@@ -88,6 +88,46 @@ internal protocol Cosmos_Staking_V1beta1_QueryClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryDelegatorValidatorRequest, Cosmos_Staking_V1beta1_QueryDelegatorValidatorResponse>
 
+  func tokenizeShareRecordById(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse>
+
+  func tokenizeShareRecordByDenom(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse>
+
+  func tokenizeShareRecordsOwned(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse>
+
+  func allTokenizeShareRecords(
+    _ request: Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest, Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse>
+
+  func lastTokenizeShareRecordId(
+    _ request: Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest, Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse>
+
+  func totalTokenizeSharedAssets(
+    _ request: Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest, Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse>
+
+  func totalLiquidStaked(
+    _ request: Cosmos_Staking_V1beta1_QueryTotalLiquidStaked,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryTotalLiquidStaked, Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse>
+
+  func tokenizeShareLockInfo(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo, Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse>
+
   func historicalInfo(
     _ request: Cosmos_Staking_V1beta1_QueryHistoricalInfoRequest,
     callOptions: CallOptions?
@@ -332,6 +372,150 @@ extension Cosmos_Staking_V1beta1_QueryClientProtocol {
     )
   }
 
+  /// Query for individual tokenize share record information by share by id
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to TokenizeShareRecordById.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func tokenizeShareRecordById(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareRecordById.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeShareRecordByIdInterceptors() ?? []
+    )
+  }
+
+  /// Query for individual tokenize share record information by share denom
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to TokenizeShareRecordByDenom.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func tokenizeShareRecordByDenom(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareRecordByDenom.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeShareRecordByDenomInterceptors() ?? []
+    )
+  }
+
+  /// Query tokenize share records by address
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to TokenizeShareRecordsOwned.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func tokenizeShareRecordsOwned(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareRecordsOwned.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeShareRecordsOwnedInterceptors() ?? []
+    )
+  }
+
+  /// Query for all tokenize share records
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to AllTokenizeShareRecords.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func allTokenizeShareRecords(
+    _ request: Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest, Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.allTokenizeShareRecords.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAllTokenizeShareRecordsInterceptors() ?? []
+    )
+  }
+
+  /// Query for last tokenize share record id
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to LastTokenizeShareRecordId.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func lastTokenizeShareRecordId(
+    _ request: Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest, Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.lastTokenizeShareRecordId.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeLastTokenizeShareRecordIdInterceptors() ?? []
+    )
+  }
+
+  /// Query for total tokenized staked assets
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to TotalTokenizeSharedAssets.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func totalTokenizeSharedAssets(
+    _ request: Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest, Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.totalTokenizeSharedAssets.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTotalTokenizeSharedAssetsInterceptors() ?? []
+    )
+  }
+
+  /// Query for total liquid staked (including tokenized shares or owned by an liquid staking provider)
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to TotalLiquidStaked.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func totalLiquidStaked(
+    _ request: Cosmos_Staking_V1beta1_QueryTotalLiquidStaked,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryTotalLiquidStaked, Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.totalLiquidStaked.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTotalLiquidStakedInterceptors() ?? []
+    )
+  }
+
+  /// Query tokenize share locks
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to TokenizeShareLockInfo.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func tokenizeShareLockInfo(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo, Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareLockInfo.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeShareLockInfoInterceptors() ?? []
+    )
+  }
+
   /// HistoricalInfo queries the historical info for given height.
   ///
   /// - Parameters:
@@ -505,6 +689,46 @@ internal protocol Cosmos_Staking_V1beta1_QueryAsyncClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryDelegatorValidatorRequest, Cosmos_Staking_V1beta1_QueryDelegatorValidatorResponse>
 
+  func makeTokenizeShareRecordByIDCall(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse>
+
+  func makeTokenizeShareRecordByDenomCall(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse>
+
+  func makeTokenizeShareRecordsOwnedCall(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse>
+
+  func makeAllTokenizeShareRecordsCall(
+    _ request: Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest, Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse>
+
+  func makeLastTokenizeShareRecordIDCall(
+    _ request: Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest, Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse>
+
+  func makeTotalTokenizeSharedAssetsCall(
+    _ request: Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest, Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse>
+
+  func makeTotalLiquidStakedCall(
+    _ request: Cosmos_Staking_V1beta1_QueryTotalLiquidStaked,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryTotalLiquidStaked, Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse>
+
+  func makeTokenizeShareLockInfoCall(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo, Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse>
+
   func makeHistoricalInfoCall(
     _ request: Cosmos_Staking_V1beta1_QueryHistoricalInfoRequest,
     callOptions: CallOptions?
@@ -660,6 +884,102 @@ extension Cosmos_Staking_V1beta1_QueryAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeDelegatorValidatorInterceptors() ?? []
+    )
+  }
+
+  internal func makeTokenizeShareRecordByIDCall(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareRecordById.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeShareRecordByIdInterceptors() ?? []
+    )
+  }
+
+  internal func makeTokenizeShareRecordByDenomCall(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareRecordByDenom.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeShareRecordByDenomInterceptors() ?? []
+    )
+  }
+
+  internal func makeTokenizeShareRecordsOwnedCall(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareRecordsOwned.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeShareRecordsOwnedInterceptors() ?? []
+    )
+  }
+
+  internal func makeAllTokenizeShareRecordsCall(
+    _ request: Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest, Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.allTokenizeShareRecords.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAllTokenizeShareRecordsInterceptors() ?? []
+    )
+  }
+
+  internal func makeLastTokenizeShareRecordIDCall(
+    _ request: Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest, Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.lastTokenizeShareRecordId.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeLastTokenizeShareRecordIdInterceptors() ?? []
+    )
+  }
+
+  internal func makeTotalTokenizeSharedAssetsCall(
+    _ request: Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest, Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.totalTokenizeSharedAssets.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTotalTokenizeSharedAssetsInterceptors() ?? []
+    )
+  }
+
+  internal func makeTotalLiquidStakedCall(
+    _ request: Cosmos_Staking_V1beta1_QueryTotalLiquidStaked,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryTotalLiquidStaked, Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.totalLiquidStaked.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTotalLiquidStakedInterceptors() ?? []
+    )
+  }
+
+  internal func makeTokenizeShareLockInfoCall(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo, Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareLockInfo.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeShareLockInfoInterceptors() ?? []
     )
   }
 
@@ -834,6 +1154,102 @@ extension Cosmos_Staking_V1beta1_QueryAsyncClientProtocol {
     )
   }
 
+  internal func tokenizeShareRecordById(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareRecordById.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeShareRecordByIdInterceptors() ?? []
+    )
+  }
+
+  internal func tokenizeShareRecordByDenom(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareRecordByDenom.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeShareRecordByDenomInterceptors() ?? []
+    )
+  }
+
+  internal func tokenizeShareRecordsOwned(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareRecordsOwned.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeShareRecordsOwnedInterceptors() ?? []
+    )
+  }
+
+  internal func allTokenizeShareRecords(
+    _ request: Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.allTokenizeShareRecords.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAllTokenizeShareRecordsInterceptors() ?? []
+    )
+  }
+
+  internal func lastTokenizeShareRecordId(
+    _ request: Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.lastTokenizeShareRecordId.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeLastTokenizeShareRecordIdInterceptors() ?? []
+    )
+  }
+
+  internal func totalTokenizeSharedAssets(
+    _ request: Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.totalTokenizeSharedAssets.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTotalTokenizeSharedAssetsInterceptors() ?? []
+    )
+  }
+
+  internal func totalLiquidStaked(
+    _ request: Cosmos_Staking_V1beta1_QueryTotalLiquidStaked,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.totalLiquidStaked.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTotalLiquidStakedInterceptors() ?? []
+    )
+  }
+
+  internal func tokenizeShareLockInfo(
+    _ request: Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareLockInfo.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeShareLockInfoInterceptors() ?? []
+    )
+  }
+
   internal func historicalInfo(
     _ request: Cosmos_Staking_V1beta1_QueryHistoricalInfoRequest,
     callOptions: CallOptions? = nil
@@ -923,6 +1339,30 @@ internal protocol Cosmos_Staking_V1beta1_QueryClientInterceptorFactoryProtocol: 
   /// - Returns: Interceptors to use when invoking 'delegatorValidator'.
   func makeDelegatorValidatorInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_QueryDelegatorValidatorRequest, Cosmos_Staking_V1beta1_QueryDelegatorValidatorResponse>]
 
+  /// - Returns: Interceptors to use when invoking 'tokenizeShareRecordById'.
+  func makeTokenizeShareRecordByIdInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'tokenizeShareRecordByDenom'.
+  func makeTokenizeShareRecordByDenomInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'tokenizeShareRecordsOwned'.
+  func makeTokenizeShareRecordsOwnedInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'allTokenizeShareRecords'.
+  func makeAllTokenizeShareRecordsInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest, Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'lastTokenizeShareRecordId'.
+  func makeLastTokenizeShareRecordIdInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest, Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'totalTokenizeSharedAssets'.
+  func makeTotalTokenizeSharedAssetsInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest, Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'totalLiquidStaked'.
+  func makeTotalLiquidStakedInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_QueryTotalLiquidStaked, Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'tokenizeShareLockInfo'.
+  func makeTokenizeShareLockInfoInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo, Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse>]
+
   /// - Returns: Interceptors to use when invoking 'historicalInfo'.
   func makeHistoricalInfoInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_QueryHistoricalInfoRequest, Cosmos_Staking_V1beta1_QueryHistoricalInfoResponse>]
 
@@ -949,6 +1389,14 @@ internal enum Cosmos_Staking_V1beta1_QueryClientMetadata {
       Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.redelegations,
       Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.delegatorValidators,
       Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.delegatorValidator,
+      Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareRecordById,
+      Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareRecordByDenom,
+      Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareRecordsOwned,
+      Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.allTokenizeShareRecords,
+      Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.lastTokenizeShareRecordId,
+      Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.totalTokenizeSharedAssets,
+      Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.totalLiquidStaked,
+      Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.tokenizeShareLockInfo,
       Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.historicalInfo,
       Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.pool,
       Cosmos_Staking_V1beta1_QueryClientMetadata.Methods.params,
@@ -1019,6 +1467,54 @@ internal enum Cosmos_Staking_V1beta1_QueryClientMetadata {
     internal static let delegatorValidator = GRPCMethodDescriptor(
       name: "DelegatorValidator",
       path: "/cosmos.staking.v1beta1.Query/DelegatorValidator",
+      type: GRPCCallType.unary
+    )
+
+    internal static let tokenizeShareRecordById = GRPCMethodDescriptor(
+      name: "TokenizeShareRecordById",
+      path: "/cosmos.staking.v1beta1.Query/TokenizeShareRecordById",
+      type: GRPCCallType.unary
+    )
+
+    internal static let tokenizeShareRecordByDenom = GRPCMethodDescriptor(
+      name: "TokenizeShareRecordByDenom",
+      path: "/cosmos.staking.v1beta1.Query/TokenizeShareRecordByDenom",
+      type: GRPCCallType.unary
+    )
+
+    internal static let tokenizeShareRecordsOwned = GRPCMethodDescriptor(
+      name: "TokenizeShareRecordsOwned",
+      path: "/cosmos.staking.v1beta1.Query/TokenizeShareRecordsOwned",
+      type: GRPCCallType.unary
+    )
+
+    internal static let allTokenizeShareRecords = GRPCMethodDescriptor(
+      name: "AllTokenizeShareRecords",
+      path: "/cosmos.staking.v1beta1.Query/AllTokenizeShareRecords",
+      type: GRPCCallType.unary
+    )
+
+    internal static let lastTokenizeShareRecordId = GRPCMethodDescriptor(
+      name: "LastTokenizeShareRecordId",
+      path: "/cosmos.staking.v1beta1.Query/LastTokenizeShareRecordId",
+      type: GRPCCallType.unary
+    )
+
+    internal static let totalTokenizeSharedAssets = GRPCMethodDescriptor(
+      name: "TotalTokenizeSharedAssets",
+      path: "/cosmos.staking.v1beta1.Query/TotalTokenizeSharedAssets",
+      type: GRPCCallType.unary
+    )
+
+    internal static let totalLiquidStaked = GRPCMethodDescriptor(
+      name: "TotalLiquidStaked",
+      path: "/cosmos.staking.v1beta1.Query/TotalLiquidStaked",
+      type: GRPCCallType.unary
+    )
+
+    internal static let tokenizeShareLockInfo = GRPCMethodDescriptor(
+      name: "TokenizeShareLockInfo",
+      path: "/cosmos.staking.v1beta1.Query/TokenizeShareLockInfo",
       type: GRPCCallType.unary
     )
 
@@ -1105,6 +1601,30 @@ internal protocol Cosmos_Staking_V1beta1_QueryProvider: CallHandlerProvider {
   /// DelegatorValidator queries validator info for given delegator validator
   /// pair.
   func delegatorValidator(request: Cosmos_Staking_V1beta1_QueryDelegatorValidatorRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_QueryDelegatorValidatorResponse>
+
+  /// Query for individual tokenize share record information by share by id
+  func tokenizeShareRecordById(request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse>
+
+  /// Query for individual tokenize share record information by share denom
+  func tokenizeShareRecordByDenom(request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse>
+
+  /// Query tokenize share records by address
+  func tokenizeShareRecordsOwned(request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse>
+
+  /// Query for all tokenize share records
+  func allTokenizeShareRecords(request: Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse>
+
+  /// Query for last tokenize share record id
+  func lastTokenizeShareRecordId(request: Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse>
+
+  /// Query for total tokenized staked assets
+  func totalTokenizeSharedAssets(request: Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse>
+
+  /// Query for total liquid staked (including tokenized shares or owned by an liquid staking provider)
+  func totalLiquidStaked(request: Cosmos_Staking_V1beta1_QueryTotalLiquidStaked, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse>
+
+  /// Query tokenize share locks
+  func tokenizeShareLockInfo(request: Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse>
 
   /// HistoricalInfo queries the historical info for given height.
   func historicalInfo(request: Cosmos_Staking_V1beta1_QueryHistoricalInfoRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_QueryHistoricalInfoResponse>
@@ -1225,6 +1745,78 @@ extension Cosmos_Staking_V1beta1_QueryProvider {
         responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryDelegatorValidatorResponse>(),
         interceptors: self.interceptors?.makeDelegatorValidatorInterceptors() ?? [],
         userFunction: self.delegatorValidator(request:context:)
+      )
+
+    case "TokenizeShareRecordById":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse>(),
+        interceptors: self.interceptors?.makeTokenizeShareRecordByIdInterceptors() ?? [],
+        userFunction: self.tokenizeShareRecordById(request:context:)
+      )
+
+    case "TokenizeShareRecordByDenom":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse>(),
+        interceptors: self.interceptors?.makeTokenizeShareRecordByDenomInterceptors() ?? [],
+        userFunction: self.tokenizeShareRecordByDenom(request:context:)
+      )
+
+    case "TokenizeShareRecordsOwned":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse>(),
+        interceptors: self.interceptors?.makeTokenizeShareRecordsOwnedInterceptors() ?? [],
+        userFunction: self.tokenizeShareRecordsOwned(request:context:)
+      )
+
+    case "AllTokenizeShareRecords":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse>(),
+        interceptors: self.interceptors?.makeAllTokenizeShareRecordsInterceptors() ?? [],
+        userFunction: self.allTokenizeShareRecords(request:context:)
+      )
+
+    case "LastTokenizeShareRecordId":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse>(),
+        interceptors: self.interceptors?.makeLastTokenizeShareRecordIdInterceptors() ?? [],
+        userFunction: self.lastTokenizeShareRecordId(request:context:)
+      )
+
+    case "TotalTokenizeSharedAssets":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse>(),
+        interceptors: self.interceptors?.makeTotalTokenizeSharedAssetsInterceptors() ?? [],
+        userFunction: self.totalTokenizeSharedAssets(request:context:)
+      )
+
+    case "TotalLiquidStaked":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryTotalLiquidStaked>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse>(),
+        interceptors: self.interceptors?.makeTotalLiquidStakedInterceptors() ?? [],
+        userFunction: self.totalLiquidStaked(request:context:)
+      )
+
+    case "TokenizeShareLockInfo":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse>(),
+        interceptors: self.interceptors?.makeTokenizeShareLockInfoInterceptors() ?? [],
+        userFunction: self.tokenizeShareLockInfo(request:context:)
       )
 
     case "HistoricalInfo":
@@ -1358,6 +1950,54 @@ internal protocol Cosmos_Staking_V1beta1_QueryAsyncProvider: CallHandlerProvider
     request: Cosmos_Staking_V1beta1_QueryDelegatorValidatorRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Cosmos_Staking_V1beta1_QueryDelegatorValidatorResponse
+
+  /// Query for individual tokenize share record information by share by id
+  @Sendable func tokenizeShareRecordById(
+    request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse
+
+  /// Query for individual tokenize share record information by share denom
+  @Sendable func tokenizeShareRecordByDenom(
+    request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse
+
+  /// Query tokenize share records by address
+  @Sendable func tokenizeShareRecordsOwned(
+    request: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse
+
+  /// Query for all tokenize share records
+  @Sendable func allTokenizeShareRecords(
+    request: Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse
+
+  /// Query for last tokenize share record id
+  @Sendable func lastTokenizeShareRecordId(
+    request: Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse
+
+  /// Query for total tokenized staked assets
+  @Sendable func totalTokenizeSharedAssets(
+    request: Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse
+
+  /// Query for total liquid staked (including tokenized shares or owned by an liquid staking provider)
+  @Sendable func totalLiquidStaked(
+    request: Cosmos_Staking_V1beta1_QueryTotalLiquidStaked,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse
+
+  /// Query tokenize share locks
+  @Sendable func tokenizeShareLockInfo(
+    request: Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse
 
   /// HistoricalInfo queries the historical info for given height.
   @Sendable func historicalInfo(
@@ -1496,6 +2136,78 @@ extension Cosmos_Staking_V1beta1_QueryAsyncProvider {
         wrapping: self.delegatorValidator(request:context:)
       )
 
+    case "TokenizeShareRecordById":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse>(),
+        interceptors: self.interceptors?.makeTokenizeShareRecordByIdInterceptors() ?? [],
+        wrapping: self.tokenizeShareRecordById(request:context:)
+      )
+
+    case "TokenizeShareRecordByDenom":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse>(),
+        interceptors: self.interceptors?.makeTokenizeShareRecordByDenomInterceptors() ?? [],
+        wrapping: self.tokenizeShareRecordByDenom(request:context:)
+      )
+
+    case "TokenizeShareRecordsOwned":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse>(),
+        interceptors: self.interceptors?.makeTokenizeShareRecordsOwnedInterceptors() ?? [],
+        wrapping: self.tokenizeShareRecordsOwned(request:context:)
+      )
+
+    case "AllTokenizeShareRecords":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse>(),
+        interceptors: self.interceptors?.makeAllTokenizeShareRecordsInterceptors() ?? [],
+        wrapping: self.allTokenizeShareRecords(request:context:)
+      )
+
+    case "LastTokenizeShareRecordId":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse>(),
+        interceptors: self.interceptors?.makeLastTokenizeShareRecordIdInterceptors() ?? [],
+        wrapping: self.lastTokenizeShareRecordId(request:context:)
+      )
+
+    case "TotalTokenizeSharedAssets":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse>(),
+        interceptors: self.interceptors?.makeTotalTokenizeSharedAssetsInterceptors() ?? [],
+        wrapping: self.totalTokenizeSharedAssets(request:context:)
+      )
+
+    case "TotalLiquidStaked":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryTotalLiquidStaked>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse>(),
+        interceptors: self.interceptors?.makeTotalLiquidStakedInterceptors() ?? [],
+        wrapping: self.totalLiquidStaked(request:context:)
+      )
+
+    case "TokenizeShareLockInfo":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse>(),
+        interceptors: self.interceptors?.makeTokenizeShareLockInfoInterceptors() ?? [],
+        wrapping: self.tokenizeShareLockInfo(request:context:)
+      )
+
     case "HistoricalInfo":
       return GRPCAsyncServerHandler(
         context: context,
@@ -1575,6 +2287,38 @@ internal protocol Cosmos_Staking_V1beta1_QueryServerInterceptorFactoryProtocol {
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeDelegatorValidatorInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_QueryDelegatorValidatorRequest, Cosmos_Staking_V1beta1_QueryDelegatorValidatorResponse>]
 
+  /// - Returns: Interceptors to use when handling 'tokenizeShareRecordById'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeTokenizeShareRecordByIdInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse>]
+
+  /// - Returns: Interceptors to use when handling 'tokenizeShareRecordByDenom'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeTokenizeShareRecordByDenomInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse>]
+
+  /// - Returns: Interceptors to use when handling 'tokenizeShareRecordsOwned'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeTokenizeShareRecordsOwnedInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest, Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse>]
+
+  /// - Returns: Interceptors to use when handling 'allTokenizeShareRecords'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeAllTokenizeShareRecordsInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest, Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'lastTokenizeShareRecordId'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeLastTokenizeShareRecordIdInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest, Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse>]
+
+  /// - Returns: Interceptors to use when handling 'totalTokenizeSharedAssets'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeTotalTokenizeSharedAssetsInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest, Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'totalLiquidStaked'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeTotalLiquidStakedInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_QueryTotalLiquidStaked, Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse>]
+
+  /// - Returns: Interceptors to use when handling 'tokenizeShareLockInfo'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeTokenizeShareLockInfoInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo, Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse>]
+
   /// - Returns: Interceptors to use when handling 'historicalInfo'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeHistoricalInfoInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_QueryHistoricalInfoRequest, Cosmos_Staking_V1beta1_QueryHistoricalInfoResponse>]
@@ -1604,6 +2348,14 @@ internal enum Cosmos_Staking_V1beta1_QueryServerMetadata {
       Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.redelegations,
       Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.delegatorValidators,
       Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.delegatorValidator,
+      Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.tokenizeShareRecordById,
+      Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.tokenizeShareRecordByDenom,
+      Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.tokenizeShareRecordsOwned,
+      Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.allTokenizeShareRecords,
+      Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.lastTokenizeShareRecordId,
+      Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.totalTokenizeSharedAssets,
+      Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.totalLiquidStaked,
+      Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.tokenizeShareLockInfo,
       Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.historicalInfo,
       Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.pool,
       Cosmos_Staking_V1beta1_QueryServerMetadata.Methods.params,
@@ -1674,6 +2426,54 @@ internal enum Cosmos_Staking_V1beta1_QueryServerMetadata {
     internal static let delegatorValidator = GRPCMethodDescriptor(
       name: "DelegatorValidator",
       path: "/cosmos.staking.v1beta1.Query/DelegatorValidator",
+      type: GRPCCallType.unary
+    )
+
+    internal static let tokenizeShareRecordById = GRPCMethodDescriptor(
+      name: "TokenizeShareRecordById",
+      path: "/cosmos.staking.v1beta1.Query/TokenizeShareRecordById",
+      type: GRPCCallType.unary
+    )
+
+    internal static let tokenizeShareRecordByDenom = GRPCMethodDescriptor(
+      name: "TokenizeShareRecordByDenom",
+      path: "/cosmos.staking.v1beta1.Query/TokenizeShareRecordByDenom",
+      type: GRPCCallType.unary
+    )
+
+    internal static let tokenizeShareRecordsOwned = GRPCMethodDescriptor(
+      name: "TokenizeShareRecordsOwned",
+      path: "/cosmos.staking.v1beta1.Query/TokenizeShareRecordsOwned",
+      type: GRPCCallType.unary
+    )
+
+    internal static let allTokenizeShareRecords = GRPCMethodDescriptor(
+      name: "AllTokenizeShareRecords",
+      path: "/cosmos.staking.v1beta1.Query/AllTokenizeShareRecords",
+      type: GRPCCallType.unary
+    )
+
+    internal static let lastTokenizeShareRecordId = GRPCMethodDescriptor(
+      name: "LastTokenizeShareRecordId",
+      path: "/cosmos.staking.v1beta1.Query/LastTokenizeShareRecordId",
+      type: GRPCCallType.unary
+    )
+
+    internal static let totalTokenizeSharedAssets = GRPCMethodDescriptor(
+      name: "TotalTokenizeSharedAssets",
+      path: "/cosmos.staking.v1beta1.Query/TotalTokenizeSharedAssets",
+      type: GRPCCallType.unary
+    )
+
+    internal static let totalLiquidStaked = GRPCMethodDescriptor(
+      name: "TotalLiquidStaked",
+      path: "/cosmos.staking.v1beta1.Query/TotalLiquidStaked",
+      type: GRPCCallType.unary
+    )
+
+    internal static let tokenizeShareLockInfo = GRPCMethodDescriptor(
+      name: "TokenizeShareLockInfo",
+      path: "/cosmos.staking.v1beta1.Query/TokenizeShareLockInfo",
       type: GRPCCallType.unary
     )
 

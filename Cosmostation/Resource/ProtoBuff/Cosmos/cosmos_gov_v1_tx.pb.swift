@@ -51,11 +51,6 @@ struct Cosmos_Gov_V1_MsgSubmitProposal {
   /// Since: cosmos-sdk 0.47
   var summary: String = String()
 
-  /// expedided defines if the proposal is expedited or not
-  ///
-  /// Since: cosmos-sdk 0.50
-  var expedited: Bool = false
-
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -256,54 +251,6 @@ struct Cosmos_Gov_V1_MsgUpdateParamsResponse {
   init() {}
 }
 
-/// MsgCancelProposal is the Msg/CancelProposal request type.
-///
-/// Since: cosmos-sdk 0.50
-struct Cosmos_Gov_V1_MsgCancelProposal {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var proposalID: UInt64 = 0
-
-  var proposer: String = String()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-/// MsgCancelProposalResponse defines the response structure for executing a
-/// MsgCancelProposal message.
-///
-/// Since: cosmos-sdk 0.50
-struct Cosmos_Gov_V1_MsgCancelProposalResponse {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var proposalID: UInt64 = 0
-
-  /// canceled_time is the time when proposal is canceled.
-  var canceledTime: SwiftProtobuf.Google_Protobuf_Timestamp {
-    get {return _canceledTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
-    set {_canceledTime = newValue}
-  }
-  /// Returns true if `canceledTime` has been explicitly set.
-  var hasCanceledTime: Bool {return self._canceledTime != nil}
-  /// Clears the value of `canceledTime`. Subsequent reads from it will return its default value.
-  mutating func clearCanceledTime() {self._canceledTime = nil}
-
-  /// canceled_height defines the block height at which the proposal is canceled.
-  var canceledHeight: UInt64 = 0
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  fileprivate var _canceledTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
-}
-
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Cosmos_Gov_V1_MsgSubmitProposal: @unchecked Sendable {}
 extension Cosmos_Gov_V1_MsgSubmitProposalResponse: @unchecked Sendable {}
@@ -317,8 +264,6 @@ extension Cosmos_Gov_V1_MsgDeposit: @unchecked Sendable {}
 extension Cosmos_Gov_V1_MsgDepositResponse: @unchecked Sendable {}
 extension Cosmos_Gov_V1_MsgUpdateParams: @unchecked Sendable {}
 extension Cosmos_Gov_V1_MsgUpdateParamsResponse: @unchecked Sendable {}
-extension Cosmos_Gov_V1_MsgCancelProposal: @unchecked Sendable {}
-extension Cosmos_Gov_V1_MsgCancelProposalResponse: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -334,7 +279,6 @@ extension Cosmos_Gov_V1_MsgSubmitProposal: SwiftProtobuf.Message, SwiftProtobuf.
     4: .same(proto: "metadata"),
     5: .same(proto: "title"),
     6: .same(proto: "summary"),
-    7: .same(proto: "expedited"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -349,7 +293,6 @@ extension Cosmos_Gov_V1_MsgSubmitProposal: SwiftProtobuf.Message, SwiftProtobuf.
       case 4: try { try decoder.decodeSingularStringField(value: &self.metadata) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self.title) }()
       case 6: try { try decoder.decodeSingularStringField(value: &self.summary) }()
-      case 7: try { try decoder.decodeSingularBoolField(value: &self.expedited) }()
       default: break
       }
     }
@@ -374,9 +317,6 @@ extension Cosmos_Gov_V1_MsgSubmitProposal: SwiftProtobuf.Message, SwiftProtobuf.
     if !self.summary.isEmpty {
       try visitor.visitSingularStringField(value: self.summary, fieldNumber: 6)
     }
-    if self.expedited != false {
-      try visitor.visitSingularBoolField(value: self.expedited, fieldNumber: 7)
-    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -387,7 +327,6 @@ extension Cosmos_Gov_V1_MsgSubmitProposal: SwiftProtobuf.Message, SwiftProtobuf.
     if lhs.metadata != rhs.metadata {return false}
     if lhs.title != rhs.title {return false}
     if lhs.summary != rhs.summary {return false}
-    if lhs.expedited != rhs.expedited {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -743,92 +682,6 @@ extension Cosmos_Gov_V1_MsgUpdateParamsResponse: SwiftProtobuf.Message, SwiftPro
   }
 
   static func ==(lhs: Cosmos_Gov_V1_MsgUpdateParamsResponse, rhs: Cosmos_Gov_V1_MsgUpdateParamsResponse) -> Bool {
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Cosmos_Gov_V1_MsgCancelProposal: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MsgCancelProposal"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "proposal_id"),
-    2: .same(proto: "proposer"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.proposalID) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.proposer) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.proposalID != 0 {
-      try visitor.visitSingularUInt64Field(value: self.proposalID, fieldNumber: 1)
-    }
-    if !self.proposer.isEmpty {
-      try visitor.visitSingularStringField(value: self.proposer, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Cosmos_Gov_V1_MsgCancelProposal, rhs: Cosmos_Gov_V1_MsgCancelProposal) -> Bool {
-    if lhs.proposalID != rhs.proposalID {return false}
-    if lhs.proposer != rhs.proposer {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Cosmos_Gov_V1_MsgCancelProposalResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MsgCancelProposalResponse"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "proposal_id"),
-    2: .standard(proto: "canceled_time"),
-    3: .standard(proto: "canceled_height"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.proposalID) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._canceledTime) }()
-      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.canceledHeight) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    if self.proposalID != 0 {
-      try visitor.visitSingularUInt64Field(value: self.proposalID, fieldNumber: 1)
-    }
-    try { if let v = self._canceledTime {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    } }()
-    if self.canceledHeight != 0 {
-      try visitor.visitSingularUInt64Field(value: self.canceledHeight, fieldNumber: 3)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Cosmos_Gov_V1_MsgCancelProposalResponse, rhs: Cosmos_Gov_V1_MsgCancelProposalResponse) -> Bool {
-    if lhs.proposalID != rhs.proposalID {return false}
-    if lhs._canceledTime != rhs._canceledTime {return false}
-    if lhs.canceledHeight != rhs.canceledHeight {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

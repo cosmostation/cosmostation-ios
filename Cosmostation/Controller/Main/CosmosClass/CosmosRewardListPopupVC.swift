@@ -27,21 +27,7 @@ class CosmosRewardListPopupVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        rewards.forEach { delegatorRewards in
-            delegatorRewards.reward.forEach { deCoin in
-                let amount = NSDecimalNumber(string: deCoin.amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
-                if (amount.compare(NSDecimalNumber.zero).rawValue > 0) {
-                    if let index = rewardCoins.firstIndex(where: { $0.denom == deCoin.denom }) {
-                        let exist = NSDecimalNumber(string: rewardCoins[index].amount)
-                        let addes = exist.adding(amount)
-                        rewardCoins[index].amount = addes.stringValue
-                    } else {
-                        rewardCoins.append(Cosmos_Base_V1beta1_Coin(deCoin.denom, amount))
-                    }
-                }
-            }
-        }
-        
+        rewardCoins = selectedChain.rewardAllCoins()
         rewardCoins.sort {
             if ($0.denom == selectedChain.stakeDenom) { return true }
             if ($1.denom == selectedChain.stakeDenom) { return false }

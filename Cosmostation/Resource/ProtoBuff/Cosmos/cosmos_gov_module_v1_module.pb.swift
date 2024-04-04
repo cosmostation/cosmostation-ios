@@ -26,7 +26,7 @@ struct Cosmos_Gov_Module_V1_Module {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// max_metadata_len defines the maximum proposal metadata length.
+  /// max_metadata_len defines the maximum proposal metadata length. 
   /// Defaults to 255 if not explicitly set.
   var maxMetadataLen: UInt64 = 0
 

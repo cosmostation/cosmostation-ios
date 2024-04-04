@@ -37,9 +37,6 @@ enum Cosmos_Staking_V1beta1_AuthorizationType: SwiftProtobuf.Enum {
 
   /// AUTHORIZATION_TYPE_REDELEGATE defines an authorization type for Msg/BeginRedelegate
   case redelegate // = 3
-
-  /// AUTHORIZATION_TYPE_CANCEL_UNBONDING_DELEGATION defines an authorization type for Msg/MsgCancelUnbondingDelegation
-  case cancelUnbondingDelegation // = 4
   case UNRECOGNIZED(Int)
 
   init() {
@@ -52,7 +49,6 @@ enum Cosmos_Staking_V1beta1_AuthorizationType: SwiftProtobuf.Enum {
     case 1: self = .delegate
     case 2: self = .undelegate
     case 3: self = .redelegate
-    case 4: self = .cancelUnbondingDelegation
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -63,7 +59,6 @@ enum Cosmos_Staking_V1beta1_AuthorizationType: SwiftProtobuf.Enum {
     case .delegate: return 1
     case .undelegate: return 2
     case .redelegate: return 3
-    case .cancelUnbondingDelegation: return 4
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -79,7 +74,6 @@ extension Cosmos_Staking_V1beta1_AuthorizationType: CaseIterable {
     .delegate,
     .undelegate,
     .redelegate,
-    .cancelUnbondingDelegation,
   ]
 }
 
@@ -194,7 +188,6 @@ extension Cosmos_Staking_V1beta1_AuthorizationType: SwiftProtobuf._ProtoNameProv
     1: .same(proto: "AUTHORIZATION_TYPE_DELEGATE"),
     2: .same(proto: "AUTHORIZATION_TYPE_UNDELEGATE"),
     3: .same(proto: "AUTHORIZATION_TYPE_REDELEGATE"),
-    4: .same(proto: "AUTHORIZATION_TYPE_CANCEL_UNBONDING_DELEGATION"),
   ]
 }
 

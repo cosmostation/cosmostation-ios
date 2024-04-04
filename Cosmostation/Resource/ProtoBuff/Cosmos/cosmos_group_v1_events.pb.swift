@@ -157,6 +157,35 @@ struct Cosmos_Group_V1_EventLeaveGroup {
   init() {}
 }
 
+/// EventProposalPruned is an event emitted when a proposal is pruned.
+struct Cosmos_Group_V1_EventProposalPruned {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// proposal_id is the unique ID of the proposal.
+  var proposalID: UInt64 = 0
+
+  /// status is the proposal status (UNSPECIFIED, SUBMITTED, ACCEPTED, REJECTED, ABORTED, WITHDRAWN).
+  var status: Cosmos_Group_V1_ProposalStatus = .unspecified
+
+  /// tally_result is the proposal tally result (when applicable).
+  var tallyResult: Cosmos_Group_V1_TallyResult {
+    get {return _tallyResult ?? Cosmos_Group_V1_TallyResult()}
+    set {_tallyResult = newValue}
+  }
+  /// Returns true if `tallyResult` has been explicitly set.
+  var hasTallyResult: Bool {return self._tallyResult != nil}
+  /// Clears the value of `tallyResult`. Subsequent reads from it will return its default value.
+  mutating func clearTallyResult() {self._tallyResult = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _tallyResult: Cosmos_Group_V1_TallyResult? = nil
+}
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Cosmos_Group_V1_EventCreateGroup: @unchecked Sendable {}
 extension Cosmos_Group_V1_EventUpdateGroup: @unchecked Sendable {}
@@ -167,6 +196,7 @@ extension Cosmos_Group_V1_EventWithdrawProposal: @unchecked Sendable {}
 extension Cosmos_Group_V1_EventVote: @unchecked Sendable {}
 extension Cosmos_Group_V1_EventExec: @unchecked Sendable {}
 extension Cosmos_Group_V1_EventLeaveGroup: @unchecked Sendable {}
+extension Cosmos_Group_V1_EventProposalPruned: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -474,6 +504,54 @@ extension Cosmos_Group_V1_EventLeaveGroup: SwiftProtobuf.Message, SwiftProtobuf.
   static func ==(lhs: Cosmos_Group_V1_EventLeaveGroup, rhs: Cosmos_Group_V1_EventLeaveGroup) -> Bool {
     if lhs.groupID != rhs.groupID {return false}
     if lhs.address != rhs.address {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Group_V1_EventProposalPruned: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".EventProposalPruned"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "proposal_id"),
+    2: .same(proto: "status"),
+    3: .standard(proto: "tally_result"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.proposalID) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.status) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._tallyResult) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.proposalID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.proposalID, fieldNumber: 1)
+    }
+    if self.status != .unspecified {
+      try visitor.visitSingularEnumField(value: self.status, fieldNumber: 2)
+    }
+    try { if let v = self._tallyResult {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Group_V1_EventProposalPruned, rhs: Cosmos_Group_V1_EventProposalPruned) -> Bool {
+    if lhs.proposalID != rhs.proposalID {return false}
+    if lhs.status != rhs.status {return false}
+    if lhs._tallyResult != rhs._tallyResult {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

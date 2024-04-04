@@ -13,28 +13,29 @@ import SwiftyJSON
 
 class BaseNetWork {
     
-    func fetchChainList() {
-        AF.request(BaseNetWork.msSupportChains(), method: .get)
+    func fetchChainParams() {
+//        print("fetchChainParams ", BaseNetWork.msChainParams())
+        AF.request(BaseNetWork.msChainParams(), method: .get)
             .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
                 case .success(let value):
-                    BaseData.instance.mintscanChains = value
-                    
+                    BaseData.instance.mintscanChainParams = value
                 case .failure:
-                    print("fetchChainList error ", response.error)
+                    print("fetchChainParams error ", response.error)
                 }
             }
     }
     
-    func fetchSupportConfig() {
-        AF.request(BaseNetWork.msSupportConfigs(), method: .get)
+    func fetchdAppConfig() {
+//        print("fetchdAppConfig ", BaseNetWork.dAppConfigs())
+        AF.request(BaseNetWork.dAppConfigs(), method: .get)
             .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
                 case .success(let value):
-                    BaseData.instance.supportConfig = value
+                    BaseData.instance.dAppConfig = value
                     
                 case .failure:
-                    print("fetchSupportConfig error ", response.error)
+                    print("fetchdAppConfig error ", response.error)
                 }
             }
     }
@@ -116,16 +117,16 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v10/assets/" +  chain.apiName + "/erc20/info"
     }
     
-    static func msSupportChains() -> String {
-        return MINTSCAN_API_URL + "v10/meta/support/chains"
+    static func msChainParams() -> String {
+        return MINTSCAN_API_URL + "v10/utils/params"
     }
     
-    static func msSupportConfigs() -> String {
+    static func msCw721InfoUrl(_ chain: BaseChain) -> String {
+        return ResourceBase + chain.apiName + "/cw721.json"
+    }
+    
+    static func dAppConfigs() -> String {
         return ResourceDappBase + "config.json"
-    }
-    
-    static func msChainParam(_ chain: BaseChain) -> String {
-        return MINTSCAN_API_URL + "v10/utils/params/" + chain.apiName
     }
     
     static func msProposals(_ chain: BaseChain) -> String {
@@ -135,29 +136,6 @@ class BaseNetWork {
     static func msMyVoteHistory(_ chain: BaseChain, _ address: String) -> String {
         return MINTSCAN_API_URL + "v10/" + chain.apiName + "/account/" + address + "/votes"
     }
-    
-    static func getTxDetailUrl(_ chain: BaseChain, _ txHash: String) -> URL? {
-        if (chain is ChainBinanceBeacon) {
-            return URL(string: BNB_BEACON_EXPLORER + "tx/" + txHash)
-        } else if (chain.tag.starts(with: "okt")) {
-            return URL(string: OKT_EXPLORER + "tx/" + txHash)
-        }
-        return URL(string: MintscanUrl + chain.apiName + "/transactions/" + txHash)
-    }
-    
-    static func getAccountDetailUrl(_ chain: CosmosClass) -> URL? {
-        if (chain is ChainBinanceBeacon) {
-            return URL(string: BNB_BEACON_EXPLORER + "address/" + chain.bechAddress)
-        } else if (chain.tag.starts(with: "okt")) {
-            return URL(string: OKT_EXPLORER + "address/" + chain.bechAddress)
-        }
-        return URL(string: MintscanUrl + chain.apiName + "/account/" + chain.bechAddress)
-    }
-    
-    static func getProposalDetailUrl(_ chain: BaseChain, _ proposalId: UInt64) -> URL? {
-        return URL(string: MintscanUrl + chain.apiName + "/proposals/" + String(proposalId))
-    }
-    
     
     static func SkipChains() -> String {
         return SKIP_API_URL + "v1/info/chains"
@@ -250,3 +228,4 @@ extension BaseNetWork {
         return ""
     }
 }
+

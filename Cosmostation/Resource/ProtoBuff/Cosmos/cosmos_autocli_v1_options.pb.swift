@@ -26,7 +26,7 @@ struct Cosmos_Autocli_V1_ModuleOptions {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// tx describes the tx commands for the module.
+  /// tx describes the tx command for the module.
   var tx: Cosmos_Autocli_V1_ServiceCommandDescriptor {
     get {return _tx ?? Cosmos_Autocli_V1_ServiceCommandDescriptor()}
     set {_tx = newValue}
@@ -36,7 +36,7 @@ struct Cosmos_Autocli_V1_ModuleOptions {
   /// Clears the value of `tx`. Subsequent reads from it will return its default value.
   mutating func clearTx() {self._tx = nil}
 
-  /// query describes the queries commands for the module.
+  /// query describes the tx command for the module.
   var query: Cosmos_Autocli_V1_ServiceCommandDescriptor {
     get {return _query ?? Cosmos_Autocli_V1_ServiceCommandDescriptor()}
     set {_query = newValue}
@@ -159,6 +159,9 @@ struct Cosmos_Autocli_V1_FlagOptions {
 
   /// default_value is the default value as text.
   var defaultValue: String = String()
+
+  /// default value is the default value as text if the flag is used without any value.
+  var noOptDefaultValue: String = String()
 
   /// deprecated is the usage text to show if this flag is deprecated.
   var deprecated: String = String()
@@ -397,6 +400,7 @@ extension Cosmos_Autocli_V1_FlagOptions: SwiftProtobuf.Message, SwiftProtobuf._M
     2: .same(proto: "shorthand"),
     3: .same(proto: "usage"),
     4: .standard(proto: "default_value"),
+    5: .standard(proto: "no_opt_default_value"),
     6: .same(proto: "deprecated"),
     7: .standard(proto: "shorthand_deprecated"),
     8: .same(proto: "hidden"),
@@ -412,6 +416,7 @@ extension Cosmos_Autocli_V1_FlagOptions: SwiftProtobuf.Message, SwiftProtobuf._M
       case 2: try { try decoder.decodeSingularStringField(value: &self.shorthand) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.usage) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.defaultValue) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.noOptDefaultValue) }()
       case 6: try { try decoder.decodeSingularStringField(value: &self.deprecated) }()
       case 7: try { try decoder.decodeSingularStringField(value: &self.shorthandDeprecated) }()
       case 8: try { try decoder.decodeSingularBoolField(value: &self.hidden) }()
@@ -433,6 +438,9 @@ extension Cosmos_Autocli_V1_FlagOptions: SwiftProtobuf.Message, SwiftProtobuf._M
     if !self.defaultValue.isEmpty {
       try visitor.visitSingularStringField(value: self.defaultValue, fieldNumber: 4)
     }
+    if !self.noOptDefaultValue.isEmpty {
+      try visitor.visitSingularStringField(value: self.noOptDefaultValue, fieldNumber: 5)
+    }
     if !self.deprecated.isEmpty {
       try visitor.visitSingularStringField(value: self.deprecated, fieldNumber: 6)
     }
@@ -450,6 +458,7 @@ extension Cosmos_Autocli_V1_FlagOptions: SwiftProtobuf.Message, SwiftProtobuf._M
     if lhs.shorthand != rhs.shorthand {return false}
     if lhs.usage != rhs.usage {return false}
     if lhs.defaultValue != rhs.defaultValue {return false}
+    if lhs.noOptDefaultValue != rhs.noOptDefaultValue {return false}
     if lhs.deprecated != rhs.deprecated {return false}
     if lhs.shorthandDeprecated != rhs.shorthandDeprecated {return false}
     if lhs.hidden != rhs.hidden {return false}

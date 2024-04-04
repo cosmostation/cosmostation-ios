@@ -9,7 +9,7 @@
 import UIKit
 import Lottie
 
-class ChainListVC: BaseVC, BaseSheetDelegate {
+class ChainListVC: BaseVC, EndpointDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchEmptyLayer: UIView!
@@ -96,24 +96,15 @@ class ChainListVC: BaseVC, BaseSheetDelegate {
     
     func onDisplayEndPointSheet(_ chain: CosmosClass) {
         loadingView.isHidden = true
-        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.targetChain = chain
-        baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SwitchEndpoint
-        onStartSheet(baseSheet)
+        let endpointSheet = SelectEndpointSheet(nibName: "SelectEndpointSheet", bundle: nil)
+        endpointSheet.targetChain = chain
+        endpointSheet.endpointDelegate = self
+        onStartSheet(endpointSheet, 420)
     }
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if (sheetType == .SwitchEndpoint) {
-            if let index = result["index"] as? Int,
-               let chainName = result["chainName"] as? String {
-                let chain = searchCosmosChains.filter { $0.name == chainName }.first!
-                let endpoint = chain.getChainParam()["grpc_endpoint"].arrayValue[index]["url"].stringValue
-                BaseData.instance.setGrpcEndpoint(chain, endpoint)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
+    func onEndpointUpdated() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
 
@@ -166,38 +157,15 @@ extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             let chain = searchEvmChains[indexPath.row]
-            if (chain.supportCosmos && !(chain is ChainOktEVM)) {
-                loadingView.isHidden = false
-                if (chain.getChainParam().isEmpty == true) {
-                    Task {
-                        if let rawParam = try? await chain.fetchChainParam() {
-                            chain.mintscanChainParam = rawParam
-                            DispatchQueue.main.async {
-                                self.onDisplayEndPointSheet(chain)
-                            }
-                        }
-                    }
-                } else {
-                    self.onDisplayEndPointSheet(chain)
-                }
-            }
+            if (chain is ChainOktEVM) { return }
+            loadingView.isHidden = false
+            self.onDisplayEndPointSheet(chain)
             
         } else if (indexPath.section == 1) {
             let chain = searchCosmosChains[indexPath.row]
             if (chain is ChainBinanceBeacon) { return }
             loadingView.isHidden = false
-            if (chain.getChainParam().isEmpty == true) {
-                Task {
-                    if let rawParam = try? await chain.fetchChainParam() {
-                        chain.mintscanChainParam = rawParam
-                        DispatchQueue.main.async {
-                            self.onDisplayEndPointSheet(chain)
-                        }
-                    }
-                }
-            } else {
-                self.onDisplayEndPointSheet(chain)
-            }
+            self.onDisplayEndPointSheet(chain)
         }
     }
     

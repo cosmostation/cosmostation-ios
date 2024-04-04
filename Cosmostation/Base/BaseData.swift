@@ -22,12 +22,12 @@ final class BaseData: NSObject{
     var copySalt: String?
     
     var reviewMode = true
-    var mintscanChains: JSON?
-    var supportConfig: JSON?
-    var baseAccount: BaseAccount?
+    var mintscanChainParams: JSON?
     var mintscanUSDPrices: [MintscanPrice]?
     var mintscanPrices: [MintscanPrice]?
     var mintscanAssets: [MintscanAsset]?
+    var dAppConfig: JSON?
+    var baseAccount: BaseAccount?
     
     public override init() {
         super.init();
@@ -41,6 +41,7 @@ final class BaseData: NSObject{
     }
     
     func getPrice(_ geckoId: String?, _ usd: Bool? = false) -> NSDecimalNumber {
+        if (geckoId == nil) { return NSDecimalNumber.zero }
         if (usd == true) {
             if let price = mintscanUSDPrices?.filter({ $0.coinGeckoId == geckoId }).first {
                 return NSDecimalNumber.init(value: price.current_price ?? 0).rounding(accordingToBehavior: handler12Down)
@@ -56,6 +57,7 @@ final class BaseData: NSObject{
     }
     
     func priceChange(_ geckoId: String?) -> NSDecimalNumber {
+        if (geckoId == nil) { return NSDecimalNumber.zero.rounding(accordingToBehavior: handler2Down) }
         if let price = mintscanPrices?.filter({ $0.coinGeckoId == geckoId }).first {
             return NSDecimalNumber.init(value: price.daily_price_change_in_percent ?? 0).rounding(accordingToBehavior: handler2Down)
         }
@@ -688,6 +690,10 @@ extension BaseData {
     
     func setGrpcEndpoint(_ chain : CosmosClass, _ endpoint: String) {
         UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + chain.name)
+    }
+    
+    func setEvmRpcEndpoint(_ chain : EvmClass, _ endpoint: String) {
+        UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_EVM_RPC_ENDPOINT +  " : " + chain.name)
     }
     
     //Skip swap info

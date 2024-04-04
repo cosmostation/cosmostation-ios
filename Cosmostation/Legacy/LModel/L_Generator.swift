@@ -66,7 +66,7 @@ class L_Generator {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
         
-        let chainId = oktChain.chainId!
+        let chainId = oktChain.chainIdCosmos!
         let accNum = oktChain.lcdAccountInfo["value","account_number"].uInt64Value
         let seqNum = oktChain.lcdAccountInfo["value","sequence"].uInt64Value
         

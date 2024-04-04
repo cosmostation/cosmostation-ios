@@ -52,7 +52,7 @@ class CosmosProposalCell: UITableViewCell {
         
         if (proposal.isVotingPeriod()) {
             selectSwitch.isHidden = false
-            timeLabel.text = WDP.dpTime(proposal.voting_end_time).appending(" ").appending(WDP.dpTimeGap(proposal.voting_end_time))
+            timeLabel.text = WDP.dpFullTime(proposal.voting_end_time).appending(" ").appending(WDP.dpTimeGap(proposal.voting_end_time))
             timeLabel.isHidden = false
             expectedImg.isHidden = !proposal.is_expedited
             selectSwitch.isOn = toVote.contains(proposal.id!)

@@ -62,11 +62,6 @@ internal protocol Cosmos_Gov_V1_MsgClientProtocol: GRPCClient {
     _ request: Cosmos_Gov_V1_MsgUpdateParams,
     callOptions: CallOptions?
   ) -> UnaryCall<Cosmos_Gov_V1_MsgUpdateParams, Cosmos_Gov_V1_MsgUpdateParamsResponse>
-
-  func cancelProposal(
-    _ request: Cosmos_Gov_V1_MsgCancelProposal,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Cosmos_Gov_V1_MsgCancelProposal, Cosmos_Gov_V1_MsgCancelProposalResponse>
 }
 
 extension Cosmos_Gov_V1_MsgClientProtocol {
@@ -185,26 +180,6 @@ extension Cosmos_Gov_V1_MsgClientProtocol {
       interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
     )
   }
-
-  /// CancelProposal defines a method to cancel governance proposal
-  ///
-  /// Since: cosmos-sdk 0.50
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to CancelProposal.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func cancelProposal(
-    _ request: Cosmos_Gov_V1_MsgCancelProposal,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Cosmos_Gov_V1_MsgCancelProposal, Cosmos_Gov_V1_MsgCancelProposalResponse> {
-    return self.makeUnaryCall(
-      path: Cosmos_Gov_V1_MsgClientMetadata.Methods.cancelProposal.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeCancelProposalInterceptors() ?? []
-    )
-  }
 }
 
 @available(*, deprecated)
@@ -299,11 +274,6 @@ internal protocol Cosmos_Gov_V1_MsgAsyncClientProtocol: GRPCClient {
     _ request: Cosmos_Gov_V1_MsgUpdateParams,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Cosmos_Gov_V1_MsgUpdateParams, Cosmos_Gov_V1_MsgUpdateParamsResponse>
-
-  func makeCancelProposalCall(
-    _ request: Cosmos_Gov_V1_MsgCancelProposal,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Cosmos_Gov_V1_MsgCancelProposal, Cosmos_Gov_V1_MsgCancelProposalResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -387,18 +357,6 @@ extension Cosmos_Gov_V1_MsgAsyncClientProtocol {
       interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
     )
   }
-
-  internal func makeCancelProposalCall(
-    _ request: Cosmos_Gov_V1_MsgCancelProposal,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Cosmos_Gov_V1_MsgCancelProposal, Cosmos_Gov_V1_MsgCancelProposalResponse> {
-    return self.makeAsyncUnaryCall(
-      path: Cosmos_Gov_V1_MsgClientMetadata.Methods.cancelProposal.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeCancelProposalInterceptors() ?? []
-    )
-  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -474,18 +432,6 @@ extension Cosmos_Gov_V1_MsgAsyncClientProtocol {
       interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
     )
   }
-
-  internal func cancelProposal(
-    _ request: Cosmos_Gov_V1_MsgCancelProposal,
-    callOptions: CallOptions? = nil
-  ) async throws -> Cosmos_Gov_V1_MsgCancelProposalResponse {
-    return try await self.performAsyncUnaryCall(
-      path: Cosmos_Gov_V1_MsgClientMetadata.Methods.cancelProposal.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeCancelProposalInterceptors() ?? []
-    )
-  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -524,9 +470,6 @@ internal protocol Cosmos_Gov_V1_MsgClientInterceptorFactoryProtocol: Sendable {
 
   /// - Returns: Interceptors to use when invoking 'updateParams'.
   func makeUpdateParamsInterceptors() -> [ClientInterceptor<Cosmos_Gov_V1_MsgUpdateParams, Cosmos_Gov_V1_MsgUpdateParamsResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'cancelProposal'.
-  func makeCancelProposalInterceptors() -> [ClientInterceptor<Cosmos_Gov_V1_MsgCancelProposal, Cosmos_Gov_V1_MsgCancelProposalResponse>]
 }
 
 internal enum Cosmos_Gov_V1_MsgClientMetadata {
@@ -540,7 +483,6 @@ internal enum Cosmos_Gov_V1_MsgClientMetadata {
       Cosmos_Gov_V1_MsgClientMetadata.Methods.voteWeighted,
       Cosmos_Gov_V1_MsgClientMetadata.Methods.deposit,
       Cosmos_Gov_V1_MsgClientMetadata.Methods.updateParams,
-      Cosmos_Gov_V1_MsgClientMetadata.Methods.cancelProposal,
     ]
   )
 
@@ -580,12 +522,6 @@ internal enum Cosmos_Gov_V1_MsgClientMetadata {
       path: "/cosmos.gov.v1.Msg/UpdateParams",
       type: GRPCCallType.unary
     )
-
-    internal static let cancelProposal = GRPCMethodDescriptor(
-      name: "CancelProposal",
-      path: "/cosmos.gov.v1.Msg/CancelProposal",
-      type: GRPCCallType.unary
-    )
   }
 }
 
@@ -616,11 +552,6 @@ internal protocol Cosmos_Gov_V1_MsgProvider: CallHandlerProvider {
   ///
   /// Since: cosmos-sdk 0.47
   func updateParams(request: Cosmos_Gov_V1_MsgUpdateParams, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Gov_V1_MsgUpdateParamsResponse>
-
-  /// CancelProposal defines a method to cancel governance proposal
-  ///
-  /// Since: cosmos-sdk 0.50
-  func cancelProposal(request: Cosmos_Gov_V1_MsgCancelProposal, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Gov_V1_MsgCancelProposalResponse>
 }
 
 extension Cosmos_Gov_V1_MsgProvider {
@@ -689,15 +620,6 @@ extension Cosmos_Gov_V1_MsgProvider {
         userFunction: self.updateParams(request:context:)
       )
 
-    case "CancelProposal":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Cosmos_Gov_V1_MsgCancelProposal>(),
-        responseSerializer: ProtobufSerializer<Cosmos_Gov_V1_MsgCancelProposalResponse>(),
-        interceptors: self.interceptors?.makeCancelProposalInterceptors() ?? [],
-        userFunction: self.cancelProposal(request:context:)
-      )
-
     default:
       return nil
     }
@@ -751,14 +673,6 @@ internal protocol Cosmos_Gov_V1_MsgAsyncProvider: CallHandlerProvider {
     request: Cosmos_Gov_V1_MsgUpdateParams,
     context: GRPCAsyncServerCallContext
   ) async throws -> Cosmos_Gov_V1_MsgUpdateParamsResponse
-
-  /// CancelProposal defines a method to cancel governance proposal
-  ///
-  /// Since: cosmos-sdk 0.50
-  @Sendable func cancelProposal(
-    request: Cosmos_Gov_V1_MsgCancelProposal,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Cosmos_Gov_V1_MsgCancelProposalResponse
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -834,15 +748,6 @@ extension Cosmos_Gov_V1_MsgAsyncProvider {
         wrapping: self.updateParams(request:context:)
       )
 
-    case "CancelProposal":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Cosmos_Gov_V1_MsgCancelProposal>(),
-        responseSerializer: ProtobufSerializer<Cosmos_Gov_V1_MsgCancelProposalResponse>(),
-        interceptors: self.interceptors?.makeCancelProposalInterceptors() ?? [],
-        wrapping: self.cancelProposal(request:context:)
-      )
-
     default:
       return nil
     }
@@ -874,10 +779,6 @@ internal protocol Cosmos_Gov_V1_MsgServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'updateParams'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeUpdateParamsInterceptors() -> [ServerInterceptor<Cosmos_Gov_V1_MsgUpdateParams, Cosmos_Gov_V1_MsgUpdateParamsResponse>]
-
-  /// - Returns: Interceptors to use when handling 'cancelProposal'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeCancelProposalInterceptors() -> [ServerInterceptor<Cosmos_Gov_V1_MsgCancelProposal, Cosmos_Gov_V1_MsgCancelProposalResponse>]
 }
 
 internal enum Cosmos_Gov_V1_MsgServerMetadata {
@@ -891,7 +792,6 @@ internal enum Cosmos_Gov_V1_MsgServerMetadata {
       Cosmos_Gov_V1_MsgServerMetadata.Methods.voteWeighted,
       Cosmos_Gov_V1_MsgServerMetadata.Methods.deposit,
       Cosmos_Gov_V1_MsgServerMetadata.Methods.updateParams,
-      Cosmos_Gov_V1_MsgServerMetadata.Methods.cancelProposal,
     ]
   )
 
@@ -929,12 +829,6 @@ internal enum Cosmos_Gov_V1_MsgServerMetadata {
     internal static let updateParams = GRPCMethodDescriptor(
       name: "UpdateParams",
       path: "/cosmos.gov.v1.Msg/UpdateParams",
-      type: GRPCCallType.unary
-    )
-
-    internal static let cancelProposal = GRPCMethodDescriptor(
-      name: "CancelProposal",
-      path: "/cosmos.gov.v1.Msg/CancelProposal",
       type: GRPCCallType.unary
     )
   }

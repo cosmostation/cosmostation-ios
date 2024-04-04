@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import web3swift
 import Alamofire
 import SwiftyJSON
 
@@ -41,43 +42,118 @@ class ChainOktEVM: EvmClass {
         supportStaking = false
         
         evmRpcURL = "https://exchainrpc.okex.org"
-        explorerURL = "https://www.oklink.com/oktc/"
-        addressURL = explorerURL + "address/%@"
-        txURL = explorerURL + "tx/%@"
     }
     
     override func fetchData(_ id: Int64) {
-        let group = DispatchGroup()
-        fetchChainParam2(group)
-        fetchErc20Info2(group)
-        fetchEvmBalance(group)
-        
-        fetchNodeInfo(group)
-        fetchAccountInfo(group, bechAddress)
-        fetchOktDeposited(group, bechAddress)
-        fetchOktWithdraw(group, bechAddress)
-        fetchOktTokens(group)
-        
-        group.notify(queue: .main) {
-            self.fetched = true
-            self.allCoinValue = self.allCoinValue()
-            self.allCoinUSDValue = self.allCoinValue(true)
-            self.fetchAllErc20Balance(id)
+        fetchState = .Busy
+        mintscanErc20Tokens.removeAll()
+        Task {
+            do {
+                let erc20Tokens = try await self.fetchErc20Info()
+                let balanceJson = try await fetchEvmBalance(self.evmAddress)
+                
+                if let erc20Tokens = erc20Tokens {
+                    self.mintscanErc20Tokens = erc20Tokens
+                }
+                if let balance = balanceJson?["result"].stringValue.hexToNSDecimal {
+                    self.evmBalances = balance()
+//                    print("evmBalances ", tag, "   ", evmBalances)
+                }
+                await fetchAllErc20Balance(id)
+                
+            } catch {
+                print("Error Evm", self.tag,  error)
+                DispatchQueue.main.async {
+                    self.fetchState = .Fail
+                    NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+                }
+            }
+            await self.fetchCosmosLcdData(id)
+        }
+    }
+    
+    func fetchCosmosLcdData(_ id: Int64) async {
+        lcdNodeInfo = JSON()
+        lcdAccountInfo = JSON()
+        lcdOktDeposits = JSON()
+        lcdOktWithdaws = JSON()
+        lcdOktTokens.removeAll()
+        do {
+            if let nodeInfo = try await fetchNodeInfo(),
+               let accountInfo = try await fetchAccountInfo(bechAddress),
+               let okDeposit = try await fetchOktDeposited(bechAddress),
+               let okWithdraw = try await fetchOktWithdraw(bechAddress),
+               let okTokens = try await fetchOktTokens() {
+                self.lcdNodeInfo = nodeInfo
+                self.lcdAccountInfo = accountInfo
+                self.lcdOktDeposits = okDeposit
+                self.lcdOktWithdaws = okWithdraw
+                okTokens["data"].array?.forEach({ value in
+                    self.lcdOktTokens.append(value)
+                })
+            }
             
-            BaseData.instance.updateRefAddressesCoinValue(
-                RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-                           self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                           nil, self.lcdAccountInfo.oktCoins?.count))
-            NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+            DispatchQueue.main.async {
+                self.fetchState = .Success
+                self.allCoinValue = self.allCoinValue()
+                self.allCoinUSDValue = self.allCoinValue(true)
+                
+                BaseData.instance.updateRefAddressesCoinValue(
+                    RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
+                               self.lcdAllStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                               nil, self.lcdAccountInfo.oktCoins?.count))
+                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+            }
+        } catch {
+            print("Error Cosmos", self.tag,  error)
+            DispatchQueue.main.async {
+                self.fetchState = .Fail
+                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+            }
         }
     }
     
     override func fetchPreCreate() {
-        let group = DispatchGroup()
-        fetchAccountInfo(group, bechAddress)
-        group.notify(queue: .main) {
-            self.fetched = true
-            NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+        lcdAccountInfo = JSON()
+        Task {
+            if let accountInfo = try? await fetchAccountInfo(bechAddress) {
+                self.lcdAccountInfo = accountInfo ?? JSON()
+            }
+            
+            DispatchQueue.main.async {
+                self.fetchState = .Success
+                NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+            }
+        }
+    }
+    
+    func fetchValidators() {
+        lcdOktValidators.removeAll()
+        Task {
+            if let okValidators = try? await fetchOktValdators() {
+                okValidators?.forEach { validator in
+                    self.lcdOktValidators.append(validator)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.lcdOktValidators.sort {
+                    if ($0["description"]["moniker"].stringValue == "Cosmostation") {
+                        return true
+                    }
+                    if ($1["description"]["moniker"].stringValue == "Cosmostation"){
+                        return false
+                    }
+                    if ($0["jailed"].boolValue && !$1["jailed"].boolValue) {
+                        return false
+                    }
+                    if (!$0["jailed"].boolValue && $1["jailed"].boolValue) {
+                        return true
+                    }
+                    return $0["delegator_shares"].doubleValue > $1["delegator_shares"].doubleValue
+                }
+                NotificationCenter.default.post(name: Notification.Name("FetchStakeData"), object: self.tag, userInfo: nil)
+            }
         }
     }
     
@@ -93,122 +169,28 @@ class ChainOktEVM: EvmClass {
 
 extension ChainOktEVM {
     
-    func fetchValidators() {
-        let group = DispatchGroup()
-        fetchOktValdators(group)
-        
-        group.notify(queue: .main) {
-            self.lcdOktValidators.sort {
-                if ($0["description"]["moniker"].stringValue == "Cosmostation") {
-                    return true
-                }
-                if ($1["description"]["moniker"].stringValue == "Cosmostation"){
-                    return false
-                }
-                if ($0["jailed"].boolValue && !$1["jailed"].boolValue) {
-                    return false
-                }
-                if (!$0["jailed"].boolValue && $1["jailed"].boolValue) {
-                    return true
-                }
-                return $0["delegator_shares"].doubleValue > $1["delegator_shares"].doubleValue
-            }
-            
-            NotificationCenter.default.post(name: Notification.Name("FetchStakeData"), object: self.tag, userInfo: nil)
-        }
+    func fetchNodeInfo() async throws -> JSON? {
+        return try? await AF.request(BaseNetWork.lcdNodeInfoUrl(self), method: .get).serializingDecodable(JSON.self).value
     }
     
-    func fetchNodeInfo(_ group: DispatchGroup) {
-        group.enter()
-        AF.request(BaseNetWork.lcdNodeInfoUrl(self), method: .get)
-            .responseDecodable(of: JSON.self) { response in
-                switch response.result {
-                case .success(let value):
-                    self.lcdNodeInfo = value
-//                    print("fetchNodeInfo ", value)
-                case .failure:
-                    print("fetchNodeInfo error")
-                }
-                group.leave()
-            }
+    func fetchAccountInfo(_ address: String) async throws -> JSON? {
+        return try await AF.request(BaseNetWork.lcdAccountInfoUrl(self, address), method: .get).serializingDecodable(JSON.self).value
     }
     
-    func fetchAccountInfo(_ group: DispatchGroup, _ address: String) {
-        group.enter()
-        AF.request(BaseNetWork.lcdAccountInfoUrl(self, address), method: .get)
-            .responseDecodable(of: JSON.self) { response in
-                switch response.result {
-                case .success(let value):
-                    self.lcdAccountInfo = value
-//                    print("fetchAccountInfo ", value)
-                case .failure:
-                    print("fetchAccountInfo error")
-                }
-                group.leave()
-            }
+    func fetchOktDeposited(_ address: String) async throws -> JSON? {
+        return try await AF.request(BaseNetWork.lcdOktDepositUrl(address), method: .get).serializingDecodable(JSON.self).value
     }
     
-    func fetchOktDeposited(_ group: DispatchGroup, _ address: String) {
-        group.enter()
-        AF.request(BaseNetWork.lcdOktDepositUrl(address), method: .get)
-            .responseDecodable(of: JSON.self) { response in
-                switch response.result {
-                case .success(let value):
-                    self.lcdOktDeposits = value
-//                    print("fetchOktDeposited ", value)
-                case .failure:
-                    print("fetchOktDeposited error")
-                }
-                group.leave()
-            }
+    func fetchOktWithdraw(_ address: String) async throws -> JSON? {
+        return try await AF.request(BaseNetWork.lcdOktWithdrawUrl(address), method: .get).serializingDecodable(JSON.self).value
     }
     
-    func fetchOktWithdraw(_ group: DispatchGroup, _ address: String) {
-        group.enter()
-        AF.request(BaseNetWork.lcdOktWithdrawUrl( address), method: .get)
-            .responseDecodable(of: JSON.self) { response in
-                switch response.result {
-                case .success(let value):
-                    self.lcdOktWithdaws = value
-                case .failure:
-                    print("fetchOktWithdraw error")
-                }
-                group.leave()
-            }
+    func fetchOktTokens() async throws -> JSON? {
+        return try await AF.request(BaseNetWork.lcdOktTokenUrl(), method: .get).serializingDecodable(JSON.self).value
     }
     
-    func fetchOktTokens(_ group: DispatchGroup) {
-        group.enter()
-        AF.request(BaseNetWork.lcdOktTokenUrl(), method: .get)
-            .responseDecodable(of: JSON.self) { response in
-                switch response.result {
-                case .success(let values):
-                    values["data"].array?.forEach({ value in
-                        self.lcdOktTokens.append(value)
-                    })
-                    
-                case .failure:
-                    print("fetchOktTokens error")
-                }
-                group.leave()
-            }
-    }
-    
-    func fetchOktValdators(_ group: DispatchGroup) {
-        group.enter()
-        AF.request(BaseNetWork.lcdOktValidatorsUrl(), method: .get, parameters: ["status":"all"])
-            .responseDecodable(of: [JSON].self) { response in
-                switch response.result {
-                case .success(let values):
-                    self.lcdOktValidators.removeAll()
-                    values.forEach { validator in
-                        self.lcdOktValidators.append(validator)
-                    }
-                case .failure:
-                    print("fetchOktValdators error")
-                }
-                group.leave()
-            }
+    func fetchOktValdators() async throws -> [JSON]? {
+        return try await AF.request(BaseNetWork.lcdOktValidatorsUrl(), method: .get, parameters: ["status":"all"]).serializingDecodable([JSON].self).value
     }
     
     

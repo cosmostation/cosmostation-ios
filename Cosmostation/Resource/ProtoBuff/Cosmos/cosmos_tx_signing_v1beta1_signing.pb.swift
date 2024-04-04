@@ -41,9 +41,7 @@ enum Cosmos_Tx_Signing_V1beta1_SignMode: SwiftProtobuf.Enum {
 
   /// SIGN_MODE_TEXTUAL is a future signing mode that will verify some
   /// human-readable textual representation on top of the binary representation
-  /// from SIGN_MODE_DIRECT. It is currently experimental, and should be used
-  /// for testing purposes only, until Textual is fully released. Please follow
-  /// the tracking issue https://github.com/cosmos/cosmos-sdk/issues/11970.
+  /// from SIGN_MODE_DIRECT. It is currently not supported.
   case textual // = 2
 
   /// SIGN_MODE_DIRECT_AUX specifies a signing mode which uses

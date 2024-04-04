@@ -177,8 +177,8 @@
 "str_voting_end_time" = "투표 종료 시간";
 "str_request_amount" = "요청 금액";
 "str_voting_description" = "설명";
-"str_voting_period" = "투표 진행 목록";
-"str_vote_proposals" = "투표 완료 목록";
+"str_voting_period" = "진행중 목록";
+"str_voting_finished" = "종료된 목록";
 "str_vote_reject_by_qourum" = "정족수가 충족되지 못했습니다. 더 많은 투표가 필요합니다.";
 "str_vote_reject_by_veto" = "정족수가 충족 되었지만, VETO 상태입니다.";
 "str_vote_reject_by_no" = "정족수가 충족 되었지만, 찬성률을 넘기지 못했습니다.";
@@ -204,6 +204,9 @@
 "str_big_loss_msg" = "현재 선택하신 스왑을 진행하시면 상당한 재산상 손해가 예상됩니다.\n\n예상 입력, 출력 가치를 확인하신 후 신중히 결정해주세요.";
 "str_memo_optional" = "메모 (선택)";
 "str_tx_result" = "Tx 결과";
+"str_vote_all" = "모두 투표";
+"str_show_all_proposal" = "라이브 프로포절";
+"str_hide_done_proposal" = "내가 투표한 프로포절 제외";
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";
@@ -386,8 +389,10 @@
 "msg_check_inputed_mnemonic" = "입력하신 니모닉을 확인해 주세요. \n아시다시피, 누구와도 공유하지 마십시오. 이 니모닉을 분실하면 자산 손실로 이어질 수 있습니다.";
 "msg_show_all_proposals" = "모든 프로포절을 표시합니다.";
 "msg_hide_scam_proposals" = "스캠의심 프로포절을 필터합니다.";
+"msg_hide_voted_proposals" = "이미 투표를 마친 프로포절은 제거합니다.";
 "msg_token_github" = "현재 사용하고 계신 체인에서는 커뮤니티에 알려진 토큰(cw20, erc20)을 보유한 경우 자동으로 토큰 목록에 표시됩니다.\n\n원하는 토큰 정보가 보이지 않는 경우, 아래 GitHub 링크를 통해 PR을 제출해주세요.";
-"msg_node_down" = "▪ 현재 사용 중인 노드에 문제가 있는 경우, [설정 > 체인 관리]를 통해 다른 노드로 손쉽게 전환하여 서비스를 계속 이용하실 수 있습니다.\n\n ▪ 모든 노드가 사용이 불가능한 경우 사용중인 체인 업그레이드가 진행 중인 경우로, 업그레이드가 완료될 때까지 기다려주시기 바랍니다.";
+"msg_node_down" = "▪ 현재 디바이스의 네트워크 상태를 확인해주세요.\n\n▪ 현재 사용 중인 노드에 문제가 있는 경우, [설정 > 체인 관리]를 통해 다른 노드로 손쉽게 전환하여 서비스를 계속 이용하실 수 있습니다.\n\n ▪ 모든 노드가 사용이 불가능한 경우 사용중인 체인 업그레이드가 진행 중인 경우로, 업그레이드가 완료될 때까지 기다려주시기 바랍니다.";
+"msg_vote_all_detail" = "라이브 상태인 프로포절을 모두 선택하여야 투표가 가능합니다.\n추후에 투표할 프로포절은 스와이프하여 제외해주세요.";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";
@@ -1029,7 +1034,7 @@
 "error_send_disable" = "아직 전송이 활성화 되지 않았습니다.";
 "error_not_voting_not" = "지금은 투표할 수 없습니다..";
 "error_not_voting_period" = "투표 기간이 아닙니다.";
-"error_no_bonding_no_vote" = "위임량이 없음으로 투표를 하실 수 없습니다.";
+"error_no_bonding_no_vote" = "위임량이 충분하지 않아 투표를 하실 수 없습니다.";
 "error_already_vote" = "이미 투표를 하였습니다.";
 "error_no_opinion" = "의견을 선택해 주세요.";
 "error_not_yet" = "준비중 입니다!";

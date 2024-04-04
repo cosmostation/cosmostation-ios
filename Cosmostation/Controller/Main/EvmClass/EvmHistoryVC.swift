@@ -20,9 +20,8 @@ class EvmHistoryVC: BaseVC {
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
-        guard let url = URL(string:String(format: selectedChain.addressURL, selectedChain.evmAddress)) else { return }
+        guard let url = selectedChain.getExplorerAccount() else { return }
         self.onShowSafariWeb(url)
-        
     }
     
 }

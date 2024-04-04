@@ -11,11 +11,13 @@ import GRPC
 import NIO
 import SwiftProtobuf
 import SwiftyJSON
+import web3swift
 
 class SelectEndpointCell: UITableViewCell {
     
     @IBOutlet weak var rootView: UIView!
     @IBOutlet weak var providerLabel: UILabel!
+    @IBOutlet weak var seletedImg: UIImageView!
     @IBOutlet weak var endpointLabel: UILabel!
     @IBOutlet weak var speedImg: UIImageView!
     @IBOutlet weak var speedTimeLabel: UILabel!
@@ -24,53 +26,101 @@ class SelectEndpointCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = .none
     }
     
     override func prepareForReuse() {
-        self.gapTime = nil
+        self.providerLabel.text = ""
+        self.endpointLabel.text = ""
+        self.speedImg.image = nil
+        self.speedTimeLabel.text = ""
+        self.seletedImg.isHidden = true
     }
     
-    func onBindEndpoint(_ position: Int, _ chain: CosmosClass) {
-        let endpoint = chain.getChainParam()["grpc_endpoint"].arrayValue[position]
-        providerLabel.text = endpoint["provider"].string
-        endpointLabel.text = endpoint["url"].string
-        
-        let checkTime = CFAbsoluteTimeGetCurrent()
-        let host = endpoint["url"].stringValue.components(separatedBy: ":")[0].trimmingCharacters(in: .whitespaces)
-        let port = Int(endpoint["url"].stringValue.components(separatedBy: ":")[1].trimmingCharacters(in: .whitespaces)) ?? 443
-//        print("host ", host)
-//        print("port ", port)
-        
-        Task {
-            let channel = getConnection(host, port)
-            do {
-                let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest.init()
-                let nodeInfo = try await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: channel).getNodeInfo(req, callOptions: getCallOptions()).response.get()
-                if (nodeInfo.defaultNodeInfo.network == chain.chainId) {
-                    gapTime = CFAbsoluteTimeGetCurrent() - checkTime
-                    let gapFormat = WUtils.getNumberFormatter(4).string(from: gapTime! as NSNumber)
-                    if (gapTime! <= 1.2) {
+    func onBindGrpcEndpoint(_ position: Int, _ chain: BaseChain) {
+        if let cosmosChain = chain as? CosmosClass {
+            let endpoint = cosmosChain.getChainListParam()["grpc_endpoint"].arrayValue[position]
+            providerLabel.text = endpoint["provider"].string
+            endpointLabel.text = endpoint["url"].string
+            endpointLabel.adjustsFontSizeToFitWidth = true
+            
+            let checkTime = CFAbsoluteTimeGetCurrent()
+            let host = endpoint["url"].stringValue.components(separatedBy: ":")[0].trimmingCharacters(in: .whitespaces)
+            let port = Int(endpoint["url"].stringValue.components(separatedBy: ":")[1].trimmingCharacters(in: .whitespaces)) ?? 443
+            
+            seletedImg.isHidden = (cosmosChain.getGrpc().host != host)
+            
+            Task {
+                let channel = getConnection(host, port)
+                do {
+                    let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest.init()
+                    let nodeInfo = try await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: channel).getNodeInfo(req, callOptions: getCallOptions()).response.get()
+                    if (nodeInfo.defaultNodeInfo.network == chain.chainIdCosmos) {
+                        self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
+                        let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
+                        if (self.gapTime! <= 1.2) {
+                            self.speedImg.image = UIImage.init(named: "ImgGovPassed")
+                        } else if (self.gapTime! <= 3) {
+                            self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
+                        } else {
+                            self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                        }
+                        self.speedTimeLabel.text = gapFormat
+                        
+                    } else {
+                        try? channel.close()
+                        DispatchQueue.main.async {
+                            self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                            self.speedTimeLabel.text = "ChainID Failed"
+                        }
+                    }
+                    
+                } catch {
+                    try? channel.close()
+                    DispatchQueue.main.async {
+                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                        self.speedTimeLabel.text = "Unknown"
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    func onBindEvmEndpoint(_ position: Int, _ chain: BaseChain) {
+        if let evmChain = chain as? EvmClass {
+            let endpoint = evmChain.getChainListParam()["evm_rpc_endpoint"].arrayValue[position]
+            providerLabel.text = endpoint["provider"].string
+            endpointLabel.text = endpoint["url"].string?.replacingOccurrences(of: "https://", with: "")
+            endpointLabel.adjustsFontSizeToFitWidth = true
+            
+            let checkTime = CFAbsoluteTimeGetCurrent()
+            let url = endpoint["url"].stringValue
+            
+            seletedImg.isHidden = (evmChain.getEvmRpc() != url)
+            
+            Task {
+                do {
+                    let balanceJson = try await evmChain.fetchEvmBalance("0x8D97689C9818892B700e27F316cc3E41e17fBeb9")
+                    self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
+                    
+                } catch {
+                    DispatchQueue.main.async {
+                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                        self.speedTimeLabel.text = "Unknown"
+                    }
+                }
+                
+                DispatchQueue.main.async {
+                    let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
+                    if (self.gapTime! <= 1.2) {
                         self.speedImg.image = UIImage.init(named: "ImgGovPassed")
-                    } else if (gapTime! <= 3) {
+                    } else if (self.gapTime! <= 3) {
                         self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
                     } else {
                         self.speedImg.image = UIImage.init(named: "ImgGovRejected")
                     }
                     self.speedTimeLabel.text = gapFormat
-                    
-                } else {
-                    try? channel.close()
-                    DispatchQueue.main.async {
-                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        self.speedTimeLabel.text = "ChainID Failed"
-                    }
-                }
-                
-            } catch {
-                try? channel.close()
-                DispatchQueue.main.async {
-                    self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                    self.speedTimeLabel.text = "Unknown"
                 }
             }
         }
@@ -83,7 +133,7 @@ class SelectEndpointCell: UITableViewCell {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(3500))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
 }

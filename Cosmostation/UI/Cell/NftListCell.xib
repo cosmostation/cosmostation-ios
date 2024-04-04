@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="NftListCell" id="gTV-IL-0wX" customClass="NftListCell" customModule="Cosmostation" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="266"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="266"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nmV-fx-Uqu" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="266"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgNftPlaceHolder" translatesAutoresizingMaskIntoConstraints="NO" id="RW8-Mi-SOd">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="266"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symbol" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbk-06-lqo">
+                                <rect key="frame" x="139.33333333333334" y="240.33333333333334" width="52.666666666666657" height="17.666666666666657"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                <color key="textColor" name="_color01"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="mbk-06-lqo" secondAttribute="bottom" constant="8" id="6gd-NO-GKE"/>
+                            <constraint firstItem="RW8-Mi-SOd" firstAttribute="top" secondItem="nmV-fx-Uqu" secondAttribute="top" id="Cjn-4e-F1k"/>
+                            <constraint firstAttribute="trailing" secondItem="RW8-Mi-SOd" secondAttribute="trailing" id="TzN-hh-XG2"/>
+                            <constraint firstItem="RW8-Mi-SOd" firstAttribute="leading" secondItem="nmV-fx-Uqu" secondAttribute="leading" id="aS6-mD-iKi"/>
+                            <constraint firstItem="RW8-Mi-SOd" firstAttribute="centerY" secondItem="nmV-fx-Uqu" secondAttribute="centerY" id="cKo-dd-ESP"/>
+                            <constraint firstItem="RW8-Mi-SOd" firstAttribute="centerX" secondItem="nmV-fx-Uqu" secondAttribute="centerX" id="iAR-Oy-HgQ"/>
+                            <constraint firstAttribute="trailing" secondItem="mbk-06-lqo" secondAttribute="trailing" constant="8" id="ouv-JL-0LP"/>
+                            <constraint firstAttribute="bottom" secondItem="RW8-Mi-SOd" secondAttribute="bottom" id="uPA-Sq-FR4"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="nmV-fx-Uqu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="AWo-pX-nwQ"/>
+                <constraint firstItem="nmV-fx-Uqu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="QZT-Pp-Rrx"/>
+                <constraint firstAttribute="bottom" secondItem="nmV-fx-Uqu" secondAttribute="bottom" id="U5t-rE-Mwm"/>
+                <constraint firstAttribute="trailing" secondItem="nmV-fx-Uqu" secondAttribute="trailing" id="mVB-sf-TUz"/>
+            </constraints>
+            <size key="customSize" width="200" height="266"/>
+            <connections>
+                <outlet property="nftImageView" destination="RW8-Mi-SOd" id="GJg-hQ-wa8"/>
+                <outlet property="rootView" destination="nmV-fx-Uqu" id="61d-w3-Cp2"/>
+                <outlet property="titleLabel" destination="mbk-06-lqo" id="WOF-sq-rVv"/>
+            </connections>
+            <point key="canvasLocation" x="106.87022900763358" y="63.380281690140848"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="imgNftPlaceHolder" width="200" height="200"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

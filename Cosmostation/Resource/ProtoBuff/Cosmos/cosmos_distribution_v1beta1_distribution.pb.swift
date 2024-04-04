@@ -158,6 +158,21 @@ struct Cosmos_Distribution_V1beta1_FeePool {
   init() {}
 }
 
+/// TokenizeShareRecordReward represents the properties of tokenize share
+struct Cosmos_Distribution_V1beta1_TokenizeShareRecordReward {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var recordID: UInt64 = 0
+
+  var reward: [Cosmos_Base_V1beta1_DecCoin] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 /// CommunityPoolSpendProposal details a proposal for use of community funds,
 /// together with how many coins are proposed to be spent, and to which
 /// recipient account.
@@ -253,6 +268,7 @@ extension Cosmos_Distribution_V1beta1_ValidatorOutstandingRewards: @unchecked Se
 extension Cosmos_Distribution_V1beta1_ValidatorSlashEvent: @unchecked Sendable {}
 extension Cosmos_Distribution_V1beta1_ValidatorSlashEvents: @unchecked Sendable {}
 extension Cosmos_Distribution_V1beta1_FeePool: @unchecked Sendable {}
+extension Cosmos_Distribution_V1beta1_TokenizeShareRecordReward: @unchecked Sendable {}
 extension Cosmos_Distribution_V1beta1_CommunityPoolSpendProposal: @unchecked Sendable {}
 extension Cosmos_Distribution_V1beta1_DelegatorStartingInfo: @unchecked Sendable {}
 extension Cosmos_Distribution_V1beta1_DelegationDelegatorReward: @unchecked Sendable {}
@@ -550,6 +566,44 @@ extension Cosmos_Distribution_V1beta1_FeePool: SwiftProtobuf.Message, SwiftProto
 
   static func ==(lhs: Cosmos_Distribution_V1beta1_FeePool, rhs: Cosmos_Distribution_V1beta1_FeePool) -> Bool {
     if lhs.communityPool != rhs.communityPool {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Distribution_V1beta1_TokenizeShareRecordReward: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".TokenizeShareRecordReward"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "record_id"),
+    2: .same(proto: "reward"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.recordID) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.reward) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.recordID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.recordID, fieldNumber: 1)
+    }
+    if !self.reward.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.reward, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Distribution_V1beta1_TokenizeShareRecordReward, rhs: Cosmos_Distribution_V1beta1_TokenizeShareRecordReward) -> Bool {
+    if lhs.recordID != rhs.recordID {return false}
+    if lhs.reward != rhs.reward {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -86,6 +86,7 @@ class CommonTransfer: BaseVC {
     var evmGasTitle: [String] = [NSLocalizedString("str_low", comment: ""), NSLocalizedString("str_average", comment: ""), NSLocalizedString("str_high", comment: "")]
     var evmGasPrice: [BigUInt] = [28000000000, 28000000000, 28000000000]
     var evmGasLimit: BigUInt = 21000
+    var web3: web3?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,6 +111,19 @@ class CommonTransfer: BaseVC {
         toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeDenom)))
+        
+        if let evmChain = fromChain as? EvmClass,
+           let url = URL(string: evmChain.getEvmRpc()) {
+            DispatchQueue.global().async { [self] in
+                do {
+                    self.web3 = try Web3.new(url)
+                } catch {
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true)
+                    }
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -556,12 +570,12 @@ class CommonTransfer: BaseVC {
         } else if (txStyle == .COSMOS_STYLE) {
             // some chain not support simulate (assetmantle)  24.2.21
             if ((fromChain as! CosmosClass).isGasSimulable() == false) {
-                if (fromChain.chainId != toChain.chainId) {
+                if (fromChain.chainIdCosmos != toChain.chainIdCosmos) {
                     ibcPath = WUtils.getMintscanPath((fromChain as! CosmosClass), (toChain as! CosmosClass), toSendDenom)
                 }
                 return onUpdateFeeViewAfterSimul(nil)
             }
-            if (fromChain.chainId == toChain.chainId) {         // Inchain Send!
+            if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {         // Inchain Send!
                 if (sendType == .Only_Cosmos_CW20) {            // Inchain CW20 Send!
                     inChainWasmSendSimul()
                 } else {                                        // Inchain Coin Send!  (Only_Cosmos_Coin, CosmosEVM_Coin)
@@ -585,9 +599,11 @@ extension CommonTransfer {
     func evmSendSimul() {
         evmTx = nil
         DispatchQueue.global().async { [self] in
-            guard let web3 = (fromChain as! EvmClass).getWeb3Connection() else {
+            
+            guard let web3 = self.web3 else {
                 return
             }
+            
             let chainID = web3.provider.network?.chainID
             let senderAddress = EthereumAddress.init((fromChain as! EvmClass).evmAddress)
             let recipientAddress = EthereumAddress.init(toAddress)
@@ -672,13 +688,12 @@ extension CommonTransfer {
     
     func evmSend() {
         DispatchQueue.global().async { [self] in
-            guard let web3 = (fromChain as! EvmClass).getWeb3Connection() else {
+            guard let web3 = self.web3 else {
                 return
             }
+            
             try! evmTx?.sign(privateKey: fromChain.privateKey!)
             let result = try? web3.eth.sendRawTransaction(evmTx!)
-//            print("evmSend ethereumTx ", ethereumTx)
-//            print("evmSend result ", result)
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                 self.loadingView.isHidden = true
                 let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -1046,8 +1061,8 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectCosmosRecipientChain) {
             if let chainId = result["chainId"] as? String {
-                if (chainId != toChain.chainId) {
-                    onUpdateToChain(recipientableChains.filter({ $0.chainId == chainId }).first!)
+                if (chainId != toChain.chainIdCosmos) {
+                    onUpdateToChain(recipientableChains.filter({ $0.chainIdCosmos == chainId }).first!)
                 }
             }
         } else if (sheetType == .SelectFeeDenom) {
@@ -1093,7 +1108,7 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                 evmSend()
                 
             } else if (txStyle == .COSMOS_STYLE) {
-                if (fromChain.chainId == toChain.chainId) {         // Inchain Send!
+                if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {         // Inchain Send!
                     if (sendType == .Only_Cosmos_CW20) {            // Inchain CW20 Send!
                         inChainWasmSend()
                     } else {                                        // Inchain Coin Send!  (Only_Cosmos_Coin, CosmosEVM_Coin)

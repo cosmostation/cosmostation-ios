@@ -15,16 +15,6 @@ class ServiceCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var msgLabel: UILabel!
     
-    @IBOutlet weak var tagskip: UIImageView!
-    @IBOutlet weak var tag1inch: UIImageView!
-    @IBOutlet weak var tagsquid: UIImageView!
-    @IBOutlet weak var tagosmo: UIImageView!
-    @IBOutlet weak var tagAstroport: UIImageView!
-    @IBOutlet weak var tagkava: UIImageView!
-    @IBOutlet weak var tagneutron: UIImageView!
-    @IBOutlet weak var tagmoonpay: UIImageView!
-    @IBOutlet weak var tagkado: UIImageView!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
@@ -32,55 +22,39 @@ class ServiceCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        tagskip.isHidden = true
-        tag1inch.isHidden = true
-        tagsquid.isHidden = true
-        tagosmo.isHidden = true
-        tagAstroport.isHidden = true
-        tagkava.isHidden = true
-        tagneutron.isHidden = true
-        tagmoonpay.isHidden = true
-        tagkado.isHidden = true
         rootView.setBlur()
     }
     
     func onBindService(_ position: Int) {
         if (position == 0) {
             serviceImg.image = UIImage(named: "imgServiceMintscan")
-            
             titleLabel.text = "MINTSCAN"
-            msgLabel.text = "Second generation blockchain analytics \nplatform specialized in on-chain \ndata visualization."
+            msgLabel.text = "Second generation blockchain\nanalytics platform specialized in\non-chain data visualization."
             
         } else if (position == 1) {
             serviceImg.image = UIImage(named: "imgServiceClaim")
-            
-            titleLabel.text = "CLAIM REWARDS"
-            msgLabel.text = "Easily claim all rewards exceeding $0.1 \nacross Cosmos Chains with a single \nclick."
+            titleLabel.text = "ALL CHAIN REWARDS"
+            msgLabel.text = "Easily claim all rewards\nexceeding $0.1 across Cosmos\nchains with a single click."
             
         } else if (position == 2) {
-            serviceImg.image = UIImage(named: "imgServiceSwap")
-            tagskip.isHidden = false
-            tagosmo.isHidden = false
-            tagAstroport.isHidden = false
-            
-            titleLabel.text = "COIN SWAP"
-            msgLabel.text = "Exchange the coins you have for a \nvariety of different coins"
+            serviceImg.image = UIImage(named: "imgServiceVote")
+            titleLabel.text = "ALL CHAIN VOTE"
+            msgLabel.text = "Check the list of live proposals\nof the chains you staked and\nvote for."
             
         } else if (position == 3) {
-            serviceImg.image = UIImage(named: "imgServiceDapp")
-            tagkava.isHidden = false
-            tagneutron.isHidden = false
-            
-            titleLabel.text = "DAPP"
-            msgLabel.text = "Discover, Track & Trade Everything \nDeFi, NFT and Gaming"
+            serviceImg.image = UIImage(named: "imgServiceSwap")
+            titleLabel.text = "COIN SWAP"
+            msgLabel.text = "Exchange the coins you have\nfor a variety of different coins."
             
         } else if (position == 4) {
-            serviceImg.image = UIImage(named: "imgServiceBuy")
-            tagmoonpay.isHidden = false
-            tagkado.isHidden = false
+            serviceImg.image = UIImage(named: "imgServiceDapp")
+            titleLabel.text = "DAPP"
+            msgLabel.text = "Discover, Track & Trade\nEverything DeFi, NFT and\nGaming."
             
+        } else if (position == 5) {
+            serviceImg.image = UIImage(named: "imgServiceBuy")
             titleLabel.text = "BUY CRYPTO"
-            msgLabel.text = "The coins purchased can be used for\n online transactions and investments"
+            msgLabel.text = "The coins purchased can be\nused for online transactions\nand investments."
         }
         
     }

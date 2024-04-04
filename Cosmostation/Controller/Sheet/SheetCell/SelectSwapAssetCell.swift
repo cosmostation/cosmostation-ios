@@ -28,7 +28,7 @@ class SelectSwapAssetCell: UITableViewCell {
         
         if let msAsset = BaseData.instance.getAsset(chain.apiName, asset["denom"].stringValue) {
             let coin = balances.filter({ $0.denom == asset["denom"].stringValue }).first
-            WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, msAsset.decimals)
+            WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, 6)
             
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let amount = NSDecimalNumber(string: coin?.amount ?? "0")

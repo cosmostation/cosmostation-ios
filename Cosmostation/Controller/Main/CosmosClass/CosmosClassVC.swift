@@ -28,6 +28,7 @@ class CosmosClassVC: BaseVC {
     @IBOutlet weak var aboutList: UIView!
     
     var addtokenBarBtn: UIBarButtonItem!
+    var addNftBarBtn: UIBarButtonItem!
     var explorerBarBtn: UIBarButtonItem!
     
     var selectedChain: CosmosClass!
@@ -52,8 +53,8 @@ class CosmosClassVC: BaseVC {
             let target = segue.destination as! CosmosTokenVC
             target.selectedChain = selectedChain
         } else if (segue.identifier == "embedNftVC") {
-//            let target = segue.destination as! CosmosCoinVC
-//            target.selectedChain = selectedChain
+            let target = segue.destination as! CosmosNftVC
+            target.selectedChain = selectedChain
         } else if (segue.identifier == "embedHistoryVC") {
             let target = segue.destination as! CosmosHistoryVC
             target.selectedChain = selectedChain
@@ -95,6 +96,12 @@ class CosmosClassVC: BaseVC {
         addtokenBtn.addTarget(self, action:  #selector(onClickAddToken), for: .touchUpInside)
         addtokenBtn.frame = CGRectMake(0, 0, 40, 30)
         addtokenBarBtn = UIBarButtonItem(customView: addtokenBtn)
+        
+        let addNftBtn: UIButton = UIButton(type: .custom)
+        addNftBtn.setImage(UIImage(named: "iconAddNFTInfo"), for: .normal)
+        addNftBtn.addTarget(self, action:  #selector(onClickAddNft), for: .touchUpInside)
+        addNftBtn.frame = CGRectMake(0, 0, 40, 30)
+        addNftBarBtn = UIBarButtonItem(customView: addNftBtn)
         
         let explorerBtn: UIButton = UIButton(type: .custom)
         explorerBtn.setImage(UIImage(named: "iconExplorer"), for: .normal)
@@ -175,13 +182,9 @@ class CosmosClassVC: BaseVC {
     }
     
     @objc func onClickExplorer() {
-        if let evmChain = selectedChain as? EvmClass {
-            guard let url = URL(string:String(format: evmChain.addressURL, evmChain.evmAddress)) else { return }
-            self.onShowSafariWeb(url)
-        } else {
-            guard let url = BaseNetWork.getAccountDetailUrl(selectedChain) else { return }
-            self.onShowSafariWeb(url)
-        }
+        guard let url = selectedChain.getExplorerAccount() else { return }
+        self.onShowSafariWeb(url)
+        
     }
     
     @objc func onClickAddToken() {
@@ -189,6 +192,11 @@ class CosmosClassVC: BaseVC {
         warnSheet.selectedChain = selectedChain
         warnSheet.noticeType = .TokenGithub
         onStartSheet(warnSheet)
+    }
+    
+    @objc func onClickAddNft() {
+        print("onClickAddNft")
+        
     }
     
     func onSendTx() {
@@ -349,9 +357,9 @@ class CosmosClassVC: BaseVC {
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 4)
         tabbar.items.append(coinTabBar)
         if (selectedChain.supportCw20 || selectedChain is EvmClass) { tabbar.items.append(tokenTabBar) }
-        if (selectedChain.supportNft) { tabbar.items.append(nftTabBar) }
+        if (selectedChain.supportCw721) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(historyTabBar)
-        if (!selectedChain.mintscanChainParam.isEmpty && !(selectedChain is ChainOktEVM)) { tabbar.items.append(aboutTabBar) }
+        if (!selectedChain.getChainListParam().isEmpty) { tabbar.items.append(aboutTabBar) }
         
         tabbar.barTintColor = .clear
         tabbar.selectionIndicatorStrokeColor = .white
@@ -514,7 +522,7 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             nftList.alpha = 1
             historyList.alpha = 0
             aboutList.alpha = 0
-            navigationItem.rightBarButtonItems = [explorerBarBtn]
+            navigationItem.rightBarButtonItems = [explorerBarBtn, addNftBarBtn]
             
         } else if (item.tag == 3) {
             coinList.alpha = 0

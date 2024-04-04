@@ -177,8 +177,8 @@
 "str_voting_end_time" = "Voting End Time";
 "str_request_amount" = "Request Amount";
 "str_voting_description" = "Description";
-"str_voting_period" = "Voting Period Proposals";
-"str_vote_proposals" = "Finished Proposals";
+"str_voting_period" = "Live Proposals";
+"str_voting_finished" = "Finished Proposals";
 "str_vote_reject_by_qourum" = "The quorum is NOT established, need more votes.";
 "str_vote_reject_by_veto" = "The quorum is established, but VETO.";
 "str_vote_reject_by_no" = "The quorum is established, but the majority has voted NO.";
@@ -204,6 +204,9 @@
 "str_big_loss_msg" = "If you proceed with the currently selected swap, significant property damage is expected.\n\nPlease check the expected input and output values and decide carefully.";
 "str_memo_optional" = "Memo (Optional)";
 "str_tx_result" = "Tx Result";
+"str_vote_all" = "Vote All";
+"str_show_all_proposal" = "Live Proposals";
+"str_hide_done_proposal" = "Excluding voted Proposals";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -386,8 +389,10 @@
 "msg_check_inputed_mnemonic" = "Please check the mnemonic you entered. \nJust so you know, don't share it with anyone. Losing this mnemonic can lead to loss of assets.";
 "msg_show_all_proposals" = "Show all proposals.";
 "msg_hide_scam_proposals" = "Filters out suspected of scam proposals.";
+"msg_hide_voted_proposals" = "Filters proposals that have already been voted on.";
 "msg_token_github" = "Currently, the selected chain does not need to manually add tokens to the chain. Cosmostation Wallet displays information for all tokens (CW20, ERC20) with existing quantity.\n\nIf you hold the token but do not see it, try submitting the PR through the Github link below.";
-"msg_node_down" = "▪ If there is a problem with the node you are currently using, you can easily switch to another node through [Settings > Manage Chains] and continue using the service.\n\n ▪ If all nodes are unavailable, the chain being used is being upgraded. Please wait until the upgrade is complete.";
+"msg_node_down" = "▪ Please check the current network status of the device.\n\n▪ If there is a problem with the node you are currently using, you can easily switch to another node through [Settings > Manage Chains] and continue using the service.\n\n ▪ If all nodes are unavailable, the chain being used is being upgraded. Please wait until the upgrade is complete.";
+"msg_vote_all_detail" = "You must select all proposals that are live to vote.\nPlease swipe to exclude proposals that you want to vote on later.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -951,6 +956,7 @@
 "title_reward_detail_list" = "Reward Detail";
 "title_earn_list" = "Earning List";
 "title_claimable_chains" = "Claimable Chains";
+"title_voting_period_proposals" = "Voting Period Proposals";
 
 
 "proposal_type_basic" = "Basic";
@@ -1029,7 +1035,7 @@
 "error_send_disable" = "Token transfer is locked.";
 "error_not_voting_not" = "Can not vote now.";
 "error_not_voting_period" = "Not voting period.";
-"error_no_bonding_no_vote" = "This proposal can only vote on delegators.";
+"error_no_bonding_no_vote" = "You cannot vote because there is not enough delegation.";
 "error_already_vote" = "Already voted.";
 "error_no_opinion" = "Please select your opinion.";
 "error_not_yet" = "Coming soon!";

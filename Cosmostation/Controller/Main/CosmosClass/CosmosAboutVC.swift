@@ -31,23 +31,7 @@ class CosmosAboutVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        chainParam = selectedChain.mintscanChainParam
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchStakeDone(_:)), name: Notification.Name("FetchStakeData"), object: nil)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchStakeData"), object: nil)
-    }
-    
-    @objc func onFetchStakeDone(_ notification: NSNotification) {
-        DispatchQueue.main.async {
-            self.tableView.reloadSections(IndexSet(2...2), with: .none)
-        }
+        chainParam = selectedChain.getChainParam()
     }
 }
 
@@ -70,7 +54,7 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (section == 2) {
             view.titleLabel.text = "Reward Address"
-            if (!selectedChain.rewardAddress.isEmpty && selectedChain.rewardAddress != selectedChain.bechAddress) {
+            if (selectedChain.rewardAddress != nil && selectedChain.rewardAddress != selectedChain.bechAddress) {
                 view.cntLabel.text = "(Changed)"
                 view.cntLabel.textColor = .colorPrimary
             } else {
@@ -81,6 +65,7 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (section == 2 && selectedChain.rewardAddress == nil) { return 0}
         if (section == 3) { return 0 }
         return 40
     }
@@ -88,6 +73,11 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.section == 2 && selectedChain.rewardAddress == nil) { return 0 }
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -110,7 +100,7 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
         } else if (indexPath.section == 3) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AboutSocialsCell") as! AboutSocialsCell
             cell.vc = self
-            cell.onBindSocial(selectedChain, chainParam)
+            cell.onBindSocial(chainParam)
             return cell
         }
         return UITableViewCell()
@@ -118,8 +108,8 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 2) {
-            if (!selectedChain.rewardAddress.isEmpty) {
-                UIPasteboard.general.string = selectedChain.rewardAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+            if (selectedChain.rewardAddress != nil) {
+                UIPasteboard.general.string = selectedChain.rewardAddress?.trimmingCharacters(in: .whitespacesAndNewlines)
                 self.onShowToast(NSLocalizedString("address_copied", comment: ""))
             }
         }

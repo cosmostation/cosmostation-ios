@@ -666,6 +666,275 @@ struct Cosmos_Staking_V1beta1_QueryParamsResponse {
   fileprivate var _params: Cosmos_Staking_V1beta1_Params? = nil
 }
 
+/// QueryTokenizeShareRecordByIdRequest is request type for the
+/// Query/QueryTokenizeShareRecordById RPC method.
+struct Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var id: UInt64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// QueryTokenizeShareRecordByIdRequest is response type for the
+/// Query/QueryTokenizeShareRecordById RPC method.
+struct Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var record: Cosmos_Staking_V1beta1_TokenizeShareRecord {
+    get {return _record ?? Cosmos_Staking_V1beta1_TokenizeShareRecord()}
+    set {_record = newValue}
+  }
+  /// Returns true if `record` has been explicitly set.
+  var hasRecord: Bool {return self._record != nil}
+  /// Clears the value of `record`. Subsequent reads from it will return its default value.
+  mutating func clearRecord() {self._record = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _record: Cosmos_Staking_V1beta1_TokenizeShareRecord? = nil
+}
+
+/// QueryTokenizeShareRecordByDenomRequest is request type for the
+/// Query/QueryTokenizeShareRecordByDenom RPC method.
+struct Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var denom: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// QueryTokenizeShareRecordByDenomResponse is response type for the
+/// Query/QueryTokenizeShareRecordByDenom RPC method.
+struct Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var record: Cosmos_Staking_V1beta1_TokenizeShareRecord {
+    get {return _record ?? Cosmos_Staking_V1beta1_TokenizeShareRecord()}
+    set {_record = newValue}
+  }
+  /// Returns true if `record` has been explicitly set.
+  var hasRecord: Bool {return self._record != nil}
+  /// Clears the value of `record`. Subsequent reads from it will return its default value.
+  mutating func clearRecord() {self._record = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _record: Cosmos_Staking_V1beta1_TokenizeShareRecord? = nil
+}
+
+/// QueryTokenizeShareRecordsOwnedRequest is request type for the
+/// Query/QueryTokenizeShareRecordsOwned RPC method.
+struct Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var owner: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// QueryTokenizeShareRecordsOwnedResponse is response type for the
+/// Query/QueryTokenizeShareRecordsOwned RPC method.
+struct Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var records: [Cosmos_Staking_V1beta1_TokenizeShareRecord] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// QueryAllTokenizeShareRecordsRequest is request type for the
+/// Query/QueryAllTokenizeShareRecords RPC method.
+struct Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// pagination defines an optional pagination for the request.
+  var pagination: Cosmos_Base_Query_V1beta1_PageRequest {
+    get {return _pagination ?? Cosmos_Base_Query_V1beta1_PageRequest()}
+    set {_pagination = newValue}
+  }
+  /// Returns true if `pagination` has been explicitly set.
+  var hasPagination: Bool {return self._pagination != nil}
+  /// Clears the value of `pagination`. Subsequent reads from it will return its default value.
+  mutating func clearPagination() {self._pagination = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _pagination: Cosmos_Base_Query_V1beta1_PageRequest? = nil
+}
+
+/// QueryAllTokenizeShareRecordsResponse is response type for the
+/// Query/QueryAllTokenizeShareRecords RPC method.
+struct Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var records: [Cosmos_Staking_V1beta1_TokenizeShareRecord] = []
+
+  /// pagination defines the pagination in the response.
+  var pagination: Cosmos_Base_Query_V1beta1_PageResponse {
+    get {return _pagination ?? Cosmos_Base_Query_V1beta1_PageResponse()}
+    set {_pagination = newValue}
+  }
+  /// Returns true if `pagination` has been explicitly set.
+  var hasPagination: Bool {return self._pagination != nil}
+  /// Clears the value of `pagination`. Subsequent reads from it will return its default value.
+  mutating func clearPagination() {self._pagination = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _pagination: Cosmos_Base_Query_V1beta1_PageResponse? = nil
+}
+
+/// QueryLastTokenizeShareRecordIdRequest is request type for the
+/// Query/QueryLastTokenizeShareRecordId RPC method.
+struct Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// QueryLastTokenizeShareRecordIdResponse is response type for the
+/// Query/QueryLastTokenizeShareRecordId RPC method.
+struct Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var id: UInt64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// QueryTotalTokenizeSharedAssetsRequest is request type for the
+/// Query/QueryTotalTokenizeSharedAssets RPC method.
+struct Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// QueryTotalTokenizeSharedAssetsResponse is response type for the
+/// Query/QueryTotalTokenizeSharedAssets RPC method.
+struct Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var value: Cosmos_Base_V1beta1_Coin {
+    get {return _value ?? Cosmos_Base_V1beta1_Coin()}
+    set {_value = newValue}
+  }
+  /// Returns true if `value` has been explicitly set.
+  var hasValue: Bool {return self._value != nil}
+  /// Clears the value of `value`. Subsequent reads from it will return its default value.
+  mutating func clearValue() {self._value = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _value: Cosmos_Base_V1beta1_Coin? = nil
+}
+
+/// QueryTotalLiquidStakedRequest is request type for the
+/// Query/QueryQueryTotalLiquidStaked RPC method.
+struct Cosmos_Staking_V1beta1_QueryTotalLiquidStaked {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// QueryTotalLiquidStakedResponse is response type for the
+/// Query/QueryQueryTotalLiquidStaked RPC method.
+struct Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var tokens: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// QueryTokenizeShareLockInfo queries the tokenize share lock information
+/// associated with given account
+struct Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var address: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// QueryTokenizeShareLockInfoResponse is the response from the
+/// QueryTokenizeShareLockInfo query
+struct Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var status: String = String()
+
+  var expirationTime: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Cosmos_Staking_V1beta1_QueryValidatorsRequest: @unchecked Sendable {}
 extension Cosmos_Staking_V1beta1_QueryValidatorsResponse: @unchecked Sendable {}
@@ -695,6 +964,22 @@ extension Cosmos_Staking_V1beta1_QueryPoolRequest: @unchecked Sendable {}
 extension Cosmos_Staking_V1beta1_QueryPoolResponse: @unchecked Sendable {}
 extension Cosmos_Staking_V1beta1_QueryParamsRequest: @unchecked Sendable {}
 extension Cosmos_Staking_V1beta1_QueryParamsResponse: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryTotalLiquidStaked: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo: @unchecked Sendable {}
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -1764,6 +2049,511 @@ extension Cosmos_Staking_V1beta1_QueryParamsResponse: SwiftProtobuf.Message, Swi
 
   static func ==(lhs: Cosmos_Staking_V1beta1_QueryParamsResponse, rhs: Cosmos_Staking_V1beta1_QueryParamsResponse) -> Bool {
     if lhs._params != rhs._params {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTokenizeShareRecordByIdRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "id"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.id) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.id != 0 {
+      try visitor.visitSingularUInt64Field(value: self.id, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest, rhs: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdRequest) -> Bool {
+    if lhs.id != rhs.id {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTokenizeShareRecordByIdResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "record"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._record) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._record {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse, rhs: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByIdResponse) -> Bool {
+    if lhs._record != rhs._record {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTokenizeShareRecordByDenomRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "denom"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.denom) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.denom.isEmpty {
+      try visitor.visitSingularStringField(value: self.denom, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest, rhs: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomRequest) -> Bool {
+    if lhs.denom != rhs.denom {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTokenizeShareRecordByDenomResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "record"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._record) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._record {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse, rhs: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordByDenomResponse) -> Bool {
+    if lhs._record != rhs._record {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTokenizeShareRecordsOwnedRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "owner"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.owner) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.owner.isEmpty {
+      try visitor.visitSingularStringField(value: self.owner, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest, rhs: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedRequest) -> Bool {
+    if lhs.owner != rhs.owner {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTokenizeShareRecordsOwnedResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "records"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.records) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.records.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.records, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse, rhs: Cosmos_Staking_V1beta1_QueryTokenizeShareRecordsOwnedResponse) -> Bool {
+    if lhs.records != rhs.records {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryAllTokenizeShareRecordsRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "pagination"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._pagination) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._pagination {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest, rhs: Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsRequest) -> Bool {
+    if lhs._pagination != rhs._pagination {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryAllTokenizeShareRecordsResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "records"),
+    2: .same(proto: "pagination"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.records) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._pagination) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.records.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.records, fieldNumber: 1)
+    }
+    try { if let v = self._pagination {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse, rhs: Cosmos_Staking_V1beta1_QueryAllTokenizeShareRecordsResponse) -> Bool {
+    if lhs.records != rhs.records {return false}
+    if lhs._pagination != rhs._pagination {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryLastTokenizeShareRecordIdRequest"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest, rhs: Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdRequest) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryLastTokenizeShareRecordIdResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "id"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.id) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.id != 0 {
+      try visitor.visitSingularUInt64Field(value: self.id, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse, rhs: Cosmos_Staking_V1beta1_QueryLastTokenizeShareRecordIdResponse) -> Bool {
+    if lhs.id != rhs.id {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTotalTokenizeSharedAssetsRequest"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest, rhs: Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsRequest) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTotalTokenizeSharedAssetsResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "value"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._value) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._value {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse, rhs: Cosmos_Staking_V1beta1_QueryTotalTokenizeSharedAssetsResponse) -> Bool {
+    if lhs._value != rhs._value {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryTotalLiquidStaked: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTotalLiquidStaked"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryTotalLiquidStaked, rhs: Cosmos_Staking_V1beta1_QueryTotalLiquidStaked) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTotalLiquidStakedResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "tokens"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.tokens) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.tokens.isEmpty {
+      try visitor.visitSingularStringField(value: self.tokens, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse, rhs: Cosmos_Staking_V1beta1_QueryTotalLiquidStakedResponse) -> Bool {
+    if lhs.tokens != rhs.tokens {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTokenizeShareLockInfo"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "address"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.address) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.address.isEmpty {
+      try visitor.visitSingularStringField(value: self.address, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo, rhs: Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfo) -> Bool {
+    if lhs.address != rhs.address {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryTokenizeShareLockInfoResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "status"),
+    2: .standard(proto: "expiration_time"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.status) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.expirationTime) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.status.isEmpty {
+      try visitor.visitSingularStringField(value: self.status, fieldNumber: 1)
+    }
+    if !self.expirationTime.isEmpty {
+      try visitor.visitSingularStringField(value: self.expirationTime, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse, rhs: Cosmos_Staking_V1beta1_QueryTokenizeShareLockInfoResponse) -> Bool {
+    if lhs.status != rhs.status {return false}
+    if lhs.expirationTime != rhs.expirationTime {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

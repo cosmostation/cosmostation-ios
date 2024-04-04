@@ -13,6 +13,7 @@ class ChainXpla: CosmosClass  {
     override init() {
         super.init()
         
+        isDefault = false
         name = "Xpla"
         tag = "xpla60"
         logo1 = "chainXpla"

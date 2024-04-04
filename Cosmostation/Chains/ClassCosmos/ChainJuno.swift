@@ -24,6 +24,7 @@ class ChainJuno: CosmosClass  {
         bechAccountPrefix = "juno"
         validatorPrefix = "junovaloper"
         supportCw20 = true
+//        supportCw721 = true
         
         grpcHost = "grpc-juno.cosmostation.io"
     }

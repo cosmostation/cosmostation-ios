@@ -43,14 +43,16 @@ class ManageChainCell: UITableViewCell {
         
         if (chain is ChainOktEVM) {
             lcdLayer.isHidden = false
-            lcdEndpointLabel.text = OKT_LCD
+            lcdEndpointLabel.text = OKT_LCD.replacingOccurrences(of: "https://", with: "")
             
         } else if (chain.supportCosmos == true) {
             grpcLayer.isHidden = false
             grpcEndpointLabel.text = chain.getGrpc().host + " : " +  String(chain.getGrpc().port)
+            grpcEndpointLabel.adjustsFontSizeToFitWidth = true
         }
         evmLayer.isHidden = false
-        evmEndpointLabel.text = chain.evmRpcURL
+        evmEndpointLabel.text = chain.getEvmRpc().replacingOccurrences(of: "https://", with: "")
+        evmEndpointLabel.adjustsFontSizeToFitWidth = true
     }
     
     func bindManageCosmosClassChain(_ chain: CosmosClass) {
@@ -59,11 +61,12 @@ class ManageChainCell: UITableViewCell {
         
         if (chain is ChainBinanceBeacon) {
             lcdLayer.isHidden = false
-            lcdEndpointLabel.text = BNB_BEACON_LCD
+            lcdEndpointLabel.text = BNB_BEACON_LCD.replacingOccurrences(of: "https://", with: "")
             
         } else {
             grpcLayer.isHidden = false
             grpcEndpointLabel.text = chain.getGrpc().host + " : " +  String(chain.getGrpc().port)
+            grpcEndpointLabel.adjustsFontSizeToFitWidth = true
             
         }
     }

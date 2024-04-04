@@ -177,8 +177,8 @@
 "str_voting_end_time" = "投票終了時間";
 "str_request_amount" = "請求金額";
 "str_voting_description" = "説明";
-"str_voting_period" = "完成した提案書";
-"str_vote_proposals" = "提案";
+"str_voting_period" = "投票期間の提案";
+"str_voting_finished" = "完成した提案書";
 "str_vote_reject_by_qourum" = "定足数が満たされていません。 もっと多くの投票が必要です。";
 "str_vote_reject_by_veto" = "定足数は決まっているが、拒否権はある。";
 "str_vote_reject_by_no" = "定足数は確定したが、過半数がNOに投票した。";
@@ -204,6 +204,9 @@
 "str_big_loss_msg" = "現在選択されているスワップを進めると、かなりの財産上の損害が予想されます。\n\n期待される入力/出力値を確認してから慎重に決定してください。";
 "str_memo_optional" = "メモ（任意）";
 "str_tx_result" = "Tx 結果";
+"str_vote_all" = "全員に投票する";
+"str_show_all_proposal" = "ライブ提案";
+"str_hide_done_proposal" = "投票された提案を除く";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
@@ -386,8 +389,10 @@
 "msg_check_inputed_mnemonic" = "入力したニーモニックを確認してください。 \nご存知のように、誰とも共有しないでください。 このニーモニックを紛失すると、資産の損失につながる可能性があります。";
 "msg_show_all_proposals" = "すべての提案を表示します。";
 "msg_hide_scam_proposals" = "詐欺の疑いのある提案を除外します。";
+"msg_hide_voted_proposals" = "すでに投票された提案をフィルターします。";
 "msg_token_github" = "現時点では、選択したチェーンにトークンを手動で追加する必要はありません。 Cosmostation Wallet には、既存の数量を持つすべてのトークン (CW20、ERC20) の情報が表示されます。\n\nトークンを保持しているのにそれが表示されない場合は、以下の Github リンクから PR を送信してみてください。";
-"msg_node_down" = "▪ 現在使用しているノードに問題がある場合は、[設定 > チェーン管理]から簡単に別のノードに切り替えてサービスを継続してご利用いただけます。\n\n ▪ すべてのノードが使用できない場合、使用されているチェーンはアップグレード中です。 アップグレードが完了するまでお待ちください。";
+"msg_node_down" = "▪現在のデバイスのネットワーク状態を確認してください。\n\n▪ 現在使用しているノードに問題がある場合は、[設定 > チェーン管理]から簡単に別のノードに切り替えてサービスを継続してご利用いただけます。\n\n ▪ すべてのノードが使用できない場合、使用されているチェーンはアップグレード中です。 アップグレードが完了するまでお待ちください。";
+"msg_vote_all_detail" = "投票できる提案をすべて選択する必要があります。\n後で投票したい提案をスワイプして除外してください。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -951,6 +956,7 @@
 "title_reward_detail_list" = "Reward Detail";
 "title_earn_list" = "Earning List";
 "title_claimable_chains" = "リワード対象チェーン";
+"title_voting_period_proposals" = "Voting Period Proposals";
 
 
 "proposal_type_basic" = "Basic";
@@ -1029,7 +1035,7 @@
 "error_send_disable" = "まだ転送が有効になっていません。";
 "error_not_voting_not" = "今は投票できません。";
 "error_not_voting_period" = "投票期間ではありません。";
-"error_no_bonding_no_vote" = "委任量がないため投票できません。";
+"error_no_bonding_no_vote" = "代表団が足りないため投票できません。";
 "error_already_vote" = "すでに投票しています。";
 "error_no_opinion" = "ご意見をお選びください。";
 "error_not_yet" = "準備中...";

@@ -627,7 +627,7 @@ struct Cosmos_Group_V1_QueryTallyResultResponse {
 }
 
 /// QueryGroupsRequest is the Query/Groups request type.
-/// 
+///
 /// Since: cosmos-sdk 0.47.1
 struct Cosmos_Group_V1_QueryGroupsRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -652,7 +652,7 @@ struct Cosmos_Group_V1_QueryGroupsRequest {
 }
 
 /// QueryGroupsResponse is the Query/Groups response type.
-/// 
+///
 /// Since: cosmos-sdk 0.47.1
 struct Cosmos_Group_V1_QueryGroupsResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the

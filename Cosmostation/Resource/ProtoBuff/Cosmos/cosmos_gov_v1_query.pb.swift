@@ -22,30 +22,6 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-/// QueryConstitutionRequest is the request type for the Query/Constitution RPC method
-struct Cosmos_Gov_V1_QueryConstitutionRequest {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-/// QueryConstitutionResponse is the response type for the Query/Constitution RPC method
-struct Cosmos_Gov_V1_QueryConstitutionResponse {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var constitution: String = String()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
 /// QueryProposalRequest is the request type for the Query/Proposal RPC method.
 struct Cosmos_Gov_V1_QueryProposalRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -258,56 +234,53 @@ struct Cosmos_Gov_V1_QueryParamsResponse {
   /// Deprecated: Prefer to use `params` instead.
   /// voting_params defines the parameters related to voting.
   var votingParams: Cosmos_Gov_V1_VotingParams {
-    get {return _votingParams ?? Cosmos_Gov_V1_VotingParams()}
-    set {_votingParams = newValue}
+    get {return _storage._votingParams ?? Cosmos_Gov_V1_VotingParams()}
+    set {_uniqueStorage()._votingParams = newValue}
   }
   /// Returns true if `votingParams` has been explicitly set.
-  var hasVotingParams: Bool {return self._votingParams != nil}
+  var hasVotingParams: Bool {return _storage._votingParams != nil}
   /// Clears the value of `votingParams`. Subsequent reads from it will return its default value.
-  mutating func clearVotingParams() {self._votingParams = nil}
+  mutating func clearVotingParams() {_uniqueStorage()._votingParams = nil}
 
   /// Deprecated: Prefer to use `params` instead.
   /// deposit_params defines the parameters related to deposit.
   var depositParams: Cosmos_Gov_V1_DepositParams {
-    get {return _depositParams ?? Cosmos_Gov_V1_DepositParams()}
-    set {_depositParams = newValue}
+    get {return _storage._depositParams ?? Cosmos_Gov_V1_DepositParams()}
+    set {_uniqueStorage()._depositParams = newValue}
   }
   /// Returns true if `depositParams` has been explicitly set.
-  var hasDepositParams: Bool {return self._depositParams != nil}
+  var hasDepositParams: Bool {return _storage._depositParams != nil}
   /// Clears the value of `depositParams`. Subsequent reads from it will return its default value.
-  mutating func clearDepositParams() {self._depositParams = nil}
+  mutating func clearDepositParams() {_uniqueStorage()._depositParams = nil}
 
   /// Deprecated: Prefer to use `params` instead.
   /// tally_params defines the parameters related to tally.
   var tallyParams: Cosmos_Gov_V1_TallyParams {
-    get {return _tallyParams ?? Cosmos_Gov_V1_TallyParams()}
-    set {_tallyParams = newValue}
+    get {return _storage._tallyParams ?? Cosmos_Gov_V1_TallyParams()}
+    set {_uniqueStorage()._tallyParams = newValue}
   }
   /// Returns true if `tallyParams` has been explicitly set.
-  var hasTallyParams: Bool {return self._tallyParams != nil}
+  var hasTallyParams: Bool {return _storage._tallyParams != nil}
   /// Clears the value of `tallyParams`. Subsequent reads from it will return its default value.
-  mutating func clearTallyParams() {self._tallyParams = nil}
+  mutating func clearTallyParams() {_uniqueStorage()._tallyParams = nil}
 
   /// params defines all the paramaters of x/gov module.
   ///
   /// Since: cosmos-sdk 0.47
   var params: Cosmos_Gov_V1_Params {
-    get {return _params ?? Cosmos_Gov_V1_Params()}
-    set {_params = newValue}
+    get {return _storage._params ?? Cosmos_Gov_V1_Params()}
+    set {_uniqueStorage()._params = newValue}
   }
   /// Returns true if `params` has been explicitly set.
-  var hasParams: Bool {return self._params != nil}
+  var hasParams: Bool {return _storage._params != nil}
   /// Clears the value of `params`. Subsequent reads from it will return its default value.
-  mutating func clearParams() {self._params = nil}
+  mutating func clearParams() {_uniqueStorage()._params = nil}
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
-  fileprivate var _votingParams: Cosmos_Gov_V1_VotingParams? = nil
-  fileprivate var _depositParams: Cosmos_Gov_V1_DepositParams? = nil
-  fileprivate var _tallyParams: Cosmos_Gov_V1_TallyParams? = nil
-  fileprivate var _params: Cosmos_Gov_V1_Params? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 /// QueryDepositRequest is the request type for the Query/Deposit RPC method.
@@ -440,8 +413,6 @@ struct Cosmos_Gov_V1_QueryTallyResultResponse {
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
-extension Cosmos_Gov_V1_QueryConstitutionRequest: @unchecked Sendable {}
-extension Cosmos_Gov_V1_QueryConstitutionResponse: @unchecked Sendable {}
 extension Cosmos_Gov_V1_QueryProposalRequest: @unchecked Sendable {}
 extension Cosmos_Gov_V1_QueryProposalResponse: @unchecked Sendable {}
 extension Cosmos_Gov_V1_QueryProposalsRequest: @unchecked Sendable {}
@@ -463,57 +434,6 @@ extension Cosmos_Gov_V1_QueryTallyResultResponse: @unchecked Sendable {}
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "cosmos.gov.v1"
-
-extension Cosmos_Gov_V1_QueryConstitutionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".QueryConstitutionRequest"
-  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let _ = try decoder.nextFieldNumber() {
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Cosmos_Gov_V1_QueryConstitutionRequest, rhs: Cosmos_Gov_V1_QueryConstitutionRequest) -> Bool {
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Cosmos_Gov_V1_QueryConstitutionResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".QueryConstitutionResponse"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "constitution"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.constitution) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.constitution.isEmpty {
-      try visitor.visitSingularStringField(value: self.constitution, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Cosmos_Gov_V1_QueryConstitutionResponse, rhs: Cosmos_Gov_V1_QueryConstitutionResponse) -> Bool {
-    if lhs.constitution != rhs.constitution {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
 
 extension Cosmos_Gov_V1_QueryProposalRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".QueryProposalRequest"
@@ -878,46 +798,84 @@ extension Cosmos_Gov_V1_QueryParamsResponse: SwiftProtobuf.Message, SwiftProtobu
     4: .same(proto: "params"),
   ]
 
+  fileprivate class _StorageClass {
+    var _votingParams: Cosmos_Gov_V1_VotingParams? = nil
+    var _depositParams: Cosmos_Gov_V1_DepositParams? = nil
+    var _tallyParams: Cosmos_Gov_V1_TallyParams? = nil
+    var _params: Cosmos_Gov_V1_Params? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _votingParams = source._votingParams
+      _depositParams = source._depositParams
+      _tallyParams = source._tallyParams
+      _params = source._params
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._votingParams) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._depositParams) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._tallyParams) }()
-      case 4: try { try decoder.decodeSingularMessageField(value: &self._params) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularMessageField(value: &_storage._votingParams) }()
+        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._depositParams) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._tallyParams) }()
+        case 4: try { try decoder.decodeSingularMessageField(value: &_storage._params) }()
+        default: break
+        }
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._votingParams {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
-    try { if let v = self._depositParams {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    } }()
-    try { if let v = self._tallyParams {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    } }()
-    try { if let v = self._params {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    } }()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      try { if let v = _storage._votingParams {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      } }()
+      try { if let v = _storage._depositParams {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      } }()
+      try { if let v = _storage._tallyParams {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      } }()
+      try { if let v = _storage._params {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      } }()
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Cosmos_Gov_V1_QueryParamsResponse, rhs: Cosmos_Gov_V1_QueryParamsResponse) -> Bool {
-    if lhs._votingParams != rhs._votingParams {return false}
-    if lhs._depositParams != rhs._depositParams {return false}
-    if lhs._tallyParams != rhs._tallyParams {return false}
-    if lhs._params != rhs._params {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._votingParams != rhs_storage._votingParams {return false}
+        if _storage._depositParams != rhs_storage._depositParams {return false}
+        if _storage._tallyParams != rhs_storage._tallyParams {return false}
+        if _storage._params != rhs_storage._params {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

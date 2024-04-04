@@ -23,6 +23,7 @@ class EvmClassVC: BaseVC {
     @IBOutlet weak var assetList: UIView!
     @IBOutlet weak var nftList: UIView!
     @IBOutlet weak var historyList: UIView!
+    @IBOutlet weak var AboutList: UIView!
     
     var addtokenBarBtn: UIBarButtonItem!
     var explorerBarBtn: UIBarButtonItem!
@@ -52,6 +53,9 @@ class EvmClassVC: BaseVC {
             target.selectedChain = selectedChain
         } else if (segue.identifier == "embedHistoryVC") {
             let target = segue.destination as! EvmHistoryVC
+            target.selectedChain = selectedChain
+        } else if (segue.identifier == "embedAboutVC") {
+            let target = segue.destination as! EvmAboutVC
             target.selectedChain = selectedChain
         }
     }
@@ -129,9 +133,13 @@ class EvmClassVC: BaseVC {
         let assetTabBar = UITabBarItem(title: "Assets", image: nil, tag: 0)
 //        let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 1)
         let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 2)
+        let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 3)
         tabbar.items.append(assetTabBar)
 //        tabbar.items.append(nftTabBar)
         tabbar.items.append(historyTabBar)
+        if (!selectedChain.getChainListParam().isEmpty) {
+            tabbar.items.append(aboutTabBar)
+        }
         
         tabbar.barTintColor = .clear
         tabbar.selectionIndicatorStrokeColor = .white
@@ -147,6 +155,7 @@ class EvmClassVC: BaseVC {
         assetList.alpha = 1
         nftList.alpha = 0
         historyList.alpha = 0
+        AboutList.alpha = 0
     }
     
     @IBAction func onClickHideValue(_ sender: UIButton) {
@@ -168,7 +177,7 @@ class EvmClassVC: BaseVC {
     }
     
     @objc func onClickExplorer() {
-        guard let url = URL(string:String(format: selectedChain.addressURL, selectedChain.evmAddress)) else { return }
+        guard let url = selectedChain.getExplorerAccount() else { return }
         self.onShowSafariWeb(url)
     }
     
@@ -187,18 +196,28 @@ extension EvmClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             assetList.alpha = 1
             nftList.alpha = 0
             historyList.alpha = 0
+            AboutList.alpha = 0
             navigationItem.rightBarButtonItems = [explorerBarBtn, addtokenBarBtn]
             
         } else if (item.tag == 1) {
             assetList.alpha = 0
             nftList.alpha = 1
             historyList.alpha = 0
+            AboutList.alpha = 0
             navigationItem.rightBarButtonItems = [explorerBarBtn]
             
         } else if (item.tag == 2) {
             assetList.alpha = 0
             nftList.alpha = 0
             historyList.alpha = 1
+            AboutList.alpha = 0
+            navigationItem.rightBarButtonItems = [explorerBarBtn]
+            
+        } else if (item.tag == 3) {
+            assetList.alpha = 0
+            nftList.alpha = 0
+            historyList.alpha = 0
+            AboutList.alpha = 1
             navigationItem.rightBarButtonItems = [explorerBarBtn]
         }
     }

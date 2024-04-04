@@ -109,7 +109,7 @@ struct Cosmos_Gov_V1beta1_MsgVoteWeighted {
   /// voter is the voter address for the proposal.
   var voter: String = String()
 
-  /// options defines the weighted vote options.
+  /// options defines the weighted vote options. 
   var options: [Cosmos_Gov_V1beta1_WeightedVoteOption] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()

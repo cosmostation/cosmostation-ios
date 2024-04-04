@@ -36,16 +36,16 @@ public struct MintscanProposal {
         self.voting_end_time = json?["voting_end_time"].stringValue
         self.is_expedited = json?["is_expedited"].boolValue ?? false
         
-        if let rawYes = json?["yes"].stringValue {
+        if let rawYes = json?["yes"].stringValue, !rawYes.isEmpty {
             self.yes = NSDecimalNumber.init(string: rawYes)
         }
-        if let rawAbstain = json?["abstain"].stringValue {
+        if let rawAbstain = json?["abstain"].stringValue, !rawAbstain.isEmpty {
             self.abstain = NSDecimalNumber.init(string: rawAbstain)
         }
-        if let rawNo = json?["no"].stringValue {
+        if let rawNo = json?["no"].stringValue, !rawNo.isEmpty {
             self.no = NSDecimalNumber.init(string: rawNo)
         }
-        if let rawNowithVeto = json?["no_with_veto"].stringValue {
+        if let rawNowithVeto = json?["no_with_veto"].stringValue, !rawNowithVeto.isEmpty {
             self.no_with_veto = NSDecimalNumber.init(string: rawNowithVeto)
         }
     }

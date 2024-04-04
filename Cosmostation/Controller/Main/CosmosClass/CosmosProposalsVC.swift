@@ -137,16 +137,23 @@ class CosmosProposalsVC: BaseVC {
     }
     
     @IBAction func onClickVote(_ sender: BaseButton) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        
+        let delegated = selectedChain.delegationAmountSum()
+        let voteThreshold = selectedChain.voteThreshold()
+        if (delegated.compare(voteThreshold).rawValue <= 0) {
+            onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
+            return
+        }
+        
         var toVoteProposals = [MintscanProposal]()
         votingPeriods.forEach { proposal in
             if (toVoteList.contains(proposal.id!)) {
                 toVoteProposals.append(proposal)
             }
-        }
-        
-        if (selectedChain.isTxFeePayable() == false) {
-            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-            return
         }
         let vote = CosmosVote(nibName: "CosmosVote", bundle: nil)
         vote.selectedChain = selectedChain
@@ -171,7 +178,7 @@ extension CosmosProposalsVC: UITableViewDelegate, UITableViewDataSource {
             else { view.cntLabel.text = String(filteredVotingPeriods.count) }
             
         } else if (section == 1) {
-            view.titleLabel.text = NSLocalizedString("str_vote_proposals", comment: "")
+            view.titleLabel.text = NSLocalizedString("str_voting_finished", comment: "")
             if (isShowAll) { view.cntLabel.text = String(etcPeriods.count) }
             else { view.cntLabel.text = String(filteredEtcPeriods.count) }
         }
@@ -254,7 +261,7 @@ extension CosmosProposalsVC: UITableViewDelegate, UITableViewDataSource {
                 proposalId = filteredEtcPeriods[indexPath.row].id!
             }
         }
-        guard let url = BaseNetWork.getProposalDetailUrl(selectedChain, proposalId) else { return }
+        guard let url = selectedChain.getExplorerProposal(proposalId) else { return }
         self.onShowSafariWeb(url)
     }
     

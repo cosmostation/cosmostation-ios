@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 
 class AboutDescriptionCell: UITableViewCell {
+    
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var chainNameLabel: UILabel!
     @IBOutlet weak var chainDescriptionLabel: UILabel!
@@ -24,14 +25,28 @@ class AboutDescriptionCell: UITableViewCell {
         rootView.setBlur()
     }
     
-    func onBindDescription(_ chain: CosmosClass, _ json: JSON) {
+    func onBindDescription(_ chain: BaseChain, _ json: JSON) {
         chainNameLabel.text = chain.name
-        if (BaseData.instance.getLanguage() == 2 && !json["ko"].stringValue.isEmpty) {
-            chainDescriptionLabel.text = json["ko"].stringValue
-        } else  if (BaseData.instance.getLanguage() == 3 && !json["ja"].stringValue.isEmpty) {
-            chainDescriptionLabel.text = json["ja"].stringValue
-        } else {
+        let languageCode = Locale.current.languageCode
+        if (BaseData.instance.getLanguage() == 1 && !json["en"].stringValue.isEmpty) {
             chainDescriptionLabel.text = json["en"].stringValue
+            
+        } else if (BaseData.instance.getLanguage() == 2 && !json["ko"].stringValue.isEmpty) {
+            chainDescriptionLabel.text = json["ko"].stringValue
+            
+        } else if (BaseData.instance.getLanguage() == 3 && !json["ja"].stringValue.isEmpty) {
+            chainDescriptionLabel.text = json["ja"].stringValue
+            
+        } else {
+            if (languageCode?.contains("ko") == true && !json["ko"].stringValue.isEmpty) {
+                chainDescriptionLabel.text = json["ko"].stringValue
+                
+            } else if (languageCode?.contains("ja") == true && !json["ko"].stringValue.isEmpty) {
+                chainDescriptionLabel.text = json["ja"].stringValue
+                
+            } else {
+                chainDescriptionLabel.text = json["en"].stringValue
+            }
         }
     }
 }

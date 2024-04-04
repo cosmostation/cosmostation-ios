@@ -12,7 +12,7 @@ import Foundation
 class BaseChain {
     var name: String!
     var tag: String!
-    var chainId: String!
+    var chainIdCosmos: String!
     var logo1: String!
     var logo2: String!
     var isDefault = true
@@ -24,7 +24,7 @@ class BaseChain {
     var publicKey: Data?
     
     
-    var fetched = false
+    var fetchState = FetchState.Idle
     var allCoinValue = NSDecimalNumber.zero
     var allCoinUSDValue = NSDecimalNumber.zero
     var allTokenValue = NSDecimalNumber.zero
@@ -45,6 +45,12 @@ class BaseChain {
     
     func isTxFeePayable() -> Bool { return false }
     
+    func getExplorerAccount() -> URL? { return nil }
+    
+    func getExplorerTx(_ hash: String?) -> URL? { return nil }
+    
+    func getExplorerProposal(_ id: UInt64) -> URL? { return nil }
+    
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
         if (usd == true) {
             return allCoinUSDValue.adding(allTokenUSDValue)
@@ -52,6 +58,7 @@ class BaseChain {
             return allCoinValue.adding(allTokenValue)
         }
     }
+        
 }
 
 
@@ -82,9 +89,17 @@ func All_IBC_Chains() -> [CosmosClass] {
     return result
 }
 
-//func AllChains() -> [CosmosClass] {
-//    var result = [CosmosClass]()
-//    result.append(contentsOf: ALLCOSMOSCLASS())
-//    result.append(contentsOf:  ALLEVMCLASS())
-//    return result
-//}
+func All_BASE_Chains() -> [BaseChain] {
+    var result = [CosmosClass]()
+    result.append(contentsOf: ALLCOSMOSCLASS())
+    result.append(contentsOf: ALLEVMCLASS())
+    return result
+}
+
+
+enum FetchState: Int {
+    case Idle = -1
+    case Busy = 0
+    case Success = 1
+    case Fail = 2
+}

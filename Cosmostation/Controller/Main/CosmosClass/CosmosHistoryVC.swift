@@ -243,21 +243,18 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var hash: String?
         if (selectedChain is ChainBinanceBeacon) {
-            let history = beaconHistoey[indexPath.row]
-            guard let url = BaseNetWork.getTxDetailUrl(selectedChain, history.txHash!) else { return }
-            self.onShowSafariWeb(url)
+            hash = beaconHistoey[indexPath.row].txHash
             
         } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-            let history = oktHistoey[indexPath.row]
-            guard let url = BaseNetWork.getTxDetailUrl(selectedChain, history.txId!) else { return }
-            self.onShowSafariWeb(url)
+            hash = oktHistoey[indexPath.row].txId
             
         } else {
-            let history = msHistoryGroup[indexPath.section].values[indexPath.row]
-            guard let url = BaseNetWork.getTxDetailUrl(selectedChain, history.data!.txhash!) else { return }
-            self.onShowSafariWeb(url)
+            hash = msHistoryGroup[indexPath.section].values[indexPath.row].data?.txhash
         }
+        guard let url = selectedChain.getExplorerTx(hash) else { return }
+        self.onShowSafariWeb(url)
     }
     
     

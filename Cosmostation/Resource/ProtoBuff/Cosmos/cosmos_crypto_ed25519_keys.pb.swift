@@ -37,7 +37,7 @@ struct Cosmos_Crypto_Ed25519_PubKey {
   init() {}
 }
 
-/// PrivKey defines a ed25519 private key.
+/// Deprecated: PrivKey defines a ed25519 private key.
 /// NOTE: ed25519 keys must not be used in SDK apps except in a tendermint validator context.
 struct Cosmos_Crypto_Ed25519_PrivKey {
   // SwiftProtobuf.Message conformance is added in an extension below. See the

@@ -69,17 +69,16 @@ class ClaimAllChainCell: UITableViewCell {
         feeDenomLabel.text = ""
     }
     
-    func onBindRewards(_ chain: CosmosClass, _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                       _ txFee: Cosmos_Tx_V1beta1_Fee?, _ broadcasted: Bool, _ response: Cosmos_Tx_V1beta1_GetTxResponse?) {
+    func onBindRewards(_ model: ClaimAllModel) {
+        let chain = model.cosmosChain!
+        let rewards = model.rewards
+        let txFee = chain.getInitPayableFee()
+        let isBusy = model.isBusy
+        let result = model.txResponse
+        
+        
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
-        
-//        if let evmChain = (chain as? EvmClass) {
-//            if (evmChain.supportCosmos) {
-//                cosmosTag.isHidden = false
-//            }
-//        }
-        
         if (!chain.isDefault) {
             legacyTag.isHidden = false
         }
@@ -137,14 +136,17 @@ class ClaimAllChainCell: UITableViewCell {
                 stateImg.isHidden = false
         }
         
-        if (broadcasted == true && response != nil) {
-            stateImg.image = UIImage(named: "iconClaimAllDone")
-            pendingView.isHidden = true
-            stateImg.isHidden = false
-            
-        } else if (broadcasted == true && response == nil) {
+        if (isBusy) {
             pendingView.isHidden = false
             stateImg.isHidden = true
+            
+        } else {
+            stateImg.isHidden = false
+            if (result == nil) {
+                stateImg.image = UIImage(named: "iconClaimAllReady")
+            } else {
+                stateImg.image = UIImage(named: "iconClaimAllDone")
+            }
         }
     }
     

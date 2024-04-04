@@ -67,6 +67,41 @@ internal protocol Cosmos_Staking_V1beta1_MsgClientProtocol: GRPCClient {
     _ request: Cosmos_Staking_V1beta1_MsgUpdateParams,
     callOptions: CallOptions?
   ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgUpdateParams, Cosmos_Staking_V1beta1_MsgUpdateParamsResponse>
+
+  func unbondValidator(
+    _ request: Cosmos_Staking_V1beta1_MsgUnbondValidator,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgUnbondValidator, Cosmos_Staking_V1beta1_MsgUnbondValidatorResponse>
+
+  func tokenizeShares(
+    _ request: Cosmos_Staking_V1beta1_MsgTokenizeShares,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgTokenizeShares, Cosmos_Staking_V1beta1_MsgTokenizeSharesResponse>
+
+  func redeemTokensForShares(
+    _ request: Cosmos_Staking_V1beta1_MsgRedeemTokensForShares,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgRedeemTokensForShares, Cosmos_Staking_V1beta1_MsgRedeemTokensForSharesResponse>
+
+  func transferTokenizeShareRecord(
+    _ request: Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord, Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecordResponse>
+
+  func disableTokenizeShares(
+    _ request: Cosmos_Staking_V1beta1_MsgDisableTokenizeShares,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgDisableTokenizeShares, Cosmos_Staking_V1beta1_MsgDisableTokenizeSharesResponse>
+
+  func enableTokenizeShares(
+    _ request: Cosmos_Staking_V1beta1_MsgEnableTokenizeShares,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgEnableTokenizeShares, Cosmos_Staking_V1beta1_MsgEnableTokenizeSharesResponse>
+
+  func validatorBond(
+    _ request: Cosmos_Staking_V1beta1_MsgValidatorBond,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgValidatorBond, Cosmos_Staking_V1beta1_MsgValidatorBondResponse>
 }
 
 extension Cosmos_Staking_V1beta1_MsgClientProtocol {
@@ -207,6 +242,138 @@ extension Cosmos_Staking_V1beta1_MsgClientProtocol {
       interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
     )
   }
+
+  /// UnbondValidator defines a method for performing the status transition for a validator
+  /// from bonded to unbonding
+  /// This allows a validator to stop their services and jail themselves without
+  /// experiencing a slash
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UnbondValidator.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func unbondValidator(
+    _ request: Cosmos_Staking_V1beta1_MsgUnbondValidator,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgUnbondValidator, Cosmos_Staking_V1beta1_MsgUnbondValidatorResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.unbondValidator.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUnbondValidatorInterceptors() ?? []
+    )
+  }
+
+  /// TokenizeShares defines a method for tokenizing shares from a validator.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to TokenizeShares.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func tokenizeShares(
+    _ request: Cosmos_Staking_V1beta1_MsgTokenizeShares,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgTokenizeShares, Cosmos_Staking_V1beta1_MsgTokenizeSharesResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.tokenizeShares.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeSharesInterceptors() ?? []
+    )
+  }
+
+  /// RedeemTokensForShares defines a method for redeeming tokens from a validator for
+  /// shares.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to RedeemTokensForShares.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func redeemTokensForShares(
+    _ request: Cosmos_Staking_V1beta1_MsgRedeemTokensForShares,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgRedeemTokensForShares, Cosmos_Staking_V1beta1_MsgRedeemTokensForSharesResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.redeemTokensForShares.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeRedeemTokensForSharesInterceptors() ?? []
+    )
+  }
+
+  /// TransferTokenizeShareRecord defines a method to transfer ownership of
+  /// TokenizeShareRecord
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to TransferTokenizeShareRecord.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func transferTokenizeShareRecord(
+    _ request: Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord, Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecordResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.transferTokenizeShareRecord.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTransferTokenizeShareRecordInterceptors() ?? []
+    )
+  }
+
+  /// DisableTokenizeShares defines a method to prevent the tokenization of an addresses stake
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to DisableTokenizeShares.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func disableTokenizeShares(
+    _ request: Cosmos_Staking_V1beta1_MsgDisableTokenizeShares,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgDisableTokenizeShares, Cosmos_Staking_V1beta1_MsgDisableTokenizeSharesResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.disableTokenizeShares.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeDisableTokenizeSharesInterceptors() ?? []
+    )
+  }
+
+  /// EnableTokenizeShares defines a method to re-enable the tokenization of an addresseses stake
+  /// after it has been disabled
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to EnableTokenizeShares.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func enableTokenizeShares(
+    _ request: Cosmos_Staking_V1beta1_MsgEnableTokenizeShares,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgEnableTokenizeShares, Cosmos_Staking_V1beta1_MsgEnableTokenizeSharesResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.enableTokenizeShares.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeEnableTokenizeSharesInterceptors() ?? []
+    )
+  }
+
+  /// ValidatorBond defines a method for performing a validator self-bond
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to ValidatorBond.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func validatorBond(
+    _ request: Cosmos_Staking_V1beta1_MsgValidatorBond,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Staking_V1beta1_MsgValidatorBond, Cosmos_Staking_V1beta1_MsgValidatorBondResponse> {
+    return self.makeUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.validatorBond.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeValidatorBondInterceptors() ?? []
+    )
+  }
 }
 
 @available(*, deprecated)
@@ -306,6 +473,41 @@ internal protocol Cosmos_Staking_V1beta1_MsgAsyncClientProtocol: GRPCClient {
     _ request: Cosmos_Staking_V1beta1_MsgUpdateParams,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgUpdateParams, Cosmos_Staking_V1beta1_MsgUpdateParamsResponse>
+
+  func makeUnbondValidatorCall(
+    _ request: Cosmos_Staking_V1beta1_MsgUnbondValidator,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgUnbondValidator, Cosmos_Staking_V1beta1_MsgUnbondValidatorResponse>
+
+  func makeTokenizeSharesCall(
+    _ request: Cosmos_Staking_V1beta1_MsgTokenizeShares,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgTokenizeShares, Cosmos_Staking_V1beta1_MsgTokenizeSharesResponse>
+
+  func makeRedeemTokensForSharesCall(
+    _ request: Cosmos_Staking_V1beta1_MsgRedeemTokensForShares,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgRedeemTokensForShares, Cosmos_Staking_V1beta1_MsgRedeemTokensForSharesResponse>
+
+  func makeTransferTokenizeShareRecordCall(
+    _ request: Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord, Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecordResponse>
+
+  func makeDisableTokenizeSharesCall(
+    _ request: Cosmos_Staking_V1beta1_MsgDisableTokenizeShares,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgDisableTokenizeShares, Cosmos_Staking_V1beta1_MsgDisableTokenizeSharesResponse>
+
+  func makeEnableTokenizeSharesCall(
+    _ request: Cosmos_Staking_V1beta1_MsgEnableTokenizeShares,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgEnableTokenizeShares, Cosmos_Staking_V1beta1_MsgEnableTokenizeSharesResponse>
+
+  func makeValidatorBondCall(
+    _ request: Cosmos_Staking_V1beta1_MsgValidatorBond,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgValidatorBond, Cosmos_Staking_V1beta1_MsgValidatorBondResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -401,6 +603,90 @@ extension Cosmos_Staking_V1beta1_MsgAsyncClientProtocol {
       interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
     )
   }
+
+  internal func makeUnbondValidatorCall(
+    _ request: Cosmos_Staking_V1beta1_MsgUnbondValidator,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgUnbondValidator, Cosmos_Staking_V1beta1_MsgUnbondValidatorResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.unbondValidator.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUnbondValidatorInterceptors() ?? []
+    )
+  }
+
+  internal func makeTokenizeSharesCall(
+    _ request: Cosmos_Staking_V1beta1_MsgTokenizeShares,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgTokenizeShares, Cosmos_Staking_V1beta1_MsgTokenizeSharesResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.tokenizeShares.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeSharesInterceptors() ?? []
+    )
+  }
+
+  internal func makeRedeemTokensForSharesCall(
+    _ request: Cosmos_Staking_V1beta1_MsgRedeemTokensForShares,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgRedeemTokensForShares, Cosmos_Staking_V1beta1_MsgRedeemTokensForSharesResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.redeemTokensForShares.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeRedeemTokensForSharesInterceptors() ?? []
+    )
+  }
+
+  internal func makeTransferTokenizeShareRecordCall(
+    _ request: Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord, Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecordResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.transferTokenizeShareRecord.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTransferTokenizeShareRecordInterceptors() ?? []
+    )
+  }
+
+  internal func makeDisableTokenizeSharesCall(
+    _ request: Cosmos_Staking_V1beta1_MsgDisableTokenizeShares,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgDisableTokenizeShares, Cosmos_Staking_V1beta1_MsgDisableTokenizeSharesResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.disableTokenizeShares.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeDisableTokenizeSharesInterceptors() ?? []
+    )
+  }
+
+  internal func makeEnableTokenizeSharesCall(
+    _ request: Cosmos_Staking_V1beta1_MsgEnableTokenizeShares,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgEnableTokenizeShares, Cosmos_Staking_V1beta1_MsgEnableTokenizeSharesResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.enableTokenizeShares.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeEnableTokenizeSharesInterceptors() ?? []
+    )
+  }
+
+  internal func makeValidatorBondCall(
+    _ request: Cosmos_Staking_V1beta1_MsgValidatorBond,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Cosmos_Staking_V1beta1_MsgValidatorBond, Cosmos_Staking_V1beta1_MsgValidatorBondResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.validatorBond.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeValidatorBondInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -488,6 +774,90 @@ extension Cosmos_Staking_V1beta1_MsgAsyncClientProtocol {
       interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
     )
   }
+
+  internal func unbondValidator(
+    _ request: Cosmos_Staking_V1beta1_MsgUnbondValidator,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_MsgUnbondValidatorResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.unbondValidator.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUnbondValidatorInterceptors() ?? []
+    )
+  }
+
+  internal func tokenizeShares(
+    _ request: Cosmos_Staking_V1beta1_MsgTokenizeShares,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_MsgTokenizeSharesResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.tokenizeShares.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTokenizeSharesInterceptors() ?? []
+    )
+  }
+
+  internal func redeemTokensForShares(
+    _ request: Cosmos_Staking_V1beta1_MsgRedeemTokensForShares,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_MsgRedeemTokensForSharesResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.redeemTokensForShares.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeRedeemTokensForSharesInterceptors() ?? []
+    )
+  }
+
+  internal func transferTokenizeShareRecord(
+    _ request: Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecordResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.transferTokenizeShareRecord.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeTransferTokenizeShareRecordInterceptors() ?? []
+    )
+  }
+
+  internal func disableTokenizeShares(
+    _ request: Cosmos_Staking_V1beta1_MsgDisableTokenizeShares,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_MsgDisableTokenizeSharesResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.disableTokenizeShares.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeDisableTokenizeSharesInterceptors() ?? []
+    )
+  }
+
+  internal func enableTokenizeShares(
+    _ request: Cosmos_Staking_V1beta1_MsgEnableTokenizeShares,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_MsgEnableTokenizeSharesResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.enableTokenizeShares.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeEnableTokenizeSharesInterceptors() ?? []
+    )
+  }
+
+  internal func validatorBond(
+    _ request: Cosmos_Staking_V1beta1_MsgValidatorBond,
+    callOptions: CallOptions? = nil
+  ) async throws -> Cosmos_Staking_V1beta1_MsgValidatorBondResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.validatorBond.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeValidatorBondInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -529,6 +899,27 @@ internal protocol Cosmos_Staking_V1beta1_MsgClientInterceptorFactoryProtocol: Se
 
   /// - Returns: Interceptors to use when invoking 'updateParams'.
   func makeUpdateParamsInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_MsgUpdateParams, Cosmos_Staking_V1beta1_MsgUpdateParamsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'unbondValidator'.
+  func makeUnbondValidatorInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_MsgUnbondValidator, Cosmos_Staking_V1beta1_MsgUnbondValidatorResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'tokenizeShares'.
+  func makeTokenizeSharesInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_MsgTokenizeShares, Cosmos_Staking_V1beta1_MsgTokenizeSharesResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'redeemTokensForShares'.
+  func makeRedeemTokensForSharesInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_MsgRedeemTokensForShares, Cosmos_Staking_V1beta1_MsgRedeemTokensForSharesResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'transferTokenizeShareRecord'.
+  func makeTransferTokenizeShareRecordInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord, Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecordResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'disableTokenizeShares'.
+  func makeDisableTokenizeSharesInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_MsgDisableTokenizeShares, Cosmos_Staking_V1beta1_MsgDisableTokenizeSharesResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'enableTokenizeShares'.
+  func makeEnableTokenizeSharesInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_MsgEnableTokenizeShares, Cosmos_Staking_V1beta1_MsgEnableTokenizeSharesResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'validatorBond'.
+  func makeValidatorBondInterceptors() -> [ClientInterceptor<Cosmos_Staking_V1beta1_MsgValidatorBond, Cosmos_Staking_V1beta1_MsgValidatorBondResponse>]
 }
 
 internal enum Cosmos_Staking_V1beta1_MsgClientMetadata {
@@ -543,6 +934,13 @@ internal enum Cosmos_Staking_V1beta1_MsgClientMetadata {
       Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.undelegate,
       Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.cancelUnbondingDelegation,
       Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.updateParams,
+      Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.unbondValidator,
+      Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.tokenizeShares,
+      Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.redeemTokensForShares,
+      Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.transferTokenizeShareRecord,
+      Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.disableTokenizeShares,
+      Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.enableTokenizeShares,
+      Cosmos_Staking_V1beta1_MsgClientMetadata.Methods.validatorBond,
     ]
   )
 
@@ -588,6 +986,48 @@ internal enum Cosmos_Staking_V1beta1_MsgClientMetadata {
       path: "/cosmos.staking.v1beta1.Msg/UpdateParams",
       type: GRPCCallType.unary
     )
+
+    internal static let unbondValidator = GRPCMethodDescriptor(
+      name: "UnbondValidator",
+      path: "/cosmos.staking.v1beta1.Msg/UnbondValidator",
+      type: GRPCCallType.unary
+    )
+
+    internal static let tokenizeShares = GRPCMethodDescriptor(
+      name: "TokenizeShares",
+      path: "/cosmos.staking.v1beta1.Msg/TokenizeShares",
+      type: GRPCCallType.unary
+    )
+
+    internal static let redeemTokensForShares = GRPCMethodDescriptor(
+      name: "RedeemTokensForShares",
+      path: "/cosmos.staking.v1beta1.Msg/RedeemTokensForShares",
+      type: GRPCCallType.unary
+    )
+
+    internal static let transferTokenizeShareRecord = GRPCMethodDescriptor(
+      name: "TransferTokenizeShareRecord",
+      path: "/cosmos.staking.v1beta1.Msg/TransferTokenizeShareRecord",
+      type: GRPCCallType.unary
+    )
+
+    internal static let disableTokenizeShares = GRPCMethodDescriptor(
+      name: "DisableTokenizeShares",
+      path: "/cosmos.staking.v1beta1.Msg/DisableTokenizeShares",
+      type: GRPCCallType.unary
+    )
+
+    internal static let enableTokenizeShares = GRPCMethodDescriptor(
+      name: "EnableTokenizeShares",
+      path: "/cosmos.staking.v1beta1.Msg/EnableTokenizeShares",
+      type: GRPCCallType.unary
+    )
+
+    internal static let validatorBond = GRPCMethodDescriptor(
+      name: "ValidatorBond",
+      path: "/cosmos.staking.v1beta1.Msg/ValidatorBond",
+      type: GRPCCallType.unary
+    )
   }
 }
 
@@ -625,6 +1065,33 @@ internal protocol Cosmos_Staking_V1beta1_MsgProvider: CallHandlerProvider {
   /// parameters.
   /// Since: cosmos-sdk 0.47
   func updateParams(request: Cosmos_Staking_V1beta1_MsgUpdateParams, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_MsgUpdateParamsResponse>
+
+  /// UnbondValidator defines a method for performing the status transition for a validator
+  /// from bonded to unbonding
+  /// This allows a validator to stop their services and jail themselves without
+  /// experiencing a slash
+  func unbondValidator(request: Cosmos_Staking_V1beta1_MsgUnbondValidator, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_MsgUnbondValidatorResponse>
+
+  /// TokenizeShares defines a method for tokenizing shares from a validator.
+  func tokenizeShares(request: Cosmos_Staking_V1beta1_MsgTokenizeShares, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_MsgTokenizeSharesResponse>
+
+  /// RedeemTokensForShares defines a method for redeeming tokens from a validator for
+  /// shares.
+  func redeemTokensForShares(request: Cosmos_Staking_V1beta1_MsgRedeemTokensForShares, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_MsgRedeemTokensForSharesResponse>
+
+  /// TransferTokenizeShareRecord defines a method to transfer ownership of
+  /// TokenizeShareRecord
+  func transferTokenizeShareRecord(request: Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecordResponse>
+
+  /// DisableTokenizeShares defines a method to prevent the tokenization of an addresses stake
+  func disableTokenizeShares(request: Cosmos_Staking_V1beta1_MsgDisableTokenizeShares, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_MsgDisableTokenizeSharesResponse>
+
+  /// EnableTokenizeShares defines a method to re-enable the tokenization of an addresseses stake
+  /// after it has been disabled
+  func enableTokenizeShares(request: Cosmos_Staking_V1beta1_MsgEnableTokenizeShares, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_MsgEnableTokenizeSharesResponse>
+
+  /// ValidatorBond defines a method for performing a validator self-bond
+  func validatorBond(request: Cosmos_Staking_V1beta1_MsgValidatorBond, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Staking_V1beta1_MsgValidatorBondResponse>
 }
 
 extension Cosmos_Staking_V1beta1_MsgProvider {
@@ -702,6 +1169,69 @@ extension Cosmos_Staking_V1beta1_MsgProvider {
         userFunction: self.updateParams(request:context:)
       )
 
+    case "UnbondValidator":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgUnbondValidator>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgUnbondValidatorResponse>(),
+        interceptors: self.interceptors?.makeUnbondValidatorInterceptors() ?? [],
+        userFunction: self.unbondValidator(request:context:)
+      )
+
+    case "TokenizeShares":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgTokenizeShares>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgTokenizeSharesResponse>(),
+        interceptors: self.interceptors?.makeTokenizeSharesInterceptors() ?? [],
+        userFunction: self.tokenizeShares(request:context:)
+      )
+
+    case "RedeemTokensForShares":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgRedeemTokensForShares>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgRedeemTokensForSharesResponse>(),
+        interceptors: self.interceptors?.makeRedeemTokensForSharesInterceptors() ?? [],
+        userFunction: self.redeemTokensForShares(request:context:)
+      )
+
+    case "TransferTokenizeShareRecord":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecordResponse>(),
+        interceptors: self.interceptors?.makeTransferTokenizeShareRecordInterceptors() ?? [],
+        userFunction: self.transferTokenizeShareRecord(request:context:)
+      )
+
+    case "DisableTokenizeShares":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgDisableTokenizeShares>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgDisableTokenizeSharesResponse>(),
+        interceptors: self.interceptors?.makeDisableTokenizeSharesInterceptors() ?? [],
+        userFunction: self.disableTokenizeShares(request:context:)
+      )
+
+    case "EnableTokenizeShares":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgEnableTokenizeShares>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgEnableTokenizeSharesResponse>(),
+        interceptors: self.interceptors?.makeEnableTokenizeSharesInterceptors() ?? [],
+        userFunction: self.enableTokenizeShares(request:context:)
+      )
+
+    case "ValidatorBond":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgValidatorBond>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgValidatorBondResponse>(),
+        interceptors: self.interceptors?.makeValidatorBondInterceptors() ?? [],
+        userFunction: self.validatorBond(request:context:)
+      )
+
     default:
       return nil
     }
@@ -765,6 +1295,54 @@ internal protocol Cosmos_Staking_V1beta1_MsgAsyncProvider: CallHandlerProvider {
     request: Cosmos_Staking_V1beta1_MsgUpdateParams,
     context: GRPCAsyncServerCallContext
   ) async throws -> Cosmos_Staking_V1beta1_MsgUpdateParamsResponse
+
+  /// UnbondValidator defines a method for performing the status transition for a validator
+  /// from bonded to unbonding
+  /// This allows a validator to stop their services and jail themselves without
+  /// experiencing a slash
+  @Sendable func unbondValidator(
+    request: Cosmos_Staking_V1beta1_MsgUnbondValidator,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_MsgUnbondValidatorResponse
+
+  /// TokenizeShares defines a method for tokenizing shares from a validator.
+  @Sendable func tokenizeShares(
+    request: Cosmos_Staking_V1beta1_MsgTokenizeShares,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_MsgTokenizeSharesResponse
+
+  /// RedeemTokensForShares defines a method for redeeming tokens from a validator for
+  /// shares.
+  @Sendable func redeemTokensForShares(
+    request: Cosmos_Staking_V1beta1_MsgRedeemTokensForShares,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_MsgRedeemTokensForSharesResponse
+
+  /// TransferTokenizeShareRecord defines a method to transfer ownership of
+  /// TokenizeShareRecord
+  @Sendable func transferTokenizeShareRecord(
+    request: Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecordResponse
+
+  /// DisableTokenizeShares defines a method to prevent the tokenization of an addresses stake
+  @Sendable func disableTokenizeShares(
+    request: Cosmos_Staking_V1beta1_MsgDisableTokenizeShares,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_MsgDisableTokenizeSharesResponse
+
+  /// EnableTokenizeShares defines a method to re-enable the tokenization of an addresseses stake
+  /// after it has been disabled
+  @Sendable func enableTokenizeShares(
+    request: Cosmos_Staking_V1beta1_MsgEnableTokenizeShares,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_MsgEnableTokenizeSharesResponse
+
+  /// ValidatorBond defines a method for performing a validator self-bond
+  @Sendable func validatorBond(
+    request: Cosmos_Staking_V1beta1_MsgValidatorBond,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Cosmos_Staking_V1beta1_MsgValidatorBondResponse
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -849,6 +1427,69 @@ extension Cosmos_Staking_V1beta1_MsgAsyncProvider {
         wrapping: self.updateParams(request:context:)
       )
 
+    case "UnbondValidator":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgUnbondValidator>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgUnbondValidatorResponse>(),
+        interceptors: self.interceptors?.makeUnbondValidatorInterceptors() ?? [],
+        wrapping: self.unbondValidator(request:context:)
+      )
+
+    case "TokenizeShares":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgTokenizeShares>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgTokenizeSharesResponse>(),
+        interceptors: self.interceptors?.makeTokenizeSharesInterceptors() ?? [],
+        wrapping: self.tokenizeShares(request:context:)
+      )
+
+    case "RedeemTokensForShares":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgRedeemTokensForShares>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgRedeemTokensForSharesResponse>(),
+        interceptors: self.interceptors?.makeRedeemTokensForSharesInterceptors() ?? [],
+        wrapping: self.redeemTokensForShares(request:context:)
+      )
+
+    case "TransferTokenizeShareRecord":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecordResponse>(),
+        interceptors: self.interceptors?.makeTransferTokenizeShareRecordInterceptors() ?? [],
+        wrapping: self.transferTokenizeShareRecord(request:context:)
+      )
+
+    case "DisableTokenizeShares":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgDisableTokenizeShares>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgDisableTokenizeSharesResponse>(),
+        interceptors: self.interceptors?.makeDisableTokenizeSharesInterceptors() ?? [],
+        wrapping: self.disableTokenizeShares(request:context:)
+      )
+
+    case "EnableTokenizeShares":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgEnableTokenizeShares>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgEnableTokenizeSharesResponse>(),
+        interceptors: self.interceptors?.makeEnableTokenizeSharesInterceptors() ?? [],
+        wrapping: self.enableTokenizeShares(request:context:)
+      )
+
+    case "ValidatorBond":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Staking_V1beta1_MsgValidatorBond>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Staking_V1beta1_MsgValidatorBondResponse>(),
+        interceptors: self.interceptors?.makeValidatorBondInterceptors() ?? [],
+        wrapping: self.validatorBond(request:context:)
+      )
+
     default:
       return nil
     }
@@ -884,6 +1525,34 @@ internal protocol Cosmos_Staking_V1beta1_MsgServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'updateParams'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeUpdateParamsInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_MsgUpdateParams, Cosmos_Staking_V1beta1_MsgUpdateParamsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'unbondValidator'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUnbondValidatorInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_MsgUnbondValidator, Cosmos_Staking_V1beta1_MsgUnbondValidatorResponse>]
+
+  /// - Returns: Interceptors to use when handling 'tokenizeShares'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeTokenizeSharesInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_MsgTokenizeShares, Cosmos_Staking_V1beta1_MsgTokenizeSharesResponse>]
+
+  /// - Returns: Interceptors to use when handling 'redeemTokensForShares'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeRedeemTokensForSharesInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_MsgRedeemTokensForShares, Cosmos_Staking_V1beta1_MsgRedeemTokensForSharesResponse>]
+
+  /// - Returns: Interceptors to use when handling 'transferTokenizeShareRecord'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeTransferTokenizeShareRecordInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecord, Cosmos_Staking_V1beta1_MsgTransferTokenizeShareRecordResponse>]
+
+  /// - Returns: Interceptors to use when handling 'disableTokenizeShares'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeDisableTokenizeSharesInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_MsgDisableTokenizeShares, Cosmos_Staking_V1beta1_MsgDisableTokenizeSharesResponse>]
+
+  /// - Returns: Interceptors to use when handling 'enableTokenizeShares'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeEnableTokenizeSharesInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_MsgEnableTokenizeShares, Cosmos_Staking_V1beta1_MsgEnableTokenizeSharesResponse>]
+
+  /// - Returns: Interceptors to use when handling 'validatorBond'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeValidatorBondInterceptors() -> [ServerInterceptor<Cosmos_Staking_V1beta1_MsgValidatorBond, Cosmos_Staking_V1beta1_MsgValidatorBondResponse>]
 }
 
 internal enum Cosmos_Staking_V1beta1_MsgServerMetadata {
@@ -898,6 +1567,13 @@ internal enum Cosmos_Staking_V1beta1_MsgServerMetadata {
       Cosmos_Staking_V1beta1_MsgServerMetadata.Methods.undelegate,
       Cosmos_Staking_V1beta1_MsgServerMetadata.Methods.cancelUnbondingDelegation,
       Cosmos_Staking_V1beta1_MsgServerMetadata.Methods.updateParams,
+      Cosmos_Staking_V1beta1_MsgServerMetadata.Methods.unbondValidator,
+      Cosmos_Staking_V1beta1_MsgServerMetadata.Methods.tokenizeShares,
+      Cosmos_Staking_V1beta1_MsgServerMetadata.Methods.redeemTokensForShares,
+      Cosmos_Staking_V1beta1_MsgServerMetadata.Methods.transferTokenizeShareRecord,
+      Cosmos_Staking_V1beta1_MsgServerMetadata.Methods.disableTokenizeShares,
+      Cosmos_Staking_V1beta1_MsgServerMetadata.Methods.enableTokenizeShares,
+      Cosmos_Staking_V1beta1_MsgServerMetadata.Methods.validatorBond,
     ]
   )
 
@@ -941,6 +1617,48 @@ internal enum Cosmos_Staking_V1beta1_MsgServerMetadata {
     internal static let updateParams = GRPCMethodDescriptor(
       name: "UpdateParams",
       path: "/cosmos.staking.v1beta1.Msg/UpdateParams",
+      type: GRPCCallType.unary
+    )
+
+    internal static let unbondValidator = GRPCMethodDescriptor(
+      name: "UnbondValidator",
+      path: "/cosmos.staking.v1beta1.Msg/UnbondValidator",
+      type: GRPCCallType.unary
+    )
+
+    internal static let tokenizeShares = GRPCMethodDescriptor(
+      name: "TokenizeShares",
+      path: "/cosmos.staking.v1beta1.Msg/TokenizeShares",
+      type: GRPCCallType.unary
+    )
+
+    internal static let redeemTokensForShares = GRPCMethodDescriptor(
+      name: "RedeemTokensForShares",
+      path: "/cosmos.staking.v1beta1.Msg/RedeemTokensForShares",
+      type: GRPCCallType.unary
+    )
+
+    internal static let transferTokenizeShareRecord = GRPCMethodDescriptor(
+      name: "TransferTokenizeShareRecord",
+      path: "/cosmos.staking.v1beta1.Msg/TransferTokenizeShareRecord",
+      type: GRPCCallType.unary
+    )
+
+    internal static let disableTokenizeShares = GRPCMethodDescriptor(
+      name: "DisableTokenizeShares",
+      path: "/cosmos.staking.v1beta1.Msg/DisableTokenizeShares",
+      type: GRPCCallType.unary
+    )
+
+    internal static let enableTokenizeShares = GRPCMethodDescriptor(
+      name: "EnableTokenizeShares",
+      path: "/cosmos.staking.v1beta1.Msg/EnableTokenizeShares",
+      type: GRPCCallType.unary
+    )
+
+    internal static let validatorBond = GRPCMethodDescriptor(
+      name: "ValidatorBond",
+      path: "/cosmos.staking.v1beta1.Msg/ValidatorBond",
       type: GRPCCallType.unary
     )
   }

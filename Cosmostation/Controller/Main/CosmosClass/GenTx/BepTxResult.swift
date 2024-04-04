@@ -80,12 +80,12 @@ class BepTxResult: BaseVC {
     }
     
     @IBAction func onClickSendTx(_ sender: UIButton) {
-        guard let url = BaseNetWork.getTxDetailUrl(fromChain, sendTxHash!) else { return }
+        guard let url = fromChain.getExplorerTx(sendTxHash) else { return }
         self.onShowSafariWeb(url)
     }
     
     @IBAction func onClickClaimTx(_ sender: UIButton) {
-        guard let url = BaseNetWork.getTxDetailUrl(toChain, claimTxHash!) else { return }
+        guard let url = toChain.getExplorerTx(claimTxHash) else { return }
         self.onShowSafariWeb(url)
     }
     
@@ -130,7 +130,7 @@ extension BepTxResult {
                                                signerAddress: fromChain.bechAddress,
                                                sequence: bnbAuth["sequence"].intValue,
                                                accountNumber: bnbAuth["account_number"].intValue,
-                                               chainId: fromChain.chainId!)
+                                               chainId: fromChain.chainIdCosmos!)
         
         var encoding: ParameterEncoding = URLEncoding.default
         encoding = HexEncoding(data: try! bnbMsg.encode())
@@ -335,7 +335,7 @@ extension BepTxResult {
                                               signerAddress: toChain.bechAddress,
                                               sequence: bnbAuth["sequence"].intValue,
                                               accountNumber: bnbAuth["account_number"].intValue,
-                                              chainId: toChain.chainId)
+                                              chainId: toChain.chainIdCosmos)
         
         var encoding: ParameterEncoding = URLEncoding.default
         encoding = HexEncoding(data: try! bnbMsg.encode())
