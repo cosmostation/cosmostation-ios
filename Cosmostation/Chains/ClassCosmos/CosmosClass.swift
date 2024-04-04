@@ -868,6 +868,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainQuicksilver())
     result.append(ChainRegen())
     result.append(ChainRizon())
+//    result.append(ChainSaga())
     result.append(ChainSecret118())
     result.append(ChainSecret529())
     result.append(ChainSei())
