@@ -84,7 +84,7 @@ class CommonTransfer: BaseVC {
     
     var evmTx: EthereumTransaction?
     var evmGasTitle: [String] = [NSLocalizedString("str_low", comment: ""), NSLocalizedString("str_average", comment: ""), NSLocalizedString("str_high", comment: "")]
-    var evmGasPrice: [BigUInt] = [28000000000, 28000000000, 28000000000]
+    var evmGasPrice: [(BigUInt, BigUInt)] = [(500000000, 1000000000), (500000000, 1000000000), (500000000, 1000000000)]
     var evmGasLimit: BigUInt = 21000
     var web3: web3?
     
@@ -171,7 +171,8 @@ class CommonTransfer: BaseVC {
             feeDenomLabel.text = (fromChain as! EvmClass).coinSymbol
             
             let feePrice = BaseData.instance.getPrice((fromChain as! EvmClass).coinGeckoId)
-            let feeAmount = NSDecimalNumber(string: String(evmGasPrice[selectedFeePosition].multiplied(by: evmGasLimit)))
+            let totalGasPrice = evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1
+            let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
             let feeDpAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(18))
             let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
             feeAmountLabel.attributedText = WDP.dpAmount(feeDpAmount.stringValue, feeAmountLabel!.font, 18)
@@ -495,7 +496,8 @@ class CommonTransfer: BaseVC {
     func onUpdateFeeView() {
         if (txStyle == .WEB3_STYLE) {
             let feePrice = BaseData.instance.getPrice((fromChain as! EvmClass).coinGeckoId)
-            let feeAmount = NSDecimalNumber(string: String(evmGasPrice[selectedFeePosition].multiplied(by: evmGasLimit)))
+            let totalGasPrice = evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1
+            let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
             let feeDpAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(18))
             let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
             feeAmountLabel.attributedText = WDP.dpAmount(feeDpAmount.stringValue, feeAmountLabel!.font, 18)
@@ -643,39 +645,34 @@ extension CommonTransfer {
             if let estimateGas = try? wTx!.estimateGas(transactionOptions: .defaultOptions) {
                 evmGasLimit = estimateGas
             }
+//            print("evmGasLimit ", evmGasLimit)
              
             let oracle = Web3.Oracle.init(web3)
             let feeHistory = oracle.bothFeesPercentiles
+//            print("feeHistory ", feeHistory)
             if (feeHistory?.baseFee.count ?? 0 > 0 && feeHistory?.tip.count ?? 0 > 0) {
-                if (feeHistory?.baseFee[0] == nil || feeHistory!.baseFee[0] < 275000000) {
-                    evmGasPrice[0] = (feeHistory?.baseFee[0] ?? 27500000000) + (feeHistory?.tip[0] ?? 500000000)
-                } else {
-                    evmGasPrice[0] = feeHistory!.baseFee[0] + (feeHistory?.tip[0] ?? 500000000)
+                for i in 0..<3 {
+                    var baseFee = feeHistory?.baseFee[i] ?? 500000000
+                    baseFee = baseFee > 500000000 ? baseFee : 500000000
+                    var tip = feeHistory?.tip[i] ?? 1000000000
+                    tip = tip > 1000000000 ? tip : 1000000000
+                    evmGasPrice[i] = (baseFee, tip)
                 }
-                if (feeHistory?.baseFee[1] == nil || feeHistory!.baseFee[1] < 275000000) {
-                    evmGasPrice[1] = (feeHistory?.baseFee[1] ?? 27500000000) + (feeHistory?.tip[1] ?? 500000000)
-                } else {
-                    evmGasPrice[1] = feeHistory!.baseFee[1] + (feeHistory?.tip[1] ?? 500000000)
-                }
-                if (feeHistory?.baseFee[2] == nil || feeHistory!.baseFee[2] < 275000000) {
-                    evmGasPrice[2] = (feeHistory?.baseFee[2] ?? 27500000000) + (feeHistory?.tip[2] ?? 500000000)
-                } else {
-                    evmGasPrice[2] = feeHistory!.baseFee[2] + (feeHistory?.tip[2] ?? 500000000)
-                }
-                let tip = feeHistory?.tip[selectedFeePosition] ?? 500000000
+//                print("evmGasPrice eip1559 ", evmGasPrice)
                 let eip1559 = EIP1559Envelope(to: toAddress, nonce: nonce!, chainID: chainID!, value: value,
-                                              data: wTx!.transaction.data, maxPriorityFeePerGas: tip,
-                                              maxFeePerGas: evmGasPrice[selectedFeePosition], gasLimit: evmGasLimit)
+                                              data: wTx!.transaction.data, maxPriorityFeePerGas: evmGasPrice[selectedFeePosition].1,
+                                              maxFeePerGas: evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1, gasLimit: evmGasLimit)
                 evmTx = EthereumTransaction(with: eip1559)
                 
             } else {
                 if let gasprice = try? web3.eth.getGasPrice() {
-                    evmGasPrice[0] = gasprice
-                    evmGasPrice[1] = gasprice
-                    evmGasPrice[2] = gasprice
+                    evmGasPrice[0].0 = gasprice
+                    evmGasPrice[1].0 = gasprice
+                    evmGasPrice[2].0 = gasprice
                 }
+//                print("evmGasPrice legacy ", evmGasPrice)
                 let legacy = LegacyEnvelope(to: toAddress, nonce: nonce!, chainID: chainID, value: value,
-                                            data: wTx!.transaction.data, gasPrice: evmGasPrice[selectedFeePosition],
+                                            data: wTx!.transaction.data, gasPrice: evmGasPrice[selectedFeePosition].0,
                                             gasLimit: evmGasLimit)
                 evmTx = EthereumTransaction(with: legacy)
             }
@@ -692,19 +689,33 @@ extension CommonTransfer {
                 return
             }
             
-            try! evmTx?.sign(privateKey: fromChain.privateKey!)
-            let result = try? web3.eth.sendRawTransaction(evmTx!)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                self.loadingView.isHidden = true
-                let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
-                txResult.txStyle = self.txStyle
-                txResult.fromChain = self.fromChain
-                txResult.toChain = self.toChain
-                txResult.toAddress = self.toAddress
-                txResult.evmHash = result?.hash
-                txResult.modalPresentationStyle = .fullScreen
-                self.present(txResult, animated: true)
-            })
+            
+            do {
+                try evmTx?.sign(privateKey: fromChain.privateKey!)
+//                print("sign gasLimit ", evmTx?.parameters.gasLimit)
+//                print("sign gasPrice ", evmTx?.parameters.gasPrice)
+//                print("sign maxPriorityFeePerGas ", evmTx?.parameters.maxPriorityFeePerGas)
+//                print("sign maxFeePerGas ", evmTx?.parameters.maxFeePerGas)
+                
+                let result = try web3.eth.sendRawTransaction(evmTx!)
+//                print("result ", result)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                    self.loadingView.isHidden = true
+                    let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                    txResult.txStyle = self.txStyle
+                    txResult.fromChain = self.fromChain
+                    txResult.toChain = self.toChain
+                    txResult.toAddress = self.toAddress
+                    txResult.evmHash = result.hash
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
+                })
+                
+            } catch {
+                print("error ", error)
+            }
+            
         }
     }
 }
