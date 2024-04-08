@@ -23,6 +23,9 @@ class SelectChainCell: UITableViewCell {
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var assetCntLabel: UILabel!
+    @IBOutlet weak var loadingLabel1: UILabel!
+    @IBOutlet weak var loadingLabel2: UILabel!
+    @IBOutlet weak var reposeErrorLabel: UILabel!
     
     
     let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
@@ -30,8 +33,8 @@ class SelectChainCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
-        assetCntLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+        loadingLabel1.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
+        loadingLabel2.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
     }
     
     override func prepareForReuse() {
@@ -40,6 +43,12 @@ class SelectChainCell: UITableViewCell {
         evmCompatTag.isHidden = true
         cosmosTag.isHidden = true
         keyTypeTag.isHidden = true
+        currencyLabel.isHidden = true
+        valueLabel.isHidden = true
+        assetCntLabel.isHidden = true
+        loadingLabel1.isHidden = false
+        loadingLabel2.isHidden = false
+        reposeErrorLabel.isHidden = true
     }
     
     var actionToggle: ((Bool) -> Void)? = nil
@@ -70,24 +79,39 @@ class SelectChainCell: UITableViewCell {
             hdPathLabel.text = ""
         }
         
-        if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
-            valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            assetCntLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
-            
-            let coinCntString = String(refAddress.lastCoinCnt) + " Coins"
-            let tokenCnt = chain.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
-            if (tokenCnt == 0) {
-                assetCntLabel.text = coinCntString
-            } else {
-                assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
-            }
+        if (chain.fetchState == .Fail) {
+            loadingLabel1.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            loadingLabel1.isHidden = true
+            loadingLabel2.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            loadingLabel2.isHidden = true
+            reposeErrorLabel.isHidden = false
             
         } else {
-            valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
-            assetCntLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+            if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
+                loadingLabel1.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+                loadingLabel1.isHidden = true
+                loadingLabel2.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+                loadingLabel2.isHidden = true
+                WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
+                
+                let coinCntString = String(refAddress.lastCoinCnt) + " Coins"
+                let tokenCnt = chain.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
+                if (tokenCnt == 0) {
+                    assetCntLabel.text = coinCntString
+                } else {
+                    assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
+                }
+                currencyLabel.isHidden = false
+                valueLabel.isHidden = false
+                assetCntLabel.isHidden = false
+                
+            } else {
+                loadingLabel1.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
+                loadingLabel1.isHidden = false
+                loadingLabel2.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+                loadingLabel2.isHidden = false
+            }
         }
-        
     }
     
     func bindCosmosClassChain(_ account: BaseAccount, _ chain: CosmosClass, _ selectedList: [String]) {
@@ -119,27 +143,43 @@ class SelectChainCell: UITableViewCell {
             keyTypeTag.isHidden = false
         }
         
-        if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
-            valueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            assetCntLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
-            
-            let coinCntString = String(refAddress.lastCoinCnt) + " Coins"
-            if (chain.supportCw20) {
-                let tokenCnt = chain.mintscanCw20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
-                if (tokenCnt == 0) {
-                    assetCntLabel.text = coinCntString
-                } else {
-                    assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
-                }
-                
-            } else {
-                assetCntLabel.text = coinCntString
-            }
+        if (chain.fetchState == .Fail) {
+            loadingLabel1.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            loadingLabel1.isHidden = true
+            loadingLabel2.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+            loadingLabel2.isHidden = true
+            reposeErrorLabel.isHidden = false
             
         } else {
-            valueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
-            assetCntLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+            if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
+                loadingLabel1.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+                loadingLabel1.isHidden = true
+                loadingLabel2.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+                loadingLabel2.isHidden = true
+                WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
+                
+                let coinCntString = String(refAddress.lastCoinCnt) + " Coins"
+                if (chain.supportCw20) {
+                    let tokenCnt = chain.mintscanCw20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
+                    if (tokenCnt == 0) {
+                        assetCntLabel.text = coinCntString
+                    } else {
+                        assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
+                    }
+                    
+                } else {
+                    assetCntLabel.text = coinCntString
+                }
+                currencyLabel.isHidden = false
+                valueLabel.isHidden = false
+                assetCntLabel.isHidden = false
+                
+            } else {
+                loadingLabel1.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
+                loadingLabel1.isHidden = false
+                loadingLabel2.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+                loadingLabel2.isHidden = false
+            }
         }
     }
 }
