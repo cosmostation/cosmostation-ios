@@ -49,6 +49,15 @@ class CosmosCoinVC: BaseVC {
         tableView.addSubview(refresher)
         
         onSortAssets()
+        
+        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainCrescent) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+                let sunsetSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
+                sunsetSheet.selectedChain = self.selectedChain
+                sunsetSheet.noticeType = .ChainSunset
+                self.onStartSheet(sunsetSheet)
+            })
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

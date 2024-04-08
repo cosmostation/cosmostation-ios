@@ -312,6 +312,8 @@
 "str_share_bech_address" = "Cosmos형식 주소공유";
 "str_token_github" = "토큰 정보 확인";
 "str_node_down_title" = "⚠️ 노드 다운";
+"str_sunset_title" = "체인 중단 안내";
+"str_sunset_msg" = "선택하신 체인은 지원종료 예정입니다. 자세한 내용은 재단의 공식 공지를 참조하세요.";
 
 
 "btn_delegate" = "  위임 하기";
