@@ -903,7 +903,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     return result
 }
 
-let DEFUAL_DISPALY_COSMOS = ["cosmos118", "neutron118", "kava459", "osmosis118", "dydx118", "crypto-org394", "celestia118"]
+let DEFUAL_DISPALY_COSMOS = ["cosmos118", "neutron118", "osmosis118", "dydx118", "crypto-org394", "celestia118"]
 
 extension Cosmos_Base_V1beta1_Coin {
     func getAmount() -> NSDecimalNumber {
