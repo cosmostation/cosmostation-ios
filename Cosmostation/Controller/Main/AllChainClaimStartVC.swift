@@ -17,6 +17,7 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var cntLabel: UILabel!
+    @IBOutlet weak var claimMsgLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var claimBtn: BaseButton!
     @IBOutlet weak var confirmBtn: BaseButton!
@@ -65,6 +66,7 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
     
     override func setLocalizedString() {
         titleLabel.text = NSLocalizedString("title_claimable_chains", comment: "")
+        claimMsgLabel.text = NSLocalizedString("msg_claim_all_detail", comment: "")
         claimBtn.setTitle(NSLocalizedString("str_claim_all", comment: ""), for: .normal)
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }

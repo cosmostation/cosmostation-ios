@@ -110,6 +110,7 @@ class CosmosClassVC: BaseVC {
         explorerBarBtn = UIBarButtonItem(customView: explorerBtn)
         
         navigationItem.rightBarButtonItems = [explorerBarBtn]
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

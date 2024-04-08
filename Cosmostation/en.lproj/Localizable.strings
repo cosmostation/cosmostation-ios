@@ -312,6 +312,8 @@
 "str_share_bech_address" = "Share Cosmos style address";
 "str_token_github" = "Check Token Info";
 "str_node_down_title" = "⚠️ Node Down";
+"str_sunset_title" = "Chain Sunset";
+"str_sunset_msg" = "The chain you selected is scheduled to end support. For more information, please refer to the foundation's official announcement.";
 
 
 "btn_delegate" = "  Delegate";
@@ -393,6 +395,7 @@
 "msg_token_github" = "Currently, the selected chain does not need to manually add tokens to the chain. Cosmostation Wallet displays information for all tokens (CW20, ERC20) with existing quantity.\n\nIf you hold the token but do not see it, try submitting the PR through the Github link below.";
 "msg_node_down" = "▪ Please check the current network status of the device.\n\n▪ If there is a problem with the node you are currently using, you can easily switch to another node through [Settings > Manage Chains] and continue using the service.\n\n ▪ If all nodes are unavailable, the chain being used is being upgraded. Please wait until the upgrade is complete.";
 "msg_vote_all_detail" = "You must select all proposals that are live to vote.\nPlease swipe to exclude proposals that you want to vote on later.";
+"msg_claim_all_detail" = "Check the reward amount and Tx fee amount.\nPlease swipe to exclude rewards you would like to receive in the future.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";

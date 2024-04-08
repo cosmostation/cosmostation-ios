@@ -40,6 +40,13 @@ class NoticeSheet: BaseVC {
             noticeMsgLabel.text = NSLocalizedString("msg_node_down", comment: "")
             subBtn.isHidden = true
             okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
+            
+        } else if (noticeType == .ChainSunset) {
+            noticeTitleLabel.text = NSLocalizedString("str_sunset_title", comment: "")
+            noticeMsgLabel.text = NSLocalizedString("str_sunset_msg", comment: "")
+            subBtn.setTitle("Link", for: .normal)
+            okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
+            
         }
     }
     
@@ -58,6 +65,19 @@ class NoticeSheet: BaseVC {
                 guard let url = URL(string: rawUrl) else { return }
                 self.onShowSafariWeb(url)
             }
+            
+        } else if (noticeType == .ChainSunset) {
+            if (selectedChain is ChainBinanceBeacon) {
+                let rawUrl =  "https://www.bnbchain.org/en/bnb-chain-fusion"
+                guard let url = URL(string: rawUrl) else { return }
+                self.onShowSafariWeb(url)
+                
+            } else if (selectedChain is ChainCrescent) {
+                let rawUrl = "https://crescentnetwork.medium.com/flip-announcement-af24c8ab7e7f"
+                guard let url = URL(string: rawUrl) else { return }
+                self.onShowSafariWeb(url)
+                
+            }
         }
     }
     
@@ -71,4 +91,5 @@ public enum NoticeType: Int {
     case SwapInitWarn = 0
     case TokenGithub = 1
     case NodeDownGuide = 2
+    case ChainSunset = 3
 }

@@ -172,11 +172,9 @@ class CosmosClass: BaseChain {
         return result
     }
     
-    var stakeInfoTask: Task<(), Never>?
     func fetchStakeData() {
-        cosmosValidators.removeAll()
-        if (cosmosValidators.count > 0 || stakeInfoTask?.hashValue != nil) { return }
-        stakeInfoTask = Task {
+        if (cosmosValidators.count > 0) { return }
+        Task {
             let channel = getConnection()
             if let bonded = try? await fetchBondedValidator(channel),
                let unbonding = try? await fetchUnbondingValidator(channel),
@@ -870,6 +868,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainQuicksilver())
     result.append(ChainRegen())
     result.append(ChainRizon())
+    result.append(ChainSaga())
     result.append(ChainSecret118())
     result.append(ChainSecret529())
     result.append(ChainSei())
@@ -904,7 +903,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     return result
 }
 
-let DEFUAL_DISPALY_COSMOS = ["cosmos118", "neutron118", "kava459", "osmosis118", "dydx118", "crypto-org394", "celestia118"]
+let DEFUAL_DISPALY_COSMOS = ["cosmos118", "neutron118", "osmosis118", "dydx118", "crypto-org394", "celestia118"]
 
 extension Cosmos_Base_V1beta1_Coin {
     func getAmount() -> NSDecimalNumber {

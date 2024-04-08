@@ -43,8 +43,10 @@ class SelectEndpointSheet: BaseVC {
         if let cosmosChain = targetChain as? CosmosClass {
             gRPCList = cosmosChain.getChainListParam()["grpc_endpoint"].array
             evmRPCList = cosmosChain.getChainListParam()["evm_rpc_endpoint"].array
-            
-            if (gRPCList != nil && evmRPCList == nil) {
+            if (gRPCList == nil && evmRPCList == nil) {
+                return
+                
+            } else if (gRPCList != nil && evmRPCList == nil) {
                 seletcedType = EndPointType.gRPC
                 titleLabel.text = NSLocalizedString("title_select_end_point", comment: "") + "  (gRPC)"
                 endpointTypeSegment.isHidden = true
