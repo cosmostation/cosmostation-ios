@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,6 +20,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AllChainClaimStartVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="claimBtn" destination="Dgh-k9-een" id="B5f-rK-Kgz"/>
+                <outlet property="claimMsgLabel" destination="wFY-wH-FA3" id="tJa-mp-WD9"/>
                 <outlet property="cntLabel" destination="u25-g7-qee" id="96J-rO-B9b"/>
                 <outlet property="confirmBtn" destination="IUk-cL-6Zj" id="hgu-Ug-gpB"/>
                 <outlet property="emptyView" destination="ZSQ-BT-ahS" id="ked-Qk-Sga"/>
@@ -46,6 +47,12 @@
                     <rect key="frame" x="338" y="91" width="35" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                     <color key="textColor" name="_color01"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="라이브 상태인 프로포절을 모두 선택하여야 투표가 가능합니다. 추후에 투표할 프로포절은 스와이프하여 제외해주세요." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFY-wH-FA3">
+                    <rect key="frame" x="20" y="121.33333333333333" width="353" height="30.333333333333329"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                    <color key="textColor" name="_color02"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZSQ-BT-ahS">
@@ -76,7 +83,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4zJ-D0-k48">
-                    <rect key="frame" x="0.0" y="119.33333333333331" width="393" height="638.66666666666674"/>
+                    <rect key="frame" x="0.0" y="163.66666666666669" width="393" height="594.33333333333326"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUk-cL-6Zj" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
@@ -151,14 +158,17 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4zJ-D0-k48" secondAttribute="trailing" id="Mvy-eH-GB8"/>
                 <constraint firstItem="IUk-cL-6Zj" firstAttribute="centerX" secondItem="Dgh-k9-een" secondAttribute="centerX" id="Nha-ie-te3"/>
                 <constraint firstItem="ZSQ-BT-ahS" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="QAh-0R-fN8"/>
+                <constraint firstItem="4zJ-D0-k48" firstAttribute="top" secondItem="wFY-wH-FA3" secondAttribute="bottom" constant="12" id="QhR-KT-3p1"/>
                 <constraint firstItem="IUk-cL-6Zj" firstAttribute="centerY" secondItem="Dgh-k9-een" secondAttribute="centerY" id="UCl-au-IFA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wFY-wH-FA3" secondAttribute="trailing" constant="20" id="V3D-jl-5Jp"/>
                 <constraint firstItem="IUk-cL-6Zj" firstAttribute="trailing" secondItem="Dgh-k9-een" secondAttribute="trailing" id="X6a-0L-Y50"/>
+                <constraint firstItem="wFY-wH-FA3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Xzd-iD-Rx6"/>
                 <constraint firstItem="Dgh-k9-een" firstAttribute="top" secondItem="4zJ-D0-k48" secondAttribute="bottom" constant="8" id="aDx-qd-hRF"/>
                 <constraint firstItem="Am3-iF-CTF" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="bHi-8J-TCt"/>
+                <constraint firstItem="wFY-wH-FA3" firstAttribute="top" secondItem="IuO-un-Xkg" secondAttribute="bottom" constant="10" id="bIo-Hs-4SW"/>
                 <constraint firstAttribute="bottom" secondItem="Dgh-k9-een" secondAttribute="bottom" constant="38" id="g40-rL-lOw"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="Dgh-k9-een" secondAttribute="leading" constant="-8" id="jPw-xU-bc1"/>
                 <constraint firstItem="IuO-un-Xkg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="pzs-eq-UTw"/>
-                <constraint firstItem="4zJ-D0-k48" firstAttribute="top" secondItem="IuO-un-Xkg" secondAttribute="bottom" constant="8" id="rHp-OR-j8n"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Dgh-k9-een" secondAttribute="trailing" constant="8" id="rRN-zR-oRB"/>
                 <constraint firstItem="IUk-cL-6Zj" firstAttribute="leading" secondItem="Dgh-k9-een" secondAttribute="leading" id="rTp-gn-zeD"/>
                 <constraint firstItem="Am3-iF-CTF" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="sml-07-jAa"/>
@@ -172,6 +182,9 @@
         <image name="imgEmptyData" width="240" height="240"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_colorBg">
             <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
