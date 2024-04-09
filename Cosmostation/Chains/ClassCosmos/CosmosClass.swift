@@ -84,7 +84,7 @@ class CosmosClass: BaseChain {
                 let channel = getConnection()
                 if let cw20Tokens = try? await fetchCw20Info(),
                    let cw721List = try? await fetchCw721Info(),
-                   let auth = try await fetchAuth(channel),
+                   let auth = try? await fetchAuth(channel),
                    let balance = try await fetchBalance(channel),
                    let delegations = try? await fetchDelegation(channel),
                    let unbonding = try? await fetchUnbondings(channel),
