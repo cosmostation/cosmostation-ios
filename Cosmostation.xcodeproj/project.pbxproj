@@ -1510,6 +1510,8 @@
 		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
 		181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
 		1812D46228E184D800AC7D61 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1812D46128E184D800AC7D61 /* GoogleService-Info.plist */; };
+		182CCB832BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 182CCB822BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy */; };
+		182CCB842BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 182CCB822BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy */; };
 		187446FF2930940F00849EE4 /* ApiKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187446FE2930940F00849EE4 /* ApiKey.plist */; };
 		187447012930942400849EE4 /* ApiKeyDev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187447002930942400849EE4 /* ApiKeyDev.plist */; };
 		18744703293094CB00849EE4 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18744702293094CB00849EE4 /* BundleExtension.swift */; };
@@ -2622,6 +2624,7 @@
 		1809C35029D16C80008884C1 /* injectScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = injectScript.js; sourceTree = "<group>"; };
 		181099DE28AE92FC00C178B5 /* PushUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUtils.swift; sourceTree = "<group>"; };
 		1812D46128E184D800AC7D61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		182CCB822BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		187446FE2930940F00849EE4 /* ApiKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKey.plist; sourceTree = "<group>"; };
 		187447002930942400849EE4 /* ApiKeyDev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeyDev.plist; sourceTree = "<group>"; };
 		18744702293094CB00849EE4 /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
@@ -4038,6 +4041,7 @@
 				04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */,
 				E1271B02224B17230083AF17 /* Localizable.strings */,
 				E1F2AE50227EC05100C87F3F /* InfoPlist.strings */,
+				182CCB822BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy */,
 			);
 			path = Cosmostation;
 			sourceTree = "<group>";
@@ -4472,6 +4476,7 @@
 				E165ED392B98C9D500C15809 /* basebg09.png in Resources */,
 				E11EAE122AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
 				E16200442AF279560008F397 /* AddressBookListVC.xib in Resources */,
+				182CCB842BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy in Resources */,
 				0409D2FE2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
 				041540FD2BA4126D00CD5AA1 /* VoteAllChainCell.xib in Resources */,
 				E13FC55E2B26F13B0082C66E /* KavaEarnListCell.xib in Resources */,
@@ -4659,6 +4664,7 @@
 				04F4061729ED119800CD88E4 /* Init.storyboard in Resources */,
 				044222562B96F4370063F031 /* SelectDisplayTokenCell.xib in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
+				182CCB832BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy in Resources */,
 				18F4EAD12A4DA0A200CFBE2B /* ApiKeyDev.plist in Resources */,
 				E165ED382B98C9D500C15809 /* basebg09.png in Resources */,
 				E15F2D062ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
