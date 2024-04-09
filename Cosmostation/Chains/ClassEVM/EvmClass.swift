@@ -69,7 +69,7 @@ class EvmClass: CosmosClass {
                 await fetchAllErc20Balance(id)
                 
             } catch {
-                print("Error Evm", self.tag,  error)
+//                print("Error Evm", self.tag,  error)
                 DispatchQueue.main.async {
                     self.fetchState = .Fail
                     NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)

@@ -82,8 +82,8 @@ class CosmosClass: BaseChain {
         Task {
             do {
                 let channel = getConnection()
-                if let cw20Tokens = try await fetchCw20Info(),
-                   let cw721List = try await fetchCw721Info(),
+                if let cw20Tokens = try? await fetchCw20Info(),
+                   let cw721List = try? await fetchCw721Info(),
                    let auth = try await fetchAuth(channel),
                    let balance = try await fetchBalance(channel),
                    let delegations = try? await fetchDelegation(channel),
@@ -91,8 +91,8 @@ class CosmosClass: BaseChain {
                    let rewards = try? await fetchRewards(channel),
                    let commission = try? await fetchCommission(channel),
                    let rewardaddr = try? await fetchRewardAddress(channel) {
-                    self.mintscanCw20Tokens = cw20Tokens
-                    self.mintscanCw721List = cw721List
+                    self.mintscanCw20Tokens = cw20Tokens ?? []
+                    self.mintscanCw721List = cw721List ?? []
                     self.cosmosAuth = auth
                     self.cosmosBalances = balance
                     delegations?.forEach({ delegation in
@@ -485,13 +485,13 @@ extension CosmosClass {
         if (channel == nil) { return nil }
         if (bechOpAddress == nil) { return nil }
         let req = Cosmos_Distribution_V1beta1_QueryValidatorCommissionRequest.with { $0.validatorAddress = bechOpAddress! }
-        return try await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel!).validatorCommission(req, callOptions: getCallOptions()).response.get().commission
+        return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel!).validatorCommission(req, callOptions: getCallOptions()).response.get().commission
     }
     
     func fetchRewardAddress(_ channel: ClientConnection?) async throws -> String? {
         if (channel == nil) { return nil }
         let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = bechAddress }
-        return try await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel!).delegatorWithdrawAddress(req, callOptions: getCallOptions()).response.get().withdrawAddress
+        return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: channel!).delegatorWithdrawAddress(req, callOptions: getCallOptions()).response.get().withdrawAddress
     }
     
     func fetchAllCw20Balance(_ id: Int64) {
