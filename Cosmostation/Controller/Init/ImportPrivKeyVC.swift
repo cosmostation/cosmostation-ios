@@ -9,13 +9,15 @@ import UIKit
 import MaterialComponents
 import web3swift
 
-class ImportPrivKeyVC: BaseVC, UITextViewDelegate {
+class ImportPrivKeyVC: BaseVC, UITextViewDelegate, PinDelegate {
     
     @IBOutlet weak var nextBtn: BaseButton!
     @IBOutlet weak var privKeyTextArea: MDCOutlinedTextArea!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        onCheckPinCodeInited()
         
         privKeyTextArea.setup()
         privKeyTextArea.textView.delegate = self
@@ -25,6 +27,30 @@ class ImportPrivKeyVC: BaseVC, UITextViewDelegate {
         navigationItem.title = NSLocalizedString("title_restore_privatekey", comment: "")
         privKeyTextArea.label.text = NSLocalizedString("str_privateKey", comment: "")
         nextBtn.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
+    }
+    
+    func onCheckPinCodeInited() {
+        view.isUserInteractionEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+            let keychain = BaseData.instance.getKeyChain()
+            if let pincode = try? keychain.getString("password"), pincode?.isEmpty == false {
+                let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+                self.present(pinVC, animated: true)
+            } else {
+                let pinVC = UIStoryboard.PincodeVC(self, .ForInit)
+                self.present(pinVC, animated: true)
+            }
+        });
+    }
+    
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
+        if (result == .success) {
+            view.isUserInteractionEnabled = true
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                self.navigationController?.popViewController(animated: true)
+            });
+        }
     }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
