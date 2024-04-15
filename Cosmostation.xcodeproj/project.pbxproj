@@ -1830,6 +1830,8 @@
 		E1D931F22BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D931F02BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib */; };
 		E1D931F32BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D931F02BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib */; };
 		E1D931F42BCCD8C700AEEA10 /* AllChainCompoundingStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D931EF2BCCD8C700AEEA10 /* AllChainCompoundingStartVC.swift */; };
+		E1D931F62BCD301E00AEEA10 /* ChainBinanceSmart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D931F52BCD301E00AEEA10 /* ChainBinanceSmart.swift */; };
+		E1D931F72BCD301E00AEEA10 /* ChainBinanceSmart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D931F52BCD301E00AEEA10 /* ChainBinanceSmart.swift */; };
 		E1D97C072B9EF65000496807 /* SelectEndpointSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D97C052B9EF65000496807 /* SelectEndpointSheet.swift */; };
 		E1D97C082B9EF65000496807 /* SelectEndpointSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D97C052B9EF65000496807 /* SelectEndpointSheet.swift */; };
 		E1D97C092B9EF65000496807 /* SelectEndpointSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D97C062B9EF65000496807 /* SelectEndpointSheet.xib */; };
@@ -2788,6 +2790,7 @@
 		E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosAboutVC.swift; sourceTree = "<group>"; };
 		E1D931EF2BCCD8C700AEEA10 /* AllChainCompoundingStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChainCompoundingStartVC.swift; sourceTree = "<group>"; };
 		E1D931F02BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllChainCompoundingStartVC.xib; sourceTree = "<group>"; };
+		E1D931F52BCD301E00AEEA10 /* ChainBinanceSmart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBinanceSmart.swift; sourceTree = "<group>"; };
 		E1D97C052B9EF65000496807 /* SelectEndpointSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEndpointSheet.swift; sourceTree = "<group>"; };
 		E1D97C062B9EF65000496807 /* SelectEndpointSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectEndpointSheet.xib; sourceTree = "<group>"; };
 		E1DBD3DF2B620B760058E0DC /* EvmClass.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = EvmClass.storyboard; path = Cosmostation/Controller/Main/EvmClass/EvmClass.storyboard; sourceTree = SOURCE_ROOT; };
@@ -2955,6 +2958,7 @@
 				04D279EF2A67C98E00AF046A /* ChainEthereum.swift */,
 				04C63D322B87619900D4A366 /* ChainAltheaEVM.swift */,
 				E1989BF62BA81763009B5619 /* ChainBaseEVM.swift */,
+				E1D931F52BCD301E00AEEA10 /* ChainBinanceSmart.swift */,
 				04C63D382B87653C00D4A366 /* ChainCantoEVM.swift */,
 				04C63D3E2B8A1AA300D4A366 /* ChainDymensionEVM.swift */,
 				04C63D2F2B875F1800D4A366 /* ChainEvmosEVM.swift */,
@@ -4863,6 +4867,7 @@
 				E14577FD2B3EC50C00EEFA8E /* CosmosClaimCommission.swift in Sources */,
 				047843982AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */,
 				04B789802ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
+				E1D931F72BCD301E00AEEA10 /* ChainBinanceSmart.swift in Sources */,
 				E1D6B8D22AA499A400177D30 /* CosmosNftVC.swift in Sources */,
 				04C817252BA98D75006B800A /* cosmos_base_tendermint_v1beta1_query.pb.swift in Sources */,
 				E11EAE1C2AAD87AD003BFC7F /* SettingPriceCell.swift in Sources */,
@@ -5614,6 +5619,7 @@
 				E14577FC2B3EC50C00EEFA8E /* CosmosClaimCommission.swift in Sources */,
 				047843972AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */,
 				04B7897F2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
+				E1D931F62BCD301E00AEEA10 /* ChainBinanceSmart.swift in Sources */,
 				E1D6B8D12AA499A400177D30 /* CosmosNftVC.swift in Sources */,
 				04C817242BA98D75006B800A /* cosmos_base_tendermint_v1beta1_query.pb.swift in Sources */,
 				E11EAE1B2AAD87AD003BFC7F /* SettingPriceCell.swift in Sources */,

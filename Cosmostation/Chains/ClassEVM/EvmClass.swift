@@ -294,18 +294,19 @@ extension EvmClass {
 
 func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
-//    result.append(ChainEthereum())
-////    result.append(ChainAltheaEVM())
-//    result.append(ChainBaseEVM())
-//    result.append(ChainCantoEVM())
-//    result.append(ChainDymensionEVM())
-//    result.append(ChainEvmosEVM())
-//    result.append(ChainHumansEVM())
-//    result.append(ChainKavaEVM())
-//    result.append(ChainOktEVM())
-//    result.append(ChainOptimism())
-//    result.append(ChainPolygon())
-//    result.append(ChainXplaEVM())
+    result.append(ChainEthereum())
+//    result.append(ChainAltheaEVM())
+    result.append(ChainBaseEVM())
+    result.append(ChainBinanceSmart())
+    result.append(ChainCantoEVM())
+    result.append(ChainDymensionEVM())
+    result.append(ChainEvmosEVM())
+    result.append(ChainHumansEVM())
+    result.append(ChainKavaEVM())
+    result.append(ChainOktEVM())
+    result.append(ChainOptimism())
+    result.append(ChainPolygon())
+    result.append(ChainXplaEVM())
     
     //Add cosmos chain id for ibc
     result.forEach { chain in

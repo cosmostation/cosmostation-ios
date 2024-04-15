@@ -843,7 +843,6 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainChihuahua())
     result.append(ChainComdex())
     result.append(ChainCoreum())
-    result.append(ChainCrescent())
     result.append(ChainCryptoorg())
     result.append(ChainCudos())
     result.append(ChainDesmos())
@@ -898,13 +897,15 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainUmee())
     result.append(ChainXpla())
     
-    result.append(ChainBinanceBeacon())
+    
     result.append(ChainOkt996Secp())
     result.append(ChainOkt996Keccak())
     
     
     
+//    result.append(ChainCrescent())
 //    result.append(ChainStarname())
+//    result.append(ChainBinanceBeacon())
     
     
     result.forEach { chain in
