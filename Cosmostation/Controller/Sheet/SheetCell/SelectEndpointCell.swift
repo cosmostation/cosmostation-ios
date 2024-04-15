@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 import GRPC
 import NIO
 import SwiftProtobuf
@@ -99,30 +100,30 @@ class SelectEndpointCell: UITableViewCell {
             
             seletedImg.isHidden = (evmChain.getEvmRpc() != url)
             
-            Task {
-                do {
-                    let balanceJson = try await evmChain.fetchEvmBalance("0x8D97689C9818892B700e27F316cc3E41e17fBeb9")
-                    self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
-                    
-                } catch {
-                    DispatchQueue.main.async {
-                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        self.speedTimeLabel.text = "Unknown"
+            let param: Parameters = ["method": "eth_getBalance", "params": ["0x8D97689C9818892B700e27F316cc3E41e17fBeb9", "latest"], "id" : 1, "jsonrpc" : "2.0"]
+            AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in
+                    switch response.result {
+                    case .success(let value):
+                        self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
+                        DispatchQueue.main.async {
+                            let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
+                            if (self.gapTime! <= 1.2) {
+                                self.speedImg.image = UIImage.init(named: "ImgGovPassed")
+                            } else if (self.gapTime! <= 3) {
+                                self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
+                            } else {
+                                self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                            }
+                            self.speedTimeLabel.text = gapFormat
+                        }
+                        
+                    case .failure:
+                        DispatchQueue.main.async {
+                            self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                            self.speedTimeLabel.text = "Unknown"
+                        }
                     }
                 }
-                
-                DispatchQueue.main.async {
-                    let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
-                    if (self.gapTime! <= 1.2) {
-                        self.speedImg.image = UIImage.init(named: "ImgGovPassed")
-                    } else if (self.gapTime! <= 3) {
-                        self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
-                    } else {
-                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                    }
-                    self.speedTimeLabel.text = gapFormat
-                }
-            }
         }
     }
     

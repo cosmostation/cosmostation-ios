@@ -84,7 +84,7 @@ class CosmosClass: BaseChain {
                 let channel = getConnection()
                 if let cw20Tokens = try? await fetchCw20Info(),
                    let cw721List = try? await fetchCw721Info(),
-                   let auth = try await fetchAuth(channel),
+                   let auth = try? await fetchAuth(channel),
                    let balance = try await fetchBalance(channel),
                    let delegations = try? await fetchDelegation(channel),
                    let unbonding = try? await fetchUnbondings(channel),
@@ -773,6 +773,21 @@ extension CosmosClass {
         return result
     }
     
+    func compoundableRewards() -> [Cosmos_Distribution_V1beta1_DelegationDelegatorReward] {
+        var result = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
+        cosmosRewards?.forEach { reward in
+            if let rewardAmount = reward.reward.filter({ $0.denom == stakeDenom }).first?.getAmount(),
+               let msAsset = BaseData.instance.getAsset(apiName, stakeDenom) {
+                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, true)
+                let value = msPrice.multiplying(by: rewardAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+                if (value.compare(NSDecimalNumber.init(string: "0.1")).rawValue >= 0) {
+                    result.append(reward)
+                }
+            }
+        }
+        return result
+    }
+    
     func commissionAmount(_ denom: String) -> NSDecimalNumber {
         return cosmosCommissions.filter { $0.denom == denom }.first?.getAmount() ?? NSDecimalNumber.zero
     }
@@ -828,7 +843,6 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainChihuahua())
     result.append(ChainComdex())
     result.append(ChainCoreum())
-    result.append(ChainCrescent())
     result.append(ChainCryptoorg())
     result.append(ChainCudos())
     result.append(ChainDesmos())
@@ -883,13 +897,15 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainUmee())
     result.append(ChainXpla())
     
-    result.append(ChainBinanceBeacon())
+    
     result.append(ChainOkt996Secp())
     result.append(ChainOkt996Keccak())
     
     
     
+//    result.append(ChainCrescent())
 //    result.append(ChainStarname())
+//    result.append(ChainBinanceBeacon())
     
     
     result.forEach { chain in

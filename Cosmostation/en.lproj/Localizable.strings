@@ -207,6 +207,8 @@
 "str_vote_all" = "Vote All";
 "str_show_all_proposal" = "Live Proposals";
 "str_hide_done_proposal" = "Excluding voted Proposals";
+"str_compoundable_chains" = "Compoundable Chains";
+"str_compounding_all" = "Compoundable All";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -396,6 +398,7 @@
 "msg_node_down" = "▪ Please check the current network status of the device.\n\n▪ If there is a problem with the node you are currently using, you can easily switch to another node through [Settings > Manage Chains] and continue using the service.\n\n ▪ If all nodes are unavailable, the chain being used is being upgraded. Please wait until the upgrade is complete.";
 "msg_vote_all_detail" = "You must select all proposals that are live to vote.\nPlease swipe to exclude proposals that you want to vote on later.";
 "msg_claim_all_detail" = "Check the reward amount and Tx fee amount.\nPlease swipe to exclude rewards you would like to receive in the future.";
+"msg_compoundable_detail" = "Check the to compounding amount and Tx fee amount.\nPlease swipe to exclude you would like to compounding in the future.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -1002,6 +1005,8 @@
 "quotes_30" = "Any time a country transitioned to a fiat currency, they collapsed. That’s just world history; you don’t have to know about cryptocurrency to know that. -- Nipsey Hussle";
 "quotes_31" = "It’s gold for nerds. -- Stephen Colbert";
 "quotes_32" = "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks. (Bitcoin genesis block memo) -- Satoshi Nakamoto";
+"quotes_33" = "Compound interest is the eighth wonder of the world. He who understands it, earns it … he who doesn't … pays it.
+ -- Albert Einstein";
 
 
 

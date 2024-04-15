@@ -297,6 +297,7 @@ func ALLEVMCLASS() -> [EvmClass] {
     result.append(ChainEthereum())
 //    result.append(ChainAltheaEVM())
     result.append(ChainBaseEVM())
+    result.append(ChainBinanceSmart())
     result.append(ChainCantoEVM())
     result.append(ChainDymensionEVM())
     result.append(ChainEvmosEVM())

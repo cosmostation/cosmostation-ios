@@ -1828,6 +1828,12 @@
 		E1D6B8D22AA499A400177D30 /* CosmosNftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */; };
 		E1D6B8D42AA499B100177D30 /* CosmosAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */; };
 		E1D6B8D52AA499B100177D30 /* CosmosAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */; };
+		E1D931F12BCCD8C700AEEA10 /* AllChainCompoundingStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D931EF2BCCD8C700AEEA10 /* AllChainCompoundingStartVC.swift */; };
+		E1D931F22BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D931F02BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib */; };
+		E1D931F32BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D931F02BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib */; };
+		E1D931F42BCCD8C700AEEA10 /* AllChainCompoundingStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D931EF2BCCD8C700AEEA10 /* AllChainCompoundingStartVC.swift */; };
+		E1D931F62BCD301E00AEEA10 /* ChainBinanceSmart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D931F52BCD301E00AEEA10 /* ChainBinanceSmart.swift */; };
+		E1D931F72BCD301E00AEEA10 /* ChainBinanceSmart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D931F52BCD301E00AEEA10 /* ChainBinanceSmart.swift */; };
 		E1D97C072B9EF65000496807 /* SelectEndpointSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D97C052B9EF65000496807 /* SelectEndpointSheet.swift */; };
 		E1D97C082B9EF65000496807 /* SelectEndpointSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D97C052B9EF65000496807 /* SelectEndpointSheet.swift */; };
 		E1D97C092B9EF65000496807 /* SelectEndpointSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D97C062B9EF65000496807 /* SelectEndpointSheet.xib */; };
@@ -2785,6 +2791,9 @@
 		E1D6B8CD2AA4998E00177D30 /* CosmosTokenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosTokenVC.swift; sourceTree = "<group>"; };
 		E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosNftVC.swift; sourceTree = "<group>"; };
 		E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosAboutVC.swift; sourceTree = "<group>"; };
+		E1D931EF2BCCD8C700AEEA10 /* AllChainCompoundingStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChainCompoundingStartVC.swift; sourceTree = "<group>"; };
+		E1D931F02BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllChainCompoundingStartVC.xib; sourceTree = "<group>"; };
+		E1D931F52BCD301E00AEEA10 /* ChainBinanceSmart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBinanceSmart.swift; sourceTree = "<group>"; };
 		E1D97C052B9EF65000496807 /* SelectEndpointSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEndpointSheet.swift; sourceTree = "<group>"; };
 		E1D97C062B9EF65000496807 /* SelectEndpointSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectEndpointSheet.xib; sourceTree = "<group>"; };
 		E1DBD3DF2B620B760058E0DC /* EvmClass.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = EvmClass.storyboard; path = Cosmostation/Controller/Main/EvmClass/EvmClass.storyboard; sourceTree = SOURCE_ROOT; };
@@ -2952,6 +2961,7 @@
 				04D279EF2A67C98E00AF046A /* ChainEthereum.swift */,
 				04C63D322B87619900D4A366 /* ChainAltheaEVM.swift */,
 				E1989BF62BA81763009B5619 /* ChainBaseEVM.swift */,
+				E1D931F52BCD301E00AEEA10 /* ChainBinanceSmart.swift */,
 				04C63D382B87653C00D4A366 /* ChainCantoEVM.swift */,
 				04C63D3E2B8A1AA300D4A366 /* ChainDymensionEVM.swift */,
 				04C63D2F2B875F1800D4A366 /* ChainEvmosEVM.swift */,
@@ -3977,6 +3987,8 @@
 				0400EE872AD425F9007BA97F /* DappDetailVC.xib */,
 				E1ECE6BD2B1D992D00FDFD91 /* AllChainClaimStartVC.swift */,
 				E1ECE6BE2B1D992D00FDFD91 /* AllChainClaimStartVC.xib */,
+				E1D931EF2BCCD8C700AEEA10 /* AllChainCompoundingStartVC.swift */,
+				E1D931F02BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib */,
 				041540F22BA2E4D500CD5AA1 /* AllChainVoteStartVC.swift */,
 				041540F32BA2E4D500CD5AA1 /* AllChainVoteStartVC.xib */,
 			);
@@ -4475,6 +4487,7 @@
 				04951DC62B7F6E6200A03FB1 /* QrAddressPopup2VC.xib in Resources */,
 				E165ED392B98C9D500C15809 /* basebg09.png in Resources */,
 				E11EAE122AAD8786003BFC7F /* SettingBaseCell.xib in Resources */,
+				E1D931F32BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib in Resources */,
 				E16200442AF279560008F397 /* AddressBookListVC.xib in Resources */,
 				182CCB842BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy in Resources */,
 				0409D2FE2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
@@ -4602,6 +4615,7 @@
 				048F8DC52B28544100432437 /* KavaEarnWithdrawAction.xib in Resources */,
 				04FA74652A9F5833001A2830 /* CreateNameVC.xib in Resources */,
 				E11EAE172AAD879A003BFC7F /* SettingSwitchCell.xib in Resources */,
+				E1D931F22BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib in Resources */,
 				E15F2D122ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */,
 				E10EB5902A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				048427A52B3BE09900C8D7D8 /* NeutronDao.storyboard in Resources */,
@@ -4859,6 +4873,7 @@
 				E14577FD2B3EC50C00EEFA8E /* CosmosClaimCommission.swift in Sources */,
 				047843982AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */,
 				04B789802ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
+				E1D931F72BCD301E00AEEA10 /* ChainBinanceSmart.swift in Sources */,
 				E1D6B8D22AA499A400177D30 /* CosmosNftVC.swift in Sources */,
 				04C817252BA98D75006B800A /* cosmos_base_tendermint_v1beta1_query.pb.swift in Sources */,
 				E11EAE1C2AAD87AD003BFC7F /* SettingPriceCell.swift in Sources */,
@@ -4891,6 +4906,7 @@
 				04C817C12BA98D75006B800A /* cosmos_authz_v1beta1_genesis.pb.swift in Sources */,
 				04C817A52BA98D75006B800A /* cosmos_genutil_module_v1_module.pb.swift in Sources */,
 				04C8175B2BA98D75006B800A /* cosmos_orm_query_v1alpha1_query.pb.swift in Sources */,
+				E1D931F42BCCD8C700AEEA10 /* AllChainCompoundingStartVC.swift in Sources */,
 				04C816D52BA98D75006B800A /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
 				04C8177B2BA98D75006B800A /* cosmos_tx_v1beta1_tx.pb.swift in Sources */,
 				047843DA2AC991B300462F1C /* injective_insurance_v1beta1_insurance.pb.swift in Sources */,
@@ -5609,6 +5625,7 @@
 				E14577FC2B3EC50C00EEFA8E /* CosmosClaimCommission.swift in Sources */,
 				047843972AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */,
 				04B7897F2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
+				E1D931F62BCD301E00AEEA10 /* ChainBinanceSmart.swift in Sources */,
 				E1D6B8D12AA499A400177D30 /* CosmosNftVC.swift in Sources */,
 				04C817242BA98D75006B800A /* cosmos_base_tendermint_v1beta1_query.pb.swift in Sources */,
 				E11EAE1B2AAD87AD003BFC7F /* SettingPriceCell.swift in Sources */,
@@ -5641,6 +5658,7 @@
 				04C817C02BA98D75006B800A /* cosmos_authz_v1beta1_genesis.pb.swift in Sources */,
 				04C817A42BA98D75006B800A /* cosmos_genutil_module_v1_module.pb.swift in Sources */,
 				04C8175A2BA98D75006B800A /* cosmos_orm_query_v1alpha1_query.pb.swift in Sources */,
+				E1D931F12BCCD8C700AEEA10 /* AllChainCompoundingStartVC.swift in Sources */,
 				04C816D42BA98D75006B800A /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
 				04C8177A2BA98D75006B800A /* cosmos_tx_v1beta1_tx.pb.swift in Sources */,
 				E1DF777B2AB75F830028BD51 /* CheckPrivateKeysVC.swift in Sources */,
