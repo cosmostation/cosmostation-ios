@@ -773,6 +773,21 @@ extension CosmosClass {
         return result
     }
     
+    func compoundableRewards() -> [Cosmos_Distribution_V1beta1_DelegationDelegatorReward] {
+        var result = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
+        cosmosRewards?.forEach { reward in
+            if let rewardAmount = reward.reward.filter({ $0.denom == stakeDenom }).first?.getAmount(),
+               let msAsset = BaseData.instance.getAsset(apiName, stakeDenom) {
+                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, true)
+                let value = msPrice.multiplying(by: rewardAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+                if (value.compare(NSDecimalNumber.init(string: "0.1")).rawValue >= 0) {
+                    result.append(reward)
+                }
+            }
+        }
+        return result
+    }
+    
     func commissionAmount(_ denom: String) -> NSDecimalNumber {
         return cosmosCommissions.filter { $0.denom == denom }.first?.getAmount() ?? NSDecimalNumber.zero
     }

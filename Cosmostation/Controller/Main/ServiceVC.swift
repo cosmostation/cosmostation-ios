@@ -127,6 +127,9 @@ extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
             self.present(claimStartVC, animated: true)
             
         } else if (indexPath.row == 2) {
+            let compoundingStartVC = AllChainCompoundingStartVC(nibName: "AllChainCompoundingStartVC", bundle: nil)
+            compoundingStartVC.modalTransitionStyle = .coverVertical
+            self.present(compoundingStartVC, animated: true)
             
         } else if (indexPath.row == 3) {
             let voteStartVC = AllChainVoteStartVC(nibName: "AllChainVoteStartVC", bundle: nil)

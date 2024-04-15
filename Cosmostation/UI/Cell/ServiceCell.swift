@@ -39,7 +39,7 @@ class ServiceCell: UITableViewCell {
         } else if (position == 2) {
             serviceImg.image = UIImage(named: "imgServiceCompunding")
             titleLabel.text = "ALL CHAIN COMPOUNDING"
-            msgLabel.text = "Enjoy the eighth wonder of \nthe world with one click."
+            msgLabel.text = "Enjoy the eighth wonder of \nthe world with a single click."
             
         } else if (position == 3) {
             serviceImg.image = UIImage(named: "imgServiceVote")
