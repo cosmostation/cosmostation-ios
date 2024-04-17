@@ -89,7 +89,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return
         }
-        if (userInput == senderBechAddress || userInput == senderEvmAddress) {
+        if (userInput?.lowercased() == senderBechAddress.lowercased() || userInput?.lowercased()  == senderEvmAddress.lowercased() ) {
             self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
             return
         }
