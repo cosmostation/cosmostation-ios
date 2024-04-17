@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "eth-arb.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
