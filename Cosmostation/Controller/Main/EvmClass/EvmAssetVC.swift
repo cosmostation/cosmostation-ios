@@ -49,7 +49,6 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
     }
@@ -57,23 +56,13 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         refresher.endRefreshing()
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ToggleHideValue"), object: nil)
     }
     
-    @objc func onFetchDone(_ notification: NSNotification) {
+    @objc func onFetchTokenDone(_ notification: NSNotification) {
         let tag = notification.object as! String
         if (selectedChain != nil && selectedChain.tag == tag) {
-            DispatchQueue.main.async {
-                self.refresher.endRefreshing()
-                self.onSortAssets()
-            }
-        }
-    }
-    
-    @objc func onFetchTokenDone(_ notification: NSNotification) {
-        DispatchQueue.main.async {
             self.refresher.endRefreshing()
             self.onSortAssets()
         }
@@ -127,8 +116,10 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
                 }
             }
             
-            loadingView.isHidden = true
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.loadingView.isHidden = true
+                self.tableView.reloadData()
+            }
         }
     }
     
