@@ -84,13 +84,13 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
     }
     
     @objc func onRequestFetch() {
-//        if (selectedChain.fetched == false) {
-//            refresher.endRefreshing()
-//        } else {
-//            DispatchQueue.global().async {
-//                self.selectedChain.fetchData(self.baseAccount.id)
-//            }
-//        }
+        if (selectedChain.fetchState == .Busy) {
+            refresher.endRefreshing()
+        } else {
+            DispatchQueue.global().async {
+                self.selectedChain.fetchData(self.baseAccount.id)
+            }
+        }
     }
     
     func onSortAssets() {
