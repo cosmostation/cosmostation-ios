@@ -1296,6 +1296,12 @@
 "tx_cosmwasm" = "Wasm";
 
 "tx_ethereum_evm" = "Evm Tx";
+"tx_evm_coin_send" = "Evm Send";
+"tx_evm_coin_receive" = "Evm Receive";
+"tx_evm_coin_transfer" = "Evm Transfer";
+"tx_evm_token_send" = "Evm Token Send";
+"tx_evm_token_receive" = "Evm Token Receive";
+"tx_evm_token_transfer" = "Evm Token Transfer";
 
 "tx_crescent_liquid_stake" = "Liquid Stake";
 "tx_crescent_liquid_unstake" = "Liquid Unstake";

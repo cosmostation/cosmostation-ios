@@ -37,7 +37,13 @@ public struct MintscanHistory: Codable {
     }
     
     
-    public func getMsgType(_ address: String) -> String {
+    func getMsgType(_ chain: CosmosClass) -> String {
+        let bechAddress = chain.bechAddress
+        var evmAddress = ""
+        if let evmChain = chain as? EvmClass {
+            evmAddress = evmChain.evmAddress
+        }
+        
         if (getMsgCnt() == 0) {
             return NSLocalizedString("tx_known", comment: "")
         }
@@ -78,9 +84,9 @@ public struct MintscanHistory: Codable {
                 
             } else if (msgType.contains("cosmos.") && msgType.contains("bank")) {
                 if (msgType.contains("MsgSend")) {
-                    if let senderAddr = msgValue["from_address"].string, senderAddr == address {
+                    if let senderAddr = msgValue["from_address"].string, senderAddr == bechAddress {
                         result = NSLocalizedString("tx_send", comment: "")
-                    } else if let receiverAddr = msgValue["to_address"].string, receiverAddr == address {
+                    } else if let receiverAddr = msgValue["to_address"].string, receiverAddr == bechAddress {
                         result = NSLocalizedString("tx_receive", comment: "")
                     } else {
                         result = NSLocalizedString("tx_transfer", comment: "")
@@ -223,9 +229,9 @@ public struct MintscanHistory: Codable {
                     result = NSLocalizedString("tx_nft_mint", comment: "")
                     
                 } else if (msgType.contains("MsgTransferNFT")) {
-                    if let senderAddr = msgValue["sender"].string, senderAddr == address {
+                    if let senderAddr = msgValue["sender"].string, senderAddr == bechAddress {
                         result = NSLocalizedString("tx_nft_send", comment: "")
-                    } else if let receiverAddr = msgValue["recipient"].string, receiverAddr == address {
+                    } else if let receiverAddr = msgValue["recipient"].string, receiverAddr == bechAddress {
                         result = NSLocalizedString("tx_nft_receive", comment: "")
                     } else {
                         result = NSLocalizedString("tx_nft_transfer", comment: "")
@@ -262,9 +268,9 @@ public struct MintscanHistory: Codable {
                     result = NSLocalizedString("tx_nft_mint", comment: "")
                     
                 } else if (msgType.contains("MsgTransferNFT")) {
-                    if let senderAddr = msgValue["sender"].string, senderAddr == address {
+                    if let senderAddr = msgValue["sender"].string, senderAddr == bechAddress {
                         result = NSLocalizedString("tx_nft_send", comment: "")
-                    } else if let receiverAddr = msgValue["recipient"].string, receiverAddr == address {
+                    } else if let receiverAddr = msgValue["recipient"].string, receiverAddr == bechAddress {
                         result = NSLocalizedString("tx_nft_receive", comment: "")
                     } else {
                         result = NSLocalizedString("tx_nft_transfer", comment: "")
@@ -643,9 +649,24 @@ public struct MintscanHistory: Codable {
             }
             
             // evm msg type
-            else if (msgType.contains("ethermint.evm")) {
-                if (msgType.contains("MsgEthereumTx")) {
-                    result = NSLocalizedString("tx_ethereum_evm", comment: "")
+            else if (msgType.contains("ethermint.evm") && msgType.contains("MsgEthereumTx")) {
+                result = NSLocalizedString("tx_ethereum_evm", comment: "")
+                
+                if let dataValue = msgValue.evmDataValue() {
+                    let amount = dataValue["value"].stringValue
+                    let data = dataValue["data"].stringValue
+                    
+                    print("amount ", amount)
+                    print("data ", data)
+                    if (data.isEmpty == true && amount.isEmpty == false && amount != "0") {
+                        if (dataValue["to"].stringValue.lowercased() == evmAddress) {
+                            result = NSLocalizedString("tx_evm_coin_receive", comment: "")
+                        } else {
+                            result = NSLocalizedString("tx_evm_coin_send", comment: "")
+                        }
+                    } else {
+                        //TODO check ERC20
+                    }
                 }
             }
             
@@ -659,6 +680,8 @@ public struct MintscanHistory: Codable {
     
     
     func getDpCoin(_ chain: CosmosClass) -> [Cosmos_Base_V1beta1_Coin]? {
+        let evmChain = chain as? EvmClass
+        
         //display staking reward amount
         var result = Array<Cosmos_Base_V1beta1_Coin>()
         if (getMsgCnt() > 0) {
@@ -786,6 +809,26 @@ public struct MintscanHistory: Codable {
                     }
                     result.append(value)
                 }
+                
+            } else if (msgType.contains("ethermint.evm") && msgType.contains("MsgEthereumTx")) {
+                if let dataValue = msgValue.evmDataValue() {
+                    let amount = dataValue["value"].stringValue
+                    let data = dataValue["data"].stringValue
+                    if (data.isEmpty == true && amount.isEmpty == false && amount != "0") {
+                        let value = Cosmos_Base_V1beta1_Coin.with {
+                            if (evmChain?.tag == "kava60") {
+                                $0.denom = "akava"
+                            } else {
+                                $0.denom = evmChain?.stakeDenom ?? ""
+                            }
+                            $0.amount = amount
+                        }
+                        result.append(value)
+                        
+                    } else {
+                        //erc20 case
+                    }
+                }
             }
         }
         return sortedCoins(chain, result)
@@ -849,5 +892,14 @@ public struct MintscanHistoryData: Codable {
     var timestamp: String?
     var tx: JSON?
     var logs: Array<JSON>?
+    
+}
+
+
+extension JSON {
+    func evmDataValue() -> JSON? {
+        let dataType = self["data"]["@type"].stringValue
+        return self["data"][dataType.replacingOccurrences(of: ".", with: "-")]
+    }
     
 }
