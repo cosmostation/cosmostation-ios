@@ -72,6 +72,12 @@ class HistoryCell: UITableViewCell {
                 coinCntLabel.isHidden = false
             }
         }
+        
+        if let dpToken = history.getDpToken(chain) {
+            WDP.dpToken(dpToken.erc20, dpToken.amount, nil, denomLabel, amountLabel, nil)
+            amountLabel.isHidden = false
+            denomLabel.isHidden = false
+        }
     }
     
     func bindBeaconHistory(_ account: BaseAccount, _ chain: CosmosClass, _ history: BeaconHistory) {

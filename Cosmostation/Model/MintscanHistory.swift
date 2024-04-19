@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import web3swift
 
 
 public struct MintscanHistory: Codable {
@@ -651,21 +652,27 @@ public struct MintscanHistory: Codable {
             // evm msg type
             else if (msgType.contains("ethermint.evm") && msgType.contains("MsgEthereumTx")) {
                 result = NSLocalizedString("tx_ethereum_evm", comment: "")
-                
                 if let dataValue = msgValue.evmDataValue() {
                     let amount = dataValue["value"].stringValue
                     let data = dataValue["data"].stringValue
                     
-                    print("amount ", amount)
-                    print("data ", data)
                     if (data.isEmpty == true && amount.isEmpty == false && amount != "0") {
                         if (dataValue["to"].stringValue.lowercased() == evmAddress) {
                             result = NSLocalizedString("tx_evm_coin_receive", comment: "")
                         } else {
                             result = NSLocalizedString("tx_evm_coin_send", comment: "")
                         }
-                    } else {
-                        //TODO check ERC20
+                        
+                    } else if (data.isEmpty == false) {
+                        if let hexData = Data(base64Encoded: data)?.toHexString() {
+                            if hexData.starts(with: "a9059cbb") {
+                                if (hexData.contains(evmAddress.replacingOccurrences(of: "0x", with: ""))) {
+                                    result = NSLocalizedString("tx_evm_token_receive", comment: "")
+                                } else {
+                                    result = NSLocalizedString("tx_evm_token_send", comment: "")
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -825,13 +832,31 @@ public struct MintscanHistory: Codable {
                         }
                         result.append(value)
                         
-                    } else {
-                        //erc20 case
                     }
                 }
             }
         }
         return sortedCoins(chain, result)
+    }
+    
+    func getDpToken(_ chain: CosmosClass) -> (erc20: MintscanToken, amount: NSDecimalNumber)? {
+        let evmChain = chain as? EvmClass
+        
+        if let firstMsg = getMsgs()?[0],
+           let msgType = firstMsg["@type"].string {
+            let msgValue = firstMsg[msgType.replacingOccurrences(of: ".", with: "-")]
+            
+            if (msgType.contains("ethermint.evm") && msgType.contains("MsgEthereumTx")) {
+                if let dataValue = msgValue.evmDataValue(),
+                   let data = dataValue["data"].string,
+                   let hexData = Data(base64Encoded: data)?.toHexString(),
+                   let contractAddress = dataValue["to"].string,
+                   let erc20 = evmChain?.mintscanErc20Tokens.first { $0.address == contractAddress } {
+                       return (erc20, String(hexData.suffix(64)).hexToNSDecimal())
+                }
+            }
+        }
+        return nil
     }
     
     public func getVoteOption() -> String {
