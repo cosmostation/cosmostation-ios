@@ -1294,13 +1294,15 @@
 "tx_cosmwasm_instantiate" = "Instantiate Contract";
 "tx_cosmwasm_execontract" = "Execute Contract";
 "tx_cosmwasm" = "Wasm";
+"tx_cosmwasm_token_send" = "Wasm Token Send";
+"tx_cosmwasm_token_receive" = "Wasm Token Received";
 
 "tx_ethereum_evm" = "Evm Tx";
 "tx_evm_coin_send" = "Evm Send";
-"tx_evm_coin_receive" = "Evm Receive";
+"tx_evm_coin_receive" = "Evm Received";
 "tx_evm_coin_transfer" = "Evm Transfer";
 "tx_evm_token_send" = "Evm Token Send";
-"tx_evm_token_receive" = "Evm Token Receive";
+"tx_evm_token_receive" = "Evm Token Received";
 "tx_evm_token_transfer" = "Evm Token Transfer";
 
 "tx_crescent_liquid_stake" = "Liquid Stake";

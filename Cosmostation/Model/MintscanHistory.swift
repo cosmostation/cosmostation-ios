@@ -640,9 +640,21 @@ public struct MintscanHistory: Codable {
                 } else if (msgType.contains("MsgExecuteContract")) {
                     if let wasmMsg = msgValue["msg__@stringify"].string,
                        let wasmFunc = try? JSONDecoder().decode(JSON.self, from: wasmMsg.data(using: .utf8) ?? Data()) {
-                        let description = wasmFunc.dictionaryValue.keys.first ?? ""
-                        result = NSLocalizedString("tx_cosmwasm", comment: "") + " " + description
-                        result = result.replacingOccurrences(of: "_", with: " ").capitalized
+                        if let recipient = wasmFunc["transfer"]["recipient"].string,
+                           let amount = wasmFunc["transfer"]["amount"].string {
+                            if (recipient == bechAddress) {
+                                result = NSLocalizedString("tx_cosmwasm_token_receive", comment: "")
+                            } else {
+                                result = NSLocalizedString("tx_cosmwasm_token_send", comment: "")
+                            }
+                            
+                        } else {
+                            let description = wasmFunc.dictionaryValue.keys.first ?? ""
+                            result = NSLocalizedString("tx_cosmwasm", comment: "") + " " + description
+                            result = result.replacingOccurrences(of: "_", with: " ").capitalized
+                            
+                        }
+                        
                     } else {
                         result = NSLocalizedString("tx_cosmwasm_execontract", comment: "")
                     }
@@ -846,7 +858,16 @@ public struct MintscanHistory: Codable {
            let msgType = firstMsg["@type"].string {
             let msgValue = firstMsg[msgType.replacingOccurrences(of: ".", with: "-")]
             
-            if (msgType.contains("ethermint.evm") && msgType.contains("MsgEthereumTx")) {
+            if (msgType.contains("cosmwasm.") && msgType.contains("MsgExecuteContract")) {
+                if let contractAddress = msgValue["contract"].string,
+                   let wasmMsg = msgValue["msg__@stringify"].string,
+                   let wasmFunc = try? JSONDecoder().decode(JSON.self, from: wasmMsg.data(using: .utf8) ?? Data()),
+                   let amount = wasmFunc["transfer"]["amount"].string,
+                   let cw20 = chain.mintscanCw20Tokens.first { $0.address == contractAddress } {
+                       return (cw20, NSDecimalNumber(string: amount))
+                }
+                
+            } else if (msgType.contains("ethermint.evm") && msgType.contains("MsgEthereumTx")) {
                 if let dataValue = msgValue.evmDataValue(),
                    let data = dataValue["data"].string,
                    let hexData = Data(base64Encoded: data)?.toHexString(),
