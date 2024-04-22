@@ -295,7 +295,7 @@ extension EvmClass {
 func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
     result.append(ChainEthereum())
-//    result.append(ChainAltheaEVM())
+    result.append(ChainAltheaEVM())
     result.append(ChainArbitrum())
     result.append(ChainAvalanche())
     result.append(ChainBaseEVM())

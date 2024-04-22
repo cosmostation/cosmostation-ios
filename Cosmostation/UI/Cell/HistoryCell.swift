@@ -12,6 +12,7 @@ class HistoryCell: UITableViewCell {
     
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var msgsTitleLabel: UILabel!
+    @IBOutlet weak var sendtxImg: UIImageView!
     @IBOutlet weak var successImg: UIImageView!
     @IBOutlet weak var hashLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -28,6 +29,7 @@ class HistoryCell: UITableViewCell {
     
     override func prepareForReuse() {
         rootView.setBlur()
+        sendtxImg.isHidden = true
         amountLabel.isHidden = true
         denomLabel.isHidden = true
         coinCntLabel.isHidden = true
@@ -43,6 +45,8 @@ class HistoryCell: UITableViewCell {
         let dpMsgType = history.getMsgType(chain)
         
         msgsTitleLabel.text = dpMsgType
+        sendtxImg.isHidden = (dpMsgType == NSLocalizedString("tx_send", comment: "")) ? false : true
+        
         hashLabel.text = history.data?.txhash
         timeLabel.text = WDP.dpTime(history.header?.timestamp)
         if let height = history.data?.height {

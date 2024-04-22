@@ -251,6 +251,14 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
             hash = oktHistoey[indexPath.row].txId
             
         } else {
+            if let cell = tableView.cellForRow(at: indexPath) as? HistoryCell {
+                if (cell.msgsTitleLabel.text == NSLocalizedString("tx_send", comment: "")) {
+                    let sendResultSheet = SendResultSheet(nibName: "SendResultSheet", bundle: nil)
+                    sendResultSheet.modalTransitionStyle = .coverVertical
+                    self.present(sendResultSheet, animated: true)
+                    return
+                }
+            }
             hash = msHistoryGroup[indexPath.section].values[indexPath.row].data?.txhash
         }
         guard let url = selectedChain.getExplorerTx(hash) else { return }

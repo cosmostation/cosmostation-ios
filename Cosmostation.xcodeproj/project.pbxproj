@@ -1554,6 +1554,10 @@
 		28CE973625872B7C006DEBEE /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE973525872B7C006DEBEE /* Signer.swift */; };
 		28FC030C2652662B001C0319 /* MintscanPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC030B2652662B001C0319 /* MintscanPrice.swift */; };
 		9EBDC03599A6A52BCFB81E33 /* Pods_Cosmostation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA3F07B8EA5FD2C04B9EB807 /* Pods_Cosmostation.framework */; };
+		E1044EA62BD641DB00DA05C2 /* SendResultSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1044EA42BD641DB00DA05C2 /* SendResultSheet.swift */; };
+		E1044EA72BD641DB00DA05C2 /* SendResultSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1044EA52BD641DB00DA05C2 /* SendResultSheet.xib */; };
+		E1044EA82BD641DB00DA05C2 /* SendResultSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1044EA52BD641DB00DA05C2 /* SendResultSheet.xib */; };
+		E1044EA92BD641DB00DA05C2 /* SendResultSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1044EA42BD641DB00DA05C2 /* SendResultSheet.swift */; };
 		E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */; };
 		E10EB58F2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */; };
 		E10EB5902A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */; };
@@ -2654,6 +2658,8 @@
 		9EC086EE8CB71A2FB9E32070 /* Pods-Cosmostation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.release.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.release.xcconfig"; sourceTree = "<group>"; };
 		B033DE716D0CD3ABABAD6866 /* Pods-CosmostationDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.release.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.release.xcconfig"; sourceTree = "<group>"; };
 		BE90772AFD2E77BC9578D8B2 /* Pods_CosmostationDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CosmostationDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1044EA42BD641DB00DA05C2 /* SendResultSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendResultSheet.swift; sourceTree = "<group>"; };
+		E1044EA52BD641DB00DA05C2 /* SendResultSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendResultSheet.xib; sourceTree = "<group>"; };
 		E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
@@ -3523,6 +3529,8 @@
 				044222472B96F2B60063F031 /* SelectDisplayTokenListSheet.xib */,
 				E1D97C052B9EF65000496807 /* SelectEndpointSheet.swift */,
 				E1D97C062B9EF65000496807 /* SelectEndpointSheet.xib */,
+				E1044EA42BD641DB00DA05C2 /* SendResultSheet.swift */,
+				E1044EA52BD641DB00DA05C2 /* SendResultSheet.xib */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -4399,6 +4407,7 @@
 				E1DF77782AB74EE80028BD51 /* CheckPrivateKeyVC.xib in Resources */,
 				E1DF77722AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */,
 				04FA74882AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
+				E1044EA82BD641DB00DA05C2 /* SendResultSheet.xib in Resources */,
 				E15F2D0D2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */,
 				04C940B42AE8D48C00415256 /* aes.js in Resources */,
 				046BF1C32B0F259C00BC1FC8 /* OktValidatorCell.xib in Resources */,
@@ -4639,6 +4648,7 @@
 				E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				0400EF252ADD4737007BA97F /* KavaSwapListVC.xib in Resources */,
 				E15F2D0C2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */,
+				E1044EA72BD641DB00DA05C2 /* SendResultSheet.xib in Resources */,
 				0402B7FA2ACC3F1400824B3F /* VoteCell.xib in Resources */,
 				048F8DBF2B28542F00432437 /* KavaEarnDepositAction.xib in Resources */,
 				E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */,
@@ -5251,6 +5261,7 @@
 				044ECB212A95DE5D0042DB3C /* ChainKi.swift in Sources */,
 				047843C02AC991B300462F1C /* injective_oracle_v1beta1_tx.pb.swift in Sources */,
 				04FAD9FA2AB7221600143A3E /* BaseRedButton.swift in Sources */,
+				E1044EA92BD641DB00DA05C2 /* SendResultSheet.swift in Sources */,
 				0478438E2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */,
 				0438A8092AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift in Sources */,
 				04C816752BA98D74006B800A /* cosmos_protocolpool_module_v1_module.pb.swift in Sources */,
@@ -6006,6 +6017,7 @@
 				04FAD9F92AB7221600143A3E /* BaseRedButton.swift in Sources */,
 				047843BF2AC991B300462F1C /* injective_oracle_v1beta1_tx.pb.swift in Sources */,
 				0478438D2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */,
+				E1044EA62BD641DB00DA05C2 /* SendResultSheet.swift in Sources */,
 				0438A8082AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift in Sources */,
 				E1DBD3EA2B6220EE0058E0DC /* EvmHistoryVC.swift in Sources */,
 				04C816742BA98D74006B800A /* cosmos_protocolpool_module_v1_module.pb.swift in Sources */,

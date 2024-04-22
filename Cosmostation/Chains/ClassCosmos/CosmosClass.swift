@@ -832,7 +832,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.removeAll()
     result.append(ChainCosmos())
     result.append(ChainAkash())
-//    result.append(ChainAlthea118())
+    result.append(ChainAlthea118())
     result.append(ChainArchway())
     result.append(ChainAssetMantle())
     result.append(ChainAxelar())
