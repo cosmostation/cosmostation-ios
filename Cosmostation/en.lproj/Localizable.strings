@@ -396,7 +396,7 @@
 "msg_show_all_proposals" = "Show all proposals.";
 "msg_hide_scam_proposals" = "Filters out suspected of scam proposals.";
 "msg_hide_voted_proposals" = "Filters proposals that have already been voted on.";
-"msg_token_github" = "Currently, the selected chain does not need to manually add tokens to the chain. Cosmostation Wallet displays information for all tokens (CW20, ERC20) with existing quantity.\n\nIf you hold the token but do not see it, try submitting the PR through the Github link below.";
+"msg_token_github" = "Information on all assets and tokens is being developed together with the community.\n\nIf you do not see your token, please provide the GitHub link below to the token issuer or community.\n\nOnce information about the token is registered, it is automatically displayed in your wallets and MintScan.\nNot only you but all users in the community can view and use it together.";
 "msg_node_down" = "▪ Please check the current network status of the device.\n\n▪ If there is a problem with the node you are currently using, you can easily switch to another node through [Settings > Manage Chains] and continue using the service.\n\n ▪ If all nodes are unavailable, the chain being used is being upgraded. Please wait until the upgrade is complete.";
 "msg_vote_all_detail" = "You must select all proposals that are live to vote.\nPlease swipe to exclude proposals that you want to vote on later.";
 "msg_claim_all_detail" = "Check the reward amount and Tx fee amount.\nPlease swipe to exclude rewards you would like to receive in the future.";
