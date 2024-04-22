@@ -1164,7 +1164,7 @@
 "tx_multi_send" = "멀티 보내기";
 "tx_multi_received" = "멀티 받기";
 "tx_multi_transfer" = "멀티 전송";
-"tx_delegate" = "스테이킹";
+"tx_delegate" = "위임";
 "tx_undelegate" = "위임 철회";
 "tx_cancel_undelegate" = "위임 철회 취소";
 "tx_redelegate" = "재위임";

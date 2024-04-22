@@ -62,10 +62,7 @@ public struct MintscanHistory: Codable {
             //check send case
             var allSend = true
             getMsgs()?.forEach({ msg in
-                if let typeString = msg["@type"].string,
-                   typeString.contains("cosmos.") == false,
-                   typeString.contains("bank") == false,
-                   typeString.contains("MsgSend") == false  {
+                if (msg["@type"].string?.contains("MsgSend") == false) {
                     allSend = false
                 }
             })
@@ -774,14 +771,10 @@ public struct MintscanHistory: Codable {
             //check send case
             var allSend = true
             getMsgs()?.forEach({ msg in
-                if let typeString = msg["@type"].string,
-                   typeString.contains("cosmos.") == false,
-                   typeString.contains("bank") == false,
-                   typeString.contains("MsgSend") == false  {
+                if (msg["@type"].string?.contains("MsgSend") == false) {
                     allSend = false
                 }
             })
-            
             if (allSend) {
                 for msg in getMsgs()! {
                     let msgType = msg["@type"].stringValue
