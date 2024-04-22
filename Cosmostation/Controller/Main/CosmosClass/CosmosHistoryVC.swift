@@ -254,6 +254,8 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
             if let cell = tableView.cellForRow(at: indexPath) as? HistoryCell {
                 if (cell.msgsTitleLabel.text == NSLocalizedString("tx_send", comment: "")) {
                     let sendResultSheet = SendResultSheet(nibName: "SendResultSheet", bundle: nil)
+                    sendResultSheet.selectedChain = selectedChain
+                    sendResultSheet.selectedHistory = msHistoryGroup[indexPath.section].values[indexPath.row]
                     sendResultSheet.modalTransitionStyle = .coverVertical
                     self.present(sendResultSheet, animated: true)
                     return

@@ -208,7 +208,10 @@
 "str_show_all_proposal" = "라이브 프로포절";
 "str_hide_done_proposal" = "내가 투표한 프로포절 제외";
 "str_compoundable_chains" = "컴파운딩 대상 체인";
-"str_compounding_all" = "모투 컴파운딩";
+"str_compounding_all" = "모두 컴파운딩";
+"str_send_info" = "전송 상세 정보";
+"str_send_address" = "보낸 주소";
+
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";

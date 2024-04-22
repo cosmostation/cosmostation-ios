@@ -209,6 +209,8 @@
 "str_hide_done_proposal" = "Excluding voted Proposals";
 "str_compoundable_chains" = "Compoundable Chains";
 "str_compounding_all" = "Compoundable All";
+"str_send_info" = "Send Detail Info";
+"str_send_address" = "Send Address";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
