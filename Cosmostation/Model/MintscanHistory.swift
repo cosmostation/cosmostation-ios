@@ -120,7 +120,19 @@ public struct MintscanHistory: Codable {
                     }
                     
                 } else if (msgType.contains("MsgMultiSend")) {
-                    result = NSLocalizedString("tx_multi_send", comment: "")
+                    result = NSLocalizedString("tx_multi_transfer", comment: "")
+                    for input in msgValue["inputs"].arrayValue {
+                        if (input["address"].string == bechAddress) {
+                            result = NSLocalizedString("tx_multi_send", comment: "")
+                            break
+                        }
+                    }
+                    for output in msgValue["outputs"].arrayValue {
+                        if (output["address"].string == bechAddress) {
+                            result = NSLocalizedString("tx_multi_received", comment: "")
+                            break
+                        }
+                    }
                 }
                 
             } else if (msgType.contains("cosmos.") && msgType.contains("distribution")) {
@@ -872,6 +884,28 @@ public struct MintscanHistory: Codable {
                     result.append(value)
                 }
 
+            } else if (msgType.contains("MsgMultiSend")) {
+                for input in msgValue["inputs"].arrayValue {
+                    if (input["address"].string == chain.bechAddress) {
+                        let value = Cosmos_Base_V1beta1_Coin.with {
+                            $0.denom = input["coins"][0]["denom"].stringValue
+                            $0.amount = input["coins"][0]["amount"].stringValue
+                        }
+                        result.append(value)
+                        break
+                    }
+                }
+                for output in msgValue["outputs"].arrayValue {
+                    if (output["address"].string == chain.bechAddress) {
+                        let value = Cosmos_Base_V1beta1_Coin.with {
+                            $0.denom = output["coins"][0]["denom"].stringValue
+                            $0.amount = output["coins"][0]["amount"].stringValue
+                        }
+                        result.append(value)
+                        break
+                    }
+                }
+                
             } else if (msgType.contains("MsgDelegate") || msgType.contains("MsgUndelegate") ||
                        msgType.contains("MsgBeginRedelegate") || msgType.contains("MsgCancelUnbondingDelegation")) {
                 let rawAmount = msgValue["amount"]
