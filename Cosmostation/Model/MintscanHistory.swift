@@ -57,6 +57,32 @@ public struct MintscanHistory: Codable {
             }
         }
         
+        
+        if (getMsgCnt() > 1) {
+            //check send case
+            var allSend = true
+            getMsgs()?.forEach({ msg in
+                if let typeString = msg["@type"].string,
+                   typeString.contains("cosmos.") == false,
+                   typeString.contains("bank") == false,
+                   typeString.contains("MsgSend") == false  {
+                    allSend = false
+                }
+            })
+            if (allSend) {
+                for msg in getMsgs()! {
+                    let msgType = msg["@type"].stringValue
+                    let msgValue = msg[msgType.replacingOccurrences(of: ".", with: "-")]
+                    if let senderAddr = msgValue["from_address"].string, senderAddr == bechAddress {
+                        return NSLocalizedString("tx_send", comment: "") + " + " + String(getMsgCnt() - 1)
+                    } else if let receiverAddr = msgValue["to_address"].string, receiverAddr == bechAddress {
+                        return NSLocalizedString("tx_receive", comment: "") + " + " + String(getMsgCnt() - 1)
+                    }
+                }
+                return NSLocalizedString("tx_transfer", comment: "") + " + " + String(getMsgCnt() - 1)
+            }
+        }
+        
         var result = NSLocalizedString("tx_known", comment: "")
         if let firstMsg = getMsgs()?[0],
            let msgType = firstMsg["@type"].string {
@@ -701,9 +727,10 @@ public struct MintscanHistory: Codable {
     func getDpCoin(_ chain: CosmosClass) -> [Cosmos_Base_V1beta1_Coin]? {
         let evmChain = chain as? EvmClass
         
-        //display staking reward amount
+        
         var result = Array<Cosmos_Base_V1beta1_Coin>()
         if (getMsgCnt() > 0) {
+            //display staking reward amount
             var allReward = true
             getMsgs()?.forEach({ msg in
                 if (msg["@type"].string?.contains("MsgWithdrawDelegatorReward") == false) {
@@ -730,6 +757,43 @@ public struct MintscanHistory: Codable {
                     }
                 })
                 return sortedCoins(chain, result)
+            }
+            
+            //check send case
+            var allSend = true
+            getMsgs()?.forEach({ msg in
+                if let typeString = msg["@type"].string,
+                   typeString.contains("cosmos.") == false,
+                   typeString.contains("bank") == false,
+                   typeString.contains("MsgSend") == false  {
+                    allSend = false
+                }
+            })
+            
+            if (allSend) {
+                for msg in getMsgs()! {
+                    let msgType = msg["@type"].stringValue
+                    let msgValue = msg[msgType.replacingOccurrences(of: ".", with: "-")]
+                    if let senderAddr = msgValue["from_address"].string, senderAddr == chain.bechAddress {
+                        if let rawAmounts = msgValue["amount"].array {
+                            let value = Cosmos_Base_V1beta1_Coin.with {
+                                $0.denom = rawAmounts[0]["denom"].stringValue
+                                $0.amount = rawAmounts[0]["amount"].stringValue
+                            }
+                            result.append(value)
+                        }
+                        return sortedCoins(chain, result)
+                    } else if let receiverAddr = msgValue["to_address"].string, receiverAddr == chain.bechAddress {
+                        if let rawAmounts = msgValue["amount"].array {
+                            let value = Cosmos_Base_V1beta1_Coin.with {
+                                $0.denom = rawAmounts[0]["denom"].stringValue
+                                $0.amount = rawAmounts[0]["amount"].stringValue
+                            }
+                            result.append(value)
+                        }
+                        return sortedCoins(chain, result)
+                    }
+                }
             }
             
             
