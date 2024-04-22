@@ -532,6 +532,26 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             affiliate["address"].stringValue = "neutron1clpqr4nrk4khgkxj78fcwwh6dl3uw4ep35p7l8"
             affiliate["basis_points_fee"].stringValue = "100"
             return [affiliate]
+        } else if (venue["chain_id"].stringValue.contains("phoenix")) {
+            var affiliate = JSON()
+            affiliate["address"].stringValue = "terra1564j3fq8p8np4yhh4lytnftz33japc03wuejxm"
+            affiliate["basis_points_fee"].stringValue = "100"
+            return [affiliate]
+        } else if (venue["chain_id"].stringValue.contains("injective")) {
+            var affiliate = JSON()
+            affiliate["address"].stringValue = "inj1rvqzf9u2uxttmshn302anlknfgsatrh5mcu6la"
+            affiliate["basis_points_fee"].stringValue = "100"
+            return [affiliate]
+        } else if (venue["chain_id"].stringValue.contains("pacific")) {
+            var affiliate = JSON()
+            affiliate["address"].stringValue = "sei1hnkkqnzwmyw652muh6wfea7xlfgplnyj3edm09"
+            affiliate["basis_points_fee"].stringValue = "100"
+            return [affiliate]
+        } else if (venue["chain_id"].stringValue.contains("chihuahua")) {
+            var affiliate = JSON()
+            affiliate["address"].stringValue = "chihuahua1tgcypttehx3afugys6eq28h0kpmswfkgcuewfw"
+            affiliate["basis_points_fee"].stringValue = "100"
+            return [affiliate]
         }
         return nil
     }

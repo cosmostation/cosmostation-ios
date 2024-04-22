@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import web3swift
 
 
 public struct MintscanHistory: Codable {
@@ -37,7 +38,13 @@ public struct MintscanHistory: Codable {
     }
     
     
-    public func getMsgType(_ address: String) -> String {
+    func getMsgType(_ chain: CosmosClass) -> String {
+        let bechAddress = chain.bechAddress
+        var evmAddress = ""
+        if let evmChain = chain as? EvmClass {
+            evmAddress = evmChain.evmAddress
+        }
+        
         if (getMsgCnt() == 0) {
             return NSLocalizedString("tx_known", comment: "")
         }
@@ -47,6 +54,29 @@ public struct MintscanHistory: Codable {
             let msgType1 = getMsgs()?[1]["@type"].string {
             if ((msgType0.contains("MsgWithdrawDelegatorReward") || msgType0.contains("MsgWithdrawDelegationReward")) && msgType1.contains("MsgDelegate")) {
                 return NSLocalizedString("tx_reinvest", comment: "")
+            }
+        }
+        
+        
+        if (getMsgCnt() > 1) {
+            //check send case
+            var allSend = true
+            getMsgs()?.forEach({ msg in
+                if (msg["@type"].string?.contains("MsgSend") == false) {
+                    allSend = false
+                }
+            })
+            if (allSend) {
+                for msg in getMsgs()! {
+                    let msgType = msg["@type"].stringValue
+                    let msgValue = msg[msgType.replacingOccurrences(of: ".", with: "-")]
+                    if let senderAddr = msgValue["from_address"].string, senderAddr == bechAddress {
+                        return NSLocalizedString("tx_send", comment: "") + " + " + String(getMsgCnt() - 1)
+                    } else if let receiverAddr = msgValue["to_address"].string, receiverAddr == bechAddress {
+                        return NSLocalizedString("tx_receive", comment: "") + " + " + String(getMsgCnt() - 1)
+                    }
+                }
+                return NSLocalizedString("tx_transfer", comment: "") + " + " + String(getMsgCnt() - 1)
             }
         }
         
@@ -78,16 +108,28 @@ public struct MintscanHistory: Codable {
                 
             } else if (msgType.contains("cosmos.") && msgType.contains("bank")) {
                 if (msgType.contains("MsgSend")) {
-                    if let senderAddr = msgValue["from_address"].string, senderAddr == address {
+                    if let senderAddr = msgValue["from_address"].string, senderAddr == bechAddress {
                         result = NSLocalizedString("tx_send", comment: "")
-                    } else if let receiverAddr = msgValue["to_address"].string, receiverAddr == address {
+                    } else if let receiverAddr = msgValue["to_address"].string, receiverAddr == bechAddress {
                         result = NSLocalizedString("tx_receive", comment: "")
                     } else {
                         result = NSLocalizedString("tx_transfer", comment: "")
                     }
                     
                 } else if (msgType.contains("MsgMultiSend")) {
-                    result = NSLocalizedString("tx_multi_send", comment: "")
+                    result = NSLocalizedString("tx_multi_transfer", comment: "")
+                    for input in msgValue["inputs"].arrayValue {
+                        if (input["address"].string == bechAddress) {
+                            result = NSLocalizedString("tx_multi_send", comment: "")
+                            break
+                        }
+                    }
+                    for output in msgValue["outputs"].arrayValue {
+                        if (output["address"].string == bechAddress) {
+                            result = NSLocalizedString("tx_multi_received", comment: "")
+                            break
+                        }
+                    }
                 }
                 
             } else if (msgType.contains("cosmos.") && msgType.contains("distribution")) {
@@ -223,9 +265,9 @@ public struct MintscanHistory: Codable {
                     result = NSLocalizedString("tx_nft_mint", comment: "")
                     
                 } else if (msgType.contains("MsgTransferNFT")) {
-                    if let senderAddr = msgValue["sender"].string, senderAddr == address {
+                    if let senderAddr = msgValue["sender"].string, senderAddr == bechAddress {
                         result = NSLocalizedString("tx_nft_send", comment: "")
-                    } else if let receiverAddr = msgValue["recipient"].string, receiverAddr == address {
+                    } else if let receiverAddr = msgValue["recipient"].string, receiverAddr == bechAddress {
                         result = NSLocalizedString("tx_nft_receive", comment: "")
                     } else {
                         result = NSLocalizedString("tx_nft_transfer", comment: "")
@@ -262,9 +304,9 @@ public struct MintscanHistory: Codable {
                     result = NSLocalizedString("tx_nft_mint", comment: "")
                     
                 } else if (msgType.contains("MsgTransferNFT")) {
-                    if let senderAddr = msgValue["sender"].string, senderAddr == address {
+                    if let senderAddr = msgValue["sender"].string, senderAddr == bechAddress {
                         result = NSLocalizedString("tx_nft_send", comment: "")
-                    } else if let receiverAddr = msgValue["recipient"].string, receiverAddr == address {
+                    } else if let receiverAddr = msgValue["recipient"].string, receiverAddr == bechAddress {
                         result = NSLocalizedString("tx_nft_receive", comment: "")
                     } else {
                         result = NSLocalizedString("tx_nft_transfer", comment: "")
@@ -633,9 +675,21 @@ public struct MintscanHistory: Codable {
                 } else if (msgType.contains("MsgExecuteContract")) {
                     if let wasmMsg = msgValue["msg__@stringify"].string,
                        let wasmFunc = try? JSONDecoder().decode(JSON.self, from: wasmMsg.data(using: .utf8) ?? Data()) {
-                        let description = wasmFunc.dictionaryValue.keys.first ?? ""
-                        result = NSLocalizedString("tx_cosmwasm", comment: "") + " " + description
-                        result = result.replacingOccurrences(of: "_", with: " ").capitalized
+                        if let recipient = wasmFunc["transfer"]["recipient"].string,
+                           let amount = wasmFunc["transfer"]["amount"].string {
+                            if (recipient == bechAddress) {
+                                result = NSLocalizedString("tx_cosmwasm_token_receive", comment: "")
+                            } else {
+                                result = NSLocalizedString("tx_cosmwasm_token_send", comment: "")
+                            }
+                            
+                        } else {
+                            let description = wasmFunc.dictionaryValue.keys.first ?? ""
+                            result = NSLocalizedString("tx_cosmwasm", comment: "") + " " + description
+                            result = result.replacingOccurrences(of: "_", with: " ").capitalized
+                            
+                        }
+                        
                     } else {
                         result = NSLocalizedString("tx_cosmwasm_execontract", comment: "")
                     }
@@ -643,9 +697,30 @@ public struct MintscanHistory: Codable {
             }
             
             // evm msg type
-            else if (msgType.contains("ethermint.evm")) {
-                if (msgType.contains("MsgEthereumTx")) {
-                    result = NSLocalizedString("tx_ethereum_evm", comment: "")
+            else if (msgType.contains("ethermint.evm") && msgType.contains("MsgEthereumTx")) {
+                result = NSLocalizedString("tx_ethereum_evm", comment: "")
+                if let dataValue = msgValue.evmDataValue() {
+                    let amount = dataValue["value"].stringValue
+                    let data = dataValue["data"].stringValue
+                    
+                    if (data.isEmpty == true && amount.isEmpty == false && amount != "0") {
+                        if (dataValue["to"].stringValue.lowercased() == evmAddress) {
+                            result = NSLocalizedString("tx_evm_coin_receive", comment: "")
+                        } else {
+                            result = NSLocalizedString("tx_evm_coin_send", comment: "")
+                        }
+                        
+                    } else if (data.isEmpty == false) {
+                        if let hexData = Data(base64Encoded: data)?.toHexString() {
+                            if hexData.starts(with: "a9059cbb") {
+                                if (hexData.contains(evmAddress.replacingOccurrences(of: "0x", with: ""))) {
+                                    result = NSLocalizedString("tx_evm_token_receive", comment: "")
+                                } else {
+                                    result = NSLocalizedString("tx_evm_token_send", comment: "")
+                                }
+                            }
+                        }
+                    }
                 }
             }
             
@@ -659,9 +734,12 @@ public struct MintscanHistory: Codable {
     
     
     func getDpCoin(_ chain: CosmosClass) -> [Cosmos_Base_V1beta1_Coin]? {
-        //display staking reward amount
+        let evmChain = chain as? EvmClass
+        
+        
         var result = Array<Cosmos_Base_V1beta1_Coin>()
         if (getMsgCnt() > 0) {
+            //display staking reward amount
             var allReward = true
             getMsgs()?.forEach({ msg in
                 if (msg["@type"].string?.contains("MsgWithdrawDelegatorReward") == false) {
@@ -688,6 +766,39 @@ public struct MintscanHistory: Codable {
                     }
                 })
                 return sortedCoins(chain, result)
+            }
+            
+            //check send case
+            var allSend = true
+            getMsgs()?.forEach({ msg in
+                if (msg["@type"].string?.contains("MsgSend") == false) {
+                    allSend = false
+                }
+            })
+            if (allSend) {
+                for msg in getMsgs()! {
+                    let msgType = msg["@type"].stringValue
+                    let msgValue = msg[msgType.replacingOccurrences(of: ".", with: "-")]
+                    if let senderAddr = msgValue["from_address"].string, senderAddr == chain.bechAddress {
+                        if let rawAmounts = msgValue["amount"].array {
+                            let value = Cosmos_Base_V1beta1_Coin.with {
+                                $0.denom = rawAmounts[0]["denom"].stringValue
+                                $0.amount = rawAmounts[0]["amount"].stringValue
+                            }
+                            result.append(value)
+                        }
+                        return sortedCoins(chain, result)
+                    } else if let receiverAddr = msgValue["to_address"].string, receiverAddr == chain.bechAddress {
+                        if let rawAmounts = msgValue["amount"].array {
+                            let value = Cosmos_Base_V1beta1_Coin.with {
+                                $0.denom = rawAmounts[0]["denom"].stringValue
+                                $0.amount = rawAmounts[0]["amount"].stringValue
+                            }
+                            result.append(value)
+                        }
+                        return sortedCoins(chain, result)
+                    }
+                }
             }
             
             
@@ -766,6 +877,28 @@ public struct MintscanHistory: Codable {
                     result.append(value)
                 }
 
+            } else if (msgType.contains("MsgMultiSend")) {
+                for input in msgValue["inputs"].arrayValue {
+                    if (input["address"].string == chain.bechAddress) {
+                        let value = Cosmos_Base_V1beta1_Coin.with {
+                            $0.denom = input["coins"][0]["denom"].stringValue
+                            $0.amount = input["coins"][0]["amount"].stringValue
+                        }
+                        result.append(value)
+                        break
+                    }
+                }
+                for output in msgValue["outputs"].arrayValue {
+                    if (output["address"].string == chain.bechAddress) {
+                        let value = Cosmos_Base_V1beta1_Coin.with {
+                            $0.denom = output["coins"][0]["denom"].stringValue
+                            $0.amount = output["coins"][0]["amount"].stringValue
+                        }
+                        result.append(value)
+                        break
+                    }
+                }
+                
             } else if (msgType.contains("MsgDelegate") || msgType.contains("MsgUndelegate") ||
                        msgType.contains("MsgBeginRedelegate") || msgType.contains("MsgCancelUnbondingDelegation")) {
                 let rawAmount = msgValue["amount"]
@@ -786,9 +919,56 @@ public struct MintscanHistory: Codable {
                     }
                     result.append(value)
                 }
+                
+            } else if (msgType.contains("ethermint.evm") && msgType.contains("MsgEthereumTx")) {
+                if let dataValue = msgValue.evmDataValue() {
+                    let amount = dataValue["value"].stringValue
+                    let data = dataValue["data"].stringValue
+                    if (data.isEmpty == true && amount.isEmpty == false && amount != "0") {
+                        let value = Cosmos_Base_V1beta1_Coin.with {
+                            if (evmChain?.tag == "kava60") {
+                                $0.denom = "akava"
+                            } else {
+                                $0.denom = evmChain?.stakeDenom ?? ""
+                            }
+                            $0.amount = amount
+                        }
+                        result.append(value)
+                        
+                    }
+                }
             }
         }
         return sortedCoins(chain, result)
+    }
+    
+    func getDpToken(_ chain: CosmosClass) -> (erc20: MintscanToken, amount: NSDecimalNumber)? {
+        let evmChain = chain as? EvmClass
+        
+        if let firstMsg = getMsgs()?[0],
+           let msgType = firstMsg["@type"].string {
+            let msgValue = firstMsg[msgType.replacingOccurrences(of: ".", with: "-")]
+            
+            if (msgType.contains("cosmwasm.") && msgType.contains("MsgExecuteContract")) {
+                if let contractAddress = msgValue["contract"].string,
+                   let wasmMsg = msgValue["msg__@stringify"].string,
+                   let wasmFunc = try? JSONDecoder().decode(JSON.self, from: wasmMsg.data(using: .utf8) ?? Data()),
+                   let amount = wasmFunc["transfer"]["amount"].string,
+                   let cw20 = chain.mintscanCw20Tokens.first { $0.address == contractAddress } {
+                       return (cw20, NSDecimalNumber(string: amount))
+                }
+                
+            } else if (msgType.contains("ethermint.evm") && msgType.contains("MsgEthereumTx")) {
+                if let dataValue = msgValue.evmDataValue(),
+                   let data = dataValue["data"].string,
+                   let hexData = Data(base64Encoded: data)?.toHexString(),
+                   let contractAddress = dataValue["to"].string,
+                   let erc20 = evmChain?.mintscanErc20Tokens.first { $0.address == contractAddress } {
+                       return (erc20, String(hexData.suffix(64)).hexToNSDecimal())
+                }
+            }
+        }
+        return nil
     }
     
     public func getVoteOption() -> String {
@@ -849,5 +1029,14 @@ public struct MintscanHistoryData: Codable {
     var timestamp: String?
     var tx: JSON?
     var logs: Array<JSON>?
+    
+}
+
+
+extension JSON {
+    func evmDataValue() -> JSON? {
+        let dataType = self["data"]["@type"].stringValue
+        return self["data"][dataType.replacingOccurrences(of: ".", with: "-")]
+    }
     
 }

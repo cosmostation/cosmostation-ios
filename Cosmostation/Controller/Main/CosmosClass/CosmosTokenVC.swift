@@ -57,11 +57,15 @@ class CosmosTokenVC: BaseVC {
     }
     
     @objc func onRequestFetch() {
-        Task {
-            if (selectedChain.supportCw20) {
-                selectedChain.fetchAllCw20Balance(baseAccount.id)
-            } else if let evmChain = selectedChain as? EvmClass {
-                 await evmChain.fetchAllErc20Balance(baseAccount.id)
+        if (selectedChain.fetchState == .Busy) {
+            refresher.endRefreshing()
+        } else {
+            Task {
+                if (selectedChain.supportCw20) {
+                    selectedChain.fetchAllCw20Balance(baseAccount.id)
+                } else if let evmChain = selectedChain as? EvmClass {
+                     await evmChain.fetchAllErc20Balance(baseAccount.id)
+                }
             }
         }
     }

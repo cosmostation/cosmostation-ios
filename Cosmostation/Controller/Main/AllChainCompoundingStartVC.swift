@@ -77,7 +77,7 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
         if (baseAccount.getDisplayCosmosChains().filter { $0.fetchState == .Busy }.count == 0 &&
             baseAccount.getDisplayEvmChains().filter { $0.fetchState == .Busy }.count == 0) {
             
-            baseAccount.getDisplayCosmosChains().forEach { chain in
+            baseAccount.getDisplayCosmosChains().filter { $0.rewardAddress == $0.bechAddress }.forEach { chain in
                 let compoundable = chain.compoundableRewards()
                 let txFee = chain.getInitPayableFee()
                 if (compoundable.count > 0 && txFee != nil) {
@@ -85,7 +85,7 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
                 }
             }
             
-            baseAccount.getDisplayEvmChains().filter { $0.supportCosmos == true }.forEach { chain in
+            baseAccount.getDisplayEvmChains().filter { $0.rewardAddress == $0.bechAddress && $0.supportCosmos == true }.forEach { chain in
                 let compoundable = chain.compoundableRewards()
                 let txFee = chain.getInitPayableFee()
                 if (compoundable.count > 0 && txFee != nil) {

@@ -12,6 +12,7 @@ class HistoryCell: UITableViewCell {
     
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var msgsTitleLabel: UILabel!
+    @IBOutlet weak var sendtxImg: UIImageView!
     @IBOutlet weak var successImg: UIImageView!
     @IBOutlet weak var hashLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -28,6 +29,7 @@ class HistoryCell: UITableViewCell {
     
     override func prepareForReuse() {
         rootView.setBlur()
+        sendtxImg.isHidden = true
         amountLabel.isHidden = true
         denomLabel.isHidden = true
         coinCntLabel.isHidden = true
@@ -40,8 +42,11 @@ class HistoryCell: UITableViewCell {
         } else {
             successImg.image = UIImage(named: "iconFail")
         }
+        let dpMsgType = history.getMsgType(chain)
         
-        msgsTitleLabel.text = history.getMsgType(chain.bechAddress)
+        msgsTitleLabel.text = dpMsgType
+        sendtxImg.isHidden = (dpMsgType == NSLocalizedString("tx_send", comment: "")) ? false : true
+        
         hashLabel.text = history.data?.txhash
         timeLabel.text = WDP.dpTime(history.header?.timestamp)
         if let height = history.data?.height {
@@ -51,7 +56,7 @@ class HistoryCell: UITableViewCell {
             blockLabel.isHidden = true
         }
         
-        if (NSLocalizedString("tx_vote", comment: "") == history.getMsgType(chain.bechAddress)) {
+        if (NSLocalizedString("tx_vote", comment: "") == dpMsgType) {
             denomLabel.text = history.getVoteOption()
             denomLabel.isHidden = false
             denomLabel.textColor = .color01
@@ -70,6 +75,12 @@ class HistoryCell: UITableViewCell {
                 coinCntLabel.text = "+" + String(dpCoins.count - 1)
                 coinCntLabel.isHidden = false
             }
+        }
+        
+        if let dpToken = history.getDpToken(chain) {
+            WDP.dpToken(dpToken.erc20, dpToken.amount, nil, denomLabel, amountLabel, nil)
+            amountLabel.isHidden = false
+            denomLabel.isHidden = false
         }
     }
     

@@ -13,7 +13,7 @@ class ChainBinanceSmart: EvmClass  {
     override init() {
         super.init()
         
-        name = "Binance Smart"
+        name = "BSC"
         tag = "binance60"
         logo1 = "chainBinanceSmart"
         logo2 = "chainBinanceSmart2"

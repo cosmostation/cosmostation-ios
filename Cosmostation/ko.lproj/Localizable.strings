@@ -208,7 +208,10 @@
 "str_show_all_proposal" = "라이브 프로포절";
 "str_hide_done_proposal" = "내가 투표한 프로포절 제외";
 "str_compoundable_chains" = "컴파운딩 대상 체인";
-"str_compounding_all" = "모투 컴파운딩";
+"str_compounding_all" = "모두 컴파운딩";
+"str_send_info" = "전송 상세 정보";
+"str_send_address" = "보낸 주소";
+
 
 "str_tx_status" = "결과";
 "str_tx_height" = "블록 높이";
@@ -1161,8 +1164,10 @@
 "tx_send" = "보내기";
 "tx_receive" = "받기";
 "tx_transfer" = "전송하기";
-"tx_multi_send" = "멀티 전송";
-"tx_delegate" = "스테이킹";
+"tx_multi_send" = "멀티 보내기";
+"tx_multi_received" = "멀티 받기";
+"tx_multi_transfer" = "멀티 전송";
+"tx_delegate" = "위임";
 "tx_undelegate" = "위임 철회";
 "tx_cancel_undelegate" = "위임 철회 취소";
 "tx_redelegate" = "재위임";
@@ -1291,9 +1296,17 @@
 "tx_cosmwasm_store_code" = "컨트랙트 코드 저장";
 "tx_cosmwasm_instantiate" = "컨트랙트 인스턴트화";
 "tx_cosmwasm_execontract" = "컨트랙트 실행";
-"tx_cosmwasm" = "와즘";
+"tx_cosmwasm" = "Wasm";
+"tx_cosmwasm_token_send" = "Wasm 토큰 보내기";
+"tx_cosmwasm_token_receive" = "Wasm 토큰 받기";
 
 "tx_ethereum_evm" = "Evm Tx";
+"tx_evm_coin_send" = "Evm 보내기";
+"tx_evm_coin_receive" = "Evm 받기";
+"tx_evm_coin_transfer" = "Evm 전송";
+"tx_evm_token_send" = "Evm 토큰 보내기";
+"tx_evm_token_receive" = "Evm 토큰 받기";
+"tx_evm_token_transfer" = "Evm 토큰 전송";
 
 "tx_crescent_liquid_stake" = "유동성 스테이크";
 "tx_crescent_liquid_unstake" = "유동성 언스테이크";

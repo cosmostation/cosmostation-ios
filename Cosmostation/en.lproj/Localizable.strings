@@ -209,6 +209,8 @@
 "str_hide_done_proposal" = "Excluding voted Proposals";
 "str_compoundable_chains" = "Compoundable Chains";
 "str_compounding_all" = "Compoundable All";
+"str_send_info" = "Send Detail Info";
+"str_send_address" = "Send Address";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -1164,6 +1166,8 @@
 "tx_receive" = "Received";
 "tx_transfer" = "Transfer";
 "tx_multi_send" = "Multi Send";
+"tx_multi_received" = "Multi Received";
+"tx_multi_transfer" = "Multi Transfer";
 "tx_delegate" = "Delegate";
 "tx_undelegate" = "Undelegate";
 "tx_cancel_undelegate" = "Cancel Undelegate";
@@ -1294,8 +1298,16 @@
 "tx_cosmwasm_instantiate" = "Instantiate Contract";
 "tx_cosmwasm_execontract" = "Execute Contract";
 "tx_cosmwasm" = "Wasm";
+"tx_cosmwasm_token_send" = "Wasm Token Send";
+"tx_cosmwasm_token_receive" = "Wasm Token Received";
 
 "tx_ethereum_evm" = "Evm Tx";
+"tx_evm_coin_send" = "Evm Send";
+"tx_evm_coin_receive" = "Evm Received";
+"tx_evm_coin_transfer" = "Evm Transfer";
+"tx_evm_token_send" = "Evm Token Send";
+"tx_evm_token_receive" = "Evm Token Received";
+"tx_evm_token_transfer" = "Evm Token Transfer";
 
 "tx_crescent_liquid_stake" = "Liquid Stake";
 "tx_crescent_liquid_unstake" = "Liquid Unstake";
