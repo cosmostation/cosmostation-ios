@@ -1558,6 +1558,10 @@
 		E1044EA72BD641DB00DA05C2 /* SendResultSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1044EA52BD641DB00DA05C2 /* SendResultSheet.xib */; };
 		E1044EA82BD641DB00DA05C2 /* SendResultSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1044EA52BD641DB00DA05C2 /* SendResultSheet.xib */; };
 		E1044EA92BD641DB00DA05C2 /* SendResultSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1044EA42BD641DB00DA05C2 /* SendResultSheet.swift */; };
+		E1044EAC2BD798BC00DA05C2 /* NftTransfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1044EAB2BD798BC00DA05C2 /* NftTransfer.xib */; };
+		E1044EAD2BD798BC00DA05C2 /* NftTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1044EAA2BD798BC00DA05C2 /* NftTransfer.swift */; };
+		E1044EAE2BD798BC00DA05C2 /* NftTransfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1044EAB2BD798BC00DA05C2 /* NftTransfer.xib */; };
+		E1044EAF2BD798BC00DA05C2 /* NftTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1044EAA2BD798BC00DA05C2 /* NftTransfer.swift */; };
 		E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */; };
 		E10EB58F2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */; };
 		E10EB5902A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */; };
@@ -2660,6 +2664,8 @@
 		BE90772AFD2E77BC9578D8B2 /* Pods_CosmostationDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CosmostationDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1044EA42BD641DB00DA05C2 /* SendResultSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendResultSheet.swift; sourceTree = "<group>"; };
 		E1044EA52BD641DB00DA05C2 /* SendResultSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendResultSheet.xib; sourceTree = "<group>"; };
+		E1044EAA2BD798BC00DA05C2 /* NftTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftTransfer.swift; sourceTree = "<group>"; };
+		E1044EAB2BD798BC00DA05C2 /* NftTransfer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NftTransfer.xib; sourceTree = "<group>"; };
 		E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
@@ -4154,6 +4160,8 @@
 			children = (
 				E1D2FC622B81FCA30080B638 /* CommonTransfer.swift */,
 				E1D2FC632B81FCA30080B638 /* CommonTransfer.xib */,
+				E1044EAA2BD798BC00DA05C2 /* NftTransfer.swift */,
+				E1044EAB2BD798BC00DA05C2 /* NftTransfer.xib */,
 				04C63D202B86FE8C00D4A366 /* CommonTransferResult.swift */,
 				04C63D212B86FE8C00D4A366 /* CommonTransferResult.xib */,
 			);
@@ -4494,6 +4502,7 @@
 				04C63D132B836DD800D4A366 /* TxSendAddressSheet.xib in Resources */,
 				04FA74822AA0CAA3001A2830 /* ImportPrivKeyVC.xib in Resources */,
 				E122DC642A8CA052006D1E7B /* Resources.xcassets in Resources */,
+				E1044EAE2BD798BC00DA05C2 /* NftTransfer.xib in Resources */,
 				E1B44B222ADA41CD0073C88A /* NeutronSingleVoteCell.xib in Resources */,
 				0400EE8B2AD425F9007BA97F /* DappDetailVC.xib in Resources */,
 				04FC656B2B0C8EA7008F2110 /* OkAddShare.xib in Resources */,
@@ -4679,6 +4688,7 @@
 				04CD24842AD312BD00497EF5 /* TxAmountBepSheet.xib in Resources */,
 				04B789F32ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */,
 				0400EE9E2AD9B434007BA97F /* NeutronVote.xib in Resources */,
+				E1044EAC2BD798BC00DA05C2 /* NftTransfer.xib in Resources */,
 				04C940D92AEA579C00415256 /* basebg05.png in Resources */,
 				E131F4502AEEAAB800E760A0 /* CreateNameSheet.xib in Resources */,
 				E1B44B212ADA41CD0073C88A /* NeutronSingleVoteCell.xib in Resources */,
@@ -5127,6 +5137,7 @@
 				E14E297B2A99C2CA00939AD2 /* BaseButton.swift in Sources */,
 				046EA88C2AD04A2500A2FCE7 /* desmos_profiles_v3_models_params.pb.swift in Sources */,
 				04C816E32BA98D75006B800A /* cosmos_bank_v1beta1_tx.grpc.swift in Sources */,
+				E1044EAF2BD798BC00DA05C2 /* NftTransfer.swift in Sources */,
 				04C816572BA98D74006B800A /* cosmos_feegrant_v1beta1_tx.grpc.swift in Sources */,
 				047843782AC991B300462F1C /* injective_ocr_v1beta1_tx.pb.swift in Sources */,
 				E16200382AF139C60008F397 /* AddressBook.swift in Sources */,
@@ -5883,6 +5894,7 @@
 				0402B84C2ACC868000824B3F /* ChainStride.swift in Sources */,
 				04A68C352AC156AA0041FA13 /* CosmosProposalCell.swift in Sources */,
 				04C816E22BA98D75006B800A /* cosmos_bank_v1beta1_tx.grpc.swift in Sources */,
+				E1044EAD2BD798BC00DA05C2 /* NftTransfer.swift in Sources */,
 				04C816562BA98D74006B800A /* cosmos_feegrant_v1beta1_tx.grpc.swift in Sources */,
 				046EA88B2AD04A2500A2FCE7 /* desmos_profiles_v3_models_params.pb.swift in Sources */,
 				04527DBF2A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */,

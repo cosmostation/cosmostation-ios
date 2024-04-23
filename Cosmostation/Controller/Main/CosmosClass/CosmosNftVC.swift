@@ -139,4 +139,15 @@ extension CosmosNftVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         let height: CGFloat = width * 1.2
         return CGSize(width: width, height: height)
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cw721 = Cw721Model.init(nftGroup[indexPath.section].info, [nftGroup[indexPath.section].tokens[indexPath.row]])
+        
+        let transfer = NftTransfer(nibName: "NftTransfer", bundle: nil)
+        transfer.fromChain = selectedChain
+        transfer.toSendNFT = cw721
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+    }
 }
