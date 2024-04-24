@@ -23,7 +23,7 @@ class ChainAltheaEVM: EvmClass  {
         stakeDenom = "aalthea"
         
         //for EVM tx and display
-        coinSymbol = "ALTG"
+        coinSymbol = "ALTHEA"
         coinGeckoId = "althea"
         coinLogo = "tokenAltg"
 
