@@ -315,6 +315,7 @@
 "str_copy_bech_address" = "Copy Cosmos style address";
 "str_share_bech_address" = "Share Cosmos style address";
 "str_token_github" = "Check Token Info";
+"str_nft_github" = "Check NFT Info";
 "str_node_down_title" = "⚠️ Node Down";
 "str_sunset_title" = "Chain Sunset";
 "str_sunset_msg" = "The chain you selected is scheduled to end support. For more information, please refer to the foundation's official announcement.";
@@ -397,6 +398,7 @@
 "msg_hide_scam_proposals" = "Filters out suspected of scam proposals.";
 "msg_hide_voted_proposals" = "Filters proposals that have already been voted on.";
 "msg_token_github" = "Information on all assets and tokens is being developed together with the community.\n\nIf you do not see your token, please provide the GitHub link below to the token issuer or community.\n\nOnce information about the token is registered, it is automatically displayed in your wallets and MintScan.\nNot only you but all users in the community can view and use it together.";
+"msg_nft_github" = "Information on all NFT collections is developed together with the community. \n\nIf you do not see your collection or NFT, please provide the GitHub link below to the publisher or community.\n\nOnce information about the collection is registered, it will be automatically displayed,\nNot only for the customer but also for all users in the community. You can check and use it.";
 "msg_node_down" = "▪ Please check the current network status of the device.\n\n▪ If there is a problem with the node you are currently using, you can easily switch to another node through [Settings > Manage Chains] and continue using the service.\n\n ▪ If all nodes are unavailable, the chain being used is being upgraded. Please wait until the upgrade is complete.";
 "msg_vote_all_detail" = "You must select all proposals that are live to vote.\nPlease swipe to exclude proposals that you want to vote on later.";
 "msg_claim_all_detail" = "Check the reward amount and Tx fee amount.\nPlease swipe to exclude rewards you would like to receive in the future.";

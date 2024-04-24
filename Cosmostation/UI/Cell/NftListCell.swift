@@ -32,6 +32,7 @@ class NftListCell: UICollectionViewCell {
             nftImageView?.af.setImage(withURL: URL(string: url)!)
         }
         titleLabel.text = info["name"].stringValue + " #" + nft.tokenId
+        titleLabel.adjustsFontSizeToFitWidth = true
     }
 
 }

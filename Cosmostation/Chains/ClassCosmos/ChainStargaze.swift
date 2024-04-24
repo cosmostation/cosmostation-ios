@@ -27,7 +27,6 @@ class ChainStargaze: CosmosClass  {
         
         grpcHost = "grpc-stargaze.cosmostation.io"
     }
-    
 }
 
 let STARGAZE_NAME_SERVICE = "stars1fx74nkqkw2748av8j7ew7r3xt9cgjqduwn8m0ur5lhe49uhlsasszc5fhr"

@@ -541,8 +541,8 @@ extension CosmosClass {
                 var tokens = [Cw721TokenModel]()
                 if let tokenIds = try? await self.fetchCw721TokenIds(channel, list), !tokenIds.isEmpty {
                     await tokenIds["tokens"].arrayValue.concurrentForEach { tokenId in
-                        if let tokenInfo = try? await self.fetchCw721TokenInfo(channel, list, tokenId.stringValue),
-                           let tokenDetail = try? await AF.request(BaseNetWork.msNftDetail(self, list["contractAddress"].stringValue, tokenId.stringValue), method: .get).serializingDecodable(JSON.self).value {
+                        if let tokenInfo = try? await self.fetchCw721TokenInfo(channel, list, tokenId.stringValue) {
+                            let tokenDetail = try? await AF.request(BaseNetWork.msNftDetail(self, list["contractAddress"].stringValue, tokenId.stringValue), method: .get).serializingDecodable(JSON.self).value
                             tokens.append(Cw721TokenModel.init(tokenId.stringValue, tokenInfo, tokenDetail))
                         }
                     }
@@ -553,6 +553,12 @@ extension CosmosClass {
             }
             DispatchQueue.main.async(execute: {
                 self.cw721Fetched = true
+                self.cw721Models.sort {
+                    return $0.info["contractAddress"].stringValue < $1.info["contractAddress"].stringValue
+                }
+                self.cw721Models.forEach { cw721Model in
+                    cw721Model.sortId()
+                }
                 NotificationCenter.default.post(name: Notification.Name("FetchNFTs"), object: self.tag, userInfo: nil)
                 try? channel.close()
             })

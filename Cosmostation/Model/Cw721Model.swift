@@ -9,13 +9,19 @@
 import Foundation
 import SwiftyJSON
 
-struct Cw721Model {
+class Cw721Model {
     var info = JSON()
     var tokens = [Cw721TokenModel]()
     
     init(_ info: JSON, _ tokens: [Cw721TokenModel]) {
         self.info = info
         self.tokens = tokens
+    }
+    
+    func sortId() {
+        tokens.sort {
+            return $0.tokenId < $1.tokenId
+        }
     }
 }
 
