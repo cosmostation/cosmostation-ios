@@ -84,7 +84,7 @@ class NoticeSheet: BaseVC {
                 
             }
             
-        } else if (noticeType == .TokenGithub) {
+        } else if (noticeType == .NFTGithub) {
             let rawUrl = "https://github.com/cosmostation/chainlist/blob/main/chain/" + selectedChain.apiName + "/cw721.json"
             guard let url = URL(string: rawUrl) else { return }
             self.onShowSafariWeb(url)
