@@ -121,7 +121,7 @@ extension CosmosNftVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NftListCell", for: indexPath) as! NftListCell
-        cell.onBindNft(nftGroup[indexPath.section].tokens[indexPath.row])
+        cell.onBindNft(nftGroup[indexPath.section].info, nftGroup[indexPath.section].tokens[indexPath.row])
         return cell
     }
     

@@ -116,7 +116,11 @@ class NftTransfer: BaseVC {
     }
     
     func onInitNft() {
-        //TODO iamge and name display with nft
+        if let url = toSendNFT.tokens[0].tokenDetails["url"].string {
+            toSendNftImage?.af.setImage(withURL: URL(string: url)!)
+        }
+        toSendNftName.text = "#" + toSendNFT.tokens[0].tokenId
+        toSendNftCollectionName.text = toSendNFT.info["name"].string
     }
     
     func onInitFee() {

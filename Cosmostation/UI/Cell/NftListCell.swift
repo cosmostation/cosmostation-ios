@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 import AlamofireImage
 
 class NftListCell: UICollectionViewCell {
@@ -26,13 +27,11 @@ class NftListCell: UICollectionViewCell {
         titleLabel.text = ""
     }
     
-    func onBindNft(_ nft: Cw721TokenModel) {
-//        let ipfsUrl = nft.tokenDetails["image"].stringValue.replacingOccurrences(of: "ipfs://", with: "https://ipfs.io/ipfs/")
-//        if let imageURL: URL = URL(string: ipfsUrl) {
-//            nftImageView?.af.setImage(withURL: imageURL)
-//        }
-//        nftImageView?.af.setImage(withURL: URL(string: url)!)
-//        titleLabel.text = nft.tokenDetails["name"].stringValue
+    func onBindNft(_ info: JSON, _ nft: Cw721TokenModel) {
+        if let url = nft.tokenDetails["url"].string {
+            nftImageView?.af.setImage(withURL: URL(string: url)!)
+        }
+        titleLabel.text = info["name"].stringValue + " #" + nft.tokenId
     }
 
 }

@@ -540,15 +540,10 @@ extension CosmosClass {
             await mintscanCw721List.concurrentForEach { list in
                 var tokens = [Cw721TokenModel]()
                 if let tokenIds = try? await self.fetchCw721TokenIds(channel, list), !tokenIds.isEmpty {
-                    print("tokenIds ", list["name"], "  ", tokenIds)
                     await tokenIds["tokens"].arrayValue.concurrentForEach { tokenId in
-//                        if let tokenInfo = try? await self.fetchCw721TokenInfo(channel, list, tokenId.stringValue),
-//                           let tokenDetail = try? await AF.request(tokenInfo.ipfsUrl, method: .get).serializingDecodable(JSON.self).value {
-//                            tokens.append(Cw721TokenModel.init(tokenId.stringValue, tokenInfo, tokenDetail))
-//                        }
-                        if let tokenInfo = try? await self.fetchCw721TokenInfo(channel, list, tokenId.stringValue) {
-                            print("tokenInfo ", tokenInfo)
-                            tokens.append(Cw721TokenModel.init(tokenId.stringValue, tokenInfo, nil))
+                        if let tokenInfo = try? await self.fetchCw721TokenInfo(channel, list, tokenId.stringValue),
+                           let tokenDetail = try? await AF.request(BaseNetWork.msNftDetail(self, list["contractAddress"].stringValue, tokenId.stringValue), method: .get).serializingDecodable(JSON.self).value {
+                            tokens.append(Cw721TokenModel.init(tokenId.stringValue, tokenInfo, tokenDetail))
                         }
                     }
                 }
