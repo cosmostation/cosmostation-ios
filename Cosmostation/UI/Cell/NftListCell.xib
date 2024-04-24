@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -30,21 +30,22 @@
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="266"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symbol" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbk-06-lqo">
-                                <rect key="frame" x="139.33333333333334" y="240.33333333333334" width="52.666666666666657" height="17.666666666666657"/>
-                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                <rect key="frame" x="16" y="231.66666666666666" width="168" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="mbk-06-lqo" secondAttribute="bottom" constant="8" id="6gd-NO-GKE"/>
+                            <constraint firstAttribute="bottom" secondItem="mbk-06-lqo" secondAttribute="bottom" constant="14" id="6gd-NO-GKE"/>
                             <constraint firstItem="RW8-Mi-SOd" firstAttribute="top" secondItem="nmV-fx-Uqu" secondAttribute="top" id="Cjn-4e-F1k"/>
+                            <constraint firstItem="mbk-06-lqo" firstAttribute="leading" secondItem="nmV-fx-Uqu" secondAttribute="leading" constant="16" id="QMW-ue-byu"/>
+                            <constraint firstAttribute="trailing" secondItem="mbk-06-lqo" secondAttribute="trailing" constant="16" id="Thh-9p-j8a"/>
                             <constraint firstAttribute="trailing" secondItem="RW8-Mi-SOd" secondAttribute="trailing" id="TzN-hh-XG2"/>
                             <constraint firstItem="RW8-Mi-SOd" firstAttribute="leading" secondItem="nmV-fx-Uqu" secondAttribute="leading" id="aS6-mD-iKi"/>
                             <constraint firstItem="RW8-Mi-SOd" firstAttribute="centerY" secondItem="nmV-fx-Uqu" secondAttribute="centerY" id="cKo-dd-ESP"/>
                             <constraint firstItem="RW8-Mi-SOd" firstAttribute="centerX" secondItem="nmV-fx-Uqu" secondAttribute="centerX" id="iAR-Oy-HgQ"/>
-                            <constraint firstAttribute="trailing" secondItem="mbk-06-lqo" secondAttribute="trailing" constant="8" id="ouv-JL-0LP"/>
                             <constraint firstAttribute="bottom" secondItem="RW8-Mi-SOd" secondAttribute="bottom" id="uPA-Sq-FR4"/>
                         </constraints>
                     </view>

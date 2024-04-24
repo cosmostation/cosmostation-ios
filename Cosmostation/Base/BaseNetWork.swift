@@ -137,6 +137,10 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v10/" + chain.apiName + "/account/" + address + "/votes"
     }
     
+    static func msNftDetail(_ chain: BaseChain, _ contractAddress: String, _ tokenId: String) -> String {
+        return MINTSCAN_API_URL + "v10/" + chain.apiName + "/contracts/" + contractAddress + "/nft-url/" + tokenId
+    }
+    
     static func SkipChains() -> String {
         return SKIP_API_URL + "v1/info/chains"
     }

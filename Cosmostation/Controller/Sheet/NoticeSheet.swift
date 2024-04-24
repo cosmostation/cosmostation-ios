@@ -47,6 +47,11 @@ class NoticeSheet: BaseVC {
             subBtn.setTitle("Link", for: .normal)
             okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
             
+        } else if (noticeType == .NFTGithub) {
+            noticeTitleLabel.text = NSLocalizedString("str_nft_github", comment: "")
+            noticeMsgLabel.text = NSLocalizedString("msg_nft_github", comment: "")
+            subBtn.setTitle(NSLocalizedString("setting_github_title", comment: ""), for: .normal)
+            okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
         }
     }
     
@@ -78,6 +83,11 @@ class NoticeSheet: BaseVC {
                 self.onShowSafariWeb(url)
                 
             }
+            
+        } else if (noticeType == .TokenGithub) {
+            let rawUrl = "https://github.com/cosmostation/chainlist/blob/main/chain/" + selectedChain.apiName + "/cw721.json"
+            guard let url = URL(string: rawUrl) else { return }
+            self.onShowSafariWeb(url)
         }
     }
     
@@ -92,4 +102,5 @@ public enum NoticeType: Int {
     case TokenGithub = 1
     case NodeDownGuide = 2
     case ChainSunset = 3
+    case NFTGithub = 4
 }
