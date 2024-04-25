@@ -554,7 +554,7 @@ extension CosmosClass {
             DispatchQueue.main.async(execute: {
                 self.cw721Fetched = true
                 self.cw721Models.sort {
-                    return $0.info["contractAddress"].stringValue < $1.info["contractAddress"].stringValue
+                    return $0.info["id"].doubleValue < $1.info["id"].doubleValue
                 }
                 self.cw721Models.forEach { cw721Model in
                     cw721Model.sortId()
