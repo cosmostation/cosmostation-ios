@@ -100,7 +100,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
             baseAccount.getDisplayEvmChains().filter { $0.fetchState == .Busy }.count == 0) {
             
             var stakedChains = [BaseChain]()
-            baseAccount.getDisplayCosmosChains().filter { $0.isDefault == true }.forEach { chain in
+            baseAccount.getDisplayCosmosChains().filter { $0.isDefault == true && $0.tag != "finschia438" }.forEach { chain in
                 let delegated = chain.delegationAmountSum()
                 let voteThreshold = chain.voteThreshold()
                 let txFee = chain.getInitPayableFee()

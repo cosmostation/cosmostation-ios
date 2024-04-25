@@ -142,6 +142,10 @@ extension CosmosNftVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let cw721 = Cw721Model.init(nftGroup[indexPath.section].info, [nftGroup[indexPath.section].tokens[indexPath.row]])
         
         let transfer = NftTransfer(nibName: "NftTransfer", bundle: nil)
