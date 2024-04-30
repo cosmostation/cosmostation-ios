@@ -43,7 +43,7 @@ class DappStartVC: BaseVC {
     }
     
     func presentDapp(_ url: URL) {
-        print("presentDapp ", url)
+//        print("presentDapp ", url)
         //TODO pincode ask?
         let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
         dappDetail.url = url

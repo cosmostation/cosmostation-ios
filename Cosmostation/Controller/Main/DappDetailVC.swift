@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import WalletConnect
+//import WalletConnect
 import HDWalletKit
 import SwiftKeychainWrapper
 import Alamofire
@@ -27,12 +27,7 @@ class DappDetailVC: BaseVC {
     
     var selectedChain: CosmosClass!
     var url: URL?
-    
     var wcURL: String?
-    
-    var wcTrustAccount: WCTrustAccount?
-    var wCPeerMeta: WCPeerMeta?
-    var interactor: WCInteractor?
     
     var currentV2PairingUri: String?
     var wcV2CurrentProposal: WalletConnectSwiftV2.Session.Proposal?
@@ -41,6 +36,8 @@ class DappDetailVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        webView.scrollView.contentInsetAdjustmentBehavior = .never
+        print("select dapp url ", url)
         setup()
     }
     
@@ -67,6 +64,9 @@ class DappDetailVC: BaseVC {
         }
     }
     
+    /*
+     * handle walletconnectV2 init from dapp request
+     */
     func processQuery(host: String?, query: String?) {
         if let host = host, let query = query?.removingPercentEncoding, host == "wc" {
             if (query.starts(with: "uri=")) {
@@ -79,33 +79,14 @@ class DappDetailVC: BaseVC {
     }
     
     func isConnected() -> Bool {
-        if let interactor = interactor, interactor.state == .connected {
-            return true
-        }
-        
         if currentV2PairingUri == wcURL {
             return true
         }
-        
         return false
     }
     
     private func disconnect() {
-        if let interactor = interactor {
-            if (interactor.state == .connected) {
-                interactor.killSession().done { [weak self] in
-                    self?.interactor = nil
-                    self?.dismissOrPopView()
-                }.cauterize()
-                return
-            } else {
-                interactor.disconnect()
-                self.interactor = nil
-            }
-        }
-        
-        self.disconnectV2Sessions()
-        
+        disconnectV2Sessions()
         dismissOrPopView()
     }
     
@@ -132,65 +113,7 @@ class DappDetailVC: BaseVC {
         showWait()
         if (url.contains("@2")) {
             connectWalletConnectV2(url: url)
-        } else {
-            connectWalletConnectV1(url: url)
         }
-    }
-    
-    private func connectWalletConnectV1(url: String) {
-        guard let session = WCSession.from(string: url) else { return }
-        let interactor = WCInteractor(session: session,
-                                      meta: WCPeerMeta(name: NSLocalizedString("wc_peer_name", comment: ""), url: NSLocalizedString("wc_peer_url", comment: ""),
-                                                       description:NSLocalizedString("wc_peer_desc", comment: "")),
-                                      uuid: UIDevice.current.identifierForVendor ?? UUID())
-        let chainId = 1
-        self.interactor = interactor
-        interactor.onSessionRequest = { [weak self] (id, peer) in
-            guard let self = self else { return }
-            self.processSessionRequest(peer: peer, chainId: chainId)
-        }
-        
-        interactor.trust.onGetAccounts = { [weak self] (id) in
-            guard let self = self else { return }
-            self.interactor?.approveRequest(id: id, result: [wcTrustAccount]).cauterize()
-        }
-        
-        interactor.trust.onTransactionSign = { [weak self] (id, trustTx) in
-            guard let self = self else { return }
-            if let trustTxParsing = try? JSONSerialization.jsonObject(with: trustTx.transaction.data(using: .utf8)!, options: .allowFragments) as? NSDictionary {
-                showRequestSign(trustTx.transaction.data(using: .utf8)!, {self.signTrust(wcId: id, wcTrustRequest: trustTxParsing)}, {self.interactor?.rejectRequest(id: id, message: "Cancel").cauterize()})
-            }
-        }
-        
-        interactor.onDisconnect = { [weak self] (error) in
-            guard let self = self else { return }
-            self.navigationController?.popViewController(animated: false)
-        }
-        
-        interactor.connect().cauterize()
-    }
-    
-    private func processSessionRequest(peer: WCSessionRequestParam, chainId: Int) {
-        let chainName = peer.peerMeta.name.lowercased()
-        
-        if let chain = baseAccount.allCosmosClassChains.filter ({ $0.apiName == chainName }).first,
-           (chain.isDefault == true && chain.accountKeyType.pubkeyType == .COSMOS_Secp256k1) {
-            chain.fetchFilteredCosmosChain(baseAccount)
-            
-            self.selectedChain = chain
-            self.wcTrustAccount = WCTrustAccount.init(network: 459, address: chain.bechAddress)
-            self.interactor?.approveSession(accounts: [chain.bechAddress], chainId: chainId).done { _ in }.cauterize()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
-                self.hideWait()
-            })
-            return
-        }
-         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
-            self.hideWait()
-            self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
-        })
     }
     
     private func connectWalletConnectV2(url: String) {
@@ -213,77 +136,6 @@ class DappDetailVC: BaseVC {
         }
         txSignRequestSheet.isModalInPresentation = true
         self.onStartSheet(txSignRequestSheet, 450)
-    }
-    
-    func signTrust(wcId: Int64, wcTrustRequest: NSDictionary?) {
-        if let request = wcTrustRequest, let makeKavaSignData = getTrustSignDic(request) {
-            self.interactor?.approveRequest(id: wcId, result: String(data: makeKavaSignData, encoding: .utf8)!).done({ _ in
-                self.onShowToast(NSLocalizedString("wc_request_responsed ", comment: ""))
-            }).cauterize()
-        } else {
-            self.interactor?.rejectRequest(id: wcId, message: "Error").cauterize()
-        }
-    }
-    
-    func getTrustSignDic(_ input: NSDictionary) -> Data? {
-        let result = NSMutableDictionary()
-        result.setValue(input.value(forKey: "chainId"), forKey: "chain_id")
-        result.setValue(input.value(forKey: "accountNumber"), forKey: "account_number")
-        result.setValue(input.value(forKey: "sequence"), forKey: "sequence")
-        result.setValue(input.value(forKey: "memo"), forKey: "memo")
-        
-        var msgs = Array<NSDictionary>()
-        if let rawMsgs = input["messages"] as? Array<NSDictionary> {
-            for rawMsg in rawMsgs {
-                if let rawjsonmessage = rawMsg["rawJsonMessage"] as? NSDictionary {
-                    let type = rawjsonmessage.value(forKey: "type") as? String
-                    let stringValue = rawjsonmessage.value(forKey: "value") as? String
-                    if let value = try? JSONSerialization.jsonObject(with: stringValue!.data(using: .utf8)!, options : .allowFragments) as? [String:Any] {
-                        let msg = NSMutableDictionary()
-                        msg.setValue(type, forKey: "type")
-                        msg.setValue(value, forKey: "value")
-                        msgs.append(msg)
-                    }
-                }
-            }
-        }
-        result.setValue(msgs, forKey: "msgs")
-        
-        let fee = NSMutableDictionary()
-        if let rawFee = input["fee"] as? NSDictionary {
-            fee.setValue(rawFee.value(forKey: "gas"), forKey: "gas")
-            if let rawAmounts = rawFee.value(forKey: "amounts") as? Array<NSDictionary> {
-                fee.setValue(rawAmounts, forKey: "amount")
-            }
-        }
-        result.setValue(fee, forKey: "fee")
-        
-        let jsonData = try! JSONSerialization.data(withJSONObject: result, options: [.sortedKeys, .withoutEscapingSlashes])
-
-        if let signature = try? ECDSA.compactsign(jsonData.sha256(), privateKey: self.selectedChain.privateKey!) {
-            let publicKey = NSMutableDictionary()
-            publicKey.setValue(COSMOS_KEY_TYPE_PUBLIC, forKey: "type")
-            publicKey.setValue(self.selectedChain.publicKey!.base64EncodedString(), forKey: "value")
-            
-            let genedSignature = NSMutableDictionary()
-            genedSignature.setValue(publicKey, forKey: "pub_key")
-            genedSignature.setValue(signature.base64EncodedString(), forKey: "signature")
-            
-            let trustSignedTxValue = NSMutableDictionary()
-            trustSignedTxValue.setValue([genedSignature], forKey: "signatures")
-            trustSignedTxValue.setValue([], forKey: "msg")
-            trustSignedTxValue.setValue(result.value(forKey: "fee"), forKey: "fee")
-            trustSignedTxValue.setValue(result.value(forKey: "memo"), forKey: "memo")
-            
-            let trustPostTx = NSMutableDictionary()
-            trustPostTx.setValue("block", forKey: "mode")
-            trustPostTx.setValue(trustSignedTxValue, forKey: "tx")
-            
-            let data = try? JSONSerialization.data(withJSONObject: trustPostTx, options: [.sortedKeys, .withoutEscapingSlashes])
-            return data
-        }
-        
-        return nil
     }
     
     //inject
@@ -426,6 +278,7 @@ class DappDetailVC: BaseVC {
 }
 
 extension CosmosClass {
+    
     func fetchFilteredCosmosChain(_ baseAccount: BaseAccount) {
         let keychain = BaseData.instance.getKeyChain()
         if (baseAccount.type == .withMnemonic) {
@@ -447,6 +300,7 @@ extension CosmosClass {
 }
 
 extension DappDetailVC: WKScriptMessageHandler {
+    
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if (message.name == "station") {
             let bodyJSON = JSON(parseJSON: message.body as? String ?? "")

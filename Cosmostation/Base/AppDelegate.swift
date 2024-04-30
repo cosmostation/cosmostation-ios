@@ -113,12 +113,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if (url.scheme == "cosmostation") {
-            if (application.topViewController is DappDetailVC) {
-                if let wcVC = application.topViewController as? DappDetailVC {
-                    wcVC.processQuery(host: url.host, query: url.query)
-                }
-            } 
+            print("AppDelegate url", url.scheme, "  ", url)
             
+            if let dappDetailVC = application.topViewController as? DappDetailVC {      // WalletConnectV2 init connect wallet
+                dappDetailVC.processQuery(host: url.host, query: url.query)
+            }
+            
+            //TODO dapp open
+//            if (application.topViewController is DappDetailVC) {
+//                if let wcVC = application.topViewController as? DappDetailVC {
+//                    wcVC.processQuery(host: url.host, query: url.query)
+//                }
+//            }
 //            else {
 //                scheme = url
 //                if let mainVC = UIApplication.shared.foregroundWindow?.rootViewController as? MainTabViewController {
