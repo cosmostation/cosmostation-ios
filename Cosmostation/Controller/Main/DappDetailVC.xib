@@ -42,7 +42,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dapp Url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jkL-YJ-8nS">
-                            <rect key="frame" x="166.66666666666666" y="0.0" width="59.666666666666657" height="40"/>
+                            <rect key="frame" x="60" y="0.0" width="59.666666666666657" height="40"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -52,7 +52,7 @@
                     <constraints>
                         <constraint firstItem="jkL-YJ-8nS" firstAttribute="top" secondItem="nWB-hR-diP" secondAttribute="top" id="Otu-v4-kHx"/>
                         <constraint firstItem="uIa-20-eov" firstAttribute="top" secondItem="nWB-hR-diP" secondAttribute="top" id="ZYo-Ze-t5w"/>
-                        <constraint firstItem="jkL-YJ-8nS" firstAttribute="centerX" secondItem="nWB-hR-diP" secondAttribute="centerX" id="his-KI-fUG"/>
+                        <constraint firstItem="jkL-YJ-8nS" firstAttribute="leading" secondItem="uIa-20-eov" secondAttribute="trailing" constant="12" id="dSd-Se-rLX"/>
                         <constraint firstItem="uIa-20-eov" firstAttribute="leading" secondItem="nWB-hR-diP" secondAttribute="leading" constant="8" id="jfD-Gb-tw7"/>
                         <constraint firstAttribute="bottom" secondItem="uIa-20-eov" secondAttribute="bottom" id="vXg-b4-0Fz"/>
                         <constraint firstAttribute="bottom" secondItem="jkL-YJ-8nS" secondAttribute="bottom" id="xIO-l7-c6O"/>

@@ -26,19 +26,33 @@ class DappDetailVC: BaseVC {
     @IBOutlet weak var dappUrlLabel: UILabel!
     
     var selectedChain: CosmosClass!
-    var url: URL?
-    var wcURL: String?
+    var dappUrl: URL?
     
-    var currentV2PairingUri: String?
-    var wcV2CurrentProposal: WalletConnectSwiftV2.Session.Proposal?
+    var wcUrl: String?
+    var currentWcUri: String?
+//    var wcV2CurrentProposal: WalletConnectSwiftV2.Session.Proposal?
     
     private var publishers = [AnyCancellable]()
     
+    
+    var allCosmosChains = [CosmosClass]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        baseAccount = BaseData.instance.baseAccount
+        
+        Task {
+            allCosmosChains = await baseAccount.initKeysforSwap()
+            print("allCosmosChains ", allCosmosChains.count)
+        }
+        
         webView.scrollView.contentInsetAdjustmentBehavior = .never
-        print("select dapp url ", url)
-        setup()
+        dappUrlLabel.text = dappUrl?.query?.replacingOccurrences(of: "https://", with: "")
+        if let query = dappUrl?.query?.removingPercentEncoding, 
+            let queryUrl = URL(string: query) {
+            webView.load(URLRequest(url: queryUrl))
+        }
+        injectScript()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,95 +65,10 @@ class DappDetailVC: BaseVC {
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
-    private func setup() {
-        baseAccount = BaseData.instance.baseAccount
-        self.dappUrlLabel.text = url?.query?.replacingOccurrences(of: "https://", with: "")
-        loadUrl(query: url?.query)
-        initWebView()
-    }
-    
-    func loadUrl(query: String?) {
-        if let query = url?.query?.removingPercentEncoding, let url = URL(string: query) {
-            webView.load(URLRequest(url: url))
-        }
-    }
-    
     /*
-     * handle walletconnectV2 init from dapp request
+     * Inject custom script to webview
      */
-    func processQuery(host: String?, query: String?) {
-        if let host = host, let query = query?.removingPercentEncoding, host == "wc" {
-            if (query.starts(with: "uri=")) {
-                wcURL = query.replacingOccurrences(of: "uri=", with: "")
-            } else {
-                wcURL = query
-            }
-            connectSession()
-        }
-    }
-    
-    func isConnected() -> Bool {
-        if currentV2PairingUri == wcURL {
-            return true
-        }
-        return false
-    }
-    
-    private func disconnect() {
-        disconnectV2Sessions()
-        dismissOrPopView()
-    }
-    
-    private func dismissOrPopView() {
-        if (self.navigationController != nil) {
-            self.navigationController?.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true)
-        }
-    }
-    
-    @IBAction func onBack(_ sender: UIButton) {
-        disconnect()
-    }
-    
-    func connectSession() {
-        if isConnected() { return }
-        
-        guard let url = wcURL, url.starts(with: "wc") else {
-            self.navigationController?.popViewController(animated: false)
-            return
-        }
-        
-        showWait()
-        if (url.contains("@2")) {
-            connectWalletConnectV2(url: url)
-        }
-    }
-    
-    private func connectWalletConnectV2(url: String) {
-        setUpAuthSubscribing()
-        currentV2PairingUri = url
-        pairClient(uri: WalletConnectURI(string: url)!)
-    }
-    
-    private func showRequestSign(_ request: Data, _ completion: @escaping(() -> ()), _ cancel: @escaping(() -> ())) {
-        let txSignRequestSheet = TxSignRequestSheet(nibName: "TxSignRequestSheet", bundle: nil)
-        txSignRequestSheet.url = url
-        txSignRequestSheet.wcMsg = request
-        txSignRequestSheet.selectedChain = self.selectedChain
-        txSignRequestSheet.completion = { success in
-            if (success) {
-                completion()
-            } else {
-                cancel()
-            }
-        }
-        txSignRequestSheet.isModalInPresentation = true
-        self.onStartSheet(txSignRequestSheet, 450)
-    }
-    
-    //inject
-    func initWebView() {
+    private func injectScript() {
         if let file = Bundle.main.path(forResource: "injectScript", ofType: "js"), let script = try? String(contentsOfFile: file) {
             let userScript = WKUserScript(source: script,
                                           injectionTime: .atDocumentEnd,
@@ -165,7 +94,84 @@ class DappDetailVC: BaseVC {
         }
     }
     
+    /*
+     * handle walletconnectV2 init from dapp request
+     */
+    func processQuery(host: String?, query: String?) {
+        if let host = host, let query = query?.removingPercentEncoding, host == "wc" {
+            if (query.starts(with: "uri=")) {
+                wcUrl = query.replacingOccurrences(of: "uri=", with: "")
+            } else {
+                wcUrl = query
+            }
+            connectSession()
+        }
+    }
+    
+    func isConnected() -> Bool {
+        if currentWcUri == wcUrl {
+            return true
+        }
+        return false
+    }
+    
+    private func disconnect() {
+        disconnectV2Sessions()
+        dismissOrPopView()
+    }
+    
+    private func dismissOrPopView() {
+        if (self.navigationController != nil) {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true)
+        }
+    }
+    
+    @IBAction func onBack(_ sender: UIButton) {
+        disconnect()
+    }
+    
+    func connectSession() {
+        if isConnected() { return }
+        
+        guard let url = wcUrl, url.starts(with: "wc") else {
+            self.navigationController?.popViewController(animated: false)
+            return
+        }
+        
+        showWait()
+        if (url.contains("@2")) {
+            connectWalletConnectV2(url: url)
+        }
+    }
+    
+    private func connectWalletConnectV2(url: String) {
+        setUpAuthSubscribing()
+        currentWcUri = url
+        pairClient(uri: WalletConnectURI(string: url)!)
+    }
+    
+    
+    
+    private func showRequestSign(_ request: Data, _ completion: @escaping(() -> ()), _ cancel: @escaping(() -> ())) {
+        let txSignRequestSheet = TxSignRequestSheet(nibName: "TxSignRequestSheet", bundle: nil)
+        txSignRequestSheet.url = dappUrl
+        txSignRequestSheet.wcMsg = request
+        txSignRequestSheet.selectedChain = self.selectedChain
+        txSignRequestSheet.completion = { success in
+            if (success) {
+                completion()
+            } else {
+                cancel()
+            }
+        }
+        txSignRequestSheet.isModalInPresentation = true
+        self.onStartSheet(txSignRequestSheet, 450)
+    }
+    
     func updateFeeInfoInAminoMessage(_ webToAppMessage: JSON) -> JSON {
+        print("updateFeeInfoInAminoMessage ", webToAppMessage)
         var approveSignMessage = webToAppMessage
         let signDoc = approveSignMessage["params"]["doc"]
         var isEditFee = true
@@ -307,48 +313,20 @@ extension DappDetailVC: WKScriptMessageHandler {
             let messageJSON = bodyJSON["message"]
             let method = messageJSON["method"].stringValue
             
-            if (method == "cos_requestAccount" || method == "cos_account" || method == "ten_requestAccount" || method == "ten_account") {
-                let params = messageJSON["params"]
-                let chainId = params["chainName"].stringValue
-                
-                var data = JSON()
-                data["isKeystone"] = false
-                data["isEthermint"] = false
-                data["isLedger"] = false
-                data["name"].stringValue = baseAccount.name
-                
-                if let filteredChainsWithChainId = baseAccount.allCosmosClassChains.filter({ $0.chainIdCosmos == chainId  && $0.isDefault == true }).first {
-                    filteredChainsWithChainId.fetchFilteredCosmosChain(self.baseAccount)
-                    
-                    self.selectedChain = filteredChainsWithChainId
-                    data["address"].stringValue = filteredChainsWithChainId.bechAddress
-                    data["publicKey"].stringValue = filteredChainsWithChainId.publicKey!.toHexString()
-                    approveWebToApp(data, messageJSON, bodyJSON["messageId"])
-                    
-                } else if let filteredChainWithChainName = baseAccount.allCosmosClassChains.filter({ $0.apiName == chainId && $0.isDefault == true }).first {
-                    filteredChainWithChainName.fetchFilteredCosmosChain(self.baseAccount)
-                    
-                    self.selectedChain = filteredChainWithChainName
-                    data["address"].stringValue = filteredChainWithChainName.bechAddress
-                    data["publicKey"].stringValue = filteredChainWithChainName.publicKey!.toHexString()
-                    
-                    let retVal = ["response": ["result": data], "message": messageJSON, "isCosmostation": true, "messageId": bodyJSON["messageId"]]
-                    self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
-                
-                } else {
-                    self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
-                }
-                
-            } else if (method == "cos_supportedChainIds" || method == "ten_supportedChainIds") {
-                if let chainIds = BaseData.instance.dAppConfig?["supportChainIds"].arrayValue {
+            print("bodyJSON ", bodyJSON)
+            
+            if (method == "cos_supportedChainIds") {
+                let chainIds = allCosmosChains.filter { $0.chainIdCosmos != nil }.map{ $0.chainIdCosmos }
+                if (chainIds.count > 0) {
                     let data:JSON = ["official": chainIds, "unofficial": []]
                     approveWebToApp(data, messageJSON, bodyJSON["messageId"])
                 } else {
                     rejectWebToApp("Error", messageJSON, bodyJSON["messageId"])
                 }
                 
-            } else if (method == "ten_supportedChainNames" || method == "cos_supportedChainNames") {
-                if let chainNames = BaseData.instance.dAppConfig?["supportChainNames"].arrayValue {
+            } else if (method == "cos_supportedChainNames") {
+                let chainNames = allCosmosChains.filter { $0.chainDappName() != nil }.map{ $0.chainDappName() }
+                if (chainNames.count > 0) {
                     let data:JSON = ["official": chainNames, "unofficial": []]
                     approveWebToApp(data, messageJSON, bodyJSON["messageId"])
                 } else {
@@ -358,33 +336,35 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "cos_addChain" || method == "cos_disconnect") {
                 approveWebToApp(true, messageJSON, bodyJSON["messageId"])
                 
-            } else if (method == "cos_activatedChainIds" || method == "ten_activatedChainIds") {
-                if let chainIds = BaseData.instance.dAppConfig?["supportChainIds"].arrayValue[0] {
-                    approveWebToApp(chainIds, messageJSON, bodyJSON["messageId"])
-                } else {
-                    rejectWebToApp("Error", messageJSON, bodyJSON["messageId"])
-                }
+            } else if (method == "cos_requestAccount" || method == "cos_account") {
+                let requestedChainId = messageJSON["params"]["chainName"].stringValue
                 
-            } else if (method == "cos_activatedChainNames" || method == "ten_activatedChainNames") {
-                if let chainNames = BaseData.instance.dAppConfig?["supportChainNames"].arrayValue[0] {
-                    approveWebToApp(chainNames, messageJSON, bodyJSON["messageId"])
+                var data = JSON()
+                data["isKeystone"] = false
+                data["isEthermint"] = false
+                data["isLedger"] = false
+                data["name"].stringValue = baseAccount.name
+                if let requestedChain = allCosmosChains.filter({ $0.chainIdCosmos == requestedChainId }).first {
+                    self.selectedChain = requestedChain
+                    data["address"].stringValue = requestedChain.bechAddress
+                    data["publicKey"].stringValue = requestedChain.publicKey!.toHexString()
+                    approveWebToApp(data, messageJSON, bodyJSON["messageId"])
                 } else {
-                    rejectWebToApp("Error", messageJSON, bodyJSON["messageId"])
+                    onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
                 }
                 
             } else if (method == "cos_signAmino") {
-                let aminoMessage = self.updateFeeInfoInAminoMessage(messageJSON)
-                self.showRequestSign(try! aminoMessage["params"]["doc"].rawData(),
-                                     {self.approveInjectSignAmino(aminoMessage, bodyJSON["messageId"])},
-                                     {self.rejectWebToApp("Cancel", aminoMessage, bodyJSON["messageId"])})
-
+                let aminoMessage = updateFeeInfoInAminoMessage(messageJSON)
+                showRequestSign(try! aminoMessage["params"]["doc"].rawData(),
+                                {self.approveInjectSignAmino(aminoMessage, bodyJSON["messageId"])},
+                                {self.rejectWebToApp("Cancel", aminoMessage, bodyJSON["messageId"])})
                 
             } else if (method == "cos_signDirect") {
-                let directMessage = self.updateFeeInfoInDirectMessage(messageJSON)
-                self.showRequestSign(try! directMessage["params"]["doc"].rawData(),
-                                     {self.approveInjectSignDirect(directMessage, bodyJSON["messageId"])},
-                                     {self.rejectWebToApp("Cancel", directMessage, bodyJSON["messageId"])})
-
+                let directMessage = updateFeeInfoInDirectMessage(messageJSON)
+                showRequestSign(try! directMessage["params"]["doc"].rawData(),
+                                {self.approveInjectSignDirect(directMessage, bodyJSON["messageId"])},
+                                {self.rejectWebToApp("Cancel", directMessage, bodyJSON["messageId"])})
+                
             } else if (method == "cos_sendTransaction") {
                 let params = messageJSON["params"]
                 let txBytes = params["txBytes"].stringValue
@@ -434,6 +414,22 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else {
                 self.rejectWebToApp("Not implemented", messageJSON, bodyJSON["messageId"])
             }
+            
+//            else if (method == "cos_activatedChainIds" || method == "ten_activatedChainIds") {
+//                if let chainIds = BaseData.instance.dAppConfig?["supportChainIds"].arrayValue[0] {
+//                    approveWebToApp(chainIds, messageJSON, bodyJSON["messageId"])
+//                } else {
+//                    rejectWebToApp("Error", messageJSON, bodyJSON["messageId"])
+//                }
+//                
+//            } else if (method == "cos_activatedChainNames" || method == "ten_activatedChainNames") {
+//                if let chainNames = BaseData.instance.dAppConfig?["supportChainNames"].arrayValue[0] {
+//                    approveWebToApp(chainNames, messageJSON, bodyJSON["messageId"])
+//                } else {
+//                    rejectWebToApp("Error", messageJSON, bodyJSON["messageId"])
+//                }
+//                
+//            }
         }
     }
 }
@@ -465,48 +461,49 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate {
         })
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if self.webView.isHidden {
-            decisionHandler(.cancel)
-            return
-        }
-        
-        if let url = navigationAction.request.url {
-            var newUrl: String?
-            
-            if let absoluteString = url.absoluteString.removingPercentEncoding {
-                if absoluteString.starts(with: "keplrwallet://wcV1") {
-                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc")
-                } else if absoluteString.starts(with: "keplrwallet://wcV2") || absoluteString.starts(with: "keplrwalletwcv2://wcV2") {
-                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc")
-                } else if let match = absoluteString.range(of: "https://.*/wc", options: .regularExpression) {
-                    newUrl = absoluteString.replacingCharacters(in: match, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
-                } else if absoluteString.starts(with: "cosmostation://wc") {
-                    newUrl = absoluteString.replacingOccurrences(of: "uri=", with: "")
-                } else if absoluteString.starts(with: "intent:") {
-                    if absoluteString.contains("intent://wcV2") {
-                        newUrl = absoluteString.replacingOccurrences(of: "intent://wcV2", with: "cosmostation://wc")
-                    } else if absoluteString.contains("intent://wc") {
-                        newUrl = absoluteString.removingPercentEncoding!.replacingOccurrences(of: "intent://wc", with: "cosmostation://wc")
-                    }
-                    if let range = newUrl?.range(of: "#Intent") {
-                        let trimmedUrl = String(newUrl![..<range.lowerBound])
-                        newUrl = trimmedUrl
-                    }
-                }
-                
-                if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
-                    UIApplication.shared.open(finalUrl, options: [:])
-                    decisionHandler(.cancel)
-                    return
-                }
-            }
-        }
-        decisionHandler(.allow)
-    }
+//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+//        if self.webView.isHidden {
+//            decisionHandler(.cancel)
+//            return
+//        }
+//        print("webView decidePolicyFor ", navigationAction.request.url )
+//        if let url = navigationAction.request.url {
+//            var newUrl: String?
+//            
+//            if let absoluteString = url.absoluteString.removingPercentEncoding {
+//                if absoluteString.starts(with: "keplrwallet://wcV1") {
+//                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc")
+//                } else if absoluteString.starts(with: "keplrwallet://wcV2") || absoluteString.starts(with: "keplrwalletwcv2://wcV2") {
+//                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc")
+//                } else if let match = absoluteString.range(of: "https://.*/wc", options: .regularExpression) {
+//                    newUrl = absoluteString.replacingCharacters(in: match, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
+//                } else if absoluteString.starts(with: "cosmostation://wc") {
+//                    newUrl = absoluteString.replacingOccurrences(of: "uri=", with: "")
+//                } else if absoluteString.starts(with: "intent:") {
+//                    if absoluteString.contains("intent://wcV2") {
+//                        newUrl = absoluteString.replacingOccurrences(of: "intent://wcV2", with: "cosmostation://wc")
+//                    } else if absoluteString.contains("intent://wc") {
+//                        newUrl = absoluteString.removingPercentEncoding!.replacingOccurrences(of: "intent://wc", with: "cosmostation://wc")
+//                    }
+//                    if let range = newUrl?.range(of: "#Intent") {
+//                        let trimmedUrl = String(newUrl![..<range.lowerBound])
+//                        newUrl = trimmedUrl
+//                    }
+//                }
+//                
+//                if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
+//                    UIApplication.shared.open(finalUrl, options: [:])
+//                    decisionHandler(.cancel)
+//                    return
+//                }
+//            }
+//        }
+//        decisionHandler(.allow)
+//    }
 }
 
 extension DappDetailVC {
+    
     func setUpAuthSubscribing() {
         Sign.instance.sessionProposalPublisher
             .receive(on: DispatchQueue.main)
