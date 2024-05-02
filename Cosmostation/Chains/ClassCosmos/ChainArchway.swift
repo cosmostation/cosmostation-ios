@@ -24,7 +24,7 @@ class ChainArchway: CosmosClass  {
         bechAccountPrefix = "archway"
         validatorPrefix = "archwayvaloper"
         supportCw20 = true
-//        supportCw721 = true
+        supportCw721 = true
         
         grpcHost = "grpc-archway.cosmostation.io"
     }
