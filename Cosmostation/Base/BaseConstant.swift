@@ -388,6 +388,25 @@ public enum AutoPass: Int {
     }
 }
 
+public enum ProtfolioStyle: Int {
+    case Simple = 0
+    case Pro = 1
+    
+    public static func getProtfolioStyles() -> [ProtfolioStyle] {
+        var result = Array<ProtfolioStyle>()
+        result.append(.Simple)
+        result.append(.Pro)
+        return result
+    }
+    
+    var description: String {
+        switch self {
+        case .Simple: return NSLocalizedString("style_simple", comment: "")
+        case .Pro: return NSLocalizedString("style_pro", comment: "")
+        }
+    }
+}
+
 
 let BASE_BG_IMG = ["basebg00", "basebg01", "basebg02", "basebg03", "basebg04", "basebg05", "basebg06", "basebg07", "basebg08", "basebg09"]
 

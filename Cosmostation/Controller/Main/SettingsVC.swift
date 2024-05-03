@@ -140,8 +140,6 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 2) {
                 baseCell.onBindSetStyle()
                 return baseCell
-//                priceCell.onBindSetDpPrice()
-//                return priceCell
                 
             } else if (indexPath.row == 3) {
                 priceCell.onBindSetDpPrice()
@@ -274,6 +272,15 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 onStartSheet(baseSheet)
                 
             } else if (indexPath.row == 2) {
+                let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                baseSheet.sheetDelegate = self
+                baseSheet.sheetType = .SwitchStyle
+                guard let sheet = baseSheet.presentationController as? UISheetPresentationController else {
+                    return
+                }
+                sheet.largestUndimmedDetentIdentifier = .large
+                sheet.prefersGrabberVisible = true
+                present(baseSheet, animated: true)
                 
             } else if (indexPath.row == 3) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
@@ -425,11 +432,20 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
                 }
             }
             
+        } else if (sheetType == .SwitchStyle) {
+            if let index = result["index"] as? Int {
+                if (BaseData.instance.getStyle() != index) {
+                    BaseData.instance.setStyle(index)
+                    BaseNetWork().fetchPrices(true)
+                    reloadRows(IndexPath(row: 2, section: 1))
+                }
+            }
+            
         } else if (sheetType == .SwitchPriceColor) {
             if let index = result["index"] as? Int {
                 if (BaseData.instance.getPriceChaingColor() != index) {
                     BaseData.instance.setPriceChaingColor(index)
-                    reloadRows(IndexPath(row: 2, section: 1))
+                    reloadRows(IndexPath(row: 3, section: 1))
                 }
             }
             
@@ -437,7 +453,7 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
             if let index = result["index"] as? Int {
                 if (BaseData.instance.getAutoPass() != index) {
                     BaseData.instance.setAutoPass(index)
-                    reloadRows(IndexPath(row: 5, section: 1))
+                    reloadRows(IndexPath(row: 8, section: 1))
                 }
             }
         }

@@ -1379,6 +1379,10 @@
 		04F048D82AFCD34A002A809D /* basebg06.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F048D62AFCD34A002A809D /* basebg06.png */; };
 		04F4061729ED119800CD88E4 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061629ED119800CD88E4 /* Init.storyboard */; };
 		04F4061829ED119800CD88E4 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061629ED119800CD88E4 /* Init.storyboard */; };
+		04F53F692BE4ED22000715FA /* SwitchStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F53F672BE4ED22000715FA /* SwitchStyleCell.swift */; };
+		04F53F6A2BE4ED22000715FA /* SwitchStyleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F53F682BE4ED22000715FA /* SwitchStyleCell.xib */; };
+		04F53F6B2BE4ED22000715FA /* SwitchStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F53F672BE4ED22000715FA /* SwitchStyleCell.swift */; };
+		04F53F6C2BE4ED22000715FA /* SwitchStyleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F53F682BE4ED22000715FA /* SwitchStyleCell.xib */; };
 		04FA74502A9D97A0001A2830 /* PincodeInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744B2A9D97A0001A2830 /* PincodeInputVC.swift */; };
 		04FA74512A9D97A0001A2830 /* PincodeInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744B2A9D97A0001A2830 /* PincodeInputVC.swift */; };
 		04FA74522A9D97A0001A2830 /* PincodeDecimalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA744C2A9D97A0001A2830 /* PincodeDecimalVC.swift */; };
@@ -2579,6 +2583,8 @@
 		04F048D62AFCD34A002A809D /* basebg06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg06.png; sourceTree = "<group>"; };
 		04F4061529ED112100CD88E4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		04F4061629ED119800CD88E4 /* Init.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Init.storyboard; sourceTree = "<group>"; };
+		04F53F672BE4ED22000715FA /* SwitchStyleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchStyleCell.swift; sourceTree = "<group>"; };
+		04F53F682BE4ED22000715FA /* SwitchStyleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchStyleCell.xib; sourceTree = "<group>"; };
 		04FA744B2A9D97A0001A2830 /* PincodeInputVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PincodeInputVC.swift; sourceTree = "<group>"; };
 		04FA744C2A9D97A0001A2830 /* PincodeDecimalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PincodeDecimalVC.swift; sourceTree = "<group>"; };
 		04FA744D2A9D97A0001A2830 /* Pincode.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pincode.storyboard; sourceTree = "<group>"; };
@@ -3558,6 +3564,8 @@
 				04FAD9B12AB011AC00143A3E /* SwitchPriceDisplayCell.xib */,
 				04FAD9C22AB17FC000143A3E /* SwitchCurrencyCell.swift */,
 				04FAD9C32AB17FC000143A3E /* SwitchCurrencyCell.xib */,
+				04F53F672BE4ED22000715FA /* SwitchStyleCell.swift */,
+				04F53F682BE4ED22000715FA /* SwitchStyleCell.xib */,
 				04A68C1B2ABDA3220041FA13 /* SelectSwapChainCell.swift */,
 				04A68C1C2ABDA3220041FA13 /* SelectSwapChainCell.xib */,
 				04A68C212ABDA3350041FA13 /* SelectSwapAssetCell.swift */,
@@ -4497,6 +4505,7 @@
 				04F048D82AFCD34A002A809D /* basebg06.png in Resources */,
 				E12E9D272AE2B49900336449 /* KavaMintCreateAction.xib in Resources */,
 				0400EF322ADD48E8007BA97F /* KavaSwapListCell.xib in Resources */,
+				04F53F6C2BE4ED22000715FA /* SwitchStyleCell.xib in Resources */,
 				046BF1C92B0F443100BC1FC8 /* OktSelectValidatorSheet.xib in Resources */,
 				E11EAE182AAD879A003BFC7F /* SettingSwitchCell.xib in Resources */,
 				04C63D132B836DD800D4A366 /* TxSendAddressSheet.xib in Resources */,
@@ -4700,6 +4709,7 @@
 				04F048CF2AF8D268002A809D /* CosmosCancelUnbonding.xib in Resources */,
 				042DE8482AC4CD01003F3EA4 /* QrScanVC.xib in Resources */,
 				04F048D72AFCD34A002A809D /* basebg06.png in Resources */,
+				04F53F6A2BE4ED22000715FA /* SwitchStyleCell.xib in Resources */,
 				E12E9D262AE2B49900336449 /* KavaMintCreateAction.xib in Resources */,
 				0400EEB12ADBB3C5007BA97F /* KavaDefiVC.xib in Resources */,
 				E1DF77832AB762010028BD51 /* CheckPrivateKeyCell.xib in Resources */,
@@ -4987,6 +4997,7 @@
 				0400EF402ADD49BB007BA97F /* kava_swap_v1beta1_query.pb.swift in Sources */,
 				04C817852BA98D75006B800A /* cosmos_gov_v1beta1_gov.pb.swift in Sources */,
 				18FFB341281AF533004E65BB /* RIPEMD160.swift in Sources */,
+				04F53F6B2BE4ED22000715FA /* SwitchStyleCell.swift in Sources */,
 				E1A05ECA2B04D9710017B72B /* ChainIris.swift in Sources */,
 				046EA8F42AD04A2600A2FCE7 /* desmos_profiles_v2_models_profile.pb.swift in Sources */,
 				E15F2D0B2ABF107300BAE105 /* StakeDelegateCell.swift in Sources */,
@@ -5744,6 +5755,7 @@
 				0400EF0D2ADBF03B007BA97F /* kava_hard_v1beta1_tx.grpc.swift in Sources */,
 				04C817842BA98D75006B800A /* cosmos_gov_v1beta1_gov.pb.swift in Sources */,
 				0402B8242ACC7AE500824B3F /* ChainOmniflix.swift in Sources */,
+				04F53F692BE4ED22000715FA /* SwitchStyleCell.swift in Sources */,
 				E1A05EC92B04D9710017B72B /* ChainIris.swift in Sources */,
 				0400EF3F2ADD49BB007BA97F /* kava_swap_v1beta1_query.pb.swift in Sources */,
 				E1A82DE822448E940097CAEE /* WUtils.swift in Sources */,

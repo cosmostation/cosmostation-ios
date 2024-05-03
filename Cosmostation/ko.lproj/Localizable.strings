@@ -211,6 +211,7 @@
 "str_compounding_all" = "모두 컴파운딩";
 "str_send_info" = "전송 상세 정보";
 "str_send_address" = "보낸 주소";
+"str_select_style" = "스타일 선택";
 
 
 "str_tx_status" = "결과";
@@ -499,6 +500,7 @@
 "setting_github_title" = "Github";
 "setting_version_title" = "버전";
 "setting_engineermode_title" = "엔지니어 모드";
+"setting_style_title" = "스타일";
 
 
 "tx_set_memo" = "메모를 입력하세요 (선택사항)";
@@ -1159,6 +1161,10 @@
 "autopass_5min" = "5분";
 "autopass_10min" = "10분";
 "autopass_30min" = "30분";
+"style_simple" = "심플";
+"style_pro" = "프로";
+"style_simple_msg" = "온 체인상 자산의 가치를 표시합니다.";
+"style_pro_msg" = "메인 자산의 가격과 변동수치가 추가로 표시됩니다.";
 
 "currency_fetch_success" = "가격 정보를 갱신 하였습니다.";
 "currency_fetch_failed" = "가격 정보 갱신에 실패하였습니다.";

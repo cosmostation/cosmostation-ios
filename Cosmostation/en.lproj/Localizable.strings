@@ -211,6 +211,7 @@
 "str_compounding_all" = "Compoundable All";
 "str_send_info" = "Send Detail Info";
 "str_send_address" = "Send Address";
+"str_select_style" = "Select Style";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -498,6 +499,7 @@
 "setting_github_title" = "Github";
 "setting_version_title" = "Version";
 "setting_engineermode_title" = "Engineer Mode";
+"setting_style_title" = "Style";
 
 
 "tx_set_memo" = "Insert memo (optional)";
@@ -1160,6 +1162,10 @@
 "autopass_5min" = "5min";
 "autopass_10min" = "10min";
 "autopass_30min" = "30min";
+"style_simple" = "Simple";
+"style_pro" = "Pro";
+"style_simple_msg" = "Display total value of on-chain assets.";
+"style_pro_msg" = "additionally, main asset's price and price change are displayed.";
 
 "currency_fetch_success" = "Currency updated";
 "currency_fetch_failed" = "Currency fetching failed";
