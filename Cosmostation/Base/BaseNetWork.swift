@@ -26,20 +26,6 @@ class BaseNetWork {
             }
     }
     
-    func fetchdAppConfig() {
-//        print("fetchdAppConfig ", BaseNetWork.dAppConfigs())
-        AF.request(BaseNetWork.dAppConfigs(), method: .get)
-            .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
-                switch response.result {
-                case .success(let value):
-                    BaseData.instance.dAppConfig = value
-                    
-                case .failure:
-                    print("fetchdAppConfig error ", response.error)
-                }
-            }
-    }
-    
     func fetchPrices(_ force: Bool? = false) {
 //        print("fetchPrices ", BaseNetWork.msPricesUrl())
         if (!BaseData.instance.needPriceUpdate() && force == false) { return }
@@ -123,10 +109,6 @@ class BaseNetWork {
     
     static func msCw721InfoUrl(_ chain: BaseChain) -> String {
         return ResourceBase + chain.apiName + "/cw721.json"
-    }
-    
-    static func dAppConfigs() -> String {
-        return ResourceDappBase + "config.json"
     }
     
     static func msProposals(_ chain: BaseChain) -> String {

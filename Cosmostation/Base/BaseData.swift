@@ -26,7 +26,6 @@ final class BaseData: NSObject{
     var mintscanUSDPrices: [MintscanPrice]?
     var mintscanPrices: [MintscanPrice]?
     var mintscanAssets: [MintscanAsset]?
-    var dAppConfig: JSON?
     var baseAccount: BaseAccount?
     
     public override init() {
