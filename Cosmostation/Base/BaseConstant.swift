@@ -26,6 +26,7 @@ let KEY_HIDE_LEGACY                     = "KEY_HIDE_LEGACY"
 let KEY_USING_APP_LOCK                  = "KEY_USING_APP_LOCK"
 let KEY_USING_BIO_AUTH                  = "KEY_USING_BIO_AUTH"
 let KEY_AUTO_PASS                       = "KEY_AUTO_PASS"
+let KEY_STYLE                           = "KEY_STYLE"
 let KEY_LAST_PASS_TIME                  = "KEY_LAST_PASS_TIME"
 let KEY_LAST_PRICE_TIME                 = "KEY_LAST_PRICE_TIME"
 let KEY_ENGINER_MODE                    = "KEY_ENGINER_MODE"
@@ -383,6 +384,25 @@ public enum AutoPass: Int {
         case .Min5: return NSLocalizedString("autopass_5min", comment: "")
         case .Min10: return NSLocalizedString("autopass_10min", comment: "")
         case .Min30: return NSLocalizedString("autopass_30min", comment: "")
+        }
+    }
+}
+
+public enum ProtfolioStyle: Int {
+    case Simple = 0
+    case Pro = 1
+    
+    public static func getProtfolioStyles() -> [ProtfolioStyle] {
+        var result = Array<ProtfolioStyle>()
+        result.append(.Simple)
+        result.append(.Pro)
+        return result
+    }
+    
+    var description: String {
+        switch self {
+        case .Simple: return NSLocalizedString("style_simple", comment: "")
+        case .Pro: return NSLocalizedString("style_pro", comment: "")
         }
     }
 }

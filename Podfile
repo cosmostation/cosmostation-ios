@@ -6,7 +6,6 @@ platform :ios, '13.5'
 
 def shared_pods
     pod 'HDWalletKit', git: 'https://github.com/cosmostation/HDWallet.git', branch: 'cosmostation-develop'
-    pod 'WalletConnect', git: 'https://github.com/cosmostation/wallet-connect-swift.git', branch: 'cosmostation-develop'
     pod 'web3swift', git: 'https://github.com/cosmostation/web3swift.git', branch: 'cosmostation-develop'
     
     pod 'MaterialComponents/BottomSheet'

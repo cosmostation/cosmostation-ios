@@ -74,6 +74,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SwitchAccountCell", bundle: nil), forCellReuseIdentifier: "SwitchAccountCell")
         sheetTableView.register(UINib(nibName: "SwitchCurrencyCell", bundle: nil), forCellReuseIdentifier: "SwitchCurrencyCell")
         sheetTableView.register(UINib(nibName: "SwitchPriceDisplayCell", bundle: nil), forCellReuseIdentifier: "SwitchPriceDisplayCell")
+        sheetTableView.register(UINib(nibName: "SwitchStyleCell", bundle: nil), forCellReuseIdentifier: "SwitchStyleCell")
+        
         sheetTableView.register(UINib(nibName: "SelectSwapChainCell", bundle: nil), forCellReuseIdentifier: "SelectSwapChainCell")
         sheetTableView.register(UINib(nibName: "SelectSwapAssetCell", bundle: nil), forCellReuseIdentifier: "SelectSwapAssetCell")
         sheetTableView.register(UINib(nibName: "SelectAccountCell", bundle: nil), forCellReuseIdentifier: "SelectAccountCell")
@@ -127,6 +129,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SwitchAutoPass) {
             sheetTitle.text = NSLocalizedString("str_autopass", comment: "")
+            
+        } else if (sheetType == .SwitchStyle) {
+            sheetTitle.text = NSLocalizedString("str_select_style", comment: "")
             
         } else if (sheetType == .SelectSwapInputChain) {
             sheetTitle.text = NSLocalizedString("title_select_input_chain", comment: "")
@@ -357,6 +362,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SwitchAutoPass) {
             return AutoPass.getAutoPasses().count
             
+        } else if (sheetType == .SwitchStyle) {
+            return 2
+            
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
             return swapChainsSearch.count
             
@@ -458,6 +466,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SwitchAutoPass) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
             cell?.onBindAutoPass(indexPath.row)
+            return cell!
+            
+        } else if (sheetType == .SwitchStyle) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SwitchStyleCell") as? SwitchStyleCell
+            cell?.onBindStyle(indexPath.row)
             return cell!
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
@@ -666,6 +679,7 @@ public enum SheetType: Int {
     case SwitchCurrency = 13
     case SwitchPriceColor = 14
     case SwitchAutoPass = 15
+    case SwitchStyle = 16
     
     case SelectSwapInputChain = 21
     case SelectSwapOutputChain = 22

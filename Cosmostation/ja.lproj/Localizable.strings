@@ -211,6 +211,7 @@
 "str_compounding_all" = "モツコンパウンディング";
 "str_send_info" = "詳細情報の送信";
 "str_send_address" = "送信アドレス";
+"str_select_style" = "スタイルの選択";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
@@ -497,7 +498,8 @@
 "setting_privacy_title" = "個人情報保護";
 "setting_github_title" = "Github";
 "setting_version_title" = "稿";
-"setting_engineermode_title" = "Engineer Mode";
+"setting_engineermode_title" = "エンジニアモード";
+"setting_style_title" = "スタイル";
 
 
 "tx_set_memo" = "メモをにゅうりょくしてください。(オプション)。";
@@ -1159,6 +1161,10 @@
 "autopass_5min" = "5分";
 "autopass_10min" = "10分";
 "autopass_30min" = "30分";
+"style_simple" = "シンプル";
+"style_pro" = "プロ";
+"style_simple_msg" = "オンチェーン資産の合計価値を表示します。";
+"style_pro_msg" = "さらに、主要資産の価格と価格変動が表示されます。";
 
 "currency_fetch_success" = "価格情報を更新しました。";
 "currency_fetch_failed" = "価格情報の更新に失敗しました。";

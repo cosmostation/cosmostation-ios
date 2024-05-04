@@ -916,3 +916,15 @@ extension UIColor {
         return String(format:"#%06x", rgb)
     }
 }
+
+
+extension Encodable {
+    public var encoded: Data {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys]
+        return try! encoder.encode(self)
+    }
+    public var encodedString: String {
+        return String(data: encoded, encoding: .utf8)!
+    }
+}

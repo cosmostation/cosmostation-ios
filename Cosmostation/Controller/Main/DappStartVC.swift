@@ -43,10 +43,9 @@ class DappStartVC: BaseVC {
     }
     
     func presentDapp(_ url: URL) {
-        print("presentDapp ", url)
         //TODO pincode ask?
         let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
-        dappDetail.url = url
+        dappDetail.dappUrl = url
         dappDetail.modalPresentationStyle = .fullScreen
         self.present(dappDetail, animated: true)
     }

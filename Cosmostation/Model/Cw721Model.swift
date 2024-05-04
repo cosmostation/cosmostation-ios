@@ -20,7 +20,7 @@ class Cw721Model {
     
     func sortId() {
         tokens.sort {
-            return $0.tokenId < $1.tokenId
+            return Double($0.tokenId) ?? 0 < Double($1.tokenId) ?? 0
         }
     }
 }

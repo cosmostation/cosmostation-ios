@@ -71,7 +71,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 1 && indexPath.row == 6) {
+        if (indexPath.section == 1 && indexPath.row == 7) {
             return 0
         } else if (indexPath.section == 3 && indexPath.row == 4) {
             return 0
@@ -83,7 +83,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         if (section == 0) {
             return 5
         } else if (section == 1) {
-            return 7
+            return 8
         } else if (section == 2) {
             return 6
         } else if (section == 3) {
@@ -138,17 +138,21 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 return baseCell
                 
             } else if (indexPath.row == 2) {
+                baseCell.onBindSetStyle()
+                return baseCell
+                
+            } else if (indexPath.row == 3) {
                 priceCell.onBindSetDpPrice()
                 return priceCell
                 
-            } else if (indexPath.row == 3) {
+            } else if (indexPath.row == 4) {
                 switchCell.onBindSetNotification()
                 switchCell.actionToggle = { request in
                     PushUtils.shared.updateStatus(enable: request)
                 }
                 return switchCell
                 
-            } else if (indexPath.row == 4) {
+            } else if (indexPath.row == 5) {
                 switchCell.onBindSetAppLock()
                 switchCell.actionToggle = { request in
                     if (request == false) {
@@ -160,14 +164,14 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 }
                 return switchCell
                 
-            } else if (indexPath.row == 5) {
+            } else if (indexPath.row == 6) {
                 switchCell.onBindSetBioAuth()
                 switchCell.actionToggle = { request in
                     BaseData.instance.setUsingBioAuth(request)
                 }
                 return switchCell
                 
-            } else if (indexPath.row == 6) {
+            } else if (indexPath.row == 7) {
                 baseCell.onBindSetAutoPass()
                 return baseCell
             }
@@ -270,10 +274,21 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 2) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
+                baseSheet.sheetType = .SwitchStyle
+                guard let sheet = baseSheet.presentationController as? UISheetPresentationController else {
+                    return
+                }
+                sheet.largestUndimmedDetentIdentifier = .large
+                sheet.prefersGrabberVisible = true
+                present(baseSheet, animated: true)
+                
+            } else if (indexPath.row == 3) {
+                let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchPriceColor
                 onStartSheet(baseSheet, 240)
                 
-            } else if (indexPath.row == 6) {
+            } else if (indexPath.row == 7) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchAutoPass
@@ -417,11 +432,20 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
                 }
             }
             
+        } else if (sheetType == .SwitchStyle) {
+            if let index = result["index"] as? Int {
+                if (BaseData.instance.getStyle() != index) {
+                    BaseData.instance.setStyle(index)
+                    BaseNetWork().fetchPrices(true)
+                    reloadRows(IndexPath(row: 2, section: 1))
+                }
+            }
+            
         } else if (sheetType == .SwitchPriceColor) {
             if let index = result["index"] as? Int {
                 if (BaseData.instance.getPriceChaingColor() != index) {
                     BaseData.instance.setPriceChaingColor(index)
-                    reloadRows(IndexPath(row: 2, section: 1))
+                    reloadRows(IndexPath(row: 3, section: 1))
                 }
             }
             
@@ -429,7 +453,7 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
             if let index = result["index"] as? Int {
                 if (BaseData.instance.getAutoPass() != index) {
                     BaseData.instance.setAutoPass(index)
-                    reloadRows(IndexPath(row: 5, section: 1))
+                    reloadRows(IndexPath(row: 8, section: 1))
                 }
             }
         }

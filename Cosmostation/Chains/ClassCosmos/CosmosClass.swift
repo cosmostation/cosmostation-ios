@@ -294,6 +294,10 @@ extension CosmosClass {
         return getChainParam()["params"]["chainlist_params"] 
     }
     
+    func chainDappName() -> String? {
+        return getChainListParam()["name_for_dapp"].string?.lowercased()
+    }
+    
     func isGasSimulable() -> Bool {
         return getChainListParam()["fee"]["isSimulable"].bool ?? true
     }

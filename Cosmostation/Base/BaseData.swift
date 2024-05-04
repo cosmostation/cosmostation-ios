@@ -644,6 +644,18 @@ extension BaseData {
         return UserDefaults.standard.integer(forKey: KEY_LANGUAGE)
     }
     
+    func setStyle(_ style : Int) {
+        UserDefaults.standard.set(style, forKey: KEY_STYLE)
+    }
+    
+    func getStyle() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_STYLE)
+    }
+    
+    func getStyleString() -> String {
+        return ProtfolioStyle.getProtfolioStyles()[getStyle()].description
+    }
+    
     func setAutoPass(_ mode : Int) {
         UserDefaults.standard.set(mode, forKey: KEY_AUTO_PASS)
     }

@@ -81,6 +81,12 @@ class SettingBaseCell: UITableViewCell {
         setDetailLabel.text = BaseData.instance.getAutoPassString()
     }
     
+    func onBindSetStyle() {
+        setImg.image = UIImage(named: "setStyle")
+        setTitleLabel.text = NSLocalizedString("setting_style_title", comment: "")
+        setDetailLabel.text = BaseData.instance.getStyleString()
+    }
+    
     
     
     
