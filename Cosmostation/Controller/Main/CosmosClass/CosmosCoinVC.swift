@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import Lottie
+import StoreKit
 
 class CosmosCoinVC: BaseVC {
     
@@ -64,7 +65,14 @@ class CosmosCoinVC: BaseVC {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
+        
+#if RELEASE
+        if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+            SKStoreReviewController.requestReview(in: scene)
+        }
+#endif
     }
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
