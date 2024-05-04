@@ -47,6 +47,7 @@ class PortfolioVC: BaseVC {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "PortfolioCell", bundle: nil), forCellReuseIdentifier: "PortfolioCell")
+        tableView.register(UINib(nibName: "Portfolio2Cell", bundle: nil), forCellReuseIdentifier: "Portfolio2Cell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
@@ -285,13 +286,25 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"PortfolioCell") as! PortfolioCell
-        if (indexPath.section == 0) {
-            cell.bindEvmClassChain(baseAccount, searchEvmChains[indexPath.row])
-        } else if (indexPath.section == 1) {
-            cell.bindCosmosClassChain(baseAccount, searchCosmosChains[indexPath.row])
+        if (BaseData.instance.getStyle() == ProtfolioStyle.Simple.rawValue) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"PortfolioCell") as! PortfolioCell
+            if (indexPath.section == 0) {
+                cell.bindEvmClassChain(baseAccount, searchEvmChains[indexPath.row])
+            } else if (indexPath.section == 1) {
+                cell.bindCosmosClassChain(baseAccount, searchCosmosChains[indexPath.row])
+            }
+            return cell
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"Portfolio2Cell") as! Portfolio2Cell
+            if (indexPath.section == 0) {
+                cell.bindEvmClassChain(baseAccount, searchEvmChains[indexPath.row])
+            } else if (indexPath.section == 1) {
+                cell.bindCosmosClassChain(baseAccount, searchCosmosChains[indexPath.row])
+            }
+            return cell
+            
         }
-        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -432,11 +445,16 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     
     private func makeTargetedPreview(for configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         guard let indexPath = configuration.identifier as? IndexPath else { return nil }
-        guard let cell = tableView.cellForRow(at: indexPath) as? PortfolioCell else { return nil }
         
         let parameters = UIPreviewParameters()
         parameters.backgroundColor = .clear
-        return UITargetedPreview(view: cell, parameters: parameters)
+        if let cell = tableView.cellForRow(at: indexPath) as? PortfolioCell {
+            return UITargetedPreview(view: cell, parameters: parameters)
+            
+        } else if let cell = tableView.cellForRow(at: indexPath) as? Portfolio2Cell {
+            return UITargetedPreview(view: cell, parameters: parameters)
+        }
+        return nil
     }
 }
 

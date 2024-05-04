@@ -100,35 +100,6 @@ public class WDP {
         return attributedString1
     }
     
-//
-//    //display price & value
-//    static func dpAssetValue(_ geckoId: String, _ amount: NSDecimalNumber, _ divider: Int16, _ label: UILabel?) {
-//        let assetValue = WUtils.assetValue(geckoId, amount, divider)
-//        let nf = WUtils.getNumberFormatter(3)
-//        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: assetValue)!
-//        label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
-//    }
-//
-//    static func dpAllAssetValue(_ chainConfig: ChainConfig?, _ label: UILabel?) {
-//        let totalValue = WUtils.allAssetValue(chainConfig)
-//        let nf = WUtils.getNumberFormatter(3)
-//        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: totalValue)!
-//        label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
-//    }
-//
-//    static func dpBnbTokenPrice(_ symbol: String, _ label: UILabel?) {
-//        let nf = WUtils.getNumberFormatter(3)
-//        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: WUtils.bnbTokenPrice(symbol))!
-//        label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
-//    }
-//
-//    static func dpPrice(_ geckoId: String, _ label: UILabel?) {
-//        let nf = WUtils.getNumberFormatter(3)
-//        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: WUtils.price(geckoId))!
-//        label?.attributedText = WUtils.getDpAttributedString(formatted, 3, label?.font)
-//    }
-//
-    
     static func dpValue(_ value: NSDecimalNumber, _ currencyLabel: UILabel?, _ priceLabel: UILabel?) {
         let nf = WUtils.getNumberFormatter(3)
         let formatted = nf.string(from: value)!
@@ -142,30 +113,6 @@ public class WDP {
         currencyLabel?.text = "$"
         priceLabel?.attributedText = WUtils.getDpAttributedString(formatted, 3, priceLabel?.font)
     }
-    
-//    static func priceUpImg(_ imgView: UIImageView) {
-//        if (BaseData.instance.getPriceChaingColor() > 0) {
-//            imgView.image =  UIImage.init(named: "iconPriceUpRed")
-//        } else {
-//            imgView.image =  UIImage.init(named: "iconPriceUpGreen")
-//        }
-//    }
-//
-//    static func priceDownImg(_ imgView: UIImageView) {
-//        if (BaseData.instance.getPriceChaingColor() > 0) {
-//            imgView.image =  UIImage.init(named: "iconPriceDownGreen")
-//        } else {
-//            imgView.image =  UIImage.init(named: "iconPriceDownRed")
-//        }
-//    }
-//
-//    static func dpPriceChangeImg(_ imgView: UIImageView, _ change: NSDecimalNumber) {
-//        if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
-//            priceUpImg(imgView)
-//        } else if (change.compare(NSDecimalNumber.zero).rawValue < 0) {
-//            priceDownImg(imgView)
-//        }
-//    }
     
     static func dpPrice(_ msAsset: MintscanAsset, _ currencyLabel: UILabel?, _ priceLabel: UILabel?) {
         dpPrice(msAsset.coinGeckoId, currencyLabel, priceLabel)
@@ -186,6 +133,7 @@ public class WDP {
     static func dpPriceChanged(_ coinGeckoId: String?, _ valueLabel: UILabel?, _ percentLabel: UILabel?) {
         let priceChanged = BaseData.instance.priceChange(coinGeckoId)
         let nf = WUtils.getNumberFormatter(2)
+        percentLabel?.text = "%"
         if (priceChanged.compare(NSDecimalNumber.zero).rawValue >= 0) {
             let formatted = nf.string(from: priceChanged)!
             valueLabel?.attributedText = WUtils.getDpAttributedString("+"+formatted, 2, valueLabel?.font)
@@ -215,24 +163,10 @@ public class WDP {
         }
     }
     
-    static func dpPercent(_ amount: String, _ valueLabel: UILabel?) {
-//        let nf = WUtils.getNumberFormatter(2)
-//        let formatted = nf.string(from: amount)!
-        valueLabel?.attributedText = WUtils.getDpAttributedString(amount, 2, valueLabel?.font)
-    }
 
-//    static func setPriceColor(_ label: UILabel, _ change: NSDecimalNumber) {
-//        if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
-//            priceUpColor(label)
-//        } else if (change.compare(NSDecimalNumber.zero).rawValue < 0) {
-//            priceDownColor(label)
-//        }
-//    }
-    
-//
-//
-//
-//    //display time
+    /*
+     * Display Times
+     */
     static func dpDate(_ timeString: String?) -> String {
         if (timeString == nil) { return "-" }
         guard let date = WUtils.timeStringToDate(timeString!) else {
@@ -337,82 +271,4 @@ public class WDP {
         return WUtils.getGapTime(date)
     }
     
-//
-//    static func dpPath(_ path: String) -> String {
-//        return path.replacingOccurrences(of: "bnb-beacon-chain", with: "binance")
-//            .replacingOccurrences(of: "ethereum", with: "eth")
-//            .replacingOccurrences(of: "persistence", with: "persis")
-//            .replacingOccurrences(of: "gravity-bridge", with: "gravity")
-//            .replacingOccurrences(of: "konstellation", with: "konstel")
-//            .replacingOccurrences(of: "assetmantle", with: "assetman")
-//            .replacingOccurrences(of: ">", with: " ⇝ ")
-//    }
-//
-    
-    
-
-    
-
-    
-    
-//
-//
-//    static func dpNeutronPairInfo(_ chainConfig: ChainConfig?, _ pair: NeutronSwapPoolPair, _ symbolLabel: UILabel?, _ symbolImg: UIImageView?, _ amountLabel: UILabel?) {
-//        if (pair.type == "cw20") {
-//            if let cw20Token = BaseData.instance.mMintscanTokens.filter({ $0.address == pair.address }).first {
-//                symbolLabel?.text = cw20Token.symbol
-//                if let assetImgeUrl = cw20Token.assetImg() {
-//                    symbolImg?.af_setImage(withURL: assetImgeUrl)
-//                }
-//
-//                if (amountLabel != nil) {
-//                    let available = NSDecimalNumber.init(string: cw20Token.amount)
-//                    let decimal = cw20Token.decimals
-//                    amountLabel!.attributedText = WDP.dpAmount(available.stringValue, amountLabel!.font!, decimal, decimal)
-//                }
-//            }
-//
-//        } else {
-//            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == pair.denom }).first {
-//                WDP.dpSymbol(chainConfig, msAsset.denom, symbolLabel)
-//                WDP.dpSymbolImg(chainConfig, msAsset.denom, symbolImg)
-//
-//                if (amountLabel != nil) {
-//                    let available = BaseData.instance.getAvailableAmount_gRPC(msAsset.denom)
-//                    let decimal = msAsset.decimals
-//                    amountLabel!.attributedText = WDP.dpAmount(available.stringValue, amountLabel!.font!, decimal, decimal)
-//                }
-//            }
-//        }
-//    }
-//
-//    static func neutronPairDecimal(_ pair: NeutronSwapPoolPair) -> Int16 {
-//        var result: Int16 = 6
-//        if (pair.type == "cw20") {
-//            if let cw20Token = BaseData.instance.mMintscanTokens.filter({ $0.address == pair.address }).first {
-//                result = cw20Token.decimals
-//            }
-//
-//        } else {
-//            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == pair.denom }).first {
-//                result = msAsset.decimals
-//            }
-//        }
-//        return result
-//    }
-//
-//    static func neutronPairAmount(_ pair: NeutronSwapPoolPair) -> NSDecimalNumber {
-//        var result = NSDecimalNumber.zero
-//        if (pair.type == "cw20") {
-//            if let cw20Token = BaseData.instance.mMintscanTokens.filter({ $0.address == pair.address }).first {
-//                result = NSDecimalNumber.init(string: cw20Token.amount)
-//            }
-//
-//        } else {
-//            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == pair.denom }).first {
-//                result = BaseData.instance.getAvailableAmount_gRPC(msAsset.denom)
-//            }
-//        }
-//        return result
-//    }
 }

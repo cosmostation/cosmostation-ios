@@ -634,6 +634,10 @@
 		047C10742AAC310600AFA159 /* QrAddressVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047C10702AAC310600AFA159 /* QrAddressVC.xib */; };
 		047DCEE228855F4800253CAA /* MintscanMyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DCEE128855F4800253CAA /* MintscanMyVote.swift */; };
 		047DCEE328855F4800253CAA /* MintscanMyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DCEE128855F4800253CAA /* MintscanMyVote.swift */; };
+		047F69392BE5FBCE00C3BC34 /* Portfolio2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047F69382BE5FBCE00C3BC34 /* Portfolio2Cell.xib */; };
+		047F693A2BE5FBCE00C3BC34 /* Portfolio2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F69372BE5FBCE00C3BC34 /* Portfolio2Cell.swift */; };
+		047F693B2BE5FBCE00C3BC34 /* Portfolio2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F69372BE5FBCE00C3BC34 /* Portfolio2Cell.swift */; };
+		047F693C2BE5FBCE00C3BC34 /* Portfolio2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047F69382BE5FBCE00C3BC34 /* Portfolio2Cell.xib */; };
 		04806BC52BB06DCA0048F232 /* Cw721Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04806BC42BB06DCA0048F232 /* Cw721Model.swift */; };
 		04806BC62BB06DCA0048F232 /* Cw721Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04806BC42BB06DCA0048F232 /* Cw721Model.swift */; };
 		04815BDE2A41DB120006A906 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 04815BDD2A41DB120006A906 /* SwiftProtobuf */; };
@@ -2217,6 +2221,8 @@
 		047C106F2AAC310600AFA159 /* QrAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrAddressVC.swift; sourceTree = "<group>"; };
 		047C10702AAC310600AFA159 /* QrAddressVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QrAddressVC.xib; sourceTree = "<group>"; };
 		047DCEE128855F4800253CAA /* MintscanMyVote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanMyVote.swift; sourceTree = "<group>"; };
+		047F69372BE5FBCE00C3BC34 /* Portfolio2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio2Cell.swift; sourceTree = "<group>"; };
+		047F69382BE5FBCE00C3BC34 /* Portfolio2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Portfolio2Cell.xib; sourceTree = "<group>"; };
 		04806BC42BB06DCA0048F232 /* Cw721Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw721Model.swift; sourceTree = "<group>"; };
 		048427A42B3BE09900C8D7D8 /* NeutronDao.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NeutronDao.storyboard; sourceTree = "<group>"; };
 		048427A72B3BE21200C8D7D8 /* NeutronSingleDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronSingleDao.swift; sourceTree = "<group>"; };
@@ -3899,6 +3905,8 @@
 			children = (
 				E15980582A6F5EFE0032892B /* PortfolioCell.swift */,
 				E15980592A6F5EFE0032892B /* PortfolioCell.xib */,
+				047F69372BE5FBCE00C3BC34 /* Portfolio2Cell.swift */,
+				047F69382BE5FBCE00C3BC34 /* Portfolio2Cell.xib */,
 				E122DC652A8DBD28006D1E7B /* BaseHeader.swift */,
 				E122DC682A8DBD3B006D1E7B /* BaseHeader.xib */,
 				04527DB72A937CA2005F72D7 /* AssetCell.swift */,
@@ -4458,6 +4466,7 @@
 				E12E9D302AE415D900336449 /* loadingSmallYellow.json in Resources */,
 				E131F44B2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */,
 				04B789A22ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib in Resources */,
+				047F693C2BE5FBCE00C3BC34 /* Portfolio2Cell.xib in Resources */,
 				04FAD9DF2AB6D8DC00143A3E /* AccountListVC.xib in Resources */,
 				04A1A8052AC80AA50014EF92 /* TxAmountSheet.xib in Resources */,
 				E1DF77842AB762010028BD51 /* CheckPrivateKeyCell.xib in Resources */,
@@ -4718,6 +4727,7 @@
 				E19993EA2B295873000F4A6B /* loadingSmallWhite.json in Resources */,
 				04A68C252ABDA3350041FA13 /* SelectSwapAssetCell.xib in Resources */,
 				04F4061729ED119800CD88E4 /* Init.storyboard in Resources */,
+				047F69392BE5FBCE00C3BC34 /* Portfolio2Cell.xib in Resources */,
 				044222562B96F4370063F031 /* SelectDisplayTokenCell.xib in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
 				182CCB832BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy in Resources */,
@@ -5136,6 +5146,7 @@
 				046EA8562AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
 				044222552B96F4370063F031 /* SelectDisplayTokenCell.swift in Sources */,
 				047843FD2AC9A37600462F1C /* ChainShentu.swift in Sources */,
+				047F693B2BE5FBCE00C3BC34 /* Portfolio2Cell.swift in Sources */,
 				0400EF242ADD4737007BA97F /* KavaSwapListVC.swift in Sources */,
 				04B7893C2ACAC9B100E9BE88 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
 				E1E0DBC72A9B0FE3006DA6BB /* HistoryCell.swift in Sources */,
@@ -5894,6 +5905,7 @@
 				044222542B96F4370063F031 /* SelectDisplayTokenCell.swift in Sources */,
 				04C940E02AEB92F800415256 /* BaseImgSheetCell.swift in Sources */,
 				046EA8552AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
+				047F693A2BE5FBCE00C3BC34 /* Portfolio2Cell.swift in Sources */,
 				047843FC2AC9A37600462F1C /* ChainShentu.swift in Sources */,
 				0400EF232ADD4737007BA97F /* KavaSwapListVC.swift in Sources */,
 				04B7893B2ACAC9B100E9BE88 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
