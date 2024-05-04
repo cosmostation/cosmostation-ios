@@ -852,7 +852,6 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     result.append(ChainCudos())
     result.append(ChainDesmos())
     result.append(ChainDydx())
-    result.append(ChainEmoney())
     result.append(ChainFetchAi())
     result.append(ChainFetchAi60Secp())
     result.append(ChainFetchAi60Old())
@@ -909,6 +908,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     
     
 //    result.append(ChainCrescent())
+//    result.append(ChainEmoney())
 //    result.append(ChainStarname())
 //    result.append(ChainBinanceBeacon())
     
