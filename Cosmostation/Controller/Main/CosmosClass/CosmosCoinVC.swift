@@ -295,6 +295,9 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             loadingView.isHidden = nativeCoins.count > 0 || ibcCoins.count > 0  || bridgedCoins.count > 0
             if (section == 0) {
+                if (selectedChain is ChainBeraEVM) {
+                    return nativeCoins.count + 1
+                }
                 return nativeCoins.count
             } else if (section == 1) {
                 return ibcCoins.count
@@ -317,6 +320,8 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
                 cell.bindBeaconAsset(selectedChain, lcdBalances[indexPath.row])
             } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
                 cell.bindOktAsset(selectedChain, lcdBalances[indexPath.row])
+            } else if (selectedChain is ChainBeraEVM && indexPath.section == 0 && indexPath.row == 1) {
+                cell.bindEvmClassCoin(selectedChain as! ChainBeraEVM)
             } else {
                 cell.bindCosmosClassAsset(selectedChain, getCoinBySection(indexPath)!)
             }

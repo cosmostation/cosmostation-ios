@@ -64,7 +64,7 @@ class EvmClass: CosmosClass {
                 }
                 if let balance = balanceJson?["result"].stringValue.hexToNSDecimal {
                     self.evmBalances = balance()
-//                    print("evmBalances ", tag, "   ", evmBalances)
+                    print("evmBalances ", tag, "   ", evmBalances)
                 }
                 await fetchAllErc20Balance(id)
                 
@@ -295,20 +295,21 @@ extension EvmClass {
 func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
     result.append(ChainEthereum())
-    result.append(ChainAltheaEVM())
-    result.append(ChainArbitrum())
-    result.append(ChainAvalanche())
-    result.append(ChainBaseEVM())
-    result.append(ChainBinanceSmart())
-    result.append(ChainCronos())
-    result.append(ChainDymensionEVM())
-    result.append(ChainEvmosEVM())
-    result.append(ChainHumansEVM())
-    result.append(ChainKavaEVM())
-    result.append(ChainOktEVM())
-    result.append(ChainOptimism())
-    result.append(ChainPolygon())
-    result.append(ChainXplaEVM())
+//    result.append(ChainAltheaEVM())
+//    result.append(ChainArbitrum())
+//    result.append(ChainAvalanche())
+//    result.append(ChainBaseEVM())
+    result.append(ChainBeraEVM())
+//    result.append(ChainBinanceSmart())
+//    result.append(ChainCronos())
+//    result.append(ChainDymensionEVM())
+//    result.append(ChainEvmosEVM())
+//    result.append(ChainHumansEVM())
+//    result.append(ChainKavaEVM())
+//    result.append(ChainOktEVM())
+//    result.append(ChainOptimism())
+//    result.append(ChainPolygon())
+//    result.append(ChainXplaEVM())
     
     
 //    result.append(ChainCantoEVM())

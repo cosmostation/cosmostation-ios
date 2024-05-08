@@ -108,6 +108,9 @@ class CosmosHistoryVC: BaseVC {
                 
             case .failure:
                 print("onFetchMsHistory error")
+                self.loadingView.isHidden = true
+                self.tableView.isHidden = true
+                self.emptyDataView.isHidden = false
             }
             self.refresher.endRefreshing()
         }

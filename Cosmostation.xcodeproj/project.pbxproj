@@ -1896,6 +1896,8 @@
 		E1ECE6C02B1D992D00FDFD91 /* AllChainClaimStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECE6BD2B1D992D00FDFD91 /* AllChainClaimStartVC.swift */; };
 		E1ECE6C12B1D992D00FDFD91 /* AllChainClaimStartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1ECE6BE2B1D992D00FDFD91 /* AllChainClaimStartVC.xib */; };
 		E1ECE6C22B1D992D00FDFD91 /* AllChainClaimStartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1ECE6BE2B1D992D00FDFD91 /* AllChainClaimStartVC.xib */; };
+		E1F257BC2BEB32CE008F4D21 /* ChainBeraEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257BB2BEB32CE008F4D21 /* ChainBeraEVM.swift */; };
+		E1F257BD2BEB32CE008F4D21 /* ChainBeraEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257BB2BEB32CE008F4D21 /* ChainBeraEVM.swift */; };
 		E1F2941C2AFE5246000550E8 /* ChainFetchAi60Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */; };
 		E1F2941D2AFE5246000550E8 /* ChainFetchAi60Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */; };
 		E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F2AE50227EC05100C87F3F /* InfoPlist.strings */; };
@@ -2847,6 +2849,7 @@
 		E1E0DBCA2A9B1579006DA6BB /* MintscanHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanHistory.swift; sourceTree = "<group>"; };
 		E1ECE6BD2B1D992D00FDFD91 /* AllChainClaimStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChainClaimStartVC.swift; sourceTree = "<group>"; };
 		E1ECE6BE2B1D992D00FDFD91 /* AllChainClaimStartVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllChainClaimStartVC.xib; sourceTree = "<group>"; };
+		E1F257BB2BEB32CE008F4D21 /* ChainBeraEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBeraEVM.swift; sourceTree = "<group>"; };
 		E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFetchAi60Old.swift; sourceTree = "<group>"; };
 		E1F2AE4B227E865D00C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1F2AE4F227EC05100C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -2996,6 +2999,7 @@
 				E1D931F82BCF74D800AEEA10 /* ChainArbitrum.swift */,
 				E1D931FB2BCF74EE00AEEA10 /* ChainAvalanche.swift */,
 				E1989BF62BA81763009B5619 /* ChainBaseEVM.swift */,
+				E1F257BB2BEB32CE008F4D21 /* ChainBeraEVM.swift */,
 				E1D931F52BCD301E00AEEA10 /* ChainBinanceSmart.swift */,
 				04C63D382B87653C00D4A366 /* ChainCantoEVM.swift */,
 				E1D931FE2BCF750400AEEA10 /* ChainCronos.swift */,
@@ -5339,6 +5343,7 @@
 				0402B8282ACC7B2600824B3F /* ChainOnomy.swift in Sources */,
 				04B789602ACAC9B100E9BE88 /* ibc_applications_transfer_v1_query.grpc.swift in Sources */,
 				047842D92AC87C1000462F1C /* CosmosTxResult.swift in Sources */,
+				E1F257BD2BEB32CE008F4D21 /* ChainBeraEVM.swift in Sources */,
 				E1DF77702AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
 				E14E29762A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
 				046EA7A42AD0499900A2FCE7 /* stride_vesting_vesting.pb.swift in Sources */,
@@ -6098,6 +6103,7 @@
 				047843692AC991B300462F1C /* injective_exchange_v1beta1_genesis.pb.swift in Sources */,
 				0402B8272ACC7B2600824B3F /* ChainOnomy.swift in Sources */,
 				04B7895F2ACAC9B100E9BE88 /* ibc_applications_transfer_v1_query.grpc.swift in Sources */,
+				E1F257BC2BEB32CE008F4D21 /* ChainBeraEVM.swift in Sources */,
 				047842D82AC87C1000462F1C /* CosmosTxResult.swift in Sources */,
 				E1DF776F2AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
 				E14E29752A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
