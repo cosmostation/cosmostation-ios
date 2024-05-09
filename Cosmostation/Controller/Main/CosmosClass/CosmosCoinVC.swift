@@ -51,13 +51,22 @@ class CosmosCoinVC: BaseVC {
         
         onSortAssets()
         
-        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainCrescent) {
+        if (selectedChain is ChainCantoEVM || selectedChain is ChainRegen) {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
                 let sunsetSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
                 sunsetSheet.selectedChain = self.selectedChain
-                sunsetSheet.noticeType = .ChainSunset
+                sunsetSheet.noticeType = .ChainDelist
                 self.onStartSheet(sunsetSheet)
             })
+            
+        } else if (selectedChain is ChainOkt996Keccak) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+                let legacySheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
+                legacySheet.selectedChain = self.selectedChain
+                legacySheet.noticeType = .LegacyPath
+                self.onStartSheet(legacySheet)
+            })
+            
         }
     }
     

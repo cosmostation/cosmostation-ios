@@ -320,6 +320,10 @@
 "str_node_down_title" = "⚠️ Node Down";
 "str_sunset_title" = "Chain Sunset";
 "str_sunset_msg" = "The chain you selected is scheduled to end support. For more information, please refer to the foundation's official announcement.";
+"str_delist_title" = "Discontinuation of support";
+"str_delist_msg" = "The chain you selected will be discontinued from mobile wallets. It can be supported by other wallets or future custom chain services.";
+"str_legacy_path_title" = "Legacy path will not support";
+"str_legacy_path_msg" = "Accounts on the legacy path you selected will be terminated. We strongly recommend that you move your assets to the public path.";
 
 
 "btn_delegate" = "  Delegate";

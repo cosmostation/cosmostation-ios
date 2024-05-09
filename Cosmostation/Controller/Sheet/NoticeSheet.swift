@@ -47,6 +47,18 @@ class NoticeSheet: BaseVC {
             subBtn.setTitle("Link", for: .normal)
             okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
             
+        } else if (noticeType == .ChainDelist) {
+            noticeTitleLabel.text = NSLocalizedString("str_delist_title", comment: "")
+            noticeMsgLabel.text = NSLocalizedString("str_delist_msg", comment: "")
+            subBtn.isHidden = true
+            okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
+            
+        } else if (noticeType == .LegacyPath) {
+            noticeTitleLabel.text = NSLocalizedString("str_legacy_path_title", comment: "")
+            noticeMsgLabel.text = NSLocalizedString("str_legacy_path_msg", comment: "")
+            subBtn.isHidden = true
+            okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
+            
         } else if (noticeType == .NFTGithub) {
             noticeTitleLabel.text = NSLocalizedString("str_nft_github", comment: "")
             noticeMsgLabel.text = NSLocalizedString("msg_nft_github", comment: "")
@@ -97,5 +109,7 @@ public enum NoticeType: Int {
     case TokenGithub = 1
     case NodeDownGuide = 2
     case ChainSunset = 3
-    case NFTGithub = 4
+    case ChainDelist = 4
+    case LegacyPath = 5
+    case NFTGithub = 6
 }
