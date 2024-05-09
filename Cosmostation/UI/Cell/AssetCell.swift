@@ -82,29 +82,6 @@ class AssetCell: UITableViewCell {
         }
     }
     
-    
-    func bindBeaconAsset(_ baseChain: CosmosClass, _ coin: JSON) {
-        if let bnbChain = baseChain as? ChainBinanceBeacon,
-            let token = bnbChain.lcdBeaconTokens.filter({ $0["symbol"].string == coin["symbol"].string }).first {
-                let original_symbol = token["original_symbol"].stringValue
-                
-                symbolLabel.text = original_symbol
-                priceCurrencyLabel.text = token["name"].string
-                coinImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(original_symbol))
-                
-                let availableAmount = bnbChain.lcdBalanceAmount(coin["symbol"].stringValue)
-                amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 8)
-                if (BaseData.instance.getHideValue()) {
-                    hidenValueLabel.isHidden = false
-                } else {
-                    amountLabel.isHidden = false
-                }
-                priceLabel.isHidden = true
-                priceChangeLabel.isHidden = true
-                priceChangePercentLabel.isHidden = true
-        }
-    }
-    
     func bindOktAsset(_ baseChain: CosmosClass, _ coin: JSON) {
         if let oktChain = baseChain as? ChainOkt996Keccak,
            let token = oktChain.lcdOktTokens.filter({ $0["symbol"].string == coin["denom"].string }).first {

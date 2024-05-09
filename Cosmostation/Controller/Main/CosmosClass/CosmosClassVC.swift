@@ -211,7 +211,7 @@ class CosmosClassVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainOkt996Keccak) {
             let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
             transfer.selectedChain = selectedChain
             transfer.toSendDenom = selectedChain.stakeDenom

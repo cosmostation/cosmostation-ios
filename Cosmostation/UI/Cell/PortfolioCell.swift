@@ -93,13 +93,6 @@ class PortfolioCell: UITableViewCell {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
             
-//            if (!(chain is ChainOkt996Keccak) && !(chain is ChainBinanceBeacon)) {
-//                if (chain.cosmosBalances == nil) {
-//                    reposeErrorLabel.isHidden = false
-//                    return
-//                }
-//            }
-            
             if (BaseData.instance.getHideValue()) {
                 currencyLabel.text = ""
                 valueLabel.font = .fontSize14Bold

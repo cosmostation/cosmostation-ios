@@ -67,10 +67,7 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     func bindCosmosStakeAsset(_ baseChain: CosmosClass) {
-        if (baseChain is ChainBinanceBeacon) {
-            bindBeaconAsset(baseChain)
-            
-        } else if (baseChain is ChainOktEVM || baseChain is ChainOkt996Keccak) {
+        if (baseChain is ChainOktEVM || baseChain is ChainOkt996Keccak) {
             bindOktAsset(baseChain)
             
         } else if (baseChain is ChainNeutron) {
@@ -149,44 +146,6 @@ class AssetCosmosClassCell: UITableViewCell {
             }
         }
         
-    }
-    
-    func bindBeaconAsset(_ baseChain: CosmosClass) {
-        if let bnbChain = baseChain as? ChainBinanceBeacon {
-            stakingTitle.text = "Locked"
-            vestingTitle.text = "Frozen"
-            vestingLayer.isHidden = false
-            
-            let stakeDenom = baseChain.stakeDenom!
-            let value = baseChain.allValue()
-            coinImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(stakeDenom))
-            symbolLabel.text = stakeDenom.uppercased()
-            
-            WDP.dpPrice(BNB_GECKO_ID, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(BNB_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
-            if (BaseData.instance.getHideValue()) {
-                hidenValueLabel.isHidden = false
-            } else {
-                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
-                amountLabel.isHidden = false
-                valueCurrencyLabel.isHidden = false
-                valueLabel.isHidden = false
-            }
-            
-            let availableAmount = bnbChain.lcdBalanceAmount(stakeDenom)
-            availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 8)
-            amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 8)
-            
-            //HardCode
-            vestingLabel?.attributedText = WDP.dpAmount("0", vestingLabel!.font, 8)
-            stakingLabel?.attributedText = WDP.dpAmount("0", stakingLabel!.font, 8)
-            
-            if (BaseData.instance.getHideValue()) {
-                availableLabel.text = "✱✱✱✱"
-                vestingLabel.text = "✱✱✱✱"
-                stakingLabel.text = "✱✱✱✱"
-            }
-        }
     }
     
     func bindOktAsset(_ baseChain: CosmosClass) {

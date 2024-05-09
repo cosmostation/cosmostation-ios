@@ -163,7 +163,6 @@ extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
             
         } else if (indexPath.section == 1) {
             let chain = searchCosmosChains[indexPath.row]
-            if (chain is ChainBinanceBeacon) { return }
             loadingView.isHidden = false
             self.onDisplayEndPointSheet(chain)
         }

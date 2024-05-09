@@ -72,20 +72,7 @@ class LegacyTransfer: BaseVC {
         loadingView.play()
         
         //display to send asset info
-        if let bnbChain = selectedChain as? ChainBinanceBeacon {
-            tokenInfo = bnbChain.lcdBeaconTokens.filter({ $0["symbol"].string == toSendDenom }).first!
-            let original_symbol = tokenInfo["original_symbol"].stringValue
-            toSendAssetImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(original_symbol))
-            toSendSymbolLabel.text = original_symbol.uppercased()
-            
-            let available = bnbChain.lcdBalanceAmount(toSendDenom)
-            if (toSendDenom == stakeDenom) {
-                availableAmount = available.subtracting(NSDecimalNumber(string: BNB_BEACON_BASE_FEE))
-            } else {
-                availableAmount = available
-            }
-            
-        } else if let okEvmChain = selectedChain as? ChainOktEVM {
+        if let okEvmChain = selectedChain as? ChainOktEVM {
             tokenInfo = okEvmChain.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
             let original_symbol = tokenInfo["original_symbol"].stringValue
             toSendAssetImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(original_symbol))
@@ -165,22 +152,7 @@ class LegacyTransfer: BaseVC {
         } else {
             toSendAmount = NSDecimalNumber(string: amount)
             
-            if (selectedChain is ChainBinanceBeacon) {
-                toAssetDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
-                toAssetAmountLabel?.attributedText = WDP.dpAmount(toSendAmount.stringValue, toAssetAmountLabel!.font, 8)
-                toSendAssetHint.isHidden = true
-                toAssetAmountLabel.isHidden = false
-                toAssetDenomLabel.isHidden = false
-                
-                if (toSendDenom == stakeDenom) {
-                    let msPrice = BaseData.instance.getPrice(BNB_GECKO_ID)
-                    let toSendValue = msPrice.multiplying(by: toSendAmount, withBehavior: handler6)
-                    WDP.dpValue(toSendValue, toAssetCurrencyLabel, toAssetValueLabel)
-                    toAssetCurrencyLabel.isHidden = false
-                    toAssetValueLabel.isHidden = false
-                }
-                
-            } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+            if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
                 toAssetDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
                 toAssetAmountLabel?.attributedText = WDP.dpAmount(toSendAmount.stringValue, toAssetAmountLabel!.font, 18)
                 toSendAssetHint.isHidden = true
@@ -245,18 +217,7 @@ class LegacyTransfer: BaseVC {
     }
     
     func onUpdateFeeView() {
-        if (selectedChain is ChainBinanceBeacon) {
-            feeSelectImg.af.setImage(withURL: ChainBinanceBeacon.assetImg(stakeDenom))
-            feeSelectLabel.text = stakeDenom.uppercased()
-            
-            let msPrice = BaseData.instance.getPrice(BNB_GECKO_ID)
-            let feeAmount = NSDecimalNumber(string: BNB_BEACON_BASE_FEE)
-            let feeValue = msPrice.multiplying(by: feeAmount, withBehavior: handler6)
-            feeAmountLabel?.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 8)
-            feeDenomLabel.text = stakeDenom.uppercased()
-            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
-            
-        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             feeSelectImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(stakeDenom))
             feeSelectLabel.text = stakeDenom.uppercased()
             
@@ -338,21 +299,7 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, AddressLegacyDelegate, Memo
             loadingView.isHidden = false
             
             Task {
-                if (selectedChain is ChainBinanceBeacon) {
-                    if let response = try? await broadcastBnbSendTx() {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.selectedChain
-                            txResult.legacyResult = response?.arrayValue[0]
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                            
-                        });
-                    }
-                    
-                } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+                if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
                     if let response = try? await broadcastOktSendTx() {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
@@ -372,26 +319,6 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, AddressLegacyDelegate, Memo
 }
 
 extension LegacyTransfer {
-    
-    func broadcastBnbSendTx() async throws -> JSON? {
-        let bnbChain = selectedChain as! ChainBinanceBeacon
-        let bnbMsg = BinanceMessage.transfer(symbol: self.toSendDenom,
-                                             amount: (self.toSendAmount).doubleValue,
-                                             toAddress: self.recipientAddress!,
-                                             memo: self.txMemo,
-                                             privateKey: self.selectedChain.privateKey!,
-                                             signerAddress: self.selectedChain.bechAddress,
-                                             sequence: bnbChain.lcdAccountInfo["sequence"].intValue,
-                                             accountNumber: bnbChain.lcdAccountInfo["account_number"].intValue,
-                                             chainId: self.selectedChain.chainIdCosmos)
-        
-        var encoding: ParameterEncoding = URLEncoding.default
-        encoding = HexEncoding(data: try bnbMsg.encode())
-        let param: Parameters = ["address": self.selectedChain.bechAddress]
-        
-        return try? await AF.request(BaseNetWork.broadcastUrl(self.selectedChain), method: .post, parameters: param, encoding: encoding, headers: [:]).serializingDecodable(JSON.self).value
-    }
-    
     
     func broadcastOktSendTx() async throws -> JSON? {
         let sendCoin = L_Coin(toSendDenom, WUtils.getFormattedNumber(toSendAmount, 18))

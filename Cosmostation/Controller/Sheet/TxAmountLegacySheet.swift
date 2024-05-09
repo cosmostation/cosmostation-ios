@@ -54,12 +54,7 @@ class TxAmountLegacySheet: BaseVC, UITextFieldDelegate {
     }
     
     func onUpdateView() {
-        if (selectedChain is ChainBinanceBeacon) {
-            decimal = 8
-            availableDenom.text = tokenInfo["original_symbol"].stringValue.uppercased()
-            availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 8)
-            
-        }  else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             decimal = 18
             availableDenom.text = tokenInfo["original_symbol"].stringValue.uppercased()
             availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 18)

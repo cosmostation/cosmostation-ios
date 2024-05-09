@@ -72,12 +72,7 @@ class NoticeSheet: BaseVC {
             }
             
         } else if (noticeType == .ChainSunset) {
-            if (selectedChain is ChainBinanceBeacon) {
-                let rawUrl =  "https://www.bnbchain.org/en/bnb-chain-fusion"
-                guard let url = URL(string: rawUrl) else { return }
-                self.onShowSafariWeb(url)
-                
-            } else if (selectedChain is ChainCrescent) {
+            if (selectedChain is ChainCrescent) {
                 let rawUrl = "https://crescentnetwork.medium.com/flip-announcement-af24c8ab7e7f"
                 guard let url = URL(string: rawUrl) else { return }
                 self.onShowSafariWeb(url)
