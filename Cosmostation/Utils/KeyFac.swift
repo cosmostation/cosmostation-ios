@@ -246,3 +246,22 @@ extension UInt32 {
         return Array(bytePtr)
     }
 }
+
+extension Data {
+    var bytes : [UInt8]{
+        return [UInt8](self)
+    }
+    
+    public static func dataFromHex(_ hex: String) -> Data? {
+        let string = hex.lowercased().stripHexPrefix()
+        let array = Array<UInt8>(hex: string)
+        if (array.count == 0) {
+            if (hex == "0x" || hex == "") {
+                return Data()
+            } else {
+                return nil
+            }
+        }
+        return Data(array)
+    }
+}
