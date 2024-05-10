@@ -1661,7 +1661,16 @@ class Signer {
         }
 
         var pubKey: Google_Protobuf_Any?
-        if (baseChain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1) {
+        if (baseChain.accountKeyType.pubkeyType == .BERA_Secp256k1) {
+            let pub = Ethermint_Crypto_V1_Ethsecp256k1_PubKey.with {
+                $0.key = baseChain.publicKey!
+            }
+            pubKey = Google_Protobuf_Any.with {
+                $0.typeURL = "/polaris.crypto.ethsecp256k1.v1.PubKey"
+                $0.value = try! pub.serializedData()
+            }
+            
+        } else if (baseChain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1) {
             let pub = Injective_Crypto_V1beta1_Ethsecp256k1_PubKey.with {
                 $0.key = baseChain.publicKey!
             }
@@ -1736,7 +1745,8 @@ class Signer {
     
     static func getByteSingleSignatures(_ toSignByte: Data, _ baseChain: BaseChain) -> Data {
         var hash: Data?
-        if (baseChain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1 || 
+        if (baseChain.accountKeyType.pubkeyType == .BERA_Secp256k1 ||
+            baseChain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1 ||
             baseChain.accountKeyType.pubkeyType == .ETH_Keccak256) {
             hash = Crypto.sha3keccak256(data: toSignByte)
         } else {

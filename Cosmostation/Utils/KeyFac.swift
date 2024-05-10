@@ -20,7 +20,8 @@ class KeyFac {
     
 
     static func getPriKeyFromSeed(_ pubKeyType: PubKeyType, _ seed: Data, _ path: String) -> Data? {
-        if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1) {
+        if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || 
+            pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1) {
             return getSecp256k1PriKey(seed, path)
             
         } else if (pubKeyType == .SUI_Ed25519) {
@@ -69,7 +70,8 @@ class KeyFac {
     
     
     static func getPubKeyFromPrivateKey(_ priKey: Data, _ pubKeyType: PubKeyType) -> Data? {
-        if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1) {
+        if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || 
+            pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1) {
             return getSecp256k1PubKey(priKey)
             
         } else if (pubKeyType == .SUI_Ed25519) {
@@ -92,7 +94,8 @@ class KeyFac {
             let ripemd160 = RIPEMD160.hash(pubKey.sha256())
             return try! SegwitAddrCoder.shared.encode(prefix!, ripemd160)
             
-        } else if (pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1) {
+        } else if (pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1
+                   || pubKeyType == .BERA_Secp256k1) {
             return Web3.Utils.publicToAddressString(pubKey)!
             
         } else if (pubKeyType == .SUI_Ed25519) {

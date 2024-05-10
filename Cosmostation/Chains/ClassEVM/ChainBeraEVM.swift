@@ -27,7 +27,7 @@ class ChainBeraEVM: EvmClass  {
         coinGeckoId = ""
         coinLogo = "tokenBera"
 
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        accountKeyType = AccountKeyType(.BERA_Secp256k1, "m/44'/60'/0'/0/X")
         bechAccountPrefix = "bera"
         validatorPrefix = "beravaloper"
         

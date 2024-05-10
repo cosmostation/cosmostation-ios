@@ -77,7 +77,8 @@ enum PubKeyType: Int {
     case ETH_Keccak256 = 0
     case COSMOS_Secp256k1 = 1
     case INJECTIVE_Secp256k1 = 2
-    case SUI_Ed25519 = 3
+    case BERA_Secp256k1 = 3
+    case SUI_Ed25519 = 4
     case unknown = 99
 }
 
