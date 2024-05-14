@@ -1858,11 +1858,38 @@
 		E1ECE6C22B1D992D00FDFD91 /* AllChainClaimStartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1ECE6BE2B1D992D00FDFD91 /* AllChainClaimStartVC.xib */; };
 		E1F257BC2BEB32CE008F4D21 /* ChainBeraEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257BB2BEB32CE008F4D21 /* ChainBeraEVM.swift */; };
 		E1F257BD2BEB32CE008F4D21 /* ChainBeraEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257BB2BEB32CE008F4D21 /* ChainBeraEVM.swift */; };
+		E1F257C52BF369EE008F4D21 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257C42BF369EE008F4D21 /* NotificationService.swift */; };
+		E1F257C92BF369EE008F4D21 /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E1F257C22BF369EE008F4D21 /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E1F257CF2BF36CA6008F4D21 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = E1F257CE2BF36CA6008F4D21 /* FirebaseMessaging */; };
 		E1F2941C2AFE5246000550E8 /* ChainFetchAi60Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */; };
 		E1F2941D2AFE5246000550E8 /* ChainFetchAi60Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */; };
 		E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F2AE50227EC05100C87F3F /* InfoPlist.strings */; };
 		EB85535FBF1815AEAECE43D4 /* Pods_CosmostationDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE90772AFD2E77BC9578D8B2 /* Pods_CosmostationDev.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E1F257C72BF369EE008F4D21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1945E1C222E7C0600A1436F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E1F257C12BF369EE008F4D21;
+			remoteInfo = NotificationService;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E1F257CD2BF369EE008F4D21 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E1F257C92BF369EE008F4D21 /* NotificationService.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0400EE802AD41FC5007BA97F /* ServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
@@ -2790,6 +2817,9 @@
 		E1ECE6BD2B1D992D00FDFD91 /* AllChainClaimStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChainClaimStartVC.swift; sourceTree = "<group>"; };
 		E1ECE6BE2B1D992D00FDFD91 /* AllChainClaimStartVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllChainClaimStartVC.xib; sourceTree = "<group>"; };
 		E1F257BB2BEB32CE008F4D21 /* ChainBeraEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBeraEVM.swift; sourceTree = "<group>"; };
+		E1F257C22BF369EE008F4D21 /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1F257C42BF369EE008F4D21 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		E1F257C62BF369EE008F4D21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFetchAi60Old.swift; sourceTree = "<group>"; };
 		E1F2AE4B227E865D00C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1F2AE4F227EC05100C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -2835,6 +2865,14 @@
 				04D547F02A612935001F1A4B /* AlamofireImage in Frameworks */,
 				04D279D82A65092B00AF046A /* SQLite in Frameworks */,
 				04D279E12A66E17B00AF046A /* Lottie in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1F257BF2BF369EE008F4D21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1F257CF2BF36CA6008F4D21 /* FirebaseMessaging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3984,6 +4022,7 @@
 			isa = PBXGroup;
 			children = (
 				E1945E26222E7C0600A1436F /* Cosmostation */,
+				E1F257C32BF369EE008F4D21 /* NotificationService */,
 				E1945E25222E7C0600A1436F /* Products */,
 				74DE208134C7AE8A99805D94 /* Pods */,
 				1D72712946482FD8BAF942D7 /* Frameworks */,
@@ -3995,6 +4034,7 @@
 			children = (
 				E1945E24222E7C0600A1436F /* Cosmostation.app */,
 				18FFB7D5281AF533004E65BB /* CosmostationDev.app */,
+				E1F257C22BF369EE008F4D21 /* NotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4149,6 +4189,15 @@
 			path = EvmClass;
 			sourceTree = "<group>";
 		};
+		E1F257C32BF369EE008F4D21 /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				E1F257C42BF369EE008F4D21 /* NotificationService.swift */,
+				E1F257C62BF369EE008F4D21 /* Info.plist */,
+			);
+			path = NotificationService;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4194,10 +4243,12 @@
 				E1945E21222E7C0600A1436F /* Frameworks */,
 				E1945E22222E7C0600A1436F /* Resources */,
 				A3D328274E250531DA57755A /* [CP] Embed Pods Frameworks */,
+				E1F257CD2BF369EE008F4D21 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E1F257C82BF369EE008F4D21 /* PBXTargetDependency */,
 			);
 			name = Cosmostation;
 			packageProductDependencies = (
@@ -4218,13 +4269,33 @@
 			productReference = E1945E24222E7C0600A1436F /* Cosmostation.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E1F257C12BF369EE008F4D21 /* NotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E1F257CA2BF369EE008F4D21 /* Build configuration list for PBXNativeTarget "NotificationService" */;
+			buildPhases = (
+				E1F257BE2BF369EE008F4D21 /* Sources */,
+				E1F257BF2BF369EE008F4D21 /* Frameworks */,
+				E1F257C02BF369EE008F4D21 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationService;
+			packageProductDependencies = (
+				E1F257CE2BF36CA6008F4D21 /* FirebaseMessaging */,
+			);
+			productName = NotificationService;
+			productReference = E1F257C22BF369EE008F4D21 /* NotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		E1945E1C222E7C0600A1436F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1340;
 				ORGANIZATIONNAME = wannabit;
 				TargetAttributes = {
@@ -4239,6 +4310,9 @@
 								enabled = 1;
 							};
 						};
+					};
+					E1F257C12BF369EE008F4D21 = {
+						CreatedOnToolsVersion = 15.3;
 					};
 				};
 			};
@@ -4273,6 +4347,7 @@
 			targets = (
 				E1945E23222E7C0600A1436F /* Cosmostation */,
 				18FFB25D281AF533004E65BB /* CosmostationDev */,
+				E1F257C12BF369EE008F4D21 /* NotificationService */,
 			);
 		};
 /* End PBXProject section */
@@ -4644,6 +4719,13 @@
 				E15F2D062ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
 				E1DF77712AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */,
 				E12E9D2C2AE2B4A700336449 /* KavaMintAction.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1F257C02BF369EE008F4D21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6219,7 +6301,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E1F257BE2BF369EE008F4D21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1F257C52BF369EE008F4D21 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E1F257C82BF369EE008F4D21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E1F257C12BF369EE008F4D21 /* NotificationService */;
+			targetProxy = E1F257C72BF369EE008F4D21 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E1271B02224B17230083AF17 /* Localizable.strings */ = {
@@ -6436,6 +6534,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6ED0AF4867E1AFC41A279302 /* Pods-Cosmostation.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
@@ -6469,6 +6568,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9EC086EE8CB71A2FB9E32070 /* Pods-Cosmostation.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
@@ -6498,6 +6598,72 @@
 			};
 			name = Release;
 		};
+		E1F257CB2BF369EE008F4D21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8G562MW56M;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 wannabit. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E1F257CC2BF369EE008F4D21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8G562MW56M;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 wannabit. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -6524,6 +6690,15 @@
 			buildConfigurations = (
 				E1945E37222E7C0800A1436F /* Debug */,
 				E1945E38222E7C0800A1436F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E1F257CA2BF369EE008F4D21 /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1F257CB2BF369EE008F4D21 /* Debug */,
+				E1F257CC2BF369EE008F4D21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -6757,6 +6932,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E122DA242A8A19D2006D1E7B /* XCRemoteSwiftPackageReference "Blake2.swift" */;
 			productName = Blake2;
+		};
+		E1F257CE2BF36CA6008F4D21 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04D547EB2A612914001F1A4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
