@@ -103,7 +103,7 @@ extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
         if (indexPath.row <= 3) {
             return UITableView.automaticDimension
         } else {
-            if (!BaseData.instance.reviewMode || BaseData.instance.checkInstallTime()) {
+            if (BaseData.instance.showEvenReview()) {
                 return UITableView.automaticDimension
             }
         }

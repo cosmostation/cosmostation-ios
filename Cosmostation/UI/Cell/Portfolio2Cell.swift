@@ -85,10 +85,9 @@ class Portfolio2Cell: UITableViewCell {
             cw20Tag.isHidden = false
         }
         
-        if ((!BaseData.instance.reviewMode || BaseData.instance.checkInstallTime()) && chain.supportCw721) {
+        if (BaseData.instance.showEvenReview() && chain.supportCw721) {
             nftTag.isHidden = false
         }
-        
         
         if (chain.fetchState == .Fail) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)

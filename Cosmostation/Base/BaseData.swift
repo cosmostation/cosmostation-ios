@@ -88,7 +88,9 @@ final class BaseData: NSObject{
         return UserDefaults.standard.bool(forKey: KEY_ACCOUNT_REFRESH_ALL)
     }
     
-    
+    func showEvenReview() -> Bool {
+        return (!reviewMode || checkInstallTime())
+    }
     
 
     

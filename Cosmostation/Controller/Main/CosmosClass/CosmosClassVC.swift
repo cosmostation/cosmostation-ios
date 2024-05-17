@@ -360,7 +360,7 @@ class CosmosClassVC: BaseVC {
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 4)
         tabbar.items.append(coinTabBar)
         if (selectedChain.supportCw20 || selectedChain is EvmClass) { tabbar.items.append(tokenTabBar) }
-        if ((!BaseData.instance.reviewMode || BaseData.instance.checkInstallTime()) && selectedChain.supportCw721) { tabbar.items.append(nftTabBar) }
+        if (BaseData.instance.showEvenReview() && selectedChain.supportCw721) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(historyTabBar)
         if (!selectedChain.getChainListParam().isEmpty) { tabbar.items.append(aboutTabBar) }
         
@@ -409,7 +409,7 @@ class CosmosClassVC: BaseVC {
             }
             
         } else if (selectedChain is ChainKava118 || selectedChain is ChainKava459) {
-            if (!BaseData.instance.reviewMode || BaseData.instance.checkInstallTime()) {
+            if (BaseData.instance.showEvenReview()) {
                 mainFab.addItem(title: "DeFi", image: UIImage(named: "iconFabDefi")) { _ in
                     self.onKavaDefi()
                 }
