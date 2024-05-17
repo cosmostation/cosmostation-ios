@@ -144,13 +144,24 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        let delegate = CosmosDelegate(nibName: "CosmosDelegate", bundle: nil)
-        delegate.selectedChain = selectedChain
-        if (toValAddress != nil) {
-            delegate.toValidator = validators.filter({ $0.operatorAddress == toValAddress }).first
+        if (selectedChain is ChainBeraEVM) {
+            let delegate = EvmDelegate(nibName: "EvmDelegate", bundle: nil)
+            delegate.selectedChain = selectedChain as? EvmClass
+            if (toValAddress != nil) {
+                delegate.toValidator = validators.filter({ $0.operatorAddress == toValAddress }).first
+            }
+            delegate.modalTransitionStyle = .coverVertical
+            self.present(delegate, animated: true)
+            
+        } else {
+            let delegate = CosmosDelegate(nibName: "CosmosDelegate", bundle: nil)
+            delegate.selectedChain = selectedChain
+            if (toValAddress != nil) {
+                delegate.toValidator = validators.filter({ $0.operatorAddress == toValAddress }).first
+            }
+            delegate.modalTransitionStyle = .coverVertical
+            self.present(delegate, animated: true)
         }
-        delegate.modalTransitionStyle = .coverVertical
-        self.present(delegate, animated: true)
     }
     
     func onUndelegateTx(_ fromValAddress: String) {

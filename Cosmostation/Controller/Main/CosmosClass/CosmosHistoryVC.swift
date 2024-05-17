@@ -71,6 +71,7 @@ class CosmosHistoryVC: BaseVC {
     
     func onFetchMsHistory(_ address: String?, _ id: String) {
         let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, address!)
+        print("url ", url)
         AF.request(url, method: .get, parameters: ["limit":String(BATCH_CNT), "search_after":id]).responseDecodable(of: [MintscanHistory].self, queue: .main, decoder: JSONDecoder()) { response in
             switch response.result {
             case .success(let value):

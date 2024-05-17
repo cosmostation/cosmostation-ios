@@ -835,7 +835,7 @@ extension CosmosClass {
 func ALLCOSMOSCLASS() -> [CosmosClass] {
     var result = [CosmosClass]()
     result.removeAll()
-    result.append(ChainCosmos())
+//    result.append(ChainCosmos())
 //    result.append(ChainAkash())
 //    result.append(ChainAlthea118())
 //    result.append(ChainArchway())

@@ -64,7 +64,7 @@ class EvmClass: CosmosClass {
                 }
                 if let balance = balanceJson?["result"].stringValue.hexToNSDecimal {
                     self.evmBalances = balance()
-                    print("evmBalances ", tag, "   ", evmBalances)
+//                    print("evmBalances ", tag, "   ", evmBalances)
                 }
                 await fetchAllErc20Balance(id)
                 
@@ -129,7 +129,7 @@ class EvmClass: CosmosClass {
                 }
                 self.rewardAddress = rewardaddr?.replacingOccurrences(of: "\"", with: "")
                 
-                print("balance", self.tag, " ", balance)
+//                print("balance", self.tag, " ", balance)
             }
             
             DispatchQueue.main.async {
@@ -296,7 +296,7 @@ extension EvmClass {
 
 func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
-    result.append(ChainEthereum())
+//    result.append(ChainEthereum())
 //    result.append(ChainAltheaEVM())
 //    result.append(ChainArbitrum())
 //    result.append(ChainAvalanche())
