@@ -32,7 +32,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var txStyle: TxStyle = .COSMOS_STYLE
     var fromChain: BaseChain!
     var toChain: BaseChain!
-    var toAddress: String!
+    var toAddress: String?
     var toMemo = ""
     var fetchCnt = 10
     
@@ -145,6 +145,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     }
     
     func onCheckAddAddressBook() {
+        if (toAddress == nil) { return }
         if let existed = BaseData.instance.selectAllAddressBooks().filter({ $0.dpAddress == toAddress }).first {
             if (existed.memo != toMemo) {
                 let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)

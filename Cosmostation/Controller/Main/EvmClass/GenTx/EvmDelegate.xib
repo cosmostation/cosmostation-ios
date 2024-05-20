@@ -21,7 +21,10 @@
             <connections>
                 <outlet property="commLabel" destination="1l2-FN-TKu" id="czO-ED-afs"/>
                 <outlet property="commPercentLabel" destination="MOh-db-ObV" id="Z6B-50-AiC"/>
+                <outlet property="errorCardView" destination="NI6-RF-Ene" id="rKv-6f-vyG"/>
+                <outlet property="errorMsgLabel" destination="8US-e1-24O" id="xUW-EI-Qh6"/>
                 <outlet property="feeAmountLabel" destination="Bkv-11-GYW" id="eLh-6D-2KK"/>
+                <outlet property="feeCardView" destination="2Tv-dd-75h" id="BhO-m7-VMw"/>
                 <outlet property="feeCurrencyLabel" destination="pwy-Fp-0Z4" id="UjC-Nz-stO"/>
                 <outlet property="feeDenomLabel" destination="Lqy-td-uaI" id="z9z-Vw-RXW"/>
                 <outlet property="feeSegments" destination="CWA-d4-rOQ" id="abH-Ha-pRW"/>
@@ -296,6 +299,9 @@
                             </segments>
                             <color key="tintColor" name="_primary"/>
                             <color key="selectedSegmentTintColor" name="_primary"/>
+                            <connections>
+                                <action selector="feeSegmentSelected:" destination="-1" eventType="valueChanged" id="IWt-u6-BGv"/>
+                            </connections>
                         </segmentedControl>
                     </subviews>
                     <color key="backgroundColor" name="_color06"/>
@@ -321,6 +327,44 @@
                         <constraint firstItem="5qs-v9-00N" firstAttribute="top" secondItem="Khg-jg-Gol" secondAttribute="bottom" constant="12" id="yno-Wh-WsF"/>
                     </constraints>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NI6-RF-Ene" customClass="RedFixCardView" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="687.66666666666663" width="377" height="56.333333333333371"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconWarnRed" translatesAutoresizingMaskIntoConstraints="NO" id="vAq-f4-Bim">
+                            <rect key="frame" x="10" y="12" width="16" height="16"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" name="_primary"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="8Pq-au-p4X"/>
+                                <constraint firstAttribute="width" constant="16" id="mx8-wb-i6E"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBf-6g-G8O">
+                            <rect key="frame" x="28" y="12.333333333333371" width="30.666666666666671" height="15.333333333333336"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="textColor" name="_colorRed"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Msg" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8US-e1-24O">
+                            <rect key="frame" x="28" y="31.666666666666746" width="333" height="12.666666666666668"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
+                            <color key="textColor" name="_colorRed"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.30199998620000001" blue="0.21199999750000001" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" name="_primary"/>
+                    <constraints>
+                        <constraint firstItem="vAq-f4-Bim" firstAttribute="leading" secondItem="NI6-RF-Ene" secondAttribute="leading" constant="10" id="DAJ-tU-cJX"/>
+                        <constraint firstItem="WBf-6g-G8O" firstAttribute="leading" secondItem="vAq-f4-Bim" secondAttribute="trailing" constant="2" id="JZH-hi-8PR"/>
+                        <constraint firstItem="8US-e1-24O" firstAttribute="leading" secondItem="WBf-6g-G8O" secondAttribute="leading" id="Jdw-fP-VX0"/>
+                        <constraint firstItem="8US-e1-24O" firstAttribute="top" secondItem="WBf-6g-G8O" secondAttribute="bottom" constant="4" id="NCq-GP-ull"/>
+                        <constraint firstAttribute="trailing" secondItem="8US-e1-24O" secondAttribute="trailing" constant="16" id="PQl-c6-Ah9"/>
+                        <constraint firstItem="vAq-f4-Bim" firstAttribute="top" secondItem="NI6-RF-Ene" secondAttribute="top" constant="12" id="Qch-4Q-aVt"/>
+                        <constraint firstItem="WBf-6g-G8O" firstAttribute="centerY" secondItem="vAq-f4-Bim" secondAttribute="centerY" id="f1x-Bv-osW"/>
+                        <constraint firstAttribute="bottom" secondItem="8US-e1-24O" secondAttribute="bottom" constant="12" id="mn9-EH-QRG"/>
+                    </constraints>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i47-55-sqc" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="8" y="760" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
@@ -332,6 +376,9 @@
                     <state key="normal" title="Stake">
                         <color key="titleColor" name="_color01"/>
                     </state>
+                    <connections>
+                        <action selector="onClickSend:" destination="-1" eventType="touchUpInside" id="pZ6-cS-sMO"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H8m-DE-nnB" customClass="LottieAnimationView" customModule="Lottie">
                     <rect key="frame" x="106.66666666666669" y="383.66666666666669" width="180" height="110"/>
@@ -349,6 +396,7 @@
             <constraints>
                 <constraint firstItem="haJ-58-3xt" firstAttribute="top" secondItem="GD2-Ov-aKv" secondAttribute="bottom" constant="20" id="8FE-XY-wUf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2Tv-dd-75h" secondAttribute="trailing" constant="8" id="Aq0-Ll-6Qt"/>
+                <constraint firstItem="NI6-RF-Ene" firstAttribute="bottom" secondItem="2Tv-dd-75h" secondAttribute="bottom" id="GYU-bb-Jw7"/>
                 <constraint firstAttribute="bottom" secondItem="i47-55-sqc" secondAttribute="bottom" constant="38" id="JCe-Bf-sK1"/>
                 <constraint firstItem="GD2-Ov-aKv" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="NSj-Ox-1qf"/>
                 <constraint firstItem="H8m-DE-nnB" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Og5-1I-Kdf"/>
@@ -357,6 +405,8 @@
                 <constraint firstItem="GD2-Ov-aKv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Z78-Iq-SNc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="haJ-58-3xt" secondAttribute="trailing" constant="8" id="ZBW-vK-YFN"/>
                 <constraint firstItem="0wV-QX-qPB" firstAttribute="top" secondItem="haJ-58-3xt" secondAttribute="bottom" constant="10" id="gma-kO-CMd"/>
+                <constraint firstItem="NI6-RF-Ene" firstAttribute="leading" secondItem="2Tv-dd-75h" secondAttribute="leading" id="h4S-F0-koR"/>
+                <constraint firstItem="NI6-RF-Ene" firstAttribute="trailing" secondItem="2Tv-dd-75h" secondAttribute="trailing" id="hPa-sm-Jpv"/>
                 <constraint firstItem="2Tv-dd-75h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="jyu-Ur-qyi"/>
                 <constraint firstItem="haJ-58-3xt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="n3U-Ju-rMf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="i47-55-sqc" secondAttribute="trailing" constant="8" id="prT-ix-eWX"/>
@@ -371,6 +421,7 @@
         <image name="iconArrowDown" width="24" height="24"/>
         <image name="iconValidatorInactive" width="40" height="40"/>
         <image name="iconValidatorJailed" width="40" height="40"/>
+        <image name="iconWarnRed" width="24" height="24"/>
         <image name="tokenDefault" width="48" height="48"/>
         <image name="validatorDefault" width="40" height="40"/>
         <namedColor name="_color01">
@@ -390,6 +441,9 @@
         </namedColor>
         <namedColor name="_colorBg">
             <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorRed">
+            <color red="1" green="0.30199998617172241" blue="0.21199999749660492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
             <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
