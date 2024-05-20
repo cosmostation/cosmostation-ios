@@ -310,25 +310,32 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (selectedChain is ChainOktEVM) {
             if (indexPath.section == 0) {
-                if (indexPath.row == 0) {
-                    //OKT EVM only support Ox style
+                if (indexPath.row == 0) {                                       //OKT EVM only support Ox style
                     onStartTransferVC(.Only_EVM_Coin, lcdBalances[indexPath.row]["denom"].stringValue)
                 } else {
                     onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
                 }
             }
+            return
+            
+        } else if (selectedChain is ChainBeraEVM) {
+            if (indexPath.section == 0 && indexPath.row == 1) {                 //Only Support BERA Send
+                onStartTransferVC(.Only_EVM_Coin, "abera")
+                return
+            }
+            return
             
         } else {
             if (indexPath.section == 0) {
                 var sendType: SendAssetType!
                 if (indexPath.row == 0) {
-                    if (selectedChain is EvmClass) {
-                        sendType = .CosmosEVM_Coin         //stake coin web3-tx and cosmos-tx
-                    } else  {
-                        sendType = .Only_Cosmos_Coin       //no evm chain only cosmos-tx
+                    if (selectedChain is EvmClass) {                            //stake coin web3-tx and cosmos-tx
+                        sendType = .CosmosEVM_Coin
+                    } else  {                                                   //no evm chain only cosmos-tx
+                        sendType = .Only_Cosmos_Coin
                     }
-                } else {
-                    sendType = .Only_Cosmos_Coin           //native(not stake) coin only cosmos-tx
+                } else {                                                        //native(not stake) coin only cosmos-tx
+                    sendType = .Only_Cosmos_Coin
                 }
                 onStartTransferVC(sendType, nativeCoins[indexPath.row].denom)
                 return

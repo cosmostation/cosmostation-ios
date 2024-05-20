@@ -181,9 +181,6 @@ class EvmClass: CosmosClass {
     
     //check account payable with lowest fee
     override func isTxFeePayable() -> Bool {
-        if (supportCosmos) {
-            return super.isTxFeePayable()
-        }
         return evmBalances.compare(EVM_BASE_FEE).rawValue > 0
     }
     
@@ -296,7 +293,7 @@ extension EvmClass {
 
 func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
-//    result.append(ChainEthereum())
+    result.append(ChainEthereum())
 //    result.append(ChainAltheaEVM())
 //    result.append(ChainArbitrum())
 //    result.append(ChainAvalanche())

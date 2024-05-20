@@ -436,18 +436,20 @@ class CosmosClassVC: BaseVC {
                     self.onClaimCommissionTx()
                 }
             }
-            mainFab.addItem(title: "Compound All Rewards", image: UIImage(named: "iconFabCompounding")) { _ in
-                if (self.selectedChain.cosmosValidators.count > 0) {
-                    self.onClaimCompoundingTx()
-                } else {
-                    self.onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+            if !(selectedChain is ChainBeraEVM) {                                                                       //disbale for bera
+                mainFab.addItem(title: "Compound All Rewards", image: UIImage(named: "iconFabCompounding")) { _ in
+                    if (self.selectedChain.cosmosValidators.count > 0) {
+                        self.onClaimCompoundingTx()
+                    } else {
+                        self.onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                    }
                 }
-            }
-            mainFab.addItem(title: "Claim All Rewards", image: UIImage(named: "iconFabClaim")) { _ in
-                if (self.selectedChain.cosmosValidators.count > 0) {
-                    self.onClaimRewardTx()
-                } else {
-                    self.onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                mainFab.addItem(title: "Claim All Rewards", image: UIImage(named: "iconFabClaim")) { _ in
+                    if (self.selectedChain.cosmosValidators.count > 0) {
+                        self.onClaimRewardTx()
+                    } else {
+                        self.onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                    }
                 }
             }
             mainFab.addItem(title: "Stake", image: UIImage(named: "iconFabStake")) { _ in
