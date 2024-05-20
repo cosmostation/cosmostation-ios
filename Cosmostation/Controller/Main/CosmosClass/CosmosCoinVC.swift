@@ -319,7 +319,11 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             return
             
         } else if (selectedChain is ChainBeraEVM) {
-            if (indexPath.section == 0 && indexPath.row == 1) {                 //Only Support BERA Send
+            if (indexPath.section == 0 && indexPath.row == 0) {                 //BGT is not sendable
+                onShowToast(NSLocalizedString("error_tranfer_disabled_bgt", comment: ""))
+                return
+                
+            } else if (indexPath.section == 0 && indexPath.row == 1) {          //Only Support BERA Send
                 onStartTransferVC(.Only_EVM_Coin, "abera")
                 return
             }

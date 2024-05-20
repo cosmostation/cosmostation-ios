@@ -298,7 +298,6 @@ func ALLEVMCLASS() -> [EvmClass] {
 //    result.append(ChainArbitrum())
 //    result.append(ChainAvalanche())
 //    result.append(ChainBaseEVM())
-    result.append(ChainBeraEVM())
 //    result.append(ChainBinanceSmart())
 //    result.append(ChainCantoEVM())
 //    result.append(ChainCronos())
@@ -310,6 +309,9 @@ func ALLEVMCLASS() -> [EvmClass] {
 //    result.append(ChainOptimism())
 //    result.append(ChainPolygon())
 //    result.append(ChainXplaEVM())
+    
+    
+    result.append(ChainBeraTestEVM())
     
     //Add cosmos chain id for ibc
     result.forEach { chain in
