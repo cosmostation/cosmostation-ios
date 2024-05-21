@@ -53,9 +53,49 @@ public class BERA_Staking {
         guard let value = Web3.Utils.parseToBigUInt(amount, decimals: 0) else {
             throw Web3Error.inputError(desc: "Can not parse inputted amount")
         }
-//        print("delegate Amount ", value)
-        
         let tx = contract.write("delegate", parameters: [validatorAddress, value] as [AnyObject], transactionOptions: transactionOptions)!
+        return tx
+    }
+    
+    public func unDelegate(_ delegatorAddress: EthereumAddress, _ validatorAddress: EthereumAddress, _ amount: String) throws -> WriteTransaction {
+        let contract = self.contract
+        var transactionOptions = TransactionOptions.defaultOptions
+        transactionOptions.from = delegatorAddress
+        transactionOptions.to = self.address
+        transactionOptions.callOnBlock = .latest
+        
+        guard let value = Web3.Utils.parseToBigUInt(amount, decimals: 0) else {
+            throw Web3Error.inputError(desc: "Can not parse inputted amount")
+        }
+        let tx = contract.write("undelegate", parameters: [validatorAddress, value] as [AnyObject], transactionOptions: transactionOptions)!
+        return tx
+    }
+    
+    public func beginRedelegate(_ delegatorAddress: EthereumAddress, _ srcValidator: EthereumAddress, _ dstValidator: EthereumAddress, _ amount: String) throws -> WriteTransaction {
+        let contract = self.contract
+        var transactionOptions = TransactionOptions.defaultOptions
+        transactionOptions.from = delegatorAddress
+        transactionOptions.to = self.address
+        transactionOptions.callOnBlock = .latest
+        
+        guard let value = Web3.Utils.parseToBigUInt(amount, decimals: 0) else {
+            throw Web3Error.inputError(desc: "Can not parse inputted amount")
+        }
+        let tx = contract.write("beginRedelegate", parameters: [srcValidator, dstValidator, value] as [AnyObject], transactionOptions: transactionOptions)!
+        return tx
+    }
+    
+    public func cancelUnbondingDelegation(_ delegatorAddress: EthereumAddress, _ validatorAddress: EthereumAddress, _ amount: String, _ creationHeight: Int64) throws -> WriteTransaction {
+        let contract = self.contract
+        var transactionOptions = TransactionOptions.defaultOptions
+        transactionOptions.from = delegatorAddress
+        transactionOptions.to = self.address
+        transactionOptions.callOnBlock = .latest
+        
+        guard let value = Web3.Utils.parseToBigUInt(amount, decimals: 0) else {
+            throw Web3Error.inputError(desc: "Can not parse inputted amount")
+        }
+        let tx = contract.write("cancelUnbondingDelegation", parameters: [validatorAddress, amount, creationHeight] as [AnyObject], transactionOptions: transactionOptions)!
         return tx
     }
 }

@@ -1,8 +1,8 @@
 //
-//  EvmDelegate.swift
+//  EvmCancelUnbonding.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 5/17/24.
+//  Created by yongjoo jung on 5/20/24.
 //  Copyright © 2024 wannabit. All rights reserved.
 //
 
@@ -11,24 +11,13 @@ import Lottie
 import web3swift
 import BigInt
 
-//only for bera chain evm staking!!
-class EvmDelegate: BaseVC {
+class EvmCancelUnbonding: BaseVC {
     
     @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var validatorCardView: FixCardView!
-    @IBOutlet weak var monikerImg: UIImageView!
-    @IBOutlet weak var monikerLabel: UILabel!
-    @IBOutlet weak var inactiveTag: UIImageView!
-    @IBOutlet weak var jailedTag: UIImageView!
-    @IBOutlet weak var commLabel: UILabel!
-    @IBOutlet weak var commPercentLabel: UILabel!
-    
-    @IBOutlet weak var stakingAmountCardView: FixCardView!
-    @IBOutlet weak var stakingAmountTitle: UILabel!
-    @IBOutlet weak var stakingAmountHintLabel: UILabel!
-    @IBOutlet weak var stakingAmountLabel: UILabel!
-    @IBOutlet weak var stakingDenomLabel: UILabel!
+    @IBOutlet weak var validatorsLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var amountDenomLabel: UILabel!
     
     @IBOutlet weak var feeCardView: FixCardView!
     @IBOutlet weak var feeSelectView: DropDownView!
@@ -43,13 +32,11 @@ class EvmDelegate: BaseVC {
     @IBOutlet weak var errorCardView: RedFixCardView!
     @IBOutlet weak var errorMsgLabel: UILabel!
     
-    @IBOutlet weak var stakeBtn: BaseButton!
+    @IBOutlet weak var cancelBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedFeePosition = 0
-    var toValidator: Cosmos_Staking_V1beta1_Validator?
-    var availableAmount = NSDecimalNumber.zero
-    var delegateAmount: NSDecimalNumber? = NSDecimalNumber.zero
+    var unbondingEntry: UnbondingEntry!
     var decimal: Int16 = 18
     
     var selectedChain: EvmClass!
@@ -58,6 +45,7 @@ class EvmDelegate: BaseVC {
     var evmGasPrice: [(BigUInt, BigUInt)] = [(500000000, 1000000000), (500000000, 1000000000), (500000000, 1000000000)]
     var evmGasLimit: BigUInt = 21000
     var web3: web3?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,22 +59,16 @@ class EvmDelegate: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        if (toValidator == nil) {
-            if let validator = selectedChain.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first {
-                toValidator = validator
-            } else {
-                toValidator = selectedChain.cosmosValidators[0]
-            }
-        }
-        availableAmount = selectedChain.balanceAmount(selectedChain.stakeDenom)
-        
+        onInitView()
         onInitFee()
-        onUpdateValidatorView()
         
         if let url = URL(string: selectedChain.getEvmRpc()) {
             DispatchQueue.global().async { [self] in
                 do {
                     self.web3 = try Web3.new(url)
+                    DispatchQueue.main.async {
+                        self.onSimul()
+                    }
                 } catch {
                     DispatchQueue.main.async {
                         self.dismiss(animated: true)
@@ -94,66 +76,23 @@ class EvmDelegate: BaseVC {
                 }
             }
         }
-        
-        validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
-        stakingAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
     }
     
     override func setLocalizedString() {
-        stakingAmountTitle.text = NSLocalizedString("str_delegate_amount", comment: "")
-        stakingAmountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
-        stakeBtn.setTitle(NSLocalizedString("str_stake", comment: ""), for: .normal)
+        cancelBtn.setTitle(NSLocalizedString("str_cancle_unstake", comment: ""), for: .normal)
     }
     
-    @objc func onClickValidator() {
-        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.targetChain = selectedChain
-        baseSheet.validators = selectedChain.cosmosValidators
-        baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectValidator
-        onStartSheet(baseSheet, 680)
-    }
-    
-    func onUpdateValidatorView() {
-        monikerImg.image = UIImage(named: "validatorDefault")
-        monikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
-        monikerLabel.text = toValidator!.description_p.moniker
-        if (toValidator!.jailed) {
-            jailedTag.isHidden = false
-        } else {
-            inactiveTag.isHidden = toValidator!.status == .bonded
+    func onInitView() {
+        if let validator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == unbondingEntry.validatorAddress }).first {
+            validatorsLabel.text = validator.description_p.moniker
         }
         
-        let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
-        commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
-        onSimul()
-    }
-    
-    @objc func onClickAmount() {
-        let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
-        amountSheet.selectedChain = selectedChain
-        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
-        amountSheet.availableAmount = availableAmount
-        if let delegateAmount = delegateAmount {
-            amountSheet.existedAmount = delegateAmount
-        }
-        amountSheet.sheetDelegate = self
-        amountSheet.sheetType = .TxDelegate
-        self.onStartSheet(amountSheet)
-    }
-    
-    func onUpdateAmountView(_ amount: String) {
         let stakeDenom = selectedChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
-            delegateAmount = NSDecimalNumber(string: amount)
-            WDP.dpCoin(msAsset, delegateAmount!, nil, stakingDenomLabel, stakingAmountLabel, msAsset.decimals)
-            stakingAmountHintLabel.isHidden = true
-            stakingAmountLabel.isHidden = false
-            stakingDenomLabel.isHidden = false
-        } else {
-            delegateAmount = nil
+            let unbondingAmount = NSDecimalNumber(string: unbondingEntry.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
+            amountLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, amountLabel!.font, msAsset.decimals!)
+            amountDenomLabel.text = msAsset.symbol
         }
-        onSimul()
     }
     
     func onInitFee() {
@@ -204,14 +143,12 @@ class EvmDelegate: BaseVC {
         onUpdateFeeView()
         feeCardView.isHidden = false
         errorCardView.isHidden = true
-        stakeBtn.isEnabled = true
+        cancelBtn.isEnabled = true
     }
     
     
     func onSimul() {
-        stakeBtn.isEnabled = false
-        if (toValidator == nil) { return }
-        if (delegateAmount == nil || delegateAmount == NSDecimalNumber.zero ) { return }
+        cancelBtn.isEnabled = false
         view.isUserInteractionEnabled = false
         loadingView.isHidden = false
         evmTx = nil
@@ -221,14 +158,14 @@ class EvmDelegate: BaseVC {
             
             let chainID = web3.provider.network?.chainID
             let delegatorAddress = EthereumAddress.init(selectedChain.evmAddress)
-            let validatorAddress = EthereumAddress.init(KeyFac.convertBech32ToEvm(toValidator!.operatorAddress))
+            let validatorAddress = EthereumAddress.init(KeyFac.convertBech32ToEvm(unbondingEntry.validatorAddress))
+            let cancelAmount = unbondingEntry.entry.balance
+            let creationHeight = unbondingEntry.entry.creationHeight
             let nonce = try? web3.eth.getTransactionCount(address: delegatorAddress!)
             let stakingContract = EthereumAddress.init(fromHex: BERA_CONT_STAKING)
             let stakingABI = BERA_Staking(web3: web3, provider: web3.provider, address: stakingContract!)
-            print("myAddress ", delegatorAddress)
-            print("validatorAddress ", validatorAddress)
             
-            guard let wTx = try? stakingABI.delegate(delegatorAddress!, validatorAddress!, delegateAmount!.stringValue) else {
+            guard let wTx = try? stakingABI.cancelUnbondingDelegation(delegatorAddress!, validatorAddress!, cancelAmount, creationHeight) else {
                 DispatchQueue.main.async {
                     self.onUpdateFeeViewAfterSimul()
                 }
@@ -262,7 +199,6 @@ class EvmDelegate: BaseVC {
             DispatchQueue.main.async {
                 self.onUpdateFeeViewAfterSimul()
             }
-            
         }
     }
     
@@ -270,28 +206,14 @@ class EvmDelegate: BaseVC {
         let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
         self.present(pinVC, animated: true)
     }
-    
 }
 
-extension EvmDelegate: BaseSheetDelegate, AmountSheetDelegate, PinDelegate {
-    
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if (sheetType == .SelectValidator) {
-            if let validatorAddress = result["validatorAddress"] as? String {
-                toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
-                onUpdateValidatorView()
-            }
-        }
-    }
-    
-    func onInputedAmount(_ type: AmountSheetType?, _ amount: String) {
-        onUpdateAmountView(amount)
-    }
+extension EvmCancelUnbonding: PinDelegate {
     
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
             view.isUserInteractionEnabled = false
-            stakeBtn.isEnabled = false
+            cancelBtn.isEnabled = false
             loadingView.isHidden = false
             DispatchQueue.global().async { [self] in
                 guard let web3 = self.web3 else {
@@ -317,7 +239,6 @@ extension EvmDelegate: BaseSheetDelegate, AmountSheetDelegate, PinDelegate {
                 } catch {
                     print("error ", error)
                 }
-                
             }
         }
     }

@@ -1869,6 +1869,18 @@
 		E1F257D92BF77A7B008F4D21 /* EvmDelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F257D52BF77A7B008F4D21 /* EvmDelegate.xib */; };
 		E1F257DB2BFB1521008F4D21 /* ChainBeraTestEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257DA2BFB1521008F4D21 /* ChainBeraTestEVM.swift */; };
 		E1F257DC2BFB1521008F4D21 /* ChainBeraTestEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257DA2BFB1521008F4D21 /* ChainBeraTestEVM.swift */; };
+		E1F257DF2BFB1FF3008F4D21 /* EvmUndelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F257DE2BFB1FF3008F4D21 /* EvmUndelegate.xib */; };
+		E1F257E02BFB1FF3008F4D21 /* EvmUndelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257DD2BFB1FF3008F4D21 /* EvmUndelegate.swift */; };
+		E1F257E12BFB1FF3008F4D21 /* EvmUndelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257DD2BFB1FF3008F4D21 /* EvmUndelegate.swift */; };
+		E1F257E22BFB1FF3008F4D21 /* EvmUndelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F257DE2BFB1FF3008F4D21 /* EvmUndelegate.xib */; };
+		E1F257E52BFB2009008F4D21 /* EvmCancelUnbonding.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F257E42BFB2009008F4D21 /* EvmCancelUnbonding.xib */; };
+		E1F257E62BFB2009008F4D21 /* EvmCancelUnbonding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257E32BFB2009008F4D21 /* EvmCancelUnbonding.swift */; };
+		E1F257E72BFB2009008F4D21 /* EvmCancelUnbonding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257E32BFB2009008F4D21 /* EvmCancelUnbonding.swift */; };
+		E1F257E82BFB2009008F4D21 /* EvmCancelUnbonding.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F257E42BFB2009008F4D21 /* EvmCancelUnbonding.xib */; };
+		E1F257EB2BFB2024008F4D21 /* EvmRedelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F257EA2BFB2024008F4D21 /* EvmRedelegate.xib */; };
+		E1F257EC2BFB2024008F4D21 /* EvmRedelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257E92BFB2024008F4D21 /* EvmRedelegate.swift */; };
+		E1F257ED2BFB2024008F4D21 /* EvmRedelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257E92BFB2024008F4D21 /* EvmRedelegate.swift */; };
+		E1F257EE2BFB2024008F4D21 /* EvmRedelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F257EA2BFB2024008F4D21 /* EvmRedelegate.xib */; };
 		E1F2941C2AFE5246000550E8 /* ChainFetchAi60Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */; };
 		E1F2941D2AFE5246000550E8 /* ChainFetchAi60Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */; };
 		E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F2AE50227EC05100C87F3F /* InfoPlist.strings */; };
@@ -2832,6 +2844,12 @@
 		E1F257D42BF77A7B008F4D21 /* EvmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmDelegate.swift; sourceTree = "<group>"; };
 		E1F257D52BF77A7B008F4D21 /* EvmDelegate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EvmDelegate.xib; sourceTree = "<group>"; };
 		E1F257DA2BFB1521008F4D21 /* ChainBeraTestEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBeraTestEVM.swift; sourceTree = "<group>"; };
+		E1F257DD2BFB1FF3008F4D21 /* EvmUndelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmUndelegate.swift; sourceTree = "<group>"; };
+		E1F257DE2BFB1FF3008F4D21 /* EvmUndelegate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EvmUndelegate.xib; sourceTree = "<group>"; };
+		E1F257E32BFB2009008F4D21 /* EvmCancelUnbonding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmCancelUnbonding.swift; sourceTree = "<group>"; };
+		E1F257E42BFB2009008F4D21 /* EvmCancelUnbonding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EvmCancelUnbonding.xib; sourceTree = "<group>"; };
+		E1F257E92BFB2024008F4D21 /* EvmRedelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmRedelegate.swift; sourceTree = "<group>"; };
+		E1F257EA2BFB2024008F4D21 /* EvmRedelegate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EvmRedelegate.xib; sourceTree = "<group>"; };
 		E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFetchAi60Old.swift; sourceTree = "<group>"; };
 		E1F2AE4B227E865D00C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1F2AE4F227EC05100C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -4218,6 +4236,12 @@
 			children = (
 				E1F257D42BF77A7B008F4D21 /* EvmDelegate.swift */,
 				E1F257D52BF77A7B008F4D21 /* EvmDelegate.xib */,
+				E1F257DD2BFB1FF3008F4D21 /* EvmUndelegate.swift */,
+				E1F257DE2BFB1FF3008F4D21 /* EvmUndelegate.xib */,
+				E1F257E32BFB2009008F4D21 /* EvmCancelUnbonding.swift */,
+				E1F257E42BFB2009008F4D21 /* EvmCancelUnbonding.xib */,
+				E1F257E92BFB2024008F4D21 /* EvmRedelegate.swift */,
+				E1F257EA2BFB2024008F4D21 /* EvmRedelegate.xib */,
 			);
 			path = GenTx;
 			sourceTree = "<group>";
@@ -4486,6 +4510,7 @@
 				047842E12AC8963100462F1C /* CosmosUndelegate.xib in Resources */,
 				18FFB78E281AF533004E65BB /* InfoPlist.strings in Resources */,
 				041541032BA413A300CD5AA1 /* VoteAllChainHeader.xib in Resources */,
+				E1F257E22BFB1FF3008F4D21 /* EvmUndelegate.xib in Resources */,
 				E15F2D072ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
 				04B789EE2ACB336400E9BE88 /* SelectRefAddressCell.xib in Resources */,
 				04C940E92AF4DAAE00415256 /* DeleteAddressBookSheet.xib in Resources */,
@@ -4509,6 +4534,7 @@
 				042DE8432AC4C518003F3EA4 /* TxMemoSheet.xib in Resources */,
 				E1D97C0A2B9EF65000496807 /* SelectEndpointSheet.xib in Resources */,
 				0400EF2C2ADD48DB007BA97F /* KavaSwapListMyCell.xib in Resources */,
+				E1F257E82BFB2009008F4D21 /* EvmCancelUnbonding.xib in Resources */,
 				E1D5382A2A96644F00FB0403 /* loading.json in Resources */,
 				04FF6B8F2B204BCB009DCA89 /* ClaimAllChainCell.xib in Resources */,
 				04FC65652B0C8E77008F2110 /* OkWithdraw.xib in Resources */,
@@ -4556,6 +4582,7 @@
 				E15F2D012ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */,
 				E1B44B282ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */,
 				047842DB2AC87C1000462F1C /* CosmosTxResult.xib in Resources */,
+				E1F257EE2BFB2024008F4D21 /* EvmRedelegate.xib in Resources */,
 				18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */,
 				0472D4862B03588F00B9E6E8 /* NoticeSheet.xib in Resources */,
 				0494CBFE2BAF442E00FA3E49 /* NftListHeader.xib in Resources */,
@@ -4662,6 +4689,7 @@
 				E1DF77772AB74EE80028BD51 /* CheckPrivateKeyVC.xib in Resources */,
 				E18D73B82AB484AB00FCB1AA /* DappStartVC.xib in Resources */,
 				04FAD9B42AB011AC00143A3E /* SwitchPriceDisplayCell.xib in Resources */,
+				E1F257E52BFB2009008F4D21 /* EvmCancelUnbonding.xib in Resources */,
 				04FAD9BA2AB0125400143A3E /* BaseSheetCell.xib in Resources */,
 				0400EF192ADBF774007BA97F /* KavaLendListCell.xib in Resources */,
 				E15980A32A83AB030032892B /* Main.storyboard in Resources */,
@@ -4682,6 +4710,7 @@
 				04F048C92AF89B19002A809D /* SelectAddressBookCell.xib in Resources */,
 				04FAD9E42AB6D8ED00143A3E /* ChainListVC.xib in Resources */,
 				E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
+				E1F257DF2BFB1FF3008F4D21 /* EvmUndelegate.xib in Resources */,
 				0400EF252ADD4737007BA97F /* KavaSwapListVC.xib in Resources */,
 				E15F2D0C2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */,
 				E1044EA72BD641DB00DA05C2 /* SendResultSheet.xib in Resources */,
@@ -4742,6 +4771,7 @@
 				182CCB832BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy in Resources */,
 				18F4EAD12A4DA0A200CFBE2B /* ApiKeyDev.plist in Resources */,
 				E165ED382B98C9D500C15809 /* basebg09.png in Resources */,
+				E1F257EB2BFB2024008F4D21 /* EvmRedelegate.xib in Resources */,
 				E15F2D062ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
 				E1DF77712AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */,
 				E12E9D2C2AE2B4A700336449 /* KavaMintAction.xib in Resources */,
@@ -5182,6 +5212,7 @@
 				04C817AF2BA98D75006B800A /* cosmos_capability_v1beta1_genesis.pb.swift in Sources */,
 				04C8164F2BA98D74006B800A /* cosmos_authz_module_v1_module.pb.swift in Sources */,
 				04C817592BA98D75006B800A /* cosmos_authz_v1beta1_query.grpc.swift in Sources */,
+				E1F257E72BFB2009008F4D21 /* EvmCancelUnbonding.swift in Sources */,
 				18FFB3DF281AF533004E65BB /* BaseConstant.swift in Sources */,
 				04C817112BA98D75006B800A /* cosmos_evidence_v1beta1_genesis.pb.swift in Sources */,
 				04C817612BA98D75006B800A /* cosmos_base_abci_v1beta1_abci.pb.swift in Sources */,
@@ -5374,6 +5405,7 @@
 				04B789942ACAC9B100E9BE88 /* ibc_applications_transfer_v1_authz.pb.swift in Sources */,
 				0400EF2A2ADD48DB007BA97F /* KavaSwapListMyCell.swift in Sources */,
 				E122DC4D2A8A4712006D1E7B /* tendermint_p2p_types.pb.swift in Sources */,
+				E1F257ED2BFB2024008F4D21 /* EvmRedelegate.swift in Sources */,
 				04FA74682A9F5833001A2830 /* CreateNameVC.swift in Sources */,
 				0402B83A2ACC84C800824B3F /* ChainRizon.swift in Sources */,
 				0402B8102ACC765F00824B3F /* ChainIxo.swift in Sources */,
@@ -5472,6 +5504,7 @@
 				04CD244D2AD125E600497EF5 /* ChainOkt996Secp.swift in Sources */,
 				04C816A92BA98D75006B800A /* cosmos_circuit_v1_types.pb.swift in Sources */,
 				E1831BA52AB82FE60078A28B /* ManageChainCell.swift in Sources */,
+				E1F257E12BFB1FF3008F4D21 /* EvmUndelegate.swift in Sources */,
 				04FAD9E32AB6D8ED00143A3E /* ChainListVC.swift in Sources */,
 				040733002AA44075001C63DD /* ImportMnemonicVC.swift in Sources */,
 				E15F2D112ABF108500BAE105 /* StakeUnbondingCell.swift in Sources */,
@@ -5929,6 +5962,7 @@
 				04C817AE2BA98D75006B800A /* cosmos_capability_v1beta1_genesis.pb.swift in Sources */,
 				04C8164E2BA98D74006B800A /* cosmos_authz_module_v1_module.pb.swift in Sources */,
 				04C817582BA98D75006B800A /* cosmos_authz_v1beta1_query.grpc.swift in Sources */,
+				E1F257E62BFB2009008F4D21 /* EvmCancelUnbonding.swift in Sources */,
 				047843732AC991B300462F1C /* injective_wasmx_v1_events.pb.swift in Sources */,
 				04C817102BA98D75006B800A /* cosmos_evidence_v1beta1_genesis.pb.swift in Sources */,
 				04C817602BA98D75006B800A /* cosmos_base_abci_v1beta1_abci.pb.swift in Sources */,
@@ -6121,6 +6155,7 @@
 				04FAD9CC2AB1B29B00143A3E /* UIStoryboard+StoryBoard.swift in Sources */,
 				04B789932ACAC9B100E9BE88 /* ibc_applications_transfer_v1_authz.pb.swift in Sources */,
 				0400EF292ADD48DB007BA97F /* KavaSwapListMyCell.swift in Sources */,
+				E1F257EC2BFB2024008F4D21 /* EvmRedelegate.swift in Sources */,
 				E122DC4C2A8A4712006D1E7B /* tendermint_p2p_types.pb.swift in Sources */,
 				04FA74672A9F5833001A2830 /* CreateNameVC.swift in Sources */,
 				0402B8392ACC84C800824B3F /* ChainRizon.swift in Sources */,
@@ -6219,6 +6254,7 @@
 				04C816A82BA98D75006B800A /* cosmos_circuit_v1_types.pb.swift in Sources */,
 				E1831BA42AB82FE60078A28B /* ManageChainCell.swift in Sources */,
 				04FAD9E22AB6D8ED00143A3E /* ChainListVC.swift in Sources */,
+				E1F257E02BFB1FF3008F4D21 /* EvmUndelegate.swift in Sources */,
 				040732FF2AA44075001C63DD /* ImportMnemonicVC.swift in Sources */,
 				E15F2D102ABF108500BAE105 /* StakeUnbondingCell.swift in Sources */,
 				046EA88F2AD04A2500A2FCE7 /* desmos_profiles_v3_msg_server.pb.swift in Sources */,

@@ -1,8 +1,8 @@
 //
-//  EvmDelegate.swift
+//  EvmRedelegate.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 5/17/24.
+//  Created by yongjoo jung on 5/20/24.
 //  Copyright © 2024 wannabit. All rights reserved.
 //
 
@@ -11,24 +11,30 @@ import Lottie
 import web3swift
 import BigInt
 
-//only for bera chain evm staking!!
-class EvmDelegate: BaseVC {
+class EvmRedelegate: BaseVC {
     
     @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var validatorCardView: FixCardView!
-    @IBOutlet weak var monikerImg: UIImageView!
-    @IBOutlet weak var monikerLabel: UILabel!
-    @IBOutlet weak var inactiveTag: UIImageView!
-    @IBOutlet weak var jailedTag: UIImageView!
-    @IBOutlet weak var commLabel: UILabel!
-    @IBOutlet weak var commPercentLabel: UILabel!
+    @IBOutlet weak var fromCardView: FixCardView!
+    @IBOutlet weak var fromMonikerImg: UIImageView!
+    @IBOutlet weak var fromInactiveTag: UIImageView!
+    @IBOutlet weak var fromJailedTag: UIImageView!
+    @IBOutlet weak var fromMonikerLabel: UILabel!
+    @IBOutlet weak var fromStakedLabel: UILabel!
     
-    @IBOutlet weak var stakingAmountCardView: FixCardView!
-    @IBOutlet weak var stakingAmountTitle: UILabel!
-    @IBOutlet weak var stakingAmountHintLabel: UILabel!
-    @IBOutlet weak var stakingAmountLabel: UILabel!
-    @IBOutlet weak var stakingDenomLabel: UILabel!
+    @IBOutlet weak var toCardView: FixCardView!
+    @IBOutlet weak var toMonikerImg: UIImageView!
+    @IBOutlet weak var toInactiveTag: UIImageView!
+    @IBOutlet weak var toJailedTag: UIImageView!
+    @IBOutlet weak var toMonikerLabel: UILabel!
+    @IBOutlet weak var toCommLabel: UILabel!
+    @IBOutlet weak var toCommPercentLabel: UILabel!
+    
+    @IBOutlet weak var amountCardView: FixCardView!
+    @IBOutlet weak var amountTitle: UILabel!
+    @IBOutlet weak var amountHintLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var amountDenomLabel: UILabel!
     
     @IBOutlet weak var feeCardView: FixCardView!
     @IBOutlet weak var feeSelectView: DropDownView!
@@ -43,13 +49,14 @@ class EvmDelegate: BaseVC {
     @IBOutlet weak var errorCardView: RedFixCardView!
     @IBOutlet weak var errorMsgLabel: UILabel!
     
-    @IBOutlet weak var stakeBtn: BaseButton!
+    @IBOutlet weak var reStakeBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedFeePosition = 0
+    var fromValidator: Cosmos_Staking_V1beta1_Validator?
     var toValidator: Cosmos_Staking_V1beta1_Validator?
     var availableAmount = NSDecimalNumber.zero
-    var delegateAmount: NSDecimalNumber? = NSDecimalNumber.zero
+    var redelegateAmount: NSDecimalNumber? = NSDecimalNumber.zero
     var decimal: Int16 = 18
     
     var selectedChain: EvmClass!
@@ -71,17 +78,16 @@ class EvmDelegate: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        if (toValidator == nil) {
-            if let validator = selectedChain.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first {
-                toValidator = validator
-            } else {
-                toValidator = selectedChain.cosmosValidators[0]
-            }
+        let cosmostation = selectedChain.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first
+        if (fromValidator?.operatorAddress == cosmostation?.operatorAddress) {
+            toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress != cosmostation!.operatorAddress }).first
+        } else {
+            toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress != fromValidator?.operatorAddress }).first
         }
-        availableAmount = selectedChain.balanceAmount(selectedChain.stakeDenom)
         
         onInitFee()
-        onUpdateValidatorView()
+        onInitFromValidatorView()
+        onUpdateToValidatorView()
         
         if let url = URL(string: selectedChain.getEvmRpc()) {
             DispatchQueue.global().async { [self] in
@@ -95,17 +101,36 @@ class EvmDelegate: BaseVC {
             }
         }
         
-        validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
-        stakingAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
+        toCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToValidator)))
+        amountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
     }
     
     override func setLocalizedString() {
-        stakingAmountTitle.text = NSLocalizedString("str_delegate_amount", comment: "")
-        stakingAmountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
-        stakeBtn.setTitle(NSLocalizedString("str_stake", comment: ""), for: .normal)
+        amountTitle.text = NSLocalizedString("str_redelegate_amount", comment: "")
+        amountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
+        reStakeBtn.setTitle(NSLocalizedString("str_switch_validator", comment: ""), for: .normal)
     }
     
-    @objc func onClickValidator() {
+    func onInitFromValidatorView() {
+        fromMonikerImg.image = UIImage(named: "validatorDefault")
+        fromMonikerImg.af.setImage(withURL: selectedChain.monikerImg(fromValidator!.operatorAddress))
+        fromMonikerLabel.text = fromValidator!.description_p.moniker
+        if (fromValidator!.jailed) {
+            fromJailedTag.isHidden = false
+        } else {
+            fromInactiveTag.isHidden = fromValidator!.status == .bonded
+        }
+        
+        let stakeDenom = selectedChain.stakeDenom!
+        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
+            let staked = selectedChain.cosmosDelegations.filter { $0.delegation.validatorAddress == fromValidator?.operatorAddress }.first?.balance.amount
+            availableAmount = NSDecimalNumber(string: staked)
+            fromStakedLabel?.attributedText = WDP.dpAmount(availableAmount.multiplying(byPowerOf10: -msAsset.decimals!).stringValue, fromStakedLabel!.font, 6)
+        }
+        print("onInitFromValidatorView ", availableAmount)
+    }
+    
+    @objc func onClickToValidator() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = selectedChain
         baseSheet.validators = selectedChain.cosmosValidators
@@ -114,18 +139,18 @@ class EvmDelegate: BaseVC {
         onStartSheet(baseSheet, 680)
     }
     
-    func onUpdateValidatorView() {
-        monikerImg.image = UIImage(named: "validatorDefault")
-        monikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
-        monikerLabel.text = toValidator!.description_p.moniker
+    func onUpdateToValidatorView() {
+        toMonikerImg.image = UIImage(named: "validatorDefault")
+        toMonikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
+        toMonikerLabel.text = toValidator!.description_p.moniker
         if (toValidator!.jailed) {
-            jailedTag.isHidden = false
+            toJailedTag.isHidden = false
         } else {
-            inactiveTag.isHidden = toValidator!.status == .bonded
+            toInactiveTag.isHidden = toValidator!.status == .bonded
         }
         
         let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
-        commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
+        toCommLabel?.attributedText = WDP.dpAmount(commission.stringValue, toCommLabel!.font, 2)
         onSimul()
     }
     
@@ -134,8 +159,8 @@ class EvmDelegate: BaseVC {
         amountSheet.selectedChain = selectedChain
         amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
         amountSheet.availableAmount = availableAmount
-        if let delegateAmount = delegateAmount {
-            amountSheet.existedAmount = delegateAmount
+        if let redelegateAmount = redelegateAmount {
+            amountSheet.existedAmount = redelegateAmount
         }
         amountSheet.sheetDelegate = self
         amountSheet.sheetType = .TxDelegate
@@ -145,16 +170,17 @@ class EvmDelegate: BaseVC {
     func onUpdateAmountView(_ amount: String) {
         let stakeDenom = selectedChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
-            delegateAmount = NSDecimalNumber(string: amount)
-            WDP.dpCoin(msAsset, delegateAmount!, nil, stakingDenomLabel, stakingAmountLabel, msAsset.decimals)
-            stakingAmountHintLabel.isHidden = true
-            stakingAmountLabel.isHidden = false
-            stakingDenomLabel.isHidden = false
+            redelegateAmount = NSDecimalNumber(string: amount)
+            WDP.dpCoin(msAsset, redelegateAmount!, nil, amountDenomLabel, amountLabel, msAsset.decimals)
+            amountHintLabel.isHidden = true
+            amountLabel.isHidden = false
+            amountDenomLabel.isHidden = false
         } else {
-            delegateAmount = nil
+            redelegateAmount = nil
         }
         onSimul()
     }
+    
     
     func onInitFee() {
         feeSegments.removeAllSegments()
@@ -204,14 +230,13 @@ class EvmDelegate: BaseVC {
         onUpdateFeeView()
         feeCardView.isHidden = false
         errorCardView.isHidden = true
-        stakeBtn.isEnabled = true
+        reStakeBtn.isEnabled = true
     }
-    
-    
+
     func onSimul() {
-        stakeBtn.isEnabled = false
+        reStakeBtn.isEnabled = false
         if (toValidator == nil) { return }
-        if (delegateAmount == nil || delegateAmount == NSDecimalNumber.zero ) { return }
+        if (redelegateAmount == nil || redelegateAmount == NSDecimalNumber.zero ) { return }
         view.isUserInteractionEnabled = false
         loadingView.isHidden = false
         evmTx = nil
@@ -221,14 +246,13 @@ class EvmDelegate: BaseVC {
             
             let chainID = web3.provider.network?.chainID
             let delegatorAddress = EthereumAddress.init(selectedChain.evmAddress)
-            let validatorAddress = EthereumAddress.init(KeyFac.convertBech32ToEvm(toValidator!.operatorAddress))
+            let srcValidatorAddress = EthereumAddress.init(KeyFac.convertBech32ToEvm(fromValidator!.operatorAddress))
+            let dstValidatorAddress = EthereumAddress.init(KeyFac.convertBech32ToEvm(toValidator!.operatorAddress))
             let nonce = try? web3.eth.getTransactionCount(address: delegatorAddress!)
             let stakingContract = EthereumAddress.init(fromHex: BERA_CONT_STAKING)
             let stakingABI = BERA_Staking(web3: web3, provider: web3.provider, address: stakingContract!)
-            print("myAddress ", delegatorAddress)
-            print("validatorAddress ", validatorAddress)
             
-            guard let wTx = try? stakingABI.delegate(delegatorAddress!, validatorAddress!, delegateAmount!.stringValue) else {
+            guard let wTx = try? stakingABI.beginRedelegate(delegatorAddress!, srcValidatorAddress!, dstValidatorAddress!, redelegateAmount!.stringValue) else {
                 DispatchQueue.main.async {
                     self.onUpdateFeeViewAfterSimul()
                 }
@@ -270,16 +294,16 @@ class EvmDelegate: BaseVC {
         let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
         self.present(pinVC, animated: true)
     }
-    
 }
 
-extension EvmDelegate: BaseSheetDelegate, AmountSheetDelegate, PinDelegate {
+
+extension EvmRedelegate: BaseSheetDelegate, AmountSheetDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectValidator) {
             if let validatorAddress = result["validatorAddress"] as? String {
                 toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
-                onUpdateValidatorView()
+                onUpdateToValidatorView()
             }
         }
     }
@@ -291,7 +315,7 @@ extension EvmDelegate: BaseSheetDelegate, AmountSheetDelegate, PinDelegate {
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
             view.isUserInteractionEnabled = false
-            stakeBtn.isEnabled = false
+            reStakeBtn.isEnabled = false
             loadingView.isHidden = false
             DispatchQueue.global().async { [self] in
                 guard let web3 = self.web3 else {
