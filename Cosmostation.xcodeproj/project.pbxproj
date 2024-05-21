@@ -1881,6 +1881,10 @@
 		E1F257EC2BFB2024008F4D21 /* EvmRedelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257E92BFB2024008F4D21 /* EvmRedelegate.swift */; };
 		E1F257ED2BFB2024008F4D21 /* EvmRedelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257E92BFB2024008F4D21 /* EvmRedelegate.swift */; };
 		E1F257EE2BFB2024008F4D21 /* EvmRedelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F257EA2BFB2024008F4D21 /* EvmRedelegate.xib */; };
+		E1F257F12BFCA223008F4D21 /* EvmVote.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F257F02BFCA223008F4D21 /* EvmVote.xib */; };
+		E1F257F22BFCA223008F4D21 /* EvmVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257EF2BFCA223008F4D21 /* EvmVote.swift */; };
+		E1F257F32BFCA223008F4D21 /* EvmVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257EF2BFCA223008F4D21 /* EvmVote.swift */; };
+		E1F257F42BFCA223008F4D21 /* EvmVote.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F257F02BFCA223008F4D21 /* EvmVote.xib */; };
 		E1F2941C2AFE5246000550E8 /* ChainFetchAi60Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */; };
 		E1F2941D2AFE5246000550E8 /* ChainFetchAi60Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */; };
 		E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F2AE50227EC05100C87F3F /* InfoPlist.strings */; };
@@ -2850,6 +2854,8 @@
 		E1F257E42BFB2009008F4D21 /* EvmCancelUnbonding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EvmCancelUnbonding.xib; sourceTree = "<group>"; };
 		E1F257E92BFB2024008F4D21 /* EvmRedelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmRedelegate.swift; sourceTree = "<group>"; };
 		E1F257EA2BFB2024008F4D21 /* EvmRedelegate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EvmRedelegate.xib; sourceTree = "<group>"; };
+		E1F257EF2BFCA223008F4D21 /* EvmVote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmVote.swift; sourceTree = "<group>"; };
+		E1F257F02BFCA223008F4D21 /* EvmVote.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EvmVote.xib; sourceTree = "<group>"; };
 		E1F2941B2AFE5246000550E8 /* ChainFetchAi60Old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFetchAi60Old.swift; sourceTree = "<group>"; };
 		E1F2AE4B227E865D00C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1F2AE4F227EC05100C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -4242,6 +4248,8 @@
 				E1F257E42BFB2009008F4D21 /* EvmCancelUnbonding.xib */,
 				E1F257E92BFB2024008F4D21 /* EvmRedelegate.swift */,
 				E1F257EA2BFB2024008F4D21 /* EvmRedelegate.xib */,
+				E1F257EF2BFCA223008F4D21 /* EvmVote.swift */,
+				E1F257F02BFCA223008F4D21 /* EvmVote.xib */,
 			);
 			path = GenTx;
 			sourceTree = "<group>";
@@ -4469,6 +4477,7 @@
 				E1DF77722AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */,
 				04FA74882AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
 				E1044EA82BD641DB00DA05C2 /* SendResultSheet.xib in Resources */,
+				E1F257F42BFCA223008F4D21 /* EvmVote.xib in Resources */,
 				E15F2D0D2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */,
 				04C940B42AE8D48C00415256 /* aes.js in Resources */,
 				046BF1C32B0F259C00BC1FC8 /* OktValidatorCell.xib in Resources */,
@@ -4621,6 +4630,7 @@
 				04CD24552AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */,
 				04FAD9C62AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
 				0400EF4F2ADF7EF4007BA97F /* KavaSwapAction.xib in Resources */,
+				E1F257F12BFCA223008F4D21 /* EvmVote.xib in Resources */,
 				04B789A12ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib in Resources */,
 				04C63D272B87039D00D4A366 /* tx_loading.json in Resources */,
 				0400EEEF2ADBE40D007BA97F /* KavaDefiCell.xib in Resources */,
@@ -5047,6 +5057,7 @@
 				0402B8252ACC7AE500824B3F /* ChainOmniflix.swift in Sources */,
 				0400EF402ADD49BB007BA97F /* kava_swap_v1beta1_query.pb.swift in Sources */,
 				04C817852BA98D75006B800A /* cosmos_gov_v1beta1_gov.pb.swift in Sources */,
+				E1F257F32BFCA223008F4D21 /* EvmVote.swift in Sources */,
 				18FFB341281AF533004E65BB /* RIPEMD160.swift in Sources */,
 				04F53F6B2BE4ED22000715FA /* SwitchStyleCell.swift in Sources */,
 				E1A05ECA2B04D9710017B72B /* ChainIris.swift in Sources */,
@@ -5797,6 +5808,7 @@
 				04B789892ACAC9B100E9BE88 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
 				0400EF0D2ADBF03B007BA97F /* kava_hard_v1beta1_tx.grpc.swift in Sources */,
 				04C817842BA98D75006B800A /* cosmos_gov_v1beta1_gov.pb.swift in Sources */,
+				E1F257F22BFCA223008F4D21 /* EvmVote.swift in Sources */,
 				0402B8242ACC7AE500824B3F /* ChainOmniflix.swift in Sources */,
 				04F53F692BE4ED22000715FA /* SwitchStyleCell.swift in Sources */,
 				E1A05EC92B04D9710017B72B /* ChainIris.swift in Sources */,

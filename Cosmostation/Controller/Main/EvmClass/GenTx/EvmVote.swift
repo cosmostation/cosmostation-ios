@@ -1,8 +1,8 @@
 //
-//  EvmUndelegate.swift
+//  EvmVote.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 5/20/24.
+//  Created by yongjoo jung on 5/21/24.
 //  Copyright © 2024 wannabit. All rights reserved.
 //
 
@@ -11,22 +11,10 @@ import Lottie
 import web3swift
 import BigInt
 
-class EvmUndelegate: BaseVC {
+class EvmVote: BaseVC {
     
     @IBOutlet weak var titleLabel: UILabel!
-    
-    @IBOutlet weak var validatorCardView: FixCardView!
-    @IBOutlet weak var monikerImg: UIImageView!
-    @IBOutlet weak var inactiveTag: UIImageView!
-    @IBOutlet weak var jailedTag: UIImageView!
-    @IBOutlet weak var monikerLabel: UILabel!
-    @IBOutlet weak var stakedLabel: UILabel!
-    
-    @IBOutlet weak var unStakingAmountCardView: FixCardView!
-    @IBOutlet weak var unStakingAmountTitle: UILabel!
-    @IBOutlet weak var unStakingAmountHintLabel: UILabel!
-    @IBOutlet weak var unStakingAmountLabel: UILabel!
-    @IBOutlet weak var unStakingDenomLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var feeCardView: FixCardView!
     @IBOutlet weak var feeSelectView: DropDownView!
@@ -41,13 +29,11 @@ class EvmUndelegate: BaseVC {
     @IBOutlet weak var errorCardView: RedFixCardView!
     @IBOutlet weak var errorMsgLabel: UILabel!
     
-    @IBOutlet weak var unStakeBtn: BaseButton!
+    @IBOutlet weak var voteBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedFeePosition = 0
-    var fromValidator: Cosmos_Staking_V1beta1_Validator?
-    var availableAmount = NSDecimalNumber.zero
-    var undelegateAmount: NSDecimalNumber? = NSDecimalNumber.zero
+    var toVoteProposals = [MintscanProposal]()
     
     var selectedChain: EvmClass!
     var evmTx: EthereumTransaction?
@@ -68,12 +54,14 @@ class EvmUndelegate: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        if let delegated = selectedChain.cosmosDelegations.filter({ $0.delegation.validatorAddress == fromValidator?.operatorAddress }).first {
-            availableAmount = NSDecimalNumber(string: delegated.balance.amount)
-        }
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "VoteCell", bundle: nil), forCellReuseIdentifier: "VoteCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderTopPadding = 0.0
         
         onInitFee()
-        onUpdateValidatorView()
         
         if let url = URL(string: selectedChain.getEvmRpc()) {
             DispatchQueue.global().async { [self] in
@@ -86,69 +74,15 @@ class EvmUndelegate: BaseVC {
                 }
             }
         }
-        
-        validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
-        unStakingAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
     }
     
     override func setLocalizedString() {
-        unStakingAmountTitle.text = NSLocalizedString("str_undelegate_amount", comment: "")
-        unStakingAmountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
-        unStakeBtn.setTitle(NSLocalizedString("str_unstake", comment: ""), for: .normal)
+        voteBtn.setTitle(NSLocalizedString("str_vote", comment: ""), for: .normal)
     }
     
-    @objc func onClickValidator() {
-        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.targetChain = selectedChain
-        baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectUnStakeValidator
-        onStartSheet(baseSheet, 680)
-    }
-    
-    func onUpdateValidatorView() {
-        monikerImg.image = UIImage(named: "validatorDefault")
-        monikerImg.af.setImage(withURL: selectedChain.monikerImg(fromValidator!.operatorAddress))
-        monikerLabel.text = fromValidator!.description_p.moniker
-        if (fromValidator!.jailed) {
-            jailedTag.isHidden = false
-        } else {
-            inactiveTag.isHidden = fromValidator!.status == .bonded
-        }
-        
-        let stakeDenom = selectedChain.stakeDenom!
-        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
-            let staked = selectedChain.cosmosDelegations.filter { $0.delegation.validatorAddress == fromValidator?.operatorAddress }.first?.balance.amount
-            let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
-            stakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakedLabel!.font, 6)
-        }
-        onSimul()
-    }
-    
-    @objc func onClickAmount() {
-        let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
-        amountSheet.selectedChain = selectedChain
-        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
-        amountSheet.availableAmount = availableAmount
-        if let undelegateAmount = undelegateAmount {
-            amountSheet.existedAmount = undelegateAmount
-        }
-        amountSheet.sheetDelegate = self
-        amountSheet.sheetType = .TxDelegate
-        self.onStartSheet(amountSheet)
-    }
-    
-    func onUpdateAmountView(_ amount: String) {
-        let stakeDenom = selectedChain.stakeDenom!
-        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
-            undelegateAmount = NSDecimalNumber(string: amount)
-            WDP.dpCoin(msAsset, undelegateAmount!, nil, unStakingDenomLabel, unStakingAmountLabel, msAsset.decimals)
-            unStakingAmountHintLabel.isHidden = true
-            unStakingAmountLabel.isHidden = false
-            unStakingDenomLabel.isHidden = false
-        } else {
-            undelegateAmount = nil
-        }
-        onSimul()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
     
     func onInitFee() {
@@ -199,12 +133,12 @@ class EvmUndelegate: BaseVC {
         onUpdateFeeView()
         feeCardView.isHidden = false
         errorCardView.isHidden = true
-        unStakeBtn.isEnabled = true
+        voteBtn.isEnabled = true
     }
     
     func onSimul() {
-        unStakeBtn.isEnabled = false
-        if (undelegateAmount == nil || undelegateAmount == NSDecimalNumber.zero ) { return }
+        voteBtn.isEnabled = false
+        if (toVoteProposals.filter { $0.toVoteOption == nil }.count > 0) { return }
         view.isUserInteractionEnabled = false
         loadingView.isHidden = false
         evmTx = nil
@@ -214,12 +148,11 @@ class EvmUndelegate: BaseVC {
             
             let chainID = web3.provider.network?.chainID
             let delegatorAddress = EthereumAddress.init(selectedChain.evmAddress)
-            let validatorAddress = EthereumAddress.init(KeyFac.convertBech32ToEvm(fromValidator!.operatorAddress))
             let nonce = try? web3.eth.getTransactionCount(address: delegatorAddress!)
-            let stakingContract = EthereumAddress.init(fromHex: BERA_CONT_STAKING)
-            let stakingABI = BERA_Staking(web3: web3, provider: web3.provider, address: stakingContract!)
+            let govContract = EthereumAddress.init(fromHex: BERA_CONT_GOVERNANCE)
+            let govABI = BERA_Governance(web3: web3, provider: web3.provider, address: govContract!)
             
-            guard let wTx = try? stakingABI.unDelegate(delegatorAddress!, validatorAddress!, undelegateAmount!.stringValue) else {
+            guard let wTx = try? govABI.vote(delegatorAddress!, toVoteProposals[0].id!, toVoteProposals[0].toVoteOption!.rawValue) else {
                 DispatchQueue.main.async {
                     self.onUpdateFeeViewAfterSimul()
                 }
@@ -244,7 +177,7 @@ class EvmUndelegate: BaseVC {
                     evmGasPrice[i] = (baseFee, tip)
                 }
                 print("evmGasPrice eip1559 ", evmGasPrice)
-                let eip1559 = EIP1559Envelope(to: stakingContract!, nonce: nonce!, chainID: chainID!, value: 0,
+                let eip1559 = EIP1559Envelope(to: govContract!, nonce: nonce!, chainID: chainID!, value: 0,
                                               data: wTx.transaction.data, maxPriorityFeePerGas: evmGasPrice[selectedFeePosition].1,
                                               maxFeePerGas: evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1, gasLimit: evmGasLimit)
                 evmTx = EthereumTransaction(with: eip1559)
@@ -264,26 +197,41 @@ class EvmUndelegate: BaseVC {
 
 }
 
-
-extension EvmUndelegate: BaseSheetDelegate, AmountSheetDelegate, PinDelegate {
+extension EvmVote: UITableViewDelegate, UITableViewDataSource, PinDelegate {
     
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if (sheetType == .SelectValidator) {
-            if let validatorAddress = result["validatorAddress"] as? String {
-                fromValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
-                onUpdateValidatorView()
-            }
-        }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return toVoteProposals.count
     }
     
-    func onInputedAmount(_ type: AmountSheetType?, _ amount: String) {
-        onUpdateAmountView(amount)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"VoteCell") as! VoteCell
+        cell.onBindVote(toVoteProposals[indexPath.row])
+        cell.actionToggle = { tag in
+            if (tag == 0) {
+                self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.yes
+            } else if (tag == 1) {
+                self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.no
+            } else if (tag == 2) {
+                self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.noWithVeto
+            } else if (tag == 3) {
+                self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.abstain
+            } else {
+                self.toVoteProposals[indexPath.row].toVoteOption = nil
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(80), execute: {
+                self.tableView.beginUpdates()
+                self.tableView.reloadRows(at: [indexPath], with: .none)
+                self.tableView.endUpdates()
+                self.onSimul()
+            })
+        }
+        return cell
     }
     
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
             view.isUserInteractionEnabled = false
-            unStakeBtn.isEnabled = false
+            voteBtn.isEnabled = false
             loadingView.isHidden = false
             DispatchQueue.global().async { [self] in
                 guard let web3 = self.web3 else {
@@ -309,7 +257,6 @@ extension EvmUndelegate: BaseSheetDelegate, AmountSheetDelegate, PinDelegate {
                 } catch {
                     print("error ", error)
                 }
-                
             }
         }
     }
