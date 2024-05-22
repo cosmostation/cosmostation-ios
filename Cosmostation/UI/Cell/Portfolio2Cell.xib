@@ -157,9 +157,8 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZ8-gN-WeX">
-                                <rect key="frame" x="72" y="43.666666666666664" width="120" height="12"/>
+                                <rect key="frame" x="72" y="43.666666666666664" width="120" height="15.333333333333336"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="12" id="1h5-PV-jCW"/>
                                     <constraint firstAttribute="width" constant="120" id="JdZ-uC-VjE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
@@ -167,9 +166,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6d-Lf-BNl">
-                                <rect key="frame" x="72" y="43.666666666666664" width="120" height="12"/>
+                                <rect key="frame" x="72" y="43.666666666666664" width="120" height="15.333333333333336"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="12" id="asb-O3-ajT"/>
                                     <constraint firstAttribute="width" constant="120" id="mZi-fn-j2a"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
@@ -212,7 +210,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Coin" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nGQ-Rr-Xp9">
-                                <rect key="frame" x="381.33333333333331" y="42" width="35.666666666666686" height="15.333333333333336"/>
+                                <rect key="frame" x="381.33333333333331" y="43.666666666666664" width="35.666666666666686" height="15.333333333333336"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
@@ -228,7 +226,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Loading Skeleton2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMF-Zk-Xdg">
-                                <rect key="frame" x="377" y="42" width="40" height="15.333333333333336"/>
+                                <rect key="frame" x="377" y="43.666666666666664" width="40" height="15.333333333333336"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="cYp-73-gCp"/>
                                 </constraints>
@@ -241,7 +239,7 @@
                                         <integer key="value" value="100"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
-                                        <integer key="value" value="8"/>
+                                        <integer key="value" value="6"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="useFontLineHeight" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -260,7 +258,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8G-oM-r2S">
-                                <rect key="frame" x="12" y="86.666666666666671" width="33" height="12"/>
+                                <rect key="frame" x="14" y="86.666666666666671" width="33" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="udR-Km-3Pl"/>
                                 </constraints>
@@ -323,6 +321,7 @@
                             <constraint firstAttribute="trailing" secondItem="nGQ-Rr-Xp9" secondAttribute="trailing" constant="14" id="ILx-Jh-IEq"/>
                             <constraint firstAttribute="trailing" secondItem="wcs-5u-9Rb" secondAttribute="trailing" constant="14" id="J6P-hZ-7WL"/>
                             <constraint firstItem="m8G-oM-r2S" firstAttribute="top" secondItem="wcs-5u-9Rb" secondAttribute="bottom" constant="14" id="ML4-5N-MDw"/>
+                            <constraint firstItem="m8G-oM-r2S" firstAttribute="leading" secondItem="Gsy-t5-EA0" secondAttribute="leading" constant="14" id="MNy-bk-D4l"/>
                             <constraint firstItem="6P4-et-chg" firstAttribute="centerY" secondItem="vJn-os-icg" secondAttribute="centerY" id="OTq-5p-IDD"/>
                             <constraint firstItem="D2k-TI-wvX" firstAttribute="top" secondItem="Gsy-t5-EA0" secondAttribute="top" constant="18" id="OfY-wJ-6jo"/>
                             <constraint firstItem="vJn-os-icg" firstAttribute="leading" secondItem="85m-VB-YH3" secondAttribute="trailing" constant="2" id="Qkt-FK-wTL"/>
@@ -331,7 +330,6 @@
                             <constraint firstItem="Xol-Xe-OA2" firstAttribute="firstBaseline" secondItem="iUO-Oz-fI0" secondAttribute="firstBaseline" id="TWE-nH-M14"/>
                             <constraint firstItem="VMF-Zk-Xdg" firstAttribute="centerY" secondItem="nGQ-Rr-Xp9" secondAttribute="centerY" id="Ta5-SQ-5JZ"/>
                             <constraint firstItem="Xol-Xe-OA2" firstAttribute="leading" secondItem="iUO-Oz-fI0" secondAttribute="trailing" constant="1" id="V4v-OR-cwh"/>
-                            <constraint firstItem="m8G-oM-r2S" firstAttribute="leading" secondItem="C1A-Ei-6cG" secondAttribute="leading" id="Z48-xc-bl8"/>
                             <constraint firstItem="WZ8-gN-WeX" firstAttribute="leading" secondItem="D2k-TI-wvX" secondAttribute="leading" id="a1T-83-n6h"/>
                             <constraint firstItem="85m-VB-YH3" firstAttribute="firstBaseline" secondItem="vJn-os-icg" secondAttribute="firstBaseline" constant="-0.5" id="ayf-Kn-3ud"/>
                             <constraint firstItem="hc7-6M-ujC" firstAttribute="leading" secondItem="uTx-G5-f9q" secondAttribute="trailing" constant="1" id="b1z-Ym-6xF"/>

@@ -47,6 +47,8 @@ class Portfolio2Cell: UITableViewCell {
         priceChangePercentLabel.text = ""
         bechAddressLabel.text = ""
         evmAddressLabel.text = ""
+        bechAddressLabel.alpha = 1.0
+        evmAddressLabel.alpha = 1.0
         valueLoadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
         assetCntLoadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color04, .color03]), animation: skeletonAnimation, transition: .none)
     }
@@ -72,6 +74,8 @@ class Portfolio2Cell: UITableViewCell {
         valueLoadingLabel.isHidden = false
         assetCntLoadingLabel.isHidden = false
         reposeErrorLabel.isHidden = true
+        bechAddressLabel.alpha = 1.0
+        evmAddressLabel.alpha = 1.0
         bechAddressLabel.layer.removeAllAnimations()
         evmAddressLabel.layer.removeAllAnimations()
     }
