@@ -20,7 +20,8 @@ class KeyFac {
     
 
     static func getPriKeyFromSeed(_ pubKeyType: PubKeyType, _ seed: Data, _ path: String) -> Data? {
-        if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1) {
+        if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || 
+            pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1) {
             return getSecp256k1PriKey(seed, path)
             
         } else if (pubKeyType == .SUI_Ed25519) {
@@ -69,7 +70,8 @@ class KeyFac {
     
     
     static func getPubKeyFromPrivateKey(_ priKey: Data, _ pubKeyType: PubKeyType) -> Data? {
-        if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1) {
+        if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || 
+            pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1) {
             return getSecp256k1PubKey(priKey)
             
         } else if (pubKeyType == .SUI_Ed25519) {
@@ -92,7 +94,8 @@ class KeyFac {
             let ripemd160 = RIPEMD160.hash(pubKey.sha256())
             return try! SegwitAddrCoder.shared.encode(prefix!, ripemd160)
             
-        } else if (pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1) {
+        } else if (pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1
+                   || pubKeyType == .BERA_Secp256k1) {
             return Web3.Utils.publicToAddressString(pubKey)!
             
         } else if (pubKeyType == .SUI_Ed25519) {
@@ -176,61 +179,61 @@ class KeyFac {
 //    }
     
     
-    static func generateRandomBytes() -> String? {
-        var keyData = Data(count: 32)
-        let result = keyData.withUnsafeMutableBytes {
-            SecRandomCopyBytes(kSecRandomDefault, 32, $0.baseAddress!)
-        }
-        
-        if result == errSecSuccess {
-            return keyData.hexEncodedString()
-        } else {
-            return nil
-        }
-    }
-    
-    static func getRandomNumnerHash(_ randomNumner: String, _ timeStamp: Int64) -> String? {
-        let timeStampData = withUnsafeBytes(of: timeStamp.bigEndian) { Data($0) }
-        let originHex = randomNumner + timeStampData.hexEncodedString()
-        let hash = Data.fromHex(originHex)!.sha256()
-        return hash.hexEncodedString()
-    }
-    
-    static func getSwapId(_ toChain: CosmosClass, _ toSendDenom: String,  _ randomNumnerHash: String, _ otherSender: String) -> String? {
-        if (toChain is ChainBinanceBeacon) {
-            var senderData: Data?
-            if (toSendDenom  == TOKEN_HTLC_KAVA_BNB) {
-                senderData = try! SegwitAddrCoder.shared.decode(BINANCE_MAIN_BNB_DEPUTY)
-            } else if (toSendDenom == TOKEN_HTLC_KAVA_BTCB) {
-                senderData = try! SegwitAddrCoder.shared.decode(BINANCE_MAIN_BTCB_DEPUTY)
-            } else if (toSendDenom == TOKEN_HTLC_KAVA_XRPB) {
-                senderData = try! SegwitAddrCoder.shared.decode(BINANCE_MAIN_XRPB_DEPUTY)
-            } else if (toSendDenom == TOKEN_HTLC_KAVA_BUSD) {
-                senderData = try! SegwitAddrCoder.shared.decode(BINANCE_MAIN_BUSD_DEPUTY)
-            }
-            let otherSenderData = otherSender.data(using: .utf8)
-            let add = randomNumnerHash + senderData!.hexEncodedString() + otherSenderData!.hexEncodedString()
-            let hash = Data.fromHex(add)!.sha256()
-            return hash.hexEncodedString()
-            
-        } else if (toChain.tag.starts(with: "kava")) {
-            var senderData: Data?
-            if (toSendDenom == TOKEN_HTLC_BINANCE_BNB) {
-                senderData = try! SegwitAddrCoder.shared.decode(KAVA_MAIN_BNB_DEPUTY)
-            } else if (toSendDenom == TOKEN_HTLC_BINANCE_BTCB) {
-                senderData = try! SegwitAddrCoder.shared.decode(KAVA_MAIN_BTCB_DEPUTY)
-            } else if (toSendDenom == TOKEN_HTLC_BINANCE_XRPB) {
-                senderData = try! SegwitAddrCoder.shared.decode(KAVA_MAIN_XRPB_DEPUTY)
-            } else if (toSendDenom == TOKEN_HTLC_BINANCE_BUSD) {
-                senderData = try! SegwitAddrCoder.shared.decode(KAVA_MAIN_BUSD_DEPUTY)
-            }
-            let otherSenderData = otherSender.data(using: .utf8)
-            let add = randomNumnerHash + senderData!.hexEncodedString() + otherSenderData!.hexEncodedString()
-            let hash = Data.fromHex(add)!.sha256()
-            return hash.hexEncodedString()
-        } 
-        return nil
-    }
+//    static func generateRandomBytes() -> String? {
+//        var keyData = Data(count: 32)
+//        let result = keyData.withUnsafeMutableBytes {
+//            SecRandomCopyBytes(kSecRandomDefault, 32, $0.baseAddress!)
+//        }
+//        
+//        if result == errSecSuccess {
+//            return keyData.hexEncodedString()
+//        } else {
+//            return nil
+//        }
+//    }
+//    
+//    static func getRandomNumnerHash(_ randomNumner: String, _ timeStamp: Int64) -> String? {
+//        let timeStampData = withUnsafeBytes(of: timeStamp.bigEndian) { Data($0) }
+//        let originHex = randomNumner + timeStampData.hexEncodedString()
+//        let hash = Data.fromHex(originHex)!.sha256()
+//        return hash.hexEncodedString()
+//    }
+//    
+//    static func getSwapId(_ toChain: CosmosClass, _ toSendDenom: String,  _ randomNumnerHash: String, _ otherSender: String) -> String? {
+//        if (toChain is ChainBinanceBeacon) {
+//            var senderData: Data?
+//            if (toSendDenom  == TOKEN_HTLC_KAVA_BNB) {
+//                senderData = try! SegwitAddrCoder.shared.decode(BINANCE_MAIN_BNB_DEPUTY)
+//            } else if (toSendDenom == TOKEN_HTLC_KAVA_BTCB) {
+//                senderData = try! SegwitAddrCoder.shared.decode(BINANCE_MAIN_BTCB_DEPUTY)
+//            } else if (toSendDenom == TOKEN_HTLC_KAVA_XRPB) {
+//                senderData = try! SegwitAddrCoder.shared.decode(BINANCE_MAIN_XRPB_DEPUTY)
+//            } else if (toSendDenom == TOKEN_HTLC_KAVA_BUSD) {
+//                senderData = try! SegwitAddrCoder.shared.decode(BINANCE_MAIN_BUSD_DEPUTY)
+//            }
+//            let otherSenderData = otherSender.data(using: .utf8)
+//            let add = randomNumnerHash + senderData!.hexEncodedString() + otherSenderData!.hexEncodedString()
+//            let hash = Data.fromHex(add)!.sha256()
+//            return hash.hexEncodedString()
+//            
+//        } else if (toChain.tag.starts(with: "kava")) {
+//            var senderData: Data?
+//            if (toSendDenom == TOKEN_HTLC_BINANCE_BNB) {
+//                senderData = try! SegwitAddrCoder.shared.decode(KAVA_MAIN_BNB_DEPUTY)
+//            } else if (toSendDenom == TOKEN_HTLC_BINANCE_BTCB) {
+//                senderData = try! SegwitAddrCoder.shared.decode(KAVA_MAIN_BTCB_DEPUTY)
+//            } else if (toSendDenom == TOKEN_HTLC_BINANCE_XRPB) {
+//                senderData = try! SegwitAddrCoder.shared.decode(KAVA_MAIN_XRPB_DEPUTY)
+//            } else if (toSendDenom == TOKEN_HTLC_BINANCE_BUSD) {
+//                senderData = try! SegwitAddrCoder.shared.decode(KAVA_MAIN_BUSD_DEPUTY)
+//            }
+//            let otherSenderData = otherSender.data(using: .utf8)
+//            let add = randomNumnerHash + senderData!.hexEncodedString() + otherSenderData!.hexEncodedString()
+//            let hash = Data.fromHex(add)!.sha256()
+//            return hash.hexEncodedString()
+//        } 
+//        return nil
+//    }
     
 }
 
@@ -244,5 +247,24 @@ extension UInt32 {
             }
         }
         return Array(bytePtr)
+    }
+}
+
+extension Data {
+    var bytes : [UInt8]{
+        return [UInt8](self)
+    }
+    
+    public static func dataFromHex(_ hex: String) -> Data? {
+        let string = hex.lowercased().stripHexPrefix()
+        let array = Array<UInt8>(hex: string)
+        if (array.count == 0) {
+            if (hex == "0x" || hex == "") {
+                return Data()
+            } else {
+                return nil
+            }
+        }
+        return Data(array)
     }
 }

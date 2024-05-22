@@ -59,16 +59,9 @@ class ManageChainCell: UITableViewCell {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         
-        if (chain is ChainBinanceBeacon) {
-            lcdLayer.isHidden = false
-            lcdEndpointLabel.text = BNB_BEACON_LCD.replacingOccurrences(of: "https://", with: "")
-            
-        } else {
-            grpcLayer.isHidden = false
-            grpcEndpointLabel.text = chain.getGrpc().host + " : " +  String(chain.getGrpc().port)
-            grpcEndpointLabel.adjustsFontSizeToFitWidth = true
-            
-        }
+        grpcLayer.isHidden = false
+        grpcEndpointLabel.text = chain.getGrpc().host + " : " +  String(chain.getGrpc().port)
+        grpcEndpointLabel.adjustsFontSizeToFitWidth = true
     }
     
 }

@@ -47,6 +47,18 @@ class NoticeSheet: BaseVC {
             subBtn.setTitle("Link", for: .normal)
             okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
             
+        } else if (noticeType == .ChainDelist) {
+            noticeTitleLabel.text = NSLocalizedString("str_delist_title", comment: "")
+            noticeMsgLabel.text = NSLocalizedString("str_delist_msg", comment: "")
+            subBtn.isHidden = true
+            okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
+            
+        } else if (noticeType == .LegacyPath) {
+            noticeTitleLabel.text = NSLocalizedString("str_legacy_path_title", comment: "")
+            noticeMsgLabel.text = NSLocalizedString("str_legacy_path_msg", comment: "")
+            subBtn.isHidden = true
+            okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
+            
         } else if (noticeType == .NFTGithub) {
             noticeTitleLabel.text = NSLocalizedString("str_nft_github", comment: "")
             noticeMsgLabel.text = NSLocalizedString("msg_nft_github", comment: "")
@@ -72,12 +84,7 @@ class NoticeSheet: BaseVC {
             }
             
         } else if (noticeType == .ChainSunset) {
-            if (selectedChain is ChainBinanceBeacon) {
-                let rawUrl =  "https://www.bnbchain.org/en/bnb-chain-fusion"
-                guard let url = URL(string: rawUrl) else { return }
-                self.onShowSafariWeb(url)
-                
-            } else if (selectedChain is ChainCrescent) {
+            if (selectedChain is ChainCrescent) {
                 let rawUrl = "https://crescentnetwork.medium.com/flip-announcement-af24c8ab7e7f"
                 guard let url = URL(string: rawUrl) else { return }
                 self.onShowSafariWeb(url)
@@ -102,5 +109,7 @@ public enum NoticeType: Int {
     case TokenGithub = 1
     case NodeDownGuide = 2
     case ChainSunset = 3
-    case NFTGithub = 4
+    case ChainDelist = 4
+    case LegacyPath = 5
+    case NFTGithub = 6
 }

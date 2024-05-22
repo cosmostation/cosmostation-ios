@@ -86,7 +86,6 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SelectNameServiceCell", bundle: nil), forCellReuseIdentifier: "SelectNameServiceCell")
         sheetTableView.register(UINib(nibName: "SelectRefAddressCell", bundle: nil), forCellReuseIdentifier: "SelectRefAddressCell")
         sheetTableView.register(UINib(nibName: "SelectAddressBookCell", bundle: nil), forCellReuseIdentifier: "SelectAddressBookCell")
-        sheetTableView.register(UINib(nibName: "SelectBepRecipientCell", bundle: nil), forCellReuseIdentifier: "SelectBepRecipientCell")
         sheetTableView.sectionHeaderTopPadding = 0
         
         
@@ -255,9 +254,6 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectCosmosNameServiceAddress) {
             sheetTitle.text = String(format: NSLocalizedString("title_select_nameservice", comment: ""), nameservices[0].name ?? "")
             
-        } else if (sheetType == .SelectBepRecipientAddress) {
-            sheetTitle.text = NSLocalizedString("str_recipient_address", comment: "")
-            
         } else if (sheetType == .SelectNeutronVault) {
             sheetTitle.text = NSLocalizedString("title_select_vaults", comment: "")
             
@@ -402,9 +398,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectCosmosNameServiceAddress) {
             return nameservices.count
             
-        } else if (sheetType == .SelectBepRecipientAddress) {
-            return cosmosChainList.count
-            
         } else if (sheetType == .SelectNeutronVault) {
             return 2
             
@@ -529,16 +522,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
                 return cell!
             }
             
-        } else if (sheetType == .SelectCosmosNameServiceAddress) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectNameServiceCell") as? SelectNameServiceCell
-            cell?.onBindNameservice(nameservices[indexPath.row])
-            return cell!
-            
-        } else if (sheetType == .SelectBepRecipientAddress) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectBepRecipientCell") as? SelectBepRecipientCell
-            cell?.onBindBepRecipient(cosmosChainList[indexPath.row])
-            return cell!
-            
         } else if (sheetType == .SelectNeutronVault) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
             cell?.onBindVault(indexPath.row)
@@ -618,27 +601,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
                 sheetDelegate?.onSelectedSheet(sheetType, result)
             }
             
-        } else if (sheetType == .SelectBepRecipientAddress) {
-            let chain = cosmosChainList[indexPath.row]
-            if let bnbChain = chain as? ChainBinanceBeacon {
-                let availableAmount = bnbChain.lcdBalanceAmount(bnbChain.stakeDenom)
-                let fee = NSDecimalNumber(string: BNB_BEACON_BASE_FEE)
-                if (availableAmount.compare(fee).rawValue < 0) {
-                    onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                    dismiss(animated: true)
-                }
-                
-            } else {
-                let availableAmount = chain.balanceAmount(chain.stakeDenom)
-                let fee = NSDecimalNumber(string: KAVA_BASE_FEE)
-                if (availableAmount.compare(fee).rawValue < 0) {
-                    onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                    dismiss(animated: true)
-                }
-            }
-            let result: [String : Any] = ["index" : indexPath.row, "address" : chain.bechAddress]
-            sheetDelegate?.onSelectedSheet(sheetType, result)
-            
         } else if (sheetType == .SelectHardAction) {
             let result: [String : Any] = ["index" : indexPath.row, "denom" : hardMarketDenom!]
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -696,7 +658,6 @@ public enum SheetType: Int {
     case SelectCosmosRecipientChain = 44
     case SelectCosmosRecipientBechAddress = 45
     case SelectCosmosNameServiceAddress = 46
-    case SelectBepRecipientAddress = 47
     
     case SelectNeutronVault = 51
     

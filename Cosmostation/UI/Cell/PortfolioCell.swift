@@ -78,7 +78,7 @@ class PortfolioCell: UITableViewCell {
             cw20Tag.isHidden = false
         }
         
-        if ((!BaseData.instance.reviewMode || BaseData.instance.checkInstallTime()) && chain.supportCw721) {
+        if (BaseData.instance.showEvenReview() && chain.supportCw721) {
             tagLayer.isHidden = false
             nftTag.isHidden = false
         }
@@ -92,13 +92,6 @@ class PortfolioCell: UITableViewCell {
         } else if (chain.fetchState == .Success) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
-            
-//            if (!(chain is ChainOkt996Keccak) && !(chain is ChainBinanceBeacon)) {
-//                if (chain.cosmosBalances == nil) {
-//                    reposeErrorLabel.isHidden = false
-//                    return
-//                }
-//            }
             
             if (BaseData.instance.getHideValue()) {
                 currencyLabel.text = ""

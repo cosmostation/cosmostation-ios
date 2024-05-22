@@ -51,29 +51,7 @@ class CosmosTxResult: BaseVC {
         loadingView.play()
         
         confirmBtn.isEnabled = false
-        if (selectedChain is ChainBinanceBeacon) {
-            successMintscanBtn.setTitle("Check in Explorer", for: .normal)
-            failMintscanBtn.setTitle("Check in Explorer", for: .normal)
-            guard legacyResult != nil else {
-                loadingView.isHidden = true
-                failView.isHidden = false
-                confirmBtn.isEnabled = true
-                return
-            }
-            
-            if (legacyResult["code"].intValue != 0) {
-                loadingView.isHidden = true
-                failView.isHidden = false
-                failMsgLabel.text = legacyResult?["log"].stringValue
-                confirmBtn.isEnabled = true
-                return
-            } else {
-                loadingView.isHidden = true
-                successView.isHidden = false
-                confirmBtn.isEnabled = true
-            }
-            
-        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             successMintscanBtn.setTitle("Check in Explorer", for: .normal)
             failMintscanBtn.setTitle("Check in Explorer", for: .normal)
             guard legacyResult != nil else {
@@ -171,9 +149,7 @@ class CosmosTxResult: BaseVC {
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
         var hash: String?
-        if (selectedChain is ChainBinanceBeacon) {
-            hash = legacyResult!["hash"].string
-        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             hash = legacyResult!["txhash"].string
         } else {
             hash = broadcastTxResponse?.txhash

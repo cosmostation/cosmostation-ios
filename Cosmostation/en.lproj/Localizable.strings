@@ -320,6 +320,10 @@
 "str_node_down_title" = "⚠️ Node Down";
 "str_sunset_title" = "Chain Sunset";
 "str_sunset_msg" = "The chain you selected is scheduled to end support. For more information, please refer to the foundation's official announcement.";
+"str_delist_title" = "Discontinuation of support";
+"str_delist_msg" = "The chain you selected will be discontinued from mobile wallets. It can be supported by other wallets or future custom chain services.";
+"str_legacy_path_title" = "Legacy path will not support";
+"str_legacy_path_msg" = "Accounts on the legacy path you selected will be terminated. We strongly recommend that you move your assets to the public path.";
 
 
 "btn_delegate" = "  Delegate";
@@ -1151,7 +1155,9 @@
 "error_not_support_cancel_unbonding" = "This chain does not yet support unstaking cancellation.";
 "error_wait_moment" = "Please wait for a moment. Synchronizing.";
 "error_evm_simul" = "Network with the node is not smooth. Please try again later.";
-"error_tranfer_disabled" = "This chain does not support the transfer function.";
+"error_tranfer_disabled" = "Send functionality of the selected chain is currently disabled.\nIt can be activated later through the onchain governance procedure.";
+"error_tranfer_disabled_bgt" = "BGT is a staking-only asset. \nTransmission is not possible.";
+"error_bera_vote_one_proposal" = "You can only vote for one BeraChain.";
 
 
 "alert_title_no_private_key" = "No Private Key";

@@ -42,17 +42,9 @@ class ChainBinanceBeacon: CosmosClass  {
         Task {
             do {
                 if let nodeInfo = try await fetchNodeInfo(),
-                   let accountInfo = try await fetchAccountInfo(bechAddress),
-                   let beaconTokens = try await fetchBeaconTokens(),
-                   let miniTokens = try await fetchBeaconMiniTokens() {
+                   let accountInfo = try await fetchAccountInfo(bechAddress) {
                     self.lcdNodeInfo = nodeInfo
                     self.lcdAccountInfo = accountInfo
-                    beaconTokens.forEach { beaconToken in
-                        self.lcdBeaconTokens.append(beaconToken)
-                    }
-                    miniTokens.forEach { miniToken in
-                        self.lcdBeaconTokens.append(miniToken)
-                    }
                 }
                 
                 DispatchQueue.main.async {
@@ -130,15 +122,6 @@ extension ChainBinanceBeacon {
     func fetchAccountInfo(_ address: String) async throws -> JSON? {
         return try await AF.request(BaseNetWork.lcdAccountInfoUrl(self, address), method: .get).serializingDecodable(JSON.self).value
     }
-    
-    func fetchBeaconTokens() async throws -> [JSON]? {
-        return try await AF.request(BaseNetWork.lcdBeaconTokenUrl(), method: .get, parameters: ["limit":"1000"]).serializingDecodable([JSON].self).value
-    }
-    
-    func fetchBeaconMiniTokens() async throws -> [JSON]? {
-        return try await AF.request(BaseNetWork.lcdBeaconMiniTokenUrl(), method: .get, parameters: ["limit":"1000"]).serializingDecodable([JSON].self).value
-    }
-    
     
     func lcdAllStakingDenomAmount() -> NSDecimalNumber {
         return lcdBalanceAmount(stakeDenom)

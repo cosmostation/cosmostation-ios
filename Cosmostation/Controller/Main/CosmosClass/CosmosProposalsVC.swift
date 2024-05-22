@@ -155,11 +155,25 @@ class CosmosProposalsVC: BaseVC {
                 toVoteProposals.append(proposal)
             }
         }
-        let vote = CosmosVote(nibName: "CosmosVote", bundle: nil)
-        vote.selectedChain = selectedChain
-        vote.toVoteProposals = toVoteProposals
-        vote.modalTransitionStyle = .coverVertical
-        self.present(vote, animated: true)
+        
+        if (selectedChain is ChainBeraEVM) {
+            if (toVoteProposals.count > 1) {
+                onShowToast(NSLocalizedString("error_bera_vote_one_proposal", comment: ""))
+                return
+            }
+            let vote = EvmVote(nibName: "EvmVote", bundle: nil)
+            vote.selectedChain = selectedChain as? EvmClass
+            vote.toVoteProposals = toVoteProposals
+            vote.modalTransitionStyle = .coverVertical
+            self.present(vote, animated: true)
+            
+        } else {
+            let vote = CosmosVote(nibName: "CosmosVote", bundle: nil)
+            vote.selectedChain = selectedChain
+            vote.toVoteProposals = toVoteProposals
+            vote.modalTransitionStyle = .coverVertical
+            self.present(vote, animated: true)
+        }
         
     }
 }

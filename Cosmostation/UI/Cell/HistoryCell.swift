@@ -84,27 +84,6 @@ class HistoryCell: UITableViewCell {
         }
     }
     
-    func bindBeaconHistory(_ account: BaseAccount, _ chain: CosmosClass, _ history: BeaconHistory) {
-        if (history.code != 0) {
-            successImg.image = UIImage(named: "iconFail")
-        } else {
-            successImg.image = UIImage(named: "iconSuccess")
-        }
-        
-        msgsTitleLabel.text = history.getMsgType(chain.bechAddress)
-        hashLabel.text = history.txHash
-        timeLabel.text = WDP.dpFullTime(history.timeStamp)
-        if let height = history.blockHeight {
-            blockLabel.text = "(" + String(height) + ")"
-            blockLabel.isHidden = false
-        } else {
-            blockLabel.isHidden = true
-        }
-        
-        denomLabel.text = WDP.dpTimeGap(history.timeStamp)
-        denomLabel.isHidden = false
-    }
-    
     func bindOktHistory(_ account: BaseAccount, _ chain: CosmosClass, _ history: OktHistory) {
         if (history.state != "success") {
             successImg.image = UIImage(named: "iconFail")

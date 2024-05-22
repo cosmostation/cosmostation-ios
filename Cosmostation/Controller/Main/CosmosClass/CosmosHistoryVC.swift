@@ -24,7 +24,6 @@ class CosmosHistoryVC: BaseVC {
     var msHasMore = false
     let BATCH_CNT = 30
     
-    var beaconHistoey = Array<BeaconHistory>()  //For BNB Beacon chain
     var oktHistoey = Array<OktHistory>()        //For OKT chain
 
     override func viewDidLoad() {
@@ -60,10 +59,7 @@ class CosmosHistoryVC: BaseVC {
     }
     
     @objc func onRequestFetch() {
-        if (selectedChain is ChainBinanceBeacon) {
-            onFetchBnbHistory(selectedChain.bechAddress)
-            
-        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             onFetchOktHistory(selectedChain.evmAddress)
             
         } else {
@@ -75,6 +71,7 @@ class CosmosHistoryVC: BaseVC {
     
     func onFetchMsHistory(_ address: String?, _ id: String) {
         let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, address!)
+        print("url ", url)
         AF.request(url, method: .get, parameters: ["limit":String(BATCH_CNT), "search_after":id]).responseDecodable(of: [MintscanHistory].self, queue: .main, decoder: JSONDecoder()) { response in
             switch response.result {
             case .success(let value):
@@ -108,29 +105,9 @@ class CosmosHistoryVC: BaseVC {
                 
             case .failure:
                 print("onFetchMsHistory error")
-            }
-            self.refresher.endRefreshing()
-        }
-    }
-    
-    func onFetchBnbHistory(_ address: String?) {
-        let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, address!)
-        AF.request(url, method: .get, parameters: ["address": address!, "startTime" : Date().Stringmilli3MonthAgo, "endTime" : Date().millisecondsSince1970]).responseDecodable(of: BeaconHistories.self, queue: .main, decoder: JSONDecoder())  { response in
-            switch response.result {
-            case .success(let value):
-                if let txs = value.tx {
-                    self.beaconHistoey = txs
-                }
                 self.loadingView.isHidden = true
-                if (self.beaconHistoey.count > 0) {
-                    self.tableView.reloadData()
-                    self.emptyDataView.isHidden = true
-                } else {
-                    self.emptyDataView.isHidden = false
-                }
-                
-            case .failure:
-                print("onFetchBnbHistory error")
+                self.tableView.isHidden = true
+                self.emptyDataView.isHidden = false
             }
             self.refresher.endRefreshing()
         }
@@ -166,8 +143,7 @@ class CosmosHistoryVC: BaseVC {
 extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (selectedChain is ChainBinanceBeacon ||
-            selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             return 1
         } else {
             return msHistoryGroup.count
@@ -176,11 +152,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (selectedChain is ChainBinanceBeacon) {
-            view.titleLabel.text = "History"
-            view.cntLabel.text = String(beaconHistoey.count)
-            
-        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             view.titleLabel.text = "History"
             view.cntLabel.text = String(oktHistoey.count)
             
@@ -201,10 +173,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (selectedChain is ChainBinanceBeacon) {
-            return beaconHistoey.count
-            
-        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             return oktHistoey.count
             
         } else {
@@ -215,11 +184,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as! HistoryCell
-        if (selectedChain is ChainBinanceBeacon) {
-            let history = beaconHistoey[indexPath.row]
-            cell.bindBeaconHistory(baseAccount, selectedChain, history)
-            
-        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             let history = oktHistoey[indexPath.row]
             cell.bindOktHistory(baseAccount, selectedChain, history)
             
@@ -231,8 +196,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if (!(selectedChain is ChainBinanceBeacon) &&
-            !(selectedChain is ChainOktEVM) && !(selectedChain is ChainOkt996Keccak)) {
+        if (!(selectedChain is ChainOktEVM) && !(selectedChain is ChainOkt996Keccak)) {
             if (indexPath.section == self.msHistoryGroup.count - 1
                 && indexPath.row == self.msHistoryGroup.last!.values.count - 1
                 && msHasMore == true) {
@@ -244,10 +208,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var hash: String?
-        if (selectedChain is ChainBinanceBeacon) {
-            hash = beaconHistoey[indexPath.row].txHash
-            
-        } else if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
             hash = oktHistoey[indexPath.row].txId
             
         } else {

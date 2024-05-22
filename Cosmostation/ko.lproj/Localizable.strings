@@ -321,6 +321,10 @@
 "str_node_down_title" = "⚠️ 노드 다운";
 "str_sunset_title" = "체인 중단 안내";
 "str_sunset_msg" = "선택하신 체인은 지원종료 예정입니다. 자세한 내용은 재단의 공식 공지를 참조하세요.";
+"str_delist_title" = "지원 중단 안내";
+"str_delist_msg" = "선택하신 체인은 모바일 지갑에서 지원종료 예정입니다. 다른 지갑 또는 차후 커스텀체인 서비스로 지원할 수 있습니다.";
+"str_legacy_path_title" = "레가시 경로 지원 중단 안내";
+"str_legacy_path_msg" = "선택하신 레가시 경로의 계정은 지원종료 예정입니다. 퍼블릭 경로로 자산을 옮기 시길 강력히 권장합니다.";
 
 
 "btn_delegate" = "  위임 하기";
@@ -1150,7 +1154,9 @@
 "error_not_support_cancel_unbonding" = "이 체인은 아직 언스테이킹 취소를 지원하지 않습니다.";
 "error_wait_moment" = "잠시만 기다려 주세요. 동기화중입니다.";
 "error_evm_simul" = "노드와 통신이 원활하지 않습니다. 잠시후에 다시 시도해주세요.";
-"error_tranfer_disabled" = "전송기능을 지원하지 않는 체인입니다.";
+"error_tranfer_disabled" = "현재 선택하신 체인은 전송기능이 비 활성화된 상태입니다.\n차후 거버넌스 등을 통해서 활성화될 수 있습니다.";
+"error_tranfer_disabled_bgt" = "BGT는 스테이킹 전용 자산입니다. \n전송이 불가능합니다.";
+"error_bera_vote_one_proposal" = "베라체인은 한개씩만 투표 가능합니다.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";

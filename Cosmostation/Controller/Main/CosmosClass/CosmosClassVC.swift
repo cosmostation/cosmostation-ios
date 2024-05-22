@@ -211,7 +211,7 @@ class CosmosClassVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain is ChainBinanceBeacon || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain is ChainOkt996Keccak) {
             let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
             transfer.selectedChain = selectedChain
             transfer.toSendDenom = selectedChain.stakeDenom
@@ -360,7 +360,7 @@ class CosmosClassVC: BaseVC {
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 4)
         tabbar.items.append(coinTabBar)
         if (selectedChain.supportCw20 || selectedChain is EvmClass) { tabbar.items.append(tokenTabBar) }
-        if ((!BaseData.instance.reviewMode || BaseData.instance.checkInstallTime()) && selectedChain.supportCw721) { tabbar.items.append(nftTabBar) }
+        if (BaseData.instance.showEvenReview() && selectedChain.supportCw721) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(historyTabBar)
         if (!selectedChain.getChainListParam().isEmpty) { tabbar.items.append(aboutTabBar) }
         
@@ -409,7 +409,7 @@ class CosmosClassVC: BaseVC {
             }
             
         } else if (selectedChain is ChainKava118 || selectedChain is ChainKava459) {
-            if (!BaseData.instance.reviewMode || BaseData.instance.checkInstallTime()) {
+            if (BaseData.instance.showEvenReview()) {
                 mainFab.addItem(title: "DeFi", image: UIImage(named: "iconFabDefi")) { _ in
                     self.onKavaDefi()
                 }
@@ -436,18 +436,20 @@ class CosmosClassVC: BaseVC {
                     self.onClaimCommissionTx()
                 }
             }
-            mainFab.addItem(title: "Compound All Rewards", image: UIImage(named: "iconFabCompounding")) { _ in
-                if (self.selectedChain.cosmosValidators.count > 0) {
-                    self.onClaimCompoundingTx()
-                } else {
-                    self.onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+            if !(selectedChain is ChainBeraEVM) {                                                                       //disbale for bera
+                mainFab.addItem(title: "Compound All Rewards", image: UIImage(named: "iconFabCompounding")) { _ in
+                    if (self.selectedChain.cosmosValidators.count > 0) {
+                        self.onClaimCompoundingTx()
+                    } else {
+                        self.onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                    }
                 }
-            }
-            mainFab.addItem(title: "Claim All Rewards", image: UIImage(named: "iconFabClaim")) { _ in
-                if (self.selectedChain.cosmosValidators.count > 0) {
-                    self.onClaimRewardTx()
-                } else {
-                    self.onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                mainFab.addItem(title: "Claim All Rewards", image: UIImage(named: "iconFabClaim")) { _ in
+                    if (self.selectedChain.cosmosValidators.count > 0) {
+                        self.onClaimRewardTx()
+                    } else {
+                        self.onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                    }
                 }
             }
             mainFab.addItem(title: "Stake", image: UIImage(named: "iconFabStake")) { _ in

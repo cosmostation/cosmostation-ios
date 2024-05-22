@@ -140,19 +140,7 @@ class DeriveCell: UITableViewCell {
             loadingLabel.isHidden = true
             
             let stakeDenom = chain.stakeDenom!
-            if let bnbChain = chain as? ChainBinanceBeacon {
-                let availableAmount = bnbChain.lcdBalanceAmount(stakeDenom)
-                amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 8)
-                denomLabel.text = stakeDenom.uppercased()
-                denomLabel.textColor = .color01
-                denomLabel.isHidden = false
-                amountLabel.isHidden = false
-                
-                let coinCnt = bnbChain.lcdAccountInfo.bnbCoins?.count ?? 0
-                coinCntLabel.text = String(coinCnt) + " Coins"
-                coinCntLabel.isHidden = false
-                
-            } else if let oktChain = chain as? ChainOkt996Keccak {
+           if let oktChain = chain as? ChainOkt996Keccak {
                 let availableAmount = oktChain.lcdBalanceAmount(stakeDenom)
                 amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
                 denomLabel.text = stakeDenom.uppercased()

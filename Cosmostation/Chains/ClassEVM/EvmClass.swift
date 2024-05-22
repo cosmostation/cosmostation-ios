@@ -128,6 +128,8 @@ class EvmClass: CosmosClass {
                     }
                 }
                 self.rewardAddress = rewardaddr?.replacingOccurrences(of: "\"", with: "")
+                
+//                print("balance", self.tag, " ", balance)
             }
             
             DispatchQueue.main.async {
@@ -179,9 +181,6 @@ class EvmClass: CosmosClass {
     
     //check account payable with lowest fee
     override func isTxFeePayable() -> Bool {
-        if (supportCosmos) {
-            return super.isTxFeePayable()
-        }
         return evmBalances.compare(EVM_BASE_FEE).rawValue > 0
     }
     
@@ -295,21 +294,24 @@ extension EvmClass {
 func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
     result.append(ChainEthereum())
-    result.append(ChainAltheaEVM())
-    result.append(ChainArbitrum())
-    result.append(ChainAvalanche())
-    result.append(ChainBaseEVM())
-    result.append(ChainBinanceSmart())
-    result.append(ChainCantoEVM())
-    result.append(ChainCronos())
-    result.append(ChainDymensionEVM())
-    result.append(ChainEvmosEVM())
-    result.append(ChainHumansEVM())
-    result.append(ChainKavaEVM())
-    result.append(ChainOktEVM())
-    result.append(ChainOptimism())
-    result.append(ChainPolygon())
-    result.append(ChainXplaEVM())
+//    result.append(ChainAltheaEVM())
+//    result.append(ChainArbitrum())
+//    result.append(ChainAvalanche())
+//    result.append(ChainBaseEVM())
+//    result.append(ChainBinanceSmart())
+//    result.append(ChainCantoEVM())
+//    result.append(ChainCronos())
+//    result.append(ChainDymensionEVM())
+//    result.append(ChainEvmosEVM())
+//    result.append(ChainHumansEVM())
+//    result.append(ChainKavaEVM())
+//    result.append(ChainOktEVM())
+//    result.append(ChainOptimism())
+//    result.append(ChainPolygon())
+//    result.append(ChainXplaEVM())
+    
+    
+    result.append(ChainBeraTestEVM())
     
     //Add cosmos chain id for ibc
     result.forEach { chain in

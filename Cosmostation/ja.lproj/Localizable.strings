@@ -320,6 +320,10 @@
 "str_node_down_title" = "⚠️ ノードダウン";
 "str_sunset_title" = "チェーン中断案内";
 "str_sunset_msg" = "選択されたチェーンはサポート終了予定です。 詳しくは、財団の公式通知をご覧ください。";
+"str_delist_title" = "サポートの終了";
+"str_delist_msg" = "選択したチェーンはモバイルウォレットから廃止されます。 他のウォレットや将来のカスタム チェーン サービスによってサポートされる可能性があります。";
+"str_legacy_path_title" = "レガシーパスはサポートされません";
+"str_legacy_path_msg" = "選択したレガシー パス上のアカウントは終了されます。 アセットをパブリック パスに移動することを強くお勧めします。";
 
 
 "btn_delegate" = "  委任する";
@@ -1150,7 +1154,9 @@
 "error_not_support_cancel_unbonding" = "このチェーンはまだアンステーキングキャンセルをサポートしていません。";
 "error_wait_moment" = "しばらくお待ちください。 同期中です。";
 "error_evm_simul" = "ノードとのネットワークがスムーズではありません。 後でもう一度試してください。";
-"error_tranfer_disabled" = "このチェーンは伝達関数をサポートしていません。";
+"error_tranfer_disabled" = "現在選択されているチェーンは送信機能が無効になっています。\n今後のガバナンスなどを通じて活性化することができます。";
+"error_tranfer_disabled_bgt" = "BGT コインはステーキング専用の資産です。 \n送信できません。";
+"error_bera_vote_one_proposal" = "投票できるのは 1 つの BeraChain のみです。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

@@ -26,20 +26,6 @@ class BaseNetWork {
             }
     }
     
-    func fetchdAppConfig() {
-//        print("fetchdAppConfig ", BaseNetWork.dAppConfigs())
-        AF.request(BaseNetWork.dAppConfigs(), method: .get)
-            .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
-                switch response.result {
-                case .success(let value):
-                    BaseData.instance.dAppConfig = value
-                    
-                case .failure:
-                    print("fetchdAppConfig error ", response.error)
-                }
-            }
-    }
-    
     func fetchPrices(_ force: Bool? = false) {
 //        print("fetchPrices ", BaseNetWork.msPricesUrl())
         if (!BaseData.instance.needPriceUpdate() && force == false) { return }
@@ -87,9 +73,7 @@ class BaseNetWork {
     }
     
     static func getAccountHistoryUrl(_ chain: BaseChain, _ address: String) -> String {
-        if (chain is ChainBinanceBeacon) {
-            return BNB_BEACON_LCD + "api/v1/transactions"
-        } else if (chain.tag.starts(with: "okt")) {
+        if (chain.tag.starts(with: "okt")) {
             return MINTSCAN_API_URL + "v10/utils/proxy/okc-transaction-list?device=IOS&chainShortName=okc&address=" + address + "&limit=50"
         } else {
             return MINTSCAN_API_URL + "v10/" + chain.apiName + "/account/" + address + "/txs"
@@ -123,10 +107,6 @@ class BaseNetWork {
     
     static func msCw721InfoUrl(_ chain: BaseChain) -> String {
         return ResourceBase + chain.apiName + "/cw721.json"
-    }
-    
-    static func dAppConfigs() -> String {
-        return ResourceDappBase + "config.json"
     }
     
     static func msProposals(_ chain: BaseChain) -> String {
@@ -163,39 +143,18 @@ class BaseNetWork {
 extension BaseNetWork {
     
     static func lcdNodeInfoUrl(_ chain: BaseChain) -> String {
-        if (chain is ChainBinanceBeacon) {
-            return BNB_BEACON_LCD + "api/v1/node-info"
-        } else if (chain.tag.starts(with: "okt")) {
+        if (chain.tag.starts(with: "okt")) {
             return OKT_LCD + "node_info"
         }
         return ""
     }
     
     static func lcdAccountInfoUrl(_ chain: BaseChain, _ address: String) -> String {
-        if (chain is ChainBinanceBeacon) {
-            return BNB_BEACON_LCD + "api/v1/account/" + address
-        } else if (chain.tag.starts(with: "okt")) {
+        if (chain.tag.starts(with: "okt")) {
             return OKT_LCD + "auth/accounts/" + address
         }
         return ""
     }
-    
-    
-    static func lcdBeaconTokenUrl() -> String {
-        return BNB_BEACON_LCD + "api/v1/tokens"
-    }
-    
-    static func lcdBeaconMiniTokenUrl() -> String {
-        return BNB_BEACON_LCD + "api/v1/mini/tokens"
-    }
-    
-//    static func lcdBeaconTicUrl() -> String {
-//        return BNB_BEACON_LCD + "api/v1/ticker/24hr"
-//    }
-//
-//    static func lcdBeaconMiniTicUrl() -> String {
-//        return BNB_BEACON_LCD + "api/v1/mini/ticker/24hr"
-//    }
     
     static func lcdOktDepositUrl(_ address: String) -> String {
         return OKT_LCD + "staking/delegators/" + address
@@ -214,9 +173,7 @@ extension BaseNetWork {
     }
     
     static func broadcastUrl(_ chain: BaseChain) -> String {
-        if (chain is ChainBinanceBeacon) {
-            return BNB_BEACON_LCD + "api/v1/broadcast"
-        } else if (chain is ChainOkt996Keccak) {
+        if (chain is ChainOkt996Keccak) {
             return OKT_LCD + "txs"
         }
         return ""
@@ -224,9 +181,7 @@ extension BaseNetWork {
     
     
     static func swapIdBep3Url(_ toChain: BaseChain, _ id: String) -> String {
-        if (toChain is ChainBinanceBeacon) {
-            return BNB_BEACON_LCD + "api/v1/atomic-swaps/" + id
-        } else if (toChain.tag.starts(with: "kava")) {
+        if (toChain.tag.starts(with: "kava")) {
             return KAVA_LCD + "kava/bep3/v1beta1/atomicswap/" + id
         }
         return ""

@@ -73,6 +73,7 @@ class StakeDelegateCell: UITableViewCell {
                 } else {
                     rewardLabel?.attributedText = WDP.dpAmount("0", rewardLabel!.font, msAsset.decimals!)
                     rewardTitle.text = "Reward"
+                    estLabel?.attributedText = WDP.dpAmount("0", estLabel!.font, msAsset.decimals!)
                     return
                 }
                 
