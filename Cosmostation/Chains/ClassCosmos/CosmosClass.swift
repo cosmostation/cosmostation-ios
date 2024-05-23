@@ -306,6 +306,10 @@ extension CosmosClass {
         return getChainListParam()["isBankLocked"].bool ?? false
     }
     
+    func isEcosystem() -> Bool {
+        return getChainListParam()["moblie_dapp"].bool ?? false
+    }
+    
     func feeThreshold() -> String? {
         return nil
     }

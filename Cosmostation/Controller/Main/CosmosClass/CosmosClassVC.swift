@@ -373,8 +373,7 @@ class CosmosClassVC: BaseVC {
         if (BaseData.instance.showEvenReview() && selectedChain.supportCw721) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(receiveTabBar)
         tabbar.items.append(historyTabBar)
-        //TODO ecos
-        tabbar.items.append(ecosystemTabBar)
+        if (BaseData.instance.showEvenReview() && selectedChain.isEcosystem()) { tabbar.items.append(ecosystemTabBar) }
         if (!selectedChain.getChainListParam().isEmpty) { tabbar.items.append(aboutTabBar) }
         
         tabbar.barTintColor = .clear

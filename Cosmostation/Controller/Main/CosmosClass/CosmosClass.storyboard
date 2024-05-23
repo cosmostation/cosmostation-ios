@@ -518,9 +518,36 @@
                     <view key="view" contentMode="scaleToFill" id="v5t-xo-T8A">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="652"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aPR-CH-kBR">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="652"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5V8-ge-ZLB" customClass="LottieAnimationView" customModule="Lottie">
+                                <rect key="frame" x="106.66666666666669" y="271" width="180" height="110"/>
+                                <viewLayoutGuide key="safeArea" id="Do7-yd-BMT"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="spy-fg-6hE"/>
+                                    <constraint firstAttribute="height" constant="110" id="yGz-sk-PU3"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="_primary"/>
+                        <constraints>
+                            <constraint firstItem="5V8-ge-ZLB" firstAttribute="centerY" secondItem="v5t-xo-T8A" secondAttribute="centerY" id="Bwh-uC-ftu"/>
+                            <constraint firstItem="aPR-CH-kBR" firstAttribute="leading" secondItem="v5t-xo-T8A" secondAttribute="leading" id="FWU-6u-fyF"/>
+                            <constraint firstAttribute="trailing" secondItem="aPR-CH-kBR" secondAttribute="trailing" id="MKz-bQ-iyU"/>
+                            <constraint firstItem="5V8-ge-ZLB" firstAttribute="centerX" secondItem="v5t-xo-T8A" secondAttribute="centerX" id="OmH-lF-0nd"/>
+                            <constraint firstItem="aPR-CH-kBR" firstAttribute="top" secondItem="v5t-xo-T8A" secondAttribute="top" id="VQy-Oe-SbF"/>
+                            <constraint firstAttribute="bottom" secondItem="aPR-CH-kBR" secondAttribute="bottom" id="yT4-fh-8Zx"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loadingView" destination="5V8-ge-ZLB" id="VV2-AG-N5H"/>
+                        <outlet property="tableView" destination="aPR-CH-kBR" id="IFq-K2-Fwq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mj7-VB-N6u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

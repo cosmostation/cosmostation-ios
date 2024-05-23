@@ -351,9 +351,36 @@ assets on the block explorer</string>
                     <view key="view" contentMode="scaleToFill" id="4IJ-t8-wVc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="12w-lm-UMi">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWu-D1-fJg" customClass="LottieAnimationView" customModule="Lottie">
+                                <rect key="frame" x="106.66666666666669" y="271.66666666666669" width="180" height="110"/>
+                                <viewLayoutGuide key="safeArea" id="wLO-7c-pOf"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="bSl-6q-6Rw"/>
+                                    <constraint firstAttribute="width" constant="180" id="e8c-iy-A7F"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="_primary"/>
+                        <constraints>
+                            <constraint firstItem="12w-lm-UMi" firstAttribute="leading" secondItem="4IJ-t8-wVc" secondAttribute="leading" id="6Mh-Vy-PUF"/>
+                            <constraint firstAttribute="bottom" secondItem="12w-lm-UMi" secondAttribute="bottom" id="D0d-F8-o3R"/>
+                            <constraint firstAttribute="trailing" secondItem="12w-lm-UMi" secondAttribute="trailing" id="LFJ-yj-qHz"/>
+                            <constraint firstItem="BWu-D1-fJg" firstAttribute="centerX" secondItem="4IJ-t8-wVc" secondAttribute="centerX" id="Sv5-Xf-836"/>
+                            <constraint firstItem="12w-lm-UMi" firstAttribute="top" secondItem="4IJ-t8-wVc" secondAttribute="top" id="h1J-dY-ZH3"/>
+                            <constraint firstItem="BWu-D1-fJg" firstAttribute="centerY" secondItem="4IJ-t8-wVc" secondAttribute="centerY" id="ntF-KA-bpP"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loadingView" destination="BWu-D1-fJg" id="JMA-t0-gcY"/>
+                        <outlet property="tableView" destination="12w-lm-UMi" id="c6A-Fz-Ibu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7qU-6e-0cG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
