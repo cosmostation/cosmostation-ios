@@ -188,6 +188,8 @@ class CommonTransfer: BaseVC {
             cosmosTxFee = (fromChain as! CosmosClass).getInitPayableFee()
             feeSegments.selectedSegmentIndex = selectedFeePosition
             
+            print("cosmosTxFee ", cosmosTxFee)
+            
             if let feeAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
                 feeSelectImg.af.setImage(withURL: feeAsset.assetImg())
                 feeSelectLabel.text = feeAsset.symbol

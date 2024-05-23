@@ -181,7 +181,11 @@ class EvmClass: CosmosClass {
     
     //check account payable with lowest fee
     override func isTxFeePayable() -> Bool {
-        return evmBalances.compare(EVM_BASE_FEE).rawValue > 0
+        let evmCheck = evmBalances.compare(EVM_BASE_FEE).rawValue > 0
+        if (supportCosmos) {
+            return super.isTxFeePayable() && evmCheck
+        }
+        return evmCheck
     }
     
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
