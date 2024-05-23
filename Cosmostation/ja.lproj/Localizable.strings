@@ -324,7 +324,7 @@
 "str_delist_msg" = "選択したチェーンはモバイルウォレットから廃止されます。 他のウォレットや将来のカスタム チェーン サービスによってサポートされる可能性があります。";
 "str_legacy_path_title" = "レガシーパスはサポートされません";
 "str_legacy_path_msg" = "選択したレガシー パス上のアカウントは終了されます。 アセットをパブリック パスに移動することを強くお勧めします。";
-"str_deposit_caution" = "⚠️ %@ 資産のみ転送可能です";
+"str_deposit_caution" = "⚠️ %@ ネットワーク資産のみ転送可能";
 
 
 "btn_delegate" = "  委任する";
@@ -385,7 +385,7 @@
 "msg_search_chain" = "チェーンやトークンを検索してください。";
 "msg_mnemonic_wanning" = "このフレーズがアカウントを回復する唯一の方法です。 誰とも共有しないでください。 このニーモニックを失うと、資産の損失につながる可能性があります。";
 "msg_tap_to_mnemonic_copy" = "ニーモニックフレーズボックスをタップしてコピーします。";
-"msg_tap_box_to_copy" = "カードをタップしてコピーします。";
+"msg_tap_box_to_copy" = "タップしてコピー。";
 "msg_tap_for_add_memo" = "タップしてメモを追加します。";
 "msg_tap_for_add_amount" = "タップして金額を追加します。";
 "msg_tap_for_add_address" = "タップしてアドレスを追加します。";

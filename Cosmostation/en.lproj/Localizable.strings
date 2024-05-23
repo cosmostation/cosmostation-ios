@@ -324,7 +324,7 @@
 "str_delist_msg" = "The chain you selected will be discontinued from mobile wallets. It can be supported by other wallets or future custom chain services.";
 "str_legacy_path_title" = "Legacy path will not support";
 "str_legacy_path_msg" = "Accounts on the legacy path you selected will be terminated. We strongly recommend that you move your assets to the public path.";
-"str_deposit_caution" = "⚠️ Send %@ asset ONLY";
+"str_deposit_caution" = "⚠️ Send %@ network asset ONLY";
 
 
 
@@ -386,7 +386,7 @@
 "msg_search_chain" = "Search by Chain or Token";
 "msg_mnemonic_wanning" = "This phrase is the only way to recover your account. Do not share with anyone. Losing this mnemonics could lead to loss of your asset.";
 "msg_tap_to_mnemonic_copy" = "Tap mnemoniuc phrases box for copy.";
-"msg_tap_box_to_copy" = "Tap the card to copy it.";
+"msg_tap_box_to_copy" = "Tap for Copy.";
 "msg_tap_for_add_memo" = "Tap to add memo.";
 "msg_tap_for_add_amount" = "Tap to add amount.";
 "msg_tap_for_add_address" = "Tap to add address.";

@@ -23,6 +23,8 @@ class ReceiveCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         rootView.setBlur()
+        
+        copyHintTitle.text = NSLocalizedString("msg_tap_box_to_copy", comment: "")
     }
     
     override func prepareForReuse() {
@@ -60,6 +62,8 @@ class ReceiveCell: UITableViewCell {
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }
         }
+        
+        
     }
     
 }
