@@ -24,7 +24,9 @@ class CosmosClassVC: BaseVC {
     @IBOutlet weak var coinList: UIView!
     @IBOutlet weak var tokenList: UIView!
     @IBOutlet weak var nftList: UIView!
+    @IBOutlet weak var ecosystemList: UIView!
     @IBOutlet weak var historyList: UIView!
+    @IBOutlet weak var receiveList: UIView!
     @IBOutlet weak var aboutList: UIView!
     
     var addtokenBarBtn: UIBarButtonItem!
@@ -55,8 +57,14 @@ class CosmosClassVC: BaseVC {
         } else if (segue.identifier == "embedNftVC") {
             let target = segue.destination as! CosmosNftVC
             target.selectedChain = selectedChain
+        } else if (segue.identifier == "embedEcosystemVC") {
+            let target = segue.destination as! CosmosEcosystemVC
+            target.selectedChain = selectedChain
         } else if (segue.identifier == "embedHistoryVC") {
             let target = segue.destination as! CosmosHistoryVC
+            target.selectedChain = selectedChain
+        } else if (segue.identifier == "embedReceiveVC") {
+            let target = segue.destination as! CosmosReceiveVC
             target.selectedChain = selectedChain
         } else if (segue.identifier == "embedAboutVC") {
             let target = segue.destination as! CosmosAboutVC
@@ -356,12 +364,17 @@ class CosmosClassVC: BaseVC {
         let coinTabBar = UITabBarItem(title: "Coins", image: nil, tag: 0)
         let tokenTabBar = UITabBarItem(title: "Tokens", image: nil, tag: 1)
         let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 2)
-        let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 3)
-        let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 4)
+        let ecosystemTabBar = UITabBarItem(title: "Ecosystem", image: nil, tag: 3)
+        let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 4)
+        let receiveTabBar = UITabBarItem(title: "Receive", image: nil, tag: 5)
+        let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 6)
         tabbar.items.append(coinTabBar)
         if (selectedChain.supportCw20 || selectedChain is EvmClass) { tabbar.items.append(tokenTabBar) }
         if (BaseData.instance.showEvenReview() && selectedChain.supportCw721) { tabbar.items.append(nftTabBar) }
+        //TODO ecos
+        tabbar.items.append(ecosystemTabBar)
         tabbar.items.append(historyTabBar)
+        tabbar.items.append(receiveTabBar)
         if (!selectedChain.getChainListParam().isEmpty) { tabbar.items.append(aboutTabBar) }
         
         tabbar.barTintColor = .clear
@@ -378,7 +391,9 @@ class CosmosClassVC: BaseVC {
         coinList.alpha = 1
         tokenList.alpha = 0
         nftList.alpha = 0
+        ecosystemList.alpha = 0
         historyList.alpha = 0
+        receiveList.alpha = 0
         aboutList.alpha = 0
     }
     
@@ -509,7 +524,9 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             coinList.alpha = 1
             tokenList.alpha = 0
             nftList.alpha = 0
+            ecosystemList.alpha = 0
             historyList.alpha = 0
+            receiveList.alpha = 0
             aboutList.alpha = 0
             navigationItem.rightBarButtonItems = [explorerBarBtn]
             
@@ -517,7 +534,9 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             coinList.alpha = 0
             tokenList.alpha = 1
             nftList.alpha = 0
+            ecosystemList.alpha = 0
             historyList.alpha = 0
+            receiveList.alpha = 0
             aboutList.alpha = 0
             navigationItem.rightBarButtonItems = [explorerBarBtn, addtokenBarBtn]
             
@@ -525,7 +544,9 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             coinList.alpha = 0
             tokenList.alpha = 0
             nftList.alpha = 1
+            ecosystemList.alpha = 0
             historyList.alpha = 0
+            receiveList.alpha = 0
             aboutList.alpha = 0
             navigationItem.rightBarButtonItems = [explorerBarBtn, addNftBarBtn]
             
@@ -533,7 +554,9 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             coinList.alpha = 0
             tokenList.alpha = 0
             nftList.alpha = 0
-            historyList.alpha = 1
+            ecosystemList.alpha = 1
+            historyList.alpha = 0
+            receiveList.alpha = 0
             aboutList.alpha = 0
             navigationItem.rightBarButtonItems = [explorerBarBtn]
             
@@ -541,7 +564,29 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             coinList.alpha = 0
             tokenList.alpha = 0
             nftList.alpha = 0
+            ecosystemList.alpha = 0
+            historyList.alpha = 1
+            receiveList.alpha = 0
+            aboutList.alpha = 0
+            navigationItem.rightBarButtonItems = [explorerBarBtn]
+            
+        } else if (item.tag == 5) {
+            coinList.alpha = 0
+            tokenList.alpha = 0
+            nftList.alpha = 0
+            ecosystemList.alpha = 0
             historyList.alpha = 0
+            receiveList.alpha = 1
+            aboutList.alpha = 0
+            navigationItem.rightBarButtonItems = [explorerBarBtn]
+            
+        } else if (item.tag == 6) {
+            coinList.alpha = 0
+            tokenList.alpha = 0
+            nftList.alpha = 0
+            ecosystemList.alpha = 0
+            historyList.alpha = 0
+            receiveList.alpha = 0
             aboutList.alpha = 1
             navigationItem.rightBarButtonItems = [explorerBarBtn]
         }

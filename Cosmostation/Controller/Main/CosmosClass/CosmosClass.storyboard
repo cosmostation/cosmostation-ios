@@ -127,6 +127,18 @@
                                     <segue destination="yoF-DC-PBK" kind="embed" identifier="embedAboutVC" id="tOj-SA-aCs"/>
                                 </connections>
                             </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YnM-R6-Ocx">
+                                <rect key="frame" x="0.0" y="200" width="393" height="652"/>
+                                <connections>
+                                    <segue destination="sy8-BH-h0n" kind="embed" identifier="embedEcosystemVC" id="f2X-Ng-ito"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6yJ-K0-WD3">
+                                <rect key="frame" x="0.0" y="200" width="393" height="652"/>
+                                <connections>
+                                    <segue destination="caz-KK-0fb" kind="embed" identifier="embedReceiveVC" id="p1v-ca-M9I"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -136,16 +148,22 @@
                             <constraint firstItem="qOU-VU-3WA" firstAttribute="leading" secondItem="sqR-D5-yjj" secondAttribute="trailing" constant="8" id="2ME-nJ-avh"/>
                             <constraint firstItem="AeT-wL-xQo" firstAttribute="leading" secondItem="vYD-Wc-AXb" secondAttribute="leading" id="2Qf-LX-oQ8"/>
                             <constraint firstItem="0An-sf-Sxo" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="47f-ZP-RPP"/>
+                            <constraint firstItem="6yJ-K0-WD3" firstAttribute="leading" secondItem="vYD-Wc-AXb" secondAttribute="leading" id="7O7-vf-teK"/>
+                            <constraint firstItem="YnM-R6-Ocx" firstAttribute="top" secondItem="vYD-Wc-AXb" secondAttribute="top" id="Csx-Rt-1hX"/>
                             <constraint firstItem="B5w-hK-wYy" firstAttribute="top" secondItem="0An-sf-Sxo" secondAttribute="bottom" constant="16" id="Fjz-ih-b7j"/>
+                            <constraint firstItem="6yJ-K0-WD3" firstAttribute="bottom" secondItem="vYD-Wc-AXb" secondAttribute="bottom" id="GdK-hC-NOq"/>
                             <constraint firstItem="B5w-hK-wYy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="Gmd-pE-4tI"/>
+                            <constraint firstItem="YnM-R6-Ocx" firstAttribute="leading" secondItem="vYD-Wc-AXb" secondAttribute="leading" id="HlZ-6k-0qi"/>
                             <constraint firstItem="fdX-08-eE0" firstAttribute="top" secondItem="B5w-hK-wYy" secondAttribute="bottom" id="KXG-Qi-buY"/>
                             <constraint firstItem="1V7-Iu-EPt" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="LYC-Qm-hqh"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="top" secondItem="1V7-Iu-EPt" secondAttribute="top" id="N8q-3P-whm"/>
+                            <constraint firstItem="YnM-R6-Ocx" firstAttribute="bottom" secondItem="vYD-Wc-AXb" secondAttribute="bottom" id="RyM-DG-qdB"/>
                             <constraint firstItem="w9R-os-Pfe" firstAttribute="bottom" secondItem="1V7-Iu-EPt" secondAttribute="bottom" id="SCg-Vx-ADD"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="leading" secondItem="1V7-Iu-EPt" secondAttribute="leading" id="ThK-hL-QAR"/>
                             <constraint firstItem="1V7-Iu-EPt" firstAttribute="top" secondItem="fdX-08-eE0" secondAttribute="bottom" id="U1o-5R-277"/>
                             <constraint firstItem="s8b-hk-JN5" firstAttribute="trailing" secondItem="1V7-Iu-EPt" secondAttribute="trailing" id="Wmx-7R-jkG"/>
                             <constraint firstItem="s8b-hk-JN5" firstAttribute="top" secondItem="1V7-Iu-EPt" secondAttribute="top" id="Xoi-9e-rjM"/>
+                            <constraint firstItem="YnM-R6-Ocx" firstAttribute="trailing" secondItem="vYD-Wc-AXb" secondAttribute="trailing" id="Xxz-Kg-DPQ"/>
                             <constraint firstItem="0An-sf-Sxo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="aMa-zb-NXQ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fdX-08-eE0" secondAttribute="trailing" constant="8" id="df6-bS-rrS"/>
                             <constraint firstItem="vYD-Wc-AXb" firstAttribute="bottom" secondItem="1V7-Iu-EPt" secondAttribute="bottom" id="ekH-Tf-Guj"/>
@@ -155,11 +173,13 @@
                             <constraint firstItem="fdX-08-eE0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="ll6-wp-9Mc"/>
                             <constraint firstItem="AeT-wL-xQo" firstAttribute="top" secondItem="vYD-Wc-AXb" secondAttribute="top" id="lm3-m2-072"/>
                             <constraint firstItem="w9R-os-Pfe" firstAttribute="trailing" secondItem="1V7-Iu-EPt" secondAttribute="trailing" id="mow-QC-4Me"/>
+                            <constraint firstItem="6yJ-K0-WD3" firstAttribute="trailing" secondItem="vYD-Wc-AXb" secondAttribute="trailing" id="neC-wg-fc1"/>
                             <constraint firstItem="AeT-wL-xQo" firstAttribute="trailing" secondItem="vYD-Wc-AXb" secondAttribute="trailing" id="njE-p9-K9x"/>
                             <constraint firstItem="1V7-Iu-EPt" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ohN-uk-tdL"/>
                             <constraint firstItem="qOU-VU-3WA" firstAttribute="centerY" secondItem="sqR-D5-yjj" secondAttribute="centerY" id="onG-Wl-MLU"/>
                             <constraint firstItem="w9R-os-Pfe" firstAttribute="leading" secondItem="vYD-Wc-AXb" secondAttribute="leading" id="pwm-qQ-Asm"/>
                             <constraint firstItem="s8b-hk-JN5" firstAttribute="bottom" secondItem="1V7-Iu-EPt" secondAttribute="bottom" id="q9N-dM-6Hb"/>
+                            <constraint firstItem="6yJ-K0-WD3" firstAttribute="top" secondItem="vYD-Wc-AXb" secondAttribute="top" id="rSQ-xT-ekb"/>
                             <constraint firstItem="w9R-os-Pfe" firstAttribute="leading" secondItem="1V7-Iu-EPt" secondAttribute="leading" id="rtJ-mK-PuR"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="B5w-hK-wYy" secondAttribute="trailing" constant="8" id="wCv-gP-kEY"/>
                             <constraint firstItem="w9R-os-Pfe" firstAttribute="top" secondItem="1V7-Iu-EPt" secondAttribute="top" id="wGU-5v-yQm"/>
@@ -173,10 +193,12 @@
                         <outlet property="bechAddressLabel" destination="uaX-Dh-cwU" id="zd4-yZ-WHC"/>
                         <outlet property="coinList" destination="vYD-Wc-AXb" id="2gt-07-Njf"/>
                         <outlet property="currencyLabel" destination="lZk-Ok-B8N" id="1rX-f3-fm9"/>
+                        <outlet property="ecosystemList" destination="YnM-R6-Ocx" id="N1T-kC-ULL"/>
                         <outlet property="evmAddessLabel" destination="Iuw-wd-z64" id="qZJ-QF-G3T"/>
                         <outlet property="hideValueBtn" destination="qOU-VU-3WA" id="7JB-cb-P5v"/>
                         <outlet property="historyList" destination="1V7-Iu-EPt" id="VOm-jL-7Zo"/>
                         <outlet property="nftList" destination="w9R-os-Pfe" id="wBQ-Ep-oVj"/>
+                        <outlet property="receiveList" destination="6yJ-K0-WD3" id="z5D-dq-odZ"/>
                         <outlet property="tabbar" destination="B5w-hK-wYy" id="Flj-2U-acs"/>
                         <outlet property="tokenList" destination="AeT-wL-xQo" id="UY5-1J-uhG"/>
                         <outlet property="totalValueLabel" destination="sqR-D5-yjj" id="zfC-nB-loW"/>
@@ -227,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UF-uO-RJr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1552" y="847"/>
+            <point key="canvasLocation" x="-1961" y="847"/>
         </scene>
         <!--Cosmos TokenVC-->
         <scene sceneID="KcN-vG-E2e">
@@ -288,7 +310,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ctm-QY-5em" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-592" y="847"/>
+            <point key="canvasLocation" x="-1141" y="847"/>
         </scene>
         <!--Cosmos NftVC-->
         <scene sceneID="hdU-jR-Mfl">
@@ -368,7 +390,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H2G-9O-J1f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="272.51908396946561" y="844.71830985915494"/>
+            <point key="canvasLocation" x="-326" y="847"/>
         </scene>
         <!--Cosmos HistoryVC-->
         <scene sceneID="KfQ-Sc-lHH">
@@ -441,7 +463,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1Y-jZ-iyp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1095" y="845"/>
+            <point key="canvasLocation" x="1280" y="847"/>
         </scene>
         <!--Cosmos AboutVC-->
         <scene sceneID="jux-jv-h4M">
@@ -472,7 +494,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B1G-KE-SWP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1947" y="845"/>
+            <point key="canvasLocation" x="3150" y="847"/>
+        </scene>
+        <!--Cosmos EcosystemVC-->
+        <scene sceneID="ZDc-Wo-Hfc">
+            <objects>
+                <viewController storyboardIdentifier="CosmosEcosystemVC" id="sy8-BH-h0n" customClass="CosmosEcosystemVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2ip-Ny-1iI">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="652"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="_primary"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qwp-5M-S5b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="442" y="847"/>
+        </scene>
+        <!--Cosmos ReceiveVC-->
+        <scene sceneID="lZT-B1-0pd">
+            <objects>
+                <viewController storyboardIdentifier="CosmosReceiveVC" id="caz-KK-0fb" customClass="CosmosReceiveVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v5t-xo-T8A">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="652"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="_primary"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mj7-VB-N6u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2189" y="846"/>
         </scene>
     </scenes>
     <resources>

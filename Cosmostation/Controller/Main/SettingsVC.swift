@@ -149,7 +149,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 4) {
                 switchCell.onBindSetNotification()
                 switchCell.actionToggle = { request in
-                    PushUtils.shared.updateStatus(enable: request)
+//                    PushUtils.shared.updateStatus(enable: request)
                 }
                 return switchCell
                 
