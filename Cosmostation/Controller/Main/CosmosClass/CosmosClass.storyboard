@@ -463,7 +463,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1Y-jZ-iyp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1280" y="847"/>
+            <point key="canvasLocation" x="1123" y="843"/>
         </scene>
         <!--Cosmos AboutVC-->
         <scene sceneID="jux-jv-h4M">
@@ -494,7 +494,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B1G-KE-SWP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3150" y="847"/>
+            <point key="canvasLocation" x="2656" y="841"/>
         </scene>
         <!--Cosmos EcosystemVC-->
         <scene sceneID="ZDc-Wo-Hfc">
@@ -509,7 +509,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qwp-5M-S5b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="442" y="847"/>
+            <point key="canvasLocation" x="1886" y="842"/>
         </scene>
         <!--Cosmos ReceiveVC-->
         <scene sceneID="lZT-B1-0pd">
@@ -524,7 +524,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mj7-VB-N6u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2189" y="846"/>
+            <point key="canvasLocation" x="370" y="844"/>
         </scene>
     </scenes>
     <resources>

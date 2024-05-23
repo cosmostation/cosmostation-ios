@@ -110,6 +110,18 @@
                                     <segue destination="umE-n0-62g" kind="embed" identifier="embedAboutVC" id="Xpz-ec-FbC"/>
                                 </connections>
                             </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90O-ET-A6J">
+                                <rect key="frame" x="0.0" y="199" width="393" height="653"/>
+                                <connections>
+                                    <segue destination="ad1-tH-hp5" kind="embed" identifier="embedReceiveVC" id="1Zs-Y3-XUn"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0tE-SO-qGG">
+                                <rect key="frame" x="0.0" y="199" width="393" height="653"/>
+                                <connections>
+                                    <segue destination="4uO-bN-E88" kind="embed" identifier="embedEcosystemVC" id="Ccb-cE-k40"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -121,24 +133,32 @@
                             <constraint firstItem="iyq-ej-XIn" firstAttribute="centerY" secondItem="1ad-XW-r7M" secondAttribute="centerY" id="5C4-h6-dWg"/>
                             <constraint firstItem="Dpc-GE-4GN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="48" id="5fo-l4-q2Q"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="F8b-EV-MOC" secondAttribute="trailing" constant="8" id="9Ux-jD-J7j"/>
+                            <constraint firstItem="90O-ET-A6J" firstAttribute="bottom" secondItem="W2h-nP-75G" secondAttribute="bottom" id="9bk-gH-hsA"/>
                             <constraint firstItem="bUj-kd-BLh" firstAttribute="top" secondItem="Dpc-GE-4GN" secondAttribute="bottom" constant="16" id="AZ8-S4-eh8"/>
                             <constraint firstItem="BJq-ks-FnM" firstAttribute="trailing" secondItem="W2h-nP-75G" secondAttribute="trailing" id="C0E-wv-bAU"/>
+                            <constraint firstItem="90O-ET-A6J" firstAttribute="leading" secondItem="W2h-nP-75G" secondAttribute="leading" id="EBI-Mr-rfd"/>
                             <constraint firstItem="XCB-ZA-sQs" firstAttribute="bottom" secondItem="W2h-nP-75G" secondAttribute="bottom" id="EQS-QE-MyZ"/>
                             <constraint firstItem="XCB-ZA-sQs" firstAttribute="trailing" secondItem="W2h-nP-75G" secondAttribute="trailing" id="Fyo-GW-SPl"/>
                             <constraint firstItem="W2h-nP-75G" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Gju-5F-1b7"/>
+                            <constraint firstItem="0tE-SO-qGG" firstAttribute="leading" secondItem="W2h-nP-75G" secondAttribute="leading" id="IFU-2b-jwE"/>
                             <constraint firstItem="F8b-EV-MOC" firstAttribute="top" secondItem="bUj-kd-BLh" secondAttribute="bottom" id="KWK-d2-bK3"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bUj-kd-BLh" secondAttribute="trailing" constant="8" id="LM9-5t-AFu"/>
+                            <constraint firstItem="0tE-SO-qGG" firstAttribute="top" secondItem="W2h-nP-75G" secondAttribute="top" id="LgP-vH-8EA"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Dpc-GE-4GN" secondAttribute="trailing" constant="48" id="N24-ow-q3n"/>
                             <constraint firstItem="XCB-ZA-sQs" firstAttribute="top" secondItem="W2h-nP-75G" secondAttribute="top" id="TGa-ub-7aV"/>
                             <constraint firstItem="jIO-da-bOO" firstAttribute="leading" secondItem="W2h-nP-75G" secondAttribute="leading" id="Tqo-3G-IKU"/>
+                            <constraint firstItem="0tE-SO-qGG" firstAttribute="trailing" secondItem="W2h-nP-75G" secondAttribute="trailing" id="VMF-nF-GbU"/>
                             <constraint firstItem="jIO-da-bOO" firstAttribute="top" secondItem="W2h-nP-75G" secondAttribute="top" id="VXv-KV-Z11"/>
+                            <constraint firstItem="0tE-SO-qGG" firstAttribute="bottom" secondItem="W2h-nP-75G" secondAttribute="bottom" id="bWh-1g-6Q5"/>
                             <constraint firstItem="W2h-nP-75G" firstAttribute="top" secondItem="F8b-EV-MOC" secondAttribute="top" id="clb-5M-8nt"/>
                             <constraint firstItem="XCB-ZA-sQs" firstAttribute="leading" secondItem="W2h-nP-75G" secondAttribute="leading" id="dF9-Nt-3Fx"/>
                             <constraint firstItem="BJq-ks-FnM" firstAttribute="bottom" secondItem="W2h-nP-75G" secondAttribute="bottom" id="fo7-cd-rTI"/>
                             <constraint firstItem="jIO-da-bOO" firstAttribute="bottom" secondItem="W2h-nP-75G" secondAttribute="bottom" id="inl-h3-hST"/>
                             <constraint firstItem="iyq-ej-XIn" firstAttribute="leading" secondItem="1ad-XW-r7M" secondAttribute="trailing" constant="8" id="ivS-Zv-M7d"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="W2h-nP-75G" secondAttribute="trailing" id="iyF-wD-Ug6"/>
+                            <constraint firstItem="90O-ET-A6J" firstAttribute="top" secondItem="W2h-nP-75G" secondAttribute="top" id="lMb-jF-0oW"/>
                             <constraint firstItem="Dpc-GE-4GN" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="shT-22-9o0"/>
+                            <constraint firstItem="90O-ET-A6J" firstAttribute="trailing" secondItem="W2h-nP-75G" secondAttribute="trailing" id="uCQ-Ul-1tO"/>
                             <constraint firstItem="bUj-kd-BLh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="uUo-bd-c8G"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="leading" secondItem="F8b-EV-MOC" secondAttribute="leading" constant="-8" id="vyq-xD-wn8"/>
                             <constraint firstItem="BJq-ks-FnM" firstAttribute="leading" secondItem="W2h-nP-75G" secondAttribute="leading" id="xKv-gR-Vp8"/>
@@ -150,9 +170,11 @@
                         <outlet property="addressLayer" destination="Dpc-GE-4GN" id="thA-SK-CIz"/>
                         <outlet property="assetList" destination="W2h-nP-75G" id="KKm-Qw-LcX"/>
                         <outlet property="currencyLabel" destination="t80-pF-gTb" id="7gs-x3-WSy"/>
+                        <outlet property="ecosystemList" destination="0tE-SO-qGG" id="wdk-VG-gbF"/>
                         <outlet property="hideValueBtn" destination="iyq-ej-XIn" id="aKc-Sw-dv0"/>
                         <outlet property="historyList" destination="BJq-ks-FnM" id="O6J-K9-Mbg"/>
                         <outlet property="nftList" destination="jIO-da-bOO" id="b5j-ZD-AnA"/>
+                        <outlet property="receiveList" destination="90O-ET-A6J" id="Bib-lY-Q2T"/>
                         <outlet property="tabbar" destination="bUj-kd-BLh" id="f5z-Xh-w7Y"/>
                         <outlet property="totalValueLabel" destination="1ad-XW-r7M" id="ZGl-BG-voV"/>
                     </connections>
@@ -201,7 +223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ybs-Xy-xIy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1117" y="929"/>
+            <point key="canvasLocation" x="-1844" y="926"/>
         </scene>
         <!--Evm NftVC-->
         <scene sceneID="C6o-ce-9sL">
@@ -216,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfO-Y8-RuQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7" y="918"/>
+            <point key="canvasLocation" x="-1042" y="926"/>
         </scene>
         <!--Evm HistoryVC-->
         <scene sceneID="eCZ-7c-X08">
@@ -289,7 +311,7 @@ assets on the block explorer</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YE4-Zn-YL2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="937" y="918"/>
+            <point key="canvasLocation" x="760" y="926"/>
         </scene>
         <!--Evm AboutVC-->
         <scene sceneID="Hbc-LZ-OlD">
@@ -304,6 +326,7 @@ assets on the block explorer</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ulH-f6-VlS"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="_primary"/>
                         <constraints>
@@ -319,7 +342,37 @@ assets on the block explorer</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bGG-3l-rVW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1932" y="921"/>
+            <point key="canvasLocation" x="2463" y="926"/>
+        </scene>
+        <!--Evm ReceiveVC-->
+        <scene sceneID="HOB-LA-HY6">
+            <objects>
+                <viewController storyboardIdentifier="EvmReceiveVC" id="ad1-tH-hp5" customClass="EvmReceiveVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4IJ-t8-wVc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="_primary"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7qU-6e-0cG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-134" y="926"/>
+        </scene>
+        <!--Evm EcosystemVC-->
+        <scene sceneID="vbe-LD-Ot1">
+            <objects>
+                <viewController storyboardIdentifier="EvmEcosystemVC" id="4uO-bN-E88" customClass="EvmEcosystemVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lCM-uY-ijk">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="_primary"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FIZ-Xs-Tdc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1619" y="926"/>
         </scene>
     </scenes>
     <resources>
