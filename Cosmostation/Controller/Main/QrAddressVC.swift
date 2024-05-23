@@ -83,7 +83,7 @@ class QrAddressVC: BaseVC {
     }
     
     func updateQrImage() {
-        if let qrImage = generateQrCode(toDpAddress) {
+        if let qrImage = WUtils.generateQrCode(toDpAddress) {
             rqImgView.image = UIImage(ciImage: qrImage)
             let chainLogo = UIImage.init(named: selectedChain.logo1)
             chainLogo?.addToCenter(of: rqImgView)
