@@ -22,7 +22,9 @@ class EvmClassVC: BaseVC {
     
     @IBOutlet weak var assetList: UIView!
     @IBOutlet weak var nftList: UIView!
+    @IBOutlet weak var receiveList: UIView!
     @IBOutlet weak var historyList: UIView!
+    @IBOutlet weak var ecosystemList: UIView!
     @IBOutlet weak var AboutList: UIView!
     
     var addtokenBarBtn: UIBarButtonItem!
@@ -51,8 +53,14 @@ class EvmClassVC: BaseVC {
         } else if (segue.identifier == "embedNftVC") {
             let target = segue.destination as! EvmNftVC
             target.selectedChain = selectedChain
+        } else if (segue.identifier == "embedReceiveVC") {
+            let target = segue.destination as! EvmReceiveVC
+            target.selectedChain = selectedChain
         } else if (segue.identifier == "embedHistoryVC") {
             let target = segue.destination as! EvmHistoryVC
+            target.selectedChain = selectedChain
+        } else if (segue.identifier == "embedEcosystemVC") {
+            let target = segue.destination as! EvmEcosystemVC
             target.selectedChain = selectedChain
         } else if (segue.identifier == "embedAboutVC") {
             let target = segue.destination as! EvmAboutVC
@@ -132,11 +140,15 @@ class EvmClassVC: BaseVC {
     func onSetTabbarView() {
         let assetTabBar = UITabBarItem(title: "Assets", image: nil, tag: 0)
 //        let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 1)
-        let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 2)
-        let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 3)
+        let receiveTabBar = UITabBarItem(title: "Receive", image: nil, tag: 2)
+        let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 3)
+        let ecosystemTabBar = UITabBarItem(title: "Ecosystem", image: nil, tag: 4)
+        let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 5)
         tabbar.items.append(assetTabBar)
-//        tabbar.items.append(nftTabBar)
+//        if (BaseData.instance.showEvenReview()) { tabbar.items.append(nftTabBar) }
+        tabbar.items.append(receiveTabBar)
         tabbar.items.append(historyTabBar)
+        if (BaseData.instance.showEvenReview() && selectedChain.isEcosystem()) { tabbar.items.append(ecosystemTabBar) }
         if (!selectedChain.getChainListParam().isEmpty) {
             tabbar.items.append(aboutTabBar)
         }
@@ -154,7 +166,9 @@ class EvmClassVC: BaseVC {
         
         assetList.alpha = 1
         nftList.alpha = 0
+        receiveList.alpha = 0
         historyList.alpha = 0
+        ecosystemList.alpha = 0
         AboutList.alpha = 0
     }
     
@@ -195,29 +209,55 @@ extension EvmClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
         if (item.tag == 0) {
             assetList.alpha = 1
             nftList.alpha = 0
+            receiveList.alpha = 0
             historyList.alpha = 0
+            ecosystemList.alpha = 0
             AboutList.alpha = 0
             navigationItem.rightBarButtonItems = [explorerBarBtn, addtokenBarBtn]
             
         } else if (item.tag == 1) {
             assetList.alpha = 0
-            nftList.alpha = 1
+            nftList.alpha = 2
+            receiveList.alpha = 0
             historyList.alpha = 0
+            ecosystemList.alpha = 0
             AboutList.alpha = 0
             navigationItem.rightBarButtonItems = [explorerBarBtn]
             
         } else if (item.tag == 2) {
             assetList.alpha = 0
             nftList.alpha = 0
-            historyList.alpha = 1
+            receiveList.alpha = 3
+            historyList.alpha = 0
+            ecosystemList.alpha = 0
             AboutList.alpha = 0
             navigationItem.rightBarButtonItems = [explorerBarBtn]
             
         } else if (item.tag == 3) {
             assetList.alpha = 0
             nftList.alpha = 0
+            receiveList.alpha = 0
+            historyList.alpha = 4
+            ecosystemList.alpha = 0
+            AboutList.alpha = 0
+            navigationItem.rightBarButtonItems = [explorerBarBtn]
+            
+        } else if (item.tag == 4) {
+            assetList.alpha = 0
+            nftList.alpha = 0
+            receiveList.alpha = 0
             historyList.alpha = 0
-            AboutList.alpha = 1
+            ecosystemList.alpha = 5
+            AboutList.alpha = 0
+            navigationItem.rightBarButtonItems = [explorerBarBtn]
+            
+        } else if (item.tag == 5) {
+            assetList.alpha = 0
+            nftList.alpha = 0
+            receiveList.alpha = 0
+            historyList.alpha = 0
+            ecosystemList.alpha = 0
+            AboutList.alpha = 6
             navigationItem.rightBarButtonItems = [explorerBarBtn]
         }
     }

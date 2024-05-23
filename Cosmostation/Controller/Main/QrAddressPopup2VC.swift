@@ -50,13 +50,13 @@ class QrAddressPopup2VC: BaseVC {
             bechAddressLabel.adjustsFontSizeToFitWidth = true
         }
         
-        if let evmQrImage = generateQrCode(evmAddress) {
+        if let evmQrImage = WUtils.generateQrCode(evmAddress) {
             evmQrImgView.image = UIImage(ciImage: evmQrImage)
             let chainLogo = UIImage.init(named: selectedChain.logo1)
             chainLogo?.addToCenter(of: evmQrImgView, width: 40, height: 40)
         }
         
-        if let bechQrImage = generateQrCode(bechAddress) {
+        if let bechQrImage = WUtils.generateQrCode(bechAddress) {
             bechQrImgView.image = UIImage(ciImage: bechQrImage)
             let chainLogo = UIImage.init(named: selectedChain.logo1)
             chainLogo?.addToCenter(of: bechQrImgView, width: 40, height: 40)

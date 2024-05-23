@@ -8,6 +8,7 @@
 
 import UIKit
 import web3swift
+import Lottie
 
 class SettingsVC: BaseVC {
     
@@ -148,7 +149,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 4) {
                 switchCell.onBindSetNotification()
                 switchCell.actionToggle = { request in
-                    PushUtils.shared.updateStatus(enable: request)
+//                    PushUtils.shared.updateStatus(enable: request)
                 }
                 return switchCell
                 
@@ -435,9 +436,13 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
         } else if (sheetType == .SwitchStyle) {
             if let index = result["index"] as? Int {
                 if (BaseData.instance.getStyle() != index) {
-                    BaseData.instance.setStyle(index)
-                    BaseNetWork().fetchPrices(true)
-                    reloadRows(IndexPath(row: 2, section: 1))
+                    showWaitDelay()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+                        BaseData.instance.setStyle(index)
+                        BaseNetWork().fetchPrices(true)
+                        self.reloadRows(IndexPath(row: 2, section: 1))
+                        self.hideWait()
+                    })
                 }
             }
             

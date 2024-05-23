@@ -53,7 +53,7 @@ class BaseVC: UIViewController {
     }
     
     public func showWaitDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(700), execute: {
             self.showWait()
         });
     }
@@ -127,23 +127,6 @@ class BaseVC: UIViewController {
         backBtnItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.fontSize16Bold], for: .normal)
         backBtnItem.title = name
         return backBtnItem
-    }
-}
-
-
-
-extension BaseVC {
-    
-    func generateQrCode(_ content: String)  -> CIImage? {
-        let data = content.data(using: String.Encoding.ascii, allowLossyConversion: false)
-        let filter = CIFilter(name: "CIQRCodeGenerator")
-        filter?.setValue(data, forKey: "inputMessage")
-        filter?.setValue("Q", forKey: "inputCorrectionLevel")
-        let scaleUp = CGAffineTransform(scaleX: 8, y: 8)
-        if let qrCodeImage = (filter?.outputImage?.transformed(by: scaleUp)) {
-            return qrCodeImage
-        }
-        return nil
     }
 }
 

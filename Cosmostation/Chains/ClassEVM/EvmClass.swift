@@ -181,7 +181,11 @@ class EvmClass: CosmosClass {
     
     //check account payable with lowest fee
     override func isTxFeePayable() -> Bool {
-        return evmBalances.compare(EVM_BASE_FEE).rawValue > 0
+        let evmCheck = evmBalances.compare(EVM_BASE_FEE).rawValue > 0
+        if (supportCosmos) {
+            return super.isTxFeePayable() && evmCheck
+        }
+        return evmCheck
     }
     
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
@@ -294,21 +298,21 @@ extension EvmClass {
 func ALLEVMCLASS() -> [EvmClass] {
     var result = [EvmClass]()
     result.append(ChainEthereum())
-//    result.append(ChainAltheaEVM())
-//    result.append(ChainArbitrum())
-//    result.append(ChainAvalanche())
-//    result.append(ChainBaseEVM())
-//    result.append(ChainBinanceSmart())
-//    result.append(ChainCantoEVM())
-//    result.append(ChainCronos())
-//    result.append(ChainDymensionEVM())
-//    result.append(ChainEvmosEVM())
-//    result.append(ChainHumansEVM())
-//    result.append(ChainKavaEVM())
-//    result.append(ChainOktEVM())
-//    result.append(ChainOptimism())
-//    result.append(ChainPolygon())
-//    result.append(ChainXplaEVM())
+    result.append(ChainAltheaEVM())
+    result.append(ChainArbitrum())
+    result.append(ChainAvalanche())
+    result.append(ChainBaseEVM())
+    result.append(ChainBinanceSmart())
+    result.append(ChainCantoEVM())
+    result.append(ChainCronos())
+    result.append(ChainDymensionEVM())
+    result.append(ChainEvmosEVM())
+    result.append(ChainHumansEVM())
+    result.append(ChainKavaEVM())
+    result.append(ChainOktEVM())
+    result.append(ChainOptimism())
+    result.append(ChainPolygon())
+    result.append(ChainXplaEVM())
     
     
     result.append(ChainBeraTestEVM())
