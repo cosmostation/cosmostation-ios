@@ -236,6 +236,7 @@ let ResourceBase = "https://raw.githubusercontent.com/cosmostation/chainlist/mas
 let ResourceDappBase = "https://raw.githubusercontent.com/cosmostation/chainlist/master/wallet_mobile/dapp/"
 let MintscanUrl = "https://www.mintscan.io/"
 let GeckoUrl = "https://www.coingecko.com/en/coins/"
+let EcosystemUrl = "https://raw.githubusercontent.com/cosmostation/chainlist/master/wallet_mobile/mobile_ecosystem/${apiName}/eco_list.json"
 
 
 
