@@ -46,12 +46,47 @@ class DappDetailVC: BaseVC {
             print("allCosmosChains ", allCosmosChains.count)
         }
         
+        print("dappUrl ", dappUrl)
+        print("dappUrl query", dappUrl?.query)
+        
         webView.scrollView.contentInsetAdjustmentBehavior = .never
-        dappUrlLabel.text = dappUrl?.query?.replacingOccurrences(of: "https://", with: "")
-        if let query = dappUrl?.query?.removingPercentEncoding, 
-            let queryUrl = URL(string: query) {
-            webView.load(URLRequest(url: queryUrl))
+//        webView.navigationDelegate = self
+//        webView.delete(<#T##sender: Any?##Any?#>)
+        
+        
+//
+//        if let query = dappUrl?.query?.removingPercentEncoding, 
+//            let queryUrl = URL(string: query) {
+//            webView.load(URLRequest(url: queryUrl))
+//        }
+//        dappUrl?.query()
+//        var titleString = ""
+//        var siteUrl: URL?
+//        
+//        if (dappUrl?.absoluteString.starts(with: "https://") ?? false) {
+//            titleString = dappUrl?.absoluteString.replacingOccurrences(of: "https://", with: "") ?? ""
+//            siteUrl = dappUrl
+//            
+//        } else {
+//            titleString = dappUrl?.query?.replacingOccurrences(of: "https://", with: "") ?? ""
+//            if let query = dappUrl?.query?.removingPercentEncoding {
+//                siteUrl = URL(string: query)
+//            }
+//        }
+//        
+//        guard let siteUrl = siteUrl else {
+//            return
+//        }
+//        print("siteUrl ", siteUrl)
+        
+        if (dappUrl?.query?.isEmpty == false) {
+            dappUrl = URL(string: dappUrl!.query!.removingPercentEncoding!)
         }
+        print("dappUrl ", dappUrl)
+        
+        webView.load(URLRequest(url: dappUrl!))
+//        dappUrlLabel.text = titleString
+        
         injectScript()
     }
     
@@ -128,9 +163,9 @@ class DappDetailVC: BaseVC {
         }
     }
     
-    @IBAction func onBack(_ sender: UIButton) {
-        disconnect()
-    }
+//    @IBAction func onBack(_ sender: UIButton) {
+//        disconnect()
+//    }
     
     func connectSession() {
         if isConnected() { return }
@@ -313,7 +348,7 @@ extension DappDetailVC: WKScriptMessageHandler {
             let messageJSON = bodyJSON["message"]
             let method = messageJSON["method"].stringValue
             
-            print("bodyJSON ", bodyJSON)
+//            print("bodyJSON ", bodyJSON)
             
             if (method == "cos_supportedChainIds") {
                 let chainIds = allCosmosChains.filter { $0.chainIdCosmos != nil }.map{ $0.chainIdCosmos }
@@ -435,6 +470,41 @@ extension DappDetailVC: WKScriptMessageHandler {
 }
 
 extension DappDetailVC: WKNavigationDelegate, WKUIDelegate {
+    
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        print("webView didCommit")
+        if var components = URLComponents(string: webView.url!.absoluteString) {
+            components.query = nil
+//            print(components)
+            dappUrlLabel.text = components.url?.absoluteString.replacingOccurrences(of: "https://", with: "")
+        }
+//        print("url ", webView.url)
+//        print("url ", webView.url?.query?.removingPercentEncoding)
+//        dappUrlLabel.text = webView.url?.query?.removingPercentEncoding
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("webView didFinish", webView.themeColor?.cgColor )
+        guard let bgColor = webView.themeColor?.cgColor else { return }
+        view.backgroundColor = UIColor(cgColor: bgColor)
+    }
+    
+//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences) async -> (WKNavigationActionPolicy, WKWebpagePreferences) {
+//        print("webView decidePolicyFor preferences", webView.themeColor?.cgColor )
+//    }
+//    
+//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction) async -> WKNavigationActionPolicy {
+//        print("webView decidePolicyFor preferences", webView.themeColor?.cgColor )
+//    }
+//    
+//    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+//        print("webView didStartProvisionalNavigation", webView.themeColor?.cgColor )
+//    }
+//    
+//    func webView(_ webView: WKWebView, navigationResponse: WKNavigationResponse, didBecome download: WKDownload) {
+//        print("webView navigationResponse", webView.themeColor?.cgColor )
+//    }
+    
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel) { _ in
