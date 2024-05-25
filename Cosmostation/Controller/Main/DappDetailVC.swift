@@ -24,6 +24,7 @@ class DappDetailVC: BaseVC {
     
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var dappUrlLabel: UILabel!
+    @IBOutlet weak var backBtn: UIButton!
     
     var selectedChain: CosmosClass!
     var dappUrl: URL?
@@ -46,48 +47,20 @@ class DappDetailVC: BaseVC {
             print("allCosmosChains ", allCosmosChains.count)
         }
         
-        print("dappUrl ", dappUrl)
-        print("dappUrl query", dappUrl?.query)
-        
-        webView.scrollView.contentInsetAdjustmentBehavior = .never
-//        webView.navigationDelegate = self
-//        webView.delete(<#T##sender: Any?##Any?#>)
-        
-        
-//
-//        if let query = dappUrl?.query?.removingPercentEncoding, 
-//            let queryUrl = URL(string: query) {
-//            webView.load(URLRequest(url: queryUrl))
-//        }
-//        dappUrl?.query()
-//        var titleString = ""
-//        var siteUrl: URL?
-//        
-//        if (dappUrl?.absoluteString.starts(with: "https://") ?? false) {
-//            titleString = dappUrl?.absoluteString.replacingOccurrences(of: "https://", with: "") ?? ""
-//            siteUrl = dappUrl
-//            
-//        } else {
-//            titleString = dappUrl?.query?.replacingOccurrences(of: "https://", with: "") ?? ""
-//            if let query = dappUrl?.query?.removingPercentEncoding {
-//                siteUrl = URL(string: query)
-//            }
-//        }
-//        
-//        guard let siteUrl = siteUrl else {
-//            return
-//        }
-//        print("siteUrl ", siteUrl)
-        
+        print("incomed URL ", dappUrl)
         if (dappUrl?.query?.isEmpty == false) {
             dappUrl = URL(string: dappUrl!.query!.removingPercentEncoding!)
         }
-        print("dappUrl ", dappUrl)
+        print("dapp URL ", dappUrl)
         
-        webView.load(URLRequest(url: dappUrl!))
-//        dappUrlLabel.text = titleString
         
+        dappUrl = URL(string: "https://coinhall.org")
+        
+        updateTitle(dappUrl?.absoluteString)
         injectScript()
+        webView.load(URLRequest(url: dappUrl!))
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,6 +73,23 @@ class DappDetailVC: BaseVC {
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
+    func updateTitle(_ absoluteString: String?) {
+        var title = absoluteString?.replacingOccurrences(of: "https://", with: "")
+        if (title?.last == "/") {
+            title = String(title!.dropLast())
+        }
+        dappUrlLabel.text = title
+    }
+    
+    @IBAction func onBackClicK(_ sender: Any) {
+        if (webView.canGoBack) {
+            webView.goBack()
+        } else {
+            disconnectV2Sessions()
+            dismissOrPopView()
+        }
+    }
+
     /*
      * Inject custom script to webview
      */
@@ -114,9 +104,8 @@ class DappDetailVC: BaseVC {
         if #available(iOS 16.4, *) {
             webView.isInspectable = true
         }
-        webView.isOpaque = false
-        webView.backgroundColor = UIColor.clear
         webView.navigationDelegate = self
+        webView.scrollView.delegate = self
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.allowsBackForwardNavigationGestures = true
         webView.allowsLinkPreview = false
@@ -162,10 +151,6 @@ class DappDetailVC: BaseVC {
             self.dismiss(animated: true)
         }
     }
-    
-//    @IBAction func onBack(_ sender: UIButton) {
-//        disconnect()
-//    }
     
     func connectSession() {
         if isConnected() { return }
@@ -343,12 +328,13 @@ extension CosmosClass {
 extension DappDetailVC: WKScriptMessageHandler {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print("userContentController didReceive")
         if (message.name == "station") {
             let bodyJSON = JSON(parseJSON: message.body as? String ?? "")
             let messageJSON = bodyJSON["message"]
             let method = messageJSON["method"].stringValue
             
-//            print("bodyJSON ", bodyJSON)
+            print("bodyJSON ", bodyJSON)
             
             if (method == "cos_supportedChainIds") {
                 let chainIds = allCosmosChains.filter { $0.chainIdCosmos != nil }.map{ $0.chainIdCosmos }
@@ -469,25 +455,45 @@ extension DappDetailVC: WKScriptMessageHandler {
     }
 }
 
-extension DappDetailVC: WKNavigationDelegate, WKUIDelegate {
+extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate {
     
-    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        print("webView didCommit")
-        if var components = URLComponents(string: webView.url!.absoluteString) {
-            components.query = nil
-//            print(components)
-            dappUrlLabel.text = components.url?.absoluteString.replacingOccurrences(of: "https://", with: "")
-        }
-//        print("url ", webView.url)
-//        print("url ", webView.url?.query?.removingPercentEncoding)
-//        dappUrlLabel.text = webView.url?.query?.removingPercentEncoding
-    }
+//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+//        decisionHandler(.allow)
+//        print("webView navigationAction11 ", webView.url?.absoluteString)
+//        print("webView navigationAction22 ", navigationAction.request.url?.absoluteString)
+//    }
+//    
+//    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+//        print("didReceiveServerRedirectForProvisionalNavigation ", webView.url?.absoluteString)
+//    }
+//    
+//    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+//        print("webView navigationResponse ", webView.url?.absoluteString)
+//        decisionHandler(.allow)
+//    }
+//    
+//    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+//        print("webView didCommit ", webView.url?.absoluteString)
+//        if var components = URLComponents(string: webView.url!.absoluteString) {
+//            components.query = nil
+//            dappUrlLabel.text = components.url?.absoluteString.replacingOccurrences(of: "https://", with: "")
+//        }
+//    }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("webView didFinish", webView.themeColor?.cgColor )
+//        print("webView didFinish", webView.themeColor?.cgColor )
+//        print("webView didFinish ", webView.url?.absoluteString)
         guard let bgColor = webView.themeColor?.cgColor else { return }
         view.backgroundColor = UIColor(cgColor: bgColor)
     }
+    
+//    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: any Error) {
+//        print("webView didFail ", webView.url?.absoluteString)
+//    }
+//    
+//    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+//        print("webViewWebContentProcessDidTerminate ", webView.url?.absoluteString)
+//    }
     
 //    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences) async -> (WKNavigationActionPolicy, WKWebpagePreferences) {
 //        print("webView decidePolicyFor preferences", webView.themeColor?.cgColor )
@@ -498,14 +504,15 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate {
 //    }
 //    
 //    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-//        print("webView didStartProvisionalNavigation", webView.themeColor?.cgColor )
+//        print("webView didStartProvisionalNavigation", webView.url?.absoluteString)
 //    }
 //    
 //    func webView(_ webView: WKWebView, navigationResponse: WKNavigationResponse, didBecome download: WKDownload) {
-//        print("webView navigationResponse", webView.themeColor?.cgColor )
+//        print("webView navigationResponse", webView.url?.absoluteString)
 //    }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        print("userContentController runJavaScriptAlertPanelWithMessage")
         let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel) { _ in
             completionHandler()
@@ -517,6 +524,7 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate {
     }
     
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+        print("userContentController runJavaScriptConfirmPanelWithMessage")
         let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel) { _ in
             completionHandler(false)
@@ -531,45 +539,53 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate {
         })
     }
     
-//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//        if self.webView.isHidden {
-//            decisionHandler(.cancel)
-//            return
-//        }
-//        print("webView decidePolicyFor ", navigationAction.request.url )
-//        if let url = navigationAction.request.url {
-//            var newUrl: String?
-//            
-//            if let absoluteString = url.absoluteString.removingPercentEncoding {
-//                if absoluteString.starts(with: "keplrwallet://wcV1") {
-//                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc")
-//                } else if absoluteString.starts(with: "keplrwallet://wcV2") || absoluteString.starts(with: "keplrwalletwcv2://wcV2") {
-//                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc")
-//                } else if let match = absoluteString.range(of: "https://.*/wc", options: .regularExpression) {
-//                    newUrl = absoluteString.replacingCharacters(in: match, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
-//                } else if absoluteString.starts(with: "cosmostation://wc") {
-//                    newUrl = absoluteString.replacingOccurrences(of: "uri=", with: "")
-//                } else if absoluteString.starts(with: "intent:") {
-//                    if absoluteString.contains("intent://wcV2") {
-//                        newUrl = absoluteString.replacingOccurrences(of: "intent://wcV2", with: "cosmostation://wc")
-//                    } else if absoluteString.contains("intent://wc") {
-//                        newUrl = absoluteString.removingPercentEncoding!.replacingOccurrences(of: "intent://wc", with: "cosmostation://wc")
-//                    }
-//                    if let range = newUrl?.range(of: "#Intent") {
-//                        let trimmedUrl = String(newUrl![..<range.lowerBound])
-//                        newUrl = trimmedUrl
-//                    }
-//                }
-//                
-//                if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
-//                    UIApplication.shared.open(finalUrl, options: [:])
-//                    decisionHandler(.cancel)
-//                    return
-//                }
-//            }
-//        }
-//        decisionHandler(.allow)
-//    }
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if self.webView.isHidden {
+            decisionHandler(.cancel)
+            return
+        }
+        print("webView decidePolicyFor ", navigationAction.request.url )
+        if let url = navigationAction.request.url {
+            var newUrl: String?
+            if let absoluteString = url.absoluteString.removingPercentEncoding {
+                if absoluteString.starts(with: "keplrwallet://wcV1") {
+                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc")
+                } else if absoluteString.starts(with: "keplrwallet://wcV2") || absoluteString.starts(with: "keplrwalletwcv2://wcV2") {
+                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc")
+                } else if let match = absoluteString.range(of: "https://.*/wc", options: .regularExpression) {
+                    newUrl = absoluteString.replacingCharacters(in: match, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
+                } else if absoluteString.starts(with: "cosmostation://wc") {
+                    newUrl = absoluteString.replacingOccurrences(of: "uri=", with: "")
+                } else if absoluteString.starts(with: "intent:") {
+                    if absoluteString.contains("intent://wcV2") {
+                        newUrl = absoluteString.replacingOccurrences(of: "intent://wcV2", with: "cosmostation://wc")
+                    } else if absoluteString.contains("intent://wc") {
+                        newUrl = absoluteString.removingPercentEncoding!.replacingOccurrences(of: "intent://wc", with: "cosmostation://wc")
+                    }
+                    if let range = newUrl?.range(of: "#Intent") {
+                        let trimmedUrl = String(newUrl![..<range.lowerBound])
+                        newUrl = trimmedUrl
+                    }
+                }
+                print("newUrl ", newUrl)
+                
+                if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
+                    UIApplication.shared.open(finalUrl, options: [:])
+                    decisionHandler(.cancel)
+                    return
+                }
+            }
+        }
+        decisionHandler(.allow)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if (targetContentOffset.pointee.y == 0 || targetContentOffset.pointee.y < scrollView.contentOffset.y) {
+            backBtn.isHidden = false
+        } else {
+            backBtn.isHidden = true
+        }
+    }
 }
 
 extension DappDetailVC {

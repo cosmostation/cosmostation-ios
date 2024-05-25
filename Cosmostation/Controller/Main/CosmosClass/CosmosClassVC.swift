@@ -489,6 +489,7 @@ class CosmosClassVC: BaseVC {
         mainFab.translatesAutoresizingMaskIntoConstraints = false
         mainFab.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         mainFab.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+        
     }
     
     func starEvmAddressAnimation() {

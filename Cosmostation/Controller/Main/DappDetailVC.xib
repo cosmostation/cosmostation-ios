@@ -17,6 +17,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DappDetailVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="backBtn" destination="FI1-Sy-yrV" id="CU9-Qz-oug"/>
                 <outlet property="dappUrlLabel" destination="jkL-YJ-8nS" id="w6A-ZA-xpX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="ET7-vF-dJg" id="5G6-av-55w"/>
@@ -28,10 +29,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWB-hR-diP">
-                    <rect key="frame" x="0.0" y="51" width="393" height="16.333333333333329"/>
+                    <rect key="frame" x="0.0" y="49" width="393" height="16"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dapp Url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jkL-YJ-8nS">
-                            <rect key="frame" x="171" y="0.0" width="51" height="16.333333333333332"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jkL-YJ-8nS">
+                            <rect key="frame" x="195" y="1" width="3" height="14"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -39,20 +40,39 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="16.333333333333329" id="28F-bL-ZpO"/>
+                        <constraint firstAttribute="height" constant="16" id="28F-bL-ZpO"/>
                         <constraint firstItem="jkL-YJ-8nS" firstAttribute="centerX" secondItem="nWB-hR-diP" secondAttribute="centerX" id="9yA-qq-4zb"/>
-                        <constraint firstItem="jkL-YJ-8nS" firstAttribute="top" secondItem="nWB-hR-diP" secondAttribute="top" id="Otu-v4-kHx"/>
-                        <constraint firstAttribute="bottom" secondItem="jkL-YJ-8nS" secondAttribute="bottom" id="xIO-l7-c6O"/>
+                        <constraint firstItem="jkL-YJ-8nS" firstAttribute="top" secondItem="nWB-hR-diP" secondAttribute="top" constant="1" id="Otu-v4-kHx"/>
+                        <constraint firstAttribute="bottom" secondItem="jkL-YJ-8nS" secondAttribute="bottom" constant="1" id="xIO-l7-c6O"/>
                     </constraints>
                 </view>
                 <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ET7-vF-dJg">
-                    <rect key="frame" x="0.0" y="67.333333333333314" width="393" height="784.66666666666674"/>
+                    <rect key="frame" x="0.0" y="65" width="393" height="787"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <wkWebViewConfiguration key="configuration" allowsInlineMediaPlayback="YES">
                         <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                         <wkPreferences key="preferences"/>
                     </wkWebViewConfiguration>
                 </wkWebView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FI1-Sy-yrV">
+                    <rect key="frame" x="20" y="758" width="48" height="48"/>
+                    <color key="backgroundColor" name="thinOverlay"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="spB-Xb-GfZ"/>
+                        <constraint firstAttribute="height" constant="48" id="xUe-te-UCp"/>
+                    </constraints>
+                    <color key="tintColor" name="_color01"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="arrowshape.backward" catalog="system"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="24"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onBackClicK:" destination="-1" eventType="touchUpInside" id="5vp-Cc-QeV"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -60,21 +80,27 @@
             <constraints>
                 <constraint firstItem="ET7-vF-dJg" firstAttribute="top" secondItem="nWB-hR-diP" secondAttribute="bottom" id="102-Qb-db1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nWB-hR-diP" secondAttribute="trailing" id="148-mo-e5q"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FI1-Sy-yrV" secondAttribute="bottom" constant="12" id="4Gq-sm-JJX"/>
                 <constraint firstItem="nWB-hR-diP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Set-VF-mfe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ET7-vF-dJg" secondAttribute="trailing" id="XVC-lW-XqC"/>
                 <constraint firstItem="ET7-vF-dJg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ZBb-rl-clX"/>
-                <constraint firstItem="nWB-hR-diP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-8" id="jeQ-wb-fCW"/>
+                <constraint firstItem="FI1-Sy-yrV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="jEC-7F-1Li"/>
+                <constraint firstItem="nWB-hR-diP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-10" id="jeQ-wb-fCW"/>
                 <constraint firstAttribute="bottom" secondItem="ET7-vF-dJg" secondAttribute="bottom" id="mF0-AU-Vto"/>
             </constraints>
             <point key="canvasLocation" x="75.572519083969468" y="20.422535211267608"/>
         </view>
     </objects>
     <resources>
+        <image name="arrowshape.backward" catalog="system" width="128" height="104"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
             <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="thinOverlay">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.10000000149011612" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
