@@ -24,7 +24,15 @@ class DappDetailVC: BaseVC {
     
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var dappUrlLabel: UILabel!
-    @IBOutlet weak var backBtn: UIButton!
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backBtn: WebNaviButton!
+    @IBOutlet weak var forwardBtn: WebNaviButton!
+    @IBOutlet weak var accountName: UILabel!
+    
+    
+    private var bottomViewHeight: CGFloat = 80
+    private var isAnimationInProgress = false
     
     var selectedChain: CosmosClass!
     var dappUrl: URL?
@@ -47,20 +55,20 @@ class DappDetailVC: BaseVC {
             print("allCosmosChains ", allCosmosChains.count)
         }
         
-        print("incomed URL ", dappUrl)
+//        print("incomed URL ", dappUrl)
         if (dappUrl?.query?.isEmpty == false) {
             dappUrl = URL(string: dappUrl!.query!.removingPercentEncoding!)
         }
-        print("dapp URL ", dappUrl)
+//        print("dapp URL ", dappUrl)
         
+//        dappUrl = URL(string: "https://coinhall.org/")
+//        dappUrl = URL(string: "https://app.kava.io/home")
         
-        dappUrl = URL(string: "https://coinhall.org")
-        
-        updateTitle(dappUrl?.absoluteString)
-        injectScript()
+        dappUrlLabel.text = dappUrl?.host
+        onInitInjectScript()
         webView.load(URLRequest(url: dappUrl!))
-        
-        
+        self.webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,14 +81,6 @@ class DappDetailVC: BaseVC {
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
-    func updateTitle(_ absoluteString: String?) {
-        var title = absoluteString?.replacingOccurrences(of: "https://", with: "")
-        if (title?.last == "/") {
-            title = String(title!.dropLast())
-        }
-        dappUrlLabel.text = title
-    }
-    
     @IBAction func onBackClicK(_ sender: Any) {
         if (webView.canGoBack) {
             webView.goBack()
@@ -89,11 +89,25 @@ class DappDetailVC: BaseVC {
             dismissOrPopView()
         }
     }
+    
+    @IBAction func onForwardClick(_ sender: Any) {
+        if (webView.canGoForward) {
+            webView.goForward()
+        }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let _ = object as? WKWebView {
+            if keyPath == #keyPath(WKWebView.canGoForward) {
+                forwardBtn.isEnabled = webView.canGoForward
+            }
+        }
+    }
 
     /*
      * Inject custom script to webview
      */
-    private func injectScript() {
+    private func onInitInjectScript() {
         if let file = Bundle.main.path(forResource: "injectScript", ofType: "js"), let script = try? String(contentsOfFile: file) {
             let userScript = WKUserScript(source: script,
                                           injectionTime: .atDocumentEnd,
@@ -118,19 +132,44 @@ class DappDetailVC: BaseVC {
         }
     }
     
+    private func onInitWalletConnectV2(_ url: URL) {
+        print("onInitWalletConnectV2 ", url)
+        
+        WalletConnectV2_Disconnect { result in
+            print("WalletConnectV2_Disconnect ", result)
+            if (result) {
+                if let host = url.host, let query = url.query?.removingPercentEncoding, host == "wc" {
+                    var aawcUrl: String?
+                    if (query.starts(with: "uri=")) {
+                        aawcUrl = query.replacingOccurrences(of: "uri=", with: "")
+                    } else {
+                        aawcUrl = query
+                    }
+                    print("aawcUrl ", aawcUrl)
+                    self.connectWalletConnectV2(url: aawcUrl!)
+                }
+                
+            } else {
+                print("old seesion not disconnected!!")
+                
+            }
+        }
+    }
+    
+    
     /*
      * handle walletconnectV2 init from dapp request
      */
-    func processQuery(host: String?, query: String?) {
-        if let host = host, let query = query?.removingPercentEncoding, host == "wc" {
-            if (query.starts(with: "uri=")) {
-                wcUrl = query.replacingOccurrences(of: "uri=", with: "")
-            } else {
-                wcUrl = query
-            }
-            connectSession()
-        }
-    }
+//    func processQuery(host: String?, query: String?) {
+//        if let host = host, let query = query?.removingPercentEncoding, host == "wc" {
+//            if (query.starts(with: "uri=")) {
+//                wcUrl = query.replacingOccurrences(of: "uri=", with: "")
+//            } else {
+//                wcUrl = query
+//            }
+//            connectSession()
+//        }
+//    }
     
     func isConnected() -> Bool {
         if currentWcUri == wcUrl {
@@ -139,10 +178,10 @@ class DappDetailVC: BaseVC {
         return false
     }
     
-    private func disconnect() {
-        disconnectV2Sessions()
-        dismissOrPopView()
-    }
+//    private func disconnect() {
+//        disconnectV2Sessions()
+//        dismissOrPopView()
+//    }
     
     private func dismissOrPopView() {
         if (self.navigationController != nil) {
@@ -152,19 +191,19 @@ class DappDetailVC: BaseVC {
         }
     }
     
-    func connectSession() {
-        if isConnected() { return }
-        
-        guard let url = wcUrl, url.starts(with: "wc") else {
-            self.navigationController?.popViewController(animated: false)
-            return
-        }
-        
-        showWait()
-        if (url.contains("@2")) {
-            connectWalletConnectV2(url: url)
-        }
-    }
+//    func connectSession() {
+//        if isConnected() { return }
+//        
+//        guard let url = wcUrl, url.starts(with: "wc") else {
+//            self.navigationController?.popViewController(animated: false)
+//            return
+//        }
+//        
+//        showWait()
+//        if (url.contains("@2")) {
+//            connectWalletConnectV2(url: url)
+//        }
+//    }
     
     private func connectWalletConnectV2(url: String) {
         setUpAuthSubscribing()
@@ -481,10 +520,14 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
 //    }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//        print("webView didFinish", webView.themeColor?.cgColor )
-//        print("webView didFinish ", webView.url?.absoluteString)
-        guard let bgColor = webView.themeColor?.cgColor else { return }
-        view.backgroundColor = UIColor(cgColor: bgColor)
+        print("webView didFinish ", webView.url?.absoluteString)
+        if let bgColor = webView.themeColor?.cgColor {
+            view.backgroundColor = UIColor(cgColor: bgColor)
+            bottomView.backgroundColor = UIColor(cgColor: bgColor)
+        } else {
+            view.backgroundColor = .clear
+            bottomView.backgroundColor = .clear
+        }
     }
     
 //    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: any Error) {
@@ -512,7 +555,7 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
 //    }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-        print("userContentController runJavaScriptAlertPanelWithMessage")
+        print("runJavaScriptAlertPanelWithMessage ")
         let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel) { _ in
             completionHandler()
@@ -524,7 +567,7 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
     }
     
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
-        print("userContentController runJavaScriptConfirmPanelWithMessage")
+        print("runJavaScriptConfirmPanelWithMessage")
         let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel) { _ in
             completionHandler(false)
@@ -570,7 +613,8 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
                 print("newUrl ", newUrl)
                 
                 if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
-                    UIApplication.shared.open(finalUrl, options: [:])
+//                    UIApplication.shared.open(finalUrl, options: [:])
+                    onInitWalletConnectV2(URL(string: newUrl)!)
                     decisionHandler(.cancel)
                     return
                 }
@@ -580,10 +624,24 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if (targetContentOffset.pointee.y == 0 || targetContentOffset.pointee.y < scrollView.contentOffset.y) {
-            backBtn.isHidden = false
-        } else {
-            backBtn.isHidden = true
+        if !isAnimationInProgress {
+            if (targetContentOffset.pointee.y == 0 || targetContentOffset.pointee.y < scrollView.contentOffset.y) {
+                bottomViewHeightConstraint.constant = bottomViewHeight
+                animateTopViewHeight()
+            } else {
+                bottomViewHeightConstraint.constant = .zero
+                animateTopViewHeight()
+            }
+        }
+    }
+    
+    private func animateTopViewHeight() {
+        isAnimationInProgress = true
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+            
+        } completion: { [weak self] (_) in
+            self?.isAnimationInProgress = false
         }
     }
 }
@@ -731,6 +789,23 @@ extension DappDetailVC {
             }
         }
     }
+    
+    @MainActor
+    private func WalletConnectV2_Disconnect(_ completionHandler: @escaping (Bool) -> Void) {
+        Task {
+            do {
+                for pairing in Pair.instance.getPairings() {
+                    try await Pair.instance.disconnect(topic: pairing.topic)
+                    try await Sign.instance.disconnect(topic: pairing.topic)
+                }
+                completionHandler(true)
+            } catch {
+                print("WalletConnectV2_Disconnect error: \(error)")
+                completionHandler(false)
+            }
+        }
+    }
+    
     
     func getConnection(_ chain: CosmosClass) -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)

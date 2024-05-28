@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -17,8 +16,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DappDetailVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
-                <outlet property="backBtn" destination="FI1-Sy-yrV" id="CU9-Qz-oug"/>
+                <outlet property="accountName" destination="eGB-Z0-G8D" id="Yg9-h3-K3I"/>
+                <outlet property="backBtn" destination="38Z-lX-3jY" id="rvn-Bw-WYd"/>
+                <outlet property="bottomView" destination="VAx-hr-qKM" id="sm2-Nh-ui9"/>
+                <outlet property="bottomViewHeightConstraint" destination="1AI-CU-sRw" id="ZOz-4P-IaF"/>
                 <outlet property="dappUrlLabel" destination="jkL-YJ-8nS" id="w6A-ZA-xpX"/>
+                <outlet property="forwardBtn" destination="Zvb-Yz-MbE" id="J4W-HR-04u"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="ET7-vF-dJg" id="5G6-av-55w"/>
             </connections>
@@ -47,63 +50,94 @@
                     </constraints>
                 </view>
                 <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ET7-vF-dJg">
-                    <rect key="frame" x="0.0" y="65" width="393" height="787"/>
-                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="0.0" y="65" width="393" height="707"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <wkWebViewConfiguration key="configuration" allowsInlineMediaPlayback="YES">
                         <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                         <wkPreferences key="preferences"/>
                     </wkWebViewConfiguration>
                 </wkWebView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FI1-Sy-yrV">
-                    <rect key="frame" x="20" y="758" width="48" height="48"/>
-                    <color key="backgroundColor" name="thinOverlay"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAx-hr-qKM">
+                    <rect key="frame" x="0.0" y="772" width="393" height="80"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="38Z-lX-3jY" customClass="WebNaviButton" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="4" y="4" width="60" height="40"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="dip-cf-Jyi"/>
+                                <constraint firstAttribute="width" constant="60" id="iKF-Bw-3Xe"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="browseBack">
+                                <color key="baseForegroundColor" name="_color01"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="onBackClicK:" destination="-1" eventType="touchUpInside" id="y6P-bI-qck"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvb-Yz-MbE" customClass="WebNaviButton" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="68" y="4" width="60" height="40"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="FdI-Zu-LcR"/>
+                                <constraint firstAttribute="width" constant="60" id="Sxh-ix-SV7"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="browseForward">
+                                <color key="baseForegroundColor" name="_color01"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="onForwardClick:" destination="-1" eventType="touchUpInside" id="bw7-K9-T6H"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGB-Z0-G8D">
+                            <rect key="frame" x="379" y="24" width="0.0" height="0.0"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="48" id="spB-Xb-GfZ"/>
-                        <constraint firstAttribute="height" constant="48" id="xUe-te-UCp"/>
+                        <constraint firstAttribute="height" constant="80" id="1AI-CU-sRw"/>
+                        <constraint firstItem="38Z-lX-3jY" firstAttribute="leading" secondItem="VAx-hr-qKM" secondAttribute="leading" constant="4" id="FfW-Q4-P1F"/>
+                        <constraint firstItem="eGB-Z0-G8D" firstAttribute="centerY" secondItem="38Z-lX-3jY" secondAttribute="centerY" id="Jmi-sG-eGS"/>
+                        <constraint firstAttribute="trailing" secondItem="eGB-Z0-G8D" secondAttribute="trailing" constant="14" id="T4p-qd-rrp"/>
+                        <constraint firstItem="Zvb-Yz-MbE" firstAttribute="centerY" secondItem="38Z-lX-3jY" secondAttribute="centerY" id="ljP-CL-Rme"/>
+                        <constraint firstItem="Zvb-Yz-MbE" firstAttribute="leading" secondItem="38Z-lX-3jY" secondAttribute="trailing" constant="4" id="nmQ-FM-92z"/>
+                        <constraint firstItem="38Z-lX-3jY" firstAttribute="top" secondItem="VAx-hr-qKM" secondAttribute="top" constant="4" id="sU4-4V-zua"/>
                     </constraints>
-                    <color key="tintColor" name="_color01"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="arrowshape.backward" catalog="system"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="24"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="onBackClicK:" destination="-1" eventType="touchUpInside" id="5vp-Cc-QeV"/>
-                    </connections>
-                </button>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
                 <constraint firstItem="ET7-vF-dJg" firstAttribute="top" secondItem="nWB-hR-diP" secondAttribute="bottom" id="102-Qb-db1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nWB-hR-diP" secondAttribute="trailing" id="148-mo-e5q"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FI1-Sy-yrV" secondAttribute="bottom" constant="12" id="4Gq-sm-JJX"/>
+                <constraint firstItem="VAx-hr-qKM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="C9F-vF-XBd"/>
+                <constraint firstItem="VAx-hr-qKM" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="Gl8-Oq-oyB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VAx-hr-qKM" secondAttribute="trailing" id="J1o-Yl-yNT"/>
                 <constraint firstItem="nWB-hR-diP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Set-VF-mfe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ET7-vF-dJg" secondAttribute="trailing" id="XVC-lW-XqC"/>
                 <constraint firstItem="ET7-vF-dJg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ZBb-rl-clX"/>
-                <constraint firstItem="FI1-Sy-yrV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="jEC-7F-1Li"/>
                 <constraint firstItem="nWB-hR-diP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-10" id="jeQ-wb-fCW"/>
-                <constraint firstAttribute="bottom" secondItem="ET7-vF-dJg" secondAttribute="bottom" id="mF0-AU-Vto"/>
+                <constraint firstItem="VAx-hr-qKM" firstAttribute="top" secondItem="ET7-vF-dJg" secondAttribute="bottom" id="pns-vI-YHt"/>
             </constraints>
             <point key="canvasLocation" x="75.572519083969468" y="20.422535211267608"/>
         </view>
     </objects>
     <resources>
-        <image name="arrowshape.backward" catalog="system" width="128" height="104"/>
+        <image name="browseBack" width="24" height="24"/>
+        <image name="browseForward" width="24" height="24"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorBg">
+            <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
             <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="thinOverlay">
-            <color red="0.0" green="0.0" blue="0.0" alpha="0.10000000149011612" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

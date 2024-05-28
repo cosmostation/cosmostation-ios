@@ -229,6 +229,8 @@
 		041541002BA4139500CD5AA1 /* VoteAllChainHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041540FE2BA4139500CD5AA1 /* VoteAllChainHeader.swift */; };
 		041541022BA413A300CD5AA1 /* VoteAllChainHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041541012BA413A300CD5AA1 /* VoteAllChainHeader.xib */; };
 		041541032BA413A300CD5AA1 /* VoteAllChainHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041541012BA413A300CD5AA1 /* VoteAllChainHeader.xib */; };
+		041F1F7E2C05E5D5008C2F2C /* WebNaviButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F1F7D2C05E5D5008C2F2C /* WebNaviButton.swift */; };
+		041F1F7F2C05E5D5008C2F2C /* WebNaviButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F1F7D2C05E5D5008C2F2C /* WebNaviButton.swift */; };
 		042296812A890C9B003C7630 /* ChainKava118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296802A890C9B003C7630 /* ChainKava118.swift */; };
 		042296822A890C9B003C7630 /* ChainKava118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296802A890C9B003C7630 /* ChainKava118.swift */; };
 		042296842A890CC4003C7630 /* ChainKavaEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296832A890CC4003C7630 /* ChainKavaEVM.swift */; };
@@ -2045,6 +2047,7 @@
 		041540F92BA4126D00CD5AA1 /* VoteAllChainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteAllChainCell.xib; sourceTree = "<group>"; };
 		041540FE2BA4139500CD5AA1 /* VoteAllChainHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteAllChainHeader.swift; sourceTree = "<group>"; };
 		041541012BA413A300CD5AA1 /* VoteAllChainHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteAllChainHeader.xib; sourceTree = "<group>"; };
+		041F1F7D2C05E5D5008C2F2C /* WebNaviButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebNaviButton.swift; sourceTree = "<group>"; };
 		042296802A890C9B003C7630 /* ChainKava118.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava118.swift; sourceTree = "<group>"; };
 		042296832A890CC4003C7630 /* ChainKavaEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKavaEVM.swift; sourceTree = "<group>"; };
 		042A174F2AB97AD900EF31C9 /* RedFixCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedFixCardView.swift; sourceTree = "<group>"; };
@@ -4020,6 +4023,7 @@
 				04FAD9D72AB438C900143A3E /* DropDownView.swift */,
 				042A174F2AB97AD900EF31C9 /* RedFixCardView.swift */,
 				E1A48DF52C006E820084D770 /* PaddingLabel.swift */,
+				041F1F7D2C05E5D5008C2F2C /* WebNaviButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5297,6 +5301,7 @@
 				04C8167B2BA98D74006B800A /* cosmos_staking_module_v1_module.pb.swift in Sources */,
 				047843B02AC991B300462F1C /* injective_tokenfactory_v1beta1_events.pb.swift in Sources */,
 				04A68C1E2ABDA3220041FA13 /* SelectSwapChainCell.swift in Sources */,
+				041F1F7F2C05E5D5008C2F2C /* WebNaviButton.swift in Sources */,
 				047843E22AC991B300462F1C /* injective_oracle_v1beta1_events.pb.swift in Sources */,
 				047844032AC9A42E00462F1C /* ChainComdex.swift in Sources */,
 				04C8171D2BA98D75006B800A /* cosmos_params_v1beta1_query.grpc.swift in Sources */,
@@ -6055,6 +6060,7 @@
 				04C8167A2BA98D74006B800A /* cosmos_staking_module_v1_module.pb.swift in Sources */,
 				047843AF2AC991B300462F1C /* injective_tokenfactory_v1beta1_events.pb.swift in Sources */,
 				04A68C1D2ABDA3220041FA13 /* SelectSwapChainCell.swift in Sources */,
+				041F1F7E2C05E5D5008C2F2C /* WebNaviButton.swift in Sources */,
 				E11069B42AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift in Sources */,
 				047843E12AC991B300462F1C /* injective_oracle_v1beta1_events.pb.swift in Sources */,
 				047844022AC9A42E00462F1C /* ChainComdex.swift in Sources */,
