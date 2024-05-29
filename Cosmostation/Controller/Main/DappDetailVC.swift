@@ -19,6 +19,7 @@ import Combine
 import web3swift
 import GRPC
 import NIO
+import Lottie
 
 class DappDetailVC: BaseVC {
     
@@ -29,26 +30,37 @@ class DappDetailVC: BaseVC {
     @IBOutlet weak var backBtn: WebNaviButton!
     @IBOutlet weak var forwardBtn: WebNaviButton!
     @IBOutlet weak var accountName: UILabel!
+    @IBOutlet weak var accountImg: UIImageView!
+    @IBOutlet weak var loadingView: LottieAnimationView!
     
     
-    private var bottomViewHeight: CGFloat = 80
+    private var bottomViewHeight: CGFloat = 70
     private var isAnimationInProgress = false
     
-    var selectedChain: CosmosClass!
+//    var selectedChain: CosmosClass!
     var dappUrl: URL?
     
-    var wcUrl: String?
-    var currentWcUri: String?
+//    var wcUrl: String?
+//    var currentWcUri: String?
 //    var wcV2CurrentProposal: WalletConnectSwiftV2.Session.Proposal?
+    
     
     private var publishers = [AnyCancellable]()
     
     
     var allCosmosChains = [CosmosClass]()
+    var targetChain: CosmosClass!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         baseAccount = BaseData.instance.baseAccount
+        
+        loadingView.isHidden = true
+        loadingView.animation = LottieAnimation.named("loading")
+        loadingView.contentMode = .scaleAspectFit
+        loadingView.loopMode = .loop
+        loadingView.animationSpeed = 1.3
+        loadingView.play()
         
         Task {
             allCosmosChains = await baseAccount.initKeysforSwap()
@@ -65,10 +77,10 @@ class DappDetailVC: BaseVC {
 //        dappUrl = URL(string: "https://app.kava.io/home")
         
         dappUrlLabel.text = dappUrl?.host
+        accountName.text = baseAccount.name
         onInitInjectScript()
         webView.load(URLRequest(url: dappUrl!))
-        self.webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
-
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,12 +93,21 @@ class DappDetailVC: BaseVC {
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
+    func onUpdateAccountName(_ online: Bool) {
+        accountName.isHidden = !online
+//        accountImg.isHidden = !online
+    }
+    
     @IBAction func onBackClicK(_ sender: Any) {
         if (webView.canGoBack) {
             webView.goBack()
         } else {
-            disconnectV2Sessions()
-            dismissOrPopView()
+            print("onBackClicK with finish")
+            print("onBackClicK Pair ", Pair.instance.getPairings().count)
+            print("onBackClicK Sign ", Sign.instance.getSessions().count)
+            wcV2Disconnect { _ in
+                self.dismiss(animated: true)
+            }
         }
     }
     
@@ -104,9 +125,7 @@ class DappDetailVC: BaseVC {
         }
     }
 
-    /*
-     * Inject custom script to webview
-     */
+    // Inject custom script to webview
     private func onInitInjectScript() {
         if let file = Bundle.main.path(forResource: "injectScript", ofType: "js"), let script = try? String(contentsOfFile: file) {
             let userScript = WKUserScript(source: script,
@@ -132,92 +151,45 @@ class DappDetailVC: BaseVC {
         }
     }
     
-    private func onInitWalletConnectV2(_ url: URL) {
+    // Re-Connect with wallet connect v2 (disconnect all as-is Pair & Sign)
+    private func onInitWcV2(_ url: URL) {
         print("onInitWalletConnectV2 ", url)
-        
-        WalletConnectV2_Disconnect { result in
-            print("WalletConnectV2_Disconnect ", result)
-            if (result) {
+        loadingView.isHidden = false
+        wcV2Disconnect { success in
+            print("onInitWalletConnectV2 ", success)
+            if (success) {
                 if let host = url.host, let query = url.query?.removingPercentEncoding, host == "wc" {
-                    var aawcUrl: String?
+                    var wcUrl: String!
                     if (query.starts(with: "uri=")) {
-                        aawcUrl = query.replacingOccurrences(of: "uri=", with: "")
+                        wcUrl = query.replacingOccurrences(of: "uri=", with: "")
                     } else {
-                        aawcUrl = query
+                        wcUrl = query
                     }
-                    print("aawcUrl ", aawcUrl)
-                    self.connectWalletConnectV2(url: aawcUrl!)
+                    print("wcUrl ", wcUrl)
+                    self.wcV2SetSign()
+                    self.wcV2SetPair(uri: wcUrl) { success in
+                        self.loadingView.isHidden = true
+                        if (!success) {
+                            self.onShowToast(NSLocalizedString("error_wc2_failed", comment: ""))
+                            return
+                        }
+                    }
                 }
                 
             } else {
-                print("old seesion not disconnected!!")
-                
+                self.loadingView.isHidden = true
+                self.onShowToast(NSLocalizedString("error_wc2_failed", comment: ""))
+                return
             }
         }
     }
     
     
-    /*
-     * handle walletconnectV2 init from dapp request
-     */
-//    func processQuery(host: String?, query: String?) {
-//        if let host = host, let query = query?.removingPercentEncoding, host == "wc" {
-//            if (query.starts(with: "uri=")) {
-//                wcUrl = query.replacingOccurrences(of: "uri=", with: "")
-//            } else {
-//                wcUrl = query
-//            }
-//            connectSession()
-//        }
-//    }
-    
-    func isConnected() -> Bool {
-        if currentWcUri == wcUrl {
-            return true
-        }
-        return false
-    }
-    
-//    private func disconnect() {
-//        disconnectV2Sessions()
-//        dismissOrPopView()
-//    }
-    
-    private func dismissOrPopView() {
-        if (self.navigationController != nil) {
-            self.navigationController?.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true)
-        }
-    }
-    
-//    func connectSession() {
-//        if isConnected() { return }
-//        
-//        guard let url = wcUrl, url.starts(with: "wc") else {
-//            self.navigationController?.popViewController(animated: false)
-//            return
-//        }
-//        
-//        showWait()
-//        if (url.contains("@2")) {
-//            connectWalletConnectV2(url: url)
-//        }
-//    }
-    
-    private func connectWalletConnectV2(url: String) {
-        setUpAuthSubscribing()
-        currentWcUri = url
-        pairClient(uri: WalletConnectURI(string: url)!)
-    }
-    
-    
-    
-    private func showRequestSign(_ request: Data, _ completion: @escaping(() -> ()), _ cancel: @escaping(() -> ())) {
+    private func popUpRequestSign(_ request: Data, _ completion: @escaping(() -> ()), _ cancel: @escaping(() -> ())) {
         let txSignRequestSheet = TxSignRequestSheet(nibName: "TxSignRequestSheet", bundle: nil)
         txSignRequestSheet.url = dappUrl
         txSignRequestSheet.wcMsg = request
-        txSignRequestSheet.selectedChain = self.selectedChain
+        txSignRequestSheet.selectedChain = self.targetChain
         txSignRequestSheet.completion = { success in
             if (success) {
                 completion()
@@ -229,106 +201,16 @@ class DappDetailVC: BaseVC {
         self.onStartSheet(txSignRequestSheet, 450)
     }
     
-    func updateFeeInfoInAminoMessage(_ webToAppMessage: JSON) -> JSON {
-        print("updateFeeInfoInAminoMessage ", webToAppMessage)
-        var approveSignMessage = webToAppMessage
-        let signDoc = approveSignMessage["params"]["doc"]
-        var isEditFee = true
-        if (approveSignMessage["isEditFee"] == false || approveSignMessage["params"]["isEditFee"] == false) {
-            isEditFee = false
-        }
-        
-        if (isEditFee == false && (signDoc["fee"]["amount"].isEmpty || signDoc["fee"]["gas"] == "0") || isEditFee == true) {
-            let chainId = signDoc["chain_id"].stringValue
-            if let targetChain = baseAccount.allCosmosClassChains.filter({ $0.chainIdCosmos == chainId }).first {
-                if let gasRate = targetChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == targetChain.stakeDenom }).first {
-                    let gasLimit = NSDecimalNumber.init(value: UInt64((Double(signDoc["fee"]["gas"].stringValue) ?? 0) * targetChain.gasMultiply()))
-                    let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
-                    
-                    approveSignMessage["params"]["doc"]["fee"]["amount"] = [["amount": String(feeCoinAmount!.stringValue), "denom": targetChain.stakeDenom]]
-                    return approveSignMessage
-                }
-            }
-        }
-        return approveSignMessage
-    }
-    
-    func approveInjectSignAmino(_ webToAppMessage: JSON, _ webToAppMessageId: JSON) {
-        var data = JSON()
-        let json = webToAppMessage["params"]["doc"]
-        let sortedJsonData = try! webToAppMessage["params"]["doc"].rawData(options: [.sortedKeys, .withoutEscapingSlashes])
-        let sig = self.getSignatureResponse(privateKey: self.selectedChain.privateKey!, sortedJsonData)
-        data["pub_key"] = sig.pubKey!
-        data["signature"].stringValue = sig.signature!
-        data["signed_doc"] = json
-        approveWebToApp(data, webToAppMessage, webToAppMessageId)
-    }
-    
-    func updateFeeInfoInDirectMessage(_ webToAppMessage: JSON) -> JSON {
-        var approveSignMessage = webToAppMessage
-        
-        if let authInfoBase64Decoded = Data.dataFromHex(approveSignMessage["params"]["doc"]["auth_info_bytes"].stringValue) {
-            if var authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: authInfoBase64Decoded) {
-                let gasLimit = NSDecimalNumber.init(value: UInt64(Double(authInfo.fee.gasLimit) * self.selectedChain.gasMultiply()))
-                if let gasRate = self.selectedChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == self.selectedChain.stakeDenom }).first {
-                    let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
-                    authInfo.fee.amount[0].amount = feeCoinAmount!.stringValue
-                    
-                    let authInfoHex = try! authInfo.serializedData()
-                    approveSignMessage["params"]["doc"]["auth_info_bytes"].stringValue = authInfoHex.toHexString()
-                    return approveSignMessage
-                }
-            }
-        }
-        return approveSignMessage
-    }
-    
-    func approveInjectSignDirect(_ webToAppMessage: JSON, _ webToAppMessageId: JSON) {
-        var data = JSON()
-        let signDoc = webToAppMessage["params"]["doc"]
-        if let chainId = signDoc["chain_id"].rawString(),
-           let bodyBase64Decoded = Data.dataFromHex(signDoc["body_bytes"].stringValue),
-           let bodyBytes = try? Cosmos_Tx_V1beta1_TxBody.init(serializedData: bodyBase64Decoded),
-           let authInfoBase64Decoded = Data.dataFromHex(signDoc["auth_info_bytes"].stringValue),
-           let authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: authInfoBase64Decoded) {
-            let signedDoc = Cosmos_Tx_V1beta1_SignDoc.with {
-                $0.bodyBytes = try! bodyBytes.serializedData()
-                $0.authInfoBytes = try! authInfo.serializedData()
-                $0.chainID = chainId
-                $0.accountNumber = signDoc["account_number"].uInt64Value
-            }
-
-            let sig = self.getSignatureResponse(privateKey: self.selectedChain.privateKey!, try! signedDoc.serializedData())
-            data["pub_key"] = sig.pubKey!
-            data["signature"].stringValue = sig.signature!
-            data["signed_doc"] = signDoc
-            approveWebToApp(data, webToAppMessage, webToAppMessageId)
-
-        } else {
-            rejectWebToApp("Error", webToAppMessage, webToAppMessageId)
-        }
-    }
-    
-    func approveWebToApp(_ data: JSON, _ message: JSON, _ messageId: JSON) {
-        let retVal = ["response": ["result": data], "message": message, "isCosmostation": true, "messageId": messageId]
-        self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
-    }
-    
-    func rejectWebToApp(_ error: String, _ message: JSON, _ messageId: JSON) {
-        let retVal = ["response": ["error": error], "message": message, "isCosmostation": true, "messageId": messageId]
-        self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
-    }
-    
-    func getSignatureResponse(privateKey: Data, _ signData: Data) -> (signature: String?, pubKey: JSON?) {
+    private func getSignatureResponse(_ privateKey: Data, _ signData: Data) -> (signature: String?, pubKey: JSON?) {
         var result: (String?, JSON?)
         var sig: Data?
         var pubkey: JSON?
         var type: String?
-        if (self.selectedChain is ChainEvmosEVM || self.selectedChain is ChainXplaEVM || self.selectedChain is ChainCantoEVM) {
+        if (self.targetChain is ChainEvmosEVM || self.targetChain is ChainXplaEVM || self.targetChain is ChainCantoEVM) {
             sig = try? ECDSA.compactsign(HDWalletKit.Crypto.sha3keccak256(data: signData), privateKey: privateKey)
             type = ETHERMINT_KEY_TYPE_PUBLIC
             
-        } else if (self.selectedChain is ChainInjective) {
+        } else if (self.targetChain is ChainInjective) {
             sig = try? ECDSA.compactsign(HDWalletKit.Crypto.sha3keccak256(data: signData), privateKey: privateKey)
             type = INJECTIVE_KEY_TYPE_PUBLIC
             
@@ -336,94 +218,76 @@ class DappDetailVC: BaseVC {
             sig = try? ECDSA.compactsign(signData.sha256(), privateKey: privateKey)
             type = COSMOS_KEY_TYPE_PUBLIC
         }
-        pubkey = ["type" : type, "value" : selectedChain.publicKey?.base64EncodedString()]
+        pubkey = ["type" : type, "value" : targetChain.publicKey?.base64EncodedString()]
         result = (sig?.base64EncodedString(), pubkey)
         return result
     }
-}
-
-extension CosmosClass {
     
-    func fetchFilteredCosmosChain(_ baseAccount: BaseAccount) {
-        let keychain = BaseData.instance.getKeyChain()
-        if (baseAccount.type == .withMnemonic) {
-            if let secureData = try? keychain.getString(baseAccount.uuid.sha1()),
-               let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                if (bechAddress.isEmpty) {
-                    setInfoWithSeed(seed, baseAccount.lastHDPath)
-                }
-            }
-            
-        } else if (baseAccount.type == .onlyPrivateKey) {
-            if let secureKey = try? keychain.getString(baseAccount.uuid.sha1()) {
-                if (bechAddress.isEmpty) {
-                    setInfoWithPrivateKey(Data.dataFromHex(secureKey!)!)
-                }
-            }
-        }
-    }
 }
 
+
+/**
+ * Injection hooking implemet
+ */
 extension DappDetailVC: WKScriptMessageHandler {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("userContentController didReceive")
         if (message.name == "station") {
             let bodyJSON = JSON(parseJSON: message.body as? String ?? "")
             let messageJSON = bodyJSON["message"]
             let method = messageJSON["method"].stringValue
             
-            print("bodyJSON ", bodyJSON)
+            print("userContentController method ", method)
+            print("userContentController bodyJSON ", bodyJSON)
             
             if (method == "cos_supportedChainIds") {
                 let chainIds = allCosmosChains.filter { $0.chainIdCosmos != nil }.map{ $0.chainIdCosmos }
                 if (chainIds.count > 0) {
                     let data:JSON = ["official": chainIds, "unofficial": []]
-                    approveWebToApp(data, messageJSON, bodyJSON["messageId"])
+                    injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
                 } else {
-                    rejectWebToApp("Error", messageJSON, bodyJSON["messageId"])
+                    injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
                 }
                 
             } else if (method == "cos_supportedChainNames") {
                 let chainNames = allCosmosChains.filter { $0.chainDappName() != nil }.map{ $0.chainDappName() }
                 if (chainNames.count > 0) {
                     let data:JSON = ["official": chainNames, "unofficial": []]
-                    approveWebToApp(data, messageJSON, bodyJSON["messageId"])
+                    injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
                 } else {
-                    rejectWebToApp("Error", messageJSON, bodyJSON["messageId"])
+                    injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
                 }
                 
             } else if (method == "cos_addChain" || method == "cos_disconnect") {
-                approveWebToApp(true, messageJSON, bodyJSON["messageId"])
+                injectionRequestApprove(true, messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "cos_requestAccount" || method == "cos_account") {
                 let requestedChainId = messageJSON["params"]["chainName"].stringValue
-                
                 var data = JSON()
                 data["isKeystone"] = false
                 data["isEthermint"] = false
                 data["isLedger"] = false
                 data["name"].stringValue = baseAccount.name
                 if let requestedChain = allCosmosChains.filter({ $0.chainIdCosmos == requestedChainId }).first {
-                    self.selectedChain = requestedChain
+                    self.targetChain = requestedChain
                     data["address"].stringValue = requestedChain.bechAddress
                     data["publicKey"].stringValue = requestedChain.publicKey!.toHexString()
-                    approveWebToApp(data, messageJSON, bodyJSON["messageId"])
+                    injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
                 } else {
                     onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
                 }
                 
             } else if (method == "cos_signAmino") {
-                let aminoMessage = updateFeeInfoInAminoMessage(messageJSON)
-                showRequestSign(try! aminoMessage["params"]["doc"].rawData(),
-                                {self.approveInjectSignAmino(aminoMessage, bodyJSON["messageId"])},
-                                {self.rejectWebToApp("Cancel", aminoMessage, bodyJSON["messageId"])})
+                let aminoMessage = injectionAminoModifyFee(messageJSON)
+                popUpRequestSign(try! aminoMessage["params"]["doc"].rawData(),
+                                {self.injectionAminoRequestApprove(aminoMessage, bodyJSON["messageId"])},
+                                {self.injectionRequestReject("Cancel", aminoMessage, bodyJSON["messageId"])})
                 
             } else if (method == "cos_signDirect") {
-                let directMessage = updateFeeInfoInDirectMessage(messageJSON)
-                showRequestSign(try! directMessage["params"]["doc"].rawData(),
-                                {self.approveInjectSignDirect(directMessage, bodyJSON["messageId"])},
-                                {self.rejectWebToApp("Cancel", directMessage, bodyJSON["messageId"])})
+                let directMessage = injectionDirectModifyFee(messageJSON)
+                popUpRequestSign(try! directMessage["params"]["doc"].rawData(),
+                                {self.injectionDirectRequestApprove(directMessage, bodyJSON["messageId"])},
+                                {self.injectionRequestReject("Cancel", directMessage, bodyJSON["messageId"])})
                 
             } else if (method == "cos_sendTransaction") {
                 let params = messageJSON["params"]
@@ -431,7 +295,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                 let mode = params["mode"].intValue
                 
                 guard let txData = Data(base64Encoded: txBytes) else {
-                    rejectWebToApp("Error", messageJSON, bodyJSON["messageId"])
+                    injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
                     return
                 }
                 
@@ -440,7 +304,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                     $0.txBytes = txData
                 }
                 
-                let channel = getConnection(self.selectedChain)
+                let channel = getConnection(self.targetChain)
                 DispatchQueue.global().async {
                     if let response = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel)
                         .broadcastTx(request, callOptions: self.getCallOptions()).response.wait() {
@@ -461,36 +325,125 @@ extension DappDetailVC: WKScriptMessageHandler {
                         data["raw_log"].stringValue = response.txResponse.rawLog
                         txResponse["tx_response"] = data
                         DispatchQueue.main.async {
-                            self.approveWebToApp(txResponse, messageJSON, bodyJSON["messageId"])
+                            self.injectionRequestApprove(txResponse, messageJSON, bodyJSON["messageId"])
                         }
                     } else {
                         DispatchQueue.main.async {
-                            self.rejectWebToApp("Unknown Error", messageJSON, bodyJSON["messageId"])
+                            self.injectionRequestReject("Unknown Error", messageJSON, bodyJSON["messageId"])
                         }
                     }
                     try? channel.close().wait()
                 }
                 
             } else {
-                self.rejectWebToApp("Not implemented", messageJSON, bodyJSON["messageId"])
+                self.injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
             }
             
 //            else if (method == "cos_activatedChainIds" || method == "ten_activatedChainIds") {
 //                if let chainIds = BaseData.instance.dAppConfig?["supportChainIds"].arrayValue[0] {
-//                    approveWebToApp(chainIds, messageJSON, bodyJSON["messageId"])
+//                    injectionRequestApprove(chainIds, messageJSON, bodyJSON["messageId"])
 //                } else {
-//                    rejectWebToApp("Error", messageJSON, bodyJSON["messageId"])
+//                    injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
 //                }
 //                
 //            } else if (method == "cos_activatedChainNames" || method == "ten_activatedChainNames") {
 //                if let chainNames = BaseData.instance.dAppConfig?["supportChainNames"].arrayValue[0] {
-//                    approveWebToApp(chainNames, messageJSON, bodyJSON["messageId"])
+//                    injectionRequestApprove(chainNames, messageJSON, bodyJSON["messageId"])
 //                } else {
-//                    rejectWebToApp("Error", messageJSON, bodyJSON["messageId"])
+//                    injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
 //                }
 //                
 //            }
         }
+    }
+    
+    
+    private func injectionRequestApprove(_ data: JSON, _ message: JSON, _ messageId: JSON) {
+        let retVal = ["response": ["result": data], "message": message, "isCosmostation": true, "messageId": messageId]
+        self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+    }
+    
+    private func injectionRequestReject(_ error: String, _ message: JSON, _ messageId: JSON) {
+        let retVal = ["response": ["error": error], "message": message, "isCosmostation": true, "messageId": messageId]
+        self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+    }
+    
+    private func injectionAminoRequestApprove(_ webToAppMessage: JSON, _ webToAppMessageId: JSON) {
+        var data = JSON()
+        let json = webToAppMessage["params"]["doc"]
+        let sortedJsonData = try! webToAppMessage["params"]["doc"].rawData(options: [.sortedKeys, .withoutEscapingSlashes])
+        let sig = getSignatureResponse(self.targetChain.privateKey!, sortedJsonData)
+        data["pub_key"] = sig.pubKey!
+        data["signature"].stringValue = sig.signature!
+        data["signed_doc"] = json
+        injectionRequestApprove(data, webToAppMessage, webToAppMessageId)
+    }
+    
+    private func injectionDirectRequestApprove(_ webToAppMessage: JSON, _ webToAppMessageId: JSON) {
+        var data = JSON()
+        let signDoc = webToAppMessage["params"]["doc"]
+        if let chainId = signDoc["chain_id"].rawString(),
+           let bodyBase64Decoded = Data.dataFromHex(signDoc["body_bytes"].stringValue),
+           let bodyBytes = try? Cosmos_Tx_V1beta1_TxBody.init(serializedData: bodyBase64Decoded),
+           let authInfoBase64Decoded = Data.dataFromHex(signDoc["auth_info_bytes"].stringValue),
+           let authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: authInfoBase64Decoded) {
+            let signedDoc = Cosmos_Tx_V1beta1_SignDoc.with {
+                $0.bodyBytes = try! bodyBytes.serializedData()
+                $0.authInfoBytes = try! authInfo.serializedData()
+                $0.chainID = chainId
+                $0.accountNumber = signDoc["account_number"].uInt64Value
+            }
+
+            let sig = getSignatureResponse(self.targetChain.privateKey!, try! signedDoc.serializedData())
+            data["pub_key"] = sig.pubKey!
+            data["signature"].stringValue = sig.signature!
+            data["signed_doc"] = signDoc
+            injectionRequestApprove(data, webToAppMessage, webToAppMessageId)
+        } else {
+            injectionRequestReject("Error", webToAppMessage, webToAppMessageId)
+        }
+    }
+    
+    private func injectionAminoModifyFee(_ webToAppMessage: JSON) -> JSON {
+        var approveSignMessage = webToAppMessage
+        let signDoc = approveSignMessage["params"]["doc"]
+        var isEditFee = true
+        if (approveSignMessage["isEditFee"] == false || approveSignMessage["params"]["isEditFee"] == false) {
+            isEditFee = false
+        }
+        
+        if (isEditFee == false && (signDoc["fee"]["amount"].isEmpty || signDoc["fee"]["gas"] == "0") || isEditFee == true) {
+            let chainId = signDoc["chain_id"].stringValue
+            if let targetChain = allCosmosChains.filter({ $0.chainIdCosmos == chainId }).first {
+                if let gasRate = targetChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == targetChain.stakeDenom }).first {
+                    let gasLimit = NSDecimalNumber.init(value: UInt64((Double(signDoc["fee"]["gas"].stringValue) ?? 0) * targetChain.gasMultiply()))
+                    let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
+                    
+                    approveSignMessage["params"]["doc"]["fee"]["amount"] = [["amount": String(feeCoinAmount!.stringValue), "denom": targetChain.stakeDenom]]
+                    return approveSignMessage
+                }
+            }
+        }
+        return approveSignMessage
+    }
+    
+    private func injectionDirectModifyFee(_ webToAppMessage: JSON) -> JSON {
+        var approveSignMessage = webToAppMessage
+        
+        if let authInfoBase64Decoded = Data.dataFromHex(approveSignMessage["params"]["doc"]["auth_info_bytes"].stringValue) {
+            if var authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: authInfoBase64Decoded) {
+                let gasLimit = NSDecimalNumber.init(value: UInt64(Double(authInfo.fee.gasLimit) * self.targetChain.gasMultiply()))
+                if let gasRate = self.targetChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == self.targetChain.stakeDenom }).first {
+                    let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
+                    authInfo.fee.amount[0].amount = feeCoinAmount!.stringValue
+                    
+                    let authInfoHex = try! authInfo.serializedData()
+                    approveSignMessage["params"]["doc"]["auth_info_bytes"].stringValue = authInfoHex.toHexString()
+                    return approveSignMessage
+                }
+            }
+        }
+        return approveSignMessage
     }
 }
 
@@ -521,12 +474,13 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("webView didFinish ", webView.url?.absoluteString)
+        print("webView didFinish ", webView.themeColor?.cgColor)
         if let bgColor = webView.themeColor?.cgColor {
             view.backgroundColor = UIColor(cgColor: bgColor)
-            bottomView.backgroundColor = UIColor(cgColor: bgColor)
+//            bottomView.backgroundColor = UIColor(cgColor: bgColor)
         } else {
             view.backgroundColor = .clear
-            bottomView.backgroundColor = .clear
+//            bottomView.backgroundColor = .clear
         }
     }
     
@@ -614,7 +568,9 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
                 
                 if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
 //                    UIApplication.shared.open(finalUrl, options: [:])
-                    onInitWalletConnectV2(URL(string: newUrl)!)
+//                    onInitWcV2(URL(string: newUrl)!)
+                    print("finalUrl ", finalUrl)
+                    onInitWcV2(finalUrl)
                     decisionHandler(.cancel)
                     return
                 }
@@ -646,14 +602,18 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
     }
 }
 
+
+/**
+ * Wallet Connect V2 implemet
+ */
 extension DappDetailVC {
     
-    func setUpAuthSubscribing() {
+    private func wcV2SetSign() {
         Sign.instance.sessionProposalPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sessionProposal, context in
                 if self?.isViewLoaded == true && self?.view.window != nil {
-                    self?.approveProposal(proposal: sessionProposal)
+                    self?.wcV2ApproveProposal(proposal: sessionProposal)
                 }
             }.store(in: &publishers)
         
@@ -661,179 +621,165 @@ extension DappDetailVC {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sessionRequest, context in
                 if self?.isViewLoaded == true && self?.view.window != nil {
-                    self?.showSessionRequest(request: sessionRequest)
+                    self?.wcV2SessionRequest(request: sessionRequest)
                 }
             }.store(in: &publishers)
     }
     
     @MainActor
-    private func pairClient(uri: WalletConnectURI) {
+    private func wcV2SetPair(uri: String, _ completionHandler: @escaping (Bool) -> Void) {
         Task {
+            guard let wcUri = WalletConnectURI(string: uri) else {
+                completionHandler(false)
+                return
+            }
             do {
-                try await Pair.instance.pair(uri: uri)
+                try await Pair.instance.pair(uri: wcUri)
+                completionHandler(true)
             } catch {
-                print("Pairing connect error: \(error)")
-                hideWait()
-            }
-        }
-    }
-    
-    private func approveProposal(proposal: WalletConnectSwiftV2.Session.Proposal) {
-        var sessionNamespaces = [String: SessionNamespace]()
-        proposal.requiredNamespaces.forEach { namespaces in
-            let caip2Namespace = namespaces.key
-            let proposalNamespace = namespaces.value
-            if let currentChain = baseAccount.allCosmosClassChains.filter({ $0.chainIdCosmos == proposalNamespace.chains?.first?.reference }).first {
-                currentChain.fetchFilteredCosmosChain(self.baseAccount)
-                
-                self.selectedChain = currentChain
-                let accounts = Set(namespaces.value.chains!.filter { chain in
-                    baseAccount.allCosmosClassChains.filter({ $0.chainIdCosmos == chain.reference }).first != nil
-                }.compactMap { chain in
-                    WalletConnectSwiftV2.Account(chainIdentifier: chain.absoluteString, address: self.selectedChain.bechAddress)
-                })
-                let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
-                sessionNamespaces[caip2Namespace] = sessionNamespace
-                
-            } else {
-                self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
-            }
-        }
-        self.approve(proposalId:  proposal.id, namespaces: sessionNamespaces)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
-            self.hideWait()
-        })
-    }
-    
-    private func showSessionRequest(request: WalletConnectSwiftV2.Request) {
-        if request.method == "cosmos_signAmino" {
-            if let json = try? JSON(data: request.encoded) {
-                let aminoMessage = self.updateFeeInfoInAminoWcMessage(json)
-                self.showRequestSign(try! aminoMessage["params"]["signDoc"].rawData(),
-                                     {self.approveV2CosmosAminoRequest(wcV2Request: request)},
-                                     {self.respondOnReject(request: request)})
-            }
-            
-        } else if request.method == "cosmos_signDirect" {
-            if let json = try? JSON(data: request.encoded) {
-                let directMessage = self.updateFeeInfoInDirectWcMessage(json)
-                self.showRequestSign(try! directMessage["params"]["signDoc"].rawData(),
-                                     {self.approveV2CosmosDirectRequest(wcV2Request: request)},
-                                     {self.respondOnReject(request: request)})
-            }
-            
-        } else if request.method == "cosmos_getAccounts" {
-            let v2Accounts = [["address": self.selectedChain.bechAddress, "pubkey": self.selectedChain.publicKey?.base64EncodedString(), "algo": "secp256k1"]]
-            self.respondOnSign(request: request, response: AnyCodable(v2Accounts))
-        }
-    }
-    
-    @MainActor
-    private func respondOnSign(request: WalletConnectSwiftV2.Request, response: AnyCodable) {
-        Task {
-            do {
-                try await Sign.instance.respond(topic: request.topic, requestId: request.id, response: .response(response))
-            } catch {
-                print("Respond Error: \(error.localizedDescription)")
-            }
-        }
-    }
-
-    @MainActor
-    private func respondOnReject(request: WalletConnectSwiftV2.Request) {
-        Task {
-            do {
-                try await Sign.instance.respond(
-                    topic: request.topic,
-                    requestId: request.id,
-                    response: .error(.init(code: 0, message: ""))
-                )
-            } catch {
-                print("Respond Error: \(error.localizedDescription)")
+                print("wcV2SetPair error: \(error)")
+                completionHandler(false)
             }
         }
     }
     
     @MainActor
-    private func approve(proposalId: String, namespaces: [String: SessionNamespace]) {
+    private func wcV2Disconnect(_ completionHandler: @escaping (Bool) -> Void) {
         Task {
             do {
-                try await Sign.instance.approve(proposalId: proposalId, namespaces: namespaces)
-            } catch {
-                print("Approve Session error: \(error)")
-            }
-        }
-    }
-    
-    @MainActor
-    private func reject(proposalId: String, reason: RejectionReason) {
-        Task {
-            do {
-                try await Sign.instance.reject(proposalId: proposalId, reason: reason)
-            } catch {
-                print("Reject Session error: \(error)")
-            }
-        }
-    }
-    
-    @MainActor
-    private func disconnectV2Sessions() {
-        Task {
-            do {
+//                print("wcV2Disconnect Pair ", Pair.instance.getPairings().count)
                 for pairing in Pair.instance.getPairings() {
                     try await Pair.instance.disconnect(topic: pairing.topic)
-                    try await Sign.instance.disconnect(topic: pairing.topic)
                 }
-            } catch {
-                print("Disconnect error: \(error)")
-            }
-        }
-    }
-    
-    @MainActor
-    private func WalletConnectV2_Disconnect(_ completionHandler: @escaping (Bool) -> Void) {
-        Task {
-            do {
-                for pairing in Pair.instance.getPairings() {
-                    try await Pair.instance.disconnect(topic: pairing.topic)
-                    try await Sign.instance.disconnect(topic: pairing.topic)
+                
+//                print("wcV2Disconnect Sign ", Sign.instance.getSessions().count)
+                for session in Sign.instance.getSessions() {
+                    try await Sign.instance.disconnect(topic: session.topic)
                 }
                 completionHandler(true)
             } catch {
-                print("WalletConnectV2_Disconnect error: \(error)")
+                print("wcV2Disconnect error: \(error)")
                 completionHandler(false)
             }
         }
     }
     
     
-    func getConnection(_ chain: CosmosClass) -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpc().0, port: chain.getGrpc().1)
+    private func wcV2ApproveProposal(proposal: WalletConnectSwiftV2.Session.Proposal) {
+        print("wcV2ApproveProposal ", proposal)
+        var sessionNamespaces = [String: SessionNamespace]()
+        proposal.requiredNamespaces.forEach { namespaces in
+            print("wcV2ApproveProposal ", namespaces)
+            let caip2Namespace = namespaces.key
+            let proposalNamespace = namespaces.value
+            if let targetChain = allCosmosChains.filter({ $0.chainIdCosmos == proposalNamespace.chains?.first?.reference }).first {
+                self.targetChain = targetChain
+                let accounts = Set(namespaces.value.chains!.filter { chain in
+                    allCosmosChains.filter({ $0.chainIdCosmos == chain.reference }).first != nil
+                }.compactMap { chain in
+                    WalletConnectSwiftV2.Account(chainIdentifier: chain.absoluteString, address: targetChain.bechAddress)
+                })
+                
+                let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
+                sessionNamespaces[caip2Namespace] = sessionNamespace
+                print("wcV2ApproveProposal accounts ", accounts)
+                print("wcV2ApproveProposal approveProposal ", sessionNamespaces)
+                self.wcV2ApproveProposal(proposalId:  proposal.id, namespaces: sessionNamespaces)
+                
+            } else {
+                let rejectResponse: RejectionReason = .userRejectedChains
+                self.wcV2RejectProposal(proposalId:  proposal.id, reason: rejectResponse)
+                self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
+            }
+        }
     }
     
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
-        return callOptions
+    @MainActor
+    private func wcV2ApproveProposal(proposalId: String, namespaces: [String: SessionNamespace]) {
+        Task {
+            do {
+                try await Sign.instance.approve(proposalId: proposalId, namespaces: namespaces)
+            } catch {
+                print("wcV2ApproveProposal error: \(error)")
+            }
+        }
     }
     
-    func approveV2CosmosAminoRequest(wcV2Request: WalletConnectSwiftV2.Request) {
+    @MainActor
+    private func wcV2RejectProposal(proposalId: String, reason: RejectionReason) {
+        Task {
+            do {
+                try await Sign.instance.reject(proposalId: proposalId, reason: reason)
+            } catch {
+                print("wcV2RejectProposal error: \(error)")
+            }
+        }
+    }
+    
+    
+    private func wcV2SessionRequest(request: WalletConnectSwiftV2.Request) {
+        print("wcV2sessionRequest ", request.method)
+        if request.method == "cosmos_signAmino" {
+            if let json = try? JSON(data: request.encoded) {
+                let aminoMessage = wcV2AminoModifyFee(json)
+                popUpRequestSign(try! aminoMessage["params"]["signDoc"].rawData(),
+                                     {self.wcV2AminoRequestApprove(wcV2Request: request)},
+                                     {self.wcV2RequestReject(request: request)})
+            }
+            
+        } else if request.method == "cosmos_signDirect" {
+            if let json = try? JSON(data: request.encoded) {
+                let directMessage = wcV2DirectModifyFee(json)
+                popUpRequestSign(try! directMessage["params"]["signDoc"].rawData(),
+                                     {self.wcV2DirectRequestApprove(wcV2Request: request)},
+                                     {self.wcV2RequestReject(request: request)})
+            }
+            
+        } else if request.method == "cosmos_getAccounts" {
+            let v2Accounts = [["address": self.targetChain.bechAddress, "pubkey": self.targetChain.publicKey?.base64EncodedString(), "algo": "secp256k1"]]
+            wcV2RequestApprove(request: request, response: AnyCodable(v2Accounts))
+        }
+    }
+    
+    @MainActor
+    private func wcV2RequestApprove(request: WalletConnectSwiftV2.Request, response: AnyCodable) {
+        Task {
+            do {
+                try await Sign.instance.respond(topic: request.topic, requestId: request.id, response: .response(response))
+            } catch {
+                print("wcV2RequestApprove Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    @MainActor
+    private func wcV2RequestReject(request: WalletConnectSwiftV2.Request) {
+        Task {
+            do {
+                let rejectResponse: RPCResult = .error(.init(code: 0, message: ""))
+                try await Sign.instance.respond(topic: request.topic, requestId: request.id, response: rejectResponse)
+            } catch {
+                print("wcV2RequestReject Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private func wcV2AminoRequestApprove(wcV2Request: WalletConnectSwiftV2.Request) {
         if let json = try? JSON(data: wcV2Request.encoded) {
-            let signJSON = self.updateFeeInfoInAminoWcMessage(json)
+            let signJSON = wcV2AminoModifyFee(json)
             let signDoc = signJSON["params"]["signDoc"]
             let sortedJsonData = try? signDoc.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
-            let sig = self.getSignatureResponse(privateKey: self.selectedChain.privateKey!, sortedJsonData!)
+            let sig = getSignatureResponse(self.targetChain.privateKey!, sortedJsonData!)
             let signature: JSON = ["signature" : sig.signature, "pub_key" : sig.pubKey]
             let response: JSON = ["signed" : signDoc.rawValue, "signDoc" : signDoc.rawValue, "signature" : signature.dictionaryValue]
-            self.respondOnSign(request: wcV2Request, response: AnyCodable(response))
+            self.wcV2RequestApprove(request: wcV2Request, response: AnyCodable(response))
             self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
         }
     }
     
-    func approveV2CosmosDirectRequest(wcV2Request: WalletConnectSwiftV2.Request) {
+    private func wcV2DirectRequestApprove(wcV2Request: WalletConnectSwiftV2.Request) {
         if let json = try? JSON(data: wcV2Request.encoded) {
-            let signJSON = self.updateFeeInfoInDirectWcMessage(json)
+            let signJSON = wcV2DirectModifyFee(json)
             let signDoc = signJSON["params"]["signDoc"]
             if let bodyString = signDoc["bodyBytes"].rawString(),
                let chainId = signDoc["chainId"].rawString(),
@@ -846,15 +792,15 @@ extension DappDetailVC {
                     $0.chainID = chainId
                     $0.accountNumber = signDoc["accountNumber"].uInt64Value
                 }
-                let sig = self.getSignatureResponse(privateKey: self.selectedChain.privateKey!, try! signedDoc.serializedData())
+                let sig = getSignatureResponse(self.targetChain.privateKey!, try! signedDoc.serializedData())
                 let signature: JSON = ["signature" : sig.signature, "pub_key" : sig.pubKey]
-                self.respondOnSign(request: wcV2Request, response: AnyCodable(signature.dictionaryValue))
+                self.wcV2RequestApprove(request: wcV2Request, response: AnyCodable(signature.dictionaryValue))
                 self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
             }
         }
     }
     
-    private func updateFeeInfoInAminoWcMessage(_ wcV2RequestMessage: JSON) -> JSON {
+    private func wcV2AminoModifyFee(_ wcV2RequestMessage: JSON) -> JSON {
         var approveSignMessage = wcV2RequestMessage
         let signDoc = approveSignMessage["params"]["signDoc"]
         var isEditFee = true
@@ -864,7 +810,7 @@ extension DappDetailVC {
         
         if (isEditFee == false && (signDoc["fee"]["amount"].isEmpty || signDoc["fee"]["gas"] == "0") || isEditFee == true) {
             let chainId = signDoc["chain_id"].stringValue
-            if let targetChain = baseAccount.allCosmosClassChains.filter({ $0.chainIdCosmos == chainId }).first {
+            if let targetChain = allCosmosChains.filter({ $0.chainIdCosmos == chainId }).first {
                 if let gasRate = targetChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == targetChain.stakeDenom }).first {
                     let gasLimit = NSDecimalNumber.init(value: UInt64((Double(signDoc["fee"]["gas"].stringValue) ?? 0) * targetChain.gasMultiply()))
                     let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
@@ -877,13 +823,12 @@ extension DappDetailVC {
         return approveSignMessage
     }
     
-    private func updateFeeInfoInDirectWcMessage(_ wcV2RequestMessage: JSON) -> JSON {
+    private func wcV2DirectModifyFee(_ wcV2RequestMessage: JSON) -> JSON {
         var approveSignMessage = wcV2RequestMessage
-        
         if let authInfoString = approveSignMessage["params"]["signDoc"]["authInfoBytes"].rawString() {
             if var authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: Data.dataFromHex(authInfoString)!) {
-                let gasLimit = NSDecimalNumber.init(value: UInt64(Double(authInfo.fee.gasLimit) * self.selectedChain.gasMultiply()))
-                if let gasRate = self.selectedChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == self.selectedChain.stakeDenom }).first {
+                let gasLimit = NSDecimalNumber.init(value: UInt64(Double(authInfo.fee.gasLimit) * self.targetChain.gasMultiply()))
+                if let gasRate = self.targetChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == self.targetChain.stakeDenom }).first {
                     let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
                     authInfo.fee.amount[0].amount = feeCoinAmount!.stringValue
                 }
@@ -894,4 +839,24 @@ extension DappDetailVC {
         }
         return approveSignMessage
     }
+}
+
+
+
+/**
+ * gRPC Handle
+ */
+extension DappDetailVC {
+    
+    func getConnection(_ chain: CosmosClass) -> ClientConnection {
+        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpc().0, port: chain.getGrpc().1)
+    }
+    
+    func getCallOptions() -> CallOptions {
+        var callOptions = CallOptions()
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
+        return callOptions
+    }
+    
 }

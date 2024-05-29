@@ -1160,6 +1160,7 @@
 "error_tranfer_disabled" = "Send functionality of the selected chain is currently disabled.\nIt can be activated later through the onchain governance procedure.";
 "error_tranfer_disabled_bgt" = "BGT is a staking-only asset. \nTransmission is not possible.";
 "error_bera_vote_one_proposal" = "You can only vote for one BeraChain.";
+"error_wc2_failed" = "DApp integration (Wallet Connect V2) failed.";
 
 
 "alert_title_no_private_key" = "No Private Key";

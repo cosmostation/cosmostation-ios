@@ -373,8 +373,6 @@ class CosmosClassVC: BaseVC {
         if (BaseData.instance.showEvenReview() && selectedChain.supportCw721) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(receiveTabBar)
         tabbar.items.append(historyTabBar)
-        print("showEvenReview ", BaseData.instance.showEvenReview())
-        print("isEcosystem ", selectedChain.isEcosystem())
         if (BaseData.instance.showEvenReview() && selectedChain.isEcosystem()) { tabbar.items.append(ecosystemTabBar) }
         if (!selectedChain.getChainListParam().isEmpty) { tabbar.items.append(aboutTabBar) }
         
