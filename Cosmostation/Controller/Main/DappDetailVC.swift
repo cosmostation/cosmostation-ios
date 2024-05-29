@@ -39,12 +39,6 @@ class DappDetailVC: BaseVC {
     
 //    var selectedChain: CosmosClass!
     var dappUrl: URL?
-    
-//    var wcUrl: String?
-//    var currentWcUri: String?
-//    var wcV2CurrentProposal: WalletConnectSwiftV2.Session.Proposal?
-    
-    
     private var publishers = [AnyCancellable]()
     
     
@@ -154,32 +148,17 @@ class DappDetailVC: BaseVC {
     // Re-Connect with wallet connect v2 (disconnect all as-is Pair & Sign)
     private func onInitWcV2(_ url: URL) {
         print("onInitWalletConnectV2 ", url)
-        loadingView.isHidden = false
-        wcV2Disconnect { success in
-            print("onInitWalletConnectV2 ", success)
-            if (success) {
-                if let host = url.host, let query = url.query?.removingPercentEncoding, host == "wc" {
-                    var wcUrl: String!
-                    if (query.starts(with: "uri=")) {
-                        wcUrl = query.replacingOccurrences(of: "uri=", with: "")
-                    } else {
-                        wcUrl = query
-                    }
-                    print("wcUrl ", wcUrl)
-                    self.wcV2SetSign()
-                    self.wcV2SetPair(uri: wcUrl) { success in
-                        self.loadingView.isHidden = true
-                        if (!success) {
-                            self.onShowToast(NSLocalizedString("error_wc2_failed", comment: ""))
-                            return
-                        }
-                    }
-                }
-                
+        if let host = url.host, let query = url.query?.removingPercentEncoding, host == "wc" {
+            var wcUrl: String!
+            if (query.starts(with: "uri=")) {
+                wcUrl = query.replacingOccurrences(of: "uri=", with: "")
             } else {
-                self.loadingView.isHidden = true
-                self.onShowToast(NSLocalizedString("error_wc2_failed", comment: ""))
-                return
+                wcUrl = query
+            }
+            print("wcUrl ", wcUrl)
+            self.wcV2SetSign()
+            self.wcV2SetPair(uri: wcUrl) { success in
+                print("wcV2SetPair ", success)
             }
         }
     }
@@ -567,8 +546,6 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
                 print("newUrl ", newUrl)
                 
                 if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
-//                    UIApplication.shared.open(finalUrl, options: [:])
-//                    onInitWcV2(URL(string: newUrl)!)
                     print("finalUrl ", finalUrl)
                     onInitWcV2(finalUrl)
                     decisionHandler(.cancel)
@@ -609,6 +586,7 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
 extension DappDetailVC {
     
     private func wcV2SetSign() {
+        print("wcV2SetSign")
         Sign.instance.sessionProposalPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sessionProposal, context in
@@ -628,6 +606,7 @@ extension DappDetailVC {
     
     @MainActor
     private func wcV2SetPair(uri: String, _ completionHandler: @escaping (Bool) -> Void) {
+        print("wcV2SetPair ", uri)
         Task {
             guard let wcUri = WalletConnectURI(string: uri) else {
                 completionHandler(false)
@@ -647,12 +626,12 @@ extension DappDetailVC {
     private func wcV2Disconnect(_ completionHandler: @escaping (Bool) -> Void) {
         Task {
             do {
-//                print("wcV2Disconnect Pair ", Pair.instance.getPairings().count)
+                print("wcV2Disconnect Pair ", Pair.instance.getPairings().count)
                 for pairing in Pair.instance.getPairings() {
                     try await Pair.instance.disconnect(topic: pairing.topic)
                 }
                 
-//                print("wcV2Disconnect Sign ", Sign.instance.getSessions().count)
+                print("wcV2Disconnect Sign ", Sign.instance.getSessions().count)
                 for session in Sign.instance.getSessions() {
                     try await Sign.instance.disconnect(topic: session.topic)
                 }
@@ -666,10 +645,16 @@ extension DappDetailVC {
     
     
     private func wcV2ApproveProposal(proposal: WalletConnectSwiftV2.Session.Proposal) {
-        print("wcV2ApproveProposal ", proposal)
+//        print("wcV2ApproveProposal ", proposal)
+//        print("wcV2ApproveProposal pairingTopic", proposal.pairingTopic)
+//        let alreay = Pair.instance.getPairings().filter { $0.topic == proposal.pairingTopic }
+//        print("alreay ", alreay)
+//        self.wcV2SetPair(uri: proposal.proposer.url) { success in
+//            print("wcV2ApproveProposal wcV2SetPair ", success)
+//        }
         var sessionNamespaces = [String: SessionNamespace]()
         proposal.requiredNamespaces.forEach { namespaces in
-            print("wcV2ApproveProposal ", namespaces)
+            print("wcV2ApproveProposal namespaces ", namespaces)
             let caip2Namespace = namespaces.key
             let proposalNamespace = namespaces.value
             if let targetChain = allCosmosChains.filter({ $0.chainIdCosmos == proposalNamespace.chains?.first?.reference }).first {
