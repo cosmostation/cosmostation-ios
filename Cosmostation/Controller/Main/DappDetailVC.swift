@@ -737,6 +737,7 @@ extension DappDetailVC {
             
         } else if request.method == "cosmos_getAccounts" {
             let v2Accounts = [["address": self.targetChain.bechAddress, "pubkey": self.targetChain.publicKey?.base64EncodedString(), "algo": "secp256k1"]]
+            print("cosmos_getAccounts ", v2Accounts)
             wcV2RequestApprove(request: request, response: AnyCodable(v2Accounts))
         }
     }
