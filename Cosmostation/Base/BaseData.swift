@@ -28,6 +28,10 @@ final class BaseData: NSObject{
     var mintscanAssets: [MintscanAsset]?
     var baseAccount: BaseAccount?
     
+    
+    var appUserInfo: [AnyHashable : Any]?
+    var appSchemeUrl: URL?
+    
     public override init() {
         super.init();
         if database == nil {

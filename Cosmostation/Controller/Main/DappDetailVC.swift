@@ -37,8 +37,9 @@ class DappDetailVC: BaseVC {
     private var bottomViewHeight: CGFloat = 70
     private var isAnimationInProgress = false
     
-//    var selectedChain: CosmosClass!
+    var dappType: DAPP_TYPE!
     var dappUrl: URL?
+    
     private var publishers = [AnyCancellable]()
     
     
@@ -47,7 +48,12 @@ class DappDetailVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        baseAccount = BaseData.instance.baseAccount
+        
+        if BaseData.instance.getLastAccount() != nil {
+            baseAccount = BaseData.instance.getLastAccount()
+        } else {
+            return
+        }
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -61,20 +67,29 @@ class DappDetailVC: BaseVC {
             print("allCosmosChains ", allCosmosChains.count)
         }
         
-//        print("incomed URL ", dappUrl)
-        if (dappUrl?.query?.isEmpty == false) {
-            dappUrl = URL(string: dappUrl!.query!.removingPercentEncoding!)
-        }
-//        print("dapp URL ", dappUrl)
-        
-//        dappUrl = URL(string: "https://coinhall.org/")
-//        dappUrl = URL(string: "https://app.kava.io/home")
-        
-        dappUrlLabel.text = dappUrl?.host
         accountName.text = baseAccount.name
         onInitInjectScript()
-        webView.load(URLRequest(url: dappUrl!))
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
+        
+        if (dappType == .INTERNAL_URL) {
+            print("DappDetailVC INTERNAL_URL ", dappUrl)
+            if (dappUrl?.query?.isEmpty == false) {
+                dappUrl = URL(string: dappUrl!.query!.removingPercentEncoding!)
+            }
+            print("DappDetailVC  dappUrl", dappUrl)
+            
+            dappUrlLabel.text = dappUrl?.host
+            webView.load(URLRequest(url: dappUrl!))
+            
+        } else if (dappType == .DEEPLINK_WC2) {
+            print("DappDetailVC DEEPLINK_WC2 ", dappUrl)
+            onInitWcV2(dappUrl!)
+        }
+        
+//        print("incomed URL ", dappUrl)
+//        print("dapp URL ", dappUrl)
+//        dappUrl = URL(string: "https://coinhall.org/")
+//        dappUrl = URL(string: "https://app.kava.io/home")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -645,13 +660,14 @@ extension DappDetailVC {
     
     
     private func wcV2ApproveProposal(proposal: WalletConnectSwiftV2.Session.Proposal) {
-//        print("wcV2ApproveProposal ", proposal)
-//        print("wcV2ApproveProposal pairingTopic", proposal.pairingTopic)
-//        let alreay = Pair.instance.getPairings().filter { $0.topic == proposal.pairingTopic }
-//        print("alreay ", alreay)
-//        self.wcV2SetPair(uri: proposal.proposer.url) { success in
-//            print("wcV2ApproveProposal wcV2SetPair ", success)
-//        }
+        print("wcV2ApproveProposal ", proposal)
+        if (dappType == .DEEPLINK_WC2) {
+            print("wcV2ApproveProposal DEEPLINK_WC2 ", proposal.proposer.url)
+            webView.load(URLRequest(url: URL(string: proposal.proposer.url)!))
+            wcV2RejectProposal(proposalId:  proposal.id, reason: .userRejectedChains)
+            dappType = .INTERNAL_URL
+            return
+        }
         var sessionNamespaces = [String: SessionNamespace]()
         proposal.requiredNamespaces.forEach { namespaces in
             print("wcV2ApproveProposal namespaces ", namespaces)
@@ -695,6 +711,7 @@ extension DappDetailVC {
         Task {
             do {
                 try await Sign.instance.reject(proposalId: proposalId, reason: reason)
+                print("wcV2RejectProposal")
             } catch {
                 print("wcV2RejectProposal error: \(error)")
             }
@@ -845,4 +862,10 @@ extension DappDetailVC {
         return callOptions
     }
     
+}
+
+
+enum DAPP_TYPE {
+    case INTERNAL_URL           //handle user click in app links (ecosystem or service)
+    case DEEPLINK_WC2           //handle user start with safari or chrome during web surfing
 }
