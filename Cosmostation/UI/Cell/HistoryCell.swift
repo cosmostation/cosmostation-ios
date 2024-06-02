@@ -81,6 +81,7 @@ class HistoryCell: UITableViewCell {
             WDP.dpToken(dpToken.erc20, dpToken.amount, nil, denomLabel, amountLabel, nil)
             amountLabel.isHidden = false
             denomLabel.isHidden = false
+            denomLabel.textColor = .color01
         }
     }
     
@@ -98,6 +99,5 @@ class HistoryCell: UITableViewCell {
         
         denomLabel.text = WDP.okcDpTimeGap(Int64(history.transactionTime!))
         denomLabel.isHidden = false
-        
     }
 }

@@ -13,8 +13,8 @@ class ReceiveCell: UITableViewCell {
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var cautionLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var keyTypeTag: UILabel!
+    @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var copyHintTitle: UILabel!
@@ -28,6 +28,8 @@ class ReceiveCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        legacyTag.isHidden = true
+        keyTypeTag.isHidden = true
         rootView.setBlur()
     }
     
@@ -37,6 +39,7 @@ class ReceiveCell: UITableViewCell {
         } else {
             hdPathLabel.text = ""
         }
+        legacyTag.isHidden = chain.isDefault
         
         if let selectedChain = chain as? EvmClass, section == 0 {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name + " EVM")
@@ -62,8 +65,6 @@ class ReceiveCell: UITableViewCell {
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }
         }
-        
-        
     }
     
 }
