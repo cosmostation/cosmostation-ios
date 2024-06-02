@@ -17,12 +17,12 @@ class Portfolio2Cell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var bechAddressLabel: UILabel!
     @IBOutlet weak var evmAddressLabel: UILabel!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var evmCompatTag: UILabel!
-    @IBOutlet weak var cosmosTag: UILabel!
-    @IBOutlet weak var keyTypeTag: UILabel!
-    @IBOutlet weak var cw20Tag: UILabel!
-    @IBOutlet weak var nftTag: UILabel!
+    @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var evmCompatTag: PaddingLabel!
+    @IBOutlet weak var cosmosTag: PaddingLabel!
+    @IBOutlet weak var keyTypeTag: PaddingLabel!
+    @IBOutlet weak var cw20Tag: PaddingLabel!
+    @IBOutlet weak var nftTag: PaddingLabel!
     @IBOutlet weak var priceCurrencyLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var priceChangeLabel: UILabel!
