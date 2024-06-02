@@ -16,10 +16,8 @@ class SelectChainCell: UITableViewCell {
     @IBOutlet weak var logoImg2: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var evmCompatTag: UILabel!
-    @IBOutlet weak var cosmosTag: UILabel!
-    @IBOutlet weak var keyTypeTag: UILabel!
+    @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var assetCntLabel: UILabel!
@@ -40,8 +38,6 @@ class SelectChainCell: UITableViewCell {
     override func prepareForReuse() {
         currencyLabel.text = ""
         legacyTag.isHidden = true
-        evmCompatTag.isHidden = true
-        cosmosTag.isHidden = true
         keyTypeTag.isHidden = true
         currencyLabel.isHidden = true
         valueLabel.isHidden = true

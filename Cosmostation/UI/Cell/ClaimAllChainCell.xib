@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -45,13 +45,9 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="EoP-A3-bEw">
                                 <rect key="frame" x="128.33333333333334" y="26" width="0.0" height="0.0"/>
                                 <subviews>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bM-ju-HDp">
-                                        <rect key="frame" x="0.0" y="0.0" width="44" height="14"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bM-ju-HDp" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" name="_color06"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="09h-v9-uiP"/>
-                                            <constraint firstAttribute="height" constant="14" id="PiQ-z0-jJu"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                         <color key="textColor" name="_color02"/>
                                         <nil key="highlightedColor"/>
@@ -62,13 +58,9 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVM Compat." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMJ-tO-q4J">
-                                        <rect key="frame" x="0.0" y="0.0" width="73" height="14"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVM Compat." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMJ-tO-q4J" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" red="0.48627450979999998" green="0.30980392159999998" blue="0.98823529409999999" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="73" id="lby-iO-XC7"/>
-                                            <constraint firstAttribute="height" constant="14" id="qDh-Hw-hB4"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                         <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
@@ -79,13 +71,9 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COSMOS EVM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Axu-0L-YNG">
-                                        <rect key="frame" x="0.0" y="0.0" width="73" height="14"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COSMOS EVM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Axu-0L-YNG" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" red="0.054901960780000002" green="0.59607843140000005" blue="0.64705882349999999" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="14" id="xaS-Kg-WK6"/>
-                                            <constraint firstAttribute="width" constant="73" id="yxb-8t-7UH"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                         <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
@@ -259,15 +247,15 @@
             <color key="tintColor" name="_primary"/>
             <connections>
                 <outlet property="amountLabel" destination="JDn-FW-FX5" id="hGG-HP-pGp"/>
-                <outlet property="cosmosTag" destination="Axu-0L-YNG" id="mAh-dr-Rjh"/>
+                <outlet property="cosmosTag" destination="Axu-0L-YNG" id="wDM-K5-mz5"/>
                 <outlet property="denomLabel" destination="Jue-Nt-vFa" id="aUw-iM-sPh"/>
                 <outlet property="etcCntLabel" destination="kG6-8h-qO4" id="HXS-Mz-B9z"/>
-                <outlet property="evmCompatTag" destination="uMJ-tO-q4J" id="rWw-aH-9Ko"/>
+                <outlet property="evmCompatTag" destination="uMJ-tO-q4J" id="Gh5-9I-o3f"/>
                 <outlet property="feeAmountLabel" destination="4cP-GW-MOF" id="DOy-4g-wie"/>
                 <outlet property="feeDenomLabel" destination="16a-ji-yTR" id="ugZ-5k-N38"/>
                 <outlet property="feeValueCurrencyLabel" destination="myV-1v-rMz" id="CKd-vx-COD"/>
                 <outlet property="feeValueLabel" destination="fa8-e5-7p8" id="58g-cP-sCY"/>
-                <outlet property="legacyTag" destination="3bM-ju-HDp" id="EWQ-Eo-mnb"/>
+                <outlet property="legacyTag" destination="3bM-ju-HDp" id="th7-8w-4j8"/>
                 <outlet property="logoImg1" destination="sm9-aB-yK7" id="7d8-xb-Jld"/>
                 <outlet property="nameLabel" destination="9hG-JF-Cgy" id="awk-mO-uS2"/>
                 <outlet property="pendingView" destination="pNo-PE-0J3" id="zmo-ic-2UY"/>

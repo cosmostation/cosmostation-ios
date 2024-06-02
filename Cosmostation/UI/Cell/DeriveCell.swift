@@ -16,10 +16,8 @@ class DeriveCell: UITableViewCell {
     @IBOutlet weak var logoImg2: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var evmCompatTag: UILabel!
-    @IBOutlet weak var cosmosTag: UILabel!
-    @IBOutlet weak var keyTypeTag: UILabel!
+    @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var denomLabel: UILabel!
     @IBOutlet weak var coinCntLabel: UILabel!
@@ -37,8 +35,6 @@ class DeriveCell: UITableViewCell {
     
     override func prepareForReuse() {
         legacyTag.isHidden = true
-        evmCompatTag.isHidden = true
-        cosmosTag.isHidden = true
         keyTypeTag.isHidden = true
         loadingLabel.isHidden = false
         amountLabel.isHidden = true

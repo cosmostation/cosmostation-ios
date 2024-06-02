@@ -13,9 +13,9 @@ class CheckPrivateKeyCell: UITableViewCell {
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var evmCompatTag: UILabel!
-    @IBOutlet weak var keyTypeTag: UILabel!
+    @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var evmCompatTag: PaddingLabel!
+    @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var pkeyLabel: UILabel!
 

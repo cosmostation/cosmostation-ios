@@ -12,10 +12,10 @@ class QrAddressVC: BaseVC {
 
     @IBOutlet weak var chainNameLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var evmCompatTag: UILabel!
-    @IBOutlet weak var cosmosTag: UILabel!
-    @IBOutlet weak var keyTypeTag: UILabel!
+    @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var evmCompatTag: PaddingLabel!
+    @IBOutlet weak var cosmosTag: PaddingLabel!
+    @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressCardView: FixCardView!
     @IBOutlet weak var addressLabel: UILabel!

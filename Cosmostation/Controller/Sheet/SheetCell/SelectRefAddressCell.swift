@@ -11,23 +11,20 @@ import UIKit
 class SelectRefAddressCell: UITableViewCell {
     
     @IBOutlet weak var accountNameLabel: UILabel!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var evmCompatTag: UILabel!
-    @IBOutlet weak var keyTypeTag: UILabel!
+    @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var addressLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
         legacyTag.isHidden = true
-        evmCompatTag.isHidden = true
         keyTypeTag.isHidden = true
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         legacyTag.isHidden = true
-        evmCompatTag.isHidden = true
         keyTypeTag.isHidden = true
     }
     
