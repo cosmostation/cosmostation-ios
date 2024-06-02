@@ -13,8 +13,6 @@ class QrAddressVC: BaseVC {
     @IBOutlet weak var chainNameLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var evmCompatTag: PaddingLabel!
-    @IBOutlet weak var cosmosTag: PaddingLabel!
     @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressCardView: FixCardView!
@@ -34,7 +32,6 @@ class QrAddressVC: BaseVC {
         
         if let evmChain = selectedChain as? EvmClass {
             addressToggleBtn.isHidden = !evmChain.supportCosmos
-//            cosmosTag.isHidden = !evmChain.supportCosmos
             toDpAddress = evmChain.evmAddress
             addressLabel.text = toDpAddress
             addressLabel.adjustsFontSizeToFitWidth = true
@@ -46,7 +43,6 @@ class QrAddressVC: BaseVC {
             
         } else if let cosmosChain = selectedChain as? CosmosClass {
             addressToggleBtn.isHidden = true
-            legacyTag.isHidden = cosmosChain.isDefault
             toDpAddress = cosmosChain.bechAddress
             addressLabel.text = toDpAddress
             addressLabel.adjustsFontSizeToFitWidth = true
@@ -57,13 +53,9 @@ class QrAddressVC: BaseVC {
                 hdPathLabel.text = ""
             }
             
-            //for okt legacy
-            if (selectedChain.tag == "okt996_Keccak") {
-                keyTypeTag.text = "ethsecp256k1"
-                keyTypeTag.isHidden = false
-                
-            } else if (selectedChain.tag == "okt996_Secp") {
-                keyTypeTag.text = "secp256k1"
+            legacyTag.isHidden = cosmosChain.isDefault
+            if (selectedChain is ChainOkt996Keccak) {
+                keyTypeTag.text = cosmosChain.accountKeyType.pubkeyType.algorhythm
                 keyTypeTag.isHidden = false
             }
         }
@@ -73,8 +65,6 @@ class QrAddressVC: BaseVC {
         let copyTap = UITapGestureRecognizer(target: self, action: #selector(onCopyAddress))
         copyTap.cancelsTouchesInView = false
         addressCardView.addGestureRecognizer(copyTap)
-//        print("bechAddress ", selectedChain.bechAddress)
-//        print("evmAddress ", selectedChain.evmAddress)
     }
     
     override func setLocalizedString() {

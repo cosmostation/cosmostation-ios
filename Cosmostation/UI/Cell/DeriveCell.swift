@@ -24,7 +24,6 @@ class DeriveCell: UITableViewCell {
     @IBOutlet weak var loadingLabel: UILabel!
     @IBOutlet weak var reposeErrorLabel: UILabel!
     
-    
     let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
 
     override func awakeFromNib() {
@@ -117,14 +116,10 @@ class DeriveCell: UITableViewCell {
         }
         
         legacyTag.isHidden = chain.isDefault
-//        if (chain.tag == "okt996_Keccak") {
-//            keyTypeTag.text = "ethsecp256k1"
-//            keyTypeTag.isHidden = false
-//            
-//        } else if (chain.tag == "okt996_Secp") {
-//            keyTypeTag.text = "secp256k1"
-//            keyTypeTag.isHidden = false
-//        }
+        if (chain is ChainOkt996Keccak) {
+            keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
+            keyTypeTag.isHidden = false
+        }
         
         if (chain.fetchState == .Fail) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)

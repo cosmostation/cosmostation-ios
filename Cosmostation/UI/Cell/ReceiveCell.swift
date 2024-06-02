@@ -47,6 +47,9 @@ class ReceiveCell: UITableViewCell {
             addressLabel.text = evmAddress
             addressLabel.adjustsFontSizeToFitWidth = true
             
+//            keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
+//            keyTypeTag.isHidden = false
+            
             if let bechQrImage = WUtils.generateQrCode(evmAddress) {
                 rqImgView.image = UIImage(ciImage: bechQrImage)
                 let chainLogo = UIImage.init(named: selectedChain.logo1)
@@ -58,6 +61,9 @@ class ReceiveCell: UITableViewCell {
             let bechAddress = selectedChain.bechAddress
             addressLabel.text = bechAddress
             addressLabel.adjustsFontSizeToFitWidth = true
+            
+//            keyTypeTag.text = chain.accountKeyType.pubkeyType.cosmosPubkey
+//            keyTypeTag.isHidden = false
             
             if let bechQrImage = WUtils.generateQrCode(bechAddress) {
                 rqImgView.image = UIImage(ciImage: bechQrImage)

@@ -15,10 +15,7 @@ class QrAddressPopupVC: BaseVC {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var evmCompatTag: PaddingLabel!
-    @IBOutlet weak var cosmosTag: PaddingLabel!
     @IBOutlet weak var keyTypeTag: PaddingLabel!
-    
     
     var selectedChain: BaseChain!
     var toDpAddress = ""
@@ -28,6 +25,8 @@ class QrAddressPopupVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
+        
+        
         
         if let selectedChain = selectedChain as? EvmClass {
             toDpAddress = selectedChain.evmAddress
@@ -45,20 +44,13 @@ class QrAddressPopupVC: BaseVC {
             addressLabel.adjustsFontSizeToFitWidth = true
             if (baseAccount.type == .withMnemonic) {
                 hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
-                if (selectedChain.isDefault == false) {
-                    legacyTag.isHidden = false
-                }
             } else {
                 hdPathLabel.text = ""
             }
             
-            //for okt legacy 
-            if (selectedChain.tag == "okt996_Keccak") {
-                keyTypeTag.text = "ethsecp256k1"
-                keyTypeTag.isHidden = false
-                
-            } else if (selectedChain.tag == "okt996_Secp") {
-                keyTypeTag.text = "secp256k1"
+            legacyTag.isHidden = selectedChain.isDefault
+            if (selectedChain is ChainOkt996Keccak) {
+                keyTypeTag.text = selectedChain.accountKeyType.pubkeyType.algorhythm
                 keyTypeTag.isHidden = false
             }
             

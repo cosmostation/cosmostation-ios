@@ -18,9 +18,6 @@ class Portfolio2Cell: UITableViewCell {
     @IBOutlet weak var bechAddressLabel: UILabel!
     @IBOutlet weak var evmAddressLabel: UILabel!
     @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var evmCompatTag: PaddingLabel!
-    @IBOutlet weak var cosmosTag: PaddingLabel!
-    @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var cw20Tag: PaddingLabel!
     @IBOutlet weak var nftTag: PaddingLabel!
     @IBOutlet weak var priceCurrencyLabel: UILabel!
@@ -60,9 +57,6 @@ class Portfolio2Cell: UITableViewCell {
         valueLabel.isHidden = true
         assetCntLabel.isHidden = true
         legacyTag.isHidden = true
-        evmCompatTag.isHidden = true
-        cosmosTag.isHidden = true
-        keyTypeTag.isHidden = true
         cw20Tag.isHidden = true
         nftTag.isHidden = true
         bechAddressLabel.text = ""
@@ -86,26 +80,9 @@ class Portfolio2Cell: UITableViewCell {
         nameLabel.text = chain.name.uppercased()
         bechAddressLabel.text = chain.bechAddress
         
-        if (!chain.isDefault) {
-            legacyTag.isHidden = false
-            //for okt legacy
-            if (chain.tag == "okt996_Keccak") {
-                keyTypeTag.text = "ethsecp256k1"
-                keyTypeTag.isHidden = false
-                
-            } else if (chain.tag == "okt996_Secp") {
-                keyTypeTag.text = "secp256k1"
-                keyTypeTag.isHidden = false
-            }
-        }
-        
-        if (chain.supportCw20) {
-            cw20Tag.isHidden = false
-        }
-        
-        if (BaseData.instance.showEvenReview() && chain.supportCw721) {
-            nftTag.isHidden = false
-        }
+        legacyTag.isHidden = chain.isDefault
+        cw20Tag.isHidden = !chain.supportCw20
+        nftTag.isHidden = !(BaseData.instance.showEvenReview() && chain.supportCw721)
         
         if (chain.fetchState == .Fail) {
             valueLoadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
@@ -170,6 +147,8 @@ class Portfolio2Cell: UITableViewCell {
             bechAddressLabel.text = chain.bechAddress
             starEvmAddressAnimation()
         }
+        
+        legacyTag.isHidden = chain.isDefault
         
         if (chain.fetchState == .Fail) {
             valueLoadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)

@@ -80,6 +80,40 @@ enum PubKeyType: Int {
     case BERA_Secp256k1 = 3
     case SUI_Ed25519 = 4
     case unknown = 99
+    
+    var algorhythm: String? {
+        switch self {
+        case PubKeyType.ETH_Keccak256:
+            return "keccak256"
+        case PubKeyType.COSMOS_Secp256k1:
+            return "secp256k1"
+        case PubKeyType.INJECTIVE_Secp256k1:
+            return "secp256k1"
+        case PubKeyType.BERA_Secp256k1:
+            return "secp256k1"
+        case PubKeyType.SUI_Ed25519:
+            return "ed25519"
+        case PubKeyType.unknown:
+            return "unknown"
+        }
+    }
+    
+    var cosmosPubkey: String? {
+        switch self {
+        case PubKeyType.ETH_Keccak256:
+            return "ethsecp256k1"
+        case PubKeyType.COSMOS_Secp256k1:
+            return "secp256k1"
+        case PubKeyType.INJECTIVE_Secp256k1:
+            return "ethsecp256k1"
+        case PubKeyType.BERA_Secp256k1:
+            return "ethsecp256k1"
+        case PubKeyType.SUI_Ed25519:
+            return "ed25519"
+        case PubKeyType.unknown:
+            return "unknown"
+        }
+    }
 }
 
 

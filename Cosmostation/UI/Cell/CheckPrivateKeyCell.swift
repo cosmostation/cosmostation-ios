@@ -14,7 +14,6 @@ class CheckPrivateKeyCell: UITableViewCell {
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var evmCompatTag: PaddingLabel!
     @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var pkeyLabel: UILabel!
@@ -27,7 +26,6 @@ class CheckPrivateKeyCell: UITableViewCell {
     
     override func prepareForReuse() {
         rootView.setBlur()
-        evmCompatTag.isHidden = true
         legacyTag.isHidden = true
         keyTypeTag.isHidden = true
     }
@@ -49,12 +47,8 @@ class CheckPrivateKeyCell: UITableViewCell {
         pkeyLabel.text = "0x" + chain.privateKey!.toHexString()
         
         legacyTag.isHidden = chain.isDefault
-        if (chain.tag == "okt996_Keccak") {
-            keyTypeTag.text = "ethsecp256k1"
-            keyTypeTag.isHidden = false
-            
-        } else if (chain.tag == "okt996_Secp") {
-            keyTypeTag.text = "secp256k1"
+        if (chain is ChainOkt996Keccak) {
+            keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
             keyTypeTag.isHidden = false
         }
     }

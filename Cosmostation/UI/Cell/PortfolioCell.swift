@@ -15,18 +15,13 @@ class PortfolioCell: UITableViewCell {
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var logoImg2: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var tagLayer: UIStackView!
     @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var evmCompatTag: PaddingLabel!
-    @IBOutlet weak var cosmosTag: PaddingLabel!
-    @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var cw20Tag: PaddingLabel!
     @IBOutlet weak var nftTag: PaddingLabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var loadingLabel: UILabel!
     @IBOutlet weak var reposeErrorLabel: UILabel!
-    
     
     let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
     
@@ -43,11 +38,7 @@ class PortfolioCell: UITableViewCell {
         currencyLabel.text = ""
         currencyLabel.isHidden = true
         valueLabel.isHidden = true
-        tagLayer.isHidden = true
         legacyTag.isHidden = true
-        evmCompatTag.isHidden = true
-        cosmosTag.isHidden = true
-        keyTypeTag.isHidden = true
         cw20Tag.isHidden = true
         nftTag.isHidden = true
         loadingLabel.isHidden = false
@@ -59,30 +50,9 @@ class PortfolioCell: UITableViewCell {
         logoImg2.image = UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
         
-        if (!chain.isDefault) {
-            tagLayer.isHidden = false
-            legacyTag.isHidden = false
-            //for okt legacy
-            if (chain.tag == "okt996_Keccak") {
-                keyTypeTag.text = "ethsecp256k1"
-                keyTypeTag.isHidden = false
-                
-            } else if (chain.tag == "okt996_Secp") {
-                keyTypeTag.text = "secp256k1"
-                keyTypeTag.isHidden = false
-            }
-        }
-        
-        if (chain.supportCw20) {
-            tagLayer.isHidden = false
-            cw20Tag.isHidden = false
-        }
-        
-        if (BaseData.instance.showEvenReview() && chain.supportCw721) {
-            tagLayer.isHidden = false
-            nftTag.isHidden = false
-        }
-        
+        legacyTag.isHidden = chain.isDefault
+        cw20Tag.isHidden = !chain.supportCw20
+        nftTag.isHidden = !(BaseData.instance.showEvenReview() && chain.supportCw721)
         
         if (chain.fetchState == .Fail) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
@@ -115,7 +85,7 @@ class PortfolioCell: UITableViewCell {
         logoImg2.image = UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
         
-        
+        legacyTag.isHidden = chain.isDefault
         
         if (chain.fetchState == .Fail) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
@@ -125,18 +95,6 @@ class PortfolioCell: UITableViewCell {
         } else if (chain.fetchState == .Success) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
-            
-//            if (!(chain is ChainOktEVM)) {
-//                if (chain.supportCosmos && chain.cosmosBalances == nil) {
-//                    reposeErrorLabel.isHidden = false
-//                    return
-//                }
-//            }
-            
-//            if (chain.web3 == nil) {
-//                reposeErrorLabel.isHidden = false
-//                return
-//            }
             
             if (BaseData.instance.getHideValue()) {
                 currencyLabel.text = ""

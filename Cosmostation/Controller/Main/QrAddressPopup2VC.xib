@@ -22,12 +22,9 @@
                 <outlet property="bechAddressLabel" destination="3qC-EH-hOX" id="wYB-iR-I7N"/>
                 <outlet property="bechQrImgView" destination="clv-dk-z4Q" id="BzR-bW-c1k"/>
                 <outlet property="chainNameLabel" destination="jhP-yX-m64" id="g6e-eR-r9L"/>
-                <outlet property="cosmosTag" destination="nh6-sO-EpY" id="iWJ-EV-uoh"/>
                 <outlet property="evmAddressLabel" destination="5Jw-yN-Z3p" id="uwA-x2-0t7"/>
-                <outlet property="evmCompatTag" destination="89V-6e-CYD" id="uBK-Zu-FRi"/>
                 <outlet property="evmQrImgView" destination="3w0-eg-zGf" id="K8l-TC-nbh"/>
                 <outlet property="hdPathLabel" destination="IYb-9c-Lt8" id="5jO-kP-apR"/>
-                <outlet property="keyTypeTag" destination="3Tn-uS-MhR" id="6NQ-qX-XuA"/>
                 <outlet property="legacyTag" destination="IMg-bV-dU5" id="Bse-jU-c8Y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -52,49 +49,10 @@
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="39M-M5-uLO">
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="39M-M5-uLO">
                             <rect key="frame" x="57" y="10" width="0.0" height="0.0"/>
                             <subviews>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMg-bV-dU5" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
-                                    <color key="backgroundColor" name="_color06"/>
-                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
-                                    <color key="textColor" name="_color02"/>
-                                    <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="6"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                </label>
-                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVM Compat." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89V-6e-CYD" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
-                                    <color key="backgroundColor" red="0.48627450979999998" green="0.30980392159999998" blue="0.98823529409999999" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
-                                    <color key="textColor" name="_color01"/>
-                                    <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="6"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                </label>
-                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COSMOS EVM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nh6-sO-EpY" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
-                                    <color key="backgroundColor" red="0.054901960780000002" green="0.59607843140000005" blue="0.64705882349999999" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
-                                    <color key="textColor" name="_color01"/>
-                                    <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="6"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                </label>
-                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Tn-uS-MhR" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                     <color key="backgroundColor" name="_color06"/>
                                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>

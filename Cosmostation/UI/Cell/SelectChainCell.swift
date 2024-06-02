@@ -17,7 +17,6 @@ class SelectChainCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var assetCntLabel: UILabel!
@@ -38,7 +37,6 @@ class SelectChainCell: UITableViewCell {
     override func prepareForReuse() {
         currencyLabel.text = ""
         legacyTag.isHidden = true
-        keyTypeTag.isHidden = true
         currencyLabel.isHidden = true
         valueLabel.isHidden = true
         assetCntLabel.isHidden = true
@@ -65,9 +63,7 @@ class SelectChainCell: UITableViewCell {
             rootView.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
         }
         
-//        if (chain.supportCosmos) {
-//            cosmosTag.isHidden = false
-//        }
+        legacyTag.isHidden = chain.isDefault
         
         if (account.type == .withMnemonic) {
             hdPathLabel.text = chain.getHDPath(account.lastHDPath)
@@ -130,14 +126,6 @@ class SelectChainCell: UITableViewCell {
         }
         
         legacyTag.isHidden = chain.isDefault
-        if (chain.tag == "okt996_Keccak") {
-            keyTypeTag.text = "ethsecp256k1"
-            keyTypeTag.isHidden = false
-            
-        } else if (chain.tag == "okt996_Secp") {
-            keyTypeTag.text = "secp256k1"
-            keyTypeTag.isHidden = false
-        }
         
         if (chain.fetchState == .Fail) {
             loadingLabel1.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)

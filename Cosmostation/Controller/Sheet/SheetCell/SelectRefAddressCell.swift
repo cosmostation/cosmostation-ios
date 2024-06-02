@@ -36,20 +36,11 @@ class SelectRefAddressCell: UITableViewCell {
         let allCosmos = ALLCOSMOSCLASS()
         if let chain = allCosmos.filter({ $0.tag == refAddress.chainTag }).first {
             legacyTag.isHidden = chain.isDefault
-            //for okt legacy
-            if (chain.tag == "okt996_Keccak") {
-                keyTypeTag.text = "ethsecp256k1"
-                keyTypeTag.isHidden = false
-                
-            } else if (chain.tag == "okt996_Secp") {
-                keyTypeTag.text = "secp256k1"
+            if (chain is ChainOkt996Keccak) {
+                keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
                 keyTypeTag.isHidden = false
             }
         }
-//        let allEvm = ALLEVMCLASS()
-//        if (allEvm.filter({ $0.tag == refAddress.chainTag }).count != 0) {
-//            evmCompatTag.isHidden = false
-//        }
         
         addressLabel.text = refAddress.bechAddress
         addressLabel.adjustsFontSizeToFitWidth = true

@@ -13,9 +13,6 @@ class QrAddressPopup2VC: BaseVC {
     @IBOutlet weak var chainNameLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var evmCompatTag: PaddingLabel!
-    @IBOutlet weak var cosmosTag: PaddingLabel!
-    @IBOutlet weak var keyTypeTag: PaddingLabel!
     
     @IBOutlet weak var evmQrImgView: UIImageView!
     @IBOutlet weak var evmAddressLabel: UILabel!
@@ -39,8 +36,6 @@ class QrAddressPopup2VC: BaseVC {
         }
         
         if let selectedChain = selectedChain as? EvmClass {
-//            cosmosTag.isHidden = false
-            
             evmAddress = selectedChain.evmAddress
             bechAddress = selectedChain.bechAddress
             
