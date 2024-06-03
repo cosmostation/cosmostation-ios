@@ -325,7 +325,7 @@ class CommonTransfer: BaseVC {
         baseSheet.cosmosChainList = recipientableChains
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectCosmosRecipientChain
-        onStartSheet(baseSheet, 680)
+        onStart2Sheet(baseSheet, 400, 0.8)
     }
     
     func onUpdateToChain(_ chain: BaseChain) {
@@ -350,7 +350,7 @@ class CommonTransfer: BaseVC {
         addressSheet.senderEvmAddress = (fromChain as? EvmClass)?.evmAddress
         addressSheet.existedAddress = toAddress
         addressSheet.sendAddressDelegate = self
-        self.onStartSheet(addressSheet, 220)
+        onStart2Sheet(addressSheet, 220, 0.6)
     }
     
     func onUpdateToAddressView(_ address: String) {
@@ -387,7 +387,7 @@ class CommonTransfer: BaseVC {
         amountSheet.existedAmount = toAmount
         amountSheet.decimal = decimal
         amountSheet.sheetDelegate = self
-        self.onStartSheet(amountSheet)
+        onStart2Sheet(amountSheet, 240, 0.6)
     }
     
     func onUpdateAmountView(_ amount: String?) {
@@ -452,7 +452,7 @@ class CommonTransfer: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = toMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStart2Sheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -488,7 +488,7 @@ class CommonTransfer: BaseVC {
             baseSheet.feeDatas = cosmosFeeInfos[selectedFeePosition].FeeDatas
             baseSheet.sheetDelegate = self
             baseSheet.sheetType = .SelectFeeDenom
-            onStartSheet(baseSheet, 240)
+            onStart2Sheet(baseSheet, 240, 0.6)
         }
     }
     

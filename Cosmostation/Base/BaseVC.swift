@@ -108,6 +108,23 @@ class BaseVC: UIViewController {
         present(baseSheet, animated: true)
     }
     
+    func onStart2Sheet(_ baseSheet: BaseVC, _ min: CGFloat? = 320, _ max: CGFloat? = 0.9) {
+        guard let sheet = baseSheet.presentationController as? UISheetPresentationController else {
+            return
+        }
+        if #available(iOS 16.0, *) {
+            sheet.detents = [
+                .custom { context in return min },
+                .custom { context in return context.maximumDetentValue * max! }
+            ]
+        } else {
+            sheet.detents = [.medium(), .large()]
+        }
+        sheet.largestUndimmedDetentIdentifier = .large
+        sheet.prefersGrabberVisible = true
+        present(baseSheet, animated: true)
+    }
+    
     func onStartIntro() {
         let IntroVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "IntroVC") as! IntroVC
         let rootVC = UINavigationController(rootViewController: IntroVC)

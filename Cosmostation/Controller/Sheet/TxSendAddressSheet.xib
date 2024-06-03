@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="OF0-Y9-kXj" customClass="MDCOutlinedTextField">
-                    <rect key="frame" x="10" y="95" width="373" height="54"/>
+                    <rect key="frame" x="20" y="95" width="353" height="54"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_color01"/>
                     <constraints>
@@ -39,7 +39,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                 </textField>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aUG-WY-00C">
-                    <rect key="frame" x="155.66666666666663" y="165" width="217.33333333333337" height="28"/>
+                    <rect key="frame" x="155.66666666666663" y="161" width="217.33333333333337" height="28"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8RE-6q-Pcc">
                             <rect key="frame" x="0.0" y="0.0" width="104.66666666666667" height="28"/>
@@ -74,7 +74,7 @@
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vek-hg-vCL" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="766" width="377" height="48"/>
+                    <rect key="frame" x="8" y="762" width="377" height="48"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="oej-VE-1Q1"/>
@@ -103,14 +103,14 @@
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
-                <constraint firstItem="aUG-WY-00C" firstAttribute="top" secondItem="OF0-Y9-kXj" secondAttribute="bottom" constant="16" id="0kv-YY-78q"/>
+                <constraint firstItem="aUG-WY-00C" firstAttribute="top" secondItem="OF0-Y9-kXj" secondAttribute="bottom" constant="12" id="0kv-YY-78q"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aUG-WY-00C" secondAttribute="trailing" constant="20" id="1fg-z2-ma4"/>
-                <constraint firstItem="OF0-Y9-kXj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="CMF-tD-oOb"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="OF0-Y9-kXj" secondAttribute="trailing" constant="10" id="ErP-vf-31i"/>
+                <constraint firstItem="OF0-Y9-kXj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="CMF-tD-oOb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="OF0-Y9-kXj" secondAttribute="trailing" constant="20" id="ErP-vf-31i"/>
                 <constraint firstItem="ozl-4P-XjG" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="G9y-2I-MaB"/>
                 <constraint firstItem="OF0-Y9-kXj" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="PTh-W9-Zg1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vek-hg-vCL" secondAttribute="trailing" constant="8" id="Q3F-kX-83v"/>
-                <constraint firstAttribute="bottom" secondItem="vek-hg-vCL" secondAttribute="bottom" constant="38" id="SkJ-Za-AHy"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vek-hg-vCL" secondAttribute="bottom" constant="8" id="SkJ-Za-AHy"/>
                 <constraint firstItem="ozl-4P-XjG" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="mwP-M9-30Q"/>
                 <constraint firstItem="vek-hg-vCL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="wxD-Hj-Pm1"/>
             </constraints>

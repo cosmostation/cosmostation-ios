@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +18,6 @@
             <connections>
                 <outlet property="confirmBtn" destination="SKj-mc-Mqh" id="KLV-1d-UDh"/>
                 <outlet property="memoTextArea" destination="jMg-s2-pzW" id="5sT-GD-1mv"/>
-                <outlet property="memoTitle" destination="r8O-co-gTm" id="0Eu-hT-9Lw"/>
                 <outlet property="qrScanBtn" destination="lGV-gk-2jp" id="QIq-dN-hwA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -28,12 +27,6 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8O-co-gTm">
-                    <rect key="frame" x="19.999999999999996" y="95" width="48.666666666666657" height="20.333333333333329"/>
-                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
-                    <color key="textColor" name="_color01"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMg-s2-pzW" customClass="MDCOutlinedTextArea">
                     <rect key="frame" x="20" y="95" width="353" height="100"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -58,7 +51,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKj-mc-Mqh" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="766" width="377" height="48"/>
+                    <rect key="frame" x="8" y="762" width="377" height="48"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="ypa-Pi-ruI"/>
@@ -79,13 +72,11 @@
             <color key="tintColor" name="_primary"/>
             <constraints>
                 <constraint firstItem="lGV-gk-2jp" firstAttribute="top" secondItem="jMg-s2-pzW" secondAttribute="bottom" constant="12" id="0QR-Np-27f"/>
-                <constraint firstItem="r8O-co-gTm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="7zk-Du-Rg2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SKj-mc-Mqh" secondAttribute="trailing" constant="8" id="GkK-vV-PWO"/>
-                <constraint firstItem="r8O-co-gTm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="MQL-M0-gST"/>
                 <constraint firstItem="SKj-mc-Mqh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="TTq-pm-1Rc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jMg-s2-pzW" secondAttribute="trailing" constant="20" id="W8z-Pl-CpH"/>
                 <constraint firstItem="jMg-s2-pzW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="bcB-E7-MXl"/>
-                <constraint firstAttribute="bottom" secondItem="SKj-mc-Mqh" secondAttribute="bottom" constant="38" id="hZ1-uS-VCa"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="SKj-mc-Mqh" secondAttribute="bottom" constant="8" id="hZ1-uS-VCa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lGV-gk-2jp" secondAttribute="trailing" constant="20" id="mBs-XD-Go9"/>
                 <constraint firstItem="jMg-s2-pzW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="n9W-wn-B4m"/>
             </constraints>

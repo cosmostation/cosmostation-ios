@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -68,10 +68,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPE-io-Hep">
-                    <rect key="frame" x="0.0" y="107.33333333333331" width="393" height="744.66666666666674"/>
+                    <rect key="frame" x="0.0" y="107.33333333333331" width="393" height="710.66666666666674"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PKv-uc-4tI">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="719"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="689"/>
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oEL-Od-XS4" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
                                     <rect key="frame" x="8" y="4" width="377" height="68"/>
@@ -444,7 +444,7 @@
                                 <constraint firstAttribute="trailing" secondItem="oEL-Od-XS4" secondAttribute="trailing" constant="8" id="cve-pS-tfe"/>
                                 <constraint firstItem="oEL-Od-XS4" firstAttribute="top" secondItem="PKv-uc-4tI" secondAttribute="top" constant="4" id="fPO-S8-v5b"/>
                                 <constraint firstItem="eDz-Ad-mPG" firstAttribute="trailing" secondItem="oEL-Od-XS4" secondAttribute="trailing" id="gDf-Hh-dCt"/>
-                                <constraint firstAttribute="bottom" secondItem="jGX-b8-8AS" secondAttribute="bottom" constant="38" id="iBj-kN-fMo"/>
+                                <constraint firstAttribute="bottom" secondItem="jGX-b8-8AS" secondAttribute="bottom" constant="8" id="iBj-kN-fMo"/>
                                 <constraint firstItem="eDz-Ad-mPG" firstAttribute="top" secondItem="4P5-Qg-Mm1" secondAttribute="bottom" constant="10" id="lz7-pp-uIe"/>
                                 <constraint firstItem="ZgU-La-hVa" firstAttribute="trailing" secondItem="L7B-9h-6dk" secondAttribute="trailing" id="pDM-oV-IDS"/>
                                 <constraint firstItem="ur7-Ww-wks" firstAttribute="trailing" secondItem="oEL-Od-XS4" secondAttribute="trailing" id="tbt-eP-yDU"/>
@@ -480,7 +480,7 @@
                 <constraint firstItem="4Cf-ph-IZs" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="Az8-pX-qnf"/>
                 <constraint firstItem="ZHG-ER-exD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="UsW-EN-bwF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="zPE-io-Hep" secondAttribute="leading" id="jYg-Sq-vas"/>
-                <constraint firstItem="zPE-io-Hep" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="m0N-hP-wBs"/>
+                <constraint firstItem="zPE-io-Hep" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="m0N-hP-wBs"/>
                 <constraint firstItem="ZHG-ER-exD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="nKo-ko-ugL"/>
                 <constraint firstItem="zPE-io-Hep" firstAttribute="top" secondItem="ZHG-ER-exD" secondAttribute="bottom" constant="8" id="pCm-eu-pZK"/>
                 <constraint firstItem="4Cf-ph-IZs" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="why-8a-TQa"/>
@@ -493,7 +493,7 @@
         <image name="chainDefault" width="192" height="192"/>
         <image name="iconArrowDown" width="24" height="24"/>
         <image name="iconWarnRed" width="24" height="24"/>
-        <image name="tokenDefault" width="22" height="22"/>
+        <image name="tokenDefault" width="48" height="48"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
