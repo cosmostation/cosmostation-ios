@@ -37,7 +37,7 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yg9-bd-XNm" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                 <rect key="frame" x="181" y="10" width="24" height="12.666666666666664"/>
-                                <color key="backgroundColor" red="0.054901960780000002" green="0.59607843140000005" blue="0.64705882349999999" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.035294117647058823" green="0.72156862745098038" blue="0.75686274509803919" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
