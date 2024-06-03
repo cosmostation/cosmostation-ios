@@ -200,14 +200,14 @@ class CosmosClassVC: BaseVC {
         let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
         warnSheet.selectedChain = selectedChain
         warnSheet.noticeType = .TokenGithub
-        onStartSheet(warnSheet)
+        onStart2Sheet(warnSheet, 420, 0.8)
     }
     
     @objc func onClickAddNft() {
         let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
         warnSheet.selectedChain = selectedChain
         warnSheet.noticeType = .NFTGithub
-        onStartSheet(warnSheet)
+        onStart2Sheet(warnSheet, 420, 0.8)
     }
     
     func onSendTx() {

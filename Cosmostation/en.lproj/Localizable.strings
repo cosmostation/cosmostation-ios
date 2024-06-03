@@ -399,7 +399,7 @@
 "msg_addressbook_add" = "For convenience, you can register frequently used addresses.";
 "msg_addressbook_memo_changed" = "The memo has changed compared to the existing address book.\nWould you like to update with new memo?";
 "msg_addressbook_updated" = "The address book has been updated.";
-"msg_swap_warn" = "Cosmostation Mobile is a non-custodial wallet service, so users are responsible for executing all transactions. Please always check the details accurately before sending a transaction. \n\nWe are not responsible for any losses resulting from transactions through the app.";
+"msg_swap_warn" = "This wallet is a non-custodial service, meaning the user is responsible for all transaction executions. Always carefully verify the details before sending any transactions.\n\nWe do not take responsibility for any losses incurred from transactions made through the app.";
 "msg_check_inputed_mnemonic" = "Please check the mnemonic you entered. \nJust so you know, don't share it with anyone. Losing this mnemonic can lead to loss of assets.";
 "msg_show_all_proposals" = "Show all proposals.";
 "msg_hide_scam_proposals" = "Filters out suspected of scam proposals.";

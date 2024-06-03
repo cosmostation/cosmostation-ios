@@ -56,7 +56,7 @@ class CosmosCoinVC: BaseVC {
                 let sunsetSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
                 sunsetSheet.selectedChain = self.selectedChain
                 sunsetSheet.noticeType = .ChainDelist
-                self.onStartSheet(sunsetSheet)
+                self.onStart2Sheet(sunsetSheet, 240, 0.6)
             })
             
         } else if (selectedChain is ChainOkt996Keccak) {
@@ -64,7 +64,7 @@ class CosmosCoinVC: BaseVC {
                 let legacySheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
                 legacySheet.selectedChain = self.selectedChain
                 legacySheet.noticeType = .LegacyPath
-                self.onStartSheet(legacySheet)
+                self.onStart2Sheet(legacySheet, 240, 0.6)
             })
             
         }

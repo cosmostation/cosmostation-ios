@@ -11,7 +11,6 @@ import MaterialComponents
 
 class CreateNameSheet: BaseVC, UITextFieldDelegate {
     
-    @IBOutlet weak var createNameLabel: UILabel!
     @IBOutlet weak var accountNameTextField: MDCOutlinedTextField!
     @IBOutlet weak var confirmBtn: BaseButton!
     
@@ -27,8 +26,7 @@ class CreateNameSheet: BaseVC, UITextFieldDelegate {
     }
     
     override func setLocalizedString() {
-        createNameLabel.text = NSLocalizedString("title_set_account_name", comment: "")
-        accountNameTextField.label.text = NSLocalizedString("str_account_name", comment: "")
+        accountNameTextField.label.text = NSLocalizedString("title_set_account_name", comment: "")
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     

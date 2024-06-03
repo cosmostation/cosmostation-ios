@@ -238,7 +238,7 @@ class PortfolioVC: BaseVC {
     func onNodedownPopup() {
         let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
         warnSheet.noticeType = .NodeDownGuide
-        onStartSheet(warnSheet)
+        onStart2Sheet(warnSheet, 320, 0.6)
     }
 
 }

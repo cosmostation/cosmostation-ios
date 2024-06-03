@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,7 +41,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qWe-te-jbv">
-                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Bb-uA-klU" customClass="SecButton" customModule="Cosmostation" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="183.66666666666666" height="54"/>
@@ -84,7 +84,7 @@
                 <constraint firstItem="qWe-te-jbv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="897-SH-WTY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qWe-te-jbv" secondAttribute="trailing" constant="8" id="Iep-vj-lmp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MEd-OA-z7b" secondAttribute="trailing" constant="20" id="OTZ-q5-3Qr"/>
-                <constraint firstAttribute="bottom" secondItem="qWe-te-jbv" secondAttribute="bottom" constant="38" id="Ohs-rS-qP6"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qWe-te-jbv" secondAttribute="bottom" constant="8" id="Ohs-rS-qP6"/>
                 <constraint firstItem="MEd-OA-z7b" firstAttribute="top" secondItem="wUH-EN-2xW" secondAttribute="bottom" constant="16" id="S8V-7O-UoR"/>
                 <constraint firstItem="wUH-EN-2xW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="UHG-Sc-EFw"/>
                 <constraint firstItem="MEd-OA-z7b" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="nux-t0-T5v"/>

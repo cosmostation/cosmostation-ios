@@ -102,7 +102,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectCreateAccount
-        onStartSheet(baseSheet)
+        onStart2Sheet(baseSheet, 320, 0.6)
     }
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {

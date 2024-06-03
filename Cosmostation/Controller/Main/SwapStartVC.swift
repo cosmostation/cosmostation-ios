@@ -216,7 +216,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         if (BaseData.instance.getSwapWarn()) {
             let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
             warnSheet.noticeType = .SwapInitWarn
-            onStartSheet(warnSheet)
+            onStart2Sheet(warnSheet, 320, 0.6)
         }
     }
     

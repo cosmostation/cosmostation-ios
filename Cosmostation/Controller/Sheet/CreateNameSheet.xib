@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +18,6 @@
             <connections>
                 <outlet property="accountNameTextField" destination="SjO-av-QFz" id="Fh4-Yy-lKz"/>
                 <outlet property="confirmBtn" destination="Jeo-C2-7dI" id="S0Y-tn-wt6"/>
-                <outlet property="createNameLabel" destination="w7Q-Dv-ZOS" id="dK3-3S-jmw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,14 +26,8 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7Q-Dv-ZOS">
-                    <rect key="frame" x="19.999999999999993" y="95" width="113.33333333333331" height="20.333333333333329"/>
-                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
-                    <color key="textColor" name="_color01"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SjO-av-QFz" customClass="MDCOutlinedTextField">
-                    <rect key="frame" x="20" y="131.33333333333334" width="353" height="54"/>
+                    <rect key="frame" x="20" y="95" width="353" height="54"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_color01"/>
                     <constraints>
@@ -45,7 +38,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jeo-C2-7dI" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="20" y="766" width="353" height="48"/>
+                    <rect key="frame" x="8" y="762" width="377" height="48"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="Rxw-M4-krC"/>
@@ -65,14 +58,12 @@
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
+                <constraint firstItem="SjO-av-QFz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="18h-As-f4k"/>
                 <constraint firstItem="SjO-av-QFz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="4zD-9j-A0Y"/>
-                <constraint firstItem="SjO-av-QFz" firstAttribute="top" secondItem="w7Q-Dv-ZOS" secondAttribute="bottom" constant="16" id="5IQ-Hw-UtC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SjO-av-QFz" secondAttribute="trailing" constant="20" id="5hk-fv-VLG"/>
-                <constraint firstItem="w7Q-Dv-ZOS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="8p5-l6-zAV"/>
-                <constraint firstItem="w7Q-Dv-ZOS" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="9GY-Rk-Ln7"/>
-                <constraint firstAttribute="bottom" secondItem="Jeo-C2-7dI" secondAttribute="bottom" constant="38" id="XPY-49-GuG"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Jeo-C2-7dI" secondAttribute="trailing" constant="20" id="iep-vV-jdR"/>
-                <constraint firstItem="Jeo-C2-7dI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ijn-6g-pyH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Jeo-C2-7dI" secondAttribute="bottom" constant="8" id="XPY-49-GuG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Jeo-C2-7dI" secondAttribute="trailing" constant="8" id="iep-vV-jdR"/>
+                <constraint firstItem="Jeo-C2-7dI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="ijn-6g-pyH"/>
             </constraints>
             <point key="canvasLocation" x="102" y="21"/>
         </view>
