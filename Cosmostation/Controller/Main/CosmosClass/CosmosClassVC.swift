@@ -401,7 +401,8 @@ class CosmosClassVC: BaseVC {
         mainFab.handleSingleActionDirectly = false
         mainFab.buttonImage = UIImage(named: "iconFab")
         mainFab.buttonColor = .colorPrimary
-        mainFab.buttonImageSize = CGSize(width: 40, height: 40)
+        mainFab.buttonImageSize = CGSize(width: 52, height: 52)
+        mainFab.buttonAnimationConfiguration.angle = 0
         mainFab.itemAnimationConfiguration.opening = JJAnimationSettings(duration: 0.1, dampingRatio: 1.0, initialVelocity: 0.8, interItemDelay: 0.03)
         mainFab.itemAnimationConfiguration.closing = JJAnimationSettings(duration: 0.1, dampingRatio: 1.0, initialVelocity: 0.8, interItemDelay: 0.01)
         mainFab.overlayView.backgroundColor = UIColor(white: 0, alpha: 0.6)
