@@ -175,7 +175,7 @@ class CreateMnemonicVC: BaseVC, PinDelegate, CreateNameDelegate {
         let createNameSheet = CreateNameSheet(nibName: "CreateNameSheet", bundle: nil)
         createNameSheet.mnemonic = mnemonic
         createNameSheet.createNameDelegate = self
-        onStart2Sheet(createNameSheet, 220, 0.6)
+        onStartSheet(createNameSheet, 220, 0.6)
     }
     
     @objc func onCopyMenmonics() {

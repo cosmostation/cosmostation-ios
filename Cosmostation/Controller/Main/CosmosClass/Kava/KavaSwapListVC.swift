@@ -154,7 +154,7 @@ extension KavaSwapListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
             baseSheet.sheetDelegate = self
             baseSheet.swpName = swapMyDeposit?[indexPath.row].poolID
             baseSheet.sheetType = .SelectSwpAction
-            onStartSheet(baseSheet, 240)
+            onStartSheet(baseSheet, 240, 0.6)
             
         } else {
             onDepositSwpTx(swapOtherList[indexPath.row].name)

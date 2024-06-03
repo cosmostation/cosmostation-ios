@@ -264,13 +264,13 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchLanguage
-                onStartSheet(baseSheet)
+                onStartSheet(baseSheet, 320, 0.6)
                 
             } else if (indexPath.row == 1) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchCurrency
-                onStartSheet(baseSheet)
+                onStartSheet(baseSheet, 320, 0.9)
                 
             } else if (indexPath.row == 2) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
@@ -287,13 +287,13 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchPriceColor
-                onStartSheet(baseSheet, 240)
+                onStartSheet(baseSheet, 240, 0.6)
                 
             } else if (indexPath.row == 7) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchAutoPass
-                onStartSheet(baseSheet)
+                onStartSheet(baseSheet, 320, 0.6)
             }
             
         } else if (indexPath.section == 2) {
@@ -393,7 +393,7 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SwitchAccount
-        onStartSheet(baseSheet)
+        onStartSheet(baseSheet, 320, 0.6)
     }
 
     public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
@@ -490,7 +490,7 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
             let qrImportCheckKeySheet = QrImportCheckKeySheet(nibName: "QrImportCheckKeySheet", bundle: nil)
             qrImportCheckKeySheet.toDecryptString = scanedStr
             qrImportCheckKeySheet.qrImportCheckKeyDelegate = self
-            onStartSheet(qrImportCheckKeySheet, 240)
+            onStartSheet(qrImportCheckKeySheet, 240, 0.6)
             return
         }
         onShowToast(NSLocalizedString("error_unknown_qr_code", comment: ""))

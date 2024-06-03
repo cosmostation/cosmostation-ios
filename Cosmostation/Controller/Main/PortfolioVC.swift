@@ -238,7 +238,7 @@ class PortfolioVC: BaseVC {
     func onNodedownPopup() {
         let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
         warnSheet.noticeType = .NodeDownGuide
-        onStart2Sheet(warnSheet, 320, 0.6)
+        onStartSheet(warnSheet, 320, 0.6)
     }
 
 }
@@ -475,7 +475,7 @@ extension PortfolioVC: BaseSheetDelegate {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SwitchAccount
-        onStartSheet(baseSheet)
+        onStartSheet(baseSheet, 320, 0.6)
     }
 
     public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {

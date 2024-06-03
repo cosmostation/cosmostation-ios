@@ -232,7 +232,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNE-kd-RtM" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="804" width="398" height="54"/>
+                    <rect key="frame" x="8" y="800" width="398" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="Rw7-L4-jay"/>
@@ -253,7 +253,7 @@
             <constraints>
                 <constraint firstItem="2hl-GP-XYx" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-36" id="Baz-yc-nGW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NNE-kd-RtM" secondAttribute="trailing" constant="8" id="LFT-9p-5oo"/>
-                <constraint firstAttribute="bottom" secondItem="NNE-kd-RtM" secondAttribute="bottom" constant="38" id="Lb5-oO-bSW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="NNE-kd-RtM" secondAttribute="bottom" constant="8" id="Lb5-oO-bSW"/>
                 <constraint firstItem="fUA-MR-oBd" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="WoL-h0-aC3"/>
                 <constraint firstItem="fUA-MR-oBd" firstAttribute="top" secondItem="Pb4-0L-Pvb" secondAttribute="bottom" constant="80" id="ZOC-5g-iQn"/>
                 <constraint firstItem="lhG-nT-YJr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="ck3-Sa-RSE"/>

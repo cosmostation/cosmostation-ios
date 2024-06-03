@@ -129,7 +129,7 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
         tokenListSheet.allErc20Tokens = allErc20Tokens
         tokenListSheet.toDisplayErc20Tokens = toDisplayErc20Tokens.map { $0.address! }
         tokenListSheet.tokensListDelegate = self
-        onStartSheet(tokenListSheet, 680)
+        onStartSheet(tokenListSheet, 680, 0.8)
     }
     
     func onTokensSelected(_ result: [String]) {

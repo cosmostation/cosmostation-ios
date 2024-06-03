@@ -236,7 +236,7 @@ extension KavaLendListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
             baseSheet.sheetDelegate = self
             baseSheet.hardMarketDenom = hardParams?.moneyMarkets[indexPath.row].denom
             baseSheet.sheetType = .SelectHardAction
-            onStartSheet(baseSheet)
+            onStartSheet(baseSheet, 320, 0.6)
         }
     }
     

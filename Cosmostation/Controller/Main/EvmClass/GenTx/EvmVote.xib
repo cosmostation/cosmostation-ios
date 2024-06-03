@@ -49,11 +49,11 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PLC-Pt-N8R">
-                    <rect key="frame" x="0.0" y="107.33333333333334" width="393" height="478.66666666666663"/>
+                    <rect key="frame" x="0.0" y="107.33333333333334" width="393" height="474.66666666666663"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qbi-2C-dOg" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="594" width="377" height="150"/>
+                    <rect key="frame" x="8" y="590" width="377" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZ6-GE-JhI">
                             <rect key="frame" x="12" y="14" width="36" height="14"/>
@@ -185,7 +185,7 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1AQ-wO-dgn" customClass="RedFixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="687.66666666666663" width="377" height="56.333333333333371"/>
+                    <rect key="frame" x="8" y="683.66666666666663" width="377" height="56.333333333333371"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconWarnRed" translatesAutoresizingMaskIntoConstraints="NO" id="UBh-fO-7zZ">
                             <rect key="frame" x="10" y="12" width="16" height="16"/>
@@ -223,7 +223,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R89-Gn-n8d" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="uqR-OK-nka"/>
@@ -267,7 +267,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PLC-Pt-N8R" secondAttribute="trailing" id="kNm-wb-FHG"/>
                 <constraint firstItem="qbi-2C-dOg" firstAttribute="top" secondItem="PLC-Pt-N8R" secondAttribute="bottom" constant="8" id="q7D-EB-ldd"/>
                 <constraint firstItem="PLC-Pt-N8R" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="skh-rE-r8A"/>
-                <constraint firstAttribute="bottom" secondItem="R89-Gn-n8d" secondAttribute="bottom" constant="38" id="yLj-Lo-6xS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="R89-Gn-n8d" secondAttribute="bottom" constant="8" id="yLj-Lo-6xS"/>
             </constraints>
             <point key="canvasLocation" x="132" y="-11"/>
         </view>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -197,7 +197,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6P9-BX-cAA" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="516.66666666666663" width="377" height="67.333333333333371"/>
+                    <rect key="frame" x="8" y="512.66666666666663" width="377" height="67.333333333333371"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0W-FS-LZA">
                             <rect key="frame" x="12" y="14" width="96" height="14"/>
@@ -215,7 +215,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to add memo" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCE-oM-QX0">
-                            <rect key="frame" x="12" y="36" width="100" height="15.333333333333336"/>
+                            <rect key="frame" x="12" y="36" width="99.666666666666671" height="15.333333333333336"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
@@ -234,7 +234,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Doz-FU-ijO" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="594" width="377" height="150"/>
+                    <rect key="frame" x="8" y="590" width="377" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRM-Ma-M2W">
                             <rect key="frame" x="12" y="14" width="36" height="14"/>
@@ -310,7 +310,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZT-bn-6mK">
-                            <rect key="frame" x="349" y="73.666666666666629" width="6.6666666666666856" height="14"/>
+                            <rect key="frame" x="350.33333333333331" y="73.666666666666629" width="5.6666666666666856" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="28A-6c-fTj"/>
                             </constraints>
@@ -319,7 +319,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Spc-vR-lUK">
-                            <rect key="frame" x="357.66666666666669" y="72.666666666666629" width="7.3333333333333144" height="14"/>
+                            <rect key="frame" x="358" y="72.666666666666629" width="7" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="8JO-3d-Hhq"/>
                             </constraints>
@@ -366,7 +366,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xY-SS-G4W" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="qBB-Wm-wVX"/>
@@ -394,7 +394,7 @@
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="2xY-SS-G4W" secondAttribute="bottom" constant="38" id="1mx-ID-lSh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="2xY-SS-G4W" secondAttribute="bottom" constant="8" id="1mx-ID-lSh"/>
                 <constraint firstItem="v8b-eK-EZt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="D2H-hy-p7q"/>
                 <constraint firstItem="sEI-q2-iZN" firstAttribute="top" secondItem="v8b-eK-EZt" secondAttribute="bottom" constant="20" id="G0i-Nt-i19"/>
                 <constraint firstItem="6P9-BX-cAA" firstAttribute="leading" secondItem="2xY-SS-G4W" secondAttribute="leading" id="JPq-2H-wlv"/>
@@ -421,7 +421,7 @@
         <image name="iconArrowDown" width="24" height="24"/>
         <image name="iconValidatorInactive" width="40" height="40"/>
         <image name="iconValidatorJailed" width="40" height="40"/>
-        <image name="tokenDefault" width="22" height="22"/>
+        <image name="tokenDefault" width="48" height="48"/>
         <image name="validatorDefault" width="40" height="40"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

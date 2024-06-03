@@ -153,7 +153,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                 addressBookSheet.addressBook = existed
                 addressBookSheet.memo = toMemo
                 addressBookSheet.bookDelegate = self
-                self.onStartSheet(addressBookSheet, 420)
+                onStartSheet(addressBookSheet, 420, 0.8)
                 return
             }
             
@@ -164,7 +164,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             addressBookSheet.recipinetAddress = toAddress
             addressBookSheet.memo = toMemo
             addressBookSheet.bookDelegate = self
-            self.onStartSheet(addressBookSheet, 420)
+            onStartSheet(addressBookSheet, 420, 0.8)
             return
         }
     }

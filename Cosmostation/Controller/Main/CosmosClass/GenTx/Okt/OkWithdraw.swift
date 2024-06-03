@@ -85,7 +85,7 @@ class OkWithdraw: BaseVC {
             amountSheet.existedAmount = toWithdrawAmount
         }
         amountSheet.sheetDelegate = self
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     func onUpdateAmountView(_ amount: String?) {
@@ -120,7 +120,7 @@ class OkWithdraw: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {

@@ -192,7 +192,7 @@ class DappDetailVC: BaseVC {
             }
         }
         txSignRequestSheet.isModalInPresentation = true
-        self.onStartSheet(txSignRequestSheet, 450)
+        onStartSheet(txSignRequestSheet, 450, 0.8)
     }
     
     private func getSignatureResponse(_ privateKey: Data, _ signData: Data) -> (signature: String?, pubKey: JSON?) {

@@ -11,7 +11,6 @@ import MaterialComponents
 
 class TxAmountSheet: BaseVC, UITextFieldDelegate {
     
-    @IBOutlet weak var amountTitle: UILabel!
     @IBOutlet weak var availableTitle: UILabel!
     @IBOutlet weak var availableLabel: UILabel!
     @IBOutlet weak var availableDenom: UILabel!
@@ -47,7 +46,6 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
     }
     
     override func setLocalizedString() {
-        amountTitle.text = NSLocalizedString("str_insert_amount", comment: "")
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     

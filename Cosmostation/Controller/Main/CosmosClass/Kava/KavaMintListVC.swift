@@ -191,7 +191,7 @@ extension KavaMintListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
             baseSheet.cdpType = myCollateralParamList[indexPath.row].type
             baseSheet.sheetDelegate = self
             baseSheet.sheetType = .SelectMintAction
-            onStartSheet(baseSheet)
+            onStartSheet(baseSheet, 320, 0.6)
             
         } else {
             onCreateCdpTx(otherCollateralParamList[indexPath.row].type)

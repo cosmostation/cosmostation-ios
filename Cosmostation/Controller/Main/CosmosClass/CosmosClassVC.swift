@@ -200,14 +200,14 @@ class CosmosClassVC: BaseVC {
         let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
         warnSheet.selectedChain = selectedChain
         warnSheet.noticeType = .TokenGithub
-        onStart2Sheet(warnSheet, 420, 0.8)
+        onStartSheet(warnSheet, 420, 0.8)
     }
     
     @objc func onClickAddNft() {
         let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
         warnSheet.selectedChain = selectedChain
         warnSheet.noticeType = .NFTGithub
-        onStart2Sheet(warnSheet, 420, 0.8)
+        onStartSheet(warnSheet, 420, 0.8)
     }
     
     func onSendTx() {
@@ -616,7 +616,7 @@ extension CosmosClassVC {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectNeutronVault
-        onStartSheet(baseSheet, 240)
+        onStartSheet(baseSheet, 240, 0.6)
     }
     
     func onNeutronVaultDeposit() {

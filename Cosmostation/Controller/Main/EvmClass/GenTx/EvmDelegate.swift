@@ -111,7 +111,7 @@ class EvmDelegate: BaseVC {
         baseSheet.validators = selectedChain.cosmosValidators
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectValidator
-        onStartSheet(baseSheet, 680)
+        onStartSheet(baseSheet, 680, 0.8)
     }
     
     func onUpdateValidatorView() {
@@ -139,7 +139,7 @@ class EvmDelegate: BaseVC {
         }
         amountSheet.sheetDelegate = self
         amountSheet.sheetType = .TxDelegate
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     func onUpdateAmountView(_ amount: String) {

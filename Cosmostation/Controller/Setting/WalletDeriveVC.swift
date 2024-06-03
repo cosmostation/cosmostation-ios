@@ -166,7 +166,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
         createNameSheet.mnemonic = mnemonic
         createNameSheet.privateKeyString = privateKeyString
         createNameSheet.createNameDelegate = self
-        onStartSheet(createNameSheet, 240)
+        onStartSheet(createNameSheet, 240, 0.6)
     }
     
     func onNameConfirmed(_ name: String, _ mnemonic: String?, _ privateKeyString: String?) {

@@ -72,7 +72,7 @@ class TxAddressLegacySheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextVie
             baseSheet.senderAddress = selectedChain.rewardAddress
         }
         baseSheet.sheetType = .SelectCosmosRecipientBechAddress
-        self.onStartSheet(baseSheet)
+        onStartSheet(baseSheet, 320, 0.6)
     }
     
     @IBAction func onClickScan(_ sender: UIButton) {

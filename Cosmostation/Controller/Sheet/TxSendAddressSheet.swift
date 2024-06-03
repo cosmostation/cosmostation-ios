@@ -69,7 +69,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         addressListSheet.senderBechAddress = senderBechAddress
         addressListSheet.senderEvmAddress = senderEvmAddress
         addressListSheet.addressListSheetDelegate = self
-        self.onStartSheet(addressListSheet)
+        onStartSheet(addressListSheet, 320, 0.6)
     }
     
     @IBAction func onClickScan(_ sender: UIButton) {
@@ -175,7 +175,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                     baseSheet.nameservices = self.nameservices
                     baseSheet.sheetDelegate = self
                     baseSheet.sheetType = .SelectCosmosNameServiceAddress
-                    self.onStartSheet(baseSheet)
+                    self.onStartSheet(baseSheet, 320, 0.6)
                 }
             }
         }

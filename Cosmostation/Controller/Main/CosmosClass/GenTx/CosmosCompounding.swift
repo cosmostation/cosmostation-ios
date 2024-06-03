@@ -108,7 +108,7 @@ class CosmosCompounding: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -138,7 +138,7 @@ class CosmosCompounding: BaseVC {
         baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240)
+        onStartSheet(baseSheet, 240, 0.6)
     }
     
     func onUpdateFeeView() {

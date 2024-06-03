@@ -65,10 +65,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goW-7l-99X">
-                    <rect key="frame" x="0.0" y="107.33333333333331" width="393" height="736.66666666666674"/>
+                    <rect key="frame" x="0.0" y="107.33333333333331" width="393" height="710.66666666666674"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LWt-r0-Cka">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="719"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="689"/>
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="doq-ct-4dv" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
                                     <rect key="frame" x="8" y="4" width="377" height="68"/>
@@ -424,7 +424,7 @@
                                 <constraint firstItem="xF3-Gx-QgM" firstAttribute="trailing" secondItem="doq-ct-4dv" secondAttribute="trailing" id="Q7I-YN-OGd"/>
                                 <constraint firstItem="EKJ-u3-w7k" firstAttribute="trailing" secondItem="doq-ct-4dv" secondAttribute="trailing" id="QbC-Bi-fg2"/>
                                 <constraint firstAttribute="trailing" secondItem="0Mp-Mp-AgV" secondAttribute="trailing" constant="8" id="VPe-JP-8Ei"/>
-                                <constraint firstAttribute="bottom" secondItem="0Mp-Mp-AgV" secondAttribute="bottom" constant="38" id="aan-yi-nTW"/>
+                                <constraint firstAttribute="bottom" secondItem="0Mp-Mp-AgV" secondAttribute="bottom" constant="8" id="aan-yi-nTW"/>
                                 <constraint firstAttribute="trailing" secondItem="doq-ct-4dv" secondAttribute="trailing" constant="8" id="cxA-9r-OrU"/>
                                 <constraint firstItem="doq-ct-4dv" firstAttribute="leading" secondItem="LWt-r0-Cka" secondAttribute="leading" constant="8" id="d6S-x0-tM5"/>
                                 <constraint firstAttribute="trailing" secondItem="KeJ-jC-Psp" secondAttribute="trailing" constant="8" id="jfL-ad-hQy"/>
@@ -462,7 +462,7 @@
                 <constraint firstItem="5U7-OU-MQi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="9A9-LD-FVE"/>
                 <constraint firstItem="jGs-cn-MKC" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="CaJ-0c-69y"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="goW-7l-99X" secondAttribute="leading" id="QaR-0a-U0s"/>
-                <constraint firstAttribute="bottom" secondItem="goW-7l-99X" secondAttribute="bottom" constant="8" id="iZM-Yb-53K"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="goW-7l-99X" secondAttribute="bottom" id="iZM-Yb-53K"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="goW-7l-99X" secondAttribute="trailing" id="peL-n6-Mcq"/>
             </constraints>
             <point key="canvasLocation" x="132" y="-11"/>

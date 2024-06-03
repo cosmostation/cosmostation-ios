@@ -99,7 +99,7 @@ class ChainListVC: BaseVC, EndpointDelegate {
         let endpointSheet = SelectEndpointSheet(nibName: "SelectEndpointSheet", bundle: nil)
         endpointSheet.targetChain = chain
         endpointSheet.endpointDelegate = self
-        onStartSheet(endpointSheet, 420)
+        onStartSheet(endpointSheet, 420, 0.8)
     }
     
     func onEndpointUpdated() {

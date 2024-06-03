@@ -122,7 +122,7 @@ class CosmosRedelegate: BaseVC {
         baseSheet.targetChain = selectedChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectUnStakeValidator
-        onStartSheet(baseSheet, 680)
+        onStartSheet(baseSheet, 680, 0.8)
     }
     
     func onUpdateFromValidatorView() {
@@ -150,7 +150,7 @@ class CosmosRedelegate: BaseVC {
         baseSheet.validators = selectedChain.cosmosValidators
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectValidator
-        onStartSheet(baseSheet, 680)
+        onStartSheet(baseSheet, 680, 0.8)
     }
     
     func onUpdateToValidatorView() {
@@ -193,7 +193,7 @@ class CosmosRedelegate: BaseVC {
         }
         amountSheet.sheetDelegate = self
         amountSheet.sheetType = .TxRedelegate
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     func onUpdateAmountView(_ amount: String) {
@@ -223,14 +223,14 @@ class CosmosRedelegate: BaseVC {
         baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240)
+        onStartSheet(baseSheet, 240, 0.6)
     }
     
     @objc func onClickMemo() {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {

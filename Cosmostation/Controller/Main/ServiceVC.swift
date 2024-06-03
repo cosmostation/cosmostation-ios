@@ -150,7 +150,7 @@ extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
             baseSheet.sheetType = .SelectBuyCrypto
-            onStartSheet(baseSheet)
+            onStartSheet(baseSheet, 320, 0.6)
         }
     }
 }
@@ -173,7 +173,7 @@ extension ServiceVC: BaseSheetDelegate {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SwitchAccount
-        onStartSheet(baseSheet)
+        onStartSheet(baseSheet, 320, 0.6)
     }
 
     public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {

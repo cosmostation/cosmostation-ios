@@ -48,7 +48,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3bD-Ws-Od4">
-                    <rect key="frame" x="211" y="180.33333333333334" width="162" height="28"/>
+                    <rect key="frame" x="211" y="184.33333333333334" width="162" height="28"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-rQ-Skb">
                             <rect key="frame" x="0.0" y="0.0" width="48.666666666666664" height="28"/>
@@ -149,7 +149,7 @@
                 <constraint firstItem="wQg-3Z-utB" firstAttribute="top" secondItem="vqk-40-D1t" secondAttribute="bottom" constant="8" id="WjJ-DS-cPp"/>
                 <constraint firstItem="vqk-40-D1t" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="c7R-Ii-Ymq"/>
                 <constraint firstItem="XCO-tB-teV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="dpc-y7-kS1"/>
-                <constraint firstItem="3bD-Ws-Od4" firstAttribute="top" secondItem="VbB-EV-RKr" secondAttribute="bottom" constant="8" id="f1C-Or-OUJ"/>
+                <constraint firstItem="3bD-Ws-Od4" firstAttribute="top" secondItem="VbB-EV-RKr" secondAttribute="bottom" constant="12" id="f1C-Or-OUJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="XCO-tB-teV" secondAttribute="bottom" constant="8" id="hZ0-xd-oSZ"/>
                 <constraint firstItem="Rpc-dN-6jT" firstAttribute="centerY" secondItem="wSi-Da-NB3" secondAttribute="centerY" id="j79-eL-Aw6"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3bD-Ws-Od4" secondAttribute="trailing" constant="20" id="jE8-JF-WkZ"/>

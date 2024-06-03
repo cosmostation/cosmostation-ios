@@ -216,7 +216,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         if (BaseData.instance.getSwapWarn()) {
             let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
             warnSheet.noticeType = .SwapInitWarn
-            onStart2Sheet(warnSheet, 320, 0.6)
+            onStartSheet(warnSheet, 320, 0.6)
         }
     }
     
@@ -290,7 +290,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         baseSheet.swapChains = skipChains
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapInputChain
-        onStartSheet(baseSheet, 680)
+        onStartSheet(baseSheet, 680, 0.8)
     }
     
     @objc func onInputAsset() {
@@ -301,7 +301,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         baseSheet.targetChain = inputCosmosChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapInputAsset
-        onStartSheet(baseSheet, 680)
+        onStartSheet(baseSheet, 680, 0.8)
     }
     
     @objc func onOutputChain() {
@@ -310,7 +310,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         baseSheet.swapChains = skipChains
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapOutputChain
-        onStartSheet(baseSheet, 680)
+        onStartSheet(baseSheet, 680, 0.8)
     }
     
     @objc func onOutputAsset() {
@@ -321,7 +321,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         baseSheet.targetChain = outputCosmosChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapOutputAsset
-        onStartSheet(baseSheet, 680)
+        onStartSheet(baseSheet, 680, 0.8)
     }
     
     
@@ -331,7 +331,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapSlippage
-        onStartSheet(baseSheet)
+        onStartSheet(baseSheet, 320, 0.6)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

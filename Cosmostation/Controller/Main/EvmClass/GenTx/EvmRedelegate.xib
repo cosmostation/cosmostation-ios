@@ -301,7 +301,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C74-kf-Mu4" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="594" width="377" height="150"/>
+                    <rect key="frame" x="8" y="590" width="377" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vni-7T-zkc">
                             <rect key="frame" x="12" y="14" width="36" height="14"/>
@@ -433,7 +433,7 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UGQ-0E-wNa" customClass="RedFixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="687.66666666666663" width="377" height="56.333333333333371"/>
+                    <rect key="frame" x="8" y="683.66666666666663" width="377" height="56.333333333333371"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconWarnRed" translatesAutoresizingMaskIntoConstraints="NO" id="EBk-vV-GF1">
                             <rect key="frame" x="10" y="12" width="16" height="16"/>
@@ -471,7 +471,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8yp-X8-7wZ" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="ItY-TU-RsK"/>
@@ -499,7 +499,7 @@
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="8yp-X8-7wZ" secondAttribute="bottom" constant="38" id="7vP-hd-s3E"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8yp-X8-7wZ" secondAttribute="bottom" constant="8" id="7vP-hd-s3E"/>
                 <constraint firstItem="VGP-kW-7D4" firstAttribute="top" secondItem="gNu-oa-M0b" secondAttribute="bottom" constant="20" id="99I-04-179"/>
                 <constraint firstItem="zcA-PW-boP" firstAttribute="trailing" secondItem="ql5-4F-INx" secondAttribute="trailing" id="B0T-zV-bUp"/>
                 <constraint firstItem="8yp-X8-7wZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="EgS-hT-zn4"/>

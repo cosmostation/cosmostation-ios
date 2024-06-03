@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -134,7 +134,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UkY-bX-F9E" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="lt7-sH-5PU"/>
@@ -172,7 +172,7 @@
                 <constraint firstItem="Hq3-0z-VB0" firstAttribute="centerY" secondItem="i9d-Tg-NPS" secondAttribute="centerY" id="7sn-bR-IAR"/>
                 <constraint firstItem="i9d-Tg-NPS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="54" id="BiU-Tn-g69"/>
                 <constraint firstItem="Hq3-0z-VB0" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="top" constant="12" id="GLg-wo-OOL"/>
-                <constraint firstAttribute="bottom" secondItem="UkY-bX-F9E" secondAttribute="bottom" constant="38" id="GvJ-Hp-0lm"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="UkY-bX-F9E" secondAttribute="bottom" constant="8" id="GvJ-Hp-0lm"/>
                 <constraint firstItem="RWO-dd-aOf" firstAttribute="top" secondItem="i9d-Tg-NPS" secondAttribute="bottom" constant="24" id="IVc-Ra-SvO"/>
                 <constraint firstItem="Hq3-0z-VB0" firstAttribute="trailing" secondItem="i9d-Tg-NPS" secondAttribute="trailing" constant="-12" id="IeG-b7-CLD"/>
                 <constraint firstItem="RWO-dd-aOf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="J74-Xd-q58"/>

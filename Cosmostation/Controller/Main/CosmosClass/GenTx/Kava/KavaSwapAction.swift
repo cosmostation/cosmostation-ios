@@ -173,7 +173,7 @@ class KavaSwapAction: BaseVC {
             lpAmountSheet.existed2Amount = coin2ToAmount
         }
         lpAmountSheet.sheetDelegate = self
-        self.onStartSheet(lpAmountSheet)
+        onStartSheet(lpAmountSheet, 320, 0.6)
     }
     
     func onUpdateDepositAmountView(_ amount1: String?, _ amount2: String?) {
@@ -206,7 +206,7 @@ class KavaSwapAction: BaseVC {
         }
         amountSheet.sheetDelegate = self
         amountSheet.sheetType = .TxSwpWithdraw
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     //update with withdraw amount
@@ -246,7 +246,7 @@ class KavaSwapAction: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -275,7 +275,7 @@ class KavaSwapAction: BaseVC {
         baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240)
+        onStartSheet(baseSheet, 240, 0.6)
     }
     
     func onUpdateFeeView() {

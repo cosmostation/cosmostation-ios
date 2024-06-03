@@ -74,14 +74,14 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectCreateAccount
-        onStartSheet(baseSheet)
+        onStartSheet(baseSheet, 320, 0.6)
     }
     
     func onShowRenameSheet(_ account: BaseAccount) {
         let renameSheet = RenameSheet(nibName: "RenameSheet", bundle: nil)
         renameSheet.toUpdateAccount = account
         renameSheet.renameDelegate = self
-        self.onStartSheet(renameSheet, 240)
+        onStartSheet(renameSheet, 240, 0.6)
     }
     
     func onShowDeleteSheet(_ account: BaseAccount) {
@@ -89,7 +89,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
         let deleteAccountSheet = DeleteAccountSheet(nibName: "DeleteAccountSheet", bundle: nil)
         deleteAccountSheet.toDeleteAccount = account
         deleteAccountSheet.deleteDelegate = self
-        self.onStartSheet(deleteAccountSheet, 280)
+        onStartSheet(deleteAccountSheet, 280, 0.6)
     }
     
     func onCheckPinforMnemonic(_ account: BaseAccount) {
@@ -288,14 +288,14 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource, UITableView
             baseSheet.sheetDelegate = self
             baseSheet.selectedAccount = mnmonicAccounts[indexPath.row]
             baseSheet.sheetType = .SelectOptionMnemonicAccount
-            onStartSheet(baseSheet)
+            onStartSheet(baseSheet, 320, 0.6)
             
         } else if (indexPath.section == 1) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
             baseSheet.selectedAccount = pkeyAccounts[indexPath.row]
             baseSheet.sheetType = .SelectOptionPrivateKeyAccount
-            onStartSheet(baseSheet)
+            onStartSheet(baseSheet, 320, 0.6)
         }
     }
     

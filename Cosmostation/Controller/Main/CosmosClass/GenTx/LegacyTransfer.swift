@@ -136,7 +136,7 @@ class LegacyTransfer: BaseVC {
             amountSheet.existedAmount = toSendAmount
         }
         amountSheet.sheetDelegate = self
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     func onUpdateAmountView(_ amount: String?) {
@@ -178,7 +178,7 @@ class LegacyTransfer: BaseVC {
         addressSheet.existedAddress = recipientAddress
         addressSheet.addressLegacySheetType = .SelectAddress_CosmosLegacySend
         addressSheet.addressLegacyDelegate = self
-        self.onStartSheet(addressSheet, 220)
+        onStartSheet(addressSheet, 220, 0.6)
     }
     
     func onUpdateToAddressView(_ address: String) {
@@ -201,7 +201,7 @@ class LegacyTransfer: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {

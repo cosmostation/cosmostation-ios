@@ -102,7 +102,7 @@ class EvmUndelegate: BaseVC {
         baseSheet.targetChain = selectedChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectUnStakeValidator
-        onStartSheet(baseSheet, 680)
+        onStartSheet(baseSheet, 680, 0.8)
     }
     
     func onUpdateValidatorView() {
@@ -134,7 +134,7 @@ class EvmUndelegate: BaseVC {
         }
         amountSheet.sheetDelegate = self
         amountSheet.sheetType = .TxDelegate
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     func onUpdateAmountView(_ amount: String) {

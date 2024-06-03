@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -71,7 +71,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMY-n5-KxC" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="WFJ-J7-4pM"/>
@@ -99,7 +99,7 @@
                 <constraint firstItem="KgZ-ft-yq0" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ecu-Lz-0hW"/>
                 <constraint firstItem="E8X-w8-jig" firstAttribute="trailing" secondItem="4ZJ-sc-YH7" secondAttribute="trailing" id="lge-L0-Sz5"/>
                 <constraint firstItem="4ZJ-sc-YH7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="n7j-cO-XZi"/>
-                <constraint firstAttribute="bottom" secondItem="MMY-n5-KxC" secondAttribute="bottom" constant="38" id="pDi-4Z-7p8"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="MMY-n5-KxC" secondAttribute="bottom" constant="8" id="pDi-4Z-7p8"/>
                 <constraint firstItem="E8X-w8-jig" firstAttribute="leading" secondItem="4ZJ-sc-YH7" secondAttribute="leading" id="vlu-IB-9V3"/>
             </constraints>
             <point key="canvasLocation" x="83" y="21"/>

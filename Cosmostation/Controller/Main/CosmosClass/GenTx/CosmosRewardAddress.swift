@@ -95,7 +95,7 @@ class CosmosRewardAddress: BaseVC {
         addressSheet.existedAddress = newRewardAddress?.withdrawAddress
         addressSheet.addressLegacySheetType = .SelectAddress_CosmosDistribution
         addressSheet.addressLegacyDelegate = self
-        self.onStartSheet(addressSheet, 220)
+        onStartSheet(addressSheet, 220, 0.6)
     }
     
     func onUpdateToAddressView() {
@@ -117,7 +117,7 @@ class CosmosRewardAddress: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -146,7 +146,7 @@ class CosmosRewardAddress: BaseVC {
         baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240)
+        onStartSheet(baseSheet, 240, 0.6)
     }
     
     func onUpdateFeeView() {

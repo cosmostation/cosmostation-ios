@@ -149,7 +149,7 @@ extension KavaEarnListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
         baseSheet.sheetDelegate = self
         baseSheet.earnCoin = myDeposits[indexPath.row]
         baseSheet.sheetType = .SelectEarnAction
-        onStartSheet(baseSheet, 240)
+        onStartSheet(baseSheet, 240, 0.6)
     }
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {

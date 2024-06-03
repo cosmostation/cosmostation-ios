@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -34,7 +34,7 @@
                     <color key="tintColor" name="_primary"/>
                 </tableView>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFM-gB-RsV" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="P8a-NJ-aj9"/>
@@ -99,7 +99,7 @@
                 <constraint firstItem="Q8M-AH-yf3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="L6K-UY-xmW"/>
                 <constraint firstItem="Q8M-AH-yf3" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="ZaF-WC-sMs"/>
                 <constraint firstItem="nO1-yz-Whg" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="dRG-eF-VGG"/>
-                <constraint firstAttribute="bottom" secondItem="FFM-gB-RsV" secondAttribute="bottom" constant="38" id="kou-ah-1S8"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FFM-gB-RsV" secondAttribute="bottom" constant="8" id="kou-ah-1S8"/>
                 <constraint firstItem="Q8M-AH-yf3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pcn-WX-kTp"/>
                 <constraint firstItem="fW9-e0-raX" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="rds-G4-IkL"/>
             </constraints>

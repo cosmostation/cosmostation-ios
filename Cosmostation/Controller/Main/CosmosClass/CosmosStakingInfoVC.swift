@@ -395,14 +395,14 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
             baseSheet.sheetDelegate = self
             baseSheet.delegation = delegations[indexPath.row]
             baseSheet.sheetType = .SelectDelegatedAction
-            onStartSheet(baseSheet)
+            onStartSheet(baseSheet, 320, 0.6)
             
         } else if (indexPath.section == 2) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
             baseSheet.unbondingEnrtyPosition = indexPath.row
             baseSheet.sheetType = .SelectUnbondingAction
-            onStartSheet(baseSheet, 240)
+            onStartSheet(baseSheet, 240, 0.6)
         }
     }
     
