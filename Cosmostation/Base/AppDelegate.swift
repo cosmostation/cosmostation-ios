@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        NSLog("Cosmostation application didFinishLaunchingWithOptions")
         setInit()
         setTheme()
         setFirebase()
@@ -52,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         if let url = launchOptions?[UIApplication.LaunchOptionsKey.url] as? URL {
             BaseData.instance.appSchemeUrl = url
+            NSLog("Cosmostation application didFinishLaunchingWithOptions \(url)")
             return false
         } else if let userInfo = launchOptions?[.remoteNotification] as? [AnyHashable: Any] {
             BaseData.instance.appUserInfo = userInfo

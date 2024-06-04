@@ -20,6 +20,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.view.addBackground()
+        NSLog("Cosmostation IntroVC viewDidLoad")
         
         if (BaseData.instance.getDBVersion() < DB_VERSION) {
             onUpdateMigration()
@@ -78,6 +79,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
                 self.present(pinVC, animated: true)
                 
             } else if BaseData.instance.appSchemeUrl != nil {
+                NSLog("Cosmostation IntroVC onDeepLinkStart")
                 self.onDeepLinkStart()
                 
             } else {
