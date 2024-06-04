@@ -677,6 +677,10 @@
 		04951DC42B7F6E6200A03FB1 /* QrAddressPopup2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04951DC12B7F6E6200A03FB1 /* QrAddressPopup2VC.swift */; };
 		04951DC52B7F6E6200A03FB1 /* QrAddressPopup2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04951DC22B7F6E6200A03FB1 /* QrAddressPopup2VC.xib */; };
 		04951DC62B7F6E6200A03FB1 /* QrAddressPopup2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04951DC22B7F6E6200A03FB1 /* QrAddressPopup2VC.xib */; };
+		049714FD2C0EB73B008C45A0 /* PopupReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049714FB2C0EB73B008C45A0 /* PopupReceiveCell.swift */; };
+		049714FE2C0EB73B008C45A0 /* PopupReceiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049714FC2C0EB73B008C45A0 /* PopupReceiveCell.xib */; };
+		049714FF2C0EB73B008C45A0 /* PopupReceiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049714FC2C0EB73B008C45A0 /* PopupReceiveCell.xib */; };
+		049715002C0EB73B008C45A0 /* PopupReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049714FB2C0EB73B008C45A0 /* PopupReceiveCell.swift */; };
 		049B691F29D1736B0027B82D /* MintscanProposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691E29D1736B0027B82D /* MintscanProposal.swift */; };
 		049B692029D1736B0027B82D /* MintscanProposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691E29D1736B0027B82D /* MintscanProposal.swift */; };
 		04A116F128F7DB42003605E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */; };
@@ -2271,6 +2275,8 @@
 		0494CBFA2BAF442E00FA3E49 /* NftListHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NftListHeader.xib; sourceTree = "<group>"; };
 		04951DC12B7F6E6200A03FB1 /* QrAddressPopup2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrAddressPopup2VC.swift; sourceTree = "<group>"; };
 		04951DC22B7F6E6200A03FB1 /* QrAddressPopup2VC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QrAddressPopup2VC.xib; sourceTree = "<group>"; };
+		049714FB2C0EB73B008C45A0 /* PopupReceiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupReceiveCell.swift; sourceTree = "<group>"; };
+		049714FC2C0EB73B008C45A0 /* PopupReceiveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupReceiveCell.xib; sourceTree = "<group>"; };
 		049B691E29D1736B0027B82D /* MintscanProposal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanProposal.swift; sourceTree = "<group>"; };
 		04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04A1A8002AC80AA50014EF92 /* TxAmountSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxAmountSheet.swift; sourceTree = "<group>"; };
@@ -4006,6 +4012,8 @@
 				E1A48DEA2BFF0DE90084D770 /* ReceiveCell.xib */,
 				E1A48DEF2C0065310084D770 /* EcoListCell.swift */,
 				E1A48DF02C0065310084D770 /* EcoListCell.xib */,
+				049714FB2C0EB73B008C45A0 /* PopupReceiveCell.swift */,
+				049714FC2C0EB73B008C45A0 /* PopupReceiveCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -4503,6 +4511,7 @@
 				18FFB6E2281AF533004E65BB /* Assets.xcassets in Resources */,
 				04FEDB552B05DE230095B7B6 /* DeriveCell.xib in Resources */,
 				E14E29782A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
+				049714FF2C0EB73B008C45A0 /* PopupReceiveCell.xib in Resources */,
 				04FA746F2A9F8652001A2830 /* BaseSheet.xib in Resources */,
 				0400EE852AD41FC5007BA97F /* ServiceCell.xib in Resources */,
 				04527DBC2A937CA2005F72D7 /* AssetCell.xib in Resources */,
@@ -4774,6 +4783,7 @@
 				04CD24492AD11D3400497EF5 /* LegacyTransfer.xib in Resources */,
 				E1F257D62BF77A7B008F4D21 /* EvmDelegate.xib in Resources */,
 				04FA74732AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
+				049714FE2C0EB73B008C45A0 /* PopupReceiveCell.xib in Resources */,
 				E1DF777D2AB75F830028BD51 /* CheckPrivateKeysVC.xib in Resources */,
 				0400EF312ADD48E8007BA97F /* KavaSwapListCell.xib in Resources */,
 				0400EED72ADBC9E6007BA97F /* KavaClaimIncentives.xib in Resources */,
@@ -5376,6 +5386,7 @@
 				0494CBF72BAF39BA00FA3E49 /* NftListCell.swift in Sources */,
 				E15980AA2A83ADB60032892B /* MainTabVC.swift in Sources */,
 				047843F12AC9A11D00462F1C /* ChainBand.swift in Sources */,
+				049715002C0EB73B008C45A0 /* PopupReceiveCell.swift in Sources */,
 				0438A8072AE135B1006FA213 /* kava_cdp_v1beta1_query.grpc.swift in Sources */,
 				04C816D32BA98D75006B800A /* cosmos_gov_v1_genesis.pb.swift in Sources */,
 				E1D4EA592871584B005C1ECF /* FeeInfo.swift in Sources */,
@@ -6135,6 +6146,7 @@
 				04C8179A2BA98D75006B800A /* cosmos_gov_v1_query.pb.swift in Sources */,
 				0494CBF52BAF39BA00FA3E49 /* NftListCell.swift in Sources */,
 				048DBCE2280EC5E90007275E /* MWords.swift in Sources */,
+				049714FD2C0EB73B008C45A0 /* PopupReceiveCell.swift in Sources */,
 				047843F02AC9A11D00462F1C /* ChainBand.swift in Sources */,
 				0438A8062AE135B1006FA213 /* kava_cdp_v1beta1_query.grpc.swift in Sources */,
 				04C816D22BA98D75006B800A /* cosmos_gov_v1_genesis.pb.swift in Sources */,
