@@ -26,6 +26,10 @@ class BaseNetWork {
             }
     }
     
+    func fetchChainParams() async throws -> JSON {
+        return try await AF.request(BaseNetWork.msChainParams(), method: .get).serializingDecodable(JSON.self).value
+    }
+    
     func fetchPrices(_ force: Bool? = false) {
 //        print("fetchPrices ", BaseNetWork.msPricesUrl())
         if (!BaseData.instance.needPriceUpdate() && force == false) { return }

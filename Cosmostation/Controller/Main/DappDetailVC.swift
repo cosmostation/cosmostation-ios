@@ -48,14 +48,9 @@ class DappDetailVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSLog("Cosmostation DappDetailVC viewDidLoad")
         
-        if BaseData.instance.getLastAccount() != nil {
-            baseAccount = BaseData.instance.getLastAccount()
-        } else {
-            return
-        }
-        
-        loadingView.isHidden = true
+        loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
         loadingView.loopMode = .loop
@@ -63,27 +58,29 @@ class DappDetailVC: BaseVC {
         loadingView.play()
         
         Task {
-            allCosmosChains = await baseAccount.initKeysforSwap()
-            print("allCosmosChains ", allCosmosChains.count)
-        }
-        
-        accountName.text = baseAccount.name
-        onInitInjectScript()
-        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
-        
-        if (dappType == .INTERNAL_URL) {
-            print("DappDetailVC INTERNAL_URL ", dappUrl)
-            if (dappUrl?.query?.isEmpty == false) {
-                dappUrl = URL(string: dappUrl!.query!.removingPercentEncoding!)
+            if BaseData.instance.getLastAccount() != nil {
+                baseAccount = BaseData.instance.getLastAccount()
             }
-            print("DappDetailVC  dappUrl", dappUrl)
+            if BaseData.instance.mintscanChainParams == nil {
+                BaseData.instance.mintscanChainParams = try? await BaseNetWork().fetchChainParams()
+            }
+            allCosmosChains = await baseAccount.initKeysforSwap()
+            NSLog("Cosmostation allCosmosChains \(allCosmosChains.count)")
             
-            dappUrlLabel.text = dappUrl?.host
-            webView.load(URLRequest(url: dappUrl!))
-            
-        } else if (dappType == .DEEPLINK_WC2) {
-            print("DappDetailVC DEEPLINK_WC2 ", dappUrl)
-            onInitWcV2(dappUrl!)
+            DispatchQueue.main.async {
+                NSLog("Cosmostation wcV2ProposalRequest viewDidLoad")
+                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Pair \(Pair.instance.getPairings().count)")
+                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Sign \(Sign.instance.getSessions().count)")
+                self.loadingView.isHidden = true
+                if (self.baseAccount == nil || BaseData.instance.mintscanChainParams == nil) {
+                    self.onShowToast(NSLocalizedString("error_network_msg", comment: ""))
+                    self.wcV2Disconnect { _ in
+                        self.dismiss(animated: true)
+                    }
+                    return
+                }
+                self.onInitView()
+            }
         }
         
 //        print("incomed URL ", dappUrl)
@@ -102,6 +99,27 @@ class DappDetailVC: BaseVC {
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
+    func onInitView() {
+        accountName.text = baseAccount.name
+        onInitInjectScript()
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
+        
+        if (dappType == .INTERNAL_URL) {
+            NSLog("Cosmostation DappDetailVC INTERNAL_URL \(dappUrl?.absoluteString)")
+            if (dappUrl?.query?.isEmpty == false) {
+                dappUrl = URL(string: dappUrl!.query!.removingPercentEncoding!)
+            }
+            NSLog("Cosmostation dappUrl \(dappUrl?.absoluteString)")
+            
+            dappUrlLabel.text = dappUrl?.host
+            webView.load(URLRequest(url: dappUrl!))
+            
+        } else if (dappType == .DEEPLINK_WC2) {
+            NSLog("Cosmostation DappDetailVC DEEPLINK_WC2 \(dappUrl?.absoluteString)")
+            onInitWcV2(dappUrl!)
+        }
+    }
+    
     func onUpdateAccountName(_ online: Bool) {
         accountName.isHidden = !online
 //        accountImg.isHidden = !online
@@ -111,9 +129,8 @@ class DappDetailVC: BaseVC {
         if (webView.canGoBack) {
             webView.goBack()
         } else {
-            print("onBackClicK with finish")
-            print("onBackClicK Pair ", Pair.instance.getPairings().count)
-            print("onBackClicK Sign ", Sign.instance.getSessions().count)
+            NSLog("Cosmostation onBackClicK Pair \(Pair.instance.getPairings().count)")
+            NSLog("Cosmostation onBackClicK Sign \(Sign.instance.getPairings().count)")
             wcV2Disconnect { _ in
                 self.dismiss(animated: true)
             }
@@ -162,7 +179,7 @@ class DappDetailVC: BaseVC {
     
     // Re-Connect with wallet connect v2 (disconnect all as-is Pair & Sign)
     private func onInitWcV2(_ url: URL) {
-        print("onInitWalletConnectV2 ", url)
+        NSLog("Cosmostation onInitWcV2 \(url.absoluteString)")
         if let host = url.host, let query = url.query?.removingPercentEncoding, host == "wc" {
             var wcUrl: String!
             if (query.starts(with: "uri=")) {
@@ -170,10 +187,10 @@ class DappDetailVC: BaseVC {
             } else {
                 wcUrl = query
             }
-            print("wcUrl ", wcUrl)
+            NSLog("Cosmostation onInitWcV2 wcUrl \(wcUrl)")
             self.wcV2SetSign()
             self.wcV2SetPair(uri: wcUrl) { success in
-                print("wcV2SetPair ", success)
+                NSLog("Cosmostation onInitWcV2 wcV2SetPairl \(success)")
             }
         }
     }
@@ -231,8 +248,8 @@ extension DappDetailVC: WKScriptMessageHandler {
             let messageJSON = bodyJSON["message"]
             let method = messageJSON["method"].stringValue
             
-            print("userContentController method ", method)
-            print("userContentController bodyJSON ", bodyJSON)
+            NSLog("Cosmostation userContentController method \(method)")
+            NSLog("Cosmostation userContentController bodyJSON \(bodyJSON)")
             
             if (method == "cos_supportedChainIds") {
                 let chainIds = allCosmosChains.filter { $0.chainIdCosmos != nil }.map{ $0.chainIdCosmos }
@@ -467,8 +484,10 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
 //    }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("webView didFinish ", webView.url?.absoluteString)
-        print("webView didFinish ", webView.themeColor?.cgColor)
+//        print("webView didFinish ", webView.url?.absoluteString)
+//        print("webView didFinish ", webView.themeColor?.cgColor)
+        NSLog("Cosmostation webView didFinish \(webView.url?.absoluteString)")
+        
         if let bgColor = webView.themeColor?.cgColor {
             view.backgroundColor = UIColor(cgColor: bgColor)
 //            bottomView.backgroundColor = UIColor(cgColor: bgColor)
@@ -535,7 +554,9 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
             decisionHandler(.cancel)
             return
         }
-        print("webView decidePolicyFor ", navigationAction.request.url )
+//        print("webView decidePolicyFor ", navigationAction.request.url )
+        NSLog("Cosmostation webView decidePolicyFor  \(navigationAction.request.url?.absoluteString)")
+        
         if let url = navigationAction.request.url {
             var newUrl: String?
             if let absoluteString = url.absoluteString.removingPercentEncoding {
@@ -558,10 +579,11 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
                         newUrl = trimmedUrl
                     }
                 }
-                print("newUrl ", newUrl)
+//                print("newUrl ", newUrl)
+                NSLog("Cosmostation webView decidePolicyFor newUrl  \(newUrl)")
                 
                 if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
-                    print("finalUrl ", finalUrl)
+                    NSLog("Cosmostation webView decidePolicyFor finalUrl  \(finalUrl)")
                     onInitWcV2(finalUrl)
                     decisionHandler(.cancel)
                     return
@@ -601,12 +623,12 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
 extension DappDetailVC {
     
     private func wcV2SetSign() {
-        print("wcV2SetSign")
+        NSLog("Cosmostation wcV2SetSign \(dappType)")
         Sign.instance.sessionProposalPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sessionProposal, context in
                 if self?.isViewLoaded == true && self?.view.window != nil {
-                    self?.wcV2ApproveProposal(proposal: sessionProposal)
+                    self?.wcV2ProposalRequest(proposal: sessionProposal)
                 }
             }.store(in: &publishers)
         
@@ -621,7 +643,7 @@ extension DappDetailVC {
     
     @MainActor
     private func wcV2SetPair(uri: String, _ completionHandler: @escaping (Bool) -> Void) {
-        print("wcV2SetPair ", uri)
+        NSLog("Cosmostation wcV2SetPair  \(dappType)    \(uri)")
         Task {
             guard let wcUri = WalletConnectURI(string: uri) else {
                 completionHandler(false)
@@ -631,7 +653,8 @@ extension DappDetailVC {
                 try await Pair.instance.pair(uri: wcUri)
                 completionHandler(true)
             } catch {
-                print("wcV2SetPair error: \(error)")
+//                print("wcV2SetPair error: \(error)")
+                NSLog("Cosmostation wcV2SetPair error: \(error)")
                 completionHandler(false)
             }
         }
@@ -659,21 +682,27 @@ extension DappDetailVC {
     }
     
     
-    private func wcV2ApproveProposal(proposal: WalletConnectSwiftV2.Session.Proposal) {
-        print("wcV2ApproveProposal ", proposal)
+    private func wcV2ProposalRequest(proposal: WalletConnectSwiftV2.Session.Proposal) {
+        NSLog("Cosmostation wcV2ProposalRequest \(proposal)")
         if (dappType == .DEEPLINK_WC2) {
-            print("wcV2ApproveProposal DEEPLINK_WC2 ", proposal.proposer.url)
+            NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 \(proposal.proposer.url)")
             webView.load(URLRequest(url: URL(string: proposal.proposer.url)!))
             wcV2RejectProposal(proposalId:  proposal.id, reason: .userRejectedChains)
             dappType = .INTERNAL_URL
+            wcV2Disconnect { success in
+                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 DISCONNECT ALL \(success)")
+                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Pair \(Pair.instance.getPairings().count)")
+                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Sign \(Sign.instance.getSessions().count)")
+            }
             return
         }
         var sessionNamespaces = [String: SessionNamespace]()
         proposal.requiredNamespaces.forEach { namespaces in
-            print("wcV2ApproveProposal namespaces ", namespaces)
+            NSLog("Cosmostation wcV2ApproveProposal namespaces \(namespaces)")
             let caip2Namespace = namespaces.key
             let proposalNamespace = namespaces.value
             if let targetChain = allCosmosChains.filter({ $0.chainIdCosmos == proposalNamespace.chains?.first?.reference }).first {
+                NSLog("Cosmostation wcV2ApproveProposal targetChain \(targetChain)")
                 self.targetChain = targetChain
                 let accounts = Set(namespaces.value.chains!.filter { chain in
                     allCosmosChains.filter({ $0.chainIdCosmos == chain.reference }).first != nil
@@ -683,11 +712,14 @@ extension DappDetailVC {
                 
                 let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
                 sessionNamespaces[caip2Namespace] = sessionNamespace
-                print("wcV2ApproveProposal accounts ", accounts)
-                print("wcV2ApproveProposal approveProposal ", sessionNamespaces)
+//                print("wcV2ApproveProposal accounts ", accounts)
+//                print("wcV2ApproveProposal approveProposal ", sessionNamespaces)
+                NSLog("Cosmostation wcV2ProposalRequest Accept")
                 self.wcV2ApproveProposal(proposalId:  proposal.id, namespaces: sessionNamespaces)
                 
             } else {
+                NSLog("Cosmostation wcV2ApproveProposal targetChain NULL")
+                NSLog("Cosmostation wcV2ProposalRequest Reject")
                 let rejectResponse: RejectionReason = .userRejectedChains
                 self.wcV2RejectProposal(proposalId:  proposal.id, reason: rejectResponse)
                 self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
@@ -699,6 +731,7 @@ extension DappDetailVC {
     private func wcV2ApproveProposal(proposalId: String, namespaces: [String: SessionNamespace]) {
         Task {
             do {
+                NSLog("Cosmostation wcV2ApproveProposal")
                 try await Sign.instance.approve(proposalId: proposalId, namespaces: namespaces)
             } catch {
                 print("wcV2ApproveProposal error: \(error)")

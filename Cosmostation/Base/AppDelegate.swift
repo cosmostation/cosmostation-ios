@@ -52,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         if let url = launchOptions?[UIApplication.LaunchOptionsKey.url] as? URL {
             BaseData.instance.appSchemeUrl = url
+            return false
         } else if let userInfo = launchOptions?[.remoteNotification] as? [AnyHashable: Any] {
             BaseData.instance.appUserInfo = userInfo
         }
@@ -59,10 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        NSLog("Cosmostation application open \(url.absoluteString)")
         if let topVC = application.topViewController, topVC.isKind(of: PincodeVC.self) {
             BaseData.instance.appSchemeUrl = url
             
         } else {
+            NSLog("Cosmostation START DappDetailVC 1")
             let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
             dappDetail.dappType = .DEEPLINK_WC2
             dappDetail.dappUrl = url
@@ -85,6 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if result == .success {
             if BaseData.instance.appSchemeUrl != nil {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    NSLog("Cosmostation START DappDetailVC 2")
                     let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
                     dappDetail.dappType = .DEEPLINK_WC2
                     dappDetail.dappUrl = BaseData.instance.appSchemeUrl
@@ -243,9 +247,9 @@ private extension AppDelegate {
 
         Networking.configure(projectId: Bundle.main.WALLET_CONNECT_API_KEY, socketFactory: self)
         Pair.configure(metadata: metadata)
-#if DEBUG
+//#if DEBUG
         try? Pair.instance.cleanup()
         try? Sign.instance.cleanup()
-#endif
+//#endif
     }
 }
