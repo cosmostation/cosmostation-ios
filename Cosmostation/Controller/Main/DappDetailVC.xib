@@ -21,6 +21,7 @@
                 <outlet property="backBtn" destination="38Z-lX-3jY" id="rvn-Bw-WYd"/>
                 <outlet property="bottomView" destination="VAx-hr-qKM" id="sm2-Nh-ui9"/>
                 <outlet property="bottomViewHeightConstraint" destination="1AI-CU-sRw" id="ZOz-4P-IaF"/>
+                <outlet property="closeBtn" destination="CuK-l0-LPs" id="Z30-8K-MT9"/>
                 <outlet property="dappUrlLabel" destination="jkL-YJ-8nS" id="w6A-ZA-xpX"/>
                 <outlet property="forwardBtn" destination="Zvb-Yz-MbE" id="J4W-HR-04u"/>
                 <outlet property="loadingView" destination="nIi-JC-eqw" id="y5V-Nh-3f9"/>
@@ -94,18 +95,33 @@
                             </connections>
                         </button>
                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImgGovPassed" translatesAutoresizingMaskIntoConstraints="NO" id="x5e-Ol-pIQ">
-                            <rect key="frame" x="358.66666666666669" y="21" width="6" height="6"/>
+                            <rect key="frame" x="183.33333333333334" y="21" width="6" height="6"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="6" id="GnK-6C-OTo"/>
                                 <constraint firstAttribute="width" constant="6" id="Osu-EY-Hvx"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGB-Z0-G8D">
-                            <rect key="frame" x="368.66666666666669" y="15.333333333333373" width="6.3333333333333144" height="17.666666666666671"/>
+                            <rect key="frame" x="193.33333333333334" y="15.999999999999996" width="6.3333333333333428" height="16.333333333333332"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CuK-l0-LPs" customClass="WebNaviButton" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="329" y="4" width="60" height="40"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="FJp-PJ-UC4"/>
+                                <constraint firstAttribute="height" constant="40" id="xK5-19-Jvo"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="browseClose">
+                                <color key="baseForegroundColor" name="_color01"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="onClickClose:" destination="-1" eventType="touchUpInside" id="0Jo-Nh-A23"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" name="_colorBg"/>
                     <constraints>
@@ -113,11 +129,13 @@
                         <constraint firstItem="eGB-Z0-G8D" firstAttribute="leading" secondItem="x5e-Ol-pIQ" secondAttribute="trailing" constant="4" id="8tr-rn-kF6"/>
                         <constraint firstItem="38Z-lX-3jY" firstAttribute="leading" secondItem="VAx-hr-qKM" secondAttribute="leading" constant="4" id="FfW-Q4-P1F"/>
                         <constraint firstItem="eGB-Z0-G8D" firstAttribute="centerY" secondItem="38Z-lX-3jY" secondAttribute="centerY" id="Jmi-sG-eGS"/>
+                        <constraint firstItem="CuK-l0-LPs" firstAttribute="centerY" secondItem="38Z-lX-3jY" secondAttribute="centerY" id="Lh5-Hi-63A"/>
                         <constraint firstItem="x5e-Ol-pIQ" firstAttribute="centerY" secondItem="eGB-Z0-G8D" secondAttribute="centerY" id="NFv-df-L3C"/>
-                        <constraint firstAttribute="trailing" secondItem="eGB-Z0-G8D" secondAttribute="trailing" constant="18" id="T4p-qd-rrp"/>
                         <constraint firstItem="Zvb-Yz-MbE" firstAttribute="centerY" secondItem="38Z-lX-3jY" secondAttribute="centerY" id="ljP-CL-Rme"/>
+                        <constraint firstItem="eGB-Z0-G8D" firstAttribute="centerX" secondItem="VAx-hr-qKM" secondAttribute="centerX" id="mHx-HZ-izk"/>
                         <constraint firstItem="Zvb-Yz-MbE" firstAttribute="leading" secondItem="38Z-lX-3jY" secondAttribute="trailing" constant="4" id="nmQ-FM-92z"/>
                         <constraint firstItem="38Z-lX-3jY" firstAttribute="top" secondItem="VAx-hr-qKM" secondAttribute="top" constant="4" id="sU4-4V-zua"/>
+                        <constraint firstAttribute="trailing" secondItem="CuK-l0-LPs" secondAttribute="trailing" constant="4" id="xkE-Ns-dWH"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nIi-JC-eqw" customClass="LottieAnimationView" customModule="Lottie">
@@ -152,6 +170,7 @@
     <resources>
         <image name="ImgGovPassed" width="6" height="6"/>
         <image name="browseBack" width="24" height="24"/>
+        <image name="browseClose" width="24" height="24"/>
         <image name="browseForward" width="24" height="24"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

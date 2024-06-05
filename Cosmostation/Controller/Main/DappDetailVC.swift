@@ -27,6 +27,7 @@ class DappDetailVC: BaseVC {
     @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var backBtn: WebNaviButton!
     @IBOutlet weak var forwardBtn: WebNaviButton!
+    @IBOutlet weak var closeBtn: WebNaviButton!
     @IBOutlet weak var accountName: UILabel!
     @IBOutlet weak var accountImg: UIImageView!
     @IBOutlet weak var loadingView: LottieAnimationView!
@@ -148,6 +149,14 @@ class DappDetailVC: BaseVC {
             webView.goForward()
         }
     }
+    
+    @IBAction func onClickClose(_ sender: Any) {
+        wcV2Disconnect { result in
+            NSLog("Cosmostation onClickClose isconnect \(result)")
+            self.dismiss(animated: true)
+        }
+    }
+    
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if let _ = object as? WKWebView {
