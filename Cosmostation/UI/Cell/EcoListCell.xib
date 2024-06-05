@@ -15,6 +15,9 @@
         <array key="SpoqaHanSansNeo-Medium.otf">
             <string>SpoqaHanSansNeo-Medium</string>
         </array>
+        <array key="SpoqaHanSansNeo-Regular.otf">
+            <string>SpoqaHanSansNeo-Regular</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -37,7 +40,7 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yg9-bd-XNm" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                 <rect key="frame" x="181" y="10" width="24" height="12.666666666666664"/>
-                                <color key="backgroundColor" red="0.035294117647058823" green="0.72156862745098038" blue="0.75686274509803919" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.035294117647058823" green="0.72156862745098038" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
@@ -55,8 +58,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ascdsadas" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GfH-br-fAZ">
-                                <rect key="frame" x="12" y="191" width="191" height="12.666666666666657"/>
-                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                <rect key="frame" x="12" y="189" width="191" height="15.333333333333343"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Regular" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -71,7 +74,7 @@
                             <constraint firstItem="hzi-vp-WlF" firstAttribute="top" secondItem="z9z-gN-GVp" secondAttribute="bottom" constant="8" id="dmY-xO-Agk"/>
                             <constraint firstItem="GfH-br-fAZ" firstAttribute="trailing" secondItem="hzi-vp-WlF" secondAttribute="trailing" id="dzz-i9-CMv"/>
                             <constraint firstItem="z9z-gN-GVp" firstAttribute="leading" secondItem="RIU-kM-mGj" secondAttribute="leading" id="icy-VV-4Iy"/>
-                            <constraint firstItem="GfH-br-fAZ" firstAttribute="top" secondItem="hzi-vp-WlF" secondAttribute="bottom" constant="4" id="rZD-bc-ww3"/>
+                            <constraint firstItem="GfH-br-fAZ" firstAttribute="top" secondItem="hzi-vp-WlF" secondAttribute="bottom" constant="2" id="rZD-bc-ww3"/>
                             <constraint firstAttribute="trailing" secondItem="z9z-gN-GVp" secondAttribute="trailing" id="roW-pS-MLN"/>
                             <constraint firstItem="GfH-br-fAZ" firstAttribute="leading" secondItem="hzi-vp-WlF" secondAttribute="leading" id="tbZ-R6-2iX"/>
                             <constraint firstItem="yg9-bd-XNm" firstAttribute="top" secondItem="RIU-kM-mGj" secondAttribute="top" constant="10" id="yKe-yE-8Zo"/>
