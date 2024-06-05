@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 import Lottie
 
 class DappEvmSignRequestSheet: BaseVC {
@@ -25,6 +26,7 @@ class DappEvmSignRequestSheet: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     
+    var requestToSign: JSON?
     var selectedChain: EvmClass!
     var completion: ((_ success: Bool) -> ())?
 

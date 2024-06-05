@@ -814,7 +814,7 @@ extension Date {
 }
 
 extension String {
-    func hexToNSDecimal() -> NSDecimalNumber{
+    func hexToNSDecimal() -> NSDecimalNumber {
         if (self.isEmpty) { return NSDecimalNumber.zero }
         return NSDecimalNumber(string: String(BigUInt(self.stripHexPrefix(), radix: 16) ?? "0"))
     }
@@ -839,18 +839,9 @@ extension String {
         return String(self[startIndex..<endIndex])
     }
     
-    func hexToString() -> String{
-        var finalString = ""
-        let chars = Array(self)
-        
-        for count in stride(from: 0, to: chars.count - 1, by: 2){
-            let firstDigit =  Int.init("\(chars[count])", radix: 16) ?? 0
-            let lastDigit = Int.init("\(chars[count + 1])", radix: 16) ?? 0
-            let decimal = firstDigit * 16 + lastDigit
-            let decimalString = String(format: "%c", decimal) as String
-            finalString.append(Character.init(decimalString))
-        }
-        return finalString
+    func hexToString() -> String? {
+        if (self.isEmpty) { return "0" }
+        return String(BigUInt(self.stripHexPrefix(), radix: 16) ?? "0")
     }
     
     var hexadecimal: Data? {

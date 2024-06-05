@@ -7,9 +7,7 @@
 //
 
 import UIKit
-//import WalletConnect
 import HDWalletKit
-import SwiftKeychainWrapper
 import Alamofire
 import WebKit
 import SwiftyJSON
@@ -42,10 +40,11 @@ class DappDetailVC: BaseVC {
     
     private var publishers = [AnyCancellable]()
     
-    
     var allCosmosChains = [CosmosClass]()
     var allEvmChains = [EvmClass]()
     var targetChain: BaseChain!
+    
+//    var web3: web3?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -208,21 +207,36 @@ class DappDetailVC: BaseVC {
         }
     }
     
+//    // (Re)Init Web3
+//    private func onInitWeb3(_ completionHandler: @escaping (Bool) -> Void) {
+//        if let evmChain = targetChain as? EvmClass,
+//           let url = URL(string: evmChain.getEvmRpc()) {
+//            DispatchQueue.global().async { [self] in
+//                do {
+//                    self.web3 = try Web3.new(url)
+//                    completionHandler(true)
+//                } catch {
+//                    completionHandler(false)
+//                }
+//            }
+//        }
+//    }
     
-    private func popUpRequestSign(_ request: Data, _ completion: @escaping(() -> ()), _ cancel: @escaping(() -> ())) {
-        let DappCosmosSignRequestSheet = DappCosmosSignRequestSheet(nibName: "DappCosmosSignRequestSheet", bundle: nil)
-        DappCosmosSignRequestSheet.url = dappUrl
-        DappCosmosSignRequestSheet.wcMsg = request
-        DappCosmosSignRequestSheet.selectedChain = targetChain as? CosmosClass
-        DappCosmosSignRequestSheet.completion = { success in
+    
+    private func popUpCosmosRequestSign(_ request: Data, _ completion: @escaping(() -> ()), _ cancel: @escaping(() -> ())) {
+        let cosmosSignRequestSheet = DappCosmosSignRequestSheet(nibName: "DappCosmosSignRequestSheet", bundle: nil)
+        cosmosSignRequestSheet.url = dappUrl
+        cosmosSignRequestSheet.wcMsg = request
+        cosmosSignRequestSheet.selectedChain = targetChain as? CosmosClass
+        cosmosSignRequestSheet.completion = { success in
             if (success) {
                 completion()
             } else {
                 cancel()
             }
         }
-        DappCosmosSignRequestSheet.isModalInPresentation = true
-        onStartSheet(DappCosmosSignRequestSheet, 680, 0.8)
+        cosmosSignRequestSheet.isModalInPresentation = true
+        onStartSheet(cosmosSignRequestSheet, 680, 0.8)
     }
     
     private func getSignatureResponse(_ privateKey: Data, _ signData: Data) -> (signature: String?, pubKey: JSON?) {
@@ -247,6 +261,20 @@ class DappDetailVC: BaseVC {
         return result
     }
     
+    private func popUpEvmRequestSign(_ request: JSON, _ completion: @escaping(() -> ()), _ cancel: @escaping(() -> ())) {
+        let evmSignRequestSheet = DappEvmSignRequestSheet(nibName: "DappEvmSignRequestSheet", bundle: nil)
+        evmSignRequestSheet.requestToSign = request
+        evmSignRequestSheet.selectedChain = targetChain as? EvmClass
+        evmSignRequestSheet.completion = { success in
+            if (success) {
+                completion()
+            } else {
+                cancel()
+            }
+        }
+        evmSignRequestSheet.isModalInPresentation = true
+        onStartSheet(evmSignRequestSheet, 680, 0.8)
+    }
 }
 
 
@@ -305,13 +333,13 @@ extension DappDetailVC: WKScriptMessageHandler {
                 
             } else if (method == "cos_signAmino") {
                 let aminoMessage = injectionAminoModifyFee(messageJSON)
-                popUpRequestSign(try! aminoMessage["params"]["doc"].rawData(),
+                popUpCosmosRequestSign(try! aminoMessage["params"]["doc"].rawData(),
                                  {self.injectionAminoRequestApprove(aminoMessage, bodyJSON["messageId"])},
                                  {self.injectionRequestReject("Cancel", aminoMessage, bodyJSON["messageId"])})
                 
             } else if (method == "cos_signDirect") {
                 let directMessage = injectionDirectModifyFee(messageJSON)
-                popUpRequestSign(try! directMessage["params"]["doc"].rawData(),
+                popUpCosmosRequestSign(try! directMessage["params"]["doc"].rawData(),
                                 {self.injectionDirectRequestApprove(directMessage, bodyJSON["messageId"])},
                                 {self.injectionRequestReject("Cancel", directMessage, bodyJSON["messageId"])})
                 
@@ -375,12 +403,10 @@ extension DappDetailVC: WKScriptMessageHandler {
             else if (method == "eth_requestAccounts" || method == "wallet_requestPermissions") {
                 onInitEvmChain()
                 let chain = targetChain as! EvmClass
-                let data: JSON = [chain.evmAddress]
-                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                injectionRequestApprove([chain.evmAddress], messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "wallet_switchEthereumChain") {
-                let params = messageJSON["params"]
-                let requestChainId = params.arrayValue[0]["chainId"].stringValue
+                let requestChainId = messageJSON["params"].arrayValue[0]["chainId"].stringValue
                 if let requestChain = allEvmChains.filter({ $0.chainIdEvm == requestChainId }).first {
                     targetChain = requestChain
                     injectionRequestApprove(JSON.null, messageJSON, bodyJSON["messageId"])
@@ -394,28 +420,86 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "eth_chainId") {
                 onInitEvmChain()
                 let chain = targetChain as! EvmClass
-                let data = JSON.init(stringLiteral: chain.chainIdEvm)
-                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                injectionRequestApprove(JSON.init(stringLiteral: chain.chainIdEvm), messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "eth_accounts") {
                 onInitEvmChain()
                 let chain = targetChain as! EvmClass
-                let data: JSON = [chain.evmAddress]
-                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                injectionRequestApprove([chain.evmAddress], messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "eth_estimateGas") {
+                onInitEvmChain()
+                let byPassParam = messageJSON["params"].arrayValue[0]
+                let evmChain = targetChain as! EvmClass
+                Task {
+                    if let response = try? await evmChain.fetchEvmEstimateGas(byPassParam),
+                       let gasAmount = response?["result"].stringValue.hexToString() {
+                        self.injectionRequestApprove([gasAmount], messageJSON, bodyJSON["messageId"])
+                    } else {
+                        self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
+                    }
+                }
                 
             } else if (method == "eth_blockNumber") {
+                onInitEvmChain()
+                let evmChain = targetChain as! EvmClass
+                Task {
+                    if let response = try? await evmChain.fetchEvmBlockNumbers(),
+                       let blockNumber = response?["result"].stringValue {
+                        self.injectionRequestApprove(JSON.init(stringLiteral: blockNumber), messageJSON, bodyJSON["messageId"])
+                    } else {
+                        self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
+                    }
+                }
                 
             } else if (method == "eth_call") {
+                onInitEvmChain()
+                let byPassParam = messageJSON["params"].arrayValue[0]
+                let evmChain = targetChain as! EvmClass
+                Task {
+                    if let response = try? await evmChain.fetchEvmEthCall(byPassParam),
+                       let result = response?["result"].stringValue {
+                        self.injectionRequestApprove(JSON.init(stringLiteral: result), messageJSON, bodyJSON["messageId"])
+                    } else {
+                        self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
+                    }
+                }
                 
             } else if (method == "eth_signTransaction" || method == "eth_sendTransaction") {
+                onInitEvmChain()
+                let toSign = messageJSON["params"].arrayValue[0]
+                popUpEvmRequestSign(toSign,
+                                {self.injectionEvmRequestApprove(toSign, bodyJSON["messageId"])},
+                                {self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])})
+                
                 
             } else if (method == "eth_signTypedData_v4" || method == "eth_signTypedData_v3") {
                 
             } else if (method == "eth_getTransactionReceipt") {
+                onInitEvmChain()
+                let param = messageJSON["params"].arrayValue[0].stringValue
+                let evmChain = targetChain as! EvmClass
+                Task {
+                    if let response = try? await evmChain.fetchEvmTxReceipt(param),
+                       let result = response?["result"].stringValue {
+                        self.injectionRequestApprove(JSON.init(stringLiteral: result), messageJSON, bodyJSON["messageId"])
+                    } else {
+                        self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
+                    }
+                }
                 
             } else if (method == "eth_getTransactionByHash") {
+                onInitEvmChain()
+                let param = messageJSON["params"].arrayValue[0].stringValue
+                let evmChain = targetChain as! EvmClass
+                Task {
+                    if let response = try? await evmChain.fetchEvmTxByHash(param),
+                       let result = response?["result"].stringValue {
+                        self.injectionRequestApprove(JSON.init(stringLiteral: result), messageJSON, bodyJSON["messageId"])
+                    } else {
+                        self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
+                    }
+                }
                 
             } else if (method == "personal_sign") {
                 
@@ -424,33 +508,15 @@ extension DappDetailVC: WKScriptMessageHandler {
             else {
                 injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
             }
-            
-//            else if (method == "cos_activatedChainIds" || method == "ten_activatedChainIds") {
-//                if let chainIds = BaseData.instance.dAppConfig?["supportChainIds"].arrayValue[0] {
-//                    injectionRequestApprove(chainIds, messageJSON, bodyJSON["messageId"])
-//                } else {
-//                    injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
-//                }
-//                
-//            } else if (method == "cos_activatedChainNames" || method == "ten_activatedChainNames") {
-//                if let chainNames = BaseData.instance.dAppConfig?["supportChainNames"].arrayValue[0] {
-//                    injectionRequestApprove(chainNames, messageJSON, bodyJSON["messageId"])
-//                } else {
-//                    injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
-//                }
-//                
-//            }
         }
     }
     private func emitToWeb(_ chainId: String) {
         let retVal = ["message": ["result": chainId], "isCosmostation": true, "type": JSON.init(stringLiteral: "chainChanged")]
-        print("emitToWeb ", retVal)
         self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
     }
     
     private func injectionRequestApprove(_ data: JSON, _ message: JSON, _ messageId: JSON) {
         let retVal = ["response": ["result": data], "message": message, "isCosmostation": true, "messageId": messageId]
-        print("injectionRequestApprove ", retVal)
         self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
     }
     
@@ -534,6 +600,10 @@ extension DappDetailVC: WKScriptMessageHandler {
             }
         }
         return approveSignMessage
+    }
+    
+    private func injectionEvmRequestApprove(_ webToAppMessage: JSON, _ webToAppMessageId: JSON) {
+        
     }
 }
 
@@ -836,7 +906,7 @@ extension DappDetailVC {
         if request.method == "cosmos_signAmino" {
             if let json = try? JSON(data: request.encoded) {
                 let aminoMessage = wcV2AminoModifyFee(json)
-                popUpRequestSign(try! aminoMessage["params"]["signDoc"].rawData(),
+                popUpCosmosRequestSign(try! aminoMessage["params"]["signDoc"].rawData(),
                                  {self.wcV2AminoRequestApprove(wcV2Request: request)},
                                  {self.wcV2RequestReject(request: request)})
             }
@@ -844,7 +914,7 @@ extension DappDetailVC {
         } else if request.method == "cosmos_signDirect" {
             if let json = try? JSON(data: request.encoded) {
                 let directMessage = wcV2DirectModifyFee(json)
-                popUpRequestSign(try! directMessage["params"]["signDoc"].rawData(),
+                popUpCosmosRequestSign(try! directMessage["params"]["signDoc"].rawData(),
                                  {self.wcV2DirectRequestApprove(wcV2Request: request)},
                                  {self.wcV2RequestReject(request: request)})
             }
