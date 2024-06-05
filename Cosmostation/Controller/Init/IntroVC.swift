@@ -79,8 +79,10 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
                 self.present(pinVC, animated: true)
                 
             } else if BaseData.instance.appSchemeUrl != nil {
-                NSLog("Cosmostation IntroVC onDeepLinkStart")
-                self.onDeepLinkStart()
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+                    NSLog("Cosmostation IntroVC onDeepLinkStart")
+                    self.onDeepLinkStart()
+                })
                 
             } else {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(5000), execute: {

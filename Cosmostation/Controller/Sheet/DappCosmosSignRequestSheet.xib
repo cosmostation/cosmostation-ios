@@ -18,7 +18,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TxSignRequestSheet" customModule="Cosmostation" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DappCosmosSignRequestSheet" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="addressLabel" destination="ILF-HT-dBS" id="4H0-qv-asJ"/>
                 <outlet property="cancelBtn" destination="zX0-No-sMJ" id="FUQ-nI-ilu"/>

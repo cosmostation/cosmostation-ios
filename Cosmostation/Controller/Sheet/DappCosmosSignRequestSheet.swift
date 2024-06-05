@@ -1,5 +1,5 @@
 //
-//  TxSignRequestSheet.swift
+//  DappCosmosSignRequestSheet.swift
 //  Cosmostation
 //
 //  Created by 권혁준 on 10/25/23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TxSignRequestSheet: BaseVC {
+class DappCosmosSignRequestSheet: BaseVC {
     
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var wcMsgTextView: UITextView!
