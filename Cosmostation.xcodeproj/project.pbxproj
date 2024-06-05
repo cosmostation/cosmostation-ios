@@ -685,6 +685,10 @@
 		049715062C0ED276008C45A0 /* basebg03.png in Resources */ = {isa = PBXBuildFile; fileRef = 049715022C0ED276008C45A0 /* basebg03.png */; };
 		049715082C0ED2D1008C45A0 /* basebg01.png in Resources */ = {isa = PBXBuildFile; fileRef = 049715072C0ED2D1008C45A0 /* basebg01.png */; };
 		049715092C0ED2D1008C45A0 /* basebg01.png in Resources */ = {isa = PBXBuildFile; fileRef = 049715072C0ED2D1008C45A0 /* basebg01.png */; };
+		0497150C2C105C13008C45A0 /* DappEvmSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497150A2C105C13008C45A0 /* DappEvmSignRequestSheet.swift */; };
+		0497150D2C105C13008C45A0 /* DappEvmSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0497150B2C105C13008C45A0 /* DappEvmSignRequestSheet.xib */; };
+		0497150E2C105C13008C45A0 /* DappEvmSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0497150B2C105C13008C45A0 /* DappEvmSignRequestSheet.xib */; };
+		0497150F2C105C13008C45A0 /* DappEvmSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497150A2C105C13008C45A0 /* DappEvmSignRequestSheet.swift */; };
 		049B691F29D1736B0027B82D /* MintscanProposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691E29D1736B0027B82D /* MintscanProposal.swift */; };
 		049B692029D1736B0027B82D /* MintscanProposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691E29D1736B0027B82D /* MintscanProposal.swift */; };
 		04A116F128F7DB42003605E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */; };
@@ -2279,6 +2283,8 @@
 		049715012C0ED276008C45A0 /* basebg05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg05.png; sourceTree = "<group>"; };
 		049715022C0ED276008C45A0 /* basebg03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg03.png; sourceTree = "<group>"; };
 		049715072C0ED2D1008C45A0 /* basebg01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg01.png; sourceTree = "<group>"; };
+		0497150A2C105C13008C45A0 /* DappEvmSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappEvmSignRequestSheet.swift; sourceTree = "<group>"; };
+		0497150B2C105C13008C45A0 /* DappEvmSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappEvmSignRequestSheet.xib; sourceTree = "<group>"; };
 		049B691E29D1736B0027B82D /* MintscanProposal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanProposal.swift; sourceTree = "<group>"; };
 		04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04A1A8002AC80AA50014EF92 /* TxAmountSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxAmountSheet.swift; sourceTree = "<group>"; };
@@ -3603,6 +3609,8 @@
 				E1044EA52BD641DB00DA05C2 /* SendResultSheet.xib */,
 				15B24C842AE9039A0009B359 /* DappCosmosSignRequestSheet.swift */,
 				15B24C852AE9039A0009B359 /* DappCosmosSignRequestSheet.xib */,
+				0497150A2C105C13008C45A0 /* DappEvmSignRequestSheet.swift */,
+				0497150B2C105C13008C45A0 /* DappEvmSignRequestSheet.xib */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -4537,6 +4545,7 @@
 				04C940E32AEB92F900415256 /* BaseImgSheetCell.xib in Resources */,
 				040733062AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
 				0400EF1A2ADBF774007BA97F /* KavaLendListCell.xib in Resources */,
+				0497150E2C105C13008C45A0 /* DappEvmSignRequestSheet.xib in Resources */,
 				042DE8492AC4CD01003F3EA4 /* QrScanVC.xib in Resources */,
 				18F4EAD22A4DA0A500CFBE2B /* ApiKey.plist in Resources */,
 				048F8DC02B28542F00432437 /* KavaEarnDepositAction.xib in Resources */,
@@ -4805,6 +4814,7 @@
 				04C63D242B86FE8C00D4A366 /* CommonTransferResult.xib in Resources */,
 				04B789E72ACB140900E9BE88 /* SelectNameServiceCell.xib in Resources */,
 				E12E9D2F2AE415D900336449 /* loadingSmallYellow.json in Resources */,
+				0497150D2C105C13008C45A0 /* DappEvmSignRequestSheet.xib in Resources */,
 				E14577FE2B3EC50C00EEFA8E /* CosmosClaimCommission.xib in Resources */,
 				046BF1C22B0F259C00BC1FC8 /* OktValidatorCell.xib in Resources */,
 				E159805C2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
@@ -4999,6 +5009,7 @@
 				04B789902ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift in Sources */,
 				E11069C12AA4C57600EB02CA /* cosmwasm_wasm_v1_ibc.pb.swift in Sources */,
 				0400EE892AD425F9007BA97F /* DappDetailVC.swift in Sources */,
+				0497150F2C105C13008C45A0 /* DappEvmSignRequestSheet.swift in Sources */,
 				04C816892BA98D74006B800A /* cosmos_reflection_v1_reflection.pb.swift in Sources */,
 				04C63D312B875F1800D4A366 /* ChainEvmosEVM.swift in Sources */,
 				04FAD9F52AB71D5000143A3E /* DeleteAccountSheet.swift in Sources */,
@@ -5759,6 +5770,7 @@
 				E122DC602A8A4712006D1E7B /* tendermint_abci_types.pb.swift in Sources */,
 				04B7898F2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift in Sources */,
 				0400EE882AD425F9007BA97F /* DappDetailVC.swift in Sources */,
+				0497150C2C105C13008C45A0 /* DappEvmSignRequestSheet.swift in Sources */,
 				04C816882BA98D74006B800A /* cosmos_reflection_v1_reflection.pb.swift in Sources */,
 				04C63D302B875F1800D4A366 /* ChainEvmosEVM.swift in Sources */,
 				E11069C02AA4C57600EB02CA /* cosmwasm_wasm_v1_ibc.pb.swift in Sources */,

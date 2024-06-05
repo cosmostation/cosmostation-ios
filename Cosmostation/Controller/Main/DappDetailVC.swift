@@ -68,7 +68,9 @@ class DappDetailVC: BaseVC {
             wcV2Disconnect { result in
                 NSLog("Cosmostation DappDetailVC viewDidLoad DISCONNECT ALL \(result)")
             }
-            allCosmosChains = await baseAccount.initKeysforSwap()
+            
+            (allEvmChains, allCosmosChains) = await baseAccount.initKeyforCheck()
+            NSLog("Cosmostation allEvmChains \(allEvmChains.count)")
             NSLog("Cosmostation allCosmosChains \(allCosmosChains.count)")
             
             DispatchQueue.main.async {
@@ -153,6 +155,12 @@ class DappDetailVC: BaseVC {
             if keyPath == #keyPath(WKWebView.canGoForward) {
                 forwardBtn.isEnabled = webView.canGoForward
             }
+        }
+    }
+    
+    private func onInitEvmChain() {
+        if (targetChain == nil) {
+            targetChain = allEvmChains.first
         }
     }
 
@@ -253,9 +261,11 @@ extension DappDetailVC: WKScriptMessageHandler {
             let messageJSON = bodyJSON["message"]
             let method = messageJSON["method"].stringValue
             
-            NSLog("Cosmostation userContentController method \(method)")
-            NSLog("Cosmostation userContentController bodyJSON \(bodyJSON)")
+//            NSLog("Cosmostation userContentController method \(method)")
+//            NSLog("Cosmostation userContentController bodyJSON \(bodyJSON)")
+            print("DAPP REQUEST method \(method)")
             
+            //Handle Cosmos Request
             if (method == "cos_supportedChainIds") {
                 let chainIds = allCosmosChains.filter { $0.chainIdCosmos != nil }.map{ $0.chainIdCosmos }
                 if (chainIds.count > 0) {
@@ -361,12 +371,58 @@ extension DappDetailVC: WKScriptMessageHandler {
             } 
             
             
-            //EVM funcs
+            //Handle EVM Request
             else if (method == "eth_requestAccounts" || method == "wallet_requestPermissions") {
+                onInitEvmChain()
+                let chain = targetChain as! EvmClass
+                let data: JSON = [chain.evmAddress]
+                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "wallet_switchEthereumChain") {
+                let params = messageJSON["params"]
+                let requestChainId = params.arrayValue[0]["chainId"].stringValue
+                if let requestChain = allEvmChains.filter({ $0.chainIdEvm == requestChainId }).first {
+                    targetChain = requestChain
+                    injectionRequestApprove(JSON.null, messageJSON, bodyJSON["messageId"])
+                    emitToWeb(requestChain.chainIdEvm)
+                } else {
+                    let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
+                    injectionRequestReject(result, messageJSON, bodyJSON["messageId"])
+                    onShowToast(result)
+                }
+                
+            } else if (method == "eth_chainId") {
+                onInitEvmChain()
+                let chain = targetChain as! EvmClass
+                let data = JSON.init(stringLiteral: chain.chainIdEvm)
+                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "eth_accounts") {
+                onInitEvmChain()
+                let chain = targetChain as! EvmClass
+                let data: JSON = [chain.evmAddress]
+                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "eth_estimateGas") {
+                
+            } else if (method == "eth_blockNumber") {
+                
+            } else if (method == "eth_call") {
+                
+            } else if (method == "eth_signTransaction" || method == "eth_sendTransaction") {
+                
+            } else if (method == "eth_signTypedData_v4" || method == "eth_signTypedData_v3") {
+                
+            } else if (method == "eth_getTransactionReceipt") {
+                
+            } else if (method == "eth_getTransactionByHash") {
+                
+            } else if (method == "personal_sign") {
+                
             }
             
             else {
-                self.injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
+                injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
             }
             
 //            else if (method == "cos_activatedChainIds" || method == "ten_activatedChainIds") {
@@ -386,10 +442,15 @@ extension DappDetailVC: WKScriptMessageHandler {
 //            }
         }
     }
-    
+    private func emitToWeb(_ chainId: String) {
+        let retVal = ["message": ["result": chainId], "isCosmostation": true, "type": JSON.init(stringLiteral: "chainChanged")]
+        print("emitToWeb ", retVal)
+        self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+    }
     
     private func injectionRequestApprove(_ data: JSON, _ message: JSON, _ messageId: JSON) {
         let retVal = ["response": ["result": data], "message": message, "isCosmostation": true, "messageId": messageId]
+        print("injectionRequestApprove ", retVal)
         self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
     }
     
@@ -573,7 +634,7 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
             return
         }
 //        print("webView decidePolicyFor ", navigationAction.request.url )
-        NSLog("Cosmostation webView decidePolicyFor  \(navigationAction.request.url?.absoluteString)")
+//        NSLog("Cosmostation webView decidePolicyFor  \(navigationAction.request.url?.absoluteString)")
         
         if let url = navigationAction.request.url {
             var newUrl: String?
@@ -598,7 +659,7 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
                     }
                 }
 //                print("newUrl ", newUrl)
-                NSLog("Cosmostation webView decidePolicyFor newUrl  \(newUrl)")
+//                NSLog("Cosmostation webView decidePolicyFor newUrl  \(newUrl)")
                 
                 if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
                     NSLog("Cosmostation webView decidePolicyFor finalUrl  \(finalUrl)")
