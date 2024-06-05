@@ -511,7 +511,8 @@ extension DappDetailVC: WKScriptMessageHandler {
                 }
                 
             } else if (method == "personal_sign") {
-                
+                let param = messageJSON["params"].arrayValue[0].stringValue
+                print("personal_sign ", param)
             }
             
             else {

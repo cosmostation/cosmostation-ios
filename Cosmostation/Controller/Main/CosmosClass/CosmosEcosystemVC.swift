@@ -100,9 +100,11 @@ extension CosmosEcosystemVC: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let link = ecosystemList?[indexPath.row]["link"].stringValue ,
            let linkUrl = URL(string: link) {
-            print("linkUrl ", linkUrl)
             let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
             dappDetail.dappType = .INTERNAL_URL
+            if let evmChain = selectedChain as? EvmClass {
+                dappDetail.targetChain = evmChain
+            }
             dappDetail.dappUrl = linkUrl
             dappDetail.modalPresentationStyle = .fullScreen
             self.present(dappDetail, animated: true)
