@@ -45,7 +45,7 @@ class DappDetailVC: BaseVC {
     var allEvmChains = [EvmClass]()
     var targetChain: BaseChain!
     
-//    var web3: web3?
+    var web3: web3?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +87,11 @@ class DappDetailVC: BaseVC {
                 }
                 self.onInitView()
             }
+        }
+        
+        
+        onInitWeb3 { success in
+            print("onInitWeb3 ", success)
         }
         
 //        print("incomed URL ", dappUrl)
@@ -216,20 +221,20 @@ class DappDetailVC: BaseVC {
         }
     }
     
-//    // (Re)Init Web3
-//    private func onInitWeb3(_ completionHandler: @escaping (Bool) -> Void) {
-//        if let evmChain = targetChain as? EvmClass,
-//           let url = URL(string: evmChain.getEvmRpc()) {
-//            DispatchQueue.global().async { [self] in
-//                do {
-//                    self.web3 = try Web3.new(url)
-//                    completionHandler(true)
-//                } catch {
-//                    completionHandler(false)
-//                }
-//            }
-//        }
-//    }
+    // (Re)Init Web3
+    private func onInitWeb3(_ completionHandler: @escaping (Bool) -> Void) {
+        if let evmChain = targetChain as? EvmClass,
+           let url = URL(string: evmChain.getEvmRpc()) {
+            DispatchQueue.global().async { [self] in
+                do {
+                    self.web3 = try Web3.new(url)
+                    completionHandler(true)
+                } catch {
+                    completionHandler(false)
+                }
+            }
+        }
+    }
     
     
     private func popUpCosmosRequestSign(_ request: Data, _ completion: @escaping(() -> ()), _ cancel: @escaping(() -> ())) {
@@ -270,13 +275,15 @@ class DappDetailVC: BaseVC {
         return result
     }
     
-    private func popUpEvmRequestSign(_ request: JSON, _ completion: @escaping(() -> ()), _ cancel: @escaping(() -> ())) {
+    private func popUpEvmRequestSign(_ method: String, _ request: JSON, _ cancel: @escaping(() -> ()), _ completion: @escaping (JSON?) -> ()) {
         let evmSignRequestSheet = DappEvmSignRequestSheet(nibName: "DappEvmSignRequestSheet", bundle: nil)
+        evmSignRequestSheet.web3 = web3
+        evmSignRequestSheet.method = method
         evmSignRequestSheet.requestToSign = request
         evmSignRequestSheet.selectedChain = targetChain as? EvmClass
-        evmSignRequestSheet.completion = { success in
+        evmSignRequestSheet.completion = { success, singed in
             if (success) {
-                completion()
+                completion(singed)
             } else {
                 cancel()
             }
@@ -442,8 +449,8 @@ extension DappDetailVC: WKScriptMessageHandler {
                 let evmChain = targetChain as! EvmClass
                 Task {
                     if let response = try? await evmChain.fetchEvmEstimateGas(byPassParam),
-                       let gasAmount = response?["result"].stringValue.hexToString() {
-                        self.injectionRequestApprove([gasAmount], messageJSON, bodyJSON["messageId"])
+                       let gasAmount = response?["result"].stringValue {
+                        self.injectionRequestApprove(JSON.init(stringLiteral: gasAmount), messageJSON, bodyJSON["messageId"])
                     } else {
                         self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
                     }
@@ -474,13 +481,22 @@ extension DappDetailVC: WKScriptMessageHandler {
                     }
                 }
                 
-            } else if (method == "eth_signTransaction" || method == "eth_sendTransaction") {
+            } else if (method == "eth_signTransaction") {
+                //return v, r, s NOT support
+                
+                
+            } else if (method == "eth_sendTransaction") {
+                //return txhash
                 onInitEvmChain()
                 let toSign = messageJSON["params"].arrayValue[0]
-                popUpEvmRequestSign(toSign,
-                                {self.injectionEvmRequestApprove(toSign, bodyJSON["messageId"])},
-                                {self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])})
-                
+                print("DAPP REQUEST messageJSON ", messageJSON)
+                print("DAPP REQUEST toSign ", toSign)
+//                popUpEvmRequestSign(toSign,
+//                                    {_ in self.injectionEvmSendTransactionRequestApprove(toSign, bodyJSON["messageId"])},
+//                                    {self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])})
+                popUpEvmRequestSign(method, toSign,
+                                    { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
+                                    { singed in self.injectionEvmSendTransactionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
                 
             } else if (method == "eth_signTypedData_v4" || method == "eth_signTypedData_v3") {
                 
@@ -500,10 +516,12 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "eth_getTransactionByHash") {
                 onInitEvmChain()
                 let param = messageJSON["params"].arrayValue[0].stringValue
+                print("eth_getTransactionByHash ", param)
                 let evmChain = targetChain as! EvmClass
                 Task {
                     if let response = try? await evmChain.fetchEvmTxByHash(param),
                        let result = response?["result"].stringValue {
+                        print("eth_getTransactionByHash ", response)
                         self.injectionRequestApprove(JSON.init(stringLiteral: result), messageJSON, bodyJSON["messageId"])
                     } else {
                         self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
@@ -612,8 +630,19 @@ extension DappDetailVC: WKScriptMessageHandler {
         return approveSignMessage
     }
     
-    private func injectionEvmRequestApprove(_ webToAppMessage: JSON, _ webToAppMessageId: JSON) {
-        
+//    private func injectionEvmRequestApprove(_ webToAppMessage: JSON, _ webToAppMessageId: JSON) {
+//        
+//    }
+    
+    private func injectionEvmSendTransactionRequestApprove(_ signed: JSON?, _ webToAppMessage: JSON, _ webToAppMessageId: JSON) {
+        print("injectionEvmSendTransactionRequestApprove signed ", signed)
+        print("injectionEvmSendTransactionRequestApprove webToAppMessage ", webToAppMessage)
+        print("injectionEvmSendTransactionRequestApprove webToAppMessageId ", webToAppMessageId)
+        if (signed != nil) {
+            injectionRequestApprove(signed!, webToAppMessage, webToAppMessageId)
+        } else {
+            injectionRequestReject("Error", webToAppMessage, webToAppMessageId)
+        }
     }
 }
 

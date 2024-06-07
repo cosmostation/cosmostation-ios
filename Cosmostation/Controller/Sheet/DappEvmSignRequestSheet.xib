@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -30,8 +29,8 @@
                 <outlet property="feeSegments" destination="yGY-7C-yva" id="b8F-nI-0wc"/>
                 <outlet property="feeValueLabel" destination="oV4-KX-Xfy" id="HaD-bo-Cgb"/>
                 <outlet property="loadingView" destination="pKt-Nm-RpS" id="VCo-zS-9zN"/>
+                <outlet property="toSignTextView" destination="yKo-py-McW" id="Ooz-Za-9KG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="wcMsgTextView" destination="yKo-py-McW" id="Zdb-Yx-Gnn"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -52,24 +51,24 @@
                         <constraint firstAttribute="height" constant="0.80000000000000004" id="V2T-Hr-2RB"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6nj-uP-GPB">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6nj-uP-GPB" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="8" y="128" width="377" height="478"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yKo-py-McW">
-                            <rect key="frame" x="0.0" y="0.0" width="377" height="478"/>
-                            <color key="backgroundColor" name="_color08"/>
+                            <rect key="frame" x="8" y="8" width="361" height="462"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                             <color key="textColor" name="_color01"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="_color06"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="yKo-py-McW" secondAttribute="trailing" id="3bu-9r-3G7"/>
-                        <constraint firstItem="yKo-py-McW" firstAttribute="top" secondItem="6nj-uP-GPB" secondAttribute="top" id="8qX-nU-qXP"/>
-                        <constraint firstItem="yKo-py-McW" firstAttribute="leading" secondItem="6nj-uP-GPB" secondAttribute="leading" id="Aio-Za-OfY"/>
-                        <constraint firstItem="yKo-py-McW" firstAttribute="bottom" secondItem="6nj-uP-GPB" secondAttribute="bottom" id="nAt-7E-yFx"/>
+                        <constraint firstAttribute="trailing" secondItem="yKo-py-McW" secondAttribute="trailing" constant="8" id="3bu-9r-3G7"/>
+                        <constraint firstItem="yKo-py-McW" firstAttribute="top" secondItem="6nj-uP-GPB" secondAttribute="top" constant="8" id="8qX-nU-qXP"/>
+                        <constraint firstItem="yKo-py-McW" firstAttribute="leading" secondItem="6nj-uP-GPB" secondAttribute="leading" constant="8" id="Aio-Za-OfY"/>
+                        <constraint firstItem="yKo-py-McW" firstAttribute="bottom" secondItem="6nj-uP-GPB" secondAttribute="bottom" constant="-8" id="nAt-7E-yFx"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yA3-N4-ueC" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
@@ -330,8 +329,5 @@
         <namedColor name="photon">
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

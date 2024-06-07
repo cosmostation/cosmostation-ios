@@ -154,6 +154,7 @@
 "str_zero" = "무료";
 "str_low" = "낮음";
 "str_tiny" = "최소";
+"str_origin" = "원본";
 "str_select_coin" = "코인을 선택하세요";
 "str_unstaking_history" = "언스테이킹 기록";
 "str_insert_amount" = "수량 입력";
