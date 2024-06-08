@@ -427,6 +427,9 @@ extension DappDetailVC: WKScriptMessageHandler {
                     targetChain = requestChain
                     injectionRequestApprove(JSON.null, messageJSON, bodyJSON["messageId"])
                     emitToWeb(requestChain.chainIdEvm)
+                    onInitWeb3 { success in
+                        print("wallet_switchEthereumChain reInitWeb3 ", success)
+                    }
                 } else {
                     let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
                     injectionRequestReject(result, messageJSON, bodyJSON["messageId"])
@@ -442,6 +445,55 @@ extension DappDetailVC: WKScriptMessageHandler {
                 onInitEvmChain()
                 let chain = targetChain as! EvmClass
                 injectionRequestApprove([chain.evmAddress], messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "eth_getBalance") {
+                onInitEvmChain()
+                let address = messageJSON["params"].arrayValue[0].stringValue
+                let chain = targetChain as! EvmClass
+                Task {
+                    if let response = try? await chain.fetchEvmBalance(address),
+                       let balance = response?["result"].stringValue {
+                        self.injectionRequestApprove(JSON.init(stringLiteral: balance), messageJSON, bodyJSON["messageId"])
+                    } else {
+                        self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
+                    }
+                }
+                
+            } else if (method == "eth_getBlockByNumber") {
+                onInitEvmChain()
+                let evmChain = targetChain as! EvmClass
+                Task {
+                    if let response = try? await evmChain.fetchEvmBlockByNumber(),
+                       let result = response?["result"] {
+                        self.injectionRequestApprove(result, messageJSON, bodyJSON["messageId"])
+                    } else {
+                        self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
+                    }
+                }
+                
+            } else if (method == "eth_gasPrice") {
+                onInitEvmChain()
+                let evmChain = targetChain as! EvmClass
+                Task {
+                    if let response = try? await evmChain.fetchEvmGasPrice(),
+                       let gasPrice = response?["result"].stringValue {
+                        self.injectionRequestApprove(JSON.init(stringLiteral: gasPrice), messageJSON, bodyJSON["messageId"])
+                    } else {
+                        self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
+                    }
+                }
+                
+            } else if (method == "eth_maxPriorityFeePerGas") {
+                onInitEvmChain()
+                let evmChain = targetChain as! EvmClass
+                Task {
+                    if let response = try? await evmChain.fetchEvmMaxPriorityFeePerGas(),
+                       let gasPrice = response?["result"].stringValue {
+                        self.injectionRequestApprove(JSON.init(stringLiteral: gasPrice), messageJSON, bodyJSON["messageId"])
+                    } else {
+                        self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
+                    }
+                }
                 
             } else if (method == "eth_estimateGas") {
                 onInitEvmChain()
@@ -503,12 +555,15 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "eth_getTransactionReceipt") {
                 onInitEvmChain()
                 let param = messageJSON["params"].arrayValue[0].stringValue
+                print("eth_getTransactionReceipt ", param)
                 let evmChain = targetChain as! EvmClass
                 Task {
                     if let response = try? await evmChain.fetchEvmTxReceipt(param),
                        let result = response?["result"].stringValue {
+                        print("eth_getTransactionReceipt ", response)
                         self.injectionRequestApprove(JSON.init(stringLiteral: result), messageJSON, bodyJSON["messageId"])
                     } else {
+                        print("eth_getTransactionReceipt Error")
                         self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
                     }
                 }
@@ -524,9 +579,13 @@ extension DappDetailVC: WKScriptMessageHandler {
                         print("eth_getTransactionByHash ", response)
                         self.injectionRequestApprove(JSON.init(stringLiteral: result), messageJSON, bodyJSON["messageId"])
                     } else {
+                        print("eth_getTransactionByHash Error")
                         self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
                     }
                 }
+                
+            } else if (method == "wallet_watchAsset") {
+                injectionRequestApprove(true, messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "personal_sign") {
                 let param = messageJSON["params"].arrayValue[0].stringValue

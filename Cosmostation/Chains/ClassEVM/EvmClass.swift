@@ -312,6 +312,21 @@ extension EvmClass {
         let param: Parameters = ["method": "eth_call", "params": [reqParam.dictionaryObject, "latest"], "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
+    
+    func fetchEvmBlockByNumber() async throws -> JSON? {
+        let param: Parameters = ["method": "eth_getBlockByNumber", "params": ["latest", false], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchEvmGasPrice() async throws -> JSON? {
+        let param: Parameters = ["method": "eth_gasPrice", "params": [], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchEvmMaxPriorityFeePerGas() async throws -> JSON? {
+        let param: Parameters = ["method": "eth_maxPriorityFeePerGas", "params": [], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
 }
 
 
