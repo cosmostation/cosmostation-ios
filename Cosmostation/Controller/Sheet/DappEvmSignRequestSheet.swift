@@ -42,6 +42,7 @@ class DappEvmSignRequestSheet: BaseVC {
     var inComeData: Data?
     var inComeValue: BigUInt?
     var inComeGas: BigUInt?
+    var inComeGasPrice: BigUInt?
     var inComeMaxFeePerGas: BigUInt?
     var inComeMaxPriorityFeePerGas: BigUInt?
     var inComeAccessLists: [AccessListEntry]?
@@ -94,6 +95,10 @@ class DappEvmSignRequestSheet: BaseVC {
                 inComeGas = BigUInt(request_gas.stripHexPrefix(), radix: 16)
             }
             
+            if let request_gasPrice = requestToSign?["gasPrice"].stringValue {
+                inComeGasPrice = BigUInt(request_gasPrice.stripHexPrefix(), radix: 16)
+            }
+            
             if let request_maxFeePerGas = requestToSign?["maxFeePerGas"].stringValue {
                 inComeMaxFeePerGas = BigUInt(request_maxFeePerGas.stripHexPrefix(), radix: 16)
             }
@@ -118,6 +123,7 @@ class DappEvmSignRequestSheet: BaseVC {
             print("inComeData ", inComeData)
             print("inComeValue ", inComeValue)
             print("inComeGas ", inComeGas)
+            print("inComeGasPrice ", inComeGasPrice)
             print("inComeMaxFeePerGas ", inComeMaxFeePerGas)
             print("inComeMaxPriorityFeePerGas ",inComeMaxPriorityFeePerGas)
             print("nonce ", nonce)
@@ -180,11 +186,15 @@ class DappEvmSignRequestSheet: BaseVC {
             
         } else {
             if let gasprice = try? web3!.eth.getGasPrice() {
-                evmGas[0].0 = gasprice
-                evmGas[1].0 = gasprice
-                evmGas[2].0 = gasprice
+                evmGas[0] = (gasprice, 0, checkedGas!)
+                evmGas[1] = (gasprice, 0, checkedGas!)
+                evmGas[2] = (gasprice, 0, checkedGas!)
             }
-            //TODO legacy speac
+            if (inComeGasPrice != nil) {
+                evmGas.append((inComeGasPrice!, 0, inComeGas ?? checkedGas!))
+                evmGasTitle.append(NSLocalizedString("str_origin", comment: ""))
+                feePosition = 3
+            }
         }
         print("fixed fee ", evmGas)
     }
@@ -240,36 +250,26 @@ class DappEvmSignRequestSheet: BaseVC {
         DispatchQueue.global().async { [self] in
             do {
                 if (method == "eth_sendTransaction") {
+                    let evmGas = evmGas[feePosition]
                     if (inComeType == TransactionType.eip1559.rawValue) {
-                        let evmGas = evmGas[feePosition]
 //                        let eip1559 = EIP1559Envelope(to: inComeToAddress!, nonce: nonce!, chainID: chainId!, value: inComeValue!, data: inComeData!,
 //                                                      maxPriorityFeePerGas: evmGas.1, maxFeePerGas: evmGas.0, gasLimit: evmGas.2, accessList: inComeAccessLists)
                         let eip1559 = EIP1559Envelope(to: inComeToAddress!, nonce: nonce!, chainID: chainId!, value: inComeValue!, data: inComeData!,
                                                       maxPriorityFeePerGas: evmGas.1, maxFeePerGas: evmGas.0, gasLimit: evmGas.2)
                         evmTx  = EthereumTransaction(with: eip1559)
-                        print("fire11 ", evmTx)
                         
-//                        try evmTxAA.sign(privateKey: selectedChain.privateKey!)
-//                        print("evmTxAA fire22 ", evmTxAA)
-//                        
-//                        
-//                        let eip1559BB = EIP1559Envelope(to: inComeToAddress!, nonce: nonce!, chainID: chainId!, value: inComeValue!, data: inComeData!,
-//                                                      maxPriorityFeePerGas: evmGas.1, maxFeePerGas: evmGas.0, gasLimit: evmGas.2)
-//                        var evmTxBB = EthereumTransaction(with: eip1559BB)
-//                        print("evmTxBB fire11 ", evmTxBB)
-//                        try evmTxBB.sign(privateKey: selectedChain.privateKey!)
-//                        print("evmTxBB fire22 ", evmTxBB)
-                        
+                    } else {
+                        let legacy = LegacyEnvelope(to: inComeToAddress!, nonce: nonce!, chainID: chainId!, value: inComeValue!, data: inComeData!,
+                                                    gasPrice: evmGas.0, gasLimit: evmGas.2)
+                        evmTx = EthereumTransaction(with: legacy)
                     }
                     
                     
                     
                 }
-                
+                print("evmTx unsigned ", evmTx)
                 try evmTx?.sign(privateKey: selectedChain.privateKey!)
-                print("fire22 ", evmTx)
-                
-                
+                print("evmTx signed ", evmTx)
                 let result = try web3!.eth.sendRawTransaction(evmTx!)
                 print("result ", result)
                 print("result.hash ", result.hash)

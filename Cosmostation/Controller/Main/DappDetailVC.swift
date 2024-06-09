@@ -538,10 +538,9 @@ extension DappDetailVC: WKScriptMessageHandler {
                 
                 
             } else if (method == "eth_sendTransaction") {
-                //return txhash
+                //broadcast self & return hash
                 onInitEvmChain()
                 let toSign = messageJSON["params"].arrayValue[0]
-                print("DAPP REQUEST messageJSON ", messageJSON)
                 print("DAPP REQUEST toSign ", toSign)
 //                popUpEvmRequestSign(toSign,
 //                                    {_ in self.injectionEvmSendTransactionRequestApprove(toSign, bodyJSON["messageId"])},
@@ -555,15 +554,12 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "eth_getTransactionReceipt") {
                 onInitEvmChain()
                 let param = messageJSON["params"].arrayValue[0].stringValue
-                print("eth_getTransactionReceipt ", param)
                 let evmChain = targetChain as! EvmClass
                 Task {
                     if let response = try? await evmChain.fetchEvmTxReceipt(param),
-                       let result = response?["result"].stringValue {
-                        print("eth_getTransactionReceipt ", response)
-                        self.injectionRequestApprove(JSON.init(stringLiteral: result), messageJSON, bodyJSON["messageId"])
+                       let result = response?["result"] {
+                        self.injectionRequestApprove(result, messageJSON, bodyJSON["messageId"])
                     } else {
-                        print("eth_getTransactionReceipt Error")
                         self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
                     }
                 }
@@ -571,15 +567,12 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "eth_getTransactionByHash") {
                 onInitEvmChain()
                 let param = messageJSON["params"].arrayValue[0].stringValue
-                print("eth_getTransactionByHash ", param)
                 let evmChain = targetChain as! EvmClass
                 Task {
                     if let response = try? await evmChain.fetchEvmTxByHash(param),
-                       let result = response?["result"].stringValue {
-                        print("eth_getTransactionByHash ", response)
-                        self.injectionRequestApprove(JSON.init(stringLiteral: result), messageJSON, bodyJSON["messageId"])
+                       let result = response?["result"] {
+                        self.injectionRequestApprove(result, messageJSON, bodyJSON["messageId"])
                     } else {
-                        print("eth_getTransactionByHash Error")
                         self.injectionRequestReject("JSON-RPC error", messageJSON, bodyJSON["messageId"])
                     }
                 }
