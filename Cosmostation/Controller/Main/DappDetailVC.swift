@@ -555,8 +555,14 @@ extension DappDetailVC: WKScriptMessageHandler {
                                     { singed in self.injectionEvmSendTransactionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
                 
             } else if (method == "eth_signTypedData_v4" || method == "eth_signTypedData_v3") {
+                onInitEvmChain()
+                let chain = targetChain as! EvmClass
                 print("eth_signTypedData_v4", messageJSON["params"])
-                let toSign = messageJSON["params"]
+                if (messageJSON["params"][0].stringValue.lowercased() != chain.evmAddress.lowercased()) {
+                    self.injectionRequestReject("Wrong-Address", messageJSON, bodyJSON["messageId"])
+                    return
+                }
+                let toSign = messageJSON["params"][1]
                 popUpEvmRequestSign(method, toSign,
                                     { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
                                     { singed in self.injectionEvmSendTransactionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
