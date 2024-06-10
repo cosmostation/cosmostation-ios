@@ -49,7 +49,7 @@ class DappEvmSignRequestSheet: BaseVC {
     var nonce: BigUInt?
     var chainId: BigUInt?
     
-    var feePosition = 0
+    var feePosition = 1
     var evmGasTitle: [String] = [NSLocalizedString("str_low", comment: ""), NSLocalizedString("str_average", comment: ""), NSLocalizedString("str_high", comment: "")]
     var evmGas: [(BigUInt, BigUInt, BigUInt)] = [(500000000, 1000000000, 21000), (500000000, 1000000000, 21000), (500000000, 1000000000, 21000)]
     var checkedGas: BigUInt?
@@ -70,7 +70,7 @@ class DappEvmSignRequestSheet: BaseVC {
         self.chainId = web3.provider.network?.chainID
         
         if (method == "eth_sendTransaction") {
-            if let request_type = requestToSign?["type"].stringValue {
+            if let request_type = requestToSign?["type"].string {
                 inComeType = UInt(request_type.stripHexPrefix(), radix: 16)
             }
             
@@ -87,23 +87,23 @@ class DappEvmSignRequestSheet: BaseVC {
                 inComeData = Data.dataFromHex(request_data)
             }
             
-            if let request_value = requestToSign?["value"].stringValue {
+            if let request_value = requestToSign?["value"].string {
                 inComeValue = BigUInt(request_value.stripHexPrefix(), radix: 16)
             }
             
-            if let request_gas = requestToSign?["gas"].stringValue {
+            if let request_gas = requestToSign?["gas"].string {
                 inComeGas = BigUInt(request_gas.stripHexPrefix(), radix: 16)
             }
             
-            if let request_gasPrice = requestToSign?["gasPrice"].stringValue {
+            if let request_gasPrice = requestToSign?["gasPrice"].string {
                 inComeGasPrice = BigUInt(request_gasPrice.stripHexPrefix(), radix: 16)
             }
             
-            if let request_maxFeePerGas = requestToSign?["maxFeePerGas"].stringValue {
+            if let request_maxFeePerGas = requestToSign?["maxFeePerGas"].string {
                 inComeMaxFeePerGas = BigUInt(request_maxFeePerGas.stripHexPrefix(), radix: 16)
             }
             
-            if let request_maxPriorityFeePerGas = requestToSign?["maxPriorityFeePerGas"].stringValue {
+            if let request_maxPriorityFeePerGas = requestToSign?["maxPriorityFeePerGas"].string {
                 inComeMaxPriorityFeePerGas = BigUInt(request_maxPriorityFeePerGas.stripHexPrefix(), radix: 16)
             }
             
@@ -129,6 +129,10 @@ class DappEvmSignRequestSheet: BaseVC {
             print("nonce ", nonce)
 //            print("inComeAccessLists ", inComeAccessLists)
             
+        } else if (method == "eth_signTypedData_v4") {
+            print("eth_signTypedData_v4")
+            let requestToSignArray = requestToSign?.arrayValue
+            print("requestToSignArray ", requestToSignArray)
         }
         
         Task {
@@ -190,6 +194,9 @@ class DappEvmSignRequestSheet: BaseVC {
                 evmGas[1] = (gasprice, 0, checkedGas!)
                 evmGas[2] = (gasprice, 0, checkedGas!)
             }
+            print("Legacy inComeGasPrice", inComeGasPrice)
+            print("Legacy inComeGas", inComeGas)
+            print("Legacy checkedGas", checkedGas)
             if (inComeGasPrice != nil) {
                 evmGas.append((inComeGasPrice!, 0, inComeGas ?? checkedGas!))
                 evmGasTitle.append(NSLocalizedString("str_origin", comment: ""))

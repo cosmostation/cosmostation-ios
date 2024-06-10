@@ -94,7 +94,7 @@ class DappDetailVC: BaseVC {
             print("onInitWeb3 ", success)
         }
         
-//        print("incomed URL ", dappUrl)
+        
 //        print("dapp URL ", dappUrl)
 //        dappUrl = URL(string: "https://coinhall.org/")
 //        dappUrl = URL(string: "https://app.kava.io/home")
@@ -116,12 +116,9 @@ class DappDetailVC: BaseVC {
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
         
         if (dappType == .INTERNAL_URL) {
-            NSLog("Cosmostation DappDetailVC INTERNAL_URL \(dappUrl?.absoluteString)")
-            if (dappUrl?.query?.isEmpty == false) {
-                dappUrl = URL(string: dappUrl!.query!.removingPercentEncoding!)
-            }
-            NSLog("Cosmostation dappUrl \(dappUrl?.absoluteString)")
-            
+            NSLog("Cosmostation DappDetailVC INTERNAL_URL1 \(dappUrl?.absoluteString)")
+            dappUrl = onStripInternalUrl(dappUrl)
+            NSLog("Cosmostation DappDetailVC INTERNAL_URL2 \(dappUrl?.absoluteString)")
             dappUrlLabel.text = dappUrl?.host
             webView.load(URLRequest(url: dappUrl!))
             
@@ -129,6 +126,13 @@ class DappDetailVC: BaseVC {
             NSLog("Cosmostation DappDetailVC DEEPLINK_WC2 \(dappUrl?.absoluteString)")
             onInitWcV2(dappUrl!)
         }
+    }
+    
+    func onStripInternalUrl(_ url: URL?) -> URL? {
+        if (url?.absoluteString.starts(with: "cosmostation://dapp") == true) {
+            return URL(string: url!.query!.removingPercentEncoding!)
+        }
+        return url
     }
     
     func onUpdateAccountName(_ online: Bool) {
@@ -142,6 +146,8 @@ class DappDetailVC: BaseVC {
         } else {
             NSLog("Cosmostation onBackClicK Pair \(Pair.instance.getPairings().count)")
             NSLog("Cosmostation onBackClicK Sign \(Sign.instance.getPairings().count)")
+            webView.navigationDelegate = self
+            webView.scrollView.delegate = self
             wcV2Disconnect { result in
                 NSLog("Cosmostation onBackClicK isconnect \(result)")
                 self.dismiss(animated: true)
@@ -156,6 +162,8 @@ class DappDetailVC: BaseVC {
     }
     
     @IBAction func onClickClose(_ sender: Any) {
+        webView.navigationDelegate = self
+        webView.scrollView.delegate = self
         wcV2Disconnect { result in
             NSLog("Cosmostation onClickClose isconnect \(result)")
             self.dismiss(animated: true)
@@ -542,14 +550,17 @@ extension DappDetailVC: WKScriptMessageHandler {
                 onInitEvmChain()
                 let toSign = messageJSON["params"].arrayValue[0]
                 print("DAPP REQUEST toSign ", toSign)
-//                popUpEvmRequestSign(toSign,
-//                                    {_ in self.injectionEvmSendTransactionRequestApprove(toSign, bodyJSON["messageId"])},
-//                                    {self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])})
                 popUpEvmRequestSign(method, toSign,
                                     { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
                                     { singed in self.injectionEvmSendTransactionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
                 
             } else if (method == "eth_signTypedData_v4" || method == "eth_signTypedData_v3") {
+                print("eth_signTypedData_v4", messageJSON["params"])
+                let toSign = messageJSON["params"]
+                popUpEvmRequestSign(method, toSign,
+                                    { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
+                                    { singed in self.injectionEvmSendTransactionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
+                
                 
             } else if (method == "eth_getTransactionReceipt") {
                 onInitEvmChain()
