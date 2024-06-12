@@ -71,8 +71,6 @@ class DappDetailVC: BaseVC {
             }
             
             (allEvmChains, allCosmosChains) = await baseAccount.initKeyforCheck()
-            NSLog("Cosmostation allEvmChains \(allEvmChains.count)")
-            NSLog("Cosmostation allCosmosChains \(allCosmosChains.count)")
             
             DispatchQueue.main.async {
 //                NSLog("Cosmostation wcV2ProposalRequest viewDidLoad")
@@ -145,14 +143,7 @@ class DappDetailVC: BaseVC {
         if (webView.canGoBack) {
             webView.goBack()
         } else {
-//            NSLog("Cosmostation onBackClicK Pair \(Pair.instance.getPairings().count)")
-//            NSLog("Cosmostation onBackClicK Sign \(Sign.instance.getPairings().count)")
-            webView.navigationDelegate = self
-            webView.scrollView.delegate = self
-            wcV2Disconnect { result in
-                NSLog("Cosmostation onBackClicK isconnect \(result)")
-                self.dismiss(animated: true)
-            }
+            onCloseAll()
         }
     }
     
@@ -163,10 +154,15 @@ class DappDetailVC: BaseVC {
     }
     
     @IBAction func onClickClose(_ sender: Any) {
+        onCloseAll()
+    }
+    
+    func onCloseAll() {
         webView.navigationDelegate = self
         webView.scrollView.delegate = self
         wcV2Disconnect { result in
             NSLog("Cosmostation onClickClose isconnect \(result)")
+            print("onCloseAll \(result)")
             self.dismiss(animated: true)
         }
     }

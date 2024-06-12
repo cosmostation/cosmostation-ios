@@ -12,9 +12,6 @@ import web3swift
 import Web3Core
 import BigInt
 
-class DappEvmSignRequestSheet: BaseVC {}
-
-/*
 class DappEvmSignRequestSheet: BaseVC {
     
     @IBOutlet weak var toSignTextView: UITextView!
@@ -29,18 +26,20 @@ class DappEvmSignRequestSheet: BaseVC {
     @IBOutlet weak var confirmBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var web3: web3?
+    var web3: Web3?
     var method: String!
     var requestToSign: JSON?
     var selectedChain: EvmClass!
     var completion: ((_ success: Bool, _ toResponse: JSON? ) -> ())?
     
-    var evmTx: EthereumTransaction?
+//    var evmTx: EthereumTransaction?
+    var evmTx: CodableTransaction?
+    var evmTxType : TransactionType?
     var toResponse: JSON?
     
     var inComeType: UInt?
-    var inComeFromAddress: web3swift.EthereumAddress?
-    var inComeToAddress: web3swift.EthereumAddress?
+    var inComeFromAddress: EthereumAddress?
+    var inComeToAddress: EthereumAddress?
     var inComeData: Data?
     var inComeValue: BigUInt?
     var inComeGas: BigUInt?
@@ -62,27 +61,55 @@ class DappEvmSignRequestSheet: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadingView.isHidden = false
+        loadingView.animation = LottieAnimation.named("tx_loading")
+        loadingView.contentMode = .scaleAspectFit
+        loadingView.loopMode = .loop
+        loadingView.animationSpeed = 1.3
+        loadingView.play()
+        
         guard let web3 = web3,
-        let rawData = try? requestToSign?.rawData() else {
-            dismissWithFail()
-            return
+              let rawData = try? requestToSign?.rawData() else {
+                dismissWithFail()
+                return
         }
+        toSignTextView.text = rawData?.prettyJson
+        chainId = web3.provider.network?.chainID
         
-        self.toSignTextView.text = rawData?.prettyJson
-        self.chainId = web3.provider.network?.chainID
-        
+        Task {
+            do {
+                try await onParsingRequest()
+                try await onCheckBalance()
+                try await onCheckEstimateGas()
+                try await onCheckGasPrice()
+                
+                DispatchQueue.main.async {
+                    self.loadingView.isHidden = true
+                    self.onInitFeeView()
+                }
+                
+            } catch {
+                print("fetching error: \(error)")
+                DispatchQueue.main.async {
+                    self.dismissWithFail()
+                }
+            }
+        }
+    }
+    
+    func onParsingRequest() async throws {
         if (method == "eth_sendTransaction") {
             if let request_type = requestToSign?["type"].string {
                 inComeType = UInt(request_type.stripHexPrefix(), radix: 16)
             }
             
             if let request_from = requestToSign?["from"].stringValue {
-                inComeFromAddress = EthereumAddress.init(fromHex: request_from)
-                nonce = try? web3.eth.getTransactionCount(address: inComeFromAddress!)
+                inComeFromAddress = EthereumAddress.init(request_from)
+                nonce = try? await web3!.eth.getTransactionCount(for: inComeFromAddress!)
             }
             
             if let request_to = requestToSign?["to"].stringValue {
-                inComeToAddress = EthereumAddress.init(fromHex: request_to)
+                inComeToAddress = EthereumAddress.init(request_to)
             }
             
             if let request_data = requestToSign?["data"].stringValue {
@@ -136,24 +163,6 @@ class DappEvmSignRequestSheet: BaseVC {
             let requestToSignArray = requestToSign?.arrayValue
             print("requestToSignArray ", requestToSignArray)
         }
-        
-        Task {
-            do {
-                try await onCheckBalance()
-                try await onCheckEstimateGas()
-                try await onCheckGasPrice()
-                
-                DispatchQueue.main.async {
-                    self.onInitFeeView()
-                }
-                
-            } catch {
-                print("fetching error: \(error)")
-                DispatchQueue.main.async {
-                    self.dismissWithFail()
-                }
-            }
-        }
     }
     
     func onCheckBalance() async throws {
@@ -173,15 +182,14 @@ class DappEvmSignRequestSheet: BaseVC {
     }
     
     func onCheckGasPrice() async throws  {
-        let oracle = Web3.Oracle.init(web3!)
-        let feeHistory = oracle.bothFeesPercentiles
-        print("feeHistory ", feeHistory)
-        if (feeHistory?.baseFee.count ?? 0 > 0 && feeHistory?.tip.count ?? 0 > 0) {
+        let oracle = Web3Core.Oracle.init(web3!.provider)
+        if let feeHistory = await oracle.bothFeesPercentiles(),
+           feeHistory.baseFee.count > 0 {
+            //support EIP1559
+            print("feeHistory ", feeHistory)
             for i in 0..<3 {
-                var baseFee = feeHistory?.baseFee[i] ?? 500000000
-                baseFee = baseFee > 500000000 ? baseFee : 500000000
-                var tip = feeHistory?.tip[i] ?? 1000000000
-                tip = tip > 1000000000 ? tip : 1000000000
+                let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
+                let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
                 evmGas[i] = (baseFee, tip, checkedGas!)
             }
             if (inComeMaxFeePerGas != nil && inComeMaxPriorityFeePerGas != nil) {
@@ -189,21 +197,21 @@ class DappEvmSignRequestSheet: BaseVC {
                 evmGasTitle.append(NSLocalizedString("str_origin", comment: ""))
                 feePosition = 3
             }
+            evmTxType = .eip1559
             
-        } else {
-            if let gasprice = try? web3!.eth.getGasPrice() {
-                evmGas[0] = (gasprice, 0, checkedGas!)
-                evmGas[1] = (gasprice, 0, checkedGas!)
-                evmGas[2] = (gasprice, 0, checkedGas!)
-            }
-            print("Legacy inComeGasPrice", inComeGasPrice)
-            print("Legacy inComeGas", inComeGas)
-            print("Legacy checkedGas", checkedGas)
+        } else if let gasprice = try? await web3!.eth.gasPrice() {
+            //only Legacy
+            print("gasprice ", gasprice)
+            evmGas[0] = (gasprice, 0, checkedGas!)
+            evmGas[1] = (gasprice, 0, checkedGas!)
+            evmGas[2] = (gasprice, 0, checkedGas!)
             if (inComeGasPrice != nil) {
                 evmGas.append((inComeGasPrice!, 0, inComeGas ?? checkedGas!))
                 evmGasTitle.append(NSLocalizedString("str_origin", comment: ""))
                 feePosition = 3
             }
+            evmTxType = .legacy
+            
         }
         print("fixed fee ", evmGas)
     }
@@ -256,30 +264,34 @@ class DappEvmSignRequestSheet: BaseVC {
     }
     
     @IBAction func onClickConfirm(_ sender: UIButton) {
-        DispatchQueue.global().async { [self] in
+        Task {
             do {
                 if (method == "eth_sendTransaction") {
-                    let evmGas = evmGas[feePosition]
-                    if (inComeType == TransactionType.eip1559.rawValue) {
-//                        let eip1559 = EIP1559Envelope(to: inComeToAddress!, nonce: nonce!, chainID: chainId!, value: inComeValue!, data: inComeData!,
-//                                                      maxPriorityFeePerGas: evmGas.1, maxFeePerGas: evmGas.0, gasLimit: evmGas.2, accessList: inComeAccessLists)
-                        let eip1559 = EIP1559Envelope(to: inComeToAddress!, nonce: nonce!, chainID: chainId!, value: inComeValue!, data: inComeData!,
-                                                      maxPriorityFeePerGas: evmGas.1, maxFeePerGas: evmGas.0, gasLimit: evmGas.2)
-                        evmTx  = EthereumTransaction(with: eip1559)
-                        
+                    let evmGas = self.evmGas[self.feePosition]
+                    evmTx = CodableTransaction.init(type: evmTxType, to: inComeToAddress!, nonce: nonce!, chainID: chainId!)
+                    evmTx?.gasLimit = evmGas.2
+                    
+                    if (inComeType == TransactionType.eip1559.rawValue && evmTxType == .eip1559) {
+                        evmTx?.maxFeePerGas = evmGas.0 + evmGas.1
+                        evmTx?.maxPriorityFeePerGas = evmGas.1
                     } else {
-                        let legacy = LegacyEnvelope(to: inComeToAddress!, nonce: nonce!, chainID: chainId!, value: inComeValue!, data: inComeData!,
-                                                    gasPrice: evmGas.0, gasLimit: evmGas.2)
-                        evmTx = EthereumTransaction(with: legacy)
+                        evmTx?.gasPrice = evmGas.0
                     }
                     
-                    
+                    if let inComeData = self.inComeData {
+                        evmTx?.data = inComeData
+                    }
+                    if let inComeValue = self.inComeValue {
+                        evmTx?.value = inComeValue
+                    }
                     
                 }
+                
                 print("evmTx unsigned ", evmTx)
                 try evmTx?.sign(privateKey: selectedChain.privateKey!)
                 print("evmTx signed ", evmTx)
-                let result = try web3!.eth.sendRawTransaction(evmTx!)
+                let encodeTx = self.evmTx?.encode(for: .transaction)
+                let result = try await self.web3!.eth.send(raw :encodeTx!)
                 print("result ", result)
                 print("result.hash ", result.hash)
                 
@@ -297,6 +309,5 @@ class DappEvmSignRequestSheet: BaseVC {
         }
     }
 }
-*/
 
 

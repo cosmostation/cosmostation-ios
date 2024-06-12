@@ -87,7 +87,7 @@ class CommonTransfer: BaseVC {
     var evmTx: CodableTransaction?
     var evmTxType : TransactionType?
     var evmGasTitle: [String] = [NSLocalizedString("str_low", comment: ""), NSLocalizedString("str_average", comment: ""), NSLocalizedString("str_high", comment: "")]
-    var evmGasPrice: [(BigUInt, BigUInt)] = [(500000000, 1000000000), (500000000, 1000000000), (500000000, 1000000000)]
+    var evmGas: [(BigUInt, BigUInt)] = [(500000000, 1000000000), (500000000, 1000000000), (500000000, 1000000000)]
     var evmGasLimit: BigUInt = 21000
     var web3: Web3?
     
@@ -176,7 +176,7 @@ class CommonTransfer: BaseVC {
             feeDenomLabel.text = (fromChain as! EvmClass).coinSymbol
             
             let feePrice = BaseData.instance.getPrice((fromChain as! EvmClass).coinGeckoId)
-            let totalGasPrice = evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1
+            let totalGasPrice = evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1
             let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
             let feeDpAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(18))
             let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
@@ -501,7 +501,7 @@ class CommonTransfer: BaseVC {
     func onUpdateFeeView() {
         if (txStyle == .WEB3_STYLE) {
             let feePrice = BaseData.instance.getPrice((fromChain as! EvmClass).coinGeckoId)
-            let totalGasPrice = evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1
+            let totalGasPrice = evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1
             let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
             let feeDpAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(18))
             let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
@@ -623,16 +623,16 @@ extension CommonTransfer {
                 for i in 0..<3 {
                     let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
                     let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
-                    evmGasPrice[i] = (baseFee, tip)
+                    evmGas[i] = (baseFee, tip)
                 }
                 evmTxType = .eip1559
                 
             } else if let gasprice = try? await web3.eth.gasPrice() {
                 //only Legacy
                 print("gasprice ", gasprice)
-                evmGasPrice[0].0 = gasprice
-                evmGasPrice[1].0 = gasprice
-                evmGasPrice[2].0 = gasprice
+                evmGas[0].0 = gasprice
+                evmGas[1].0 = gasprice
+                evmGas[2].0 = gasprice
                 evmTxType = .legacy
                 
             } else {
@@ -643,7 +643,7 @@ extension CommonTransfer {
                 }
                 return
             }
-            print("evmGasPrice ", evmGasPrice)
+            print("evmGas ", evmGas)
             
             let chainID = web3.provider.network?.chainID
             let senderAddress = EthereumAddress.init((fromChain as! EvmClass).evmAddress)
@@ -659,12 +659,12 @@ extension CommonTransfer {
                 if (evmTxType == .eip1559) {
                     evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
                                                     chainID: chainID!, data: writeOperation.data!,
-                                                    maxFeePerGas: evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1, 
-                                                    maxPriorityFeePerGas: evmGasPrice[selectedFeePosition].1)
+                                                    maxFeePerGas: evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1, 
+                                                    maxPriorityFeePerGas: evmGas[selectedFeePosition].1)
                 } else {
                     evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
                                                     chainID: chainID!, data: writeOperation.data!,
-                                                    gasPrice: evmGasPrice[selectedFeePosition].0)
+                                                    gasPrice: evmGas[selectedFeePosition].0)
                 }
                 
             } else {
@@ -673,12 +673,12 @@ extension CommonTransfer {
                 if (evmTxType == .eip1559) {
                     evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
                                                     chainID: chainID!, value: value,
-                                                    maxFeePerGas: evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1,
-                                                    maxPriorityFeePerGas: evmGasPrice[selectedFeePosition].1)
+                                                    maxFeePerGas: evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1,
+                                                    maxPriorityFeePerGas: evmGas[selectedFeePosition].1)
                 } else {
                     evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
                                                     chainID: chainID!, value: value,
-                                                    gasPrice: evmGasPrice[selectedFeePosition].0)
+                                                    gasPrice: evmGas[selectedFeePosition].0)
                 }
             }
             evmTx?.from = senderAddress
