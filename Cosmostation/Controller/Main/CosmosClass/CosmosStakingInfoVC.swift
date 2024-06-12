@@ -145,13 +145,13 @@ class CosmosStakingInfoVC: BaseVC {
             return
         }
         if (selectedChain is ChainBeraEVM) {
-            let delegate = EvmDelegate(nibName: "EvmDelegate", bundle: nil)
-            delegate.selectedChain = selectedChain as? EvmClass
-            if (toValAddress != nil) {
-                delegate.toValidator = validators.filter({ $0.operatorAddress == toValAddress }).first
-            }
-            delegate.modalTransitionStyle = .coverVertical
-            self.present(delegate, animated: true)
+//            let delegate = EvmDelegate(nibName: "EvmDelegate", bundle: nil)
+//            delegate.selectedChain = selectedChain as? EvmClass
+//            if (toValAddress != nil) {
+//                delegate.toValidator = validators.filter({ $0.operatorAddress == toValAddress }).first
+//            }
+//            delegate.modalTransitionStyle = .coverVertical
+//            self.present(delegate, animated: true)
             
         } else {
             let delegate = CosmosDelegate(nibName: "CosmosDelegate", bundle: nil)
@@ -170,11 +170,11 @@ class CosmosStakingInfoVC: BaseVC {
             return
         }
         if (selectedChain is ChainBeraEVM) {
-            let undelegate = EvmUndelegate(nibName: "EvmUndelegate", bundle: nil)
-            undelegate.selectedChain = selectedChain as? EvmClass
-            undelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
-            undelegate.modalTransitionStyle = .coverVertical
-            self.present(undelegate, animated: true)
+//            let undelegate = EvmUndelegate(nibName: "EvmUndelegate", bundle: nil)
+//            undelegate.selectedChain = selectedChain as? EvmClass
+//            undelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
+//            undelegate.modalTransitionStyle = .coverVertical
+//            self.present(undelegate, animated: true)
             
         } else {
             let undelegate = CosmosUndelegate(nibName: "CosmosUndelegate", bundle: nil)
@@ -191,11 +191,11 @@ class CosmosStakingInfoVC: BaseVC {
             return
         }
         if (selectedChain is ChainBeraEVM) {
-            let redelegate = EvmRedelegate(nibName: "EvmRedelegate", bundle: nil)
-            redelegate.selectedChain = selectedChain as? EvmClass
-            redelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
-            redelegate.modalTransitionStyle = .coverVertical
-            self.present(redelegate, animated: true)
+//            let redelegate = EvmRedelegate(nibName: "EvmRedelegate", bundle: nil)
+//            redelegate.selectedChain = selectedChain as? EvmClass
+//            redelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
+//            redelegate.modalTransitionStyle = .coverVertical
+//            self.present(redelegate, animated: true)
             
         } else {
             let redelegate = CosmosRedelegate(nibName: "CosmosRedelegate", bundle: nil)
@@ -252,11 +252,11 @@ class CosmosStakingInfoVC: BaseVC {
             return
         }
         if (selectedChain is ChainBeraEVM) {
-            let cancel = EvmCancelUnbonding(nibName: "EvmCancelUnbonding", bundle: nil)
-            cancel.selectedChain = selectedChain as? EvmClass
-            cancel.unbondingEntry = unbondings[position]
-            cancel.modalTransitionStyle = .coverVertical
-            self.present(cancel, animated: true)
+//            let cancel = EvmCancelUnbonding(nibName: "EvmCancelUnbonding", bundle: nil)
+//            cancel.selectedChain = selectedChain as? EvmClass
+//            cancel.unbondingEntry = unbondings[position]
+//            cancel.modalTransitionStyle = .coverVertical
+//            self.present(cancel, animated: true)
         } else {
             let cancel = CosmosCancelUnbonding(nibName: "CosmosCancelUnbonding", bundle: nil)
             cancel.selectedChain = selectedChain

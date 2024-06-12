@@ -691,6 +691,8 @@
 		0497150F2C105C13008C45A0 /* DappEvmSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497150A2C105C13008C45A0 /* DappEvmSignRequestSheet.swift */; };
 		049B691F29D1736B0027B82D /* MintscanProposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691E29D1736B0027B82D /* MintscanProposal.swift */; };
 		049B692029D1736B0027B82D /* MintscanProposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B691E29D1736B0027B82D /* MintscanProposal.swift */; };
+		049C02D42C16D6D300A71604 /* web3swift in Frameworks */ = {isa = PBXBuildFile; productRef = 049C02D32C16D6D300A71604 /* web3swift */; };
+		049C02D62C16D6DF00A71604 /* web3swift in Frameworks */ = {isa = PBXBuildFile; productRef = 049C02D52C16D6DF00A71604 /* web3swift */; };
 		04A116F128F7DB42003605E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */; };
 		04A116F228F7DB42003605E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */; };
 		04A1A8022AC80AA50014EF92 /* TxAmountSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A8002AC80AA50014EF92 /* TxAmountSheet.swift */; };
@@ -2911,6 +2913,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04FA745E2A9DEE65001A2830 /* Toast in Frameworks */,
+				049C02D62C16D6DF00A71604 /* web3swift in Frameworks */,
 				EB85535FBF1815AEAECE43D4 /* Pods_CosmostationDev.framework in Frameworks */,
 				E122DA232A8A1909006D1E7B /* ed25519swift in Frameworks */,
 				04D547F22A612A93001F1A4B /* FirebaseMessaging in Frameworks */,
@@ -2931,6 +2934,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04FA745C2A9DEE51001A2830 /* Toast in Frameworks */,
+				049C02D42C16D6D300A71604 /* web3swift in Frameworks */,
 				9EBDC03599A6A52BCFB81E33 /* Pods_Cosmostation.framework in Frameworks */,
 				E122DA212A8A18FB006D1E7B /* ed25519swift in Frameworks */,
 				04815BDE2A41DB120006A906 /* SwiftProtobuf in Frameworks */,
@@ -4341,6 +4345,7 @@
 				E122DA272A8A19DF006D1E7B /* Blake2 */,
 				04BA9BCE2A976EAD003E2404 /* SkeletonView */,
 				04FA745D2A9DEE65001A2830 /* Toast */,
+				049C02D52C16D6DF00A71604 /* web3swift */,
 			);
 			productName = Cosmostation;
 			productReference = 18FFB7D5281AF533004E65BB /* CosmostationDev.app */;
@@ -4376,6 +4381,7 @@
 				E122DA252A8A19D2006D1E7B /* Blake2 */,
 				04BA9BCC2A976EA2003E2404 /* SkeletonView */,
 				04FA745B2A9DEE51001A2830 /* Toast */,
+				049C02D32C16D6D300A71604 /* web3swift */,
 			);
 			productName = Cosmostation;
 			productReference = E1945E24222E7C0600A1436F /* Cosmostation.app */;
@@ -4452,6 +4458,8 @@
 				E122DA242A8A19D2006D1E7B /* XCRemoteSwiftPackageReference "Blake2.swift" */,
 				04BA9BCB2A976EA2003E2404 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				04FA745A2A9DEE51001A2830 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				049C02D22C16D6D300A71604 /* XCRemoteSwiftPackageReference "web3swift" */,
+				049C02D72C16EB8E00A71604 /* XCRemoteSwiftPackageReference "Starscream" */,
 			);
 			productRefGroup = E1945E25222E7C0600A1436F /* Products */;
 			projectDirPath = "";
@@ -6886,6 +6894,22 @@
 				minimumVersion = 1.16.0;
 			};
 		};
+		049C02D22C16D6D300A71604 /* XCRemoteSwiftPackageReference "web3swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/web3swift-team/web3swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.1;
+			};
+		};
+		049C02D72C16EB8E00A71604 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.8;
+			};
+		};
 		04BA9BCB2A976EA2003E2404 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
@@ -6986,6 +7010,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04815BDF2A41DB410006A906 /* XCRemoteSwiftPackageReference "grpc-swift" */;
 			productName = GRPC;
+		};
+		049C02D32C16D6D300A71604 /* web3swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 049C02D22C16D6D300A71604 /* XCRemoteSwiftPackageReference "web3swift" */;
+			productName = web3swift;
+		};
+		049C02D52C16D6DF00A71604 /* web3swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 049C02D22C16D6D300A71604 /* XCRemoteSwiftPackageReference "web3swift" */;
+			productName = web3swift;
 		};
 		04BA9BCC2A976EA2003E2404 /* SkeletonView */ = {
 			isa = XCSwiftPackageProductDependency;

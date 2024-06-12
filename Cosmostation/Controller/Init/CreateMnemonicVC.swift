@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import web3swift
+import Web3Core
 
 class CreateMnemonicVC: BaseVC, PinDelegate, CreateNameDelegate {
     

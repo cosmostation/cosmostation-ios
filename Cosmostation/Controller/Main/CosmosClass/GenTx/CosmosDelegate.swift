@@ -260,7 +260,7 @@ class CosmosDelegate: BaseVC {
             if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
                 do {
                     let simul = try await simulateTx(channel, auth!)
-                    print("simul ", simul)
+//                    print("simul ", simul)
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simul)
                     }

@@ -5,14 +5,16 @@
 //  Created by yongjoo jung on 6/5/24.
 //  Copyright © 2024 wannabit. All rights reserved.
 //
-
 import UIKit
 import SwiftyJSON
 import Lottie
 import web3swift
+import Web3Core
 import BigInt
-import HDWalletKit
 
+class DappEvmSignRequestSheet: BaseVC {}
+
+/*
 class DappEvmSignRequestSheet: BaseVC {
     
     @IBOutlet weak var toSignTextView: UITextView!
@@ -295,6 +297,6 @@ class DappEvmSignRequestSheet: BaseVC {
         }
     }
 }
-
+*/
 
 

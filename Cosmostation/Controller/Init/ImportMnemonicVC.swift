@@ -7,7 +7,7 @@
 
 import UIKit
 import MaterialComponents
-import web3swift
+import Web3Core
 
 class ImportMnemonicVC: BaseVC, UITextViewDelegate, PinDelegate {
     

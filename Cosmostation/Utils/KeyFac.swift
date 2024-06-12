@@ -5,9 +5,9 @@
 //  Created by 정용주 on 2021/07/08.
 //  Copyright © 2021 wannabit. All rights reserved.
 //
-
 import Foundation
 import web3swift
+import Web3Core
 import ed25519swift
 import CryptoSwift
 import Blake2
@@ -18,7 +18,6 @@ class KeyFac {
         return BIP39.seedFromMmemonics(mnemnics, password: "", language: .english)
     }
     
-
     static func getPriKeyFromSeed(_ pubKeyType: PubKeyType, _ seed: Data, _ path: String) -> Data? {
         if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || 
             pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1) {
@@ -94,9 +93,8 @@ class KeyFac {
             let ripemd160 = RIPEMD160.hash(pubKey.sha256())
             return try! SegwitAddrCoder.shared.encode(prefix!, ripemd160)
             
-        } else if (pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1
-                   || pubKeyType == .BERA_Secp256k1) {
-            return Web3.Utils.publicToAddressString(pubKey)!
+        } else if (pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1) {
+            return Web3Core.Utilities.publicToAddressString(pubKey)!
             
         } else if (pubKeyType == .SUI_Ed25519) {
             let data = Data([UInt8](Data(count: 1)) + pubKey)

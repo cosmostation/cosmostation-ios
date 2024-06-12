@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import CryptoSwift
-import HDWalletKit
+import web3swift
+import Web3Core
 
 
 class L_Generator {
@@ -92,13 +92,13 @@ class L_Generator {
     
     static func genSignatures(_ toSignData: Data, _ accNum: String, _ seqNum: String, _ baseChain: CosmosClass) -> [L_Signature]? {
         if (baseChain.accountKeyType.pubkeyType == .COSMOS_Secp256k1) {
-            let signedData = try! ECDSA.compactsign(toSignData.sha256(), privateKey: baseChain.privateKey!)
+            let signedData = SECP256K1.compactsign(toSignData.sha256(), privateKey: baseChain.privateKey!)!
             let publicKey = L_PublicKey.init(COSMOS_KEY_TYPE_PUBLIC, baseChain.publicKey!.base64EncodedString())
             let signature = L_Signature.init(publicKey, signedData.base64EncodedString(), accNum, seqNum)
             return [signature]
             
         }  else if (baseChain.accountKeyType.pubkeyType == .ETH_Keccak256) {
-            let signedData = try! ECDSA.compactsign(HDWalletKit.Crypto.sha3keccak256(data: toSignData), privateKey: baseChain.privateKey!)
+            let signedData = SECP256K1.compactsign(toSignData.sha3(.keccak256), privateKey: baseChain.privateKey!)!
             let publicKey = L_PublicKey.init(ETHERMINT_KEY_TYPE_PUBLIC, baseChain.publicKey!.base64EncodedString())
             let signature = L_Signature.init(publicKey, signedData.base64EncodedString(), accNum, seqNum)
             return [signature]

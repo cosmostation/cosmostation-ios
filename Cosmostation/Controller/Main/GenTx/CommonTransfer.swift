@@ -10,10 +10,12 @@ import UIKit
 import Lottie
 import SwiftyJSON
 import web3swift
+import Web3Core
 import BigInt
 import GRPC
 import NIO
 import SwiftProtobuf
+
 
 class CommonTransfer: BaseVC {
     
@@ -82,11 +84,12 @@ class CommonTransfer: BaseVC {
     var cosmosFeeInfos = [FeeInfo]()
     var cosmosTxFee: Cosmos_Tx_V1beta1_Fee!
     
-    var evmTx: EthereumTransaction?
+    var evmTx: CodableTransaction?
+    var evmTxType : TransactionType?
     var evmGasTitle: [String] = [NSLocalizedString("str_low", comment: ""), NSLocalizedString("str_average", comment: ""), NSLocalizedString("str_high", comment: "")]
     var evmGasPrice: [(BigUInt, BigUInt)] = [(500000000, 1000000000), (500000000, 1000000000), (500000000, 1000000000)]
     var evmGasLimit: BigUInt = 21000
-    var web3: web3?
+    var web3: Web3?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,18 +115,20 @@ class CommonTransfer: BaseVC {
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeDenom)))
         
-        if let evmChain = fromChain as? EvmClass,
-           let url = URL(string: evmChain.getEvmRpc()) {
-            DispatchQueue.global().async { [self] in
-                do {
-                    self.web3 = try Web3.new(url)
-                } catch {
+        Task {
+            if let evmChain = fromChain as? EvmClass {
+                if let url = URL(string: evmChain.getEvmRpc()),
+                   let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil) {
+                    self.web3 = Web3.init(provider: web3Provider)
+                    
+                } else {
                     DispatchQueue.main.async {
                         self.dismiss(animated: true)
                     }
                 }
             }
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -598,84 +603,95 @@ class CommonTransfer: BaseVC {
 
 //Evm style tx simul and broadcast
 extension CommonTransfer {
+    
     func evmSendSimul() {
-        evmTx = nil
-        DispatchQueue.global().async { [self] in
-            
+        Task {
             guard let web3 = self.web3 else {
-                return
-            }
-            
-            let chainID = web3.provider.network?.chainID
-            let senderAddress = EthereumAddress.init((fromChain as! EvmClass).evmAddress)
-            let recipientAddress = EthereumAddress.init(toAddress)
-            let nonce = try? web3.eth.getTransactionCount(address: senderAddress!)
-            let calSendAmount = toAmount.multiplying(byPowerOf10: -decimal)
-            
-            var toAddress: EthereumAddress!
-            var wTx: WriteTransaction?
-            var value: BigUInt = 0
-            
-            if (sendType == .Only_EVM_ERC20) {
-                toAddress = EthereumAddress.init(fromHex: toSendMsToken.address!)
-                let erc20token = ERC20(web3: web3, provider: web3.provider, address: toAddress!)
-                value = 0
-                wTx = try? erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
-                
-            } else {
-                toAddress = recipientAddress
-                let contract = web3.contract(Web3.Utils.coldWalletABI, at: toAddress, abiVersion: 2)!
-                let amount = Web3.Utils.parseToBigUInt(calSendAmount.stringValue, units: .eth)
-                var options = TransactionOptions.defaultOptions
-                options.value = amount
-                options.from = senderAddress
-                options.gasPrice = .automatic
-                options.gasLimit = .automatic
-                value = amount!
-                wTx = contract.write("fallback", parameters: [AnyObject](), extraData: Data(), transactionOptions: options)!
-            }
-            
-            if (wTx == nil) {
+                print("web3 init error")
+                evmTxType = nil
                 DispatchQueue.main.async {
                     self.onUpdateFeeViewAfterSimul(nil)
                 }
                 return
             }
             
-            if let estimateGas = try? wTx!.estimateGas(transactionOptions: .defaultOptions) {
-                evmGasLimit = estimateGas
-            }
-//            print("evmGasLimit ", evmGasLimit)
-             
-            let oracle = Web3.Oracle.init(web3)
-            let feeHistory = oracle.bothFeesPercentiles
-//            print("feeHistory ", feeHistory)
-            if (feeHistory?.baseFee.count ?? 0 > 0 && feeHistory?.tip.count ?? 0 > 0) {
+            let oracle = Web3Core.Oracle.init(web3.provider)
+            if let feeHistory = await oracle.bothFeesPercentiles(),
+               feeHistory.baseFee.count > 0 {
+                //support EIP1559
+                print("feeHistory ", feeHistory)
                 for i in 0..<3 {
-                    var baseFee = feeHistory?.baseFee[i] ?? 500000000
-                    baseFee = baseFee > 500000000 ? baseFee : 500000000
-                    var tip = feeHistory?.tip[i] ?? 1000000000
-                    tip = tip > 1000000000 ? tip : 1000000000
+                    let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
+                    let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
                     evmGasPrice[i] = (baseFee, tip)
                 }
-//                print("evmGasPrice eip1559 ", evmGasPrice)
-                let eip1559 = EIP1559Envelope(to: toAddress, nonce: nonce!, chainID: chainID!, value: value,
-                                              data: wTx!.transaction.data, maxPriorityFeePerGas: evmGasPrice[selectedFeePosition].1,
-                                              maxFeePerGas: evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1, gasLimit: evmGasLimit)
-                evmTx = EthereumTransaction(with: eip1559)
+                evmTxType = .eip1559
+                
+            } else if let gasprice = try? await web3.eth.gasPrice() {
+                //only Legacy
+                print("gasprice ", gasprice)
+                evmGasPrice[0].0 = gasprice
+                evmGasPrice[1].0 = gasprice
+                evmGasPrice[2].0 = gasprice
+                evmTxType = .legacy
                 
             } else {
-                if let gasprice = try? web3.eth.getGasPrice() {
-                    evmGasPrice[0].0 = gasprice
-                    evmGasPrice[1].0 = gasprice
-                    evmGasPrice[2].0 = gasprice
+                print("no gas error")
+                evmTxType = nil
+                DispatchQueue.main.async {
+                    self.onUpdateFeeViewAfterSimul(nil)
                 }
-//                print("evmGasPrice legacy ", evmGasPrice)
-                let legacy = LegacyEnvelope(to: toAddress, nonce: nonce!, chainID: chainID, value: value,
-                                            data: wTx!.transaction.data, gasPrice: evmGasPrice[selectedFeePosition].0,
-                                            gasLimit: evmGasLimit)
-                evmTx = EthereumTransaction(with: legacy)
+                return
             }
+            print("evmGasPrice ", evmGasPrice)
+            
+            let chainID = web3.provider.network?.chainID
+            let senderAddress = EthereumAddress.init((fromChain as! EvmClass).evmAddress)
+            let recipientAddress = EthereumAddress.init(toAddress)
+            let nonce = try? await web3.eth.getTransactionCount(for: senderAddress!)
+            let calSendAmount = self.toAmount.multiplying(byPowerOf10: -decimal)
+            var toAddress: EthereumAddress!
+            
+            if (sendType == .Only_EVM_ERC20) {
+                toAddress = EthereumAddress.init(toSendMsToken.address!)
+                let erc20token = ERC20(web3: web3, provider: web3.provider, address: toAddress!)
+                let writeOperation = try await erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
+                if (evmTxType == .eip1559) {
+                    evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
+                                                    chainID: chainID!, data: writeOperation.data!,
+                                                    maxFeePerGas: evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1, 
+                                                    maxPriorityFeePerGas: evmGasPrice[selectedFeePosition].1)
+                } else {
+                    evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
+                                                    chainID: chainID!, data: writeOperation.data!,
+                                                    gasPrice: evmGasPrice[selectedFeePosition].0)
+                }
+                
+            } else {
+                toAddress = recipientAddress
+                let value = Web3Core.Utilities.parseToBigUInt(calSendAmount.stringValue, units: .ether)!
+                if (evmTxType == .eip1559) {
+                    evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
+                                                    chainID: chainID!, value: value,
+                                                    maxFeePerGas: evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1,
+                                                    maxPriorityFeePerGas: evmGasPrice[selectedFeePosition].1)
+                } else {
+                    evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
+                                                    chainID: chainID!, value: value,
+                                                    gasPrice: evmGasPrice[selectedFeePosition].0)
+                }
+            }
+            evmTx?.from = senderAddress
+            
+            print("evmTxA ", evmTx)
+            if let estimateGas = try? await web3.eth.estimateGas(for: evmTx!) {
+                print("estimateGas GOT ", estimateGas)
+                evmGasLimit = estimateGas
+                evmTx?.gasLimit = estimateGas
+            } else {
+                evmTxType = nil
+            }
+            print("evmTxB ", evmTx)
             
             DispatchQueue.main.async {
                 self.onUpdateFeeViewAfterSimul(nil)
@@ -684,20 +700,16 @@ extension CommonTransfer {
     }
     
     func evmSend() {
-        DispatchQueue.global().async { [self] in
+        Task {
             guard let web3 = self.web3 else {
+                print("web3 init error")
                 return
             }
             
-            
             do {
-                try evmTx?.sign(privateKey: fromChain.privateKey!)
-//                print("sign gasLimit ", evmTx?.parameters.gasLimit)
-//                print("sign gasPrice ", evmTx?.parameters.gasPrice)
-//                print("sign maxPriorityFeePerGas ", evmTx?.parameters.maxPriorityFeePerGas)
-//                print("sign maxFeePerGas ", evmTx?.parameters.maxFeePerGas)
-                
-                let result = try web3.eth.sendRawTransaction(evmTx!)
+                try self.evmTx?.sign(privateKey: fromChain.privateKey!)
+                let encodeTx = self.evmTx?.encode(for: .transaction)
+                let result = try await web3.eth.send(raw : encodeTx!)
 //                print("result ", result)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {

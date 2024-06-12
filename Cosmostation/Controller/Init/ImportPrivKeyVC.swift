@@ -7,7 +7,7 @@
 
 import UIKit
 import MaterialComponents
-import web3swift
+import Web3Core
 
 class ImportPrivKeyVC: BaseVC, UITextViewDelegate, PinDelegate {
     

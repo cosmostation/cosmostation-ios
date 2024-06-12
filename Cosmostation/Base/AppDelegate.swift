@@ -6,12 +6,13 @@
 //  Copyright © 2019 wannabit. All rights reserved.
 //
 
+//YONG3
 import UIKit
 import SwiftKeychainWrapper
 import Firebase
 import UserNotifications
 import WalletConnectSwiftV2
-import Starscream
+//import Starscream
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, PinDelegate, MessagingDelegate {
@@ -159,15 +160,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 }
 
 
-
-extension AppDelegate: WebSocketFactory {
-    func create(with url: URL) -> WalletConnectSwiftV2.WebSocketConnecting {
-        return WebSocket(request: URLRequest(url: url))
-    }
-}
-
-extension WebSocket: WebSocketConnecting { }
-
+//YONG3
+//extension AppDelegate: WalletConnectSwiftV2.WebSocketFactory {
+//    func create(with url: URL) -> any WalletConnectSwiftV2.WebSocketConnecting {
+//        return WebSocket(request: URLRequest(url: url))
+//    }
+//}
+//
+//extension WebSocket: WalletConnectSwiftV2.WebSocketConnecting {
+//}
 
 extension UIApplication{
     var topViewController: UIViewController? {
@@ -239,19 +240,22 @@ private extension AppDelegate {
             Messaging.messaging().delegate = self
         }
     }
-    
+    //YONG3
     private func setWalletConnectV2() {
         let metadata = AppMetadata(
             name: NSLocalizedString("wc_peer_name", comment: ""),
             description: NSLocalizedString("wc_peer_desc", comment: ""),
             url: NSLocalizedString("wc_peer_url", comment: ""),
             icons: [])
+        
 
+        /*
         Networking.configure(projectId: Bundle.main.WALLET_CONNECT_API_KEY, socketFactory: self)
         Pair.configure(metadata: metadata)
 //#if DEBUG
         try? Pair.instance.cleanup()
         try? Sign.instance.cleanup()
 //#endif
+         */
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import SwiftProtobuf
-import web3swift
+import Web3Core
 import BigInt
 
 
