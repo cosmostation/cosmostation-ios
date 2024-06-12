@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import web3swift
+import Web3Core
 import Lottie
 
 class SettingsVC: BaseVC {
@@ -485,7 +485,8 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
         }
         
         let data = Data(base64Encoded: scanedStr.data(using: .utf8)!)
-        if (data?.dataToHexString().starts(with: "53616c74") == true) {
+        if (data?.toHexString().starts(with: "53616c74") == true) {
+//            if (data?.dataToHexString().starts(with: "53616c74") == true) {
             //start with salted
             let qrImportCheckKeySheet = QrImportCheckKeySheet(nibName: "QrImportCheckKeySheet", bundle: nil)
             qrImportCheckKeySheet.toDecryptString = scanedStr

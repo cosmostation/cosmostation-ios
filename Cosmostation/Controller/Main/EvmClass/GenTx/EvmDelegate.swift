@@ -11,6 +11,9 @@ import Lottie
 import web3swift
 import BigInt
 
+class EvmDelegate: BaseVC {}
+
+/*
 //only for bera chain evm staking!!
 class EvmDelegate: BaseVC {
     
@@ -87,6 +90,8 @@ class EvmDelegate: BaseVC {
             DispatchQueue.global().async { [self] in
                 do {
                     self.web3 = try Web3.new(url)
+                    let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil)
+ 
                 } catch {
                     DispatchQueue.main.async {
                         self.dismiss(animated: true)
@@ -322,3 +327,4 @@ extension EvmDelegate: BaseSheetDelegate, AmountSheetDelegate, PinDelegate {
         }
     }
 }
+*/

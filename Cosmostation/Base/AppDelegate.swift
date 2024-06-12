@@ -11,8 +11,10 @@ import UIKit
 import SwiftKeychainWrapper
 import Firebase
 import UserNotifications
-import WalletConnectSwiftV2
-//import Starscream
+import WalletConnectRelay
+import WalletConnectPairing
+import WalletConnectSign
+import Starscream
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, PinDelegate, MessagingDelegate {
@@ -160,15 +162,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 }
 
 
-//YONG3
-//extension AppDelegate: WalletConnectSwiftV2.WebSocketFactory {
-//    func create(with url: URL) -> any WalletConnectSwiftV2.WebSocketConnecting {
-//        return WebSocket(request: URLRequest(url: url))
-//    }
-//}
-//
-//extension WebSocket: WalletConnectSwiftV2.WebSocketConnecting {
-//}
+extension AppDelegate: WalletConnectRelay.WebSocketFactory {
+    func create(with url: URL) -> any WalletConnectRelay.WebSocketConnecting {
+        return WebSocket(request: URLRequest(url: url))
+    }
+}
+
+extension WebSocket: WalletConnectRelay.WebSocketConnecting {
+}
 
 extension UIApplication{
     var topViewController: UIViewController? {
@@ -246,16 +247,14 @@ private extension AppDelegate {
             name: NSLocalizedString("wc_peer_name", comment: ""),
             description: NSLocalizedString("wc_peer_desc", comment: ""),
             url: NSLocalizedString("wc_peer_url", comment: ""),
-            icons: [])
-        
+            icons: []
+        )
 
-        /*
         Networking.configure(projectId: Bundle.main.WALLET_CONNECT_API_KEY, socketFactory: self)
         Pair.configure(metadata: metadata)
-//#if DEBUG
+#if DEBUG
         try? Pair.instance.cleanup()
         try? Sign.instance.cleanup()
-//#endif
-         */
+#endif
     }
 }

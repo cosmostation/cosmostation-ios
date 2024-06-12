@@ -11,6 +11,9 @@ import Lottie
 import web3swift
 import BigInt
 
+class EvmRedelegate: BaseVC {}
+
+/*
 class EvmRedelegate: BaseVC {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -93,6 +96,7 @@ class EvmRedelegate: BaseVC {
             DispatchQueue.global().async { [self] in
                 do {
                     self.web3 = try Web3.new(url)
+ let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil)
                 } catch {
                     DispatchQueue.main.async {
                         self.dismiss(animated: true)
@@ -346,3 +350,4 @@ extension EvmRedelegate: BaseSheetDelegate, AmountSheetDelegate, PinDelegate {
         }
     }
 }
+*/

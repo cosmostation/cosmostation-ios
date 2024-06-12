@@ -11,6 +11,9 @@ import Lottie
 import web3swift
 import BigInt
 
+class EvmCancelUnbonding: BaseVC {}
+
+/*
 class EvmCancelUnbonding: BaseVC {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -66,6 +69,7 @@ class EvmCancelUnbonding: BaseVC {
             DispatchQueue.global().async { [self] in
                 do {
                     self.web3 = try Web3.new(url)
+ let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil)
                     DispatchQueue.main.async {
                         self.onSimul()
                     }
@@ -243,3 +247,4 @@ extension EvmCancelUnbonding: PinDelegate {
         }
     }
 }
+*/
