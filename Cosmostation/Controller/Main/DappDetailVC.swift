@@ -158,15 +158,17 @@ class DappDetailVC: BaseVC {
     }
     
     func onCloseAll() {
-        webView.navigationDelegate = self
-        webView.scrollView.delegate = self
+        webView.configuration.userContentController.removeAllUserScripts()
+        webView.configuration.userContentController.removeScriptMessageHandler(forName: "station")
+        webView.navigationDelegate = nil
+        webView.scrollView.delegate = nil
+        emitCloseToWeb()
         wcV2Disconnect { result in
-            NSLog("Cosmostation onClickClose isconnect \(result)")
+            NSLog("Cosmostation onClickClose \(result)")
             print("onCloseAll \(result)")
             self.dismiss(animated: true)
         }
     }
-    
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if let _ = object as? WKWebView {
@@ -279,20 +281,20 @@ class DappDetailVC: BaseVC {
     }
     
     private func popUpEvmRequestSign(_ method: String, _ request: JSON, _ cancel: @escaping(() -> ()), _ completion: @escaping (JSON?) -> ()) {
-//        let evmSignRequestSheet = DappEvmSignRequestSheet(nibName: "DappEvmSignRequestSheet", bundle: nil)
-//        evmSignRequestSheet.web3 = web3
-//        evmSignRequestSheet.method = method
-//        evmSignRequestSheet.requestToSign = request
-//        evmSignRequestSheet.selectedChain = targetChain as? EvmClass
-//        evmSignRequestSheet.completion = { success, singed in
-//            if (success) {
-//                completion(singed)
-//            } else {
-//                cancel()
-//            }
-//        }
-//        evmSignRequestSheet.isModalInPresentation = true
-//        onStartSheet(evmSignRequestSheet, 680, 0.8)
+        let evmSignRequestSheet = DappEvmSignRequestSheet(nibName: "DappEvmSignRequestSheet", bundle: nil)
+        evmSignRequestSheet.web3 = web3
+        evmSignRequestSheet.method = method
+        evmSignRequestSheet.requestToSign = request
+        evmSignRequestSheet.selectedChain = targetChain as? EvmClass
+        evmSignRequestSheet.completion = { success, singed in
+            if (success) {
+                completion(singed)
+            } else {
+                cancel()
+            }
+        }
+        evmSignRequestSheet.isModalInPresentation = true
+        onStartSheet(evmSignRequestSheet, 680, 0.8)
     }
 }
 
@@ -602,8 +604,14 @@ extension DappDetailVC: WKScriptMessageHandler {
             }
         }
     }
+    
     private func emitToWeb(_ chainId: String) {
         let retVal = ["message": ["result": chainId], "isCosmostation": true, "type": JSON.init(stringLiteral: "chainChanged")]
+        self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
+    }
+    
+    private func emitCloseToWeb() {
+        let retVal = ["message": ["result": []], "isCosmostation": true, "type": JSON.init(stringLiteral: "accountsChanged")]
         self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
     }
     

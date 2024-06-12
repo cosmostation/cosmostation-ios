@@ -103,7 +103,7 @@ class DappEvmSignRequestSheet: BaseVC {
                 inComeType = UInt(request_type.stripHexPrefix(), radix: 16)
             }
             
-            if let request_from = requestToSign?["from"].stringValue {
+            if let request_from = requestToSign?["from"].string {
                 inComeFromAddress = EthereumAddress.init(request_from)
                 nonce = try? await web3!.eth.getTransactionCount(for: inComeFromAddress!)
             }
@@ -136,14 +136,10 @@ class DappEvmSignRequestSheet: BaseVC {
                 inComeMaxPriorityFeePerGas = BigUInt(request_maxPriorityFeePerGas.stripHexPrefix(), radix: 16)
             }
             
-//            if let request_AccessLists = requestToSign?["accessList"].array {
-//                inComeAccessLists = [AccessListEntry]()
-//                request_AccessLists.forEach { accessList in
-//                    let address = accessList["address"].string
-//                    let storageKeys = accessList["storageKeys"].arrayValue.map { $0.stringValue }
-//                    inComeAccessLists?.append(AccessListEntry.init(address ?? "", storageKeys))
-//                }
-//            }
+            if let request_AccessLists = requestToSign?["accessList"].string,
+               let data = request_AccessLists.data(using: .utf8) {
+                inComeAccessLists = try? JSONDecoder().decode([AccessListEntry].self, from: data)
+            }
             
             print("chainID ", chainId)
             print("inComeType ", inComeType)
@@ -155,13 +151,15 @@ class DappEvmSignRequestSheet: BaseVC {
             print("inComeGasPrice ", inComeGasPrice)
             print("inComeMaxFeePerGas ", inComeMaxFeePerGas)
             print("inComeMaxPriorityFeePerGas ",inComeMaxPriorityFeePerGas)
+            print("inComeAccessLists ", inComeAccessLists)
             print("nonce ", nonce)
-//            print("inComeAccessLists ", inComeAccessLists)
             
         } else if (method == "eth_signTypedData_v4") {
             print("eth_signTypedData_v4")
             let requestToSignArray = requestToSign?.arrayValue
             print("requestToSignArray ", requestToSignArray)
+            
+            
         }
     }
     
