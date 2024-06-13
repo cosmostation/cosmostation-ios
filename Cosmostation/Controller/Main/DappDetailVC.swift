@@ -254,8 +254,8 @@ class DappDetailVC: BaseVC {
                 cancel()
             }
         }
-        cosmosSignRequestSheet.isModalInPresentation = true
-        onStartSheet(cosmosSignRequestSheet, 680, 0.8)
+        cosmosSignRequestSheet.modalTransitionStyle = .coverVertical
+        self.present(cosmosSignRequestSheet, animated: true)
     }
     
     private func getSignatureResponse(_ privateKey: Data, _ signData: Data) -> (signature: String?, pubKey: JSON?) {
@@ -293,8 +293,8 @@ class DappDetailVC: BaseVC {
                 cancel()
             }
         }
-        evmSignRequestSheet.isModalInPresentation = true
-        onStartSheet(evmSignRequestSheet, 680, 0.8)
+        evmSignRequestSheet.modalTransitionStyle = .coverVertical
+        self.present(evmSignRequestSheet, animated: true)
     }
 }
 
@@ -546,7 +546,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                 //broadcast self & return hash
                 onInitEvmChain()
                 let toSign = messageJSON["params"].arrayValue[0]
-                print("DAPP REQUEST toSign ", toSign)
+                print("eth_sendTransaction  toSign ", toSign)
                 popUpEvmRequestSign(method, toSign,
                                     { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
                                     { singed in self.injectionEvmSendTransactionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
@@ -560,6 +560,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                     return
                 }
                 let toSign = messageJSON["params"][1]
+                print("eth_signTypedData_v4 toSign ", toSign)
                 popUpEvmRequestSign(method, toSign,
                                     { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
                                     { singed in self.injectionEvmSendTransactionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
@@ -595,8 +596,13 @@ extension DappDetailVC: WKScriptMessageHandler {
                 injectionRequestApprove(true, messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "personal_sign") {
-                let param = messageJSON["params"].arrayValue[0].stringValue
-                print("personal_sign ", param)
+                onInitEvmChain()
+                let toSign = messageJSON["params"]
+                print("personal_sign ", toSign)
+                popUpEvmRequestSign(method, toSign,
+                                    { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
+                                    { singed in self.injectionEvmSendTransactionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
+                
             }
             
             else {

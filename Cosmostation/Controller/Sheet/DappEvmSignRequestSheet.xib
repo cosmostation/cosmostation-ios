@@ -19,16 +19,22 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DappEvmSignRequestSheet" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="bodyCardView" destination="6nj-uP-GPB" id="s0I-kA-HQr"/>
                 <outlet property="cancelBtn" destination="eKQ-2g-PVp" id="RoB-Fi-w7s"/>
                 <outlet property="confirmBtn" destination="A0e-IU-WFg" id="xfG-rG-tma"/>
+                <outlet property="controlStakView" destination="yD0-At-PhN" id="Ohn-Gk-VZY"/>
+                <outlet property="dangerMsgTitle" destination="yIE-5u-7Jq" id="yYC-Eh-MTy"/>
                 <outlet property="errorCardView" destination="dKZ-gz-2jd" id="HqQ-sv-kpG"/>
                 <outlet property="errorMsgLabel" destination="Mab-OI-CbA" id="I0U-nD-sn3"/>
                 <outlet property="feeAmountLabel" destination="fGc-GR-pOi" id="gjG-x2-Nu0"/>
+                <outlet property="feeCardView" destination="yA3-N4-ueC" id="9KI-53-Kkl"/>
                 <outlet property="feeCurrencyLabel" destination="mo0-FV-hrn" id="fxU-Z1-Oqk"/>
                 <outlet property="feeDenomLabel" destination="sXb-Jo-hJi" id="Pfi-4M-WUd"/>
                 <outlet property="feeSegments" destination="yGY-7C-yva" id="b8F-nI-0wc"/>
                 <outlet property="feeValueLabel" destination="oV4-KX-Xfy" id="HaD-bo-Cgb"/>
                 <outlet property="loadingView" destination="pKt-Nm-RpS" id="VCo-zS-9zN"/>
+                <outlet property="requestTitle" destination="6F8-iE-rUW" id="eeV-b9-2Xc"/>
+                <outlet property="safeMsgTitle" destination="wtB-yq-Mko" id="GTs-24-dkw"/>
                 <outlet property="toSignTextView" destination="yKo-py-McW" id="Ooz-Za-9KG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -38,10 +44,22 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Request" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6F8-iE-rUW">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Request" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6F8-iE-rUW">
                     <rect key="frame" x="19.999999999999993" y="83" width="102.33333333333331" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                     <color key="textColor" name="_color01"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Affects your Assets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIE-5u-7Jq">
+                    <rect key="frame" x="261.33333333333331" y="85.666666666666671" width="111.66666666666669" height="15.333333333333329"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                    <color key="textColor" name="_warnRed"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not affects your Assets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtB-yq-Mko">
+                    <rect key="frame" x="238" y="85.666666666666671" width="135" height="15.333333333333329"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                    <color key="textColor" name="_voteYes"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D6R-oX-OtJ">
@@ -51,13 +69,76 @@
                         <constraint firstAttribute="height" constant="0.80000000000000004" id="V2T-Hr-2RB"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6nj-uP-GPB" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6nj-uP-GPB" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="8" y="128" width="377" height="478"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yKo-py-McW">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKo-py-McW">
                             <rect key="frame" x="8" y="8" width="361" height="462"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                            <mutableString key="text">{
+  "types": {
+    "EIP712Domain": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "version",
+        "type": "string"
+      },
+      {
+        "name": "chainId",
+        "type": "uint256"
+      },
+      {
+        "name": "verifyingContract",
+        "type": "address"
+      }
+    ],
+    "Person": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "wallet",
+        "type": "address"
+      }
+    ],
+    "Mail": [
+      {
+        "name": "from",
+        "type": "Person"
+      },
+      {
+        "name": "to",
+        "type": "Person"
+      },
+      {
+        "name": "contents",
+        "type": "string"
+      }
+    ]
+  },
+  "primaryType": "Mail",
+  "domain": {
+    "name": "Ether Mail",
+    "version": "1",
+    "chainId": 1,
+    "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"
+  },
+  "message": {
+    "from": {
+      "name": "Cow",
+      "wallet": "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826"
+    },
+    "to": {
+      "name": "Bob",
+      "wallet": "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB"
+    },
+    "contents": "Hello, Bob!"
+  }
+}</mutableString>
                             <color key="textColor" name="_color01"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -71,7 +152,7 @@
                         <constraint firstItem="yKo-py-McW" firstAttribute="bottom" secondItem="6nj-uP-GPB" secondAttribute="bottom" constant="-8" id="nAt-7E-yFx"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yA3-N4-ueC" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yA3-N4-ueC" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="8" y="614" width="377" height="130"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPq-mH-Ue3">
@@ -200,7 +281,7 @@
                         <constraint firstItem="Mab-OI-CbA" firstAttribute="leading" secondItem="FST-4i-Jov" secondAttribute="leading" id="zit-ym-8Dt"/>
                     </constraints>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yD0-At-PhN">
+                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yD0-At-PhN">
                     <rect key="frame" x="8" y="760" width="377" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKQ-2g-PVp" customClass="SecButton" customModule="Cosmostation" customModuleProvider="target">
@@ -228,7 +309,7 @@
                                 <action selector="onClickCancel:" destination="-1" eventType="touchUpInside" id="h8r-T9-Rzt"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0e-IU-WFg" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0e-IU-WFg" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
                             <rect key="frame" x="192.66666666666663" y="0.0" width="184.33333333333337" height="50"/>
                             <color key="backgroundColor" name="_primary"/>
                             <constraints>
@@ -270,7 +351,9 @@
             <color key="tintColor" name="_primary"/>
             <constraints>
                 <constraint firstItem="dKZ-gz-2jd" firstAttribute="trailing" secondItem="yA3-N4-ueC" secondAttribute="trailing" id="2z4-mp-yH7"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yIE-5u-7Jq" secondAttribute="trailing" constant="20" id="5Y6-na-och"/>
                 <constraint firstItem="yD0-At-PhN" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-8" id="5m9-e5-WQA"/>
+                <constraint firstItem="yIE-5u-7Jq" firstAttribute="centerY" secondItem="6F8-iE-rUW" secondAttribute="centerY" id="7CH-Xu-qb9"/>
                 <constraint firstItem="D6R-oX-OtJ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="8Jc-bs-42b"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="D6R-oX-OtJ" secondAttribute="trailing" constant="8" id="9Al-CG-pBb"/>
                 <constraint firstItem="6nj-uP-GPB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="BbV-N6-WiV"/>
@@ -284,14 +367,16 @@
                 <constraint firstItem="D6R-oX-OtJ" firstAttribute="top" secondItem="6F8-iE-rUW" secondAttribute="bottom" constant="16" id="Sf9-7j-coE"/>
                 <constraint firstItem="6F8-iE-rUW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="24" id="Vim-nM-BFP"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yA3-N4-ueC" secondAttribute="trailing" constant="8" id="ZhB-Ww-YjD"/>
-                <constraint firstItem="yA3-N4-ueC" firstAttribute="top" secondItem="6nj-uP-GPB" secondAttribute="bottom" constant="8" id="bHU-k8-U57"/>
+                <constraint firstItem="yD0-At-PhN" firstAttribute="top" secondItem="6nj-uP-GPB" secondAttribute="bottom" constant="154" id="acj-Nb-Fq6"/>
                 <constraint firstItem="6nj-uP-GPB" firstAttribute="top" secondItem="D6R-oX-OtJ" secondAttribute="bottom" constant="8" id="c1Q-Vx-Zvb"/>
+                <constraint firstItem="wtB-yq-Mko" firstAttribute="centerY" secondItem="yIE-5u-7Jq" secondAttribute="centerY" id="dP2-Ht-2zo"/>
                 <constraint firstItem="yA3-N4-ueC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="j6Y-hW-eND"/>
+                <constraint firstItem="wtB-yq-Mko" firstAttribute="trailing" secondItem="yIE-5u-7Jq" secondAttribute="trailing" id="qBA-DZ-bjd"/>
                 <constraint firstItem="dKZ-gz-2jd" firstAttribute="bottom" secondItem="yA3-N4-ueC" secondAttribute="bottom" id="rQp-1h-7D9"/>
                 <constraint firstItem="D6R-oX-OtJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="ttT-kc-FfJ"/>
                 <constraint firstItem="6F8-iE-rUW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="xRl-Kq-9yE"/>
             </constraints>
-            <point key="canvasLocation" x="126" y="21"/>
+            <point key="canvasLocation" x="125.95419847328243" y="20.422535211267608"/>
         </view>
     </objects>
     <resources>
@@ -325,6 +410,12 @@
         </namedColor>
         <namedColor name="_primary">
             <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_voteYes">
+            <color red="0.030999999493360519" green="0.81999999284744263" blue="0.32199999690055847" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_warnRed">
+            <color red="0.95300000905990601" green="0.097999997437000275" blue="0.3880000114440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>

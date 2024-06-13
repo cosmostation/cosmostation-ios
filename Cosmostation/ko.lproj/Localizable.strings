@@ -213,6 +213,8 @@
 "str_send_info" = "전송 상세 정보";
 "str_send_address" = "보낸 주소";
 "str_select_style" = "스타일 선택";
+"str_tx_request" = "Tx 요청";
+"str_permit_request" = "Permit 요청";
 
 
 "str_tx_status" = "결과";

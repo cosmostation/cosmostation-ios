@@ -213,6 +213,8 @@
 "str_send_info" = "Send Detail Info";
 "str_send_address" = "Send Address";
 "str_select_style" = "Select Style";
+"str_tx_request" = "Tx Request";
+"str_permit_request" = "Permit Request";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";

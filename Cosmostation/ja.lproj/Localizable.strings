@@ -213,6 +213,8 @@
 "str_send_info" = "詳細情報の送信";
 "str_send_address" = "送信アドレス";
 "str_select_style" = "スタイルの選択";
+"str_tx_request" = "Tx 要求";
+"str_permit_request" = "Permit 要求";
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
