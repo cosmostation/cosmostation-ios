@@ -17,6 +17,7 @@ class DappEvmSignRequestSheet: BaseVC {
     @IBOutlet weak var requestTitle: UILabel!
     @IBOutlet weak var safeMsgTitle: UILabel!
     @IBOutlet weak var dangerMsgTitle: UILabel!
+    @IBOutlet weak var warnMsgLabel: UILabel!
     @IBOutlet weak var bodyCardView: FixCardView!
     @IBOutlet weak var toSignTextView: UITextView!
     @IBOutlet weak var feeCardView: FixCardView!
@@ -52,6 +53,7 @@ class DappEvmSignRequestSheet: BaseVC {
     var inComeMaxFeePerGas: BigUInt?
     var inComeMaxPriorityFeePerGas: BigUInt?
     var inComeAccessLists: [AccessListEntry]?
+    var inComeSignTypedData: String?
     var inComeChallenge: String?
     var nonce: BigUInt?
     var chainId: BigUInt?
@@ -79,6 +81,7 @@ class DappEvmSignRequestSheet: BaseVC {
                 dismissWithFail()
                 return
         }
+        
         toSignTextView.text = rawData?.prettyJson
         chainId = web3.provider.network?.chainID
         
@@ -94,13 +97,6 @@ class DappEvmSignRequestSheet: BaseVC {
                 DispatchQueue.main.async {
                     self.loadingView.isHidden = true
                     self.onInitView()
-//                    if (self.method == "eth_sendTransaction") {
-//                        self.onInitFeeView()
-//                    } else {
-//                        self.confirmBtn.isEnabled = true
-//                    }
-                    
-                    
                 }
                 
             } catch {
@@ -112,73 +108,77 @@ class DappEvmSignRequestSheet: BaseVC {
         }
     }
     
+    override func setLocalizedString() {
+        warnMsgLabel.text = NSLocalizedString("str_dapp_warn_msg", comment: "")
+        safeMsgTitle.text = NSLocalizedString("str_affect_safe", comment: "")
+        warnMsgLabel.text = NSLocalizedString("str_affect_danger", comment: "")
+    }
+    
     func onInitView() {
-//        onInitFeeView()
         requestTitle.isHidden = false
+        warnMsgLabel.isHidden = false
         bodyCardView.isHidden = false
         controlStakView.isHidden = false
         
         if (method == "eth_sendTransaction") {
             requestTitle.text = NSLocalizedString("str_tx_request", comment: "")
-            dangerMsgTitle.isHidden = false
-            
             onInitFeeView()
+            dangerMsgTitle.isHidden = false
             feeCardView.isHidden = false
             
             
         } else if (method == "eth_signTypedData_v4") {
             requestTitle.text = NSLocalizedString("str_permit_request", comment: "")
+            let toSign = inComeSignTypedData?.lowercased()
+            if (toSign?.contains("to") == true || toSign?.contains("gas") == true) {
+                dangerMsgTitle.isHidden = false
+            } else {
+                safeMsgTitle.isHidden = false
+            }
+            confirmBtn.isEnabled = true
             
         } else if (method == "personal_sign") {
             requestTitle.text = NSLocalizedString("str_permit_request", comment: "")
+            safeMsgTitle.isHidden = false
+            confirmBtn.isEnabled = true
             
         }
     }
     
     func onParsingRequest() async throws {
         if (method == "eth_sendTransaction") {
-            if let request_type = requestToSign?["type"].string {
+            if let request_type = requestToSign?[0]["type"].string {
                 inComeType = UInt(request_type.stripHexPrefix(), radix: 16)
             }
-            
-            if let request_from = requestToSign?["from"].string {
+            if let request_from = requestToSign?[0]["from"].string {
                 inComeFromAddress = EthereumAddress.init(request_from)
                 nonce = try? await web3!.eth.getTransactionCount(for: inComeFromAddress!)
             }
-            
-            if let request_to = requestToSign?["to"].stringValue {
+            if let request_to = requestToSign?[0]["to"].stringValue {
                 inComeToAddress = EthereumAddress.init(request_to)
             }
-            
-            if let request_data = requestToSign?["data"].stringValue {
+            if let request_data = requestToSign?[0]["data"].stringValue {
                 inComeData = Data.dataFromHex(request_data)
             }
-            
-            if let request_value = requestToSign?["value"].string {
+            if let request_value = requestToSign?[0]["value"].string {
                 inComeValue = BigUInt(request_value.stripHexPrefix(), radix: 16)
             }
-            
-            if let request_gas = requestToSign?["gas"].string {
+            if let request_gas = requestToSign?[0]["gas"].string {
                 inComeGas = BigUInt(request_gas.stripHexPrefix(), radix: 16)
             }
-            
-            if let request_gasPrice = requestToSign?["gasPrice"].string {
+            if let request_gasPrice = requestToSign?[0]["gasPrice"].string {
                 inComeGasPrice = BigUInt(request_gasPrice.stripHexPrefix(), radix: 16)
             }
-            
-            if let request_maxFeePerGas = requestToSign?["maxFeePerGas"].string {
+            if let request_maxFeePerGas = requestToSign?[0]["maxFeePerGas"].string {
                 inComeMaxFeePerGas = BigUInt(request_maxFeePerGas.stripHexPrefix(), radix: 16)
             }
-            
-            if let request_maxPriorityFeePerGas = requestToSign?["maxPriorityFeePerGas"].string {
+            if let request_maxPriorityFeePerGas = requestToSign?[0]["maxPriorityFeePerGas"].string {
                 inComeMaxPriorityFeePerGas = BigUInt(request_maxPriorityFeePerGas.stripHexPrefix(), radix: 16)
             }
-            
-            if let request_AccessLists = requestToSign?["accessList"].string,
+            if let request_AccessLists = requestToSign?[0]["accessList"].string,
                let data = request_AccessLists.data(using: .utf8) {
                 inComeAccessLists = try? JSONDecoder().decode([AccessListEntry].self, from: data)
             }
-            
             print("chainID ", chainId)
             print("inComeType ", inComeType)
             print("inComeFromAddress ", inComeFromAddress)
@@ -192,10 +192,9 @@ class DappEvmSignRequestSheet: BaseVC {
             print("inComeAccessLists ", inComeAccessLists)
             print("nonce ", nonce)
             
-        } else if (method == "eth_signTypedData_v4") {
-            print("eth_signTypedData_v4 ", requestToSign)
-//            let requestToSignArray = requestToSign?.arrayValue
-//            print("requestToSignArray ", requestToSignArray)
+        } else if (method == "eth_signTypedData_v4" || method == "eth_signTypedData_v3") {
+            inComeSignTypedData = requestToSign?.arrayValue[1].stringValue
+            print("inComeSignTypedData ", inComeSignTypedData)
             
             
         } else if (method == "personal_sign") {
@@ -210,8 +209,6 @@ class DappEvmSignRequestSheet: BaseVC {
             print("inComeChallenge ", inComeChallenge)
             
         }
-        
-       
     }
     
     func onCheckBalance() async throws {
@@ -286,10 +283,6 @@ class DappEvmSignRequestSheet: BaseVC {
         WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
         
         let totalSpend = (inComeValue ?? 0) + feeAmountBigInt
-        print("inComeValue ", inComeValue)
-        print("feeAmountBigInt ", feeAmountBigInt)
-        print("totalSpend ", totalSpend)
-        print("evmBalances ", evmBalances)
         if (totalSpend > evmBalances ?? 0) {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             confirmBtn.isEnabled = false
@@ -337,36 +330,38 @@ class DappEvmSignRequestSheet: BaseVC {
                         evmTx?.accessList = inComeAccessLists
                     }
                     
-                    print("evmTx unsigned ", evmTx)
                     try evmTx?.sign(privateKey: selectedChain.privateKey!)
-                    print("evmTx signed ", evmTx)
                     let encodeTx = self.evmTx?.encode(for: .transaction)
                     let result = try await self.web3!.eth.send(raw :encodeTx!)
                     print("result ", result)
-                    print("result.hash ", result.hash)
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.completion?(true, JSON.init(stringLiteral: result.hash))
                         self.dismiss(animated: true)
                     })
                     
-                } else if (method == "eth_signTypedData_v4") {
-                    
-                } else if (method == "personal_sign") {
-                    let personalHash = Utilities.hashPersonalMessage(self.inComeChallenge!.data(using: .utf8)!)
-                    print("personalHash ", personalHash)
-                    let (compressedSignature, _) = SECP256K1.signForRecovery(hash: personalHash!, privateKey: selectedChain.privateKey!)
-                    print("compressedSignature ", compressedSignature)
-                    let result = compressedSignature?.toHexString()
-                    print("result ", result)
+                } else if (method == "eth_signTypedData_v4" || method == "eth_signTypedData_v3") {
+                    let data = self.inComeSignTypedData!.data(using: .utf8)
+                    let eip712TypedData = try EIP712Parser.parse(data!)
+                    let eip712Hash = try eip712TypedData.signHash()
+                    let (compressedSignature, _) = SECP256K1.signForRecovery(hash: eip712Hash, privateKey: selectedChain.privateKey!)
+                    let result = compressedSignature?.toHexString().addHexPrefix()
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.completion?(true, JSON.init(stringLiteral: result!))
                         self.dismiss(animated: true)
                     })
+                    
+                } else if (method == "personal_sign") {
+                    let personalHash = Utilities.hashPersonalMessage(self.inComeChallenge!.data(using: .utf8)!)
+                    let (compressedSignature, _) = SECP256K1.signForRecovery(hash: personalHash!, privateKey: selectedChain.privateKey!)
+                    let result = compressedSignature?.toHexString().addHexPrefix()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        self.completion?(true, JSON.init(stringLiteral: result!))
+                        self.dismiss(animated: true)
+                    })
+                    
                 }
-                
-                
-                                              
+                            
             } catch {
                 print("error ", error)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {

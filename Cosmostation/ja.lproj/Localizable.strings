@@ -215,6 +215,10 @@
 "str_select_style" = "スタイルの選択";
 "str_tx_request" = "Tx 要求";
 "str_permit_request" = "Permit 要求";
+"str_dapp_warn_msg" = "このメッセージに署名するのは、要求しているサイトを信頼し、その内容を完全に理解している場合にのみ行ってください。";
+"str_affect_safe" = "あなたの資産に影響を与えません。";
+"str_affect_danger" = "あなたの資産に影響を与えます。";
+
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";

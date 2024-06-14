@@ -309,9 +309,6 @@ extension DappDetailVC: WKScriptMessageHandler {
             let bodyJSON = JSON(parseJSON: message.body as? String ?? "")
             let messageJSON = bodyJSON["message"]
             let method = messageJSON["method"].stringValue
-            
-//            NSLog("Cosmostation userContentController method \(method)")
-//            NSLog("Cosmostation userContentController bodyJSON \(bodyJSON)")
             print("DAPP REQUEST method \(method)")
             
             //Handle Cosmos Request
@@ -538,15 +535,11 @@ extension DappDetailVC: WKScriptMessageHandler {
                     }
                 }
                 
-            } else if (method == "eth_signTransaction") {
-                //return v, r, s NOT support
-                
-                
             } else if (method == "eth_sendTransaction") {
                 //broadcast self & return hash
                 onInitEvmChain()
-                let toSign = messageJSON["params"].arrayValue[0]
-                print("eth_sendTransaction  toSign ", toSign)
+                print("params", messageJSON["params"])
+                let toSign = messageJSON["params"]
                 popUpEvmRequestSign(method, toSign,
                                     { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
                                     { singed in self.injectionEvmSendTransactionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
@@ -554,13 +547,12 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "eth_signTypedData_v4" || method == "eth_signTypedData_v3") {
                 onInitEvmChain()
                 let chain = targetChain as! EvmClass
-                print("eth_signTypedData_v4", messageJSON["params"])
                 if (messageJSON["params"][0].stringValue.lowercased() != chain.evmAddress.lowercased()) {
                     self.injectionRequestReject("Wrong-Address", messageJSON, bodyJSON["messageId"])
                     return
                 }
-                let toSign = messageJSON["params"][1]
-                print("eth_signTypedData_v4 toSign ", toSign)
+                print("params", messageJSON["params"])
+                let toSign = messageJSON["params"]
                 popUpEvmRequestSign(method, toSign,
                                     { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
                                     { singed in self.injectionEvmSendTransactionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
@@ -598,7 +590,7 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "personal_sign") {
                 onInitEvmChain()
                 let toSign = messageJSON["params"]
-                print("personal_sign ", toSign)
+                print("personal_sign ori ", toSign)
                 popUpEvmRequestSign(method, toSign,
                                     { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
                                     { singed in self.injectionEvmSendTransactionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
@@ -713,9 +705,6 @@ extension DappDetailVC: WKScriptMessageHandler {
 //    }
     
     private func injectionEvmSendTransactionRequestApprove(_ signed: JSON?, _ webToAppMessage: JSON, _ webToAppMessageId: JSON) {
-        print("injectionEvmSendTransactionRequestApprove signed ", signed)
-        print("injectionEvmSendTransactionRequestApprove webToAppMessage ", webToAppMessage)
-        print("injectionEvmSendTransactionRequestApprove webToAppMessageId ", webToAppMessageId)
         if (signed != nil) {
             injectionRequestApprove(signed!, webToAppMessage, webToAppMessageId)
         } else {
@@ -788,7 +777,6 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
 //    }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-        print("runJavaScriptAlertPanelWithMessage ")
         let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel) { _ in
             completionHandler()
@@ -800,7 +788,6 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
     }
     
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
-        print("runJavaScriptConfirmPanelWithMessage")
         let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel) { _ in
             completionHandler(false)

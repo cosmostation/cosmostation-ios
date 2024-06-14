@@ -215,6 +215,9 @@
 "str_select_style" = "Select Style";
 "str_tx_request" = "Tx Request";
 "str_permit_request" = "Permit Request";
+"str_dapp_warn_msg" = "Only sign this message if you trust the requesting site and fully understand its contents.";
+"str_affect_safe" = "Not affects your Assets.";
+"str_affect_danger" = "Affects your Assets.";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";

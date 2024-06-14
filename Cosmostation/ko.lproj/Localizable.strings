@@ -215,6 +215,9 @@
 "str_select_style" = "스타일 선택";
 "str_tx_request" = "Tx 요청";
 "str_permit_request" = "Permit 요청";
+"str_dapp_warn_msg" = "요청하는 사이트를 신뢰하고 그 내용을 완전히 이해하는 경우에만 이 메세지에 서명하세요.";
+"str_affect_safe" = "당신의 자산에 영향을 미치지 않습니다.";
+"str_affect_danger" = "당신의 자산에 영향을 미칩니다.";
 
 
 "str_tx_status" = "결과";
