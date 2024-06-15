@@ -120,7 +120,7 @@ class CosmosCoinVC: BaseVC {
     
     func onSortAssets() {
         Task {
-//            if let oktChain = selectedChain as? ChainOkt996Keccak {
+            if let oktChain = selectedChain as? ChainOkt996Keccak {
 //                oktChain.lcdAccountInfo.oktCoins?.forEach { balance in
 //                    lcdBalances.append(balance)
 //                }
@@ -132,8 +132,8 @@ class CosmosCoinVC: BaseVC {
 //                    if ($1["denom"].string == oktChain.stakeDenom) { return false }
 //                    return false
 //                }
-//                
-//            }  else if let oktEvmChain = selectedChain as? ChainOktEVM {
+                
+            }  else if let oktEvmChain = selectedChain as? ChainOktEVM {
 //                oktEvmChain.lcdAccountInfo.oktCoins?.forEach { balance in
 //                    lcdBalances.append(balance)
 //                }
@@ -145,9 +145,9 @@ class CosmosCoinVC: BaseVC {
 //                    if ($1["denom"].string == oktEvmChain.stakeDenom) { return false }
 //                    return false
 //                }
-//                
-//            } else {
-            selectedChain.grpcFetcher?.cosmosBalances?.forEach { coin in
+                
+            } else if let grpcFetcher = selectedChain.grpcFetcher {
+                grpcFetcher.cosmosBalances?.forEach { coin in
                     let coinType = BaseData.instance.getAsset(selectedChain.apiName, coin.denom)?.type
                     if (coinType == "staking" || coinType == "native") {
                         nativeCoins.append(coin)
@@ -157,30 +157,27 @@ class CosmosCoinVC: BaseVC {
                         ibcCoins.append(coin)
                     }
                 }
-                
                 if (nativeCoins.filter { $0.denom == selectedChain.stakeDenom }.first == nil) {
                     nativeCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = selectedChain.stakeDenom!; $0.amount = "0" })
                 }
-//                nativeCoins.sort {
-//                    if ($0.denom == selectedChain.stakeDenom) { return true }
-//                    if ($1.denom == selectedChain.stakeDenom) { return false }
-//                    let value0 = selectedChain.balanceValue($0.denom)
-//                    let value1 = selectedChain.balanceValue($1.denom)
-//                    return value0.compare(value1).rawValue > 0 ? true : false
-//                }
-//                
-//                ibcCoins.sort {
-//                    let value0 = selectedChain.balanceValue($0.denom)
-//                    let value1 = selectedChain.balanceValue($1.denom)
-//                    return value0.compare(value1).rawValue > 0 ? true : false
-//                }
-//                
-//                bridgedCoins.sort {
-//                    let value0 = selectedChain.balanceValue($0.denom)
-//                    let value1 = selectedChain.balanceValue($1.denom)
-//                    return value0.compare(value1).rawValue > 0 ? true : false
-//                }
-//            }
+                nativeCoins.sort {
+                    if ($0.denom == selectedChain.stakeDenom) { return true }
+                    if ($1.denom == selectedChain.stakeDenom) { return false }
+                    let value0 = grpcFetcher.balanceValue($0.denom)
+                    let value1 = grpcFetcher.balanceValue($1.denom)
+                    return value0.compare(value1).rawValue > 0 ? true : false
+                }
+                ibcCoins.sort {
+                    let value0 = grpcFetcher.balanceValue($0.denom)
+                    let value1 = grpcFetcher.balanceValue($1.denom)
+                    return value0.compare(value1).rawValue > 0 ? true : false
+                }
+                bridgedCoins.sort {
+                    let value0 = grpcFetcher.balanceValue($0.denom)
+                    let value1 = grpcFetcher.balanceValue($1.denom)
+                    return value0.compare(value1).rawValue > 0 ? true : false
+                }
+            }
             tableView.reloadData()
         }
     }
@@ -256,43 +253,43 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-//            loadingView.isHidden = lcdBalances.count > 0
-//            return lcdBalances.count
-//            
-//        } else {
-//            loadingView.isHidden = nativeCoins.count > 0 || ibcCoins.count > 0  || bridgedCoins.count > 0
-//            if (section == 0) {
-//                if (selectedChain is ChainBeraEVM) {
-//                    return nativeCoins.count + 1
-//                }
-//                return nativeCoins.count
-//            } else if (section == 1) {
-//                return ibcCoins.count
-//            } else if (section == 2) {
-//                return bridgedCoins.count
-//            }
-//        }
+        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+            loadingView.isHidden = lcdBalances.count > 0
+            return lcdBalances.count
+            
+        } else {
+            loadingView.isHidden = nativeCoins.count > 0 || ibcCoins.count > 0  || bridgedCoins.count > 0
+            if (section == 0) {
+                if (selectedChain is ChainBeraEVM_T) {
+                    return nativeCoins.count + 1
+                }
+                return nativeCoins.count
+            } else if (section == 1) {
+                return ibcCoins.count
+            } else if (section == 2) {
+                return bridgedCoins.count
+            }
+        }
         return 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if (indexPath.section == 0 && indexPath.row == 0) {
-//            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
-//            cell.bindCosmosStakeAsset(selectedChain)
-//            return cell
-//            
-//        } else {
-//            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-//            if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-//                cell.bindOktAsset(selectedChain, lcdBalances[indexPath.row])
-//            } else if (selectedChain is ChainBeraEVM && indexPath.section == 0 && indexPath.row == 1) {
-//                cell.bindEvmClassCoin(selectedChain as! ChainBeraEVM)
-//            } else {
-//                cell.bindCosmosClassAsset(selectedChain, getCoinBySection(indexPath)!)
-//            }
-//            return cell
-//        }
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
+            cell.bindCosmosStakeAsset(selectedChain)
+            return cell
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+            if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+                cell.bindOktAsset(selectedChain, lcdBalances[indexPath.row])
+            } else if (selectedChain is ChainBeraEVM_T && indexPath.section == 0 && indexPath.row == 1) {
+                cell.bindEvmClassCoin(selectedChain as! ChainBeraEVM_T)
+            } else {
+                cell.bindCosmosClassAsset(selectedChain, getCoinBySection(indexPath)!)
+            }
+            return cell
+        }
         return UITableViewCell()
     }
     

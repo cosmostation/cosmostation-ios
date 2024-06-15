@@ -39,9 +39,24 @@ class FetcherEvmrpc {
                 self.evmBalances = balance()
             }
             
-            try? await fetchAllErc20Balance(id)
-//            return true
-//            print("fetch Done", chain.tag)
+//            print("fetchAllErc20Balance start ", chain.tag)
+            let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)
+            await mintscanErc20Tokens.concurrentForEach { erc20 in
+                if (self.chain.supportCosmos) {
+                    await self.fetchErc20Balance(erc20)
+                } else {
+                    if (userDisplaytoken == nil) {
+                        if (erc20.isdefault == true) {
+                            await self.fetchErc20Balance(erc20)
+                        }
+                    } else {
+                        if (userDisplaytoken?.contains(erc20.address!) == true) {
+                            await self.fetchErc20Balance(erc20)
+                        }
+                    }
+                }
+            }
+//            print("fetchAllErc20Balance end ", chain.tag)
             return true
             
         } catch {
@@ -88,7 +103,7 @@ extension FetcherEvmrpc {
         return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
     
-    func fetchAllErc20Balance(_ id: Int64) async throws {
+    func fetchAllErc20Balance(_ id: Int64) async {
         let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)
         Task {
             await mintscanErc20Tokens.concurrentForEach { erc20 in
@@ -115,6 +130,7 @@ extension FetcherEvmrpc {
                                  "params": [["data": data, "to" : tokenInfo.address], "latest"]]
         if let erc20BalanceJson = try? await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value {
             let erc20Balance = erc20BalanceJson["result"].stringValue.hexToNSDecimal
+//            print("fetchErc20Balance ", tokenInfo.symbol, "  ", erc20Balance().stringValue)
             tokenInfo.setAmount(erc20Balance().stringValue)
         }
     }

@@ -115,40 +115,54 @@ class BaseChain {
             if (evmResult == false || grpcResult == false) {
                 fetchState = .Fail
                 print("fetching Some error ", tag)
-//                setFetchedData(false)
             } else {
                 fetchState = .Success
-                print("fetching good ", tag)
-//                setFetchedData(true)
+//                print("fetching good ", tag)
             }
             
             if (self.fetchState == .Success) {
                 if let grpcFetcher = grpcFetcher, supportCosmos == true {
                     allCoinValue = grpcFetcher.allCoinValue()
                     allCoinUSDValue = grpcFetcher.allCoinValue(true)
-                    BaseData.instance.updateRefAddressesCoinValue(
+                    allTokenValue = grpcFetcher.allTokenValue()
+                    allTokenUSDValue = grpcFetcher.allTokenValue(true)
+                    BaseData.instance.updateRefAddressesValue(
                         RefAddress(id, self.tag, self.bechAddress!, self.evmAddress ?? "",
-                                   grpcFetcher.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-                                   nil, grpcFetcher.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
+                                   grpcFetcher.allStakingDenomAmount().stringValue, allCoinUSDValue.stringValue,
+                                   allTokenUSDValue.stringValue, grpcFetcher.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
                     
                 } else if let evmFetcher = evmFetcher, supportEvm == true {
                     allCoinValue = evmFetcher.allCoinValue()
                     allCoinUSDValue = evmFetcher.allCoinValue(true)
-                    BaseData.instance.updateRefAddressesCoinValue(
+                    allTokenValue = evmFetcher.allTokenValue()
+                    allTokenUSDValue = evmFetcher.allTokenValue(true)
+                    BaseData.instance.updateRefAddressesValue(
                         RefAddress(id, self.tag, self.bechAddress ?? "", self.evmAddress!,
-                                   evmFetcher.evmBalances.stringValue, self.allCoinUSDValue.stringValue,
-                                   nil, (evmFetcher.evmBalances != NSDecimalNumber.zero ? 1 : 0) ))
+                                   evmFetcher.evmBalances.stringValue, allCoinUSDValue.stringValue,
+                                   allTokenUSDValue.stringValue, (evmFetcher.evmBalances != NSDecimalNumber.zero ? 1 : 0) ))
                 }
                 
             }
             
             DispatchQueue.main.async(execute: {
+//                print("", self.tag, " FetchData post")
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
             })
         }
     }
     
-//    func setFetchedData(_ success: Bool) { }
+    func fetchValidatorInfos() {
+        if (supportCosmos == true && supportStaking == true) {
+            Task {
+                _ = await grpcFetcher?.fetchValidators()
+                DispatchQueue.main.async(execute: {
+                    NotificationCenter.default.post(name: Notification.Name("FetchValidator"), object: self.tag, userInfo: nil)
+                })
+            }
+        }
+    }
+    
+    
     
     func fetchPreCreate() {}
     
@@ -174,6 +188,9 @@ class BaseChain {
     
     func getChainListParam() -> JSON {
         return getChainParam()["params"]["chainlist_params"]
+    }
+    func isEcosystem() -> Bool {
+        return getChainListParam()["moblie_dapp"].bool ?? false
     }
         
 }
@@ -257,8 +274,8 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAxelar())
     result.append(ChainKava459())
     result.append(ChainKava118())
-//    
-//    
+    
+    
     result.append(ChainEthereum())
     result.append(ChainAltheaEVM())
     return result

@@ -124,9 +124,6 @@ class Portfolio2Cell: UITableViewCell {
                 } else {
                     assetCntLabel.text = coinCntString
                 }
-                valuecurrencyLabel.isHidden = false
-                valueLabel.isHidden = false
-                assetCntLabel.isHidden = false
                 
             } else if let evmFetcher = chain.evmFetcher {
                 let coinCntString = String(evmFetcher.evmBalances != NSDecimalNumber.zero ? 1 : 0) + " Coins"
@@ -136,9 +133,6 @@ class Portfolio2Cell: UITableViewCell {
                 } else {
                     assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
                 }
-                valuecurrencyLabel.isHidden = false
-                valueLabel.isHidden = false
-                assetCntLabel.isHidden = false
             }
             
         } else {

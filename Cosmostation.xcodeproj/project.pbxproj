@@ -1337,6 +1337,8 @@
 		E10EB5912A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */; };
 		E10EB5992A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */; };
 		E10EB59A2A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */; };
+		E10F88212C1E1B5800EA4272 /* ChainBeraEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F88202C1E1B5800EA4272 /* ChainBeraEVM_T.swift */; };
+		E10F88222C1E1B5800EA4272 /* ChainBeraEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F88202C1E1B5800EA4272 /* ChainBeraEVM_T.swift */; };
 		E10FD3BE2B70D1F900B57DB4 /* ChainAlthea118.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10FD3BD2B70D1F900B57DB4 /* ChainAlthea118.swift */; };
 		E10FD3BF2B70D1F900B57DB4 /* ChainAlthea118.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10FD3BD2B70D1F900B57DB4 /* ChainAlthea118.swift */; };
 		E11069B22AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11069AA2AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift */; };
@@ -2341,6 +2343,7 @@
 		E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
+		E10F88202C1E1B5800EA4272 /* ChainBeraEVM_T.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainBeraEVM_T.swift; sourceTree = "<group>"; };
 		E10FD3BD2B70D1F900B57DB4 /* ChainAlthea118.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAlthea118.swift; sourceTree = "<group>"; };
 		E11069AA2AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_tx.grpc.swift; sourceTree = "<group>"; };
 		E11069AB2AA4C57600EB02CA /* cosmwasm_wasm_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_query.pb.swift; sourceTree = "<group>"; };
@@ -2580,6 +2583,7 @@
 				04CB911A2A90C41E00375354 /* EvmClass.swift */,
 				04D279EF2A67C98E00AF046A /* ChainEthereum.swift */,
 				04C63D322B87619900D4A366 /* ChainAltheaEVM.swift */,
+				E10F88202C1E1B5800EA4272 /* ChainBeraEVM_T.swift */,
 				042DE7002C1D7FCB009CAC04 /* ChainOktEVM.swift */,
 			);
 			path = ClassEVM;
@@ -4957,6 +4961,7 @@
 				046EA8D82AD04A2600A2FCE7 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */,
 				04B789622ACAC9B100E9BE88 /* ibc_core_connection_v1_tx.grpc.swift in Sources */,
 				04C816F12BA98D75006B800A /* cosmos_evidence_v1beta1_tx.pb.swift in Sources */,
+				E10F88222C1E1B5800EA4272 /* ChainBeraEVM_T.swift in Sources */,
 				04CD24602AD1CD2F00497EF5 /* L_Generator.swift in Sources */,
 				0478437E2AC991B300462F1C /* injective_peggy_v1_query.grpc.swift in Sources */,
 				0400EEE02ADBE1D3007BA97F /* kava_pricefeed_v1beta1_store.pb.swift in Sources */,
@@ -5613,6 +5618,7 @@
 				046EA8D72AD04A2600A2FCE7 /* desmos_profiles_v3_models_app_links.pb.swift in Sources */,
 				04B789612ACAC9B100E9BE88 /* ibc_core_connection_v1_tx.grpc.swift in Sources */,
 				04C816F02BA98D75006B800A /* cosmos_evidence_v1beta1_tx.pb.swift in Sources */,
+				E10F88212C1E1B5800EA4272 /* ChainBeraEVM_T.swift in Sources */,
 				04CD245F2AD1CD2F00497EF5 /* L_Generator.swift in Sources */,
 				0478437D2AC991B300462F1C /* injective_peggy_v1_query.grpc.swift in Sources */,
 				0400EEDF2ADBE1D3007BA97F /* kava_pricefeed_v1beta1_store.pb.swift in Sources */,

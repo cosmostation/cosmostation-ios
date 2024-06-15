@@ -83,40 +83,44 @@ class FetcherGrpc {
                 }
                 self.rewardAddress = rewardaddr?.replacingOccurrences(of: "\"", with: "")
                 
-                
-                try? await fetchAllCw20Balance(id)
+//                print("fetchAllCw20Balance start ", chain.tag)
+                await mintscanCw20Tokens.concurrentForEach { cw20 in
+                    self.fetchCw20Balance(cw20)
+                }
+//                print("fetchAllCw20Balance end ", chain.tag)
                 return true
             }
-            
-//            print("fetch Done", chain.tag)
-//            self.allCoinValue = self.allCoinValue()
-//            self.allCoinUSDValue = self.allCoinValue(true)
-            return true
-            
-//            DispatchQueue.main.async {
-//                    WUtils.onParseVestingAccount(self)
-//                    self.fetchState = .Success
-//                    self.allCoinValue = self.allCoinValue()
-//                    self.allCoinUSDValue = self.allCoinValue(true)
-//                    print("Done ", self.tag, "  ", self.allCoinValue)
-//                    if (self.supportCw20) { self.fetchAllCw20Balance(id) }
-                
-//                    BaseData.instance.updateRefAddressesCoinValue(
-//                        RefAddress(id, self.tag, self.bechAddress, self.evmAddress,
-//                                   self.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
-//                                   nil, self.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
-//                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
-//                try? channel.close()
-//            }
+            return false
             
         } catch {
             print("grpc error \(error)")
-//            throw CommonError.grpcError
             return false
         }
         
     }
     
+    func fetchValidators() async -> Bool {
+        if (cosmosValidators.count > 0) { return true }
+        
+        if let bonded = try? await fetchBondedValidator(),
+           let unbonding = try? await fetchUnbondingValidator(),
+           let unbonded = try? await fetchUnbondedValidator() {
+            
+            cosmosValidators.append(contentsOf: bonded ?? [])
+            cosmosValidators.append(contentsOf: unbonding ?? [])
+            cosmosValidators.append(contentsOf: unbonded ?? [])
+            
+            cosmosValidators.sort {
+                if ($0.description_p.moniker == "Cosmostation") { return true }
+                if ($1.description_p.moniker == "Cosmostation") { return false }
+                if ($0.jailed && !$1.jailed) { return false }
+                if (!$0.jailed && $1.jailed) { return true }
+                return Double($0.tokens)! > Double($1.tokens)!
+            }
+            return true
+        }
+        return false
+    }
     
     
     
@@ -185,7 +189,7 @@ class FetcherGrpc {
         return result
     }
     
-    func vestingAmount(_ denom: String) -> NSDecimalNumber  {
+    func vestingAmount(_ denom: String) -> NSDecimalNumber {
         return NSDecimalNumber(string: cosmosVestings.filter { $0.denom == denom }.first?.amount ?? "0")
     }
     
@@ -456,13 +460,20 @@ extension FetcherGrpc {
         return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: getClient()).delegatorWithdrawAddress(req, callOptions: getCallOptions()).response.get().withdrawAddress
     }
     
-    func fetchAllCw20Balance(_ id: Int64) async throws {
+    func fetchAllCw20Balance(_ id: Int64) async {
+        print("fetchAllCw20Balance in start")
         if (chain.supportCw20 == false) { return }
         Task {
             await mintscanCw20Tokens.concurrentForEach { cw20 in
                 self.fetchCw20Balance(cw20)
             }
         }
+        print("fetchAllCw20Balance in end")
+//        mintscanCw20Tokens.forEach { cw20 in
+//            Task {
+//                self.fetchCw20Balance(cw20)
+//            }
+//        }
     }
     
     func fetchCw20Balance(_ tokenInfo: MintscanToken) {
@@ -474,6 +485,7 @@ extension FetcherGrpc {
         }
         if let response = try? Cosmwasm_Wasm_V1_QueryNIOClient(channel: getClient()).smartContractState(req, callOptions: self.getCallOptions()).response.wait() {
             let cw20balance = try? JSONDecoder().decode(JSON.self, from: response.data)
+//            print("fetchCw20Balance ", tokenInfo.symbol, "  ", cw20balance?["balance"].string)
             tokenInfo.setAmount(cw20balance?["balance"].string ?? "0")
         }
     }

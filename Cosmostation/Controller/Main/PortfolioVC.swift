@@ -39,7 +39,6 @@ class PortfolioVC: BaseVC {
             }
         }
     }
-    var detailChainTag = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,7 +116,7 @@ class PortfolioVC: BaseVC {
         } else {
             BaseNetWork().fetchPrices()
             baseAccount.getDisplayChains().forEach { $0.fetchState = .Idle }
-            baseAccount?.fetchChains()
+            baseAccount?.fetchDpChains()
             tableView.reloadData()
             refresher.endRefreshing()
         }
@@ -196,17 +195,16 @@ class PortfolioVC: BaseVC {
     }
     
     func onChainSelected() {
-//        baseAccount.fetchDisplayEvmChains()
-//        toDisplayEvmChains = baseAccount.getDisplayEvmChains()
-//        searchEvmChains = toDisplayEvmChains
-//        
-//        baseAccount.fetchDisplayCosmosChains()
-//        toDisplayCosmosChains = baseAccount.getDisplayCosmosChains()
-//        searchCosmosChains = toDisplayCosmosChains
-//        
-//        onUpdateSearchBar()
-//        tableView.reloadData()
-//        onUpdateTotal()
+        baseAccount.fetchDpChains()
+        mainnetChains = baseAccount.getDisplayChains().filter({ $0.isTestnet == false })
+        searchMainnets = mainnetChains
+        
+        testnetChains = baseAccount.getDisplayChains().filter({ $0.isTestnet == true })
+        searchTestnets = testnetChains
+        
+        onUpdateSearchBar()
+        tableView.reloadData()
+        onUpdateTotal()
     }
     
     func onUpdateSearchBar() {
@@ -311,8 +309,10 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
             onNodedownPopup()
             return
         }
+        if (chain.fetchState != .Success) {
+            return
+        }
         
-        detailChainTag = chain.tag
         if (chain.supportCosmos) {
             let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
             cosmosClassVC.selectedChain = chain

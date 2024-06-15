@@ -20,7 +20,7 @@ class ChainAssetMantle: BaseChain  {
         supportCosmos = true
         apiName = "asset-mantle"
         
-        stakeDenom = "uatom"
+        stakeDenom = "umntl"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         bechAccountPrefix = "mantle"
         validatorPrefix = "mantlevaloper"
