@@ -14,6 +14,7 @@ import Alamofire
 import SwiftyJSON
 import web3swift
 
+/*
 class CosmosClass: BaseChain {
     
     var stakeDenom: String!
@@ -927,6 +928,7 @@ func ALLCOSMOSCLASS() -> [CosmosClass] {
     }
     return result
 }
+*/
 
 let DEFUAL_DISPALY_COSMOS = ["cosmos118", "neutron118", "osmosis118", "dydx118", "crypto-org394", "celestia118"]
 

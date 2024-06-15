@@ -29,7 +29,7 @@ class CosmosTxResult: BaseVC {
     @IBOutlet weak var quotoesAutherLabel: UILabel!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var broadcastTxResponse: Cosmos_Base_Abci_V1beta1_TxResponse?
     var txResponse: Cosmos_Tx_V1beta1_GetTxResponse?
     var fetchCnt = 10
@@ -183,7 +183,7 @@ extension CosmosTxResult {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.grpcFetcher!.getGrpc().0, port: selectedChain.grpcFetcher!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

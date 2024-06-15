@@ -30,19 +30,19 @@ class OktValidatorCell: UITableViewCell {
         inactiveTag.isHidden = true
         jailedTag.isHidden = true
     }
-    
+    //YONG4
     func bindOktValidator( _ chain: ChainOkt996Keccak, _ validator: JSON) {
-        logoImg.af.setImage(withURL: chain.monikerImg(validator["operator_address"].stringValue))
-        nameLabel.text = validator["description"]["moniker"].stringValue
-        
-        let vp = validator["delegator_shares"].doubleValue
-        vpLabel?.attributedText = WDP.dpAmount(String(vp), vpLabel!.font, 2)
-        
-        if (validator["jailed"].boolValue) {
-            jailedTag.isHidden = false
-        } else {
-            inactiveTag.isHidden = validator["status"].intValue == 2
-        }
+//        logoImg.af.setImage(withURL: chain.monikerImg(validator["operator_address"].stringValue))
+//        nameLabel.text = validator["description"]["moniker"].stringValue
+//        
+//        let vp = validator["delegator_shares"].doubleValue
+//        vpLabel?.attributedText = WDP.dpAmount(String(vp), vpLabel!.font, 2)
+//        
+//        if (validator["jailed"].boolValue) {
+//            jailedTag.isHidden = false
+//        } else {
+//            inactiveTag.isHidden = validator["status"].intValue == 2
+//        }
     }
     
 }

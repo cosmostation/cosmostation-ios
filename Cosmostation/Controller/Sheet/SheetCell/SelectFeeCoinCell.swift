@@ -26,7 +26,7 @@ class SelectFeeCoinCell: UITableViewCell {
     }
     
     
-    func onBindFeeCoin(_ chain: CosmosClass, _ feeData: FeeData ) {
+    func onBindFeeCoin(_ chain: BaseChain, _ feeData: FeeData ) {
 //        if let coin = chain.cosmosBalances.filter({ $0.denom == feeData.denom }).first,
 //           let msAsset = BaseData.instance.getAsset(chain.apiName, feeData.denom!) {
 //            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)

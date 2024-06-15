@@ -70,8 +70,8 @@ class CommonTransfer: BaseVC {
     var toSendMsAsset: MintscanAsset!               // to send Coin
     var toSendMsToken: MintscanToken!               // to send Token
     var ibcPath: MintscanPath?                      // to IBC send path
-    var allIbcChains = [CosmosClass]()
-    var recipientableChains = [CosmosClass]()
+    var allIbcChains = [BaseChain]()
+    var recipientableChains = [BaseChain]()
     var availableAmount = NSDecimalNumber.zero
     var decimal: Int16!
     
@@ -90,7 +90,7 @@ class CommonTransfer: BaseVC {
     var evmGas: [(BigUInt, BigUInt)] = [(500000000, 1000000000), (500000000, 1000000000), (500000000, 1000000000)]
     var evmGasLimit: BigUInt = 21000
     var web3: Web3?
-    
+    //YONG4
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,33 +104,33 @@ class CommonTransfer: BaseVC {
         loadingView.play()
         
         
-        onInitToChain()                     // set init toChain UI
-        onInitTxStyle()                     // init Tx style by to send denom stye. CosmosEVM_Coin is only changble tx style
-        onInitFee()                         // set init fee for set send available
-        onInitView()                        // set selected asset display symbol, sendable amount, display decimal
-        onInitToChainsInfo()                // set recipientable chains for IBC tx
-        
-        toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
-        toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
-        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
-        feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeDenom)))
-        
-        Task {
-            if let evmChain = fromChain as? EvmClass {
-                if let url = URL(string: evmChain.getEvmRpc()),
-                   let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil) {
-                    self.web3 = Web3.init(provider: web3Provider)
-                    
-                } else {
-                    DispatchQueue.main.async {
-                        self.dismiss(animated: true)
-                    }
-                }
-            }
-        }
+//        onInitToChain()                     // set init toChain UI
+//        onInitTxStyle()                     // init Tx style by to send denom stye. CosmosEVM_Coin is only changble tx style
+//        onInitFee()                         // set init fee for set send available
+//        onInitView()                        // set selected asset display symbol, sendable amount, display decimal
+//        onInitToChainsInfo()                // set recipientable chains for IBC tx
+//        
+//        toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
+//        toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
+//        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
+//        feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeDenom)))
+//        
+//        Task {
+//            if let evmChain = fromChain as? EvmClass {
+//                if let url = URL(string: evmChain.getEvmRpc()),
+//                   let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil) {
+//                    self.web3 = Web3.init(provider: web3Provider)
+//                    
+//                } else {
+//                    DispatchQueue.main.async {
+//                        self.dismiss(animated: true)
+//                    }
+//                }
+//            }
+//        }
         
     }
-    
+    /*
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let gap = UIScreen.main.bounds.size.height - 685
@@ -598,8 +598,11 @@ class CommonTransfer: BaseVC {
             }
         }
     }
+     */
 
 }
+
+/*
 
 //Evm style tx simul and broadcast
 extension CommonTransfer {
@@ -1149,6 +1152,7 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
         }
     }
 }
+ */
 
 public enum SendAssetType: Int {
     case Only_Cosmos_Coin = 0               // support IBC, bank send                 (staking, ibc, native coins)

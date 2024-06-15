@@ -568,7 +568,7 @@ extension BaseData {
     }
     
     func deleteDisplayErc20s(_ id: Int64)  {
-        ALLEVMCLASS().forEach { evmChain in
+        ALLCHAINS().filter { $0.supportEvm == true }.forEach { evmChain in
             UserDefaults.standard.removeObject(forKey: String(id) + " " + evmChain.tag + " " + KEY_DISPLAY_ERC20_TOKENS)
         }
     }
@@ -705,11 +705,11 @@ extension BaseData {
         return UserDefaults.standard.integer(forKey: KEY_LAST_TAB)
     }
     
-    func setGrpcEndpoint(_ chain : CosmosClass, _ endpoint: String) {
+    func setGrpcEndpoint(_ chain : BaseChain, _ endpoint: String) {
         UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + chain.name)
     }
     
-    func setEvmRpcEndpoint(_ chain : EvmClass, _ endpoint: String) {
+    func setEvmRpcEndpoint(_ chain : BaseChain, _ endpoint: String) {
         UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_EVM_RPC_ENDPOINT +  " : " + chain.name)
     }
     

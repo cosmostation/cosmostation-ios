@@ -35,30 +35,30 @@ class PopupReceiveCell: UITableViewCell {
         }
         legacyTag.isHidden = chain.isDefault
         
-        if let selectedChain = chain as? EvmClass, section == 0 {
-            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name + " EVM")
-            let evmAddress = selectedChain.evmAddress
-            addressLabel.text = evmAddress
-            addressLabel.adjustsFontSizeToFitWidth = true
-            
-            if let bechQrImage = WUtils.generateQrCode(evmAddress) {
-                rqImgView.image = UIImage(ciImage: bechQrImage)
-                let chainLogo = UIImage.init(named: selectedChain.logo1)
-                chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
-            }
-            
-        } else if let selectedChain = chain as? CosmosClass, section == 1 {
-            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
-            let bechAddress = selectedChain.bechAddress
-            addressLabel.text = bechAddress
-            addressLabel.adjustsFontSizeToFitWidth = true
-            
-            if let bechQrImage = WUtils.generateQrCode(bechAddress) {
-                rqImgView.image = UIImage(ciImage: bechQrImage)
-                let chainLogo = UIImage.init(named: selectedChain.logo1)
-                chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
-            }
-            
-        }
+//        if chain.supportEvm == true, section == 0 {
+//            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name + " EVM")
+//            let evmAddress = chain.evmAddress!
+//            addressLabel.text = evmAddress
+//            addressLabel.adjustsFontSizeToFitWidth = true
+//            
+//            if let bechQrImage = WUtils.generateQrCode(evmAddress) {
+//                rqImgView.image = UIImage(ciImage: bechQrImage)
+//                let chainLogo = UIImage.init(named: chain.logo1)
+//                chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
+//            }
+//            
+//        } else if chain.supportCosmos == true, section == 1 {
+//            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
+//            let bechAddress = chain.bechAddress!
+//            addressLabel.text = bechAddress
+//            addressLabel.adjustsFontSizeToFitWidth = true
+//            
+//            if let bechQrImage = WUtils.generateQrCode(bechAddress) {
+//                rqImgView.image = UIImage(ciImage: bechQrImage)
+//                let chainLogo = UIImage.init(named: chain.logo1)
+//                chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
+//            }
+//            
+//        }
     }
 }

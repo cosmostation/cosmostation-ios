@@ -8,6 +8,30 @@
 
 import Foundation
 
+class ChainKava459: BaseChain {
+    
+    override init() {
+        super.init()
+        
+        name = "Kava"
+        tag = "kava459"
+        logo1 = "chainKava"
+        logo2 = "chainKava2"
+        isDefault = false
+        supportCosmos = true
+        apiName = "kava"
+        
+        stakeDenom = "ukava"
+        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/459'/0'/0/X")
+        bechAccountPrefix = "kava"
+        validatorPrefix = "kavavaloper"
+        grpcHost = "grpc-kava.cosmostation.io"
+        
+        initFetcher()
+    }
+}
+
+/*
 class ChainKava459: CosmosClass  {
     
     override init() {
@@ -28,6 +52,7 @@ class ChainKava459: CosmosClass  {
         grpcHost = "grpc-kava.cosmostation.io"
     }
 }
+ */
 
 let KAVA_MAIN_DENOM = "ukava"
 let KAVA_HARD_DENOM = "hard"

@@ -10,6 +10,9 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+class ChainOkt996Keccak: BaseChain  {
+}
+/*
 class ChainOkt996Keccak: CosmosClass  {
     
     //For Legacy Lcd chains
@@ -227,6 +230,7 @@ extension ChainOkt996Keccak {
         return msPrice.multiplying(by: amount, withBehavior: handler6)
     }
 }
+*/
 
 let OKT_LCD = "https://exchainrpc.okex.org/okexchain/v1/"
 let OKT_BASE_FEE = "0.008"

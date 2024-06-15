@@ -18,7 +18,7 @@ class CosmosHistoryVC: BaseVC {
     @IBOutlet weak var emptyDataView: UIView!
     var refresher: UIRefreshControl!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var msHistoryGroup = Array<MintscanHistoryGroup>()
     var msHistoyID = ""
     var msHasMore = false
@@ -38,108 +38,108 @@ class CosmosHistoryVC: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.sectionHeaderTopPadding = 0.0
-        
-        refresher = UIRefreshControl()
-        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-        refresher.tintColor = .color01
-        tableView.addSubview(refresher)
-        
-        onRequestFetch()
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.separatorStyle = .none
+//        tableView.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.sectionHeaderTopPadding = 0.0
+//        
+//        refresher = UIRefreshControl()
+//        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
+//        refresher.tintColor = .color01
+//        tableView.addSubview(refresher)
+//        
+//        onRequestFetch()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        refresher.endRefreshing()
-    }
-    
-    @objc func onRequestFetch() {
-        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-            onFetchOktHistory(selectedChain.evmAddress)
-            
-        } else {
-            msHistoyID = ""
-            msHasMore = false
-            onFetchMsHistory(selectedChain.bechAddress, msHistoyID)
-        }
-    }
-    
-    func onFetchMsHistory(_ address: String?, _ id: String) {
-        let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, address!)
-        print("url ", url)
-        AF.request(url, method: .get, parameters: ["limit":String(BATCH_CNT), "search_after":id]).responseDecodable(of: [MintscanHistory].self, queue: .main, decoder: JSONDecoder()) { response in
-            switch response.result {
-            case .success(let value):
-                if (id == "") { self.msHistoryGroup.removeAll() }
-                if (value.count > 0) {
-                    value.forEach { history in
-                        let headerDate  = WDP.dpDate(history.header?.timestamp)
-                        if let index = self.msHistoryGroup.firstIndex(where: { $0.date == headerDate }) {
-                            self.msHistoryGroup[index].values.append(history)
-                        } else {
-                            self.msHistoryGroup.append(MintscanHistoryGroup.init(headerDate, [history]))
-                        }
-                    }
-                    self.msHistoyID = value.last?.search_after ?? ""
-                    self.msHasMore = value.count >= self.BATCH_CNT
-                    
-                } else {
-                    self.msHasMore = false
-                    self.msHistoyID = ""
-                }
-                
-                self.loadingView.isHidden = true
-                if (self.msHistoryGroup.count > 0) {
-                    self.tableView.reloadData()
-                    self.tableView.isHidden = false
-                    self.emptyDataView.isHidden = true
-                } else {
-                    self.tableView.isHidden = true
-                    self.emptyDataView.isHidden = false
-                }
-                
-            case .failure:
-                print("onFetchMsHistory error")
-                self.loadingView.isHidden = true
-                self.tableView.isHidden = true
-                self.emptyDataView.isHidden = false
-            }
-            self.refresher.endRefreshing()
-        }
-    }
-    
-    func onFetchOktHistory(_ evmAddress: String) {
-        let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, evmAddress)
-        AF.request(url, method: .get, parameters: [:]).responseDecodable(of: OkHistoryRoot.self, queue: .main, decoder: JSONDecoder())  { response in
-            switch response.result {
-            case .success(let value):
-                if let txs = value.data?[0].transactionLists {
-                    self.oktHistoey = txs
-                }
-                self.loadingView.isHidden = true
-                if (self.oktHistoey.count > 0) {
-                    self.tableView.reloadData()
-                    self.emptyDataView.isHidden = true
-                } else {
-                    self.emptyDataView.isHidden = false
-                }
-                
-                
-            case .failure:
-                print("onFetchOktHistory error", response.error)
-            }
-            self.refresher.endRefreshing()
-        }
-    }
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        refresher.endRefreshing()
+//    }
+//    
+//    @objc func onRequestFetch() {
+//        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+//            onFetchOktHistory(selectedChain.evmAddress)
+//            
+//        } else {
+//            msHistoyID = ""
+//            msHasMore = false
+//            onFetchMsHistory(selectedChain.bechAddress, msHistoyID)
+//        }
+//    }
+//    
+//    func onFetchMsHistory(_ address: String?, _ id: String) {
+//        let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, address!)
+//        print("url ", url)
+//        AF.request(url, method: .get, parameters: ["limit":String(BATCH_CNT), "search_after":id]).responseDecodable(of: [MintscanHistory].self, queue: .main, decoder: JSONDecoder()) { response in
+//            switch response.result {
+//            case .success(let value):
+//                if (id == "") { self.msHistoryGroup.removeAll() }
+//                if (value.count > 0) {
+//                    value.forEach { history in
+//                        let headerDate  = WDP.dpDate(history.header?.timestamp)
+//                        if let index = self.msHistoryGroup.firstIndex(where: { $0.date == headerDate }) {
+//                            self.msHistoryGroup[index].values.append(history)
+//                        } else {
+//                            self.msHistoryGroup.append(MintscanHistoryGroup.init(headerDate, [history]))
+//                        }
+//                    }
+//                    self.msHistoyID = value.last?.search_after ?? ""
+//                    self.msHasMore = value.count >= self.BATCH_CNT
+//                    
+//                } else {
+//                    self.msHasMore = false
+//                    self.msHistoyID = ""
+//                }
+//                
+//                self.loadingView.isHidden = true
+//                if (self.msHistoryGroup.count > 0) {
+//                    self.tableView.reloadData()
+//                    self.tableView.isHidden = false
+//                    self.emptyDataView.isHidden = true
+//                } else {
+//                    self.tableView.isHidden = true
+//                    self.emptyDataView.isHidden = false
+//                }
+//                
+//            case .failure:
+//                print("onFetchMsHistory error")
+//                self.loadingView.isHidden = true
+//                self.tableView.isHidden = true
+//                self.emptyDataView.isHidden = false
+//            }
+//            self.refresher.endRefreshing()
+//        }
+//    }
+//    
+//    func onFetchOktHistory(_ evmAddress: String) {
+//        let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, evmAddress)
+//        AF.request(url, method: .get, parameters: [:]).responseDecodable(of: OkHistoryRoot.self, queue: .main, decoder: JSONDecoder())  { response in
+//            switch response.result {
+//            case .success(let value):
+//                if let txs = value.data?[0].transactionLists {
+//                    self.oktHistoey = txs
+//                }
+//                self.loadingView.isHidden = true
+//                if (self.oktHistoey.count > 0) {
+//                    self.tableView.reloadData()
+//                    self.emptyDataView.isHidden = true
+//                } else {
+//                    self.emptyDataView.isHidden = false
+//                }
+//                
+//                
+//            case .failure:
+//                print("onFetchOktHistory error", response.error)
+//            }
+//            self.refresher.endRefreshing()
+//        }
+//    }
 
 }
 
-
+/*
 extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -251,6 +251,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
         return mask;
     }
 }
+*/
 
 struct MintscanHistoryGroup {
     var date : String!

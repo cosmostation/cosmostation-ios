@@ -10,13 +10,14 @@ import UIKit
 import SwiftyJSON
 import Lottie
 
-class EvmAssetVC: BaseVC, SelectTokensListDelegate {
+class EvmAssetVC: BaseVC {
+//    class EvmAssetVC: BaseVC, SelectTokensListDelegate {
     
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var tableView: UITableView!
     var refresher: UIRefreshControl!
     
-    var selectedChain: EvmClass!
+    var selectedChain: BaseChain!
     var allErc20Tokens = [MintscanToken]()
     var toDisplayErc20Tokens = [MintscanToken]()
 
@@ -32,112 +33,112 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.sectionHeaderTopPadding = 0.0
-        
-        refresher = UIRefreshControl()
-        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-        refresher.tintColor = .color01
-        tableView.addSubview(refresher)
-        
-        onSortAssets()
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.separatorStyle = .none
+//        tableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.sectionHeaderTopPadding = 0.0
+//        
+//        refresher = UIRefreshControl()
+//        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
+//        refresher.tintColor = .color01
+//        tableView.addSubview(refresher)
+//        
+//        onSortAssets()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        refresher.endRefreshing()
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("ToggleHideValue"), object: nil)
-    }
-    
-    @objc func onFetchTokenDone(_ notification: NSNotification) {
-        let tag = notification.object as! String
-        if (selectedChain != nil && selectedChain.tag == tag) {
-            self.refresher.endRefreshing()
-            self.onSortAssets()
-        }
-    }
-    
-    @objc func onToggleValue(_ notification: NSNotification) {
-        tableView.reloadData()
-    }
-    
-    @objc func onRequestFetch() {
-        if (selectedChain.fetchState == .Busy) {
-            refresher.endRefreshing()
-        } else {
-            DispatchQueue.global().async {
-                self.selectedChain.fetchData(self.baseAccount.id)
-            }
-        }
-    }
-    
-    func onSortAssets() {
-        allErc20Tokens.removeAll()
-        toDisplayErc20Tokens.removeAll()
-        Task {
-            allErc20Tokens = selectedChain.mintscanErc20Tokens
-            allErc20Tokens = allErc20Tokens.sorted { $0.symbol!.lowercased() < $1.symbol!.lowercased() }
-            
-            if let userCustomTokens = BaseData.instance.getDisplayErc20s(baseAccount.id, selectedChain.tag) {
-                allErc20Tokens.sort {
-                    if (userCustomTokens.contains($0.address!) && !userCustomTokens.contains($1.address!)) { return true }
-                    if (!userCustomTokens.contains($0.address!) && userCustomTokens.contains($1.address!)) { return false }
-                    let value0 = selectedChain.tokenValue($0.address!)
-                    let value1 = selectedChain.tokenValue($1.address!)
-                    return value0.compare(value1).rawValue > 0 ? true : false
-                }
-                allErc20Tokens.forEach { tokens in
-                    if (userCustomTokens.contains(tokens.address!)) {
-                        toDisplayErc20Tokens.append(tokens)
-                    }
-                }
-                
-            } else {
-                allErc20Tokens.sort {
-                    let value0 = selectedChain.tokenValue($0.address!)
-                    let value1 = selectedChain.tokenValue($1.address!)
-                    return value0.compare(value1).rawValue > 0 ? true : false
-                }
-                allErc20Tokens.forEach { tokens in
-                    if (tokens.getAmount() != NSDecimalNumber.zero) {
-                        toDisplayErc20Tokens.append(tokens)
-                    }
-                }
-            }
-            
-            DispatchQueue.main.async {
-                self.loadingView.isHidden = true
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
-    func onShowTokenListSheet()  {
-        let tokenListSheet = SelectDisplayTokenListSheet(nibName: "SelectDisplayTokenListSheet", bundle: nil)
-        tokenListSheet.selectedChain = selectedChain
-        tokenListSheet.allErc20Tokens = allErc20Tokens
-        tokenListSheet.toDisplayErc20Tokens = toDisplayErc20Tokens.map { $0.address! }
-        tokenListSheet.tokensListDelegate = self
-        onStartSheet(tokenListSheet, 680, 0.8)
-    }
-    
-    func onTokensSelected(_ result: [String]) {
-        onRequestFetch()
-    }
+//    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
+//    }
+//    
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        refresher.endRefreshing()
+//        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
+//        NotificationCenter.default.removeObserver(self, name: Notification.Name("ToggleHideValue"), object: nil)
+//    }
+//    
+//    @objc func onFetchTokenDone(_ notification: NSNotification) {
+//        let tag = notification.object as! String
+//        if (selectedChain != nil && selectedChain.tag == tag) {
+//            self.refresher.endRefreshing()
+//            self.onSortAssets()
+//        }
+//    }
+//    
+//    @objc func onToggleValue(_ notification: NSNotification) {
+//        tableView.reloadData()
+//    }
+//    
+//    @objc func onRequestFetch() {
+//        if (selectedChain.fetchState == .Busy) {
+//            refresher.endRefreshing()
+//        } else {
+//            DispatchQueue.global().async {
+//                self.selectedChain.fetchData(self.baseAccount.id)
+//            }
+//        }
+//    }
+//    
+//    func onSortAssets() {
+//        allErc20Tokens.removeAll()
+//        toDisplayErc20Tokens.removeAll()
+//        Task {
+//            allErc20Tokens = selectedChain.mintscanErc20Tokens
+//            allErc20Tokens = allErc20Tokens.sorted { $0.symbol!.lowercased() < $1.symbol!.lowercased() }
+//            
+//            if let userCustomTokens = BaseData.instance.getDisplayErc20s(baseAccount.id, selectedChain.tag) {
+//                allErc20Tokens.sort {
+//                    if (userCustomTokens.contains($0.address!) && !userCustomTokens.contains($1.address!)) { return true }
+//                    if (!userCustomTokens.contains($0.address!) && userCustomTokens.contains($1.address!)) { return false }
+//                    let value0 = selectedChain.tokenValue($0.address!)
+//                    let value1 = selectedChain.tokenValue($1.address!)
+//                    return value0.compare(value1).rawValue > 0 ? true : false
+//                }
+//                allErc20Tokens.forEach { tokens in
+//                    if (userCustomTokens.contains(tokens.address!)) {
+//                        toDisplayErc20Tokens.append(tokens)
+//                    }
+//                }
+//                
+//            } else {
+//                allErc20Tokens.sort {
+//                    let value0 = selectedChain.tokenValue($0.address!)
+//                    let value1 = selectedChain.tokenValue($1.address!)
+//                    return value0.compare(value1).rawValue > 0 ? true : false
+//                }
+//                allErc20Tokens.forEach { tokens in
+//                    if (tokens.getAmount() != NSDecimalNumber.zero) {
+//                        toDisplayErc20Tokens.append(tokens)
+//                    }
+//                }
+//            }
+//            
+//            DispatchQueue.main.async {
+//                self.loadingView.isHidden = true
+//                self.tableView.reloadData()
+//            }
+//        }
+//    }
+//    
+//    func onShowTokenListSheet()  {
+//        let tokenListSheet = SelectDisplayTokenListSheet(nibName: "SelectDisplayTokenListSheet", bundle: nil)
+//        tokenListSheet.selectedChain = selectedChain
+//        tokenListSheet.allErc20Tokens = allErc20Tokens
+//        tokenListSheet.toDisplayErc20Tokens = toDisplayErc20Tokens.map { $0.address! }
+//        tokenListSheet.tokensListDelegate = self
+//        onStartSheet(tokenListSheet, 680, 0.8)
+//    }
+//    
+//    func onTokensSelected(_ result: [String]) {
+//        onRequestFetch()
+//    }
 }
 
-
+/*
 extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -238,3 +239,4 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+*/

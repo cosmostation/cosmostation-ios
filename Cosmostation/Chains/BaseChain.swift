@@ -7,39 +7,148 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 
 class BaseChain {
+    
     var name: String!
     var tag: String!
-    var chainIdCosmos: String!
     var logo1: String!
     var logo2: String!
     var isDefault = true
+    var isTestnet = false
+    var supportCosmos = false
+    var supportEvm = false
     var apiName: String!
     
+    var chainIdCosmos: String?
+    var chainIdEvm: String?
     
     var accountKeyType: AccountKeyType!
     var privateKey: Data?
     var publicKey: Data?
     
+    //cosmos & grpc info
+    var bechAddress: String?
+    var stakeDenom: String?
+    var bechAccountPrefix: String?
+    var validatorPrefix: String?
+    var bechOpAddress: String?
+    var supportCw20 = false
+    var supportCw721 = false
+    var supportStaking = true
+    var isGrpc = true
+    var grpcHost = ""
+    var grpcPort = 443
+    var lcdUrl = ""
     
-    var fetchState = FetchState.Idle
+    //evm & rpc info
+    var evmAddress: String?
+    var coinSymbol = ""
+    var coinGeckoId = ""
+    var coinLogo = ""
+    var evmRpcURL = ""
+    
+    
+//    var fetchState = FetchState.Idle
     var allCoinValue = NSDecimalNumber.zero
     var allCoinUSDValue = NSDecimalNumber.zero
     var allTokenValue = NSDecimalNumber.zero
     var allTokenUSDValue = NSDecimalNumber.zero
     
+    var fetchState = FetchState.Idle
+    var grpcFetcher: FetcherGrpc?
+    var evmFetcher: FetcherEvmrpc?
+    
     func getHDPath(_ lastPath: String) -> String {
         return accountKeyType.hdPath.replacingOccurrences(of: "X", with: lastPath)
     }
     
+    func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
+        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
+        setInfoWithPrivateKey(privateKey!)
+    }
     
-    func setInfoWithSeed(_ seed: Data, _ lastPath: String) {}
+    func setInfoWithPrivateKey(_ priKey: Data) {
+        privateKey = priKey
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        if (accountKeyType.pubkeyType == .COSMOS_Secp256k1) {
+            bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
+            
+        } else if (accountKeyType.pubkeyType == .SUI_Ed25519) {
+            
+        } else {
+            evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+            if (supportCosmos) {
+                bechAddress = KeyFac.convertEvmToBech32(evmAddress!, bechAccountPrefix!)
+            }
+        }
+        
+        if (supportCosmos && supportStaking) {
+            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, validatorPrefix)
+        }
+    }
     
-    func setInfoWithPrivateKey(_ priKey: Data) {}
+    func initFetcher() {
+        if (supportEvm == true) {
+            evmFetcher = FetcherEvmrpc.init(self)
+        }
+        if (supportCosmos == true) {
+            grpcFetcher = FetcherGrpc.init(self)
+        }
+    }
     
-    func fetchData(_ id: Int64) {}
+    func fetchData(_ id: Int64) {
+        fetchState = .Busy
+        Task {
+            var evmResult: Bool?
+            var grpcResult: Bool?
+            
+            if (supportEvm == true) {
+                evmResult = await evmFetcher?.fetchEvmData(id)
+            }
+            if (supportCosmos == true) {
+                grpcResult = await grpcFetcher?.fetchGrpcData(id)
+            }
+            
+            if (evmResult == false || grpcResult == false) {
+                fetchState = .Fail
+                print("fetching Some error ", tag)
+//                setFetchedData(false)
+            } else {
+                fetchState = .Success
+                print("fetching good ", tag)
+//                setFetchedData(true)
+            }
+            
+            if (self.fetchState == .Success) {
+                if let grpcFetcher = grpcFetcher, supportCosmos == true {
+                    allCoinValue = grpcFetcher.allCoinValue()
+                    allCoinUSDValue = grpcFetcher.allCoinValue(true)
+                    BaseData.instance.updateRefAddressesCoinValue(
+                        RefAddress(id, self.tag, self.bechAddress!, self.evmAddress ?? "",
+                                   grpcFetcher.allStakingDenomAmount().stringValue, self.allCoinUSDValue.stringValue,
+                                   nil, grpcFetcher.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
+                    
+                } else if let evmFetcher = evmFetcher, supportEvm == true {
+                    allCoinValue = evmFetcher.allCoinValue()
+                    allCoinUSDValue = evmFetcher.allCoinValue(true)
+                    BaseData.instance.updateRefAddressesCoinValue(
+                        RefAddress(id, self.tag, self.bechAddress ?? "", self.evmAddress!,
+                                   evmFetcher.evmBalances.stringValue, self.allCoinUSDValue.stringValue,
+                                   nil, (evmFetcher.evmBalances != NSDecimalNumber.zero ? 1 : 0) ))
+                }
+                
+            }
+            
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+            })
+        }
+    }
+    
+//    func setFetchedData(_ success: Bool) { }
     
     func fetchPreCreate() {}
     
@@ -58,9 +167,16 @@ class BaseChain {
             return allCoinValue.adding(allTokenValue)
         }
     }
+    
+    func getChainParam() -> JSON {
+        return BaseData.instance.mintscanChainParams?[apiName] ?? JSON()
+    }
+    
+    func getChainListParam() -> JSON {
+        return getChainParam()["params"]["chainlist_params"]
+    }
         
 }
-
 
 
 struct AccountKeyType {
@@ -117,17 +233,34 @@ enum PubKeyType: Int {
 }
 
 
-func All_IBC_Chains() -> [CosmosClass] {
-    var result = [CosmosClass]()
-    result.append(contentsOf: ALLCOSMOSCLASS())
-    result.append(contentsOf: ALLEVMCLASS().filter { $0.supportCosmos == true } )
-    return result
-}
+//func All_IBC_Chains() -> [CosmosClass] {
+//    var result = [CosmosClass]()
+//    result.append(contentsOf: ALLCOSMOSCLASS())
+//    result.append(contentsOf: ALLEVMCLASS().filter { $0.supportCosmos == true } )
+//    return result
+//}
+//
+//func All_BASE_Chains() -> [BaseChain] {
+//    var result = [CosmosClass]()
+//    result.append(contentsOf: ALLCOSMOSCLASS())
+//    result.append(contentsOf: ALLEVMCLASS())
+//    return result
+//}
 
-func All_BASE_Chains() -> [BaseChain] {
-    var result = [CosmosClass]()
-    result.append(contentsOf: ALLCOSMOSCLASS())
-    result.append(contentsOf: ALLEVMCLASS())
+func ALLCHAINS() -> [BaseChain] {
+    var result = [BaseChain]()
+    result.append(ChainCosmos())
+    result.append(ChainAkash())
+    result.append(ChainAlthea118())
+    result.append(ChainArchway())
+    result.append(ChainAssetMantle())
+    result.append(ChainAxelar())
+    result.append(ChainKava459())
+    result.append(ChainKava118())
+//    
+//    
+    result.append(ChainEthereum())
+    result.append(ChainAltheaEVM())
     return result
 }
 

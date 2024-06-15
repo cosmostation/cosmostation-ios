@@ -21,7 +21,7 @@ class TxAddressLegacySheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextVie
     var addressLegacySheetType: LegacyAddressSheetType!
     var addressLegacyDelegate: AddressLegacyDelegate?
     var existedAddress: String?
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +69,7 @@ class TxAddressLegacySheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextVie
         if (addressLegacySheetType == .SelectAddress_CosmosLegacySend) {
             baseSheet.senderAddress = selectedChain.bechAddress
         } else if (addressLegacySheetType == .SelectAddress_CosmosDistribution) {
-            baseSheet.senderAddress = selectedChain.rewardAddress
+            baseSheet.senderAddress = selectedChain.grpcFetcher?.rewardAddress
         }
         baseSheet.sheetType = .SelectCosmosRecipientBechAddress
         onStartSheet(baseSheet, 320, 0.6)
@@ -94,7 +94,7 @@ class TxAddressLegacySheet: BaseVC, BaseSheetDelegate, QrScanDelegate, UITextVie
         }
         
         if (addressLegacySheetType == .SelectAddress_CosmosDistribution) {
-            if (userInput == selectedChain.rewardAddress) {
+            if (userInput == selectedChain.grpcFetcher?.rewardAddress) {
                 self.onShowToast(NSLocalizedString("error_same_reward_address", comment: ""))
                 return
             }

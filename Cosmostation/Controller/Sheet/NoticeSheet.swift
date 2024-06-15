@@ -73,7 +73,7 @@ class NoticeSheet: BaseVC {
             dismiss(animated: true)
             
         } else if (noticeType == .TokenGithub) {
-            if (selectedChain is EvmClass) {
+            if (selectedChain.supportEvm == true) {
                 let rawUrl = "https://github.com/cosmostation/chainlist/blob/main/chain/" + selectedChain.apiName + "/erc20.json"
                 guard let url = URL(string: rawUrl) else { return }
                 self.onShowSafariWeb(url)
@@ -84,12 +84,13 @@ class NoticeSheet: BaseVC {
             }
             
         } else if (noticeType == .ChainSunset) {
-            if (selectedChain is ChainCrescent) {
-                let rawUrl = "https://crescentnetwork.medium.com/flip-announcement-af24c8ab7e7f"
-                guard let url = URL(string: rawUrl) else { return }
-                self.onShowSafariWeb(url)
-                
-            }
+            //YONG4
+//            if (selectedChain is ChainCrescent) {
+//                let rawUrl = "https://crescentnetwork.medium.com/flip-announcement-af24c8ab7e7f"
+//                guard let url = URL(string: rawUrl) else { return }
+//                self.onShowSafariWeb(url)
+//                
+//            }
             
         } else if (noticeType == .NFTGithub) {
             let rawUrl = "https://github.com/cosmostation/chainlist/blob/main/chain/" + selectedChain.apiName + "/cw721.json"

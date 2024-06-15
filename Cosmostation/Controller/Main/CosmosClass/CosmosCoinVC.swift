@@ -17,7 +17,7 @@ class CosmosCoinVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     var refresher: UIRefreshControl!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var nativeCoins = Array<Cosmos_Base_V1beta1_Coin>()                 // section 1
     var ibcCoins = Array<Cosmos_Base_V1beta1_Coin>()                    // section 2
     var bridgedCoins = Array<Cosmos_Base_V1beta1_Coin>()                // section 3
@@ -51,23 +51,23 @@ class CosmosCoinVC: BaseVC {
         
         onSortAssets()
         
-        if (selectedChain is ChainCantoEVM || selectedChain is ChainRegen) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
-                let sunsetSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
-                sunsetSheet.selectedChain = self.selectedChain
-                sunsetSheet.noticeType = .ChainDelist
-                self.onStartSheet(sunsetSheet, 240, 0.6)
-            })
-            
-        } else if (selectedChain is ChainOkt996Keccak) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
-                let legacySheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
-                legacySheet.selectedChain = self.selectedChain
-                legacySheet.noticeType = .LegacyPath
-                self.onStartSheet(legacySheet, 240, 0.6)
-            })
-            
-        }
+//        if (selectedChain is ChainCantoEVM || selectedChain is ChainRegen) {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+//                let sunsetSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
+//                sunsetSheet.selectedChain = self.selectedChain
+//                sunsetSheet.noticeType = .ChainDelist
+//                self.onStartSheet(sunsetSheet, 240, 0.6)
+//            })
+//            
+//        } else if (selectedChain is ChainOkt996Keccak) {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+//                let legacySheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
+//                legacySheet.selectedChain = self.selectedChain
+//                legacySheet.noticeType = .LegacyPath
+//                self.onStartSheet(legacySheet, 240, 0.6)
+//            })
+//            
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -109,45 +109,45 @@ class CosmosCoinVC: BaseVC {
     }
 
     @objc func onRequestFetch() {
-        if (selectedChain.fetchState == .Busy) {
-            refresher.endRefreshing()
-        } else {
-            DispatchQueue.global().async {
-                self.selectedChain.fetchData(self.baseAccount.id)
-            }
-        }
+//        if (selectedChain.fetchState == .Busy) {
+//            refresher.endRefreshing()
+//        } else {
+//            DispatchQueue.global().async {
+//                self.selectedChain.fetchData(self.baseAccount.id)
+//            }
+//        }
     }
     
     func onSortAssets() {
         Task {
-            if let oktChain = selectedChain as? ChainOkt996Keccak {
-                oktChain.lcdAccountInfo.oktCoins?.forEach { balance in
-                    lcdBalances.append(balance)
-                }
-                if (lcdBalances.filter { $0["denom"].string == oktChain.stakeDenom }.first == nil) {
-                    lcdBalances.append(JSON(["denom":"okt", "amount": "0"]))
-                }
-                lcdBalances.sort {
-                    if ($0["denom"].string == oktChain.stakeDenom) { return true }
-                    if ($1["denom"].string == oktChain.stakeDenom) { return false }
-                    return false
-                }
-                
-            }  else if let oktEvmChain = selectedChain as? ChainOktEVM {
-                oktEvmChain.lcdAccountInfo.oktCoins?.forEach { balance in
-                    lcdBalances.append(balance)
-                }
-                if (lcdBalances.filter { $0["denom"].string == oktEvmChain.stakeDenom }.first == nil) {
-                    lcdBalances.append(JSON(["denom":"okt", "amount": "0"]))
-                }
-                lcdBalances.sort {
-                    if ($0["denom"].string == oktEvmChain.stakeDenom) { return true }
-                    if ($1["denom"].string == oktEvmChain.stakeDenom) { return false }
-                    return false
-                }
-                
-            } else {
-                selectedChain.cosmosBalances?.forEach { coin in
+//            if let oktChain = selectedChain as? ChainOkt996Keccak {
+//                oktChain.lcdAccountInfo.oktCoins?.forEach { balance in
+//                    lcdBalances.append(balance)
+//                }
+//                if (lcdBalances.filter { $0["denom"].string == oktChain.stakeDenom }.first == nil) {
+//                    lcdBalances.append(JSON(["denom":"okt", "amount": "0"]))
+//                }
+//                lcdBalances.sort {
+//                    if ($0["denom"].string == oktChain.stakeDenom) { return true }
+//                    if ($1["denom"].string == oktChain.stakeDenom) { return false }
+//                    return false
+//                }
+//                
+//            }  else if let oktEvmChain = selectedChain as? ChainOktEVM {
+//                oktEvmChain.lcdAccountInfo.oktCoins?.forEach { balance in
+//                    lcdBalances.append(balance)
+//                }
+//                if (lcdBalances.filter { $0["denom"].string == oktEvmChain.stakeDenom }.first == nil) {
+//                    lcdBalances.append(JSON(["denom":"okt", "amount": "0"]))
+//                }
+//                lcdBalances.sort {
+//                    if ($0["denom"].string == oktEvmChain.stakeDenom) { return true }
+//                    if ($1["denom"].string == oktEvmChain.stakeDenom) { return false }
+//                    return false
+//                }
+//                
+//            } else {
+            selectedChain.grpcFetcher?.cosmosBalances?.forEach { coin in
                     let coinType = BaseData.instance.getAsset(selectedChain.apiName, coin.denom)?.type
                     if (coinType == "staking" || coinType == "native") {
                         nativeCoins.append(coin)
@@ -159,28 +159,28 @@ class CosmosCoinVC: BaseVC {
                 }
                 
                 if (nativeCoins.filter { $0.denom == selectedChain.stakeDenom }.first == nil) {
-                    nativeCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = selectedChain.stakeDenom; $0.amount = "0" })
+                    nativeCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = selectedChain.stakeDenom!; $0.amount = "0" })
                 }
-                nativeCoins.sort {
-                    if ($0.denom == selectedChain.stakeDenom) { return true }
-                    if ($1.denom == selectedChain.stakeDenom) { return false }
-                    let value0 = selectedChain.balanceValue($0.denom)
-                    let value1 = selectedChain.balanceValue($1.denom)
-                    return value0.compare(value1).rawValue > 0 ? true : false
-                }
-                
-                ibcCoins.sort {
-                    let value0 = selectedChain.balanceValue($0.denom)
-                    let value1 = selectedChain.balanceValue($1.denom)
-                    return value0.compare(value1).rawValue > 0 ? true : false
-                }
-                
-                bridgedCoins.sort {
-                    let value0 = selectedChain.balanceValue($0.denom)
-                    let value1 = selectedChain.balanceValue($1.denom)
-                    return value0.compare(value1).rawValue > 0 ? true : false
-                }
-            }
+//                nativeCoins.sort {
+//                    if ($0.denom == selectedChain.stakeDenom) { return true }
+//                    if ($1.denom == selectedChain.stakeDenom) { return false }
+//                    let value0 = selectedChain.balanceValue($0.denom)
+//                    let value1 = selectedChain.balanceValue($1.denom)
+//                    return value0.compare(value1).rawValue > 0 ? true : false
+//                }
+//                
+//                ibcCoins.sort {
+//                    let value0 = selectedChain.balanceValue($0.denom)
+//                    let value1 = selectedChain.balanceValue($1.denom)
+//                    return value0.compare(value1).rawValue > 0 ? true : false
+//                }
+//                
+//                bridgedCoins.sort {
+//                    let value0 = selectedChain.balanceValue($0.denom)
+//                    let value1 = selectedChain.balanceValue($1.denom)
+//                    return value0.compare(value1).rawValue > 0 ? true : false
+//                }
+//            }
             tableView.reloadData()
         }
     }
@@ -256,110 +256,111 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-            loadingView.isHidden = lcdBalances.count > 0
-            return lcdBalances.count
-            
-        } else {
-            loadingView.isHidden = nativeCoins.count > 0 || ibcCoins.count > 0  || bridgedCoins.count > 0
-            if (section == 0) {
-                if (selectedChain is ChainBeraEVM) {
-                    return nativeCoins.count + 1
-                }
-                return nativeCoins.count
-            } else if (section == 1) {
-                return ibcCoins.count
-            } else if (section == 2) {
-                return bridgedCoins.count
-            }
-        }
+//        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+//            loadingView.isHidden = lcdBalances.count > 0
+//            return lcdBalances.count
+//            
+//        } else {
+//            loadingView.isHidden = nativeCoins.count > 0 || ibcCoins.count > 0  || bridgedCoins.count > 0
+//            if (section == 0) {
+//                if (selectedChain is ChainBeraEVM) {
+//                    return nativeCoins.count + 1
+//                }
+//                return nativeCoins.count
+//            } else if (section == 1) {
+//                return ibcCoins.count
+//            } else if (section == 2) {
+//                return bridgedCoins.count
+//            }
+//        }
         return 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (indexPath.section == 0 && indexPath.row == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
-            cell.bindCosmosStakeAsset(selectedChain)
-            return cell
-            
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-            if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-                cell.bindOktAsset(selectedChain, lcdBalances[indexPath.row])
-            } else if (selectedChain is ChainBeraEVM && indexPath.section == 0 && indexPath.row == 1) {
-                cell.bindEvmClassCoin(selectedChain as! ChainBeraEVM)
-            } else {
-                cell.bindCosmosClassAsset(selectedChain, getCoinBySection(indexPath)!)
-            }
-            return cell
-        }
+//        if (indexPath.section == 0 && indexPath.row == 0) {
+//            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
+//            cell.bindCosmosStakeAsset(selectedChain)
+//            return cell
+//            
+//        } else {
+//            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+//            if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+//                cell.bindOktAsset(selectedChain, lcdBalances[indexPath.row])
+//            } else if (selectedChain is ChainBeraEVM && indexPath.section == 0 && indexPath.row == 1) {
+//                cell.bindEvmClassCoin(selectedChain as! ChainBeraEVM)
+//            } else {
+//                cell.bindCosmosClassAsset(selectedChain, getCoinBySection(indexPath)!)
+//            }
+//            return cell
+//        }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (selectedChain.isBankLocked()) {
-            onShowToast(NSLocalizedString("error_tranfer_disabled", comment: ""))
-            return
-        }
-        if (selectedChain.isTxFeePayable() == false) {
-            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-            return
-        }
-        if (selectedChain is ChainOkt996Keccak) {
-            onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
-            return
-            
-        } else if (selectedChain is ChainOktEVM) {
-            if (indexPath.section == 0) {
-                if (indexPath.row == 0) {                                       //OKT EVM only support Ox style
-                    onStartTransferVC(.Only_EVM_Coin, lcdBalances[indexPath.row]["denom"].stringValue)
-                } else {
-                    onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
-                }
-            }
-            return
-            
-        } else if (selectedChain is ChainBeraEVM) {
-            if (indexPath.section == 0 && indexPath.row == 0) {                 //BGT is not sendable
-                onShowToast(NSLocalizedString("error_tranfer_disabled_bgt", comment: ""))
-                return
-                
-            } else if (indexPath.section == 0 && indexPath.row == 1) {          //Only Support BERA Send
-                onStartTransferVC(.Only_EVM_Coin, "abera")
-                return
-            }
-            return
-            
-        } else {
-            if (indexPath.section == 0) {
-                var sendType: SendAssetType!
-                if (indexPath.row == 0) {
-                    if (selectedChain is EvmClass) {                            //stake coin web3-tx and cosmos-tx
-                        sendType = .CosmosEVM_Coin
-                    } else  {                                                   //no evm chain only cosmos-tx
-                        sendType = .Only_Cosmos_Coin
-                    }
-                } else {                                                        //native(not stake) coin only cosmos-tx
-                    sendType = .Only_Cosmos_Coin
-                }
-                onStartTransferVC(sendType, nativeCoins[indexPath.row].denom)
-                return
-                
-            } else if (indexPath.section == 1) {
-                onStartTransferVC(.Only_Cosmos_Coin, ibcCoins[indexPath.row].denom)
-                return
-                
-            } else if (indexPath.section == 2) {
-                if (selectedChain.tag.starts(with: "kava") == true) {
-                    let sendDenom = bridgedCoins[indexPath.row].denom
-                    onStartTransferVC(.Only_Cosmos_Coin, sendDenom)
-                    return
-                    
-                } else {
-                    onStartTransferVC(.Only_Cosmos_Coin, bridgedCoins[indexPath.row].denom)
-                    return
-                }
-            }
-        }
+//        if (selectedChain.isBankLocked()) {
+//            onShowToast(NSLocalizedString("error_tranfer_disabled", comment: ""))
+//            return
+//        }
+//        if (selectedChain.isTxFeePayable() == false) {
+//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+//            return
+//        }
+//        if (selectedChain is ChainOkt996Keccak) {
+//            onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
+//            return
+//            
+//        } else if (selectedChain is ChainOktEVM) {
+//            if (indexPath.section == 0) {
+//                if (indexPath.row == 0) {                                       //OKT EVM only support Ox style
+//                    onStartTransferVC(.Only_EVM_Coin, lcdBalances[indexPath.row]["denom"].stringValue)
+//                } else {
+//                    onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
+//                }
+//            }
+//            return
+//            
+//        } else if (selectedChain is ChainBeraEVM) {
+//            if (indexPath.section == 0 && indexPath.row == 0) {                 //BGT is not sendable
+//                onShowToast(NSLocalizedString("error_tranfer_disabled_bgt", comment: ""))
+//                return
+//                
+//            } else if (indexPath.section == 0 && indexPath.row == 1) {          //Only Support BERA Send
+//                onStartTransferVC(.Only_EVM_Coin, "abera")
+//                return
+//            }
+//            return
+//            
+//        } else {
+//            if (indexPath.section == 0) {
+//                var sendType: SendAssetType!
+//                if (indexPath.row == 0) {
+//                    if (selectedChain is EvmClass) {                            //stake coin web3-tx and cosmos-tx
+//                        sendType = .CosmosEVM_Coin
+//                    } else  {                                                   //no evm chain only cosmos-tx
+//                        sendType = .Only_Cosmos_Coin
+//                    }
+//                } else {                                                        //native(not stake) coin only cosmos-tx
+//                    sendType = .Only_Cosmos_Coin
+//                }
+//                onStartTransferVC(sendType, nativeCoins[indexPath.row].denom)
+//                return
+//                
+//            } else if (indexPath.section == 1) {
+//                onStartTransferVC(.Only_Cosmos_Coin, ibcCoins[indexPath.row].denom)
+//                return
+//                
+//            } else if (indexPath.section == 2) {
+//                if (selectedChain.tag.starts(with: "kava") == true) {
+//                    let sendDenom = bridgedCoins[indexPath.row].denom
+//                    onStartTransferVC(.Only_Cosmos_Coin, sendDenom)
+//                    return
+//                    
+//                } else {
+//                    onStartTransferVC(.Only_Cosmos_Coin, bridgedCoins[indexPath.row].denom)
+//                    return
+//                }
+//            }
+//        }
     }
     
     func getCoinBySection(_ indexPath: IndexPath) -> Cosmos_Base_V1beta1_Coin? {
@@ -373,17 +374,17 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
         return nil
     }
     
-    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        if (indexPath.section == 0 && indexPath.row == 0 && selectedChain.supportStaking == true && selectedChain.cosmosRewards?.count ?? 0 > 0) {
-            let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
-            rewardListPopupVC.selectedChain = selectedChain
-            rewardListPopupVC.rewards = selectedChain.cosmosRewards!
-            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return rewardListPopupVC }) { _ in
-                UIMenu(title: "", children: [])
-            }
-        }
-        return nil
-    }
+//    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+//        if (indexPath.section == 0 && indexPath.row == 0 && selectedChain.supportStaking == true && selectedChain.cosmosRewards?.count ?? 0 > 0) {
+//            let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
+//            rewardListPopupVC.selectedChain = selectedChain
+//            rewardListPopupVC.rewards = selectedChain.cosmosRewards!
+//            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return rewardListPopupVC }) { _ in
+//                UIMenu(title: "", children: [])
+//            }
+//        }
+//        return nil
+//    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {

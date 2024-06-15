@@ -42,8 +42,8 @@ class DeriveCell: UITableViewCell {
         coinCntLabel.isHidden = true
         reposeErrorLabel.isHidden = true
     }
-    
-    func bindDeriveEvmClassChain(_ account: BaseAccount, _ chain: EvmClass, _ selectedList: [String]) {
+    //YONG4
+    func bindDeriveEvmClassChain(_ account: BaseAccount, _ chain: BaseChain, _ selectedList: [String]) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
@@ -61,42 +61,42 @@ class DeriveCell: UITableViewCell {
             hdPathLabel.text = chain.evmAddress
         }
         
-        if (chain.fetchState == .Fail) {
-            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            loadingLabel.isHidden = true
-            reposeErrorLabel.isHidden  = false
-            
-        } else if (chain.fetchState == .Success) {
-            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            loadingLabel.isHidden = true
-            
-            let dpAmount = chain.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
-            denomLabel.text = chain.coinSymbol
-            amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
-            if let stakeDenom = chain.stakeDenom,
-               let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
-                denomLabel.textColor = msAsset.assetColor()
-            } else {
-                denomLabel.textColor = .color01
-            }
-            
-            if (chain.evmBalances != NSDecimalNumber.zero) {
-                coinCntLabel.text = "1 Coins"
-            } else {
-                coinCntLabel.text = "0 Coins"
-            }
-            denomLabel.isHidden = false
-            amountLabel.isHidden = false
-            coinCntLabel.isHidden = false
-            
-        } else {
-            loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
-            loadingLabel.isHidden = false
-        }
+//        if (chain.fetchState == .Fail) {
+//            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//            loadingLabel.isHidden = true
+//            reposeErrorLabel.isHidden  = false
+//            
+//        } else if (chain.fetchState == .Success) {
+//            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//            loadingLabel.isHidden = true
+//            
+//            let dpAmount = chain.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
+//            denomLabel.text = chain.coinSymbol
+//            amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
+//            if let stakeDenom = chain.stakeDenom,
+//               let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+//                denomLabel.textColor = msAsset.assetColor()
+//            } else {
+//                denomLabel.textColor = .color01
+//            }
+//            
+//            if (chain.evmBalances != NSDecimalNumber.zero) {
+//                coinCntLabel.text = "1 Coins"
+//            } else {
+//                coinCntLabel.text = "0 Coins"
+//            }
+//            denomLabel.isHidden = false
+//            amountLabel.isHidden = false
+//            coinCntLabel.isHidden = false
+//            
+//        } else {
+//            loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
+//            loadingLabel.isHidden = false
+//        }
     }
     
     
-    func bindDeriveCosmosClassChain(_ account: BaseAccount, _ chain: CosmosClass, _ selectedList: [String]) {
+    func bindDeriveCosmosClassChain(_ account: BaseAccount, _ chain: BaseChain, _ selectedList: [String]) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
@@ -121,43 +121,43 @@ class DeriveCell: UITableViewCell {
             keyTypeTag.isHidden = false
         }
         
-        if (chain.fetchState == .Fail) {
-            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            loadingLabel.isHidden = true
-            reposeErrorLabel.isHidden  = false
-            
-        } else if (chain.fetchState == .Success) {
-            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            loadingLabel.isHidden = true
-            
-            let stakeDenom = chain.stakeDenom!
-           if let oktChain = chain as? ChainOkt996Keccak {
-                let availableAmount = oktChain.lcdBalanceAmount(stakeDenom)
-                amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
-                denomLabel.text = stakeDenom.uppercased()
-                denomLabel.textColor = .color01
-                denomLabel.isHidden = false
-                amountLabel.isHidden = false
-                
-                let coinCnt = oktChain.lcdAccountInfo.oktCoins?.count ?? 0
-                coinCntLabel.text = String(coinCnt) + " Coins"
-                coinCntLabel.isHidden = false
-                
-            } else {
-                let availableAmount = chain.balanceAmount(stakeDenom)
-                if let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
-                    WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)
-                    denomLabel.isHidden = false
-                    amountLabel.isHidden = false
-                }
-                let coinCnt = chain.cosmosBalances?.count ?? 0
-                coinCntLabel.text = String(coinCnt) + " Coins"
-                coinCntLabel.isHidden = false
-            }
-            
-        } else {
-            loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
-            loadingLabel.isHidden = false
-        }
+//        if (chain.fetchState == .Fail) {
+//            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//            loadingLabel.isHidden = true
+//            reposeErrorLabel.isHidden  = false
+//            
+//        } else if (chain.fetchState == .Success) {
+//            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//            loadingLabel.isHidden = true
+//            
+//            let stakeDenom = chain.stakeDenom!
+//           if let oktChain = chain as? ChainOkt996Keccak {
+//                let availableAmount = oktChain.lcdBalanceAmount(stakeDenom)
+//                amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
+//                denomLabel.text = stakeDenom.uppercased()
+//                denomLabel.textColor = .color01
+//                denomLabel.isHidden = false
+//                amountLabel.isHidden = false
+//                
+//                let coinCnt = oktChain.lcdAccountInfo.oktCoins?.count ?? 0
+//                coinCntLabel.text = String(coinCnt) + " Coins"
+//                coinCntLabel.isHidden = false
+//                
+//            } else {
+//                let availableAmount = chain.balanceAmount(stakeDenom)
+//                if let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+//                    WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)
+//                    denomLabel.isHidden = false
+//                    amountLabel.isHidden = false
+//                }
+//                let coinCnt = chain.cosmosBalances?.count ?? 0
+//                coinCntLabel.text = String(coinCnt) + " Coins"
+//                coinCntLabel.isHidden = false
+//            }
+//            
+//        } else {
+//            loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
+//            loadingLabel.isHidden = false
+//        }
     }
 }

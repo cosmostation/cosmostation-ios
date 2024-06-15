@@ -31,7 +31,7 @@ class OktSelectValidatorSheet: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        allValidators = selectedChain.lcdOktValidators
+//        allValidators = selectedChain.lcdOktValidators
     }
 
 

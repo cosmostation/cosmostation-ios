@@ -101,8 +101,16 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v10/assets/" +  chain.apiName + "/cw20/info"
     }
     
+    static func msCw20InfoUrl(_ apiName: String) -> String {
+        return MINTSCAN_API_URL + "v10/assets/" +  apiName + "/cw20/info"
+    }
+    
     static func msErc20InfoUrl(_ chain: BaseChain) -> String {
         return MINTSCAN_API_URL + "v10/assets/" +  chain.apiName + "/erc20/info"
+    }
+    
+    static func msErc20InfoUrl(_ apiName: String) -> String {
+        return MINTSCAN_API_URL + "v10/assets/" +  apiName + "/erc20/info"
     }
     
     static func msChainParams() -> String {
@@ -111,6 +119,10 @@ class BaseNetWork {
     
     static func msCw721InfoUrl(_ chain: BaseChain) -> String {
         return ResourceBase + chain.apiName + "/cw721.json"
+    }
+    
+    static func msCw721InfoUrl(_ apiName: String) -> String {
+        return ResourceBase + apiName + "/cw721.json"
     }
     
     static func msProposals(_ chain: BaseChain) -> String {
@@ -123,6 +135,10 @@ class BaseNetWork {
     
     static func msNftDetail(_ chain: BaseChain, _ contractAddress: String, _ tokenId: String) -> String {
         return MINTSCAN_API_URL + "v10/" + chain.apiName + "/contracts/" + contractAddress + "/nft-url/" + tokenId
+    }
+    
+    static func msNftDetail(_ apiName: String, _ contractAddress: String, _ tokenId: String) -> String {
+        return MINTSCAN_API_URL + "v10/" + apiName + "/contracts/" + contractAddress + "/nft-url/" + tokenId
     }
     
     static func SkipChains() -> String {

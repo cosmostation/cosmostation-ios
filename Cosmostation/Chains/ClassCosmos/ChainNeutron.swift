@@ -13,6 +13,31 @@ import SwiftProtobuf
 import Alamofire
 import SwiftyJSON
 
+class ChainNeutron: BaseChain {
+    
+    override init() {
+        super.init()
+        
+        name = "Neutron"
+        tag = "neutron118"
+        logo1 = "chainNeutron"
+        logo2 = "chainNeutron2"
+        supportCosmos = true
+        apiName = "neutron"
+        
+        stakeDenom = "untrn"
+        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        bechAccountPrefix = "neutron"
+        validatorPrefix = "neutronvaloper"
+        supportStaking = false
+        supportCw20 = true
+        grpcHost = "grpc-neutron.cosmostation.io"
+        
+        initFetcher()
+    }
+}
+
+/*
 class ChainNeutron: CosmosClass  {
     
     var vaultsList: [JSON]?
@@ -172,6 +197,7 @@ extension ChainNeutron {
         return NSDecimalNumber.zero
     }
 }
+ */
 
 //Neutron Contract Address
 let NEUTRON_VAULT_ADDRESS = "neutron1qeyjez6a9dwlghf9d6cy44fxmsajztw257586akk6xn6k88x0gus5djz4e"

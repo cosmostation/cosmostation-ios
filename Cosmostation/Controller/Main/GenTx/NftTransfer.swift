@@ -83,247 +83,247 @@ class NftTransfer: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        onInitToChain()                     // set init toChain UI
-        onInitNft()                         // set nft
-        onInitFee()                         // set init fee for set send available
-        
-        toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
-        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
-        feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeDenom)))
+//        onInitToChain()                     // set init toChain UI
+//        onInitNft()                         // set nft
+//        onInitFee()                         // set init fee for set send available
+//        
+//        toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
+//        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
+//        feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeDenom)))
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        let gap = UIScreen.main.bounds.size.height - 685
-        if (gap > 0) { midGapConstraint.constant = gap }
-        else { midGapConstraint.constant = 60 }
-    }
-    
-    override func setLocalizedString() {
-        titleLabel.text = String(format: NSLocalizedString("str_send_asset", comment: ""), "NFT")
-        toChainTitle.text = NSLocalizedString("str_recipient_chain", comment: "")
-        toAddressTitle.text = NSLocalizedString("str_recipient_address", comment: "")
-        toAddressHint.text = NSLocalizedString("msg_tap_for_add_address", comment: "")
-        memoTitle.text = NSLocalizedString("str_memo_optional", comment: "")
-        memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
-        sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
-    }
-    
-    func onInitToChain() {
-        toChain = fromChain
-        toChainImg.image = UIImage.init(named: toChain.logo1)
-        toChainLabel.text = toChain.name.uppercased()
-    }
-    
-    func onInitNft() {
-        if let url = toSendNFT.tokens[0].tokenDetails["url"].string {
-            toSendNftImage?.af.setImage(withURL: URL(string: url)!)
-        }
-        toSendNftName.text = "#" + toSendNFT.tokens[0].tokenId
-        toSendNftCollectionName.text = toSendNFT.info["name"].string
-    }
-    
-    func onInitFee() {
-        cosmosFeeInfos = (fromChain as! CosmosClass).getFeeInfos()
-        feeSegments.removeAllSegments()
-        for i in 0..<cosmosFeeInfos.count {
-            feeSegments.insertSegment(withTitle: cosmosFeeInfos[i].title, at: i, animated: false)
-        }
-        selectedFeePosition = (fromChain as! CosmosClass).getFeeBasePosition()
-        cosmosTxFee = (fromChain as! CosmosClass).getInitPayableFee()
-        feeSegments.selectedSegmentIndex = selectedFeePosition
-        
-        if let feeAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
-            feeSelectImg.af.setImage(withURL: feeAsset.assetImg())
-            feeSelectLabel.text = feeAsset.symbol
-            feeDenomLabel.text = feeAsset.symbol
-            
-            let feePrice = BaseData.instance.getPrice(feeAsset.coinGeckoId)
-            let feeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
-            let feeDpAmount = feeAmount.multiplying(byPowerOf10: -feeAsset.decimals!, withBehavior: getDivideHandler(feeAsset.decimals!))
-            let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
-            feeAmountLabel.attributedText = WDP.dpAmount(feeDpAmount.stringValue, feeAmountLabel!.font, feeAsset.decimals!)
-            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
-        }
-    }
-    
-    @objc func onClickToAddress() {
-        let addressSheet = TxSendAddressSheet(nibName: "TxSendAddressSheet", bundle: nil)
-        addressSheet.fromChain = fromChain
-        addressSheet.toChain = toChain
-        addressSheet.sendType = sendType
-        addressSheet.senderBechAddress = (fromChain as? CosmosClass)?.bechAddress
-        addressSheet.senderEvmAddress = (fromChain as? EvmClass)?.evmAddress
-        addressSheet.existedAddress = toAddress
-        addressSheet.sendAddressDelegate = self
-        onStartSheet(addressSheet, 220, 0.6)
-    }
-    
-    func onUpdateToAddressView(_ address: String) {
-        if (address.isEmpty == true) {
-            toAddress = ""
-            toAddressHint.isHidden = false
-            toAddressLabel.isHidden = true
-            
-        } else {
-            toAddress = address
-            toAddressHint.isHidden = true
-            toAddressLabel.isHidden = false
-            toAddressLabel.text = toAddress
-            toAddressLabel.adjustsFontSizeToFitWidth = true
-            onSimul()
-        }
-    }
-    
-    @objc func onClickMemo() {
-        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
-        memoSheet.existedMemo = toMemo
-        memoSheet.memoDelegate = self
-        onStartSheet(memoSheet, 260, 0.6)
-    }
-    
-    func onUpdateMemoView(_ memo: String) {
-        if (toMemo != memo) {
-            toMemo = memo
-            if (toMemo.isEmpty) {
-                memoLabel.isHidden = true
-                memoHintLabel.isHidden = false
-            } else {
-                memoLabel.text = toMemo
-                memoLabel.isHidden = false
-                memoHintLabel.isHidden = true
-            }
-            onSimul()
-        }
-    }
-    
-    @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
-        selectedFeePosition = sender.selectedSegmentIndex
-        cosmosTxFee = (fromChain as! CosmosClass).getUserSelectedFee(selectedFeePosition, cosmosTxFee.amount[0].denom)
-        onUpdateFeeView()
-        onSimul()
-    }
-    
-    @objc func onSelectFeeDenom() {
-        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.targetChain = (fromChain as! CosmosClass)
-        baseSheet.feeDatas = cosmosFeeInfos[selectedFeePosition].FeeDatas
-        baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240, 0.6)
-    }
-    
-    func onUpdateFeeView() {
-        if let feeAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
-            feeSelectImg.af.setImage(withURL: feeAsset.assetImg())
-            feeSelectLabel.text = feeAsset.symbol
-            feeDenomLabel.text = feeAsset.symbol
-            
-            let feePrice = BaseData.instance.getPrice(feeAsset.coinGeckoId)
-            let feeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
-            let feeDpAmount = feeAmount.multiplying(byPowerOf10: -feeAsset.decimals!, withBehavior: getDivideHandler(feeAsset.decimals!))
-            let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
-            feeAmountLabel.attributedText = WDP.dpAmount(feeDpAmount.stringValue, feeAmountLabel!.font, feeAsset.decimals!)
-            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
-        }
-    }
-    
-    func onUpdateFeeViewAfterSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
-        view.isUserInteractionEnabled = true
-        loadingView.isHidden = true
-        
-        if ((fromChain as! CosmosClass).isGasSimulable() == false) {
-            onUpdateFeeView()
-            sendBtn.isEnabled = true
-            return
-        }
-        guard let toGas = simul?.gasInfo.gasUsed else {
-            feeCardView.isHidden = true
-            errorCardView.isHidden = false
-            errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
-            return
-        }
-        cosmosTxFee.gasLimit = UInt64(Double(toGas) * (fromChain as! CosmosClass).gasMultiply())
-        if let gasRate = cosmosFeeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
-            let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
-            let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
-            cosmosTxFee.amount[0].amount = feeCoinAmount!.stringValue
-        }
-        onUpdateFeeView()
-        sendBtn.isEnabled = true
-    }
-    
-    @IBAction func onClickSend(_ sender: BaseButton) {
-        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
-        self.present(pinVC, animated: true)
-    }
-    
-    func onSimul() {
-        sendBtn.isEnabled = false
-        if (toAddress.isEmpty == true) { return }
-        view.isUserInteractionEnabled = false
-        loadingView.isHidden = false
-        
-        if ((fromChain as! CosmosClass).isGasSimulable() == false) {
-            return onUpdateFeeViewAfterSimul(nil)
-        }
-        cw721SendSimul()
-    }
-    
-    func cw721SendSimul() {
-        Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress) {
-                do {
-                    let simul = try await simulCw721SendTx(channel, auth!, onBindCw20Send())
-                    DispatchQueue.main.async {
-                        self.onUpdateFeeViewAfterSimul(simul)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
-                }
-            }
-        }
-    }
-    
-    func cw721Send() {
-        Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress),
-               let response = try await broadcast721SendTx(channel, auth!, onBindCw20Send()) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                    self.loadingView.isHidden = true
-                    let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
-                    txResult.txStyle = self.txStyle
-                    txResult.fromChain = self.fromChain
-                    txResult.toChain = self.toChain
-                    txResult.toAddress = self.toAddress
-                    txResult.toMemo = self.toMemo
-                    txResult.cosmosBroadcastTxResponse = response
-                    txResult.modalPresentationStyle = .fullScreen
-                    self.present(txResult, animated: true)
-                })
-            }
-        }
-    }
-    
-    func onBindCw20Send() -> Cosmwasm_Wasm_V1_MsgExecuteContract {
-        let msg: JSON = ["transfer_nft" : ["token_id" : toSendNFT.tokens[0].tokenId, "recipient" : toAddress]]
-        let msgBase64 = try! msg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
-        return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-            $0.sender = (fromChain as! CosmosClass).bechAddress
-            $0.contract = toSendNFT.info["contractAddress"].stringValue
-            $0.msg = Data(base64Encoded: msgBase64)!
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        let gap = UIScreen.main.bounds.size.height - 685
+//        if (gap > 0) { midGapConstraint.constant = gap }
+//        else { midGapConstraint.constant = 60 }
+//    }
+//    
+//    override func setLocalizedString() {
+//        titleLabel.text = String(format: NSLocalizedString("str_send_asset", comment: ""), "NFT")
+//        toChainTitle.text = NSLocalizedString("str_recipient_chain", comment: "")
+//        toAddressTitle.text = NSLocalizedString("str_recipient_address", comment: "")
+//        toAddressHint.text = NSLocalizedString("msg_tap_for_add_address", comment: "")
+//        memoTitle.text = NSLocalizedString("str_memo_optional", comment: "")
+//        memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
+//        sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
+//    }
+//    
+//    func onInitToChain() {
+//        toChain = fromChain
+//        toChainImg.image = UIImage.init(named: toChain.logo1)
+//        toChainLabel.text = toChain.name.uppercased()
+//    }
+//    
+//    func onInitNft() {
+//        if let url = toSendNFT.tokens[0].tokenDetails["url"].string {
+//            toSendNftImage?.af.setImage(withURL: URL(string: url)!)
+//        }
+//        toSendNftName.text = "#" + toSendNFT.tokens[0].tokenId
+//        toSendNftCollectionName.text = toSendNFT.info["name"].string
+//    }
+//    
+//    func onInitFee() {
+//        cosmosFeeInfos = (fromChain as! CosmosClass).getFeeInfos()
+//        feeSegments.removeAllSegments()
+//        for i in 0..<cosmosFeeInfos.count {
+//            feeSegments.insertSegment(withTitle: cosmosFeeInfos[i].title, at: i, animated: false)
+//        }
+//        selectedFeePosition = (fromChain as! CosmosClass).getFeeBasePosition()
+//        cosmosTxFee = (fromChain as! CosmosClass).getInitPayableFee()
+//        feeSegments.selectedSegmentIndex = selectedFeePosition
+//        
+//        if let feeAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
+//            feeSelectImg.af.setImage(withURL: feeAsset.assetImg())
+//            feeSelectLabel.text = feeAsset.symbol
+//            feeDenomLabel.text = feeAsset.symbol
+//            
+//            let feePrice = BaseData.instance.getPrice(feeAsset.coinGeckoId)
+//            let feeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
+//            let feeDpAmount = feeAmount.multiplying(byPowerOf10: -feeAsset.decimals!, withBehavior: getDivideHandler(feeAsset.decimals!))
+//            let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
+//            feeAmountLabel.attributedText = WDP.dpAmount(feeDpAmount.stringValue, feeAmountLabel!.font, feeAsset.decimals!)
+//            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+//        }
+//    }
+//    
+//    @objc func onClickToAddress() {
+//        let addressSheet = TxSendAddressSheet(nibName: "TxSendAddressSheet", bundle: nil)
+//        addressSheet.fromChain = fromChain
+//        addressSheet.toChain = toChain
+//        addressSheet.sendType = sendType
+//        addressSheet.senderBechAddress = (fromChain as? CosmosClass)?.bechAddress
+//        addressSheet.senderEvmAddress = (fromChain as? EvmClass)?.evmAddress
+//        addressSheet.existedAddress = toAddress
+//        addressSheet.sendAddressDelegate = self
+//        onStartSheet(addressSheet, 220, 0.6)
+//    }
+//    
+//    func onUpdateToAddressView(_ address: String) {
+//        if (address.isEmpty == true) {
+//            toAddress = ""
+//            toAddressHint.isHidden = false
+//            toAddressLabel.isHidden = true
+//            
+//        } else {
+//            toAddress = address
+//            toAddressHint.isHidden = true
+//            toAddressLabel.isHidden = false
+//            toAddressLabel.text = toAddress
+//            toAddressLabel.adjustsFontSizeToFitWidth = true
+//            onSimul()
+//        }
+//    }
+//    
+//    @objc func onClickMemo() {
+//        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
+//        memoSheet.existedMemo = toMemo
+//        memoSheet.memoDelegate = self
+//        onStartSheet(memoSheet, 260, 0.6)
+//    }
+//    
+//    func onUpdateMemoView(_ memo: String) {
+//        if (toMemo != memo) {
+//            toMemo = memo
+//            if (toMemo.isEmpty) {
+//                memoLabel.isHidden = true
+//                memoHintLabel.isHidden = false
+//            } else {
+//                memoLabel.text = toMemo
+//                memoLabel.isHidden = false
+//                memoHintLabel.isHidden = true
+//            }
+//            onSimul()
+//        }
+//    }
+//    
+//    @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
+//        selectedFeePosition = sender.selectedSegmentIndex
+//        cosmosTxFee = (fromChain as! CosmosClass).getUserSelectedFee(selectedFeePosition, cosmosTxFee.amount[0].denom)
+//        onUpdateFeeView()
+//        onSimul()
+//    }
+//    
+//    @objc func onSelectFeeDenom() {
+//        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+//        baseSheet.targetChain = (fromChain as! CosmosClass)
+//        baseSheet.feeDatas = cosmosFeeInfos[selectedFeePosition].FeeDatas
+//        baseSheet.sheetDelegate = self
+//        baseSheet.sheetType = .SelectFeeDenom
+//        onStartSheet(baseSheet, 240, 0.6)
+//    }
+//    
+//    func onUpdateFeeView() {
+//        if let feeAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
+//            feeSelectImg.af.setImage(withURL: feeAsset.assetImg())
+//            feeSelectLabel.text = feeAsset.symbol
+//            feeDenomLabel.text = feeAsset.symbol
+//            
+//            let feePrice = BaseData.instance.getPrice(feeAsset.coinGeckoId)
+//            let feeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
+//            let feeDpAmount = feeAmount.multiplying(byPowerOf10: -feeAsset.decimals!, withBehavior: getDivideHandler(feeAsset.decimals!))
+//            let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
+//            feeAmountLabel.attributedText = WDP.dpAmount(feeDpAmount.stringValue, feeAmountLabel!.font, feeAsset.decimals!)
+//            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+//        }
+//    }
+//    
+//    func onUpdateFeeViewAfterSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
+//        view.isUserInteractionEnabled = true
+//        loadingView.isHidden = true
+//        
+//        if ((fromChain as! CosmosClass).isGasSimulable() == false) {
+//            onUpdateFeeView()
+//            sendBtn.isEnabled = true
+//            return
+//        }
+//        guard let toGas = simul?.gasInfo.gasUsed else {
+//            feeCardView.isHidden = true
+//            errorCardView.isHidden = false
+//            errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
+//            return
+//        }
+//        cosmosTxFee.gasLimit = UInt64(Double(toGas) * (fromChain as! CosmosClass).gasMultiply())
+//        if let gasRate = cosmosFeeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
+//            let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
+//            let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
+//            cosmosTxFee.amount[0].amount = feeCoinAmount!.stringValue
+//        }
+//        onUpdateFeeView()
+//        sendBtn.isEnabled = true
+//    }
+//    
+//    @IBAction func onClickSend(_ sender: BaseButton) {
+//        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+//        self.present(pinVC, animated: true)
+//    }
+//    
+//    func onSimul() {
+//        sendBtn.isEnabled = false
+//        if (toAddress.isEmpty == true) { return }
+//        view.isUserInteractionEnabled = false
+//        loadingView.isHidden = false
+//        
+//        if ((fromChain as! CosmosClass).isGasSimulable() == false) {
+//            return onUpdateFeeViewAfterSimul(nil)
+//        }
+//        cw721SendSimul()
+//    }
+//    
+//    func cw721SendSimul() {
+//        Task {
+//            let channel = getConnection()
+//            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress) {
+//                do {
+//                    let simul = try await simulCw721SendTx(channel, auth!, onBindCw20Send())
+//                    DispatchQueue.main.async {
+//                        self.onUpdateFeeViewAfterSimul(simul)
+//                    }
+//                } catch {
+//                    DispatchQueue.main.async {
+//                        self.view.isUserInteractionEnabled = true
+//                        self.loadingView.isHidden = true
+//                        self.onShowToast("Error : " + "\n" + "\(error)")
+//                        return
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    
+//    func cw721Send() {
+//        Task {
+//            let channel = getConnection()
+//            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress),
+//               let response = try await broadcast721SendTx(channel, auth!, onBindCw20Send()) {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+//                    self.loadingView.isHidden = true
+//                    let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+//                    txResult.txStyle = self.txStyle
+//                    txResult.fromChain = self.fromChain
+//                    txResult.toChain = self.toChain
+//                    txResult.toAddress = self.toAddress
+//                    txResult.toMemo = self.toMemo
+//                    txResult.cosmosBroadcastTxResponse = response
+//                    txResult.modalPresentationStyle = .fullScreen
+//                    self.present(txResult, animated: true)
+//                })
+//            }
+//        }
+//    }
+//    
+//    func onBindCw20Send() -> Cosmwasm_Wasm_V1_MsgExecuteContract {
+//        let msg: JSON = ["transfer_nft" : ["token_id" : toSendNFT.tokens[0].tokenId, "recipient" : toAddress]]
+//        let msgBase64 = try! msg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+//        return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+//            $0.sender = (fromChain as! CosmosClass).bechAddress
+//            $0.contract = toSendNFT.info["contractAddress"].stringValue
+//            $0.msg = Data(base64Encoded: msgBase64)!
+//        }
+//    }
 }
 
-
+/*
 extension NftTransfer: BaseSheetDelegate, SendAddressDelegate, MemoDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
@@ -401,3 +401,4 @@ extension NftTransfer {
         return callOptions
     }
 }
+*/

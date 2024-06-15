@@ -36,7 +36,7 @@ class CosmosVote: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -59,147 +59,147 @@ class CosmosVote: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        feeInfos = selectedChain.getFeeInfos()
-        feeSegments.removeAllSegments()
-        for i in 0..<feeInfos.count {
-            feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
-        }
-        selectedFeeInfo = selectedChain.getFeeBasePosition()
-        feeSegments.selectedSegmentIndex = selectedFeeInfo
-        txFee = selectedChain.getInitPayableFee()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(UINib(nibName: "VoteCell", bundle: nil), forCellReuseIdentifier: "VoteCell")
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.sectionHeaderTopPadding = 0.0
-        
-        feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
-        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
-        
-        onUpdateFeeView()
+//        feeInfos = selectedChain.getFeeInfos()
+//        feeSegments.removeAllSegments()
+//        for i in 0..<feeInfos.count {
+//            feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
+//        }
+//        selectedFeeInfo = selectedChain.getFeeBasePosition()
+//        feeSegments.selectedSegmentIndex = selectedFeeInfo
+//        txFee = selectedChain.getInitPayableFee()
+//        
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.separatorStyle = .none
+//        tableView.register(UINib(nibName: "VoteCell", bundle: nil), forCellReuseIdentifier: "VoteCell")
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.sectionHeaderTopPadding = 0.0
+//        
+//        feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
+//        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
+//        
+//        onUpdateFeeView()
     }
     
-    override func setLocalizedString() {
-        memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
-        voteBtn.setTitle(NSLocalizedString("str_vote", comment: ""), for: .normal)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tableView.reloadData()
-    }
-    
-    @objc func onClickMemo() {
-        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
-        memoSheet.existedMemo = txMemo
-        memoSheet.memoDelegate = self
-        onStartSheet(memoSheet, 260, 0.6)
-    }
-    
-    func onUpdateMemoView(_ memo: String) {
-        txMemo = memo
-        if (txMemo.isEmpty) {
-            memoLabel.isHidden = true
-            memoHintLabel.isHidden = false
-        } else {
-            memoLabel.text = txMemo
-            memoLabel.isHidden = false
-            memoHintLabel.isHidden = true
-        }
-        onSimul()
-    }
-    
-    @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
-        selectedFeeInfo = sender.selectedSegmentIndex
-        txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, txFee.amount[0].denom)
-        onUpdateFeeView()
-        onSimul()
-    }
-    
-    @objc func onSelectFeeCoin() {
-        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.targetChain = selectedChain
-        baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
-        baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240, 0.6)
-    }
-    
-    func onUpdateFeeView() {
-        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
-            feeSelectLabel.text = msAsset.symbol
-            WDP.dpCoin(msAsset, txFee.amount[0], feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-            let amount = NSDecimalNumber(string: txFee.amount[0].amount)
-            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
-            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
-        }
-    }
-    
-    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
-        if let toGas = simul?.gasInfo.gasUsed {
-            txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
-            if let gasRate = feeInfos[selectedFeeInfo].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
-                let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
-                let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
-                txFee.amount[0].amount = feeCoinAmount!.stringValue
-            }
-        }
-        onUpdateFeeView()
-        view.isUserInteractionEnabled = true
-        loadingView.isHidden = true
-        voteBtn.isEnabled = true
-    }
-    
-    @IBAction func onClickVote(_ sender: BaseButton) {
-        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
-        self.present(pinVC, animated: true)
-    }
-    
-    func onSimul() {
-        if (toVoteProposals.filter { $0.toVoteOption == nil }.count > 0) { return }
-        view.isUserInteractionEnabled = false
-        voteBtn.isEnabled = false
-        loadingView.isHidden = false
-        
-        toVote.removeAll()
-        toVoteProposals.forEach { proposal in
-            let voteMsg = Cosmos_Gov_V1beta1_MsgVote.with {
-                $0.voter = selectedChain.bechAddress
-                $0.proposalID = proposal.id!
-                $0.option = proposal.toVoteOption!
-            }
-            toVote.append(voteMsg)
-        }
-        if (selectedChain.isGasSimulable() == false) {
-            return onUpdateWithSimul(nil)
-        }
-        
-        Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
-                do {
-                    let simul = try await simulateTx(channel, auth!)
-                    DispatchQueue.main.async {
-                        self.onUpdateWithSimul(simul)
-                    }
-                    
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
-                }
-            }
-        }
-    }
+//    override func setLocalizedString() {
+//        memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
+//        voteBtn.setTitle(NSLocalizedString("str_vote", comment: ""), for: .normal)
+//    }
+//    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        tableView.reloadData()
+//    }
+//    
+//    @objc func onClickMemo() {
+//        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
+//        memoSheet.existedMemo = txMemo
+//        memoSheet.memoDelegate = self
+//        onStartSheet(memoSheet, 260, 0.6)
+//    }
+//    
+//    func onUpdateMemoView(_ memo: String) {
+//        txMemo = memo
+//        if (txMemo.isEmpty) {
+//            memoLabel.isHidden = true
+//            memoHintLabel.isHidden = false
+//        } else {
+//            memoLabel.text = txMemo
+//            memoLabel.isHidden = false
+//            memoHintLabel.isHidden = true
+//        }
+//        onSimul()
+//    }
+//    
+//    @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
+//        selectedFeeInfo = sender.selectedSegmentIndex
+//        txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, txFee.amount[0].denom)
+//        onUpdateFeeView()
+//        onSimul()
+//    }
+//    
+//    @objc func onSelectFeeCoin() {
+//        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+//        baseSheet.targetChain = selectedChain
+//        baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
+//        baseSheet.sheetDelegate = self
+//        baseSheet.sheetType = .SelectFeeDenom
+//        onStartSheet(baseSheet, 240, 0.6)
+//    }
+//    
+//    func onUpdateFeeView() {
+//        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
+//            feeSelectLabel.text = msAsset.symbol
+//            WDP.dpCoin(msAsset, txFee.amount[0], feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+//            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+//            let amount = NSDecimalNumber(string: txFee.amount[0].amount)
+//            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+//            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
+//        }
+//    }
+//    
+//    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
+//        if let toGas = simul?.gasInfo.gasUsed {
+//            txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
+//            if let gasRate = feeInfos[selectedFeeInfo].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
+//                let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
+//                let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
+//                txFee.amount[0].amount = feeCoinAmount!.stringValue
+//            }
+//        }
+//        onUpdateFeeView()
+//        view.isUserInteractionEnabled = true
+//        loadingView.isHidden = true
+//        voteBtn.isEnabled = true
+//    }
+//    
+//    @IBAction func onClickVote(_ sender: BaseButton) {
+//        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+//        self.present(pinVC, animated: true)
+//    }
+//    
+//    func onSimul() {
+//        if (toVoteProposals.filter { $0.toVoteOption == nil }.count > 0) { return }
+//        view.isUserInteractionEnabled = false
+//        voteBtn.isEnabled = false
+//        loadingView.isHidden = false
+//        
+//        toVote.removeAll()
+//        toVoteProposals.forEach { proposal in
+//            let voteMsg = Cosmos_Gov_V1beta1_MsgVote.with {
+//                $0.voter = selectedChain.bechAddress
+//                $0.proposalID = proposal.id!
+//                $0.option = proposal.toVoteOption!
+//            }
+//            toVote.append(voteMsg)
+//        }
+//        if (selectedChain.isGasSimulable() == false) {
+//            return onUpdateWithSimul(nil)
+//        }
+//        
+//        Task {
+//            let channel = getConnection()
+//            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+//                do {
+//                    let simul = try await simulateTx(channel, auth!)
+//                    DispatchQueue.main.async {
+//                        self.onUpdateWithSimul(simul)
+//                    }
+//                    
+//                } catch {
+//                    DispatchQueue.main.async {
+//                        self.view.isUserInteractionEnabled = true
+//                        self.loadingView.isHidden = true
+//                        self.onShowToast("Error : " + "\n" + "\(error)")
+//                        return
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 }
-
+/*
 extension CosmosVote: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -306,3 +306,4 @@ extension CosmosVote {
         return callOptions
     }
 }
+*/

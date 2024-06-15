@@ -10,7 +10,7 @@ import UIKit
 
 class EvmHistoryVC: BaseVC {
     
-    var selectedChain: EvmClass!
+    var selectedChain: BaseChain!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,9 +19,10 @@ class EvmHistoryVC: BaseVC {
         
     }
     
+    //YONG4
     @IBAction func onClickExplorer(_ sender: UIButton) {
-        guard let url = selectedChain.getExplorerAccount() else { return }
-        self.onShowSafariWeb(url)
+//        guard let url = selectedChain.getExplorerAccount() else { return }
+//        self.onShowSafariWeb(url)
     }
     
 }

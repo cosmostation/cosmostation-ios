@@ -47,18 +47,18 @@ class PushUtils {
     }
     
     func sync() {
-        guard let account = BaseData.instance.baseAccount else { return }
-        guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
-        if (account.getDisplayCosmosChains().count > 0) {
-            let addresses = account.getDisplayCosmosChains().map { chain in
-                ["address": chain.bechAddress, "chain": chain.apiName]
-            }
-            let parameters: Parameters = ["fcm_token": token, "accounts": addresses]
-            AF.request(WALLET_API_SYNC_PUSH_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
-                if let error = response.error {
-                    print("push address sync error : ", error)
-                }
-            }
-        }
+//        guard let account = BaseData.instance.baseAccount else { return }
+//        guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
+//        if (account.getDisplayCosmosChains().count > 0) {
+//            let addresses = account.getDisplayCosmosChains().map { chain in
+//                ["address": chain.bechAddress, "chain": chain.apiName]
+//            }
+//            let parameters: Parameters = ["fcm_token": token, "accounts": addresses]
+//            AF.request(WALLET_API_SYNC_PUSH_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
+//                if let error = response.error {
+//                    print("push address sync error : ", error)
+//                }
+//            }
+//        }
     }
 }

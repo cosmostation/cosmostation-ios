@@ -9,7 +9,8 @@
 import UIKit
 import Lottie
 
-class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
+//class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
+class WalletDeriveVC: BaseVC {
     
     @IBOutlet weak var hdPathTitle: UILabel!
     @IBOutlet weak var hdPathLayer: UIView!
@@ -24,11 +25,14 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
     var toAddAccount: BaseAccount!
     var hdPath = 0
     
-    var allEvmChains = [EvmClass]()
-    var selectedEvmTags = [String]()
+//    var allEvmChains = [EvmClass]()
+//    var selectedEvmTags = [String]()
+//    
+//    var allCosmosChains = [CosmosClass]()
+//    var selectedCosmosTags = [String]()
     
-    var allCosmosChains = [CosmosClass]()
-    var selectedCosmosTags = [String]()
+    var allChains = [BaseChain]()
+    var selectedChainTags = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,171 +44,171 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(UINib(nibName: "DeriveCell", bundle: nil), forCellReuseIdentifier: "DeriveCell")
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.sectionHeaderTopPadding = 0.0
-        
-        //add only cosmos for default
-        selectedCosmosTags.append("cosmos118")
-        
-        if (mnemonic != nil) {
-            Task {
-                self.seed = KeyFac.getSeedFromWords(self.mnemonic!)
-                DispatchQueue.main.async(execute: {
-                    self.toAddAccount = BaseAccount("", .withMnemonic, String(self.hdPath))
-                    self.toAddAccount.fetchForPreCreate(self.seed!, nil)
-                    self.allEvmChains = self.toAddAccount.allEvmClassChains
-                    self.allCosmosChains = self.toAddAccount.allCosmosClassChains
-                    self.onUpdateview()
-                });
-            }
-            
-            let hdPathTap = UITapGestureRecognizer(target: self, action: #selector(onHdPathSelect))
-            hdPathTap.cancelsTouchesInView = false
-            hdPathLayer.addGestureRecognizer(hdPathTap)
-            
-        } else if (privateKeyString != nil) {
-            hdPathTitle.isHidden = true
-            hdPathLayer.isHidden = true
-            
-            toAddAccount = BaseAccount("", .onlyPrivateKey, "-1")
-            toAddAccount.fetchForPreCreate(nil, privateKeyString)
-            allEvmChains = toAddAccount.allEvmClassChains
-            allCosmosChains = toAddAccount.allCosmosClassChains
-            onUpdateview()
-            
-        } else {
-            hdPathTitle.isHidden = true
-            hdPathLayer.isHidden = true
-            
-        }
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.separatorStyle = .none
+//        tableView.register(UINib(nibName: "DeriveCell", bundle: nil), forCellReuseIdentifier: "DeriveCell")
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.sectionHeaderTopPadding = 0.0
+//        
+//        //add only cosmos for default
+//        selectedChainTags.append("cosmos118")
+//        
+//        if (mnemonic != nil) {
+//            Task {
+//                self.seed = KeyFac.getSeedFromWords(self.mnemonic!)
+//                DispatchQueue.main.async(execute: {
+//                    self.toAddAccount = BaseAccount("", .withMnemonic, String(self.hdPath))
+//                    self.toAddAccount.fetchForPreCreate(self.seed!, nil)
+//                    self.allEvmChains = self.toAddAccount.allEvmClassChains
+//                    self.allCosmosChains = self.toAddAccount.allCosmosClassChains
+//                    self.onUpdateview()
+//                });
+//            }
+//            
+//            let hdPathTap = UITapGestureRecognizer(target: self, action: #selector(onHdPathSelect))
+//            hdPathTap.cancelsTouchesInView = false
+//            hdPathLayer.addGestureRecognizer(hdPathTap)
+//            
+//        } else if (privateKeyString != nil) {
+//            hdPathTitle.isHidden = true
+//            hdPathLayer.isHidden = true
+//            
+//            toAddAccount = BaseAccount("", .onlyPrivateKey, "-1")
+//            toAddAccount.fetchForPreCreate(nil, privateKeyString)
+//            allEvmChains = toAddAccount.allEvmClassChains
+//            allCosmosChains = toAddAccount.allCosmosClassChains
+//            onUpdateview()
+//            
+//        } else {
+//            hdPathTitle.isHidden = true
+//            hdPathLayer.isHidden = true
+//            
+//        }
     }
     
-    override func setLocalizedString() {
-        navigationItem.title = NSLocalizedString("title_select_wallet", comment: "")
-        confirmBtn.setTitle(NSLocalizedString("str_restore_wallets", comment: ""), for: .normal)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchPreCreate"), object: nil)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchPreCreate"), object: nil)
-    }
-    
-    func onUpdateview() {
-        if (allCosmosChains.count > 0) {
-            tableView.reloadData()
-            tableView.isHidden = false
-            loadingView.isHidden = true
-            confirmBtn.isEnabled = true
-            
-            hdPathLabel.text = String(hdPath)
-        }
-    }
-    
-    @objc func onFetchDone(_ notification: NSNotification) {
-        let tag = notification.object as! String
-        for i in 0..<allEvmChains.count {
-            if (allEvmChains[i].tag == tag) {
-                DispatchQueue.main.async {
-                    self.tableView.beginUpdates()
-                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
-                    self.tableView.endUpdates()
-                }
-            }
-        }
-        for i in 0..<allCosmosChains.count {
-            if (allCosmosChains[i].tag == tag) {
-                DispatchQueue.main.async {
-                    self.tableView.beginUpdates()
-                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 1)], with: .none)
-                    self.tableView.endUpdates()
-                }
-            }
-        }
-    }
-    
-    @objc func onHdPathSelect() {
-        let hdPathSheet = HdPathSheet(nibName: "HdPathSheet", bundle: nil)
-        hdPathSheet.hdPath = hdPath
-        hdPathSheet.hdPathDelegate = self
-        guard let sheet = hdPathSheet.presentationController as? UISheetPresentationController else {
-            return
-        }
-        sheet.largestUndimmedDetentIdentifier = .large
-        sheet.prefersGrabberVisible = true
-        present(hdPathSheet, animated: true)
-    }
-
-    
-    func onSelectedHDPath(_ path: Int) {
-        if (hdPath != path) {
-            hdPath = path
-            selectedEvmTags.removeAll()
-            selectedCosmosTags.removeAll()
-            selectedCosmosTags.append("cosmos118")
-            
-            toAddAccount = BaseAccount("", .withMnemonic, String(self.hdPath))
-            toAddAccount.allEvmClassChains.removeAll()
-            toAddAccount.allCosmosClassChains.removeAll()
-            toAddAccount.fetchForPreCreate(seed!, nil)
-            allEvmChains = toAddAccount.allEvmClassChains
-            allCosmosChains = toAddAccount.allCosmosClassChains
-            onUpdateview()
-        }
-    }
-    
-    @IBAction func onClickCreate(_ sender: UIButton) {
-        let createNameSheet = CreateNameSheet(nibName: "CreateNameSheet", bundle: nil)
-        createNameSheet.mnemonic = mnemonic
-        createNameSheet.privateKeyString = privateKeyString
-        createNameSheet.createNameDelegate = self
-        onStartSheet(createNameSheet, 240, 0.6)
-    }
-    
-    func onNameConfirmed(_ name: String, _ mnemonic: String?, _ privateKeyString: String?) {
-        loadingView.isHidden = false
-        
-        DispatchQueue.global().async {
-            let keychain = BaseData.instance.getKeyChain()
-            if (self.toAddAccount.type == .withMnemonic) {
-                let recoverAccount = BaseAccount(name, .withMnemonic, String(self.hdPath))
-                let id = BaseData.instance.insertAccount(recoverAccount)
-                let newData = mnemonic! + " : " + self.seed!.toHexString()
-                try? keychain.set(newData, key: recoverAccount.uuid.sha1())
-                BaseData.instance.setLastAccount(id)
-                BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
-                BaseData.instance.setDisplayEvmChainTags(id, self.selectedEvmTags)
-                BaseData.instance.setDisplayCosmosChainTags(id, self.selectedCosmosTags)
-                
-            } else if (self.toAddAccount.type == .onlyPrivateKey) {
-                let recoverAccount = BaseAccount(name, .onlyPrivateKey, "0")
-                let id = BaseData.instance.insertAccount(recoverAccount)
-                try? keychain.set(privateKeyString!, key: recoverAccount.uuid.sha1())
-                BaseData.instance.setLastAccount(id)
-                BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
-                BaseData.instance.setDisplayEvmChainTags(id, self.selectedEvmTags)
-                BaseData.instance.setDisplayCosmosChainTags(id, self.selectedCosmosTags)
-            }
-            
-            DispatchQueue.main.async(execute: {
-                self.loadingView.isHidden = true
-                self.onStartMainTab()
-            });
-        }
-    }
+//    override func setLocalizedString() {
+//        navigationItem.title = NSLocalizedString("title_select_wallet", comment: "")
+//        confirmBtn.setTitle(NSLocalizedString("str_restore_wallets", comment: ""), for: .normal)
+//    }
+//    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchPreCreate"), object: nil)
+//    }
+//
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchPreCreate"), object: nil)
+//    }
+//    
+//    func onUpdateview() {
+//        if (allCosmosChains.count > 0) {
+//            tableView.reloadData()
+//            tableView.isHidden = false
+//            loadingView.isHidden = true
+//            confirmBtn.isEnabled = true
+//            
+//            hdPathLabel.text = String(hdPath)
+//        }
+//    }
+//    
+//    @objc func onFetchDone(_ notification: NSNotification) {
+//        let tag = notification.object as! String
+//        for i in 0..<allEvmChains.count {
+//            if (allEvmChains[i].tag == tag) {
+//                DispatchQueue.main.async {
+//                    self.tableView.beginUpdates()
+//                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .none)
+//                    self.tableView.endUpdates()
+//                }
+//            }
+//        }
+//        for i in 0..<allCosmosChains.count {
+//            if (allCosmosChains[i].tag == tag) {
+//                DispatchQueue.main.async {
+//                    self.tableView.beginUpdates()
+//                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 1)], with: .none)
+//                    self.tableView.endUpdates()
+//                }
+//            }
+//        }
+//    }
+//    
+//    @objc func onHdPathSelect() {
+//        let hdPathSheet = HdPathSheet(nibName: "HdPathSheet", bundle: nil)
+//        hdPathSheet.hdPath = hdPath
+//        hdPathSheet.hdPathDelegate = self
+//        guard let sheet = hdPathSheet.presentationController as? UISheetPresentationController else {
+//            return
+//        }
+//        sheet.largestUndimmedDetentIdentifier = .large
+//        sheet.prefersGrabberVisible = true
+//        present(hdPathSheet, animated: true)
+//    }
+//
+//    
+//    func onSelectedHDPath(_ path: Int) {
+//        if (hdPath != path) {
+//            hdPath = path
+//            selectedEvmTags.removeAll()
+//            selectedCosmosTags.removeAll()
+//            selectedCosmosTags.append("cosmos118")
+//            
+//            toAddAccount = BaseAccount("", .withMnemonic, String(self.hdPath))
+//            toAddAccount.allEvmClassChains.removeAll()
+//            toAddAccount.allCosmosClassChains.removeAll()
+//            toAddAccount.fetchForPreCreate(seed!, nil)
+//            allEvmChains = toAddAccount.allEvmClassChains
+//            allCosmosChains = toAddAccount.allCosmosClassChains
+//            onUpdateview()
+//        }
+//    }
+//    
+//    @IBAction func onClickCreate(_ sender: UIButton) {
+//        let createNameSheet = CreateNameSheet(nibName: "CreateNameSheet", bundle: nil)
+//        createNameSheet.mnemonic = mnemonic
+//        createNameSheet.privateKeyString = privateKeyString
+//        createNameSheet.createNameDelegate = self
+//        onStartSheet(createNameSheet, 240, 0.6)
+//    }
+//    
+//    func onNameConfirmed(_ name: String, _ mnemonic: String?, _ privateKeyString: String?) {
+//        loadingView.isHidden = false
+//        
+//        DispatchQueue.global().async {
+//            let keychain = BaseData.instance.getKeyChain()
+//            if (self.toAddAccount.type == .withMnemonic) {
+//                let recoverAccount = BaseAccount(name, .withMnemonic, String(self.hdPath))
+//                let id = BaseData.instance.insertAccount(recoverAccount)
+//                let newData = mnemonic! + " : " + self.seed!.toHexString()
+//                try? keychain.set(newData, key: recoverAccount.uuid.sha1())
+//                BaseData.instance.setLastAccount(id)
+//                BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
+//                BaseData.instance.setDisplayEvmChainTags(id, self.selectedEvmTags)
+//                BaseData.instance.setDisplayCosmosChainTags(id, self.selectedCosmosTags)
+//                
+//            } else if (self.toAddAccount.type == .onlyPrivateKey) {
+//                let recoverAccount = BaseAccount(name, .onlyPrivateKey, "0")
+//                let id = BaseData.instance.insertAccount(recoverAccount)
+//                try? keychain.set(privateKeyString!, key: recoverAccount.uuid.sha1())
+//                BaseData.instance.setLastAccount(id)
+//                BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
+//                BaseData.instance.setDisplayEvmChainTags(id, self.selectedEvmTags)
+//                BaseData.instance.setDisplayCosmosChainTags(id, self.selectedCosmosTags)
+//            }
+//            
+//            DispatchQueue.main.async(execute: {
+//                self.loadingView.isHidden = true
+//                self.onStartMainTab()
+//            });
+//        }
+//    }
     
 }
 
 
-
+/*
 extension WalletDeriveVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -277,3 +281,4 @@ extension WalletDeriveVC: UITableViewDelegate, UITableViewDataSource, UISearchBa
     }
     
 }
+*/

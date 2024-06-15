@@ -14,7 +14,8 @@ import GRPC
 import NIO
 import SwiftProtobuf
 
-class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrScanDelegate, SelectAddressListDelegate, BaseSheetDelegate {
+class TxSendAddressSheet: BaseVC {
+//class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrScanDelegate, SelectAddressListDelegate, BaseSheetDelegate {
     
     @IBOutlet weak var addressTextField: MDCOutlinedTextField!
     @IBOutlet weak var confirmBtn: BaseButton!
@@ -42,165 +43,165 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        addressTextField.setup()
-        if let existedAddress = existedAddress {
-            addressTextField.text = existedAddress
-        }
-        addressTextField.delegate = self
-        
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+//        addressTextField.setup()
+//        if let existedAddress = existedAddress {
+//            addressTextField.text = existedAddress
+//        }
+//        addressTextField.delegate = self
+//        
+//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
     
-    override func setLocalizedString() {
-        addressTextField.label.text = NSLocalizedString("msg_address_nameservice", comment: "")
-        confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    @IBAction func onClickAddressBook(_ sender: UIButton) {
-        let addressListSheet = SelectAddressListSheet(nibName: "SelectAddressListSheet", bundle: nil)
-        addressListSheet.fromChain = fromChain
-        addressListSheet.toChain = toChain
-        addressListSheet.sendType = sendType
-        addressListSheet.senderBechAddress = senderBechAddress
-        addressListSheet.senderEvmAddress = senderEvmAddress
-        addressListSheet.addressListSheetDelegate = self
-        onStartSheet(addressListSheet, 320, 0.6)
-    }
-    
-    @IBAction func onClickScan(_ sender: UIButton) {
-        let qrScanVC = QrScanVC(nibName: "QrScanVC", bundle: nil)
-        qrScanVC.scanDelegate = self
-        present(qrScanVC, animated: true)
-    }
-    
-    func onScanned(_ result: String) {
-        let address = result.components(separatedBy: "(MEMO)")[0]
-        addressTextField.text = address.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-    
-    @IBAction func onClickConfirm(_ sender: BaseButton?) {
-        let userInput = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        if (userInput?.isEmpty == true || userInput?.count ?? 0 < 5) {
-            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-            return
-        }
-        if (userInput?.lowercased() == senderBechAddress?.lowercased() || userInput?.lowercased()  == senderEvmAddress?.lowercased() ) {
-            self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
-            return
-        }
-        
-        if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20) {
-            //only support EVM address style
-            if (!WUtils.isValidEvmAddress(userInput)) {
-                self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-                return;
-            }
-            self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
-            self.dismiss(animated: true)
-            
-        } else if (sendType == .Only_Cosmos_Coin || sendType == .Only_Cosmos_CW20) {
-            //only support cosmos address style
-            if (WUtils.isValidBechAddress((toChain as! CosmosClass), userInput)) {
-                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
-                self.dismiss(animated: true)
-                return
-            }
-            onCheckNameServices(userInput!)
-            
-        } else if (sendType == .CosmosEVM_Coin) {
-            //support both style
-            if (WUtils.isValidEvmAddress(userInput)) {
-                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
-                self.dismiss(animated: true)
-                return
-            }
-            if (WUtils.isValidBechAddress((toChain as! CosmosClass), userInput)) {
-                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
-                self.dismiss(animated: true)
-                return
-            }
-            onCheckNameServices(userInput!)
-        }
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
-    
-    func onCheckNameServices(_ userInput: String)  {
-        view.isUserInteractionEnabled = false
-        loadingView.isHidden = false
-        nameservices.removeAll()
-        let prefix = (toChain as! CosmosClass).bechAccountPrefix!
-        
-        Task {
-            if let icns = try await checkOsmoname(userInput, prefix) {
-                if let result = try? JSONDecoder().decode(JSON.self, from: icns.data) {
-                    if (result["bech32_address"].stringValue.starts(with: prefix + "1")) {
-                        nameservices.append(NameService.init("osmosis", userInput, result["bech32_address"].stringValue))
-                    }
-                }
-            }
-            
-            if let stargaze = try await checkStargazename(userInput) {
-                if let result = try? JSONDecoder().decode(JSON.self, from: stargaze.data) {
-                    if (result.stringValue.starts(with: prefix + "1")) {
-                        nameservices.append(NameService.init("stargaze", userInput, result.stringValue))
-                    }
-                }
-            }
-            
-            if let archway = try await checkArchwayname(userInput) {
-                if let result = try? JSONDecoder().decode(JSON.self, from: archway.data) {
-                    if (result["address"].stringValue.starts(with: prefix + "1")) {
-                        nameservices.append(NameService.init("archway", userInput, result["address"].stringValue))
-                    }
-                }
-            }
-            
-            DispatchQueue.main.async {
-                self.view.isUserInteractionEnabled = true
-                self.loadingView.isHidden = true
-                if (self.nameservices.count == 0) {
-                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-                    
-                } else {
-                    let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-                    baseSheet.nameservices = self.nameservices
-                    baseSheet.sheetDelegate = self
-                    baseSheet.sheetType = .SelectCosmosNameServiceAddress
-                    self.onStartSheet(baseSheet, 320, 0.6)
-                }
-            }
-        }
-    }
-    
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if (sheetType == .SelectCosmosNameServiceAddress) {
-            if let index = result["index"] as? Int {
-                let nameservice = nameservices[index]
-                addressTextField.text = nameservice.address
-            }
-        }
-    }
-    
-    func onAddressSelected(_ result: Dictionary<String, Any>) {
-        if let address = result["address"] as? String {
-            let memo = result["memo"] as? String
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-                self.sendAddressDelegate?.onInputedAddress(address, memo)
-                self.dismiss(animated: true)
-            });
-        }
-    }
+//    override func setLocalizedString() {
+//        addressTextField.label.text = NSLocalizedString("msg_address_nameservice", comment: "")
+//        confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
+//    }
+//    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
+//    
+//    @IBAction func onClickAddressBook(_ sender: UIButton) {
+//        let addressListSheet = SelectAddressListSheet(nibName: "SelectAddressListSheet", bundle: nil)
+//        addressListSheet.fromChain = fromChain
+//        addressListSheet.toChain = toChain
+//        addressListSheet.sendType = sendType
+//        addressListSheet.senderBechAddress = senderBechAddress
+//        addressListSheet.senderEvmAddress = senderEvmAddress
+//        addressListSheet.addressListSheetDelegate = self
+//        onStartSheet(addressListSheet, 320, 0.6)
+//    }
+//    
+//    @IBAction func onClickScan(_ sender: UIButton) {
+//        let qrScanVC = QrScanVC(nibName: "QrScanVC", bundle: nil)
+//        qrScanVC.scanDelegate = self
+//        present(qrScanVC, animated: true)
+//    }
+//    
+//    func onScanned(_ result: String) {
+//        let address = result.components(separatedBy: "(MEMO)")[0]
+//        addressTextField.text = address.trimmingCharacters(in: .whitespacesAndNewlines)
+//    }
+//    
+//    @IBAction func onClickConfirm(_ sender: BaseButton?) {
+//        let userInput = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+//        if (userInput?.isEmpty == true || userInput?.count ?? 0 < 5) {
+//            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+//            return
+//        }
+//        if (userInput?.lowercased() == senderBechAddress?.lowercased() || userInput?.lowercased()  == senderEvmAddress?.lowercased() ) {
+//            self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
+//            return
+//        }
+//        
+//        if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20) {
+//            //only support EVM address style
+//            if (!WUtils.isValidEvmAddress(userInput)) {
+//                self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+//                return;
+//            }
+//            self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+//            self.dismiss(animated: true)
+//            
+//        } else if (sendType == .Only_Cosmos_Coin || sendType == .Only_Cosmos_CW20) {
+//            //only support cosmos address style
+//            if (WUtils.isValidBechAddress((toChain as! CosmosClass), userInput)) {
+//                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+//                self.dismiss(animated: true)
+//                return
+//            }
+//            onCheckNameServices(userInput!)
+//            
+//        } else if (sendType == .CosmosEVM_Coin) {
+//            //support both style
+//            if (WUtils.isValidEvmAddress(userInput)) {
+//                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+//                self.dismiss(animated: true)
+//                return
+//            }
+//            if (WUtils.isValidBechAddress((toChain as! CosmosClass), userInput)) {
+//                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+//                self.dismiss(animated: true)
+//                return
+//            }
+//            onCheckNameServices(userInput!)
+//        }
+//    }
+//    
+//    @objc func dismissKeyboard() {
+//        view.endEditing(true)
+//    }
+//    
+//    
+//    func onCheckNameServices(_ userInput: String)  {
+//        view.isUserInteractionEnabled = false
+//        loadingView.isHidden = false
+//        nameservices.removeAll()
+//        let prefix = (toChain as! CosmosClass).bechAccountPrefix!
+//        
+//        Task {
+//            if let icns = try await checkOsmoname(userInput, prefix) {
+//                if let result = try? JSONDecoder().decode(JSON.self, from: icns.data) {
+//                    if (result["bech32_address"].stringValue.starts(with: prefix + "1")) {
+//                        nameservices.append(NameService.init("osmosis", userInput, result["bech32_address"].stringValue))
+//                    }
+//                }
+//            }
+//            
+//            if let stargaze = try await checkStargazename(userInput) {
+//                if let result = try? JSONDecoder().decode(JSON.self, from: stargaze.data) {
+//                    if (result.stringValue.starts(with: prefix + "1")) {
+//                        nameservices.append(NameService.init("stargaze", userInput, result.stringValue))
+//                    }
+//                }
+//            }
+//            
+//            if let archway = try await checkArchwayname(userInput) {
+//                if let result = try? JSONDecoder().decode(JSON.self, from: archway.data) {
+//                    if (result["address"].stringValue.starts(with: prefix + "1")) {
+//                        nameservices.append(NameService.init("archway", userInput, result["address"].stringValue))
+//                    }
+//                }
+//            }
+//            
+//            DispatchQueue.main.async {
+//                self.view.isUserInteractionEnabled = true
+//                self.loadingView.isHidden = true
+//                if (self.nameservices.count == 0) {
+//                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+//                    
+//                } else {
+//                    let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+//                    baseSheet.nameservices = self.nameservices
+//                    baseSheet.sheetDelegate = self
+//                    baseSheet.sheetType = .SelectCosmosNameServiceAddress
+//                    self.onStartSheet(baseSheet, 320, 0.6)
+//                }
+//            }
+//        }
+//    }
+//    
+//    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
+//        if (sheetType == .SelectCosmosNameServiceAddress) {
+//            if let index = result["index"] as? Int {
+//                let nameservice = nameservices[index]
+//                addressTextField.text = nameservice.address
+//            }
+//        }
+//    }
+//    
+//    func onAddressSelected(_ result: Dictionary<String, Any>) {
+//        if let address = result["address"] as? String {
+//            let memo = result["memo"] as? String
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+//                self.sendAddressDelegate?.onInputedAddress(address, memo)
+//                self.dismiss(animated: true)
+//            });
+//        }
+//    }
 }
-
+/*
 extension TxSendAddressSheet {
     
     func checkOsmoname(_ inputName: String, _ prefix: String) async throws -> Cosmwasm_Wasm_V1_QuerySmartContractStateResponse? {
@@ -250,9 +251,9 @@ extension TxSendAddressSheet {
     }
     
     
-    func getConnection(_ chain: CosmosClass) -> ClientConnection {
+    func getConnection(_ chain: BaseChain) -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpc().0, port: chain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.grpcFetcher!.getGrpc().0, port: chain.grpcFetcher!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {
@@ -261,6 +262,7 @@ extension TxSendAddressSheet {
         return callOptions
     }
 }
+*/
 
 protocol SendAddressDelegate {
     func onInputedAddress(_ address: String, _ memo: String?)

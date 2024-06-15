@@ -21,7 +21,7 @@ class TxAmountLegacySheet: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var confirmBtn: BaseButton!
     
     var sheetDelegate: LegacyAmountSheetDelegate?
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var tokenInfo: JSON!
     var availableAmount: NSDecimalNumber!
     var existedAmount: NSDecimalNumber?

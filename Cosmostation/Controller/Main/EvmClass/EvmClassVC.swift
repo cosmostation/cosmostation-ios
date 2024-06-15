@@ -30,7 +30,7 @@ class EvmClassVC: BaseVC {
     var addtokenBarBtn: UIBarButtonItem!
     var explorerBarBtn: UIBarButtonItem!
     
-    var selectedChain: EvmClass!
+    var selectedChain: BaseChain!
     var totalValue = NSDecimalNumber.zero {
         didSet {
             if (BaseData.instance.getHideValue()) {
@@ -148,7 +148,7 @@ class EvmClassVC: BaseVC {
 //        if (BaseData.instance.showEvenReview()) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(receiveTabBar)
         tabbar.items.append(historyTabBar)
-        if (BaseData.instance.showEvenReview() && selectedChain.isEcosystem()) { tabbar.items.append(ecosystemTabBar) }
+//        if (BaseData.instance.showEvenReview() && selectedChain.isEcosystem()) { tabbar.items.append(ecosystemTabBar) }
         if (!selectedChain.getChainListParam().isEmpty) {
             tabbar.items.append(aboutTabBar)
         }
@@ -196,9 +196,9 @@ class EvmClassVC: BaseVC {
     }
     
     @objc func onClickAddToken() {
-        if (evmAssetVC != nil) {
-            evmAssetVC?.onShowTokenListSheet()
-        }
+//        if (evmAssetVC != nil) {
+//            evmAssetVC?.onShowTokenListSheet()
+//        }
     }
 }
 

@@ -9,7 +9,8 @@
 import UIKit
 import Lottie
 
-class ChainListVC: BaseVC, EndpointDelegate {
+class ChainListVC: BaseVC {
+//class ChainListVC: BaseVC, EndpointDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchEmptyLayer: UIView!
@@ -18,10 +19,13 @@ class ChainListVC: BaseVC, EndpointDelegate {
     
     var searchBar: UISearchBar?
     
-    var allEvmChains = [EvmClass]()
-    var searchEvmChains = [EvmClass]()
-    var allCosmosChains = [CosmosClass]()
-    var searchCosmosChains = [CosmosClass]()
+//    var allEvmChains = [EvmClass]()
+//    var searchEvmChains = [EvmClass]()
+//    var allCosmosChains = [CosmosClass]()
+//    var searchCosmosChains = [CosmosClass]()
+    
+    var allChains = [BaseChain]()
+    var searchChains = [BaseChain]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,86 +37,86 @@ class ChainListVC: BaseVC, EndpointDelegate {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(UINib(nibName: "ManageChainCell", bundle: nil), forCellReuseIdentifier: "ManageChainCell")
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.sectionHeaderTopPadding = 0.0
-        
-        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
-        searchBar?.searchTextField.textColor = .color01
-        searchBar?.tintColor = UIColor.white
-        searchBar?.barTintColor = UIColor.clear
-        searchBar?.searchTextField.font = .fontSize14Bold
-        searchBar?.backgroundImage = UIImage()
-        searchBar?.delegate = self
-        tableView.tableHeaderView = searchBar
-        
-        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        dismissTap.cancelsTouchesInView = false
-        view.addGestureRecognizer(dismissTap)
-        
-        onUpdateView()
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.separatorStyle = .none
+//        tableView.register(UINib(nibName: "ManageChainCell", bundle: nil), forCellReuseIdentifier: "ManageChainCell")
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.sectionHeaderTopPadding = 0.0
+//        
+//        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
+//        searchBar?.searchTextField.textColor = .color01
+//        searchBar?.tintColor = UIColor.white
+//        searchBar?.barTintColor = UIColor.clear
+//        searchBar?.searchTextField.font = .fontSize14Bold
+//        searchBar?.backgroundImage = UIImage()
+//        searchBar?.delegate = self
+//        tableView.tableHeaderView = searchBar
+//        
+//        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+//        dismissTap.cancelsTouchesInView = false
+//        view.addGestureRecognizer(dismissTap)
+//        
+//        onUpdateView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        var contentOffset: CGPoint = tableView.contentOffset
-        contentOffset.y += (tableView.tableHeaderView?.frame)!.height
-        tableView.contentOffset = contentOffset
-        tableView.isHidden = false
-//        addChainBtn.isHidden = false
-    }
-    
-    override func setLocalizedString() {
-        navigationItem.title = NSLocalizedString("setting_chain_title", comment: "")
-        addChainBtn.setTitle(NSLocalizedString("str_add_custom_chain", comment: ""), for: .normal)
-    }
-    
-    func onUpdateView() {
-        allEvmChains.removeAll()
-        ALLEVMCLASS().forEach { chain in
-            if (!allEvmChains.contains { $0.name == chain.name }) {
-                allEvmChains.append(chain)
-            }
-        }
-        
-        allCosmosChains.removeAll()
-        ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
-            if (!allCosmosChains.contains { $0.name == chain.name } &&
-                !allEvmChains.contains { $0.name == chain.name }) {
-                allCosmosChains.append(chain)
-            }
-        }
-        searchEvmChains = allEvmChains
-        searchCosmosChains = allCosmosChains
-        tableView.reloadData()
-    }
-    
-    @objc func dismissKeyboard() {
-        searchBar?.endEditing(true)
-    }
-    
-    func onDisplayEndPointSheet(_ chain: CosmosClass) {
-        loadingView.isHidden = true
-        let endpointSheet = SelectEndpointSheet(nibName: "SelectEndpointSheet", bundle: nil)
-        endpointSheet.targetChain = chain
-        endpointSheet.endpointDelegate = self
-        onStartSheet(endpointSheet, 420, 0.8)
-    }
-    
-    func onEndpointUpdated() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-
-    @IBAction func onClickAddChain(_ sender: UIButton) {
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        var contentOffset: CGPoint = tableView.contentOffset
+//        contentOffset.y += (tableView.tableHeaderView?.frame)!.height
+//        tableView.contentOffset = contentOffset
+//        tableView.isHidden = false
+////        addChainBtn.isHidden = false
+//    }
+//    
+//    override func setLocalizedString() {
+//        navigationItem.title = NSLocalizedString("setting_chain_title", comment: "")
+//        addChainBtn.setTitle(NSLocalizedString("str_add_custom_chain", comment: ""), for: .normal)
+//    }
+//    
+//    func onUpdateView() {
+//        allEvmChains.removeAll()
+//        ALLEVMCLASS().forEach { chain in
+//            if (!allEvmChains.contains { $0.name == chain.name }) {
+//                allEvmChains.append(chain)
+//            }
+//        }
+//        
+//        allCosmosChains.removeAll()
+//        ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
+//            if (!allCosmosChains.contains { $0.name == chain.name } &&
+//                !allEvmChains.contains { $0.name == chain.name }) {
+//                allCosmosChains.append(chain)
+//            }
+//        }
+//        searchEvmChains = allEvmChains
+//        searchCosmosChains = allCosmosChains
+//        tableView.reloadData()
+//    }
+//    
+//    @objc func dismissKeyboard() {
+//        searchBar?.endEditing(true)
+//    }
+//    
+//    func onDisplayEndPointSheet(_ chain: BaseChain) {
+//        loadingView.isHidden = true
+//        let endpointSheet = SelectEndpointSheet(nibName: "SelectEndpointSheet", bundle: nil)
+//        endpointSheet.targetChain = chain
+//        endpointSheet.endpointDelegate = self
+//        onStartSheet(endpointSheet, 420, 0.8)
+//    }
+//    
+//    func onEndpointUpdated() {
+//        DispatchQueue.main.async {
+//            self.tableView.reloadData()
+//        }
+//    }
+//
+//    @IBAction func onClickAddChain(_ sender: UIButton) {
+//    }
 
 }
-
+/*
 extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -183,3 +187,4 @@ extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
         tableView.reloadData()
     }
 }
+*/

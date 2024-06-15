@@ -11,6 +11,30 @@ import web3swift
 import Alamofire
 import SwiftyJSON
 
+class ChainOktEVM: BaseChain {
+    
+    override init() {
+        super.init()
+        
+        name = "OKT"
+        tag = "okt60_Keccak"
+        logo1 = "chainOktEvm"
+        logo2 = "chainOkt2"
+        supportEvm = true
+        apiName = "okc"
+        
+        coinSymbol = "OKT"
+        coinGeckoId = "oec-token"
+        coinLogo = "tokenOkt"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        bechAccountPrefix = "ex"
+        supportStaking = false
+        evmRpcURL = "https://exchainrpc.okex.org"
+        
+        initFetcher()
+    }
+}
+/*
 class ChainOktEVM: EvmClass {
     
     //For Legacy Lcd chains
@@ -236,3 +260,4 @@ extension ChainOktEVM {
         return msPrice.multiplying(by: amount, withBehavior: handler6)
     }
 }
+*/

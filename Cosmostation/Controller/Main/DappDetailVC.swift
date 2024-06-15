@@ -42,8 +42,8 @@ class DappDetailVC: BaseVC {
     
     private var publishers = [AnyCancellable]()
     
-    var allCosmosChains = [CosmosClass]()
-    var allEvmChains = [EvmClass]()
+//    var allCosmosChains = [CosmosClass]()
+//    var allEvmChains = [EvmClass]()
     var targetChain: BaseChain!
     
     var web3: Web3?
@@ -59,39 +59,39 @@ class DappDetailVC: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
                 
-        Task {
-            if BaseData.instance.getLastAccount() != nil {
-                baseAccount = BaseData.instance.getLastAccount()
-            }
-            if BaseData.instance.mintscanChainParams == nil {
-                BaseData.instance.mintscanChainParams = try? await BaseNetWork().fetchChainParams()
-            }
-            wcV2Disconnect { result in
-                NSLog("Cosmostation DappDetailVC viewDidLoad DISCONNECT ALL \(result)")
-            }
-            
-            (allEvmChains, allCosmosChains) = await baseAccount.initKeyforCheck()
-            
-            DispatchQueue.main.async {
-//                NSLog("Cosmostation wcV2ProposalRequest viewDidLoad")
-//                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Pair \(Pair.instance.getPairings().count)")
-//                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Sign \(Sign.instance.getSessions().count)")
-                self.loadingView.isHidden = true
-                if (self.baseAccount == nil || BaseData.instance.mintscanChainParams == nil) {
-                    self.onShowToast(NSLocalizedString("error_network_msg", comment: ""))
-                    self.wcV2Disconnect { _ in
-                        self.dismiss(animated: true)
-                    }
-                    return
-                }
-                self.onInitView()
-            }
-        }
-        
-        
-        onInitWeb3 { success in
-            print("onInitWeb3 ", success)
-        }
+//        Task {
+//            if BaseData.instance.getLastAccount() != nil {
+//                baseAccount = BaseData.instance.getLastAccount()
+//            }
+//            if BaseData.instance.mintscanChainParams == nil {
+//                BaseData.instance.mintscanChainParams = try? await BaseNetWork().fetchChainParams()
+//            }
+//            wcV2Disconnect { result in
+//                NSLog("Cosmostation DappDetailVC viewDidLoad DISCONNECT ALL \(result)")
+//            }
+//            
+////            (allEvmChains, allCosmosChains) = await baseAccount.initKeyforCheck()
+//            
+//            DispatchQueue.main.async {
+////                NSLog("Cosmostation wcV2ProposalRequest viewDidLoad")
+////                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Pair \(Pair.instance.getPairings().count)")
+////                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Sign \(Sign.instance.getSessions().count)")
+//                self.loadingView.isHidden = true
+//                if (self.baseAccount == nil || BaseData.instance.mintscanChainParams == nil) {
+//                    self.onShowToast(NSLocalizedString("error_network_msg", comment: ""))
+//                    self.wcV2Disconnect { _ in
+//                        self.dismiss(animated: true)
+//                    }
+//                    return
+//                }
+//                self.onInitView()
+//            }
+//        }
+//        
+//        
+//        onInitWeb3 { success in
+//            print("onInitWeb3 ", success)
+//        }
         
         
 //        print("dapp URL ", dappUrl)
@@ -99,209 +99,211 @@ class DappDetailVC: BaseVC {
 //        dappUrl = URL(string: "https://app.kava.io/home")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.isIdleTimerDisabled = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.isIdleTimerDisabled = false
-    }
-    
-    func onInitView() {
-        accountName.text = baseAccount.name
-        onInitInjectScript()
-        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
-        
-        if (dappType == .INTERNAL_URL) {
-//            NSLog("Cosmostation DappDetailVC INTERNAL_URL1 \(dappUrl?.absoluteString)")
-            dappUrl = onStripInternalUrl(dappUrl)
-//            NSLog("Cosmostation DappDetailVC INTERNAL_URL2 \(dappUrl?.absoluteString)")
-            dappUrlLabel.text = dappUrl?.host
-            webView.load(URLRequest(url: dappUrl!))
-            
-        } else if (dappType == .DEEPLINK_WC2) {
-//            NSLog("Cosmostation DappDetailVC DEEPLINK_WC2 \(dappUrl?.absoluteString)")
-            onInitWcV2(dappUrl!)
-        }
-    }
-    
-    func onStripInternalUrl(_ url: URL?) -> URL? {
-        if (url?.absoluteString.starts(with: "cosmostation://dapp") == true) {
-            return URL(string: url!.query!.removingPercentEncoding!)
-        }
-        return url
-    }
-    
-    func onUpdateAccountName(_ online: Bool) {
-        accountName.isHidden = !online
-//        accountImg.isHidden = !online
-    }
-    
-    @IBAction func onBackClicK(_ sender: Any) {
-        if (webView.canGoBack) {
-            webView.goBack()
-        } else {
-            onCloseAll()
-        }
-    }
-    
-    @IBAction func onForwardClick(_ sender: Any) {
-        if (webView.canGoForward) {
-            webView.goForward()
-        }
-    }
-    
-    @IBAction func onClickClose(_ sender: Any) {
-        onCloseAll()
-    }
-    
-    func onCloseAll() {
-        webView.configuration.userContentController.removeAllUserScripts()
-        webView.configuration.userContentController.removeScriptMessageHandler(forName: "station")
-        webView.navigationDelegate = nil
-        webView.scrollView.delegate = nil
-        emitCloseToWeb()
-        wcV2Disconnect { result in
-            NSLog("Cosmostation onClickClose \(result)")
-            print("onCloseAll \(result)")
-            self.dismiss(animated: true)
-        }
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let _ = object as? WKWebView {
-            if keyPath == #keyPath(WKWebView.canGoForward) {
-                forwardBtn.isEnabled = webView.canGoForward
-            }
-        }
-    }
-    
-    private func onInitEvmChain() {
-        if (targetChain == nil) {
-            targetChain = allEvmChains.first
-        }
-    }
-
-    // Inject custom script to webview
-    private func onInitInjectScript() {
-        if let file = Bundle.main.path(forResource: "injectScript", ofType: "js"), let script = try? String(contentsOfFile: file) {
-            let userScript = WKUserScript(source: script,
-                                          injectionTime: .atDocumentEnd,
-                                          forMainFrameOnly: false)
-            webView.configuration.userContentController.addUserScript(userScript)
-            webView.configuration.userContentController.add(self, name: "station")
-        }
-        if #available(iOS 16.4, *) {
-            webView.isInspectable = true
-        }
-        webView.navigationDelegate = self
-        webView.scrollView.delegate = self
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.allowsBackForwardNavigationGestures = true
-        webView.allowsLinkPreview = false
-        if let dictionary = Bundle.main.infoDictionary,
-            let version = dictionary["CFBundleShortVersionString"] as? String {
-            webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
-                let originUserAgent = result as! String
-                self.webView.customUserAgent = "Cosmostation/APP/iOS/\(version) \(originUserAgent)"
-            }
-        }
-    }
-    
-    // Re-Connect with wallet connect v2 (disconnect all as-is Pair & Sign)
-    private func onInitWcV2(_ url: URL) {
-        NSLog("Cosmostation onInitWcV2 \(url.absoluteString)")
-        if let host = url.host, let query = url.query?.removingPercentEncoding, host == "wc" {
-            var wcUrl: String!
-            if (query.starts(with: "uri=")) {
-                wcUrl = query.replacingOccurrences(of: "uri=", with: "")
-            } else {
-                wcUrl = query
-            }
-            NSLog("Cosmostation onInitWcV2 wcUrl \(wcUrl)")
-            self.wcV2SetSign()
-            self.wcV2SetPair(uri: wcUrl) { success in
-                NSLog("Cosmostation onInitWcV2 wcV2SetPairl \(success)")
-            }
-        }
-    }
-    
-    // (Re)Init Web3
-    private func onInitWeb3(_ completionHandler: @escaping (Bool) -> Void) {
-        Task {
-            if let evmChain = targetChain as? EvmClass,
-               let url = URL(string: evmChain.getEvmRpc()),
-               let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil) {
-                self.web3 = Web3.init(provider: web3Provider)
-                completionHandler(true)
-            }
-            completionHandler(false)
-        }
-    }
-    
-    
-    private func popUpCosmosRequestSign(_ request: Data, _ completion: @escaping(() -> ()), _ cancel: @escaping(() -> ())) {
-        let cosmosSignRequestSheet = DappCosmosSignRequestSheet(nibName: "DappCosmosSignRequestSheet", bundle: nil)
-        cosmosSignRequestSheet.url = dappUrl
-        cosmosSignRequestSheet.wcMsg = request
-        cosmosSignRequestSheet.selectedChain = targetChain as? CosmosClass
-        cosmosSignRequestSheet.completion = { success in
-            if (success) {
-                completion()
-            } else {
-                cancel()
-            }
-        }
-        cosmosSignRequestSheet.modalTransitionStyle = .coverVertical
-        self.present(cosmosSignRequestSheet, animated: true)
-    }
-    
-    private func getSignatureResponse(_ privateKey: Data, _ signData: Data) -> (signature: String?, pubKey: JSON?) {
-        var result: (String?, JSON?)
-        var sig: Data?
-        var pubkey: JSON?
-        var type: String?
-        if (self.targetChain is ChainEvmosEVM || self.targetChain is ChainXplaEVM || self.targetChain is ChainCantoEVM) {
-            sig = SECP256K1.compactsign(signData.sha3(.keccak256), privateKey: privateKey)!
-            type = ETHERMINT_KEY_TYPE_PUBLIC
-            
-        } else if (self.targetChain is ChainInjective) {
-            sig = SECP256K1.compactsign(signData.sha3(.keccak256), privateKey: privateKey)!
-            type = INJECTIVE_KEY_TYPE_PUBLIC
-            
-        } else {
-            sig = SECP256K1.compactsign(signData.sha256(), privateKey: privateKey)!
-            type = COSMOS_KEY_TYPE_PUBLIC
-        }
-        pubkey = ["type" : type, "value" : targetChain.publicKey?.base64EncodedString()]
-        result = (sig?.base64EncodedString(), pubkey)
-        return result
-    }
-    
-    private func popUpEvmRequestSign(_ method: String, _ request: JSON, _ cancel: @escaping(() -> ()), _ completion: @escaping (JSON?) -> ()) {
-        let evmSignRequestSheet = DappEvmSignRequestSheet(nibName: "DappEvmSignRequestSheet", bundle: nil)
-        evmSignRequestSheet.web3 = web3
-        evmSignRequestSheet.method = method
-        evmSignRequestSheet.requestToSign = request
-        evmSignRequestSheet.selectedChain = targetChain as? EvmClass
-        evmSignRequestSheet.completion = { success, singed in
-            if (success) {
-                completion(singed)
-            } else {
-                cancel()
-            }
-        }
-        evmSignRequestSheet.modalTransitionStyle = .coverVertical
-        self.present(evmSignRequestSheet, animated: true)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        UIApplication.shared.isIdleTimerDisabled = true
+//    }
+//    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        UIApplication.shared.isIdleTimerDisabled = false
+//    }
+//    
+//    func onInitView() {
+//        accountName.text = baseAccount.name
+//        onInitInjectScript()
+//        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
+//        
+//        if (dappType == .INTERNAL_URL) {
+////            NSLog("Cosmostation DappDetailVC INTERNAL_URL1 \(dappUrl?.absoluteString)")
+//            dappUrl = onStripInternalUrl(dappUrl)
+////            NSLog("Cosmostation DappDetailVC INTERNAL_URL2 \(dappUrl?.absoluteString)")
+//            dappUrlLabel.text = dappUrl?.host
+//            webView.load(URLRequest(url: dappUrl!))
+//            
+//        } else if (dappType == .DEEPLINK_WC2) {
+////            NSLog("Cosmostation DappDetailVC DEEPLINK_WC2 \(dappUrl?.absoluteString)")
+//            onInitWcV2(dappUrl!)
+//        }
+//    }
+//    
+//    func onStripInternalUrl(_ url: URL?) -> URL? {
+//        if (url?.absoluteString.starts(with: "cosmostation://dapp") == true) {
+//            return URL(string: url!.query!.removingPercentEncoding!)
+//        }
+//        return url
+//    }
+//    
+//    func onUpdateAccountName(_ online: Bool) {
+//        accountName.isHidden = !online
+////        accountImg.isHidden = !online
+//    }
+//    
+//    @IBAction func onBackClicK(_ sender: Any) {
+//        if (webView.canGoBack) {
+//            webView.goBack()
+//        } else {
+//            onCloseAll()
+//        }
+//    }
+//    
+//    @IBAction func onForwardClick(_ sender: Any) {
+//        if (webView.canGoForward) {
+//            webView.goForward()
+//        }
+//    }
+//    
+//    @IBAction func onClickClose(_ sender: Any) {
+//        onCloseAll()
+//    }
+//    
+//    func onCloseAll() {
+//        webView.configuration.userContentController.removeAllUserScripts()
+//        webView.configuration.userContentController.removeScriptMessageHandler(forName: "station")
+//        webView.navigationDelegate = nil
+//        webView.scrollView.delegate = nil
+//        emitCloseToWeb()
+//        wcV2Disconnect { result in
+//            NSLog("Cosmostation onClickClose \(result)")
+//            print("onCloseAll \(result)")
+//            self.dismiss(animated: true)
+//        }
+//    }
+//    
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        if let _ = object as? WKWebView {
+//            if keyPath == #keyPath(WKWebView.canGoForward) {
+//                forwardBtn.isEnabled = webView.canGoForward
+//            }
+//        }
+//    }
+//    
+//    private func onInitEvmChain() {
+////        if (targetChain == nil) {
+////            targetChain = allEvmChains.first
+////        }
+//    }
+//
+//    // Inject custom script to webview
+//    private func onInitInjectScript() {
+//        if let file = Bundle.main.path(forResource: "injectScript", ofType: "js"), let script = try? String(contentsOfFile: file) {
+//            let userScript = WKUserScript(source: script,
+//                                          injectionTime: .atDocumentEnd,
+//                                          forMainFrameOnly: false)
+//            webView.configuration.userContentController.addUserScript(userScript)
+//            webView.configuration.userContentController.add(self, name: "station")
+//        }
+//        if #available(iOS 16.4, *) {
+//            webView.isInspectable = true
+//        }
+//        webView.navigationDelegate = self
+//        webView.scrollView.delegate = self
+//        webView.translatesAutoresizingMaskIntoConstraints = false
+//        webView.allowsBackForwardNavigationGestures = true
+//        webView.allowsLinkPreview = false
+//        if let dictionary = Bundle.main.infoDictionary,
+//            let version = dictionary["CFBundleShortVersionString"] as? String {
+//            webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
+//                let originUserAgent = result as! String
+//                self.webView.customUserAgent = "Cosmostation/APP/iOS/\(version) \(originUserAgent)"
+//            }
+//        }
+//    }
+//    
+//    // Re-Connect with wallet connect v2 (disconnect all as-is Pair & Sign)
+//    private func onInitWcV2(_ url: URL) {
+//        NSLog("Cosmostation onInitWcV2 \(url.absoluteString)")
+//        if let host = url.host, let query = url.query?.removingPercentEncoding, host == "wc" {
+//            var wcUrl: String!
+//            if (query.starts(with: "uri=")) {
+//                wcUrl = query.replacingOccurrences(of: "uri=", with: "")
+//            } else {
+//                wcUrl = query
+//            }
+//            NSLog("Cosmostation onInitWcV2 wcUrl \(wcUrl)")
+//            self.wcV2SetSign()
+//            self.wcV2SetPair(uri: wcUrl) { success in
+//                NSLog("Cosmostation onInitWcV2 wcV2SetPairl \(success)")
+//            }
+//        }
+//    }
+//    
+//    // (Re)Init Web3
+//    private func onInitWeb3(_ completionHandler: @escaping (Bool) -> Void) {
+//        Task {
+//            if let evmChain = targetChain as? EvmClass,
+//               let url = URL(string: evmChain.getEvmRpc()),
+//               let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil) {
+//                self.web3 = Web3.init(provider: web3Provider)
+//                completionHandler(true)
+//            }
+//            completionHandler(false)
+//        }
+//    }
+//    
+//    
+//    private func popUpCosmosRequestSign(_ request: Data, _ completion: @escaping(() -> ()), _ cancel: @escaping(() -> ())) {
+//        let cosmosSignRequestSheet = DappCosmosSignRequestSheet(nibName: "DappCosmosSignRequestSheet", bundle: nil)
+//        cosmosSignRequestSheet.url = dappUrl
+//        cosmosSignRequestSheet.wcMsg = request
+//        cosmosSignRequestSheet.selectedChain = targetChain as? CosmosClass
+//        cosmosSignRequestSheet.completion = { success in
+//            if (success) {
+//                completion()
+//            } else {
+//                cancel()
+//            }
+//        }
+//        cosmosSignRequestSheet.modalTransitionStyle = .coverVertical
+//        self.present(cosmosSignRequestSheet, animated: true)
+//    }
+//    
+//    private func getSignatureResponse(_ privateKey: Data, _ signData: Data) -> (signature: String?, pubKey: JSON?) {
+//        var result: (String?, JSON?)
+//        var sig: Data?
+//        var pubkey: JSON?
+//        var type: String?
+//        if (self.targetChain is ChainEvmosEVM || self.targetChain is ChainXplaEVM || self.targetChain is ChainCantoEVM) {
+//            sig = SECP256K1.compactsign(signData.sha3(.keccak256), privateKey: privateKey)!
+//            type = ETHERMINT_KEY_TYPE_PUBLIC
+//            
+//        } else if (self.targetChain is ChainInjective) {
+//            sig = SECP256K1.compactsign(signData.sha3(.keccak256), privateKey: privateKey)!
+//            type = INJECTIVE_KEY_TYPE_PUBLIC
+//            
+//        } else {
+//            sig = SECP256K1.compactsign(signData.sha256(), privateKey: privateKey)!
+//            type = COSMOS_KEY_TYPE_PUBLIC
+//        }
+//        pubkey = ["type" : type, "value" : targetChain.publicKey?.base64EncodedString()]
+//        result = (sig?.base64EncodedString(), pubkey)
+//        return result
+//    }
+//    
+//    private func popUpEvmRequestSign(_ method: String, _ request: JSON, _ cancel: @escaping(() -> ()), _ completion: @escaping (JSON?) -> ()) {
+//        let evmSignRequestSheet = DappEvmSignRequestSheet(nibName: "DappEvmSignRequestSheet", bundle: nil)
+//        evmSignRequestSheet.web3 = web3
+//        evmSignRequestSheet.method = method
+//        evmSignRequestSheet.requestToSign = request
+//        evmSignRequestSheet.selectedChain = targetChain as? EvmClass
+//        evmSignRequestSheet.completion = { success, singed in
+//            if (success) {
+//                completion(singed)
+//            } else {
+//                cancel()
+//            }
+//        }
+//        evmSignRequestSheet.modalTransitionStyle = .coverVertical
+//        self.present(evmSignRequestSheet, animated: true)
+//    }
 }
 
 
 /**
  * Injection hooking implemet
  */
+
+/*
 extension DappDetailVC: WKScriptMessageHandler {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -313,41 +315,41 @@ extension DappDetailVC: WKScriptMessageHandler {
             
             //Handle Cosmos Request
             if (method == "cos_supportedChainIds") {
-                let chainIds = allCosmosChains.filter { $0.chainIdCosmos != nil }.map{ $0.chainIdCosmos }
-                if (chainIds.count > 0) {
-                    let data:JSON = ["official": chainIds, "unofficial": []]
-                    injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
-                } else {
-                    injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
-                }
+//                let chainIds = allCosmosChains.filter { $0.chainIdCosmos != nil }.map{ $0.chainIdCosmos }
+//                if (chainIds.count > 0) {
+//                    let data:JSON = ["official": chainIds, "unofficial": []]
+//                    injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+//                } else {
+//                    injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
+//                }
                 
             } else if (method == "cos_supportedChainNames") {
-                let chainNames = allCosmosChains.filter { $0.chainDappName() != nil }.map{ $0.chainDappName() }
-                if (chainNames.count > 0) {
-                    let data:JSON = ["official": chainNames, "unofficial": []]
-                    injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
-                } else {
-                    injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
-                }
+//                let chainNames = allCosmosChains.filter { $0.chainDappName() != nil }.map{ $0.chainDappName() }
+//                if (chainNames.count > 0) {
+//                    let data:JSON = ["official": chainNames, "unofficial": []]
+//                    injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+//                } else {
+//                    injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
+//                }
                 
             } else if (method == "cos_addChain" || method == "cos_disconnect") {
                 injectionRequestApprove(true, messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "cos_requestAccount" || method == "cos_account") {
-                let requestedChainId = messageJSON["params"]["chainName"].stringValue
-                var data = JSON()
-                data["isKeystone"] = false
-                data["isEthermint"] = false
-                data["isLedger"] = false
-                data["name"].stringValue = baseAccount.name
-                if let requestedChain = allCosmosChains.filter({ $0.chainIdCosmos == requestedChainId }).first {
-                    self.targetChain = requestedChain
-                    data["address"].stringValue = requestedChain.bechAddress
-                    data["publicKey"].stringValue = requestedChain.publicKey!.toHexString()
-                    injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
-                } else {
-                    onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
-                }
+//                let requestedChainId = messageJSON["params"]["chainName"].stringValue
+//                var data = JSON()
+//                data["isKeystone"] = false
+//                data["isEthermint"] = false
+//                data["isLedger"] = false
+//                data["name"].stringValue = baseAccount.name
+//                if let requestedChain = allCosmosChains.filter({ $0.chainIdCosmos == requestedChainId }).first {
+//                    self.targetChain = requestedChain
+//                    data["address"].stringValue = requestedChain.bechAddress
+//                    data["publicKey"].stringValue = requestedChain.publicKey!.toHexString()
+//                    injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+//                } else {
+//                    onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
+//                }
                 
             } else if (method == "cos_signAmino") {
                 let aminoMessage = injectionAminoModifyFee(messageJSON)
@@ -424,19 +426,19 @@ extension DappDetailVC: WKScriptMessageHandler {
                 injectionRequestApprove([chain.evmAddress], messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "wallet_switchEthereumChain") {
-                let requestChainId = messageJSON["params"].arrayValue[0]["chainId"].stringValue
-                if let requestChain = allEvmChains.filter({ $0.chainIdEvm == requestChainId }).first {
-                    targetChain = requestChain
-                    injectionRequestApprove(JSON.null, messageJSON, bodyJSON["messageId"])
-                    emitToWeb(requestChain.chainIdEvm)
-                    onInitWeb3 { success in
-                        print("wallet_switchEthereumChain reInitWeb3 ", success)
-                    }
-                } else {
-                    let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
-                    injectionRequestReject(result, messageJSON, bodyJSON["messageId"])
-                    onShowToast(result)
-                }
+//                let requestChainId = messageJSON["params"].arrayValue[0]["chainId"].stringValue
+//                if let requestChain = allEvmChains.filter({ $0.chainIdEvm == requestChainId }).first {
+//                    targetChain = requestChain
+//                    injectionRequestApprove(JSON.null, messageJSON, bodyJSON["messageId"])
+//                    emitToWeb(requestChain.chainIdEvm)
+//                    onInitWeb3 { success in
+//                        print("wallet_switchEthereumChain reInitWeb3 ", success)
+//                    }
+//                } else {
+//                    let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
+//                    injectionRequestReject(result, messageJSON, bodyJSON["messageId"])
+//                    onShowToast(result)
+//                }
                 
             } else if (method == "eth_chainId") {
                 onInitEvmChain()
@@ -666,18 +668,18 @@ extension DappDetailVC: WKScriptMessageHandler {
             isEditFee = false
         }
         
-        if (isEditFee == false && (signDoc["fee"]["amount"].isEmpty || signDoc["fee"]["gas"] == "0") || isEditFee == true) {
-            let chainId = signDoc["chain_id"].stringValue
-            if let targetChain = allCosmosChains.filter({ $0.chainIdCosmos == chainId }).first {
-                if let gasRate = targetChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == targetChain.stakeDenom }).first {
-                    let gasLimit = NSDecimalNumber.init(value: UInt64((Double(signDoc["fee"]["gas"].stringValue) ?? 0) * targetChain.gasMultiply()))
-                    let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
-                    
-                    approveSignMessage["params"]["doc"]["fee"]["amount"] = [["amount": String(feeCoinAmount!.stringValue), "denom": targetChain.stakeDenom]]
-                    return approveSignMessage
-                }
-            }
-        }
+//        if (isEditFee == false && (signDoc["fee"]["amount"].isEmpty || signDoc["fee"]["gas"] == "0") || isEditFee == true) {
+//            let chainId = signDoc["chain_id"].stringValue
+//            if let targetChain = allCosmosChains.filter({ $0.chainIdCosmos == chainId }).first {
+//                if let gasRate = targetChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == targetChain.stakeDenom }).first {
+//                    let gasLimit = NSDecimalNumber.init(value: UInt64((Double(signDoc["fee"]["gas"].stringValue) ?? 0) * targetChain.gasMultiply()))
+//                    let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
+//                    
+//                    approveSignMessage["params"]["doc"]["fee"]["amount"] = [["amount": String(feeCoinAmount!.stringValue), "denom": targetChain.stakeDenom]]
+//                    return approveSignMessage
+//                }
+//            }
+//        }
         return approveSignMessage
     }
     
@@ -803,47 +805,6 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if self.webView.isHidden {
-            decisionHandler(.cancel)
-            return
-        }
-//        print("webView decidePolicyFor ", navigationAction.request.url )
-//        NSLog("Cosmostation webView decidePolicyFor  \(navigationAction.request.url?.absoluteString)")
-        
-        if let url = navigationAction.request.url {
-            var newUrl: String?
-            if let absoluteString = url.absoluteString.removingPercentEncoding {
-                if absoluteString.starts(with: "keplrwallet://wcV1") {
-                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc")
-                } else if absoluteString.starts(with: "keplrwallet://wcV2") || absoluteString.starts(with: "keplrwalletwcv2://wcV2") {
-                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc")
-                } else if let match = absoluteString.range(of: "https://.*/wc", options: .regularExpression) {
-                    newUrl = absoluteString.replacingCharacters(in: match, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
-                } else if absoluteString.starts(with: "cosmostation://wc") {
-                    newUrl = absoluteString.replacingOccurrences(of: "uri=", with: "")
-                } else if absoluteString.starts(with: "intent:") {
-                    if absoluteString.contains("intent://wcV2") {
-                        newUrl = absoluteString.replacingOccurrences(of: "intent://wcV2", with: "cosmostation://wc")
-                    } else if absoluteString.contains("intent://wc") {
-                        newUrl = absoluteString.removingPercentEncoding!.replacingOccurrences(of: "intent://wc", with: "cosmostation://wc")
-                    }
-                    if let range = newUrl?.range(of: "#Intent") {
-                        let trimmedUrl = String(newUrl![..<range.lowerBound])
-                        newUrl = trimmedUrl
-                    }
-                }
-//                print("newUrl ", newUrl)
-//                NSLog("Cosmostation webView decidePolicyFor newUrl  \(newUrl)")
-                
-                if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
-                    NSLog("Cosmostation webView decidePolicyFor finalUrl  \(finalUrl)")
-                    onInitWcV2(finalUrl)
-                    decisionHandler(.cancel)
-                    return
-                }
-            }
-        }
-        decisionHandler(.allow)
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -868,11 +829,15 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
         }
     }
 }
+ */
 
 
 /**
  * Wallet Connect V2 implemet
  */
+
+
+/*
 extension DappDetailVC {
     
     private func wcV2SetSign() {
@@ -954,29 +919,29 @@ extension DappDetailVC {
             NSLog("Cosmostation wcV2ApproveProposal namespaces \(namespaces)")
             let caip2Namespace = namespaces.key
             let proposalNamespace = namespaces.value
-            if let targetChain = allCosmosChains.filter({ $0.chainIdCosmos == proposalNamespace.chains?.first?.reference }).first {
-                NSLog("Cosmostation wcV2ApproveProposal targetChain \(targetChain)")
-                self.targetChain = targetChain
-                let accounts = Set(namespaces.value.chains!.filter { chain in
-                    allCosmosChains.filter({ $0.chainIdCosmos == chain.reference }).first != nil
-                }.compactMap { chain in
-                    WalletConnectUtils.Account(chainIdentifier: chain.absoluteString, address: targetChain.bechAddress)
-                })
-                
-                let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
-                sessionNamespaces[caip2Namespace] = sessionNamespace
-//                print("wcV2ApproveProposal accounts ", accounts)
-//                print("wcV2ApproveProposal approveProposal ", sessionNamespaces)
-                NSLog("Cosmostation wcV2ProposalRequest Accept")
-                self.wcV2ApproveProposal(proposalId:  proposal.id, namespaces: sessionNamespaces)
-                
-            } else {
-                NSLog("Cosmostation wcV2ApproveProposal targetChain NULL")
-                NSLog("Cosmostation wcV2ProposalRequest Reject")
-                let rejectResponse: RejectionReason = .userRejectedChains
-                self.wcV2RejectProposal(proposalId:  proposal.id, reason: rejectResponse)
-                self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
-            }
+//            if let targetChain = allCosmosChains.filter({ $0.chainIdCosmos == proposalNamespace.chains?.first?.reference }).first {
+//                NSLog("Cosmostation wcV2ApproveProposal targetChain \(targetChain)")
+//                self.targetChain = targetChain
+//                let accounts = Set(namespaces.value.chains!.filter { chain in
+//                    allCosmosChains.filter({ $0.chainIdCosmos == chain.reference }).first != nil
+//                }.compactMap { chain in
+//                    WalletConnectUtils.Account(chainIdentifier: chain.absoluteString, address: targetChain.bechAddress)
+//                })
+//                
+//                let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
+//                sessionNamespaces[caip2Namespace] = sessionNamespace
+////                print("wcV2ApproveProposal accounts ", accounts)
+////                print("wcV2ApproveProposal approveProposal ", sessionNamespaces)
+//                NSLog("Cosmostation wcV2ProposalRequest Accept")
+//                self.wcV2ApproveProposal(proposalId:  proposal.id, namespaces: sessionNamespaces)
+//                
+//            } else {
+//                NSLog("Cosmostation wcV2ApproveProposal targetChain NULL")
+//                NSLog("Cosmostation wcV2ProposalRequest Reject")
+//                let rejectResponse: RejectionReason = .userRejectedChains
+//                self.wcV2RejectProposal(proposalId:  proposal.id, reason: rejectResponse)
+//                self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
+//            }
         }
     }
     
@@ -1097,18 +1062,18 @@ extension DappDetailVC {
         if (approveSignMessage["isEditFee"] == false || approveSignMessage["params"]["isEditFee"] == false) {
             isEditFee = false
         }
-        if (isEditFee == false && (signDoc["fee"]["amount"].isEmpty || signDoc["fee"]["gas"] == "0") || isEditFee == true) {
-            let chainId = signDoc["chain_id"].stringValue
-            if let targetChain = allCosmosChains.filter({ $0.chainIdCosmos == chainId }).first {
-                if let gasRate = targetChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == targetChain.stakeDenom }).first {
-                    let gasLimit = NSDecimalNumber.init(value: UInt64((Double(signDoc["fee"]["gas"].stringValue) ?? 0) * targetChain.gasMultiply()))
-                    let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
-                    
-                    approveSignMessage["params"]["signDoc"]["fee"]["amount"] = [["amount": String(feeCoinAmount!.stringValue), "denom": targetChain.stakeDenom]]
-                    return approveSignMessage
-                }
-            }
-        }
+//        if (isEditFee == false && (signDoc["fee"]["amount"].isEmpty || signDoc["fee"]["gas"] == "0") || isEditFee == true) {
+//            let chainId = signDoc["chain_id"].stringValue
+//            if let targetChain = allCosmosChains.filter({ $0.chainIdCosmos == chainId }).first {
+//                if let gasRate = targetChain.getFeeInfos().first?.FeeDatas.filter({ $0.denom == targetChain.stakeDenom }).first {
+//                    let gasLimit = NSDecimalNumber.init(value: UInt64((Double(signDoc["fee"]["gas"].stringValue) ?? 0) * targetChain.gasMultiply()))
+//                    let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
+//                    
+//                    approveSignMessage["params"]["signDoc"]["fee"]["amount"] = [["amount": String(feeCoinAmount!.stringValue), "denom": targetChain.stakeDenom]]
+//                    return approveSignMessage
+//                }
+//            }
+//        }
         return approveSignMessage
     }
     
@@ -1132,15 +1097,16 @@ extension DappDetailVC {
 }
 
 
+ */
 
 /**
  * gRPC Handle
  */
 extension DappDetailVC {
     
-    func getConnection(_ chain: CosmosClass) -> ClientConnection {
+    func getConnection(_ chain: BaseChain) -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpc().0, port: chain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.grpcFetcher!.getGrpc().0, port: chain.grpcFetcher!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

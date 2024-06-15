@@ -30,7 +30,7 @@ class CheckPrivateKeyCell: UITableViewCell {
         keyTypeTag.isHidden = true
     }
     
-    func bindEvmClassPrivateKey(_ account: BaseAccount, _ chain: EvmClass) {
+    func bindEvmClassPrivateKey(_ account: BaseAccount, _ chain: BaseChain) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         
@@ -39,7 +39,7 @@ class CheckPrivateKeyCell: UITableViewCell {
     }
     
     
-    func bindCosmosClassPrivateKey(_ account: BaseAccount, _ chain: CosmosClass) {
+    func bindCosmosClassPrivateKey(_ account: BaseAccount, _ chain: BaseChain) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         

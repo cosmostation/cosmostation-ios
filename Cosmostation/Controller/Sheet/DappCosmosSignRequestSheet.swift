@@ -21,7 +21,7 @@ class DappCosmosSignRequestSheet: BaseVC {
     
     var url: URL!
     var wcMsg: Data?
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var completion: ((_ success: Bool) -> ())?
 
     override func viewDidLoad() {

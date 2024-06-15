@@ -50,7 +50,7 @@ class SelectChainCell: UITableViewCell {
         actionToggle?(sender.isOn)
     }
     
-    func bindEvmClassChain(_ account: BaseAccount, _ chain: EvmClass, _ selectedList: [String]) {
+    func bindEvmClassChain(_ account: BaseAccount, _ chain: BaseChain, _ selectedList: [String]) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
@@ -71,42 +71,42 @@ class SelectChainCell: UITableViewCell {
             hdPathLabel.text = ""
         }
         
-        if (chain.fetchState == .Fail) {
-            loadingLabel1.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            loadingLabel1.isHidden = true
-            loadingLabel2.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            loadingLabel2.isHidden = true
-            reposeErrorLabel.isHidden = false
-            
-        } else {
-            if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
-                loadingLabel1.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-                loadingLabel1.isHidden = true
-                loadingLabel2.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-                loadingLabel2.isHidden = true
-                WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
-                
-                let coinCntString = String(refAddress.lastCoinCnt) + " Coins"
-                let tokenCnt = chain.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
-                if (tokenCnt == 0) {
-                    assetCntLabel.text = coinCntString
-                } else {
-                    assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
-                }
-                currencyLabel.isHidden = false
-                valueLabel.isHidden = false
-                assetCntLabel.isHidden = false
-                
-            } else {
-                loadingLabel1.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
-                loadingLabel1.isHidden = false
-                loadingLabel2.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
-                loadingLabel2.isHidden = false
-            }
-        }
+//        if (chain.fetchState == .Fail) {
+//            loadingLabel1.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//            loadingLabel1.isHidden = true
+//            loadingLabel2.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//            loadingLabel2.isHidden = true
+//            reposeErrorLabel.isHidden = false
+//            
+//        } else {
+//            if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
+//                loadingLabel1.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//                loadingLabel1.isHidden = true
+//                loadingLabel2.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//                loadingLabel2.isHidden = true
+//                WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
+//                
+//                let coinCntString = String(refAddress.lastCoinCnt) + " Coins"
+//                let tokenCnt = chain.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
+//                if (tokenCnt == 0) {
+//                    assetCntLabel.text = coinCntString
+//                } else {
+//                    assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
+//                }
+//                currencyLabel.isHidden = false
+//                valueLabel.isHidden = false
+//                assetCntLabel.isHidden = false
+//                
+//            } else {
+//                loadingLabel1.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
+//                loadingLabel1.isHidden = false
+//                loadingLabel2.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+//                loadingLabel2.isHidden = false
+//            }
+//        }
     }
     
-    func bindCosmosClassChain(_ account: BaseAccount, _ chain: CosmosClass, _ selectedList: [String]) {
+    func bindCosmosClassChain(_ account: BaseAccount, _ chain: BaseChain, _ selectedList: [String]) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         logoImg2.image =  UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
@@ -127,43 +127,43 @@ class SelectChainCell: UITableViewCell {
         
         legacyTag.isHidden = chain.isDefault
         
-        if (chain.fetchState == .Fail) {
-            loadingLabel1.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            loadingLabel1.isHidden = true
-            loadingLabel2.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            loadingLabel2.isHidden = true
-            reposeErrorLabel.isHidden = false
-            
-        } else {
-            if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
-                loadingLabel1.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-                loadingLabel1.isHidden = true
-                loadingLabel2.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-                loadingLabel2.isHidden = true
-                WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
-                
-                let coinCntString = String(refAddress.lastCoinCnt) + " Coins"
-                if (chain.supportCw20) {
-                    let tokenCnt = chain.mintscanCw20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
-                    if (tokenCnt == 0) {
-                        assetCntLabel.text = coinCntString
-                    } else {
-                        assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
-                    }
-                    
-                } else {
-                    assetCntLabel.text = coinCntString
-                }
-                currencyLabel.isHidden = false
-                valueLabel.isHidden = false
-                assetCntLabel.isHidden = false
-                
-            } else {
-                loadingLabel1.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
-                loadingLabel1.isHidden = false
-                loadingLabel2.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
-                loadingLabel2.isHidden = false
-            }
-        }
+//        if (chain.fetchState == .Fail) {
+//            loadingLabel1.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//            loadingLabel1.isHidden = true
+//            loadingLabel2.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//            loadingLabel2.isHidden = true
+//            reposeErrorLabel.isHidden = false
+//            
+//        } else {
+//            if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
+//                loadingLabel1.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//                loadingLabel1.isHidden = true
+//                loadingLabel2.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+//                loadingLabel2.isHidden = true
+//                WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
+//                
+//                let coinCntString = String(refAddress.lastCoinCnt) + " Coins"
+//                if (chain.supportCw20) {
+//                    let tokenCnt = chain.mintscanCw20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
+//                    if (tokenCnt == 0) {
+//                        assetCntLabel.text = coinCntString
+//                    } else {
+//                        assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
+//                    }
+//                    
+//                } else {
+//                    assetCntLabel.text = coinCntString
+//                }
+//                currencyLabel.isHidden = false
+//                valueLabel.isHidden = false
+//                assetCntLabel.isHidden = false
+//                
+//            } else {
+//                loadingLabel1.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
+//                loadingLabel1.isHidden = false
+//                loadingLabel2.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
+//                loadingLabel2.isHidden = false
+//            }
+//        }
     }
 }

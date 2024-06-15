@@ -26,10 +26,8 @@ class QrAddressPopupVC: BaseVC {
         baseAccount = BaseData.instance.baseAccount
         chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
         
-        
-        
-        if let selectedChain = selectedChain as? EvmClass {
-            toDpAddress = selectedChain.evmAddress
+        if selectedChain.supportEvm == true {
+            toDpAddress = selectedChain.evmAddress!
             addressLabel.text = toDpAddress
             addressLabel.adjustsFontSizeToFitWidth = true
             if (baseAccount.type == .withMnemonic) {
@@ -38,8 +36,8 @@ class QrAddressPopupVC: BaseVC {
                 hdPathLabel.text = ""
             }
             
-        } else if let selectedChain = selectedChain as? CosmosClass {
-            toDpAddress = selectedChain.bechAddress
+        } else if selectedChain.supportCosmos == true{
+            toDpAddress = selectedChain.bechAddress!
             addressLabel.text = toDpAddress
             addressLabel.adjustsFontSizeToFitWidth = true
             if (baseAccount.type == .withMnemonic) {

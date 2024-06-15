@@ -23,7 +23,7 @@ class SelectSwapAssetCell: UITableViewCell {
     }
     
     
-    func onBindAsset(_ chain: CosmosClass, _ asset: JSON, _ balances: [Cosmos_Base_V1beta1_Coin] ) {
+    func onBindAsset(_ chain: BaseChain, _ asset: JSON, _ balances: [Cosmos_Base_V1beta1_Coin] ) {
         symbolLabel.text = asset["symbol"].stringValue
         
         if let msAsset = BaseData.instance.getAsset(chain.apiName, asset["denom"].stringValue) {

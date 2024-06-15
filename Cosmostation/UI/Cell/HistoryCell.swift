@@ -36,7 +36,7 @@ class HistoryCell: UITableViewCell {
     }
     
     
-    func bindCosmosClassHistory(_ account: BaseAccount, _ chain: CosmosClass, _ history: MintscanHistory) {
+    func bindCosmosClassHistory(_ account: BaseAccount, _ chain: BaseChain, _ history: MintscanHistory) {
         if (history.isSuccess()) {
             successImg.image = UIImage(named: "iconSuccess")
         } else {
@@ -85,7 +85,7 @@ class HistoryCell: UITableViewCell {
         }
     }
     
-    func bindOktHistory(_ account: BaseAccount, _ chain: CosmosClass, _ history: OktHistory) {
+    func bindOktHistory(_ account: BaseAccount, _ chain: BaseChain, _ history: OktHistory) {
         if (history.state != "success") {
             successImg.image = UIImage(named: "iconFail")
         } else {

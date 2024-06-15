@@ -30,14 +30,15 @@ class PortfolioCell: UITableViewCell {
         selectionStyle = .none
         
         rootView.setBlur()
+        currencyLabel.text = ""
+        valueLabel.text = ""
         loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
     }
     
     override func prepareForReuse() {
         rootView.setBlur()
         currencyLabel.text = ""
-        currencyLabel.isHidden = true
-        valueLabel.isHidden = true
+        valueLabel.text = ""
         legacyTag.isHidden = true
         cw20Tag.isHidden = true
         nftTag.isHidden = true
@@ -45,7 +46,8 @@ class PortfolioCell: UITableViewCell {
         reposeErrorLabel.isHidden = true
     }
     
-    func bindCosmosClassChain(_ account: BaseAccount, _ chain: CosmosClass) {
+    
+    func bindChain(_ account: BaseAccount, _ chain: BaseChain) {
         logoImg1.image = UIImage.init(named: chain.logo1)
         logoImg2.image = UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
@@ -71,41 +73,6 @@ class PortfolioCell: UITableViewCell {
                 valueLabel.font = .fontSize16Bold
                 WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
             }
-            currencyLabel.isHidden = false
-            valueLabel.isHidden = false
-            
-        } else {
-            loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
-            loadingLabel.isHidden = false
-        }
-    }
-    
-    func bindEvmClassChain(_ account: BaseAccount, _ chain: EvmClass) {
-        logoImg1.image = UIImage.init(named: chain.logo1)
-        logoImg2.image = UIImage.init(named: chain.logo2)
-        nameLabel.text = chain.name.uppercased()
-        
-        legacyTag.isHidden = chain.isDefault
-        
-        if (chain.fetchState == .Fail) {
-            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            loadingLabel.isHidden = true
-            reposeErrorLabel.isHidden = false
-            
-        } else if (chain.fetchState == .Success) {
-            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            loadingLabel.isHidden = true
-            
-            if (BaseData.instance.getHideValue()) {
-                currencyLabel.text = ""
-                valueLabel.font = .fontSize14Bold
-                valueLabel.text = "✱✱✱✱"
-            } else {
-                valueLabel.font = .fontSize16Bold
-                WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
-            }
-            currencyLabel.isHidden = false
-            valueLabel.isHidden = false
             
         } else {
             loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)

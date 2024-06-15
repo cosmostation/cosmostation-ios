@@ -20,10 +20,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var sheetType: SheetType?
     var sheetDelegate: BaseSheetDelegate?
     
-    var targetChain: CosmosClass!
-    var targetEvmChain: EvmClass!
-    var swapChains = Array<CosmosClass>()
-    var swapChainsSearch = Array<CosmosClass>()
+    var targetChain: BaseChain!
+    var targetEvmChain: BaseChain!
+    var swapChains = Array<BaseChain>()
+    var swapChainsSearch = Array<BaseChain>()
     var swapAssets = Array<JSON>()
     var swapAssetsSearch = Array<JSON>()
     var swapBalance = Array<Cosmos_Base_V1beta1_Coin>()
@@ -34,7 +34,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var delegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     var delegation: Cosmos_Staking_V1beta1_DelegationResponse!
     var unbondingEnrtyPosition: Int?
-    var cosmosChainList = Array<CosmosClass>()
+    var cosmosChainList = Array<BaseChain>()
     var nameservices = Array<NameService>()
     var oktValidators = [JSON]()
     
@@ -105,6 +105,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     }
     
     func updateTitle() {
+        /*
         if (sheetType == .SelectCreateAccount) {
             sheetTitle.text = NSLocalizedString("title_create_account", comment: "")
             
@@ -273,6 +274,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             sheetTitle.text = NSLocalizedString("title_buy_crypto", comment: "")
             
         }
+         */
     }
     
     @objc func dismissKeyboard() {
@@ -280,21 +282,21 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
-            swapChainsSearch = searchText.isEmpty ? swapChains : swapChains.filter { chain in
-                return chain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-            }
-            
-        } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
-            swapAssetsSearch = searchText.isEmpty ? swapAssets : swapAssets.filter { json in
-                return json["symbol"].stringValue.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-            }
-        } else if (sheetType == .SelectValidator) {
-            validatorsSearch = searchText.isEmpty ? validators : validators.filter { validator in
-                return validator.description_p.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-            }
-        }
-        sheetTableView.reloadData()
+//        if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
+//            swapChainsSearch = searchText.isEmpty ? swapChains : swapChains.filter { chain in
+//                return chain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+//            }
+//            
+//        } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
+//            swapAssetsSearch = searchText.isEmpty ? swapAssets : swapAssets.filter { json in
+//                return json["symbol"].stringValue.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+//            }
+//        } else if (sheetType == .SelectValidator) {
+//            validatorsSearch = searchText.isEmpty ? validators : validators.filter { validator in
+//                return validator.description_p.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+//            }
+//        }
+//        sheetTableView.reloadData()
     }
 }
 
