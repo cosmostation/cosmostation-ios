@@ -324,8 +324,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMars())
     result.append(ChainMedibloc())
     result.append(ChainNeutron())
-    
-    
     result.append(ChainNibiru())
     result.append(ChainNoble())
     result.append(ChainNyx())
@@ -340,7 +338,17 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainQuicksilver())
     result.append(ChainRegen())
     result.append(ChainRizon())
-    
+    result.append(ChainSaga())
+    result.append(ChainSecret118())
+    result.append(ChainSecret529())
+    result.append(ChainSei())
+    result.append(ChainSentinel())
+    result.append(ChainShentu())
+    result.append(ChainSommelier())
+    result.append(ChainStafi())
+    result.append(ChainStargaze())
+//    result.append(ChainStarname())
+    result.append(ChainStride())
     
     
     
