@@ -51,7 +51,6 @@ class BaseChain {
     var evmRpcURL = ""
     
     
-//    var fetchState = FetchState.Idle
     var allCoinValue = NSDecimalNumber.zero
     var allCoinUSDValue = NSDecimalNumber.zero
     var allTokenValue = NSDecimalNumber.zero
@@ -293,6 +292,20 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainArchway())
     result.append(ChainAssetMantle())
     result.append(ChainAxelar())
+    result.append(ChainBand())
+    result.append(ChainBitcana())
+    result.append(ChainBitsong())
+    result.append(ChainCelestia())
+    result.append(ChainChihuahua())
+    result.append(ChainCoreum())
+//    result.append(ChainCrescent())
+    result.append(ChainCryptoorg())
+    result.append(ChainCudos())
+    
+    
+    
+    
+    
     result.append(ChainKava459())
     result.append(ChainKava118())
     result.append(ChainNeutron())
@@ -316,6 +329,8 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainOptimism())
     result.append(ChainPolygon())
     result.append(ChainXplaEVM())
+    
+//    result.append(ChainBeraEVM_T())
     return result
 }
 
