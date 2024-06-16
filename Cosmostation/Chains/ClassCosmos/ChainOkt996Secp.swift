@@ -62,7 +62,6 @@ class ChainOkt996Secp: BaseChain {
             }
             
             DispatchQueue.main.async(execute: {
-                print("", self.tag, " FetchData post")
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
             })
         }
