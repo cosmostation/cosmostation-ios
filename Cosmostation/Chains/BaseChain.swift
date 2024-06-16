@@ -349,10 +349,10 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainStargaze())
 //    result.append(ChainStarname())
     result.append(ChainStride())
-    
-    
-    
-    
+    result.append(ChainTeritori())
+    result.append(ChainTerra())
+    result.append(ChainUmee())
+    result.append(ChainXpla())
     result.append(ChainOkt996Keccak())
     result.append(ChainOkt996Secp())
 

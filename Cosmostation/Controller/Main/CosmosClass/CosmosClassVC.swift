@@ -91,10 +91,7 @@ class CosmosClassVC: BaseVC {
         if (selectedChain.supportStaking) {
             selectedChain.fetchValidatorInfos()
         }
-//        
-//        if (selectedChain is ChainOkt996Keccak) {
-//            (selectedChain as? ChainOkt996Keccak)?.fetchValidators()
-//        }
+        
         if (selectedChain.isLagacyOKT()) {
             selectedChain.fetchValidatorInfos()
         }
@@ -128,7 +125,6 @@ class CosmosClassVC: BaseVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchValidators(_:)), name: Notification.Name("FetchValidator"), object: nil)
     }
     
@@ -153,18 +149,10 @@ class CosmosClassVC: BaseVC {
             tabVC?.hideChainBgImg()
         }
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchValidator"), object: nil)
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
-        let tag = notification.object as! String
-        if (tag == selectedChain.tag) {
-            totalValue = selectedChain.allValue()
-        }
-    }
-    
-    @objc func onFetchTokenDone(_ notification: NSNotification) {
         let tag = notification.object as! String
         if (tag == selectedChain.tag) {
             totalValue = selectedChain.allValue()

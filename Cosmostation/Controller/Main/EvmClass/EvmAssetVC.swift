@@ -49,18 +49,18 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         refresher.endRefreshing()
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ToggleHideValue"), object: nil)
     }
     
-    @objc func onFetchTokenDone(_ notification: NSNotification) {
+    @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
         if (selectedChain != nil && selectedChain.tag == tag) {
             self.refresher.endRefreshing()

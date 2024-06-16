@@ -41,13 +41,13 @@ class CosmosTokenVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ToggleHideValue"), object: nil)
     }
     
@@ -60,21 +60,19 @@ class CosmosTokenVC: BaseVC {
         if (selectedChain.fetchState == .Busy) {
             refresher.endRefreshing()
         } else {
-            Task {
-//                if (selectedChain.supportCw20) {
-//                    selectedChain.fetchAllCw20Balance(baseAccount.id)
-//                } else if let evmChain = selectedChain as? EvmClass {
-//                     await evmChain.fetchAllErc20Balance(baseAccount.id)
-//                }
+            DispatchQueue.global().async {
+                self.selectedChain.fetchData(self.baseAccount.id)
             }
         }
     }
     
-    @objc func onFetchTokenDone(_ notification: NSNotification) {
-        DispatchQueue.main.async {
-            self.mintscanCw20Tokens.removeAll()
-            self.mintscanErc20Tokens.removeAll()
-            self.onUpdateView()
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (selectedChain != nil && selectedChain.tag == tag) {
+            DispatchQueue.main.async {
+                self.refresher.endRefreshing()
+                self.onUpdateView()
+            }
         }
     }
     
@@ -83,6 +81,8 @@ class CosmosTokenVC: BaseVC {
     }
     
     func onUpdateView() {
+        self.mintscanCw20Tokens.removeAll()
+        self.mintscanErc20Tokens.removeAll()
         if let grpcFetcher = selectedChain.getGrpcfetcher() {
             grpcFetcher.mintscanCw20Tokens.forEach { tokenInfo in
                 if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
