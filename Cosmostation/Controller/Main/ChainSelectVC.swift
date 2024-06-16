@@ -191,9 +191,9 @@ extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource, UISearchBar
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
-            return mainnetChains.count
+            return searchMainnets.count
         } else if (section == 1) {
-            return testnetChains.count
+            return searchTestnets.count
         }
         return 0
     }

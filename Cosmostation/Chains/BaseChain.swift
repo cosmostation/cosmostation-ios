@@ -324,6 +324,27 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMars())
     result.append(ChainMedibloc())
     result.append(ChainNeutron())
+    
+    
+    result.append(ChainNibiru())
+    result.append(ChainNoble())
+    result.append(ChainNyx())
+    result.append(ChainOmniflix())
+    result.append(ChainOnomy())
+    result.append(ChainOsmosis())
+    result.append(ChainPassage())
+    result.append(ChainPersistence118())
+    result.append(ChainPersistence750())
+    result.append(ChainProvenance())
+    result.append(ChainQuasar())
+    result.append(ChainQuicksilver())
+    result.append(ChainRegen())
+    result.append(ChainRizon())
+    
+    
+    
+    
+    
     result.append(ChainOkt996Keccak())
     result.append(ChainOkt996Secp())
 

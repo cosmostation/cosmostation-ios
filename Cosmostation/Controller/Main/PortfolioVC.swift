@@ -266,7 +266,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
         if (section == 0) {
             return searchMainnets.count
         } else if (section == 1) {
-            return testnetChains.count
+            return searchTestnets.count
         }
         return 0
     }
