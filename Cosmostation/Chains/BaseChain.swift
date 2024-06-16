@@ -314,11 +314,15 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainIris())
     result.append(ChainIxo())
     result.append(ChainJuno())
-    
-    
-    
     result.append(ChainKava459())
     result.append(ChainKava118())
+    result.append(ChainKi())
+    result.append(ChainKyve())
+    result.append(ChainLike())
+    result.append(ChainLum118())
+    result.append(ChainLum880())
+    result.append(ChainMars())
+    result.append(ChainMedibloc())
     result.append(ChainNeutron())
     result.append(ChainOkt996Keccak())
     result.append(ChainOkt996Secp())
