@@ -31,7 +31,6 @@ class FetcherGrpc {
     var mintscanCw20Tokens = [MintscanToken]()
     var mintscanCw721List = [JSON]()
     var cw721Models = [Cw721Model]()
-    var cw721Fetched = false
     
     var grpcConnection: ClientConnection!
     
@@ -491,7 +490,6 @@ extension FetcherGrpc {
     }
     
     func fetchAllCw721() {
-        cw721Fetched = false
         cw721Models.removeAll()
         Task {
             await mintscanCw721List.concurrentForEach { list in
@@ -509,7 +507,6 @@ extension FetcherGrpc {
                 }
             }
             DispatchQueue.main.async(execute: {
-                self.cw721Fetched = true
                 self.cw721Models.sort {
                     return $0.info["id"].doubleValue < $1.info["id"].doubleValue
                 }

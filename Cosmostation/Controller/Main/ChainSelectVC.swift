@@ -142,7 +142,7 @@ class ChainSelectVC: BaseVC {
         dpTags.removeAll()
         dpTags.append("cosmos118")
         mainnetChains.forEach { chain in
-            if (chain.allCoinUSDValue.compare(NSDecimalNumber.one).rawValue > 0) {
+            if (chain.allValue(true).compare(NSDecimalNumber.one).rawValue > 0) {
                 dpTags.append(chain.tag)
             }
         }

@@ -34,6 +34,13 @@ class ChainOkt996Keccak: BaseChain  {
         initFetcher()
     }
     
+    override func setInfoWithPrivateKey(_ priKey: Data) {
+        privateKey = priKey
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+        bechAddress = KeyFac.convertEvmToBech32(evmAddress!, bechAccountPrefix!)
+    }
+    
     override func getLcdfetcher() -> FetcherLcd? {
         return oktFetcher
     }

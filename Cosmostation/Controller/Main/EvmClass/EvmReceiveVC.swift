@@ -19,16 +19,16 @@ class EvmReceiveVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.separatorStyle = .none
-//        tableView.register(UINib(nibName: "ReceiveCell", bundle: nil), forCellReuseIdentifier: "ReceiveCell")
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.sectionHeaderTopPadding = 0.0
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "ReceiveCell", bundle: nil), forCellReuseIdentifier: "ReceiveCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderTopPadding = 0.0
     }
 
 }
-/*
+
 extension EvmReceiveVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -57,7 +57,7 @@ extension EvmReceiveVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UIPasteboard.general.string = selectedChain.evmAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        UIPasteboard.general.string = selectedChain.evmAddress!.trimmingCharacters(in: .whitespacesAndNewlines)
         self.onShowToast(NSLocalizedString("address_copied", comment: ""))
     }
     
@@ -83,4 +83,3 @@ extension EvmReceiveVC: UITableViewDelegate, UITableViewDataSource {
         return mask;
     }
 }
-*/

@@ -19,10 +19,9 @@ class EvmHistoryVC: BaseVC {
         
     }
     
-    //YONG4
     @IBAction func onClickExplorer(_ sender: UIButton) {
-//        guard let url = selectedChain.getExplorerAccount() else { return }
-//        self.onShowSafariWeb(url)
+        guard let url = selectedChain.getExplorerAccount() else { return }
+        self.onShowSafariWeb(url)
     }
     
 }

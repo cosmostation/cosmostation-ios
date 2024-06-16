@@ -34,68 +34,68 @@ class CosmosNftVC: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-//        collectionView.isHidden = true
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
-//        collectionView.register(UINib(nibName: "NftListCell", bundle: nil), forCellWithReuseIdentifier: "NftListCell")
-//        collectionView.register(UINib(nibName: "NftListHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "NftListHeader")
-//        
-//        refresher = UIRefreshControl()
-//        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-//        refresher.tintColor = .color01
-//        collectionView.refreshControl = refresher
-//        
-//        if (selectedChain.cw721Fetched == false) {
-//            onRequestFetch()
-//        } else {
-//            nftGroup = selectedChain.cw721Models
-//            onUpdateView()
-//        }
+        collectionView.isHidden = true
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "NftListCell", bundle: nil), forCellWithReuseIdentifier: "NftListCell")
+        collectionView.register(UINib(nibName: "NftListHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "NftListHeader")
+        
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
+        refresher.tintColor = .color01
+        collectionView.refreshControl = refresher
+        
+        onRequestFetch()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchNFTDone(_:)), name: Notification.Name("FetchNFTs"), object: nil)
-//    }
-//    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchNFTs"), object: nil)
-//    }
-//    
-//    override func viewDidDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(animated)
-//        refresher.endRefreshing()
-//    }
-//    
-//    @objc func onRequestFetch() {
-//        if (isBusy) { return }
-//        isBusy = true
-//        selectedChain.fetchAllCw721()
-//    }
-//    
-//    @objc func onFetchNFTDone(_ notification: NSNotification) {
-//        nftGroup = selectedChain.cw721Models
-//        isBusy = false
-//        onUpdateView()
-//    }
-//    
-//    func onUpdateView() {
-//        refresher.endRefreshing()
-//        loadingView.isHidden = true
-//        if (nftGroup.count <= 0) {
-//            emptyDataView.isHidden = false
-//            collectionView.isHidden = true
-//        } else {
-//            emptyDataView.isHidden = true
-//            collectionView.isHidden = false
-//            collectionView.reloadData()
-//        }
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchNFTDone(_:)), name: Notification.Name("FetchNFTs"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchNFTs"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        refresher.endRefreshing()
+    }
+    
+    @objc func onRequestFetch() {
+        if (isBusy) { return }
+        isBusy = true
+        if let grpFetcher = selectedChain.grpcFetcher {
+            grpFetcher.fetchAllCw721()
+        }
+    }
+    
+    @objc func onFetchNFTDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (selectedChain != nil && selectedChain.tag == tag) {
+            isBusy = false
+            nftGroup = selectedChain.getGrpcfetcher()?.cw721Models ?? []
+            onUpdateView()
+        }
+    }
+    
+    func onUpdateView() {
+        refresher.endRefreshing()
+        loadingView.isHidden = true
+        if (nftGroup.count <= 0) {
+            emptyDataView.isHidden = false
+            collectionView.isHidden = true
+        } else {
+            emptyDataView.isHidden = true
+            collectionView.isHidden = false
+            collectionView.reloadData()
+        }
+    }
 
 }
 
-/*
+
 extension CosmosNftVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return nftGroup.count
@@ -155,4 +155,3 @@ extension CosmosNftVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         self.present(transfer, animated: true)
     }
 }
-*/

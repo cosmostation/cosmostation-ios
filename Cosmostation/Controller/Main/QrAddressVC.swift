@@ -23,45 +23,45 @@ class QrAddressVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-//        isEvm = selectedChain is EvmClass
-//        isBech = (selectedChain as? CosmosClass)?.bechAddress.isEmpty == false
-//        
-//        
-//        titleLabel.text = baseAccount.name
-//        evmShareBtn.isHidden = !isEvm
-//        bechShareBtn.isHidden = !isBech
-//        
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.separatorStyle = .none
-//        tableView.register(UINib(nibName: "PopupReceiveCell", bundle: nil), forCellReuseIdentifier: "PopupReceiveCell")
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.sectionHeaderTopPadding = 0.0
+        isEvm = selectedChain.supportEvm
+        isBech = selectedChain.supportCosmos
+        
+        
+        titleLabel.text = baseAccount.name
+        evmShareBtn.isHidden = !isEvm
+        bechShareBtn.isHidden = !isBech
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "PopupReceiveCell", bundle: nil), forCellReuseIdentifier: "PopupReceiveCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderTopPadding = 0.0
     }
     
-//    override func setLocalizedString() {
-//        evmShareBtn.setTitle(NSLocalizedString("str_share_evm_address", comment: ""), for: .normal)
-//        bechShareBtn.setTitle(NSLocalizedString("str_share_bech_address", comment: ""), for: .normal)
-//    }
-//    
-//    @IBAction func onClickEvmShare(_ sender: BaseButton) {
-//        if let selectedChain = selectedChain as? EvmClass {
-//            let activityViewController = UIActivityViewController(activityItems: [selectedChain.evmAddress], applicationActivities: nil)
-//            activityViewController.popoverPresentationController?.sourceView = self.view
-//            self.present(activityViewController, animated: true, completion: nil)
-//        }
-//    }
-//    
-//    
-//    @IBAction func onClickBechShare(_ sender: BaseButton) {
-//        if let selectedChain = selectedChain as? CosmosClass {
-//            let activityViewController = UIActivityViewController(activityItems: [selectedChain.bechAddress], applicationActivities: nil)
-//            activityViewController.popoverPresentationController?.sourceView = self.view
-//            self.present(activityViewController, animated: true, completion: nil)
-//        }
-//    }
+    override func setLocalizedString() {
+        evmShareBtn.setTitle(NSLocalizedString("str_share_evm_address", comment: ""), for: .normal)
+        bechShareBtn.setTitle(NSLocalizedString("str_share_bech_address", comment: ""), for: .normal)
+    }
+    
+    @IBAction func onClickEvmShare(_ sender: BaseButton) {
+        if let evmAddress = selectedChain.evmAddress {
+            let activityViewController = UIActivityViewController(activityItems: [evmAddress], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+    }
+    
+    
+    @IBAction func onClickBechShare(_ sender: BaseButton) {
+        if let bechAddress = selectedChain.bechAddress {
+            let activityViewController = UIActivityViewController(activityItems: [bechAddress], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+    }
 }
-/*
+
 extension QrAddressVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -90,17 +90,16 @@ extension QrAddressVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var toCopyAddress = ""
-        if let selectedChain = selectedChain as? EvmClass, indexPath.section == 0 {
-            toCopyAddress = selectedChain.evmAddress
-        } else if let selectedChain = selectedChain as? CosmosClass, indexPath.section == 1 {
-            toCopyAddress = selectedChain.bechAddress
+        if selectedChain.supportEvm, indexPath.section == 0 {
+            toCopyAddress = selectedChain.evmAddress!
+        } else if selectedChain.supportCosmos, indexPath.section == 1 {
+            toCopyAddress = selectedChain.bechAddress!
         }
         UIPasteboard.general.string = toCopyAddress.trimmingCharacters(in: .whitespacesAndNewlines)
         self.onShowToast(NSLocalizedString("address_copied", comment: ""))
     }
     
 }
- */
 
 extension UIImage {
     func addToCenter(of superView: UIView, width: CGFloat = 80, height: CGFloat = 80) {

@@ -174,15 +174,27 @@ class BaseChain {
         }
     }
     
-    
-    
     func fetchPreCreate() {}
     
     func isTxFeePayable() -> Bool { return false }
     
-    func getExplorerAccount() -> URL? { return nil }
+    func getExplorerAccount() -> URL? {
+        let address: String = supportCosmos ? bechAddress! : evmAddress!
+        if let urlString = getChainListParam()["explorer"]["account"].string,
+           let url = URL(string: urlString.replacingOccurrences(of: "${address}", with: address)) {
+            return url
+        }
+        return nil
+    }
     
-    func getExplorerTx(_ hash: String?) -> URL? { return nil }
+    func getExplorerTx(_ hash: String?) -> URL? {
+        if let urlString = getChainListParam()["explorer"]["tx"].string,
+           let txhash = hash,
+           let url = URL(string: urlString.replacingOccurrences(of: "${hash}", with: txhash)) {
+            return url
+        }
+        return nil
+    }
     
     func getExplorerProposal(_ id: UInt64) -> URL? { return nil }
     

@@ -272,7 +272,7 @@ class CosmosClassVC: BaseVC {
                 }
             }
             
-        } else if (selectedChain is ChainOkt996Keccak) {
+        } else if (selectedChain.isLagacyOKT()) {
             mainFab.addItem(title: "Select Validators", image: UIImage(named: "iconFabAddShare")) { _ in
                 self.onOkAddShareTx()
             }
