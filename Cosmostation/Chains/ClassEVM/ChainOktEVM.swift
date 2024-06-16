@@ -13,6 +13,8 @@ import SwiftyJSON
 
 class ChainOktEVM: BaseChain {
     
+    var oktFetcher: OktFetcher?
+    
     override init() {
         super.init()
         
@@ -20,18 +22,68 @@ class ChainOktEVM: BaseChain {
         tag = "okt60_Keccak"
         logo1 = "chainOktEvm"
         logo2 = "chainOkt2"
+        supportCosmos = true
         supportEvm = true
         apiName = "okc"
         
+        stakeDenom = "okt"
         coinSymbol = "OKT"
         coinGeckoId = "oec-token"
         coinLogo = "tokenOkt"
+        
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         bechAccountPrefix = "ex"
         supportStaking = false
+        isGrpc = false
         evmRpcURL = "https://exchainrpc.okex.org"
         
         initFetcher()
+    }
+    
+    override func getLcdfetcher() -> FetcherLcd? {
+        return oktFetcher
+    }
+    
+    override func initFetcher() {
+        oktFetcher = OktFetcher.init(self)
+        evmFetcher = FetcherEvmrpc.init(self)
+    }
+    
+    override func fetchData(_ id: Int64) {
+        fetchState = .Busy
+        Task {
+            let lcdResult = await oktFetcher?.fetchLcdData(id)
+            let evmResult = await evmFetcher?.fetchEvmData(id)
+            
+            if (lcdResult == false || evmResult == false) {
+                fetchState = .Fail
+                print("fetching Some error ", tag)
+            } else {
+                fetchState = .Success
+                print("fetching good ", tag)
+            }
+            
+            if let oktFetcher = oktFetcher,
+                let evmFetcher = evmFetcher, fetchState == .Success {
+                allCoinValue = oktFetcher.allCoinValue()
+                allCoinUSDValue = oktFetcher.allCoinValue(true)
+                allTokenValue = evmFetcher.allTokenValue()
+                allTokenUSDValue = evmFetcher.allTokenValue(true)
+                
+                BaseData.instance.updateRefAddressesValue(
+                    RefAddress(id, self.tag, self.bechAddress!, self.evmAddress!,
+                               oktFetcher.lcdAllStakingDenomAmount().stringValue, allCoinUSDValue.stringValue,
+                               allTokenUSDValue.stringValue, oktFetcher.lcdAccountInfo.oktCoins?.count))
+            }
+            
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+            })
+        }
+    }
+    
+    static func assetImg(_ original_symbol: String) -> URL {
+        return URL(string: ResourceBase + "okc/asset/" + original_symbol.lowercased() + ".png") ?? URL(string: "")!
     }
 }
 /*

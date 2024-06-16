@@ -178,6 +178,8 @@
 		04449FC72ABD9287004CCD7C /* UITextField+DecimalCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04449FC52ABD9287004CCD7C /* UITextField+DecimalCheck.swift */; };
 		044ECB172A95C2E40042DB3C /* ChainAxelar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044ECB162A95C2E40042DB3C /* ChainAxelar.swift */; };
 		044ECB182A95C2E40042DB3C /* ChainAxelar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044ECB162A95C2E40042DB3C /* ChainAxelar.swift */; };
+		0450321F2C1ECAD900235F6A /* FetcherLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0450321E2C1ECAD900235F6A /* FetcherLcd.swift */; };
+		045032202C1ECAD900235F6A /* FetcherLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0450321E2C1ECAD900235F6A /* FetcherLcd.swift */; };
 		04527DB92A937CA2005F72D7 /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DB72A937CA2005F72D7 /* AssetCell.swift */; };
 		04527DBA2A937CA2005F72D7 /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DB72A937CA2005F72D7 /* AssetCell.swift */; };
 		04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04527DB82A937CA2005F72D7 /* AssetCell.xib */; };
@@ -1771,6 +1773,7 @@
 		0443B8A1285C7F050027A6B9 /* Chain.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Chain.xcassets; sourceTree = "<group>"; };
 		04449FC52ABD9287004CCD7C /* UITextField+DecimalCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+DecimalCheck.swift"; sourceTree = "<group>"; };
 		044ECB162A95C2E40042DB3C /* ChainAxelar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAxelar.swift; sourceTree = "<group>"; };
+		0450321E2C1ECAD900235F6A /* FetcherLcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetcherLcd.swift; sourceTree = "<group>"; };
 		04527DB72A937CA2005F72D7 /* AssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCell.swift; sourceTree = "<group>"; };
 		04527DB82A937CA2005F72D7 /* AssetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCell.xib; sourceTree = "<group>"; };
 		04527DBD2A937CC1005F72D7 /* AssetCosmosClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCosmosClassCell.swift; sourceTree = "<group>"; };
@@ -2961,6 +2964,7 @@
 				04D279F22A67C9A600AF046A /* ChainSui.swift */,
 				042DE6F42C1D4DEA009CAC04 /* FetcherGrpc.swift */,
 				042DE6F72C1D4DFC009CAC04 /* FetcherEvmrpc.swift */,
+				0450321E2C1ECAD900235F6A /* FetcherLcd.swift */,
 			);
 			path = Chains;
 			sourceTree = "<group>";
@@ -4426,6 +4430,7 @@
 				E11EAE102AAD8786003BFC7F /* SettingBaseCell.swift in Sources */,
 				04C817392BA98D75006B800A /* cosmos_feegrant_module_v1_module.pb.swift in Sources */,
 				04C816832BA98D74006B800A /* cosmos_nft_v1beta1_tx.grpc.swift in Sources */,
+				045032202C1ECAD900235F6A /* FetcherLcd.swift in Sources */,
 				04C817CE2BA9900D006B800A /* gaia_globalfee_v1beta1_query.grpc.swift in Sources */,
 				04B789922ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */,
 				046BF1CD2B0F52BC00BC1FC8 /* SelectOktValidatorCell.swift in Sources */,
@@ -5083,6 +5088,7 @@
 				E11EAE1B2AAD87AD003BFC7F /* SettingPriceCell.swift in Sources */,
 				E11EAE0F2AAD8786003BFC7F /* SettingBaseCell.swift in Sources */,
 				04C817382BA98D75006B800A /* cosmos_feegrant_module_v1_module.pb.swift in Sources */,
+				0450321F2C1ECAD900235F6A /* FetcherLcd.swift in Sources */,
 				04C816822BA98D74006B800A /* cosmos_nft_v1beta1_tx.grpc.swift in Sources */,
 				04C817CD2BA9900D006B800A /* gaia_globalfee_v1beta1_query.grpc.swift in Sources */,
 				04B789912ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */,

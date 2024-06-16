@@ -286,7 +286,7 @@ class AllChainClaimStartVC: BaseVC {
 //    
 //    func getConnection(_ chain: BaseChain) -> ClientConnection {
 //        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-//        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.grpcFetcher.getGrpc().0, port: chain.grpcFetcher.getGrpc().1)
+//        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpcfetcher().getGrpc().0, port: chain.getGrpcfetcher().getGrpc().1)
 //    }
 //    
 //    func getCallOptions() -> CallOptions {

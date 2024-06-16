@@ -59,6 +59,7 @@ class BaseChain {
     
     var fetchState = FetchState.Idle
     var grpcFetcher: FetcherGrpc?
+    var lcdFetcher: FetcherLcd?
     var evmFetcher: FetcherEvmrpc?
     
     func getHDPath(_ lastPath: String) -> String {
@@ -88,6 +89,18 @@ class BaseChain {
         if (supportCosmos && supportStaking) {
             bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, validatorPrefix)
         }
+    }
+    
+    func getGrpcfetcher() -> FetcherGrpc? {
+        return grpcFetcher
+    }
+    
+    func getLcdfetcher() -> FetcherLcd? {
+        return lcdFetcher
+    }
+    
+    func getEvmfetcher() -> FetcherEvmrpc? {
+        return evmFetcher
     }
     
     func initFetcher() {
@@ -192,6 +205,14 @@ class BaseChain {
     func isEcosystem() -> Bool {
         return getChainListParam()["moblie_dapp"].bool ?? false
     }
+    
+    
+    func isLagacyOKT() -> Bool {
+        if (tag == "okt996_Keccak" || tag == "okt996_Secp") {
+            return true
+        }
+        return false
+    }
         
 }
 
@@ -274,10 +295,14 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAxelar())
     result.append(ChainKava459())
     result.append(ChainKava118())
-    
+    result.append(ChainNeutron())
+    result.append(ChainOkt996Keccak())
+    result.append(ChainOkt996Secp())
+
     
     result.append(ChainEthereum())
     result.append(ChainAltheaEVM())
+    result.append(ChainOktEVM())
     return result
 }
 

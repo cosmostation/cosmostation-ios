@@ -247,13 +247,13 @@ public class BaseAccount {
     
     func updateAllValue() {
         getDisplayChains().forEach { chain in
-            if let grpcFetcher = chain.grpcFetcher {
+            if let grpcFetcher = chain.getGrpcfetcher() {
                 chain.allCoinValue = grpcFetcher.allCoinValue()
                 chain.allCoinUSDValue = grpcFetcher.allCoinValue(true)
                 chain.allTokenValue = grpcFetcher.allTokenValue()
                 chain.allTokenUSDValue = grpcFetcher.allTokenValue(true)
                 
-            } else if let evmFetcher = chain.evmFetcher {
+            } else if let evmFetcher = chain.getEvmfetcher() {
                 chain.allCoinValue = evmFetcher.allCoinValue()
                 chain.allCoinUSDValue = evmFetcher.allCoinValue(true)
                 chain.allTokenValue = evmFetcher.allTokenValue()

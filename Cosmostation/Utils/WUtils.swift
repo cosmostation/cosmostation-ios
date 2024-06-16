@@ -109,7 +109,7 @@ public class WUtils {
     static func getMintscanPath(_ fromChain: BaseChain, _ toChain: BaseChain, _ denom: String) -> MintscanPath? {
         let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom?.lowercased() == denom.lowercased() }).first
         var msToken: MintscanToken?
-        if let tokenInfo = fromChain.grpcFetcher?.mintscanCw20Tokens.filter({ $0.address == denom }).first {
+        if let tokenInfo = fromChain.getGrpcfetcher()?.mintscanCw20Tokens.filter({ $0.address == denom }).first {
             msToken = tokenInfo
         } 
         
@@ -457,14 +457,14 @@ public class WUtils {
     
     //YONG4
 //    static func onParseVestingAccount(_ baseChain: BaseChain) {
-//        guard let authInfo = baseChain.grpcFetcher?.cosmosAuth else {
+//        guard let authInfo = baseChain.getGrpcfetcher()?.cosmosAuth else {
 //            return
 //        }
 //        
 //        if (authInfo.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)),
 //           let vestingAccount = try? Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: authInfo.value) {
 //
-//            baseChain.grpcFetcher?.cosmosBalances?.forEach({ coin in
+//            baseChain.getGrpcfetcher()?.cosmosBalances?.forEach({ coin in
 //                let denom = coin.denom
 //                var dpBalance = NSDecimalNumber.zero
 //                var dpVesting = NSDecimalNumber.zero

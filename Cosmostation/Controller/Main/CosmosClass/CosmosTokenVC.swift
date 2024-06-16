@@ -23,102 +23,104 @@ class CosmosTokenVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.separatorStyle = .none
-//        tableView.register(UINib(nibName: "AssetCosmosClassCell", bundle: nil), forCellReuseIdentifier: "AssetCosmosClassCell")
-//        tableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.sectionHeaderTopPadding = 0.0
-//        
-//        refresher = UIRefreshControl()
-//        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-//        refresher.tintColor = .color01
-//        tableView.addSubview(refresher)
-//        
-//        onUpdateView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "AssetCosmosClassCell", bundle: nil), forCellReuseIdentifier: "AssetCosmosClassCell")
+        tableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderTopPadding = 0.0
+        
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
+        refresher.tintColor = .color01
+        tableView.addSubview(refresher)
+        
+        onUpdateView()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
-//    }
-//    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
-//        NotificationCenter.default.removeObserver(self, name: Notification.Name("ToggleHideValue"), object: nil)
-//    }
-//    
-//    override func viewDidDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(animated)
-//        refresher.endRefreshing()
-//    }
-//    
-//    @objc func onRequestFetch() {
-//        if (selectedChain.fetchState == .Busy) {
-//            refresher.endRefreshing()
-//        } else {
-//            Task {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ToggleHideValue"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        refresher.endRefreshing()
+    }
+    
+    @objc func onRequestFetch() {
+        if (selectedChain.fetchState == .Busy) {
+            refresher.endRefreshing()
+        } else {
+            Task {
 //                if (selectedChain.supportCw20) {
 //                    selectedChain.fetchAllCw20Balance(baseAccount.id)
 //                } else if let evmChain = selectedChain as? EvmClass {
 //                     await evmChain.fetchAllErc20Balance(baseAccount.id)
 //                }
-//            }
-//        }
-//    }
-//    
-//    @objc func onFetchTokenDone(_ notification: NSNotification) {
-//        DispatchQueue.main.async {
-//            self.mintscanCw20Tokens.removeAll()
-//            self.mintscanErc20Tokens.removeAll()
-//            self.onUpdateView()
-//        }
-//    }
-//    
-//    @objc func onToggleValue(_ notification: NSNotification) {
-//        tableView.reloadData()
-//    }
-//    
-//    func onUpdateView() {
-//        selectedChain.mintscanCw20Tokens.forEach { tokenInfo in
-//            if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
-//                mintscanCw20Tokens.append(tokenInfo)
-//            }
-//        }
-//        mintscanCw20Tokens.sort {
-//            let value0 = selectedChain.tokenValue($0.address!)
-//            let value1 = selectedChain.tokenValue($1.address!)
-//            return value0.compare(value1).rawValue > 0 ? true : false
-//        }
-//        
-//        if let evmChain = selectedChain as? EvmClass {
-//            evmChain.mintscanErc20Tokens.forEach { tokenInfo in
-//                if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
-//                    mintscanErc20Tokens.append(tokenInfo)
-//                }
-//            }
-//            mintscanErc20Tokens.sort {
-//                let value0 = selectedChain.tokenValue($0.address!)
-//                let value1 = selectedChain.tokenValue($1.address!)
-//                return value0.compare(value1).rawValue > 0 ? true : false
-//            }
-//        }
-//        
-//        if (mintscanCw20Tokens.count > 0 || mintscanErc20Tokens.count > 0) {
-//            tableView.reloadData()
-//            tableView.isHidden = false
-//            emptyDataView.isHidden = true
-//        } else {
-//            emptyDataView.isHidden = false
-//        }
-//        refresher.endRefreshing()
-//    }
+            }
+        }
+    }
+    
+    @objc func onFetchTokenDone(_ notification: NSNotification) {
+        DispatchQueue.main.async {
+            self.mintscanCw20Tokens.removeAll()
+            self.mintscanErc20Tokens.removeAll()
+            self.onUpdateView()
+        }
+    }
+    
+    @objc func onToggleValue(_ notification: NSNotification) {
+        tableView.reloadData()
+    }
+    
+    func onUpdateView() {
+        if let grpcFetcher = selectedChain.getGrpcfetcher() {
+            grpcFetcher.mintscanCw20Tokens.forEach { tokenInfo in
+                if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
+                    mintscanCw20Tokens.append(tokenInfo)
+                }
+            }
+            mintscanCw20Tokens.sort {
+                let value0 = grpcFetcher.tokenValue($0.address!)
+                let value1 = grpcFetcher.tokenValue($1.address!)
+                return value0.compare(value1).rawValue > 0 ? true : false
+            }
+        }
+        
+        if let evmFetcher = selectedChain.getEvmfetcher() {
+            evmFetcher.mintscanErc20Tokens.forEach { tokenInfo in
+                if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
+                    mintscanErc20Tokens.append(tokenInfo)
+                }
+            }
+            mintscanErc20Tokens.sort {
+                let value0 = evmFetcher.tokenValue($0.address!)
+                let value1 = evmFetcher.tokenValue($1.address!)
+                return value0.compare(value1).rawValue > 0 ? true : false
+            }
+        }
+        
+        if (mintscanCw20Tokens.count > 0 || mintscanErc20Tokens.count > 0) {
+            tableView.reloadData()
+            tableView.isHidden = false
+            emptyDataView.isHidden = true
+        } else {
+            emptyDataView.isHidden = false
+        }
+        refresher.endRefreshing()
+    }
 }
 
-/*
+
 extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -131,7 +133,7 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
             view.titleLabel.text = "Cw20 Tokens"
             view.cntLabel.text = String(mintscanCw20Tokens.count)
         } else {
-            if let okChain = selectedChain as? ChainOkt996Keccak {
+            if (selectedChain.name == "OKT") {
                 view.titleLabel.text = "Kip20 Tokens"
             } else {
                 view.titleLabel.text = "Erc20 Tokens"
@@ -160,39 +162,39 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
         if (indexPath.section == 0) {
-            cell.bindToken(selectedChain, mintscanCw20Tokens[indexPath.row])
+            cell.bindCosmosClassToken(selectedChain, mintscanCw20Tokens[indexPath.row])
         } else {
-            cell.bindToken(selectedChain, mintscanErc20Tokens[indexPath.row])
+            cell.bindEvmClassToken(selectedChain, mintscanErc20Tokens[indexPath.row])
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (selectedChain.isTxFeePayable() == false) {
-            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-            return
-        }
-        if (indexPath.section == 0) {
-            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-            transfer.sendType = .Only_Cosmos_CW20
-            transfer.fromChain = selectedChain
-            transfer.toSendDenom = mintscanCw20Tokens[indexPath.row].address
-            transfer.toSendMsToken = mintscanCw20Tokens[indexPath.row]
-            transfer.modalTransitionStyle = .coverVertical
-            self.present(transfer, animated: true)
-            return
-            
-        } else {
-            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-            transfer.sendType = .Only_EVM_ERC20
-            transfer.fromChain = selectedChain
-            transfer.toSendDenom = mintscanErc20Tokens[indexPath.row].address
-            transfer.toSendMsToken = mintscanErc20Tokens[indexPath.row]
-            transfer.modalTransitionStyle = .coverVertical
-            self.present(transfer, animated: true)
-            return
-            
-        }
+//        if (selectedChain.isTxFeePayable() == false) {
+//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+//            return
+//        }
+//        if (indexPath.section == 0) {
+//            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+//            transfer.sendType = .Only_Cosmos_CW20
+//            transfer.fromChain = selectedChain
+//            transfer.toSendDenom = mintscanCw20Tokens[indexPath.row].address
+//            transfer.toSendMsToken = mintscanCw20Tokens[indexPath.row]
+//            transfer.modalTransitionStyle = .coverVertical
+//            self.present(transfer, animated: true)
+//            return
+//            
+//        } else {
+//            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+//            transfer.sendType = .Only_EVM_ERC20
+//            transfer.fromChain = selectedChain
+//            transfer.toSendDenom = mintscanErc20Tokens[indexPath.row].address
+//            transfer.toSendMsToken = mintscanErc20Tokens[indexPath.row]
+//            transfer.modalTransitionStyle = .coverVertical
+//            self.present(transfer, animated: true)
+//            return
+//            
+//        }
     }
     
     
@@ -218,4 +220,3 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
         return mask;
     }
 }
-*/

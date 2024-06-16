@@ -88,9 +88,8 @@ class FetcherGrpc {
                     self.fetchCw20Balance(cw20)
                 }
 //                print("fetchAllCw20Balance end ", chain.tag)
-                return true
             }
-            return false
+            return true
             
         } catch {
             print("grpc error \(error)")
@@ -403,6 +402,7 @@ extension FetcherGrpc {
     
 }
 
+//about common grpc call
 extension FetcherGrpc {
     
     func fetchBondedValidator() async throws -> [Cosmos_Staking_V1beta1_Validator]? {

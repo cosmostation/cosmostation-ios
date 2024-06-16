@@ -92,58 +92,39 @@ class SelectChainCell: UITableViewCell {
             
             WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
             
-            if let grpcFetcher = chain.grpcFetcher {
-                let coinCntString = String(grpcFetcher.cosmosBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0) + " Coins"
-                if (chain.supportCw20) {
-                    let tokenCnt = grpcFetcher.mintscanCw20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
-                    if (tokenCnt == 0) {
-                        assetCntLabel.text = coinCntString
-                    } else {
-                        assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
-                    }
-                } else {
-                    assetCntLabel.text = coinCntString
+            var coinCntString = ""
+            var tokenCnt = 0
+            if (chain.name == "OKT") {
+                if let lcdFetcher = chain.getLcdfetcher() {
+                    coinCntString = String(lcdFetcher.lcdAccountInfo.oktCoins?.count ?? 0) + " Coins"
+                }
+                if let evmFetcher = chain.getEvmfetcher() {
+                    tokenCnt = evmFetcher.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
                 }
                 
-            } else if let evmFetcher = chain.evmFetcher {
-                let coinCntString = String(evmFetcher.evmBalances != NSDecimalNumber.zero ? 1 : 0) + " Coins"
-                let tokenCnt = evmFetcher.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
-                if (tokenCnt == 0) {
-                    assetCntLabel.text = coinCntString
-                } else {
-                    assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
+            } else if let grpcFetcher = chain.getGrpcfetcher() {
+                coinCntString = String(grpcFetcher.cosmosBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0) + " Coins"
+                if (chain.supportCw20) {
+                    tokenCnt = grpcFetcher.mintscanCw20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
                 }
+                
+            } else if let evmFetcher = chain.getEvmfetcher() {
+                coinCntString = String(evmFetcher.evmBalances != NSDecimalNumber.zero ? 1 : 0) + " Coins"
+                tokenCnt = evmFetcher.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
             }
             
-//            if let refAddress = BaseData.instance.selectRefAddress(account.id, chain.tag) {
-                
-//                WDP.dpUSDValue(refAddress.lastUsdValue(), currencyLabel, valueLabel)
-//                
-//                let coinCntString = String(refAddress.lastCoinCnt) + " Coins"
-//                if (chain.supportCw20) {
-//                    let tokenCnt = chain.mintscanCw20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
-//                    if (tokenCnt == 0) {
-//                        assetCntLabel.text = coinCntString
-//                    } else {
-//                        assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
-//                    }
-//                    
-//                } else {
-//                    assetCntLabel.text = coinCntString
-//                }
-//                currencyLabel.isHidden = false
-//                valueLabel.isHidden = false
-//                assetCntLabel.isHidden = false
-//                
-//            }
+            if (tokenCnt == 0) {
+                assetCntLabel.text = coinCntString
+            } else {
+                assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
+            }
+            
         } else {
             loadingLabel1.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
             loadingLabel1.isHidden = false
             loadingLabel2.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
             loadingLabel2.isHidden = false
         }
-        
-        
     }
     
     func bindEvmClassChain(_ account: BaseAccount, _ chain: BaseChain, _ selectedList: [String]) {

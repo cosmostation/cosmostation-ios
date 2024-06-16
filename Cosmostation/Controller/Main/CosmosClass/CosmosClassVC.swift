@@ -95,6 +95,9 @@ class CosmosClassVC: BaseVC {
 //        if (selectedChain is ChainOkt996Keccak) {
 //            (selectedChain as? ChainOkt996Keccak)?.fetchValidators()
 //        }
+        if (selectedChain.isLagacyOKT()) {
+            selectedChain.fetchValidatorInfos()
+        }
         
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
         addressTap.cancelsTouchesInView = false
@@ -297,7 +300,7 @@ class CosmosClassVC: BaseVC {
             mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
                 self.onProposalList()
             }
-            if (selectedChain.grpcFetcher?.cosmosCommissions.count ?? 0 > 0) {
+            if (selectedChain.getGrpcfetcher()?.cosmosCommissions.count ?? 0 > 0) {
                 mainFab.addItem(title: "Claim Commission", image: UIImage(named: "iconFabCommission")) { _ in
                     self.onClaimCommissionTx()
                 }
@@ -473,7 +476,7 @@ extension CosmosClassVC {
     }
     
     func onClaimRewardTx() {
-        if (selectedChain.grpcFetcher?.cosmosValidators.count ?? 0 <= 0) {
+        if (selectedChain.getGrpcfetcher()?.cosmosValidators.count ?? 0 <= 0) {
             onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
             return
         }
@@ -497,7 +500,7 @@ extension CosmosClassVC {
     }
     
     func onClaimCompoundingTx() {
-        if (selectedChain.grpcFetcher?.cosmosValidators.count ?? 0 <= 0) {
+        if (selectedChain.getGrpcfetcher()?.cosmosValidators.count ?? 0 <= 0) {
             onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
             return
         }
@@ -543,7 +546,7 @@ extension CosmosClassVC {
     }
     
     func onStakeInfo() {
-        if (selectedChain.grpcFetcher?.cosmosValidators.count ?? 0 <= 0) {
+        if (selectedChain.getGrpcfetcher()?.cosmosValidators.count ?? 0 <= 0) {
             onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
             return
         }

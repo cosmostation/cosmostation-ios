@@ -80,8 +80,12 @@ class Portfolio2Cell: UITableViewCell {
         logoImg1.image = UIImage.init(named: chain.logo1)
         logoImg2.image = UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
-        bechAddressLabel.text = chain.bechAddress
-        evmAddressLabel.text = chain.evmAddress
+        if (chain.supportCosmos) {
+            bechAddressLabel.text = chain.bechAddress
+        }
+        if (chain.supportEvm) {
+            evmAddressLabel.text = chain.evmAddress
+        }
         if (chain.supportCosmos && chain.supportEvm) {
             starEvmAddressAnimation()
         }
@@ -112,27 +116,31 @@ class Portfolio2Cell: UITableViewCell {
                 WDP.dpValue(chain.allValue(), valuecurrencyLabel, valueLabel)
             }
             
-            if let grpcFetcher = chain.grpcFetcher {
-                let coinCntString = String(grpcFetcher.cosmosBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0) + " Coins"
-                if (chain.supportCw20) {
-                    let tokenCnt = grpcFetcher.mintscanCw20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
-                    if (tokenCnt == 0) {
-                        assetCntLabel.text = coinCntString
-                    } else {
-                        assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
-                    }
-                } else {
-                    assetCntLabel.text = coinCntString
+            var coinCntString = ""
+            var tokenCnt = 0
+            if (chain.name == "OKT") {
+                if let lcdFetcher = chain.getLcdfetcher() {
+                    coinCntString = String(lcdFetcher.lcdAccountInfo.oktCoins?.count ?? 0) + " Coins"
+                }
+                if let evmFetcher = chain.getEvmfetcher() {
+                    tokenCnt = evmFetcher.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
                 }
                 
-            } else if let evmFetcher = chain.evmFetcher {
-                let coinCntString = String(evmFetcher.evmBalances != NSDecimalNumber.zero ? 1 : 0) + " Coins"
-                let tokenCnt = evmFetcher.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
-                if (tokenCnt == 0) {
-                    assetCntLabel.text = coinCntString
-                } else {
-                    assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
+            } else if let grpcFetcher = chain.getGrpcfetcher() {
+                coinCntString = String(grpcFetcher.cosmosBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0) + " Coins"
+                if (chain.supportCw20) {
+                    tokenCnt = grpcFetcher.mintscanCw20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
                 }
+                
+            } else if let evmFetcher = chain.getEvmfetcher() {
+                coinCntString = String(evmFetcher.evmBalances != NSDecimalNumber.zero ? 1 : 0) + " Coins"
+                tokenCnt = evmFetcher.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
+            }
+            
+            if (tokenCnt == 0) {
+                assetCntLabel.text = coinCntString
+            } else {
+                assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
             }
             
         } else {
@@ -143,7 +151,11 @@ class Portfolio2Cell: UITableViewCell {
         }
         
         //DP Price
-        if (chain.supportCosmos) {
+        if (chain.name == "OKT") {
+            WDP.dpPrice(OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+            
+        } else if (chain.supportCosmos) {
             if let stakeDenom = chain.stakeDenom,
                let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)

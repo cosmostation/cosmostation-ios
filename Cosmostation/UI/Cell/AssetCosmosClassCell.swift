@@ -67,7 +67,7 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     func bindCosmosStakeAsset(_ baseChain: BaseChain) {
-        if (baseChain is ChainOktEVM || baseChain is ChainOkt996Keccak) {
+        if (baseChain.name == "OKT") {
             bindOktAsset(baseChain)
             
         } else if (baseChain is ChainNeutron) {
@@ -75,7 +75,7 @@ class AssetCosmosClassCell: UITableViewCell {
             
         } else {
             let stakeDenom = baseChain.stakeDenom!
-            if let gFetcher = baseChain.grpcFetcher,
+            if let gFetcher = baseChain.getGrpcfetcher(),
                let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
                 let value = gFetcher.denomValue(stakeDenom)
                 
@@ -115,7 +115,7 @@ class AssetCosmosClassCell: UITableViewCell {
                 if (gFetcher.rewardAllCoins().count > 0) {
                     rewardLayer.isHidden = false
                     if (gFetcher.rewardOtherDenomTypeCnts() > 0) {
-                        rewardTitle.text = "Reward + " + String(baseChain.grpcFetcher!.rewardOtherDenomTypeCnts())
+                        rewardTitle.text = "Reward + " + String(baseChain.getGrpcfetcher()!.rewardOtherDenomTypeCnts())
                     } else {
                         rewardTitle.text = "Reward"
                     }
@@ -151,6 +151,48 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     func bindOktAsset(_ baseChain: BaseChain) {
+        if let oktFetcher = baseChain.getLcdfetcher() as? OktFetcher,
+           let stakeDenom = baseChain.stakeDenom {
+            stakingTitle.text = "Deposited"
+            unstakingTitle.text = "Withdrawing"
+            
+            let value = baseChain.allValue()
+            coinImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
+            symbolLabel.text = stakeDenom.uppercased()
+            
+            WDP.dpPrice(OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
+            
+            let availableAmount = oktFetcher.lcdBalanceAmount(stakeDenom)
+            availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 18)
+            
+            let depositAmount = oktFetcher.lcdOktDepositAmount()
+            stakingLabel?.attributedText = WDP.dpAmount(depositAmount.stringValue, stakingLabel!.font, 18)
+            
+            let withdrawAmount = oktFetcher.lcdOktWithdrawAmount()
+            if (withdrawAmount != NSDecimalNumber.zero) {
+                unstakingLayer.isHidden = false
+                unstakingLabel?.attributedText = WDP.dpAmount(withdrawAmount.stringValue, unstakingLabel!.font, 18)
+            }
+            
+            let totalAmount = availableAmount.adding(depositAmount).adding(withdrawAmount)
+            amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 18)
+            
+            if (BaseData.instance.getHideValue()) {
+                availableLabel.text = "✱✱✱✱"
+                stakingLabel.text = "✱✱✱✱"
+                unstakingLabel.text = "✱✱✱✱"
+            }
+            
+        }
 //        if let oktChain = baseChain as? ChainOkt996Keccak {
 //            stakingTitle.text = "Deposited"
 //            unstakingTitle.text = "Withdrawing"
@@ -237,46 +279,46 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     func bindNeutron(_ baseChain: BaseChain) {
-//        if let neutronChain = baseChain as? ChainNeutron {
-//            stakingTitle.text = "Vault Deposited"
-//            let stakeDenom = neutronChain.stakeDenom!
-//            if let msAsset = BaseData.instance.getAsset(neutronChain.apiName, stakeDenom) {
-//                let value = neutronChain.denomValue(stakeDenom)
-//                coinImg.af.setImage(withURL: msAsset.assetImg())
-//                symbolLabel.text = msAsset.symbol?.uppercased()
-//                
-//                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
-//                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
-//                if (BaseData.instance.getHideValue()) {
-//                    hidenValueLabel.isHidden = false
-//                } else {
-//                    WDP.dpValue(value, valueCurrencyLabel, valueLabel)
-//                    amountLabel.isHidden = false
-//                    valueCurrencyLabel.isHidden = false
-//                    valueLabel.isHidden = false
-//                }
-//                
-//                let availableAmount = neutronChain.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-//                availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
-//                
-//                let vestingAmount = neutronChain.neutronVestingAmount().multiplying(byPowerOf10: -msAsset.decimals!)
-//                if (vestingAmount != NSDecimalNumber.zero) {
-//                    vestingLayer.isHidden = false
-//                    vestingLabel?.attributedText = WDP.dpAmount(vestingAmount.stringValue, vestingLabel!.font, 6)
-//                }
-//                
-//                let depositedAmount = neutronChain.neutronDeposited.multiplying(byPowerOf10: -msAsset.decimals!)
-//                stakingLabel?.attributedText = WDP.dpAmount(depositedAmount.stringValue, stakingLabel!.font, 6)
-//                
-//                let totalAmount = availableAmount.adding(vestingAmount).adding(depositedAmount)
-//                amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 6)
-//                
-//                if (BaseData.instance.getHideValue()) {
-//                    availableLabel.text = "✱✱✱✱"
-//                    vestingLabel.text = "✱✱✱✱"
-//                    stakingLabel.text = "✱✱✱✱"
-//                }
-//            }
-//        }
+        if let neutronFetcher = baseChain.getGrpcfetcher() as? NeutronFetcher,
+           let stakeDenom = baseChain.stakeDenom {
+            stakingTitle.text = "Vault Deposited"
+            if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+                let value = neutronFetcher.denomValue(stakeDenom)
+                coinImg.af.setImage(withURL: msAsset.assetImg())
+                symbolLabel.text = msAsset.symbol?.uppercased()
+                
+                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+                if (BaseData.instance.getHideValue()) {
+                    hidenValueLabel.isHidden = false
+                } else {
+                    WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                    amountLabel.isHidden = false
+                    valueCurrencyLabel.isHidden = false
+                    valueLabel.isHidden = false
+                }
+                
+                let availableAmount = neutronFetcher.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+                availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
+                
+                let vestingAmount = neutronFetcher.neutronVestingAmount().multiplying(byPowerOf10: -msAsset.decimals!)
+                if (vestingAmount != NSDecimalNumber.zero) {
+                    vestingLayer.isHidden = false
+                    vestingLabel?.attributedText = WDP.dpAmount(vestingAmount.stringValue, vestingLabel!.font, 6)
+                }
+                
+                let depositedAmount = neutronFetcher.neutronDeposited.multiplying(byPowerOf10: -msAsset.decimals!)
+                stakingLabel?.attributedText = WDP.dpAmount(depositedAmount.stringValue, stakingLabel!.font, 6)
+                
+                let totalAmount = availableAmount.adding(vestingAmount).adding(depositedAmount)
+                amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 6)
+                
+                if (BaseData.instance.getHideValue()) {
+                    availableLabel.text = "✱✱✱✱"
+                    vestingLabel.text = "✱✱✱✱"
+                    stakingLabel.text = "✱✱✱✱"
+                }
+            }
+        }
     }
 }

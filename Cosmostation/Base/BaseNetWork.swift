@@ -162,35 +162,35 @@ class BaseNetWork {
 //LCD call for legacy chains
 extension BaseNetWork {
     
-    static func lcdNodeInfoUrl(_ chain: BaseChain) -> String {
-        if (chain.tag.starts(with: "okt")) {
-            return OKT_LCD + "node_info"
-        }
-        return ""
-    }
-    
-    static func lcdAccountInfoUrl(_ chain: BaseChain, _ address: String) -> String {
-        if (chain.tag.starts(with: "okt")) {
-            return OKT_LCD + "auth/accounts/" + address
-        }
-        return ""
-    }
-    
-    static func lcdOktDepositUrl(_ address: String) -> String {
-        return OKT_LCD + "staking/delegators/" + address
-    }
-    
-    static func lcdOktWithdrawUrl(_ address: String) -> String {
-        return OKT_LCD + "staking/delegators/" + address + "/unbonding_delegations"
-    }
-    
-    static func lcdOktTokenUrl() -> String {
-        return OKT_LCD + "tokens"
-    }
-    
-    static func lcdOktValidatorsUrl() -> String {
-        return OKT_LCD + "staking/validators"
-    }
+//    static func lcdNodeInfoUrl(_ chain: BaseChain) -> String {
+//        if (chain.tag.starts(with: "okt")) {
+//            return OKT_LCD + "node_info"
+//        }
+//        return ""
+//    }
+//    
+//    static func lcdAccountInfoUrl(_ chain: BaseChain, _ address: String) -> String {
+//        if (chain.tag.starts(with: "okt")) {
+//            return OKT_LCD + "auth/accounts/" + address
+//        }
+//        return ""
+//    }
+//    
+//    static func lcdOktDepositUrl(_ address: String) -> String {
+//        return OKT_LCD + "staking/delegators/" + address
+//    }
+//    
+//    static func lcdOktWithdrawUrl(_ address: String) -> String {
+//        return OKT_LCD + "staking/delegators/" + address + "/unbonding_delegations"
+//    }
+//    
+//    static func lcdOktTokenUrl() -> String {
+//        return OKT_LCD + "tokens"
+//    }
+//    
+//    static func lcdOktValidatorsUrl() -> String {
+//        return OKT_LCD + "staking/validators"
+//    }
     
     static func broadcastUrl(_ chain: BaseChain) -> String {
         if (chain is ChainOkt996Keccak) {
