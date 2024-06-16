@@ -58,6 +58,7 @@ class ChainNeutron: BaseChain {
             }
             
             if let neutronFetcher = neutronFetcher, fetchState == .Success {
+                WUtils.onParseVestingAccount(self)
                 allCoinValue = neutronFetcher.allCoinValue()
                 allCoinUSDValue = neutronFetcher.allCoinValue(true)
                 allTokenValue = neutronFetcher.allTokenValue()

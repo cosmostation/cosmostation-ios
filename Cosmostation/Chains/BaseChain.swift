@@ -134,6 +134,7 @@ class BaseChain {
             
             if (self.fetchState == .Success) {
                 if let grpcFetcher = grpcFetcher, supportCosmos == true {
+                    WUtils.onParseVestingAccount(self)
                     allCoinValue = grpcFetcher.allCoinValue()
                     allCoinUSDValue = grpcFetcher.allCoinValue(true)
                     allTokenValue = grpcFetcher.allTokenValue()
@@ -178,6 +179,151 @@ class BaseChain {
     
     func isTxFeePayable() -> Bool { return false }
     
+
+    
+    func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
+        if (usd == true) {
+            return allCoinUSDValue.adding(allTokenUSDValue)
+        } else {
+            return allCoinValue.adding(allTokenValue)
+        }
+    }
+    
+}
+
+// for Param check
+extension BaseChain {
+    func getChainParam() -> JSON {
+        return BaseData.instance.mintscanChainParams?[apiName] ?? JSON()
+    }
+    
+    func getChainListParam() -> JSON {
+        return getChainParam()["params"]["chainlist_params"]
+    }
+    
+    func chainDappName() -> String? {
+        return getChainListParam()["name_for_dapp"].string?.lowercased()
+    }
+    
+    func isGasSimulable() -> Bool {
+        return getChainListParam()["fee"]["isSimulable"].bool ?? true
+    }
+    
+    func isBankLocked() -> Bool {
+        return getChainListParam()["isBankLocked"].bool ?? false
+    }
+    
+    func isEcosystem() -> Bool {
+        return getChainListParam()["moblie_dapp"].bool ?? false
+    }
+    
+    func voteThreshold() -> NSDecimalNumber {
+        let threshold = getChainListParam()["voting_threshold"].uInt64Value
+        return NSDecimalNumber(value: threshold)
+    }
+    
+    func gasMultiply() -> Double {
+        if let mutiply = getChainListParam()["fee"]["simul_gas_multiply"].double {
+            return mutiply
+        }
+        return 1.2
+    }
+    
+    func getFeeInfos() -> [FeeInfo] {
+        var result = [FeeInfo]()
+        getChainListParam()["fee"]["rate"].arrayValue.forEach { rate in
+            result.append(FeeInfo.init(rate.stringValue))
+        }
+        if (result.count == 1) {
+            result[0].title = NSLocalizedString("str_fixed", comment: "")
+        } else if (result.count == 2) {
+            result[1].title = NSLocalizedString("str_average", comment: "")
+            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+                result[0].title = NSLocalizedString("str_zero", comment: "")
+            } else {
+                result[0].title = NSLocalizedString("str_tiny", comment: "")
+            }
+        } else if (result.count == 3) {
+            result[2].title = NSLocalizedString("str_average", comment: "")
+            result[1].title = NSLocalizedString("str_low", comment: "")
+            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+                result[0].title = NSLocalizedString("str_zero", comment: "")
+            } else {
+                result[0].title = NSLocalizedString("str_tiny", comment: "")
+            }
+        }
+        return result
+    }
+    
+    func getBaseFeeInfo() -> FeeInfo {
+        return getFeeInfos()[getFeeBasePosition()]
+    }
+    
+    func getFeeBasePosition() -> Int {
+        return getChainListParam()["fee"]["base"].intValue
+    }
+    
+    func getFeeBaseGasAmount() -> UInt64 {
+        guard let limit = getChainListParam()["fee"]["init_gas_limit"].uInt64 else {
+            return UInt64(BASE_GAS_AMOUNT)!
+        }
+        return limit
+    }
+    
+    func getFeeBaseGasAmount() -> NSDecimalNumber {
+        return NSDecimalNumber(string: String(getFeeBaseGasAmount()))
+    }
+    //get chainlist suggest fees array
+    func getDefaultFeeCoins() -> [Cosmos_Base_V1beta1_Coin] {
+        var result = [Cosmos_Base_V1beta1_Coin]()
+        let gasAmount: NSDecimalNumber = getFeeBaseGasAmount()
+        if (getFeeInfos().count > 0) {
+            let feeDatas = getFeeInfos()[getFeeBasePosition()].FeeDatas
+            feeDatas.forEach { feeData in
+                let amount = (feeData.gasRate)!.multiplying(by: gasAmount, withBehavior: handler0Up)
+                result.append(Cosmos_Base_V1beta1_Coin.with {  $0.denom = feeData.denom!; $0.amount = amount.stringValue })
+            }
+        }
+        return result
+    }
+    
+    //get first payable fee with this account
+    func getInitPayableFee() -> Cosmos_Tx_V1beta1_Fee? {
+        guard let grpcFetcher = grpcFetcher else { return nil }
+        var feeCoin: Cosmos_Base_V1beta1_Coin?
+        for i in 0..<getDefaultFeeCoins().count {
+            let minFee = getDefaultFeeCoins()[i]
+            if (grpcFetcher.balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+                feeCoin = minFee
+                break
+            }
+        }
+        if (feeCoin != nil) {
+            return Cosmos_Tx_V1beta1_Fee.with {
+                $0.gasLimit = getFeeBaseGasAmount()
+                $0.amount = [feeCoin!]
+            }
+        }
+        return nil
+    }
+    
+    //get user selected fee
+    func getUserSelectedFee(_ position: Int, _ denom: String) -> Cosmos_Tx_V1beta1_Fee {
+        let gasAmount: NSDecimalNumber = getFeeBaseGasAmount()
+        let feeDatas = getFeeInfos()[position].FeeDatas
+        let rate = feeDatas.filter { $0.denom == denom }.first!.gasRate
+        let coinAmount = rate!.multiplying(by: gasAmount, withBehavior: handler0Up)
+        return Cosmos_Tx_V1beta1_Fee.with {
+            $0.gasLimit = getFeeBaseGasAmount()
+            $0.amount = [Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = coinAmount.stringValue }]
+        }
+    }
+    
+}
+
+//for utils
+extension BaseChain {
+    
     func getExplorerAccount() -> URL? {
         let address: String = supportCosmos ? bechAddress! : evmAddress!
         if let urlString = getChainListParam()["explorer"]["account"].string,
@@ -196,32 +342,13 @@ class BaseChain {
         return nil
     }
     
-    func getExplorerProposal(_ id: UInt64) -> URL? { return nil }
-    
-    func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        if (usd == true) {
-            return allCoinUSDValue.adding(allTokenUSDValue)
-        } else {
-            return allCoinValue.adding(allTokenValue)
+    func getExplorerProposal(_ id: UInt64) -> URL? {
+        if let urlString = getChainListParam()["explorer"]["proposal"].string,
+           let url = URL(string: urlString.replacingOccurrences(of: "${id}", with: String(id))) {
+            return url
         }
+        return nil
     }
-    
-    func getChainParam() -> JSON {
-        return BaseData.instance.mintscanChainParams?[apiName] ?? JSON()
-    }
-    
-    func getChainListParam() -> JSON {
-        return getChainParam()["params"]["chainlist_params"]
-    }
-    func isEcosystem() -> Bool {
-        return getChainListParam()["moblie_dapp"].bool ?? false
-    }
-    
-    func voteThreshold() -> NSDecimalNumber {
-        let threshold = getChainListParam()["voting_threshold"].uInt64Value
-        return NSDecimalNumber(value: threshold)
-    }
-    
     
     func isLagacyOKT() -> Bool {
         if (tag == "okt996_Keccak" || tag == "okt996_Secp") {
@@ -234,7 +361,6 @@ class BaseChain {
         return URL(string: ResourceBase + apiName + "/moniker/" + opAddress + ".png") ?? URL(string: "")!
     }
 }
-
 
 struct AccountKeyType {
     var pubkeyType: PubKeyType!
@@ -395,6 +521,21 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainXplaEVM())
     
 //    result.append(ChainBeraEVM_T())
+    
+    
+    
+    result.forEach { chain in
+        if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {
+            chain.chainIdCosmos = cosmosChainId
+        }
+        if let evmChainId = chain.getChainListParam()["chain_id_evm"].string {
+            chain.chainIdEvm = evmChainId
+        }
+    }
+    
+    if (BaseData.instance.getHideLegacy()) {
+        return result.filter({ $0.isDefault == true })
+    }
     return result
 }
 

@@ -95,7 +95,7 @@ public class BaseAccount {
         
     }
     
-    func getDisplayChains() -> [BaseChain] {
+    func getDpChains() -> [BaseChain] {
         return allChains.filter { chain in
             dpTags.contains(chain.tag)
         }
@@ -149,13 +149,38 @@ public class BaseAccount {
 //        return (evmResult, cosmosResult)
 //    }
     
+    func initAllKeys() async -> [BaseChain] {
+        var result = ALLCHAINS()
+        let keychain = BaseData.instance.getKeyChain()
+        if (type == .withMnemonic) {
+            if let secureData = try? keychain.getString(uuid.sha1()),
+               let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
+                result.forEach { chain in
+                    if (chain.publicKey == nil) {
+                        chain.setInfoWithSeed(seed, lastHDPath)
+                    }
+                }
+            }
+            
+        } else if (type == .onlyPrivateKey) {
+            if let secureKey = try? keychain.getString(uuid.sha1()) {
+                result.forEach { chain in
+                    if (chain.publicKey == nil) {
+                        chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                    }
+                }
+            }
+        }
+        return result
+    }
+    
     func fetchDpChains() {
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
                let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
                 Task {
-                    await getDisplayChains().concurrentForEach { chain in
+                    await getDpChains().concurrentForEach { chain in
                         if (chain.publicKey == nil) {
                             chain.setInfoWithSeed(seed, self.lastHDPath)
                         }
@@ -169,7 +194,7 @@ public class BaseAccount {
         } else if (type == .onlyPrivateKey) {
             if let secureKey = try? keychain.getString(uuid.sha1()) {
                 Task {
-                    await getDisplayChains().concurrentForEach { chain in
+                    await getDpChains().concurrentForEach { chain in
                         if (chain.publicKey == nil) {
                             chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
                         }
@@ -180,9 +205,7 @@ public class BaseAccount {
                 }
             }
         }
-        
     }
-    
     
     func fetchAllChains() {
         let keychain = BaseData.instance.getKeyChain()
@@ -246,7 +269,7 @@ public class BaseAccount {
 
     
     func updateAllValue() {
-        getDisplayChains().forEach { chain in
+        getDpChains().forEach { chain in
             if let grpcFetcher = chain.getGrpcfetcher() {
                 chain.allCoinValue = grpcFetcher.allCoinValue()
                 chain.allCoinUSDValue = grpcFetcher.allCoinValue(true)

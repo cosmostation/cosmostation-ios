@@ -95,10 +95,10 @@ class PortfolioVC: BaseVC {
     func initView() {
         baseAccount = BaseData.instance.baseAccount
         
-        mainnetChains = baseAccount.getDisplayChains().filter({ $0.isTestnet == false })
+        mainnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == false })
         searchMainnets = mainnetChains
         
-        testnetChains = baseAccount.getDisplayChains().filter({ $0.isTestnet == true })
+        testnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == true })
         searchTestnets = testnetChains
         
         onUpdateSearchBar()
@@ -111,11 +111,11 @@ class PortfolioVC: BaseVC {
     }
     
     @objc func onRequestFetch() {
-        if (baseAccount.getDisplayChains().filter { $0.fetchState == .Busy }.count > 0) {
+        if (baseAccount.getDpChains().filter { $0.fetchState == .Busy }.count > 0) {
             refresher.endRefreshing()
         } else {
             BaseNetWork().fetchPrices()
-            baseAccount.getDisplayChains().forEach { $0.fetchState = .Idle }
+            baseAccount.getDpChains().forEach { $0.fetchState = .Idle }
             baseAccount?.fetchDpChains()
             tableView.reloadData()
             refresher.endRefreshing()
@@ -172,7 +172,7 @@ class PortfolioVC: BaseVC {
     
     func onUpdateTotal() {
         var sum = NSDecimalNumber.zero
-        baseAccount.getDisplayChains().forEach { chain in
+        baseAccount.getDpChains().forEach { chain in
             sum = sum.adding(chain.allValue())
         }
         DispatchQueue.main.async {
@@ -196,10 +196,10 @@ class PortfolioVC: BaseVC {
     
     func onChainSelected() {
         baseAccount.fetchDpChains()
-        mainnetChains = baseAccount.getDisplayChains().filter({ $0.isTestnet == false })
+        mainnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == false })
         searchMainnets = mainnetChains
         
-        testnetChains = baseAccount.getDisplayChains().filter({ $0.isTestnet == true })
+        testnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == true })
         searchTestnets = testnetChains
         
         onUpdateSearchBar()

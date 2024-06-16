@@ -15,8 +15,7 @@ import GRPC
 import NIO
 import SwiftProtobuf
 
-//class AllChainVoteStartVC: BaseVC, PinDelegate {
-class AllChainVoteStartVC: BaseVC {
+class AllChainVoteStartVC: BaseVC, PinDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var filterBtn: UIButton!
@@ -38,261 +37,250 @@ class AllChainVoteStartVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         
-//        titleLabel.isHidden = true
-//        filterMsgLabel.isHidden = true
-//        voteBtn.isHidden = true
-//        
-//        lottieView.isHidden = false
-//        lottieView.animation = LottieAnimation.named("loading")
-//        lottieView.contentMode = .scaleAspectFit
-//        lottieView.loopMode = .loop
-//        lottieView.animationSpeed = 1.3
-//        lottieView.play()
-//        
-//        tableView.isHidden = true
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.separatorStyle = .none
-//        tableView.register(UINib(nibName: "VoteAllChainCell", bundle: nil), forCellReuseIdentifier: "VoteAllChainCell")
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.sectionHeaderTopPadding = 0.0
-//        
-//        voteBtn.isEnabled = false
-//        onInitView()
+        titleLabel.isHidden = true
+        filterMsgLabel.isHidden = true
+        voteBtn.isHidden = true
+        
+        lottieView.isHidden = false
+        lottieView.animation = LottieAnimation.named("loading")
+        lottieView.contentMode = .scaleAspectFit
+        lottieView.loopMode = .loop
+        lottieView.animationSpeed = 1.3
+        lottieView.play()
+        
+        tableView.isHidden = true
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "VoteAllChainCell", bundle: nil), forCellReuseIdentifier: "VoteAllChainCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderTopPadding = 0.0
+        
+        voteBtn.isEnabled = false
+        onInitView()
     }
     
-//    override func setLocalizedString() {
-//        titleLabel.text = NSLocalizedString("str_hide_done_proposal", comment: "")
-//        filterMsgLabel.text = NSLocalizedString("msg_vote_all_detail", comment: "")
-//        voteBtn.setTitle(NSLocalizedString("str_vote_all", comment: ""), for: .normal)
-//        confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
-//    }
-//    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
-//    }
-//    
-//    override func viewDidDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(animated)
-//        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
-//    }
-//    
-//    @IBAction func onClickFilter(_ sender: UIButton) {
-//        if (toDisplayInfos.filter { $0.isBusy == true }.count > 0) { return }
-//        if (toDisplayInfos.filter { $0.txResponse != nil }.count > 0) { return }
-//        isShowAll = !isShowAll
-//        if (isShowAll) {
-//            filterBtn.setImage(UIImage(named: "iconVoteAllShowAll"), for: .normal)
-//            titleLabel.text = NSLocalizedString("str_show_all_proposal", comment: "")
-//        }  else {
-//            filterBtn.setImage(UIImage(named: "iconVoteAllFiltered"), for: .normal)
-//            titleLabel.text = NSLocalizedString("str_hide_done_proposal", comment: "")
-//        }
-//        onUpdateView()
-//    }
-//    
-//    @objc func onFetchDone(_ notification: NSNotification) {
-//        onInitView()
-//    }
-//    
-//    func onInitView() {
-//        if (baseAccount.getDisplayCosmosChains().filter { $0.fetchState == .Busy }.count == 0 &&
-//            baseAccount.getDisplayEvmChains().filter { $0.fetchState == .Busy }.count == 0) {
-//            
-//            var stakedChains = [BaseChain]()
-//            baseAccount.getDisplayCosmosChains().filter { $0.isDefault == true && $0.tag != "finschia438" }.forEach { chain in
-//                let delegated = chain.delegationAmountSum()
-//                let voteThreshold = chain.voteThreshold()
-//                let txFee = chain.getInitPayableFee()
-//                if (delegated.compare(voteThreshold).rawValue > 0 && txFee != nil) {
-//                    stakedChains.append(chain)
-//                }
-//            }
-//            
-//            baseAccount.getDisplayEvmChains().filter { $0.supportCosmos == true }.forEach { chain in
-//                let delegated = chain.delegationAmountSum()
-//                let voteThreshold = chain.voteThreshold()
-//                let txFee = chain.getInitPayableFee()
-//                if (delegated.compare(voteThreshold).rawValue > 0 && txFee != nil) {
-//                    stakedChains.append(chain)
-//                }
-//            }
-//            allLiveInfo.removeAll()
-//            toDisplayInfos.removeAll()
-//            onFetchProposalInfos(stakedChains)
-//        }
-//    }
-//    
-//    func onUpdateView() {
-//        titleLabel.isHidden = false
-//        filterMsgLabel.isHidden = false
-//        voteBtn.isEnabled = false
-//        emptyView.isHidden = true
-//        filterBtn.isHidden = false
-//        lodingView.isHidden = true
-//        
-//        self.allLiveInfo.sort {
-//            if ($0.basechain.tag == "cosmos118") { return true }
-//            if ($1.basechain.tag == "cosmos118") { return false }
-//            if ($0.basechain.tag == "govgen118") { return true }
-//            if ($1.basechain.tag == "govgen118") { return false }
-//            return false
-//        }
-//        
-//        toDisplayInfos.removeAll()
-//        if (isShowAll) {
-//            toDisplayInfos = allLiveInfo.map { $0 }
-//        } else {
-//            allLiveInfo.forEach { info in
-//                var filteredProposal = [MintscanProposal]()
-//                let proposals = info.msProposals
-//                let myVotes = info.msMyVotes
-//                proposals.forEach { proposal in
-//                    if (myVotes.filter({ $0.proposal_id == proposal.id }).count ==  0) {
-//                        filteredProposal.append(proposal)
-//                    }
-//                }
-//                if (filteredProposal.count > 0) {
-//                    toDisplayInfos.append(VoteAllModel.init(info.basechain, filteredProposal, myVotes))
-//                }
-//            }
-//        }
-//        
-//        if (toDisplayInfos.count == 0) {
-//            emptyView.isHidden = false
-//        } else {
-//            voteBtn.isHidden = false
-//        }
-//        tableView.isHidden = false
-//        tableView.reloadData()
-//    }
-//    
-//    func onUpdateProgress(_ progress: Int, _ allCnt: Int) {
-//        DispatchQueue.main.async(execute: {
-//            self.progressLabel.text = "Checked " + String(progress) +  "/" +  String(allCnt)
-//        })
-//    }
-//    
-//    func onSimul(_ section: Int) {
-//        if (toDisplayInfos[section].msProposals.filter { $0.toVoteOption == nil }.count > 0) {
-//            return
-//        }
-//        
-//        Task {
-//            toDisplayInfos[section].onClear()
-//            let cosmosChain = toDisplayInfos[section].basechain as! CosmosClass
-//            var txFee = cosmosChain.getInitPayableFee()!
-//            var tempToVotes = [Cosmos_Gov_V1beta1_MsgVote]()
-//            toDisplayInfos[section].msProposals.forEach { proposal in
-//                let voteMsg = Cosmos_Gov_V1beta1_MsgVote.with {
-//                    $0.voter = cosmosChain.bechAddress
-//                    $0.proposalID = proposal.id!
-//                    $0.option = proposal.toVoteOption!
-//                }
-//                tempToVotes.append(voteMsg)
-//            }
-//            
-//            toDisplayInfos[section].isBusy = true
-//            onSectionReload(section)
-//        
-//            if let simul = try await simulateVoteTx(cosmosChain, tempToVotes) {
-//                let toGas = simul.gasInfo.gasUsed
-//                txFee.gasLimit = UInt64(Double(toGas) * cosmosChain.gasMultiply())
-//                if let gasRate = cosmosChain.getBaseFeeInfo().FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
-//                    let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
-//                    let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
-//                    txFee.amount[0].amount = feeCoinAmount!.stringValue
-//                }
-//                toDisplayInfos[section].isBusy = false
-//                toDisplayInfos[section].toVotes = tempToVotes
-//                toDisplayInfos[section].txFee = txFee
-//            }
-//            
-//            onSectionReload(section)
-//            DispatchQueue.main.async {
-//                if (self.toDisplayInfos.filter { $0.toVotes == [] || $0.txFee == nil }.count == 0) {
-//                    self.voteBtn.isEnabled = true
-//                }
-//            }
-//        }
-//    }
-//    
-//    func onSectionReload(_ section: Int) {
-//        DispatchQueue.main.async {
-//            UIView.setAnimationsEnabled(false)
-//            self.tableView.beginUpdates()
-//            self.tableView.reloadSections([section], with: .none)
-//            self.tableView.endUpdates()
-//            UIView.setAnimationsEnabled(true)
-//        }
-//    }
-//    
-//    @IBAction func onClickVote(_ sender: BaseButton) {
-//        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
-//        self.present(pinVC, animated: true)
-//    }
-//    
-//    @IBAction func onClickConfirm(_ sender: BaseButton) {
-//        self.baseAccount.getDisplayEvmChains().forEach { $0.fetchState = .Idle }
-//        self.baseAccount.getDisplayCosmosChains().forEach { $0.fetchState = .Idle }
-//        self.baseAccount.fetchDisplayEvmChains()
-//        self.baseAccount.fetchDisplayCosmosChains()
-//        self.dismiss(animated: true)
-//    }
-//    
-//    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
-//        if (request == .ForDataCheck && result == .success) {
-//            voteBtn.isEnabled = false
-//            confirmBtn.isEnabled = false
-//            voteBtn.isHidden = true
-//            confirmBtn.isHidden = false
-//            for i in toDisplayInfos.indices {
-//                toDisplayInfos[i].isBusy = true
-//            }
-//            tableView.reloadData()
-//            
-//            for i in 0..<toDisplayInfos.count {
-//                Task {
-//                    let chain = toDisplayInfos[i].basechain as! CosmosClass
-//                    let toVotes = toDisplayInfos[i].toVotes
-//                    let txFee = toDisplayInfos[i].txFee!
-//                    
-//                    let channel = getConnection(chain)
-//                    if let auth = try await fetchAuth(channel, chain),
-//                       let response = try await broadcastVoteTx(chain, channel, auth, toVotes, txFee) {
-//                        self.checkTx(i, channel, response)
-//                    }
-//                }
-//            }
-//        }
-//    }
-//    
-//    func checkTx(_ position: Int, _ channel: ClientConnection, _ txResponse: Cosmos_Base_Abci_V1beta1_TxResponse) {
-//        Task {
-//            do {
-//                let result = try await fetchTx(channel, txResponse)
-//                toDisplayInfos[position].isBusy = false
-//                toDisplayInfos[position].txResponse = result
-//                DispatchQueue.main.async {
-//                    self.onSectionReload(position)
-//                    
-//                    DispatchQueue.main.async {
-//                        if (self.toDisplayInfos.filter { $0.txResponse == nil }.count == 0) {
-//                            self.confirmBtn.isEnabled = true
-//                        }
-//                    }
-//                }
-//                
-//            } catch {
-//                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
-//                    self.checkTx(position, channel, txResponse)
-//                });
-//            }
-//        }
-//    }
+    override func setLocalizedString() {
+        titleLabel.text = NSLocalizedString("str_hide_done_proposal", comment: "")
+        filterMsgLabel.text = NSLocalizedString("msg_vote_all_detail", comment: "")
+        voteBtn.setTitle(NSLocalizedString("str_vote_all", comment: ""), for: .normal)
+        confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    @IBAction func onClickFilter(_ sender: UIButton) {
+        if (toDisplayInfos.filter { $0.isBusy == true }.count > 0) { return }
+        if (toDisplayInfos.filter { $0.txResponse != nil }.count > 0) { return }
+        isShowAll = !isShowAll
+        if (isShowAll) {
+            filterBtn.setImage(UIImage(named: "iconVoteAllShowAll"), for: .normal)
+            titleLabel.text = NSLocalizedString("str_show_all_proposal", comment: "")
+        }  else {
+            filterBtn.setImage(UIImage(named: "iconVoteAllFiltered"), for: .normal)
+            titleLabel.text = NSLocalizedString("str_hide_done_proposal", comment: "")
+        }
+        onUpdateView()
+    }
+    
+    @objc func onFetchDone(_ notification: NSNotification) {
+        onInitView()
+    }
+    
+    func onInitView() {
+        if (baseAccount.getDpChains().filter { $0.fetchState == .Busy }.count == 0) {
+            var stakedChains = [BaseChain]()
+            baseAccount.getDpChains().filter { $0.isTestnet == false && $0.isDefault == true && $0.tag != "finschia438" }.forEach { chain in
+                if let grpcFetcher = chain.grpcFetcher {
+                    let delegated = grpcFetcher.delegationAmountSum()
+                    let voteThreshold = chain.voteThreshold()
+                    let txFee = chain.getInitPayableFee()
+                    if (delegated.compare(voteThreshold).rawValue > 0 && txFee != nil) {
+                        stakedChains.append(chain)
+                    }
+                }
+            }
+            allLiveInfo.removeAll()
+            toDisplayInfos.removeAll()
+            onFetchProposalInfos(stakedChains)
+        }
+    }
+    
+    func onUpdateView() {
+        titleLabel.isHidden = false
+        filterMsgLabel.isHidden = false
+        voteBtn.isEnabled = false
+        emptyView.isHidden = true
+        filterBtn.isHidden = false
+        lodingView.isHidden = true
+        
+        self.allLiveInfo.sort {
+            if ($0.basechain.tag == "cosmos118") { return true }
+            if ($1.basechain.tag == "cosmos118") { return false }
+            if ($0.basechain.tag == "govgen118") { return true }
+            if ($1.basechain.tag == "govgen118") { return false }
+            return false
+        }
+        
+        toDisplayInfos.removeAll()
+        if (isShowAll) {
+            toDisplayInfos = allLiveInfo.map { $0 }
+        } else {
+            allLiveInfo.forEach { info in
+                var filteredProposal = [MintscanProposal]()
+                let proposals = info.msProposals
+                let myVotes = info.msMyVotes
+                proposals.forEach { proposal in
+                    if (myVotes.filter({ $0.proposal_id == proposal.id }).count ==  0) {
+                        filteredProposal.append(proposal)
+                    }
+                }
+                if (filteredProposal.count > 0) {
+                    toDisplayInfos.append(VoteAllModel.init(info.basechain, filteredProposal, myVotes))
+                }
+            }
+        }
+        
+        if (toDisplayInfos.count == 0) {
+            emptyView.isHidden = false
+        } else {
+            voteBtn.isHidden = false
+        }
+        tableView.isHidden = false
+        tableView.reloadData()
+    }
+    
+    func onUpdateProgress(_ progress: Int, _ allCnt: Int) {
+        DispatchQueue.main.async(execute: {
+            self.progressLabel.text = "Checked " + String(progress) +  "/" +  String(allCnt)
+        })
+    }
+    
+    func onSimul(_ section: Int) {
+        if (toDisplayInfos[section].msProposals.filter { $0.toVoteOption == nil }.count > 0) {
+            return
+        }
+        
+        Task {
+            toDisplayInfos[section].onClear()
+            let chain = toDisplayInfos[section].basechain!
+            var txFee = chain.getInitPayableFee()!
+            var tempToVotes = [Cosmos_Gov_V1beta1_MsgVote]()
+            toDisplayInfos[section].msProposals.forEach { proposal in
+                let voteMsg = Cosmos_Gov_V1beta1_MsgVote.with {
+                    $0.voter = chain.bechAddress!
+                    $0.proposalID = proposal.id!
+                    $0.option = proposal.toVoteOption!
+                }
+                tempToVotes.append(voteMsg)
+            }
+            
+            toDisplayInfos[section].isBusy = true
+            onSectionReload(section)
+        
+            if let simul = try await simulateVoteTx(chain, tempToVotes) {
+                let toGas = simul.gasInfo.gasUsed
+                txFee.gasLimit = UInt64(Double(toGas) * chain.gasMultiply())
+                if let gasRate = chain.getBaseFeeInfo().FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
+                    let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
+                    let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
+                    txFee.amount[0].amount = feeCoinAmount!.stringValue
+                }
+                toDisplayInfos[section].isBusy = false
+                toDisplayInfos[section].toVotes = tempToVotes
+                toDisplayInfos[section].txFee = txFee
+            }
+            
+            onSectionReload(section)
+            DispatchQueue.main.async {
+                if (self.toDisplayInfos.filter { $0.toVotes == [] || $0.txFee == nil }.count == 0) {
+                    self.voteBtn.isEnabled = true
+                }
+            }
+        }
+    }
+    
+    func onSectionReload(_ section: Int) {
+        DispatchQueue.main.async {
+            UIView.setAnimationsEnabled(false)
+            self.tableView.beginUpdates()
+            self.tableView.reloadSections([section], with: .none)
+            self.tableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+        }
+    }
+    
+    @IBAction func onClickVote(_ sender: BaseButton) {
+        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+        self.present(pinVC, animated: true)
+    }
+    
+    @IBAction func onClickConfirm(_ sender: BaseButton) {
+        self.baseAccount.getDpChains().forEach { $0.fetchState = .Idle }
+        self.baseAccount.fetchDpChains()
+        self.dismiss(animated: true)
+    }
+    
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
+        if (request == .ForDataCheck && result == .success) {
+            voteBtn.isEnabled = false
+            confirmBtn.isEnabled = false
+            voteBtn.isHidden = true
+            confirmBtn.isHidden = false
+            for i in toDisplayInfos.indices {
+                toDisplayInfos[i].isBusy = true
+            }
+            tableView.reloadData()
+            
+            for i in 0..<toDisplayInfos.count {
+                Task {
+                    let chain = toDisplayInfos[i].basechain!
+                    let toVotes = toDisplayInfos[i].toVotes
+                    let txFee = toDisplayInfos[i].txFee!
+                    
+                    let channel = getConnection(chain)
+                    if let auth = try await fetchAuth(channel, chain),
+                       let response = try await broadcastVoteTx(chain, channel, auth, toVotes, txFee) {
+                        self.checkTx(i, channel, response)
+                    }
+                }
+            }
+        }
+    }
+    
+    func checkTx(_ position: Int, _ channel: ClientConnection, _ txResponse: Cosmos_Base_Abci_V1beta1_TxResponse) {
+        Task {
+            do {
+                let result = try await fetchTx(channel, txResponse)
+                toDisplayInfos[position].isBusy = false
+                toDisplayInfos[position].txResponse = result
+                DispatchQueue.main.async {
+                    self.onSectionReload(position)
+                    
+                    DispatchQueue.main.async {
+                        if (self.toDisplayInfos.filter { $0.txResponse == nil }.count == 0) {
+                            self.confirmBtn.isEnabled = true
+                        }
+                    }
+                }
+                
+            } catch {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
+                    self.checkTx(position, channel, txResponse)
+                });
+            }
+        }
+    }
 }
-/*
+
 extension AllChainVoteStartVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -302,9 +290,9 @@ extension AllChainVoteStartVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = VoteAllChainHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         let model = toDisplayInfos[section]
-        let cosmosChain = model.basechain as! CosmosClass
-        view.chainImg.image = UIImage.init(named: cosmosChain.logo1)
-        view.titleLabel.text = cosmosChain.name.uppercased()
+        let chain = model.basechain!
+        view.chainImg.image = UIImage.init(named: chain.logo1)
+        view.titleLabel.text = chain.name.uppercased()
         view.cntLabel.text = String(model.msProposals.count)
         
         
@@ -316,7 +304,7 @@ extension AllChainVoteStartVC: UITableViewDelegate, UITableViewDataSource {
                 view.stateImg.isHidden = false
                 
             } else if let txFee = model.txFee,
-               let msAsset = BaseData.instance.getAsset(cosmosChain.apiName, txFee.amount[0].denom) {
+               let msAsset = BaseData.instance.getAsset(chain.apiName, txFee.amount[0].denom) {
                 WDP.dpCoin(msAsset, txFee.amount[0], nil, view.feeDenomLabel, view.feeAmountLabel, msAsset.decimals)
                 view.feeTitle.isHidden = false
                 view.feeAmountLabel.isHidden = false
@@ -362,9 +350,9 @@ extension AllChainVoteStartVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (toDisplayInfos[indexPath.section].isBusy) { return }
         if (toDisplayInfos[indexPath.section].txResponse != nil) { return }
-        if let cosmosChain = toDisplayInfos[indexPath.section].basechain as? CosmosClass,
+        if let chain = toDisplayInfos[indexPath.section].basechain,
            let proposalId = toDisplayInfos[indexPath.section].msProposals[indexPath.row].id {
-            guard let url = cosmosChain.getExplorerProposal(proposalId) else { return }
+            guard let url = chain.getExplorerProposal(proposalId) else { return }
             self.onShowSafariWeb(url)
         }
     }
@@ -418,7 +406,7 @@ extension AllChainVoteStartVC {
                 }
                 
                 if (!toShowProposals.isEmpty) {
-                    let address = (chain as! CosmosClass).bechAddress
+                    let address = chain.bechAddress!
                     var myVotes = [MintscanMyVotes]()
                     if let votes = try? await AF.request(BaseNetWork.msMyVoteHistory(chain, address), method: .get).serializingDecodable(JSON.self).value {
                         votes["votes"].arrayValue.forEach { vote in
@@ -457,7 +445,7 @@ extension AllChainVoteStartVC {
     }
     
     func fetchAuth(_ channel: ClientConnection, _ chain: BaseChain) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = chain.bechAddress }
+        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = chain.bechAddress! }
         return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
     }
     
@@ -472,7 +460,7 @@ extension AllChainVoteStartVC {
     
     func getConnection(_ chain: BaseChain) -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpcfetcher().getGrpc().0, port: chain.getGrpcfetcher().getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpcfetcher()!.getGrpc().0, port: chain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {
@@ -481,7 +469,6 @@ extension AllChainVoteStartVC {
         return callOptions
     }
 }
-*/
 
 struct VoteAllModel {
     
