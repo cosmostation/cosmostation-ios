@@ -301,8 +301,19 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainCrescent())
     result.append(ChainCryptoorg())
     result.append(ChainCudos())
-    
-    
+    result.append(ChainDesmos())
+    result.append(ChainDydx())
+//    result.append(ChainEmoney())
+    result.append(ChainFetchAi())
+    result.append(ChainFetchAi60Old())
+    result.append(ChainFetchAi60Secp())
+    result.append(ChainFinschia())
+    result.append(ChainGovgen())
+    result.append(ChainGravityBridge())
+    result.append(ChainInjective())
+    result.append(ChainIris())
+    result.append(ChainIxo())
+    result.append(ChainJuno())
     
     
     
