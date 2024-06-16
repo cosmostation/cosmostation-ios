@@ -40,273 +40,275 @@ class CosmosStakingInfoVC: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-//        tableView.isHidden = true
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.separatorStyle = .none
-//        tableView.register(UINib(nibName: "StakeRewardAddressCell", bundle: nil), forCellReuseIdentifier: "StakeRewardAddressCell")
-//        tableView.register(UINib(nibName: "StakeDelegateCell", bundle: nil), forCellReuseIdentifier: "StakeDelegateCell")
-//        tableView.register(UINib(nibName: "StakeUnbondingCell", bundle: nil), forCellReuseIdentifier: "StakeUnbondingCell")
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.sectionHeaderTopPadding = 0.0
-//        
-//        refresher = UIRefreshControl()
-//        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-//        refresher.tintColor = .color01
-//        tableView.addSubview(refresher)
-//        
-//        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconRewardAddress"), style: .plain, target: self, action: #selector(onClickRewardAddressChange))
-//        
-//        onSetStakeData()
+        tableView.isHidden = true
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "StakeRewardAddressCell", bundle: nil), forCellReuseIdentifier: "StakeRewardAddressCell")
+        tableView.register(UINib(nibName: "StakeDelegateCell", bundle: nil), forCellReuseIdentifier: "StakeDelegateCell")
+        tableView.register(UINib(nibName: "StakeUnbondingCell", bundle: nil), forCellReuseIdentifier: "StakeUnbondingCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderTopPadding = 0.0
+        
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
+        refresher.tintColor = .color01
+        tableView.addSubview(refresher)
+        
+        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconRewardAddress"), style: .plain, target: self, action: #selector(onClickRewardAddressChange))
+        
+        onSetStakeData()
     }
     
-//    override func setLocalizedString() {
-//        navigationItem.title = NSLocalizedString("title_staking_info", comment: "")
-//        stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
-//    }
-//    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
-//    }
-//    
-//    override func viewDidDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(animated)
-//        refresher.endRefreshing()
-//        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
-//    }
-//    
-//    @objc func onRequestFetch() {
-//        if (selectedChain.fetchState == .Busy) {
-//            refresher.endRefreshing()
-//        } else {
-//            DispatchQueue.global().async {
-//                self.selectedChain.fetchData(self.baseAccount.id)
-//            }
-//        }
-//    }
-//    
-//    @objc func onFetchDone(_ notification: NSNotification) {
-//        let tag = notification.object as! String
-//        if (selectedChain.tag == tag) {
-//            onSetStakeData()
-//        }
-//    }
-//    
-//    func onSetStakeData() {
-//        Task {
-//            rewardAddress = selectedChain.rewardAddress
-//            validators = selectedChain.cosmosValidators
-//            delegations = selectedChain.cosmosDelegations
-//            rewards = selectedChain.cosmosRewards
-//            unbondings.removeAll()
-//            
-//            selectedChain.cosmosUnbondings?.forEach { unbonding in
-//                unbonding.entries.forEach { entry in
-//                    unbondings.append(UnbondingEntry.init(validatorAddress: unbonding.validatorAddress, entry: entry))
-//                }
-//            }
-//            
-//            cosmostationValAddress = validators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
-//            delegations.sort {
-//                if ($0.delegation.validatorAddress == cosmostationValAddress) { return true }
-//                if ($1.delegation.validatorAddress == cosmostationValAddress) { return false }
-//                return Double($0.balance.amount)! > Double($1.balance.amount)!
-//            }
-//            unbondings.sort {
-//                return $0.entry.creationHeight < $1.entry.creationHeight
-//            }
-//            
-//            DispatchQueue.main.async {
-//                self.onUpdateView()
-//            }
-//        }
-//    }
-//    
-//    func onUpdateView() {
-//        refresher.endRefreshing()
-//        loadingView.isHidden = true
-//        tableView.isHidden = false
-//        tableView.reloadData()
-//        if (delegations.count == 0 && unbondings.count == 0) {
-//            emptyStakeImg.isHidden = false
-//        } else {
-//            emptyStakeImg.isHidden = true
-//        }
-//    }
-//    
-//    @IBAction func onClickStake(_ sender: BaseButton) {
-//        onDelegateTx(nil)
-//    }
-//    
-//    func onDelegateTx(_ toValAddress: String?) {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        if (selectedChain is ChainBeraEVM) {
-////            let delegate = EvmDelegate(nibName: "EvmDelegate", bundle: nil)
-////            delegate.selectedChain = selectedChain as? EvmClass
-////            if (toValAddress != nil) {
-////                delegate.toValidator = validators.filter({ $0.operatorAddress == toValAddress }).first
-////            }
-////            delegate.modalTransitionStyle = .coverVertical
-////            self.present(delegate, animated: true)
-//            
-//        } else {
-//            let delegate = CosmosDelegate(nibName: "CosmosDelegate", bundle: nil)
-//            delegate.selectedChain = selectedChain
+    override func setLocalizedString() {
+        navigationItem.title = NSLocalizedString("title_staking_info", comment: "")
+        stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        refresher.endRefreshing()
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    @objc func onRequestFetch() {
+        if (selectedChain.fetchState == .Busy) {
+            refresher.endRefreshing()
+        } else {
+            DispatchQueue.global().async {
+                self.selectedChain.fetchData(self.baseAccount.id)
+            }
+        }
+    }
+    
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (selectedChain.tag == tag) {
+            onSetStakeData()
+        }
+    }
+    
+    func onSetStakeData() {
+        Task {
+            if let grpcFetcher = selectedChain.getGrpcfetcher() {
+                rewardAddress = grpcFetcher.rewardAddress
+                validators = grpcFetcher.cosmosValidators
+                delegations = grpcFetcher.cosmosDelegations
+                rewards = grpcFetcher.cosmosRewards
+                unbondings.removeAll()
+                
+                grpcFetcher.cosmosUnbondings?.forEach { unbonding in
+                    unbonding.entries.forEach { entry in
+                        unbondings.append(UnbondingEntry.init(validatorAddress: unbonding.validatorAddress, entry: entry))
+                    }
+                }
+                
+                cosmostationValAddress = validators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
+                delegations.sort {
+                    if ($0.delegation.validatorAddress == cosmostationValAddress) { return true }
+                    if ($1.delegation.validatorAddress == cosmostationValAddress) { return false }
+                    return Double($0.balance.amount)! > Double($1.balance.amount)!
+                }
+                unbondings.sort {
+                    return $0.entry.creationHeight < $1.entry.creationHeight
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.onUpdateView()
+            }
+        }
+    }
+    
+    func onUpdateView() {
+        refresher.endRefreshing()
+        loadingView.isHidden = true
+        tableView.isHidden = false
+        tableView.reloadData()
+        if (delegations.count == 0 && unbondings.count == 0) {
+            emptyStakeImg.isHidden = false
+        } else {
+            emptyStakeImg.isHidden = true
+        }
+    }
+    
+    @IBAction func onClickStake(_ sender: BaseButton) {
+        onDelegateTx(nil)
+    }
+    
+    func onDelegateTx(_ toValAddress: String?) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (selectedChain is ChainBeraEVM_T) {
+//            let delegate = EvmDelegate(nibName: "EvmDelegate", bundle: nil)
+//            delegate.selectedChain = selectedChain as? EvmClass
 //            if (toValAddress != nil) {
 //                delegate.toValidator = validators.filter({ $0.operatorAddress == toValAddress }).first
 //            }
 //            delegate.modalTransitionStyle = .coverVertical
 //            self.present(delegate, animated: true)
-//        }
-//    }
-//    
-//    func onUndelegateTx(_ fromValAddress: String) {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        if (selectedChain is ChainBeraEVM) {
-////            let undelegate = EvmUndelegate(nibName: "EvmUndelegate", bundle: nil)
-////            undelegate.selectedChain = selectedChain as? EvmClass
-////            undelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
-////            undelegate.modalTransitionStyle = .coverVertical
-////            self.present(undelegate, animated: true)
-//            
-//        } else {
-//            let undelegate = CosmosUndelegate(nibName: "CosmosUndelegate", bundle: nil)
-//            undelegate.selectedChain = selectedChain
+            
+        } else {
+            let delegate = CosmosDelegate(nibName: "CosmosDelegate", bundle: nil)
+            delegate.selectedChain = selectedChain
+            if (toValAddress != nil) {
+                delegate.toValidator = validators.filter({ $0.operatorAddress == toValAddress }).first
+            }
+            delegate.modalTransitionStyle = .coverVertical
+            self.present(delegate, animated: true)
+        }
+    }
+    
+    func onUndelegateTx(_ fromValAddress: String) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (selectedChain is ChainBeraEVM_T) {
+//            let undelegate = EvmUndelegate(nibName: "EvmUndelegate", bundle: nil)
+//            undelegate.selectedChain = selectedChain as? EvmClass
 //            undelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
 //            undelegate.modalTransitionStyle = .coverVertical
 //            self.present(undelegate, animated: true)
-//        }
-//    }
-//    
-//    func onRedelegateTx(_ fromValAddress: String) {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        if (selectedChain is ChainBeraEVM) {
-////            let redelegate = EvmRedelegate(nibName: "EvmRedelegate", bundle: nil)
-////            redelegate.selectedChain = selectedChain as? EvmClass
-////            redelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
-////            redelegate.modalTransitionStyle = .coverVertical
-////            self.present(redelegate, animated: true)
-//            
-//        } else {
-//            let redelegate = CosmosRedelegate(nibName: "CosmosRedelegate", bundle: nil)
-//            redelegate.selectedChain = selectedChain
+            
+        } else {
+            let undelegate = CosmosUndelegate(nibName: "CosmosUndelegate", bundle: nil)
+            undelegate.selectedChain = selectedChain
+            undelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
+            undelegate.modalTransitionStyle = .coverVertical
+            self.present(undelegate, animated: true)
+        }
+    }
+    
+    func onRedelegateTx(_ fromValAddress: String) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (selectedChain is ChainBeraEVM_T) {
+//            let redelegate = EvmRedelegate(nibName: "EvmRedelegate", bundle: nil)
+//            redelegate.selectedChain = selectedChain as? EvmClass
 //            redelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
 //            redelegate.modalTransitionStyle = .coverVertical
 //            self.present(redelegate, animated: true)
-//        }
-//    }
-//    
-//    func onClaimRewardTx(_ fromValAddress: String) {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        if let claimableReward = selectedChain.cosmosRewards?.filter({ $0.validatorAddress == fromValAddress }).first,
-//           claimableReward.reward.count > 0 {
-//            let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
-//            claimRewards.claimableRewards = [claimableReward]
-//            claimRewards.selectedChain = selectedChain
-//            claimRewards.modalTransitionStyle = .coverVertical
-//            self.present(claimRewards, animated: true)
-//            
-//        } else {
-//            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
-//        }
-//    }
-//    
-//    func onCompoundingTx(_ fromValAddress: String) {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        if (selectedChain.rewardAddress != selectedChain.bechAddress) {
-//            onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
-//            return
-//        }
-//        if let claimableReward = selectedChain.cosmosRewards?.filter({ $0.validatorAddress == fromValAddress }).first,
-//           claimableReward.reward.count > 0 {
-//            let compounding = CosmosCompounding(nibName: "CosmosCompounding", bundle: nil)
-//            compounding.claimableRewards = [claimableReward]
-//            compounding.selectedChain = selectedChain
-//            compounding.modalTransitionStyle = .coverVertical
-//            self.present(compounding, animated: true)
-//            
-//        } else {
-//            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
-//        }
-//    }
-//    
-//    func onCancelUnbondingTx(_ position: Int) {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        if (selectedChain is ChainBeraEVM) {
-////            let cancel = EvmCancelUnbonding(nibName: "EvmCancelUnbonding", bundle: nil)
-////            cancel.selectedChain = selectedChain as? EvmClass
-////            cancel.unbondingEntry = unbondings[position]
-////            cancel.modalTransitionStyle = .coverVertical
-////            self.present(cancel, animated: true)
-//        } else {
-//            let cancel = CosmosCancelUnbonding(nibName: "CosmosCancelUnbonding", bundle: nil)
-//            cancel.selectedChain = selectedChain
+            
+        } else {
+            let redelegate = CosmosRedelegate(nibName: "CosmosRedelegate", bundle: nil)
+            redelegate.selectedChain = selectedChain
+            redelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
+            redelegate.modalTransitionStyle = .coverVertical
+            self.present(redelegate, animated: true)
+        }
+    }
+    
+    func onClaimRewardTx(_ fromValAddress: String) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if let claimableReward = rewards?.filter({ $0.validatorAddress == fromValAddress }).first,
+           claimableReward.reward.count > 0 {
+            let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
+            claimRewards.claimableRewards = [claimableReward]
+            claimRewards.selectedChain = selectedChain
+            claimRewards.modalTransitionStyle = .coverVertical
+            self.present(claimRewards, animated: true)
+            
+        } else {
+            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+        }
+    }
+    
+    func onCompoundingTx(_ fromValAddress: String) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (selectedChain.getGrpcfetcher()?.rewardAddress != selectedChain.bechAddress) {
+            onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
+            return
+        }
+        if let claimableReward = rewards?.filter({ $0.validatorAddress == fromValAddress }).first,
+           claimableReward.reward.count > 0 {
+            let compounding = CosmosCompounding(nibName: "CosmosCompounding", bundle: nil)
+            compounding.claimableRewards = [claimableReward]
+            compounding.selectedChain = selectedChain
+            compounding.modalTransitionStyle = .coverVertical
+            self.present(compounding, animated: true)
+            
+        } else {
+            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+        }
+    }
+    
+    func onCancelUnbondingTx(_ position: Int) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (selectedChain is ChainBeraEVM_T) {
+//            let cancel = EvmCancelUnbonding(nibName: "EvmCancelUnbonding", bundle: nil)
+//            cancel.selectedChain = selectedChain as? EvmClass
 //            cancel.unbondingEntry = unbondings[position]
 //            cancel.modalTransitionStyle = .coverVertical
 //            self.present(cancel, animated: true)
-//        }
-//    }
-//    
-//    func onRewardAddressTx() {
-//        let rewardAddress = CosmosRewardAddress(nibName: "CosmosRewardAddress", bundle: nil)
-//        rewardAddress.selectedChain = selectedChain
-//        rewardAddress.modalTransitionStyle = .coverVertical
-//        self.present(rewardAddress, animated: true)
-//    }
-//    
-//    @objc func onClickRewardAddressChange() {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        
-//        let title = NSLocalizedString("reward_address_notice_title", comment: "")
-//        let msg1 = NSLocalizedString("reward_address_notice_msg", comment: "")
-//        let msg2 = NSLocalizedString("reward_address_notice_msg2", comment: "")
-//        let msg = msg1 + msg2
-//        let range = (msg as NSString).range(of: msg2)
-//        let noticeAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-//        let attributedMessage: NSMutableAttributedString = NSMutableAttributedString(
-//            string: msg,
-//            attributes: [
-//                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12.0)
-//            ]
-//        )
-//        attributedMessage.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 14.0), range: range)
-//        attributedMessage.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red, range: range)
-//        
-//        noticeAlert.setValue(attributedMessage, forKey: "attributedMessage")
-//        noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
-//        noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default, handler: { _ in
-//            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-//                self.onRewardAddressTx()
-//            });
-//            
-//        }))
-//        self.present(noticeAlert, animated: true)
-//    }
+        } else {
+            let cancel = CosmosCancelUnbonding(nibName: "CosmosCancelUnbonding", bundle: nil)
+            cancel.selectedChain = selectedChain
+            cancel.unbondingEntry = unbondings[position]
+            cancel.modalTransitionStyle = .coverVertical
+            self.present(cancel, animated: true)
+        }
+    }
+    
+    func onRewardAddressTx() {
+        let rewardAddress = CosmosRewardAddress(nibName: "CosmosRewardAddress", bundle: nil)
+        rewardAddress.selectedChain = selectedChain
+        rewardAddress.modalTransitionStyle = .coverVertical
+        self.present(rewardAddress, animated: true)
+    }
+    
+    @objc func onClickRewardAddressChange() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        
+        let title = NSLocalizedString("reward_address_notice_title", comment: "")
+        let msg1 = NSLocalizedString("reward_address_notice_msg", comment: "")
+        let msg2 = NSLocalizedString("reward_address_notice_msg2", comment: "")
+        let msg = msg1 + msg2
+        let range = (msg as NSString).range(of: msg2)
+        let noticeAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        let attributedMessage: NSMutableAttributedString = NSMutableAttributedString(
+            string: msg,
+            attributes: [
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12.0)
+            ]
+        )
+        attributedMessage.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 14.0), range: range)
+        attributedMessage.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red, range: range)
+        
+        noticeAlert.setValue(attributedMessage, forKey: "attributedMessage")
+        noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
+        noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default, handler: { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                self.onRewardAddressTx()
+            });
+            
+        }))
+        self.present(noticeAlert, animated: true)
+    }
 }
 
-/*
+
 extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -387,7 +389,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
-            UIPasteboard.general.string = selectedChain.rewardAddress?.trimmingCharacters(in: .whitespacesAndNewlines)
+            UIPasteboard.general.string = selectedChain.getGrpcfetcher()?.rewardAddress?.trimmingCharacters(in: .whitespacesAndNewlines)
             self.onShowToast(NSLocalizedString("address_copied", comment: ""))
             
         } else if (indexPath.section == 1) {
@@ -409,7 +411,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         if (indexPath.section == 1) {
             let delegation = delegations[indexPath.row]
-            let rewards = selectedChain.cosmosRewards?.filter { $0.validatorAddress == delegation.delegation.validatorAddress }
+            let rewards = rewards?.filter { $0.validatorAddress == delegation.delegation.validatorAddress }
                 
             let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
             rewardListPopupVC.selectedChain = selectedChain
@@ -497,7 +499,6 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
         
     }
 }
-*/
 
 struct UnbondingEntry {
     var validatorAddress: String = String()

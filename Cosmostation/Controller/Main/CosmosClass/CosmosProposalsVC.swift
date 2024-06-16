@@ -43,141 +43,142 @@ class CosmosProposalsVC: BaseVC {
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
         loadingView.play()
-//        
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.separatorStyle = .none
-//        tableView.register(UINib(nibName: "CosmosProposalCell", bundle: nil), forCellReuseIdentifier: "CosmosProposalCell")
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.sectionHeaderTopPadding = 0.0
-//        
-//        showAll = UIBarButtonItem(image: UIImage(named: "iconFilterOn"), style: .plain, target: self, action: #selector(onClickFilterOn))
-//        filtered = UIBarButtonItem(image: UIImage(named: "iconFilterOff"), style: .plain, target: self, action: #selector(onClickFilterOff))
-//        navigationItem.setRightBarButton(showAll, animated: true)
-//        
-//        onFetchVoteInfos()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "CosmosProposalCell", bundle: nil), forCellReuseIdentifier: "CosmosProposalCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderTopPadding = 0.0
+        
+        showAll = UIBarButtonItem(image: UIImage(named: "iconFilterOn"), style: .plain, target: self, action: #selector(onClickFilterOn))
+        filtered = UIBarButtonItem(image: UIImage(named: "iconFilterOff"), style: .plain, target: self, action: #selector(onClickFilterOff))
+        navigationItem.setRightBarButton(showAll, animated: true)
+        
+        onFetchVoteInfos()
     }
     
-//    @objc func onClickFilterOn() {
-//        navigationItem.setRightBarButton(filtered, animated: true)
-//        isShowAll = !isShowAll
-//        onShowToast(NSLocalizedString("msg_show_all_proposals", comment: ""))
-//        tableView.reloadData()
-//    }
-//    
-//    @objc func onClickFilterOff() {
-//        navigationItem.setRightBarButton(showAll, animated: true)
-//        isShowAll = !isShowAll
-//        onShowToast(NSLocalizedString("msg_hide_scam_proposals", comment: ""))
-//        tableView.reloadData()
-//    }
-//    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
-//    }
-//    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
-//    }
-//    
-//    @objc func onFetchDone(_ notification: NSNotification) {
-//        let tag = notification.object as! String
-//        if (selectedChain.tag == tag) {
-//            onFetchVoteInfos()
-//        }
-//    }
-//    
-//    override func setLocalizedString() {
-//        navigationItem.title = NSLocalizedString("title_vote_list", comment: "")
-//        voteBtn.setTitle(NSLocalizedString("str_start_vote", comment: ""), for: .normal)
-//    }
-//    
-//    func onFetchVoteInfos() {
-//        votingPeriods.removeAll()
-//        etcPeriods.removeAll()
-//        filteredVotingPeriods.removeAll()
-//        filteredEtcPeriods.removeAll()
-//        myVotes.removeAll()
-//        
-//        Task {
-//            if let proposals = try? await fetchProposals(selectedChain),
-//               let votes = try? await fetchMyVotes(selectedChain, selectedChain.bechAddress) {
-//                proposals.forEach { proposal in
-//                    let msProposal = MintscanProposal(proposal)
-//                    if (msProposal.isVotingPeriod()) {
-//                        votingPeriods.append(msProposal)
-//                        if (!msProposal.isScam()) {
-//                            filteredVotingPeriods.append(msProposal)
-//                        }
-//                        
-//                    } else {
-//                        etcPeriods.append(msProposal)
-//                        if (!msProposal.isScam()) {
-//                            filteredEtcPeriods.append(msProposal)
-//                        }
-//                    }
-//                }
-//                votes["votes"].arrayValue.forEach { vote in
-//                    myVotes.append(MintscanMyVotes(vote))
-//                }
-//            }
-//            
-//            DispatchQueue.main.async {
-//                self.onUpdateView()
-//            }
-//        }
-//    }
-//    
-//    func onUpdateView() {
-//        loadingView.isHidden = true
-//        tableView.isHidden = false
-//        tableView.reloadData()
-//    }
-//    
-//    @IBAction func onClickVote(_ sender: BaseButton) {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        
-//        let delegated = selectedChain.delegationAmountSum()
-//        let voteThreshold = selectedChain.voteThreshold()
-//        if (delegated.compare(voteThreshold).rawValue <= 0) {
-//            onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
-//            return
-//        }
-//        
-//        var toVoteProposals = [MintscanProposal]()
-//        votingPeriods.forEach { proposal in
-//            if (toVoteList.contains(proposal.id!)) {
-//                toVoteProposals.append(proposal)
-//            }
-//        }
-//        
-//        if (selectedChain is ChainBeraEVM) {
-//            if (toVoteProposals.count > 1) {
-//                onShowToast(NSLocalizedString("error_bera_vote_one_proposal", comment: ""))
-//                return
-//            }
-////            let vote = EvmVote(nibName: "EvmVote", bundle: nil)
-////            vote.selectedChain = selectedChain as? EvmClass
-////            vote.toVoteProposals = toVoteProposals
-////            vote.modalTransitionStyle = .coverVertical
-////            self.present(vote, animated: true)
-//            
-//        } else {
-//            let vote = CosmosVote(nibName: "CosmosVote", bundle: nil)
-//            vote.selectedChain = selectedChain
+    @objc func onClickFilterOn() {
+        navigationItem.setRightBarButton(filtered, animated: true)
+        isShowAll = !isShowAll
+        onShowToast(NSLocalizedString("msg_show_all_proposals", comment: ""))
+        tableView.reloadData()
+    }
+    
+    @objc func onClickFilterOff() {
+        navigationItem.setRightBarButton(showAll, animated: true)
+        isShowAll = !isShowAll
+        onShowToast(NSLocalizedString("msg_hide_scam_proposals", comment: ""))
+        tableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (selectedChain.tag == tag) {
+            onFetchVoteInfos()
+        }
+    }
+    
+    override func setLocalizedString() {
+        navigationItem.title = NSLocalizedString("title_vote_list", comment: "")
+        voteBtn.setTitle(NSLocalizedString("str_start_vote", comment: ""), for: .normal)
+    }
+    
+    func onFetchVoteInfos() {
+        votingPeriods.removeAll()
+        etcPeriods.removeAll()
+        filteredVotingPeriods.removeAll()
+        filteredEtcPeriods.removeAll()
+        myVotes.removeAll()
+        
+        Task {
+            if let proposals = try? await fetchProposals(selectedChain),
+               let votes = try? await fetchMyVotes(selectedChain, selectedChain.bechAddress!) {
+                proposals.forEach { proposal in
+                    let msProposal = MintscanProposal(proposal)
+                    if (msProposal.isVotingPeriod()) {
+                        votingPeriods.append(msProposal)
+                        if (!msProposal.isScam()) {
+                            filteredVotingPeriods.append(msProposal)
+                        }
+                        
+                    } else {
+                        etcPeriods.append(msProposal)
+                        if (!msProposal.isScam()) {
+                            filteredEtcPeriods.append(msProposal)
+                        }
+                    }
+                }
+                votes["votes"].arrayValue.forEach { vote in
+                    myVotes.append(MintscanMyVotes(vote))
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.onUpdateView()
+            }
+        }
+    }
+    
+    func onUpdateView() {
+        loadingView.isHidden = true
+        tableView.isHidden = false
+        tableView.reloadData()
+    }
+    
+    @IBAction func onClickVote(_ sender: BaseButton) {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        
+        if let delegated = selectedChain.getGrpcfetcher()?.delegationAmountSum() {
+            let voteThreshold = selectedChain.voteThreshold()
+            if (delegated.compare(voteThreshold).rawValue <= 0) {
+                onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
+                return
+            }
+        }
+        
+        var toVoteProposals = [MintscanProposal]()
+        votingPeriods.forEach { proposal in
+            if (toVoteList.contains(proposal.id!)) {
+                toVoteProposals.append(proposal)
+            }
+        }
+        
+        if (selectedChain is ChainBeraEVM_T) {
+            if (toVoteProposals.count > 1) {
+                onShowToast(NSLocalizedString("error_bera_vote_one_proposal", comment: ""))
+                return
+            }
+//            let vote = EvmVote(nibName: "EvmVote", bundle: nil)
+//            vote.selectedChain = selectedChain as? EvmClass
 //            vote.toVoteProposals = toVoteProposals
 //            vote.modalTransitionStyle = .coverVertical
 //            self.present(vote, animated: true)
-//        }
-//        
-//    }
+            
+        } else {
+            let vote = CosmosVote(nibName: "CosmosVote", bundle: nil)
+            vote.selectedChain = selectedChain
+            vote.toVoteProposals = toVoteProposals
+            vote.modalTransitionStyle = .coverVertical
+            self.present(vote, animated: true)
+        }
+        
+    }
 }
-/*
+
 extension CosmosProposalsVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -316,4 +317,3 @@ extension CosmosProposalsVC {
     }
     
 }
-*/

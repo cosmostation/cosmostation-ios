@@ -217,6 +217,11 @@ class BaseChain {
         return getChainListParam()["moblie_dapp"].bool ?? false
     }
     
+    func voteThreshold() -> NSDecimalNumber {
+        let threshold = getChainListParam()["voting_threshold"].uInt64Value
+        return NSDecimalNumber(value: threshold)
+    }
+    
     
     func isLagacyOKT() -> Bool {
         if (tag == "okt996_Keccak" || tag == "okt996_Secp") {
@@ -224,7 +229,10 @@ class BaseChain {
         }
         return false
     }
-        
+    
+    func monikerImg(_ opAddress: String) -> URL {
+        return URL(string: ResourceBase + apiName + "/moniker/" + opAddress + ".png") ?? URL(string: "")!
+    }
 }
 
 

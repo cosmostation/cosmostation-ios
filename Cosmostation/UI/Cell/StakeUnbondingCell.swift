@@ -35,26 +35,25 @@ class StakeUnbondingCell: UITableViewCell {
         inactiveTag.isHidden = true
         jailedTag.isHidden = true
     }
-    //YONG4
     func onBindMyUnbonding(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator, _ unbonding: UnbondingEntry) {
         
-//        logoImg.af.setImage(withURL: baseChain.monikerImg(validator.operatorAddress))
-//        nameLabel.text = validator.description_p.moniker
-//        if (validator.jailed) {
-//            jailedTag.isHidden = false
-//        } else {
-//            inactiveTag.isHidden = validator.status == .bonded
-//        }
-//        
-//        let stakeDenom = baseChain.stakeDenom!
-//        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
-//            let unbondingAmount = NSDecimalNumber(string: unbonding.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
-//            unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
-//            
-//            let completionTime = unbonding.entry.completionTime
-//            finishTimeLabel.text = WDP.protoDpTime(completionTime.seconds)
-//            finishGapLabel.text = WDP.protoDpTimeGap(completionTime.seconds)
-//        }
+        logoImg.af.setImage(withURL: baseChain.monikerImg(validator.operatorAddress))
+        nameLabel.text = validator.description_p.moniker
+        if (validator.jailed) {
+            jailedTag.isHidden = false
+        } else {
+            inactiveTag.isHidden = validator.status == .bonded
+        }
+        
+        if let stakeDenom = baseChain.stakeDenom,
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+            let unbondingAmount = NSDecimalNumber(string: unbonding.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
+            unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
+            
+            let completionTime = unbonding.entry.completionTime
+            finishTimeLabel.text = WDP.protoDpTime(completionTime.seconds)
+            finishGapLabel.text = WDP.protoDpTimeGap(completionTime.seconds)
+        }
     }
     
 }

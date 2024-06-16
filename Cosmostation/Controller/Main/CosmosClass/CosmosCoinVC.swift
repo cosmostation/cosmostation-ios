@@ -360,17 +360,17 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
         return nil
     }
     
-//    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-//        if (indexPath.section == 0 && indexPath.row == 0 && selectedChain.supportStaking == true && selectedChain.cosmosRewards?.count ?? 0 > 0) {
-//            let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
-//            rewardListPopupVC.selectedChain = selectedChain
-//            rewardListPopupVC.rewards = selectedChain.cosmosRewards!
-//            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return rewardListPopupVC }) { _ in
-//                UIMenu(title: "", children: [])
-//            }
-//        }
-//        return nil
-//    }
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        if (indexPath.section == 0 && indexPath.row == 0 && selectedChain.supportStaking == true && selectedChain.getGrpcfetcher()?.cosmosRewards?.count ?? 0 > 0) {
+            let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
+            rewardListPopupVC.selectedChain = selectedChain
+            rewardListPopupVC.rewards = selectedChain.getGrpcfetcher()!.cosmosRewards!
+            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return rewardListPopupVC }) { _ in
+                UIMenu(title: "", children: [])
+            }
+        }
+        return nil
+    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {

@@ -54,6 +54,7 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (section == 2) {
             view.titleLabel.text = "Reward Address"
+            view.cntLabel.text = ""
             if let rewardAddress = selectedChain.getGrpcfetcher()?.rewardAddress {
                 if (selectedChain.bechAddress != rewardAddress) {
                     view.cntLabel.text = "(Changed)"
