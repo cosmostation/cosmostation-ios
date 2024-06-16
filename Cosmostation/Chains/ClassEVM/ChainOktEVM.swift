@@ -60,7 +60,7 @@ class ChainOktEVM: BaseChain {
                 print("fetching Some error ", tag)
             } else {
                 fetchState = .Success
-                print("fetching good ", tag)
+//                print("fetching good ", tag)
             }
             
             if let oktFetcher = oktFetcher,

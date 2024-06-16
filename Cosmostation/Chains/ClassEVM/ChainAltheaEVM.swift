@@ -9,6 +9,7 @@
 import Foundation
 
 class ChainAltheaEVM: BaseChain {
+    
     override init() {
         super.init()
         

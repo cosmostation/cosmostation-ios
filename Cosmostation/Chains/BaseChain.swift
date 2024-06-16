@@ -302,7 +302,20 @@ func ALLCHAINS() -> [BaseChain] {
     
     result.append(ChainEthereum())
     result.append(ChainAltheaEVM())
+    result.append(ChainArbitrum())
+    result.append(ChainAvalanche())
+    result.append(ChainBaseEVM())
+    result.append(ChainBinanceSmart())
+    result.append(ChainCantoEVM())
+    result.append(ChainCronos())
+    result.append(ChainDymensionEVM())
+    result.append(ChainEvmosEVM())
+    result.append(ChainHumansEVM())
+    result.append(ChainKavaEVM())
     result.append(ChainOktEVM())
+    result.append(ChainOptimism())
+    result.append(ChainPolygon())
+    result.append(ChainXplaEVM())
     return result
 }
 
