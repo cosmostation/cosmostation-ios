@@ -29,12 +29,12 @@ class NeutronFetcher: FetcherGrpc {
         daosList = chain.getChainListParam()["daos"].arrayValue
         
         do {
-            if let cw20Tokens = try await fetchCw20Info(),
-               let auth = try await fetchAuth(),
+            if let cw20Tokens = try? await fetchCw20Info(),
+               let auth = try? await fetchAuth(),
                let balance = try await fetchBalance(),
                let vault = try? await fetchVaultDeposit(),
                let vesting = try? await fetchNeutronVesting() {
-                self.mintscanCw20Tokens = cw20Tokens
+                self.mintscanCw20Tokens = cw20Tokens ?? []
                 self.cosmosAuth = auth
                 self.cosmosBalances = balance
                 if let vault = vault,

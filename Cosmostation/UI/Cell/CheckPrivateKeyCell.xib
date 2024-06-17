@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,15 +43,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="YCv-eF-mPF">
-                                <rect key="frame" x="331" y="27" width="0.0" height="0.0"/>
+                                <rect key="frame" x="147.66666666666666" y="27" width="0.0" height="0.0"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bv9-CZ-uhs" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="44" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" name="_color06"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="14" id="OeE-C2-Bk1"/>
-                                            <constraint firstAttribute="width" constant="44" id="UXm-uC-BR1"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                         <color key="textColor" name="_color02"/>
                                         <nil key="highlightedColor"/>
@@ -63,12 +59,8 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9H1-3N-Bea" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="72" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" name="_color06"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="72" id="UNi-es-baD"/>
-                                            <constraint firstAttribute="height" constant="14" id="zTG-E4-LHO"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                         <color key="textColor" name="_color02"/>
                                         <nil key="highlightedColor"/>
@@ -109,11 +101,11 @@
                             <constraint firstItem="Ymw-3N-L35" firstAttribute="top" secondItem="DuX-mc-kc0" secondAttribute="top" constant="18" id="0WP-Nj-Ze9"/>
                             <constraint firstItem="AvC-ON-HAr" firstAttribute="top" secondItem="Ymw-3N-L35" secondAttribute="bottom" constant="8" id="1nB-lv-X8U"/>
                             <constraint firstAttribute="bottom" secondItem="Ebr-sN-Lxe" secondAttribute="bottom" constant="12" id="8ql-Ok-8PX"/>
+                            <constraint firstItem="YCv-eF-mPF" firstAttribute="leading" secondItem="Ymw-3N-L35" secondAttribute="trailing" constant="4" id="9Ko-UM-pfs"/>
                             <constraint firstItem="Ebr-sN-Lxe" firstAttribute="centerY" secondItem="DuX-mc-kc0" secondAttribute="centerY" id="Eiu-dr-d7D"/>
                             <constraint firstItem="Ebr-sN-Lxe" firstAttribute="top" secondItem="DuX-mc-kc0" secondAttribute="top" constant="12" id="N4r-gp-jNe"/>
                             <constraint firstItem="Ymw-3N-L35" firstAttribute="leading" secondItem="Ebr-sN-Lxe" secondAttribute="trailing" constant="4" id="Omu-iY-hr6"/>
                             <constraint firstAttribute="trailing" secondItem="ws6-85-cqe" secondAttribute="trailing" constant="14" id="PKA-Fe-TVc"/>
-                            <constraint firstItem="ws6-85-cqe" firstAttribute="leading" secondItem="YCv-eF-mPF" secondAttribute="trailing" constant="4" id="PdZ-z2-zeI"/>
                             <constraint firstAttribute="trailing" secondItem="AvC-ON-HAr" secondAttribute="trailing" constant="14" id="TuC-Iv-3Y5"/>
                             <constraint firstItem="Ebr-sN-Lxe" firstAttribute="leading" secondItem="DuX-mc-kc0" secondAttribute="leading" constant="12" id="Ymb-Bh-53Y"/>
                             <constraint firstItem="YCv-eF-mPF" firstAttribute="centerY" secondItem="ws6-85-cqe" secondAttribute="centerY" id="abe-HO-gVg"/>

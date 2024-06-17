@@ -16,6 +16,14 @@ class OktFetcher: FetcherLcd {
     var lcdOktTokens = Array<JSON>()
     var lcdOktValidators = Array<JSON>()
     
+    override func fetchPreCreate() async -> Bool {
+        lcdAccountInfo = JSON()
+        if let accountInfo = try? await fetchAccountInfo(chain.bechAddress!) {
+            self.lcdAccountInfo = accountInfo ?? JSON()
+        }
+        return true
+    }
+    
     override func fetchLcdData(_ id: Int64) async -> Bool {
         lcdNodeInfo = JSON()
         lcdAccountInfo = JSON()
@@ -43,19 +51,19 @@ class OktFetcher: FetcherLcd {
         }
     }
     
-    func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
+    override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
         return lcdBalanceValue(chain.stakeDenom!, usd).adding(lcdOktDepositValue(usd)).adding(lcdOktWithdrawValue(usd))
     }
     
-    func lcdAllStakingDenomAmount() -> NSDecimalNumber {
-        return lcdBalanceAmount(chain.stakeDenom!).adding(lcdOktDepositAmount()).adding(lcdOktWithdrawAmount())
-    }
-    
-    func lcdBalanceAmount(_ denom: String) -> NSDecimalNumber {
+    override func lcdBalanceAmount(_ denom: String) -> NSDecimalNumber {
         if let balance = lcdAccountInfo.oktCoins?.filter({ $0["denom"].string == denom }).first {
             return NSDecimalNumber.init(string: balance["amount"].string ?? "0")
         }
         return NSDecimalNumber.zero
+    }
+    
+    func lcdAllStakingDenomAmount() -> NSDecimalNumber {
+        return lcdBalanceAmount(chain.stakeDenom!).adding(lcdOktDepositAmount()).adding(lcdOktWithdrawAmount())
     }
     
     func lcdBalanceValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {

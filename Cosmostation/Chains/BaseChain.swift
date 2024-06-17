@@ -175,7 +175,29 @@ class BaseChain {
         }
     }
     
-    func fetchPreCreate() {}
+    //fetch only balance for add account check
+    func fetchPreCreate() {
+        fetchState = .Busy
+        Task {
+            var result: Bool?
+            if (supportEvm == true) {
+                result = await evmFetcher?.fetchPreCreate()
+            } else if (supportCosmos == true) {
+                result = await grpcFetcher?.fetchPreCreate()
+            }
+            
+            if (result == false) {
+                fetchState = .Fail
+            } else {
+                fetchState = .Success
+            }
+            
+            DispatchQueue.main.async(execute: {
+//                print("", self.tag, " FetchData post")
+                NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+            })
+        }
+    }
     
     func isTxFeePayable() -> Bool { return false }
     

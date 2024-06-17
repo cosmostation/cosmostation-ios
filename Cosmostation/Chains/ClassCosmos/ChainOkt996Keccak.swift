@@ -76,6 +76,23 @@ class ChainOkt996Keccak: BaseChain  {
         }
         
     }
+    
+    //fetch only balance for add account check
+    override func fetchPreCreate() {
+        fetchState = .Busy
+        Task {
+            var result = await oktFetcher?.fetchPreCreate()
+            
+            if (result == false) {
+                fetchState = .Fail
+            } else {
+                fetchState = .Success
+            }
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+            })
+        }
+    }
 }
 
 

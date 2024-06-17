@@ -22,9 +22,15 @@ class FetcherEvmrpc {
         self.chain = chain
     }
     
-    deinit {
-    }
     
+    func fetchPreCreate() async -> Bool {
+        evmBalances = NSDecimalNumber.zero
+        if let balanceJson = try? await fetchEvmBalance(chain.evmAddress!),
+           let balance = balanceJson?["result"].stringValue.hexToNSDecimal {
+            self.evmBalances = balance()
+        }
+        return true
+    }
     
     func fetchEvmData(_ id: Int64) async -> Bool {
         mintscanErc20Tokens.removeAll()

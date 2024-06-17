@@ -116,18 +116,14 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as? SelectEndpointCell
         if (cell?.gapTime != nil) {
-//            if (tableView == grpcTableView) {
-//                if let cosmosChain = targetChain as? CosmosClass {
-//                    let endpoint = cosmosChain.getChainListParam()["grpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
-//                    BaseData.instance.setGrpcEndpoint(cosmosChain, endpoint)
-//                }
-//                
-//            } else if (tableView == evmTableView) {
-//                if let evmChain = targetChain as? EvmClass {
-//                    let endpoint = evmChain.getChainListParam()["evm_rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
-//                    BaseData.instance.setEvmRpcEndpoint(evmChain, endpoint)
-//                }
-//            }
+            if (tableView == grpcTableView) {
+                let endpoint = targetChain.getChainListParam()["grpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                BaseData.instance.setGrpcEndpoint(targetChain, endpoint)
+                
+            } else if (tableView == evmTableView) {
+                let endpoint = targetChain.getChainListParam()["evm_rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                BaseData.instance.setEvmRpcEndpoint(targetChain, endpoint)
+            }
             self.dismiss(animated: true) {
                 self.endpointDelegate?.onEndpointUpdated()
             }

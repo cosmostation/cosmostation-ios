@@ -20,7 +20,19 @@ class FetcherLcd {
         self.chain = chain
     }
     
+    func fetchPreCreate() async -> Bool {
+        return false
+    }
+    
     func fetchLcdData(_ id: Int64) async -> Bool {
         return false
+    }
+    
+    func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
+        return NSDecimalNumber.zero
+    }
+    
+    func lcdBalanceAmount(_ denom: String) -> NSDecimalNumber {
+        return NSDecimalNumber.zero
     }
 }

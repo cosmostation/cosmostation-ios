@@ -21,25 +21,19 @@ class CheckPrivateKeyCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        legacyTag.isHidden = true
+        keyTypeTag.isHidden = true
         rootView.setBlur()
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
+        super.prepareForReuse()
         legacyTag.isHidden = true
         keyTypeTag.isHidden = true
+        rootView.setBlur()
     }
     
-    func bindEvmClassPrivateKey(_ account: BaseAccount, _ chain: BaseChain) {
-        logoImg1.image =  UIImage.init(named: chain.logo1)
-        nameLabel.text = chain.name.uppercased()
-        
-        hdPathLabel.text = chain.getHDPath(account.lastHDPath)
-        pkeyLabel.text = "0x" + chain.privateKey!.toHexString()
-    }
-    
-    
-    func bindCosmosClassPrivateKey(_ account: BaseAccount, _ chain: BaseChain) {
+    func bindPrivateKey(_ account: BaseAccount, _ chain: BaseChain) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         
@@ -47,9 +41,5 @@ class CheckPrivateKeyCell: UITableViewCell {
         pkeyLabel.text = "0x" + chain.privateKey!.toHexString()
         
         legacyTag.isHidden = chain.isDefault
-        if (chain is ChainOkt996Keccak) {
-            keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
-            keyTypeTag.isHidden = false
-        }
     }
 }

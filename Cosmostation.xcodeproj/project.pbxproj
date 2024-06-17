@@ -1341,10 +1341,6 @@
 		04FA745E2A9DEE65001A2830 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 04FA745D2A9DEE65001A2830 /* Toast */; };
 		04FA74612A9F2BEB001A2830 /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74602A9F2BEB001A2830 /* TextInput.swift */; };
 		04FA74622A9F2BEB001A2830 /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74602A9F2BEB001A2830 /* TextInput.swift */; };
-		04FA74652A9F5833001A2830 /* CreateNameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA74632A9F5833001A2830 /* CreateNameVC.xib */; };
-		04FA74662A9F5833001A2830 /* CreateNameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA74632A9F5833001A2830 /* CreateNameVC.xib */; };
-		04FA74672A9F5833001A2830 /* CreateNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74642A9F5833001A2830 /* CreateNameVC.swift */; };
-		04FA74682A9F5833001A2830 /* CreateNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA74642A9F5833001A2830 /* CreateNameVC.swift */; };
 		04FA746C2A9F8652001A2830 /* BaseSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA746A2A9F8652001A2830 /* BaseSheet.swift */; };
 		04FA746D2A9F8652001A2830 /* BaseSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA746A2A9F8652001A2830 /* BaseSheet.swift */; };
 		04FA746E2A9F8652001A2830 /* BaseSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA746B2A9F8652001A2830 /* BaseSheet.xib */; };
@@ -2494,8 +2490,6 @@
 		04FA744E2A9D97A0001A2830 /* PincodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PincodeVC.swift; sourceTree = "<group>"; };
 		04FA744F2A9D97A0001A2830 /* PincodeAlphabetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PincodeAlphabetVC.swift; sourceTree = "<group>"; };
 		04FA74602A9F2BEB001A2830 /* TextInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInput.swift; sourceTree = "<group>"; };
-		04FA74632A9F5833001A2830 /* CreateNameVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateNameVC.xib; sourceTree = "<group>"; };
-		04FA74642A9F5833001A2830 /* CreateNameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNameVC.swift; sourceTree = "<group>"; };
 		04FA746A2A9F8652001A2830 /* BaseSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSheet.swift; sourceTree = "<group>"; };
 		04FA746B2A9F8652001A2830 /* BaseSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseSheet.xib; sourceTree = "<group>"; };
 		04FA74712AA04416001A2830 /* SwitchAccountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchAccountCell.xib; sourceTree = "<group>"; };
@@ -3845,8 +3839,6 @@
 			children = (
 				04F4061629ED119800CD88E4 /* Init.storyboard */,
 				E16D9B1422489B030019B7BB /* IntroVC.swift */,
-				04FA74642A9F5833001A2830 /* CreateNameVC.swift */,
-				04FA74632A9F5833001A2830 /* CreateNameVC.xib */,
 				04FA74832AA0E2A8001A2830 /* CreateMnemonicVC.swift */,
 				04FA74842AA0E2A9001A2830 /* CreateMnemonicVC.xib */,
 				040732FC2AA44075001C63DD /* ImportMnemonicVC.swift */,
@@ -4352,7 +4344,6 @@
 				E1A48DF42C0065310084D770 /* EcoListCell.xib in Resources */,
 				04FAD9F72AB71D5000143A3E /* DeleteAccountSheet.xib in Resources */,
 				0494B3B72B68FA930064BCD5 /* Token.xcassets in Resources */,
-				04FA74662A9F5833001A2830 /* CreateNameVC.xib in Resources */,
 				E1831BA72AB82FE60078A28B /* ManageChainCell.xib in Resources */,
 				04FA74742AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
 				044222572B96F4370063F031 /* SelectDisplayTokenCell.xib in Resources */,
@@ -4487,7 +4478,6 @@
 				0438A7E42AE0E9FA006FA213 /* TxAmountLpSheet.xib in Resources */,
 				047C10732AAC310600AFA159 /* QrAddressVC.xib in Resources */,
 				04BA9BD72A985771003E2404 /* ChainSelectVC.xib in Resources */,
-				04FA74652A9F5833001A2830 /* CreateNameVC.xib in Resources */,
 				E11EAE172AAD879A003BFC7F /* SettingSwitchCell.xib in Resources */,
 				E1D931F22BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib in Resources */,
 				E15F2D122ABF108500BAE105 /* StakeUnbondingCell.xib in Resources */,
@@ -5155,7 +5145,6 @@
 				04B789942ACAC9B100E9BE88 /* ibc_applications_transfer_v1_authz.pb.swift in Sources */,
 				E122DC4D2A8A4712006D1E7B /* tendermint_p2p_types.pb.swift in Sources */,
 				E1F257ED2BFB2024008F4D21 /* EvmRedelegate.swift in Sources */,
-				04FA74682A9F5833001A2830 /* CreateNameVC.swift in Sources */,
 				04C816FD2BA98D75006B800A /* cosmos_staking_v1beta1_query.pb.swift in Sources */,
 				04C940E72AF4DAAE00415256 /* DeleteAddressBookSheet.swift in Sources */,
 				045032A32C1EEFCA00235F6A /* ChainGovgen.swift in Sources */,
@@ -5888,7 +5877,6 @@
 				04B789932ACAC9B100E9BE88 /* ibc_applications_transfer_v1_authz.pb.swift in Sources */,
 				E1F257EC2BFB2024008F4D21 /* EvmRedelegate.swift in Sources */,
 				E122DC4C2A8A4712006D1E7B /* tendermint_p2p_types.pb.swift in Sources */,
-				04FA74672A9F5833001A2830 /* CreateNameVC.swift in Sources */,
 				04C816FC2BA98D75006B800A /* cosmos_staking_v1beta1_query.pb.swift in Sources */,
 				045032A22C1EEFCA00235F6A /* ChainGovgen.swift in Sources */,
 				04C940E62AF4DAAE00415256 /* DeleteAddressBookSheet.swift in Sources */,

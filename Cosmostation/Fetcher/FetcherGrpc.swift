@@ -17,7 +17,6 @@ class FetcherGrpc {
     
     var chain: BaseChain!
     
-    
     var cosmosAuth: Google_Protobuf_Any?
     var cosmosBalances: [Cosmos_Base_V1beta1_Coin]?
     var cosmosVestings = [Cosmos_Base_V1beta1_Coin]()
@@ -40,6 +39,14 @@ class FetcherGrpc {
     
     deinit {
         try? grpcConnection.close()
+    }
+    
+    func fetchPreCreate() async -> Bool {
+        cosmosBalances = [Cosmos_Base_V1beta1_Coin]()
+        if let balance = try? await fetchBalance() {
+            self.cosmosBalances = balance
+        }
+        return true
     }
     
     func fetchGrpcData(_ id: Int64) async -> Bool {

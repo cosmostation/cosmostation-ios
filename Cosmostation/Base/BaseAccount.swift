@@ -102,7 +102,7 @@ public class BaseAccount {
     }
     
     func initAllKeys() async -> [BaseChain] {
-        var result = ALLCHAINS()
+        let result = ALLCHAINS()
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
             if let secureData = try? keychain.getString(uuid.sha1()),
@@ -192,6 +192,33 @@ public class BaseAccount {
         }
     }
     
+    func fetchForPreCreate(_ seed: Data? = nil, _ privateKeyString: String? = nil) {
+        allChains = ALLCHAINS()
+        if (seed != nil) {
+            Task {
+                await allChains.concurrentForEach { chain in
+                    if (chain.publicKey == nil) {
+                        chain.setInfoWithSeed(seed!, self.lastHDPath)
+                    }
+                    if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
+                        chain.fetchPreCreate()
+                    }
+                }
+            }
+            
+        } else if (privateKeyString != nil) {
+            Task {
+                await allChains.concurrentForEach { chain in
+                    if (chain.publicKey == nil) {
+                        chain.setInfoWithPrivateKey(Data.fromHex(privateKeyString!)!)
+                    }
+                    if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
+                        chain.fetchPreCreate()
+                    }
+                }
+            }
+        }
+    }
     
     func initSortChains() {
         allChains.sort {
