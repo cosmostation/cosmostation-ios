@@ -58,58 +58,57 @@ class L_Generator {
         return result
     }
     
-    //YONG4
-//    static func postData(_ msgs: [L_Msg], _ fee: L_Fee, _ memo: String, _ baseChain: CosmosClass) -> Data {
-//        guard let oktChain = baseChain as? ChainOkt996Keccak else {
-//            return Data()
-//        }
-//        let encoder = JSONEncoder()
-//        encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
-//        
-//        let chainId = oktChain.chainIdCosmos!
-//        let accNum = oktChain.lcdAccountInfo["value","account_number"].uInt64Value
-//        let seqNum = oktChain.lcdAccountInfo["value","sequence"].uInt64Value
-//        
-//        let stdMsg = getToSignMsg(chainId, String(accNum), String(seqNum), msgs, fee, memo)
-//        let toSignData = try! encoder.encode(stdMsg)
-//        let signatures = genSignatures(toSignData, String(accNum), String(seqNum), baseChain)
-//        let stdTx = genSignedTx(msgs, fee, memo, signatures!)
-//        let postTx = L_PostTx.init("sync", stdTx.value)
-//        return try! encoder.encode(postTx)
-//    }
-//    
-//    
-//    static func getToSignMsg(_ chainid: String, _ accountNum: String, _ sequenceNum: String, _ msgs: [L_Msg], _ fee: L_Fee, _ memo: String) -> StdSignMsg {
-//        var stdSignedMsg = StdSignMsg.init()
-//        stdSignedMsg.chain_id = chainid
-//        stdSignedMsg.account_number = accountNum
-//        stdSignedMsg.sequence = sequenceNum
-//        stdSignedMsg.msgs = msgs
-//        stdSignedMsg.fee = fee
-//        stdSignedMsg.memo = memo
-//        return stdSignedMsg
-//    }
-//    
-//    static func genSignatures(_ toSignData: Data, _ accNum: String, _ seqNum: String, _ baseChain: CosmosClass) -> [L_Signature]? {
-//        if (baseChain.accountKeyType.pubkeyType == .COSMOS_Secp256k1) {
-//            let signedData = SECP256K1.compactsign(toSignData.sha256(), privateKey: baseChain.privateKey!)!
-//            let publicKey = L_PublicKey.init(COSMOS_KEY_TYPE_PUBLIC, baseChain.publicKey!.base64EncodedString())
-//            let signature = L_Signature.init(publicKey, signedData.base64EncodedString(), accNum, seqNum)
-//            return [signature]
-//            
-//        }  else if (baseChain.accountKeyType.pubkeyType == .ETH_Keccak256) {
-//            let signedData = SECP256K1.compactsign(toSignData.sha3(.keccak256), privateKey: baseChain.privateKey!)!
-//            let publicKey = L_PublicKey.init(ETHERMINT_KEY_TYPE_PUBLIC, baseChain.publicKey!.base64EncodedString())
-//            let signature = L_Signature.init(publicKey, signedData.base64EncodedString(), accNum, seqNum)
-//            return [signature]
-//        }
-//        return nil
-//    }
-//    
-//    static func genSignedTx(_ msgs: [L_Msg], _ fee: L_Fee, _ memo: String, _ signatures: [L_Signature]) -> L_StdTx {
-//        let value = L_StdTx.L_Value.init(msgs, fee, signatures, memo)
-//        return L_StdTx.init(COSMOS_AUTH_TYPE_STDTX, value)
-//    }
+    static func postData(_ msgs: [L_Msg], _ fee: L_Fee, _ memo: String, _ baseChain: BaseChain) -> Data {
+        guard let oktChain = baseChain as? ChainOkt996Keccak else {
+            return Data()
+        }
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+        
+        let chainId = oktChain.chainIdCosmos!
+        let accNum = oktChain.getLcdfetcher()!.lcdAccountInfo["value","account_number"].uInt64Value
+        let seqNum = oktChain.getLcdfetcher()!.lcdAccountInfo["value","sequence"].uInt64Value
+        
+        let stdMsg = getToSignMsg(chainId, String(accNum), String(seqNum), msgs, fee, memo)
+        let toSignData = try! encoder.encode(stdMsg)
+        let signatures = genSignatures(toSignData, String(accNum), String(seqNum), baseChain)
+        let stdTx = genSignedTx(msgs, fee, memo, signatures!)
+        let postTx = L_PostTx.init("sync", stdTx.value)
+        return try! encoder.encode(postTx)
+    }
+    
+    
+    static func getToSignMsg(_ chainid: String, _ accountNum: String, _ sequenceNum: String, _ msgs: [L_Msg], _ fee: L_Fee, _ memo: String) -> StdSignMsg {
+        var stdSignedMsg = StdSignMsg.init()
+        stdSignedMsg.chain_id = chainid
+        stdSignedMsg.account_number = accountNum
+        stdSignedMsg.sequence = sequenceNum
+        stdSignedMsg.msgs = msgs
+        stdSignedMsg.fee = fee
+        stdSignedMsg.memo = memo
+        return stdSignedMsg
+    }
+    
+    static func genSignatures(_ toSignData: Data, _ accNum: String, _ seqNum: String, _ baseChain: BaseChain) -> [L_Signature]? {
+        if (baseChain.accountKeyType.pubkeyType == .COSMOS_Secp256k1) {
+            let signedData = SECP256K1.compactsign(toSignData.sha256(), privateKey: baseChain.privateKey!)!
+            let publicKey = L_PublicKey.init(COSMOS_KEY_TYPE_PUBLIC, baseChain.publicKey!.base64EncodedString())
+            let signature = L_Signature.init(publicKey, signedData.base64EncodedString(), accNum, seqNum)
+            return [signature]
+            
+        }  else if (baseChain.accountKeyType.pubkeyType == .ETH_Keccak256) {
+            let signedData = SECP256K1.compactsign(toSignData.sha3(.keccak256), privateKey: baseChain.privateKey!)!
+            let publicKey = L_PublicKey.init(ETHERMINT_KEY_TYPE_PUBLIC, baseChain.publicKey!.base64EncodedString())
+            let signature = L_Signature.init(publicKey, signedData.base64EncodedString(), accNum, seqNum)
+            return [signature]
+        }
+        return nil
+    }
+    
+    static func genSignedTx(_ msgs: [L_Msg], _ fee: L_Fee, _ memo: String, _ signatures: [L_Signature]) -> L_StdTx {
+        let value = L_StdTx.L_Value.init(msgs, fee, signatures, memo)
+        return L_StdTx.init(COSMOS_AUTH_TYPE_STDTX, value)
+    }
 }
 
 

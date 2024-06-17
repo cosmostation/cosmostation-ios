@@ -71,180 +71,167 @@ class LegacyTransfer: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-//        //display to send asset info
-//        if let okEvmChain = selectedChain as? ChainOktEVM {
-//            tokenInfo = okEvmChain.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
-//            let original_symbol = tokenInfo["original_symbol"].stringValue
-//            toSendAssetImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(original_symbol))
-//            toSendSymbolLabel.text = original_symbol.uppercased()
-//            
-//            let available = okEvmChain.lcdBalanceAmount(toSendDenom)
-//            if (toSendDenom == stakeDenom) {
-//                availableAmount = available.subtracting(NSDecimalNumber(string: OKT_BASE_FEE))
-//            } else {
-//                availableAmount = available
-//            }
-//            
-//        } else if let okChain = selectedChain as? ChainOkt996Keccak {
-//            tokenInfo = okChain.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
-//            let original_symbol = tokenInfo["original_symbol"].stringValue
-//            toSendAssetImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(original_symbol))
-//            toSendSymbolLabel.text = original_symbol.uppercased()
-//            
-//            let available = okChain.lcdBalanceAmount(toSendDenom)
-//            if (toSendDenom == stakeDenom) {
-//                availableAmount = available.subtracting(NSDecimalNumber(string: OKT_BASE_FEE))
-//            } else {
-//                availableAmount = available
-//            }
-//        }
-//        
-//        toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
-//        toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
-//        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
-//        
-//        onUpdateFeeView()
+        //display to send asset info
+        if let oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher {
+            tokenInfo = oktFetcher.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
+            let original_symbol = tokenInfo["original_symbol"].stringValue
+            toSendAssetImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
+            toSendSymbolLabel.text = original_symbol.uppercased()
+            
+            let available = oktFetcher.lcdBalanceAmount(toSendDenom)
+            if (toSendDenom == stakeDenom) {
+                availableAmount = available.subtracting(NSDecimalNumber(string: OKT_BASE_FEE))
+            } else {
+                availableAmount = available
+            }
+        }
+        
+        toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
+        toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
+        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
+        
+        onUpdateFeeView()
     }
     
-//    override func setLocalizedString() {
-//        titleLabel.text = NSLocalizedString("str_transfer_asset", comment: "")
-//        toAddressHint.text = NSLocalizedString("msg_tap_for_add_address", comment: "")
-//        toSendAssetHint.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
-//        memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
-//        sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
-//    }
-//    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        let gap = UIScreen.main.bounds.size.height - 600
-//        if (gap > 0) { midGapConstraint.constant = gap }
-//        else { midGapConstraint.constant = 60 }
-//    }
-//    
-//    @IBAction func onClickScan(_ sender: UIButton) {
-//        let qrScanVC = QrScanVC(nibName: "QrScanVC", bundle: nil)
-//        qrScanVC.scanDelegate = self
-//        present(qrScanVC, animated: true)
-//    }
-//    
-//    @objc func onClickAmount() {
-//        let amountSheet = TxAmountLegacySheet(nibName: "TxAmountLegacySheet", bundle: nil)
-//        amountSheet.selectedChain = selectedChain
-//        amountSheet.tokenInfo = tokenInfo
-//        amountSheet.availableAmount = availableAmount
-//        if (toSendAmount != NSDecimalNumber.zero) {
-//            amountSheet.existedAmount = toSendAmount
-//        }
-//        amountSheet.sheetDelegate = self
-//        onStartSheet(amountSheet, 240, 0.6)
-//    }
-//    
-//    func onUpdateAmountView(_ amount: String?) {
-//        toSendAssetHint.isHidden = false
-//        toAssetAmountLabel.isHidden = true
-//        toAssetDenomLabel.isHidden = true
-//        toAssetCurrencyLabel.isHidden = true
-//        toAssetValueLabel.isHidden = true
-//        
-//        if (amount?.isEmpty == true) {
-//            toSendAmount = NSDecimalNumber.zero
-//            
-//        } else {
-//            toSendAmount = NSDecimalNumber(string: amount)
-//            
-//            if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-//                toAssetDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
-//                toAssetAmountLabel?.attributedText = WDP.dpAmount(toSendAmount.stringValue, toAssetAmountLabel!.font, 18)
-//                toSendAssetHint.isHidden = true
-//                toAssetAmountLabel.isHidden = false
-//                toAssetDenomLabel.isHidden = false
-//                
-//                if (toSendDenom == stakeDenom) {
-//                    let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
-//                    let toSendValue = msPrice.multiplying(by: toSendAmount, withBehavior: handler6)
-//                    WDP.dpValue(toSendValue, toAssetCurrencyLabel, toAssetValueLabel)
-//                    toAssetCurrencyLabel.isHidden = false
-//                    toAssetValueLabel.isHidden = false
-//                }
-//            }
-//        }
-//        onValidate()
-//    }
-//    
-//    
-//    @objc func onClickToAddress() {
-//        let addressSheet = TxAddressLegacySheet(nibName: "TxAddressLegacySheet", bundle: nil)
-//        addressSheet.selectedChain = selectedChain
-//        addressSheet.existedAddress = recipientAddress
-//        addressSheet.addressLegacySheetType = .SelectAddress_CosmosLegacySend
-//        addressSheet.addressLegacyDelegate = self
-//        onStartSheet(addressSheet, 220, 0.6)
-//    }
-//    
-//    func onUpdateToAddressView(_ address: String) {
-//        if (address.isEmpty == true) {
-//            recipientAddress = ""
-//            toAddressHint.isHidden = false
-//            toAddressLabel.isHidden = true
-//            
-//        } else {
-//            recipientAddress = address
-//            toAddressHint.isHidden = true
-//            toAddressLabel.isHidden = false
-//            toAddressLabel.text = recipientAddress
-//            toAddressLabel.adjustsFontSizeToFitWidth = true
-//        }
-//        onValidate()
-//    }
-//    
-//    @objc func onClickMemo() {
-//        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
-//        memoSheet.existedMemo = txMemo
-//        memoSheet.memoDelegate = self
-//        onStartSheet(memoSheet, 260, 0.6)
-//    }
-//    
-//    func onUpdateMemoView(_ memo: String) {
-//        txMemo = memo
-//        if (txMemo.isEmpty) {
-//            memoLabel.isHidden = true
-//            memoHintLabel.isHidden = false
-//        } else {
-//            memoLabel.text = txMemo
-//            memoLabel.isHidden = false
-//            memoHintLabel.isHidden = true
-//        }
-//    }
-//    
-//    func onUpdateFeeView() {
-//        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-//            feeSelectImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(stakeDenom))
-//            feeSelectLabel.text = stakeDenom.uppercased()
-//            
-//            let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
-//            let feeAmount = NSDecimalNumber(string: OKT_BASE_FEE)
-//            let feeValue = msPrice.multiplying(by: feeAmount, withBehavior: handler6)
-//            feeAmountLabel?.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 18)
-//            feeDenomLabel.text = stakeDenom.uppercased()
-//            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
-//        }
-//    }
-//    
-//    @IBAction func onClickSend(_ sender: BaseButton) {
-//        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
-//        self.present(pinVC, animated: true)
-//    }
-//    
-//    func onValidate() {
-//        sendBtn.isEnabled = false
-//        if (toSendAmount == NSDecimalNumber.zero ) { return }
-//        if (recipientAddress?.isEmpty == true) { return }
-//        if (txMemo.count > 300) { return }
-//        sendBtn.isEnabled = true
-//    }
+    override func setLocalizedString() {
+        titleLabel.text = NSLocalizedString("str_transfer_asset", comment: "")
+        toAddressHint.text = NSLocalizedString("msg_tap_for_add_address", comment: "")
+        toSendAssetHint.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
+        memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
+        sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let gap = UIScreen.main.bounds.size.height - 600
+        if (gap > 0) { midGapConstraint.constant = gap }
+        else { midGapConstraint.constant = 60 }
+    }
+    
+    @IBAction func onClickScan(_ sender: UIButton) {
+        let qrScanVC = QrScanVC(nibName: "QrScanVC", bundle: nil)
+        qrScanVC.scanDelegate = self
+        present(qrScanVC, animated: true)
+    }
+    
+    @objc func onClickAmount() {
+        let amountSheet = TxAmountLegacySheet(nibName: "TxAmountLegacySheet", bundle: nil)
+        amountSheet.selectedChain = selectedChain
+        amountSheet.tokenInfo = tokenInfo
+        amountSheet.availableAmount = availableAmount
+        if (toSendAmount != NSDecimalNumber.zero) {
+            amountSheet.existedAmount = toSendAmount
+        }
+        amountSheet.sheetDelegate = self
+        onStartSheet(amountSheet, 240, 0.6)
+    }
+    
+    func onUpdateAmountView(_ amount: String?) {
+        toSendAssetHint.isHidden = false
+        toAssetAmountLabel.isHidden = true
+        toAssetDenomLabel.isHidden = true
+        toAssetCurrencyLabel.isHidden = true
+        toAssetValueLabel.isHidden = true
+        
+        if (amount?.isEmpty == true) {
+            toSendAmount = NSDecimalNumber.zero
+            
+        } else {
+            toSendAmount = NSDecimalNumber(string: amount)
+            
+            if (selectedChain.name == "OKT") {
+                toAssetDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
+                toAssetAmountLabel?.attributedText = WDP.dpAmount(toSendAmount.stringValue, toAssetAmountLabel!.font, 18)
+                toSendAssetHint.isHidden = true
+                toAssetAmountLabel.isHidden = false
+                toAssetDenomLabel.isHidden = false
+                
+                if (toSendDenom == stakeDenom) {
+                    let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
+                    let toSendValue = msPrice.multiplying(by: toSendAmount, withBehavior: handler6)
+                    WDP.dpValue(toSendValue, toAssetCurrencyLabel, toAssetValueLabel)
+                    toAssetCurrencyLabel.isHidden = false
+                    toAssetValueLabel.isHidden = false
+                }
+            }
+        }
+        onValidate()
+    }
+    
+    
+    @objc func onClickToAddress() {
+        let addressSheet = TxAddressLegacySheet(nibName: "TxAddressLegacySheet", bundle: nil)
+        addressSheet.selectedChain = selectedChain
+        addressSheet.existedAddress = recipientAddress
+        addressSheet.addressLegacySheetType = .SelectAddress_CosmosLegacySend
+        addressSheet.addressLegacyDelegate = self
+        onStartSheet(addressSheet, 220, 0.6)
+    }
+    
+    func onUpdateToAddressView(_ address: String) {
+        if (address.isEmpty == true) {
+            recipientAddress = ""
+            toAddressHint.isHidden = false
+            toAddressLabel.isHidden = true
+            
+        } else {
+            recipientAddress = address
+            toAddressHint.isHidden = true
+            toAddressLabel.isHidden = false
+            toAddressLabel.text = recipientAddress
+            toAddressLabel.adjustsFontSizeToFitWidth = true
+        }
+        onValidate()
+    }
+    
+    @objc func onClickMemo() {
+        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
+        memoSheet.existedMemo = txMemo
+        memoSheet.memoDelegate = self
+        onStartSheet(memoSheet, 260, 0.6)
+    }
+    
+    func onUpdateMemoView(_ memo: String) {
+        txMemo = memo
+        if (txMemo.isEmpty) {
+            memoLabel.isHidden = true
+            memoHintLabel.isHidden = false
+        } else {
+            memoLabel.text = txMemo
+            memoLabel.isHidden = false
+            memoHintLabel.isHidden = true
+        }
+    }
+    
+    func onUpdateFeeView() {
+        if (selectedChain.name == "OKT") {
+            feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
+            feeSelectLabel.text = stakeDenom.uppercased()
+            
+            let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
+            let feeAmount = NSDecimalNumber(string: OKT_BASE_FEE)
+            let feeValue = msPrice.multiplying(by: feeAmount, withBehavior: handler6)
+            feeAmountLabel?.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 18)
+            feeDenomLabel.text = stakeDenom.uppercased()
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+        }
+    }
+    
+    @IBAction func onClickSend(_ sender: BaseButton) {
+        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+        self.present(pinVC, animated: true)
+    }
+    
+    func onValidate() {
+        sendBtn.isEnabled = false
+        if (toSendAmount == NSDecimalNumber.zero ) { return }
+        if (recipientAddress?.isEmpty == true) { return }
+        if (txMemo.count > 300) { return }
+        sendBtn.isEnabled = true
+    }
 }
 
-/*
+
 extension LegacyTransfer: LegacyAmountSheetDelegate, AddressLegacyDelegate, MemoDelegate , QrScanDelegate, PinDelegate {
     
     func onInputedAmount(_ amount: String) {
@@ -325,7 +312,7 @@ extension LegacyTransfer {
         let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(NSDecimalNumber(string: OKT_BASE_FEE), 18))
         let fee = L_Fee(BASE_GAS_AMOUNT, [gasCoin])
         
-        let okMsg = L_Generator.oktSendMsg(selectedChain.bechAddress, recipientAddress!, [sendCoin])
+        let okMsg = L_Generator.oktSendMsg(selectedChain.bechAddress!, recipientAddress!, [sendCoin])
         let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
         let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
         
@@ -333,4 +320,3 @@ extension LegacyTransfer {
     }
     
 }
-*/

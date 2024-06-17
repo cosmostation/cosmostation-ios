@@ -111,11 +111,7 @@ public class WUtils {
         var msToken: MintscanToken?
         if let tokenInfo = fromChain.getGrpcfetcher()?.mintscanCw20Tokens.filter({ $0.address == denom }).first {
             msToken = tokenInfo
-        } 
-        
-//        else if let tokenInfo = fromChain.mintscanErc20Tokens.filter({ $0.address == denom }).first {
-//            msToken = tokenInfo
-//        }
+        }
         var result: MintscanPath?
         BaseData.instance.mintscanAssets?.forEach { asset in
             if (msAsset != nil) {
