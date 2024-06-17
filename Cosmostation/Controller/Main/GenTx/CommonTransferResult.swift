@@ -14,8 +14,7 @@ import NIO
 import SwiftProtobuf
 import web3swift
 
-class CommonTransferResult: BaseVC {
-//class CommonTransferResult: BaseVC, AddressBookDelegate {
+class CommonTransferResult: BaseVC, AddressBookDelegate {
     
     @IBOutlet weak var resultTitle: UILabel!
     @IBOutlet weak var successView: UIView!
@@ -56,134 +55,134 @@ class CommonTransferResult: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-//        if (txStyle == .WEB3_STYLE) {
-//            guard evmHash != nil else {
-//                loadingView.isHidden = true
-//                failView.isHidden = false
-//                failMsgLabel.text = ""
-//                confirmBtn.isEnabled = true
-//                return
-//            }
-//            fetchEvmTx()
-//            
-//        } else if (txStyle == .COSMOS_STYLE) {
-//            guard (cosmosBroadcastTxResponse?.txhash) != nil else {
-//                loadingView.isHidden = true
-//                failView.isHidden = false
-//                failMsgLabel.text = cosmosBroadcastTxResponse?.rawLog
-//                confirmBtn.isEnabled = true
-//                return
-//            }
-//            fetchCosmosTx()
-//        }
-//        setQutoes()
+        if (txStyle == .WEB3_STYLE) {
+            guard evmHash != nil else {
+                loadingView.isHidden = true
+                failView.isHidden = false
+                failMsgLabel.text = ""
+                confirmBtn.isEnabled = true
+                return
+            }
+            fetchEvmTx()
+            
+        } else if (txStyle == .COSMOS_STYLE) {
+            guard (cosmosBroadcastTxResponse?.txhash) != nil else {
+                loadingView.isHidden = true
+                failView.isHidden = false
+                failMsgLabel.text = cosmosBroadcastTxResponse?.rawLog
+                confirmBtn.isEnabled = true
+                return
+            }
+            fetchCosmosTx()
+        }
+        setQutoes()
     }
     
-//    override func setLocalizedString() {
-//        resultTitle.text = NSLocalizedString("str_tx_result", comment: "")
-//        confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
-//        if (txStyle == .WEB3_STYLE) {
-//            successMsgLabel.text = evmHash
-//            successExplorerBtn.setTitle("Check in Explorer", for: .normal)
-//            failExplorerBtn.setTitle("Check in Explorer", for: .normal)
-//            
-//        } else if (txStyle == .COSMOS_STYLE) {
-//            successMsgLabel.text = cosmosBroadcastTxResponse?.txhash
-//            successExplorerBtn.setTitle("Check in Mintscan", for: .normal)
-//            failExplorerBtn.setTitle("Check in Mintscan", for: .normal)
-//        }
-//    }
-//    
-//    func onUpdateView() {
-//        loadingView.isHidden = true
-//        confirmBtn.isEnabled = true
-//        if (txStyle == .WEB3_STYLE) {
-//            if (evmRecipient?["result"]["status"].stringValue != "0x1") {
-//                failView.isHidden = false
-//                failExplorerBtn.isHidden = false
-//                
-//            } else {
-//                successView.isHidden = false
-//                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-//                    self.onCheckAddAddressBook()
-//                });
-//            }
-//            
-//        } else if (txStyle == .COSMOS_STYLE) {
-//            if (cosmosTxResponse?.txResponse.code != 0) {
-//                failView.isHidden = false
-//                failExplorerBtn.isHidden = false
-//                failMsgLabel.text = cosmosTxResponse?.txResponse.rawLog
-//                
-//            } else {
-//                successView.isHidden = false
-//                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-//                    self.onCheckAddAddressBook()
-//                });
-//            }
-//            
-//        }
-//    }
-//    
-//    
-//    @IBAction func onClickConfirm(_ sender: BaseButton) {
-//        self.presentingViewController?.presentingViewController?.dismiss(animated: true) {
-//            DispatchQueue.global().async {
-//                self.fromChain.fetchData(self.baseAccount.id)
-//            }
-//        }
-//    }
-//    
-//    @IBAction func onClickExplorer(_ sender: UIButton) {
-//        if (txStyle == .WEB3_STYLE) {
-//            guard let url = fromChain.getExplorerTx(evmHash) else { return }
-//            self.onShowSafariWeb(url)
-//            
-//        } else if (txStyle == .COSMOS_STYLE) {
-//            guard let url = fromChain.getExplorerTx(cosmosBroadcastTxResponse?.txhash) else { return }
-//            self.onShowSafariWeb(url)
-//        }
-//    }
-//    
-//    func onCheckAddAddressBook() {
-//        if (toAddress == nil) { return }
-//        if let existed = BaseData.instance.selectAllAddressBooks().filter({ $0.dpAddress == toAddress }).first {
-//            if (existed.memo != toMemo) {
-//                let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
-//                addressBookSheet.addressBookType = .AfterTxEdit
-//                addressBookSheet.addressBook = existed
-//                addressBookSheet.memo = toMemo
-//                addressBookSheet.bookDelegate = self
-//                onStartSheet(addressBookSheet, 420, 0.8)
-//                return
-//            }
-//            
-//        } else if (BaseData.instance.selectAllRefAddresses().filter { $0.bechAddress == toAddress || $0.evmAddress == toAddress }.count == 0) {
-//            let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
-//            addressBookSheet.addressBookType = .AfterTxNew
-//            addressBookSheet.recipientChain = toChain
-//            addressBookSheet.recipinetAddress = toAddress
-//            addressBookSheet.memo = toMemo
-//            addressBookSheet.bookDelegate = self
-//            onStartSheet(addressBookSheet, 420, 0.8)
-//            return
-//        }
-//    }
-//    
-//    func onAddressBookUpdated(_ result: Int?) {
-//        print("onAddressBookUpdated")
-//    }
-//    
-//    func setQutoes() {
-//        let num = Int.random(in: 0..<QUOTES.count)
-//        let qutoe = NSLocalizedString(QUOTES[num], comment: "").components(separatedBy: "--")
-//        quotesMsgLabel.text = qutoe[0]
-//        quotoesAutherLabel.text = "- " + qutoe[1] + " -"
-//        quotesLayer.isHidden = false
-//    }
+    override func setLocalizedString() {
+        resultTitle.text = NSLocalizedString("str_tx_result", comment: "")
+        confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
+        if (txStyle == .WEB3_STYLE) {
+            successMsgLabel.text = evmHash
+            successExplorerBtn.setTitle("Check in Explorer", for: .normal)
+            failExplorerBtn.setTitle("Check in Explorer", for: .normal)
+            
+        } else if (txStyle == .COSMOS_STYLE) {
+            successMsgLabel.text = cosmosBroadcastTxResponse?.txhash
+            successExplorerBtn.setTitle("Check in Mintscan", for: .normal)
+            failExplorerBtn.setTitle("Check in Mintscan", for: .normal)
+        }
+    }
+    
+    func onUpdateView() {
+        loadingView.isHidden = true
+        confirmBtn.isEnabled = true
+        if (txStyle == .WEB3_STYLE) {
+            if (evmRecipient?["result"]["status"].stringValue != "0x1") {
+                failView.isHidden = false
+                failExplorerBtn.isHidden = false
+                
+            } else {
+                successView.isHidden = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                    self.onCheckAddAddressBook()
+                });
+            }
+            
+        } else if (txStyle == .COSMOS_STYLE) {
+            if (cosmosTxResponse?.txResponse.code != 0) {
+                failView.isHidden = false
+                failExplorerBtn.isHidden = false
+                failMsgLabel.text = cosmosTxResponse?.txResponse.rawLog
+                
+            } else {
+                successView.isHidden = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                    self.onCheckAddAddressBook()
+                });
+            }
+            
+        }
+    }
+    
+    
+    @IBAction func onClickConfirm(_ sender: BaseButton) {
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true) {
+            DispatchQueue.global().async {
+                self.fromChain.fetchData(self.baseAccount.id)
+            }
+        }
+    }
+    
+    @IBAction func onClickExplorer(_ sender: UIButton) {
+        if (txStyle == .WEB3_STYLE) {
+            guard let url = fromChain.getExplorerTx(evmHash) else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (txStyle == .COSMOS_STYLE) {
+            guard let url = fromChain.getExplorerTx(cosmosBroadcastTxResponse?.txhash) else { return }
+            self.onShowSafariWeb(url)
+        }
+    }
+    
+    func onCheckAddAddressBook() {
+        if (toAddress == nil) { return }
+        if let existed = BaseData.instance.selectAllAddressBooks().filter({ $0.dpAddress == toAddress }).first {
+            if (existed.memo != toMemo) {
+                let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
+                addressBookSheet.addressBookType = .AfterTxEdit
+                addressBookSheet.addressBook = existed
+                addressBookSheet.memo = toMemo
+                addressBookSheet.bookDelegate = self
+                onStartSheet(addressBookSheet, 420, 0.8)
+                return
+            }
+            
+        } else if (BaseData.instance.selectAllRefAddresses().filter { $0.bechAddress == toAddress || $0.evmAddress == toAddress }.count == 0) {
+            let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
+            addressBookSheet.addressBookType = .AfterTxNew
+            addressBookSheet.recipientChain = toChain
+            addressBookSheet.recipinetAddress = toAddress
+            addressBookSheet.memo = toMemo
+            addressBookSheet.bookDelegate = self
+            onStartSheet(addressBookSheet, 420, 0.8)
+            return
+        }
+    }
+    
+    func onAddressBookUpdated(_ result: Int?) {
+        print("onAddressBookUpdated")
+    }
+    
+    func setQutoes() {
+        let num = Int.random(in: 0..<QUOTES.count)
+        let qutoe = NSLocalizedString(QUOTES[num], comment: "").components(separatedBy: "--")
+        quotesMsgLabel.text = qutoe[0]
+        quotoesAutherLabel.text = "- " + qutoe[1] + " -"
+        quotesLayer.isHidden = false
+    }
 
 }
-/*
+
 extension CommonTransferResult {
     
     func fetchCosmosTx() {
@@ -216,8 +215,7 @@ extension CommonTransferResult {
     func fetchEvmTx() {
         Task {
             do {
-                let evmChain = (fromChain as? EvmClass)
-                let recipient = try await evmChain?.fetchEvmTxReceipt(evmHash!)
+                let recipient = try await fromChain.getEvmfetcher()?.fetchEvmTxReceipt(evmHash!)
                 if (recipient?["result"].isEmpty == true) {
                     self.confirmBtn.isEnabled = true
                     self.fetchCnt = self.fetchCnt - 1
@@ -289,7 +287,7 @@ extension CommonTransferResult {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: (fromChain as! CosmosClass).getGrpc().0, port: (fromChain as! CosmosClass).getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: fromChain.getGrpcfetcher()!.getGrpc().0, port: fromChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {
@@ -299,4 +297,3 @@ extension CommonTransferResult {
     }
     
 }
-*/

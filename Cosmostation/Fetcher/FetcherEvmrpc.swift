@@ -141,6 +141,46 @@ extension FetcherEvmrpc {
         }
     }
     
+    func fetchEvmTxReceipt(_ txHash: String) async throws -> JSON? {
+        let param: Parameters = ["method": "eth_getTransactionReceipt", "params": [txHash], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchEvmTxByHash(_ txHash: String) async throws -> JSON? {
+        let param: Parameters = ["method": "eth_getTransactionByHash", "params": [txHash], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchEvmEstimateGas(_ reqParam: JSON) async throws -> JSON? {
+        let param: Parameters = ["method": "eth_estimateGas", "params": [reqParam.dictionaryObject], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchEvmBlockNumbers() async throws -> JSON? {
+        let param: Parameters = ["method": "eth_blockNumber", "params": [], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchEvmEthCall(_ reqParam: JSON) async throws -> JSON? {
+        let param: Parameters = ["method": "eth_call", "params": [reqParam.dictionaryObject, "latest"], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchEvmBlockByNumber() async throws -> JSON? {
+        let param: Parameters = ["method": "eth_getBlockByNumber", "params": ["latest", false], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchEvmGasPrice() async throws -> JSON? {
+        let param: Parameters = ["method": "eth_gasPrice", "params": [], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchEvmMaxPriorityFeePerGas() async throws -> JSON? {
+        let param: Parameters = ["method": "eth_maxPriorityFeePerGas", "params": [], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
     func getEvmRpc() -> String {
         if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_EVM_RPC_ENDPOINT +  " : " + chain.name) {
             return endpoint.trimmingCharacters(in: .whitespaces)
@@ -149,3 +189,7 @@ extension FetcherEvmrpc {
     }
     
 }
+
+let DEFUAL_DISPALY_EVM = ["ethereum60", "dymension60", "kava60"]
+
+let EVM_BASE_FEE = NSDecimalNumber.init(string: "588000000000000")
