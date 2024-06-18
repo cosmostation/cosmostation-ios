@@ -265,7 +265,7 @@ class CosmosClassVC: BaseVC {
                 self.onNeutronProposals()
             }
             
-        } else if (selectedChain is ChainKava118 || selectedChain is ChainKava459) {
+        } else if (selectedChain.name == "Kava") {
             if (BaseData.instance.showEvenReview()) {
                 mainFab.addItem(title: "DeFi", image: UIImage(named: "iconFabDefi")) { _ in
                     self.onKavaDefi()
@@ -602,10 +602,10 @@ extension CosmosClassVC: BaseSheetDelegate {
     }
     
     func onKavaDefi() {
-//        let defiVC = KavaDefiVC(nibName: "KavaDefiVC", bundle: nil)
-//        defiVC.selectedChain = selectedChain as? CosmosClass
-//        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(defiVC, animated: true)
+        let defiVC = KavaDefiVC(nibName: "KavaDefiVC", bundle: nil)
+        defiVC.selectedChain = selectedChain
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(defiVC, animated: true)
     }
 }
 

@@ -592,8 +592,6 @@ class Signer {
 //        return [anyMsg]
 //    }
     
-    //YONG4
-    /*
     //for kava sign
     //Tx for Kava CDP Create
     static func genKavaCDPCreateTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
@@ -1079,7 +1077,6 @@ class Signer {
 //        }
 //        return [anyMsg]
 //    }
-     */
 //
 //    //Tx for Authz Claim Commission
 //    static func genAuthzClaimCommission(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
