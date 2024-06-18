@@ -203,7 +203,28 @@ class BaseChain {
         }
     }
     
-    func isTxFeePayable() -> Bool { return false }
+    func isTxFeePayable() -> Bool {
+        if (name == "OKT") {
+            let availableAmount = getLcdfetcher()?.lcdBalanceAmount(stakeDenom!) ?? NSDecimalNumber.zero
+            return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
+            
+        } else if (supportEvm) {
+            return getEvmfetcher()?.evmBalances.compare(EVM_BASE_FEE).rawValue ?? 0 > 0
+            
+        } else if (supportCosmosGrpc) {
+            var result = false
+            getDefaultFeeCoins().forEach { minFee in
+                let availaAmount = getGrpcfetcher()?.balanceAmount(minFee.denom) ?? NSDecimalNumber.zero
+                let minFeeAmount = NSDecimalNumber.init(string: minFee.amount)
+                if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
+                    result = true
+                    return
+                }
+            }
+            return result
+        }
+        return false
+    }
     
 
     func isCosmos() -> Bool {
@@ -302,6 +323,7 @@ extension BaseChain {
     func getFeeBaseGasAmount() -> NSDecimalNumber {
         return NSDecimalNumber(string: String(getFeeBaseGasAmount()))
     }
+    
     //get chainlist suggest fees array
     func getDefaultFeeCoins() -> [Cosmos_Base_V1beta1_Coin] {
         var result = [Cosmos_Base_V1beta1_Coin]()
@@ -455,92 +477,92 @@ enum PubKeyType: Int {
 func ALLCHAINS() -> [BaseChain] {
     var result = [BaseChain]()
     result.append(ChainCosmos())
-//    result.append(ChainAkash())
-//    result.append(ChainAlthea118())
-//    result.append(ChainArchway())
-//    result.append(ChainAssetMantle())
-//    result.append(ChainAxelar())
-//    result.append(ChainBand())
-//    result.append(ChainBitcana())
-//    result.append(ChainBitsong())
-//    result.append(ChainCelestia())
-//    result.append(ChainChihuahua())
-//    result.append(ChainCoreum())
-////    result.append(ChainCrescent())
-//    result.append(ChainCryptoorg())
-//    result.append(ChainCudos())
-//    result.append(ChainDesmos())
-//    result.append(ChainDydx())
-////    result.append(ChainEmoney())
-//    result.append(ChainFetchAi())
-//    result.append(ChainFetchAi60Old())
-//    result.append(ChainFetchAi60Secp())
-//    result.append(ChainFinschia())
-//    result.append(ChainGovgen())
-//    result.append(ChainGravityBridge())
-//    result.append(ChainInjective())
-//    result.append(ChainIris())
-//    result.append(ChainIxo())
-//    result.append(ChainJuno())
-//    result.append(ChainKava459())
-//    result.append(ChainKava118())
+    result.append(ChainAkash())
+    result.append(ChainAlthea118())
+    result.append(ChainArchway())
+    result.append(ChainAssetMantle())
+    result.append(ChainAxelar())
+    result.append(ChainBand())
+    result.append(ChainBitcana())
+    result.append(ChainBitsong())
+    result.append(ChainCelestia())
+    result.append(ChainChihuahua())
+    result.append(ChainCoreum())
+//    result.append(ChainCrescent())
+    result.append(ChainCryptoorg())
+    result.append(ChainCudos())
+    result.append(ChainDesmos())
+    result.append(ChainDydx())
+//    result.append(ChainEmoney())
+    result.append(ChainFetchAi())
+    result.append(ChainFetchAi60Old())
+    result.append(ChainFetchAi60Secp())
+    result.append(ChainFinschia())
+    result.append(ChainGovgen())
+    result.append(ChainGravityBridge())
+    result.append(ChainInjective())
+    result.append(ChainIris())
+    result.append(ChainIxo())
+    result.append(ChainJuno())
+    result.append(ChainKava459())
+    result.append(ChainKava118())
     result.append(ChainKi())
     result.append(ChainKyve())
-//    result.append(ChainLike())
-//    result.append(ChainLum118())
-//    result.append(ChainLum880())
-//    result.append(ChainMars())
+    result.append(ChainLike())
+    result.append(ChainLum118())
+    result.append(ChainLum880())
+    result.append(ChainMars())
     result.append(ChainMedibloc())
     result.append(ChainNeutron())
     result.append(ChainNibiru())
-//    result.append(ChainNoble())
-//    result.append(ChainNyx())
-//    result.append(ChainOmniflix())
-//    result.append(ChainOnomy())
-//    result.append(ChainOsmosis())
-//    result.append(ChainPassage())
-//    result.append(ChainPersistence118())
-//    result.append(ChainPersistence750())
-//    result.append(ChainProvenance())
-//    result.append(ChainQuasar())
-//    result.append(ChainQuicksilver())
-//    result.append(ChainRegen())
-//    result.append(ChainRizon())
-//    result.append(ChainSaga())
-//    result.append(ChainSecret118())
-//    result.append(ChainSecret529())
-//    result.append(ChainSei())
-//    result.append(ChainSentinel())
-//    result.append(ChainShentu())
-//    result.append(ChainSommelier())
-//    result.append(ChainStafi())
-//    result.append(ChainStargaze())
-////    result.append(ChainStarname())
-//    result.append(ChainStride())
-//    result.append(ChainTeritori())
-//    result.append(ChainTerra())
-//    result.append(ChainUmee())
-//    result.append(ChainXpla())
+    result.append(ChainNoble())
+    result.append(ChainNyx())
+    result.append(ChainOmniflix())
+    result.append(ChainOnomy())
+    result.append(ChainOsmosis())
+    result.append(ChainPassage())
+    result.append(ChainPersistence118())
+    result.append(ChainPersistence750())
+    result.append(ChainProvenance())
+    result.append(ChainQuasar())
+    result.append(ChainQuicksilver())
+    result.append(ChainRegen())
+    result.append(ChainRizon())
+    result.append(ChainSaga())
+    result.append(ChainSecret118())
+    result.append(ChainSecret529())
+    result.append(ChainSei())
+    result.append(ChainSentinel())
+    result.append(ChainShentu())
+    result.append(ChainSommelier())
+    result.append(ChainStafi())
+    result.append(ChainStargaze())
+//    result.append(ChainStarname())
+    result.append(ChainStride())
+    result.append(ChainTeritori())
+    result.append(ChainTerra())
+    result.append(ChainUmee())
+    result.append(ChainXpla())
     result.append(ChainOkt996Keccak())
     result.append(ChainOkt996Secp())
 
     
     result.append(ChainEthereum())
-//    result.append(ChainAltheaEVM())
-//    result.append(ChainArbitrum())
-//    result.append(ChainAvalanche())
-//    result.append(ChainBaseEVM())
-//    result.append(ChainBinanceSmart())
-//    result.append(ChainCantoEVM())
-//    result.append(ChainCronos())
-//    result.append(ChainDymensionEVM())
-//    result.append(ChainEvmosEVM())
-//    result.append(ChainHumansEVM())
+    result.append(ChainAltheaEVM())
+    result.append(ChainArbitrum())
+    result.append(ChainAvalanche())
+    result.append(ChainBaseEVM())
+    result.append(ChainBinanceSmart())
+    result.append(ChainCantoEVM())
+    result.append(ChainCronos())
+    result.append(ChainDymensionEVM())
+    result.append(ChainEvmosEVM())
+    result.append(ChainHumansEVM())
     result.append(ChainKavaEVM())
     result.append(ChainOktEVM())
     result.append(ChainOptimism())
-//    result.append(ChainPolygon())
-//    result.append(ChainXplaEVM())
+    result.append(ChainPolygon())
+    result.append(ChainXplaEVM())
     
 //    result.append(ChainBeraEVM_T())
     

@@ -342,7 +342,7 @@ class CosmosClassVC: BaseVC {
     }
 }
 
-extension CosmosClassVC: MDCTabBarViewDelegate {
+extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
     
     func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
         if (item.tag == 0) {
@@ -417,134 +417,6 @@ extension CosmosClassVC: MDCTabBarViewDelegate {
         }
     }
     
-    
-}
-
-//Common Action For Neutron
-extension CosmosClassVC {
-    
-    func onSendTx() {
-//        if (selectedChain.isBankLocked()) {
-//            onShowToast(NSLocalizedString("error_tranfer_disabled", comment: ""))
-//            return
-//        }
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        if (selectedChain is ChainOkt996Keccak) {
-//            let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
-//            transfer.selectedChain = selectedChain
-//            transfer.toSendDenom = selectedChain.stakeDenom
-//            transfer.modalTransitionStyle = .coverVertical
-//            self.present(transfer, animated: true)
-//
-//        } else if (selectedChain is ChainOktEVM) {
-//            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-//            transfer.sendType = .Only_EVM_Coin
-//            transfer.fromChain = selectedChain
-//            transfer.toSendDenom = selectedChain.stakeDenom
-//            transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom)
-//            transfer.modalTransitionStyle = .coverVertical
-//            self.present(transfer, animated: true)
-//
-//        } else {
-//            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-//            transfer.sendType = (selectedChain is EvmClass) ? .CosmosEVM_Coin : .Only_Cosmos_Coin
-//            transfer.fromChain = selectedChain
-//            transfer.toSendDenom = selectedChain.stakeDenom
-//            transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom)
-//            transfer.modalTransitionStyle = .coverVertical
-//            self.present(transfer, animated: true)
-//        }
-    }
-    
-    func onClaimRewardTx() {
-        if (selectedChain.getGrpcfetcher()?.cosmosValidators.count ?? 0 <= 0) {
-            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-            return
-        }
-//        if (selectedChain.rewardAllCoins().count == 0) {
-//            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
-//            return
-//        }
-//        if (selectedChain.claimableRewards().count == 0) {
-//            onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
-//            return
-//        }
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
-//        claimRewards.claimableRewards = selectedChain.claimableRewards()
-//        claimRewards.selectedChain = selectedChain
-//        claimRewards.modalTransitionStyle = .coverVertical
-//        self.present(claimRewards, animated: true)
-    }
-    
-    func onClaimCompoundingTx() {
-        if (selectedChain.getGrpcfetcher()?.cosmosValidators.count ?? 0 <= 0) {
-            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-            return
-        }
-//        if (selectedChain.rewardAllCoins().count == 0) {
-//            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
-//            return
-//        }
-//        if (selectedChain.claimableRewards().count == 0) {
-//            onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
-//            return
-//        }
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        if (selectedChain.rewardAddress != selectedChain.bechAddress) {
-//            onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
-//            return
-//        }
-//        let compounding = CosmosCompounding(nibName: "CosmosCompounding", bundle: nil)
-//        compounding.claimableRewards = selectedChain.claimableRewards()
-//        compounding.selectedChain = selectedChain
-//        compounding.modalTransitionStyle = .coverVertical
-//        self.present(compounding, animated: true)
-    }
-    
-    func onClaimCommissionTx() {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        let claimCommission = CosmosClaimCommission(nibName: "CosmosClaimCommission", bundle: nil)
-//        claimCommission.selectedChain = selectedChain
-//        claimCommission.modalTransitionStyle = .coverVertical
-//        self.present(claimCommission, animated: true)
-    }
-    
-    func onProposalList() {
-        let proposalsVC = CosmosProposalsVC(nibName: "CosmosProposalsVC", bundle: nil)
-        proposalsVC.selectedChain = selectedChain
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(proposalsVC, animated: true)
-    }
-    
-    func onStakeInfo() {
-        if (selectedChain.getGrpcfetcher()?.cosmosValidators.count ?? 0 <= 0) {
-            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-            return
-        }
-        let stakingInfoVC = CosmosStakingInfoVC(nibName: "CosmosStakingInfoVC", bundle: nil)
-        stakingInfoVC.selectedChain = selectedChain
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
-    }
-    
-}
-
-//Custom Action For Neutron
-extension CosmosClassVC: BaseSheetDelegate {
-    
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectNeutronVault) {
             if let index = result["index"] as? Int {
@@ -558,44 +430,147 @@ extension CosmosClassVC: BaseSheetDelegate {
             }
         }
     }
+}
+
+//Common Action
+extension CosmosClassVC {
     
-    func onNeutronVault() {
-        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectNeutronVault
-        onStartSheet(baseSheet, 240, 0.6)
+    func onSendTx() {
+        if (selectedChain.isBankLocked()) {
+            onShowToast(NSLocalizedString("error_tranfer_disabled", comment: ""))
+            return
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        
+        if (selectedChain.name == "OKT") {
+            if (selectedChain.tag == "okt60_Keccak") {
+                let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+                transfer.sendType = .Only_EVM_Coin
+                transfer.fromChain = selectedChain
+                transfer.toSendDenom = selectedChain.stakeDenom
+                transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
+                transfer.modalTransitionStyle = .coverVertical
+                self.present(transfer, animated: true)
+                
+            } else {
+                let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
+                transfer.selectedChain = selectedChain
+                transfer.toSendDenom = selectedChain.stakeDenom!
+                transfer.modalTransitionStyle = .coverVertical
+                self.present(transfer, animated: true)
+            }
+            
+        } else {
+            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+            transfer.sendType = selectedChain.supportEvm ? .CosmosEVM_Coin : .Only_Cosmos_Coin
+            transfer.fromChain = selectedChain
+            transfer.toSendDenom = selectedChain.stakeDenom
+            transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
+            transfer.modalTransitionStyle = .coverVertical
+            self.present(transfer, animated: true)
+        }
     }
     
-    func onNeutronVaultDeposit() {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        let transfer = NeutronVault(nibName: "NeutronVault", bundle: nil)
-//        transfer.selectedChain = selectedChain as? ChainNeutron
-//        transfer.vaultType = .Deposit
-//        transfer.modalTransitionStyle = .coverVertical
-//        self.present(transfer, animated: true)
+    func onClaimRewardTx() {
+        guard let grpcFetcher = selectedChain.getGrpcfetcher() else {
+            return
+        }
+        if (grpcFetcher.cosmosValidators.count <= 0) {
+            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+            return
+        }
+        if (grpcFetcher.rewardAllCoins().count == 0) {
+            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+            return
+        }
+        if (grpcFetcher.claimableRewards().count == 0) {
+            onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
+            return
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
+        claimRewards.claimableRewards = grpcFetcher.claimableRewards()
+        claimRewards.selectedChain = selectedChain
+        claimRewards.modalTransitionStyle = .coverVertical
+        self.present(claimRewards, animated: true)
     }
     
-    func onNeutronVaultwithdraw() {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        let transfer = NeutronVault(nibName: "NeutronVault", bundle: nil)
-//        transfer.selectedChain = selectedChain as? ChainNeutron
-//        transfer.vaultType = .Withdraw
-//        transfer.modalTransitionStyle = .coverVertical
-//        self.present(transfer, animated: true)
+    func onClaimCompoundingTx() {
+        guard let grpcFetcher = selectedChain.getGrpcfetcher() else {
+            return
+        }
+        if (grpcFetcher.cosmosValidators.count <= 0) {
+            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+            return
+        }
+        if (grpcFetcher.rewardAllCoins().count == 0) {
+            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+            return
+        }
+        if (grpcFetcher.claimableRewards().count == 0) {
+            onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
+            return
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (grpcFetcher.rewardAddress != selectedChain.bechAddress) {
+            onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
+            return
+        }
+        let compounding = CosmosCompounding(nibName: "CosmosCompounding", bundle: nil)
+        compounding.claimableRewards = grpcFetcher.claimableRewards()
+        compounding.selectedChain = selectedChain
+        compounding.modalTransitionStyle = .coverVertical
+        self.present(compounding, animated: true)
     }
     
-    func onNeutronProposals() {
-        let neutronDaoVC = UIStoryboard(name: "NeutronDao", bundle: nil).instantiateViewController(withIdentifier: "NeutronDaoVC") as! NeutronDaoVC
-        neutronDaoVC.selectedChain = selectedChain as? ChainNeutron
+    func onClaimCommissionTx() {
+        guard let grpcFetcher = selectedChain.getGrpcfetcher() else {
+            return
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let claimCommission = CosmosClaimCommission(nibName: "CosmosClaimCommission", bundle: nil)
+        claimCommission.selectedChain = selectedChain
+        claimCommission.modalTransitionStyle = .coverVertical
+        self.present(claimCommission, animated: true)
+    }
+    
+    func onProposalList() {
+        let proposalsVC = CosmosProposalsVC(nibName: "CosmosProposalsVC", bundle: nil)
+        proposalsVC.selectedChain = selectedChain
         self.navigationItem.title = ""
-        self.navigationController?.pushViewController(neutronDaoVC, animated: true)
+        self.navigationController?.pushViewController(proposalsVC, animated: true)
     }
+    
+    func onStakeInfo() {
+        guard let grpcFetcher = selectedChain.getGrpcfetcher() else {
+            return
+        }
+        if (grpcFetcher.cosmosValidators.count <= 0) {
+            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+            return
+        }
+        let stakingInfoVC = CosmosStakingInfoVC(nibName: "CosmosStakingInfoVC", bundle: nil)
+        stakingInfoVC.selectedChain = selectedChain
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
+    }
+    
+}
+
+//Custom Action For Kava
+extension CosmosClassVC {
     
     func onKavaDefi() {
         let defiVC = KavaDefiVC(nibName: "KavaDefiVC", bundle: nil)
@@ -605,6 +580,47 @@ extension CosmosClassVC: BaseSheetDelegate {
     }
 }
 
+//Custom Action For Neutron
+extension CosmosClassVC {
+    
+    func onNeutronVault() {
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.sheetDelegate = self
+        baseSheet.sheetType = .SelectNeutronVault
+        onStartSheet(baseSheet, 240, 0.6)
+    }
+    
+    func onNeutronVaultDeposit() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let transfer = NeutronVault(nibName: "NeutronVault", bundle: nil)
+        transfer.selectedChain = selectedChain as? ChainNeutron
+        transfer.vaultType = .Deposit
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+    }
+    
+    func onNeutronVaultwithdraw() {
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let transfer = NeutronVault(nibName: "NeutronVault", bundle: nil)
+        transfer.selectedChain = selectedChain as? ChainNeutron
+        transfer.vaultType = .Withdraw
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+    }
+    
+    func onNeutronProposals() {
+        let neutronDaoVC = UIStoryboard(name: "NeutronDao", bundle: nil).instantiateViewController(withIdentifier: "NeutronDaoVC") as! NeutronDaoVC
+        neutronDaoVC.selectedChain = selectedChain as? ChainNeutron
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(neutronDaoVC, animated: true)
+    }
+}
 
 //Custom Action For OKT
 extension CosmosClassVC {

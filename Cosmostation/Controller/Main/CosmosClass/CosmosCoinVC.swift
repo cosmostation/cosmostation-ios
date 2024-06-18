@@ -279,74 +279,55 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             }
             return cell
         }
-        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if (selectedChain.isBankLocked()) {
-//            onShowToast(NSLocalizedString("error_tranfer_disabled", comment: ""))
-//            return
-//        }
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        if (selectedChain is ChainOkt996Keccak) {
-//            onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
-//            return
-//            
-//        } else if (selectedChain is ChainOktEVM) {
-//            if (indexPath.section == 0) {
-//                if (indexPath.row == 0) {                                       //OKT EVM only support Ox style
-//                    onStartTransferVC(.Only_EVM_Coin, lcdBalances[indexPath.row]["denom"].stringValue)
-//                } else {
-//                    onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
-//                }
-//            }
-//            return
-//            
-//        } else if (selectedChain is ChainBeraEVM) {
-//            if (indexPath.section == 0 && indexPath.row == 0) {                 //BGT is not sendable
-//                onShowToast(NSLocalizedString("error_tranfer_disabled_bgt", comment: ""))
-//                return
-//                
-//            } else if (indexPath.section == 0 && indexPath.row == 1) {          //Only Support BERA Send
-//                onStartTransferVC(.Only_EVM_Coin, "abera")
-//                return
-//            }
-//            return
-//            
-//        } else {
-//            if (indexPath.section == 0) {
-//                var sendType: SendAssetType!
-//                if (indexPath.row == 0) {
-//                    if (selectedChain is EvmClass) {                            //stake coin web3-tx and cosmos-tx
-//                        sendType = .CosmosEVM_Coin
-//                    } else  {                                                   //no evm chain only cosmos-tx
-//                        sendType = .Only_Cosmos_Coin
-//                    }
-//                } else {                                                        //native(not stake) coin only cosmos-tx
-//                    sendType = .Only_Cosmos_Coin
-//                }
-//                onStartTransferVC(sendType, nativeCoins[indexPath.row].denom)
-//                return
-//                
-//            } else if (indexPath.section == 1) {
-//                onStartTransferVC(.Only_Cosmos_Coin, ibcCoins[indexPath.row].denom)
-//                return
-//                
-//            } else if (indexPath.section == 2) {
-//                if (selectedChain.tag.starts(with: "kava") == true) {
-//                    let sendDenom = bridgedCoins[indexPath.row].denom
-//                    onStartTransferVC(.Only_Cosmos_Coin, sendDenom)
-//                    return
-//                    
-//                } else {
-//                    onStartTransferVC(.Only_Cosmos_Coin, bridgedCoins[indexPath.row].denom)
-//                    return
-//                }
-//            }
-//        }
+        if (selectedChain.isBankLocked()) {
+            onShowToast(NSLocalizedString("error_tranfer_disabled", comment: ""))
+            return
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        
+        if (selectedChain.name == "OKT") {
+            if (selectedChain.tag == "okt60_Keccak") {
+                if (indexPath.section == 0 && indexPath.row == 0) { //OKT EVM only support Ox style
+                    onStartTransferVC(.Only_EVM_Coin, lcdBalances[indexPath.row]["denom"].stringValue)
+                } else {
+                    onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
+                }
+                
+            } else {
+                onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
+            }
+            
+        } else if (selectedChain is ChainBeraEVM_T) {
+            return
+            
+        } else {
+            if (indexPath.section == 0) {
+                var sendType: SendAssetType!
+                if (indexPath.row == 0) {
+                    if (selectedChain.supportEvm) {                            //stake coin web3-tx and cosmos-tx
+                        sendType = .CosmosEVM_Coin
+                    } else  {                                                   //no evm chain only cosmos-tx
+                        sendType = .Only_Cosmos_Coin
+                    }
+                } else {                                                        //native(not stake) coin only cosmos-tx
+                    sendType = .Only_Cosmos_Coin
+                }
+                onStartTransferVC(sendType, nativeCoins[indexPath.row].denom)
+                
+            } else if (indexPath.section == 1) {
+                onStartTransferVC(.Only_Cosmos_Coin, ibcCoins[indexPath.row].denom)
+                
+            } else if (indexPath.section == 2) {
+                onStartTransferVC(.Only_Cosmos_Coin, bridgedCoins[indexPath.row].denom)
+            }
+        }
+        
     }
     
     func getCoinBySection(_ indexPath: IndexPath) -> Cosmos_Base_V1beta1_Coin? {

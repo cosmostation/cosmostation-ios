@@ -170,31 +170,31 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        if (indexPath.section == 0) {
-//            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-//            transfer.sendType = .Only_Cosmos_CW20
-//            transfer.fromChain = selectedChain
-//            transfer.toSendDenom = mintscanCw20Tokens[indexPath.row].address
-//            transfer.toSendMsToken = mintscanCw20Tokens[indexPath.row]
-//            transfer.modalTransitionStyle = .coverVertical
-//            self.present(transfer, animated: true)
-//            return
-//            
-//        } else {
-//            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-//            transfer.sendType = .Only_EVM_ERC20
-//            transfer.fromChain = selectedChain
-//            transfer.toSendDenom = mintscanErc20Tokens[indexPath.row].address
-//            transfer.toSendMsToken = mintscanErc20Tokens[indexPath.row]
-//            transfer.modalTransitionStyle = .coverVertical
-//            self.present(transfer, animated: true)
-//            return
-//            
-//        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (indexPath.section == 0) {
+            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+            transfer.sendType = .Only_Cosmos_CW20
+            transfer.fromChain = selectedChain
+            transfer.toSendDenom = mintscanCw20Tokens[indexPath.row].address
+            transfer.toSendMsToken = mintscanCw20Tokens[indexPath.row]
+            transfer.modalTransitionStyle = .coverVertical
+            self.present(transfer, animated: true)
+            return
+            
+        } else {
+            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+            transfer.sendType = .Only_EVM_ERC20
+            transfer.fromChain = selectedChain
+            transfer.toSendDenom = mintscanErc20Tokens[indexPath.row].address
+            transfer.toSendMsToken = mintscanErc20Tokens[indexPath.row]
+            transfer.modalTransitionStyle = .coverVertical
+            self.present(transfer, animated: true)
+            return
+            
+        }
     }
     
     
