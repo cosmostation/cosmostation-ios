@@ -33,8 +33,8 @@ class SelectRefAddressCell: UITableViewCell {
             accountNameLabel.text = account.name
         }
         
-        let allBaseChain = ALLCHAINS()
-        if let chain = allCosmos.filter({ $0.tag == refAddress.chainTag }).first {
+        let allChain = ALLCHAINS()
+        if let chain = allChain.filter({ $0.tag == refAddress.chainTag }).first {
             legacyTag.isHidden = chain.isDefault
             if (chain.name == "OKT" && !chain.supportEvm) {
                 keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
