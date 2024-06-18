@@ -86,7 +86,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         } else if (section == 1) {
             return 8
         } else if (section == 2) {
-            return 6
+            return 2
         } else if (section == 3) {
             return 5
         }
@@ -180,29 +180,12 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (indexPath.section == 2) {
             if (indexPath.row == 0) {
-                baseCell.onBindSetMintscan()
+                baseCell.onBindSetGuide()
                 return baseCell
                 
             } else if (indexPath.row == 1) {
                 baseCell.onBindSetHomePage()
                 return baseCell
-                
-            } else if (indexPath.row == 2) {
-                baseCell.onBindSetBlog()
-                return baseCell
-                
-            } else if (indexPath.row == 3) {
-                baseCell.onBindSetTwitter()
-                return baseCell
-                
-            } else if (indexPath.row == 4) {
-                baseCell.onBindSetTellegram()
-                return baseCell
-                
-            } else if (indexPath.row == 5) {
-                baseCell.onBindSetYoutube()
-                return baseCell
-                
             }
             
         } else if (indexPath.section == 3) {
@@ -298,52 +281,20 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (indexPath.section == 2) {
             if (indexPath.row == 0) {
-                guard let url = URL(string: MintscanUrl) else { return }
-                onShowSafariWeb(url)
+                if (BaseData.instance.getLanguage() == 2) {
+                    guard let url = URL(string: "https://www.cosmostation.io/kr/support/moible") else { return }
+                    onShowSafariWeb(url)
+                } else if (BaseData.instance.getLanguage() == 3) {
+                    guard let url = URL(string: "https://www.cosmostation.io/jp/support/moible") else { return }
+                    onShowSafariWeb(url)
+                } else {
+                    guard let url = URL(string: "https://www.cosmostation.io/en/support/moible") else { return }
+                    onShowSafariWeb(url)
+                }
                 
             } else if (indexPath.row == 1) {
                 guard let url = URL(string: "https://www.cosmostation.io") else { return }
                 onShowSafariWeb(url)
-                
-            } else if (indexPath.row == 2) {
-                guard let url = URL(string: "https://medium.com/cosmostation") else { return }
-                onShowSafariWeb(url)
-                
-            } else if (indexPath.row == 3) {
-                guard let url = URL(string: "https://twitter.com/CosmostationVD") else { return }
-                if (UIApplication.shared.canOpenURL(url)) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                } else {
-                    onShowSafariWeb(url)
-                }
-                
-            } else if (indexPath.row == 4) {
-                let url = URL(string: "tg://resolve?domain=cosmostation")
-                if (UIApplication.shared.canOpenURL(url!)) {
-                    UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-                    
-                } else {
-                    let alert = UIAlertController(title: "", message: NSLocalizedString("error_no_telegram", comment: ""), preferredStyle: .alert)
-                    alert.overrideUserInterfaceStyle = .dark
-                    let action = UIAlertAction(title: "Download And Install", style: .default, handler: { _ in
-                        let urlAppStore = URL(string: "itms-apps://itunes.apple.com/app/id686449807")
-                        if (UIApplication.shared.canOpenURL(urlAppStore!)) {
-                            UIApplication.shared.open(urlAppStore!, options: [:], completionHandler: nil)
-                        }
-                    })
-                    let actionCancel = UIAlertAction(title: NSLocalizedString("str_cancel", comment: ""), style: .cancel, handler: nil)
-                    alert.addAction(action)
-                    alert.addAction(actionCancel)
-                    self.present(alert, animated: true, completion: nil)
-                }
-                
-            } else if (indexPath.row == 5) {
-                guard let url = URL(string: "https://www.youtube.com/@cosmostationio") else { return }
-                if (UIApplication.shared.canOpenURL(url)) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                } else {
-                    onShowSafariWeb(url)
-                }
             }
             
         } else if (indexPath.section == 3) {
