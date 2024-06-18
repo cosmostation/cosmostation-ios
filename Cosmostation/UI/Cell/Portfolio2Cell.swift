@@ -80,13 +80,13 @@ class Portfolio2Cell: UITableViewCell {
         logoImg1.image = UIImage.init(named: chain.logo1)
         logoImg2.image = UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
-        if (chain.supportCosmos) {
+        if (chain.isCosmos()) {
             bechAddressLabel.text = chain.bechAddress
         }
         if (chain.supportEvm) {
             evmAddressLabel.text = chain.evmAddress
         }
-        if (chain.supportCosmos && chain.supportEvm) {
+        if (chain.isCosmos() && chain.supportEvm) {
             starEvmAddressAnimation()
         }
         
@@ -155,7 +155,7 @@ class Portfolio2Cell: UITableViewCell {
             WDP.dpPrice(OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
             
-        } else if (chain.supportCosmos) {
+        } else if (chain.isCosmos()) {
             if let stakeDenom = chain.stakeDenom,
                let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)

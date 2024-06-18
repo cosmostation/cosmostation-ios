@@ -18,10 +18,11 @@ class ChainStargaze: BaseChain {
         logo1 = "chainStargaze"
         logo2 = "chainStargaze2"
         apiName = "stargaze"
-        supportCosmos = true
-        
-        stakeDenom = "ustars"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ustars"
         bechAccountPrefix = "stars"
         validatorPrefix = "starsvaloper"
         supportCw721 = true

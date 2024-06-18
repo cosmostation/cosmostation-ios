@@ -17,11 +17,12 @@ class ChainCrescent: BaseChain  {
         tag = "crescent118"
         logo1 = "chainCrescent"
         logo2 = "chainCrescent2"
-        supportCosmos = true
         apiName = "crescent"
-        
-        stakeDenom = "ucre"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ucre"
         bechAccountPrefix = "cre"
         validatorPrefix = "crevaloper"
         grpcHost = "grpc-crescent.cosmostation.io"

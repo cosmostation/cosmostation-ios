@@ -17,11 +17,12 @@ class ChainCoreum: BaseChain  {
         tag = "coreum990"
         logo1 = "chainCoreum"
         logo2 = "chainCoreum2"
-        supportCosmos = true
         apiName = "coreum"
-        
-        stakeDenom = "ucore"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/990'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ucore"
         bechAccountPrefix = "core"
         validatorPrefix = "corevaloper"
         grpcHost = "grpc-coreum.cosmostation.io"

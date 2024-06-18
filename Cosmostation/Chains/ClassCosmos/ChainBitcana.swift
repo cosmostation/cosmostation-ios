@@ -17,11 +17,12 @@ class ChainBitcana: BaseChain {
         tag = "bitcanna118"
         logo1 = "chainBitcanna"
         logo2 = "chainBitcanna2"
-        supportCosmos = true
         apiName = "bitcanna"
-        
-        stakeDenom = "ubcna"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ubcna"
         bechAccountPrefix = "bcna"
         validatorPrefix = "bcnavaloper"
         grpcHost = "grpc-bitcanna.cosmostation.io"

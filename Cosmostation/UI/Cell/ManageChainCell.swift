@@ -48,7 +48,7 @@ class ManageChainCell: UITableViewCell {
             lcdEndpointLabel.adjustsFontSizeToFitWidth = true
         }
         
-        if (chain.supportCosmos && chain.isGrpc) {
+        if (chain.supportCosmosGrpc) {
             grpcLayer.isHidden = false
             grpcEndpointLabel.text = chain.getGrpcfetcher()!.getGrpc().host + " : " +  String(chain.getGrpcfetcher()!.getGrpc().port)
             grpcEndpointLabel.adjustsFontSizeToFitWidth = true

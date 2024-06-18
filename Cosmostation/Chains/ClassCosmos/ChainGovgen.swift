@@ -17,11 +17,12 @@ class ChainGovgen: BaseChain  {
         tag = "govgen118"
         logo1 = "chainGovgen"
         logo2 = "chainGovgen2"
-        supportCosmos = true
         apiName = "govgen"
-        
-        stakeDenom = "ugovgen"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ugovgen"
         bechAccountPrefix = "govgen"
         validatorPrefix = "govgenvaloper"
         grpcHost = "grpc-govgen.cosmostation.io"

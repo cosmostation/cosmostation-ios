@@ -11,25 +11,22 @@ import SwiftyJSON
 
 
 class BaseChain {
-    
+    //account and commmon info
     var name: String!
     var tag: String!
     var logo1: String!
     var logo2: String!
-    var isDefault = true
     var isTestnet = false
-    var supportCosmos = false
-    var supportEvm = false
+    var isDefault = true
     var apiName: String!
-    
-    var chainIdCosmos: String?
-    var chainIdEvm: String?
-    
     var accountKeyType: AccountKeyType!
     var privateKey: Data?
     var publicKey: Data?
     
-    //cosmos & grpc info
+    //cosmos & grpc & lcd info
+    var supportCosmosGrpc = false
+    var supportCosmosLcd = false
+    var chainIdCosmos: String?
     var bechAddress: String?
     var stakeDenom: String?
     var bechAccountPrefix: String?
@@ -38,12 +35,13 @@ class BaseChain {
     var supportCw20 = false
     var supportCw721 = false
     var supportStaking = true
-    var isGrpc = true
     var grpcHost = ""
     var grpcPort = 443
     var lcdUrl = ""
     
     //evm & rpc info
+    var supportEvm = false
+    var chainIdEvm: String?
     var evmAddress: String?
     var coinSymbol = ""
     var coinGeckoId = ""
@@ -80,12 +78,12 @@ class BaseChain {
             
         } else {
             evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-            if (supportCosmos) {
+            if (isCosmos()) {
                 bechAddress = KeyFac.convertEvmToBech32(evmAddress!, bechAccountPrefix!)
             }
         }
         
-        if (supportCosmos && supportStaking) {
+        if (isCosmos() && supportStaking) {
             bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, validatorPrefix)
         }
     }
@@ -106,8 +104,11 @@ class BaseChain {
         if (supportEvm == true) {
             evmFetcher = FetcherEvmrpc.init(self)
         }
-        if (supportCosmos == true) {
+        if (supportCosmosGrpc == true) {
             grpcFetcher = FetcherGrpc.init(self)
+        }
+        if (supportCosmosLcd == true) {
+            lcdFetcher = FetcherLcd.init(self)
         }
     }
     
@@ -118,10 +119,10 @@ class BaseChain {
             var grpcResult: Bool?
             
             if (supportEvm == true) {
-                evmResult = await evmFetcher?.fetchEvmData(id)
+                evmResult = await getEvmfetcher()?.fetchEvmData(id)
             }
-            if (supportCosmos == true) {
-                grpcResult = await grpcFetcher?.fetchGrpcData(id)
+            if (supportCosmosGrpc == true) {
+                grpcResult = await getGrpcfetcher()?.fetchGrpcData(id)
             }
             
             if (evmResult == false || grpcResult == false) {
@@ -133,7 +134,7 @@ class BaseChain {
             }
             
             if (self.fetchState == .Success) {
-                if let grpcFetcher = grpcFetcher, supportCosmos == true {
+                if let grpcFetcher = grpcFetcher {
                     WUtils.onParseVestingAccount(self)
                     allCoinValue = grpcFetcher.allCoinValue()
                     allCoinUSDValue = grpcFetcher.allCoinValue(true)
@@ -144,7 +145,7 @@ class BaseChain {
                                    grpcFetcher.allStakingDenomAmount().stringValue, allCoinUSDValue.stringValue,
                                    allTokenUSDValue.stringValue, grpcFetcher.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
                     
-                } else if let evmFetcher = evmFetcher, supportEvm == true {
+                } else if let evmFetcher = evmFetcher {
                     allCoinValue = evmFetcher.allCoinValue()
                     allCoinUSDValue = evmFetcher.allCoinValue(true)
                     allTokenValue = evmFetcher.allTokenValue()
@@ -165,13 +166,17 @@ class BaseChain {
     }
     
     func fetchValidatorInfos() {
-        if (supportCosmos == true && supportStaking == true) {
-            Task {
-                _ = await grpcFetcher?.fetchValidators()
-                DispatchQueue.main.async(execute: {
-                    NotificationCenter.default.post(name: Notification.Name("FetchValidator"), object: self.tag, userInfo: nil)
-                })
+        Task {
+            if (name == "OKT") {
+                _  = await getLcdfetcher()?.fetchValidators()
+                
+            } else if (supportCosmosGrpc == true && supportStaking == true) {
+                _ = await getGrpcfetcher()?.fetchValidators()
             }
+            
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name("FetchValidator"), object: self.tag, userInfo: nil)
+            })
         }
     }
     
@@ -182,7 +187,7 @@ class BaseChain {
             var result: Bool?
             if (supportEvm == true) {
                 result = await evmFetcher?.fetchPreCreate()
-            } else if (supportCosmos == true) {
+            } else if (supportCosmosGrpc == true) {
                 result = await grpcFetcher?.fetchPreCreate()
             }
             
@@ -193,7 +198,6 @@ class BaseChain {
             }
             
             DispatchQueue.main.async(execute: {
-//                print("", self.tag, " FetchData post")
                 NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
             })
         }
@@ -202,6 +206,9 @@ class BaseChain {
     func isTxFeePayable() -> Bool { return false }
     
 
+    func isCosmos() -> Bool {
+        return supportCosmosGrpc || supportCosmosLcd
+    }
     
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
         if (usd == true) {
@@ -347,7 +354,7 @@ extension BaseChain {
 extension BaseChain {
     
     func getExplorerAccount() -> URL? {
-        let address: String = supportCosmos ? bechAddress! : evmAddress!
+        let address: String = isCosmos() ? bechAddress! : evmAddress!
         if let urlString = getChainListParam()["explorer"]["account"].string,
            let url = URL(string: urlString.replacingOccurrences(of: "${address}", with: address)) {
             return url
@@ -370,13 +377,6 @@ extension BaseChain {
             return url
         }
         return nil
-    }
-    
-    func isLagacyOKT() -> Bool {
-        if (tag == "okt996_Keccak" || tag == "okt996_Secp") {
-            return true
-        }
-        return false
     }
     
     func monikerImg(_ opAddress: String) -> URL {
@@ -455,92 +455,92 @@ enum PubKeyType: Int {
 func ALLCHAINS() -> [BaseChain] {
     var result = [BaseChain]()
     result.append(ChainCosmos())
-    result.append(ChainAkash())
-    result.append(ChainAlthea118())
-    result.append(ChainArchway())
-    result.append(ChainAssetMantle())
-    result.append(ChainAxelar())
-    result.append(ChainBand())
-    result.append(ChainBitcana())
-    result.append(ChainBitsong())
-    result.append(ChainCelestia())
-    result.append(ChainChihuahua())
-    result.append(ChainCoreum())
-//    result.append(ChainCrescent())
-    result.append(ChainCryptoorg())
-    result.append(ChainCudos())
-    result.append(ChainDesmos())
-    result.append(ChainDydx())
-//    result.append(ChainEmoney())
-    result.append(ChainFetchAi())
-    result.append(ChainFetchAi60Old())
-    result.append(ChainFetchAi60Secp())
-    result.append(ChainFinschia())
-    result.append(ChainGovgen())
-    result.append(ChainGravityBridge())
-    result.append(ChainInjective())
-    result.append(ChainIris())
-    result.append(ChainIxo())
-    result.append(ChainJuno())
-    result.append(ChainKava459())
-    result.append(ChainKava118())
+//    result.append(ChainAkash())
+//    result.append(ChainAlthea118())
+//    result.append(ChainArchway())
+//    result.append(ChainAssetMantle())
+//    result.append(ChainAxelar())
+//    result.append(ChainBand())
+//    result.append(ChainBitcana())
+//    result.append(ChainBitsong())
+//    result.append(ChainCelestia())
+//    result.append(ChainChihuahua())
+//    result.append(ChainCoreum())
+////    result.append(ChainCrescent())
+//    result.append(ChainCryptoorg())
+//    result.append(ChainCudos())
+//    result.append(ChainDesmos())
+//    result.append(ChainDydx())
+////    result.append(ChainEmoney())
+//    result.append(ChainFetchAi())
+//    result.append(ChainFetchAi60Old())
+//    result.append(ChainFetchAi60Secp())
+//    result.append(ChainFinschia())
+//    result.append(ChainGovgen())
+//    result.append(ChainGravityBridge())
+//    result.append(ChainInjective())
+//    result.append(ChainIris())
+//    result.append(ChainIxo())
+//    result.append(ChainJuno())
+//    result.append(ChainKava459())
+//    result.append(ChainKava118())
     result.append(ChainKi())
     result.append(ChainKyve())
-    result.append(ChainLike())
-    result.append(ChainLum118())
-    result.append(ChainLum880())
-    result.append(ChainMars())
+//    result.append(ChainLike())
+//    result.append(ChainLum118())
+//    result.append(ChainLum880())
+//    result.append(ChainMars())
     result.append(ChainMedibloc())
     result.append(ChainNeutron())
     result.append(ChainNibiru())
-    result.append(ChainNoble())
-    result.append(ChainNyx())
-    result.append(ChainOmniflix())
-    result.append(ChainOnomy())
-    result.append(ChainOsmosis())
-    result.append(ChainPassage())
-    result.append(ChainPersistence118())
-    result.append(ChainPersistence750())
-    result.append(ChainProvenance())
-    result.append(ChainQuasar())
-    result.append(ChainQuicksilver())
-    result.append(ChainRegen())
-    result.append(ChainRizon())
-    result.append(ChainSaga())
-    result.append(ChainSecret118())
-    result.append(ChainSecret529())
-    result.append(ChainSei())
-    result.append(ChainSentinel())
-    result.append(ChainShentu())
-    result.append(ChainSommelier())
-    result.append(ChainStafi())
-    result.append(ChainStargaze())
-//    result.append(ChainStarname())
-    result.append(ChainStride())
-    result.append(ChainTeritori())
-    result.append(ChainTerra())
-    result.append(ChainUmee())
-    result.append(ChainXpla())
+//    result.append(ChainNoble())
+//    result.append(ChainNyx())
+//    result.append(ChainOmniflix())
+//    result.append(ChainOnomy())
+//    result.append(ChainOsmosis())
+//    result.append(ChainPassage())
+//    result.append(ChainPersistence118())
+//    result.append(ChainPersistence750())
+//    result.append(ChainProvenance())
+//    result.append(ChainQuasar())
+//    result.append(ChainQuicksilver())
+//    result.append(ChainRegen())
+//    result.append(ChainRizon())
+//    result.append(ChainSaga())
+//    result.append(ChainSecret118())
+//    result.append(ChainSecret529())
+//    result.append(ChainSei())
+//    result.append(ChainSentinel())
+//    result.append(ChainShentu())
+//    result.append(ChainSommelier())
+//    result.append(ChainStafi())
+//    result.append(ChainStargaze())
+////    result.append(ChainStarname())
+//    result.append(ChainStride())
+//    result.append(ChainTeritori())
+//    result.append(ChainTerra())
+//    result.append(ChainUmee())
+//    result.append(ChainXpla())
     result.append(ChainOkt996Keccak())
     result.append(ChainOkt996Secp())
 
     
     result.append(ChainEthereum())
-    result.append(ChainAltheaEVM())
-    result.append(ChainArbitrum())
-    result.append(ChainAvalanche())
-    result.append(ChainBaseEVM())
-    result.append(ChainBinanceSmart())
-    result.append(ChainCantoEVM())
-    result.append(ChainCronos())
-    result.append(ChainDymensionEVM())
-    result.append(ChainEvmosEVM())
-    result.append(ChainHumansEVM())
+//    result.append(ChainAltheaEVM())
+//    result.append(ChainArbitrum())
+//    result.append(ChainAvalanche())
+//    result.append(ChainBaseEVM())
+//    result.append(ChainBinanceSmart())
+//    result.append(ChainCantoEVM())
+//    result.append(ChainCronos())
+//    result.append(ChainDymensionEVM())
+//    result.append(ChainEvmosEVM())
+//    result.append(ChainHumansEVM())
     result.append(ChainKavaEVM())
     result.append(ChainOktEVM())
     result.append(ChainOptimism())
-    result.append(ChainPolygon())
-    result.append(ChainXplaEVM())
+//    result.append(ChainPolygon())
+//    result.append(ChainXplaEVM())
     
 //    result.append(ChainBeraEVM_T())
     

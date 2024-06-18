@@ -18,11 +18,12 @@ class ChainAlthea118: BaseChain {
         logo1 = "chainAlthea"
         logo2 = "chainAlthea2"
         isDefault = false
-        supportCosmos = true
         apiName = "althea"
-        
-        stakeDenom = "aalthea"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "aalthea"
         bechAccountPrefix = "althea"
         validatorPrefix = "altheavaloper"
         grpcHost = "grpc-althea.cosmostation.io"

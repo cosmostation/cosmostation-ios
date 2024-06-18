@@ -17,11 +17,12 @@ class ChainDesmos: BaseChain  {
         tag = "desmos852"
         logo1 = "chainDesmos"
         logo2 = "chainDesmo2"
-        supportCosmos = true
         apiName = "desmos"
-        
-        stakeDenom = "udsm"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/852'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "udsm"
         bechAccountPrefix = "desmos"
         validatorPrefix = "desmosvaloper"
         grpcHost = "grpc-desmos.cosmostation.io"

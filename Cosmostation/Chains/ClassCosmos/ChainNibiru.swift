@@ -17,11 +17,12 @@ class ChainNibiru: BaseChain  {
         tag = "nibiru118"
         logo1 = "chainNibiru"
         logo2 = "chainNibiru2"
-        supportCosmos = true
         apiName = "nibiru"
-        
-        stakeDenom = "unibi"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "unibi"
         bechAccountPrefix = "nibi"
         validatorPrefix = "nibivaloper"
         grpcHost = "grpc-nibiru.cosmostation.io"

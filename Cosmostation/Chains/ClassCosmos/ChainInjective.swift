@@ -17,11 +17,12 @@ class ChainInjective: BaseChain  {
         tag = "injective60"
         logo1 = "chainInjective"
         logo2 = "chainInjective2"
-        supportCosmos = true
         apiName = "injective"
-        
-        stakeDenom = "inj"
         accountKeyType = AccountKeyType(.INJECTIVE_Secp256k1, "m/44'/60'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "inj"
         bechAccountPrefix = "inj"
         validatorPrefix = "injvaloper"
         grpcHost = "grpc-injective.cosmostation.io"

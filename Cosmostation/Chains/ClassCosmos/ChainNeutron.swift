@@ -24,11 +24,12 @@ class ChainNeutron: BaseChain {
         tag = "neutron118"
         logo1 = "chainNeutron"
         logo2 = "chainNeutron2"
-        supportCosmos = true
         apiName = "neutron"
-        
-        stakeDenom = "untrn"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "untrn"
         bechAccountPrefix = "neutron"
         validatorPrefix = "neutronvaloper"
         supportStaking = false
@@ -38,12 +39,12 @@ class ChainNeutron: BaseChain {
         initFetcher()
     }
     
-    override func getGrpcfetcher() -> FetcherGrpc? {
-        return neutronFetcher
-    }
-    
     override func initFetcher() {
         neutronFetcher = NeutronFetcher.init(self)
+    }
+    
+    override func getGrpcfetcher() -> FetcherGrpc? {
+        return neutronFetcher
     }
     
     override func fetchData(_ id: Int64) {

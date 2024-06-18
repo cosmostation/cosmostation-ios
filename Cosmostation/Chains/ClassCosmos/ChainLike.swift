@@ -17,11 +17,12 @@ class ChainLike: BaseChain  {
         tag = "likecoin118"
         logo1 = "chainLike"
         logo2 = "chainLike2"
-        supportCosmos = true
         apiName = "likecoin"
-        
-        stakeDenom = "nanolike"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "nanolike"
         bechAccountPrefix = "like"
         validatorPrefix = "likevaloper"
         grpcHost = "grpc-likecoin.cosmostation.io"

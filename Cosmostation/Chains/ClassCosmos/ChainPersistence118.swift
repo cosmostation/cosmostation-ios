@@ -17,11 +17,12 @@ class ChainPersistence118: BaseChain  {
         tag = "persistence118"
         logo1 = "chainPersistence"
         logo2 = "chainPersistence2"
-        supportCosmos = true
         apiName = "persistence"
-        
-        stakeDenom = "uxprt"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uxprt"
         bechAccountPrefix = "persistence"
         validatorPrefix = "persistencevaloper"
         grpcHost = "grpc-persistence.cosmostation.io"

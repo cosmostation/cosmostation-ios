@@ -18,10 +18,11 @@ class ChainQuasar: BaseChain  {
         logo1 = "chainQuasar"
         logo2 = "chainQuasar2"
         apiName = "quasar"
-        supportCosmos = true
-        
-        stakeDenom = "uqsr"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uqsr"
         bechAccountPrefix = "quasar"
         validatorPrefix = "quasarvaloper"
         grpcHost = "grpc-quasar.cosmostation.io"

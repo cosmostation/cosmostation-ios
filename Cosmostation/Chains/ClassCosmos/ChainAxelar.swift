@@ -17,11 +17,12 @@ class ChainAxelar: BaseChain {
         tag = "axelar118"
         logo1 = "chainAxelar"
         logo2 = "chainAxelar2"
-        supportCosmos = true
         apiName = "axelar"
-        
-        stakeDenom = "uaxl"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uaxl"
         bechAccountPrefix = "axelar"
         validatorPrefix = "axelarvaloper"
         grpcHost = "grpc-axelar.cosmostation.io"

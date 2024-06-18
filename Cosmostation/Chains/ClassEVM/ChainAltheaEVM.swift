@@ -17,19 +17,21 @@ class ChainAltheaEVM: BaseChain {
         tag = "althea60"
         logo1 = "chainAltheaEvm"
         logo2 = "chainAlthea2"
-        supportCosmos = true
-        supportEvm = true
         apiName = "althea"
-        
-        stakeDenom = "aalthea"
-        coinSymbol = "ALTHEA"
-        coinGeckoId = "althea"
-        coinLogo = "tokenAltg"
-
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "aalthea"
         bechAccountPrefix = "althea"
         validatorPrefix = "altheavaloper"
         grpcHost = "grpc-althea.cosmostation.io"
+
+        
+        supportEvm = true
+        coinSymbol = "ALTHEA"
+        coinGeckoId = "althea"
+        coinLogo = "tokenAltg"
         evmRpcURL = "https://rpc-althea-evm.cosmostation.io"
         
         initFetcher()

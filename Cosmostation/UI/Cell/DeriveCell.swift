@@ -99,7 +99,7 @@ class DeriveCell: UITableViewCell {
                     coinCntLabel.text = "0 Coins"
                 }
                 
-            } else if (chain.supportCosmos) {
+            } else if (chain.isCosmos()) {
                 let stakeDenom = chain.stakeDenom!
                 let availableAmount = chain.getGrpcfetcher()?.balanceAmount(stakeDenom) ?? NSDecimalNumber.zero
                 if let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {

@@ -20,14 +20,15 @@ class ChainOkt996Secp: BaseChain {
         logo1 = "chainOkt"
         logo2 = "chainOkt2"
         isDefault = false
-        supportCosmos = true
         apiName = "okc"
-        
-        stakeDenom = "okt"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/996'/0'/0/X")
+        
+        
+        supportCosmosLcd = true
+        stakeDenom = "okt"
         bechAccountPrefix = "ex"
         supportStaking = false
-        isGrpc = false
+        lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
         
         initFetcher()
     }

@@ -17,11 +17,12 @@ class ChainRegen: BaseChain  {
         tag = "regen118"
         logo1 = "chainRegen"
         logo2 = "chainRegen2"
-        supportCosmos = true
         apiName = "regen"
-        
-        stakeDenom = "uregen"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uregen"
         bechAccountPrefix = "regen"
         validatorPrefix = "regenvaloper"
         grpcHost = "grpc-regen.cosmostation.io"

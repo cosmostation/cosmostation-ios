@@ -17,13 +17,14 @@ class ChainPolygon: BaseChain  {
         tag = "polygon60"
         logo1 = "chainPolygon"
         logo2 = "chainPolygon2"
-        supportEvm = true
         apiName = "polygon"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
+        
+        supportEvm = true
         coinSymbol = "MATIC"
         coinGeckoId = "matic-network"
         coinLogo = "tokenMatic"
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         evmRpcURL = "https://polygon-rpc.com"
         
         initFetcher()

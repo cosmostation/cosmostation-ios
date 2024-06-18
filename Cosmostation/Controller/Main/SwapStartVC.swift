@@ -106,7 +106,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         loadingView.play()
         
         Task {
-            allSwapableChains = await baseAccount.initAllKeys().filter({ $0.isTestnet == false && $0.supportCosmos && $0.isDefault && $0.isGrpc })
+            allSwapableChains = await baseAccount.initAllKeys().filter({ $0.isTestnet == false && $0.supportCosmosGrpc && $0.isDefault })
             
             var sChains: JSON?
             if (BaseData.instance.needSwapInfoUpdate()) {
@@ -173,7 +173,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             let outputChannel = getConnection(outputCosmosChain)
             if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.bechAddress!),
                let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.bechAddress!),
-               let outputGrpcFetcher = inputCosmosChain.getGrpcfetcher() {
+               let outputGrpcFetcher = outputCosmosChain.getGrpcfetcher() {
                 outputGrpcFetcher.cosmosAuth = outputAuth?.account ?? Google_Protobuf_Any()
                 outputGrpcFetcher.cosmosBalances = outputBal!
                 WUtils.onParseVestingAccount(outputCosmosChain)

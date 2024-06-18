@@ -17,11 +17,12 @@ class ChainBand: BaseChain  {
         tag = "band494"
         logo1 = "chainBand"
         logo2 = "chainBand2"
-        supportCosmos = true
         apiName = "band"
-        
-        stakeDenom = "uband"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/494'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uband"
         bechAccountPrefix = "band"
         validatorPrefix = "bandvaloper"
         grpcHost = "grpc-band.cosmostation.io"

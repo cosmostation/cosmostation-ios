@@ -17,11 +17,12 @@ class ChainKi: BaseChain  {
         tag = "ki118"
         logo1 = "chainKi"
         logo2 = "chainK2"
-        supportCosmos = true
         apiName = "ki-chain"
-        
-        stakeDenom = "uxki"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uxki"
         bechAccountPrefix = "ki"
         validatorPrefix = "kivaloper"
         supportCw20 = true

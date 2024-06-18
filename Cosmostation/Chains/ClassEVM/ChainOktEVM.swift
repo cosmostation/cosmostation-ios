@@ -22,19 +22,21 @@ class ChainOktEVM: BaseChain {
         tag = "okt60_Keccak"
         logo1 = "chainOktEvm"
         logo2 = "chainOkt2"
-        supportCosmos = true
-        supportEvm = true
         apiName = "okc"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
+        
+        supportCosmosLcd = true
         stakeDenom = "okt"
+        bechAccountPrefix = "ex"
+        supportStaking = false
+        lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
+        
+        
+        supportEvm = true
         coinSymbol = "OKT"
         coinGeckoId = "oec-token"
         coinLogo = "tokenOkt"
-        
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
-        bechAccountPrefix = "ex"
-        supportStaking = false
-        isGrpc = false
         evmRpcURL = "https://exchainrpc.okex.org"
         
         initFetcher()

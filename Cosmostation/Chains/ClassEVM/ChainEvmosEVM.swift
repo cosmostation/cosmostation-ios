@@ -17,19 +17,21 @@ class ChainEvmosEVM: BaseChain  {
         tag = "evmos60"
         logo1 = "chainEvmosEvm"
         logo2 = "chainEvmos2"
-        supportCosmos = true
-        supportEvm = true
         apiName = "evmos"
-        
-        stakeDenom = "aevmos"
-        coinSymbol = "EVMOS"
-        coinGeckoId = "evmos"
-        coinLogo = "tokenEvmos"
-
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "aevmos"
         bechAccountPrefix = "evmos"
         validatorPrefix = "evmosvaloper"
         grpcHost = "grpc-evmos.cosmostation.io"
+        
+    
+        supportEvm = true
+        coinSymbol = "EVMOS"
+        coinGeckoId = "evmos"
+        coinLogo = "tokenEvmos"
         evmRpcURL = "https://rpc-evmos-evm.cosmostation.io"
         
         initFetcher()

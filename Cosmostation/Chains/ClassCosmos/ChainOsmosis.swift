@@ -17,11 +17,12 @@ class ChainOsmosis: BaseChain  {
         tag = "osmosis118"
         logo1 = "chainOsmosis"
         logo2 = "chainOsmosis2"
-        supportCosmos = true
         apiName = "osmosis"
-        stakeDenom = "uosmo"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uosmo"
         bechAccountPrefix = "osmo"
         validatorPrefix = "osmovaloper"
         grpcHost = "grpc-osmosis.cosmostation.io"

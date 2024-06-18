@@ -75,7 +75,7 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
     
     func onInitView() {
         if (baseAccount.getDpChains().filter { $0.fetchState == .Busy }.count == 0) {
-            baseAccount.getDpChains().filter { $0.isTestnet == false && $0.supportCosmos }.forEach { chain in
+            baseAccount.getDpChains().filter { $0.isTestnet == false && $0.isCosmos() }.forEach { chain in
                 if let grpcFetcher = chain.grpcFetcher,
                    let txFee = chain.getInitPayableFee(),
                    grpcFetcher.rewardAddress == chain.bechAddress {

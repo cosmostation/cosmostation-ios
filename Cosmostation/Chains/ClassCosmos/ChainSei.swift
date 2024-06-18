@@ -17,11 +17,12 @@ class ChainSei: BaseChain {
         tag = "sei118"
         logo1 = "chainSei"
         logo2 = "chainSei2"
-        supportCosmos = true
         apiName = "sei"
-        
-        stakeDenom = "usei"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "usei"
         bechAccountPrefix = "sei"
         validatorPrefix = "seivaloper"
         supportCw20 = true

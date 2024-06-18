@@ -17,13 +17,14 @@ class ChainCronos: BaseChain  {
         tag = "cronos60"
         logo1 = "chainCronos"
         logo2 = "chainCronos2"
-        supportEvm = true
         apiName = "cronos"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
+        
+        supportEvm = true
         coinSymbol = "CRO"
         coinGeckoId = "crypto-com-chain"
         coinLogo = "tokenCro"
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         evmRpcURL = "https://evm.cronos.org"
         
         initFetcher()

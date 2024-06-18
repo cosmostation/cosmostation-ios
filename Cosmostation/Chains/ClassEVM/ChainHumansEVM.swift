@@ -17,19 +17,21 @@ class ChainHumansEVM: BaseChain  {
         tag = "humans60"
         logo1 = "chainHumansEvm"
         logo2 = "chainHumans2"
-        supportCosmos = true
-        supportEvm = true
         apiName = "humans"
-        
-        stakeDenom = "aheart"
-        coinSymbol = "HEART"
-        coinGeckoId = "humans-ai"
-        coinLogo = "tokenHeart"
-
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "aheart"
         bechAccountPrefix = "human"
         validatorPrefix = "humanvaloper"
         grpcHost = "grpc-humans.cosmostation.io"
+        
+        
+        supportEvm = true
+        coinSymbol = "HEART"
+        coinGeckoId = "humans-ai"
+        coinLogo = "tokenHeart"
         evmRpcURL = "https://rpc-humans-evm.cosmostation.io"
         
         initFetcher()

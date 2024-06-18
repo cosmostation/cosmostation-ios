@@ -17,13 +17,14 @@ class ChainOptimism: BaseChain  {
         tag = "optimism60"
         logo1 = "chainOptimism"
         logo2 = "chainOptimism2"
-        supportEvm = true
         apiName = "optimism"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
+        
+        supportEvm = true
         coinSymbol = "ETH"
         coinGeckoId = "weth"
         coinLogo = "tokenEth_Op"
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         evmRpcURL = "https://mainnet.optimism.io"
         
         initFetcher()

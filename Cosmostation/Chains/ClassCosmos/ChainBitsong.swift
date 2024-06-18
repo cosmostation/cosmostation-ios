@@ -17,11 +17,12 @@ class ChainBitsong: BaseChain  {
         tag = "bitsong639"
         logo1 = "chainBitsong"
         logo2 = "chainBitsong2"
-        supportCosmos = true
         apiName = "bitsong"
-        
-        stakeDenom = "ubtsg"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/639'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ubtsg"
         bechAccountPrefix = "bitsong"
         validatorPrefix = "bitsongvaloper"
         grpcHost = "grpc-bitsong.cosmostation.io"

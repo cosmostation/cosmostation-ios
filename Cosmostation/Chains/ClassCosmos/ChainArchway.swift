@@ -17,11 +17,12 @@ class ChainArchway: BaseChain  {
         tag = "archway118"
         logo1 = "chainArchway"
         logo2 = "chainArchway2"
-        supportCosmos = true
         apiName = "archway"
-        
-        stakeDenom = "aarch"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "aarch"
         bechAccountPrefix = "archway"
         validatorPrefix = "archwayvaloper"
         supportCw20 = true

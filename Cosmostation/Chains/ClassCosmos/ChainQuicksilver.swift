@@ -17,11 +17,12 @@ class ChainQuicksilver: BaseChain  {
         tag = "quicksilver118"
         logo1 = "chainQuicksilver"
         logo2 = "chainQuicksilver2"
-        supportCosmos = true
         apiName = "quicksilver"
-        
-        stakeDenom = "uqck"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uqck"
         bechAccountPrefix = "quick"
         validatorPrefix = "quickvaloper"
         grpcHost = "grpc-quicksilver.cosmostation.io"

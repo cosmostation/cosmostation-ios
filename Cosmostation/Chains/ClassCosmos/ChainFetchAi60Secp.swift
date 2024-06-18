@@ -18,11 +18,12 @@ class ChainFetchAi60Secp: BaseChain {
         logo1 = "chainFetchAi"
         logo2 = "chainFetchAi2"
         isDefault = false
-        supportCosmos = true
         apiName = "fetchai"
-        
-        stakeDenom = "afet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/60'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "afet"
         bechAccountPrefix = "fetch"
         validatorPrefix = "fetchvaloper"
         grpcHost = "grpc-fetchai.cosmostation.io"

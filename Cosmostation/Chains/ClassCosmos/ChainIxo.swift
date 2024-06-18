@@ -17,11 +17,12 @@ class ChainIxo: BaseChain  {
         tag = "ixo118"
         logo1 = "chainIxo"
         logo2 = "chainIxo2"
-        supportCosmos = true
         apiName = "ixo"
-        
-        stakeDenom = "uixo"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uixo"
         bechAccountPrefix = "ixo"
         validatorPrefix = "ixovaloper"
         grpcHost = "grpc-ixo.cosmostation.io"

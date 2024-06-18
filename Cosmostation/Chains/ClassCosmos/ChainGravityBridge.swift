@@ -17,11 +17,12 @@ class ChainGravityBridge: BaseChain  {
         tag = "gravity-bridge118"
         logo1 = "chainGravityBridge"
         logo2 = "chainGravityBridge2"
-        supportCosmos = true
         apiName = "gravity-bridge"
-        
-        stakeDenom = "ugraviton"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ugraviton"
         bechAccountPrefix = "gravity"
         validatorPrefix = "gravityvaloper"
         grpcHost = "grpc-gravity-bridge.cosmostation.io"

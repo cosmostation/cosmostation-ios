@@ -17,11 +17,12 @@ class ChainJuno: BaseChain  {
         tag = "juno118"
         logo1 = "chainJuno"
         logo2 = "chainJuno2"
-        supportCosmos = true
         apiName = "juno"
-        
-        stakeDenom = "ujuno"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ujuno"
         bechAccountPrefix = "juno"
         validatorPrefix = "junovaloper"
         supportCw20 = true

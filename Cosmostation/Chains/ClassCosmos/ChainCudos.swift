@@ -17,11 +17,12 @@ class ChainCudos: BaseChain {
         tag = "cudos118"
         logo1 = "chainCudos"
         logo2 = "chainCudos2"
-        supportCosmos = true
         apiName = "cudos"
-        
-        stakeDenom = "acudos"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "acudos"
         bechAccountPrefix = "cudos"
         validatorPrefix = "cudosvaloper"
         grpcHost = "grpc-cudos.cosmostation.io"

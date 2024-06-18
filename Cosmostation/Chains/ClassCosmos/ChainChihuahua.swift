@@ -17,11 +17,12 @@ class ChainChihuahua: BaseChain  {
         tag = "chihuahua118"
         logo1 = "chainChihuahua"
         logo2 = "chainChihuahua2"
-        supportCosmos = true
         apiName = "chihuahua"
-        
-        stakeDenom = "uhuahua"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uhuahua"
         bechAccountPrefix = "chihuahua"
         validatorPrefix = "chihuahuavaloper"
         supportCw20 = true

@@ -17,11 +17,12 @@ class ChainMedibloc: BaseChain  {
         tag = "medibloc371"
         logo1 = "chainMedibloc"
         logo2 = "chainMedibloc2"
-        supportCosmos = true
         apiName = "medibloc"
-        
-        stakeDenom = "umed"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/371'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "umed"
         bechAccountPrefix = "panacea"
         validatorPrefix = "panaceavaloper"
         grpcHost = "grpc-medibloc.cosmostation.io"

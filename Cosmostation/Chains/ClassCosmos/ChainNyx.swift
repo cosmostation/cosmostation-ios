@@ -17,11 +17,12 @@ class ChainNyx: BaseChain  {
         tag = "nyx118"
         logo1 = "chainNyx"
         logo2 = "chainNyx2"
-        supportCosmos = true
         apiName = "nyx"
-        
-        stakeDenom = "unyx"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "unyx"
         bechAccountPrefix = "n"
         validatorPrefix = "nvaloper"
         grpcHost = "grpc-nyx.cosmostation.io"

@@ -254,7 +254,7 @@ class CommonTransfer: BaseVC {
         recipientableChains.append(fromChain)
         // check IBC support case for recipient chain
         if (sendType == .Only_Cosmos_Coin || sendType == .CosmosEVM_Coin || sendType == .Only_Cosmos_CW20) {
-            allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false && $0.supportCosmos && $0.isGrpc })
+            allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false && $0.supportCosmosGrpc })
             BaseData.instance.mintscanAssets?.forEach({ msAsset in
                 if (sendType == .Only_Cosmos_Coin || sendType == .CosmosEVM_Coin) {
                     if (msAsset.chain == fromChain.apiName && msAsset.denom?.lowercased() == toSendDenom.lowercased()) {

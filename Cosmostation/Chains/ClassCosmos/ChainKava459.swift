@@ -18,11 +18,12 @@ class ChainKava459: BaseChain {
         logo1 = "chainKava"
         logo2 = "chainKava2"
         isDefault = false
-        supportCosmos = true
         apiName = "kava"
-        
-        stakeDenom = "ukava"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/459'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ukava"
         bechAccountPrefix = "kava"
         validatorPrefix = "kavavaloper"
         grpcHost = "grpc-kava.cosmostation.io"

@@ -48,7 +48,7 @@ class FetcherEvmrpc {
 //            print("fetchAllErc20Balance start ", chain.tag)
             let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)
             await mintscanErc20Tokens.concurrentForEach { erc20 in
-                if (self.chain.supportCosmos) {
+                if (self.chain.isCosmos()) {
                     await self.fetchErc20Balance(erc20)
                 } else {
                     if (userDisplaytoken == nil) {
@@ -113,7 +113,7 @@ extension FetcherEvmrpc {
         let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)
         Task {
             await mintscanErc20Tokens.concurrentForEach { erc20 in
-                if (self.chain.supportCosmos) {
+                if (self.chain.isCosmos()) {
                     await self.fetchErc20Balance(erc20)
                 } else {
                     if (userDisplaytoken == nil) {

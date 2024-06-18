@@ -17,19 +17,21 @@ class ChainCantoEVM: BaseChain  {
         tag = "canto60"
         logo1 = "chainCantoEvm"
         logo2 = "chainCanto2"
-        supportCosmos = true
-        supportEvm = true
         apiName = "canto"
-        
-        stakeDenom = "acanto"
-        coinSymbol = "CANTO"
-        coinGeckoId = "canto"
-        coinLogo = "tokenCanto"
-
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "acanto"
         bechAccountPrefix = "canto"
         validatorPrefix = "cantovaloper"
         grpcHost = "grpc-canto.cosmostation.io"
+        
+        
+        supportEvm = true
+        coinSymbol = "CANTO"
+        coinGeckoId = "canto"
+        coinLogo = "tokenCanto"
         evmRpcURL = "https://rpc-canto-evm.cosmostation.io"
         
         initFetcher()

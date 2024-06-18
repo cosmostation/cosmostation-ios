@@ -18,10 +18,11 @@ class ChainShentu: BaseChain {
         logo1 = "chainShentu"
         logo2 = "chainShentu2"
         apiName = "shentu"
-        supportCosmos = true
-        
-        stakeDenom = "uctk"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uctk"
         bechAccountPrefix = "shentu"
         validatorPrefix = "shentuvaloper"
         grpcHost = "grpc-shentu.cosmostation.io"

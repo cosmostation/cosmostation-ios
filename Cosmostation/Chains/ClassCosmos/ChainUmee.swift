@@ -17,11 +17,12 @@ class ChainUmee: BaseChain {
         tag = "umee118"
         logo1 = "chainUmee"
         logo2 = "chainUmee2"
-        supportCosmos = true
         apiName = "umee"
-        
-        stakeDenom = "uumee"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uumee"
         bechAccountPrefix = "umee"
         validatorPrefix = "umeevaloper"
         grpcHost = "grpc-umee.cosmostation.io"

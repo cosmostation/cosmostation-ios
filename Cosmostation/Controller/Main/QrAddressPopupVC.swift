@@ -36,7 +36,7 @@ class QrAddressPopupVC: BaseVC {
                 hdPathLabel.text = ""
             }
             
-        } else if selectedChain.supportCosmos == true{
+        } else if selectedChain.isCosmos() == true{
             toDpAddress = selectedChain.bechAddress!
             addressLabel.text = toDpAddress
             addressLabel.adjustsFontSizeToFitWidth = true

@@ -17,11 +17,12 @@ class ChainStride: BaseChain {
         tag = "stride118"
         logo1 = "chainStride"
         logo2 = "chainStride2"
-        supportCosmos = true
         apiName = "stride"
-        
-        stakeDenom = "ustrd"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ustrd"
         bechAccountPrefix = "stride"
         validatorPrefix = "stridevaloper"
         grpcHost = "grpc-stride.cosmostation.io"

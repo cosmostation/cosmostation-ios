@@ -17,19 +17,21 @@ class ChainDymensionEVM: BaseChain  {
         tag = "dymension60"
         logo1 = "chainDymensionEvm"
         logo2 = "chainDymension2"
-        supportCosmos = true
-        supportEvm = true
         apiName = "dymension"
-        
-        stakeDenom = "adym"
-        coinSymbol = "DYM"
-        coinGeckoId = "dymension"
-        coinLogo = "tokenDym"
-
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "adym"
         bechAccountPrefix = "dym"
         validatorPrefix = "dymvaloper"
         grpcHost = "grpc-dymension.cosmostation.io"
+        
+        
+        supportEvm = true
+        coinSymbol = "DYM"
+        coinGeckoId = "dymension"
+        coinLogo = "tokenDym"
         evmRpcURL = "https://rpc-dymension-evm.cosmostation.io"
         
         initFetcher()

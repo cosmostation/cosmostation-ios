@@ -17,11 +17,12 @@ class ChainPassage: BaseChain  {
         tag = "passage118"
         logo1 = "chainPassage"
         logo2 = "chainPassage2"
-        supportCosmos = true
         apiName = "passage"
-        
-        stakeDenom = "upasg"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "upasg"
         bechAccountPrefix = "pasg"
         validatorPrefix = "pasgvaloper"
         grpcHost = "grpc-passage.cosmostation.io"

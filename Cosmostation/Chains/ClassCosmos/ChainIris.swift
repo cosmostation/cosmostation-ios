@@ -17,11 +17,12 @@ class ChainIris: BaseChain  {
         tag = "iris118"
         logo1 = "chainIris"
         logo2 = "chainIris2"
-        supportCosmos = true
         apiName = "iris"
-        
-        stakeDenom = "uiris"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uiris"
         bechAccountPrefix = "iaa"
         validatorPrefix = "iva"
         grpcHost = "grpc-iris.cosmostation.io"

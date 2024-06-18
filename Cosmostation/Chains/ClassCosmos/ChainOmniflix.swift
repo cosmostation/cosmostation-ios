@@ -17,11 +17,12 @@ class ChainOmniflix: BaseChain  {
         tag = "omniflix118"
         logo1 = "chainOmniflix"
         logo2 = "chainOmniflix2"
-        supportCosmos = true
         apiName = "omniflix"
-        
-        stakeDenom = "uflix"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uflix"
         bechAccountPrefix = "omniflix"
         validatorPrefix = "omniflixvaloper"
         grpcHost = "grpc-omniflix.cosmostation.io"

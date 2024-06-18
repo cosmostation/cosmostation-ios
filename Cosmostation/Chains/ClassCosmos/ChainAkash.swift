@@ -17,11 +17,12 @@ class ChainAkash: BaseChain {
         tag = "akash118"
         logo1 = "chainAkash"
         logo2 = "chainAkash2"
-        supportCosmos = true
         apiName = "akash"
-        
-        stakeDenom = "uakt"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uakt"
         bechAccountPrefix = "akash"
         validatorPrefix = "akashvaloper"
         grpcHost = "grpc-akash.cosmostation.io"
