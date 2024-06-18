@@ -40,6 +40,10 @@ class ReceiveCell: UITableViewCell {
             hdPathLabel.text = ""
         }
         legacyTag.isHidden = chain.isDefault
+        if (chain.name == "OKT" && !chain.supportEvm) {
+            keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
+            keyTypeTag.isHidden = false
+        }
         
         if chain.supportEvm, section == 0 {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name + " EVM")
