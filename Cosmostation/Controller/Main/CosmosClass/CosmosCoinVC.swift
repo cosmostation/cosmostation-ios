@@ -51,7 +51,7 @@ class CosmosCoinVC: BaseVC {
         
         onSortAssets()
         
-        if (selectedChain is ChainCantoEVM || selectedChain is ChainRegen) {
+        if (selectedChain is ChainCantoEVM || selectedChain is ChainRegen || selectedChain is ChainLike || selectedChain is ChainIxo) {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
                 let sunsetSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
                 sunsetSheet.selectedChain = self.selectedChain
