@@ -59,7 +59,7 @@ class CosmosCoinVC: BaseVC {
                 self.onStartSheet(sunsetSheet, 240, 0.6)
             })
             
-        } else if (selectedChain.isLagacyOKT()) {
+        } else if (selectedChain.tag == "okt996_Keccak" || selectedChain.tag == "okt996_Secp") {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
                 let legacySheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
                 legacySheet.selectedChain = self.selectedChain

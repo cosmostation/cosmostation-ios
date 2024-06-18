@@ -88,11 +88,7 @@ class CosmosClassVC: BaseVC {
         onSetTabbarView()
         onSetFabButton()
         
-        if (selectedChain.supportStaking) {
-            selectedChain.fetchValidatorInfos()
-        }
-        
-        if (selectedChain.isLagacyOKT()) {
+        if (selectedChain.name == "OKT" || selectedChain.supportStaking) {
             selectedChain.fetchValidatorInfos()
         }
         
@@ -160,7 +156,7 @@ class CosmosClassVC: BaseVC {
     }
     
     @objc func onFetchValidators(_ notification: NSNotification) {
-//        print("onFetchValidators")
+//        print("onFetchValidators ", selectedChain.tag)
     }
     
     
@@ -272,7 +268,7 @@ class CosmosClassVC: BaseVC {
                 }
             }
             
-        } else if (selectedChain.isLagacyOKT()) {
+        } else if (selectedChain.name == "OKT") {
             mainFab.addItem(title: "Select Validators", image: UIImage(named: "iconFabAddShare")) { _ in
                 self.onOkAddShareTx()
             }
@@ -614,47 +610,66 @@ extension CosmosClassVC: BaseSheetDelegate {
 extension CosmosClassVC {
     
     func onOkDepositTx() {
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        let okDeposit = OkDeposit(nibName: "OkDeposit", bundle: nil)
-//        okDeposit.selectedChain = selectedChain as? ChainOkt996Keccak
-//        okDeposit.modalTransitionStyle = .coverVertical
-//        self.present(okDeposit, animated: true)
+        if let oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher {
+            let validators = oktFetcher.lcdOktValidators.count
+            if (validators <= 0) {
+                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                return
+            }
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let okDeposit = OkDeposit(nibName: "OkDeposit", bundle: nil)
+        okDeposit.selectedChain = selectedChain
+        okDeposit.modalTransitionStyle = .coverVertical
+        self.present(okDeposit, animated: true)
     }
     
     func onOkWithdrawTx() {
-//        if let oktChain = selectedChain as? ChainOkt996Keccak {
-//            if (oktChain.lcdOktDepositAmount().compare(NSDecimalNumber.zero).rawValue <= 0) {
-//                self.onShowToast(NSLocalizedString("error_no_deposited_asset", comment: ""))
-//                return
-//            }
-//        }
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        let okWithdraw = OkWithdraw(nibName: "OkWithdraw", bundle: nil)
-//        okWithdraw.selectedChain = selectedChain as? ChainOkt996Keccak
-//        okWithdraw.modalTransitionStyle = .coverVertical
-//        self.present(okWithdraw, animated: true)
+        if let oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher {
+            let validators = oktFetcher.lcdOktValidators.count
+            let myDeposit = oktFetcher.lcdOktDepositAmount().compare(NSDecimalNumber.zero).rawValue
+            if (validators <= 0) {
+                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                return
+            }
+            if (myDeposit <= 0) {
+                self.onShowToast(NSLocalizedString("error_no_deposited_asset", comment: ""))
+                return
+            }
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let okWithdraw = OkWithdraw(nibName: "OkWithdraw", bundle: nil)
+        okWithdraw.selectedChain = selectedChain
+        okWithdraw.modalTransitionStyle = .coverVertical
+        self.present(okWithdraw, animated: true)
     }
     
     func onOkAddShareTx() {
-//        if let oktChain = selectedChain as? ChainOkt996Keccak {
-//            if (oktChain.lcdOktDepositAmount().compare(NSDecimalNumber.zero).rawValue <= 0) {
-//                self.onShowToast(NSLocalizedString("error_no_deposited_asset", comment: ""))
-//                return
-//            }
-//        }
-//        if (selectedChain.isTxFeePayable() == false) {
-//            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//            return
-//        }
-//        let okAddShare = OkAddShare(nibName: "OkAddShare", bundle: nil)
-//        okAddShare.selectedChain = selectedChain as? ChainOkt996Keccak
-//        okAddShare.modalTransitionStyle = .coverVertical
-//        self.present(okAddShare, animated: true)
+        if let oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher {
+            let validators = oktFetcher.lcdOktValidators.count
+            let myDeposit = oktFetcher.lcdOktDepositAmount().compare(NSDecimalNumber.zero).rawValue
+            if (validators <= 0) {
+                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                return
+            }
+            if (myDeposit <= 0) {
+                self.onShowToast(NSLocalizedString("error_no_deposited_asset", comment: ""))
+                return
+            }
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let okAddShare = OkAddShare(nibName: "OkAddShare", bundle: nil)
+        okAddShare.selectedChain = selectedChain
+        okAddShare.modalTransitionStyle = .coverVertical
+        self.present(okAddShare, animated: true)
     }
 }

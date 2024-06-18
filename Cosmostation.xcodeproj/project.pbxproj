@@ -1583,6 +1583,18 @@
 		E10B1DF42C215E250039283B /* NeutronVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B1DEC2C215E250039283B /* NeutronVote.swift */; };
 		E10B1DF52C215E250039283B /* NeutronVote.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10B1DED2C215E250039283B /* NeutronVote.xib */; };
 		E10B1DF62C215E250039283B /* NeutronVote.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10B1DED2C215E250039283B /* NeutronVote.xib */; };
+		E10B1DFE2C215EF20039283B /* OkAddShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B1DF72C215EF20039283B /* OkAddShare.swift */; };
+		E10B1DFF2C215EF20039283B /* OkAddShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B1DF72C215EF20039283B /* OkAddShare.swift */; };
+		E10B1E002C215EF20039283B /* OkAddShare.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10B1DF82C215EF20039283B /* OkAddShare.xib */; };
+		E10B1E012C215EF20039283B /* OkAddShare.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10B1DF82C215EF20039283B /* OkAddShare.xib */; };
+		E10B1E022C215EF20039283B /* OkDeposit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B1DF92C215EF20039283B /* OkDeposit.swift */; };
+		E10B1E032C215EF20039283B /* OkDeposit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B1DF92C215EF20039283B /* OkDeposit.swift */; };
+		E10B1E042C215EF20039283B /* OkDeposit.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10B1DFA2C215EF20039283B /* OkDeposit.xib */; };
+		E10B1E052C215EF20039283B /* OkDeposit.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10B1DFA2C215EF20039283B /* OkDeposit.xib */; };
+		E10B1E062C215EF20039283B /* OkWithdraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B1DFB2C215EF20039283B /* OkWithdraw.swift */; };
+		E10B1E072C215EF20039283B /* OkWithdraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10B1DFB2C215EF20039283B /* OkWithdraw.swift */; };
+		E10B1E082C215EF20039283B /* OkWithdraw.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10B1DFC2C215EF20039283B /* OkWithdraw.xib */; };
+		E10B1E092C215EF20039283B /* OkWithdraw.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10B1DFC2C215EF20039283B /* OkWithdraw.xib */; };
 		E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */; };
 		E10EB58F2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */; };
 		E10EB5902A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */; };
@@ -2718,6 +2730,12 @@
 		E10B1DEB2C215E250039283B /* NeutronVault.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NeutronVault.xib; sourceTree = "<group>"; };
 		E10B1DEC2C215E250039283B /* NeutronVote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeutronVote.swift; sourceTree = "<group>"; };
 		E10B1DED2C215E250039283B /* NeutronVote.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NeutronVote.xib; sourceTree = "<group>"; };
+		E10B1DF72C215EF20039283B /* OkAddShare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OkAddShare.swift; sourceTree = "<group>"; };
+		E10B1DF82C215EF20039283B /* OkAddShare.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OkAddShare.xib; sourceTree = "<group>"; };
+		E10B1DF92C215EF20039283B /* OkDeposit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OkDeposit.swift; sourceTree = "<group>"; };
+		E10B1DFA2C215EF20039283B /* OkDeposit.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OkDeposit.xib; sourceTree = "<group>"; };
+		E10B1DFB2C215EF20039283B /* OkWithdraw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OkWithdraw.swift; sourceTree = "<group>"; };
+		E10B1DFC2C215EF20039283B /* OkWithdraw.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OkWithdraw.xib; sourceTree = "<group>"; };
 		E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
@@ -3702,6 +3720,19 @@
 			path = Neutron;
 			sourceTree = "<group>";
 		};
+		E10B1DFD2C215EF20039283B /* Okt */ = {
+			isa = PBXGroup;
+			children = (
+				E10B1DF72C215EF20039283B /* OkAddShare.swift */,
+				E10B1DF82C215EF20039283B /* OkAddShare.xib */,
+				E10B1DF92C215EF20039283B /* OkDeposit.swift */,
+				E10B1DFA2C215EF20039283B /* OkDeposit.xib */,
+				E10B1DFB2C215EF20039283B /* OkWithdraw.swift */,
+				E10B1DFC2C215EF20039283B /* OkWithdraw.xib */,
+			);
+			path = Okt;
+			sourceTree = "<group>";
+		};
 		E11069A92AA4C55F00EB02CA /* Cosmwasm */ = {
 			isa = PBXGroup;
 			children = (
@@ -4234,6 +4265,7 @@
 			children = (
 				E10B1DBD2C2159040039283B /* Kava */,
 				E10B1DEE2C215E250039283B /* Neutron */,
+				E10B1DFD2C215EF20039283B /* Okt */,
 				0409D2F32AC5DC6D0021E192 /* CosmosDelegate.swift */,
 				0409D2F42AC5DC6D0021E192 /* CosmosDelegate.xib */,
 				047842DC2AC8963100462F1C /* CosmosUndelegate.swift */,
@@ -4567,6 +4599,7 @@
 				04C63D1F2B839D3900D4A366 /* TxSendAmountSheet.xib in Resources */,
 				04F048D02AF8D268002A809D /* CosmosCancelUnbonding.xib in Resources */,
 				E12E9D302AE415D900336449 /* loadingSmallYellow.json in Resources */,
+				E10B1E052C215EF20039283B /* OkDeposit.xib in Resources */,
 				E131F44B2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */,
 				04B789A22ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib in Resources */,
 				E10B1D9E2C2156430039283B /* KavaDefiVC.xib in Resources */,
@@ -4607,6 +4640,8 @@
 				E1D97C0A2B9EF65000496807 /* SelectEndpointSheet.xib in Resources */,
 				E1F257E82BFB2009008F4D21 /* EvmCancelUnbonding.xib in Resources */,
 				E1D5382A2A96644F00FB0403 /* loading.json in Resources */,
+				E10B1E012C215EF20039283B /* OkAddShare.xib in Resources */,
+				E10B1E092C215EF20039283B /* OkWithdraw.xib in Resources */,
 				04FF6B8F2B204BCB009DCA89 /* ClaimAllChainCell.xib in Resources */,
 				04FEDB4F2B05D1340095B7B6 /* WalletDeriveVC.xib in Resources */,
 				04FA747C2AA0446A001A2830 /* BaseMsgSheetCell.xib in Resources */,
@@ -4675,6 +4710,7 @@
 				041541022BA413A300CD5AA1 /* VoteAllChainHeader.xib in Resources */,
 				E11EAE1D2AAD87AD003BFC7F /* SettingPriceCell.xib in Resources */,
 				049715082C0ED2D1008C45A0 /* basebg01.png in Resources */,
+				E10B1E082C215EF20039283B /* OkWithdraw.xib in Resources */,
 				04FA746E2A9F8652001A2830 /* BaseSheet.xib in Resources */,
 				E1ECE6C12B1D992D00FDFD91 /* AllChainClaimStartVC.xib in Resources */,
 				E10B1D752C2156430039283B /* KavaDefiCell.xib in Resources */,
@@ -4731,6 +4767,7 @@
 				04FAD9F02AB71D3300143A3E /* RenameSheet.xib in Resources */,
 				E1CD6B022AEAAEF200376909 /* AboutSocialsCell.xib in Resources */,
 				04FA74542A9D97A0001A2830 /* Pincode.storyboard in Resources */,
+				E10B1E042C215EF20039283B /* OkDeposit.xib in Resources */,
 				04CFF0352AC58D4400FB3187 /* SelectFeeCoinCell.xib in Resources */,
 				E10B1DD02C2159040039283B /* KavaMintAction.xib in Resources */,
 				042DE8422AC4C518003F3EA4 /* TxMemoSheet.xib in Resources */,
@@ -4793,6 +4830,7 @@
 				E1F257D62BF77A7B008F4D21 /* EvmDelegate.xib in Resources */,
 				04FA74732AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
 				049714FE2C0EB73B008C45A0 /* PopupReceiveCell.xib in Resources */,
+				E10B1E002C215EF20039283B /* OkAddShare.xib in Resources */,
 				E1DF777D2AB75F830028BD51 /* CheckPrivateKeysVC.xib in Resources */,
 				0402B7F42ACC38BA00824B3F /* CosmosVote.xib in Resources */,
 				0402B7EE2ACC248400824B3F /* CosmosRewardAddress.xib in Resources */,
@@ -5049,6 +5087,7 @@
 				04B7895C2ACAC9B100E9BE88 /* ibc_core_channel_v1_tx.pb.swift in Sources */,
 				046EA8F02AD04A2600A2FCE7 /* desmos_profiles_v3_msg_server.grpc.swift in Sources */,
 				045032852C1EEDCD00235F6A /* ChainBitcana.swift in Sources */,
+				E10B1E072C215EF20039283B /* OkWithdraw.swift in Sources */,
 				047843A82AC991B300462F1C /* injective_exchange_v1beta1_tx.pb.swift in Sources */,
 				04B7899C2ACAC9B100E9BE88 /* ibc_core_connection_v1_query.grpc.swift in Sources */,
 				E10B1DE92C215C120039283B /* NeutronSingleDao.swift in Sources */,
@@ -5213,6 +5252,7 @@
 				04BA9BD62A985771003E2404 /* ChainSelectVC.swift in Sources */,
 				E18D73B72AB484AB00FCB1AA /* DappStartVC.swift in Sources */,
 				E11069BD2AA4C57600EB02CA /* cosmwasm_wasm_v1_genesis.pb.swift in Sources */,
+				E10B1E032C215EF20039283B /* OkDeposit.swift in Sources */,
 				04C817CA2BA9900D006B800A /* gaia_globalfee_v1beta1_query.pb.swift in Sources */,
 				047C10722AAC310600AFA159 /* QrAddressVC.swift in Sources */,
 				04B789EC2ACB336400E9BE88 /* SelectRefAddressCell.swift in Sources */,
@@ -5347,6 +5387,7 @@
 				04C817412BA98D75006B800A /* cosmos_protocolpool_v1_tx.grpc.swift in Sources */,
 				04C817012BA98D75006B800A /* cosmos_autocli_v1_query.pb.swift in Sources */,
 				0400EF0C2ADBF03B007BA97F /* kava_hard_v1beta1_query.pb.swift in Sources */,
+				E10B1DFF2C215EF20039283B /* OkAddShare.swift in Sources */,
 				E11069B72AA4C57600EB02CA /* cosmwasm_wasm_v1_proposal.pb.swift in Sources */,
 				04C817832BA98D75006B800A /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift in Sources */,
 				04C8167D2BA98D74006B800A /* cosmos_nft_v1beta1_tx.pb.swift in Sources */,
@@ -5808,6 +5849,7 @@
 				E122DC562A8A4712006D1E7B /* tendermint_types_params.pb.swift in Sources */,
 				04B7895B2ACAC9B100E9BE88 /* ibc_core_channel_v1_tx.pb.swift in Sources */,
 				045032842C1EEDCD00235F6A /* ChainBitcana.swift in Sources */,
+				E10B1E062C215EF20039283B /* OkWithdraw.swift in Sources */,
 				046EA8EF2AD04A2600A2FCE7 /* desmos_profiles_v3_msg_server.grpc.swift in Sources */,
 				047843A72AC991B300462F1C /* injective_exchange_v1beta1_tx.pb.swift in Sources */,
 				E10B1DE82C215C120039283B /* NeutronSingleDao.swift in Sources */,
@@ -5972,6 +6014,7 @@
 				04CB911B2A90C41E00375354 /* EvmClass.swift in Sources */,
 				04BA9BD52A985771003E2404 /* ChainSelectVC.swift in Sources */,
 				E1945E542231256800A1436F /* BaseConstant.swift in Sources */,
+				E10B1E022C215EF20039283B /* OkDeposit.swift in Sources */,
 				E18D73B62AB484AB00FCB1AA /* DappStartVC.swift in Sources */,
 				04C817C92BA9900D006B800A /* gaia_globalfee_v1beta1_query.pb.swift in Sources */,
 				E11069BC2AA4C57600EB02CA /* cosmwasm_wasm_v1_genesis.pb.swift in Sources */,
@@ -6106,6 +6149,7 @@
 				047843052AC9918700462F1C /* ethermint_types_v1_dynamic_fee.pb.swift in Sources */,
 				047843C92AC991B300462F1C /* injective_auction_v1beta1_query.grpc.swift in Sources */,
 				04C817402BA98D75006B800A /* cosmos_protocolpool_v1_tx.grpc.swift in Sources */,
+				E10B1DFE2C215EF20039283B /* OkAddShare.swift in Sources */,
 				04C817002BA98D75006B800A /* cosmos_autocli_v1_query.pb.swift in Sources */,
 				0400EF0B2ADBF03B007BA97F /* kava_hard_v1beta1_query.pb.swift in Sources */,
 				04C817822BA98D75006B800A /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift in Sources */,

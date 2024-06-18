@@ -35,4 +35,8 @@ class FetcherLcd {
     func lcdBalanceAmount(_ denom: String) -> NSDecimalNumber {
         return NSDecimalNumber.zero
     }
+    
+    func fetchValidators() async -> Bool {
+        return false
+    }
 }

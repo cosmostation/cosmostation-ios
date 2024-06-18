@@ -51,6 +51,35 @@ class OktFetcher: FetcherLcd {
         }
     }
     
+    override func fetchValidators() async -> Bool {
+        lcdOktValidators.removeAll()
+        if let okValidators = try? await fetchOktValdators() {
+            okValidators?.forEach { validator in
+                self.lcdOktValidators.append(validator)
+            }
+            
+            self.lcdOktValidators.sort {
+                if ($0["description"]["moniker"].stringValue == "Cosmostation") {
+                    return true
+                }
+                if ($1["description"]["moniker"].stringValue == "Cosmostation"){
+                    return false
+                }
+                if ($0["jailed"].boolValue && !$1["jailed"].boolValue) {
+                    return false
+                }
+                if (!$0["jailed"].boolValue && $1["jailed"].boolValue) {
+                    return true
+                }
+                return $0["delegator_shares"].doubleValue > $1["delegator_shares"].doubleValue
+            }
+            return true
+        } else {
+            print("okValidators error")
+        }
+        return false
+    }
+    
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
         return lcdBalanceValue(chain.stakeDenom!, usd).adding(lcdOktDepositValue(usd)).adding(lcdOktWithdrawValue(usd))
     }
@@ -125,6 +154,7 @@ extension OktFetcher {
     
     func fetchOktValdators() async throws -> [JSON]? {
         let url = OKT_LCD + "staking/validators"
-        return try await AF.request(url, method: .get, parameters: ["status":"all"]).serializingDecodable([JSON].self).value
+//        return try await AF.request(url, method: .get, parameters: ["status":"all"]).serializingDecodable([JSON].self).value
+        return try await AF.request(url, method: .get, parameters: [:]).serializingDecodable([JSON].self).value
     }
 }
