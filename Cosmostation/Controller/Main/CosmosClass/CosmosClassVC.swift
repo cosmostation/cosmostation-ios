@@ -595,10 +595,10 @@ extension CosmosClassVC: BaseSheetDelegate {
     }
     
     func onNeutronProposals() {
-//        let neutronDaoVC = UIStoryboard(name: "NeutronDao", bundle: nil).instantiateViewController(withIdentifier: "NeutronDaoVC") as! NeutronDaoVC
-//        neutronDaoVC.selectedChain = selectedChain as? ChainNeutron
-//        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(neutronDaoVC, animated: true)
+        let neutronDaoVC = UIStoryboard(name: "NeutronDao", bundle: nil).instantiateViewController(withIdentifier: "NeutronDaoVC") as! NeutronDaoVC
+        neutronDaoVC.selectedChain = selectedChain as? ChainNeutron
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(neutronDaoVC, animated: true)
     }
     
     func onKavaDefi() {
