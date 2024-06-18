@@ -68,56 +68,56 @@ class SelectAddressListSheet: BaseVC {
             
         } else if (sendType == .Only_Cosmos_Coin || sendType == .Only_Cosmos_CW20) {
             //only support cosmos address style
-//            BaseData.instance.selectAllRefAddresses().filter {
-//                $0.bechAddress.starts(with: (toChain as! CosmosClass).bechAccountPrefix! + "1") &&
-//                $0.bechAddress != senderBechAddress }.forEach { refAddress in
-//                    if (tempRefBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
-//                        tempRefBechAddresses.append(refAddress)
-//                    }
-//                }
-//            
-//            BaseData.instance.selectAllAddressBooks().forEach { book in
-//                if (book.chainName == toChain.name && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
-//                    bechAddressBook.append(book)
-//                }
-//            }
-//            addressStyleSegment.isHidden = true
-//            sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
-//            cosmosStyleTableView.isHidden = false
-//            evmStyleTableView.isHidden = true
+            BaseData.instance.selectAllRefAddresses().filter {
+                $0.bechAddress.starts(with: toChain.bechAccountPrefix! + "1") &&
+                $0.bechAddress != senderBechAddress }.forEach { refAddress in
+                    if (tempRefBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
+                        tempRefBechAddresses.append(refAddress)
+                    }
+                }
+            
+            BaseData.instance.selectAllAddressBooks().forEach { book in
+                if (book.chainName == toChain.name && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
+                    bechAddressBook.append(book)
+                }
+            }
+            addressStyleSegment.isHidden = true
+            sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
+            cosmosStyleTableView.isHidden = false
+            evmStyleTableView.isHidden = true
             
         } else if (sendType == .CosmosEVM_Coin) {
             //only support both address style
-//            BaseData.instance.selectAllRefAddresses().filter {
-//                $0.bechAddress.starts(with: (toChain as! CosmosClass).bechAccountPrefix! + "1") &&
-//                $0.bechAddress != senderBechAddress }.forEach { refAddress in
-//                    if (tempRefBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
-//                        tempRefBechAddresses.append(refAddress)
-//                    }
-//                }
-//            BaseData.instance.selectAllAddressBooks().forEach { book in
-//                if (book.chainName == toChain.name && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
-//                    bechAddressBook.append(book)
-//                }
-//            }
-//            
-//            if (fromChain.tag == toChain.tag) {
-//                //ibc case not support EVM address style
-//                BaseData.instance.selectAllRefAddresses().forEach { refAddress in
-//                    if (refAddress.chainTag == toChain.tag && refAddress.evmAddress != senderEvmAddress) {
-//                        refEvmAddresses.append(refAddress)
-//                    }
-//                }
-//                BaseData.instance.selectAllAddressBooks().forEach { book in
-//                    if (book.dpAddress.starts(with: "0x") && book.dpAddress != senderEvmAddress) {
-//                        evmAddressBook.append(book)
-//                    }
-//                }
-//            }
-//            addressStyleSegment.isHidden = false
-//            sheetTitle.isHidden = true
-//            cosmosStyleTableView.isHidden = false
-//            evmStyleTableView.isHidden = true
+            BaseData.instance.selectAllRefAddresses().filter {
+                $0.bechAddress.starts(with: toChain.bechAccountPrefix! + "1") &&
+                $0.bechAddress != senderBechAddress }.forEach { refAddress in
+                    if (tempRefBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
+                        tempRefBechAddresses.append(refAddress)
+                    }
+                }
+            BaseData.instance.selectAllAddressBooks().forEach { book in
+                if (book.chainName == toChain.name && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
+                    bechAddressBook.append(book)
+                }
+            }
+            
+            if (fromChain.tag == toChain.tag) {
+                //ibc case not support EVM address style
+                BaseData.instance.selectAllRefAddresses().forEach { refAddress in
+                    if (refAddress.chainTag == toChain.tag && refAddress.evmAddress != senderEvmAddress) {
+                        refEvmAddresses.append(refAddress)
+                    }
+                }
+                BaseData.instance.selectAllAddressBooks().forEach { book in
+                    if (book.dpAddress.starts(with: "0x") && book.dpAddress != senderEvmAddress) {
+                        evmAddressBook.append(book)
+                    }
+                }
+            }
+            addressStyleSegment.isHidden = false
+            sheetTitle.isHidden = true
+            cosmosStyleTableView.isHidden = false
+            evmStyleTableView.isHidden = true
         }
         refEvmAddresses.sort {
             if let account0 = BaseData.instance.selectAccount($0.accountId),
@@ -126,18 +126,18 @@ class SelectAddressListSheet: BaseVC {
             }
             return false
         }
-        //YONG
-//        let allBaseChain = All_BASE_Chains()
-//        let hideLegacy = BaseData.instance.getHideLegacy()
-//        if (hideLegacy) {
-//            tempRefBechAddresses.forEach { refAddress in
-//                if (allBaseChain.filter { $0.tag == refAddress.chainTag && $0.isDefault == true }.count > 0) {
-//                    refBechAddresses.append(refAddress)
-//                }
-//            }
-//        } else {
-//            refBechAddresses = tempRefBechAddresses
-//        }
+        
+        let allBaseChain = ALLCHAINS()
+        let hideLegacy = BaseData.instance.getHideLegacy()
+        if (hideLegacy) {
+            tempRefBechAddresses.forEach { refAddress in
+                if (allBaseChain.filter { $0.tag == refAddress.chainTag && $0.isDefault == true }.count > 0) {
+                    refBechAddresses.append(refAddress)
+                }
+            }
+        } else {
+            refBechAddresses = tempRefBechAddresses
+        }
         
         refBechAddresses.sort {
             if let account0 = BaseData.instance.selectAccount($0.accountId),

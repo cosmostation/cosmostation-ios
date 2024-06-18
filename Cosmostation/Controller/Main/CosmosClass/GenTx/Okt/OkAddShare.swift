@@ -79,16 +79,17 @@ class OkAddShare: BaseVC {
     }
     
     @objc func onClickTable() {
-//        let selectSheet = OktSelectValidatorSheet(nibName: "OktSelectValidatorSheet", bundle: nil)
-//        selectSheet.selectedChain = selectedChain
-//        selectSheet.existSelected = myValidators
-//        selectSheet.oktSelectValidatorDelegate = self
-//        guard let sheet = selectSheet.presentationController as? UISheetPresentationController else {
-//            return
-//        }
-//        sheet.largestUndimmedDetentIdentifier = .large
-//        sheet.prefersGrabberVisible = true
-//        present(selectSheet, animated: true)
+        let selectSheet = OktSelectValidatorSheet(nibName: "OktSelectValidatorSheet", bundle: nil)
+        selectSheet.selectedChain = selectedChain
+        selectSheet.oktFetcher = oktFetcher
+        selectSheet.existSelected = myValidators
+        selectSheet.oktSelectValidatorDelegate = self
+        guard let sheet = selectSheet.presentationController as? UISheetPresentationController else {
+            return
+        }
+        sheet.largestUndimmedDetentIdentifier = .large
+        sheet.prefersGrabberVisible = true
+        present(selectSheet, animated: true)
     }
     
     @objc func onClickMemo() {

@@ -16,8 +16,9 @@ class OktSelectValidatorSheet: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var confirmBtn: BaseButton!
     
+    var selectedChain: BaseChain!
+    var oktFetcher: OktFetcher!
     var oktSelectValidatorDelegate: OktSelectValidatorDelegate?
-    var selectedChain: ChainOkt996Keccak!
     var allValidators = [JSON]()
     var existSelected = [JSON]()
     
@@ -31,7 +32,7 @@ class OktSelectValidatorSheet: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-//        allValidators = selectedChain.lcdOktValidators
+        allValidators = oktFetcher.lcdOktValidators
     }
 
 

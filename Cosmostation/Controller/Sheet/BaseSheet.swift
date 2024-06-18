@@ -105,7 +105,6 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     }
     
     func updateTitle() {
-        /*
         if (sheetType == .SelectCreateAccount) {
             sheetTitle.text = NSLocalizedString("title_create_account", comment: "")
             
@@ -161,12 +160,12 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                 swapAssets.sort {
                     if ($0["symbol"] == "ATOM") { return true }
                     if ($1["symbol"] == "ATOM") { return false }
-                    let value0 = targetChain.balanceValue($0["denom"].stringValue)
-                    let value1 = targetChain.balanceValue($1["denom"].stringValue)
+                    let value0 = targetChain.getGrpcfetcher()!.balanceValue($0["denom"].stringValue)
+                    let value1 = targetChain.getGrpcfetcher()!.balanceValue($1["denom"].stringValue)
                     if (value0.compare(value1).rawValue > 0 ) { return true }
                     if (value0.compare(value1).rawValue < 0 ) { return false }
-                    let amount0 = targetChain.balanceAmount($0["denom"].stringValue)
-                    let amount1 = targetChain.balanceAmount($1["denom"].stringValue)
+                    let amount0 = targetChain.getGrpcfetcher()!.balanceAmount($0["denom"].stringValue)
+                    let amount1 = targetChain.getGrpcfetcher()!.balanceAmount($1["denom"].stringValue)
                     if (amount0.compare(amount1).rawValue > 0 ) { return true }
                     if (amount0.compare(amount1).rawValue < 0 ) { return false }
                     return $0["symbol"].stringValue < $1["symbol"].stringValue
@@ -186,12 +185,12 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                 swapAssets.sort {
                     if ($0["symbol"] == "ATOM") { return true }
                     if ($1["symbol"] == "ATOM") { return false }
-                    let value0 = targetChain.balanceValue($0["denom"].stringValue)
-                    let value1 = targetChain.balanceValue($1["denom"].stringValue)
+                    let value0 = targetChain.getGrpcfetcher()!.balanceValue($0["denom"].stringValue)
+                    let value1 = targetChain.getGrpcfetcher()!.balanceValue($1["denom"].stringValue)
                     if (value0.compare(value1).rawValue > 0 ) { return true }
                     if (value0.compare(value1).rawValue < 0 ) { return false }
-                    let amount0 = targetChain.balanceAmount($0["denom"].stringValue)
-                    let amount1 = targetChain.balanceAmount($1["denom"].stringValue)
+                    let amount0 = targetChain.getGrpcfetcher()!.balanceAmount($0["denom"].stringValue)
+                    let amount1 = targetChain.getGrpcfetcher()!.balanceAmount($1["denom"].stringValue)
                     if (amount0.compare(amount1).rawValue > 0 ) { return true }
                     if (amount0.compare(amount1).rawValue < 0 ) { return false }
                     return $0["symbol"].stringValue < $1["symbol"].stringValue
@@ -219,9 +218,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SelectUnStakeValidator) {
             sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
-            delegations = targetChain.cosmosDelegations
+            delegations = targetChain.getGrpcfetcher()!.cosmosDelegations
             delegations.forEach { delegation in
-                if let validator = targetChain.cosmosValidators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
+                if let validator = targetChain.getGrpcfetcher()!.cosmosValidators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
                     validators.append(validator)
                 }
             }
@@ -274,7 +273,6 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             sheetTitle.text = NSLocalizedString("title_buy_crypto", comment: "")
             
         }
-         */
     }
     
     @objc func dismissKeyboard() {
@@ -282,21 +280,21 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
-//            swapChainsSearch = searchText.isEmpty ? swapChains : swapChains.filter { chain in
-//                return chain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-//            }
-//            
-//        } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
-//            swapAssetsSearch = searchText.isEmpty ? swapAssets : swapAssets.filter { json in
-//                return json["symbol"].stringValue.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-//            }
-//        } else if (sheetType == .SelectValidator) {
-//            validatorsSearch = searchText.isEmpty ? validators : validators.filter { validator in
-//                return validator.description_p.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-//            }
-//        }
-//        sheetTableView.reloadData()
+        if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
+            swapChainsSearch = searchText.isEmpty ? swapChains : swapChains.filter { chain in
+                return chain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+            
+        } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
+            swapAssetsSearch = searchText.isEmpty ? swapAssets : swapAssets.filter { json in
+                return json["symbol"].stringValue.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+        } else if (sheetType == .SelectValidator) {
+            validatorsSearch = searchText.isEmpty ? validators : validators.filter { validator in
+                return validator.description_p.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+        }
+        sheetTableView.reloadData()
     }
 }
 

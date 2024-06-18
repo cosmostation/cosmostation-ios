@@ -32,23 +32,23 @@ class SelectOktValidatorCell: UITableViewCell {
     }
 
     
-    //YONG4
-    func onBindSelectValidator( _ chain: ChainOkt996Keccak, _ validatorInfo: JSON, _ selectedList: [JSON]) {
-//        logoImg.af.setImage(withURL: chain.monikerImg(validatorInfo["operator_address"].stringValue))
-//        nameLabel.text = validatorInfo["description"]["moniker"].stringValue
-//        
-//        if (validatorInfo["jailed"].boolValue) {
-//            jailedTag.isHidden = false
-//        } else {
-//            inactiveTag.isHidden = validatorInfo["status"].intValue == 2
-//        }
-//        
-//        
-//        if (selectedList.map { $0["operator_address"].stringValue }.contains(validatorInfo["operator_address"].stringValue)) {
-//            checkedImg.isHidden = false
-//        } else {
-//            checkedImg.isHidden = true
-//        }
+
+    func onBindSelectValidator( _ chain: BaseChain, _ validatorInfo: JSON, _ selectedList: [JSON]) {
+        logoImg.af.setImage(withURL: chain.monikerImg(validatorInfo["operator_address"].stringValue))
+        nameLabel.text = validatorInfo["description"]["moniker"].stringValue
+        
+        if (validatorInfo["jailed"].boolValue) {
+            jailedTag.isHidden = false
+        } else {
+            inactiveTag.isHidden = validatorInfo["status"].intValue == 2
+        }
+        
+        
+        if (selectedList.map { $0["operator_address"].stringValue }.contains(validatorInfo["operator_address"].stringValue)) {
+            checkedImg.isHidden = false
+        } else {
+            checkedImg.isHidden = true
+        }
     }
     
 }
