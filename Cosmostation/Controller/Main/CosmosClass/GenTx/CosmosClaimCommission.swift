@@ -40,7 +40,7 @@ class CosmosClaimCommission: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var claimableCommission: Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission!
@@ -81,22 +81,22 @@ class CosmosClaimCommission: BaseVC {
     }
     
     func onInitView() {
-        let selfValidator = selectedChain.cosmosValidators.filter { $0.operatorAddress == selectedChain.bechOpAddress }.first
+        let selfValidator = selectedChain.getGrpcfetcher()!.cosmosValidators.filter { $0.operatorAddress == selectedChain.bechOpAddress }.first
         validatorsLabel.text = selfValidator?.description_p.moniker
         
         
         let stakeDenom = selectedChain.stakeDenom!
         var mainCoin: Cosmos_Base_V1beta1_Coin!
-        if let mainCommi = selectedChain.cosmosCommissions.filter({ $0.denom == stakeDenom }).first {
+        if let mainCommi = selectedChain.getGrpcfetcher()!.cosmosCommissions.filter({ $0.denom == stakeDenom }).first {
             mainCoin = mainCommi
         } else {
-            mainCoin = selectedChain.cosmosCommissions[0]
+            mainCoin = selectedChain.getGrpcfetcher()!.cosmosCommissions[0]
         }
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, mainCoin.denom) {
             WDP.dpCoin(msAsset, mainCoin, nil, commissionDenomLabel, commissionAmountLabel, msAsset.decimals)
         }
-        if (selectedChain.cosmosCommissions.count > 1) {
-            commissionCntLabel.text = "+ " + String(selectedChain.cosmosCommissions.count - 1)
+        if (selectedChain.getGrpcfetcher()!.cosmosCommissions.count > 1) {
+            commissionCntLabel.text = "+ " + String(selectedChain.getGrpcfetcher()!.cosmosCommissions.count - 1)
         } else {
             commissionCntLabel.isHidden = true
         }
@@ -184,7 +184,7 @@ class CosmosClaimCommission: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
                 do {
                     let simul = try await simulateTx(channel, auth!)
                     DispatchQueue.main.async {
@@ -229,7 +229,7 @@ extension CosmosClaimCommission: MemoDelegate, BaseSheetDelegate, PinDelegate {
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
                    let response = try await broadcastTx(channel, auth!) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -271,7 +271,7 @@ extension CosmosClaimCommission {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

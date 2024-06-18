@@ -17,7 +17,7 @@ class EvmEcosystemVC: BaseVC {
     @IBOutlet weak var emptyDataView: UIView!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: EvmClass!
+    var selectedChain: BaseChain!
     var ecosystemList: [JSON]?
 
     override func viewDidLoad() {

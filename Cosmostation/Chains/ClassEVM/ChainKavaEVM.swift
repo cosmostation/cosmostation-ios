@@ -8,36 +8,38 @@
 
 import Foundation
 
-class ChainKavaEVM: EvmClass  {
+class ChainKavaEVM: BaseChain  {
     
     override init() {
         super.init()
-        
-        supportCosmos = true
         
         name = "Kava"
         tag = "kava60"
         logo1 = "chainKavaEvm"
         logo2 = "chainKava2"
         apiName = "kava"
-        stakeDenom = "ukava"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
-        //for EVM tx and display
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ukava"
+        bechAccountPrefix = "kava"
+        validatorPrefix = "kavavaloper"
+        grpcHost = "grpc-kava.cosmostation.io"
+        
+        
+        supportEvm = true
         coinSymbol = "KAVA"
         coinGeckoId = "kava"
         coinLogo = "tokenKava"
-
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
-        bechAccountPrefix = "kava"
-        validatorPrefix = "kavavaloper"
-        
-        grpcHost = "grpc-kava.cosmostation.io"
         evmRpcURL = "https://rpc-kava-evm.cosmostation.io"
+        
+        initFetcher()
     }
     
 //    override func getExplorerAccount() -> URL? {
 //        if let urlString = getChainListParam()["evm_explorer"]["account"].string,
-//           let url = URL(string: urlString.replacingOccurrences(of: "${address}", with: evmAddress)) {
+//           let url = URL(string: urlString.replacingOccurrences(of: "${address}", with: evmAddress!)) {
 //            return url
 //        }
 //        return nil

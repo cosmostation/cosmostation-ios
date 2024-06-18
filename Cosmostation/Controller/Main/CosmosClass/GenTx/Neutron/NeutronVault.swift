@@ -104,7 +104,7 @@ class NeutronVault: BaseVC {
         
         if (vaultType == .Deposit) {
             let stakeDenom = selectedChain.stakeDenom!
-            let balanceAmount = selectedChain.balanceAmount(stakeDenom)
+            let balanceAmount = selectedChain.neutronFetcher!.balanceAmount(stakeDenom)
             if (txFee.amount[0].denom == stakeDenom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 if (feeAmount.compare(balanceAmount).rawValue > 0) {
@@ -117,7 +117,7 @@ class NeutronVault: BaseVC {
             }
             
         } else {
-            availableAmount = selectedChain.neutronDeposited
+            availableAmount = selectedChain.neutronFetcher!.neutronDeposited
         }
     }
     
@@ -216,7 +216,7 @@ class NeutronVault: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
                 do {
                     let simul = try await simulVaultTx(channel, auth!, onBindWasmMsg())
                     DispatchQueue.main.async {
@@ -241,8 +241,8 @@ class NeutronVault: BaseVC {
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             
             return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.bechAddress
-                $0.contract = self.selectedChain.vaultsList?[0]["address"].stringValue ?? ""
+                $0.sender = selectedChain.bechAddress!
+                $0.contract = self.selectedChain.neutronFetcher!.vaultsList?[0]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
                 $0.funds = [toCoin!]
             }
@@ -250,8 +250,8 @@ class NeutronVault: BaseVC {
             let jsonMsg: JSON = ["unbond" : ["amount" : toCoin!.amount]]
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.bechAddress
-                $0.contract = self.selectedChain.vaultsList?[0]["address"].stringValue ?? ""
+                $0.sender = selectedChain.bechAddress!
+                $0.contract = self.selectedChain.neutronFetcher!.vaultsList?[0]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             
@@ -287,7 +287,7 @@ extension NeutronVault: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, Pi
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
                    let response = try await broadcastVaultTx(channel, auth!, onBindWasmMsg()) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -330,7 +330,7 @@ extension NeutronVault {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.neutronFetcher!.getGrpc().0, port: selectedChain.neutronFetcher!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

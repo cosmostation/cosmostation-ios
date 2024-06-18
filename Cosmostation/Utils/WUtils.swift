@@ -106,16 +106,12 @@ public class WUtils {
         return attributedString1
     }
     
-    static func getMintscanPath(_ fromChain: CosmosClass, _ toChain: CosmosClass, _ denom: String) -> MintscanPath? {
+    static func getMintscanPath(_ fromChain: BaseChain, _ toChain: BaseChain, _ denom: String) -> MintscanPath? {
         let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom?.lowercased() == denom.lowercased() }).first
         var msToken: MintscanToken?
-        if let tokenInfo = fromChain.mintscanCw20Tokens.filter({ $0.address == denom }).first {
+        if let tokenInfo = fromChain.getGrpcfetcher()?.mintscanCw20Tokens.filter({ $0.address == denom }).first {
             msToken = tokenInfo
-        } 
-        
-//        else if let tokenInfo = fromChain.mintscanErc20Tokens.filter({ $0.address == denom }).first {
-//            msToken = tokenInfo
-//        }
+        }
         var result: MintscanPath?
         BaseData.instance.mintscanAssets?.forEach { asset in
             if (msAsset != nil) {
@@ -145,7 +141,7 @@ public class WUtils {
     }
     
     
-    static func isValidBechAddress(_ chain: CosmosClass, _ address: String?) -> Bool {
+    static func isValidBechAddress(_ chain: BaseChain, _ address: String?) -> Bool {
         if (address?.isEmpty == true) {
             return false
         }
@@ -455,15 +451,16 @@ public class WUtils {
         return result
     }
     
-    static func onParseVestingAccount(_ baseChain: CosmosClass) {
-        guard let authInfo = baseChain.cosmosAuth else {
+    static func onParseVestingAccount(_ baseChain: BaseChain) {
+        guard let grpcfetcher = baseChain.getGrpcfetcher(),
+              let authInfo = grpcfetcher.cosmosAuth else {
             return
         }
         
         if (authInfo.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)),
            let vestingAccount = try? Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: authInfo.value) {
 
-            baseChain.cosmosBalances?.forEach({ coin in
+            grpcfetcher.cosmosBalances?.forEach({ coin in
                 let denom = coin.denom
                 var dpBalance = NSDecimalNumber.zero
                 var dpVesting = NSDecimalNumber.zero
@@ -496,15 +493,15 @@ public class WUtils {
                 }
                 if (dpVesting.compare(NSDecimalNumber.zero).rawValue > 0) {
                     let vestingCoin = Cosmos_Base_V1beta1_Coin.with { $0.denom = denom; $0.amount = dpVesting.stringValue }
-                    baseChain.cosmosVestings.append(vestingCoin)
+                    grpcfetcher.cosmosVestings.append(vestingCoin)
                     var replace = -1
-                    for i in 0..<(baseChain.cosmosBalances?.count ?? 0) {
-                        if (baseChain.cosmosBalances![i].denom == denom) {
+                    for i in 0..<(grpcfetcher.cosmosBalances?.count ?? 0) {
+                        if (grpcfetcher.cosmosBalances![i].denom == denom) {
                             replace = i
                         }
                     }
                     if (replace >= 0) {
-                        baseChain.cosmosBalances![replace] = Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = dpBalance.stringValue }
+                        grpcfetcher.cosmosBalances![replace] = Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = dpBalance.stringValue }
                     }
                 }
             })
@@ -512,7 +509,7 @@ public class WUtils {
         } else if (authInfo.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)),
                     let vestingAccount = try? Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: authInfo.value) {
 
-            baseChain.cosmosBalances?.forEach({ (coin) in
+            grpcfetcher.cosmosBalances?.forEach({ (coin) in
                 let denom = coin.denom
                 var dpBalance = NSDecimalNumber.zero
                 var dpVesting = NSDecimalNumber.zero
@@ -556,15 +553,15 @@ public class WUtils {
                 
                 if (dpVesting.compare(NSDecimalNumber.zero).rawValue > 0) {
                     let vestingCoin = Cosmos_Base_V1beta1_Coin.with { $0.denom = denom; $0.amount = dpVesting.stringValue }
-                    baseChain.cosmosVestings.append(vestingCoin)
+                    grpcfetcher.cosmosVestings.append(vestingCoin)
                     var replace = -1
-                    for i in 0..<(baseChain.cosmosBalances?.count ?? 0) {
-                        if (baseChain.cosmosBalances![i].denom == denom) {
+                    for i in 0..<(grpcfetcher.cosmosBalances?.count ?? 0) {
+                        if (grpcfetcher.cosmosBalances![i].denom == denom) {
                             replace = i
                         }
                     }
                     if (replace >= 0) {
-                        baseChain.cosmosBalances![replace] = Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = dpBalance.stringValue }
+                        grpcfetcher.cosmosBalances![replace] = Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = dpBalance.stringValue }
                     }
                 }
             })
@@ -572,7 +569,7 @@ public class WUtils {
         } else if (authInfo.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)),
                     let vestingAccount = try? Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: authInfo.value) {
 
-            baseChain.cosmosBalances?.forEach({ (coin) in
+            grpcfetcher.cosmosBalances?.forEach({ (coin) in
                 let denom = coin.denom
                 var dpBalance = NSDecimalNumber.zero
                 var dpVesting = NSDecimalNumber.zero
@@ -610,15 +607,15 @@ public class WUtils {
                 
                 if (dpVesting.compare(NSDecimalNumber.zero).rawValue > 0) {
                     let vestingCoin = Cosmos_Base_V1beta1_Coin.with { $0.denom = denom; $0.amount = dpVesting.stringValue }
-                    baseChain.cosmosVestings.append(vestingCoin)
+                    grpcfetcher.cosmosVestings.append(vestingCoin)
                     var replace = -1
-                    for i in 0..<(baseChain.cosmosBalances?.count ?? 0) {
-                        if (baseChain.cosmosBalances![i].denom == denom) {
+                    for i in 0..<(grpcfetcher.cosmosBalances?.count ?? 0) {
+                        if (grpcfetcher.cosmosBalances![i].denom == denom) {
                             replace = i
                         }
                     }
                     if (replace >= 0) {
-                        baseChain.cosmosBalances![replace] = Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = dpBalance.stringValue }
+                        grpcfetcher.cosmosBalances![replace] = Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = dpBalance.stringValue }
                     }
                 }
             })
@@ -626,7 +623,7 @@ public class WUtils {
         } else if (authInfo.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)),
                   let vestingAccount = try? Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: authInfo.value) {
             
-            baseChain.cosmosBalances?.forEach({ (coin) in
+            grpcfetcher.cosmosBalances?.forEach({ (coin) in
                 let denom = coin.denom
                 var dpBalance = NSDecimalNumber.zero
                 var dpVesting = NSDecimalNumber.zero
@@ -665,20 +662,21 @@ public class WUtils {
                 
                 if (dpVesting.compare(NSDecimalNumber.zero).rawValue > 0) {
                     let vestingCoin = Cosmos_Base_V1beta1_Coin.with { $0.denom = denom; $0.amount = dpVesting.stringValue }
-                    baseChain.cosmosVestings.append(vestingCoin)
+                    grpcfetcher.cosmosVestings.append(vestingCoin)
                     var replace = -1
-                    for i in 0..<(baseChain.cosmosBalances?.count ?? 0) {
-                        if (baseChain.cosmosBalances![i].denom == denom) {
+                    for i in 0..<(grpcfetcher.cosmosBalances?.count ?? 0) {
+                        if (grpcfetcher.cosmosBalances![i].denom == denom) {
                             replace = i
                         }
                     }
                     if (replace >= 0) {
-                        baseChain.cosmosBalances![replace] = Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = dpBalance.stringValue }
+                        grpcfetcher.cosmosBalances![replace] = Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = dpBalance.stringValue }
                     }
                 }
             })
         }
     }
+    
     static func onParsePeriodicUnLockTime(_ vestingAccount: Cosmos_Vesting_V1beta1_PeriodicVestingAccount, _ position: Int) -> Int64 {
         var result = vestingAccount.startTime
         for i in 0..<(position + 1) {

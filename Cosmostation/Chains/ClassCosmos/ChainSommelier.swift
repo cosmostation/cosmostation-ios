@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainSommelier: CosmosClass  {
+class ChainSommelier: BaseChain {
     
     override init() {
         super.init()
@@ -18,13 +18,15 @@ class ChainSommelier: CosmosClass  {
         logo1 = "chainSommelier"
         logo2 = "chainSommelier2"
         apiName = "sommelier"
-        stakeDenom = "usomm"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        supportCosmosGrpc = true
+        stakeDenom = "usomm"
         bechAccountPrefix = "somm"
         validatorPrefix = "sommvaloper"
-        
         grpcHost = "grpc-sommelier.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

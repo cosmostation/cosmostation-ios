@@ -12,7 +12,7 @@ class CosmosReceiveVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,7 @@ class CosmosReceiveVC: BaseVC {
 extension CosmosReceiveVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (selectedChain is EvmClass) {
+        if (selectedChain.supportEvm) {
             return 2
         } else {
             return 1
@@ -41,7 +41,7 @@ extension CosmosReceiveVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (selectedChain is EvmClass) {
+        if (selectedChain.supportEvm) {
             if (section == 0) {
                 view.titleLabel.text = "My Address (EVM style)"
             } else {
@@ -70,10 +70,10 @@ extension CosmosReceiveVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var toCopyAddress = ""
-        if let chain = selectedChain as? EvmClass, indexPath.section == 0 {
-            toCopyAddress = chain.evmAddress
+        if selectedChain.supportEvm, indexPath.section == 0 {
+            toCopyAddress = selectedChain.evmAddress!
         } else {
-            toCopyAddress = selectedChain.bechAddress
+            toCopyAddress = selectedChain.bechAddress!
         }
         UIPasteboard.general.string = toCopyAddress.trimmingCharacters(in: .whitespacesAndNewlines)
         self.onShowToast(NSLocalizedString("address_copied", comment: ""))

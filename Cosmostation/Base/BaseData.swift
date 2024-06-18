@@ -369,6 +369,21 @@ extension BaseData {
     }
     
     @discardableResult
+    public func updateRefAddressesValue(_ refAddress: RefAddress) -> Int? {
+        let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
+                                            REFADDRESS_CHAIN_TAG == refAddress.chainTag)
+        if let address = try! database.pluck(query) {
+            let target = TABLE_REFADDRESS.filter(REFADDRESS_ID == address[REFADDRESS_ID])
+            return try? database.run(target.update(REFADDRESS_MAIN_AMOUNT <- refAddress.lastMainAmount,
+                                                   REFADDRESS_MAIN_VALUE <- refAddress.lastMainValue,
+                                                   REFADDRESS_COIN_CNT <- refAddress.lastCoinCnt,
+                                                   REFADDRESS_TOKEN_VALUE <- refAddress.lastTokenValue))
+        } else {
+            return Int(insertRefAddresses(refAddress))
+        }
+    }
+    
+    @discardableResult
     public func updateRefAddressesCoinValue(_ refAddress: RefAddress) -> Int? {
         let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
                                             REFADDRESS_CHAIN_TAG == refAddress.chainTag)
@@ -568,7 +583,7 @@ extension BaseData {
     }
     
     func deleteDisplayErc20s(_ id: Int64)  {
-        ALLEVMCLASS().forEach { evmChain in
+        ALLCHAINS().filter { $0.supportEvm == true }.forEach { evmChain in
             UserDefaults.standard.removeObject(forKey: String(id) + " " + evmChain.tag + " " + KEY_DISPLAY_ERC20_TOKENS)
         }
     }
@@ -705,11 +720,11 @@ extension BaseData {
         return UserDefaults.standard.integer(forKey: KEY_LAST_TAB)
     }
     
-    func setGrpcEndpoint(_ chain : CosmosClass, _ endpoint: String) {
+    func setGrpcEndpoint(_ chain : BaseChain, _ endpoint: String) {
         UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + chain.name)
     }
     
-    func setEvmRpcEndpoint(_ chain : EvmClass, _ endpoint: String) {
+    func setEvmRpcEndpoint(_ chain : BaseChain, _ endpoint: String) {
         UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_EVM_RPC_ENDPOINT +  " : " + chain.name)
     }
     

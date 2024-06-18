@@ -20,7 +20,7 @@ class KavaEarnListVC: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var earnBtn: BaseButton!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var myDeposits = [Cosmos_Base_V1beta1_Coin]()
 
     override func viewDidLoad() {
@@ -54,7 +54,7 @@ class KavaEarnListVC: BaseVC {
         myDeposits.removeAll()
         Task {
             let channel = getConnection()
-            if let myDeposit = try? await fetchEarnMyDeposit(channel, selectedChain.bechAddress) {
+            if let myDeposit = try? await fetchEarnMyDeposit(channel, selectedChain.bechAddress!) {
                 myDeposit?.deposits.forEach { deposit in
                     deposit.value.forEach { rawCoin in
                         if (rawCoin.denom.starts(with: "bkava-")) {
@@ -93,7 +93,7 @@ class KavaEarnListVC: BaseVC {
         let valOpAddress = target?.denom.replacingOccurrences(of: "bkava-", with: "")
         let earnDeposit = KavaEarnDepositAction(nibName: "KavaEarnDepositAction", bundle: nil)
         earnDeposit.selectedChain = selectedChain
-        earnDeposit.toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == valOpAddress }).first
+        earnDeposit.toValidator = selectedChain.getGrpcfetcher()!.cosmosValidators.filter({ $0.operatorAddress == valOpAddress }).first
         earnDeposit.modalTransitionStyle = .coverVertical
         self.present(earnDeposit, animated: true)
     }
@@ -180,7 +180,7 @@ extension KavaEarnListVC {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

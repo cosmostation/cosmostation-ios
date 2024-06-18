@@ -18,7 +18,7 @@ class KavaSwapListVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
     var swapParam: Kava_Swap_V1beta1_Params?
     var swapList = [Kava_Swap_V1beta1_PoolResponse]()
@@ -58,7 +58,7 @@ class KavaSwapListVC: BaseVC {
         Task {
             let channel = getConnection()
             if var swapPools = try? await self.fetchSwapList(channel),
-               var myDeposit = try? await self.fetchSwapMyDeposit(channel, selectedChain.bechAddress) {
+               var myDeposit = try? await self.fetchSwapMyDeposit(channel, selectedChain.bechAddress!) {
                 myDeposit?.sort {
                     return $0.getUsdxAmount().compare($1.getUsdxAmount()).rawValue > 0 ? true : false
                 }
@@ -198,7 +198,7 @@ extension KavaSwapListVC {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

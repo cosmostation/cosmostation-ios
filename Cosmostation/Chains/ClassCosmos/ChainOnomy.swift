@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainOnomy: CosmosClass  {
+class ChainOnomy: BaseChain  {
     
     override init() {
         super.init()
@@ -18,12 +18,15 @@ class ChainOnomy: CosmosClass  {
         logo1 = "chainOnomy"
         logo2 = "chainOnomy2"
         apiName = "onomy-protocol"
-        stakeDenom = "anom"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "anom"
         bechAccountPrefix = "onomy"
         validatorPrefix = "onomyvaloper"
-        
         grpcHost = "grpc-onomy-protocol.cosmostation.io"
+        
+        initFetcher()
     }
 }

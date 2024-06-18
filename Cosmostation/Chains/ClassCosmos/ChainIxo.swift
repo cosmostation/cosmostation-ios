@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainIxo: CosmosClass  {
+class ChainIxo: BaseChain  {
     
     override init() {
         super.init()
@@ -18,12 +18,15 @@ class ChainIxo: CosmosClass  {
         logo1 = "chainIxo"
         logo2 = "chainIxo2"
         apiName = "ixo"
-        stakeDenom = "uixo"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uixo"
         bechAccountPrefix = "ixo"
         validatorPrefix = "ixovaloper"
-        
         grpcHost = "grpc-ixo.cosmostation.io"
+        
+        initFetcher()
     }
 }

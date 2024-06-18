@@ -41,7 +41,7 @@ class CosmosRewardAddress: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -78,7 +78,7 @@ class CosmosRewardAddress: BaseVC {
     }
     
     func onInitView() {
-        currentAddressLabel.text = selectedChain.rewardAddress
+        currentAddressLabel.text = selectedChain.getGrpcfetcher()!.rewardAddress
         currentAddressLabel.adjustsFontSizeToFitWidth = true
     }
     
@@ -190,7 +190,7 @@ class CosmosRewardAddress: BaseVC {
         }
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
                 do {
                     let simul = try await simulateTx(channel, auth!)
                     DispatchQueue.main.async {
@@ -226,7 +226,7 @@ extension CosmosRewardAddress: AddressLegacyDelegate, MemoDelegate, BaseSheetDel
     }
     func onInputedAddress(_ address: String, _ memo: String?) {
         newRewardAddress = Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress.with {
-            $0.delegatorAddress = selectedChain.bechAddress
+            $0.delegatorAddress = selectedChain.bechAddress!
             $0.withdrawAddress = address
         }
         onUpdateToAddressView()
@@ -243,7 +243,7 @@ extension CosmosRewardAddress: AddressLegacyDelegate, MemoDelegate, BaseSheetDel
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
                    let response = try await broadcastTx(channel, auth!) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -284,7 +284,7 @@ extension CosmosRewardAddress {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainMedibloc: CosmosClass  {
+class ChainMedibloc: BaseChain  {
     
     override init() {
         super.init()
@@ -18,13 +18,16 @@ class ChainMedibloc: CosmosClass  {
         logo1 = "chainMedibloc"
         logo2 = "chainMedibloc2"
         apiName = "medibloc"
-        stakeDenom = "umed"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/371'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "umed"
         bechAccountPrefix = "panacea"
         validatorPrefix = "panaceavaloper"
-        
         grpcHost = "grpc-medibloc.cosmostation.io"
+        
+        initFetcher()
     }
 }
 

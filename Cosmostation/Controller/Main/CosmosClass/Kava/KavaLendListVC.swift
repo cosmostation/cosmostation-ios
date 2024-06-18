@@ -18,7 +18,7 @@ class KavaLendListVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
     var hardParams: Kava_Hard_V1beta1_Params?
     var hardInterestRates: [Kava_Hard_V1beta1_MoneyMarketInterestRate]?
@@ -62,8 +62,8 @@ class KavaLendListVC: BaseVC {
                let hardInterestRate = try? await fetchLendingInterestRate(channel),
                let hardTotalDeposit = try? await fetchLendingTotalDeposit(channel),
                let hardTotalBorrow = try? await fetchLendingTotalBorrow(channel),
-               let myDeposit = try? await fetchLendingMyDeposit(channel, selectedChain.bechAddress),
-               let myBorrow = try? await fetchLendingMyBorrow(channel, selectedChain.bechAddress) {
+               let myDeposit = try? await fetchLendingMyDeposit(channel, selectedChain.bechAddress!),
+               let myBorrow = try? await fetchLendingMyBorrow(channel, selectedChain.bechAddress!) {
                 
                 self.hardParams = hardParam?.params
                 self.hardInterestRates = hardInterestRate?.interestRates
@@ -297,7 +297,7 @@ extension KavaLendListVC {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

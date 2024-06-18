@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainNyx: CosmosClass  {
+class ChainNyx: BaseChain  {
     
     override init() {
         super.init()
@@ -18,12 +18,15 @@ class ChainNyx: CosmosClass  {
         logo1 = "chainNyx"
         logo2 = "chainNyx2"
         apiName = "nyx"
-        stakeDenom = "unyx"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "unyx"
         bechAccountPrefix = "n"
         validatorPrefix = "nvaloper"
-        
         grpcHost = "grpc-nyx.cosmostation.io"
+        
+        initFetcher()
     }
 }

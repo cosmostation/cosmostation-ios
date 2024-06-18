@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainLike: CosmosClass  {
+class ChainLike: BaseChain  {
     
     override init() {
         super.init()
@@ -18,12 +18,15 @@ class ChainLike: CosmosClass  {
         logo1 = "chainLike"
         logo2 = "chainLike2"
         apiName = "likecoin"
-        stakeDenom = "nanolike"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "nanolike"
         bechAccountPrefix = "like"
         validatorPrefix = "likevaloper"
-        
         grpcHost = "grpc-likecoin.cosmostation.io"
+        
+        initFetcher()
     }
 }

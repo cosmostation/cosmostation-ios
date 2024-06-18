@@ -38,6 +38,9 @@ class Portfolio2Cell: UITableViewCell {
         selectionStyle = .none
         
         rootView.setBlur()
+        valuecurrencyLabel.text = ""
+        valueLabel.text = ""
+        assetCntLabel.text = ""
         priceCurrencyLabel.text = ""
         priceLabel.text = ""
         priceChangeLabel.text = ""
@@ -53,9 +56,8 @@ class Portfolio2Cell: UITableViewCell {
     override func prepareForReuse() {
         rootView.setBlur()
         valuecurrencyLabel.text = ""
-        valuecurrencyLabel.isHidden = true
-        valueLabel.isHidden = true
-        assetCntLabel.isHidden = true
+        valueLabel.text = ""
+        assetCntLabel.text = ""
         legacyTag.isHidden = true
         cw20Tag.isHidden = true
         nftTag.isHidden = true
@@ -74,11 +76,19 @@ class Portfolio2Cell: UITableViewCell {
         evmAddressLabel.layer.removeAllAnimations()
     }
     
-    func bindCosmosClassChain(_ account: BaseAccount, _ chain: CosmosClass) {
+    func bindChain(_ account: BaseAccount, _ chain: BaseChain) {
         logoImg1.image = UIImage.init(named: chain.logo1)
         logoImg2.image = UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
-        bechAddressLabel.text = chain.bechAddress
+        if (chain.isCosmos()) {
+            bechAddressLabel.text = chain.bechAddress
+        }
+        if (chain.supportEvm) {
+            evmAddressLabel.text = chain.evmAddress
+        }
+        if (chain.isCosmos() && chain.supportEvm) {
+            starEvmAddressAnimation()
+        }
         
         legacyTag.isHidden = chain.isDefault
         cw20Tag.isHidden = !chain.supportCw20
@@ -96,6 +106,7 @@ class Portfolio2Cell: UITableViewCell {
             valueLoadingLabel.isHidden = true
             assetCntLoadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             assetCntLoadingLabel.isHidden = true
+            
             if (BaseData.instance.getHideValue()) {
                 valuecurrencyLabel.text = ""
                 valueLabel.font = .fontSize14Bold
@@ -105,83 +116,32 @@ class Portfolio2Cell: UITableViewCell {
                 WDP.dpValue(chain.allValue(), valuecurrencyLabel, valueLabel)
             }
             
-            let coinCntString = String(chain.cosmosBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0) + " Coins"
-            if (chain.supportCw20) {
-                let tokenCnt = chain.mintscanCw20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
-                if (tokenCnt == 0) {
-                    assetCntLabel.text = coinCntString
-                } else {
-                    assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
+            var coinCntString = ""
+            var tokenCnt = 0
+            if (chain.name == "OKT") {
+                if let lcdFetcher = chain.getLcdfetcher() {
+                    coinCntString = String(lcdFetcher.lcdAccountInfo.oktCoins?.count ?? 0) + " Coins"
                 }
-            } else {
-                assetCntLabel.text = coinCntString
-            }
-            valuecurrencyLabel.isHidden = false
-            valueLabel.isHidden = false
-            assetCntLabel.isHidden = false
-            
-        } else {
-            valueLoadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
-            valueLoadingLabel.isHidden = false
-            assetCntLoadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color04, .color03]), animation: skeletonAnimation, transition: .none)
-            assetCntLoadingLabel.isHidden = false
-        }
-        
-        if let stakeDenom = chain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
-            WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
-            priceCurrencyLabel.isHidden = false
-            priceLabel.isHidden = false
-            priceChangeLabel.isHidden = false
-            priceChangePercentLabel.isHidden = false
-        }
-    }
-    
-    func bindEvmClassChain(_ account: BaseAccount, _ chain: EvmClass) {
-        logoImg1.image = UIImage.init(named: chain.logo1)
-        logoImg2.image = UIImage.init(named: chain.logo2)
-        nameLabel.text = chain.name.uppercased()
-        evmAddressLabel.text = chain.evmAddress
-        if (chain.supportCosmos == true) {
-            bechAddressLabel.text = chain.bechAddress
-            starEvmAddressAnimation()
-        }
-        
-        legacyTag.isHidden = chain.isDefault
-        
-        if (chain.fetchState == .Fail) {
-            valueLoadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            valueLoadingLabel.isHidden = true
-            assetCntLoadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            assetCntLoadingLabel.isHidden = true
-            reposeErrorLabel.isHidden = false
-            
-        } else if (chain.fetchState == .Success) {
-            valueLoadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            valueLoadingLabel.isHidden = true
-            assetCntLoadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            assetCntLoadingLabel.isHidden = true
-            
-            if (BaseData.instance.getHideValue()) {
-                valuecurrencyLabel.text = ""
-                valueLabel.font = .fontSize14Bold
-                valueLabel.text = "✱✱✱✱"
-            } else {
-                valueLabel.font = .fontSize16Bold
-                WDP.dpValue(chain.allValue(), valuecurrencyLabel, valueLabel)
+                if let evmFetcher = chain.getEvmfetcher() {
+                    tokenCnt = evmFetcher.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
+                }
+                
+            } else if let grpcFetcher = chain.getGrpcfetcher() {
+                coinCntString = String(grpcFetcher.cosmosBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0) + " Coins"
+                if (chain.supportCw20) {
+                    tokenCnt = grpcFetcher.mintscanCw20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
+                }
+                
+            } else if let evmFetcher = chain.getEvmfetcher() {
+                coinCntString = String(evmFetcher.evmBalances != NSDecimalNumber.zero ? 1 : 0) + " Coins"
+                tokenCnt = evmFetcher.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
             }
             
-            let coinCntString = String(chain.evmBalances != NSDecimalNumber.zero ? 1 : 0) + " Coins"
-            let tokenCnt = chain.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
             if (tokenCnt == 0) {
                 assetCntLabel.text = coinCntString
             } else {
                 assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
             }
-            valuecurrencyLabel.isHidden = false
-            valueLabel.isHidden = false
-            assetCntLabel.isHidden = false
             
         } else {
             valueLoadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
@@ -190,8 +150,22 @@ class Portfolio2Cell: UITableViewCell {
             assetCntLoadingLabel.isHidden = false
         }
         
-        WDP.dpPrice(chain.coinGeckoId, priceCurrencyLabel, priceLabel)
-        WDP.dpPriceChanged(chain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+        //DP Price
+        if (chain.name == "OKT") {
+            WDP.dpPrice(OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+            
+        } else if (chain.isCosmos()) {
+            if let stakeDenom = chain.stakeDenom,
+               let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+            }
+            
+        } else if (chain.supportEvm) {
+            WDP.dpPrice(chain.coinGeckoId, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(chain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+        }
     }
     
     func starEvmAddressAnimation() {

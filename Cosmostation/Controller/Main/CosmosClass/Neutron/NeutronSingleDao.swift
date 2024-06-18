@@ -152,7 +152,7 @@ extension NeutronSingleDao: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"CosmosProposalCell") as! CosmosProposalCell
-        let module = selectedChain.daosList?[0]["proposal_modules"][0]
+        let module = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"][0]
         var proposal: JSON!
         if (indexPath.section == 0) {
             if (isShowAll) {
@@ -189,7 +189,7 @@ extension NeutronSingleDao: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contAddress = selectedChain.daosList?[0]["proposal_modules"][0]["address"].string ?? ""
+        let contAddress = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"][0]["address"].string ?? ""
         var proposal: JSON!
         if (indexPath.section == 0) {
             if (isShowAll) {
@@ -238,7 +238,7 @@ extension NeutronSingleDao {
     
     func fetchProposals() {
         Task {
-            let contAddress = selectedChain.daosList?[0]["proposal_modules"][0]["address"].string ?? ""
+            let contAddress = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"][0]["address"].string ?? ""
             let query: JSON = ["reverse_proposals" : JSON()]
             let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
@@ -275,7 +275,7 @@ extension NeutronSingleDao {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.neutronFetcher!.getGrpc().0, port: selectedChain.neutronFetcher!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

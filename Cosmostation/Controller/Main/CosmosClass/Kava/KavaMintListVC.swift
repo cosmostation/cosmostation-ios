@@ -18,7 +18,7 @@ class KavaMintListVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
     var cdpParam: Kava_Cdp_V1beta1_Params?
     var myCollateralParamList = [Kava_Cdp_V1beta1_CollateralParam]()
@@ -57,7 +57,7 @@ class KavaMintListVC: BaseVC {
         Task {
             let channel = getConnection()
             if let cdpParam = try? await fetchMintParam(channel),
-               let myCdps = try? await fetchMyCdps(channel, selectedChain.bechAddress) {
+               let myCdps = try? await fetchMyCdps(channel, selectedChain.bechAddress!) {
                 
                 cdpParam?.collateralParams.forEach({ collateralParam in
                     if (myCdps?.filter({ $0.type == collateralParam.type }).count ?? 0 > 0) {
@@ -239,7 +239,7 @@ extension KavaMintListVC {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

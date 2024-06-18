@@ -20,10 +20,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var sheetType: SheetType?
     var sheetDelegate: BaseSheetDelegate?
     
-    var targetChain: CosmosClass!
-    var targetEvmChain: EvmClass!
-    var swapChains = Array<CosmosClass>()
-    var swapChainsSearch = Array<CosmosClass>()
+    var targetChain: BaseChain!
+    var targetEvmChain: BaseChain!
+    var swapChains = Array<BaseChain>()
+    var swapChainsSearch = Array<BaseChain>()
     var swapAssets = Array<JSON>()
     var swapAssetsSearch = Array<JSON>()
     var swapBalance = Array<Cosmos_Base_V1beta1_Coin>()
@@ -34,7 +34,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var delegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     var delegation: Cosmos_Staking_V1beta1_DelegationResponse!
     var unbondingEnrtyPosition: Int?
-    var cosmosChainList = Array<CosmosClass>()
+    var cosmosChainList = Array<BaseChain>()
     var nameservices = Array<NameService>()
     var oktValidators = [JSON]()
     
@@ -160,12 +160,12 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                 swapAssets.sort {
                     if ($0["symbol"] == "ATOM") { return true }
                     if ($1["symbol"] == "ATOM") { return false }
-                    let value0 = targetChain.balanceValue($0["denom"].stringValue)
-                    let value1 = targetChain.balanceValue($1["denom"].stringValue)
+                    let value0 = targetChain.getGrpcfetcher()!.balanceValue($0["denom"].stringValue)
+                    let value1 = targetChain.getGrpcfetcher()!.balanceValue($1["denom"].stringValue)
                     if (value0.compare(value1).rawValue > 0 ) { return true }
                     if (value0.compare(value1).rawValue < 0 ) { return false }
-                    let amount0 = targetChain.balanceAmount($0["denom"].stringValue)
-                    let amount1 = targetChain.balanceAmount($1["denom"].stringValue)
+                    let amount0 = targetChain.getGrpcfetcher()!.balanceAmount($0["denom"].stringValue)
+                    let amount1 = targetChain.getGrpcfetcher()!.balanceAmount($1["denom"].stringValue)
                     if (amount0.compare(amount1).rawValue > 0 ) { return true }
                     if (amount0.compare(amount1).rawValue < 0 ) { return false }
                     return $0["symbol"].stringValue < $1["symbol"].stringValue
@@ -185,12 +185,12 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                 swapAssets.sort {
                     if ($0["symbol"] == "ATOM") { return true }
                     if ($1["symbol"] == "ATOM") { return false }
-                    let value0 = targetChain.balanceValue($0["denom"].stringValue)
-                    let value1 = targetChain.balanceValue($1["denom"].stringValue)
+                    let value0 = targetChain.getGrpcfetcher()!.balanceValue($0["denom"].stringValue)
+                    let value1 = targetChain.getGrpcfetcher()!.balanceValue($1["denom"].stringValue)
                     if (value0.compare(value1).rawValue > 0 ) { return true }
                     if (value0.compare(value1).rawValue < 0 ) { return false }
-                    let amount0 = targetChain.balanceAmount($0["denom"].stringValue)
-                    let amount1 = targetChain.balanceAmount($1["denom"].stringValue)
+                    let amount0 = targetChain.getGrpcfetcher()!.balanceAmount($0["denom"].stringValue)
+                    let amount1 = targetChain.getGrpcfetcher()!.balanceAmount($1["denom"].stringValue)
                     if (amount0.compare(amount1).rawValue > 0 ) { return true }
                     if (amount0.compare(amount1).rawValue < 0 ) { return false }
                     return $0["symbol"].stringValue < $1["symbol"].stringValue
@@ -218,9 +218,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SelectUnStakeValidator) {
             sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
-            delegations = targetChain.cosmosDelegations
+            delegations = targetChain.getGrpcfetcher()!.cosmosDelegations
             delegations.forEach { delegation in
-                if let validator = targetChain.cosmosValidators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
+                if let validator = targetChain.getGrpcfetcher()!.cosmosValidators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
                     validators.append(validator)
                 }
             }

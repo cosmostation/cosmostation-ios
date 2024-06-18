@@ -163,7 +163,7 @@ class NeutronVote: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
                 do {
                     let simul = try await simulateTx(channel, auth!)
                     DispatchQueue.main.async {
@@ -188,8 +188,8 @@ class NeutronVote: BaseVC {
             let jsonMsg: JSON = ["vote" : ["proposal_id" : single["id"].int64Value, "vote" : single["myVote"].stringValue]]
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.bechAddress
-                $0.contract = selectedChain.daosList?[0]["proposal_modules"].arrayValue[0]["address"].stringValue ?? ""
+                $0.sender = selectedChain.bechAddress!
+                $0.contract = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"].arrayValue[0]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             result.append(msg)
@@ -198,8 +198,8 @@ class NeutronVote: BaseVC {
             let jsonMsg: JSON = ["vote" : ["proposal_id" : multi["id"].int64Value, "vote" : ["option_id" : multi["myVote"].intValue ]]]
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.bechAddress
-                $0.contract = selectedChain.daosList?[0]["proposal_modules"].arrayValue[1]["address"].stringValue ?? ""
+                $0.sender = selectedChain.bechAddress!
+                $0.contract = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"].arrayValue[1]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             result.append(msg)
@@ -208,8 +208,8 @@ class NeutronVote: BaseVC {
             let jsonMsg: JSON = ["vote" : ["proposal_id" : overrule["id"].int64Value, "vote" : overrule["myVote"].stringValue]]
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.bechAddress
-                $0.contract = selectedChain.daosList?[0]["proposal_modules"].arrayValue[2]["address"].stringValue ?? ""
+                $0.sender = selectedChain.bechAddress!
+                $0.contract = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"].arrayValue[2]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             result.append(msg)
@@ -330,7 +330,7 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
                    let response = try await broadcastTx(channel, auth!) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -374,7 +374,7 @@ extension NeutronVote {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.neutronFetcher!.getGrpc().0, port: selectedChain.neutronFetcher!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

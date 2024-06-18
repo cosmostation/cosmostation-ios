@@ -29,7 +29,7 @@ class NeutronDaoVC: BaseVC {
         super.viewDidLoad()
 
         setTabbarView()
-        fetchMyVotes(selectedChain.bechAddress)
+        fetchMyVotes(selectedChain.bechAddress!)
         
         showAll = UIBarButtonItem(image: UIImage(named: "iconFilterOn"), style: .plain, target: self, action: #selector(onClickFilterOn))
         filtered = UIBarButtonItem(image: UIImage(named: "iconFilterOff"), style: .plain, target: self, action: #selector(onClickFilterOff))

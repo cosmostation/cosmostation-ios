@@ -19,6 +19,10 @@ public class BaseAccount {
     var lastHDPath = ""
     var order: Int64 = 999
     
+    
+    var allChains = [BaseChain]()
+    var dpTags = [String]()
+    
     //using for generate new aacount
     init(_ name: String, _ type: BaseAccountType, _ lastPath: String) {
         self.uuid = UUID().uuidString
@@ -37,59 +41,233 @@ public class BaseAccount {
         self.order = order
     }
     
-    lazy var toDisplayCTags = [String]()
-    lazy var allCosmosClassChains = [CosmosClass]()
-    
-    lazy var toDisplayETags = [String]()
-    lazy var allEvmClassChains = [EvmClass]()
+//    lazy var toDisplayCTags = [String]()
+//    lazy var allCosmosClassChains = [CosmosClass]()
+//    
+//    lazy var toDisplayETags = [String]()
+//    lazy var allEvmClassChains = [EvmClass]()
     
     func getRefreshName() -> String {
         self.name = BaseData.instance.selectAccount(id)?.name ?? ""
         return self.name
     }
     
-    func loadDisplayCTags() {
-        toDisplayCTags = BaseData.instance.getDisplayCosmosChainTags(self.id)
-    }
+//    func loadDisplayCTags() {
+//        toDisplayCTags = BaseData.instance.getDisplayCosmosChainTags(self.id)
+//    }
+//    
+//    func loadDisplayETags() {
+//        toDisplayETags = BaseData.instance.getDisplayEvmChainTags(self.id)
+//    }
     
-    func loadDisplayETags() {
-        toDisplayETags = BaseData.instance.getDisplayEvmChainTags(self.id)
+    func loadDisplayTags() {
+        dpTags = BaseData.instance.getDisplayCosmosChainTags(self.id)
     }
     
     func initAccount() {
-        loadDisplayETags()
-        loadDisplayCTags()
+//        loadDisplayETags()
+//        loadDisplayCTags()
+        loadDisplayTags()
+//        print("initAccount ", dpTags.count)
         
-        allCosmosClassChains = ALLCOSMOSCLASS()
         if (type == .onlyPrivateKey) {
-            allCosmosClassChains = ALLCOSMOSCLASS().filter({ $0.isDefault == true || $0.tag == "okt996_Secp"})
+            allChains = ALLCHAINS()
+        } else {
+            allChains = ALLCHAINS()
         }
-        initSortCosmosChains()
         
-        allEvmClassChains = ALLEVMCLASS()
-        initSortEvmChains()
+        //YONG4 value
+        allChains.sort {
+            if ($0.tag == "cosmos118") { return true }
+            if ($1.tag == "cosmos118") { return false }
+            return false
+        }
+        initSortChains()
+        
+//        allChains = ALLCHAINS(onlymainnet: false, onlydefault: false)
+//        if (type == .onlyPrivateKey) {
+//            allCosmosClassChains = ALLCOSMOSCLASS().filter({ $0.isDefault == true || $0.tag == "okt996_Secp"})
+//        }
+//        initSortCosmosChains()
+//        
+//        allEvmClassChains = ALLEVMCLASS()
+//        initSortEvmChains()
+        
     }
+    
+    func getDpChains() -> [BaseChain] {
+        return allChains.filter { chain in
+            dpTags.contains(chain.tag)
+        }
+    }
+    
+    func initAllKeys() async -> [BaseChain] {
+        let result = ALLCHAINS()
+        let keychain = BaseData.instance.getKeyChain()
+        if (type == .withMnemonic) {
+            if let secureData = try? keychain.getString(uuid.sha1()),
+               let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
+                result.forEach { chain in
+                    if (chain.publicKey == nil) {
+                        chain.setInfoWithSeed(seed, lastHDPath)
+                    }
+                }
+            }
+            
+        } else if (type == .onlyPrivateKey) {
+            if let secureKey = try? keychain.getString(uuid.sha1()) {
+                result.forEach { chain in
+                    if (chain.publicKey == nil) {
+                        chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                    }
+                }
+            }
+        }
+        return result
+    }
+    
+    func fetchDpChains() {
+        let keychain = BaseData.instance.getKeyChain()
+        if (type == .withMnemonic) {
+            if let secureData = try? keychain.getString(uuid.sha1()),
+               let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
+                Task {
+                    await getDpChains().concurrentForEach { chain in
+                        if (chain.publicKey == nil) {
+                            chain.setInfoWithSeed(seed, self.lastHDPath)
+                        }
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
+                            chain.fetchData(self.id)
+                        }
+                    }
+                }
+            }
+
+        } else if (type == .onlyPrivateKey) {
+            if let secureKey = try? keychain.getString(uuid.sha1()) {
+                Task {
+                    await getDpChains().concurrentForEach { chain in
+                        if (chain.publicKey == nil) {
+                            chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                        }
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
+                            chain.fetchData(self.id)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchAllChains() {
+        let keychain = BaseData.instance.getKeyChain()
+        if (type == .withMnemonic) {
+            if let secureData = try? keychain.getString(uuid.sha1()),
+               let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
+                Task {
+                    await allChains.concurrentForEach { chain in
+                        if (chain.publicKey == nil) {
+                            chain.setInfoWithSeed(seed, self.lastHDPath)
+                        }
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
+                            chain.fetchData(self.id)
+                        }
+                    }
+                }
+            }
+
+        } else if (type == .onlyPrivateKey) {
+            if let secureKey = try? keychain.getString(uuid.sha1()) {
+                Task {
+                    await allChains.concurrentForEach { chain in
+                        if (chain.publicKey == nil) {
+                            chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
+                        }
+                        if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
+                            chain.fetchData(self.id)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchForPreCreate(_ seed: Data? = nil, _ privateKeyString: String? = nil) {
+        allChains = ALLCHAINS()
+        if (seed != nil) {
+            Task {
+                await allChains.concurrentForEach { chain in
+                    if (chain.publicKey == nil) {
+                        chain.setInfoWithSeed(seed!, self.lastHDPath)
+                    }
+                    if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
+                        chain.fetchPreCreate()
+                    }
+                }
+            }
+            
+        } else if (privateKeyString != nil) {
+            Task {
+                await allChains.concurrentForEach { chain in
+                    if (chain.publicKey == nil) {
+                        chain.setInfoWithPrivateKey(Data.fromHex(privateKeyString!)!)
+                    }
+                    if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
+                        chain.fetchPreCreate()
+                    }
+                }
+            }
+        }
+    }
+    
+    func initSortChains() {
+        allChains.sort {
+            if ($0.tag == "cosmos118") { return true }
+            if ($1.tag == "cosmos118") { return false }
+            let ref0 = BaseData.instance.selectRefAddress(id, $0.tag)?.lastUsdValue() ?? NSDecimalNumber.zero
+            let ref1 = BaseData.instance.selectRefAddress(id, $1.tag)?.lastUsdValue() ?? NSDecimalNumber.zero
+            return ref0.compare(ref1).rawValue > 0 ? true : false
+        }
+        allChains.sort {
+            if ($0.tag == "cosmos118") { return true }
+            if ($1.tag == "cosmos118") { return false }
+            if (dpTags.contains($0.tag) == true && dpTags.contains($1.tag) == false) { return true }
+            return false
+        }
+    }
+    
+    func reSortChains() {
+        allChains.sort {
+            if ($0.tag == "cosmos118") { return true }
+            if ($1.tag == "cosmos118") { return false }
+            return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
+        }
+    }
+    
     
 
     
     func updateAllValue() {
-        getDisplayEvmChains().forEach { chain in
-            chain.allCoinValue = chain.allCoinValue()
-            chain.allCoinUSDValue = chain.allCoinValue(true)
-            chain.allTokenValue = chain.allTokenValue()
-            chain.allTokenUSDValue = chain.allTokenValue(true)
-        }
-        
-        getDisplayCosmosChains().forEach { chain in
-            chain.allCoinValue = chain.allCoinValue()
-            chain.allCoinUSDValue = chain.allCoinValue(true)
-            chain.allTokenValue = chain.allTokenValue()
-            chain.allTokenUSDValue = chain.allTokenValue(true)
+        getDpChains().forEach { chain in
+            if let grpcFetcher = chain.getGrpcfetcher() {
+                chain.allCoinValue = grpcFetcher.allCoinValue()
+                chain.allCoinUSDValue = grpcFetcher.allCoinValue(true)
+                chain.allTokenValue = grpcFetcher.allTokenValue()
+                chain.allTokenUSDValue = grpcFetcher.allTokenValue(true)
+                
+            } else if let evmFetcher = chain.getEvmfetcher() {
+                chain.allCoinValue = evmFetcher.allCoinValue()
+                chain.allCoinUSDValue = evmFetcher.allCoinValue(true)
+                chain.allTokenValue = evmFetcher.allTokenValue()
+                chain.allTokenUSDValue = evmFetcher.allTokenValue(true)
+            }
         }
     }
 }
 
 extension BaseAccount {
+    
+    /*
     func getDisplayCosmosChains() -> [CosmosClass] {
         return allCosmosClassChains.filter { cosmosChain in
             toDisplayCTags.contains(cosmosChain.tag)
@@ -220,9 +398,11 @@ extension BaseAccount {
             return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
         }
     }
+    */
 }
 
 extension BaseAccount {
+    /*
     func getDisplayEvmChains() -> [EvmClass] {
         return allEvmClassChains.filter { evmChain in
             toDisplayETags.contains(evmChain.tag)
@@ -319,46 +499,12 @@ extension BaseAccount {
             return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
         }
     }
+     */
 }
 
 extension BaseAccount {
     
-    func initKeysforSwap() async -> [CosmosClass] {
-        var result = [CosmosClass]()
-        let keychain = BaseData.instance.getKeyChain()
-        if (type == .withMnemonic) {
-            ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
-                result.append(chain)
-            }
-            ALLEVMCLASS().filter({ $0.isDefault == true && $0.supportCosmos == true }).forEach { chain in
-                result.append(chain)
-            }
-            if let secureData = try? keychain.getString(uuid.sha1()),
-               let seed = secureData?.components(separatedBy: ":").last?.hexadecimal {
-                result.forEach { chain in
-                    if (chain.bechAddress.isEmpty) {
-                        chain.setInfoWithSeed(seed, lastHDPath)
-                    }
-                }
-            }
-            
-        } else if (type == .onlyPrivateKey) {
-            ALLCOSMOSCLASS().filter({ $0.isDefault == true }).forEach { chain in
-                result.append(chain)
-            }
-            ALLEVMCLASS().filter({ $0.isDefault == true && $0.supportCosmos == true }).forEach { chain in
-                result.append(chain)
-            }
-            if let secureKey = try? keychain.getString(uuid.sha1()) {
-                result.forEach { chain in
-                    if (chain.bechAddress.isEmpty) {
-                        chain.setInfoWithPrivateKey(Data.fromHex(secureKey!)!)
-                    }
-                }
-            }
-        }
-        return result
-    }
+    /*
     
     func initKeyforCheck() async -> ([EvmClass], [CosmosClass]) {
         var evmResult = [EvmClass]()
@@ -461,6 +607,7 @@ extension BaseAccount {
             }
         }
     }
+     */
 }
 
 

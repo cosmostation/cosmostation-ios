@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainGovgen: CosmosClass  {
+class ChainGovgen: BaseChain  {
     
     override init() {
         super.init()
@@ -18,12 +18,15 @@ class ChainGovgen: CosmosClass  {
         logo1 = "chainGovgen"
         logo2 = "chainGovgen2"
         apiName = "govgen"
-        stakeDenom = "ugovgen"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ugovgen"
         bechAccountPrefix = "govgen"
         validatorPrefix = "govgenvaloper"
-        
         grpcHost = "grpc-govgen.cosmostation.io"
+        
+        initFetcher()
     }
 }

@@ -17,7 +17,7 @@ class CosmosEcosystemVC: BaseVC {
     @IBOutlet weak var emptyDataView: UIView!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var ecosystemList: [JSON]?
 
     override func viewDidLoad() {
@@ -102,9 +102,7 @@ extension CosmosEcosystemVC: UICollectionViewDelegate, UICollectionViewDataSourc
            let linkUrl = URL(string: link) {
             let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
             dappDetail.dappType = .INTERNAL_URL
-            if let evmChain = selectedChain as? EvmClass {
-                dappDetail.targetChain = evmChain
-            }
+            dappDetail.targetChain = selectedChain
             dappDetail.dappUrl = linkUrl
             dappDetail.modalPresentationStyle = .fullScreen
             self.present(dappDetail, animated: true)

@@ -41,9 +41,9 @@ class ReceiveCell: UITableViewCell {
         }
         legacyTag.isHidden = chain.isDefault
         
-        if let selectedChain = chain as? EvmClass, section == 0 {
+        if chain.supportEvm, section == 0 {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name + " EVM")
-            let evmAddress = selectedChain.evmAddress
+            let evmAddress = chain.evmAddress!
             addressLabel.text = evmAddress
             addressLabel.adjustsFontSizeToFitWidth = true
             
@@ -52,13 +52,13 @@ class ReceiveCell: UITableViewCell {
             
             if let bechQrImage = WUtils.generateQrCode(evmAddress) {
                 rqImgView.image = UIImage(ciImage: bechQrImage)
-                let chainLogo = UIImage.init(named: selectedChain.logo1)
+                let chainLogo = UIImage.init(named: chain.logo1)
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }
             
-        } else if let selectedChain = chain as? CosmosClass {
+        } else if chain.isCosmos() {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
-            let bechAddress = selectedChain.bechAddress
+            let bechAddress = chain.bechAddress!
             addressLabel.text = bechAddress
             addressLabel.adjustsFontSizeToFitWidth = true
             
@@ -67,7 +67,7 @@ class ReceiveCell: UITableViewCell {
             
             if let bechQrImage = WUtils.generateQrCode(bechAddress) {
                 rqImgView.image = UIImage(ciImage: bechQrImage)
-                let chainLogo = UIImage.init(named: selectedChain.logo1)
+                let chainLogo = UIImage.init(named: chain.logo1)
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }
         }

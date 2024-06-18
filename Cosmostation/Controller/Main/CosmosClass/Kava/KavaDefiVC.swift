@@ -18,7 +18,7 @@ class KavaDefiVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var incentive: Kava_Incentive_V1beta1_QueryRewardsResponse?
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
 
@@ -53,7 +53,7 @@ class KavaDefiVC: BaseVC {
     func onFetchData() {
         Task {
             let channel = getConnection()
-            if let incentive = try? await fetchIncentive(channel, selectedChain.bechAddress),
+            if let incentive = try? await fetchIncentive(channel, selectedChain.bechAddress!),
                let pricefeed = try? await fetchPriceFeed(channel) {
                 self.incentive = incentive
                 self.priceFeed = pricefeed
@@ -163,7 +163,7 @@ extension KavaDefiVC {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

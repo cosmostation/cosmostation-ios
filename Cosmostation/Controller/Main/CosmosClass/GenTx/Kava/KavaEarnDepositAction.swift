@@ -48,7 +48,7 @@ class KavaEarnDepositAction: BaseVC {
     @IBOutlet weak var addBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var toEarnDeposit: Kava_Router_V1beta1_MsgDelegateMintDeposit!
@@ -86,10 +86,10 @@ class KavaEarnDepositAction: BaseVC {
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
         if (toValidator == nil) {
-            if let validator = selectedChain.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first {
+            if let validator = selectedChain.getGrpcfetcher()!.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first {
                 toValidator = validator
             } else {
-                toValidator = selectedChain.cosmosValidators[0]
+                toValidator = selectedChain.getGrpcfetcher()!.cosmosValidators[0]
             }
         }
         
@@ -107,7 +107,7 @@ class KavaEarnDepositAction: BaseVC {
     @objc func onClickValidator() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = selectedChain
-        baseSheet.validators = selectedChain.cosmosValidators
+        baseSheet.validators = selectedChain.getGrpcfetcher()!.cosmosValidators
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectValidator
         onStartSheet(baseSheet, 680, 0.8)
@@ -181,7 +181,7 @@ class KavaEarnDepositAction: BaseVC {
         }
         
         let stakeDenom = selectedChain.stakeDenom!
-        let balanceAmount = selectedChain.balanceAmount(stakeDenom)
+        let balanceAmount = selectedChain.getGrpcfetcher()!.balanceAmount(stakeDenom)
         if (txFee.amount[0].denom == stakeDenom) {
             let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
             if (feeAmount.compare(balanceAmount).rawValue > 0) {
@@ -241,7 +241,7 @@ class KavaEarnDepositAction: BaseVC {
         loadingView.isHidden = false
         
         toEarnDeposit = Kava_Router_V1beta1_MsgDelegateMintDeposit.with {
-            $0.depositor = selectedChain.bechAddress
+            $0.depositor = selectedChain.bechAddress!
             $0.validator = toValidator!.operatorAddress
             $0.amount = toCoin!
         }
@@ -251,7 +251,7 @@ class KavaEarnDepositAction: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
                 do {
                     let simul = try await simulateTx(channel, auth!)
                     DispatchQueue.main.async {
@@ -277,7 +277,7 @@ extension KavaEarnDepositAction: BaseSheetDelegate, MemoDelegate, AmountSheetDel
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectValidator) {
             if let validatorAddress = result["validatorAddress"] as? String {
-                toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
+                toValidator = selectedChain.getGrpcfetcher()!.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
                 onUpdateValidatorView()
             }
             
@@ -306,7 +306,7 @@ extension KavaEarnDepositAction: BaseSheetDelegate, MemoDelegate, AmountSheetDel
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
                    let response = try await broadcastTx(channel, auth!) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -347,7 +347,7 @@ extension KavaEarnDepositAction {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

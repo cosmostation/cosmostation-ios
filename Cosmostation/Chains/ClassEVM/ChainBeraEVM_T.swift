@@ -1,5 +1,5 @@
 //
-//  ChainBeraEVM.swift
+//  ChainBeraEVM_T.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 5/8/24.
@@ -8,31 +8,33 @@
 
 import Foundation
 
-class ChainBeraEVM: EvmClass  {
+class ChainBeraEVM_T: BaseChain  {
     
     override init() {
         super.init()
         
-        supportCosmos = true
-        
-        name = "Bera"
+        name = "Bera Testnet"
         tag = "bera60"
         logo1 = "chainBera"
         logo2 = "chainBera2"
-        apiName = "berachain"
-        stakeDenom = "abgt"
+        apiName = "berachain-testnet"
+        accountKeyType = AccountKeyType(.BERA_Secp256k1, "m/44'/60'/0'/0/X")
         
-        //for EVM tx and display
+        
+        supportCosmosGrpc = true
+        stakeDenom = "abgt"
+        bechAccountPrefix = "bera"
+        validatorPrefix = "beravaloper"
+        grpcHost = ""
+        
+        
+        supportEvm = true
         coinSymbol = "BERA"
         coinGeckoId = ""
         coinLogo = "tokenBera"
-
-        accountKeyType = AccountKeyType(.BERA_Secp256k1, "m/44'/60'/0'/0/X")
-        bechAccountPrefix = "bera"
-        validatorPrefix = "beravaloper"
-        
-        grpcHost = ""
         evmRpcURL = ""
+        
+        initFetcher()
     }
 }
 

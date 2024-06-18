@@ -29,7 +29,7 @@ class SendResultSheet: BaseVC {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var confirmBtn: BaseButton!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var selectedHistory: MintscanHistory!
     
     override func viewDidLoad() {

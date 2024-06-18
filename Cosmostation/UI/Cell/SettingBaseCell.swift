@@ -43,12 +43,7 @@ class SettingBaseCell: UITableViewCell {
         setImg.image = UIImage(named: "setChain")
         setTitleLabel.text = NSLocalizedString("setting_chain_title", comment: "")
         var chainNames = [String]()
-        ALLEVMCLASS().forEach { chain in
-            if (!chainNames.contains(chain.name)) {
-                chainNames.append(chain.name)
-            }
-        }
-        ALLCOSMOSCLASS().forEach { chain in
+        ALLCHAINS().forEach { chain in
             if (!chainNames.contains(chain.name)) {
                 chainNames.append(chain.name)
             }

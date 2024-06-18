@@ -34,9 +34,9 @@ class KavaEarnListCell: UITableViewCell {
         inactiveTag.isHidden = true
     }
     
-    func onBindEarnView(_ chain: CosmosClass, _ deposit: Cosmos_Base_V1beta1_Coin) {
+    func onBindEarnView(_ chain: BaseChain, _ deposit: Cosmos_Base_V1beta1_Coin) {
         let valOpAddress = deposit.denom.replacingOccurrences(of: "bkava-", with: "")
-        if let validator = chain.cosmosValidators.filter({ $0.operatorAddress == valOpAddress }).first {
+        if let validator = chain.getGrpcfetcher()?.cosmosValidators.filter({ $0.operatorAddress == valOpAddress }).first {
             logoImg.af.setImage(withURL: chain.monikerImg(validator.operatorAddress))
             nameLabel.text = validator.description_p.moniker
             if (validator.jailed) {

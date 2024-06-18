@@ -19,7 +19,7 @@ class CosmosNftVC: BaseVC {
     var refresher: UIRefreshControl!
     
     var isBusy = false
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var nftGroup = [Cw721Model]()
     
     override func viewDidLoad() {
@@ -45,12 +45,7 @@ class CosmosNftVC: BaseVC {
         refresher.tintColor = .color01
         collectionView.refreshControl = refresher
         
-        if (selectedChain.cw721Fetched == false) {
-            onRequestFetch()
-        } else {
-            nftGroup = selectedChain.cw721Models
-            onUpdateView()
-        }
+        onRequestFetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,13 +66,18 @@ class CosmosNftVC: BaseVC {
     @objc func onRequestFetch() {
         if (isBusy) { return }
         isBusy = true
-        selectedChain.fetchAllCw721()
+        if let grpFetcher = selectedChain.grpcFetcher {
+            grpFetcher.fetchAllCw721()
+        }
     }
     
     @objc func onFetchNFTDone(_ notification: NSNotification) {
-        nftGroup = selectedChain.cw721Models
-        isBusy = false
-        onUpdateView()
+        let tag = notification.object as! String
+        if (selectedChain != nil && selectedChain.tag == tag) {
+            isBusy = false
+            nftGroup = selectedChain.getGrpcfetcher()?.cw721Models ?? []
+            onUpdateView()
+        }
     }
     
     func onUpdateView() {

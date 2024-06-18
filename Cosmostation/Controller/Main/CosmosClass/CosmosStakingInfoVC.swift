@@ -20,7 +20,7 @@ class CosmosStakingInfoVC: BaseVC {
     @IBOutlet weak var emptyStakeImg: UIImageView!
     var refresher: UIRefreshControl!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var rewardAddress: String?
     var validators = [Cosmos_Staking_V1beta1_Validator]()
     var delegations = [Cosmos_Staking_V1beta1_DelegationResponse]()
@@ -95,26 +95,28 @@ class CosmosStakingInfoVC: BaseVC {
     
     func onSetStakeData() {
         Task {
-            rewardAddress = selectedChain.rewardAddress
-            validators = selectedChain.cosmosValidators
-            delegations = selectedChain.cosmosDelegations
-            rewards = selectedChain.cosmosRewards
-            unbondings.removeAll()
-            
-            selectedChain.cosmosUnbondings?.forEach { unbonding in
-                unbonding.entries.forEach { entry in
-                    unbondings.append(UnbondingEntry.init(validatorAddress: unbonding.validatorAddress, entry: entry))
+            if let grpcFetcher = selectedChain.getGrpcfetcher() {
+                rewardAddress = grpcFetcher.rewardAddress
+                validators = grpcFetcher.cosmosValidators
+                delegations = grpcFetcher.cosmosDelegations
+                rewards = grpcFetcher.cosmosRewards
+                unbondings.removeAll()
+                
+                grpcFetcher.cosmosUnbondings?.forEach { unbonding in
+                    unbonding.entries.forEach { entry in
+                        unbondings.append(UnbondingEntry.init(validatorAddress: unbonding.validatorAddress, entry: entry))
+                    }
                 }
-            }
-            
-            cosmostationValAddress = validators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
-            delegations.sort {
-                if ($0.delegation.validatorAddress == cosmostationValAddress) { return true }
-                if ($1.delegation.validatorAddress == cosmostationValAddress) { return false }
-                return Double($0.balance.amount)! > Double($1.balance.amount)!
-            }
-            unbondings.sort {
-                return $0.entry.creationHeight < $1.entry.creationHeight
+                
+                cosmostationValAddress = validators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
+                delegations.sort {
+                    if ($0.delegation.validatorAddress == cosmostationValAddress) { return true }
+                    if ($1.delegation.validatorAddress == cosmostationValAddress) { return false }
+                    return Double($0.balance.amount)! > Double($1.balance.amount)!
+                }
+                unbondings.sort {
+                    return $0.entry.creationHeight < $1.entry.creationHeight
+                }
             }
             
             DispatchQueue.main.async {
@@ -144,7 +146,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain is ChainBeraEVM) {
+        if (selectedChain is ChainBeraEVM_T) {
 //            let delegate = EvmDelegate(nibName: "EvmDelegate", bundle: nil)
 //            delegate.selectedChain = selectedChain as? EvmClass
 //            if (toValAddress != nil) {
@@ -169,7 +171,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain is ChainBeraEVM) {
+        if (selectedChain is ChainBeraEVM_T) {
 //            let undelegate = EvmUndelegate(nibName: "EvmUndelegate", bundle: nil)
 //            undelegate.selectedChain = selectedChain as? EvmClass
 //            undelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
@@ -190,7 +192,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain is ChainBeraEVM) {
+        if (selectedChain is ChainBeraEVM_T) {
 //            let redelegate = EvmRedelegate(nibName: "EvmRedelegate", bundle: nil)
 //            redelegate.selectedChain = selectedChain as? EvmClass
 //            redelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
@@ -211,7 +213,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if let claimableReward = selectedChain.cosmosRewards?.filter({ $0.validatorAddress == fromValAddress }).first,
+        if let claimableReward = rewards?.filter({ $0.validatorAddress == fromValAddress }).first,
            claimableReward.reward.count > 0 {
             let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
             claimRewards.claimableRewards = [claimableReward]
@@ -229,11 +231,11 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain.rewardAddress != selectedChain.bechAddress) {
+        if (selectedChain.getGrpcfetcher()?.rewardAddress != selectedChain.bechAddress) {
             onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
             return
         }
-        if let claimableReward = selectedChain.cosmosRewards?.filter({ $0.validatorAddress == fromValAddress }).first,
+        if let claimableReward = rewards?.filter({ $0.validatorAddress == fromValAddress }).first,
            claimableReward.reward.count > 0 {
             let compounding = CosmosCompounding(nibName: "CosmosCompounding", bundle: nil)
             compounding.claimableRewards = [claimableReward]
@@ -251,7 +253,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain is ChainBeraEVM) {
+        if (selectedChain is ChainBeraEVM_T) {
 //            let cancel = EvmCancelUnbonding(nibName: "EvmCancelUnbonding", bundle: nil)
 //            cancel.selectedChain = selectedChain as? EvmClass
 //            cancel.unbondingEntry = unbondings[position]
@@ -387,7 +389,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
-            UIPasteboard.general.string = selectedChain.rewardAddress?.trimmingCharacters(in: .whitespacesAndNewlines)
+            UIPasteboard.general.string = selectedChain.getGrpcfetcher()?.rewardAddress?.trimmingCharacters(in: .whitespacesAndNewlines)
             self.onShowToast(NSLocalizedString("address_copied", comment: ""))
             
         } else if (indexPath.section == 1) {
@@ -409,7 +411,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         if (indexPath.section == 1) {
             let delegation = delegations[indexPath.row]
-            let rewards = selectedChain.cosmosRewards?.filter { $0.validatorAddress == delegation.delegation.validatorAddress }
+            let rewards = rewards?.filter { $0.validatorAddress == delegation.delegation.validatorAddress }
                 
             let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
             rewardListPopupVC.selectedChain = selectedChain
@@ -497,7 +499,6 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
         
     }
 }
-
 
 struct UnbondingEntry {
     var validatorAddress: String = String()

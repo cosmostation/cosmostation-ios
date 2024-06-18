@@ -215,8 +215,7 @@ extension CommonTransferResult {
     func fetchEvmTx() {
         Task {
             do {
-                let evmChain = (fromChain as? EvmClass)
-                let recipient = try await evmChain?.fetchEvmTxReceipt(evmHash!)
+                let recipient = try await fromChain.getEvmfetcher()?.fetchEvmTxReceipt(evmHash!)
                 if (recipient?["result"].isEmpty == true) {
                     self.confirmBtn.isEnabled = true
                     self.fetchCnt = self.fetchCnt - 1
@@ -288,7 +287,7 @@ extension CommonTransferResult {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: (fromChain as! CosmosClass).getGrpc().0, port: (fromChain as! CosmosClass).getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: fromChain.getGrpcfetcher()!.getGrpc().0, port: fromChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

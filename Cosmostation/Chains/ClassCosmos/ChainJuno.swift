@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainJuno: CosmosClass  {
+class ChainJuno: BaseChain  {
     
     override init() {
         super.init()
@@ -18,15 +18,18 @@ class ChainJuno: CosmosClass  {
         logo1 = "chainJuno"
         logo2 = "chainJuno2"
         apiName = "juno"
-        stakeDenom = "ujuno"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ujuno"
         bechAccountPrefix = "juno"
         validatorPrefix = "junovaloper"
         supportCw20 = true
 //        supportCw721 = true
-        
         grpcHost = "grpc-juno.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

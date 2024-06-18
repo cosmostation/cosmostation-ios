@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainPassage: CosmosClass  {
+class ChainPassage: BaseChain  {
     
     override init() {
         super.init()
@@ -18,12 +18,15 @@ class ChainPassage: CosmosClass  {
         logo1 = "chainPassage"
         logo2 = "chainPassage2"
         apiName = "passage"
-        stakeDenom = "upasg"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "upasg"
         bechAccountPrefix = "pasg"
         validatorPrefix = "pasgvaloper"
-        
         grpcHost = "grpc-passage.cosmostation.io"
+        
+        initFetcher()
     }
 }

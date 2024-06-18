@@ -8,6 +8,29 @@
 
 import Foundation
 
+class ChainCosmos: BaseChain {
+    
+    override init() {
+        super.init()
+        
+        name = "Cosmos"
+        tag = "cosmos118"
+        logo1 = "chainCosmos"
+        logo2 = "chainCosmos2"
+        apiName = "cosmos"
+        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uatom"
+        bechAccountPrefix = "cosmos"
+        validatorPrefix = "cosmosvaloper"
+        grpcHost = "grpc-cosmos.cosmostation.io"
+        
+        initFetcher()
+    }
+}
+/*
 class ChainCosmos: CosmosClass  {
     
     override init() {
@@ -27,3 +50,4 @@ class ChainCosmos: CosmosClass  {
         grpcHost = "grpc-cosmos.cosmostation.io"
     }
 }
+*/

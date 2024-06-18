@@ -8,30 +8,32 @@
 
 import Foundation
 
-class ChainEvmosEVM: EvmClass  {
+class ChainEvmosEVM: BaseChain  {
     
     override init() {
         super.init()
-        
-        supportCosmos = true
         
         name = "Evmos"
         tag = "evmos60"
         logo1 = "chainEvmosEvm"
         logo2 = "chainEvmos2"
         apiName = "evmos"
-        stakeDenom = "aevmos"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
-        //for EVM tx and display
+        
+        supportCosmosGrpc = true
+        stakeDenom = "aevmos"
+        bechAccountPrefix = "evmos"
+        validatorPrefix = "evmosvaloper"
+        grpcHost = "grpc-evmos.cosmostation.io"
+        
+    
+        supportEvm = true
         coinSymbol = "EVMOS"
         coinGeckoId = "evmos"
         coinLogo = "tokenEvmos"
-
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
-        bechAccountPrefix = "evmos"
-        validatorPrefix = "evmosvaloper"
-        
-        grpcHost = "grpc-evmos.cosmostation.io"
         evmRpcURL = "https://rpc-evmos-evm.cosmostation.io"
+        
+        initFetcher()
     }
 }

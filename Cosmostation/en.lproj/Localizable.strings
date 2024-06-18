@@ -209,7 +209,7 @@
 "str_show_all_proposal" = "Live Proposals";
 "str_hide_done_proposal" = "Excluding voted Proposals";
 "str_compoundable_chains" = "Compoundable Chains";
-"str_compounding_all" = "Compoundable All";
+"str_compounding_all" = "Compounding All";
 "str_send_info" = "Send Detail Info";
 "str_send_address" = "Send Address";
 "str_select_style" = "Select Style";

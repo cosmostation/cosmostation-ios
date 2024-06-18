@@ -209,7 +209,7 @@
 "str_show_all_proposal" = "ライブ提案";
 "str_hide_done_proposal" = "投票された提案を除く";
 "str_compoundable_chains" = "コンパウンディング対象チェーン";
-"str_compounding_all" = "モツコンパウンディング";
+"str_compounding_all" = "すべてを複利化する";
 "str_send_info" = "詳細情報の送信";
 "str_send_address" = "送信アドレス";
 "str_select_style" = "スタイルの選択";

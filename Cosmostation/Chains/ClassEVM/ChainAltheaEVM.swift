@@ -8,6 +8,36 @@
 
 import Foundation
 
+class ChainAltheaEVM: BaseChain {
+    
+    override init() {
+        super.init()
+        
+        name = "Althea"
+        tag = "althea60"
+        logo1 = "chainAltheaEvm"
+        logo2 = "chainAlthea2"
+        apiName = "althea"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "aalthea"
+        bechAccountPrefix = "althea"
+        validatorPrefix = "altheavaloper"
+        grpcHost = "grpc-althea.cosmostation.io"
+
+        
+        supportEvm = true
+        coinSymbol = "ALTHEA"
+        coinGeckoId = "althea"
+        coinLogo = "tokenAltg"
+        evmRpcURL = "https://rpc-althea-evm.cosmostation.io"
+        
+        initFetcher()
+    }
+}
+/*
 class ChainAltheaEVM: EvmClass  {
     
     override init() {
@@ -35,3 +65,4 @@ class ChainAltheaEVM: EvmClass  {
         evmRpcURL = "https://rpc-althea-evm.cosmostation.io"
     }
 }
+*/

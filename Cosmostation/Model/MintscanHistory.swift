@@ -38,12 +38,9 @@ public struct MintscanHistory: Codable {
     }
     
     
-    func getMsgType(_ chain: CosmosClass) -> String {
+    func getMsgType(_ chain: BaseChain) -> String {
         let bechAddress = chain.bechAddress
-        var evmAddress = ""
-        if let evmChain = chain as? EvmClass {
-            evmAddress = evmChain.evmAddress
-        }
+        var evmAddress = chain.evmAddress
         
         if (getMsgCnt() == 0) {
             return NSLocalizedString("tx_known", comment: "")
@@ -711,7 +708,8 @@ public struct MintscanHistory: Codable {
                         }
                         
                     } else if (data.isEmpty == false) {
-                        if let hexData = Data(base64Encoded: data)?.toHexString() {
+                        if let hexData = Data(base64Encoded: data)?.toHexString(),
+                           let evmAddress = evmAddress {
                             if hexData.starts(with: "a9059cbb") {
                                 if (hexData.contains(evmAddress.replacingOccurrences(of: "0x", with: ""))) {
                                     result = NSLocalizedString("tx_evm_token_receive", comment: "")
@@ -733,10 +731,7 @@ public struct MintscanHistory: Codable {
     }
     
     
-    func getDpCoin(_ chain: CosmosClass) -> [Cosmos_Base_V1beta1_Coin]? {
-        let evmChain = chain as? EvmClass
-        
-        
+    func getDpCoin(_ chain: BaseChain) -> [Cosmos_Base_V1beta1_Coin]? {
         var result = Array<Cosmos_Base_V1beta1_Coin>()
         if (getMsgCnt() > 0) {
             //display staking reward amount
@@ -926,10 +921,10 @@ public struct MintscanHistory: Codable {
                     let data = dataValue["data"].stringValue
                     if (data.isEmpty == true && amount.isEmpty == false && amount != "0") {
                         let value = Cosmos_Base_V1beta1_Coin.with {
-                            if (evmChain?.tag == "kava60") {
+                            if (chain.tag == "kava60") {
                                 $0.denom = "akava"
                             } else {
-                                $0.denom = evmChain?.stakeDenom ?? ""
+                                $0.denom = chain.stakeDenom ?? ""
                             }
                             $0.amount = amount
                         }
@@ -942,9 +937,7 @@ public struct MintscanHistory: Codable {
         return sortedCoins(chain, result)
     }
     
-    func getDpToken(_ chain: CosmosClass) -> (erc20: MintscanToken, amount: NSDecimalNumber)? {
-        let evmChain = chain as? EvmClass
-        
+    func getDpToken(_ chain: BaseChain) -> (erc20: MintscanToken, amount: NSDecimalNumber)? {
         if let firstMsg = getMsgs()?[0],
            let msgType = firstMsg["@type"].string {
             let msgValue = firstMsg[msgType.replacingOccurrences(of: ".", with: "-")]
@@ -954,7 +947,7 @@ public struct MintscanHistory: Codable {
                    let wasmMsg = msgValue["msg__@stringify"].string,
                    let wasmFunc = try? JSONDecoder().decode(JSON.self, from: wasmMsg.data(using: .utf8) ?? Data()),
                    let amount = wasmFunc["transfer"]["amount"].string,
-                   let cw20 = chain.mintscanCw20Tokens.first { $0.address == contractAddress } {
+                   let cw20 = chain.getGrpcfetcher()?.mintscanCw20Tokens.first(where: { $0.address == contractAddress }) {
                        return (cw20, NSDecimalNumber(string: amount))
                 }
                 
@@ -963,7 +956,7 @@ public struct MintscanHistory: Codable {
                    let data = dataValue["data"].string,
                    let hexData = Data(base64Encoded: data)?.toHexString(),
                    let contractAddress = dataValue["to"].string,
-                   let erc20 = evmChain?.mintscanErc20Tokens.first { $0.address == contractAddress } {
+                   let erc20 = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.address == contractAddress }) {
                        return (erc20, String(hexData.suffix(64)).hexToNSDecimal())
                 }
             }
@@ -992,7 +985,7 @@ public struct MintscanHistory: Codable {
         return result
     }
     
-    func sortedCoins(_ chain: CosmosClass, _ input: [Cosmos_Base_V1beta1_Coin]?) -> [Cosmos_Base_V1beta1_Coin]? {
+    func sortedCoins(_ chain: BaseChain, _ input: [Cosmos_Base_V1beta1_Coin]?) -> [Cosmos_Base_V1beta1_Coin]? {
         var sorted = Array<Cosmos_Base_V1beta1_Coin>()
         input?.forEach { coin in
             if let index = sorted.firstIndex(where: { $0.denom == coin.denom }) {

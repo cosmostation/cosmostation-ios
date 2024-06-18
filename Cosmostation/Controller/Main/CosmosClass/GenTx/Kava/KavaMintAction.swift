@@ -44,7 +44,7 @@ class KavaMintAction: BaseVC {
     @IBOutlet weak var mintBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -88,7 +88,7 @@ class KavaMintAction: BaseVC {
         if (mintActionType == .Deposit) {
             toMintSymbolLabel.text = collateralMsAsset.symbol
             toMintAssetImg.af.setImage(withURL: collateralMsAsset.assetImg())
-            let balanceAmount = selectedChain.balanceAmount(collateralParam.denom)
+            let balanceAmount = selectedChain.getGrpcfetcher()!.balanceAmount(collateralParam.denom)
             if (txFee.amount[0].denom == collateralParam.denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 collateralAvailableAmount = balanceAmount.subtracting(feeAmount)
@@ -116,7 +116,7 @@ class KavaMintAction: BaseVC {
         } else if (mintActionType == .Repay) {
             toMintSymbolLabel.text = principalMsAsset.symbol
             toMintAssetImg.af.setImage(withURL: principalMsAsset.assetImg())
-            principalAvailableAmount = selectedChain.balanceAmount("usdx")
+            principalAvailableAmount = selectedChain.getGrpcfetcher()!.balanceAmount("usdx")
         }
         
         
@@ -305,7 +305,7 @@ class KavaMintAction: BaseVC {
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
                     do {
                         let simul = try await simulDepositTx(channel, auth!, onBindDepsoitMsg())
                         DispatchQueue.main.async {
@@ -330,7 +330,7 @@ class KavaMintAction: BaseVC {
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
                     do {
                         let simul = try await simulWithdrawTx(channel, auth!, onBindWithdrawMsg())
                         DispatchQueue.main.async {
@@ -355,7 +355,7 @@ class KavaMintAction: BaseVC {
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
                     do {
                         let simul = try await simulBorrowTx(channel, auth!, onBindDrawDebtMsg())
                         DispatchQueue.main.async {
@@ -380,7 +380,7 @@ class KavaMintAction: BaseVC {
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
                     do {
                         let simul = try await simulRepayTx(channel, auth!, onBindRepayMsg())
                         DispatchQueue.main.async {
@@ -406,8 +406,8 @@ class KavaMintAction: BaseVC {
             $0.amount = toCollateralAmount.stringValue
         }
         return Kava_Cdp_V1beta1_MsgDeposit.with {
-            $0.depositor = selectedChain.bechAddress
-            $0.owner = selectedChain.bechAddress
+            $0.depositor = selectedChain.bechAddress!
+            $0.owner = selectedChain.bechAddress!
             $0.collateral = collateralCoin
             $0.collateralType = collateralParam.type
         }
@@ -419,8 +419,8 @@ class KavaMintAction: BaseVC {
             $0.amount = toCollateralAmount.stringValue
         }
         return Kava_Cdp_V1beta1_MsgWithdraw.with {
-            $0.depositor = selectedChain.bechAddress
-            $0.owner = selectedChain.bechAddress
+            $0.depositor = selectedChain.bechAddress!
+            $0.owner = selectedChain.bechAddress!
             $0.collateral = collateralCoin
             $0.collateralType = collateralParam.type
         }
@@ -432,7 +432,7 @@ class KavaMintAction: BaseVC {
             $0.amount = toPrincipalAmount.stringValue
         }
         return Kava_Cdp_V1beta1_MsgDrawDebt.with {
-            $0.sender = selectedChain.bechAddress
+            $0.sender = selectedChain.bechAddress!
             $0.collateralType = collateralParam.type
             $0.principal = principalCoin
         }
@@ -444,7 +444,7 @@ class KavaMintAction: BaseVC {
             $0.amount = toPrincipalAmount.stringValue
         }
         return Kava_Cdp_V1beta1_MsgRepayDebt.with {
-            $0.sender = selectedChain.bechAddress
+            $0.sender = selectedChain.bechAddress!
             $0.collateralType = collateralParam.type
             $0.payment = paymentCoin
         }
@@ -482,7 +482,7 @@ extension KavaMintAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             if (mintActionType == .Deposit) {
                 Task {
                     let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
+                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
                        let response = try await broadcastDepositTx(channel, auth!, onBindDepsoitMsg()) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
@@ -499,7 +499,7 @@ extension KavaMintAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             } else if (mintActionType == .Withdraw) {
                 Task {
                     let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
+                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
                        let response = try await broadcastWithdrawTx(channel, auth!, onBindWithdrawMsg()) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
@@ -516,7 +516,7 @@ extension KavaMintAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             } else if (mintActionType == .DrawDebt) {
                 Task {
                     let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
+                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
                        let response = try await broadcastBorrowTx(channel, auth!, onBindDrawDebtMsg()) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
@@ -533,7 +533,7 @@ extension KavaMintAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             } else if (mintActionType == .Repay) {
                 Task {
                     let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
+                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
                        let response = try await broadcastRepayTx(channel, auth!, onBindRepayMsg()) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
@@ -624,7 +624,7 @@ extension KavaMintAction {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

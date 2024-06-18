@@ -27,7 +27,7 @@ class SelectDisplayTokenCell: UITableViewCell {
         descriptionLabel.text = ""
     }
     
-    func bindErc20Token(_ chain: EvmClass, _ token: MintscanToken, _ selectedList: [String]) {
+    func bindErc20Token(_ chain: BaseChain, _ token: MintscanToken, _ selectedList: [String]) {
         if (selectedList.contains(token.address!)) {
             rootView.layer.borderWidth = 1.0
             rootView.layer.borderColor = UIColor.white.cgColor

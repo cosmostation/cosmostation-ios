@@ -61,13 +61,13 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
             WDP.dpCoin(toSendMsAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             
         } else if (sendType == .Only_EVM_Coin) {
-            availableDenom.text = (fromChain as! EvmClass).coinSymbol
+            availableDenom.text = fromChain.coinSymbol
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
             
         } else if (sendType == .CosmosEVM_Coin) {
             if (txStyle == .WEB3_STYLE) {
-                availableDenom.text = (fromChain as! EvmClass).coinSymbol
+                availableDenom.text = fromChain.coinSymbol
                 let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
                 

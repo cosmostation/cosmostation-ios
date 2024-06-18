@@ -8,31 +8,33 @@
 
 import Foundation
 
-class ChainXplaEVM: EvmClass  {
+class ChainXplaEVM: BaseChain  {
     
     override init() {
         super.init()
-        
-        supportCosmos = true
         
         name = "Xpla"
         tag = "xplaKeccak256"
         logo1 = "chainXplaEvm"
         logo2 = "chainXpla2"
         apiName = "xpla"
-        stakeDenom = "axpla"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
-        //for EVM tx and display
+        
+        supportCosmosGrpc = true
+        stakeDenom = "axpla"
+        bechAccountPrefix = "xpla"
+        validatorPrefix = "xplavaloper"
+        grpcHost = "grpc-xpla.cosmostation.io"
+        
+        
+        supportEvm = true
         coinSymbol = "XPLA"
         coinGeckoId = "xpla"
         coinLogo = "tokenXpla"
-
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
-        bechAccountPrefix = "xpla"
-        validatorPrefix = "xplavaloper"
-        
-        grpcHost = "grpc-xpla.cosmostation.io"
         evmRpcURL = "https://rpc-xpla-evm.cosmostation.io"
+        
+        initFetcher()
     }
 }
 

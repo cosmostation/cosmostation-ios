@@ -14,7 +14,7 @@ class CosmosTokenVC: BaseVC {
     @IBOutlet weak var emptyDataView: UIView!
     var refresher: UIRefreshControl!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var mintscanCw20Tokens = [MintscanToken]()
     var mintscanErc20Tokens = [MintscanToken]()
 
@@ -41,13 +41,13 @@ class CosmosTokenVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ToggleHideValue"), object: nil)
     }
     
@@ -60,21 +60,19 @@ class CosmosTokenVC: BaseVC {
         if (selectedChain.fetchState == .Busy) {
             refresher.endRefreshing()
         } else {
-            Task {
-                if (selectedChain.supportCw20) {
-                    selectedChain.fetchAllCw20Balance(baseAccount.id)
-                } else if let evmChain = selectedChain as? EvmClass {
-                     await evmChain.fetchAllErc20Balance(baseAccount.id)
-                }
+            DispatchQueue.global().async {
+                self.selectedChain.fetchData(self.baseAccount.id)
             }
         }
     }
     
-    @objc func onFetchTokenDone(_ notification: NSNotification) {
-        DispatchQueue.main.async {
-            self.mintscanCw20Tokens.removeAll()
-            self.mintscanErc20Tokens.removeAll()
-            self.onUpdateView()
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (selectedChain != nil && selectedChain.tag == tag) {
+            DispatchQueue.main.async {
+                self.refresher.endRefreshing()
+                self.onUpdateView()
+            }
         }
     }
     
@@ -83,26 +81,30 @@ class CosmosTokenVC: BaseVC {
     }
     
     func onUpdateView() {
-        selectedChain.mintscanCw20Tokens.forEach { tokenInfo in
-            if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
-                mintscanCw20Tokens.append(tokenInfo)
+        self.mintscanCw20Tokens.removeAll()
+        self.mintscanErc20Tokens.removeAll()
+        if let grpcFetcher = selectedChain.getGrpcfetcher() {
+            grpcFetcher.mintscanCw20Tokens.forEach { tokenInfo in
+                if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
+                    mintscanCw20Tokens.append(tokenInfo)
+                }
+            }
+            mintscanCw20Tokens.sort {
+                let value0 = grpcFetcher.tokenValue($0.address!)
+                let value1 = grpcFetcher.tokenValue($1.address!)
+                return value0.compare(value1).rawValue > 0 ? true : false
             }
         }
-        mintscanCw20Tokens.sort {
-            let value0 = selectedChain.tokenValue($0.address!)
-            let value1 = selectedChain.tokenValue($1.address!)
-            return value0.compare(value1).rawValue > 0 ? true : false
-        }
         
-        if let evmChain = selectedChain as? EvmClass {
-            evmChain.mintscanErc20Tokens.forEach { tokenInfo in
+        if let evmFetcher = selectedChain.getEvmfetcher() {
+            evmFetcher.mintscanErc20Tokens.forEach { tokenInfo in
                 if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
                     mintscanErc20Tokens.append(tokenInfo)
                 }
             }
             mintscanErc20Tokens.sort {
-                let value0 = selectedChain.tokenValue($0.address!)
-                let value1 = selectedChain.tokenValue($1.address!)
+                let value0 = evmFetcher.tokenValue($0.address!)
+                let value1 = evmFetcher.tokenValue($1.address!)
                 return value0.compare(value1).rawValue > 0 ? true : false
             }
         }
@@ -131,7 +133,7 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
             view.titleLabel.text = "Cw20 Tokens"
             view.cntLabel.text = String(mintscanCw20Tokens.count)
         } else {
-            if let okChain = selectedChain as? ChainOkt996Keccak {
+            if (selectedChain.name == "OKT") {
                 view.titleLabel.text = "Kip20 Tokens"
             } else {
                 view.titleLabel.text = "Erc20 Tokens"
@@ -160,9 +162,9 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
         if (indexPath.section == 0) {
-            cell.bindToken(selectedChain, mintscanCw20Tokens[indexPath.row])
+            cell.bindCosmosClassToken(selectedChain, mintscanCw20Tokens[indexPath.row])
         } else {
-            cell.bindToken(selectedChain, mintscanErc20Tokens[indexPath.row])
+            cell.bindEvmClassToken(selectedChain, mintscanErc20Tokens[indexPath.row])
         }
         return cell
     }

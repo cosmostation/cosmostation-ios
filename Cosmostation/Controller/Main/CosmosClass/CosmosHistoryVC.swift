@@ -18,7 +18,7 @@ class CosmosHistoryVC: BaseVC {
     @IBOutlet weak var emptyDataView: UIView!
     var refresher: UIRefreshControl!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var msHistoryGroup = Array<MintscanHistoryGroup>()
     var msHistoyID = ""
     var msHasMore = false
@@ -59,8 +59,8 @@ class CosmosHistoryVC: BaseVC {
     }
     
     @objc func onRequestFetch() {
-        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-            onFetchOktHistory(selectedChain.evmAddress)
+        if (selectedChain.name == "OKT") {
+            onFetchOktHistory(selectedChain.evmAddress!)
             
         } else {
             msHistoyID = ""
@@ -208,7 +208,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var hash: String?
-        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain.name == "OKT") {
             hash = oktHistoey[indexPath.row].txId
             
         } else {

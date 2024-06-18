@@ -36,7 +36,7 @@ class DappEvmSignRequestSheet: BaseVC {
     var web3: Web3?
     var method: String!
     var requestToSign: JSON?
-    var selectedChain: EvmClass!
+    var selectedChain: BaseChain!
     var completion: ((_ success: Bool, _ toResponse: JSON? ) -> ())?
     
     var evmTx: CodableTransaction?
@@ -201,9 +201,9 @@ class DappEvmSignRequestSheet: BaseVC {
             let requestToSignArray = requestToSign
             if (requestToSignArray?.count != 2) { return }
             
-            if (requestToSignArray![0].stringValue.lowercased() == selectedChain.evmAddress.lowercased()) {
+            if (requestToSignArray![0].stringValue.lowercased() == selectedChain.evmAddress!.lowercased()) {
                 inComeChallenge = requestToSignArray![1].stringValue
-            } else if (requestToSignArray![1].stringValue.lowercased() == selectedChain.evmAddress.lowercased()) {
+            } else if (requestToSignArray![1].stringValue.lowercased() == selectedChain.evmAddress!.lowercased()) {
                 inComeChallenge = requestToSignArray![0].stringValue
             }
             print("inComeChallenge ", inComeChallenge)
@@ -212,7 +212,7 @@ class DappEvmSignRequestSheet: BaseVC {
     }
     
     func onCheckBalance() async throws {
-        if let response = try? await selectedChain.fetchEvmBalance(selectedChain.evmAddress),
+        if let response = try? await selectedChain.getEvmfetcher()!.fetchEvmBalance(selectedChain.evmAddress!),
            let balanceString = response?["result"].stringValue,
            let balance = BigUInt(balanceString.stripHexPrefix(), radix: 16) {
             evmBalances = balance
@@ -220,7 +220,7 @@ class DappEvmSignRequestSheet: BaseVC {
     }
     
     func onCheckEstimateGas() async throws {
-        if let response = try? await selectedChain.fetchEvmEstimateGas(requestToSign!),
+        if let response = try? await selectedChain.getEvmfetcher()!.fetchEvmEstimateGas(requestToSign!),
            let gasAmountString = response?["result"].stringValue,
            let gasAmount = BigUInt(gasAmountString.stripHexPrefix(), radix: 16) {
             checkedGas = gasAmount

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainBitsong: CosmosClass  {
+class ChainBitsong: BaseChain  {
     
     override init() {
         super.init()
@@ -18,13 +18,16 @@ class ChainBitsong: CosmosClass  {
         logo1 = "chainBitsong"
         logo2 = "chainBitsong2"
         apiName = "bitsong"
-        stakeDenom = "ubtsg"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/639'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ubtsg"
         bechAccountPrefix = "bitsong"
         validatorPrefix = "bitsongvaloper"
-        
         grpcHost = "grpc-bitsong.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

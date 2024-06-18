@@ -23,12 +23,14 @@ class AboutRewardAddressCell: UITableViewCell {
         rootView.setBlur()
     }
     
-    func onBindStakingInfo(_ chain: CosmosClass) {
-        rewardAddressLabel.text = chain.rewardAddress
-        rewardAddressLabel.adjustsFontSizeToFitWidth = true
-        if (chain.rewardAddress != nil && chain.rewardAddress != chain.bechAddress) {
-            rootView.backgroundView.layer.borderWidth = 1
-            rootView.backgroundView.layer.borderColor = UIColor.colorPrimary.cgColor
+    func onBindStakingInfo(_ chain: BaseChain) {
+        if let rewardAddress = chain.getGrpcfetcher()?.rewardAddress{
+            rewardAddressLabel.text = rewardAddress
+            rewardAddressLabel.adjustsFontSizeToFitWidth = true
+            if (rewardAddress != chain.bechAddress) {
+                rootView.backgroundView.layer.borderWidth = 1
+                rootView.backgroundView.layer.borderColor = UIColor.colorPrimary.cgColor
+            }
         }
     }
     

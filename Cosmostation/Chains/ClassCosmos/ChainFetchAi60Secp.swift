@@ -8,15 +8,27 @@
 
 import Foundation
 
-class ChainFetchAi60Secp: ChainFetchAi  {
+class ChainFetchAi60Secp: BaseChain {
     
     override init() {
         super.init()
         
-        isDefault = false
+        name = "Fetch.Ai"
         tag = "fetchai60_Secp"
-        
+        logo1 = "chainFetchAi"
+        logo2 = "chainFetchAi2"
+        isDefault = false
+        apiName = "fetchai"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/60'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "afet"
+        bechAccountPrefix = "fetch"
+        validatorPrefix = "fetchvaloper"
+        grpcHost = "grpc-fetchai.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

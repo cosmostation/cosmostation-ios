@@ -124,13 +124,13 @@ class NftTransfer: BaseVC {
     }
     
     func onInitFee() {
-        cosmosFeeInfos = (fromChain as! CosmosClass).getFeeInfos()
+        cosmosFeeInfos = fromChain.getFeeInfos()
         feeSegments.removeAllSegments()
         for i in 0..<cosmosFeeInfos.count {
             feeSegments.insertSegment(withTitle: cosmosFeeInfos[i].title, at: i, animated: false)
         }
-        selectedFeePosition = (fromChain as! CosmosClass).getFeeBasePosition()
-        cosmosTxFee = (fromChain as! CosmosClass).getInitPayableFee()
+        selectedFeePosition = fromChain.getFeeBasePosition()
+        cosmosTxFee = fromChain.getInitPayableFee()
         feeSegments.selectedSegmentIndex = selectedFeePosition
         
         if let feeAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
@@ -152,8 +152,8 @@ class NftTransfer: BaseVC {
         addressSheet.fromChain = fromChain
         addressSheet.toChain = toChain
         addressSheet.sendType = sendType
-        addressSheet.senderBechAddress = (fromChain as? CosmosClass)?.bechAddress
-        addressSheet.senderEvmAddress = (fromChain as? EvmClass)?.evmAddress
+        addressSheet.senderBechAddress = fromChain.bechAddress
+        addressSheet.senderEvmAddress = fromChain.evmAddress
         addressSheet.existedAddress = toAddress
         addressSheet.sendAddressDelegate = self
         onStartSheet(addressSheet, 220, 0.6)
@@ -199,14 +199,14 @@ class NftTransfer: BaseVC {
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeePosition = sender.selectedSegmentIndex
-        cosmosTxFee = (fromChain as! CosmosClass).getUserSelectedFee(selectedFeePosition, cosmosTxFee.amount[0].denom)
+        cosmosTxFee = fromChain.getUserSelectedFee(selectedFeePosition, cosmosTxFee.amount[0].denom)
         onUpdateFeeView()
         onSimul()
     }
     
     @objc func onSelectFeeDenom() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.targetChain = (fromChain as! CosmosClass)
+        baseSheet.targetChain = fromChain
         baseSheet.feeDatas = cosmosFeeInfos[selectedFeePosition].FeeDatas
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeDenom
@@ -232,7 +232,7 @@ class NftTransfer: BaseVC {
         view.isUserInteractionEnabled = true
         loadingView.isHidden = true
         
-        if ((fromChain as! CosmosClass).isGasSimulable() == false) {
+        if (fromChain.isGasSimulable() == false) {
             onUpdateFeeView()
             sendBtn.isEnabled = true
             return
@@ -243,7 +243,7 @@ class NftTransfer: BaseVC {
             errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
             return
         }
-        cosmosTxFee.gasLimit = UInt64(Double(toGas) * (fromChain as! CosmosClass).gasMultiply())
+        cosmosTxFee.gasLimit = UInt64(Double(toGas) * fromChain.gasMultiply())
         if let gasRate = cosmosFeeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
             let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
             let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
@@ -264,7 +264,7 @@ class NftTransfer: BaseVC {
         view.isUserInteractionEnabled = false
         loadingView.isHidden = false
         
-        if ((fromChain as! CosmosClass).isGasSimulable() == false) {
+        if (fromChain.isGasSimulable() == false) {
             return onUpdateFeeViewAfterSimul(nil)
         }
         cw721SendSimul()
@@ -273,7 +273,7 @@ class NftTransfer: BaseVC {
     func cw721SendSimul() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress) {
+            if let auth = try? await fetchAuth(channel, fromChain.bechAddress!) {
                 do {
                     let simul = try await simulCw721SendTx(channel, auth!, onBindCw20Send())
                     DispatchQueue.main.async {
@@ -294,7 +294,7 @@ class NftTransfer: BaseVC {
     func cw721Send() {
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress),
+            if let auth = try? await fetchAuth(channel, fromChain.bechAddress!),
                let response = try await broadcast721SendTx(channel, auth!, onBindCw20Send()) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
@@ -316,7 +316,7 @@ class NftTransfer: BaseVC {
         let msg: JSON = ["transfer_nft" : ["token_id" : toSendNFT.tokens[0].tokenId, "recipient" : toAddress]]
         let msgBase64 = try! msg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-            $0.sender = (fromChain as! CosmosClass).bechAddress
+            $0.sender = fromChain.bechAddress!
             $0.contract = toSendNFT.info["contractAddress"].stringValue
             $0.msg = Data(base64Encoded: msgBase64)!
         }
@@ -330,7 +330,7 @@ extension NftTransfer: BaseSheetDelegate, SendAddressDelegate, MemoDelegate, Pin
         if (sheetType == .SelectFeeDenom) {
             if let index = result["index"] as? Int,
                let selectedDenom = cosmosFeeInfos[selectedFeePosition].FeeDatas[index].denom {
-                cosmosTxFee = (fromChain as! CosmosClass).getUserSelectedFee(selectedFeePosition, selectedDenom)
+                cosmosTxFee = fromChain.getUserSelectedFee(selectedFeePosition, selectedDenom)
                 onUpdateFeeView()
                 onSimul()
             }
@@ -392,7 +392,7 @@ extension NftTransfer {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: (fromChain as! CosmosClass).getGrpc().0, port: (fromChain as! CosmosClass).getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: fromChain.getGrpcfetcher()!.getGrpc().0, port: fromChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

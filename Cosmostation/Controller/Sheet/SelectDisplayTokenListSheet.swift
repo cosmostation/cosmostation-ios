@@ -15,7 +15,7 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
     @IBOutlet weak var sheetSearchBar: UISearchBar!
     @IBOutlet weak var confirmBtn: BaseButton!
     
-    var selectedChain: EvmClass!
+    var selectedChain: BaseChain!
     var allErc20Tokens = [MintscanToken]()
     var searchErc20Tokens = [MintscanToken]()
     var toDisplayErc20Tokens = [String]()

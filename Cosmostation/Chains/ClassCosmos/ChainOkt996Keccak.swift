@@ -10,6 +10,94 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+class ChainOkt996Keccak: BaseChain  {
+    
+    var oktFetcher: OktFetcher?
+    
+    override init() {
+        super.init()
+        
+        name = "OKT"
+        tag = "okt996_Keccak"
+        logo1 = "chainOkt"
+        logo2 = "chainOkt2"
+        isDefault = false
+        apiName = "okc"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/996'/0'/0/X")
+        
+        
+        supportCosmosLcd = true
+        stakeDenom = "okt"
+        bechAccountPrefix = "ex"
+        supportStaking = false
+        lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
+        
+        initFetcher()
+    }
+    
+    override func setInfoWithPrivateKey(_ priKey: Data) {
+        privateKey = priKey
+        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
+        evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+        bechAddress = KeyFac.convertEvmToBech32(evmAddress!, bechAccountPrefix!)
+    }
+    
+    override func getLcdfetcher() -> FetcherLcd? {
+        return oktFetcher
+    }
+    
+    override func initFetcher() {
+        oktFetcher = OktFetcher.init(self)
+    }
+    
+    override func fetchData(_ id: Int64) {
+        fetchState = .Busy
+        Task {
+            let result = await oktFetcher?.fetchLcdData(id)
+            
+            if (result == false) {
+                fetchState = .Fail
+            } else {
+                fetchState = .Success
+            }
+            
+            if let oktFetcher = oktFetcher, fetchState == .Success {
+                allCoinValue = oktFetcher.allCoinValue()
+                allCoinUSDValue = oktFetcher.allCoinValue(true)
+                
+                BaseData.instance.updateRefAddressesCoinValue(
+                    RefAddress(id, self.tag, self.bechAddress!, self.evmAddress ?? "",
+                               oktFetcher.lcdAllStakingDenomAmount().stringValue, allCoinUSDValue.stringValue,
+                               nil, oktFetcher.lcdAccountInfo.oktCoins?.count))
+            }
+            
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+            })
+        }
+        
+    }
+    
+    //fetch only balance for add account check
+    override func fetchPreCreate() {
+        fetchState = .Busy
+        Task {
+            var result = await oktFetcher?.fetchPreCreate()
+            
+            if (result == false) {
+                fetchState = .Fail
+            } else {
+                fetchState = .Success
+            }
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+            })
+        }
+    }
+}
+
+
+/*
 class ChainOkt996Keccak: CosmosClass  {
     
     //For Legacy Lcd chains
@@ -152,9 +240,7 @@ class ChainOkt996Keccak: CosmosClass  {
     }
     
     
-    static func assetImg(_ original_symbol: String) -> URL {
-        return URL(string: ResourceBase + "okc/asset/" + original_symbol.lowercased() + ".png") ?? URL(string: "")!
-    }
+    
 }
 
 
@@ -227,6 +313,7 @@ extension ChainOkt996Keccak {
         return msPrice.multiplying(by: amount, withBehavior: handler6)
     }
 }
+*/
 
 let OKT_LCD = "https://exchainrpc.okex.org/okexchain/v1/"
 let OKT_BASE_FEE = "0.008"

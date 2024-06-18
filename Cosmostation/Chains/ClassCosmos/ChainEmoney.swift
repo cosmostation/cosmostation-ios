@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainEmoney: CosmosClass  {
+class ChainEmoney: BaseChain  {
     
     override init() {
         super.init()
@@ -18,13 +18,16 @@ class ChainEmoney: CosmosClass  {
         logo1 = "chainEmoney"
         logo2 = "chainEmoney2"
         apiName = "emoney"
-        stakeDenom = "ungm"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ungm"
         bechAccountPrefix = "emoney"
         validatorPrefix = "emoneyvaloper"
-        
         grpcHost = "grpc-emoney.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainShentu: CosmosClass  {
+class ChainShentu: BaseChain {
     
     override init() {
         super.init()
@@ -18,13 +18,16 @@ class ChainShentu: CosmosClass  {
         logo1 = "chainShentu"
         logo2 = "chainShentu2"
         apiName = "shentu"
-        stakeDenom = "uctk"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uctk"
         bechAccountPrefix = "shentu"
         validatorPrefix = "shentuvaloper"
-        
         grpcHost = "grpc-shentu.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

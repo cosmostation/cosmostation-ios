@@ -31,7 +31,9 @@ class SelectOktValidatorCell: UITableViewCell {
         jailedTag.isHidden = true
     }
 
-    func onBindSelectValidator( _ chain: ChainOkt996Keccak, _ validatorInfo: JSON, _ selectedList: [JSON]) {
+    
+
+    func onBindSelectValidator( _ chain: BaseChain, _ validatorInfo: JSON, _ selectedList: [JSON]) {
         logoImg.af.setImage(withURL: chain.monikerImg(validatorInfo["operator_address"].stringValue))
         nameLabel.text = validatorInfo["description"]["moniker"].stringValue
         

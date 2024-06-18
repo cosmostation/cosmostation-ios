@@ -31,7 +31,7 @@ class OktValidatorCell: UITableViewCell {
         jailedTag.isHidden = true
     }
     
-    func bindOktValidator( _ chain: ChainOkt996Keccak, _ validator: JSON) {
+    func bindOktValidator( _ chain: BaseChain, _ validator: JSON) {
         logoImg.af.setImage(withURL: chain.monikerImg(validator["operator_address"].stringValue))
         nameLabel.text = validator["description"]["moniker"].stringValue
         

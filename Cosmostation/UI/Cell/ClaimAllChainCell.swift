@@ -83,7 +83,7 @@ class ClaimAllChainCell: UITableViewCell {
         if (chain is ChainDydx) {
             mainRewardDenom = DYDX_USDC_DENOM
         } else {
-            mainRewardDenom = chain.stakeDenom
+            mainRewardDenom = chain.stakeDenom!
         }
         
         rewards.forEach { reward in

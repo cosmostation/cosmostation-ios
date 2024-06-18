@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainOsmosis: CosmosClass  {
+class ChainOsmosis: BaseChain  {
     
     override init() {
         super.init()
@@ -18,13 +18,16 @@ class ChainOsmosis: CosmosClass  {
         logo1 = "chainOsmosis"
         logo2 = "chainOsmosis2"
         apiName = "osmosis"
-        stakeDenom = "uosmo"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uosmo"
         bechAccountPrefix = "osmo"
         validatorPrefix = "osmovaloper"
-        
         grpcHost = "grpc-osmosis.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

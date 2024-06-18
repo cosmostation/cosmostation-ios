@@ -21,7 +21,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
     
     var sheetType: AmountSheetType?
     var sheetDelegate: AmountSheetDelegate?
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var msAsset: MintscanAsset?
     var msToken: MintscanToken?
     var availableAmount: NSDecimalNumber!

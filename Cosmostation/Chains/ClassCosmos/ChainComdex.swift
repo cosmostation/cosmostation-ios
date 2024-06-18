@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainComdex: CosmosClass  {
+class ChainComdex: BaseChain  {
     
     override init() {
         super.init()
@@ -18,13 +18,16 @@ class ChainComdex: CosmosClass  {
         logo1 = "chainComdex"
         logo2 = "chainComdex2"
         apiName = "comdex"
-        stakeDenom = "ucmdx"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ucmdx"
         bechAccountPrefix = "comdex"
         validatorPrefix = "comdexvaloper"
-        
         grpcHost = "grpc-comdex.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

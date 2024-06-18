@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainStafi: CosmosClass  {
+class ChainStafi: BaseChain {
     
     override init() {
         super.init()
@@ -18,14 +18,17 @@ class ChainStafi: CosmosClass  {
         logo1 = "chainStafi"
         logo2 = "chainStafi2"
         apiName = "stafi"
-        stakeDenom = "ufis"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ufis"
         bechAccountPrefix = "stafi"
         validatorPrefix = "stafivaloper"
         supportStaking = false
-        
         grpcHost = "grpc-stafi.cosmostation.io"
+        
+        initFetcher()
     }
 }
 

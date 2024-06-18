@@ -50,9 +50,10 @@ class AssetCell: UITableViewCell {
         hidenValueLabel.isHidden = true
     }
     
-    func bindCosmosClassAsset(_ baseChain: CosmosClass, _ coin: Cosmos_Base_V1beta1_Coin) {
-        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, coin.denom) {
-            let value = baseChain.denomValue(coin.denom)
+    func bindCosmosClassAsset(_ baseChain: BaseChain, _ coin: Cosmos_Base_V1beta1_Coin) {
+        if let gFetcher = baseChain.getGrpcfetcher(),
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, coin.denom) {
+            let value = gFetcher.denomValue(coin.denom)
             WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, 6)
             WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
@@ -67,50 +68,33 @@ class AssetCell: UITableViewCell {
         }
     }
     
-    func bindToken(_ baseChain: CosmosClass, _ token: MintscanToken) {
-        let value = baseChain.tokenValue(token.address!)
-        WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
-        WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
-        WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
-        if (BaseData.instance.getHideValue()) {
-            hidenValueLabel.isHidden = false
-        } else {
-            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
-            amountLabel.isHidden = false
-            valueCurrencyLabel.isHidden = false
-            valueLabel.isHidden = false
+    func bindCosmosClassToken(_ baseChain: BaseChain, _ token: MintscanToken) {
+        if let gFetcher = baseChain.getGrpcfetcher() {
+            let value = gFetcher.tokenValue(token.address!)
+            WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
+            WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
         }
     }
     
-    func bindOktAsset(_ baseChain: CosmosClass, _ coin: JSON) {
-        if let oktChain = baseChain as? ChainOkt996Keccak,
-           let token = oktChain.lcdOktTokens.filter({ $0["symbol"].string == coin["denom"].string }).first {
-                let original_symbol = token["original_symbol"].stringValue
-                
-                symbolLabel.text = original_symbol.uppercased()
-                priceCurrencyLabel.text = token["description"].string
-                coinImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(original_symbol))
-                
-                let availableAmount = oktChain.lcdBalanceAmount(coin["denom"].stringValue)
-                amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
-                if (BaseData.instance.getHideValue()) {
-                    hidenValueLabel.isHidden = false
-                } else {
-                    amountLabel.isHidden = false
-                }
-                priceLabel.isHidden = true
-                priceChangeLabel.isHidden = true
-                priceChangePercentLabel.isHidden = true
-            
-        } else if let oktEvmChain = baseChain as? ChainOktEVM,
-                  let token = oktEvmChain.lcdOktTokens.filter({ $0["symbol"].string == coin["denom"].string }).first {
+    func bindOktAsset(_ baseChain: BaseChain, _ coin: JSON) {
+        if let oktFetcher = baseChain.getLcdfetcher() as? OktFetcher,
+           let token = oktFetcher.lcdOktTokens.filter({ $0["symbol"].string == coin["denom"].string }).first {
             let original_symbol = token["original_symbol"].stringValue
             
             symbolLabel.text = original_symbol.uppercased()
             priceCurrencyLabel.text = token["description"].string
-            coinImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(original_symbol))
+            coinImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
             
-            let availableAmount = oktEvmChain.lcdBalanceAmount(coin["denom"].stringValue)
+            let availableAmount = oktFetcher.lcdBalanceAmount(coin["denom"].stringValue)
             amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
             if (BaseData.instance.getHideValue()) {
                 hidenValueLabel.isHidden = false
@@ -124,37 +108,42 @@ class AssetCell: UITableViewCell {
     }
     
     
-    func bindEvmClassCoin(_ baseChain: EvmClass) {
+    func bindEvmClassCoin(_ baseChain: BaseChain) {
         symbolLabel.text = baseChain.coinSymbol
         coinImg.image =  UIImage.init(named: baseChain.coinLogo)
         
-        let dpAmount = baseChain.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
-        let value = baseChain.allCoinValue()
-        WDP.dpPrice(baseChain.coinGeckoId, priceCurrencyLabel, priceLabel)
-        WDP.dpPriceChanged(baseChain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
-        amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
-        if (BaseData.instance.getHideValue()) {
-            hidenValueLabel.isHidden = false
-        } else {
-            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
-            amountLabel.isHidden = false
-            valueCurrencyLabel.isHidden = false
-            valueLabel.isHidden = false
+        if let evmFetcher = baseChain.getEvmfetcher() {
+            let dpAmount = evmFetcher.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
+            let value = evmFetcher.allCoinValue()
+            WDP.dpPrice(baseChain.coinGeckoId, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(baseChain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+            amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
+            
         }
     }
     
-    func bindEvmClassToken(_ baseChain: EvmClass, _ token: MintscanToken) {
-        let value = baseChain.tokenValue(token.address!)
-        WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
-        WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
-        WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
-        if (BaseData.instance.getHideValue()) {
-            hidenValueLabel.isHidden = false
-        } else {
-            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
-            amountLabel.isHidden = false
-            valueCurrencyLabel.isHidden = false
-            valueLabel.isHidden = false
+    func bindEvmClassToken(_ baseChain: BaseChain, _ token: MintscanToken) {
+        if let evmFetcher = baseChain.getEvmfetcher() {
+            let value = evmFetcher.tokenValue(token.address!)
+            WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
+            WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
         }
     }
     

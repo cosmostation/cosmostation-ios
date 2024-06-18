@@ -47,7 +47,7 @@ class CosmosUndelegate: BaseVC {
     @IBOutlet weak var unStakeBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate!
@@ -85,7 +85,7 @@ class CosmosUndelegate: BaseVC {
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
         if (fromValidator == nil) {
-            fromValidator = selectedChain.cosmosValidators.filter { $0.operatorAddress == selectedChain.cosmosDelegations[0].delegation.validatorAddress }.first
+            fromValidator = selectedChain.getGrpcfetcher()!.cosmosValidators.filter { $0.operatorAddress == selectedChain.getGrpcfetcher()!.cosmosDelegations[0].delegation.validatorAddress }.first
         }
         
         onUpdateValidatorView()
@@ -119,7 +119,7 @@ class CosmosUndelegate: BaseVC {
         
         let stakeDenom = selectedChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
-            let staked = selectedChain.cosmosDelegations.filter { $0.delegation.validatorAddress == fromValidator?.operatorAddress }.first?.balance.amount
+            let staked = selectedChain.getGrpcfetcher()!.cosmosDelegations.filter { $0.delegation.validatorAddress == fromValidator?.operatorAddress }.first?.balance.amount
             let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
             stakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakedLabel!.font, 6)
         }
@@ -136,7 +136,7 @@ class CosmosUndelegate: BaseVC {
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }
         
-        if let delegated = selectedChain.cosmosDelegations.filter({ $0.delegation.validatorAddress == fromValidator?.operatorAddress }).first {
+        if let delegated = selectedChain.getGrpcfetcher()!.cosmosDelegations.filter({ $0.delegation.validatorAddress == fromValidator?.operatorAddress }).first {
             availableAmount = NSDecimalNumber(string: delegated.balance.amount)
         }
     }
@@ -231,7 +231,7 @@ class CosmosUndelegate: BaseVC {
         loadingView.isHidden = false
         
         toUndelegate = Cosmos_Staking_V1beta1_MsgUndelegate.with {
-            $0.delegatorAddress = selectedChain.bechAddress
+            $0.delegatorAddress = selectedChain.bechAddress!
             $0.validatorAddress = fromValidator!.operatorAddress
             $0.amount = toCoin!
         }
@@ -241,7 +241,7 @@ class CosmosUndelegate: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
                 do {
                     let simul = try await simulateTx(channel, auth!)
                     DispatchQueue.main.async {
@@ -261,13 +261,12 @@ class CosmosUndelegate: BaseVC {
     }
 }
 
-
 extension CosmosUndelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectUnStakeValidator) {
             if let validatorAddress = result["validatorAddress"] as? String {
-                fromValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
+                fromValidator = selectedChain.getGrpcfetcher()!.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
                 onUpdateValidatorView()
                 onUpdateFeeView()
                 onSimul()
@@ -298,7 +297,7 @@ extension CosmosUndelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
                    let response = try await broadcastTx(channel, auth!) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -341,7 +340,7 @@ extension CosmosUndelegate {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

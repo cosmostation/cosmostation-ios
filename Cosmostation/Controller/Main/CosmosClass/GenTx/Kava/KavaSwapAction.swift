@@ -54,7 +54,7 @@ class KavaSwapAction: BaseVC {
     @IBOutlet weak var swpBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -115,12 +115,12 @@ class KavaSwapAction: BaseVC {
             
             let poolCoin1Amount = swapPool.coins[0].getAmount()
             let poolCoin2Amount = swapPool.coins[1].getAmount()
-            var availabelCoin1Amount = selectedChain.balanceAmount(swapPool.coins[0].denom)
+            var availabelCoin1Amount = selectedChain.getGrpcfetcher()!.balanceAmount(swapPool.coins[0].denom)
             if (txFee.amount[0].denom == swapPool.coins[0].denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 availabelCoin1Amount = availabelCoin1Amount.subtracting(feeAmount)
             }
-            let availabelCoin2Amount = selectedChain.balanceAmount(swapPool.coins[1].denom)
+            let availabelCoin2Amount = selectedChain.getGrpcfetcher()!.balanceAmount(swapPool.coins[1].denom)
             
             swapRate = poolCoin1Amount.dividing(by: poolCoin2Amount, withBehavior: handler24Down)
             let availabelRate = availabelCoin1Amount.dividing(by: availabelCoin2Amount, withBehavior: handler24Down)
@@ -319,7 +319,7 @@ class KavaSwapAction: BaseVC {
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
                     do {
                         let simul = try await simulDepositTx(channel, auth!, onBindDepsoitMsg())
                         DispatchQueue.main.async {
@@ -344,7 +344,7 @@ class KavaSwapAction: BaseVC {
             loadingView.isHidden = false
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
                     do {
                         let simul = try await simulWithdrawTx(channel, auth!, onBindWithdrawMsg())
                         DispatchQueue.main.async {
@@ -376,7 +376,7 @@ class KavaSwapAction: BaseVC {
             $0.amount = coin2ToAmount.stringValue
         }
         return Kava_Swap_V1beta1_MsgDeposit.with {
-            $0.depositor = selectedChain.bechAddress
+            $0.depositor = selectedChain.bechAddress!
             $0.tokenA = depositCoin1
             $0.tokenB = depositCoin2
             $0.slippage = slippage
@@ -391,7 +391,7 @@ class KavaSwapAction: BaseVC {
         let mintCoin2Amount = swapPool.coins[1].getAmount().multiplying(by: toWithdrawAmount).dividing(by: totalShares, withBehavior: handler0Down).multiplying(by: padding, withBehavior: handler0Down)
         let deadline = (Date().millisecondsSince1970 / 1000) + 300
         return  Kava_Swap_V1beta1_MsgWithdraw.with {
-            $0.from = selectedChain.bechAddress
+            $0.from = selectedChain.bechAddress!
             $0.shares = toWithdrawAmount.stringValue
             $0.minTokenA = Cosmos_Base_V1beta1_Coin.with { $0.denom = swapPool.coins[0].denom; $0.amount = mintCoin1Amount.stringValue }
             $0.minTokenB = Cosmos_Base_V1beta1_Coin.with { $0.denom = swapPool.coins[1].denom; $0.amount = mintCoin2Amount.stringValue }
@@ -436,7 +436,7 @@ extension KavaSwapAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             if (swpActionType == .Deposit) {
                 Task {
                     let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
+                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
                        let response = try await broadcastDepositTx(channel, auth!, onBindDepsoitMsg()) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
@@ -453,7 +453,7 @@ extension KavaSwapAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             } else if (swpActionType == .Withdraw) {
                 Task {
                     let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
+                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
                        let response = try await broadcastWithdrawTx(channel, auth!, onBindWithdrawMsg()) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
@@ -515,7 +515,7 @@ extension KavaSwapAction {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

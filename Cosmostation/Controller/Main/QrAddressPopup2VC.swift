@@ -35,15 +35,13 @@ class QrAddressPopup2VC: BaseVC {
             hdPathLabel.text = ""
         }
         
-        if let selectedChain = selectedChain as? EvmClass {
-            evmAddress = selectedChain.evmAddress
-            bechAddress = selectedChain.bechAddress
-            
-            evmAddressLabel.text = evmAddress
-            evmAddressLabel.adjustsFontSizeToFitWidth = true
-            bechAddressLabel.text = bechAddress
-            bechAddressLabel.adjustsFontSizeToFitWidth = true
-        }
+        evmAddress = selectedChain.evmAddress!
+        bechAddress = selectedChain.bechAddress!
+        
+        evmAddressLabel.text = evmAddress
+        evmAddressLabel.adjustsFontSizeToFitWidth = true
+        bechAddressLabel.text = bechAddress
+        bechAddressLabel.adjustsFontSizeToFitWidth = true
         
         if let evmQrImage = WUtils.generateQrCode(evmAddress) {
             evmQrImgView.image = UIImage(ciImage: evmQrImage)

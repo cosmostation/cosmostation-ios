@@ -1077,7 +1077,7 @@ class Signer {
 //        }
 //        return [anyMsg]
 //    }
-//    
+//
 //    //Tx for Authz Claim Commission
 //    static func genAuthzClaimCommission(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
 //                                        _ grantee: String, _ granter: String, _ validatorAddress: String,
@@ -1716,7 +1716,7 @@ class Signer {
         let signDoc = Cosmos_Tx_V1beta1_SignDoc.with {
             $0.bodyBytes = try! txBody.serializedData()
             $0.authInfoBytes = try! authInfo.serializedData()
-            $0.chainID = baseChain.chainIdCosmos
+            $0.chainID = baseChain.chainIdCosmos!
             $0.accountNumber = WUtils.onParseAuthGrpc(auth).1!
         }
         let sigbyte = getByteSingleSignatures(try! signDoc.serializedData(), baseChain)
@@ -1732,7 +1732,7 @@ class Signer {
         let signDoc = Cosmos_Tx_V1beta1_SignDoc.with {
             $0.bodyBytes = try! txBody.serializedData()
             $0.authInfoBytes = try! authInfo.serializedData()
-            $0.chainID = baseChain.chainIdCosmos
+            $0.chainID = baseChain.chainIdCosmos!
             $0.accountNumber = WUtils.onParseAuthGrpc(auth).1!
         }
         let sigbyte = getByteSingleSignatures(try! signDoc.serializedData(), baseChain)

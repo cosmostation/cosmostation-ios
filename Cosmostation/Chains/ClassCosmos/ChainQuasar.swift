@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainQuasar: CosmosClass  {
+class ChainQuasar: BaseChain  {
     
     override init() {
         super.init()
@@ -18,12 +18,15 @@ class ChainQuasar: CosmosClass  {
         logo1 = "chainQuasar"
         logo2 = "chainQuasar2"
         apiName = "quasar"
-        stakeDenom = "uqsr"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uqsr"
         bechAccountPrefix = "quasar"
         validatorPrefix = "quasarvaloper"
-        
         grpcHost = "grpc-quasar.cosmostation.io"
+        
+        initFetcher()
     }
 }

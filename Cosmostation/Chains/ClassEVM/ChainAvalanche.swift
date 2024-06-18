@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainAvalanche: EvmClass  {
+class ChainAvalanche: BaseChain  {
     
     override init() {
         super.init()
@@ -18,15 +18,16 @@ class ChainAvalanche: EvmClass  {
         logo1 = "chainAvalanche"
         logo2 = "chainAvalanche2"
         apiName = "avalanche"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
+        
+        supportEvm = true
         coinSymbol = "AVAX"
         coinGeckoId = "avalanche-2"
         coinLogo = "tokenAvax"
-        
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
-        
         evmRpcURL = "https://avalanche.public-rpc.com"
         
+        initFetcher()
     }
     
 }

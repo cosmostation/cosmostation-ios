@@ -33,17 +33,17 @@ class SelectRefAddressCell: UITableViewCell {
             accountNameLabel.text = account.name
         }
         
-        let allCosmos = ALLCOSMOSCLASS()
-        if let chain = allCosmos.filter({ $0.tag == refAddress.chainTag }).first {
-            legacyTag.isHidden = chain.isDefault
-            if (chain is ChainOkt996Keccak) {
-                keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
-                keyTypeTag.isHidden = false
-            }
-        }
-        
-        addressLabel.text = refAddress.bechAddress
-        addressLabel.adjustsFontSizeToFitWidth = true
+//        let allCosmos = ALLCOSMOSCLASS()
+//        if let chain = allCosmos.filter({ $0.tag == refAddress.chainTag }).first {
+//            legacyTag.isHidden = chain.isDefault
+//            if (chain is ChainOkt996Keccak) {
+//                keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
+//                keyTypeTag.isHidden = false
+//            }
+//        }
+//        
+//        addressLabel.text = refAddress.bechAddress
+//        addressLabel.adjustsFontSizeToFitWidth = true
     }
     
     func onBindEvmRefAddress(_ toChain: BaseChain, _ refAddress: RefAddress) {

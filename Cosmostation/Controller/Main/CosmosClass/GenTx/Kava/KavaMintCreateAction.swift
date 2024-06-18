@@ -50,7 +50,7 @@ class KavaMintCreateAction: BaseVC {
     @IBOutlet weak var cdpBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -94,7 +94,7 @@ class KavaMintCreateAction: BaseVC {
         principalSymbolLabel.text = principalMsAsset.symbol
         principalImg.af.setImage(withURL: principalMsAsset.assetImg())
         
-        let balanceAmount = selectedChain.balanceAmount(collateralParam.denom)
+        let balanceAmount = selectedChain.getGrpcfetcher()!.balanceAmount(collateralParam.denom)
         if (txFee.amount[0].denom == collateralParam.denom) {
             let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
             collateralAvailableAmount = balanceAmount.subtracting(feeAmount)
@@ -256,7 +256,7 @@ class KavaMintCreateAction: BaseVC {
         
         Task {
             let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
+            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
                 do {
                     let simul = try await simulCretaeTx(channel, auth!, onBindCreateMsg())
                     DispatchQueue.main.async {
@@ -285,7 +285,7 @@ class KavaMintCreateAction: BaseVC {
             $0.amount = toPrincipalAmount.stringValue
         }
         return Kava_Cdp_V1beta1_MsgCreateCDP.with {
-            $0.sender = selectedChain.bechAddress
+            $0.sender = selectedChain.bechAddress!
             $0.collateral = collateralCoin
             $0.principal = principalCoin
             $0.collateralType = collateralParam.type
@@ -326,7 +326,7 @@ extension KavaMintCreateAction: BaseSheetDelegate, MemoDelegate, AmountSheetDele
             
             Task {
                 let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
+                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
                    let response = try await broadcastCreateTx(channel, auth!, onBindCreateMsg()) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -367,7 +367,7 @@ extension KavaMintCreateAction {
     
     func getConnection() -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {
