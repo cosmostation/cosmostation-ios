@@ -135,7 +135,7 @@ class BaseChain {
             
             if (self.fetchState == .Success) {
                 if let grpcFetcher = grpcFetcher {
-                    WUtils.onParseVestingAccount(self)
+                    grpcFetcher.onCheckVesting()
                     allCoinValue = grpcFetcher.allCoinValue()
                     allCoinUSDValue = grpcFetcher.allCoinValue(true)
                     allTokenValue = grpcFetcher.allTokenValue()

@@ -167,7 +167,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                let inputGrpcFetcher = inputCosmosChain.getGrpcfetcher() {
                 inputGrpcFetcher.cosmosAuth = inputAuth?.account ?? Google_Protobuf_Any()
                 inputGrpcFetcher.cosmosBalances = inputBal!
-                WUtils.onParseVestingAccount(inputCosmosChain)
+                inputGrpcFetcher.onCheckVesting()
             }
             
             let outputChannel = getConnection(outputCosmosChain)
@@ -176,7 +176,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                let outputGrpcFetcher = outputCosmosChain.getGrpcfetcher() {
                 outputGrpcFetcher.cosmosAuth = outputAuth?.account ?? Google_Protobuf_Any()
                 outputGrpcFetcher.cosmosBalances = outputBal!
-                WUtils.onParseVestingAccount(outputCosmosChain)
+                outputGrpcFetcher.onCheckVesting()
             }
             
             DispatchQueue.main.async {
@@ -699,7 +699,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                            let inputFetcher = inputCosmosChain.getGrpcfetcher() {
                             inputFetcher.cosmosAuth = inputAuth?.account ?? Google_Protobuf_Any()
                             inputFetcher.cosmosBalances = inputBal!
-                            WUtils.onParseVestingAccount(inputCosmosChain)
+                            inputFetcher.onCheckVesting()
                         }
                         
                         DispatchQueue.main.async {
@@ -730,7 +730,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                            let outputFetcher = outputCosmosChain.getGrpcfetcher() {
                             outputFetcher.cosmosAuth = outputAuth?.account ?? Google_Protobuf_Any()
                             outputFetcher.cosmosBalances = outputBal!
-                            WUtils.onParseVestingAccount(outputCosmosChain)
+                            outputFetcher.onCheckVesting()
                         }
                         
                         DispatchQueue.main.async {
