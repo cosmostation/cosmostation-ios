@@ -8,10 +8,6 @@
 
 import UIKit
 import Lottie
-import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class KavaLendAction: BaseVC {
     
@@ -45,6 +41,7 @@ class KavaLendAction: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedChain: BaseChain!
+    var grpcFetcher: FetcherGrpc!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -67,6 +64,7 @@ class KavaLendAction: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        grpcFetcher = selectedChain.getGrpcfetcher()
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -89,7 +87,7 @@ class KavaLendAction: BaseVC {
         toHardAssetImg.af.setImage(withURL: msAsset.assetImg())
         
         if (hardActionType == .Deposit) {
-            let balanceAmount = selectedChain.getGrpcfetcher()!.balanceAmount(hardMarket.denom)
+            let balanceAmount = grpcFetcher.balanceAmount(hardMarket.denom)
             if (txFee.amount[0].denom == hardMarket.denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 availableAmount = balanceAmount.subtracting(feeAmount)
@@ -106,7 +104,7 @@ class KavaLendAction: BaseVC {
             var borrowedAmount = hardMyBorrow?.filter({ $0.denom == hardMarket.denom }).first?.getAmount() ?? NSDecimalNumber.zero
             borrowedAmount = borrowedAmount.multiplying(by: NSDecimalNumber.init(string: "1.1"), withBehavior: handler0Down)
             
-            var balanceAmount = selectedChain.getGrpcfetcher()!.balanceAmount(hardMarket.denom)
+            var balanceAmount = grpcFetcher.balanceAmount(hardMarket.denom)
             if (txFee.amount[0].denom == hardMarket.denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 balanceAmount = balanceAmount.subtracting(feeAmount)
@@ -269,87 +267,36 @@ class KavaLendAction: BaseVC {
         hardBtn.isEnabled = false
         loadingView.isHidden = false
         
-        if (hardActionType == .Deposit) {
-            Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
-                    do {
-                        let simul = try await simulDepositTx(channel, auth!, onBindDepsoitMsg())
-                        DispatchQueue.main.async {
-                            self.onUpdateWithSimul(simul)
-                        }
-                        
-                    } catch {
-                        DispatchQueue.main.async {
-                            self.view.isUserInteractionEnabled = true
-                            self.loadingView.isHidden = true
-                            self.onShowToast("Error : " + "\n" + "\(error)")
-                            return
-                        }
-                    }
+        Task {
+            do {
+                var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
+                if (hardActionType == .Deposit) {
+                    let account = try await grpcFetcher.fetchAuth()
+                    simulReq = Signer.geKavaHardDepositSimul(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                    
+                } else if (hardActionType == .Withdraw) {
+                    let account = try await grpcFetcher.fetchAuth()
+                    simulReq = Signer.geKavaHardWithdrawSimul(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                    
+                } else if (hardActionType == .Borrow) {
+                    let account = try await grpcFetcher.fetchAuth()
+                    simulReq = Signer.genKavaHardBorrowSimul(account!, onBindBorrowMsg(), txFee, txMemo, selectedChain)
+                    
+                } else if (hardActionType == .Repay) {
+                    let account = try await grpcFetcher.fetchAuth()
+                    simulReq = Signer.genKavaHardRepaySimul(account!, onBindRepayMsg(), txFee, txMemo, selectedChain)
                 }
-            }
-            
-        } else if (hardActionType == .Withdraw) {
-            Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
-                    do {
-                        let simul = try await simulWithdrawTx(channel, auth!, onBindWithdrawMsg())
-                        DispatchQueue.main.async {
-                            self.onUpdateWithSimul(simul)
-                        }
-                        
-                    } catch {
-                        DispatchQueue.main.async {
-                            self.view.isUserInteractionEnabled = true
-                            self.loadingView.isHidden = true
-                            self.onShowToast("Error : " + "\n" + "\(error)")
-                            return
-                        }
-                    }
+                let simulRes = try await grpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(simulRes)
                 }
-            }
-            
-        } else if (hardActionType == .Borrow) {
-            Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
-                    do {
-                        let simul = try await simulBorrowTx(channel, auth!, onBindBorrowMsg())
-                        DispatchQueue.main.async {
-                            self.onUpdateWithSimul(simul)
-                        }
-                        
-                    } catch {
-                        DispatchQueue.main.async {
-                            self.view.isUserInteractionEnabled = true
-                            self.loadingView.isHidden = true
-                            self.onShowToast("Error : " + "\n" + "\(error)")
-                            return
-                        }
-                    }
-                }
-            }
-            
-        } else if (hardActionType == .Repay) {
-            Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
-                    do {
-                        let simul = try await simulRepayTx(channel, auth!, onBindRepayMsg())
-                        DispatchQueue.main.async {
-                            self.onUpdateWithSimul(simul)
-                        }
-                        
-                    } catch {
-                        DispatchQueue.main.async {
-                            self.view.isUserInteractionEnabled = true
-                            self.loadingView.isHidden = true
-                            self.onShowToast("Error : " + "\n" + "\(error)")
-                            return
-                        }
-                    }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -429,159 +376,42 @@ extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             view.isUserInteractionEnabled = false
             hardBtn.isEnabled = false
             loadingView.isHidden = false
-            
-            if (hardActionType == .Deposit) {
-                Task {
-                    let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
-                       let response = try await broadcastDepositTx(channel, auth!, onBindDepsoitMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.selectedChain
-                            txResult.broadcastTxResponse = response
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
+            Task {
+                do {
+                    var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
+                    if (hardActionType == .Deposit) {
+                        let account = try await grpcFetcher.fetchAuth()
+                        broadReq = Signer.genKavaHardDepositTx(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                        
+                    } else if (hardActionType == .Withdraw) {
+                        let account = try await grpcFetcher.fetchAuth()
+                        broadReq = Signer.genKavaHardwithdrawTx(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                        
+                    } else if (hardActionType == .Borrow) {
+                        let account = try await grpcFetcher.fetchAuth()
+                        broadReq = Signer.genKavaHardBorrowTx(account!, onBindBorrowMsg(), txFee, txMemo, selectedChain)
+                        
+                    } else if (hardActionType == .Repay) {
+                        let account = try await grpcFetcher.fetchAuth()
+                        broadReq = Signer.genKavaHardRepayTx(account!, onBindRepayMsg(), txFee, txMemo, selectedChain)
+                        
                     }
+                    let response = try await grpcFetcher.broadcastTx(broadReq)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        self.loadingView.isHidden = true
+                        
+                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                        txResult.selectedChain = self.selectedChain
+                        txResult.broadcastTxResponse = response
+                        txResult.modalPresentationStyle = .fullScreen
+                        self.present(txResult, animated: true)
+                    })
+                    
+                } catch {
+                    //TODO handle Error
                 }
-                
-            } else if (hardActionType == .Withdraw) {
-                Task {
-                    let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
-                       let response = try await broadcastWithdrawTx(channel, auth!, onBindWithdrawMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.selectedChain
-                            txResult.broadcastTxResponse = response
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
-                    }
-                }
-                
-            } else if (hardActionType == .Borrow) {
-                Task {
-                    let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
-                       let response = try await broadcastBorrowTx(channel, auth!, onBindBorrowMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.selectedChain
-                            txResult.broadcastTxResponse = response
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
-                    }
-                }
-                
-            } else if (hardActionType == .Repay) {
-                Task {
-                    let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
-                       let response = try await broadcastRepayTx(channel, auth!, onBindRepayMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.selectedChain
-                            txResult.broadcastTxResponse = response
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
-                    }
-                }
-                
             }
         }
-    }
-}
-
-
-extension KavaLendAction {
-    
-    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    //Hard Deposit
-    func simulDepositTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toDeposit: Kava_Hard_V1beta1_MsgDeposit) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.geKavaHardDepositSimul(auth, toDeposit, txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastDepositTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toDeposit: Kava_Hard_V1beta1_MsgDeposit) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genKavaHardDepositTx(auth, toDeposit, txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    //Hard Withdraw
-    func simulWithdrawTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWithdraw: Kava_Hard_V1beta1_MsgWithdraw) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.geKavaHardWithdrawSimul(auth, toWithdraw, txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastWithdrawTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWithdraw: Kava_Hard_V1beta1_MsgWithdraw) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genKavaHardwithdrawTx(auth, toWithdraw, txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    //Hard Borrow
-    func simulBorrowTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toBorrow: Kava_Hard_V1beta1_MsgBorrow) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genKavaHardBorrowSimul(auth, toBorrow, txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastBorrowTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toBorrow: Kava_Hard_V1beta1_MsgBorrow) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genKavaHardBorrowTx(auth, toBorrow, txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    //Hard Repay
-    func simulRepayTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toRepay: Kava_Hard_V1beta1_MsgRepay) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genKavaHardRepaySimul(auth, toRepay, txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastRepayTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toRepay: Kava_Hard_V1beta1_MsgRepay) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genKavaHardRepayTx(auth, toRepay, txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
     }
 }
 

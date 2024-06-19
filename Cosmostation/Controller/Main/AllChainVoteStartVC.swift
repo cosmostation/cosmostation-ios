@@ -245,26 +245,22 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
                     let chain = toDisplayInfos[i].basechain!
                     let toVotes = toDisplayInfos[i].toVotes
                     let txFee = toDisplayInfos[i].txFee!
-                    
-                    let channel = getConnection(chain)
-                    if let auth = try await fetchAuth(channel, chain),
-                       let response = try await broadcastVoteTx(chain, channel, auth, toVotes, txFee) {
-                        self.checkTx(i, channel, response)
+                    if let response = try await broadcastVoteTx(chain, toVotes, txFee) {
+                        self.checkTx(chain, i, response)
                     }
                 }
             }
         }
     }
     
-    func checkTx(_ position: Int, _ channel: ClientConnection, _ txResponse: Cosmos_Base_Abci_V1beta1_TxResponse) {
+    func checkTx(_ chain: BaseChain, _ position: Int, _ txResponse: Cosmos_Base_Abci_V1beta1_TxResponse) {
         Task {
             do {
-                let result = try await fetchTx(channel, txResponse)
+                let result = try await chain.getGrpcfetcher()!.fetchTx(txResponse.txhash)
                 toDisplayInfos[position].isBusy = false
                 toDisplayInfos[position].txResponse = result
                 DispatchQueue.main.async {
                     self.onSectionReload(position)
-                    
                     DispatchQueue.main.async {
                         if (self.toDisplayInfos.filter { $0.txResponse == nil }.count == 0) {
                             self.confirmBtn.isEnabled = true
@@ -274,7 +270,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
                 
             } catch {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
-                    self.checkTx(position, channel, txResponse)
+                    self.checkTx(chain, position, txResponse)
                 });
             }
         }
@@ -429,44 +425,21 @@ extension AllChainVoteStartVC {
 extension AllChainVoteStartVC {
     
     func simulateVoteTx(_ chain: BaseChain, _ msgVotes: [Cosmos_Gov_V1beta1_MsgVote]) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let channel = getConnection(chain)
-        if let auth = try await fetchAuth(channel, chain) {
-            let simulTx = Signer.genVotesSimul(auth, msgVotes, chain.getInitPayableFee()!, "", chain)
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } else {
-            return nil
+        if let grpcFetcher = chain.getGrpcfetcher(),
+           let account = try await grpcFetcher.fetchAuth() {
+            let simulReq = Signer.genVotesSimul(account, msgVotes, chain.getInitPayableFee()!, "", chain)
+            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: grpcFetcher.getClient()).simulate(simulReq, callOptions: grpcFetcher.getCallOptions()).response.get()
         }
+        return nil
     }
     
-    func broadcastVoteTx(_ chain: BaseChain, _ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                         _ msgVotes: [Cosmos_Gov_V1beta1_MsgVote], _ fee: Cosmos_Tx_V1beta1_Fee) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genVotesTx(auth, msgVotes, fee, "", chain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    func fetchAuth(_ channel: ClientConnection, _ chain: BaseChain) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = chain.bechAddress! }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchTx(_ channel: ClientConnection, _ response: Cosmos_Base_Abci_V1beta1_TxResponse) async throws -> Cosmos_Tx_V1beta1_GetTxResponse? {
-        let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = response.txhash }
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).getTx(req, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
+    func broadcastVoteTx(_ chain: BaseChain, _ msgVotes: [Cosmos_Gov_V1beta1_MsgVote], _ fee: Cosmos_Tx_V1beta1_Fee) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+        if let grpcFetcher = chain.getGrpcfetcher(),
+           let account = try await grpcFetcher.fetchAuth() {
+            let broadReq = Signer.genVotesTx(account, msgVotes, fee, "", chain)
+            return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: grpcFetcher.getClient()).broadcastTx(broadReq, callOptions: grpcFetcher.getCallOptions()).response.get().txResponse
         }
-    }
-    
-    func getConnection(_ chain: BaseChain) -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpcfetcher()!.getGrpc().0, port: chain.getGrpcfetcher()!.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
+        return nil
     }
 }
 

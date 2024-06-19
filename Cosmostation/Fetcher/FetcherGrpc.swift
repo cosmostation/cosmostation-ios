@@ -466,6 +466,20 @@ extension FetcherGrpc {
         return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: getClient()).delegatorWithdrawAddress(req, callOptions: getCallOptions()).response.get().withdrawAddress
     }
     
+    func simulateTx(_ simulTx: Cosmos_Tx_V1beta1_SimulateRequest) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).simulate(simulTx, callOptions: getCallOptions()).response.get()
+    }
+    
+    func broadcastTx(_ broadTx: Cosmos_Tx_V1beta1_BroadcastTxRequest) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).broadcastTx(broadTx, callOptions: getCallOptions()).response.get().txResponse
+    }
+    
+    func fetchTx( _ hash: String) async throws -> Cosmos_Tx_V1beta1_GetTxResponse? {
+        let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = hash }
+        return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).getTx(req, callOptions: getCallOptions()).response.get()
+    }
+    
+    
     func fetchAllCw20Balance(_ id: Int64) async {
         print("fetchAllCw20Balance in start")
         if (chain.supportCw20 == false) { return }
@@ -893,4 +907,94 @@ extension FetcherGrpc {
         }
         return result * 1000
     }
+}
+
+
+extension Google_Protobuf_Any {
+    
+    func accountInfos() -> (address: String?, accountNum: UInt64?, sequenceNum: UInt64?) {
+        
+        var rawAccount = self
+        if (typeURL.contains(Desmos_Profiles_V3_Profile.protoMessageName)),
+            let account = try? Desmos_Profiles_V3_Profile.init(serializedData: value).account {
+            rawAccount = account
+        }
+        
+        if (rawAccount.typeURL.contains(Cosmos_Auth_V1beta1_BaseAccount.protoMessageName)),
+           let auth = try? Cosmos_Auth_V1beta1_BaseAccount.init(serializedData: rawAccount.value) {
+            return (auth.address, auth.accountNumber, auth.sequence)
+
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)),
+                  let auth = try? Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: rawAccount.value) {
+            let baseAccount = auth.baseVestingAccount.baseAccount
+            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)),
+                  let auth = try? Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value){
+            let baseAccount = auth.baseVestingAccount.baseAccount
+            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)),
+                  let auth = try? Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: rawAccount.value) {
+            let baseAccount = auth.baseVestingAccount.baseAccount
+            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+
+        } else if (rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)),
+                  let auth = try? Injective_Types_V1beta1_EthAccount.init(serializedData: rawAccount.value) {
+            let baseAccount = auth.baseAccount
+            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+
+        } else if (rawAccount.typeURL.contains(Ethermint_Types_V1_EthAccount.protoMessageName)),
+                    let auth = try? Ethermint_Types_V1_EthAccount.init(serializedData: rawAccount.value) {
+            let baseAccount = auth.baseAccount
+            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+
+        }  else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)),
+                  let auth = try? Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value){
+            let baseAccount = auth.baseVestingAccount.baseAccount
+            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+        }
+        
+        return (nil, nil, nil)
+    }
+    
+    func onParseAuthPubkeyType() -> String? {
+        
+        var rawAccount = self
+        if (typeURL.contains(Desmos_Profiles_V3_Profile.protoMessageName)),
+            let account = try? Desmos_Profiles_V3_Profile.init(serializedData: rawAccount.value).account {
+            rawAccount = account
+        }
+
+        if (rawAccount.typeURL.contains(Cosmos_Auth_V1beta1_BaseAccount.protoMessageName)),
+           let auth = try? Cosmos_Auth_V1beta1_BaseAccount.init(serializedData: rawAccount.value) {
+            return auth.pubKey.typeURL
+
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)),
+                  let auth = try? Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: rawAccount.value) {
+            return auth.baseVestingAccount.baseAccount.pubKey.typeURL
+
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)),
+                  let auth = try? Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value){
+            return auth.baseVestingAccount.baseAccount.pubKey.typeURL
+
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)),
+                  let auth = try? Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: rawAccount.value) {
+            return auth.baseVestingAccount.baseAccount.pubKey.typeURL
+
+        } else if (rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)),
+                  let auth = try? Injective_Types_V1beta1_EthAccount.init(serializedData: rawAccount.value) {
+            return auth.baseAccount.pubKey.typeURL
+
+        } else if (rawAccount.typeURL.contains(Ethermint_Types_V1_EthAccount.protoMessageName)),
+                    let auth = try? Ethermint_Types_V1_EthAccount.init(serializedData: rawAccount.value) {
+            return auth.baseAccount.pubKey.typeURL
+
+        }  else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)),
+                  let auth = try? Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value){
+            return auth.baseVestingAccount.baseAccount.pubKey.typeURL
+        }
+        return nil
+    }
+    
 }
