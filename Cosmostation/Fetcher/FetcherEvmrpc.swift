@@ -23,7 +23,7 @@ class FetcherEvmrpc {
     }
     
     
-    func fetchPreCreate() async -> Bool {
+    func fetchBalances() async -> Bool {
         evmBalances = NSDecimalNumber.zero
         if let balanceJson = try? await fetchEvmBalance(chain.evmAddress!),
            let balance = balanceJson?["result"].stringValue.hexToNSDecimal {

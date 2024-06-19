@@ -191,7 +191,7 @@ public class BaseAccount {
                         chain.setInfoWithSeed(seed!, self.lastHDPath)
                     }
                     if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
-                        chain.fetchPreCreate()
+                        chain.fetchBalances()
                     }
                 }
             }
@@ -203,7 +203,7 @@ public class BaseAccount {
                         chain.setInfoWithPrivateKey(Data.fromHex(privateKeyString!)!)
                     }
                     if (chain.fetchState == .Idle || chain.fetchState == .Fail) {
-                        chain.fetchPreCreate()
+                        chain.fetchBalances()
                     }
                 }
             }

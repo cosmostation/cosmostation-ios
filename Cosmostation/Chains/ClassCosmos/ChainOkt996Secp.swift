@@ -77,10 +77,10 @@ class ChainOkt996Secp: BaseChain {
     }
     
     //fetch only balance for add account check
-    override func fetchPreCreate() {
+    override func fetchBalances() {
         fetchState = .Busy
         Task {
-            var result = await oktFetcher?.fetchPreCreate()
+            var result = await oktFetcher?.fetchBalances()
             
             if (result == false) {
                 fetchState = .Fail
@@ -89,7 +89,7 @@ class ChainOkt996Secp: BaseChain {
             }
             
             DispatchQueue.main.async(execute: {
-                NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+                NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
             })
         }
     }

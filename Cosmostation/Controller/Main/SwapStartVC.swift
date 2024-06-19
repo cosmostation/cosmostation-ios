@@ -11,9 +11,6 @@ import Lottie
 import Alamofire
 import AlamofireImage
 import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class SwapStartVC: BaseVC, UITextFieldDelegate {
     
@@ -161,29 +158,13 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             })
             outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == lastSwapSet[3] }.first ?? outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first!
             
-            let inputChannel = getConnection(inputCosmosChain)
-            if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.bechAddress!),
-               let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.bechAddress!),
-               let inputGrpcFetcher = inputCosmosChain.getGrpcfetcher() {
-                inputGrpcFetcher.cosmosAuth = inputAuth?.account ?? Google_Protobuf_Any()
-                inputGrpcFetcher.cosmosBalances = inputBal!
-                inputGrpcFetcher.onCheckVesting()
-            }
-            
-            let outputChannel = getConnection(outputCosmosChain)
-            if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.bechAddress!),
-               let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.bechAddress!),
-               let outputGrpcFetcher = outputCosmosChain.getGrpcfetcher() {
-                outputGrpcFetcher.cosmosAuth = outputAuth?.account ?? Google_Protobuf_Any()
-                outputGrpcFetcher.cosmosBalances = outputBal!
-                outputGrpcFetcher.onCheckVesting()
-            }
+            _ = await inputCosmosChain.grpcFetcher?.fetchBalances()
+            _ = await outputCosmosChain.grpcFetcher?.fetchBalances()
             
             DispatchQueue.main.async {
                 self.onInitView()
             }
         }
-        
         
         inputChainView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onInputChain)))
         inputAssetView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onInputAsset)))
@@ -601,7 +582,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                     let simulReq = Signer.genIbcSendSimul(account!, onBindIbcSend(inner_mag!), txFee, "", inputCosmosChain)
                     let simulRes = try await inputGrpcfetcher!.simulateTx(simulReq)
                     DispatchQueue.main.async {
-                        self.onUpdateWithSimul(simulRes, msgs)
+                        self.onUpdateWithSimul(simulRes, msg)
                     }
                     
                 } catch {
@@ -627,7 +608,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                     let simulReq = Signer.genWasmSimul(account!, onBindWasm(inner_mag!), txFee, "", inputCosmosChain)
                     let simulRes = try await inputGrpcfetcher!.simulateTx(simulReq)
                     DispatchQueue.main.async {
-                        self.onUpdateWithSimul(simulRes, msgs)
+                        self.onUpdateWithSimul(simulRes, msg)
                     }
                     
                 } catch {
@@ -695,15 +676,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                             }
                         })
                         inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first ?? inputAssetList[0]
-                        
-                        let inputChannel = getConnection(inputCosmosChain)
-                        if let inputAuth = try? await fetchAuth(inputChannel, inputCosmosChain.bechAddress!),
-                           let inputBal = try? await fetchBalances(inputChannel, inputCosmosChain.bechAddress!),
-                           let inputFetcher = inputCosmosChain.getGrpcfetcher() {
-                            inputFetcher.cosmosAuth = inputAuth?.account ?? Google_Protobuf_Any()
-                            inputFetcher.cosmosBalances = inputBal!
-                            inputFetcher.onCheckVesting()
-                        }
+                        _ =  await inputCosmosChain.grpcFetcher?.fetchBalances()
                         
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
@@ -726,15 +699,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                             }
                         })
                         outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first ?? outputAssetList[0]
-                        
-                        let outputChannel = getConnection(outputCosmosChain)
-                        if let outputAuth = try? await fetchAuth(outputChannel, outputCosmosChain.bechAddress!),
-                           let outputBal = try? await fetchBalances(outputChannel, outputCosmosChain.bechAddress!),
-                           let outputFetcher = outputCosmosChain.getGrpcfetcher() {
-                            outputFetcher.cosmosAuth = outputAuth?.account ?? Google_Protobuf_Any()
-                            outputFetcher.cosmosBalances = outputBal!
-                            outputFetcher.onCheckVesting()
-                        }
+                        _ =  await outputCosmosChain.grpcFetcher?.fetchBalances()
                         
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
@@ -779,7 +744,6 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
             swapBtn.isEnabled = false
             view.isUserInteractionEnabled = false
             loadingView.isHidden = false
-            
             let msgs = toMsg!["msgs"].arrayValue[0]
             if (msgs["msg_type_url"].stringValue == "/ibc.applications.transfer.v1.MsgTransfer") {
                 let inner_mag = try? JSON(data: Data(msgs["msg"].stringValue.utf8))
@@ -853,58 +817,5 @@ extension SwapStartVC {
     func fetchSkipMsg(_ route: JSON) async throws -> JSON {
         let json = onBindSkipMsgReq(route)
         return try await AF.request(BaseNetWork.SkipMsg(), method: .post, parameters: json.dictionaryObject!, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
-    }
-    
-    
-    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchBalances(_ channel: ClientConnection, _ address: String) async throws -> [Cosmos_Base_V1beta1_Coin]? {
-        let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
-        let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = address; $0.pagination = page }
-        return try? await Cosmos_Bank_V1beta1_QueryNIOClient(channel: channel).allBalances(req, callOptions: getCallOptions()).response.get().balances
-    }
-    
-//    //ibc Send
-//    func simulIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-//        let simulTx = Signer.genIbcSendSimul(auth, ibcTransfer, txFee, "", inputCosmosChain)
-//        do {
-//            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-//        } catch {
-//            throw error
-//        }
-//    }
-//    
-//    func broadcastIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-//        let reqTx = Signer.genIbcSendTx(auth, ibcTransfer, txFee, "", inputCosmosChain)
-//        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-//    }
-//    
-//    //Wasm
-//    func simulWasmTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasm: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-//        let simulTx = Signer.genWasmSimul(auth, [toWasm], txFee, "", inputCosmosChain)
-//        do {
-//            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-//        } catch {
-//            throw error
-//        }
-//    }
-//    
-//    func broadcastWasmTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasm: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-//        let reqTx = Signer.genWasmTx(auth, [toWasm], txFee, "", inputCosmosChain)
-//        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-//    }
-    
-    func getConnection(_ chain: BaseChain) -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpcfetcher()!.getGrpc().0, port: chain.getGrpcfetcher()!.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
     }
 }

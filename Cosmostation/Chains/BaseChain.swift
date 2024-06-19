@@ -181,14 +181,14 @@ class BaseChain {
     }
     
     //fetch only balance for add account check
-    func fetchPreCreate() {
+    func fetchBalances() {
         fetchState = .Busy
         Task {
             var result: Bool?
             if (supportEvm == true) {
-                result = await evmFetcher?.fetchPreCreate()
+                result = await evmFetcher?.fetchBalances()
             } else if (supportCosmosGrpc == true) {
-                result = await grpcFetcher?.fetchPreCreate()
+                result = await grpcFetcher?.fetchBalances()
             }
             
             if (result == false) {
@@ -198,7 +198,7 @@ class BaseChain {
             }
             
             DispatchQueue.main.async(execute: {
-                NotificationCenter.default.post(name: Notification.Name("FetchPreCreate"), object: self.tag, userInfo: nil)
+                NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
             })
         }
     }

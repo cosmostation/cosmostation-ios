@@ -16,7 +16,7 @@ class OktFetcher: FetcherLcd {
     var lcdOktTokens = Array<JSON>()
     var lcdOktValidators = Array<JSON>()
     
-    override func fetchPreCreate() async -> Bool {
+    override func fetchBalances() async -> Bool {
         lcdAccountInfo = JSON()
         if let accountInfo = try? await fetchAccountInfo(chain.bechAddress!) {
             self.lcdAccountInfo = accountInfo ?? JSON()

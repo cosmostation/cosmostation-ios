@@ -20,7 +20,7 @@ class FetcherLcd {
         self.chain = chain
     }
     
-    func fetchPreCreate() async -> Bool {
+    func fetchBalances() async -> Bool {
         return false
     }
     

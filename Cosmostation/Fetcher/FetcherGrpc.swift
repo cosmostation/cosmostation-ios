@@ -41,13 +41,17 @@ class FetcherGrpc {
         try? grpcConnection.close()
     }
     
-    func fetchPreCreate() async -> Bool {
+    func fetchBalances() async -> Bool {
         cosmosBalances = [Cosmos_Base_V1beta1_Coin]()
-        if let balance = try? await fetchBalance() {
+        if let auth = try? await fetchAuth(),
+           let balance = try? await fetchBalance() {
+            self.cosmosAuth = auth
             self.cosmosBalances = balance
+            self.onCheckVesting()
         }
         return true
     }
+    
     
     func fetchGrpcData(_ id: Int64) async -> Bool {
         mintscanCw20Tokens.removeAll()
