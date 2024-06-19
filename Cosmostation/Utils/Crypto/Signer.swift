@@ -14,21 +14,21 @@ import secp256k1
 
 class Signer {
     //Tx for Transfer
-    static func genSendTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSendTx(_ account: Google_Protobuf_Any,
                           _ toSend: Cosmos_Bank_V1beta1_MsgSend,
                           _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain)  -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let sendMsg = genSendMsg(auth, toSend)
-        return getSignedTx(auth, sendMsg, fee, memo, baseChain)
+        let sendMsg = genSendMsg(toSend)
+        return getSignedTxA(account, sendMsg, fee, memo, baseChain)
     }
     
-    static func genSendSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSendSimul(_ account: Google_Protobuf_Any,
                              _ toSend: Cosmos_Bank_V1beta1_MsgSend,
                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain)  -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let sendMsg = genSendMsg(auth, toSend)
-        return getSimulateTx(auth, sendMsg, fee, memo, baseChain)
+        let sendMsg = genSendMsg(toSend)
+        return getSimulateTxA(account, sendMsg, fee, memo, baseChain)
     }
     
-    static func genSendMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toSend: Cosmos_Bank_V1beta1_MsgSend) -> [Google_Protobuf_Any] {
+    static func genSendMsg(_ toSend: Cosmos_Bank_V1beta1_MsgSend) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/cosmos.bank.v1beta1.MsgSend"
             $0.value = try! toSend.serializedData()
@@ -37,21 +37,21 @@ class Signer {
     }
     
     //Tx for Ibc Transfer
-    static func genIbcSendTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genIbcSendTx(_ account: Google_Protobuf_Any,
                              _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer,
                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let ibcSendMsg = genIbcSendMsg(auth, ibcTransfer)
-        return getSignedTx(auth, ibcSendMsg, fee, memo, baseChain)
+        let ibcSendMsg = genIbcSendMsg(ibcTransfer)
+        return getSignedTxA(account, ibcSendMsg, fee, memo, baseChain)
     }
     
-    static func genIbcSendSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genIbcSendSimul(_ account: Google_Protobuf_Any,
                                 _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer,
                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let ibcSendMsg = genIbcSendMsg(auth, ibcTransfer)
-        return getSimulateTx(auth, ibcSendMsg, fee, memo, baseChain)
+        let ibcSendMsg = genIbcSendMsg(ibcTransfer)
+        return getSimulateTxA(account, ibcSendMsg, fee, memo, baseChain)
     }
     
-    static func genIbcSendMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) -> [Google_Protobuf_Any] {
+    static func genIbcSendMsg(_ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/ibc.applications.transfer.v1.MsgTransfer"
             $0.value = try! ibcTransfer.serializedData()
@@ -60,21 +60,21 @@ class Signer {
     }
     
     //Tx for Wasm Exe
-    static func genWasmTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genWasmTx(_ account: Google_Protobuf_Any,
                           _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract],
                           _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let wasmMsg = genWasmMsg(auth, wasmContracts)
-        return getSignedTx(auth, wasmMsg, fee, memo, baseChain)
+        let wasmMsg = genWasmMsg(wasmContracts)
+        return getSignedTxA(account, wasmMsg, fee, memo, baseChain)
     }
     
-    static func genWasmSimul(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genWasmSimul(_ account: Google_Protobuf_Any,
                              _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract],
                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let wasmMsg = genWasmMsg(auth, wasmContracts)
-        return getSimulateTx(auth, wasmMsg, fee, memo, baseChain)
+        let wasmMsg = genWasmMsg(wasmContracts)
+        return getSimulateTxA(account, wasmMsg, fee, memo, baseChain)
     }
     
-    static func genWasmMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract]) -> [Google_Protobuf_Any] {
+    static func genWasmMsg(_ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract]) -> [Google_Protobuf_Any] {
         var result = [Google_Protobuf_Any]()
         wasmContracts.forEach { msg in
             let anyMsg = Google_Protobuf_Any.with {

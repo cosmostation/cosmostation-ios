@@ -479,6 +479,19 @@ extension FetcherGrpc {
         return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).getTx(req, callOptions: getCallOptions()).response.get()
     }
     
+    func fetchIbcClient(_ ibcPath: MintscanPath) async throws -> Ibc_Core_Channel_V1_QueryChannelClientStateResponse? {
+        let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
+            $0.channelID = ibcPath.channel!
+            $0.portID = ibcPath.port!
+        }
+        return try? await Ibc_Core_Channel_V1_QueryNIOClient(channel: getClient()).channelClientState(req, callOptions: getCallOptions()).response.get()
+    }
+    
+    func fetchLastBlock() async throws -> Cosmos_Base_Tendermint_V1beta1_GetLatestBlockResponse? {
+        let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
+        return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: getClient()).getLatestBlock(req, callOptions: getCallOptions()).response.get()
+    }
+    
     
     func fetchAllCw20Balance(_ id: Int64) async {
         print("fetchAllCw20Balance in start")

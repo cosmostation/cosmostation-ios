@@ -62,6 +62,7 @@ class CommonTransfer: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var fromChain: BaseChain!
+    var fromGrpcFetcher: FetcherGrpc!
     var sendType: SendAssetType!
     var txStyle: TxStyle = .COSMOS_STYLE            // .CosmosEVM_Coin is only change tx style
     
@@ -95,6 +96,9 @@ class CommonTransfer: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        if (fromChain.supportCosmosGrpc) {
+            fromGrpcFetcher = fromChain.getGrpcfetcher()
+        }
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -116,19 +120,17 @@ class CommonTransfer: BaseVC {
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeDenom)))
         
         Task {
-            if let evmfetcher = fromChain.getEvmfetcher() {
-                if let url = URL(string: evmfetcher.getEvmRpc()),
-                   let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil) {
-                    self.web3 = Web3.init(provider: web3Provider)
-                    
-                } else {
-                    DispatchQueue.main.async {
-                        self.dismiss(animated: true)
-                    }
+            if fromChain.supportEvm,
+               let evmfetcher = fromChain.getEvmfetcher(),
+               let url = URL(string: evmfetcher.getEvmRpc()),
+               let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil) {
+                self.web3 = Web3.init(provider: web3Provider)
+            } else {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true)
                 }
             }
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -212,7 +214,7 @@ class CommonTransfer: BaseVC {
         if (sendType == .Only_Cosmos_Coin) {
             decimal = toSendMsAsset!.decimals
             toSendSymbol = toSendMsAsset!.symbol
-            availableAmount = fromChain.getGrpcfetcher()!.balanceAmount(toSendDenom)
+            availableAmount = fromGrpcFetcher.balanceAmount(toSendDenom)
             if (cosmosTxFee.amount[0].denom == toSendDenom) {
                 let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
                 availableAmount = availableAmount.subtracting(feeAmount)
@@ -238,7 +240,7 @@ class CommonTransfer: BaseVC {
             } else if (txStyle == .COSMOS_STYLE) {
                 decimal = toSendMsAsset!.decimals
                 toSendSymbol = toSendMsAsset!.symbol
-                availableAmount = fromChain.getGrpcfetcher()!.balanceAmount(toSendDenom)
+                availableAmount = fromGrpcFetcher.balanceAmount(toSendDenom)
                 if (cosmosTxFee.amount[0].denom == toSendDenom) {
                     let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
                     availableAmount = availableAmount.subtracting(feeAmount)
@@ -312,7 +314,7 @@ class CommonTransfer: BaseVC {
             } else if (txStyle == .COSMOS_STYLE) {
                 decimal = toSendMsAsset!.decimals
                 toSendSymbol = toSendMsAsset!.symbol
-                availableAmount = fromChain.getGrpcfetcher()!.balanceAmount(toSendDenom)
+                availableAmount = fromGrpcFetcher.balanceAmount(toSendDenom)
                 if (cosmosTxFee.amount[0].denom == toSendDenom) {
                     let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
                     availableAmount = availableAmount.subtracting(feeAmount)
@@ -685,7 +687,7 @@ extension CommonTransfer {
             }
             evmTx?.from = senderAddress
             
-            print("evmTxA ", evmTx)
+//            print("evmTxA ", evmTx)
             if let estimateGas = try? await web3.eth.estimateGas(for: evmTx!) {
                 print("estimateGas GOT ", estimateGas)
                 evmGasLimit = estimateGas
@@ -693,7 +695,7 @@ extension CommonTransfer {
             } else {
                 evmTxType = nil
             }
-            print("evmTxB ", evmTx)
+//            print("evmTxB ", evmTx)
             
             DispatchQueue.main.async {
                 self.onUpdateFeeViewAfterSimul(nil)
@@ -738,20 +740,20 @@ extension CommonTransfer {
 extension CommonTransfer {
     func inChainCoinSendSimul() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, fromChain.bechAddress!) {
-                do {
-                    let simul = try await simulSendTx(channel, auth!, onBindSend())
-                    DispatchQueue.main.async {
-                        self.onUpdateFeeViewAfterSimul(simul)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let simulReq = Signer.genSendSimul(account!, onBindSend(), cosmosTxFee, toMemo, fromChain)
+                let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateFeeViewAfterSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -759,9 +761,10 @@ extension CommonTransfer {
     
     func inChainCoinSend() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, fromChain.bechAddress!),
-               let response = try await broadcastSendTx(channel, auth!, onBindSend()) {
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let broadReq = Signer.genSendTx(account!, onBindSend(), cosmosTxFee, toMemo, fromChain)
+                let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -771,9 +774,11 @@ extension CommonTransfer {
                     txResult.toAddress = self.toAddress
                     txResult.toMemo = self.toMemo
                     txResult.cosmosBroadcastTxResponse = response
-                    txResult.modalPresentationStyle = .fullScreen
-                    self.present(txResult, animated: true)
+
                 })
+                
+            } catch {
+                //TODO handle Error
             }
         }
     }
@@ -794,20 +799,20 @@ extension CommonTransfer {
     
     func inChainWasmSendSimul() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, fromChain.bechAddress!) {
-                do {
-                    let simul = try await simulCw20SendTx(channel, auth!, onBindCw20Send())
-                    DispatchQueue.main.async {
-                        self.onUpdateFeeViewAfterSimul(simul)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let simulReq = Signer.genWasmSimul(account!, [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateFeeViewAfterSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -815,9 +820,10 @@ extension CommonTransfer {
     
     func inChainWasmSend() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, fromChain.bechAddress!),
-               let response = try await broadcastCw20SendTx(channel, auth!, onBindCw20Send()) {
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let broadReq = Signer.genWasmTx(account!, [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -827,9 +833,11 @@ extension CommonTransfer {
                     txResult.toAddress = self.toAddress
                     txResult.toMemo = self.toMemo
                     txResult.cosmosBroadcastTxResponse = response
-                    txResult.modalPresentationStyle = .fullScreen
-                    self.present(txResult, animated: true)
+
                 })
+                
+            } catch {
+                //TODO handle Error
             }
         }
     }
@@ -846,26 +854,25 @@ extension CommonTransfer {
     
     
     
-    
     func ibcCoinSendSimul() {
         Task {
-            let channel = getConnection()
-            let recipientChannel = getRecipientConnection()
-            if let auth = try? await fetchAuth(channel, fromChain.bechAddress!),
-               let ibcClient = try? await fetchIbcClient(channel),
-               let lastBlock = try? await fetchLastBlock(recipientChannel) {
-                do {
-                    let simul = try await simulIbcSendTx(channel, auth!, onBindIbcSend(ibcClient!, lastBlock!))
-                    DispatchQueue.main.async {
-                        self.onUpdateFeeViewAfterSimul(simul)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let ibcClient = try await fromGrpcFetcher.fetchIbcClient(ibcPath!)
+                let toGrpcFetcher = toChain!.getGrpcfetcher()
+                let toLastBlock = try await toGrpcFetcher!.fetchLastBlock()
+                let simulReq = Signer.genIbcSendSimul(account!, onBindIbcSend(ibcClient!, toLastBlock!), cosmosTxFee, toMemo, fromChain)
+                let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateFeeViewAfterSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -873,12 +880,13 @@ extension CommonTransfer {
     
     func ibcCoinSend() {
         Task {
-            let channel = getConnection()
-            let recipientChannel = getRecipientConnection()
-            if let auth = try? await fetchAuth(channel, fromChain.bechAddress!),
-               let ibcClient = try? await fetchIbcClient(channel),
-               let lastBlock = try? await fetchLastBlock(recipientChannel),
-               let response = try await broadcastIbcSendTx(channel, auth!, onBindIbcSend(ibcClient!, lastBlock!)) {
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let ibcClient = try await fromGrpcFetcher.fetchIbcClient(ibcPath!)
+                let toGrpcFetcher = toChain!.getGrpcfetcher()
+                let toLastBlock = try await toGrpcFetcher!.fetchLastBlock()
+                let broadReq = Signer.genIbcSendTx(account!, onBindIbcSend(ibcClient!, toLastBlock!), cosmosTxFee, toMemo, fromChain)
+                let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -888,9 +896,11 @@ extension CommonTransfer {
                     txResult.toAddress = self.toAddress
                     txResult.toMemo = self.toMemo
                     txResult.cosmosBroadcastTxResponse = response
-                    txResult.modalPresentationStyle = .fullScreen
-                    self.present(txResult, animated: true)
+
                 })
+                
+            } catch {
+                //TODO handle Error
             }
         }
     }
@@ -921,20 +931,20 @@ extension CommonTransfer {
     
     func ibcWasmSendSimul() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, fromChain.bechAddress!) {
-                do {
-                    let simul = try await simulCw20IbcSendTx(channel, auth!, onBindCw20IbcSend())
-                    DispatchQueue.main.async {
-                        self.onUpdateFeeViewAfterSimul(simul)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let simulReq = Signer.genWasmSimul(account!, [onBindCw20IbcSend()], cosmosTxFee, toMemo, fromChain)
+                let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateFeeViewAfterSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -942,9 +952,10 @@ extension CommonTransfer {
     
     func ibcWasmSend() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, fromChain.bechAddress!),
-               let response = try await broadcastCw20IbcSendTx(channel, auth!, onBindCw20IbcSend()) {
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let broadReq = Signer.genWasmTx(account!, [onBindCw20IbcSend()], cosmosTxFee, toMemo, fromChain)
+                let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -954,9 +965,11 @@ extension CommonTransfer {
                     txResult.toAddress = self.toAddress
                     txResult.toMemo = self.toMemo
                     txResult.cosmosBroadcastTxResponse = response
-                    txResult.modalPresentationStyle = .fullScreen
-                    self.present(txResult, animated: true)
+
                 })
+                
+            } catch {
+                //TODO handle Error
             }
         }
     }
@@ -977,108 +990,108 @@ extension CommonTransfer {
 
 extension CommonTransfer {
     
-    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchIbcClient(_ channel: ClientConnection) async throws -> Ibc_Core_Channel_V1_QueryChannelClientStateResponse? {
-        let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
-            $0.channelID = ibcPath!.channel!
-            $0.portID = ibcPath!.port!
-        }
-        return try? await Ibc_Core_Channel_V1_QueryNIOClient(channel: channel).channelClientState(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchLastBlock(_ channel: ClientConnection) async throws -> Cosmos_Base_Tendermint_V1beta1_GetLatestBlockResponse? {
-        let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
-        return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: channel).getLatestBlock(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    
-    
-    //inChain Coin Send
-    func simulSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toSend: Cosmos_Bank_V1beta1_MsgSend) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genSendSimul(auth, toSend, cosmosTxFee, toMemo, fromChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toSend: Cosmos_Bank_V1beta1_MsgSend) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genSendTx(auth, toSend, cosmosTxFee, toMemo, fromChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    //inChain Wasm Send
-    func simulCw20SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, [toWasmSend], cosmosTxFee, toMemo, fromChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastCw20SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, [toWasmSend], cosmosTxFee, toMemo, fromChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    //ibc Coin Send
-    func simulIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genIbcSendSimul(auth, ibcTransfer, cosmosTxFee, toMemo, fromChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genIbcSendTx(auth, ibcTransfer, cosmosTxFee, toMemo, fromChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    //Wasm ibc Send
-    func simulCw20IbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, [ibcWasmSend], cosmosTxFee, toMemo, fromChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastCw20IbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, [ibcWasmSend], cosmosTxFee, toMemo, fromChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: fromChain.getGrpcfetcher()!.getGrpc().0, port: fromChain.getGrpcfetcher()!.getGrpc().1)
-    }
-    
-    func getRecipientConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: toChain.getGrpcfetcher()!.getGrpc().0, port: toChain.getGrpcfetcher()!.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
-    }
+    //    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
+    //        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
+    //        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
+    //    }
+    //
+    //    func fetchIbcClient(_ channel: ClientConnection) async throws -> Ibc_Core_Channel_V1_QueryChannelClientStateResponse? {
+    //        let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
+    //            $0.channelID = ibcPath!.channel!
+    //            $0.portID = ibcPath!.port!
+    //        }
+    //        return try? await Ibc_Core_Channel_V1_QueryNIOClient(channel: channel).channelClientState(req, callOptions: getCallOptions()).response.get()
+    //    }
+    //
+    //    func fetchLastBlock(_ channel: ClientConnection) async throws -> Cosmos_Base_Tendermint_V1beta1_GetLatestBlockResponse? {
+    //        let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
+    //        return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: channel).getLatestBlock(req, callOptions: getCallOptions()).response.get()
+    //    }
+    //
+    //
+    //
+    //    //inChain Coin Send
+    //    func simulSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toSend: Cosmos_Bank_V1beta1_MsgSend) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+    //        let simulTx = Signer.genSendSimul(auth, toSend, cosmosTxFee, toMemo, fromChain)
+    //        do {
+    //            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
+    //        } catch {
+    //            throw error
+    //        }
+    //    }
+    //
+    //    func broadcastSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toSend: Cosmos_Bank_V1beta1_MsgSend) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+    //        let reqTx = Signer.genSendTx(auth, toSend, cosmosTxFee, toMemo, fromChain)
+    //        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
+    //    }
+    //
+    //
+    //    //inChain Wasm Send
+    //    func simulCw20SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+    //        let simulTx = Signer.genWasmSimul(auth, [toWasmSend], cosmosTxFee, toMemo, fromChain)
+    //        do {
+    //            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
+    //        } catch {
+    //            throw error
+    //        }
+    //    }
+    //
+    //    func broadcastCw20SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+    //        let reqTx = Signer.genWasmTx(auth, [toWasmSend], cosmosTxFee, toMemo, fromChain)
+    //        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
+    //    }
+    //
+    //
+    //    //ibc Coin Send
+    //    func simulIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+    //        let simulTx = Signer.genIbcSendSimul(auth, ibcTransfer, cosmosTxFee, toMemo, fromChain)
+    //        do {
+    //            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
+    //        } catch {
+    //            throw error
+    //        }
+    //    }
+    //
+    //    func broadcastIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+    //        let reqTx = Signer.genIbcSendTx(auth, ibcTransfer, cosmosTxFee, toMemo, fromChain)
+    //        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
+    //    }
+    //
+    //
+    //    //Wasm ibc Send
+    //    func simulCw20IbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+    //        let simulTx = Signer.genWasmSimul(auth, [ibcWasmSend], cosmosTxFee, toMemo, fromChain)
+    //        do {
+    //            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
+    //        } catch {
+    //            throw error
+    //        }
+    //    }
+    //
+    //    func broadcastCw20IbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+    //        let reqTx = Signer.genWasmTx(auth, [ibcWasmSend], cosmosTxFee, toMemo, fromChain)
+    //        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
+    //    }
+    //
+    //
+    //
+    //
+    //
+    //    func getConnection() -> ClientConnection {
+    //        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
+    //        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: fromChain.getGrpcfetcher()!.getGrpc().0, port: fromChain.getGrpcfetcher()!.getGrpc().1)
+    //    }
+    //
+    //    func getRecipientConnection() -> ClientConnection {
+    //        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
+    //        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: toChain.getGrpcfetcher()!.getGrpc().0, port: toChain.getGrpcfetcher()!.getGrpc().1)
+    //    }
+    //
+    //    func getCallOptions() -> CallOptions {
+    //        var callOptions = CallOptions()
+    //        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
+    //        return callOptions
+    //    }
 }
 
 extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountSheetDelegate, MemoDelegate, PinDelegate {

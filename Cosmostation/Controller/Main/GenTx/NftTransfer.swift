@@ -9,9 +9,6 @@
 import UIKit
 import Lottie
 import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class NftTransfer: BaseVC {
     
@@ -58,6 +55,7 @@ class NftTransfer: BaseVC {
     var txStyle: TxStyle = .COSMOS_STYLE
     
     var fromChain: BaseChain!
+    var fromGrpcFetcher: FetcherGrpc!
     var toSendNFT: Cw721Model!
     
     var toChain: BaseChain!
@@ -75,6 +73,7 @@ class NftTransfer: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        fromGrpcFetcher = fromChain.getGrpcfetcher()
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -272,20 +271,20 @@ class NftTransfer: BaseVC {
     
     func cw721SendSimul() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, fromChain.bechAddress!) {
-                do {
-                    let simul = try await simulCw721SendTx(channel, auth!, onBindCw20Send())
-                    DispatchQueue.main.async {
-                        self.onUpdateFeeViewAfterSimul(simul)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let simulReq = Signer.genWasmSimul(account!, [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateFeeViewAfterSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -293,9 +292,10 @@ class NftTransfer: BaseVC {
     
     func cw721Send() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, fromChain.bechAddress!),
-               let response = try await broadcast721SendTx(channel, auth!, onBindCw20Send()) {
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let broadReq = Signer.genWasmTx(account!, [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -308,6 +308,9 @@ class NftTransfer: BaseVC {
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
                 })
+                
+            } catch {
+                //TODO handle Error
             }
         }
     }
@@ -363,41 +366,5 @@ extension NftTransfer: BaseSheetDelegate, SendAddressDelegate, MemoDelegate, Pin
             loadingView.isHidden = false
             cw721Send()
         }
-    }
-}
-
-
-extension NftTransfer {
-    
-    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func simulCw721SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, [toWasmSend], cosmosTxFee, toMemo, fromChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcast721SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, [toWasmSend], cosmosTxFee, toMemo, fromChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: fromChain.getGrpcfetcher()!.getGrpc().0, port: fromChain.getGrpcfetcher()!.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
     }
 }

@@ -595,24 +595,24 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             let inner_mag = try? JSON(data: Data(msgs["msg"].stringValue.utf8))
 //            print("inner_mag ", inner_mag)
             Task {
-                let channel = getConnection(inputCosmosChain)
-                if let auth = try? await fetchAuth(channel, inputCosmosChain.bechAddress!) {
-                    do {
-                        let simul = try await simulIbcSendTx(channel, auth!, onBindIbcSend(inner_mag!))
-                        DispatchQueue.main.async {
-                            self.onUpdateWithSimul(simul, msg)
-                        }
-                        
-                    } catch {
-                        DispatchQueue.main.async {
-                            self.view.isUserInteractionEnabled = true
-                            self.loadingView.isHidden = true
-                            self.onShowToast("Error : " + "\n" + "\(error)")
-                            self.toMsg = nil
-                            self.swapBtn.isEnabled = false
-                            self.toggleBtn.isEnabled = true
-                            return
-                        }
+                do {
+                    let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher()
+                    let account = try await inputGrpcfetcher!.fetchAuth()
+                    let simulReq = Signer.genIbcSendSimul(account!, onBindIbcSend(inner_mag!), txFee, "", inputCosmosChain)
+                    let simulRes = try await inputGrpcfetcher!.simulateTx(simulReq)
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(simulRes, msgs)
+                    }
+                    
+                } catch {
+                    DispatchQueue.main.async {
+                        self.view.isUserInteractionEnabled = true
+                        self.loadingView.isHidden = true
+                        self.onShowToast("Error : " + "\n" + "\(error)")
+                        self.toMsg = nil
+                        self.swapBtn.isEnabled = false
+                        self.toggleBtn.isEnabled = true
+                        return
                     }
                 }
             }
@@ -621,24 +621,24 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             let inner_mag = try? JSON(data: Data(msgs["msg"].stringValue.utf8))
 //            print("inner_mag ", inner_mag)
             Task {
-                let channel = getConnection(inputCosmosChain)
-                if let auth = try? await fetchAuth(channel, inputCosmosChain.bechAddress!) {
-                    do {
-                        let simul = try await simulWasmTx(channel, auth!, onBindWasm(inner_mag!))
-                        DispatchQueue.main.async {
-                            self.onUpdateWithSimul(simul, msg)
-                        }
-                        
-                    } catch {
-                        DispatchQueue.main.async {
-                            self.view.isUserInteractionEnabled = true
-                            self.loadingView.isHidden = true
-                            self.onShowToast("Error : " + "\n" + "\(error)")
-                            self.toMsg = nil
-                            self.swapBtn.isEnabled = false
-                            self.toggleBtn.isEnabled = true
-                            return
-                        }
+                do {
+                    let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher()
+                    let account = try await inputGrpcfetcher!.fetchAuth()
+                    let simulReq = Signer.genWasmSimul(account!, onBindWasm(inner_mag!), txFee, "", inputCosmosChain)
+                    let simulRes = try await inputGrpcfetcher!.simulateTx(simulReq)
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(simulRes, msgs)
+                    }
+                    
+                } catch {
+                    DispatchQueue.main.async {
+                        self.view.isUserInteractionEnabled = true
+                        self.loadingView.isHidden = true
+                        self.onShowToast("Error : " + "\n" + "\(error)")
+                        self.toMsg = nil
+                        self.swapBtn.isEnabled = false
+                        self.toggleBtn.isEnabled = true
+                        return
                     }
                 }
             }
@@ -661,16 +661,19 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         }
     }
     
-    func onBindWasm(_ innerMsg: JSON) -> Cosmwasm_Wasm_V1_MsgExecuteContract {
+    func onBindWasm(_ innerMsg: JSON) -> [Cosmwasm_Wasm_V1_MsgExecuteContract] {
+        var result = [Cosmwasm_Wasm_V1_MsgExecuteContract]()
         let jsonMsgBase64 = try! innerMsg["msg"].rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let fundCoin = Cosmos_Base_V1beta1_Coin.init(innerMsg["funds"].arrayValue[0]["denom"].stringValue, innerMsg["funds"].arrayValue[0]["amount"].stringValue)
         
-        return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+        let msg =  Cosmwasm_Wasm_V1_MsgExecuteContract.with {
             $0.sender = innerMsg["sender"].stringValue
             $0.contract = innerMsg["contract"].stringValue
             $0.msg = Data(base64Encoded: jsonMsgBase64)!
             $0.funds = [fundCoin]
         }
+        result.append(msg)
+        return result
     }
     
 }
@@ -780,39 +783,47 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
             let msgs = toMsg!["msgs"].arrayValue[0]
             if (msgs["msg_type_url"].stringValue == "/ibc.applications.transfer.v1.MsgTransfer") {
                 let inner_mag = try? JSON(data: Data(msgs["msg"].stringValue.utf8))
+                
                 Task {
-                    let channel = getConnection(inputCosmosChain)
-                    if let auth = try? await fetchAuth(channel, inputCosmosChain.bechAddress!),
-                       let response = try await broadcastIbcSendTx(channel, auth!, onBindIbcSend(inner_mag!)) {
+                    do {
+                        let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher()
+                        let account = try await inputGrpcfetcher!.fetchAuth()
+                        let broadReq = Signer.genIbcSendTx(account!, onBindIbcSend(inner_mag!), txFee, "", inputCosmosChain)
+                        let response = try await inputGrpcfetcher!.broadcastTx(broadReq)
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.view.isUserInteractionEnabled = true
                             self.loadingView.isHidden = true
-                            
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                             txResult.selectedChain = self.inputCosmosChain
                             txResult.broadcastTxResponse = response
                             txResult.modalPresentationStyle = .fullScreen
                             self.present(txResult, animated: true)
                         })
+                        
+                    } catch {
+                        //TODO handle Error
                     }
                 }
                 
             } else if (msgs["msg_type_url"].stringValue == "/cosmwasm.wasm.v1.MsgExecuteContract") {
                 let inner_mag = try? JSON(data: Data(msgs["msg"].stringValue.utf8))
+                
                 Task {
-                    let channel = getConnection(inputCosmosChain)
-                    if let auth = try? await fetchAuth(channel, inputCosmosChain.bechAddress!),
-                       let response = try await broadcastWasmTx(channel, auth!, onBindWasm(inner_mag!)) {
+                    do {
+                        let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher()
+                        let account = try await inputGrpcfetcher!.fetchAuth()
+                        let broadReq = Signer.genWasmTx(account!, onBindWasm(inner_mag!), txFee, "", inputCosmosChain)
+                        let response = try await inputGrpcfetcher!.broadcastTx(broadReq)
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.view.isUserInteractionEnabled = true
                             self.loadingView.isHidden = true
-                            
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                             txResult.selectedChain = self.inputCosmosChain
                             txResult.broadcastTxResponse = response
                             txResult.modalPresentationStyle = .fullScreen
                             self.present(txResult, animated: true)
                         })
+                        
+                    } catch {
+                        //TODO handle Error
                     }
                 }
             }
@@ -856,35 +867,35 @@ extension SwapStartVC {
         return try? await Cosmos_Bank_V1beta1_QueryNIOClient(channel: channel).allBalances(req, callOptions: getCallOptions()).response.get().balances
     }
     
-    //ibc Send
-    func simulIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genIbcSendSimul(auth, ibcTransfer, txFee, "", inputCosmosChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genIbcSendTx(auth, ibcTransfer, txFee, "", inputCosmosChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    //Wasm
-    func simulWasmTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasm: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, [toWasm], txFee, "", inputCosmosChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastWasmTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasm: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, [toWasm], txFee, "", inputCosmosChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
+//    //ibc Send
+//    func simulIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+//        let simulTx = Signer.genIbcSendSimul(auth, ibcTransfer, txFee, "", inputCosmosChain)
+//        do {
+//            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
+//        } catch {
+//            throw error
+//        }
+//    }
+//    
+//    func broadcastIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+//        let reqTx = Signer.genIbcSendTx(auth, ibcTransfer, txFee, "", inputCosmosChain)
+//        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
+//    }
+//    
+//    //Wasm
+//    func simulWasmTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasm: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+//        let simulTx = Signer.genWasmSimul(auth, [toWasm], txFee, "", inputCosmosChain)
+//        do {
+//            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
+//        } catch {
+//            throw error
+//        }
+//    }
+//    
+//    func broadcastWasmTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasm: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+//        let reqTx = Signer.genWasmTx(auth, [toWasm], txFee, "", inputCosmosChain)
+//        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
+//    }
     
     func getConnection(_ chain: BaseChain) -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)

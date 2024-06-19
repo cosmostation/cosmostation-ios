@@ -9,9 +9,6 @@
 import UIKit
 import Lottie
 import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class NeutronVault: BaseVC {
     
@@ -41,6 +38,7 @@ class NeutronVault: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var vaultType: NeutronVaultType!
+    var grpcFetcher: NeutronFetcher!
     var selectedChain: ChainNeutron!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
@@ -54,6 +52,7 @@ class NeutronVault: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        grpcFetcher = selectedChain.neutronFetcher
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -215,47 +214,50 @@ class NeutronVault: BaseVC {
         loadingView.isHidden = false
         
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!) {
-                do {
-                    let simul = try await simulVaultTx(channel, auth!, onBindWasmMsg())
-                    DispatchQueue.main.async {
-                        self.onUpdateWithSimul(simul)
-                    }
-                    
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
+            do {
+                let account = try await grpcFetcher.fetchAuth()
+                let simulReq = Signer.genWasmSimul(account!, onBindWasmMsg(), txFee, txMemo, selectedChain)
+                let simulRes = try await grpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
     }
     
-    func onBindWasmMsg() -> Cosmwasm_Wasm_V1_MsgExecuteContract {
+    func onBindWasmMsg() -> [Cosmwasm_Wasm_V1_MsgExecuteContract] {
+        var result = [Cosmwasm_Wasm_V1_MsgExecuteContract]()
         if (vaultType == .Deposit) {
             let jsonMsg: JSON = ["bond" : JSON()]
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             
-            return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+            let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
                 $0.sender = selectedChain.bechAddress!
                 $0.contract = self.selectedChain.neutronFetcher!.vaultsList?[0]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
                 $0.funds = [toCoin!]
             }
+            result.append(msg)
+            
         } else {
             let jsonMsg: JSON = ["unbond" : ["amount" : toCoin!.amount]]
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
-            return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+            let msg  = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
                 $0.sender = selectedChain.bechAddress!
                 $0.contract = self.selectedChain.neutronFetcher!.vaultsList?[0]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
-            
+            result.append(msg)
         }
+        return result
     }
 }
 
@@ -285,61 +287,29 @@ extension NeutronVault: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, Pi
             view.isUserInteractionEnabled = false
             confrimBtn.isEnabled = false
             loadingView.isHidden = false
+            
             Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress!),
-                   let response = try await broadcastVaultTx(channel, auth!, onBindWasmMsg()) {
+                do {
+                    let account = try await grpcFetcher.fetchAuth()
+                    let broadReq = Signer.genWasmTx(account!, onBindWasmMsg(), txFee, txMemo, selectedChain)
+                    let response = try await grpcFetcher.broadcastTx(broadReq)
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
-                        
                         let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                         txResult.selectedChain = self.selectedChain
                         txResult.broadcastTxResponse = response
                         txResult.modalPresentationStyle = .fullScreen
                         self.present(txResult, animated: true)
                     })
+                    
+                } catch {
+                    //TODO handle Error
                 }
             }
         }
     }
     
 }
-
-extension NeutronVault {
-    
-    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func simulVaultTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, [toWasmSend], txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastVaultTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, [toWasmSend], txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.neutronFetcher!.getGrpc().0, port: selectedChain.neutronFetcher!.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
-    }
-}
-
 
 public enum NeutronVaultType: Int {
     case Deposit = 0
