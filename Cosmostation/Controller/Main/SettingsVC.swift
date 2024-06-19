@@ -282,13 +282,13 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         } else if (indexPath.section == 2) {
             if (indexPath.row == 0) {
                 if (BaseData.instance.getLanguage() == 2) {
-                    guard let url = URL(string: "https://www.cosmostation.io/kr/support/moible") else { return }
+                    guard let url = URL(string: "https://www.cosmostation.io/kr/support/mobile") else { return }
                     onShowSafariWeb(url)
                 } else if (BaseData.instance.getLanguage() == 3) {
-                    guard let url = URL(string: "https://www.cosmostation.io/jp/support/moible") else { return }
+                    guard let url = URL(string: "https://www.cosmostation.io/jp/support/mobile") else { return }
                     onShowSafariWeb(url)
                 } else {
-                    guard let url = URL(string: "https://www.cosmostation.io/en/support/moible") else { return }
+                    guard let url = URL(string: "https://www.cosmostation.io/en/support/mobile") else { return }
                     onShowSafariWeb(url)
                 }
                 

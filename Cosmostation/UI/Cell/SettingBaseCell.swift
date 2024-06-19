@@ -84,15 +84,8 @@ class SettingBaseCell: UITableViewCell {
     
     
     
-    
-//    func onBindSetMintscan() {
-//        setImg.image = UIImage(named: "setCosmostation")
-//        setTitleLabel.text = NSLocalizedString("setting_mintscan_title", comment: "")
-//        setDetailLabel.text = ""
-//    }
-    
     func onBindSetGuide() {
-        setImg.image = UIImage(named: "setHomepage")
+        setImg.image = UIImage(named: "setGuide")
         setTitleLabel.text = NSLocalizedString("setting_help_title", comment: "")
         setDetailLabel.text = ""
     }
@@ -102,32 +95,6 @@ class SettingBaseCell: UITableViewCell {
         setTitleLabel.text = NSLocalizedString("setting_homepage_title", comment: "")
         setDetailLabel.text = ""
     }
-    
-    
-    
-//    func onBindSetBlog() {
-//        setImg.image = UIImage(named: "setBlog")
-//        setTitleLabel.text = NSLocalizedString("setting_blog_title", comment: "")
-//        setDetailLabel.text = ""
-//    }
-//    
-//    func onBindSetTwitter() {
-//        setImg.image = UIImage(named: "setTwitter")
-//        setTitleLabel.text = NSLocalizedString("setting_twitter_title", comment: "")
-//        setDetailLabel.text = ""
-//    }
-//    
-//    func onBindSetTellegram() {
-//        setImg.image = UIImage(named: "setTelegram")
-//        setTitleLabel.text = NSLocalizedString("setting_telegram_title", comment: "")
-//        setDetailLabel.text = ""
-//    }
-//    
-//    func onBindSetYoutube() {
-//        setImg.image = UIImage(named: "setYoutube")
-//        setTitleLabel.text = NSLocalizedString("setting_youtube_title", comment: "")
-//        setDetailLabel.text = ""
-//    }
     
     
     
