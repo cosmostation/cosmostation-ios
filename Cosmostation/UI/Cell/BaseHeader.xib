@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,6 +17,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BaseHeader" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="cntLabel" destination="XJZ-P6-Z4b" id="EBD-dK-0X1"/>
+                <outlet property="msgLabel" destination="eT7-jD-tGG" id="o90-b6-xC2"/>
                 <outlet property="rootView" destination="cob-d6-Z4o" id="yTn-4p-wpa"/>
                 <outlet property="titleLabel" destination="VDh-Lm-y6q" id="JEe-9m-vv2"/>
             </connections>
@@ -41,14 +42,22 @@
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eT7-jD-tGG">
+                            <rect key="frame" x="377" y="26" width="0.0" height="0.0"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="textColor" name="_color02"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="VDh-Lm-y6q" firstAttribute="centerY" secondItem="cob-d6-Z4o" secondAttribute="centerY" constant="6" id="RYW-eJ-U4L"/>
+                        <constraint firstItem="eT7-jD-tGG" firstAttribute="centerY" secondItem="VDh-Lm-y6q" secondAttribute="centerY" id="TMY-pd-vba"/>
                         <constraint firstItem="XJZ-P6-Z4b" firstAttribute="centerY" secondItem="VDh-Lm-y6q" secondAttribute="centerY" id="UrR-eV-YEe"/>
                         <constraint firstItem="VDh-Lm-y6q" firstAttribute="leading" secondItem="cob-d6-Z4o" secondAttribute="leading" constant="16" id="XcM-Oc-Bg7"/>
                         <constraint firstItem="XJZ-P6-Z4b" firstAttribute="leading" secondItem="VDh-Lm-y6q" secondAttribute="trailing" constant="4" id="bKH-ib-yme"/>
+                        <constraint firstAttribute="trailing" secondItem="eT7-jD-tGG" secondAttribute="trailing" constant="16" id="hXt-cJ-RzF"/>
                         <constraint firstAttribute="height" constant="40" id="peX-VZ-5WW"/>
                     </constraints>
                 </view>

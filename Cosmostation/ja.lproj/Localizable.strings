@@ -291,7 +291,6 @@
 "str_delete_menmonic_msg" = "ニーモニックをバックアップしないと、二度と復元することができません!\nまた、つながった%@個のウォレットも削除されます。";
 "str_rename" = "名前変更";
 "str_check_each_private_keys" = "チェーンによる秘密鍵の確認";
-"str_s_private_keys" = "%@の秘密鍵";
 "str_add_custom_chain" = "カスタムチェーンの追加";
 "str_select_coin_for_fee" = "Tx手数料として使用するコインの選択";
 "str_stake" = "ステーク";
@@ -333,7 +332,8 @@
 "str_legacy_path_title" = "レガシーパスはサポートされません";
 "str_legacy_path_msg" = "選択したレガシー パス上のアカウントは終了されます。 アセットをパブリック パスに移動することを強くお勧めします。";
 "str_deposit_caution" = "⚠️ %@ ネットワーク資産のみ転送可能";
-"str_copy_with_longpress" = "長押しでコピーします。";
+"str_copy_with_longpress" = "長押しでコピーします";
+"str_copy_with_box" = "コピーするにはボックスをタップしてください";
 
 
 "btn_delegate" = "  委任する";

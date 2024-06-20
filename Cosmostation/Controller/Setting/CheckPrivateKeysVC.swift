@@ -11,7 +11,6 @@ import Lottie
 
 class CheckPrivateKeysVC: BaseVC {
     
-    @IBOutlet weak var copyMsgLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchEmptyLayer: UIView!
     @IBOutlet weak var checkBtn: BaseButton!
@@ -59,8 +58,7 @@ class CheckPrivateKeysVC: BaseVC {
     
     override func setLocalizedString() {
         navigationItem.backButtonTitle = ""
-        navigationItem.title = String(format: NSLocalizedString("str_s_private_keys", comment: ""), toCheckAccount.name)
-        copyMsgLabel.text = NSLocalizedString("str_copy_with_longpress", comment: "")
+        navigationItem.title = toCheckAccount.name
         checkBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
@@ -73,7 +71,6 @@ class CheckPrivateKeysVC: BaseVC {
             searchTestnets = testnetChains
             
             DispatchQueue.main.async {
-                self.copyMsgLabel.isHidden = false
                 self.loadingView.isHidden = true
                 self.tableView.reloadData()
             }
@@ -107,6 +104,7 @@ extension CheckPrivateKeysVC: UITableViewDelegate, UITableViewDataSource, UISear
             view.titleLabel.text = "Testnet"
             view.cntLabel.text = String(testnetChains.count)
         }
+        view.msgLabel.text = NSLocalizedString("str_copy_with_longpress", comment: "")
         return view
     }
     

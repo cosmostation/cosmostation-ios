@@ -10,12 +10,10 @@ import UIKit
 
 class CheckMenmonicVC: BaseVC {
     
+    @IBOutlet weak var copyMsgLabel: UILabel!
+    @IBOutlet weak var lastPathLabel: UILabel!
     @IBOutlet weak var createBtn: SecButton!
     @IBOutlet weak var checkBtn: BaseButton!
-    
-    @IBOutlet weak var nameCardView: CardView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var lastPathLabel: UILabel!
     
     @IBOutlet weak var wordCardView: CardView!
     @IBOutlet weak var word00: UILabel!
@@ -66,19 +64,18 @@ class CheckMenmonicVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setLocalizedString()
-        nameCardView.setBlur()
         wordCardView.setBlur()
     }
     
     override func setLocalizedString() {
         navigationItem.backButtonTitle = ""
-        navigationItem.title = NSLocalizedString("title_check_mnemonics", comment: "")
+        navigationItem.title = toCheckAccount.name
+        copyMsgLabel.text = NSLocalizedString("str_copy_with_box", comment: "")
         createBtn.setTitle(NSLocalizedString("str_create_another_account", comment: ""), for: .normal)
         checkBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
     func onUpdateView() {
-        nameLabel.text = toCheckAccount.name
         
         let keychain = BaseData.instance.getKeyChain()
         if let secureData = try? keychain.getString(toCheckAccount.uuid.sha1()),
@@ -108,10 +105,8 @@ class CheckMenmonicVC: BaseVC {
             }
         }
         
-        if (toCheckAccount.lastHDPath != "0") {
-            lastPathLabel.text = "Last HD Path : " + toCheckAccount.lastHDPath
-            lastPathLabel.isHidden = false
-        }
+        lastPathLabel.text = "Last HD Path : " + toCheckAccount.lastHDPath
+        lastPathLabel.isHidden = false
     }
     
     @IBAction func onClickCreate(_ sender: UIButton) {
