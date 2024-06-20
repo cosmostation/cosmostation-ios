@@ -290,6 +290,7 @@
 "str_delete_menmonic_msg" = "If you do not backup your mnemonics, you can not find it again!\n\nAnd %@ derived wallets will also be deleted";
 "str_rename" = "Change Name";
 "str_check_each_private_keys" = "Check private key for each chain";
+"str_s_private_keys" = "%@'s Private Key List";
 "str_add_custom_chain" = "Add Custom Chain";
 "str_select_coin_for_fee" = "Select coin to use as Tx fee";
 "str_stake" = "Stake";
@@ -331,6 +332,7 @@
 "str_legacy_path_title" = "Legacy path will not support";
 "str_legacy_path_msg" = "Accounts on the legacy path you selected will be terminated. We strongly recommend that you move your assets to the public path.";
 "str_deposit_caution" = "⚠️ Send %@ network asset ONLY";
+"str_copy_with_longpress" = "Copy with long press.";
 
 
 

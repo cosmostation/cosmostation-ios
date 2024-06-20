@@ -205,6 +205,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                     let checkMenmonicVC = CheckMenmonicVC(nibName: "CheckMenmonicVC", bundle: nil)
                     checkMenmonicVC.toCheckAccount = self.toCheckAccount
                     self.navigationItem.title = ""
+                    self.navigationItem.backButtonTitle = ""
                     self.navigationController?.pushViewController(checkMenmonicVC, animated: true)
                 });
                 
@@ -213,6 +214,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                     let checkPrivateKeysVC = CheckPrivateKeysVC(nibName: "CheckPrivateKeysVC", bundle: nil)
                     checkPrivateKeysVC.toCheckAccount = self.toCheckAccount
                     self.navigationItem.title = ""
+                    self.navigationItem.backButtonTitle = ""
                     self.navigationController?.pushViewController(checkPrivateKeysVC, animated: true)
                 });
                 
@@ -221,6 +223,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                     let checkPrivateKeyVC = CheckPrivateKeyVC(nibName: "CheckPrivateKeyVC", bundle: nil)
                     checkPrivateKeyVC.toCheckAccount = self.toCheckAccount
                     self.navigationItem.title = ""
+                    self.navigationItem.backButtonTitle = ""
                     self.navigationController?.pushViewController(checkPrivateKeyVC, animated: true)
                 });
             }
