@@ -320,8 +320,10 @@
 "str_withdraw" = "출금";
 "str_copy_evm_address" = "Evm형식 주소복사";
 "str_share_evm_address" = "Evm형식 주소공유";
+"str_share_evm_address2" = "Evm형식\n주소공유";
 "str_copy_bech_address" = "Cosmos형식 주소복사";
 "str_share_bech_address" = "Cosmos형식 주소공유";
+"str_share_bech_address2" = "Cosmos형식\n주소공유";
 "str_token_github" = "토큰 정보 확인";
 "str_nft_github" = "NFT 정보 확인";
 "str_node_down_title" = "⚠️ 노드 다운";

@@ -319,8 +319,10 @@
 "str_withdraw" = "Withdraw";
 "str_copy_evm_address" = "Copy Evm style address";
 "str_share_evm_address" = "Share Evm style address";
+"str_share_evm_address2" = "Share\nEvm Style Address";
 "str_copy_bech_address" = "Copy Cosmos style address";
 "str_share_bech_address" = "Share Cosmos style address";
+"str_share_bech_address2" = "Share\nCosmos Style Address";
 "str_token_github" = "Check Token Info";
 "str_nft_github" = "Check NFT Info";
 "str_node_down_title" = "⚠️ Node Down";

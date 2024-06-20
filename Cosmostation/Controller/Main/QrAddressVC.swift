@@ -26,7 +26,6 @@ class QrAddressVC: BaseVC {
         isEvm = selectedChain.supportEvm
         isBech = selectedChain.isCosmos()
         
-        
         titleLabel.text = baseAccount.name
         evmShareBtn.isHidden = !isEvm
         bechShareBtn.isHidden = !isBech
@@ -37,11 +36,18 @@ class QrAddressVC: BaseVC {
         tableView.register(UINib(nibName: "PopupReceiveCell", bundle: nil), forCellReuseIdentifier: "PopupReceiveCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
-    }
-    
-    override func setLocalizedString() {
+        
+        
         evmShareBtn.setTitle(NSLocalizedString("str_share_evm_address", comment: ""), for: .normal)
         bechShareBtn.setTitle(NSLocalizedString("str_share_bech_address", comment: ""), for: .normal)
+        if (isEvm && isBech) {
+            evmShareBtn.titleLabel?.font = .fontSize14Bold
+            bechShareBtn.titleLabel?.font = .fontSize14Bold
+            evmShareBtn.setTitle(NSLocalizedString("str_share_evm_address2", comment: ""), for: .normal)
+            bechShareBtn.setTitle(NSLocalizedString("str_share_bech_address2", comment: ""), for: .normal)
+            evmShareBtn.titleLabel?.textAlignment = .center
+            bechShareBtn.titleLabel?.textAlignment = .center
+        }
     }
     
     @IBAction func onClickEvmShare(_ sender: BaseButton) {
