@@ -297,9 +297,7 @@ class CosmosClassVC: BaseVC {
                     self.onClaimRewardTx()
                 }
 //            }
-            mainFab.addItem(title: "Stake", image: UIImage(named: "iconFabStake")) { _ in
-                self.onStakeInfo()
-            }
+            
         }
         
         mainFab.addItem(title: "Receive", image: UIImage(named: "iconFabReceive")) { _ in
@@ -308,6 +306,12 @@ class CosmosClassVC: BaseVC {
         
         mainFab.addItem(title: "Send", image: UIImage(named: "iconFabSend")) { _ in
             self.onSendTx()
+        }
+        
+        if (selectedChain.supportStaking) {
+            mainFab.addItem(title: "Stake", image: UIImage(named: "iconFabStake")) { _ in
+                self.onStakeInfo()
+            }
         }
         
         view.addSubview(mainFab)

@@ -202,8 +202,9 @@ class PortfolioVC: BaseVC {
         testnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == true })
         searchTestnets = testnetChains
         
-        onUpdateSearchBar()
+        searchEmptyLayer.isHidden = true
         tableView.reloadData()
+        onUpdateSearchBar()
         onUpdateTotal()
     }
     

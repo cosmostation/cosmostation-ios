@@ -68,30 +68,6 @@ final class BaseData: NSObject{
     }
     
     
-    func setAllValidatorSort(_ sort : Int64) {
-        UserDefaults.standard.set(sort, forKey: KEY_ALL_VAL_SORT)
-    }
-    
-    func getAllValidatorSort() -> Int64 {
-        return Int64(UserDefaults.standard.integer(forKey: KEY_ALL_VAL_SORT))
-    }
-    
-    func setMyValidatorSort(_ sort : Int64) {
-        UserDefaults.standard.set(sort, forKey: KEY_MY_VAL_SORT)
-    }
-    
-    func getMyValidatorSort() -> Int64 {
-        return Int64(UserDefaults.standard.integer(forKey: KEY_MY_VAL_SORT))
-    }
-    
-    func setNeedRefresh(_ refresh : Bool) {
-        UserDefaults.standard.set(refresh, forKey: KEY_ACCOUNT_REFRESH_ALL)
-    }
-    
-    func getNeedRefresh() -> Bool {
-        return UserDefaults.standard.bool(forKey: KEY_ACCOUNT_REFRESH_ALL)
-    }
-    
     func showEvenReview() -> Bool {
         return (!reviewMode || checkInstallTime())
     }
@@ -137,49 +113,6 @@ final class BaseData: NSObject{
 //        }
 //        return false
 //    }
-    
-
-    
-    
-
-    
-//    func setKavaWarn() {
-//        let remindTime = Calendar.current.date(byAdding: .day, value: 3, to: Date())?.millisecondsSince1970
-//        UserDefaults.standard.set(String(remindTime!), forKey: KEY_KAVA_TESTNET_WARN)
-//    }
-//
-//    func getKavaWarn() ->Bool {
-//        let reminTime = Int64(UserDefaults.standard.string(forKey: KEY_KAVA_TESTNET_WARN) ?? "0")
-//        if (Date().millisecondsSince1970 > reminTime!) {
-//            return true
-//        }
-//        return false
-//    }
-//
-//    func setEventTime() {
-//        let remindTime = Calendar.current.date(byAdding: .day, value: 1, to: Date())?.millisecondsSince1970
-//        UserDefaults.standard.set(String(remindTime!), forKey: KEY_PRE_EVENT_HIDE)
-//    }
-//
-//    func getEventTime() -> Bool {
-//        let reminTime = Int64(UserDefaults.standard.string(forKey: KEY_PRE_EVENT_HIDE) ?? "0")
-//        if (Date().millisecondsSince1970 > reminTime!) {
-//            return true
-//        }
-//        return false
-//    }
-    
-    func setCustomIcon(_ type: String) {
-        UserDefaults.standard.set(type, forKey: KEY_CUSTOM_ICON)
-    }
-    
-    func getCustomIcon() -> String {
-        return UserDefaults.standard.string(forKey: KEY_PRE_EVENT_HIDE) ?? ICON_DEFAULT
-    }
-    
-    func getUserHiddenChains() -> Array<String>? {
-        return UserDefaults.standard.stringArray(forKey: KEY_USER_HIDEN_CHAINS) ?? []
-    }
     
     public func hasPassword() -> Bool{
         if (KeychainWrapper.standard.hasValue(forKey: "password")) {
@@ -299,7 +232,7 @@ extension BaseData {
         try? getKeyChain().remove(account.uuid.sha1())
                                   
         deleteRefAddresses(account.id)
-        deleteDisplayCosmosChainTags(account.id)
+        deleteDisplayChainTags(account.id)
         
         let query = TABLE_BASEACCOUNT.filter(BASEACCOUNT_ID == account.id)
         return try? database.run(query.delete())
@@ -548,25 +481,6 @@ extension BaseData {
         return selectAccounts().first
     }
     
-    func setDisplayEvmChainTags(_ id: Int64, _ chainNames: [String])  {
-        if let encoded = try? JSONEncoder().encode(chainNames) {
-            UserDefaults.standard.setValue(encoded, forKey: String(id) + " " + KEY_DISPLAY_EVM_CHAINS)
-        }
-    }
-    
-    func getDisplayEvmChainTags(_ id: Int64) -> [String] {
-        if let savedData = UserDefaults.standard.object(forKey: String(id) + " " + KEY_DISPLAY_EVM_CHAINS) as? Data {
-            if let result = try? JSONDecoder().decode([String].self, from: savedData) {
-                return result
-            }
-        }
-        return DEFUAL_DISPALY_EVM
-    }
-    
-    func deleteDisplayEvmChainTags(_ id: Int64)  {
-        UserDefaults.standard.removeObject(forKey: String(id) + " " + KEY_DISPLAY_EVM_CHAINS)
-    }
-    
     func setDisplayErc20s(_ id: Int64, _ chainTag: String, _ contractAddress: [String])  {
         if let encoded = try? JSONEncoder().encode(contractAddress) {
             UserDefaults.standard.setValue(encoded, forKey: String(id) + " " + chainTag + " " + KEY_DISPLAY_ERC20_TOKENS)
@@ -589,22 +503,22 @@ extension BaseData {
     }
     
     
-    func setDisplayCosmosChainTags(_ id: Int64, _ chainNames: [String])  {
+    func setDisplayChainTags(_ id: Int64, _ chainNames: [String])  {
         if let encoded = try? JSONEncoder().encode(chainNames) {
             UserDefaults.standard.setValue(encoded, forKey: String(id) + " " + KEY_DISPLAY_COSMOS_CHAINS)
         }
     }
     
-    func getDisplayCosmosChainTags(_ id: Int64) -> [String] {
+    func getDisplayChainTags(_ id: Int64) -> [String] {
         if let savedData = UserDefaults.standard.object(forKey: String(id) + " " + KEY_DISPLAY_COSMOS_CHAINS) as? Data {
             if let result = try? JSONDecoder().decode([String].self, from: savedData) {
                 return result
             }
         }
-        return DEFUAL_DISPALY_COSMOS
+        return DEFUAL_DISPALY_CHAINS
     }
     
-    func deleteDisplayCosmosChainTags(_ id: Int64)  {
+    func deleteDisplayChainTags(_ id: Int64)  {
         UserDefaults.standard.removeObject(forKey: String(id) + " " + KEY_DISPLAY_COSMOS_CHAINS)
     }
     

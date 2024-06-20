@@ -219,6 +219,7 @@ extension OkWithdraw {
         let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
         let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
         
-        return try? await AF.request(BaseNetWork.broadcastUrl(self.selectedChain), method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
+        let url = OKT_LCD + "txs"
+        return try? await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
     }
 }

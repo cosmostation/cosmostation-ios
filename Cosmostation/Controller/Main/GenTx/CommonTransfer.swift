@@ -119,15 +119,17 @@ class CommonTransfer: BaseVC {
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeDenom)))
         
-        Task {
-            if fromChain.supportEvm,
-               let evmfetcher = fromChain.getEvmfetcher(),
-               let url = URL(string: evmfetcher.getEvmRpc()),
-               let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil) {
-                self.web3 = Web3.init(provider: web3Provider)
-            } else {
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true)
+        
+        if (fromChain.supportEvm) {
+            Task {
+                if let evmfetcher = fromChain.getEvmfetcher(),
+                   let url = URL(string: evmfetcher.getEvmRpc()),
+                   let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil) {
+                    self.web3 = Web3.init(provider: web3Provider)
+                } else {
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true)
+                    }
                 }
             }
         }
@@ -623,7 +625,7 @@ extension CommonTransfer {
             if let feeHistory = await oracle.bothFeesPercentiles(),
                feeHistory.baseFee.count > 0 {
                 //support EIP1559
-                print("feeHistory ", feeHistory)
+//                print("feeHistory ", feeHistory)
                 for i in 0..<3 {
                     let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
                     let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
@@ -633,21 +635,21 @@ extension CommonTransfer {
                 
             } else if let gasprice = try? await web3.eth.gasPrice() {
                 //only Legacy
-                print("gasprice ", gasprice)
+//                print("gasprice ", gasprice)
                 evmGas[0].0 = gasprice
                 evmGas[1].0 = gasprice
                 evmGas[2].0 = gasprice
                 evmTxType = .legacy
                 
             } else {
-                print("no gas error")
+//                print("no gas error")
                 evmTxType = nil
                 DispatchQueue.main.async {
                     self.onUpdateFeeViewAfterSimul(nil)
                 }
                 return
             }
-            print("evmGas ", evmGas)
+//            print("evmGas ", evmGas)
             
             let chainID = web3.provider.network?.chainID
             let senderAddress = EthereumAddress.init(fromChain.evmAddress!)
@@ -774,7 +776,8 @@ extension CommonTransfer {
                     txResult.toAddress = self.toAddress
                     txResult.toMemo = self.toMemo
                     txResult.cosmosBroadcastTxResponse = response
-
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
                 })
                 
             } catch {
@@ -833,7 +836,8 @@ extension CommonTransfer {
                     txResult.toAddress = self.toAddress
                     txResult.toMemo = self.toMemo
                     txResult.cosmosBroadcastTxResponse = response
-
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
                 })
                 
             } catch {
@@ -896,7 +900,8 @@ extension CommonTransfer {
                     txResult.toAddress = self.toAddress
                     txResult.toMemo = self.toMemo
                     txResult.cosmosBroadcastTxResponse = response
-
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
                 })
                 
             } catch {
@@ -965,7 +970,8 @@ extension CommonTransfer {
                     txResult.toAddress = self.toAddress
                     txResult.toMemo = self.toMemo
                     txResult.cosmosBroadcastTxResponse = response
-
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
                 })
                 
             } catch {
@@ -986,112 +992,6 @@ extension CommonTransfer {
             $0.msg = Data(base64Encoded: innerMsgBase64)!
         }
     }
-}
-
-extension CommonTransfer {
-    
-    //    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-    //        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-    //        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    //    }
-    //
-    //    func fetchIbcClient(_ channel: ClientConnection) async throws -> Ibc_Core_Channel_V1_QueryChannelClientStateResponse? {
-    //        let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
-    //            $0.channelID = ibcPath!.channel!
-    //            $0.portID = ibcPath!.port!
-    //        }
-    //        return try? await Ibc_Core_Channel_V1_QueryNIOClient(channel: channel).channelClientState(req, callOptions: getCallOptions()).response.get()
-    //    }
-    //
-    //    func fetchLastBlock(_ channel: ClientConnection) async throws -> Cosmos_Base_Tendermint_V1beta1_GetLatestBlockResponse? {
-    //        let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
-    //        return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: channel).getLatestBlock(req, callOptions: getCallOptions()).response.get()
-    //    }
-    //
-    //
-    //
-    //    //inChain Coin Send
-    //    func simulSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toSend: Cosmos_Bank_V1beta1_MsgSend) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-    //        let simulTx = Signer.genSendSimul(auth, toSend, cosmosTxFee, toMemo, fromChain)
-    //        do {
-    //            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-    //        } catch {
-    //            throw error
-    //        }
-    //    }
-    //
-    //    func broadcastSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toSend: Cosmos_Bank_V1beta1_MsgSend) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-    //        let reqTx = Signer.genSendTx(auth, toSend, cosmosTxFee, toMemo, fromChain)
-    //        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    //    }
-    //
-    //
-    //    //inChain Wasm Send
-    //    func simulCw20SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-    //        let simulTx = Signer.genWasmSimul(auth, [toWasmSend], cosmosTxFee, toMemo, fromChain)
-    //        do {
-    //            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-    //        } catch {
-    //            throw error
-    //        }
-    //    }
-    //
-    //    func broadcastCw20SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-    //        let reqTx = Signer.genWasmTx(auth, [toWasmSend], cosmosTxFee, toMemo, fromChain)
-    //        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    //    }
-    //
-    //
-    //    //ibc Coin Send
-    //    func simulIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-    //        let simulTx = Signer.genIbcSendSimul(auth, ibcTransfer, cosmosTxFee, toMemo, fromChain)
-    //        do {
-    //            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-    //        } catch {
-    //            throw error
-    //        }
-    //    }
-    //
-    //    func broadcastIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-    //        let reqTx = Signer.genIbcSendTx(auth, ibcTransfer, cosmosTxFee, toMemo, fromChain)
-    //        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    //    }
-    //
-    //
-    //    //Wasm ibc Send
-    //    func simulCw20IbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-    //        let simulTx = Signer.genWasmSimul(auth, [ibcWasmSend], cosmosTxFee, toMemo, fromChain)
-    //        do {
-    //            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-    //        } catch {
-    //            throw error
-    //        }
-    //    }
-    //
-    //    func broadcastCw20IbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-    //        let reqTx = Signer.genWasmTx(auth, [ibcWasmSend], cosmosTxFee, toMemo, fromChain)
-    //        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    //    }
-    //
-    //
-    //
-    //
-    //
-    //    func getConnection() -> ClientConnection {
-    //        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-    //        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: fromChain.getGrpcfetcher()!.getGrpc().0, port: fromChain.getGrpcfetcher()!.getGrpc().1)
-    //    }
-    //
-    //    func getRecipientConnection() -> ClientConnection {
-    //        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-    //        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: toChain.getGrpcfetcher()!.getGrpc().0, port: toChain.getGrpcfetcher()!.getGrpc().1)
-    //    }
-    //
-    //    func getCallOptions() -> CallOptions {
-    //        var callOptions = CallOptions()
-    //        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-    //        return callOptions
-    //    }
 }
 
 extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountSheetDelegate, MemoDelegate, PinDelegate {
@@ -1146,17 +1046,17 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                 evmSend()
                 
             } else if (txStyle == .COSMOS_STYLE) {
-                if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {         // Inchain Send!
-                    if (sendType == .Only_Cosmos_CW20) {            // Inchain CW20 Send!
+                if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                     // Inchain Send!
+                    if (sendType == .Only_Cosmos_CW20) {                                    // Inchain CW20 Send!
                         inChainWasmSend()
-                    } else {                                        // Inchain Coin Send!  (Only_Cosmos_Coin, CosmosEVM_Coin)
+                    } else {                                                                // Inchain Coin Send!  (Only_Cosmos_Coin, CosmosEVM_Coin)
                         inChainCoinSend()
                     }
-                } else {                                            // IBC Send!
+                } else {                                                                    // IBC Send!
                     ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
-                    if (sendType == .Only_Cosmos_CW20) {            // CW20 IBC Send!
+                    if (sendType == .Only_Cosmos_CW20) {                                    // CW20 IBC Send!
                         ibcWasmSend()
-                    } else {                                        // Coin IBC Send! (Only_Cosmos_Coin, CosmosEVM_Coin)
+                    } else {                                                                // Coin IBC Send! (Only_Cosmos_Coin, CosmosEVM_Coin)
                         ibcCoinSend()
                     }
                 }

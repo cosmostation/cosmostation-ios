@@ -13,12 +13,7 @@ let SUPPORT_BEP3_SWAP                   = true;
 
 //let KEY_RECENT_ACCOUNT                  = "KEY_RECENT_ACCOUNT"
 let KEY_INSTALL_TIME                    = "KEY_INSTALL_TIME"
-let KEY_RECENT_CHAIN                    = "KEY_RECENT_CHAIN"
-let KEY_RECENT_CHAIN_S                  = "KEY_RECENT_CHAIN_S"
-let KEY_ALL_VAL_SORT                    = "KEY_ALL_VAL_SORT"
-let KEY_MY_VAL_SORT                     = "KEY_MY_VAL_SORT"
 let KEY_LAST_TAB                        = "KEY_LAST_TAB"
-let KEY_ACCOUNT_REFRESH_ALL             = "KEY_ACCOUNT_REFRESH_ALL"
 let KEY_CURRENCY                        = "KEY_CURRENCY"
 let KEY_PRICE_CHANGE_COLOR              = "KEY_PRICE_CHANGE_COLOR"
 let KEY_THEME                           = "KEY_THEME"
@@ -31,18 +26,10 @@ let KEY_LAST_PASS_TIME                  = "KEY_LAST_PASS_TIME"
 let KEY_LAST_PRICE_TIME                 = "KEY_LAST_PRICE_TIME"
 let KEY_ENGINER_MODE                    = "KEY_ENGINER_MODE"
 let KEY_FCM_TOKEN                       = "KEY_FCM_TOKEN_NEW"
-let KEY_KAVA_TESTNET_WARN               = "KEY_KAVA_TESTNET_WARN"
-let KEY_USER_HIDEN_CHAINS               = "KEY_USER_HIDEN_CHAINS"
-let KEY_USER_SORTED_CHAINS              = "KEY_USER_SORTED_CHAINS"
-let KEY_USER_EXPENDED_CHAINS            = "KEY_USER_EXPENDED_CHAINS"
-let KEY_USER_FAVO_TOKENS                = "KEY_USER_FAVO_TOKENS"
-let KEY_PRE_EVENT_HIDE                  = "KEY_PRE_EVENT_HIDE"
-let KEY_CUSTOM_ICON                     = "KEY_CUSTOM_ICON"
 let KEY_DB_VERSION                      = "KEY_DB_VERSION"
 let KEY_LANGUAGE                        = "KEY_LANGUAGE"
 let KEY_LAST_ACCOUNT                    = "KEY_LAST_ACCOUNT"
 let KEY_DISPLAY_COSMOS_CHAINS           = "KEY_DISPLAY_COSMOS_CHAINS"
-let KEY_DISPLAY_EVM_CHAINS              = "KEY_DISPLAY_EVM_CHAINS"
 let KEY_DISPLAY_ERC20_TOKENS            = "KEY_DISPLAY_ERC20_TOKENS"
 let KEY_CHAIN_GRPC_ENDPOINT             = "KEY_CHAIN_GRPC_ENDPOINT"
 let KEY_CHAIN_EVM_RPC_ENDPOINT          = "KEY_CHAIN_EVM_RPC_ENDPOINT"
@@ -150,24 +137,6 @@ let COSMOS_AUTH_TYPE_STDTX                  = "auth/StdTx";
 let BASE_GAS_AMOUNT                         = "800000"
 
 
-//// Constant for BEP3-Swap
-//let KAVA_MAIN_BNB_DEPUTY                    = "kava1r4v2zdhdalfj2ydazallqvrus9fkphmglhn6u6"
-//let KAVA_MAIN_BTCB_DEPUTY                   = "kava14qsmvzprqvhwmgql9fr0u3zv9n2qla8zhnm5pc"
-//let KAVA_MAIN_XRPB_DEPUTY                   = "kava1c0ju5vnwgpgxnrktfnkccuth9xqc68dcdpzpas"
-//let KAVA_MAIN_BUSD_DEPUTY                   = "kava1hh4x3a4suu5zyaeauvmv7ypf7w9llwlfufjmuu"
-//
-//let BINANCE_MAIN_BNB_DEPUTY                 = "bnb1jh7uv2rm6339yue8k4mj9406k3509kr4wt5nxn"
-//let BINANCE_MAIN_BTCB_DEPUTY                = "bnb1xz3xqf4p2ygrw9lhp5g5df4ep4nd20vsywnmpr"
-//let BINANCE_MAIN_XRPB_DEPUTY                = "bnb15jzuvvg2kf0fka3fl2c8rx0kc3g6wkmvsqhgnh"
-//let BINANCE_MAIN_BUSD_DEPUTY                = "bnb10zq89008gmedc6rrwzdfukjk94swynd7dl97w8"
-//
-//
-////For 9000
-//let BINANCE_TEST_BNB_DEPUTY                 = "tbnb10uypsspvl6jlxcx5xse02pag39l8xpe7a3468h"
-//let KAVA_TEST_BNB_DEPUTY                    = "kava1tfvn5t8qwngqd2q427za2mel48pcus3z9u73fl"
-//let BINANCE_TEST_BTC_DEPUTY                 = "tbnb1dmn2xgnc8kcxn4s0ts5llu9ry3ulp2nlhuh5fz"
-//let KAVA_TEST_BTC_DEPUTY                    = "kava1kla4wl0ccv7u85cemvs3y987hqk0afcv7vue84"
-
 let TOKEN_HTLC_BINANCE_BNB                  = "BNB"
 let TOKEN_HTLC_KAVA_BNB                     = "bnb"
 let TOKEN_HTLC_BINANCE_BTCB                 = "BTCB-1DE"
@@ -226,10 +195,6 @@ let YEAR_SEC    = DAY_SEC.multiplying(by: NSDecimalNumber.init(string: "365"))
 //NFT Denom Default config
 let STATION_NFT_DENOM           = "station";
 
-//Custom Icon config
-let ICON_DEFAULT                = "ICON_DEFAULT";
-let ICON_SANTA                  = "ICON_SANTA";
-let ICON_2002                   = "ICON_2002";
 
 
 let ResourceBase = "https://raw.githubusercontent.com/cosmostation/chainlist/master/chain/"

@@ -89,7 +89,7 @@
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DAPP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZW-HC-K3Q" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
-                                                <color key="backgroundColor" red="0.035294117649999998" green="0.72156862749999995" blue="0.75686274509999996" alpha="0.60358029801324509" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.035294117649999998" green="0.72156862749999995" blue="0.75686274509999996" alpha="0.55000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                                 <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>

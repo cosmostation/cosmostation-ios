@@ -53,7 +53,7 @@ public class BaseAccount {
     }
     
 //    func loadDisplayCTags() {
-//        toDisplayCTags = BaseData.instance.getDisplayCosmosChainTags(self.id)
+//        toDisplayCTags = BaseData.instance.getDisplayChainTags(self.id)
 //    }
 //    
 //    func loadDisplayETags() {
@@ -61,7 +61,7 @@ public class BaseAccount {
 //    }
     
     func loadDisplayTags() {
-        dpTags = BaseData.instance.getDisplayCosmosChainTags(self.id)
+        dpTags = BaseData.instance.getDisplayChainTags(self.id)
     }
     
     func initAccount() {
@@ -256,12 +256,66 @@ public class BaseAccount {
 }
 
 
+
+
+struct AccountKeyType {
+    var pubkeyType: PubKeyType!
+    var hdPath: String!
+    
+    init(_ pubkeyType: PubKeyType!, _ hdPath: String!) {
+        self.pubkeyType = pubkeyType
+        self.hdPath = hdPath
+    }
+}
+
+public enum PubKeyType: Int {
+    case ETH_Keccak256 = 0
+    case COSMOS_Secp256k1 = 1
+    case INJECTIVE_Secp256k1 = 2
+    case BERA_Secp256k1 = 3
+    case SUI_Ed25519 = 4
+    case unknown = 99
+    
+    var algorhythm: String? {
+        switch self {
+        case PubKeyType.ETH_Keccak256:
+            return "keccak256"
+        case PubKeyType.COSMOS_Secp256k1:
+            return "secp256k1"
+        case PubKeyType.INJECTIVE_Secp256k1:
+            return "secp256k1"
+        case PubKeyType.BERA_Secp256k1:
+            return "secp256k1"
+        case PubKeyType.SUI_Ed25519:
+            return "ed25519"
+        case PubKeyType.unknown:
+            return "unknown"
+        }
+    }
+    
+    var cosmosPubkey: String? {
+        switch self {
+        case PubKeyType.ETH_Keccak256:
+            return "ethsecp256k1"
+        case PubKeyType.COSMOS_Secp256k1:
+            return "secp256k1"
+        case PubKeyType.INJECTIVE_Secp256k1:
+            return "ethsecp256k1"
+        case PubKeyType.BERA_Secp256k1:
+            return "ethsecp256k1"
+        case PubKeyType.SUI_Ed25519:
+            return "ed25519"
+        case PubKeyType.unknown:
+            return "unknown"
+        }
+    }
+}
+
 public enum BaseAccountType: Int64 {
     case withMnemonic = 0
     case onlyPrivateKey = 1
     case none = 2
 }
-
 
 extension Sequence {
     func concurrentForEach(

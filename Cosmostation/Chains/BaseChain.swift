@@ -405,76 +405,9 @@ extension BaseChain {
     }
 }
 
-struct AccountKeyType {
-    var pubkeyType: PubKeyType!
-    var hdPath: String!
-    
-    init(_ pubkeyType: PubKeyType!, _ hdPath: String!) {
-        self.pubkeyType = pubkeyType
-        self.hdPath = hdPath
-    }
-}
-
-enum PubKeyType: Int {
-    case ETH_Keccak256 = 0
-    case COSMOS_Secp256k1 = 1
-    case INJECTIVE_Secp256k1 = 2
-    case BERA_Secp256k1 = 3
-    case SUI_Ed25519 = 4
-    case unknown = 99
-    
-    var algorhythm: String? {
-        switch self {
-        case PubKeyType.ETH_Keccak256:
-            return "keccak256"
-        case PubKeyType.COSMOS_Secp256k1:
-            return "secp256k1"
-        case PubKeyType.INJECTIVE_Secp256k1:
-            return "secp256k1"
-        case PubKeyType.BERA_Secp256k1:
-            return "secp256k1"
-        case PubKeyType.SUI_Ed25519:
-            return "ed25519"
-        case PubKeyType.unknown:
-            return "unknown"
-        }
-    }
-    
-    var cosmosPubkey: String? {
-        switch self {
-        case PubKeyType.ETH_Keccak256:
-            return "ethsecp256k1"
-        case PubKeyType.COSMOS_Secp256k1:
-            return "secp256k1"
-        case PubKeyType.INJECTIVE_Secp256k1:
-            return "ethsecp256k1"
-        case PubKeyType.BERA_Secp256k1:
-            return "ethsecp256k1"
-        case PubKeyType.SUI_Ed25519:
-            return "ed25519"
-        case PubKeyType.unknown:
-            return "unknown"
-        }
-    }
-}
-
-
-//func All_IBC_Chains() -> [CosmosClass] {
-//    var result = [CosmosClass]()
-//    result.append(contentsOf: ALLCOSMOSCLASS())
-//    result.append(contentsOf: ALLEVMCLASS().filter { $0.supportCosmos == true } )
-//    return result
-//}
-//
-//func All_BASE_Chains() -> [BaseChain] {
-//    var result = [CosmosClass]()
-//    result.append(contentsOf: ALLCOSMOSCLASS())
-//    result.append(contentsOf: ALLEVMCLASS())
-//    return result
-//}
-
 func ALLCHAINS() -> [BaseChain] {
     var result = [BaseChain]()
+    
     result.append(ChainCosmos())
     result.append(ChainAkash())
     result.append(ChainAlthea118())
@@ -565,8 +498,6 @@ func ALLCHAINS() -> [BaseChain] {
     
 //    result.append(ChainBeraEVM_T())
     
-    
-    
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {
             chain.chainIdCosmos = cosmosChainId
@@ -589,3 +520,5 @@ enum FetchState: Int {
     case Success = 1
     case Fail = 2
 }
+
+let DEFUAL_DISPALY_CHAINS = ["cosmos118", "ethereum60", "neutron118", "kava60", "osmosis118", "dydx118"]

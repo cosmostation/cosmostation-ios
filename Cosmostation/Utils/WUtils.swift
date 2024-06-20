@@ -170,93 +170,6 @@ public class WUtils {
         return false
     }
     
-    
-    //address, accountnumber, sequencenumber
-    static func onParseAuthGrpc(_ response :Cosmos_Auth_V1beta1_QueryAccountResponse) -> (address: String?, accountNum: UInt64?, sequenceNum: UInt64?) {
-        var rawAccount = response.account
-        if (rawAccount.typeURL.contains(Desmos_Profiles_V3_Profile.protoMessageName)),
-            let account = try? Desmos_Profiles_V3_Profile.init(serializedData: rawAccount.value).account {
-            rawAccount = account
-        }
-
-        if (rawAccount.typeURL.contains(Cosmos_Auth_V1beta1_BaseAccount.protoMessageName)),
-           let auth = try? Cosmos_Auth_V1beta1_BaseAccount.init(serializedData: rawAccount.value) {
-            return (auth.address, auth.accountNumber, auth.sequence)
-
-        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)),
-                  let auth = try? Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: rawAccount.value) {
-            let baseAccount = auth.baseVestingAccount.baseAccount
-            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
-
-        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)),
-                  let auth = try? Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value){
-            let baseAccount = auth.baseVestingAccount.baseAccount
-            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
-
-        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)),
-                  let auth = try? Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: rawAccount.value) {
-            let baseAccount = auth.baseVestingAccount.baseAccount
-            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
-
-        } else if (rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)),
-                  let auth = try? Injective_Types_V1beta1_EthAccount.init(serializedData: rawAccount.value) {
-            let baseAccount = auth.baseAccount
-            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
-
-        } else if (rawAccount.typeURL.contains(Ethermint_Types_V1_EthAccount.protoMessageName)),
-                    let auth = try? Ethermint_Types_V1_EthAccount.init(serializedData: rawAccount.value) {
-            let baseAccount = auth.baseAccount
-            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
-
-        }  else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)),
-                  let auth = try? Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value){
-            let baseAccount = auth.baseVestingAccount.baseAccount
-            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
-        }
-
-        return (nil, nil, nil)
-    }
-    
-    static func onParseAuthPubkeyType(_ response :Cosmos_Auth_V1beta1_QueryAccountResponse?) -> String? {
-        if (response == nil) { return nil }
-        
-        var rawAccount = response!.account
-        if (rawAccount.typeURL.contains(Desmos_Profiles_V3_Profile.protoMessageName)),
-            let account = try? Desmos_Profiles_V3_Profile.init(serializedData: rawAccount.value).account {
-            rawAccount = account
-        }
-
-        if (rawAccount.typeURL.contains(Cosmos_Auth_V1beta1_BaseAccount.protoMessageName)),
-           let auth = try? Cosmos_Auth_V1beta1_BaseAccount.init(serializedData: rawAccount.value) {
-            return auth.pubKey.typeURL
-
-        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)),
-                  let auth = try? Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: rawAccount.value) {
-            return auth.baseVestingAccount.baseAccount.pubKey.typeURL
-
-        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)),
-                  let auth = try? Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value){
-            return auth.baseVestingAccount.baseAccount.pubKey.typeURL
-
-        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)),
-                  let auth = try? Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: rawAccount.value) {
-            return auth.baseVestingAccount.baseAccount.pubKey.typeURL
-
-        } else if (rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)),
-                  let auth = try? Injective_Types_V1beta1_EthAccount.init(serializedData: rawAccount.value) {
-            return auth.baseAccount.pubKey.typeURL
-
-        } else if (rawAccount.typeURL.contains(Ethermint_Types_V1_EthAccount.protoMessageName)),
-                    let auth = try? Ethermint_Types_V1_EthAccount.init(serializedData: rawAccount.value) {
-            return auth.baseAccount.pubKey.typeURL
-
-        }  else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)),
-                  let auth = try? Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value){
-            return auth.baseVestingAccount.baseAccount.pubKey.typeURL
-        }
-        return nil
-    }
-    
     static func generateQrCode(_ content: String)  -> CIImage? {
         let data = content.data(using: String.Encoding.ascii, allowLossyConversion: false)
         let filter = CIFilter(name: "CIQRCodeGenerator")
@@ -371,5 +284,29 @@ extension Encodable {
     }
     public var encodedString: String {
         return String(data: encoded, encoding: .utf8)!
+    }
+}
+
+
+extension Cosmos_Base_V1beta1_Coin {
+    func getAmount() -> NSDecimalNumber {
+        return NSDecimalNumber(string: amount)
+    }
+    
+    init (_ denom: String, _ amount: String) {
+        self.denom = denom
+        self.amount = amount
+    }
+    
+    init (_ denom: String, _ amount: NSDecimalNumber) {
+        self.denom = denom
+        self.amount = amount.stringValue
+    }
+}
+
+
+extension Cosmos_Base_V1beta1_DecCoin {
+    func getAmount() -> NSDecimalNumber {
+        return NSDecimalNumber(string: amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
     }
 }

@@ -183,7 +183,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
                 try? keychain.set(newData, key: recoverAccount.uuid.sha1())
                 BaseData.instance.setLastAccount(id)
                 BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
-                BaseData.instance.setDisplayCosmosChainTags(id, self.selectedTags)
+                BaseData.instance.setDisplayChainTags(id, self.selectedTags)
                 
             } else if (self.toAddAccount.type == .onlyPrivateKey) {
                 let recoverAccount = BaseAccount(name, .onlyPrivateKey, "0")
@@ -191,7 +191,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
                 try? keychain.set(privateKeyString!, key: recoverAccount.uuid.sha1())
                 BaseData.instance.setLastAccount(id)
                 BaseData.instance.baseAccount = BaseData.instance.getLastAccount()
-                BaseData.instance.setDisplayCosmosChainTags(id, self.selectedTags)
+                BaseData.instance.setDisplayChainTags(id, self.selectedTags)
             }
             
             DispatchQueue.main.async(execute: {

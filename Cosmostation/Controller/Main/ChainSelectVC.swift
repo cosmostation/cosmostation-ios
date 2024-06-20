@@ -67,7 +67,7 @@ class ChainSelectVC: BaseVC {
         testnetChains = baseAccount.allChains.filter({ $0.isTestnet == true })
         searchTestnets = testnetChains
         
-        dpTags = BaseData.instance.getDisplayCosmosChainTags(baseAccount.id)
+        dpTags = BaseData.instance.getDisplayChainTags(baseAccount.id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -151,7 +151,7 @@ class ChainSelectVC: BaseVC {
     
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         baseAccount.reSortChains()
-        BaseData.instance.setDisplayCosmosChainTags(baseAccount.id, dpTags)
+        BaseData.instance.setDisplayChainTags(baseAccount.id, dpTags)
         baseAccount.dpTags = dpTags
         onChainSelected?()
         dismiss(animated: true)
