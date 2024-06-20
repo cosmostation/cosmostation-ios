@@ -16,7 +16,6 @@ class ChainAvalanche: BaseChain  {
         name = "Avalanche"
         tag = "avalanche60"
         logo1 = "chainAvalanche"
-        logo2 = "chainAvalanche2"
         apiName = "avalanche"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

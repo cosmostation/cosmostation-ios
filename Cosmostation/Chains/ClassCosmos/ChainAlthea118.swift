@@ -16,7 +16,6 @@ class ChainAlthea118: BaseChain {
         name = "Althea"
         tag = "althea118"
         logo1 = "chainAlthea"
-        logo2 = "chainAlthea2"
         isDefault = false
         apiName = "althea"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

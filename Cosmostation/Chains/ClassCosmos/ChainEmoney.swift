@@ -16,7 +16,6 @@ class ChainEmoney: BaseChain  {
         name = "E-Money"
         tag = "emoney118"
         logo1 = "chainEmoney"
-        logo2 = "chainEmoney2"
         apiName = "emoney"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

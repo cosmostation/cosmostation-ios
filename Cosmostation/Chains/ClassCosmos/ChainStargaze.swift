@@ -16,7 +16,6 @@ class ChainStargaze: BaseChain {
         name = "Stargaze"
         tag = "stargaze118"
         logo1 = "chainStargaze"
-        logo2 = "chainStargaze2"
         apiName = "stargaze"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

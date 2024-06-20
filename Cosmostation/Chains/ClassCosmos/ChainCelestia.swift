@@ -16,7 +16,6 @@ class ChainCelestia: BaseChain  {
         name = "Celestia"
         tag = "celestia118"
         logo1 = "chainCelestia"
-        logo2 = "chainCelestia2"
         apiName = "celestia"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

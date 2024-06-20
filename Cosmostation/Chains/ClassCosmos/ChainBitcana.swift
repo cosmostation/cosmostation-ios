@@ -16,7 +16,6 @@ class ChainBitcana: BaseChain {
         name = "Bitcanna"
         tag = "bitcanna118"
         logo1 = "chainBitcanna"
-        logo2 = "chainBitcanna2"
         apiName = "bitcanna"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

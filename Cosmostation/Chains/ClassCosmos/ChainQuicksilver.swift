@@ -16,7 +16,6 @@ class ChainQuicksilver: BaseChain  {
         name = "Quicksilver"
         tag = "quicksilver118"
         logo1 = "chainQuicksilver"
-        logo2 = "chainQuicksilver2"
         apiName = "quicksilver"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

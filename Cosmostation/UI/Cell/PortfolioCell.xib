@@ -29,13 +29,6 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyB-xM-Oo9" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="8" y="4" width="349" height="72"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault2" translatesAutoresizingMaskIntoConstraints="NO" id="LTW-RR-keU">
-                                <rect key="frame" x="12" y="12" width="48" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="ghf-GM-s10"/>
-                                    <constraint firstAttribute="width" constant="48" id="z8j-xK-EPY"/>
-                                </constraints>
-                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="Suc-II-N3v">
                                 <rect key="frame" x="12" y="12" width="48" height="48"/>
                                 <constraints>
@@ -84,6 +77,19 @@
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NFT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7a-vD-HYW" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                                 <color key="backgroundColor" red="0.3411764705882353" green="0.38039215686274508" blue="0.65098039215686276" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                                <color key="textColor" name="_color01"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eco" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZW-HC-K3Q" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
+                                                <color key="backgroundColor" red="0.035294117649999998" green="0.72156862749999995" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                                 <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
@@ -152,17 +158,13 @@
                             <constraint firstItem="9Wa-Nb-JYD" firstAttribute="centerY" secondItem="fyB-xM-Oo9" secondAttribute="centerY" id="5Ol-an-aYl"/>
                             <constraint firstAttribute="trailing" secondItem="9Wa-Nb-JYD" secondAttribute="trailing" constant="14" id="5oy-oe-wjx"/>
                             <constraint firstItem="Suc-II-N3v" firstAttribute="centerY" secondItem="fyB-xM-Oo9" secondAttribute="centerY" id="7aV-Il-q6q"/>
-                            <constraint firstItem="LTW-RR-keU" firstAttribute="centerY" secondItem="Suc-II-N3v" secondAttribute="centerY" id="G3L-a1-JHu"/>
-                            <constraint firstItem="LTW-RR-keU" firstAttribute="height" secondItem="Suc-II-N3v" secondAttribute="height" id="KJz-je-wvO"/>
                             <constraint firstAttribute="trailing" secondItem="iOm-4h-c1H" secondAttribute="trailing" constant="14" id="NGZ-If-1MN"/>
                             <constraint firstItem="iOm-4h-c1H" firstAttribute="centerY" secondItem="fyB-xM-Oo9" secondAttribute="centerY" id="Ri5-Fg-ttp"/>
                             <constraint firstItem="Suc-II-N3v" firstAttribute="top" secondItem="fyB-xM-Oo9" secondAttribute="top" constant="12" id="TP7-Xo-Vlt"/>
                             <constraint firstAttribute="height" constant="72" id="XJ1-8H-GgX"/>
                             <constraint firstItem="cDe-Ml-zFv" firstAttribute="centerY" secondItem="fyB-xM-Oo9" secondAttribute="centerY" id="cFp-Po-wrK"/>
-                            <constraint firstItem="LTW-RR-keU" firstAttribute="width" secondItem="Suc-II-N3v" secondAttribute="width" id="jpc-qz-rrJ"/>
                             <constraint firstItem="0dM-2b-jCf" firstAttribute="leading" secondItem="Suc-II-N3v" secondAttribute="trailing" constant="4" id="oy2-JT-fhA"/>
                             <constraint firstItem="0dM-2b-jCf" firstAttribute="centerY" secondItem="fyB-xM-Oo9" secondAttribute="centerY" id="pkW-fI-a8o"/>
-                            <constraint firstItem="LTW-RR-keU" firstAttribute="centerX" secondItem="Suc-II-N3v" secondAttribute="centerX" id="uH8-x8-Os1"/>
                             <constraint firstItem="WCb-NS-yvk" firstAttribute="firstBaseline" secondItem="9Wa-Nb-JYD" secondAttribute="firstBaseline" constant="-0.5" id="vd7-Yb-OoY"/>
                             <constraint firstItem="9Wa-Nb-JYD" firstAttribute="leading" secondItem="WCb-NS-yvk" secondAttribute="trailing" constant="2" id="zGt-yG-mSI"/>
                         </constraints>
@@ -181,10 +183,10 @@
             <connections>
                 <outlet property="currencyLabel" destination="WCb-NS-yvk" id="zbt-ln-Duw"/>
                 <outlet property="cw20Tag" destination="ESj-Qv-Gy3" id="C7Q-Hb-Ls2"/>
+                <outlet property="dappTag" destination="qZW-HC-K3Q" id="Ksj-Cc-aQe"/>
                 <outlet property="legacyTag" destination="79d-Eg-kfT" id="KYZ-KY-y0X"/>
                 <outlet property="loadingLabel" destination="iOm-4h-c1H" id="hgu-Fa-SAt"/>
                 <outlet property="logoImg1" destination="Suc-II-N3v" id="Eqg-23-cbT"/>
-                <outlet property="logoImg2" destination="LTW-RR-keU" id="q3H-w4-f1M"/>
                 <outlet property="nameLabel" destination="OeQ-XM-yfu" id="auZ-0Z-aPF"/>
                 <outlet property="nftTag" destination="W7a-vD-HYW" id="iob-n2-ldO"/>
                 <outlet property="reposeErrorLabel" destination="cDe-Ml-zFv" id="SwH-g6-O9j"/>
@@ -196,7 +198,6 @@
     </objects>
     <resources>
         <image name="chainDefault" width="192" height="192"/>
-        <image name="chainDefault2" width="192" height="192"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

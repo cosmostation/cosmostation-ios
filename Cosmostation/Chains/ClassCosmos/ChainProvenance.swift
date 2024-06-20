@@ -16,7 +16,6 @@ class ChainProvenance: BaseChain  {
         name = "Provenance"
         tag = "provenance505"
         logo1 = "chainProvenance"
-        logo2 = "chainProvenance2"
         apiName = "provenance"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/505'/0'/0/X")
         

@@ -18,7 +18,6 @@ class ChainOkt996Secp: BaseChain {
         name = "OKT"
         tag = "okt996_Secp"
         logo1 = "chainOkt"
-        logo2 = "chainOkt2"
         isDefault = false
         apiName = "okc"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/996'/0'/0/X")

@@ -16,7 +16,6 @@ class ChainBinanceSmart: BaseChain  {
         name = "BSC"
         tag = "binance60"
         logo1 = "chainBinanceSmart"
-        logo2 = "chainBinanceSmart2"
         apiName = "bnb-smart-chain"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

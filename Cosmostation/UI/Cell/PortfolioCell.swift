@@ -13,11 +13,11 @@ class PortfolioCell: UITableViewCell {
 
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg1: UIImageView!
-    @IBOutlet weak var logoImg2: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var legacyTag: PaddingLabel!
     @IBOutlet weak var cw20Tag: PaddingLabel!
     @IBOutlet weak var nftTag: PaddingLabel!
+    @IBOutlet weak var dappTag: PaddingLabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var loadingLabel: UILabel!
@@ -42,6 +42,7 @@ class PortfolioCell: UITableViewCell {
         legacyTag.isHidden = true
         cw20Tag.isHidden = true
         nftTag.isHidden = true
+        dappTag.isHidden = true
         loadingLabel.isHidden = false
         reposeErrorLabel.isHidden = true
     }
@@ -49,12 +50,12 @@ class PortfolioCell: UITableViewCell {
     
     func bindChain(_ account: BaseAccount, _ chain: BaseChain) {
         logoImg1.image = UIImage.init(named: chain.logo1)
-        logoImg2.image = UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
         
         legacyTag.isHidden = chain.isDefault
         cw20Tag.isHidden = !chain.supportCw20
         nftTag.isHidden = !(BaseData.instance.showEvenReview() && chain.supportCw721)
+        dappTag.isHidden = !(BaseData.instance.showEvenReview() && chain.isDefault && chain.isEcosystem())
         
         if (chain.fetchState == .Fail) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)

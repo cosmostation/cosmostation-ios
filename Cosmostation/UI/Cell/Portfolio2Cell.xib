@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,6 +14,9 @@
         </array>
         <array key="SpoqaHanSansNeo-Medium.otf">
             <string>SpoqaHanSansNeo-Medium</string>
+        </array>
+        <array key="SpoqaHanSansNeo-Regular.otf">
+            <string>SpoqaHanSansNeo-Regular</string>
         </array>
     </customFonts>
     <objects>
@@ -29,13 +32,6 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gsy-t5-EA0" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="8" y="4" width="431" height="112"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault2" translatesAutoresizingMaskIntoConstraints="NO" id="gww-wi-0sm">
-                                <rect key="frame" x="12" y="12" width="48" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="PNr-yj-1ox"/>
-                                    <constraint firstAttribute="width" constant="48" id="PtT-jr-clj"/>
-                                </constraints>
-                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="C1A-Ei-6cG">
                                 <rect key="frame" x="12" y="12" width="48" height="48"/>
                                 <constraints>
@@ -81,6 +77,19 @@
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NFT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnI-ee-NuM" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" red="0.3411764706" green="0.3803921569" blue="0.65098039220000004" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                        <color key="textColor" name="_color01"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ECO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrc-L5-vHy" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
+                                        <color key="backgroundColor" red="0.035294117649999998" green="0.72156862749999995" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                         <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
@@ -276,15 +285,11 @@
                             <constraint firstAttribute="trailing" secondItem="6P4-et-chg" secondAttribute="trailing" constant="14" id="dzm-gx-VKT"/>
                             <constraint firstItem="wcs-5u-9Rb" firstAttribute="top" secondItem="C1A-Ei-6cG" secondAttribute="bottom" constant="12" id="eCt-bx-FNK"/>
                             <constraint firstItem="wcs-5u-9Rb" firstAttribute="leading" secondItem="Gsy-t5-EA0" secondAttribute="leading" constant="14" id="eEj-bj-Ybp"/>
-                            <constraint firstItem="gww-wi-0sm" firstAttribute="centerX" secondItem="C1A-Ei-6cG" secondAttribute="centerX" id="hz7-Q3-DLx"/>
                             <constraint firstItem="TTl-Pi-aoD" firstAttribute="leading" secondItem="D2k-TI-wvX" secondAttribute="trailing" constant="4" id="iRv-0d-1Tv"/>
                             <constraint firstItem="WZ8-gN-WeX" firstAttribute="top" secondItem="D2k-TI-wvX" secondAttribute="bottom" constant="8" id="jfB-fz-IRL"/>
                             <constraint firstItem="C1A-Ei-6cG" firstAttribute="leading" secondItem="Gsy-t5-EA0" secondAttribute="leading" constant="12" id="noO-Ad-irv"/>
-                            <constraint firstItem="gww-wi-0sm" firstAttribute="width" secondItem="C1A-Ei-6cG" secondAttribute="width" id="ooG-aq-KQ7"/>
                             <constraint firstItem="D2k-TI-wvX" firstAttribute="leading" secondItem="C1A-Ei-6cG" secondAttribute="trailing" constant="12" id="p0k-oN-4GN"/>
                             <constraint firstAttribute="trailing" secondItem="iIr-Ed-DdG" secondAttribute="trailing" constant="14" id="qrv-wM-1QG"/>
-                            <constraint firstItem="gww-wi-0sm" firstAttribute="centerY" secondItem="C1A-Ei-6cG" secondAttribute="centerY" id="wCQ-L9-D3w"/>
-                            <constraint firstItem="gww-wi-0sm" firstAttribute="height" secondItem="C1A-Ei-6cG" secondAttribute="height" id="zED-PO-Y6x"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -304,10 +309,10 @@
                 <outlet property="assetCntLoadingLabel" destination="VMF-Zk-Xdg" id="tZt-94-hdS"/>
                 <outlet property="bechAddressLabel" destination="WZ8-gN-WeX" id="Edo-hG-svJ"/>
                 <outlet property="cw20Tag" destination="qYc-AQ-xwA" id="Pal-qO-ppf"/>
+                <outlet property="dappTag" destination="yrc-L5-vHy" id="I7q-Rp-c16"/>
                 <outlet property="evmAddressLabel" destination="C6d-Lf-BNl" id="NUE-Tr-NR7"/>
                 <outlet property="legacyTag" destination="Cet-um-LoA" id="uDS-Ja-52X"/>
                 <outlet property="logoImg1" destination="C1A-Ei-6cG" id="oV4-3m-BgS"/>
-                <outlet property="logoImg2" destination="gww-wi-0sm" id="TF5-l7-W7L"/>
                 <outlet property="nameLabel" destination="D2k-TI-wvX" id="fng-hh-NL0"/>
                 <outlet property="nftTag" destination="cnI-ee-NuM" id="5cb-X3-1NM"/>
                 <outlet property="priceChangeLabel" destination="iUO-Oz-fI0" id="CxA-5w-CJv"/>
@@ -325,7 +330,6 @@
     </objects>
     <resources>
         <image name="chainDefault" width="192" height="192"/>
-        <image name="chainDefault2" width="192" height="192"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

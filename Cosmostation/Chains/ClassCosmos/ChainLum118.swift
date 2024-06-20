@@ -16,7 +16,6 @@ class ChainLum118: BaseChain  {
         name = "Lum"
         tag = "lum118"
         logo1 = "chainLum"
-        logo2 = "chainLum2"
         isDefault = false
         apiName = "lum"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

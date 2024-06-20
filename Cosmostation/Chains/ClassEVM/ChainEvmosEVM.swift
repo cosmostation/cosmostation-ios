@@ -15,8 +15,7 @@ class ChainEvmosEVM: BaseChain  {
         
         name = "Evmos"
         tag = "evmos60"
-        logo1 = "chainEvmosEvm"
-        logo2 = "chainEvmos2"
+        logo1 = "chainEvmos"
         apiName = "evmos"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

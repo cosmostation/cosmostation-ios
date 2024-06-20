@@ -16,7 +16,6 @@ class ChainEthereum: BaseChain {
         name = "Ethereum"
         tag = "ethereum60"
         logo1 = "chainEthereum"
-        logo2 = "chainEthereum2"
         apiName = "ethereum"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

@@ -16,7 +16,6 @@ class ChainOsmosis: BaseChain  {
         name = "Osmosis"
         tag = "osmosis118"
         logo1 = "chainOsmosis"
-        logo2 = "chainOsmosis2"
         apiName = "osmosis"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

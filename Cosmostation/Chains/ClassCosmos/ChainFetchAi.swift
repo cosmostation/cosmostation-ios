@@ -16,7 +16,6 @@ class ChainFetchAi: BaseChain  {
         name = "Fetch.Ai"
         tag = "fetchai118"
         logo1 = "chainFetchAi"
-        logo2 = "chainFetchAi2"
         apiName = "fetchai"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

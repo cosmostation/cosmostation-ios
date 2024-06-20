@@ -16,7 +16,6 @@ class ChainComdex: BaseChain  {
         name = "Comdex"
         tag = "comdex118"
         logo1 = "chainComdex"
-        logo2 = "chainComdex2"
         apiName = "comdex"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

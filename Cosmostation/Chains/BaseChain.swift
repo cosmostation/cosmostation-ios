@@ -15,7 +15,6 @@ class BaseChain {
     var name: String!
     var tag: String!
     var logo1: String!
-    var logo2: String!
     var isTestnet = false
     var isDefault = true
     var apiName: String!

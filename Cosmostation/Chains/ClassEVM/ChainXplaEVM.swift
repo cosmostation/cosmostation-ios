@@ -15,8 +15,7 @@ class ChainXplaEVM: BaseChain  {
         
         name = "Xpla"
         tag = "xplaKeccak256"
-        logo1 = "chainXplaEvm"
-        logo2 = "chainXpla2"
+        logo1 = "chainXpla"
         apiName = "xpla"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

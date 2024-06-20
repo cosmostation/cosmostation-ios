@@ -16,7 +16,6 @@ class ChainOmniflix: BaseChain  {
         name = "Omniflix"
         tag = "omniflix118"
         logo1 = "chainOmniflix"
-        logo2 = "chainOmniflix2"
         apiName = "omniflix"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

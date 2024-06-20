@@ -16,7 +16,6 @@ class ChainSei: BaseChain {
         name = "Sei"
         tag = "sei118"
         logo1 = "chainSei"
-        logo2 = "chainSei2"
         apiName = "sei"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

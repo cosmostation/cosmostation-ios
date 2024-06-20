@@ -16,7 +16,6 @@ class ChainNyx: BaseChain  {
         name = "Nyx"
         tag = "nyx118"
         logo1 = "chainNyx"
-        logo2 = "chainNyx2"
         apiName = "nyx"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

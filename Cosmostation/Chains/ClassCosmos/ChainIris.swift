@@ -16,7 +16,6 @@ class ChainIris: BaseChain  {
         name = "Iris"
         tag = "iris118"
         logo1 = "chainIris"
-        logo2 = "chainIris2"
         apiName = "iris"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

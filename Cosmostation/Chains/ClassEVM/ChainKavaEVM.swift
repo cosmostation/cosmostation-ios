@@ -15,8 +15,7 @@ class ChainKavaEVM: BaseChain  {
         
         name = "Kava"
         tag = "kava60"
-        logo1 = "chainKavaEvm"
-        logo2 = "chainKava2"
+        logo1 = "chainKava"
         apiName = "kava"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

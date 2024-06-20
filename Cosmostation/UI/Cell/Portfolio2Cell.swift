@@ -13,13 +13,13 @@ class Portfolio2Cell: UITableViewCell {
     
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg1: UIImageView!
-    @IBOutlet weak var logoImg2: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var bechAddressLabel: UILabel!
     @IBOutlet weak var evmAddressLabel: UILabel!
     @IBOutlet weak var legacyTag: PaddingLabel!
     @IBOutlet weak var cw20Tag: PaddingLabel!
     @IBOutlet weak var nftTag: PaddingLabel!
+    @IBOutlet weak var dappTag: PaddingLabel!
     @IBOutlet weak var priceCurrencyLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var priceChangeLabel: UILabel!
@@ -61,6 +61,7 @@ class Portfolio2Cell: UITableViewCell {
         legacyTag.isHidden = true
         cw20Tag.isHidden = true
         nftTag.isHidden = true
+        dappTag.isHidden = true
         bechAddressLabel.text = ""
         evmAddressLabel.text = ""
         priceCurrencyLabel.text = ""
@@ -78,7 +79,6 @@ class Portfolio2Cell: UITableViewCell {
     
     func bindChain(_ account: BaseAccount, _ chain: BaseChain) {
         logoImg1.image = UIImage.init(named: chain.logo1)
-        logoImg2.image = UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
         if (chain.isCosmos()) {
             bechAddressLabel.text = chain.bechAddress
@@ -93,6 +93,7 @@ class Portfolio2Cell: UITableViewCell {
         legacyTag.isHidden = chain.isDefault
         cw20Tag.isHidden = !chain.supportCw20
         nftTag.isHidden = !(BaseData.instance.showEvenReview() && chain.supportCw721)
+        dappTag.isHidden = !(BaseData.instance.showEvenReview() && chain.isDefault && chain.isEcosystem())
         
         if (chain.fetchState == .Fail) {
             valueLoadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)

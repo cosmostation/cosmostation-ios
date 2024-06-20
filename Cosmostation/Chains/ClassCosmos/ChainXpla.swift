@@ -15,7 +15,6 @@ class ChainXpla: BaseChain  {
         name = "Xpla"
         tag = "xpla60"
         logo1 = "chainXpla"
-        logo2 = "chainXpla2"
         isDefault = false
         apiName = "xpla"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/60'/0'/0/X")

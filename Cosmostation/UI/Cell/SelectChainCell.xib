@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,13 +29,6 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJ2-PH-o0E" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="8" y="4" width="357" height="72"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault2" translatesAutoresizingMaskIntoConstraints="NO" id="6Qf-wv-brJ">
-                                <rect key="frame" x="12" y="12" width="48" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="6ks-VW-qoI"/>
-                                    <constraint firstAttribute="width" constant="48" id="nm2-Lu-gHT"/>
-                                </constraints>
-                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="hCI-tl-W78">
                                 <rect key="frame" x="12" y="12" width="48" height="48"/>
                                 <constraints>
@@ -159,7 +152,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Z6Y-lL-ijC" firstAttribute="leading" secondItem="brX-jS-Hp5" secondAttribute="leading" id="1ZZ-jJ-751"/>
-                            <constraint firstItem="6Qf-wv-brJ" firstAttribute="centerY" secondItem="hCI-tl-W78" secondAttribute="centerY" id="22v-fL-7OH"/>
                             <constraint firstItem="Zh3-K6-yqb" firstAttribute="centerY" secondItem="brX-jS-Hp5" secondAttribute="centerY" id="2KS-cQ-Iq9"/>
                             <constraint firstItem="QGE-gq-48I" firstAttribute="centerY" secondItem="YJ2-PH-o0E" secondAttribute="centerY" id="4bi-Cg-DqX"/>
                             <constraint firstItem="rov-M3-rhY" firstAttribute="firstBaseline" secondItem="Zh3-K6-yqb" secondAttribute="firstBaseline" constant="-0.5" id="5GN-aZ-bvO"/>
@@ -171,16 +163,13 @@
                             <constraint firstItem="Zh3-K6-yqb" firstAttribute="leading" secondItem="rov-M3-rhY" secondAttribute="trailing" constant="2.0000000000000568" id="JGl-yE-vbo"/>
                             <constraint firstItem="hCI-tl-W78" firstAttribute="top" secondItem="YJ2-PH-o0E" secondAttribute="top" constant="12" id="K3n-P0-P4i"/>
                             <constraint firstItem="2nt-Q9-wQJ" firstAttribute="centerY" secondItem="Z6Y-lL-ijC" secondAttribute="centerY" id="L8N-St-qag"/>
-                            <constraint firstItem="6Qf-wv-brJ" firstAttribute="height" secondItem="hCI-tl-W78" secondAttribute="height" id="MMF-26-5yY"/>
                             <constraint firstItem="hCI-tl-W78" firstAttribute="centerY" secondItem="YJ2-PH-o0E" secondAttribute="centerY" id="PAX-UC-SSw"/>
                             <constraint firstAttribute="bottom" secondItem="hCI-tl-W78" secondAttribute="bottom" constant="12" id="UEt-nI-x6y"/>
-                            <constraint firstItem="6Qf-wv-brJ" firstAttribute="width" secondItem="hCI-tl-W78" secondAttribute="width" id="UFX-09-Qx9"/>
                             <constraint firstItem="wC6-dE-gcs" firstAttribute="leading" secondItem="brX-jS-Hp5" secondAttribute="trailing" constant="4" id="aPP-dM-gtd"/>
                             <constraint firstAttribute="trailing" secondItem="Zh3-K6-yqb" secondAttribute="trailing" constant="16" id="aS4-Lh-WSe"/>
                             <constraint firstItem="brX-jS-Hp5" firstAttribute="top" secondItem="YJ2-PH-o0E" secondAttribute="top" constant="16" id="afs-OC-aI5"/>
                             <constraint firstItem="REt-eI-mXD" firstAttribute="centerY" secondItem="2nt-Q9-wQJ" secondAttribute="centerY" id="awR-fO-rqn"/>
                             <constraint firstItem="RX1-4l-ZXX" firstAttribute="centerY" secondItem="Zh3-K6-yqb" secondAttribute="centerY" id="gJs-Ju-yxb"/>
-                            <constraint firstItem="6Qf-wv-brJ" firstAttribute="centerX" secondItem="hCI-tl-W78" secondAttribute="centerX" id="hoM-aB-6DI"/>
                             <constraint firstAttribute="trailing" secondItem="QGE-gq-48I" secondAttribute="trailing" constant="16" id="lfm-CM-MRV"/>
                             <constraint firstItem="brX-jS-Hp5" firstAttribute="leading" secondItem="hCI-tl-W78" secondAttribute="trailing" constant="4" id="t6s-lZ-wdh"/>
                             <constraint firstAttribute="trailing" secondItem="RX1-4l-ZXX" secondAttribute="trailing" constant="16" id="yO2-Jw-URO"/>
@@ -205,7 +194,6 @@
                 <outlet property="loadingLabel1" destination="RX1-4l-ZXX" id="RML-3h-ujv"/>
                 <outlet property="loadingLabel2" destination="REt-eI-mXD" id="atw-1O-79U"/>
                 <outlet property="logoImg1" destination="hCI-tl-W78" id="2VQ-sE-GlK"/>
-                <outlet property="logoImg2" destination="6Qf-wv-brJ" id="JgW-7O-Sen"/>
                 <outlet property="nameLabel" destination="brX-jS-Hp5" id="Yys-Q4-sYo"/>
                 <outlet property="reposeErrorLabel" destination="QGE-gq-48I" id="O4p-7X-dZf"/>
                 <outlet property="rootView" destination="YJ2-PH-o0E" id="wqz-3V-ZzS"/>
@@ -216,7 +204,6 @@
     </objects>
     <resources>
         <image name="chainDefault" width="192" height="192"/>
-        <image name="chainDefault2" width="192" height="192"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

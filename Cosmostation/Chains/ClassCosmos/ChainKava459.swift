@@ -16,7 +16,6 @@ class ChainKava459: BaseChain {
         name = "Kava"
         tag = "kava459"
         logo1 = "chainKava"
-        logo2 = "chainKava2"
         isDefault = false
         apiName = "kava"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/459'/0'/0/X")

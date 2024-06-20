@@ -15,8 +15,7 @@ class ChainCantoEVM: BaseChain  {
         
         name = "Canto"
         tag = "canto60"
-        logo1 = "chainCantoEvm"
-        logo2 = "chainCanto2"
+        logo1 = "chainCanto"
         apiName = "canto"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

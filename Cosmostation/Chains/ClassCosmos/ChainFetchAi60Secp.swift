@@ -16,7 +16,6 @@ class ChainFetchAi60Secp: BaseChain {
         name = "Fetch.Ai"
         tag = "fetchai60_Secp"
         logo1 = "chainFetchAi"
-        logo2 = "chainFetchAi2"
         isDefault = false
         apiName = "fetchai"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/60'/0'/0/X")

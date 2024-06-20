@@ -16,7 +16,6 @@ class ChainCoreum: BaseChain  {
         name = "Coreum"
         tag = "coreum990"
         logo1 = "chainCoreum"
-        logo2 = "chainCoreum2"
         apiName = "coreum"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/990'/0'/0/X")
         

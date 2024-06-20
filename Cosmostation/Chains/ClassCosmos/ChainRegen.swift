@@ -16,7 +16,6 @@ class ChainRegen: BaseChain  {
         name = "Regen"
         tag = "regen118"
         logo1 = "chainRegen"
-        logo2 = "chainRegen2"
         apiName = "regen"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
