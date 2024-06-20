@@ -66,7 +66,7 @@ class FetcherEvmrpc {
             return true
             
         } catch {
-//            print("evm error \(error)")
+            print("evm error \(error) ", chain.tag)
 //            throw CommonError.evmErrpr
             return false
         }

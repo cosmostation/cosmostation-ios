@@ -14,7 +14,8 @@ class SelectChainCell: UITableViewCell {
     @IBOutlet weak var rootView: FixCardView!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var hdPathLabel: UILabel!
+    @IBOutlet weak var bechAddressLabel: UILabel!
+    @IBOutlet weak var evmAddressLabel: UILabel!
     @IBOutlet weak var legacyTag: PaddingLabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
@@ -31,10 +32,14 @@ class SelectChainCell: UITableViewCell {
         currencyLabel.text = ""
         valueLabel.text = ""
         assetCntLabel.text = ""
+        bechAddressLabel.text = ""
+        evmAddressLabel.text = ""
         legacyTag.isHidden = true
         loadingLabel1.isHidden = false
         loadingLabel2.isHidden = false
         reposeErrorLabel.isHidden = true
+        bechAddressLabel.alpha = 1.0
+        evmAddressLabel.alpha = 1.0
         loadingLabel1.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color05, .color04]), animation: skeletonAnimation, transition: .none)
         loadingLabel2.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
     }
@@ -43,10 +48,16 @@ class SelectChainCell: UITableViewCell {
         currencyLabel.text = ""
         valueLabel.text = ""
         assetCntLabel.text = ""
+        bechAddressLabel.text = ""
+        evmAddressLabel.text = ""
         legacyTag.isHidden = true
         loadingLabel1.isHidden = false
         loadingLabel2.isHidden = false
         reposeErrorLabel.isHidden = true
+        bechAddressLabel.alpha = 1.0
+        evmAddressLabel.alpha = 1.0
+        bechAddressLabel.layer.removeAllAnimations()
+        evmAddressLabel.layer.removeAllAnimations()
     }
     
     var actionToggle: ((Bool) -> Void)? = nil
@@ -57,6 +68,17 @@ class SelectChainCell: UITableViewCell {
     func bindSelectChain(_ account: BaseAccount, _ chain: BaseChain, _ selectedList: [String]) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
+        if (chain.isCosmos()) {
+            bechAddressLabel.text = chain.bechAddress
+        }
+        if (chain.supportEvm) {
+            evmAddressLabel.text = chain.evmAddress
+        }
+        if (chain.isCosmos() && chain.supportEvm) {
+            starEvmAddressAnimation()
+        }
+        
+        legacyTag.isHidden = chain.isDefault
         
         if (selectedList.contains(chain.tag)) {
             rootView.layer.borderWidth = 1.0
@@ -64,14 +86,6 @@ class SelectChainCell: UITableViewCell {
         } else {
             rootView.layer.borderWidth = 0.5
             rootView.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
-        }
-        
-        legacyTag.isHidden = chain.isDefault
-        
-        if (account.type == .withMnemonic) {
-            hdPathLabel.text = chain.getHDPath(account.lastHDPath)
-        } else {
-            hdPathLabel.text = ""
         }
         
         if (chain.fetchState == .Fail) {
@@ -121,6 +135,30 @@ class SelectChainCell: UITableViewCell {
             loadingLabel1.isHidden = false
             loadingLabel2.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color06, .color05]), animation: skeletonAnimation, transition: .none)
             loadingLabel2.isHidden = false
+        }
+    }
+    
+    func starEvmAddressAnimation() {
+        bechAddressLabel.layer.removeAllAnimations()
+        evmAddressLabel.layer.removeAllAnimations()
+        bechAddressLabel.alpha = 0.0
+        evmAddressLabel.alpha = 1.0
+        
+        UIView.animateKeyframes(withDuration: 10.0,
+                                delay: 0,
+                                options: [.repeat, .calculationModeCubic]) {
+            UIView.addKeyframe(withRelativeStartTime: 4 / 16, relativeDuration: 1 / 16) { [weak self] in
+                self?.evmAddressLabel.alpha = 0.0
+            }
+            UIView.addKeyframe(withRelativeStartTime: 5 / 16, relativeDuration: 1 / 16) { [weak self] in
+                self?.bechAddressLabel.alpha = 1.0
+            }
+            UIView.addKeyframe(withRelativeStartTime: 14 / 16, relativeDuration: 1 / 16) { [weak self] in
+                self?.bechAddressLabel.alpha = 0.0
+            }
+            UIView.addKeyframe(withRelativeStartTime: 15 / 16, relativeDuration: 1 / 16) { [weak self] in
+                self?.evmAddressLabel.alpha = 1.0
+            }
         }
     }
 }

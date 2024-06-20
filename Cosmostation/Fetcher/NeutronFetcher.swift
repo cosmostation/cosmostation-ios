@@ -30,8 +30,8 @@ class NeutronFetcher: FetcherGrpc {
         
         do {
             if let cw20Tokens = try? await fetchCw20Info(),
-               let auth = try? await fetchAuth(),
                let balance = try await fetchBalance(),
+               let auth = try? await fetchAuth(),
                let vault = try? await fetchVaultDeposit(),
                let vesting = try? await fetchNeutronVesting() {
                 self.mintscanCw20Tokens = cw20Tokens ?? []
@@ -53,6 +53,7 @@ class NeutronFetcher: FetcherGrpc {
             return true
             
         } catch {
+            print("grpc error \(error) ", chain.tag)
             return false
         }
     }

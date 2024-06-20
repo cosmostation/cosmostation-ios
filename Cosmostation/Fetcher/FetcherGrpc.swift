@@ -68,8 +68,8 @@ class FetcherGrpc {
         do {
             if let cw20Tokens = try? await fetchCw20Info(),
                let cw721List = try? await fetchCw721Info(),
-               let auth = try? await fetchAuth(),
                let balance = try await fetchBalance(),
+               let auth = try? await fetchAuth(),
                let delegations = try? await fetchDelegation(),
                let unbonding = try? await fetchUnbondings(),
                let rewards = try? await fetchRewards(),
@@ -93,16 +93,14 @@ class FetcherGrpc {
                 }
                 self.rewardAddress = rewardaddr?.replacingOccurrences(of: "\"", with: "")
                 
-//                print("fetchAllCw20Balance start ", chain.tag)
                 await mintscanCw20Tokens.concurrentForEach { cw20 in
                     self.fetchCw20Balance(cw20)
                 }
-//                print("fetchAllCw20Balance end ", chain.tag)
             }
             return true
             
         } catch {
-            print("grpc error \(error)")
+            print("grpc error \(error) ", chain.tag)
             return false
         }
         
@@ -435,7 +433,7 @@ extension FetcherGrpc {
     
     func fetchAuth() async throws -> Google_Protobuf_Any? {
         let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = chain.bechAddress! }
-        return try await Cosmos_Auth_V1beta1_QueryNIOClient(channel: getClient()).account(req, callOptions: getCallOptions()).response.get().account
+        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: getClient()).account(req, callOptions: getCallOptions()).response.get().account
     }
     
     func fetchBalance() async throws -> [Cosmos_Base_V1beta1_Coin]? {
@@ -446,7 +444,7 @@ extension FetcherGrpc {
     
     func fetchDelegation() async throws -> [Cosmos_Staking_V1beta1_DelegationResponse]? {
         let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = chain.bechAddress! }
-        return try await Cosmos_Staking_V1beta1_QueryNIOClient(channel: getClient()).delegatorDelegations(req, callOptions: getCallOptions()).response.get().delegationResponses
+        return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: getClient()).delegatorDelegations(req, callOptions: getCallOptions()).response.get().delegationResponses
     }
     
     func fetchUnbondings() async throws -> [Cosmos_Staking_V1beta1_UnbondingDelegation]? {
@@ -456,7 +454,7 @@ extension FetcherGrpc {
     
     func fetchRewards() async throws -> [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]? {
         let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = chain.bechAddress! }
-        return try await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: getClient()).delegationTotalRewards(req, callOptions: getCallOptions()).response.get().rewards
+        return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: getClient()).delegationTotalRewards(req, callOptions: getCallOptions()).response.get().rewards
     }
     
     func fetchCommission() async throws -> Cosmos_Distribution_V1beta1_ValidatorAccumulatedCommission? {
@@ -480,7 +478,7 @@ extension FetcherGrpc {
     
     func fetchTx( _ hash: String) async throws -> Cosmos_Tx_V1beta1_GetTxResponse? {
         let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = hash }
-        return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).getTx(req, callOptions: getCallOptions()).response.get()
+        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).getTx(req, callOptions: getCallOptions()).response.get()
     }
     
     func fetchIbcClient(_ ibcPath: MintscanPath) async throws -> Ibc_Core_Channel_V1_QueryChannelClientStateResponse? {
@@ -608,7 +606,7 @@ extension FetcherGrpc {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(8000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
         return callOptions
     }
 }
