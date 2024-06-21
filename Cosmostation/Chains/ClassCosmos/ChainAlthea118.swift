@@ -30,26 +30,3 @@ class ChainAlthea118: BaseChain {
         initFetcher()
     }
 }
-/*
-class ChainAlthea118: CosmosClass  {
-    
-    override init() {
-        super.init()
-        
-        isDefault = false
-        
-        name = "Althea"
-        tag = "althea118"
-        logo1 = "chainAlthea"
-        logo2 = "chainAlthea2"
-        apiName = "althea"
-        stakeDenom = "aalthea"
-        
-        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        bechAccountPrefix = "althea"
-        validatorPrefix = "altheavaloper"
-        
-        grpcHost = "grpc-althea.cosmostation.io"
-    }
-}
-*/

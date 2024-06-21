@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftProtobuf
-import SwiftyJSON
 import Web3Core
 import secp256k1
 

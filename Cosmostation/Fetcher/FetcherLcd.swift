@@ -39,4 +39,8 @@ class FetcherLcd {
     func fetchValidators() async -> Bool {
         return false
     }
+    
+    func getLcd() -> String {
+        return chain.lcdUrl
+    }
 }

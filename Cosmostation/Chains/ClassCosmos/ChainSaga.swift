@@ -28,6 +28,5 @@ class ChainSaga: BaseChain  {
         
         initFetcher()
     }
-    
 }
 

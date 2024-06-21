@@ -8,10 +8,6 @@
 
 import UIKit
 import Lottie
-import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class CosmosVote: BaseVC {
     

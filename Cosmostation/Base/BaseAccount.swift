@@ -19,7 +19,6 @@ public class BaseAccount {
     var lastHDPath = ""
     var order: Int64 = 999
     
-    
     var allChains = [BaseChain]()
     var dpTags = [String]()
     
@@ -41,34 +40,17 @@ public class BaseAccount {
         self.order = order
     }
     
-//    lazy var toDisplayCTags = [String]()
-//    lazy var allCosmosClassChains = [CosmosClass]()
-//    
-//    lazy var toDisplayETags = [String]()
-//    lazy var allEvmClassChains = [EvmClass]()
-    
     func getRefreshName() -> String {
         self.name = BaseData.instance.selectAccount(id)?.name ?? ""
         return self.name
     }
-    
-//    func loadDisplayCTags() {
-//        toDisplayCTags = BaseData.instance.getDisplayChainTags(self.id)
-//    }
-//    
-//    func loadDisplayETags() {
-//        toDisplayETags = BaseData.instance.getDisplayEvmChainTags(self.id)
-//    }
     
     func loadDisplayTags() {
         dpTags = BaseData.instance.getDisplayChainTags(self.id)
     }
     
     func initAccount() {
-//        loadDisplayETags()
-//        loadDisplayCTags()
         loadDisplayTags()
-//        print("initAccount ", dpTags.count)
         
         if (type == .onlyPrivateKey) {
             allChains = ALLCHAINS()
@@ -76,7 +58,6 @@ public class BaseAccount {
             allChains = ALLCHAINS()
         }
         
-        //YONG4 value
         allChains.sort {
             if ($0.tag == "cosmos118") { return true }
             if ($1.tag == "cosmos118") { return false }

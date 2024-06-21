@@ -8,11 +8,8 @@
 
 import Foundation
 import UIKit
-import SwiftProtobuf
 import Web3Core
 import BigInt
-
-
 
 public class WUtils {
     

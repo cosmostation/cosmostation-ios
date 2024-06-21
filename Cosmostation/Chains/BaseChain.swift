@@ -126,7 +126,7 @@ class BaseChain {
             
             if (evmResult == false || grpcResult == false) {
                 fetchState = .Fail
-                print("fetching Some error ", tag)
+//                print("fetching Some error ", tag)
             } else {
                 fetchState = .Success
 //                print("fetching good ", tag)
@@ -410,32 +410,44 @@ func ALLCHAINS() -> [BaseChain] {
     
     result.append(ChainCosmos())
     result.append(ChainAkash())
+    result.append(ChainAltheaEVM())                     //EVM
     result.append(ChainAlthea118())
+    result.append(ChainArbitrum())                      //EVM
     result.append(ChainArchway())
     result.append(ChainAssetMantle())
+    result.append(ChainAvalanche())                     //EVM
     result.append(ChainAxelar())
     result.append(ChainBand())
+    result.append(ChainBaseEVM())                       //EVM
+    result.append(ChainBinanceSmart())                  //EVM
     result.append(ChainBitcana())
     result.append(ChainBitsong())
+    result.append(ChainCantoEVM())                      //EVM
     result.append(ChainCelestia())
     result.append(ChainChihuahua())
     result.append(ChainCoreum())
     // result.append(ChainCrescent())
+    result.append(ChainCronos())                        //EVM
     result.append(ChainCryptoorg())
     result.append(ChainCudos())
     result.append(ChainDesmos())
     result.append(ChainDydx())
+    result.append(ChainDymensionEVM())                  //EVM
     // result.append(ChainEmoney())
+    result.append(ChainEthereum())                      //EVM
+    result.append(ChainEvmosEVM())                      //EVM
     result.append(ChainFetchAi())
     result.append(ChainFetchAi60Old())
     result.append(ChainFetchAi60Secp())
     result.append(ChainFinschia())
     result.append(ChainGovgen())
     result.append(ChainGravityBridge())
+    result.append(ChainHumansEVM())                     //EVM
     result.append(ChainInjective())
     result.append(ChainIris())
     result.append(ChainIxo())
     result.append(ChainJuno())
+    result.append(ChainKavaEVM())                       //EVM
     result.append(ChainKava459())
     result.append(ChainKava118())
     result.append(ChainKi())
@@ -449,12 +461,17 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNibiru())
     result.append(ChainNoble())
     result.append(ChainNyx())
+    result.append(ChainOktEVM())                        //EVM
+    result.append(ChainOkt996Keccak())                  //LCD
+    result.append(ChainOkt996Secp())                    //LCD
     result.append(ChainOmniflix())
     result.append(ChainOnomy())
+    result.append(ChainOptimism())                      //EVM
     result.append(ChainOsmosis())
     result.append(ChainPassage())
     result.append(ChainPersistence118())
     result.append(ChainPersistence750())
+    result.append(ChainPolygon())                       //EVM
     result.append(ChainProvenance())
     result.append(ChainQuasar())
     result.append(ChainQuicksilver())
@@ -474,27 +491,15 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainTeritori())
     result.append(ChainTerra())
     result.append(ChainUmee())
+    result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
-    result.append(ChainOkt996Keccak())
-    result.append(ChainOkt996Secp())
 
     
-    result.append(ChainEthereum())
-    result.append(ChainAltheaEVM())
-    result.append(ChainArbitrum())
-    result.append(ChainAvalanche())
-    result.append(ChainBaseEVM())
-    result.append(ChainBinanceSmart())
-    result.append(ChainCantoEVM())
-    result.append(ChainCronos())
-    result.append(ChainDymensionEVM())
-    result.append(ChainEvmosEVM())
-    result.append(ChainHumansEVM())
-    result.append(ChainKavaEVM())
-    result.append(ChainOktEVM())
-    result.append(ChainOptimism())
-    result.append(ChainPolygon())
-    result.append(ChainXplaEVM())
+    
+    
+    
+    
+
     
 //    result.append(ChainBeraEVM_T())
     

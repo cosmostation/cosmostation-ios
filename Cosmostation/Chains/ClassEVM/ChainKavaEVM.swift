@@ -17,7 +17,7 @@ class ChainKavaEVM: BaseChain  {
         
         name = "Kava"
         tag = "kava60"
-        logo1 = "chainKava"
+        logo1 = "chainKavaEVM"
         apiName = "kava"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
@@ -64,3 +64,11 @@ class ChainKavaEVM: BaseChain  {
 //        return nil
 //    }
 }
+
+let KAVA_MAIN_DENOM = "ukava"
+let KAVA_HARD_DENOM = "hard"
+let KAVA_USDX_DENOM = "usdx"
+let KAVA_SWAP_DENOM = "swp"
+
+let KAVA_CDP_IMG_URL        = ResourceBase + "kava/module/mint/";
+let KAVA_HARD_POOL_IMG_URL  = ResourceBase + "kava/module/lend/";

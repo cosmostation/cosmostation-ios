@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "kava(evm).png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

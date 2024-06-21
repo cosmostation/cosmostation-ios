@@ -30,26 +30,3 @@ class ChainAkash: BaseChain {
     }
     
 }
-
-/*
-class ChainAkash: CosmosClass  {
-    
-    override init() {
-        super.init()
-        
-        name = "Akash"
-        tag = "akash118"
-        logo1 = "chainAkash"
-        logo2 = "chainAkash2"
-        apiName = "akash"
-        stakeDenom = "uakt"
-        
-        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        bechAccountPrefix = "akash"
-        validatorPrefix = "akashvaloper"
-        
-        grpcHost = "grpc-akash.cosmostation.io"
-    }
-    
-}
-*/

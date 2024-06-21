@@ -128,33 +128,32 @@ class OktFetcher: FetcherLcd {
 extension OktFetcher {
     
     func fetchNodeInfo() async throws -> JSON? {
-        let url = OKT_LCD + "node_info"
+        let url = getLcd() + "node_info"
         return try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchAccountInfo(_ address: String) async throws -> JSON? {
-        let url = OKT_LCD + "auth/accounts/" + address
+        let url = getLcd() + "auth/accounts/" + address
         return try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchOktDeposited(_ address: String) async throws -> JSON? {
-        let url = OKT_LCD + "staking/delegators/" + address
+        let url = getLcd() + "staking/delegators/" + address
         return try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchOktWithdraw(_ address: String) async throws -> JSON? {
-        let url = OKT_LCD + "staking/delegators/" + address + "/unbonding_delegations"
+        let url = getLcd() + "staking/delegators/" + address + "/unbonding_delegations"
         return try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchOktTokens() async throws -> JSON? {
-        let url = OKT_LCD + "tokens"
+        let url = getLcd() + "tokens"
         return try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchOktValdators() async throws -> [JSON]? {
-        let url = OKT_LCD + "staking/validators"
-//        return try await AF.request(url, method: .get, parameters: ["status":"all"]).serializingDecodable([JSON].self).value
-        return try await AF.request(url, method: .get, parameters: [:]).serializingDecodable([JSON].self).value
+        let url = getLcd() + "staking/validators"
+        return try await AF.request(url, method: .get, parameters: ["status":"all"]).serializingDecodable([JSON].self).value
     }
 }

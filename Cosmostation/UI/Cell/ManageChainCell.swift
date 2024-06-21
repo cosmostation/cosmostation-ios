@@ -44,7 +44,7 @@ class ManageChainCell: UITableViewCell {
         
         if (chain.name == "OKT") {
             lcdLayer.isHidden = false
-            lcdEndpointLabel.text = OKT_LCD.replacingOccurrences(of: "https://", with: "")
+            lcdEndpointLabel.text = chain.getLcdfetcher()!.getLcd().replacingOccurrences(of: "https://", with: "")
             lcdEndpointLabel.adjustsFontSizeToFitWidth = true
         }
         

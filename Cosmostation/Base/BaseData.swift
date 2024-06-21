@@ -9,7 +9,6 @@
 import Foundation
 import SQLite
 import SwiftKeychainWrapper
-import SwiftProtobuf
 import KeychainAccess
 import SwiftyJSON
 
