@@ -8,10 +8,6 @@
 
 import UIKit
 import Lottie
-import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class KavaDefiVC: BaseVC {
     
@@ -19,6 +15,7 @@ class KavaDefiVC: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedChain: BaseChain!
+    var kavaFetcher: KavaFetcher!
     var incentive: Kava_Incentive_V1beta1_QueryRewardsResponse?
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
 
@@ -26,6 +23,7 @@ class KavaDefiVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        kavaFetcher = selectedChain.getGrpcfetcher() as? KavaFetcher
         
         tableView.isHidden = true
         loadingView.isHidden = false
@@ -52,9 +50,8 @@ class KavaDefiVC: BaseVC {
     
     func onFetchData() {
         Task {
-            let channel = getConnection()
-            if let incentive = try? await fetchIncentive(channel, selectedChain.bechAddress!),
-               let pricefeed = try? await fetchPriceFeed(channel) {
+            if let incentive = try? await kavaFetcher.fetchIncentive(),
+               let pricefeed = try? await kavaFetcher.fetchPriceFeed() {
                 self.incentive = incentive
                 self.priceFeed = pricefeed
                 
@@ -137,50 +134,6 @@ extension KavaDefiVC: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(earnListVC, animated: true)
             
         }
-    }
-}
-
-
-extension KavaDefiVC {
-    
-    func fetchIncentive(_ channel: ClientConnection, _ address: String) async throws -> Kava_Incentive_V1beta1_QueryRewardsResponse? {
-        let req = Kava_Incentive_V1beta1_QueryRewardsRequest.with { $0.owner = address }
-        return try? await Kava_Incentive_V1beta1_QueryNIOClient(channel: channel).rewards(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchRewardFactor(_ channel: ClientConnection) async throws -> Kava_Incentive_V1beta1_QueryRewardFactorsResponse? {
-        let req = Kava_Incentive_V1beta1_QueryRewardFactorsRequest()
-        return try? await Kava_Incentive_V1beta1_QueryNIOClient(channel: channel).rewardFactors(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchPriceFeed(_ channel: ClientConnection) async throws -> Kava_Pricefeed_V1beta1_QueryPricesResponse? {
-        let req = Kava_Pricefeed_V1beta1_QueryPricesRequest()
-        return try? await Kava_Pricefeed_V1beta1_QueryNIOClient(channel: channel).prices(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
-    }
-}
-
-
-extension Kava_Pricefeed_V1beta1_QueryPricesResponse {
-    
-    func getKavaOraclePrice(_ marketId: String?) -> NSDecimalNumber {
-        if let price = prices.filter({ $0.marketID == marketId }).first {
-            return NSDecimalNumber.init(string: price.price).multiplying(byPowerOf10: -18, withBehavior: handler6)
-        }
-        return NSDecimalNumber.zero
     }
 }
 

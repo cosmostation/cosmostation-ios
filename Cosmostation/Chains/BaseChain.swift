@@ -133,7 +133,7 @@ class BaseChain {
             }
             
             if (self.fetchState == .Success) {
-                if let grpcFetcher = grpcFetcher {
+                if let grpcFetcher = getGrpcfetcher() {
                     grpcFetcher.onCheckVesting()
                     allCoinValue = grpcFetcher.allCoinValue()
                     allCoinUSDValue = grpcFetcher.allCoinValue(true)
@@ -185,9 +185,9 @@ class BaseChain {
         Task {
             var result: Bool?
             if (supportEvm == true) {
-                result = await evmFetcher?.fetchBalances()
+                result = await getEvmfetcher()?.fetchBalances()
             } else if (supportCosmosGrpc == true) {
-                result = await grpcFetcher?.fetchBalances()
+                result = await getGrpcfetcher()?.fetchBalances()
             }
             
             if (result == false) {
@@ -339,7 +339,7 @@ extension BaseChain {
     
     //get first payable fee with this account
     func getInitPayableFee() -> Cosmos_Tx_V1beta1_Fee? {
-        guard let grpcFetcher = grpcFetcher else { return nil }
+        guard let grpcFetcher = getGrpcfetcher() else { return nil }
         var feeCoin: Cosmos_Base_V1beta1_Coin?
         for i in 0..<getDefaultFeeCoins().count {
             let minFee = getDefaultFeeCoins()[i]

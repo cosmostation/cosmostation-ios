@@ -10,6 +10,8 @@ import Foundation
 
 class ChainKavaEVM: BaseChain  {
     
+    var kavaFetcher: KavaFetcher?
+    
     override init() {
         super.init()
         
@@ -34,6 +36,15 @@ class ChainKavaEVM: BaseChain  {
         evmRpcURL = "https://rpc-kava-evm.cosmostation.io"
         
         initFetcher()
+    }
+    
+    override func initFetcher() {
+        evmFetcher = FetcherEvmrpc.init(self)
+        kavaFetcher = KavaFetcher.init(self)
+    }
+    
+    override func getGrpcfetcher() -> FetcherGrpc? {
+        return kavaFetcher
     }
     
 //    override func getExplorerAccount() -> URL? {

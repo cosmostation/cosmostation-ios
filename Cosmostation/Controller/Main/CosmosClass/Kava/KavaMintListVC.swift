@@ -8,10 +8,6 @@
 
 import UIKit
 import Lottie
-import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class KavaMintListVC: BaseVC {
     
@@ -19,6 +15,7 @@ class KavaMintListVC: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedChain: BaseChain!
+    var kavaFetcher: KavaFetcher!
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
     var cdpParam: Kava_Cdp_V1beta1_Params?
     var myCollateralParamList = [Kava_Cdp_V1beta1_CollateralParam]()
@@ -29,6 +26,7 @@ class KavaMintListVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        kavaFetcher = selectedChain.getGrpcfetcher() as? KavaFetcher
         
         tableView.isHidden = true
         loadingView.isHidden = false
@@ -55,9 +53,8 @@ class KavaMintListVC: BaseVC {
     
     func onFetchData() {
         Task {
-            let channel = getConnection()
-            if let cdpParam = try? await fetchMintParam(channel),
-               let myCdps = try? await fetchMyCdps(channel, selectedChain.bechAddress!) {
+            if let cdpParam = try? await kavaFetcher.fetchMintParam(),
+               let myCdps = try? await kavaFetcher.fetchMyCdps() {
                 
                 cdpParam?.collateralParams.forEach({ collateralParam in
                     if (myCdps?.filter({ $0.type == collateralParam.type }).count ?? 0 > 0) {
@@ -217,110 +214,4 @@ extension KavaMintListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
         }
     }
     
-}
-
-
-extension KavaMintListVC {
-    
-    func fetchMintParam(_ channel: ClientConnection) async throws -> Kava_Cdp_V1beta1_Params? {
-        let req = Kava_Cdp_V1beta1_QueryParamsRequest()
-        return try? await Kava_Cdp_V1beta1_QueryNIOClient(channel: channel).params(req, callOptions: getCallOptions()).response.get().params
-    }
-    
-    func fetchMyCdps(_ channel: ClientConnection, _ address: String) async throws -> [Kava_Cdp_V1beta1_CDPResponse]? {
-        let req = Kava_Cdp_V1beta1_QueryCdpsRequest.with { $0.owner = address }
-        return try? await Kava_Cdp_V1beta1_QueryNIOClient(channel: channel).cdps(req, callOptions: getCallOptions()).response.get().cdps
-    }
-    
-//    func fetchMyDeposit(_ group: DispatchGroup, _ channel: ClientConnection, _ address: String, _ collateralType: String) async throws -> [Kava_Cdp_V1beta1_Deposit]? {
-//        let req = Kava_Cdp_V1beta1_QueryDepositsRequest.with { $0.owner = address; $0.collateralType = collateralType }
-//        return try? await Kava_Cdp_V1beta1_QueryNIOClient(channel: channel).deposits(req, callOptions: getCallOptions()).response.get().deposits
-//    }
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
-    }
-    
-}
-
-
-extension Kava_Cdp_V1beta1_CollateralParam {
-    public func getLiquidationRatioAmount() -> NSDecimalNumber {
-        return NSDecimalNumber.init(string: liquidationRatio).multiplying(byPowerOf10: -18)
-    }
-    
-    public func getDpLiquidationRatio() -> NSDecimalNumber {
-        return getLiquidationRatioAmount().multiplying(byPowerOf10: 2, withBehavior: handler2)
-    }
-    
-    public func getLiquidationPenaltyAmount() -> NSDecimalNumber {
-        return NSDecimalNumber.init(string: liquidationPenalty).multiplying(byPowerOf10: -18)
-    }
-    
-    public func getDpLiquidationPenalty() -> NSDecimalNumber {
-        return getLiquidationPenaltyAmount().multiplying(byPowerOf10: 2, withBehavior: handler2)
-    }
-    
-    public func getExpectCollateralUsdxValue(_ collateralAmount: NSDecimalNumber, _ priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse) -> NSDecimalNumber {
-        let collateralPrice = priceFeed.getKavaOraclePrice(liquidationMarketID)
-        let collateralValue = collateralAmount.multiplying(by: collateralPrice).multiplying(byPowerOf10: -Int16(conversionFactor)!, withBehavior: handler6)
-        return collateralValue.multiplying(byPowerOf10: 6, withBehavior: handler0)
-    }
-    
-    public func getExpectUsdxLTV(_ collateralAmount: NSDecimalNumber, _ priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse) -> NSDecimalNumber {
-        return getExpectCollateralUsdxValue(collateralAmount, priceFeed).dividing(by: getLiquidationRatioAmount(), withBehavior: handler0)
-    }
-}
-
-extension Kava_Cdp_V1beta1_CDPResponse {
-    
-    public func getCollateralAmount() -> NSDecimalNumber {
-        return collateral.getAmount()
-    }
-    
-    public func getCollateralUsdxAmount() -> NSDecimalNumber {
-        return collateralValue.getAmount().multiplying(byPowerOf10: -6, withBehavior: handler6)
-    }
-    
-//    public func getCollateralValue(_ priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse) -> NSDecimalNumber {
-//        let principalPrice = priceFeed.getKavaOraclePrice("usdx:usd")
-//        return getCollateralUsdxAmount().multiplying(by: principalPrice).multiplying(byPowerOf10: -6, withBehavior: handler6)
-//    }
-    
-    public func getUsdxLTV(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam) -> NSDecimalNumber {
-        return getCollateralUsdxAmount().dividing(by: collateralParam.getLiquidationRatioAmount())
-    }
-    
-    public func getPrincipalAmount() -> NSDecimalNumber {
-        return principal.getAmount()
-    }
-    
-    public func getDebtAmount() -> NSDecimalNumber {
-        return getPrincipalAmount().adding(accumulatedFees.getAmount())
-    }
-    
-    public func getDebtUsdxValue() -> NSDecimalNumber {
-        return getDebtAmount().multiplying(byPowerOf10: -6, withBehavior: handler6)
-    }
-    
-//    public func getDebtValue(_ priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse) -> NSDecimalNumber {
-//        let principalPrice = priceFeed.getKavaOraclePrice("usdx:usd")
-//        return getDebtAmount().multiplying(by: principalPrice).multiplying(byPowerOf10: -6, withBehavior: handler6)
-//    }
-    
-    public func getLiquidationPrice(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam) -> NSDecimalNumber {
-        let cDenomDecimal = Int16(collateralParam.conversionFactor)!
-        let collateralAmount = getCollateralAmount().multiplying(byPowerOf10: -cDenomDecimal)
-        let rawDebtAmount = getDebtAmount()
-            .multiplying(by: collateralParam.getLiquidationRatioAmount())
-            .multiplying(byPowerOf10: -6)
-        return rawDebtAmount.dividing(by: collateralAmount, withBehavior: handler6)
-    }
 }

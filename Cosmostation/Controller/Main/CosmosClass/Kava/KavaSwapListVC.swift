@@ -8,10 +8,6 @@
 
 import UIKit
 import Lottie
-import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class KavaSwapListVC: BaseVC {
     
@@ -19,6 +15,7 @@ class KavaSwapListVC: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedChain: BaseChain!
+    var kavaFetcher: KavaFetcher!
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
     var swapParam: Kava_Swap_V1beta1_Params?
     var swapList = [Kava_Swap_V1beta1_PoolResponse]()
@@ -30,6 +27,7 @@ class KavaSwapListVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        kavaFetcher = selectedChain.getGrpcfetcher() as? KavaFetcher
         
         tableView.isHidden = true
         loadingView.isHidden = false
@@ -56,9 +54,8 @@ class KavaSwapListVC: BaseVC {
     
     func onFetchData() {
         Task {
-            let channel = getConnection()
-            if var swapPools = try? await self.fetchSwapList(channel),
-               var myDeposit = try? await self.fetchSwapMyDeposit(channel, selectedChain.bechAddress!) {
+            if var swapPools = try? await kavaFetcher.fetchSwapList(),
+               var myDeposit = try? await kavaFetcher.fetchSwapMyDeposit() {
                 myDeposit?.sort {
                     return $0.getUsdxAmount().compare($1.getUsdxAmount()).rawValue > 0 ? true : false
                 }
@@ -176,49 +173,4 @@ extension KavaSwapListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
         }
     }
     
-}
-
-extension KavaSwapListVC {
-    
-    func fetchSwapParam(_ channel: ClientConnection) async throws -> Kava_Swap_V1beta1_Params? {
-        let req = Kava_Swap_V1beta1_QueryParamsRequest()
-        return try? await Kava_Swap_V1beta1_QueryNIOClient(channel: channel).params(req, callOptions: getCallOptions()).response.get().params
-    }
-    
-    func fetchSwapList(_ channel: ClientConnection) async throws -> [Kava_Swap_V1beta1_PoolResponse]? {
-        let req = Kava_Swap_V1beta1_QueryPoolsRequest()
-        return try? await Kava_Swap_V1beta1_QueryNIOClient(channel: channel).pools(req, callOptions: getCallOptions()).response.get().pools
-    }
-    
-    func fetchSwapMyDeposit(_ channel: ClientConnection, _ address: String) async throws -> [Kava_Swap_V1beta1_DepositResponse]? {
-        let req = Kava_Swap_V1beta1_QueryDepositsRequest.with { $0.owner = address }
-        return try? await Kava_Swap_V1beta1_QueryNIOClient(channel: channel).deposits(req, callOptions: getCallOptions()).response.get().deposits
-    }
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
-    }
-    
-}
-
-
-extension Kava_Swap_V1beta1_PoolResponse {
-    func getUsdxAmount() -> NSDecimalNumber {
-        return coins.filter { $0.denom == "usdx" }.first?.getAmount() ?? NSDecimalNumber.zero
-    }
-    
-}
-
-extension Kava_Swap_V1beta1_DepositResponse {
-    func getUsdxAmount() -> NSDecimalNumber {
-        return sharesValue.filter { $0.denom == "usdx" }.first?.getAmount() ?? NSDecimalNumber.zero
-    }
 }

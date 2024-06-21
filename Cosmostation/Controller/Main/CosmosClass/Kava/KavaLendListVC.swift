@@ -8,10 +8,6 @@
 
 import UIKit
 import Lottie
-import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class KavaLendListVC: BaseVC {
     
@@ -19,6 +15,7 @@ class KavaLendListVC: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedChain: BaseChain!
+    var kavaFetcher: KavaFetcher!
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
     var hardParams: Kava_Hard_V1beta1_Params?
     var hardInterestRates: [Kava_Hard_V1beta1_MoneyMarketInterestRate]?
@@ -31,6 +28,7 @@ class KavaLendListVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        kavaFetcher = selectedChain.getGrpcfetcher() as? KavaFetcher
         
         tableView.isHidden = true
         loadingView.isHidden = false
@@ -57,13 +55,12 @@ class KavaLendListVC: BaseVC {
     
     func onFetchData() {
         Task {
-            let channel = getConnection()
-            if let hardParam = try? await fetchLendingParam(channel),
-               let hardInterestRate = try? await fetchLendingInterestRate(channel),
-               let hardTotalDeposit = try? await fetchLendingTotalDeposit(channel),
-               let hardTotalBorrow = try? await fetchLendingTotalBorrow(channel),
-               let myDeposit = try? await fetchLendingMyDeposit(channel, selectedChain.bechAddress!),
-               let myBorrow = try? await fetchLendingMyBorrow(channel, selectedChain.bechAddress!) {
+            if let hardParam = try? await kavaFetcher.fetchLendingParam(),
+               let hardInterestRate = try? await kavaFetcher.fetchLendingInterestRate(),
+               let hardTotalDeposit = try? await kavaFetcher.fetchLendingTotalDeposit(),
+               let hardTotalBorrow = try? await kavaFetcher.fetchLendingTotalBorrow(),
+               let myDeposit = try? await kavaFetcher.fetchLendingMyDeposit(),
+               let myBorrow = try? await kavaFetcher.fetchLendingMyBorrow() {
                 
                 self.hardParams = hardParam?.params
                 self.hardInterestRates = hardInterestRate?.interestRates
@@ -258,79 +255,5 @@ extension KavaLendListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
             }
         }
         
-    }
-}
-
-
-extension KavaLendListVC {
-    
-    func fetchLendingParam(_ channel: ClientConnection) async throws -> Kava_Hard_V1beta1_QueryParamsResponse? {
-        let req = Kava_Hard_V1beta1_QueryParamsRequest()
-        return try? await Kava_Hard_V1beta1_QueryNIOClient(channel: channel).params(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchLendingInterestRate(_ channel: ClientConnection) async throws -> Kava_Hard_V1beta1_QueryInterestRateResponse? {
-        let req = Kava_Hard_V1beta1_QueryInterestRateRequest()
-        return try? await Kava_Hard_V1beta1_QueryNIOClient(channel: channel).interestRate(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchLendingTotalDeposit(_ channel: ClientConnection) async throws -> Kava_Hard_V1beta1_QueryTotalDepositedResponse? {
-        let req = Kava_Hard_V1beta1_QueryTotalDepositedRequest()
-        return try? await Kava_Hard_V1beta1_QueryNIOClient(channel: channel).totalDeposited(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchLendingTotalBorrow(_ channel: ClientConnection) async throws -> Kava_Hard_V1beta1_QueryTotalBorrowedResponse? {
-        let req = Kava_Hard_V1beta1_QueryTotalBorrowedRequest()
-        return try? await Kava_Hard_V1beta1_QueryNIOClient(channel: channel).totalBorrowed(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchLendingMyDeposit(_ channel: ClientConnection, _ address: String) async throws -> Kava_Hard_V1beta1_QueryDepositsResponse? {
-        let req = Kava_Hard_V1beta1_QueryDepositsRequest.with { $0.owner = address }
-        return try? await Kava_Hard_V1beta1_QueryNIOClient(channel: channel).deposits(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchLendingMyBorrow(_ channel: ClientConnection, _ address: String) async throws -> Kava_Hard_V1beta1_QueryBorrowsResponse? {
-        let req = Kava_Hard_V1beta1_QueryBorrowsRequest.with { $0.owner = address }
-        return try? await Kava_Hard_V1beta1_QueryNIOClient(channel: channel).borrows(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpcfetcher()!.getGrpc().0, port: selectedChain.getGrpcfetcher()!.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
-    }
-}
-
-
-extension Kava_Hard_V1beta1_Params {
-    
-    public func getHardMoneyMarket(_ denom: String) -> Kava_Hard_V1beta1_MoneyMarket? {
-        return moneyMarkets.filter { $0.denom == denom }.first
-    }
-    
-    public func getLTV(_ denom: String) -> NSDecimalNumber {
-        if let market = moneyMarkets.filter({ $0.denom == denom }).first {
-            return NSDecimalNumber.init(string: market.borrowLimit.loanToValue).multiplying(byPowerOf10: -18)
-        }
-        return NSDecimalNumber.zero
-    }
-    
-    public func getSpotMarketId(_ denom: String) -> String {
-        if let market = moneyMarkets.filter({ $0.denom == denom }).first {
-            return market.spotMarketID
-        }
-        return ""
-    }
-}
-
-extension Kava_Hard_V1beta1_MoneyMarket {
-    public func getLTV(_ denom: String) -> NSDecimalNumber {
-        NSDecimalNumber.init(string: borrowLimit.loanToValue).multiplying(byPowerOf10: -18)
     }
 }

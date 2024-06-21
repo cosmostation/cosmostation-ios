@@ -10,6 +10,8 @@ import Foundation
 
 class ChainKava118: BaseChain  {
     
+    var kavaFetcher: KavaFetcher?
+    
     override init() {
         super.init()
         
@@ -28,5 +30,13 @@ class ChainKava118: BaseChain  {
         grpcHost = "grpc-kava.cosmostation.io"
         
         initFetcher()
+    }
+    
+    override func initFetcher() {
+        kavaFetcher = KavaFetcher.init(self)
+    }
+    
+    override func getGrpcfetcher() -> FetcherGrpc? {
+        return kavaFetcher
     }
 }
