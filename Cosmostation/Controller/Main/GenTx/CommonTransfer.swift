@@ -12,14 +12,13 @@ import SwiftyJSON
 import web3swift
 import Web3Core
 import BigInt
-import GRPC
-import NIO
-import SwiftProtobuf
+import AlamofireImage
 
 
 class CommonTransfer: BaseVC {
     
     @IBOutlet weak var midGapConstraint: NSLayoutConstraint!
+    @IBOutlet weak var titleCoinImg: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var toChainCardView: FixCardView!
@@ -214,6 +213,7 @@ class CommonTransfer: BaseVC {
     
     func onInitView() {
         if (sendType == .Only_Cosmos_Coin) {
+            titleCoinImg.af.setImage(withURL: toSendMsAsset.assetImg())
             decimal = toSendMsAsset!.decimals
             toSendSymbol = toSendMsAsset!.symbol
             availableAmount = fromGrpcFetcher.balanceAmount(toSendDenom)
@@ -223,23 +223,27 @@ class CommonTransfer: BaseVC {
             }
             
         } else if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20) {
+            titleCoinImg.af.setImage(withURL: toSendMsToken.assetImg())
             decimal = toSendMsToken!.decimals
             toSendSymbol = toSendMsToken!.symbol
             availableAmount = toSendMsToken!.getAmount()
             
         } else if (sendType == .Only_EVM_Coin) {
+            titleCoinImg.image =  UIImage.init(named: fromChain.coinLogo)
             decimal = 18
             toSendSymbol = fromChain.coinSymbol
             availableAmount = fromChain.getEvmfetcher()!.evmBalances.subtracting(EVM_BASE_FEE)
             
         } else if (sendType == .CosmosEVM_Coin) {
             if (txStyle == .WEB3_STYLE) {
+                titleCoinImg.image =  UIImage.init(named: fromChain.coinLogo)
                 decimal = 18
                 toSendSymbol = fromChain.coinSymbol
                 availableAmount = fromChain.getEvmfetcher()!.evmBalances.subtracting(EVM_BASE_FEE)
                 memoCardView.isHidden = true
                 
             } else if (txStyle == .COSMOS_STYLE) {
+                titleCoinImg.af.setImage(withURL: toSendMsAsset.assetImg())
                 decimal = toSendMsAsset!.decimals
                 toSendSymbol = toSendMsAsset!.symbol
                 availableAmount = fromGrpcFetcher.balanceAmount(toSendDenom)
@@ -249,8 +253,6 @@ class CommonTransfer: BaseVC {
                 }
             }
         }
-//        print("toSendSymbol ", toSendSymbol)
-//        print("sendType ", sendType)
         titleLabel.text = String(format: NSLocalizedString("str_send_asset", comment: ""), toSendSymbol)
     }
     
@@ -503,6 +505,8 @@ class CommonTransfer: BaseVC {
     
     // user changed segment or fee coin denom kinds
     func onUpdateFeeView() {
+        sendBtn.isHidden = false
+        errorCardView.isHidden = true
         if (txStyle == .WEB3_STYLE) {
             let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
             let totalGasPrice = evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1
@@ -534,7 +538,7 @@ class CommonTransfer: BaseVC {
         loadingView.isHidden = true
         if (txStyle == .WEB3_STYLE) {
             guard evmTx != nil else {
-                feeCardView.isHidden = true
+                sendBtn.isHidden = true
                 errorCardView.isHidden = false
                 errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
                 return
@@ -547,7 +551,7 @@ class CommonTransfer: BaseVC {
                 return
             }
             guard let toGas = simul?.gasInfo.gasUsed else {
-                feeCardView.isHidden = true
+                sendBtn.isHidden = true
                 errorCardView.isHidden = false
                 errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
                 return
@@ -637,8 +641,8 @@ extension CommonTransfer {
                 //only Legacy
 //                print("gasprice ", gasprice)
                 evmGas[0].0 = gasprice
-                evmGas[1].0 = gasprice
-                evmGas[2].0 = gasprice
+                evmGas[1].0 = gasprice * 12 / 10
+                evmGas[2].0 = gasprice * 20 / 10
                 evmTxType = .legacy
                 
             } else {

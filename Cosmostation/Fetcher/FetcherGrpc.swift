@@ -469,7 +469,7 @@ extension FetcherGrpc {
     }
     
     func simulateTx(_ simulTx: Cosmos_Tx_V1beta1_SimulateRequest) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).simulate(simulTx, callOptions: getCallOptions()).response.get()
+        return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).simulate(simulTx, callOptions: getCallOptions()).response.get()
     }
     
     func broadcastTx(_ broadTx: Cosmos_Tx_V1beta1_BroadcastTxRequest) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
@@ -496,19 +496,13 @@ extension FetcherGrpc {
     
     
     func fetchAllCw20Balance(_ id: Int64) async {
-        print("fetchAllCw20Balance in start")
+//        print("fetchAllCw20Balance")
         if (chain.supportCw20 == false) { return }
         Task {
             await mintscanCw20Tokens.concurrentForEach { cw20 in
                 self.fetchCw20Balance(cw20)
             }
         }
-        print("fetchAllCw20Balance in end")
-//        mintscanCw20Tokens.forEach { cw20 in
-//            Task {
-//                self.fetchCw20Balance(cw20)
-//            }
-//        }
     }
     
     func fetchCw20Balance(_ tokenInfo: MintscanToken) {

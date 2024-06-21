@@ -249,8 +249,8 @@ class DappEvmSignRequestSheet: BaseVC {
             //only Legacy
             print("gasprice ", gasprice)
             evmGas[0] = (gasprice, 0, checkedGas!)
-            evmGas[1] = (gasprice, 0, checkedGas!)
-            evmGas[2] = (gasprice, 0, checkedGas!)
+            evmGas[1] = (gasprice * 12 / 10, 0, checkedGas!)
+            evmGas[2] = (gasprice * 20 / 10, 0, checkedGas!)
             if (inComeGasPrice != nil) {
                 evmGas.append((inComeGasPrice!, 0, inComeGas ?? checkedGas!))
                 evmGasTitle.append(NSLocalizedString("str_origin", comment: ""))
