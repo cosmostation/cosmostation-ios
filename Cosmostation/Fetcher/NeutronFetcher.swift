@@ -127,4 +127,14 @@ extension NeutronFetcher {
         return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: getClient()).smartContractState(req, callOptions: getCallOptions()).response.get().data
     }
     
+    func fetchNeutronProposals(_ daoType: Int) async throws -> Data? {
+        let contAddress = daosList?[0]["proposal_modules"][daoType]["address"].string ?? ""
+        let query: JSON = ["reverse_proposals" : JSON()]
+        let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+        let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+            $0.address = contAddress
+            $0.queryData = Data(base64Encoded: queryBase64)!
+        }
+        return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: getClient()).smartContractState(req, callOptions: getCallOptions()).response.get().data
+    }
 }

@@ -9,9 +9,6 @@
 import UIKit
 import Lottie
 import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 import web3swift
 
 class CommonTransferResult: BaseVC, AddressBookDelegate {
@@ -31,6 +28,8 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     
     var txStyle: TxStyle = .COSMOS_STYLE
     var fromChain: BaseChain!
+    var fromGrpcFetcher: FetcherGrpc!
+    var fromEvmFetcher: FetcherEvmrpc!
     var toChain: BaseChain!
     var toAddress: String?
     var toMemo = ""
@@ -63,6 +62,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                 confirmBtn.isEnabled = true
                 return
             }
+            fromEvmFetcher = fromChain.getEvmfetcher()
             fetchEvmTx()
             
         } else if (txStyle == .COSMOS_STYLE) {
@@ -73,6 +73,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                 confirmBtn.isEnabled = true
                 return
             }
+            fromGrpcFetcher = fromChain.getGrpcfetcher()
             fetchCosmosTx()
         }
         setQutoes()
@@ -187,9 +188,8 @@ extension CommonTransferResult {
     
     func fetchCosmosTx() {
         Task {
-            let channel = getConnection()
             do {
-                let result = try await fetchTx(channel, cosmosBroadcastTxResponse!.txhash)
+                let result = try await fromGrpcFetcher.fetchTx(cosmosBroadcastTxResponse!.txhash)
                 self.cosmosTxResponse = result
                 DispatchQueue.main.async {
                     self.onUpdateView()
@@ -215,7 +215,7 @@ extension CommonTransferResult {
     func fetchEvmTx() {
         Task {
             do {
-                let recipient = try await fromChain.getEvmfetcher()?.fetchEvmTxReceipt(evmHash!)
+                let recipient = try await fromEvmFetcher.fetchEvmTxReceipt(evmHash!)
                 if (recipient?["result"].isEmpty == true) {
                     self.confirmBtn.isEnabled = true
                     self.fetchCnt = self.fetchCnt - 1
@@ -271,29 +271,4 @@ extension CommonTransferResult {
         }))
         self.present(noticeAlert, animated: true)
     }
-}
-
-extension CommonTransferResult {
-    
-    func fetchTx(_ channel: ClientConnection, _ hash: String) async throws -> Cosmos_Tx_V1beta1_GetTxResponse? {
-        let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = hash }
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).getTx(req, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: fromChain.getGrpcfetcher()!.getGrpc().0, port: fromChain.getGrpcfetcher()!.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
-    }
-    
 }
