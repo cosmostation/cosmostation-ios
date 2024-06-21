@@ -285,8 +285,12 @@ class DappEvmSignRequestSheet: BaseVC {
         let totalSpend = (inComeValue ?? 0) + feeAmountBigInt
         if (totalSpend > evmBalances ?? 0) {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            errorMsgLabel.isHidden = false
+            controlStakView.isHidden = true
             confirmBtn.isEnabled = false
         } else {
+            errorMsgLabel.isHidden = true
+            controlStakView.isHidden = false
             confirmBtn.isEnabled = true
         }
     }

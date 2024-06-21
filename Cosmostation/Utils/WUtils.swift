@@ -307,3 +307,4 @@ extension Cosmos_Base_V1beta1_DecCoin {
         return NSDecimalNumber(string: amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
     }
 }
+

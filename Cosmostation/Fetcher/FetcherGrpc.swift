@@ -478,7 +478,7 @@ extension FetcherGrpc {
     
     func fetchTx( _ hash: String) async throws -> Cosmos_Tx_V1beta1_GetTxResponse? {
         let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = hash }
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).getTx(req, callOptions: getCallOptions()).response.get()
+        return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).getTx(req, callOptions: getCallOptions()).response.get()
     }
     
     func fetchIbcClient(_ ibcPath: MintscanPath) async throws -> Ibc_Core_Channel_V1_QueryChannelClientStateResponse? {

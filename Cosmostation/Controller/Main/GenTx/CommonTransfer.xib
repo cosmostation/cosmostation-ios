@@ -325,7 +325,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDP-Vh-3D0">
-                                            <rect key="frame" x="350.33333333333331" y="72.666666666666629" width="5.6666666666666856" height="14"/>
+                                            <rect key="frame" x="350.33333333333331" y="71.666666666666629" width="5.6666666666666856" height="14"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="14" id="eQM-bc-jsS"/>
                                             </constraints>
@@ -377,7 +377,7 @@
                                         <constraint firstItem="ZQD-7L-o46" firstAttribute="leading" secondItem="L7B-9h-6dk" secondAttribute="leading" constant="12" id="iF0-EN-m1K"/>
                                         <constraint firstAttribute="trailing" secondItem="hWq-ma-jPn" secondAttribute="trailing" constant="12" id="p5x-ZQ-dUM"/>
                                         <constraint firstItem="Tqf-q9-Iqa" firstAttribute="leading" secondItem="L7B-9h-6dk" secondAttribute="leading" constant="12" id="rfT-bq-7Wc"/>
-                                        <constraint firstItem="hWq-ma-jPn" firstAttribute="centerY" secondItem="NDP-Vh-3D0" secondAttribute="centerY" constant="-1" id="wKI-Qg-FsF"/>
+                                        <constraint firstItem="hWq-ma-jPn" firstAttribute="centerY" secondItem="NDP-Vh-3D0" secondAttribute="centerY" id="wKI-Qg-FsF"/>
                                     </constraints>
                                 </view>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZgU-La-hVa" customClass="RedFixCardView" customModule="Cosmostation" customModuleProvider="target">

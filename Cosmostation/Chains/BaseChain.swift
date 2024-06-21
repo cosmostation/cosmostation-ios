@@ -319,6 +319,13 @@ extension BaseChain {
         return limit
     }
     
+    func getFeeBaseGasAmountS() -> String {
+        guard let limit = getChainListParam()["fee"]["init_gas_limit"].string else {
+            return BASE_GAS_AMOUNT
+        }
+        return limit
+    }
+    
     func getFeeBaseGasAmount() -> NSDecimalNumber {
         return NSDecimalNumber(string: String(getFeeBaseGasAmount()))
     }
