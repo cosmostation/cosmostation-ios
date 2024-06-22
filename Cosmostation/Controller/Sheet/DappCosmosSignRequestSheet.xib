@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,6 +29,7 @@
                 <outlet property="feeAmountLabel" destination="NZU-GU-inR" id="fkc-J0-NbC"/>
                 <outlet property="feeCardView" destination="NgW-zY-Wos" id="jaQ-UI-fS0"/>
                 <outlet property="feeCurrencyLabel" destination="SDl-S5-cRo" id="FKq-z3-EyF"/>
+                <outlet property="feeDappBtn" destination="gsG-rb-WAf" id="4R4-0C-v5h"/>
                 <outlet property="feeDenomLabel" destination="Ykq-e9-UKW" id="KW3-hS-m3U"/>
                 <outlet property="feeSegments" destination="BGS-Tg-gG4" id="g7L-NI-63q"/>
                 <outlet property="feeSelectImg" destination="zfC-7F-xnC" id="TfW-F1-rqZ"/>
@@ -193,37 +194,65 @@
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="BGS-Tg-gG4">
-                            <rect key="frame" x="12" y="97.666666666666629" width="353" height="32"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <segments>
-                                <segment title="Tiny"/>
-                                <segment title="Low"/>
-                                <segment title="Average"/>
-                            </segments>
-                            <color key="tintColor" name="_primary"/>
-                            <color key="selectedSegmentTintColor" name="_primary"/>
-                            <connections>
-                                <action selector="feeSegmentSelected:" destination="-1" eventType="valueChanged" id="ZEh-KN-SmI"/>
-                            </connections>
-                        </segmentedControl>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1OJ-8s-jV6">
+                            <rect key="frame" x="12" y="98" width="353" height="28"/>
+                            <subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="BGS-Tg-gG4">
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="29"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <segments>
+                                        <segment title="Tiny"/>
+                                        <segment title="Low"/>
+                                        <segment title="Average"/>
+                                    </segments>
+                                    <color key="tintColor" name="_primary"/>
+                                    <color key="selectedSegmentTintColor" name="_primary"/>
+                                    <connections>
+                                        <action selector="feeSegmentSelected:" destination="-1" eventType="valueChanged" id="ZEh-KN-SmI"/>
+                                    </connections>
+                                </segmentedControl>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsG-rb-WAf" customClass="SmallButton" customModule="Cosmostation" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="28"/>
+                                    <color key="backgroundColor" name="_primary"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="28" id="w5i-4r-FIM"/>
+                                        <constraint firstAttribute="width" constant="90" id="zY0-Ua-Uqz"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="From dapp">
+                                        <color key="titleColor" name="_color01"/>
+                                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="8"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="onClickDappFee:" destination="-1" eventType="touchUpInside" id="CKo-AR-dpd"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" name="_color06"/>
                     <constraints>
                         <constraint firstItem="q5S-d4-FnH" firstAttribute="leading" secondItem="NgW-zY-Wos" secondAttribute="leading" constant="12" id="0TB-IE-IOF"/>
-                        <constraint firstAttribute="trailing" secondItem="BGS-Tg-gG4" secondAttribute="trailing" constant="12" id="116-FS-f17"/>
                         <constraint firstItem="2D1-PC-irt" firstAttribute="leading" secondItem="NgW-zY-Wos" secondAttribute="leading" constant="12" id="4Xs-t7-cbv"/>
                         <constraint firstAttribute="trailing" secondItem="q5S-d4-FnH" secondAttribute="trailing" constant="12" id="4em-Lp-s4a"/>
                         <constraint firstItem="Ic1-b3-hKB" firstAttribute="leading" secondItem="SDl-S5-cRo" secondAttribute="trailing" constant="2" id="E7e-MG-SUA"/>
-                        <constraint firstItem="BGS-Tg-gG4" firstAttribute="top" secondItem="qJa-KY-Wxp" secondAttribute="bottom" constant="14" id="Gxx-Ip-gUn"/>
                         <constraint firstItem="Ykq-e9-UKW" firstAttribute="top" secondItem="q5S-d4-FnH" secondAttribute="bottom" constant="14" id="Gyg-yP-gp9"/>
                         <constraint firstItem="NZU-GU-inR" firstAttribute="centerY" secondItem="Ykq-e9-UKW" secondAttribute="centerY" id="NL3-JU-4uz"/>
-                        <constraint firstItem="BGS-Tg-gG4" firstAttribute="leading" secondItem="NgW-zY-Wos" secondAttribute="leading" constant="12" id="Q7S-jZ-Luk"/>
+                        <constraint firstItem="1OJ-8s-jV6" firstAttribute="leading" secondItem="NgW-zY-Wos" secondAttribute="leading" constant="12" id="Q60-ML-JFP"/>
                         <constraint firstAttribute="trailing" secondItem="Ic1-b3-hKB" secondAttribute="trailing" constant="12" id="Tol-FK-frp"/>
                         <constraint firstItem="qJa-KY-Wxp" firstAttribute="leading" secondItem="NgW-zY-Wos" secondAttribute="leading" constant="12" id="WFM-3p-hyR"/>
+                        <constraint firstAttribute="bottom" secondItem="1OJ-8s-jV6" secondAttribute="bottom" constant="24" id="Xzl-jI-oxs"/>
                         <constraint firstItem="q5S-d4-FnH" firstAttribute="top" secondItem="2D1-PC-irt" secondAttribute="bottom" constant="10" id="cOT-0g-XNS"/>
                         <constraint firstItem="2D1-PC-irt" firstAttribute="top" secondItem="NgW-zY-Wos" secondAttribute="top" constant="15" id="gPG-sS-NZP"/>
                         <constraint firstItem="qJa-KY-Wxp" firstAttribute="top" secondItem="q5S-d4-FnH" secondAttribute="bottom" constant="12" id="gnu-p7-mA2"/>
+                        <constraint firstAttribute="trailing" secondItem="1OJ-8s-jV6" secondAttribute="trailing" constant="12" id="kxp-Hd-BoH"/>
                         <constraint firstItem="Ic1-b3-hKB" firstAttribute="top" secondItem="Ykq-e9-UKW" secondAttribute="bottom" constant="2" id="ojC-Fl-feA"/>
                         <constraint firstAttribute="trailing" secondItem="Ykq-e9-UKW" secondAttribute="trailing" constant="12" id="pka-d2-B8i"/>
                         <constraint firstItem="Ic1-b3-hKB" firstAttribute="centerY" secondItem="SDl-S5-cRo" secondAttribute="centerY" id="qRH-wM-qWK"/>
