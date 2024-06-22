@@ -533,11 +533,8 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "eth_sendTransaction") {
                 //broadcast self & return hash
                 onInitEvmChain()
-                print("params", messageJSON["params"])
                 let toSign = messageJSON["params"]
-//                popUpEvmRequestSign(method, toSign,
-//                                    { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
-//                                    { singed in self.injectionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
+                print("eth_sendTransaction", messageJSON["params"])
                 popUpEvmRequestSign(method, toSign, bodyJSON["messageId"])
                 
             } else if (method == "eth_signTypedData_v4" || method == "eth_signTypedData_v3") {
@@ -554,7 +551,7 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "personal_sign") {
                 onInitEvmChain()
                 let toSign = messageJSON["params"]
-                print("personal_sign ori ", toSign)
+                print("personal_sign ", toSign)
                 popUpEvmRequestSign(method, toSign, bodyJSON["messageId"])
                 
             }
