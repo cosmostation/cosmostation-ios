@@ -154,7 +154,6 @@
 "str_zero" = "無料";
 "str_low" = "低";
 "str_tiny" = "最小";
-"str_origin" = "起源";
 "str_select_coin" = "コインを選択します。";
 "str_unstaking_history" = "アンステーク履歴";
 "str_insert_amount" = "投入量";

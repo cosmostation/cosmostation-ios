@@ -472,7 +472,7 @@ extension JSON {
             return self["params"]["doc"]
         }
         if !self["params"]["signDoc"].isEmpty {
-            self["params"]["signDoc"]
+            return self["params"]["signDoc"]
         }
         return nil
     }

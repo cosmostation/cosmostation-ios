@@ -240,7 +240,7 @@ class DappEvmSignRequestSheet: BaseVC {
             }
             if (inComeMaxFeePerGas != nil && inComeMaxPriorityFeePerGas != nil) {
                 evmGas.append((inComeMaxPriorityFeePerGas!, inComeMaxPriorityFeePerGas!, inComeGas ?? checkedGas!))
-                evmGasTitle.append(NSLocalizedString("str_origin", comment: ""))
+                evmGasTitle.append("From dapp")
                 feePosition = 3
             }
             evmTxType = .eip1559
@@ -253,7 +253,7 @@ class DappEvmSignRequestSheet: BaseVC {
             evmGas[2] = (gasprice * 20 / 10, 0, checkedGas!)
             if (inComeGasPrice != nil) {
                 evmGas.append((inComeGasPrice!, 0, inComeGas ?? checkedGas!))
-                evmGasTitle.append(NSLocalizedString("str_origin", comment: ""))
+                evmGasTitle.append("From dapp")
                 feePosition = 3
             }
             evmTxType = .legacy

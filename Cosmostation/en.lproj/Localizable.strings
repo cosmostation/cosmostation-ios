@@ -154,7 +154,6 @@
 "str_zero" = "Zero";
 "str_low" = "Low";
 "str_tiny" = "Tiny";
-"str_origin" = "Origin";
 "str_select_coin" = "Select Coin.";
 "str_unstaking_history" = "Unstaking Histories";
 "str_insert_amount" = "Insert Amount";
