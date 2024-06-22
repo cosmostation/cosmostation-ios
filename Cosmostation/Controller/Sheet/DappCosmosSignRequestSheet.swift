@@ -35,7 +35,7 @@ class DappCosmosSignRequestSheet: BaseVC {
     @IBOutlet weak var errorCardView: RedFixCardView!
     @IBOutlet weak var errorMsgLabel: UILabel!
     @IBOutlet weak var controlStakView: UIStackView!
-    @IBOutlet weak var cancelBtn: BaseButton!
+    @IBOutlet weak var cancelBtn: SecButton!
     @IBOutlet weak var confirmBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
@@ -79,6 +79,10 @@ class DappCosmosSignRequestSheet: BaseVC {
         
         Task {
             try await onParsingRequest()
+            if (method == "cos_signDirect" || method == "cosmos_signDirect") {
+                try await targetChain?.getGrpcfetcher()?.fetchBalances()
+                print("targetChain ", targetChain.getGrpcfetcher()?.cosmosBalances)
+            }
             DispatchQueue.main.async {
                 self.loadingView.isHidden = true
                 self.onInitView()
@@ -128,14 +132,21 @@ class DappCosmosSignRequestSheet: BaseVC {
                 for i in 0..<feeInfos.count {
                     feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
                 }
-                selectedFeePosition = selectedChain.getFeeBasePosition()
+//                selectedFeePosition = selectedChain.getFeeBasePosition()
+                selectedFeePosition = -1
                 feeSegments.selectedSegmentIndex = selectedFeePosition
+//                txFee = selectedChain.getInitPayableFee()
 //                txFee = selectedChain.getInitPayableFee()   <- no balance!!
 //                confirmBtn.isEnabled = true
 //                
 //                print("feeInfos ", feeInfos)
 //                print("txFee ", txFee)
 //                onSimul()
+                
+//                feeInfos[selectedFeePosition].
+//                if (txFee.amount.isEmpty == true || txFee.gasLimit <= 0) {
+//                    
+//                }
             }
         }
         onUpdateFeeView()

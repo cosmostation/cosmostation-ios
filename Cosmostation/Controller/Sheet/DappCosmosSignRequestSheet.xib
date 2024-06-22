@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,7 +20,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DappCosmosSignRequestSheet" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="bodyCardView" destination="j6A-KN-1Pk" id="Cyh-eX-vOM"/>
-                <outlet property="cancelBtn" destination="zX0-No-sMJ" id="FUQ-nI-ilu"/>
+                <outlet property="cancelBtn" destination="zX0-No-sMJ" id="SUv-LQ-nIK"/>
                 <outlet property="confirmBtn" destination="fri-IR-mgH" id="f89-Xr-EC5"/>
                 <outlet property="controlStakView" destination="rMP-Zl-eWs" id="Owg-NS-nfQ"/>
                 <outlet property="dangerMsgTitle" destination="OAE-dO-BI7" id="BW6-Kv-sig"/>
@@ -231,61 +231,6 @@
                         <constraint firstItem="Ykq-e9-UKW" firstAttribute="leading" secondItem="NZU-GU-inR" secondAttribute="trailing" constant="2" id="zrY-kE-Lqn"/>
                     </constraints>
                 </view>
-                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rMP-Zl-eWs">
-                    <rect key="frame" x="8" y="760" width="377" height="50"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zX0-No-sMJ">
-                            <rect key="frame" x="0.0" y="0.0" width="184.66666666666666" height="50"/>
-                            <color key="backgroundColor" name="_color08"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="JA6-4I-fFp"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
-                            <state key="normal" title="Cancel">
-                                <color key="titleColor" name="_color01"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="8"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" name="_font05"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="onClickCancel:" destination="-1" eventType="touchUpInside" id="1CT-Rz-FIp"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fri-IR-mgH">
-                            <rect key="frame" x="192.66666666666663" y="0.0" width="184.33333333333337" height="50"/>
-                            <color key="backgroundColor" name="_primary"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="OF0-FL-x7x"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
-                            <state key="normal" title="Confirm">
-                                <color key="titleColor" name="_color01"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="8"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" name="photon"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="onClickConfirm:" destination="-1" eventType="touchUpInside" id="TXd-W2-h9i"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                </stackView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="73w-9m-dV6" customClass="RedFixCardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="8" y="760" width="377" height="50"/>
                     <subviews>
@@ -325,6 +270,61 @@
                         <constraint firstAttribute="bottom" secondItem="9fc-ss-CFG" secondAttribute="bottom" constant="12" id="r7H-aa-Huw"/>
                     </constraints>
                 </view>
+                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rMP-Zl-eWs">
+                    <rect key="frame" x="8" y="760" width="377" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zX0-No-sMJ" customClass="SecButton" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="184.66666666666666" height="50"/>
+                            <color key="backgroundColor" name="_color08"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="JA6-4I-fFp"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" name="_color01"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" name="_font05"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickCancel:" destination="-1" eventType="touchUpInside" id="MLa-lm-QGP"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fri-IR-mgH" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="192.66666666666663" y="0.0" width="184.33333333333337" height="50"/>
+                            <color key="backgroundColor" name="_primary"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="OF0-FL-x7x"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                            <state key="normal" title="Confirm">
+                                <color key="titleColor" name="_color01"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" name="photon"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickConfirm:" destination="-1" eventType="touchUpInside" id="TXd-W2-h9i"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hax-ch-6Px" customClass="LottieAnimationView" customModule="Lottie">
                     <rect key="frame" x="106.66666666666669" y="383.66666666666669" width="180" height="110"/>
                     <viewLayoutGuide key="safeArea" id="XEi-Kj-xaP"/>
