@@ -14,6 +14,8 @@ import BigInt
 
 class DappEvmSignRequestSheet: BaseVC {
     
+    var webSignDelegate: WebSignDelegate?
+    
     @IBOutlet weak var requestTitle: UILabel!
     @IBOutlet weak var safeMsgTitle: UILabel!
     @IBOutlet weak var dangerMsgTitle: UILabel!
@@ -36,8 +38,8 @@ class DappEvmSignRequestSheet: BaseVC {
     var web3: Web3?
     var method: String!
     var requestToSign: JSON?
+    var messageId: JSON?
     var selectedChain: BaseChain!
-    var completion: ((_ success: Bool, _ toResponse: JSON? ) -> ())?
     
     var evmTx: CodableTransaction?
     var evmTxType : TransactionType?
@@ -301,7 +303,7 @@ class DappEvmSignRequestSheet: BaseVC {
     }
     
     func dismissWithFail() {
-        completion?(false, nil)
+        webSignDelegate?.onCancleInjection("Cancel", requestToSign!, messageId!)
         dismiss(animated: true)
     }
     
@@ -340,7 +342,7 @@ class DappEvmSignRequestSheet: BaseVC {
                     print("result ", result)
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                        self.completion?(true, JSON.init(stringLiteral: result.hash))
+                        self.webSignDelegate?.onAcceptInjection(JSON.init(stringLiteral: result.hash), self.requestToSign!, self.messageId!)
                         self.dismiss(animated: true)
                     })
                     
@@ -351,7 +353,7 @@ class DappEvmSignRequestSheet: BaseVC {
                     let (compressedSignature, _) = SECP256K1.signForRecovery(hash: eip712Hash, privateKey: selectedChain.privateKey!)
                     let result = compressedSignature?.toHexString().addHexPrefix()
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                        self.completion?(true, JSON.init(stringLiteral: result!))
+                        self.webSignDelegate?.onAcceptInjection(JSON.init(stringLiteral: result!), self.requestToSign!, self.messageId!)
                         self.dismiss(animated: true)
                     })
                     
@@ -360,7 +362,7 @@ class DappEvmSignRequestSheet: BaseVC {
                     let (compressedSignature, _) = SECP256K1.signForRecovery(hash: personalHash!, privateKey: selectedChain.privateKey!)
                     let result = compressedSignature?.toHexString().addHexPrefix()
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                        self.completion?(true, JSON.init(stringLiteral: result!))
+                        self.webSignDelegate?.onAcceptInjection(JSON.init(stringLiteral: result!), self.requestToSign!, self.messageId!)
                         self.dismiss(animated: true)
                     })
                     

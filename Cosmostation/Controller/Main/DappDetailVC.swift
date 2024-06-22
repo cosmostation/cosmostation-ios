@@ -257,19 +257,14 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         self.present(cosmosSignRequestSheet, animated: true)
     }
     
-    private func popUpEvmRequestSign(_ method: String, _ request: JSON, _ cancel: @escaping(() -> ()), _ completion: @escaping (JSON?) -> ()) {
+    private func popUpEvmRequestSign(_ method: String, _ request: JSON, _ messageId: JSON?) {
         let evmSignRequestSheet = DappEvmSignRequestSheet(nibName: "DappEvmSignRequestSheet", bundle: nil)
         evmSignRequestSheet.web3 = web3
         evmSignRequestSheet.method = method
         evmSignRequestSheet.requestToSign = request
+        evmSignRequestSheet.messageId = messageId
         evmSignRequestSheet.selectedChain = targetChain
-        evmSignRequestSheet.completion = { success, singed in
-            if (success) {
-                completion(singed)
-            } else {
-                cancel()
-            }
-        }
+        evmSignRequestSheet.webSignDelegate = self
         evmSignRequestSheet.modalTransitionStyle = .coverVertical
         self.present(evmSignRequestSheet, animated: true)
     }
@@ -540,9 +535,10 @@ extension DappDetailVC: WKScriptMessageHandler {
                 onInitEvmChain()
                 print("params", messageJSON["params"])
                 let toSign = messageJSON["params"]
-                popUpEvmRequestSign(method, toSign,
-                                    { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
-                                    { singed in self.injectionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
+//                popUpEvmRequestSign(method, toSign,
+//                                    { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
+//                                    { singed in self.injectionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
+                popUpEvmRequestSign(method, toSign, bodyJSON["messageId"])
                 
             } else if (method == "eth_signTypedData_v4" || method == "eth_signTypedData_v3") {
                 onInitEvmChain()
@@ -552,18 +548,14 @@ extension DappDetailVC: WKScriptMessageHandler {
                 }
                 print("params", messageJSON["params"])
                 let toSign = messageJSON["params"]
-                popUpEvmRequestSign(method, toSign,
-                                    { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
-                                    { singed in self.injectionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
+                popUpEvmRequestSign(method, toSign, bodyJSON["messageId"])
                 
                 
             } else if (method == "personal_sign") {
                 onInitEvmChain()
                 let toSign = messageJSON["params"]
                 print("personal_sign ori ", toSign)
-                popUpEvmRequestSign(method, toSign,
-                                    { self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"]) },
-                                    { singed in self.injectionRequestApprove(singed, toSign, bodyJSON["messageId"])} )
+                popUpEvmRequestSign(method, toSign, bodyJSON["messageId"])
                 
             }
             
