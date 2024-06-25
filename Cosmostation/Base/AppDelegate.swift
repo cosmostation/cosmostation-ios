@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        NSLog("Cosmostation application didFinishLaunchingWithOptions")
+        print("Cosmostation application didFinishLaunchingWithOptions")
         setInit()
         setTheme()
         setFirebase()
@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         if let url = launchOptions?[UIApplication.LaunchOptionsKey.url] as? URL {
             BaseData.instance.appSchemeUrl = url
-            NSLog("Cosmostation application didFinishLaunchingWithOptions \(url)")
+            print("Cosmostation application didFinishLaunchingWithOptions \(url)")
             return false
         } else if let userInfo = launchOptions?[.remoteNotification] as? [AnyHashable: Any] {
             BaseData.instance.appUserInfo = userInfo
@@ -65,12 +65,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        NSLog("Cosmostation application open \(url.absoluteString)")
+        print("Cosmostation application open \(url.absoluteString)")
         if let topVC = application.topViewController, topVC.isKind(of: PincodeVC.self) {
             BaseData.instance.appSchemeUrl = url
             
         } else {
-            NSLog("Cosmostation START DappDetailVC 1")
+            print("Cosmostation START DappDetailVC 1")
             let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
             dappDetail.dappType = .DEEPLINK_WC2
             dappDetail.dappUrl = url
@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if result == .success {
             if BaseData.instance.appSchemeUrl != nil {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    NSLog("Cosmostation START DappDetailVC 2")
+                    print("Cosmostation START DappDetailVC 2")
                     let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
                     dappDetail.dappType = .DEEPLINK_WC2
                     dappDetail.dappUrl = BaseData.instance.appSchemeUrl

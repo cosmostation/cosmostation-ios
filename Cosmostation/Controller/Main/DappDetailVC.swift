@@ -22,7 +22,6 @@ import WalletConnectUtils
 
 class DappDetailVC: BaseVC, WebSignDelegate {
     
-    
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var dappUrlLabel: UILabel!
     @IBOutlet weak var bottomView: UIView!
@@ -49,7 +48,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSLog("Cosmostation DappDetailVC viewDidLoad")
+        print("Cosmostation DappDetailVC viewDidLoad")
         
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
@@ -74,7 +73,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
                 BaseData.instance.mintscanChainParams = try? await BaseNetWork().fetchChainParams()
             }
             wcV2Disconnect { result in
-                NSLog("Cosmostation DappDetailVC viewDidLoad DISCONNECT ALL \(result)")
+                print("init wcV2Disconnect \(result)")
             }
             
             allChains = await baseAccount.initAllKeys().filter({ $0.isTestnet == false && $0.isDefault })
@@ -165,8 +164,6 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         webView.scrollView.delegate = nil
         emitCloseToWeb()
         wcV2Disconnect { result in
-            NSLog("Cosmostation onClickClose \(result)")
-            print("onCloseAll \(result)")
             self.dismiss(animated: true)
         }
     }
@@ -215,7 +212,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     
     // Re-Connect with wallet connect v2 (disconnect all as-is Pair & Sign)
     private func onInitWcV2(_ url: URL) {
-        NSLog("Cosmostation onInitWcV2 \(url.absoluteString)")
+        print("onInitWcV2 \(url.absoluteString)")
         if let host = url.host, let query = url.query?.removingPercentEncoding, host == "wc" {
             var wcUrl: String!
             if (query.starts(with: "uri=")) {
@@ -223,10 +220,10 @@ class DappDetailVC: BaseVC, WebSignDelegate {
             } else {
                 wcUrl = query
             }
-            NSLog("Cosmostation onInitWcV2 wcUrl \(wcUrl)")
+            print("onInitWcV2 wcUrl \(wcUrl)")
             self.wcV2SetSign()
             self.wcV2SetPair(uri: wcUrl) { success in
-                NSLog("Cosmostation onInitWcV2 wcV2SetPairl \(success)")
+                print("onInitWcV2 wcV2SetPairl \(success)")
             }
         }
     }
@@ -330,31 +327,34 @@ extension DappDetailVC: WKScriptMessageHandler {
                 injectionRequestApprove(true, messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "cos_requestAccount" || method == "cos_account") {
-                let requestedChainId = messageJSON["params"]["chainName"].stringValue
-                if let requestedChain = allChains.filter({ $0.chainIdCosmos == requestedChainId || $0.chainDappName()?.lowercased() == requestedChainId }).first {
-                    targetChain = requestedChain
+                print("cos_requestAccount ", messageJSON)
+                let requestChainName = messageJSON["params"]["chainName"].stringValue
+                let requestChainId = messageJSON["params"]["chainId"].stringValue
+                if let chain = allChains.filter({ $0.chainIdCosmos == requestChainId ||
+                    $0.chainIdCosmos == requestChainName ||
+                    $0.chainDappName()?.lowercased() == requestChainId.lowercased() ||
+                    $0.chainDappName()?.lowercased() == requestChainName.lowercased()} ).first {
+                    targetChain = chain
                     var data = JSON()
                     data["isLedger"].boolValue = false
                     data["isKeystone"].boolValue = false
                     data["isEthermint"].boolValue = targetChain.supportEvm
                     data["name"].stringValue = baseAccount.name
-                    data["address"].stringValue = requestedChain.bechAddress!
-                    data["publicKey"].stringValue = requestedChain.publicKey!.toHexString()
+                    data["address"].stringValue = chain.bechAddress!
+                    data["publicKey"].stringValue = chain.publicKey!.toHexString()
                     injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
                 } else {
-                    onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
+                    print("ERROR ", messageJSON)
+                    onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: "") + "  " + requestChainName + "  " + requestChainId)
                 }
                 
             } else if (method == "cos_signAmino") {
-//                print("params", messageJSON)
                 popUpCosmosRequestSign(method, messageJSON, bodyJSON["messageId"], nil)
                 
             } else if (method == "cos_signDirect") {
                 popUpCosmosRequestSign(method, messageJSON, bodyJSON["messageId"], nil)
                 
             } else if (method == "cos_signMessage") {
-//                print("cos_signMessage ", messageJSON)
-//                print("cos_signMessage ", targetChain)
                 if (messageJSON["params"]["signer"].stringValue.lowercased() != targetChain.bechAddress!.lowercased()) {
                     self.injectionRequestReject("Wrong-Address", messageJSON, bodyJSON["messageId"])
                     return
@@ -362,50 +362,48 @@ extension DappDetailVC: WKScriptMessageHandler {
                 popUpCosmosRequestSign(method, messageJSON, bodyJSON["messageId"], nil)
                 
             } else if (method == "cos_sendTransaction") {
-//                let params = messageJSON["params"]
-//                let txBytes = params["txBytes"].stringValue
-//                let mode = params["mode"].intValue
-//                
-//                guard let txData = Data(base64Encoded: txBytes) else {
-//                    injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
-//                    return
-//                }
-//                
-//                let request = Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
-//                    $0.mode = Cosmos_Tx_V1beta1_BroadcastMode(rawValue: mode) ?? Cosmos_Tx_V1beta1_BroadcastMode.unspecified
-//                    $0.txBytes = txData
-//                }
-//                
-//                DispatchQueue.global().async {
-//                    let channel = self.getConnection(self.targetChain)
-//                    if let response = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel)
-//                        .broadcastTx(request, callOptions: self.getCallOptions()).response.wait() {
-//                        var txResponse = JSON()
-//                        var data = JSON()
-//                        data["code"].uInt32Value = response.txResponse.code
-//                        data["codespace"].stringValue = response.txResponse.codespace
-//                        data["data"].stringValue = response.txResponse.data
-//                        data["event"].object = response.txResponse.events
-//                        data["gas_wanted"].stringValue = String(response.txResponse.gasWanted)
-//                        data["gas_used"].stringValue = String(response.txResponse.gasUsed)
-//                        data["height"].stringValue = String(response.txResponse.height)
-//                        data["txhash"].stringValue = response.txResponse.txhash
-//                        data["info"].stringValue = response.txResponse.info
-//                        data["logs"].object = response.txResponse.logs
-//                        data["tx"].object = response.txResponse.tx
-//                        data["timestamp"].stringValue = response.txResponse.timestamp
-//                        data["raw_log"].stringValue = response.txResponse.rawLog
-//                        txResponse["tx_response"] = data
-//                        DispatchQueue.main.async {
-//                            self.injectionRequestApprove(txResponse, messageJSON, bodyJSON["messageId"])
-//                        }
-//                    } else {
-//                        DispatchQueue.main.async {
-//                            self.injectionRequestReject("Unknown Error", messageJSON, bodyJSON["messageId"])
-//                        }
-//                    }
-//                    try? channel.close().wait()
-//                }
+                let params = messageJSON["params"]
+                let txBytes = params["txBytes"].stringValue
+                let mode = params["mode"].intValue
+                
+                guard let txData = Data(base64Encoded: txBytes) else {
+                    injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
+                    return
+                }
+                
+                let request = Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+                    $0.mode = Cosmos_Tx_V1beta1_BroadcastMode(rawValue: mode) ?? Cosmos_Tx_V1beta1_BroadcastMode.unspecified
+                    $0.txBytes = txData
+                }
+                
+                Task {
+                    if let response = try await targetChain.getGrpcfetcher()?.broadcastTx(request) {
+                        var txResponse = JSON()
+                        var data = JSON()
+                        data["code"].uInt32Value = response.code
+                        data["codespace"].stringValue = response.codespace
+                        data["data"].stringValue = response.data
+                        data["event"].object = response.events
+                        data["gas_wanted"].stringValue = String(response.gasWanted)
+                        data["gas_used"].stringValue = String(response.gasUsed)
+                        data["height"].stringValue = String(response.height)
+                        data["txhash"].stringValue = response.txhash
+                        data["info"].stringValue = response.info
+                        data["logs"].object = response.logs
+                        data["tx"].object = response.tx
+                        data["timestamp"].stringValue = response.timestamp
+                        data["raw_log"].stringValue = response.rawLog
+                        txResponse["tx_response"] = data
+                        DispatchQueue.main.async {
+                            self.injectionRequestApprove(txResponse, messageJSON, bodyJSON["messageId"])
+                        }
+                        
+                    } else {
+                        DispatchQueue.main.async {
+                            self.injectionRequestReject("Unknown Error", messageJSON, bodyJSON["messageId"])
+                        }
+                    }
+                }
             }
             
             
@@ -637,48 +635,60 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
         })
     }
     
-//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//        if self.webView.isHidden {
-//            decisionHandler(.cancel)
-//            return
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if self.webView.isHidden {
+            decisionHandler(.cancel)
+            return
+        }
+        print("webView decidePolicyFor ", navigationAction.request.url)
+        if navigationAction.targetFrame == nil {
+            print("targetFrame ", navigationAction.targetFrame)
+            webView.load(navigationAction.request)
+        }
+//        NSLog("Cosmostation webView decidePolicyFor  \(navigationAction.request.url?.absoluteString)")
+        
+        if let url = navigationAction.request.url {
+            var newUrl: String?
+            if let absoluteString = url.absoluteString.removingPercentEncoding {
+                if absoluteString.starts(with: "keplrwallet://wcV1") {
+                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc")
+                } else if absoluteString.starts(with: "keplrwallet://wcV2") || absoluteString.starts(with: "keplrwalletwcv2://wcV2") {
+                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc")
+                } else if let match = absoluteString.range(of: "https://.*/wc", options: .regularExpression) {
+                    newUrl = absoluteString.replacingCharacters(in: match, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
+                } else if absoluteString.starts(with: "cosmostation://wc") {
+                    newUrl = absoluteString.replacingOccurrences(of: "uri=", with: "")
+                } else if absoluteString.starts(with: "intent:") {
+                    if absoluteString.contains("intent://wcV2") {
+                        newUrl = absoluteString.replacingOccurrences(of: "intent://wcV2", with: "cosmostation://wc")
+                    } else if absoluteString.contains("intent://wc") {
+                        newUrl = absoluteString.removingPercentEncoding!.replacingOccurrences(of: "intent://wc", with: "cosmostation://wc")
+                    }
+                    if let range = newUrl?.range(of: "#Intent") {
+                        let trimmedUrl = String(newUrl![..<range.lowerBound])
+                        newUrl = trimmedUrl
+                    }
+                }
+                print("newUrl ", newUrl)
+//                NSLog("Cosmostation webView decidePolicyFor newUrl  \(newUrl)")
+                
+                if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
+                    print("Cosmostation webView decidePolicyFor finalUrl  \(finalUrl)")
+                    onInitWcV2(finalUrl)
+                    decisionHandler(.cancel)
+                    return
+                }
+            }
+        }
+        decisionHandler(.allow)
+    }
+    
+//    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+//        print("webView createWebViewWith ", navigationAction.request.url )
+//        if navigationAction.targetFrame == nil {
+//            webView.load(navigationAction.request)
 //        }
-//        print("webView decidePolicyFor ", navigationAction.request.url )
-////        NSLog("Cosmostation webView decidePolicyFor  \(navigationAction.request.url?.absoluteString)")
-//        
-//        if let url = navigationAction.request.url {
-//            var newUrl: String?
-//            if let absoluteString = url.absoluteString.removingPercentEncoding {
-//                if absoluteString.starts(with: "keplrwallet://wcV1") {
-//                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc")
-//                } else if absoluteString.starts(with: "keplrwallet://wcV2") || absoluteString.starts(with: "keplrwalletwcv2://wcV2") {
-//                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc")
-//                } else if let match = absoluteString.range(of: "https://.*/wc", options: .regularExpression) {
-//                    newUrl = absoluteString.replacingCharacters(in: match, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
-//                } else if absoluteString.starts(with: "cosmostation://wc") {
-//                    newUrl = absoluteString.replacingOccurrences(of: "uri=", with: "")
-//                } else if absoluteString.starts(with: "intent:") {
-//                    if absoluteString.contains("intent://wcV2") {
-//                        newUrl = absoluteString.replacingOccurrences(of: "intent://wcV2", with: "cosmostation://wc")
-//                    } else if absoluteString.contains("intent://wc") {
-//                        newUrl = absoluteString.removingPercentEncoding!.replacingOccurrences(of: "intent://wc", with: "cosmostation://wc")
-//                    }
-//                    if let range = newUrl?.range(of: "#Intent") {
-//                        let trimmedUrl = String(newUrl![..<range.lowerBound])
-//                        newUrl = trimmedUrl
-//                    }
-//                }
-//                print("newUrl ", newUrl)
-////                NSLog("Cosmostation webView decidePolicyFor newUrl  \(newUrl)")
-//                
-//                if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
-//                    NSLog("Cosmostation webView decidePolicyFor finalUrl  \(finalUrl)")
-//                    onInitWcV2(finalUrl)
-//                    decisionHandler(.cancel)
-//                    return
-//                }
-//            }
-//        }
-//        decisionHandler(.allow)
+//        return nil
 //    }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -711,7 +721,7 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
 extension DappDetailVC {
     
     private func wcV2SetSign() {
-        NSLog("Cosmostation wcV2SetSign \(dappType)")
+        print("Cosmostation wcV2SetSign \(dappType)")
         Sign.instance.sessionProposalPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sessionProposal, context in
@@ -731,7 +741,7 @@ extension DappDetailVC {
     
     @MainActor
     private func wcV2SetPair(uri: String, _ completionHandler: @escaping (Bool) -> Void) {
-        NSLog("Cosmostation wcV2SetPair  \(dappType)    \(uri)")
+        print("Cosmostation wcV2SetPair  \(dappType)    \(uri)")
         Task {
             guard let wcUri = WalletConnectURI(string: uri) else {
                 completionHandler(false)
@@ -742,7 +752,7 @@ extension DappDetailVC {
                 completionHandler(true)
             } catch {
 //                print("wcV2SetPair error: \(error)")
-                NSLog("Cosmostation wcV2SetPair error: \(error)")
+                print("Cosmostation wcV2SetPair error: \(error)")
                 completionHandler(false)
             }
         }
@@ -771,26 +781,26 @@ extension DappDetailVC {
     
     
     private func wcV2ProposalRequest(proposal: WalletConnectSign.Session.Proposal) {
-        NSLog("Cosmostation wcV2ProposalRequest \(proposal)")
+        print("Cosmostation wcV2ProposalRequest \(proposal)")
         if (dappType == .DEEPLINK_WC2) {
-            NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 \(proposal.proposer.url)")
+            print("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 \(proposal.proposer.url)")
             webView.load(URLRequest(url: URL(string: proposal.proposer.url)!))
             wcV2RejectProposal(proposalId:  proposal.id, reason: .userRejectedChains)
             dappType = .INTERNAL_URL
             wcV2Disconnect { success in
-                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 DISCONNECT ALL \(success)")
-                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Pair \(Pair.instance.getPairings().count)")
-                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Sign \(Sign.instance.getSessions().count)")
+//                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 DISCONNECT ALL \(success)")
+//                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Pair \(Pair.instance.getPairings().count)")
+//                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Sign \(Sign.instance.getSessions().count)")
             }
             return
         }
         var sessionNamespaces = [String: SessionNamespace]()
         proposal.requiredNamespaces.forEach { namespaces in
-            NSLog("Cosmostation wcV2ApproveProposal namespaces \(namespaces)")
+            print("Cosmostation wcV2ApproveProposal namespaces \(namespaces)")
             let caip2Namespace = namespaces.key
             let proposalNamespace = namespaces.value
             if let targetChain = allChains.filter({ $0.chainIdCosmos == proposalNamespace.chains?.first?.reference }).first {
-                NSLog("Cosmostation wcV2ApproveProposal targetChain \(targetChain)")
+                print("Cosmostation wcV2ApproveProposal targetChain \(targetChain)")
                 self.targetChain = targetChain
                 let accounts = Set(namespaces.value.chains!.filter { chain in
                     allChains.filter({ $0.chainIdCosmos == chain.reference }).first != nil
@@ -802,12 +812,12 @@ extension DappDetailVC {
                 sessionNamespaces[caip2Namespace] = sessionNamespace
 //                print("wcV2ApproveProposal accounts ", accounts)
 //                print("wcV2ApproveProposal approveProposal ", sessionNamespaces)
-                NSLog("Cosmostation wcV2ProposalRequest Accept")
+                print("Cosmostation wcV2ProposalRequest Accept")
                 self.wcV2ApproveProposal(proposalId:  proposal.id, namespaces: sessionNamespaces)
                 
             } else {
-                NSLog("Cosmostation wcV2ApproveProposal targetChain NULL")
-                NSLog("Cosmostation wcV2ProposalRequest Reject")
+//                NSLog("Cosmostation wcV2ApproveProposal targetChain NULL")
+//                NSLog("Cosmostation wcV2ProposalRequest Reject")
                 let rejectResponse: RejectionReason = .userRejectedChains
                 self.wcV2RejectProposal(proposalId:  proposal.id, reason: rejectResponse)
                 self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
@@ -819,7 +829,7 @@ extension DappDetailVC {
     private func wcV2ApproveProposal(proposalId: String, namespaces: [String: SessionNamespace]) {
         Task {
             do {
-                NSLog("Cosmostation wcV2ApproveProposal")
+                print("Cosmostation wcV2ApproveProposal")
                 try await Sign.instance.approve(proposalId: proposalId, namespaces: namespaces)
             } catch {
                 print("wcV2ApproveProposal error: \(error)")
