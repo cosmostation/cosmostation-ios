@@ -1517,6 +1517,15 @@ class Signer {
         }
         return SECP256K1.compactsign(hash!, privateKey: baseChain.privateKey!)!
     }
+    
+    static func getSimulsignatures(_ cnt: Int) -> [Data] {
+        var result = [Data]()
+        let emptyDayta = Data(capacity: 64)
+        for _ in 0..<cnt {
+            result.append(emptyDayta)
+        }
+        return result
+    }
 }
 
 extension SECP256K1 {

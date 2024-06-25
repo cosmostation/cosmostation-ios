@@ -19,6 +19,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DappCosmosSignRequestSheet" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="barView" destination="D0y-Ie-tKc" id="BdO-nd-XB8"/>
                 <outlet property="bodyCardView" destination="j6A-KN-1Pk" id="Cyh-eX-vOM"/>
                 <outlet property="cancelBtn" destination="zX0-No-sMJ" id="SUv-LQ-nIK"/>
                 <outlet property="confirmBtn" destination="fri-IR-mgH" id="f89-Xr-EC5"/>
@@ -73,7 +74,7 @@
                     <color key="textColor" name="_color02"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D0y-Ie-tKc">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D0y-Ie-tKc">
                     <rect key="frame" x="8" y="165.66666666666666" width="377" height="0.66666666666665719"/>
                     <color key="backgroundColor" name="_divider"/>
                     <constraints>

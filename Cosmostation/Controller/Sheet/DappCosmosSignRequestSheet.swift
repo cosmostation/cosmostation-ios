@@ -22,6 +22,7 @@ class DappCosmosSignRequestSheet: BaseVC {
     @IBOutlet weak var safeMsgTitle: UILabel!
     @IBOutlet weak var dangerMsgTitle: UILabel!
     @IBOutlet weak var warnMsgLabel: UILabel!
+    @IBOutlet weak var barView: UIView!
     @IBOutlet weak var bodyCardView: FixCardView!
     @IBOutlet weak var wcMsgTextView: UITextView!
     @IBOutlet weak var feeCardView: FixCardView!
@@ -73,7 +74,7 @@ class DappCosmosSignRequestSheet: BaseVC {
         
         confirmBtn.isEnabled = true
         
-//        print("DappCosmosSignRequestSheet ", requestToSign)
+        print("DappCosmosSignRequestSheet ", requestToSign)
         if (requestToSign == nil) {
             dismissWithFail()
             return
@@ -129,6 +130,7 @@ class DappCosmosSignRequestSheet: BaseVC {
         } else if (method == "cos_signDirect" || method == "cosmos_signDirect") {
             if let authInfoBytes = targetDocs.authInfoBytes,
                 let authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: Data.dataFromHex(authInfoBytes)!) {
+                print("authInfo ", authInfo)
                 if (authInfo.fee.gasLimit > 0 && authInfo.fee.amount.count >= 1) {
                     dappTxFee = authInfo.fee
                 }
@@ -154,6 +156,7 @@ class DappCosmosSignRequestSheet: BaseVC {
         
         requestTitle.isHidden = false
         warnMsgLabel.isHidden = false
+        barView.isHidden = false
         bodyCardView.isHidden = false
         feeCardView.isHidden = false
         controlStakView.isHidden = false
@@ -398,7 +401,7 @@ extension DappCosmosSignRequestSheet: BaseSheetDelegate {
                 let simulReq = genSimulTxs()
 //                print("simulReq ", simulReq)
                 let simulRes = try await targetChain.getGrpcfetcher()!.simulateTx(simulReq!)
-//                print("simulRes ", simulRes)
+//                print("simulRes ", simulRes?.gasInfo)
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(simulRes)
                 }
@@ -420,21 +423,21 @@ extension DappCosmosSignRequestSheet: BaseSheetDelegate {
            let authInfoString = targetDocs.authInfoBytes,
            let bodyBytes = try? Cosmos_Tx_V1beta1_TxBody.init(serializedData: Data.dataFromHex(bodyString)!),
            var authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: Data.dataFromHex(authInfoString)!) {
-            authInfo.fee = txFee!
+            authInfo.fee.amount = txFee!.amount
+            authInfo.fee.gasLimit = txFee!.gasLimit
             let signDoc = Cosmos_Tx_V1beta1_SignDoc.with {
                 $0.bodyBytes = try! bodyBytes.serializedData()
                 $0.authInfoBytes = try! authInfo.serializedData()
                 $0.chainID = chainId
                 $0.accountNumber = targetDocs["account_number"].uInt64Value
             }
-            let sigbyte = Signer.getByteSingleSignatures(try! signDoc.serializedData(), targetChain!)
             let simulateTx = Cosmos_Tx_V1beta1_Tx.with {
                 $0.authInfo = authInfo
                 $0.body = bodyBytes
-                $0.signatures = [sigbyte]
+                $0.signatures = Signer.getSimulsignatures(authInfo.signerInfos.count)
             }
             return Cosmos_Tx_V1beta1_SimulateRequest.with {
-                $0.tx = simulateTx
+                $0.txBytes = try! simulateTx.serializedData()
             }
         }
         return nil
