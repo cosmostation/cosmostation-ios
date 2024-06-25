@@ -41,7 +41,8 @@ class OkDeposit: BaseVC {
     @IBOutlet weak var depositBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: ChainOkt996Keccak!
+    var selectedChain: BaseChain!
+    var oktFetcher: OktFetcher!
     var stakeDenom: String!
     var tokenInfo: JSON!
     var availableAmount = NSDecimalNumber.zero
@@ -55,16 +56,17 @@ class OkDeposit: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher
         stakeDenom = selectedChain.stakeDenom
         
         onUpdateFeeView()
         
-        tokenInfo = selectedChain.lcdOktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
+        tokenInfo = oktFetcher.lcdOktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
         let original_symbol = tokenInfo["original_symbol"].stringValue
-        toDepositAssetImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(original_symbol))
+        toDepositAssetImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
         toDepositSymbolLabel.text = original_symbol.uppercased()
         
-        let available = selectedChain.lcdBalanceAmount(stakeDenom)
+        let available = oktFetcher.lcdBalanceAmount(stakeDenom)
         availableAmount = available.subtracting(gasFee)
         
         toDepositAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
@@ -87,7 +89,7 @@ class OkDeposit: BaseVC {
             amountSheet.existedAmount = toDepositAmount
         }
         amountSheet.sheetDelegate = self
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     func onUpdateAmountView(_ amount: String?) {
@@ -122,7 +124,7 @@ class OkDeposit: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -138,10 +140,10 @@ class OkDeposit: BaseVC {
     }
     
     func onUpdateFeeView() {
-        feeSelectImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(stakeDenom))
+        feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
         feeSelectLabel.text = stakeDenom.uppercased()
         
-        let existCnt = selectedChain.lcdOktDeposits["validator_address"].arrayValue.count
+        let existCnt = oktFetcher.lcdOktDeposits["validator_address"].arrayValue.count
         
         
         gasAmount = NSDecimalNumber(string: BASE_GAS_AMOUNT)
@@ -216,10 +218,11 @@ extension OkDeposit {
         let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(gasFee, 18))
         let fee = L_Fee(gasAmount.stringValue, [gasCoin])
         
-        let okMsg = L_Generator.oktDepositMsg(selectedChain.bechAddress, depositCoin)
+        let okMsg = L_Generator.oktDepositMsg(selectedChain.bechAddress!, depositCoin)
         let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
         let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
         
-        return try? await AF.request(BaseNetWork.broadcastUrl(self.selectedChain), method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
+        let url = oktFetcher.getLcd() + "txs"
+        return try? await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
     }
 }

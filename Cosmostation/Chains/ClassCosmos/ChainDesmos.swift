@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainDesmos: CosmosClass  {
+class ChainDesmos: BaseChain  {
     
     override init() {
         super.init()
@@ -16,15 +16,17 @@ class ChainDesmos: CosmosClass  {
         name = "Desmos"
         tag = "desmos852"
         logo1 = "chainDesmos"
-        logo2 = "chainDesmo2"
         apiName = "desmos"
-        stakeDenom = "udsm"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/852'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "udsm"
         bechAccountPrefix = "desmos"
         validatorPrefix = "desmosvaloper"
-        
         grpcHost = "grpc-desmos.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

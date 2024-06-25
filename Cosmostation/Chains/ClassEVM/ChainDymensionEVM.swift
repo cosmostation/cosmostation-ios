@@ -8,30 +8,31 @@
 
 import Foundation
 
-class ChainDymensionEVM: EvmClass  {
+class ChainDymensionEVM: BaseChain  {
     
     override init() {
         super.init()
         
-        supportCosmos = true
-        
         name = "Dymension"
         tag = "dymension60"
-        logo1 = "chainDymensionEvm"
-        logo2 = "chainDymension2"
+        logo1 = "chainDymension"
         apiName = "dymension"
-        stakeDenom = "adym"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
-        //for EVM tx and display
+        
+        supportCosmosGrpc = true
+        stakeDenom = "adym"
+        bechAccountPrefix = "dym"
+        validatorPrefix = "dymvaloper"
+        grpcHost = "grpc-dymension.cosmostation.io"
+        
+        
+        supportEvm = true
         coinSymbol = "DYM"
         coinGeckoId = "dymension"
         coinLogo = "tokenDym"
-
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
-        bechAccountPrefix = "dym"
-        validatorPrefix = "dymvaloper"
-        
-        grpcHost = "grpc-dymension.cosmostation.io"
         evmRpcURL = "https://rpc-dymension-evm.cosmostation.io"
+        
+        initFetcher()
     }
 }

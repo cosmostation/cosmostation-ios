@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainOmniflix: CosmosClass  {
+class ChainOmniflix: BaseChain  {
     
     override init() {
         super.init()
@@ -16,15 +16,17 @@ class ChainOmniflix: CosmosClass  {
         name = "Omniflix"
         tag = "omniflix118"
         logo1 = "chainOmniflix"
-        logo2 = "chainOmniflix2"
         apiName = "omniflix"
-        stakeDenom = "uflix"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uflix"
         bechAccountPrefix = "omniflix"
         validatorPrefix = "omniflixvaloper"
-        
         grpcHost = "grpc-omniflix.cosmostation.io"
+        
+        initFetcher()
     }
 }
 

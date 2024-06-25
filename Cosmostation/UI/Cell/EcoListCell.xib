@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+        <array key="SpoqaHanSansNeo-Medium.otf">
+            <string>SpoqaHanSansNeo-Medium</string>
+        </array>
+        <array key="SpoqaHanSansNeo-Regular.otf">
+            <string>SpoqaHanSansNeo-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="EcoListCell" customModule="Cosmostation" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="215" height="296"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="215" height="296"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RIU-kM-mGj" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="215" height="296"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z9z-gN-GVp">
+                                <rect key="frame" x="0.0" y="0.0" width="215" height="161.33333333333334"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="z9z-gN-GVp" secondAttribute="height" multiplier="4:3" id="caN-0b-TCo"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yg9-bd-XNm" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                <rect key="frame" x="181" y="10" width="24" height="12.666666666666664"/>
+                                <color key="backgroundColor" red="0.035294117647058823" green="0.72156862745098038" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                <color key="textColor" name="_color01"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hzi-vp-WlF">
+                                <rect key="frame" x="12" y="169.33333333333334" width="191" height="17.666666666666657"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                <color key="textColor" name="_color01"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ascdsadas" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GfH-br-fAZ">
+                                <rect key="frame" x="12" y="189" width="191" height="15.333333333333343"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Regular" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                <color key="textColor" name="_color02"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="GfH-br-fAZ" secondAttribute="bottom" constant="8" id="4js-wm-Thj"/>
+                            <constraint firstAttribute="trailing" secondItem="hzi-vp-WlF" secondAttribute="trailing" constant="12" id="6Yp-jg-s5Y"/>
+                            <constraint firstItem="hzi-vp-WlF" firstAttribute="leading" secondItem="RIU-kM-mGj" secondAttribute="leading" constant="12" id="Ihg-8e-Hk5"/>
+                            <constraint firstAttribute="trailing" secondItem="yg9-bd-XNm" secondAttribute="trailing" constant="10" id="Jpu-d9-N1g"/>
+                            <constraint firstItem="z9z-gN-GVp" firstAttribute="top" secondItem="RIU-kM-mGj" secondAttribute="top" id="Sox-dX-QUA"/>
+                            <constraint firstItem="hzi-vp-WlF" firstAttribute="top" secondItem="z9z-gN-GVp" secondAttribute="bottom" constant="8" id="dmY-xO-Agk"/>
+                            <constraint firstItem="GfH-br-fAZ" firstAttribute="trailing" secondItem="hzi-vp-WlF" secondAttribute="trailing" id="dzz-i9-CMv"/>
+                            <constraint firstItem="z9z-gN-GVp" firstAttribute="leading" secondItem="RIU-kM-mGj" secondAttribute="leading" id="icy-VV-4Iy"/>
+                            <constraint firstItem="GfH-br-fAZ" firstAttribute="top" secondItem="hzi-vp-WlF" secondAttribute="bottom" constant="2" id="rZD-bc-ww3"/>
+                            <constraint firstAttribute="trailing" secondItem="z9z-gN-GVp" secondAttribute="trailing" id="roW-pS-MLN"/>
+                            <constraint firstItem="GfH-br-fAZ" firstAttribute="leading" secondItem="hzi-vp-WlF" secondAttribute="leading" id="tbZ-R6-2iX"/>
+                            <constraint firstItem="yg9-bd-XNm" firstAttribute="top" secondItem="RIU-kM-mGj" secondAttribute="top" constant="10" id="yKe-yE-8Zo"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="RIU-kM-mGj" secondAttribute="trailing" id="2G9-bn-8nc"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="leading" secondItem="RIU-kM-mGj" secondAttribute="leading" id="AEy-dd-vx8"/>
+                <constraint firstAttribute="bottom" secondItem="RIU-kM-mGj" secondAttribute="bottom" id="HbQ-I7-hov"/>
+                <constraint firstAttribute="top" secondItem="RIU-kM-mGj" secondAttribute="top" id="bEt-aG-xc3"/>
+            </constraints>
+            <size key="customSize" width="215" height="296"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="GfH-br-fAZ" id="5SL-aR-6CE"/>
+                <outlet property="rootView" destination="RIU-kM-mGj" id="WJg-J1-yvG"/>
+                <outlet property="thumbnailImageView" destination="z9z-gN-GVp" id="gUR-LH-etp"/>
+                <outlet property="titleLabel" destination="hzi-vp-WlF" id="MHT-qF-8O8"/>
+                <outlet property="typeTagLabel" destination="yg9-bd-XNm" id="Az7-9q-4yP"/>
+            </connections>
+            <point key="canvasLocation" x="255.72519083969465" y="75.352112676056336"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

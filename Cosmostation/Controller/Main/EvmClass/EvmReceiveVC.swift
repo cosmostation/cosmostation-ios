@@ -12,7 +12,7 @@ class EvmReceiveVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var selectedChain: EvmClass!
+    var selectedChain: BaseChain!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ extension EvmReceiveVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UIPasteboard.general.string = selectedChain.evmAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        UIPasteboard.general.string = selectedChain.evmAddress!.trimmingCharacters(in: .whitespacesAndNewlines)
         self.onShowToast(NSLocalizedString("address_copied", comment: ""))
     }
     

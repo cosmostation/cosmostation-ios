@@ -12,10 +12,7 @@ class QrAddressPopup2VC: BaseVC {
     
     @IBOutlet weak var chainNameLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var evmCompatTag: UILabel!
-    @IBOutlet weak var cosmosTag: UILabel!
-    @IBOutlet weak var keyTypeTag: UILabel!
+    @IBOutlet weak var legacyTag: PaddingLabel!
     
     @IBOutlet weak var evmQrImgView: UIImageView!
     @IBOutlet weak var evmAddressLabel: UILabel!
@@ -38,17 +35,13 @@ class QrAddressPopup2VC: BaseVC {
             hdPathLabel.text = ""
         }
         
-        if let selectedChain = selectedChain as? EvmClass {
-//            cosmosTag.isHidden = false
-            
-            evmAddress = selectedChain.evmAddress
-            bechAddress = selectedChain.bechAddress
-            
-            evmAddressLabel.text = evmAddress
-            evmAddressLabel.adjustsFontSizeToFitWidth = true
-            bechAddressLabel.text = bechAddress
-            bechAddressLabel.adjustsFontSizeToFitWidth = true
-        }
+        evmAddress = selectedChain.evmAddress!
+        bechAddress = selectedChain.bechAddress!
+        
+        evmAddressLabel.text = evmAddress
+        evmAddressLabel.adjustsFontSizeToFitWidth = true
+        bechAddressLabel.text = bechAddress
+        bechAddressLabel.adjustsFontSizeToFitWidth = true
         
         if let evmQrImage = WUtils.generateQrCode(evmAddress) {
             evmQrImgView.image = UIImage(ciImage: evmQrImage)

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainRizon: CosmosClass  {
+class ChainRizon: BaseChain  {
     
     override init() {
         super.init()
@@ -16,14 +16,16 @@ class ChainRizon: CosmosClass  {
         name = "Rizon"
         tag = "rizon118"
         logo1 = "chainRizon"
-        logo2 = "chainRizon2"
         apiName = "rizon"
-        stakeDenom = "uatolo"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uatolo"
         bechAccountPrefix = "rizon"
         validatorPrefix = "rizonvaloper"
-        
         grpcHost = "grpc-rizon.cosmostation.io"
+        
+        initFetcher()
     }
 }

@@ -14,6 +14,7 @@ import BigInt
 
 public class BERA_Staking {
     
+    /*
     public var transactionOptions: TransactionOptions
     public var web3: web3
     public var provider: Web3Provider
@@ -98,10 +99,11 @@ public class BERA_Staking {
         let tx = contract.write("cancelUnbondingDelegation", parameters: [validatorAddress, amount, creationHeight] as [AnyObject], transactionOptions: transactionOptions)!
         return tx
     }
+     */
 }
 
 public class BERA_Governance {
-    
+    /*
     public var transactionOptions: TransactionOptions
     public var web3: web3
     public var provider: Web3Provider
@@ -132,7 +134,7 @@ public class BERA_Governance {
         let tx = contract.write("vote", parameters: [proposalId, Int32(option), ""] as [AnyObject], transactionOptions: transactionOptions)!
         return tx
     }
-    
+    */
 }
 
 extension Web3.Utils {

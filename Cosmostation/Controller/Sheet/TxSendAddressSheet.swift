@@ -69,7 +69,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         addressListSheet.senderBechAddress = senderBechAddress
         addressListSheet.senderEvmAddress = senderEvmAddress
         addressListSheet.addressListSheetDelegate = self
-        self.onStartSheet(addressListSheet)
+        onStartSheet(addressListSheet, 320, 0.6)
     }
     
     @IBAction func onClickScan(_ sender: UIButton) {
@@ -105,7 +105,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             
         } else if (sendType == .Only_Cosmos_Coin || sendType == .Only_Cosmos_CW20) {
             //only support cosmos address style
-            if (WUtils.isValidBechAddress((toChain as! CosmosClass), userInput)) {
+            if (WUtils.isValidBechAddress(toChain, userInput)) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
@@ -119,7 +119,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                 self.dismiss(animated: true)
                 return
             }
-            if (WUtils.isValidBechAddress((toChain as! CosmosClass), userInput)) {
+            if (WUtils.isValidBechAddress(toChain, userInput)) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
@@ -137,7 +137,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         view.isUserInteractionEnabled = false
         loadingView.isHidden = false
         nameservices.removeAll()
-        let prefix = (toChain as! CosmosClass).bechAccountPrefix!
+        let prefix = toChain.bechAccountPrefix!
         
         Task {
             if let icns = try await checkOsmoname(userInput, prefix) {
@@ -175,7 +175,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                     baseSheet.nameservices = self.nameservices
                     baseSheet.sheetDelegate = self
                     baseSheet.sheetType = .SelectCosmosNameServiceAddress
-                    self.onStartSheet(baseSheet)
+                    self.onStartSheet(baseSheet, 320, 0.6)
                 }
             }
         }
@@ -250,9 +250,9 @@ extension TxSendAddressSheet {
     }
     
     
-    func getConnection(_ chain: CosmosClass) -> ClientConnection {
+    func getConnection(_ chain: BaseChain) -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpc().0, port: chain.getGrpc().1)
+        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpcfetcher()!.getGrpc().0, port: chain.getGrpcfetcher()!.getGrpc().1)
     }
     
     func getCallOptions() -> CallOptions {

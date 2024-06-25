@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainInjective: CosmosClass  {
+class ChainInjective: BaseChain  {
     
     override init() {
         super.init()
@@ -16,34 +16,16 @@ class ChainInjective: CosmosClass  {
         name = "Injective"
         tag = "injective60"
         logo1 = "chainInjective"
-        logo2 = "chainInjective2"
         apiName = "injective"
-        stakeDenom = "inj"
-        
         accountKeyType = AccountKeyType(.INJECTIVE_Secp256k1, "m/44'/60'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "inj"
         bechAccountPrefix = "inj"
         validatorPrefix = "injvaloper"
-        
         grpcHost = "grpc-injective.cosmostation.io"
-    }
-    
-    override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
-        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
-        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
-        if (supportStaking) {
-            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
-        }
-    }
-    
-    override func setInfoWithPrivateKey(_ priKey: Data) {
-        privateKey = priKey
-        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        bechAddress = KeyFac.convertEvmToBech32(evmAddress, bechAccountPrefix!)
-        if (supportStaking) {
-            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress, validatorPrefix)
-        }
+        
+        initFetcher()
     }
 }

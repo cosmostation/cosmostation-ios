@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainUmee: CosmosClass {
+class ChainUmee: BaseChain {
     
     override init() {
         super.init()
@@ -16,15 +16,17 @@ class ChainUmee: CosmosClass {
         name = "UX(Umee)"
         tag = "umee118"
         logo1 = "chainUmee"
-        logo2 = "chainUmee2"
         apiName = "umee"
-        stakeDenom = "uumee"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uumee"
         bechAccountPrefix = "umee"
         validatorPrefix = "umeevaloper"
-        
         grpcHost = "grpc-umee.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

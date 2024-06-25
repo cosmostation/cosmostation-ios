@@ -8,30 +8,31 @@
 
 import Foundation
 
-class ChainHumansEVM: EvmClass  {
+class ChainHumansEVM: BaseChain  {
     
     override init() {
         super.init()
         
-        supportCosmos = true
-        
         name = "Humans"
         tag = "humans60"
-        logo1 = "chainHumansEvm"
-        logo2 = "chainHumans2"
+        logo1 = "chainHumans"
         apiName = "humans"
-        stakeDenom = "aheart"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
-        //for EVM tx and display
+        
+        supportCosmosGrpc = true
+        stakeDenom = "aheart"
+        bechAccountPrefix = "human"
+        validatorPrefix = "humanvaloper"
+        grpcHost = "grpc-humans.cosmostation.io"
+        
+        
+        supportEvm = true
         coinSymbol = "HEART"
         coinGeckoId = "humans-ai"
         coinLogo = "tokenHeart"
-
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
-        bechAccountPrefix = "human"
-        validatorPrefix = "humanvaloper"
-        
-        grpcHost = "grpc-humans.cosmostation.io"
         evmRpcURL = "https://rpc-humans-evm.cosmostation.io"
+        
+        initFetcher()
     }
 }

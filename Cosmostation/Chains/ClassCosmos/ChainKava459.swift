@@ -8,34 +8,35 @@
 
 import Foundation
 
-class ChainKava459: CosmosClass  {
+class ChainKava459: BaseChain {
+    
+    var kavaFetcher: KavaFetcher?
     
     override init() {
         super.init()
         
-        isDefault = false
         name = "Kava"
         tag = "kava459"
         logo1 = "chainKava"
-        logo2 = "chainKava2"
+        isDefault = false
         apiName = "kava"
-        stakeDenom = "ukava"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/459'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ukava"
         bechAccountPrefix = "kava"
         validatorPrefix = "kavavaloper"
-        
         grpcHost = "grpc-kava.cosmostation.io"
+        
+        initFetcher()
+    }
+    
+    override func initFetcher() {
+        kavaFetcher = KavaFetcher.init(self)
+    }
+    
+    override func getGrpcfetcher() -> FetcherGrpc? {
+        return kavaFetcher
     }
 }
-
-let KAVA_MAIN_DENOM = "ukava"
-let KAVA_HARD_DENOM = "hard"
-let KAVA_USDX_DENOM = "usdx"
-let KAVA_SWAP_DENOM = "swp"
-
-let KAVA_LCD = "https://lcd-kava.cosmostation.io/"
-let KAVA_BASE_FEE = "12500"
-
-let KAVA_CDP_IMG_URL        = ResourceBase + "kava/module/mint/";
-let KAVA_HARD_POOL_IMG_URL  = ResourceBase + "kava/module/lend/";

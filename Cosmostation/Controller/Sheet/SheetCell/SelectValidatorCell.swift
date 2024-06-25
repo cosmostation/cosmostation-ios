@@ -49,7 +49,7 @@ class SelectValidatorCell: UITableViewCell {
         stakingLabel.isHidden = true
     }
     
-    func onBindValidator(_ baseChain: CosmosClass, _ validator: Cosmos_Staking_V1beta1_Validator) {
+    func onBindValidator(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator) {
         
         logoImg.af.setImage(withURL: baseChain.monikerImg(validator.operatorAddress))
         nameLabel.text = validator.description_p.moniker
@@ -59,8 +59,8 @@ class SelectValidatorCell: UITableViewCell {
             inactiveTag.isHidden = validator.status == .bonded
         }
         
-        let stakeDenom = baseChain.stakeDenom!
-        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        if let stakeDenom = baseChain.stakeDenom,
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
             
             let vpAmount = NSDecimalNumber(string: validator.tokens).multiplying(byPowerOf10: -msAsset.decimals!)
             vpLabel?.attributedText = WDP.dpAmount(vpAmount.stringValue, vpLabel!.font, 0)
@@ -78,7 +78,7 @@ class SelectValidatorCell: UITableViewCell {
     }
     
     
-    func onBindUnstakeValidator(_ baseChain: CosmosClass, _ validator: Cosmos_Staking_V1beta1_Validator) {
+    func onBindUnstakeValidator(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator) {
         
         logoImg.af.setImage(withURL: baseChain.monikerImg(validator.operatorAddress))
         nameLabel.text = validator.description_p.moniker
@@ -88,9 +88,11 @@ class SelectValidatorCell: UITableViewCell {
             inactiveTag.isHidden = validator.status == .bonded
         }
         
-        let stakeDenom = baseChain.stakeDenom!
-        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
-            let staked = baseChain.cosmosDelegations.filter { $0.delegation.validatorAddress == validator.operatorAddress }.first?.balance.amount
+        if let stakeDenom = baseChain.stakeDenom,
+           let delegations = baseChain.getGrpcfetcher()?.cosmosDelegations,
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+            
+            let staked = delegations.filter { $0.delegation.validatorAddress == validator.operatorAddress }.first?.balance.amount
             let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
             stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
         }

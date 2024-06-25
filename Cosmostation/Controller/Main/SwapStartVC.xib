@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -87,7 +87,7 @@
                     </connections>
                 </button>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3d-MG-veZ">
-                    <rect key="frame" x="0.0" y="102.33333333333331" width="414" height="707.66666666666674"/>
+                    <rect key="frame" x="0.0" y="102.33333333333331" width="414" height="703.66666666666674"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5xe-ir-5WB">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="645.66666666666663"/>
@@ -809,7 +809,7 @@
                     <viewLayoutGuide key="frameLayoutGuide" id="Nfs-9c-Ybt"/>
                 </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NoA-l1-4SI" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="810" width="398" height="48"/>
+                    <rect key="frame" x="8" y="806" width="398" height="48"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="Sj4-q7-lIH"/>
@@ -842,7 +842,7 @@
                 <constraint firstItem="NoA-l1-4SI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="6Bi-K9-84Z"/>
                 <constraint firstItem="QRb-vF-1tj" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="83B-4Q-dhd"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NoA-l1-4SI" secondAttribute="trailing" constant="8" id="AhI-BR-3yk"/>
-                <constraint firstItem="NoA-l1-4SI" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-4" id="Dxw-Lm-gHw"/>
+                <constraint firstItem="NoA-l1-4SI" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-8" id="Dxw-Lm-gHw"/>
                 <constraint firstItem="K8D-1w-Zfs" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="ETQ-8r-D9U"/>
                 <constraint firstItem="QRb-vF-1tj" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="aej-9G-4aT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="y3d-MG-veZ" secondAttribute="trailing" id="hEJ-vs-E0X"/>
@@ -860,7 +860,7 @@
         <image name="iconSlippageChange" width="24" height="24"/>
         <image name="iconSwapToggle" width="24" height="24"/>
         <image name="iconWarnRed" width="24" height="24"/>
-        <image name="tokenDefault" width="192" height="192"/>
+        <image name="tokenDefault" width="48" height="48"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

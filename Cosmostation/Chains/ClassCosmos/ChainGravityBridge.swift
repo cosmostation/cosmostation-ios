@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainGravityBridge: CosmosClass  {
+class ChainGravityBridge: BaseChain  {
     
     override init() {
         super.init()
@@ -16,14 +16,16 @@ class ChainGravityBridge: CosmosClass  {
         name = "G-Bridge"
         tag = "gravity-bridge118"
         logo1 = "chainGravityBridge"
-        logo2 = "chainGravityBridge2"
         apiName = "gravity-bridge"
-        stakeDenom = "ugraviton"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ugraviton"
         bechAccountPrefix = "gravity"
         validatorPrefix = "gravityvaloper"
-        
         grpcHost = "grpc-gravity-bridge.cosmostation.io"
+        
+        initFetcher()
     }
 }

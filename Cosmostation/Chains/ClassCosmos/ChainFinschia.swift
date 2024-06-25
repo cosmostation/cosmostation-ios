@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainFinschia: CosmosClass  {
+class ChainFinschia: BaseChain  {
     
     override init() {
         super.init()
@@ -16,15 +16,17 @@ class ChainFinschia: CosmosClass  {
         name = "Finschia"
         tag = "finschia438"
         logo1 = "chainFinschia"
-        logo2 = "chainFinschia2"
         apiName = "finschia"
-        stakeDenom = "cony"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/438'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "cony"
         bechAccountPrefix = "link"
         validatorPrefix = "linkvaloper"
-        
         grpcHost = "grpc-finschia.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

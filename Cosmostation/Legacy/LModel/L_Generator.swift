@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import CryptoSwift
-import HDWalletKit
+import web3swift
+import Web3Core
 
 
 class L_Generator {
@@ -59,7 +59,19 @@ class L_Generator {
     }
     
     
-    static func postData(_ msgs: [L_Msg], _ fee: L_Fee, _ memo: String, _ baseChain: CosmosClass) -> Data {
+    
+    static func personalSignMsg(_ data: String, _ signer: String) -> L_Msg {
+        var value = L_Value.init()
+        value.data = data
+        value.signer = signer
+        
+        var result = L_Msg.init()
+        result.type = "sign/MsgSignData"
+        result.value = value
+        return result
+    }
+    
+    static func postData(_ msgs: [L_Msg], _ fee: L_Fee, _ memo: String, _ baseChain: BaseChain) -> Data {
         guard let oktChain = baseChain as? ChainOkt996Keccak else {
             return Data()
         }
@@ -67,8 +79,8 @@ class L_Generator {
         encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
         
         let chainId = oktChain.chainIdCosmos!
-        let accNum = oktChain.lcdAccountInfo["value","account_number"].uInt64Value
-        let seqNum = oktChain.lcdAccountInfo["value","sequence"].uInt64Value
+        let accNum = oktChain.getLcdfetcher()!.lcdAccountInfo["value","account_number"].uInt64Value
+        let seqNum = oktChain.getLcdfetcher()!.lcdAccountInfo["value","sequence"].uInt64Value
         
         let stdMsg = getToSignMsg(chainId, String(accNum), String(seqNum), msgs, fee, memo)
         let toSignData = try! encoder.encode(stdMsg)
@@ -90,15 +102,15 @@ class L_Generator {
         return stdSignedMsg
     }
     
-    static func genSignatures(_ toSignData: Data, _ accNum: String, _ seqNum: String, _ baseChain: CosmosClass) -> [L_Signature]? {
+    static func genSignatures(_ toSignData: Data, _ accNum: String, _ seqNum: String, _ baseChain: BaseChain) -> [L_Signature]? {
         if (baseChain.accountKeyType.pubkeyType == .COSMOS_Secp256k1) {
-            let signedData = try! ECDSA.compactsign(toSignData.sha256(), privateKey: baseChain.privateKey!)
+            let signedData = SECP256K1.compactsign(toSignData.sha256(), privateKey: baseChain.privateKey!)!
             let publicKey = L_PublicKey.init(COSMOS_KEY_TYPE_PUBLIC, baseChain.publicKey!.base64EncodedString())
             let signature = L_Signature.init(publicKey, signedData.base64EncodedString(), accNum, seqNum)
             return [signature]
             
         }  else if (baseChain.accountKeyType.pubkeyType == .ETH_Keccak256) {
-            let signedData = try! ECDSA.compactsign(HDWalletKit.Crypto.sha3keccak256(data: toSignData), privateKey: baseChain.privateKey!)
+            let signedData = SECP256K1.compactsign(toSignData.sha3(.keccak256), privateKey: baseChain.privateKey!)!
             let publicKey = L_PublicKey.init(ETHERMINT_KEY_TYPE_PUBLIC, baseChain.publicKey!.base64EncodedString())
             let signature = L_Signature.init(publicKey, signedData.base64EncodedString(), accNum, seqNum)
             return [signature]

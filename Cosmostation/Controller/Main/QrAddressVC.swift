@@ -9,113 +9,102 @@
 import UIKit
 
 class QrAddressVC: BaseVC {
-
-    @IBOutlet weak var chainNameLabel: UILabel!
-    @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var evmCompatTag: UILabel!
-    @IBOutlet weak var cosmosTag: UILabel!
-    @IBOutlet weak var keyTypeTag: UILabel!
-    @IBOutlet weak var rqImgView: UIImageView!
-    @IBOutlet weak var addressCardView: FixCardView!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var tapToCopyLabel: UILabel!
-    @IBOutlet weak var shareBtn: BaseButton!
-    @IBOutlet weak var addressToggleBtn: UIButton!
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var evmShareBtn: BaseButton!
+    @IBOutlet weak var bechShareBtn: BaseButton!
     
     var selectedChain: BaseChain!
-    var toDpAddress = ""
+    var isEvm: Bool!
+    var isBech: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
+        isEvm = selectedChain.supportEvm
+        isBech = selectedChain.isCosmos()
         
-        if let evmChain = selectedChain as? EvmClass {
-            addressToggleBtn.isHidden = !evmChain.supportCosmos
-//            cosmosTag.isHidden = !evmChain.supportCosmos
-            toDpAddress = evmChain.evmAddress
-            addressLabel.text = toDpAddress
-            addressLabel.adjustsFontSizeToFitWidth = true
-            if (baseAccount.type == .withMnemonic) {
-                hdPathLabel.text = evmChain.getHDPath(baseAccount.lastHDPath)
-            } else {
-                hdPathLabel.text = ""
-            }
-            
-        } else if let cosmosChain = selectedChain as? CosmosClass {
-            addressToggleBtn.isHidden = true
-            legacyTag.isHidden = cosmosChain.isDefault
-            toDpAddress = cosmosChain.bechAddress
-            addressLabel.text = toDpAddress
-            addressLabel.adjustsFontSizeToFitWidth = true
-            
-            if (baseAccount.type == .withMnemonic) {
-                hdPathLabel.text = cosmosChain.getHDPath(baseAccount.lastHDPath)
-            } else {
-                hdPathLabel.text = ""
-            }
-            
-            //for okt legacy
-            if (selectedChain.tag == "okt996_Keccak") {
-                keyTypeTag.text = "ethsecp256k1"
-                keyTypeTag.isHidden = false
-                
-            } else if (selectedChain.tag == "okt996_Secp") {
-                keyTypeTag.text = "secp256k1"
-                keyTypeTag.isHidden = false
-            }
+        titleLabel.text = baseAccount.name
+        evmShareBtn.isHidden = !isEvm
+        bechShareBtn.isHidden = !isBech
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "PopupReceiveCell", bundle: nil), forCellReuseIdentifier: "PopupReceiveCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderTopPadding = 0.0
+        
+        
+        evmShareBtn.setTitle(NSLocalizedString("str_share_evm_address", comment: ""), for: .normal)
+        bechShareBtn.setTitle(NSLocalizedString("str_share_bech_address", comment: ""), for: .normal)
+        if (isEvm && isBech) {
+            evmShareBtn.titleLabel?.font = .fontSize14Bold
+            bechShareBtn.titleLabel?.font = .fontSize14Bold
+            evmShareBtn.setTitle(NSLocalizedString("str_share_evm_address2", comment: ""), for: .normal)
+            bechShareBtn.setTitle(NSLocalizedString("str_share_bech_address2", comment: ""), for: .normal)
+            evmShareBtn.titleLabel?.textAlignment = .center
+            bechShareBtn.titleLabel?.textAlignment = .center
         }
-        
-        updateQrImage()
-        
-        let copyTap = UITapGestureRecognizer(target: self, action: #selector(onCopyAddress))
-        copyTap.cancelsTouchesInView = false
-        addressCardView.addGestureRecognizer(copyTap)
-//        print("bechAddress ", selectedChain.bechAddress)
-//        print("evmAddress ", selectedChain.evmAddress)
     }
     
-    override func setLocalizedString() {
-        shareBtn.setTitle(NSLocalizedString("str_share", comment: ""), for: .normal)
-        tapToCopyLabel.text = NSLocalizedString("msg_tap_box_to_copy", comment: "")
+    @IBAction func onClickEvmShare(_ sender: BaseButton) {
+        if let evmAddress = selectedChain.evmAddress {
+            let activityViewController = UIActivityViewController(activityItems: [evmAddress], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+        }
     }
     
-    func updateQrImage() {
-        if let qrImage = WUtils.generateQrCode(toDpAddress) {
-            rqImgView.image = UIImage(ciImage: qrImage)
-            let chainLogo = UIImage.init(named: selectedChain.logo1)
-            chainLogo?.addToCenter(of: rqImgView)
+    
+    @IBAction func onClickBechShare(_ sender: BaseButton) {
+        if let bechAddress = selectedChain.bechAddress {
+            let activityViewController = UIActivityViewController(activityItems: [bechAddress], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
         }
-        view.isUserInteractionEnabled = true
     }
+}
 
-    @IBAction func onClickShare(_ sender: BaseButton) {
-        let activityViewController = UIActivityViewController(activityItems: [toDpAddress], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        self.present(activityViewController, animated: true, completion: nil)
+extension QrAddressVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
-    @IBAction func onAddressToggleClick(_ sender: UIButton) {
-        view.isUserInteractionEnabled = false
-        rqImgView.image = nil
-        if let selectedChain = selectedChain as? EvmClass {
-            if (toDpAddress == selectedChain.evmAddress) {
-                toDpAddress = selectedChain.bechAddress
-            } else {
-                toDpAddress = selectedChain.evmAddress
-            }
-            addressLabel.text = toDpAddress
-            addressLabel.adjustsFontSizeToFitWidth = true
-            updateQrImage()
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.section == 0 && !isEvm) {
+            return 0
+        } else if (indexPath.section == 1 && !isBech) {
+            return 0
         }
+        return UITableView.automaticDimension
     }
     
-    @objc func onCopyAddress() {
-        UIPasteboard.general.string = toDpAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"PopupReceiveCell") as! PopupReceiveCell
+        cell.bindReceive(baseAccount, selectedChain, indexPath.section)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var toCopyAddress = ""
+        if selectedChain.supportEvm, indexPath.section == 0 {
+            toCopyAddress = selectedChain.evmAddress!
+        } else if selectedChain.isCosmos(), indexPath.section == 1 {
+            toCopyAddress = selectedChain.bechAddress!
+        }
+        UIPasteboard.general.string = toCopyAddress.trimmingCharacters(in: .whitespacesAndNewlines)
         self.onShowToast(NSLocalizedString("address_copied", comment: ""))
     }
+    
 }
 
 extension UIImage {
@@ -134,3 +123,4 @@ extension UIImage {
         NSLayoutConstraint.activate([width, height, centerXConst, centerYConst])
     }
 }
+

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -113,7 +113,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3bZ-v7-Ffl" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="516.66666666666663" width="377" height="67.333333333333371"/>
+                    <rect key="frame" x="8" y="512.66666666666663" width="377" height="67.333333333333371"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4d-iS-qKx">
                             <rect key="frame" x="12" y="14" width="96" height="14"/>
@@ -150,7 +150,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DuG-t6-g4Y" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="594" width="377" height="150"/>
+                    <rect key="frame" x="8" y="590" width="377" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h46-eU-sVC">
                             <rect key="frame" x="12" y="14" width="36" height="14"/>
@@ -282,7 +282,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OzF-JA-tMf" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="HNO-33-bFQ"/>
@@ -319,7 +319,7 @@
                 <constraint firstItem="5pJ-fA-yFf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="SGR-c2-0Ni"/>
                 <constraint firstItem="5pJ-fA-yFf" firstAttribute="top" secondItem="V8l-AE-vny" secondAttribute="bottom" constant="20" id="a6V-aM-Lo8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5pJ-fA-yFf" secondAttribute="trailing" constant="8" id="bGv-Ep-1ef"/>
-                <constraint firstAttribute="bottom" secondItem="OzF-JA-tMf" secondAttribute="bottom" constant="38" id="cb8-vW-CBn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="OzF-JA-tMf" secondAttribute="bottom" constant="8" id="cb8-vW-CBn"/>
                 <constraint firstItem="V8l-AE-vny" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="fzv-jw-mbY"/>
                 <constraint firstItem="DuG-t6-g4Y" firstAttribute="trailing" secondItem="OzF-JA-tMf" secondAttribute="trailing" id="he5-D4-4sH"/>
                 <constraint firstItem="DuG-t6-g4Y" firstAttribute="leading" secondItem="OzF-JA-tMf" secondAttribute="leading" id="koX-QX-JpA"/>
@@ -332,7 +332,7 @@
     </objects>
     <resources>
         <image name="iconArrowDown" width="24" height="24"/>
-        <image name="tokenDefault" width="22" height="22"/>
+        <image name="tokenDefault" width="48" height="48"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

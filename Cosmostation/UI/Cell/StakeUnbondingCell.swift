@@ -35,8 +35,7 @@ class StakeUnbondingCell: UITableViewCell {
         inactiveTag.isHidden = true
         jailedTag.isHidden = true
     }
-    
-    func onBindMyUnbonding(_ baseChain: CosmosClass, _ validator: Cosmos_Staking_V1beta1_Validator, _ unbonding: UnbondingEntry) {
+    func onBindMyUnbonding(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator, _ unbonding: UnbondingEntry) {
         
         logoImg.af.setImage(withURL: baseChain.monikerImg(validator.operatorAddress))
         nameLabel.text = validator.description_p.moniker
@@ -46,8 +45,8 @@ class StakeUnbondingCell: UITableViewCell {
             inactiveTag.isHidden = validator.status == .bonded
         }
         
-        let stakeDenom = baseChain.stakeDenom!
-        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        if let stakeDenom = baseChain.stakeDenom,
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
             let unbondingAmount = NSDecimalNumber(string: unbonding.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
             unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
             

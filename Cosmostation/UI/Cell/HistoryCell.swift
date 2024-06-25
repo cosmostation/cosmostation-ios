@@ -36,7 +36,7 @@ class HistoryCell: UITableViewCell {
     }
     
     
-    func bindCosmosClassHistory(_ account: BaseAccount, _ chain: CosmosClass, _ history: MintscanHistory) {
+    func bindCosmosClassHistory(_ account: BaseAccount, _ chain: BaseChain, _ history: MintscanHistory) {
         if (history.isSuccess()) {
             successImg.image = UIImage(named: "iconSuccess")
         } else {
@@ -81,10 +81,11 @@ class HistoryCell: UITableViewCell {
             WDP.dpToken(dpToken.erc20, dpToken.amount, nil, denomLabel, amountLabel, nil)
             amountLabel.isHidden = false
             denomLabel.isHidden = false
+            denomLabel.textColor = .color01
         }
     }
     
-    func bindOktHistory(_ account: BaseAccount, _ chain: CosmosClass, _ history: OktHistory) {
+    func bindOktHistory(_ account: BaseAccount, _ chain: BaseChain, _ history: OktHistory) {
         if (history.state != "success") {
             successImg.image = UIImage(named: "iconFail")
         } else {
@@ -98,6 +99,5 @@ class HistoryCell: UITableViewCell {
         
         denomLabel.text = WDP.okcDpTimeGap(Int64(history.transactionTime!))
         denomLabel.isHidden = false
-        
     }
 }

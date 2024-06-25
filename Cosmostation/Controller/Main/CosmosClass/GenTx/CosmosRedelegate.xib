@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -302,7 +302,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWE-qx-ctQ" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="516.66666666666663" width="377" height="67.333333333333371"/>
+                    <rect key="frame" x="8" y="512.66666666666663" width="377" height="67.333333333333371"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="let-Kb-V8y">
                             <rect key="frame" x="12" y="14" width="96" height="14"/>
@@ -339,7 +339,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7D-TL-vzc" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="594" width="377" height="150"/>
+                    <rect key="frame" x="8" y="590" width="377" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPu-2a-MZ8">
                             <rect key="frame" x="12" y="14" width="36" height="14"/>
@@ -471,7 +471,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fOu-Ss-lX6" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="r7z-6x-cQd"/>
@@ -506,7 +506,7 @@
                 <constraint firstItem="nOQ-p3-SXt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="9o4-Fk-Mxq"/>
                 <constraint firstItem="NsS-aG-eMb" firstAttribute="top" secondItem="N3M-NJ-RMu" secondAttribute="bottom" constant="10" id="A06-Xu-CoA"/>
                 <constraint firstItem="fOu-Ss-lX6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="EFL-eQ-YNv"/>
-                <constraint firstAttribute="bottom" secondItem="fOu-Ss-lX6" secondAttribute="bottom" constant="38" id="FRY-sL-fxM"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fOu-Ss-lX6" secondAttribute="bottom" constant="8" id="FRY-sL-fxM"/>
                 <constraint firstItem="c7D-TL-vzc" firstAttribute="top" secondItem="gWE-qx-ctQ" secondAttribute="bottom" constant="10" id="KrD-Hc-dXm"/>
                 <constraint firstItem="NsS-aG-eMb" firstAttribute="leading" secondItem="N3M-NJ-RMu" secondAttribute="leading" id="NF1-yT-5J5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kaC-8P-uEg" secondAttribute="trailing" constant="8" id="SGl-RR-4f2"/>
@@ -529,7 +529,7 @@
         <image name="iconArrowDown" width="24" height="24"/>
         <image name="iconValidatorInactive" width="40" height="40"/>
         <image name="iconValidatorJailed" width="40" height="40"/>
-        <image name="tokenDefault" width="192" height="192"/>
+        <image name="tokenDefault" width="48" height="48"/>
         <image name="validatorDefault" width="40" height="40"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

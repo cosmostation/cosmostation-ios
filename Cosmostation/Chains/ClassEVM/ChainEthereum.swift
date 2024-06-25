@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainEthereum: EvmClass  {
+class ChainEthereum: BaseChain {
     
     override init() {
         super.init()
@@ -16,17 +16,16 @@ class ChainEthereum: EvmClass  {
         name = "Ethereum"
         tag = "ethereum60"
         logo1 = "chainEthereum"
-        logo2 = "chainEthereum2"
         apiName = "ethereum"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
+        
+        supportEvm = true
         coinSymbol = "ETH"
         coinGeckoId = "ethereum"
         coinLogo = "tokenEth"
-        
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
-        
         evmRpcURL = "https://rpc-ethereum-evm.cosmostation.io/rpc"
         
+        initFetcher()
     }
-    
 }

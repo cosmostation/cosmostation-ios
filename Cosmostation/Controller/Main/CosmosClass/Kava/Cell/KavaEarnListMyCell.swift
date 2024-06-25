@@ -28,7 +28,7 @@ class KavaEarnListMyCell: UITableViewCell {
         rootView.setBlur()
     }
     
-    func onBindEarnsView(_ chain: CosmosClass, _ deposits: [Cosmos_Base_V1beta1_Coin]) {
+    func onBindEarnsView(_ chain: BaseChain, _ deposits: [Cosmos_Base_V1beta1_Coin]) {
         var sum = NSDecimalNumber.zero
         deposits.forEach { coin in
             sum = sum.adding(NSDecimalNumber.init(string: coin.amount))
@@ -37,7 +37,7 @@ class KavaEarnListMyCell: UITableViewCell {
         if let kavaAsset = BaseData.instance.getAsset(chain.apiName, "ukava") {
             WDP.dpCoin(kavaAsset, sum, nil, myLiquidityDenomLabel, myLiquidityAmountLabel, kavaAsset.decimals)
             
-            let availableAmount = chain.balanceAmount(chain.stakeDenom)
+            let availableAmount = chain.getGrpcfetcher()!.balanceAmount(chain.stakeDenom!)
             WDP.dpCoin(kavaAsset, availableAmount, nil, myAvailableDenomLabel, myAvailableAmountLabel, kavaAsset.decimals)
         }
     }

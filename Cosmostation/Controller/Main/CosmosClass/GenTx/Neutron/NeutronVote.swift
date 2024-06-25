@@ -9,9 +9,6 @@
 import UIKit
 import Lottie
 import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class NeutronVote: BaseVC {
     
@@ -37,6 +34,7 @@ class NeutronVote: BaseVC {
     
     
     var selectedChain: ChainNeutron!
+    var grpcFetcher: NeutronFetcher!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -50,6 +48,7 @@ class NeutronVote: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        grpcFetcher = selectedChain.neutronFetcher
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -90,7 +89,7 @@ class NeutronVote: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -119,7 +118,7 @@ class NeutronVote: BaseVC {
         baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240)
+        onStartSheet(baseSheet, 240, 0.6)
     }
     
     func onUpdateFeeView() {
@@ -162,21 +161,20 @@ class NeutronVote: BaseVC {
         loadingView.isHidden = false
         
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
-                do {
-                    let simul = try await simulateTx(channel, auth!)
-                    DispatchQueue.main.async {
-                        self.onUpdateWithSimul(simul)
-                    }
-                    
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
+            do {
+                let account = try await grpcFetcher.fetchAuth()
+                let simulReq = Signer.genWasmSimul(account!, onBindWasmMsg(), txFee, txMemo, selectedChain)
+                let simulRes = try await grpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -188,8 +186,8 @@ class NeutronVote: BaseVC {
             let jsonMsg: JSON = ["vote" : ["proposal_id" : single["id"].int64Value, "vote" : single["myVote"].stringValue]]
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.bechAddress
-                $0.contract = selectedChain.daosList?[0]["proposal_modules"].arrayValue[0]["address"].stringValue ?? ""
+                $0.sender = selectedChain.bechAddress!
+                $0.contract = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"].arrayValue[0]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             result.append(msg)
@@ -198,8 +196,8 @@ class NeutronVote: BaseVC {
             let jsonMsg: JSON = ["vote" : ["proposal_id" : multi["id"].int64Value, "vote" : ["option_id" : multi["myVote"].intValue ]]]
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.bechAddress
-                $0.contract = selectedChain.daosList?[0]["proposal_modules"].arrayValue[1]["address"].stringValue ?? ""
+                $0.sender = selectedChain.bechAddress!
+                $0.contract = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"].arrayValue[1]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             result.append(msg)
@@ -208,8 +206,8 @@ class NeutronVote: BaseVC {
             let jsonMsg: JSON = ["vote" : ["proposal_id" : overrule["id"].int64Value, "vote" : overrule["myVote"].stringValue]]
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-                $0.sender = selectedChain.bechAddress
-                $0.contract = selectedChain.daosList?[0]["proposal_modules"].arrayValue[2]["address"].stringValue ?? ""
+                $0.sender = selectedChain.bechAddress!
+                $0.contract = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"].arrayValue[2]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             result.append(msg)
@@ -328,58 +326,26 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
             view.isUserInteractionEnabled = false
             voteBtn.isEnabled = false
             loadingView.isHidden = false
+            
             Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
-                   let response = try await broadcastTx(channel, auth!) {
+                do {
+                    let account = try await grpcFetcher.fetchAuth()
+                    let broadReq = Signer.genWasmTx(account!, onBindWasmMsg(), txFee, txMemo, selectedChain)
+                    let response = try await grpcFetcher.broadcastTx(broadReq)
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
-                        
                         let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
                         txResult.selectedChain = self.selectedChain
                         txResult.broadcastTxResponse = response
                         txResult.modalPresentationStyle = .fullScreen
                         self.present(txResult, animated: true)
                     })
+                    
+                } catch {
+                    //TODO handle Error
                 }
             }
         }
     }
     
-}
-
-
-extension NeutronVote {
-    
-    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func simulateTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, onBindWasmMsg(), txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, onBindWasmMsg(), txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
-    }
 }

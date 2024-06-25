@@ -18,7 +18,7 @@ class CosmosHistoryVC: BaseVC {
     @IBOutlet weak var emptyDataView: UIView!
     var refresher: UIRefreshControl!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var msHistoryGroup = Array<MintscanHistoryGroup>()
     var msHistoyID = ""
     var msHasMore = false
@@ -59,8 +59,8 @@ class CosmosHistoryVC: BaseVC {
     }
     
     @objc func onRequestFetch() {
-        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-            onFetchOktHistory(selectedChain.evmAddress)
+        if (selectedChain.name == "OKT") {
+            onFetchOktHistory(selectedChain.evmAddress!)
             
         } else {
             msHistoyID = ""
@@ -143,7 +143,7 @@ class CosmosHistoryVC: BaseVC {
 extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain.name == "OKT") {
             return 1
         } else {
             return msHistoryGroup.count
@@ -152,7 +152,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain.name == "OKT") {
             view.titleLabel.text = "History"
             view.cntLabel.text = String(oktHistoey.count)
             
@@ -173,7 +173,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain.name == "OKT") {
             return oktHistoey.count
             
         } else {
@@ -184,7 +184,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as! HistoryCell
-        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain.name == "OKT") {
             let history = oktHistoey[indexPath.row]
             cell.bindOktHistory(baseAccount, selectedChain, history)
             
@@ -196,7 +196,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if (!(selectedChain is ChainOktEVM) && !(selectedChain is ChainOkt996Keccak)) {
+        if (selectedChain.name != "OKT") {
             if (indexPath.section == self.msHistoryGroup.count - 1
                 && indexPath.row == self.msHistoryGroup.last!.values.count - 1
                 && msHasMore == true) {
@@ -208,7 +208,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var hash: String?
-        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain.name == "OKT") {
             hash = oktHistoey[indexPath.row].txId
             
         } else {

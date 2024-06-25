@@ -8,25 +8,25 @@
 
 import Foundation
 
-class ChainAlthea118: CosmosClass  {
+class ChainAlthea118: BaseChain {
     
     override init() {
         super.init()
         
-        isDefault = false
-        
         name = "Althea"
         tag = "althea118"
         logo1 = "chainAlthea"
-        logo2 = "chainAlthea2"
+        isDefault = false
         apiName = "althea"
-        stakeDenom = "aalthea"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "aalthea"
         bechAccountPrefix = "althea"
         validatorPrefix = "altheavaloper"
-        
         grpcHost = "grpc-althea.cosmostation.io"
+        
+        initFetcher()
     }
 }
-

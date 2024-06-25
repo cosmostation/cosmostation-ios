@@ -74,14 +74,14 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectCreateAccount
-        onStartSheet(baseSheet)
+        onStartSheet(baseSheet, 320, 0.6)
     }
     
     func onShowRenameSheet(_ account: BaseAccount) {
         let renameSheet = RenameSheet(nibName: "RenameSheet", bundle: nil)
         renameSheet.toUpdateAccount = account
         renameSheet.renameDelegate = self
-        self.onStartSheet(renameSheet, 240)
+        onStartSheet(renameSheet, 240, 0.6)
     }
     
     func onShowDeleteSheet(_ account: BaseAccount) {
@@ -89,7 +89,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
         let deleteAccountSheet = DeleteAccountSheet(nibName: "DeleteAccountSheet", bundle: nil)
         deleteAccountSheet.toDeleteAccount = account
         deleteAccountSheet.deleteDelegate = self
-        self.onStartSheet(deleteAccountSheet, 280)
+        onStartSheet(deleteAccountSheet, 280, 0.6)
     }
     
     func onCheckPinforMnemonic(_ account: BaseAccount) {
@@ -205,6 +205,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                     let checkMenmonicVC = CheckMenmonicVC(nibName: "CheckMenmonicVC", bundle: nil)
                     checkMenmonicVC.toCheckAccount = self.toCheckAccount
                     self.navigationItem.title = ""
+                    self.navigationItem.backButtonTitle = ""
                     self.navigationController?.pushViewController(checkMenmonicVC, animated: true)
                 });
                 
@@ -213,6 +214,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                     let checkPrivateKeysVC = CheckPrivateKeysVC(nibName: "CheckPrivateKeysVC", bundle: nil)
                     checkPrivateKeysVC.toCheckAccount = self.toCheckAccount
                     self.navigationItem.title = ""
+                    self.navigationItem.backButtonTitle = ""
                     self.navigationController?.pushViewController(checkPrivateKeysVC, animated: true)
                 });
                 
@@ -221,6 +223,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                     let checkPrivateKeyVC = CheckPrivateKeyVC(nibName: "CheckPrivateKeyVC", bundle: nil)
                     checkPrivateKeyVC.toCheckAccount = self.toCheckAccount
                     self.navigationItem.title = ""
+                    self.navigationItem.backButtonTitle = ""
                     self.navigationController?.pushViewController(checkPrivateKeyVC, animated: true)
                 });
             }
@@ -288,14 +291,14 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource, UITableView
             baseSheet.sheetDelegate = self
             baseSheet.selectedAccount = mnmonicAccounts[indexPath.row]
             baseSheet.sheetType = .SelectOptionMnemonicAccount
-            onStartSheet(baseSheet)
+            onStartSheet(baseSheet, 320, 0.6)
             
         } else if (indexPath.section == 1) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
             baseSheet.selectedAccount = pkeyAccounts[indexPath.row]
             baseSheet.sheetType = .SelectOptionPrivateKeyAccount
-            onStartSheet(baseSheet)
+            onStartSheet(baseSheet, 320, 0.6)
         }
     }
     

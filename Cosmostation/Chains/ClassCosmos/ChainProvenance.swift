@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainProvenance: CosmosClass  {
+class ChainProvenance: BaseChain  {
     
     override init() {
         super.init()
@@ -16,14 +16,16 @@ class ChainProvenance: CosmosClass  {
         name = "Provenance"
         tag = "provenance505"
         logo1 = "chainProvenance"
-        logo2 = "chainProvenance2"
         apiName = "provenance"
-        stakeDenom = "nhash"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/505'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "nhash"
         bechAccountPrefix = "pb"
         validatorPrefix = "pbvaloper"
-        
         grpcHost = "grpc-provenance.cosmostation.io"
+        
+        initFetcher()
     }
 }

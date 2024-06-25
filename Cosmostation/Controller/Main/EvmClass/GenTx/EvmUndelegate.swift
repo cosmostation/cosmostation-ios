@@ -11,6 +11,8 @@ import Lottie
 import web3swift
 import BigInt
 
+class EvmUndelegate: BaseVC {}
+/*
 class EvmUndelegate: BaseVC {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -49,6 +51,7 @@ class EvmUndelegate: BaseVC {
     var availableAmount = NSDecimalNumber.zero
     var undelegateAmount: NSDecimalNumber? = NSDecimalNumber.zero
     
+    
     var selectedChain: EvmClass!
     var evmTx: EthereumTransaction?
     var evmGasTitle: [String] = [NSLocalizedString("str_low", comment: ""), NSLocalizedString("str_average", comment: ""), NSLocalizedString("str_high", comment: "")]
@@ -79,6 +82,7 @@ class EvmUndelegate: BaseVC {
             DispatchQueue.global().async { [self] in
                 do {
                     self.web3 = try Web3.new(url)
+ let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil)
                 } catch {
                     DispatchQueue.main.async {
                         self.dismiss(animated: true)
@@ -102,7 +106,7 @@ class EvmUndelegate: BaseVC {
         baseSheet.targetChain = selectedChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectUnStakeValidator
-        onStartSheet(baseSheet, 680)
+        onStartSheet(baseSheet, 680, 0.8)
     }
     
     func onUpdateValidatorView() {
@@ -134,7 +138,7 @@ class EvmUndelegate: BaseVC {
         }
         amountSheet.sheetDelegate = self
         amountSheet.sheetType = .TxDelegate
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     func onUpdateAmountView(_ amount: String) {
@@ -261,7 +265,6 @@ class EvmUndelegate: BaseVC {
         let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
         self.present(pinVC, animated: true)
     }
-
 }
 
 
@@ -314,3 +317,4 @@ extension EvmUndelegate: BaseSheetDelegate, AmountSheetDelegate, PinDelegate {
         }
     }
 }
+*/

@@ -13,35 +13,27 @@ class CheckPrivateKeyCell: UITableViewCell {
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var evmCompatTag: UILabel!
-    @IBOutlet weak var keyTypeTag: UILabel!
+    @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var pkeyLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        legacyTag.isHidden = true
+        keyTypeTag.isHidden = true
         rootView.setBlur()
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
-        evmCompatTag.isHidden = true
+        super.prepareForReuse()
         legacyTag.isHidden = true
         keyTypeTag.isHidden = true
+        rootView.setBlur()
     }
     
-    func bindEvmClassPrivateKey(_ account: BaseAccount, _ chain: EvmClass) {
-        logoImg1.image =  UIImage.init(named: chain.logo1)
-        nameLabel.text = chain.name.uppercased()
-        
-        hdPathLabel.text = chain.getHDPath(account.lastHDPath)
-        pkeyLabel.text = "0x" + chain.privateKey!.toHexString()
-    }
-    
-    
-    func bindCosmosClassPrivateKey(_ account: BaseAccount, _ chain: CosmosClass) {
+    func bindPrivateKey(_ account: BaseAccount, _ chain: BaseChain) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         
@@ -49,13 +41,5 @@ class CheckPrivateKeyCell: UITableViewCell {
         pkeyLabel.text = "0x" + chain.privateKey!.toHexString()
         
         legacyTag.isHidden = chain.isDefault
-        if (chain.tag == "okt996_Keccak") {
-            keyTypeTag.text = "ethsecp256k1"
-            keyTypeTag.isHidden = false
-            
-        } else if (chain.tag == "okt996_Secp") {
-            keyTypeTag.text = "secp256k1"
-            keyTypeTag.isHidden = false
-        }
     }
 }

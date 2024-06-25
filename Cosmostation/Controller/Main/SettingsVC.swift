@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import web3swift
+import Web3Core
 import Lottie
 
 class SettingsVC: BaseVC {
@@ -86,7 +86,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         } else if (section == 1) {
             return 8
         } else if (section == 2) {
-            return 6
+            return 2
         } else if (section == 3) {
             return 5
         }
@@ -180,29 +180,12 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (indexPath.section == 2) {
             if (indexPath.row == 0) {
-                baseCell.onBindSetMintscan()
+                baseCell.onBindSetGuide()
                 return baseCell
                 
             } else if (indexPath.row == 1) {
                 baseCell.onBindSetHomePage()
                 return baseCell
-                
-            } else if (indexPath.row == 2) {
-                baseCell.onBindSetBlog()
-                return baseCell
-                
-            } else if (indexPath.row == 3) {
-                baseCell.onBindSetTwitter()
-                return baseCell
-                
-            } else if (indexPath.row == 4) {
-                baseCell.onBindSetTellegram()
-                return baseCell
-                
-            } else if (indexPath.row == 5) {
-                baseCell.onBindSetYoutube()
-                return baseCell
-                
             }
             
         } else if (indexPath.section == 3) {
@@ -264,13 +247,13 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchLanguage
-                onStartSheet(baseSheet)
+                onStartSheet(baseSheet, 320, 0.6)
                 
             } else if (indexPath.row == 1) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchCurrency
-                onStartSheet(baseSheet)
+                onStartSheet(baseSheet, 320, 0.9)
                 
             } else if (indexPath.row == 2) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
@@ -287,63 +270,31 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchPriceColor
-                onStartSheet(baseSheet, 240)
+                onStartSheet(baseSheet, 240, 0.6)
                 
             } else if (indexPath.row == 7) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchAutoPass
-                onStartSheet(baseSheet)
+                onStartSheet(baseSheet, 320, 0.6)
             }
             
         } else if (indexPath.section == 2) {
             if (indexPath.row == 0) {
-                guard let url = URL(string: MintscanUrl) else { return }
-                onShowSafariWeb(url)
+                if (BaseData.instance.getLanguage() == 2) {
+                    guard let url = URL(string: "https://www.cosmostation.io/kr/support/mobile") else { return }
+                    onShowSafariWeb(url)
+                } else if (BaseData.instance.getLanguage() == 3) {
+                    guard let url = URL(string: "https://www.cosmostation.io/jp/support/mobile") else { return }
+                    onShowSafariWeb(url)
+                } else {
+                    guard let url = URL(string: "https://www.cosmostation.io/en/support/mobile") else { return }
+                    onShowSafariWeb(url)
+                }
                 
             } else if (indexPath.row == 1) {
                 guard let url = URL(string: "https://www.cosmostation.io") else { return }
                 onShowSafariWeb(url)
-                
-            } else if (indexPath.row == 2) {
-                guard let url = URL(string: "https://medium.com/cosmostation") else { return }
-                onShowSafariWeb(url)
-                
-            } else if (indexPath.row == 3) {
-                guard let url = URL(string: "https://twitter.com/CosmostationVD") else { return }
-                if (UIApplication.shared.canOpenURL(url)) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                } else {
-                    onShowSafariWeb(url)
-                }
-                
-            } else if (indexPath.row == 4) {
-                let url = URL(string: "tg://resolve?domain=cosmostation")
-                if (UIApplication.shared.canOpenURL(url!)) {
-                    UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-                    
-                } else {
-                    let alert = UIAlertController(title: "", message: NSLocalizedString("error_no_telegram", comment: ""), preferredStyle: .alert)
-                    alert.overrideUserInterfaceStyle = .dark
-                    let action = UIAlertAction(title: "Download And Install", style: .default, handler: { _ in
-                        let urlAppStore = URL(string: "itms-apps://itunes.apple.com/app/id686449807")
-                        if (UIApplication.shared.canOpenURL(urlAppStore!)) {
-                            UIApplication.shared.open(urlAppStore!, options: [:], completionHandler: nil)
-                        }
-                    })
-                    let actionCancel = UIAlertAction(title: NSLocalizedString("str_cancel", comment: ""), style: .cancel, handler: nil)
-                    alert.addAction(action)
-                    alert.addAction(actionCancel)
-                    self.present(alert, animated: true, completion: nil)
-                }
-                
-            } else if (indexPath.row == 5) {
-                guard let url = URL(string: "https://www.youtube.com/@cosmostationio") else { return }
-                if (UIApplication.shared.canOpenURL(url)) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                } else {
-                    onShowSafariWeb(url)
-                }
             }
             
         } else if (indexPath.section == 3) {
@@ -393,7 +344,7 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SwitchAccount
-        onStartSheet(baseSheet)
+        onStartSheet(baseSheet, 320, 0.6)
     }
 
     public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
@@ -485,12 +436,13 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
         }
         
         let data = Data(base64Encoded: scanedStr.data(using: .utf8)!)
-        if (data?.dataToHexString().starts(with: "53616c74") == true) {
+        if (data?.toHexString().starts(with: "53616c74") == true) {
+//            if (data?.dataToHexString().starts(with: "53616c74") == true) {
             //start with salted
             let qrImportCheckKeySheet = QrImportCheckKeySheet(nibName: "QrImportCheckKeySheet", bundle: nil)
             qrImportCheckKeySheet.toDecryptString = scanedStr
             qrImportCheckKeySheet.qrImportCheckKeyDelegate = self
-            onStartSheet(qrImportCheckKeySheet, 240)
+            onStartSheet(qrImportCheckKeySheet, 240, 0.6)
             return
         }
         onShowToast(NSLocalizedString("error_unknown_qr_code", comment: ""))

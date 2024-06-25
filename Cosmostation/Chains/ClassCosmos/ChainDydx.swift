@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainDydx: CosmosClass  {
+class ChainDydx: BaseChain  {
     
     override init() {
         super.init()
@@ -16,15 +16,17 @@ class ChainDydx: CosmosClass  {
         name = "Dydx"
         tag = "dydx118"
         logo1 = "chainDydx"
-        logo2 = "chainDydx2"
         apiName = "dydx"
-        stakeDenom = "adydx"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "adydx"
         bechAccountPrefix = "dydx"
         validatorPrefix = "dydxvaloper"
-        
         grpcHost = "grpc-dydx.cosmostation.io"
+        
+        initFetcher()
     }
 }
 

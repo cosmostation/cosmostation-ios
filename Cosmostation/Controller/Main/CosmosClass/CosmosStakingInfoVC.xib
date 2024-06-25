@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,11 +29,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EAi-3C-2oH">
-                    <rect key="frame" x="0.0" y="59" width="393" height="693"/>
+                    <rect key="frame" x="0.0" y="59" width="393" height="689"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="624-lZ-p19" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="wFl-SE-Stx"/>
@@ -72,7 +72,7 @@
                 <constraint firstItem="wWP-Dn-0KN" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" constant="-40" id="NX0-kp-VSC"/>
                 <constraint firstItem="624-lZ-p19" firstAttribute="top" secondItem="EAi-3C-2oH" secondAttribute="bottom" constant="8" id="QZb-Mn-mbH"/>
                 <constraint firstItem="624-lZ-p19" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="VtP-PC-MkV"/>
-                <constraint firstAttribute="bottom" secondItem="624-lZ-p19" secondAttribute="bottom" constant="38" id="XAw-yA-Cmf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="624-lZ-p19" secondAttribute="bottom" constant="8" id="XAw-yA-Cmf"/>
                 <constraint firstItem="wWP-Dn-0KN" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="bCS-QP-xs0"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="624-lZ-p19" secondAttribute="trailing" constant="8" id="qzY-XD-JmH"/>
                 <constraint firstItem="0j9-dh-zkZ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="wPb-Ht-7gb"/>

@@ -18,7 +18,7 @@ class CosmosProposalsVC: BaseVC {
     @IBOutlet weak var voteBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     
     var votingPeriods = Array<MintscanProposal>()
     var etcPeriods = Array<MintscanProposal>()
@@ -103,7 +103,7 @@ class CosmosProposalsVC: BaseVC {
         
         Task {
             if let proposals = try? await fetchProposals(selectedChain),
-               let votes = try? await fetchMyVotes(selectedChain, selectedChain.bechAddress) {
+               let votes = try? await fetchMyVotes(selectedChain, selectedChain.bechAddress!) {
                 proposals.forEach { proposal in
                     let msProposal = MintscanProposal(proposal)
                     if (msProposal.isVotingPeriod()) {
@@ -142,11 +142,12 @@ class CosmosProposalsVC: BaseVC {
             return
         }
         
-        let delegated = selectedChain.delegationAmountSum()
-        let voteThreshold = selectedChain.voteThreshold()
-        if (delegated.compare(voteThreshold).rawValue <= 0) {
-            onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
-            return
+        if let delegated = selectedChain.getGrpcfetcher()?.delegationAmountSum() {
+            let voteThreshold = selectedChain.voteThreshold()
+            if (delegated.compare(voteThreshold).rawValue <= 0) {
+                onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
+                return
+            }
         }
         
         var toVoteProposals = [MintscanProposal]()
@@ -156,16 +157,16 @@ class CosmosProposalsVC: BaseVC {
             }
         }
         
-        if (selectedChain is ChainBeraEVM) {
+        if (selectedChain is ChainBeraEVM_T) {
             if (toVoteProposals.count > 1) {
                 onShowToast(NSLocalizedString("error_bera_vote_one_proposal", comment: ""))
                 return
             }
-            let vote = EvmVote(nibName: "EvmVote", bundle: nil)
-            vote.selectedChain = selectedChain as? EvmClass
-            vote.toVoteProposals = toVoteProposals
-            vote.modalTransitionStyle = .coverVertical
-            self.present(vote, animated: true)
+//            let vote = EvmVote(nibName: "EvmVote", bundle: nil)
+//            vote.selectedChain = selectedChain as? EvmClass
+//            vote.toVoteProposals = toVoteProposals
+//            vote.modalTransitionStyle = .coverVertical
+//            self.present(vote, animated: true)
             
         } else {
             let vote = CosmosVote(nibName: "CosmosVote", bundle: nil)

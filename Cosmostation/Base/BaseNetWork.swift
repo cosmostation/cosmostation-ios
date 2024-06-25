@@ -26,6 +26,10 @@ class BaseNetWork {
             }
     }
     
+    func fetchChainParams() async throws -> JSON {
+        return try await AF.request(BaseNetWork.msChainParams(), method: .get).serializingDecodable(JSON.self).value
+    }
+    
     func fetchPrices(_ force: Bool? = false) {
 //        print("fetchPrices ", BaseNetWork.msPricesUrl())
         if (!BaseData.instance.needPriceUpdate() && force == false) { return }
@@ -97,8 +101,16 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v10/assets/" +  chain.apiName + "/cw20/info"
     }
     
+    static func msCw20InfoUrl(_ apiName: String) -> String {
+        return MINTSCAN_API_URL + "v10/assets/" +  apiName + "/cw20/info"
+    }
+    
     static func msErc20InfoUrl(_ chain: BaseChain) -> String {
         return MINTSCAN_API_URL + "v10/assets/" +  chain.apiName + "/erc20/info"
+    }
+    
+    static func msErc20InfoUrl(_ apiName: String) -> String {
+        return MINTSCAN_API_URL + "v10/assets/" +  apiName + "/erc20/info"
     }
     
     static func msChainParams() -> String {
@@ -107,6 +119,10 @@ class BaseNetWork {
     
     static func msCw721InfoUrl(_ chain: BaseChain) -> String {
         return ResourceBase + chain.apiName + "/cw721.json"
+    }
+    
+    static func msCw721InfoUrl(_ apiName: String) -> String {
+        return ResourceBase + apiName + "/cw721.json"
     }
     
     static func msProposals(_ chain: BaseChain) -> String {
@@ -119,6 +135,10 @@ class BaseNetWork {
     
     static func msNftDetail(_ chain: BaseChain, _ contractAddress: String, _ tokenId: String) -> String {
         return MINTSCAN_API_URL + "v10/" + chain.apiName + "/contracts/" + contractAddress + "/nft-url/" + tokenId
+    }
+    
+    static func msNftDetail(_ apiName: String, _ contractAddress: String, _ tokenId: String) -> String {
+        return MINTSCAN_API_URL + "v10/" + apiName + "/contracts/" + contractAddress + "/nft-url/" + tokenId
     }
     
     static func SkipChains() -> String {
@@ -135,56 +155,6 @@ class BaseNetWork {
     
     static func SkipMsg() -> String {
         return SKIP_API_URL + "v1/fungible/msgs"
-    }
-}
-
-
-//LCD call for legacy chains
-extension BaseNetWork {
-    
-    static func lcdNodeInfoUrl(_ chain: BaseChain) -> String {
-        if (chain.tag.starts(with: "okt")) {
-            return OKT_LCD + "node_info"
-        }
-        return ""
-    }
-    
-    static func lcdAccountInfoUrl(_ chain: BaseChain, _ address: String) -> String {
-        if (chain.tag.starts(with: "okt")) {
-            return OKT_LCD + "auth/accounts/" + address
-        }
-        return ""
-    }
-    
-    static func lcdOktDepositUrl(_ address: String) -> String {
-        return OKT_LCD + "staking/delegators/" + address
-    }
-    
-    static func lcdOktWithdrawUrl(_ address: String) -> String {
-        return OKT_LCD + "staking/delegators/" + address + "/unbonding_delegations"
-    }
-    
-    static func lcdOktTokenUrl() -> String {
-        return OKT_LCD + "tokens"
-    }
-    
-    static func lcdOktValidatorsUrl() -> String {
-        return OKT_LCD + "staking/validators"
-    }
-    
-    static func broadcastUrl(_ chain: BaseChain) -> String {
-        if (chain is ChainOkt996Keccak) {
-            return OKT_LCD + "txs"
-        }
-        return ""
-    }
-    
-    
-    static func swapIdBep3Url(_ toChain: BaseChain, _ id: String) -> String {
-        if (toChain.tag.starts(with: "kava")) {
-            return KAVA_LCD + "kava/bep3/v1beta1/atomicswap/" + id
-        }
-        return ""
     }
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainQuicksilver: CosmosClass  {
+class ChainQuicksilver: BaseChain  {
     
     override init() {
         super.init()
@@ -16,14 +16,16 @@ class ChainQuicksilver: CosmosClass  {
         name = "Quicksilver"
         tag = "quicksilver118"
         logo1 = "chainQuicksilver"
-        logo2 = "chainQuicksilver2"
         apiName = "quicksilver"
-        stakeDenom = "uqck"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uqck"
         bechAccountPrefix = "quick"
         validatorPrefix = "quickvaloper"
-        
         grpcHost = "grpc-quicksilver.cosmostation.io"
+        
+        initFetcher()
     }
 }

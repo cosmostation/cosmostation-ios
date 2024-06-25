@@ -39,8 +39,8 @@ class SelectEndpointCell: UITableViewCell {
     }
     
     func onBindGrpcEndpoint(_ position: Int, _ chain: BaseChain) {
-        if let cosmosChain = chain as? CosmosClass {
-            let endpoint = cosmosChain.getChainListParam()["grpc_endpoint"].arrayValue[position]
+        if let grpcFetcher = chain.grpcFetcher {
+            let endpoint = chain.getChainListParam()["grpc_endpoint"].arrayValue[position]
             providerLabel.text = endpoint["provider"].string
             endpointLabel.text = endpoint["url"].string
             endpointLabel.adjustsFontSizeToFitWidth = true
@@ -49,7 +49,7 @@ class SelectEndpointCell: UITableViewCell {
             let host = endpoint["url"].stringValue.components(separatedBy: ":")[0].trimmingCharacters(in: .whitespaces)
             let port = Int(endpoint["url"].stringValue.components(separatedBy: ":")[1].trimmingCharacters(in: .whitespaces)) ?? 443
             
-            seletedImg.isHidden = (cosmosChain.getGrpc().host != host)
+            seletedImg.isHidden = (grpcFetcher.getGrpc().host != host)
             
             Task {
                 let channel = getConnection(host, port)
@@ -89,8 +89,8 @@ class SelectEndpointCell: UITableViewCell {
     }
     
     func onBindEvmEndpoint(_ position: Int, _ chain: BaseChain) {
-        if let evmChain = chain as? EvmClass {
-            let endpoint = evmChain.getChainListParam()["evm_rpc_endpoint"].arrayValue[position]
+        if let evmFetcher = chain.evmFetcher  {
+            let endpoint = chain.getChainListParam()["evm_rpc_endpoint"].arrayValue[position]
             providerLabel.text = endpoint["provider"].string
             endpointLabel.text = endpoint["url"].string?.replacingOccurrences(of: "https://", with: "")
             endpointLabel.adjustsFontSizeToFitWidth = true
@@ -98,7 +98,7 @@ class SelectEndpointCell: UITableViewCell {
             let checkTime = CFAbsoluteTimeGetCurrent()
             let url = endpoint["url"].stringValue
             
-            seletedImg.isHidden = (evmChain.getEvmRpc() != url)
+            seletedImg.isHidden = (evmFetcher.getEvmRpc() != url)
             
             let param: Parameters = ["method": "eth_getBalance", "params": ["0x8D97689C9818892B700e27F316cc3E41e17fBeb9", "latest"], "id" : 1, "jsonrpc" : "2.0"]
             AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in

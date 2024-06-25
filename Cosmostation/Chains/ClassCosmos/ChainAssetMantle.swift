@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainAssetMantle: CosmosClass  {
+class ChainAssetMantle: BaseChain  {
     
     override init() {
         super.init()
@@ -16,15 +16,16 @@ class ChainAssetMantle: CosmosClass  {
         name = "AssetMantle"
         tag = "assetmantle118"
         logo1 = "chainAssetmantle"
-        logo2 = "chainAssetmantle2"
         apiName = "asset-mantle"
-        stakeDenom = "umntl"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "umntl"
         bechAccountPrefix = "mantle"
         validatorPrefix = "mantlevaloper"
-        
         grpcHost = "grpc-asset-mantle.cosmostation.io"
+        
+        initFetcher()
     }
-    
 }

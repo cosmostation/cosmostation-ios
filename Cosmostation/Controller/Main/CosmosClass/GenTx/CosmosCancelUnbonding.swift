@@ -8,10 +8,6 @@
 
 import UIKit
 import Lottie
-import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class CosmosCancelUnbonding: BaseVC {
     
@@ -38,7 +34,8 @@ class CosmosCancelUnbonding: BaseVC {
     @IBOutlet weak var cancelBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
+    var grpcFetcher: FetcherGrpc!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var toCancel: Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation!
@@ -51,6 +48,7 @@ class CosmosCancelUnbonding: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        grpcFetcher = selectedChain.getGrpcfetcher()
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -69,7 +67,7 @@ class CosmosCancelUnbonding: BaseVC {
         txFee = selectedChain.getInitPayableFee()
         
         
-        if let validator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == unbondingEntry.validatorAddress }).first {
+        if let validator = grpcFetcher.cosmosValidators.filter({ $0.operatorAddress == unbondingEntry.validatorAddress }).first {
             validatorsLabel.text = validator.description_p.moniker
         }
         
@@ -116,14 +114,14 @@ class CosmosCancelUnbonding: BaseVC {
         baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240)
+        onStartSheet(baseSheet, 240, 0.6)
     }
     
     @objc func onClickMemo() {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -166,7 +164,7 @@ class CosmosCancelUnbonding: BaseVC {
         
         let toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = selectedChain.stakeDenom!; $0.amount = unbondingEntry.entry.balance }
         toCancel = Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation.with {
-            $0.delegatorAddress = selectedChain.bechAddress
+            $0.delegatorAddress = selectedChain.bechAddress!
             $0.validatorAddress = unbondingEntry.validatorAddress
             $0.creationHeight = unbondingEntry.entry.creationHeight
             $0.amount = toCoin
@@ -176,27 +174,20 @@ class CosmosCancelUnbonding: BaseVC {
         }
         
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
-                do {
-                    let simul = try await simulateTx(channel, auth!)
-                    DispatchQueue.main.async {
-                        self.onUpdateWithSimul(simul)
-                    }
-                    
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        if ("\(error)".contains("unable to resolve type")) {
-                            self.onShowToast(NSLocalizedString("error_not_support_cancel_unbonding", comment: ""))
-                            return
-                            
-                        } else {
-                            self.onShowToast("Error : " + "\n" + "\(error)")
-                            return
-                        }
-                    }
+            do {
+                let account = try await grpcFetcher.fetchAuth()
+                let simulReq = Signer.genCancelUnbondingSimul(account!, toCancel, txFee, txMemo, selectedChain)
+                let simulRes = try await grpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -226,9 +217,10 @@ extension CosmosCancelUnbonding: BaseSheetDelegate, MemoDelegate, PinDelegate {
             cancelBtn.isEnabled = false
             loadingView.isHidden = false
             Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
-                   let response = try await broadcastTx(channel, auth!) {
+                do {
+                    let account = try await grpcFetcher.fetchAuth()
+                    let broadReq = Signer.genCancelUnbondingTx(account!, toCancel, txFee, txMemo, selectedChain)
+                    let response = try await grpcFetcher.broadcastTx(broadReq)
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         
@@ -238,43 +230,11 @@ extension CosmosCancelUnbonding: BaseSheetDelegate, MemoDelegate, PinDelegate {
                         txResult.modalPresentationStyle = .fullScreen
                         self.present(txResult, animated: true)
                     })
+                    
+                } catch {
+                    //TODO handle Error
                 }
             }
         }
-    }
-}
-
-
-extension CosmosCancelUnbonding {
-    
-    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func simulateTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genCancelUnbondingSimul(auth, toCancel, txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genCancelUnbondingTx(auth, toCancel, txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
     }
 }

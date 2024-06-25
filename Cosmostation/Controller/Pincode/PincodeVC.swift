@@ -8,7 +8,6 @@
 
 import UIKit
 import Toast
-import CryptoSwift
 import SwiftKeychainWrapper
 import LocalAuthentication
 

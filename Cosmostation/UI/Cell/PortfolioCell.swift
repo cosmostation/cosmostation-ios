@@ -13,20 +13,15 @@ class PortfolioCell: UITableViewCell {
 
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg1: UIImageView!
-    @IBOutlet weak var logoImg2: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var tagLayer: UIStackView!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var evmCompatTag: UILabel!
-    @IBOutlet weak var cosmosTag: UILabel!
-    @IBOutlet weak var keyTypeTag: UILabel!
-    @IBOutlet weak var cw20Tag: UILabel!
-    @IBOutlet weak var nftTag: UILabel!
+    @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var cw20Tag: PaddingLabel!
+    @IBOutlet weak var nftTag: PaddingLabel!
+    @IBOutlet weak var dappTag: PaddingLabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var loadingLabel: UILabel!
     @IBOutlet weak var reposeErrorLabel: UILabel!
-    
     
     let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
     
@@ -35,87 +30,32 @@ class PortfolioCell: UITableViewCell {
         selectionStyle = .none
         
         rootView.setBlur()
+        currencyLabel.text = ""
+        valueLabel.text = ""
         loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
     }
     
     override func prepareForReuse() {
         rootView.setBlur()
         currencyLabel.text = ""
-        currencyLabel.isHidden = true
-        valueLabel.isHidden = true
-        tagLayer.isHidden = true
+        valueLabel.text = ""
         legacyTag.isHidden = true
-        evmCompatTag.isHidden = true
-        cosmosTag.isHidden = true
-        keyTypeTag.isHidden = true
         cw20Tag.isHidden = true
         nftTag.isHidden = true
+        dappTag.isHidden = true
         loadingLabel.isHidden = false
         reposeErrorLabel.isHidden = true
     }
     
-    func bindCosmosClassChain(_ account: BaseAccount, _ chain: CosmosClass) {
-        logoImg1.image = UIImage.init(named: chain.logo1)
-        logoImg2.image = UIImage.init(named: chain.logo2)
-        nameLabel.text = chain.name.uppercased()
-        
-        if (!chain.isDefault) {
-            tagLayer.isHidden = false
-            legacyTag.isHidden = false
-            //for okt legacy
-            if (chain.tag == "okt996_Keccak") {
-                keyTypeTag.text = "ethsecp256k1"
-                keyTypeTag.isHidden = false
-                
-            } else if (chain.tag == "okt996_Secp") {
-                keyTypeTag.text = "secp256k1"
-                keyTypeTag.isHidden = false
-            }
-        }
-        
-        if (chain.supportCw20) {
-            tagLayer.isHidden = false
-            cw20Tag.isHidden = false
-        }
-        
-        if (BaseData.instance.showEvenReview() && chain.supportCw721) {
-            tagLayer.isHidden = false
-            nftTag.isHidden = false
-        }
-        
-        
-        if (chain.fetchState == .Fail) {
-            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            loadingLabel.isHidden = true
-            reposeErrorLabel.isHidden = false
-            
-        } else if (chain.fetchState == .Success) {
-            loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
-            loadingLabel.isHidden = true
-            
-            if (BaseData.instance.getHideValue()) {
-                currencyLabel.text = ""
-                valueLabel.font = .fontSize14Bold
-                valueLabel.text = "✱✱✱✱"
-            } else {
-                valueLabel.font = .fontSize16Bold
-                WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
-            }
-            currencyLabel.isHidden = false
-            valueLabel.isHidden = false
-            
-        } else {
-            loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
-            loadingLabel.isHidden = false
-        }
-    }
     
-    func bindEvmClassChain(_ account: BaseAccount, _ chain: EvmClass) {
+    func bindChain(_ account: BaseAccount, _ chain: BaseChain) {
         logoImg1.image = UIImage.init(named: chain.logo1)
-        logoImg2.image = UIImage.init(named: chain.logo2)
         nameLabel.text = chain.name.uppercased()
         
-        
+        legacyTag.isHidden = chain.isDefault
+        cw20Tag.isHidden = !chain.supportCw20
+        nftTag.isHidden = !(BaseData.instance.showEvenReview() && chain.supportCw721)
+        dappTag.isHidden = !(BaseData.instance.showEvenReview() && chain.isDefault && chain.isEcosystem())
         
         if (chain.fetchState == .Fail) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
@@ -126,18 +66,6 @@ class PortfolioCell: UITableViewCell {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
             
-//            if (!(chain is ChainOktEVM)) {
-//                if (chain.supportCosmos && chain.cosmosBalances == nil) {
-//                    reposeErrorLabel.isHidden = false
-//                    return
-//                }
-//            }
-            
-//            if (chain.web3 == nil) {
-//                reposeErrorLabel.isHidden = false
-//                return
-//            }
-            
             if (BaseData.instance.getHideValue()) {
                 currencyLabel.text = ""
                 valueLabel.font = .fontSize14Bold
@@ -146,8 +74,6 @@ class PortfolioCell: UITableViewCell {
                 valueLabel.font = .fontSize16Bold
                 WDP.dpValue(chain.allValue(), currencyLabel, valueLabel)
             }
-            currencyLabel.isHidden = false
-            valueLabel.isHidden = false
             
         } else {
             loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)

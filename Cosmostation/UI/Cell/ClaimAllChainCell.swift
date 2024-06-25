@@ -14,9 +14,7 @@ class ClaimAllChainCell: UITableViewCell {
     @IBOutlet weak var rootView: FixCardView!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var evmCompatTag: UILabel!
-    @IBOutlet weak var cosmosTag: UILabel!
+    @IBOutlet weak var legacyTag: PaddingLabel!
     @IBOutlet weak var rewardTitle: UILabel!
     @IBOutlet weak var valueCurrencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
@@ -36,8 +34,6 @@ class ClaimAllChainCell: UITableViewCell {
         selectionStyle = .none
         
         legacyTag.isHidden = true
-        evmCompatTag.isHidden = true
-        cosmosTag.isHidden = true
         pendingView.isHidden = false
         pendingView.animation = LottieAnimation.named("loadingSmallYellow")
         pendingView.contentMode = .scaleAspectFit
@@ -57,8 +53,6 @@ class ClaimAllChainCell: UITableViewCell {
     
     override func prepareForReuse() {
         legacyTag.isHidden = true
-        evmCompatTag.isHidden = true
-        cosmosTag.isHidden = true
         pendingView.isHidden = false
         stateImg.image = UIImage(named: "iconClaimAllReady")
         stateImg.isHidden = true
@@ -89,7 +83,7 @@ class ClaimAllChainCell: UITableViewCell {
         if (chain is ChainDydx) {
             mainRewardDenom = DYDX_USDC_DENOM
         } else {
-            mainRewardDenom = chain.stakeDenom
+            mainRewardDenom = chain.stakeDenom!
         }
         
         rewards.forEach { reward in

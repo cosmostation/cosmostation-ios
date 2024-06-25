@@ -37,31 +37,28 @@ class ManageChainCell: UITableViewCell {
         lcdLayer.isHidden = true
     }
     
-    func bindManageEvmClassChain(_ chain: EvmClass) {
+    
+    func bindManageChain(_ chain: BaseChain) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         
-        if (chain is ChainOktEVM) {
+        if (chain.name == "OKT") {
             lcdLayer.isHidden = false
-            lcdEndpointLabel.text = OKT_LCD.replacingOccurrences(of: "https://", with: "")
-            
-        } else if (chain.supportCosmos == true) {
+            lcdEndpointLabel.text = chain.getLcdfetcher()!.getLcd().replacingOccurrences(of: "https://", with: "")
+            lcdEndpointLabel.adjustsFontSizeToFitWidth = true
+        }
+        
+        if (chain.supportCosmosGrpc) {
             grpcLayer.isHidden = false
-            grpcEndpointLabel.text = chain.getGrpc().host + " : " +  String(chain.getGrpc().port)
+            grpcEndpointLabel.text = chain.getGrpcfetcher()!.getGrpc().host + " : " +  String(chain.getGrpcfetcher()!.getGrpc().port)
             grpcEndpointLabel.adjustsFontSizeToFitWidth = true
         }
-        evmLayer.isHidden = false
-        evmEndpointLabel.text = chain.getEvmRpc().replacingOccurrences(of: "https://", with: "")
-        evmEndpointLabel.adjustsFontSizeToFitWidth = true
-    }
-    
-    func bindManageCosmosClassChain(_ chain: CosmosClass) {
-        logoImg1.image =  UIImage.init(named: chain.logo1)
-        nameLabel.text = chain.name.uppercased()
         
-        grpcLayer.isHidden = false
-        grpcEndpointLabel.text = chain.getGrpc().host + " : " +  String(chain.getGrpc().port)
-        grpcEndpointLabel.adjustsFontSizeToFitWidth = true
+        if (chain.supportEvm) {
+            evmLayer.isHidden = false
+            evmEndpointLabel.text = chain.getEvmfetcher()!.getEvmRpc().replacingOccurrences(of: "https://", with: "")
+            evmEndpointLabel.adjustsFontSizeToFitWidth = true
+        }
     }
     
 }

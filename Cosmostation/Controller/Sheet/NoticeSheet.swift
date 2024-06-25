@@ -73,7 +73,7 @@ class NoticeSheet: BaseVC {
             dismiss(animated: true)
             
         } else if (noticeType == .TokenGithub) {
-            if (selectedChain is EvmClass) {
+            if (selectedChain.supportEvm == true) {
                 let rawUrl = "https://github.com/cosmostation/chainlist/blob/main/chain/" + selectedChain.apiName + "/erc20.json"
                 guard let url = URL(string: rawUrl) else { return }
                 self.onShowSafariWeb(url)

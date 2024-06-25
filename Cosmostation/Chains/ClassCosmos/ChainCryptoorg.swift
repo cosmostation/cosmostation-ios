@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainCryptoorg: CosmosClass  {
+class ChainCryptoorg: BaseChain  {
     
     override init() {
         super.init()
@@ -16,15 +16,17 @@ class ChainCryptoorg: CosmosClass  {
         name = "Cronos POS"
         tag = "crypto-org394"
         logo1 = "chainCryptoorg"
-        logo2 = "chainCryptoorg2"
         apiName = "crypto-org"
-        stakeDenom = "basecro"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/394'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "basecro"
         bechAccountPrefix = "cro"
         validatorPrefix = "crocncl"
-        
         grpcHost = "grpc-crypto-org.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

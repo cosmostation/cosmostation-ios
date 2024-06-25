@@ -35,7 +35,8 @@ class OkAddShare: BaseVC {
     @IBOutlet weak var voteBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: ChainOkt996Keccak!
+    var selectedChain: BaseChain!
+    var oktFetcher: OktFetcher!
     var stakeDenom: String!
     var tokenInfo: JSON!
     var txMemo = ""
@@ -48,6 +49,7 @@ class OkAddShare: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher
         stakeDenom = selectedChain.stakeDenom
         
         tableView.delegate = self
@@ -60,8 +62,8 @@ class OkAddShare: BaseVC {
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickTable)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
-        let allValidators = selectedChain.lcdOktValidators
-        let myValidaorAddress = selectedChain.lcdOktDeposits["validator_address"].arrayValue.map { $0.stringValue }
+        let allValidators = oktFetcher.lcdOktValidators
+        let myValidaorAddress = oktFetcher.lcdOktDeposits["validator_address"].arrayValue.map { $0.stringValue }
         allValidators.forEach { validatorinfo in
             if (myValidaorAddress.contains(validatorinfo["operator_address"].stringValue)) {
                 myValidators.append(validatorinfo)
@@ -79,6 +81,7 @@ class OkAddShare: BaseVC {
     @objc func onClickTable() {
         let selectSheet = OktSelectValidatorSheet(nibName: "OktSelectValidatorSheet", bundle: nil)
         selectSheet.selectedChain = selectedChain
+        selectSheet.oktFetcher = oktFetcher
         selectSheet.existSelected = myValidators
         selectSheet.oktSelectValidatorDelegate = self
         guard let sheet = selectSheet.presentationController as? UISheetPresentationController else {
@@ -93,7 +96,7 @@ class OkAddShare: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -109,10 +112,10 @@ class OkAddShare: BaseVC {
     }
     
     func onUpdateFeeView() {
-        feeSelectImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(stakeDenom))
+        feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
         feeSelectLabel.text = stakeDenom.uppercased()
         
-        let existCnt = selectedChain.lcdOktDeposits["validator_address"].arrayValue.count
+        let existCnt = oktFetcher.lcdOktDeposits["validator_address"].arrayValue.count
         let noCnt = myValidators.count
         let max = (existCnt >= noCnt) ? existCnt : noCnt
         
@@ -199,10 +202,11 @@ extension OkAddShare {
         let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(gasFee, 18))
         let fee = L_Fee(gasAmount.stringValue, [gasCoin])
         
-        let okMsg = L_Generator.oktAddShareMsg(selectedChain.bechAddress, myValidators.map{ $0["operator_address"].stringValue })
+        let okMsg = L_Generator.oktAddShareMsg(selectedChain.bechAddress!, myValidators.map{ $0["operator_address"].stringValue })
         let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
         let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
         
-        return try? await AF.request(BaseNetWork.broadcastUrl(self.selectedChain), method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
+        let url = oktFetcher.getLcd() + "txs"
+        return try? await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
     }
 }

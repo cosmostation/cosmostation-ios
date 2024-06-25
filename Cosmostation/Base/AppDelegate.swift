@@ -6,11 +6,14 @@
 //  Copyright © 2019 wannabit. All rights reserved.
 //
 
+//YONG3
 import UIKit
 import SwiftKeychainWrapper
 import Firebase
 import UserNotifications
-import WalletConnectSwiftV2
+import WalletConnectRelay
+import WalletConnectPairing
+import WalletConnectSign
 import Starscream
 
 @UIApplicationMain
@@ -18,11 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
-    var userInfo:[AnyHashable : Any]?
-    var scheme: URL?
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-      Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().apnsToken = deviceToken
     }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
@@ -32,108 +33,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             object: nil,
             userInfo: dataDict
         )
-        print("fcmToken ", fcmToken)
+        print("didReceiveRegistrationToken ", fcmToken)
         if let token = fcmToken {
             PushUtils.shared.updateTokenIfNeed(token: token)
         }
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        configureFirebase()
-        initWalletConnectV2()
-        BaseData.instance.copySalt = UUID().uuidString
-        if UserDefaults.standard.object(forKey: "FirstInstall") == nil {
-            KeychainWrapper.standard.removeAllKeys()
-            try? BaseData.instance.getKeyChain().removeAll()
-            UserDefaults.standard.set(false, forKey: "FirstInstall")
-            UserDefaults.standard.synchronize()
-        }
-        
-        if BaseData.instance.getInstallTime() == 0 {
-            BaseData.instance.setInstallTime()
-        }
+        print("Cosmostation application didFinishLaunchingWithOptions")
+        setInit()
+        setTheme()
+        setFirebase()
+        setWalletConnectV2()
         
         UNUserNotificationCenter.current().delegate = self
-
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(
           options: authOptions,
           completionHandler: { _, _ in }
         )
-
         application.registerForRemoteNotifications()
         
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor : UIColor.white
-        ]
-        navigationBarAppearance.backgroundColor = UIColor.clear
-        navigationBarAppearance.shadowColor = UIColor.clear
-        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-        UINavigationBar.appearance().compactAppearance = navigationBarAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-        
-        let tabBarApperance = UITabBarAppearance()
-        tabBarApperance.configureWithOpaqueBackground()
-        tabBarApperance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
-        UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
-        UITabBar.appearance().standardAppearance = tabBarApperance
-        
-        let attr = [NSAttributedString.Key.font: UIFont.fontSize12Bold]
-        UISegmentedControl.appearance().setTitleTextAttributes(attr, for:.normal)
-        
+        if let url = launchOptions?[UIApplication.LaunchOptionsKey.url] as? URL {
+            BaseData.instance.appSchemeUrl = url
+            print("Cosmostation application didFinishLaunchingWithOptions \(url)")
+            return false
+        } else if let userInfo = launchOptions?[.remoteNotification] as? [AnyHashable: Any] {
+            BaseData.instance.appUserInfo = userInfo
+        }
         return true
     }
     
-    private func initWalletConnectV2() {
-        let metadata = AppMetadata(
-            name: NSLocalizedString("wc_peer_name", comment: ""),
-            description: NSLocalizedString("wc_peer_desc", comment: ""),
-            url: NSLocalizedString("wc_peer_url", comment: ""),
-            icons: [])
-
-        Networking.configure(projectId: Bundle.main.WALLET_CONNECT_API_KEY, socketFactory: self)
-        Pair.configure(metadata: metadata)
-#if DEBUG
-        try? Pair.instance.cleanup()
-        try? Sign.instance.cleanup()
-#endif
-    }
-    
-    func requestToken() {
-        Messaging.messaging().token { token, error in
-            if let error = error {
-                print("Get FCM token error : \(error)")
-            } else if let token = token {
-                PushUtils.shared.updateTokenIfNeed(token: token)
-            }
-        }
-    }
-    
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        if (url.scheme == "cosmostation") {
-            print("AppDelegate url", url.scheme, "  ", url)
+        print("Cosmostation application open \(url.absoluteString)")
+        if let topVC = application.topViewController, topVC.isKind(of: PincodeVC.self) {
+            BaseData.instance.appSchemeUrl = url
             
-            if let dappDetailVC = application.topViewController as? DappDetailVC {      // WalletConnectV2 init connect wallet
-                dappDetailVC.processQuery(host: url.host, query: url.query)
-            }
-            
-            //TODO dapp open
-//            if (application.topViewController is DappDetailVC) {
-//                if let wcVC = application.topViewController as? DappDetailVC {
-//                    wcVC.processQuery(host: url.host, query: url.query)
-//                }
-//            }
-//            else {
-//                scheme = url
-//                if let mainVC = UIApplication.shared.foregroundWindow?.rootViewController as? MainTabViewController {
-//                    mainVC.processScheme()
-//                } else {
-//                    let emptyWcVc = EmptyWCViewController(nibName: "EmptyWCViewController", bundle: nil)
-//                    application.topViewController!.present(emptyWcVc, animated: true, completion: nil)
-//                }
-//            }
+        } else {
+            print("Cosmostation START DappDetailVC 1")
+            let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+            dappDetail.dappType = .DEEPLINK_WC2
+            dappDetail.dappUrl = url
+            dappDetail.modalPresentationStyle = .fullScreen
+            application.topViewController?.present(dappDetail, animated: true)
         }
         return false
     }
@@ -149,7 +91,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if result == .success {
-            
+            if BaseData.instance.appSchemeUrl != nil {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    print("Cosmostation START DappDetailVC 2")
+                    let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+                    dappDetail.dappType = .DEEPLINK_WC2
+                    dappDetail.dappUrl = BaseData.instance.appSchemeUrl
+                    dappDetail.modalPresentationStyle = .fullScreen
+                    self.window?.rootViewController?.present(dappDetail, animated: true) {
+                        BaseData.instance.appSchemeUrl = nil
+                    }
+                })
+            }
         }
     }
 
@@ -204,9 +157,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("getPush2 ", notification)
         completionHandler(.alert)
     }
+}
+
+
+extension AppDelegate: WalletConnectRelay.WebSocketFactory {
+    func create(with url: URL) -> any WalletConnectRelay.WebSocketConnecting {
+        return WebSocket(request: URLRequest(url: url))
+    }
+}
+
+extension WebSocket: WalletConnectRelay.WebSocketConnecting {
 }
 
 extension UIApplication{
@@ -234,21 +196,65 @@ extension UIApplication{
     }
 }
 
-extension AppDelegate: WebSocketFactory {
-    func create(with url: URL) -> WalletConnectSwiftV2.WebSocketConnecting {
-        return WebSocket(request: URLRequest(url: url))
-    }
-}
-
-extension WebSocket: WebSocketConnecting { }
-
-// MARK: - Firebase
-
 private extension AppDelegate {
-    func configureFirebase() {
+    func setInit() {
+        BaseData.instance.appUserInfo = nil
+        BaseData.instance.appSchemeUrl = nil
+        BaseData.instance.copySalt = UUID().uuidString
+        if UserDefaults.standard.object(forKey: "FirstInstall") == nil {
+            KeychainWrapper.standard.removeAllKeys()
+            try? BaseData.instance.getKeyChain().removeAll()
+            UserDefaults.standard.set(false, forKey: "FirstInstall")
+            UserDefaults.standard.synchronize()
+        }
+        
+        if BaseData.instance.getInstallTime() == 0 {
+            BaseData.instance.setInstallTime()
+        }
+    }
+    
+    func setTheme() {
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor : UIColor.white
+        ]
+        navigationBarAppearance.backgroundColor = UIColor.clear
+        navigationBarAppearance.shadowColor = UIColor.clear
+        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+        UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        
+        let tabBarApperance = UITabBarAppearance()
+        tabBarApperance.configureWithOpaqueBackground()
+        tabBarApperance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
+        UITabBar.appearance().standardAppearance = tabBarApperance
+        
+        let attr = [NSAttributedString.Key.font: UIFont.fontSize12Bold]
+        UISegmentedControl.appearance().setTitleTextAttributes(attr, for:.normal)
+    }
+    
+    private func setFirebase() {
         if Bundle.main.bundleIdentifier == "io.wannabit.cosmostation" {
             FirebaseApp.configure()
             Messaging.messaging().delegate = self
         }
+    }
+    //YONG3
+    private func setWalletConnectV2() {
+        let metadata = AppMetadata(
+            name: NSLocalizedString("wc_peer_name", comment: ""),
+            description: NSLocalizedString("wc_peer_desc", comment: ""),
+            url: NSLocalizedString("wc_peer_url", comment: ""),
+            icons: []
+        )
+
+        Networking.configure(projectId: Bundle.main.WALLET_CONNECT_API_KEY, socketFactory: self)
+        Pair.configure(metadata: metadata)
+#if DEBUG
+        try? Pair.instance.cleanup()
+        try? Sign.instance.cleanup()
+#endif
     }
 }

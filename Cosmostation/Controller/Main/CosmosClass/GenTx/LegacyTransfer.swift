@@ -48,7 +48,7 @@ class LegacyTransfer: BaseVC {
     @IBOutlet weak var sendBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var toSendDenom: String!
     var stakeDenom: String!
     var availableAmount = NSDecimalNumber.zero
@@ -72,26 +72,13 @@ class LegacyTransfer: BaseVC {
         loadingView.play()
         
         //display to send asset info
-        if let okEvmChain = selectedChain as? ChainOktEVM {
-            tokenInfo = okEvmChain.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
+        if let oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher {
+            tokenInfo = oktFetcher.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
             let original_symbol = tokenInfo["original_symbol"].stringValue
-            toSendAssetImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(original_symbol))
+            toSendAssetImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
             toSendSymbolLabel.text = original_symbol.uppercased()
             
-            let available = okEvmChain.lcdBalanceAmount(toSendDenom)
-            if (toSendDenom == stakeDenom) {
-                availableAmount = available.subtracting(NSDecimalNumber(string: OKT_BASE_FEE))
-            } else {
-                availableAmount = available
-            }
-            
-        } else if let okChain = selectedChain as? ChainOkt996Keccak {
-            tokenInfo = okChain.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
-            let original_symbol = tokenInfo["original_symbol"].stringValue
-            toSendAssetImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(original_symbol))
-            toSendSymbolLabel.text = original_symbol.uppercased()
-            
-            let available = okChain.lcdBalanceAmount(toSendDenom)
+            let available = oktFetcher.lcdBalanceAmount(toSendDenom)
             if (toSendDenom == stakeDenom) {
                 availableAmount = available.subtracting(NSDecimalNumber(string: OKT_BASE_FEE))
             } else {
@@ -136,7 +123,7 @@ class LegacyTransfer: BaseVC {
             amountSheet.existedAmount = toSendAmount
         }
         amountSheet.sheetDelegate = self
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     func onUpdateAmountView(_ amount: String?) {
@@ -152,7 +139,7 @@ class LegacyTransfer: BaseVC {
         } else {
             toSendAmount = NSDecimalNumber(string: amount)
             
-            if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+            if (selectedChain.name == "OKT") {
                 toAssetDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
                 toAssetAmountLabel?.attributedText = WDP.dpAmount(toSendAmount.stringValue, toAssetAmountLabel!.font, 18)
                 toSendAssetHint.isHidden = true
@@ -178,7 +165,7 @@ class LegacyTransfer: BaseVC {
         addressSheet.existedAddress = recipientAddress
         addressSheet.addressLegacySheetType = .SelectAddress_CosmosLegacySend
         addressSheet.addressLegacyDelegate = self
-        self.onStartSheet(addressSheet, 220)
+        onStartSheet(addressSheet, 220, 0.6)
     }
     
     func onUpdateToAddressView(_ address: String) {
@@ -201,7 +188,7 @@ class LegacyTransfer: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -217,8 +204,8 @@ class LegacyTransfer: BaseVC {
     }
     
     func onUpdateFeeView() {
-        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
-            feeSelectImg.af.setImage(withURL: ChainOkt996Keccak.assetImg(stakeDenom))
+        if (selectedChain.name == "OKT") {
+            feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
             feeSelectLabel.text = stakeDenom.uppercased()
             
             let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
@@ -320,16 +307,18 @@ extension LegacyTransfer: LegacyAmountSheetDelegate, AddressLegacyDelegate, Memo
 
 extension LegacyTransfer {
     
+    //only for okt legacy lcd
     func broadcastOktSendTx() async throws -> JSON? {
         let sendCoin = L_Coin(toSendDenom, WUtils.getFormattedNumber(toSendAmount, 18))
         let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(NSDecimalNumber(string: OKT_BASE_FEE), 18))
         let fee = L_Fee(BASE_GAS_AMOUNT, [gasCoin])
         
-        let okMsg = L_Generator.oktSendMsg(selectedChain.bechAddress, recipientAddress!, [sendCoin])
+        let okMsg = L_Generator.oktSendMsg(selectedChain.bechAddress!, recipientAddress!, [sendCoin])
         let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
         let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
         
-        return try? await AF.request(BaseNetWork.broadcastUrl(self.selectedChain), method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
+        let url = selectedChain.getLcdfetcher()!.getLcd() + "txs"
+        return try? await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
     }
     
 }

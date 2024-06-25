@@ -35,5 +35,6 @@ class BaseHeader: UIView {
     @IBOutlet weak var rootView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var cntLabel: UILabel!
-
+    @IBOutlet weak var msgLabel: UILabel!
+    
 }

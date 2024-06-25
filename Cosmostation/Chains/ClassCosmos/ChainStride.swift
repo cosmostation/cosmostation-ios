@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainStride: CosmosClass  {
+class ChainStride: BaseChain {
     
     override init() {
         super.init()
@@ -16,14 +16,16 @@ class ChainStride: CosmosClass  {
         name = "Stride"
         tag = "stride118"
         logo1 = "chainStride"
-        logo2 = "chainStride2"
         apiName = "stride"
-        stakeDenom = "ustrd"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ustrd"
         bechAccountPrefix = "stride"
         validatorPrefix = "stridevaloper"
-        
         grpcHost = "grpc-stride.cosmostation.io"
+        
+        initFetcher()
     }
 }

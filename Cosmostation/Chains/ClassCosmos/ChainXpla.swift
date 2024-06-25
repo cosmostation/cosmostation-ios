@@ -8,23 +8,24 @@
 
 import Foundation
 
-class ChainXpla: CosmosClass  {
+class ChainXpla: BaseChain  {
     
     override init() {
         super.init()
-        
-        isDefault = false
         name = "Xpla"
         tag = "xpla60"
         logo1 = "chainXpla"
-        logo2 = "chainXpla2"
+        isDefault = false
         apiName = "xpla"
-        stakeDenom = "axpla"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/60'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "axpla"
         bechAccountPrefix = "xpla"
         validatorPrefix = "xplavaloper"
-        
         grpcHost = "grpc-xpla.cosmostation.io"
+        
+        initFetcher()
     }
 }

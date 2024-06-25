@@ -45,6 +45,7 @@ class DappStartVC: BaseVC {
     func presentDapp(_ url: URL) {
         //TODO pincode ask?
         let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+        dappDetail.dappType = .INTERNAL_URL
         dappDetail.dappUrl = url
         dappDetail.modalPresentationStyle = .fullScreen
         self.present(dappDetail, animated: true)
@@ -63,32 +64,5 @@ extension DappStartVC: WKNavigationDelegate, WKUIDelegate {
         } else {
             decisionHandler(.allow)
         }
-        
     }
-    
-//    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-//        let alert = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
-//        let cancelAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel) { _ in
-//            completionHandler()
-//        }
-//        alert.addAction(cancelAction)
-//        DispatchQueue.main.async {
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//    }
-//    
-//    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
-//        let alert = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
-//        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel) { _ in
-//            completionHandler(false)
-//        }
-//        let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { _ in
-//            completionHandler(true)
-//        }
-//        alert.addAction(cancelAction)
-//        alert.addAction(okAction)
-//        DispatchQueue.main.async {
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//    }
 }

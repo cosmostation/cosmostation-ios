@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainNoble: CosmosClass  {
+class ChainNoble: BaseChain  {
     
     override init() {
         super.init()
@@ -16,15 +16,17 @@ class ChainNoble: CosmosClass  {
         name = "Noble"
         tag = "noble118"
         logo1 = "chainNoble"
-        logo2 = "chainNoble2"
         apiName = "noble"
-        stakeDenom = "ustake"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ustake"
         bechAccountPrefix = "noble"
         validatorPrefix = "noblevaloper"
         supportStaking = false
-        
         grpcHost = "grpc-noble.cosmostation.io"
+        
+        initFetcher()
     }
 }

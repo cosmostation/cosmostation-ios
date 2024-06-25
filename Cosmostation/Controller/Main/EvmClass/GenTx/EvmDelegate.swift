@@ -11,6 +11,9 @@ import Lottie
 import web3swift
 import BigInt
 
+class EvmDelegate: BaseVC {}
+
+/*
 //only for bera chain evm staking!!
 class EvmDelegate: BaseVC {
     
@@ -87,6 +90,8 @@ class EvmDelegate: BaseVC {
             DispatchQueue.global().async { [self] in
                 do {
                     self.web3 = try Web3.new(url)
+                    let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil)
+ 
                 } catch {
                     DispatchQueue.main.async {
                         self.dismiss(animated: true)
@@ -111,7 +116,7 @@ class EvmDelegate: BaseVC {
         baseSheet.validators = selectedChain.cosmosValidators
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectValidator
-        onStartSheet(baseSheet, 680)
+        onStartSheet(baseSheet, 680, 0.8)
     }
     
     func onUpdateValidatorView() {
@@ -139,7 +144,7 @@ class EvmDelegate: BaseVC {
         }
         amountSheet.sheetDelegate = self
         amountSheet.sheetType = .TxDelegate
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     func onUpdateAmountView(_ amount: String) {
@@ -322,3 +327,4 @@ extension EvmDelegate: BaseSheetDelegate, AmountSheetDelegate, PinDelegate {
         }
     }
 }
+*/

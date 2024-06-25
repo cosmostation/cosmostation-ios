@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainTerra: CosmosClass  {
+class ChainTerra: BaseChain  {
     
     override init() {
         super.init()
@@ -16,16 +16,18 @@ class ChainTerra: CosmosClass  {
         name = "Terra"
         tag = "terra330"
         logo1 = "chainTerra"
-        logo2 = "chainTerra2"
         apiName = "terra"
-        stakeDenom = "uluna"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/330'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uluna"
         bechAccountPrefix = "terra"
         validatorPrefix = "terravaloper"
         supportCw20 = true
 //        supportCw721 = true
-        
         grpcHost = "grpc-terra.cosmostation.io"
+        
+        initFetcher()
     }
 }

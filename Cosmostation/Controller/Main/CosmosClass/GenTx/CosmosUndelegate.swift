@@ -8,10 +8,6 @@
 
 import UIKit
 import Lottie
-import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class CosmosUndelegate: BaseVC {
     
@@ -47,7 +43,8 @@ class CosmosUndelegate: BaseVC {
     @IBOutlet weak var unStakeBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
+    var grpcFetcher: FetcherGrpc!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate!
@@ -62,6 +59,7 @@ class CosmosUndelegate: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        grpcFetcher = selectedChain.getGrpcfetcher()
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -85,7 +83,7 @@ class CosmosUndelegate: BaseVC {
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
         if (fromValidator == nil) {
-            fromValidator = selectedChain.cosmosValidators.filter { $0.operatorAddress == selectedChain.cosmosDelegations[0].delegation.validatorAddress }.first
+            fromValidator = grpcFetcher.cosmosValidators.filter { $0.operatorAddress == grpcFetcher.cosmosDelegations[0].delegation.validatorAddress }.first
         }
         
         onUpdateValidatorView()
@@ -104,7 +102,7 @@ class CosmosUndelegate: BaseVC {
         baseSheet.targetChain = selectedChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectUnStakeValidator
-        onStartSheet(baseSheet, 680)
+        onStartSheet(baseSheet, 680, 0.8)
     }
     
     func onUpdateValidatorView() {
@@ -119,7 +117,7 @@ class CosmosUndelegate: BaseVC {
         
         let stakeDenom = selectedChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
-            let staked = selectedChain.cosmosDelegations.filter { $0.delegation.validatorAddress == fromValidator?.operatorAddress }.first?.balance.amount
+            let staked = grpcFetcher.cosmosDelegations.filter { $0.delegation.validatorAddress == fromValidator?.operatorAddress }.first?.balance.amount
             let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
             stakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakedLabel!.font, 6)
         }
@@ -136,7 +134,7 @@ class CosmosUndelegate: BaseVC {
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }
         
-        if let delegated = selectedChain.cosmosDelegations.filter({ $0.delegation.validatorAddress == fromValidator?.operatorAddress }).first {
+        if let delegated = grpcFetcher.cosmosDelegations.filter({ $0.delegation.validatorAddress == fromValidator?.operatorAddress }).first {
             availableAmount = NSDecimalNumber(string: delegated.balance.amount)
         }
     }
@@ -151,7 +149,7 @@ class CosmosUndelegate: BaseVC {
         }
         amountSheet.sheetDelegate = self
         amountSheet.sheetType = .TxUndelegate
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     func onUpdateAmountView(_ amount: String) {
@@ -181,14 +179,14 @@ class CosmosUndelegate: BaseVC {
         baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240)
+        onStartSheet(baseSheet, 240, 0.6)
     }
     
     @objc func onClickMemo() {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -231,7 +229,7 @@ class CosmosUndelegate: BaseVC {
         loadingView.isHidden = false
         
         toUndelegate = Cosmos_Staking_V1beta1_MsgUndelegate.with {
-            $0.delegatorAddress = selectedChain.bechAddress
+            $0.delegatorAddress = selectedChain.bechAddress!
             $0.validatorAddress = fromValidator!.operatorAddress
             $0.amount = toCoin!
         }
@@ -240,34 +238,32 @@ class CosmosUndelegate: BaseVC {
         }
         
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
-                do {
-                    let simul = try await simulateTx(channel, auth!)
-                    DispatchQueue.main.async {
-                        self.onUpdateWithSimul(simul)
-                    }
-                    
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
+            do {
+                let account = try await grpcFetcher.fetchAuth()
+                let simulReq = Signer.genUndelegateSimul(account!, toUndelegate, txFee, txMemo, selectedChain)
+                let simulRes = try await grpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
     }
 }
 
-
 extension CosmosUndelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectUnStakeValidator) {
             if let validatorAddress = result["validatorAddress"] as? String {
-                fromValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
+                fromValidator = grpcFetcher.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
                 onUpdateValidatorView()
                 onUpdateFeeView()
                 onSimul()
@@ -297,9 +293,10 @@ extension CosmosUndelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
             unStakeBtn.isEnabled = false
             loadingView.isHidden = false
             Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
-                   let response = try await broadcastTx(channel, auth!) {
+                do {
+                    let account = try await grpcFetcher.fetchAuth()
+                    let broadReq = Signer.genUndelegateTx(account!, toUndelegate, txFee, txMemo, selectedChain)
+                    let response = try await grpcFetcher.broadcastTx(broadReq)
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         
@@ -309,44 +306,11 @@ extension CosmosUndelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
                         txResult.modalPresentationStyle = .fullScreen
                         self.present(txResult, animated: true)
                     })
+                    
+                } catch {
+                    //TODO handle Error
                 }
             }
         }
-    }
-    
-}
-
-
-extension CosmosUndelegate {
-    
-    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func simulateTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genUndelegateSimul(auth, toUndelegate, txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genUndelegateTx(auth, toUndelegate, txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
     }
 }

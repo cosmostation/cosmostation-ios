@@ -13,7 +13,7 @@ class CosmosAboutVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var chainParam: JSON!
 
     override func viewDidLoad() {
@@ -54,18 +54,19 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (section == 2) {
             view.titleLabel.text = "Reward Address"
-            if (selectedChain.rewardAddress != nil && selectedChain.rewardAddress != selectedChain.bechAddress) {
-                view.cntLabel.text = "(Changed)"
-                view.cntLabel.textColor = .colorPrimary
-            } else {
-                view.cntLabel.text = ""
+            view.cntLabel.text = ""
+            if let rewardAddress = selectedChain.getGrpcfetcher()?.rewardAddress {
+                if (selectedChain.bechAddress != rewardAddress) {
+                    view.cntLabel.text = "(Changed)"
+                    view.cntLabel.textColor = .colorPrimary
+                }
             }
         }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 2 && selectedChain.rewardAddress == nil) { return 0}
+        if (section == 2 && selectedChain.getGrpcfetcher()?.rewardAddress == nil) { return 0}
         if (section == 3) { return 0 }
         return 40
     }
@@ -76,7 +77,7 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 2 && selectedChain.rewardAddress == nil) { return 0 }
+        if (indexPath.section == 2 && selectedChain.getGrpcfetcher()?.rewardAddress == nil) { return 0 }
         return UITableView.automaticDimension
     }
     
@@ -108,8 +109,8 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 2) {
-            if (selectedChain.rewardAddress != nil) {
-                UIPasteboard.general.string = selectedChain.rewardAddress?.trimmingCharacters(in: .whitespacesAndNewlines)
+            if let rewardAddress = selectedChain.getGrpcfetcher()?.rewardAddress {
+                UIPasteboard.general.string = rewardAddress.trimmingCharacters(in: .whitespacesAndNewlines)
                 self.onShowToast(NSLocalizedString("address_copied", comment: ""))
             }
         }

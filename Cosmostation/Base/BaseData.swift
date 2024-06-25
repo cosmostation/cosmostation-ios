@@ -9,7 +9,6 @@
 import Foundation
 import SQLite
 import SwiftKeychainWrapper
-import SwiftProtobuf
 import KeychainAccess
 import SwiftyJSON
 
@@ -27,6 +26,10 @@ final class BaseData: NSObject{
     var mintscanPrices: [MintscanPrice]?
     var mintscanAssets: [MintscanAsset]?
     var baseAccount: BaseAccount?
+    
+    
+    var appUserInfo: [AnyHashable : Any]?
+    var appSchemeUrl: URL?
     
     public override init() {
         super.init();
@@ -63,30 +66,6 @@ final class BaseData: NSObject{
         return NSDecimalNumber.zero.rounding(accordingToBehavior: handler2Down)
     }
     
-    
-    func setAllValidatorSort(_ sort : Int64) {
-        UserDefaults.standard.set(sort, forKey: KEY_ALL_VAL_SORT)
-    }
-    
-    func getAllValidatorSort() -> Int64 {
-        return Int64(UserDefaults.standard.integer(forKey: KEY_ALL_VAL_SORT))
-    }
-    
-    func setMyValidatorSort(_ sort : Int64) {
-        UserDefaults.standard.set(sort, forKey: KEY_MY_VAL_SORT)
-    }
-    
-    func getMyValidatorSort() -> Int64 {
-        return Int64(UserDefaults.standard.integer(forKey: KEY_MY_VAL_SORT))
-    }
-    
-    func setNeedRefresh(_ refresh : Bool) {
-        UserDefaults.standard.set(refresh, forKey: KEY_ACCOUNT_REFRESH_ALL)
-    }
-    
-    func getNeedRefresh() -> Bool {
-        return UserDefaults.standard.bool(forKey: KEY_ACCOUNT_REFRESH_ALL)
-    }
     
     func showEvenReview() -> Bool {
         return (!reviewMode || checkInstallTime())
@@ -133,49 +112,6 @@ final class BaseData: NSObject{
 //        }
 //        return false
 //    }
-    
-
-    
-    
-
-    
-//    func setKavaWarn() {
-//        let remindTime = Calendar.current.date(byAdding: .day, value: 3, to: Date())?.millisecondsSince1970
-//        UserDefaults.standard.set(String(remindTime!), forKey: KEY_KAVA_TESTNET_WARN)
-//    }
-//
-//    func getKavaWarn() ->Bool {
-//        let reminTime = Int64(UserDefaults.standard.string(forKey: KEY_KAVA_TESTNET_WARN) ?? "0")
-//        if (Date().millisecondsSince1970 > reminTime!) {
-//            return true
-//        }
-//        return false
-//    }
-//
-//    func setEventTime() {
-//        let remindTime = Calendar.current.date(byAdding: .day, value: 1, to: Date())?.millisecondsSince1970
-//        UserDefaults.standard.set(String(remindTime!), forKey: KEY_PRE_EVENT_HIDE)
-//    }
-//
-//    func getEventTime() -> Bool {
-//        let reminTime = Int64(UserDefaults.standard.string(forKey: KEY_PRE_EVENT_HIDE) ?? "0")
-//        if (Date().millisecondsSince1970 > reminTime!) {
-//            return true
-//        }
-//        return false
-//    }
-    
-    func setCustomIcon(_ type: String) {
-        UserDefaults.standard.set(type, forKey: KEY_CUSTOM_ICON)
-    }
-    
-    func getCustomIcon() -> String {
-        return UserDefaults.standard.string(forKey: KEY_PRE_EVENT_HIDE) ?? ICON_DEFAULT
-    }
-    
-    func getUserHiddenChains() -> Array<String>? {
-        return UserDefaults.standard.stringArray(forKey: KEY_USER_HIDEN_CHAINS) ?? []
-    }
     
     public func hasPassword() -> Bool{
         if (KeychainWrapper.standard.hasValue(forKey: "password")) {
@@ -295,7 +231,7 @@ extension BaseData {
         try? getKeyChain().remove(account.uuid.sha1())
                                   
         deleteRefAddresses(account.id)
-        deleteDisplayCosmosChainTags(account.id)
+        deleteDisplayChainTags(account.id)
         
         let query = TABLE_BASEACCOUNT.filter(BASEACCOUNT_ID == account.id)
         return try? database.run(query.delete())
@@ -359,6 +295,21 @@ extension BaseData {
                                                    REFADDRESS_MAIN_VALUE <- refAddress.lastMainValue,
                                                    REFADDRESS_TOKEN_VALUE <- refAddress.lastTokenValue,
                                                    REFADDRESS_COIN_CNT <- refAddress.lastCoinCnt))
+        } else {
+            return Int(insertRefAddresses(refAddress))
+        }
+    }
+    
+    @discardableResult
+    public func updateRefAddressesValue(_ refAddress: RefAddress) -> Int? {
+        let query = TABLE_REFADDRESS.filter(REFADDRESS_ACCOUNT_ID == refAddress.accountId &&
+                                            REFADDRESS_CHAIN_TAG == refAddress.chainTag)
+        if let address = try! database.pluck(query) {
+            let target = TABLE_REFADDRESS.filter(REFADDRESS_ID == address[REFADDRESS_ID])
+            return try? database.run(target.update(REFADDRESS_MAIN_AMOUNT <- refAddress.lastMainAmount,
+                                                   REFADDRESS_MAIN_VALUE <- refAddress.lastMainValue,
+                                                   REFADDRESS_COIN_CNT <- refAddress.lastCoinCnt,
+                                                   REFADDRESS_TOKEN_VALUE <- refAddress.lastTokenValue))
         } else {
             return Int(insertRefAddresses(refAddress))
         }
@@ -529,25 +480,6 @@ extension BaseData {
         return selectAccounts().first
     }
     
-    func setDisplayEvmChainTags(_ id: Int64, _ chainNames: [String])  {
-        if let encoded = try? JSONEncoder().encode(chainNames) {
-            UserDefaults.standard.setValue(encoded, forKey: String(id) + " " + KEY_DISPLAY_EVM_CHAINS)
-        }
-    }
-    
-    func getDisplayEvmChainTags(_ id: Int64) -> [String] {
-        if let savedData = UserDefaults.standard.object(forKey: String(id) + " " + KEY_DISPLAY_EVM_CHAINS) as? Data {
-            if let result = try? JSONDecoder().decode([String].self, from: savedData) {
-                return result
-            }
-        }
-        return DEFUAL_DISPALY_EVM
-    }
-    
-    func deleteDisplayEvmChainTags(_ id: Int64)  {
-        UserDefaults.standard.removeObject(forKey: String(id) + " " + KEY_DISPLAY_EVM_CHAINS)
-    }
-    
     func setDisplayErc20s(_ id: Int64, _ chainTag: String, _ contractAddress: [String])  {
         if let encoded = try? JSONEncoder().encode(contractAddress) {
             UserDefaults.standard.setValue(encoded, forKey: String(id) + " " + chainTag + " " + KEY_DISPLAY_ERC20_TOKENS)
@@ -564,28 +496,28 @@ extension BaseData {
     }
     
     func deleteDisplayErc20s(_ id: Int64)  {
-        ALLEVMCLASS().forEach { evmChain in
+        ALLCHAINS().filter { $0.supportEvm == true }.forEach { evmChain in
             UserDefaults.standard.removeObject(forKey: String(id) + " " + evmChain.tag + " " + KEY_DISPLAY_ERC20_TOKENS)
         }
     }
     
     
-    func setDisplayCosmosChainTags(_ id: Int64, _ chainNames: [String])  {
+    func setDisplayChainTags(_ id: Int64, _ chainNames: [String])  {
         if let encoded = try? JSONEncoder().encode(chainNames) {
             UserDefaults.standard.setValue(encoded, forKey: String(id) + " " + KEY_DISPLAY_COSMOS_CHAINS)
         }
     }
     
-    func getDisplayCosmosChainTags(_ id: Int64) -> [String] {
+    func getDisplayChainTags(_ id: Int64) -> [String] {
         if let savedData = UserDefaults.standard.object(forKey: String(id) + " " + KEY_DISPLAY_COSMOS_CHAINS) as? Data {
             if let result = try? JSONDecoder().decode([String].self, from: savedData) {
                 return result
             }
         }
-        return DEFUAL_DISPALY_COSMOS
+        return DEFUAL_DISPALY_CHAINS
     }
     
-    func deleteDisplayCosmosChainTags(_ id: Int64)  {
+    func deleteDisplayChainTags(_ id: Int64)  {
         UserDefaults.standard.removeObject(forKey: String(id) + " " + KEY_DISPLAY_COSMOS_CHAINS)
     }
     
@@ -701,11 +633,11 @@ extension BaseData {
         return UserDefaults.standard.integer(forKey: KEY_LAST_TAB)
     }
     
-    func setGrpcEndpoint(_ chain : CosmosClass, _ endpoint: String) {
+    func setGrpcEndpoint(_ chain : BaseChain, _ endpoint: String) {
         UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + chain.name)
     }
     
-    func setEvmRpcEndpoint(_ chain : EvmClass, _ endpoint: String) {
+    func setEvmRpcEndpoint(_ chain : BaseChain, _ endpoint: String) {
         UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_EVM_RPC_ENDPOINT +  " : " + chain.name)
     }
     

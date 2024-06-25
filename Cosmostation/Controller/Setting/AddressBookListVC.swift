@@ -43,7 +43,7 @@ class AddressBookListVC: BaseVC {
         let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
         addressBookSheet.addressBookType = .ManualNew
         addressBookSheet.bookDelegate = self
-        self.onStartSheet(addressBookSheet, 420)
+        onStartSheet(addressBookSheet, 420, 0.8)
     }
     
     func onShowEditSheet(_ book: AddressBook) {
@@ -51,14 +51,14 @@ class AddressBookListVC: BaseVC {
         addressBookSheet.addressBookType = .ManualEdit
         addressBookSheet.addressBook = book
         addressBookSheet.bookDelegate = self
-        self.onStartSheet(addressBookSheet, 420)
+        onStartSheet(addressBookSheet, 420, 0.8)
     }
     
     func onDeleteBook(_ book: AddressBook) {
         let deleteAddressBookSheet = DeleteAddressBookSheet(nibName: "DeleteAddressBookSheet", bundle: nil)
         deleteAddressBookSheet.addressBook = book
         deleteAddressBookSheet.deleteDelegate = self
-        self.onStartSheet(deleteAddressBookSheet)
+        onStartSheet(deleteAddressBookSheet, 320, 0.6)
     }
 }
 

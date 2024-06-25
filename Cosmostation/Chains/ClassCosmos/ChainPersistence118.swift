@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainPersistence118: CosmosClass  {
+class ChainPersistence118: BaseChain  {
     
     override init() {
         super.init()
@@ -16,15 +16,17 @@ class ChainPersistence118: CosmosClass  {
         name = "Persistence"
         tag = "persistence118"
         logo1 = "chainPersistence"
-        logo2 = "chainPersistence2"
         apiName = "persistence"
-        stakeDenom = "uxprt"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uxprt"
         bechAccountPrefix = "persistence"
         validatorPrefix = "persistencevaloper"
-        
         grpcHost = "grpc-persistence.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

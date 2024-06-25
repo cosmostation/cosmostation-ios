@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -39,6 +39,7 @@
                                 <rect key="frame" x="143.66666666666666" y="53.666666666666629" width="219.99999999999997" height="235"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bvC-Xj-lO8" secondAttribute="height" multiplier="1:1" id="TRo-En-3Er"/>
+                                    <constraint firstAttribute="width" secondItem="bvC-Xj-lO8" secondAttribute="height" multiplier="1:1" id="UhI-IX-mgm"/>
                                     <constraint firstAttribute="width" constant="220" id="l3A-M3-yfV"/>
                                 </constraints>
                             </imageView>
@@ -65,16 +66,12 @@
                                         <color key="textColor" name="_color02"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="zyS-Nr-Gr9">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="zyS-Nr-Gr9">
                                         <rect key="frame" x="58.000000000000028" y="10" width="0.0" height="0.0"/>
                                         <subviews>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlG-RY-XhB">
-                                                <rect key="frame" x="0.0" y="0.0" width="44" height="14"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlG-RY-XhB" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                                 <color key="backgroundColor" name="_color06"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="14" id="VoY-L6-wwh"/>
-                                                    <constraint firstAttribute="width" constant="44" id="ZFk-XO-Vub"/>
-                                                </constraints>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                                 <color key="textColor" name="_color02"/>
                                                 <nil key="highlightedColor"/>
@@ -85,13 +82,9 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hud-b1-APH">
-                                                <rect key="frame" x="0.0" y="0.0" width="72" height="14"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hud-b1-APH" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                                 <color key="backgroundColor" name="_color06"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="14" id="Ego-LA-8KE"/>
-                                                    <constraint firstAttribute="width" constant="72" id="dRm-Rp-Qj9"/>
-                                                </constraints>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                                 <color key="textColor" name="_color02"/>
                                                 <nil key="highlightedColor"/>
@@ -135,7 +128,6 @@
                             <constraint firstItem="sKw-Sg-5Rm" firstAttribute="top" secondItem="bvC-Xj-lO8" secondAttribute="bottom" constant="24" id="J0I-RS-zWl"/>
                             <constraint firstItem="sKw-Sg-5Rm" firstAttribute="leading" secondItem="oGU-Xp-OhM" secondAttribute="leading" constant="12" id="MQg-FE-3Nh"/>
                             <constraint firstItem="UX6-PM-HKK" firstAttribute="centerX" secondItem="oGU-Xp-OhM" secondAttribute="centerX" id="Qme-hQ-gOX"/>
-                            <constraint firstItem="bvC-Xj-lO8" firstAttribute="width" secondItem="bvC-Xj-lO8" secondAttribute="height" multiplier="1:1" id="UhI-IX-mgm"/>
                             <constraint firstItem="tYk-wU-pkh" firstAttribute="top" secondItem="oGU-Xp-OhM" secondAttribute="top" constant="18" id="VnS-yH-HhC"/>
                             <constraint firstItem="8g8-nT-LI4" firstAttribute="top" secondItem="bvC-Xj-lO8" secondAttribute="top" constant="12" id="ZqI-a4-Zsd"/>
                             <constraint firstItem="8g8-nT-LI4" firstAttribute="centerX" secondItem="bvC-Xj-lO8" secondAttribute="centerX" id="acb-1V-pu5"/>
@@ -163,8 +155,8 @@
                 <outlet property="cautionLabel" destination="tYk-wU-pkh" id="oDV-T7-DwC"/>
                 <outlet property="copyHintTitle" destination="mgT-qk-SKz" id="ePc-ja-cAa"/>
                 <outlet property="hdPathLabel" destination="ua0-vo-4e5" id="uCe-j5-ai8"/>
-                <outlet property="keyTypeTag" destination="hud-b1-APH" id="bDE-gU-K8J"/>
-                <outlet property="legacyTag" destination="vlG-RY-XhB" id="q2d-oR-a7u"/>
+                <outlet property="keyTypeTag" destination="hud-b1-APH" id="aue-U5-gpa"/>
+                <outlet property="legacyTag" destination="vlG-RY-XhB" id="Yga-Gr-dcN"/>
                 <outlet property="rootView" destination="oGU-Xp-OhM" id="J9I-Ul-04R"/>
                 <outlet property="rqImgView" destination="8g8-nT-LI4" id="7Q0-h6-aBg"/>
             </connections>

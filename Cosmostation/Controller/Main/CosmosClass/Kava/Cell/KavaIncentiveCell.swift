@@ -35,7 +35,7 @@ class KavaIncentiveCell: UITableViewCell {
         rootView.setBlur()
     }
     
-    func onBindIncentive(_ baseChain: CosmosClass, _ incentive: Kava_Incentive_V1beta1_QueryRewardsResponse?) {
+    func onBindIncentive(_ baseChain: BaseChain, _ incentive: Kava_Incentive_V1beta1_QueryRewardsResponse?) {
         let allIncentives = incentive?.allIncentiveCoins()
         if let kavaIncentive = allIncentives?.filter({ $0.denom == KAVA_MAIN_DENOM }).first {
             if let msAsset = BaseData.instance.getAsset(baseChain.apiName, kavaIncentive.denom) {

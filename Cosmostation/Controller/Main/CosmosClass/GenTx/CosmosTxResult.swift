@@ -9,10 +9,6 @@
 import UIKit
 import Lottie
 import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
-import web3swift
 
 class CosmosTxResult: BaseVC {
     
@@ -28,20 +24,21 @@ class CosmosTxResult: BaseVC {
     @IBOutlet weak var quotoesAutherLabel: UILabel!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
+    var grpcFetcher: FetcherGrpc!
     var broadcastTxResponse: Cosmos_Base_Abci_V1beta1_TxResponse?
     var txResponse: Cosmos_Tx_V1beta1_GetTxResponse?
     var fetchCnt = 10
     
     var legacyResult: JSON!
-    
-    var evmHash: String?
-    var evmRecipient: TransactionReceipt?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        if (selectedChain.name != "OKT") {
+            grpcFetcher = selectedChain.getGrpcfetcher()
+        }
         
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("tx_loading")
@@ -51,7 +48,7 @@ class CosmosTxResult: BaseVC {
         loadingView.play()
         
         confirmBtn.isEnabled = false
-        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain.name == "OKT") {
             successMintscanBtn.setTitle("Check in Explorer", for: .normal)
             failMintscanBtn.setTitle("Check in Explorer", for: .normal)
             guard legacyResult != nil else {
@@ -102,9 +99,8 @@ class CosmosTxResult: BaseVC {
     
     func fetchTx() {
         Task {
-            let channel = getConnection()
             do {
-                let result = try await fetchTx(channel, broadcastTxResponse!.txhash)
+                let result = try await grpcFetcher.fetchTx(broadcastTxResponse!.txhash)
                 self.txResponse = result
                 DispatchQueue.main.async {
                     self.onUpdateView()
@@ -149,7 +145,7 @@ class CosmosTxResult: BaseVC {
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
         var hash: String?
-        if (selectedChain is ChainOktEVM || selectedChain is ChainOkt996Keccak) {
+        if (selectedChain.name == "OKT") {
             hash = legacyResult!["txhash"].string
         } else {
             hash = broadcastTxResponse?.txhash
@@ -166,29 +162,4 @@ class CosmosTxResult: BaseVC {
         quotoesAutherLabel.text = "- " + qutoe[1] + " -"
         quotesLayer.isHidden = false
     }
-}
-
-extension CosmosTxResult {
-    
-    func fetchTx(_ channel: ClientConnection, _ hash: String) async throws -> Cosmos_Tx_V1beta1_GetTxResponse? {
-        let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = hash }
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).getTx(req, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
-    }
-    
 }

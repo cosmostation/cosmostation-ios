@@ -5,10 +5,7 @@
 //  Created by yongjoo jung on 2022/04/19.
 //  Copyright © 2022 wannabit. All rights reserved.
 //
-
 import Foundation
-import HDWalletKit
-import SwiftKeychainWrapper
 
 public class MWords {
     var id: Int64 = -1;

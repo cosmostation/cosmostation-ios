@@ -212,6 +212,11 @@
 "str_send_info" = "전송 상세 정보";
 "str_send_address" = "보낸 주소";
 "str_select_style" = "스타일 선택";
+"str_tx_request" = "Tx 요청";
+"str_permit_request" = "Permit 요청";
+"str_dapp_warn_msg" = "요청하는 사이트를 신뢰하고 그 내용을 완전히 이해하는 경우에만 이 메세지에 서명하세요.";
+"str_affect_safe" = "당신의 자산에 영향을 미치지 않습니다.";
+"str_affect_danger" = "당신의 자산에 영향을 미칩니다.";
 
 
 "str_tx_status" = "결과";
@@ -314,8 +319,10 @@
 "str_withdraw" = "출금";
 "str_copy_evm_address" = "Evm형식 주소복사";
 "str_share_evm_address" = "Evm형식 주소공유";
+"str_share_evm_address2" = "Evm형식\n주소공유";
 "str_copy_bech_address" = "Cosmos형식 주소복사";
 "str_share_bech_address" = "Cosmos형식 주소공유";
+"str_share_bech_address2" = "Cosmos형식\n주소공유";
 "str_token_github" = "토큰 정보 확인";
 "str_nft_github" = "NFT 정보 확인";
 "str_node_down_title" = "⚠️ 노드 다운";
@@ -325,7 +332,9 @@
 "str_delist_msg" = "선택하신 체인은 모바일 지갑에서 지원종료 예정입니다. 다른 지갑 또는 차후 커스텀체인 서비스로 지원할 수 있습니다.";
 "str_legacy_path_title" = "레가시 경로 지원 중단 안내";
 "str_legacy_path_msg" = "선택하신 레가시 경로의 계정은 지원종료 예정입니다. 퍼블릭 경로로 자산을 옮기 시길 강력히 권장합니다.";
-"str_deposit_caution" = "⚠️ %@ 자산만 전송가능 합니다";
+"str_deposit_caution" = "⚠️ %@ 네트워크 자산만 전송가능 합니다";
+"str_copy_with_longpress" = "길게 눌러서 복사하실 수 있습니다";
+"str_copy_with_box" = "박스영역을 눌러서 복사하실 수 있습니다";
 
 
 "btn_delegate" = "  위임 하기";
@@ -386,7 +395,7 @@
 "msg_search_chain" = "체인이나 토큰을 검색하세요";
 "msg_mnemonic_wanning" = "이 문구는 계정을 복구하는 유일한 방법입니다. 누구와도 공유하지 마십시오. 이 니모닉을 분실하면 자산 손실로 이어질 수 있습니다.";
 "msg_tap_to_mnemonic_copy" = "복사하려면 니모닉 문구 상자를 탭하세요.";
-"msg_tap_box_to_copy" = "복사하려면 카드를 탭하세요.";
+"msg_tap_box_to_copy" = "복사하려면 탭하세요.";
 "msg_tap_for_add_memo" = "메모를 추가려면 탭하세요.";
 "msg_tap_for_add_amount" = "수량을 입력하시려면 탭하세요.";
 "msg_tap_for_add_address" = "주소를 입력하시려면 탭하세요.";
@@ -399,7 +408,7 @@
 "msg_addressbook_add" = "편의를 위해 자주쓰는 주소를 등록하실 수 있습니다.";
 "msg_addressbook_memo_changed" = "기존 주소록과 비교해서 메모가 변경되었습니다.\n새로운 메모로 업데이트 하시겠습니까?";
 "msg_addressbook_updated" = "주소록을 업데이트 하였습니다.";
-"msg_swap_warn" = "코스모스테이션 모바일을 비수탁형 지갑 서비스로 모든 트랜젝션 실행의 책임은 유저에게 있습니다. 트랜잭션을 보내기전에 항상 내용을 정확하게 확인하시고 사용해 주시길 바랍니다. \n\n앱을 통한 거래로 인한 손실은 책임지지 않습니다.";
+"msg_swap_warn" = "본 지갑은 비수탁형 서비스로 모든 트랜젝션 실행의 책임은 유저에게 있습니다. 트랜잭션을 보내기전에 항상 내용을 정확하게 확인하시고 사용해 주시길 바랍니다. \n\n앱을 통한 거래로 인한 손실은 책임지지 않습니다.";
 "msg_check_inputed_mnemonic" = "입력하신 니모닉을 확인해 주세요. \n아시다시피, 누구와도 공유하지 마십시오. 이 니모닉을 분실하면 자산 손실로 이어질 수 있습니다.";
 "msg_show_all_proposals" = "모든 프로포절을 표시합니다.";
 "msg_hide_scam_proposals" = "스캠의심 프로포절을 필터합니다.";
@@ -494,12 +503,8 @@
 "setting_app_lock_title" = "앱락";
 "setting_bio_auth_title" = "생체인식";
 "setting_auto_pass_title" = "오토패스";
-"setting_mintscan_title" = "Mintscan";
+"setting_help_title" = "Help & Guide";
 "setting_homepage_title" = "HomePage";
-"setting_blog_title" = "Blog";
-"setting_telegram_title" = "텔레그램";
-"setting_twitter_title" = "X(트위터)";
-"setting_youtube_title" = "유튜브";
 "setting_term_title" = "약관";
 "setting_privacy_title" = "개인정보 보호";
 "setting_github_title" = "Github";
@@ -1158,6 +1163,7 @@
 "error_tranfer_disabled" = "현재 선택하신 체인은 전송기능이 비 활성화된 상태입니다.\n차후 거버넌스 등을 통해서 활성화될 수 있습니다.";
 "error_tranfer_disabled_bgt" = "BGT는 스테이킹 전용 자산입니다. \n전송이 불가능합니다.";
 "error_bera_vote_one_proposal" = "베라체인은 한개씩만 투표 가능합니다.";
+"error_wc2_failed" = "디앱연동(Wallet Connect V2)에 실패하였습니다.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";

@@ -40,37 +40,35 @@ class SelectEndpointSheet: BaseVC {
         
         
         endpointTypeSegment.removeAllSegments()
-        if let cosmosChain = targetChain as? CosmosClass {
-            gRPCList = cosmosChain.getChainListParam()["grpc_endpoint"].array
-            evmRPCList = cosmosChain.getChainListParam()["evm_rpc_endpoint"].array
-            if (gRPCList == nil && evmRPCList == nil) {
-                return
-                
-            } else if (gRPCList != nil && evmRPCList == nil) {
-                seletcedType = EndPointType.gRPC
-                titleLabel.text = NSLocalizedString("title_select_end_point", comment: "") + "  (gRPC)"
-                endpointTypeSegment.isHidden = true
-                evmTableView.isHidden = true
-                
-            } else if (gRPCList == nil && evmRPCList != nil) {
-                seletcedType = EndPointType.evmRPC
-                titleLabel.text = NSLocalizedString("title_select_end_point", comment: "") + "  (evm RPC)"
-                endpointTypeSegment.isHidden = true
-                grpcTableView.isHidden = true
-                
-            } else if (gRPCList != nil && evmRPCList != nil) {
-                titleLabel.text = NSLocalizedString("title_select_end_point", comment: "")
-                endpointTypeSegment.isHidden = false
-                
-                endpointTypeSegment.insertSegment(withTitle: "gRPC Endpoint", at: EndPointType.gRPC.rawValue, animated: false)
-                endpointTypeSegment.insertSegment(withTitle: "Evm RPC Endpoint", at: EndPointType.evmRPC.rawValue, animated: false)
-                seletcedType = EndPointType.gRPC
-                
-                grpcTableView.isHidden = false
-                evmTableView.isHidden = true
-            }
-            endpointTypeSegment.selectedSegmentIndex = seletcedType.rawValue
+        gRPCList = targetChain.getChainListParam()["grpc_endpoint"].array
+        evmRPCList = targetChain.getChainListParam()["evm_rpc_endpoint"].array
+        if (gRPCList == nil && evmRPCList == nil) {
+            return
+            
+        } else if (gRPCList != nil && evmRPCList == nil) {
+            seletcedType = EndPointType.gRPC
+            titleLabel.text = NSLocalizedString("title_select_end_point", comment: "") + "  (gRPC)"
+            endpointTypeSegment.isHidden = true
+            evmTableView.isHidden = true
+            
+        } else if (gRPCList == nil && evmRPCList != nil) {
+            seletcedType = EndPointType.evmRPC
+            titleLabel.text = NSLocalizedString("title_select_end_point", comment: "") + "  (evm RPC)"
+            endpointTypeSegment.isHidden = true
+            grpcTableView.isHidden = true
+            
+        } else if (gRPCList != nil && evmRPCList != nil) {
+            titleLabel.text = NSLocalizedString("title_select_end_point", comment: "")
+            endpointTypeSegment.isHidden = false
+            
+            endpointTypeSegment.insertSegment(withTitle: "gRPC Endpoint", at: EndPointType.gRPC.rawValue, animated: false)
+            endpointTypeSegment.insertSegment(withTitle: "Evm RPC Endpoint", at: EndPointType.evmRPC.rawValue, animated: false)
+            seletcedType = EndPointType.gRPC
+            
+            grpcTableView.isHidden = false
+            evmTableView.isHidden = true
         }
+        endpointTypeSegment.selectedSegmentIndex = seletcedType.rawValue
         
     }
     
@@ -119,16 +117,12 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.cellForRow(at: indexPath) as? SelectEndpointCell
         if (cell?.gapTime != nil) {
             if (tableView == grpcTableView) {
-                if let cosmosChain = targetChain as? CosmosClass {
-                    let endpoint = cosmosChain.getChainListParam()["grpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
-                    BaseData.instance.setGrpcEndpoint(cosmosChain, endpoint)
-                }
+                let endpoint = targetChain.getChainListParam()["grpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                BaseData.instance.setGrpcEndpoint(targetChain, endpoint)
                 
             } else if (tableView == evmTableView) {
-                if let evmChain = targetChain as? EvmClass {
-                    let endpoint = evmChain.getChainListParam()["evm_rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
-                    BaseData.instance.setEvmRpcEndpoint(evmChain, endpoint)
-                }
+                let endpoint = targetChain.getChainListParam()["evm_rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                BaseData.instance.setEvmRpcEndpoint(targetChain, endpoint)
             }
             self.dismiss(animated: true) {
                 self.endpointDelegate?.onEndpointUpdated()

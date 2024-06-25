@@ -10,14 +10,15 @@ import UIKit
 import Lottie
 import SwiftyJSON
 import web3swift
+import Web3Core
 import BigInt
-import GRPC
-import NIO
-import SwiftProtobuf
+import AlamofireImage
+
 
 class CommonTransfer: BaseVC {
     
     @IBOutlet weak var midGapConstraint: NSLayoutConstraint!
+    @IBOutlet weak var titleCoinImg: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var toChainCardView: FixCardView!
@@ -60,6 +61,7 @@ class CommonTransfer: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var fromChain: BaseChain!
+    var fromGrpcFetcher: FetcherGrpc!
     var sendType: SendAssetType!
     var txStyle: TxStyle = .COSMOS_STYLE            // .CosmosEVM_Coin is only change tx style
     
@@ -68,8 +70,8 @@ class CommonTransfer: BaseVC {
     var toSendMsAsset: MintscanAsset!               // to send Coin
     var toSendMsToken: MintscanToken!               // to send Token
     var ibcPath: MintscanPath?                      // to IBC send path
-    var allIbcChains = [CosmosClass]()
-    var recipientableChains = [CosmosClass]()
+    var allIbcChains = [BaseChain]()
+    var recipientableChains = [BaseChain]()
     var availableAmount = NSDecimalNumber.zero
     var decimal: Int16!
     
@@ -82,16 +84,20 @@ class CommonTransfer: BaseVC {
     var cosmosFeeInfos = [FeeInfo]()
     var cosmosTxFee: Cosmos_Tx_V1beta1_Fee!
     
-    var evmTx: EthereumTransaction?
+    var evmTx: CodableTransaction?
+    var evmTxType : TransactionType?
     var evmGasTitle: [String] = [NSLocalizedString("str_low", comment: ""), NSLocalizedString("str_average", comment: ""), NSLocalizedString("str_high", comment: "")]
-    var evmGasPrice: [(BigUInt, BigUInt)] = [(500000000, 1000000000), (500000000, 1000000000), (500000000, 1000000000)]
+    var evmGas: [(BigUInt, BigUInt)] = [(500000000, 1000000000), (500000000, 1000000000), (500000000, 1000000000)]
     var evmGasLimit: BigUInt = 21000
-    var web3: web3?
+    var web3: Web3?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        if (fromChain.supportCosmosGrpc) {
+            fromGrpcFetcher = fromChain.getGrpcfetcher()
+        }
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -112,12 +118,14 @@ class CommonTransfer: BaseVC {
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeDenom)))
         
-        if let evmChain = fromChain as? EvmClass,
-           let url = URL(string: evmChain.getEvmRpc()) {
-            DispatchQueue.global().async { [self] in
-                do {
-                    self.web3 = try Web3.new(url)
-                } catch {
+        
+        if (fromChain.supportEvm) {
+            Task {
+                if let evmfetcher = fromChain.getEvmfetcher(),
+                   let url = URL(string: evmfetcher.getEvmRpc()),
+                   let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil) {
+                    self.web3 = Web3.init(provider: web3Provider)
+                } else {
                     DispatchQueue.main.async {
                         self.dismiss(animated: true)
                     }
@@ -165,13 +173,13 @@ class CommonTransfer: BaseVC {
             }
             selectedFeePosition = 1
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectImg.image =  UIImage.init(named: (fromChain as! EvmClass).coinLogo)
+            feeSelectImg.image =  UIImage.init(named: fromChain.coinLogo)
             
-            feeSelectLabel.text = (fromChain as! EvmClass).coinSymbol
-            feeDenomLabel.text = (fromChain as! EvmClass).coinSymbol
+            feeSelectLabel.text = fromChain.coinSymbol
+            feeDenomLabel.text = fromChain.coinSymbol
             
-            let feePrice = BaseData.instance.getPrice((fromChain as! EvmClass).coinGeckoId)
-            let totalGasPrice = evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1
+            let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
+            let totalGasPrice = evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1
             let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
             let feeDpAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(18))
             let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
@@ -179,13 +187,13 @@ class CommonTransfer: BaseVC {
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .COSMOS_STYLE) {
-            cosmosFeeInfos = (fromChain as! CosmosClass).getFeeInfos()
+            cosmosFeeInfos = fromChain.getFeeInfos()
             feeSegments.removeAllSegments()
             for i in 0..<cosmosFeeInfos.count {
                 feeSegments.insertSegment(withTitle: cosmosFeeInfos[i].title, at: i, animated: false)
             }
-            selectedFeePosition = (fromChain as! CosmosClass).getFeeBasePosition()
-            cosmosTxFee = (fromChain as! CosmosClass).getInitPayableFee()
+            selectedFeePosition = fromChain.getFeeBasePosition()
+            cosmosTxFee = fromChain.getInitPayableFee()
             feeSegments.selectedSegmentIndex = selectedFeePosition
             
             if let feeAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
@@ -205,51 +213,54 @@ class CommonTransfer: BaseVC {
     
     func onInitView() {
         if (sendType == .Only_Cosmos_Coin) {
+            titleCoinImg.af.setImage(withURL: toSendMsAsset.assetImg())
             decimal = toSendMsAsset!.decimals
             toSendSymbol = toSendMsAsset!.symbol
-            availableAmount = (fromChain as! CosmosClass).balanceAmount(toSendDenom)
+            availableAmount = fromGrpcFetcher.balanceAmount(toSendDenom)
             if (cosmosTxFee.amount[0].denom == toSendDenom) {
                 let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
                 availableAmount = availableAmount.subtracting(feeAmount)
             }
             
         } else if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20) {
+            titleCoinImg.af.setImage(withURL: toSendMsToken.assetImg())
             decimal = toSendMsToken!.decimals
             toSendSymbol = toSendMsToken!.symbol
             availableAmount = toSendMsToken!.getAmount()
             
         } else if (sendType == .Only_EVM_Coin) {
+            titleCoinImg.image =  UIImage.init(named: fromChain.coinLogo)
             decimal = 18
-            toSendSymbol = (fromChain as! EvmClass).coinSymbol
-            availableAmount = (fromChain as! EvmClass).evmBalances.subtracting(EVM_BASE_FEE)
+            toSendSymbol = fromChain.coinSymbol
+            availableAmount = fromChain.getEvmfetcher()!.evmBalances.subtracting(EVM_BASE_FEE)
             
         } else if (sendType == .CosmosEVM_Coin) {
             if (txStyle == .WEB3_STYLE) {
+                titleCoinImg.image =  UIImage.init(named: fromChain.coinLogo)
                 decimal = 18
-                toSendSymbol = (fromChain as! EvmClass).coinSymbol
-                availableAmount = (fromChain as! EvmClass).evmBalances.subtracting(EVM_BASE_FEE)
+                toSendSymbol = fromChain.coinSymbol
+                availableAmount = fromChain.getEvmfetcher()!.evmBalances.subtracting(EVM_BASE_FEE)
                 memoCardView.isHidden = true
                 
             } else if (txStyle == .COSMOS_STYLE) {
+                titleCoinImg.af.setImage(withURL: toSendMsAsset.assetImg())
                 decimal = toSendMsAsset!.decimals
                 toSendSymbol = toSendMsAsset!.symbol
-                availableAmount = (fromChain as! CosmosClass).balanceAmount(toSendDenom)
+                availableAmount = fromGrpcFetcher.balanceAmount(toSendDenom)
                 if (cosmosTxFee.amount[0].denom == toSendDenom) {
                     let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
                     availableAmount = availableAmount.subtracting(feeAmount)
                 }
             }
         }
-//        print("toSendSymbol ", toSendSymbol)
-//        print("sendType ", sendType)
         titleLabel.text = String(format: NSLocalizedString("str_send_asset", comment: ""), toSendSymbol)
     }
     
     func onInitToChainsInfo() {
-        recipientableChains.append(fromChain as! CosmosClass)
+        recipientableChains.append(fromChain)
         // check IBC support case for recipient chain
         if (sendType == .Only_Cosmos_Coin || sendType == .CosmosEVM_Coin || sendType == .Only_Cosmos_CW20) {
-            allIbcChains = All_IBC_Chains()
+            allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false && $0.supportCosmosGrpc })
             BaseData.instance.mintscanAssets?.forEach({ msAsset in
                 if (sendType == .Only_Cosmos_Coin || sendType == .CosmosEVM_Coin) {
                     if (msAsset.chain == fromChain.apiName && msAsset.denom?.lowercased() == toSendDenom.lowercased()) {
@@ -300,14 +311,14 @@ class CommonTransfer: BaseVC {
             txStyle = style
             if (txStyle == .WEB3_STYLE) {
                 decimal = 18
-                toSendSymbol = (fromChain as! EvmClass).coinSymbol
-                availableAmount = (fromChain as! EvmClass).evmBalances.subtracting(EVM_BASE_FEE)
+                toSendSymbol = fromChain.coinSymbol
+                availableAmount = fromChain.getEvmfetcher()!.evmBalances.subtracting(EVM_BASE_FEE)
                 memoCardView.isHidden = true
                 
             } else if (txStyle == .COSMOS_STYLE) {
                 decimal = toSendMsAsset!.decimals
                 toSendSymbol = toSendMsAsset!.symbol
-                availableAmount = (fromChain as! CosmosClass).balanceAmount(toSendDenom)
+                availableAmount = fromGrpcFetcher.balanceAmount(toSendDenom)
                 if (cosmosTxFee.amount[0].denom == toSendDenom) {
                     let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
                     availableAmount = availableAmount.subtracting(feeAmount)
@@ -325,7 +336,7 @@ class CommonTransfer: BaseVC {
         baseSheet.cosmosChainList = recipientableChains
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectCosmosRecipientChain
-        onStartSheet(baseSheet, 680)
+        onStartSheet(baseSheet, 400, 0.8)
     }
     
     func onUpdateToChain(_ chain: BaseChain) {
@@ -346,11 +357,11 @@ class CommonTransfer: BaseVC {
         addressSheet.fromChain = fromChain
         addressSheet.toChain = toChain
         addressSheet.sendType = sendType
-        addressSheet.senderBechAddress = (fromChain as? CosmosClass)?.bechAddress
-        addressSheet.senderEvmAddress = (fromChain as? EvmClass)?.evmAddress
+        addressSheet.senderBechAddress = fromChain.bechAddress
+        addressSheet.senderEvmAddress = fromChain.evmAddress
         addressSheet.existedAddress = toAddress
         addressSheet.sendAddressDelegate = self
-        self.onStartSheet(addressSheet, 220)
+        onStartSheet(addressSheet, 220, 0.6)
     }
     
     func onUpdateToAddressView(_ address: String) {
@@ -387,7 +398,7 @@ class CommonTransfer: BaseVC {
         amountSheet.existedAmount = toAmount
         amountSheet.decimal = decimal
         amountSheet.sheetDelegate = self
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     func onUpdateAmountView(_ amount: String?) {
@@ -416,22 +427,22 @@ class CommonTransfer: BaseVC {
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
             } else if (sendType == .Only_EVM_Coin) {
-                let msPrice = BaseData.instance.getPrice((fromChain as! EvmClass).coinGeckoId)
+                let msPrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
-                toAssetDenomLabel.text = (fromChain as! EvmClass).coinSymbol
+                toAssetDenomLabel.text = fromChain.coinSymbol
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                 
             } else if (sendType == .CosmosEVM_Coin) {
-                let msPrice = BaseData.instance.getPrice((fromChain as! EvmClass).coinGeckoId)
+                let msPrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
                 if (txStyle == .WEB3_STYLE) {
-                    toAssetDenomLabel.text = (fromChain as! EvmClass).coinSymbol
+                    toAssetDenomLabel.text = fromChain.coinSymbol
                     toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                     
                 } else if (txStyle == .COSMOS_STYLE) {
@@ -452,7 +463,7 @@ class CommonTransfer: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = toMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -474,7 +485,7 @@ class CommonTransfer: BaseVC {
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeePosition = sender.selectedSegmentIndex
         if (txStyle == .COSMOS_STYLE) {
-            cosmosTxFee = (fromChain as! CosmosClass).getUserSelectedFee(selectedFeePosition, cosmosTxFee.amount[0].denom)
+            cosmosTxFee = fromChain.getUserSelectedFee(selectedFeePosition, cosmosTxFee.amount[0].denom)
         }
         onUpdateFeeView()
         onSimul()
@@ -484,19 +495,21 @@ class CommonTransfer: BaseVC {
         if (txStyle == .COSMOS_STYLE) {
             // only cosmos style support multi type fee denom
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-            baseSheet.targetChain = (fromChain as! CosmosClass)
+            baseSheet.targetChain = fromChain
             baseSheet.feeDatas = cosmosFeeInfos[selectedFeePosition].FeeDatas
             baseSheet.sheetDelegate = self
             baseSheet.sheetType = .SelectFeeDenom
-            onStartSheet(baseSheet, 240)
+            onStartSheet(baseSheet, 240, 0.6)
         }
     }
     
     // user changed segment or fee coin denom kinds
     func onUpdateFeeView() {
+        sendBtn.isHidden = false
+        errorCardView.isHidden = true
         if (txStyle == .WEB3_STYLE) {
-            let feePrice = BaseData.instance.getPrice((fromChain as! EvmClass).coinGeckoId)
-            let totalGasPrice = evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1
+            let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
+            let totalGasPrice = evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1
             let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
             let feeDpAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(18))
             let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
@@ -525,25 +538,25 @@ class CommonTransfer: BaseVC {
         loadingView.isHidden = true
         if (txStyle == .WEB3_STYLE) {
             guard evmTx != nil else {
-                feeCardView.isHidden = true
+                sendBtn.isHidden = true
                 errorCardView.isHidden = false
                 errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
                 return
             }
             
         } else if (txStyle == .COSMOS_STYLE) {
-            if ((fromChain as! CosmosClass).isGasSimulable() == false) {
+            if (fromChain.isGasSimulable() == false) {
                 onUpdateFeeView()
                 sendBtn.isEnabled = true
                 return
             }
             guard let toGas = simul?.gasInfo.gasUsed else {
-                feeCardView.isHidden = true
+                sendBtn.isHidden = true
                 errorCardView.isHidden = false
                 errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
                 return
             }
-            cosmosTxFee.gasLimit = UInt64(Double(toGas) * (fromChain as! CosmosClass).gasMultiply())
+            cosmosTxFee.gasLimit = UInt64(Double(toGas) * fromChain.gasMultiply())
             if let gasRate = cosmosFeeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
                 let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
@@ -571,9 +584,9 @@ class CommonTransfer: BaseVC {
             
         } else if (txStyle == .COSMOS_STYLE) {
             // some chain not support simulate (assetmantle)  24.2.21
-            if ((fromChain as! CosmosClass).isGasSimulable() == false) {
+            if (fromChain.isGasSimulable() == false) {
                 if (fromChain.chainIdCosmos != toChain.chainIdCosmos) {
-                    ibcPath = WUtils.getMintscanPath((fromChain as! CosmosClass), (toChain as! CosmosClass), toSendDenom)
+                    ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
                 }
                 return onUpdateFeeViewAfterSimul(nil)
             }
@@ -584,7 +597,7 @@ class CommonTransfer: BaseVC {
                     inChainCoinSendSimul()
                 }
             } else {                                            // IBC Send!
-                ibcPath = WUtils.getMintscanPath((fromChain as! CosmosClass), (toChain as! CosmosClass), toSendDenom)
+                ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
                 if (sendType == .Only_Cosmos_CW20) {            // CW20 IBC Send!
                     ibcWasmSendSimul()
                 } else {                                        // Coin IBC Send! (Only_Cosmos_Coin, CosmosEVM_Coin)
@@ -596,86 +609,99 @@ class CommonTransfer: BaseVC {
 
 }
 
+
+
 //Evm style tx simul and broadcast
 extension CommonTransfer {
+    
     func evmSendSimul() {
-        evmTx = nil
-        DispatchQueue.global().async { [self] in
-            
+        Task {
             guard let web3 = self.web3 else {
-                return
-            }
-            
-            let chainID = web3.provider.network?.chainID
-            let senderAddress = EthereumAddress.init((fromChain as! EvmClass).evmAddress)
-            let recipientAddress = EthereumAddress.init(toAddress)
-            let nonce = try? web3.eth.getTransactionCount(address: senderAddress!)
-            let calSendAmount = toAmount.multiplying(byPowerOf10: -decimal)
-            
-            var toAddress: EthereumAddress!
-            var wTx: WriteTransaction?
-            var value: BigUInt = 0
-            
-            if (sendType == .Only_EVM_ERC20) {
-                toAddress = EthereumAddress.init(fromHex: toSendMsToken.address!)
-                let erc20token = ERC20(web3: web3, provider: web3.provider, address: toAddress!)
-                value = 0
-                wTx = try? erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
-                
-            } else {
-                toAddress = recipientAddress
-                let contract = web3.contract(Web3.Utils.coldWalletABI, at: toAddress, abiVersion: 2)!
-                let amount = Web3.Utils.parseToBigUInt(calSendAmount.stringValue, units: .eth)
-                var options = TransactionOptions.defaultOptions
-                options.value = amount
-                options.from = senderAddress
-                options.gasPrice = .automatic
-                options.gasLimit = .automatic
-                value = amount!
-                wTx = contract.write("fallback", parameters: [AnyObject](), extraData: Data(), transactionOptions: options)!
-            }
-            
-            if (wTx == nil) {
+                print("web3 init error")
+                evmTxType = nil
                 DispatchQueue.main.async {
                     self.onUpdateFeeViewAfterSimul(nil)
                 }
                 return
             }
             
-            if let estimateGas = try? wTx!.estimateGas(transactionOptions: .defaultOptions) {
-                evmGasLimit = estimateGas
-            }
-//            print("evmGasLimit ", evmGasLimit)
-             
-            let oracle = Web3.Oracle.init(web3)
-            let feeHistory = oracle.bothFeesPercentiles
-//            print("feeHistory ", feeHistory)
-            if (feeHistory?.baseFee.count ?? 0 > 0 && feeHistory?.tip.count ?? 0 > 0) {
+            let oracle = Web3Core.Oracle.init(web3.provider)
+            if let feeHistory = await oracle.bothFeesPercentiles(),
+               feeHistory.baseFee.count > 0 {
+                //support EIP1559
+//                print("feeHistory ", feeHistory)
                 for i in 0..<3 {
-                    var baseFee = feeHistory?.baseFee[i] ?? 500000000
-                    baseFee = baseFee > 500000000 ? baseFee : 500000000
-                    var tip = feeHistory?.tip[i] ?? 1000000000
-                    tip = tip > 1000000000 ? tip : 1000000000
-                    evmGasPrice[i] = (baseFee, tip)
+                    let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
+                    let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
+                    evmGas[i] = (baseFee, tip)
                 }
-//                print("evmGasPrice eip1559 ", evmGasPrice)
-                let eip1559 = EIP1559Envelope(to: toAddress, nonce: nonce!, chainID: chainID!, value: value,
-                                              data: wTx!.transaction.data, maxPriorityFeePerGas: evmGasPrice[selectedFeePosition].1,
-                                              maxFeePerGas: evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1, gasLimit: evmGasLimit)
-                evmTx = EthereumTransaction(with: eip1559)
+                evmTxType = .eip1559
+                
+            } else if let gasprice = try? await web3.eth.gasPrice() {
+                //only Legacy
+//                print("gasprice ", gasprice)
+                evmGas[0].0 = gasprice
+                evmGas[1].0 = gasprice * 12 / 10
+                evmGas[2].0 = gasprice * 20 / 10
+                evmTxType = .legacy
                 
             } else {
-                if let gasprice = try? web3.eth.getGasPrice() {
-                    evmGasPrice[0].0 = gasprice
-                    evmGasPrice[1].0 = gasprice
-                    evmGasPrice[2].0 = gasprice
+//                print("no gas error")
+                evmTxType = nil
+                DispatchQueue.main.async {
+                    self.onUpdateFeeViewAfterSimul(nil)
                 }
-//                print("evmGasPrice legacy ", evmGasPrice)
-                let legacy = LegacyEnvelope(to: toAddress, nonce: nonce!, chainID: chainID, value: value,
-                                            data: wTx!.transaction.data, gasPrice: evmGasPrice[selectedFeePosition].0,
-                                            gasLimit: evmGasLimit)
-                evmTx = EthereumTransaction(with: legacy)
+                return
             }
+//            print("evmGas ", evmGas)
+            
+            let chainID = web3.provider.network?.chainID
+            let senderAddress = EthereumAddress.init(fromChain.evmAddress!)
+            let recipientAddress = EthereumAddress.init(toAddress)
+            let nonce = try? await web3.eth.getTransactionCount(for: senderAddress!)
+            let calSendAmount = self.toAmount.multiplying(byPowerOf10: -decimal)
+            var toAddress: EthereumAddress!
+            
+            if (sendType == .Only_EVM_ERC20) {
+                toAddress = EthereumAddress.init(toSendMsToken.address!)
+                let erc20token = ERC20(web3: web3, provider: web3.provider, address: toAddress!)
+                let writeOperation = try await erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
+                if (evmTxType == .eip1559) {
+                    evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
+                                                    chainID: chainID!, data: writeOperation.data!,
+                                                    maxFeePerGas: evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1, 
+                                                    maxPriorityFeePerGas: evmGas[selectedFeePosition].1)
+                } else {
+                    evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
+                                                    chainID: chainID!, data: writeOperation.data!,
+                                                    gasPrice: evmGas[selectedFeePosition].0)
+                }
+                
+            } else {
+                toAddress = recipientAddress
+                let value = Web3Core.Utilities.parseToBigUInt(calSendAmount.stringValue, units: .ether)!
+                if (evmTxType == .eip1559) {
+                    evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
+                                                    chainID: chainID!, value: value,
+                                                    maxFeePerGas: evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1,
+                                                    maxPriorityFeePerGas: evmGas[selectedFeePosition].1)
+                } else {
+                    evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
+                                                    chainID: chainID!, value: value,
+                                                    gasPrice: evmGas[selectedFeePosition].0)
+                }
+            }
+            evmTx?.from = senderAddress
+            
+//            print("evmTxA ", evmTx)
+            if let estimateGas = try? await web3.eth.estimateGas(for: evmTx!) {
+                print("estimateGas GOT ", estimateGas)
+                evmGasLimit = estimateGas
+                evmTx?.gasLimit = estimateGas
+            } else {
+                evmTxType = nil
+            }
+//            print("evmTxB ", evmTx)
             
             DispatchQueue.main.async {
                 self.onUpdateFeeViewAfterSimul(nil)
@@ -684,20 +710,16 @@ extension CommonTransfer {
     }
     
     func evmSend() {
-        DispatchQueue.global().async { [self] in
+        Task {
             guard let web3 = self.web3 else {
+                print("web3 init error")
                 return
             }
             
-            
             do {
-                try evmTx?.sign(privateKey: fromChain.privateKey!)
-//                print("sign gasLimit ", evmTx?.parameters.gasLimit)
-//                print("sign gasPrice ", evmTx?.parameters.gasPrice)
-//                print("sign maxPriorityFeePerGas ", evmTx?.parameters.maxPriorityFeePerGas)
-//                print("sign maxFeePerGas ", evmTx?.parameters.maxFeePerGas)
-                
-                let result = try web3.eth.sendRawTransaction(evmTx!)
+                try self.evmTx?.sign(privateKey: fromChain.privateKey!)
+                let encodeTx = self.evmTx?.encode(for: .transaction)
+                let result = try await web3.eth.send(raw : encodeTx!)
 //                print("result ", result)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
@@ -724,20 +746,20 @@ extension CommonTransfer {
 extension CommonTransfer {
     func inChainCoinSendSimul() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress) {
-                do {
-                    let simul = try await simulSendTx(channel, auth!, onBindSend())
-                    DispatchQueue.main.async {
-                        self.onUpdateFeeViewAfterSimul(simul)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let simulReq = Signer.genSendSimul(account!, onBindSend(), cosmosTxFee, toMemo, fromChain)
+                let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateFeeViewAfterSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -745,9 +767,10 @@ extension CommonTransfer {
     
     func inChainCoinSend() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress),
-               let response = try await broadcastSendTx(channel, auth!, onBindSend()) {
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let broadReq = Signer.genSendTx(account!, onBindSend(), cosmosTxFee, toMemo, fromChain)
+                let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -760,6 +783,9 @@ extension CommonTransfer {
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
                 })
+                
+            } catch {
+                //TODO handle Error
             }
         }
     }
@@ -770,7 +796,7 @@ extension CommonTransfer {
             $0.amount = toAmount.stringValue
         }
         return Cosmos_Bank_V1beta1_MsgSend.with {
-            $0.fromAddress = (fromChain as! CosmosClass).bechAddress
+            $0.fromAddress = fromChain.bechAddress!
             $0.toAddress = toAddress
             $0.amount = [sendCoin]
         }
@@ -780,20 +806,20 @@ extension CommonTransfer {
     
     func inChainWasmSendSimul() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress) {
-                do {
-                    let simul = try await simulCw20SendTx(channel, auth!, onBindCw20Send())
-                    DispatchQueue.main.async {
-                        self.onUpdateFeeViewAfterSimul(simul)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let simulReq = Signer.genWasmSimul(account!, [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateFeeViewAfterSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -801,9 +827,10 @@ extension CommonTransfer {
     
     func inChainWasmSend() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress),
-               let response = try await broadcastCw20SendTx(channel, auth!, onBindCw20Send()) {
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let broadReq = Signer.genWasmTx(account!, [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -816,6 +843,9 @@ extension CommonTransfer {
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
                 })
+                
+            } catch {
+                //TODO handle Error
             }
         }
     }
@@ -824,7 +854,7 @@ extension CommonTransfer {
         let msg: JSON = ["transfer" : ["recipient" : toAddress , "amount" : toAmount.stringValue]]
         let msgBase64 = try! msg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-            $0.sender = (fromChain as! CosmosClass).bechAddress
+            $0.sender = fromChain.bechAddress!
             $0.contract = toSendMsToken.address!
             $0.msg = Data(base64Encoded: msgBase64)!
         }
@@ -832,26 +862,25 @@ extension CommonTransfer {
     
     
     
-    
     func ibcCoinSendSimul() {
         Task {
-            let channel = getConnection()
-            let recipientChannel = getRecipientConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress),
-               let ibcClient = try? await fetchIbcClient(channel),
-               let lastBlock = try? await fetchLastBlock(recipientChannel) {
-                do {
-                    let simul = try await simulIbcSendTx(channel, auth!, onBindIbcSend(ibcClient!, lastBlock!))
-                    DispatchQueue.main.async {
-                        self.onUpdateFeeViewAfterSimul(simul)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let ibcClient = try await fromGrpcFetcher.fetchIbcClient(ibcPath!)
+                let toGrpcFetcher = toChain!.getGrpcfetcher()
+                let toLastBlock = try await toGrpcFetcher!.fetchLastBlock()
+                let simulReq = Signer.genIbcSendSimul(account!, onBindIbcSend(ibcClient!, toLastBlock!), cosmosTxFee, toMemo, fromChain)
+                let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateFeeViewAfterSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -859,12 +888,13 @@ extension CommonTransfer {
     
     func ibcCoinSend() {
         Task {
-            let channel = getConnection()
-            let recipientChannel = getRecipientConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress),
-               let ibcClient = try? await fetchIbcClient(channel),
-               let lastBlock = try? await fetchLastBlock(recipientChannel),
-               let response = try await broadcastIbcSendTx(channel, auth!, onBindIbcSend(ibcClient!, lastBlock!)) {
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let ibcClient = try await fromGrpcFetcher.fetchIbcClient(ibcPath!)
+                let toGrpcFetcher = toChain!.getGrpcfetcher()
+                let toLastBlock = try await toGrpcFetcher!.fetchLastBlock()
+                let broadReq = Signer.genIbcSendTx(account!, onBindIbcSend(ibcClient!, toLastBlock!), cosmosTxFee, toMemo, fromChain)
+                let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -877,6 +907,9 @@ extension CommonTransfer {
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
                 })
+                
+            } catch {
+                //TODO handle Error
             }
         }
     }
@@ -893,7 +926,7 @@ extension CommonTransfer {
             $0.amount = toAmount.stringValue
         }
         return Ibc_Applications_Transfer_V1_MsgTransfer.with {
-            $0.sender = (fromChain as! CosmosClass).bechAddress
+            $0.sender = fromChain.bechAddress!
             $0.receiver = toAddress
             $0.sourceChannel = ibcPath!.channel!
             $0.sourcePort = ibcPath!.port!
@@ -907,20 +940,20 @@ extension CommonTransfer {
     
     func ibcWasmSendSimul() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress) {
-                do {
-                    let simul = try await simulCw20IbcSendTx(channel, auth!, onBindCw20IbcSend())
-                    DispatchQueue.main.async {
-                        self.onUpdateFeeViewAfterSimul(simul)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let simulReq = Signer.genWasmSimul(account!, [onBindCw20IbcSend()], cosmosTxFee, toMemo, fromChain)
+                let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateFeeViewAfterSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -928,9 +961,10 @@ extension CommonTransfer {
     
     func ibcWasmSend() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress),
-               let response = try await broadcastCw20IbcSendTx(channel, auth!, onBindCw20IbcSend()) {
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let broadReq = Signer.genWasmTx(account!, [onBindCw20IbcSend()], cosmosTxFee, toMemo, fromChain)
+                let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -943,6 +977,9 @@ extension CommonTransfer {
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
                 })
+                
+            } catch {
+                //TODO handle Error
             }
         }
     }
@@ -954,116 +991,10 @@ extension CommonTransfer {
         let innerMsg: JSON = ["send" : ["contract" : ibcPath!.getIBCContract(), "amount" : toAmount.stringValue, "msg" : jsonMsgBase64]]
         let innerMsgBase64 = try! innerMsg.rawData(options: [.sortedKeys]).base64EncodedString()
         return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-            $0.sender = (fromChain as! CosmosClass).bechAddress
+            $0.sender = fromChain.bechAddress!
             $0.contract = toSendMsToken.address!
             $0.msg = Data(base64Encoded: innerMsgBase64)!
         }
-    }
-}
-
-extension CommonTransfer {
-    
-    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchIbcClient(_ channel: ClientConnection) async throws -> Ibc_Core_Channel_V1_QueryChannelClientStateResponse? {
-        let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
-            $0.channelID = ibcPath!.channel!
-            $0.portID = ibcPath!.port!
-        }
-        return try? await Ibc_Core_Channel_V1_QueryNIOClient(channel: channel).channelClientState(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func fetchLastBlock(_ channel: ClientConnection) async throws -> Cosmos_Base_Tendermint_V1beta1_GetLatestBlockResponse? {
-        let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
-        return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: channel).getLatestBlock(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    
-    
-    //inChain Coin Send
-    func simulSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toSend: Cosmos_Bank_V1beta1_MsgSend) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genSendSimul(auth, toSend, cosmosTxFee, toMemo, fromChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toSend: Cosmos_Bank_V1beta1_MsgSend) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genSendTx(auth, toSend, cosmosTxFee, toMemo, fromChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    //inChain Wasm Send
-    func simulCw20SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, [toWasmSend], cosmosTxFee, toMemo, fromChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastCw20SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, [toWasmSend], cosmosTxFee, toMemo, fromChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    //ibc Coin Send
-    func simulIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genIbcSendSimul(auth, ibcTransfer, cosmosTxFee, toMemo, fromChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastIbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genIbcSendTx(auth, ibcTransfer, cosmosTxFee, toMemo, fromChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    //Wasm ibc Send
-    func simulCw20IbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, [ibcWasmSend], cosmosTxFee, toMemo, fromChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastCw20IbcSendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ ibcWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, [ibcWasmSend], cosmosTxFee, toMemo, fromChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: (fromChain as! CosmosClass).getGrpc().0, port: (fromChain as! CosmosClass).getGrpc().1)
-    }
-    
-    func getRecipientConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: (toChain as! CosmosClass).getGrpc().0, port: (toChain as! CosmosClass).getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
     }
 }
 
@@ -1079,7 +1010,7 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
         } else if (sheetType == .SelectFeeDenom) {
             if let index = result["index"] as? Int,
                let selectedDenom = cosmosFeeInfos[selectedFeePosition].FeeDatas[index].denom {
-                cosmosTxFee = (fromChain as! CosmosClass).getUserSelectedFee(selectedFeePosition, selectedDenom)
+                cosmosTxFee = fromChain.getUserSelectedFee(selectedFeePosition, selectedDenom)
                 onUpdateFeeView()
                 onSimul()
             }
@@ -1119,17 +1050,17 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                 evmSend()
                 
             } else if (txStyle == .COSMOS_STYLE) {
-                if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {         // Inchain Send!
-                    if (sendType == .Only_Cosmos_CW20) {            // Inchain CW20 Send!
+                if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                     // Inchain Send!
+                    if (sendType == .Only_Cosmos_CW20) {                                    // Inchain CW20 Send!
                         inChainWasmSend()
-                    } else {                                        // Inchain Coin Send!  (Only_Cosmos_Coin, CosmosEVM_Coin)
+                    } else {                                                                // Inchain Coin Send!  (Only_Cosmos_Coin, CosmosEVM_Coin)
                         inChainCoinSend()
                     }
-                } else {                                            // IBC Send!
-                    ibcPath = WUtils.getMintscanPath((fromChain as! CosmosClass), (toChain as! CosmosClass), toSendDenom)
-                    if (sendType == .Only_Cosmos_CW20) {            // CW20 IBC Send!
+                } else {                                                                    // IBC Send!
+                    ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
+                    if (sendType == .Only_Cosmos_CW20) {                                    // CW20 IBC Send!
                         ibcWasmSend()
-                    } else {                                        // Coin IBC Send! (Only_Cosmos_Coin, CosmosEVM_Coin)
+                    } else {                                                                // Coin IBC Send! (Only_Cosmos_Coin, CosmosEVM_Coin)
                         ibcCoinSend()
                     }
                 }

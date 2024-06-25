@@ -208,10 +208,16 @@
 "str_show_all_proposal" = "ライブ提案";
 "str_hide_done_proposal" = "投票された提案を除く";
 "str_compoundable_chains" = "コンパウンディング対象チェーン";
-"str_compounding_all" = "モツコンパウンディング";
+"str_compounding_all" = "すべてを複利化する";
 "str_send_info" = "詳細情報の送信";
 "str_send_address" = "送信アドレス";
 "str_select_style" = "スタイルの選択";
+"str_tx_request" = "Tx 要求";
+"str_permit_request" = "Permit 要求";
+"str_dapp_warn_msg" = "このメッセージに署名するのは、要求しているサイトを信頼し、その内容を完全に理解している場合にのみ行ってください。";
+"str_affect_safe" = "あなたの資産に影響を与えません。";
+"str_affect_danger" = "あなたの資産に影響を与えます。";
+
 
 "str_tx_status" = "結果";
 "str_tx_height" = "ブロックの高さ";
@@ -313,8 +319,10 @@
 "str_withdraw" = "出金";
 "str_copy_evm_address" = "EVM スタイルのアドレスをコピー";
 "str_share_evm_address" = "EVM スタイルのアドレスを共有する";
+"str_share_evm_address2" = "EVM\nスタイルのアドレスを共有する";
 "str_copy_bech_address" = "Cosmos スタイルのアドレスをコピー";
 "str_share_bech_address" = "Cosmos スタイルのアドレスを共有する";
+"str_share_bech_address2" = "Cosmos\nスタイルのアドレスを共有する";
 "str_token_github" = "Token 情報確認";
 "str_nft_github" = "NFT 情報確認";
 "str_node_down_title" = "⚠️ ノードダウン";
@@ -324,7 +332,9 @@
 "str_delist_msg" = "選択したチェーンはモバイルウォレットから廃止されます。 他のウォレットや将来のカスタム チェーン サービスによってサポートされる可能性があります。";
 "str_legacy_path_title" = "レガシーパスはサポートされません";
 "str_legacy_path_msg" = "選択したレガシー パス上のアカウントは終了されます。 アセットをパブリック パスに移動することを強くお勧めします。";
-"str_deposit_caution" = "⚠️ %@ 資産のみ転送可能です";
+"str_deposit_caution" = "⚠️ %@ ネットワーク資産のみ転送可能";
+"str_copy_with_longpress" = "長押しでコピーします";
+"str_copy_with_box" = "コピーするにはボックスをタップしてください";
 
 
 "btn_delegate" = "  委任する";
@@ -385,7 +395,7 @@
 "msg_search_chain" = "チェーンやトークンを検索してください。";
 "msg_mnemonic_wanning" = "このフレーズがアカウントを回復する唯一の方法です。 誰とも共有しないでください。 このニーモニックを失うと、資産の損失につながる可能性があります。";
 "msg_tap_to_mnemonic_copy" = "ニーモニックフレーズボックスをタップしてコピーします。";
-"msg_tap_box_to_copy" = "カードをタップしてコピーします。";
+"msg_tap_box_to_copy" = "タップしてコピー。";
 "msg_tap_for_add_memo" = "タップしてメモを追加します。";
 "msg_tap_for_add_amount" = "タップして金額を追加します。";
 "msg_tap_for_add_address" = "タップしてアドレスを追加します。";
@@ -398,7 +408,7 @@
 "msg_addressbook_add" = "便宜上、よく使うアドレスを登録できます。";
 "msg_addressbook_memo_changed" = "既存のアドレス帳と比べてメモが変わりました。\n新しいメモで更新しますか?";
 "msg_addressbook_updated" = "連絡先を更新しました。";
-"msg_swap_warn" = "コスモステーションモバイルを非受託型ウォレットサービスとしてすべてのトランザクション実行の責任はユーザーにあります。 トランザクションを送信する前に常に内容を正確に確認して使用してください。 \n\nアプリによる取引による損失は一切責任を負いません。";
+"msg_swap_warn" = "このウォレットは非カストディアルサービスであり、すべてのトランザクションの実行はユーザーの責任です。トランザクションを送信する前に、必ず詳細を慎重に確認してください。\n\nアプリを通じて行われた取引による損失については責任を負いません。";
 "msg_check_inputed_mnemonic" = "入力したニーモニックを確認してください。 \nご存知のように、誰とも共有しないでください。 このニーモニックを紛失すると、資産の損失につながる可能性があります。";
 "msg_show_all_proposals" = "すべての提案を表示します。";
 "msg_hide_scam_proposals" = "詐欺の疑いのある提案を除外します。";
@@ -493,12 +503,8 @@
 "setting_app_lock_title" = "App Lock";
 "setting_bio_auth_title" = "Biometrics";
 "setting_auto_pass_title" = "Auto Pass";
-"setting_mintscan_title" = "Mintscan";
+"setting_help_title" = "Help & Guide";
 "setting_homepage_title" = "HomePage";
-"setting_blog_title" = "Blog";
-"setting_telegram_title" = "Telegram";
-"setting_twitter_title" = "X(Twiiter)";
-"setting_youtube_title" = "Youtube";
 "setting_term_title" = "利用規約";
 "setting_privacy_title" = "個人情報保護";
 "setting_github_title" = "Github";
@@ -1158,6 +1164,7 @@
 "error_tranfer_disabled" = "現在選択されているチェーンは送信機能が無効になっています。\n今後のガバナンスなどを通じて活性化することができます。";
 "error_tranfer_disabled_bgt" = "BGT コインはステーキング専用の資産です。 \n送信できません。";
 "error_bera_vote_one_proposal" = "投票できるのは 1 つの BeraChain のみです。";
+"error_wc2_failed" = "デアプリ連動（Wallet Connect V2）に失敗しました。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

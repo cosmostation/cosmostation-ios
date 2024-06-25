@@ -8,10 +8,6 @@
 
 import UIKit
 import Lottie
-import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class KavaSwapAction: BaseVC {
     
@@ -54,7 +50,8 @@ class KavaSwapAction: BaseVC {
     @IBOutlet weak var swpBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
+    var grpcFetcher: FetcherGrpc!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -79,6 +76,7 @@ class KavaSwapAction: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        grpcFetcher = selectedChain.getGrpcfetcher()
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -115,12 +113,12 @@ class KavaSwapAction: BaseVC {
             
             let poolCoin1Amount = swapPool.coins[0].getAmount()
             let poolCoin2Amount = swapPool.coins[1].getAmount()
-            var availabelCoin1Amount = selectedChain.balanceAmount(swapPool.coins[0].denom)
+            var availabelCoin1Amount = grpcFetcher.balanceAmount(swapPool.coins[0].denom)
             if (txFee.amount[0].denom == swapPool.coins[0].denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 availabelCoin1Amount = availabelCoin1Amount.subtracting(feeAmount)
             }
-            let availabelCoin2Amount = selectedChain.balanceAmount(swapPool.coins[1].denom)
+            let availabelCoin2Amount = grpcFetcher.balanceAmount(swapPool.coins[1].denom)
             
             swapRate = poolCoin1Amount.dividing(by: poolCoin2Amount, withBehavior: handler24Down)
             let availabelRate = availabelCoin1Amount.dividing(by: availabelCoin2Amount, withBehavior: handler24Down)
@@ -173,7 +171,7 @@ class KavaSwapAction: BaseVC {
             lpAmountSheet.existed2Amount = coin2ToAmount
         }
         lpAmountSheet.sheetDelegate = self
-        self.onStartSheet(lpAmountSheet)
+        onStartSheet(lpAmountSheet, 320, 0.6)
     }
     
     func onUpdateDepositAmountView(_ amount1: String?, _ amount2: String?) {
@@ -206,7 +204,7 @@ class KavaSwapAction: BaseVC {
         }
         amountSheet.sheetDelegate = self
         amountSheet.sheetType = .TxSwpWithdraw
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     //update with withdraw amount
@@ -246,7 +244,7 @@ class KavaSwapAction: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -275,7 +273,7 @@ class KavaSwapAction: BaseVC {
         baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240)
+        onStartSheet(baseSheet, 240, 0.6)
     }
     
     func onUpdateFeeView() {
@@ -314,51 +312,34 @@ class KavaSwapAction: BaseVC {
     func onSimul() {
         if (swpActionType == .Deposit) {
             if (coin1ToAmount == NSDecimalNumber.zero || coin2ToAmount == NSDecimalNumber.zero) { return }
-            view.isUserInteractionEnabled = false
-            swpBtn.isEnabled = false
-            loadingView.isHidden = false
-            Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
-                    do {
-                        let simul = try await simulDepositTx(channel, auth!, onBindDepsoitMsg())
-                        DispatchQueue.main.async {
-                            self.onUpdateWithSimul(simul)
-                        }
-                        
-                    } catch {
-                        DispatchQueue.main.async {
-                            self.view.isUserInteractionEnabled = true
-                            self.loadingView.isHidden = true
-                            self.onShowToast("Error : " + "\n" + "\(error)")
-                            return
-                        }
-                    }
-                }
-            }
-            
         } else if (swpActionType == .Withdraw) {
             if (toWithdrawAmount == NSDecimalNumber.zero) { return }
-            view.isUserInteractionEnabled = false
-            swpBtn.isEnabled = false
-            loadingView.isHidden = false
-            Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
-                    do {
-                        let simul = try await simulWithdrawTx(channel, auth!, onBindWithdrawMsg())
-                        DispatchQueue.main.async {
-                            self.onUpdateWithSimul(simul)
-                        }
-                        
-                    } catch {
-                        DispatchQueue.main.async {
-                            self.view.isUserInteractionEnabled = true
-                            self.loadingView.isHidden = true
-                            self.onShowToast("Error : " + "\n" + "\(error)")
-                            return
-                        }
-                    }
+        }
+        view.isUserInteractionEnabled = false
+        swpBtn.isEnabled = false
+        loadingView.isHidden = false
+        
+        Task {
+            do {
+                var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
+                let account = try await grpcFetcher.fetchAuth()
+                if (swpActionType == .Deposit) {
+                    simulReq = Signer.geKavaSwpDepositSimul(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                    
+                } else if (swpActionType == .Withdraw) {
+                    simulReq = Signer.geKavaSwpWithdrawSimul(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                }
+                let simulRes = try await grpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -376,7 +357,7 @@ class KavaSwapAction: BaseVC {
             $0.amount = coin2ToAmount.stringValue
         }
         return Kava_Swap_V1beta1_MsgDeposit.with {
-            $0.depositor = selectedChain.bechAddress
+            $0.depositor = selectedChain.bechAddress!
             $0.tokenA = depositCoin1
             $0.tokenB = depositCoin2
             $0.slippage = slippage
@@ -391,7 +372,7 @@ class KavaSwapAction: BaseVC {
         let mintCoin2Amount = swapPool.coins[1].getAmount().multiplying(by: toWithdrawAmount).dividing(by: totalShares, withBehavior: handler0Down).multiplying(by: padding, withBehavior: handler0Down)
         let deadline = (Date().millisecondsSince1970 / 1000) + 300
         return  Kava_Swap_V1beta1_MsgWithdraw.with {
-            $0.from = selectedChain.bechAddress
+            $0.from = selectedChain.bechAddress!
             $0.shares = toWithdrawAmount.stringValue
             $0.minTokenA = Cosmos_Base_V1beta1_Coin.with { $0.denom = swapPool.coins[0].denom; $0.amount = mintCoin1Amount.stringValue }
             $0.minTokenB = Cosmos_Base_V1beta1_Coin.with { $0.denom = swapPool.coins[1].denom; $0.amount = mintCoin2Amount.stringValue }
@@ -432,99 +413,36 @@ extension KavaSwapAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             view.isUserInteractionEnabled = false
             swpBtn.isEnabled = false
             loadingView.isHidden = false
-            
-            if (swpActionType == .Deposit) {
-                Task {
-                    let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
-                       let response = try await broadcastDepositTx(channel, auth!, onBindDepsoitMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.selectedChain
-                            txResult.broadcastTxResponse = response
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
+            Task {
+                do {
+                    var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
+                    let account = try await grpcFetcher.fetchAuth()
+                    if (swpActionType == .Deposit) {
+                        broadReq = Signer.genKavaSwpDepositTx(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                        
+                    } else if (swpActionType == .Withdraw) {
+                        broadReq = Signer.genKavaSwpwithdrawTx(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                        
                     }
+                    let response = try await grpcFetcher.broadcastTx(broadReq)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        self.loadingView.isHidden = true
+                        
+                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                        txResult.selectedChain = self.selectedChain
+                        txResult.broadcastTxResponse = response
+                        txResult.modalPresentationStyle = .fullScreen
+                        self.present(txResult, animated: true)
+                    })
+                    
+                } catch {
+                    //TODO handle Error
                 }
-                
-            } else if (swpActionType == .Withdraw) {
-                Task {
-                    let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
-                       let response = try await broadcastWithdrawTx(channel, auth!, onBindWithdrawMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.selectedChain
-                            txResult.broadcastTxResponse = response
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
-                    }
-                }
-                
             }
         }
     }
     
 }
-
-
-extension KavaSwapAction {
-    
-    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    //Swp Deposit
-    func simulDepositTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toDeposit: Kava_Swap_V1beta1_MsgDeposit) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.geKavaSwpDepositSimul(auth, toDeposit, txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastDepositTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toDeposit: Kava_Swap_V1beta1_MsgDeposit) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genKavaSwpDepositTx(auth, toDeposit, txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    //Swp Withdraw
-    func simulWithdrawTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWithdraw: Kava_Swap_V1beta1_MsgWithdraw) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.geKavaSwpWithdrawSimul(auth, toWithdraw, txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastWithdrawTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWithdraw: Kava_Swap_V1beta1_MsgWithdraw) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genKavaSwpwithdrawTx(auth, toWithdraw, txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
-    }
-}
-
 
 
 public enum SwpActionType: Int {

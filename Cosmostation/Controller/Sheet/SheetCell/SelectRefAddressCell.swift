@@ -11,23 +11,20 @@ import UIKit
 class SelectRefAddressCell: UITableViewCell {
     
     @IBOutlet weak var accountNameLabel: UILabel!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var evmCompatTag: UILabel!
-    @IBOutlet weak var keyTypeTag: UILabel!
+    @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var addressLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
         legacyTag.isHidden = true
-        evmCompatTag.isHidden = true
         keyTypeTag.isHidden = true
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         legacyTag.isHidden = true
-        evmCompatTag.isHidden = true
         keyTypeTag.isHidden = true
     }
     
@@ -36,23 +33,14 @@ class SelectRefAddressCell: UITableViewCell {
             accountNameLabel.text = account.name
         }
         
-        let allCosmos = ALLCOSMOSCLASS()
-        if let chain = allCosmos.filter({ $0.tag == refAddress.chainTag }).first {
+        let allChain = ALLCHAINS()
+        if let chain = allChain.filter({ $0.tag == refAddress.chainTag }).first {
             legacyTag.isHidden = chain.isDefault
-            //for okt legacy
-            if (chain.tag == "okt996_Keccak") {
-                keyTypeTag.text = "ethsecp256k1"
-                keyTypeTag.isHidden = false
-                
-            } else if (chain.tag == "okt996_Secp") {
-                keyTypeTag.text = "secp256k1"
+            if (chain.name == "OKT" && !chain.supportEvm) {
+                keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
                 keyTypeTag.isHidden = false
             }
         }
-//        let allEvm = ALLEVMCLASS()
-//        if (allEvm.filter({ $0.tag == refAddress.chainTag }).count != 0) {
-//            evmCompatTag.isHidden = false
-//        }
         
         addressLabel.text = refAddress.bechAddress
         addressLabel.adjustsFontSizeToFitWidth = true

@@ -8,10 +8,6 @@
 
 import UIKit
 import Lottie
-import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class KavaMintAction: BaseVC {
     
@@ -44,7 +40,8 @@ class KavaMintAction: BaseVC {
     @IBOutlet weak var mintBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
+    var grpcFetcher: FetcherGrpc!
     var feeInfos = [FeeInfo]()
     var selectedFeeInfo = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -65,6 +62,7 @@ class KavaMintAction: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        grpcFetcher = selectedChain.getGrpcfetcher()
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -88,7 +86,7 @@ class KavaMintAction: BaseVC {
         if (mintActionType == .Deposit) {
             toMintSymbolLabel.text = collateralMsAsset.symbol
             toMintAssetImg.af.setImage(withURL: collateralMsAsset.assetImg())
-            let balanceAmount = selectedChain.balanceAmount(collateralParam.denom)
+            let balanceAmount = grpcFetcher.balanceAmount(collateralParam.denom)
             if (txFee.amount[0].denom == collateralParam.denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 collateralAvailableAmount = balanceAmount.subtracting(feeAmount)
@@ -116,7 +114,7 @@ class KavaMintAction: BaseVC {
         } else if (mintActionType == .Repay) {
             toMintSymbolLabel.text = principalMsAsset.symbol
             toMintAssetImg.af.setImage(withURL: principalMsAsset.assetImg())
-            principalAvailableAmount = selectedChain.balanceAmount("usdx")
+            principalAvailableAmount = grpcFetcher.balanceAmount("usdx")
         }
         
         
@@ -188,7 +186,7 @@ class KavaMintAction: BaseVC {
             amountSheet.msAsset = principalMsAsset
         }
         amountSheet.sheetDelegate = self
-        self.onStartSheet(amountSheet)
+        onStartSheet(amountSheet, 240, 0.6)
     }
     
     func onUpdateAmountView(_ amount: String?) {
@@ -233,7 +231,7 @@ class KavaMintAction: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -262,7 +260,7 @@ class KavaMintAction: BaseVC {
         baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240)
+        onStartSheet(baseSheet, 240, 0.6)
     }
     
     func onUpdateFeeView() {
@@ -298,106 +296,48 @@ class KavaMintAction: BaseVC {
     }
     
     func onSimul() {
-        if (mintActionType == .Deposit) {
+        if (mintActionType == .Deposit || mintActionType == .Withdraw) {
             if (toCollateralAmount == NSDecimalNumber.zero ) { return }
-            view.isUserInteractionEnabled = false
-            mintBtn.isEnabled = false
-            loadingView.isHidden = false
-            Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
-                    do {
-                        let simul = try await simulDepositTx(channel, auth!, onBindDepsoitMsg())
-                        DispatchQueue.main.async {
-                            self.onUpdateWithSimul(simul)
-                        }
-                        
-                    } catch {
-                        DispatchQueue.main.async {
-                            self.view.isUserInteractionEnabled = true
-                            self.loadingView.isHidden = true
-                            self.onShowToast("Error : " + "\n" + "\(error)")
-                            return
-                        }
-                    }
-                }
-            }
-            
-        } else if (mintActionType == .Withdraw) {
-            if (toCollateralAmount == NSDecimalNumber.zero ) { return }
-            view.isUserInteractionEnabled = false
-            mintBtn.isEnabled = false
-            loadingView.isHidden = false
-            Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
-                    do {
-                        let simul = try await simulWithdrawTx(channel, auth!, onBindWithdrawMsg())
-                        DispatchQueue.main.async {
-                            self.onUpdateWithSimul(simul)
-                        }
-                        
-                    } catch {
-                        DispatchQueue.main.async {
-                            self.view.isUserInteractionEnabled = true
-                            self.loadingView.isHidden = true
-                            self.onShowToast("Error : " + "\n" + "\(error)")
-                            return
-                        }
-                    }
-                }
-            }
-            
-        } else if (mintActionType == .DrawDebt) {
+        } else {
             if (toPrincipalAmount == NSDecimalNumber.zero ) { return }
-            view.isUserInteractionEnabled = false
-            mintBtn.isEnabled = false
-            loadingView.isHidden = false
-            Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
-                    do {
-                        let simul = try await simulBorrowTx(channel, auth!, onBindDrawDebtMsg())
-                        DispatchQueue.main.async {
-                            self.onUpdateWithSimul(simul)
-                        }
-                        
-                    } catch {
-                        DispatchQueue.main.async {
-                            self.view.isUserInteractionEnabled = true
-                            self.loadingView.isHidden = true
-                            self.onShowToast("Error : " + "\n" + "\(error)")
-                            return
-                        }
-                    }
+        }
+        
+        view.isUserInteractionEnabled = false
+        mintBtn.isEnabled = false
+        loadingView.isHidden = false
+        
+        Task {
+            do {
+                var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
+                let account = try await grpcFetcher.fetchAuth()
+                if (mintActionType == .Deposit) {
+                    simulReq = Signer.KavaCDPDepositSimul(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                    
+                } else if (mintActionType == .Withdraw) {
+                    simulReq = Signer.genKavaCDPWithdrawSimul(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                    
+                } else if (mintActionType == .DrawDebt) {
+                    simulReq = Signer.genKavaCDPDrawDebtSimul(account!, onBindDrawDebtMsg(), txFee, txMemo, selectedChain)
+                    
+                } else if (mintActionType == .Repay) {
+                    simulReq = Signer.genKavaCDPRepaySimul(account!, onBindRepayMsg(), txFee, txMemo, selectedChain)
                 }
-            }
-            
-        } else if (mintActionType == .Repay) {
-            if (toPrincipalAmount == NSDecimalNumber.zero ) { return }
-            view.isUserInteractionEnabled = false
-            mintBtn.isEnabled = false
-            loadingView.isHidden = false
-            Task {
-                let channel = getConnection()
-                if let auth = try? await fetchAuth(channel, selectedChain.bechAddress) {
-                    do {
-                        let simul = try await simulRepayTx(channel, auth!, onBindRepayMsg())
-                        DispatchQueue.main.async {
-                            self.onUpdateWithSimul(simul)
-                        }
-                        
-                    } catch {
-                        DispatchQueue.main.async {
-                            self.view.isUserInteractionEnabled = true
-                            self.loadingView.isHidden = true
-                            self.onShowToast("Error : " + "\n" + "\(error)")
-                            return
-                        }
-                    }
+                let simulRes = try await grpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(simulRes)
+                }
+                            
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
+        
     }
     
     func onBindDepsoitMsg() -> Kava_Cdp_V1beta1_MsgDeposit {
@@ -406,8 +346,8 @@ class KavaMintAction: BaseVC {
             $0.amount = toCollateralAmount.stringValue
         }
         return Kava_Cdp_V1beta1_MsgDeposit.with {
-            $0.depositor = selectedChain.bechAddress
-            $0.owner = selectedChain.bechAddress
+            $0.depositor = selectedChain.bechAddress!
+            $0.owner = selectedChain.bechAddress!
             $0.collateral = collateralCoin
             $0.collateralType = collateralParam.type
         }
@@ -419,8 +359,8 @@ class KavaMintAction: BaseVC {
             $0.amount = toCollateralAmount.stringValue
         }
         return Kava_Cdp_V1beta1_MsgWithdraw.with {
-            $0.depositor = selectedChain.bechAddress
-            $0.owner = selectedChain.bechAddress
+            $0.depositor = selectedChain.bechAddress!
+            $0.owner = selectedChain.bechAddress!
             $0.collateral = collateralCoin
             $0.collateralType = collateralParam.type
         }
@@ -432,7 +372,7 @@ class KavaMintAction: BaseVC {
             $0.amount = toPrincipalAmount.stringValue
         }
         return Kava_Cdp_V1beta1_MsgDrawDebt.with {
-            $0.sender = selectedChain.bechAddress
+            $0.sender = selectedChain.bechAddress!
             $0.collateralType = collateralParam.type
             $0.principal = principalCoin
         }
@@ -444,7 +384,7 @@ class KavaMintAction: BaseVC {
             $0.amount = toPrincipalAmount.stringValue
         }
         return Kava_Cdp_V1beta1_MsgRepayDebt.with {
-            $0.sender = selectedChain.bechAddress
+            $0.sender = selectedChain.bechAddress!
             $0.collateralType = collateralParam.type
             $0.payment = paymentCoin
         }
@@ -478,159 +418,39 @@ extension KavaMintAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             view.isUserInteractionEnabled = false
             mintBtn.isEnabled = false
             loadingView.isHidden = false
-            
-            if (mintActionType == .Deposit) {
-                Task {
-                    let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
-                       let response = try await broadcastDepositTx(channel, auth!, onBindDepsoitMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.selectedChain
-                            txResult.broadcastTxResponse = response
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
+            Task {
+                do {
+                    var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
+                    let account = try await grpcFetcher.fetchAuth()
+                    if (mintActionType == .Deposit) {
+                        broadReq = Signer.genKavaCDPDepositTx(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                        
+                    } else if (mintActionType == .Withdraw) {
+                        broadReq = Signer.genKavaCDPWithdrawTx(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                        
+                    } else if (mintActionType == .DrawDebt) {
+                        broadReq = Signer.genKavaCDPDrawDebtTx(account!, onBindDrawDebtMsg(), txFee, txMemo, selectedChain)
+                        
+                    } else if (mintActionType == .Repay) {
+                        broadReq = Signer.genKavaCDPRepayTx(account!, onBindRepayMsg(), txFee, txMemo, selectedChain)
+                        
                     }
+                    let response = try await grpcFetcher.broadcastTx(broadReq)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        self.loadingView.isHidden = true
+                        
+                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                        txResult.selectedChain = self.selectedChain
+                        txResult.broadcastTxResponse = response
+                        txResult.modalPresentationStyle = .fullScreen
+                        self.present(txResult, animated: true)
+                    })
+                    
+                } catch {
+                    //TODO handle Error
                 }
-                
-            } else if (mintActionType == .Withdraw) {
-                Task {
-                    let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
-                       let response = try await broadcastWithdrawTx(channel, auth!, onBindWithdrawMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.selectedChain
-                            txResult.broadcastTxResponse = response
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
-                    }
-                }
-                
-            } else if (mintActionType == .DrawDebt) {
-                Task {
-                    let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
-                       let response = try await broadcastBorrowTx(channel, auth!, onBindDrawDebtMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.selectedChain
-                            txResult.broadcastTxResponse = response
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
-                    }
-                }
-                
-            } else if (mintActionType == .Repay) {
-                Task {
-                    let channel = getConnection()
-                    if let auth = try? await fetchAuth(channel, selectedChain.bechAddress),
-                       let response = try await broadcastRepayTx(channel, auth!, onBindRepayMsg()) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.selectedChain
-                            txResult.broadcastTxResponse = response
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
-                    }
-                }
-                
             }
         }
-    }
-    
-}
-
-extension KavaMintAction {
-    
-    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    
-    //CDP Deposit
-    func simulDepositTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toDeposit: Kava_Cdp_V1beta1_MsgDeposit) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.KavaCDPDepositSimul(auth, toDeposit, txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastDepositTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toDeposit: Kava_Cdp_V1beta1_MsgDeposit) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genKavaCDPDepositTx(auth, toDeposit, txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    //CDP Withdraw
-    func simulWithdrawTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWithdraw: Kava_Cdp_V1beta1_MsgWithdraw) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genKavaCDPWithdrawSimul(auth, toWithdraw, txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastWithdrawTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWithdraw: Kava_Cdp_V1beta1_MsgWithdraw) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genKavaCDPWithdrawTx(auth, toWithdraw, txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    //CDP DrawDebt
-    func simulBorrowTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toDrawDebt: Kava_Cdp_V1beta1_MsgDrawDebt) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genKavaCDPDrawDebtSimul(auth, toDrawDebt, txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastBorrowTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toDrawDebt: Kava_Cdp_V1beta1_MsgDrawDebt) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genKavaCDPDrawDebtTx(auth, toDrawDebt, txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    //CDP Repay
-    func simulRepayTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toRepay: Kava_Cdp_V1beta1_MsgRepayDebt) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genKavaCDPRepaySimul(auth, toRepay, txFee, txMemo, selectedChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcastRepayTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toRepay: Kava_Cdp_V1beta1_MsgRepayDebt) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genKavaCDPRepayTx(auth, toRepay, txFee, txMemo, selectedChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
     }
 }
 

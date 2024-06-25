@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -143,7 +143,7 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z2k-BU-6T1">
-                    <rect key="frame" x="8" y="682.33333333333337" width="377" height="69.666666666666629"/>
+                    <rect key="frame" x="8" y="678.33333333333337" width="377" height="69.666666666666629"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1im-Jr-7qV">
                             <rect key="frame" x="16" y="15.999999999999998" width="345" height="19.333333333333329"/>
@@ -169,7 +169,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pAd-Pf-hQO" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="HbW-j9-2EE"/>
@@ -201,7 +201,7 @@
                 <constraint firstItem="6br-xa-AHd" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="3j0-Zn-n5y"/>
                 <constraint firstItem="zYI-QQ-NDW" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="4Nm-8e-3ME"/>
                 <constraint firstItem="pAd-Pf-hQO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="DcG-WT-62z"/>
-                <constraint firstAttribute="bottom" secondItem="pAd-Pf-hQO" secondAttribute="bottom" constant="38" id="HA2-Ss-Cgg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pAd-Pf-hQO" secondAttribute="bottom" constant="8" id="HA2-Ss-Cgg"/>
                 <constraint firstItem="pAd-Pf-hQO" firstAttribute="top" secondItem="z2k-BU-6T1" secondAttribute="bottom" constant="8" id="Lx7-tH-qOw"/>
                 <constraint firstItem="Bmg-8Q-NhC" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="OyB-Br-3Y9"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pAd-Pf-hQO" secondAttribute="trailing" constant="8" id="dkc-It-Zin"/>

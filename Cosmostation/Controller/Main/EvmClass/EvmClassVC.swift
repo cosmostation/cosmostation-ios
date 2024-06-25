@@ -30,7 +30,7 @@ class EvmClassVC: BaseVC {
     var addtokenBarBtn: UIBarButtonItem!
     var explorerBarBtn: UIBarButtonItem!
     
-    var selectedChain: EvmClass!
+    var selectedChain: BaseChain!
     var totalValue = NSDecimalNumber.zero {
         didSet {
             if (BaseData.instance.getHideValue()) {
@@ -99,7 +99,6 @@ class EvmClassVC: BaseVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchTokenDone(_:)), name: Notification.Name("FetchTokens"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -124,13 +123,6 @@ class EvmClassVC: BaseVC {
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
-        let tag = notification.object as! String
-        if (tag == selectedChain.tag) {
-            totalValue = selectedChain.allValue()
-        }
-    }
-    
-    @objc func onFetchTokenDone(_ notification: NSNotification) {
         let tag = notification.object as! String
         if (tag == selectedChain.tag) {
             totalValue = selectedChain.allValue()

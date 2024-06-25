@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainBaseEVM: EvmClass  {
+class ChainBaseEVM: BaseChain  {
     
     override init() {
         super.init()
@@ -16,17 +16,17 @@ class ChainBaseEVM: EvmClass  {
         name = "Base"
         tag = "base60"
         logo1 = "chainBase"
-        logo2 = "chainBase2"
         apiName = "base"
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
+        
+        supportEvm = true
         coinSymbol = "ETH"
         coinGeckoId = "weth"
         coinLogo = "tokenEth_base"
-        
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
-        
         evmRpcURL = "https://mainnet.base.org"
         
+        initFetcher()
     }
     
 }

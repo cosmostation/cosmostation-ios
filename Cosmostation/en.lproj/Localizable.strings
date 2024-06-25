@@ -208,10 +208,15 @@
 "str_show_all_proposal" = "Live Proposals";
 "str_hide_done_proposal" = "Excluding voted Proposals";
 "str_compoundable_chains" = "Compoundable Chains";
-"str_compounding_all" = "Compoundable All";
+"str_compounding_all" = "Compounding All";
 "str_send_info" = "Send Detail Info";
 "str_send_address" = "Send Address";
 "str_select_style" = "Select Style";
+"str_tx_request" = "Tx Request";
+"str_permit_request" = "Permit Request";
+"str_dapp_warn_msg" = "Only sign this message if you trust the requesting site and fully understand its contents.";
+"str_affect_safe" = "Not affects your Assets.";
+"str_affect_danger" = "Affects your Assets.";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -313,8 +318,10 @@
 "str_withdraw" = "Withdraw";
 "str_copy_evm_address" = "Copy Evm style address";
 "str_share_evm_address" = "Share Evm style address";
+"str_share_evm_address2" = "Share\nEvm Style Address";
 "str_copy_bech_address" = "Copy Cosmos style address";
 "str_share_bech_address" = "Share Cosmos style address";
+"str_share_bech_address2" = "Share\nCosmos Style Address";
 "str_token_github" = "Check Token Info";
 "str_nft_github" = "Check NFT Info";
 "str_node_down_title" = "⚠️ Node Down";
@@ -324,7 +331,9 @@
 "str_delist_msg" = "The chain you selected will be discontinued from mobile wallets. It can be supported by other wallets or future custom chain services.";
 "str_legacy_path_title" = "Legacy path will not support";
 "str_legacy_path_msg" = "Accounts on the legacy path you selected will be terminated. We strongly recommend that you move your assets to the public path.";
-"str_deposit_caution" = "⚠️ Send %@ asset ONLY";
+"str_deposit_caution" = "⚠️ Send %@ network asset ONLY";
+"str_copy_with_longpress" = "Long press for copy";
+"str_copy_with_box" = "Tap the box for copy";
 
 
 
@@ -386,7 +395,7 @@
 "msg_search_chain" = "Search by Chain or Token";
 "msg_mnemonic_wanning" = "This phrase is the only way to recover your account. Do not share with anyone. Losing this mnemonics could lead to loss of your asset.";
 "msg_tap_to_mnemonic_copy" = "Tap mnemoniuc phrases box for copy.";
-"msg_tap_box_to_copy" = "Tap the card to copy it.";
+"msg_tap_box_to_copy" = "Tap for Copy.";
 "msg_tap_for_add_memo" = "Tap to add memo.";
 "msg_tap_for_add_amount" = "Tap to add amount.";
 "msg_tap_for_add_address" = "Tap to add address.";
@@ -399,7 +408,7 @@
 "msg_addressbook_add" = "For convenience, you can register frequently used addresses.";
 "msg_addressbook_memo_changed" = "The memo has changed compared to the existing address book.\nWould you like to update with new memo?";
 "msg_addressbook_updated" = "The address book has been updated.";
-"msg_swap_warn" = "Cosmostation Mobile is a non-custodial wallet service, so users are responsible for executing all transactions. Please always check the details accurately before sending a transaction. \n\nWe are not responsible for any losses resulting from transactions through the app.";
+"msg_swap_warn" = "This wallet is a non-custodial service, meaning the user is responsible for all transaction executions. Always carefully verify the details before sending any transactions.\n\nWe do not take responsibility for any losses incurred from transactions made through the app.";
 "msg_check_inputed_mnemonic" = "Please check the mnemonic you entered. \nJust so you know, don't share it with anyone. Losing this mnemonic can lead to loss of assets.";
 "msg_show_all_proposals" = "Show all proposals.";
 "msg_hide_scam_proposals" = "Filters out suspected of scam proposals.";
@@ -494,12 +503,8 @@
 "setting_app_lock_title" = "App Lock";
 "setting_bio_auth_title" = "Biometrics";
 "setting_auto_pass_title" = "Auto Pass";
-"setting_mintscan_title" = "Mintscan";
+"setting_help_title" = "Help & Guide";
 "setting_homepage_title" = "HomePage";
-"setting_blog_title" = "Blog";
-"setting_telegram_title" = "Telegram";
-"setting_twitter_title" = "X(Twiiter)";
-"setting_youtube_title" = "Youtube";
 "setting_term_title" = "Term";
 "setting_privacy_title" = "Privacy";
 "setting_github_title" = "Github";
@@ -1160,6 +1165,7 @@
 "error_tranfer_disabled" = "Send functionality of the selected chain is currently disabled.\nIt can be activated later through the onchain governance procedure.";
 "error_tranfer_disabled_bgt" = "BGT is a staking-only asset. \nTransmission is not possible.";
 "error_bera_vote_one_proposal" = "You can only vote for one BeraChain.";
+"error_wc2_failed" = "DApp integration (Wallet Connect V2) failed.";
 
 
 "alert_title_no_private_key" = "No Private Key";

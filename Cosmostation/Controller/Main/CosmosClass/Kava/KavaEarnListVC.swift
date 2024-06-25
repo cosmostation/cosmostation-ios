@@ -8,10 +8,6 @@
 
 import UIKit
 import Lottie
-import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class KavaEarnListVC: BaseVC {
     
@@ -20,13 +16,15 @@ class KavaEarnListVC: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var earnBtn: BaseButton!
     
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
+    var kavaFetcher: KavaFetcher!
     var myDeposits = [Cosmos_Base_V1beta1_Coin]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        kavaFetcher = selectedChain.getGrpcfetcher() as? KavaFetcher
         
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
@@ -51,10 +49,8 @@ class KavaEarnListVC: BaseVC {
     }
     
     func onFetchData() {
-        myDeposits.removeAll()
         Task {
-            let channel = getConnection()
-            if let myDeposit = try? await fetchEarnMyDeposit(channel, selectedChain.bechAddress) {
+            if let myDeposit = try? await kavaFetcher.fetchEarnMyDeposit() {
                 myDeposit?.deposits.forEach { deposit in
                     deposit.value.forEach { rawCoin in
                         if (rawCoin.denom.starts(with: "bkava-")) {
@@ -93,7 +89,7 @@ class KavaEarnListVC: BaseVC {
         let valOpAddress = target?.denom.replacingOccurrences(of: "bkava-", with: "")
         let earnDeposit = KavaEarnDepositAction(nibName: "KavaEarnDepositAction", bundle: nil)
         earnDeposit.selectedChain = selectedChain
-        earnDeposit.toValidator = selectedChain.cosmosValidators.filter({ $0.operatorAddress == valOpAddress }).first
+        earnDeposit.toValidator = selectedChain.getGrpcfetcher()!.cosmosValidators.filter({ $0.operatorAddress == valOpAddress }).first
         earnDeposit.modalTransitionStyle = .coverVertical
         self.present(earnDeposit, animated: true)
     }
@@ -149,7 +145,7 @@ extension KavaEarnListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
         baseSheet.sheetDelegate = self
         baseSheet.earnCoin = myDeposits[indexPath.row]
         baseSheet.sheetType = .SelectEarnAction
-        onStartSheet(baseSheet, 240)
+        onStartSheet(baseSheet, 240, 0.6)
     }
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
@@ -168,24 +164,4 @@ extension KavaEarnListVC: UITableViewDelegate, UITableViewDataSource, BaseSheetD
     }
     
     
-}
-
-extension KavaEarnListVC {
-    
-    func fetchEarnMyDeposit(_ channel: ClientConnection, _ address: String) async throws -> Kava_Earn_V1beta1_QueryDepositsResponse? {
-        let req = Kava_Earn_V1beta1_QueryDepositsRequest.with { $0.depositor = address }
-        return try? await Kava_Earn_V1beta1_QueryNIOClient(channel: channel).deposits(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
-    }
 }

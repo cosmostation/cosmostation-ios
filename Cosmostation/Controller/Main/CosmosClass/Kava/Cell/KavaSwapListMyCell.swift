@@ -31,7 +31,7 @@ class KavaSwapListMyCell: UITableViewCell {
         rootView.setBlur()
     }
     
-    func onBindSwpPool(_ baseChain: CosmosClass, _ priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?,
+    func onBindSwpPool(_ baseChain: BaseChain, _ priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?,
                        _ deposit: Kava_Swap_V1beta1_DepositResponse?, _ pool: Kava_Swap_V1beta1_PoolResponse?) {
         if (deposit == nil || pool == nil) { return }
         let coin1 = pool!.coins[0]

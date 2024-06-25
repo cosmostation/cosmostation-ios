@@ -83,7 +83,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="CC2-IS-H2q">
-                    <rect key="frame" x="0.0" y="169.66666666666669" width="393" height="588.33333333333326"/>
+                    <rect key="frame" x="0.0" y="169.66666666666669" width="393" height="584.33333333333326"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W8J-nT-Ti9">
@@ -116,7 +116,7 @@
                     </constraints>
                 </view>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNg-fs-Goi" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="766" width="377" height="48"/>
+                    <rect key="frame" x="8" y="762" width="377" height="48"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="nFu-th-S7l"/>
@@ -132,7 +132,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yig-Fq-6UW" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="766" width="377" height="48"/>
+                    <rect key="frame" x="8" y="762" width="377" height="48"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="Bna-0n-guh"/>
@@ -163,7 +163,7 @@
                 <constraint firstItem="Ojd-YY-Yyf" firstAttribute="top" secondItem="Y1f-Tz-XYH" secondAttribute="bottom" constant="10" id="S3N-r7-xK0"/>
                 <constraint firstItem="Ojd-YY-Yyf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="S5H-s2-k5I"/>
                 <constraint firstItem="sNg-fs-Goi" firstAttribute="trailing" secondItem="Yig-Fq-6UW" secondAttribute="trailing" id="YHv-TR-6BM"/>
-                <constraint firstAttribute="bottom" secondItem="Yig-Fq-6UW" secondAttribute="bottom" constant="38" id="Zu1-l7-sDE"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Yig-Fq-6UW" secondAttribute="bottom" constant="8" id="Zu1-l7-sDE"/>
                 <constraint firstItem="EwM-vn-iGd" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="cJd-Dy-iOe"/>
                 <constraint firstItem="W8J-nT-Ti9" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="cQo-Ud-K7O"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="CC2-IS-H2q" secondAttribute="trailing" id="ccL-AB-a4I"/>

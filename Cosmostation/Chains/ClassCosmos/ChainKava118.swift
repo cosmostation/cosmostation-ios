@@ -8,14 +8,35 @@
 
 import Foundation
 
-class ChainKava118: ChainKava459  {
+class ChainKava118: BaseChain  {
+    
+    var kavaFetcher: KavaFetcher?
     
     override init() {
         super.init()
         
-        isDefault = false
+        name = "Kava"
         tag = "kava118"
-        
+        logo1 = "chainKava"
+        isDefault = false
+        apiName = "kava"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ukava"
+        bechAccountPrefix = "kava"
+        validatorPrefix = "kavavaloper"
+        grpcHost = "grpc-kava.cosmostation.io"
+        
+        initFetcher()
+    }
+    
+    override func initFetcher() {
+        kavaFetcher = KavaFetcher.init(self)
+    }
+    
+    override func getGrpcfetcher() -> FetcherGrpc? {
+        return kavaFetcher
     }
 }

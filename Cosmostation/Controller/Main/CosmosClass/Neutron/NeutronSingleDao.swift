@@ -9,11 +9,6 @@
 import UIKit
 import Lottie
 import SwiftyJSON
-import GRPC
-import NIO
-import Alamofire
-import AlamofireImage
-import SwiftyJSON
 
 class NeutronSingleDao: BaseVC {
     
@@ -23,6 +18,7 @@ class NeutronSingleDao: BaseVC {
     @IBOutlet weak var emptyView: UIView!
     
     var selectedChain: ChainNeutron!
+    var neutronFetcher: NeutronFetcher!
     var neutronMyVotes: [JSON]?
     
     var votingPeriods = [JSON]()
@@ -36,6 +32,7 @@ class NeutronSingleDao: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        neutronFetcher = selectedChain.neutronFetcher
         
         tableView.isHidden = true
         loadingView.isHidden = false
@@ -102,6 +99,35 @@ class NeutronSingleDao: BaseVC {
         vote.modalTransitionStyle = .coverVertical
         self.present(vote, animated: true)
     }
+    
+    func fetchProposals() {
+        self.votingPeriods.removeAll()
+        self.etcPeriods.removeAll()
+        self.filteredVotingPeriods.removeAll()
+        self.filteredEtcPeriods.removeAll()
+        
+        Task {
+            if let response = try await neutronFetcher.fetchNeutronProposals(0),
+                let result = try? JSONDecoder().decode(JSON.self, from: response) {
+                result["proposals"].arrayValue.forEach { proposal in
+                    let title = proposal["proposal"]["title"].stringValue.lowercased()
+                    if (proposal["proposal"]["status"].stringValue.lowercased() == "open") {
+                        votingPeriods.append(proposal)
+                        if (!title.contains("airdrop") && !title.containsEmoji()) {
+                            filteredVotingPeriods.append(proposal)
+                        }
+                        
+                    } else {
+                        etcPeriods.append(proposal)
+                        if (!title.contains("airdrop") && !title.containsEmoji()) {
+                            filteredEtcPeriods.append(proposal)
+                        }
+                    }
+                }
+            }
+            DispatchQueue.main.async { self.updateView() }
+        }
+    }
 
 }
 
@@ -152,7 +178,7 @@ extension NeutronSingleDao: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"CosmosProposalCell") as! CosmosProposalCell
-        let module = selectedChain.daosList?[0]["proposal_modules"][0]
+        let module = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"][0]
         var proposal: JSON!
         if (indexPath.section == 0) {
             if (isShowAll) {
@@ -189,7 +215,7 @@ extension NeutronSingleDao: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contAddress = selectedChain.daosList?[0]["proposal_modules"][0]["address"].string ?? ""
+        let contAddress = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"][0]["address"].string ?? ""
         var proposal: JSON!
         if (indexPath.section == 0) {
             if (isShowAll) {
@@ -231,56 +257,5 @@ extension NeutronSingleDao: UITableViewDelegate, UITableViewDataSource {
         mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
         mask.locations = [NSNumber(value: location), NSNumber(value: location)]
         return mask;
-    }
-}
-
-extension NeutronSingleDao {
-    
-    func fetchProposals() {
-        Task {
-            let contAddress = selectedChain.daosList?[0]["proposal_modules"][0]["address"].string ?? ""
-            let query: JSON = ["reverse_proposals" : JSON()]
-            let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
-            let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
-                $0.address = contAddress
-                $0.queryData = Data(base64Encoded: queryBase64)!
-            }
-            if let response = try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: getConnection()).smartContractState(req, callOptions: getCallOptions()).response.get(),
-               let result = try? JSONDecoder().decode(JSON.self, from: response.data) {
-                self.votingPeriods.removeAll()
-                self.etcPeriods.removeAll()
-                self.filteredVotingPeriods.removeAll()
-                self.filteredEtcPeriods.removeAll()
-                result["proposals"].arrayValue.forEach { proposal in
-                    let title = proposal["proposal"]["title"].stringValue.lowercased()
-                    if (proposal["proposal"]["status"].stringValue.lowercased() == "open") {
-                        votingPeriods.append(proposal)
-                        if (!title.contains("airdrop") && !title.containsEmoji()) {
-                            filteredVotingPeriods.append(proposal)
-                        }
-                        
-                    } else {
-                        etcPeriods.append(proposal)
-                        if (!title.contains("airdrop") && !title.containsEmoji()) {
-                            filteredEtcPeriods.append(proposal)
-                        }
-                    }
-                }
-                DispatchQueue.main.async { self.updateView() }
-            } else {
-                DispatchQueue.main.async { self.updateView() }
-            }
-        }
-    }
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: selectedChain.getGrpc().0, port: selectedChain.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
     }
 }

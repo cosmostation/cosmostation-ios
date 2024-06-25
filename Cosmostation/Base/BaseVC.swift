@@ -91,17 +91,17 @@ class BaseVC: UIViewController {
         }
     }
     
-    func onStartSheet(_ baseSheet: BaseVC, _ height: CGFloat? = 320) {
+    func onStartSheet(_ baseSheet: BaseVC, _ min: CGFloat? = 320, _ max: CGFloat? = 0.9) {
         guard let sheet = baseSheet.presentationController as? UISheetPresentationController else {
             return
         }
         if #available(iOS 16.0, *) {
             sheet.detents = [
-                .custom { _ in return height },
-                .custom { context in return context.maximumDetentValue * 0.6 }
+                .custom { context in return min },
+                .custom { context in return context.maximumDetentValue * max! }
             ]
         } else {
-            sheet.detents = [.medium()]
+            sheet.detents = [.medium(), .large()]
         }
         sheet.largestUndimmedDetentIdentifier = .large
         sheet.prefersGrabberVisible = true

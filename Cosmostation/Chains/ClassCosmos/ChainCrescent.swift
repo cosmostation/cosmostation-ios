@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainCrescent: CosmosClass  {
+class ChainCrescent: BaseChain  {
     
     override init() {
         super.init()
@@ -16,15 +16,17 @@ class ChainCrescent: CosmosClass  {
         name = "Crescent"
         tag = "crescent118"
         logo1 = "chainCrescent"
-        logo2 = "chainCrescent2"
         apiName = "crescent"
-        stakeDenom = "ucre"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ucre"
         bechAccountPrefix = "cre"
         validatorPrefix = "crevaloper"
-        
         grpcHost = "grpc-crescent.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

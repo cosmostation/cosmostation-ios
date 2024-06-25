@@ -23,7 +23,7 @@ class TxAmountLpSheet: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var confirmBtn: BaseButton!
     
     var sheetDelegate: LpAmountSheetDelegate?
-    var selectedChain: CosmosClass!
+    var selectedChain: BaseChain!
     var msAsset1: MintscanAsset!
     var msAsset2: MintscanAsset!
     var available1Amount: NSDecimalNumber!

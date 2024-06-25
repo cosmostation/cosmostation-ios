@@ -9,9 +9,6 @@
 import UIKit
 import Lottie
 import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class NftTransfer: BaseVC {
     
@@ -58,6 +55,7 @@ class NftTransfer: BaseVC {
     var txStyle: TxStyle = .COSMOS_STYLE
     
     var fromChain: BaseChain!
+    var fromGrpcFetcher: FetcherGrpc!
     var toSendNFT: Cw721Model!
     
     var toChain: BaseChain!
@@ -75,6 +73,7 @@ class NftTransfer: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
+        fromGrpcFetcher = fromChain.getGrpcfetcher()
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -124,13 +123,13 @@ class NftTransfer: BaseVC {
     }
     
     func onInitFee() {
-        cosmosFeeInfos = (fromChain as! CosmosClass).getFeeInfos()
+        cosmosFeeInfos = fromChain.getFeeInfos()
         feeSegments.removeAllSegments()
         for i in 0..<cosmosFeeInfos.count {
             feeSegments.insertSegment(withTitle: cosmosFeeInfos[i].title, at: i, animated: false)
         }
-        selectedFeePosition = (fromChain as! CosmosClass).getFeeBasePosition()
-        cosmosTxFee = (fromChain as! CosmosClass).getInitPayableFee()
+        selectedFeePosition = fromChain.getFeeBasePosition()
+        cosmosTxFee = fromChain.getInitPayableFee()
         feeSegments.selectedSegmentIndex = selectedFeePosition
         
         if let feeAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
@@ -152,11 +151,11 @@ class NftTransfer: BaseVC {
         addressSheet.fromChain = fromChain
         addressSheet.toChain = toChain
         addressSheet.sendType = sendType
-        addressSheet.senderBechAddress = (fromChain as? CosmosClass)?.bechAddress
-        addressSheet.senderEvmAddress = (fromChain as? EvmClass)?.evmAddress
+        addressSheet.senderBechAddress = fromChain.bechAddress
+        addressSheet.senderEvmAddress = fromChain.evmAddress
         addressSheet.existedAddress = toAddress
         addressSheet.sendAddressDelegate = self
-        self.onStartSheet(addressSheet, 220)
+        onStartSheet(addressSheet, 220, 0.6)
     }
     
     func onUpdateToAddressView(_ address: String) {
@@ -179,7 +178,7 @@ class NftTransfer: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = toMemo
         memoSheet.memoDelegate = self
-        self.onStartSheet(memoSheet, 260)
+        onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
@@ -199,18 +198,18 @@ class NftTransfer: BaseVC {
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeePosition = sender.selectedSegmentIndex
-        cosmosTxFee = (fromChain as! CosmosClass).getUserSelectedFee(selectedFeePosition, cosmosTxFee.amount[0].denom)
+        cosmosTxFee = fromChain.getUserSelectedFee(selectedFeePosition, cosmosTxFee.amount[0].denom)
         onUpdateFeeView()
         onSimul()
     }
     
     @objc func onSelectFeeDenom() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.targetChain = (fromChain as! CosmosClass)
+        baseSheet.targetChain = fromChain
         baseSheet.feeDatas = cosmosFeeInfos[selectedFeePosition].FeeDatas
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240)
+        onStartSheet(baseSheet, 240, 0.6)
     }
     
     func onUpdateFeeView() {
@@ -232,7 +231,7 @@ class NftTransfer: BaseVC {
         view.isUserInteractionEnabled = true
         loadingView.isHidden = true
         
-        if ((fromChain as! CosmosClass).isGasSimulable() == false) {
+        if (fromChain.isGasSimulable() == false) {
             onUpdateFeeView()
             sendBtn.isEnabled = true
             return
@@ -243,7 +242,7 @@ class NftTransfer: BaseVC {
             errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
             return
         }
-        cosmosTxFee.gasLimit = UInt64(Double(toGas) * (fromChain as! CosmosClass).gasMultiply())
+        cosmosTxFee.gasLimit = UInt64(Double(toGas) * fromChain.gasMultiply())
         if let gasRate = cosmosFeeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
             let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
             let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
@@ -264,7 +263,7 @@ class NftTransfer: BaseVC {
         view.isUserInteractionEnabled = false
         loadingView.isHidden = false
         
-        if ((fromChain as! CosmosClass).isGasSimulable() == false) {
+        if (fromChain.isGasSimulable() == false) {
             return onUpdateFeeViewAfterSimul(nil)
         }
         cw721SendSimul()
@@ -272,20 +271,20 @@ class NftTransfer: BaseVC {
     
     func cw721SendSimul() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress) {
-                do {
-                    let simul = try await simulCw721SendTx(channel, auth!, onBindCw20Send())
-                    DispatchQueue.main.async {
-                        self.onUpdateFeeViewAfterSimul(simul)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view.isUserInteractionEnabled = true
-                        self.loadingView.isHidden = true
-                        self.onShowToast("Error : " + "\n" + "\(error)")
-                        return
-                    }
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let simulReq = Signer.genWasmSimul(account!, [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateFeeViewAfterSimul(simulRes)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
                 }
             }
         }
@@ -293,9 +292,10 @@ class NftTransfer: BaseVC {
     
     func cw721Send() {
         Task {
-            let channel = getConnection()
-            if let auth = try? await fetchAuth(channel, (fromChain as! CosmosClass).bechAddress),
-               let response = try await broadcast721SendTx(channel, auth!, onBindCw20Send()) {
+            do {
+                let account = try await fromGrpcFetcher.fetchAuth()
+                let broadReq = Signer.genWasmTx(account!, [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -308,6 +308,9 @@ class NftTransfer: BaseVC {
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
                 })
+                
+            } catch {
+                //TODO handle Error
             }
         }
     }
@@ -316,7 +319,7 @@ class NftTransfer: BaseVC {
         let msg: JSON = ["transfer_nft" : ["token_id" : toSendNFT.tokens[0].tokenId, "recipient" : toAddress]]
         let msgBase64 = try! msg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         return Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-            $0.sender = (fromChain as! CosmosClass).bechAddress
+            $0.sender = fromChain.bechAddress!
             $0.contract = toSendNFT.info["contractAddress"].stringValue
             $0.msg = Data(base64Encoded: msgBase64)!
         }
@@ -330,7 +333,7 @@ extension NftTransfer: BaseSheetDelegate, SendAddressDelegate, MemoDelegate, Pin
         if (sheetType == .SelectFeeDenom) {
             if let index = result["index"] as? Int,
                let selectedDenom = cosmosFeeInfos[selectedFeePosition].FeeDatas[index].denom {
-                cosmosTxFee = (fromChain as! CosmosClass).getUserSelectedFee(selectedFeePosition, selectedDenom)
+                cosmosTxFee = fromChain.getUserSelectedFee(selectedFeePosition, selectedDenom)
                 onUpdateFeeView()
                 onSimul()
             }
@@ -363,41 +366,5 @@ extension NftTransfer: BaseSheetDelegate, SendAddressDelegate, MemoDelegate, Pin
             loadingView.isHidden = false
             cw721Send()
         }
-    }
-}
-
-
-extension NftTransfer {
-    
-    func fetchAuth(_ channel: ClientConnection, _ address: String) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func simulCw721SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let simulTx = Signer.genWasmSimul(auth, [toWasmSend], cosmosTxFee, toMemo, fromChain)
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
-        }
-    }
-    
-    func broadcast721SendTx(_ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toWasmSend: Cosmwasm_Wasm_V1_MsgExecuteContract) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genWasmTx(auth, [toWasmSend], cosmosTxFee, toMemo, fromChain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    
-    
-    func getConnection() -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: (fromChain as! CosmosClass).getGrpc().0, port: (fromChain as! CosmosClass).getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
     }
 }

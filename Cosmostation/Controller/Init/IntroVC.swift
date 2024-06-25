@@ -20,6 +20,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.view.addBackground()
+        NSLog("Cosmostation IntroVC viewDidLoad")
         
         if (BaseData.instance.getDBVersion() < DB_VERSION) {
             onUpdateMigration()
@@ -77,6 +78,12 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
                 let pinVC = UIStoryboard.PincodeVC(self, .ForIntroLock)
                 self.present(pinVC, animated: true)
                 
+            } else if BaseData.instance.appSchemeUrl != nil {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+                    NSLog("Cosmostation IntroVC onDeepLinkStart")
+                    self.onDeepLinkStart()
+                })
+                
             } else {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(5000), execute: {
                     self.onStartMainTab()
@@ -99,7 +106,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectCreateAccount
-        onStartSheet(baseSheet)
+        onStartSheet(baseSheet, 320, 0.6)
     }
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
@@ -128,9 +135,23 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
     
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if result == .success {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                self.onStartMainTab()
-            })
+            if BaseData.instance.appSchemeUrl != nil {
+                self.onDeepLinkStart()
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                    self.onStartMainTab()
+                })
+            }
+        }
+    }
+    
+    func onDeepLinkStart() {
+        let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+        dappDetail.dappType = .DEEPLINK_WC2
+        dappDetail.dappUrl = BaseData.instance.appSchemeUrl
+        dappDetail.modalPresentationStyle = .fullScreen
+        self.present(dappDetail, animated: true) {
+            BaseData.instance.appSchemeUrl = nil
         }
     }
     

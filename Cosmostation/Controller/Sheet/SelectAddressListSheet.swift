@@ -69,7 +69,7 @@ class SelectAddressListSheet: BaseVC {
         } else if (sendType == .Only_Cosmos_Coin || sendType == .Only_Cosmos_CW20) {
             //only support cosmos address style
             BaseData.instance.selectAllRefAddresses().filter {
-                $0.bechAddress.starts(with: (toChain as! CosmosClass).bechAccountPrefix! + "1") &&
+                $0.bechAddress.starts(with: toChain.bechAccountPrefix! + "1") &&
                 $0.bechAddress != senderBechAddress }.forEach { refAddress in
                     if (tempRefBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
                         tempRefBechAddresses.append(refAddress)
@@ -89,7 +89,7 @@ class SelectAddressListSheet: BaseVC {
         } else if (sendType == .CosmosEVM_Coin) {
             //only support both address style
             BaseData.instance.selectAllRefAddresses().filter {
-                $0.bechAddress.starts(with: (toChain as! CosmosClass).bechAccountPrefix! + "1") &&
+                $0.bechAddress.starts(with: toChain.bechAccountPrefix! + "1") &&
                 $0.bechAddress != senderBechAddress }.forEach { refAddress in
                     if (tempRefBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
                         tempRefBechAddresses.append(refAddress)
@@ -127,7 +127,7 @@ class SelectAddressListSheet: BaseVC {
             return false
         }
         
-        let allBaseChain = All_BASE_Chains()
+        let allBaseChain = ALLCHAINS()
         let hideLegacy = BaseData.instance.getHideLegacy()
         if (hideLegacy) {
             tempRefBechAddresses.forEach { refAddress in

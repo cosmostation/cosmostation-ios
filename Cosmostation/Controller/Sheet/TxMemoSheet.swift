@@ -10,8 +10,6 @@ import UIKit
 import MaterialComponents
 
 class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
-    
-    @IBOutlet weak var memoTitle: UILabel!
     @IBOutlet weak var memoTextArea: MDCOutlinedTextArea!
     @IBOutlet weak var qrScanBtn: UIButton!
     @IBOutlet weak var confirmBtn: BaseButton!

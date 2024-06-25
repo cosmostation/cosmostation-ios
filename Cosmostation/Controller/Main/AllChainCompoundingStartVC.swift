@@ -74,33 +74,26 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
     }
     
     func onInitView() {
-        if (baseAccount.getDisplayCosmosChains().filter { $0.fetchState == .Busy }.count == 0 &&
-            baseAccount.getDisplayEvmChains().filter { $0.fetchState == .Busy }.count == 0) {
-            
-            baseAccount.getDisplayCosmosChains().filter { $0.rewardAddress == $0.bechAddress }.forEach { chain in
-                let compoundable = chain.compoundableRewards()
-                let txFee = chain.getInitPayableFee()
-                if (compoundable.count > 0 && txFee != nil) {
-                    compoundableRewards.append(ClaimAllModel.init(chain, compoundable))
-                }
-            }
-            
-            baseAccount.getDisplayEvmChains().filter { $0.rewardAddress == $0.bechAddress && $0.supportCosmos == true }.forEach { chain in
-                let compoundable = chain.compoundableRewards()
-                let txFee = chain.getInitPayableFee()
-                if (compoundable.count > 0 && txFee != nil) {
-                    compoundableRewards.append(ClaimAllModel.init(chain, compoundable))
+        if (baseAccount.getDpChains().filter { $0.fetchState == .Busy }.count == 0) {
+            baseAccount.getDpChains().filter { $0.isTestnet == false && $0.supportCosmosGrpc }.forEach { chain in
+                if let grpcFetcher = chain.grpcFetcher,
+                   let txFee = chain.getInitPayableFee(),
+                   grpcFetcher.rewardAddress == chain.bechAddress {
+                    let compoundable = grpcFetcher.compoundableRewards()
+                    if (compoundable.count > 0) {
+                        compoundableRewards.append(ClaimAllModel.init(chain, compoundable))
+                    }
                 }
             }
             onUpdateView()
             onSimul()
             
         } else {
-            let totalCnt = self.baseAccount.getDisplayCosmosChains().count +
-                            self.baseAccount.getDisplayEvmChains().count
-            let checkedCnt = self.baseAccount.getDisplayCosmosChains().filter { $0.fetchState != .Busy }.count +
-                                self.baseAccount.getDisplayEvmChains().filter { $0.fetchState != .Busy }.count
-            self.progressLabel.text = "Checked " + String(checkedCnt) +  "/" +  String(totalCnt)
+            DispatchQueue.main.async(execute: {
+                let totalCnt = self.baseAccount.getDpChains().count
+                let checkedCnt = self.baseAccount.getDpChains().filter { $0.fetchState != .Busy }.count
+                self.progressLabel.text = "Checked " + String(checkedCnt) +  "/" +  String(totalCnt)
+            })
         }
     }
     
@@ -155,7 +148,6 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
                 }
             }
         }
-        
     }
     
     @IBAction func onClickClaim(_ sender: BaseButton) {
@@ -164,10 +156,8 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
     }
     
     @IBAction func onClickConfirm(_ sender: BaseButton) {
-        self.baseAccount.getDisplayEvmChains().forEach { $0.fetchState = .Idle }
-        self.baseAccount.getDisplayCosmosChains().forEach { $0.fetchState = .Idle }
-        self.baseAccount.fetchDisplayEvmChains()
-        self.baseAccount.fetchDisplayCosmosChains()
+        self.baseAccount.getDpChains().forEach { $0.fetchState = .Idle }
+        self.baseAccount.fetchDpChains()
         self.dismiss(animated: true)
     }
     
@@ -185,21 +175,18 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
                     let chain = compoundableRewards[i].cosmosChain!
                     let rewards = compoundableRewards[i].rewards
                     let txFee = (compoundableRewards[i].txFee == nil) ? chain.getInitPayableFee() : compoundableRewards[i].txFee
-                    
-                    let channel = getConnection(chain)
-                    if let auth = try await fetchAuth(channel, chain),
-                       let response = try await broadcastCompoundingTx(chain, channel, auth, rewards, txFee!) {
-                        self.checkTx(i, channel, response)
+                    if let response = try await broadcastCompoundingTx(chain, rewards, txFee!) {
+                        self.checkTx(chain, i, response)
                     }
                 }
             }
         }
     }
     
-    func checkTx(_ position: Int, _ channel: ClientConnection, _ txResponse: Cosmos_Base_Abci_V1beta1_TxResponse) {
+    func checkTx(_ chain: BaseChain, _ position: Int, _ txResponse: Cosmos_Base_Abci_V1beta1_TxResponse) {
         Task {
             do {
-                let result = try await fetchTx(channel, txResponse)
+                let result = try await chain.getGrpcfetcher()!.fetchTx(txResponse.txhash)
                 compoundableRewards[position].txResponse = result
                 compoundableRewards[position].isBusy = false
                 DispatchQueue.main.async {
@@ -214,7 +201,7 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
                 
             } catch {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
-                    self.checkTx(position, channel, txResponse)
+                    self.checkTx(chain, position, txResponse)
                 });
             }
         }
@@ -251,45 +238,21 @@ extension AllChainCompoundingStartVC: UITableViewDelegate, UITableViewDataSource
 
 extension AllChainCompoundingStartVC {
     
-    func fetchAuth(_ channel: ClientConnection, _ chain: CosmosClass) async throws -> Cosmos_Auth_V1beta1_QueryAccountResponse? {
-        let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = chain.bechAddress }
-        return try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: channel).account(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    func simulateCompoundingTx(_ chain: CosmosClass, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
-        let channel = getConnection(chain)
-        if let auth = try await fetchAuth(channel, chain) {
-            let simulTx = Signer.genCompoundingSimul(auth, claimableRewards, chain.stakeDenom, chain.getInitPayableFee()!, "", chain)
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).simulate(simulTx, callOptions: getCallOptions()).response.get()
-        } else {
-            return nil
+    func simulateCompoundingTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+        if let grpcFetcher = chain.getGrpcfetcher(),
+           let account = try await grpcFetcher.fetchAuth() {
+            let simulReq = Signer.genCompoundingSimul(account, claimableRewards, chain.stakeDenom!, chain.getInitPayableFee()!, "", chain)
+            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: grpcFetcher.getClient()).simulate(simulReq, callOptions: grpcFetcher.getCallOptions()).response.get()
         }
+        return nil
     }
     
-    func broadcastCompoundingTx(_ chain: CosmosClass, _ channel: ClientConnection, _ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                           _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward], _ fee: Cosmos_Tx_V1beta1_Fee) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let reqTx = Signer.genCompoundingTx(auth, claimableRewards, chain.stakeDenom, fee, "", chain)
-        return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).broadcastTx(reqTx, callOptions: getCallOptions()).response.get().txResponse
-    }
-    
-    func fetchTx(_ channel: ClientConnection, _ response: Cosmos_Base_Abci_V1beta1_TxResponse) async throws -> Cosmos_Tx_V1beta1_GetTxResponse? {
-        let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = response.txhash }
-        do {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: channel).getTx(req, callOptions: getCallOptions()).response.get()
-        } catch {
-            throw error
+    func broadcastCompoundingTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward], _ fee: Cosmos_Tx_V1beta1_Fee) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+        if let grpcFetcher = chain.getGrpcfetcher(),
+           let account = try await grpcFetcher.fetchAuth() {
+            let broadReq = Signer.genCompoundingTx(account, claimableRewards, chain.stakeDenom!, fee, "", chain)
+            return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: grpcFetcher.getClient()).broadcastTx(broadReq, callOptions: grpcFetcher.getCallOptions()).response.get().txResponse
         }
-    }
-    
-    
-    func getConnection(_ chain: CosmosClass) -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpc().0, port: chain.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
+        return nil
     }
 }

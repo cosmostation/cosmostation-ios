@@ -8,14 +8,25 @@
 
 import Foundation
 
-class ChainSecret118: ChainSecret529  {
+class ChainSecret118: BaseChain  {
     
     override init() {
         super.init()
         
-        isDefault = false
+        name = "Secret"
         tag = "secret118"
-        
+        logo1 = "chainSecret"
+        isDefault = false
+        apiName = "secret"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uscrt"
+        bechAccountPrefix = "secret"
+        validatorPrefix = "secretvaloper"
+        grpcHost = "grpc-secret.cosmostation.io"
+        
+        initFetcher()
     }
 }

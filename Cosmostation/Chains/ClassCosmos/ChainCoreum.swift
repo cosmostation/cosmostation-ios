@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainCoreum: CosmosClass  {
+class ChainCoreum: BaseChain  {
     
     override init() {
         super.init()
@@ -16,15 +16,17 @@ class ChainCoreum: CosmosClass  {
         name = "Coreum"
         tag = "coreum990"
         logo1 = "chainCoreum"
-        logo2 = "chainCoreum2"
         apiName = "coreum"
-        stakeDenom = "ucore"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/990'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "ucore"
         bechAccountPrefix = "core"
         validatorPrefix = "corevaloper"
-        
         grpcHost = "grpc-coreum.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

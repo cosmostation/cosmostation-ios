@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainIris: CosmosClass  {
+class ChainIris: BaseChain  {
     
     override init() {
         super.init()
@@ -16,15 +16,17 @@ class ChainIris: CosmosClass  {
         name = "Iris"
         tag = "iris118"
         logo1 = "chainIris"
-        logo2 = "chainIris2"
         apiName = "iris"
-        stakeDenom = "uiris"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uiris"
         bechAccountPrefix = "iaa"
         validatorPrefix = "iva"
-        
         grpcHost = "grpc-iris.cosmostation.io"
+        
+        initFetcher()
     }
 }
 

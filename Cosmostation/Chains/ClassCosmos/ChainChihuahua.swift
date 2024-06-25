@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainChihuahua: CosmosClass  {
+class ChainChihuahua: BaseChain  {
     
     override init() {
         super.init()
@@ -16,16 +16,18 @@ class ChainChihuahua: CosmosClass  {
         name = "Chihuahua"
         tag = "chihuahua118"
         logo1 = "chainChihuahua"
-        logo2 = "chainChihuahua2"
         apiName = "chihuahua"
-        stakeDenom = "uhuahua"
-        
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        
+        
+        supportCosmosGrpc = true
+        stakeDenom = "uhuahua"
         bechAccountPrefix = "chihuahua"
         validatorPrefix = "chihuahuavaloper"
         supportCw20 = true
-        
         grpcHost = "grpc-chihuahua.cosmostation.io"
+        
+        initFetcher()
     }
     
 }

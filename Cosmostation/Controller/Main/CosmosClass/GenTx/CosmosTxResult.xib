@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -142,7 +142,7 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Xb-aD-riv">
-                    <rect key="frame" x="8" y="682.33333333333337" width="377" height="69.666666666666629"/>
+                    <rect key="frame" x="8" y="678.33333333333337" width="377" height="69.666666666666629"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uvM-NT-XKd">
                             <rect key="frame" x="16" y="15.999999999999998" width="345" height="19.333333333333329"/>
@@ -168,7 +168,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bu-wC-h0h" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="760" width="377" height="54"/>
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="z3n-SM-FyK"/>
@@ -210,15 +210,15 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3Xb-aD-riv" secondAttribute="trailing" constant="8" id="njG-Pz-uE0"/>
                 <constraint firstItem="Ble-IY-3WY" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="qDs-KG-0KL"/>
                 <constraint firstItem="hj0-ZK-Txi" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="s30-wa-Y49"/>
-                <constraint firstAttribute="bottom" secondItem="1bu-wC-h0h" secondAttribute="bottom" constant="38" id="tlF-XM-4yf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="1bu-wC-h0h" secondAttribute="bottom" constant="8" id="tlF-XM-4yf"/>
             </constraints>
             <point key="canvasLocation" x="49.618320610687022" y="20.422535211267608"/>
         </view>
     </objects>
     <resources>
         <image name="iconArrowRight" width="24" height="24"/>
-        <image name="imgTxFail" width="240" height="240"/>
-        <image name="imgTxSuccess" width="240" height="240"/>
+        <image name="imgTxFail" width="60" height="60"/>
+        <image name="imgTxSuccess" width="60" height="60"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

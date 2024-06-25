@@ -13,8 +13,8 @@ class ReceiveCell: UITableViewCell {
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var cautionLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var legacyTag: UILabel!
-    @IBOutlet weak var keyTypeTag: UILabel!
+    @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var keyTypeTag: PaddingLabel!
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var copyHintTitle: UILabel!
@@ -23,9 +23,13 @@ class ReceiveCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         rootView.setBlur()
+        
+        copyHintTitle.text = NSLocalizedString("msg_tap_box_to_copy", comment: "")
     }
     
     override func prepareForReuse() {
+        legacyTag.isHidden = true
+        keyTypeTag.isHidden = true
         rootView.setBlur()
     }
     
@@ -35,28 +39,39 @@ class ReceiveCell: UITableViewCell {
         } else {
             hdPathLabel.text = ""
         }
+        legacyTag.isHidden = chain.isDefault
+        if (chain.name == "OKT" && !chain.supportEvm) {
+            keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
+            keyTypeTag.isHidden = false
+        }
         
-        if let selectedChain = chain as? EvmClass, section == 0 {
+        if chain.supportEvm, section == 0 {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name + " EVM")
-            let evmAddress = selectedChain.evmAddress
+            let evmAddress = chain.evmAddress!
             addressLabel.text = evmAddress
             addressLabel.adjustsFontSizeToFitWidth = true
             
+//            keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
+//            keyTypeTag.isHidden = false
+            
             if let bechQrImage = WUtils.generateQrCode(evmAddress) {
                 rqImgView.image = UIImage(ciImage: bechQrImage)
-                let chainLogo = UIImage.init(named: selectedChain.logo1)
+                let chainLogo = UIImage.init(named: chain.logo1)
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }
             
-        } else if let selectedChain = chain as? CosmosClass {
+        } else if chain.isCosmos() {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
-            let bechAddress = selectedChain.bechAddress
+            let bechAddress = chain.bechAddress!
             addressLabel.text = bechAddress
             addressLabel.adjustsFontSizeToFitWidth = true
             
+//            keyTypeTag.text = chain.accountKeyType.pubkeyType.cosmosPubkey
+//            keyTypeTag.isHidden = false
+            
             if let bechQrImage = WUtils.generateQrCode(bechAddress) {
                 rqImgView.image = UIImage(ciImage: bechQrImage)
-                let chainLogo = UIImage.init(named: selectedChain.logo1)
+                let chainLogo = UIImage.init(named: chain.logo1)
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }
         }

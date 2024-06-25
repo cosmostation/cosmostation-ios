@@ -13,7 +13,7 @@ class EvmAboutVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var selectedChain: EvmClass!
+    var selectedChain: BaseChain!
     var chainParam: JSON!
 
     override func viewDidLoad() {
