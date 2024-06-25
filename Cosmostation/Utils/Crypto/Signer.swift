@@ -1384,6 +1384,7 @@ class Signer {
 //        return [anyMsg]
 //    }
     
+    
     static func getSignedTx(_ account: Google_Protobuf_Any, _ msgAnys: [Google_Protobuf_Any],
                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let txBody = getTxBody(msgAnys, memo)

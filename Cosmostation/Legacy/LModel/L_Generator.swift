@@ -58,6 +58,19 @@ class L_Generator {
         return result
     }
     
+    
+    
+    static func personalSignMsg(_ data: String, _ signer: String) -> L_Msg {
+        var value = L_Value.init()
+        value.data = data
+        value.signer = signer
+        
+        var result = L_Msg.init()
+        result.type = "sign/MsgSignData"
+        result.value = value
+        return result
+    }
+    
     static func postData(_ msgs: [L_Msg], _ fee: L_Fee, _ memo: String, _ baseChain: BaseChain) -> Data {
         guard let oktChain = baseChain as? ChainOkt996Keccak else {
             return Data()

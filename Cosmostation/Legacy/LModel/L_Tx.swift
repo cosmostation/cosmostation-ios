@@ -20,6 +20,8 @@ public struct L_Value: Codable {
     var delegator_address: String?
     var validator_addresses: Array<String>?
     var quantity: L_Coin?
+    var data: String?
+    var signer: String?
 }
 
 public struct L_Coin: Codable {

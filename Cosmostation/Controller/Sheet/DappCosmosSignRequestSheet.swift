@@ -74,7 +74,7 @@ class DappCosmosSignRequestSheet: BaseVC {
         
         confirmBtn.isEnabled = true
         
-        print("DappCosmosSignRequestSheet ", requestToSign)
+//        print("DappCosmosSignRequestSheet ", requestToSign)
         if (requestToSign == nil) {
             dismissWithFail()
             return
@@ -97,60 +97,66 @@ class DappCosmosSignRequestSheet: BaseVC {
     
     func onParsingRequest() async throws {
         
-        if let editFee = requestToSign?.isEditFee,
-           let docs = requestToSign?.docs,
-           let chain = allChains.filter({ $0.chainIdCosmos == docs.chainId }).first {
-            isEditFee = editFee
-            targetDocs = docs
-            targetChain = chain
-        } else {
-            print("Parsing error")
-            return
-        }
-        
-        if (method == "cos_signAmino" || method == "cosmos_signAmino") {
-            if (isEditFee == false && (targetDocs!["fee"]["amount"].isEmpty || targetDocs!["fee"]["gas"] == "0") || isEditFee == true) {
-                let baseFeeDatas = targetChain.getBaseFeeInfo().FeeDatas
-                let gasLimit = targetDocs!["fee"]["gas"].string ?? targetChain.getFeeBaseGasAmountS()
-                let feeDenom = targetDocs!["fee"]["amount"][0]["denom"].string ?? baseFeeDatas[0].denom
-                let gasRate = baseFeeDatas.filter { $0.denom == feeDenom }.first?.gasRate ?? NSDecimalNumber.zero
-                let feeAmount = NSDecimalNumber(string: gasLimit).multiplying(by: gasRate, withBehavior: handler0Up)
-//                print("gasLimit ", gasLimit)
-//                print("feeDenom ", feeDenom)
-//                print("gasRate ", gasRate)
-//                print("feeAmount ", feeAmount.stringValue)
-                targetDocs!["fee"]["amount"] = [["amount": feeAmount.stringValue, "denom": feeDenom]]
-                targetDocs!["fee"]["gas"].stringValue = gasLimit
+        if (method == "cos_signMessage") {
+            let requestChainName = requestToSign?["params"]["chainName"].stringValue
+            let requestChainId = requestToSign?["params"]["chainId"].stringValue
+            
+            if let chain = allChains.filter({ $0.chainIdCosmos == requestChainId ||
+                $0.chainIdCosmos == requestChainName ||
+                $0.chainDappName()?.lowercased() == requestChainId?.lowercased() ||
+                $0.chainDappName()?.lowercased() == requestChainName?.lowercased()} ).first {
+                targetChain = chain
+            } else {
+                print("Parsing error")
+                return
             }
-            dappTxFee = setFeeData(targetDocs!["fee"]["gas"].stringValue,
-                                   targetDocs!["fee"]["amount"][0]["denom"].stringValue,
-                                   targetDocs!["fee"]["amount"][0]["amount"].stringValue)
             
             
-        } else if (method == "cos_signDirect" || method == "cosmos_signDirect") {
-            if let authInfoBytes = targetDocs.authInfoBytes,
-                let authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: Data.dataFromHex(authInfoBytes)!) {
-                print("authInfo ", authInfo)
-                if (authInfo.fee.gasLimit > 0 && authInfo.fee.amount.count >= 1) {
-                    dappTxFee = authInfo.fee
+        } else {
+            if let editFee = requestToSign?.isEditFee,
+               let docs = requestToSign?.docs,
+               let chain = allChains.filter({ $0.chainIdCosmos == docs.chainId }).first {
+                isEditFee = editFee
+                targetDocs = docs
+                targetChain = chain
+            } else {
+                print("Parsing error")
+                return
+            }
+            
+            if (method == "cos_signAmino" || method == "cosmos_signAmino") {
+                if (isEditFee == false && (targetDocs!["fee"]["amount"].isEmpty || targetDocs!["fee"]["gas"] == "0") || isEditFee == true) {
+                    let baseFeeDatas = targetChain.getBaseFeeInfo().FeeDatas
+                    let gasLimit = targetDocs!["fee"]["gas"].string ?? targetChain.getFeeBaseGasAmountS()
+                    let feeDenom = targetDocs!["fee"]["amount"][0]["denom"].string ?? baseFeeDatas[0].denom
+                    let gasRate = baseFeeDatas.filter { $0.denom == feeDenom }.first?.gasRate ?? NSDecimalNumber.zero
+                    let feeAmount = NSDecimalNumber(string: gasLimit).multiplying(by: gasRate, withBehavior: handler0Up)
+    //                print("gasLimit ", gasLimit)
+    //                print("feeDenom ", feeDenom)
+    //                print("gasRate ", gasRate)
+    //                print("feeAmount ", feeAmount.stringValue)
+                    targetDocs!["fee"]["amount"] = [["amount": feeAmount.stringValue, "denom": feeDenom]]
+                    targetDocs!["fee"]["gas"].stringValue = gasLimit
+                }
+                dappTxFee = setFeeData(targetDocs!["fee"]["gas"].stringValue,
+                                       targetDocs!["fee"]["amount"][0]["denom"].stringValue,
+                                       targetDocs!["fee"]["amount"][0]["amount"].stringValue)
+                
+                
+            } else if (method == "cos_signDirect" || method == "cosmos_signDirect") {
+                if let authInfoBytes = targetDocs.authInfoBytes,
+                    let authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: Data.dataFromHex(authInfoBytes)!) {
+                    print("authInfo ", authInfo)
+                    if (authInfo.fee.gasLimit > 0 && authInfo.fee.amount.count >= 1) {
+                        dappTxFee = authInfo.fee
+                    }
                 }
             }
+            print("dappTxFee ", dappTxFee)
         }
-//        print("dappTxFee ", dappTxFee)
     }
     
     func onInitView() {
-        if (targetDocs == nil) {
-            errorMsgLabel.text = "Request Pasing Error"
-            errorCardView.isHidden = false
-            return
-        }
-        
-        if (targetChain == nil) {
-            errorMsgLabel.text = "Not Supported Chain"
-            errorCardView.isHidden = false
-            return
-        }
         
         onInitFeeView()
         
@@ -158,10 +164,25 @@ class DappCosmosSignRequestSheet: BaseVC {
         warnMsgLabel.isHidden = false
         barView.isHidden = false
         bodyCardView.isHidden = false
-        feeCardView.isHidden = false
         controlStakView.isHidden = false
         
-        wcMsgTextView.text = targetDocs?.rawString()
+        if (method == "cos_signMessage") {
+            wcMsgTextView.text = requestToSign?["params"]["message"].rawString()
+            
+        } else {
+            if (targetDocs == nil) {
+                errorMsgLabel.text = "Request Pasing Error"
+                errorCardView.isHidden = false
+                return
+            }
+            if (targetChain == nil) {
+                errorMsgLabel.text = "Not Supported Chain"
+                errorCardView.isHidden = false
+                return
+            }
+            feeCardView.isHidden = false
+            wcMsgTextView.text = targetDocs?.rawString()
+        }
     }
     
     func onInitFeeView() {
@@ -261,7 +282,7 @@ class DappCosmosSignRequestSheet: BaseVC {
     }
     
     func dismissWithFail() {
-        if (method == "cos_signAmino" || method == "cos_signDirect") {
+        if (method == "cos_signAmino" || method == "cos_signDirect" || method == "cos_signMessage") {
             webSignDelegate?.onCancleInjection("Cancel", requestToSign!, messageId!)
             
         } else if (method == "cosmos_signAmino" || method == "cosmos_signDirect") {
@@ -276,7 +297,26 @@ class DappCosmosSignRequestSheet: BaseVC {
     }
     
     @IBAction func onClickConfirm(_ sender: UIButton) {
-        if (method == "cos_signAmino") {
+        if (method == "cos_signMessage") {
+            let signer = requestToSign?["params"]["signer"]
+            let message = requestToSign?["params"]["message"].stringValue
+            let base64 = message!.data(using: .utf8)!.base64EncodedString()
+            
+            let msg = L_Generator.personalSignMsg(base64, signer!.stringValue)
+            let fee = L_Fee.init("0", [])
+            let stdMsg = L_Generator.getToSignMsg("", "0", "0", [msg], fee, "")
+            
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+            let toSignData = try! encoder.encode(stdMsg)
+            let sig = getSignatureResponse(selectedChain!.privateKey!, toSignData)
+            
+            var signed = JSON()
+            signed["pub_key"] = sig.pubKey!
+            signed["signature"].stringValue = sig.signature!
+            webSignDelegate?.onAcceptInjection(signed, requestToSign!, messageId!)
+            
+        } else if (method == "cos_signAmino") {
             var signed = JSON()
             let sortedJsonData = try! targetDocs!.rawData(options: [.sortedKeys, .withoutEscapingSlashes])
             let sig = getSignatureResponse(targetChain!.privateKey!, sortedJsonData)
@@ -425,12 +465,12 @@ extension DappCosmosSignRequestSheet: BaseSheetDelegate {
            var authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: Data.dataFromHex(authInfoString)!) {
             authInfo.fee.amount = txFee!.amount
             authInfo.fee.gasLimit = txFee!.gasLimit
-            let signDoc = Cosmos_Tx_V1beta1_SignDoc.with {
-                $0.bodyBytes = try! bodyBytes.serializedData()
-                $0.authInfoBytes = try! authInfo.serializedData()
-                $0.chainID = chainId
-                $0.accountNumber = targetDocs["account_number"].uInt64Value
-            }
+//            let signDoc = Cosmos_Tx_V1beta1_SignDoc.with {
+//                $0.bodyBytes = try! bodyBytes.serializedData()
+//                $0.authInfoBytes = try! authInfo.serializedData()
+//                $0.chainID = chainId
+//                $0.accountNumber = targetDocs["account_number"].uInt64Value
+//            }
             let simulateTx = Cosmos_Tx_V1beta1_Tx.with {
                 $0.authInfo = authInfo
                 $0.body = bodyBytes

@@ -58,9 +58,13 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        print("targetChain ", targetChain)
+        
 //        dappUrl = URL(string: "https://omniflix.tv/home")
 //        dappUrl = URL(string: "https://coinhall.org/")
 //        dappUrl = URL(string: "https://app.kava.io/home")
+//        dappUrl = URL(string: "https://osmosis.zone/")
+    
                 
         Task {
             if BaseData.instance.getLastAccount() != nil {
@@ -202,7 +206,9 @@ class DappDetailVC: BaseVC, WebSignDelegate {
             let version = dictionary["CFBundleShortVersionString"] as? String {
             webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
                 let originUserAgent = result as! String
-                self.webView.customUserAgent = "Cosmostation/APP/iOS/\(version) \(originUserAgent)"
+                print("originUserAgent ", originUserAgent)
+//                self.webView.customUserAgent = "Cosmostation/APP/iOS/\(version) \(originUserAgent)"
+//                self.webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
             }
         }
     }
@@ -324,15 +330,14 @@ extension DappDetailVC: WKScriptMessageHandler {
                 injectionRequestApprove(true, messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "cos_requestAccount" || method == "cos_account") {
-                print("messageJSON ", messageJSON)
                 let requestedChainId = messageJSON["params"]["chainName"].stringValue
-                var data = JSON()
-                data["isKeystone"] = false
-                data["isEthermint"] = false
-                data["isLedger"] = false
-                data["name"].stringValue = baseAccount.name
                 if let requestedChain = allChains.filter({ $0.chainIdCosmos == requestedChainId || $0.chainDappName()?.lowercased() == requestedChainId }).first {
                     targetChain = requestedChain
+                    var data = JSON()
+                    data["isLedger"].boolValue = false
+                    data["isKeystone"].boolValue = false
+                    data["isEthermint"].boolValue = targetChain.supportEvm
+                    data["name"].stringValue = baseAccount.name
                     data["address"].stringValue = requestedChain.bechAddress!
                     data["publicKey"].stringValue = requestedChain.publicKey!.toHexString()
                     injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
@@ -341,10 +346,19 @@ extension DappDetailVC: WKScriptMessageHandler {
                 }
                 
             } else if (method == "cos_signAmino") {
-                print("params", messageJSON)
+//                print("params", messageJSON)
                 popUpCosmosRequestSign(method, messageJSON, bodyJSON["messageId"], nil)
                 
             } else if (method == "cos_signDirect") {
+                popUpCosmosRequestSign(method, messageJSON, bodyJSON["messageId"], nil)
+                
+            } else if (method == "cos_signMessage") {
+//                print("cos_signMessage ", messageJSON)
+//                print("cos_signMessage ", targetChain)
+                if (messageJSON["params"]["signer"].stringValue.lowercased() != targetChain.bechAddress!.lowercased()) {
+                    self.injectionRequestReject("Wrong-Address", messageJSON, bodyJSON["messageId"])
+                    return
+                }
                 popUpCosmosRequestSign(method, messageJSON, bodyJSON["messageId"], nil)
                 
             } else if (method == "cos_sendTransaction") {
@@ -392,7 +406,7 @@ extension DappDetailVC: WKScriptMessageHandler {
 //                    }
 //                    try? channel.close().wait()
 //                }
-            } 
+            }
             
             
             //Handle EVM Request
@@ -623,49 +637,49 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
         })
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if self.webView.isHidden {
-            decisionHandler(.cancel)
-            return
-        }
-        print("webView decidePolicyFor ", navigationAction.request.url )
-//        NSLog("Cosmostation webView decidePolicyFor  \(navigationAction.request.url?.absoluteString)")
-        
-        if let url = navigationAction.request.url {
-            var newUrl: String?
-            if let absoluteString = url.absoluteString.removingPercentEncoding {
-                if absoluteString.starts(with: "keplrwallet://wcV1") {
-                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc")
-                } else if absoluteString.starts(with: "keplrwallet://wcV2") || absoluteString.starts(with: "keplrwalletwcv2://wcV2") {
-                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc")
-                } else if let match = absoluteString.range(of: "https://.*/wc", options: .regularExpression) {
-                    newUrl = absoluteString.replacingCharacters(in: match, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
-                } else if absoluteString.starts(with: "cosmostation://wc") {
-                    newUrl = absoluteString.replacingOccurrences(of: "uri=", with: "")
-                } else if absoluteString.starts(with: "intent:") {
-                    if absoluteString.contains("intent://wcV2") {
-                        newUrl = absoluteString.replacingOccurrences(of: "intent://wcV2", with: "cosmostation://wc")
-                    } else if absoluteString.contains("intent://wc") {
-                        newUrl = absoluteString.removingPercentEncoding!.replacingOccurrences(of: "intent://wc", with: "cosmostation://wc")
-                    }
-                    if let range = newUrl?.range(of: "#Intent") {
-                        let trimmedUrl = String(newUrl![..<range.lowerBound])
-                        newUrl = trimmedUrl
-                    }
-                }
-                print("newUrl ", newUrl)
-//                NSLog("Cosmostation webView decidePolicyFor newUrl  \(newUrl)")
-                
-                if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
-                    NSLog("Cosmostation webView decidePolicyFor finalUrl  \(finalUrl)")
-                    onInitWcV2(finalUrl)
-                    decisionHandler(.cancel)
-                    return
-                }
-            }
-        }
-        decisionHandler(.allow)
-    }
+//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+//        if self.webView.isHidden {
+//            decisionHandler(.cancel)
+//            return
+//        }
+//        print("webView decidePolicyFor ", navigationAction.request.url )
+////        NSLog("Cosmostation webView decidePolicyFor  \(navigationAction.request.url?.absoluteString)")
+//        
+//        if let url = navigationAction.request.url {
+//            var newUrl: String?
+//            if let absoluteString = url.absoluteString.removingPercentEncoding {
+//                if absoluteString.starts(with: "keplrwallet://wcV1") {
+//                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc")
+//                } else if absoluteString.starts(with: "keplrwallet://wcV2") || absoluteString.starts(with: "keplrwalletwcv2://wcV2") {
+//                    newUrl = absoluteString.replacingOccurrences(of: "keplrwallet://wcV2", with: "cosmostation://wc")
+//                } else if let match = absoluteString.range(of: "https://.*/wc", options: .regularExpression) {
+//                    newUrl = absoluteString.replacingCharacters(in: match, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
+//                } else if absoluteString.starts(with: "cosmostation://wc") {
+//                    newUrl = absoluteString.replacingOccurrences(of: "uri=", with: "")
+//                } else if absoluteString.starts(with: "intent:") {
+//                    if absoluteString.contains("intent://wcV2") {
+//                        newUrl = absoluteString.replacingOccurrences(of: "intent://wcV2", with: "cosmostation://wc")
+//                    } else if absoluteString.contains("intent://wc") {
+//                        newUrl = absoluteString.removingPercentEncoding!.replacingOccurrences(of: "intent://wc", with: "cosmostation://wc")
+//                    }
+//                    if let range = newUrl?.range(of: "#Intent") {
+//                        let trimmedUrl = String(newUrl![..<range.lowerBound])
+//                        newUrl = trimmedUrl
+//                    }
+//                }
+//                print("newUrl ", newUrl)
+////                NSLog("Cosmostation webView decidePolicyFor newUrl  \(newUrl)")
+//                
+//                if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
+//                    NSLog("Cosmostation webView decidePolicyFor finalUrl  \(finalUrl)")
+//                    onInitWcV2(finalUrl)
+//                    decisionHandler(.cancel)
+//                    return
+//                }
+//            }
+//        }
+//        decisionHandler(.allow)
+//    }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if !isAnimationInProgress {
