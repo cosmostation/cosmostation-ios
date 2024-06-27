@@ -1301,6 +1301,10 @@
 		04D547F22A612A93001F1A4B /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 04D547F12A612A93001F1A4B /* FirebaseMessaging */; };
 		04D547F42A612AA7001F1A4B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 04D547F32A612AA7001F1A4B /* SwiftyJSON */; };
 		04D547F62A612AE1001F1A4B /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 04D547F52A612AE1001F1A4B /* AlamofireImage */; };
+		04D782BF2C2D28FF004B99CF /* AboutChainInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D782BE2C2D28FF004B99CF /* AboutChainInfoCell.xib */; };
+		04D782C02C2D28FF004B99CF /* AboutChainInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D782BD2C2D28FF004B99CF /* AboutChainInfoCell.swift */; };
+		04D782C12C2D28FF004B99CF /* AboutChainInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D782BD2C2D28FF004B99CF /* AboutChainInfoCell.swift */; };
+		04D782C22C2D28FF004B99CF /* AboutChainInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D782BE2C2D28FF004B99CF /* AboutChainInfoCell.xib */; };
 		04E165BA28B61BE1000F12C0 /* MintscanAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165B928B61BE1000F12C0 /* MintscanAsset.swift */; };
 		04E165BB28B61BE1000F12C0 /* MintscanAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165B928B61BE1000F12C0 /* MintscanAsset.swift */; };
 		04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165BC28B62133000F12C0 /* MintscanToken.swift */; };
@@ -1732,10 +1736,6 @@
 		E15F2CFF2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2CFC2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift */; };
 		E15F2D002ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2CFD2ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib */; };
 		E15F2D012ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2CFD2ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib */; };
-		E15F2D042ABF105B00BAE105 /* StakeRewardAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2D022ABF105B00BAE105 /* StakeRewardAddressCell.swift */; };
-		E15F2D052ABF105B00BAE105 /* StakeRewardAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2D022ABF105B00BAE105 /* StakeRewardAddressCell.swift */; };
-		E15F2D062ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2D032ABF105B00BAE105 /* StakeRewardAddressCell.xib */; };
-		E15F2D072ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2D032ABF105B00BAE105 /* StakeRewardAddressCell.xib */; };
 		E15F2D0A2ABF107300BAE105 /* StakeDelegateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2D082ABF107300BAE105 /* StakeDelegateCell.swift */; };
 		E15F2D0B2ABF107300BAE105 /* StakeDelegateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15F2D082ABF107300BAE105 /* StakeDelegateCell.swift */; };
 		E15F2D0C2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15F2D092ABF107300BAE105 /* StakeDelegateCell.xib */; };
@@ -2588,6 +2588,8 @@
 		04D279EF2A67C98E00AF046A /* ChainEthereum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainEthereum.swift; sourceTree = "<group>"; };
 		04D279F22A67C9A600AF046A /* ChainSui.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSui.swift; sourceTree = "<group>"; };
 		04D279F82A69159E00AF046A /* BaseChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChain.swift; sourceTree = "<group>"; };
+		04D782BD2C2D28FF004B99CF /* AboutChainInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutChainInfoCell.swift; sourceTree = "<group>"; };
+		04D782BE2C2D28FF004B99CF /* AboutChainInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutChainInfoCell.xib; sourceTree = "<group>"; };
 		04E165B928B61BE1000F12C0 /* MintscanAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanAsset.swift; sourceTree = "<group>"; };
 		04E165BC28B62133000F12C0 /* MintscanToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanToken.swift; sourceTree = "<group>"; };
 		04E250DC2B8F0354007D5AA0 /* basebg00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg00.png; sourceTree = "<group>"; };
@@ -2803,8 +2805,6 @@
 		E15980A82A83ADB60032892B /* MainTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabVC.swift; sourceTree = "<group>"; };
 		E15F2CFC2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosStakingInfoVC.swift; sourceTree = "<group>"; };
 		E15F2CFD2ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosStakingInfoVC.xib; sourceTree = "<group>"; };
-		E15F2D022ABF105B00BAE105 /* StakeRewardAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StakeRewardAddressCell.swift; sourceTree = "<group>"; };
-		E15F2D032ABF105B00BAE105 /* StakeRewardAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StakeRewardAddressCell.xib; sourceTree = "<group>"; };
 		E15F2D082ABF107300BAE105 /* StakeDelegateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StakeDelegateCell.swift; sourceTree = "<group>"; };
 		E15F2D092ABF107300BAE105 /* StakeDelegateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StakeDelegateCell.xib; sourceTree = "<group>"; };
 		E15F2D0E2ABF108500BAE105 /* StakeUnbondingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StakeUnbondingCell.swift; sourceTree = "<group>"; };
@@ -4004,8 +4004,6 @@
 				E1831BA32AB82FE60078A28B /* ManageChainCell.xib */,
 				E162004B2AF27C250008F397 /* AddressBookCell.swift */,
 				E162004C2AF27C250008F397 /* AddressBookCell.xib */,
-				E15F2D022ABF105B00BAE105 /* StakeRewardAddressCell.swift */,
-				E15F2D032ABF105B00BAE105 /* StakeRewardAddressCell.xib */,
 				E15F2D082ABF107300BAE105 /* StakeDelegateCell.swift */,
 				E15F2D092ABF107300BAE105 /* StakeDelegateCell.xib */,
 				E15F2D0E2ABF108500BAE105 /* StakeUnbondingCell.swift */,
@@ -4020,6 +4018,8 @@
 				E1B44B242ADA41DE0073C88A /* NeutronMultiVoteCell.xib */,
 				E1CD6AEC2AEAAEA300376909 /* AboutDescriptionCell.swift */,
 				E1CD6AED2AEAAEA300376909 /* AboutDescriptionCell.xib */,
+				04D782BD2C2D28FF004B99CF /* AboutChainInfoCell.swift */,
+				04D782BE2C2D28FF004B99CF /* AboutChainInfoCell.xib */,
 				E1CD6AF22AEAAEC200376909 /* AboutStakingCell.swift */,
 				E1CD6AF32AEAAEC200376909 /* AboutStakingCell.xib */,
 				E1CD6AF82AEAAEDC00376909 /* AboutRewardAddressCell.swift */,
@@ -4532,6 +4532,7 @@
 				E10B1DAA2C2156430039283B /* KavaMintListVC.xib in Resources */,
 				0494CBF82BAF39BA00FA3E49 /* NftListCell.xib in Resources */,
 				E1F257D92BF77A7B008F4D21 /* EvmDelegate.xib in Resources */,
+				04D782C22C2D28FF004B99CF /* AboutChainInfoCell.xib in Resources */,
 				E16200352AF0CFFD0008F397 /* SelectEndpointCell.xib in Resources */,
 				047C10742AAC310600AFA159 /* QrAddressVC.xib in Resources */,
 				0409D2F82AC5DC6D0021E192 /* CosmosDelegate.xib in Resources */,
@@ -4614,7 +4615,6 @@
 				18FFB78E281AF533004E65BB /* InfoPlist.strings in Resources */,
 				041541032BA413A300CD5AA1 /* VoteAllChainHeader.xib in Resources */,
 				E1F257E22BFB1FF3008F4D21 /* EvmUndelegate.xib in Resources */,
-				E15F2D072ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
 				E10B1DD52C2159040039283B /* KavaMintCreateAction.xib in Resources */,
 				04B789EE2ACB336400E9BE88 /* SelectRefAddressCell.xib in Resources */,
 				04C940E92AF4DAAE00415256 /* DeleteAddressBookSheet.xib in Resources */,
@@ -4728,6 +4728,7 @@
 				046BF1C82B0F443100BC1FC8 /* OktSelectValidatorSheet.xib in Resources */,
 				04FA74872AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
 				E10B1DC82C2159040039283B /* KavaEarnWithdrawAction.xib in Resources */,
+				04D782BF2C2D28FF004B99CF /* AboutChainInfoCell.xib in Resources */,
 				04A68C312AC13A560041FA13 /* CosmosProposalsVC.xib in Resources */,
 				04CD24552AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */,
 				04FAD9C62AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
@@ -4879,7 +4880,6 @@
 				18F4EAD12A4DA0A200CFBE2B /* ApiKeyDev.plist in Resources */,
 				E165ED382B98C9D500C15809 /* basebg09.png in Resources */,
 				E1F257EB2BFB2024008F4D21 /* EvmRedelegate.xib in Resources */,
-				E15F2D062ABF105B00BAE105 /* StakeRewardAddressCell.xib in Resources */,
 				E1DF77712AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5017,7 +5017,6 @@
 				E1D6B8CF2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */,
 				04C940B72AE8D4A100415256 /* CryptoJS.swift in Sources */,
 				045033132C1F029A00235F6A /* ChainStride.swift in Sources */,
-				E15F2D052ABF105B00BAE105 /* StakeRewardAddressCell.swift in Sources */,
 				04FAD9E92AB6DBCE00143A3E /* ManageAccountCell.swift in Sources */,
 				04FEDB532B05DE230095B7B6 /* DeriveCell.swift in Sources */,
 				0450330F2C1F029A00235F6A /* ChainSecret118.swift in Sources */,
@@ -5124,6 +5123,7 @@
 				047843F42AC9A1B500462F1C /* ChainArchway.swift in Sources */,
 				18FFB332281AF533004E65BB /* KeyFac.swift in Sources */,
 				E10B1D882C2156430039283B /* KavaLendListMyCell.swift in Sources */,
+				04D782C12C2D28FF004B99CF /* AboutChainInfoCell.swift in Sources */,
 				E10B1D9C2C2156430039283B /* KavaDefiVC.swift in Sources */,
 				04C816EB2BA98D75006B800A /* cosmos_orm_module_v1alpha1_module.pb.swift in Sources */,
 				045032892C1EEDCD00235F6A /* ChainBitsong.swift in Sources */,
@@ -5780,7 +5780,6 @@
 				04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */,
 				045033122C1F029A00235F6A /* ChainStride.swift in Sources */,
 				04C940B62AE8D4A100415256 /* CryptoJS.swift in Sources */,
-				E15F2D042ABF105B00BAE105 /* StakeRewardAddressCell.swift in Sources */,
 				04FAD9E82AB6DBCE00143A3E /* ManageAccountCell.swift in Sources */,
 				0450330E2C1F029A00235F6A /* ChainSecret118.swift in Sources */,
 				04FEDB522B05DE230095B7B6 /* DeriveCell.swift in Sources */,
@@ -5886,6 +5885,7 @@
 				042DE8462AC4CD01003F3EA4 /* QrScanVC.swift in Sources */,
 				047843F32AC9A1B500462F1C /* ChainArchway.swift in Sources */,
 				E10B1D872C2156430039283B /* KavaLendListMyCell.swift in Sources */,
+				04D782C02C2D28FF004B99CF /* AboutChainInfoCell.swift in Sources */,
 				E10B1D9B2C2156430039283B /* KavaDefiVC.swift in Sources */,
 				E1945E50222E842B00A1436F /* BaseVC.swift in Sources */,
 				045032882C1EEDCD00235F6A /* ChainBitsong.swift in Sources */,

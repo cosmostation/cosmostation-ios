@@ -217,6 +217,21 @@
 "str_dapp_warn_msg" = "このメッセージに署名するのは、要求しているサイトを信頼し、その内容を完全に理解している場合にのみ行ってください。";
 "str_affect_safe" = "あなたの資産に影響を与えません。";
 "str_affect_danger" = "あなたの資産に影響を与えます。";
+"str_chain_introduce" = "チェーンの説明";
+"str_chain_info" = "チェーン情報";
+"str_staking_info" = "ステーキング情報";
+"str_unstake_period" = "ステーキ解除期間";
+"str_inflation" = "インフレーション";
+"str_est_apr" = "予想収益率";
+"str_days" = "日";
+"str_staking_asset" = "ステーキングコイン";
+"str_chain_id" = "チェーンID";
+"str_chain_id_cosmos" = "チェーンID(cosmos形式)";
+"str_chain_id_evm" = "チェーンID(evm形式)";
+"str_initial_issue" = "最初の稼働日";
+"str_network" = "通信網";
+"str_mainnet" = "メインネット";
+"str_testnet" = "テストネット";
 
 
 "str_tx_status" = "結果";
@@ -419,6 +434,9 @@
 "msg_vote_all_detail" = "投票できる提案をすべて選択する必要があります。\n後で投票したい提案をスワイプして除外してください。";
 "msg_claim_all_detail" = "報酬額と送信手数料額を確認してください。\n今後受け取りたい報酬を除外するにはスワイプしてください。";
 "msg_compoundable_detail" = "コンパウンディング数量とTx手数料の金額を確認してください。\n今後コンパウンディングするチェーンをスワイプして除外してください。";
+"msg_reward_address" = "このアドレスはリワード資産を受け取るためのアドレスです。\n報酬の住所を変更するにはここをタップしてください。 (お勧めしません)";
+"msg_reward_address_under" = "報酬の住所を変更するにはここをタップしてください。";
+"msg_already_changed_reward_address" = "すでにリワードアドレスを変更しました。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";

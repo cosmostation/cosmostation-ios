@@ -217,6 +217,21 @@
 "str_dapp_warn_msg" = "요청하는 사이트를 신뢰하고 그 내용을 완전히 이해하는 경우에만 이 메세지에 서명하세요.";
 "str_affect_safe" = "당신의 자산에 영향을 미치지 않습니다.";
 "str_affect_danger" = "당신의 자산에 영향을 미칩니다.";
+"str_chain_introduce" = "체인 설명";
+"str_chain_info" = "체인 정보";
+"str_staking_info" = "스테이킹 정보";
+"str_unstake_period" = "스테이크 해제 기간";
+"str_inflation" = "인플래이션";
+"str_est_apr" = "예상 수익률";
+"str_days" = "일";
+"str_staking_asset" = "스테이킹 코인";
+"str_chain_id" = "체인 아이디";
+"str_chain_id_cosmos" = "체인 아이디 (cosmos 형식)";
+"str_chain_id_evm" = "체인 아이디 (evm 형식)";
+"str_initial_issue" = "최초 가동일";
+"str_network" = "네트워크";
+"str_mainnet" = "메인넷";
+"str_testnet" = "테스트넷";
 
 
 "str_tx_status" = "결과";
@@ -419,6 +434,9 @@
 "msg_vote_all_detail" = "라이브 상태인 프로포절을 모두 선택하여야 투표가 가능합니다.\n추후에 투표할 프로포절은 스와이프하여 제외해주세요.";
 "msg_claim_all_detail" = "라워드 수량과 Tx 수수료 수량을 확인해주세요.\n추후에 받고 싶으신 리워드는 스와이프하여 제외해주세요.";
 "msg_compoundable_detail" = "컴파운딩 수량과 Tx 수수료 금액을 확인하세요.\n추후에 컴파운딩 하실 체인은 스와이프하여 제외해주세요.";
+"msg_reward_address" = "이 주소는 리워드 자산을 받는 주소입니다.\n여기를 눌러 리워드 주소를 변경하실 수 있습니다. (권장하지 않음)";
+"msg_reward_address_under" = "여기를 눌러 리워드 주소를 변경하실 수 있습니다.";
+"msg_already_changed_reward_address" = "이미 리워드 주소를 변경하였습니다.";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";

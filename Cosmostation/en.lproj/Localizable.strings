@@ -217,6 +217,21 @@
 "str_dapp_warn_msg" = "Only sign this message if you trust the requesting site and fully understand its contents.";
 "str_affect_safe" = "Not affects your Assets.";
 "str_affect_danger" = "Affects your Assets.";
+"str_chain_introduce" = "Introduction";
+"str_chain_info" = "Chain Information";
+"str_staking_info" = "Staking Information";
+"str_unstake_period" = "Unstake Period";
+"str_inflation" = "Inflation";
+"str_est_apr" = "Staking APR (est)";
+"str_days" = "Days";
+"str_staking_asset" = "Staking Asset";
+"str_chain_id" = "Chain Id";
+"str_chain_id_cosmos" = "Chain Id (cosmos style)";
+"str_chain_id_evm" = "Chain Id (evm style)";
+"str_initial_issue" = "Initial Issue";
+"str_network" = "Network";
+"str_mainnet" = "Mainnet";
+"str_testnet" = "Testnet";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";
@@ -419,6 +434,9 @@
 "msg_vote_all_detail" = "You must select all proposals that are live to vote.\nPlease swipe to exclude proposals that you want to vote on later.";
 "msg_claim_all_detail" = "Check the reward amount and Tx fee amount.\nPlease swipe to exclude rewards you would like to receive in the future.";
 "msg_compoundable_detail" = "Check the to compounding amount and Tx fee amount.\nPlease swipe to exclude you would like to compounding in the future.";
+"msg_reward_address" = "This address is where you receive reward assets.\nTap here for change reward address. (not recommend)";
+"msg_reward_address_under" = "Tap here for change reward address.";
+"msg_already_changed_reward_address" = "You changed a reward address";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
