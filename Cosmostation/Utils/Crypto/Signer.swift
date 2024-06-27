@@ -14,17 +14,19 @@ import secp256k1
 class Signer {
     //Tx for Transfer
     static func genSendTx(_ account: Google_Protobuf_Any,
+                          _ timeout: UInt64,
                           _ toSend: Cosmos_Bank_V1beta1_MsgSend,
                           _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain)  -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let sendMsg = genSendMsg(toSend)
-        return getSignedTx(account, sendMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, sendMsg, fee, memo, baseChain)
     }
     
     static func genSendSimul(_ account: Google_Protobuf_Any,
+                             _ timeout: UInt64,
                              _ toSend: Cosmos_Bank_V1beta1_MsgSend,
                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain)  -> Cosmos_Tx_V1beta1_SimulateRequest {
         let sendMsg = genSendMsg(toSend)
-        return getSimulateTx(account, sendMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, sendMsg, fee, memo, baseChain)
     }
     
     static func genSendMsg(_ toSend: Cosmos_Bank_V1beta1_MsgSend) -> [Google_Protobuf_Any] {
@@ -37,17 +39,19 @@ class Signer {
     
     //Tx for Ibc Transfer
     static func genIbcSendTx(_ account: Google_Protobuf_Any,
+                             _ timeout: UInt64,
                              _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer,
                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let ibcSendMsg = genIbcSendMsg(ibcTransfer)
-        return getSignedTx(account, ibcSendMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, ibcSendMsg, fee, memo, baseChain)
     }
     
     static func genIbcSendSimul(_ account: Google_Protobuf_Any,
+                                _ timeout: UInt64,
                                 _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer,
                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let ibcSendMsg = genIbcSendMsg(ibcTransfer)
-        return getSimulateTx(account, ibcSendMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, ibcSendMsg, fee, memo, baseChain)
     }
     
     static func genIbcSendMsg(_ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) -> [Google_Protobuf_Any] {
@@ -60,17 +64,19 @@ class Signer {
     
     //Tx for Wasm Exe
     static func genWasmTx(_ account: Google_Protobuf_Any,
+                          _ timeout: UInt64,
                           _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract],
                           _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let wasmMsg = genWasmMsg(wasmContracts)
-        return getSignedTx(account, wasmMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, wasmMsg, fee, memo, baseChain)
     }
     
     static func genWasmSimul(_ account: Google_Protobuf_Any,
+                             _ timeout: UInt64,
                              _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract],
                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let wasmMsg = genWasmMsg(wasmContracts)
-        return getSimulateTx(account, wasmMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, wasmMsg, fee, memo, baseChain)
     }
     
     static func genWasmMsg(_ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract]) -> [Google_Protobuf_Any] {
@@ -87,17 +93,19 @@ class Signer {
     
     //Tx for Common Delegate
     static func genDelegateTx(_ account: Google_Protobuf_Any,
+                              _ timeout: UInt64,
                               _ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate,
                               _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let deleMsg = genDelegateMsg(toDelegate)
-        return getSignedTx(account, deleMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, deleMsg, fee, memo, baseChain)
     }
     
     static func genDelegateSimul(_ account: Google_Protobuf_Any,
+                                 _ timeout: UInt64,
                                  _ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate,
                                  _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let deleMsg = genDelegateMsg(toDelegate)
-        return getSimulateTx(account, deleMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, deleMsg, fee, memo, baseChain)
     }
     
     static func genDelegateMsg(_ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate) -> [Google_Protobuf_Any] {
@@ -110,17 +118,19 @@ class Signer {
     
     //Tx for Common UnDelegate
     static func genUndelegateTx(_ account: Google_Protobuf_Any,
+                                _ timeout: UInt64,
                                 _ toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate,
                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let undeleMsg = genUndelegateMsg(toUndelegate)
-        return getSignedTx(account, undeleMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, undeleMsg, fee, memo, baseChain)
     }
     
     static func genUndelegateSimul(_ account: Google_Protobuf_Any,
+                                   _ timeout: UInt64,
                                    _ toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate,
                                    _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let undeleMsg = genUndelegateMsg(toUndelegate)
-        return getSimulateTx(account, undeleMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, undeleMsg, fee, memo, baseChain)
     }
     
     static func genUndelegateMsg(_ toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate) -> [Google_Protobuf_Any] {
@@ -133,17 +143,19 @@ class Signer {
     
     //Tx for Common CancelUnbonding
     static func genCancelUnbondingTx(_ account: Google_Protobuf_Any,
+                                     _ timeout: UInt64,
                                      _ toCancel: Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation,
                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let cancelMsg = genCancelUnbondingMsg(toCancel)
-        return getSignedTx(account, cancelMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, cancelMsg, fee, memo, baseChain)
     }
     
     static func genCancelUnbondingSimul(_ account: Google_Protobuf_Any,
+                                        _ timeout: UInt64,
                                         _ toCancel: Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation,
                                         _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let cancelMsg = genCancelUnbondingMsg(toCancel)
-        return getSimulateTx(account, cancelMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, cancelMsg, fee, memo, baseChain)
     }
     
     static func genCancelUnbondingMsg(_ toCancel: Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation) -> [Google_Protobuf_Any] {
@@ -157,17 +169,19 @@ class Signer {
     
     //Tx for Common ReDelegate
     static func genRedelegateTx(_ account: Google_Protobuf_Any,
+                                _ timeout: UInt64,
                                 _ toRedelegate: Cosmos_Staking_V1beta1_MsgBeginRedelegate,
                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let redeleMsg = genRedelegateMsg(toRedelegate)
-        return getSignedTx(account, redeleMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, redeleMsg, fee, memo, baseChain)
     }
     
     static func genRedelegateSimul(_ account: Google_Protobuf_Any,
+                                   _ timeout: UInt64,
                                    _ toRedelegate: Cosmos_Staking_V1beta1_MsgBeginRedelegate,
                                    _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let redeleMsg = genRedelegateMsg(toRedelegate)
-        return getSimulateTx(account, redeleMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, redeleMsg, fee, memo, baseChain)
     }
     
     static func genRedelegateMsg(_ toRedelegate: Cosmos_Staking_V1beta1_MsgBeginRedelegate) -> [Google_Protobuf_Any] {
@@ -180,17 +194,19 @@ class Signer {
     
     //Tx for Common Claim Staking Rewards
     static func genClaimRewardsTx(_ account: Google_Protobuf_Any,
+                                  _ timeout: UInt64,
                                   _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                   _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest  {
         let claimRewardMsg = genClaimStakingRewardMsg(account, rewards)
-        return getSignedTx(account, claimRewardMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, claimRewardMsg, fee, memo, baseChain)
     }
     
     static func genClaimRewardsSimul(_ account: Google_Protobuf_Any,
+                                     _ timeout: UInt64,
                                      _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let claimRewardMsg = genClaimStakingRewardMsg(account, rewards)
-        return getSimulateTx(account, claimRewardMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, claimRewardMsg, fee, memo, baseChain)
     }
     
     static func genClaimStakingRewardMsg(_ account: Google_Protobuf_Any, _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) -> [Google_Protobuf_Any] {
@@ -211,17 +227,19 @@ class Signer {
     
     //Tx for Common Claim Commission
     static func genClaimCommissionTx(_ account: Google_Protobuf_Any,
+                                     _ timeout: UInt64,
                                      _ commission: Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission,
                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest  {
         let claimCommissionMsg = genClaimCommissionMsg(commission)
-        return getSignedTx(account, claimCommissionMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, claimCommissionMsg, fee, memo, baseChain)
     }
     
     static func genClaimCommissionSimul(_ account: Google_Protobuf_Any,
+                                        _ timeout: UInt64,
                                         _ commission: Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission,
                                         _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let claimCommissionMsg = genClaimCommissionMsg(commission)
-        return getSimulateTx(account, claimCommissionMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, claimCommissionMsg, fee, memo, baseChain)
     }
     
     static func genClaimCommissionMsg(_ commission: Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission) -> [Google_Protobuf_Any] {
@@ -235,19 +253,21 @@ class Signer {
     
     //Tx for Common Re-Invest
     static func genCompoundingTx(_ account: Google_Protobuf_Any,
+                                 _ timeout: UInt64,
                                  _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                  _ stakingDenom: String,
                                  _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let reinvestMsg = genCompoundingMsg(account, rewards, stakingDenom)
-        return getSignedTx(account, reinvestMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, reinvestMsg, fee, memo, baseChain)
     }
     
     static func genCompoundingSimul(_ account: Google_Protobuf_Any,
+                                    _ timeout: UInt64,
                                     _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                     _ stakingDenom: String,
                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let reinvestMsg = genCompoundingMsg(account, rewards, stakingDenom)
-        return getSimulateTx(account, reinvestMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, reinvestMsg, fee, memo, baseChain)
     }
     
     static func genCompoundingMsg(_ account: Google_Protobuf_Any,
@@ -285,16 +305,20 @@ class Signer {
     }
     
     //Tx for Common Vote
-    static func genVotesTx(_ account: Google_Protobuf_Any, _ votes: [Cosmos_Gov_V1beta1_MsgVote],
+    static func genVotesTx(_ account: Google_Protobuf_Any, 
+                           _ timeout: UInt64,
+                           _ votes: [Cosmos_Gov_V1beta1_MsgVote],
                            _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let voteMsg = genVoteMsg(votes)
-        return getSignedTx(account, voteMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, voteMsg, fee, memo, baseChain)
     }
     
-    static func genVotesSimul(_ account: Google_Protobuf_Any, _ votes: [Cosmos_Gov_V1beta1_MsgVote],
+    static func genVotesSimul(_ account: Google_Protobuf_Any, 
+                              _ timeout: UInt64,
+                              _ votes: [Cosmos_Gov_V1beta1_MsgVote],
                               _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let voteMsg = genVoteMsg(votes)
-        return getSimulateTx(account, voteMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, voteMsg, fee, memo, baseChain)
     }
     
     static func genVoteMsg(_ votes: [Cosmos_Gov_V1beta1_MsgVote]) -> [Google_Protobuf_Any] {
@@ -311,17 +335,19 @@ class Signer {
     
     //Tx for Common Reward Address Change
     static func genRewardAddressTx(_ account: Google_Protobuf_Any,
+                                   _ timeout: UInt64,
                                    _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress,
                                    _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let setRewardAddressMsg = genRewardAddressMsg(setAddress)
-        return getSignedTx(account, setRewardAddressMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, setRewardAddressMsg, fee, memo, baseChain)
     }
     
     static func genRewardAddressTxSimul(_ account: Google_Protobuf_Any,
+                                        _ timeout: UInt64,
                                         _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress,
                                         _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let setRewardAddressMsg = genRewardAddressMsg(setAddress)
-        return getSimulateTx(account, setRewardAddressMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, setRewardAddressMsg, fee, memo, baseChain)
     }
     
     static func genRewardAddressMsg(_ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress) -> [Google_Protobuf_Any] {
@@ -591,17 +617,19 @@ class Signer {
     //for kava sign
     //Tx for Kava CDP Create
     static func genKavaCDPCreateTx(_ account: Google_Protobuf_Any,
+                                   _ timeout: UInt64,
                                    _ toCreate: Kava_Cdp_V1beta1_MsgCreateCDP,
                                    _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let toCreateMsg = genKavaCDPCreateMsg(toCreate)
-        return getSignedTx(account, toCreateMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, toCreateMsg, fee, memo, baseChain)
     }
     
     static func genKavaCDPCreateSimul(_ account: Google_Protobuf_Any,
+                                      _ timeout: UInt64,
                                       _ toCreate: Kava_Cdp_V1beta1_MsgCreateCDP,
                                       _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let toCreateMsg = genKavaCDPCreateMsg(toCreate)
-        return getSimulateTx(account, toCreateMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, toCreateMsg, fee, memo, baseChain)
     }
     
     static func genKavaCDPCreateMsg(_ toCreate: Kava_Cdp_V1beta1_MsgCreateCDP) -> [Google_Protobuf_Any] {
@@ -614,17 +642,19 @@ class Signer {
     
     //Tx for Kava CDP Deposit
     static func genKavaCDPDepositTx(_ account: Google_Protobuf_Any,
+                                    _ timeout: UInt64,
                                     _ toDeposit: Kava_Cdp_V1beta1_MsgDeposit,
                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let toDepositMsg = genKavaCDPDepositMsg(toDeposit)
-        return getSignedTx(account, toDepositMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, toDepositMsg, fee, memo, baseChain)
     }
     
     static func KavaCDPDepositSimul(_ account: Google_Protobuf_Any,
+                                    _ timeout: UInt64,
                                     _ toDeposit: Kava_Cdp_V1beta1_MsgDeposit,
                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let toDepositMsg = genKavaCDPDepositMsg(toDeposit)
-        return getSimulateTx(account, toDepositMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, toDepositMsg, fee, memo, baseChain)
     }
     
     static func genKavaCDPDepositMsg(_ toDeposit: Kava_Cdp_V1beta1_MsgDeposit) -> [Google_Protobuf_Any] {
@@ -637,17 +667,19 @@ class Signer {
     
     //Tx for Kava CDP Withdraw
     static func genKavaCDPWithdrawTx(_ account: Google_Protobuf_Any,
+                                     _ timeout: UInt64,
                                      _ toWithdraw: Kava_Cdp_V1beta1_MsgWithdraw,
                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let toWithdrawMsg = genKavaCDPWithdrawMsg(toWithdraw)
-        return getSignedTx(account, toWithdrawMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, toWithdrawMsg, fee, memo, baseChain)
     }
     
     static func genKavaCDPWithdrawSimul(_ account: Google_Protobuf_Any,
+                                        _ timeout: UInt64,
                                         _ toWithdraw: Kava_Cdp_V1beta1_MsgWithdraw,
                                         _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let toWithdrawMsg = genKavaCDPWithdrawMsg(toWithdraw)
-        return getSimulateTx(account, toWithdrawMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, toWithdrawMsg, fee, memo, baseChain)
     }
     
     static func genKavaCDPWithdrawMsg(_ toWithdraw: Kava_Cdp_V1beta1_MsgWithdraw) -> [Google_Protobuf_Any] {
@@ -660,17 +692,19 @@ class Signer {
     
     //Tx for Kava CDP Draw Debt
     static func genKavaCDPDrawDebtTx(_ account: Google_Protobuf_Any,
+                                     _ timeout: UInt64,
                                      _ toDrawDebt: Kava_Cdp_V1beta1_MsgDrawDebt,
                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let drawMsg = genKavaCDPDrawMsg(toDrawDebt)
-        return getSignedTx(account, drawMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, drawMsg, fee, memo, baseChain)
     }
     
     static func genKavaCDPDrawDebtSimul(_ account: Google_Protobuf_Any,
+                                        _ timeout: UInt64,
                                         _ toDrawDebt: Kava_Cdp_V1beta1_MsgDrawDebt,
                                         _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let drawMsg = genKavaCDPDrawMsg(toDrawDebt)
-        return getSimulateTx(account, drawMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, drawMsg, fee, memo, baseChain)
     }
     
     static func genKavaCDPDrawMsg(_ toDrawDebt: Kava_Cdp_V1beta1_MsgDrawDebt) -> [Google_Protobuf_Any] {
@@ -683,17 +717,19 @@ class Signer {
     
     //Tx for Kava CDP Repay
     static func genKavaCDPRepayTx(_ account: Google_Protobuf_Any,
+                                  _ timeout: UInt64,
                                   _ toRepay: Kava_Cdp_V1beta1_MsgRepayDebt,
                                   _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let repayMsg = genKavaCDPRepayMsg(toRepay)
-        return getSignedTx(account, repayMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, repayMsg, fee, memo, baseChain)
     }
     
     static func genKavaCDPRepaySimul(_ account: Google_Protobuf_Any,
+                                     _ timeout: UInt64,
                                      _ toRepay: Kava_Cdp_V1beta1_MsgRepayDebt,
                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let repayMsg = genKavaCDPRepayMsg(toRepay)
-        return getSimulateTx(account, repayMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, repayMsg, fee, memo, baseChain)
     }
     
     static func genKavaCDPRepayMsg(_ toRepay: Kava_Cdp_V1beta1_MsgRepayDebt) -> [Google_Protobuf_Any] {
@@ -706,17 +742,19 @@ class Signer {
     
     //Tx for Kava Hard Deposit
     static func genKavaHardDepositTx(_ account: Google_Protobuf_Any,
+                                     _ timeout: UInt64,
                                      _ toDeposit: Kava_Hard_V1beta1_MsgDeposit,
                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let depositMsg = genKavaHardDepositMsg(toDeposit)
-        return getSignedTx(account, depositMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, depositMsg, fee, memo, baseChain)
     }
     
     static func geKavaHardDepositSimul(_ account: Google_Protobuf_Any,
+                                       _ timeout: UInt64,
                                        _ toDeposit: Kava_Hard_V1beta1_MsgDeposit,
                                        _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let depositMsg = genKavaHardDepositMsg(toDeposit)
-        return getSimulateTx(account, depositMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, depositMsg, fee, memo, baseChain)
     }
     
     static func genKavaHardDepositMsg(_ toDeposit: Kava_Hard_V1beta1_MsgDeposit) -> [Google_Protobuf_Any] {
@@ -729,17 +767,19 @@ class Signer {
     
     //Tx for Kava Hard Withdraw
     static func genKavaHardwithdrawTx(_ account: Google_Protobuf_Any,
+                                      _ timeout: UInt64,
                                       _ toWithdraw: Kava_Hard_V1beta1_MsgWithdraw,
                                       _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let withdrawMsg = genKavaHardWithdrawMsg(toWithdraw)
-        return getSignedTx(account, withdrawMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, withdrawMsg, fee, memo, baseChain)
     }
     
     static func geKavaHardWithdrawSimul(_ account: Google_Protobuf_Any,
+                                        _ timeout: UInt64,
                                         _ toWithdraw: Kava_Hard_V1beta1_MsgWithdraw,
                                         _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let withdrawMsg = genKavaHardWithdrawMsg(toWithdraw)
-        return getSimulateTx(account, withdrawMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, withdrawMsg, fee, memo, baseChain)
     }
     
     static func genKavaHardWithdrawMsg(_ toWithdraw: Kava_Hard_V1beta1_MsgWithdraw) -> [Google_Protobuf_Any] {
@@ -752,17 +792,19 @@ class Signer {
     
     //Tx for Kava Hard Borrow
     static func genKavaHardBorrowTx(_ account: Google_Protobuf_Any,
+                                    _ timeout: UInt64,
                                     _ toBorrow: Kava_Hard_V1beta1_MsgBorrow,
                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let borrowMsg = genKavaHardBorrowMsg(toBorrow)
-        return getSignedTx(account, borrowMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, borrowMsg, fee, memo, baseChain)
     }
     
     static func genKavaHardBorrowSimul(_ account: Google_Protobuf_Any,
+                                       _ timeout: UInt64,
                                        _ toBorrow: Kava_Hard_V1beta1_MsgBorrow,
                                        _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let borrowMsg = genKavaHardBorrowMsg(toBorrow)
-        return getSimulateTx(account, borrowMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, borrowMsg, fee, memo, baseChain)
     }
     
     static func genKavaHardBorrowMsg(_ toBorrow: Kava_Hard_V1beta1_MsgBorrow) -> [Google_Protobuf_Any] {
@@ -775,17 +817,19 @@ class Signer {
     
     //Tx for Kava Hard Repay
     static func genKavaHardRepayTx(_ account: Google_Protobuf_Any,
+                                   _ timeout: UInt64,
                                    _ toRepay: Kava_Hard_V1beta1_MsgRepay,
                                    _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let repayMsg = genKavaHardRepayMsg(toRepay)
-        return getSignedTx(account, repayMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, repayMsg, fee, memo, baseChain)
     }
     
     static func genKavaHardRepaySimul(_ account: Google_Protobuf_Any,
+                                      _ timeout: UInt64,
                                       _ toRepay: Kava_Hard_V1beta1_MsgRepay,
                                       _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let repayMsg = genKavaHardRepayMsg(toRepay)
-        return getSimulateTx(account, repayMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, repayMsg, fee, memo, baseChain)
     }
     
     static func genKavaHardRepayMsg(_ toRepay: Kava_Hard_V1beta1_MsgRepay) -> [Google_Protobuf_Any] {
@@ -798,17 +842,19 @@ class Signer {
     
     //Tx for Kava Swap Deposit
     static func genKavaSwpDepositTx(_ account: Google_Protobuf_Any,
+                                    _ timeout: UInt64,
                                     _ toDeposit: Kava_Swap_V1beta1_MsgDeposit,
                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let depositMsg = genKavaSwpDepositMsg(toDeposit)
-        return getSignedTx(account, depositMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, depositMsg, fee, memo, baseChain)
     }
     
     static func geKavaSwpDepositSimul(_ account: Google_Protobuf_Any,
+                                      _ timeout: UInt64,
                                       _ toDeposit: Kava_Swap_V1beta1_MsgDeposit,
                                       _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let depositMsg = genKavaSwpDepositMsg(toDeposit)
-        return getSimulateTx(account, depositMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, depositMsg, fee, memo, baseChain)
     }
     
     static func genKavaSwpDepositMsg(_ toDeposit: Kava_Swap_V1beta1_MsgDeposit) -> [Google_Protobuf_Any] {
@@ -821,17 +867,19 @@ class Signer {
     
     //Tx for Kava Swap Withdraw
     static func genKavaSwpwithdrawTx(_ account: Google_Protobuf_Any,
+                                     _ timeout: UInt64,
                                      _ toWithdraw: Kava_Swap_V1beta1_MsgWithdraw,
                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let withdrawMsg = genKavaSwpWithdrawMsg(toWithdraw)
-        return getSignedTx(account, withdrawMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, withdrawMsg, fee, memo, baseChain)
     }
     
     static func geKavaSwpWithdrawSimul(_ account: Google_Protobuf_Any,
+                                       _ timeout: UInt64,
                                        _ toWithdraw: Kava_Swap_V1beta1_MsgWithdraw,
                                        _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let withdrawMsg = genKavaSwpWithdrawMsg(toWithdraw)
-        return getSimulateTx(account, withdrawMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, withdrawMsg, fee, memo, baseChain)
     }
     
     static func genKavaSwpWithdrawMsg(_ toWithdraw: Kava_Swap_V1beta1_MsgWithdraw) -> [Google_Protobuf_Any] {
@@ -844,17 +892,19 @@ class Signer {
     
     //Tx for Kava Incentive All
     static func genKavaClaimIncentivesTx(_ account: Google_Protobuf_Any,
+                                         _ timeout: UInt64,
                                          _ incentives: Kava_Incentive_V1beta1_QueryRewardsResponse,
                                          _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let kavaIncentiveMsgs = genKavaIncentiveMsgs(account, incentives)
-        return getSignedTx(account, kavaIncentiveMsgs, fee, memo, baseChain)
+        return getSignedTx(account, timeout, kavaIncentiveMsgs, fee, memo, baseChain)
     }
     
     static func genKavaClaimIncentivesSimul(_ account: Google_Protobuf_Any,
+                                            _ timeout: UInt64,
                                             _ incentives: Kava_Incentive_V1beta1_QueryRewardsResponse,
                                             _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let kavaIncentiveMsgs = genKavaIncentiveMsgs(account, incentives)
-        return getSimulateTx(account, kavaIncentiveMsgs, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, kavaIncentiveMsgs, fee, memo, baseChain)
     }
         
     
@@ -936,17 +986,19 @@ class Signer {
     
     //Tx for Kava Earn Deposit
     static func genKavaEarnDepositTx(_ account: Google_Protobuf_Any,
+                                     _ timeout: UInt64,
                                      _ earnDeposit: Kava_Router_V1beta1_MsgDelegateMintDeposit,
                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let earnDepositMsg = genKavaEarnDepositMsg(earnDeposit)
-        return getSignedTx(account, earnDepositMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, earnDepositMsg, fee, memo, baseChain)
     }
     
     static func genKavaEarnDepositSimul(_ account: Google_Protobuf_Any,
+                                        _ timeout: UInt64,
                                         _ earnDeposit: Kava_Router_V1beta1_MsgDelegateMintDeposit,
                                         _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let earnDepositMsg = genKavaEarnDepositMsg(earnDeposit)
-        return getSimulateTx(account, earnDepositMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, earnDepositMsg, fee, memo, baseChain)
     }
     
     static func genKavaEarnDepositMsg(_ earnDeposit: Kava_Router_V1beta1_MsgDelegateMintDeposit) -> [Google_Protobuf_Any] {
@@ -959,17 +1011,19 @@ class Signer {
     
     //Tx for Kava Earn Withdraw
     static func genKavaEarnWithdrawTx(_ account: Google_Protobuf_Any,
+                                      _ timeout: UInt64,
                                       _ earnWithdraw: Kava_Router_V1beta1_MsgWithdrawBurn,
                                       _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let earnWithdrawMsg = genKavaEarnWithdrawMsg(earnWithdraw)
-        return getSignedTx(account, earnWithdrawMsg, fee, memo, baseChain)
+        return getSignedTx(account, timeout, earnWithdrawMsg, fee, memo, baseChain)
     }
     
     static func genKavaEarnWithdrawSimul(_ account: Google_Protobuf_Any,
+                                         _ timeout: UInt64,
                                          _ earnWithdraw: Kava_Router_V1beta1_MsgWithdrawBurn,
                                          _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let earnWithdrawMsg = genKavaEarnWithdrawMsg(earnWithdraw)
-        return getSimulateTx(account, earnWithdrawMsg, fee, memo, baseChain)
+        return getSimulateTx(account, timeout, earnWithdrawMsg, fee, memo, baseChain)
     }
     
     static func genKavaEarnWithdrawMsg(_ earnWithdraw: Kava_Router_V1beta1_MsgWithdrawBurn) -> [Google_Protobuf_Any] {
@@ -1385,9 +1439,9 @@ class Signer {
 //    }
     
     
-    static func getSignedTx(_ account: Google_Protobuf_Any, _ msgAnys: [Google_Protobuf_Any],
+    static func getSignedTx(_ account: Google_Protobuf_Any, _ timeout: UInt64, _ msgAnys: [Google_Protobuf_Any],
                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let txBody = getTxBody(msgAnys, memo)
+        let txBody = getTxBody(msgAnys, memo, timeout)
         let signerInfo = getSignerInfos(account, baseChain)
         let authInfo = getAuthInfo(signerInfo, fee)
         let rawTx = getRawTxs(account, txBody, authInfo, baseChain)
@@ -1397,9 +1451,9 @@ class Signer {
         }
     }
     
-    static func getSimulateTx(_ account: Google_Protobuf_Any, _ msgAnys: [Google_Protobuf_Any],
+    static func getSimulateTx(_ account: Google_Protobuf_Any, _ timeout: UInt64, _ msgAnys: [Google_Protobuf_Any],
                                _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let txBody = getTxBody(msgAnys, memo)
+        let txBody = getTxBody(msgAnys, memo, timeout)
         let signerInfo = getSignerInfos(account, baseChain)
         let authInfo = getAuthInfo(signerInfo, fee)
         let simulateTx = getSimulTxs(txBody, authInfo)
@@ -1408,10 +1462,11 @@ class Signer {
         }
     }
     
-    static func getTxBody(_ msgAnys: [Google_Protobuf_Any], _ memo: String) -> Cosmos_Tx_V1beta1_TxBody {
+    static func getTxBody(_ msgAnys: [Google_Protobuf_Any], _ memo: String, _ timeout: UInt64) -> Cosmos_Tx_V1beta1_TxBody {
         return Cosmos_Tx_V1beta1_TxBody.with {
             $0.memo = memo
             $0.messages = msgAnys
+            $0.timeoutHeight = timeout + 30
         }
     }
     

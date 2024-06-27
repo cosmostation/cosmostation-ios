@@ -196,7 +196,8 @@ class KavaEarnWithdrawAction: BaseVC {
         Task {
             do {
                 let account = try await grpcFetcher.fetchAuth()
-                let simulReq = Signer.genKavaEarnWithdrawSimul(account!, toEarnRemove, txFee, txMemo, selectedChain)
+                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
+                let simulReq = Signer.genKavaEarnWithdrawSimul(account!, UInt64(height), toEarnRemove, txFee, txMemo, selectedChain)
                 let simulRes = try await grpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(simulRes)
@@ -243,7 +244,8 @@ extension KavaEarnWithdrawAction: BaseSheetDelegate, MemoDelegate, AmountSheetDe
             Task {
                 do {
                     let account = try await grpcFetcher.fetchAuth()
-                    let broadReq = Signer.genKavaEarnWithdrawTx(account!, toEarnRemove, txFee, txMemo, selectedChain)
+                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
+                    let broadReq = Signer.genKavaEarnWithdrawTx(account!, UInt64(height), toEarnRemove, txFee, txMemo, selectedChain)
                     let response = try await grpcFetcher.broadcastTx(broadReq)
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true

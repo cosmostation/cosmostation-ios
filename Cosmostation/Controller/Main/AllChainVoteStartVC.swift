@@ -426,8 +426,9 @@ extension AllChainVoteStartVC {
     
     func simulateVoteTx(_ chain: BaseChain, _ msgVotes: [Cosmos_Gov_V1beta1_MsgVote]) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
         if let grpcFetcher = chain.getGrpcfetcher(),
-           let account = try await grpcFetcher.fetchAuth() {
-            let simulReq = Signer.genVotesSimul(account, msgVotes, chain.getInitPayableFee()!, "", chain)
+           let account = try await grpcFetcher.fetchAuth(),
+            let height = try await grpcFetcher.fetchLastBlock()?.block.header.height {
+            let simulReq = Signer.genVotesSimul(account, UInt64(height), msgVotes, chain.getInitPayableFee()!, "", chain)
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: grpcFetcher.getClient()).simulate(simulReq, callOptions: grpcFetcher.getCallOptions()).response.get()
         }
         return nil
@@ -435,8 +436,9 @@ extension AllChainVoteStartVC {
     
     func broadcastVoteTx(_ chain: BaseChain, _ msgVotes: [Cosmos_Gov_V1beta1_MsgVote], _ fee: Cosmos_Tx_V1beta1_Fee) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
         if let grpcFetcher = chain.getGrpcfetcher(),
-           let account = try await grpcFetcher.fetchAuth() {
-            let broadReq = Signer.genVotesTx(account, msgVotes, fee, "", chain)
+           let account = try await grpcFetcher.fetchAuth(),
+           let height = try await grpcFetcher.fetchLastBlock()?.block.header.height {
+            let broadReq = Signer.genVotesTx(account, UInt64(height), msgVotes, fee, "", chain)
             return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: grpcFetcher.getClient()).broadcastTx(broadReq, callOptions: grpcFetcher.getCallOptions()).response.get().txResponse
         }
         return nil

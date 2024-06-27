@@ -256,7 +256,8 @@ class CosmosDelegate: BaseVC {
         Task {
             do {
                 let account = try await grpcFetcher.fetchAuth()
-                let simulReq = Signer.genDelegateSimul(account!, toDelegate, txFee, txMemo, selectedChain)
+                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
+                let simulReq = Signer.genDelegateSimul(account!, UInt64(height), toDelegate, txFee, txMemo, selectedChain)
                 let simulRes = try await grpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(simulRes)
@@ -309,7 +310,8 @@ extension CosmosDelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             Task {
                 do {
                     let account = try await grpcFetcher.fetchAuth()
-                    let broadReq = Signer.genDelegateTx(account!, toDelegate, txFee, txMemo, selectedChain)
+                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
+                    let broadReq = Signer.genDelegateTx(account!, UInt64(height), toDelegate, txFee, txMemo, selectedChain)
                     let response = try await grpcFetcher.broadcastTx(broadReq)
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true

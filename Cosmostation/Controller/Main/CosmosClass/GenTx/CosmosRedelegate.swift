@@ -285,7 +285,8 @@ class CosmosRedelegate: BaseVC {
         Task {
             do {
                 let account = try await grpcFetcher.fetchAuth()
-                let simulReq = Signer.genRedelegateSimul(account!, toRedelegate, txFee, txMemo, selectedChain)
+                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
+                let simulReq = Signer.genRedelegateSimul(account!, UInt64(height), toRedelegate, txFee, txMemo, selectedChain)
                 let simulRes = try await grpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(simulRes)
@@ -346,7 +347,8 @@ extension CosmosRedelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
             Task {
                 do {
                     let account = try await grpcFetcher.fetchAuth()
-                    let broadReq = Signer.genRedelegateTx(account!, toRedelegate, txFee, txMemo, selectedChain)
+                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
+                    let broadReq = Signer.genRedelegateTx(account!, UInt64(height), toRedelegate, txFee, txMemo, selectedChain)
                     let response = try await grpcFetcher.broadcastTx(broadReq)
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true

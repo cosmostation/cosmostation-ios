@@ -273,7 +273,8 @@ class NftTransfer: BaseVC {
         Task {
             do {
                 let account = try await fromGrpcFetcher.fetchAuth()
-                let simulReq = Signer.genWasmSimul(account!, [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let height = try await fromGrpcFetcher.fetchLastBlock()!.block.header.height
+                let simulReq = Signer.genWasmSimul(account!, UInt64(height), [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
                 let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
                     self.onUpdateFeeViewAfterSimul(simulRes)
@@ -294,7 +295,8 @@ class NftTransfer: BaseVC {
         Task {
             do {
                 let account = try await fromGrpcFetcher.fetchAuth()
-                let broadReq = Signer.genWasmTx(account!, [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let height = try await fromGrpcFetcher.fetchLastBlock()!.block.header.height
+                let broadReq = Signer.genWasmTx(account!, UInt64(height), [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
                 let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true

@@ -183,7 +183,8 @@ class CosmosClaimCommission: BaseVC {
         Task {
             do {
                 let account = try await grpcFetcher.fetchAuth()
-                let simulReq = Signer.genClaimCommissionSimul(account!, claimableCommission, txFee, txMemo, selectedChain)
+                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
+                let simulReq = Signer.genClaimCommissionSimul(account!, UInt64(height), claimableCommission, txFee, txMemo, selectedChain)
                 let simulRes = try await grpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(simulRes)
@@ -227,7 +228,8 @@ extension CosmosClaimCommission: MemoDelegate, BaseSheetDelegate, PinDelegate {
             Task {
                 do {
                     let account = try await grpcFetcher.fetchAuth()
-                    let broadReq = Signer.genClaimCommissionTx(account!, claimableCommission, txFee, txMemo, selectedChain)
+                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
+                    let broadReq = Signer.genClaimCommissionTx(account!, UInt64(height), claimableCommission, txFee, txMemo, selectedChain)
                     let response = try await grpcFetcher.broadcastTx(broadReq)
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true

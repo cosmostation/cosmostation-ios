@@ -310,17 +310,18 @@ class KavaMintAction: BaseVC {
             do {
                 var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
                 let account = try await grpcFetcher.fetchAuth()
+                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                 if (mintActionType == .Deposit) {
-                    simulReq = Signer.KavaCDPDepositSimul(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                    simulReq = Signer.KavaCDPDepositSimul(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
                     
                 } else if (mintActionType == .Withdraw) {
-                    simulReq = Signer.genKavaCDPWithdrawSimul(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                    simulReq = Signer.genKavaCDPWithdrawSimul(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
                     
                 } else if (mintActionType == .DrawDebt) {
-                    simulReq = Signer.genKavaCDPDrawDebtSimul(account!, onBindDrawDebtMsg(), txFee, txMemo, selectedChain)
+                    simulReq = Signer.genKavaCDPDrawDebtSimul(account!, UInt64(height), onBindDrawDebtMsg(), txFee, txMemo, selectedChain)
                     
                 } else if (mintActionType == .Repay) {
-                    simulReq = Signer.genKavaCDPRepaySimul(account!, onBindRepayMsg(), txFee, txMemo, selectedChain)
+                    simulReq = Signer.genKavaCDPRepaySimul(account!, UInt64(height), onBindRepayMsg(), txFee, txMemo, selectedChain)
                 }
                 let simulRes = try await grpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
@@ -422,17 +423,18 @@ extension KavaMintAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                 do {
                     var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
                     let account = try await grpcFetcher.fetchAuth()
+                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                     if (mintActionType == .Deposit) {
-                        broadReq = Signer.genKavaCDPDepositTx(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                        broadReq = Signer.genKavaCDPDepositTx(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
                         
                     } else if (mintActionType == .Withdraw) {
-                        broadReq = Signer.genKavaCDPWithdrawTx(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                        broadReq = Signer.genKavaCDPWithdrawTx(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
                         
                     } else if (mintActionType == .DrawDebt) {
-                        broadReq = Signer.genKavaCDPDrawDebtTx(account!, onBindDrawDebtMsg(), txFee, txMemo, selectedChain)
+                        broadReq = Signer.genKavaCDPDrawDebtTx(account!, UInt64(height), onBindDrawDebtMsg(), txFee, txMemo, selectedChain)
                         
                     } else if (mintActionType == .Repay) {
-                        broadReq = Signer.genKavaCDPRepayTx(account!, onBindRepayMsg(), txFee, txMemo, selectedChain)
+                        broadReq = Signer.genKavaCDPRepayTx(account!, UInt64(height), onBindRepayMsg(), txFee, txMemo, selectedChain)
                         
                     }
                     let response = try await grpcFetcher.broadcastTx(broadReq)

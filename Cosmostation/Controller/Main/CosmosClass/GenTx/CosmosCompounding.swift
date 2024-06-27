@@ -181,7 +181,8 @@ class CosmosCompounding: BaseVC {
         Task {
             do {
                 let account = try await grpcFetcher.fetchAuth()
-                let simulReq = Signer.genCompoundingSimul(account!, claimableRewards, selectedChain.stakeDenom!, txFee, txMemo, selectedChain)
+                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
+                let simulReq = Signer.genCompoundingSimul(account!, UInt64(height), claimableRewards, selectedChain.stakeDenom!, txFee, txMemo, selectedChain)
                 let simulRes = try await grpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(simulRes)
@@ -225,7 +226,8 @@ extension CosmosCompounding: MemoDelegate, BaseSheetDelegate, PinDelegate {
             Task {
                 do {
                     let account = try await grpcFetcher.fetchAuth()
-                    let broadReq = Signer.genCompoundingTx(account!, claimableRewards, selectedChain.stakeDenom!, txFee, txMemo, selectedChain)
+                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
+                    let broadReq = Signer.genCompoundingTx(account!, UInt64(height), claimableRewards, selectedChain.stakeDenom!, txFee, txMemo, selectedChain)
                     let response = try await grpcFetcher.broadcastTx(broadReq)
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true

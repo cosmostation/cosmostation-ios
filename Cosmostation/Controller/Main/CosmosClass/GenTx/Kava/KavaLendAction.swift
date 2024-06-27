@@ -270,21 +270,19 @@ class KavaLendAction: BaseVC {
         Task {
             do {
                 var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
+                let account = try await grpcFetcher.fetchAuth()
+                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                 if (hardActionType == .Deposit) {
-                    let account = try await grpcFetcher.fetchAuth()
-                    simulReq = Signer.geKavaHardDepositSimul(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                    simulReq = Signer.geKavaHardDepositSimul(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
                     
                 } else if (hardActionType == .Withdraw) {
-                    let account = try await grpcFetcher.fetchAuth()
-                    simulReq = Signer.geKavaHardWithdrawSimul(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                    simulReq = Signer.geKavaHardWithdrawSimul(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
                     
                 } else if (hardActionType == .Borrow) {
-                    let account = try await grpcFetcher.fetchAuth()
-                    simulReq = Signer.genKavaHardBorrowSimul(account!, onBindBorrowMsg(), txFee, txMemo, selectedChain)
+                    simulReq = Signer.genKavaHardBorrowSimul(account!, UInt64(height), onBindBorrowMsg(), txFee, txMemo, selectedChain)
                     
                 } else if (hardActionType == .Repay) {
-                    let account = try await grpcFetcher.fetchAuth()
-                    simulReq = Signer.genKavaHardRepaySimul(account!, onBindRepayMsg(), txFee, txMemo, selectedChain)
+                    simulReq = Signer.genKavaHardRepaySimul(account!, UInt64(height), onBindRepayMsg(), txFee, txMemo, selectedChain)
                 }
                 let simulRes = try await grpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
@@ -379,21 +377,19 @@ extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             Task {
                 do {
                     var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
+                    let account = try await grpcFetcher.fetchAuth()
+                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                     if (hardActionType == .Deposit) {
-                        let account = try await grpcFetcher.fetchAuth()
-                        broadReq = Signer.genKavaHardDepositTx(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                        broadReq = Signer.genKavaHardDepositTx(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
                         
                     } else if (hardActionType == .Withdraw) {
-                        let account = try await grpcFetcher.fetchAuth()
-                        broadReq = Signer.genKavaHardwithdrawTx(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                        broadReq = Signer.genKavaHardwithdrawTx(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
                         
                     } else if (hardActionType == .Borrow) {
-                        let account = try await grpcFetcher.fetchAuth()
-                        broadReq = Signer.genKavaHardBorrowTx(account!, onBindBorrowMsg(), txFee, txMemo, selectedChain)
+                        broadReq = Signer.genKavaHardBorrowTx(account!, UInt64(height), onBindBorrowMsg(), txFee, txMemo, selectedChain)
                         
                     } else if (hardActionType == .Repay) {
-                        let account = try await grpcFetcher.fetchAuth()
-                        broadReq = Signer.genKavaHardRepayTx(account!, onBindRepayMsg(), txFee, txMemo, selectedChain)
+                        broadReq = Signer.genKavaHardRepayTx(account!, UInt64(height), onBindRepayMsg(), txFee, txMemo, selectedChain)
                         
                     }
                     let response = try await grpcFetcher.broadcastTx(broadReq)

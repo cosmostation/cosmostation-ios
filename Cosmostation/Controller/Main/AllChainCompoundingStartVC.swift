@@ -240,8 +240,9 @@ extension AllChainCompoundingStartVC {
     
     func simulateCompoundingTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
         if let grpcFetcher = chain.getGrpcfetcher(),
-           let account = try await grpcFetcher.fetchAuth() {
-            let simulReq = Signer.genCompoundingSimul(account, claimableRewards, chain.stakeDenom!, chain.getInitPayableFee()!, "", chain)
+           let account = try await grpcFetcher.fetchAuth(),
+           let height = try await grpcFetcher.fetchLastBlock()?.block.header.height {
+            let simulReq = Signer.genCompoundingSimul(account, UInt64(height), claimableRewards, chain.stakeDenom!, chain.getInitPayableFee()!, "", chain)
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: grpcFetcher.getClient()).simulate(simulReq, callOptions: grpcFetcher.getCallOptions()).response.get()
         }
         return nil
@@ -249,8 +250,9 @@ extension AllChainCompoundingStartVC {
     
     func broadcastCompoundingTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward], _ fee: Cosmos_Tx_V1beta1_Fee) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
         if let grpcFetcher = chain.getGrpcfetcher(),
-           let account = try await grpcFetcher.fetchAuth() {
-            let broadReq = Signer.genCompoundingTx(account, claimableRewards, chain.stakeDenom!, fee, "", chain)
+           let account = try await grpcFetcher.fetchAuth(),
+           let height = try await grpcFetcher.fetchLastBlock()?.block.header.height {
+            let broadReq = Signer.genCompoundingTx(account, UInt64(height), claimableRewards, chain.stakeDenom!, fee, "", chain)
             return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: grpcFetcher.getClient()).broadcastTx(broadReq, callOptions: grpcFetcher.getCallOptions()).response.get().txResponse
         }
         return nil

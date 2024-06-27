@@ -748,7 +748,8 @@ extension CommonTransfer {
         Task {
             do {
                 let account = try await fromGrpcFetcher.fetchAuth()
-                let simulReq = Signer.genSendSimul(account!, onBindSend(), cosmosTxFee, toMemo, fromChain)
+                let height = try await fromGrpcFetcher.fetchLastBlock()!.block.header.height
+                let simulReq = Signer.genSendSimul(account!, UInt64(height), onBindSend(), cosmosTxFee, toMemo, fromChain)
                 let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
                     self.onUpdateFeeViewAfterSimul(simulRes)
@@ -769,7 +770,8 @@ extension CommonTransfer {
         Task {
             do {
                 let account = try await fromGrpcFetcher.fetchAuth()
-                let broadReq = Signer.genSendTx(account!, onBindSend(), cosmosTxFee, toMemo, fromChain)
+                let height = try await fromGrpcFetcher.fetchLastBlock()!.block.header.height
+                let broadReq = Signer.genSendTx(account!, UInt64(height), onBindSend(), cosmosTxFee, toMemo, fromChain)
                 let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
@@ -808,7 +810,8 @@ extension CommonTransfer {
         Task {
             do {
                 let account = try await fromGrpcFetcher.fetchAuth()
-                let simulReq = Signer.genWasmSimul(account!, [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let height = try await fromGrpcFetcher.fetchLastBlock()!.block.header.height
+                let simulReq = Signer.genWasmSimul(account!, UInt64(height), [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
                 let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
                     self.onUpdateFeeViewAfterSimul(simulRes)
@@ -829,7 +832,8 @@ extension CommonTransfer {
         Task {
             do {
                 let account = try await fromGrpcFetcher.fetchAuth()
-                let broadReq = Signer.genWasmTx(account!, [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let height = try await fromGrpcFetcher.fetchLastBlock()!.block.header.height
+                let broadReq = Signer.genWasmTx(account!, UInt64(height), [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
                 let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
@@ -866,10 +870,11 @@ extension CommonTransfer {
         Task {
             do {
                 let account = try await fromGrpcFetcher.fetchAuth()
+                let height = try await fromGrpcFetcher.fetchLastBlock()!.block.header.height
                 let ibcClient = try await fromGrpcFetcher.fetchIbcClient(ibcPath!)
                 let toGrpcFetcher = toChain!.getGrpcfetcher()
                 let toLastBlock = try await toGrpcFetcher!.fetchLastBlock()
-                let simulReq = Signer.genIbcSendSimul(account!, onBindIbcSend(ibcClient!, toLastBlock!), cosmosTxFee, toMemo, fromChain)
+                let simulReq = Signer.genIbcSendSimul(account!, UInt64(height), onBindIbcSend(ibcClient!, toLastBlock!), cosmosTxFee, toMemo, fromChain)
                 let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
                     self.onUpdateFeeViewAfterSimul(simulRes)
@@ -890,10 +895,11 @@ extension CommonTransfer {
         Task {
             do {
                 let account = try await fromGrpcFetcher.fetchAuth()
+                let height = try await fromGrpcFetcher.fetchLastBlock()!.block.header.height
                 let ibcClient = try await fromGrpcFetcher.fetchIbcClient(ibcPath!)
                 let toGrpcFetcher = toChain!.getGrpcfetcher()
                 let toLastBlock = try await toGrpcFetcher!.fetchLastBlock()
-                let broadReq = Signer.genIbcSendTx(account!, onBindIbcSend(ibcClient!, toLastBlock!), cosmosTxFee, toMemo, fromChain)
+                let broadReq = Signer.genIbcSendTx(account!, UInt64(height), onBindIbcSend(ibcClient!, toLastBlock!), cosmosTxFee, toMemo, fromChain)
                 let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
@@ -942,7 +948,8 @@ extension CommonTransfer {
         Task {
             do {
                 let account = try await fromGrpcFetcher.fetchAuth()
-                let simulReq = Signer.genWasmSimul(account!, [onBindCw20IbcSend()], cosmosTxFee, toMemo, fromChain)
+                let height = try await fromGrpcFetcher.fetchLastBlock()!.block.header.height
+                let simulReq = Signer.genWasmSimul(account!, UInt64(height), [onBindCw20IbcSend()], cosmosTxFee, toMemo, fromChain)
                 let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
                     self.onUpdateFeeViewAfterSimul(simulRes)
@@ -963,7 +970,8 @@ extension CommonTransfer {
         Task {
             do {
                 let account = try await fromGrpcFetcher.fetchAuth()
-                let broadReq = Signer.genWasmTx(account!, [onBindCw20IbcSend()], cosmosTxFee, toMemo, fromChain)
+                let height = try await fromGrpcFetcher.fetchLastBlock()!.block.header.height
+                let broadReq = Signer.genWasmTx(account!, UInt64(height), [onBindCw20IbcSend()], cosmosTxFee, toMemo, fromChain)
                 let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true

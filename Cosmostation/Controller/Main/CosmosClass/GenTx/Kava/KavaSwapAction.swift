@@ -323,11 +323,12 @@ class KavaSwapAction: BaseVC {
             do {
                 var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
                 let account = try await grpcFetcher.fetchAuth()
+                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                 if (swpActionType == .Deposit) {
-                    simulReq = Signer.geKavaSwpDepositSimul(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                    simulReq = Signer.geKavaSwpDepositSimul(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
                     
                 } else if (swpActionType == .Withdraw) {
-                    simulReq = Signer.geKavaSwpWithdrawSimul(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                    simulReq = Signer.geKavaSwpWithdrawSimul(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
                 }
                 let simulRes = try await grpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
@@ -417,11 +418,12 @@ extension KavaSwapAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                 do {
                     var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
                     let account = try await grpcFetcher.fetchAuth()
+                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                     if (swpActionType == .Deposit) {
-                        broadReq = Signer.genKavaSwpDepositTx(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                        broadReq = Signer.genKavaSwpDepositTx(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
                         
                     } else if (swpActionType == .Withdraw) {
-                        broadReq = Signer.genKavaSwpwithdrawTx(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                        broadReq = Signer.genKavaSwpwithdrawTx(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
                         
                     }
                     let response = try await grpcFetcher.broadcastTx(broadReq)
