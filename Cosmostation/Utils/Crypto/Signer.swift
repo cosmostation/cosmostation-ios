@@ -1402,7 +1402,7 @@ class Signer {
         let txBody = getTxBody(msgAnys, memo)
         let signerInfo = getSignerInfos(account, baseChain)
         let authInfo = getAuthInfo(signerInfo, fee)
-        let simulateTx = getSimulTxs(account, txBody, authInfo, baseChain)
+        let simulateTx = getSimulTxs(txBody, authInfo)
         return Cosmos_Tx_V1beta1_SimulateRequest.with {
             $0.tx = simulateTx
         }
@@ -1490,19 +1490,11 @@ class Signer {
         }
     }
     
-    static func getSimulTxs(_ account: Google_Protobuf_Any, _ txBody: Cosmos_Tx_V1beta1_TxBody,
-                            _ authInfo: Cosmos_Tx_V1beta1_AuthInfo, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_Tx {
-        let signDoc = Cosmos_Tx_V1beta1_SignDoc.with {
-            $0.bodyBytes = try! txBody.serializedData()
-            $0.authInfoBytes = try! authInfo.serializedData()
-            $0.chainID = baseChain.chainIdCosmos!
-            $0.accountNumber = account.accountInfos().1!
-        }
-        let sigbyte = getByteSingleSignatures(try! signDoc.serializedData(), baseChain)
+    static func getSimulTxs(_ txBody: Cosmos_Tx_V1beta1_TxBody, _ authInfo: Cosmos_Tx_V1beta1_AuthInfo) -> Cosmos_Tx_V1beta1_Tx {
         return Cosmos_Tx_V1beta1_Tx.with {
             $0.authInfo = authInfo
             $0.body = txBody
-            $0.signatures = [sigbyte]
+            $0.signatures = getSimulsignatures(authInfo.signerInfos.count)
         }
     }
     

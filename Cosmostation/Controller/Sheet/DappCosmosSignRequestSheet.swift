@@ -458,19 +458,12 @@ extension DappCosmosSignRequestSheet: BaseSheetDelegate {
     }
     
     func genSimulTxs() -> Cosmos_Tx_V1beta1_SimulateRequest? {
-        if let chainId = targetDocs.chainId,
-           let bodyString = targetDocs.bodyBytes,
+        if let bodyString = targetDocs.bodyBytes,
            let authInfoString = targetDocs.authInfoBytes,
            let bodyBytes = try? Cosmos_Tx_V1beta1_TxBody.init(serializedData: Data.dataFromHex(bodyString)!),
            var authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: Data.dataFromHex(authInfoString)!) {
             authInfo.fee.amount = txFee!.amount
             authInfo.fee.gasLimit = txFee!.gasLimit
-//            let signDoc = Cosmos_Tx_V1beta1_SignDoc.with {
-//                $0.bodyBytes = try! bodyBytes.serializedData()
-//                $0.authInfoBytes = try! authInfo.serializedData()
-//                $0.chainID = chainId
-//                $0.accountNumber = targetDocs["account_number"].uInt64Value
-//            }
             let simulateTx = Cosmos_Tx_V1beta1_Tx.with {
                 $0.authInfo = authInfo
                 $0.body = bodyBytes
