@@ -456,6 +456,18 @@ extension BaseData {
         return UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) ?? ""
     }
     
+    func setLastPushTime() {
+        let now = Date().millisecondsSince1970
+        UserDefaults.standard.set(String(now), forKey: KEY_FCM_SYNC_TIME)
+    }
+    
+    func needPushRefresh() -> Bool {
+        let now = Date().millisecondsSince1970
+        let min: Int64 = 60000
+        let last = Int64(UserDefaults.standard.string(forKey: KEY_LAST_PRICE_TIME) ?? "0")! + (min * 60 * 24 * 3)
+        return last < now ? true : false
+    }
+    
     func setDBVersion(_ version: Int) {
         UserDefaults.standard.set(version, forKey: KEY_DB_VERSION)
     }

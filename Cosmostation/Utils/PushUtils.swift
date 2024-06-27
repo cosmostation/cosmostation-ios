@@ -14,23 +14,27 @@ class PushUtils {
     static let shared = PushUtils()
     
     func updateTokenIfNeed(token: String) {
-        if token != UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) {
-            UserDefaults.standard.set(token, forKey: KEY_FCM_TOKEN)
-            UserDefaults.standard.synchronize()
-            guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
-            AF.request("\(WALLET_API_PUSH_STATUS_URL)/\(token)", method: .get).response { response in
-                if (response.error != nil || response.response?.statusCode != 200) {
-                    self.updateStatus(enable: false)
-                } else {
-                    self.sync()
-                }
-            }
+//        if token != UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) {
+//            UserDefaults.standard.set(token, forKey: KEY_FCM_TOKEN)
+//            UserDefaults.standard.synchronize()
+//            guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
+//            AF.request("\(WALLET_API_PUSH_STATUS_URL)/\(token)", method: .get).response { response in
+//                if (response.error != nil || response.response?.statusCode != 200) {
+//                    self.updateStatus(enable: false)
+//                } else {
+//                    self.sync()
+//                }
+//            }
+//        }
+        if token != BaseData.instance.getFCMToken() {
+            //TODO post all my list
         }
     }
     
     func getStatus() async throws -> JSON {
-        guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return JSON() }
-        return try await AF.request("\(WALLET_API_PUSH_STATUS_URL)/\(token)", method: .get).serializingDecodable(JSON.self).value
+//        guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return JSON() }
+//        return try await AF.request("\(WALLET_API_PUSH_STATUS_URL)/\(token)", method: .get).serializingDecodable(JSON.self).value
+//        let token = BaseData.
     }
     
     func updateStatus(enable: Bool) {
@@ -61,4 +65,22 @@ class PushUtils {
 //            }
 //        }
     }
+}
+
+
+public struct PushInfo {
+    var pushToken: String = String()
+    var enable: Bool = Bool()
+    var wallets: [PushWallet] = [PushWallet]()
+}
+
+public struct PushWallet {
+    var walletName: String = String()
+    var walletKey: String = String()
+    var accounts: [PushAccount] = [PushAccount]()
+}
+
+public struct PushAccount {
+    var chain: String = String()
+    var address: String = String()
 }
