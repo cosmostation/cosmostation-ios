@@ -232,6 +232,7 @@
 "str_network" = "Network";
 "str_mainnet" = "Mainnet";
 "str_testnet" = "Testnet";
+"str_gas_fee_coin" = "Coin for Gas";
 
 "str_tx_status" = "Status";
 "str_tx_height" = "Block Height";

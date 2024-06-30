@@ -25,6 +25,7 @@ class EvmAboutVC: BaseVC {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "AboutDescriptionCell", bundle: nil), forCellReuseIdentifier: "AboutDescriptionCell")
+        tableView.register(UINib(nibName: "AboutChainInfoCell", bundle: nil), forCellReuseIdentifier: "AboutChainInfoCell")
         tableView.register(UINib(nibName: "AboutSocialsCell", bundle: nil), forCellReuseIdentifier: "AboutSocialsCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
@@ -38,20 +39,23 @@ class EvmAboutVC: BaseVC {
 extension EvmAboutVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == 0) {
-            view.titleLabel.text = "Description"
+            view.titleLabel.text = NSLocalizedString("str_chain_introduce", comment: "")
+            view.cntLabel.text = ""
+        } else if (section == 1) {
+            view.titleLabel.text = NSLocalizedString("str_chain_info", comment: "")
             view.cntLabel.text = ""
         }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 1) { return 0 }
+        if (section == 2) { return 0 }
         return 40
     }
     
@@ -67,6 +71,11 @@ extension EvmAboutVC: UITableViewDelegate, UITableViewDataSource {
             return cell
             
         } else if (indexPath.section == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"AboutChainInfoCell") as! AboutChainInfoCell
+            cell.onBindChainInfo(selectedChain, chainParam)
+            return cell
+            
+        } else if (indexPath.section == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AboutSocialsCell") as! AboutSocialsCell
             cell.vc = self
             cell.onBindSocial(chainParam)

@@ -19,6 +19,9 @@ class AboutChainInfoCell: UITableViewCell {
     @IBOutlet weak var chainIdevmView: UIView!
     @IBOutlet weak var chainIdevmTitle: UILabel!
     @IBOutlet weak var chainIdevmLabel: UILabel!
+    @IBOutlet weak var gasFeeView: UIView!
+    @IBOutlet weak var gasFeeTitle: UILabel!
+    @IBOutlet weak var gssFeeLabel: UILabel!
     @IBOutlet weak var networkTitle: UILabel!
     @IBOutlet weak var networkLabel: UILabel!
 
@@ -28,12 +31,14 @@ class AboutChainInfoCell: UITableViewCell {
         rootView.setBlur()
         chainIdcosmosView.isHidden = true
         chainIdevmView.isHidden = true
+        gasFeeView.isHidden = true
     }
     
     override func prepareForReuse() {
         rootView.setBlur()
         chainIdcosmosView.isHidden = true
         chainIdevmView.isHidden = true
+        gasFeeView.isHidden = true
     }
     
     
@@ -57,6 +62,10 @@ class AboutChainInfoCell: UITableViewCell {
             chainIdevmView.isHidden = false
             chainIdevmTitle.text = NSLocalizedString("str_chain_id", comment: "")
             chainIdevmLabel.text = json["params"]["chainlist_params"]["chain_id_evm"].string?.hexToNSDecimal().stringValue
+            
+            gasFeeView.isHidden = false
+            gasFeeTitle.text = NSLocalizedString("str_gas_fee_coin", comment: "")
+            gssFeeLabel.text = json["params"]["chainlist_params"]["symbol"].string
             
         } else if (chain.isCosmos()) {
             chainIdcosmosView.isHidden = false

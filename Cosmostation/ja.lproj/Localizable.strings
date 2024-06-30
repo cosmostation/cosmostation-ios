@@ -232,6 +232,7 @@
 "str_network" = "通信網";
 "str_mainnet" = "メインネット";
 "str_testnet" = "テストネット";
+"str_gas_fee_coin" = "ガス用コイン";
 
 
 "str_tx_status" = "結果";

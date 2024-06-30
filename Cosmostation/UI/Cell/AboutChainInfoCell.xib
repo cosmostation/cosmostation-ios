@@ -107,6 +107,31 @@
                                             <constraint firstItem="DIg-6n-ZgJ" firstAttribute="centerY" secondItem="XCP-pF-X9M" secondAttribute="centerY" id="z5x-Op-tNK"/>
                                         </constraints>
                                     </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8l1-QF-xSk">
+                                        <rect key="frame" x="0.0" y="65" width="425" height="15"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gas Fee Coin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0F-Zh-Kkn">
+                                                <rect key="frame" x="0.0" y="0.0" width="72.333333333333329" height="15.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color02"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y6v-xB-izk">
+                                                <rect key="frame" x="419.33333333333331" y="0.0" width="5.6666666666666856" height="15.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color01"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="c0F-Zh-Kkn" firstAttribute="centerY" secondItem="8l1-QF-xSk" secondAttribute="centerY" id="8G9-Ru-ton"/>
+                                            <constraint firstItem="y6v-xB-izk" firstAttribute="centerY" secondItem="c0F-Zh-Kkn" secondAttribute="centerY" id="ZJ9-EL-IOz"/>
+                                            <constraint firstAttribute="trailing" secondItem="y6v-xB-izk" secondAttribute="trailing" id="aBh-hx-WrB"/>
+                                            <constraint firstItem="c0F-Zh-Kkn" firstAttribute="leading" secondItem="8l1-QF-xSk" secondAttribute="leading" id="e1x-tz-5Jc"/>
+                                            <constraint firstAttribute="height" constant="15" id="vbx-zV-6lv"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dLy-1Z-fmk">
                                         <rect key="frame" x="0.0" y="69" width="425" height="50"/>
                                         <subviews>
@@ -162,6 +187,9 @@
                 <outlet property="chainIdevmLabel" destination="DIg-6n-ZgJ" id="jcN-gA-58v"/>
                 <outlet property="chainIdevmTitle" destination="XCP-pF-X9M" id="KPu-cR-6rB"/>
                 <outlet property="chainIdevmView" destination="HOw-fc-6UJ" id="svW-aH-6mQ"/>
+                <outlet property="gasFeeTitle" destination="c0F-Zh-Kkn" id="43A-Ed-148"/>
+                <outlet property="gasFeeView" destination="8l1-QF-xSk" id="Lai-HK-dPf"/>
+                <outlet property="gssFeeLabel" destination="y6v-xB-izk" id="3NY-Sd-7aw"/>
                 <outlet property="initTimeTitle" destination="Pdj-bO-ZOT" id="x7w-sZ-x4s"/>
                 <outlet property="initTimeabel" destination="Rso-Cs-mfL" id="jip-ag-wS3"/>
                 <outlet property="networkLabel" destination="bx4-L4-CzU" id="QF1-7K-a0T"/>
