@@ -190,6 +190,8 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
             if (request == .ForDeleteAccount) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     BaseData.instance.deleteAccount(self.toDeleteAccount!)
+                    let request = BaseData.instance.getPushNoti()
+                    PushUtils().updateStatus(enable: request) { _, _ in }
                     if (BaseData.instance.baseAccount?.id == self.toDeleteAccount?.id) {
                         self.onStartIntro()
                         

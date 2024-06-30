@@ -41,13 +41,7 @@ class SettingSwitchCell: UITableViewCell {
     func onBindSetNotification() {
         setImg.image = UIImage(named: "setNoti")
         setTitleLabel.text = NSLocalizedString("setting_notification_title", comment: "")
-        selectSwitch.isOn = false
-        Task {
-            if let status = try? await PushUtils.shared.getStatus() {
-                print("onBindSetNotification status ", status)
-                self.selectSwitch.isOn = status["enable"].bool ?? false
-            }
-        }
+        selectSwitch.isOn = BaseData.instance.getPushNoti()
     }
     
     func onBindSetAppLock() {

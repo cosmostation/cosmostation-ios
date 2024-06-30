@@ -27,6 +27,12 @@ class SettingsVC: BaseVC {
         tableView.sectionHeaderTopPadding = 0.0
         
         baseAccount = BaseData.instance.baseAccount
+        
+        if (BaseData.instance.needPushRefresh()) {
+            let request = BaseData.instance.getPushNoti()
+            PushUtils().updateStatus(enable: request) { _, _ in }
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -35,6 +41,8 @@ class SettingsVC: BaseVC {
         reloadRows(IndexPath(row: 4, section: 0))
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
     }
+    
+    
 }
 
 
@@ -149,7 +157,12 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 4) {
                 switchCell.onBindSetNotification()
                 switchCell.actionToggle = { request in
-//                    PushUtils.shared.updateStatus(enable: request)
+                    self.showWait()
+                    PushUtils().updateStatus(enable: request) { result, msg in
+                        self.reloadRows(IndexPath(row: 4, section: 1))
+                        self.hideWait()
+                        self.onShowToast(msg)
+                    }
                 }
                 return switchCell
                 
@@ -421,7 +434,7 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
             if (result == .success) {
                 BaseData.instance.setUsingAppLock(false)
             }
-            reloadRows(IndexPath(row: 4, section: 1))
+            reloadRows(IndexPath(row: 5, section: 1))
         }
     }
     

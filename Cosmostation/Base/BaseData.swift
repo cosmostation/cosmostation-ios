@@ -448,6 +448,14 @@ extension BaseData {
 
 
 extension BaseData {
+    func setPushNoti(_ using : Bool) {
+        UserDefaults.standard.set(using, forKey: KEY_PUSH_NOTI)
+    }
+    
+    func getPushNoti() -> Bool {
+        return UserDefaults.standard.bool(forKey: KEY_PUSH_NOTI)
+    }
+    
     func setFCMToken(_ token : String) {
         UserDefaults.standard.set(token, forKey: KEY_FCM_TOKEN)
     }

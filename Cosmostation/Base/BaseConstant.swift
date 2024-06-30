@@ -27,6 +27,7 @@ let KEY_LAST_PRICE_TIME                 = "KEY_LAST_PRICE_TIME"
 let KEY_ENGINER_MODE                    = "KEY_ENGINER_MODE"
 let KEY_FCM_TOKEN                       = "KEY_FCM_TOKEN_NEW"
 let KEY_FCM_SYNC_TIME                   = "KEY_FCM_SYNC_TIME"
+let KEY_PUSH_NOTI                       = "KEY_PUSH_NOTI"
 let KEY_DB_VERSION                      = "KEY_DB_VERSION"
 let KEY_LANGUAGE                        = "KEY_LANGUAGE"
 let KEY_LAST_ACCOUNT                    = "KEY_LAST_ACCOUNT"
@@ -56,8 +57,8 @@ let BINANCE_BUY_URL                     = "https://www.binance.com/en/crypto/buy
 let CSS_VERSION                         = CSS_URL + "v1/app/version/ios";
 let CSS_PUSH_UPDATE                     = CSS_URL + "v1/account/update";
 let CSS_MOON_PAY                        = CSS_URL + "v1/sign/moonpay";
-let WALLET_API_SYNC_PUSH_URL            = CSS_URL + "v1/push/token/address";
-let WALLET_API_PUSH_STATUS_URL          = CSS_URL + "v1/push/alarm/status";
+//let WALLET_API_SYNC_PUSH_URL            = CSS_URL + "v1/push/token/address";
+//let WALLET_API_PUSH_STATUS_URL          = CSS_URL + "v1/push/alarm/status";
 
 
 let DB_VERSION                          = 3

@@ -14,71 +14,52 @@ class PushUtils {
     static let shared = PushUtils()
     
     func updateTokenIfNeed(token: String) {
-//        if token != UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) {
-//            UserDefaults.standard.set(token, forKey: KEY_FCM_TOKEN)
-//            UserDefaults.standard.synchronize()
-//            guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
-//            AF.request("\(WALLET_API_PUSH_STATUS_URL)/\(token)", method: .get).response { response in
-//                if (response.error != nil || response.response?.statusCode != 200) {
-//                    self.updateStatus(enable: false)
-//                } else {
-//                    self.sync()
-//                }
-//            }
-//        }
-        if token != BaseData.instance.getFCMToken() {
-            
-        }
     }
     
     func getStatus() async throws -> JSON {
-//        guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return JSON() }
-//        return try await AF.request("\(WALLET_API_PUSH_STATUS_URL)/\(token)", method: .get).serializingDecodable(JSON.self).value
-//        let token = BaseData.
-//        return JSON()
-        
         guard let fcmToken = BaseData.instance.getFCMToken() else { return JSON() }
         let url = BaseNetWork.getPushStatus(fcmToken)
         return try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     
-    func updateStatus(enable: Bool) {
-//        if (enable) {
-//            sync()
-//        }
-//        guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
-//        let parameters: Parameters = ["fcm_token": token, "subscribe": enable]
-//        AF.request(WALLET_API_PUSH_STATUS_URL, method: .put, parameters: parameters, encoding: JSONEncoding.default).response { response in
-//            if let error = response.error {
-//                print("push status update error : ", error)
-//            }
-//        }
-    }
-    
-    func updatePushInfo() async {
-//        guard let account = BaseData.instance.baseAccount else { return }
-//        guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
-//        if (account.getDisplayCosmosChains().count > 0) {
-//            let addresses = account.getDisplayCosmosChains().map { chain in
-//                ["address": chain.bechAddress, "chain": chain.apiName]
-//            }
-//            let parameters: Parameters = ["fcm_token": token, "accounts": addresses]
-//            AF.request(WALLET_API_SYNC_PUSH_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
-//                if let error = response.error {
-//                    print("push address sync error : ", error)
-//                }
-//            }
-//        }
+    func updateStatus(enable: Bool, _ completion: @escaping (Bool, String) -> ()) {
+        guard let token = BaseData.instance.getFCMToken() else {
+            BaseData.instance.setPushNoti(false)
+            completion(false, "Not FCM Token.")
+            return
+        }
+        
+        Task {
+            let param = await getPushInfo(enable, token).dictionaryRepresentation
+            let url = BaseNetWork.setPushStatus()
+//            print("param ", param)
+            AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in
+                if let error = response.error {
+                    BaseData.instance.setPushNoti(false)
+                    completion(false, "\(error)")
+                    return
+                } else {
+                    BaseData.instance.setPushNoti(enable)
+                    BaseData.instance.setLastPushTime()
+                    completion(true, "Push Notification Updated.")
+                    return
+                }
+            }
+        }
     }
     
     
-    func getPushInfo() async -> PushInfo {
+    func getPushInfo(_ enable: Bool, _ fcmToken: String) async -> PushInfo {
         var pushInfo = PushInfo()
         var pushWallet = [PushWallet]()
-        await BaseData.instance.selectAccounts().concurrentForEach { account in
-            let wallet = await self.getPushWallet(account)
-            pushWallet.append(wallet)
+        if (enable) {
+            await BaseData.instance.selectAccounts().concurrentForEach { account in
+                let wallet = await self.getPushWallet(account)
+                pushWallet.append(wallet)
+            }
         }
+        pushInfo.pushToken = fcmToken
+        pushInfo.enable = enable
         pushInfo.wallets = pushWallet
         return pushInfo
     }
@@ -112,7 +93,9 @@ public struct PushInfo {
         return [
             "pushToken" : pushToken,
             "enable" : enable,
-            "wallets" : wallets
+            "wallets" : wallets.map({ wallet in
+                wallet.dictionaryRepresentation
+            })
         ]
     }
 }
@@ -126,7 +109,9 @@ public struct PushWallet {
         return [
             "walletName" : walletName,
             "walletKey" : walletKey,
-            "accounts" : accounts
+            "accounts" : accounts.map({ accuont in
+                accuont.dictionaryRepresentation
+            })
         ]
     }
 }
