@@ -44,8 +44,8 @@ class SettingSwitchCell: UITableViewCell {
         selectSwitch.isOn = false
         Task {
             if let status = try? await PushUtils.shared.getStatus() {
-//                print("onBindSetNotification status ", status)
-                self.selectSwitch.isOn = status["subscribe"].bool ?? false
+                print("onBindSetNotification status ", status)
+                self.selectSwitch.isOn = status["enable"].bool ?? false
             }
         }
     }

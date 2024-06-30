@@ -452,8 +452,8 @@ extension BaseData {
         UserDefaults.standard.set(token, forKey: KEY_FCM_TOKEN)
     }
     
-    func getFCMToken() -> String {
-        return UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) ?? ""
+    func getFCMToken() -> String? {
+        return UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) ?? nil
     }
     
     func setLastPushTime() {

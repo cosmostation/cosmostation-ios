@@ -141,6 +141,14 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v10/" + apiName + "/contracts/" + contractAddress + "/nft-url/" + tokenId
     }
     
+    static func getPushStatus(_ fcmToken: String) -> String {
+        return MINTSCAN_API_URL + "v10/notification?pushToken=" + fcmToken
+    }
+    
+    static func setPushStatus() -> String {
+        return MINTSCAN_API_URL + "v10/notification"
+    }
+    
     static func SkipChains() -> String {
         return SKIP_API_URL + "v1/info/chains"
     }
