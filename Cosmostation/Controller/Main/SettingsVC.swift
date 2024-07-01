@@ -82,7 +82,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath.section == 1 && indexPath.row == 7) {
             return 0
-        } else if (indexPath.section == 3 && indexPath.row == 4) {
+        } else if (indexPath.section == 3 && indexPath.row == 4 && !BaseData.instance.showEvenReview()) {
             return 0
         }
         return UITableView.automaticDimension
@@ -234,11 +234,8 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 return baseCell
                 
             } else if (indexPath.row == 4) {
-                switchCell.onBindSetEngineerMode()
-                switchCell.actionToggle = { request in
-                    print("onBindSetEngineerMode ", request)
-                }
-                return switchCell
+                baseCell.onBindLabs()
+                return baseCell
             }
         }
         return UITableViewCell()
@@ -349,6 +346,28 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                     UIApplication.shared.open(urlAppStore!, options: [:], completionHandler: nil)
                 }
                 
+            } else if (indexPath.row == 4) {
+                let labAlert = UIAlertController(title: "Lab", message: nil, preferredStyle: .alert)
+                labAlert.addTextField { (textField) in
+                    textField.placeholder = "insert"
+                }
+                labAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: { _ in
+                    self.dismiss(animated: true, completion: nil)
+                }))
+                labAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
+                    let text = labAlert.textFields![0].text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                    guard let url = URL.init(string: text), UIApplication.shared.canOpenURL(url) else {
+                        self.onShowToast(text)
+                        return
+                    }
+                    
+                    let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+                    dappDetail.dappType = .INTERNAL_URL
+                    dappDetail.dappUrl = url
+                    dappDetail.modalPresentationStyle = .fullScreen
+                    self.present(dappDetail, animated: true)
+                }))
+                present(labAlert, animated: true)
             }
         }
     }

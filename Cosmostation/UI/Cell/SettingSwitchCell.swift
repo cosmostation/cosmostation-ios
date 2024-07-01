@@ -62,11 +62,4 @@ class SettingSwitchCell: UITableViewCell {
         selectSwitch.isOn = BaseData.instance.getUsingBioAuth()
     }
     
-    func onBindSetEngineerMode() {
-        setImg.image = UIImage(named: "setEngineer")
-        setTitleLabel.text = NSLocalizedString("setting_engineermode_title", comment: "")
-        selectSwitch.isOn = BaseData.instance.getUsingEnginerMode()
-        
-    }
-    
 }

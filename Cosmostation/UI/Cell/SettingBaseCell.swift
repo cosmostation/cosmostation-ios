@@ -123,4 +123,10 @@ class SettingBaseCell: UITableViewCell {
             setDetailLabel.text = "v " + appVersion
         }
     }
+    
+    func onBindLabs() {
+        setImg.image = UIImage(named: "setEngineer")
+        setTitleLabel.text = NSLocalizedString("setting_engineermode_title", comment: "")
+        setDetailLabel.text = ""
+    }
 }
