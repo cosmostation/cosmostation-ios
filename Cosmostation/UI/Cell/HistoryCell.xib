@@ -26,14 +26,14 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJW-5H-XDx" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="8" y="4" width="400" height="75"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Msg Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80w-3r-bqR">
-                                <rect key="frame" x="15.999999999999996" y="14.000000000000002" width="61.666666666666657" height="17.666666666666671"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Msg Title woiduwqoidioqwdiowqjdoijqwoidjhwoqidhjowqihjdoiwq" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80w-3r-bqR">
+                                <rect key="frame" x="16" y="14.000000000000002" width="267.33333333333331" height="17.666666666666671"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconSendTx" translatesAutoresizingMaskIntoConstraints="NO" id="x58-5y-gwg">
-                                <rect key="frame" x="81.666666666666671" y="13" width="20" height="20"/>
+                                <rect key="frame" x="287.33333333333331" y="13" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="5to-ne-PG9"/>
                                     <constraint firstAttribute="width" constant="20" id="Jaz-mQ-nTn"/>
@@ -100,6 +100,7 @@
                             <constraint firstItem="x58-5y-gwg" firstAttribute="centerY" secondItem="80w-3r-bqR" secondAttribute="centerY" id="e1z-t8-Kle"/>
                             <constraint firstItem="80w-3r-bqR" firstAttribute="top" secondItem="VJW-5H-XDx" secondAttribute="top" constant="14.000000000000002" id="fEW-5U-Fcx"/>
                             <constraint firstItem="SDA-0u-kyg" firstAttribute="leading" secondItem="a78-Hq-mdm" secondAttribute="trailing" constant="2" id="h4o-wx-oKa"/>
+                            <constraint firstItem="a78-Hq-mdm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="80w-3r-bqR" secondAttribute="trailing" constant="36" id="h5p-E5-XQo"/>
                             <constraint firstItem="SDA-0u-kyg" firstAttribute="centerY" secondItem="80w-3r-bqR" secondAttribute="centerY" id="hgw-as-qmO"/>
                             <constraint firstItem="Scm-dR-wpd" firstAttribute="trailing" secondItem="Dll-20-Gp8" secondAttribute="trailing" id="opg-mw-A6f"/>
                             <constraint firstAttribute="trailing" secondItem="Dll-20-Gp8" secondAttribute="trailing" constant="16" id="pAf-8S-939"/>

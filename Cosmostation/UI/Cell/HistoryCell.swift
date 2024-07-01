@@ -45,6 +45,7 @@ class HistoryCell: UITableViewCell {
         let dpMsgType = history.getMsgType(chain)
         
         msgsTitleLabel.text = dpMsgType
+        msgsTitleLabel.adjustsFontSizeToFitWidth = true
         sendtxImg.isHidden = (dpMsgType == NSLocalizedString("tx_send", comment: "")) ? false : true
         
         hashLabel.text = history.data?.txhash
