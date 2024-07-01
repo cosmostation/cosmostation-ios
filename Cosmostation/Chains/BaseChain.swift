@@ -522,6 +522,10 @@ func ALLCHAINS() -> [BaseChain] {
     if (BaseData.instance.getHideLegacy()) {
         return result.filter({ $0.isDefault == true })
     }
+    
+    if (!BaseData.instance.getShowTestnet()) {
+        return result.filter({ $0.isTestnet == true })
+    }
     return result
 }
 

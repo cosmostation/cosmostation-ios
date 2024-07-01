@@ -514,6 +514,7 @@
 "setting_account_title" = "アカウント管理";
 "setting_qr_import_account" = "QRスキャンでアカウントをインポート";
 "setting_hide_legacy" = "レガシーアドレスの有効化";
+"setting_show_testnet" = "テストネットの有効化";
 "setting_chain_title" = "チェーン管理";
 "setting_addressbook_title" = "連絡先の管理";
 "setting_language_title" = "言語";

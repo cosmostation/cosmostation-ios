@@ -38,7 +38,7 @@ class SettingsVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         reloadRows(IndexPath(row: 0, section: 0))
-        reloadRows(IndexPath(row: 4, section: 0))
+        reloadRows(IndexPath(row: 5, section: 0))
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
     }
     
@@ -90,7 +90,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
-            return 5
+            return 6
         } else if (section == 1) {
             return 8
         } else if (section == 2) {
@@ -119,6 +119,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 switchCell.onBindHideLegacy()
                 switchCell.actionToggle = { request in
                     if (request == BaseData.instance.getHideLegacy()) {
+                        self.showWait()
                         BaseData.instance.setHideLegacy(!request)
                         DispatchQueue.main.async(execute: {
                             self.hideWait()
@@ -129,10 +130,24 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 return switchCell
                 
             } else if (indexPath.row == 3) {
+                switchCell.onBindTestnet()
+                switchCell.actionToggle = { request in
+                    if (request != BaseData.instance.getShowTestnet()) {
+                        self.showWait()
+                        BaseData.instance.setShowTestnet(request)
+                        DispatchQueue.main.async(execute: {
+                            self.hideWait()
+                            self.onStartMainTab()
+                        });
+                    }
+                }
+                return switchCell
+                
+            } else if (indexPath.row == 4) {
                 baseCell.onBindSetChain()
                 return baseCell
                 
-            } else if (indexPath.row == 4) {
+            } else if (indexPath.row == 5) {
                 baseCell.onBindSetAddressBook()
                 return baseCell
             }

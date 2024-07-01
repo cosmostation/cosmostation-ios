@@ -514,6 +514,7 @@
 "setting_account_title" = "Account";
 "setting_qr_import_account" = "Import account with QR scan";
 "setting_hide_legacy" = "Enable Legacy Addresses";
+"setting_show_testnet" = "Enable Testnet";
 "setting_chain_title" = "Manage Chains";
 "setting_addressbook_title" = "Address Book";
 "setting_language_title" = "Language";

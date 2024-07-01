@@ -38,6 +38,12 @@ class SettingSwitchCell: UITableViewCell {
         selectSwitch.isOn = !BaseData.instance.getHideLegacy()
     }
     
+    func onBindTestnet() {
+        setImg.image = UIImage(named: "setEngineer")
+        setTitleLabel.text = NSLocalizedString("setting_show_testnet", comment: "")
+        selectSwitch.isOn = BaseData.instance.getShowTestnet()
+    }
+    
     func onBindSetNotification() {
         setImg.image = UIImage(named: "setNoti")
         setTitleLabel.text = NSLocalizedString("setting_notification_title", comment: "")
