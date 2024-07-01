@@ -218,6 +218,7 @@ extension ChainSelectVC: UITableViewDelegate, UITableViewDataSource, UISearchBar
         } else if (indexPath.section == 1) {
             chain = searchTestnets[indexPath.row]
         }
+        if (chain.tag == "cosmos118") { return }
         
         if (dpTags.contains(chain.tag)) {
             dpTags.removeAll { $0 == chain.tag }
