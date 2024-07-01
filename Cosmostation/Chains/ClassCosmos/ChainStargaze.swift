@@ -26,8 +26,6 @@ class ChainStargaze: BaseChain {
         validatorPrefix = "starsvaloper"
         supportCw721 = true
         grpcHost = "grpc-stargaze.cosmostation.io"
-        
-        initFetcher()
     }
 }
 

@@ -25,7 +25,5 @@ class ChainXpla: BaseChain  {
         bechAccountPrefix = "xpla"
         validatorPrefix = "xplavaloper"
         grpcHost = "grpc-xpla.cosmostation.io"
-        
-        initFetcher()
     }
 }

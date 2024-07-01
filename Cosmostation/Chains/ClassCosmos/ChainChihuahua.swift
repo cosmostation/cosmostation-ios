@@ -26,8 +26,6 @@ class ChainChihuahua: BaseChain  {
         validatorPrefix = "chihuahuavaloper"
         supportCw20 = true
         grpcHost = "grpc-chihuahua.cosmostation.io"
-        
-        initFetcher()
     }
     
 }

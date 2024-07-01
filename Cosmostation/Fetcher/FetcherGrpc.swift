@@ -74,7 +74,8 @@ class FetcherGrpc {
                let unbonding = try? await fetchUnbondings(),
                let rewards = try? await fetchRewards(),
                let commission = try? await fetchCommission(),
-               let rewardaddr = try? await fetchRewardAddress() {
+               let rewardaddr = try? await fetchRewardAddress(),
+               let baseFee = try? await fetchBaseFee() {
                 self.mintscanCw20Tokens = cw20Tokens ?? []
                 self.mintscanCw721List = cw721List ?? []
                 self.cosmosAuth = auth
@@ -575,6 +576,11 @@ extension FetcherGrpc {
             return tokenInfo
         }
         return JSON()
+    }
+    
+    func fetchBaseFee() async throws -> [Cosmos_Base_V1beta1_DecCoin]? {
+        let req = Feemarket_Feemarket_V1_GasPricesRequest.init()
+        return try? await Feemarket_Feemarket_V1_QueryNIOClient(channel: getClient()).gasPrices(req, callOptions: getCallOptions()).response.get().prices
     }
     
     

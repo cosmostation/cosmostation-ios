@@ -25,8 +25,6 @@ class ChainPolygon: BaseChain  {
         coinGeckoId = "matic-network"
         coinLogo = "tokenMatic"
         evmRpcURL = "https://polygon-rpc.com"
-        
-        initFetcher()
     }
     
 }

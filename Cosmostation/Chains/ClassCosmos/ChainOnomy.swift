@@ -25,7 +25,5 @@ class ChainOnomy: BaseChain  {
         bechAccountPrefix = "onomy"
         validatorPrefix = "onomyvaloper"
         grpcHost = "grpc-onomy-protocol.cosmostation.io"
-        
-        initFetcher()
     }
 }

@@ -32,7 +32,5 @@ class ChainDymensionEVM: BaseChain  {
         coinGeckoId = "dymension"
         coinLogo = "tokenDym"
         evmRpcURL = "https://rpc-dymension-evm.cosmostation.io"
-        
-        initFetcher()
     }
 }

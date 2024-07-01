@@ -26,7 +26,5 @@ class ChainSecret118: BaseChain  {
         bechAccountPrefix = "secret"
         validatorPrefix = "secretvaloper"
         grpcHost = "grpc-secret.cosmostation.io"
-        
-        initFetcher()
     }
 }

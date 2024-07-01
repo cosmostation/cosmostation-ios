@@ -25,8 +25,6 @@ class ChainSaga: BaseChain  {
         bechAccountPrefix = "saga"
         validatorPrefix = "sagavaloper"
         grpcHost = "grpc-saga.cosmostation.io"
-        
-        initFetcher()
     }
 }
 

@@ -25,7 +25,5 @@ class ChainKyve: BaseChain  {
         bechAccountPrefix = "kyve"
         validatorPrefix = "kyvevaloper"
         grpcHost = "grpc-kyve.cosmostation.io"
-        
-        initFetcher()
     }
 }

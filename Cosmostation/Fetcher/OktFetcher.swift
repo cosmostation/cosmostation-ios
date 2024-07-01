@@ -91,7 +91,7 @@ class OktFetcher: FetcherLcd {
         return NSDecimalNumber.zero
     }
     
-    func lcdAllStakingDenomAmount() -> NSDecimalNumber {
+    override func lcdAllStakingDenomAmount() -> NSDecimalNumber {
         return lcdBalanceAmount(chain.stakeDenom!).adding(lcdOktDepositAmount()).adding(lcdOktWithdrawAmount())
     }
     

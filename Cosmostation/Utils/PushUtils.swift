@@ -30,10 +30,12 @@ class PushUtils {
         }
         
         Task {
-            let param = await getPushInfo(enable, token).dictionaryRepresentation
+            let paramsss = await getPushInfo(enable, token).dictionaryRepresentation
             let url = BaseNetWork.setPushStatus()
-//            print("param ", param)
+//            print("param ", paramsss)
+            let param = try! JSONSerialization.jsonObject(with: paramsss.rawData(), options: .allowFragments) as? [String: Any]
             AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in
+//                print("response ", response)
                 if let error = response.error {
                     BaseData.instance.setPushNoti(false)
                     completion(false, "\(error)")
@@ -67,17 +69,20 @@ class PushUtils {
     func getPushWallet(_ account: BaseAccount) async -> PushWallet {
         var pushWallet = PushWallet()
         var pushAccounts = [PushAccount]()
-        await account.initAllKeys().forEach { chain in
-            if (chain.isCosmos()) {
-                let pushAccount = PushAccount(chain.chainIdCosmos!, chain.bechAddress!)
-                pushAccounts.append(pushAccount)
-            } else if (chain.supportEvm) {
-                let pushAccount = PushAccount(chain.chainIdEvm!, chain.evmAddress!)
-                pushAccounts.append(pushAccount)
+        
+        await account.initAllKeys().filter { $0.isTestnet == false }.forEach { chain in
+            if let chainname = chain.apiName {
+                if (chain.isCosmos()) {
+                    let pushAccount = PushAccount(chainname, chain.bechAddress!)
+                    pushAccounts.append(pushAccount)
+                } else if (chain.supportEvm) {
+                    let pushAccount = PushAccount(chainname, chain.evmAddress!)
+                    pushAccounts.append(pushAccount)
+                }
             }
         }
         pushWallet.walletName = account.name
-        pushWallet.walletKey = String(account.id)
+        pushWallet.walletKey = String(account.id) + account.uuid + String(account.id)
         pushWallet.accounts = pushAccounts
         return pushWallet
     }
@@ -89,14 +94,16 @@ public struct PushInfo {
     var enable: Bool = Bool()
     var wallets: [PushWallet] = [PushWallet]()
     
-    var dictionaryRepresentation: [String: Any] {
-        return [
-            "pushToken" : pushToken,
-            "enable" : enable,
-            "wallets" : wallets.map({ wallet in
-                wallet.dictionaryRepresentation
-            })
-        ]
+    var dictionaryRepresentation: JSON {
+        var result = JSON()
+        result["pushToken"].stringValue = pushToken
+        result["enable"].boolValue = enable
+        var rawWallets = [JSON]()
+        wallets.forEach { wallet in
+            rawWallets.append(wallet.dictionaryRepresentation)
+        }
+        result["wallets"].arrayObject = rawWallets
+        return result
     }
 }
 
@@ -105,14 +112,16 @@ public struct PushWallet {
     var walletKey: String = String()
     var accounts: [PushAccount] = [PushAccount]()
     
-    var dictionaryRepresentation: [String: Any] {
-        return [
-            "walletName" : walletName,
-            "walletKey" : walletKey,
-            "accounts" : accounts.map({ accuont in
-                accuont.dictionaryRepresentation
-            })
-        ]
+    var dictionaryRepresentation: JSON {
+        var result = JSON()
+        result["walletName"].stringValue = walletName
+        result["walletKey"].stringValue = walletKey
+        var rawAccounts = [JSON]()
+        accounts.forEach { account in
+            rawAccounts.append(account.dictionaryRepresentation)
+        }
+        result["accounts"].arrayObject = rawAccounts
+        return result
     }
 }
 
@@ -125,7 +134,7 @@ public struct PushAccount {
         self.address = address
     }
     
-    var dictionaryRepresentation: [String: Any] {
+    var dictionaryRepresentation: JSON {
         return [
             "chain" : chain,
             "address" : address

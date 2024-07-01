@@ -32,8 +32,6 @@ class ChainXplaEVM: BaseChain  {
         coinGeckoId = "xpla"
         coinLogo = "tokenXpla"
         evmRpcURL = "https://rpc-xpla-evm.cosmostation.io"
-        
-        initFetcher()
     }
 }
 

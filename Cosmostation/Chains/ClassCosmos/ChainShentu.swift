@@ -25,8 +25,6 @@ class ChainShentu: BaseChain {
         bechAccountPrefix = "shentu"
         validatorPrefix = "shentuvaloper"
         grpcHost = "grpc-shentu.cosmostation.io"
-        
-        initFetcher()
     }
     
 }

@@ -25,8 +25,6 @@ class ChainBitsong: BaseChain  {
         bechAccountPrefix = "bitsong"
         validatorPrefix = "bitsongvaloper"
         grpcHost = "grpc-bitsong.cosmostation.io"
-        
-        initFetcher()
     }
     
 }

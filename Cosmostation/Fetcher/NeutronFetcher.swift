@@ -33,7 +33,8 @@ class NeutronFetcher: FetcherGrpc {
                let balance = try await fetchBalance(),
                let auth = try? await fetchAuth(),
                let vault = try? await fetchVaultDeposit(),
-               let vesting = try? await fetchNeutronVesting() {
+               let vesting = try? await fetchNeutronVesting(),
+               let baseFee = try? await fetchBaseFee() {
                 self.mintscanCw20Tokens = cw20Tokens ?? []
                 self.cosmosAuth = auth
                 self.cosmosBalances = balance
@@ -111,7 +112,7 @@ extension NeutronFetcher {
         let query: JSON = ["voting_power_at_height" : ["address" : chain.bechAddress!]]
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
-            $0.address = NEUTRON_VAULT_ADDRESS
+            $0.address = vaultsList?[0]["address"].stringValue ?? ""   // NEUTRON_VAULT_ADDRESS
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
         return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: getClient()).smartContractState(req, callOptions: getCallOptions()).response.get().data

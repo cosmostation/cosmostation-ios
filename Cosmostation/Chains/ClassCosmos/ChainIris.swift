@@ -25,8 +25,6 @@ class ChainIris: BaseChain  {
         bechAccountPrefix = "iaa"
         validatorPrefix = "iva"
         grpcHost = "grpc-iris.cosmostation.io"
-        
-        initFetcher()
     }
 }
 

@@ -32,7 +32,5 @@ class ChainHumansEVM: BaseChain  {
         coinGeckoId = "humans-ai"
         coinLogo = "tokenHeart"
         evmRpcURL = "https://rpc-humans-evm.cosmostation.io"
-        
-        initFetcher()
     }
 }

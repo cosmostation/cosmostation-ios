@@ -25,8 +25,6 @@ class ChainBand: BaseChain  {
         bechAccountPrefix = "band"
         validatorPrefix = "bandvaloper"
         grpcHost = "grpc-band.cosmostation.io"
-        
-        initFetcher()
     }
     
 }

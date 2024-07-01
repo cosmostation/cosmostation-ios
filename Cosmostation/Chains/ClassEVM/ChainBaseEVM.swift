@@ -25,8 +25,6 @@ class ChainBaseEVM: BaseChain  {
         coinGeckoId = "weth"
         coinLogo = "tokenEth_base"
         evmRpcURL = "https://mainnet.base.org"
-        
-        initFetcher()
     }
     
 }

@@ -32,7 +32,5 @@ class ChainCantoEVM: BaseChain  {
         coinGeckoId = "canto"
         coinLogo = "tokenCanto"
         evmRpcURL = "https://rpc-canto-evm.cosmostation.io"
-        
-        initFetcher()
     }
 }

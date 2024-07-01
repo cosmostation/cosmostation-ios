@@ -25,7 +25,5 @@ class ChainSentinel: BaseChain {
         bechAccountPrefix = "sent"
         validatorPrefix = "sentvaloper"
         grpcHost = "grpc-sentinel.cosmostation.io"
-        
-        initFetcher()
     }
 }

@@ -32,7 +32,5 @@ class ChainEvmosEVM: BaseChain  {
         coinGeckoId = "evmos"
         coinLogo = "tokenEvmos"
         evmRpcURL = "https://rpc-evmos-evm.cosmostation.io"
-        
-        initFetcher()
     }
 }

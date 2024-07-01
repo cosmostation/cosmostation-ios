@@ -25,8 +25,6 @@ class ChainFetchAi: BaseChain  {
         bechAccountPrefix = "fetch"
         validatorPrefix = "fetchvaloper"
         grpcHost = "grpc-fetchai.cosmostation.io"
-        
-        initFetcher()
     }
     
 }

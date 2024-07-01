@@ -25,7 +25,5 @@ class ChainEthereum: BaseChain {
         coinGeckoId = "ethereum"
         coinLogo = "tokenEth"
         evmRpcURL = "https://rpc-ethereum-evm.cosmostation.io/rpc"
-        
-        initFetcher()
     }
 }

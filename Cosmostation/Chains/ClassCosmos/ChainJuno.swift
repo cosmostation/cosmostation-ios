@@ -27,8 +27,6 @@ class ChainJuno: BaseChain  {
         supportCw20 = true
 //        supportCw721 = true
         grpcHost = "grpc-juno.cosmostation.io"
-        
-        initFetcher()
     }
     
 }

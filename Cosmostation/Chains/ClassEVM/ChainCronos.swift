@@ -25,8 +25,6 @@ class ChainCronos: BaseChain  {
         coinGeckoId = "crypto-com-chain"
         coinLogo = "tokenCro"
         evmRpcURL = "https://evm.cronos.org"
-        
-        initFetcher()
     }
     
 }

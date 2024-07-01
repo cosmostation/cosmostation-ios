@@ -25,7 +25,5 @@ class ChainCosmos: BaseChain {
         bechAccountPrefix = "cosmos"
         validatorPrefix = "cosmosvaloper"
         grpcHost = "grpc-cosmos.cosmostation.io"
-        
-        initFetcher()
     }
 }

@@ -25,8 +25,6 @@ class ChainMedibloc: BaseChain  {
         bechAccountPrefix = "panacea"
         validatorPrefix = "panaceavaloper"
         grpcHost = "grpc-medibloc.cosmostation.io"
-        
-        initFetcher()
     }
 }
 

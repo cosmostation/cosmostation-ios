@@ -26,8 +26,6 @@ class ChainPersistence750: BaseChain  {
         bechAccountPrefix = "persistence"
         validatorPrefix = "persistencevaloper"
         grpcHost = "grpc-persistence.cosmostation.io"
-        
-        initFetcher()
     }
     
 }

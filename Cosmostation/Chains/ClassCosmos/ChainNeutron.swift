@@ -30,21 +30,22 @@ class ChainNeutron: BaseChain {
         supportCw20 = true
         grpcHost = "grpc-neutron.cosmostation.io"
         
-        initFetcher()
-    }
-    
-    override func initFetcher() {
-        neutronFetcher = NeutronFetcher.init(self)
+//        grpcHost = "grpc-office-neutron.cosmostation.io"
+//        grpcHost = "grpc-office-neutron2.cosmostation.io"
+        
     }
     
     override func getGrpcfetcher() -> FetcherGrpc? {
+        if (neutronFetcher == nil) {
+            neutronFetcher = NeutronFetcher.init(self)
+        }
         return neutronFetcher
     }
     
     override func fetchData(_ id: Int64) {
         fetchState = .Busy
         Task {
-            let result = await neutronFetcher?.fetchGrpcData(id)
+            let result = await getGrpcfetcher()?.fetchGrpcData(id)
             
             if (result == false) {
                 fetchState = .Fail
@@ -52,7 +53,7 @@ class ChainNeutron: BaseChain {
                 fetchState = .Success
             }
             
-            if let neutronFetcher = neutronFetcher, fetchState == .Success {
+            if let neutronFetcher = getGrpcfetcher(), fetchState == .Success {
                 neutronFetcher.onCheckVesting()
                 allCoinValue = neutronFetcher.allCoinValue()
                 allCoinUSDValue = neutronFetcher.allCoinValue(true)
@@ -72,6 +73,4 @@ class ChainNeutron: BaseChain {
     }
 }
 
-//Neutron Contract Address
-let NEUTRON_VAULT_ADDRESS = "neutron1qeyjez6a9dwlghf9d6cy44fxmsajztw257586akk6xn6k88x0gus5djz4e"
 let NEUTRON_VESTING_CONTRACT_ADDRESS = "neutron1h6828as2z5av0xqtlh4w9m75wxewapk8z9l2flvzc29zeyzhx6fqgp648z"
