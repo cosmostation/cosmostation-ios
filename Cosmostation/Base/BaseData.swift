@@ -448,12 +448,32 @@ extension BaseData {
 
 
 extension BaseData {
+    func setPushNoti(_ using : Bool) {
+        UserDefaults.standard.set(using, forKey: KEY_PUSH_NOTI)
+    }
+    
+    func getPushNoti() -> Bool {
+        return UserDefaults.standard.bool(forKey: KEY_PUSH_NOTI)
+    }
+    
     func setFCMToken(_ token : String) {
         UserDefaults.standard.set(token, forKey: KEY_FCM_TOKEN)
     }
     
-    func getFCMToken() -> String {
-        return UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) ?? ""
+    func getFCMToken() -> String? {
+        return UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) ?? nil
+    }
+    
+    func setLastPushTime() {
+        let now = Date().millisecondsSince1970
+        UserDefaults.standard.set(String(now), forKey: KEY_FCM_SYNC_TIME)
+    }
+    
+    func needPushRefresh() -> Bool {
+        let now = Date().millisecondsSince1970
+        let min: Int64 = 60000
+        let last = Int64(UserDefaults.standard.string(forKey: KEY_LAST_PRICE_TIME) ?? "0")! + (min * 60 * 24 * 3)
+        return last < now ? true : false
     }
     
     func setDBVersion(_ version: Int) {
@@ -543,6 +563,14 @@ extension BaseData {
     
     func getHideLegacy() -> Bool {
         return UserDefaults.standard.bool(forKey: KEY_HIDE_LEGACY)
+    }
+    
+    func setShowTestnet(_ hide : Bool) {
+        UserDefaults.standard.set(hide, forKey: KEY_SHOW_TESTNET)
+    }
+    
+    func getShowTestnet() -> Bool {
+        return UserDefaults.standard.bool(forKey: KEY_SHOW_TESTNET)
     }
     
     func setCurrency(_ currency : Int) {

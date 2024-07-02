@@ -25,8 +25,6 @@ class ChainCoreum: BaseChain  {
         bechAccountPrefix = "core"
         validatorPrefix = "corevaloper"
         grpcHost = "grpc-coreum.cosmostation.io"
-        
-        initFetcher()
     }
     
 }

@@ -25,7 +25,5 @@ class ChainQuasar: BaseChain  {
         bechAccountPrefix = "quasar"
         validatorPrefix = "quasarvaloper"
         grpcHost = "grpc-quasar.cosmostation.io"
-        
-        initFetcher()
     }
 }

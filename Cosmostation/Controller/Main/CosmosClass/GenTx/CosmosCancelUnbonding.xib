@@ -25,6 +25,7 @@
                 <outlet property="feeAmountLabel" destination="DaX-BT-mZn" id="h42-Zv-SHd"/>
                 <outlet property="feeCurrencyLabel" destination="Miu-iM-Cf1" id="BxY-18-SAU"/>
                 <outlet property="feeDenomLabel" destination="atH-hG-4yO" id="MdU-77-1Fu"/>
+                <outlet property="feeMsgLabel" destination="UBW-fL-Hnt" id="IKu-Ix-beH"/>
                 <outlet property="feeSegments" destination="lh6-GT-Yap" id="jG8-3Z-Lbt"/>
                 <outlet property="feeSelectImg" destination="BXx-S4-Zac" id="q4b-bj-u7M"/>
                 <outlet property="feeSelectLabel" destination="9hz-6r-aSB" id="Asi-Ao-gpc"/>
@@ -161,6 +162,14 @@
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBW-fL-Hnt">
+                            <rect key="frame" x="232.33333333333337" y="11" width="132.66666666666663" height="20.333333333333329"/>
+                            <string key="text">Fees and tips are paid to the chain, 
+not the wallet.</string>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
+                            <color key="textColor" name="_color03"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DUh-E3-qLj">
                             <rect key="frame" x="12" y="40" width="353" height="0.6666666666666643"/>
                             <color key="backgroundColor" name="_color05"/>
@@ -268,8 +277,10 @@
                         <constraint firstItem="dTF-P4-KKC" firstAttribute="top" secondItem="atH-hG-4yO" secondAttribute="bottom" constant="2" id="Fu9-Tp-8ag"/>
                         <constraint firstItem="dTF-P4-KKC" firstAttribute="leading" secondItem="Miu-iM-Cf1" secondAttribute="trailing" constant="2" id="Rm6-HK-MpM"/>
                         <constraint firstItem="kOS-BK-7b5" firstAttribute="top" secondItem="DUh-E3-qLj" secondAttribute="bottom" constant="12" id="Rou-EA-wkK"/>
+                        <constraint firstItem="UBW-fL-Hnt" firstAttribute="centerY" secondItem="h46-eU-sVC" secondAttribute="centerY" id="WKO-IJ-XpX"/>
                         <constraint firstItem="lh6-GT-Yap" firstAttribute="top" secondItem="kOS-BK-7b5" secondAttribute="bottom" constant="14" id="WTZ-nw-sUG"/>
                         <constraint firstItem="dTF-P4-KKC" firstAttribute="centerY" secondItem="Miu-iM-Cf1" secondAttribute="centerY" constant="-1" id="WYf-k1-BFU"/>
+                        <constraint firstAttribute="trailing" secondItem="UBW-fL-Hnt" secondAttribute="trailing" constant="12" id="Yb3-Zh-kDX"/>
                         <constraint firstItem="atH-hG-4yO" firstAttribute="leading" secondItem="DaX-BT-mZn" secondAttribute="trailing" constant="2" id="Z2p-bu-RR5"/>
                         <constraint firstAttribute="trailing" secondItem="atH-hG-4yO" secondAttribute="trailing" constant="12" id="Z3h-Mg-6qx"/>
                         <constraint firstAttribute="trailing" secondItem="lh6-GT-Yap" secondAttribute="trailing" constant="12" id="bX9-aA-EhM"/>

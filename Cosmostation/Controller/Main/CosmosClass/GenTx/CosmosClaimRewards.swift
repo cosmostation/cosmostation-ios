@@ -8,6 +8,7 @@
 
 import UIKit
 import Lottie
+import SwiftProtobuf
 
 class CosmosClaimRewards: BaseVC {
     
@@ -25,6 +26,7 @@ class CosmosClaimRewards: BaseVC {
     @IBOutlet weak var memoHintLabel: UILabel!
     
     @IBOutlet weak var feeSelectView: DropDownView!
+    @IBOutlet weak var feeMsgLabel: UILabel!
     @IBOutlet weak var feeSelectImg: UIImageView!
     @IBOutlet weak var feeSelectLabel: UILabel!
     @IBOutlet weak var feeAmountLabel: UILabel!
@@ -39,11 +41,12 @@ class CosmosClaimRewards: BaseVC {
     
     var selectedChain: BaseChain!
     var grpcFetcher: FetcherGrpc!
-    var feeInfos = [FeeInfo]()
-    var selectedFeeInfo = 0
     var claimableRewards = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
-    var txFee: Cosmos_Tx_V1beta1_Fee!
+    var feeInfos = [FeeInfo]()
+    var txFee: Cosmos_Tx_V1beta1_Fee = Cosmos_Tx_V1beta1_Fee.init()
+    var txTip: Cosmos_Tx_V1beta1_Tip = Cosmos_Tx_V1beta1_Tip.init()
     var txMemo = ""
+    var selectedFeePosition = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,32 +54,31 @@ class CosmosClaimRewards: BaseVC {
         baseAccount = BaseData.instance.baseAccount
         grpcFetcher = selectedChain.getGrpcfetcher()
         
+        loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        feeInfos = selectedChain.getFeeInfos()
-        feeSegments.removeAllSegments()
-        for i in 0..<feeInfos.count {
-            feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
-        }
-        selectedFeeInfo = selectedChain.getFeeBasePosition()
-        feeSegments.selectedSegmentIndex = selectedFeeInfo
-        txFee = selectedChain.getInitPayableFee()
-        
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
-        onInitView()
-        onUpdateFeeView()
-        onSimul()
+        Task {
+            await grpcFetcher.updateBaseFee()
+            DispatchQueue.main.async {
+                self.loadingView.isHidden = true
+                self.onInitView()
+                self.oninitFeeView()
+                self.onSimul()
+            }
+        }
     }
     
     override func setLocalizedString() {
-        claimBtn.setTitle(NSLocalizedString("tx_get_reward", comment: ""), for: .normal)
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
+        feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
+        claimBtn.setTitle(NSLocalizedString("tx_get_reward", comment: ""), for: .normal)
     }
     
     func onInitView() {
@@ -120,6 +122,74 @@ class CosmosClaimRewards: BaseVC {
         }
     }
     
+    func oninitFeeView() {
+        if (grpcFetcher.cosmosBaseFees.count > 0) {
+            feeSegments.removeAllSegments()
+            feeSegments.insertSegment(withTitle: "No Tip", at: 0, animated: false)
+            feeSegments.insertSegment(withTitle: "20% Tip", at: 1, animated: false)
+            feeSegments.insertSegment(withTitle: "50% Tip", at: 2, animated: false)
+            feeSegments.insertSegment(withTitle: "100% Tip", at: 3, animated: false)
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            
+            let baseFee = grpcFetcher.cosmosBaseFees[0]
+            let gasAmount: NSDecimalNumber = selectedChain.getFeeBaseGasAmount()
+            let feeDenom = baseFee.denom
+            let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
+            txFee.gasLimit = gasAmount.uint64Value
+            txFee.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount)]
+            txTip.tipper = selectedChain.bechAddress!
+            txTip.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, "0")]
+            
+        } else {
+            feeInfos = selectedChain.getFeeInfos()
+            feeSegments.removeAllSegments()
+            for i in 0..<feeInfos.count {
+                feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
+            }
+            selectedFeePosition = selectedChain.getFeeBasePosition()
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            txFee = selectedChain.getInitPayableFee()!
+        }
+        onUpdateFeeView()
+    }
+    
+    @objc func onSelectFeeCoin() {
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.targetChain = selectedChain
+        baseSheet.sheetDelegate = self
+        if (grpcFetcher.cosmosBaseFees.count > 0) {
+            baseSheet.baseFeesDatas = grpcFetcher.cosmosBaseFees
+            baseSheet.sheetType = .SelectBaseFeeDenom
+        } else {
+            baseSheet.feeDatas = feeInfos[selectedFeePosition].FeeDatas
+            baseSheet.sheetType = .SelectFeeDenom
+        }
+        onStartSheet(baseSheet, 240, 0.6)
+    }
+    
+    @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
+        selectedFeePosition = sender.selectedSegmentIndex
+        if (grpcFetcher.cosmosBaseFees.count > 0) {
+            txTip = Signer.setTip(selectedFeePosition, txFee, txTip)
+            
+        } else {
+            txFee = selectedChain.getUserSelectedFee(selectedFeePosition, txFee.amount[0].denom)
+        }
+        onUpdateFeeView()
+        onSimul()
+    }
+    
+    func onUpdateFeeView() {
+        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
+            feeSelectLabel.text = msAsset.symbol
+            WDP.dpCoin(msAsset, txFee.amount[0], feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let amount = NSDecimalNumber(string: txFee.amount[0].amount)
+            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
+        }
+    }
+    
     @objc func onClickMemo() {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
@@ -140,40 +210,23 @@ class CosmosClaimRewards: BaseVC {
         onSimul()
     }
     
-    @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
-        selectedFeeInfo = sender.selectedSegmentIndex
-        txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, txFee.amount[0].denom)
-        onUpdateFeeView()
-        onSimul()
-    }
-    
-    @objc func onSelectFeeCoin() {
-        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.targetChain = selectedChain
-        baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
-        baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240, 0.6)
-    }
-    
-    func onUpdateFeeView() {
-        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
-            feeSelectLabel.text = msAsset.symbol
-            WDP.dpCoin(msAsset, txFee.amount[0], feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-            let amount = NSDecimalNumber(string: txFee.amount[0].amount)
-            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
-            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
-        }
-    }
-    
     func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
         if let toGas = simul?.gasInfo.gasUsed {
             txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
-            if let gasRate = feeInfos[selectedFeeInfo].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
-                let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
-                let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
-                txFee.amount[0].amount = feeCoinAmount!.stringValue
+            if (grpcFetcher.cosmosBaseFees.count > 0) {
+                if let baseFee = grpcFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
+                    let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
+                    let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
+                    txFee.amount[0].amount = feeAmount.stringValue
+                    txTip = Signer.setTip(selectedFeePosition, txFee, txTip)
+                }
+                
+            } else {
+                if let gasRate = feeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
+                    let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
+                    let feeAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
+                    txFee.amount[0].amount = feeAmount!.stringValue
+                }
             }
         }
         onUpdateFeeView()
@@ -197,11 +250,11 @@ class CosmosClaimRewards: BaseVC {
         
         Task {
             do {
-                let account = try await grpcFetcher.fetchAuth()
-                let simulReq = Signer.genClaimRewardsSimul(account!, claimableRewards, txFee, txMemo, selectedChain)
-                let simulRes = try await grpcFetcher.simulateTx(simulReq)
-                DispatchQueue.main.async {
-                    self.onUpdateWithSimul(simulRes)
+                if let simulReq = try await Signer.genSimul(selectedChain, onBindRewardMsgs(), txMemo, txFee, txTip),
+                   let simulRes = try await grpcFetcher.simulateTx(simulReq) {
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(simulRes)
+                    }
                 }
                 
             } catch {
@@ -214,6 +267,10 @@ class CosmosClaimRewards: BaseVC {
             }
         }
     }
+    
+    func onBindRewardMsgs() -> [Google_Protobuf_Any] {
+        return Signer.genClaimStakingRewardMsg(selectedChain.bechAddress!, claimableRewards)
+    }
 }
 
 extension CosmosClaimRewards: MemoDelegate, BaseSheetDelegate, PinDelegate {
@@ -221,8 +278,16 @@ extension CosmosClaimRewards: MemoDelegate, BaseSheetDelegate, PinDelegate {
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectFeeDenom) {
             if let index = result["index"] as? Int,
-               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
-                txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
+               let selectedDenom = feeInfos[selectedFeePosition].FeeDatas[index].denom {
+                txFee = selectedChain.getUserSelectedFee(selectedFeePosition, selectedDenom)
+                onUpdateFeeView()
+                onSimul()
+            }
+            
+        } else if (sheetType == .SelectBaseFeeDenom) {
+            if let index = result["index"] as? Int {
+               let selectedDenom = grpcFetcher.cosmosBaseFees[index].denom
+                txFee.amount[0].denom = selectedDenom
                 onUpdateFeeView()
                 onSimul()
             }
@@ -240,18 +305,17 @@ extension CosmosClaimRewards: MemoDelegate, BaseSheetDelegate, PinDelegate {
             loadingView.isHidden = false
             Task {
                 do {
-                    let account = try await grpcFetcher.fetchAuth()
-                    let broadReq = Signer.genClaimRewardsTx(account!, claimableRewards, txFee, txMemo, selectedChain)
-                    let response = try await grpcFetcher.broadcastTx(broadReq)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                        self.loadingView.isHidden = true
-                        
-                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                        txResult.selectedChain = self.selectedChain
-                        txResult.broadcastTxResponse = response
-                        txResult.modalPresentationStyle = .fullScreen
-                        self.present(txResult, animated: true)
-                    })
+                    if let broadReq = try await Signer.genTx(selectedChain, onBindRewardMsgs(), txMemo, txFee, txTip),
+                       let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                            self.loadingView.isHidden = true
+                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                            txResult.selectedChain = self.selectedChain
+                            txResult.broadcastTxResponse = broadRes
+                            txResult.modalPresentationStyle = .fullScreen
+                            self.present(txResult, animated: true)
+                        })
+                    }
                     
                 } catch {
                     //TODO handle Error

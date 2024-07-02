@@ -25,7 +25,5 @@ class ChainIxo: BaseChain  {
         bechAccountPrefix = "ixo"
         validatorPrefix = "ixovaloper"
         grpcHost = "grpc-ixo.cosmostation.io"
-        
-        initFetcher()
     }
 }

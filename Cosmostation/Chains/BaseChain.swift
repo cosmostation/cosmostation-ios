@@ -58,6 +58,8 @@ class BaseChain {
     var lcdFetcher: FetcherLcd?
     var evmFetcher: FetcherEvmrpc?
     
+    init() { }
+    
     func getHDPath(_ lastPath: String) -> String {
         return accountKeyType.hdPath.replacingOccurrences(of: "X", with: lastPath)
     }
@@ -88,27 +90,27 @@ class BaseChain {
     }
     
     func getGrpcfetcher() -> FetcherGrpc? {
+        if (supportCosmosGrpc != true) { return nil }
+        if (grpcFetcher == nil) {
+            grpcFetcher = FetcherGrpc.init(self)
+        }
         return grpcFetcher
     }
     
     func getLcdfetcher() -> FetcherLcd? {
+        if (supportCosmosLcd != true) { return nil }
+        if (lcdFetcher == nil) {
+            lcdFetcher = FetcherLcd.init(self)
+        }
         return lcdFetcher
     }
     
     func getEvmfetcher() -> FetcherEvmrpc? {
-        return evmFetcher
-    }
-    
-    func initFetcher() {
-        if (supportEvm == true) {
+        if (supportEvm != true) { return nil }
+        if (lcdFetcher == nil) {
             evmFetcher = FetcherEvmrpc.init(self)
         }
-        if (supportCosmosGrpc == true) {
-            grpcFetcher = FetcherGrpc.init(self)
-        }
-        if (supportCosmosLcd == true) {
-            lcdFetcher = FetcherLcd.init(self)
-        }
+        return evmFetcher
     }
     
     func fetchData(_ id: Int64) {
@@ -144,7 +146,7 @@ class BaseChain {
                                    grpcFetcher.allStakingDenomAmount().stringValue, allCoinUSDValue.stringValue,
                                    allTokenUSDValue.stringValue, grpcFetcher.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
                     
-                } else if let evmFetcher = evmFetcher {
+                } else if let evmFetcher = getEvmfetcher() {
                     allCoinValue = evmFetcher.allCoinValue()
                     allCoinUSDValue = evmFetcher.allCoinValue(true)
                     allTokenValue = evmFetcher.allTokenValue()
@@ -212,12 +214,24 @@ class BaseChain {
             
         } else if (supportCosmosGrpc) {
             var result = false
-            getDefaultFeeCoins().forEach { minFee in
-                let availaAmount = getGrpcfetcher()?.balanceAmount(minFee.denom) ?? NSDecimalNumber.zero
-                let minFeeAmount = NSDecimalNumber.init(string: minFee.amount)
-                if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
-                    result = true
-                    return
+            if (getGrpcfetcher()?.cosmosBaseFees.count ?? 0 > 0) {
+                getGrpcfetcher()?.cosmosBaseFees.forEach({ basefee in
+                    let availaAmount = getGrpcfetcher()?.balanceAmount(basefee.denom) ?? NSDecimalNumber.zero
+                    let minFeeAmount = basefee.getdAmount().multiplying(by: getFeeBaseGasAmount(), withBehavior: handler0Down)
+                    if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
+                        result = true
+                        return
+                    }
+                })
+                
+            } else {
+                getDefaultFeeCoins().forEach { minFee in
+                    let availaAmount = getGrpcfetcher()?.balanceAmount(minFee.denom) ?? NSDecimalNumber.zero
+                    let minFeeAmount = NSDecimalNumber.init(string: minFee.amount)
+                    if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
+                        result = true
+                        return
+                    }
                 }
             }
             return result
@@ -275,7 +289,11 @@ extension BaseChain {
         if let mutiply = getChainListParam()["fee"]["simul_gas_multiply"].double {
             return mutiply
         }
-        return 1.2
+        return 1.3
+    }
+    
+    func supportFeeMarket() -> Bool {
+        return getChainListParam()["fee"]["feemarket"].bool ?? false
     }
     
     func getFeeInfos() -> [FeeInfo] {
@@ -507,6 +525,7 @@ func ALLCHAINS() -> [BaseChain] {
     
     
 
+    result.append(ChainNeutron_T())
     
 //    result.append(ChainBeraEVM_T())
     
@@ -521,6 +540,10 @@ func ALLCHAINS() -> [BaseChain] {
     
     if (BaseData.instance.getHideLegacy()) {
         return result.filter({ $0.isDefault == true })
+    }
+    
+    if (!BaseData.instance.getShowTestnet()) {
+        return result.filter({ $0.isTestnet == false })
     }
     return result
 }

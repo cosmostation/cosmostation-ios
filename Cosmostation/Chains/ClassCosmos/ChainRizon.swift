@@ -25,7 +25,5 @@ class ChainRizon: BaseChain  {
         bechAccountPrefix = "rizon"
         validatorPrefix = "rizonvaloper"
         grpcHost = "grpc-rizon.cosmostation.io"
-        
-        initFetcher()
     }
 }

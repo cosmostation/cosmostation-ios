@@ -23,6 +23,7 @@
                 <outlet property="feeAmountLabel" destination="HaC-zY-t0u" id="sft-q3-3Up"/>
                 <outlet property="feeCurrencyLabel" destination="Iv1-FB-pcp" id="84a-nS-zqX"/>
                 <outlet property="feeDenomLabel" destination="8Lk-nU-b4x" id="nLU-Xy-Hnf"/>
+                <outlet property="feeMsgLabel" destination="Zzd-2T-5Hr" id="AJc-bs-hWd"/>
                 <outlet property="feeSegments" destination="zAT-ZG-fTf" id="lTW-L8-65E"/>
                 <outlet property="feeSelectImg" destination="cBL-id-zqE" id="X1I-XJ-jfy"/>
                 <outlet property="feeSelectLabel" destination="6Xv-nk-reQ" id="WUa-Jk-hTb"/>
@@ -153,6 +154,14 @@
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zzd-2T-5Hr">
+                            <rect key="frame" x="232.33333333333337" y="11" width="132.66666666666663" height="20.333333333333329"/>
+                            <string key="text">Fees and tips are paid to the chain, 
+not the wallet.</string>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
+                            <color key="textColor" name="_color03"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ER-zo-b0n">
                             <rect key="frame" x="12" y="40" width="353" height="0.6666666666666643"/>
                             <color key="backgroundColor" name="_color05"/>
@@ -252,6 +261,7 @@
                     </subviews>
                     <color key="backgroundColor" name="_color06"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Zzd-2T-5Hr" secondAttribute="trailing" constant="12" id="0vs-ok-ApD"/>
                         <constraint firstItem="8Lk-nU-b4x" firstAttribute="leading" secondItem="HaC-zY-t0u" secondAttribute="trailing" constant="2" id="6cp-mz-QXh"/>
                         <constraint firstItem="6i7-li-e6b" firstAttribute="centerY" secondItem="Iv1-FB-pcp" secondAttribute="centerY" constant="-1" id="D1T-bP-fqd"/>
                         <constraint firstItem="tTH-QN-E6F" firstAttribute="leading" secondItem="A1W-7M-5Z1" secondAttribute="leading" constant="12" id="FA4-Xr-16K"/>
@@ -268,6 +278,7 @@
                         <constraint firstItem="zAT-ZG-fTf" firstAttribute="top" secondItem="vMj-75-KeP" secondAttribute="bottom" constant="14" id="gsP-Ir-7n6"/>
                         <constraint firstAttribute="height" constant="150" id="h9L-2F-deh"/>
                         <constraint firstItem="zAT-ZG-fTf" firstAttribute="leading" secondItem="A1W-7M-5Z1" secondAttribute="leading" constant="12" id="nbj-ai-bhQ"/>
+                        <constraint firstItem="Zzd-2T-5Hr" firstAttribute="centerY" secondItem="tTH-QN-E6F" secondAttribute="centerY" id="rlh-Fb-SL9"/>
                         <constraint firstAttribute="trailing" secondItem="6i7-li-e6b" secondAttribute="trailing" constant="12" id="ugG-gC-dlz"/>
                         <constraint firstAttribute="trailing" secondItem="8Lk-nU-b4x" secondAttribute="trailing" constant="12" id="wiu-zp-pwK"/>
                         <constraint firstItem="vMj-75-KeP" firstAttribute="top" secondItem="8ER-zo-b0n" secondAttribute="bottom" constant="12" id="x6D-G6-hgu"/>

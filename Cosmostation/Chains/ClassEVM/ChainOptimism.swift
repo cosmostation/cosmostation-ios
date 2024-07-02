@@ -25,8 +25,6 @@ class ChainOptimism: BaseChain  {
         coinGeckoId = "weth"
         coinLogo = "tokenEth_Op"
         evmRpcURL = "https://mainnet.optimism.io"
-        
-        initFetcher()
     }
     
 }

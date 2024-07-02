@@ -25,7 +25,5 @@ class ChainCelestia: BaseChain  {
         bechAccountPrefix = "celestia"
         validatorPrefix = "celestiavaloper"
         grpcHost = "grpc-celestia.cosmostation.io"
-        
-        initFetcher()
     }
 }

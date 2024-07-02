@@ -30,8 +30,6 @@ class ChainOkt996Keccak: BaseChain  {
         bechAccountPrefix = "ex"
         supportStaking = false
         lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
-        
-        initFetcher()
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
@@ -42,17 +40,16 @@ class ChainOkt996Keccak: BaseChain  {
     }
     
     override func getLcdfetcher() -> FetcherLcd? {
+        if (oktFetcher == nil) {
+            oktFetcher = OktFetcher.init(self)
+        }
         return oktFetcher
-    }
-    
-    override func initFetcher() {
-        oktFetcher = OktFetcher.init(self)
     }
     
     override func fetchData(_ id: Int64) {
         fetchState = .Busy
         Task {
-            let result = await oktFetcher?.fetchLcdData(id)
+            let result = await getLcdfetcher()?.fetchLcdData(id)
             
             if (result == false) {
                 fetchState = .Fail
@@ -60,7 +57,7 @@ class ChainOkt996Keccak: BaseChain  {
                 fetchState = .Success
             }
             
-            if let oktFetcher = oktFetcher, fetchState == .Success {
+            if let oktFetcher = getLcdfetcher(), fetchState == .Success {
                 allCoinValue = oktFetcher.allCoinValue()
                 allCoinUSDValue = oktFetcher.allCoinValue(true)
                 
@@ -81,7 +78,7 @@ class ChainOkt996Keccak: BaseChain  {
     override func fetchBalances() {
         fetchState = .Busy
         Task {
-            var result = await oktFetcher?.fetchBalances()
+            var result = await getLcdfetcher()?.fetchBalances()
             
             if (result == false) {
                 fetchState = .Fail

@@ -44,7 +44,6 @@ class CosmosStakingInfoVC: BaseVC {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.register(UINib(nibName: "StakeRewardAddressCell", bundle: nil), forCellReuseIdentifier: "StakeRewardAddressCell")
         tableView.register(UINib(nibName: "StakeDelegateCell", bundle: nil), forCellReuseIdentifier: "StakeDelegateCell")
         tableView.register(UINib(nibName: "StakeUnbondingCell", bundle: nil), forCellReuseIdentifier: "StakeUnbondingCell")
         tableView.rowHeight = UITableView.automaticDimension
@@ -54,8 +53,6 @@ class CosmosStakingInfoVC: BaseVC {
         refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
-        
-        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconRewardAddress"), style: .plain, target: self, action: #selector(onClickRewardAddressChange))
         
         onSetStakeData()
     }
@@ -267,64 +264,21 @@ class CosmosStakingInfoVC: BaseVC {
             self.present(cancel, animated: true)
         }
     }
-    
-    func onRewardAddressTx() {
-        let rewardAddress = CosmosRewardAddress(nibName: "CosmosRewardAddress", bundle: nil)
-        rewardAddress.selectedChain = selectedChain
-        rewardAddress.modalTransitionStyle = .coverVertical
-        self.present(rewardAddress, animated: true)
-    }
-    
-    @objc func onClickRewardAddressChange() {
-        if (selectedChain.isTxFeePayable() == false) {
-            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-            return
-        }
-        
-        let title = NSLocalizedString("reward_address_notice_title", comment: "")
-        let msg1 = NSLocalizedString("reward_address_notice_msg", comment: "")
-        let msg2 = NSLocalizedString("reward_address_notice_msg2", comment: "")
-        let msg = msg1 + msg2
-        let range = (msg as NSString).range(of: msg2)
-        let noticeAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-        let attributedMessage: NSMutableAttributedString = NSMutableAttributedString(
-            string: msg,
-            attributes: [
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12.0)
-            ]
-        )
-        attributedMessage.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 14.0), range: range)
-        attributedMessage.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red, range: range)
-        
-        noticeAlert.setValue(attributedMessage, forKey: "attributedMessage")
-        noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
-        noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default, handler: { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                self.onRewardAddressTx()
-            });
-            
-        }))
-        self.present(noticeAlert, animated: true)
-    }
 }
 
 
 extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == 0) {
-            view.titleLabel.text = NSLocalizedString("str_reward_address", comment: "")
-            view.cntLabel.text = "(Changed)"
-            view.cntLabel.textColor = .colorPrimary
-        } else if (section == 1) {
             view.titleLabel.text = NSLocalizedString("str_my_delegations", comment: "")
             view.cntLabel.text = String(delegations.count)
-        } else if (section == 2) {
+        } else if (section == 1) {
             view.titleLabel.text = NSLocalizedString("str_my_unbondings", comment: "")
             view.cntLabel.text = String(unbondings.count)
         }
@@ -333,11 +287,8 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0) {
-            if (rewardAddress?.isEmpty == true || rewardAddress == selectedChain.bechAddress) { return 0 }
-            else  { return 40 }
-        } else if (section == 1) {
             return (delegations.count > 0) ? 40 : 0
-        } else if (section == 2) {
+        } else if (section == 1) {
             return (unbondings.count > 0) ? 40 : 0
         }
         return 0
@@ -345,10 +296,8 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
-            return 1
-        } else if (section == 1) {
             return delegations.count
-        } else if (section == 2) {
+        } else if (section == 1) {
             return unbondings.count
         }
         return 0
@@ -356,11 +305,6 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"StakeRewardAddressCell") as! StakeRewardAddressCell
-            cell.onBindRewardAddress(selectedChain)
-            return cell
-            
-        } else if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"StakeDelegateCell") as! StakeDelegateCell
             let delegation = delegations[indexPath.row]
             if let validator = validators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
@@ -368,7 +312,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
             }
             return cell
             
-        } else if (indexPath.section == 2) {
+        } else if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"StakeUnbondingCell") as! StakeUnbondingCell
             let entry = unbondings[indexPath.row]
             if let validator = validators.filter({ $0.operatorAddress == entry.validatorAddress }).first {
@@ -381,25 +325,18 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 0) {
-            if (rewardAddress?.isEmpty == true || rewardAddress == selectedChain.bechAddress) { return 0 }
-        }
         return UITableView.automaticDimension;
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
-            UIPasteboard.general.string = selectedChain.getGrpcfetcher()?.rewardAddress?.trimmingCharacters(in: .whitespacesAndNewlines)
-            self.onShowToast(NSLocalizedString("address_copied", comment: ""))
-            
-        } else if (indexPath.section == 1) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
             baseSheet.delegation = delegations[indexPath.row]
             baseSheet.sheetType = .SelectDelegatedAction
             onStartSheet(baseSheet, 320, 0.6)
             
-        } else if (indexPath.section == 2) {
+        } else if (indexPath.section == 1) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
             baseSheet.unbondingEnrtyPosition = indexPath.row

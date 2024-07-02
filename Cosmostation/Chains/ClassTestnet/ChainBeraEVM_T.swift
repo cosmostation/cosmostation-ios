@@ -32,8 +32,6 @@ class ChainBeraEVM_T: BaseChain  {
         coinGeckoId = ""
         coinLogo = "tokenBera"
         evmRpcURL = ""
-        
-        initFetcher()
     }
 }
 

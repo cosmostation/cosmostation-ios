@@ -25,8 +25,6 @@ class ChainDydx: BaseChain  {
         bechAccountPrefix = "dydx"
         validatorPrefix = "dydxvaloper"
         grpcHost = "grpc-dydx.cosmostation.io"
-        
-        initFetcher()
     }
 }
 

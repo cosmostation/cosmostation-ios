@@ -9,6 +9,7 @@
 import UIKit
 import Lottie
 import SwiftyJSON
+import SwiftProtobuf
 
 class NeutronVote: BaseVC {
     
@@ -21,6 +22,7 @@ class NeutronVote: BaseVC {
     @IBOutlet weak var memoHintLabel: UILabel!
     
     @IBOutlet weak var feeSelectView: DropDownView!
+    @IBOutlet weak var feeMsgLabel: UILabel!
     @IBOutlet weak var feeSelectImg: UIImageView!
     @IBOutlet weak var feeSelectLabel: UILabel!
     @IBOutlet weak var feeAmountLabel: UILabel!
@@ -36,8 +38,9 @@ class NeutronVote: BaseVC {
     var selectedChain: ChainNeutron!
     var grpcFetcher: NeutronFetcher!
     var feeInfos = [FeeInfo]()
-    var selectedFeeInfo = 0
-    var txFee: Cosmos_Tx_V1beta1_Fee!
+    var txFee: Cosmos_Tx_V1beta1_Fee = Cosmos_Tx_V1beta1_Fee.init()
+    var txTip: Cosmos_Tx_V1beta1_Tip = Cosmos_Tx_V1beta1_Tip.init()
+    var selectedFeePosition = 0
     var txMemo = ""
     
     var toSingleProposals = [JSON]()
@@ -50,21 +53,12 @@ class NeutronVote: BaseVC {
         baseAccount = BaseData.instance.baseAccount
         grpcFetcher = selectedChain.neutronFetcher
         
-        loadingView.isHidden = true
+        loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
         loadingView.play()
-        
-        feeInfos = selectedChain.getFeeInfos()
-        feeSegments.removeAllSegments()
-        for i in 0..<feeInfos.count {
-            feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
-        }
-        selectedFeeInfo = selectedChain.getFeeBasePosition()
-        feeSegments.selectedSegmentIndex = selectedFeeInfo
-        txFee = selectedChain.getInitPayableFee()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -77,12 +71,92 @@ class NeutronVote: BaseVC {
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
-        onUpdateFeeView()
+        
+        Task {
+            await grpcFetcher.updateBaseFee()
+            DispatchQueue.main.async {
+                self.loadingView.isHidden = true
+                self.oninitFeeView()
+            }
+        }
     }
     
     override func setLocalizedString() {
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
+        feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
         voteBtn.setTitle(NSLocalizedString("str_vote", comment: ""), for: .normal)
+    }
+    
+    func oninitFeeView() {
+        if (grpcFetcher.cosmosBaseFees.count > 0) {
+            feeSegments.removeAllSegments()
+            feeSegments.insertSegment(withTitle: "No Tip", at: 0, animated: false)
+            feeSegments.insertSegment(withTitle: "20% Tip", at: 1, animated: false)
+            feeSegments.insertSegment(withTitle: "50% Tip", at: 2, animated: false)
+            feeSegments.insertSegment(withTitle: "100% Tip", at: 3, animated: false)
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            
+            let baseFee = grpcFetcher.cosmosBaseFees[0]
+            let gasAmount: NSDecimalNumber = selectedChain.getFeeBaseGasAmount()
+            let feeDenom = baseFee.denom
+            let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
+            txFee.gasLimit = gasAmount.uint64Value
+            txFee.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount)]
+            txTip.tipper = selectedChain.bechAddress!
+            txTip.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, "0")]
+            
+        } else {
+            feeInfos = selectedChain.getFeeInfos()
+            feeSegments.removeAllSegments()
+            for i in 0..<feeInfos.count {
+                feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
+            }
+            selectedFeePosition = selectedChain.getFeeBasePosition()
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            txFee = selectedChain.getInitPayableFee()!
+        }
+        onUpdateFeeView()
+    }
+    
+    @objc func onSelectFeeCoin() {
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.targetChain = selectedChain
+        baseSheet.sheetDelegate = self
+        if (grpcFetcher.cosmosBaseFees.count > 0) {
+            baseSheet.baseFeesDatas = grpcFetcher.cosmosBaseFees
+            baseSheet.sheetType = .SelectBaseFeeDenom
+        } else {
+            baseSheet.feeDatas = feeInfos[selectedFeePosition].FeeDatas
+            baseSheet.sheetType = .SelectFeeDenom
+        }
+        onStartSheet(baseSheet, 240, 0.6)
+    }
+    
+    @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
+        selectedFeePosition = sender.selectedSegmentIndex
+        if (grpcFetcher.cosmosBaseFees.count > 0) {
+            txTip = Signer.setTip(selectedFeePosition, txFee, txTip)
+            
+        } else {
+            txFee = selectedChain.getUserSelectedFee(selectedFeePosition, txFee.amount[0].denom)
+        }
+        onUpdateFeeView()
+        onSimul()
+    }
+    
+    func onUpdateFeeView() {
+        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
+            feeSelectLabel.text = msAsset.symbol
+            
+            var totalFeeAmount = NSDecimalNumber(string: txFee.amount[0].amount)
+            if (txTip.amount.count > 0) {
+                totalFeeAmount = totalFeeAmount.adding(NSDecimalNumber(string: txTip.amount[0].amount))
+            }
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let value = msPrice.multiplying(by: totalFeeAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+            WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
+        }
     }
     
     @objc func onClickMemo() {
@@ -105,40 +179,23 @@ class NeutronVote: BaseVC {
         onSimul()
     }
     
-    @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
-        selectedFeeInfo = sender.selectedSegmentIndex
-        txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, txFee.amount[0].denom)
-        onUpdateFeeView()
-        onSimul()
-    }
-    
-    @objc func onSelectFeeCoin() {
-        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.targetChain = selectedChain
-        baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
-        baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectFeeDenom
-        onStartSheet(baseSheet, 240, 0.6)
-    }
-    
-    func onUpdateFeeView() {
-        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
-            feeSelectLabel.text = msAsset.symbol
-            WDP.dpCoin(msAsset, txFee.amount[0], feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-            let amount = NSDecimalNumber(string: txFee.amount[0].amount)
-            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
-            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
-        }
-    }
-    
     func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
         if let toGas = simul?.gasInfo.gasUsed {
             txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
-            if let gasRate = feeInfos[selectedFeeInfo].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
-                let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
-                let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
-                txFee.amount[0].amount = feeCoinAmount!.stringValue
+            if (grpcFetcher.cosmosBaseFees.count > 0) {
+                if let baseFee = grpcFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
+                    let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
+                    let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
+                    txFee.amount[0].amount = feeAmount.stringValue
+                    txTip = Signer.setTip(selectedFeePosition, txFee, txTip)
+                }
+                
+            } else {
+                if let gasRate = feeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
+                    let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
+                    let feeAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
+                    txFee.amount[0].amount = feeAmount!.stringValue
+                }
             }
         }
         onUpdateFeeView()
@@ -162,11 +219,11 @@ class NeutronVote: BaseVC {
         
         Task {
             do {
-                let account = try await grpcFetcher.fetchAuth()
-                let simulReq = Signer.genWasmSimul(account!, onBindWasmMsg(), txFee, txMemo, selectedChain)
-                let simulRes = try await grpcFetcher.simulateTx(simulReq)
-                DispatchQueue.main.async {
-                    self.onUpdateWithSimul(simulRes)
+                if let simulReq = try await Signer.genSimul(selectedChain, onBindWasmMsg(), txMemo, txFee, txTip),
+                   let simulRes = try await grpcFetcher.simulateTx(simulReq) {
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(simulRes)
+                    }
                 }
                 
             } catch {
@@ -180,8 +237,8 @@ class NeutronVote: BaseVC {
         }
     }
     
-    func onBindWasmMsg() -> [Cosmwasm_Wasm_V1_MsgExecuteContract] {
-        var result = [Cosmwasm_Wasm_V1_MsgExecuteContract]()
+    func onBindWasmMsg() -> [Google_Protobuf_Any] {
+        var wasmMsgs = [Cosmwasm_Wasm_V1_MsgExecuteContract]()
         toSingleProposals.forEach { single in
             let jsonMsg: JSON = ["vote" : ["proposal_id" : single["id"].int64Value, "vote" : single["myVote"].stringValue]]
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
@@ -190,7 +247,7 @@ class NeutronVote: BaseVC {
                 $0.contract = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"].arrayValue[0]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
-            result.append(msg)
+            wasmMsgs.append(msg)
         }
         toMultiProposals.forEach { multi in
             let jsonMsg: JSON = ["vote" : ["proposal_id" : multi["id"].int64Value, "vote" : ["option_id" : multi["myVote"].intValue ]]]
@@ -200,7 +257,7 @@ class NeutronVote: BaseVC {
                 $0.contract = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"].arrayValue[1]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
-            result.append(msg)
+            wasmMsgs.append(msg)
         }
         toOverrruleProposals.forEach { overrule in
             let jsonMsg: JSON = ["vote" : ["proposal_id" : overrule["id"].int64Value, "vote" : overrule["myVote"].stringValue]]
@@ -210,9 +267,9 @@ class NeutronVote: BaseVC {
                 $0.contract = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"].arrayValue[2]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
-            result.append(msg)
+            wasmMsgs.append(msg)
         }
-        return result
+        return Signer.genWasmMsg(wasmMsgs)
     }
 }
 
@@ -309,8 +366,15 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectFeeDenom) {
             if let index = result["index"] as? Int,
-               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
-                txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
+               let selectedDenom = feeInfos[selectedFeePosition].FeeDatas[index].denom {
+                txFee = selectedChain.getUserSelectedFee(selectedFeePosition, selectedDenom)
+                onUpdateFeeView()
+                onSimul()
+            }
+        } else if (sheetType == .SelectBaseFeeDenom) {
+            if let index = result["index"] as? Int {
+               let selectedDenom = grpcFetcher.cosmosBaseFees[index].denom
+                txFee.amount[0].denom = selectedDenom
                 onUpdateFeeView()
                 onSimul()
             }
@@ -329,17 +393,17 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
             
             Task {
                 do {
-                    let account = try await grpcFetcher.fetchAuth()
-                    let broadReq = Signer.genWasmTx(account!, onBindWasmMsg(), txFee, txMemo, selectedChain)
-                    let response = try await grpcFetcher.broadcastTx(broadReq)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                        self.loadingView.isHidden = true
-                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                        txResult.selectedChain = self.selectedChain
-                        txResult.broadcastTxResponse = response
-                        txResult.modalPresentationStyle = .fullScreen
-                        self.present(txResult, animated: true)
-                    })
+                    if let broadReq = try await Signer.genTx(selectedChain, onBindWasmMsg(), txMemo, txFee, txTip),
+                       let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                            self.loadingView.isHidden = true
+                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                            txResult.selectedChain = self.selectedChain
+                            txResult.broadcastTxResponse = broadRes
+                            txResult.modalPresentationStyle = .fullScreen
+                            self.present(txResult, animated: true)
+                        })
+                    }
                     
                 } catch {
                     //TODO handle Error

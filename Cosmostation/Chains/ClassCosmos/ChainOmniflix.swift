@@ -25,8 +25,6 @@ class ChainOmniflix: BaseChain  {
         bechAccountPrefix = "omniflix"
         validatorPrefix = "omniflixvaloper"
         grpcHost = "grpc-omniflix.cosmostation.io"
-        
-        initFetcher()
     }
 }
 

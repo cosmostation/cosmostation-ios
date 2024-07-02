@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "neutron(testnet).png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

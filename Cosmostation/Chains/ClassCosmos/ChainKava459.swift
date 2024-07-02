@@ -8,9 +8,7 @@
 
 import Foundation
 
-class ChainKava459: BaseChain {
-    
-    var kavaFetcher: KavaFetcher?
+class ChainKava459: ChainKavaEVM {
     
     override init() {
         super.init()
@@ -29,14 +27,10 @@ class ChainKava459: BaseChain {
         validatorPrefix = "kavavaloper"
         grpcHost = "grpc-kava.cosmostation.io"
         
-        initFetcher()
-    }
-    
-    override func initFetcher() {
-        kavaFetcher = KavaFetcher.init(self)
-    }
-    
-    override func getGrpcfetcher() -> FetcherGrpc? {
-        return kavaFetcher
+        supportEvm = false
+        coinSymbol = ""
+        coinGeckoId = ""
+        coinLogo = ""
+        evmRpcURL = ""
     }
 }

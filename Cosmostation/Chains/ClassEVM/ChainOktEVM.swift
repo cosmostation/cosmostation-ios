@@ -37,24 +37,20 @@ class ChainOktEVM: BaseChain {
         coinGeckoId = "oec-token"
         coinLogo = "tokenOkt"
         evmRpcURL = "https://exchainrpc.okex.org"
-        
-        initFetcher()
     }
     
     override func getLcdfetcher() -> FetcherLcd? {
+        if (oktFetcher == nil) {
+            oktFetcher = OktFetcher.init(self)
+        }
         return oktFetcher
-    }
-    
-    override func initFetcher() {
-        oktFetcher = OktFetcher.init(self)
-        evmFetcher = FetcherEvmrpc.init(self)
     }
     
     override func fetchData(_ id: Int64) {
         fetchState = .Busy
         Task {
-            let lcdResult = await oktFetcher?.fetchLcdData(id)
-            let evmResult = await evmFetcher?.fetchEvmData(id)
+            let lcdResult = await getLcdfetcher()?.fetchLcdData(id)
+            let evmResult = await getEvmfetcher()?.fetchEvmData(id)
             
             if (lcdResult == false || evmResult == false) {
                 fetchState = .Fail
@@ -64,8 +60,8 @@ class ChainOktEVM: BaseChain {
 //                print("fetching good ", tag)
             }
             
-            if let oktFetcher = oktFetcher,
-                let evmFetcher = evmFetcher, fetchState == .Success {
+            if let oktFetcher = getLcdfetcher(),
+                let evmFetcher = getEvmfetcher(), fetchState == .Success {
                 allCoinValue = oktFetcher.allCoinValue()
                 allCoinUSDValue = oktFetcher.allCoinValue(true)
                 allTokenValue = evmFetcher.allTokenValue()

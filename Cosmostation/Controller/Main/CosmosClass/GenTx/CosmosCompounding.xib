@@ -23,6 +23,7 @@
                 <outlet property="feeAmountLabel" destination="Cxs-wW-Feo" id="MIw-C3-hZu"/>
                 <outlet property="feeCurrencyLabel" destination="Dvf-2n-TJC" id="W4m-LG-Dvl"/>
                 <outlet property="feeDenomLabel" destination="Nwm-fG-LPe" id="oEp-Bg-k41"/>
+                <outlet property="feeMsgLabel" destination="kju-Op-uEX" id="ZLQ-BZ-rLf"/>
                 <outlet property="feeSegments" destination="c6H-az-Zq9" id="Ejd-GD-iKj"/>
                 <outlet property="feeSelectImg" destination="Qsh-dv-veK" id="mdd-ev-JE5"/>
                 <outlet property="feeSelectLabel" destination="PoT-il-3wo" id="LNm-tC-Qmv"/>
@@ -170,6 +171,14 @@
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kju-Op-uEX">
+                            <rect key="frame" x="232.33333333333337" y="10.999999999999998" width="132.66666666666663" height="20.333333333333329"/>
+                            <string key="text">Fees and tips are paid to the chain, 
+not the wallet.</string>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
+                            <color key="textColor" name="_color03"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q7W-mv-Jdo">
                             <rect key="frame" x="12" y="40" width="353" height="0.6666666666666643"/>
                             <color key="backgroundColor" name="_color05"/>
@@ -271,6 +280,7 @@
                     <constraints>
                         <constraint firstItem="q7W-mv-Jdo" firstAttribute="leading" secondItem="sCB-ly-HBC" secondAttribute="leading" constant="12" id="1IB-fF-FVl"/>
                         <constraint firstItem="GIk-fS-pF4" firstAttribute="leading" secondItem="Dvf-2n-TJC" secondAttribute="trailing" constant="2" id="4A2-Np-0Gg"/>
+                        <constraint firstItem="kju-Op-uEX" firstAttribute="centerY" secondItem="wd0-hx-wTh" secondAttribute="centerY" id="4t6-H5-ZRv"/>
                         <constraint firstAttribute="trailing" secondItem="q7W-mv-Jdo" secondAttribute="trailing" constant="12" id="5bs-4U-NKg"/>
                         <constraint firstItem="GIk-fS-pF4" firstAttribute="top" secondItem="Nwm-fG-LPe" secondAttribute="bottom" constant="2" id="82L-Oa-VUn"/>
                         <constraint firstItem="Nwm-fG-LPe" firstAttribute="leading" secondItem="Cxs-wW-Feo" secondAttribute="trailing" constant="2" id="C4E-WO-7tY"/>
@@ -288,6 +298,7 @@
                         <constraint firstItem="y7G-jT-Fqd" firstAttribute="top" secondItem="q7W-mv-Jdo" secondAttribute="bottom" constant="12" id="hze-ix-MOz"/>
                         <constraint firstAttribute="trailing" secondItem="Nwm-fG-LPe" secondAttribute="trailing" constant="12" id="n9y-7l-Ypv"/>
                         <constraint firstItem="y7G-jT-Fqd" firstAttribute="leading" secondItem="sCB-ly-HBC" secondAttribute="leading" constant="12" id="rUf-z0-CEz"/>
+                        <constraint firstAttribute="trailing" secondItem="kju-Op-uEX" secondAttribute="trailing" constant="12" id="rnN-5Q-5gd"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tH0-2E-Slt" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">

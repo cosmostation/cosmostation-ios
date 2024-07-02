@@ -14,51 +14,130 @@ class PushUtils {
     static let shared = PushUtils()
     
     func updateTokenIfNeed(token: String) {
-        if token != UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) {
-            UserDefaults.standard.set(token, forKey: KEY_FCM_TOKEN)
-            UserDefaults.standard.synchronize()
-            guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
-            AF.request("\(WALLET_API_PUSH_STATUS_URL)/\(token)", method: .get).response { response in
-                if (response.error != nil || response.response?.statusCode != 200) {
-                    self.updateStatus(enable: false)
+    }
+    
+    func getStatus() async throws -> JSON {
+        guard let fcmToken = BaseData.instance.getFCMToken() else { return JSON() }
+        let url = BaseNetWork.getPushStatus(fcmToken)
+        return try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
+    }
+    
+    func updateStatus(enable: Bool, _ completion: @escaping (Bool, String) -> ()) {
+        guard let token = BaseData.instance.getFCMToken() else {
+            BaseData.instance.setPushNoti(false)
+            completion(false, "Not FCM Token.")
+            return
+        }
+        
+        Task {
+            let paramsss = await getPushInfo(enable, token).dictionaryRepresentation
+            let url = BaseNetWork.setPushStatus()
+//            print("param ", paramsss)
+            let param = try! JSONSerialization.jsonObject(with: paramsss.rawData(), options: .allowFragments) as? [String: Any]
+            AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in
+//                print("response ", response)
+                if let error = response.error {
+                    BaseData.instance.setPushNoti(false)
+                    completion(false, "\(error)")
+                    return
                 } else {
-                    self.sync()
+                    BaseData.instance.setPushNoti(enable)
+                    BaseData.instance.setLastPushTime()
+                    completion(true, "Push Notification Updated.")
+                    return
                 }
             }
         }
     }
     
-    func getStatus() async throws -> JSON {
-        guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return JSON() }
-        return try await AF.request("\(WALLET_API_PUSH_STATUS_URL)/\(token)", method: .get).serializingDecodable(JSON.self).value
-    }
     
-    func updateStatus(enable: Bool) {
+    func getPushInfo(_ enable: Bool, _ fcmToken: String) async -> PushInfo {
+        var pushInfo = PushInfo()
+        var pushWallet = [PushWallet]()
         if (enable) {
-            sync()
-        }
-        guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
-        let parameters: Parameters = ["fcm_token": token, "subscribe": enable]
-        AF.request(WALLET_API_PUSH_STATUS_URL, method: .put, parameters: parameters, encoding: JSONEncoding.default).response { response in
-            if let error = response.error {
-                print("push status update error : ", error)
+            await BaseData.instance.selectAccounts().concurrentForEach { account in
+                let wallet = await self.getPushWallet(account)
+                pushWallet.append(wallet)
             }
         }
+        pushInfo.pushToken = fcmToken
+        pushInfo.enable = enable
+        pushInfo.wallets = pushWallet
+        return pushInfo
     }
     
-    func sync() {
-//        guard let account = BaseData.instance.baseAccount else { return }
-//        guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
-//        if (account.getDisplayCosmosChains().count > 0) {
-//            let addresses = account.getDisplayCosmosChains().map { chain in
-//                ["address": chain.bechAddress, "chain": chain.apiName]
-//            }
-//            let parameters: Parameters = ["fcm_token": token, "accounts": addresses]
-//            AF.request(WALLET_API_SYNC_PUSH_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
-//                if let error = response.error {
-//                    print("push address sync error : ", error)
-//                }
-//            }
-//        }
+    func getPushWallet(_ account: BaseAccount) async -> PushWallet {
+        var pushWallet = PushWallet()
+        var pushAccounts = [PushAccount]()
+        
+        await account.initAllKeys().filter { $0.isTestnet == false }.forEach { chain in
+            if let chainname = chain.apiName {
+                if (chain.isCosmos()) {
+                    let pushAccount = PushAccount(chainname, chain.bechAddress!)
+                    pushAccounts.append(pushAccount)
+                } else if (chain.supportEvm) {
+                    let pushAccount = PushAccount(chainname, chain.evmAddress!)
+                    pushAccounts.append(pushAccount)
+                }
+            }
+        }
+        pushWallet.walletName = account.name
+        pushWallet.walletKey = String(account.id) + account.uuid + String(account.id)
+        pushWallet.accounts = pushAccounts
+        return pushWallet
+    }
+}
+
+
+public struct PushInfo {
+    var pushToken: String = String()
+    var enable: Bool = Bool()
+    var wallets: [PushWallet] = [PushWallet]()
+    
+    var dictionaryRepresentation: JSON {
+        var result = JSON()
+        result["pushToken"].stringValue = pushToken
+        result["enable"].boolValue = enable
+        var rawWallets = [JSON]()
+        wallets.forEach { wallet in
+            rawWallets.append(wallet.dictionaryRepresentation)
+        }
+        result["wallets"].arrayObject = rawWallets
+        return result
+    }
+}
+
+public struct PushWallet {
+    var walletName: String = String()
+    var walletKey: String = String()
+    var accounts: [PushAccount] = [PushAccount]()
+    
+    var dictionaryRepresentation: JSON {
+        var result = JSON()
+        result["walletName"].stringValue = walletName
+        result["walletKey"].stringValue = walletKey
+        var rawAccounts = [JSON]()
+        accounts.forEach { account in
+            rawAccounts.append(account.dictionaryRepresentation)
+        }
+        result["accounts"].arrayObject = rawAccounts
+        return result
+    }
+}
+
+public struct PushAccount {
+    var chain: String = String()
+    var address: String = String()
+    
+    init(_ chain: String, _ address: String) {
+        self.chain = chain
+        self.address = address
+    }
+    
+    var dictionaryRepresentation: JSON {
+        return [
+            "chain" : chain,
+            "address" : address
+        ]
     }
 }

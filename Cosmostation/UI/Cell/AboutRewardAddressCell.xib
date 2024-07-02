@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,33 +12,97 @@
         <array key="SpoqaHanSansNeo-Bold.otf">
             <string>SpoqaHanSansNeo-Bold</string>
         </array>
+        <array key="SpoqaHanSansNeo-Medium.otf">
+            <string>SpoqaHanSansNeo-Medium</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="57" id="KGk-i7-Jjw" customClass="AboutRewardAddressCell" customModule="Cosmostation" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="387" height="57"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="144" id="KGk-i7-Jjw" customClass="AboutRewardAddressCell" customModule="Cosmostation" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="504" height="144"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="387" height="57"/>
+                <rect key="frame" x="0.0" y="0.0" width="504" height="144"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vK5-yM-ZKq" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
-                        <rect key="frame" x="8" y="4" width="371" height="49"/>
+                        <rect key="frame" x="8" y="4" width="488" height="136"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RewardAddress" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEK-wC-dK6">
-                                <rect key="frame" x="14" y="14" width="343" height="21"/>
-                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                                <color key="textColor" name="_color01"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="not-Wh-TG8">
+                                <rect key="frame" x="12" y="12" width="464" height="44"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHp-oS-zzH">
+                                        <rect key="frame" x="0.0" y="0.0" width="464" height="16"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconWarnRed" translatesAutoresizingMaskIntoConstraints="NO" id="c7R-uf-JQU">
+                                                <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" name="_primary"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="16" id="H5y-S3-Tjf"/>
+                                                    <constraint firstAttribute="width" constant="16" id="h9S-1q-xmU"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You changed a reward address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEn-xt-Qlz">
+                                                <rect key="frame" x="18" y="1" width="166.33333333333334" height="14"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_colorRed"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="c7R-uf-JQU" firstAttribute="top" secondItem="oHp-oS-zzH" secondAttribute="top" id="Hdd-ex-nue"/>
+                                            <constraint firstItem="c7R-uf-JQU" firstAttribute="leading" secondItem="oHp-oS-zzH" secondAttribute="leading" id="NSR-yH-hJj"/>
+                                            <constraint firstItem="yEn-xt-Qlz" firstAttribute="centerY" secondItem="c7R-uf-JQU" secondAttribute="centerY" id="WCa-yJ-bvj"/>
+                                            <constraint firstAttribute="height" constant="16" id="eOs-JM-MFG"/>
+                                            <constraint firstItem="yEn-xt-Qlz" firstAttribute="leading" secondItem="c7R-uf-JQU" secondAttribute="trailing" constant="2" id="vAy-dK-7ZT"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RewardAddress" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEK-wC-dK6">
+                                        <rect key="frame" x="0.0" y="20" width="464" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="vv7-Tw-i1p"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="13"/>
+                                        <color key="textColor" name="_color01"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="bEK-wC-dK6" secondAttribute="trailing" id="Gbz-wz-CB0"/>
+                                    <constraint firstItem="bEK-wC-dK6" firstAttribute="leading" secondItem="not-Wh-TG8" secondAttribute="leading" id="QVo-Sk-xOV"/>
+                                    <constraint firstItem="oHp-oS-zzH" firstAttribute="leading" secondItem="not-Wh-TG8" secondAttribute="leading" id="iSJ-j0-6iE"/>
+                                    <constraint firstAttribute="trailing" secondItem="oHp-oS-zzH" secondAttribute="trailing" id="o03-CP-9o8"/>
+                                </constraints>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPP-Oi-wh6">
+                                <rect key="frame" x="12" y="72" width="464" height="0.6666666666666714"/>
+                                <color key="backgroundColor" name="_color05"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="ih3-jh-9vq"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This address is where you receive reward assets.  Would you like to change the reward address?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRZ-Sv-e76">
+                                <rect key="frame" x="12" y="88.666666666666671" width="464" height="31.333333333333329"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="bEK-wC-dK6" firstAttribute="leading" secondItem="vK5-yM-ZKq" secondAttribute="leading" constant="14" id="20o-wY-GGe"/>
-                            <constraint firstItem="bEK-wC-dK6" firstAttribute="top" secondItem="vK5-yM-ZKq" secondAttribute="top" constant="14" id="8Cq-KS-XZK"/>
-                            <constraint firstAttribute="bottom" secondItem="bEK-wC-dK6" secondAttribute="bottom" constant="14" id="GcL-gl-IgK"/>
-                            <constraint firstAttribute="trailing" secondItem="bEK-wC-dK6" secondAttribute="trailing" constant="14" id="Ko2-sp-EWt"/>
+                            <constraint firstItem="pRZ-Sv-e76" firstAttribute="top" secondItem="HPP-Oi-wh6" secondAttribute="bottom" constant="16" id="9Q9-L9-x24"/>
+                            <constraint firstAttribute="trailing" secondItem="not-Wh-TG8" secondAttribute="trailing" constant="12" id="G2g-jd-XOU"/>
+                            <constraint firstItem="not-Wh-TG8" firstAttribute="top" secondItem="vK5-yM-ZKq" secondAttribute="top" constant="12" id="IA9-Qq-hm1"/>
+                            <constraint firstAttribute="trailing" secondItem="pRZ-Sv-e76" secondAttribute="trailing" constant="12" id="ScM-L2-GlW"/>
+                            <constraint firstItem="HPP-Oi-wh6" firstAttribute="leading" secondItem="vK5-yM-ZKq" secondAttribute="leading" constant="12" id="aUc-Cq-RWN"/>
+                            <constraint firstAttribute="trailing" secondItem="HPP-Oi-wh6" secondAttribute="trailing" constant="12" id="dBT-wd-GRM"/>
+                            <constraint firstItem="not-Wh-TG8" firstAttribute="leading" secondItem="vK5-yM-ZKq" secondAttribute="leading" constant="12" id="dy5-iY-4aT"/>
+                            <constraint firstItem="pRZ-Sv-e76" firstAttribute="leading" secondItem="vK5-yM-ZKq" secondAttribute="leading" constant="12" id="qC9-pg-Vc5"/>
+                            <constraint firstAttribute="bottom" secondItem="pRZ-Sv-e76" secondAttribute="bottom" constant="16" id="qsL-dS-yR2"/>
+                            <constraint firstItem="HPP-Oi-wh6" firstAttribute="top" secondItem="not-Wh-TG8" secondAttribute="bottom" constant="16" id="zmI-4T-blW"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -54,15 +118,29 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" name="_primary"/>
             <connections>
+                <outlet property="descriptionLabel" destination="pRZ-Sv-e76" id="SDH-Dm-cPQ"/>
                 <outlet property="rewardAddressLabel" destination="bEK-wC-dK6" id="JIr-FJ-j7h"/>
                 <outlet property="rootView" destination="vK5-yM-ZKq" id="IWJ-a2-yhu"/>
+                <outlet property="warnIconImageView" destination="c7R-uf-JQU" id="lwi-So-lL6"/>
+                <outlet property="warnMsgLabel" destination="yEn-xt-Qlz" id="AKP-pD-zZv"/>
+                <outlet property="warnView" destination="oHp-oS-zzH" id="QsN-hk-miW"/>
             </connections>
-            <point key="canvasLocation" x="180.91603053435114" y="-6.6901408450704229"/>
+            <point key="canvasLocation" x="270.2290076335878" y="23.943661971830988"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="iconWarnRed" width="24" height="24"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color05">
+            <color red="0.31400001049041748" green="0.32199999690055847" blue="0.40400001406669617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorRed">
+            <color red="1" green="0.30199998617172241" blue="0.21199999749660492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
             <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

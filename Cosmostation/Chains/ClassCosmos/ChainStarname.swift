@@ -25,8 +25,6 @@ class ChainStarname: BaseChain {
         bechAccountPrefix = "star"
         validatorPrefix = "starvaloper"
         grpcHost = "grpc-starname.cosmostation.io"
-        
-        initFetcher()
     }
     
 }

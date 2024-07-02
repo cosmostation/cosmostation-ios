@@ -36,6 +36,10 @@ class FetcherLcd {
         return NSDecimalNumber.zero
     }
     
+    func lcdAllStakingDenomAmount() -> NSDecimalNumber {
+        return NSDecimalNumber.zero
+    }
+    
     func fetchValidators() async -> Bool {
         return false
     }

@@ -25,7 +25,5 @@ class ChainNyx: BaseChain  {
         bechAccountPrefix = "n"
         validatorPrefix = "nvaloper"
         grpcHost = "grpc-nyx.cosmostation.io"
-        
-        initFetcher()
     }
 }

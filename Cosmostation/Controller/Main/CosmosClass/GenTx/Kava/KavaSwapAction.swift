@@ -53,7 +53,7 @@ class KavaSwapAction: BaseVC {
     var selectedChain: BaseChain!
     var grpcFetcher: FetcherGrpc!
     var feeInfos = [FeeInfo]()
-    var selectedFeeInfo = 0
+    var selectedFeePosition = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
     var txMemo = ""
     
@@ -90,8 +90,8 @@ class KavaSwapAction: BaseVC {
         for i in 0..<feeInfos.count {
             feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
         }
-        selectedFeeInfo = selectedChain.getFeeBasePosition()
-        feeSegments.selectedSegmentIndex = selectedFeeInfo
+        selectedFeePosition = selectedChain.getFeeBasePosition()
+        feeSegments.selectedSegmentIndex = selectedFeePosition
         txFee = selectedChain.getInitPayableFee()
         
         if (swpActionType == .Deposit) {
@@ -261,8 +261,8 @@ class KavaSwapAction: BaseVC {
     }
 
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
-        selectedFeeInfo = sender.selectedSegmentIndex
-        txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, txFee.amount[0].denom)
+        selectedFeePosition = sender.selectedSegmentIndex
+        txFee = selectedChain.getUserSelectedFee(selectedFeePosition, txFee.amount[0].denom)
         onUpdateFeeView()
         onSimul()
     }
@@ -270,7 +270,7 @@ class KavaSwapAction: BaseVC {
     @objc func onSelectFeeCoin() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = selectedChain
-        baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
+        baseSheet.feeDatas = feeInfos[selectedFeePosition].FeeDatas
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeDenom
         onStartSheet(baseSheet, 240, 0.6)
@@ -290,7 +290,7 @@ class KavaSwapAction: BaseVC {
     func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
         if let toGas = simul?.gasInfo.gasUsed {
             txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
-            if let gasRate = feeInfos[selectedFeeInfo].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
+            if let gasRate = feeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                 let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
                 txFee.amount[0].amount = feeCoinAmount!.stringValue
@@ -323,11 +323,12 @@ class KavaSwapAction: BaseVC {
             do {
                 var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
                 let account = try await grpcFetcher.fetchAuth()
+                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                 if (swpActionType == .Deposit) {
-                    simulReq = Signer.geKavaSwpDepositSimul(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                    simulReq = Signer.geKavaSwpDepositSimul(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
                     
                 } else if (swpActionType == .Withdraw) {
-                    simulReq = Signer.geKavaSwpWithdrawSimul(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                    simulReq = Signer.geKavaSwpWithdrawSimul(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
                 }
                 let simulRes = try await grpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
@@ -388,8 +389,8 @@ extension KavaSwapAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectFeeDenom) {
             if let index = result["index"] as? Int,
-               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
-                txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
+               let selectedDenom = feeInfos[selectedFeePosition].FeeDatas[index].denom {
+                txFee = selectedChain.getUserSelectedFee(selectedFeePosition, selectedDenom)
                 onUpdateFeeView()
                 onSimul()
             }
@@ -417,11 +418,12 @@ extension KavaSwapAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                 do {
                     var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
                     let account = try await grpcFetcher.fetchAuth()
+                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                     if (swpActionType == .Deposit) {
-                        broadReq = Signer.genKavaSwpDepositTx(account!, onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                        broadReq = Signer.genKavaSwpDepositTx(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
                         
                     } else if (swpActionType == .Withdraw) {
-                        broadReq = Signer.genKavaSwpwithdrawTx(account!, onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                        broadReq = Signer.genKavaSwpwithdrawTx(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
                         
                     }
                     let response = try await grpcFetcher.broadcastTx(broadReq)

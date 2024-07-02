@@ -18,6 +18,7 @@ let KEY_CURRENCY                        = "KEY_CURRENCY"
 let KEY_PRICE_CHANGE_COLOR              = "KEY_PRICE_CHANGE_COLOR"
 let KEY_THEME                           = "KEY_THEME"
 let KEY_HIDE_LEGACY                     = "KEY_HIDE_LEGACY"
+let KEY_SHOW_TESTNET                    = "KEY_SHOW_TESTNET"
 let KEY_USING_APP_LOCK                  = "KEY_USING_APP_LOCK"
 let KEY_USING_BIO_AUTH                  = "KEY_USING_BIO_AUTH"
 let KEY_AUTO_PASS                       = "KEY_AUTO_PASS"
@@ -26,6 +27,8 @@ let KEY_LAST_PASS_TIME                  = "KEY_LAST_PASS_TIME"
 let KEY_LAST_PRICE_TIME                 = "KEY_LAST_PRICE_TIME"
 let KEY_ENGINER_MODE                    = "KEY_ENGINER_MODE"
 let KEY_FCM_TOKEN                       = "KEY_FCM_TOKEN_NEW"
+let KEY_FCM_SYNC_TIME                   = "KEY_FCM_SYNC_TIME"
+let KEY_PUSH_NOTI                       = "KEY_PUSH_NOTI"
 let KEY_DB_VERSION                      = "KEY_DB_VERSION"
 let KEY_LANGUAGE                        = "KEY_LANGUAGE"
 let KEY_LAST_ACCOUNT                    = "KEY_LAST_ACCOUNT"
@@ -55,8 +58,8 @@ let BINANCE_BUY_URL                     = "https://www.binance.com/en/crypto/buy
 let CSS_VERSION                         = CSS_URL + "v1/app/version/ios";
 let CSS_PUSH_UPDATE                     = CSS_URL + "v1/account/update";
 let CSS_MOON_PAY                        = CSS_URL + "v1/sign/moonpay";
-let WALLET_API_SYNC_PUSH_URL            = CSS_URL + "v1/push/token/address";
-let WALLET_API_PUSH_STATUS_URL          = CSS_URL + "v1/push/alarm/status";
+//let WALLET_API_SYNC_PUSH_URL            = CSS_URL + "v1/push/token/address";
+//let WALLET_API_PUSH_STATUS_URL          = CSS_URL + "v1/push/alarm/status";
 
 
 let DB_VERSION                          = 3
@@ -157,7 +160,8 @@ let SWAP_MEMO_CREATE                        = "Create Atomic Swap via Cosmostati
 let SWAP_MEMO_CLAIM                         = "Claim Atomic Swap via Cosmostation iOS Wallet"
 
 
-let handler18 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 18, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+let handler18Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 18, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+
 let handler18Up = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.up, scale: 18, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
 
 let handler12 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 12, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)

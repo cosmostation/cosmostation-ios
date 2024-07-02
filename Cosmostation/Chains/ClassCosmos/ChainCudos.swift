@@ -25,8 +25,6 @@ class ChainCudos: BaseChain {
         bechAccountPrefix = "cudos"
         validatorPrefix = "cudosvaloper"
         grpcHost = "grpc-cudos.cosmostation.io"
-        
-        initFetcher()
     }
 }
 

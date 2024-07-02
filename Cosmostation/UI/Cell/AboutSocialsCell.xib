@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,10 +27,10 @@
                         <rect key="frame" x="14" y="42" width="419" height="69"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sac-S3-w5D">
-                                <rect key="frame" x="0.0" y="0.0" width="104.66666666666667" height="69"/>
+                                <rect key="frame" x="0.0" y="0.0" width="83.666666666666671" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWP-2b-oLG">
-                                        <rect key="frame" x="32.333333333333336" y="0.0" width="40.000000000000007" height="40"/>
+                                        <rect key="frame" x="22" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="IaX-tF-qNc"/>
                                             <constraint firstAttribute="height" constant="40" id="WZf-uK-Evc"/>
@@ -42,7 +42,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Web Site" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrG-go-uos">
-                                        <rect key="frame" x="27.666666666666668" y="44" width="49.666666666666657" height="23"/>
+                                        <rect key="frame" x="16.999999999999996" y="44" width="49.666666666666657" height="23"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color03"/>
                                         <nil key="highlightedColor"/>
@@ -58,11 +58,43 @@
                                     <constraint firstItem="CrG-go-uos" firstAttribute="centerX" secondItem="Sac-S3-w5D" secondAttribute="centerX" id="vmg-F9-lOT"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ru-hN-Qg4">
+                                <rect key="frame" x="83.666666666666671" y="0.0" width="84.000000000000014" height="69"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5H-xi-MZk">
+                                        <rect key="frame" x="22" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="k1j-IY-XNi"/>
+                                            <constraint firstAttribute="width" constant="40" id="vEy-Ok-XdN"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="imgSocialGithub"/>
+                                        <connections>
+                                            <action selector="onClickGithub:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yW3-mf-ysL"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Github" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Uv-pC-4Qh">
+                                        <rect key="frame" x="22.666666666666657" y="44" width="39" height="23"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                        <color key="textColor" name="_color03"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="z5H-xi-MZk" firstAttribute="top" secondItem="4Ru-hN-Qg4" secondAttribute="top" id="PlT-Wt-XBK"/>
+                                    <constraint firstItem="6Uv-pC-4Qh" firstAttribute="top" secondItem="z5H-xi-MZk" secondAttribute="bottom" constant="4" id="VyE-Q9-c8h"/>
+                                    <constraint firstItem="6Uv-pC-4Qh" firstAttribute="centerX" secondItem="4Ru-hN-Qg4" secondAttribute="centerX" id="kVZ-vY-Gzc"/>
+                                    <constraint firstAttribute="bottom" secondItem="6Uv-pC-4Qh" secondAttribute="bottom" constant="2" id="ndZ-eX-i8W"/>
+                                    <constraint firstAttribute="height" constant="69" id="pIg-vq-2Kc"/>
+                                    <constraint firstItem="z5H-xi-MZk" firstAttribute="centerX" secondItem="4Ru-hN-Qg4" secondAttribute="centerX" id="xdE-rQ-cNz"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKt-Si-Byf">
-                                <rect key="frame" x="104.66666666666669" y="0.0" width="105" height="69"/>
+                                <rect key="frame" x="167.66666666666666" y="0.0" width="83.666666666666657" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OSd-uu-0tc">
-                                        <rect key="frame" x="32.333333333333329" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="22" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Hus-Id-xbH"/>
                                             <constraint firstAttribute="width" constant="40" id="Z10-ag-Ega"/>
@@ -74,7 +106,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Twitter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uiB-EU-vpk">
-                                        <rect key="frame" x="31.999999999999982" y="44" width="40.666666666666657" height="23"/>
+                                        <rect key="frame" x="21.666666666666679" y="44" width="40.666666666666664" height="23"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color03"/>
                                         <nil key="highlightedColor"/>
@@ -91,10 +123,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVA-Uy-YvL">
-                                <rect key="frame" x="209.66666666666666" y="0.0" width="104.66666666666666" height="69"/>
+                                <rect key="frame" x="251.33333333333331" y="0.0" width="84" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibd-FJ-FaR">
-                                        <rect key="frame" x="32.333333333333343" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="22" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="BZ8-fM-X8l"/>
                                             <constraint firstAttribute="height" constant="40" id="Rom-Nv-84U"/>
@@ -106,7 +138,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CoinGecko" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pde-Yj-v2q">
-                                        <rect key="frame" x="21.666666666666689" y="44" width="61.333333333333343" height="23"/>
+                                        <rect key="frame" x="11.333333333333375" y="44" width="61.333333333333343" height="23"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color03"/>
                                         <nil key="highlightedColor"/>
@@ -123,10 +155,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Kr-F4-F4q">
-                                <rect key="frame" x="314.33333333333331" y="0.0" width="104.66666666666669" height="69"/>
+                                <rect key="frame" x="335.33333333333331" y="0.0" width="83.666666666666686" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MY7-Fc-krl">
-                                        <rect key="frame" x="32.333333333333371" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="21.666666666666686" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="8Xn-ZH-eZZ"/>
                                             <constraint firstAttribute="height" constant="40" id="ckO-hj-4nE"/>
@@ -138,7 +170,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blog" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ge5-8A-GqD">
-                                        <rect key="frame" x="39.333333333333371" y="44" width="25.666666666666671" height="23"/>
+                                        <rect key="frame" x="29" y="44" width="25.666666666666671" height="23"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color03"/>
                                         <nil key="highlightedColor"/>
@@ -159,43 +191,11 @@
                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5v7-Wd-WOf">
                         <rect key="frame" x="36" y="135" width="375" height="69"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ru-hN-Qg4">
-                                <rect key="frame" x="0.0" y="0.0" width="75" height="69"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5H-xi-MZk">
-                                        <rect key="frame" x="17.666666666666664" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="k1j-IY-XNi"/>
-                                            <constraint firstAttribute="width" constant="40" id="vEy-Ok-XdN"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="imgSocialGithub"/>
-                                        <connections>
-                                            <action selector="onClickGithub:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yW3-mf-ysL"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Github" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Uv-pC-4Qh">
-                                        <rect key="frame" x="18" y="44" width="39" height="23"/>
-                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
-                                        <color key="textColor" name="_color03"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="z5H-xi-MZk" firstAttribute="top" secondItem="4Ru-hN-Qg4" secondAttribute="top" id="PlT-Wt-XBK"/>
-                                    <constraint firstItem="6Uv-pC-4Qh" firstAttribute="top" secondItem="z5H-xi-MZk" secondAttribute="bottom" constant="4" id="VyE-Q9-c8h"/>
-                                    <constraint firstItem="6Uv-pC-4Qh" firstAttribute="centerX" secondItem="4Ru-hN-Qg4" secondAttribute="centerX" id="kVZ-vY-Gzc"/>
-                                    <constraint firstAttribute="bottom" secondItem="6Uv-pC-4Qh" secondAttribute="bottom" constant="2" id="ndZ-eX-i8W"/>
-                                    <constraint firstAttribute="height" constant="69" id="pIg-vq-2Kc"/>
-                                    <constraint firstItem="z5H-xi-MZk" firstAttribute="centerX" secondItem="4Ru-hN-Qg4" secondAttribute="centerX" id="xdE-rQ-cNz"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oPq-vo-0a0">
-                                <rect key="frame" x="75" y="0.0" width="75" height="69"/>
+                                <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPt-Iv-o2h">
-                                        <rect key="frame" x="17.666666666666657" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="27" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="TAH-az-0zX"/>
                                             <constraint firstAttribute="height" constant="40" id="W9d-zS-TWz"/>
@@ -207,7 +207,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Docs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jd6-uK-ehA">
-                                        <rect key="frame" x="23.666666666666657" y="44" width="28" height="23"/>
+                                        <rect key="frame" x="33" y="44" width="28" height="23"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color03"/>
                                         <nil key="highlightedColor"/>
@@ -224,10 +224,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNy-dW-7ID">
-                                <rect key="frame" x="150" y="0.0" width="75" height="69"/>
+                                <rect key="frame" x="93.666666666666657" y="0.0" width="94" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OtG-XG-CXC">
-                                        <rect key="frame" x="17.666666666666657" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="27" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="PqY-zt-Vzi"/>
                                             <constraint firstAttribute="width" constant="40" id="TLu-pO-5nN"/>
@@ -239,7 +239,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6J-EE-f1T">
-                                        <rect key="frame" x="18.666666666666654" y="44" width="37.666666666666657" height="23"/>
+                                        <rect key="frame" x="27.999999999999996" y="44" width="37.666666666666657" height="23"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color03"/>
                                         <nil key="highlightedColor"/>
@@ -256,10 +256,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aj0-B7-js0">
-                                <rect key="frame" x="225" y="0.0" width="75" height="69"/>
+                                <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iX-FN-beD">
-                                        <rect key="frame" x="17.666666666666686" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="26.666666666666686" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="8VC-xu-vHV"/>
                                             <constraint firstAttribute="height" constant="40" id="wIw-Ns-0Hs"/>
@@ -271,7 +271,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Governance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoX-8f-7T0">
-                                        <rect key="frame" x="3.3333333333333144" y="44" width="68.666666666666671" height="23"/>
+                                        <rect key="frame" x="12.333333333333343" y="44" width="68.666666666666671" height="23"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color03"/>
                                         <nil key="highlightedColor"/>
@@ -288,10 +288,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdm-uW-jEN">
-                                <rect key="frame" x="300" y="0.0" width="75" height="69"/>
+                                <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0i-6f-lq0">
-                                        <rect key="frame" x="17.666666666666686" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="26.666666666666686" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="NpM-d2-oYA"/>
                                             <constraint firstAttribute="width" constant="40" id="ocp-vf-QZ3"/>
@@ -303,7 +303,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipe-Hn-Lrv">
-                                        <rect key="frame" x="14.333333333333318" y="44" width="46.333333333333343" height="23"/>
+                                        <rect key="frame" x="23.666666666666689" y="44" width="46.333333333333343" height="23"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                         <color key="textColor" name="_color03"/>
                                         <nil key="highlightedColor"/>

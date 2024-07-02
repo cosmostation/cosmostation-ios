@@ -25,7 +25,5 @@ class ChainStride: BaseChain {
         bechAccountPrefix = "stride"
         validatorPrefix = "stridevaloper"
         grpcHost = "grpc-stride.cosmostation.io"
-        
-        initFetcher()
     }
 }

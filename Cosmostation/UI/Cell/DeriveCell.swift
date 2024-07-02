@@ -111,7 +111,7 @@ class DeriveCell: UITableViewCell {
                 coinCntLabel.text = String(coinCnt) + " Coins"
                 
             } else if (chain.supportEvm) {
-                let dpAmount = chain.getEvmfetcher()?.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18) ?? NSDecimalNumber.zero
+                let dpAmount = chain.getEvmfetcher()?.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18Down) ?? NSDecimalNumber.zero
                 denomLabel.text = chain.coinSymbol
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
                 

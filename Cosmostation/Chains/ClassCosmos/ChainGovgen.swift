@@ -25,7 +25,5 @@ class ChainGovgen: BaseChain  {
         bechAccountPrefix = "govgen"
         validatorPrefix = "govgenvaloper"
         grpcHost = "grpc-govgen.cosmostation.io"
-        
-        initFetcher()
     }
 }

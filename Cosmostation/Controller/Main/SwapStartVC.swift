@@ -579,7 +579,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                 do {
                     let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher()
                     let account = try await inputGrpcfetcher!.fetchAuth()
-                    let simulReq = Signer.genIbcSendSimul(account!, onBindIbcSend(inner_mag!), txFee, "", inputCosmosChain)
+                    let height = try await inputGrpcfetcher!.fetchLastBlock()!.block.header.height
+                    let simulReq = Signer.genIbcSendSimul(account!, UInt64(height), onBindIbcSend(inner_mag!), txFee, "", inputCosmosChain)
                     let simulRes = try await inputGrpcfetcher!.simulateTx(simulReq)
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes, msg)
@@ -605,7 +606,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                 do {
                     let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher()
                     let account = try await inputGrpcfetcher!.fetchAuth()
-                    let simulReq = Signer.genWasmSimul(account!, onBindWasm(inner_mag!), txFee, "", inputCosmosChain)
+                    let height = try await inputGrpcfetcher!.fetchLastBlock()!.block.header.height
+                    let simulReq = Signer.genWasmSimul(account!, UInt64(height), onBindWasm(inner_mag!), txFee, "", inputCosmosChain)
                     let simulRes = try await inputGrpcfetcher!.simulateTx(simulReq)
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes, msg)
@@ -752,7 +754,8 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     do {
                         let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher()
                         let account = try await inputGrpcfetcher!.fetchAuth()
-                        let broadReq = Signer.genIbcSendTx(account!, onBindIbcSend(inner_mag!), txFee, "", inputCosmosChain)
+                        let height = try await inputGrpcfetcher!.fetchLastBlock()!.block.header.height
+                        let broadReq = Signer.genIbcSendTx(account!, UInt64(height), onBindIbcSend(inner_mag!), txFee, "", inputCosmosChain)
                         let response = try await inputGrpcfetcher!.broadcastTx(broadReq)
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
@@ -775,7 +778,8 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     do {
                         let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher()
                         let account = try await inputGrpcfetcher!.fetchAuth()
-                        let broadReq = Signer.genWasmTx(account!, onBindWasm(inner_mag!), txFee, "", inputCosmosChain)
+                        let height = try await inputGrpcfetcher!.fetchLastBlock()!.block.header.height
+                        let broadReq = Signer.genWasmTx(account!, UInt64(height), onBindWasm(inner_mag!), txFee, "", inputCosmosChain)
                         let response = try await inputGrpcfetcher!.broadcastTx(broadReq)
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true

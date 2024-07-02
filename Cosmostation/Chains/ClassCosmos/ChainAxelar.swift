@@ -25,7 +25,5 @@ class ChainAxelar: BaseChain {
         bechAccountPrefix = "axelar"
         validatorPrefix = "axelarvaloper"
         grpcHost = "grpc-axelar.cosmostation.io"
-        
-        initFetcher()
     }
 }

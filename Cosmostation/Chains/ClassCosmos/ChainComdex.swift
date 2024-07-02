@@ -25,8 +25,6 @@ class ChainComdex: BaseChain  {
         bechAccountPrefix = "comdex"
         validatorPrefix = "comdexvaloper"
         grpcHost = "grpc-comdex.cosmostation.io"
-        
-        initFetcher()
     }
     
 }

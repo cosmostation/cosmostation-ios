@@ -25,8 +25,6 @@ class ChainAvalanche: BaseChain  {
         coinGeckoId = "avalanche-2"
         coinLogo = "tokenAvax"
         evmRpcURL = "https://avalanche.public-rpc.com"
-        
-        initFetcher()
     }
     
 }

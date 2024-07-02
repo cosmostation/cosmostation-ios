@@ -49,7 +49,7 @@ class KavaMintCreateAction: BaseVC {
     var selectedChain: BaseChain!
     var grpcFetcher: FetcherGrpc!
     var feeInfos = [FeeInfo]()
-    var selectedFeeInfo = 0
+    var selectedFeePosition = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
     var txMemo = ""
     
@@ -80,8 +80,8 @@ class KavaMintCreateAction: BaseVC {
         for i in 0..<feeInfos.count {
             feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
         }
-        selectedFeeInfo = selectedChain.getFeeBasePosition()
-        feeSegments.selectedSegmentIndex = selectedFeeInfo
+        selectedFeePosition = selectedChain.getFeeBasePosition()
+        feeSegments.selectedSegmentIndex = selectedFeePosition
         txFee = selectedChain.getInitPayableFee()
         
         collateralMsAsset = BaseData.instance.getAsset(selectedChain.apiName, collateralParam.denom)!
@@ -179,8 +179,8 @@ class KavaMintCreateAction: BaseVC {
     
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
-        selectedFeeInfo = sender.selectedSegmentIndex
-        txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, txFee.amount[0].denom)
+        selectedFeePosition = sender.selectedSegmentIndex
+        txFee = selectedChain.getUserSelectedFee(selectedFeePosition, txFee.amount[0].denom)
         onUpdateFeeView()
         onSimul()
     }
@@ -188,7 +188,7 @@ class KavaMintCreateAction: BaseVC {
     @objc func onSelectFeeCoin() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = selectedChain
-        baseSheet.feeDatas = feeInfos[selectedFeeInfo].FeeDatas
+        baseSheet.feeDatas = feeInfos[selectedFeePosition].FeeDatas
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectFeeDenom
         onStartSheet(baseSheet, 240, 0.6)
@@ -228,7 +228,7 @@ class KavaMintCreateAction: BaseVC {
     func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
         if let toGas = simul?.gasInfo.gasUsed {
             txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
-            if let gasRate = feeInfos[selectedFeeInfo].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
+            if let gasRate = feeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                 let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
                 txFee.amount[0].amount = feeCoinAmount!.stringValue
@@ -255,7 +255,8 @@ class KavaMintCreateAction: BaseVC {
         Task {
             do {
                 let account = try await grpcFetcher.fetchAuth()
-                let simulReq = Signer.genKavaCDPCreateSimul(account!, onBindCreateMsg(), txFee, txMemo, selectedChain)
+                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
+                let simulReq = Signer.genKavaCDPCreateSimul(account!, UInt64(height), onBindCreateMsg(), txFee, txMemo, selectedChain)
                 let simulRes = try await grpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(simulRes)
@@ -295,8 +296,8 @@ extension KavaMintCreateAction: BaseSheetDelegate, MemoDelegate, AmountSheetDele
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectFeeDenom) {
             if let index = result["index"] as? Int,
-               let selectedDenom = feeInfos[selectedFeeInfo].FeeDatas[index].denom {
-                txFee = selectedChain.getUserSelectedFee(selectedFeeInfo, selectedDenom)
+               let selectedDenom = feeInfos[selectedFeePosition].FeeDatas[index].denom {
+                txFee = selectedChain.getUserSelectedFee(selectedFeePosition, selectedDenom)
                 onUpdateFeeView()
                 onSimul()
             }
@@ -323,7 +324,8 @@ extension KavaMintCreateAction: BaseSheetDelegate, MemoDelegate, AmountSheetDele
             Task {
                 do {
                     let account = try await grpcFetcher.fetchAuth()
-                    let broadReq = Signer.genKavaCDPCreateTx(account!, onBindCreateMsg(), txFee, txMemo, selectedChain)
+                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
+                    let broadReq = Signer.genKavaCDPCreateTx(account!, UInt64(height), onBindCreateMsg(), txFee, txMemo, selectedChain)
                     let response = try await grpcFetcher.broadcastTx(broadReq)
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true

@@ -23,6 +23,7 @@
                 <outlet property="feeAmountLabel" destination="oQL-mr-Dlf" id="XfW-zQ-SU2"/>
                 <outlet property="feeCurrencyLabel" destination="IBn-Zc-US6" id="Jyy-Ch-nXh"/>
                 <outlet property="feeDenomLabel" destination="oQs-Qv-b8V" id="LhW-A1-txp"/>
+                <outlet property="feeMsgLabel" destination="xoA-wG-XUj" id="WJ3-ka-3mQ"/>
                 <outlet property="feeSegments" destination="8Kl-sG-SkQ" id="xx2-x8-qF7"/>
                 <outlet property="feeSelectImg" destination="ENX-cD-Emo" id="ncq-qj-rB1"/>
                 <outlet property="feeSelectLabel" destination="Cbs-TU-0Me" id="Xgf-MS-4UD"/>
@@ -179,6 +180,14 @@
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xoA-wG-XUj">
+                            <rect key="frame" x="253.5" y="11" width="132.5" height="20.5"/>
+                            <string key="text">Fees and tips are paid to the chain, 
+not the wallet.</string>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
+                            <color key="textColor" name="_color03"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="USv-8B-2OX">
                             <rect key="frame" x="12" y="40" width="374" height="0.5"/>
                             <color key="backgroundColor" name="_color05"/>
@@ -284,6 +293,7 @@
                         <constraint firstItem="oQs-Qv-b8V" firstAttribute="top" secondItem="USv-8B-2OX" secondAttribute="bottom" constant="14" id="Ge5-8Y-fTh"/>
                         <constraint firstAttribute="trailing" secondItem="USv-8B-2OX" secondAttribute="trailing" constant="12" id="KUA-6v-rNS"/>
                         <constraint firstItem="oQL-mr-Dlf" firstAttribute="centerY" secondItem="oQs-Qv-b8V" secondAttribute="centerY" id="NsY-sK-8MV"/>
+                        <constraint firstAttribute="trailing" secondItem="xoA-wG-XUj" secondAttribute="trailing" constant="12" id="UJm-qf-bfs"/>
                         <constraint firstItem="8Kl-sG-SkQ" firstAttribute="leading" secondItem="Yxj-Nf-2ba" secondAttribute="leading" constant="12" id="WIi-rt-6Se"/>
                         <constraint firstAttribute="height" constant="150" id="XP8-e2-AWI"/>
                         <constraint firstItem="4BH-8a-162" firstAttribute="centerY" secondItem="IBn-Zc-US6" secondAttribute="centerY" constant="-1" id="fpQ-w3-epl"/>
@@ -295,6 +305,7 @@
                         <constraint firstItem="oQs-Qv-b8V" firstAttribute="leading" secondItem="oQL-mr-Dlf" secondAttribute="trailing" constant="2" id="se6-oZ-SLh"/>
                         <constraint firstItem="8Kl-sG-SkQ" firstAttribute="top" secondItem="ZPN-ZA-b5I" secondAttribute="bottom" constant="14" id="v5s-72-oHv"/>
                         <constraint firstAttribute="trailing" secondItem="8Kl-sG-SkQ" secondAttribute="trailing" constant="12" id="w5k-QE-N1u"/>
+                        <constraint firstItem="xoA-wG-XUj" firstAttribute="centerY" secondItem="bhO-Ub-f6h" secondAttribute="centerY" id="wq9-mh-a2A"/>
                         <constraint firstItem="bhO-Ub-f6h" firstAttribute="top" secondItem="Yxj-Nf-2ba" secondAttribute="top" constant="14" id="yHf-V4-7A7"/>
                         <constraint firstAttribute="trailing" secondItem="4BH-8a-162" secondAttribute="trailing" constant="12" id="zFk-6t-niY"/>
                     </constraints>

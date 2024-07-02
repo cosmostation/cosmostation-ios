@@ -26,8 +26,6 @@ class ChainKi: BaseChain  {
         validatorPrefix = "kivaloper"
         supportCw20 = true
         grpcHost = "grpc-ki-chain.cosmostation.io"
-        
-        initFetcher()
     }
     
 }

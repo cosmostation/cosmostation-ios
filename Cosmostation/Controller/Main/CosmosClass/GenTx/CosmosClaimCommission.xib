@@ -26,6 +26,7 @@
                 <outlet property="feeAmountLabel" destination="Yke-E9-kzK" id="pQo-kk-Uud"/>
                 <outlet property="feeCurrencyLabel" destination="uUl-rL-P0K" id="EGr-6p-OFC"/>
                 <outlet property="feeDenomLabel" destination="FI6-z5-7Oi" id="GUI-Z6-M6h"/>
+                <outlet property="feeMsgLabel" destination="0cT-Aa-s27" id="fON-MT-DFz"/>
                 <outlet property="feeSegments" destination="0hz-Wy-cUo" id="EMy-M0-jF7"/>
                 <outlet property="feeSelectImg" destination="HgY-5u-oos" id="5S4-as-dld"/>
                 <outlet property="feeSelectLabel" destination="YdP-Tc-FC7" id="8mr-ln-Or0"/>
@@ -170,6 +171,14 @@
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cT-Aa-s27">
+                            <rect key="frame" x="232.33333333333337" y="11" width="132.66666666666663" height="20.333333333333329"/>
+                            <string key="text">Fees and tips are paid to the chain, 
+not the wallet.</string>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
+                            <color key="textColor" name="_color03"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IFM-OL-s25">
                             <rect key="frame" x="12" y="40" width="353" height="0.6666666666666643"/>
                             <color key="backgroundColor" name="_color05"/>
@@ -271,6 +280,7 @@
                     <constraints>
                         <constraint firstItem="IFM-OL-s25" firstAttribute="top" secondItem="Stw-mp-hyA" secondAttribute="bottom" constant="12" id="3B7-8o-MRi"/>
                         <constraint firstItem="0hz-Wy-cUo" firstAttribute="top" secondItem="RsA-7r-Wxl" secondAttribute="bottom" constant="14" id="8eZ-kR-4Ua"/>
+                        <constraint firstItem="0cT-Aa-s27" firstAttribute="centerY" secondItem="Stw-mp-hyA" secondAttribute="centerY" id="9WH-hE-Us5"/>
                         <constraint firstAttribute="trailing" secondItem="0hz-Wy-cUo" secondAttribute="trailing" constant="12" id="EUC-62-yHe"/>
                         <constraint firstAttribute="height" constant="150" id="Elf-An-XHw"/>
                         <constraint firstItem="0hz-Wy-cUo" firstAttribute="leading" secondItem="3Cf-Do-Utl" secondAttribute="leading" constant="12" id="Ibv-u7-dVi"/>
@@ -282,6 +292,7 @@
                         <constraint firstItem="RsA-7r-Wxl" firstAttribute="leading" secondItem="3Cf-Do-Utl" secondAttribute="leading" constant="12" id="V6T-Mr-eXH"/>
                         <constraint firstAttribute="trailing" secondItem="IFM-OL-s25" secondAttribute="trailing" constant="12" id="Yjo-5Q-NQt"/>
                         <constraint firstItem="Yke-E9-kzK" firstAttribute="centerY" secondItem="FI6-z5-7Oi" secondAttribute="centerY" id="e6w-10-x6y"/>
+                        <constraint firstAttribute="trailing" secondItem="0cT-Aa-s27" secondAttribute="trailing" constant="12" id="eRT-zP-gYz"/>
                         <constraint firstItem="txF-xH-Aur" firstAttribute="leading" secondItem="uUl-rL-P0K" secondAttribute="trailing" constant="2" id="eUm-sq-s3F"/>
                         <constraint firstItem="RsA-7r-Wxl" firstAttribute="top" secondItem="IFM-OL-s25" secondAttribute="bottom" constant="12" id="iYu-Kc-xkT"/>
                         <constraint firstItem="FI6-z5-7Oi" firstAttribute="leading" secondItem="Yke-E9-kzK" secondAttribute="trailing" constant="2" id="lo1-5Y-m0U"/>

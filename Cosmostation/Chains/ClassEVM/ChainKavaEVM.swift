@@ -34,16 +34,12 @@ class ChainKavaEVM: BaseChain  {
         coinGeckoId = "kava"
         coinLogo = "tokenKava"
         evmRpcURL = "https://rpc-kava-evm.cosmostation.io"
-        
-        initFetcher()
-    }
-    
-    override func initFetcher() {
-        evmFetcher = FetcherEvmrpc.init(self)
-        kavaFetcher = KavaFetcher.init(self)
     }
     
     override func getGrpcfetcher() -> FetcherGrpc? {
+        if (kavaFetcher == nil) {
+            kavaFetcher = KavaFetcher.init(self)
+        }
         return kavaFetcher
     }
     

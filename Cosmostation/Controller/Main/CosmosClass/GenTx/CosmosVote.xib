@@ -22,6 +22,7 @@
                 <outlet property="feeAmountLabel" destination="0p4-wN-Vo5" id="t6V-lb-I9H"/>
                 <outlet property="feeCurrencyLabel" destination="1qB-YR-kAJ" id="CHs-M8-Tl4"/>
                 <outlet property="feeDenomLabel" destination="G0y-s7-9Lb" id="sn5-Nv-Zfb"/>
+                <outlet property="feeMsgLabel" destination="3eU-A8-DoT" id="aYX-7e-pm9"/>
                 <outlet property="feeSegments" destination="lzt-zh-HYl" id="FbM-2K-ZOb"/>
                 <outlet property="feeSelectImg" destination="0D8-Na-rIf" id="9b1-yI-Q6h"/>
                 <outlet property="feeSelectLabel" destination="gyG-53-27g" id="WnD-q5-zFR"/>
@@ -100,6 +101,14 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3eU-A8-DoT">
+                            <rect key="frame" x="232.33333333333337" y="10.999999999999998" width="132.66666666666663" height="20.333333333333329"/>
+                            <string key="text">Fees and tips are paid to the chain, 
+not the wallet.</string>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
+                            <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iBW-6c-bXc">
@@ -204,6 +213,7 @@
                         <constraint firstItem="IR9-wi-qWh" firstAttribute="centerY" secondItem="1qB-YR-kAJ" secondAttribute="centerY" constant="-1" id="2YE-PB-ecQ"/>
                         <constraint firstAttribute="trailing" secondItem="lzt-zh-HYl" secondAttribute="trailing" constant="12" id="37O-XB-PMb"/>
                         <constraint firstItem="G0y-s7-9Lb" firstAttribute="leading" secondItem="0p4-wN-Vo5" secondAttribute="trailing" constant="2" id="6zq-8T-1fF"/>
+                        <constraint firstItem="3eU-A8-DoT" firstAttribute="centerY" secondItem="cdT-Z3-plJ" secondAttribute="centerY" id="DH5-jf-e7Q"/>
                         <constraint firstItem="0p4-wN-Vo5" firstAttribute="centerY" secondItem="G0y-s7-9Lb" secondAttribute="centerY" id="E7p-9x-0j1"/>
                         <constraint firstAttribute="trailing" secondItem="iBW-6c-bXc" secondAttribute="trailing" constant="12" id="Iab-1b-uSB"/>
                         <constraint firstAttribute="height" constant="150" id="KWx-ha-IiJ"/>
@@ -217,6 +227,7 @@
                         <constraint firstItem="iBW-6c-bXc" firstAttribute="leading" secondItem="ATz-S6-JdD" secondAttribute="leading" constant="12" id="cB9-oD-JuG"/>
                         <constraint firstItem="iBW-6c-bXc" firstAttribute="top" secondItem="cdT-Z3-plJ" secondAttribute="bottom" constant="12" id="cwm-WK-aFs"/>
                         <constraint firstItem="YEG-00-KqC" firstAttribute="top" secondItem="iBW-6c-bXc" secondAttribute="bottom" constant="12" id="e1g-0d-wk0"/>
+                        <constraint firstAttribute="trailing" secondItem="3eU-A8-DoT" secondAttribute="trailing" constant="12" id="guR-Fl-daH"/>
                         <constraint firstItem="cdT-Z3-plJ" firstAttribute="top" secondItem="ATz-S6-JdD" secondAttribute="top" constant="14" id="ktp-fi-owo"/>
                         <constraint firstItem="lzt-zh-HYl" firstAttribute="top" secondItem="YEG-00-KqC" secondAttribute="bottom" constant="14" id="pte-ak-3hY"/>
                         <constraint firstItem="IR9-wi-qWh" firstAttribute="top" secondItem="G0y-s7-9Lb" secondAttribute="bottom" constant="2" id="r8U-th-Byy"/>

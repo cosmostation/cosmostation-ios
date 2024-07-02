@@ -25,8 +25,6 @@ class ChainBinanceSmart: BaseChain  {
         coinGeckoId = "binancecoin"
         coinLogo = "tokenBnb"
         evmRpcURL = "https://bsc-dataseed.binance.org"
-        
-        initFetcher()
     }
     
 }

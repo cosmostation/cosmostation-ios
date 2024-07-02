@@ -25,8 +25,6 @@ class ChainArbitrum: BaseChain  {
         coinGeckoId = "ethereum"
         coinLogo = "tokenEth_arb"
         evmRpcURL = "https://arb1.arbitrum.io/rpc"
-        
-        initFetcher()
     }
     
 }

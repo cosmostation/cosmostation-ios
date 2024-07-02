@@ -25,8 +25,6 @@ class ChainCrescent: BaseChain  {
         bechAccountPrefix = "cre"
         validatorPrefix = "crevaloper"
         grpcHost = "grpc-crescent.cosmostation.io"
-        
-        initFetcher()
     }
     
 }

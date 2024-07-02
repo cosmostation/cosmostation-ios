@@ -25,8 +25,6 @@ class ChainCryptoorg: BaseChain  {
         bechAccountPrefix = "cro"
         validatorPrefix = "crocncl"
         grpcHost = "grpc-crypto-org.cosmostation.io"
-        
-        initFetcher()
     }
     
 }

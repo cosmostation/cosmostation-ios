@@ -26,7 +26,5 @@ class ChainSei: BaseChain {
         validatorPrefix = "seivaloper"
         supportCw20 = true
         grpcHost = "grpc-sei.cosmostation.io"
-        
-        initFetcher()
     }
 }
