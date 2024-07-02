@@ -289,7 +289,11 @@ extension BaseChain {
         if let mutiply = getChainListParam()["fee"]["simul_gas_multiply"].double {
             return mutiply
         }
-        return 1.2
+        return 1.3
+    }
+    
+    func supportFeeMarket() -> Bool {
+        return getChainListParam()["fee"]["feemarket"].bool ?? false
     }
     
     func getFeeInfos() -> [FeeInfo] {

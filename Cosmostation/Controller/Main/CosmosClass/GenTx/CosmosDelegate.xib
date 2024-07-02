@@ -24,6 +24,7 @@
                 <outlet property="feeAmountLabel" destination="MkX-t8-GGa" id="042-AW-gmB"/>
                 <outlet property="feeCurrencyLabel" destination="oRo-B2-ZpO" id="Aqe-NH-87r"/>
                 <outlet property="feeDenomLabel" destination="9f0-U9-e3K" id="by4-jI-17D"/>
+                <outlet property="feeMsgLabel" destination="B3b-3j-unu" id="zPu-wH-9Sh"/>
                 <outlet property="feeSegments" destination="crd-99-Hyw" id="HOy-XN-Uh4"/>
                 <outlet property="feeSelectImg" destination="ZHa-P0-fqt" id="Msa-uG-zHZ"/>
                 <outlet property="feeSelectLabel" destination="ldl-hv-jcz" id="l5n-Yl-Gdy"/>
@@ -341,6 +342,14 @@
                                 <action selector="feeSegmentSelected:" destination="-1" eventType="valueChanged" id="GmL-6B-JRl"/>
                             </connections>
                         </segmentedControl>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3b-3j-unu">
+                            <rect key="frame" x="232" y="11" width="132.66666666666663" height="20.333333333333314"/>
+                            <string key="text">Fees and tips are paid to the chain, 
+not the wallet.</string>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
+                            <color key="textColor" name="_color03"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" name="_color06"/>
                     <constraints>
@@ -348,6 +357,8 @@
                         <constraint firstItem="2zt-w8-L71" firstAttribute="top" secondItem="p7e-jS-jPp" secondAttribute="top" constant="14" id="CcC-tv-xy9"/>
                         <constraint firstItem="5b5-Bx-l1s" firstAttribute="top" secondItem="2zt-w8-L71" secondAttribute="bottom" constant="12" id="ChK-qf-DxH"/>
                         <constraint firstItem="crd-99-Hyw" firstAttribute="top" secondItem="ZnL-sm-lWx" secondAttribute="bottom" constant="14" id="EVV-aI-6fJ"/>
+                        <constraint firstAttribute="trailing" secondItem="B3b-3j-unu" secondAttribute="trailing" constant="12" id="FQP-9T-Oli"/>
+                        <constraint firstItem="B3b-3j-unu" firstAttribute="centerY" secondItem="2zt-w8-L71" secondAttribute="centerY" id="LKB-k3-H0X"/>
                         <constraint firstItem="crd-99-Hyw" firstAttribute="leading" secondItem="p7e-jS-jPp" secondAttribute="leading" constant="12" id="LKX-sT-HZp"/>
                         <constraint firstItem="ZnL-sm-lWx" firstAttribute="leading" secondItem="p7e-jS-jPp" secondAttribute="leading" constant="12" id="OgA-jc-pNh"/>
                         <constraint firstItem="5b5-Bx-l1s" firstAttribute="leading" secondItem="p7e-jS-jPp" secondAttribute="leading" constant="12" id="UXk-60-uGk"/>

@@ -147,6 +147,7 @@ class NeutronVote: BaseVC {
     func onUpdateFeeView() {
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
             feeSelectLabel.text = msAsset.symbol
+            
             var totalFeeAmount = NSDecimalNumber(string: txFee.amount[0].amount)
             if (txTip.amount.count > 0) {
                 totalFeeAmount = totalFeeAmount.adding(NSDecimalNumber(string: txTip.amount[0].amount))

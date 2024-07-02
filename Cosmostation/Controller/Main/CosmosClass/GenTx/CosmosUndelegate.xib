@@ -22,6 +22,7 @@
                 <outlet property="feeAmountLabel" destination="OCA-Wp-uod" id="JUh-OZ-jEg"/>
                 <outlet property="feeCurrencyLabel" destination="qXc-o0-kW7" id="Ber-wU-G42"/>
                 <outlet property="feeDenomLabel" destination="LUL-fF-ld5" id="EXE-Y9-bbo"/>
+                <outlet property="feeMsgLabel" destination="rJ5-yg-g5w" id="wsK-sg-cXc"/>
                 <outlet property="feeSegments" destination="ZL0-CA-7tF" id="Sej-Jg-AXj"/>
                 <outlet property="feeSelectImg" destination="f8u-bS-hfe" id="OPk-IN-1gn"/>
                 <outlet property="feeSelectLabel" destination="Fy1-wT-m7B" id="gqX-s7-2r7"/>
@@ -236,6 +237,14 @@
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJ5-yg-g5w">
+                            <rect key="frame" x="232.33333333333337" y="11" width="132.66666666666663" height="20.333333333333329"/>
+                            <string key="text">Fees and tips are paid to the chain, 
+not the wallet.</string>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
+                            <color key="textColor" name="_color03"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c23-6c-RrY">
                             <rect key="frame" x="12" y="40" width="353" height="0.6666666666666643"/>
                             <color key="backgroundColor" name="_color05"/>
@@ -344,6 +353,7 @@
                         <constraint firstAttribute="trailing" secondItem="LUL-fF-ld5" secondAttribute="trailing" constant="12" id="OSR-nd-KCm"/>
                         <constraint firstItem="c23-6c-RrY" firstAttribute="top" secondItem="VwO-Xl-wM9" secondAttribute="bottom" constant="12" id="V6e-sa-y3N"/>
                         <constraint firstAttribute="trailing" secondItem="ZL0-CA-7tF" secondAttribute="trailing" constant="12" id="Wpk-fh-WUV"/>
+                        <constraint firstAttribute="trailing" secondItem="rJ5-yg-g5w" secondAttribute="trailing" constant="12" id="aCi-Bz-bGs"/>
                         <constraint firstItem="56T-eR-V4g" firstAttribute="leading" secondItem="qXc-o0-kW7" secondAttribute="trailing" constant="2" id="hMo-Kg-EaP"/>
                         <constraint firstItem="VwO-Xl-wM9" firstAttribute="top" secondItem="xXY-TS-cxm" secondAttribute="top" constant="14" id="iTV-Qb-gkW"/>
                         <constraint firstItem="56T-eR-V4g" firstAttribute="top" secondItem="LUL-fF-ld5" secondAttribute="bottom" constant="2" id="lUC-3e-FmL"/>
@@ -354,6 +364,7 @@
                         <constraint firstAttribute="trailing" secondItem="c23-6c-RrY" secondAttribute="trailing" constant="12" id="wFD-BZ-MXD"/>
                         <constraint firstItem="ZL0-CA-7tF" firstAttribute="top" secondItem="KCB-vX-cnS" secondAttribute="bottom" constant="14" id="wbt-cB-iVC"/>
                         <constraint firstItem="VwO-Xl-wM9" firstAttribute="leading" secondItem="xXY-TS-cxm" secondAttribute="leading" constant="12" id="xBl-E8-Wng"/>
+                        <constraint firstItem="rJ5-yg-g5w" firstAttribute="centerY" secondItem="VwO-Xl-wM9" secondAttribute="centerY" id="y03-j2-pwf"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Uf-S0-XKP" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">

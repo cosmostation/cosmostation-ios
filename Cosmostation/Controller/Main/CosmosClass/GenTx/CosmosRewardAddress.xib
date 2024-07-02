@@ -24,6 +24,7 @@
                 <outlet property="feeAmountLabel" destination="9od-Vc-b5B" id="EhG-3U-QYO"/>
                 <outlet property="feeCurrencyLabel" destination="lIE-P4-ZdX" id="IlE-nh-eX4"/>
                 <outlet property="feeDenomLabel" destination="qCl-0r-hnm" id="y23-Fv-gCm"/>
+                <outlet property="feeMsgLabel" destination="iUy-8p-rpg" id="BFi-4x-dbT"/>
                 <outlet property="feeSegments" destination="Exi-WU-TJa" id="bHh-D7-91e"/>
                 <outlet property="feeSelectImg" destination="NUY-sy-atE" id="ej2-KB-laG"/>
                 <outlet property="feeSelectLabel" destination="Rwt-LQ-RNO" id="CkF-Le-flG"/>
@@ -167,6 +168,14 @@
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUy-8p-rpg">
+                            <rect key="frame" x="232.33333333333337" y="10.999999999999998" width="132.66666666666663" height="20.333333333333329"/>
+                            <string key="text">Fees and tips are paid to the chain, 
+not the wallet.</string>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
+                            <color key="textColor" name="_color03"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="54t-Ys-nVV">
                             <rect key="frame" x="12" y="40" width="353" height="0.6666666666666643"/>
                             <color key="backgroundColor" name="_color05"/>
@@ -278,6 +287,8 @@
                         <constraint firstAttribute="trailing" secondItem="Rmq-nU-VFj" secondAttribute="trailing" constant="12" id="Pz6-dR-qpx"/>
                         <constraint firstItem="Exi-WU-TJa" firstAttribute="leading" secondItem="V74-LA-Cxy" secondAttribute="leading" constant="12" id="UZa-Dc-QTa"/>
                         <constraint firstItem="qCl-0r-hnm" firstAttribute="top" secondItem="54t-Ys-nVV" secondAttribute="bottom" constant="14" id="XuE-Ug-zhA"/>
+                        <constraint firstItem="iUy-8p-rpg" firstAttribute="centerY" secondItem="kjK-EB-kFx" secondAttribute="centerY" id="bKW-hL-lvW"/>
+                        <constraint firstAttribute="trailing" secondItem="iUy-8p-rpg" secondAttribute="trailing" constant="12" id="eOI-CY-z5f"/>
                         <constraint firstItem="kjK-EB-kFx" firstAttribute="leading" secondItem="V74-LA-Cxy" secondAttribute="leading" constant="12" id="euy-jG-bbj"/>
                         <constraint firstItem="54t-Ys-nVV" firstAttribute="leading" secondItem="V74-LA-Cxy" secondAttribute="leading" constant="12" id="g5F-iI-je5"/>
                         <constraint firstAttribute="height" constant="150" id="gK4-G0-Pa3"/>

@@ -592,12 +592,14 @@ extension FetcherGrpc {
     }
     
     func fetchBaseFee() async throws -> [Cosmos_Base_V1beta1_DecCoin]? {
+        if (!chain.supportFeeMarket()) { return nil }
         let req = Feemarket_Feemarket_V1_GasPricesRequest.init()
         return try? await Feemarket_Feemarket_V1_QueryNIOClient(channel: getClient()).gasPrices(req, callOptions: getCallOptions()).response.get().prices
     }
     
     func updateBaseFee() async {
         cosmosBaseFees.removeAll()
+        if (!chain.supportFeeMarket()) { return }
         let req = Feemarket_Feemarket_V1_GasPricesRequest.init()
         if let baseFees = try? await Feemarket_Feemarket_V1_QueryNIOClient(channel: getClient()).gasPrices(req, callOptions: getCallOptions()).response.get().prices {
             baseFees.forEach({ basefee in

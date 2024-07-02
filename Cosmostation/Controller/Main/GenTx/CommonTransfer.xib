@@ -25,6 +25,7 @@
                 <outlet property="feeCardView" destination="L7B-9h-6dk" id="m2a-oF-txx"/>
                 <outlet property="feeCurrencyLabel" destination="NDP-Vh-3D0" id="uRD-dQ-Jju"/>
                 <outlet property="feeDenomLabel" destination="Eut-vZ-em3" id="UJX-s7-GRD"/>
+                <outlet property="feeMsgLabel" destination="TMF-9X-Vge" id="OWD-jx-UrE"/>
                 <outlet property="feeSegments" destination="ZQD-7L-o46" id="bxF-cB-jS3"/>
                 <outlet property="feeSelectImg" destination="MMM-wM-6rZ" id="hGs-R7-jpu"/>
                 <outlet property="feeSelectLabel" destination="1AP-fS-DXm" id="kik-PI-ZOg"/>
@@ -260,6 +261,14 @@
                                             <color key="textColor" name="_color02"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMF-9X-Vge">
+                                            <rect key="frame" x="232.33333333333337" y="11.999999999999998" width="132.66666666666663" height="20.333333333333329"/>
+                                            <string key="text">Fees and tips are paid to the chain, 
+not the wallet.</string>
+                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
+                                            <color key="textColor" name="_color03"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tqf-q9-Iqa">
                                             <rect key="frame" x="12" y="39" width="353" height="0.6666666666666643"/>
                                             <color key="backgroundColor" name="_color05"/>
@@ -373,11 +382,13 @@
                                         <constraint firstItem="hWq-ma-jPn" firstAttribute="leading" secondItem="NDP-Vh-3D0" secondAttribute="trailing" constant="2" id="a6t-Fu-MQm"/>
                                         <constraint firstItem="hFJ-AM-HYT" firstAttribute="top" secondItem="Tqf-q9-Iqa" secondAttribute="bottom" constant="12" id="aba-vU-eYz"/>
                                         <constraint firstItem="Eut-vZ-em3" firstAttribute="top" secondItem="Tqf-q9-Iqa" secondAttribute="bottom" constant="14" id="bYK-ow-6LR"/>
+                                        <constraint firstAttribute="trailing" secondItem="TMF-9X-Vge" secondAttribute="trailing" constant="12" id="dZq-5U-oHx"/>
                                         <constraint firstItem="IBW-hD-K6J" firstAttribute="centerY" secondItem="Eut-vZ-em3" secondAttribute="centerY" id="dmu-7s-yQA"/>
                                         <constraint firstItem="ZQD-7L-o46" firstAttribute="leading" secondItem="L7B-9h-6dk" secondAttribute="leading" constant="12" id="iF0-EN-m1K"/>
                                         <constraint firstAttribute="trailing" secondItem="hWq-ma-jPn" secondAttribute="trailing" constant="12" id="p5x-ZQ-dUM"/>
                                         <constraint firstItem="Tqf-q9-Iqa" firstAttribute="leading" secondItem="L7B-9h-6dk" secondAttribute="leading" constant="12" id="rfT-bq-7Wc"/>
                                         <constraint firstItem="hWq-ma-jPn" firstAttribute="centerY" secondItem="NDP-Vh-3D0" secondAttribute="centerY" id="wKI-Qg-FsF"/>
+                                        <constraint firstItem="TMF-9X-Vge" firstAttribute="centerY" secondItem="kiR-yn-i6o" secondAttribute="centerY" id="z5j-wr-gK7"/>
                                     </constraints>
                                 </view>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZgU-La-hVa" customClass="RedFixCardView" customModule="Cosmostation" customModuleProvider="target">

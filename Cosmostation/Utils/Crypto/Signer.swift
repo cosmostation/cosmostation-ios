@@ -13,22 +13,6 @@ import secp256k1
 
 class Signer {
     //Tx for Transfer
-    static func genSendTx(_ account: Google_Protobuf_Any,
-                          _ timeout: UInt64,
-                          _ toSend: Cosmos_Bank_V1beta1_MsgSend,
-                          _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain)  -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let sendMsg = genSendMsg(toSend)
-        return getSignedTx(account, timeout, sendMsg, fee, memo, baseChain)
-    }
-    
-    static func genSendSimul(_ account: Google_Protobuf_Any,
-                             _ timeout: UInt64,
-                             _ toSend: Cosmos_Bank_V1beta1_MsgSend,
-                             _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain)  -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let sendMsg = genSendMsg(toSend)
-        return getSimulateTx(account, timeout, sendMsg, fee, memo, baseChain)
-    }
-    
     static func genSendMsg(_ toSend: Cosmos_Bank_V1beta1_MsgSend) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/cosmos.bank.v1beta1.MsgSend"
@@ -92,22 +76,6 @@ class Signer {
     }
     
     //Tx for Common Delegate
-    static func genDelegateTx(_ account: Google_Protobuf_Any,
-                              _ timeout: UInt64,
-                              _ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate,
-                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let deleMsg = genDelegateMsg(toDelegate)
-        return getSignedTx(account, timeout, deleMsg, fee, memo, baseChain)
-    }
-    
-    static func genDelegateSimul(_ account: Google_Protobuf_Any,
-                                 _ timeout: UInt64,
-                                 _ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate,
-                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let deleMsg = genDelegateMsg(toDelegate)
-        return getSimulateTx(account, timeout, deleMsg, fee, memo, baseChain)
-    }
-    
     static func genDelegateMsg(_ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgDelegate"
@@ -117,22 +85,6 @@ class Signer {
     }
     
     //Tx for Common UnDelegate
-    static func genUndelegateTx(_ account: Google_Protobuf_Any,
-                                _ timeout: UInt64,
-                                _ toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate,
-                                _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let undeleMsg = genUndelegateMsg(toUndelegate)
-        return getSignedTx(account, timeout, undeleMsg, fee, memo, baseChain)
-    }
-    
-    static func genUndelegateSimul(_ account: Google_Protobuf_Any,
-                                   _ timeout: UInt64,
-                                   _ toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate,
-                                   _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let undeleMsg = genUndelegateMsg(toUndelegate)
-        return getSimulateTx(account, timeout, undeleMsg, fee, memo, baseChain)
-    }
-    
     static func genUndelegateMsg(_ toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgUndelegate"
@@ -142,22 +94,6 @@ class Signer {
     }
     
     //Tx for Common CancelUnbonding
-    static func genCancelUnbondingTx(_ account: Google_Protobuf_Any,
-                                     _ timeout: UInt64,
-                                     _ toCancel: Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation,
-                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let cancelMsg = genCancelUnbondingMsg(toCancel)
-        return getSignedTx(account, timeout, cancelMsg, fee, memo, baseChain)
-    }
-    
-    static func genCancelUnbondingSimul(_ account: Google_Protobuf_Any,
-                                        _ timeout: UInt64,
-                                        _ toCancel: Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation,
-                                        _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let cancelMsg = genCancelUnbondingMsg(toCancel)
-        return getSimulateTx(account, timeout, cancelMsg, fee, memo, baseChain)
-    }
-    
     static func genCancelUnbondingMsg(_ toCancel: Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgCancelUnbondingDelegation"
@@ -197,7 +133,7 @@ class Signer {
                                   _ timeout: UInt64,
                                   _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                   _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest  {
-        let claimRewardMsg = genClaimStakingRewardMsg(account, rewards)
+        let claimRewardMsg = genClaimStakingRewardMsg(account.accountInfos().0!, rewards)
         return getSignedTx(account, timeout, claimRewardMsg, fee, memo, baseChain)
     }
     
@@ -205,15 +141,15 @@ class Signer {
                                      _ timeout: UInt64,
                                      _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                      _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let claimRewardMsg = genClaimStakingRewardMsg(account, rewards)
+        let claimRewardMsg = genClaimStakingRewardMsg(account.accountInfos().0!, rewards)
         return getSimulateTx(account, timeout, claimRewardMsg, fee, memo, baseChain)
     }
     
-    static func genClaimStakingRewardMsg(_ account: Google_Protobuf_Any, _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) -> [Google_Protobuf_Any] {
+    static func genClaimStakingRewardMsg(_ address: String, _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) -> [Google_Protobuf_Any] {
         var anyMsgs = [Google_Protobuf_Any]()
         for reward in rewards {
             let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
-                $0.delegatorAddress = account.accountInfos().0!
+                $0.delegatorAddress = address
                 $0.validatorAddress = reward.validatorAddress
             }
             let anyMsg = Google_Protobuf_Any.with {
@@ -226,22 +162,6 @@ class Signer {
     }
     
     //Tx for Common Claim Commission
-    static func genClaimCommissionTx(_ account: Google_Protobuf_Any,
-                                     _ timeout: UInt64,
-                                     _ commission: Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission,
-                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest  {
-        let claimCommissionMsg = genClaimCommissionMsg(commission)
-        return getSignedTx(account, timeout, claimCommissionMsg, fee, memo, baseChain)
-    }
-    
-    static func genClaimCommissionSimul(_ account: Google_Protobuf_Any,
-                                        _ timeout: UInt64,
-                                        _ commission: Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission,
-                                        _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let claimCommissionMsg = genClaimCommissionMsg(commission)
-        return getSimulateTx(account, timeout, claimCommissionMsg, fee, memo, baseChain)
-    }
-    
     static func genClaimCommissionMsg(_ commission: Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission"
@@ -257,7 +177,7 @@ class Signer {
                                  _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                  _ stakingDenom: String,
                                  _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let reinvestMsg = genCompoundingMsg(account, rewards, stakingDenom)
+        let reinvestMsg = genCompoundingMsg(account.accountInfos().0!, rewards, stakingDenom)
         return getSignedTx(account, timeout, reinvestMsg, fee, memo, baseChain)
     }
     
@@ -266,17 +186,17 @@ class Signer {
                                     _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                     _ stakingDenom: String,
                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let reinvestMsg = genCompoundingMsg(account, rewards, stakingDenom)
+        let reinvestMsg = genCompoundingMsg(account.accountInfos().0!, rewards, stakingDenom)
         return getSimulateTx(account, timeout, reinvestMsg, fee, memo, baseChain)
     }
     
-    static func genCompoundingMsg(_ account: Google_Protobuf_Any,
+    static func genCompoundingMsg(_ address: String,
                                   _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                   _ stakingDenom: String) -> [Google_Protobuf_Any] {
         var anyMsgs = [Google_Protobuf_Any]()
         rewards.forEach { reward in
             let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
-                $0.delegatorAddress = account.accountInfos().0!
+                $0.delegatorAddress = address
                 $0.validatorAddress = reward.validatorAddress
             }
             let anyMsg = Google_Protobuf_Any.with {
@@ -291,7 +211,7 @@ class Signer {
                 $0.amount = NSDecimalNumber.init(string: rewardCoin!.amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down).stringValue
             }
             let deleMsg = Cosmos_Staking_V1beta1_MsgDelegate.with {
-                $0.delegatorAddress = account.accountInfos().0!
+                $0.delegatorAddress = address
                 $0.validatorAddress = reward.validatorAddress
                 $0.amount = deleCoin
             }

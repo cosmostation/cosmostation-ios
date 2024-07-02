@@ -25,6 +25,7 @@
                 <outlet property="feeCardView" destination="KeJ-jC-Psp" id="rGO-ny-Ehg"/>
                 <outlet property="feeCurrencyLabel" destination="HJg-2q-t66" id="Ncf-0A-V21"/>
                 <outlet property="feeDenomLabel" destination="EZZ-R1-MOV" id="k6U-0d-eUg"/>
+                <outlet property="feeMsgLabel" destination="ILP-uC-g8D" id="MDf-ex-Yek"/>
                 <outlet property="feeSegments" destination="NzN-ui-omv" id="0GH-7U-Skg"/>
                 <outlet property="feeSelectImg" destination="lDx-hZ-q7G" id="5sf-kY-qXw"/>
                 <outlet property="feeSelectLabel" destination="bjT-aU-xz1" id="xJe-37-Jiv"/>
@@ -231,6 +232,14 @@
                                             <color key="textColor" name="_color02"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILP-uC-g8D">
+                                            <rect key="frame" x="232.33333333333337" y="12" width="132.66666666666663" height="20.333333333333329"/>
+                                            <string key="text">Fees and tips are paid to the chain, 
+not the wallet.</string>
+                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
+                                            <color key="textColor" name="_color03"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Wv-gO-kYT">
                                             <rect key="frame" x="12" y="39" width="353" height="0.6666666666666643"/>
                                             <color key="backgroundColor" name="_color05"/>
@@ -349,6 +358,8 @@
                                         <constraint firstItem="3Wv-gO-kYT" firstAttribute="top" secondItem="Bu1-Lq-sK1" secondAttribute="bottom" constant="10" id="qzo-ax-xeF"/>
                                         <constraint firstItem="Bu1-Lq-sK1" firstAttribute="leading" secondItem="KeJ-jC-Psp" secondAttribute="leading" constant="12" id="siL-A9-YLP"/>
                                         <constraint firstItem="9MS-wW-Ly8" firstAttribute="top" secondItem="EZZ-R1-MOV" secondAttribute="bottom" constant="2" id="uL8-a7-dLF"/>
+                                        <constraint firstAttribute="trailing" secondItem="ILP-uC-g8D" secondAttribute="trailing" constant="12" id="uMH-BJ-nvM"/>
+                                        <constraint firstItem="ILP-uC-g8D" firstAttribute="centerY" secondItem="Bu1-Lq-sK1" secondAttribute="centerY" id="whg-pp-Pex"/>
                                     </constraints>
                                 </view>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gz-5V-QWf" customClass="RedFixCardView" customModule="Cosmostation" customModuleProvider="target">

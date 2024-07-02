@@ -182,7 +182,6 @@ class NeutronVault: BaseVC {
     
     func onUpdateFeeView() {
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
-            feeSelectImg.af.setImage(withURL: msAsset.assetImg())
             feeSelectLabel.text = msAsset.symbol
             
             var totalFeeAmount = NSDecimalNumber(string: txFee.amount[0].amount)

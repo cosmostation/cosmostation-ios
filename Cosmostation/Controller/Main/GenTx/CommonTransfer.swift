@@ -45,6 +45,7 @@ class CommonTransfer: BaseVC {
     @IBOutlet weak var memoLabel: UILabel!
     
     @IBOutlet weak var feeCardView: FixCardView!
+    @IBOutlet weak var feeMsgLabel: UILabel!
     @IBOutlet weak var feeSelectView: DropDownView!
     @IBOutlet weak var feeSelectImg: UIImageView!
     @IBOutlet weak var feeSelectLabel: UILabel!
@@ -155,6 +156,7 @@ class CommonTransfer: BaseVC {
         toSendAssetHint.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
         memoTitle.text = NSLocalizedString("str_memo_optional", comment: "")
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
+        feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
         sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
     }
     
@@ -538,7 +540,6 @@ class CommonTransfer: BaseVC {
         } else if (txStyle == .COSMOS_STYLE) {
             // cosmosTxFee is already setted!
             if let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
-                feeSelectImg.af.setImage(withURL: msAsset.assetImg())
                 feeSelectLabel.text = msAsset.symbol
             
                 var totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
