@@ -53,7 +53,7 @@ class NeutronVote: BaseVC {
         baseAccount = BaseData.instance.baseAccount
         grpcFetcher = selectedChain.neutronFetcher
         
-        loadingView.isHidden = true
+        loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
         loadingView.loopMode = .loop
@@ -71,7 +71,14 @@ class NeutronVote: BaseVC {
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
-        oninitFeeView()
+        
+        Task {
+            await grpcFetcher.updateBaseFee()
+            DispatchQueue.main.async {
+                self.loadingView.isHidden = true
+                self.oninitFeeView()
+            }
+        }
     }
     
     override func setLocalizedString() {
@@ -177,7 +184,7 @@ class NeutronVote: BaseVC {
             if (grpcFetcher.cosmosBaseFees.count > 0) {
                 if let baseFee = grpcFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
-                    let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Down)
+                    let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                     txFee.amount[0].amount = feeAmount.stringValue
                     txTip = Signer.setTip(selectedFeePosition, txFee, txTip)
                 }

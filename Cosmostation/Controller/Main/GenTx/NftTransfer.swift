@@ -60,7 +60,7 @@ class NftTransfer: BaseVC {
     
     var toChain: BaseChain!
     var toAddress = ""
-    var toMemo = ""
+    var txMemo = ""
     
     var selectedFeePosition = 0
     var cosmosFeeInfos = [FeeInfo]()
@@ -176,19 +176,19 @@ class NftTransfer: BaseVC {
     
     @objc func onClickMemo() {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
-        memoSheet.existedMemo = toMemo
+        memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
         onStartSheet(memoSheet, 260, 0.6)
     }
     
     func onUpdateMemoView(_ memo: String) {
-        if (toMemo != memo) {
-            toMemo = memo
-            if (toMemo.isEmpty) {
+        if (txMemo != memo) {
+            txMemo = memo
+            if (txMemo.isEmpty) {
                 memoLabel.isHidden = true
                 memoHintLabel.isHidden = false
             } else {
-                memoLabel.text = toMemo
+                memoLabel.text = txMemo
                 memoLabel.isHidden = false
                 memoHintLabel.isHidden = true
             }
@@ -274,7 +274,7 @@ class NftTransfer: BaseVC {
             do {
                 let account = try await fromGrpcFetcher.fetchAuth()
                 let height = try await fromGrpcFetcher.fetchLastBlock()!.block.header.height
-                let simulReq = Signer.genWasmSimul(account!, UInt64(height), [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let simulReq = Signer.genWasmSimul(account!, UInt64(height), [onBindCw20Send()], cosmosTxFee, txMemo, fromChain)
                 let simulRes = try await fromGrpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
                     self.onUpdateFeeViewAfterSimul(simulRes)
@@ -296,7 +296,7 @@ class NftTransfer: BaseVC {
             do {
                 let account = try await fromGrpcFetcher.fetchAuth()
                 let height = try await fromGrpcFetcher.fetchLastBlock()!.block.header.height
-                let broadReq = Signer.genWasmTx(account!, UInt64(height), [onBindCw20Send()], cosmosTxFee, toMemo, fromChain)
+                let broadReq = Signer.genWasmTx(account!, UInt64(height), [onBindCw20Send()], cosmosTxFee, txMemo, fromChain)
                 let response = try await fromGrpcFetcher.broadcastTx(broadReq)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
@@ -305,7 +305,7 @@ class NftTransfer: BaseVC {
                     txResult.fromChain = self.fromChain
                     txResult.toChain = self.toChain
                     txResult.toAddress = self.toAddress
-                    txResult.toMemo = self.toMemo
+                    txResult.txMemo = self.txMemo
                     txResult.cosmosBroadcastTxResponse = response
                     txResult.modalPresentationStyle = .fullScreen
                     self.present(txResult, animated: true)
@@ -344,12 +344,12 @@ extension NftTransfer: BaseSheetDelegate, SendAddressDelegate, MemoDelegate, Pin
     
     func onInputedAddress(_ address: String, _ memo: String?) {
         if let Memo = memo {
-            toMemo = Memo
-            if (toMemo.isEmpty) {
+            txMemo = Memo
+            if (txMemo.isEmpty) {
                 memoLabel.isHidden = true
                 memoHintLabel.isHidden = false
             } else {
-                memoLabel.text = toMemo
+                memoLabel.text = txMemo
                 memoLabel.isHidden = false
                 memoHintLabel.isHidden = true
             }

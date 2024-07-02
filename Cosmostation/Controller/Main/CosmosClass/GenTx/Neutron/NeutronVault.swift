@@ -55,9 +55,10 @@ class NeutronVault: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        grpcFetcher = selectedChain.getGrpcfetcher() 
+        grpcFetcher = selectedChain.getGrpcfetcher()
         
-        loadingView.isHidden = true
+        
+        loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
         loadingView.loopMode = .loop
@@ -68,7 +69,14 @@ class NeutronVault: BaseVC {
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
-        oninitFeeView()
+        
+        Task {
+            await grpcFetcher.updateBaseFee()
+            DispatchQueue.main.async {
+                self.loadingView.isHidden = true
+                self.oninitFeeView()
+            }
+        }
     }
     
     override func setLocalizedString() {
@@ -174,7 +182,9 @@ class NeutronVault: BaseVC {
     
     func onUpdateFeeView() {
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
+            feeSelectImg.af.setImage(withURL: msAsset.assetImg())
             feeSelectLabel.text = msAsset.symbol
+            
             var totalFeeAmount = NSDecimalNumber(string: txFee.amount[0].amount)
             if (txTip.amount.count > 0) {
                 totalFeeAmount = totalFeeAmount.adding(NSDecimalNumber(string: txTip.amount[0].amount))
@@ -228,7 +238,7 @@ class NeutronVault: BaseVC {
             if (grpcFetcher.cosmosBaseFees.count > 0) {
                 if let baseFee = grpcFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
-                    let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Down)
+                    let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                     txFee.amount[0].amount = feeAmount.stringValue
                     txTip = Signer.setTip(selectedFeePosition, txFee, txTip)
                 }

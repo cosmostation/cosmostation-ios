@@ -596,6 +596,23 @@ extension FetcherGrpc {
         return try? await Feemarket_Feemarket_V1_QueryNIOClient(channel: getClient()).gasPrices(req, callOptions: getCallOptions()).response.get().prices
     }
     
+    func updateBaseFee() async {
+        cosmosBaseFees.removeAll()
+        let req = Feemarket_Feemarket_V1_GasPricesRequest.init()
+        if let baseFees = try? await Feemarket_Feemarket_V1_QueryNIOClient(channel: getClient()).gasPrices(req, callOptions: getCallOptions()).response.get().prices {
+            baseFees.forEach({ basefee in
+                if (BaseData.instance.getAsset(chain.apiName, basefee.denom) != nil) {
+                    self.cosmosBaseFees.append(basefee)
+                }
+            })
+            self.cosmosBaseFees.sort {
+                if ($0.denom == chain.stakeDenom) { return true }
+                if ($1.denom == chain.stakeDenom) { return false }
+                return false
+            }
+        }
+    }
+    
     
     
     func getGrpc() -> (host: String, port: Int) {
