@@ -22,6 +22,7 @@
                 <outlet property="feeAmountLabel" destination="1Bo-vj-v1S" id="a7e-aK-ndy"/>
                 <outlet property="feeCurrencyLabel" destination="xTV-ta-Emi" id="Xqe-6d-k44"/>
                 <outlet property="feeDenomLabel" destination="gEs-a7-3S4" id="flW-YX-oNw"/>
+                <outlet property="feeMsgLabel" destination="2Ch-Kj-EXy" id="A6j-ar-UGu"/>
                 <outlet property="feeSegments" destination="Cmx-0d-p9x" id="zEO-E3-6nW"/>
                 <outlet property="feeSelectImg" destination="IKQ-0c-xeD" id="LcG-4D-9Lp"/>
                 <outlet property="feeSelectLabel" destination="rBp-YG-OKT" id="s4l-5f-GJi"/>
@@ -100,6 +101,14 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ch-Kj-EXy">
+                            <rect key="frame" x="232.33333333333337" y="10.999999999999998" width="132.66666666666663" height="20.333333333333329"/>
+                            <string key="text">Fees and tips are paid to the chain, 
+not the wallet.</string>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
+                            <color key="textColor" name="_color03"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TT3-nv-5lo">
@@ -202,6 +211,7 @@
                     <color key="backgroundColor" name="_color06"/>
                     <constraints>
                         <constraint firstItem="D7H-RB-pRf" firstAttribute="leading" secondItem="SwL-Va-9Xi" secondAttribute="leading" constant="12" id="1gs-I6-qLK"/>
+                        <constraint firstAttribute="trailing" secondItem="2Ch-Kj-EXy" secondAttribute="trailing" constant="12" id="5WI-r6-8T5"/>
                         <constraint firstItem="gGA-hW-SXb" firstAttribute="top" secondItem="TT3-nv-5lo" secondAttribute="bottom" constant="12" id="As4-kl-iD5"/>
                         <constraint firstAttribute="trailing" secondItem="Cmx-0d-p9x" secondAttribute="trailing" constant="12" id="Le6-PP-Erw"/>
                         <constraint firstItem="UXG-tu-lcV" firstAttribute="centerY" secondItem="xTV-ta-Emi" secondAttribute="centerY" constant="-1" id="Mt8-kR-ihU"/>
@@ -218,6 +228,7 @@
                         <constraint firstItem="UXG-tu-lcV" firstAttribute="top" secondItem="gEs-a7-3S4" secondAttribute="bottom" constant="2" id="hhc-T0-EGO"/>
                         <constraint firstAttribute="height" constant="150" id="kwv-4y-mw8"/>
                         <constraint firstItem="TT3-nv-5lo" firstAttribute="top" secondItem="D7H-RB-pRf" secondAttribute="bottom" constant="12" id="tOB-gZ-wLd"/>
+                        <constraint firstItem="2Ch-Kj-EXy" firstAttribute="centerY" secondItem="D7H-RB-pRf" secondAttribute="centerY" id="uGh-Ea-6k3"/>
                         <constraint firstItem="TT3-nv-5lo" firstAttribute="leading" secondItem="SwL-Va-9Xi" secondAttribute="leading" constant="12" id="wJQ-Tp-A8k"/>
                         <constraint firstAttribute="trailing" secondItem="gEs-a7-3S4" secondAttribute="trailing" constant="12" id="xfN-VK-kCe"/>
                     </constraints>

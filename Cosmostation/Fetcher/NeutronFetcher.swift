@@ -27,6 +27,7 @@ class NeutronFetcher: FetcherGrpc {
         neutronVesting = nil
         vaultsList = chain.getChainListParam()["vaults"].arrayValue
         daosList = chain.getChainListParam()["daos"].arrayValue
+        cosmosBaseFees.removeAll()
         
         do {
             if let cw20Tokens = try? await fetchCw20Info(),
@@ -34,7 +35,7 @@ class NeutronFetcher: FetcherGrpc {
                let auth = try? await fetchAuth(),
                let vault = try? await fetchVaultDeposit(),
                let vesting = try? await fetchNeutronVesting(),
-               let baseFee = try? await fetchBaseFee() {
+               let baseFees = try? await fetchBaseFee() {
                 self.mintscanCw20Tokens = cw20Tokens ?? []
                 self.cosmosAuth = auth
                 self.cosmosBalances = balance
@@ -45,6 +46,17 @@ class NeutronFetcher: FetcherGrpc {
                 if let vesting = vesting,
                    let vestingInfo = try? JSONDecoder().decode(JSON.self, from: vesting) {
                     self.neutronVesting = vestingInfo
+                }
+                
+                baseFees?.forEach({ basefee in
+                    if (BaseData.instance.getAsset(chain.apiName, basefee.denom) != nil) {
+                        self.cosmosBaseFees.append(basefee)
+                    }
+                })
+                self.cosmosBaseFees.sort {
+                    if ($0.denom == chain.stakeDenom) { return true }
+                    if ($1.denom == chain.stakeDenom) { return false }
+                    return false
                 }
                 
                 await mintscanCw20Tokens.concurrentForEach { cw20 in

@@ -35,7 +35,7 @@ class ChainNeutron: BaseChain {
         
     }
     
-    override func getGrpcfetcher() -> FetcherGrpc? {
+    override func getGrpcfetcher() -> NeutronFetcher? {
         if (neutronFetcher == nil) {
             neutronFetcher = NeutronFetcher.init(self)
         }

@@ -113,7 +113,7 @@ class AssetCell: UITableViewCell {
         coinImg.image =  UIImage.init(named: baseChain.coinLogo)
         
         if let evmFetcher = baseChain.getEvmfetcher() {
-            let dpAmount = evmFetcher.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18)
+            let dpAmount = evmFetcher.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18Down)
             let value = evmFetcher.allCoinValue()
             WDP.dpPrice(baseChain.coinGeckoId, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(baseChain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)

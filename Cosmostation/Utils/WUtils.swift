@@ -306,5 +306,9 @@ extension Cosmos_Base_V1beta1_DecCoin {
     func getAmount() -> NSDecimalNumber {
         return NSDecimalNumber(string: amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
     }
+    
+    func getdAmount() -> NSDecimalNumber {
+        return NSDecimalNumber(string: amount).multiplying(byPowerOf10: -18, withBehavior: handler18Down)
+    }
 }
 

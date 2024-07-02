@@ -438,6 +438,7 @@
 "msg_reward_address" = "このアドレスはリワード資産を受け取るためのアドレスです。\n報酬の住所を変更するにはここをタップしてください。 (お勧めしません)";
 "msg_reward_address_under" = "報酬の住所を変更するにはここをタップしてください。";
 "msg_already_changed_reward_address" = "すでにリワードアドレスを変更しました。";
+"msg_about_fee_tip" = "Feeとtipは財布ではなくチェー ンに支払われます。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";

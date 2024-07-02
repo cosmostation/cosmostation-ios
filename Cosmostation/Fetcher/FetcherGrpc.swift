@@ -26,6 +26,7 @@ class FetcherGrpc {
     var cosmosCommissions =  [Cosmos_Base_V1beta1_Coin]()
     var rewardAddress:  String?
     var cosmosValidators = [Cosmos_Staking_V1beta1_Validator]()
+    var cosmosBaseFees = [Cosmos_Base_V1beta1_DecCoin]()
     
     var mintscanCw20Tokens = [MintscanToken]()
     var mintscanCw721List = [JSON]()
@@ -64,6 +65,7 @@ class FetcherGrpc {
         cosmosRewards = nil
         cosmosCommissions.removeAll()
         rewardAddress = nil
+        cosmosBaseFees.removeAll()
         
         do {
             if let cw20Tokens = try? await fetchCw20Info(),
@@ -75,7 +77,7 @@ class FetcherGrpc {
                let rewards = try? await fetchRewards(),
                let commission = try? await fetchCommission(),
                let rewardaddr = try? await fetchRewardAddress(),
-               let baseFee = try? await fetchBaseFee() {
+               let baseFees = try? await fetchBaseFee() {
                 self.mintscanCw20Tokens = cw20Tokens ?? []
                 self.mintscanCw721List = cw721List ?? []
                 self.cosmosAuth = auth
@@ -93,6 +95,17 @@ class FetcherGrpc {
                     }
                 }
                 self.rewardAddress = rewardaddr?.replacingOccurrences(of: "\"", with: "")
+                
+                baseFees?.forEach({ basefee in
+                    if (BaseData.instance.getAsset(chain.apiName, basefee.denom) != nil) {
+                        self.cosmosBaseFees.append(basefee)
+                    }
+                })
+                self.cosmosBaseFees.sort {
+                    if ($0.denom == chain.stakeDenom) { return true }
+                    if ($1.denom == chain.stakeDenom) { return false }
+                    return false
+                }
                 
                 await mintscanCw20Tokens.concurrentForEach { cw20 in
                     self.fetchCw20Balance(cw20)

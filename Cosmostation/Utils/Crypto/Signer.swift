@@ -66,7 +66,7 @@ class Signer {
     static func genWasmTx(_ account: Google_Protobuf_Any,
                           _ timeout: UInt64,
                           _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract],
-                          _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+                          _ fee: Cosmos_Tx_V1beta1_Fee,_ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let wasmMsg = genWasmMsg(wasmContracts)
         return getSignedTx(account, timeout, wasmMsg, fee, memo, baseChain)
     }
@@ -1437,6 +1437,68 @@ class Signer {
 //        }
 //        return [anyMsg]
 //    }
+//    static func genx(_ account: Google_Protobuf_Any,
+//                          _ timeout: UInt64,
+//                          _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract],
+//                          _ fee: Cosmos_Tx_V1beta1_Fee,_ memo: String, _ baseChain: BaseChain, _ tip: Cosmos_Tx_V1beta1_Tip? = nil) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+//        let wasmMsg = genWasmMsg(wasmContracts)
+//        return getSignedTx(account, timeout, wasmMsg, fee, memo, baseChain)
+//    }
+    
+    static func setTip(_ posiion: Int, _ txFee: Cosmos_Tx_V1beta1_Fee, _ txTip: Cosmos_Tx_V1beta1_Tip) -> Cosmos_Tx_V1beta1_Tip {
+        let feeDenom = txFee.amount[0].denom
+        let feeAmount = txFee.amount[0].getAmount()
+        
+        var result = Cosmos_Tx_V1beta1_Tip()
+        result.tipper = txTip.tipper
+        if (posiion == 0) {
+            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, "0")]
+        } else if (posiion == 1) {
+            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "0.2"), withBehavior: handler0Down).stringValue)]
+        } else if (posiion == 2) {
+            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "0.5"), withBehavior: handler0Down).stringValue)]
+        } else if (posiion == 3) {
+            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.stringValue)]
+        }
+        return result
+    }
+    
+    static func genSimul(_ baseChain: BaseChain,
+                         _ msgs: [Google_Protobuf_Any],
+                         _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip) async throws -> Cosmos_Tx_V1beta1_SimulateRequest? {
+        if let grpcFetcher = baseChain.getGrpcfetcher(),
+           let account = try await grpcFetcher.fetchAuth(),
+           let height = try? await grpcFetcher.fetchLastBlock()!.block.header.height {
+            let txBody = getTxBody(msgs, memo, UInt64(height))
+            let authInfo = getAuthInfo2(account, baseChain, fee, tip)
+            let simulateTx = getSimulTxs(txBody, authInfo)
+            return Cosmos_Tx_V1beta1_SimulateRequest.with {
+                $0.tx = simulateTx
+            }
+        }
+        return nil
+    }
+    
+    static func genTx(_ baseChain: BaseChain,
+                      _ msgs: [Google_Protobuf_Any],
+                      _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip) async throws -> Cosmos_Tx_V1beta1_BroadcastTxRequest? {
+        if let grpcFetcher = baseChain.getGrpcfetcher(),
+           let account = try await grpcFetcher.fetchAuth(),
+           let height = try? await grpcFetcher.fetchLastBlock()!.block.header.height {
+            let txBody = getTxBody(msgs, memo, UInt64(height))
+            let authInfo = getAuthInfo2(account, baseChain, fee, tip)
+            let rawTx = getRawTxs(account, txBody, authInfo, baseChain)
+            return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+                $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
+                $0.txBytes = try! rawTx.serializedData()
+            }
+        }
+        return nil
+    }
+    
+    
+    
+    
     
     
     static func getSignedTx(_ account: Google_Protobuf_Any, _ timeout: UInt64, _ msgAnys: [Google_Protobuf_Any],
@@ -1462,6 +1524,7 @@ class Signer {
         }
     }
     
+    
     static func getTxBody(_ msgAnys: [Google_Protobuf_Any], _ memo: String, _ timeout: UInt64) -> Cosmos_Tx_V1beta1_TxBody {
         return Cosmos_Tx_V1beta1_TxBody.with {
             $0.memo = memo
@@ -1469,6 +1532,67 @@ class Signer {
             $0.timeoutHeight = timeout + 30
         }
     }
+    
+    static func getAuthInfo2(_ account: Google_Protobuf_Any, _ baseChain: BaseChain, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip? = nil) -> Cosmos_Tx_V1beta1_AuthInfo {
+        let single = Cosmos_Tx_V1beta1_ModeInfo.Single.with {
+            $0.mode = Cosmos_Tx_Signing_V1beta1_SignMode.direct
+        }
+        let mode = Cosmos_Tx_V1beta1_ModeInfo.with {
+            $0.single = single
+        }
+
+        var pubKey: Google_Protobuf_Any?
+        if (baseChain.accountKeyType.pubkeyType == .BERA_Secp256k1) {
+            let pub = Ethermint_Crypto_V1_Ethsecp256k1_PubKey.with {
+                $0.key = baseChain.publicKey!
+            }
+            pubKey = Google_Protobuf_Any.with {
+                $0.typeURL = "/polaris.crypto.ethsecp256k1.v1.PubKey"
+                $0.value = try! pub.serializedData()
+            }
+            
+        } else if (baseChain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1) {
+            let pub = Injective_Crypto_V1beta1_Ethsecp256k1_PubKey.with {
+                $0.key = baseChain.publicKey!
+            }
+            pubKey = Google_Protobuf_Any.with {
+                $0.typeURL = "/injective.crypto.v1beta1.ethsecp256k1.PubKey"
+                $0.value = try! pub.serializedData()
+            }
+            
+        } else if (baseChain.accountKeyType.pubkeyType == .ETH_Keccak256) {
+            let pub = Ethermint_Crypto_V1_Ethsecp256k1_PubKey.with {
+                $0.key = baseChain.publicKey!
+            }
+            pubKey = Google_Protobuf_Any.with {
+                $0.typeURL = "/ethermint.crypto.v1.ethsecp256k1.PubKey"
+                $0.value = try! pub.serializedData()
+            }
+        } else {
+            let pub = Cosmos_Crypto_Secp256k1_PubKey.with {
+                $0.key = baseChain.publicKey!
+            }
+            pubKey = Google_Protobuf_Any.with {
+                $0.typeURL = "/cosmos.crypto.secp256k1.PubKey"
+                $0.value = try! pub.serializedData()
+            }
+        }
+        
+        let signerInfo =  Cosmos_Tx_V1beta1_SignerInfo.with {
+            $0.publicKey = pubKey!
+            $0.modeInfo = mode
+            $0.sequence = account.accountInfos().2!
+        }
+        
+        return Cosmos_Tx_V1beta1_AuthInfo.with {
+            $0.fee = fee
+            $0.signerInfos = [signerInfo]
+            if let Tip = tip, !Tip.tipper.isEmpty,  Tip.amount.count > 0 {
+                $0.tip = Tip
+            }
+        }
+    }
+    
     
     static func getSignerInfos(_ account: Google_Protobuf_Any, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SignerInfo {
         let single = Cosmos_Tx_V1beta1_ModeInfo.Single.with {
@@ -1522,12 +1646,18 @@ class Signer {
         }
     }
     
-    static func getAuthInfo(_ signerInfo: Cosmos_Tx_V1beta1_SignerInfo, _ fee: Cosmos_Tx_V1beta1_Fee) -> Cosmos_Tx_V1beta1_AuthInfo {
+    static func getAuthInfo(_ signerInfo: Cosmos_Tx_V1beta1_SignerInfo, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip? = nil) -> Cosmos_Tx_V1beta1_AuthInfo {
         return Cosmos_Tx_V1beta1_AuthInfo.with {
             $0.fee = fee
             $0.signerInfos = [signerInfo]
+            if let Tip = tip {
+                $0.tip = Tip
+            }
         }
     }
+    
+    
+    
     
     static func getRawTxs(_ account: Google_Protobuf_Any, _ txBody: Cosmos_Tx_V1beta1_TxBody,
                           _ authInfo: Cosmos_Tx_V1beta1_AuthInfo, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_TxRaw {

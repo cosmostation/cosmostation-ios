@@ -214,12 +214,24 @@ class BaseChain {
             
         } else if (supportCosmosGrpc) {
             var result = false
-            getDefaultFeeCoins().forEach { minFee in
-                let availaAmount = getGrpcfetcher()?.balanceAmount(minFee.denom) ?? NSDecimalNumber.zero
-                let minFeeAmount = NSDecimalNumber.init(string: minFee.amount)
-                if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
-                    result = true
-                    return
+            if (getGrpcfetcher()?.cosmosBaseFees.count ?? 0 > 0) {
+                getGrpcfetcher()?.cosmosBaseFees.forEach({ basefee in
+                    let availaAmount = getGrpcfetcher()?.balanceAmount(basefee.denom) ?? NSDecimalNumber.zero
+                    let minFeeAmount = basefee.getdAmount().multiplying(by: getFeeBaseGasAmount(), withBehavior: handler0Down)
+                    if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
+                        result = true
+                        return
+                    }
+                })
+                
+            } else {
+                getDefaultFeeCoins().forEach { minFee in
+                    let availaAmount = getGrpcfetcher()?.balanceAmount(minFee.denom) ?? NSDecimalNumber.zero
+                    let minFeeAmount = NSDecimalNumber.init(string: minFee.amount)
+                    if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
+                        result = true
+                        return
+                    }
                 }
             }
             return result

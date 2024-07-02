@@ -29,6 +29,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var swapBalance = Array<Cosmos_Base_V1beta1_Coin>()
     
     var feeDatas = Array<FeeData>()
+    var baseFeesDatas = [Cosmos_Base_V1beta1_DecCoin]()
     var validators = Array<Cosmos_Staking_V1beta1_Validator>()
     var validatorsSearch = Array<Cosmos_Staking_V1beta1_Validator>()
     var delegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
@@ -208,7 +209,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectUnbondingAction) {
             sheetTitle.text = NSLocalizedString("title_select_options", comment: "")
             
-        } else if (sheetType == .SelectFeeDenom) {
+        } else if (sheetType == .SelectFeeDenom || sheetType == .SelectBaseFeeDenom) {
             sheetTitle.text = NSLocalizedString("str_select_coin_for_fee", comment: "")
             
         } else if (sheetType == .SelectValidator) {
@@ -379,6 +380,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectFeeDenom) {
             return feeDatas.count
             
+        } else if (sheetType == .SelectBaseFeeDenom) {
+            return baseFeesDatas.count
+            
         } else if (sheetType == .SelectValidator) {
             return validatorsSearch.count
             
@@ -494,6 +498,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectFeeDenom) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectFeeCoinCell") as? SelectFeeCoinCell
             cell?.onBindFeeCoin(targetChain, feeDatas[indexPath.row])
+            return cell!
+            
+        } else if (sheetType == .SelectBaseFeeDenom) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectFeeCoinCell") as? SelectFeeCoinCell
+            cell?.onBindBaseFeeCoin(targetChain, baseFeesDatas[indexPath.row])
             return cell!
             
         } else if (sheetType == .SelectValidator) {
@@ -658,6 +667,7 @@ public enum SheetType: Int {
     case SelectCosmosRecipientChain = 44
     case SelectCosmosRecipientBechAddress = 45
     case SelectCosmosNameServiceAddress = 46
+    case SelectBaseFeeDenom = 47
     
     case SelectNeutronVault = 51
     

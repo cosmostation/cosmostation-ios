@@ -438,6 +438,7 @@
 "msg_reward_address" = "This address is where you receive reward assets.\nTap here for change reward address. (not recommend)";
 "msg_reward_address_under" = "Tap here for change reward address.";
 "msg_already_changed_reward_address" = "You changed a reward address";
+"msg_about_fee_tip" = "Fees and tips are pay to the chain,\nnot to wallet.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";

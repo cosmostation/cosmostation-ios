@@ -438,6 +438,7 @@
 "msg_reward_address" = "이 주소는 리워드 자산을 받는 주소입니다.\n여기를 눌러 리워드 주소를 변경하실 수 있습니다. (권장하지 않음)";
 "msg_reward_address_under" = "여기를 눌러 리워드 주소를 변경하실 수 있습니다.";
 "msg_already_changed_reward_address" = "이미 리워드 주소를 변경하였습니다.";
+"msg_about_fee_tip" = "Fee와 Tip은 지갑이 아닌 체인에 지불됩니다.";
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";
