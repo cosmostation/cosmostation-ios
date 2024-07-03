@@ -11,6 +11,7 @@ import Lottie
 import Alamofire
 import AlamofireImage
 import SwiftyJSON
+import SwiftProtobuf
 
 class SwapStartVC: BaseVC, UITextFieldDelegate {
     
@@ -84,6 +85,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     var toActionAmount = NSDecimalNumber.zero
     
     var txFee: Cosmos_Tx_V1beta1_Fee!
+    var txTip: Cosmos_Tx_V1beta1_Tip?
     var toMsg: JSON?
 
     override func viewDidLoad() {
@@ -158,8 +160,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             })
             outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == lastSwapSet[3] }.first ?? outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first!
             
-            _ = await inputCosmosChain.grpcFetcher?.fetchBalances()
-            _ = await outputCosmosChain.grpcFetcher?.fetchBalances()
+            _ = await inputCosmosChain.getGrpcfetcher()?.fetchBalances()
+            _ = await outputCosmosChain.getGrpcfetcher()?.fetchBalances()
             
             DispatchQueue.main.async {
                 self.onInitView()
@@ -193,6 +195,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         slippageBtn.isHidden = false
         rootScrollView.isHidden = false
         swapBtn.isHidden = false
+        
         onReadyToUserInsert()
         
         if (BaseData.instance.getSwapWarn()) {
@@ -577,13 +580,12 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
 //            print("inner_mag ", inner_mag)
             Task {
                 do {
-                    let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher()
-                    let account = try await inputGrpcfetcher!.fetchAuth()
-                    let height = try await inputGrpcfetcher!.fetchLastBlock()!.block.header.height
-                    let simulReq = Signer.genIbcSendSimul(account!, UInt64(height), onBindIbcSend(inner_mag!), txFee, "", inputCosmosChain)
-                    let simulRes = try await inputGrpcfetcher!.simulateTx(simulReq)
-                    DispatchQueue.main.async {
-                        self.onUpdateWithSimul(simulRes, msg)
+                    if let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher(),
+                       let simulReq = try await Signer.genSimul(inputCosmosChain, onBindIbcSend(inner_mag!), "", txFee, txTip),
+                       let simulRes = try await inputGrpcfetcher.simulateTx(simulReq) {
+                        DispatchQueue.main.async {
+                            self.onUpdateWithSimul(simulRes, msg)
+                        }
                     }
                     
                 } catch {
@@ -604,13 +606,12 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
 //            print("inner_mag ", inner_mag)
             Task {
                 do {
-                    let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher()
-                    let account = try await inputGrpcfetcher!.fetchAuth()
-                    let height = try await inputGrpcfetcher!.fetchLastBlock()!.block.header.height
-                    let simulReq = Signer.genWasmSimul(account!, UInt64(height), onBindWasm(inner_mag!), txFee, "", inputCosmosChain)
-                    let simulRes = try await inputGrpcfetcher!.simulateTx(simulReq)
-                    DispatchQueue.main.async {
-                        self.onUpdateWithSimul(simulRes, msg)
+                    if let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher(),
+                       let simulReq = try await Signer.genSimul(inputCosmosChain, onBindWasm(inner_mag!), "", txFee, txTip),
+                       let simulRes = try await inputGrpcfetcher.simulateTx(simulReq) {
+                        DispatchQueue.main.async {
+                            self.onUpdateWithSimul(simulRes, msg)
+                        }
                     }
                     
                 } catch {
@@ -628,12 +629,12 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         }
     }
     
-    func onBindIbcSend(_ innerMsg: JSON) -> Ibc_Applications_Transfer_V1_MsgTransfer {
+    func onBindIbcSend(_ innerMsg: JSON) -> [Google_Protobuf_Any] {
         let sendCoin = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = innerMsg["token"]["denom"].stringValue
             $0.amount = innerMsg["token"]["amount"].stringValue
         }
-        return Ibc_Applications_Transfer_V1_MsgTransfer.with {
+        let ibcSendMsg = Ibc_Applications_Transfer_V1_MsgTransfer.with {
             $0.sender = innerMsg["sender"].stringValue
             $0.receiver = innerMsg["receiver"].stringValue
             $0.sourceChannel = innerMsg["source_channel"].stringValue
@@ -642,10 +643,11 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             $0.token = sendCoin
             $0.memo = innerMsg["memo"].stringValue
         }
+        return Signer.genIbcSendMsg(ibcSendMsg)
     }
     
-    func onBindWasm(_ innerMsg: JSON) -> [Cosmwasm_Wasm_V1_MsgExecuteContract] {
-        var result = [Cosmwasm_Wasm_V1_MsgExecuteContract]()
+    func onBindWasm(_ innerMsg: JSON) -> [Google_Protobuf_Any] {
+        var wasmMsgs = [Cosmwasm_Wasm_V1_MsgExecuteContract]()
         let jsonMsgBase64 = try! innerMsg["msg"].rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let fundCoin = Cosmos_Base_V1beta1_Coin.init(innerMsg["funds"].arrayValue[0]["denom"].stringValue, innerMsg["funds"].arrayValue[0]["amount"].stringValue)
         
@@ -655,8 +657,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             $0.msg = Data(base64Encoded: jsonMsgBase64)!
             $0.funds = [fundCoin]
         }
-        result.append(msg)
-        return result
+        wasmMsgs.append(msg)
+        return Signer.genWasmMsg(wasmMsgs)
     }
     
 }
@@ -678,7 +680,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                             }
                         })
                         inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first ?? inputAssetList[0]
-                        _ =  await inputCosmosChain.grpcFetcher?.fetchBalances()
+                        _ =  await inputCosmosChain.getGrpcfetcher()?.fetchBalances()
                         
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
@@ -701,7 +703,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                             }
                         })
                         outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first ?? outputAssetList[0]
-                        _ =  await outputCosmosChain.grpcFetcher?.fetchBalances()
+                        _ =  await outputCosmosChain.getGrpcfetcher()?.fetchBalances()
                         
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
@@ -752,19 +754,19 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                 
                 Task {
                     do {
-                        let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher()
-                        let account = try await inputGrpcfetcher!.fetchAuth()
-                        let height = try await inputGrpcfetcher!.fetchLastBlock()!.block.header.height
-                        let broadReq = Signer.genIbcSendTx(account!, UInt64(height), onBindIbcSend(inner_mag!), txFee, "", inputCosmosChain)
-                        let response = try await inputGrpcfetcher!.broadcastTx(broadReq)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.inputCosmosChain
-                            txResult.broadcastTxResponse = response
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
+                        if let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher(),
+                           let broadReq = try await Signer.genTx(inputCosmosChain, onBindIbcSend(inner_mag!), "", txFee, txTip),
+                           let broadRes = try await inputGrpcfetcher.broadcastTx(broadReq) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                                self.loadingView.isHidden = true
+                                let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                                txResult.selectedChain = self.inputCosmosChain
+                                txResult.broadcastTxResponse = broadRes
+                                txResult.modalPresentationStyle = .fullScreen
+                                self.present(txResult, animated: true)
+                            })
+                        }
+                           
                         
                     } catch {
                         //TODO handle Error
@@ -776,19 +778,18 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                 
                 Task {
                     do {
-                        let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher()
-                        let account = try await inputGrpcfetcher!.fetchAuth()
-                        let height = try await inputGrpcfetcher!.fetchLastBlock()!.block.header.height
-                        let broadReq = Signer.genWasmTx(account!, UInt64(height), onBindWasm(inner_mag!), txFee, "", inputCosmosChain)
-                        let response = try await inputGrpcfetcher!.broadcastTx(broadReq)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.inputCosmosChain
-                            txResult.broadcastTxResponse = response
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
+                        if let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher(),
+                           let broadReq = try await Signer.genTx(inputCosmosChain, onBindWasm(inner_mag!), "", txFee, txTip),
+                           let broadRes = try await inputGrpcfetcher.broadcastTx(broadReq) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                                self.loadingView.isHidden = true
+                                let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                                txResult.selectedChain = self.inputCosmosChain
+                                txResult.broadcastTxResponse = broadRes
+                                txResult.modalPresentationStyle = .fullScreen
+                                self.present(txResult, animated: true)
+                            })
+                        }
                         
                     } catch {
                         //TODO handle Error

@@ -22,22 +22,6 @@ class Signer {
     }
     
     //Tx for Ibc Transfer
-    static func genIbcSendTx(_ account: Google_Protobuf_Any,
-                             _ timeout: UInt64,
-                             _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer,
-                             _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let ibcSendMsg = genIbcSendMsg(ibcTransfer)
-        return getSignedTx(account, timeout, ibcSendMsg, fee, memo, baseChain)
-    }
-    
-    static func genIbcSendSimul(_ account: Google_Protobuf_Any,
-                                _ timeout: UInt64,
-                                _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer,
-                                _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let ibcSendMsg = genIbcSendMsg(ibcTransfer)
-        return getSimulateTx(account, timeout, ibcSendMsg, fee, memo, baseChain)
-    }
-    
     static func genIbcSendMsg(_ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/ibc.applications.transfer.v1.MsgTransfer"
@@ -47,22 +31,6 @@ class Signer {
     }
     
     //Tx for Wasm Exe
-    static func genWasmTx(_ account: Google_Protobuf_Any,
-                          _ timeout: UInt64,
-                          _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract],
-                          _ fee: Cosmos_Tx_V1beta1_Fee,_ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let wasmMsg = genWasmMsg(wasmContracts)
-        return getSignedTx(account, timeout, wasmMsg, fee, memo, baseChain)
-    }
-    
-    static func genWasmSimul(_ account: Google_Protobuf_Any,
-                             _ timeout: UInt64,
-                             _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract],
-                             _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let wasmMsg = genWasmMsg(wasmContracts)
-        return getSimulateTx(account, timeout, wasmMsg, fee, memo, baseChain)
-    }
-    
     static func genWasmMsg(_ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract]) -> [Google_Protobuf_Any] {
         var result = [Google_Protobuf_Any]()
         wasmContracts.forEach { msg in
@@ -104,22 +72,6 @@ class Signer {
     
     
     //Tx for Common ReDelegate
-    static func genRedelegateTx(_ account: Google_Protobuf_Any,
-                                _ timeout: UInt64,
-                                _ toRedelegate: Cosmos_Staking_V1beta1_MsgBeginRedelegate,
-                                _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let redeleMsg = genRedelegateMsg(toRedelegate)
-        return getSignedTx(account, timeout, redeleMsg, fee, memo, baseChain)
-    }
-    
-    static func genRedelegateSimul(_ account: Google_Protobuf_Any,
-                                   _ timeout: UInt64,
-                                   _ toRedelegate: Cosmos_Staking_V1beta1_MsgBeginRedelegate,
-                                   _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let redeleMsg = genRedelegateMsg(toRedelegate)
-        return getSimulateTx(account, timeout, redeleMsg, fee, memo, baseChain)
-    }
-    
     static func genRedelegateMsg(_ toRedelegate: Cosmos_Staking_V1beta1_MsgBeginRedelegate) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgBeginRedelegate"
@@ -254,22 +206,6 @@ class Signer {
     }
     
     //Tx for Common Reward Address Change
-    static func genRewardAddressTx(_ account: Google_Protobuf_Any,
-                                   _ timeout: UInt64,
-                                   _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress,
-                                   _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let setRewardAddressMsg = genRewardAddressMsg(setAddress)
-        return getSignedTx(account, timeout, setRewardAddressMsg, fee, memo, baseChain)
-    }
-    
-    static func genRewardAddressTxSimul(_ account: Google_Protobuf_Any,
-                                        _ timeout: UInt64,
-                                        _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress,
-                                        _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let setRewardAddressMsg = genRewardAddressMsg(setAddress)
-        return getSimulateTx(account, timeout, setRewardAddressMsg, fee, memo, baseChain)
-    }
-    
     static func genRewardAddressMsg(_ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress"
@@ -1385,7 +1321,7 @@ class Signer {
     
     static func genSimul(_ baseChain: BaseChain,
                          _ msgs: [Google_Protobuf_Any],
-                         _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip) async throws -> Cosmos_Tx_V1beta1_SimulateRequest? {
+                         _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip?) async throws -> Cosmos_Tx_V1beta1_SimulateRequest? {
         if let grpcFetcher = baseChain.getGrpcfetcher(),
            let account = try await grpcFetcher.fetchAuth(),
            let height = try? await grpcFetcher.fetchLastBlock()!.block.header.height {
@@ -1401,7 +1337,7 @@ class Signer {
     
     static func genTx(_ baseChain: BaseChain,
                       _ msgs: [Google_Protobuf_Any],
-                      _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip) async throws -> Cosmos_Tx_V1beta1_BroadcastTxRequest? {
+                      _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip?) async throws -> Cosmos_Tx_V1beta1_BroadcastTxRequest? {
         if let grpcFetcher = baseChain.getGrpcfetcher(),
            let account = try await grpcFetcher.fetchAuth(),
            let height = try? await grpcFetcher.fetchLastBlock()!.block.header.height {
