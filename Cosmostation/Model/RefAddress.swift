@@ -14,23 +14,23 @@ public struct RefAddress {
     var chainTag: String = ""
     var bechAddress: String = ""
     var evmAddress: String = ""
-    var lastMainValue: String = "0"         // last coins total USD value
     var lastMainAmount: String = "0"        // last main denom amount
+    var lastMainValue: String = "0"         // last coins total USD value
     var lastTokenValue: String = "0"        // last tokens total USD value
     var lastCoinCnt: Int64 = 0              // last coin type counts
     
     //create
     init(_ accountId: Int64, _ chainTag: String, _ bechAddress: String, _ evmAddress: String,
-         _ lastMainValue: String? = "0", _ lastMainAmount: String? = "0", _ lastTokenValue: String? = "0", _ lastCoinCnt: Int? = 0) {
+         _ lastMainAmount: String? = "0", _ lastMainValue: String? = "0", _ lastTokenValue: String? = "0", _ lastCoinCnt: Int? = 0) {
         self.accountId = accountId
         self.chainTag = chainTag
         self.bechAddress = bechAddress
         self.evmAddress = evmAddress
-        if (lastMainValue != nil && !lastMainValue!.isEmpty) {
-            self.lastMainValue = lastMainValue!
-        }
         if (lastMainAmount != nil && !lastMainAmount!.isEmpty) {
             self.lastMainAmount = lastMainAmount!
+        }
+        if (lastMainValue != nil && !lastMainValue!.isEmpty) {
+            self.lastMainValue = lastMainValue!
         }
         if (lastTokenValue != nil && !lastTokenValue!.isEmpty) {
             self.lastTokenValue = lastTokenValue!
@@ -42,17 +42,17 @@ public struct RefAddress {
     
     //db query
     init(_ id: Int64, _ accountId: Int64, _ chainTag: String, _ bechAddress: String, _ evmAddress: String,
-         _ lastMainValue: String?, _ lastMainAmount: String?, _ lastTokenValue: String?, _ lastCoinCnt: Int64?) {
+         _ lastMainAmount: String?, _ lastMainValue: String?, _ lastTokenValue: String?, _ lastCoinCnt: Int64?) {
         self.id = id
         self.accountId = accountId
         self.chainTag = chainTag
         self.bechAddress = bechAddress
         self.evmAddress = evmAddress
-        if (lastMainValue != nil && !lastMainValue!.isEmpty) {
-            self.lastMainValue = lastMainValue!
-        }
         if (lastMainAmount != nil && !lastMainAmount!.isEmpty) {
             self.lastMainAmount = lastMainAmount!
+        }
+        if (lastMainValue != nil && !lastMainValue!.isEmpty) {
+            self.lastMainValue = lastMainValue!
         }
         if (lastTokenValue != nil && !lastTokenValue!.isEmpty) {
             self.lastTokenValue = lastTokenValue!

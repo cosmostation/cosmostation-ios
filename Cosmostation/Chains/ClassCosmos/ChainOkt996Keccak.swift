@@ -58,13 +58,28 @@ class ChainOkt996Keccak: BaseChain  {
             }
             
             if let oktFetcher = getLcdfetcher(), fetchState == .Success {
-                allCoinValue = oktFetcher.allCoinValue()
-                allCoinUSDValue = oktFetcher.allCoinValue(true)
                 
-                BaseData.instance.updateRefAddressesCoinValue(
-                    RefAddress(id, self.tag, self.bechAddress!, self.evmAddress ?? "",
-                               oktFetcher.lcdAllStakingDenomAmount().stringValue, allCoinUSDValue.stringValue,
-                               nil, oktFetcher.lcdAccountInfo.oktCoins?.count))
+                var coinsValue = NSDecimalNumber.zero
+                var coinsUSDValue = NSDecimalNumber.zero
+                var mainCoinAmount = NSDecimalNumber.zero
+                var tokensValue = NSDecimalNumber.zero
+                var tokensUSDValue = NSDecimalNumber.zero
+                
+                coinsCnt = oktFetcher.valueCoinCnt()
+                coinsValue = oktFetcher.allCoinValue()
+                coinsUSDValue = oktFetcher.allCoinValue(true)
+                mainCoinAmount = oktFetcher.lcdAllStakingDenomAmount()
+                
+                allCoinValue = coinsValue
+                allCoinUSDValue = coinsUSDValue
+                allTokenValue = tokensValue
+                allTokenUSDValue = tokensUSDValue
+                
+                BaseData.instance.updateRefAddressesValue(
+                    RefAddress(id, self.tag, self.bechAddress ?? "", self.evmAddress ?? "",
+                               mainCoinAmount.stringValue, allCoinUSDValue.stringValue, allTokenUSDValue.stringValue,
+                               coinsCnt))
+                
             }
             
             DispatchQueue.main.async(execute: {

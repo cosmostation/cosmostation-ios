@@ -166,6 +166,7 @@ class FetcherGrpc {
             .adding(unbondingValueSum(usd)).adding(rewardValueSum(usd)).adding(commissionValueSum(usd))
     }
     
+    
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if (chain.supportCw20) {
             if let tokenInfo = mintscanCw20Tokens.filter({ $0.address == address }).first {
@@ -187,6 +188,16 @@ class FetcherGrpc {
         }
         return result
     }
+    
+    func valueCoinCnt() -> Int {
+        return cosmosBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0
+    }
+    
+    func valueTokenCnt() -> Int {
+        return mintscanCw20Tokens.filter {  $0.getAmount() != NSDecimalNumber.zero }.count
+    }
+    
+    
     
     func balanceAmount(_ denom: String) -> NSDecimalNumber {
         return NSDecimalNumber(string: cosmosBalances?.filter { $0.denom == denom }.first?.amount ?? "0")

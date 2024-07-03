@@ -54,7 +54,7 @@ class ChainOktEVM: BaseChain {
             
             if (lcdResult == false || evmResult == false) {
                 fetchState = .Fail
-                print("fetching Some error ", tag)
+//                print("fetching Some error ", tag)
             } else {
                 fetchState = .Success
 //                print("fetching good ", tag)
@@ -62,15 +62,30 @@ class ChainOktEVM: BaseChain {
             
             if let oktFetcher = getLcdfetcher(),
                 let evmFetcher = getEvmfetcher(), fetchState == .Success {
-                allCoinValue = oktFetcher.allCoinValue()
-                allCoinUSDValue = oktFetcher.allCoinValue(true)
-                allTokenValue = evmFetcher.allTokenValue()
-                allTokenUSDValue = evmFetcher.allTokenValue(true)
+                
+                var coinsValue = NSDecimalNumber.zero
+                var coinsUSDValue = NSDecimalNumber.zero
+                var mainCoinAmount = NSDecimalNumber.zero
+                var tokensValue = NSDecimalNumber.zero
+                var tokensUSDValue = NSDecimalNumber.zero
+                
+                coinsCnt = oktFetcher.valueCoinCnt()
+                coinsValue = oktFetcher.allCoinValue()
+                coinsUSDValue = oktFetcher.allCoinValue(true)
+                mainCoinAmount = oktFetcher.lcdAllStakingDenomAmount()
+                tokensCnt = evmFetcher.valueTokenCnt()
+                tokensValue = evmFetcher.allTokenValue()
+                tokensUSDValue = evmFetcher.allTokenValue(true)
+                
+                allCoinValue = coinsValue
+                allCoinUSDValue = coinsUSDValue
+                allTokenValue = tokensValue
+                allTokenUSDValue = tokensUSDValue
                 
                 BaseData.instance.updateRefAddressesValue(
-                    RefAddress(id, self.tag, self.bechAddress!, self.evmAddress!,
-                               oktFetcher.lcdAllStakingDenomAmount().stringValue, allCoinUSDValue.stringValue,
-                               allTokenUSDValue.stringValue, oktFetcher.lcdAccountInfo.oktCoins?.count))
+                    RefAddress(id, self.tag, self.bechAddress ?? "", self.evmAddress ?? "",
+                               mainCoinAmount.stringValue, allCoinUSDValue.stringValue, allTokenUSDValue.stringValue,
+                               coinsCnt))
             }
             
             DispatchQueue.main.async(execute: {

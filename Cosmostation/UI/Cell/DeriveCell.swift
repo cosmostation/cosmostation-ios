@@ -107,19 +107,10 @@ class DeriveCell: UITableViewCell {
                 denomLabel.text = "OKT"
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
                 
-                let coinCnt = chain.getLcdfetcher()?.lcdAccountInfo.oktCoins?.count ?? 0
-                coinCntLabel.text = String(coinCnt) + " Coins"
-                
             } else if (chain.supportEvm) {
                 let dpAmount = chain.getEvmfetcher()?.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18Down) ?? NSDecimalNumber.zero
                 denomLabel.text = chain.coinSymbol
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
-                
-                if (dpAmount != NSDecimalNumber.zero) {
-                    coinCntLabel.text = "1 Coins"
-                } else {
-                    coinCntLabel.text = "0 Coins"
-                }
                 
             } else if (chain.isCosmos()) {
                 let stakeDenom = chain.stakeDenom!
@@ -127,10 +118,9 @@ class DeriveCell: UITableViewCell {
                 if let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
                     WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)
                 }
-                
-                let coinCnt = chain.getGrpcfetcher()?.cosmosBalances?.count ?? 0
-                coinCntLabel.text = String(coinCnt) + " Coins"
             }
+            
+            coinCntLabel.text =  String(chain.coinsCnt) + " Coins"
             
         } else {
             loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
