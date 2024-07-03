@@ -39,7 +39,7 @@ class SettingSwitchCell: UITableViewCell {
     }
     
     func onBindTestnet() {
-        setImg.image = UIImage(named: "setEngineer")
+        setImg.image = UIImage(named: "setTestnet")
         setTitleLabel.text = NSLocalizedString("setting_show_testnet", comment: "")
         selectSwitch.isOn = BaseData.instance.getShowTestnet()
     }
