@@ -117,31 +117,10 @@ class Portfolio2Cell: UITableViewCell {
                 WDP.dpValue(chain.allValue(), valuecurrencyLabel, valueLabel)
             }
             
-            var coinCntString = ""
-            var tokenCnt = 0
-            if (chain.name == "OKT") {
-                if let lcdFetcher = chain.getLcdfetcher() {
-                    coinCntString = String(lcdFetcher.lcdAccountInfo.oktCoins?.count ?? 0) + " Coins"
-                }
-                if let evmFetcher = chain.getEvmfetcher() {
-                    tokenCnt = evmFetcher.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
-                }
-                
-            } else if let grpcFetcher = chain.getGrpcfetcher() {
-                coinCntString = String(grpcFetcher.cosmosBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0) + " Coins"
-                if (chain.supportCw20) {
-                    tokenCnt = grpcFetcher.mintscanCw20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
-                }
-                
-            } else if let evmFetcher = chain.getEvmfetcher() {
-                coinCntString = String(evmFetcher.evmBalances != NSDecimalNumber.zero ? 1 : 0) + " Coins"
-                tokenCnt = evmFetcher.mintscanErc20Tokens.filter { $0.getAmount() != NSDecimalNumber.zero }.count
-            }
-            
-            if (tokenCnt == 0) {
-                assetCntLabel.text = coinCntString
+            if (chain.tokensCnt == 0) {
+                assetCntLabel.text =  String(chain.coinsCnt) + " Coins"
             } else {
-                assetCntLabel.text = String(tokenCnt) + " Tokens,  " + coinCntString
+                assetCntLabel.text = String(chain.tokensCnt) + " Tokens " + String(chain.coinsCnt) + " Coins"
             }
             
         } else {

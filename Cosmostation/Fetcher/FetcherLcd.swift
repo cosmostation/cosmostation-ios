@@ -32,6 +32,14 @@ class FetcherLcd {
         return NSDecimalNumber.zero
     }
     
+    func valueCoinCnt() -> Int {
+        return lcdAccountInfo.oktCoins?.count ?? 0
+    }
+    
+    func valueTokenCnt() -> Int {
+        return 0
+    }
+    
     func lcdBalanceAmount(_ denom: String) -> NSDecimalNumber {
         return NSDecimalNumber.zero
     }

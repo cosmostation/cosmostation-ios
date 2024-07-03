@@ -47,6 +47,7 @@ class FetcherEvmrpc {
             
 //            print("fetchAllErc20Balance start ", chain.tag)
             let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)
+//            print("userDisplaytoken ", chain.tag, "  ", userDisplaytoken?.count)
             await mintscanErc20Tokens.concurrentForEach { erc20 in
                 if (self.chain.isCosmos()) {
                     await self.fetchErc20Balance(erc20)
@@ -62,7 +63,7 @@ class FetcherEvmrpc {
                     }
                 }
             }
-//            print("fetchAllErc20Balance end ", chain.tag)
+//            print("fetchAllErc20Balance end ", chain.tag, "  ", mintscanErc20Tokens.count)
             return true
             
         } catch {
@@ -93,6 +94,14 @@ class FetcherEvmrpc {
             result = result.adding(value)
         }
         return result
+    }
+    
+    func valueCoinCnt() -> Int {
+        return evmBalances != NSDecimalNumber.zero ? 1 : 0
+    }
+    
+    func valueTokenCnt() -> Int {
+        return mintscanErc20Tokens.filter {  $0.getAmount() != NSDecimalNumber.zero }.count
     }
     
 }

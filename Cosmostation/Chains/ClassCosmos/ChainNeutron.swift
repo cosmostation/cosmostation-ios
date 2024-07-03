@@ -55,14 +55,30 @@ class ChainNeutron: BaseChain {
             
             if let neutronFetcher = getGrpcfetcher(), fetchState == .Success {
                 neutronFetcher.onCheckVesting()
-                allCoinValue = neutronFetcher.allCoinValue()
-                allCoinUSDValue = neutronFetcher.allCoinValue(true)
-                allTokenValue = neutronFetcher.allTokenValue()
-                allTokenUSDValue = neutronFetcher.allTokenValue(true)
+                
+                var coinsValue = NSDecimalNumber.zero
+                var coinsUSDValue = NSDecimalNumber.zero
+                var mainCoinAmount = NSDecimalNumber.zero
+                var tokensValue = NSDecimalNumber.zero
+                var tokensUSDValue = NSDecimalNumber.zero
+                
+                coinsCnt = neutronFetcher.valueCoinCnt()
+                coinsValue = neutronFetcher.allCoinValue()
+                coinsUSDValue = neutronFetcher.allCoinValue(true)
+                mainCoinAmount = neutronFetcher.allStakingDenomAmount()
+                tokensCnt = neutronFetcher.valueTokenCnt()
+                tokensValue = neutronFetcher.allTokenValue()
+                tokensUSDValue = neutronFetcher.allTokenValue(true)
+                
+                allCoinValue = coinsValue
+                allCoinUSDValue = coinsUSDValue
+                allTokenValue = tokensValue
+                allTokenUSDValue = tokensUSDValue
+                
                 BaseData.instance.updateRefAddressesValue(
-                    RefAddress(id, self.tag, self.bechAddress!, self.evmAddress ?? "",
-                               neutronFetcher.allStakingDenomAmount().stringValue, allCoinUSDValue.stringValue,
-                               allTokenUSDValue.stringValue, neutronFetcher.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
+                    RefAddress(id, self.tag, self.bechAddress ?? "", self.evmAddress ?? "",
+                               mainCoinAmount.stringValue, allCoinUSDValue.stringValue, allTokenUSDValue.stringValue,
+                               coinsCnt))
                 
             }
             

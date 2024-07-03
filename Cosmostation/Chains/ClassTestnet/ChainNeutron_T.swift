@@ -27,8 +27,8 @@ class ChainNeutron_T: ChainNeutron {
         validatorPrefix = "neutronvaloper"
         supportStaking = false
         supportCw20 = false
-//        grpcHost = "grpc-office-neutron.cosmostation.io"
-        grpcHost = "grpc-office-neutron2.cosmostation.io"
+        grpcHost = "grpc-office-neutron.cosmostation.io"
+//        grpcHost = "grpc-office-neutron2.cosmostation.io"
         
         
     }

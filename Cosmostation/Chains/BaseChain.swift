@@ -58,6 +58,9 @@ class BaseChain {
     var lcdFetcher: FetcherLcd?
     var evmFetcher: FetcherEvmrpc?
     
+    var coinsCnt = 0
+    var tokensCnt = 0
+    
     init() { }
     
     func getHDPath(_ lastPath: String) -> String {
@@ -107,7 +110,7 @@ class BaseChain {
     
     func getEvmfetcher() -> FetcherEvmrpc? {
         if (supportEvm != true) { return nil }
-        if (lcdFetcher == nil) {
+        if (evmFetcher == nil) {
             evmFetcher = FetcherEvmrpc.init(self)
         }
         return evmFetcher
@@ -118,6 +121,8 @@ class BaseChain {
         Task {
             var evmResult: Bool?
             var grpcResult: Bool?
+            coinsCnt = 0
+            tokensCnt = 0
             
             if (supportEvm == true) {
                 evmResult = await getEvmfetcher()?.fetchEvmData(id)
@@ -137,25 +142,60 @@ class BaseChain {
             if (self.fetchState == .Success) {
                 if let grpcFetcher = getGrpcfetcher() {
                     grpcFetcher.onCheckVesting()
-                    allCoinValue = grpcFetcher.allCoinValue()
-                    allCoinUSDValue = grpcFetcher.allCoinValue(true)
-                    allTokenValue = grpcFetcher.allTokenValue()
-                    allTokenUSDValue = grpcFetcher.allTokenValue(true)
-                    BaseData.instance.updateRefAddressesValue(
-                        RefAddress(id, self.tag, self.bechAddress!, self.evmAddress ?? "",
-                                   grpcFetcher.allStakingDenomAmount().stringValue, allCoinUSDValue.stringValue,
-                                   allTokenUSDValue.stringValue, grpcFetcher.cosmosBalances?.filter({ BaseData.instance.getAsset(self.apiName, $0.denom) != nil }).count))
-                    
-                } else if let evmFetcher = getEvmfetcher() {
-                    allCoinValue = evmFetcher.allCoinValue()
-                    allCoinUSDValue = evmFetcher.allCoinValue(true)
-                    allTokenValue = evmFetcher.allTokenValue()
-                    allTokenUSDValue = evmFetcher.allTokenValue(true)
-                    BaseData.instance.updateRefAddressesValue(
-                        RefAddress(id, self.tag, self.bechAddress ?? "", self.evmAddress!,
-                                   evmFetcher.evmBalances.stringValue, allCoinUSDValue.stringValue,
-                                   allTokenUSDValue.stringValue, (evmFetcher.evmBalances != NSDecimalNumber.zero ? 1 : 0) ))
                 }
+                var coinsValue = NSDecimalNumber.zero
+                var coinsUSDValue = NSDecimalNumber.zero
+                var mainCoinAmount = NSDecimalNumber.zero
+                var tokensValue = NSDecimalNumber.zero
+                var tokensUSDValue = NSDecimalNumber.zero
+                
+                if (supportEvm && supportCosmosGrpc) {
+                    if let grpcFetcher = getGrpcfetcher() {
+                        coinsCnt = grpcFetcher.valueCoinCnt()
+                        coinsValue = grpcFetcher.allCoinValue()
+                        coinsUSDValue = grpcFetcher.allCoinValue(true)
+                        mainCoinAmount = grpcFetcher.allStakingDenomAmount()
+                        tokensCnt = grpcFetcher.valueTokenCnt()
+                        tokensValue = grpcFetcher.allTokenValue()
+                        tokensUSDValue = grpcFetcher.allTokenValue(true)
+                    }
+                    if let evmFetcher = getEvmfetcher() {
+                        tokensCnt = tokensCnt + evmFetcher.valueTokenCnt()
+                        tokensValue = tokensValue.adding(evmFetcher.allTokenValue())
+                        tokensUSDValue = tokensUSDValue.adding(evmFetcher.allTokenValue(true))
+                    }
+                    
+                } else if (supportCosmosGrpc) {
+                    if let grpcFetcher = getGrpcfetcher() {
+                        coinsCnt = grpcFetcher.valueCoinCnt()
+                        coinsValue = grpcFetcher.allCoinValue()
+                        coinsUSDValue = grpcFetcher.allCoinValue(true)
+                        mainCoinAmount = grpcFetcher.allStakingDenomAmount()
+                        tokensCnt = grpcFetcher.valueTokenCnt()
+                        tokensValue = grpcFetcher.allTokenValue()
+                        tokensUSDValue = grpcFetcher.allTokenValue(true)
+                    }
+                    
+                } else if (supportEvm) {
+                    if let evmFetcher = getEvmfetcher() {
+                        coinsCnt = evmFetcher.valueCoinCnt()
+                        coinsValue = evmFetcher.allCoinValue()
+                        coinsUSDValue = evmFetcher.allCoinValue(true)
+                        mainCoinAmount = evmFetcher.evmBalances
+                        tokensCnt = evmFetcher.valueTokenCnt()
+                        tokensValue = evmFetcher.allTokenValue()
+                        tokensUSDValue = evmFetcher.allTokenValue(true)
+                    }
+                }
+                allCoinValue = coinsValue
+                allCoinUSDValue = coinsUSDValue
+                allTokenValue = tokensValue
+                allTokenUSDValue = tokensUSDValue
+                
+                BaseData.instance.updateRefAddressesValue(
+                    RefAddress(id, self.tag, self.bechAddress ?? "", self.evmAddress ?? "",
+                               mainCoinAmount.stringValue, allCoinUSDValue.stringValue, allTokenUSDValue.stringValue,
+                               coinsCnt))
                 
             }
             
