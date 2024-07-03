@@ -81,22 +81,6 @@ class Signer {
     }
     
     //Tx for Common Claim Staking Rewards
-    static func genClaimRewardsTx(_ account: Google_Protobuf_Any,
-                                  _ timeout: UInt64,
-                                  _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                  _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest  {
-        let claimRewardMsg = genClaimStakingRewardMsg(account.accountInfos().0!, rewards)
-        return getSignedTx(account, timeout, claimRewardMsg, fee, memo, baseChain)
-    }
-    
-    static func genClaimRewardsSimul(_ account: Google_Protobuf_Any,
-                                     _ timeout: UInt64,
-                                     _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let claimRewardMsg = genClaimStakingRewardMsg(account.accountInfos().0!, rewards)
-        return getSimulateTx(account, timeout, claimRewardMsg, fee, memo, baseChain)
-    }
-    
     static func genClaimStakingRewardMsg(_ address: String, _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) -> [Google_Protobuf_Any] {
         var anyMsgs = [Google_Protobuf_Any]()
         for reward in rewards {
@@ -123,25 +107,7 @@ class Signer {
     }
     
     
-    //Tx for Common Re-Invest
-    static func genCompoundingTx(_ account: Google_Protobuf_Any,
-                                 _ timeout: UInt64,
-                                 _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                 _ stakingDenom: String,
-                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let reinvestMsg = genCompoundingMsg(account.accountInfos().0!, rewards, stakingDenom)
-        return getSignedTx(account, timeout, reinvestMsg, fee, memo, baseChain)
-    }
-    
-    static func genCompoundingSimul(_ account: Google_Protobuf_Any,
-                                    _ timeout: UInt64,
-                                    _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                    _ stakingDenom: String,
-                                    _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let reinvestMsg = genCompoundingMsg(account.accountInfos().0!, rewards, stakingDenom)
-        return getSimulateTx(account, timeout, reinvestMsg, fee, memo, baseChain)
-    }
-    
+    //Tx for Common Compounding
     static func genCompoundingMsg(_ address: String,
                                   _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                   _ stakingDenom: String) -> [Google_Protobuf_Any] {
