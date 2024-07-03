@@ -66,7 +66,7 @@ class CosmosNftVC: BaseVC {
     @objc func onRequestFetch() {
         if (isBusy) { return }
         isBusy = true
-        if let grpFetcher = selectedChain.grpcFetcher {
+        if let grpFetcher = selectedChain.getGrpcfetcher() {
             grpFetcher.fetchAllCw721()
         }
     }

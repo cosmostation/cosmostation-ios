@@ -22,22 +22,6 @@ class Signer {
     }
     
     //Tx for Ibc Transfer
-    static func genIbcSendTx(_ account: Google_Protobuf_Any,
-                             _ timeout: UInt64,
-                             _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer,
-                             _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let ibcSendMsg = genIbcSendMsg(ibcTransfer)
-        return getSignedTx(account, timeout, ibcSendMsg, fee, memo, baseChain)
-    }
-    
-    static func genIbcSendSimul(_ account: Google_Protobuf_Any,
-                                _ timeout: UInt64,
-                                _ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer,
-                                _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let ibcSendMsg = genIbcSendMsg(ibcTransfer)
-        return getSimulateTx(account, timeout, ibcSendMsg, fee, memo, baseChain)
-    }
-    
     static func genIbcSendMsg(_ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/ibc.applications.transfer.v1.MsgTransfer"
@@ -47,22 +31,6 @@ class Signer {
     }
     
     //Tx for Wasm Exe
-    static func genWasmTx(_ account: Google_Protobuf_Any,
-                          _ timeout: UInt64,
-                          _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract],
-                          _ fee: Cosmos_Tx_V1beta1_Fee,_ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let wasmMsg = genWasmMsg(wasmContracts)
-        return getSignedTx(account, timeout, wasmMsg, fee, memo, baseChain)
-    }
-    
-    static func genWasmSimul(_ account: Google_Protobuf_Any,
-                             _ timeout: UInt64,
-                             _ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract],
-                             _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let wasmMsg = genWasmMsg(wasmContracts)
-        return getSimulateTx(account, timeout, wasmMsg, fee, memo, baseChain)
-    }
-    
     static func genWasmMsg(_ wasmContracts: [Cosmwasm_Wasm_V1_MsgExecuteContract]) -> [Google_Protobuf_Any] {
         var result = [Google_Protobuf_Any]()
         wasmContracts.forEach { msg in
@@ -104,22 +72,6 @@ class Signer {
     
     
     //Tx for Common ReDelegate
-    static func genRedelegateTx(_ account: Google_Protobuf_Any,
-                                _ timeout: UInt64,
-                                _ toRedelegate: Cosmos_Staking_V1beta1_MsgBeginRedelegate,
-                                _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let redeleMsg = genRedelegateMsg(toRedelegate)
-        return getSignedTx(account, timeout, redeleMsg, fee, memo, baseChain)
-    }
-    
-    static func genRedelegateSimul(_ account: Google_Protobuf_Any,
-                                   _ timeout: UInt64,
-                                   _ toRedelegate: Cosmos_Staking_V1beta1_MsgBeginRedelegate,
-                                   _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let redeleMsg = genRedelegateMsg(toRedelegate)
-        return getSimulateTx(account, timeout, redeleMsg, fee, memo, baseChain)
-    }
-    
     static func genRedelegateMsg(_ toRedelegate: Cosmos_Staking_V1beta1_MsgBeginRedelegate) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgBeginRedelegate"
@@ -129,22 +81,6 @@ class Signer {
     }
     
     //Tx for Common Claim Staking Rewards
-    static func genClaimRewardsTx(_ account: Google_Protobuf_Any,
-                                  _ timeout: UInt64,
-                                  _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                  _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest  {
-        let claimRewardMsg = genClaimStakingRewardMsg(account.accountInfos().0!, rewards)
-        return getSignedTx(account, timeout, claimRewardMsg, fee, memo, baseChain)
-    }
-    
-    static func genClaimRewardsSimul(_ account: Google_Protobuf_Any,
-                                     _ timeout: UInt64,
-                                     _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                     _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let claimRewardMsg = genClaimStakingRewardMsg(account.accountInfos().0!, rewards)
-        return getSimulateTx(account, timeout, claimRewardMsg, fee, memo, baseChain)
-    }
-    
     static func genClaimStakingRewardMsg(_ address: String, _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) -> [Google_Protobuf_Any] {
         var anyMsgs = [Google_Protobuf_Any]()
         for reward in rewards {
@@ -171,25 +107,7 @@ class Signer {
     }
     
     
-    //Tx for Common Re-Invest
-    static func genCompoundingTx(_ account: Google_Protobuf_Any,
-                                 _ timeout: UInt64,
-                                 _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                 _ stakingDenom: String,
-                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let reinvestMsg = genCompoundingMsg(account.accountInfos().0!, rewards, stakingDenom)
-        return getSignedTx(account, timeout, reinvestMsg, fee, memo, baseChain)
-    }
-    
-    static func genCompoundingSimul(_ account: Google_Protobuf_Any,
-                                    _ timeout: UInt64,
-                                    _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                    _ stakingDenom: String,
-                                    _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let reinvestMsg = genCompoundingMsg(account.accountInfos().0!, rewards, stakingDenom)
-        return getSimulateTx(account, timeout, reinvestMsg, fee, memo, baseChain)
-    }
-    
+    //Tx for Common Compounding
     static func genCompoundingMsg(_ address: String,
                                   _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                   _ stakingDenom: String) -> [Google_Protobuf_Any] {
@@ -225,22 +143,6 @@ class Signer {
     }
     
     //Tx for Common Vote
-    static func genVotesTx(_ account: Google_Protobuf_Any, 
-                           _ timeout: UInt64,
-                           _ votes: [Cosmos_Gov_V1beta1_MsgVote],
-                           _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let voteMsg = genVoteMsg(votes)
-        return getSignedTx(account, timeout, voteMsg, fee, memo, baseChain)
-    }
-    
-    static func genVotesSimul(_ account: Google_Protobuf_Any, 
-                              _ timeout: UInt64,
-                              _ votes: [Cosmos_Gov_V1beta1_MsgVote],
-                              _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let voteMsg = genVoteMsg(votes)
-        return getSimulateTx(account, timeout, voteMsg, fee, memo, baseChain)
-    }
-    
     static func genVoteMsg(_ votes: [Cosmos_Gov_V1beta1_MsgVote]) -> [Google_Protobuf_Any] {
         var anyMsgs = Array<Google_Protobuf_Any>()
         votes.forEach { vote in
@@ -254,22 +156,6 @@ class Signer {
     }
     
     //Tx for Common Reward Address Change
-    static func genRewardAddressTx(_ account: Google_Protobuf_Any,
-                                   _ timeout: UInt64,
-                                   _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress,
-                                   _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let setRewardAddressMsg = genRewardAddressMsg(setAddress)
-        return getSignedTx(account, timeout, setRewardAddressMsg, fee, memo, baseChain)
-    }
-    
-    static func genRewardAddressTxSimul(_ account: Google_Protobuf_Any,
-                                        _ timeout: UInt64,
-                                        _ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress,
-                                        _ fee: Cosmos_Tx_V1beta1_Fee, _ memo: String, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let setRewardAddressMsg = genRewardAddressMsg(setAddress)
-        return getSimulateTx(account, timeout, setRewardAddressMsg, fee, memo, baseChain)
-    }
-    
     static func genRewardAddressMsg(_ setAddress: Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress"
@@ -278,261 +164,6 @@ class Signer {
         return [anyMsg]
     }
     
-//
-//    //for Osmosis custom msgs
-//    //Tx for Osmosis Swap In
-//    static func genSignedSwapInMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                         _ swapRoutes: [Osmosis_Poolmanager_V1beta1_SwapAmountInRoute], _ inputDenom: String, _ inputAmount: String, _ outputAmount: String,
-//                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let SwapInMsg = genSwapInMsg(auth, swapRoutes, inputDenom, inputAmount, outputAmount)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, SwapInMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateSwapInMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                           _ swapRoutes: [Osmosis_Poolmanager_V1beta1_SwapAmountInRoute], _ inputDenom: String, _ inputAmount: String, _ outputAmount: String,
-//                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let SwapInMsg = genSwapInMsg(auth, swapRoutes, inputDenom, inputAmount, outputAmount)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, SwapInMsg, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSwapInMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ swapRoutes: [Osmosis_Poolmanager_V1beta1_SwapAmountInRoute],
-//                             _ inputDenom: String, _ inputAmount: String, _ outputAmount: String) -> [Google_Protobuf_Any] {
-//        let inputCoin = Cosmos_Base_V1beta1_Coin.with {
-//            $0.denom = inputDenom
-//            $0.amount = inputAmount
-//        }
-//        let swapMsg = Osmosis_Gamm_V1beta1_MsgSwapExactAmountIn.with {
-//            $0.sender = WUtils.onParseAuthGrpc(auth).0!
-//            $0.routes = swapRoutes
-//            $0.tokenIn = inputCoin
-//            $0.tokenOutMinAmount = outputAmount
-//            
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn"
-//            $0.value = try! swapMsg.serializedData()
-//        }
-//        return [anyMsg]
-//    }
-//    
-//
-    
-//    //for IRIS custom msgs
-//    //Tx for Iris Issue Nft
-//    static func genSignedIssueNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                            _ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
-//                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let irisIssueNft = genIrisIssueNft(signer, denom_id, denom_name, id, name, uri, data)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, irisIssueNft, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateIssueNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                              _ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
-//                                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let irisIssueNft = genIrisIssueNft(signer, denom_id, denom_name, id, name, uri, data)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, irisIssueNft, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genIrisIssueNft(_ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String) -> [Google_Protobuf_Any] {
-//        var anyMsgs = Array<Google_Protobuf_Any>()
-//        let issueNftDenom = Irismod_Nft_MsgIssueDenom.with {
-//            $0.id = denom_id
-//            $0.name = denom_name
-//            $0.schema = ""
-//            $0.sender = signer
-//            $0.symbol = ""
-//            $0.mintRestricted = false
-//            $0.updateRestricted = false
-//        }
-//        let issueNftDenomMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/irismod.nft.MsgIssueDenom"
-//            $0.value = try! issueNftDenom.serializedData()
-//        }
-//        anyMsgs.append(issueNftDenomMsg)
-//        let issueNft = Irismod_Nft_MsgMintNFT.with {
-//            $0.sender = signer
-//            $0.recipient = signer
-//            $0.id = id
-//            $0.denomID = denom_id
-//            $0.name = name
-//            $0.uri = uri
-//            $0.data = data
-//        }
-//        let issueNftMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/irismod.nft.MsgMintNFT"
-//            $0.value = try! issueNft.serializedData()
-//        }
-//        anyMsgs.append(issueNftMsg)
-//        return anyMsgs
-//    }
-//    
-//    //Tx for Iris Send Nft
-//    static func genSignedSendNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                           _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ irisResponse: Irismod_Nft_QueryNFTResponse,
-//                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let irisSendNft = genIrisSendNft(signer, recipient, id, denom_id, irisResponse)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, irisSendNft, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateSendNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                             _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ irisResponse: Irismod_Nft_QueryNFTResponse,
-//                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let irisSendNft = genIrisSendNft(signer, recipient, id, denom_id, irisResponse)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, irisSendNft, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genIrisSendNft(_ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ irisResponse: Irismod_Nft_QueryNFTResponse) -> [Google_Protobuf_Any] {
-//        let issueNft = Irismod_Nft_MsgMintNFT.with {
-//            $0.sender = signer
-//            $0.recipient = recipient
-//            $0.id = id
-//            $0.denomID = denom_id
-//            $0.name = irisResponse.nft.name
-//            $0.uri = irisResponse.nft.uri
-//            $0.data = irisResponse.nft.data
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/irismod.nft.MsgTransferNFT"
-//            $0.value = try! issueNft.serializedData()
-//        }
-//        return [anyMsg]
-//    }
-//    
-//    //Tx for Iris Issue Nft Denom
-//    static func genSignedIssueNftDenomIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                                 _ signer: String,_ denom_id: String, _ denom_name: String,
-//                                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let irisIssueNftDenom = genIrisIssueNftDenom(signer, denom_id, denom_name)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, irisIssueNftDenom, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateIssueNftDenomIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                                   _ signer: String,_ denom_id: String, _ denom_name: String,
-//                                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let irisIssueNftDenom = genIrisIssueNftDenom(signer, denom_id, denom_name)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, irisIssueNftDenom, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genIrisIssueNftDenom(_ signer: String,_ denom_id: String, _ denom_name: String) -> [Google_Protobuf_Any] {
-//        let issueNft = Irismod_Nft_MsgIssueDenom.with {
-//            $0.id = denom_id
-//            $0.name = denom_name
-//            $0.schema = ""
-//            $0.sender = signer
-//            $0.symbol = ""
-//            $0.mintRestricted = false
-//            $0.updateRestricted = false
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/irismod.nft.MsgIssueDenom"
-//            $0.value = try! issueNft.serializedData()
-//        }
-//        return [anyMsg]
-//    }
-//    
-//    //for CRO custom msgs
-//    //Tx for Cro Issue Nft
-//    static func genSignedIssueNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                           _ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
-//                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let croIssueNft = genCroIssueNft(signer, denom_id, denom_name, id, name, uri, data)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, croIssueNft, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateIssueNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                             _ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
-//                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let croIssueNft = genCroIssueNft(signer, denom_id, denom_name, id, name, uri, data)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, croIssueNft, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genCroIssueNft(_ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String) -> [Google_Protobuf_Any] {
-//        var anyMsgs = Array<Google_Protobuf_Any>()
-//        let issueNftDenom = Chainmain_Nft_V1_MsgIssueDenom.with {
-//            $0.id = denom_id
-//            $0.name = denom_name
-//            $0.schema = ""
-//            $0.sender = signer
-//        }
-//        let issueNftDenomMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/chainmain.nft.v1.MsgIssueDenom"
-//            $0.value = try! issueNftDenom.serializedData()
-//        }
-//        anyMsgs.append(issueNftDenomMsg)
-//        let issueNft = Chainmain_Nft_V1_MsgMintNFT.with {
-//            $0.sender = signer
-//            $0.recipient = signer
-//            $0.id = id
-//            $0.denomID = denom_id
-//            $0.name = name
-//            $0.uri = uri
-//            $0.data = data
-//        }
-//        let issueNftMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/chainmain.nft.v1.MsgMintNFT"
-//            $0.value = try! issueNft.serializedData()
-//        }
-//        anyMsgs.append(issueNftMsg)
-//        return anyMsgs
-//    }
-//    
-//    //Tx for Cro Send Nft
-//    static func genSignedSendNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                          _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ croResponse: Chainmain_Nft_V1_QueryNFTResponse,
-//                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let croSendNft = genCroSendNft(signer, recipient, id, denom_id, croResponse)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, croSendNft, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateSendNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                            _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ croResponse: Chainmain_Nft_V1_QueryNFTResponse,
-//                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let croSendNft = genCroSendNft(signer, recipient, id, denom_id, croResponse)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, croSendNft, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genCroSendNft(_ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ croResponse: Chainmain_Nft_V1_QueryNFTResponse) -> [Google_Protobuf_Any] {
-//        let issueNft = Chainmain_Nft_V1_MsgTransferNFT.with {
-//            $0.sender = signer
-//            $0.recipient = recipient
-//            $0.id = id
-//            $0.denomID = denom_id
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/chainmain.nft.v1.MsgTransferNFT"
-//            $0.value = try! issueNft.serializedData()
-//        }
-//        return [anyMsg]
-//    }
-//    
-//    //Tx for Cro Issue Nft Denom
-//    static func genSignedIssueNftDenomCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                                _ signer: String,_ denom_id: String, _ denom_name: String,
-//                                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-//        let croIssueNftDenom = genCroIssueNftDenom(signer, denom_id, denom_name)
-//        return getGrpcSignedTx(auth, pubkeyType, chainType, croIssueNftDenom, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genSimulateIssueNftDenomCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ pubkeyType: Int64,
-//                                                  _ signer: String,_ denom_id: String, _ denom_name: String,
-//                                                  _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-//        let croIssueNftDenom = genCroIssueNftDenom(signer, denom_id, denom_name)
-//        return getGrpcSimulateTx(auth, pubkeyType, chainType, croIssueNftDenom, privateKey, publicKey, fee, memo)
-//    }
-//    
-//    static func genCroIssueNftDenom(_ signer: String,_ denom_id: String, _ denom_name: String) -> [Google_Protobuf_Any] {
-//        let issueNft = Chainmain_Nft_V1_MsgIssueDenom.with {
-//            $0.id = denom_id
-//            $0.name = denom_name
-//            $0.schema = ""
-//            $0.sender = signer
-//        }
-//        let anyMsg = Google_Protobuf_Any.with {
-//            $0.typeURL = "/chainmain.nft.v1.MsgIssueDenom"
-//            $0.value = try! issueNft.serializedData()
-//        }
-//        return [anyMsg]
-//    }
     
     //for kava sign
     //Tx for Kava CDP Create
@@ -1385,7 +1016,7 @@ class Signer {
     
     static func genSimul(_ baseChain: BaseChain,
                          _ msgs: [Google_Protobuf_Any],
-                         _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip) async throws -> Cosmos_Tx_V1beta1_SimulateRequest? {
+                         _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip?) async throws -> Cosmos_Tx_V1beta1_SimulateRequest? {
         if let grpcFetcher = baseChain.getGrpcfetcher(),
            let account = try await grpcFetcher.fetchAuth(),
            let height = try? await grpcFetcher.fetchLastBlock()!.block.header.height {
@@ -1401,7 +1032,7 @@ class Signer {
     
     static func genTx(_ baseChain: BaseChain,
                       _ msgs: [Google_Protobuf_Any],
-                      _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip) async throws -> Cosmos_Tx_V1beta1_BroadcastTxRequest? {
+                      _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip?) async throws -> Cosmos_Tx_V1beta1_BroadcastTxRequest? {
         if let grpcFetcher = baseChain.getGrpcfetcher(),
            let account = try await grpcFetcher.fetchAuth(),
            let height = try? await grpcFetcher.fetchLastBlock()!.block.header.height {

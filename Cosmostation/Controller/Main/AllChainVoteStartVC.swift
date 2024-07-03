@@ -99,7 +99,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
         if (baseAccount.getDpChains().filter { $0.fetchState == .Busy }.count == 0) {
             var stakedChains = [BaseChain]()
             baseAccount.getDpChains().filter { $0.isTestnet == false && $0.isDefault == true && $0.tag != "finschia438" }.forEach { chain in
-                if let grpcFetcher = chain.grpcFetcher {
+                if let grpcFetcher = chain.getGrpcfetcher() {
                     let delegated = grpcFetcher.delegationAmountSum()
                     let voteThreshold = chain.voteThreshold()
                     let txFee = chain.getInitPayableFee()
@@ -425,21 +425,19 @@ extension AllChainVoteStartVC {
 extension AllChainVoteStartVC {
     
     func simulateVoteTx(_ chain: BaseChain, _ msgVotes: [Cosmos_Gov_V1beta1_MsgVote]) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+        let msgs = Signer.genVoteMsg(msgVotes)
         if let grpcFetcher = chain.getGrpcfetcher(),
-           let account = try await grpcFetcher.fetchAuth(),
-            let height = try await grpcFetcher.fetchLastBlock()?.block.header.height {
-            let simulReq = Signer.genVotesSimul(account, UInt64(height), msgVotes, chain.getInitPayableFee()!, "", chain)
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: grpcFetcher.getClient()).simulate(simulReq, callOptions: grpcFetcher.getCallOptions()).response.get()
+           let simulReq = try await Signer.genSimul(chain, msgs, "", chain.getInitPayableFee()!, nil) {
+            return try await grpcFetcher.simulateTx(simulReq)
         }
         return nil
     }
     
-    func broadcastVoteTx(_ chain: BaseChain, _ msgVotes: [Cosmos_Gov_V1beta1_MsgVote], _ fee: Cosmos_Tx_V1beta1_Fee) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+    func broadcastVoteTx(_ chain: BaseChain, _ msgVotes: [Cosmos_Gov_V1beta1_MsgVote], _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip? = nil) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+        let msgs = Signer.genVoteMsg(msgVotes)
         if let grpcFetcher = chain.getGrpcfetcher(),
-           let account = try await grpcFetcher.fetchAuth(),
-           let height = try await grpcFetcher.fetchLastBlock()?.block.header.height {
-            let broadReq = Signer.genVotesTx(account, UInt64(height), msgVotes, fee, "", chain)
-            return try? await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: grpcFetcher.getClient()).broadcastTx(broadReq, callOptions: grpcFetcher.getCallOptions()).response.get().txResponse
+           let broadReq = try await Signer.genTx(chain, msgs, "", fee, tip) {
+            return try await grpcFetcher.broadcastTx(broadReq)
         }
         return nil
     }
