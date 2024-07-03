@@ -39,7 +39,7 @@ class SelectEndpointCell: UITableViewCell {
     }
     
     func onBindGrpcEndpoint(_ position: Int, _ chain: BaseChain) {
-        if let grpcFetcher = chain.grpcFetcher {
+        if let grpcFetcher = chain.getGrpcfetcher() {
             let endpoint = chain.getChainListParam()["grpc_endpoint"].arrayValue[position]
             providerLabel.text = endpoint["provider"].string
             endpointLabel.text = endpoint["url"].string
