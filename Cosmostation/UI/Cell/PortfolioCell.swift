@@ -15,6 +15,7 @@ class PortfolioCell: UITableViewCell {
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var erc20Tag: PaddingLabel!
     @IBOutlet weak var cw20Tag: PaddingLabel!
     @IBOutlet weak var nftTag: PaddingLabel!
     @IBOutlet weak var dappTag: PaddingLabel!
@@ -40,6 +41,7 @@ class PortfolioCell: UITableViewCell {
         currencyLabel.text = ""
         valueLabel.text = ""
         legacyTag.isHidden = true
+        erc20Tag.isHidden = true
         cw20Tag.isHidden = true
         nftTag.isHidden = true
         dappTag.isHidden = true
@@ -53,6 +55,7 @@ class PortfolioCell: UITableViewCell {
         nameLabel.text = chain.name.uppercased()
         
         legacyTag.isHidden = chain.isDefault
+        erc20Tag.isHidden = !chain.supportEvm
         cw20Tag.isHidden = !chain.supportCw20
         nftTag.isHidden = !(BaseData.instance.showEvenReview() && chain.supportCw721)
         dappTag.isHidden = !(BaseData.instance.showEvenReview() && chain.isDefault && chain.isEcosystem())
