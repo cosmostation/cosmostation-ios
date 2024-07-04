@@ -51,13 +51,7 @@ public class BaseAccount {
     
     func initAccount() {
         loadDisplayTags()
-        
-        if (type == .onlyPrivateKey) {
-            allChains = ALLCHAINS()
-        } else {
-            allChains = ALLCHAINS()
-        }
-        
+        allChains = ALLCHAINS()
         allChains.sort {
             if ($0.tag == "cosmos118") { return true }
             if ($1.tag == "cosmos118") { return false }
@@ -72,6 +66,7 @@ public class BaseAccount {
         }
     }
     
+    //only derive address for service
     func initAllKeys() async -> [BaseChain] {
         let result = ALLCHAINS()
         let keychain = BaseData.instance.getKeyChain()
@@ -97,6 +92,7 @@ public class BaseAccount {
         return result
     }
     
+    //user seelcted to display chains feching full data from node
     func fetchDpChains() {
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
@@ -130,6 +126,7 @@ public class BaseAccount {
         }
     }
     
+    //all chain fetching full data from node
     func fetchAllChains() {
         let keychain = BaseData.instance.getKeyChain()
         if (type == .withMnemonic) {
@@ -163,6 +160,7 @@ public class BaseAccount {
         }
     }
     
+    //all chain fetching only balance
     func fetchForPreCreate(_ seed: Data? = nil, _ privateKeyString: String? = nil) {
         allChains = ALLCHAINS()
         if (seed != nil) {
@@ -214,9 +212,6 @@ public class BaseAccount {
             return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
         }
     }
-    
-    
-
     
     func updateAllValue() {
         getDpChains().forEach { chain in

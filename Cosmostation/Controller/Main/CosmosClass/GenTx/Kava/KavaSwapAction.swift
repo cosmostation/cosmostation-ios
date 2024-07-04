@@ -8,6 +8,7 @@
 
 import UIKit
 import Lottie
+import SwiftProtobuf
 
 class KavaSwapAction: BaseVC {
     
@@ -322,13 +323,11 @@ class KavaSwapAction: BaseVC {
         Task {
             do {
                 var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
-                let account = try await grpcFetcher.fetchAuth()
-                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                 if (swpActionType == .Deposit) {
-                    simulReq = Signer.geKavaSwpDepositSimul(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                    simulReq = try await Signer.genSimul(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
                     
                 } else if (swpActionType == .Withdraw) {
-                    simulReq = Signer.geKavaSwpWithdrawSimul(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                    simulReq = try await Signer.genSimul(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
                 }
                 let simulRes = try await grpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
@@ -346,7 +345,7 @@ class KavaSwapAction: BaseVC {
         }
     }
     
-    func onBindDepsoitMsg() -> Kava_Swap_V1beta1_MsgDeposit {
+    func onBindDepsoitMsg() -> [Google_Protobuf_Any] {
         let slippage = "30000000000000000"
         let deadline = (Date().millisecondsSince1970 / 1000) + 300
         let depositCoin1 = Cosmos_Base_V1beta1_Coin.with {
@@ -357,28 +356,30 @@ class KavaSwapAction: BaseVC {
             $0.denom = swapPool.coins[1].denom
             $0.amount = coin2ToAmount.stringValue
         }
-        return Kava_Swap_V1beta1_MsgDeposit.with {
+        let msg = Kava_Swap_V1beta1_MsgDeposit.with {
             $0.depositor = selectedChain.bechAddress!
             $0.tokenA = depositCoin1
             $0.tokenB = depositCoin2
             $0.slippage = slippage
             $0.deadline = deadline
         }
+        return Signer.genKavaSwpDepositMsg(msg)
     }
     
-    func onBindWithdrawMsg() -> Kava_Swap_V1beta1_MsgWithdraw {
+    func onBindWithdrawMsg() -> [Google_Protobuf_Any] {
         let totalShares = NSDecimalNumber.init(string: swapPool.totalShares)
         let padding = NSDecimalNumber(string: "0.97")
         let mintCoin1Amount = swapPool.coins[0].getAmount().multiplying(by: toWithdrawAmount).dividing(by: totalShares, withBehavior: handler0Down).multiplying(by: padding, withBehavior: handler0Down)
         let mintCoin2Amount = swapPool.coins[1].getAmount().multiplying(by: toWithdrawAmount).dividing(by: totalShares, withBehavior: handler0Down).multiplying(by: padding, withBehavior: handler0Down)
         let deadline = (Date().millisecondsSince1970 / 1000) + 300
-        return  Kava_Swap_V1beta1_MsgWithdraw.with {
+        let msg =  Kava_Swap_V1beta1_MsgWithdraw.with {
             $0.from = selectedChain.bechAddress!
             $0.shares = toWithdrawAmount.stringValue
             $0.minTokenA = Cosmos_Base_V1beta1_Coin.with { $0.denom = swapPool.coins[0].denom; $0.amount = mintCoin1Amount.stringValue }
             $0.minTokenB = Cosmos_Base_V1beta1_Coin.with { $0.denom = swapPool.coins[1].denom; $0.amount = mintCoin2Amount.stringValue }
             $0.deadline = deadline
         }
+        return Signer.genKavaSwpWithdrawMsg(msg)
     }
 
 }
@@ -417,13 +418,11 @@ extension KavaSwapAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             Task {
                 do {
                     var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
-                    let account = try await grpcFetcher.fetchAuth()
-                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                     if (swpActionType == .Deposit) {
-                        broadReq = Signer.genKavaSwpDepositTx(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                        broadReq = try await Signer.genTx(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
                         
                     } else if (swpActionType == .Withdraw) {
-                        broadReq = Signer.genKavaSwpwithdrawTx(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                        broadReq = try await Signer.genTx(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
                         
                     }
                     let response = try await grpcFetcher.broadcastTx(broadReq)

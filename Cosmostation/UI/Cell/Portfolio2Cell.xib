@@ -61,6 +61,19 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ERC20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzJ-eY-CJr" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
+                                        <color key="backgroundColor" red="0.71372549019607845" green="0.25098039215686274" blue="0.36078431372549019" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                        <color key="textColor" name="_color01"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CW20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYc-AQ-xwA" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" red="0.59999999999999998" green="0.42352941179999998" blue="0.48627450979999998" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -310,6 +323,7 @@
                 <outlet property="bechAddressLabel" destination="WZ8-gN-WeX" id="Edo-hG-svJ"/>
                 <outlet property="cw20Tag" destination="qYc-AQ-xwA" id="Pal-qO-ppf"/>
                 <outlet property="dappTag" destination="yrc-L5-vHy" id="I7q-Rp-c16"/>
+                <outlet property="erc20Tag" destination="dzJ-eY-CJr" id="fUe-VM-6SK"/>
                 <outlet property="evmAddressLabel" destination="C6d-Lf-BNl" id="NUE-Tr-NR7"/>
                 <outlet property="legacyTag" destination="Cet-um-LoA" id="uDS-Ja-52X"/>
                 <outlet property="logoImg1" destination="C1A-Ei-6cG" id="oV4-3m-BgS"/>

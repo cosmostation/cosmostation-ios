@@ -8,6 +8,7 @@
 
 import UIKit
 import Lottie
+import SwiftProtobuf
 
 class KavaMintAction: BaseVC {
     
@@ -309,19 +310,17 @@ class KavaMintAction: BaseVC {
         Task {
             do {
                 var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
-                let account = try await grpcFetcher.fetchAuth()
-                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                 if (mintActionType == .Deposit) {
-                    simulReq = Signer.KavaCDPDepositSimul(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                    simulReq = try await Signer.genSimul(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
                     
                 } else if (mintActionType == .Withdraw) {
-                    simulReq = Signer.genKavaCDPWithdrawSimul(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                    simulReq = try await Signer.genSimul(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
                     
                 } else if (mintActionType == .DrawDebt) {
-                    simulReq = Signer.genKavaCDPDrawDebtSimul(account!, UInt64(height), onBindDrawDebtMsg(), txFee, txMemo, selectedChain)
+                    simulReq = try await Signer.genSimul(selectedChain, onBindDrawDebtMsg(), txMemo, txFee, nil)
                     
                 } else if (mintActionType == .Repay) {
-                    simulReq = Signer.genKavaCDPRepaySimul(account!, UInt64(height), onBindRepayMsg(), txFee, txMemo, selectedChain)
+                    simulReq = try await Signer.genSimul(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
                 }
                 let simulRes = try await grpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
@@ -341,54 +340,58 @@ class KavaMintAction: BaseVC {
         
     }
     
-    func onBindDepsoitMsg() -> Kava_Cdp_V1beta1_MsgDeposit {
+    func onBindDepsoitMsg() -> [Google_Protobuf_Any] {
         let collateralCoin = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = collateralParam.denom
             $0.amount = toCollateralAmount.stringValue
         }
-        return Kava_Cdp_V1beta1_MsgDeposit.with {
+        let msg = Kava_Cdp_V1beta1_MsgDeposit.with {
             $0.depositor = selectedChain.bechAddress!
             $0.owner = selectedChain.bechAddress!
             $0.collateral = collateralCoin
             $0.collateralType = collateralParam.type
         }
+        return Signer.genKavaCDPDepositMsg(msg)
     }
     
-    func onBindWithdrawMsg() -> Kava_Cdp_V1beta1_MsgWithdraw {
+    func onBindWithdrawMsg() -> [Google_Protobuf_Any] {
         let collateralCoin = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = collateralParam.denom
             $0.amount = toCollateralAmount.stringValue
         }
-        return Kava_Cdp_V1beta1_MsgWithdraw.with {
+        let msg = Kava_Cdp_V1beta1_MsgWithdraw.with {
             $0.depositor = selectedChain.bechAddress!
             $0.owner = selectedChain.bechAddress!
             $0.collateral = collateralCoin
             $0.collateralType = collateralParam.type
         }
+        return Signer.genKavaCDPWithdrawMsg(msg)
     }
     
-    func onBindDrawDebtMsg() -> Kava_Cdp_V1beta1_MsgDrawDebt {
+    func onBindDrawDebtMsg() -> [Google_Protobuf_Any] {
         let principalCoin = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = "usdx"
             $0.amount = toPrincipalAmount.stringValue
         }
-        return Kava_Cdp_V1beta1_MsgDrawDebt.with {
+        let msg = Kava_Cdp_V1beta1_MsgDrawDebt.with {
             $0.sender = selectedChain.bechAddress!
             $0.collateralType = collateralParam.type
             $0.principal = principalCoin
         }
+        return Signer.genKavaCDPDrawMsg(msg)
     }
     
-    func onBindRepayMsg() -> Kava_Cdp_V1beta1_MsgRepayDebt {
+    func onBindRepayMsg() -> [Google_Protobuf_Any] {
         let paymentCoin = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = "usdx"
             $0.amount = toPrincipalAmount.stringValue
         }
-        return Kava_Cdp_V1beta1_MsgRepayDebt.with {
+        let msg = Kava_Cdp_V1beta1_MsgRepayDebt.with {
             $0.sender = selectedChain.bechAddress!
             $0.collateralType = collateralParam.type
             $0.payment = paymentCoin
         }
+        return Signer.genKavaCDPRepayMsg(msg)
     }
 }
 
@@ -422,19 +425,17 @@ extension KavaMintAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             Task {
                 do {
                     var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
-                    let account = try await grpcFetcher.fetchAuth()
-                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                     if (mintActionType == .Deposit) {
-                        broadReq = Signer.genKavaCDPDepositTx(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                        broadReq = try await Signer.genTx(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
                         
                     } else if (mintActionType == .Withdraw) {
-                        broadReq = Signer.genKavaCDPWithdrawTx(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                        broadReq = try await Signer.genTx(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
                         
                     } else if (mintActionType == .DrawDebt) {
-                        broadReq = Signer.genKavaCDPDrawDebtTx(account!, UInt64(height), onBindDrawDebtMsg(), txFee, txMemo, selectedChain)
+                        broadReq = try await Signer.genTx(selectedChain, onBindDrawDebtMsg(), txMemo, txFee, nil)
                         
                     } else if (mintActionType == .Repay) {
-                        broadReq = Signer.genKavaCDPRepayTx(account!, UInt64(height), onBindRepayMsg(), txFee, txMemo, selectedChain)
+                        broadReq = try await Signer.genTx(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
                         
                     }
                     let response = try await grpcFetcher.broadcastTx(broadReq)

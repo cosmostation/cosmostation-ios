@@ -8,6 +8,7 @@
 
 import UIKit
 import Lottie
+import SwiftProtobuf
 
 class KavaEarnWithdrawAction: BaseVC {
     
@@ -184,23 +185,17 @@ class KavaEarnWithdrawAction: BaseVC {
         removeBtn.isEnabled = false
         loadingView.isHidden = false
         
-        toEarnRemove = Kava_Router_V1beta1_MsgWithdrawBurn.with {
-            $0.from = selectedChain.bechAddress!
-            $0.validator = targetCoin.denom.replacingOccurrences(of: "bkava-", with: "")
-            $0.amount = toCoin!
-        }
         if (selectedChain.isGasSimulable() == false) {
             return onUpdateWithSimul(nil)
         }
         
         Task {
             do {
-                let account = try await grpcFetcher.fetchAuth()
-                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
-                let simulReq = Signer.genKavaEarnWithdrawSimul(account!, UInt64(height), toEarnRemove, txFee, txMemo, selectedChain)
-                let simulRes = try await grpcFetcher.simulateTx(simulReq)
-                DispatchQueue.main.async {
-                    self.onUpdateWithSimul(simulRes)
+                if let simulReq = try await Signer.genSimul(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil),
+                   let simulRes = try await grpcFetcher.simulateTx(simulReq) {
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(simulRes)
+                    }
                 }
                 
             } catch {
@@ -212,6 +207,15 @@ class KavaEarnWithdrawAction: BaseVC {
                 }
             }
         }
+    }
+    
+    func onBindWithdrawMsg() -> [Google_Protobuf_Any] {
+        let msg = Kava_Router_V1beta1_MsgWithdrawBurn.with {
+            $0.from = selectedChain.bechAddress!
+            $0.validator = targetCoin.denom.replacingOccurrences(of: "bkava-", with: "")
+            $0.amount = toCoin!
+        }
+        return Signer.genKavaEarnWithdrawMsg(msg)
     }
 }
 
@@ -243,19 +247,17 @@ extension KavaEarnWithdrawAction: BaseSheetDelegate, MemoDelegate, AmountSheetDe
             loadingView.isHidden = false
             Task {
                 do {
-                    let account = try await grpcFetcher.fetchAuth()
-                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
-                    let broadReq = Signer.genKavaEarnWithdrawTx(account!, UInt64(height), toEarnRemove, txFee, txMemo, selectedChain)
-                    let response = try await grpcFetcher.broadcastTx(broadReq)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                        self.loadingView.isHidden = true
-                        
-                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                        txResult.selectedChain = self.selectedChain
-                        txResult.broadcastTxResponse = response
-                        txResult.modalPresentationStyle = .fullScreen
-                        self.present(txResult, animated: true)
-                    })
+                    if let broadReq = try await Signer.genTx(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil),
+                       let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                            self.loadingView.isHidden = true
+                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                            txResult.selectedChain = self.selectedChain
+                            txResult.broadcastTxResponse = broadRes
+                            txResult.modalPresentationStyle = .fullScreen
+                            self.present(txResult, animated: true)
+                        })
+                    }
                     
                 } catch {
                     //TODO handle Error

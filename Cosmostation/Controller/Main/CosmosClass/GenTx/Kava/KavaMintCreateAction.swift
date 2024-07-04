@@ -8,6 +8,7 @@
 
 import UIKit
 import Lottie
+import SwiftProtobuf
 
 class KavaMintCreateAction: BaseVC {
     
@@ -254,12 +255,11 @@ class KavaMintCreateAction: BaseVC {
         
         Task {
             do {
-                let account = try await grpcFetcher.fetchAuth()
-                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
-                let simulReq = Signer.genKavaCDPCreateSimul(account!, UInt64(height), onBindCreateMsg(), txFee, txMemo, selectedChain)
-                let simulRes = try await grpcFetcher.simulateTx(simulReq)
-                DispatchQueue.main.async {
-                    self.onUpdateWithSimul(simulRes)
+                if let simulReq = try await Signer.genSimul(selectedChain, onBindCreateMsg(), txMemo, txFee, nil),
+                   let simulRes = try await grpcFetcher.simulateTx(simulReq) {
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(simulRes)
+                    }
                 }
                 
             } catch {
@@ -273,7 +273,7 @@ class KavaMintCreateAction: BaseVC {
         }
     }
     
-    func onBindCreateMsg() -> Kava_Cdp_V1beta1_MsgCreateCDP {
+    func onBindCreateMsg() -> [Google_Protobuf_Any] {
         let collateralCoin = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = collateralParam.denom
             $0.amount = toCollateralAmount.stringValue
@@ -282,12 +282,13 @@ class KavaMintCreateAction: BaseVC {
             $0.denom = "usdx"
             $0.amount = toPrincipalAmount.stringValue
         }
-        return Kava_Cdp_V1beta1_MsgCreateCDP.with {
+        let createCdpMsg = Kava_Cdp_V1beta1_MsgCreateCDP.with {
             $0.sender = selectedChain.bechAddress!
             $0.collateral = collateralCoin
             $0.principal = principalCoin
             $0.collateralType = collateralParam.type
         }
+        return Signer.genKavaCDPCreateMsg(createCdpMsg)
     }
 }
 
@@ -323,19 +324,17 @@ extension KavaMintCreateAction: BaseSheetDelegate, MemoDelegate, AmountSheetDele
             loadingView.isHidden = false
             Task {
                 do {
-                    let account = try await grpcFetcher.fetchAuth()
-                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
-                    let broadReq = Signer.genKavaCDPCreateTx(account!, UInt64(height), onBindCreateMsg(), txFee, txMemo, selectedChain)
-                    let response = try await grpcFetcher.broadcastTx(broadReq)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                        self.loadingView.isHidden = true
-                        
-                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                        txResult.selectedChain = self.selectedChain
-                        txResult.broadcastTxResponse = response
-                        txResult.modalPresentationStyle = .fullScreen
-                        self.present(txResult, animated: true)
-                    })
+                    if let broadReq = try await Signer.genTx(selectedChain, onBindCreateMsg(), txMemo, txFee, nil),
+                       let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                            self.loadingView.isHidden = true
+                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                            txResult.selectedChain = self.selectedChain
+                            txResult.broadcastTxResponse = broadRes
+                            txResult.modalPresentationStyle = .fullScreen
+                            self.present(txResult, animated: true)
+                        })
+                    }
                     
                 } catch {
                     //TODO handle Error
