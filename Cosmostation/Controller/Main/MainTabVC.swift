@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class MainTabVC: UITabBarController, UITabBarControllerDelegate {
     
@@ -24,6 +25,8 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
         
         self.delegate = self
         self.selectedIndex = BaseData.instance.getLastTab()
+        
+        self.onHandleEvent()
     }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
@@ -53,6 +56,33 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
     
     func hideChainBgImg() {
         chainImg?.isHidden = true
+    }
+    
+    func onHandleEvent()  {
+        if let appSchemeUrl = BaseData.instance.appSchemeUrl {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+                dappDetail.dappType = .DEEPLINK_WC2
+                dappDetail.dappUrl = appSchemeUrl
+                dappDetail.modalPresentationStyle = .fullScreen
+                self.present(dappDetail, animated: true)
+                BaseData.instance.appSchemeUrl = nil
+            })
+            
+        } else if let userInfo = BaseData.instance.appUserInfo {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                if (userInfo["push_type"] as? String == "0") {
+                    if let txhash = userInfo["txhash"] as? String,
+                       let network = userInfo["network"] as? String,
+                       let url = URL(string: MintscanTxUrl.replacingOccurrences(of: "${apiName}", with: network).replacingOccurrences(of: "${hash}", with: txhash)) {
+                        let safariViewController = SFSafariViewController(url: url)
+                        safariViewController.modalPresentationStyle = .popover
+                        self.present(safariViewController, animated: true)
+                    }
+                }
+                BaseData.instance.appUserInfo = nil
+            })
+        }
     }
 }
 

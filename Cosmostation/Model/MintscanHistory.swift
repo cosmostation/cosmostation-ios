@@ -40,7 +40,7 @@ public struct MintscanHistory: Codable {
     
     func getMsgType(_ chain: BaseChain) -> String {
         let bechAddress = chain.bechAddress
-        var evmAddress = chain.evmAddress
+        let evmAddress = chain.evmAddress
         
         if (getMsgCnt() == 0) {
             return NSLocalizedString("tx_known", comment: "")
@@ -957,7 +957,12 @@ public struct MintscanHistory: Codable {
                    let hexData = Data(base64Encoded: data)?.toHexString(),
                    let contractAddress = dataValue["to"].string,
                    let erc20 = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.address == contractAddress }) {
-                       return (erc20, String(hexData.suffix(64)).hexToNSDecimal())
+                    let suffix = String(hexData.suffix(64))
+                    if (suffix.count < 15) {
+                        return (erc20, suffix.hexToNSDecimal())
+                    } else {
+                        return (erc20, NSDecimalNumber.zero)
+                    }
                 }
             }
         }

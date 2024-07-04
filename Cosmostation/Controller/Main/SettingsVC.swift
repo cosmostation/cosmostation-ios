@@ -254,13 +254,13 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 qrScanVC.scanDelegate = self
                 present(qrScanVC, animated: true)
                 
-            } else if (indexPath.row == 3) {
+            } else if (indexPath.row == 4) {
                 let chainListVC = ChainListVC(nibName: "ChainListVC", bundle: nil)
                 chainListVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(chainListVC, animated: true)
                 
-            } else if (indexPath.row == 4) {
+            } else if (indexPath.row == 5) {
                 let addressBookVC = AddressBookListVC(nibName: "AddressBookListVC", bundle: nil)
                 addressBookVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
