@@ -8,6 +8,7 @@
 
 import UIKit
 import Lottie
+import SwiftProtobuf
 
 class KavaLendAction: BaseVC {
     
@@ -270,19 +271,17 @@ class KavaLendAction: BaseVC {
         Task {
             do {
                 var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
-                let account = try await grpcFetcher.fetchAuth()
-                let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                 if (hardActionType == .Deposit) {
-                    simulReq = Signer.geKavaHardDepositSimul(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                    simulReq = try await Signer.genSimul(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
                     
                 } else if (hardActionType == .Withdraw) {
-                    simulReq = Signer.geKavaHardWithdrawSimul(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                    simulReq = try await Signer.genSimul(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
                     
                 } else if (hardActionType == .Borrow) {
-                    simulReq = Signer.genKavaHardBorrowSimul(account!, UInt64(height), onBindBorrowMsg(), txFee, txMemo, selectedChain)
+                    simulReq = try await Signer.genSimul(selectedChain, onBindBorrowMsg(), txMemo, txFee, nil)
                     
                 } else if (hardActionType == .Repay) {
-                    simulReq = Signer.genKavaHardRepaySimul(account!, UInt64(height), onBindRepayMsg(), txFee, txMemo, selectedChain)
+                    simulReq = try await Signer.genSimul(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
                 }
                 let simulRes = try await grpcFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
@@ -300,49 +299,53 @@ class KavaLendAction: BaseVC {
         }
     }
     
-    func onBindDepsoitMsg() -> Kava_Hard_V1beta1_MsgDeposit {
+    func onBindDepsoitMsg() -> [Google_Protobuf_Any] {
         let depositCoin = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = hardMarket.denom
             $0.amount = toAmount.stringValue
         }
-        return Kava_Hard_V1beta1_MsgDeposit.with {
+        let msg = Kava_Hard_V1beta1_MsgDeposit.with {
             $0.depositor = selectedChain.bechAddress!
             $0.amount = [depositCoin]
         }
+        return Signer.genKavaHardDepositMsg(msg)
     }
     
-    func onBindWithdrawMsg() -> Kava_Hard_V1beta1_MsgWithdraw {
+    func onBindWithdrawMsg() -> [Google_Protobuf_Any] {
         let withdrawCoin = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = hardMarket.denom
             $0.amount = toAmount.stringValue
         }
-        return Kava_Hard_V1beta1_MsgWithdraw.with {
+        let msg = Kava_Hard_V1beta1_MsgWithdraw.with {
             $0.depositor = selectedChain.bechAddress!
             $0.amount = [withdrawCoin]
         }
+        return Signer.genKavaHardWithdrawMsg(msg)
     }
     
-    func onBindBorrowMsg() -> Kava_Hard_V1beta1_MsgBorrow {
+    func onBindBorrowMsg() -> [Google_Protobuf_Any] {
         let borrowCoin = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = hardMarket.denom
             $0.amount = toAmount.stringValue
         }
-        return Kava_Hard_V1beta1_MsgBorrow.with {
+        let msg = Kava_Hard_V1beta1_MsgBorrow.with {
             $0.borrower = selectedChain.bechAddress!
             $0.amount = [borrowCoin]
         }
+        return Signer.genKavaHardBorrowMsg(msg)
     }
     
-    func onBindRepayMsg() -> Kava_Hard_V1beta1_MsgRepay {
+    func onBindRepayMsg() -> [Google_Protobuf_Any] {
         let repayCoin = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = hardMarket.denom
             $0.amount = toAmount.stringValue
         }
-        return Kava_Hard_V1beta1_MsgRepay.with {
+        let msg = Kava_Hard_V1beta1_MsgRepay.with {
             $0.sender = selectedChain.bechAddress!
             $0.owner = selectedChain.bechAddress!
             $0.amount = [repayCoin]
         }
+        return Signer.genKavaHardRepayMsg(msg)
     }
 
 }
@@ -377,19 +380,17 @@ extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             Task {
                 do {
                     var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
-                    let account = try await grpcFetcher.fetchAuth()
-                    let height = try await grpcFetcher.fetchLastBlock()!.block.header.height
                     if (hardActionType == .Deposit) {
-                        broadReq = Signer.genKavaHardDepositTx(account!, UInt64(height), onBindDepsoitMsg(), txFee, txMemo, selectedChain)
+                        broadReq = try await Signer.genTx(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
                         
                     } else if (hardActionType == .Withdraw) {
-                        broadReq = Signer.genKavaHardwithdrawTx(account!, UInt64(height), onBindWithdrawMsg(), txFee, txMemo, selectedChain)
+                        broadReq = try await Signer.genTx(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
                         
                     } else if (hardActionType == .Borrow) {
-                        broadReq = Signer.genKavaHardBorrowTx(account!, UInt64(height), onBindBorrowMsg(), txFee, txMemo, selectedChain)
+                        broadReq = try await Signer.genTx(selectedChain, onBindBorrowMsg(), txMemo, txFee, nil)
                         
                     } else if (hardActionType == .Repay) {
-                        broadReq = Signer.genKavaHardRepayTx(account!, UInt64(height), onBindRepayMsg(), txFee, txMemo, selectedChain)
+                        broadReq = try await Signer.genTx(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
                         
                     }
                     let response = try await grpcFetcher.broadcastTx(broadReq)
