@@ -17,16 +17,8 @@ class NotificationService: UNNotificationServiceExtension {
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
-        print("NotificationService didReceive")
         
         if let bestAttemptContent = bestAttemptContent {
-            // Modify the notification content here...
-            
-            print("bestAttemptContent ", bestAttemptContent)
-//            bestAttemptContent.title = "\(bestAttemptContent.title) [modified]"
-//            
-//            contentHandler(bestAttemptContent)
-            
             let apsData = request.content.userInfo["aps"] as! [String : Any]
             let imageData = request.content.userInfo["fcm_options"] as! [String : Any]
             

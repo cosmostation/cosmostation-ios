@@ -15,6 +15,7 @@ import WalletConnectRelay
 import WalletConnectPairing
 import WalletConnectSign
 import Starscream
+import SafariServices
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, PinDelegate, MessagingDelegate {
@@ -40,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        print("Cosmostation application didFinishLaunchingWithOptions")
         setInit()
         setTheme()
         setFirebase()
@@ -56,7 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         if let url = launchOptions?[UIApplication.LaunchOptionsKey.url] as? URL {
             BaseData.instance.appSchemeUrl = url
-            print("Cosmostation application didFinishLaunchingWithOptions \(url)")
             return false
         } else if let userInfo = launchOptions?[.remoteNotification] as? [AnyHashable: Any] {
             BaseData.instance.appUserInfo = userInfo
@@ -75,7 +74,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             dappDetail.dappType = .DEEPLINK_WC2
             dappDetail.dappUrl = url
             dappDetail.modalPresentationStyle = .fullScreen
-            application.topViewController?.present(dappDetail, animated: true)
+            application.topViewController?.present(dappDetail, animated: true) {
+                BaseData.instance.appSchemeUrl = nil
+            }
         }
         return false
     }
@@ -85,23 +86,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if !topVC.isKind(of: PincodeVC.self) && BaseData.instance.getUsingAppLock() {
                 let pinVC = UIStoryboard.PincodeVC(self, .ForAppLock)
                 topVC.present(pinVC, animated: false, completion: nil)
-            }
-        }
-    }
-    
-    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
-        if result == .success {
-            if BaseData.instance.appSchemeUrl != nil {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                    print("Cosmostation START DappDetailVC 2")
-                    let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
-                    dappDetail.dappType = .DEEPLINK_WC2
-                    dappDetail.dappUrl = BaseData.instance.appSchemeUrl
-                    dappDetail.modalPresentationStyle = .fullScreen
-                    self.window?.rootViewController?.present(dappDetail, animated: true) {
-                        BaseData.instance.appSchemeUrl = nil
-                    }
-                })
             }
         }
     }
@@ -119,45 +103,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("getPush1 ", userInfo)
-//        if application.applicationState == .inactive {
-//            UIApplication.shared.applicationIconBadgeNumber = 0
-//            guard let _ = userInfo["aps"] as? [String: Any],
-//                  let address = userInfo["address"] as? String else {
-//                    return
-//            }
-//
-//            let notiAccount = BaseData.instance.selectAccountByAddress(address: address)
-//            if (notiAccount != nil) {
-//                BaseData.instance.setRecentAccountId(notiAccount!.account_id)
-//                BaseData.instance.setLastTab(2)
-//                DispatchQueue.main.async(execute: {
-//                    let mainTabVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainTabViewController") as! MainTabViewController
-//                    let rootVC = self.window?.rootViewController!
-//                    self.window?.rootViewController = mainTabVC
-//                    rootVC?.present(mainTabVC, animated: true, completion: nil)
-//                })
-//            }
-//        } else {
-//            UIApplication.shared.applicationIconBadgeNumber = 0
-//            guard let apsInfo = userInfo["aps"] as? [String: Any],
-//                  let alert = apsInfo["alert"] as? [String: Any],
-//                 let url = userInfo["url"] as? String,
-//                  let title = alert["title"] as? String,
-//                  let body = alert["body"] as? String else {
-//                    return
-//            }
-//            let alertController = UIAlertController(title: title, message: body, preferredStyle: .alert)
-//            alertController.addAction(UIAlertAction(title: NSLocalizedString("mintscan_explorer", comment: ""), style: .default, handler: { (action) in
-//                UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
-//            }))
-//            alertController.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .cancel, handler: nil))
-//            window?.rootViewController?.present(alertController, animated: true, completion: nil)
-//        }
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        if let topVC = application.topViewController,
+            (topVC.isKind(of: PincodeVC.self) || topVC.isKind(of: IntroVC.self)) {
+            BaseData.instance.appUserInfo = userInfo
+            
+        } else {
+            if (userInfo["push_type"] as? String == "0") {
+                if let txhash = userInfo["txhash"] as? String,
+                   let network = userInfo["network"] as? String,
+                   let url = URL(string: MintscanTxUrl.replacingOccurrences(of: "${apiName}", with: network).replacingOccurrences(of: "${hash}", with: txhash)) {
+                    let safariViewController = SFSafariViewController(url: url)
+                    safariViewController.modalPresentationStyle = .popover
+                    application.topViewController?.present(safariViewController, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler(.alert)
+    }
+    
+    func onPinResponse(_ request: LockType, _ result: UnLockResult) {
+        if result == .success {
+            if let appSchemeUrl = BaseData.instance.appSchemeUrl {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+                    dappDetail.dappType = .DEEPLINK_WC2
+                    dappDetail.dappUrl = appSchemeUrl
+                    dappDetail.modalPresentationStyle = .fullScreen
+                    self.window?.rootViewController?.present(dappDetail, animated: true)
+                    BaseData.instance.appSchemeUrl = nil
+                })
+                
+            } else if let userInfo = BaseData.instance.appUserInfo {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    if (userInfo["push_type"] as? String == "0") {
+                        if let txhash = userInfo["txhash"] as? String,
+                           let network = userInfo["network"] as? String,
+                           let url = URL(string: MintscanTxUrl.replacingOccurrences(of: "${apiName}", with: network).replacingOccurrences(of: "${hash}", with: txhash)) {
+                            let safariViewController = SFSafariViewController(url: url)
+                            safariViewController.modalPresentationStyle = .popover
+                            self.window?.rootViewController?.present(safariViewController, animated: true)
+                        }
+                    }
+                    BaseData.instance.appUserInfo = nil
+                })
+            }
+        }
     }
 }
 
