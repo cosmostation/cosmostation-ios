@@ -13,11 +13,12 @@ class ChainInitia_T: BaseChain  {
     override init() {
         super.init()
         
-        name = "Initia"
+        name = "Initia Testnet"
         tag = "initia_T"
         logo1 = "chainInitia_T"
+        isTestnet = true
         apiName = "initia-testnet"
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
         supportCosmosGrpc = true
