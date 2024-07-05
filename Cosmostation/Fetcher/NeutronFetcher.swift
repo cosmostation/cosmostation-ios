@@ -25,8 +25,8 @@ class NeutronFetcher: FetcherGrpc {
         cosmosBalances = nil
         neutronDeposited = NSDecimalNumber.zero
         neutronVesting = nil
-        vaultsList = chain.getChainListParam()["vaults"].arrayValue
-        daosList = chain.getChainListParam()["daos"].arrayValue
+        vaultsList = chain.getChainListParam()["vaults"].array
+        daosList = chain.getChainListParam()["daos"].array
         cosmosBaseFees.removeAll()
         
         do {

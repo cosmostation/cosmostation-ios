@@ -224,17 +224,33 @@ class BaseChain {
     func fetchBalances() {
         fetchState = .Busy
         Task {
-            var result: Bool?
-            if (supportEvm == true) {
-                result = await getEvmfetcher()?.fetchBalances()
-            } else if (supportCosmosGrpc == true) {
-                result = await getGrpcfetcher()?.fetchBalances()
-            }
+            coinsCnt = 0
+            var evmResult: Bool?
+            var grpcResult: Bool?
             
-            if (result == false) {
+            if (supportEvm == true) {
+                evmResult = await getEvmfetcher()?.fetchBalances()
+            }
+            if (supportCosmosGrpc == true) {
+                grpcResult = await getGrpcfetcher()?.fetchBalances()
+            }
+            if (evmResult == false || grpcResult == false) {
                 fetchState = .Fail
             } else {
                 fetchState = .Success
+            }
+            
+            if (self.fetchState == .Success) {
+                if (supportCosmosGrpc) {
+                    if let grpcFetcher = getGrpcfetcher() {
+                        coinsCnt = grpcFetcher.valueCoinCnt()
+                    }
+                    
+                } else if (supportEvm) {
+                    if let evmFetcher = getEvmfetcher() {
+                        coinsCnt = evmFetcher.valueCoinCnt()
+                    }
+                }
             }
             
             DispatchQueue.main.async(execute: {
