@@ -14,7 +14,7 @@ class ChainArtelaEVM_T: ChainArtelaEVM  {
         super.init()
         
         name = "Artela Testnet"
-        tag = "artela118_T"
+        tag = "artela60_T"
         logo1 = "chainArtela_T"
         isTestnet = true
         apiName = "artela-testnet"

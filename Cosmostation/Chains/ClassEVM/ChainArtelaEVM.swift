@@ -14,7 +14,7 @@ class ChainArtelaEVM: BaseChain  {
         super.init()
         
         name = "Artela"
-        tag = "artela118"
+        tag = "artela60"
         logo1 = "chainArtela"
         apiName = "artela"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
