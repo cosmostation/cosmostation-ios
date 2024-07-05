@@ -525,6 +525,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMedibloc())
     result.append(ChainNeutron())
     result.append(ChainNibiru())
+    //result.append(ChainNillion())
     result.append(ChainNoble())
     result.append(ChainNyx())
     result.append(ChainOktEVM())                        //EVM
@@ -566,9 +567,10 @@ func ALLCHAINS() -> [BaseChain] {
     
     result.append(ChainCosmos_T())
     result.append(ChainArtelaEVM_T())
-    result.append(ChainNeutron_T())
     //result.append(ChainInitia_T())
     //result.append(ChainBeraEVM_T())
+    result.append(ChainNeutron_T())
+    result.append(ChainNillion_T())
     
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {
