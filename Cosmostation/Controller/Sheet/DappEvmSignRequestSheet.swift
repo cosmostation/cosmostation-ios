@@ -113,7 +113,7 @@ class DappEvmSignRequestSheet: BaseVC {
     override func setLocalizedString() {
         warnMsgLabel.text = NSLocalizedString("str_dapp_warn_msg", comment: "")
         safeMsgTitle.text = NSLocalizedString("str_affect_safe", comment: "")
-        warnMsgLabel.text = NSLocalizedString("str_affect_danger", comment: "")
+        dangerMsgTitle.text = NSLocalizedString("str_affect_danger", comment: "")
     }
     
     func onInitView() {
@@ -143,6 +143,10 @@ class DappEvmSignRequestSheet: BaseVC {
             requestTitle.text = NSLocalizedString("str_permit_request", comment: "")
             safeMsgTitle.isHidden = false
             confirmBtn.isEnabled = true
+            
+            if let data = inComeChallenge?.stripHexPrefix().hexadecimal {
+                toSignTextView.text = String.init(data: data, encoding: .utf8)
+            }
             
         }
     }
@@ -209,6 +213,13 @@ class DappEvmSignRequestSheet: BaseVC {
                 inComeChallenge = requestToSignArray![0].stringValue
             }
             print("inComeChallenge ", inComeChallenge)
+            
+//            print("inComeChallenge1 ", inComeChallenge?.hexToString())
+//            print("inComeChallenge2 ", inComeChallenge?.hexadecimal)
+//            print("inComeChallenge3 ", inComeChallenge!.data(using: .utf8))
+            print("inComeChallenge4 ", String.init(data:inComeChallenge!.hexadecimal!, encoding: .utf8))
+            
+            
             
         }
     }
@@ -358,7 +369,7 @@ class DappEvmSignRequestSheet: BaseVC {
                     })
                     
                 } else if (method == "personal_sign") {
-                    let personalHash = Utilities.hashPersonalMessage(self.inComeChallenge!.data(using: .utf8)!)
+                    let personalHash = Utilities.hashPersonalMessage(self.inComeChallenge!.stripHexPrefix().hexadecimal!)
                     let (compressedSignature, _) = SECP256K1.signForRecovery(hash: personalHash!, privateKey: selectedChain.privateKey!)
                     let result = compressedSignature?.toHexString().addHexPrefix()
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
