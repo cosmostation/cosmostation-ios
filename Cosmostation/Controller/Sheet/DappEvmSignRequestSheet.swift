@@ -20,6 +20,7 @@ class DappEvmSignRequestSheet: BaseVC {
     @IBOutlet weak var safeMsgTitle: UILabel!
     @IBOutlet weak var dangerMsgTitle: UILabel!
     @IBOutlet weak var warnMsgLabel: UILabel!
+    @IBOutlet weak var barView: UIView!
     @IBOutlet weak var bodyCardView: FixCardView!
     @IBOutlet weak var toSignTextView: UITextView!
     @IBOutlet weak var feeCardView: FixCardView!
@@ -121,13 +122,13 @@ class DappEvmSignRequestSheet: BaseVC {
         warnMsgLabel.isHidden = false
         bodyCardView.isHidden = false
         controlStakView.isHidden = false
+        barView.isHidden = false
         
         if (method == "eth_sendTransaction") {
             requestTitle.text = NSLocalizedString("str_tx_request", comment: "")
             onInitFeeView()
             dangerMsgTitle.isHidden = false
             feeCardView.isHidden = false
-            
             
         } else if (method == "eth_signTypedData_v4") {
             requestTitle.text = NSLocalizedString("str_permit_request", comment: "")
@@ -185,22 +186,22 @@ class DappEvmSignRequestSheet: BaseVC {
                let data = request_AccessLists.data(using: .utf8) {
                 inComeAccessLists = try? JSONDecoder().decode([AccessListEntry].self, from: data)
             }
-            print("chainID ", chainId)
-            print("inComeType ", inComeType)
-            print("inComeFromAddress ", inComeFromAddress)
-            print("inComeToAddress ", inComeToAddress)
-            print("inComeData ", inComeData)
-            print("inComeValue ", inComeValue)
-            print("inComeGas ", inComeGas)
-            print("inComeGasPrice ", inComeGasPrice)
-            print("inComeMaxFeePerGas ", inComeMaxFeePerGas)
-            print("inComeMaxPriorityFeePerGas ",inComeMaxPriorityFeePerGas)
-            print("inComeAccessLists ", inComeAccessLists)
-            print("nonce ", nonce)
+//            print("chainID ", chainId)
+//            print("inComeType ", inComeType)
+//            print("inComeFromAddress ", inComeFromAddress)
+//            print("inComeToAddress ", inComeToAddress)
+//            print("inComeData ", inComeData)
+//            print("inComeValue ", inComeValue)
+//            print("inComeGas ", inComeGas)
+//            print("inComeGasPrice ", inComeGasPrice)
+//            print("inComeMaxFeePerGas ", inComeMaxFeePerGas)
+//            print("inComeMaxPriorityFeePerGas ",inComeMaxPriorityFeePerGas)
+//            print("inComeAccessLists ", inComeAccessLists)
+//            print("nonce ", nonce)
             
         } else if (method == "eth_signTypedData_v4" || method == "eth_signTypedData_v3") {
             inComeSignTypedData = requestToSign?.arrayValue[1].stringValue
-            print("inComeSignTypedData ", inComeSignTypedData)
+//            print("inComeSignTypedData ", inComeSignTypedData)
             
             
         } else if (method == "personal_sign") {
@@ -212,15 +213,6 @@ class DappEvmSignRequestSheet: BaseVC {
             } else if (requestToSignArray![1].stringValue.lowercased() == selectedChain.evmAddress!.lowercased()) {
                 inComeChallenge = requestToSignArray![0].stringValue
             }
-            print("inComeChallenge ", inComeChallenge)
-            
-//            print("inComeChallenge1 ", inComeChallenge?.hexToString())
-//            print("inComeChallenge2 ", inComeChallenge?.hexadecimal)
-//            print("inComeChallenge3 ", inComeChallenge!.data(using: .utf8))
-            print("inComeChallenge4 ", String.init(data:inComeChallenge!.hexadecimal!, encoding: .utf8))
-            
-            
-            
         }
     }
     
@@ -233,10 +225,11 @@ class DappEvmSignRequestSheet: BaseVC {
     }
     
     func onCheckEstimateGas() async throws {
-        if let response = try? await selectedChain.getEvmfetcher()!.fetchEvmEstimateGas(requestToSign!),
+        if let response = try? await selectedChain.getEvmfetcher()!.fetchEvmEstimateGas(requestToSign![0]),
            let gasAmountString = response?["result"].stringValue,
            let gasAmount = BigUInt(gasAmountString.stripHexPrefix(), radix: 16) {
-            checkedGas = gasAmount
+            checkedGas = gasAmount * selectedChain.evmGasMultiply() / 10
+            print("onCheckEstimateGas", gasAmount, "  ", checkedGas)
         }
     }
     
@@ -246,10 +239,18 @@ class DappEvmSignRequestSheet: BaseVC {
            feeHistory.baseFee.count > 0 {
             //support EIP1559
             print("feeHistory ", feeHistory)
-            for i in 0..<3 {
-                let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
-                let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
-                evmGas[i] = (baseFee, tip, checkedGas!)
+            if (selectedChain.evmSupportEip1559()) {
+                for i in 0..<3 {
+                    let baseFee = feeHistory.baseFee[i]
+                    let tip = feeHistory.tip[i]
+                    evmGas[i] = (baseFee, tip, checkedGas!)
+                }
+            } else {
+                for i in 0..<3 {
+                    let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
+                    let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
+                    evmGas[i] = (baseFee, tip, checkedGas!)
+                }
             }
             if (inComeMaxFeePerGas != nil && inComeMaxPriorityFeePerGas != nil) {
                 evmGas.append((inComeMaxPriorityFeePerGas!, inComeMaxPriorityFeePerGas!, inComeGas ?? checkedGas!))
@@ -329,8 +330,7 @@ class DappEvmSignRequestSheet: BaseVC {
                     let evmGas = self.evmGas[self.feePosition]
                     evmTx = CodableTransaction.init(type: evmTxType, to: inComeToAddress!, nonce: nonce!, chainID: chainId!)
                     evmTx?.gasLimit = evmGas.2
-                    
-                    if (inComeType == TransactionType.eip1559.rawValue && evmTxType == .eip1559) {
+                    if (evmTxType == .eip1559) {
                         evmTx?.maxFeePerGas = evmGas.0 + evmGas.1
                         evmTx?.maxPriorityFeePerGas = evmGas.1
                     } else {
@@ -350,7 +350,6 @@ class DappEvmSignRequestSheet: BaseVC {
                     try evmTx?.sign(privateKey: selectedChain.privateKey!)
                     let encodeTx = self.evmTx?.encode(for: .transaction)
                     let result = try await self.web3!.eth.send(raw :encodeTx!)
-                    print("result ", result)
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.webSignDelegate?.onAcceptInjection(JSON.init(stringLiteral: result.hash), self.requestToSign!, self.messageId!)
