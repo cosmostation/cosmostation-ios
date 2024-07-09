@@ -19,10 +19,10 @@
 
 <table border="1">
   <tr>
-    <th style="text-align:center"></th>
-    <th style="text-align:center">Chain</th>
+    <th style="text-align:center">Image</th>
+    <th style="text-align:center">Name</th>
     <th style="text-align:center" >HD Path</th>
-    <th style="text-align:center">Public-Key Cryptography</th>
+    <th style="text-align:center">Public-Key Type</th>
     <th style="text-align:center">Call Method</th>
     <th style="text-align:center">Support</th>
   </tr>
