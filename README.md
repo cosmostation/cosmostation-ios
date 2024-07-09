@@ -12,13 +12,11 @@
 
 *:rocket: Developed / Developing by [Cosmostation](https://www.cosmostation.io/)*
 
-<!-- ## About
 
-Cosmostation wallet apps are non-custodial tendermint-based wallet that supports [COSMOS HUB](https://https://cosmos.network/). 
-We will add more tendermint-based blockchain projects in the coming updates, such as [AKASH](https://akash.network/), [ASSETMANTLE](https://assetmantle.one/), [AXELAR](https://axelar.network/), [BAND](https://bandprotocol.com/), [BINANCE](https://www.binance.org/), [BITCANNA](https://www.bitcanna.io/), [BITSONG](https://bitsong.io/), [CANTO](https://canto.io/), [CERBERUS](https://cerberus.zone/), [CHIHUAHUA](https://chi.huahua.wtf/), [COMDEX](https://comdex.one/), [CRESCENT](https://crescent.network/), [CRYTO.ORG](https://crypto.org/), [CUDOS](https://www.cudos.org/), [DESMOS](https://www.desmos.network/), [EMONEY](https://www.e-money.com/), [EVMOS](https://evmos.org/), [FETCH.AI](https://fetch.ai/), [GRAVITYBRIDGE](https://www.gravitybridge.net/), [INJECTIVE](https://injectiveprotocol.com/), [IRIS](https://www.irisnet.org/), [IXO](https://www.ixo.world/), [JUNO](https://junochain.com/), [KAVA](https://www.kava.io/), [KI](https://foundation.ki/), [KONSTELLATION](https://konstellation.tech/), [KUJIRA](https://kujira.app/), [LIKECOIN](https://about.like.co/), [LUM](https://lum.network/), [MARS](https://marsprotocol.io/), [MEDIBLOC](https://medibloc.com/en/), [NYX](https://nymtech.net/), [OKC](https://www.okx.com/), [OMNIFLIX](https://www.omniflix.network/), [ONOMY](https://onomy.io/), [OSMOSIS](https://osmosis.zone/), [PASSAGE](https://passage3d.com/), [PERSISTENCE](https://persistence.one/), [PROVENANCE](https://www.provenance.io/), [QUICKSILVER](https://quicksilver.zone/), [REGEN](https://www.regen.network/), [RIZON](https://rizon.world/), [SECRET](https://scrt.network/), [SENTINEL](https://sentinel.co/), [SHENTU](https://www.certik.com/), [SIF](https://sifchain.finance/), [SOMMELIER](https://sommelier.finance/), [STARGAZE](https://stargaze.zone/), [STARNAME](https://www.starname.me/), [STRIDE](https://stride.zone/), [TERITORI](https://teritori.com/), [UMEE](https://www.umee.cc/), [XPLA](https://xpla.io/)   -->
+<details open>
+<summary><h2 style='display: inline; font-size: 24px'>Supporting Chains (Cosmos)</h2></summary>
+<br>
 
-
-# Support Chains
 <table border="1">
   <tr>
     <th style="text-align:center"></th>
@@ -26,7 +24,7 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <th style="text-align:center" >HD Path</th>
     <th style="text-align:center">Public-Key Cryptography</th>
     <th style="text-align:center">Call Method</th>
-    <th style="text-align:center">Spec</th>
+    <th style="text-align:center">Support</th>
   </tr>
   
   <tr> 
@@ -35,7 +33,7 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>COSMOS-GRPC</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
   <tr> 
@@ -49,14 +47,17 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
 	 	
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/althea/resource/chain_althea.png?raw=true" width="42" height = "42"></td>
-    <td><span style="font-weight:bold">OKT</span></td>
+    <td><span style="font-weight:bold">ALTHEA</span></td>
     <td><span>m/44'/60'/0'/0/X</span><br/>
         <span>m/44'/118'/0'/0/X</span></td>
     <td><span>keccak256</span><br/>
         <span>secp256k1</span></td>
     <td><span>COSMOS-GRPC</span><br/>
         <span>EVM-RPC</span></td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_nft.png?raw=true" width="42" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -65,7 +66,7 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>COSMOS-GRPC</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -129,7 +130,8 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>keccak256</td>
     <td><span>COSMOS-GRPC</span><br/>
         <span>EVM-RPC</span></td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
+    <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
 
   <tr>
@@ -138,7 +140,7 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>COSMOS-GRPC</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -202,7 +204,8 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>keccak256</td>
     <td><span>COSMOS-GRPC</span><br/>
         <span>EVM-RPC</span></td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
+    <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -212,7 +215,8 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>keccak256</td>
     <td><span>COSMOS-GRPC</span><br/>
         <span>EVM-RPC</span></td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
+    <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
 
   <tr>
@@ -261,7 +265,8 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>keccak256</td>
     <td><span>COSMOS-GRPC</span><br/>
         <span>EVM-RPC</span></td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
+    <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -270,7 +275,7 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>m/44'/60'/0'/0/X</td>
     <td>keccak256</td>
     <td>COSMOS-GRPC</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -297,7 +302,7 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>COSMOS-GRPC</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -311,7 +316,9 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
         <span>secp256k1</span></td>
     <td><span>COSMOS-GRPC</span><br/>
         <span>EVM-RPC</span></td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -320,7 +327,7 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>COSMOS-GRPC</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -375,7 +382,8 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>COSMOS-GRPC</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_ics.png?raw=true" width="42" height = "22">
+    <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -425,7 +433,8 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
         <span>secp256k1</span></td>
     <td><span>COSMOS-GRPC</span><br/>
         <span>EVM-RPC</span></td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
+    <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
     
   <tr>
@@ -471,7 +480,7 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
         <span>m/44'/750'/0'/0/X</span></td>
     <td>secp256k1</td>
     <td>COSMOS-GRPC</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
     
   <tr>
@@ -544,7 +553,7 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>COSMOS-GRPC</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
   </tr>
     
   <tr>
@@ -589,7 +598,7 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>COSMOS-GRPC</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_nft.png?raw=true" width="42" height = "22"></td>
   </tr>
     
   <tr>
@@ -598,7 +607,7 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>COSMOS-GRPC</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_ics.png?raw=true" width="42" height = "22"></td>
   </tr>
     
   <tr>
@@ -616,7 +625,7 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
     <td>m/44'/330'/0'/0/X</td>
     <td>secp256k1</td>
     <td>COSMOS-GRPC</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
   </tr>
     
   <tr>
@@ -637,19 +646,18 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
         <span>secp256k1</span></td>
     <td><span>COSMOS-GRPC</span><br/>
         <span>EVM-RPC</span></td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
+    <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
 	 
 </table>
        
+</details>
 
 
-## Notice iOS
-You can build by following these instructions:
-1. Clone the project.
-2. `pod update` ( in m1. `arch -x86_64 pod update`)
-3. Remove **GoogleService-Info.plist** from list of project files.(Red highlighting)
-4. Comment out `FirebaseApp.configure()` in **AppDelegate.swift**
+
+
+
 
 ## Downloads
 
