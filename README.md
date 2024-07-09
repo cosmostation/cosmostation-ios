@@ -35,7 +35,6 @@ You can download each store.
 
 </details>
 <br>
-<br>
 
 <details >
 <summary><h2 style='display: inline; font-size: 24px'>Supporting Chains (Cosmos)</h2></summary>
@@ -668,7 +667,6 @@ You can download each store.
 </table>
 </details>
 <br>
-<br>
 
 <details >
 <summary><h2 style='display: inline; font-size: 24px'>Supporting Chains (Ethreum & L1, L2)</h2></summary>
@@ -765,16 +763,8 @@ You can download each store.
         <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22">
         <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"</td>
   </tr>
-
-
-
-
-
 </table>
 </details>
-
-
-<br>
 <br>
 
 <details>
@@ -787,7 +777,6 @@ You can download each store.
 - [Telegram - International](https://t.me/cosmostation)
 - [Kakao - Korean](https://open.kakao.com/o/g6KKSe5)
 </details>
-<br>
 <br>
 
 ## License

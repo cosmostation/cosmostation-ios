@@ -60,6 +60,9 @@ For EVM-based DApps, by supporting the EIP-6963 specification, you can enjoy a s
                             <state key="normal" title="No more 7Days">
                                 <color key="titleColor" name="_color05"/>
                             </state>
+                            <connections>
+                                <action selector="onClickSubBtn:" destination="-1" eventType="touchUpInside" id="6rc-95-YKQ"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4du-18-jBg" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
                             <rect key="frame" x="193.66666666666663" y="0.0" width="183.33333333333337" height="54"/>
@@ -72,6 +75,9 @@ For EVM-based DApps, by supporting the EIP-6963 specification, you can enjoy a s
                             <state key="normal" title="OK">
                                 <color key="titleColor" name="_color01"/>
                             </state>
+                            <connections>
+                                <action selector="onClickOkBtn:" destination="-1" eventType="touchUpInside" id="yFP-n7-sDh"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>
