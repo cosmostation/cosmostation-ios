@@ -12,10 +12,635 @@
 
 *:rocket: Developed / Developing by [Cosmostation](https://www.cosmostation.io/)*
 
-## About
+<!-- ## About
 
 Cosmostation wallet apps are non-custodial tendermint-based wallet that supports [COSMOS HUB](https://https://cosmos.network/). 
-We will add more tendermint-based blockchain projects in the coming updates, such as [AKASH](https://akash.network/), [ASSETMANTLE](https://assetmantle.one/), [AXELAR](https://axelar.network/), [BAND](https://bandprotocol.com/), [BINANCE](https://www.binance.org/), [BITCANNA](https://www.bitcanna.io/), [BITSONG](https://bitsong.io/), [CANTO](https://canto.io/), [CERBERUS](https://cerberus.zone/), [CHIHUAHUA](https://chi.huahua.wtf/), [COMDEX](https://comdex.one/), [CRESCENT](https://crescent.network/), [CRYTO.ORG](https://crypto.org/), [CUDOS](https://www.cudos.org/), [DESMOS](https://www.desmos.network/), [EMONEY](https://www.e-money.com/), [EVMOS](https://evmos.org/), [FETCH.AI](https://fetch.ai/), [GRAVITYBRIDGE](https://www.gravitybridge.net/), [INJECTIVE](https://injectiveprotocol.com/), [IRIS](https://www.irisnet.org/), [IXO](https://www.ixo.world/), [JUNO](https://junochain.com/), [KAVA](https://www.kava.io/), [KI](https://foundation.ki/), [KONSTELLATION](https://konstellation.tech/), [KUJIRA](https://kujira.app/), [LIKECOIN](https://about.like.co/), [LUM](https://lum.network/), [MARS](https://marsprotocol.io/), [MEDIBLOC](https://medibloc.com/en/), [NYX](https://nymtech.net/), [OKC](https://www.okx.com/), [OMNIFLIX](https://www.omniflix.network/), [ONOMY](https://onomy.io/), [OSMOSIS](https://osmosis.zone/), [PASSAGE](https://passage3d.com/), [PERSISTENCE](https://persistence.one/), [PROVENANCE](https://www.provenance.io/), [QUICKSILVER](https://quicksilver.zone/), [REGEN](https://www.regen.network/), [RIZON](https://rizon.world/), [SECRET](https://scrt.network/), [SENTINEL](https://sentinel.co/), [SHENTU](https://www.certik.com/), [SIF](https://sifchain.finance/), [SOMMELIER](https://sommelier.finance/), [STARGAZE](https://stargaze.zone/), [STARNAME](https://www.starname.me/), [STRIDE](https://stride.zone/), [TERITORI](https://teritori.com/), [UMEE](https://www.umee.cc/), [XPLA](https://xpla.io/)  
+We will add more tendermint-based blockchain projects in the coming updates, such as [AKASH](https://akash.network/), [ASSETMANTLE](https://assetmantle.one/), [AXELAR](https://axelar.network/), [BAND](https://bandprotocol.com/), [BINANCE](https://www.binance.org/), [BITCANNA](https://www.bitcanna.io/), [BITSONG](https://bitsong.io/), [CANTO](https://canto.io/), [CERBERUS](https://cerberus.zone/), [CHIHUAHUA](https://chi.huahua.wtf/), [COMDEX](https://comdex.one/), [CRESCENT](https://crescent.network/), [CRYTO.ORG](https://crypto.org/), [CUDOS](https://www.cudos.org/), [DESMOS](https://www.desmos.network/), [EMONEY](https://www.e-money.com/), [EVMOS](https://evmos.org/), [FETCH.AI](https://fetch.ai/), [GRAVITYBRIDGE](https://www.gravitybridge.net/), [INJECTIVE](https://injectiveprotocol.com/), [IRIS](https://www.irisnet.org/), [IXO](https://www.ixo.world/), [JUNO](https://junochain.com/), [KAVA](https://www.kava.io/), [KI](https://foundation.ki/), [KONSTELLATION](https://konstellation.tech/), [KUJIRA](https://kujira.app/), [LIKECOIN](https://about.like.co/), [LUM](https://lum.network/), [MARS](https://marsprotocol.io/), [MEDIBLOC](https://medibloc.com/en/), [NYX](https://nymtech.net/), [OKC](https://www.okx.com/), [OMNIFLIX](https://www.omniflix.network/), [ONOMY](https://onomy.io/), [OSMOSIS](https://osmosis.zone/), [PASSAGE](https://passage3d.com/), [PERSISTENCE](https://persistence.one/), [PROVENANCE](https://www.provenance.io/), [QUICKSILVER](https://quicksilver.zone/), [REGEN](https://www.regen.network/), [RIZON](https://rizon.world/), [SECRET](https://scrt.network/), [SENTINEL](https://sentinel.co/), [SHENTU](https://www.certik.com/), [SIF](https://sifchain.finance/), [SOMMELIER](https://sommelier.finance/), [STARGAZE](https://stargaze.zone/), [STARNAME](https://www.starname.me/), [STRIDE](https://stride.zone/), [TERITORI](https://teritori.com/), [UMEE](https://www.umee.cc/), [XPLA](https://xpla.io/)   -->
+
+
+# Support Chains
+<table border="1">
+  <tr>
+    <th style="text-align:center"></th>
+    <th style="text-align:center">Chain</th>
+    <th style="text-align:center" >HD Path</th>
+    <th style="text-align:center">Public-Key Cryptography</th>
+    <th style="text-align:center">Call Method</th>
+    <th style="text-align:center">Spec</th>
+  </tr>
+  
+  <tr> 
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/cosmos/resource/chain_cosmos.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">COSMOS</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr> 
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/akash/resource/chain_akash.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">AKASH</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/althea/resource/chain_althea.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">OKT</span></td>
+    <td><span>m/44'/60'/0'/0/X</span><br/>
+        <span>m/44'/118'/0'/0/X</span></td>
+    <td><span>keccak256</span><br/>
+        <span>secp256k1</span></td>
+    <td><span>COSMOS-GRPC</span><br/>
+        <span>EVM-RPC</span></td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/archway/resource/chain_archway.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">ARCHYWAY</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/asset-mantle/resource/chain_asset-mantle.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">ASSETMANTLE</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/axelar/resource/chain_axelar.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">AXELAR</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/band/resource/chain_band.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">BAND</span></td>
+    <td>m/44'/494'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/bitcanna/resource/chain_bitcanna.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">BITCANNA</span></td>
+    <td>m/44'/494'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/bitsong/resource/chain_bitsong.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">BITSONG</span></td>
+    <td>m/44'/639'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/celestia/resource/chain_celestia.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">CELESTIA</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/canto/resource/chain_canto.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">CANTO</span></td>
+    <td>m/44'/60'/0'/0/X</td>
+    <td>keccak256</td>
+    <td><span>COSMOS-GRPC</span><br/>
+        <span>EVM-RPC</span></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/chihuahua/resource/chain_chihuahua.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">CHIHUAHUA</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/comdex/resource/chain_comdex.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">COMDEX</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/coreum/resource/chain_coreum.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">COMDEX</span></td>
+    <td>m/44'/990'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/crypto-org/resource/chain_crypto-org.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">CRONOS POS</span></td>
+    <td>m/44'/394'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/cudos/resource/chain_cudos.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">CUDOS</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/desmos/resource/chain_desmos.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">DESMOS</span></td>
+    <td>m/44'/852'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/dydx/resource/chain_dydx.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">DYDX</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/dymension/resource/chain_dymension.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">DYMENSION</span></td>
+    <td>m/44'/60'/0'/0/X</td>
+    <td>keccak256</td>
+    <td><span>COSMOS-GRPC</span><br/>
+        <span>EVM-RPC</span></td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/evmos/resource/chain_evmos.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">EVMOS</span></td>
+    <td>m/44'/60'/0'/0/X</td>
+    <td>keccak256</td>
+    <td><span>COSMOS-GRPC</span><br/>
+        <span>EVM-RPC</span></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/fetchai/resource/chain_fetchai.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">FETCH.Ai</span></td>
+    <td><span>m/44'/118'/0'/0/X</span><br/>
+        <span>m/44'/60'/0'/0/X</span><br/>
+        <span>m/44'/60'/0'/X</span></td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/finschia/resource/chain_finschia.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">FINSCHIA</span></td>
+    <td>m/44'/438'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/govgen/resource/chain_govgen.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">GOVGEN</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/gravity-bridge/resource/chain_gravity-bridge.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold"><span>GRAVITY</span><br/>
+        <span>-BRIDGE</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/humans/resource/chain_humans.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">HUMANS</span></td>
+    <td>m/44'/60'/0'/0/X</td>
+    <td>keccak256</td>
+    <td><span>COSMOS-GRPC</span><br/>
+        <span>EVM-RPC</span></td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/injective/resource/chain_injective.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">INJECTIVE</span></td>
+    <td>m/44'/60'/0'/0/X</td>
+    <td>keccak256</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/iris/resource/chain_iris.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">IRIS</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/ixo/resource/chain_ixo.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">IXO</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/juno/resource/chain_juno.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">JUNO</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/kava/resource/chain_kava.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">KAVA</span></td>
+    <td><span>m/44'/60'/0'/0/X</span><br/>
+        <span>m/44'/459'/0'/0/X</span><br/>
+        <span>m/44'/118'/0'/0/X</span></td>
+    <td><span>keccak256</span><br/>
+        <span>secp256k1</span><br/>
+        <span>secp256k1</span></td>
+    <td><span>COSMOS-GRPC</span><br/>
+        <span>EVM-RPC</span></td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/ki-chain/resource/chain_ki-chain.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">KI CHAIN</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/kyve/resource/chain_kyve.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">KYVE</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/likecoin/resource/chain_likecoin.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">LIKE COIN</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/lum/resource/chain_lum.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">LUM NETWORK</span></td>
+    <td><span>m/44'/880'/0'/0/X</span><br/>
+        <span>m/44'/118'/0'/0/X</span></td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/mars-protocol/resource/chain_mars-protocol.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">MARS PROTOCOL</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/medibloc/resource/chain_medibloc.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">MEDIBLOC</span></td>
+    <td>m/44'/371'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/neutron/resource/chain_neutron.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">NEUTRON</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/nibiru/resource/chain_nibiru.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">NIBIRU</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/nillion/resource/chain_nillion.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">NILLION</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/noble/resource/chain_noble.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">NOBLE</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/nyx/resource/chain_nyx.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">NYX</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/okc/resource/chain_okc.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">OKT</span></td>
+    <td><span>m/44'/60'/0'/0/X</span><br/>
+        <span>m/44'/996'/0'/0/X</span><br/>
+        <span>m/44'/996'/0'/0/X</span></td>
+    <td><span>keccak256</span><br/>
+        <span>keccak256</span><br/>
+        <span>secp256k1</span></td>
+    <td><span>COSMOS-GRPC</span><br/>
+        <span>EVM-RPC</span></td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/omniflix/resource/chain_omniflix.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">Omniflix</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/onomy-protocol/resource/chain_onomy-protocol.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">ONOMY</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/osmosis/resource/chain_osmosis.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">OSMOSIS</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/passage/resource/chain_passage.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">PASSAGE</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/persistence/resource/chain_persistence.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">PERSISTENCE</span></td>
+    <td><span>m/44'/118'/0'/0/X</span><br/>
+        <span>m/44'/750'/0'/0/X</span></td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/provenance/resource/chain_provenance.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">PROVENANCE</span></td>
+    <td>m/44'/505'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/quasar/resource/chain_quasar.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">QUASAR</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/quicksilver/resource/chain_quicksilver.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">QUICKSILVER</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/regen/resource/chain_regen.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">REGEN NETWORK</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/rizon/resource/chain_rizon.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">RIZON</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/saga/resource/chain_saga.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">SAGA</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/secret/resource/chain_secret.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">SECRET</span></td>
+    <td><span>m/44'/529'/0'/0/X</span><br/>
+        <span>m/44'/118'/0'/0/X</span></td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/sei/resource/chain_sei.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">SEI</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/sentinel/resource/chain_sentinel.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">SENTINEL</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/shentu/resource/chain_shentu.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">SHENTU</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/sommelier/resource/chain_sommelier.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">SOMMELIER</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/stafi/resource/chain_stafi.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">STAFI</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/stargaze/resource/chain_stargaze.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">STARGAZE</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/stride/resource/chain_stride.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">STRIDE</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/teritori/resource/chain_teritori.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">TERITORRI</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/terra/resource/chain_terra.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">TERRA</span></td>
+    <td>m/44'/330'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/umee/resource/chain_umee.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">UMEE</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>COSMOS-GRPC</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/xpla/resource/chain_xpla.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">XPLAR</span></td>
+    <td><span>m/44'/60'/0'/0/X</span><br/>
+        <span>m/44'/60'/0'/0/X</span></td>
+    <td><span>keccak256</span><br/>
+        <span>secp256k1</span></td>
+    <td><span>COSMOS-GRPC</span><br/>
+        <span>EVM-RPC</span></td>
+    <td></td>
+  </tr>
+	 
+</table>
        
 
 
