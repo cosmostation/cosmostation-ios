@@ -736,6 +736,21 @@ extension BaseData {
         return ["", "", "", ""]
     }
     
+    func setInjectionWarn() {
+        var dayComponent = DateComponents()
+        dayComponent.day = 7
+        let theCalendar = Calendar.current
+        let nextDate = theCalendar.date(byAdding: dayComponent, to: Date())
+        let nextTime = nextDate?.millisecondsSince1970 ?? 0
+        UserDefaults.standard.set(String(nextTime), forKey: KEY_INJECTION_WARN)
+    }
+
+    func getInjectionWarn() -> Bool {
+        let last = Int64(UserDefaults.standard.string(forKey: KEY_INJECTION_WARN) ?? "0")!
+        let now = Date().millisecondsSince1970
+        return last < now
+    }
+    
     
     
     func setInstallTime() {

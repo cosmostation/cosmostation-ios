@@ -351,6 +351,7 @@
 "str_deposit_caution" = "⚠️ %@ ネットワーク資産のみ転送可能";
 "str_copy_with_longpress" = "長押しでコピーします";
 "str_copy_with_box" = "コピーするにはボックスをタップしてください";
+"str_support_injection" = "インジェクションをサポート";
 
 
 "btn_delegate" = "  委任する";
@@ -439,6 +440,7 @@
 "msg_reward_address_under" = "報酬の住所を変更するにはここをタップしてください。";
 "msg_already_changed_reward_address" = "すでにリワードアドレスを変更しました。";
 "msg_about_fee_tip" = "Feeとtipは財布ではなくチェー ンに支払われます。";
+"msg_support_injection" = "ユーザーの利便性と応答速度の改善のために、インジェクション方式（EIP-6963）をサポートしています。DAppを使用する際は、デスクトップウォレットなどを選択してください。\nデスクトップのエクステンションウォレットと同じユーザーエクスペリエンスを体験できます。\nEVM用DAppの場合、EIP-6963仕様をサポートしているため、快適なWeb3の旅をお楽しみいただけます。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";

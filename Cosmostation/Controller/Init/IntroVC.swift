@@ -20,8 +20,6 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.view.addBackground()
-        NSLog("Cosmostation IntroVC viewDidLoad")
-        
         if (BaseData.instance.getDBVersion() < DB_VERSION) {
             onUpdateMigration()
         }

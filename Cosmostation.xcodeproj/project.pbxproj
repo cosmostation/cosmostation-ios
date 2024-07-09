@@ -117,6 +117,10 @@
 		041F1F7F2C05E5D5008C2F2C /* WebNaviButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F1F7D2C05E5D5008C2F2C /* WebNaviButton.swift */; };
 		042296812A890C9B003C7630 /* ChainKava118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296802A890C9B003C7630 /* ChainKava118.swift */; };
 		042296822A890C9B003C7630 /* ChainKava118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042296802A890C9B003C7630 /* ChainKava118.swift */; };
+		042316C42C3CD8C100840A86 /* InjectionSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042316C32C3CD8C100840A86 /* InjectionSheet.xib */; };
+		042316C52C3CD8C100840A86 /* InjectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042316C22C3CD8C100840A86 /* InjectionSheet.swift */; };
+		042316C62C3CD8C100840A86 /* InjectionSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042316C32C3CD8C100840A86 /* InjectionSheet.xib */; };
+		042316C72C3CD8C100840A86 /* InjectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042316C22C3CD8C100840A86 /* InjectionSheet.swift */; };
 		042A17502AB97AD900EF31C9 /* RedFixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A174F2AB97AD900EF31C9 /* RedFixCardView.swift */; };
 		042A17512AB97AD900EF31C9 /* RedFixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A174F2AB97AD900EF31C9 /* RedFixCardView.swift */; };
 		042DE6D22C19A044009CAC04 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 042DE6D12C19A044009CAC04 /* Starscream */; };
@@ -2037,6 +2041,8 @@
 		041541012BA413A300CD5AA1 /* VoteAllChainHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteAllChainHeader.xib; sourceTree = "<group>"; };
 		041F1F7D2C05E5D5008C2F2C /* WebNaviButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebNaviButton.swift; sourceTree = "<group>"; };
 		042296802A890C9B003C7630 /* ChainKava118.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKava118.swift; sourceTree = "<group>"; };
+		042316C22C3CD8C100840A86 /* InjectionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionSheet.swift; sourceTree = "<group>"; };
+		042316C32C3CD8C100840A86 /* InjectionSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InjectionSheet.xib; sourceTree = "<group>"; };
 		042A174F2AB97AD900EF31C9 /* RedFixCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedFixCardView.swift; sourceTree = "<group>"; };
 		042DE6F42C1D4DEA009CAC04 /* FetcherGrpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetcherGrpc.swift; sourceTree = "<group>"; };
 		042DE6F72C1D4DFC009CAC04 /* FetcherEvmrpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetcherEvmrpc.swift; sourceTree = "<group>"; };
@@ -3579,6 +3585,8 @@
 				04FA746B2A9F8652001A2830 /* BaseSheet.xib */,
 				0472D4812B03588F00B9E6E8 /* NoticeSheet.swift */,
 				0472D4822B03588F00B9E6E8 /* NoticeSheet.xib */,
+				042316C22C3CD8C100840A86 /* InjectionSheet.swift */,
+				042316C32C3CD8C100840A86 /* InjectionSheet.xib */,
 				E131F44C2AEEAAB800E760A0 /* CreateNameSheet.swift */,
 				E131F44D2AEEAAB800E760A0 /* CreateNameSheet.xib */,
 				04FAD9EC2AB71D3300143A3E /* RenameSheet.swift */,
@@ -4658,6 +4666,7 @@
 				E10B1D762C2156430039283B /* KavaDefiCell.xib in Resources */,
 				04C940E32AEB92F900415256 /* BaseImgSheetCell.xib in Resources */,
 				040733062AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
+				042316C62C3CD8C100840A86 /* InjectionSheet.xib in Resources */,
 				0497150E2C105C13008C45A0 /* DappEvmSignRequestSheet.xib in Resources */,
 				042DE8492AC4CD01003F3EA4 /* QrScanVC.xib in Resources */,
 				18F4EAD22A4DA0A500CFBE2B /* ApiKey.plist in Resources */,
@@ -4800,6 +4809,7 @@
 				04FF6B8E2B204BCB009DCA89 /* ClaimAllChainCell.xib in Resources */,
 				047842E02AC8963100462F1C /* CosmosUndelegate.xib in Resources */,
 				E10B1D9D2C2156430039283B /* KavaDefiVC.xib in Resources */,
+				042316C42C3CD8C100840A86 /* InjectionSheet.xib in Resources */,
 				04C63D1E2B839D3900D4A366 /* TxSendAmountSheet.xib in Resources */,
 				046BF1C82B0F443100BC1FC8 /* OktSelectValidatorSheet.xib in Resources */,
 				04FA74872AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
@@ -5198,6 +5208,7 @@
 				04C816CD2BA98D75006B800A /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
 				E159805B2A6F5EFE0032892B /* PortfolioCell.swift in Sources */,
 				042DE8472AC4CD01003F3EA4 /* QrScanVC.swift in Sources */,
+				042316C72C3CD8C100840A86 /* InjectionSheet.swift in Sources */,
 				047843F42AC9A1B500462F1C /* ChainArchway.swift in Sources */,
 				04D7854F2C328DB1009D1A94 /* feemarket_feemarket_v1_genesis.pb.swift in Sources */,
 				18FFB332281AF533004E65BB /* KeyFac.swift in Sources */,
@@ -5975,6 +5986,7 @@
 				04C816CC2BA98D75006B800A /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
 				04E165BA28B61BE1000F12C0 /* MintscanAsset.swift in Sources */,
 				E159805A2A6F5EFE0032892B /* PortfolioCell.swift in Sources */,
+				042316C52C3CD8C100840A86 /* InjectionSheet.swift in Sources */,
 				042DE8462AC4CD01003F3EA4 /* QrScanVC.swift in Sources */,
 				04D7854E2C328DB1009D1A94 /* feemarket_feemarket_v1_genesis.pb.swift in Sources */,
 				047843F32AC9A1B500462F1C /* ChainArchway.swift in Sources */,

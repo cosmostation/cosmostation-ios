@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import BigInt
 
 
 class BaseChain {
@@ -447,6 +448,20 @@ extension BaseChain {
             $0.gasLimit = getFeeBaseGasAmount()
             $0.amount = [Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = coinAmount.stringValue }]
         }
+    }
+    
+    
+    
+    func evmSupportEip1559() -> Bool {
+        return getChainListParam()["evm_fee"]["eip1559"].bool ?? false
+    }
+    
+    
+    func evmGasMultiply() -> BigUInt {
+        if let mutiply = getChainListParam()["evm_fee"]["simul_gas_multiply"].int {
+            return BigUInt(mutiply * 10)
+        }
+        return 13
     }
     
 }
