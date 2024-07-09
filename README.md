@@ -14,6 +14,33 @@
 
 
 <details open>
+<summary><h2 style='display: inline; font-size: 24px'>Key Features</h2></summary>
+<br>
+Non-custodial tendermint-based mobile walle application designed for managing and staking Cosmos-based assets. It supports various Cosmos SDK-based blockchains, enabling users to store, send, receive, and stake their tokens directly from their mobile devices. The wallet features a user-friendly interface, real-time transaction history, and secure private key management. It also provides integration with decentralized applications
+<br>
+
+1. Fully open-source
+2. We respect your privacy and ensure that no user data is collected, except for push notifications to keep you informed.
+3. Supports all staking-related features (Delegate, Undelegate, Redelegate, CanceUnbonding)
+4. Supports not only standard transactions but also IBC (Inter-Blockchain Communication) transfers through secure channels.
+5. Supports realtime [governance data](https://www.mintscan.io/cosmos/proposals/) and provides the ability to vote on proposals.
+6. By supporting the injection method(like [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963)), it allows for faster and more convenient connections with DApps.
+7. By utilizing gRPC, which boasts advantages such as performance, security, and scalability, we align with the Cosmos.
+
+<br>
+
+You can download each store.
+* [Android](https://play.google.com/store/apps/details?id=wannabit.io.cosmostaion)
+
+* [iOS](https://apps.apple.com/us/app/cosmostation/id1459830339)
+
+</details>
+
+<br>
+<br>
+<br>
+
+<details >
 <summary><h2 style='display: inline; font-size: 24px'>Supporting Chains (Cosmos)</h2></summary>
 <br>
 
@@ -32,7 +59,7 @@
     <td><span style="font-weight:bold">COSMOS</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
@@ -41,7 +68,7 @@
     <td><span style="font-weight:bold">AKASH</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -52,12 +79,9 @@
         <span>m/44'/118'/0'/0/X</span></td>
     <td><span>keccak256</span><br/>
         <span>secp256k1</span></td>
-    <td><span>COSMOS-GRPC</span><br/>
-        <span>EVM-RPC</span></td>
+    <td>gRPC, evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
-        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22">
-        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_nft.png?raw=true" width="42" height = "22">
-        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -65,8 +89,10 @@
     <td><span style="font-weight:bold">ARCHYWAY</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
-    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
+    <td>gRPC</td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_nft.png?raw=true" width="42" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -74,7 +100,7 @@
     <td><span style="font-weight:bold">ASSETMANTLE</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -83,7 +109,7 @@
     <td><span style="font-weight:bold">AXELAR</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -92,7 +118,7 @@
     <td><span style="font-weight:bold">BAND</span></td>
     <td>m/44'/494'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -101,7 +127,7 @@
     <td><span style="font-weight:bold">BITCANNA</span></td>
     <td>m/44'/494'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -110,7 +136,7 @@
     <td><span style="font-weight:bold">BITSONG</span></td>
     <td>m/44'/639'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -119,7 +145,7 @@
     <td><span style="font-weight:bold">CELESTIA</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -128,8 +154,7 @@
     <td><span style="font-weight:bold">CANTO</span></td>
     <td>m/44'/60'/0'/0/X</td>
     <td>keccak256</td>
-    <td><span>COSMOS-GRPC</span><br/>
-        <span>EVM-RPC</span></td>
+    <td>gRPC, evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
     <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
@@ -139,7 +164,7 @@
     <td><span style="font-weight:bold">CHIHUAHUA</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
@@ -148,7 +173,7 @@
     <td><span style="font-weight:bold">COMDEX</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -157,7 +182,7 @@
     <td><span style="font-weight:bold">COMDEX</span></td>
     <td>m/44'/990'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -166,7 +191,7 @@
     <td><span style="font-weight:bold">CRONOS POS</span></td>
     <td>m/44'/394'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -175,7 +200,7 @@
     <td><span style="font-weight:bold">CUDOS</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -184,7 +209,7 @@
     <td><span style="font-weight:bold">DESMOS</span></td>
     <td>m/44'/852'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -193,7 +218,7 @@
     <td><span style="font-weight:bold">DYDX</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -202,8 +227,7 @@
     <td><span style="font-weight:bold">DYMENSION</span></td>
     <td>m/44'/60'/0'/0/X</td>
     <td>keccak256</td>
-    <td><span>COSMOS-GRPC</span><br/>
-        <span>EVM-RPC</span></td>
+    <td>gRPC, evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
     <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
@@ -213,8 +237,7 @@
     <td><span style="font-weight:bold">EVMOS</span></td>
     <td>m/44'/60'/0'/0/X</td>
     <td>keccak256</td>
-    <td><span>COSMOS-GRPC</span><br/>
-        <span>EVM-RPC</span></td>
+    <td>gRPC, evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
     <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
@@ -226,7 +249,7 @@
         <span>m/44'/60'/0'/0/X</span><br/>
         <span>m/44'/60'/0'/X</span></td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -235,7 +258,7 @@
     <td><span style="font-weight:bold">FINSCHIA</span></td>
     <td>m/44'/438'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -244,7 +267,7 @@
     <td><span style="font-weight:bold">GOVGEN</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -254,7 +277,7 @@
         <span>-BRIDGE</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -263,8 +286,7 @@
     <td><span style="font-weight:bold">HUMANS</span></td>
     <td>m/44'/60'/0'/0/X</td>
     <td>keccak256</td>
-    <td><span>COSMOS-GRPC</span><br/>
-        <span>EVM-RPC</span></td>
+    <td>gRPC, evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
     <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
@@ -274,7 +296,7 @@
     <td><span style="font-weight:bold">INJECTIVE</span></td>
     <td>m/44'/60'/0'/0/X</td>
     <td>keccak256</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
@@ -283,7 +305,7 @@
     <td><span style="font-weight:bold">IRIS</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -292,7 +314,7 @@
     <td><span style="font-weight:bold">IXO</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -301,7 +323,7 @@
     <td><span style="font-weight:bold">JUNO</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
@@ -314,8 +336,7 @@
     <td><span>keccak256</span><br/>
         <span>secp256k1</span><br/>
         <span>secp256k1</span></td>
-    <td><span>COSMOS-GRPC</span><br/>
-        <span>EVM-RPC</span></td>
+    <td>gRPC, evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
         <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22">
         <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
@@ -326,7 +347,7 @@
     <td><span style="font-weight:bold">KI CHAIN</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
@@ -335,7 +356,7 @@
     <td><span style="font-weight:bold">KYVE</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -344,7 +365,7 @@
     <td><span style="font-weight:bold">LIKE COIN</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -354,7 +375,7 @@
     <td><span>m/44'/880'/0'/0/X</span><br/>
         <span>m/44'/118'/0'/0/X</span></td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -363,7 +384,7 @@
     <td><span style="font-weight:bold">MARS PROTOCOL</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -372,7 +393,7 @@
     <td><span style="font-weight:bold">MEDIBLOC</span></td>
     <td>m/44'/371'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -381,7 +402,7 @@
     <td><span style="font-weight:bold">NEUTRON</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_ics.png?raw=true" width="42" height = "22">
     <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
   </tr>
@@ -391,7 +412,7 @@
     <td><span style="font-weight:bold">NIBIRU</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -400,7 +421,7 @@
     <td><span style="font-weight:bold">NILLION</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -409,7 +430,7 @@
     <td><span style="font-weight:bold">NOBLE</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 	 	
@@ -418,7 +439,7 @@
     <td><span style="font-weight:bold">NYX</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 
@@ -431,8 +452,7 @@
     <td><span>keccak256</span><br/>
         <span>keccak256</span><br/>
         <span>secp256k1</span></td>
-    <td><span>COSMOS-GRPC</span><br/>
-        <span>EVM-RPC</span></td>
+    <td>LCD, evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
     <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
@@ -442,7 +462,7 @@
     <td><span style="font-weight:bold">Omniflix</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -451,7 +471,7 @@
     <td><span style="font-weight:bold">ONOMY</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -460,7 +480,7 @@
     <td><span style="font-weight:bold">OSMOSIS</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -469,7 +489,7 @@
     <td><span style="font-weight:bold">PASSAGE</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 
@@ -479,7 +499,7 @@
     <td><span>m/44'/118'/0'/0/X</span><br/>
         <span>m/44'/750'/0'/0/X</span></td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
     
@@ -488,7 +508,7 @@
     <td><span style="font-weight:bold">PROVENANCE</span></td>
     <td>m/44'/505'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -497,7 +517,7 @@
     <td><span style="font-weight:bold">QUASAR</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -506,7 +526,7 @@
     <td><span style="font-weight:bold">QUICKSILVER</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -515,7 +535,7 @@
     <td><span style="font-weight:bold">REGEN NETWORK</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -524,7 +544,7 @@
     <td><span style="font-weight:bold">RIZON</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -533,7 +553,7 @@
     <td><span style="font-weight:bold">SAGA</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 
@@ -543,7 +563,7 @@
     <td><span>m/44'/529'/0'/0/X</span><br/>
         <span>m/44'/118'/0'/0/X</span></td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -552,7 +572,7 @@
     <td><span style="font-weight:bold">SEI</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
   </tr>
     
@@ -561,7 +581,7 @@
     <td><span style="font-weight:bold">SENTINEL</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -570,7 +590,7 @@
     <td><span style="font-weight:bold">SHENTU</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -579,7 +599,7 @@
     <td><span style="font-weight:bold">SOMMELIER</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -588,7 +608,7 @@
     <td><span style="font-weight:bold">STAFI</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -597,7 +617,7 @@
     <td><span style="font-weight:bold">STARGAZE</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_nft.png?raw=true" width="42" height = "22"></td>
   </tr>
     
@@ -606,7 +626,7 @@
     <td><span style="font-weight:bold">STRIDE</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_ics.png?raw=true" width="42" height = "22"></td>
   </tr>
     
@@ -615,7 +635,7 @@
     <td><span style="font-weight:bold">TERITORRI</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
     
@@ -624,7 +644,7 @@
     <td><span style="font-weight:bold">TERRA</span></td>
     <td>m/44'/330'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_cw20.png?raw=true" width="48" height = "22"></td>
   </tr>
     
@@ -633,7 +653,7 @@
     <td><span style="font-weight:bold">UMEE</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
-    <td>COSMOS-GRPC</td>
+    <td>gRPC</td>
     <td></td>
   </tr>
 
@@ -644,8 +664,7 @@
         <span>m/44'/60'/0'/0/X</span></td>
     <td><span>keccak256</span><br/>
         <span>secp256k1</span></td>
-    <td><span>COSMOS-GRPC</span><br/>
-        <span>EVM-RPC</span></td>
+    <td>gRPC, evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
     <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
@@ -654,26 +673,25 @@
        
 </details>
 
+<br>
+<br>
+<br>
 
-
-
-
-
-## Downloads
-
-* [Android](https://play.google.com/store/apps/details?id=wannabit.io.cosmostaion)
-
-* [iOS](https://apps.apple.com/us/app/cosmostation/id1459830339)
-
-
-## Cosmostation's Services and Community
+<details>
+<summary><h2 style='display: inline; font-size: 24px'>Cosmostation's Services and Community</h2></summary>
+<br>
 
 - [Official Website](https://www.cosmostation.io)
 - [Mintscan Explorer](https://www.mintscan.io)
 - [Web Wallet](https://wallet.cosmostation.io)
 - [Telegram - International](https://t.me/cosmostation)
 - [Kakao - Korean](https://open.kakao.com/o/g6KKSe5)
+</details>
 
+
+<br>
+<br>
+<br>
 
 ## License
 
