@@ -25,11 +25,9 @@ class StakeUnbondingCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
         logoImg.af.cancelImageRequest()
         logoImg.image = UIImage(named: "validatorDefault")
         inactiveTag.isHidden = true

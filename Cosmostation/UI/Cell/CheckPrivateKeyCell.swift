@@ -23,14 +23,12 @@ class CheckPrivateKeyCell: UITableViewCell {
         selectionStyle = .none
         legacyTag.isHidden = true
         keyTypeTag.isHidden = true
-        rootView.setBlur()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         legacyTag.isHidden = true
         keyTypeTag.isHidden = true
-        rootView.setBlur()
     }
     
     func bindPrivateKey(_ account: BaseAccount, _ chain: BaseChain) {

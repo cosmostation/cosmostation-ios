@@ -24,14 +24,12 @@ class ManageChainCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
         evmLayer.isHidden = true
         grpcLayer.isHidden = true
         lcdLayer.isHidden = true
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
         evmLayer.isHidden = true
         grpcLayer.isHidden = true
         lcdLayer.isHidden = true

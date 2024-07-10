@@ -19,13 +19,7 @@ class KavaLendListMyCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
     }
-    
-    override func prepareForReuse() {
-        rootView.setBlur()
-    }
-    
     
     func onBindMyHard(_ hardParam: Kava_Hard_V1beta1_Params?, _ priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?,
                       _ myDeposits: [Cosmos_Base_V1beta1_Coin]?, _ myBorrows: [Cosmos_Base_V1beta1_Coin]?) {

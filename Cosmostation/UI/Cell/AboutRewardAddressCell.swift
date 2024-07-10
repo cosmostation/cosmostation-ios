@@ -20,7 +20,6 @@ class AboutRewardAddressCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
         warnView.isHidden = true
         rewardAddressLabel.text = ""
         rewardAddressLabel.textColor = .color01
@@ -31,7 +30,6 @@ class AboutRewardAddressCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
         rewardAddressLabel.text = ""
         rewardAddressLabel.textColor = .color01
     }

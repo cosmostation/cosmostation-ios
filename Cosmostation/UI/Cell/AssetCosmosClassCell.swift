@@ -44,7 +44,6 @@ class AssetCosmosClassCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
         amountLabel.text = ""
         valueCurrencyLabel.text = ""
         valueLabel.text = ""
@@ -55,7 +54,6 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
         coinImg.af.cancelImageRequest()
         amountLabel.text = ""
         valueCurrencyLabel.text = ""

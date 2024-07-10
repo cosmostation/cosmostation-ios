@@ -28,11 +28,6 @@ class KavaIncentiveCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
-    }
-    
-    override func prepareForReuse() {
-        rootView.setBlur()
     }
     
     func onBindIncentive(_ baseChain: BaseChain, _ incentive: Kava_Incentive_V1beta1_QueryRewardsResponse?) {

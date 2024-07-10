@@ -21,11 +21,6 @@ class KavaEarnListMyCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
-    }
-    
-    override func prepareForReuse() {
-        rootView.setBlur()
     }
     
     func onBindEarnsView(_ chain: BaseChain, _ deposits: [Cosmos_Base_V1beta1_Coin]) {

@@ -18,11 +18,6 @@ class AboutDescriptionCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
-    }
-    
-    override func prepareForReuse() {
-        rootView.setBlur()
     }
     
     func onBindDescription(_ chain: BaseChain, _ json: JSON) {

@@ -67,13 +67,7 @@ class CreateMnemonicVC: BaseVC, PinDelegate, CreateNameDelegate {
         copyTap.cancelsTouchesInView = false
         wordCardView.addGestureRecognizer(copyTap)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        warningCardView.setBlur()
-        wordCardView.setBlur()
-    }
-    
+        
     override func setLocalizedString() {
         navigationItem.title = NSLocalizedString("title_mnemonic_create", comment: "")
         warningTitleLabel.text = NSLocalizedString("str_warnning", comment: "")

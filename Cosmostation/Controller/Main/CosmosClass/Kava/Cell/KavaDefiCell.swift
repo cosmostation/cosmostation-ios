@@ -18,13 +18,8 @@ class KavaDefiCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
     }
-    
-    override func prepareForReuse() {
-        rootView.setBlur()
-    }
-    
+        
     func onBindKava(_ position: Int) {
         if (position == 1) {
             defiImg.image = UIImage(named: "imgKavaMint")

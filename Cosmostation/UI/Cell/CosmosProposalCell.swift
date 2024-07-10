@@ -27,7 +27,6 @@ class CosmosProposalCell: UITableViewCell {
         selectionStyle = .none
         selectSwitch.isHidden = true
         selectSwitch.isOn = false
-        rootView.setBlur()
     }
     
     override func prepareForReuse() {
@@ -38,7 +37,6 @@ class CosmosProposalCell: UITableViewCell {
         expectedImg.isHidden = true
         statusImg.isHidden = true
         statusLabel.isHidden = true
-        rootView.setBlur()
     }
     
     var actionToggle: ((Bool) -> Void)? = nil

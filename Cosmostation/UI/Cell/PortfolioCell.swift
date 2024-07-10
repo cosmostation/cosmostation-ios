@@ -30,14 +30,12 @@ class PortfolioCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         
-        rootView.setBlur()
         currencyLabel.text = ""
         valueLabel.text = ""
         loadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
         currencyLabel.text = ""
         valueLabel.text = ""
         legacyTag.isHidden = true

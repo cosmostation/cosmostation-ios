@@ -23,11 +23,9 @@ class AddressBookCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
         logoImg1.image = UIImage.init(named: "chainDefault")
     }
     

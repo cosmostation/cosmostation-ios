@@ -38,7 +38,6 @@ class Portfolio2Cell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         
-        rootView.setBlur()
         valuecurrencyLabel.text = ""
         valueLabel.text = ""
         assetCntLabel.text = ""
@@ -55,7 +54,6 @@ class Portfolio2Cell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
         valuecurrencyLabel.text = ""
         valueLabel.text = ""
         assetCntLabel.text = ""

@@ -27,7 +27,6 @@ class AssetCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
         amountLabel.text = ""
         valueCurrencyLabel.text = ""
         valueLabel.text = ""
@@ -38,7 +37,6 @@ class AssetCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
         coinImg.af.cancelImageRequest()
         coinImg.image = UIImage(named: "tokenDefault")
         amountLabel.text = ""
