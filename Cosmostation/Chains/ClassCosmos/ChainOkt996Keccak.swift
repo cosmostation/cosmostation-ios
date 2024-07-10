@@ -100,6 +100,13 @@ class ChainOkt996Keccak: BaseChain  {
             } else {
                 fetchState = .Success
             }
+            
+            if (self.fetchState == .Success) {
+                if let oktFetcher = getLcdfetcher() {
+                    coinsCnt = oktFetcher.valueCoinCnt()
+                }
+            }
+            
             DispatchQueue.main.async(execute: {
                 NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
             })

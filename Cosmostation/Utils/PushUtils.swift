@@ -14,6 +14,7 @@ class PushUtils {
     static let shared = PushUtils()
     
     func updateTokenIfNeed(token: String) {
+        BaseData.instance.setFCMToken(token)
     }
     
     func getStatus() async throws -> JSON {

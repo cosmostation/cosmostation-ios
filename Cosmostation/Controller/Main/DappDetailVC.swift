@@ -97,6 +97,13 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         onInitWeb3 { success in
             print("onInitWeb3 ", success)
         }
+        
+        if (BaseData.instance.getInjectionWarn()) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                let warnSheet = InjectionSheet(nibName: "InjectionSheet", bundle: nil)
+                self.onStartSheet(warnSheet, 540, 0.9)
+            })
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

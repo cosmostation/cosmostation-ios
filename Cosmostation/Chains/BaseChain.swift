@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import BigInt
 
 
 class BaseChain {
@@ -130,7 +131,6 @@ class BaseChain {
             if (supportCosmosGrpc == true) {
                 grpcResult = await getGrpcfetcher()?.fetchGrpcData(id)
             }
-            
             if (evmResult == false || grpcResult == false) {
                 fetchState = .Fail
 //                print("fetching Some error ", tag)
@@ -225,17 +225,33 @@ class BaseChain {
     func fetchBalances() {
         fetchState = .Busy
         Task {
-            var result: Bool?
-            if (supportEvm == true) {
-                result = await getEvmfetcher()?.fetchBalances()
-            } else if (supportCosmosGrpc == true) {
-                result = await getGrpcfetcher()?.fetchBalances()
-            }
+            coinsCnt = 0
+            var evmResult: Bool?
+            var grpcResult: Bool?
             
-            if (result == false) {
+            if (supportEvm == true) {
+                evmResult = await getEvmfetcher()?.fetchBalances()
+            }
+            if (supportCosmosGrpc == true) {
+                grpcResult = await getGrpcfetcher()?.fetchBalances()
+            }
+            if (evmResult == false || grpcResult == false) {
                 fetchState = .Fail
             } else {
                 fetchState = .Success
+            }
+            
+            if (self.fetchState == .Success) {
+                if (supportCosmosGrpc) {
+                    if let grpcFetcher = getGrpcfetcher() {
+                        coinsCnt = grpcFetcher.valueCoinCnt()
+                    }
+                    
+                } else if (supportEvm) {
+                    if let evmFetcher = getEvmfetcher() {
+                        coinsCnt = evmFetcher.valueCoinCnt()
+                    }
+                }
             }
             
             DispatchQueue.main.async(execute: {
@@ -434,6 +450,20 @@ extension BaseChain {
         }
     }
     
+    
+    
+    func evmSupportEip1559() -> Bool {
+        return getChainListParam()["evm_fee"]["eip1559"].bool ?? false
+    }
+    
+    
+    func evmGasMultiply() -> BigUInt {
+        if let mutiply = getChainListParam()["evm_fee"]["simul_gas_multiply"].int {
+            return BigUInt(mutiply * 10)
+        }
+        return 13
+    }
+    
 }
 
 //for utils
@@ -479,6 +509,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAlthea118())
     result.append(ChainArbitrum())                      //EVM
     result.append(ChainArchway())
+    //result.append(ChainArtelaEVM())                   //EVM
     result.append(ChainAssetMantle())
     result.append(ChainAvalanche())                     //EVM
     result.append(ChainAxelar())
@@ -509,6 +540,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainGravityBridge())
     result.append(ChainHumansEVM())                     //EVM
     result.append(ChainInjective())
+    //result.append(ChainInitia())
     result.append(ChainIris())
     result.append(ChainIxo())
     result.append(ChainJuno())
@@ -524,6 +556,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMedibloc())
     result.append(ChainNeutron())
     result.append(ChainNibiru())
+    //result.append(ChainNillion())
     result.append(ChainNoble())
     result.append(ChainNyx())
     result.append(ChainOktEVM())                        //EVM
@@ -563,11 +596,12 @@ func ALLCHAINS() -> [BaseChain] {
     
     
     
-    
-
+    result.append(ChainCosmos_T())
+    result.append(ChainArtelaEVM_T())
+    //result.append(ChainInitia_T())
+    //result.append(ChainBeraEVM_T())
     result.append(ChainNeutron_T())
-    
-//    result.append(ChainBeraEVM_T())
+    result.append(ChainNillion_T())
     
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {
@@ -579,11 +613,11 @@ func ALLCHAINS() -> [BaseChain] {
     }
     
     if (BaseData.instance.getHideLegacy()) {
-        return result.filter({ $0.isDefault == true })
+        result = result.filter({ $0.isDefault == true })
     }
     
     if (!BaseData.instance.getShowTestnet()) {
-        return result.filter({ $0.isTestnet == false })
+        result = result.filter({ $0.isTestnet == false })
     }
     return result
 }

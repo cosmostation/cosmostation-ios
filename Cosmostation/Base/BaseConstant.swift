@@ -42,6 +42,7 @@ let KEY_SWAP_USER_SET                   = "KEY_SWAP_USER_SET"
 let KEY_SKIP_CHAIN_INFO                 = "KEY_SKIP_CHAIN_INFO"
 let KEY_SKIP_ASSET_INFO                 = "KEY_SKIP_ASSET_INFO"
 let KEY_HIDE_VALUE                      = "KEY_HIDE_VALUE"
+let KEY_INJECTION_WARN                  = "KEY_INJECTION_WARN"
 
 let MINTSCAN_DEV_API_URL                = "https://dev.api.mintscan.io/";
 let MINTSCAN_API_URL                    = "https://front.api.mintscan.io/";

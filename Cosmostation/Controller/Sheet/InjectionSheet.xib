@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InjectionSheet" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="noticeMsgLabel" destination="u04-fU-mWq" id="JcJ-72-Rkf"/>
+                <outlet property="noticeTitleLabel" destination="1AR-hA-eiO" id="sWP-hz-Esp"/>
+                <outlet property="okBtn" destination="4du-18-jBg" id="KwZ-Ke-DvW"/>
+                <outlet property="subBtn" destination="9Q7-iU-pCG" id="eeZ-Vb-UKc"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconInjection" translatesAutoresizingMaskIntoConstraints="NO" id="UWx-lk-hYm">
+                    <rect key="frame" x="106.66666666666669" y="217.33333333333337" width="180" height="255"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="R6q-0t-rOb"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u04-fU-mWq">
+                    <rect key="frame" x="30" y="515" width="333" height="193"/>
+                    <string key="text">To enhance user convenience and response speed, we support the injection method (EIP-6963). When using DApps, please select your desktop wallet, etc.
+
+You can experience the same user experience as with the desktop extension wallet.
+
+For EVM-based DApps, by supporting the EIP-6963 specification, you can enjoy a seamless web3 experience.</string>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                    <color key="textColor" name="_color02"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9aI-j2-ucL">
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Q7-iU-pCG" customClass="SecButton" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="183.66666666666666" height="54"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="79F-T2-lqB"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                            <color key="tintColor" name="_color01"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="No more 7Days">
+                                <color key="titleColor" name="_color05"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickSubBtn:" destination="-1" eventType="touchUpInside" id="6rc-95-YKQ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4du-18-jBg" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="193.66666666666663" y="0.0" width="183.33333333333337" height="54"/>
+                            <color key="backgroundColor" name="_primary"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="iQf-oh-5Ob"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="OK">
+                                <color key="titleColor" name="_color01"/>
+                            </state>
+                            <connections>
+                                <action selector="onClickOkBtn:" destination="-1" eventType="touchUpInside" id="yFP-n7-sDh"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Support Injection" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AR-hA-eiO">
+                    <rect key="frame" x="119.33333333333333" y="480.33333333333331" width="154.66666666666669" height="22.666666666666686"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="18"/>
+                    <color key="textColor" name="_color01"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="_colorBg"/>
+            <constraints>
+                <constraint firstItem="1AR-hA-eiO" firstAttribute="top" secondItem="UWx-lk-hYm" secondAttribute="bottom" constant="8" id="12z-CJ-8We"/>
+                <constraint firstItem="UWx-lk-hYm" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="5S4-di-Hwi"/>
+                <constraint firstItem="9aI-j2-ucL" firstAttribute="top" secondItem="u04-fU-mWq" secondAttribute="bottom" constant="48" id="J7h-ZY-Zna"/>
+                <constraint firstItem="u04-fU-mWq" firstAttribute="top" secondItem="1AR-hA-eiO" secondAttribute="bottom" constant="12" id="LGj-QV-r51"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9aI-j2-ucL" secondAttribute="trailing" constant="8" id="Mj2-1C-i4v"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9aI-j2-ucL" secondAttribute="bottom" constant="8" id="dNP-4D-8Xk"/>
+                <constraint firstItem="u04-fU-mWq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="eCH-vL-qvo"/>
+                <constraint firstItem="1AR-hA-eiO" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="gX9-YZ-Ybn"/>
+                <constraint firstItem="9aI-j2-ucL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="jo2-4O-Qyw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="u04-fU-mWq" secondAttribute="trailing" constant="30" id="wAv-22-cXA"/>
+            </constraints>
+            <point key="canvasLocation" x="140" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconInjection" width="255" height="255"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color05">
+            <color red="0.31400001049041748" green="0.32199999690055847" blue="0.40400001406669617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorBg">
+            <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

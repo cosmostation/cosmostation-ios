@@ -102,8 +102,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.list, .banner])
+    }
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         UIApplication.shared.applicationIconBadgeNumber = 0
+        let application = UIApplication.shared
+        let userInfo = response.notification.request.content.userInfo
+        if (application.applicationState == .background) { return }         // if app terminated, handle push with "didFinishLaunchingWithOptions"
         if let topVC = application.topViewController,
             (topVC.isKind(of: PincodeVC.self) || topVC.isKind(of: IntroVC.self)) {
             BaseData.instance.appUserInfo = userInfo
@@ -119,10 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
             }
         }
-    }
-    
-    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler(.alert)
+        completionHandler()
     }
     
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {

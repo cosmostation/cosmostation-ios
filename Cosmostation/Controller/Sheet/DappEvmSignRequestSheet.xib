@@ -19,6 +19,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DappEvmSignRequestSheet" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="barView" destination="D6R-oX-OtJ" id="Q1T-gM-P74"/>
                 <outlet property="bodyCardView" destination="6nj-uP-GPB" id="s0I-kA-HQr"/>
                 <outlet property="cancelBtn" destination="eKQ-2g-PVp" id="RoB-Fi-w7s"/>
                 <outlet property="confirmBtn" destination="A0e-IU-WFg" id="xfG-rG-tma"/>
@@ -69,7 +70,7 @@
                     <color key="textColor" name="_color02"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D6R-oX-OtJ">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D6R-oX-OtJ">
                     <rect key="frame" x="8" y="161.66666666666666" width="377" height="0.66666666666665719"/>
                     <color key="backgroundColor" name="_divider"/>
                     <constraints>
