@@ -14,11 +14,11 @@ class PortfolioCell: UITableViewCell {
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var erc20Tag: PaddingLabel!
-    @IBOutlet weak var cw20Tag: PaddingLabel!
-    @IBOutlet weak var nftTag: PaddingLabel!
-    @IBOutlet weak var dappTag: PaddingLabel!
+    @IBOutlet weak var legacyTag: RoundedPaddingLabel!
+    @IBOutlet weak var erc20Tag: RoundedPaddingLabel!
+    @IBOutlet weak var cw20Tag: RoundedPaddingLabel!
+    @IBOutlet weak var nftTag: RoundedPaddingLabel!
+    @IBOutlet weak var dappTag: RoundedPaddingLabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var loadingLabel: UILabel!
