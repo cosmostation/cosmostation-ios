@@ -97,6 +97,16 @@
         "code",
         "design"
       ]
+    },
+    {
+      "login": "cha-somin",
+      "name": "cha-somin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/174298380?v=4",
+      "profile": "https://github.com/cha-somin",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -104,5 +114,7 @@
   "projectOwner": "cosmostation",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs",
+  "commitConvention": "angular"
 }
