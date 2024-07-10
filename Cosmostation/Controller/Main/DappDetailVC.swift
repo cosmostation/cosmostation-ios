@@ -417,7 +417,12 @@ extension DappDetailVC: WKScriptMessageHandler {
             //Handle EVM Request
             else if (method == "eth_requestAccounts" || method == "wallet_requestPermissions") {
                 onInitEvmChain()
-                injectionRequestApprove([targetChain.evmAddress!], messageJSON, bodyJSON["messageId"])
+                if let evmAddress = targetChain.evmAddress {
+                    injectionRequestApprove([evmAddress], messageJSON, bodyJSON["messageId"])
+                } else {
+                    let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
+                    injectionRequestReject(result, messageJSON, bodyJSON["messageId"])
+                }
                 
             } else if (method == "wallet_switchEthereumChain") {
                 let requestChainId = messageJSON["params"].arrayValue[0]["chainId"].stringValue
@@ -431,16 +436,25 @@ extension DappDetailVC: WKScriptMessageHandler {
                 } else {
                     let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
                     injectionRequestReject(result, messageJSON, bodyJSON["messageId"])
-                    onShowToast(result)
                 }
                 
             } else if (method == "eth_chainId") {
                 onInitEvmChain()
-                injectionRequestApprove(JSON.init(stringLiteral: targetChain.chainIdEvm!), messageJSON, bodyJSON["messageId"])
+                if let evmChainId = targetChain.chainIdEvm {
+                    injectionRequestApprove(JSON.init(stringLiteral: evmChainId), messageJSON, bodyJSON["messageId"])
+                } else {
+                    let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
+                    injectionRequestReject(result, messageJSON, bodyJSON["messageId"])
+                }
                 
             } else if (method == "eth_accounts") {
                 onInitEvmChain()
-                injectionRequestApprove([targetChain.evmAddress!], messageJSON, bodyJSON["messageId"])
+                if let evmAddress = targetChain.evmAddress {
+                    injectionRequestApprove([evmAddress], messageJSON, bodyJSON["messageId"])
+                } else {
+                    let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
+                    injectionRequestReject(result, messageJSON, bodyJSON["messageId"])
+                }
                 
             } else if (method == "eth_getBalance") {
                 onInitEvmChain()

@@ -94,6 +94,12 @@ class DappCosmosSignRequestSheet: BaseVC {
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeDenom)))
     }
     
+    override func setLocalizedString() {
+        warnMsgLabel.text = NSLocalizedString("str_dapp_warn_msg", comment: "")
+        safeMsgTitle.text = NSLocalizedString("str_affect_safe", comment: "")
+        dangerMsgTitle.text = NSLocalizedString("str_affect_danger", comment: "")
+    }
+    
     
     func onParsingRequest() async throws {
         
@@ -168,6 +174,7 @@ class DappCosmosSignRequestSheet: BaseVC {
         
         if (method == "cos_signMessage") {
             wcMsgTextView.text = requestToSign?["params"]["message"].rawString()
+            safeMsgTitle.isHidden = false
             
         } else {
             if (targetDocs == nil) {
@@ -180,6 +187,7 @@ class DappCosmosSignRequestSheet: BaseVC {
                 errorCardView.isHidden = false
                 return
             }
+            dangerMsgTitle.isHidden = false
             feeCardView.isHidden = false
             wcMsgTextView.text = targetDocs?.rawString()
         }
