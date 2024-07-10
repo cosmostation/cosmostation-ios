@@ -18,11 +18,6 @@ class ServiceCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
-    }
-    
-    override func prepareForReuse() {
-        rootView.setBlur()
     }
     
     func onBindService(_ position: Int) {

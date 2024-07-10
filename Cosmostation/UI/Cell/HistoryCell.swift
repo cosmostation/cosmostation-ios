@@ -24,11 +24,9 @@ class HistoryCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
         sendtxImg.isHidden = true
         amountLabel.isHidden = true
         denomLabel.isHidden = true

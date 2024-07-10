@@ -23,7 +23,6 @@ class AboutStakingCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
         stakingDenomTitle.text = NSLocalizedString("str_staking_asset", comment: "")
         unbondingTimeTitle.text = NSLocalizedString("str_unstake_period", comment: "")
         inflationTitle.text = NSLocalizedString("str_inflation", comment: "")
@@ -35,7 +34,6 @@ class AboutStakingCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
         stakingDenomLabel.text = "-"
         unbondingTimeLabel.text = "-" + " " + NSLocalizedString("str_days", comment: "")
         inflationLabel.text = "-"

@@ -22,7 +22,6 @@ class ReceiveCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
         
         copyHintTitle.text = NSLocalizedString("msg_tap_box_to_copy", comment: "")
     }
@@ -30,7 +29,6 @@ class ReceiveCell: UITableViewCell {
     override func prepareForReuse() {
         legacyTag.isHidden = true
         keyTypeTag.isHidden = true
-        rootView.setBlur()
     }
     
     func bindReceive(_ account: BaseAccount, _ chain: BaseChain, _ section: Int) {

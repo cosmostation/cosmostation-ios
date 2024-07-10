@@ -21,11 +21,6 @@ class SettingPriceCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         setMsgLabel.isHidden = true
-        rootView.setBlur()
-    }
-    
-    override func prepareForReuse() {
-        rootView.setBlur()
     }
     
     func onBindSetDpPrice() {

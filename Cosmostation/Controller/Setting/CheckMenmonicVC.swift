@@ -64,7 +64,6 @@ class CheckMenmonicVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setLocalizedString()
-        wordCardView.setBlur()
     }
     
     override func setLocalizedString() {

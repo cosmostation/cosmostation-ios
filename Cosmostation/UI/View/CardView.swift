@@ -13,8 +13,6 @@ class CardView: UIView {
     
     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     let backgroundView = UIView()
-    let animator = UIViewPropertyAnimator(duration: 0.5, curve: .linear)
-    let animatorFraction = 0.82
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -39,36 +37,13 @@ class CardView: UIView {
         blurView.layer.cornerRadius = 12
         blurView.backgroundColor = .clear
         blurView.translatesAutoresizingMaskIntoConstraints = false
+        blurView.alpha = 0.2
         backgroundView.addSubview(blurView)
-        
-//        animator.stopAnimation(true)
-//        animator.addAnimations {
-//            self.blurView.effect = nil
-//        }
-//        animator.fractionComplete = animatorFraction
-        setBlur()
-        
     }
-    
-    deinit {
-        animator.pauseAnimation()
-        animator.stopAnimation(true)
-    }
-    
+        
     override func layoutSubviews() {
         super.layoutSubviews()
         blurView.frame = bounds
         backgroundView.frame = bounds
-    }
-    
-    
-    func setBlur() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-            self.animator.stopAnimation(true)
-            self.animator.addAnimations {
-                self.blurView.effect = nil
-            }
-            self.animator.fractionComplete = self.animatorFraction
-        })
     }
 }

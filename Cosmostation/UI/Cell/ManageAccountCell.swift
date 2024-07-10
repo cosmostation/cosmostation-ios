@@ -25,11 +25,6 @@ class ManageAccountCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
-    }
-    
-    override func prepareForReuse() {
-        rootView.setBlur()
     }
     
     func bindAccount(_ account: BaseAccount) {

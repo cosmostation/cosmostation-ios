@@ -28,14 +28,12 @@ class AboutChainInfoCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        rootView.setBlur()
         chainIdcosmosView.isHidden = true
         chainIdevmView.isHidden = true
         gasFeeView.isHidden = true
     }
     
     override func prepareForReuse() {
-        rootView.setBlur()
         chainIdcosmosView.isHidden = true
         chainIdevmView.isHidden = true
         gasFeeView.isHidden = true
