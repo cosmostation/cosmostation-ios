@@ -440,7 +440,7 @@
 "msg_reward_address_under" = "報酬の住所を変更するにはここをタップしてください。";
 "msg_already_changed_reward_address" = "すでにリワードアドレスを変更しました。";
 "msg_about_fee_tip" = "Feeとtipは財布ではなくチェー ンに支払われます。";
-"msg_support_injection" = "ユーザーの利便性と応答速度の改善のために、インジェクション方式（EIP-6963）をサポートしています。DAppを使用する際は、デスクトップウォレットなどを選択してください。\nデスクトップのエクステンションウォレットと同じユーザーエクスペリエンスを体験できます。\nEVM用DAppの場合、EIP-6963仕様をサポートしているため、快適なWeb3の旅をお楽しみいただけます。";
+"msg_support_injection" = "ユーザーの利便性と反応速度を向上させるため、インジェクション方式（EIP-6963）をサポートしています。DAppsを使用する際は、ブラウザ（デスクトップ）ウォレットを選択してください。\nデスクトップのエクステンションウォレットと同じユーザーエクスペリエンスを体験できます。\nEVM用DAppの場合、EIP-6963仕様をサポートしているため、快適なWeb3の旅をお楽しみいただけます。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -1188,6 +1188,7 @@
 "error_tranfer_disabled_bgt" = "BGT コインはステーキング専用の資産です。 \n送信できません。";
 "error_bera_vote_one_proposal" = "投票できるのは 1 つの BeraChain のみです。";
 "error_wc2_failed" = "デアプリ連動（Wallet Connect V2）に失敗しました。";
+"error_not_support_dapp" = "%@はモバイルインジェクションをサポートしていません。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

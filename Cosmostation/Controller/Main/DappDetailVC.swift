@@ -119,17 +119,13 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     func onInitView() {
         accountName.text = baseAccount.name
         onInitInjectScript()
-        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
         
         if (dappType == .INTERNAL_URL) {
-//            NSLog("Cosmostation DappDetailVC INTERNAL_URL1 \(dappUrl?.absoluteString)")
             dappUrl = onStripInternalUrl(dappUrl)
-//            NSLog("Cosmostation DappDetailVC INTERNAL_URL2 \(dappUrl?.absoluteString)")
             dappUrlLabel.text = dappUrl?.host
             webView.load(URLRequest(url: dappUrl!))
             
         } else if (dappType == .DEEPLINK_WC2) {
-//            NSLog("Cosmostation DappDetailVC DEEPLINK_WC2 \(dappUrl?.absoluteString)")
             onInitWcV2(dappUrl!)
         }
     }
@@ -175,14 +171,6 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         }
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let _ = object as? WKWebView {
-            if keyPath == #keyPath(WKWebView.canGoForward) {
-                forwardBtn.isEnabled = webView.canGoForward
-            }
-        }
-    }
-    
     private func onInitEvmChain() {
         if (targetChain == nil) {
             targetChain = allChains.filter({ $0.supportEvm }).first!
@@ -206,13 +194,22 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.allowsBackForwardNavigationGestures = true
         webView.allowsLinkPreview = false
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
         if let dictionary = Bundle.main.infoDictionary,
             let version = dictionary["CFBundleShortVersionString"] as? String {
             webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
                 let originUserAgent = result as! String
                 print("originUserAgent ", originUserAgent)
-//                self.webView.customUserAgent = "Cosmostation/APP/iOS/\(version) \(originUserAgent)"
+                self.webView.customUserAgent = "Cosmostation/APP/iOS/\(version) \(originUserAgent)"
 //                self.webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+            }
+        }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let _ = object as? WKWebView {
+            if keyPath == #keyPath(WKWebView.canGoForward) {
+                forwardBtn.isEnabled = webView.canGoForward
             }
         }
     }
@@ -334,7 +331,6 @@ extension DappDetailVC: WKScriptMessageHandler {
                 injectionRequestApprove(true, messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "cos_requestAccount" || method == "cos_account") {
-                print("cos_requestAccount ", messageJSON)
                 let requestChainName = messageJSON["params"]["chainName"].stringValue
                 let requestChainId = messageJSON["params"]["chainId"].stringValue
                 if let chain = allChains.filter({ $0.chainIdCosmos == requestChainId ||
@@ -417,7 +413,12 @@ extension DappDetailVC: WKScriptMessageHandler {
             //Handle EVM Request
             else if (method == "eth_requestAccounts" || method == "wallet_requestPermissions") {
                 onInitEvmChain()
-                injectionRequestApprove([targetChain.evmAddress!], messageJSON, bodyJSON["messageId"])
+                if let evmAddress = targetChain.evmAddress {
+                    injectionRequestApprove([evmAddress], messageJSON, bodyJSON["messageId"])
+                } else {
+                    let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
+                    injectionRequestReject(result, messageJSON, bodyJSON["messageId"])
+                }
                 
             } else if (method == "wallet_switchEthereumChain") {
                 let requestChainId = messageJSON["params"].arrayValue[0]["chainId"].stringValue
@@ -431,16 +432,25 @@ extension DappDetailVC: WKScriptMessageHandler {
                 } else {
                     let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
                     injectionRequestReject(result, messageJSON, bodyJSON["messageId"])
-                    onShowToast(result)
                 }
                 
             } else if (method == "eth_chainId") {
                 onInitEvmChain()
-                injectionRequestApprove(JSON.init(stringLiteral: targetChain.chainIdEvm!), messageJSON, bodyJSON["messageId"])
+                if let evmChainId = targetChain.chainIdEvm {
+                    injectionRequestApprove(JSON.init(stringLiteral: evmChainId), messageJSON, bodyJSON["messageId"])
+                } else {
+                    let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
+                    injectionRequestReject(result, messageJSON, bodyJSON["messageId"])
+                }
                 
             } else if (method == "eth_accounts") {
                 onInitEvmChain()
-                injectionRequestApprove([targetChain.evmAddress!], messageJSON, bodyJSON["messageId"])
+                if let evmAddress = targetChain.evmAddress {
+                    injectionRequestApprove([evmAddress], messageJSON, bodyJSON["messageId"])
+                } else {
+                    let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
+                    injectionRequestReject(result, messageJSON, bodyJSON["messageId"])
+                }
                 
             } else if (method == "eth_getBalance") {
                 onInitEvmChain()

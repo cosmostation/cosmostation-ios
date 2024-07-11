@@ -98,6 +98,11 @@ extension EvmEcosystemVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let support = ecosystemList?[indexPath.row]["support"].bool, support == false {
+            let name = ecosystemList?[indexPath.row]["name"].stringValue ?? ""
+            onShowToast(String(format: NSLocalizedString("error_not_support_dapp", comment: ""), name))
+            return
+        }
         if let link = ecosystemList?[indexPath.row]["link"].stringValue ,
            let linkUrl = URL(string: link) {
             let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
