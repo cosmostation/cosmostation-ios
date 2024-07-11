@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -37,7 +37,7 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="0dM-2b-jCf">
-                                <rect key="frame" x="64" y="25.333333333333329" width="83.666666666666686" height="21.666666666666671"/>
+                                <rect key="frame" x="64" y="27.333333333333329" width="83.666666666666686" height="21.666666666666671"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChainName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OeQ-XM-yfu">
                                         <rect key="frame" x="4" y="0.0" width="79.666666666666671" height="17.666666666666668"/>
@@ -147,7 +147,7 @@
                             <constraint firstAttribute="height" constant="72" id="XJ1-8H-GgX"/>
                             <constraint firstItem="cDe-Ml-zFv" firstAttribute="centerY" secondItem="fyB-xM-Oo9" secondAttribute="centerY" id="cFp-Po-wrK"/>
                             <constraint firstItem="0dM-2b-jCf" firstAttribute="leading" secondItem="Suc-II-N3v" secondAttribute="trailing" constant="4" id="oy2-JT-fhA"/>
-                            <constraint firstItem="0dM-2b-jCf" firstAttribute="centerY" secondItem="fyB-xM-Oo9" secondAttribute="centerY" id="pkW-fI-a8o"/>
+                            <constraint firstItem="0dM-2b-jCf" firstAttribute="centerY" secondItem="fyB-xM-Oo9" secondAttribute="centerY" constant="2" id="pkW-fI-a8o"/>
                             <constraint firstItem="WCb-NS-yvk" firstAttribute="firstBaseline" secondItem="9Wa-Nb-JYD" secondAttribute="firstBaseline" constant="-0.5" id="vd7-Yb-OoY"/>
                             <constraint firstItem="9Wa-Nb-JYD" firstAttribute="leading" secondItem="WCb-NS-yvk" secondAttribute="trailing" constant="2" id="zGt-yG-mSI"/>
                         </constraints>
