@@ -1187,6 +1187,7 @@
 "error_tranfer_disabled_bgt" = "BGT는 스테이킹 전용 자산입니다. \n전송이 불가능합니다.";
 "error_bera_vote_one_proposal" = "베라체인은 한개씩만 투표 가능합니다.";
 "error_wc2_failed" = "디앱연동(Wallet Connect V2)에 실패하였습니다.";
+"error_not_support_dapp" = "%@는 모바일 인젝션을 지원하지 않습니다.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";

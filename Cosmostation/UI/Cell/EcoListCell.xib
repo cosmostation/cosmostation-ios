@@ -38,6 +38,13 @@
                                     <constraint firstAttribute="width" secondItem="z9z-gN-GVp" secondAttribute="height" multiplier="4:3" id="caN-0b-TCo"/>
                                 </constraints>
                             </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconFail" translatesAutoresizingMaskIntoConstraints="NO" id="9K7-gh-gDF">
+                                <rect key="frame" x="165" y="10.333333333333336" width="12" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="12" id="RxW-LE-UBz"/>
+                                    <constraint firstAttribute="height" constant="12" id="Ypl-TW-dzo"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yg9-bd-XNm" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                 <rect key="frame" x="181" y="10" width="24" height="12.666666666666664"/>
                                 <color key="backgroundColor" red="0.035294117647058823" green="0.72156862745098038" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -68,8 +75,10 @@
                         <constraints>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="GfH-br-fAZ" secondAttribute="bottom" constant="8" id="4js-wm-Thj"/>
                             <constraint firstAttribute="trailing" secondItem="hzi-vp-WlF" secondAttribute="trailing" constant="12" id="6Yp-jg-s5Y"/>
+                            <constraint firstItem="9K7-gh-gDF" firstAttribute="centerY" secondItem="yg9-bd-XNm" secondAttribute="centerY" id="Hx0-mR-esP"/>
                             <constraint firstItem="hzi-vp-WlF" firstAttribute="leading" secondItem="RIU-kM-mGj" secondAttribute="leading" constant="12" id="Ihg-8e-Hk5"/>
                             <constraint firstAttribute="trailing" secondItem="yg9-bd-XNm" secondAttribute="trailing" constant="10" id="Jpu-d9-N1g"/>
+                            <constraint firstItem="yg9-bd-XNm" firstAttribute="leading" secondItem="9K7-gh-gDF" secondAttribute="trailing" constant="4" id="PKG-P5-HQF"/>
                             <constraint firstItem="z9z-gN-GVp" firstAttribute="top" secondItem="RIU-kM-mGj" secondAttribute="top" id="Sox-dX-QUA"/>
                             <constraint firstItem="hzi-vp-WlF" firstAttribute="top" secondItem="z9z-gN-GVp" secondAttribute="bottom" constant="8" id="dmY-xO-Agk"/>
                             <constraint firstItem="GfH-br-fAZ" firstAttribute="trailing" secondItem="hzi-vp-WlF" secondAttribute="trailing" id="dzz-i9-CMv"/>
@@ -93,14 +102,16 @@
             <connections>
                 <outlet property="descriptionLabel" destination="GfH-br-fAZ" id="5SL-aR-6CE"/>
                 <outlet property="rootView" destination="RIU-kM-mGj" id="WJg-J1-yvG"/>
+                <outlet property="supportImageView" destination="9K7-gh-gDF" id="RwD-Vv-Tvs"/>
                 <outlet property="thumbnailImageView" destination="z9z-gN-GVp" id="gUR-LH-etp"/>
                 <outlet property="titleLabel" destination="hzi-vp-WlF" id="MHT-qF-8O8"/>
                 <outlet property="typeTagLabel" destination="yg9-bd-XNm" id="Az7-9q-4yP"/>
             </connections>
-            <point key="canvasLocation" x="255.72519083969465" y="75.352112676056336"/>
+            <point key="canvasLocation" x="255.72519083969465" y="74.647887323943664"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="iconFail" width="24" height="24"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

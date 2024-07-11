@@ -178,7 +178,7 @@ You can download each store.
     <td>m/44'/990'/0'/0/X</td>
     <td>secp256k1</td>
     <td>gRPC</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -613,7 +613,8 @@ You can download each store.
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>gRPC</td>
-    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_nft.png?raw=true" width="42" height = "22"></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_nft.png?raw=true" width="42" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
     
   <tr>

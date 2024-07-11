@@ -1188,6 +1188,7 @@
 "error_tranfer_disabled_bgt" = "BGT コインはステーキング専用の資産です。 \n送信できません。";
 "error_bera_vote_one_proposal" = "投票できるのは 1 つの BeraChain のみです。";
 "error_wc2_failed" = "デアプリ連動（Wallet Connect V2）に失敗しました。";
+"error_not_support_dapp" = "%@はモバイルインジェクションをサポートしていません。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

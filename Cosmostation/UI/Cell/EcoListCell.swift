@@ -15,6 +15,7 @@ class EcoListCell: UICollectionViewCell {
     @IBOutlet weak var rootView: FixCardView!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var typeTagLabel: PaddingLabel!
+    @IBOutlet weak var supportImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
@@ -25,6 +26,7 @@ class EcoListCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        supportImageView.isHidden = true
         thumbnailImageView.image = nil
         typeTagLabel.text = ""
         titleLabel.text = ""
@@ -40,6 +42,9 @@ class EcoListCell: UICollectionViewCell {
         titleLabel.text = info["name"].string
         descriptionLabel.text = info["description"].string
         typeTagLabel.text = info["type"].string
+        if let support = info["support"].bool {
+            supportImageView.isHidden = support
+        }
     }
 
 }
