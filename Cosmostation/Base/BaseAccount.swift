@@ -249,7 +249,8 @@ public enum PubKeyType: Int {
     case COSMOS_Secp256k1 = 1
     case INJECTIVE_Secp256k1 = 2
     case BERA_Secp256k1 = 3
-    case SUI_Ed25519 = 4
+    case ARTELA_Keccak256 = 4
+    case SUI_Ed25519 = 5
     case unknown = 99
     
     var algorhythm: String? {
@@ -262,6 +263,8 @@ public enum PubKeyType: Int {
             return "secp256k1"
         case PubKeyType.BERA_Secp256k1:
             return "secp256k1"
+        case PubKeyType.ARTELA_Keccak256:
+            return "keccak256"
         case PubKeyType.SUI_Ed25519:
             return "ed25519"
         case PubKeyType.unknown:
@@ -278,6 +281,8 @@ public enum PubKeyType: Int {
         case PubKeyType.INJECTIVE_Secp256k1:
             return "ethsecp256k1"
         case PubKeyType.BERA_Secp256k1:
+            return "ethsecp256k1"
+        case PubKeyType.ARTELA_Keccak256:
             return "ethsecp256k1"
         case PubKeyType.SUI_Ed25519:
             return "ed25519"

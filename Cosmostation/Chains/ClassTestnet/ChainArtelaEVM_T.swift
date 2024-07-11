@@ -18,7 +18,7 @@ class ChainArtelaEVM_T: ChainArtelaEVM  {
         logo1 = "chainArtela_T"
         isTestnet = true
         apiName = "artela-testnet"
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        accountKeyType = AccountKeyType(.ARTELA_Keccak256, "m/44'/60'/0'/0/X")
         
         
         supportCosmosGrpc = true
