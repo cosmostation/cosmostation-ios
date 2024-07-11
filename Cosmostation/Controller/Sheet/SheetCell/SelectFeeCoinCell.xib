@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -49,7 +49,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMi-Br-qb2">
-                                <rect key="frame" x="295.66666666666669" y="41" width="6.3333333333333144" height="10"/>
+                                <rect key="frame" x="295.66666666666669" y="40" width="6.3333333333333144" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="s3H-Or-cW2"/>
                                 </constraints>
@@ -76,7 +76,6 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="bRo-Lz-mHb" firstAttribute="firstBaseline" secondItem="NMi-Br-qb2" secondAttribute="firstBaseline" id="4WH-dY-lYt"/>
                             <constraint firstItem="bRo-Lz-mHb" firstAttribute="leading" secondItem="NMi-Br-qb2" secondAttribute="trailing" constant="1" id="89k-iV-afr"/>
                             <constraint firstItem="ALV-Vy-jzi" firstAttribute="top" secondItem="CTc-1l-5E4" secondAttribute="top" constant="17" id="FCp-QY-dLM"/>
                             <constraint firstAttribute="trailing" secondItem="iaJ-zp-PEf" secondAttribute="trailing" constant="12" id="T11-7o-cwk"/>
@@ -87,6 +86,7 @@
                             <constraint firstItem="07y-m4-n1V" firstAttribute="leading" secondItem="Aai-a1-fkF" secondAttribute="trailing" constant="12" id="dPf-rd-aUY"/>
                             <constraint firstItem="07y-m4-n1V" firstAttribute="centerY" secondItem="Aai-a1-fkF" secondAttribute="centerY" id="j3A-w7-kbr"/>
                             <constraint firstAttribute="trailing" secondItem="ALV-Vy-jzi" secondAttribute="trailing" constant="14" id="kFV-mQ-oiK"/>
+                            <constraint firstItem="NMi-Br-qb2" firstAttribute="bottom" secondItem="bRo-Lz-mHb" secondAttribute="bottom" constant="-1" id="lfj-tY-7Bi"/>
                             <constraint firstItem="bRo-Lz-mHb" firstAttribute="top" secondItem="ALV-Vy-jzi" secondAttribute="bottom" constant="6" id="s5I-ZB-4Bi"/>
                             <constraint firstItem="Aai-a1-fkF" firstAttribute="leading" secondItem="CTc-1l-5E4" secondAttribute="leading" constant="20" id="uux-K5-BLs"/>
                             <constraint firstAttribute="bottom" secondItem="iaJ-zp-PEf" secondAttribute="bottom" id="xSv-ge-pTA"/>
@@ -114,7 +114,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="tokenDefault" width="22" height="22"/>
+        <image name="tokenDefault" width="48" height="48"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
