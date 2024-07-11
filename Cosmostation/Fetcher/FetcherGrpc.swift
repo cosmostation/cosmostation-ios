@@ -988,7 +988,7 @@ extension Google_Protobuf_Any {
             return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
 
         } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)),
-                  let auth = try? Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value){
+                  let auth = try? Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value) {
             let baseAccount = auth.baseVestingAccount.baseAccount
             return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
 
@@ -1007,9 +1007,14 @@ extension Google_Protobuf_Any {
             let baseAccount = auth.baseAccount
             return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
 
-        }  else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)),
-                  let auth = try? Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value){
+        } else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)),
+                  let auth = try? Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value) {
             let baseAccount = auth.baseVestingAccount.baseAccount
+            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+            
+        } else if (rawAccount.typeURL.contains(Artela_Types_V1_EthAccount.protoMessageName)),
+                  let auth = try? Artela_Types_V1_EthAccount.init(serializedData: rawAccount.value) {
+            let baseAccount = auth.baseAccount
             return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
         }
         
@@ -1033,7 +1038,7 @@ extension Google_Protobuf_Any {
             return auth.baseVestingAccount.baseAccount.pubKey.typeURL
 
         } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)),
-                  let auth = try? Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value){
+                  let auth = try? Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value) {
             return auth.baseVestingAccount.baseAccount.pubKey.typeURL
 
         } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)),
@@ -1049,7 +1054,7 @@ extension Google_Protobuf_Any {
             return auth.baseAccount.pubKey.typeURL
 
         }  else if (rawAccount.typeURL.contains(Stride_Vesting_StridePeriodicVestingAccount.protoMessageName)),
-                  let auth = try? Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value){
+                  let auth = try? Stride_Vesting_StridePeriodicVestingAccount.init(serializedData: rawAccount.value) {
             return auth.baseVestingAccount.baseAccount.pubKey.typeURL
         }
         return nil
