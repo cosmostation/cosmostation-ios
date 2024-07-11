@@ -17,7 +17,7 @@ class ChainArtelaEVM: BaseChain  {
         tag = "artela60"
         logo1 = "chainArtela"
         apiName = "artela"
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        accountKeyType = AccountKeyType(.ARTELA_Keccak256, "m/44'/60'/0'/0/X")
         
         
         supportCosmosGrpc = true
