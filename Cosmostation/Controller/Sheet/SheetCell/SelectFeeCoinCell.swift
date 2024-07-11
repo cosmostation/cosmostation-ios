@@ -27,30 +27,36 @@ class SelectFeeCoinCell: UITableViewCell {
     
     
     func onBindFeeCoin(_ chain: BaseChain, _ feeData: FeeData ) {
-        if let grpcFetcher = chain.getGrpcfetcher(),
-           let balances = grpcFetcher.cosmosBalances,
-           let coin = balances.filter({ $0.denom == feeData.denom }).first,
-           let msAsset = BaseData.instance.getAsset(chain.apiName, feeData.denom!) {
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-            let amount = NSDecimalNumber(string: coin.amount)
-            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
-            
-            WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, msAsset.decimals)
-            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+//        if let grpcFetcher = chain.getGrpcfetcher(),
+//           let balances = grpcFetcher.cosmosBalances,
+//           let coin = balances.filter({ $0.denom == feeData.denom }).first,
+//           let msAsset = BaseData.instance.getAsset(chain.apiName, feeData.denom!) {
+//            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+//            let amount = NSDecimalNumber(string: coin.amount)
+//            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+//            
+//            WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, msAsset.decimals)
+//            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+//        }
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, feeData.denom!) {
+            WDP.dpCoin(msAsset, nil, coinImg, symbolLabel, amountLabel, msAsset.decimals)
         }
     }
     
     func onBindBaseFeeCoin(_ chain: BaseChain, _ baseFee: Cosmos_Base_V1beta1_DecCoin ) {
-        if let grpcFetcher = chain.getGrpcfetcher(),
-           let balances = grpcFetcher.cosmosBalances,
-           let coin = balances.filter({ $0.denom == baseFee.denom }).first,
-           let msAsset = BaseData.instance.getAsset(chain.apiName, baseFee.denom) {
-            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-            let amount = NSDecimalNumber(string: coin.amount)
-            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
-            
-            WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, msAsset.decimals)
-            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+//        if let grpcFetcher = chain.getGrpcfetcher(),
+//           let balances = grpcFetcher.cosmosBalances,
+//           let coin = balances.filter({ $0.denom == baseFee.denom }).first,
+//           let msAsset = BaseData.instance.getAsset(chain.apiName, baseFee.denom) {
+//            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+//            let amount = NSDecimalNumber(string: coin.amount)
+//            let value = msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+//            
+//            WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, msAsset.decimals)
+//            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+//        }
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, baseFee.denom) {
+            WDP.dpCoin(msAsset, nil, coinImg, symbolLabel, amountLabel, msAsset.decimals)
         }
     }
 }
