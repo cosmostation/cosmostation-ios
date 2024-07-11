@@ -73,8 +73,6 @@ class DappCosmosSignRequestSheet: BaseVC {
         loadingView.play()
         
         confirmBtn.isEnabled = true
-        
-//        print("DappCosmosSignRequestSheet ", requestToSign)
         if (requestToSign == nil) {
             dismissWithFail()
             return
@@ -84,7 +82,6 @@ class DappCosmosSignRequestSheet: BaseVC {
             try await onParsingRequest()
             if (method == "cos_signDirect" || method == "cosmos_signDirect") {
                 try? await targetChain?.getGrpcfetcher()?.fetchBalances()
-//                print("targetChain ", targetChain.getGrpcfetcher()?.cosmosBalances)
             }
             DispatchQueue.main.async {
                 self.loadingView.isHidden = true
@@ -137,10 +134,6 @@ class DappCosmosSignRequestSheet: BaseVC {
                     let feeDenom = targetDocs!["fee"]["amount"][0]["denom"].string ?? baseFeeDatas[0].denom
                     let gasRate = baseFeeDatas.filter { $0.denom == feeDenom }.first?.gasRate ?? NSDecimalNumber.zero
                     let feeAmount = NSDecimalNumber(string: gasLimit).multiplying(by: gasRate, withBehavior: handler0Up)
-    //                print("gasLimit ", gasLimit)
-    //                print("feeDenom ", feeDenom)
-    //                print("gasRate ", gasRate)
-    //                print("feeAmount ", feeAmount.stringValue)
                     targetDocs!["fee"]["amount"] = [["amount": feeAmount.stringValue, "denom": feeDenom]]
                     targetDocs!["fee"]["gas"].stringValue = gasLimit
                 }
@@ -152,13 +145,11 @@ class DappCosmosSignRequestSheet: BaseVC {
             } else if (method == "cos_signDirect" || method == "cosmos_signDirect") {
                 if let authInfoBytes = targetDocs.authInfoBytes,
                     let authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: Data.dataFromHex(authInfoBytes)!) {
-                    print("authInfo ", authInfo)
                     if (authInfo.fee.gasLimit > 0 && authInfo.fee.amount.count >= 1) {
                         dappTxFee = authInfo.fee
                     }
                 }
             }
-            print("dappTxFee ", dappTxFee)
         }
     }
     
@@ -207,16 +198,13 @@ class DappCosmosSignRequestSheet: BaseVC {
             for i in 0..<feeInfos.count {
                 feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
             }
-            if (dappTxFee == nil) {
-                selectedFeePosition = selectedChain.getFeeBasePosition()
-                feeSegments.selectedSegmentIndex = selectedFeePosition
-                txFee = selectedChain.getInitPayableFee()
-            } else {
-                selectedFeePosition = -1
-                feeSegments.selectedSegmentIndex = selectedFeePosition
+            selectedFeePosition = selectedChain.getFeeBasePosition()
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            txFee = selectedChain.getInitPayableFee()
+            if (dappTxFee != nil) {
                 feeDappBtn.isHidden = false
-                feeDappBtn.isSelected = true
-                txFee = dappTxFee
+                feeDappBtn.isSelected = false
+                
             }
             onSimul()
         }
@@ -274,7 +262,6 @@ class DappCosmosSignRequestSheet: BaseVC {
     func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
         if (selectedFeePosition >= 0) {
             if let toGas = simul?.gasInfo.gasUsed {
-                print("onUpdateWithSimul ", toGas)
                 txFee!.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
                 if let gasRate = feeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == txFee!.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: txFee!.gasLimit)
@@ -331,9 +318,6 @@ class DappCosmosSignRequestSheet: BaseVC {
             signed["pub_key"] = sig.pubKey!
             signed["signature"].stringValue = sig.signature!
             signed["signed_doc"] = targetDocs
-            
-            print("signed ", signed)
-            print("targetDocs ", targetDocs)
             webSignDelegate?.onAcceptInjection(signed, targetDocs!, messageId!)
             
         } else if (method == "cosmos_signAmino") {
@@ -341,30 +325,40 @@ class DappCosmosSignRequestSheet: BaseVC {
             let sig = getSignatureResponse(self.targetChain.privateKey!, sortedJsonData!)
             let signature: JSON = ["signature" : sig.signature, "pub_key" : sig.pubKey]
             let response: JSON = ["signed" : targetDocs.rawValue, "signDoc" : targetDocs.rawValue, "signature" : signature.dictionaryValue]
-            
-            print("sig ", sig)
-            print("signature ", signature)
-            print("response ", response)
             webSignDelegate?.onAcceptWC2(AnyCodable(response), wcRequest!)
             
         } else if (method == "cos_signDirect") {
             var signed = JSON()
+            
             if let chainId = targetDocs.chainId,
                let bodyString = targetDocs.bodyBytes,
                let authInfoString = targetDocs.authInfoBytes,
                let bodyBytes = try? Cosmos_Tx_V1beta1_TxBody.init(serializedData: Data.dataFromHex(bodyString)!),
-               let authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: Data.dataFromHex(authInfoString)!) {
+               var authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: Data.dataFromHex(authInfoString)!) {
+                
+                //update authInfo with user modified fee
+                if (selectedFeePosition == -1) {
+                    authInfo.fee.gasLimit = dappTxFee!.gasLimit
+                    authInfo.fee.amount[0] = dappTxFee!.amount[0]
+                } else {
+                    authInfo.fee.gasLimit = txFee!.gasLimit
+                    authInfo.fee.amount[0] = txFee!.amount[0]
+                }
+                targetDocs = setAuthInfo(targetDocs, try! authInfo.serializedData().toHexString())
+                requestToSign = setAuthInfo(requestToSign!, try! authInfo.serializedData().toHexString())
+                
                 let signedDoc = Cosmos_Tx_V1beta1_SignDoc.with {
                     $0.bodyBytes = try! bodyBytes.serializedData()
                     $0.authInfoBytes = try! authInfo.serializedData()
                     $0.chainID = chainId
                     $0.accountNumber = targetDocs["account_number"].uInt64Value
                 }
+                
                 let sig = getSignatureResponse(self.targetChain.privateKey!, try! signedDoc.serializedData())
                 signed["pub_key"] = sig.pubKey!
                 signed["signature"].stringValue = sig.signature!
                 signed["signed_doc"] = targetDocs
-                webSignDelegate?.onAcceptInjection(signed, targetDocs!, messageId!)
+                webSignDelegate?.onAcceptInjection(signed, requestToSign!, messageId!)
             }
             
         } else if (method == "cosmos_signDirect") {
@@ -394,6 +388,30 @@ class DappCosmosSignRequestSheet: BaseVC {
             $0.gasLimit = UInt64(gas)!
             $0.amount = [feeCoin]
         }
+    }
+    
+    
+    func setAuthInfo(_ json: JSON, _ authByte: String) -> JSON {
+        var result = json
+        if let authInfo = json["auth_info_bytes"].string {
+            result["auth_info_bytes"].stringValue = authByte
+        }
+        if let authInfo = json["authInfoBytes"].string {
+            result["authInfoBytes"].stringValue = authByte
+        }
+        if let authInfo = json["params"]["doc"]["auth_info_bytes"].string {
+            result["params"]["doc"]["auth_info_bytes"].stringValue = authByte
+        }
+        if let authInfo = json["params"]["signDoc"]["auth_info_bytes"].string {
+            result["params"]["signDoc"]["auth_info_bytes"].stringValue = authByte
+        }
+        if let authInfo = json["params"]["doc"]["authInfoBytes"].string {
+            result["params"]["doc"]["authInfoBytes"].stringValue = authByte
+        }
+        if let authInfo = json["params"]["signDoc"]["authInfoBytes"].string {
+            result["params"]["signDoc"]["authInfoBytes"].stringValue = authByte
+        }
+        return result
     }
     
     private func getSignatureResponse(_ privateKey: Data, _ signData: Data) -> (signature: String?, pubKey: JSON?) {
@@ -447,9 +465,7 @@ extension DappCosmosSignRequestSheet: BaseSheetDelegate {
         Task {
             do {
                 let simulReq = genSimulTxs()
-//                print("simulReq ", simulReq)
                 let simulRes = try await targetChain.getGrpcfetcher()!.simulateTx(simulReq!)
-//                print("simulRes ", simulRes?.gasInfo)
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(simulRes)
                 }
@@ -472,6 +488,7 @@ extension DappCosmosSignRequestSheet: BaseSheetDelegate {
            var authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: Data.dataFromHex(authInfoString)!) {
             authInfo.fee.amount = txFee!.amount
             authInfo.fee.gasLimit = txFee!.gasLimit
+            
             let simulateTx = Cosmos_Tx_V1beta1_Tx.with {
                 $0.authInfo = authInfo
                 $0.body = bodyBytes
@@ -549,11 +566,11 @@ extension JSON {
     }
     
     var authInfoBytes: String? {
-        if let chainId = self["auth_info_bytes"].rawString() {
-            return chainId
+        if let authInfo = self["auth_info_bytes"].rawString() {
+            return authInfo
         }
-        if let chainId = self["authInfoBytes"].rawString() {
-            return chainId
+        if let authInfo = self["authInfoBytes"].rawString() {
+            return authInfo
         }
         return nil
     }
