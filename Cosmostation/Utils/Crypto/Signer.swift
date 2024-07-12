@@ -363,21 +363,20 @@ class Signer {
 
     
     
-    
-    static func setTip(_ posiion: Int, _ txFee: Cosmos_Tx_V1beta1_Fee, _ txTip: Cosmos_Tx_V1beta1_Tip) -> Cosmos_Tx_V1beta1_Tip {
-        let feeDenom = txFee.amount[0].denom
-        let feeAmount = txFee.amount[0].getAmount()
+    static func setFee(_ posiion: Int, _ baseFee: Cosmos_Tx_V1beta1_Fee) -> Cosmos_Tx_V1beta1_Fee {
+        let feeDenom = baseFee.amount[0].denom
+        let feeAmount = baseFee.amount[0].getAmount()
         
-        var result = Cosmos_Tx_V1beta1_Tip()
-        result.tipper = txTip.tipper
+        var result = Cosmos_Tx_V1beta1_Fee()
+        result.gasLimit = baseFee.gasLimit
         if (posiion == 0) {
-            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, "0")]
+            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount)]
         } else if (posiion == 1) {
-            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "0.2"), withBehavior: handler0Down).stringValue)]
+            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "1.2"), withBehavior: handler0Down).stringValue)]
         } else if (posiion == 2) {
-            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "0.5"), withBehavior: handler0Down).stringValue)]
+            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "1.5"), withBehavior: handler0Down).stringValue)]
         } else if (posiion == 3) {
-            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.stringValue)]
+            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "2"), withBehavior: handler0Down).stringValue)]
         }
         return result
     }

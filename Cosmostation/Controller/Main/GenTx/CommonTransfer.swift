@@ -84,7 +84,7 @@ class CommonTransfer: BaseVC {
     var selectedFeePosition = 0
     var cosmosFeeInfos = [FeeInfo]()
     var cosmosTxFee: Cosmos_Tx_V1beta1_Fee = Cosmos_Tx_V1beta1_Fee.init()
-    var cosmosTxTip: Cosmos_Tx_V1beta1_Tip = Cosmos_Tx_V1beta1_Tip.init()
+    var txTip: Cosmos_Tx_V1beta1_Tip?
     
     var evmTx: CodableTransaction?
     var evmTxType : TransactionType?
@@ -201,8 +201,6 @@ class CommonTransfer: BaseVC {
                 let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
                 cosmosTxFee.gasLimit = gasAmount.uint64Value
                 cosmosTxFee.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount)]
-                cosmosTxTip.tipper = fromChain.bechAddress!
-                cosmosTxTip.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, "0")]
                 
             } else {
                 cosmosFeeInfos = fromChain.getFeeInfos()
@@ -225,10 +223,7 @@ class CommonTransfer: BaseVC {
             toSendSymbol = toSendMsAsset!.symbol
             availableAmount = fromGrpcFetcher.balanceAmount(toSendDenom)
             if (cosmosTxFee.amount[0].denom == toSendDenom) {
-                var totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
-                if (cosmosTxTip.amount.count > 0) {
-                    totalFeeAmount = totalFeeAmount.adding(NSDecimalNumber(string: cosmosTxTip.amount[0].amount))
-                }
+                let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
                 availableAmount = availableAmount.subtracting(totalFeeAmount)
             }
             
@@ -258,10 +253,7 @@ class CommonTransfer: BaseVC {
                 toSendSymbol = toSendMsAsset!.symbol
                 availableAmount = fromGrpcFetcher.balanceAmount(toSendDenom)
                 if (cosmosTxFee.amount[0].denom == toSendDenom) {
-                    var totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
-                    if (cosmosTxTip.amount.count > 0) {
-                        totalFeeAmount = totalFeeAmount.adding(NSDecimalNumber(string: cosmosTxTip.amount[0].amount))
-                    }
+                    let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
                     availableAmount = availableAmount.subtracting(totalFeeAmount)
                 }
             }
@@ -499,7 +491,7 @@ class CommonTransfer: BaseVC {
         selectedFeePosition = sender.selectedSegmentIndex
         if (txStyle == .COSMOS_STYLE) {
             if (fromGrpcFetcher.cosmosBaseFees.count > 0) {
-                cosmosTxTip = Signer.setTip(selectedFeePosition, cosmosTxFee, cosmosTxTip)
+                cosmosTxFee = Signer.setFee(selectedFeePosition, cosmosTxFee)
             } else {
                 cosmosTxFee = fromChain.getUserSelectedFee(selectedFeePosition, cosmosTxFee.amount[0].denom)
             }
@@ -542,10 +534,7 @@ class CommonTransfer: BaseVC {
             if let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
                 feeSelectLabel.text = msAsset.symbol
             
-                var totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
-                if (cosmosTxTip.amount.count > 0) {
-                    totalFeeAmount = totalFeeAmount.adding(NSDecimalNumber(string: cosmosTxTip.amount[0].amount))
-                }
+                let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
                 let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                 let value = msPrice.multiplying(by: totalFeeAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
                 WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
@@ -598,7 +587,7 @@ class CommonTransfer: BaseVC {
                     let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
                     let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                     cosmosTxFee.amount[0].amount = feeAmount.stringValue
-                    cosmosTxTip = Signer.setTip(selectedFeePosition, cosmosTxFee, cosmosTxTip)
+                    cosmosTxFee = Signer.setFee(selectedFeePosition, cosmosTxFee)
                 }
                 
             } else {
@@ -750,13 +739,11 @@ extension CommonTransfer {
             
 //            print("evmTxA ", evmTx)
             if let estimateGas = try? await web3.eth.estimateGas(for: evmTx!) {
-                print("estimateGas GOT ", estimateGas)
-                evmGasLimit = estimateGas
-                evmTx?.gasLimit = estimateGas
+                evmGasLimit = estimateGas * fromChain.evmGasMultiply() / 10
+                evmTx?.gasLimit = evmGasLimit
             } else {
                 evmTxType = nil
             }
-//            print("evmTxB ", evmTx)
             
             DispatchQueue.main.async {
                 self.onUpdateWithSimul(nil)
@@ -803,7 +790,7 @@ extension CommonTransfer {
     func inChainCoinSendSimul() {
         Task {
             do {
-                if let simulReq = try await Signer.genSimul(fromChain, onBindSendMsg(), txMemo, cosmosTxFee, cosmosTxTip),
+                if let simulReq = try await Signer.genSimul(fromChain, onBindSendMsg(), txMemo, cosmosTxFee, nil),
                    let simulRes = try await fromGrpcFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
@@ -824,7 +811,7 @@ extension CommonTransfer {
     func inChainCoinSend() {
         Task {
             do {
-                if let broadReq = try await Signer.genTx(fromChain, onBindSendMsg(), txMemo, cosmosTxFee, cosmosTxTip),
+                if let broadReq = try await Signer.genTx(fromChain, onBindSendMsg(), txMemo, cosmosTxFee, nil),
                    let broadRes = try await fromGrpcFetcher.broadcastTx(broadReq) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -864,7 +851,7 @@ extension CommonTransfer {
     func inChainWasmSendSimul() {
         Task {
             do {
-                if let simulReq = try await Signer.genSimul(fromChain, onBindCw20SendMsg(), txMemo, cosmosTxFee, cosmosTxTip),
+                if let simulReq = try await Signer.genSimul(fromChain, onBindCw20SendMsg(), txMemo, cosmosTxFee, nil),
                    let simulRes = try await fromGrpcFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
@@ -885,7 +872,7 @@ extension CommonTransfer {
     func inChainWasmSend() {
         Task {
             do {
-                if let broadReq = try await Signer.genTx(fromChain, onBindCw20SendMsg(), txMemo, cosmosTxFee, cosmosTxTip),
+                if let broadReq = try await Signer.genTx(fromChain, onBindCw20SendMsg(), txMemo, cosmosTxFee, nil),
                    let broadRes = try await fromGrpcFetcher.broadcastTx(broadReq) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -927,7 +914,7 @@ extension CommonTransfer {
                 let ibcClient = try await fromGrpcFetcher.fetchIbcClient(ibcPath!)
                 let toGrpcFetcher = toChain!.getGrpcfetcher()
                 let toLastBlock = try await toGrpcFetcher!.fetchLastBlock()
-                if let simulReq = try await Signer.genSimul(fromChain, onBindIbcSendMsg(ibcClient!, toLastBlock!), txMemo, cosmosTxFee, cosmosTxTip),
+                if let simulReq = try await Signer.genSimul(fromChain, onBindIbcSendMsg(ibcClient!, toLastBlock!), txMemo, cosmosTxFee, nil),
                    let simulRes = try await fromGrpcFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
@@ -951,7 +938,7 @@ extension CommonTransfer {
                 let ibcClient = try await fromGrpcFetcher.fetchIbcClient(ibcPath!)
                 let toGrpcFetcher = toChain!.getGrpcfetcher()
                 let toLastBlock = try await toGrpcFetcher!.fetchLastBlock()
-                if let broadReq = try await Signer.genTx(fromChain, onBindIbcSendMsg(ibcClient!, toLastBlock!), txMemo, cosmosTxFee, cosmosTxTip),
+                if let broadReq = try await Signer.genTx(fromChain, onBindIbcSendMsg(ibcClient!, toLastBlock!), txMemo, cosmosTxFee, nil),
                    let broadRes = try await fromGrpcFetcher.broadcastTx(broadReq) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -1002,7 +989,7 @@ extension CommonTransfer {
     func ibcWasmSendSimul() {
         Task {
             do {
-                if let simulReq = try await Signer.genSimul(fromChain, onBindCw20IbcSendMsg(), txMemo, cosmosTxFee, cosmosTxTip),
+                if let simulReq = try await Signer.genSimul(fromChain, onBindCw20IbcSendMsg(), txMemo, cosmosTxFee, nil),
                    let simulRes = try await fromGrpcFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
@@ -1023,7 +1010,7 @@ extension CommonTransfer {
     func ibcWasmSend() {
         Task {
             do {
-                if let broadReq = try await Signer.genTx(fromChain, onBindCw20IbcSendMsg(), txMemo, cosmosTxFee, cosmosTxTip),
+                if let broadReq = try await Signer.genTx(fromChain, onBindCw20IbcSendMsg(), txMemo, cosmosTxFee, nil),
                    let broadRes = try await fromGrpcFetcher.broadcastTx(broadReq) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
