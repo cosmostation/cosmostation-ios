@@ -92,5 +92,6 @@ extension UIView {
         guard let background = BASE_BG_IMG.randomElement() else { return }
         let img = UIImage(named: background)
         layer.contents = img?.cgImage
+        contentMode = .scaleAspectFill
     }
 }
