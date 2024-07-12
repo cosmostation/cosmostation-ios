@@ -39,7 +39,7 @@ class NeutronVote: BaseVC {
     var grpcFetcher: NeutronFetcher!
     var feeInfos = [FeeInfo]()
     var txFee: Cosmos_Tx_V1beta1_Fee = Cosmos_Tx_V1beta1_Fee.init()
-    var txTip: Cosmos_Tx_V1beta1_Tip = Cosmos_Tx_V1beta1_Tip.init()
+    var txTip: Cosmos_Tx_V1beta1_Tip?
     var selectedFeePosition = 0
     var txMemo = ""
     
@@ -102,8 +102,6 @@ class NeutronVote: BaseVC {
             let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
             txFee.gasLimit = gasAmount.uint64Value
             txFee.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount)]
-            txTip.tipper = selectedChain.bechAddress!
-            txTip.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, "0")]
             
         } else {
             feeInfos = selectedChain.getFeeInfos()
@@ -135,8 +133,8 @@ class NeutronVote: BaseVC {
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeePosition = sender.selectedSegmentIndex
         if (grpcFetcher.cosmosBaseFees.count > 0) {
-            txTip = Signer.setTip(selectedFeePosition, txFee, txTip)
-            
+            txFee = Signer.setFee(selectedFeePosition, txFee)
+
         } else {
             txFee = selectedChain.getUserSelectedFee(selectedFeePosition, txFee.amount[0].denom)
         }
@@ -148,10 +146,7 @@ class NeutronVote: BaseVC {
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
             feeSelectLabel.text = msAsset.symbol
             
-            var totalFeeAmount = NSDecimalNumber(string: txFee.amount[0].amount)
-            if (txTip.amount.count > 0) {
-                totalFeeAmount = totalFeeAmount.adding(NSDecimalNumber(string: txTip.amount[0].amount))
-            }
+            let totalFeeAmount = NSDecimalNumber(string: txFee.amount[0].amount)
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let value = msPrice.multiplying(by: totalFeeAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
             WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
@@ -187,7 +182,7 @@ class NeutronVote: BaseVC {
                     let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                     let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                     txFee.amount[0].amount = feeAmount.stringValue
-                    txTip = Signer.setTip(selectedFeePosition, txFee, txTip)
+                    txFee = Signer.setFee(selectedFeePosition, txFee)
                 }
                 
             } else {
@@ -219,7 +214,7 @@ class NeutronVote: BaseVC {
         
         Task {
             do {
-                if let simulReq = try await Signer.genSimul(selectedChain, onBindWasmMsg(), txMemo, txFee, txTip),
+                if let simulReq = try await Signer.genSimul(selectedChain, onBindWasmMsg(), txMemo, txFee, nil),
                    let simulRes = try await grpcFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
@@ -393,7 +388,7 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
             
             Task {
                 do {
-                    if let broadReq = try await Signer.genTx(selectedChain, onBindWasmMsg(), txMemo, txFee, txTip),
+                    if let broadReq = try await Signer.genTx(selectedChain, onBindWasmMsg(), txMemo, txFee, nil),
                        let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
