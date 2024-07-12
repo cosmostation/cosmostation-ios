@@ -68,6 +68,8 @@ class PortfolioVC: BaseVC {
         dismissTap.cancelsTouchesInView = false
         view.addGestureRecognizer(dismissTap)
         
+        navigationItem.titleView = BgRandomButton()
+        
         initView()
     }
     
@@ -223,7 +225,6 @@ class PortfolioVC: BaseVC {
         warnSheet.noticeType = .NodeDownGuide
         onStartSheet(warnSheet, 320, 0.6)
     }
-
 }
 
 extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UISearchBarDelegate {

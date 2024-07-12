@@ -116,6 +116,7 @@ class CosmosClassVC: BaseVC {
         
         navigationItem.rightBarButtonItems = [explorerBarBtn]
         
+        navigationItem.titleView = BgRandomButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
