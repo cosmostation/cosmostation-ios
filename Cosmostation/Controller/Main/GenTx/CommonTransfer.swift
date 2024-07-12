@@ -676,10 +676,19 @@ extension CommonTransfer {
                feeHistory.baseFee.count > 0 {
                 //support EIP1559
 //                print("feeHistory ", feeHistory)
-                for i in 0..<3 {
-                    let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
-                    let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
-                    evmGas[i] = (baseFee, tip)
+                if (fromChain.evmSupportEip1559()) {
+                    for i in 0..<3 {
+                        let baseFee = feeHistory.baseFee[i]
+                        let tip = feeHistory.tip[i]
+                        evmGas[i] = (baseFee, tip)
+                    }
+                    
+                } else {
+                    for i in 0..<3 {
+                        let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
+                        let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
+                        evmGas[i] = (baseFee, tip)
+                    }
                 }
                 evmTxType = .eip1559
                 
