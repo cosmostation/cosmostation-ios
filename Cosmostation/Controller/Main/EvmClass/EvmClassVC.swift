@@ -94,6 +94,7 @@ class EvmClassVC: BaseVC {
         explorerBarBtn = UIBarButtonItem(customView: explorerBtn)
         
         navigationItem.rightBarButtonItems = [explorerBarBtn, addtokenBarBtn]
+        navigationItem.titleView = BgRandomButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {

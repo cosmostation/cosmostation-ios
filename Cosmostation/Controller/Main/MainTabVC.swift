@@ -89,16 +89,9 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
 
 extension UIView {
     func addBackground() {
-        let num = Int.random(in: 0..<BASE_BG_IMG.count)
-        
-        let width = UIScreen.main.bounds.size.width
-        let height = UIScreen.main.bounds.size.height
-
-        let bgImg = UIImageView(frame: CGRectMake(0, 0, width, height))
-        bgImg.image = UIImage(named: BASE_BG_IMG[num])
-        bgImg.contentMode = .scaleToFill
-
-        self.addSubview(bgImg)
-        self.sendSubviewToBack(bgImg)
+        guard let background = BASE_BG_IMG.randomElement() else { return }
+        let img = UIImage(named: background)
+        layer.contents = img?.cgImage
+        contentMode = .scaleAspectFill
     }
 }

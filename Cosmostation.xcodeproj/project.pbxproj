@@ -1506,6 +1506,8 @@
 		2810084A2696D979002986A6 /* KeyFac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281008492696D979002986A6 /* KeyFac.swift */; };
 		28CE973625872B7C006DEBEE /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE973525872B7C006DEBEE /* Signer.swift */; };
 		28FC030C2652662B001C0319 /* MintscanPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC030B2652662B001C0319 /* MintscanPrice.swift */; };
+		79EF66802C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
+		79EF66812C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79FCA3682C3E5B31001C17D0 /* RoundedPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */; };
 		79FCA3692C3E5B31001C17D0 /* RoundedPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */; };
 		79FCA3B82C3F9E92001C17D0 /* artela_types_v1_web3.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FCA3A52C3F9E90001C17D0 /* artela_types_v1_web3.pb.swift */; };
@@ -2763,6 +2765,7 @@
 		28CE973525872B7C006DEBEE /* Signer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signer.swift; sourceTree = "<group>"; };
 		28FC030B2652662B001C0319 /* MintscanPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanPrice.swift; sourceTree = "<group>"; };
 		6ED0AF4867E1AFC41A279302 /* Pods-Cosmostation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.debug.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.debug.xcconfig"; sourceTree = "<group>"; };
+		79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgRandomButton.swift; sourceTree = "<group>"; };
 		79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedPaddingLabel.swift; sourceTree = "<group>"; };
 		79FCA3A52C3F9E90001C17D0 /* artela_types_v1_web3.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = artela_types_v1_web3.pb.swift; sourceTree = "<group>"; };
 		79FCA3A62C3F9E90001C17D0 /* artela_crypto_v1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = artela_crypto_v1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
@@ -4237,6 +4240,7 @@
 				79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */,
 				041F1F7D2C05E5D5008C2F2C /* WebNaviButton.swift */,
 				0400F1312C2770FE00A7144B /* SmallButton.swift */,
+				79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5854,6 +5858,7 @@
 				04C817B72BA98D75006B800A /* cosmos_group_v1_tx.grpc.swift in Sources */,
 				04C816592BA98D74006B800A /* cosmos_app_v1alpha1_module.pb.swift in Sources */,
 				18FFB5CF281AF533004E65BB /* Bech32.swift in Sources */,
+				79EF66812C40C2DA00A38A3F /* BgRandomButton.swift in Sources */,
 				045032A72C1EEFCA00235F6A /* ChainInjective.swift in Sources */,
 				04C817AD2BA98D75006B800A /* cosmos_auth_v1beta1_auth.pb.swift in Sources */,
 				0400EF3C2ADD49BB007BA97F /* kava_swap_v1beta1_tx.pb.swift in Sources */,
@@ -6652,6 +6657,7 @@
 				04C817B62BA98D75006B800A /* cosmos_group_v1_tx.grpc.swift in Sources */,
 				04C816582BA98D74006B800A /* cosmos_app_v1alpha1_module.pb.swift in Sources */,
 				0478430F2AC9918700462F1C /* ethermint_feemarket_v1_tx.pb.swift in Sources */,
+				79EF66802C40C2DA00A38A3F /* BgRandomButton.swift in Sources */,
 				045032A62C1EEFCA00235F6A /* ChainInjective.swift in Sources */,
 				04C817AC2BA98D75006B800A /* cosmos_auth_v1beta1_auth.pb.swift in Sources */,
 				047BA8D42A94777600D3F7DD /* CosmosCoinVC.swift in Sources */,
