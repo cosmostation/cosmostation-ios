@@ -134,13 +134,13 @@ class EvmClassVC: BaseVC {
         let assetTabBar = UITabBarItem(title: "Assets", image: nil, tag: 0)
 //        let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 1)
         let receiveTabBar = UITabBarItem(title: "Receive", image: nil, tag: 2)
-        let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 3)
+//        let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 3)
         let ecosystemTabBar = UITabBarItem(title: "Ecosystem", image: nil, tag: 4)
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 5)
         tabbar.items.append(assetTabBar)
 //        if (BaseData.instance.showEvenReview()) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(receiveTabBar)
-        tabbar.items.append(historyTabBar)
+//        tabbar.items.append(historyTabBar)
         if (BaseData.instance.showEvenReview() && selectedChain.isEcosystem()) { tabbar.items.append(ecosystemTabBar) }
         if (!selectedChain.getChainListParam().isEmpty) {
             tabbar.items.append(aboutTabBar)
