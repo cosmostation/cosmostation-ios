@@ -51,15 +51,7 @@ class CosmosCoinVC: BaseVC {
         
         onSortAssets()
         
-        if (selectedChain is ChainCantoEVM || selectedChain is ChainRegen || selectedChain is ChainLike || selectedChain is ChainIxo) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
-                let sunsetSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
-                sunsetSheet.selectedChain = self.selectedChain
-                sunsetSheet.noticeType = .ChainDelist
-                self.onStartSheet(sunsetSheet, 240, 0.6)
-            })
-            
-        } else if (selectedChain.tag == "okt996_Keccak" || selectedChain.tag == "okt996_Secp") {
+        if (selectedChain.tag == "okt996_Keccak" || selectedChain.tag == "okt996_Secp") {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
                 let legacySheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
                 legacySheet.selectedChain = self.selectedChain

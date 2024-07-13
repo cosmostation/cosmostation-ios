@@ -29,7 +29,6 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
     func onUpdateMigration() {
         Task {
             let result = await migrationV2()
-            print("onUpdateMigration ", result)
         }
     }
     

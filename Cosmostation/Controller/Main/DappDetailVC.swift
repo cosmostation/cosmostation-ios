@@ -48,7 +48,6 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Cosmostation DappDetailVC viewDidLoad")
         
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
@@ -56,13 +55,6 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
         loadingView.play()
-        
-        print("targetChain ", targetChain)
-        
-//        dappUrl = URL(string: "https://omniflix.tv/home")
-//        dappUrl = URL(string: "https://coinhall.org/")
-//        dappUrl = URL(string: "https://app.kava.io/home")
-//        dappUrl = URL(string: "https://osmosis.zone/")
     
                 
         Task {
@@ -79,9 +71,6 @@ class DappDetailVC: BaseVC, WebSignDelegate {
             allChains = await baseAccount.initAllKeys().filter({ $0.isTestnet == false && $0.isDefault })
             
             DispatchQueue.main.async {
-//                NSLog("Cosmostation wcV2ProposalRequest viewDidLoad")
-//                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Pair \(Pair.instance.getPairings().count)")
-//                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Sign \(Sign.instance.getSessions().count)")
                 self.loadingView.isHidden = true
                 if (self.baseAccount == nil || BaseData.instance.mintscanChainParams == nil) {
                     self.onShowToast(NSLocalizedString("error_network_msg", comment: ""))
@@ -139,7 +128,6 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     
     func onUpdateAccountName(_ online: Bool) {
         accountName.isHidden = !online
-//        accountImg.isHidden = !online
     }
     
     @IBAction func onBackClicK(_ sender: Any) {
@@ -199,9 +187,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
             let version = dictionary["CFBundleShortVersionString"] as? String {
             webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
                 let originUserAgent = result as! String
-                print("originUserAgent ", originUserAgent)
                 self.webView.customUserAgent = "Cosmostation/APP/iOS/\(version) \(originUserAgent)"
-//                self.webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
             }
         }
     }
@@ -216,7 +202,6 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     
     // Re-Connect with wallet connect v2 (disconnect all as-is Pair & Sign)
     private func onInitWcV2(_ url: URL) {
-        print("onInitWcV2 \(url.absoluteString)")
         if let host = url.host, let query = url.query?.removingPercentEncoding, host == "wc" {
             var wcUrl: String!
             if (query.starts(with: "uri=")) {
@@ -224,11 +209,8 @@ class DappDetailVC: BaseVC, WebSignDelegate {
             } else {
                 wcUrl = query
             }
-            print("onInitWcV2 wcUrl \(wcUrl)")
             self.wcV2SetSign()
-            self.wcV2SetPair(uri: wcUrl) { success in
-                print("onInitWcV2 wcV2SetPairl \(success)")
-            }
+            self.wcV2SetPair(uri: wcUrl) { _ in }
         }
     }
     
@@ -347,7 +329,6 @@ extension DappDetailVC: WKScriptMessageHandler {
                     data["publicKey"].stringValue = chain.publicKey!.toHexString()
                     injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
                 } else {
-                    print("ERROR ", messageJSON)
                     onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: "") + "  " + requestChainName + "  " + requestChainId)
                 }
                 
@@ -563,7 +544,6 @@ extension DappDetailVC: WKScriptMessageHandler {
                 //broadcast self & return hash
                 onInitEvmChain()
                 let toSign = messageJSON["params"]
-                print("eth_sendTransaction", messageJSON["params"])
                 popUpEvmRequestSign(method, toSign, bodyJSON["messageId"])
                 
             } else if (method == "eth_signTypedData_v4" || method == "eth_signTypedData_v3") {
@@ -572,7 +552,6 @@ extension DappDetailVC: WKScriptMessageHandler {
                     self.injectionRequestReject("Wrong-Address", messageJSON, bodyJSON["messageId"])
                     return
                 }
-                print("params", messageJSON["params"])
                 let toSign = messageJSON["params"]
                 popUpEvmRequestSign(method, toSign, bodyJSON["messageId"])
                 
@@ -580,7 +559,6 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "personal_sign") {
                 onInitEvmChain()
                 let toSign = messageJSON["params"]
-                print("personal_sign ", toSign)
                 popUpEvmRequestSign(method, toSign, bodyJSON["messageId"])
                 
             }
@@ -657,12 +635,10 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
             decisionHandler(.cancel)
             return
         }
-        print("webView decidePolicyFor ", navigationAction.request.url)
         if navigationAction.targetFrame == nil {
-            print("targetFrame ", navigationAction.targetFrame)
             webView.load(navigationAction.request)
+            decisionHandler(.allow)
         }
-//        NSLog("Cosmostation webView decidePolicyFor  \(navigationAction.request.url?.absoluteString)")
         
         if let url = navigationAction.request.url {
             var newUrl: String?
@@ -686,11 +662,9 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
                         newUrl = trimmedUrl
                     }
                 }
-                print("newUrl ", newUrl)
-//                NSLog("Cosmostation webView decidePolicyFor newUrl  \(newUrl)")
                 
                 if let newUrl = newUrl, let finalUrl = URL(string: newUrl.removingPercentEncoding!) {
-                    print("Cosmostation webView decidePolicyFor finalUrl  \(finalUrl)")
+//                    print("finalUrl  \(finalUrl)")
                     onInitWcV2(finalUrl)
                     decisionHandler(.cancel)
                     return
@@ -699,14 +673,6 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
         }
         decisionHandler(.allow)
     }
-    
-//    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-//        print("webView createWebViewWith ", navigationAction.request.url )
-//        if navigationAction.targetFrame == nil {
-//            webView.load(navigationAction.request)
-//        }
-//        return nil
-//    }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if !isAnimationInProgress {
@@ -738,7 +704,6 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
 extension DappDetailVC {
     
     private func wcV2SetSign() {
-        print("Cosmostation wcV2SetSign \(dappType)")
         Sign.instance.sessionProposalPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sessionProposal, context in
@@ -758,7 +723,6 @@ extension DappDetailVC {
     
     @MainActor
     private func wcV2SetPair(uri: String, _ completionHandler: @escaping (Bool) -> Void) {
-        print("Cosmostation wcV2SetPair  \(dappType)    \(uri)")
         Task {
             guard let wcUri = WalletConnectURI(string: uri) else {
                 completionHandler(false)
@@ -768,8 +732,6 @@ extension DappDetailVC {
                 try await Pair.instance.pair(uri: wcUri)
                 completionHandler(true)
             } catch {
-//                print("wcV2SetPair error: \(error)")
-                print("Cosmostation wcV2SetPair error: \(error)")
                 completionHandler(false)
             }
         }
@@ -779,12 +741,10 @@ extension DappDetailVC {
     private func wcV2Disconnect(_ completionHandler: @escaping (Bool) -> Void) {
         Task {
             do {
-                print("wcV2Disconnect Pair ", Pair.instance.getPairings().count)
                 for pairing in Pair.instance.getPairings() {
                     try await Pair.instance.disconnect(topic: pairing.topic)
                 }
                 
-                print("wcV2Disconnect Sign ", Sign.instance.getSessions().count)
                 for session in Sign.instance.getSessions() {
                     try await Sign.instance.disconnect(topic: session.topic)
                 }
@@ -798,26 +758,19 @@ extension DappDetailVC {
     
     
     private func wcV2ProposalRequest(proposal: WalletConnectSign.Session.Proposal) {
-        print("Cosmostation wcV2ProposalRequest \(proposal)")
         if (dappType == .DEEPLINK_WC2) {
-            print("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 \(proposal.proposer.url)")
             webView.load(URLRequest(url: URL(string: proposal.proposer.url)!))
             wcV2RejectProposal(proposalId:  proposal.id, reason: .userRejectedChains)
             dappType = .INTERNAL_URL
             wcV2Disconnect { success in
-//                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 DISCONNECT ALL \(success)")
-//                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Pair \(Pair.instance.getPairings().count)")
-//                NSLog("Cosmostation wcV2ProposalRequest DEEPLINK_WC2 Sign \(Sign.instance.getSessions().count)")
             }
             return
         }
         var sessionNamespaces = [String: SessionNamespace]()
         proposal.requiredNamespaces.forEach { namespaces in
-            print("Cosmostation wcV2ApproveProposal namespaces \(namespaces)")
             let caip2Namespace = namespaces.key
             let proposalNamespace = namespaces.value
             if let targetChain = allChains.filter({ $0.chainIdCosmos == proposalNamespace.chains?.first?.reference }).first {
-                print("Cosmostation wcV2ApproveProposal targetChain \(targetChain)")
                 self.targetChain = targetChain
                 let accounts = Set(namespaces.value.chains!.filter { chain in
                     allChains.filter({ $0.chainIdCosmos == chain.reference }).first != nil
@@ -827,14 +780,9 @@ extension DappDetailVC {
                 
                 let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
                 sessionNamespaces[caip2Namespace] = sessionNamespace
-//                print("wcV2ApproveProposal accounts ", accounts)
-//                print("wcV2ApproveProposal approveProposal ", sessionNamespaces)
-                print("Cosmostation wcV2ProposalRequest Accept")
                 self.wcV2ApproveProposal(proposalId:  proposal.id, namespaces: sessionNamespaces)
                 
             } else {
-//                NSLog("Cosmostation wcV2ApproveProposal targetChain NULL")
-//                NSLog("Cosmostation wcV2ProposalRequest Reject")
                 let rejectResponse: RejectionReason = .userRejectedChains
                 self.wcV2RejectProposal(proposalId:  proposal.id, reason: rejectResponse)
                 self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
@@ -846,7 +794,6 @@ extension DappDetailVC {
     private func wcV2ApproveProposal(proposalId: String, namespaces: [String: SessionNamespace]) {
         Task {
             do {
-                print("Cosmostation wcV2ApproveProposal")
                 try await Sign.instance.approve(proposalId: proposalId, namespaces: namespaces)
             } catch {
                 print("wcV2ApproveProposal error: \(error)")
@@ -859,7 +806,6 @@ extension DappDetailVC {
         Task {
             do {
                 try await Sign.instance.reject(proposalId: proposalId, reason: reason)
-                print("wcV2RejectProposal")
             } catch {
                 print("wcV2RejectProposal error: \(error)")
             }
@@ -868,7 +814,6 @@ extension DappDetailVC {
     
     
     private func wcV2SessionRequest(wcRequest: WalletConnectSign.Request) {
-        print("wcV2sessionRequest ", wcRequest.method)
         let method = wcRequest.method
         guard let json = try? JSON(data: wcRequest.encoded) else {
             return
@@ -883,27 +828,6 @@ extension DappDetailVC {
             let v2Accounts = [["address": targetChain.bechAddress!, "pubkey": targetChain.publicKey?.base64EncodedString(), "algo": targetChain.accountKeyType.pubkeyType.algorhythm!]]
             wcV2ApproveSession(wcRequest, AnyCodable(v2Accounts))
         }
-//        if request.method == "cosmos_signAmino" {
-//            if let json = try? JSON(data: request.encoded) {
-//                let aminoMessage = wcV2AminoModifyFee(json)
-//                popUpCosmosRequestSign(try! aminoMessage["params"]["signDoc"].rawData(),
-//                                 {self.wcV2AminoRequestApprove(wcV2Request: request)},
-//                                 {self.wcV2SessionReject(request: request)})
-//            }
-//            
-//        } else if request.method == "cosmos_signDirect" {
-//            if let json = try? JSON(data: request.encoded) {
-//                let directMessage = wcV2DirectModifyFee(json)
-//                popUpCosmosRequestSign(try! directMessage["params"]["signDoc"].rawData(),
-//                                 {self.wcV2DirectRequestApprove(wcV2Request: request)},
-//                                 {self.wcV2SessionReject(request: request)})
-//            }
-//            
-//        } else if request.method == "cosmos_getAccounts" {
-//            let v2Accounts = [["address": targetChain.bechAddress!, "pubkey": targetChain.publicKey?.base64EncodedString(), "algo": "secp256k1"]]
-//            print("cosmos_getAccounts ", v2Accounts)
-//            wcV2ApproveSession(request: request, response: AnyCodable(v2Accounts))
-//        }
     }
     
     @MainActor

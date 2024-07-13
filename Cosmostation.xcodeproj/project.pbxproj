@@ -1359,6 +1359,8 @@
 		04F048D02AF8D268002A809D /* CosmosCancelUnbonding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F048CC2AF8D268002A809D /* CosmosCancelUnbonding.xib */; };
 		04F048D72AFCD34A002A809D /* basebg06.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F048D62AFCD34A002A809D /* basebg06.png */; };
 		04F048D82AFCD34A002A809D /* basebg06.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F048D62AFCD34A002A809D /* basebg06.png */; };
+		04F23A9D2C4258E70030F70F /* ChainLava.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F23A9C2C4258E70030F70F /* ChainLava.swift */; };
+		04F23A9E2C4258E70030F70F /* ChainLava.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F23A9C2C4258E70030F70F /* ChainLava.swift */; };
 		04F4061729ED119800CD88E4 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061629ED119800CD88E4 /* Init.storyboard */; };
 		04F4061829ED119800CD88E4 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F4061629ED119800CD88E4 /* Init.storyboard */; };
 		04F53F692BE4ED22000715FA /* SwitchStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F53F672BE4ED22000715FA /* SwitchStyleCell.swift */; };
@@ -2693,6 +2695,7 @@
 		04F048CB2AF8D268002A809D /* CosmosCancelUnbonding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosCancelUnbonding.swift; sourceTree = "<group>"; };
 		04F048CC2AF8D268002A809D /* CosmosCancelUnbonding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosCancelUnbonding.xib; sourceTree = "<group>"; };
 		04F048D62AFCD34A002A809D /* basebg06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg06.png; sourceTree = "<group>"; };
+		04F23A9C2C4258E70030F70F /* ChainLava.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainLava.swift; sourceTree = "<group>"; };
 		04F4061529ED112100CD88E4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		04F4061629ED119800CD88E4 /* Init.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Init.storyboard; sourceTree = "<group>"; };
 		04F53F672BE4ED22000715FA /* SwitchStyleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchStyleCell.swift; sourceTree = "<group>"; };
@@ -3148,6 +3151,7 @@
 				042296802A890C9B003C7630 /* ChainKava118.swift */,
 				045032BA2C1EFCE600235F6A /* ChainKi.swift */,
 				045032BC2C1EFCE700235F6A /* ChainKyve.swift */,
+				04F23A9C2C4258E70030F70F /* ChainLava.swift */,
 				045032BD2C1EFCE700235F6A /* ChainLike.swift */,
 				045032B82C1EFCE600235F6A /* ChainLum118.swift */,
 				045032BB2C1EFCE700235F6A /* ChainLum880.swift */,
@@ -5223,6 +5227,7 @@
 				04C8179D2BA98D75006B800A /* cosmos_group_v1_genesis.pb.swift in Sources */,
 				04C817292BA98D75006B800A /* cosmos_group_v1_query.grpc.swift in Sources */,
 				045033032C1F029A00235F6A /* ChainSei.swift in Sources */,
+				04F23A9E2C4258E70030F70F /* ChainLava.swift in Sources */,
 				04C816E12BA98D75006B800A /* cosmos_evidence_v1beta1_evidence.pb.swift in Sources */,
 				04CD24542AD1621800497EF5 /* TxAmountLegacySheet.swift in Sources */,
 				0450331F2C1F045900235F6A /* ChainTerra.swift in Sources */,
@@ -6022,6 +6027,7 @@
 				04FAD9F42AB71D5000143A3E /* DeleteAccountSheet.swift in Sources */,
 				04C8179C2BA98D75006B800A /* cosmos_group_v1_genesis.pb.swift in Sources */,
 				045033022C1F029A00235F6A /* ChainSei.swift in Sources */,
+				04F23A9D2C4258E70030F70F /* ChainLava.swift in Sources */,
 				04C817282BA98D75006B800A /* cosmos_group_v1_query.grpc.swift in Sources */,
 				04C816E02BA98D75006B800A /* cosmos_evidence_v1beta1_evidence.pb.swift in Sources */,
 				0450331E2C1F045900235F6A /* ChainTerra.swift in Sources */,
