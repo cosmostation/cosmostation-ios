@@ -182,7 +182,6 @@ class CosmosClassVC: BaseVC {
     @objc func onClickExplorer() {
         guard let url = selectedChain.getExplorerAccount() else { return }
         self.onShowSafariWeb(url)
-        
     }
     
     @objc func onClickAddToken() {
