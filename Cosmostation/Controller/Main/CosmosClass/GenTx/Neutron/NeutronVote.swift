@@ -133,7 +133,12 @@ class NeutronVote: BaseVC {
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeePosition = sender.selectedSegmentIndex
         if (grpcFetcher.cosmosBaseFees.count > 0) {
-            txFee = Signer.setFee(selectedFeePosition, txFee)
+            if let baseFee = grpcFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
+                let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
+                let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
+                txFee.amount[0].amount = feeAmount.stringValue
+                txFee = Signer.setFee(selectedFeePosition, txFee)
+            }
 
         } else {
             txFee = selectedChain.getUserSelectedFee(selectedFeePosition, txFee.amount[0].denom)
