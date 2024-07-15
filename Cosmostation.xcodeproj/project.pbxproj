@@ -346,6 +346,8 @@
 		04527DC22A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04527DBE2A937CC1005F72D7 /* AssetCosmosClassCell.xib */; };
 		04527DC52A938FC9005F72D7 /* CosmosClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */; };
 		04527DC62A938FC9005F72D7 /* CosmosClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */; };
+		045CF9642C450D72000DAD08 /* CosmosFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CF9632C450D72000DAD08 /* CosmosFetcher.swift */; };
+		045CF9652C450D72000DAD08 /* CosmosFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CF9632C450D72000DAD08 /* CosmosFetcher.swift */; };
 		046269072B9740F300648059 /* basebg04.png in Resources */ = {isa = PBXBuildFile; fileRef = 046269062B9740F300648059 /* basebg04.png */; };
 		046269082B9740F300648059 /* basebg04.png in Resources */ = {isa = PBXBuildFile; fileRef = 046269062B9740F300648059 /* basebg04.png */; };
 		046BF1C02B0F259C00BC1FC8 /* OktValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BF1BE2B0F259C00BC1FC8 /* OktValidatorCell.swift */; };
@@ -2197,6 +2199,7 @@
 		04527DBD2A937CC1005F72D7 /* AssetCosmosClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCosmosClassCell.swift; sourceTree = "<group>"; };
 		04527DBE2A937CC1005F72D7 /* AssetCosmosClassCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCosmosClassCell.xib; sourceTree = "<group>"; };
 		04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClassVC.swift; sourceTree = "<group>"; };
+		045CF9632C450D72000DAD08 /* CosmosFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosFetcher.swift; sourceTree = "<group>"; };
 		046269062B9740F300648059 /* basebg04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg04.png; sourceTree = "<group>"; };
 		046BF1BE2B0F259C00BC1FC8 /* OktValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktValidatorCell.swift; sourceTree = "<group>"; };
 		046BF1BF2B0F259C00BC1FC8 /* OktValidatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OktValidatorCell.xib; sourceTree = "<group>"; };
@@ -3197,6 +3200,7 @@
 		045032212C1EE83600235F6A /* Fetcher */ = {
 			isa = PBXGroup;
 			children = (
+				045CF9632C450D72000DAD08 /* CosmosFetcher.swift */,
 				042DE6F42C1D4DEA009CAC04 /* FetcherGrpc.swift */,
 				042DE6F72C1D4DFC009CAC04 /* FetcherEvmrpc.swift */,
 				0450321E2C1ECAD900235F6A /* FetcherLcd.swift */,
@@ -5370,6 +5374,7 @@
 				04B7898E2ACAC9B100E9BE88 /* ibc_core_connection_v1_tx.pb.swift in Sources */,
 				04C816712BA98D74006B800A /* cosmos_app_v1alpha1_query.pb.swift in Sources */,
 				045032812C1EEDCD00235F6A /* ChainCelestia.swift in Sources */,
+				045CF9652C450D72000DAD08 /* CosmosFetcher.swift in Sources */,
 				04B7897C2ACAC9B100E9BE88 /* ibc_core_channel_v1_channel.pb.swift in Sources */,
 				04C817B92BA98D75006B800A /* cosmos_staking_v1beta1_tx.pb.swift in Sources */,
 				046EA8E02AD04A2600A2FCE7 /* desmos_profiles_v3_models_packets.pb.swift in Sources */,
@@ -6170,6 +6175,7 @@
 				04B789372ACAC9B100E9BE88 /* ibc_core_client_v1_tx.pb.swift in Sources */,
 				04C816702BA98D74006B800A /* cosmos_app_v1alpha1_query.pb.swift in Sources */,
 				045032802C1EEDCD00235F6A /* ChainCelestia.swift in Sources */,
+				045CF9642C450D72000DAD08 /* CosmosFetcher.swift in Sources */,
 				0472D4832B03588F00B9E6E8 /* NoticeSheet.swift in Sources */,
 				04C817B82BA98D75006B800A /* cosmos_staking_v1beta1_tx.pb.swift in Sources */,
 				04B7898D2ACAC9B100E9BE88 /* ibc_core_connection_v1_tx.pb.swift in Sources */,
