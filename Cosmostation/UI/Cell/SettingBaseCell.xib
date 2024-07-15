@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -34,9 +34,9 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="pkQ-pO-Es3">
-                                <rect key="frame" x="64" y="17.666666666666671" width="50.333333333333343" height="37"/>
+                                <rect key="frame" x="64.000000000000014" y="17.666666666666671" width="214.33333333333337" height="37"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OyM-9F-iny">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OyM-9F-iny">
                                         <rect key="frame" x="0.0" y="0.0" width="31.333333333333332" height="17.666666666666668"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                         <color key="textColor" name="_color01"/>
@@ -50,7 +50,7 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPq-mZ-R8l">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPq-mZ-R8l">
                                 <rect key="frame" x="293.33333333333331" y="18.666666666666668" width="34.666666666666686" height="15.333333333333332"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color01"/>
@@ -65,6 +65,7 @@
                             <constraint firstItem="pkQ-pO-Es3" firstAttribute="leading" secondItem="5Zx-AL-6xf" secondAttribute="trailing" constant="8" id="Ohv-P6-J1A"/>
                             <constraint firstItem="5Zx-AL-6xf" firstAttribute="centerY" secondItem="oLi-9a-aZ7" secondAttribute="centerY" id="Uet-fI-trR"/>
                             <constraint firstItem="5Zx-AL-6xf" firstAttribute="leading" secondItem="oLi-9a-aZ7" secondAttribute="leading" constant="8" id="Yl2-J9-e5Z"/>
+                            <constraint firstItem="LPq-mZ-R8l" firstAttribute="leading" secondItem="pkQ-pO-Es3" secondAttribute="trailing" constant="15" id="aCf-Rl-y1H"/>
                             <constraint firstItem="LPq-mZ-R8l" firstAttribute="centerY" secondItem="OyM-9F-iny" secondAttribute="centerY" id="er3-HD-RSh"/>
                             <constraint firstItem="5Zx-AL-6xf" firstAttribute="top" secondItem="oLi-9a-aZ7" secondAttribute="top" constant="12" id="uO7-XH-0R5"/>
                         </constraints>
@@ -92,7 +93,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="setAccount" width="192" height="192"/>
+        <image name="setAccount" width="72" height="72"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
