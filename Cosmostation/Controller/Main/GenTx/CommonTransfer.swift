@@ -491,7 +491,12 @@ class CommonTransfer: BaseVC {
         selectedFeePosition = sender.selectedSegmentIndex
         if (txStyle == .COSMOS_STYLE) {
             if (fromGrpcFetcher.cosmosBaseFees.count > 0) {
-                cosmosTxFee = Signer.setFee(selectedFeePosition, cosmosTxFee)
+                if let baseFee = fromGrpcFetcher.cosmosBaseFees.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
+                    let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
+                    let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
+                    cosmosTxFee.amount[0].amount = feeAmount.stringValue
+                    cosmosTxFee = Signer.setFee(selectedFeePosition, cosmosTxFee)
+                }
             } else {
                 cosmosTxFee = fromChain.getUserSelectedFee(selectedFeePosition, cosmosTxFee.amount[0].denom)
             }
