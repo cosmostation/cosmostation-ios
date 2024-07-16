@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -101,8 +101,8 @@
                                 <constraint firstAttribute="width" constant="6" id="Osu-EY-Hvx"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGB-Z0-G8D">
-                            <rect key="frame" x="193.33333333333334" y="15.999999999999996" width="6.3333333333333428" height="16.333333333333332"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGB-Z0-G8D">
+                            <rect key="frame" x="193.33333333333334" y="15.333333333333373" width="6.3333333333333428" height="17.666666666666671"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -126,11 +126,13 @@
                     <color key="backgroundColor" name="_colorBg"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="1AI-CU-sRw"/>
+                        <constraint firstItem="x5e-Ol-pIQ" firstAttribute="centerY" secondItem="38Z-lX-3jY" secondAttribute="centerY" id="1II-Ir-UiW"/>
+                        <constraint firstItem="CuK-l0-LPs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eGB-Z0-G8D" secondAttribute="trailing" constant="5" id="6zk-2O-1iU"/>
                         <constraint firstItem="eGB-Z0-G8D" firstAttribute="leading" secondItem="x5e-Ol-pIQ" secondAttribute="trailing" constant="4" id="8tr-rn-kF6"/>
                         <constraint firstItem="38Z-lX-3jY" firstAttribute="leading" secondItem="VAx-hr-qKM" secondAttribute="leading" constant="4" id="FfW-Q4-P1F"/>
                         <constraint firstItem="eGB-Z0-G8D" firstAttribute="centerY" secondItem="38Z-lX-3jY" secondAttribute="centerY" id="Jmi-sG-eGS"/>
                         <constraint firstItem="CuK-l0-LPs" firstAttribute="centerY" secondItem="38Z-lX-3jY" secondAttribute="centerY" id="Lh5-Hi-63A"/>
-                        <constraint firstItem="x5e-Ol-pIQ" firstAttribute="centerY" secondItem="eGB-Z0-G8D" secondAttribute="centerY" id="NFv-df-L3C"/>
+                        <constraint firstItem="x5e-Ol-pIQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zvb-Yz-MbE" secondAttribute="trailing" constant="5" id="jzL-co-qJQ"/>
                         <constraint firstItem="Zvb-Yz-MbE" firstAttribute="centerY" secondItem="38Z-lX-3jY" secondAttribute="centerY" id="ljP-CL-Rme"/>
                         <constraint firstItem="eGB-Z0-G8D" firstAttribute="centerX" secondItem="VAx-hr-qKM" secondAttribute="centerX" id="mHx-HZ-izk"/>
                         <constraint firstItem="Zvb-Yz-MbE" firstAttribute="leading" secondItem="38Z-lX-3jY" secondAttribute="trailing" constant="4" id="nmQ-FM-92z"/>
