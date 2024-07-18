@@ -10,9 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class ChainOkt996Keccak: BaseChain  {
-    
-    var oktFetcher: OktFetcher?
+class ChainOkt996Keccak: ChainOktEVM  {
     
     override init() {
         super.init()
@@ -30,6 +28,8 @@ class ChainOkt996Keccak: BaseChain  {
         bechAccountPrefix = "ex"
         supportStaking = false
         lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
+        
+        supportEvm = false
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
@@ -39,17 +39,10 @@ class ChainOkt996Keccak: BaseChain  {
         bechAddress = KeyFac.convertEvmToBech32(evmAddress!, bechAccountPrefix!)
     }
     
-    override func getLcdfetcher() -> FetcherLcd? {
-        if (oktFetcher == nil) {
-            oktFetcher = OktFetcher.init(self)
-        }
-        return oktFetcher
-    }
-    
     override func fetchData(_ id: Int64) {
         fetchState = .Busy
         Task {
-            let result = await getLcdfetcher()?.fetchLcdData(id)
+            let result = await getOktfetcher()?.fetchCosmosData(id)
             
             if (result == false) {
                 fetchState = .Fail
@@ -57,7 +50,7 @@ class ChainOkt996Keccak: BaseChain  {
                 fetchState = .Success
             }
             
-            if let oktFetcher = getLcdfetcher(), fetchState == .Success {
+            if let oktFetcher = getOktfetcher(), fetchState == .Success {
                 
                 var coinsValue = NSDecimalNumber.zero
                 var coinsUSDValue = NSDecimalNumber.zero
@@ -68,7 +61,7 @@ class ChainOkt996Keccak: BaseChain  {
                 coinsCnt = oktFetcher.valueCoinCnt()
                 coinsValue = oktFetcher.allCoinValue()
                 coinsUSDValue = oktFetcher.allCoinValue(true)
-                mainCoinAmount = oktFetcher.lcdAllStakingDenomAmount()
+                mainCoinAmount = oktFetcher.oktAllStakingDenomAmount()
                 
                 allCoinValue = coinsValue
                 allCoinUSDValue = coinsUSDValue
@@ -89,31 +82,5 @@ class ChainOkt996Keccak: BaseChain  {
         
     }
     
-    //fetch only balance for add account check
-    override func fetchBalances() {
-        fetchState = .Busy
-        Task {
-            var result = await getLcdfetcher()?.fetchBalances()
-            
-            if (result == false) {
-                fetchState = .Fail
-            } else {
-                fetchState = .Success
-            }
-            
-            if (self.fetchState == .Success) {
-                if let oktFetcher = getLcdfetcher() {
-                    coinsCnt = oktFetcher.valueCoinCnt()
-                }
-            }
-            
-            DispatchQueue.main.async(execute: {
-                NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
-            })
-        }
-    }
+    
 }
-
-
-let OKT_BASE_FEE = "0.008"
-let OKT_GECKO_ID = "oec-token"

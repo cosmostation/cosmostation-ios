@@ -8,7 +8,8 @@
 
 import Foundation
 
-class ChainArtelaEVM_T: ChainArtelaEVM  {
+//class ChainArtelaEVM_T: ChainArtelaEVM  {
+class ChainArtelaEVM_T: BaseChain {
     
     override init() {
         super.init()
@@ -21,11 +22,12 @@ class ChainArtelaEVM_T: ChainArtelaEVM  {
         accountKeyType = AccountKeyType(.ARTELA_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        supportCosmosLcd = true
         stakeDenom = "uart"
         bechAccountPrefix = "art"
         validatorPrefix = "artvaloper"
-        grpcHost = "grpc-office-artela.cosmostation.io"
+//        grpcHost = "grpc-office-artela.cosmostation.io"
+        lcdUrl = "https://lcd-office.cosmostation.io/artela-testnet/"
         
         
         supportEvm = true

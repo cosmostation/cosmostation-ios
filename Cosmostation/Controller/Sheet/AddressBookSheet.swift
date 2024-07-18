@@ -89,7 +89,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         if (WUtils.isValidEvmAddress(addressInput)) {
             memoTextField.isHidden = true
             
-        } else if let chain = ALLCHAINS().filter({ $0.isCosmos() && addressInput!.starts(with: $0.bechAccountPrefix! + "1") == true }).first {
+        } else if let chain = ALLCHAINS().filter({ $0.supportCosmos && addressInput!.starts(with: $0.bechAccountPrefix! + "1") == true }).first {
             if (WUtils.isValidBechAddress(chain, addressInput!)) {
                 memoTextField.isHidden = false
             }

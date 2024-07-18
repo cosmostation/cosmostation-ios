@@ -48,7 +48,7 @@ class KavaMintCreateAction: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedChain: BaseChain!
-    var grpcFetcher: FetcherGrpc!
+    var cosmosFetcher: CosmosFetcher!
     var feeInfos = [FeeInfo]()
     var selectedFeePosition = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -67,7 +67,7 @@ class KavaMintCreateAction: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        grpcFetcher = selectedChain.getGrpcfetcher()
+        cosmosFetcher = selectedChain.getCosmosfetcher()
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -93,7 +93,7 @@ class KavaMintCreateAction: BaseVC {
         principalSymbolLabel.text = principalMsAsset.symbol
         principalImg.af.setImage(withURL: principalMsAsset.assetImg())
         
-        let balanceAmount = grpcFetcher.balanceAmount(collateralParam.denom)
+        let balanceAmount = cosmosFetcher.balanceAmount(collateralParam.denom)
         if (txFee.amount[0].denom == collateralParam.denom) {
             let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
             collateralAvailableAmount = balanceAmount.subtracting(feeAmount)
@@ -255,12 +255,13 @@ class KavaMintCreateAction: BaseVC {
         
         Task {
             do {
-                if let simulReq = try await Signer.genSimul(selectedChain, onBindCreateMsg(), txMemo, txFee, nil),
-                   let simulRes = try await grpcFetcher.simulateTx(simulReq) {
-                    DispatchQueue.main.async {
-                        self.onUpdateWithSimul(simulRes)
-                    }
-                }
+                //TODO YONG
+//                if let simulReq = try await Signer.genSimul(selectedChain, onBindCreateMsg(), txMemo, txFee, nil),
+//                   let simulRes = try await grpcFetcher.simulateTx(simulReq) {
+//                    DispatchQueue.main.async {
+//                        self.onUpdateWithSimul(simulRes)
+//                    }
+//                }
                 
             } catch {
                 DispatchQueue.main.async {
@@ -324,17 +325,18 @@ extension KavaMintCreateAction: BaseSheetDelegate, MemoDelegate, AmountSheetDele
             loadingView.isHidden = false
             Task {
                 do {
-                    if let broadReq = try await Signer.genTx(selectedChain, onBindCreateMsg(), txMemo, txFee, nil),
-                       let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.selectedChain
-                            txResult.broadcastTxResponse = broadRes
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
-                    }
+                    //TODO YONG
+//                    if let broadReq = try await Signer.genTx(selectedChain, onBindCreateMsg(), txMemo, txFee, nil),
+//                       let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+//                            self.loadingView.isHidden = true
+//                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+//                            txResult.selectedChain = self.selectedChain
+//                            txResult.broadcastTxResponse = broadRes
+//                            txResult.modalPresentationStyle = .fullScreen
+//                            self.present(txResult, animated: true)
+//                        })
+//                    }
                     
                 } catch {
                     //TODO handle Error

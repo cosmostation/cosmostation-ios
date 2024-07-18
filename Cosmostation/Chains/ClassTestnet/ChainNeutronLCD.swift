@@ -1,32 +1,32 @@
 //
-//  ChainNeutron.swift
+//  ChainNeutronLCD.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2023/10/04.
-//  Copyright © 2023 wannabit. All rights reserved.
+//  Created by yongjoo jung on 7/18/24.
+//  Copyright © 2024 wannabit. All rights reserved.
 //
 
 import Foundation
 
-class ChainNeutron: BaseChain {
+class ChainNeutronLCD: BaseChain {
     
     override init() {
         super.init()
         
-        name = "Neutron"
-        tag = "neutron118"
+        name = "NeutronLCD"
+        tag = "neutroncdsdc"
         logo1 = "chainNeutron"
         apiName = "neutron"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        supportCosmosLcd = true
         stakeDenom = "untrn"
         bechAccountPrefix = "neutron"
         validatorPrefix = "neutronvaloper"
         supportStaking = false
         supportCw20 = true
-        grpcHost = "grpc-neutron.cosmostation.io"
+        lcdUrl = "https://lcd-neutron.cosmostation.io/"
         
     }
     
@@ -89,5 +89,3 @@ class ChainNeutron: BaseChain {
         }
     }
 }
-
-let NEUTRON_VESTING_CONTRACT_ADDRESS = "neutron1h6828as2z5av0xqtlh4w9m75wxewapk8z9l2flvzc29zeyzhx6fqgp648z"

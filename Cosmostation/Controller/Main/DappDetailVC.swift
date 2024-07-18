@@ -361,7 +361,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                 }
                 
                 Task {
-                    if let response = try await targetChain.getGrpcfetcher()?.broadcastTx(request) {
+                    if let response = try await targetChain.getCosmosfetcher()?.broadCastCosmosTx(request) {
                         var txResponse = JSON()
                         var data = JSON()
                         data["code"].uInt32Value = response.code
@@ -854,25 +854,6 @@ extension DappDetailVC {
     }
     
 }
-
-/**
- * gRPC Handle
- */
-extension DappDetailVC {
-    
-    func getConnection(_ chain: BaseChain) -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpcfetcher()!.getGrpc().0, port: chain.getGrpcfetcher()!.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(2000))
-        return callOptions
-    }
-    
-}
-
 
 enum DAPP_TYPE {
     case INTERNAL_URL           //handle user click in app links (ecosystem or service)

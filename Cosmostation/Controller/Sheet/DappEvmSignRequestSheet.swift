@@ -253,7 +253,7 @@ class DappEvmSignRequestSheet: BaseVC {
                 }
             }
             if (inComeMaxFeePerGas != nil && inComeMaxPriorityFeePerGas != nil) {
-                evmGas.append((inComeMaxPriorityFeePerGas!, inComeMaxPriorityFeePerGas!, inComeGas ?? checkedGas!))
+                evmGas.append((inComeMaxFeePerGas!, inComeMaxPriorityFeePerGas!, inComeGas ?? checkedGas!))
                 evmGasTitle.append("From dapp")
                 feePosition = 3
             }

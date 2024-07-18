@@ -79,9 +79,9 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
     func onInitView() {
         if (baseAccount.getDpChains().filter { $0.fetchState == .Busy }.count == 0) {
             baseAccount.getDpChains().filter { $0.isTestnet == false && $0.supportCosmosGrpc }.forEach { chain in
-                if let grpcFetcher = chain.getGrpcfetcher(),
+                if let cosmosFetcher = chain.getCosmosfetcher(),
                    let txFee = chain.getInitPayableFee() {
-                    let valueableReward = grpcFetcher.valueableRewards()
+                    let valueableReward = cosmosFetcher.valueableRewards()
                     if (valueableReward.count > 0) {
                         valueableRewards.append(ClaimAllModel.init(chain, valueableReward))
                     }
@@ -123,8 +123,7 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
                     let chain = valueableRewards[i].cosmosChain!
                     let rewards = valueableRewards[i].rewards
                     var txFee = chain.getInitPayableFee()!
-                    if let simul = try await simulateClaimTx(chain, rewards) {
-                        let toGas = simul.gasInfo.gasUsed
+                    if let toGas = try await simulateClaimTx(chain, rewards) {
                         txFee.gasLimit = UInt64(Double(toGas) * chain.gasMultiply())
                         if let gasRate = chain.getBaseFeeInfo().FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                             let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
@@ -184,7 +183,7 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
     func checkTx(_ chain: BaseChain, _ position: Int, _ txResponse: Cosmos_Base_Abci_V1beta1_TxResponse) {
         Task {
             do {
-                let result = try await chain.getGrpcfetcher()!.fetchTx(txResponse.txhash)
+                let result = try await chain.getCosmosfetcher()!.fetchCosmosTx(txResponse.txhash)
                 valueableRewards[position].txResponse = result
                 valueableRewards[position].isBusy = false
                 DispatchQueue.main.async {
@@ -235,11 +234,11 @@ extension AllChainClaimStartVC: UITableViewDelegate, UITableViewDataSource {
 
 extension AllChainClaimStartVC {
     
-    func simulateClaimTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+    func simulateClaimTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) async throws -> UInt64? {
         let msgs = Signer.genClaimStakingRewardMsg(chain.bechAddress!, claimableRewards)
-        if let grpcFetcher = chain.getGrpcfetcher(),
+        if let cosmosFetcher = chain.getCosmosfetcher(),
            let simulReq = try await Signer.genSimul(chain, msgs, "", chain.getInitPayableFee()!, nil) {
-            return try await grpcFetcher.simulateTx(simulReq)
+            return try await cosmosFetcher.simulCosmosTx(simulReq)
         }
         return nil
     }
@@ -247,9 +246,9 @@ extension AllChainClaimStartVC {
     func broadcastClaimTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward], 
                           _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip? = nil) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
         let msgs = Signer.genClaimStakingRewardMsg(chain.bechAddress!, claimableRewards)
-        if let grpcFetcher = chain.getGrpcfetcher(),
+        if let cosmosFetcher = chain.getCosmosfetcher(),
            let broadReq = try await Signer.genTx(chain, msgs, "", fee, tip) {
-            return try await grpcFetcher.broadcastTx(broadReq)
+            return try await cosmosFetcher.broadCastCosmosTx(broadReq)
         }
         return nil
     }

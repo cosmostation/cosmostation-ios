@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftyJSON
-
+/*
 class FetcherLcd {
     
     var chain: BaseChain!
@@ -56,3 +56,4 @@ class FetcherLcd {
         return chain.lcdUrl
     }
 }
+*/

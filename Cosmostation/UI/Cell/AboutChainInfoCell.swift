@@ -47,7 +47,7 @@ class AboutChainInfoCell: UITableViewCell {
             initTimeabel.text = WDP.dpDate(inittime)
         }
         
-        if (chain.supportEvm && chain.isCosmos()) {
+        if (chain.supportEvm && chain.supportCosmos) {
             chainIdcosmosView.isHidden = false
             chainIdevmView.isHidden = false
             chainIdcosmosTitle.text = NSLocalizedString("str_chain_id_cosmos", comment: "")
@@ -65,7 +65,7 @@ class AboutChainInfoCell: UITableViewCell {
             gasFeeTitle.text = NSLocalizedString("str_gas_fee_coin", comment: "")
             gssFeeLabel.text = json["params"]["chainlist_params"]["symbol"].string
             
-        } else if (chain.isCosmos()) {
+        } else if (chain.supportCosmos) {
             chainIdcosmosView.isHidden = false
             chainIdevmView.isHidden = true
             chainIdcosmosTitle.text = NSLocalizedString("str_chain_id", comment: "")

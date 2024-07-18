@@ -24,7 +24,7 @@ class KavaEarnListVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        kavaFetcher = selectedChain.getGrpcfetcher() as? KavaFetcher
+        kavaFetcher = selectedChain.getCosmosfetcher() as? KavaFetcher
         
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
@@ -89,7 +89,7 @@ class KavaEarnListVC: BaseVC {
         let valOpAddress = target?.denom.replacingOccurrences(of: "bkava-", with: "")
         let earnDeposit = KavaEarnDepositAction(nibName: "KavaEarnDepositAction", bundle: nil)
         earnDeposit.selectedChain = selectedChain
-        earnDeposit.toValidator = selectedChain.getGrpcfetcher()!.cosmosValidators.filter({ $0.operatorAddress == valOpAddress }).first
+        earnDeposit.toValidator = selectedChain.getCosmosfetcher()!.cosmosValidators.filter({ $0.operatorAddress == valOpAddress }).first
         earnDeposit.modalTransitionStyle = .coverVertical
         self.present(earnDeposit, animated: true)
     }

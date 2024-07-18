@@ -46,7 +46,7 @@ class KavaClaimIncentives: BaseVC {
     
     
     var selectedChain: BaseChain!
-    var grpcFetcher: FetcherGrpc!
+    var kavaFetcher: KavaFetcher!
     var feeInfos = [FeeInfo]()
     var selectedFeePosition = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -58,7 +58,7 @@ class KavaClaimIncentives: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        grpcFetcher = selectedChain.getGrpcfetcher()
+        kavaFetcher = selectedChain.getCosmosfetcher() as! KavaFetcher
         
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
@@ -193,12 +193,13 @@ class KavaClaimIncentives: BaseVC {
         loadingView.isHidden = false
         Task {
             do {
-                if let simulReq = try await Signer.genSimul(selectedChain, onBindIncentiveMsg(), txMemo, txFee, nil),
-                   let simulRes = try await grpcFetcher.simulateTx(simulReq) {
-                    DispatchQueue.main.async {
-                        self.onUpdateWithSimul(simulRes)
-                    }
-                }
+                //TODO YONG
+//                if let simulReq = try await Signer.genSimul(selectedChain, onBindIncentiveMsg(), txMemo, txFee, nil),
+//                   let simulRes = try await grpcFetcher.simulateTx(simulReq) {
+//                    DispatchQueue.main.async {
+//                        self.onUpdateWithSimul(simulRes)
+//                    }
+//                }
                 
             } catch {
                 DispatchQueue.main.async {
@@ -240,17 +241,18 @@ extension KavaClaimIncentives: MemoDelegate, BaseSheetDelegate, PinDelegate {
             loadingView.isHidden = false
             Task {
                 do {
-                    if let broadReq = try await Signer.genTx(selectedChain, onBindIncentiveMsg(), txMemo, txFee, nil),
-                       let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                            txResult.selectedChain = self.selectedChain
-                            txResult.broadcastTxResponse = broadRes
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
-                    }
+                    //TODO YONG
+//                    if let broadReq = try await Signer.genTx(selectedChain, onBindIncentiveMsg(), txMemo, txFee, nil),
+//                       let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+//                            self.loadingView.isHidden = true
+//                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+//                            txResult.selectedChain = self.selectedChain
+//                            txResult.broadcastTxResponse = broadRes
+//                            txResult.modalPresentationStyle = .fullScreen
+//                            self.present(txResult, animated: true)
+//                        })
+//                    }
                     
                 } catch {
                     //TODO handle Error

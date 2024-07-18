@@ -65,17 +65,17 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     func bindCosmosStakeAsset(_ baseChain: BaseChain) {
-        if (baseChain.name == "OKT") {
-            bindOktAsset(baseChain)
+        if let oktChain = baseChain as? ChainOktEVM {
+            bindOktAsset(oktChain)
             
         } else if (baseChain is ChainNeutron) {
             bindNeutron(baseChain)
             
         } else {
             let stakeDenom = baseChain.stakeDenom!
-            if let gFetcher = baseChain.getGrpcfetcher(),
+            if let cosmosFetcher = baseChain.getCosmosfetcher(),
                let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
-                let value = gFetcher.denomValue(stakeDenom)
+                let value = cosmosFetcher.denomValue(stakeDenom)
                 
                 coinImg.af.setImage(withURL: msAsset.assetImg())
                 symbolLabel.text = msAsset.symbol?.uppercased()
@@ -91,40 +91,40 @@ class AssetCosmosClassCell: UITableViewCell {
                     valueLabel.isHidden = false
                 }
                 
-                let availableAmount = gFetcher.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+                let availableAmount = cosmosFetcher.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
                 availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
                 
-                let vestingAmount = gFetcher.vestingAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+                let vestingAmount = cosmosFetcher.vestingAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
                 if (vestingAmount != NSDecimalNumber.zero) {
                     vestingLayer.isHidden = false
                     vestingLabel?.attributedText = WDP.dpAmount(vestingAmount.stringValue, vestingLabel!.font, 6)
                 }
                 
-                let stakingAmount = gFetcher.delegationAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
+                let stakingAmount = cosmosFetcher.delegationAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
                 stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
                 
-                let unStakingAmount = gFetcher.unbondingAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
+                let unStakingAmount = cosmosFetcher.unbondingAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
                 if (unStakingAmount != NSDecimalNumber.zero) {
                     unstakingLayer.isHidden = false
                     unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
                 }
                 
-                let rewardAmount = gFetcher.rewardAmountSum(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-                if (gFetcher.rewardAllCoins().count > 0) {
+                let rewardAmount = cosmosFetcher.rewardAmountSum(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+                if (cosmosFetcher.rewardAllCoins().count > 0) {
                     rewardLayer.isHidden = false
-                    if (gFetcher.rewardOtherDenomTypeCnts() > 0) {
-                        rewardTitle.text = "Reward + " + String(baseChain.getGrpcfetcher()!.rewardOtherDenomTypeCnts())
+                    if (cosmosFetcher.rewardOtherDenomTypeCnts() > 0) {
+                        rewardTitle.text = "Reward + " + String(cosmosFetcher.rewardOtherDenomTypeCnts())
                     } else {
                         rewardTitle.text = "Reward"
                     }
                     rewardLabel?.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardLabel!.font, 6)
                 }
                 
-                let commissionAmount = gFetcher.commissionAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-                if (gFetcher.cosmosCommissions.count > 0) {
+                let commissionAmount = cosmosFetcher.commissionAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+                if (cosmosFetcher.cosmosCommissions.count > 0) {
                     commissionLayer.isHidden = false
-                    if (gFetcher.commissionOtherDenoms() > 0) {
-                        commissionTitle.text = "Commission + " + String(gFetcher.commissionOtherDenoms())
+                    if (cosmosFetcher.commissionOtherDenoms() > 0) {
+                        commissionTitle.text = "Commission + " + String(cosmosFetcher.commissionOtherDenoms())
                     } else {
                         commissionTitle.text = "Commission"
                     }
@@ -148,13 +148,13 @@ class AssetCosmosClassCell: UITableViewCell {
         
     }
     
-    func bindOktAsset(_ baseChain: BaseChain) {
-        if let oktFetcher = baseChain.getLcdfetcher() as? OktFetcher,
-           let stakeDenom = baseChain.stakeDenom {
+    func bindOktAsset(_ oktChain: ChainOktEVM) {
+        if let oktFetcher = oktChain.getOktfetcher(),
+           let stakeDenom = oktChain.stakeDenom {
             stakingTitle.text = "Deposited"
             unstakingTitle.text = "Withdrawing"
             
-            let value = baseChain.allValue()
+            let value = oktChain.allValue()
             coinImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
             symbolLabel.text = stakeDenom.uppercased()
             
@@ -169,13 +169,13 @@ class AssetCosmosClassCell: UITableViewCell {
                 valueLabel.isHidden = false
             }
             
-            let availableAmount = oktFetcher.lcdBalanceAmount(stakeDenom)
+            let availableAmount = oktFetcher.oktBalanceAmount(stakeDenom)
             availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 18)
             
-            let depositAmount = oktFetcher.lcdOktDepositAmount()
+            let depositAmount = oktFetcher.oktDepositAmount()
             stakingLabel?.attributedText = WDP.dpAmount(depositAmount.stringValue, stakingLabel!.font, 18)
             
-            let withdrawAmount = oktFetcher.lcdOktWithdrawAmount()
+            let withdrawAmount = oktFetcher.oktWithdrawAmount()
             if (withdrawAmount != NSDecimalNumber.zero) {
                 unstakingLayer.isHidden = false
                 unstakingLabel?.attributedText = WDP.dpAmount(withdrawAmount.stringValue, unstakingLabel!.font, 18)
@@ -193,7 +193,7 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     func bindNeutron(_ baseChain: BaseChain) {
-        if let neutronFetcher = baseChain.getGrpcfetcher() as? NeutronFetcher,
+        if let neutronFetcher = baseChain.getCosmosfetcher(),
            let stakeDenom = baseChain.stakeDenom {
             stakingTitle.text = "Vault Deposited"
             if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {

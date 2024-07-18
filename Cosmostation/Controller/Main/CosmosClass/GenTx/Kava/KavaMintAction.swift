@@ -42,7 +42,7 @@ class KavaMintAction: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedChain: BaseChain!
-    var grpcFetcher: FetcherGrpc!
+    var kavaFetcher: KavaFetcher!
     var feeInfos = [FeeInfo]()
     var selectedFeePosition = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -63,7 +63,7 @@ class KavaMintAction: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        grpcFetcher = selectedChain.getGrpcfetcher()
+        kavaFetcher = selectedChain.getCosmosfetcher() as? KavaFetcher
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -87,7 +87,7 @@ class KavaMintAction: BaseVC {
         if (mintActionType == .Deposit) {
             toMintSymbolLabel.text = collateralMsAsset.symbol
             toMintAssetImg.af.setImage(withURL: collateralMsAsset.assetImg())
-            let balanceAmount = grpcFetcher.balanceAmount(collateralParam.denom)
+            let balanceAmount = kavaFetcher.balanceAmount(collateralParam.denom)
             if (txFee.amount[0].denom == collateralParam.denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 collateralAvailableAmount = balanceAmount.subtracting(feeAmount)
@@ -115,7 +115,7 @@ class KavaMintAction: BaseVC {
         } else if (mintActionType == .Repay) {
             toMintSymbolLabel.text = principalMsAsset.symbol
             toMintAssetImg.af.setImage(withURL: principalMsAsset.assetImg())
-            principalAvailableAmount = grpcFetcher.balanceAmount("usdx")
+            principalAvailableAmount = kavaFetcher.balanceAmount("usdx")
         }
         
         
@@ -309,23 +309,23 @@ class KavaMintAction: BaseVC {
         
         Task {
             do {
-                var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
-                if (mintActionType == .Deposit) {
-                    simulReq = try await Signer.genSimul(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
-                    
-                } else if (mintActionType == .Withdraw) {
-                    simulReq = try await Signer.genSimul(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
-                    
-                } else if (mintActionType == .DrawDebt) {
-                    simulReq = try await Signer.genSimul(selectedChain, onBindDrawDebtMsg(), txMemo, txFee, nil)
-                    
-                } else if (mintActionType == .Repay) {
-                    simulReq = try await Signer.genSimul(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
-                }
-                let simulRes = try await grpcFetcher.simulateTx(simulReq)
-                DispatchQueue.main.async {
-                    self.onUpdateWithSimul(simulRes)
-                }
+//                var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
+//                if (mintActionType == .Deposit) {
+//                    simulReq = try await Signer.genSimul(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
+//                    
+//                } else if (mintActionType == .Withdraw) {
+//                    simulReq = try await Signer.genSimul(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
+//                    
+//                } else if (mintActionType == .DrawDebt) {
+//                    simulReq = try await Signer.genSimul(selectedChain, onBindDrawDebtMsg(), txMemo, txFee, nil)
+//                    
+//                } else if (mintActionType == .Repay) {
+//                    simulReq = try await Signer.genSimul(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
+//                }
+//                let simulRes = try await kavaFetcher.simulateTx(simulReq)
+//                DispatchQueue.main.async {
+//                    self.onUpdateWithSimul(simulRes)
+//                }
                             
                 
             } catch {
@@ -424,30 +424,30 @@ extension KavaMintAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             loadingView.isHidden = false
             Task {
                 do {
-                    var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
-                    if (mintActionType == .Deposit) {
-                        broadReq = try await Signer.genTx(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
-                        
-                    } else if (mintActionType == .Withdraw) {
-                        broadReq = try await Signer.genTx(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
-                        
-                    } else if (mintActionType == .DrawDebt) {
-                        broadReq = try await Signer.genTx(selectedChain, onBindDrawDebtMsg(), txMemo, txFee, nil)
-                        
-                    } else if (mintActionType == .Repay) {
-                        broadReq = try await Signer.genTx(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
-                        
-                    }
-                    let response = try await grpcFetcher.broadcastTx(broadReq)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                        self.loadingView.isHidden = true
-                        
-                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                        txResult.selectedChain = self.selectedChain
-                        txResult.broadcastTxResponse = response
-                        txResult.modalPresentationStyle = .fullScreen
-                        self.present(txResult, animated: true)
-                    })
+//                    var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
+//                    if (mintActionType == .Deposit) {
+//                        broadReq = try await Signer.genTx(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
+//                        
+//                    } else if (mintActionType == .Withdraw) {
+//                        broadReq = try await Signer.genTx(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
+//                        
+//                    } else if (mintActionType == .DrawDebt) {
+//                        broadReq = try await Signer.genTx(selectedChain, onBindDrawDebtMsg(), txMemo, txFee, nil)
+//                        
+//                    } else if (mintActionType == .Repay) {
+//                        broadReq = try await Signer.genTx(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
+//                        
+//                    }
+//                    let response = try await kavaFetcher.broadcastTx(broadReq)
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+//                        self.loadingView.isHidden = true
+//                        
+//                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+//                        txResult.selectedChain = self.selectedChain
+//                        txResult.broadcastTxResponse = response
+//                        txResult.modalPresentationStyle = .fullScreen
+//                        self.present(txResult, animated: true)
+//                    })
                     
                 } catch {
                     //TODO handle Error

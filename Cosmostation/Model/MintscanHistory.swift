@@ -947,7 +947,7 @@ public struct MintscanHistory: Codable {
                    let wasmMsg = msgValue["msg__@stringify"].string,
                    let wasmFunc = try? JSONDecoder().decode(JSON.self, from: wasmMsg.data(using: .utf8) ?? Data()),
                    let amount = wasmFunc["transfer"]["amount"].string,
-                   let cw20 = chain.getGrpcfetcher()?.mintscanCw20Tokens.first(where: { $0.address == contractAddress }) {
+                   let cw20 = chain.getCosmosfetcher()?.mintscanCw20Tokens.first(where: { $0.address == contractAddress }) {
                        return (cw20, NSDecimalNumber(string: amount))
                 }
                 

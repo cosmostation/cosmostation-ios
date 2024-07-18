@@ -49,9 +49,9 @@ class AssetCell: UITableViewCell {
     }
     
     func bindCosmosClassAsset(_ baseChain: BaseChain, _ coin: Cosmos_Base_V1beta1_Coin) {
-        if let gFetcher = baseChain.getGrpcfetcher(),
+        if let cosmosFetcher = baseChain.getCosmosfetcher(),
            let msAsset = BaseData.instance.getAsset(baseChain.apiName, coin.denom) {
-            let value = gFetcher.denomValue(coin.denom)
+            let value = cosmosFetcher.denomValue(coin.denom)
             WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, 6)
             WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
@@ -67,8 +67,8 @@ class AssetCell: UITableViewCell {
     }
     
     func bindCosmosClassToken(_ baseChain: BaseChain, _ token: MintscanToken) {
-        if let gFetcher = baseChain.getGrpcfetcher() {
-            let value = gFetcher.tokenValue(token.address!)
+        if let cosmosFetcher = baseChain.getCosmosfetcher() {
+            let value = cosmosFetcher.tokenValue(token.address!)
             WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
             WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
@@ -83,16 +83,16 @@ class AssetCell: UITableViewCell {
         }
     }
     
-    func bindOktAsset(_ baseChain: BaseChain, _ coin: JSON) {
-        if let oktFetcher = baseChain.getLcdfetcher() as? OktFetcher,
-           let token = oktFetcher.lcdOktTokens.filter({ $0["symbol"].string == coin["denom"].string }).first {
+    func bindOktAsset(_ oktChain: ChainOktEVM, _ coin: JSON) {
+        if let oktFetcher = oktChain.oktFetcher,
+           let token = oktFetcher.oktTokens.filter({ $0["symbol"].string == coin["denom"].string }).first {
             let original_symbol = token["original_symbol"].stringValue
             
             symbolLabel.text = original_symbol.uppercased()
             priceCurrencyLabel.text = token["description"].string
             coinImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
             
-            let availableAmount = oktFetcher.lcdBalanceAmount(coin["denom"].stringValue)
+            let availableAmount = oktFetcher.oktBalanceAmount(coin["denom"].stringValue)
             amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
             if (BaseData.instance.getHideValue()) {
                 hidenValueLabel.isHidden = false

@@ -40,16 +40,17 @@ class ManageChainCell: UITableViewCell {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         
-        if (chain.name == "OKT") {
+        if let oktFetcher = (chain as? ChainOktEVM)?.getOktfetcher() {
             lcdLayer.isHidden = false
-            lcdEndpointLabel.text = chain.getLcdfetcher()!.getLcd().replacingOccurrences(of: "https://", with: "")
+            lcdEndpointLabel.text = oktFetcher.getLcd().replacingOccurrences(of: "https://", with: "")
             lcdEndpointLabel.adjustsFontSizeToFitWidth = true
         }
         
         if (chain.supportCosmosGrpc) {
-            grpcLayer.isHidden = false
-            grpcEndpointLabel.text = chain.getGrpcfetcher()!.getGrpc().host + " : " +  String(chain.getGrpcfetcher()!.getGrpc().port)
-            grpcEndpointLabel.adjustsFontSizeToFitWidth = true
+            //TODO YONG
+//            grpcLayer.isHidden = false
+//            grpcEndpointLabel.text = chain.getCosmosfetcher()!.getGrpc().host + " : " +  String(chain.getCosmosfetcher()!.getGrpc().port)
+//            grpcEndpointLabel.adjustsFontSizeToFitWidth = true
         }
         
         if (chain.supportEvm) {

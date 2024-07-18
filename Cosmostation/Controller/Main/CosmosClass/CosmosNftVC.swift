@@ -66,8 +66,8 @@ class CosmosNftVC: BaseVC {
     @objc func onRequestFetch() {
         if (isBusy) { return }
         isBusy = true
-        if let grpFetcher = selectedChain.getGrpcfetcher() {
-            grpFetcher.fetchAllCw721()
+        if let cosmosFetcher = selectedChain.getCosmosfetcher() {
+            cosmosFetcher.fetchCosmosCw721()
         }
     }
     
@@ -75,7 +75,7 @@ class CosmosNftVC: BaseVC {
         let tag = notification.object as! String
         if (selectedChain != nil && selectedChain.tag == tag) {
             isBusy = false
-            nftGroup = selectedChain.getGrpcfetcher()?.cw721Models ?? []
+            nftGroup = selectedChain.getCosmosfetcher()?.cw721Models ?? []
             onUpdateView()
         }
     }

@@ -24,7 +24,7 @@ class QrAddressVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         isEvm = selectedChain.supportEvm
-        isBech = selectedChain.isCosmos()
+        isBech = selectedChain.supportCosmos
         
         titleLabel.text = baseAccount.name
         evmShareBtn.isHidden = !isEvm
@@ -98,7 +98,7 @@ extension QrAddressVC: UITableViewDelegate, UITableViewDataSource {
         var toCopyAddress = ""
         if selectedChain.supportEvm, indexPath.section == 0 {
             toCopyAddress = selectedChain.evmAddress!
-        } else if selectedChain.isCosmos(), indexPath.section == 1 {
+        } else if selectedChain.supportCosmos, indexPath.section == 1 {
             toCopyAddress = selectedChain.bechAddress!
         }
         UIPasteboard.general.string = toCopyAddress.trimmingCharacters(in: .whitespacesAndNewlines)

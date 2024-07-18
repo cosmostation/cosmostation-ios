@@ -73,7 +73,7 @@ class PushUtils {
         
         await account.initAllKeys().filter { $0.isTestnet == false }.forEach { chain in
             if let chainname = chain.apiName {
-                if (chain.isCosmos()) {
+                if (chain.supportCosmos) {
                     let pushAccount = PushAccount(chainname, chain.bechAddress!)
                     pushAccounts.append(pushAccount)
                 } else if (chain.supportEvm) {

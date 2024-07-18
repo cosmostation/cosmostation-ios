@@ -129,8 +129,6 @@
 		042DE6D92C19A0FA009CAC04 /* WalletConnectPairing in Frameworks */ = {isa = PBXBuildFile; productRef = 042DE6D82C19A0FA009CAC04 /* WalletConnectPairing */; };
 		042DE6DB2C19A109009CAC04 /* WalletConnect in Frameworks */ = {isa = PBXBuildFile; productRef = 042DE6DA2C19A109009CAC04 /* WalletConnect */; };
 		042DE6DD2C19A109009CAC04 /* WalletConnectPairing in Frameworks */ = {isa = PBXBuildFile; productRef = 042DE6DC2C19A109009CAC04 /* WalletConnectPairing */; };
-		042DE6F52C1D4DEA009CAC04 /* FetcherGrpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DE6F42C1D4DEA009CAC04 /* FetcherGrpc.swift */; };
-		042DE6F62C1D4DEA009CAC04 /* FetcherGrpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DE6F42C1D4DEA009CAC04 /* FetcherGrpc.swift */; };
 		042DE6F82C1D4DFC009CAC04 /* FetcherEvmrpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DE6F72C1D4DFC009CAC04 /* FetcherEvmrpc.swift */; };
 		042DE6F92C1D4DFC009CAC04 /* FetcherEvmrpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DE6F72C1D4DFC009CAC04 /* FetcherEvmrpc.swift */; };
 		042DE6FC2C1D7665009CAC04 /* ChainOkt996Keccak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DE6FA2C1D7664009CAC04 /* ChainOkt996Keccak.swift */; };
@@ -188,8 +186,6 @@
 		045032202C1ECAD900235F6A /* FetcherLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0450321E2C1ECAD900235F6A /* FetcherLcd.swift */; };
 		045032232C1EE85900235F6A /* OktFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032222C1EE85900235F6A /* OktFetcher.swift */; };
 		045032242C1EE85900235F6A /* OktFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032222C1EE85900235F6A /* OktFetcher.swift */; };
-		045032262C1EE88900235F6A /* NeutronFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032252C1EE88900235F6A /* NeutronFetcher.swift */; };
-		045032272C1EE88900235F6A /* NeutronFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032252C1EE88900235F6A /* NeutronFetcher.swift */; };
 		0450322B2C1EE98B00235F6A /* ChainBaseEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032282C1EE98B00235F6A /* ChainBaseEVM.swift */; };
 		0450322C2C1EE98B00235F6A /* ChainBaseEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032282C1EE98B00235F6A /* ChainBaseEVM.swift */; };
 		0450322D2C1EE98B00235F6A /* ChainArbitrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032292C1EE98B00235F6A /* ChainArbitrum.swift */; };
@@ -644,6 +640,22 @@
 		04806BC62BB06DCA0048F232 /* Cw721Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04806BC42BB06DCA0048F232 /* Cw721Model.swift */; };
 		04815BDE2A41DB120006A906 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 04815BDD2A41DB120006A906 /* SwiftProtobuf */; };
 		04815BE12A41DB410006A906 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 04815BE02A41DB410006A906 /* GRPC */; };
+		048B4A592C4523D200CE9766 /* CosmosGrpcFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A582C4523D200CE9766 /* CosmosGrpcFetcher.swift */; };
+		048B4A5A2C4523D200CE9766 /* CosmosGrpcFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A582C4523D200CE9766 /* CosmosGrpcFetcher.swift */; };
+		048B4A5C2C4523E200CE9766 /* CosmosLcdFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A5B2C4523E200CE9766 /* CosmosLcdFetcher.swift */; };
+		048B4A5D2C4523E200CE9766 /* CosmosLcdFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A5B2C4523E200CE9766 /* CosmosLcdFetcher.swift */; };
+		048B4A622C467E5E00CE9766 /* ChainLCDTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A612C467E5E00CE9766 /* ChainLCDTest.swift */; };
+		048B4A632C467E5E00CE9766 /* ChainLCDTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A612C467E5E00CE9766 /* ChainLCDTest.swift */; };
+		048B4A652C46BB1500CE9766 /* ChainARchLCDTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A642C46BB1500CE9766 /* ChainARchLCDTest.swift */; };
+		048B4A662C46BB1500CE9766 /* ChainARchLCDTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A642C46BB1500CE9766 /* ChainARchLCDTest.swift */; };
+		048B4A682C48EC1500CE9766 /* ChainStarTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A672C48EC1500CE9766 /* ChainStarTest.swift */; };
+		048B4A692C48EC1500CE9766 /* ChainStarTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A672C48EC1500CE9766 /* ChainStarTest.swift */; };
+		048B4A6B2C48FD8A00CE9766 /* NeutronGrpcFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A6A2C48FD8A00CE9766 /* NeutronGrpcFetcher.swift */; };
+		048B4A6C2C48FD8A00CE9766 /* NeutronGrpcFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A6A2C48FD8A00CE9766 /* NeutronGrpcFetcher.swift */; };
+		048B4A6E2C48FD9C00CE9766 /* NeutronLcdFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A6D2C48FD9C00CE9766 /* NeutronLcdFetcher.swift */; };
+		048B4A6F2C48FD9C00CE9766 /* NeutronLcdFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A6D2C48FD9C00CE9766 /* NeutronLcdFetcher.swift */; };
+		048B4A712C49113300CE9766 /* ChainNeutronLCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A702C49113300CE9766 /* ChainNeutronLCD.swift */; };
+		048B4A722C49113300CE9766 /* ChainNeutronLCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B4A702C49113300CE9766 /* ChainNeutronLCD.swift */; };
 		048DBCE2280EC5E90007275E /* MWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DBCE1280EC5E90007275E /* MWords.swift */; };
 		048F8DC92B285EC900432437 /* kava_router_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048F8DC72B285EC800432437 /* kava_router_v1beta1_tx.grpc.swift */; };
 		048F8DCA2B285EC900432437 /* kava_router_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048F8DC72B285EC800432437 /* kava_router_v1beta1_tx.grpc.swift */; };
@@ -2090,7 +2102,6 @@
 		042316C22C3CD8C100840A86 /* InjectionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionSheet.swift; sourceTree = "<group>"; };
 		042316C32C3CD8C100840A86 /* InjectionSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InjectionSheet.xib; sourceTree = "<group>"; };
 		042A174F2AB97AD900EF31C9 /* RedFixCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedFixCardView.swift; sourceTree = "<group>"; };
-		042DE6F42C1D4DEA009CAC04 /* FetcherGrpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetcherGrpc.swift; sourceTree = "<group>"; };
 		042DE6F72C1D4DFC009CAC04 /* FetcherEvmrpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetcherEvmrpc.swift; sourceTree = "<group>"; };
 		042DE6FA2C1D7664009CAC04 /* ChainOkt996Keccak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainOkt996Keccak.swift; sourceTree = "<group>"; };
 		042DE6FB2C1D7665009CAC04 /* ChainOkt996Secp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainOkt996Secp.swift; sourceTree = "<group>"; };
@@ -2120,7 +2131,6 @@
 		044ECB162A95C2E40042DB3C /* ChainAxelar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAxelar.swift; sourceTree = "<group>"; };
 		0450321E2C1ECAD900235F6A /* FetcherLcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetcherLcd.swift; sourceTree = "<group>"; };
 		045032222C1EE85900235F6A /* OktFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktFetcher.swift; sourceTree = "<group>"; };
-		045032252C1EE88900235F6A /* NeutronFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronFetcher.swift; sourceTree = "<group>"; };
 		045032282C1EE98B00235F6A /* ChainBaseEVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainBaseEVM.swift; sourceTree = "<group>"; };
 		045032292C1EE98B00235F6A /* ChainArbitrum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainArbitrum.swift; sourceTree = "<group>"; };
 		0450322A2C1EE98B00235F6A /* ChainAvalanche.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainAvalanche.swift; sourceTree = "<group>"; };
@@ -2347,6 +2357,14 @@
 		047F69372BE5FBCE00C3BC34 /* Portfolio2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio2Cell.swift; sourceTree = "<group>"; };
 		047F69382BE5FBCE00C3BC34 /* Portfolio2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Portfolio2Cell.xib; sourceTree = "<group>"; };
 		04806BC42BB06DCA0048F232 /* Cw721Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw721Model.swift; sourceTree = "<group>"; };
+		048B4A582C4523D200CE9766 /* CosmosGrpcFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosGrpcFetcher.swift; sourceTree = "<group>"; };
+		048B4A5B2C4523E200CE9766 /* CosmosLcdFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosLcdFetcher.swift; sourceTree = "<group>"; };
+		048B4A612C467E5E00CE9766 /* ChainLCDTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainLCDTest.swift; sourceTree = "<group>"; };
+		048B4A642C46BB1500CE9766 /* ChainARchLCDTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainARchLCDTest.swift; sourceTree = "<group>"; };
+		048B4A672C48EC1500CE9766 /* ChainStarTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStarTest.swift; sourceTree = "<group>"; };
+		048B4A6A2C48FD8A00CE9766 /* NeutronGrpcFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronGrpcFetcher.swift; sourceTree = "<group>"; };
+		048B4A6D2C48FD9C00CE9766 /* NeutronLcdFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronLcdFetcher.swift; sourceTree = "<group>"; };
+		048B4A702C49113300CE9766 /* ChainNeutronLCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainNeutronLCD.swift; sourceTree = "<group>"; };
 		048DBCE1280EC5E90007275E /* MWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWords.swift; sourceTree = "<group>"; };
 		048F8DC72B285EC800432437 /* kava_router_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_router_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
 		048F8DC82B285EC800432437 /* kava_router_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_router_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
@@ -3201,11 +3219,13 @@
 			isa = PBXGroup;
 			children = (
 				045CF9632C450D72000DAD08 /* CosmosFetcher.swift */,
-				042DE6F42C1D4DEA009CAC04 /* FetcherGrpc.swift */,
-				042DE6F72C1D4DFC009CAC04 /* FetcherEvmrpc.swift */,
+				048B4A582C4523D200CE9766 /* CosmosGrpcFetcher.swift */,
+				048B4A5B2C4523E200CE9766 /* CosmosLcdFetcher.swift */,
+				048B4A6A2C48FD8A00CE9766 /* NeutronGrpcFetcher.swift */,
+				048B4A6D2C48FD9C00CE9766 /* NeutronLcdFetcher.swift */,
 				0450321E2C1ECAD900235F6A /* FetcherLcd.swift */,
+				042DE6F72C1D4DFC009CAC04 /* FetcherEvmrpc.swift */,
 				045032222C1EE85900235F6A /* OktFetcher.swift */,
-				045032252C1EE88900235F6A /* NeutronFetcher.swift */,
 				0450332A2C252DD400235F6A /* KavaFetcher.swift */,
 			);
 			path = Fetcher;
@@ -3592,6 +3612,10 @@
 				04965B3C2C379A9C00403605 /* ChainArtelaEVM_T.swift */,
 				04965B422C37B3AE00403605 /* ChainInitia_T.swift */,
 				04965B482C37DC6200403605 /* ChainNillion_T.swift */,
+				048B4A612C467E5E00CE9766 /* ChainLCDTest.swift */,
+				048B4A642C46BB1500CE9766 /* ChainARchLCDTest.swift */,
+				048B4A672C48EC1500CE9766 /* ChainStarTest.swift */,
+				048B4A702C49113300CE9766 /* ChainNeutronLCD.swift */,
 			);
 			path = ClassTestnet;
 			sourceTree = "<group>";
@@ -5172,6 +5196,7 @@
 				042296822A890C9B003C7630 /* ChainKava118.swift in Sources */,
 				0400EEE22ADBE1D3007BA97F /* kava_pricefeed_v1beta1_tx.pb.swift in Sources */,
 				0409D2F62AC5DC6D0021E192 /* CosmosDelegate.swift in Sources */,
+				048B4A6C2C48FD8A00CE9766 /* NeutronGrpcFetcher.swift in Sources */,
 				E10B1DE52C215C120039283B /* NeutronMultiDao.swift in Sources */,
 				04D785532C328DB1009D1A94 /* feemarket_feemarket_module_v1_module.pb.swift in Sources */,
 				047843A62AC991B300462F1C /* injective_peggy_v1_params.pb.swift in Sources */,
@@ -5321,6 +5346,7 @@
 				18FFB332281AF533004E65BB /* KeyFac.swift in Sources */,
 				E10B1D882C2156430039283B /* KavaLendListMyCell.swift in Sources */,
 				04D782C12C2D28FF004B99CF /* AboutChainInfoCell.swift in Sources */,
+				048B4A5A2C4523D200CE9766 /* CosmosGrpcFetcher.swift in Sources */,
 				E10B1D9C2C2156430039283B /* KavaDefiVC.swift in Sources */,
 				04C816EB2BA98D75006B800A /* cosmos_orm_module_v1alpha1_module.pb.swift in Sources */,
 				045032892C1EEDCD00235F6A /* ChainBitsong.swift in Sources */,
@@ -5340,13 +5366,13 @@
 				04CD24752AD2E99A00497EF5 /* kava_bep3_v1beta1_query.pb.swift in Sources */,
 				045032832C1EEDCD00235F6A /* ChainCudos.swift in Sources */,
 				04C817DA2BA9917D006B800A /* cosmos_upgrade_v1beta1_query.pb.swift in Sources */,
+				048B4A6F2C48FD9C00CE9766 /* NeutronLcdFetcher.swift in Sources */,
 				04B789F12ACB3FC900E9BE88 /* BaseSheetHeader.swift in Sources */,
 				E162004E2AF27C250008F397 /* AddressBookCell.swift in Sources */,
 				04E165BB28B61BE1000F12C0 /* MintscanAsset.swift in Sources */,
 				04B7898A2ACAC9B100E9BE88 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
 				0400EF0E2ADBF03B007BA97F /* kava_hard_v1beta1_tx.grpc.swift in Sources */,
 				04C8178B2BA98D75006B800A /* cosmos_evidence_v1beta1_query.pb.swift in Sources */,
-				042DE6F62C1D4DEA009CAC04 /* FetcherGrpc.swift in Sources */,
 				04C817912BA98D75006B800A /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,
 				04965B4D2C37DCF600403605 /* ChainNillion.swift in Sources */,
 				0400EF402ADD49BB007BA97F /* kava_swap_v1beta1_query.pb.swift in Sources */,
@@ -5428,6 +5454,7 @@
 				04C817512BA98D75006B800A /* cosmos_bank_v1beta1_query.pb.swift in Sources */,
 				E10B1DF42C215E250039283B /* NeutronVote.swift in Sources */,
 				04C816492BA98D74006B800A /* cosmos_base_reflection_v2alpha1_reflection.grpc.swift in Sources */,
+				048B4A632C467E5E00CE9766 /* ChainLCDTest.swift in Sources */,
 				E13FC5542B26C79A0082C66E /* kava_earn_v1beta1_strategy.pb.swift in Sources */,
 				04C816DF2BA98D75006B800A /* cosmos_base_kv_v1beta1_kv.pb.swift in Sources */,
 				04C817BF2BA98D75006B800A /* cosmos_distribution_v1beta1_genesis.pb.swift in Sources */,
@@ -5499,6 +5526,7 @@
 				047F693B2BE5FBCE00C3BC34 /* Portfolio2Cell.swift in Sources */,
 				0450323E2C1EEA9600235F6A /* ChainKavaEVM.swift in Sources */,
 				045032D32C1EFE3F00235F6A /* ChainNibiru.swift in Sources */,
+				048B4A722C49113300CE9766 /* ChainNeutronLCD.swift in Sources */,
 				04B7893C2ACAC9B100E9BE88 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
 				E1E0DBC72A9B0FE3006DA6BB /* HistoryCell.swift in Sources */,
 				04D279EB2A67C96500AF046A /* ChainCosmos.swift in Sources */,
@@ -5613,6 +5641,7 @@
 				04D7854B2C328DB1009D1A94 /* feemarket_feemarket_v1_params.pb.swift in Sources */,
 				0478430C2AC9918700462F1C /* ethermint_feemarket_v1_genesis.pb.swift in Sources */,
 				0402B7E72ACC132200824B3F /* CosmosCompounding.swift in Sources */,
+				048B4A662C46BB1500CE9766 /* ChainARchLCDTest.swift in Sources */,
 				0478438C2AC991B300462F1C /* injective_peggy_v1_msgs.grpc.swift in Sources */,
 				045032C22C1EFCE700235F6A /* ChainMedibloc.swift in Sources */,
 				04951DC42B7F6E6200A03FB1 /* QrAddressPopup2VC.swift in Sources */,
@@ -5669,6 +5698,7 @@
 				0478431E2AC9918700462F1C /* ethermint_types_v1_indexer.pb.swift in Sources */,
 				E15F2CFF2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift in Sources */,
 				04C816DB2BA98D75006B800A /* cosmos_base_reflection_v1beta1_reflection.grpc.swift in Sources */,
+				048B4A5D2C4523E200CE9766 /* CosmosLcdFetcher.swift in Sources */,
 				04CD24732AD2E99A00497EF5 /* kava_bep3_v1beta1_bep3.pb.swift in Sources */,
 				046EA8E22AD04A2600A2FCE7 /* desmos_profiles_v3_query_params.pb.swift in Sources */,
 				E10B1D7C2C2156430039283B /* KavaEarnListMyCell.swift in Sources */,
@@ -5827,7 +5857,6 @@
 				047843D42AC991B300462F1C /* injective_tokenfactory_v1beta1_genesis.pb.swift in Sources */,
 				045032302C1EE98B00235F6A /* ChainAvalanche.swift in Sources */,
 				79FCA3C32C3F9E92001C17D0 /* artela_types_v1_account.pb.swift in Sources */,
-				045032272C1EE88900235F6A /* NeutronFetcher.swift in Sources */,
 				0450329D2C1EEFCA00235F6A /* ChainFinschia.swift in Sources */,
 				04C816A92BA98D75006B800A /* cosmos_circuit_v1_types.pb.swift in Sources */,
 				E1831BA52AB82FE60078A28B /* ManageChainCell.swift in Sources */,
@@ -5939,6 +5968,7 @@
 				048F8DCA2B285EC900432437 /* kava_router_v1beta1_tx.grpc.swift in Sources */,
 				04B789A02ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift in Sources */,
 				79FCA3B92C3F9E92001C17D0 /* artela_types_v1_web3.pb.swift in Sources */,
+				048B4A692C48EC1500CE9766 /* ChainStarTest.swift in Sources */,
 				79FCA3D32C3F9E92001C17D0 /* artela_fee_v1_query.grpc.swift in Sources */,
 				18FFB66B281AF533004E65BB /* Account.swift in Sources */,
 				04CB91342A910BDC00375354 /* CardViewCell.swift in Sources */,
@@ -5973,6 +6003,7 @@
 				042296812A890C9B003C7630 /* ChainKava118.swift in Sources */,
 				0400EEE12ADBE1D3007BA97F /* kava_pricefeed_v1beta1_tx.pb.swift in Sources */,
 				0409D2F52AC5DC6D0021E192 /* CosmosDelegate.swift in Sources */,
+				048B4A6B2C48FD8A00CE9766 /* NeutronGrpcFetcher.swift in Sources */,
 				E10B1DE42C215C120039283B /* NeutronMultiDao.swift in Sources */,
 				04D785522C328DB1009D1A94 /* feemarket_feemarket_module_v1_module.pb.swift in Sources */,
 				047843A52AC991B300462F1C /* injective_peggy_v1_params.pb.swift in Sources */,
@@ -6122,6 +6153,7 @@
 				047843F32AC9A1B500462F1C /* ChainArchway.swift in Sources */,
 				E10B1D872C2156430039283B /* KavaLendListMyCell.swift in Sources */,
 				04D782C02C2D28FF004B99CF /* AboutChainInfoCell.swift in Sources */,
+				048B4A592C4523D200CE9766 /* CosmosGrpcFetcher.swift in Sources */,
 				E10B1D9B2C2156430039283B /* KavaDefiVC.swift in Sources */,
 				E1945E50222E842B00A1436F /* BaseVC.swift in Sources */,
 				045032882C1EEDCD00235F6A /* ChainBitsong.swift in Sources */,
@@ -6141,13 +6173,13 @@
 				E13FC5572B26C79A0082C66E /* kava_earn_v1beta1_params.pb.swift in Sources */,
 				045032822C1EEDCD00235F6A /* ChainCudos.swift in Sources */,
 				04C817D92BA9917D006B800A /* cosmos_upgrade_v1beta1_query.pb.swift in Sources */,
+				048B4A6E2C48FD9C00CE9766 /* NeutronLcdFetcher.swift in Sources */,
 				04CD24472AD11D3400497EF5 /* LegacyTransfer.swift in Sources */,
 				04CD24742AD2E99A00497EF5 /* kava_bep3_v1beta1_query.pb.swift in Sources */,
 				04B789F02ACB3FC900E9BE88 /* BaseSheetHeader.swift in Sources */,
 				E162004D2AF27C250008F397 /* AddressBookCell.swift in Sources */,
 				0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */,
 				04C8178A2BA98D75006B800A /* cosmos_evidence_v1beta1_query.pb.swift in Sources */,
-				042DE6F52C1D4DEA009CAC04 /* FetcherGrpc.swift in Sources */,
 				04C817902BA98D75006B800A /* cosmos_base_tendermint_v1beta1_types.pb.swift in Sources */,
 				04965B4C2C37DCF600403605 /* ChainNillion.swift in Sources */,
 				04B789892ACAC9B100E9BE88 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
@@ -6229,6 +6261,7 @@
 				04C817502BA98D75006B800A /* cosmos_bank_v1beta1_query.pb.swift in Sources */,
 				E10B1DF32C215E250039283B /* NeutronVote.swift in Sources */,
 				04C816482BA98D74006B800A /* cosmos_base_reflection_v2alpha1_reflection.grpc.swift in Sources */,
+				048B4A622C467E5E00CE9766 /* ChainLCDTest.swift in Sources */,
 				E122DC522A8A4712006D1E7B /* tendermint_libs_bits_types.pb.swift in Sources */,
 				04C816DE2BA98D75006B800A /* cosmos_base_kv_v1beta1_kv.pb.swift in Sources */,
 				04C817BE2BA98D75006B800A /* cosmos_distribution_v1beta1_genesis.pb.swift in Sources */,
@@ -6300,6 +6333,7 @@
 				046EA8552AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
 				0450323D2C1EEA9600235F6A /* ChainKavaEVM.swift in Sources */,
 				045032D22C1EFE3F00235F6A /* ChainNibiru.swift in Sources */,
+				048B4A712C49113300CE9766 /* ChainNeutronLCD.swift in Sources */,
 				047F693A2BE5FBCE00C3BC34 /* Portfolio2Cell.swift in Sources */,
 				04B7893B2ACAC9B100E9BE88 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
 				E1E0DBC62A9B0FE3006DA6BB /* HistoryCell.swift in Sources */,
@@ -6414,6 +6448,7 @@
 				04D7854A2C328DB1009D1A94 /* feemarket_feemarket_v1_params.pb.swift in Sources */,
 				04C8171E2BA98D75006B800A /* cosmos_slashing_module_v1_module.pb.swift in Sources */,
 				0402B7E62ACC132200824B3F /* CosmosCompounding.swift in Sources */,
+				048B4A652C46BB1500CE9766 /* ChainARchLCDTest.swift in Sources */,
 				0478438B2AC991B300462F1C /* injective_peggy_v1_msgs.grpc.swift in Sources */,
 				045032C12C1EFCE700235F6A /* ChainMedibloc.swift in Sources */,
 				04951DC32B7F6E6200A03FB1 /* QrAddressPopup2VC.swift in Sources */,
@@ -6470,6 +6505,7 @@
 				0478431D2AC9918700462F1C /* ethermint_types_v1_indexer.pb.swift in Sources */,
 				E15F2CFE2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift in Sources */,
 				04CD24722AD2E99A00497EF5 /* kava_bep3_v1beta1_bep3.pb.swift in Sources */,
+				048B4A5C2C4523E200CE9766 /* CosmosLcdFetcher.swift in Sources */,
 				04C816DA2BA98D75006B800A /* cosmos_base_reflection_v1beta1_reflection.grpc.swift in Sources */,
 				04C63D1C2B839D3900D4A366 /* TxSendAmountSheet.swift in Sources */,
 				E10B1D7B2C2156430039283B /* KavaEarnListMyCell.swift in Sources */,
@@ -6628,7 +6664,6 @@
 				04C816A82BA98D75006B800A /* cosmos_circuit_v1_types.pb.swift in Sources */,
 				0450322F2C1EE98B00235F6A /* ChainAvalanche.swift in Sources */,
 				79FCA3C22C3F9E92001C17D0 /* artela_types_v1_account.pb.swift in Sources */,
-				045032262C1EE88900235F6A /* NeutronFetcher.swift in Sources */,
 				0450329C2C1EEFCA00235F6A /* ChainFinschia.swift in Sources */,
 				E1831BA42AB82FE60078A28B /* ManageChainCell.swift in Sources */,
 				04FAD9E22AB6D8ED00143A3E /* ChainListVC.swift in Sources */,
@@ -6740,6 +6775,7 @@
 				048F8DC92B285EC900432437 /* kava_router_v1beta1_tx.grpc.swift in Sources */,
 				04B7899F2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift in Sources */,
 				79FCA3B82C3F9E92001C17D0 /* artela_types_v1_web3.pb.swift in Sources */,
+				048B4A682C48EC1500CE9766 /* ChainStarTest.swift in Sources */,
 				79FCA3D22C3F9E92001C17D0 /* artela_fee_v1_query.grpc.swift in Sources */,
 				E1A82DD1224220910097CAEE /* Account.swift in Sources */,
 				04CB91332A910BDC00375354 /* CardViewCell.swift in Sources */,

@@ -83,15 +83,15 @@ class CosmosTokenVC: BaseVC {
     func onUpdateView() {
         self.mintscanCw20Tokens.removeAll()
         self.mintscanErc20Tokens.removeAll()
-        if let grpcFetcher = selectedChain.getGrpcfetcher() {
-            grpcFetcher.mintscanCw20Tokens.forEach { tokenInfo in
+        if let cosmosFetcher = selectedChain.getCosmosfetcher() {
+            cosmosFetcher.mintscanCw20Tokens.forEach { tokenInfo in
                 if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
                     mintscanCw20Tokens.append(tokenInfo)
                 }
             }
             mintscanCw20Tokens.sort {
-                let value0 = grpcFetcher.tokenValue($0.address!)
-                let value1 = grpcFetcher.tokenValue($1.address!)
+                let value0 = cosmosFetcher.tokenValue($0.address!)
+                let value1 = cosmosFetcher.tokenValue($1.address!)
                 return value0.compare(value1).rawValue > 0 ? true : false
             }
         }

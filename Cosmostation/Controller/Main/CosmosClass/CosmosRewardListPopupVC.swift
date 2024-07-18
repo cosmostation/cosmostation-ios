@@ -27,8 +27,8 @@ class CosmosRewardListPopupVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        if let grpcFetcher = selectedChain.getGrpcfetcher() {
-            rewardCoins = grpcFetcher.rewardAllCoins()
+        if let cosmosFetcher = selectedChain.getCosmosfetcher() {
+            rewardCoins = cosmosFetcher.rewardAllCoins()
             rewardCoins.sort {
                 if ($0.denom == selectedChain.stakeDenom) { return true }
                 if ($1.denom == selectedChain.stakeDenom) { return false }

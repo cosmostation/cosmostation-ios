@@ -55,8 +55,7 @@ class BaseChain {
     var allTokenUSDValue = NSDecimalNumber.zero
     
     var fetchState = FetchState.Idle
-    var grpcFetcher: FetcherGrpc?
-    var lcdFetcher: FetcherLcd?
+    var cosmosFetcher: CosmosFetcher?
     var evmFetcher: FetcherEvmrpc?
     
     var coinsCnt = 0
@@ -83,30 +82,24 @@ class BaseChain {
             
         } else {
             evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-            if (isCosmos()) {
+            if (supportCosmos) {
                 bechAddress = KeyFac.convertEvmToBech32(evmAddress!, bechAccountPrefix!)
             }
         }
         
-        if (isCosmos() && supportStaking) {
+        if (supportCosmos && supportStaking) {
             bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, validatorPrefix)
         }
     }
     
-    func getGrpcfetcher() -> FetcherGrpc? {
-        if (supportCosmosGrpc != true) { return nil }
-        if (grpcFetcher == nil) {
-            grpcFetcher = FetcherGrpc.init(self)
+    func getCosmosfetcher() -> CosmosFetcher? {
+        if (cosmosFetcher != nil) { return cosmosFetcher }
+        if (supportCosmosGrpc) {
+            cosmosFetcher = CosmosGrpcFetcher(self)
+        } else if (supportCosmosLcd) {
+            cosmosFetcher = CosmosLcdFetcher(self)
         }
-        return grpcFetcher
-    }
-    
-    func getLcdfetcher() -> FetcherLcd? {
-        if (supportCosmosLcd != true) { return nil }
-        if (lcdFetcher == nil) {
-            lcdFetcher = FetcherLcd.init(self)
-        }
-        return lcdFetcher
+        return cosmosFetcher
     }
     
     func getEvmfetcher() -> FetcherEvmrpc? {
@@ -117,47 +110,80 @@ class BaseChain {
         return evmFetcher
     }
     
+    //fetch only balance for add account check
+    func fetchBalances() {
+        fetchState = .Busy
+        Task {
+            coinsCnt = 0
+            var evmResult: Bool?
+            var cosmosResult: Bool?
+            
+            if (supportEvm == true) {
+                evmResult = await getEvmfetcher()?.fetchBalances()
+                coinsCnt = getEvmfetcher()?.valueCoinCnt() ?? 0
+            }
+            if (supportCosmos == true) {
+                cosmosResult = await getCosmosfetcher()?.fetchBalances()
+                coinsCnt = getCosmosfetcher()?.valueCoinCnt() ?? 0
+            }
+            if (evmResult == false || cosmosResult == false) {
+                fetchState = .Fail
+            } else {
+                fetchState = .Success
+            }
+            
+            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
+                cosmosFetcher.onCheckCosmosVesting()
+            }
+            
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
+            })
+        }
+    }
+    
     func fetchData(_ id: Int64) {
         fetchState = .Busy
         Task {
-            var evmResult: Bool?
-            var grpcResult: Bool?
             coinsCnt = 0
             tokensCnt = 0
+            var evmResult: Bool?
+            var cosmosResult: Bool?
             
             if (supportEvm == true) {
                 evmResult = await getEvmfetcher()?.fetchEvmData(id)
             }
-            if (supportCosmosGrpc == true) {
-                grpcResult = await getGrpcfetcher()?.fetchGrpcData(id)
+            if (supportCosmos == true) {
+                cosmosResult = await getCosmosfetcher()?.fetchCosmosData(id)
             }
-            if (evmResult == false || grpcResult == false) {
+            if (evmResult == false || cosmosResult == false) {
                 fetchState = .Fail
-//                print("fetching Some error ", tag)
             } else {
                 fetchState = .Success
-//                print("fetching good ", tag)
+            }
+            
+            
+            
+            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
+                cosmosFetcher.onCheckCosmosVesting()
             }
             
             if (self.fetchState == .Success) {
-                if let grpcFetcher = getGrpcfetcher() {
-                    grpcFetcher.onCheckVesting()
-                }
                 var coinsValue = NSDecimalNumber.zero
                 var coinsUSDValue = NSDecimalNumber.zero
                 var mainCoinAmount = NSDecimalNumber.zero
                 var tokensValue = NSDecimalNumber.zero
                 var tokensUSDValue = NSDecimalNumber.zero
                 
-                if (supportEvm && supportCosmosGrpc) {
-                    if let grpcFetcher = getGrpcfetcher() {
-                        coinsCnt = grpcFetcher.valueCoinCnt()
-                        coinsValue = grpcFetcher.allCoinValue()
-                        coinsUSDValue = grpcFetcher.allCoinValue(true)
-                        mainCoinAmount = grpcFetcher.allStakingDenomAmount()
-                        tokensCnt = grpcFetcher.valueTokenCnt()
-                        tokensValue = grpcFetcher.allTokenValue()
-                        tokensUSDValue = grpcFetcher.allTokenValue(true)
+                if (supportEvm && supportCosmos) {
+                    if let cosmosFetcher = getCosmosfetcher() {
+                        coinsCnt = cosmosFetcher.valueCoinCnt()
+                        coinsValue = cosmosFetcher.allCoinValue()
+                        coinsUSDValue = cosmosFetcher.allCoinValue(true)
+                        mainCoinAmount = cosmosFetcher.allStakingDenomAmount()
+                        tokensCnt = cosmosFetcher.valueTokenCnt()
+                        tokensValue = cosmosFetcher.allTokenValue()
+                        tokensUSDValue = cosmosFetcher.allTokenValue(true)
                     }
                     if let evmFetcher = getEvmfetcher() {
                         tokensCnt = tokensCnt + evmFetcher.valueTokenCnt()
@@ -165,15 +191,15 @@ class BaseChain {
                         tokensUSDValue = tokensUSDValue.adding(evmFetcher.allTokenValue(true))
                     }
                     
-                } else if (supportCosmosGrpc) {
-                    if let grpcFetcher = getGrpcfetcher() {
-                        coinsCnt = grpcFetcher.valueCoinCnt()
-                        coinsValue = grpcFetcher.allCoinValue()
-                        coinsUSDValue = grpcFetcher.allCoinValue(true)
-                        mainCoinAmount = grpcFetcher.allStakingDenomAmount()
-                        tokensCnt = grpcFetcher.valueTokenCnt()
-                        tokensValue = grpcFetcher.allTokenValue()
-                        tokensUSDValue = grpcFetcher.allTokenValue(true)
+                } else if (supportCosmos) {
+                    if let cosmosFetcher = getCosmosfetcher() {
+                        coinsCnt = cosmosFetcher.valueCoinCnt()
+                        coinsValue = cosmosFetcher.allCoinValue()
+                        coinsUSDValue = cosmosFetcher.allCoinValue(true)
+                        mainCoinAmount = cosmosFetcher.allStakingDenomAmount()
+                        tokensCnt = cosmosFetcher.valueTokenCnt()
+                        tokensValue = cosmosFetcher.allTokenValue()
+                        tokensUSDValue = cosmosFetcher.allTokenValue(true)
                     }
                     
                 } else if (supportEvm) {
@@ -196,9 +222,7 @@ class BaseChain {
                     RefAddress(id, self.tag, self.bechAddress ?? "", self.evmAddress ?? "",
                                mainCoinAmount.stringValue, allCoinUSDValue.stringValue, allTokenUSDValue.stringValue,
                                coinsCnt))
-                
             }
-            
             DispatchQueue.main.async(execute: {
 //                print("", self.tag, " FetchData post")
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
@@ -209,10 +233,11 @@ class BaseChain {
     func fetchValidatorInfos() {
         Task {
             if (name == "OKT") {
-                _  = await getLcdfetcher()?.fetchValidators()
+                //TODO YONG
+//                _  = await getLcdfetcher()?.fetchValidators()
                 
-            } else if (supportCosmosGrpc == true && supportStaking == true) {
-                _ = await getGrpcfetcher()?.fetchValidators()
+            } else if (supportCosmos == true && supportStaking == true) {
+                _ = await getCosmosfetcher()?.fetchValidators()
             }
             
             DispatchQueue.main.async(execute: {
@@ -221,58 +246,22 @@ class BaseChain {
         }
     }
     
-    //fetch only balance for add account check
-    func fetchBalances() {
-        fetchState = .Busy
-        Task {
-            coinsCnt = 0
-            var evmResult: Bool?
-            var grpcResult: Bool?
-            
-            if (supportEvm == true) {
-                evmResult = await getEvmfetcher()?.fetchBalances()
-            }
-            if (supportCosmosGrpc == true) {
-                grpcResult = await getGrpcfetcher()?.fetchBalances()
-            }
-            if (evmResult == false || grpcResult == false) {
-                fetchState = .Fail
-            } else {
-                fetchState = .Success
-            }
-            
-            if (self.fetchState == .Success) {
-                if (supportCosmosGrpc) {
-                    if let grpcFetcher = getGrpcfetcher() {
-                        coinsCnt = grpcFetcher.valueCoinCnt()
-                    }
-                    
-                } else if (supportEvm) {
-                    if let evmFetcher = getEvmfetcher() {
-                        coinsCnt = evmFetcher.valueCoinCnt()
-                    }
-                }
-            }
-            
-            DispatchQueue.main.async(execute: {
-                NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
-            })
-        }
-    }
+    
     
     func isTxFeePayable() -> Bool {
         if (name == "OKT") {
-            let availableAmount = getLcdfetcher()?.lcdBalanceAmount(stakeDenom!) ?? NSDecimalNumber.zero
-            return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
+            //TODO YONG
+//            let availableAmount = getLcdfetcher()?.lcdBalanceAmount(stakeDenom!) ?? NSDecimalNumber.zero
+//            return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
             
         } else if (supportEvm) {
             return getEvmfetcher()?.evmBalances.compare(EVM_BASE_FEE).rawValue ?? 0 > 0
             
-        } else if (supportCosmosGrpc) {
+        } else if (supportCosmos) {
             var result = false
-            if (getGrpcfetcher()?.cosmosBaseFees.count ?? 0 > 0) {
-                getGrpcfetcher()?.cosmosBaseFees.forEach({ basefee in
-                    let availaAmount = getGrpcfetcher()?.balanceAmount(basefee.denom) ?? NSDecimalNumber.zero
+            if (getCosmosfetcher()?.cosmosBaseFees.count ?? 0 > 0) {
+                getCosmosfetcher()?.cosmosBaseFees.forEach({ basefee in
+                    let availaAmount = getCosmosfetcher()?.balanceAmount(basefee.denom) ?? NSDecimalNumber.zero
                     let minFeeAmount = basefee.getdAmount().multiplying(by: getFeeBaseGasAmount(), withBehavior: handler0Down)
                     if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
                         result = true
@@ -282,7 +271,7 @@ class BaseChain {
                 
             } else {
                 getDefaultFeeCoins().forEach { minFee in
-                    let availaAmount = getGrpcfetcher()?.balanceAmount(minFee.denom) ?? NSDecimalNumber.zero
+                    let availaAmount = getCosmosfetcher()?.balanceAmount(minFee.denom) ?? NSDecimalNumber.zero
                     let minFeeAmount = NSDecimalNumber.init(string: minFee.amount)
                     if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
                         result = true
@@ -295,17 +284,16 @@ class BaseChain {
         return false
     }
     
-
-    func isCosmos() -> Bool {
-        return supportCosmosGrpc || supportCosmosLcd
-    }
-    
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
         if (usd == true) {
             return allCoinUSDValue.adding(allTokenUSDValue)
         } else {
             return allCoinValue.adding(allTokenValue)
         }
+    }
+    
+    var supportCosmos: Bool {
+        return supportCosmosGrpc || supportCosmosLcd
     }
     
 }
@@ -420,11 +408,11 @@ extension BaseChain {
     
     //get first payable fee with this account
     func getInitPayableFee() -> Cosmos_Tx_V1beta1_Fee? {
-        guard let grpcFetcher = getGrpcfetcher() else { return nil }
+        guard let cosmosFetcher = getCosmosfetcher() else { return nil }
         var feeCoin: Cosmos_Base_V1beta1_Coin?
         for i in 0..<getDefaultFeeCoins().count {
             let minFee = getDefaultFeeCoins()[i]
-            if (grpcFetcher.balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+            if (cosmosFetcher.balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
                 feeCoin = minFee
                 break
             }
@@ -458,7 +446,7 @@ extension BaseChain {
     
     
     func evmGasMultiply() -> BigUInt {
-        if let mutiply = getChainListParam()["evm_fee"]["simul_gas_multiply"].int {
+        if let mutiply = getChainListParam()["evm_fee"]["simul_gas_multiply"].double {
             return BigUInt(mutiply * 10)
         }
         return 13
@@ -470,7 +458,7 @@ extension BaseChain {
 extension BaseChain {
     
     func getExplorerAccount() -> URL? {
-        let address: String = isCosmos() ? bechAddress! : evmAddress!
+        let address: String = supportCosmos ? bechAddress! : evmAddress!
         if let urlString = getChainListParam()["explorer"]["account"].string,
            let url = URL(string: urlString.replacingOccurrences(of: "${address}", with: address)) {
             return url
@@ -503,106 +491,109 @@ extension BaseChain {
 func ALLCHAINS() -> [BaseChain] {
     var result = [BaseChain]()
     
-    result.append(ChainCosmos())
-    result.append(ChainAkash())
-    result.append(ChainAltheaEVM())                     //EVM
-    result.append(ChainAlthea118())
-    result.append(ChainArbitrum())                      //EVM
+//    result.append(ChainCosmos())
+//    result.append(ChainAkash())
+//    result.append(ChainAltheaEVM())                     //EVM
+//    result.append(ChainAlthea118())
+//    result.append(ChainArbitrum())                      //EVM
     result.append(ChainArchway())
-    //result.append(ChainArtelaEVM())                   //EVM
-    result.append(ChainAssetMantle())
-    result.append(ChainAvalanche())                     //EVM
-    result.append(ChainAxelar())
-    result.append(ChainBand())
-    result.append(ChainBaseEVM())                       //EVM
-    result.append(ChainBinanceSmart())                  //EVM
-    result.append(ChainBitcana())
-    result.append(ChainBitsong())
-    result.append(ChainCantoEVM())                      //EVM
-    result.append(ChainCelestia())
-    result.append(ChainChihuahua())
-    result.append(ChainCoreum())
-    // result.append(ChainCrescent())
-    result.append(ChainCronos())                        //EVM
-    result.append(ChainCryptoorg())
-    result.append(ChainCudos())
-    result.append(ChainDesmos())
-    result.append(ChainDydx())
-    result.append(ChainDymensionEVM())                  //EVM
-    // result.append(ChainEmoney())
-    result.append(ChainEthereum())                      //EVM
-    result.append(ChainEvmosEVM())                      //EVM
-    result.append(ChainFetchAi())
-    result.append(ChainFetchAi60Old())
-    result.append(ChainFetchAi60Secp())
-    result.append(ChainFinschia())
-    result.append(ChainGovgen())
+//    //result.append(ChainArtelaEVM())                   //EVM
+//    result.append(ChainAssetMantle())
+//    result.append(ChainAvalanche())                     //EVM
+//    result.append(ChainAxelar())
+//    result.append(ChainBand())
+//    result.append(ChainBaseEVM())                       //EVM
+//    result.append(ChainBinanceSmart())                  //EVM
+//    result.append(ChainBitcana())
+//    result.append(ChainBitsong())
+//    result.append(ChainCantoEVM())                      //EVM
+//    result.append(ChainCelestia())
+//    result.append(ChainChihuahua())
+//    result.append(ChainCoreum())
+//    // result.append(ChainCrescent())
+//    result.append(ChainCronos())                        //EVM
+//    result.append(ChainCryptoorg())
+//    result.append(ChainCudos())
+//    result.append(ChainDesmos())
+//    result.append(ChainDydx())
+//    result.append(ChainDymensionEVM())                  //EVM
+//    // result.append(ChainEmoney())
+//    result.append(ChainEthereum())                      //EVM
+//    result.append(ChainEvmosEVM())                      //EVM
+//    result.append(ChainFetchAi())
+//    result.append(ChainFetchAi60Old())
+//    result.append(ChainFetchAi60Secp())
+//    result.append(ChainFinschia())
+//    result.append(ChainGovgen())
     result.append(ChainGravityBridge())
-    result.append(ChainHumansEVM())                     //EVM
-    result.append(ChainInjective())
-    //result.append(ChainInitia())
-    result.append(ChainIris())
-    result.append(ChainIxo())
-    result.append(ChainJuno())
-    result.append(ChainKavaEVM())                       //EVM
-    result.append(ChainKava459())
-    result.append(ChainKava118())
-    result.append(ChainKi())
-    result.append(ChainKyve())
-    result.append(ChainLava())
-    result.append(ChainLike())
-    result.append(ChainLum118())
-    result.append(ChainLum880())
-    result.append(ChainMars())
-    result.append(ChainMedibloc())
+//    result.append(ChainHumansEVM())                     //EVM
+//    result.append(ChainInjective())
+//    //result.append(ChainInitia())
+//    result.append(ChainIris())
+//    result.append(ChainIxo())
+//    result.append(ChainJuno())
+//    result.append(ChainKavaEVM())                       //EVM
+//    result.append(ChainKava459())
+//    result.append(ChainKava118())
+//    result.append(ChainKi())
+//    result.append(ChainKyve())
+//    result.append(ChainLava())
+//    result.append(ChainLike())
+//    result.append(ChainLum118())
+//    result.append(ChainLum880())
+//    result.append(ChainMars())
+//    result.append(ChainMedibloc())
     result.append(ChainNeutron())
-    result.append(ChainNibiru())
-    //result.append(ChainNillion())
-    result.append(ChainNoble())
-    result.append(ChainNyx())
+//    result.append(ChainNibiru())
+//    //result.append(ChainNillion())
+//    result.append(ChainNoble())
+//    result.append(ChainNyx())
     result.append(ChainOktEVM())                        //EVM
     result.append(ChainOkt996Keccak())                  //LCD
     result.append(ChainOkt996Secp())                    //LCD
-    result.append(ChainOmniflix())
-    result.append(ChainOnomy())
-    result.append(ChainOptimism())                      //EVM
-    result.append(ChainOsmosis())
-    result.append(ChainPassage())
-    result.append(ChainPersistence118())
-    result.append(ChainPersistence750())
-    result.append(ChainPolygon())                       //EVM
-    result.append(ChainProvenance())
-    result.append(ChainQuasar())
-    result.append(ChainQuicksilver())
-    result.append(ChainRegen())
-    result.append(ChainRizon())
-    result.append(ChainSaga())
-    result.append(ChainSecret118())
-    result.append(ChainSecret529())
-    result.append(ChainSei())
-    result.append(ChainSentinel())
-    result.append(ChainShentu())
-    result.append(ChainSommelier())
-    result.append(ChainStafi())
+//    result.append(ChainOmniflix())
+//    result.append(ChainOnomy())
+//    result.append(ChainOptimism())                      //EVM
+//    result.append(ChainOsmosis())
+//    result.append(ChainPassage())
+//    result.append(ChainPersistence118())
+//    result.append(ChainPersistence750())
+//    result.append(ChainPolygon())                       //EVM
+//    result.append(ChainProvenance())
+//    result.append(ChainQuasar())
+//    result.append(ChainQuicksilver())
+//    result.append(ChainRegen())
+//    result.append(ChainRizon())
+//    result.append(ChainSaga())
+//    result.append(ChainSecret118())
+//    result.append(ChainSecret529())
+//    result.append(ChainSei())
+//    result.append(ChainSentinel())
+//    result.append(ChainShentu())
+//    result.append(ChainSommelier())
+//    result.append(ChainStafi())
     result.append(ChainStargaze())
-    // result.append(ChainStarname())
-    result.append(ChainStride())
-    result.append(ChainTeritori())
-    result.append(ChainTerra())
-    result.append(ChainUmee())
-    result.append(ChainXplaEVM())                       //EVM
-    result.append(ChainXpla())
+//    // result.append(ChainStarname())
+//    result.append(ChainStride())
+//    result.append(ChainTeritori())
+//    result.append(ChainTerra())
+//    result.append(ChainUmee())
+//    result.append(ChainXplaEVM())                       //EVM
+//    result.append(ChainXpla())
 
     
     
+    result.append(ChainLCDTest())
+    result.append(ChainARchLCDTest())
+    result.append(ChainStarTest())
+    result.append(ChainNeutronLCD())
     
-    
-    result.append(ChainCosmos_T())
-    result.append(ChainArtelaEVM_T())
-    //result.append(ChainInitia_T())
-    //result.append(ChainBeraEVM_T())
-    result.append(ChainNeutron_T())
-    result.append(ChainNillion_T())
+//    result.append(ChainCosmos_T())
+//    result.append(ChainArtelaEVM_T())
+//    //result.append(ChainInitia_T())
+//    //result.append(ChainBeraEVM_T())
+//    result.append(ChainNeutron_T())
+//    result.append(ChainNillion_T())
     
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {

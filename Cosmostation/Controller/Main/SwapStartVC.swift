@@ -160,8 +160,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             })
             outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == lastSwapSet[3] }.first ?? outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first!
             
-            _ = await inputCosmosChain.getGrpcfetcher()?.fetchBalances()
-            _ = await outputCosmosChain.getGrpcfetcher()?.fetchBalances()
+            _ = await inputCosmosChain.getCosmosfetcher()?.fetchBalances()
+            _ = await outputCosmosChain.getCosmosfetcher()?.fetchBalances()
             
             DispatchQueue.main.async {
                 self.onInitView()
@@ -227,7 +227,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         inputAssetImg.af.setImage(withURL: inputMsAsset.assetImg())
         inputAssetLabel.text = inputMsAsset.symbol
         
-        let inputBlance = inputCosmosChain.getGrpcfetcher()!.balanceAmount(inputDenom)
+        let inputBlance = inputCosmosChain.getCosmosfetcher()!.balanceAmount(inputDenom)
         if (txFee.amount[0].denom == inputDenom) {
             let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
             if (feeAmount.compare(inputBlance).rawValue >= 0) {
@@ -253,7 +253,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         outputAssetImg.af.setImage(withURL: outputMsAsset.assetImg())
         outputAssetLabel.text = outputMsAsset.symbol
         
-        let outputBalance = outputCosmosChain.getGrpcfetcher()!.balanceAmount(outputDenom)
+        let outputBalance = outputCosmosChain.getCosmosfetcher()!.balanceAmount(outputDenom)
         WDP.dpCoin(outputMsAsset, outputBalance, nil, nil, outputBalanceLabel, outputMsAsset.decimals)
         
         inputAmountTextField.text = ""
@@ -282,7 +282,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         dismissKeyboard()
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.swapAssets = inputAssetList
-        baseSheet.swapBalance = inputCosmosChain.getGrpcfetcher()?.cosmosBalances ?? []
+        baseSheet.swapBalance = inputCosmosChain.getCosmosfetcher()?.cosmosBalances ?? []
         baseSheet.targetChain = inputCosmosChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapInputAsset
@@ -302,7 +302,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         dismissKeyboard()
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.swapAssets = outputAssetList
-        baseSheet.swapBalance = outputCosmosChain.getGrpcfetcher()?.cosmosBalances ?? []
+        baseSheet.swapBalance = outputCosmosChain.getCosmosfetcher()?.cosmosBalances ?? []
         baseSheet.targetChain = outputCosmosChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapOutputAsset
@@ -541,8 +541,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         return nil
     }
     
-    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?, _ msg: JSON) {
-        if let toGas = simul?.gasInfo.gasUsed {
+    func onUpdateWithSimul(_ gasUsed: UInt64?, _ msg: JSON) {
+        if let toGas = gasUsed {
             txFee.gasLimit = UInt64(Double(toGas) * inputCosmosChain.gasMultiply())
             let baseFeePosition = inputCosmosChain.getFeeBasePosition()
             if let gasRate = inputCosmosChain.getFeeInfos()[baseFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
@@ -580,9 +580,9 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
 //            print("inner_mag ", inner_mag)
             Task {
                 do {
-                    if let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher(),
+                    if let inputCosmosfetcher = inputCosmosChain.getCosmosfetcher(),
                        let simulReq = try await Signer.genSimul(inputCosmosChain, onBindIbcSend(inner_mag!), "", txFee, txTip),
-                       let simulRes = try await inputGrpcfetcher.simulateTx(simulReq) {
+                       let simulRes = try await inputCosmosfetcher.simulCosmosTx(simulReq) {
                         DispatchQueue.main.async {
                             self.onUpdateWithSimul(simulRes, msg)
                         }
@@ -606,9 +606,9 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
 //            print("inner_mag ", inner_mag)
             Task {
                 do {
-                    if let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher(),
+                    if let inputCosmosfetcher = inputCosmosChain.getCosmosfetcher(),
                        let simulReq = try await Signer.genSimul(inputCosmosChain, onBindWasm(inner_mag!), "", txFee, txTip),
-                       let simulRes = try await inputGrpcfetcher.simulateTx(simulReq) {
+                       let simulRes = try await inputCosmosfetcher.simulCosmosTx(simulReq) {
                         DispatchQueue.main.async {
                             self.onUpdateWithSimul(simulRes, msg)
                         }
@@ -680,7 +680,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                             }
                         })
                         inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first ?? inputAssetList[0]
-                        _ =  await inputCosmosChain.getGrpcfetcher()?.fetchBalances()
+                        _ =  await inputCosmosChain.getCosmosfetcher()?.fetchBalances()
                         
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
@@ -703,7 +703,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                             }
                         })
                         outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first ?? outputAssetList[0]
-                        _ =  await outputCosmosChain.getGrpcfetcher()?.fetchBalances()
+                        _ =  await outputCosmosChain.getCosmosfetcher()?.fetchBalances()
                         
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
@@ -754,9 +754,9 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                 
                 Task {
                     do {
-                        if let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher(),
+                        if let inputGrpcfetcher = inputCosmosChain.getCosmosfetcher(),
                            let broadReq = try await Signer.genTx(inputCosmosChain, onBindIbcSend(inner_mag!), "", txFee, txTip),
-                           let broadRes = try await inputGrpcfetcher.broadcastTx(broadReq) {
+                           let broadRes = try await inputGrpcfetcher.broadCastCosmosTx(broadReq) {
                             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                                 self.loadingView.isHidden = true
                                 let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
@@ -778,9 +778,9 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                 
                 Task {
                     do {
-                        if let inputGrpcfetcher = inputCosmosChain.getGrpcfetcher(),
+                        if let inputGrpcfetcher = inputCosmosChain.getCosmosfetcher(),
                            let broadReq = try await Signer.genTx(inputCosmosChain, onBindWasm(inner_mag!), "", txFee, txTip),
-                           let broadRes = try await inputGrpcfetcher.broadcastTx(broadReq) {
+                           let broadRes = try await inputGrpcfetcher.broadCastCosmosTx(broadReq) {
                             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                                 self.loadingView.isHidden = true
                                 let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

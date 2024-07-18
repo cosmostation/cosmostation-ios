@@ -63,13 +63,13 @@ class DeriveCell: UITableViewCell {
     func bindDeriveChain(_ account: BaseAccount, _ chain: BaseChain, _ selectedList: [String]) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
-        if (chain.isCosmos()) {
+        if (chain.supportCosmos) {
             bechAddressLabel.text = chain.bechAddress
         }
         if (chain.supportEvm) {
             evmAddressLabel.text = chain.evmAddress
         }
-        if (chain.isCosmos() && chain.supportEvm) {
+        if (chain.supportCosmos && chain.supportEvm) {
             starEvmAddressAnimation()
         }
 //        if (account.type == .withMnemonic) {
@@ -102,8 +102,14 @@ class DeriveCell: UITableViewCell {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
             
-            if (chain.name == "OKT") {
-                let dpAmount =  chain.getLcdfetcher()?.lcdBalanceAmount(chain.stakeDenom!) ?? NSDecimalNumber.zero
+//            if (chain.name == "OKT") {
+//                let dpAmount = (chain.getCosmosfetcher() as? OktFetcher)?.oktBalanceAmount(chain.stakeDenom!) ?? NSDecimalNumber.zero
+//                denomLabel.text = "OKT"
+//                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
+//                
+//            } 
+            if let oktChain = chain as? ChainOktEVM {
+                let dpAmount = oktChain.getOktfetcher()?.oktBalanceAmount(chain.stakeDenom!) ?? NSDecimalNumber.zero
                 denomLabel.text = "OKT"
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
                 
@@ -112,9 +118,9 @@ class DeriveCell: UITableViewCell {
                 denomLabel.text = chain.coinSymbol
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
                 
-            } else if (chain.isCosmos()) {
+            } else if (chain.supportCosmos) {
                 let stakeDenom = chain.stakeDenom!
-                let availableAmount = chain.getGrpcfetcher()?.balanceAmount(stakeDenom) ?? NSDecimalNumber.zero
+                let availableAmount = chain.getCosmosfetcher()?.balanceAmount(stakeDenom) ?? NSDecimalNumber.zero
                 if let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
                     WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)
                 }

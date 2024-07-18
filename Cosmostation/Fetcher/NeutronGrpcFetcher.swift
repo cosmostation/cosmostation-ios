@@ -1,8 +1,8 @@
 //
-//  NeutronFetcher.swift
+//  NeutronGrpcFetcher.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 6/16/24.
+//  Created by yongjoo jung on 7/18/24.
 //  Copyright © 2024 wannabit. All rights reserved.
 //
 
@@ -13,14 +13,10 @@ import SwiftProtobuf
 import Alamofire
 import SwiftyJSON
 
-class NeutronFetcher: FetcherGrpc {
+
+class NeutronGrpcFetcher: CosmosGrpcFetcher {
     
-    var vaultsList: [JSON]?
-    var daosList: [JSON]?
-    var neutronDeposited = NSDecimalNumber.zero
-    var neutronVesting: JSON?
-    
-    override func fetchGrpcData(_ id: Int64) async -> Bool {
+    override func fetchCosmosData(_ id: Int64) async -> Bool {
         cosmosAuth = nil
         cosmosBalances = nil
         neutronDeposited = NSDecimalNumber.zero
@@ -39,12 +35,10 @@ class NeutronFetcher: FetcherGrpc {
                 self.mintscanCw20Tokens = cw20Tokens ?? []
                 self.cosmosAuth = auth
                 self.cosmosBalances = balance
-                if let vault = vault,
-                   let deposited = try? JSONDecoder().decode(JSON.self, from: vault) {
+                if let deposited = vault {
                     self.neutronDeposited = NSDecimalNumber(string: deposited["power"].string)
                 }
-                if let vesting = vesting,
-                   let vestingInfo = try? JSONDecoder().decode(JSON.self, from: vesting) {
+                if let vestingInfo = vesting {
                     self.neutronVesting = vestingInfo
                 }
                 
@@ -60,13 +54,13 @@ class NeutronFetcher: FetcherGrpc {
                 }
                 
                 await mintscanCw20Tokens.concurrentForEach { cw20 in
-                    self.fetchCw20Balance(cw20)
+                    await self.fetchCw20Balance(cw20)
                 }
             }
             return true
             
         } catch {
-            print("grpc error \(error) ", chain.tag)
+            print("neutron grpc error \(error) ", chain.tag)
             return false
         }
     }
@@ -88,7 +82,7 @@ class NeutronFetcher: FetcherGrpc {
     }
     
     
-    func neutronVestingAmount() -> NSDecimalNumber  {
+    override func neutronVestingAmount() -> NSDecimalNumber  {
         if let allocated = neutronVesting?["allocated_amount"].string,
            let withdrawn = neutronVesting?["withdrawn_amount"].string {
             let allocatedAmount = NSDecimalNumber(string: allocated)
@@ -98,7 +92,7 @@ class NeutronFetcher: FetcherGrpc {
         return NSDecimalNumber.zero
     }
     
-    func neutronVestingValue(_ usd: Bool? = false) -> NSDecimalNumber {
+    override func neutronVestingValue(_ usd: Bool? = false) -> NSDecimalNumber {
         if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = neutronVestingAmount()
@@ -107,7 +101,7 @@ class NeutronFetcher: FetcherGrpc {
         return NSDecimalNumber.zero
     }
     
-    func neutronDepositedValue(_ usd: Bool? = false) -> NSDecimalNumber {
+    override func neutronDepositedValue(_ usd: Bool? = false) -> NSDecimalNumber {
         if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = neutronDeposited
@@ -116,31 +110,41 @@ class NeutronFetcher: FetcherGrpc {
         return NSDecimalNumber.zero
     }
     
-}
-
-extension NeutronFetcher {
     
-    func fetchVaultDeposit() async throws -> Data? {
+    
+    
+    
+    
+    
+    
+    
+    override func fetchVaultDeposit() async throws -> JSON? {
         let query: JSON = ["voting_power_at_height" : ["address" : chain.bechAddress!]]
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
             $0.address = vaultsList?[0]["address"].stringValue ?? ""   // NEUTRON_VAULT_ADDRESS
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
-        return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: getClient()).smartContractState(req, callOptions: getCallOptions()).response.get().data
+        if let response = try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: getClient()).smartContractState(req, callOptions: getCallOptions()).response.get() {
+            return try? JSONDecoder().decode(JSON.self, from: response.data)
+        }
+        return nil
     }
     
-    func fetchNeutronVesting() async throws -> Data? {
+    override func fetchNeutronVesting() async throws -> JSON? {
         let query: JSON = ["allocation" : ["address" : chain.bechAddress!]]
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
             $0.address = NEUTRON_VESTING_CONTRACT_ADDRESS
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
-        return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: getClient()).smartContractState(req, callOptions: getCallOptions()).response.get().data
+        if let response = try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: getClient()).smartContractState(req, callOptions: getCallOptions()).response.get() {
+            return try? JSONDecoder().decode(JSON.self, from: response.data)
+        }
+        return nil
     }
     
-    func fetchNeutronProposals(_ daoType: Int) async throws -> Data? {
+    override func fetchNeutronProposals(_ daoType: Int) async throws -> JSON? {
         let contAddress = daosList?[0]["proposal_modules"][daoType]["address"].string ?? ""
         let query: JSON = ["reverse_proposals" : JSON()]
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
@@ -148,6 +152,10 @@ extension NeutronFetcher {
             $0.address = contAddress
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
-        return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: getClient()).smartContractState(req, callOptions: getCallOptions()).response.get().data
+        if let response = try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: getClient()).smartContractState(req, callOptions: getCallOptions()).response.get() {
+            return try? JSONDecoder().decode(JSON.self, from: response.data)
+        }
+        return nil
     }
+    
 }

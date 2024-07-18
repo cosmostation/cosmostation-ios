@@ -36,7 +36,7 @@ class NeutronVote: BaseVC {
     
     
     var selectedChain: ChainNeutron!
-    var grpcFetcher: NeutronFetcher!
+    var neutronFetcher: CosmosFetcher!
     var feeInfos = [FeeInfo]()
     var txFee: Cosmos_Tx_V1beta1_Fee = Cosmos_Tx_V1beta1_Fee.init()
     var txTip: Cosmos_Tx_V1beta1_Tip?
@@ -51,7 +51,7 @@ class NeutronVote: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        grpcFetcher = selectedChain.neutronFetcher
+        neutronFetcher = selectedChain.getCosmosfetcher()
         
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
@@ -73,7 +73,7 @@ class NeutronVote: BaseVC {
         
         
         Task {
-            await grpcFetcher.updateBaseFee()
+            await neutronFetcher.updateBaseFee()
             DispatchQueue.main.async {
                 self.loadingView.isHidden = true
                 self.oninitFeeView()
@@ -88,7 +88,7 @@ class NeutronVote: BaseVC {
     }
     
     func oninitFeeView() {
-        if (grpcFetcher.cosmosBaseFees.count > 0) {
+        if (neutronFetcher.cosmosBaseFees.count > 0) {
             feeSegments.removeAllSegments()
             feeSegments.insertSegment(withTitle: "No Tip", at: 0, animated: false)
             feeSegments.insertSegment(withTitle: "20% Tip", at: 1, animated: false)
@@ -96,7 +96,7 @@ class NeutronVote: BaseVC {
             feeSegments.insertSegment(withTitle: "100% Tip", at: 3, animated: false)
             feeSegments.selectedSegmentIndex = selectedFeePosition
             
-            let baseFee = grpcFetcher.cosmosBaseFees[0]
+            let baseFee = neutronFetcher.cosmosBaseFees[0]
             let gasAmount: NSDecimalNumber = selectedChain.getFeeBaseGasAmount()
             let feeDenom = baseFee.denom
             let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
@@ -120,8 +120,8 @@ class NeutronVote: BaseVC {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = selectedChain
         baseSheet.sheetDelegate = self
-        if (grpcFetcher.cosmosBaseFees.count > 0) {
-            baseSheet.baseFeesDatas = grpcFetcher.cosmosBaseFees
+        if (neutronFetcher.cosmosBaseFees.count > 0) {
+            baseSheet.baseFeesDatas = neutronFetcher.cosmosBaseFees
             baseSheet.sheetType = .SelectBaseFeeDenom
         } else {
             baseSheet.feeDatas = feeInfos[selectedFeePosition].FeeDatas
@@ -132,8 +132,8 @@ class NeutronVote: BaseVC {
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeePosition = sender.selectedSegmentIndex
-        if (grpcFetcher.cosmosBaseFees.count > 0) {
-            if let baseFee = grpcFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
+        if (neutronFetcher.cosmosBaseFees.count > 0) {
+            if let baseFee = neutronFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                 let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                 txFee.amount[0].amount = feeAmount.stringValue
@@ -179,11 +179,11 @@ class NeutronVote: BaseVC {
         onSimul()
     }
     
-    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
-        if let toGas = simul?.gasInfo.gasUsed {
+    func onUpdateWithSimul(_ gasUsed: UInt64?) {
+        if let toGas = gasUsed {
             txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
-            if (grpcFetcher.cosmosBaseFees.count > 0) {
-                if let baseFee = grpcFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
+            if (neutronFetcher.cosmosBaseFees.count > 0) {
+                if let baseFee = neutronFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                     let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                     txFee.amount[0].amount = feeAmount.stringValue
@@ -220,7 +220,7 @@ class NeutronVote: BaseVC {
         Task {
             do {
                 if let simulReq = try await Signer.genSimul(selectedChain, onBindWasmMsg(), txMemo, txFee, nil),
-                   let simulRes = try await grpcFetcher.simulateTx(simulReq) {
+                   let simulRes = try await neutronFetcher.simulCosmosTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
                     }
@@ -244,7 +244,7 @@ class NeutronVote: BaseVC {
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
                 $0.sender = selectedChain.bechAddress!
-                $0.contract = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"].arrayValue[0]["address"].stringValue ?? ""
+                $0.contract = neutronFetcher.daosList?[0]["proposal_modules"].arrayValue[0]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             wasmMsgs.append(msg)
@@ -254,7 +254,7 @@ class NeutronVote: BaseVC {
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
                 $0.sender = selectedChain.bechAddress!
-                $0.contract = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"].arrayValue[1]["address"].stringValue ?? ""
+                $0.contract = neutronFetcher.daosList?[0]["proposal_modules"].arrayValue[1]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             wasmMsgs.append(msg)
@@ -264,7 +264,7 @@ class NeutronVote: BaseVC {
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
                 $0.sender = selectedChain.bechAddress!
-                $0.contract = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"].arrayValue[2]["address"].stringValue ?? ""
+                $0.contract = neutronFetcher.daosList?[0]["proposal_modules"].arrayValue[2]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             wasmMsgs.append(msg)
@@ -373,7 +373,7 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
             }
         } else if (sheetType == .SelectBaseFeeDenom) {
             if let index = result["index"] as? Int {
-               let selectedDenom = grpcFetcher.cosmosBaseFees[index].denom
+               let selectedDenom = neutronFetcher.cosmosBaseFees[index].denom
                 txFee.amount[0].denom = selectedDenom
                 onUpdateFeeView()
                 onSimul()
@@ -394,7 +394,7 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
             Task {
                 do {
                     if let broadReq = try await Signer.genTx(selectedChain, onBindWasmMsg(), txMemo, txFee, nil),
-                       let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
+                       let broadRes = try await neutronFetcher.broadCastCosmosTx(broadReq) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

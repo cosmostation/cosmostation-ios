@@ -28,7 +28,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     
     var txStyle: TxStyle = .COSMOS_STYLE
     var fromChain: BaseChain!
-    var fromGrpcFetcher: FetcherGrpc!
+    var fromCosmosFetcher: CosmosFetcher!
     var fromEvmFetcher: FetcherEvmrpc!
     var toChain: BaseChain!
     var toAddress: String?
@@ -73,7 +73,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                 confirmBtn.isEnabled = true
                 return
             }
-            fromGrpcFetcher = fromChain.getGrpcfetcher()
+            fromCosmosFetcher = fromChain.getCosmosfetcher()
             fetchCosmosTx()
         }
         setQutoes()
@@ -189,7 +189,7 @@ extension CommonTransferResult {
     func fetchCosmosTx() {
         Task {
             do {
-                let result = try await fromGrpcFetcher.fetchTx(cosmosBroadcastTxResponse!.txhash)
+                let result = try await fromCosmosFetcher.fetchCosmosTx(cosmosBroadcastTxResponse!.txhash)
                 self.cosmosTxResponse = result
                 DispatchQueue.main.async {
                     self.onUpdateView()

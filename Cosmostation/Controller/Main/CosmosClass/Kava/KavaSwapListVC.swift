@@ -27,7 +27,7 @@ class KavaSwapListVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        kavaFetcher = selectedChain.getGrpcfetcher() as? KavaFetcher
+        kavaFetcher = selectedChain.getCosmosfetcher() as? KavaFetcher
         
         tableView.isHidden = true
         loadingView.isHidden = false

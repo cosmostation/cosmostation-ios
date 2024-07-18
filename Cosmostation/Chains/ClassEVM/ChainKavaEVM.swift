@@ -36,7 +36,7 @@ class ChainKavaEVM: BaseChain  {
         evmRpcURL = "https://rpc-kava-evm.cosmostation.io"
     }
     
-    override func getGrpcfetcher() -> FetcherGrpc? {
+    override func getCosmosfetcher() -> KavaFetcher? {
         if (kavaFetcher == nil) {
             kavaFetcher = KavaFetcher.init(self)
         }
