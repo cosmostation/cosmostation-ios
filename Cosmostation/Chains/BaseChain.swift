@@ -56,7 +56,7 @@ class BaseChain {
     
     var fetchState = FetchState.Idle
     var cosmosFetcher: CosmosFetcher?
-    var evmFetcher: FetcherEvmrpc?
+    var evmFetcher: EvmFetcher?
     
     var coinsCnt = 0
     var tokensCnt = 0
@@ -93,19 +93,17 @@ class BaseChain {
     }
     
     func getCosmosfetcher() -> CosmosFetcher? {
-        if (cosmosFetcher != nil) { return cosmosFetcher }
-        if (supportCosmosGrpc) {
-            cosmosFetcher = CosmosGrpcFetcher(self)
-        } else if (supportCosmosLcd) {
-            cosmosFetcher = CosmosLcdFetcher(self)
+        if (supportCosmos != true) { return nil }
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = CosmosFetcher.init(self)
         }
         return cosmosFetcher
     }
     
-    func getEvmfetcher() -> FetcherEvmrpc? {
+    func getEvmfetcher() -> EvmFetcher? {
         if (supportEvm != true) { return nil }
         if (evmFetcher == nil) {
-            evmFetcher = FetcherEvmrpc.init(self)
+            evmFetcher = EvmFetcher.init(self)
         }
         return evmFetcher
     }
@@ -119,11 +117,11 @@ class BaseChain {
             var cosmosResult: Bool?
             
             if (supportEvm == true) {
-                evmResult = await getEvmfetcher()?.fetchBalances()
+                evmResult = await getEvmfetcher()?.fetchEvmBalances()
                 coinsCnt = getEvmfetcher()?.valueCoinCnt() ?? 0
             }
             if (supportCosmos == true) {
-                cosmosResult = await getCosmosfetcher()?.fetchBalances()
+                cosmosResult = await getCosmosfetcher()?.fetchCosmosBalances()
                 coinsCnt = getCosmosfetcher()?.valueCoinCnt() ?? 0
             }
             if (evmResult == false || cosmosResult == false) {
@@ -133,7 +131,7 @@ class BaseChain {
             }
             
             if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
-                cosmosFetcher.onCheckCosmosVesting()
+                cosmosFetcher.onCheckVesting()
             }
             
             DispatchQueue.main.async(execute: {
@@ -165,7 +163,7 @@ class BaseChain {
             
             
             if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
-                cosmosFetcher.onCheckCosmosVesting()
+                cosmosFetcher.onCheckVesting()
             }
             
             if (self.fetchState == .Success) {
@@ -232,12 +230,10 @@ class BaseChain {
     
     func fetchValidatorInfos() {
         Task {
-            if (name == "OKT") {
-                //TODO YONG
-//                _  = await getLcdfetcher()?.fetchValidators()
-                
+            if let oktChain = self as? ChainOktEVM {
+                _ = await oktChain.getOktfetcher()?.fetchCosmosValidators()
             } else if (supportCosmos == true && supportStaking == true) {
-                _ = await getCosmosfetcher()?.fetchValidators()
+                _ = await getCosmosfetcher()?.fetchCosmosValidators()
             }
             
             DispatchQueue.main.async(execute: {
@@ -249,10 +245,9 @@ class BaseChain {
     
     
     func isTxFeePayable() -> Bool {
-        if (name == "OKT") {
-            //TODO YONG
-//            let availableAmount = getLcdfetcher()?.lcdBalanceAmount(stakeDenom!) ?? NSDecimalNumber.zero
-//            return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
+        if let oktChain = self as? ChainOktEVM {
+            let availableAmount = oktChain.getOktfetcher()?.oktBalanceAmount(stakeDenom!) ?? NSDecimalNumber.zero
+            return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
             
         } else if (supportEvm) {
             return getEvmfetcher()?.evmBalances.compare(EVM_BASE_FEE).rawValue ?? 0 > 0

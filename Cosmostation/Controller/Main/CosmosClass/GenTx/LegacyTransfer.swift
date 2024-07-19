@@ -72,20 +72,20 @@ class LegacyTransfer: BaseVC {
         loadingView.play()
         
         //display to send asset info
-        //TODO YONG
-//        if let oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher {
-//            tokenInfo = oktFetcher.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
-//            let original_symbol = tokenInfo["original_symbol"].stringValue
-//            toSendAssetImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
-//            toSendSymbolLabel.text = original_symbol.uppercased()
-//            
-//            let available = oktFetcher.lcdBalanceAmount(toSendDenom)
-//            if (toSendDenom == stakeDenom) {
-//                availableAmount = available.subtracting(NSDecimalNumber(string: OKT_BASE_FEE))
-//            } else {
-//                availableAmount = available
-//            }
-//        }
+        if let oktChain = selectedChain as? ChainOktEVM,
+           let oktFetcher = oktChain.getOktfetcher() {
+            tokenInfo = oktFetcher.oktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
+            let original_symbol = tokenInfo["original_symbol"].stringValue
+            toSendAssetImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
+            toSendSymbolLabel.text = original_symbol.uppercased()
+            
+            let available = oktFetcher.oktBalanceAmount(toSendDenom)
+            if (toSendDenom == stakeDenom) {
+                availableAmount = available.subtracting(NSDecimalNumber(string: OKT_BASE_FEE))
+            } else {
+                availableAmount = available
+            }
+        }
         
         toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
         toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
@@ -310,18 +310,16 @@ extension LegacyTransfer {
     
     //only for okt legacy lcd
     func broadcastOktSendTx() async throws -> JSON? {
-        //TODO YONG
-//        let sendCoin = L_Coin(toSendDenom, WUtils.getFormattedNumber(toSendAmount, 18))
-//        let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(NSDecimalNumber(string: OKT_BASE_FEE), 18))
-//        let fee = L_Fee(BASE_GAS_AMOUNT, [gasCoin])
-//        
-//        let okMsg = L_Generator.oktSendMsg(selectedChain.bechAddress!, recipientAddress!, [sendCoin])
-//        let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
-//        let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
-//        
-//        let url = selectedChain.getLcdfetcher()!.getLcd() + "txs"
-//        return try? await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
-        return nil
+        let sendCoin = L_Coin(toSendDenom, WUtils.getFormattedNumber(toSendAmount, 18))
+        let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(NSDecimalNumber(string: OKT_BASE_FEE), 18))
+        let fee = L_Fee(BASE_GAS_AMOUNT, [gasCoin])
+        
+        let okMsg = L_Generator.oktSendMsg(selectedChain.bechAddress!, recipientAddress!, [sendCoin])
+        let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
+        let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
+        
+        let url = (selectedChain as! ChainOktEVM).getOktfetcher()!.getLcd() + "txs"
+        return try? await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
     }
     
 }

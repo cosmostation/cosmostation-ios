@@ -79,7 +79,7 @@ class PortfolioVC: BaseVC {
             let kavalcd = mainnetChains.filter { $0.tag == "kavaLCD" }.first
             print("kavalcd supportCosmosGrpc ", kavalcd?.supportCosmosGrpc)
             print("kavalcd supportCosmosLcd ", kavalcd?.supportCosmosLcd)
-            try? await kavalcd?.getCosmosfetcher()?.fetchBalances()
+            try? await kavalcd?.getCosmosfetcher()?.fetchCosmosBalances()
         }
         
     }

@@ -36,7 +36,7 @@ class NeutronVote: BaseVC {
     
     
     var selectedChain: ChainNeutron!
-    var neutronFetcher: CosmosFetcher!
+    var neutronFetcher: NeutronFetcher!
     var feeInfos = [FeeInfo]()
     var txFee: Cosmos_Tx_V1beta1_Fee = Cosmos_Tx_V1beta1_Fee.init()
     var txTip: Cosmos_Tx_V1beta1_Tip?
@@ -51,7 +51,7 @@ class NeutronVote: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        neutronFetcher = selectedChain.getCosmosfetcher()
+        neutronFetcher = selectedChain.getNeutronFetcher()
         
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
@@ -220,7 +220,7 @@ class NeutronVote: BaseVC {
         Task {
             do {
                 if let simulReq = try await Signer.genSimul(selectedChain, onBindWasmMsg(), txMemo, txFee, nil),
-                   let simulRes = try await neutronFetcher.simulCosmosTx(simulReq) {
+                   let simulRes = try await neutronFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
                     }
@@ -394,7 +394,7 @@ extension NeutronVote: MemoDelegate, BaseSheetDelegate, PinDelegate {
             Task {
                 do {
                     if let broadReq = try await Signer.genTx(selectedChain, onBindWasmMsg(), txMemo, txFee, nil),
-                       let broadRes = try await neutronFetcher.broadCastCosmosTx(broadReq) {
+                       let broadRes = try await neutronFetcher.broadcastTx(broadReq) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

@@ -88,9 +88,7 @@ class CosmosClassVC: BaseVC {
         onSetTabbarView()
         onSetFabButton()
         
-        if (selectedChain.name == "OKT" || selectedChain.supportStaking) {
-            selectedChain.fetchValidatorInfos()
-        }
+        selectedChain.fetchValidatorInfos()
         
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
         addressTap.cancelsTouchesInView = false
@@ -642,7 +640,7 @@ extension CosmosClassVC {
             return
         }
         let okDeposit = OkDeposit(nibName: "OkDeposit", bundle: nil)
-        okDeposit.selectedChain = selectedChain
+        okDeposit.selectedChain = selectedChain as? ChainOktEVM
         okDeposit.modalTransitionStyle = .coverVertical
         self.present(okDeposit, animated: true)
     }
@@ -665,7 +663,7 @@ extension CosmosClassVC {
             return
         }
         let okWithdraw = OkWithdraw(nibName: "OkWithdraw", bundle: nil)
-        okWithdraw.selectedChain = selectedChain
+        okWithdraw.selectedChain = selectedChain as? ChainOktEVM
         okWithdraw.modalTransitionStyle = .coverVertical
         self.present(okWithdraw, animated: true)
     }
@@ -688,7 +686,7 @@ extension CosmosClassVC {
             return
         }
         let okAddShare = OkAddShare(nibName: "OkAddShare", bundle: nil)
-        okAddShare.selectedChain = selectedChain
+        okAddShare.selectedChain = selectedChain as? ChainOktEVM
         okAddShare.modalTransitionStyle = .coverVertical
         self.present(okAddShare, animated: true)
     }

@@ -20,7 +20,7 @@ class OktFetcher: CosmosFetcher {
     var oktTokens = Array<JSON>()
     var oktValidators = Array<JSON>()
     
-    override func fetchBalances() async -> Bool {
+    override func fetchCosmosBalances() async -> Bool {
         oktAccountInfo = JSON()
         
         if let accountInfo = try? await fetchAccountInfo(chain.bechAddress!) {
@@ -56,7 +56,7 @@ class OktFetcher: CosmosFetcher {
         }
     }
     
-    override func fetchValidators() async -> Bool {
+    override func fetchCosmosValidators() async -> Bool {
         oktValidators.removeAll()
         if let okValidators = try? await fetchOktValdators() {
             okValidators?.forEach { validator in
@@ -160,9 +160,5 @@ extension OktFetcher {
     func fetchOktValdators() async throws -> [JSON]? {
         let url = getLcd() + "staking/validators"
         return try await AF.request(url, method: .get, parameters: ["status":"all"]).serializingDecodable([JSON].self).value
-    }
-    
-    func getLcd() -> String {
-        return chain.lcdUrl
     }
 }

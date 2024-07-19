@@ -224,7 +224,7 @@ class CosmosCancelUnbonding: BaseVC {
         Task {
             do {
                 if let simulReq = try await Signer.genSimul(selectedChain, onBindCancelUnbondingMsg(), txMemo, txFee, nil),
-                   let simulRes = try await cosmosFetcher.simulCosmosTx(simulReq) {
+                   let simulRes = try await cosmosFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
                     }
@@ -286,7 +286,7 @@ extension CosmosCancelUnbonding: BaseSheetDelegate, MemoDelegate, PinDelegate {
             Task {
                 do {
                     if let broadReq = try await Signer.genTx(selectedChain, onBindCancelUnbondingMsg(), txMemo, txFee, nil),
-                       let broadRes = try await cosmosFetcher.broadCastCosmosTx(broadReq) {
+                       let broadRes = try await cosmosFetcher.broadcastTx(broadReq) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

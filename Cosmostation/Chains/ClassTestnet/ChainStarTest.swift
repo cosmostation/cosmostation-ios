@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainStarTest: BaseChain {
+class ChainStarTest: ChainStargaze {
     
     override init() {
         super.init()
@@ -20,6 +20,7 @@ class ChainStarTest: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
+        supportCosmosGrpc = false
         supportCosmosLcd = true
         stakeDenom = "ustars"
         bechAccountPrefix = "stars"

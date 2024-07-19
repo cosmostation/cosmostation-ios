@@ -185,7 +185,7 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
     func checkTx(_ chain: BaseChain, _ position: Int, _ txResponse: Cosmos_Base_Abci_V1beta1_TxResponse) {
         Task {
             do {
-                let result = try await chain.getCosmosfetcher()!.fetchCosmosTx(txResponse.txhash)
+                let result = try await chain.getCosmosfetcher()!.fetchTx(txResponse.txhash)
                 compoundableRewards[position].txResponse = result
                 compoundableRewards[position].isBusy = false
                 DispatchQueue.main.async {
@@ -241,7 +241,7 @@ extension AllChainCompoundingStartVC {
         let msgs = Signer.genCompoundingMsg(chain.bechAddress!, claimableRewards, chain.stakeDenom!)
         if let cosmosFetcher = chain.getCosmosfetcher(),
            let simulReq = try await Signer.genSimul(chain, msgs, "", chain.getInitPayableFee()!, nil) {
-            return try await cosmosFetcher.simulCosmosTx(simulReq)
+            return try await cosmosFetcher.simulateTx(simulReq)
         }
         return nil
     }
@@ -251,7 +251,7 @@ extension AllChainCompoundingStartVC {
         let msgs = Signer.genCompoundingMsg(chain.bechAddress!, claimableRewards, chain.stakeDenom!)
         if let cosmosFetcher = chain.getCosmosfetcher(),
            let broadReq = try await Signer.genTx(chain, msgs, "", fee, tip) {
-            return try await cosmosFetcher.broadCastCosmosTx(broadReq)
+            return try await cosmosFetcher.broadcastTx(broadReq)
         }
         return nil
     }

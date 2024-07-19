@@ -100,7 +100,7 @@ class CosmosTxResult: BaseVC {
     func fetchTx() {
         Task {
             do {
-                let result = try await cosmosFetcher.fetchCosmosTx(broadcastTxResponse!.txhash)
+                let result = try await cosmosFetcher.fetchTx(broadcastTxResponse!.txhash)
                 self.txResponse = result
                 DispatchQueue.main.async {
                     self.onUpdateView()

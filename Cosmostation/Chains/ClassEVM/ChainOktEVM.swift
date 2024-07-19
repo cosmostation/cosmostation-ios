@@ -49,7 +49,7 @@ class ChainOktEVM: BaseChain {
     override func fetchBalances() {
         fetchState = .Busy
         Task {
-            let result = await getOktfetcher()?.fetchBalances()
+            let result = await getOktfetcher()?.fetchCosmosBalances()
             
             if (result == false) {
                 fetchState = .Fail
@@ -77,10 +77,8 @@ class ChainOktEVM: BaseChain {
             
             if (lcdResult == false || evmResult == false) {
                 fetchState = .Fail
-//                print("fetching Some error ", tag)
             } else {
                 fetchState = .Success
-//                print("fetching good ", tag)
             }
             
             if let oktFetcher = getOktfetcher(),

@@ -81,7 +81,7 @@ class DappCosmosSignRequestSheet: BaseVC {
         Task {
             try await onParsingRequest()
             if (method == "cos_signDirect" || method == "cosmos_signDirect") {
-                try? await targetChain?.getCosmosfetcher()?.fetchBalances()
+                try? await targetChain?.getCosmosfetcher()?.fetchCosmosBalances()
             }
             DispatchQueue.main.async {
                 self.loadingView.isHidden = true
@@ -465,7 +465,7 @@ extension DappCosmosSignRequestSheet: BaseSheetDelegate {
         Task {
             do {
                 let simulReq = genSimulTxs()
-                let simulRes = try await targetChain.getCosmosfetcher()!.simulCosmosTx(simulReq!)
+                let simulRes = try await targetChain.getCosmosfetcher()!.simulateTx(simulReq!)
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(simulRes)
                 }

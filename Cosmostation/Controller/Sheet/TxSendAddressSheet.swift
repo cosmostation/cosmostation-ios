@@ -203,7 +203,7 @@ extension TxSendAddressSheet {
             $0.address = OSMO_NAME_SERVICE
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
-        return try await ChainOsmosis().getCosmosfetcher()?.fetchCosmosWasm(req)
+        return try await ChainOsmosis().getCosmosfetcher()?.fetchSmartContractState(req)
     }
     
     func checkStargazename (_ inputName: String) async throws -> JSON? {
@@ -215,7 +215,7 @@ extension TxSendAddressSheet {
             $0.address = STARGAZE_NAME_SERVICE
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
-        return try await ChainStargaze().getCosmosfetcher()?.fetchCosmosWasm(req)
+        return try await ChainStargaze().getCosmosfetcher()?.fetchSmartContractState(req)
     }
     
     func checkArchwayname (_ inputName: String) async throws -> JSON? {
@@ -234,7 +234,7 @@ extension TxSendAddressSheet {
             $0.address = ARCH_NAME_SERVICE
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
-        return try await ChainArchway().getCosmosfetcher()?.fetchCosmosWasm(req)
+        return try await ChainArchway().getCosmosfetcher()?.fetchSmartContractState(req)
     }
 }
 

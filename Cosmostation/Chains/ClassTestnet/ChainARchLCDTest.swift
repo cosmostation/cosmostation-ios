@@ -9,7 +9,7 @@
 import Foundation
 
 
-class ChainARchLCDTest: BaseChain  {
+class ChainARchLCDTest: ChainArchway  {
     
     override init() {
         super.init()
@@ -21,6 +21,7 @@ class ChainARchLCDTest: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
+        supportCosmosGrpc = false
         supportCosmosLcd = true
         stakeDenom = "aarch"
         bechAccountPrefix = "archway"

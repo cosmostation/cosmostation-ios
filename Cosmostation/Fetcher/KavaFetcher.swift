@@ -13,7 +13,7 @@ import SwiftProtobuf
 import Alamofire
 import SwiftyJSON
 
-class KavaFetcher: CosmosGrpcFetcher {
+class KavaFetcher: CosmosFetcher {
     
 }
 

@@ -18,7 +18,7 @@ class NeutronOverruleDao: BaseVC {
     @IBOutlet weak var emptyView: UIView!
     
     var selectedChain: ChainNeutron!
-    var neutronFetcher: CosmosFetcher!
+    var neutronFetcher: NeutronFetcher!
     var neutronMyVotes: [JSON]?
     
     var votingPeriods = [JSON]()
@@ -32,7 +32,7 @@ class NeutronOverruleDao: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        neutronFetcher = selectedChain.getCosmosfetcher()
+        neutronFetcher = selectedChain.getNeutronFetcher()
         
         tableView.isHidden = true
         loadingView.isHidden = false

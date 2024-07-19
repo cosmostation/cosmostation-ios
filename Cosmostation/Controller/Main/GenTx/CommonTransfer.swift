@@ -796,7 +796,7 @@ extension CommonTransfer {
         Task {
             do {
                 if let simulReq = try await Signer.genSimul(fromChain, onBindSendMsg(), txMemo, cosmosTxFee, nil),
-                   let simulRes = try await fromCosmosFetcher.simulCosmosTx(simulReq) {
+                   let simulRes = try await fromCosmosFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
                     }
@@ -817,7 +817,7 @@ extension CommonTransfer {
         Task {
             do {
                 if let broadReq = try await Signer.genTx(fromChain, onBindSendMsg(), txMemo, cosmosTxFee, nil),
-                   let broadRes = try await fromCosmosFetcher.broadCastCosmosTx(broadReq) {
+                   let broadRes = try await fromCosmosFetcher.broadcastTx(broadReq) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -857,7 +857,7 @@ extension CommonTransfer {
         Task {
             do {
                 if let simulReq = try await Signer.genSimul(fromChain, onBindCw20SendMsg(), txMemo, cosmosTxFee, nil),
-                   let simulRes = try await fromCosmosFetcher.simulCosmosTx(simulReq) {
+                   let simulRes = try await fromCosmosFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
                     }
@@ -878,7 +878,7 @@ extension CommonTransfer {
         Task {
             do {
                 if let broadReq = try await Signer.genTx(fromChain, onBindCw20SendMsg(), txMemo, cosmosTxFee, nil),
-                   let broadRes = try await fromCosmosFetcher.broadCastCosmosTx(broadReq) {
+                   let broadRes = try await fromCosmosFetcher.broadcastTx(broadReq) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -916,11 +916,11 @@ extension CommonTransfer {
     func ibcCoinSendSimul() {
         Task {
             do {
-                let revisionNumber = try! await fromCosmosFetcher.fetchCosmosIbcClient(ibcPath!)
+                let revisionNumber = try! await fromCosmosFetcher.fetchIbcClient(ibcPath!)
                 let toCosmosFetcher = toChain!.getCosmosfetcher()
-                let toLastBlock = try await toCosmosFetcher!.fetchCosmosLastHeight()
+                let toLastBlock = try await toCosmosFetcher!.fetchLastBlock()
                 if let simulReq = try await Signer.genSimul(fromChain, onBindIbcSendMsg(revisionNumber!, toLastBlock!), txMemo, cosmosTxFee, nil),
-                   let simulRes = try await fromCosmosFetcher.simulCosmosTx(simulReq) {
+                   let simulRes = try await fromCosmosFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
                     }
@@ -940,11 +940,11 @@ extension CommonTransfer {
     func ibcCoinSend() {
         Task {
             do {
-                let revisionNumber = try! await fromCosmosFetcher.fetchCosmosIbcClient(ibcPath!)
+                let revisionNumber = try! await fromCosmosFetcher.fetchIbcClient(ibcPath!)
                 let toCosmosFetcher = toChain!.getCosmosfetcher()
-                let toLastBlock = try await toCosmosFetcher!.fetchCosmosLastHeight()
+                let toLastBlock = try await toCosmosFetcher!.fetchLastBlock()
                 if let broadReq = try await Signer.genTx(fromChain, onBindIbcSendMsg(revisionNumber!, toLastBlock!), txMemo, cosmosTxFee, nil),
-                   let broadRes = try await fromCosmosFetcher.broadCastCosmosTx(broadReq) {
+                   let broadRes = try await fromCosmosFetcher.broadcastTx(broadReq) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -993,7 +993,7 @@ extension CommonTransfer {
         Task {
             do {
                 if let simulReq = try await Signer.genSimul(fromChain, onBindCw20IbcSendMsg(), txMemo, cosmosTxFee, nil),
-                   let simulRes = try await fromCosmosFetcher.simulCosmosTx(simulReq) {
+                   let simulRes = try await fromCosmosFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
                     }
@@ -1014,7 +1014,7 @@ extension CommonTransfer {
         Task {
             do {
                 if let broadReq = try await Signer.genTx(fromChain, onBindCw20IbcSendMsg(), txMemo, cosmosTxFee, nil),
-                   let broadRes = try await fromCosmosFetcher.broadCastCosmosTx(broadReq) {
+                   let broadRes = try await fromCosmosFetcher.broadcastTx(broadReq) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)

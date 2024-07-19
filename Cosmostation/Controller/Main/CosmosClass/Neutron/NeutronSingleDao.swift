@@ -18,7 +18,7 @@ class NeutronSingleDao: BaseVC {
     @IBOutlet weak var emptyView: UIView!
     
     var selectedChain: ChainNeutron!
-    var neutronFetcher: CosmosFetcher!
+    var neutronFetcher: NeutronFetcher!
     var neutronMyVotes: [JSON]?
     
     var votingPeriods = [JSON]()
@@ -32,7 +32,7 @@ class NeutronSingleDao: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        neutronFetcher = selectedChain.getCosmosfetcher()
+        neutronFetcher = selectedChain.getNeutronFetcher()
         
         tableView.isHidden = true
         loadingView.isHidden = false
@@ -177,7 +177,7 @@ extension NeutronSingleDao: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"CosmosProposalCell") as! CosmosProposalCell
-        let module = selectedChain.getCosmosfetcher()!.daosList?[0]["proposal_modules"][0]
+        let module = neutronFetcher.daosList?[0]["proposal_modules"][0]
         var proposal: JSON!
         if (indexPath.section == 0) {
             if (isShowAll) {

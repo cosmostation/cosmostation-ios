@@ -303,7 +303,7 @@ class NftTransfer: BaseVC {
         Task {
             do {
                 if let simulReq = try await Signer.genSimul(fromChain, onBindCw721Send(), txMemo, cosmosTxFee, nil),
-                   let simulRes = try await fromCosmosFetcher.simulCosmosTx(simulReq) {
+                   let simulRes = try await fromCosmosFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
                     }
@@ -324,7 +324,7 @@ class NftTransfer: BaseVC {
         Task {
             do {
                 if let broadReq = try await Signer.genTx(fromChain, onBindCw721Send(), txMemo, cosmosTxFee, nil),
-                   let broadRes = try await fromCosmosFetcher.broadCastCosmosTx(broadReq) {
+                   let broadRes = try await fromCosmosFetcher.broadcastTx(broadReq) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)

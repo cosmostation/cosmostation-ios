@@ -35,8 +35,8 @@ class OkAddShare: BaseVC {
     @IBOutlet weak var voteBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: BaseChain!
-//    var oktFetcher: OktFetcher!
+    var selectedChain: ChainOktEVM!
+    var oktFetcher: OktFetcher!
     var stakeDenom: String!
     var tokenInfo: JSON!
     var txMemo = ""
@@ -49,7 +49,7 @@ class OkAddShare: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-//        oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher
+        oktFetcher = selectedChain.getOktfetcher()
         stakeDenom = selectedChain.stakeDenom
         
         tableView.delegate = self
@@ -62,14 +62,14 @@ class OkAddShare: BaseVC {
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickTable)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
-//        let allValidators = oktFetcher.lcdOktValidators
-//        let myValidaorAddress = oktFetcher.lcdOktDeposits["validator_address"].arrayValue.map { $0.stringValue }
-//        allValidators.forEach { validatorinfo in
-//            if (myValidaorAddress.contains(validatorinfo["operator_address"].stringValue)) {
-//                myValidators.append(validatorinfo)
-//            }
-//        }
-//        onUpdateFeeView()
+        let allValidators = oktFetcher.oktValidators
+        let myValidaorAddress = oktFetcher.oktDeposits["validator_address"].arrayValue.map { $0.stringValue }
+        allValidators.forEach { validatorinfo in
+            if (myValidaorAddress.contains(validatorinfo["operator_address"].stringValue)) {
+                myValidators.append(validatorinfo)
+            }
+        }
+        onUpdateFeeView()
     }
     
     override func setLocalizedString() {
@@ -79,17 +79,17 @@ class OkAddShare: BaseVC {
     }
     
     @objc func onClickTable() {
-//        let selectSheet = OktSelectValidatorSheet(nibName: "OktSelectValidatorSheet", bundle: nil)
-//        selectSheet.selectedChain = selectedChain
-//        selectSheet.oktFetcher = oktFetcher
-//        selectSheet.existSelected = myValidators
-//        selectSheet.oktSelectValidatorDelegate = self
-//        guard let sheet = selectSheet.presentationController as? UISheetPresentationController else {
-//            return
-//        }
-//        sheet.largestUndimmedDetentIdentifier = .large
-//        sheet.prefersGrabberVisible = true
-//        present(selectSheet, animated: true)
+        let selectSheet = OktSelectValidatorSheet(nibName: "OktSelectValidatorSheet", bundle: nil)
+        selectSheet.selectedChain = selectedChain
+        selectSheet.oktFetcher = oktFetcher
+        selectSheet.existSelected = myValidators
+        selectSheet.oktSelectValidatorDelegate = self
+        guard let sheet = selectSheet.presentationController as? UISheetPresentationController else {
+            return
+        }
+        sheet.largestUndimmedDetentIdentifier = .large
+        sheet.prefersGrabberVisible = true
+        present(selectSheet, animated: true)
     }
     
     @objc func onClickMemo() {
@@ -112,28 +112,28 @@ class OkAddShare: BaseVC {
     }
     
     func onUpdateFeeView() {
-//        feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
-//        feeSelectLabel.text = stakeDenom.uppercased()
-//        
-//        let existCnt = oktFetcher.lcdOktDeposits["validator_address"].arrayValue.count
-//        let noCnt = myValidators.count
-//        let max = (existCnt >= noCnt) ? existCnt : noCnt
-//        
-//        gasAmount = NSDecimalNumber(string: BASE_GAS_AMOUNT)
-//        gasFee = NSDecimalNumber(string: OKT_BASE_FEE)
-//        if (max > 10) {
-//            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "3"))
-//            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "3"))
-//        } else if (max > 20) {
-//            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "4"))
-//            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "4"))
-//        }
-//        
-//        let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
-//        let feeValue = msPrice.multiplying(by: gasFee, withBehavior: handler6)
-//        feeAmountLabel?.attributedText = WDP.dpAmount(gasFee.stringValue, feeAmountLabel!.font, 18)
-//        feeDenomLabel.text = stakeDenom.uppercased()
-//        WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+        feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
+        feeSelectLabel.text = stakeDenom.uppercased()
+        
+        let existCnt = oktFetcher.oktDeposits["validator_address"].arrayValue.count
+        let noCnt = myValidators.count
+        let max = (existCnt >= noCnt) ? existCnt : noCnt
+        
+        gasAmount = NSDecimalNumber(string: BASE_GAS_AMOUNT)
+        gasFee = NSDecimalNumber(string: OKT_BASE_FEE)
+        if (max > 10) {
+            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "3"))
+            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "3"))
+        } else if (max > 20) {
+            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "4"))
+            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "4"))
+        }
+        
+        let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
+        let feeValue = msPrice.multiplying(by: gasFee, withBehavior: handler6)
+        feeAmountLabel?.attributedText = WDP.dpAmount(gasFee.stringValue, feeAmountLabel!.font, 18)
+        feeDenomLabel.text = stakeDenom.uppercased()
+        WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
     }
     
     
@@ -178,19 +178,19 @@ extension OkAddShare: MemoDelegate, PinDelegate, OktSelectValidatorDelegate {
             loadingView.isHidden = false
             
             Task {
-//                if let response = try? await broadcastOktAddShareTx() {
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-//                        print("response ", response)
-//                        self.loadingView.isHidden = true
-//                        
-//                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-//                        txResult.selectedChain = self.selectedChain
-//                        txResult.legacyResult = response
-//                        txResult.modalPresentationStyle = .fullScreen
-//                        self.present(txResult, animated: true)
-//                        
-//                    });
-//                }
+                if let response = try? await broadcastOktAddShareTx() {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        print("response ", response)
+                        self.loadingView.isHidden = true
+                        
+                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                        txResult.selectedChain = self.selectedChain
+                        txResult.legacyResult = response
+                        txResult.modalPresentationStyle = .fullScreen
+                        self.present(txResult, animated: true)
+                        
+                    });
+                }
             }
         }
     }
@@ -199,15 +199,14 @@ extension OkAddShare: MemoDelegate, PinDelegate, OktSelectValidatorDelegate {
 extension OkAddShare {
     
     func broadcastOktAddShareTx() async throws -> JSON? {
-//        let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(gasFee, 18))
-//        let fee = L_Fee(gasAmount.stringValue, [gasCoin])
-//        
-//        let okMsg = L_Generator.oktAddShareMsg(selectedChain.bechAddress!, myValidators.map{ $0["operator_address"].stringValue })
-//        let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
-//        let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
-//        
-//        let url = oktFetcher.getLcd() + "txs"
-//        return try? await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
-        return nil
+        let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(gasFee, 18))
+        let fee = L_Fee(gasAmount.stringValue, [gasCoin])
+        
+        let okMsg = L_Generator.oktAddShareMsg(selectedChain.bechAddress!, myValidators.map{ $0["operator_address"].stringValue })
+        let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
+        let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
+        
+        let url = oktFetcher.getLcd() + "txs"
+        return try? await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
     }
 }

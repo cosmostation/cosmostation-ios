@@ -67,7 +67,7 @@ class CosmosNftVC: BaseVC {
         if (isBusy) { return }
         isBusy = true
         if let cosmosFetcher = selectedChain.getCosmosfetcher() {
-            cosmosFetcher.fetchCosmosCw721()
+            cosmosFetcher.fetchAllCw721()
         }
     }
     

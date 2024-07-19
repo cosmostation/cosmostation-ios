@@ -385,8 +385,8 @@ class Signer {
                          _ msgs: [Google_Protobuf_Any],
                          _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip?) async throws -> Cosmos_Tx_V1beta1_SimulateRequest? {
         if let cosmosFetcher = baseChain.getCosmosfetcher(),
-           let height = try await cosmosFetcher.fetchCosmosLastHeight() {
-            await cosmosFetcher.fetchCosmosAuth()
+           let height = try await cosmosFetcher.fetchLastBlock() {
+            try? await cosmosFetcher.fetchAuth()
             let txBody = getTxBody(msgs, memo, height)
             let authInfo = getAuthInfo(baseChain, fee, tip)
             let simulateTx = getSimulTxs(txBody, authInfo)
@@ -401,8 +401,8 @@ class Signer {
                       _ msgs: [Google_Protobuf_Any],
                       _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip?) async throws -> Cosmos_Tx_V1beta1_BroadcastTxRequest? {
         if let cosmosFetcher = baseChain.getCosmosfetcher(),
-           let height = try await cosmosFetcher.fetchCosmosLastHeight() {
-            await cosmosFetcher.fetchCosmosAuth()
+           let height = try await cosmosFetcher.fetchLastBlock() {
+            try? await cosmosFetcher.fetchAuth()
             let txBody = getTxBody(msgs, memo, height)
             let authInfo = getAuthInfo(baseChain, fee, tip)
             let rawTx = getRawTxs(txBody, authInfo, baseChain)

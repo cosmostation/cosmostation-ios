@@ -361,7 +361,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                 }
                 
                 Task {
-                    if let response = try await targetChain.getCosmosfetcher()?.broadCastCosmosTx(request) {
+                    if let response = try await targetChain.getCosmosfetcher()?.broadcastTx(request) {
                         var txResponse = JSON()
                         var data = JSON()
                         data["code"].uInt32Value = response.code

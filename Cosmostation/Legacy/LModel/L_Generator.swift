@@ -72,24 +72,22 @@ class L_Generator {
     }
     
     static func postData(_ msgs: [L_Msg], _ fee: L_Fee, _ memo: String, _ baseChain: BaseChain) -> Data {
-        //TODO YONG
-//        guard let oktChain = baseChain as? ChainOkt996Keccak else {
-//            return Data()
-//        }
-//        let encoder = JSONEncoder()
-//        encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
-//        
-//        let chainId = oktChain.chainIdCosmos!
-//        let accNum = oktChain.getLcdfetcher()!.lcdAccountInfo["value","account_number"].uInt64Value
-//        let seqNum = oktChain.getLcdfetcher()!.lcdAccountInfo["value","sequence"].uInt64Value
-//        
-//        let stdMsg = getToSignMsg(chainId, String(accNum), String(seqNum), msgs, fee, memo)
-//        let toSignData = try! encoder.encode(stdMsg)
-//        let signatures = genSignatures(toSignData, String(accNum), String(seqNum), baseChain)
-//        let stdTx = genSignedTx(msgs, fee, memo, signatures!)
-//        let postTx = L_PostTx.init("sync", stdTx.value)
-//        return try! encoder.encode(postTx)
-        return Data()
+        guard let oktChain = baseChain as? ChainOkt996Keccak else {
+            return Data()
+        }
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+        
+        let chainId = oktChain.chainIdCosmos!
+        let accNum = oktChain.getOktfetcher()!.oktAccountInfo["value","account_number"].uInt64Value
+        let seqNum = oktChain.getOktfetcher()!.oktAccountInfo["value","sequence"].uInt64Value
+        
+        let stdMsg = getToSignMsg(chainId, String(accNum), String(seqNum), msgs, fee, memo)
+        let toSignData = try! encoder.encode(stdMsg)
+        let signatures = genSignatures(toSignData, String(accNum), String(seqNum), baseChain)
+        let stdTx = genSignedTx(msgs, fee, memo, signatures!)
+        let postTx = L_PostTx.init("sync", stdTx.value)
+        return try! encoder.encode(postTx)
     }
     
     

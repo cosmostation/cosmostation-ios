@@ -41,7 +41,7 @@ class OkDeposit: BaseVC {
     @IBOutlet weak var depositBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: BaseChain!
+    var selectedChain: ChainOktEVM!
     var oktFetcher: OktFetcher!
     var stakeDenom: String!
     var tokenInfo: JSON!
@@ -55,22 +55,22 @@ class OkDeposit: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        baseAccount = BaseData.instance.baseAccount
-//        oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher
-//        stakeDenom = selectedChain.stakeDenom
-//        
-//        onUpdateFeeView()
-//        
-//        tokenInfo = oktFetcher.lcdOktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
-//        let original_symbol = tokenInfo["original_symbol"].stringValue
-//        toDepositAssetImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
-//        toDepositSymbolLabel.text = original_symbol.uppercased()
-//        
-//        let available = oktFetcher.lcdBalanceAmount(stakeDenom)
-//        availableAmount = available.subtracting(gasFee)
-//        
-//        toDepositAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
-//        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
+        baseAccount = BaseData.instance.baseAccount
+        oktFetcher = selectedChain.getOktfetcher()
+        stakeDenom = selectedChain.stakeDenom
+        
+        onUpdateFeeView()
+        
+        tokenInfo = oktFetcher.oktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
+        let original_symbol = tokenInfo["original_symbol"].stringValue
+        toDepositAssetImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
+        toDepositSymbolLabel.text = original_symbol.uppercased()
+        
+        let available = oktFetcher.oktBalanceAmount(stakeDenom)
+        availableAmount = available.subtracting(gasFee)
+        
+        toDepositAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
+        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
     }
     
     override func setLocalizedString() {
@@ -140,27 +140,27 @@ class OkDeposit: BaseVC {
     }
     
     func onUpdateFeeView() {
-//        feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
-//        feeSelectLabel.text = stakeDenom.uppercased()
-//        
-//        let existCnt = oktFetcher.lcdOktDeposits["validator_address"].arrayValue.count
-//        
-//        
-//        gasAmount = NSDecimalNumber(string: BASE_GAS_AMOUNT)
-//        gasFee = NSDecimalNumber(string: OKT_BASE_FEE)
-//        if (existCnt > 10) {
-//            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "3"))
-//            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "3"))
-//        } else if (existCnt > 20) {
-//            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "4"))
-//            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "4"))
-//        }
-//        
-//        let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
-//        let feeValue = msPrice.multiplying(by: gasFee, withBehavior: handler6)
-//        feeAmountLabel?.attributedText = WDP.dpAmount(gasFee.stringValue, feeAmountLabel!.font, 18)
-//        feeDenomLabel.text = stakeDenom.uppercased()
-//        WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+        feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
+        feeSelectLabel.text = stakeDenom.uppercased()
+        
+        let existCnt = oktFetcher.oktDeposits["validator_address"].arrayValue.count
+        
+        
+        gasAmount = NSDecimalNumber(string: BASE_GAS_AMOUNT)
+        gasFee = NSDecimalNumber(string: OKT_BASE_FEE)
+        if (existCnt > 10) {
+            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "3"))
+            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "3"))
+        } else if (existCnt > 20) {
+            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "4"))
+            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "4"))
+        }
+        
+        let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
+        let feeValue = msPrice.multiplying(by: gasFee, withBehavior: handler6)
+        feeAmountLabel?.attributedText = WDP.dpAmount(gasFee.stringValue, feeAmountLabel!.font, 18)
+        feeDenomLabel.text = stakeDenom.uppercased()
+        WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
     }
     
     @IBAction func onClickDeposit(_ sender: UIButton) {
@@ -214,16 +214,15 @@ extension OkDeposit: LegacyAmountSheetDelegate, MemoDelegate, PinDelegate {
 extension OkDeposit {
     
     func broadcastOktDepositTx() async throws -> JSON? {
-//        let depositCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(toDepositAmount, 18))
-//        let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(gasFee, 18))
-//        let fee = L_Fee(gasAmount.stringValue, [gasCoin])
-//        
-//        let okMsg = L_Generator.oktDepositMsg(selectedChain.bechAddress!, depositCoin)
-//        let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
-//        let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
-//        
-//        let url = oktFetcher.getLcd() + "txs"
-//        return try? await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
-        return nil
+        let depositCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(toDepositAmount, 18))
+        let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(gasFee, 18))
+        let fee = L_Fee(gasAmount.stringValue, [gasCoin])
+        
+        let okMsg = L_Generator.oktDepositMsg(selectedChain.bechAddress!, depositCoin)
+        let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
+        let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
+        
+        let url = oktFetcher.getLcd() + "txs"
+        return try? await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
     }
 }

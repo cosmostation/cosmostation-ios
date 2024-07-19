@@ -255,7 +255,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
     func checkTx(_ chain: BaseChain, _ position: Int, _ txResponse: Cosmos_Base_Abci_V1beta1_TxResponse) {
         Task {
             do {
-                let result = try await chain.getCosmosfetcher()!.fetchCosmosTx(txResponse.txhash)
+                let result = try await chain.getCosmosfetcher()!.fetchTx(txResponse.txhash)
                 toDisplayInfos[position].isBusy = false
                 toDisplayInfos[position].txResponse = result
                 DispatchQueue.main.async {
@@ -427,7 +427,7 @@ extension AllChainVoteStartVC {
         let msgs = Signer.genVoteMsg(msgVotes)
         if let cosmosFetcher = chain.getCosmosfetcher(),
            let simulReq = try await Signer.genSimul(chain, msgs, "", chain.getInitPayableFee()!, nil) {
-            return try await cosmosFetcher.simulCosmosTx(simulReq)
+            return try await cosmosFetcher.simulateTx(simulReq)
         }
         return nil
     }
@@ -436,7 +436,7 @@ extension AllChainVoteStartVC {
         let msgs = Signer.genVoteMsg(msgVotes)
         if let cosmosFetcher = chain.getCosmosfetcher(),
            let broadReq = try await Signer.genTx(chain, msgs, "", fee, tip) {
-            return try await cosmosFetcher.broadCastCosmosTx(broadReq)
+            return try await cosmosFetcher.broadcastTx(broadReq)
         }
         return nil
     }

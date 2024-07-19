@@ -68,8 +68,8 @@ class AssetCosmosClassCell: UITableViewCell {
         if let oktChain = baseChain as? ChainOktEVM {
             bindOktAsset(oktChain)
             
-        } else if (baseChain is ChainNeutron) {
-            bindNeutron(baseChain)
+        } else if let neutronChain = baseChain as? ChainNeutron {
+            bindNeutron(neutronChain)
             
         } else {
             let stakeDenom = baseChain.stakeDenom!
@@ -192,8 +192,8 @@ class AssetCosmosClassCell: UITableViewCell {
         }
     }
     
-    func bindNeutron(_ baseChain: BaseChain) {
-        if let neutronFetcher = baseChain.getCosmosfetcher(),
+    func bindNeutron(_ baseChain: ChainNeutron) {
+        if let neutronFetcher = baseChain.getNeutronFetcher(),
            let stakeDenom = baseChain.stakeDenom {
             stakingTitle.text = "Vault Deposited"
             if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {

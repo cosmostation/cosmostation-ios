@@ -31,13 +31,19 @@ class ChainNeutron: BaseChain {
     }
     
     override func getCosmosfetcher() -> CosmosFetcher? {
-        if (cosmosFetcher != nil) { return cosmosFetcher }
-        if (supportCosmosGrpc) {
-            cosmosFetcher = NeutronGrpcFetcher(self)
-        } else if (supportCosmosLcd) {
-            cosmosFetcher = NeutronLcdFetcher(self)
+        if (supportCosmos != true) { return nil }
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = NeutronFetcher.init(self)
         }
         return cosmosFetcher
+    }
+    
+    func getNeutronFetcher() -> NeutronFetcher? {
+        if (supportCosmos != true) { return nil }
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = NeutronFetcher.init(self)
+        }
+        return cosmosFetcher as? NeutronFetcher
     }
     
     override func fetchData(_ id: Int64) {
@@ -55,7 +61,7 @@ class ChainNeutron: BaseChain {
             }
             
             if let neutronFetcher = getCosmosfetcher(), fetchState == .Success {
-                neutronFetcher.onCheckCosmosVesting()
+                neutronFetcher.onCheckVesting()
                 
                 var coinsValue = NSDecimalNumber.zero
                 var coinsUSDValue = NSDecimalNumber.zero

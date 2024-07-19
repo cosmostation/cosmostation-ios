@@ -41,8 +41,8 @@ class OkWithdraw: BaseVC {
     @IBOutlet weak var withdrawBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: BaseChain!
-//    var oktFetcher: OktFetcher!
+    var selectedChain: ChainOktEVM!
+    var oktFetcher: OktFetcher!
     var stakeDenom: String!
     var tokenInfo: JSON!
     var availableAmount = NSDecimalNumber.zero
@@ -56,17 +56,17 @@ class OkWithdraw: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-//        oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher
+        oktFetcher = selectedChain.getOktfetcher()
         stakeDenom = selectedChain.stakeDenom
         
-//        tokenInfo = oktFetcher.lcdOktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
-//        let original_symbol = tokenInfo["original_symbol"].stringValue
-//        toWithdrawAssetImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
-//        toWithdrawSymbolLabel.text = original_symbol.uppercased()
-//        availableAmount = oktFetcher.lcdOktDepositAmount()
-//        
-//        toWithdrawAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
-//        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
+        tokenInfo = oktFetcher.oktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
+        let original_symbol = tokenInfo["original_symbol"].stringValue
+        toWithdrawAssetImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
+        toWithdrawSymbolLabel.text = original_symbol.uppercased()
+        availableAmount = oktFetcher.oktDepositAmount()
+        
+        toWithdrawAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
+        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
         onUpdateFeeView()
     }
@@ -138,27 +138,27 @@ class OkWithdraw: BaseVC {
     }
     
     func onUpdateFeeView() {
-//        feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
-//        feeSelectLabel.text = stakeDenom.uppercased()
-//        
-//        let existCnt = oktFetcher.lcdOktDeposits["validator_address"].arrayValue.count
-//        
-//        
-//        gasAmount = NSDecimalNumber(string: BASE_GAS_AMOUNT)
-//        gasFee = NSDecimalNumber(string: OKT_BASE_FEE)
-//        if (existCnt > 10) {
-//            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "3"))
-//            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "3"))
-//        } else if (existCnt > 20) {
-//            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "4"))
-//            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "4"))
-//        }
-//        
-//        let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
-//        let feeValue = msPrice.multiplying(by: gasFee, withBehavior: handler6)
-//        feeAmountLabel?.attributedText = WDP.dpAmount(gasFee.stringValue, feeAmountLabel!.font, 18)
-//        feeDenomLabel.text = stakeDenom.uppercased()
-//        WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+        feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
+        feeSelectLabel.text = stakeDenom.uppercased()
+        
+        let existCnt = oktFetcher.oktDeposits["validator_address"].arrayValue.count
+        
+        
+        gasAmount = NSDecimalNumber(string: BASE_GAS_AMOUNT)
+        gasFee = NSDecimalNumber(string: OKT_BASE_FEE)
+        if (existCnt > 10) {
+            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "3"))
+            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "3"))
+        } else if (existCnt > 20) {
+            gasFee = gasFee.multiplying(by: NSDecimalNumber(string: "4"))
+            gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "4"))
+        }
+        
+        let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
+        let feeValue = msPrice.multiplying(by: gasFee, withBehavior: handler6)
+        feeAmountLabel?.attributedText = WDP.dpAmount(gasFee.stringValue, feeAmountLabel!.font, 18)
+        feeDenomLabel.text = stakeDenom.uppercased()
+        WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
     }
 
     @IBAction func onClickWithdraw(_ sender: UIButton) {
@@ -211,16 +211,15 @@ extension OkWithdraw: LegacyAmountSheetDelegate, MemoDelegate, PinDelegate {
 extension OkWithdraw {
     
     func broadcastOktWithdrawTx() async throws -> JSON? {
-//        let withdrawCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(toWithdrawAmount, 18))
-//        let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(gasFee, 18))
-//        let fee = L_Fee(gasAmount.stringValue, [gasCoin])
-//        
-//        let okMsg = L_Generator.oktWithdrawMsg(selectedChain.bechAddress!, withdrawCoin)
-//        let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
-//        let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
-//        
-//        let url = oktFetcher.getLcd() + "txs"
-//        return try? await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
-        return nil
+        let withdrawCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(toWithdrawAmount, 18))
+        let gasCoin = L_Coin(stakeDenom, WUtils.getFormattedNumber(gasFee, 18))
+        let fee = L_Fee(gasAmount.stringValue, [gasCoin])
+        
+        let okMsg = L_Generator.oktWithdrawMsg(selectedChain.bechAddress!, withdrawCoin)
+        let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
+        let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
+        
+        let url = oktFetcher.getLcd() + "txs"
+        return try? await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
     }
 }

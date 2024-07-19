@@ -1,5 +1,5 @@
 //
-//  FetcherEvmrpc.swift
+//  EvmFetcher.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 6/15/24.
@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import BigInt
 
-class FetcherEvmrpc {
+class EvmFetcher {
     
     var chain: BaseChain!
     
@@ -23,7 +23,7 @@ class FetcherEvmrpc {
     }
     
     
-    func fetchBalances() async -> Bool {
+    func fetchEvmBalances() async -> Bool {
         evmBalances = NSDecimalNumber.zero
         if let balanceJson = try? await fetchEvmBalance(chain.evmAddress!),
            let balance = balanceJson?["result"].stringValue.hexToNSDecimal {
@@ -103,7 +103,7 @@ class FetcherEvmrpc {
 }
 
 //about mintscan api
-extension FetcherEvmrpc {
+extension EvmFetcher {
     
     func fetchErc20Info() async throws -> [MintscanToken]?  {
         return try await AF.request(BaseNetWork.msErc20InfoUrl(chain.apiName), method: .get).serializingDecodable([MintscanToken].self).value
