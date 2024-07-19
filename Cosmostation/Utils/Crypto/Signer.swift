@@ -387,7 +387,7 @@ class Signer {
         if let cosmosFetcher = baseChain.getCosmosfetcher(),
            let height = try await cosmosFetcher.fetchLastBlock() {
             try? await cosmosFetcher.fetchAuth()
-            let txBody = getTxBody(msgs, memo, height)
+            let txBody = getTxBody(baseChain, msgs, memo, height)
             let authInfo = getAuthInfo(baseChain, fee, tip)
             let simulateTx = getSimulTxs(txBody, authInfo)
             return Cosmos_Tx_V1beta1_SimulateRequest.with {
@@ -403,7 +403,7 @@ class Signer {
         if let cosmosFetcher = baseChain.getCosmosfetcher(),
            let height = try await cosmosFetcher.fetchLastBlock() {
             try? await cosmosFetcher.fetchAuth()
-            let txBody = getTxBody(msgs, memo, height)
+            let txBody = getTxBody(baseChain, msgs, memo, height)
             let authInfo = getAuthInfo(baseChain, fee, tip)
             let rawTx = getRawTxs(txBody, authInfo, baseChain)
             return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
@@ -414,12 +414,12 @@ class Signer {
         return nil
     }
     
-    static func getTxBody(_ msgAnys: [Google_Protobuf_Any], _ memo: String, _ timeout: Int64?) -> Cosmos_Tx_V1beta1_TxBody {
+    static func getTxBody(_ baseChain: BaseChain, _ msgAnys: [Google_Protobuf_Any], _ memo: String, _ timeout: Int64?) -> Cosmos_Tx_V1beta1_TxBody {
         return Cosmos_Tx_V1beta1_TxBody.with {
             $0.memo = memo
             $0.messages = msgAnys
             if let height = timeout {
-                $0.timeoutHeight = UInt64(height) + 30
+                $0.timeoutHeight = UInt64(height) + baseChain.getTimeoutAdding()
             }
         }
     }

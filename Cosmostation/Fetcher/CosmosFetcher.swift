@@ -115,7 +115,7 @@ class CosmosFetcher {
             return true
             
         } catch {
-            print("lcd error \(error) ", chain.tag)
+            print("fetchCosmos error \(error) ", chain.tag)
             return false
         }
     }
