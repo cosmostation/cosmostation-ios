@@ -20,7 +20,7 @@ class ChainBitsong: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/639'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ubtsg"
         bechAccountPrefix = "bitsong"
         validatorPrefix = "bitsongvaloper"

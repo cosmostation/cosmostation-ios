@@ -66,7 +66,7 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 3 && selectedChain.getGrpcfetcher()?.rewardAddress == nil) { return 0 }
+        if (section == 3 && selectedChain.getCosmosfetcher()?.rewardAddress == nil) { return 0 }
         if (section == 4) { return 0 }
         return 40
     }
@@ -77,7 +77,7 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 3 && selectedChain.getGrpcfetcher()?.rewardAddress == nil) { return 0 }
+        if (indexPath.section == 3 && selectedChain.getCosmosfetcher()?.rewardAddress == nil) { return 0 }
         return UITableView.automaticDimension
     }
     
@@ -117,7 +117,7 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 3) {
-            if let rewardAddress = selectedChain.getGrpcfetcher()?.rewardAddress {
+            if let rewardAddress = selectedChain.getCosmosfetcher()?.rewardAddress {
                 UIPasteboard.general.string = rewardAddress.trimmingCharacters(in: .whitespacesAndNewlines)
                 self.onShowToast(NSLocalizedString("address_copied", comment: ""))
             }

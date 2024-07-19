@@ -14,7 +14,7 @@ class KavaLendListVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: BaseChain!
+    var selectedChain: ChainKavaEVM!
     var kavaFetcher: KavaFetcher!
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
     var hardParams: Kava_Hard_V1beta1_Params?
@@ -28,7 +28,7 @@ class KavaLendListVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        kavaFetcher = selectedChain.getGrpcfetcher() as? KavaFetcher
+        kavaFetcher = selectedChain.getKavaFetcher()
         
         tableView.isHidden = true
         loadingView.isHidden = false

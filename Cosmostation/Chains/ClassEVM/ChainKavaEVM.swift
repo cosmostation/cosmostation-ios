@@ -10,7 +10,7 @@ import Foundation
 
 class ChainKavaEVM: BaseChain  {
     
-    var kavaFetcher: KavaFetcher?
+//    var kavaFetcher: KavaFetcher?
     
     override init() {
         super.init()
@@ -22,7 +22,7 @@ class ChainKavaEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ukava"
         bechAccountPrefix = "kava"
         validatorPrefix = "kavavaloper"
@@ -36,11 +36,18 @@ class ChainKavaEVM: BaseChain  {
         evmRpcURL = "https://rpc-kava-evm.cosmostation.io"
     }
     
-    override func getGrpcfetcher() -> FetcherGrpc? {
-        if (kavaFetcher == nil) {
-            kavaFetcher = KavaFetcher.init(self)
+    override func getCosmosfetcher() -> CosmosFetcher? {
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = KavaFetcher.init(self)
         }
-        return kavaFetcher
+        return cosmosFetcher
+    }
+    
+    func getKavaFetcher() -> KavaFetcher? {
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = KavaFetcher.init(self)
+        }
+        return cosmosFetcher as? KavaFetcher
     }
     
 //    override func getExplorerAccount() -> URL? {

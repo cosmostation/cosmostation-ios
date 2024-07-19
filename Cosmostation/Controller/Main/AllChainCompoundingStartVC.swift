@@ -75,11 +75,11 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
     
     func onInitView() {
         if (baseAccount.getDpChains().filter { $0.fetchState == .Busy }.count == 0) {
-            baseAccount.getDpChains().filter { $0.isTestnet == false && $0.supportCosmosGrpc }.forEach { chain in
-                if let grpcFetcher = chain.getGrpcfetcher(),
+            baseAccount.getDpChains().filter { $0.isTestnet == false && $0.supportCosmos }.forEach { chain in
+                if let cosmosFetcher = chain.getCosmosfetcher(),
                    let txFee = chain.getInitPayableFee(),
-                   grpcFetcher.rewardAddress == chain.bechAddress {
-                    let compoundable = grpcFetcher.compoundableRewards()
+                   cosmosFetcher.rewardAddress == chain.bechAddress {
+                    let compoundable = cosmosFetcher.compoundableRewards()
                     if (compoundable.count > 0) {
                         compoundableRewards.append(ClaimAllModel.init(chain, compoundable))
                     }
@@ -125,8 +125,7 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
                     let chain = compoundableRewards[i].cosmosChain!
                     let rewards = compoundableRewards[i].rewards
                     var txFee = chain.getInitPayableFee()!
-                    if let simul = try await simulateCompoundingTx(chain, rewards) {
-                        let toGas = simul.gasInfo.gasUsed
+                    if let toGas = try await simulateCompoundingTx(chain, rewards) {
                         txFee.gasLimit = UInt64(Double(toGas) * chain.gasMultiply())
                         if let gasRate = chain.getBaseFeeInfo().FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                             let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
@@ -186,7 +185,7 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
     func checkTx(_ chain: BaseChain, _ position: Int, _ txResponse: Cosmos_Base_Abci_V1beta1_TxResponse) {
         Task {
             do {
-                let result = try await chain.getGrpcfetcher()!.fetchTx(txResponse.txhash)
+                let result = try await chain.getCosmosfetcher()!.fetchTx(txResponse.txhash)
                 compoundableRewards[position].txResponse = result
                 compoundableRewards[position].isBusy = false
                 DispatchQueue.main.async {
@@ -238,11 +237,11 @@ extension AllChainCompoundingStartVC: UITableViewDelegate, UITableViewDataSource
 
 extension AllChainCompoundingStartVC {
     
-    func simulateCompoundingTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+    func simulateCompoundingTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) async throws -> UInt64? {
         let msgs = Signer.genCompoundingMsg(chain.bechAddress!, claimableRewards, chain.stakeDenom!)
-        if let grpcFetcher = chain.getGrpcfetcher(),
+        if let cosmosFetcher = chain.getCosmosfetcher(),
            let simulReq = try await Signer.genSimul(chain, msgs, "", chain.getInitPayableFee()!, nil) {
-            return try await grpcFetcher.simulateTx(simulReq)
+            return try await cosmosFetcher.simulateTx(simulReq)
         }
         return nil
     }
@@ -250,9 +249,9 @@ extension AllChainCompoundingStartVC {
     func broadcastCompoundingTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip? = nil) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
         let msgs = Signer.genCompoundingMsg(chain.bechAddress!, claimableRewards, chain.stakeDenom!)
-        if let grpcFetcher = chain.getGrpcfetcher(),
+        if let cosmosFetcher = chain.getCosmosfetcher(),
            let broadReq = try await Signer.genTx(chain, msgs, "", fee, tip) {
-            return try await grpcFetcher.broadcastTx(broadReq)
+            return try await cosmosFetcher.broadcastTx(broadReq)
         }
         return nil
     }

@@ -32,7 +32,7 @@ class NeutronMultiDao: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        neutronFetcher = selectedChain.neutronFetcher
+        neutronFetcher = selectedChain.getNeutronFetcher()
         
         tableView.isHidden = true
         loadingView.isHidden = false
@@ -107,9 +107,8 @@ class NeutronMultiDao: BaseVC {
         self.filteredEtcPeriods.removeAll()
         
         Task {
-            if let response = try await neutronFetcher.fetchNeutronProposals(1),
-                let result = try? JSONDecoder().decode(JSON.self, from: response) {
-                result["proposals"].arrayValue.forEach { proposal in
+            if let response = try await neutronFetcher.fetchNeutronProposals(1) {
+                response["proposals"].arrayValue.forEach { proposal in
                     let title = proposal["proposal"]["title"].stringValue.lowercased()
                     if (proposal["proposal"]["status"].stringValue.lowercased() == "open") {
                         votingPeriods.append(proposal)
@@ -177,7 +176,7 @@ extension NeutronMultiDao: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"CosmosProposalCell") as! CosmosProposalCell
-        let module = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"][1]
+        let module = neutronFetcher.daosList?[0]["proposal_modules"][1]
         var proposal: JSON!
         if (indexPath.section == 0) {
             if (isShowAll) {
@@ -213,7 +212,7 @@ extension NeutronMultiDao: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contAddress = selectedChain.neutronFetcher!.daosList?[0]["proposal_modules"][1]["address"].string ?? ""
+        let contAddress = neutronFetcher.daosList?[0]["proposal_modules"][1]["address"].string ?? ""
         var proposal: JSON!
         if (indexPath.section == 0) {
             if (isShowAll) {

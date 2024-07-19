@@ -10,8 +10,6 @@ import Foundation
 
 class ChainNeutron: BaseChain {
     
-    var neutronFetcher: NeutronFetcher?
-    
     override init() {
         super.init()
         
@@ -22,7 +20,7 @@ class ChainNeutron: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "untrn"
         bechAccountPrefix = "neutron"
         validatorPrefix = "neutronvaloper"
@@ -30,22 +28,29 @@ class ChainNeutron: BaseChain {
         supportCw20 = true
         grpcHost = "grpc-neutron.cosmostation.io"
         
-//        grpcHost = "grpc-office-neutron.cosmostation.io"
-//        grpcHost = "grpc-office-neutron2.cosmostation.io"
-        
     }
     
-    override func getGrpcfetcher() -> NeutronFetcher? {
-        if (neutronFetcher == nil) {
-            neutronFetcher = NeutronFetcher.init(self)
+    override func getCosmosfetcher() -> CosmosFetcher? {
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = NeutronFetcher.init(self)
         }
-        return neutronFetcher
+        return cosmosFetcher
+    }
+    
+    func getNeutronFetcher() -> NeutronFetcher? {
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = NeutronFetcher.init(self)
+        }
+        return cosmosFetcher as? NeutronFetcher
     }
     
     override func fetchData(_ id: Int64) {
         fetchState = .Busy
         Task {
-            let result = await getGrpcfetcher()?.fetchGrpcData(id)
+            coinsCnt = 0
+            tokensCnt = 0
+            
+            let result = await getCosmosfetcher()?.fetchCosmosData(id)
             
             if (result == false) {
                 fetchState = .Fail
@@ -53,7 +58,7 @@ class ChainNeutron: BaseChain {
                 fetchState = .Success
             }
             
-            if let neutronFetcher = getGrpcfetcher(), fetchState == .Success {
+            if let neutronFetcher = getCosmosfetcher(), fetchState == .Success {
                 neutronFetcher.onCheckVesting()
                 
                 var coinsValue = NSDecimalNumber.zero

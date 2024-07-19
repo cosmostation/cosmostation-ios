@@ -92,14 +92,14 @@ class CosmosStakingInfoVC: BaseVC {
     
     func onSetStakeData() {
         Task {
-            if let grpcFetcher = selectedChain.getGrpcfetcher() {
-                rewardAddress = grpcFetcher.rewardAddress
-                validators = grpcFetcher.cosmosValidators
-                delegations = grpcFetcher.cosmosDelegations
-                rewards = grpcFetcher.cosmosRewards
+            if let cosmosFetcher = selectedChain.getCosmosfetcher() {
+                rewardAddress = cosmosFetcher.rewardAddress
+                validators = cosmosFetcher.cosmosValidators
+                delegations = cosmosFetcher.cosmosDelegations
+                rewards = cosmosFetcher.cosmosRewards
                 unbondings.removeAll()
                 
-                grpcFetcher.cosmosUnbondings?.forEach { unbonding in
+                cosmosFetcher.cosmosUnbondings?.forEach { unbonding in
                     unbonding.entries.forEach { entry in
                         unbondings.append(UnbondingEntry.init(validatorAddress: unbonding.validatorAddress, entry: entry))
                     }
@@ -228,7 +228,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain.getGrpcfetcher()?.rewardAddress != selectedChain.bechAddress) {
+        if (selectedChain.getCosmosfetcher()?.rewardAddress != selectedChain.bechAddress) {
             onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
             return
         }

@@ -41,7 +41,7 @@ class OkDeposit: BaseVC {
     @IBOutlet weak var depositBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: BaseChain!
+    var selectedChain: ChainOktEVM!
     var oktFetcher: OktFetcher!
     var stakeDenom: String!
     var tokenInfo: JSON!
@@ -56,17 +56,17 @@ class OkDeposit: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher
+        oktFetcher = selectedChain.getOktfetcher()
         stakeDenom = selectedChain.stakeDenom
         
         onUpdateFeeView()
         
-        tokenInfo = oktFetcher.lcdOktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
+        tokenInfo = oktFetcher.oktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
         let original_symbol = tokenInfo["original_symbol"].stringValue
         toDepositAssetImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
         toDepositSymbolLabel.text = original_symbol.uppercased()
         
-        let available = oktFetcher.lcdBalanceAmount(stakeDenom)
+        let available = oktFetcher.oktBalanceAmount(stakeDenom)
         availableAmount = available.subtracting(gasFee)
         
         toDepositAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
@@ -143,7 +143,7 @@ class OkDeposit: BaseVC {
         feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
         feeSelectLabel.text = stakeDenom.uppercased()
         
-        let existCnt = oktFetcher.lcdOktDeposits["validator_address"].arrayValue.count
+        let existCnt = oktFetcher.oktDeposits["validator_address"].arrayValue.count
         
         
         gasAmount = NSDecimalNumber(string: BASE_GAS_AMOUNT)

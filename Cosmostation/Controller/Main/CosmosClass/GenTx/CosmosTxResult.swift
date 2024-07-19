@@ -25,7 +25,7 @@ class CosmosTxResult: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedChain: BaseChain!
-    var grpcFetcher: FetcherGrpc!
+    var cosmosFetcher: CosmosFetcher!
     var broadcastTxResponse: Cosmos_Base_Abci_V1beta1_TxResponse?
     var txResponse: Cosmos_Tx_V1beta1_GetTxResponse?
     var fetchCnt = 10
@@ -37,7 +37,7 @@ class CosmosTxResult: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         if (selectedChain.name != "OKT") {
-            grpcFetcher = selectedChain.getGrpcfetcher()
+            cosmosFetcher = selectedChain.getCosmosfetcher()
         }
         
         loadingView.isHidden = false
@@ -100,7 +100,7 @@ class CosmosTxResult: BaseVC {
     func fetchTx() {
         Task {
             do {
-                let result = try await grpcFetcher.fetchTx(broadcastTxResponse!.txhash)
+                let result = try await cosmosFetcher.fetchTx(broadcastTxResponse!.txhash)
                 self.txResponse = result
                 DispatchQueue.main.async {
                     self.onUpdateView()

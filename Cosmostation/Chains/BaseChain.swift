@@ -10,7 +10,6 @@ import Foundation
 import SwiftyJSON
 import BigInt
 
-
 class BaseChain {
     //account and commmon info
     var name: String!
@@ -24,8 +23,7 @@ class BaseChain {
     var publicKey: Data?
     
     //cosmos & grpc & lcd info
-    var supportCosmosGrpc = false
-    var supportCosmosLcd = false
+    var cosmosEndPointType: CosmosEndPointType?
     var chainIdCosmos: String?
     var bechAddress: String?
     var stakeDenom: String?
@@ -55,9 +53,8 @@ class BaseChain {
     var allTokenUSDValue = NSDecimalNumber.zero
     
     var fetchState = FetchState.Idle
-    var grpcFetcher: FetcherGrpc?
-    var lcdFetcher: FetcherLcd?
-    var evmFetcher: FetcherEvmrpc?
+    var cosmosFetcher: CosmosFetcher?
+    var evmFetcher: EvmFetcher?
     
     var coinsCnt = 0
     var tokensCnt = 0
@@ -83,81 +80,106 @@ class BaseChain {
             
         } else {
             evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-            if (isCosmos()) {
+            if (supportCosmos) {
                 bechAddress = KeyFac.convertEvmToBech32(evmAddress!, bechAccountPrefix!)
             }
         }
         
-        if (isCosmos() && supportStaking) {
+        if (supportCosmos && supportStaking) {
             bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, validatorPrefix)
         }
     }
     
-    func getGrpcfetcher() -> FetcherGrpc? {
-        if (supportCosmosGrpc != true) { return nil }
-        if (grpcFetcher == nil) {
-            grpcFetcher = FetcherGrpc.init(self)
+    func getCosmosfetcher() -> CosmosFetcher? {
+        if (supportCosmos != true) { return nil }
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = CosmosFetcher.init(self)
         }
-        return grpcFetcher
+        return cosmosFetcher
     }
     
-    func getLcdfetcher() -> FetcherLcd? {
-        if (supportCosmosLcd != true) { return nil }
-        if (lcdFetcher == nil) {
-            lcdFetcher = FetcherLcd.init(self)
-        }
-        return lcdFetcher
-    }
-    
-    func getEvmfetcher() -> FetcherEvmrpc? {
+    func getEvmfetcher() -> EvmFetcher? {
         if (supportEvm != true) { return nil }
         if (evmFetcher == nil) {
-            evmFetcher = FetcherEvmrpc.init(self)
+            evmFetcher = EvmFetcher.init(self)
         }
         return evmFetcher
+    }
+    
+    //fetch only balance for add account check
+    func fetchBalances() {
+        fetchState = .Busy
+        Task {
+            coinsCnt = 0
+            var evmResult: Bool?
+            var cosmosResult: Bool?
+            
+            if (supportEvm == true) {
+                evmResult = await getEvmfetcher()?.fetchEvmBalances()
+                coinsCnt = getEvmfetcher()?.valueCoinCnt() ?? 0
+            }
+            if (supportCosmos == true) {
+                cosmosResult = await getCosmosfetcher()?.fetchCosmosBalances()
+                coinsCnt = getCosmosfetcher()?.valueCoinCnt() ?? 0
+            }
+            if (evmResult == false || cosmosResult == false) {
+                fetchState = .Fail
+            } else {
+                fetchState = .Success
+            }
+            
+            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
+                cosmosFetcher.onCheckVesting()
+            }
+            
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
+            })
+        }
     }
     
     func fetchData(_ id: Int64) {
         fetchState = .Busy
         Task {
-            var evmResult: Bool?
-            var grpcResult: Bool?
             coinsCnt = 0
             tokensCnt = 0
+            var evmResult: Bool?
+            var cosmosResult: Bool?
             
             if (supportEvm == true) {
                 evmResult = await getEvmfetcher()?.fetchEvmData(id)
             }
-            if (supportCosmosGrpc == true) {
-                grpcResult = await getGrpcfetcher()?.fetchGrpcData(id)
+            if (supportCosmos == true) {
+                cosmosResult = await getCosmosfetcher()?.fetchCosmosData(id)
             }
-            if (evmResult == false || grpcResult == false) {
+            if (evmResult == false || cosmosResult == false) {
                 fetchState = .Fail
-//                print("fetching Some error ", tag)
             } else {
                 fetchState = .Success
-//                print("fetching good ", tag)
+            }
+            
+            
+            
+            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
+                cosmosFetcher.onCheckVesting()
             }
             
             if (self.fetchState == .Success) {
-                if let grpcFetcher = getGrpcfetcher() {
-                    grpcFetcher.onCheckVesting()
-                }
                 var coinsValue = NSDecimalNumber.zero
                 var coinsUSDValue = NSDecimalNumber.zero
                 var mainCoinAmount = NSDecimalNumber.zero
                 var tokensValue = NSDecimalNumber.zero
                 var tokensUSDValue = NSDecimalNumber.zero
                 
-                if (supportEvm && supportCosmosGrpc) {
-                    if let grpcFetcher = getGrpcfetcher() {
-                        coinsCnt = grpcFetcher.valueCoinCnt()
-                        coinsValue = grpcFetcher.allCoinValue()
-                        coinsUSDValue = grpcFetcher.allCoinValue(true)
-                        mainCoinAmount = grpcFetcher.allStakingDenomAmount()
-                        tokensCnt = grpcFetcher.valueTokenCnt()
-                        tokensValue = grpcFetcher.allTokenValue()
-                        tokensUSDValue = grpcFetcher.allTokenValue(true)
+                if (supportEvm && supportCosmos) {
+                    if let cosmosFetcher = getCosmosfetcher() {
+                        coinsCnt = cosmosFetcher.valueCoinCnt()
+                        coinsValue = cosmosFetcher.allCoinValue()
+                        coinsUSDValue = cosmosFetcher.allCoinValue(true)
+                        mainCoinAmount = cosmosFetcher.allStakingDenomAmount()
+                        tokensCnt = cosmosFetcher.valueTokenCnt()
+                        tokensValue = cosmosFetcher.allTokenValue()
+                        tokensUSDValue = cosmosFetcher.allTokenValue(true)
                     }
                     if let evmFetcher = getEvmfetcher() {
                         tokensCnt = tokensCnt + evmFetcher.valueTokenCnt()
@@ -165,15 +187,15 @@ class BaseChain {
                         tokensUSDValue = tokensUSDValue.adding(evmFetcher.allTokenValue(true))
                     }
                     
-                } else if (supportCosmosGrpc) {
-                    if let grpcFetcher = getGrpcfetcher() {
-                        coinsCnt = grpcFetcher.valueCoinCnt()
-                        coinsValue = grpcFetcher.allCoinValue()
-                        coinsUSDValue = grpcFetcher.allCoinValue(true)
-                        mainCoinAmount = grpcFetcher.allStakingDenomAmount()
-                        tokensCnt = grpcFetcher.valueTokenCnt()
-                        tokensValue = grpcFetcher.allTokenValue()
-                        tokensUSDValue = grpcFetcher.allTokenValue(true)
+                } else if (supportCosmos) {
+                    if let cosmosFetcher = getCosmosfetcher() {
+                        coinsCnt = cosmosFetcher.valueCoinCnt()
+                        coinsValue = cosmosFetcher.allCoinValue()
+                        coinsUSDValue = cosmosFetcher.allCoinValue(true)
+                        mainCoinAmount = cosmosFetcher.allStakingDenomAmount()
+                        tokensCnt = cosmosFetcher.valueTokenCnt()
+                        tokensValue = cosmosFetcher.allTokenValue()
+                        tokensUSDValue = cosmosFetcher.allTokenValue(true)
                     }
                     
                 } else if (supportEvm) {
@@ -196,9 +218,7 @@ class BaseChain {
                     RefAddress(id, self.tag, self.bechAddress ?? "", self.evmAddress ?? "",
                                mainCoinAmount.stringValue, allCoinUSDValue.stringValue, allTokenUSDValue.stringValue,
                                coinsCnt))
-                
             }
-            
             DispatchQueue.main.async(execute: {
 //                print("", self.tag, " FetchData post")
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
@@ -208,11 +228,10 @@ class BaseChain {
     
     func fetchValidatorInfos() {
         Task {
-            if (name == "OKT") {
-                _  = await getLcdfetcher()?.fetchValidators()
-                
-            } else if (supportCosmosGrpc == true && supportStaking == true) {
-                _ = await getGrpcfetcher()?.fetchValidators()
+            if let oktChain = self as? ChainOktEVM {
+                _ = await oktChain.getOktfetcher()?.fetchCosmosValidators()
+            } else if (supportCosmos == true && supportStaking == true) {
+                _ = await getCosmosfetcher()?.fetchCosmosValidators()
             }
             
             DispatchQueue.main.async(execute: {
@@ -221,58 +240,21 @@ class BaseChain {
         }
     }
     
-    //fetch only balance for add account check
-    func fetchBalances() {
-        fetchState = .Busy
-        Task {
-            coinsCnt = 0
-            var evmResult: Bool?
-            var grpcResult: Bool?
-            
-            if (supportEvm == true) {
-                evmResult = await getEvmfetcher()?.fetchBalances()
-            }
-            if (supportCosmosGrpc == true) {
-                grpcResult = await getGrpcfetcher()?.fetchBalances()
-            }
-            if (evmResult == false || grpcResult == false) {
-                fetchState = .Fail
-            } else {
-                fetchState = .Success
-            }
-            
-            if (self.fetchState == .Success) {
-                if (supportCosmosGrpc) {
-                    if let grpcFetcher = getGrpcfetcher() {
-                        coinsCnt = grpcFetcher.valueCoinCnt()
-                    }
-                    
-                } else if (supportEvm) {
-                    if let evmFetcher = getEvmfetcher() {
-                        coinsCnt = evmFetcher.valueCoinCnt()
-                    }
-                }
-            }
-            
-            DispatchQueue.main.async(execute: {
-                NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
-            })
-        }
-    }
+    
     
     func isTxFeePayable() -> Bool {
-        if (name == "OKT") {
-            let availableAmount = getLcdfetcher()?.lcdBalanceAmount(stakeDenom!) ?? NSDecimalNumber.zero
+        if let oktChain = self as? ChainOktEVM {
+            let availableAmount = oktChain.getOktfetcher()?.oktBalanceAmount(stakeDenom!) ?? NSDecimalNumber.zero
             return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
             
         } else if (supportEvm) {
             return getEvmfetcher()?.evmBalances.compare(EVM_BASE_FEE).rawValue ?? 0 > 0
             
-        } else if (supportCosmosGrpc) {
+        } else if (supportCosmos) {
             var result = false
-            if (getGrpcfetcher()?.cosmosBaseFees.count ?? 0 > 0) {
-                getGrpcfetcher()?.cosmosBaseFees.forEach({ basefee in
-                    let availaAmount = getGrpcfetcher()?.balanceAmount(basefee.denom) ?? NSDecimalNumber.zero
+            if (getCosmosfetcher()?.cosmosBaseFees.count ?? 0 > 0) {
+                getCosmosfetcher()?.cosmosBaseFees.forEach({ basefee in
+                    let availaAmount = getCosmosfetcher()?.balanceAmount(basefee.denom) ?? NSDecimalNumber.zero
                     let minFeeAmount = basefee.getdAmount().multiplying(by: getFeeBaseGasAmount(), withBehavior: handler0Down)
                     if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
                         result = true
@@ -282,7 +264,7 @@ class BaseChain {
                 
             } else {
                 getDefaultFeeCoins().forEach { minFee in
-                    let availaAmount = getGrpcfetcher()?.balanceAmount(minFee.denom) ?? NSDecimalNumber.zero
+                    let availaAmount = getCosmosfetcher()?.balanceAmount(minFee.denom) ?? NSDecimalNumber.zero
                     let minFeeAmount = NSDecimalNumber.init(string: minFee.amount)
                     if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
                         result = true
@@ -295,17 +277,19 @@ class BaseChain {
         return false
     }
     
-
-    func isCosmos() -> Bool {
-        return supportCosmosGrpc || supportCosmosLcd
-    }
-    
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
         if (usd == true) {
             return allCoinUSDValue.adding(allTokenUSDValue)
         } else {
             return allCoinValue.adding(allTokenValue)
         }
+    }
+    
+    var supportCosmos: Bool {
+        if (cosmosEndPointType == nil || cosmosEndPointType == .Unknown) {
+            return false
+        }
+        return true
     }
     
 }
@@ -350,6 +334,10 @@ extension BaseChain {
     
     func supportFeeMarket() -> Bool {
         return getChainListParam()["fee"]["feemarket"].bool ?? false
+    }
+    
+    func getTimeoutAdding() -> UInt64 {
+        return getChainListParam()["tx_timeout_add"].uInt64 ?? 30
     }
     
     func getFeeInfos() -> [FeeInfo] {
@@ -420,11 +408,11 @@ extension BaseChain {
     
     //get first payable fee with this account
     func getInitPayableFee() -> Cosmos_Tx_V1beta1_Fee? {
-        guard let grpcFetcher = getGrpcfetcher() else { return nil }
+        guard let cosmosFetcher = getCosmosfetcher() else { return nil }
         var feeCoin: Cosmos_Base_V1beta1_Coin?
         for i in 0..<getDefaultFeeCoins().count {
             let minFee = getDefaultFeeCoins()[i]
-            if (grpcFetcher.balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+            if (cosmosFetcher.balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
                 feeCoin = minFee
                 break
             }
@@ -458,7 +446,7 @@ extension BaseChain {
     
     
     func evmGasMultiply() -> BigUInt {
-        if let mutiply = getChainListParam()["evm_fee"]["simul_gas_multiply"].int {
+        if let mutiply = getChainListParam()["evm_fee"]["simul_gas_multiply"].double {
             return BigUInt(mutiply * 10)
         }
         return 13
@@ -470,7 +458,7 @@ extension BaseChain {
 extension BaseChain {
     
     func getExplorerAccount() -> URL? {
-        let address: String = isCosmos() ? bechAddress! : evmAddress!
+        let address: String = supportCosmos ? bechAddress! : evmAddress!
         if let urlString = getChainListParam()["explorer"]["account"].string,
            let url = URL(string: urlString.replacingOccurrences(of: "${address}", with: address)) {
             return url
@@ -596,7 +584,6 @@ func ALLCHAINS() -> [BaseChain] {
     
     
     
-    
     result.append(ChainCosmos_T())
     result.append(ChainArtelaEVM_T())
     //result.append(ChainInitia_T())
@@ -630,5 +617,14 @@ enum FetchState: Int {
     case Success = 1
     case Fail = 2
 }
+
+
+
+enum CosmosEndPointType: Int {
+    case Unknown = 0
+    case UseGRPC = 1
+    case UseLCD = 2
+}
+
 
 let DEFUAL_DISPALY_CHAINS = ["cosmos118", "ethereum60", "neutron118", "kava60", "osmosis118", "dydx118"]

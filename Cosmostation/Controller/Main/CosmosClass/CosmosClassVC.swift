@@ -88,9 +88,7 @@ class CosmosClassVC: BaseVC {
         onSetTabbarView()
         onSetFabButton()
         
-        if (selectedChain.name == "OKT" || selectedChain.supportStaking) {
-            selectedChain.fetchValidatorInfos()
-        }
+        selectedChain.fetchValidatorInfos()
         
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
         addressTap.cancelsTouchesInView = false
@@ -284,7 +282,7 @@ class CosmosClassVC: BaseVC {
             mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
                 self.onProposalList()
             }
-            if (selectedChain.getGrpcfetcher()?.cosmosCommissions.count ?? 0 > 0) {
+            if (selectedChain.getCosmosfetcher()?.cosmosCommissions.count ?? 0 > 0) {
                 mainFab.addItem(title: "Claim Commission", image: UIImage(named: "iconFabCommission")) { _ in
                     self.onClaimCommissionTx()
                 }
@@ -479,18 +477,18 @@ extension CosmosClassVC {
     }
     
     func onClaimRewardTx() {
-        guard let grpcFetcher = selectedChain.getGrpcfetcher() else {
+        guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
             return
         }
-        if (grpcFetcher.cosmosValidators.count <= 0) {
+        if (comsosFetcher.cosmosValidators.count <= 0) {
             onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
             return
         }
-        if (grpcFetcher.rewardAllCoins().count == 0) {
+        if (comsosFetcher.rewardAllCoins().count == 0) {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return
         }
-        if (grpcFetcher.claimableRewards().count == 0) {
+        if (comsosFetcher.claimableRewards().count == 0) {
             onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
             return
         }
@@ -499,25 +497,25 @@ extension CosmosClassVC {
             return
         }
         let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
-        claimRewards.claimableRewards = grpcFetcher.claimableRewards()
+        claimRewards.claimableRewards = comsosFetcher.claimableRewards()
         claimRewards.selectedChain = selectedChain
         claimRewards.modalTransitionStyle = .coverVertical
         self.present(claimRewards, animated: true)
     }
     
     func onClaimCompoundingTx() {
-        guard let grpcFetcher = selectedChain.getGrpcfetcher() else {
+        guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
             return
         }
-        if (grpcFetcher.cosmosValidators.count <= 0) {
+        if (comsosFetcher.cosmosValidators.count <= 0) {
             onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
             return
         }
-        if (grpcFetcher.rewardAllCoins().count == 0) {
+        if (comsosFetcher.rewardAllCoins().count == 0) {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return
         }
-        if (grpcFetcher.claimableRewards().count == 0) {
+        if (comsosFetcher.claimableRewards().count == 0) {
             onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
             return
         }
@@ -525,19 +523,19 @@ extension CosmosClassVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (grpcFetcher.rewardAddress != selectedChain.bechAddress) {
+        if (comsosFetcher.rewardAddress != selectedChain.bechAddress) {
             onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
             return
         }
         let compounding = CosmosCompounding(nibName: "CosmosCompounding", bundle: nil)
-        compounding.claimableRewards = grpcFetcher.claimableRewards()
+        compounding.claimableRewards = comsosFetcher.claimableRewards()
         compounding.selectedChain = selectedChain
         compounding.modalTransitionStyle = .coverVertical
         self.present(compounding, animated: true)
     }
     
     func onClaimCommissionTx() {
-        guard let grpcFetcher = selectedChain.getGrpcfetcher() else {
+        guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
             return
         }
         if (selectedChain.isTxFeePayable() == false) {
@@ -558,10 +556,10 @@ extension CosmosClassVC {
     }
     
     func onStakeInfo() {
-        guard let grpcFetcher = selectedChain.getGrpcfetcher() else {
+        guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
             return
         }
-        if (grpcFetcher.cosmosValidators.count <= 0) {
+        if (comsosFetcher.cosmosValidators.count <= 0) {
             onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
             return
         }
@@ -630,8 +628,8 @@ extension CosmosClassVC {
 extension CosmosClassVC {
     
     func onOkDepositTx() {
-        if let oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher {
-            let validators = oktFetcher.lcdOktValidators.count
+        if let oktFetcher = (selectedChain as? ChainOktEVM)?.getOktfetcher() {
+            let validators = oktFetcher.oktValidators.count
             if (validators <= 0) {
                 onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
                 return
@@ -642,15 +640,15 @@ extension CosmosClassVC {
             return
         }
         let okDeposit = OkDeposit(nibName: "OkDeposit", bundle: nil)
-        okDeposit.selectedChain = selectedChain
+        okDeposit.selectedChain = selectedChain as? ChainOktEVM
         okDeposit.modalTransitionStyle = .coverVertical
         self.present(okDeposit, animated: true)
     }
     
     func onOkWithdrawTx() {
-        if let oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher {
-            let validators = oktFetcher.lcdOktValidators.count
-            let myDeposit = oktFetcher.lcdOktDepositAmount().compare(NSDecimalNumber.zero).rawValue
+        if let oktFetcher = (selectedChain as? ChainOktEVM)?.getOktfetcher() {
+            let validators = oktFetcher.oktValidators.count
+            let myDeposit = oktFetcher.oktDepositAmount().compare(NSDecimalNumber.zero).rawValue
             if (validators <= 0) {
                 onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
                 return
@@ -665,15 +663,15 @@ extension CosmosClassVC {
             return
         }
         let okWithdraw = OkWithdraw(nibName: "OkWithdraw", bundle: nil)
-        okWithdraw.selectedChain = selectedChain
+        okWithdraw.selectedChain = selectedChain as? ChainOktEVM
         okWithdraw.modalTransitionStyle = .coverVertical
         self.present(okWithdraw, animated: true)
     }
     
     func onOkAddShareTx() {
-        if let oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher {
-            let validators = oktFetcher.lcdOktValidators.count
-            let myDeposit = oktFetcher.lcdOktDepositAmount().compare(NSDecimalNumber.zero).rawValue
+        if let oktFetcher = (selectedChain as? ChainOktEVM)?.getOktfetcher() {
+            let validators = oktFetcher.oktValidators.count
+            let myDeposit = oktFetcher.oktDepositAmount().compare(NSDecimalNumber.zero).rawValue
             if (validators <= 0) {
                 onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
                 return
@@ -688,7 +686,7 @@ extension CosmosClassVC {
             return
         }
         let okAddShare = OkAddShare(nibName: "OkAddShare", bundle: nil)
-        okAddShare.selectedChain = selectedChain
+        okAddShare.selectedChain = selectedChain as? ChainOktEVM
         okAddShare.modalTransitionStyle = .coverVertical
         self.present(okAddShare, animated: true)
     }

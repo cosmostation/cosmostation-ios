@@ -72,13 +72,14 @@ class LegacyTransfer: BaseVC {
         loadingView.play()
         
         //display to send asset info
-        if let oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher {
-            tokenInfo = oktFetcher.lcdOktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
+        if let oktChain = selectedChain as? ChainOktEVM,
+           let oktFetcher = oktChain.getOktfetcher() {
+            tokenInfo = oktFetcher.oktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
             let original_symbol = tokenInfo["original_symbol"].stringValue
             toSendAssetImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
             toSendSymbolLabel.text = original_symbol.uppercased()
             
-            let available = oktFetcher.lcdBalanceAmount(toSendDenom)
+            let available = oktFetcher.oktBalanceAmount(toSendDenom)
             if (toSendDenom == stakeDenom) {
                 availableAmount = available.subtracting(NSDecimalNumber(string: OKT_BASE_FEE))
             } else {
@@ -317,7 +318,7 @@ extension LegacyTransfer {
         let postData = L_Generator.postData([okMsg], fee, txMemo, selectedChain)
         let param = try! JSONSerialization.jsonObject(with: postData, options: .allowFragments) as? [String: Any]
         
-        let url = selectedChain.getLcdfetcher()!.getLcd() + "txs"
+        let url = (selectedChain as! ChainOktEVM).getOktfetcher()!.getLcd() + "txs"
         return try? await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
     }
     

@@ -384,11 +384,11 @@ class Signer {
     static func genSimul(_ baseChain: BaseChain,
                          _ msgs: [Google_Protobuf_Any],
                          _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip?) async throws -> Cosmos_Tx_V1beta1_SimulateRequest? {
-        if let grpcFetcher = baseChain.getGrpcfetcher(),
-           let account = try await grpcFetcher.fetchAuth(),
-           let height = try? await grpcFetcher.fetchLastBlock()!.block.header.height {
-            let txBody = getTxBody(msgs, memo, UInt64(height))
-            let authInfo = getAuthInfo(account, baseChain, fee, tip)
+        if let cosmosFetcher = baseChain.getCosmosfetcher(),
+           let height = try await cosmosFetcher.fetchLastBlock() {
+            try? await cosmosFetcher.fetchAuth()
+            let txBody = getTxBody(baseChain, msgs, memo, height)
+            let authInfo = getAuthInfo(baseChain, fee, tip)
             let simulateTx = getSimulTxs(txBody, authInfo)
             return Cosmos_Tx_V1beta1_SimulateRequest.with {
                 $0.tx = simulateTx
@@ -400,12 +400,12 @@ class Signer {
     static func genTx(_ baseChain: BaseChain,
                       _ msgs: [Google_Protobuf_Any],
                       _ memo: String, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip?) async throws -> Cosmos_Tx_V1beta1_BroadcastTxRequest? {
-        if let grpcFetcher = baseChain.getGrpcfetcher(),
-           let account = try await grpcFetcher.fetchAuth(),
-           let height = try? await grpcFetcher.fetchLastBlock()!.block.header.height {
-            let txBody = getTxBody(msgs, memo, UInt64(height))
-            let authInfo = getAuthInfo(account, baseChain, fee, tip)
-            let rawTx = getRawTxs(account, txBody, authInfo, baseChain)
+        if let cosmosFetcher = baseChain.getCosmosfetcher(),
+           let height = try await cosmosFetcher.fetchLastBlock() {
+            try? await cosmosFetcher.fetchAuth()
+            let txBody = getTxBody(baseChain, msgs, memo, height)
+            let authInfo = getAuthInfo(baseChain, fee, tip)
+            let rawTx = getRawTxs(txBody, authInfo, baseChain)
             return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
                 $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
                 $0.txBytes = try! rawTx.serializedData()
@@ -414,15 +414,17 @@ class Signer {
         return nil
     }
     
-    static func getTxBody(_ msgAnys: [Google_Protobuf_Any], _ memo: String, _ timeout: UInt64) -> Cosmos_Tx_V1beta1_TxBody {
+    static func getTxBody(_ baseChain: BaseChain, _ msgAnys: [Google_Protobuf_Any], _ memo: String, _ timeout: Int64?) -> Cosmos_Tx_V1beta1_TxBody {
         return Cosmos_Tx_V1beta1_TxBody.with {
             $0.memo = memo
             $0.messages = msgAnys
-            $0.timeoutHeight = timeout + 30
+            if let height = timeout {
+                $0.timeoutHeight = UInt64(height) + baseChain.getTimeoutAdding()
+            }
         }
     }
     
-    static func getAuthInfo(_ account: Google_Protobuf_Any, _ baseChain: BaseChain, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip? = nil) -> Cosmos_Tx_V1beta1_AuthInfo {
+    static func getAuthInfo(_ baseChain: BaseChain, _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip? = nil) -> Cosmos_Tx_V1beta1_AuthInfo {
         let single = Cosmos_Tx_V1beta1_ModeInfo.Single.with {
             $0.mode = Cosmos_Tx_Signing_V1beta1_SignMode.direct
         }
@@ -480,7 +482,7 @@ class Signer {
         let signerInfo =  Cosmos_Tx_V1beta1_SignerInfo.with {
             $0.publicKey = pubKey!
             $0.modeInfo = mode
-            $0.sequence = account.accountInfos().2!
+            $0.sequence = baseChain.getCosmosfetcher()!.cosmosSequenceNum!
         }
         
         return Cosmos_Tx_V1beta1_AuthInfo.with {
@@ -492,13 +494,13 @@ class Signer {
         }
     }
     
-    static func getRawTxs(_ account: Google_Protobuf_Any, _ txBody: Cosmos_Tx_V1beta1_TxBody,
+    static func getRawTxs(_ txBody: Cosmos_Tx_V1beta1_TxBody,
                           _ authInfo: Cosmos_Tx_V1beta1_AuthInfo, _ baseChain: BaseChain) -> Cosmos_Tx_V1beta1_TxRaw {
         let signDoc = Cosmos_Tx_V1beta1_SignDoc.with {
             $0.bodyBytes = try! txBody.serializedData()
             $0.authInfoBytes = try! authInfo.serializedData()
             $0.chainID = baseChain.chainIdCosmos!
-            $0.accountNumber = account.accountInfos().1!
+            $0.accountNumber = baseChain.getCosmosfetcher()!.cosmosAccountNumber!
         }
         let sigbyte = getByteSingleSignatures(try! signDoc.serializedData(), baseChain)
         return Cosmos_Tx_V1beta1_TxRaw.with {

@@ -19,7 +19,7 @@ class ChainSommelier: BaseChain {
         apiName = "sommelier"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "usomm"
         bechAccountPrefix = "somm"
         validatorPrefix = "sommvaloper"

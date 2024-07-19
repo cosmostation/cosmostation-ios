@@ -10,26 +10,31 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class OktFetcher: FetcherLcd {
-    var lcdOktDeposits = JSON()
-    var lcdOktWithdaws = JSON()
-    var lcdOktTokens = Array<JSON>()
-    var lcdOktValidators = Array<JSON>()
+class OktFetcher: CosmosFetcher {
     
-    override func fetchBalances() async -> Bool {
-        lcdAccountInfo = JSON()
+    var oktNodeInfo = JSON()
+    var oktAccountInfo = JSON()
+    
+    var oktDeposits = JSON()
+    var oktWithdaws = JSON()
+    var oktTokens = Array<JSON>()
+    var oktValidators = Array<JSON>()
+    
+    override func fetchCosmosBalances() async -> Bool {
+        oktAccountInfo = JSON()
+        
         if let accountInfo = try? await fetchAccountInfo(chain.bechAddress!) {
-            self.lcdAccountInfo = accountInfo ?? JSON()
+            self.oktAccountInfo = accountInfo ?? JSON()
         }
         return true
     }
     
-    override func fetchLcdData(_ id: Int64) async -> Bool {
-        lcdNodeInfo = JSON()
-        lcdAccountInfo = JSON()
-        lcdOktDeposits = JSON()
-        lcdOktWithdaws = JSON()
-        lcdOktTokens.removeAll()
+    override func fetchCosmosData(_ id: Int64) async -> Bool {
+        oktNodeInfo = JSON()
+        oktAccountInfo = JSON()
+        oktDeposits = JSON()
+        oktWithdaws = JSON()
+        oktTokens.removeAll()
         
         do {
             if let nodeInfo = try await fetchNodeInfo(),
@@ -37,12 +42,12 @@ class OktFetcher: FetcherLcd {
                let okDeposit = try await fetchOktDeposited(chain.bechAddress!),
                let okWithdraw = try await fetchOktWithdraw(chain.bechAddress!),
                let okTokens = try await fetchOktTokens() {
-                self.lcdNodeInfo = nodeInfo
-                self.lcdAccountInfo = accountInfo
-                self.lcdOktDeposits = okDeposit
-                self.lcdOktWithdaws = okWithdraw
+                self.oktNodeInfo = nodeInfo
+                self.oktAccountInfo = accountInfo
+                self.oktDeposits = okDeposit
+                self.oktWithdaws = okWithdraw
                 okTokens["data"].array?.forEach({ value in
-                    self.lcdOktTokens.append(value)
+                    self.oktTokens.append(value)
                 })
             }
             return true
@@ -51,14 +56,14 @@ class OktFetcher: FetcherLcd {
         }
     }
     
-    override func fetchValidators() async -> Bool {
-        lcdOktValidators.removeAll()
+    override func fetchCosmosValidators() async -> Bool {
+        oktValidators.removeAll()
         if let okValidators = try? await fetchOktValdators() {
             okValidators?.forEach { validator in
-                self.lcdOktValidators.append(validator)
+                self.oktValidators.append(validator)
             }
             
-            self.lcdOktValidators.sort {
+            self.oktValidators.sort {
                 if ($0["description"]["moniker"].stringValue == "Cosmostation") {
                     return true
                 }
@@ -81,46 +86,46 @@ class OktFetcher: FetcherLcd {
     }
     
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        return lcdBalanceValue(chain.stakeDenom!, usd).adding(lcdOktDepositValue(usd)).adding(lcdOktWithdrawValue(usd))
+        return oktBalanceValue(chain.stakeDenom!, usd).adding(oktDepositValue(usd)).adding(oktWithdrawValue(usd))
     }
     
-    override func lcdBalanceAmount(_ denom: String) -> NSDecimalNumber {
-        if let balance = lcdAccountInfo.oktCoins?.filter({ $0["denom"].string == denom }).first {
+    func oktAllStakingDenomAmount() -> NSDecimalNumber {
+        return oktBalanceAmount(chain.stakeDenom!).adding(oktDepositAmount()).adding(oktWithdrawAmount())
+    }
+    
+    func oktBalanceAmount(_ denom: String) -> NSDecimalNumber {
+        if let balance = oktAccountInfo.oktCoins?.filter({ $0["denom"].string == denom }).first {
             return NSDecimalNumber.init(string: balance["amount"].string ?? "0")
         }
         return NSDecimalNumber.zero
     }
     
-    override func lcdAllStakingDenomAmount() -> NSDecimalNumber {
-        return lcdBalanceAmount(chain.stakeDenom!).adding(lcdOktDepositAmount()).adding(lcdOktWithdrawAmount())
-    }
-    
-    func lcdBalanceValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
+    func oktBalanceValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if (denom == chain.stakeDenom) {
-            let amount = lcdBalanceAmount(denom)
+            let amount = oktBalanceAmount(denom)
             let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
             return msPrice.multiplying(by: amount, withBehavior: handler6)
         }
         return NSDecimalNumber.zero
     }
     
-    func lcdOktDepositAmount() -> NSDecimalNumber {
-        return NSDecimalNumber(string: lcdOktDeposits["tokens"].string ?? "0")
+    func oktDepositAmount() -> NSDecimalNumber {
+        return NSDecimalNumber(string: oktDeposits["tokens"].string ?? "0")
     }
     
-    func lcdOktDepositValue(_ usd: Bool? = false) -> NSDecimalNumber {
+    func oktDepositValue(_ usd: Bool? = false) -> NSDecimalNumber {
         let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
-        let amount = lcdOktDepositAmount()
+        let amount = oktDepositAmount()
         return msPrice.multiplying(by: amount, withBehavior: handler6)
     }
     
-    func lcdOktWithdrawAmount() -> NSDecimalNumber {
-        return NSDecimalNumber(string: lcdOktWithdaws["quantity"].string ?? "0")
+    func oktWithdrawAmount() -> NSDecimalNumber {
+        return NSDecimalNumber(string: oktWithdaws["quantity"].string ?? "0")
     }
     
-    func lcdOktWithdrawValue(_ usd: Bool? = false) -> NSDecimalNumber {
+    func oktWithdrawValue(_ usd: Bool? = false) -> NSDecimalNumber {
         let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
-        let amount = lcdOktWithdrawAmount()
+        let amount = oktWithdrawAmount()
         return msPrice.multiplying(by: amount, withBehavior: handler6)
     }
 }
@@ -134,6 +139,7 @@ extension OktFetcher {
     
     func fetchAccountInfo(_ address: String) async throws -> JSON? {
         let url = getLcd() + "auth/accounts/" + address
+        print("url ", url)
         return try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     

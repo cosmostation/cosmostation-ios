@@ -35,7 +35,7 @@ class OkAddShare: BaseVC {
     @IBOutlet weak var voteBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: BaseChain!
+    var selectedChain: ChainOktEVM!
     var oktFetcher: OktFetcher!
     var stakeDenom: String!
     var tokenInfo: JSON!
@@ -49,7 +49,7 @@ class OkAddShare: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        oktFetcher = selectedChain.getLcdfetcher() as? OktFetcher
+        oktFetcher = selectedChain.getOktfetcher()
         stakeDenom = selectedChain.stakeDenom
         
         tableView.delegate = self
@@ -62,8 +62,8 @@ class OkAddShare: BaseVC {
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickTable)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
-        let allValidators = oktFetcher.lcdOktValidators
-        let myValidaorAddress = oktFetcher.lcdOktDeposits["validator_address"].arrayValue.map { $0.stringValue }
+        let allValidators = oktFetcher.oktValidators
+        let myValidaorAddress = oktFetcher.oktDeposits["validator_address"].arrayValue.map { $0.stringValue }
         allValidators.forEach { validatorinfo in
             if (myValidaorAddress.contains(validatorinfo["operator_address"].stringValue)) {
                 myValidators.append(validatorinfo)
@@ -115,7 +115,7 @@ class OkAddShare: BaseVC {
         feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
         feeSelectLabel.text = stakeDenom.uppercased()
         
-        let existCnt = oktFetcher.lcdOktDeposits["validator_address"].arrayValue.count
+        let existCnt = oktFetcher.oktDeposits["validator_address"].arrayValue.count
         let noCnt = myValidators.count
         let max = (existCnt >= noCnt) ? existCnt : noCnt
         

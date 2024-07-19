@@ -20,7 +20,7 @@ class ChainBand: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/494'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uband"
         bechAccountPrefix = "band"
         validatorPrefix = "bandvaloper"

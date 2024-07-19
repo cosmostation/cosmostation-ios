@@ -79,8 +79,8 @@ class L_Generator {
         encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
         
         let chainId = oktChain.chainIdCosmos!
-        let accNum = oktChain.getLcdfetcher()!.lcdAccountInfo["value","account_number"].uInt64Value
-        let seqNum = oktChain.getLcdfetcher()!.lcdAccountInfo["value","sequence"].uInt64Value
+        let accNum = oktChain.getOktfetcher()!.oktAccountInfo["value","account_number"].uInt64Value
+        let seqNum = oktChain.getOktfetcher()!.oktAccountInfo["value","sequence"].uInt64Value
         
         let stdMsg = getToSignMsg(chainId, String(accNum), String(seqNum), msgs, fee, memo)
         let toSignData = try! encoder.encode(stdMsg)

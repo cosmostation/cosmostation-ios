@@ -20,7 +20,7 @@ class ChainXpla: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/60'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "axpla"
         bechAccountPrefix = "xpla"
         validatorPrefix = "xplavaloper"

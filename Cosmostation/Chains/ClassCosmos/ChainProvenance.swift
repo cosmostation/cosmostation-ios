@@ -20,7 +20,7 @@ class ChainProvenance: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/505'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "nhash"
         bechAccountPrefix = "pb"
         validatorPrefix = "pbvaloper"

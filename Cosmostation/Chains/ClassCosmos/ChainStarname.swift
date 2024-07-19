@@ -20,7 +20,7 @@ class ChainStarname: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/234'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uiov"
         bechAccountPrefix = "star"
         validatorPrefix = "starvaloper"

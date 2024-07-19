@@ -89,7 +89,7 @@ class SelectValidatorCell: UITableViewCell {
         }
         
         if let stakeDenom = baseChain.stakeDenom,
-           let delegations = baseChain.getGrpcfetcher()?.cosmosDelegations,
+           let delegations = baseChain.getCosmosfetcher()?.cosmosDelegations,
            let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
             
             let staked = delegations.filter { $0.delegation.validatorAddress == validator.operatorAddress }.first?.balance.amount

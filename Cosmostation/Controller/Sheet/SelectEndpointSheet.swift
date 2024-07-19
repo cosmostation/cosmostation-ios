@@ -13,7 +13,7 @@ class SelectEndpointSheet: BaseVC {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var endpointTypeSegment: UISegmentedControl!
-    @IBOutlet weak var grpcTableView: UITableView!
+    @IBOutlet weak var cosmosTableView: UITableView!
     @IBOutlet weak var evmTableView: UITableView!
     
     var targetChain: BaseChain!
@@ -21,16 +21,17 @@ class SelectEndpointSheet: BaseVC {
     var endpointDelegate: EndpointDelegate?
     
     var gRPCList: [JSON]?
+    var lcdList: [JSON]?
     var evmRPCList: [JSON]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        grpcTableView.delegate = self
-        grpcTableView.dataSource = self
-        grpcTableView.separatorStyle = .none
-        grpcTableView.register(UINib(nibName: "SelectEndpointCell", bundle: nil), forCellReuseIdentifier: "SelectEndpointCell")
-        grpcTableView.sectionHeaderTopPadding = 0
+        cosmosTableView.delegate = self
+        cosmosTableView.dataSource = self
+        cosmosTableView.separatorStyle = .none
+        cosmosTableView.register(UINib(nibName: "SelectEndpointCell", bundle: nil), forCellReuseIdentifier: "SelectEndpointCell")
+        cosmosTableView.sectionHeaderTopPadding = 0
         
         evmTableView.delegate = self
         evmTableView.dataSource = self
@@ -38,38 +39,37 @@ class SelectEndpointSheet: BaseVC {
         evmTableView.register(UINib(nibName: "SelectEndpointCell", bundle: nil), forCellReuseIdentifier: "SelectEndpointCell")
         evmTableView.sectionHeaderTopPadding = 0
         
-        
         endpointTypeSegment.removeAllSegments()
         gRPCList = targetChain.getChainListParam()["grpc_endpoint"].array
+        lcdList = targetChain.getChainListParam()["lcd_endpoint"].array
         evmRPCList = targetChain.getChainListParam()["evm_rpc_endpoint"].array
-        if (gRPCList == nil && evmRPCList == nil) {
+        if (gRPCList == nil && lcdList == nil && evmRPCList == nil) {
             return
             
-        } else if (gRPCList != nil && evmRPCList == nil) {
-            seletcedType = EndPointType.gRPC
-            titleLabel.text = NSLocalizedString("title_select_end_point", comment: "") + "  (gRPC)"
+        } else if ((gRPCList != nil || lcdList != nil) && evmRPCList == nil) {
+            seletcedType = EndPointType.cosmosEndPoint
+            titleLabel.text = NSLocalizedString("title_select_end_point", comment: "")
             endpointTypeSegment.isHidden = true
             evmTableView.isHidden = true
             
-        } else if (gRPCList == nil && evmRPCList != nil) {
-            seletcedType = EndPointType.evmRPC
-            titleLabel.text = NSLocalizedString("title_select_end_point", comment: "") + "  (evm RPC)"
+        } else if ((gRPCList == nil && lcdList == nil) && evmRPCList != nil) {
+            seletcedType = EndPointType.evmEndpoint
+            titleLabel.text = NSLocalizedString("title_select_end_point", comment: "")
             endpointTypeSegment.isHidden = true
-            grpcTableView.isHidden = true
+            cosmosTableView.isHidden = true
             
-        } else if (gRPCList != nil && evmRPCList != nil) {
+        } else if ((gRPCList != nil || lcdList != nil) && evmRPCList != nil) {
             titleLabel.text = NSLocalizedString("title_select_end_point", comment: "")
             endpointTypeSegment.isHidden = false
             
-            endpointTypeSegment.insertSegment(withTitle: "gRPC Endpoint", at: EndPointType.gRPC.rawValue, animated: false)
-            endpointTypeSegment.insertSegment(withTitle: "Evm RPC Endpoint", at: EndPointType.evmRPC.rawValue, animated: false)
-            seletcedType = EndPointType.gRPC
+            endpointTypeSegment.insertSegment(withTitle: "Cosmos Endpoint", at: EndPointType.cosmosEndPoint.rawValue, animated: false)
+            endpointTypeSegment.insertSegment(withTitle: "Evm Endpoint", at: EndPointType.evmEndpoint.rawValue, animated: false)
+            seletcedType = EndPointType.cosmosEndPoint
             
-            grpcTableView.isHidden = false
+            cosmosTableView.isHidden = false
             evmTableView.isHidden = true
         }
         endpointTypeSegment.selectedSegmentIndex = seletcedType.rawValue
-        
     }
     
     override func setLocalizedString() {
@@ -79,12 +79,12 @@ class SelectEndpointSheet: BaseVC {
     @IBAction func onClickSegment(_ sender: UISegmentedControl) {
         if (sender.selectedSegmentIndex != seletcedType.rawValue) {
             if (sender.selectedSegmentIndex == 0) {
-                seletcedType = EndPointType.gRPC
-                grpcTableView.isHidden = false
+                seletcedType = EndPointType.cosmosEndPoint
+                cosmosTableView.isHidden = false
                 evmTableView.isHidden = true
             } else {
-                seletcedType = EndPointType.evmRPC
-                grpcTableView.isHidden = true
+                seletcedType = EndPointType.evmEndpoint
+                cosmosTableView.isHidden = true
                 evmTableView.isHidden = false
             }
         }
@@ -93,9 +93,42 @@ class SelectEndpointSheet: BaseVC {
 }
 
 extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if (tableView == cosmosTableView) {
+            return 2
+        }
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        if (section == 0 && gRPCList != nil) {
+            view.titleLabel.text = "gPRC"
+            view.cntLabel.text = String(gRPCList!.count)
+        } else if (section == 1 && lcdList != nil) {
+            view.titleLabel.text = "Rest"
+            view.cntLabel.text = String(lcdList!.count)
+        }
+        return view
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (tableView == cosmosTableView) {
+            if (section == 0) {
+                return (gRPCList != nil) ? 40 : 0
+            } else if (section == 1) {
+                return (lcdList != nil) ? 40 : 0
+            }
+        }
+        return 0
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (tableView == grpcTableView) {
-            return gRPCList?.count ?? 0
+        if (tableView == cosmosTableView) {
+            if (section == 0) {
+                return gRPCList?.count ?? 0
+            }
+            return lcdList?.count ?? 0
             
         } else if (tableView == evmTableView) {
             return evmRPCList?.count ?? 0
@@ -105,8 +138,12 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"SelectEndpointCell") as? SelectEndpointCell
-        if (tableView == grpcTableView) {
-            cell?.onBindGrpcEndpoint(indexPath.row, targetChain)
+        if (tableView == cosmosTableView) {
+            if (indexPath.section == 0) {
+                cell?.onBindGrpcEndpoint(indexPath.row, targetChain)
+            } else {
+                cell?.onBindLcdEndpoint(indexPath.row, targetChain)
+            }
         } else if (tableView == evmTableView) {
             cell?.onBindEvmEndpoint(indexPath.row, targetChain)
         }
@@ -116,9 +153,16 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as? SelectEndpointCell
         if (cell?.gapTime != nil) {
-            if (tableView == grpcTableView) {
-                let endpoint = targetChain.getChainListParam()["grpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
-                BaseData.instance.setGrpcEndpoint(targetChain, endpoint)
+            if (tableView == cosmosTableView) {
+                if (indexPath.section == 0) {
+                    let endpoint = targetChain.getChainListParam()["grpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                    BaseData.instance.setGrpcEndpoint(targetChain, endpoint)
+                    BaseData.instance.setCosmosEndpointType(targetChain, .UseGRPC)
+                } else {
+                    let endpoint = targetChain.getChainListParam()["lcd_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                    BaseData.instance.setLcdEndpoint(targetChain, endpoint)
+                    BaseData.instance.setCosmosEndpointType(targetChain, .UseLCD)
+                }
                 
             } else if (tableView == evmTableView) {
                 let endpoint = targetChain.getChainListParam()["evm_rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
@@ -141,6 +185,6 @@ protocol EndpointDelegate {
 }
 
 enum EndPointType: Int {
-    case gRPC = 0
-    case evmRPC = 1
+    case cosmosEndPoint = 0
+    case evmEndpoint = 1
 }

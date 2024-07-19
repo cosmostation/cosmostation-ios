@@ -44,7 +44,7 @@ class AboutRewardAddressCell: UITableViewCell {
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.thick.rawValue, range: (description as NSString).range(of:description_underline))
         descriptionLabel.attributedText = attributedString
         
-        if let rewardAddress = chain.getGrpcfetcher()?.rewardAddress {
+        if let rewardAddress = chain.getCosmosfetcher()?.rewardAddress {
             rewardAddressLabel.text = rewardAddress
             rewardAddressLabel.adjustsFontSizeToFitWidth = true
             if (rewardAddress != chain.bechAddress) {

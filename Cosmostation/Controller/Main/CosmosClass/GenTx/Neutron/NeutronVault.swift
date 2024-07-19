@@ -40,8 +40,8 @@ class NeutronVault: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var vaultType: NeutronVaultType!
-    var grpcFetcher: NeutronFetcher!
     var selectedChain: ChainNeutron!
+    var neutronFetcher: NeutronFetcher!
     var feeInfos = [FeeInfo]()
     var txFee: Cosmos_Tx_V1beta1_Fee = Cosmos_Tx_V1beta1_Fee.init()
     var txTip: Cosmos_Tx_V1beta1_Tip?
@@ -55,7 +55,7 @@ class NeutronVault: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        grpcFetcher = selectedChain.getGrpcfetcher()
+        neutronFetcher = selectedChain.getNeutronFetcher()
         
         
         loadingView.isHidden = false
@@ -71,7 +71,7 @@ class NeutronVault: BaseVC {
         
         
         Task {
-            await grpcFetcher.updateBaseFee()
+            await neutronFetcher.updateBaseFee()
             DispatchQueue.main.async {
                 self.loadingView.isHidden = true
                 self.oninitFeeView()
@@ -124,7 +124,7 @@ class NeutronVault: BaseVC {
     }
     
     func oninitFeeView() {
-        if (grpcFetcher.cosmosBaseFees.count > 0) {
+        if (neutronFetcher.cosmosBaseFees.count > 0) {
             feeSegments.removeAllSegments()
             feeSegments.insertSegment(withTitle: "No Tip", at: 0, animated: false)
             feeSegments.insertSegment(withTitle: "20% Tip", at: 1, animated: false)
@@ -132,7 +132,7 @@ class NeutronVault: BaseVC {
             feeSegments.insertSegment(withTitle: "100% Tip", at: 3, animated: false)
             feeSegments.selectedSegmentIndex = selectedFeePosition
             
-            let baseFee = grpcFetcher.cosmosBaseFees[0]
+            let baseFee = neutronFetcher.cosmosBaseFees[0]
             let gasAmount: NSDecimalNumber = selectedChain.getFeeBaseGasAmount()
             let feeDenom = baseFee.denom
             let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
@@ -156,8 +156,8 @@ class NeutronVault: BaseVC {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = selectedChain
         baseSheet.sheetDelegate = self
-        if (grpcFetcher.cosmosBaseFees.count > 0) {
-            baseSheet.baseFeesDatas = grpcFetcher.cosmosBaseFees
+        if (neutronFetcher.cosmosBaseFees.count > 0) {
+            baseSheet.baseFeesDatas = neutronFetcher.cosmosBaseFees
             baseSheet.sheetType = .SelectBaseFeeDenom
         } else {
             baseSheet.feeDatas = feeInfos[selectedFeePosition].FeeDatas
@@ -168,8 +168,8 @@ class NeutronVault: BaseVC {
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeePosition = sender.selectedSegmentIndex
-        if (grpcFetcher.cosmosBaseFees.count > 0) {
-            if let baseFee = grpcFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
+        if (neutronFetcher.cosmosBaseFees.count > 0) {
+            if let baseFee = neutronFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                 let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                 txFee.amount[0].amount = feeAmount.stringValue
@@ -195,7 +195,7 @@ class NeutronVault: BaseVC {
             
             if (vaultType == .Deposit) {
                 let stakeDenom = selectedChain.stakeDenom!
-                let balanceAmount = selectedChain.neutronFetcher!.balanceAmount(stakeDenom)
+                let balanceAmount = neutronFetcher.balanceAmount(stakeDenom)
                 if (txFee.amount[0].denom == stakeDenom) {
                     if (totalFeeAmount.compare(balanceAmount).rawValue > 0) {
                         //ERROR short balance!!
@@ -206,7 +206,7 @@ class NeutronVault: BaseVC {
                 }
                 
             } else {
-                availableAmount = selectedChain.neutronFetcher!.neutronDeposited
+                availableAmount = neutronFetcher.neutronDeposited
             }
         }
     }
@@ -231,11 +231,11 @@ class NeutronVault: BaseVC {
         onSimul()
     }
     
-    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
-        if let toGas = simul?.gasInfo.gasUsed {
+    func onUpdateWithSimul(_ gasUsed: UInt64?) {
+        if let toGas = gasUsed {
             txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
-            if (grpcFetcher.cosmosBaseFees.count > 0) {
-                if let baseFee = grpcFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
+            if (neutronFetcher.cosmosBaseFees.count > 0) {
+                if let baseFee = neutronFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                     let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                     txFee.amount[0].amount = feeAmount.stringValue
@@ -270,7 +270,7 @@ class NeutronVault: BaseVC {
         Task {
             do {
                 if let simulReq = try await Signer.genSimul(selectedChain, onBindWasmMsg(), txMemo, txFee, nil),
-                   let simulRes = try await grpcFetcher.simulateTx(simulReq) {
+                   let simulRes = try await neutronFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
                     }
@@ -294,7 +294,7 @@ class NeutronVault: BaseVC {
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
                 $0.sender = selectedChain.bechAddress!
-                $0.contract = self.selectedChain.neutronFetcher!.vaultsList?[0]["address"].stringValue ?? ""
+                $0.contract = neutronFetcher.vaultsList?[0]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
                 $0.funds = [toCoin!]
             }
@@ -305,7 +305,7 @@ class NeutronVault: BaseVC {
             let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let msg  = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
                 $0.sender = selectedChain.bechAddress!
-                $0.contract = self.selectedChain.neutronFetcher!.vaultsList?[0]["address"].stringValue ?? ""
+                $0.contract = neutronFetcher.vaultsList?[0]["address"].stringValue ?? ""
                 $0.msg  = Data(base64Encoded: jsonMsgBase64)!
             }
             wasmMsgs.append(msg)
@@ -326,7 +326,7 @@ extension NeutronVault: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, Pi
             }
         } else if (sheetType == .SelectBaseFeeDenom) {
             if let index = result["index"] as? Int {
-               let selectedDenom = grpcFetcher.cosmosBaseFees[index].denom
+               let selectedDenom = neutronFetcher.cosmosBaseFees[index].denom
                 txFee.amount[0].denom = selectedDenom
                 onUpdateFeeView()
                 onSimul()
@@ -351,7 +351,7 @@ extension NeutronVault: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, Pi
             Task {
                 do {
                     if let broadReq = try await Signer.genTx(selectedChain, onBindWasmMsg(), txMemo, txFee, nil),
-                       let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
+                       let broadRes = try await neutronFetcher.broadcastTx(broadReq) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

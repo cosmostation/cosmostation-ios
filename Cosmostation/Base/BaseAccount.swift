@@ -215,11 +215,11 @@ public class BaseAccount {
     
     func updateAllValue() {
         getDpChains().forEach { chain in
-            if let grpcFetcher = chain.getGrpcfetcher() {
-                chain.allCoinValue = grpcFetcher.allCoinValue()
-                chain.allCoinUSDValue = grpcFetcher.allCoinValue(true)
-                chain.allTokenValue = grpcFetcher.allTokenValue()
-                chain.allTokenUSDValue = grpcFetcher.allTokenValue(true)
+            if let cosmosFetcher = chain.getCosmosfetcher() {
+                chain.allCoinValue = cosmosFetcher.allCoinValue()
+                chain.allCoinUSDValue = cosmosFetcher.allCoinValue(true)
+                chain.allTokenValue = cosmosFetcher.allTokenValue()
+                chain.allTokenUSDValue = cosmosFetcher.allTokenValue(true)
                 
             } else if let evmFetcher = chain.getEvmfetcher() {
                 chain.allCoinValue = evmFetcher.allCoinValue()

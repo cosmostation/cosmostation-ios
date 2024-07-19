@@ -57,7 +57,7 @@ class NftTransfer: BaseVC {
     var txStyle: TxStyle = .COSMOS_STYLE
     
     var fromChain: BaseChain!
-    var fromGrpcFetcher: FetcherGrpc!
+    var fromCosmosFetcher: CosmosFetcher!
     var toSendNFT: Cw721Model!
     
     var toChain: BaseChain!
@@ -76,7 +76,7 @@ class NftTransfer: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        fromGrpcFetcher = fromChain.getGrpcfetcher()
+        fromCosmosFetcher = fromChain.getCosmosfetcher()
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -127,7 +127,7 @@ class NftTransfer: BaseVC {
     }
     
     func onInitFee() {
-        if (fromGrpcFetcher.cosmosBaseFees.count > 0) {
+        if (fromCosmosFetcher.cosmosBaseFees.count > 0) {
             feeSegments.removeAllSegments()
             feeSegments.insertSegment(withTitle: "No Tip", at: 0, animated: false)
             feeSegments.insertSegment(withTitle: "20% Tip", at: 1, animated: false)
@@ -135,7 +135,7 @@ class NftTransfer: BaseVC {
             feeSegments.insertSegment(withTitle: "100% Tip", at: 3, animated: false)
             feeSegments.selectedSegmentIndex = selectedFeePosition
             
-            let baseFee = fromGrpcFetcher.cosmosBaseFees[0]
+            let baseFee = fromCosmosFetcher.cosmosBaseFees[0]
             let gasAmount: NSDecimalNumber = fromChain.getFeeBaseGasAmount()
             let feeDenom = baseFee.denom
             let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
@@ -207,8 +207,8 @@ class NftTransfer: BaseVC {
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeePosition = sender.selectedSegmentIndex
-        if (fromGrpcFetcher.cosmosBaseFees.count > 0) {
-            if let baseFee = fromGrpcFetcher.cosmosBaseFees.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
+        if (fromCosmosFetcher.cosmosBaseFees.count > 0) {
+            if let baseFee = fromCosmosFetcher.cosmosBaseFees.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
                 let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                 cosmosTxFee.amount[0].amount = feeAmount.stringValue
@@ -225,8 +225,8 @@ class NftTransfer: BaseVC {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = fromChain
         baseSheet.sheetDelegate = self
-        if (fromGrpcFetcher.cosmosBaseFees.count > 0) {
-            baseSheet.baseFeesDatas = fromGrpcFetcher.cosmosBaseFees
+        if (fromCosmosFetcher.cosmosBaseFees.count > 0) {
+            baseSheet.baseFeesDatas = fromCosmosFetcher.cosmosBaseFees
             baseSheet.sheetType = .SelectBaseFeeDenom
         } else {
             baseSheet.feeDatas = cosmosFeeInfos[selectedFeePosition].FeeDatas
@@ -247,7 +247,7 @@ class NftTransfer: BaseVC {
         }
     }
     
-    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
+    func onUpdateWithSimul(_ gasUsed: UInt64?) {
         view.isUserInteractionEnabled = true
         loadingView.isHidden = true
         
@@ -256,15 +256,15 @@ class NftTransfer: BaseVC {
             sendBtn.isEnabled = true
             return
         }
-        guard let toGas = simul?.gasInfo.gasUsed else {
+        guard let toGas = gasUsed else {
             feeCardView.isHidden = true
             errorCardView.isHidden = false
             errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
             return
         }
         cosmosTxFee.gasLimit = UInt64(Double(toGas) * fromChain.gasMultiply())
-        if (fromGrpcFetcher.cosmosBaseFees.count > 0) {
-            if let baseFee = fromGrpcFetcher.cosmosBaseFees.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
+        if (fromCosmosFetcher.cosmosBaseFees.count > 0) {
+            if let baseFee = fromCosmosFetcher.cosmosBaseFees.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
                 let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                 cosmosTxFee.amount[0].amount = feeAmount.stringValue
@@ -303,7 +303,7 @@ class NftTransfer: BaseVC {
         Task {
             do {
                 if let simulReq = try await Signer.genSimul(fromChain, onBindCw721Send(), txMemo, cosmosTxFee, nil),
-                   let simulRes = try await fromGrpcFetcher.simulateTx(simulReq) {
+                   let simulRes = try await fromCosmosFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
                     }
@@ -324,7 +324,7 @@ class NftTransfer: BaseVC {
         Task {
             do {
                 if let broadReq = try await Signer.genTx(fromChain, onBindCw721Send(), txMemo, cosmosTxFee, nil),
-                   let broadRes = try await fromGrpcFetcher.broadcastTx(broadReq) {
+                   let broadRes = try await fromCosmosFetcher.broadcastTx(broadReq) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
@@ -370,7 +370,7 @@ extension NftTransfer: BaseSheetDelegate, SendAddressDelegate, MemoDelegate, Pin
             }
         } else if (sheetType == .SelectBaseFeeDenom) {
             if let index = result["index"] as? Int {
-               let selectedDenom = fromGrpcFetcher.cosmosBaseFees[index].denom
+               let selectedDenom = fromCosmosFetcher.cosmosBaseFees[index].denom
                 cosmosTxFee.amount[0].denom = selectedDenom
                 onUpdateFeeView()
                 onSimul()
