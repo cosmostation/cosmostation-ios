@@ -356,12 +356,6 @@
 		046BF1CD2B0F52BC00BC1FC8 /* SelectOktValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BF1CA2B0F52BC00BC1FC8 /* SelectOktValidatorCell.swift */; };
 		046BF1CE2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BF1CB2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib */; };
 		046BF1CF2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BF1CB2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib */; };
-		046EA7A32AD0499900A2FCE7 /* stride_vesting_vesting.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA75E2AD0499300A2FCE7 /* stride_vesting_vesting.pb.swift */; };
-		046EA7A42AD0499900A2FCE7 /* stride_vesting_vesting.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA75E2AD0499300A2FCE7 /* stride_vesting_vesting.pb.swift */; };
-		046EA7A92AD0499900A2FCE7 /* stride_vesting_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA7612AD0499300A2FCE7 /* stride_vesting_tx.pb.swift */; };
-		046EA7AA2AD0499900A2FCE7 /* stride_vesting_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA7612AD0499300A2FCE7 /* stride_vesting_tx.pb.swift */; };
-		046EA7FB2AD0499900A2FCE7 /* stride_vesting_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA78A2AD0499800A2FCE7 /* stride_vesting_tx.grpc.swift */; };
-		046EA7FC2AD0499900A2FCE7 /* stride_vesting_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA78A2AD0499800A2FCE7 /* stride_vesting_tx.grpc.swift */; };
 		046EA8552AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8052AD04A1F00A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift */; };
 		046EA8562AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA8052AD04A1F00A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift */; };
 		046EA85F2AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EA80A2AD04A1F00A2FCE7 /* desmos_profiles_v3_msgs_app_links.pb.swift */; };
@@ -2208,9 +2202,6 @@
 		046BF1C52B0F443100BC1FC8 /* OktSelectValidatorSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OktSelectValidatorSheet.xib; sourceTree = "<group>"; };
 		046BF1CA2B0F52BC00BC1FC8 /* SelectOktValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOktValidatorCell.swift; sourceTree = "<group>"; };
 		046BF1CB2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectOktValidatorCell.xib; sourceTree = "<group>"; };
-		046EA75E2AD0499300A2FCE7 /* stride_vesting_vesting.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_vesting_vesting.pb.swift; sourceTree = "<group>"; };
-		046EA7612AD0499300A2FCE7 /* stride_vesting_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_vesting_tx.pb.swift; sourceTree = "<group>"; };
-		046EA78A2AD0499800A2FCE7 /* stride_vesting_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_vesting_tx.grpc.swift; sourceTree = "<group>"; };
 		046EA8052AD04A1F00A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_models_app_links.pb.swift; sourceTree = "<group>"; };
 		046EA80A2AD04A1F00A2FCE7 /* desmos_profiles_v3_msgs_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_msgs_app_links.pb.swift; sourceTree = "<group>"; };
 		046EA80D2AD04A2000A2FCE7 /* desmos_profiles_v3_query_dtag_requests.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v3_query_dtag_requests.pb.swift; sourceTree = "<group>"; };
@@ -3209,20 +3200,10 @@
 				042DE6F72C1D4DFC009CAC04 /* EvmFetcher.swift */,
 				045CF9632C450D72000DAD08 /* CosmosFetcher.swift */,
 				E18B21F82C4A19FE00AD572F /* NeutronFetcher.swift */,
-				045032222C1EE85900235F6A /* OktFetcher.swift */,
 				0450332A2C252DD400235F6A /* KavaFetcher.swift */,
+				045032222C1EE85900235F6A /* OktFetcher.swift */,
 			);
 			path = Fetcher;
-			sourceTree = "<group>";
-		};
-		046EA7192AD0495B00A2FCE7 /* Stride */ = {
-			isa = PBXGroup;
-			children = (
-				046EA78A2AD0499800A2FCE7 /* stride_vesting_tx.grpc.swift */,
-				046EA7612AD0499300A2FCE7 /* stride_vesting_tx.pb.swift */,
-				046EA75E2AD0499300A2FCE7 /* stride_vesting_vesting.pb.swift */,
-			);
-			path = Stride;
 			sourceTree = "<group>";
 		};
 		046EA71A2AD0496500A2FCE7 /* Desmos */ = {
@@ -3773,7 +3754,6 @@
 				E122DA2F2A8A4671006D1E7B /* Cosmos */,
 				046EA71A2AD0496500A2FCE7 /* Desmos */,
 				047843252AC9919900462F1C /* Injective */,
-				046EA7192AD0495B00A2FCE7 /* Stride */,
 				04B788FA2ACAC99F00E9BE88 /* Ibc */,
 				047842EB2AC9917000462F1C /* Ethermint */,
 				E11069A92AA4C55F00EB02CA /* Cosmwasm */,
@@ -5708,7 +5688,6 @@
 				E1DF77702AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
 				E14E29762A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
 				045032422C1EEA9600235F6A /* ChainDymensionEVM.swift in Sources */,
-				046EA7A42AD0499900A2FCE7 /* stride_vesting_vesting.pb.swift in Sources */,
 				E10B1DCB2C2159040039283B /* KavaLendAction.swift in Sources */,
 				E10FD3BF2B70D1F900B57DB4 /* ChainAlthea118.swift in Sources */,
 				045032F62C1EFE5500235F6A /* ChainQuasar.swift in Sources */,
@@ -5791,7 +5770,6 @@
 				04C816A72BA98D75006B800A /* cosmos_autocli_v1_query.grpc.swift in Sources */,
 				045032A92C1EEFCA00235F6A /* ChainEmoney.swift in Sources */,
 				047843702AC991B300462F1C /* injective_insurance_v1beta1_query.grpc.swift in Sources */,
-				046EA7AA2AD0499900A2FCE7 /* stride_vesting_tx.pb.swift in Sources */,
 				E1A48DE52BFEF9330084D770 /* EvmReceiveVC.swift in Sources */,
 				04C816732BA98D74006B800A /* cosmos_protocolpool_v1_query.pb.swift in Sources */,
 				04B7895A2ACAC9B100E9BE88 /* ibc_applications_fee_v1_genesis.pb.swift in Sources */,
@@ -5939,7 +5917,6 @@
 				0400EF082ADBF03B007BA97F /* kava_hard_v1beta1_query.grpc.swift in Sources */,
 				045032EA2C1EFE5500235F6A /* ChainProvenance.swift in Sources */,
 				04C816DD2BA98D75006B800A /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
-				046EA7FC2AD0499900A2FCE7 /* stride_vesting_tx.grpc.swift in Sources */,
 				04C8179F2BA98D75006B800A /* cosmos_authz_v1beta1_query.pb.swift in Sources */,
 				045033152C1F029A00235F6A /* ChainSecret529.swift in Sources */,
 				E122DC592A8A4712006D1E7B /* tendermint_crypto_keys.pb.swift in Sources */,
@@ -6511,7 +6488,6 @@
 				E1DF776F2AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
 				E14E29752A98DA5300939AD2 /* SelectChainCell.swift in Sources */,
 				045032412C1EEA9600235F6A /* ChainDymensionEVM.swift in Sources */,
-				046EA7A32AD0499900A2FCE7 /* stride_vesting_vesting.pb.swift in Sources */,
 				E10B1DCA2C2159040039283B /* KavaLendAction.swift in Sources */,
 				E10FD3BE2B70D1F900B57DB4 /* ChainAlthea118.swift in Sources */,
 				045032F52C1EFE5500235F6A /* ChainQuasar.swift in Sources */,
@@ -6596,7 +6572,6 @@
 				0478436F2AC991B300462F1C /* injective_insurance_v1beta1_query.grpc.swift in Sources */,
 				04C816722BA98D74006B800A /* cosmos_protocolpool_v1_query.pb.swift in Sources */,
 				E1A48DE42BFEF9330084D770 /* EvmReceiveVC.swift in Sources */,
-				046EA7A92AD0499900A2FCE7 /* stride_vesting_tx.pb.swift in Sources */,
 				04C8164C2BA98D74006B800A /* cosmos_counter_module_v1_module.pb.swift in Sources */,
 				04B789592ACAC9B100E9BE88 /* ibc_applications_fee_v1_genesis.pb.swift in Sources */,
 				046EA85F2AD04A2500A2FCE7 /* desmos_profiles_v3_msgs_app_links.pb.swift in Sources */,
@@ -6742,7 +6717,6 @@
 				0400EF072ADBF03B007BA97F /* kava_hard_v1beta1_query.grpc.swift in Sources */,
 				045032E92C1EFE5500235F6A /* ChainProvenance.swift in Sources */,
 				04C816DC2BA98D75006B800A /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
-				046EA7FB2AD0499900A2FCE7 /* stride_vesting_tx.grpc.swift in Sources */,
 				04C8179E2BA98D75006B800A /* cosmos_authz_v1beta1_query.pb.swift in Sources */,
 				045033142C1F029A00235F6A /* ChainSecret529.swift in Sources */,
 				E122DC582A8A4712006D1E7B /* tendermint_crypto_keys.pb.swift in Sources */,
