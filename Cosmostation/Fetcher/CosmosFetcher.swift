@@ -27,6 +27,7 @@ class CosmosFetcher {
     var cosmosDelegations = [Cosmos_Staking_V1beta1_DelegationResponse]()
     var cosmosUnbondings: [Cosmos_Staking_V1beta1_UnbondingDelegation]?
     var cosmosRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]?
+    var cosmosRewardCoins: [Cosmos_Base_V1beta1_Coin]?
     var cosmosCommissions =  [Cosmos_Base_V1beta1_Coin]()
     var rewardAddress:  String?
     var cosmosValidators = [Cosmos_Staking_V1beta1_Validator]()
@@ -62,6 +63,7 @@ class CosmosFetcher {
         cosmosDelegations.removeAll()
         cosmosUnbondings = nil
         cosmosRewards = nil
+        cosmosRewardCoins = nil
         cosmosCommissions.removeAll()
         rewardAddress = nil
         cosmosBaseFees.removeAll()
@@ -297,24 +299,25 @@ extension CosmosFetcher {
     }
     
     func rewardAllCoins() -> [Cosmos_Base_V1beta1_Coin] {
-        var result = [Cosmos_Base_V1beta1_Coin]()
+        if (cosmosRewardCoins != nil) { return cosmosRewardCoins! }
+        cosmosRewardCoins = [Cosmos_Base_V1beta1_Coin]()
         cosmosRewards?.forEach({ reward in
             reward.reward.forEach { deCoin in
                 if BaseData.instance.getAsset(chain.apiName, deCoin.denom) != nil {
                     let deCoinAmount = deCoin.getAmount()
                     if (deCoinAmount != NSDecimalNumber.zero) {
-                        if let index = result.firstIndex(where: { $0.denom == deCoin.denom }) {
-                            let exist = NSDecimalNumber(string: result[index].amount)
+                        if let index = cosmosRewardCoins!.firstIndex(where: { $0.denom == deCoin.denom }) {
+                            let exist = NSDecimalNumber(string: cosmosRewardCoins![index].amount)
                             let addes = exist.adding(deCoinAmount)
-                            result[index].amount = addes.stringValue
+                            cosmosRewardCoins![index].amount = addes.stringValue
                         } else {
-                            result.append(Cosmos_Base_V1beta1_Coin(deCoin.denom, deCoinAmount))
+                            cosmosRewardCoins!.append(Cosmos_Base_V1beta1_Coin(deCoin.denom, deCoinAmount))
                         }
                     }
                 }
             }
         })
-        return result
+        return cosmosRewardCoins!
     }
     
     func rewardOtherDenomTypeCnts() -> Int {
