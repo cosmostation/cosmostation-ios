@@ -78,7 +78,7 @@ class AllChainClaimStartVC: BaseVC, PinDelegate {
     
     func onInitView() {
         if (baseAccount.getDpChains().filter { $0.fetchState == .Busy }.count == 0) {
-            baseAccount.getDpChains().filter { $0.isTestnet == false && $0.supportCosmosGrpc }.forEach { chain in
+            baseAccount.getDpChains().filter { $0.isTestnet == false && $0.supportCosmos }.forEach { chain in
                 if let cosmosFetcher = chain.getCosmosfetcher(),
                    let txFee = chain.getInitPayableFee() {
                     let valueableReward = cosmosFetcher.valueableRewards()

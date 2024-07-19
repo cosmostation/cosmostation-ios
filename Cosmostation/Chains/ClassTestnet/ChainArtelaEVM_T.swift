@@ -22,7 +22,7 @@ class ChainArtelaEVM_T: BaseChain {
         accountKeyType = AccountKeyType(.ARTELA_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        supportCosmosLcd = true
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uart"
         bechAccountPrefix = "art"
         validatorPrefix = "artvaloper"

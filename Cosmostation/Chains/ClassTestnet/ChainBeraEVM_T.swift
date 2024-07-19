@@ -20,7 +20,7 @@ class ChainBeraEVM_T: BaseChain  {
         accountKeyType = AccountKeyType(.BERA_Secp256k1, "m/44'/60'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "abgt"
         bechAccountPrefix = "bera"
         validatorPrefix = "beravaloper"

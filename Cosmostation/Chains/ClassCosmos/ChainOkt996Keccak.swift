@@ -23,7 +23,7 @@ class ChainOkt996Keccak: ChainOktEVM  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/996'/0'/0/X")
         
         
-        supportCosmosLcd = true
+        cosmosEndPointType = .UseLCD
         stakeDenom = "okt"
         bechAccountPrefix = "ex"
         supportStaking = false

@@ -439,7 +439,7 @@ extension CosmosFetcher {
 extension CosmosFetcher {
     
     func fetchBondedValidator() async throws -> [Cosmos_Staking_V1beta1_Validator]? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 300 }
             let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_BONDED" }
             return try await Cosmos_Staking_V1beta1_QueryNIOClient(channel: getClient()).validators(req).response.get().validators
@@ -451,7 +451,7 @@ extension CosmosFetcher {
     }
     
     func fetchUnbondedValidator() async throws -> [Cosmos_Staking_V1beta1_Validator]? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
             let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_UNBONDED" }
             return try await Cosmos_Staking_V1beta1_QueryNIOClient(channel: getClient()).validators(req).response.get().validators
@@ -463,7 +463,7 @@ extension CosmosFetcher {
     }
     
     func fetchUnbondingValidator() async throws -> [Cosmos_Staking_V1beta1_Validator]? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 500 }
             let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_UNBONDING" }
             return try await Cosmos_Staking_V1beta1_QueryNIOClient(channel: getClient()).validators(req).response.get().validators
@@ -479,7 +479,7 @@ extension CosmosFetcher {
         cosmosGrpcAuth = nil
         cosmosAccountNumber = nil
         cosmosSequenceNum = nil
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = chain.bechAddress! }
             if let result = try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: getClient()).account(req, callOptions: getCallOptions()).response.get().account {
                 cosmosGrpcAuth = result
@@ -497,7 +497,7 @@ extension CosmosFetcher {
     }
     
     func fetchBalance() async throws -> [Cosmos_Base_V1beta1_Coin]? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
             let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = chain.bechAddress!; $0.pagination = page }
             return try await Cosmos_Bank_V1beta1_QueryNIOClient(channel: getClient()).allBalances(req, callOptions: getCallOptions()).response.get().balances
@@ -509,7 +509,7 @@ extension CosmosFetcher {
     }
     
     func fetchDelegation() async throws -> [Cosmos_Staking_V1beta1_DelegationResponse]? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = chain.bechAddress! }
             return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: getClient()).delegatorDelegations(req, callOptions: getCallOptions()).response.get().delegationResponses
         } else {
@@ -520,7 +520,7 @@ extension CosmosFetcher {
     }
     
     func fetchUnbondings() async throws -> [Cosmos_Staking_V1beta1_UnbondingDelegation]? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = chain.bechAddress! }
             return try? await Cosmos_Staking_V1beta1_QueryNIOClient(channel: getClient()).delegatorUnbondingDelegations(req, callOptions: getCallOptions()).response.get().unbondingResponses
         } else {
@@ -531,7 +531,7 @@ extension CosmosFetcher {
     }
     
     func fetchRewards() async throws -> [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = chain.bechAddress! }
             return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: getClient()).delegationTotalRewards(req, callOptions: getCallOptions()).response.get().rewards
         } else {
@@ -542,7 +542,7 @@ extension CosmosFetcher {
     }
     
     func fetchCommission() async throws -> Cosmos_Distribution_V1beta1_ValidatorAccumulatedCommission? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             if (chain.bechOpAddress == nil) { return nil }
             let req = Cosmos_Distribution_V1beta1_QueryValidatorCommissionRequest.with { $0.validatorAddress = chain.bechOpAddress! }
             return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: getClient()).validatorCommission(req, callOptions: getCallOptions()).response.get().commission
@@ -554,7 +554,7 @@ extension CosmosFetcher {
     }
     
     func fetchRewardAddress() async throws -> String? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = chain.bechAddress! }
             return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: getClient()).delegatorWithdrawAddress(req, callOptions: getCallOptions()).response.get().withdrawAddress
         } else {
@@ -565,7 +565,7 @@ extension CosmosFetcher {
     }
     
     func simulateTx(_ simulTx: Cosmos_Tx_V1beta1_SimulateRequest) async throws -> UInt64? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).simulate(simulTx, callOptions: getCallOptions()).response.get().gasInfo.gasUsed
         } else {
             let param: Parameters = ["txBytes": try! simulTx.tx.serializedData().base64EncodedString() ]
@@ -578,7 +578,7 @@ extension CosmosFetcher {
     }
     
     func broadcastTx(_ broadTx: Cosmos_Tx_V1beta1_BroadcastTxRequest) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).broadcastTx(broadTx, callOptions: getCallOptions()).response.get().txResponse
         } else {
             let param: Parameters = ["mode" : Cosmos_Tx_V1beta1_BroadcastMode.async.rawValue, "tx_bytes": try broadTx.txBytes.base64EncodedString() ]
@@ -595,7 +595,7 @@ extension CosmosFetcher {
     }
     
     func fetchTx( _ hash: String) async throws -> Cosmos_Tx_V1beta1_GetTxResponse? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = hash }
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).getTx(req, callOptions: getCallOptions()).response.get()
         } else {
@@ -615,7 +615,7 @@ extension CosmosFetcher {
     }
     
     func fetchIbcClient(_ ibcPath: MintscanPath) async throws -> UInt64? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
                 $0.channelID = ibcPath.channel!
                 $0.portID = ibcPath.port!
@@ -635,7 +635,7 @@ extension CosmosFetcher {
     }
     
     func fetchLastBlock() async throws -> Int64? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
             return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: getClient()).getLatestBlock(req, callOptions: getCallOptions()).response.get().block.header.height
         } else {
@@ -664,7 +664,7 @@ extension CosmosFetcher {
     }
     
     func fetchCw20Balance(_ tokenInfo: MintscanToken) async {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let query: JSON = ["balance" : ["address" : self.chain.bechAddress!]]
             let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
@@ -717,7 +717,7 @@ extension CosmosFetcher {
     }
     
     func fetchCw721TokenIds(_ list: JSON) async throws -> JSON? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let query: JSON = ["tokens" : ["owner" : self.chain.bechAddress!, "limit" : 50, "start_after" : "0"]]
             let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
@@ -738,7 +738,7 @@ extension CosmosFetcher {
     }
     
     func fetchCw721TokenInfo(_ list: JSON, _ tokenId: String) async throws -> JSON? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let query: JSON = ["nft_info" : ["token_id" : tokenId]]
             let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
@@ -760,7 +760,7 @@ extension CosmosFetcher {
     
     func fetchBaseFee() async throws -> [Cosmos_Base_V1beta1_DecCoin]? {
         if (!chain.supportFeeMarket()) { return nil }
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let req = Feemarket_Feemarket_V1_GasPricesRequest.init()
             return try? await Feemarket_Feemarket_V1_QueryNIOClient(channel: getClient()).gasPrices(req, callOptions: getCallOptions()).response.get().prices
         } else {
@@ -773,7 +773,7 @@ extension CosmosFetcher {
     func updateBaseFee() async {
         cosmosBaseFees.removeAll()
         if (!chain.supportFeeMarket()) { return }
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             let req = Feemarket_Feemarket_V1_GasPricesRequest.init()
             if let baseFees = try? await Feemarket_Feemarket_V1_QueryNIOClient(channel: getClient()).gasPrices(req, callOptions: getCallOptions()).response.get().prices {
                 baseFees.forEach({ basefee in
@@ -807,7 +807,7 @@ extension CosmosFetcher {
     }
     
     func fetchSmartContractState(_ request: Cosmwasm_Wasm_V1_QuerySmartContractStateRequest) async throws -> JSON? {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             if let result = try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: getClient()).smartContractState(request, callOptions: getCallOptions()).response.get().data,
                let state = try? JSONDecoder().decode(JSON.self, from: result) {
                 return state
@@ -820,8 +820,30 @@ extension CosmosFetcher {
     }
     
     
+    
+    
+    func getEndpointType() -> CosmosEndPointType? {
+        let endpointType = UserDefaults.standard.integer(forKey: KEY_COSMOS_ENDPOINT_TYPE +  " : " + chain.name)
+        if (endpointType == CosmosEndPointType.UseGRPC.rawValue) {
+            return .UseGRPC
+        } else if (endpointType == CosmosEndPointType.UseLCD.rawValue) {
+            return .UseLCD
+        } else {
+            return chain.cosmosEndPointType
+        }
+    }
+    
     func getLcd() -> String {
-        return chain.lcdUrl
+        var url = ""
+        if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_LCD_ENDPOINT +  " : " + chain.name) {
+            url = endpoint
+        } else {
+            url = chain.lcdUrl
+        }
+        if (url.last != "/") {
+            return url + "/"
+        }
+        return url
     }
     
     func getGrpc() -> (host: String, port: Int) {
@@ -853,7 +875,7 @@ extension CosmosFetcher {
 
 extension CosmosFetcher {
     func onCheckVesting() {
-        if (chain.supportCosmosGrpc) {
+        if (getEndpointType() == .UseGRPC) {
             onCheckGrpcVesting()
         } else {
             onCheckLcdVesting()

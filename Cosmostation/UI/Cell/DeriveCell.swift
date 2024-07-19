@@ -102,12 +102,6 @@ class DeriveCell: UITableViewCell {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
             
-//            if (chain.name == "OKT") {
-//                let dpAmount = (chain.getCosmosfetcher() as? OktFetcher)?.oktBalanceAmount(chain.stakeDenom!) ?? NSDecimalNumber.zero
-//                denomLabel.text = "OKT"
-//                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
-//                
-//            } 
             if let oktChain = chain as? ChainOktEVM {
                 let dpAmount = oktChain.getOktfetcher()?.oktBalanceAmount(chain.stakeDenom!) ?? NSDecimalNumber.zero
                 denomLabel.text = "OKT"

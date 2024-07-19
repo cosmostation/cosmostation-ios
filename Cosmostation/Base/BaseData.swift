@@ -661,8 +661,16 @@ extension BaseData {
         return UserDefaults.standard.integer(forKey: KEY_LAST_TAB)
     }
     
+    func setCosmosEndpointType(_ chain : BaseChain, _ type: CosmosEndPointType) {
+        UserDefaults.standard.set(type.rawValue, forKey: KEY_COSMOS_ENDPOINT_TYPE +  " : " + chain.name)
+    }
+    
     func setGrpcEndpoint(_ chain : BaseChain, _ endpoint: String) {
         UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + chain.name)
+    }
+    
+    func setLcdEndpoint(_ chain : BaseChain, _ endpoint: String) {
+        UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_LCD_ENDPOINT +  " : " + chain.name)
     }
     
     func setEvmRpcEndpoint(_ chain : BaseChain, _ endpoint: String) {

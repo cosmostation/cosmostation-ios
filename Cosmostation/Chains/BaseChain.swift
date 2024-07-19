@@ -23,8 +23,7 @@ class BaseChain {
     var publicKey: Data?
     
     //cosmos & grpc & lcd info
-    var supportCosmosGrpc = false
-    var supportCosmosLcd = false
+    var cosmosEndPointType: CosmosEndPointType?
     var chainIdCosmos: String?
     var bechAddress: String?
     var stakeDenom: String?
@@ -287,7 +286,10 @@ class BaseChain {
     }
     
     var supportCosmos: Bool {
-        return supportCosmosGrpc || supportCosmosLcd
+        if (cosmosEndPointType == nil || cosmosEndPointType == .Unknown) {
+            return false
+        }
+        return true
     }
     
 }
@@ -615,5 +617,14 @@ enum FetchState: Int {
     case Success = 1
     case Fail = 2
 }
+
+
+
+enum CosmosEndPointType: Int {
+    case Unknown = 0
+    case UseGRPC = 1
+    case UseLCD = 2
+}
+
 
 let DEFUAL_DISPALY_CHAINS = ["cosmos118", "ethereum60", "neutron118", "kava60", "osmosis118", "dydx118"]

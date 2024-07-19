@@ -139,6 +139,7 @@ extension OktFetcher {
     
     func fetchAccountInfo(_ address: String) async throws -> JSON? {
         let url = getLcd() + "auth/accounts/" + address
+        print("url ", url)
         return try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     

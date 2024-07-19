@@ -20,7 +20,7 @@ class ChainInjective: BaseChain  {
         accountKeyType = AccountKeyType(.INJECTIVE_Secp256k1, "m/44'/60'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "inj"
         bechAccountPrefix = "inj"
         validatorPrefix = "injvaloper"

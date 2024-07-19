@@ -21,7 +21,7 @@ class ChainPersistence750: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/750'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uxprt"
         bechAccountPrefix = "persistence"
         validatorPrefix = "persistencevaloper"

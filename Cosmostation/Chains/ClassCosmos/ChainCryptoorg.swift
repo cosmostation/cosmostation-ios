@@ -20,7 +20,7 @@ class ChainCryptoorg: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/394'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "basecro"
         bechAccountPrefix = "cro"
         validatorPrefix = "crocncl"

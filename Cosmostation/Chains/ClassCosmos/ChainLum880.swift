@@ -20,7 +20,7 @@ class ChainLum880: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/880'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ulum"
         bechAccountPrefix = "lum"
         validatorPrefix = "lumvaloper"

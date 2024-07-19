@@ -25,7 +25,7 @@ class ChainOktEVM: BaseChain {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        supportCosmosLcd = true
+        cosmosEndPointType = .UseLCD
         stakeDenom = "okt"
         bechAccountPrefix = "ex"
         supportStaking = false
@@ -37,6 +37,7 @@ class ChainOktEVM: BaseChain {
         coinGeckoId = "oec-token"
         coinLogo = "tokenOkt"
         evmRpcURL = "https://exchainrpc.okex.org"
+//        evmRpcURL = "https://oktc-mainnet.public.blastapi.io"
     }
     
     func getOktfetcher() -> OktFetcher? {

@@ -105,7 +105,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         loadingView.play()
         
         Task {
-            allSwapableChains = await baseAccount.initAllKeys().filter({ $0.isTestnet == false && $0.supportCosmosGrpc && $0.isDefault })
+            allSwapableChains = await baseAccount.initAllKeys().filter({ $0.isTestnet == false && $0.supportCosmos  && $0.isDefault })
             
             var sChains: JSON?
             if (BaseData.instance.needSwapInfoUpdate()) {
