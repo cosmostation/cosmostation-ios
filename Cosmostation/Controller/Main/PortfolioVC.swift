@@ -71,17 +71,6 @@ class PortfolioVC: BaseVC {
         navigationItem.titleView = BgRandomButton()
         
         initView()
-        
-        
-        
-    
-        Task {
-            let kavalcd = mainnetChains.filter { $0.tag == "kavaLCD" }.first
-            print("kavalcd supportCosmosGrpc ", kavalcd?.supportCosmosGrpc)
-            print("kavalcd supportCosmosLcd ", kavalcd?.supportCosmosLcd)
-            try? await kavalcd?.getCosmosfetcher()?.fetchCosmosBalances()
-        }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {

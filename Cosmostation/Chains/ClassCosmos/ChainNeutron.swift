@@ -31,7 +31,6 @@ class ChainNeutron: BaseChain {
     }
     
     override func getCosmosfetcher() -> CosmosFetcher? {
-        if (supportCosmos != true) { return nil }
         if (cosmosFetcher == nil) {
             cosmosFetcher = NeutronFetcher.init(self)
         }
@@ -39,7 +38,6 @@ class ChainNeutron: BaseChain {
     }
     
     func getNeutronFetcher() -> NeutronFetcher? {
-        if (supportCosmos != true) { return nil }
         if (cosmosFetcher == nil) {
             cosmosFetcher = NeutronFetcher.init(self)
         }

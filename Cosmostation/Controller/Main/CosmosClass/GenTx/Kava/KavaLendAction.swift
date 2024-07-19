@@ -41,8 +41,8 @@ class KavaLendAction: BaseVC {
     @IBOutlet weak var hardBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: BaseChain!
-    var cosmosFetcher: CosmosFetcher!
+    var selectedChain: ChainKavaEVM!
+    var kavaFetcher: KavaFetcher!
     var feeInfos = [FeeInfo]()
     var selectedFeePosition = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -65,7 +65,7 @@ class KavaLendAction: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        cosmosFetcher = selectedChain.getCosmosfetcher()
+        kavaFetcher = selectedChain.getKavaFetcher()
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -88,7 +88,7 @@ class KavaLendAction: BaseVC {
         toHardAssetImg.af.setImage(withURL: msAsset.assetImg())
         
         if (hardActionType == .Deposit) {
-            let balanceAmount = cosmosFetcher.balanceAmount(hardMarket.denom)
+            let balanceAmount = kavaFetcher.balanceAmount(hardMarket.denom)
             if (txFee.amount[0].denom == hardMarket.denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 availableAmount = balanceAmount.subtracting(feeAmount)
@@ -105,7 +105,7 @@ class KavaLendAction: BaseVC {
             var borrowedAmount = hardMyBorrow?.filter({ $0.denom == hardMarket.denom }).first?.getAmount() ?? NSDecimalNumber.zero
             borrowedAmount = borrowedAmount.multiplying(by: NSDecimalNumber.init(string: "1.1"), withBehavior: handler0Down)
             
-            var balanceAmount = cosmosFetcher.balanceAmount(hardMarket.denom)
+            var balanceAmount = kavaFetcher.balanceAmount(hardMarket.denom)
             if (txFee.amount[0].denom == hardMarket.denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 balanceAmount = balanceAmount.subtracting(feeAmount)
@@ -241,8 +241,8 @@ class KavaLendAction: BaseVC {
         }
     }
     
-    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
-        if let toGas = simul?.gasInfo.gasUsed {
+    func onUpdateWithSimul(_ gasUsed: UInt64?) {
+        if let toGas = gasUsed {
             txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
             if let gasRate = feeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
@@ -270,24 +270,23 @@ class KavaLendAction: BaseVC {
         
         Task {
             do {
-                //TODO YONG
-//                var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
-//                if (hardActionType == .Deposit) {
-//                    simulReq = try await Signer.genSimul(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
-//                    
-//                } else if (hardActionType == .Withdraw) {
-//                    simulReq = try await Signer.genSimul(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
-//                    
-//                } else if (hardActionType == .Borrow) {
-//                    simulReq = try await Signer.genSimul(selectedChain, onBindBorrowMsg(), txMemo, txFee, nil)
-//                    
-//                } else if (hardActionType == .Repay) {
-//                    simulReq = try await Signer.genSimul(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
-//                }
-//                let simulRes = try await grpcFetcher.simulateTx(simulReq)
-//                DispatchQueue.main.async {
-//                    self.onUpdateWithSimul(simulRes)
-//                }
+                var simulReq: Cosmos_Tx_V1beta1_SimulateRequest!
+                if (hardActionType == .Deposit) {
+                    simulReq = try await Signer.genSimul(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
+                    
+                } else if (hardActionType == .Withdraw) {
+                    simulReq = try await Signer.genSimul(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
+                    
+                } else if (hardActionType == .Borrow) {
+                    simulReq = try await Signer.genSimul(selectedChain, onBindBorrowMsg(), txMemo, txFee, nil)
+                    
+                } else if (hardActionType == .Repay) {
+                    simulReq = try await Signer.genSimul(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
+                }
+                let simulRes = try await kavaFetcher.simulateTx(simulReq)
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(simulRes)
+                }
                 
             } catch {
                 DispatchQueue.main.async {
@@ -380,31 +379,30 @@ extension KavaLendAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
             loadingView.isHidden = false
             Task {
                 do {
-                    //TODO YONG
-//                    var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
-//                    if (hardActionType == .Deposit) {
-//                        broadReq = try await Signer.genTx(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
-//                        
-//                    } else if (hardActionType == .Withdraw) {
-//                        broadReq = try await Signer.genTx(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
-//                        
-//                    } else if (hardActionType == .Borrow) {
-//                        broadReq = try await Signer.genTx(selectedChain, onBindBorrowMsg(), txMemo, txFee, nil)
-//                        
-//                    } else if (hardActionType == .Repay) {
-//                        broadReq = try await Signer.genTx(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
-//                        
-//                    }
-//                    let response = try await grpcFetcher.broadcastTx(broadReq)
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-//                        self.loadingView.isHidden = true
-//                        
-//                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-//                        txResult.selectedChain = self.selectedChain
-//                        txResult.broadcastTxResponse = response
-//                        txResult.modalPresentationStyle = .fullScreen
-//                        self.present(txResult, animated: true)
-//                    })
+                    var broadReq: Cosmos_Tx_V1beta1_BroadcastTxRequest!
+                    if (hardActionType == .Deposit) {
+                        broadReq = try await Signer.genTx(selectedChain, onBindDepsoitMsg(), txMemo, txFee, nil)
+                        
+                    } else if (hardActionType == .Withdraw) {
+                        broadReq = try await Signer.genTx(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil)
+                        
+                    } else if (hardActionType == .Borrow) {
+                        broadReq = try await Signer.genTx(selectedChain, onBindBorrowMsg(), txMemo, txFee, nil)
+                        
+                    } else if (hardActionType == .Repay) {
+                        broadReq = try await Signer.genTx(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
+                        
+                    }
+                    let response = try await kavaFetcher.broadcastTx(broadReq)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        self.loadingView.isHidden = true
+                        
+                        let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                        txResult.selectedChain = self.selectedChain
+                        txResult.broadcastTxResponse = response
+                        txResult.modalPresentationStyle = .fullScreen
+                        self.present(txResult, animated: true)
+                    })
                     
                 } catch {
                     //TODO handle Error

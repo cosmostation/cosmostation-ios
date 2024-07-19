@@ -45,8 +45,8 @@ class KavaEarnDepositAction: BaseVC {
     @IBOutlet weak var addBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: BaseChain!
-    var cosmosFetcher: CosmosFetcher!
+    var selectedChain: ChainKavaEVM!
+    var kavaFetcher: KavaFetcher!
     var feeInfos = [FeeInfo]()
     var selectedFeePosition = 0
     var toEarnDeposit: Kava_Router_V1beta1_MsgDelegateMintDeposit!
@@ -61,7 +61,7 @@ class KavaEarnDepositAction: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        cosmosFetcher = selectedChain.getCosmosfetcher()
+        kavaFetcher = selectedChain.getKavaFetcher()
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -85,10 +85,10 @@ class KavaEarnDepositAction: BaseVC {
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
         if (toValidator == nil) {
-            if let validator = cosmosFetcher.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first {
+            if let validator = kavaFetcher.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first {
                 toValidator = validator
             } else {
-                toValidator = cosmosFetcher.cosmosValidators[0]
+                toValidator = kavaFetcher.cosmosValidators[0]
             }
         }
         
@@ -106,7 +106,7 @@ class KavaEarnDepositAction: BaseVC {
     @objc func onClickValidator() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = selectedChain
-        baseSheet.validators = cosmosFetcher.cosmosValidators
+        baseSheet.validators = kavaFetcher.cosmosValidators
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectValidator
         onStartSheet(baseSheet, 680, 0.8)
@@ -180,7 +180,7 @@ class KavaEarnDepositAction: BaseVC {
         }
         
         let stakeDenom = selectedChain.stakeDenom!
-        let balanceAmount = cosmosFetcher.balanceAmount(stakeDenom)
+        let balanceAmount = kavaFetcher.balanceAmount(stakeDenom)
         if (txFee.amount[0].denom == stakeDenom) {
             let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
             if (feeAmount.compare(balanceAmount).rawValue > 0) {
@@ -212,8 +212,8 @@ class KavaEarnDepositAction: BaseVC {
         onSimul()
     }
     
-    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
-        if let toGas = simul?.gasInfo.gasUsed {
+    func onUpdateWithSimul(_ gasUsed: UInt64?) {
+        if let toGas = gasUsed {
             txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
             if let gasRate = feeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
@@ -245,13 +245,12 @@ class KavaEarnDepositAction: BaseVC {
         
         Task {
             do {
-                //TODO YONG
-//                if let simulReq = try await Signer.genSimul(selectedChain, onBindDepositMsg(), txMemo, txFee, nil),
-//                   let simulRes = try await grpcFetcher.simulateTx(simulReq) {
-//                    DispatchQueue.main.async {
-//                        self.onUpdateWithSimul(simulRes)
-//                    }
-//                }
+                if let simulReq = try await Signer.genSimul(selectedChain, onBindDepositMsg(), txMemo, txFee, nil),
+                   let simulRes = try await kavaFetcher.simulateTx(simulReq) {
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(simulRes)
+                    }
+                }
                 
             } catch {
                 DispatchQueue.main.async {
@@ -280,7 +279,7 @@ extension KavaEarnDepositAction: BaseSheetDelegate, MemoDelegate, AmountSheetDel
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectValidator) {
             if let validatorAddress = result["validatorAddress"] as? String {
-                toValidator = cosmosFetcher.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
+                toValidator = kavaFetcher.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
                 onUpdateValidatorView()
             }
             
@@ -309,18 +308,17 @@ extension KavaEarnDepositAction: BaseSheetDelegate, MemoDelegate, AmountSheetDel
             loadingView.isHidden = false
             Task {
                 do {
-                    //TODO YONG
-//                    if let broadReq = try await Signer.genTx(selectedChain, onBindDepositMsg(), txMemo, txFee, nil),
-//                       let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-//                            self.loadingView.isHidden = true
-//                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-//                            txResult.selectedChain = self.selectedChain
-//                            txResult.broadcastTxResponse = broadRes
-//                            txResult.modalPresentationStyle = .fullScreen
-//                            self.present(txResult, animated: true)
-//                        })
-//                    }
+                    if let broadReq = try await Signer.genTx(selectedChain, onBindDepositMsg(), txMemo, txFee, nil),
+                       let broadRes = try await kavaFetcher.broadcastTx(broadReq) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                            self.loadingView.isHidden = true
+                            let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
+                            txResult.selectedChain = self.selectedChain
+                            txResult.broadcastTxResponse = broadRes
+                            txResult.modalPresentationStyle = .fullScreen
+                            self.present(txResult, animated: true)
+                        })
+                    }
                     
                 } catch {
                     //TODO handle Error

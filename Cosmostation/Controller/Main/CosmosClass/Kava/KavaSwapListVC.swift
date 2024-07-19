@@ -14,7 +14,7 @@ class KavaSwapListVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: BaseChain!
+    var selectedChain: ChainKavaEVM!
     var kavaFetcher: KavaFetcher!
     var priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?
     var swapParam: Kava_Swap_V1beta1_Params?
@@ -27,7 +27,7 @@ class KavaSwapListVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        kavaFetcher = selectedChain.getCosmosfetcher() as? KavaFetcher
+        kavaFetcher = selectedChain.getKavaFetcher()
         
         tableView.isHidden = true
         loadingView.isHidden = false

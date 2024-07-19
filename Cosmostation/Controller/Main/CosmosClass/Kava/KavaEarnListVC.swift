@@ -16,7 +16,7 @@ class KavaEarnListVC: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var earnBtn: BaseButton!
     
-    var selectedChain: BaseChain!
+    var selectedChain: ChainKavaEVM!
     var kavaFetcher: KavaFetcher!
     var myDeposits = [Cosmos_Base_V1beta1_Coin]()
 
@@ -24,7 +24,7 @@ class KavaEarnListVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        kavaFetcher = selectedChain.getCosmosfetcher() as? KavaFetcher
+        kavaFetcher = selectedChain.getKavaFetcher()
         
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")

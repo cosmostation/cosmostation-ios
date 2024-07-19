@@ -101,34 +101,34 @@ extension KavaDefiVC: UITableViewDelegate, UITableViewDataSource {
         if (indexPath.row == 0) {
             let claimRewards = KavaClaimIncentives(nibName: "KavaClaimIncentives", bundle: nil)
             claimRewards.incentive = incentive
-            claimRewards.selectedChain = selectedChain
+            claimRewards.selectedChain = selectedChain as? ChainKavaEVM
             claimRewards.modalTransitionStyle = .coverVertical
             self.present(claimRewards, animated: true)
             
         } else if (indexPath.row == 1) {
             let mintListVC = KavaMintListVC(nibName: "KavaMintListVC", bundle: nil)
-            mintListVC.selectedChain = selectedChain
+            mintListVC.selectedChain = selectedChain as? ChainKavaEVM
             mintListVC.priceFeed = priceFeed
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(mintListVC, animated: true)
             
         } else if (indexPath.row == 2) {
             let lendListVC = KavaLendListVC(nibName: "KavaLendListVC", bundle: nil)
-            lendListVC.selectedChain = selectedChain
+            lendListVC.selectedChain = selectedChain as? ChainKavaEVM
             lendListVC.priceFeed = priceFeed
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(lendListVC, animated: true)
             
         } else if (indexPath.row == 3) {
             let swapListVC = KavaSwapListVC(nibName: "KavaSwapListVC", bundle: nil)
-            swapListVC.selectedChain = selectedChain
+            swapListVC.selectedChain = selectedChain as? ChainKavaEVM
             swapListVC.priceFeed = priceFeed
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(swapListVC, animated: true)
             
         } else if (indexPath.row == 4) {
             let earnListVC = KavaEarnListVC(nibName: "KavaEarnListVC", bundle: nil)
-            earnListVC.selectedChain = selectedChain
+            earnListVC.selectedChain = selectedChain as? ChainKavaEVM
 //            earnListVC.priceFeed = priceFeed
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(earnListVC, animated: true)
