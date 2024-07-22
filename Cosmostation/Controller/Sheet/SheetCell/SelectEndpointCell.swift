@@ -99,7 +99,11 @@ class SelectEndpointCell: UITableViewCell {
             if (url.last != "/") {
                 url = url + "/"
             }
-            url = url + "cosmos/base/tendermint/v1beta1/node_info"
+            if (chain.name.starts(with: "G-Bridge") || chain.name.starts(with: "Sentinel")) {
+                url = url + "/node_info"
+            } else {
+                url = url + "cosmos/base/tendermint/v1beta1/node_info"
+            }
             
             if (cosmosFetcher.getEndpointType() == .UseLCD &&
                 cosmosFetcher.getLcd().contains(endpoint["url"].stringValue)) {
@@ -109,7 +113,8 @@ class SelectEndpointCell: UITableViewCell {
             Task {
                 do {
                     let response = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
-                    if (response["default_node_info"]["network"].stringValue == chain.chainIdCosmos) {
+                    if (response["default_node_info"]["network"].stringValue == chain.chainIdCosmos ||
+                        response["node_info"]["network"].stringValue == chain.chainIdCosmos) {
                         self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
                         let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
                         if (self.gapTime! <= 1.2) {
