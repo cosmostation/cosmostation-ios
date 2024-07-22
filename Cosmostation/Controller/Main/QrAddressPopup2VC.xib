@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,7 +25,7 @@
                 <outlet property="evmAddressLabel" destination="5Jw-yN-Z3p" id="uwA-x2-0t7"/>
                 <outlet property="evmQrImgView" destination="3w0-eg-zGf" id="K8l-TC-nbh"/>
                 <outlet property="hdPathLabel" destination="IYb-9c-Lt8" id="5jO-kP-apR"/>
-                <outlet property="legacyTag" destination="IMg-bV-dU5" id="Bse-jU-c8Y"/>
+                <outlet property="oldTag" destination="IMg-bV-dU5" id="8zr-Zw-4ma"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -52,7 +52,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="39M-M5-uLO">
                             <rect key="frame" x="57" y="10" width="0.0" height="0.0"/>
                             <subviews>
-                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMg-bV-dU5" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMg-bV-dU5" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                     <color key="backgroundColor" name="_color06"/>
                                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>

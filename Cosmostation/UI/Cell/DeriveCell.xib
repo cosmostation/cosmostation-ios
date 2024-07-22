@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -46,10 +46,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="mFd-nJ-qjL">
-                                <rect key="frame" x="147.66666666666666" y="18.666666666666668" width="33" height="12.666666666666668"/>
+                                <rect key="frame" x="147.66666666666666" y="18.666666666666668" width="20.333333333333343" height="12.666666666666668"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXT-BX-fiK" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="33" height="12.666666666666666"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXT-BX-fiK" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="20.333333333333332" height="12.666666666666666"/>
                                         <color key="backgroundColor" name="_color06"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                         <color key="textColor" name="_color02"/>
@@ -61,8 +61,8 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hos-Xk-sL3" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="33" y="0.0" width="0.0" height="12.666666666666666"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hos-Xk-sL3" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                        <rect key="frame" x="20.333333333333343" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" name="_color06"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                         <color key="textColor" name="_color02"/>
@@ -207,10 +207,10 @@
                 <outlet property="evmAddressLabel" destination="CFO-Sn-Lzr" id="hXx-ph-9hg"/>
                 <outlet property="hdPathLabel" destination="4bX-g8-T0H" id="jXm-9W-gBt"/>
                 <outlet property="keyTypeTag" destination="Hos-Xk-sL3" id="9Fk-rL-bzS"/>
-                <outlet property="legacyTag" destination="PXT-BX-fiK" id="icf-vf-bQh"/>
                 <outlet property="loadingLabel" destination="vPz-4J-oOX" id="255-Om-VHL"/>
                 <outlet property="logoImg1" destination="8mE-zW-7bb" id="IvU-RS-Kdy"/>
                 <outlet property="nameLabel" destination="aBa-vi-v6F" id="iuG-nF-mdL"/>
+                <outlet property="oldTag" destination="PXT-BX-fiK" id="5vw-xi-ZKK"/>
                 <outlet property="reposeErrorLabel" destination="7Ct-gm-5Tl" id="new-qB-6kJ"/>
                 <outlet property="rootView" destination="KiY-8H-OEa" id="snu-xC-z0f"/>
             </connections>

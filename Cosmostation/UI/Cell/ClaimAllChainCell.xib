@@ -45,10 +45,10 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="EoP-A3-bEw">
                                 <rect key="frame" x="128.33333333333334" y="26" width="0.0" height="0.0"/>
                                 <subviews>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bM-ju-HDp" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bM-ju-HDp" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="20.333333333333332"/>
                                         <color key="backgroundColor" name="_color06"/>
-                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                         <color key="textColor" name="_color02"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
@@ -227,9 +227,9 @@
                 <outlet property="feeDenomLabel" destination="16a-ji-yTR" id="ugZ-5k-N38"/>
                 <outlet property="feeValueCurrencyLabel" destination="myV-1v-rMz" id="CKd-vx-COD"/>
                 <outlet property="feeValueLabel" destination="fa8-e5-7p8" id="58g-cP-sCY"/>
-                <outlet property="legacyTag" destination="3bM-ju-HDp" id="th7-8w-4j8"/>
                 <outlet property="logoImg1" destination="sm9-aB-yK7" id="7d8-xb-Jld"/>
                 <outlet property="nameLabel" destination="9hG-JF-Cgy" id="awk-mO-uS2"/>
+                <outlet property="oldTag" destination="3bM-ju-HDp" id="rHD-uP-C2c"/>
                 <outlet property="pendingView" destination="pNo-PE-0J3" id="zmo-ic-2UY"/>
                 <outlet property="rewardTitle" destination="8XW-J8-Fy3" id="pjx-C9-DMZ"/>
                 <outlet property="rootView" destination="oFg-9j-LTI" id="AAg-at-ROG"/>

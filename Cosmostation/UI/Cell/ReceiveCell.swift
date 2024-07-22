@@ -13,8 +13,8 @@ class ReceiveCell: UITableViewCell {
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var cautionLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var keyTypeTag: PaddingLabel!
+    @IBOutlet weak var oldTag: RoundedPaddingLabel!
+    @IBOutlet weak var keyTypeTag: RoundedPaddingLabel!
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var copyHintTitle: UILabel!
@@ -27,7 +27,7 @@ class ReceiveCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        legacyTag.isHidden = true
+        oldTag.isHidden = true
         keyTypeTag.isHidden = true
     }
     
@@ -37,7 +37,7 @@ class ReceiveCell: UITableViewCell {
         } else {
             hdPathLabel.text = ""
         }
-        legacyTag.isHidden = chain.isDefault
+        oldTag.isHidden = chain.isDefault
         if (chain.name == "OKT" && !chain.supportEvm) {
             keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
             keyTypeTag.isHidden = false

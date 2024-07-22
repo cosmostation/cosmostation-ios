@@ -48,39 +48,11 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="TTl-Pi-aoD">
                                 <rect key="frame" x="155.66666666666666" y="25" width="0.0" height="0.0"/>
                                 <subviews>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEGACY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cet-um-LoA" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cet-um-LoA" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" name="_color06"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
                                         <color key="textColor" name="_color02"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ERC20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzJ-eY-CJr" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
-                                        <color key="backgroundColor" red="0.71372549019607845" green="0.25098039215686274" blue="0.36078431372549019" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
-                                        <color key="textColor" name="_color01"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CW20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYc-AQ-xwA" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
-                                        <color key="backgroundColor" red="0.59999999999999998" green="0.42352941179999998" blue="0.48627450979999998" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
-                                        <color key="textColor" name="_color01"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NFT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnI-ee-NuM" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
-                                        <color key="backgroundColor" red="0.3411764706" green="0.3803921569" blue="0.65098039220000004" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
-                                        <color key="textColor" name="_color01"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DAPP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrc-L5-vHy" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
-                                        <color key="backgroundColor" red="0.035294117649999998" green="0.72156862749999995" blue="0.75686274509999996" alpha="0.55000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
-                                        <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -291,14 +263,10 @@
                 <outlet property="assetCntLabel" destination="nGQ-Rr-Xp9" id="ejt-vo-3RR"/>
                 <outlet property="assetCntLoadingLabel" destination="VMF-Zk-Xdg" id="tZt-94-hdS"/>
                 <outlet property="bechAddressLabel" destination="WZ8-gN-WeX" id="Edo-hG-svJ"/>
-                <outlet property="cw20Tag" destination="qYc-AQ-xwA" id="Pal-qO-ppf"/>
-                <outlet property="dappTag" destination="yrc-L5-vHy" id="I7q-Rp-c16"/>
-                <outlet property="erc20Tag" destination="dzJ-eY-CJr" id="fUe-VM-6SK"/>
                 <outlet property="evmAddressLabel" destination="C6d-Lf-BNl" id="NUE-Tr-NR7"/>
-                <outlet property="legacyTag" destination="Cet-um-LoA" id="uDS-Ja-52X"/>
                 <outlet property="logoImg1" destination="C1A-Ei-6cG" id="oV4-3m-BgS"/>
                 <outlet property="nameLabel" destination="D2k-TI-wvX" id="fng-hh-NL0"/>
-                <outlet property="nftTag" destination="cnI-ee-NuM" id="5cb-X3-1NM"/>
+                <outlet property="oldTag" destination="Cet-um-LoA" id="kOd-LN-D99"/>
                 <outlet property="priceChangeLabel" destination="iUO-Oz-fI0" id="CxA-5w-CJv"/>
                 <outlet property="priceChangePercentLabel" destination="Xol-Xe-OA2" id="Vdh-qb-Ag7"/>
                 <outlet property="priceCurrencyLabel" destination="uTx-G5-f9q" id="jBw-Ie-xOj"/>

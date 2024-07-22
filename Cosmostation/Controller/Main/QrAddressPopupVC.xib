@@ -23,7 +23,7 @@
                 <outlet property="chainNameLabel" destination="oBF-2o-bRk" id="WxI-jD-mxe"/>
                 <outlet property="hdPathLabel" destination="wfX-nN-dpn" id="NTI-oU-9mO"/>
                 <outlet property="keyTypeTag" destination="4DZ-EN-zz6" id="uYX-5j-HmS"/>
-                <outlet property="legacyTag" destination="pJZ-zD-0YM" id="Wlc-Y6-MZi"/>
+                <outlet property="oldTag" destination="pJZ-zD-0YM" id="YuR-S2-8Jt"/>
                 <outlet property="rqImgView" destination="Xt9-i3-n96" id="tVn-CY-Whq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -51,7 +51,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="M6e-mZ-J57">
                             <rect key="frame" x="57" y="10" width="0.0" height="0.0"/>
                             <subviews>
-                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJZ-zD-0YM" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJZ-zD-0YM" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                     <color key="backgroundColor" name="_color06"/>
                                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
@@ -64,7 +64,7 @@
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                     </userDefinedRuntimeAttributes>
                                 </label>
-                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4DZ-EN-zz6" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4DZ-EN-zz6" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                     <color key="backgroundColor" name="_color06"/>
                                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>

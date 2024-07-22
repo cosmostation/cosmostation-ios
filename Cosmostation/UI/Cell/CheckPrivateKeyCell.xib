@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -45,7 +45,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="YCv-eF-mPF">
                                 <rect key="frame" x="147.66666666666666" y="27" width="0.0" height="0.0"/>
                                 <subviews>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bv9-CZ-uhs" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bv9-CZ-uhs" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" name="_color06"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
@@ -58,7 +58,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9H1-3N-Bea" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9H1-3N-Bea" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" name="_color06"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
@@ -128,9 +128,9 @@
             <connections>
                 <outlet property="hdPathLabel" destination="ws6-85-cqe" id="i9Z-Qa-X25"/>
                 <outlet property="keyTypeTag" destination="9H1-3N-Bea" id="hgg-bs-Rpb"/>
-                <outlet property="legacyTag" destination="bv9-CZ-uhs" id="WhE-eM-vgy"/>
                 <outlet property="logoImg1" destination="Ebr-sN-Lxe" id="sxD-DN-2ZC"/>
                 <outlet property="nameLabel" destination="Ymw-3N-L35" id="LKT-Ys-wp0"/>
+                <outlet property="oldTag" destination="bv9-CZ-uhs" id="0Ol-0x-rvu"/>
                 <outlet property="pkeyLabel" destination="AvC-ON-HAr" id="13R-Vp-A9j"/>
                 <outlet property="rootView" destination="DuX-mc-kc0" id="bIG-Yu-Uf8"/>
             </connections>
