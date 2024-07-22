@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: 코인과 탭 합쳐짐 -> crypto
 class CosmosTokenVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
