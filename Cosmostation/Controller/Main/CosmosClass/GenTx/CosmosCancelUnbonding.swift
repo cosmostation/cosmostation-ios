@@ -37,7 +37,7 @@ class CosmosCancelUnbonding: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedChain: BaseChain!
-    var grpcFetcher: FetcherGrpc!
+    var cosmosFetcher: CosmosFetcher!
     var feeInfos = [FeeInfo]()
     var txFee: Cosmos_Tx_V1beta1_Fee = Cosmos_Tx_V1beta1_Fee.init()
     var txTip: Cosmos_Tx_V1beta1_Tip?
@@ -50,7 +50,7 @@ class CosmosCancelUnbonding: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        grpcFetcher = selectedChain.getGrpcfetcher()
+        cosmosFetcher = selectedChain.getCosmosfetcher()
         
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
@@ -60,7 +60,7 @@ class CosmosCancelUnbonding: BaseVC {
         loadingView.play()
         
         
-        if let validator = grpcFetcher.cosmosValidators.filter({ $0.operatorAddress == unbondingEntry.validatorAddress }).first {
+        if let validator = cosmosFetcher.cosmosValidators.filter({ $0.operatorAddress == unbondingEntry.validatorAddress }).first {
             validatorsLabel.text = validator.description_p.moniker
         }
         
@@ -75,7 +75,7 @@ class CosmosCancelUnbonding: BaseVC {
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
         Task {
-            await grpcFetcher.updateBaseFee()
+            await cosmosFetcher.updateBaseFee()
             DispatchQueue.main.async {
                 self.loadingView.isHidden = true
                 self.oninitFeeView()
@@ -91,7 +91,7 @@ class CosmosCancelUnbonding: BaseVC {
     }
     
     func oninitFeeView() {
-        if (grpcFetcher.cosmosBaseFees.count > 0) {
+        if (cosmosFetcher.cosmosBaseFees.count > 0) {
             feeSegments.removeAllSegments()
             feeSegments.insertSegment(withTitle: "No Tip", at: 0, animated: false)
             feeSegments.insertSegment(withTitle: "20% Tip", at: 1, animated: false)
@@ -99,7 +99,7 @@ class CosmosCancelUnbonding: BaseVC {
             feeSegments.insertSegment(withTitle: "100% Tip", at: 3, animated: false)
             feeSegments.selectedSegmentIndex = selectedFeePosition
             
-            let baseFee = grpcFetcher.cosmosBaseFees[0]
+            let baseFee = cosmosFetcher.cosmosBaseFees[0]
             let gasAmount: NSDecimalNumber = selectedChain.getFeeBaseGasAmount()
             let feeDenom = baseFee.denom
             let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
@@ -123,8 +123,8 @@ class CosmosCancelUnbonding: BaseVC {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = selectedChain
         baseSheet.sheetDelegate = self
-        if (grpcFetcher.cosmosBaseFees.count > 0) {
-            baseSheet.baseFeesDatas = grpcFetcher.cosmosBaseFees
+        if (cosmosFetcher.cosmosBaseFees.count > 0) {
+            baseSheet.baseFeesDatas = cosmosFetcher.cosmosBaseFees
             baseSheet.sheetType = .SelectBaseFeeDenom
         } else {
             baseSheet.feeDatas = feeInfos[selectedFeePosition].FeeDatas
@@ -135,8 +135,8 @@ class CosmosCancelUnbonding: BaseVC {
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeePosition = sender.selectedSegmentIndex
-        if (grpcFetcher.cosmosBaseFees.count > 0) {
-            if let baseFee = grpcFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
+        if (cosmosFetcher.cosmosBaseFees.count > 0) {
+            if let baseFee = cosmosFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                 let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                 txFee.amount[0].amount = feeAmount.stringValue
@@ -182,11 +182,11 @@ class CosmosCancelUnbonding: BaseVC {
         onSimul()
     }
     
-    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
-        if let toGas = simul?.gasInfo.gasUsed {
+    func onUpdateWithSimul(_ gasUsed: UInt64?) {
+        if let toGas = gasUsed {
             txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
-            if (grpcFetcher.cosmosBaseFees.count > 0) {
-                if let baseFee = grpcFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
+            if (cosmosFetcher.cosmosBaseFees.count > 0) {
+                if let baseFee = cosmosFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                     let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                     txFee.amount[0].amount = feeAmount.stringValue
@@ -224,7 +224,7 @@ class CosmosCancelUnbonding: BaseVC {
         Task {
             do {
                 if let simulReq = try await Signer.genSimul(selectedChain, onBindCancelUnbondingMsg(), txMemo, txFee, nil),
-                   let simulRes = try await grpcFetcher.simulateTx(simulReq) {
+                   let simulRes = try await cosmosFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
                     }
@@ -266,7 +266,7 @@ extension CosmosCancelUnbonding: BaseSheetDelegate, MemoDelegate, PinDelegate {
             
         } else if (sheetType == .SelectBaseFeeDenom) {
             if let index = result["index"] as? Int {
-               let selectedDenom = grpcFetcher.cosmosBaseFees[index].denom
+               let selectedDenom = cosmosFetcher.cosmosBaseFees[index].denom
                 txFee.amount[0].denom = selectedDenom
                 onUpdateFeeView()
                 onSimul()
@@ -286,7 +286,7 @@ extension CosmosCancelUnbonding: BaseSheetDelegate, MemoDelegate, PinDelegate {
             Task {
                 do {
                     if let broadReq = try await Signer.genTx(selectedChain, onBindCancelUnbondingMsg(), txMemo, txFee, nil),
-                       let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
+                       let broadRes = try await cosmosFetcher.broadcastTx(broadReq) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

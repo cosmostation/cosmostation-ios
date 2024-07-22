@@ -106,7 +106,7 @@ public class WUtils {
     static func getMintscanPath(_ fromChain: BaseChain, _ toChain: BaseChain, _ denom: String) -> MintscanPath? {
         let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom?.lowercased() == denom.lowercased() }).first
         var msToken: MintscanToken?
-        if let tokenInfo = fromChain.getGrpcfetcher()?.mintscanCw20Tokens.filter({ $0.address == denom }).first {
+        if let tokenInfo = fromChain.getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address == denom }).first {
             msToken = tokenInfo
         }
         var result: MintscanPath?

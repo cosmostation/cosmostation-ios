@@ -28,8 +28,8 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     
     var txStyle: TxStyle = .COSMOS_STYLE
     var fromChain: BaseChain!
-    var fromGrpcFetcher: FetcherGrpc!
-    var fromEvmFetcher: FetcherEvmrpc!
+    var fromCosmosFetcher: CosmosFetcher!
+    var fromEvmFetcher: EvmFetcher!
     var toChain: BaseChain!
     var toAddress: String?
     var txMemo = ""
@@ -73,8 +73,8 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                 confirmBtn.isEnabled = true
                 return
             }
-            fromGrpcFetcher = fromChain.getGrpcfetcher()
-            fetchCosmosTx()
+            fromCosmosFetcher = fromChain.getCosmosfetcher()
+            fetchTx()
         }
         setQutoes()
     }
@@ -186,10 +186,10 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
 
 extension CommonTransferResult {
     
-    func fetchCosmosTx() {
+    func fetchTx() {
         Task {
             do {
-                let result = try await fromGrpcFetcher.fetchTx(cosmosBroadcastTxResponse!.txhash)
+                let result = try await fromCosmosFetcher.fetchTx(cosmosBroadcastTxResponse!.txhash)
                 self.cosmosTxResponse = result
                 DispatchQueue.main.async {
                     self.onUpdateView()
@@ -200,7 +200,7 @@ extension CommonTransferResult {
                 self.fetchCnt = self.fetchCnt - 1
                 if (self.fetchCnt > 0) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
-                        self.fetchCosmosTx()
+                        self.fetchTx()
                     });
                     
                 } else {
@@ -266,7 +266,7 @@ extension CommonTransferResult {
             if (self.txStyle == .WEB3_STYLE) {
                 self.fetchEvmTx()
             } else if (self.txStyle == .COSMOS_STYLE) {
-                self.fetchCosmosTx()
+                self.fetchTx()
             }
         }))
         self.present(noticeAlert, animated: true)

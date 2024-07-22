@@ -42,7 +42,6 @@ class StakeDelegateCell: UITableViewCell {
     }
     
     func onBindMyDelegate(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator, _ delegation: Cosmos_Staking_V1beta1_DelegationResponse) {
-        
         logoImg.af.setImage(withURL: baseChain.monikerImg(validator.operatorAddress))
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
@@ -53,7 +52,7 @@ class StakeDelegateCell: UITableViewCell {
         
         if let stakeDenom = baseChain.stakeDenom,
            let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom),
-           let grpcFetcher = baseChain.getGrpcfetcher() {
+           let cosmosFetcher = baseChain.getCosmosfetcher() {
             
             let vpAmount = NSDecimalNumber(string: validator.tokens).multiplying(byPowerOf10: -msAsset.decimals!)
             vpLabel?.attributedText = WDP.dpAmount(vpAmount.stringValue, vpLabel!.font, 0)
@@ -64,7 +63,7 @@ class StakeDelegateCell: UITableViewCell {
             let stakedAmount = NSDecimalNumber(string: delegation.balance.amount).multiplying(byPowerOf10: -msAsset.decimals!)
             stakingLabel?.attributedText = WDP.dpAmount(stakedAmount.stringValue, stakingLabel!.font, msAsset.decimals!)
             
-            if let rewards = grpcFetcher.cosmosRewards?.filter({ $0.validatorAddress == validator.operatorAddress }).first?.reward {
+            if let rewards = cosmosFetcher.cosmosRewards?.filter({ $0.validatorAddress == validator.operatorAddress }).first?.reward {
                 if let mainDenomReward = rewards.filter({ $0.denom == stakeDenom }).first {
                     let mainDenomrewardAmount = NSDecimalNumber(string: mainDenomReward.amount).multiplying(byPowerOf10: -18).multiplying(byPowerOf10: -msAsset.decimals!)
                     rewardLabel?.attributedText = WDP.dpAmount(mainDenomrewardAmount.stringValue, rewardLabel!.font, msAsset.decimals!)

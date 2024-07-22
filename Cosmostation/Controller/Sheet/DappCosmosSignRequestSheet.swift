@@ -81,7 +81,7 @@ class DappCosmosSignRequestSheet: BaseVC {
         Task {
             try await onParsingRequest()
             if (method == "cos_signDirect" || method == "cosmos_signDirect") {
-                try? await targetChain?.getGrpcfetcher()?.fetchBalances()
+                try? await targetChain?.getCosmosfetcher()?.fetchCosmosBalances()
             }
             DispatchQueue.main.async {
                 self.loadingView.isHidden = true
@@ -259,9 +259,9 @@ class DappCosmosSignRequestSheet: BaseVC {
         onSimul()
     }
     
-    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
+    func onUpdateWithSimul(_ gasUsed: UInt64?) {
         if (selectedFeePosition >= 0) {
-            if let toGas = simul?.gasInfo.gasUsed {
+            if let toGas = gasUsed {
                 txFee!.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
                 if let gasRate = feeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == txFee!.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: txFee!.gasLimit)
@@ -465,7 +465,7 @@ extension DappCosmosSignRequestSheet: BaseSheetDelegate {
         Task {
             do {
                 let simulReq = genSimulTxs()
-                let simulRes = try await targetChain.getGrpcfetcher()!.simulateTx(simulReq!)
+                let simulRes = try await targetChain.getCosmosfetcher()!.simulateTx(simulReq!)
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(simulRes)
                 }

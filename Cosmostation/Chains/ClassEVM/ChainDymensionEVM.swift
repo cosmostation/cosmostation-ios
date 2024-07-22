@@ -20,7 +20,7 @@ class ChainDymensionEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "adym"
         bechAccountPrefix = "dym"
         validatorPrefix = "dymvaloper"

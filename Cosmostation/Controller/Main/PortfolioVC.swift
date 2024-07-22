@@ -316,7 +316,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
             return
         }
         
-        if (chain.isCosmos()) {
+        if (chain.supportCosmos) {
             let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
             cosmosClassVC.selectedChain = chain
             cosmosClassVC.hidesBottomBarWhenPushed = true
@@ -340,7 +340,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
             chain = searchTestnets[indexPath.row]
         }
         
-        if (chain.isCosmos() && chain.supportEvm) {
+        if (chain.supportCosmos && chain.supportEvm) {
             let toEvmAddress = chain.evmAddress!
             let toBechAddress = chain.bechAddress!
             let copyEvm = UIAction(title: NSLocalizedString("str_copy_evm_address", comment: ""), image: nil) { _ in
@@ -367,7 +367,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
                 UIMenu(title: "", children: [copyEvm, shareEvm, copyBech, shareBech])
             }
             
-        } else if (chain.isCosmos()) {
+        } else if (chain.supportCosmos) {
             let toBechAddress = chain.bechAddress!
             let copy = UIAction(title: NSLocalizedString("str_copy", comment: ""), image: UIImage(systemName: "doc.on.doc")) { _ in
                 UIPasteboard.general.string = toBechAddress.trimmingCharacters(in: .whitespacesAndNewlines)

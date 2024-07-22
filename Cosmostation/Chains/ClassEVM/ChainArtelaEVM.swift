@@ -20,7 +20,7 @@ class ChainArtelaEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ARTELA_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        supportCosmosGrpc = true
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "aart"
         bechAccountPrefix = "art"
         validatorPrefix = "artvaloper"

@@ -34,8 +34,8 @@ class SelectFeeCoinCell: UITableViewCell {
         if let msAsset = BaseData.instance.getAsset(chain.apiName, feeData.denom!) {
             WDP.dpCoin(msAsset, nil, coinImg, symbolLabel, amountLabel, msAsset.decimals)
             
-            if let grpcFetcher = chain.getGrpcfetcher(),
-               let balances = grpcFetcher.cosmosBalances,
+            if let cosmosFetcher = chain.getCosmosfetcher(),
+               let balances = cosmosFetcher.cosmosBalances,
                let coin = balances.filter({ $0.denom == feeData.denom }).first {
                 let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                 let amount = NSDecimalNumber(string: coin.amount)
@@ -51,8 +51,8 @@ class SelectFeeCoinCell: UITableViewCell {
         if let msAsset = BaseData.instance.getAsset(chain.apiName, baseFee.denom) {
             WDP.dpCoin(msAsset, nil, coinImg, symbolLabel, amountLabel, msAsset.decimals)
             
-            if let grpcFetcher = chain.getGrpcfetcher(),
-               let balances = grpcFetcher.cosmosBalances,
+            if let cosmosFetcher = chain.getCosmosfetcher(),
+               let balances = cosmosFetcher.cosmosBalances,
                let coin = balances.filter({ $0.denom == baseFee.denom }).first {
                 let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                 let amount = NSDecimalNumber(string: coin.amount)

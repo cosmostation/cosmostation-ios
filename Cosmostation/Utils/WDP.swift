@@ -167,6 +167,15 @@ public class WDP {
     /*
      * Display Times
      */
+    static func toDate(_ timeString: String?) -> Date? {
+        if (timeString == nil) { return nil }
+        guard let date = WUtils.timeStringToDate(timeString!) else {
+            return nil
+        }
+        return date
+    }
+    
+    
     static func dpDate(_ timeString: String?) -> String {
         if (timeString == nil) { return "-" }
         guard let date = WUtils.timeStringToDate(timeString!) else {

@@ -1,5 +1,5 @@
 //
-//  FetcherEvmrpc.swift
+//  EvmFetcher.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 6/15/24.
@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import BigInt
 
-class FetcherEvmrpc {
+class EvmFetcher {
     
     var chain: BaseChain!
     
@@ -23,7 +23,7 @@ class FetcherEvmrpc {
     }
     
     
-    func fetchBalances() async -> Bool {
+    func fetchEvmBalances() async -> Bool {
         evmBalances = NSDecimalNumber.zero
         if let balanceJson = try? await fetchEvmBalance(chain.evmAddress!),
            let balance = balanceJson?["result"].stringValue.hexToNSDecimal {
@@ -45,11 +45,9 @@ class FetcherEvmrpc {
                 self.evmBalances = balance()
             }
             
-//            print("fetchAllErc20Balance start ", chain.tag)
             let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)
-//            print("userDisplaytoken ", chain.tag, "  ", userDisplaytoken?.count)
             await mintscanErc20Tokens.concurrentForEach { erc20 in
-                if (self.chain.isCosmos()) {
+                if (self.chain.supportCosmos) {
                     await self.fetchErc20Balance(erc20)
                 } else {
                     if (userDisplaytoken == nil) {
@@ -63,12 +61,10 @@ class FetcherEvmrpc {
                     }
                 }
             }
-//            print("fetchAllErc20Balance end ", chain.tag, "  ", mintscanErc20Tokens.count)
             return true
             
         } catch {
             print("evm error \(error) ", chain.tag)
-//            throw CommonError.evmErrpr
             return false
         }
     }
@@ -107,7 +103,7 @@ class FetcherEvmrpc {
 }
 
 //about mintscan api
-extension FetcherEvmrpc {
+extension EvmFetcher {
     
     func fetchErc20Info() async throws -> [MintscanToken]?  {
         return try await AF.request(BaseNetWork.msErc20InfoUrl(chain.apiName), method: .get).serializingDecodable([MintscanToken].self).value
@@ -122,7 +118,7 @@ extension FetcherEvmrpc {
         let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)
         Task {
             await mintscanErc20Tokens.concurrentForEach { erc20 in
-                if (self.chain.isCosmos()) {
+                if (self.chain.supportCosmos) {
                     await self.fetchErc20Balance(erc20)
                 } else {
                     if (userDisplaytoken == nil) {

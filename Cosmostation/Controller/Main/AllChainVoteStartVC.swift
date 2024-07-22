@@ -99,8 +99,8 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
         if (baseAccount.getDpChains().filter { $0.fetchState == .Busy }.count == 0) {
             var stakedChains = [BaseChain]()
             baseAccount.getDpChains().filter { $0.isTestnet == false && $0.isDefault == true && $0.tag != "finschia438" }.forEach { chain in
-                if let grpcFetcher = chain.getGrpcfetcher() {
-                    let delegated = grpcFetcher.delegationAmountSum()
+                if let cosmosFetcher = chain.getCosmosfetcher() {
+                    let delegated = cosmosFetcher.delegationAmountSum()
                     let voteThreshold = chain.voteThreshold()
                     let txFee = chain.getInitPayableFee()
                     if (delegated.compare(voteThreshold).rawValue > 0 && txFee != nil) {
@@ -186,8 +186,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
             toDisplayInfos[section].isBusy = true
             onSectionReload(section)
         
-            if let simul = try await simulateVoteTx(chain, tempToVotes) {
-                let toGas = simul.gasInfo.gasUsed
+            if let toGas = try await simulateVoteTx(chain, tempToVotes) {
                 txFee.gasLimit = UInt64(Double(toGas) * chain.gasMultiply())
                 if let gasRate = chain.getBaseFeeInfo().FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
@@ -256,7 +255,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
     func checkTx(_ chain: BaseChain, _ position: Int, _ txResponse: Cosmos_Base_Abci_V1beta1_TxResponse) {
         Task {
             do {
-                let result = try await chain.getGrpcfetcher()!.fetchTx(txResponse.txhash)
+                let result = try await chain.getCosmosfetcher()!.fetchTx(txResponse.txhash)
                 toDisplayInfos[position].isBusy = false
                 toDisplayInfos[position].txResponse = result
                 DispatchQueue.main.async {
@@ -424,20 +423,20 @@ extension AllChainVoteStartVC {
 
 extension AllChainVoteStartVC {
     
-    func simulateVoteTx(_ chain: BaseChain, _ msgVotes: [Cosmos_Gov_V1beta1_MsgVote]) async throws -> Cosmos_Tx_V1beta1_SimulateResponse? {
+    func simulateVoteTx(_ chain: BaseChain, _ msgVotes: [Cosmos_Gov_V1beta1_MsgVote]) async throws -> UInt64? {
         let msgs = Signer.genVoteMsg(msgVotes)
-        if let grpcFetcher = chain.getGrpcfetcher(),
+        if let cosmosFetcher = chain.getCosmosfetcher(),
            let simulReq = try await Signer.genSimul(chain, msgs, "", chain.getInitPayableFee()!, nil) {
-            return try await grpcFetcher.simulateTx(simulReq)
+            return try await cosmosFetcher.simulateTx(simulReq)
         }
         return nil
     }
     
     func broadcastVoteTx(_ chain: BaseChain, _ msgVotes: [Cosmos_Gov_V1beta1_MsgVote], _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip? = nil) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
         let msgs = Signer.genVoteMsg(msgVotes)
-        if let grpcFetcher = chain.getGrpcfetcher(),
+        if let cosmosFetcher = chain.getCosmosfetcher(),
            let broadReq = try await Signer.genTx(chain, msgs, "", fee, tip) {
-            return try await grpcFetcher.broadcastTx(broadReq)
+            return try await cosmosFetcher.broadcastTx(broadReq)
         }
         return nil
     }

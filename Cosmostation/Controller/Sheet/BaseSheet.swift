@@ -161,12 +161,12 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                 swapAssets.sort {
                     if ($0["symbol"] == "ATOM") { return true }
                     if ($1["symbol"] == "ATOM") { return false }
-                    let value0 = targetChain.getGrpcfetcher()!.balanceValue($0["denom"].stringValue)
-                    let value1 = targetChain.getGrpcfetcher()!.balanceValue($1["denom"].stringValue)
+                    let value0 = targetChain.getCosmosfetcher()!.balanceValue($0["denom"].stringValue)
+                    let value1 = targetChain.getCosmosfetcher()!.balanceValue($1["denom"].stringValue)
                     if (value0.compare(value1).rawValue > 0 ) { return true }
                     if (value0.compare(value1).rawValue < 0 ) { return false }
-                    let amount0 = targetChain.getGrpcfetcher()!.balanceAmount($0["denom"].stringValue)
-                    let amount1 = targetChain.getGrpcfetcher()!.balanceAmount($1["denom"].stringValue)
+                    let amount0 = targetChain.getCosmosfetcher()!.balanceAmount($0["denom"].stringValue)
+                    let amount1 = targetChain.getCosmosfetcher()!.balanceAmount($1["denom"].stringValue)
                     if (amount0.compare(amount1).rawValue > 0 ) { return true }
                     if (amount0.compare(amount1).rawValue < 0 ) { return false }
                     return $0["symbol"].stringValue < $1["symbol"].stringValue
@@ -186,12 +186,12 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                 swapAssets.sort {
                     if ($0["symbol"] == "ATOM") { return true }
                     if ($1["symbol"] == "ATOM") { return false }
-                    let value0 = targetChain.getGrpcfetcher()!.balanceValue($0["denom"].stringValue)
-                    let value1 = targetChain.getGrpcfetcher()!.balanceValue($1["denom"].stringValue)
+                    let value0 = targetChain.getCosmosfetcher()!.balanceValue($0["denom"].stringValue)
+                    let value1 = targetChain.getCosmosfetcher()!.balanceValue($1["denom"].stringValue)
                     if (value0.compare(value1).rawValue > 0 ) { return true }
                     if (value0.compare(value1).rawValue < 0 ) { return false }
-                    let amount0 = targetChain.getGrpcfetcher()!.balanceAmount($0["denom"].stringValue)
-                    let amount1 = targetChain.getGrpcfetcher()!.balanceAmount($1["denom"].stringValue)
+                    let amount0 = targetChain.getCosmosfetcher()!.balanceAmount($0["denom"].stringValue)
+                    let amount1 = targetChain.getCosmosfetcher()!.balanceAmount($1["denom"].stringValue)
                     if (amount0.compare(amount1).rawValue > 0 ) { return true }
                     if (amount0.compare(amount1).rawValue < 0 ) { return false }
                     return $0["symbol"].stringValue < $1["symbol"].stringValue
@@ -219,9 +219,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SelectUnStakeValidator) {
             sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
-            delegations = targetChain.getGrpcfetcher()!.cosmosDelegations
+            delegations = targetChain.getCosmosfetcher()!.cosmosDelegations
             delegations.forEach { delegation in
-                if let validator = targetChain.getGrpcfetcher()!.cosmosValidators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
+                if let validator = targetChain.getCosmosfetcher()!.cosmosValidators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
                     validators.append(validator)
                 }
             }

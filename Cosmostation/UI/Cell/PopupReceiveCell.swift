@@ -47,7 +47,7 @@ class PopupReceiveCell: UITableViewCell {
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }
             
-        } else if chain.isCosmos(), section == 1 {
+        } else if chain.supportCosmos, section == 1 {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
             let bechAddress = chain.bechAddress!
             addressLabel.text = bechAddress

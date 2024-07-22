@@ -10,9 +10,6 @@ import UIKit
 import Lottie
 import MaterialComponents
 import SwiftyJSON
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrScanDelegate, SelectAddressListDelegate, BaseSheetDelegate {
     
@@ -141,26 +138,20 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         
         Task {
             if let icns = try await checkOsmoname(userInput, prefix) {
-                if let result = try? JSONDecoder().decode(JSON.self, from: icns.data) {
-                    if (result["bech32_address"].stringValue.starts(with: prefix + "1")) {
-                        nameservices.append(NameService.init("osmosis", userInput, result["bech32_address"].stringValue))
-                    }
+                if (icns["bech32_address"].stringValue.starts(with: prefix + "1")) {
+                    nameservices.append(NameService.init("osmosis", userInput, icns["bech32_address"].stringValue))
                 }
             }
             
             if let stargaze = try await checkStargazename(userInput) {
-                if let result = try? JSONDecoder().decode(JSON.self, from: stargaze.data) {
-                    if (result.stringValue.starts(with: prefix + "1")) {
-                        nameservices.append(NameService.init("stargaze", userInput, result.stringValue))
-                    }
+                if (stargaze.stringValue.starts(with: prefix + "1")) {
+                    nameservices.append(NameService.init("stargaze", userInput, stargaze.stringValue))
                 }
             }
             
             if let archway = try await checkArchwayname(userInput) {
-                if let result = try? JSONDecoder().decode(JSON.self, from: archway.data) {
-                    if (result["address"].stringValue.starts(with: prefix + "1")) {
-                        nameservices.append(NameService.init("archway", userInput, result["address"].stringValue))
-                    }
+                if (archway["address"].stringValue.starts(with: prefix + "1")) {
+                    nameservices.append(NameService.init("archway", userInput, archway["address"].stringValue))
                 }
             }
             
@@ -203,8 +194,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
 
 extension TxSendAddressSheet {
     
-    func checkOsmoname(_ inputName: String, _ prefix: String) async throws -> Cosmwasm_Wasm_V1_QuerySmartContractStateResponse? {
-        let channel = getConnection(ChainOsmosis())
+    func checkOsmoname(_ inputName: String, _ prefix: String) async throws -> JSON? {
         let name = String(inputName.split(separator: ".")[0]) + "." + prefix
         let query: JSON = ["address_by_icns" : ["icns" : name]]
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
@@ -213,11 +203,10 @@ extension TxSendAddressSheet {
             $0.address = OSMO_NAME_SERVICE
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
-        return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.get()
+        return try await ChainOsmosis().getCosmosfetcher()?.fetchSmartContractState(req)
     }
     
-    func checkStargazename (_ inputName: String) async throws -> Cosmwasm_Wasm_V1_QuerySmartContractStateResponse? {
-        let channel = getConnection(ChainStargaze())
+    func checkStargazename (_ inputName: String) async throws -> JSON? {
         let name = String(inputName.split(separator: ".")[0])
         let query: JSON = ["associated_address" : ["name" : name]]
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
@@ -226,11 +215,10 @@ extension TxSendAddressSheet {
             $0.address = STARGAZE_NAME_SERVICE
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
-        return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.get()
+        return try await ChainStargaze().getCosmosfetcher()?.fetchSmartContractState(req)
     }
     
-    func checkArchwayname (_ inputName: String) async throws -> Cosmwasm_Wasm_V1_QuerySmartContractStateResponse? {
-        let channel = getConnection(ChainArchway())
+    func checkArchwayname (_ inputName: String) async throws -> JSON? {
         var name = ""
         if (inputName.contains(".arch")) {
             name = inputName
@@ -246,19 +234,7 @@ extension TxSendAddressSheet {
             $0.address = ARCH_NAME_SERVICE
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
-        return try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: channel).smartContractState(req, callOptions: getCallOptions()).response.get()
-    }
-    
-    
-    func getConnection(_ chain: BaseChain) -> ClientConnection {
-        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
-        return ClientConnection.usingPlatformAppropriateTLS(for: group).connect(host: chain.getGrpcfetcher()!.getGrpc().0, port: chain.getGrpcfetcher()!.getGrpc().1)
-    }
-    
-    func getCallOptions() -> CallOptions {
-        var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
-        return callOptions
+        return try await ChainArchway().getCosmosfetcher()?.fetchSmartContractState(req)
     }
 }
 

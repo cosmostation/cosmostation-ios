@@ -28,6 +28,7 @@ class SelectEndpointCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        self.seletedImg.isHidden = true
     }
     
     override func prepareForReuse() {
@@ -39,7 +40,7 @@ class SelectEndpointCell: UITableViewCell {
     }
     
     func onBindGrpcEndpoint(_ position: Int, _ chain: BaseChain) {
-        if let grpcFetcher = chain.getGrpcfetcher() {
+        if let cosmosFetcher = chain.getCosmosfetcher() {
             let endpoint = chain.getChainListParam()["grpc_endpoint"].arrayValue[position]
             providerLabel.text = endpoint["provider"].string
             endpointLabel.text = endpoint["url"].string
@@ -49,7 +50,10 @@ class SelectEndpointCell: UITableViewCell {
             let host = endpoint["url"].stringValue.components(separatedBy: ":")[0].trimmingCharacters(in: .whitespaces)
             let port = Int(endpoint["url"].stringValue.components(separatedBy: ":")[1].trimmingCharacters(in: .whitespaces)) ?? 443
             
-            seletedImg.isHidden = (grpcFetcher.getGrpc().host != host)
+            if (cosmosFetcher.getEndpointType() == .UseGRPC &&
+                cosmosFetcher.getGrpc().host == host) {
+                seletedImg.isHidden = false
+            }
             
             Task {
                 let channel = getConnection(host, port)
@@ -70,21 +74,63 @@ class SelectEndpointCell: UITableViewCell {
                         
                     } else {
                         try? channel.close()
-                        DispatchQueue.main.async {
-                            self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                            self.speedTimeLabel.text = "ChainID Failed"
-                        }
+                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                        self.speedTimeLabel.text = "ChainID Failed"
                     }
                     
                 } catch {
                     try? channel.close()
-                    DispatchQueue.main.async {
-                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        self.speedTimeLabel.text = "Unknown"
-                    }
+                    self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                    self.speedTimeLabel.text = "Unknown"
                 }
             }
+        }
+    }
+    
+    func onBindLcdEndpoint(_ position: Int, _ chain: BaseChain) {
+        if let cosmosFetcher = chain.getCosmosfetcher() {
+            let endpoint = chain.getChainListParam()["lcd_endpoint"].arrayValue[position]
+            providerLabel.text = endpoint["provider"].string
+            endpointLabel.text = String(endpoint["url"].string?.dropLast() ?? "")
+            endpointLabel.adjustsFontSizeToFitWidth = true
             
+            let checkTime = CFAbsoluteTimeGetCurrent()
+            var url = endpoint["url"].stringValue
+            if (url.last != "/") {
+                url = url + "/"
+            }
+            url = url + "cosmos/base/tendermint/v1beta1/node_info"
+            
+            if (cosmosFetcher.getEndpointType() == .UseLCD &&
+                cosmosFetcher.getLcd().contains(endpoint["url"].stringValue)) {
+                seletedImg.isHidden = false
+            }
+            
+            Task {
+                do {
+                    let response = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
+                    if (response["default_node_info"]["network"].stringValue == chain.chainIdCosmos) {
+                        self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
+                        let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
+                        if (self.gapTime! <= 1.2) {
+                            self.speedImg.image = UIImage.init(named: "ImgGovPassed")
+                        } else if (self.gapTime! <= 3) {
+                            self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
+                        } else {
+                            self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                        }
+                        self.speedTimeLabel.text = gapFormat
+                        
+                    } else {
+                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                        self.speedTimeLabel.text = "ChainID Failed"
+                    }
+                    
+                } catch {
+                    self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                    self.speedTimeLabel.text = "Unknown"
+                }
+            }
         }
     }
     

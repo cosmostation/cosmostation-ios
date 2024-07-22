@@ -15,24 +15,21 @@ class ManageChainCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var evmLayer: UIView!
     @IBOutlet weak var evmEndpointLabel: UILabel!
-    @IBOutlet weak var grpcLayer: UIView!
-    @IBOutlet weak var grpcEndpointLabel: UILabel!
-    @IBOutlet weak var lcdLayer: UIView!
-    @IBOutlet weak var lcdEndpointLabel: UILabel!
+    @IBOutlet weak var cosmosLayer: UIView!
+    @IBOutlet weak var cosmosEndpointLabel: UILabel!
+    @IBOutlet weak var cosmosEndpointTag: PaddingLabel!
     
 
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
         evmLayer.isHidden = true
-        grpcLayer.isHidden = true
-        lcdLayer.isHidden = true
+        cosmosLayer.isHidden = true
     }
     
     override func prepareForReuse() {
         evmLayer.isHidden = true
-        grpcLayer.isHidden = true
-        lcdLayer.isHidden = true
+        cosmosLayer.isHidden = true
     }
     
     
@@ -40,16 +37,17 @@ class ManageChainCell: UITableViewCell {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         
-        if (chain.name == "OKT") {
-            lcdLayer.isHidden = false
-            lcdEndpointLabel.text = chain.getLcdfetcher()!.getLcd().replacingOccurrences(of: "https://", with: "")
-            lcdEndpointLabel.adjustsFontSizeToFitWidth = true
-        }
-        
-        if (chain.supportCosmosGrpc) {
-            grpcLayer.isHidden = false
-            grpcEndpointLabel.text = chain.getGrpcfetcher()!.getGrpc().host + " : " +  String(chain.getGrpcfetcher()!.getGrpc().port)
-            grpcEndpointLabel.adjustsFontSizeToFitWidth = true
+        if (chain.getCosmosfetcher()?.getEndpointType() == .UseGRPC) {
+            cosmosLayer.isHidden = false
+            cosmosEndpointTag.text = "gRPC"
+            cosmosEndpointLabel.text = chain.getCosmosfetcher()!.getGrpc().host + " : " +  String(chain.getCosmosfetcher()!.getGrpc().port)
+            cosmosEndpointLabel.adjustsFontSizeToFitWidth = true
+            
+        } else if (chain.getCosmosfetcher()?.getEndpointType() == .UseLCD) {
+            cosmosLayer.isHidden = false
+            cosmosEndpointTag.text = "Rest"
+            cosmosEndpointLabel.text = chain.getCosmosfetcher()?.getLcd().replacingOccurrences(of: "https://", with: "")
+            cosmosEndpointLabel.adjustsFontSizeToFitWidth = true
         }
         
         if (chain.supportEvm) {

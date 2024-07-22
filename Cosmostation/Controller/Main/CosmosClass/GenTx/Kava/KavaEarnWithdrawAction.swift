@@ -37,8 +37,8 @@ class KavaEarnWithdrawAction: BaseVC {
     @IBOutlet weak var removeBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: BaseChain!
-    var grpcFetcher: FetcherGrpc!
+    var selectedChain: ChainKavaEVM!
+    var kavaFetcher: KavaFetcher!
     var feeInfos = [FeeInfo]()
     var selectedFeePosition = 0
     var toEarnRemove: Kava_Router_V1beta1_MsgWithdrawBurn!
@@ -53,7 +53,7 @@ class KavaEarnWithdrawAction: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        grpcFetcher = selectedChain.getGrpcfetcher()
+        kavaFetcher = selectedChain.getKavaFetcher()
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -159,8 +159,8 @@ class KavaEarnWithdrawAction: BaseVC {
         onSimul()
     }
     
-    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
-        if let toGas = simul?.gasInfo.gasUsed {
+    func onUpdateWithSimul(_ gasUsed: UInt64?) {
+        if let toGas = gasUsed {
             txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
             if let gasRate = feeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
@@ -192,7 +192,7 @@ class KavaEarnWithdrawAction: BaseVC {
         Task {
             do {
                 if let simulReq = try await Signer.genSimul(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil),
-                   let simulRes = try await grpcFetcher.simulateTx(simulReq) {
+                   let simulRes = try await kavaFetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
                     }
@@ -248,7 +248,7 @@ extension KavaEarnWithdrawAction: BaseSheetDelegate, MemoDelegate, AmountSheetDe
             Task {
                 do {
                     if let broadReq = try await Signer.genTx(selectedChain, onBindWithdrawMsg(), txMemo, txFee, nil),
-                       let broadRes = try await grpcFetcher.broadcastTx(broadReq) {
+                       let broadRes = try await kavaFetcher.broadcastTx(broadReq) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

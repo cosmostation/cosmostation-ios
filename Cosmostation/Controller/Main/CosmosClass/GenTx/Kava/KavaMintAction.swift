@@ -41,8 +41,8 @@ class KavaMintAction: BaseVC {
     @IBOutlet weak var mintBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var selectedChain: BaseChain!
-    var grpcFetcher: FetcherGrpc!
+    var selectedChain: ChainKavaEVM!
+    var kavaFetcher: KavaFetcher!
     var feeInfos = [FeeInfo]()
     var selectedFeePosition = 0
     var txFee: Cosmos_Tx_V1beta1_Fee!
@@ -63,7 +63,7 @@ class KavaMintAction: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        grpcFetcher = selectedChain.getGrpcfetcher()
+        kavaFetcher = selectedChain.getCosmosfetcher() as? KavaFetcher
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -87,7 +87,7 @@ class KavaMintAction: BaseVC {
         if (mintActionType == .Deposit) {
             toMintSymbolLabel.text = collateralMsAsset.symbol
             toMintAssetImg.af.setImage(withURL: collateralMsAsset.assetImg())
-            let balanceAmount = grpcFetcher.balanceAmount(collateralParam.denom)
+            let balanceAmount = kavaFetcher.balanceAmount(collateralParam.denom)
             if (txFee.amount[0].denom == collateralParam.denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 collateralAvailableAmount = balanceAmount.subtracting(feeAmount)
@@ -115,7 +115,7 @@ class KavaMintAction: BaseVC {
         } else if (mintActionType == .Repay) {
             toMintSymbolLabel.text = principalMsAsset.symbol
             toMintAssetImg.af.setImage(withURL: principalMsAsset.assetImg())
-            principalAvailableAmount = grpcFetcher.balanceAmount("usdx")
+            principalAvailableAmount = kavaFetcher.balanceAmount("usdx")
         }
         
         
@@ -275,8 +275,8 @@ class KavaMintAction: BaseVC {
         }
     }
     
-    func onUpdateWithSimul(_ simul: Cosmos_Tx_V1beta1_SimulateResponse?) {
-        if let toGas = simul?.gasInfo.gasUsed {
+    func onUpdateWithSimul(_ gasUsed: UInt64?) {
+        if let toGas = gasUsed {
             txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
             if let gasRate = feeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
@@ -322,7 +322,7 @@ class KavaMintAction: BaseVC {
                 } else if (mintActionType == .Repay) {
                     simulReq = try await Signer.genSimul(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
                 }
-                let simulRes = try await grpcFetcher.simulateTx(simulReq)
+                let simulRes = try await kavaFetcher.simulateTx(simulReq)
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(simulRes)
                 }
@@ -438,7 +438,7 @@ extension KavaMintAction: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
                         broadReq = try await Signer.genTx(selectedChain, onBindRepayMsg(), txMemo, txFee, nil)
                         
                     }
-                    let response = try await grpcFetcher.broadcastTx(broadReq)
+                    let response = try await kavaFetcher.broadcastTx(broadReq)
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         

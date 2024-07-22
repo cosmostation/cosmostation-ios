@@ -58,7 +58,7 @@ class ReceiveCell: UITableViewCell {
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }
             
-        } else if chain.isCosmos() {
+        } else if chain.supportCosmos {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
             let bechAddress = chain.bechAddress!
             addressLabel.text = bechAddress

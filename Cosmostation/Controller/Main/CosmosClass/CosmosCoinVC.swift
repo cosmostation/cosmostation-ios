@@ -22,7 +22,7 @@ class CosmosCoinVC: BaseVC {
     var ibcCoins = Array<Cosmos_Base_V1beta1_Coin>()                    // section 2
     var bridgedCoins = Array<Cosmos_Base_V1beta1_Coin>()                // section 3
     
-    var lcdBalances = Array<JSON>()                                     // section 1 for legacy lcd
+    var oktBalances = Array<JSON>()                                     // section 1 for legacy okt
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +90,7 @@ class CosmosCoinVC: BaseVC {
                 self.nativeCoins.removeAll()
                 self.ibcCoins.removeAll()
                 self.bridgedCoins.removeAll()
-                self.lcdBalances.removeAll()
+                self.oktBalances.removeAll()
                 self.onSortAssets()
             }
         }
@@ -112,23 +112,21 @@ class CosmosCoinVC: BaseVC {
     
     func onSortAssets() {
         Task {
-            if (selectedChain.name == "OKT") {
-                if let lcdFetcher = selectedChain.getLcdfetcher() {
-                    lcdFetcher.lcdAccountInfo.oktCoins?.forEach { balance in
-                        lcdBalances.append(balance)
-                    }
-                    if (lcdBalances.filter { $0["denom"].string == selectedChain.stakeDenom }.first == nil) {
-                        lcdBalances.append(JSON(["denom":"okt", "amount": "0"]))
-                    }
-                    lcdBalances.sort {
-                        if ($0["denom"].string == selectedChain.stakeDenom) { return true }
-                        if ($1["denom"].string == selectedChain.stakeDenom) { return false }
-                        return false
-                    }
+            if let oktFetcher = (selectedChain as? ChainOktEVM)?.getOktfetcher() {
+                oktFetcher.oktAccountInfo.oktCoins?.forEach { balance in
+                    oktBalances.append(balance)
+                }
+                if (oktBalances.filter { $0["denom"].string == selectedChain.stakeDenom }.first == nil) {
+                    oktBalances.append(JSON(["denom":"okt", "amount": "0"]))
+                }
+                oktBalances.sort {
+                    if ($0["denom"].string == selectedChain.stakeDenom) { return true }
+                    if ($1["denom"].string == selectedChain.stakeDenom) { return false }
+                    return false
                 }
                 
-            } else if let grpcFetcher = selectedChain.getGrpcfetcher() {
-                grpcFetcher.cosmosBalances?.forEach { coin in
+            } else if let cosmosFetcher = selectedChain.getCosmosfetcher() {
+                cosmosFetcher.cosmosBalances?.forEach { coin in
                     let coinType = BaseData.instance.getAsset(selectedChain.apiName, coin.denom)?.type
                     if (coinType == "staking" || coinType == "native") {
                         nativeCoins.append(coin)
@@ -144,18 +142,18 @@ class CosmosCoinVC: BaseVC {
                 nativeCoins.sort {
                     if ($0.denom == selectedChain.stakeDenom) { return true }
                     if ($1.denom == selectedChain.stakeDenom) { return false }
-                    let value0 = grpcFetcher.balanceValue($0.denom)
-                    let value1 = grpcFetcher.balanceValue($1.denom)
+                    let value0 = cosmosFetcher.balanceValue($0.denom)
+                    let value1 = cosmosFetcher.balanceValue($1.denom)
                     return value0.compare(value1).rawValue > 0 ? true : false
                 }
                 ibcCoins.sort {
-                    let value0 = grpcFetcher.balanceValue($0.denom)
-                    let value1 = grpcFetcher.balanceValue($1.denom)
+                    let value0 = cosmosFetcher.balanceValue($0.denom)
+                    let value1 = cosmosFetcher.balanceValue($1.denom)
                     return value0.compare(value1).rawValue > 0 ? true : false
                 }
                 bridgedCoins.sort {
-                    let value0 = grpcFetcher.balanceValue($0.denom)
-                    let value1 = grpcFetcher.balanceValue($1.denom)
+                    let value0 = cosmosFetcher.balanceValue($0.denom)
+                    let value1 = cosmosFetcher.balanceValue($1.denom)
                     return value0.compare(value1).rawValue > 0 ? true : false
                 }
             }
@@ -198,7 +196,7 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (selectedChain.name == "OKT") {
             view.titleLabel.text = "Native Coins"
-            view.cntLabel.text = String(lcdBalances.count)
+            view.cntLabel.text = String(oktBalances.count)
             
         } else {
             if (section == 0 && nativeCoins.count > 0) {
@@ -235,8 +233,8 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (selectedChain.name == "OKT") {
-            loadingView.isHidden = lcdBalances.count > 0
-            return lcdBalances.count
+            loadingView.isHidden = oktBalances.count > 0
+            return oktBalances.count
             
         } else {
             loadingView.isHidden = nativeCoins.count > 0 || ibcCoins.count > 0  || bridgedCoins.count > 0
@@ -262,8 +260,9 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-            if (selectedChain.name == "OKT") {
-                cell.bindOktAsset(selectedChain, lcdBalances[indexPath.row])
+            
+            if let oktChain = selectedChain as? ChainOktEVM {
+                cell.bindOktAsset(oktChain, oktBalances[indexPath.row])
             } else if (selectedChain is ChainBeraEVM_T && indexPath.section == 0 && indexPath.row == 1) {
                 cell.bindEvmClassCoin(selectedChain as! ChainBeraEVM_T)
             } else {
@@ -286,13 +285,13 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
         if (selectedChain.name == "OKT") {
             if (selectedChain.tag == "okt60_Keccak") {
                 if (indexPath.section == 0 && indexPath.row == 0) { //OKT EVM only support Ox style
-                    onStartTransferVC(.Only_EVM_Coin, lcdBalances[indexPath.row]["denom"].stringValue)
+                    onStartTransferVC(.Only_EVM_Coin, oktBalances[indexPath.row]["denom"].stringValue)
                 } else {
-                    onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
+                    onStartLegacyTransferVC(oktBalances[indexPath.row]["denom"].stringValue)
                 }
                 
             } else {
-                onStartLegacyTransferVC(lcdBalances[indexPath.row]["denom"].stringValue)
+                onStartLegacyTransferVC(oktBalances[indexPath.row]["denom"].stringValue)
             }
             
         } else if (selectedChain is ChainBeraEVM_T) {
@@ -334,10 +333,10 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        if (indexPath.section == 0 && indexPath.row == 0 && selectedChain.supportStaking == true && selectedChain.getGrpcfetcher()?.cosmosRewards?.count ?? 0 > 0) {
+        if (indexPath.section == 0 && indexPath.row == 0 && selectedChain.supportStaking == true && selectedChain.getCosmosfetcher()?.cosmosRewards?.count ?? 0 > 0) {
             let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
             rewardListPopupVC.selectedChain = selectedChain
-            rewardListPopupVC.rewards = selectedChain.getGrpcfetcher()!.cosmosRewards!
+            rewardListPopupVC.rewards = selectedChain.getCosmosfetcher()!.cosmosRewards!
             return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return rewardListPopupVC }) { _ in
                 UIMenu(title: "", children: [])
             }
