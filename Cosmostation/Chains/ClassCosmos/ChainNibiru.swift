@@ -25,6 +25,7 @@ class ChainNibiru: BaseChain  {
         bechAccountPrefix = "nibi"
         validatorPrefix = "nibivaloper"
         grpcHost = "grpc-nibiru.cosmostation.io"
+        lcdUrl = "https://lcd-nibiru.cosmostation.io/"
     }
 }
 

@@ -25,6 +25,7 @@ class ChainDesmos: BaseChain  {
         bechAccountPrefix = "desmos"
         validatorPrefix = "desmosvaloper"
         grpcHost = "grpc-desmos.cosmostation.io"
+        lcdUrl = "https://lcd-desmos.cosmostation.io/"
     }
     
 }

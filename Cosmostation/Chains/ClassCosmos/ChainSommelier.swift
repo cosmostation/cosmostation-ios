@@ -24,6 +24,7 @@ class ChainSommelier: BaseChain {
         bechAccountPrefix = "somm"
         validatorPrefix = "sommvaloper"
         grpcHost = "grpc-sommelier.cosmostation.io"
+        lcdUrl = "https://lcd-sommelier.cosmostation.io/"
     }
     
 }

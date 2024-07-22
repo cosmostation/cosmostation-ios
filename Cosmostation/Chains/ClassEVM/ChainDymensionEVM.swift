@@ -25,7 +25,7 @@ class ChainDymensionEVM: BaseChain  {
         bechAccountPrefix = "dym"
         validatorPrefix = "dymvaloper"
         grpcHost = "grpc-dymension.cosmostation.io"
-        
+        lcdUrl = "https://lcd-dymension.cosmostation.io/"
         
         supportEvm = true
         coinSymbol = "DYM"

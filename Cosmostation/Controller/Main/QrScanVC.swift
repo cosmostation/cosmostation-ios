@@ -57,10 +57,15 @@ class QrScanVC: UIViewController {
             
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-            videoPreviewLayer?.frame = view.layer.bounds
             view.layer.addSublayer(videoPreviewLayer!)
             
-            captureSession.startRunning()
+            DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+                guard let self else { return }
+                self.captureSession.startRunning()
+                DispatchQueue.main.async {
+                    self.videoPreviewLayer?.frame = self.view.layer.bounds
+                }
+            }
             
             view.bringSubviewToFront(guideImg)
             view.bringSubviewToFront(cancelBtn)

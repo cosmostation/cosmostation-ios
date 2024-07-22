@@ -26,6 +26,7 @@ class ChainStafi: BaseChain {
         validatorPrefix = "stafivaloper"
         supportStaking = false
         grpcHost = "grpc-stafi.cosmostation.io"
+        lcdUrl = "https://lcd-stafi.cosmostation.io/"
     }
 }
 

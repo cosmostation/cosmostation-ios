@@ -27,7 +27,7 @@ class ChainNeutron: BaseChain {
         supportStaking = false
         supportCw20 = true
         grpcHost = "grpc-neutron.cosmostation.io"
-        
+        lcdUrl = "https://lcd-neutron.cosmostation.io/"
     }
     
     override func getCosmosfetcher() -> CosmosFetcher? {

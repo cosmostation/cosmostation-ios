@@ -25,5 +25,6 @@ class ChainGovgen: BaseChain  {
         bechAccountPrefix = "govgen"
         validatorPrefix = "govgenvaloper"
         grpcHost = "grpc-govgen.cosmostation.io"
+        lcdUrl = "https://lcd-govgen.cosmostation.io/"
     }
 }

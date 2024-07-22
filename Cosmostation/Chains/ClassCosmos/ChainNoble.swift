@@ -26,5 +26,6 @@ class ChainNoble: BaseChain  {
         validatorPrefix = "noblevaloper"
         supportStaking = false
         grpcHost = "grpc-noble.cosmostation.io"
+        lcdUrl = "https://lcd-noble.cosmostation.io/"
     }
 }

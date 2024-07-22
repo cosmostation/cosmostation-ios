@@ -105,7 +105,8 @@ class PortfolioVC: BaseVC {
         
         onUpdateSearchBar()
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
-        navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "iconSearchChain"), style: .plain, target: self, action: #selector(onClickChainSelect))
+        
+        navigationItem.rightBarButtonItem = rightBarButton()
     }
     
     @objc func dismissKeyboard() {
@@ -234,15 +235,15 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if (section == 0 && mainnetChains.count == 0) { return nil }
-        if (section == 1 && testnetChains.count == 0) { return nil }
+        if (section == 0 && searchMainnets.count == 0) { return nil }
+        if (section == 1 && searchTestnets.count == 0) { return nil }
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == 0) {
             view.titleLabel.text = "Mainnet"
-            view.cntLabel.text = String(mainnetChains.count)
+            view.cntLabel.text = String(searchMainnets.count)
         } else if (section == 1) {
             view.titleLabel.text = "Testnet"
-            view.cntLabel.text = String(testnetChains.count)
+            view.cntLabel.text = String(searchTestnets.count)
         }
         return view
     }
@@ -445,13 +446,32 @@ extension PortfolioVC: BaseSheetDelegate {
     
     func leftBarButton(_ name: String?, _ imge: UIImage? = nil) -> UIBarButtonItem {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "naviCon"), for: .normal)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -16)
-        button.setTitle(name == nil ? "Account" : name, for: .normal)
-        button.titleLabel?.font = .fontSize16Bold
-        button.sizeToFit()
+        
+        var title = AttributedString(name == nil ? "Account" : name!)
+        title.font = .fontSize16Bold
+        
+        var config = UIButton.Configuration.plain()
+        config.attributedTitle = title
+        config.image = UIImage(named: "naviCon")
+        config.imagePadding = 8
+        config.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
+        config.titleLineBreakMode = .byTruncatingMiddle
+        
+        button.configuration = config
         button.addTarget(self, action: #selector(onClickSwitchAccount(_:)), for: .touchUpInside)
+
         return UIBarButtonItem(customView: button)
+    }
+    
+    private func rightBarButton() -> UIBarButtonItem {
+        let rightBarButton = UIButton()
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "iconSearchChain")
+        config.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
+        rightBarButton.configuration = config
+        rightBarButton.addTarget(self, action: #selector(onClickChainSelect), for: .touchUpInside)
+        
+        return UIBarButtonItem(customView: rightBarButton)
     }
 
     @objc func onClickSwitchAccount(_ sender: UIButton) {

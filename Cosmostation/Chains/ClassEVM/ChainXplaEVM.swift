@@ -25,7 +25,7 @@ class ChainXplaEVM: BaseChain  {
         bechAccountPrefix = "xpla"
         validatorPrefix = "xplavaloper"
         grpcHost = "grpc-xpla.cosmostation.io"
-        
+        lcdUrl = "https://lcd-xpla.cosmostation.io/"
         
         supportEvm = true
         coinSymbol = "XPLA"

@@ -25,5 +25,6 @@ class ChainAxelar: BaseChain {
         bechAccountPrefix = "axelar"
         validatorPrefix = "axelarvaloper"
         grpcHost = "grpc-axelar.cosmostation.io"
+        lcdUrl = "https://lcd-axelar.cosmostation.io/"
     }
 }

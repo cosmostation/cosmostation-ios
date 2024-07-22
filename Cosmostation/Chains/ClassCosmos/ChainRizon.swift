@@ -25,5 +25,6 @@ class ChainRizon: BaseChain  {
         bechAccountPrefix = "rizon"
         validatorPrefix = "rizonvaloper"
         grpcHost = "grpc-rizon.cosmostation.io"
+        lcdUrl = "https://lcd-rizon.cosmostation.io/"
     }
 }

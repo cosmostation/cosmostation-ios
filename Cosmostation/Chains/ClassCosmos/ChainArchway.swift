@@ -27,6 +27,7 @@ class ChainArchway: BaseChain  {
         supportCw20 = true
         supportCw721 = true
         grpcHost = "grpc-archway.cosmostation.io"
+        lcdUrl = "https://lcd-archway.cosmostation.io/"
     }
 }
 

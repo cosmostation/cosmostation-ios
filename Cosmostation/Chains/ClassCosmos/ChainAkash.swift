@@ -25,6 +25,7 @@ class ChainAkash: BaseChain {
         bechAccountPrefix = "akash"
         validatorPrefix = "akashvaloper"
         grpcHost = "grpc-akash.cosmostation.io"
+        lcdUrl = "https://lcd-akash.cosmostation.io/"
     }
     
 }

@@ -25,5 +25,6 @@ class ChainInjective: BaseChain  {
         bechAccountPrefix = "inj"
         validatorPrefix = "injvaloper"
         grpcHost = "grpc-injective.cosmostation.io"
+        lcdUrl = "https://lcd-injective.cosmostation.io/"
     }
 }

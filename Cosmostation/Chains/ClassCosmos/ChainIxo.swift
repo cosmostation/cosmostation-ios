@@ -25,5 +25,6 @@ class ChainIxo: BaseChain  {
         bechAccountPrefix = "ixo"
         validatorPrefix = "ixovaloper"
         grpcHost = "grpc-ixo.cosmostation.io"
+        lcdUrl = "https://lcd-ixo.cosmostation.io/"
     }
 }

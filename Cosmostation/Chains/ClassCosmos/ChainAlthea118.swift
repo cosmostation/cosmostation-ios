@@ -26,5 +26,6 @@ class ChainAlthea118: BaseChain {
         bechAccountPrefix = "althea"
         validatorPrefix = "altheavaloper"
         grpcHost = "grpc-althea.cosmostation.io"
+        lcdUrl = "https://lcd-althea.cosmostation.io/"
     }
 }

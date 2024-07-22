@@ -25,6 +25,7 @@ class ChainBitcana: BaseChain {
         bechAccountPrefix = "bcna"
         validatorPrefix = "bcnavaloper"
         grpcHost = "grpc-bitcanna.cosmostation.io"
+        lcdUrl = "https://lcd-bitcanna.cosmostation.io/"
     }
     
 }

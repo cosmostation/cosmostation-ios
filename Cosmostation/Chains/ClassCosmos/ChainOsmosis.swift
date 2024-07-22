@@ -25,6 +25,7 @@ class ChainOsmosis: BaseChain  {
         bechAccountPrefix = "osmo"
         validatorPrefix = "osmovaloper"
         grpcHost = "grpc-osmosis.cosmostation.io"
+        lcdUrl = "https://lcd-osmosis.cosmostation.io/"
     }
     
 }

@@ -25,5 +25,6 @@ class ChainGravityBridge: BaseChain  {
         bechAccountPrefix = "gravity"
         validatorPrefix = "gravityvaloper"
         grpcHost = "grpc-gravity-bridge.cosmostation.io"
+        lcdUrl = "https://lcd-gravity-bridge.cosmostation.io/"
     }
 }

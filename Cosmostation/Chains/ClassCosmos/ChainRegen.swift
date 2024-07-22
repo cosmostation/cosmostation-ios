@@ -25,5 +25,6 @@ class ChainRegen: BaseChain  {
         bechAccountPrefix = "regen"
         validatorPrefix = "regenvaloper"
         grpcHost = "grpc-regen.cosmostation.io"
+        lcdUrl = "https://lcd-regen.cosmostation.io/"
     }
 }

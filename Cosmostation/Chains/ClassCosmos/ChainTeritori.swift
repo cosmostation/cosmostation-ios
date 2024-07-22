@@ -26,5 +26,6 @@ class ChainTeritori: BaseChain  {
         validatorPrefix = "torivaloper"
 //        supportCw721 = true
         grpcHost = "grpc-teritori.cosmostation.io"
+        lcdUrl = "https://lcd-teritori.cosmostation.io/"
     }
 }

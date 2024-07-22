@@ -26,6 +26,7 @@ class ChainFetchAi60Secp: BaseChain {
         bechAccountPrefix = "fetch"
         validatorPrefix = "fetchvaloper"
         grpcHost = "grpc-fetchai.cosmostation.io"
+        lcdUrl = "https://lcd-fetchai.cosmostation.io/"
     }
     
 }

@@ -25,6 +25,7 @@ class ChainLava: BaseChain  {
         bechAccountPrefix = "lava@"
         validatorPrefix = "lava@valoper"
         grpcHost = "grpc-lava.cosmostation.io"
+        lcdUrl = "https://lcd-lava.cosmostation.io/"
     }
     
 }

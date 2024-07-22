@@ -25,6 +25,7 @@ class ChainSaga: BaseChain  {
         bechAccountPrefix = "saga"
         validatorPrefix = "sagavaloper"
         grpcHost = "grpc-saga.cosmostation.io"
+        lcdUrl = "https://lcd-saga.cosmostation.io/"
     }
 }
 

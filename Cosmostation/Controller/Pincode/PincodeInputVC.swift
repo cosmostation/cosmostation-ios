@@ -8,9 +8,8 @@
 
 import UIKit
 
-class PincodeInputVC: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIScrollViewDelegate{
+class PincodeInputVC: UIPageViewController {
 
-    
     lazy var orderedViewControllers: [UIViewController] = {
         return [self.newVc(viewController: "PincodeDecimalVC"),
                 self.newVc(viewController: "PincodeAlphabetVC")]
@@ -23,7 +22,6 @@ class PincodeInputVC: UIPageViewController, UIPageViewControllerDelegate, UIPage
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.dataSource = self
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
         }
@@ -62,14 +60,5 @@ class PincodeInputVC: UIPageViewController, UIPageViewControllerDelegate, UIPage
                 }
             }
         }
-    }
-    
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        return nil
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        return nil
     }
 }
