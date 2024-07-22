@@ -279,7 +279,7 @@ class CosmosClassVC: BaseVC {
         }
         
         if (selectedChain.supportStaking) {
-            mainFab.addItem(title: "Governance", image: UIImage(named: "iconFabGov")) { _ in
+            mainFab.addItem(title: "Vote", image: UIImage(named: "iconFabGov")) { _ in
                 self.onProposalList()
             }
             if (selectedChain.getCosmosfetcher()?.cosmosCommissions.count ?? 0 > 0) {
@@ -288,26 +288,18 @@ class CosmosClassVC: BaseVC {
                 }
             }
 //            if !(selectedChain is ChainBeraEVM) {                                                                       //disbale for bera
-                mainFab.addItem(title: "Compound All Rewards", image: UIImage(named: "iconFabCompounding")) { _ in
+                mainFab.addItem(title: "Compound All", image: UIImage(named: "iconFabCompounding")) { _ in
                     self.onClaimCompoundingTx()
                 }
-                mainFab.addItem(title: "Claim All Rewards", image: UIImage(named: "iconFabClaim")) { _ in
+                mainFab.addItem(title: "Claim All", image: UIImage(named: "iconFabClaim")) { _ in
                     self.onClaimRewardTx()
                 }
 //            }
             
         }
         
-        mainFab.addItem(title: "Receive", image: UIImage(named: "iconFabReceive")) { _ in
-            self.onShowAddress()
-        }
-        
-        mainFab.addItem(title: "Send", image: UIImage(named: "iconFabSend")) { _ in
-            self.onSendTx()
-        }
-        
         if (selectedChain.supportStaking) {
-            mainFab.addItem(title: "Stake", image: UIImage(named: "iconFabStake")) { _ in
+            mainFab.addItem(title: "Manage Stake", image: UIImage(named: "iconFabStake")) { _ in
                 self.onStakeInfo()
             }
         }
