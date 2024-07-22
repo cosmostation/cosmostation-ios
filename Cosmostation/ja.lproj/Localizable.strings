@@ -158,7 +158,7 @@
 "str_unstaking_history" = "アンステーク履歴";
 "str_insert_amount" = "投入量";
 "str_estimate_withdraw_amount" = "出金額(est)";
-"str_tip" = "ヒント";
+"str_tip" = "スピードアップ";
 "str_delegate_warn_title" = "委任について";
 "str_delegate_warn_msg" = "検証人に委任してステーキング報酬を受けることができます。 選択したノードに問題が発生すると、委任された時分の一部を失う可能性があります。 慎重に選択してください。\n\n委任を撤回すると、撤回期間があります。 この期間中にはステーキング報酬を受けることができません。\n\n";
 "str_paste_translate" = "貼り付け";
@@ -439,7 +439,7 @@
 "msg_reward_address" = "このアドレスはリワード資産を受け取るためのアドレスです。\n報酬の住所を変更するにはここをタップしてください。 (お勧めしません)";
 "msg_reward_address_under" = "報酬の住所を変更するにはここをタップしてください。";
 "msg_already_changed_reward_address" = "すでにリワードアドレスを変更しました。";
-"msg_about_fee_tip" = "Feeとtipは財布ではなくチェー ンに支払われます。";
+"msg_about_fee_tip" = "Feeはウォレットではなく、チェーンに支払われます。";
 "msg_support_injection" = "ユーザーの利便性と反応速度を向上させるため、インジェクション方式（EIP-6963）をサポートしています。DAppsを使用する際は、ブラウザ（デスクトップ）ウォレットを選択してください。\nデスクトップのエクステンションウォレットと同じユーザーエクスペリエンスを体験できます。\nEVM用DAppの場合、EIP-6963仕様をサポートしているため、快適なWeb3の旅をお楽しみいただけます。";
 
 
