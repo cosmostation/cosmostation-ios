@@ -25,5 +25,6 @@ class ChainCosmos: BaseChain {
         bechAccountPrefix = "cosmos"
         validatorPrefix = "cosmosvaloper"
         grpcHost = "grpc-cosmos.cosmostation.io"
+        lcdUrl = "https://lcd-cosmos.cosmostation.io/"
     }
 }

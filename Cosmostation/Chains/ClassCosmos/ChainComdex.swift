@@ -25,6 +25,7 @@ class ChainComdex: BaseChain  {
         bechAccountPrefix = "comdex"
         validatorPrefix = "comdexvaloper"
         grpcHost = "grpc-comdex.cosmostation.io"
+        lcdUrl = "https://lcd-comdex.cosmostation.io/"
     }
     
 }

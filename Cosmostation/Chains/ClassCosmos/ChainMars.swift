@@ -25,6 +25,7 @@ class ChainMars: BaseChain  {
         bechAccountPrefix = "mars"
         validatorPrefix = "marsvaloper"
         grpcHost = "grpc-mars-protocol.cosmostation.io"
+        lcdUrl = "https://lcd-mars-protocol.cosmostation.io/"
     }
 }
 

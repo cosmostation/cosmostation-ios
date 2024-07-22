@@ -25,6 +25,7 @@ class ChainUmee: BaseChain {
         bechAccountPrefix = "umee"
         validatorPrefix = "umeevaloper"
         grpcHost = "grpc-umee.cosmostation.io"
+        lcdUrl = "https://lcd-umee.cosmostation.io/"
     }
     
 }

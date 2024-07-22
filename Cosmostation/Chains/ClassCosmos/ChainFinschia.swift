@@ -25,6 +25,7 @@ class ChainFinschia: BaseChain  {
         bechAccountPrefix = "link"
         validatorPrefix = "linkvaloper"
         grpcHost = "grpc-finschia.cosmostation.io"
+        lcdUrl = "https://lcd-finschia.cosmostation.io/"
     }
     
 }

@@ -25,7 +25,7 @@ class ChainEvmosEVM: BaseChain  {
         bechAccountPrefix = "evmos"
         validatorPrefix = "evmosvaloper"
         grpcHost = "grpc-evmos.cosmostation.io"
-        
+        lcdUrl = "https://lcd-evmos.cosmostation.io/"
     
         supportEvm = true
         coinSymbol = "EVMOS"

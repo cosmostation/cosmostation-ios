@@ -25,7 +25,7 @@ class ChainHumansEVM: BaseChain  {
         bechAccountPrefix = "human"
         validatorPrefix = "humanvaloper"
         grpcHost = "grpc-humans.cosmostation.io"
-        
+        lcdUrl = "https://lcd-humans.cosmostation.io/"
         
         supportEvm = true
         coinSymbol = "HEART"

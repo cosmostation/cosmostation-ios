@@ -25,6 +25,7 @@ class ChainShentu: BaseChain {
         bechAccountPrefix = "shentu"
         validatorPrefix = "shentuvaloper"
         grpcHost = "grpc-shentu.cosmostation.io"
+        lcdUrl = "https://lcd-shentu.cosmostation.io/"
     }
     
 }

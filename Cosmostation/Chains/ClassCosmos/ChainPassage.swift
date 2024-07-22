@@ -25,5 +25,6 @@ class ChainPassage: BaseChain  {
         bechAccountPrefix = "pasg"
         validatorPrefix = "pasgvaloper"
         grpcHost = "grpc-passage.cosmostation.io"
+        lcdUrl = "https://lcd-passage.cosmostation.io/"
     }
 }

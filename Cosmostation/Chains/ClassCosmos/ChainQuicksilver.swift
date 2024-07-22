@@ -25,5 +25,6 @@ class ChainQuicksilver: BaseChain  {
         bechAccountPrefix = "quick"
         validatorPrefix = "quickvaloper"
         grpcHost = "grpc-quicksilver.cosmostation.io"
+        lcdUrl = "https://lcd-quicksilver.cosmostation.io/"
     }
 }

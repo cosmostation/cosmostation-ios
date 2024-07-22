@@ -25,5 +25,6 @@ class ChainProvenance: BaseChain  {
         bechAccountPrefix = "pb"
         validatorPrefix = "pbvaloper"
         grpcHost = "grpc-provenance.cosmostation.io"
+        lcdUrl = "https://lcd-provenance.cosmostation.io/"
     }
 }

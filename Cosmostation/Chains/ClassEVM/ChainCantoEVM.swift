@@ -25,7 +25,7 @@ class ChainCantoEVM: BaseChain  {
         bechAccountPrefix = "canto"
         validatorPrefix = "cantovaloper"
         grpcHost = "grpc-canto.cosmostation.io"
-        
+        lcdUrl = "https://lcd-canto.cosmostation.io/"
         
         supportEvm = true
         coinSymbol = "CANTO"

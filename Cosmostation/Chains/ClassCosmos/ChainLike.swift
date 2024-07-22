@@ -25,5 +25,6 @@ class ChainLike: BaseChain  {
         bechAccountPrefix = "like"
         validatorPrefix = "likevaloper"
         grpcHost = "grpc-likecoin.cosmostation.io"
+        lcdUrl = "https://lcd-likecoin.cosmostation.io/"
     }
 }

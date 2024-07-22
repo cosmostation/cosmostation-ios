@@ -24,7 +24,8 @@ class ChainCoreum: BaseChain  {
         stakeDenom = "ucore"
         bechAccountPrefix = "core"
         validatorPrefix = "corevaloper"
-        grpcHost = "grpc-coreum.cosmostation.io"
+        grpcHost = "grpc-coreum.cosmostation.io"  
+        lcdUrl = "https://lcd-coreum.cosmostation.io/"
     }
     
 }

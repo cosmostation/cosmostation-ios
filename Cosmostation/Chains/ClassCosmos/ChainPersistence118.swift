@@ -25,6 +25,7 @@ class ChainPersistence118: BaseChain  {
         bechAccountPrefix = "persistence"
         validatorPrefix = "persistencevaloper"
         grpcHost = "grpc-persistence.cosmostation.io"
+        lcdUrl = "https://lcd-persistence.cosmostation.io/"
     }
     
 }

@@ -25,6 +25,7 @@ class ChainCryptoorg: BaseChain  {
         bechAccountPrefix = "cro"
         validatorPrefix = "crocncl"
         grpcHost = "grpc-crypto-org.cosmostation.io"
+        lcdUrl = "https://lcd-crypto-org.cosmostation.io/"
     }
     
 }

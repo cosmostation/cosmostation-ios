@@ -27,6 +27,7 @@ class ChainJuno: BaseChain  {
         supportCw20 = true
 //        supportCw721 = true
         grpcHost = "grpc-juno.cosmostation.io"
+        lcdUrl = "https://lcd-juno.cosmostation.io/"
     }
     
 }

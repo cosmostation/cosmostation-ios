@@ -25,6 +25,7 @@ class ChainStarname: BaseChain {
         bechAccountPrefix = "star"
         validatorPrefix = "starvaloper"
         grpcHost = "grpc-starname.cosmostation.io"
+        lcdUrl = "https://lcd-starname.cosmostation.io/"
     }
     
 }

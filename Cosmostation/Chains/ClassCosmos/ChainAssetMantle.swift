@@ -25,5 +25,6 @@ class ChainAssetMantle: BaseChain  {
         bechAccountPrefix = "mantle"
         validatorPrefix = "mantlevaloper"
         grpcHost = "grpc-asset-mantle.cosmostation.io"
+        lcdUrl = "https://lcd-asset-mantle.cosmostation.io/"
     }
 }

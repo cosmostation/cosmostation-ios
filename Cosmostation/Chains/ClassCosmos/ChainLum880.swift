@@ -25,6 +25,7 @@ class ChainLum880: BaseChain  {
         bechAccountPrefix = "lum"
         validatorPrefix = "lumvaloper"
         grpcHost = "grpc-lum.cosmostation.io"
+        lcdUrl = "https://lcd-lum.cosmostation.io/"
     }
     
 }
