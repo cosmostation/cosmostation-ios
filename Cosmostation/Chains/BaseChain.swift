@@ -247,9 +247,6 @@ class BaseChain {
             let availableAmount = oktChain.getOktfetcher()?.oktBalanceAmount(stakeDenom!) ?? NSDecimalNumber.zero
             return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
             
-        } else if (supportEvm) {
-            return getEvmfetcher()?.evmBalances.compare(EVM_BASE_FEE).rawValue ?? 0 > 0
-            
         } else if (supportCosmos) {
             var result = false
             if (getCosmosfetcher()?.cosmosBaseFees.count ?? 0 > 0) {
@@ -273,6 +270,9 @@ class BaseChain {
                 }
             }
             return result
+            
+        } else if (supportEvm) {
+            return getEvmfetcher()?.evmBalances.compare(EVM_BASE_FEE).rawValue ?? 0 > 0
         }
         return false
     }
