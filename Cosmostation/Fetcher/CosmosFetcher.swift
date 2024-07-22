@@ -542,8 +542,8 @@ extension CosmosFetcher {
     }
     
     func fetchCommission() async throws -> Cosmos_Distribution_V1beta1_ValidatorAccumulatedCommission? {
+        if (chain.bechOpAddress == nil) { return nil }
         if (getEndpointType() == .UseGRPC) {
-            if (chain.bechOpAddress == nil) { return nil }
             let req = Cosmos_Distribution_V1beta1_QueryValidatorCommissionRequest.with { $0.validatorAddress = chain.bechOpAddress! }
             return try? await Cosmos_Distribution_V1beta1_QueryNIOClient(channel: getClient()).validatorCommission(req, callOptions: getCallOptions()).response.get().commission
         } else {
