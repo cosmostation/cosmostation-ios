@@ -155,7 +155,7 @@
 "str_low" = "Low";
 "str_tiny" = "Tiny";
 "str_select_coin" = "Select Coin.";
-"str_unstaking_history" = "Unstaking Histories";
+"str_unstaking_history" = "Unstaking History";
 "str_insert_amount" = "Insert Amount";
 "str_estimate_withdraw_amount" = "Withdraw Amount(est)";
 "str_tip" = "Tip";
@@ -822,7 +822,7 @@
 "select_hd_path" = "Select Custom Path";
 "import_account_title" = "Import Wallet";
 "import_account_msg" = "Would you like to add %@ wallet(s)?";
-"recent_history" = "Recently Histories";
+"recent_history" = "Recently History";
 "select_fee_denom" = "Select coin for Tx fee pay.";
 "gas_checked" = "Gas amount checked successfully";
 "address_type" = "Address Type";

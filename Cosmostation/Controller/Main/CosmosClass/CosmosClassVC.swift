@@ -201,7 +201,7 @@ class CosmosClassVC: BaseVC {
         let tokenTabBar = UITabBarItem(title: "Tokens", image: nil, tag: 1)
         let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 2)
         let receiveTabBar = UITabBarItem(title: "Receive", image: nil, tag: 3)
-        let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 4)
+        let historyTabBar = UITabBarItem(title: "History", image: nil, tag: 4)
         let ecosystemTabBar = UITabBarItem(title: "Ecosystem", image: nil, tag: 5)
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 6)
         tabbar.items.append(coinTabBar)
