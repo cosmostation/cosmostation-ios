@@ -13,7 +13,7 @@ class ChainKi: BaseChain  {
     override init() {
         super.init()
         
-        name = "KiChain"
+        name = "Ki Chain"
         tag = "ki118"
         logo1 = "chainKi"
         apiName = "ki-chain"

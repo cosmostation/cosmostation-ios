@@ -580,6 +580,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainUmee())
     result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
+    result.append(ChainZetaEVM())                       //EVM
 
     
     
