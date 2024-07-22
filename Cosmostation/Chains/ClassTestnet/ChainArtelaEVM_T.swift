@@ -22,11 +22,11 @@ class ChainArtelaEVM_T: BaseChain {
         accountKeyType = AccountKeyType(.ARTELA_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uart"
         bechAccountPrefix = "art"
         validatorPrefix = "artvaloper"
-//        grpcHost = "grpc-office-artela.cosmostation.io"
+        grpcHost = "grpc-office-artela.cosmostation.io"
         lcdUrl = "https://lcd-office.cosmostation.io/artela-testnet/"
         
         

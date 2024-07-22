@@ -28,7 +28,7 @@ class ChainNeutron_T: ChainNeutron {
         supportStaking = false
         supportCw20 = false
         grpcHost = "grpc-office-neutron.cosmostation.io"
-//        grpcHost = "grpc-office-neutron2.cosmostation.io"
+        lcdUrl = "https://rest-falcron.pion-1.ntrn.tech/"
         
         
     }

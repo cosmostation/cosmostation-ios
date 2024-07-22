@@ -26,5 +26,6 @@ class ChainNillion_T: ChainNillion {
         bechAccountPrefix = "nillion"
         validatorPrefix = "nillionvaloper"
         grpcHost = "grpc-office-nillion.cosmostation.io"
+        lcdUrl = "https://testnet-nillion-api.lavenderfive.com/"
     }
 }
