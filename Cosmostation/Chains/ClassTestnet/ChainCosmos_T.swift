@@ -26,5 +26,6 @@ class ChainCosmos_T: BaseChain {
         bechAccountPrefix = "cosmos"
         validatorPrefix = "cosmosvaloper"
         grpcHost = "grpc-office.cosmostation.io"
+        lcdUrl = "https://rest.sentry-01.theta-testnet.polypore.xyz/"
     }
 }
