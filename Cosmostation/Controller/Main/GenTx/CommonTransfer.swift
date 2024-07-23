@@ -275,7 +275,7 @@ class CommonTransfer: BaseVC {
                                 recipientableChains.append(sendable)
                             }
                         }
-                    } else if (msAsset.origin_chain == fromChain.apiName && msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
+                    } else if (msAsset.getjustBeforeChain() == fromChain.apiName && msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
                         //add forward path
                         if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
                             if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
