@@ -22,6 +22,9 @@ class CosmosCoinVC: BaseVC {
     var ibcCoins = Array<Cosmos_Base_V1beta1_Coin>()                    // section 2
     var bridgedCoins = Array<Cosmos_Base_V1beta1_Coin>()                // section 3
     
+    var mintscanCw20Tokens = [MintscanToken]()
+    var mintscanErc20Tokens = [MintscanToken]()
+    
     var oktBalances = Array<JSON>()                                     // section 1 for legacy okt
     
     override func viewDidLoad() {
@@ -50,6 +53,7 @@ class CosmosCoinVC: BaseVC {
         tableView.addSubview(refresher)
         
         onSortAssets()
+        onUpdateView()
         
         if (selectedChain.tag == "okt996_Keccak" || selectedChain.tag == "okt996_Secp") {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
@@ -92,6 +96,7 @@ class CosmosCoinVC: BaseVC {
                 self.bridgedCoins.removeAll()
                 self.oktBalances.removeAll()
                 self.onSortAssets()
+                self.onUpdateView()
             }
         }
     }
@@ -161,6 +166,40 @@ class CosmosCoinVC: BaseVC {
         }
     }
     
+    func onUpdateView() {
+        self.mintscanCw20Tokens.removeAll()
+        self.mintscanErc20Tokens.removeAll()
+        if let cosmosFetcher = selectedChain.getCosmosfetcher() {
+            cosmosFetcher.mintscanCw20Tokens.forEach { tokenInfo in
+                if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
+                    mintscanCw20Tokens.append(tokenInfo)
+                }
+            }
+            mintscanCw20Tokens.sort {
+                let value0 = cosmosFetcher.tokenValue($0.address!)
+                let value1 = cosmosFetcher.tokenValue($1.address!)
+                return value0.compare(value1).rawValue > 0 ? true : false
+            }
+        }
+        
+        if let evmFetcher = selectedChain.getEvmfetcher() {
+            evmFetcher.mintscanErc20Tokens.forEach { tokenInfo in
+                if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
+                    mintscanErc20Tokens.append(tokenInfo)
+                }
+            }
+            mintscanErc20Tokens.sort {
+                let value0 = evmFetcher.tokenValue($0.address!)
+                let value1 = evmFetcher.tokenValue($1.address!)
+                return value0.compare(value1).rawValue > 0 ? true : false
+            }
+        }
+        
+        if (mintscanCw20Tokens.count > 0 || mintscanErc20Tokens.count > 0) {
+            tableView.reloadData()
+        }
+    }
+    
     func onStartTransferVC(_ sendType: SendAssetType, _ denom: String) {
         let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
         transfer.sendType = sendType
@@ -188,7 +227,7 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
         if (selectedChain.name == "OKT") {
             return 1
         } else {
-            return 3
+            return 5
         }
     }
     
@@ -210,6 +249,17 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             } else if (section == 2 && bridgedCoins.count > 0) {
                 view.titleLabel.text = "Bridged Coins"
                 view.cntLabel.text = String(bridgedCoins.count)
+                
+            } else if (section == 3 && mintscanCw20Tokens.count > 0) {
+                view.titleLabel.text = "Cw20 Tokens"
+                view.cntLabel.text = String(mintscanCw20Tokens.count)
+            } else if (section == 4 && mintscanErc20Tokens.count > 0) {
+                if (selectedChain.name == "OKT") {
+                    view.titleLabel.text = "Kip20 Tokens"
+                } else {
+                    view.titleLabel.text = "Erc20 Tokens"
+                }
+                view.cntLabel.text = String(mintscanErc20Tokens.count)
             }
         }
         return view
@@ -226,6 +276,10 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
                 return (ibcCoins.count > 0) ? 40 : 0
             } else if (section == 2) {
                 return (bridgedCoins.count > 0) ? 40 : 0
+            } else if (section == 3 && mintscanCw20Tokens.count > 0) {
+                return 40
+            } else if (section == 4 && mintscanErc20Tokens.count > 0) {
+                return 40
             }
         }
         return 0
@@ -247,6 +301,10 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
                 return ibcCoins.count
             } else if (section == 2) {
                 return bridgedCoins.count
+            } else if (section == 3) {
+                return mintscanCw20Tokens.count
+            } else if (section == 4) {
+                return mintscanErc20Tokens.count
             }
         }
         return 0
@@ -263,10 +321,18 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
             
             if let oktChain = selectedChain as? ChainOktEVM {
                 cell.bindOktAsset(oktChain, oktBalances[indexPath.row])
+                
             } else if (selectedChain is ChainBeraEVM_T && indexPath.section == 0 && indexPath.row == 1) {
                 cell.bindEvmClassCoin(selectedChain as! ChainBeraEVM_T)
-            } else {
+                
+            } else if (indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2) {
                 cell.bindCosmosClassAsset(selectedChain, getCoinBySection(indexPath)!)
+                
+            } else if (indexPath.section == 3) {
+                cell.bindCosmosClassToken(selectedChain, mintscanCw20Tokens[indexPath.row])
+                
+            } else if (indexPath.section == 4) {
+                cell.bindEvmClassToken(selectedChain, mintscanErc20Tokens[indexPath.row])
             }
             return cell
         }
@@ -316,6 +382,26 @@ extension CosmosCoinVC: UITableViewDelegate, UITableViewDataSource {
                 
             } else if (indexPath.section == 2) {
                 onStartTransferVC(.Only_Cosmos_Coin, bridgedCoins[indexPath.row].denom)
+                
+            } else if (indexPath.section == 3) {
+                let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+                transfer.sendType = .Only_Cosmos_CW20
+                transfer.fromChain = selectedChain
+                transfer.toSendDenom = mintscanCw20Tokens[indexPath.row].address
+                transfer.toSendMsToken = mintscanCw20Tokens[indexPath.row]
+                transfer.modalTransitionStyle = .coverVertical
+                self.present(transfer, animated: true)
+                return
+                
+            } else if (indexPath.section == 4) {
+                let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+                transfer.sendType = .Only_EVM_ERC20
+                transfer.fromChain = selectedChain
+                transfer.toSendDenom = mintscanErc20Tokens[indexPath.row].address
+                transfer.toSendMsToken = mintscanErc20Tokens[indexPath.row]
+                transfer.modalTransitionStyle = .coverVertical
+                self.present(transfer, animated: true)
+                return
             }
         }
         

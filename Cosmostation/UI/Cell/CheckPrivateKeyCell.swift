@@ -13,21 +13,21 @@ class CheckPrivateKeyCell: UITableViewCell {
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var keyTypeTag: PaddingLabel!
+    @IBOutlet weak var oldTag: RoundedPaddingLabel!
+    @IBOutlet weak var keyTypeTag: RoundedPaddingLabel!
     @IBOutlet weak var hdPathLabel: UILabel!
     @IBOutlet weak var pkeyLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        legacyTag.isHidden = true
+        oldTag.isHidden = true
         keyTypeTag.isHidden = true
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        legacyTag.isHidden = true
+        oldTag.isHidden = true
         keyTypeTag.isHidden = true
     }
     
@@ -38,6 +38,6 @@ class CheckPrivateKeyCell: UITableViewCell {
         hdPathLabel.text = chain.getHDPath(account.lastHDPath)
         pkeyLabel.text = "0x" + chain.privateKey!.toHexString()
         
-        legacyTag.isHidden = chain.isDefault
+        oldTag.isHidden = chain.isDefault
     }
 }

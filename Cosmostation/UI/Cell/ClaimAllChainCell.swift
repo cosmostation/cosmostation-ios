@@ -14,7 +14,7 @@ class ClaimAllChainCell: UITableViewCell {
     @IBOutlet weak var rootView: FixCardView!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var oldTag: RoundedPaddingLabel!
     @IBOutlet weak var rewardTitle: UILabel!
     @IBOutlet weak var valueCurrencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
@@ -33,7 +33,7 @@ class ClaimAllChainCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         
-        legacyTag.isHidden = true
+        oldTag.isHidden = true
         pendingView.isHidden = false
         pendingView.animation = LottieAnimation.named("loadingSmallYellow")
         pendingView.contentMode = .scaleAspectFit
@@ -52,7 +52,7 @@ class ClaimAllChainCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        legacyTag.isHidden = true
+        oldTag.isHidden = true
         pendingView.isHidden = false
         stateImg.image = UIImage(named: "iconClaimAllReady")
         stateImg.isHidden = true
@@ -75,7 +75,7 @@ class ClaimAllChainCell: UITableViewCell {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         if (!chain.isDefault) {
-            legacyTag.isHidden = false
+            oldTag.isHidden = false
         }
         
         var mainRewardDenom = ""
@@ -159,7 +159,7 @@ class ClaimAllChainCell: UITableViewCell {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         if (!chain.isDefault) {
-            legacyTag.isHidden = false
+            oldTag.isHidden = false
         }
         
         let mainRewardDenom = chain.stakeDenom

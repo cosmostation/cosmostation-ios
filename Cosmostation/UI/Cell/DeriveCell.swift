@@ -17,8 +17,8 @@ class DeriveCell: UITableViewCell {
     @IBOutlet weak var bechAddressLabel: UILabel!
     @IBOutlet weak var evmAddressLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var keyTypeTag: PaddingLabel!
+    @IBOutlet weak var oldTag: RoundedPaddingLabel!
+    @IBOutlet weak var keyTypeTag: RoundedPaddingLabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var denomLabel: UILabel!
     @IBOutlet weak var coinCntLabel: UILabel!
@@ -43,7 +43,7 @@ class DeriveCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        legacyTag.isHidden = true
+        oldTag.isHidden = true
         keyTypeTag.isHidden = true
         loadingLabel.isHidden = false
         denomLabel.text = ""
@@ -78,7 +78,7 @@ class DeriveCell: UITableViewCell {
 //        } else {
 //            hdPathLabel.text = ""
 //        }
-        legacyTag.isHidden = chain.isDefault
+        oldTag.isHidden = chain.isDefault
         
         if (chain.name == "OKT" && !chain.supportEvm) {
             keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm

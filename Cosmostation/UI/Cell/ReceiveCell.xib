@@ -69,7 +69,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="zyS-Nr-Gr9">
                                         <rect key="frame" x="58.000000000000028" y="10" width="0.0" height="0.0"/>
                                         <subviews>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlG-RY-XhB" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlG-RY-XhB" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                                 <color key="backgroundColor" name="_color06"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
@@ -82,7 +82,7 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hud-b1-APH" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hud-b1-APH" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                                 <color key="backgroundColor" name="_color06"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
@@ -156,7 +156,7 @@
                 <outlet property="copyHintTitle" destination="mgT-qk-SKz" id="ePc-ja-cAa"/>
                 <outlet property="hdPathLabel" destination="ua0-vo-4e5" id="uCe-j5-ai8"/>
                 <outlet property="keyTypeTag" destination="hud-b1-APH" id="aue-U5-gpa"/>
-                <outlet property="legacyTag" destination="vlG-RY-XhB" id="Yga-Gr-dcN"/>
+                <outlet property="oldTag" destination="vlG-RY-XhB" id="0TD-LM-8i2"/>
                 <outlet property="rootView" destination="oGU-Xp-OhM" id="J9I-Ul-04R"/>
                 <outlet property="rqImgView" destination="8g8-nT-LI4" id="7Q0-h6-aBg"/>
             </connections>

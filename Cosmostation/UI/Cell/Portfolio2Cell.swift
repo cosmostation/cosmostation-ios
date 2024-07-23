@@ -16,11 +16,7 @@ class Portfolio2Cell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var bechAddressLabel: UILabel!
     @IBOutlet weak var evmAddressLabel: UILabel!
-    @IBOutlet weak var legacyTag: RoundedPaddingLabel!
-    @IBOutlet weak var erc20Tag: RoundedPaddingLabel!
-    @IBOutlet weak var cw20Tag: RoundedPaddingLabel!
-    @IBOutlet weak var nftTag: RoundedPaddingLabel!
-    @IBOutlet weak var dappTag: RoundedPaddingLabel!
+    @IBOutlet weak var oldTag: RoundedPaddingLabel!
     @IBOutlet weak var priceCurrencyLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var priceChangeLabel: UILabel!
@@ -57,11 +53,7 @@ class Portfolio2Cell: UITableViewCell {
         valuecurrencyLabel.text = ""
         valueLabel.text = ""
         assetCntLabel.text = ""
-        legacyTag.isHidden = true
-        erc20Tag.isHidden = true
-        cw20Tag.isHidden = true
-        nftTag.isHidden = true
-        dappTag.isHidden = true
+        oldTag.isHidden = true
         bechAddressLabel.text = ""
         evmAddressLabel.text = ""
         priceCurrencyLabel.text = ""
@@ -90,11 +82,7 @@ class Portfolio2Cell: UITableViewCell {
             starEvmAddressAnimation()
         }
         
-        legacyTag.isHidden = chain.isDefault
-        cw20Tag.isHidden = !chain.supportCw20
-        erc20Tag.isHidden = !chain.supportEvm
-        nftTag.isHidden = !(BaseData.instance.showEvenReview() && chain.supportCw721)
-        dappTag.isHidden = !(BaseData.instance.showEvenReview() && chain.isDefault && chain.isEcosystem())
+        oldTag.isHidden = chain.isDefault
         
         if (chain.fetchState == .Fail) {
             valueLoadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)

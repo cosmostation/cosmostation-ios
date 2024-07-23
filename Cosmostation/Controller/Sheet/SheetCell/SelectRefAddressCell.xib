@@ -38,7 +38,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="z1D-Sj-mND">
                                 <rect key="frame" x="123" y="23" width="0.0" height="0.0"/>
                                 <subviews>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8c-K1-bjh" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8c-K1-bjh" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" name="_color06"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
@@ -51,7 +51,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldJ-88-d3R" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldJ-88-d3R" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" name="_color06"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
@@ -111,7 +111,7 @@
                 <outlet property="accountNameLabel" destination="ylP-Qx-5FA" id="jnS-mF-hKI"/>
                 <outlet property="addressLabel" destination="XGK-xK-aly" id="XPh-sb-HgS"/>
                 <outlet property="keyTypeTag" destination="ldJ-88-d3R" id="lF6-U4-oF5"/>
-                <outlet property="legacyTag" destination="p8c-K1-bjh" id="hHf-e4-vif"/>
+                <outlet property="oldTag" destination="p8c-K1-bjh" id="TTU-2R-5wC"/>
             </connections>
             <point key="canvasLocation" x="108" y="17"/>
         </tableViewCell>

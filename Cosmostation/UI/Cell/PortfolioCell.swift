@@ -14,11 +14,7 @@ class PortfolioCell: UITableViewCell {
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var legacyTag: RoundedPaddingLabel!
-    @IBOutlet weak var erc20Tag: RoundedPaddingLabel!
-    @IBOutlet weak var cw20Tag: RoundedPaddingLabel!
-    @IBOutlet weak var nftTag: RoundedPaddingLabel!
-    @IBOutlet weak var dappTag: RoundedPaddingLabel!
+    @IBOutlet weak var oldTag: RoundedPaddingLabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var loadingLabel: UILabel!
@@ -38,11 +34,7 @@ class PortfolioCell: UITableViewCell {
     override func prepareForReuse() {
         currencyLabel.text = ""
         valueLabel.text = ""
-        legacyTag.isHidden = true
-        erc20Tag.isHidden = true
-        cw20Tag.isHidden = true
-        nftTag.isHidden = true
-        dappTag.isHidden = true
+        oldTag.isHidden = true
         loadingLabel.isHidden = false
         reposeErrorLabel.isHidden = true
     }
@@ -52,11 +44,7 @@ class PortfolioCell: UITableViewCell {
         logoImg1.image = UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         
-        legacyTag.isHidden = chain.isDefault
-        erc20Tag.isHidden = !chain.supportEvm
-        cw20Tag.isHidden = !chain.supportCw20
-        nftTag.isHidden = !(BaseData.instance.showEvenReview() && chain.supportCw721)
-        dappTag.isHidden = !(BaseData.instance.showEvenReview() && chain.isDefault && chain.isEcosystem())
+        oldTag.isHidden = chain.isDefault
         
         if (chain.fetchState == .Fail) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)

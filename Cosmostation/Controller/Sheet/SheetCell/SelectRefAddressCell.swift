@@ -11,20 +11,20 @@ import UIKit
 class SelectRefAddressCell: UITableViewCell {
     
     @IBOutlet weak var accountNameLabel: UILabel!
-    @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var keyTypeTag: PaddingLabel!
+    @IBOutlet weak var oldTag: RoundedPaddingLabel!
+    @IBOutlet weak var keyTypeTag: RoundedPaddingLabel!
     @IBOutlet weak var addressLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        legacyTag.isHidden = true
+        oldTag.isHidden = true
         keyTypeTag.isHidden = true
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        legacyTag.isHidden = true
+        oldTag.isHidden = true
         keyTypeTag.isHidden = true
     }
     
@@ -35,7 +35,7 @@ class SelectRefAddressCell: UITableViewCell {
         
         let allChain = ALLCHAINS()
         if let chain = allChain.filter({ $0.tag == refAddress.chainTag }).first {
-            legacyTag.isHidden = chain.isDefault
+            oldTag.isHidden = chain.isDefault
             if (chain.name == "OKT" && !chain.supportEvm) {
                 keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
                 keyTypeTag.isHidden = false

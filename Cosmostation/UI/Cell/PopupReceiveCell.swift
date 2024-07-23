@@ -13,8 +13,8 @@ class PopupReceiveCell: UITableViewCell {
     @IBOutlet weak var rootView: FixCardView!
     @IBOutlet weak var cautionLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var keyTypeTag: PaddingLabel!
+    @IBOutlet weak var oldTag: RoundedPaddingLabel!
+    @IBOutlet weak var keyTypeTag: RoundedPaddingLabel!
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var copyHintTitle: UILabel!
@@ -33,7 +33,7 @@ class PopupReceiveCell: UITableViewCell {
         } else {
             hdPathLabel.text = ""
         }
-        legacyTag.isHidden = chain.isDefault
+        oldTag.isHidden = chain.isDefault
         
         if chain.supportEvm, section == 0 {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name + " EVM")

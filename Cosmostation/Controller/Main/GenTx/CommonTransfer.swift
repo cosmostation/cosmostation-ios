@@ -189,10 +189,10 @@ class CommonTransfer: BaseVC {
         } else if (txStyle == .COSMOS_STYLE) {
             if (fromCosmosFetcher.cosmosBaseFees.count > 0) {
                 feeSegments.removeAllSegments()
-                feeSegments.insertSegment(withTitle: "No Tip", at: 0, animated: false)
-                feeSegments.insertSegment(withTitle: "20% Tip", at: 1, animated: false)
-                feeSegments.insertSegment(withTitle: "50% Tip", at: 2, animated: false)
-                feeSegments.insertSegment(withTitle: "100% Tip", at: 3, animated: false)
+                feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
+                feeSegments.insertSegment(withTitle: "Fast", at: 1, animated: false)
+                feeSegments.insertSegment(withTitle: "Faster", at: 2, animated: false)
+                feeSegments.insertSegment(withTitle: "Instant", at: 3, animated: false)
                 feeSegments.selectedSegmentIndex = selectedFeePosition
                 
                 let baseFee = fromCosmosFetcher.cosmosBaseFees[0]

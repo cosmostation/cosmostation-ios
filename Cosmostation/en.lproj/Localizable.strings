@@ -155,10 +155,10 @@
 "str_low" = "Low";
 "str_tiny" = "Tiny";
 "str_select_coin" = "Select Coin.";
-"str_unstaking_history" = "Unstaking Histories";
+"str_unstaking_history" = "Unstaking History";
 "str_insert_amount" = "Insert Amount";
 "str_estimate_withdraw_amount" = "Withdraw Amount(est)";
-"str_tip" = "Tip";
+"str_tip" = "Speed Up";
 "str_delegate_warn_title" = "Delegate Notice";
 "str_delegate_warn_msg" = "You can receive staking rewards by delegating to a validator. You may lose a portion of your delegated stake if a problem occurs with the selected node. Please perform careful due diligence before delegating.\n\nWhen you undelegate, there is an unbonding period. You will not receive staking rewards during this time.\n\n";
 "str_paste_translate" = "Paste";
@@ -440,7 +440,7 @@
 "msg_reward_address" = "This address is where you receive reward assets.\nTap here for change reward address. (not recommend)";
 "msg_reward_address_under" = "Tap here for change reward address.";
 "msg_already_changed_reward_address" = "You changed a reward address";
-"msg_about_fee_tip" = "Fees and tips are pay to the chain,\nnot to wallet.";
+"msg_about_fee_tip" = "Fees are paid to the chain,\nnot to the wallet.";
 "msg_support_injection" = "To enhance user convenience and response times, we support the injection method (EIP-6963). When using DApps, please select your browser(desktop) wallet accordingly.\nYou can experience the same user experience as with the desktop extension wallet.\nFor EVM-based DApps, by supporting the EIP-6963 specification, you can enjoy a seamless web3 experience.";
 
 
@@ -517,7 +517,7 @@
 "setting_section_about" = "About";
 "setting_account_title" = "Account";
 "setting_qr_import_account" = "Import account with QR scan";
-"setting_hide_legacy" = "Enable Legacy Addresses";
+"setting_hide_legacy" = "Enable Old Addresses";
 "setting_show_testnet" = "Enable Testnet";
 "setting_chain_title" = "Manage Chains";
 "setting_addressbook_title" = "Address Book";
@@ -822,7 +822,7 @@
 "select_hd_path" = "Select Custom Path";
 "import_account_title" = "Import Wallet";
 "import_account_msg" = "Would you like to add %@ wallet(s)?";
-"recent_history" = "Recently Histories";
+"recent_history" = "Recently History";
 "select_fee_denom" = "Select coin for Tx fee pay.";
 "gas_checked" = "Gas amount checked successfully";
 "address_type" = "Address Type";

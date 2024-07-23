@@ -14,8 +14,8 @@ class QrAddressPopupVC: BaseVC {
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
-    @IBOutlet weak var legacyTag: PaddingLabel!
-    @IBOutlet weak var keyTypeTag: PaddingLabel!
+    @IBOutlet weak var oldTag: RoundedPaddingLabel!
+    @IBOutlet weak var keyTypeTag: RoundedPaddingLabel!
     
     var selectedChain: BaseChain!
     var toDpAddress = ""
@@ -46,7 +46,7 @@ class QrAddressPopupVC: BaseVC {
                 hdPathLabel.text = ""
             }
             
-            legacyTag.isHidden = selectedChain.isDefault
+            oldTag.isHidden = selectedChain.isDefault
             if (selectedChain.name == "OKT" && !selectedChain.supportEvm) {
                 keyTypeTag.text = selectedChain.accountKeyType.pubkeyType.algorhythm
                 keyTypeTag.isHidden = false

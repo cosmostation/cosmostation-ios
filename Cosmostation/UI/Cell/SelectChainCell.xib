@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -68,7 +68,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="wC6-dE-gcs">
                                 <rect key="frame" x="147.66666666666666" y="25" width="0.0" height="0.0"/>
                                 <subviews>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpI-Ap-xV9" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpI-Ap-xV9" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                         <color key="backgroundColor" name="_color06"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
@@ -211,11 +211,11 @@
                 <outlet property="bechAddressLabel" destination="B7C-na-Kid" id="xhb-9g-jZ5"/>
                 <outlet property="currencyLabel" destination="rov-M3-rhY" id="9Wx-ky-ELK"/>
                 <outlet property="evmAddressLabel" destination="o5a-Xj-3hp" id="hdM-Lk-YEf"/>
-                <outlet property="legacyTag" destination="IpI-Ap-xV9" id="bwM-R5-CN8"/>
                 <outlet property="loadingLabel1" destination="RX1-4l-ZXX" id="RML-3h-ujv"/>
                 <outlet property="loadingLabel2" destination="REt-eI-mXD" id="atw-1O-79U"/>
                 <outlet property="logoImg1" destination="hCI-tl-W78" id="2VQ-sE-GlK"/>
                 <outlet property="nameLabel" destination="brX-jS-Hp5" id="Yys-Q4-sYo"/>
+                <outlet property="oldTag" destination="IpI-Ap-xV9" id="hQQ-3u-aFr"/>
                 <outlet property="reposeErrorLabel" destination="QGE-gq-48I" id="O4p-7X-dZf"/>
                 <outlet property="rootView" destination="YJ2-PH-o0E" id="wqz-3V-ZzS"/>
                 <outlet property="valueLabel" destination="Zh3-K6-yqb" id="CWJ-C7-fQu"/>

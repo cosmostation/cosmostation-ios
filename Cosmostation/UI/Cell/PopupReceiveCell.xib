@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -39,8 +39,10 @@
                                 <rect key="frame" x="161.66666666666663" y="51.666666666666629" width="220" height="220"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="2q2-gd-Bbi"/>
+                                    <constraint firstAttribute="width" secondItem="0DD-E3-RWP" secondAttribute="height" multiplier="1:1" id="Yxt-KP-ZfP"/>
                                     <constraint firstAttribute="width" secondItem="0DD-E3-RWP" secondAttribute="height" multiplier="1:1" id="aNj-C5-1Ig"/>
                                     <constraint firstAttribute="width" secondItem="0DD-E3-RWP" secondAttribute="height" multiplier="1:1" id="kI2-5A-c6U"/>
+                                    <constraint firstAttribute="width" secondItem="0DD-E3-RWP" secondAttribute="height" multiplier="1:1" id="lnj-Qr-JO4"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Po-I2-mov">
@@ -69,7 +71,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="nja-z9-VOt">
                                         <rect key="frame" x="58.000000000000028" y="10" width="0.0" height="0.0"/>
                                         <subviews>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btZ-Co-xgV" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btZ-Co-xgV" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                                 <color key="backgroundColor" name="_color06"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
@@ -82,7 +84,7 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LBc-ho-ufI" customClass="PaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LBc-ho-ufI" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
                                                 <color key="backgroundColor" name="_color06"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
@@ -128,11 +130,9 @@
                             <constraint firstItem="KLZ-N4-RqJ" firstAttribute="leading" secondItem="M7I-nP-f3G" secondAttribute="leading" constant="12" id="N9y-rW-CzL"/>
                             <constraint firstItem="HCt-w8-Up7" firstAttribute="centerX" secondItem="M7I-nP-f3G" secondAttribute="centerX" id="OU7-Z0-KzG"/>
                             <constraint firstItem="7Po-I2-mov" firstAttribute="trailing" secondItem="0DD-E3-RWP" secondAttribute="trailing" constant="-12" id="Rpc-nm-cuc"/>
-                            <constraint firstItem="0DD-E3-RWP" firstAttribute="width" secondItem="0DD-E3-RWP" secondAttribute="height" multiplier="1:1" id="Yxt-KP-ZfP"/>
                             <constraint firstItem="0DD-E3-RWP" firstAttribute="centerX" secondItem="M7I-nP-f3G" secondAttribute="centerX" id="Zrv-3D-LcT"/>
                             <constraint firstItem="7Po-I2-mov" firstAttribute="centerY" secondItem="0DD-E3-RWP" secondAttribute="centerY" id="bGC-Zk-OcR"/>
                             <constraint firstItem="7Po-I2-mov" firstAttribute="top" secondItem="0DD-E3-RWP" secondAttribute="top" constant="12" id="k72-KT-5QN"/>
-                            <constraint firstItem="0DD-E3-RWP" firstAttribute="width" secondItem="0DD-E3-RWP" secondAttribute="height" multiplier="1:1" id="lnj-Qr-JO4"/>
                             <constraint firstAttribute="trailing" secondItem="KLZ-N4-RqJ" secondAttribute="trailing" constant="12" id="m5l-La-zFO"/>
                             <constraint firstItem="HCt-w8-Up7" firstAttribute="top" secondItem="ZKN-od-FmD" secondAttribute="bottom" constant="24" id="okT-Ac-sRY"/>
                             <constraint firstItem="7Po-I2-mov" firstAttribute="centerX" secondItem="0DD-E3-RWP" secondAttribute="centerX" id="qUh-DK-PcB"/>
@@ -157,7 +157,7 @@
                 <outlet property="copyHintTitle" destination="HCt-w8-Up7" id="eEE-yl-6hT"/>
                 <outlet property="hdPathLabel" destination="Nf4-qw-QQ5" id="c15-1U-lKE"/>
                 <outlet property="keyTypeTag" destination="LBc-ho-ufI" id="7g8-0C-e67"/>
-                <outlet property="legacyTag" destination="btZ-Co-xgV" id="82u-Xr-b45"/>
+                <outlet property="oldTag" destination="btZ-Co-xgV" id="Lh9-EE-irv"/>
                 <outlet property="rootView" destination="M7I-nP-f3G" id="UBl-pC-h9E"/>
                 <outlet property="rqImgView" destination="7Po-I2-mov" id="cb6-02-Ewg"/>
             </connections>

@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -109,12 +109,6 @@
                                     <segue destination="DVQ-I1-owb" kind="embed" identifier="embedNftVC" id="6Wk-zk-FDX"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AeT-wL-xQo">
-                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
-                                <connections>
-                                    <segue destination="yyO-ei-xsW" kind="embed" identifier="embedTokenVC" id="wiH-Nb-UO2"/>
-                                </connections>
-                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYD-Wc-AXb">
                                 <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
                                 <connections>
@@ -144,9 +138,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="_primary"/>
                         <constraints>
-                            <constraint firstItem="AeT-wL-xQo" firstAttribute="bottom" secondItem="vYD-Wc-AXb" secondAttribute="bottom" id="0Hz-n7-Xey"/>
                             <constraint firstItem="qOU-VU-3WA" firstAttribute="leading" secondItem="sqR-D5-yjj" secondAttribute="trailing" constant="8" id="2ME-nJ-avh"/>
-                            <constraint firstItem="AeT-wL-xQo" firstAttribute="leading" secondItem="vYD-Wc-AXb" secondAttribute="leading" id="2Qf-LX-oQ8"/>
                             <constraint firstItem="0An-sf-Sxo" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="47f-ZP-RPP"/>
                             <constraint firstItem="6yJ-K0-WD3" firstAttribute="leading" secondItem="vYD-Wc-AXb" secondAttribute="leading" id="7O7-vf-teK"/>
                             <constraint firstItem="YnM-R6-Ocx" firstAttribute="top" secondItem="vYD-Wc-AXb" secondAttribute="top" id="Csx-Rt-1hX"/>
@@ -171,10 +163,8 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1V7-Iu-EPt" secondAttribute="trailing" id="iHy-1c-waq"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0An-sf-Sxo" secondAttribute="trailing" constant="48" id="kY3-s0-qOT"/>
                             <constraint firstItem="fdX-08-eE0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="ll6-wp-9Mc"/>
-                            <constraint firstItem="AeT-wL-xQo" firstAttribute="top" secondItem="vYD-Wc-AXb" secondAttribute="top" id="lm3-m2-072"/>
                             <constraint firstItem="w9R-os-Pfe" firstAttribute="trailing" secondItem="1V7-Iu-EPt" secondAttribute="trailing" id="mow-QC-4Me"/>
                             <constraint firstItem="6yJ-K0-WD3" firstAttribute="trailing" secondItem="vYD-Wc-AXb" secondAttribute="trailing" id="neC-wg-fc1"/>
-                            <constraint firstItem="AeT-wL-xQo" firstAttribute="trailing" secondItem="vYD-Wc-AXb" secondAttribute="trailing" id="njE-p9-K9x"/>
                             <constraint firstItem="1V7-Iu-EPt" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ohN-uk-tdL"/>
                             <constraint firstItem="qOU-VU-3WA" firstAttribute="centerY" secondItem="sqR-D5-yjj" secondAttribute="centerY" id="onG-Wl-MLU"/>
                             <constraint firstItem="w9R-os-Pfe" firstAttribute="leading" secondItem="vYD-Wc-AXb" secondAttribute="leading" id="pwm-qQ-Asm"/>
@@ -200,7 +190,6 @@
                         <outlet property="nftList" destination="w9R-os-Pfe" id="wBQ-Ep-oVj"/>
                         <outlet property="receiveList" destination="6yJ-K0-WD3" id="z5D-dq-odZ"/>
                         <outlet property="tabbar" destination="B5w-hK-wYy" id="Flj-2U-acs"/>
-                        <outlet property="tokenList" destination="AeT-wL-xQo" id="UY5-1J-uhG"/>
                         <outlet property="totalValueLabel" destination="sqR-D5-yjj" id="zfC-nB-loW"/>
                     </connections>
                 </viewController>
@@ -256,11 +245,11 @@
             <objects>
                 <viewController storyboardIdentifier="CosmosTokenVC" id="yyO-ei-xsW" customClass="CosmosTokenVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6m4-W2-W09">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8e1-0V-k7Y">
-                                <rect key="frame" x="76.666666666666686" y="274.66666666666669" width="240" height="128"/>
+                                <rect key="frame" x="76.666666666666686" y="374.66666666666669" width="240" height="128"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgNoSearch" translatesAutoresizingMaskIntoConstraints="NO" id="LLL-CN-Dck">
                                         <rect key="frame" x="87.999999999999986" y="0.0" width="64.000000000000014" height="64"/>
@@ -287,7 +276,7 @@
                                 </constraints>
                             </view>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="871-cq-xsh">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -310,7 +299,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ctm-QY-5em" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1141" y="847"/>
+            <point key="canvasLocation" x="-1257" y="1773"/>
         </scene>
         <!--Cosmos NftVC-->
         <scene sceneID="hdU-jR-Mfl">

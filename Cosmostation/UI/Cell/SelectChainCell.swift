@@ -16,7 +16,7 @@ class SelectChainCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var bechAddressLabel: UILabel!
     @IBOutlet weak var evmAddressLabel: UILabel!
-    @IBOutlet weak var legacyTag: PaddingLabel!
+    @IBOutlet weak var oldTag: RoundedPaddingLabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var assetCntLabel: UILabel!
@@ -34,7 +34,7 @@ class SelectChainCell: UITableViewCell {
         assetCntLabel.text = ""
         bechAddressLabel.text = ""
         evmAddressLabel.text = ""
-        legacyTag.isHidden = true
+        oldTag.isHidden = true
         loadingLabel1.isHidden = false
         loadingLabel2.isHidden = false
         reposeErrorLabel.isHidden = true
@@ -50,7 +50,7 @@ class SelectChainCell: UITableViewCell {
         assetCntLabel.text = ""
         bechAddressLabel.text = ""
         evmAddressLabel.text = ""
-        legacyTag.isHidden = true
+        oldTag.isHidden = true
         loadingLabel1.isHidden = false
         loadingLabel2.isHidden = false
         reposeErrorLabel.isHidden = true
@@ -78,7 +78,7 @@ class SelectChainCell: UITableViewCell {
             starEvmAddressAnimation()
         }
         
-        legacyTag.isHidden = chain.isDefault
+        oldTag.isHidden = chain.isDefault
         
         if (selectedList.contains(chain.tag)) {
             rootView.layer.borderWidth = 1.0
