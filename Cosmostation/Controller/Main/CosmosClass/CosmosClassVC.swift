@@ -111,8 +111,8 @@ class CosmosClassVC: BaseVC {
         explorerBtn.frame = CGRectMake(0, 0, 30, 30)
         explorerBarBtn = UIBarButtonItem(customView: explorerBtn)
         
-        navigationItem.rightBarButtonItems = [explorerBarBtn]
-        
+        navigationItem.rightBarButtonItems = isTokenPresent() ? [explorerBarBtn, addtokenBarBtn] : [explorerBarBtn]
+
         navigationItem.titleView = BgRandomButton()
     }
     
@@ -330,6 +330,28 @@ class CosmosClassVC: BaseVC {
             }
         }
     }
+    
+    private func isTokenPresent() -> Bool {
+        var status = false
+        
+        if let cosmosFetcher = selectedChain.getCosmosfetcher() {
+            cosmosFetcher.mintscanCw20Tokens.forEach { tokenInfo in
+                if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
+                    status = true
+                }
+            }
+        }
+        
+        if let evmFetcher = selectedChain.getEvmfetcher() {
+            evmFetcher.mintscanErc20Tokens.forEach { tokenInfo in
+                if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
+                    status = true
+                }
+            }
+        }
+
+        return status
+    }
 }
 
 extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
@@ -342,8 +364,8 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             historyList.alpha = 0
             ecosystemList.alpha = 0
             aboutList.alpha = 0
-            navigationItem.rightBarButtonItems = [explorerBarBtn]
-            
+            navigationItem.rightBarButtonItems = isTokenPresent() ? [explorerBarBtn, addtokenBarBtn] : [explorerBarBtn]
+
         } else if (item.tag == 1) {
             coinList.alpha = 0
             nftList.alpha = 1
@@ -351,7 +373,7 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             historyList.alpha = 0
             ecosystemList.alpha = 0
             aboutList.alpha = 0
-            navigationItem.rightBarButtonItems = [explorerBarBtn, addtokenBarBtn]
+            navigationItem.rightBarButtonItems = [explorerBarBtn,addNftBarBtn]
             
         } else if (item.tag == 2) {
             coinList.alpha = 0
@@ -360,7 +382,7 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             historyList.alpha = 0
             ecosystemList.alpha = 0
             aboutList.alpha = 0
-            navigationItem.rightBarButtonItems = [explorerBarBtn, addNftBarBtn]
+            navigationItem.rightBarButtonItems = [explorerBarBtn]
             
         } else if (item.tag == 3) {
             coinList.alpha = 0
