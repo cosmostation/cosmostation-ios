@@ -48,7 +48,7 @@ class CosmosClassVC: BaseVC {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "embedCoinVC") {
-            let target = segue.destination as! CosmosCoinVC
+            let target = segue.destination as! CosmosCryptoVC
             target.selectedChain = selectedChain
         } else if (segue.identifier == "embedTokenVC") {
             let target = segue.destination as! CosmosTokenVC

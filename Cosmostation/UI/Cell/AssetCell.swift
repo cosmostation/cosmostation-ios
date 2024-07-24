@@ -30,6 +30,8 @@ class AssetCell: UITableViewCell {
         amountLabel.text = ""
         valueCurrencyLabel.text = ""
         valueLabel.text = ""
+        priceLabel.text = ""
+        priceChangeLabel.text = ""
         amountLabel.isHidden = true
         valueCurrencyLabel.isHidden = true
         valueLabel.isHidden = true
@@ -42,10 +44,14 @@ class AssetCell: UITableViewCell {
         amountLabel.text = ""
         valueCurrencyLabel.text = ""
         valueLabel.text = ""
+        priceChangeLabel.text = ""
+        priceLabel.text = ""
         amountLabel.isHidden = true
         valueCurrencyLabel.isHidden = true
         valueLabel.isHidden = true
         hidenValueLabel.isHidden = true
+        priceLabel.isHidden = false
+        priceChangeLabel.isHidden = false
     }
     
     func bindCosmosClassAsset(_ baseChain: BaseChain, _ coin: Cosmos_Base_V1beta1_Coin) {
@@ -133,6 +139,7 @@ class AssetCell: UITableViewCell {
             let value = evmFetcher.tokenValue(token.address!)
             WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
             WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
+            print("TEST!!!!", token.coinGeckoId)
             WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
             if (BaseData.instance.getHideValue()) {
                 hidenValueLabel.isHidden = false

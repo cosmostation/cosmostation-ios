@@ -197,10 +197,10 @@
             </objects>
             <point key="canvasLocation" x="139.69465648854961" y="-2.1126760563380285"/>
         </scene>
-        <!--Cosmos CoinVC-->
+        <!--Cosmos CryptoVC-->
         <scene sceneID="lAa-dm-dlk">
             <objects>
-                <viewController storyboardIdentifier="CosmosCoinVC" id="EO6-oK-AmS" customClass="CosmosCoinVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CosmosCoinVC" id="EO6-oK-AmS" customClass="CosmosCryptoVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KVq-Tq-0JA">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
