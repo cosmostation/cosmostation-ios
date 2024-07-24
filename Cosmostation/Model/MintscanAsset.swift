@@ -48,6 +48,14 @@ public struct MintscanAsset: Codable {
         return nil
     }
     
+    func getjustBeforeChain() -> String? {
+        let chainPath = path?.components(separatedBy: ">")
+        if (chainPath?.count ?? 0 > 1) {
+            return String(chainPath![chainPath!.count - 2])
+        }
+        return nil
+    }
+    
     func assetColor() -> UIColor {
         if (color == nil || color?.isEmpty == true) {
             return UIColor.white

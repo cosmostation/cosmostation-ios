@@ -1339,6 +1339,10 @@
 		04E250E22B8F035E007D5AA0 /* basebg07.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E250DF2B8F035E007D5AA0 /* basebg07.png */; };
 		04E250E32B8F035E007D5AA0 /* basebg08.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E250E02B8F035E007D5AA0 /* basebg08.png */; };
 		04E250E42B8F035E007D5AA0 /* basebg08.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E250E02B8F035E007D5AA0 /* basebg08.png */; };
+		04E979E92C4F997300E94BCB /* ChainAgoric564.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E979E82C4F997300E94BCB /* ChainAgoric564.swift */; };
+		04E979EA2C4F997300E94BCB /* ChainAgoric564.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E979E82C4F997300E94BCB /* ChainAgoric564.swift */; };
+		04E979EC2C4F998600E94BCB /* ChainAgoric118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E979EB2C4F998600E94BCB /* ChainAgoric118.swift */; };
+		04E979ED2C4F998600E94BCB /* ChainAgoric118.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E979EB2C4F998600E94BCB /* ChainAgoric118.swift */; };
 		04F048C72AF89B19002A809D /* SelectAddressBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F048C52AF89B19002A809D /* SelectAddressBookCell.swift */; };
 		04F048C82AF89B19002A809D /* SelectAddressBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F048C52AF89B19002A809D /* SelectAddressBookCell.swift */; };
 		04F048C92AF89B19002A809D /* SelectAddressBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F048C62AF89B19002A809D /* SelectAddressBookCell.xib */; };
@@ -2679,6 +2683,8 @@
 		04E250DC2B8F0354007D5AA0 /* basebg00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg00.png; sourceTree = "<group>"; };
 		04E250DF2B8F035E007D5AA0 /* basebg07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg07.png; sourceTree = "<group>"; };
 		04E250E02B8F035E007D5AA0 /* basebg08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg08.png; sourceTree = "<group>"; };
+		04E979E82C4F997300E94BCB /* ChainAgoric564.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAgoric564.swift; sourceTree = "<group>"; };
+		04E979EB2C4F998600E94BCB /* ChainAgoric118.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAgoric118.swift; sourceTree = "<group>"; };
 		04F048C52AF89B19002A809D /* SelectAddressBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAddressBookCell.swift; sourceTree = "<group>"; };
 		04F048C62AF89B19002A809D /* SelectAddressBookCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAddressBookCell.xib; sourceTree = "<group>"; };
 		04F048CB2AF8D268002A809D /* CosmosCancelUnbonding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosCancelUnbonding.swift; sourceTree = "<group>"; };
@@ -3111,6 +3117,8 @@
 			isa = PBXGroup;
 			children = (
 				04D279E92A67C96500AF046A /* ChainCosmos.swift */,
+				04E979E82C4F997300E94BCB /* ChainAgoric564.swift */,
+				04E979EB2C4F998600E94BCB /* ChainAgoric118.swift */,
 				04CB911D2A90C9D900375354 /* ChainAkash.swift */,
 				E10FD3BD2B70D1F900B57DB4 /* ChainAlthea118.swift */,
 				047843F22AC9A1B500462F1C /* ChainArchway.swift */,
@@ -5150,6 +5158,7 @@
 				0400EEE22ADBE1D3007BA97F /* kava_pricefeed_v1beta1_tx.pb.swift in Sources */,
 				0409D2F62AC5DC6D0021E192 /* CosmosDelegate.swift in Sources */,
 				E10B1DE52C215C120039283B /* NeutronMultiDao.swift in Sources */,
+				04E979ED2C4F998600E94BCB /* ChainAgoric118.swift in Sources */,
 				04D785532C328DB1009D1A94 /* feemarket_feemarket_module_v1_module.pb.swift in Sources */,
 				047843A62AC991B300462F1C /* injective_peggy_v1_params.pb.swift in Sources */,
 				042DE8412AC4C518003F3EA4 /* TxMemoSheet.swift in Sources */,
@@ -5530,6 +5539,7 @@
 				047843002AC9918700462F1C /* ethermint_evm_v1_events.pb.swift in Sources */,
 				04C8167B2BA98D74006B800A /* cosmos_staking_module_v1_module.pb.swift in Sources */,
 				79FCA3BB2C3F9E92001C17D0 /* artela_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */,
+				04E979EA2C4F997300E94BCB /* ChainAgoric564.swift in Sources */,
 				047843B02AC991B300462F1C /* injective_tokenfactory_v1beta1_events.pb.swift in Sources */,
 				04A68C1E2ABDA3220041FA13 /* SelectSwapChainCell.swift in Sources */,
 				041F1F7F2C05E5D5008C2F2C /* WebNaviButton.swift in Sources */,
@@ -5947,6 +5957,7 @@
 				0400EEE12ADBE1D3007BA97F /* kava_pricefeed_v1beta1_tx.pb.swift in Sources */,
 				0409D2F52AC5DC6D0021E192 /* CosmosDelegate.swift in Sources */,
 				E10B1DE42C215C120039283B /* NeutronMultiDao.swift in Sources */,
+				04E979EC2C4F998600E94BCB /* ChainAgoric118.swift in Sources */,
 				04D785522C328DB1009D1A94 /* feemarket_feemarket_module_v1_module.pb.swift in Sources */,
 				047843A52AC991B300462F1C /* injective_peggy_v1_params.pb.swift in Sources */,
 				042DE8402AC4C518003F3EA4 /* TxMemoSheet.swift in Sources */,
@@ -6327,6 +6338,7 @@
 				047842FF2AC9918700462F1C /* ethermint_evm_v1_events.pb.swift in Sources */,
 				04C8167A2BA98D74006B800A /* cosmos_staking_module_v1_module.pb.swift in Sources */,
 				79FCA3BA2C3F9E92001C17D0 /* artela_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */,
+				04E979E92C4F997300E94BCB /* ChainAgoric564.swift in Sources */,
 				047843AF2AC991B300462F1C /* injective_tokenfactory_v1beta1_events.pb.swift in Sources */,
 				04A68C1D2ABDA3220041FA13 /* SelectSwapChainCell.swift in Sources */,
 				041F1F7E2C05E5D5008C2F2C /* WebNaviButton.swift in Sources */,
