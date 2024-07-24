@@ -18,7 +18,16 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
     
     var selectedChain: BaseChain!
     var allErc20Tokens = [MintscanToken]()
-    var toDisplayErc20Tokens = [MintscanToken]()
+    var toDisplayErc20Tokens = [MintscanToken]() {
+        didSet {
+            searchErc20Tokens = toDisplayErc20Tokens
+        }
+    }
+    var searchErc20Tokens = [MintscanToken]()
+    
+    var containCoinSymbol = true
+    
+    private lazy var searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +53,33 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
         
+        searchBar.backgroundImage = UIImage()
+        searchBar.tintColor = .white
+        searchBar.barTintColor = .clear
+        searchBar.searchTextField.textColor = .color01
+        searchBar.searchTextField.font = .fontSize14Bold
+        searchBar.delegate = self
+        
         onSortAssets()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if !allErc20Tokens.isEmpty  {
+            tableView.tableHeaderView = searchBar
+
+            var contentOffset: CGPoint = tableView.contentOffset
+            if (contentOffset == CGPoint(x: 0, y: 0) &&
+                tableView.tableHeaderView != nil &&
+                searchBar.text?.isEmpty == true) {
+                contentOffset.y += (tableView.tableHeaderView?.frame)!.height
+                tableView.contentOffset = contentOffset
+            }
+            
+            tableView.reloadData()
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
     }
@@ -150,10 +181,11 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == 0) {
             view.titleLabel.text = "Coin"
-            view.cntLabel.text = "1"
+            view.cntLabel.text = containCoinSymbol ? "1" : "0"
+            
         } else {
             view.titleLabel.text = "Erc20 Tokens"
-            view.cntLabel.text = String(toDisplayErc20Tokens.count)
+            view.cntLabel.text = String(searchErc20Tokens.count)
         }
         return view
     }
@@ -161,7 +193,7 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0) {
             return 40
-        } else if (section == 1 && toDisplayErc20Tokens.count > 0) {
+        } else if (section == 1 && searchErc20Tokens.count > 0) {
             return 40
         }
         return 0
@@ -169,9 +201,9 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
-            return 1
+            return containCoinSymbol ?  1 :  0
         } else if (section == 1) {
-            return toDisplayErc20Tokens.count
+            return searchErc20Tokens.count
         }
         return 0
     }
@@ -181,7 +213,7 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
         if (indexPath.section == 0) {
             cell.bindEvmClassCoin(selectedChain)
         } else {
-            cell.bindEvmClassToken(selectedChain, toDisplayErc20Tokens[indexPath.row])
+            cell.bindEvmClassToken(selectedChain, searchErc20Tokens[indexPath.row])
         }
         return cell
     }
@@ -201,7 +233,7 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
             return
             
         } else {
-            let token = toDisplayErc20Tokens[indexPath.row]
+            let token = searchErc20Tokens[indexPath.row]
             if (token.getAmount() == NSDecimalNumber.zero) {
                 onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
                 return
@@ -224,6 +256,8 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
                 maskCell(cell: cell, margin: Float(hiddenFrameHeight))
             }
         }
+        
+        view.endEditing(true)
     }
 
     func maskCell(cell: UITableViewCell, margin: Float) {
@@ -239,4 +273,38 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
         return mask;
     }
     
+}
+
+extension EvmAssetVC: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        searchErc20Tokens.removeAll()
+        
+        if searchText.isEmpty {
+            searchErc20Tokens = toDisplayErc20Tokens
+            containCoinSymbol = true
+            
+            tableView.reloadData()
+            return
+        }
+        
+        searchErc20Tokens = toDisplayErc20Tokens.filter { token in
+            guard let symbol = token.symbol else { return false }
+            return symbol.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        
+        let symbol = selectedChain.coinSymbol
+        if symbol.range(of: searchText, options: .caseInsensitive) != nil {
+            containCoinSymbol = true
+        } else {
+            containCoinSymbol = false
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
 }
