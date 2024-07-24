@@ -16,7 +16,7 @@ class CosmosCryptoVC: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var tableView: UITableView!
     var refresher: UIRefreshControl!
-    private lazy var searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
+    private lazy var searchBarView = SearchBarWithTopPadding(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 54))
     
     var selectedChain: BaseChain!
     var nativeCoins = Array<Cosmos_Base_V1beta1_Coin>() {
@@ -88,12 +88,7 @@ class CosmosCryptoVC: BaseVC {
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
         
-        searchBar.backgroundImage = UIImage()
-        searchBar.tintColor = .white
-        searchBar.barTintColor = .clear
-        searchBar.searchTextField.textColor = .color01
-        searchBar.searchTextField.font = .fontSize14Bold
-        searchBar.delegate = self
+        searchBarView.searchBar.delegate = self
         
         onSortAssets()
         onUpdateView()
@@ -111,13 +106,13 @@ class CosmosCryptoVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if !ibcCoins.isEmpty || !mintscanCw20Tokens.isEmpty || !mintscanErc20Tokens.isEmpty {
-            tableView.tableHeaderView = searchBar
+        if (nativeCoins.count + ibcCoins.count + bridgedCoins.count + mintscanCw20Tokens.count + mintscanErc20Tokens.count) > 14 {
+            tableView.tableHeaderView = searchBarView
 
             var contentOffset: CGPoint = tableView.contentOffset
             if (contentOffset == CGPoint(x: 0, y: 0) &&
                 tableView.tableHeaderView != nil &&
-                searchBar.text?.isEmpty == true) {
+                searchBarView.searchBar.text?.isEmpty == true) {
                 contentOffset.y += (tableView.tableHeaderView?.frame)!.height
                 tableView.contentOffset = contentOffset
             }
@@ -326,17 +321,21 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (selectedChain.name == "OKT") {
-                return 40
+            if (section == 0) {
+                return searchOktBalances.count > 0 ? 40 : 0
+            } else if (section == 1 ) {
+                return searchMintscanErc20Tokens.count > 0 ? 40 : 0
+            }
         } else {
             if (section == 0) {
-                return (nativeCoins.count > 0) ? 40 : 0
+                return (searchNativeCoins.count > 0) ? 40 : 0
             } else if (section == 1) {
-                return (ibcCoins.count > 0) ? 40 : 0
+                return (searchIbcCoins.count > 0) ? 40 : 0
             } else if (section == 2) {
-                return (bridgedCoins.count > 0) ? 40 : 0
-            } else if (section == 3 && mintscanCw20Tokens.count > 0) {
+                return (searchBridgedCoins.count > 0) ? 40 : 0
+            } else if (section == 3 && searchMintscanCw20Tokens.count > 0) {
                 return 40
-            } else if (section == 4 && mintscanErc20Tokens.count > 0) {
+            } else if (section == 4 && searchMintscanErc20Tokens.count > 0) {
                 return 40
             }
         }
@@ -376,7 +375,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             let stakeDenom = selectedChain.stakeDenom!
             let symbol = selectedChain.name == "OKT" ? stakeDenom.lowercased() : BaseData.instance.getAsset(selectedChain.apiName, stakeDenom)!.symbol!.lowercased()
             
-            if searchBar.text == "" || symbol.contains(searchBar.text!.lowercased()) {
+            if searchBarView.searchBar.text == "" || symbol.contains(searchBarView.searchBar.text!.lowercased()) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
                 cell.bindCosmosStakeAsset(selectedChain)
                 
@@ -400,7 +399,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             
             if let oktChain = selectedChain as? ChainOktEVM {
                 if indexPath.section == 0 {
-                    cell.bindOktAsset(oktChain, searchOktBalances[indexPath.row])//
+                    cell.bindOktAsset(oktChain, searchOktBalances[indexPath.row])
                 } else if indexPath.section == 1 {
                     cell.bindEvmClassToken(selectedChain, searchMintscanErc20Tokens[indexPath.row])
                 }
@@ -434,7 +433,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
         if (selectedChain.name == "OKT") {
             if (selectedChain.tag == "okt60_Keccak") {
                 if (indexPath.section == 0 && indexPath.row == 0) { //OKT EVM only support Ox style
-                    onStartTransferVC(.Only_EVM_Coin, searchOktBalances[indexPath.row]["denom"].stringValue)//
+                    onStartTransferVC(.Only_EVM_Coin, searchOktBalances[indexPath.row]["denom"].stringValue)
                 } else if indexPath.section == 1 {
                     let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
                     transfer.sendType = .Only_EVM_ERC20
@@ -469,7 +468,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 onStartTransferVC(sendType, searchNativeCoins[indexPath.row].denom)
                 
             } else if (indexPath.section == 1) {
-                onStartTransferVC(.Only_Cosmos_Coin, searchIbcCoins[indexPath.row].denom)     //!!!
+                onStartTransferVC(.Only_Cosmos_Coin, searchIbcCoins[indexPath.row].denom)
                 
             } else if (indexPath.section == 2) {
                 onStartTransferVC(.Only_Cosmos_Coin, searchBridgedCoins[indexPath.row].denom)
@@ -575,7 +574,7 @@ extension CosmosCryptoVC: UISearchBarDelegate {
         searchBridgedCoins.removeAll()
         searchMintscanCw20Tokens.removeAll()
         searchMintscanErc20Tokens.removeAll()
-        //
+        
         
         if searchText.isEmpty {
             searchOktBalances = oktBalances
@@ -584,7 +583,7 @@ extension CosmosCryptoVC: UISearchBarDelegate {
             searchBridgedCoins = bridgedCoins
             searchMintscanCw20Tokens = mintscanCw20Tokens
             searchMintscanErc20Tokens = mintscanErc20Tokens
-            //
+            
             tableView.reloadData()
             return
         }

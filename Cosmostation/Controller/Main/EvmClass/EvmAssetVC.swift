@@ -27,7 +27,7 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
     
     var containCoinSymbol = true
     
-    private lazy var searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
+    private lazy var searchBarView = SearchBarWithTopPadding(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 54))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,26 +53,21 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
         
-        searchBar.backgroundImage = UIImage()
-        searchBar.tintColor = .white
-        searchBar.barTintColor = .clear
-        searchBar.searchTextField.textColor = .color01
-        searchBar.searchTextField.font = .fontSize14Bold
-        searchBar.delegate = self
-        
+        searchBarView.searchBar.delegate = self
+
         onSortAssets()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if !allErc20Tokens.isEmpty  {
-            tableView.tableHeaderView = searchBar
+        if toDisplayErc20Tokens.count > 14 {
+            tableView.tableHeaderView = searchBarView
 
             var contentOffset: CGPoint = tableView.contentOffset
             if (contentOffset == CGPoint(x: 0, y: 0) &&
                 tableView.tableHeaderView != nil &&
-                searchBar.text?.isEmpty == true) {
+                searchBarView.searchBar.text?.isEmpty == true) {
                 contentOffset.y += (tableView.tableHeaderView?.frame)!.height
                 tableView.contentOffset = contentOffset
             }
@@ -192,7 +187,7 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0) {
-            return 40
+            return containCoinSymbol ? 40 : 0
         } else if (section == 1 && searchErc20Tokens.count > 0) {
             return 40
         }

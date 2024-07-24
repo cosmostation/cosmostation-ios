@@ -139,7 +139,6 @@ class AssetCell: UITableViewCell {
             let value = evmFetcher.tokenValue(token.address!)
             WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
             WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
-            print("TEST!!!!", token.coinGeckoId)
             WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
             if (BaseData.instance.getHideValue()) {
                 hidenValueLabel.isHidden = false
