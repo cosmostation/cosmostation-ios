@@ -154,7 +154,7 @@ class AssetCosmosClassCell: UITableViewCell {
             stakingTitle.text = "Deposited"
             unstakingTitle.text = "Withdrawing"
             
-            let value = oktChain.allValue()
+            let value = oktFetcher.allCoinValue()
             coinImg.kf.setImage(with: ChainOktEVM.assetImg(stakeDenom), placeholder: UIImage(named: "tokenDefault"))
             symbolLabel.text = stakeDenom.uppercased()
             
