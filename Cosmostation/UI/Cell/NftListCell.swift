@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftyJSON
-import AlamofireImage
+import Kingfisher
 
 class NftListCell: UICollectionViewCell {
 
@@ -29,7 +29,7 @@ class NftListCell: UICollectionViewCell {
     
     func onBindNft(_ info: JSON, _ nft: Cw721TokenModel) {
         if let url = nft.tokenDetails["url"].string {
-            nftImageView?.af.setImage(withURL: URL(string: url)!)
+            nftImageView?.kf.setImage(with: URL(string: url)!, placeholder: UIImage(named: "imgNftPlaceHolder"))
         }
         titleLabel.text = info["name"].stringValue + " #" + nft.tokenId
         titleLabel.adjustsFontSizeToFitWidth = true

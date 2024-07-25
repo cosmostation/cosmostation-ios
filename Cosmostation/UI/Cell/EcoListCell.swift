@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftyJSON
-import AlamofireImage
+import Kingfisher
 
 class EcoListCell: UICollectionViewCell {
     
@@ -37,7 +37,7 @@ class EcoListCell: UICollectionViewCell {
         guard let info = info else { return }
         
         if let url = URL(string: info["thumbnail"].stringValue) {
-            thumbnailImageView?.af.setImage(withURL: url)
+            thumbnailImageView?.kf.setImage(with: url)
         }
         titleLabel.text = info["name"].string
         descriptionLabel.text = info["description"].string

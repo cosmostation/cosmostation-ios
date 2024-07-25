@@ -9,6 +9,7 @@
 import UIKit
 import Lottie
 import SwiftProtobuf
+import Kingfisher
 
 class CosmosRedelegate: BaseVC {
     
@@ -125,7 +126,7 @@ class CosmosRedelegate: BaseVC {
     
     func onUpdateFromValidatorView() {
         fromMonikerImg.image = UIImage(named: "validatorDefault")
-        fromMonikerImg.af.setImage(withURL: selectedChain.monikerImg(fromValidator!.operatorAddress))
+        fromMonikerImg.kf.setImage(with: selectedChain.monikerImg(fromValidator!.operatorAddress), placeholder: UIImage(named: "validatorDefault"))
         fromMonikerLabel.text = fromValidator!.description_p.moniker
         if (fromValidator!.jailed) {
             fromJailedTag.isHidden = false
@@ -153,7 +154,7 @@ class CosmosRedelegate: BaseVC {
     
     func onUpdateToValidatorView() {
         toMonikerImg.image = UIImage(named: "validatorDefault")
-        toMonikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
+        toMonikerImg.kf.setImage(with: selectedChain.monikerImg(toValidator!.operatorAddress), placeholder: UIImage(named: "validatorDefault"))
         toMonikerLabel.text = toValidator!.description_p.moniker
         if (toValidator!.jailed) {
             toJailedTag.isHidden = false

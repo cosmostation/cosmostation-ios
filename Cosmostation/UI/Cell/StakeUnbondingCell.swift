@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AlamofireImage
+import Kingfisher
 import SwiftyJSON
 
 class StakeUnbondingCell: UITableViewCell {
@@ -28,14 +28,14 @@ class StakeUnbondingCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        logoImg.af.cancelImageRequest()
+        logoImg.kf.cancelDownloadTask()
         logoImg.image = UIImage(named: "validatorDefault")
         inactiveTag.isHidden = true
         jailedTag.isHidden = true
     }
     func onBindMyUnbonding(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator, _ unbonding: UnbondingEntry) {
         
-        logoImg.af.setImage(withURL: baseChain.monikerImg(validator.operatorAddress))
+        logoImg.kf.setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholder: UIImage(named: "validatorDefault"))
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false

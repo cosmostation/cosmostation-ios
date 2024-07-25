@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AlamofireImage
+import Kingfisher
 import SwiftyJSON
 
 class StakeDelegateCell: UITableViewCell {
@@ -35,14 +35,14 @@ class StakeDelegateCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        logoImg.af.cancelImageRequest()
+        logoImg.kf.cancelDownloadTask()
         logoImg.image = UIImage(named: "validatorDefault")
         jailedTag.isHidden = true
         inactiveTag.isHidden = true
     }
     
     func onBindMyDelegate(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator, _ delegation: Cosmos_Staking_V1beta1_DelegationResponse) {
-        logoImg.af.setImage(withURL: baseChain.monikerImg(validator.operatorAddress))
+        logoImg.kf.setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholder: UIImage(named: "validatorDefault"))
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false

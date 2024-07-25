@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AlamofireImage
+import Kingfisher
 
 class RewardDetailCell: UITableViewCell {
     
@@ -26,7 +26,7 @@ class RewardDetailCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        coinImg.af.cancelImageRequest()
+        coinImg.kf.cancelDownloadTask()
         coinImg.image = UIImage(named: "tokenDefault")
         amountLabel.text = ""
         valueCurrencyLabel.text = ""

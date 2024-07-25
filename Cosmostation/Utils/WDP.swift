@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import AlamofireImage
+import Kingfisher
 
 public class WDP {
     
@@ -17,14 +17,13 @@ public class WDP {
             amountLabel?.attributedText = dpAmount("0", amountLabel!.font, showDecimal ?? msAsset.decimals)
             denomLabel?.text = msAsset.symbol
             denomLabel?.textColor = msAsset.assetColor()
-            coinImg?.af.setImage(withURL: msAsset.assetImg())
-            
+            coinImg?.kf.setImage(with: msAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
         } else {
             let amount = NSDecimalNumber(string: coin?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
             amountLabel?.attributedText = dpAmount(amount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
             denomLabel?.text = msAsset.symbol
             denomLabel?.textColor = msAsset.assetColor()
-            coinImg?.af.setImage(withURL: msAsset.assetImg())
+            coinImg?.kf.setImage(with: msAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
         }
     }
     
@@ -34,7 +33,7 @@ public class WDP {
         amountLabel?.attributedText = dpAmount(deAmount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
         denomLabel?.text = msAsset.symbol
         denomLabel?.textColor = msAsset.assetColor()
-        coinImg?.af.setImage(withURL: msAsset.assetImg())
+        coinImg?.kf.setImage(with: msAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
     }
     
     static func dpToken(_ msToken: MintscanToken, _ coinImg: UIImageView?, _ denomLabel: UILabel?, _ amountLabel: UILabel?, _ showDecimal: Int16?) {
@@ -45,7 +44,7 @@ public class WDP {
         let deAmount = amount.multiplying(byPowerOf10: -msToken.decimals!)
         amountLabel?.attributedText = dpAmount(deAmount.stringValue, amountLabel!.font, showDecimal ?? msToken.decimals)
         denomLabel?.text = msToken.symbol
-        coinImg?.af.setImage(withURL: msToken.assetImg())
+        coinImg?.kf.setImage(with: msToken.assetImg(), placeholder: UIImage(named: "tokenDefault"))
     }
     
     static func dpAmount(_ amount: String?, _ font: UIFont, _ showDecimal: Int16? = 6) -> NSMutableAttributedString {

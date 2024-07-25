@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AlamofireImage
+import Kingfisher
 
 class KavaLendListCell: UITableViewCell {
     
@@ -27,7 +27,7 @@ class KavaLendListCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        marketImg.af.cancelImageRequest()
+        marketImg.kf.cancelDownloadTask()
         marketImg.image = nil
     }
     
@@ -40,7 +40,7 @@ class KavaLendListCell: UITableViewCell {
         let hardImgDenom = msAsset.origin_denom ?? ""
         let url = KAVA_HARD_POOL_IMG_URL + "lp" + hardImgDenom + ".png"
         let title = hardMarket?.spotMarketID.replacingOccurrences(of: ":30", with: "").replacingOccurrences(of: ":720", with: "")
-        marketImg.af.setImage(withURL: URL(string: url)!)
+        marketImg.kf.setImage(with: URL(string: url)!)
         marketNameLabel.text = title?.uppercased()
         
         //Display supplied amounts

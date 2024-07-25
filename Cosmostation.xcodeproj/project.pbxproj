@@ -1502,6 +1502,8 @@
 		2810084A2696D979002986A6 /* KeyFac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281008492696D979002986A6 /* KeyFac.swift */; };
 		28CE973625872B7C006DEBEE /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE973525872B7C006DEBEE /* Signer.swift */; };
 		28FC030C2652662B001C0319 /* MintscanPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC030B2652662B001C0319 /* MintscanPrice.swift */; };
+		79A190202C522B500016C0E0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 79A1901F2C522B500016C0E0 /* Kingfisher */; };
+		79A190222C522B590016C0E0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 79A190212C522B590016C0E0 /* Kingfisher */; };
 		79BF332F2C50D0C300515D78 /* SearchBarWithTopPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BF332E2C50D0C300515D78 /* SearchBarWithTopPadding.swift */; };
 		79BF33302C50D0C400515D78 /* SearchBarWithTopPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BF332E2C50D0C300515D78 /* SearchBarWithTopPadding.swift */; };
 		79EF66802C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
@@ -3047,6 +3049,7 @@
 				E122DA282A8A19DF006D1E7B /* Blake2 in Frameworks */,
 				042DE6D42C19A050009CAC04 /* Starscream in Frameworks */,
 				1876EE882A49352400C53352 /* GRPC in Frameworks */,
+				79A190222C522B590016C0E0 /* Kingfisher in Frameworks */,
 				04D547F42A612AA7001F1A4B /* SwiftyJSON in Frameworks */,
 				1876EE8A2A49353100C53352 /* SwiftProtobuf in Frameworks */,
 				04D547F62A612AE1001F1A4B /* AlamofireImage in Frameworks */,
@@ -3071,6 +3074,7 @@
 				E122DA262A8A19D2006D1E7B /* Blake2 in Frameworks */,
 				042DE6D22C19A044009CAC04 /* Starscream in Frameworks */,
 				04D547ED2A612914001F1A4B /* FirebaseMessaging in Frameworks */,
+				79A190202C522B500016C0E0 /* Kingfisher in Frameworks */,
 				04D547EA2A6128CA001F1A4B /* SwiftyJSON in Frameworks */,
 				04815BE12A41DB410006A906 /* GRPC in Frameworks */,
 				04D547F02A612935001F1A4B /* AlamofireImage in Frameworks */,
@@ -4541,6 +4545,7 @@
 				042DE6D32C19A050009CAC04 /* Starscream */,
 				042DE6DA2C19A109009CAC04 /* WalletConnect */,
 				042DE6DC2C19A109009CAC04 /* WalletConnectPairing */,
+				79A190212C522B590016C0E0 /* Kingfisher */,
 			);
 			productName = Cosmostation;
 			productReference = 18FFB7D5281AF533004E65BB /* CosmostationDev.app */;
@@ -4580,6 +4585,7 @@
 				042DE6D12C19A044009CAC04 /* Starscream */,
 				042DE6D62C19A0FA009CAC04 /* WalletConnect */,
 				042DE6D82C19A0FA009CAC04 /* WalletConnectPairing */,
+				79A1901F2C522B500016C0E0 /* Kingfisher */,
 			);
 			productName = Cosmostation;
 			productReference = E1945E24222E7C0600A1436F /* Cosmostation.app */;
@@ -4658,6 +4664,7 @@
 				049C02D22C16D6D300A71604 /* XCRemoteSwiftPackageReference "web3swift" */,
 				042DE6CC2C199FF3009CAC04 /* XCRemoteSwiftPackageReference "Starscream" */,
 				042DE6D52C19A0FA009CAC04 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */,
+				79A1901E2C522B500016C0E0 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = E1945E25222E7C0600A1436F /* Products */;
 			projectDirPath = "";
@@ -7258,6 +7265,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		79A1901E2C522B500016C0E0 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 		E122DA1F2A8A18FB006D1E7B /* XCRemoteSwiftPackageReference "ed25519swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pebble8888/ed25519swift";
@@ -7416,6 +7431,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04815BDC2A41DB120006A906 /* XCRemoteSwiftPackageReference "swift-protobuf" */;
 			productName = SwiftProtobuf;
+		};
+		79A1901F2C522B500016C0E0 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79A1901E2C522B500016C0E0 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		79A190212C522B590016C0E0 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79A1901E2C522B500016C0E0 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 		E122DA202A8A18FB006D1E7B /* ed25519swift */ = {
 			isa = XCSwiftPackageProductDependency;
