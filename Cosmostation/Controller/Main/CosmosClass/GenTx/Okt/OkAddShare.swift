@@ -10,7 +10,7 @@ import UIKit
 import Lottie
 import SwiftyJSON
 import Alamofire
-import AlamofireImage
+import Kingfisher
 
 class OkAddShare: BaseVC {
     
@@ -112,7 +112,7 @@ class OkAddShare: BaseVC {
     }
     
     func onUpdateFeeView() {
-        feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
+        feeSelectImg.kf.setImage(with: ChainOktEVM.assetImg(stakeDenom), placeholder: UIImage(named: "tokenDefault"))
         feeSelectLabel.text = stakeDenom.uppercased()
         
         let existCnt = oktFetcher.oktDeposits["validator_address"].arrayValue.count

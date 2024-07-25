@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AlamofireImage
+import Kingfisher
 
 class AssetCosmosClassCell: UITableViewCell {
     
@@ -54,7 +54,7 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        coinImg.af.cancelImageRequest()
+        coinImg.kf.cancelDownloadTask()
         amountLabel.text = ""
         valueCurrencyLabel.text = ""
         valueLabel.text = ""
@@ -77,7 +77,7 @@ class AssetCosmosClassCell: UITableViewCell {
                let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
                 let value = cosmosFetcher.denomValue(stakeDenom)
                 
-                coinImg.af.setImage(withURL: msAsset.assetImg())
+                coinImg.kf.setImage(with: msAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
                 symbolLabel.text = msAsset.symbol?.uppercased()
                 
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
@@ -154,8 +154,8 @@ class AssetCosmosClassCell: UITableViewCell {
             stakingTitle.text = "Deposited"
             unstakingTitle.text = "Withdrawing"
             
-            let value = oktChain.allValue()
-            coinImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
+            let value = oktFetcher.allCoinValue()
+            coinImg.kf.setImage(with: ChainOktEVM.assetImg(stakeDenom), placeholder: UIImage(named: "tokenDefault"))
             symbolLabel.text = stakeDenom.uppercased()
             
             WDP.dpPrice(OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
@@ -198,7 +198,7 @@ class AssetCosmosClassCell: UITableViewCell {
             stakingTitle.text = "Vault Deposited"
             if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
                 let value = neutronFetcher.denomValue(stakeDenom)
-                coinImg.af.setImage(withURL: msAsset.assetImg())
+                coinImg.kf.setImage(with: msAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
                 symbolLabel.text = msAsset.symbol?.uppercased()
                 
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)

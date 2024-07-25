@@ -10,6 +10,7 @@ import UIKit
 import Lottie
 import SwiftyJSON
 import SwiftProtobuf
+import Kingfisher
 
 class NftTransfer: BaseVC {
     
@@ -120,7 +121,7 @@ class NftTransfer: BaseVC {
     
     func onInitNft() {
         if let url = toSendNFT.tokens[0].tokenDetails["url"].string {
-            toSendNftImage?.af.setImage(withURL: URL(string: url)!)
+            toSendNftImage?.kf.setImage(with: URL(string: url)!, placeholder: UIImage(named: "imgNftPlaceHolder"))
         }
         toSendNftName.text = "#" + toSendNFT.tokens[0].tokenId
         toSendNftCollectionName.text = toSendNFT.info["name"].string

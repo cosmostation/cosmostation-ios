@@ -9,7 +9,6 @@
 import UIKit
 import Lottie
 import Alamofire
-import AlamofireImage
 import SwiftyJSON
 
 class CosmosProposalsVC: BaseVC {

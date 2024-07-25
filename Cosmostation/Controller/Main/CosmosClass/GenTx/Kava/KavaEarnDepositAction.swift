@@ -9,6 +9,7 @@
 import UIKit
 import Lottie
 import SwiftProtobuf
+import Kingfisher
 
 class KavaEarnDepositAction: BaseVC {
     
@@ -114,7 +115,7 @@ class KavaEarnDepositAction: BaseVC {
     
     func onUpdateValidatorView() {
         monikerImg.image = UIImage(named: "validatorDefault")
-        monikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
+        monikerImg.kf.setImage(with: selectedChain.monikerImg(toValidator!.operatorAddress), placeholder: UIImage(named: "validatorDefault"))
         monikerLabel.text = toValidator!.description_p.moniker
         if (toValidator!.jailed) {
             jailedTag.isHidden = false

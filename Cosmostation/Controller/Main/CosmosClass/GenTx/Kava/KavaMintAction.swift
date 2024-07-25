@@ -9,6 +9,7 @@
 import UIKit
 import Lottie
 import SwiftProtobuf
+import Kingfisher
 
 class KavaMintAction: BaseVC {
     
@@ -86,7 +87,7 @@ class KavaMintAction: BaseVC {
         
         if (mintActionType == .Deposit) {
             toMintSymbolLabel.text = collateralMsAsset.symbol
-            toMintAssetImg.af.setImage(withURL: collateralMsAsset.assetImg())
+            toMintAssetImg.kf.setImage(with: collateralMsAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
             let balanceAmount = kavaFetcher.balanceAmount(collateralParam.denom)
             if (txFee.amount[0].denom == collateralParam.denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
@@ -96,13 +97,13 @@ class KavaMintAction: BaseVC {
             
         } else if (mintActionType == .Withdraw) {
             toMintSymbolLabel.text = collateralMsAsset.symbol
-            toMintAssetImg.af.setImage(withURL: collateralMsAsset.assetImg())
+            toMintAssetImg.kf.setImage(with: collateralMsAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
             collateralAvailableAmount = myCdp.collateral.getAmount()
             
             
         } else if (mintActionType == .DrawDebt) {
             toMintSymbolLabel.text = principalMsAsset.symbol
-            toMintAssetImg.af.setImage(withURL: principalMsAsset.assetImg())
+            toMintAssetImg.kf.setImage(with: principalMsAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
             let padding = NSDecimalNumber(string: "0.95")
             let collateralValue = myCdp.collateralValue.getAmount()
             let ltvAmount = collateralValue.dividing(by: collateralParam.getLiquidationRatioAmount())
@@ -114,7 +115,7 @@ class KavaMintAction: BaseVC {
             
         } else if (mintActionType == .Repay) {
             toMintSymbolLabel.text = principalMsAsset.symbol
-            toMintAssetImg.af.setImage(withURL: principalMsAsset.assetImg())
+            toMintAssetImg.kf.setImage(with: principalMsAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
             principalAvailableAmount = kavaFetcher.balanceAmount("usdx")
         }
         

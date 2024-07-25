@@ -10,7 +10,7 @@ import UIKit
 import Lottie
 import SwiftyJSON
 import Alamofire
-import AlamofireImage
+import Kingfisher
 import web3swift
 
 class LegacyTransfer: BaseVC {
@@ -76,7 +76,7 @@ class LegacyTransfer: BaseVC {
            let oktFetcher = oktChain.getOktfetcher() {
             tokenInfo = oktFetcher.oktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
             let original_symbol = tokenInfo["original_symbol"].stringValue
-            toSendAssetImg.af.setImage(withURL: ChainOktEVM.assetImg(original_symbol))
+            toSendAssetImg.kf.setImage(with: ChainOktEVM.assetImg(original_symbol), placeholder: UIImage(named: "tokenDefault"))
             toSendSymbolLabel.text = original_symbol.uppercased()
             
             let available = oktFetcher.oktBalanceAmount(toSendDenom)
@@ -206,7 +206,7 @@ class LegacyTransfer: BaseVC {
     
     func onUpdateFeeView() {
         if (selectedChain.name == "OKT") {
-            feeSelectImg.af.setImage(withURL: ChainOktEVM.assetImg(stakeDenom))
+            feeSelectImg.kf.setImage(with: ChainOktEVM.assetImg(stakeDenom), placeholder: UIImage(named: "tokenDefault"))
             feeSelectLabel.text = stakeDenom.uppercased()
             
             let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)

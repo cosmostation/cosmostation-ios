@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AlamofireImage
+import Kingfisher
 import SwiftyJSON
 
 class SelectOktValidatorCell: UITableViewCell {
@@ -25,7 +25,7 @@ class SelectOktValidatorCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        logoImg.af.cancelImageRequest()
+        logoImg.kf.cancelDownloadTask()
         logoImg.image = UIImage(named: "validatorDefault")
         inactiveTag.isHidden = true
         jailedTag.isHidden = true
@@ -34,7 +34,7 @@ class SelectOktValidatorCell: UITableViewCell {
     
 
     func onBindSelectValidator( _ chain: BaseChain, _ validatorInfo: JSON, _ selectedList: [JSON]) {
-        logoImg.af.setImage(withURL: chain.monikerImg(validatorInfo["operator_address"].stringValue))
+        logoImg.kf.setImage(with: chain.monikerImg(validatorInfo["operator_address"].stringValue), placeholder: UIImage(named: "validatorDefault"))
         nameLabel.text = validatorInfo["description"]["moniker"].stringValue
         
         if (validatorInfo["jailed"].boolValue) {

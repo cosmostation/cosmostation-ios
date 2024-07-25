@@ -9,6 +9,7 @@
 import UIKit
 import Lottie
 import SwiftProtobuf
+import Kingfisher
 
 class KavaSwapAction: BaseVC {
     
@@ -101,13 +102,13 @@ class KavaSwapAction: BaseVC {
             withdrawCard.isHidden = true
             
             coin1MsAsset = BaseData.instance.getAsset(selectedChain.apiName, swapPool.coins[0].denom)
-            depositCoin1Img.af.setImage(withURL: coin1MsAsset.assetImg())
+            depositCoin1Img.kf.setImage(with: coin1MsAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
             depositCoin1Symbol.text = coin1MsAsset.symbol
             WDP.dpCoin(coin1MsAsset, NSDecimalNumber.zero, nil, depositCoin1DenomLabel, depositCoin1AmountLabel, coin1MsAsset.decimals)
             WDP.dpValue(NSDecimalNumber.zero, depositCoin1CurrencyLabel, depositCoin1ValueLabel)
             
             coin2MsAsset = BaseData.instance.getAsset(selectedChain.apiName, swapPool.coins[1].denom)
-            depositCoin2Img.af.setImage(withURL: coin2MsAsset.assetImg())
+            depositCoin2Img.kf.setImage(with: coin2MsAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
             depositCoin2Symbol.text = coin2MsAsset.symbol
             WDP.dpCoin(coin2MsAsset, NSDecimalNumber.zero, nil, depositCoin2DenomLabel, depositCoin2AmountLabel, coin2MsAsset.decimals)
             WDP.dpValue(NSDecimalNumber.zero, depositCoin2CurrencyLabel, depositCoin2ValueLabel)

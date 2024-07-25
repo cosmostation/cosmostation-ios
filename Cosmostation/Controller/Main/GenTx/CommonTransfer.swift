@@ -13,6 +13,7 @@ import web3swift
 import Web3Core
 import BigInt
 import SwiftProtobuf
+import Kingfisher
 
 
 class CommonTransfer: BaseVC {
@@ -218,7 +219,7 @@ class CommonTransfer: BaseVC {
     
     func onInitView() {
         if (sendType == .Only_Cosmos_Coin) {
-            titleCoinImg.af.setImage(withURL: toSendMsAsset.assetImg())
+            titleCoinImg.kf.setImage(with: toSendMsAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
             decimal = toSendMsAsset!.decimals
             toSendSymbol = toSendMsAsset!.symbol
             availableAmount = fromCosmosFetcher.balanceAmount(toSendDenom)
@@ -228,7 +229,7 @@ class CommonTransfer: BaseVC {
             }
             
         } else if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20) {
-            titleCoinImg.af.setImage(withURL: toSendMsToken.assetImg())
+            titleCoinImg.kf.setImage(with: toSendMsToken.assetImg(), placeholder: UIImage(named: "tokenDefault"))
             decimal = toSendMsToken!.decimals
             toSendSymbol = toSendMsToken!.symbol
             availableAmount = toSendMsToken!.getAmount()
@@ -248,7 +249,7 @@ class CommonTransfer: BaseVC {
                 memoCardView.isHidden = true
                 
             } else if (txStyle == .COSMOS_STYLE) {
-                titleCoinImg.af.setImage(withURL: toSendMsAsset.assetImg())
+                titleCoinImg.kf.setImage(with: toSendMsAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
                 decimal = toSendMsAsset!.decimals
                 toSendSymbol = toSendMsAsset!.symbol
                 availableAmount = fromCosmosFetcher.balanceAmount(toSendDenom)
