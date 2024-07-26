@@ -68,3 +68,7 @@ Podfile.lock
 # Carthage/Checkouts
 
 Carthage/
+
+
+# macOS
+.DS_Store
