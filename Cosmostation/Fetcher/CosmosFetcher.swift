@@ -165,6 +165,15 @@ class CosmosFetcher {
         return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(delegationValueSum(usd))
             .adding(unbondingValueSum(usd)).adding(rewardValueSum(usd)).adding(commissionValueSum(usd))
     }
+    
+    func valueCoinCnt() -> Int {
+        return cosmosBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0
+    }
+    
+    func valueTokenCnt() -> Int {
+        return mintscanCw20Tokens.filter {  $0.getAmount() != NSDecimalNumber.zero }.count
+    }
+
 }
 
 
@@ -190,15 +199,6 @@ extension CosmosFetcher {
         }
         return result
     }
-    
-    func valueCoinCnt() -> Int {
-        return cosmosBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0
-    }
-    
-    func valueTokenCnt() -> Int {
-        return mintscanCw20Tokens.filter {  $0.getAmount() != NSDecimalNumber.zero }.count
-    }
-    
     
     func balanceAmount(_ denom: String) -> NSDecimalNumber {
         return NSDecimalNumber(string: cosmosBalances?.filter { $0.denom == denom }.first?.amount ?? "0")

@@ -21,6 +21,12 @@ class OktFetcher: CosmosFetcher {
     var oktValidators = Array<JSON>()
     
     override func fetchCosmosBalances() async -> Bool {
+        cosmosBalances = [Cosmos_Base_V1beta1_Coin]()
+        if let _ = try? await fetchAuth(),
+           let balance = try? await fetchBalance() {
+            self.cosmosBalances = balance
+        }
+        
         oktAccountInfo = JSON()
         
         if let accountInfo = try? await fetchAccountInfo(chain.bechAddress!) {
@@ -29,20 +35,26 @@ class OktFetcher: CosmosFetcher {
         return true
     }
     
+    override func valueCoinCnt() -> Int {
+        return cosmosBalances?.count ?? 0
+    }
+
     override func fetchCosmosData(_ id: Int64) async -> Bool {
         oktNodeInfo = JSON()
         oktAccountInfo = JSON()
         oktDeposits = JSON()
         oktWithdaws = JSON()
         oktTokens.removeAll()
-        
+
         do {
             if let nodeInfo = try await fetchNodeInfo(),
+               let balance = try await fetchBalance(),
                let accountInfo = try await fetchAccountInfo(chain.bechAddress!),
                let okDeposit = try await fetchOktDeposited(chain.bechAddress!),
                let okWithdraw = try await fetchOktWithdraw(chain.bechAddress!),
                let okTokens = try await fetchOktTokens() {
                 self.oktNodeInfo = nodeInfo
+                self.cosmosBalances = balance
                 self.oktAccountInfo = accountInfo
                 self.oktDeposits = okDeposit
                 self.oktWithdaws = okWithdraw
