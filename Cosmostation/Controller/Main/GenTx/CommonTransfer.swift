@@ -105,6 +105,12 @@ class CommonTransfer: BaseVC {
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
         loadingView.play()
+        view.isUserInteractionEnabled = false
+        
+        toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
+        toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
+        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
+        feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         
         Task {
             if (fromChain.supportCosmos) {
@@ -135,10 +141,7 @@ class CommonTransfer: BaseVC {
                 self.onInitView()                        // set selected asset display symbol, sendable amount, display decimal
                 self.onInitToChainsInfo()                // set recipientable chains for IBC tx
                 
-                toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
-                toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
-                memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
-                feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
+                view.isUserInteractionEnabled = true
             }
         }
     }
