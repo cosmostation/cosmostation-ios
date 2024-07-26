@@ -106,12 +106,6 @@ class CommonTransfer: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
-        toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
-        memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
-        feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
-        
-        
         Task {
             if (fromChain.supportCosmos) {
                 fromCosmosFetcher = fromChain.getCosmosfetcher()
@@ -131,13 +125,20 @@ class CommonTransfer: BaseVC {
                 }
             }
             
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                
                 self.loadingView.isHidden = true
                 self.onInitToChain()                     // set init toChain UI
                 self.onInitTxStyle()                     // init Tx style by to send denom stye. CosmosEVM_Coin is only changble tx style
                 self.onInitFee()                         // set init fee for set send available
                 self.onInitView()                        // set selected asset display symbol, sendable amount, display decimal
                 self.onInitToChainsInfo()                // set recipientable chains for IBC tx
+                
+                toAddressCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToAddress)))
+                toSendAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
+                memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
+                feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
             }
         }
     }
