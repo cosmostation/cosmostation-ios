@@ -215,34 +215,30 @@ public class BaseAccount {
     
     func updateAllValue() {
         getDpChains().forEach { chain in
-            
             if let chain = chain as? ChainOktEVM {
-                guard let oktFetcher = chain.getOktfetcher() else { return }
-                chain.allCoinValue = oktFetcher.allCoinValue()
-                chain.allCoinUSDValue = oktFetcher.allCoinValue(true)
-                chain.allTokenValue = oktFetcher.allTokenValue()
-                chain.allTokenUSDValue = oktFetcher.allTokenValue(true)
-                
-            } else {
-                if let cosmosFetcher = chain.getCosmosfetcher() {
-                    chain.allCoinValue = cosmosFetcher.allCoinValue()
-                    chain.allCoinUSDValue = cosmosFetcher.allCoinValue(true)
-                    chain.allTokenValue = cosmosFetcher.allTokenValue()
-                    chain.allTokenUSDValue = cosmosFetcher.allTokenValue(true)
-                    
-                } else if let evmFetcher = chain.getEvmfetcher() {
-                    chain.allCoinValue = evmFetcher.allCoinValue()
-                    chain.allCoinUSDValue = evmFetcher.allCoinValue(true)
+                if let oktFetcher = chain.getOktfetcher(), let evmFetcher = chain.getEvmfetcher() {
+                    chain.allCoinValue = oktFetcher.allCoinValue()
+                    chain.allCoinUSDValue = oktFetcher.allCoinValue(true)
                     chain.allTokenValue = evmFetcher.allTokenValue()
                     chain.allTokenUSDValue = evmFetcher.allTokenValue(true)
                 }
+                
+            } else if let cosmosFetcher = chain.getCosmosfetcher() {
+                chain.allCoinValue = cosmosFetcher.allCoinValue()
+                chain.allCoinUSDValue = cosmosFetcher.allCoinValue(true)
+                chain.allTokenValue = cosmosFetcher.allTokenValue()
+                chain.allTokenUSDValue = cosmosFetcher.allTokenValue(true)
+                
+            } else if let evmFetcher = chain.getEvmfetcher() {
+                chain.allCoinValue = evmFetcher.allCoinValue()
+                chain.allCoinUSDValue = evmFetcher.allCoinValue(true)
+                chain.allTokenValue = evmFetcher.allTokenValue()
+                chain.allTokenUSDValue = evmFetcher.allTokenValue(true)
+                
             }
         }
     }
 }
-
-
-
 
 struct AccountKeyType {
     var pubkeyType: PubKeyType!
