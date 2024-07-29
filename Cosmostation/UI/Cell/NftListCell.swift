@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftyJSON
-import Kingfisher
+import SDWebImage
 
 class NftListCell: UICollectionViewCell {
 
@@ -23,13 +23,14 @@ class NftListCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        nftImageView.sd_cancelCurrentImageLoad()
         nftImageView.image = UIImage(named: "imgNftPlaceHolder")
         titleLabel.text = ""
     }
     
     func onBindNft(_ info: JSON, _ nft: Cw721TokenModel) {
         if let url = nft.tokenDetails["url"].string {
-            nftImageView?.kf.setImage(with: URL(string: url)!, placeholder: UIImage(named: "imgNftPlaceHolder"))
+            nftImageView?.sd_setImage(with: URL(string: url)!, placeholderImage: UIImage(named: "imgNftPlaceHolder"))
         }
         titleLabel.text = info["name"].stringValue + " #" + nft.tokenId
         titleLabel.adjustsFontSizeToFitWidth = true

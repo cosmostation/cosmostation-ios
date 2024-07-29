@@ -9,7 +9,7 @@
 import UIKit
 import Lottie
 import SwiftProtobuf
-import Kingfisher
+import SDWebImage
 
 class CosmosDelegate: BaseVC {
     
@@ -114,7 +114,7 @@ class CosmosDelegate: BaseVC {
     
     func onUpdateValidatorView() {
         monikerImg.image = UIImage(named: "validatorDefault")
-        monikerImg.kf.setImage(with: selectedChain.monikerImg(toValidator!.operatorAddress), placeholder: UIImage(named: "validatorDefault"))
+        monikerImg.sd_setImage(with: selectedChain.monikerImg(toValidator!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
         monikerLabel.text = toValidator!.description_p.moniker
         if (toValidator!.jailed) {
             jailedTag.isHidden = false

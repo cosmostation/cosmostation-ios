@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 import SwiftyJSON
 
 class KavaEarnListCell: UITableViewCell {
@@ -26,7 +26,7 @@ class KavaEarnListCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        logoImg.kf.cancelDownloadTask()
+        logoImg.sd_cancelCurrentImageLoad()
         logoImg.image = UIImage(named: "validatorDefault")
         jailedTag.isHidden = true
         inactiveTag.isHidden = true
@@ -35,7 +35,7 @@ class KavaEarnListCell: UITableViewCell {
     func onBindEarnView(_ chain: BaseChain, _ deposit: Cosmos_Base_V1beta1_Coin) {
         let valOpAddress = deposit.denom.replacingOccurrences(of: "bkava-", with: "")
         if let validator = chain.getCosmosfetcher()?.cosmosValidators.filter({ $0.operatorAddress == valOpAddress }).first {
-            logoImg.kf.setImage(with: chain.monikerImg(validator.operatorAddress), placeholder: UIImage(named: "validatorDefault"))
+            logoImg.sd_setImage(with: chain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
             nameLabel.text = validator.description_p.moniker
             if (validator.jailed) {
                 jailedTag.isHidden = false

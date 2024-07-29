@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 
 class KavaMintListCell: UITableViewCell {
     
@@ -24,13 +24,13 @@ class KavaMintListCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        marketImg.kf.cancelDownloadTask()
+        marketImg.sd_cancelCurrentImageLoad()
         marketImg.image = nil
     }
     func onBindCdp(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam?) {
         if (collateralParam == nil) { return }
         let url = KAVA_CDP_IMG_URL + collateralParam!.type + ".png"
-        marketImg.kf.setImage(with: URL(string: url)!)
+        marketImg.sd_setImage(with: URL(string: url)!)
         marketTypeLabel.text = collateralParam?.type.uppercased()
         marketPairLabel.text = collateralParam?.spotMarketID.uppercased()
         minCollateralRate.attributedText = WDP.dpAmount(collateralParam!.getDpLiquidationRatio().stringValue, minCollateralRate.font, 2)

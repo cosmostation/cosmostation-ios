@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 import SwiftyJSON
 
 class OktValidatorCell: UITableViewCell {
@@ -25,14 +25,14 @@ class OktValidatorCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        logoImg.kf.cancelDownloadTask()
+        logoImg.sd_cancelCurrentImageLoad()
         logoImg.image = UIImage(named: "validatorDefault")
         inactiveTag.isHidden = true
         jailedTag.isHidden = true
     }
     
     func bindOktValidator( _ chain: BaseChain, _ validator: JSON) {
-        logoImg.kf.setImage(with: chain.monikerImg(validator["operator_address"].stringValue), placeholder: UIImage(named: "validatorDefault"))
+        logoImg.sd_setImage(with: chain.monikerImg(validator["operator_address"].stringValue), placeholderImage: UIImage(named: "validatorDefault"))
         nameLabel.text = validator["description"]["moniker"].stringValue
         
         let vp = validator["delegator_shares"].doubleValue

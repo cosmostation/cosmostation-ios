@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 
 class KavaSwapListCell: UITableViewCell {
     
@@ -34,8 +34,8 @@ class KavaSwapListCell: UITableViewCell {
         
         if let msAsset1 = BaseData.instance.getAsset(baseChain.apiName, coin1.denom),
            let msAsset2 = BaseData.instance.getAsset(baseChain.apiName, coin2.denom){
-            coin1Img?.kf.setImage(with: msAsset1.assetImg(), placeholder: UIImage(named: "tokenDefault"))
-            coin2Img?.kf.setImage(with: msAsset2.assetImg(), placeholder: UIImage(named: "tokenDefault"))
+            coin1Img?.sd_setImage(with: msAsset1.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+            coin2Img?.sd_setImage(with: msAsset2.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
             
             marketNameLabel.text = msAsset1.symbol! + " : " + msAsset2.symbol!
             marketNameLabel.adjustsFontSizeToFitWidth = true

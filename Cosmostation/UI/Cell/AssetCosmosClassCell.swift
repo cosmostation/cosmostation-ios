@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 
 class AssetCosmosClassCell: UITableViewCell {
     
@@ -54,7 +54,7 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        coinImg.kf.cancelDownloadTask()
+        coinImg.sd_cancelCurrentImageLoad()
         amountLabel.text = ""
         valueCurrencyLabel.text = ""
         valueLabel.text = ""
@@ -77,7 +77,7 @@ class AssetCosmosClassCell: UITableViewCell {
                let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
                 let value = cosmosFetcher.denomValue(stakeDenom)
                 
-                coinImg.kf.setImage(with: msAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
+                coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
                 symbolLabel.text = msAsset.symbol?.uppercased()
                 
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
@@ -155,7 +155,7 @@ class AssetCosmosClassCell: UITableViewCell {
             unstakingTitle.text = "Withdrawing"
             
             let value = oktFetcher.allCoinValue()
-            coinImg.kf.setImage(with: ChainOktEVM.assetImg(stakeDenom), placeholder: UIImage(named: "tokenDefault"))
+            coinImg.sd_setImage(with: ChainOktEVM.assetImg(stakeDenom), placeholderImage: UIImage(named: "tokenDefault"))
             symbolLabel.text = stakeDenom.uppercased()
             
             WDP.dpPrice(OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
@@ -198,7 +198,7 @@ class AssetCosmosClassCell: UITableViewCell {
             stakingTitle.text = "Vault Deposited"
             if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
                 let value = neutronFetcher.denomValue(stakeDenom)
-                coinImg.kf.setImage(with: msAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
+                coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
                 symbolLabel.text = msAsset.symbol?.uppercased()
                 
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
