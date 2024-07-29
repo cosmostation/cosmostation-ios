@@ -464,6 +464,13 @@ extension BaseChain {
         return 13
     }
     
+    func getSkipAffiliate() -> String {
+        if let affiliate = BaseData.instance.mintscanChainParams?["cosmos"]["params"]["chainlist_params"]["skipAffiliate"].string {
+            return affiliate
+        }
+        return "50"
+    }
+    
 }
 
 //for utils
