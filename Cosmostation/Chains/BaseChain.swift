@@ -40,6 +40,18 @@ class BaseChain {
     //evm & rpc info
     var supportEvm = false
     var chainIdEvm: String?
+    var chainIdEvmDecimal: String? {
+        guard let hex = chainIdEvm else { return nil }
+        return hex.hexToString()
+    }
+    var chainIdForSwap: String {
+        if (supportCosmos) {
+            return chainIdCosmos!
+        } else if (supportEvm) {
+            return chainIdEvmDecimal!
+        }
+        return ""
+    }
     var evmAddress: String?
     var coinSymbol = ""
     var coinGeckoId = ""
@@ -450,6 +462,13 @@ extension BaseChain {
             return BigUInt(mutiply * 10)
         }
         return 13
+    }
+    
+    func getSkipAffiliate() -> String {
+        if let affiliate = BaseData.instance.mintscanChainParams?["cosmos"]["params"]["chainlist_params"]["skipAffiliate"].string {
+            return affiliate
+        }
+        return "50"
     }
     
 }

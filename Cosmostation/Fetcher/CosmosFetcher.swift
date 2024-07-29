@@ -687,6 +687,20 @@ extension CosmosFetcher {
         }
     }
     
+    func fetchCw20BalanceAmount(_ contractAddress: String) async throws -> NSDecimalNumber? {
+        let query: JSON = ["balance" : ["address" : self.chain.bechAddress!]]
+        let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
+        let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+            $0.address = contractAddress
+            $0.queryData = Data(base64Encoded: queryBase64)!
+        }
+        if let response = try await self.fetchSmartContractState(req) {
+            return NSDecimalNumber(string: response["balance"].string)
+        }
+        return nil
+    }
+    
+    
     func fetchAllCw721() {
         cw721Models.removeAll()
         Task {

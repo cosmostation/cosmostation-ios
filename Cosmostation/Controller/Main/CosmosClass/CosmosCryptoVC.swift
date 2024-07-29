@@ -159,7 +159,7 @@ class CosmosCryptoVC: BaseVC {
     }
 
     @objc func onRequestFetch() {
-        if (selectedChain.fetchState == .Busy) {
+        if (selectedChain.fetchState == FetchState.Busy) {
             refresher.endRefreshing()
         } else {
             DispatchQueue.global().async {
