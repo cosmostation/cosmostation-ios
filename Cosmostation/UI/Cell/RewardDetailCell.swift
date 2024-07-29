@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 
 class RewardDetailCell: UITableViewCell {
     
@@ -26,7 +26,7 @@ class RewardDetailCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        coinImg.kf.cancelDownloadTask()
+        coinImg.sd_cancelCurrentImageLoad()
         coinImg.image = UIImage(named: "tokenDefault")
         amountLabel.text = ""
         valueCurrencyLabel.text = ""

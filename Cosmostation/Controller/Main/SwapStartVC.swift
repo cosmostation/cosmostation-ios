@@ -9,7 +9,7 @@
 import UIKit
 import Lottie
 import Alamofire
-import Kingfisher
+import SDWebImage
 import SwiftyJSON
 import SwiftProtobuf
 
@@ -224,7 +224,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         let inputDenom = inputAssetSelected["denom"].stringValue
 //        print("inputDenom ", inputDenom)
         inputMsAsset = BaseData.instance.getAsset(inputCosmosChain.apiName, inputDenom)!
-        inputAssetImg.kf.setImage(with: inputMsAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
+        inputAssetImg.sd_setImage(with: inputMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         inputAssetLabel.text = inputMsAsset.symbol
         
         let inputBlance = inputCosmosChain.getCosmosfetcher()!.balanceAmount(inputDenom)
@@ -250,7 +250,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         let outputDenom = outputAssetSelected["denom"].stringValue
 //        print("outputDenom ", outputDenom)
         outputMsAsset = BaseData.instance.getAsset(outputCosmosChain.apiName, outputDenom)!
-        outputAssetImg.kf.setImage(with: outputMsAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
+        outputAssetImg.sd_setImage(with: outputMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         outputAssetLabel.text = outputMsAsset.symbol
         
         let outputBalance = outputCosmosChain.getCosmosfetcher()!.balanceAmount(outputDenom)
