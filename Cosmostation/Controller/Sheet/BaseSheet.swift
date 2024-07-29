@@ -24,9 +24,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var targetEvmChain: BaseChain!
     var swapChains = Array<BaseChain>()
     var swapChainsSearch = Array<BaseChain>()
-    var swapAssets = Array<JSON>()
-    var swapAssetsSearch = Array<JSON>()
-    var swapBalance = Array<Cosmos_Base_V1beta1_Coin>()
+    var swapAssets = Array<TargetAsset>()
+    var swapAssetsSearch = Array<TargetAsset>()
     
     var feeDatas = Array<FeeData>()
     var baseFeesDatas = [Cosmos_Base_V1beta1_DecCoin]()
@@ -156,52 +155,13 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectSwapInputAsset) {
             sheetTitle.text = NSLocalizedString("title_select_input_asset", comment: "")
             sheetSearchBar.isHidden = false
-            loadingView.isHidden = false
-            DispatchQueue.global().async { [self] in
-                swapAssets.sort {
-                    if ($0["symbol"] == "ATOM") { return true }
-                    if ($1["symbol"] == "ATOM") { return false }
-                    let value0 = targetChain.getCosmosfetcher()!.balanceValue($0["denom"].stringValue)
-                    let value1 = targetChain.getCosmosfetcher()!.balanceValue($1["denom"].stringValue)
-                    if (value0.compare(value1).rawValue > 0 ) { return true }
-                    if (value0.compare(value1).rawValue < 0 ) { return false }
-                    let amount0 = targetChain.getCosmosfetcher()!.balanceAmount($0["denom"].stringValue)
-                    let amount1 = targetChain.getCosmosfetcher()!.balanceAmount($1["denom"].stringValue)
-                    if (amount0.compare(amount1).rawValue > 0 ) { return true }
-                    if (amount0.compare(amount1).rawValue < 0 ) { return false }
-                    return $0["symbol"].stringValue < $1["symbol"].stringValue
-                }
-                swapAssetsSearch = swapAssets
-                DispatchQueue.main.async(execute: {
-                    self.loadingView.isHidden = true
-                    self.sheetTableView.reloadData()
-                })
-            }
+            swapAssetsSearch = swapAssets
+            
             
         } else if (sheetType == .SelectSwapOutputAsset) {
             sheetTitle.text = NSLocalizedString("title_select_output_asset", comment: "")
             sheetSearchBar.isHidden = false
-            loadingView.isHidden = false
-            DispatchQueue.global().async { [self] in
-                swapAssets.sort {
-                    if ($0["symbol"] == "ATOM") { return true }
-                    if ($1["symbol"] == "ATOM") { return false }
-                    let value0 = targetChain.getCosmosfetcher()!.balanceValue($0["denom"].stringValue)
-                    let value1 = targetChain.getCosmosfetcher()!.balanceValue($1["denom"].stringValue)
-                    if (value0.compare(value1).rawValue > 0 ) { return true }
-                    if (value0.compare(value1).rawValue < 0 ) { return false }
-                    let amount0 = targetChain.getCosmosfetcher()!.balanceAmount($0["denom"].stringValue)
-                    let amount1 = targetChain.getCosmosfetcher()!.balanceAmount($1["denom"].stringValue)
-                    if (amount0.compare(amount1).rawValue > 0 ) { return true }
-                    if (amount0.compare(amount1).rawValue < 0 ) { return false }
-                    return $0["symbol"].stringValue < $1["symbol"].stringValue
-                }
-                swapAssetsSearch = swapAssets
-                DispatchQueue.main.async(execute: {
-                    self.loadingView.isHidden = true
-                    self.sheetTableView.reloadData()
-                })
-            }
+            swapAssetsSearch = swapAssets
             
         } else if (sheetType == .SelectSwapSlippage) {
             sheetTitle.text = NSLocalizedString("title_select_slippage", comment: "")
@@ -287,8 +247,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             }
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
-            swapAssetsSearch = searchText.isEmpty ? swapAssets : swapAssets.filter { json in
-                return json["symbol"].stringValue.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            swapAssetsSearch = searchText.isEmpty ? swapAssets : swapAssets.filter { asset in
+                return (asset.symbol.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil ||
+                        asset.denom.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil)
             }
         } else if (sheetType == .SelectValidator) {
             validatorsSearch = searchText.isEmpty ? validators : validators.filter { validator in
@@ -477,7 +438,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset)  {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapAssetCell") as? SelectSwapAssetCell
-            cell?.onBindAsset(targetChain, swapAssetsSearch[indexPath.row], swapBalance)
+            cell?.onBindAsset(targetChain, swapAssetsSearch[indexPath.row])
             return cell!
             
         } else if (sheetType == .SelectSwapSlippage) {
@@ -582,11 +543,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
-            let result: [String : Any] = ["index" : indexPath.row, "chainId" : swapChainsSearch[indexPath.row].chainIdCosmos]
+            let result: [String : Any] = ["index" : indexPath.row, "chainName" : swapChainsSearch[indexPath.row].name]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset)  {
-            let result: [String : Any] = ["index" : indexPath.row, "denom" : swapAssetsSearch[indexPath.row]["denom"].stringValue]
+            let result: [String : Any] = ["index" : indexPath.row, "denom" : swapAssetsSearch[indexPath.row].denom]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectValidator) {

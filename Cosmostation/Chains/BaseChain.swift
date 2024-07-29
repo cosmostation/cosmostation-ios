@@ -40,6 +40,18 @@ class BaseChain {
     //evm & rpc info
     var supportEvm = false
     var chainIdEvm: String?
+    var chainIdEvmDecimal: String? {
+        guard let hex = chainIdEvm else { return nil }
+        return hex.hexToString()
+    }
+    var chainIdForSwap: String {
+        if (supportCosmos) {
+            return chainIdCosmos!
+        } else if (supportEvm) {
+            return chainIdEvmDecimal!
+        }
+        return ""
+    }
     var evmAddress: String?
     var coinSymbol = ""
     var coinGeckoId = ""

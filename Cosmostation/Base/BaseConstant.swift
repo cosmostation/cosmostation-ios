@@ -40,6 +40,7 @@ let KEY_CHAIN_LCD_ENDPOINT              = "KEY_CHAIN_LCD_ENDPOINT"
 let KEY_CHAIN_EVM_RPC_ENDPOINT          = "KEY_CHAIN_EVM_RPC_ENDPOINT"
 let KEY_SWAP_WARN                       = "KEY_SWAP_WARN"
 let KEY_SWAP_INFO_TIME                  = "KEY_SWAP_INFO_TIME"
+let KEY_SWAP_INFO_TIME2                 = "KEY_SWAP_INFO_TIME2"
 let KEY_SWAP_USER_SET                   = "KEY_SWAP_USER_SET"
 let KEY_SKIP_CHAIN_INFO                 = "KEY_SKIP_CHAIN_INFO"
 let KEY_SKIP_ASSET_INFO                 = "KEY_SKIP_ASSET_INFO"
@@ -51,6 +52,7 @@ let MINTSCAN_API_URL                    = "https://front.api.mintscan.io/";
 let CSS_URL                             = "https://api-wallet.cosmostation.io/";
 let NFT_INFURA                          = "https://ipfs.infura.io/ipfs/";
 let SKIP_API_URL                        = "https://api.skip.money/";
+let SQUID_API_URL                       = "https://api.squidrouter.com/v1/";
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
 let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTuuCn";

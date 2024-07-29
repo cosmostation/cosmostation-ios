@@ -26,8 +26,8 @@ class EvmFetcher {
     func fetchEvmBalances() async -> Bool {
         evmBalances = NSDecimalNumber.zero
         if let balanceJson = try? await fetchEvmBalance(chain.evmAddress!),
-           let balance = balanceJson?["result"].stringValue.hexToNSDecimal {
-            self.evmBalances = balance()
+           let balance = balanceJson?["result"].stringValue.hexToNSDecimal() {
+            self.evmBalances = balance
         }
         return true
     }
@@ -41,8 +41,8 @@ class EvmFetcher {
             if let erc20Tokens = erc20Tokens {
                 self.mintscanErc20Tokens = erc20Tokens
             }
-            if let balance = balanceJson?["result"].stringValue.hexToNSDecimal {
-                self.evmBalances = balance()
+            if let balance = balanceJson?["result"].stringValue.hexToNSDecimal() {
+                self.evmBalances = balance
             }
             
             let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)
@@ -140,10 +140,20 @@ extension EvmFetcher {
         let param: Parameters = ["method": "eth_call", "id" : 1, "jsonrpc" : "2.0",
                                  "params": [["data": data, "to" : tokenInfo.address], "latest"]]
         if let erc20BalanceJson = try? await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value {
-            let erc20Balance = erc20BalanceJson["result"].stringValue.hexToNSDecimal
+            let erc20Balance = erc20BalanceJson["result"].stringValue.hexToNSDecimal()
 //            print("fetchErc20Balance ", tokenInfo.symbol, "  ", erc20Balance().stringValue)
-            tokenInfo.setAmount(erc20Balance().stringValue)
+            tokenInfo.setAmount(erc20Balance.stringValue)
         }
+    }
+    
+    func fetchErc20BalanceAmount(_ contractAddress: String) async throws -> NSDecimalNumber? {
+        let data = "0x70a08231000000000000000000000000" + self.chain.evmAddress!.stripHexPrefix()
+        let param: Parameters = ["method": "eth_call", "id" : 1, "jsonrpc" : "2.0",
+                                 "params": [["data": data, "to" : contractAddress], "latest"]]
+        if let erc20BalanceJson = try? await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value {
+            return erc20BalanceJson["result"].stringValue.hexToNSDecimal()
+        }
+        return nil
     }
     
     func fetchEvmTxReceipt(_ txHash: String) async throws -> JSON? {

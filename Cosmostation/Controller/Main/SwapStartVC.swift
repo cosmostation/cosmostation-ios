@@ -66,19 +66,40 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var swapBtn: BaseButton!
     
-    var allSwapableChains = Array<BaseChain>()
+    var allChains = Array<BaseChain>()
     var skipChains = Array<BaseChain>()               //inapp support chain for skip
+    var skipInputAssets = [JSON]()
+    var skipOutputAssets = [JSON]()
+    
+    var squidChains = Array<BaseChain>()               //inapp support chain for squid
+    var squidInputAssets = [JSON]()
+    var squidOutputAssets = [JSON]()
+    
+    var targetChains = Array<BaseChain>()
+    var targetInputAssets = [TargetAsset]()
+    var targetOutputAssets = [TargetAsset]()
+    
+    var inputChain: BaseChain!
+    var inputAsset: TargetAsset!
+    
+    var outputChain: BaseChain!
+    var outputAsset: TargetAsset!
+    
+    
+    
+    
+    
+    
     var skipAssets: JSON?
     var skipSlippage = "1"
     
-    var inputCosmosChain: BaseChain!
-    var inputAssetList = Array<JSON>()
-    var inputAssetSelected: JSON!
+//    var inputAssetList = Array<JSON>()
+//    var inputAssetSelected: JSON!
     var inputMsAsset: MintscanAsset!
     
-    var outputCosmosChain: BaseChain!
-    var outputAssetList = Array<JSON>()
-    var outputAssetSelected: JSON!
+    
+//    var outputAssetList = Array<JSON>()
+//    var outputAssetSelected: JSON!
     var outputMsAsset: MintscanAsset!
     
     var availableAmount = NSDecimalNumber.zero
@@ -105,63 +126,73 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         loadingView.play()
         
         Task {
-            allSwapableChains = await baseAccount.initAllKeys().filter({ $0.isTestnet == false && $0.supportCosmos  && $0.isDefault })
+            allChains = await baseAccount.initAllKeys().filter({ $0.isTestnet == false && $0.isDefault })
             
-            var sChains: JSON?
-            if (BaseData.instance.needSwapInfoUpdate()) {
-                sChains = try? await fetchSkipChains()
-                skipAssets = try? await fetchSkipAssets()
-                
-                if (sChains != nil && skipAssets != nil) {
-                    BaseData.instance.setLastSwapInfoTime()
-                    BaseData.instance.setSkipChainInfo(sChains)
-                    BaseData.instance.setSkipAssetInfo(skipAssets)
+            
+            let skipChainList = try? await self.fetchSkipChains()
+//            print("skipChainList ", skipChainList?["chains"].count)
+            
+            let squidChainList = try? await self.fetchSquidChains()
+//            print("squidChainList ", squidChainList?["chains"].count)
+            
+            
+            skipChainList?["chains"].arrayValue.forEach({ skipChain in
+                if let skipCosmosChain = allChains.filter({ $0.chainIdCosmos == skipChain["chain_id"].stringValue }).first {
+                    skipChains.append(skipCosmosChain)
                 }
-                
-            } else {
-                sChains = BaseData.instance.getSkipChainInfo()
-                skipAssets = BaseData.instance.getSkipAssetInfo()
-            }
-            
-            sChains?["chains"].arrayValue.forEach({ sChain in
-                if let skipChain = allSwapableChains.filter({ $0.chainIdCosmos == sChain["chain_id"].stringValue }).first {
-                    skipChains.append(skipChain)
+                if let skipEvmChain = allChains.filter({ $0.chainIdEvmDecimal == skipChain["chain_id"].stringValue }).first {
+                    skipChains.append(skipEvmChain)
                 }
             })
+//            print("skipChains ", skipChains.count)
             
-            //Remove no supporting denom chain
-            let chainIds = skipChains.map { chain in
-                chain.chainIdCosmos
-            }
-            chainIds.forEach { chainId in
-                if (skipAssets?["chain_to_assets_map"][chainId!]["assets"].arrayValue.count ?? 0 == 0) {
-                    skipChains = skipChains.filter({ $0.chainIdCosmos != chainId })
+            
+            squidChainList?["chains"].arrayValue.forEach({ squidChain in
+                if let squidCosmosChain = allChains.filter({ $0.chainIdCosmos == squidChain["chainId"].stringValue }).first {
+                    squidChains.append(squidCosmosChain)
                 }
-            }
-            
-            
-            //check user last seelcted ui info
-            let lastSwapSet = BaseData.instance.getLastSwapSet()
-            
-            // $0.isDefault 예외처리 확인 카바
-            inputCosmosChain = skipChains.filter({ $0.tag == lastSwapSet[0] }).first ?? skipChains.filter({ $0.tag == "cosmos118" }).first!
-            skipAssets?["chain_to_assets_map"][inputCosmosChain.chainIdCosmos!]["assets"].arrayValue.forEach({ json in
-                if BaseData.instance.getAsset(inputCosmosChain.apiName, json["denom"].stringValue) != nil {
-                    inputAssetList.append(json)
+                if let squidEvmChain = allChains.filter({ $0.chainIdEvmDecimal == squidChain["chainId"].stringValue }).first {
+                    squidChains.append(squidEvmChain)
                 }
             })
-            inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == lastSwapSet[1] }.first ?? inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first!
+//            print("squidChains ", squidChains.count)
             
-            outputCosmosChain = skipChains.filter({ $0.tag == lastSwapSet[2] }).first ?? skipChains.filter({ $0.tag == "neutron118" }).first!
-            skipAssets?["chain_to_assets_map"][outputCosmosChain.chainIdCosmos!]["assets"].arrayValue.forEach({ json in
-                if BaseData.instance.getAsset(outputCosmosChain.apiName, json["denom"].stringValue) != nil {
-                    outputAssetList.append(json)
+            targetChains.append(contentsOf: skipChains)
+            squidChains.forEach { squidChain in
+                if !targetChains.contains(where: { $0.tag == squidChain.tag }) {
+                    targetChains.append(squidChain)
                 }
-            })
-            outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == lastSwapSet[3] }.first ?? outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first!
+            }
+            targetChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                if ($0.tag == "ethereum60") { return true }
+                if ($1.tag == "ethereum60") { return false }
+                if ($0.tag == "osmosis118") { return true }
+                if ($1.tag == "osmosis118") { return false }
+                return $0.name < $1.name
+            }
+            print("targetChains ", targetChains.count)
             
-            _ = await inputCosmosChain.getCosmosfetcher()?.fetchCosmosBalances()
-            _ = await outputCosmosChain.getCosmosfetcher()?.fetchCosmosBalances()
+//            print("skipChains ", skipChains)
+//            print("squidChains ", squidChains)
+//            print("targetChains ", targetChains)
+            
+            inputChain = targetChains[0]
+            outputChain = targetChains[1]
+            
+            try await fetchInputAssetBalances()             // fetching coins balance and vesting
+            try await fetchOutputAssetBalances()            // fetching coins balance and vesting
+            
+            try await fetchInputAssets()
+            try await fetchOutputAssets()
+            
+            inputAsset = targetInputAssets[0]
+            outputAsset = targetOutputAssets[0]
+            
+            try await fetchInputAssetBalance()
+            try await fetchOutputAssetBalance()
+            
             
             DispatchQueue.main.async {
                 self.onInitView()
@@ -206,6 +237,56 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     }
     
     func onReadyToUserInsert() {
+        
+        swapBtn.isEnabled = false
+        toggleBtn.isEnabled = true
+        view.isUserInteractionEnabled = true
+        loadingView.isHidden = true
+        
+        //From UI update
+        fromAddressLabel.text = inputChain.bechAddress ?? inputChain.evmAddress
+        inputChainImg.image = UIImage(named: inputChain.logo1)
+        inputChainLabel.text = inputChain.name.uppercased()
+        if let inputMsAsset = BaseData.instance.getAsset(inputChain.apiName, inputAsset.denom) {
+            inputAssetImg.sd_setImage(with: inputMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+            inputAssetLabel.text = inputMsAsset.symbol
+        } else {
+            inputAssetImg.sd_setImage(with: inputAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+            inputAssetLabel.text = inputAsset.symbol
+        }
+        
+        //TODO Check Fee!!
+        print("inputAsset balance", inputAsset.balance)
+        let dpInputBalance = inputAsset.balance.multiplying(byPowerOf10: -inputAsset.decimals!)
+        inputAvailableLabel?.attributedText = WDP.dpAmount(dpInputBalance.stringValue, inputAvailableLabel!.font, inputAsset.decimals)
+        
+        
+        //To UI update
+        toAddressLabel.text = outputChain.bechAddress ?? outputChain.evmAddress
+        outputChainImg.image = UIImage(named: outputChain.logo1)
+        outputChainLabel.text = outputChain.name.uppercased()
+        if let outputMsAsset = BaseData.instance.getAsset(outputChain.apiName, outputAsset!.denom) {
+            outputAssetImg.sd_setImage(with: outputMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+            outputAssetLabel.text = outputMsAsset.symbol
+        } else {
+            outputAssetImg.sd_setImage(with: outputAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+            outputAssetLabel.text = outputAsset.symbol
+        }
+        
+        print("outputAsset balance", outputAsset.balance)
+        let dpOutputBalance = outputAsset.balance.multiplying(byPowerOf10: -outputAsset.decimals!)
+        outputBalanceLabel?.attributedText = WDP.dpAmount(dpOutputBalance.stringValue, outputBalanceLabel!.font, outputAsset.decimals)
+        
+        inputAmountTextField.text = ""
+        inputValueCurrency.text = ""
+        inputValueLabel.text = ""
+        outputAmountLabel.text = ""
+        outputValueCurrency.text = ""
+        outputValueLabel.text = ""
+        errorCardView.isHidden = true
+        descriptionCardView.isHidden = true
+        
+        /*
         toMsg = nil
         swapBtn.isEnabled = false
         toggleBtn.isEnabled = true
@@ -216,18 +297,18 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
 //        print("txFee ", txFee)
         
         //From UI update
-        fromAddressLabel.text = inputCosmosChain.bechAddress
-        inputChainImg.image = UIImage(named: inputCosmosChain.logo1)
-        inputChainLabel.text = inputCosmosChain.name.uppercased()
-//        print("fromAddress ", inputCosmosChain.address)
+        fromAddressLabel.text = inputChain.bechAddress
+        inputChainImg.image = UIImage(named: inputChain.logo1)
+        inputChainLabel.text = inputChain.name.uppercased()
+//        print("fromAddress ", inputChain.address)
         
         let inputDenom = inputAssetSelected["denom"].stringValue
 //        print("inputDenom ", inputDenom)
-        inputMsAsset = BaseData.instance.getAsset(inputCosmosChain.apiName, inputDenom)!
-        inputAssetImg.sd_setImage(with: inputMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+        inputMsAsset = BaseData.instance.getAsset(inputChain.apiName, inputDenom)!
+        inputAssetImg.af.setImage(withURL: inputMsAsset.assetImg())
         inputAssetLabel.text = inputMsAsset.symbol
         
-        let inputBlance = inputCosmosChain.getCosmosfetcher()!.balanceAmount(inputDenom)
+        let inputBlance = inputChain.getCosmosfetcher()!.balanceAmount(inputDenom)
         if (txFee.amount[0].denom == inputDenom) {
             let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
             if (feeAmount.compare(inputBlance).rawValue >= 0) {
@@ -242,18 +323,18 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         
         
         //To UI update
-        toAddressLabel.text = outputCosmosChain.bechAddress
-        outputChainImg.image = UIImage(named: outputCosmosChain.logo1)
-        outputChainLabel.text = outputCosmosChain.name.uppercased()
-//        print("toAddress ", outputCosmosChain.address)
+        toAddressLabel.text = outputChain.bechAddress
+        outputChainImg.image = UIImage(named: outputChain.logo1)
+        outputChainLabel.text = outputChain.name.uppercased()
+//        print("toAddress ", outputChain.address)
         
         let outputDenom = outputAssetSelected["denom"].stringValue
 //        print("outputDenom ", outputDenom)
-        outputMsAsset = BaseData.instance.getAsset(outputCosmosChain.apiName, outputDenom)!
-        outputAssetImg.sd_setImage(with: outputMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+        outputMsAsset = BaseData.instance.getAsset(outputChain.apiName, outputDenom)!
+        outputAssetImg.af.setImage(withURL: outputMsAsset.assetImg())
         outputAssetLabel.text = outputMsAsset.symbol
         
-        let outputBalance = outputCosmosChain.getCosmosfetcher()!.balanceAmount(outputDenom)
+        let outputBalance = outputChain.getCosmosfetcher()!.balanceAmount(outputDenom)
         WDP.dpCoin(outputMsAsset, outputBalance, nil, nil, outputBalanceLabel, outputMsAsset.decimals)
         
         inputAmountTextField.text = ""
@@ -266,13 +347,14 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         descriptionCardView.isHidden = true
         
         //save last user ui
-        BaseData.instance.setLastSwapSet([inputCosmosChain.tag, inputAssetSelected["denom"].stringValue, outputCosmosChain.tag, outputAssetSelected["denom"].stringValue])
+        BaseData.instance.setLastSwapSet([inputChain.tag, inputAssetSelected["denom"].stringValue, outputChain.tag, outputAssetSelected["denom"].stringValue])
+        */
     }
     
     @objc func onInputChain() {
         dismissKeyboard()
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.swapChains = skipChains
+        baseSheet.swapChains = targetChains
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapInputChain
         onStartSheet(baseSheet, 680, 0.8)
@@ -281,9 +363,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @objc func onInputAsset() {
         dismissKeyboard()
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.swapAssets = inputAssetList
-        baseSheet.swapBalance = inputCosmosChain.getCosmosfetcher()?.cosmosBalances ?? []
-        baseSheet.targetChain = inputCosmosChain
+        baseSheet.swapAssets = targetInputAssets
+        baseSheet.targetChain = inputChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapInputAsset
         onStartSheet(baseSheet, 680, 0.8)
@@ -292,7 +373,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @objc func onOutputChain() {
         dismissKeyboard()
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.swapChains = skipChains
+        baseSheet.swapChains = targetChains
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapOutputChain
         onStartSheet(baseSheet, 680, 0.8)
@@ -301,9 +382,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @objc func onOutputAsset() {
         dismissKeyboard()
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.swapAssets = outputAssetList
-        baseSheet.swapBalance = outputCosmosChain.getCosmosfetcher()?.cosmosBalances ?? []
-        baseSheet.targetChain = outputCosmosChain
+        baseSheet.swapAssets = targetOutputAssets
+        baseSheet.targetChain = outputChain
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapOutputAsset
         onStartSheet(baseSheet, 680, 0.8)
@@ -399,7 +479,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                         rateOutputDenomLabel.text = outputMsAsset.symbol
                         rateOutputAmountLanel.attributedText = WDP.dpAmount(swapRate.stringValue, rateOutputAmountLanel.font, 6)
                         
-                        if let feeMsAsset = BaseData.instance.getAsset(inputCosmosChain.apiName, txFee.amount[0].denom) {
+                        if let feeMsAsset = BaseData.instance.getAsset(inputChain.apiName, txFee.amount[0].denom) {
                             WDP.dpCoin(feeMsAsset, txFee.amount[0], nil, feeDenomLabel, feeAmountLanel, feeMsAsset.decimals)
                         }
                         
@@ -437,20 +517,17 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     }
     
     @IBAction func onSwapToggle(_ sender: UIButton) {
-        let tempChain = inputCosmosChain
-        let tempAssetList = inputAssetList
-        let tempAssetSelected = inputAssetSelected
-        let tempMsAsset = inputMsAsset
+        let tempChain = inputChain
+        let tempAssetList = targetInputAssets
+        let tempAssetSelected = inputAsset
         
-        inputCosmosChain = outputCosmosChain
-        inputAssetList = outputAssetList
-        inputAssetSelected = outputAssetSelected
-        inputMsAsset = outputMsAsset
+        inputChain = outputChain
+        targetInputAssets = targetOutputAssets
+        inputAsset = outputAsset
         
-        outputCosmosChain = tempChain
-        outputAssetList = tempAssetList
-        outputAssetSelected = tempAssetSelected
-        outputMsAsset = tempMsAsset
+        outputChain = tempChain
+        targetOutputAssets = tempAssetList
+        outputAsset = tempAssetSelected
         
         onReadyToUserInsert()
     }
@@ -464,9 +541,9 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     func onBindSkipRouteReq(_ amount: String) -> JSON {
         var routeReq = JSON()
         routeReq["amount_in"].stringValue = amount
-        routeReq["source_asset_chain_id"].stringValue = inputCosmosChain.chainIdCosmos!
+        routeReq["source_asset_chain_id"].stringValue = inputChain.chainIdCosmos!
         routeReq["source_asset_denom"].stringValue = inputMsAsset.denom!
-        routeReq["dest_asset_chain_id"].stringValue = outputCosmosChain.chainIdCosmos!
+        routeReq["dest_asset_chain_id"].stringValue = outputChain.chainIdCosmos!
         routeReq["dest_asset_denom"].stringValue = outputMsAsset.denom!
         routeReq["cumulative_affiliate_fee_bps"] = "100"
         routeReq["client_id"] = "cosmostation_ios"
@@ -477,7 +554,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         var msgReq = JSON()
         var address_list = [String]()
         route["chain_ids"].array?.forEach({ chain_Id in
-            if let address = allSwapableChains.filter({ $0.chainIdCosmos == chain_Id.stringValue }).first?.bechAddress {
+            if let address = allChains.filter({ $0.chainIdCosmos == chain_Id.stringValue }).first?.bechAddress {
                 address_list.append(address)
             }
         })
@@ -498,7 +575,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     }
     
     func getBaseFee() -> Cosmos_Tx_V1beta1_Fee {
-        let minFee = inputCosmosChain.getDefaultFeeCoins()[0]
+        let minFee = inputChain.getDefaultFeeCoins()[0]
         let feeCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = minFee.denom; $0.amount = minFee.amount }
         return Cosmos_Tx_V1beta1_Fee.with {
             $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
@@ -543,15 +620,15 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     
     func onUpdateWithSimul(_ gasUsed: UInt64?, _ msg: JSON) {
         if let toGas = gasUsed {
-            txFee.gasLimit = UInt64(Double(toGas) * inputCosmosChain.gasMultiply())
-            let baseFeePosition = inputCosmosChain.getFeeBasePosition()
-            if let gasRate = inputCosmosChain.getFeeInfos()[baseFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
+            txFee.gasLimit = UInt64(Double(toGas) * inputChain.gasMultiply())
+            let baseFeePosition = inputChain.getFeeBasePosition()
+            if let gasRate = inputChain.getFeeInfos()[baseFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                 let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
                 txFee.amount[0].amount = feeCoinAmount!.stringValue
             }
         }
-        if let feeMsAsset = BaseData.instance.getAsset(inputCosmosChain.apiName, txFee.amount[0].denom) {
+        if let feeMsAsset = BaseData.instance.getAsset(inputChain.apiName, txFee.amount[0].denom) {
             WDP.dpCoin(feeMsAsset, txFee.amount[0], nil, feeDenomLabel, feeAmountLanel, feeMsAsset.decimals)
         }
         toMsg = msg
@@ -580,8 +657,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
 //            print("inner_mag ", inner_mag)
             Task {
                 do {
-                    if let inputCosmosfetcher = inputCosmosChain.getCosmosfetcher(),
-                       let simulReq = try await Signer.genSimul(inputCosmosChain, onBindIbcSend(inner_mag!), "", txFee, txTip),
+                    if let inputCosmosfetcher = inputChain.getCosmosfetcher(),
+                       let simulReq = try await Signer.genSimul(inputChain, onBindIbcSend(inner_mag!), "", txFee, txTip),
                        let simulRes = try await inputCosmosfetcher.simulateTx(simulReq) {
                         DispatchQueue.main.async {
                             self.onUpdateWithSimul(simulRes, msg)
@@ -606,8 +683,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
 //            print("inner_mag ", inner_mag)
             Task {
                 do {
-                    if let inputCosmosfetcher = inputCosmosChain.getCosmosfetcher(),
-                       let simulReq = try await Signer.genSimul(inputCosmosChain, onBindWasm(inner_mag!), "", txFee, txTip),
+                    if let inputCosmosfetcher = inputChain.getCosmosfetcher(),
+                       let simulReq = try await Signer.genSimul(inputChain, onBindWasm(inner_mag!), "", txFee, txTip),
                        let simulRes = try await inputCosmosfetcher.simulateTx(simulReq) {
                         DispatchQueue.main.async {
                             self.onUpdateWithSimul(simulRes, msg)
@@ -667,21 +744,16 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectSwapInputChain) {
-            if let chainId = result["chainId"] as? String {
-                if (inputCosmosChain.chainIdCosmos != chainId) {
+            if let chainName = result["chainName"] as? String {
+                if (inputChain.name != chainName) {
                     view.isUserInteractionEnabled = false
                     loadingView.isHidden = false
                     Task {
-                        inputCosmosChain = skipChains.filter({ $0.chainIdCosmos == chainId }).first!
-                        inputAssetList.removeAll()
-                        skipAssets?["chain_to_assets_map"][inputCosmosChain.chainIdCosmos!]["assets"].arrayValue.forEach({ json in
-                            if BaseData.instance.getAsset(inputCosmosChain.apiName, json["denom"].stringValue) != nil {
-                                inputAssetList.append(json)
-                            }
-                        })
-                        inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == inputCosmosChain.stakeDenom }.first ?? inputAssetList[0]
-                        _ =  await inputCosmosChain.getCosmosfetcher()?.fetchCosmosBalances()
-                        
+                        inputChain = targetChains.filter({ $0.name == chainName }).first!
+                        try await fetchInputAssetBalances()
+                        try await fetchInputAssets()
+                        inputAsset = targetInputAssets[0]
+                        try await fetchInputAssetBalance()
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
                         }
@@ -690,21 +762,16 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
             }
             
         } else if (sheetType == .SelectSwapOutputChain) {
-            if let chainId = result["chainId"] as? String {
-                if (outputCosmosChain.chainIdCosmos != chainId) {
+            if let chainName = result["chainName"] as? String {
+                if (outputChain.name != chainName) {
                     loadingView.isHidden = false
                     view.isUserInteractionEnabled = false
                     Task {
-                        outputCosmosChain = skipChains.filter({ $0.chainIdCosmos == chainId }).first!
-                        outputAssetList.removeAll()
-                        skipAssets?["chain_to_assets_map"][outputCosmosChain.chainIdCosmos!]["assets"].arrayValue.forEach({ json in
-                            if BaseData.instance.getAsset(outputCosmosChain.apiName, json["denom"].stringValue) != nil {
-                                outputAssetList.append(json)
-                            }
-                        })
-                        outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == outputCosmosChain.stakeDenom }.first ?? outputAssetList[0]
-                        _ =  await outputCosmosChain.getCosmosfetcher()?.fetchCosmosBalances()
-                        
+                        outputChain = targetChains.filter({ $0.name == chainName }).first!
+                        try await fetchOutputAssetBalances()
+                        try await fetchOutputAssets()
+                        outputAsset = targetOutputAssets[0]
+                        try await fetchOutputAssetBalance()
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
                         }
@@ -714,18 +781,32 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
             
         } else if (sheetType == .SelectSwapInputAsset) {
             if let denom = result["denom"] as? String {
-                if (inputAssetSelected["denom"].stringValue != denom) {
-                    inputAssetSelected = inputAssetList.filter { $0["denom"].stringValue == denom }.first!
-                    onReadyToUserInsert()
+                if (inputAsset.denom != denom) {
+                    loadingView.isHidden = false
+                    view.isUserInteractionEnabled = false
+                    Task {
+                        inputAsset = targetInputAssets.filter({ $0.denom == denom }).first
+                        try await fetchInputAssetBalance()
+                        DispatchQueue.main.async {
+                            self.onReadyToUserInsert()
+                        }
+                    }
                 }
             }
             
             
         } else if (sheetType == .SelectSwapOutputAsset) {
             if let denom = result["denom"] as? String {
-                if (outputAssetSelected["denom"].stringValue != denom) {
-                    outputAssetSelected = outputAssetList.filter { $0["denom"].stringValue == denom }.first!
-                    onReadyToUserInsert()
+                if (outputAsset.denom != denom) {
+                    loadingView.isHidden = false
+                    view.isUserInteractionEnabled = false
+                    Task {
+                        outputAsset = targetOutputAssets.filter({ $0.denom == denom }).first
+                        try await fetchOutputAssetBalance()
+                        DispatchQueue.main.async {
+                            self.onReadyToUserInsert()
+                        }
+                    }
                 }
             }
             
@@ -754,13 +835,13 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                 
                 Task {
                     do {
-                        if let inputGrpcfetcher = inputCosmosChain.getCosmosfetcher(),
-                           let broadReq = try await Signer.genTx(inputCosmosChain, onBindIbcSend(inner_mag!), "", txFee, txTip),
+                        if let inputGrpcfetcher = inputChain.getCosmosfetcher(),
+                           let broadReq = try await Signer.genTx(inputChain, onBindIbcSend(inner_mag!), "", txFee, txTip),
                            let broadRes = try await inputGrpcfetcher.broadcastTx(broadReq) {
                             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                                 self.loadingView.isHidden = true
                                 let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                                txResult.selectedChain = self.inputCosmosChain
+                                txResult.selectedChain = self.inputChain
                                 txResult.broadcastTxResponse = broadRes
                                 txResult.modalPresentationStyle = .fullScreen
                                 self.present(txResult, animated: true)
@@ -778,13 +859,13 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                 
                 Task {
                     do {
-                        if let inputGrpcfetcher = inputCosmosChain.getCosmosfetcher(),
-                           let broadReq = try await Signer.genTx(inputCosmosChain, onBindWasm(inner_mag!), "", txFee, txTip),
+                        if let inputGrpcfetcher = inputChain.getCosmosfetcher(),
+                           let broadReq = try await Signer.genTx(inputChain, onBindWasm(inner_mag!), "", txFee, txTip),
                            let broadRes = try await inputGrpcfetcher.broadcastTx(broadReq) {
                             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                                 self.loadingView.isHidden = true
                                 let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)
-                                txResult.selectedChain = self.inputCosmosChain
+                                txResult.selectedChain = self.inputChain
                                 txResult.broadcastTxResponse = broadRes
                                 txResult.modalPresentationStyle = .fullScreen
                                 self.present(txResult, animated: true)
@@ -823,4 +904,277 @@ extension SwapStartVC {
         let json = onBindSkipMsgReq(route)
         return try await AF.request(BaseNetWork.SkipMsg(), method: .post, parameters: json.dictionaryObject!, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
     }
+    
+    
+    
+    func fetchSquidChains() async throws -> JSON {
+//        print("fetchSquidChains ", BaseNetWork.SkipChains())
+        return try await AF.request(BaseNetWork.SquidChains(), method: .get).serializingDecodable(JSON.self).value
+    }
+    
+    
+    func fetchInputAssetBalances() async throws {
+        if (inputChain.supportCosmos && inputChain.supportEvm) {
+            _ = await inputChain.getCosmosfetcher()?.fetchCosmosBalances()
+            _ = await inputChain.getEvmfetcher()?.fetchEvmBalances()
+        } else if (inputChain.supportCosmos) {
+            _ = await inputChain.getCosmosfetcher()?.fetchCosmosBalances()
+        } else if (inputChain.supportEvm) {
+            _ = await inputChain.getEvmfetcher()?.fetchEvmBalances()
+        }
+        inputChain.getCosmosfetcher()?.onCheckVesting()
+    }
+    
+    func fetchOutputAssetBalances() async throws {
+        if (outputChain.supportCosmos && outputChain.supportEvm) {
+            _ = await outputChain.getCosmosfetcher()?.fetchCosmosBalances()
+            _ = await outputChain.getEvmfetcher()?.fetchEvmBalances()
+        } else if (outputChain.supportCosmos) {
+            _ = await outputChain.getCosmosfetcher()?.fetchCosmosBalances()
+        } else if (outputChain.supportEvm) {
+            _ = await outputChain.getEvmfetcher()?.fetchEvmBalances()
+        }
+        outputChain.getCosmosfetcher()?.onCheckVesting()
+    }
+    
+    
+    func fetchInputAssets() async throws {
+
+        squidInputAssets.removeAll()
+        if (squidChains.contains(where: { $0.tag == inputChain.tag }))  {
+            if (inputChain.supportCosmos) {
+                let squidCosmosAssets = try? await AF.request(BaseNetWork.SquidAsset(inputChain.chainIdCosmos!), method: .get).serializingDecodable(JSON.self).value
+                squidInputAssets.append(contentsOf: squidCosmosAssets?["tokens"].arrayValue ?? [])
+            }
+            if (inputChain.supportEvm) {
+                let squidEvmAssets = try? await AF.request(BaseNetWork.SquidAsset(inputChain.chainIdEvmDecimal!), method: .get).serializingDecodable(JSON.self).value
+                squidInputAssets.append(contentsOf: squidEvmAssets?["tokens"].arrayValue ?? [])
+            }
+        }
+        
+        skipInputAssets.removeAll()
+        if (skipChains.contains(where: { $0.tag == inputChain.tag }))  {
+            let skipAssets = try? await AF.request(BaseNetWork.SkipAsset(inputChain), method: .get).serializingDecodable(JSON.self).value
+            skipInputAssets = skipAssets?["chain_to_assets_map"][inputChain.chainIdForSwap]["assets"].arrayValue ?? []
+        }
+        
+        var tempInputAssets = [TargetAsset]()
+        squidInputAssets.forEach { squidInput in
+            let tempTarget = TargetAsset.init(squidInput["address"].stringValue,
+                                              squidInput["symbol"].stringValue,
+                                              squidInput["decimals"].int16Value,
+                                              squidInput["logoURI"].stringValue,
+                                              squidInput["coingeckoId"].string,
+                                              squidInput["name"].string)
+            tempInputAssets.append(tempTarget)
+        }
+        skipInputAssets.forEach { skipInput in
+            let tempTarget = TargetAsset.init(skipInput["denom"].stringValue,
+                                              skipInput["recommended_symbol"].stringValue,
+                                              skipInput["decimals"].int16Value,
+                                              skipInput["logo_uri"].stringValue,
+                                              skipInput["coingecko_id"].string,
+                                              skipInput["description"].string)
+            if !tempInputAssets.contains(where: { $0.denom.lowercased() == tempTarget.denom.lowercased() }) {
+                tempInputAssets.append(tempTarget)
+            }
+        }
+        
+        targetInputAssets.removeAll()
+        let msAssets = BaseData.instance.mintscanAssets?.filter({ $0.chain == inputChain.apiName })
+        if let mainCoin = msAssets?.first, (!inputChain.supportCosmos && inputChain.supportEvm) {
+            targetInputAssets.append(TargetAsset.init("evmMain", mainCoin.symbol!,  18, mainCoin.assetImg().absoluteString, mainCoin.coinGeckoId, mainCoin.description))
+        }
+        for index in tempInputAssets.indices {
+            if (tempInputAssets[index].denom == "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE") { continue }
+            if (tempInputAssets[index].denom.starts(with: "0x") ||
+                tempInputAssets[index].denom.starts(with: "cw20:") ||
+                msAssets?.filter({ $0.denom == tempInputAssets[index].denom }).first != nil) {
+                let msAsset = msAssets?.filter({ $0.denom == tempInputAssets[index].denom }).first
+                if let msGeckoId = msAsset?.coinGeckoId {
+                    tempInputAssets[index].geckoId = msGeckoId
+                }
+                if let msDescription = msAsset?.description {
+                    tempInputAssets[index].description = msDescription
+                }
+                if let msImg = msAsset?.assetImg().absoluteString {
+                    tempInputAssets[index].image = msImg
+                }
+                targetInputAssets.append(tempInputAssets[index])
+            }
+        }
+        
+        targetInputAssets.sort {
+            if ($0.denom == inputChain.stakeDenom) { return true }
+            if ($1.denom == inputChain.stakeDenom) { return false }
+            if ($0.symbol == inputChain.coinSymbol) { return true }
+            if ($1.symbol == inputChain.coinSymbol) { return false }
+            if ($0.type.rawValue < $1.type.rawValue ) { return true }
+            if ($0.type.rawValue > $1.type.rawValue ) { return false }
+            return $0.symbol < $1.symbol
+        }
+        print("targetInputAssets ", targetInputAssets.count)
+//        targetInputAssets.forEach { target in
+//            print("target input ", target.symbol,  "  ", target.denom, "  ", target.assetImg())
+//        }
+    }
+    
+    func fetchOutputAssets() async throws  {
+        
+        squidOutputAssets.removeAll()
+        if (squidChains.contains(where: { $0.tag == outputChain.tag }))  {
+            if (outputChain.supportCosmos) {
+                let squidCosmosAssets = try? await AF.request(BaseNetWork.SquidAsset(outputChain.chainIdCosmos!), method: .get).serializingDecodable(JSON.self).value
+                squidOutputAssets.append(contentsOf: squidCosmosAssets?["tokens"].arrayValue ?? [])
+            }
+            if (outputChain.supportEvm) {
+                let squidEvmAssets = try? await AF.request(BaseNetWork.SquidAsset(outputChain.chainIdEvmDecimal!), method: .get).serializingDecodable(JSON.self).value
+                squidOutputAssets.append(contentsOf: squidEvmAssets?["tokens"].arrayValue ?? [])
+            }
+        }
+        
+        skipOutputAssets.removeAll()
+        if (skipChains.contains(where: { $0.tag == outputChain.tag }))  {
+            let skipAssets = try? await AF.request(BaseNetWork.SkipAsset(outputChain), method: .get).serializingDecodable(JSON.self).value
+            skipOutputAssets = skipAssets?["chain_to_assets_map"][outputChain.chainIdForSwap]["assets"].arrayValue ?? []
+        }
+        
+        var tempOutputAssets = [TargetAsset]()
+        squidOutputAssets.forEach { squidOutput in
+            let tempTarget = TargetAsset.init(squidOutput["address"].stringValue,
+                                              squidOutput["symbol"].stringValue,
+                                              squidOutput["decimals"].int16Value,
+                                              squidOutput["logoURI"].stringValue,
+                                              squidOutput["coingeckoId"].string,
+                                              squidOutput["name"].string)
+            tempOutputAssets.append(tempTarget)
+        }
+        
+        skipOutputAssets.forEach { skipOutput in
+            let tempTarget = TargetAsset.init(skipOutput["denom"].stringValue,
+                                              skipOutput["recommended_symbol"].stringValue,
+                                              skipOutput["decimals"].int16Value,
+                                              skipOutput["logo_uri"].stringValue,
+                                              skipOutput["coingecko_id"].string,
+                                              skipOutput["description"].string)
+            if !tempOutputAssets.contains(where: { $0.denom.lowercased() == tempTarget.denom.lowercased() }) {
+                tempOutputAssets.append(tempTarget)
+            }
+        }
+        
+        targetOutputAssets.removeAll()
+        let msAssets = BaseData.instance.mintscanAssets?.filter({ $0.chain == outputChain.apiName })
+        if let mainCoin = msAssets?.first, (!outputChain.supportCosmos && outputChain.supportEvm) {
+            targetOutputAssets.append(TargetAsset.init("evmMain", mainCoin.symbol!,  18, mainCoin.assetImg().absoluteString, mainCoin.coinGeckoId, mainCoin.description))
+        }
+        for index in tempOutputAssets.indices {
+            if (tempOutputAssets[index].denom == "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE") { continue }
+            if (tempOutputAssets[index].denom.starts(with: "0x") ||
+                tempOutputAssets[index].denom.starts(with: "cw20:") ||
+                msAssets?.filter({ $0.denom == tempOutputAssets[index].denom }).first != nil) {
+                let msAsset = msAssets?.filter({ $0.denom == tempOutputAssets[index].denom }).first
+                if let msGeckoId = msAsset?.coinGeckoId {
+                    tempOutputAssets[index].geckoId = msGeckoId
+                }
+                if let msDescription = msAsset?.description {
+                    tempOutputAssets[index].description = msDescription
+                }
+                if let msImg = msAsset?.assetImg().absoluteString {
+                    tempOutputAssets[index].image = msImg
+                }
+                targetOutputAssets.append(tempOutputAssets[index])
+            }
+        }
+        
+        targetOutputAssets.sort {
+            if ($0.denom == outputChain.stakeDenom) { return true }
+            if ($1.denom == outputChain.stakeDenom) { return false }
+            if ($0.symbol == outputChain.coinSymbol) { return true }
+            if ($1.symbol == outputChain.coinSymbol) { return false }
+            if ($0.type.rawValue < $1.type.rawValue ) { return true }
+            if ($0.type.rawValue > $1.type.rawValue ) { return false }
+            return $0.symbol < $1.symbol
+        }
+        print("targetOutputAssets ", targetOutputAssets.count)
+//        targetOutputAssets.forEach { target in
+//            print("target input ", target.symbol,  "  ", target.denom, "  ", target.assetImg())
+//        }
+    }
+    
+    func fetchInputAssetBalance() async throws {
+        if inputAsset.type == .CW20 {
+            inputAsset.balance = try await inputChain.getCosmosfetcher()?.fetchCw20BalanceAmount(inputAsset.denom!) ?? NSDecimalNumber.zero
+            
+        } else if inputAsset.type == .ERC20 {
+            inputAsset.balance = try await inputChain.getEvmfetcher()?.fetchErc20BalanceAmount(inputAsset.denom!) ?? NSDecimalNumber.zero
+            
+        } else {
+            if (!inputChain.supportCosmos && inputChain.supportEvm) {
+                inputAsset.balance = inputChain.getEvmfetcher()?.evmBalances ?? NSDecimalNumber.zero
+            } else {
+                inputAsset.balance = inputChain.getCosmosfetcher()?.balanceAmount(inputAsset.denom) ?? NSDecimalNumber.zero
+            }
+        }
+    }
+    
+    func fetchOutputAssetBalance() async throws {
+        if outputAsset.type == .CW20 {
+            outputAsset.balance = try await outputChain.getCosmosfetcher()?.fetchCw20BalanceAmount(outputAsset.denom!) ?? NSDecimalNumber.zero
+            
+        } else if outputAsset.type == .ERC20 {
+            outputAsset.balance = try await outputChain.getEvmfetcher()?.fetchErc20BalanceAmount(outputAsset.denom!) ?? NSDecimalNumber.zero
+            
+        } else {
+            if (!outputChain.supportCosmos && outputChain.supportEvm) {
+                outputAsset.balance = outputChain.getEvmfetcher()?.evmBalances ?? NSDecimalNumber.zero
+            } else {
+                outputAsset.balance = outputChain.getCosmosfetcher()?.balanceAmount(outputAsset.denom) ?? NSDecimalNumber.zero
+            }
+        }
+    }
+    
 }
+
+
+public struct TargetAsset {
+    var denom: String!                      // skip - "denom"                       squid - "address"
+    var symbol: String!                     // skip - "recommended_symbol"          squid - "symbol"
+    var decimals: Int16!                    // skip - "decimals"                    squid - "decimals"
+    var image: String?                      // skip - "logo_uri"                    squid - "logoURI"
+    var geckoId: String?                    // skip - "coingecko_id"                squid - "coingeckoId"
+    var description: String?                // skip - "description"                 squid - "name"
+    var balance = NSDecimalNumber.zero      // fetched balacne
+    var type = TargetAssetType.Native
+    
+    init(_ denom: String, _ symbol: String, _ decimals: Int16, _ image: String?, _ geckoId: String?, _ description: String?) {
+        self.denom = denom
+        self.symbol = symbol
+        self.decimals = decimals
+        self.image = image
+        self.geckoId = geckoId
+        self.description = description
+        
+        if (denom.lowercased().starts(with: "0x")) {
+            self.type = .ERC20
+        } else if (denom.lowercased().starts(with: "cw20:")) {
+            self.type = .CW20
+        } else if (denom.lowercased().starts(with: "ibc/")) {
+            self.type = .IBC
+        }
+    }
+    
+    func assetImg() -> URL? {
+        guard let path = image else {
+            return nil
+        }
+        return URL(string: path)
+    }
+}
+
+enum TargetAssetType: Int {
+    case Native = 0
+    case IBC = 1
+    case CW20 = 2
+    case ERC20 = 3
+}
+

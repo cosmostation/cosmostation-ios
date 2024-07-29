@@ -150,11 +150,15 @@ class BaseNetWork {
     }
     
     static func SkipChains() -> String {
-        return SKIP_API_URL + "v1/info/chains"
+        return SKIP_API_URL + "v2/info/chains?include_evm=true"
+    }
+    
+    static func SkipAsset(_ baseChain: BaseChain) -> String {
+        return SKIP_API_URL + "v2/fungible/assets?chain_ids=" + baseChain.chainIdForSwap + "&include_cw20_assets=true&include_evm_assets=true"
     }
     
     static func SkipAssets() -> String {
-        return SKIP_API_URL + "v1/fungible/assets"
+        return SKIP_API_URL + "v2/fungible/assets?include_cw20_assets=true&include_evm_assets=true"
     }
     
     static func SkipRoutes() -> String {
@@ -163,6 +167,14 @@ class BaseNetWork {
     
     static func SkipMsg() -> String {
         return SKIP_API_URL + "v1/fungible/msgs"
+    }
+    
+    static func SquidChains() -> String {
+        return SQUID_API_URL + "chains"
+    }
+    
+    static func SquidAsset(_ chainId: String) -> String {
+        return SQUID_API_URL + "tokens?chainId=" + chainId
     }
 }
 

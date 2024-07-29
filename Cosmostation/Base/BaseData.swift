@@ -680,13 +680,13 @@ extension BaseData {
     //Skip swap info
     func setLastSwapInfoTime() {
         let now = Date().millisecondsSince1970
-        UserDefaults.standard.set(String(now), forKey: KEY_SWAP_INFO_TIME)
+        UserDefaults.standard.set(String(now), forKey: KEY_SWAP_INFO_TIME2)
     }
     
     func needSwapInfoUpdate() -> Bool {
         let now = Date().millisecondsSince1970
         let day: Int64 = 86400000
-        let last = Int64(UserDefaults.standard.string(forKey: KEY_SWAP_INFO_TIME) ?? "0")! + (day * 3)
+        let last = Int64(UserDefaults.standard.string(forKey: KEY_SWAP_INFO_TIME2) ?? "0")! + (day * 3)
         return last < now ? true : false
     }
     
