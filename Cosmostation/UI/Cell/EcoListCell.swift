@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftyJSON
-import Kingfisher
+import SDWebImage
 
 class EcoListCell: UICollectionViewCell {
     
@@ -37,7 +37,7 @@ class EcoListCell: UICollectionViewCell {
         guard let info = info else { return }
         
         if let url = URL(string: info["thumbnail"].stringValue) {
-            thumbnailImageView?.kf.setImage(with: url)
+            thumbnailImageView?.sd_setImage(with: url)
         }
         titleLabel.text = info["name"].string
         descriptionLabel.text = info["description"].string

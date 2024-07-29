@@ -16,6 +16,8 @@ import WalletConnectPairing
 import WalletConnectSign
 import Starscream
 import SafariServices
+import SDWebImage
+import SDWebImageSVGCoder
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, PinDelegate, MessagingDelegate {
@@ -60,6 +62,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         } else if let userInfo = launchOptions?[.remoteNotification] as? [AnyHashable: Any] {
             BaseData.instance.appUserInfo = userInfo
         }
+        
+        // SVG, GIF Coder
+        let svgCoder = SDImageSVGCoder.shared
+        SDImageCodersManager.shared.addCoder(svgCoder)
+        let gifCoder = SDImageGIFCoder.shared
+        SDImageCodersManager.shared.addCoder(gifCoder)
+
         return true
     }
     

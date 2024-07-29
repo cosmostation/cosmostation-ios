@@ -9,7 +9,7 @@
 import UIKit
 import Lottie
 import SwiftProtobuf
-import Kingfisher
+import SDWebImage
 
 class KavaLendAction: BaseVC {
     
@@ -86,7 +86,7 @@ class KavaLendAction: BaseVC {
         
         msAsset = BaseData.instance.getAsset(selectedChain.apiName, hardMarket.denom)
         toHardSymbolLabel.text = msAsset.symbol
-        toHardAssetImg.kf.setImage(with: msAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
+        toHardAssetImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         
         if (hardActionType == .Deposit) {
             let balanceAmount = kavaFetcher.balanceAmount(hardMarket.denom)

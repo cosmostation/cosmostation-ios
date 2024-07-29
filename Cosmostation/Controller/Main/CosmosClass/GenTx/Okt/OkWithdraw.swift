@@ -10,7 +10,7 @@ import UIKit
 import Lottie
 import SwiftyJSON
 import Alamofire
-import Kingfisher
+import SDWebImage
 
 class OkWithdraw: BaseVC {
     
@@ -61,7 +61,7 @@ class OkWithdraw: BaseVC {
         
         tokenInfo = oktFetcher.oktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
         let original_symbol = tokenInfo["original_symbol"].stringValue
-        toWithdrawAssetImg.kf.setImage(with: ChainOktEVM.assetImg(original_symbol), placeholder: UIImage(named: "tokenDefault"))
+        toWithdrawAssetImg.sd_setImage(with: ChainOktEVM.assetImg(original_symbol), placeholderImage: UIImage(named: "tokenDefault"))
         toWithdrawSymbolLabel.text = original_symbol.uppercased()
         availableAmount = oktFetcher.oktDepositAmount()
         
@@ -138,7 +138,7 @@ class OkWithdraw: BaseVC {
     }
     
     func onUpdateFeeView() {
-        feeSelectImg.kf.setImage(with: ChainOktEVM.assetImg(stakeDenom), placeholder: UIImage(named: "tokenDefault"))
+        feeSelectImg.sd_setImage(with: ChainOktEVM.assetImg(stakeDenom), placeholderImage: UIImage(named: "tokenDefault"))
         feeSelectLabel.text = stakeDenom.uppercased()
         
         let existCnt = oktFetcher.oktDeposits["validator_address"].arrayValue.count

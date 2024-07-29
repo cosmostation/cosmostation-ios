@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 
 class SelectDisplayTokenCell: UITableViewCell {
     
@@ -22,7 +22,7 @@ class SelectDisplayTokenCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        coinImg.kf.cancelDownloadTask()
+        coinImg.sd_cancelCurrentImageLoad()
         coinImg.image = UIImage(named: "tokenDefault")
         symbolLabel.text = ""
         descriptionLabel.text = ""
@@ -37,7 +37,7 @@ class SelectDisplayTokenCell: UITableViewCell {
             rootView.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
         }
         
-        coinImg?.kf.setImage(with: token.assetImg(), placeholder: UIImage(named: "tokenDefault"))
+        coinImg?.sd_setImage(with: token.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         symbolLabel.text = token.symbol
         descriptionLabel.text = token.description
     }
