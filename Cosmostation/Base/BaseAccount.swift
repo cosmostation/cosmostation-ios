@@ -221,8 +221,12 @@ public class BaseAccount {
                     chain.allCoinUSDValue = oktFetcher.allCoinValue(true)
                     chain.allTokenValue = evmFetcher.allTokenValue()
                     chain.allTokenUSDValue = evmFetcher.allTokenValue(true)
+                    
+                } else if let oktFetcher = chain.getOktfetcher() {
+                    chain.allCoinValue = oktFetcher.allCoinValue()
+                    chain.allCoinUSDValue = oktFetcher.allCoinValue(true)
+                    
                 }
-                
             } else if let cosmosFetcher = chain.getCosmosfetcher() {
                 chain.allCoinValue = cosmosFetcher.allCoinValue()
                 chain.allCoinUSDValue = cosmosFetcher.allCoinValue(true)
