@@ -215,7 +215,19 @@ public class BaseAccount {
     
     func updateAllValue() {
         getDpChains().forEach { chain in
-            if let cosmosFetcher = chain.getCosmosfetcher() {
+            if let chain = chain as? ChainOktEVM {
+                if let oktFetcher = chain.getOktfetcher(), let evmFetcher = chain.getEvmfetcher() {
+                    chain.allCoinValue = oktFetcher.allCoinValue()
+                    chain.allCoinUSDValue = oktFetcher.allCoinValue(true)
+                    chain.allTokenValue = evmFetcher.allTokenValue()
+                    chain.allTokenUSDValue = evmFetcher.allTokenValue(true)
+                    
+                } else if let oktFetcher = chain.getOktfetcher() {
+                    chain.allCoinValue = oktFetcher.allCoinValue()
+                    chain.allCoinUSDValue = oktFetcher.allCoinValue(true)
+                    
+                }
+            } else if let cosmosFetcher = chain.getCosmosfetcher() {
                 chain.allCoinValue = cosmosFetcher.allCoinValue()
                 chain.allCoinUSDValue = cosmosFetcher.allCoinValue(true)
                 chain.allTokenValue = cosmosFetcher.allTokenValue()
@@ -226,13 +238,11 @@ public class BaseAccount {
                 chain.allCoinUSDValue = evmFetcher.allCoinValue(true)
                 chain.allTokenValue = evmFetcher.allTokenValue()
                 chain.allTokenUSDValue = evmFetcher.allTokenValue(true)
+                
             }
         }
     }
 }
-
-
-
 
 struct AccountKeyType {
     var pubkeyType: PubKeyType!
