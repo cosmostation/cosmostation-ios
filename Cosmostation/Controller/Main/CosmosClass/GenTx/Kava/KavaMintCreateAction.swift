@@ -9,7 +9,7 @@
 import UIKit
 import Lottie
 import SwiftProtobuf
-import Kingfisher
+import SDWebImage
 
 class KavaMintCreateAction: BaseVC {
     
@@ -88,11 +88,11 @@ class KavaMintCreateAction: BaseVC {
         
         collateralMsAsset = BaseData.instance.getAsset(selectedChain.apiName, collateralParam.denom)!
         collateralSymbolLabel.text = collateralMsAsset.symbol
-        collateralImg.kf.setImage(with: collateralMsAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
+        collateralImg.sd_setImage(with: collateralMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         
         principalMsAsset = BaseData.instance.getAsset(selectedChain.apiName, "usdx")!
         principalSymbolLabel.text = principalMsAsset.symbol
-        principalImg.kf.setImage(with: principalMsAsset.assetImg(), placeholder: UIImage(named: "tokenDefault"))
+        principalImg.sd_setImage(with: principalMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         
         let balanceAmount = kavaFetcher.balanceAmount(collateralParam.denom)
         if (txFee.amount[0].denom == collateralParam.denom) {

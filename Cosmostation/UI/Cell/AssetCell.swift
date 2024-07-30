@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 import SwiftyJSON
 
 class AssetCell: UITableViewCell {
@@ -39,7 +39,7 @@ class AssetCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        coinImg.kf.cancelDownloadTask()
+        coinImg.sd_cancelCurrentImageLoad()
         coinImg.image = UIImage(named: "tokenDefault")
         amountLabel.text = ""
         valueCurrencyLabel.text = ""
@@ -96,7 +96,7 @@ class AssetCell: UITableViewCell {
             
             symbolLabel.text = original_symbol.uppercased()
             priceCurrencyLabel.text = token["description"].string
-            coinImg.kf.setImage(with: ChainOktEVM.assetImg(original_symbol), placeholder: UIImage(named: "tokenDefault"))
+            coinImg.sd_setImage(with: ChainOktEVM.assetImg(original_symbol), placeholderImage: UIImage(named: "tokenDefault"))
             
             let availableAmount = oktFetcher.oktBalanceAmount(coin["denom"].stringValue)
             amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)

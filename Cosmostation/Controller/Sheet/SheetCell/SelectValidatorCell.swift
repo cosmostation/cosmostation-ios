@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 
 class SelectValidatorCell: UITableViewCell {
     
@@ -33,7 +33,7 @@ class SelectValidatorCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        logoImg.kf.cancelDownloadTask()
+        logoImg.sd_cancelCurrentImageLoad()
         logoImg.image = UIImage(named: "validatorDefault")
         inactiveTag.isHidden = true
         jailedTag.isHidden = true
@@ -51,7 +51,7 @@ class SelectValidatorCell: UITableViewCell {
     
     func onBindValidator(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator) {
         
-        logoImg.kf.setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholder: UIImage(named: "validatorDefault"))
+        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false
@@ -80,7 +80,7 @@ class SelectValidatorCell: UITableViewCell {
     
     func onBindUnstakeValidator(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator) {
         
-        logoImg.kf.setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholder: UIImage(named: "validatorDefault"))
+        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false
