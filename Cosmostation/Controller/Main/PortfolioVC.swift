@@ -216,6 +216,7 @@ class PortfolioVC: BaseVC {
             tableView.tableHeaderView = nil
             tableView.headerView(forSection: 0)?.layoutSubviews()
         } else {
+            searchBar?.text = ""
             tableView.tableHeaderView = searchBar
             tableView.headerView(forSection: 0)?.layoutSubviews()
         }
