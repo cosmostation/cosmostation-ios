@@ -90,6 +90,15 @@ class BaseChain {
             
         } else if (accountKeyType.pubkeyType == .SUI_Ed25519) {
             
+            if let chain = self as? ChainSui {
+                chain.address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+            }
+
+        } else if (accountKeyType.pubkeyType == .BTC__Secp256k1) {
+            if let chain = self as? ChainBitcoin {
+                chain.address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
+            }
+
         } else {
             evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
             if (supportCosmos) {
@@ -613,6 +622,9 @@ func ALLCHAINS() -> [BaseChain] {
     //result.append(ChainBeraEVM_T())
     result.append(ChainNeutron_T())
     result.append(ChainNillion_T())
+    
+    result.append(ChainSui())
+    result.append(ChainBitcoin())
     
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {

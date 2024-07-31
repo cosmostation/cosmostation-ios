@@ -11,6 +11,7 @@ import Web3Core
 import ed25519swift
 import CryptoSwift
 import Blake2
+import BigInt
 
 class KeyFac {
     
@@ -20,7 +21,7 @@ class KeyFac {
     
     static func getPriKeyFromSeed(_ pubKeyType: PubKeyType, _ seed: Data, _ path: String) -> Data? {
         if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || 
-            pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
+            pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256 || pubKeyType == .BTC__Secp256k1) {
             return getSecp256k1PriKey(seed, path)
             
         } else if (pubKeyType == .SUI_Ed25519) {
@@ -70,7 +71,7 @@ class KeyFac {
     
     static func getPubKeyFromPrivateKey(_ priKey: Data, _ pubKeyType: PubKeyType) -> Data? {
         if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || 
-            pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
+            pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256 || pubKeyType == .BTC__Secp256k1) {
             return getSecp256k1PubKey(priKey)
             
         } else if (pubKeyType == .SUI_Ed25519) {
@@ -100,8 +101,42 @@ class KeyFac {
             let data = Data([UInt8](Data(count: 1)) + pubKey)
             let hash = try! Blake2b.hash(size: 32, data: data)
             return "0x" + hash.toHexString()
+        } else if (pubKeyType == .BTC__Secp256k1) { //bitcoin
+            //A = RIPEMD160(SHA256(공개키))
+            let ripemd160 = RIPEMD160.hash(pubKey.sha256())
+            let networkByte: UInt8 = 0x00
+            let networkAndHash = Data([networkByte]) + ripemd160
+            return base58CheckEncode(networkAndHash)
+
         }
         return ""
+    }
+    
+    static func base58CheckEncode(_ data: Data) -> String {
+        let checksum = data.sha256().sha256().prefix(4)
+        let extendedData = data + checksum
+        return base58Encode(extendedData)
+    }
+    
+    static func base58Encode(_ data: Data) -> String {
+        let base58Alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+
+        var x = BigUInt(data)
+        var answer = ""
+        
+        while x > 0 {
+            let (quotient, remainder) = x.quotientAndRemainder(dividingBy: 58)
+            answer = "\(base58Alphabet[String.Index(encodedOffset: Int(remainder))])" + answer
+            x = quotient
+        }
+        
+        // Leading zero bytes
+        for byte in data {
+            if byte != 0 { break }
+            answer = "1" + answer
+        }
+        
+        return answer
     }
     
     static func getOpAddressFromAddress(_ address: String, _ validatorPrefix: String?) -> String? {
