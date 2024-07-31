@@ -17,6 +17,7 @@ class NoticeSheet: BaseVC {
     
     var selectedChain: BaseChain!
     var noticeType: NoticeType?
+    var noticeDelegate: NoticeSheetDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +39,9 @@ class NoticeSheet: BaseVC {
         } else if (noticeType == .NodeDownGuide) {
             noticeTitleLabel.text = NSLocalizedString("str_node_down_title", comment: "")
             noticeMsgLabel.text = NSLocalizedString("msg_node_down", comment: "")
-            subBtn.isHidden = true
-            okBtn.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
+            subBtn.isHidden = false
+            subBtn.setTitle(NSLocalizedString("str_change_end_point", comment: ""), for: .normal)
+            okBtn.setTitle(NSLocalizedString("str_retry", comment: ""), for: .normal)
             
         } else if (noticeType == .ChainSunset) {
             noticeTitleLabel.text = NSLocalizedString("str_sunset_title", comment: "")
@@ -95,12 +97,29 @@ class NoticeSheet: BaseVC {
             let rawUrl = "https://github.com/cosmostation/chainlist/blob/main/chain/" + selectedChain.apiName + "/cw721.json"
             guard let url = URL(string: rawUrl) else { return }
             self.onShowSafariWeb(url)
+            
+        } else if (noticeType == .NodeDownGuide) {
+            dismiss(animated: true) {
+                self.noticeDelegate?.onSubResult(.NodeDownGuide, ["chainTag" : self.selectedChain.tag])
+            }
+            return
         }
     }
     
     @IBAction func onClickOkBtn(_ sender: UIButton) {
+        if (noticeType == .NodeDownGuide) {
+            dismiss(animated: true) {
+                self.noticeDelegate?.onMainResult(.NodeDownGuide, ["chainTag" : self.selectedChain.tag])
+            }
+            return
+        }
         dismiss(animated: true)
     }
+}
+
+protocol NoticeSheetDelegate {
+    func onMainResult(_ noticeType: NoticeType?, _ result: Dictionary<String, Any>?)
+    func onSubResult(_ noticeType: NoticeType?, _ result: Dictionary<String, Any>?)
 }
 
 

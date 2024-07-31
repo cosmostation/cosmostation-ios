@@ -52,7 +52,7 @@
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                             <color key="tintColor" name="_color01"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="No more 7Days">
+                            <state key="normal" title="Change Endpoint">
                                 <color key="titleColor" name="_color05"/>
                             </state>
                             <connections>
@@ -67,7 +67,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="OK">
+                            <state key="normal" title="Retry">
                                 <color key="titleColor" name="_color01"/>
                             </state>
                             <connections>

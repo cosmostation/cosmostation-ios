@@ -341,7 +341,7 @@
 "str_share_bech_address2" = "Share\nCosmos Style Address";
 "str_token_github" = "Check Token Info";
 "str_nft_github" = "Check NFT Info";
-"str_node_down_title" = "⚠️ Node Down";
+"str_node_down_title" = "⚠️ Network failure";
 "str_sunset_title" = "Chain Sunset";
 "str_sunset_msg" = "The chain you selected is scheduled to end support. For more information, please refer to the foundation's official announcement.";
 "str_delist_title" = "Discontinuation of support";
@@ -352,6 +352,8 @@
 "str_copy_with_longpress" = "Long press for copy";
 "str_copy_with_box" = "Tap the box for copy";
 "str_support_injection" = "Support Injection";
+"str_retry" = "Retry";
+"str_change_end_point" = "Change End-Point";
 
 
 
@@ -747,7 +749,6 @@
 "push_disabled_state_msg" = "Enabled push alarm for each sent & receive tx with this address";
 "permission_push_title" = "Allow Notification";
 "permission_push_msg" = "Please allow for push notification.";
-"retry" = "Retry";
 "update_title" = "Update";
 "update_msg" = "New version available. \nPlease update to the latest version from the AppStore.";
 "go_appstore" = "Go to AppStore";
