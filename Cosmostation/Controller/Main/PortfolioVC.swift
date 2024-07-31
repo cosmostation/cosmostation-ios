@@ -222,10 +222,12 @@ class PortfolioVC: BaseVC {
         }
     }
     
-    func onNodedownPopup() {
+    func onNodedownPopup(_ baseChain: BaseChain) {
         let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
+        warnSheet.selectedChain = baseChain
         warnSheet.noticeType = .NodeDownGuide
-        onStartSheet(warnSheet, 320, 0.6)
+        warnSheet.noticeDelegate = self
+        onStartSheet(warnSheet, 420, 0.6)
     }
 }
 
@@ -310,7 +312,7 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
         }
         
         if (chain.fetchState == .Fail) {
-            onNodedownPopup()
+            onNodedownPopup(chain)
             return
         }
         if (chain.fetchState != .Success) {
@@ -503,3 +505,34 @@ extension PortfolioVC: BaseSheetDelegate {
     }
 }
 
+
+extension PortfolioVC: NoticeSheetDelegate, EndpointDelegate {
+    
+    func onMainResult(_ noticeType: NoticeType?, _ result: Dictionary<String, Any>?) {
+        if (noticeType == .NodeDownGuide) {
+            if let chainTag = result?["chainTag"] as? String {
+                baseAccount.getDpChains().filter { $0.tag == chainTag }.first?.fetchData(baseAccount.id)
+                onUpdateRow(chainTag)
+            }
+        }
+    }
+    
+    func onSubResult(_ noticeType: NoticeType?, _ result: Dictionary<String, Any>?) {
+        if (noticeType == .NodeDownGuide) {
+            if let chainTag = result?["chainTag"] as? String {
+                let endpointSheet = SelectEndpointSheet(nibName: "SelectEndpointSheet", bundle: nil)
+                endpointSheet.targetChain = baseAccount.getDpChains().filter { $0.tag == chainTag }.first
+                endpointSheet.endpointDelegate = self
+                onStartSheet(endpointSheet, 420, 0.8)
+            }
+        }
+    }
+    
+    func onEndpointUpdated(_ result: Dictionary<String, Any>?) {
+        if let chainTag = result?["chainTag"] as? String {
+            baseAccount.getDpChains().filter { $0.tag == chainTag }.first?.getCosmosfetcher()?.grpcConnection = nil
+            baseAccount.getDpChains().filter { $0.tag == chainTag }.first?.fetchData(baseAccount.id)
+            onUpdateRow(chainTag)
+        }
+    }
+}

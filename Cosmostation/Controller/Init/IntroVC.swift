@@ -176,7 +176,7 @@ extension IntroVC {
     
     func onShowNetworkAlert() {
         let alert = UIAlertController(title: NSLocalizedString("error_network", comment: ""), message: NSLocalizedString("error_network_msg", comment: ""), preferredStyle: .alert)
-        let action = UIAlertAction(title: NSLocalizedString("retry", comment: ""), style: .default, handler: { _ in
+        let action = UIAlertAction(title: NSLocalizedString("str_retry", comment: ""), style: .default, handler: { _ in
             self.onAppVersionCheck()
         })
         alert.addAction(action)

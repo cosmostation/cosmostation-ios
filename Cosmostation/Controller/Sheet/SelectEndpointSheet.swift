@@ -169,7 +169,7 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
                 BaseData.instance.setEvmRpcEndpoint(targetChain, endpoint)
             }
             self.dismiss(animated: true) {
-                self.endpointDelegate?.onEndpointUpdated()
+                self.endpointDelegate?.onEndpointUpdated(["chainTag" : self.targetChain.tag])
             }
             
         } else {
@@ -181,7 +181,7 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
 
 
 protocol EndpointDelegate {
-    func onEndpointUpdated()
+    func onEndpointUpdated(_ result: Dictionary<String, Any>?)
 }
 
 enum EndPointType: Int {

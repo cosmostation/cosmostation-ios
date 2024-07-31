@@ -97,7 +97,7 @@ class ChainListVC: BaseVC, EndpointDelegate {
         onStartSheet(endpointSheet, 420, 0.8)
     }
     
-    func onEndpointUpdated() {
+    func onEndpointUpdated(_ result: Dictionary<String, Any>?) {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
