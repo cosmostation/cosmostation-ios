@@ -17,7 +17,7 @@ class ManageChainCell: UITableViewCell {
     @IBOutlet weak var evmEndpointLabel: UILabel!
     @IBOutlet weak var cosmosLayer: UIView!
     @IBOutlet weak var cosmosEndpointLabel: UILabel!
-    @IBOutlet weak var cosmosEndpointTag: PaddingLabel!
+    @IBOutlet weak var cosmosEndpointTag: RoundedPaddingLabel!
     
 
     override func awakeFromNib() {

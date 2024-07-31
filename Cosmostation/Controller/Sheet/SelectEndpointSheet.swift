@@ -104,7 +104,7 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == 0 && gRPCList != nil) {
-            view.titleLabel.text = "gPRC"
+            view.titleLabel.text = "gRPC"
             view.cntLabel.text = String(gRPCList!.count)
         } else if (section == 1 && lcdList != nil) {
             view.titleLabel.text = "Rest"
