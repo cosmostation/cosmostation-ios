@@ -200,7 +200,7 @@
 "str_to_add_amount" = "To Add Amount";
 "str_to_remove_amount" = "To Remove Amount";
 "str_claim_all" = "Claim All";
-"str_big_loss" = "자산 손실";
+"str_big_loss" = "Potential Loss of fund";
 "str_big_loss_msg" = "If you proceed with the currently selected swap, significant property damage is expected.\n\nPlease check the expected input and output values and decide carefully.";
 "str_memo_optional" = "Memo (Optional)";
 "str_tx_result" = "Tx Result";
