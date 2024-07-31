@@ -49,8 +49,6 @@ class ClaimAllChainCell: UITableViewCell {
         feeValueLabel.text = ""
         feeAmountLabel.text = ""
         feeDenomLabel.text = ""
-        
-        oldTag.font = UIFont(name: "SpoqaHanSansNeo-Medium", size: 10)
     }
     
     override func prepareForReuse() {
