@@ -70,6 +70,9 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     var skipChains = Array<BaseChain>()               //inapp support chain for skip
     var skipInputAssets = [JSON]()
     var skipOutputAssets = [JSON]()
+    var squidChains = Array<BaseChain>()
+    var squidInputAssets = [JSON]()
+    var squidOutputAssets = [JSON]()
     
     var targetChains = Array<BaseChain>()
     var targetInputAssets = [TargetAsset]()
@@ -105,7 +108,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         loadingView.play()
         
         Task {
-            allChains = await baseAccount.initAllKeys().filter({ $0.isTestnet == false && $0.isDefault && $0.supportCosmos })
+            allChains = await baseAccount.initAllKeys().filter({ $0.isTestnet == false && $0.isDefault /*&& $0.supportCosmos*/ })
             
             
             let skipChainList = try? await self.fetchSkipChains()
@@ -115,7 +118,26 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                 }
             })
             
+            let squidChainList = try? await self.fetchSquidChains()
+            squidChainList?["chains"].arrayValue.forEach({ squidChain in
+                if let squidCosmosChain = allChains.filter({ $0.chainIdCosmos == squidChain["chainId"].stringValue }).first {
+                    if !skipChains.contains(where: { $0.name.lowercased() == squidCosmosChain.name.lowercased() }) {
+                        squidChains.append(squidCosmosChain)
+                    }
+                }
+                
+                if squidChain["chainType"] == "evm" {
+                    if let squidEvmChain = allChains.filter({ squidChain["chainType"] == "evm" && $0.name.lowercased() == squidChain["chainName"].stringValue.lowercased() }).first {
+                        if !skipChains.contains(where: { $0.name.lowercased() == squidEvmChain.name.lowercased() }) {
+                            squidChains.append(squidEvmChain)
+                        }
+                    }
+
+                }
+            })
+            
             targetChains.append(contentsOf: skipChains)
+            targetChains.append(contentsOf: squidChains)
             targetChains.sort {
                 if ($0.tag == "cosmos118") { return true }
                 if ($1.tag == "cosmos118") { return false }
@@ -135,8 +157,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             try await fetchInputAssets()
             try await fetchOutputAssets()
             
-            inputAsset = targetInputAssets[0]
-            outputAsset = targetOutputAssets[0]
+            inputAsset = targetInputAssets.first ?? TargetAsset("", "", 0, "", "", "")
+            outputAsset = targetOutputAssets.first ?? TargetAsset("", "", 0, "", "", "")
             
             try await fetchInputAssetBalance()
             try await fetchOutputAssetBalance()
@@ -442,10 +464,10 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     func onBindSkipRouteReq(_ amount: String) -> JSON {
         var routeReq = JSON()
         routeReq["amount_in"].stringValue = amount
-        routeReq["source_asset_chain_id"].stringValue = inputChain.chainIdCosmos!
-        routeReq["source_asset_denom"].stringValue = inputAsset.denom!
-        routeReq["dest_asset_chain_id"].stringValue = outputChain.chainIdCosmos!
-        routeReq["dest_asset_denom"].stringValue = outputAsset.denom!
+        routeReq["source_asset_chain_id"].stringValue = inputChain.chainIdCosmos ?? ""
+        routeReq["source_asset_denom"].stringValue = inputAsset.denom
+        routeReq["dest_asset_chain_id"].stringValue = outputChain.chainIdCosmos ?? ""
+        routeReq["dest_asset_denom"].stringValue = outputAsset.denom
         routeReq["cumulative_affiliate_fee_bps"].stringValue = inputChain.getSkipAffiliate()
         return routeReq
     }
@@ -474,7 +496,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     }
     
     func getBaseFee() -> Cosmos_Tx_V1beta1_Fee {
-        let minFee = inputChain.getDefaultFeeCoins()[0]
+        let minFee = inputChain.getDefaultFeeCoins().first ?? Cosmos_Base_V1beta1_Coin("", 0) //
         let feeCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = minFee.denom; $0.amount = minFee.amount }
         return Cosmos_Tx_V1beta1_Fee.with {
             $0.gasLimit = UInt64(BASE_GAS_AMOUNT)!
@@ -629,7 +651,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                         inputChain = targetChains.filter({ $0.name == chainName }).first!
                         try await fetchInputAssetBalances()
                         try await fetchInputAssets()
-                        inputAsset = targetInputAssets[0]
+                        inputAsset = targetInputAssets.first ?? TargetAsset("", "", 0, "", "", "")
                         try await fetchInputAssetBalance()
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
@@ -647,7 +669,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                         outputChain = targetChains.filter({ $0.name == chainName }).first!
                         try await fetchOutputAssetBalances()
                         try await fetchOutputAssets()
-                        outputAsset = targetOutputAssets[0]
+                        outputAsset = targetOutputAssets.first ?? TargetAsset("", "", 0, "", "", "")
                         try await fetchOutputAssetBalance()
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
@@ -789,6 +811,9 @@ extension SwapStartVC {
         return try await AF.request(BaseNetWork.SquidChains(), method: .get).serializingDecodable(JSON.self).value
     }
     
+    func fetchSquidAssets(chainId: String) async throws -> JSON {
+        return try await AF.request(BaseNetWork.SquidAsset(chainId), method: .get).serializingDecodable(JSON.self).value
+    }
     
     func fetchInputAssetBalances() async throws {
         _ = await inputChain.getCosmosfetcher()?.fetchCosmosBalances()
@@ -809,6 +834,12 @@ extension SwapStartVC {
             skipInputAssets = skipAssets?["chain_to_assets_map"][inputChain.chainIdForSwap]["assets"].arrayValue ?? []
         }
         
+        squidInputAssets.removeAll()
+        if (squidChains.contains(where: { $0.tag == inputChain.tag })) {
+            let squidAssets = try? await AF.request(BaseNetWork.SquidAsset(inputChain.chainIdForSwap), method: .get).serializingDecodable(JSON.self).value
+            squidInputAssets = squidAssets?["tokens"].arrayValue ?? []
+        }
+        
         var tempInputAssets = [TargetAsset]()
         skipInputAssets.forEach { skipInput in
             let tempTarget = TargetAsset.init(skipInput["denom"].stringValue,
@@ -821,19 +852,36 @@ extension SwapStartVC {
                 tempInputAssets.append(tempTarget)
             }
         }
+
+        squidInputAssets.forEach { squidInput in
+            let tempTarget = TargetAsset.init(squidInput["address"].stringValue,
+                                              squidInput["symbol"].stringValue,
+                                              squidInput["decimals"].int16Value,
+                                              squidInput["logoURI"].stringValue,
+                                              squidInput["coingeckoId"].stringValue,
+                                              squidInput["name"].stringValue)
+            if !tempInputAssets.contains(where: { $0.denom.lowercased() == tempTarget.denom.lowercased() }) {
+                tempInputAssets.append(tempTarget)
+            }
+        }
         
         targetInputAssets.removeAll()
         let msAssets = BaseData.instance.mintscanAssets?.filter({ $0.chain == inputChain.apiName })
         for index in tempInputAssets.indices {
-            if let msAsset = msAssets?.filter({ $0.denom == tempInputAssets[index].denom }).first {
-                if let msGeckoId = msAsset.coinGeckoId {
-                    tempInputAssets[index].geckoId = msGeckoId
-                }
-                if let msDescription = msAsset.description {
-                    tempInputAssets[index].description = msDescription
-                }
-                tempInputAssets[index].image = msAsset.assetImg().absoluteString
+            if inputChain.supportEvm {
                 targetInputAssets.append(tempInputAssets[index])
+                
+            } else {
+                if let msAsset = msAssets?.filter({ $0.denom == tempInputAssets[index].denom }).first {
+                    if let msGeckoId = msAsset.coinGeckoId {
+                        tempInputAssets[index].geckoId = msGeckoId
+                    }
+                    if let msDescription = msAsset.description {
+                        tempInputAssets[index].description = msDescription
+                    }
+                    tempInputAssets[index].image = msAsset.assetImg().absoluteString
+                    targetInputAssets.append(tempInputAssets[index])
+                }
             }
         }
         
@@ -859,6 +907,12 @@ extension SwapStartVC {
             skipOutputAssets = skipAssets?["chain_to_assets_map"][outputChain.chainIdForSwap]["assets"].arrayValue ?? []
         }
         
+        squidOutputAssets.removeAll()
+        if (squidChains.contains(where: { $0.tag == outputChain.tag })) {
+            let squidAssets = try? await AF.request(BaseNetWork.SquidAsset(outputChain.chainIdForSwap), method: .get).serializingDecodable(JSON.self).value
+            squidOutputAssets = squidAssets?["tokens"].arrayValue ?? []
+        }
+        
         var tempOutputAssets = [TargetAsset]()
         skipOutputAssets.forEach { skipOutput in
             let tempTarget = TargetAsset.init(skipOutput["denom"].stringValue,
@@ -872,18 +926,35 @@ extension SwapStartVC {
             }
         }
         
+        squidOutputAssets.forEach { squidOutput in
+            let tempTarget = TargetAsset.init(squidOutput["address"].stringValue,
+                                              squidOutput["symbol"].stringValue,
+                                              squidOutput["decimals"].int16Value,
+                                              squidOutput["logoURI"].stringValue,
+                                              squidOutput["coingeckoId"].stringValue,
+                                              squidOutput["name"].stringValue)
+            if !tempOutputAssets.contains(where: { $0.denom.lowercased() == tempTarget.denom.lowercased() }) {
+                tempOutputAssets.append(tempTarget)
+            }
+        }
+        
         targetOutputAssets.removeAll()
         let msAssets = BaseData.instance.mintscanAssets?.filter({ $0.chain == outputChain.apiName })
         for index in tempOutputAssets.indices {
-            if let msAsset = msAssets?.filter({ $0.denom == tempOutputAssets[index].denom }).first {
-                if let msGeckoId = msAsset.coinGeckoId {
-                    tempOutputAssets[index].geckoId = msGeckoId
-                }
-                if let msDescription = msAsset.description {
-                    tempOutputAssets[index].description = msDescription
-                }
-                tempOutputAssets[index].image = msAsset.assetImg().absoluteString
+            if outputChain.supportEvm {
                 targetOutputAssets.append(tempOutputAssets[index])
+                
+            } else {
+                if let msAsset = msAssets?.filter({ $0.denom == tempOutputAssets[index].denom }).first {
+                    if let msGeckoId = msAsset.coinGeckoId {
+                        tempOutputAssets[index].geckoId = msGeckoId
+                    }
+                    if let msDescription = msAsset.description {
+                        tempOutputAssets[index].description = msDescription
+                    }
+                    tempOutputAssets[index].image = msAsset.assetImg().absoluteString
+                    targetOutputAssets.append(tempOutputAssets[index])
+                }
             }
         }
         
