@@ -21,7 +21,7 @@ class KeyFac {
     
     static func getPriKeyFromSeed(_ pubKeyType: PubKeyType, _ seed: Data, _ path: String) -> Data? {
         if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || 
-            pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256 || pubKeyType == .BTC__Secp256k1) {
+            pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256 || pubKeyType == .BTC_Secp256k1) {
             return getSecp256k1PriKey(seed, path)
             
         } else if (pubKeyType == .SUI_Ed25519) {
@@ -71,7 +71,7 @@ class KeyFac {
     
     static func getPubKeyFromPrivateKey(_ priKey: Data, _ pubKeyType: PubKeyType) -> Data? {
         if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || 
-            pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256 || pubKeyType == .BTC__Secp256k1) {
+            pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256 || pubKeyType == .BTC_Secp256k1) {
             return getSecp256k1PubKey(priKey)
             
         } else if (pubKeyType == .SUI_Ed25519) {
@@ -101,11 +101,13 @@ class KeyFac {
             let data = Data([UInt8](Data(count: 1)) + pubKey)
             let hash = try! Blake2b.hash(size: 32, data: data)
             return "0x" + hash.toHexString()
-        } else if (pubKeyType == .BTC__Secp256k1) { //bitcoin
+        } else if (pubKeyType == .BTC_Secp256k1) { //bitcoin
             //A = RIPEMD160(SHA256(공개키))
             let ripemd160 = RIPEMD160.hash(pubKey.sha256())
             let networkByte: UInt8 = 0x00
             let networkAndHash = Data([networkByte]) + ripemd160
+            
+            print("TEST", base58CheckEncode(networkAndHash))
             return base58CheckEncode(networkAndHash)
 
         }

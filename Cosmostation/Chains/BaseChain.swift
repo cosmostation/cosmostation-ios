@@ -94,7 +94,7 @@ class BaseChain {
                 chain.address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
             }
 
-        } else if (accountKeyType.pubkeyType == .BTC__Secp256k1) {
+        } else if (accountKeyType.pubkeyType == .BTC_Secp256k1) {
             if let chain = self as? ChainBitcoin {
                 chain.address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
             }

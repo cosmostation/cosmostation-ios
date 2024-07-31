@@ -34,7 +34,7 @@ class ChainBitcoin: BaseChain {
     override init() {
         super.init()
         
-        accountKeyType = AccountKeyType(.BTC__Secp256k1, "m/44'/0'/0'/0")
+        accountKeyType = AccountKeyType(.BTC_Secp256k1, "m/44'/0'/0'/0")
         tag = ""
         logo1 = ""
         apiName = ""
