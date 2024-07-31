@@ -77,7 +77,16 @@ class SelectChainCell: UITableViewCell {
         if (chain.supportCosmos && chain.supportEvm) {
             starEvmAddressAnimation()
         }
-        
+        if let chain = chain as? ChainSui  {
+            bechAddressLabel.text = chain.address //test
+        }        
+        if let chain = chain as? ChainBitcoin  {
+            bechAddressLabel.text = chain.address //test
+        }
+
+
+
+
         oldTag.isHidden = chain.isDefault
         
         if (selectedList.contains(chain.tag)) {
