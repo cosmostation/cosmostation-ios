@@ -78,6 +78,10 @@ class SelectChainCell: UITableViewCell {
             starEvmAddressAnimation()
         }
         
+        if let chain = chain as? ChainSui  {
+            bechAddressLabel.text = chain.address //test
+        }
+        
         oldTag.isHidden = chain.isDefault
         
         if (selectedList.contains(chain.tag)) {
