@@ -78,7 +78,7 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
             toAddAccount = BaseAccount("", .onlyPrivateKey, "-1")
             toAddAccount.fetchForPreCreate(nil, privateKeyString)
             mainnetChains = toAddAccount.allChains.filter({ $0.isTestnet == false })
-            testnetChains = toAddAccount.allChains.filter({ $0.isTestnet == false })
+            testnetChains = toAddAccount.allChains.filter({ $0.isTestnet == true })
             onUpdateview()
             
         } else {
