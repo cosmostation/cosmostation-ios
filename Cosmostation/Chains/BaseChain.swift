@@ -89,6 +89,10 @@ class BaseChain {
             bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
             
         } else if (accountKeyType.pubkeyType == .SUI_Ed25519) {
+            // test
+            if let chain = self as? ChainSui {
+                chain.address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+            }
             
         } else {
             evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
@@ -614,6 +618,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNeutron_T())
     result.append(ChainNillion_T())
     
+    result.append(ChainSui())
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {
             chain.chainIdCosmos = cosmosChainId
