@@ -59,6 +59,11 @@ class BaseChain {
     var evmRpcURL = ""
     
     
+    //FOR BTC or SUI or majorChains
+    var mainAddress = ""
+    var mainUrl = ""
+    
+    
     var allCoinValue = NSDecimalNumber.zero
     var allCoinUSDValue = NSDecimalNumber.zero
     var allTokenValue = NSDecimalNumber.zero
@@ -87,12 +92,6 @@ class BaseChain {
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         if (accountKeyType.pubkeyType == .COSMOS_Secp256k1) {
             bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
-            
-        } else if (accountKeyType.pubkeyType == .SUI_Ed25519) {
-            // test
-            if let chain = self as? ChainSui {
-                chain.address = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-            }
             
         } else {
             evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
@@ -601,6 +600,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainStargaze())
     // result.append(ChainStarname())
     result.append(ChainStride())
+    result.append(ChainSui())                           //MAJOR SUI
     result.append(ChainTeritori())
     result.append(ChainTerra())
     result.append(ChainUmee())
@@ -618,7 +618,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNeutron_T())
     result.append(ChainNillion_T())
     
-    result.append(ChainSui())
+    
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {
             chain.chainIdCosmos = cosmosChainId
