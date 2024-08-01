@@ -118,7 +118,8 @@ class CosmosHistoryVC: BaseVC {
         AF.request(url, method: .get, parameters: [:]).responseDecodable(of: OkHistoryRoot.self, queue: .main, decoder: JSONDecoder())  { response in
             switch response.result {
             case .success(let value):
-                if let txs = value.data?[0].transactionLists {
+                if value.data?.count ?? 0 > 0,
+                   let txs = value.data?[0].transactionLists {
                     self.oktHistoey = txs
                 }
                 self.loadingView.isHidden = true
