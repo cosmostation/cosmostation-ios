@@ -339,6 +339,7 @@
 "str_copy_bech_address" = "Copy Cosmos style address";
 "str_share_bech_address" = "Share Cosmos style address";
 "str_share_bech_address2" = "Share\nCosmos Style Address";
+"str_share_address" = "Share Address";
 "str_token_github" = "Check Token Info";
 "str_nft_github" = "Check NFT Info";
 "str_node_down_title" = "⚠️ Network failure";

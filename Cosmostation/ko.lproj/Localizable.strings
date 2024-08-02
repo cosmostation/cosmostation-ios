@@ -339,6 +339,7 @@
 "str_copy_bech_address" = "Cosmos형식 주소복사";
 "str_share_bech_address" = "Cosmos형식 주소공유";
 "str_share_bech_address2" = "Cosmos형식\n주소공유";
+"str_share_address" = "주소공유";
 "str_token_github" = "토큰 정보 확인";
 "str_nft_github" = "NFT 정보 확인";
 "str_node_down_title" = "⚠️ 네트워크 장애";

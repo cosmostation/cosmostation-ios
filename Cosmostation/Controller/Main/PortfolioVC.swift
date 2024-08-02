@@ -334,7 +334,11 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
             self.navigationController?.pushViewController(evmClassVC, animated: true)
             
         } else if (!chain.mainAddress.isEmpty) {
-            //TODO main!!
+            let majorClass = UIStoryboard(name: "MajorClass", bundle: nil).instantiateViewController(withIdentifier: "MajorClassVC") as! MajorClassVC
+            majorClass.selectedChain = chain
+            majorClass.hidesBottomBarWhenPushed = true
+            self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
+            self.navigationController?.pushViewController(majorClass, animated: true)
         }
     }
     

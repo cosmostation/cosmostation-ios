@@ -1,8 +1,8 @@
 //
-//  EvmClassVC.swift
+//  MajorClassVC.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2024/01/25.
+//  Created by yongjoo jung on 8/2/24.
 //  Copyright © 2024 wannabit. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import MaterialComponents
 import JJFloatingActionButton
 import SwiftyJSON
 
-class EvmClassVC: BaseVC {
+class MajorClassVC: BaseVC {
     
     @IBOutlet weak var addressLayer: UIView!
     @IBOutlet weak var addressLabel: UILabel!
@@ -27,7 +27,6 @@ class EvmClassVC: BaseVC {
     @IBOutlet weak var ecosystemList: UIView!
     @IBOutlet weak var AboutList: UIView!
     
-    var addtokenBarBtn: UIBarButtonItem!
     var explorerBarBtn: UIBarButtonItem!
     
     var selectedChain: BaseChain!
@@ -44,26 +43,24 @@ class EvmClassVC: BaseVC {
         }
     }
     
-    var evmAssetVC: EvmAssetVC?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "embedAssetVC") {
-            let target = segue.destination as! EvmAssetVC
+        if (segue.identifier == "majorCryptoVC") {
+            let target = segue.destination as! MajorCryptoVC
             target.selectedChain = selectedChain
-            evmAssetVC = target
-        } else if (segue.identifier == "embedNftVC") {
-            let target = segue.destination as! EvmNftVC
+        } else if (segue.identifier == "majorNftVC") {
+            let target = segue.destination as! MajorNftVC
             target.selectedChain = selectedChain
-        } else if (segue.identifier == "embedReceiveVC") {
-            let target = segue.destination as! EvmReceiveVC
+        } else if (segue.identifier == "majorReceiveVC") {
+            let target = segue.destination as! MajorReceiveVC
             target.selectedChain = selectedChain
-        } else if (segue.identifier == "embedHistoryVC") {
-            let target = segue.destination as! EvmHistoryVC
+        } else if (segue.identifier == "majorHistoryVC") {
+            let target = segue.destination as! MajorHistoryVC
             target.selectedChain = selectedChain
-        } else if (segue.identifier == "embedEcosystemVC") {
-            let target = segue.destination as! EvmEcosystemVC
+        } else if (segue.identifier == "majorEcosystemVC") {
+            let target = segue.destination as! MajorEcosystemVC
             target.selectedChain = selectedChain
-        } else if (segue.identifier == "embedAboutVC") {
-            let target = segue.destination as! EvmAboutVC
+        } else if (segue.identifier == "majorAboutVC") {
+            let target = segue.destination as! MajorAboutVC
             target.selectedChain = selectedChain
         }
     }
@@ -73,7 +70,7 @@ class EvmClassVC: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         totalValue = selectedChain.allValue()
-        addressLabel.text = selectedChain.evmAddress
+        addressLabel.text = selectedChain.mainAddress
         
         onSetTabbarView()
         
@@ -81,25 +78,14 @@ class EvmClassVC: BaseVC {
         addressTap.cancelsTouchesInView = false
         addressLayer.addGestureRecognizer(addressTap)
         
-        let addtokenBtn: UIButton = UIButton(type: .custom)
-        addtokenBtn.setImage(UIImage(named: "iconAddToken"), for: .normal)
-        addtokenBtn.addTarget(self, action:  #selector(onClickAddToken), for: .touchUpInside)
-        addtokenBtn.frame = CGRectMake(0, 0, 40, 30)
-        addtokenBarBtn = UIBarButtonItem(customView: addtokenBtn)
-        
         let explorerBtn: UIButton = UIButton(type: .custom)
         explorerBtn.setImage(UIImage(named: "iconExplorer"), for: .normal)
         explorerBtn.addTarget(self, action:  #selector(onClickExplorer), for: .touchUpInside)
         explorerBtn.frame = CGRectMake(0, 0, 30, 30)
         explorerBarBtn = UIBarButtonItem(customView: explorerBtn)
         
-        navigationItem.rightBarButtonItems = [explorerBarBtn, addtokenBarBtn]
+        navigationItem.rightBarButtonItems = [explorerBarBtn]
         navigationItem.titleView = BgRandomButton()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -119,32 +105,28 @@ class EvmClassVC: BaseVC {
             let tabVC = (self.parent)?.parent as? MainTabVC
             tabVC?.hideChainBgImg()
         }
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchTokens"), object: nil)
-    }
-    
-    @objc func onFetchDone(_ notification: NSNotification) {
-        let tag = notification.object as! String
-        if (tag == selectedChain.tag) {
-            totalValue = selectedChain.allValue()
-        }
     }
     
     func onSetTabbarView() {
-        let assetTabBar = UITabBarItem(title: "Crypto", image: nil, tag: 0)
-//        let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 1)
+        let coinTabBar = UITabBarItem(title: "Crypto", image: nil, tag: 0)
+        let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 1)
         let receiveTabBar = UITabBarItem(title: "Receive", image: nil, tag: 2)
-//        let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 3)
+        let historyTabBar = UITabBarItem(title: "History", image: nil, tag: 3)
         let ecosystemTabBar = UITabBarItem(title: "Ecosystem", image: nil, tag: 4)
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 5)
-        tabbar.items.append(assetTabBar)
-//        if (BaseData.instance.showEvenReview()) { tabbar.items.append(nftTabBar) }
+        tabbar.items.append(coinTabBar)
+        tabbar.items.append(nftTabBar)
         tabbar.items.append(receiveTabBar)
+        tabbar.items.append(historyTabBar)
+        tabbar.items.append(ecosystemTabBar)
+        tabbar.items.append(aboutTabBar)
+//        if (BaseData.instance.showEvenReview()) { tabbar.items.append(nftTabBar) }
+//        tabbar.items.append(receiveTabBar)
 //        tabbar.items.append(historyTabBar)
-        if (BaseData.instance.showEvenReview() && selectedChain.isEcosystem()) { tabbar.items.append(ecosystemTabBar) }
-        if (!selectedChain.getChainListParam().isEmpty) {
-            tabbar.items.append(aboutTabBar)
-        }
+//        if (BaseData.instance.showEvenReview() && selectedChain.isEcosystem()) { tabbar.items.append(ecosystemTabBar) }
+//        if (!selectedChain.getChainListParam().isEmpty) {
+//            tabbar.items.append(aboutTabBar)
+//        }
         
         tabbar.barTintColor = .clear
         tabbar.selectionIndicatorStrokeColor = .white
@@ -152,7 +134,7 @@ class EvmClassVC: BaseVC {
         tabbar.setTitleFont(.fontSize14Bold, for: .selected)
         tabbar.setTitleColor(.color02, for: .normal)
         tabbar.setTitleColor(.color02, for: .selected)
-        tabbar.setSelectedItem(assetTabBar, animated: false)
+        tabbar.setSelectedItem(coinTabBar, animated: false)
         tabbar.tabBarDelegate = self
         tabbar.preferredLayoutStyle = .fixed
         tabbar.setContentPadding(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), for: .scrollable)
@@ -187,18 +169,14 @@ class EvmClassVC: BaseVC {
         guard let url = selectedChain.getExplorerAccount() else { return }
         self.onShowSafariWeb(url)
     }
-    
-    @objc func onClickAddToken() {
-        if (evmAssetVC != nil) {
-            evmAssetVC?.onShowTokenListSheet()
-        }
-    }
+
 }
 
 
-extension EvmClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
+extension MajorClassVC: MDCTabBarViewDelegate {
     
     func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
+        print("didSelect ", item.tag)
         if (item.tag == 0) {
             assetList.alpha = 1
             nftList.alpha = 0
@@ -206,7 +184,6 @@ extension EvmClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             historyList.alpha = 0
             ecosystemList.alpha = 0
             AboutList.alpha = 0
-            navigationItem.rightBarButtonItems = [explorerBarBtn, addtokenBarBtn]
             
         } else if (item.tag == 1) {
             assetList.alpha = 0
@@ -215,7 +192,6 @@ extension EvmClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             historyList.alpha = 0
             ecosystemList.alpha = 0
             AboutList.alpha = 0
-            navigationItem.rightBarButtonItems = [explorerBarBtn]
             
         } else if (item.tag == 2) {
             assetList.alpha = 0
@@ -224,7 +200,6 @@ extension EvmClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             historyList.alpha = 0
             ecosystemList.alpha = 0
             AboutList.alpha = 0
-            navigationItem.rightBarButtonItems = [explorerBarBtn]
             
         } else if (item.tag == 3) {
             assetList.alpha = 0
@@ -233,7 +208,6 @@ extension EvmClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             historyList.alpha = 1
             ecosystemList.alpha = 0
             AboutList.alpha = 0
-            navigationItem.rightBarButtonItems = [explorerBarBtn]
             
         } else if (item.tag == 4) {
             assetList.alpha = 0
@@ -242,7 +216,6 @@ extension EvmClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             historyList.alpha = 0
             ecosystemList.alpha = 1
             AboutList.alpha = 0
-            navigationItem.rightBarButtonItems = [explorerBarBtn]
             
         } else if (item.tag == 5) {
             assetList.alpha = 0
@@ -251,10 +224,6 @@ extension EvmClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
             historyList.alpha = 0
             ecosystemList.alpha = 0
             AboutList.alpha = 1
-            navigationItem.rightBarButtonItems = [explorerBarBtn]
         }
-    }
-    
-    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
     }
 }

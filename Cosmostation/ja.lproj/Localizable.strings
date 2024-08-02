@@ -339,6 +339,7 @@
 "str_copy_bech_address" = "Cosmos スタイルのアドレスをコピー";
 "str_share_bech_address" = "Cosmos スタイルのアドレスを共有する";
 "str_share_bech_address2" = "Cosmos\nスタイルのアドレスを共有する";
+"str_share_address" = "アドレスを共有する";
 "str_token_github" = "Token 情報確認";
 "str_nft_github" = "NFT 情報確認";
 "str_node_down_title" = "⚠️ ネットワーク障害";
