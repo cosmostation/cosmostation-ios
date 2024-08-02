@@ -115,24 +115,24 @@ extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if (section == 0 && mainnetChains.count == 0) { return nil }
-        if (section == 1 && testnetChains.count == 0) { return nil }
+        if (section == 0 && searchMainnets.count == 0) { return nil }
+        if (section == 1 && searchTestnets.count == 0) { return nil }
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == 0) {
             view.titleLabel.text = "Mainnet"
-            view.cntLabel.text = String(mainnetChains.count)
+            view.cntLabel.text = String(searchMainnets.count)
         } else if (section == 1) {
             view.titleLabel.text = "Testnet"
-            view.cntLabel.text = String(testnetChains.count)
+            view.cntLabel.text = String(searchTestnets.count)
         }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0) {
-            return mainnetChains.count == 0 ? 0 : 40
+            return searchMainnets.count == 0 ? 0 : 40
         } else if (section == 1) {
-            return testnetChains.count == 0 ? 0 : 40
+            return searchTestnets.count == 0 ? 0 : 40
         }
         return 0
     }
