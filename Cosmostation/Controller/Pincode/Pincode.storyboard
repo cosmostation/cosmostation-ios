@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,9 +11,6 @@
     <customFonts key="customFonts">
         <array key="SpoqaHanSansNeo-Bold.otf">
             <string>SpoqaHanSansNeo-Bold</string>
-        </array>
-        <array key="SpoqaHanSansNeo-Regular.otf">
-            <string>SpoqaHanSansNeo-Regular</string>
         </array>
     </customFonts>
     <scenes>
@@ -98,6 +95,7 @@
                                 <rect key="frame" x="0.0" y="302" width="320" height="256"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ivf-H9-JWH" secondAttribute="height" multiplier="10:8" id="IMn-ME-p0b"/>
+                                    <constraint firstAttribute="width" secondItem="ivf-H9-JWH" secondAttribute="height" multiplier="10:8" id="y0y-6r-l1x"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="eYo-zT-SQ8" kind="embed" id="u9F-hW-U30"/>
@@ -113,7 +111,6 @@
                             <constraint firstItem="ivf-H9-JWH" firstAttribute="top" secondItem="kwO-g6-mMG" secondAttribute="bottom" id="byu-Q2-GdQ"/>
                             <constraint firstItem="kwO-g6-mMG" firstAttribute="leading" secondItem="hcZ-lA-WpK" secondAttribute="leading" constant="30" id="nbU-Do-OSM"/>
                             <constraint firstItem="hcZ-lA-WpK" firstAttribute="bottom" secondItem="ivf-H9-JWH" secondAttribute="bottom" constant="10" id="pUt-Vo-Erx"/>
-                            <constraint firstItem="ivf-H9-JWH" firstAttribute="width" secondItem="ivf-H9-JWH" secondAttribute="height" multiplier="10:8" id="y0y-6r-l1x"/>
                             <constraint firstItem="kwO-g6-mMG" firstAttribute="top" secondItem="zbn-21-Gcx" secondAttribute="top" constant="20" id="zI3-yG-AVr"/>
                         </constraints>
                     </view>
@@ -321,7 +318,7 @@
                                                             <constraint firstAttribute="width" constant="120" id="87A-ya-AS3"/>
                                                             <constraint firstAttribute="width" secondItem="zaL-14-eUO" secondAttribute="height" multiplier="10:6" id="ZvM-dc-MbZ"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Regular" family="Spoqa Han Sans Neo" pointSize="24"/>
+                                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="24"/>
                                                         <state key="normal" title="0">
                                                             <color key="titleColor" name="_color01"/>
                                                         </state>
@@ -778,10 +775,10 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_colorBg">
-            <color red="0.16862745098039217" green="0.16862745098039217" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.33700001239776611" green="0.016000000759959221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
