@@ -131,7 +131,7 @@ class EvmClassVC: BaseVC {
     }
     
     func onSetTabbarView() {
-        let assetTabBar = UITabBarItem(title: "Assets", image: nil, tag: 0)
+        let assetTabBar = UITabBarItem(title: "Crypto", image: nil, tag: 0)
 //        let nftTabBar = UITabBarItem(title: "NFTs", image: nil, tag: 1)
         let receiveTabBar = UITabBarItem(title: "Receive", image: nil, tag: 2)
 //        let historyTabBar = UITabBarItem(title: "Histories", image: nil, tag: 3)
