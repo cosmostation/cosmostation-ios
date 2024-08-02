@@ -38,7 +38,7 @@ class KavaLendListCell: UITableViewCell {
             return
         }
         let hardImgDenom = msAsset.origin_denom ?? ""
-        let url = KAVA_HARD_POOL_IMG_URL + "lp" + hardImgDenom + ".png"
+        let url = KAVA_HARD_POOL_IMG_URL + "lp" + hardImgDenom.replacingOccurrences(of: "/", with: ":") + ".png"
         let title = hardMarket?.spotMarketID.replacingOccurrences(of: ":30", with: "").replacingOccurrences(of: ":720", with: "")
         marketImg.sd_setImage(with: URL(string: url)!)
         marketNameLabel.text = title?.uppercased()
