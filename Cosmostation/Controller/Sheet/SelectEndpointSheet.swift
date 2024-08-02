@@ -106,11 +106,16 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
         if (section == 0 && gRPCList != nil) {
             view.titleLabel.text = "gRPC"
             view.cntLabel.text = String(gRPCList!.count)
+            return view
+            
         } else if (section == 1 && lcdList != nil) {
             view.titleLabel.text = "Rest"
             view.cntLabel.text = String(lcdList!.count)
+            return view
+            
+        } else {
+            return nil
         }
-        return view
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (tableView == cosmosTableView) {
