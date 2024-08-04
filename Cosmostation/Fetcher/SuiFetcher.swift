@@ -84,6 +84,11 @@ class SuiFetcher {
                         }
                     }
                 }
+                
+                
+                if (suiBalances.filter { $0.0 == SUI_MAIN_DENOM }.count == 0) {
+                    suiBalances.append((SUI_MAIN_DENOM, NSDecimalNumber.zero))
+                }
                 suiBalances.sort {
                     if ($0.0 == SUI_MAIN_DENOM) { return true }
                     if ($1.0 == SUI_MAIN_DENOM) { return false }

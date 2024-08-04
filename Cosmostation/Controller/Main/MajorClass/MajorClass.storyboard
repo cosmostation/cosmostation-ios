@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -190,9 +190,37 @@
                     <view key="view" contentMode="scaleToFill" id="UeP-GM-2hf">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="O5d-SO-gxk">
+                                <rect key="frame" x="0.0" y="59" width="393" height="559.33333333333337"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gmC-Ql-oRE" customClass="LottieAnimationView" customModule="Lottie">
+                                <rect key="frame" x="106.66666666666669" y="283.66666666666669" width="180" height="110"/>
+                                <viewLayoutGuide key="safeArea" id="T0v-ab-3Gr"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="XHi-p7-1GE"/>
+                                    <constraint firstAttribute="width" constant="180" id="mM6-Np-Aq7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="q8P-dV-bG4"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="_primary"/>
+                        <constraints>
+                            <constraint firstItem="q8P-dV-bG4" firstAttribute="top" secondItem="O5d-SO-gxk" secondAttribute="top" id="CGp-I7-juA"/>
+                            <constraint firstItem="q8P-dV-bG4" firstAttribute="bottom" secondItem="O5d-SO-gxk" secondAttribute="bottom" id="CZ5-ei-cfx"/>
+                            <constraint firstItem="gmC-Ql-oRE" firstAttribute="centerY" secondItem="q8P-dV-bG4" secondAttribute="centerY" id="Jcr-T3-JXo"/>
+                            <constraint firstItem="q8P-dV-bG4" firstAttribute="trailing" secondItem="O5d-SO-gxk" secondAttribute="trailing" id="MXh-eV-yVn"/>
+                            <constraint firstItem="q8P-dV-bG4" firstAttribute="leading" secondItem="O5d-SO-gxk" secondAttribute="leading" id="h5O-pt-U41"/>
+                            <constraint firstItem="gmC-Ql-oRE" firstAttribute="centerX" secondItem="q8P-dV-bG4" secondAttribute="centerX" id="z0V-Kd-g5d"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loadingView" destination="gmC-Ql-oRE" id="WMG-F1-D30"/>
+                        <outlet property="tableView" destination="O5d-SO-gxk" id="y8Y-3B-GU4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="29U-LW-8eA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -205,6 +233,7 @@
                     <view key="view" contentMode="scaleToFill" id="qbO-9A-u2A">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="AvM-WE-EKH"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="_primary"/>
                     </view>
@@ -220,6 +249,7 @@
                     <view key="view" contentMode="scaleToFill" id="xqe-l6-deK">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="5e6-3M-EO3"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="_primary"/>
                     </view>
@@ -235,6 +265,7 @@
                     <view key="view" contentMode="scaleToFill" id="bYM-hy-hfA">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="1EX-Fz-wGo"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="_primary"/>
                     </view>
@@ -250,6 +281,7 @@
                     <view key="view" contentMode="scaleToFill" id="gXb-ss-Cj2">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="rgZ-q1-o91"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="_primary"/>
                     </view>
@@ -265,6 +297,7 @@
                     <view key="view" contentMode="scaleToFill" id="2tB-EL-60s">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="7nD-nP-wYd"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="_primary"/>
                     </view>

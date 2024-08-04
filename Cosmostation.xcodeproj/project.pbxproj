@@ -1924,6 +1924,10 @@
 		E1B44B262ADA41DE0073C88A /* NeutronMultiVoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B44B232ADA41DE0073C88A /* NeutronMultiVoteCell.swift */; };
 		E1B44B272ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B44B242ADA41DE0073C88A /* NeutronMultiVoteCell.xib */; };
 		E1B44B282ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B44B242ADA41DE0073C88A /* NeutronMultiVoteCell.xib */; };
+		E1C5007C2C5F0F3700406EE5 /* AssetSuiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C5007A2C5F0F3700406EE5 /* AssetSuiCell.swift */; };
+		E1C5007D2C5F0F3700406EE5 /* AssetSuiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C5007B2C5F0F3700406EE5 /* AssetSuiCell.xib */; };
+		E1C5007E2C5F0F3700406EE5 /* AssetSuiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C5007A2C5F0F3700406EE5 /* AssetSuiCell.swift */; };
+		E1C5007F2C5F0F3700406EE5 /* AssetSuiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C5007B2C5F0F3700406EE5 /* AssetSuiCell.xib */; };
 		E1CD6AEE2AEAAEA300376909 /* AboutDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD6AEC2AEAAEA300376909 /* AboutDescriptionCell.swift */; };
 		E1CD6AEF2AEAAEA300376909 /* AboutDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD6AEC2AEAAEA300376909 /* AboutDescriptionCell.swift */; };
 		E1CD6AF02AEAAEA300376909 /* AboutDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1CD6AED2AEAAEA300376909 /* AboutDescriptionCell.xib */; };
@@ -3010,6 +3014,8 @@
 		E1B44B1E2ADA41CD0073C88A /* NeutronSingleVoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronSingleVoteCell.xib; sourceTree = "<group>"; };
 		E1B44B232ADA41DE0073C88A /* NeutronMultiVoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronMultiVoteCell.swift; sourceTree = "<group>"; };
 		E1B44B242ADA41DE0073C88A /* NeutronMultiVoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronMultiVoteCell.xib; sourceTree = "<group>"; };
+		E1C5007A2C5F0F3700406EE5 /* AssetSuiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetSuiCell.swift; sourceTree = "<group>"; };
+		E1C5007B2C5F0F3700406EE5 /* AssetSuiCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetSuiCell.xib; sourceTree = "<group>"; };
 		E1CD6AEC2AEAAEA300376909 /* AboutDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutDescriptionCell.swift; sourceTree = "<group>"; };
 		E1CD6AED2AEAAEA300376909 /* AboutDescriptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutDescriptionCell.xib; sourceTree = "<group>"; };
 		E1CD6AF22AEAAEC200376909 /* AboutStakingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutStakingCell.swift; sourceTree = "<group>"; };
@@ -4222,6 +4228,8 @@
 				04527DB82A937CA2005F72D7 /* AssetCell.xib */,
 				04527DBD2A937CC1005F72D7 /* AssetCosmosClassCell.swift */,
 				04527DBE2A937CC1005F72D7 /* AssetCosmosClassCell.xib */,
+				E1C5007A2C5F0F3700406EE5 /* AssetSuiCell.swift */,
+				E1C5007B2C5F0F3700406EE5 /* AssetSuiCell.xib */,
 				E14E29732A98DA5300939AD2 /* SelectChainCell.swift */,
 				E14E29742A98DA5300939AD2 /* SelectChainCell.xib */,
 				04FEDB502B05DE230095B7B6 /* DeriveCell.swift */,
@@ -4935,6 +4943,7 @@
 				E15F2D012ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */,
 				E1B44B282ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */,
 				047842DB2AC87C1000462F1C /* CosmosTxResult.xib in Resources */,
+				E1C5007F2C5F0F3700406EE5 /* AssetSuiCell.xib in Resources */,
 				E10B1DC92C2159040039283B /* KavaEarnWithdrawAction.xib in Resources */,
 				E1F257EE2BFB2024008F4D21 /* EvmRedelegate.xib in Resources */,
 				18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */,
@@ -4991,6 +5000,7 @@
 				E10B1D852C2156430039283B /* KavaLendListCell.xib in Resources */,
 				04C63D272B87039D00D4A366 /* tx_loading.json in Resources */,
 				04FEDB5A2B06012D0095B7B6 /* HdPathSheet.xib in Resources */,
+				E1C5007D2C5F0F3700406EE5 /* AssetSuiCell.xib in Resources */,
 				E16200342AF0CFFD0008F397 /* SelectEndpointCell.xib in Resources */,
 				E10B1D812C2156430039283B /* KavaIncentiveCell.xib in Resources */,
 				1809C35129D16C80008884C1 /* injectScript.js in Resources */,
@@ -5446,6 +5456,7 @@
 				045032812C1EEDCD00235F6A /* ChainCelestia.swift in Sources */,
 				045CF9652C450D72000DAD08 /* CosmosFetcher.swift in Sources */,
 				04B7897C2ACAC9B100E9BE88 /* ibc_core_channel_v1_channel.pb.swift in Sources */,
+				E1C5007E2C5F0F3700406EE5 /* AssetSuiCell.swift in Sources */,
 				04C817B92BA98D75006B800A /* cosmos_staking_v1beta1_tx.pb.swift in Sources */,
 				046EA8E02AD04A2600A2FCE7 /* desmos_profiles_v3_models_packets.pb.swift in Sources */,
 				04C816632BA98D74006B800A /* cosmos_authz_v1beta1_tx.pb.swift in Sources */,
@@ -6257,6 +6268,7 @@
 				045032802C1EEDCD00235F6A /* ChainCelestia.swift in Sources */,
 				045CF9642C450D72000DAD08 /* CosmosFetcher.swift in Sources */,
 				0472D4832B03588F00B9E6E8 /* NoticeSheet.swift in Sources */,
+				E1C5007C2C5F0F3700406EE5 /* AssetSuiCell.swift in Sources */,
 				04C817B82BA98D75006B800A /* cosmos_staking_v1beta1_tx.pb.swift in Sources */,
 				04B7898D2ACAC9B100E9BE88 /* ibc_core_connection_v1_tx.pb.swift in Sources */,
 				04C816622BA98D74006B800A /* cosmos_authz_v1beta1_tx.pb.swift in Sources */,

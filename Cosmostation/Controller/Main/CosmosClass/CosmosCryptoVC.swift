@@ -394,7 +394,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
             
-            } else {
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
             
             if let oktChain = selectedChain as? ChainOktEVM {
@@ -403,7 +403,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 } else if indexPath.section == 1 {
                     cell.bindEvmClassToken(selectedChain, searchMintscanErc20Tokens[indexPath.row])
                 }
-
+                
             } else if (selectedChain is ChainBeraEVM_T && indexPath.section == 0 && indexPath.row == 1) {
                 cell.bindEvmClassCoin(selectedChain as! ChainBeraEVM_T)
                 
