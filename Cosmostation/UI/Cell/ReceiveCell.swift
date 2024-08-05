@@ -72,6 +72,18 @@ class ReceiveCell: UITableViewCell {
                 let chainLogo = UIImage.init(named: chain.logo1)
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }
+        } else if !chain.mainAddress.isEmpty {
+            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
+            let mainAddress = chain.mainAddress
+            addressLabel.numberOfLines = 2
+            addressLabel.text = mainAddress
+            
+            if let qrImage = WUtils.generateQrCode(mainAddress) {
+                rqImgView.image = UIImage(ciImage: qrImage)
+                let chainLogo = UIImage.init(named: chain.logo1)
+                chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
+            }
+            
         }
     }
     
