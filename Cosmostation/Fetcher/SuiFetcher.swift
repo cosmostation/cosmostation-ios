@@ -20,7 +20,6 @@ class SuiFetcher {
     var suiObjects = [JSON]()
     var suiValidators = [JSON]()
     var suiCoinMeta: [String: JSON] = [:]
-    var suiNFTs: [JSON] = []
     
     init(_ chain: BaseChain) {
         self.chain = chain
@@ -208,6 +207,14 @@ class SuiFetcher {
         return allBalanceValue(usd).adding(stakedValue(usd))
     }
     
+    //TODO chekc nft logic match with android & extention
+    func suiNfts() -> [JSON] {
+        return suiObjects.filter { object in
+            let typeS = object["type"].string?.lowercased()
+            return (typeS?.contains("stakedsui") == false && typeS?.contains("coin") == false)
+        }
+    }
+    
     
     func getSuiRpc() -> String {
         return chain.mainUrl
@@ -265,18 +272,6 @@ extension SuiFetcher {
     func fetchCoinMetadata(_ coinType: String) async throws -> JSON? {
         let parameters: Parameters = ["method": "suix_getCoinMetadata", "params": [coinType], "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
-    }
-    
-    func fetchNFTs() {
-        Task {
-            let _ = await fetchSuiData(BaseData.instance.baseAccount!.id)
-            suiNFTs = suiObjects.filter {
-                let typeS = $0["type"].string?.lowercased()
-                return (typeS?.contains("stakedsui") == false && typeS?.contains("coin") == false)
-            }
-            
-            NotificationCenter.default.post(name: NSNotification.Name("FetchSuiNFTs"), object: chain.tag, userInfo: nil)
-        }
     }
 }
 
