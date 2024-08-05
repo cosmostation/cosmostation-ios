@@ -68,14 +68,20 @@ class SelectChainCell: UITableViewCell {
     func bindSelectChain(_ account: BaseAccount, _ chain: BaseChain, _ selectedList: [String]) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
-        if (chain.supportCosmos) {
-            bechAddressLabel.text = chain.bechAddress
-        }
-        if (chain.supportEvm) {
-            evmAddressLabel.text = chain.evmAddress
-        }
+        
         if (chain.supportCosmos && chain.supportEvm) {
+            bechAddressLabel.text = chain.bechAddress
+            evmAddressLabel.text = chain.evmAddress
             starEvmAddressAnimation()
+            
+        } else if (chain.supportCosmos) {
+            bechAddressLabel.text = chain.bechAddress
+            
+        } else if (chain.supportEvm) {
+            evmAddressLabel.text = chain.evmAddress
+            
+        } else {
+            bechAddressLabel.text = chain.mainAddress
         }
         
         oldTag.isHidden = chain.isDefault

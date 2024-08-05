@@ -16,19 +16,37 @@ class QrAddressVC: BaseVC {
     @IBOutlet weak var bechShareBtn: BaseButton!
     
     var selectedChain: BaseChain!
-    var isEvm: Bool!
-    var isBech: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        isEvm = selectedChain.supportEvm
-        isBech = selectedChain.supportCosmos
-        
         titleLabel.text = baseAccount.name
-        evmShareBtn.isHidden = !isEvm
-        bechShareBtn.isHidden = !isBech
+        
+        
+        if (selectedChain.supportEvm && selectedChain.supportCosmos) {
+            evmShareBtn.isHidden = false
+            bechShareBtn.isHidden = false
+            evmShareBtn.setTitle(NSLocalizedString("str_share_evm_address2", comment: ""), for: .normal)
+            bechShareBtn.setTitle(NSLocalizedString("str_share_bech_address2", comment: ""), for: .normal)
+            
+        } else if (selectedChain.supportEvm) {
+            evmShareBtn.isHidden = false
+            bechShareBtn.isHidden = true
+            evmShareBtn.setTitle(NSLocalizedString("str_share_address", comment: ""), for: .normal)
+            
+        } else if (selectedChain.supportCosmos) {
+            evmShareBtn.isHidden = true
+            bechShareBtn.isHidden = false
+            bechShareBtn.setTitle(NSLocalizedString("str_share_address", comment: ""), for: .normal)
+            
+        } else if (!selectedChain.mainAddress.isEmpty) {
+            evmShareBtn.isHidden = true
+            bechShareBtn.isHidden = false
+            bechShareBtn.setTitle(NSLocalizedString("str_share_address", comment: ""), for: .normal)
+        }
+        evmShareBtn.titleLabel?.textAlignment = .center
+        bechShareBtn.titleLabel?.textAlignment = .center
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -37,50 +55,44 @@ class QrAddressVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-        
-        evmShareBtn.setTitle(NSLocalizedString("str_share_evm_address", comment: ""), for: .normal)
-        bechShareBtn.setTitle(NSLocalizedString("str_share_bech_address", comment: ""), for: .normal)
-        if (isEvm && isBech) {
-            evmShareBtn.titleLabel?.font = .fontSize14Bold
-            bechShareBtn.titleLabel?.font = .fontSize14Bold
-            evmShareBtn.setTitle(NSLocalizedString("str_share_evm_address2", comment: ""), for: .normal)
-            bechShareBtn.setTitle(NSLocalizedString("str_share_bech_address2", comment: ""), for: .normal)
-            evmShareBtn.titleLabel?.textAlignment = .center
-            bechShareBtn.titleLabel?.textAlignment = .center
-        }
     }
     
     @IBAction func onClickEvmShare(_ sender: BaseButton) {
-        if let evmAddress = selectedChain.evmAddress {
-            let activityViewController = UIActivityViewController(activityItems: [evmAddress], applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = self.view
-            self.present(activityViewController, animated: true, completion: nil)
-        }
+//        if let evmAddress = selectedChain.evmAddress {
+//            let activityViewController = UIActivityViewController(activityItems: [evmAddress], applicationActivities: nil)
+//            activityViewController.popoverPresentationController?.sourceView = self.view
+//            self.present(activityViewController, animated: true, completion: nil)
+//        }
     }
     
     
     @IBAction func onClickBechShare(_ sender: BaseButton) {
-        if let bechAddress = selectedChain.bechAddress {
-            let activityViewController = UIActivityViewController(activityItems: [bechAddress], applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = self.view
-            self.present(activityViewController, animated: true, completion: nil)
-        }
+//        if let bechAddress = selectedChain.bechAddress {
+//            let activityViewController = UIActivityViewController(activityItems: [bechAddress], applicationActivities: nil)
+//            activityViewController.popoverPresentationController?.sourceView = self.view
+//            self.present(activityViewController, animated: true, completion: nil)
+//        }
     }
 }
 
 extension QrAddressVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 0 && !isEvm) {
-            return 0
-        } else if (indexPath.section == 1 && !isBech) {
-            return 0
+        if (indexPath.section == 0) {
+            return selectedChain.supportEvm == true ? UITableView.automaticDimension : 0
+            
+        } else if (indexPath.section == 1) {
+            return selectedChain.supportCosmos == true ? UITableView.automaticDimension : 0
+            
+        } else if (indexPath.section == 2) {
+            return selectedChain.mainAddress.isEmpty == true ? 0 : UITableView.automaticDimension
+            
         }
-        return UITableView.automaticDimension
+        return 0
     }
     
     
@@ -96,10 +108,14 @@ extension QrAddressVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var toCopyAddress = ""
-        if selectedChain.supportEvm, indexPath.section == 0 {
+        if (indexPath.section == 0) {
             toCopyAddress = selectedChain.evmAddress!
-        } else if selectedChain.supportCosmos, indexPath.section == 1 {
+            
+        } else if (indexPath.section == 1) {
             toCopyAddress = selectedChain.bechAddress!
+            
+        } else if (indexPath.section == 2) {
+            toCopyAddress = selectedChain.mainAddress
         }
         UIPasteboard.general.string = toCopyAddress.trimmingCharacters(in: .whitespacesAndNewlines)
         self.onShowToast(NSLocalizedString("address_copied", comment: ""))

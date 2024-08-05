@@ -52,6 +52,16 @@ class QrAddressPopupVC: BaseVC {
                 keyTypeTag.isHidden = false
             }
             
+        } else {
+            toDpAddress = selectedChain.mainAddress
+            addressLabel.numberOfLines = 2
+            addressLabel.text = toDpAddress
+            if (baseAccount.type == .withMnemonic) {
+                hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
+            } else {
+                hdPathLabel.text = ""
+            }
+            
         }
             
         if let qrImage = WUtils.generateQrCode(toDpAddress) {

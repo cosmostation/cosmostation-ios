@@ -35,26 +35,38 @@ class PopupReceiveCell: UITableViewCell {
         }
         oldTag.isHidden = chain.isDefault
         
-        if chain.supportEvm, section == 0 {
+        if (section == 0 && chain.supportEvm)  {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name + " EVM")
             let evmAddress = chain.evmAddress!
             addressLabel.text = evmAddress
             addressLabel.adjustsFontSizeToFitWidth = true
             
-            if let bechQrImage = WUtils.generateQrCode(evmAddress) {
-                rqImgView.image = UIImage(ciImage: bechQrImage)
+            if let qrImage = WUtils.generateQrCode(evmAddress) {
+                rqImgView.image = UIImage(ciImage: qrImage)
                 let chainLogo = UIImage.init(named: chain.logo1)
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }
             
-        } else if chain.supportCosmos, section == 1 {
+        } else if (section == 1 && chain.supportCosmos) {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
             let bechAddress = chain.bechAddress!
             addressLabel.text = bechAddress
             addressLabel.adjustsFontSizeToFitWidth = true
             
-            if let bechQrImage = WUtils.generateQrCode(bechAddress) {
-                rqImgView.image = UIImage(ciImage: bechQrImage)
+            if let qrImage = WUtils.generateQrCode(bechAddress) {
+                rqImgView.image = UIImage(ciImage: qrImage)
+                let chainLogo = UIImage.init(named: chain.logo1)
+                chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
+            }
+            
+        } else if (section == 2 && !chain.mainAddress.isEmpty) {
+            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
+            let mainAddress = chain.mainAddress
+            addressLabel.numberOfLines = 2
+            addressLabel.text = mainAddress
+            
+            if let qrImage = WUtils.generateQrCode(mainAddress) {
+                rqImgView.image = UIImage(ciImage: qrImage)
                 let chainLogo = UIImage.init(named: chain.logo1)
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }

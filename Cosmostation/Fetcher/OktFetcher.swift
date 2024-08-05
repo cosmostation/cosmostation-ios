@@ -174,3 +174,14 @@ extension OktFetcher {
         return try await AF.request(url, method: .get, parameters: ["status":"all"]).serializingDecodable([JSON].self).value
     }
 }
+
+
+extension JSON {
+    var oktCoins: [JSON]? {
+        return self["value","coins"].array
+    }
+    
+    func oktCoin(_ position: Int) -> JSON? {
+        return oktCoins?[position]
+    }
+}

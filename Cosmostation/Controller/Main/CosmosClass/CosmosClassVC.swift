@@ -332,25 +332,7 @@ class CosmosClassVC: BaseVC {
     }
     
     private func isTokenPresent() -> Bool {
-        var status = false
-        
-        if let cosmosFetcher = selectedChain.getCosmosfetcher() {
-            cosmosFetcher.mintscanCw20Tokens.forEach { tokenInfo in
-                if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
-                    status = true
-                }
-            }
-        }
-        
-        if let evmFetcher = selectedChain.getEvmfetcher() {
-            evmFetcher.mintscanErc20Tokens.forEach { tokenInfo in
-                if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
-                    status = true
-                }
-            }
-        }
-
-        return status
+        return selectedChain.supportCw20 || selectedChain.supportEvm
     }
 }
 

@@ -72,14 +72,20 @@ class Portfolio2Cell: UITableViewCell {
     func bindChain(_ account: BaseAccount, _ chain: BaseChain) {
         logoImg1.image = UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
-        if (chain.supportCosmos) {
-            bechAddressLabel.text = chain.bechAddress
-        }
-        if (chain.supportEvm) {
-            evmAddressLabel.text = chain.evmAddress
-        }
+        
         if (chain.supportCosmos && chain.supportEvm) {
+            bechAddressLabel.text = chain.bechAddress
+            evmAddressLabel.text = chain.evmAddress
             starEvmAddressAnimation()
+            
+        } else if (chain.supportCosmos) {
+            bechAddressLabel.text = chain.bechAddress
+            
+        } else if (chain.supportEvm) {
+            evmAddressLabel.text = chain.evmAddress
+            
+        } else {
+            bechAddressLabel.text = chain.mainAddress
         }
         
         oldTag.isHidden = chain.isDefault
@@ -132,6 +138,10 @@ class Portfolio2Cell: UITableViewCell {
             }
             
         } else if (chain.supportEvm) {
+            WDP.dpPrice(chain.coinGeckoId, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(chain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+            
+        } else {
             WDP.dpPrice(chain.coinGeckoId, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(chain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
         }

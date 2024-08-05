@@ -332,6 +332,13 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
             evmClassVC.hidesBottomBarWhenPushed = true
             self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
             self.navigationController?.pushViewController(evmClassVC, animated: true)
+            
+        } else if (!chain.mainAddress.isEmpty) {
+            let majorClass = UIStoryboard(name: "MajorClass", bundle: nil).instantiateViewController(withIdentifier: "MajorClassVC") as! MajorClassVC
+            majorClass.selectedChain = chain
+            majorClass.hidesBottomBarWhenPushed = true
+            self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
+            self.navigationController?.pushViewController(majorClass, animated: true)
         }
     }
     
@@ -403,6 +410,24 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
             return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return qrAddressPopupVC }) { _ in
                 UIMenu(title: "", children: [copy, share])
             }
+            
+        } else if (!chain.mainAddress.isEmpty) {
+            let toMainAddress = chain.mainAddress
+            let copy = UIAction(title: NSLocalizedString("str_copy", comment: ""), image: UIImage(systemName: "doc.on.doc")) { _ in
+                UIPasteboard.general.string = toMainAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+                self.onShowToast(NSLocalizedString("address_copied", comment: ""))
+            }
+            let share = UIAction(title: NSLocalizedString("str_share", comment: ""), image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                let activityViewController = UIActivityViewController(activityItems: [toMainAddress], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+            let qrAddressPopupVC = QrAddressPopupVC(nibName: "QrAddressPopupVC", bundle: nil)
+            qrAddressPopupVC.selectedChain = chain
+            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return qrAddressPopupVC }) { _ in
+                UIMenu(title: "", children: [copy, share])
+            }
+            
         }
         return nil
     }
