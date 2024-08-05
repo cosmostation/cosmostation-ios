@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -218,12 +218,41 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cey-rR-HuE">
+                                <rect key="frame" x="76.666666666666686" y="274.66666666666669" width="240" height="128"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEmptyData" translatesAutoresizingMaskIntoConstraints="NO" id="QSt-ip-BMQ">
+                                        <rect key="frame" x="87.999999999999986" y="0.0" width="64.000000000000014" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="xkf-q3-jGg"/>
+                                            <constraint firstAttribute="width" constant="64" id="yJY-6d-gVj"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Searched" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Iz-rT-keH">
+                                        <rect key="frame" x="76.333333333333343" y="72" width="87.333333333333343" height="17.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                        <color key="textColor" name="_color01"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="Ave-Fa-SSV"/>
+                                    <constraint firstAttribute="width" constant="240" id="OlL-Qa-9fL"/>
+                                    <constraint firstItem="QSt-ip-BMQ" firstAttribute="centerX" secondItem="cey-rR-HuE" secondAttribute="centerX" id="WNQ-2q-w8L"/>
+                                    <constraint firstItem="7Iz-rT-keH" firstAttribute="top" secondItem="QSt-ip-BMQ" secondAttribute="bottom" constant="8" id="Z5M-h8-9ys"/>
+                                    <constraint firstItem="QSt-ip-BMQ" firstAttribute="top" secondItem="cey-rR-HuE" secondAttribute="top" id="hrb-MT-dQE"/>
+                                    <constraint firstItem="7Iz-rT-keH" firstAttribute="centerX" secondItem="cey-rR-HuE" secondAttribute="centerX" id="qTb-oT-rax"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aYH-Cl-c1y"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="_primary"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="AJM-90-cmx" secondAttribute="trailing" id="7GW-4W-rBg"/>
+                            <constraint firstItem="cey-rR-HuE" firstAttribute="centerY" secondItem="aYH-Cl-c1y" secondAttribute="centerY" id="IRv-dF-0u5"/>
+                            <constraint firstItem="cey-rR-HuE" firstAttribute="centerX" secondItem="aYH-Cl-c1y" secondAttribute="centerX" id="VvE-NQ-iVx"/>
                             <constraint firstItem="XNO-GG-9I6" firstAttribute="centerX" secondItem="aYH-Cl-c1y" secondAttribute="centerX" id="a2b-Nw-IFO"/>
                             <constraint firstAttribute="bottom" secondItem="AJM-90-cmx" secondAttribute="bottom" id="nzY-Yx-yyd"/>
                             <constraint firstItem="XNO-GG-9I6" firstAttribute="centerY" secondItem="aYH-Cl-c1y" secondAttribute="centerY" id="osP-zO-6vc"/>
@@ -233,6 +262,7 @@
                     </view>
                     <connections>
                         <outlet property="loadingView" destination="XNO-GG-9I6" id="2vh-rS-NsE"/>
+                        <outlet property="searchEmptyLayer" destination="cey-rR-HuE" id="5Tr-vS-25J"/>
                         <outlet property="tableView" destination="AJM-90-cmx" id="sA3-VZ-SaC"/>
                     </connections>
                 </viewController>
