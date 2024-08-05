@@ -90,6 +90,7 @@ class PortfolioVC: BaseVC {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        refresher.endRefreshing()
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchPrice"), object: nil)
     }
