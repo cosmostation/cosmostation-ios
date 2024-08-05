@@ -17,6 +17,8 @@ class MajorCryptoVC: BaseVC {
     var refresher: UIRefreshControl!
     
     var selectedChain: BaseChain!
+    
+    var suiBalances = Array<(String, NSDecimalNumber)>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,16 +40,66 @@ class MajorCryptoVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
-//        refresher = UIRefreshControl()
-//        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-//        refresher.tintColor = .color01
-//        tableView.addSubview(refresher)
-//        
-//        onUpdateView()
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
+        refresher.tintColor = .color01
+        tableView.addSubview(refresher)
+        
+        onUpdateView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        refresher.endRefreshing()
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ToggleHideValue"), object: nil)
+    }
+    
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (selectedChain != nil && selectedChain.tag == tag) {
+            DispatchQueue.main.async {
+                self.refresher.endRefreshing()
+                self.suiBalances.removeAll()
+                self.onUpdateView()
+            }
+        }
+    }
+    
+    @objc func onToggleValue(_ notification: NSNotification) {
+        tableView.reloadData()
     }
 
+    @objc func onRequestFetch() {
+        if (selectedChain.fetchState == FetchState.Busy) {
+            refresher.endRefreshing()
+        } else {
+            DispatchQueue.global().async {
+                self.selectedChain.fetchData(self.baseAccount.id)
+            }
+        }
+    }
     
-    
+    func onUpdateView() {
+        if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
+            suiBalances = suiFetcher.suiBalances
+            suiBalances.sort {
+                if ($0.0 == SUI_MAIN_DENOM) { return true }
+                if ($1.0 == SUI_MAIN_DENOM) { return false }
+                let value0 = suiFetcher.balanceValue($0.0)
+                let value1 = suiFetcher.balanceValue($1.0)
+                return value0.compare(value1).rawValue > 0 ? true : false
+            }
+        }
+        loadingView.isHidden = true
+        tableView.reloadData()
+    }
 }
 
 extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
@@ -63,8 +115,8 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if section == 0 {
             view.titleLabel.text = "Native Coins"
-            if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
-                view.cntLabel.text = String(suiFetcher.suiBalances.count)
+            if (selectedChain is ChainSui) {
+                view.cntLabel.text = String(suiBalances.count)
             }
         }
         return view
@@ -78,14 +130,14 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
-            return suiFetcher.suiBalances.count
+        if (selectedChain is ChainSui) {
+            return suiBalances.count
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
+        if (selectedChain is ChainSui) {
             if (indexPath.row == 0) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AssetSuiCell") as! AssetSuiCell
                 cell.bindStakeAsset(selectedChain)
@@ -93,10 +145,34 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-//                cell.bindOktAsset(oktChain, searchOktBalances[indexPath.row])
+                cell.bindSuiAsset(selectedChain, suiBalances[indexPath.row])
                 return cell
             }
         }
         return UITableViewCell()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        for cell in tableView.visibleCells {
+            let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
+            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
+                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
+            }
+        }
+        
+        view.endEditing(true)
+    }
+
+    func maskCell(cell: UITableViewCell, margin: Float) {
+        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
+        cell.layer.masksToBounds = true
+    }
+
+    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
+        let mask = CAGradientLayer()
+        mask.frame = cell.bounds
+        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
+        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
+        return mask;
     }
 }

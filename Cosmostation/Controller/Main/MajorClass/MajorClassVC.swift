@@ -176,7 +176,6 @@ class MajorClassVC: BaseVC {
 extension MajorClassVC: MDCTabBarViewDelegate {
     
     func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
-        print("didSelect ", item.tag)
         if (item.tag == 0) {
             assetList.alpha = 1
             nftList.alpha = 0

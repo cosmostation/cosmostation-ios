@@ -36,6 +36,8 @@ class AssetCell: UITableViewCell {
         valueCurrencyLabel.isHidden = true
         valueLabel.isHidden = true
         hidenValueLabel.isHidden = true
+        WDP.dpPrice(nil, priceCurrencyLabel, priceLabel)
+        WDP.dpPriceChanged(nil, priceChangeLabel, priceChangePercentLabel)
     }
     
     override func prepareForReuse() {
@@ -52,6 +54,8 @@ class AssetCell: UITableViewCell {
         hidenValueLabel.isHidden = true
         priceLabel.isHidden = false
         priceChangeLabel.isHidden = false
+        WDP.dpPrice(nil, priceCurrencyLabel, priceLabel)
+        WDP.dpPriceChanged(nil, priceChangeLabel, priceChangePercentLabel)
     }
     
     func bindCosmosClassAsset(_ baseChain: BaseChain, _ coin: Cosmos_Base_V1beta1_Coin) {
@@ -148,6 +152,41 @@ class AssetCell: UITableViewCell {
                 valueCurrencyLabel.isHidden = false
                 valueLabel.isHidden = false
             }
+        }
+    }
+    
+    
+    func bindSuiAsset(_ baseChain: BaseChain, _ balance: (String, NSDecimalNumber)) {
+        if let suiFetcher = (baseChain as? ChainSui)?.getSuiFetcher() {
+            if let msAsset = BaseData.instance.getAsset(baseChain.apiName, balance.0) {
+                WDP.dpCoin(msAsset, balance.1, coinImg, symbolLabel, amountLabel, 6)
+                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+                
+            } else if let metaData = suiFetcher.suiCoinMeta[balance.0] {
+                coinImg.sd_setImage(with: metaData.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+                symbolLabel.text = metaData["symbol"].stringValue
+                let dpAmount = balance.1.multiplying(byPowerOf10: -metaData["decimals"].int16Value, withBehavior: handler18Down)
+                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
+                
+            } else {
+                symbolLabel.text = balance.0.suiCoinSymbol()
+                let dpAmount = balance.1.multiplying(byPowerOf10: -9, withBehavior: handler18Down)
+                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
+                
+            }
+            
+            let value = suiFetcher.balanceValue(balance.0)
+            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+        }
+        
+        if (BaseData.instance.getHideValue()) {
+            hidenValueLabel.isHidden = false
+            
+        } else {
+            amountLabel.isHidden = false
+            valueCurrencyLabel.isHidden = false
+            valueLabel.isHidden = false
         }
     }
     

@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -192,7 +192,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="O5d-SO-gxk">
-                                <rect key="frame" x="0.0" y="59" width="393" height="559.33333333333337"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="593.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gmC-Ql-oRE" customClass="LottieAnimationView" customModule="Lottie">
@@ -210,7 +210,7 @@
                         <color key="tintColor" name="_primary"/>
                         <constraints>
                             <constraint firstItem="q8P-dV-bG4" firstAttribute="top" secondItem="O5d-SO-gxk" secondAttribute="top" id="CGp-I7-juA"/>
-                            <constraint firstItem="q8P-dV-bG4" firstAttribute="bottom" secondItem="O5d-SO-gxk" secondAttribute="bottom" id="CZ5-ei-cfx"/>
+                            <constraint firstAttribute="bottom" secondItem="O5d-SO-gxk" secondAttribute="bottom" id="CZ5-ei-cfx"/>
                             <constraint firstItem="gmC-Ql-oRE" firstAttribute="centerY" secondItem="q8P-dV-bG4" secondAttribute="centerY" id="Jcr-T3-JXo"/>
                             <constraint firstItem="q8P-dV-bG4" firstAttribute="trailing" secondItem="O5d-SO-gxk" secondAttribute="trailing" id="MXh-eV-yVn"/>
                             <constraint firstItem="q8P-dV-bG4" firstAttribute="leading" secondItem="O5d-SO-gxk" secondAttribute="leading" id="h5O-pt-U41"/>

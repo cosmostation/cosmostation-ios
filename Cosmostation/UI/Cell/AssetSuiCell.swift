@@ -70,22 +70,22 @@ class AssetSuiCell: UITableViewCell {
         if let suiFetcher = (baseChain as? ChainSui)?.getSuiFetcher() {
             
             let allSui = suiFetcher.allSuiAmount().multiplying(byPowerOf10: -msAsset.decimals!)
-            amountLabel?.attributedText = WDP.dpAmount(allSui.stringValue, amountLabel!.font, msAsset.decimals!)
+            amountLabel?.attributedText = WDP.dpAmount(allSui.stringValue, amountLabel!.font, 6)
             
             let allSuiValue = suiFetcher.allSuiValue()
             WDP.dpValue(allSuiValue, valueCurrencyLabel, valueLabel)
             
             let available = suiFetcher.balanceAmount(SUI_MAIN_DENOM).multiplying(byPowerOf10: -msAsset.decimals!)
-            availableLabel?.attributedText = WDP.dpAmount(available.stringValue, availableLabel!.font, msAsset.decimals!)
+            availableLabel?.attributedText = WDP.dpAmount(available.stringValue, availableLabel!.font, 6)
             
             let staked = suiFetcher.stakedAmount().multiplying(byPowerOf10: -msAsset.decimals!)
-            totalStakedLabel?.attributedText = WDP.dpAmount(staked.stringValue, totalStakedLabel!.font, msAsset.decimals!)
+            totalStakedLabel?.attributedText = WDP.dpAmount(staked.stringValue, totalStakedLabel!.font, 6)
             
             let principal = suiFetcher.principalAmount().multiplying(byPowerOf10: -msAsset.decimals!)
-            principalLabel?.attributedText = WDP.dpAmount(principal.stringValue, principalLabel!.font, msAsset.decimals!)
+            principalLabel?.attributedText = WDP.dpAmount(principal.stringValue, principalLabel!.font, 6)
             
             let estimatedReward = suiFetcher.estimatedRewardAmount().multiplying(byPowerOf10: -msAsset.decimals!)
-            estimatedRewardLabel?.attributedText = WDP.dpAmount(estimatedReward.stringValue, estimatedRewardLabel!.font, msAsset.decimals!)
+            estimatedRewardLabel?.attributedText = WDP.dpAmount(estimatedReward.stringValue, estimatedRewardLabel!.font, 6)
             
             if (BaseData.instance.getHideValue()) {
                 hidenValueLabel.isHidden = false

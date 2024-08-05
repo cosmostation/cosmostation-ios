@@ -76,11 +76,6 @@ class ChainSui: BaseChain  {
             }
             
             if let suiFetcher = getSuiFetcher(), fetchState == .Success {
-                print("suiBalances ", suiFetcher.suiBalances.count)
-                print("suiStakedList ", suiFetcher.suiStakedList.count)
-                print("suiObjects ", suiFetcher.suiObjects.count)
-                print("suiBalances ", suiFetcher.suiBalances.count)
-                
                 coinsCnt = suiFetcher.suiBalances.count
                 
                 allCoinValue = suiFetcher.allValue()
@@ -107,4 +102,4 @@ class ChainSui: BaseChain  {
 }
 
 let SUI_TYPE_COIN = "0x2::coin::Coin"
-let SUI_MAIN_DENOM = SUI_TYPE_COIN + "<0x2::sui::SUI>"
+let SUI_MAIN_DENOM = "0x2::sui::SUI"

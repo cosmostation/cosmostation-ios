@@ -636,21 +636,3 @@ extension CosmosCryptoVC: UISearchBarDelegate {
 
 
 
-extension JSON {
-    var bnbCoins: [JSON]? {
-        return self["balances"].array
-    }
-    
-    func bnbCoin(_ position: Int) -> JSON? {
-        return bnbCoins?[position]
-    }
-    
-    var oktCoins: [JSON]? {
-        return self["value","coins"].array
-    }
-    
-    func oktCoin(_ position: Int) -> JSON? {
-        return oktCoins?[position]
-    }
-    
-}

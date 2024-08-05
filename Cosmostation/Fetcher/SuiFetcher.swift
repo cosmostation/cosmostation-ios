@@ -29,13 +29,9 @@ class SuiFetcher {
         suiBalances.removeAll()
         if let balance = try? await fetchAllBalances(chain.mainAddress) {
             balance?["result"].arrayValue.forEach({ balance in
-                let type = balance["coinType"].stringValue
+                let cointype = balance["coinType"].stringValue
                 let amount = NSDecimalNumber.init(string: balance["totalBalance"].stringValue)
-                if (type == SUI_TYPE_COIN) {
-                    suiBalances.append((SUI_MAIN_DENOM, amount))
-                } else {
-                    suiBalances.append((type, amount))
-                }
+                suiBalances.append((cointype, amount))
             })
             suiBalances.sort {
                 if ($0.0 == SUI_MAIN_DENOM) { return true }
@@ -70,38 +66,30 @@ class SuiFetcher {
                     return $0["votingPower"].intValue > $1["votingPower"].intValue ? true : false
                 }
                 
-                
                 suiObjects.forEach { object in
-                    let type = object["type"].stringValue
-                    if (type.starts(with: SUI_TYPE_COIN)) {
-                        if let index = suiBalances.firstIndex(where: { $0.0 == type }) {
+                    if let coinType = object["type"].string?.suiCoinType() {
+                        if let index = suiBalances.firstIndex(where: { $0.0 == coinType }) {
                             let alreadyAmount = suiBalances[index].1
                             let sumAmount = alreadyAmount.adding(NSDecimalNumber.init(string:  object["content"]["fields"]["balance"].stringValue))
-                            suiBalances[index] = (type, sumAmount)
+                            suiBalances[index] = (coinType, sumAmount)
                         } else {
-                            let newAmount = NSDecimalNumber.init(string:  object["content"]["fields"]["balance"].stringValue)
-                            suiBalances.append((type, newAmount))
+                            let newAmount = NSDecimalNumber.init(string: object["content"]["fields"]["balance"].stringValue)
+                            suiBalances.append((coinType, newAmount))
                         }
                     }
                 }
                 
-                
                 if (suiBalances.filter { $0.0 == SUI_MAIN_DENOM }.count == 0) {
                     suiBalances.append((SUI_MAIN_DENOM, NSDecimalNumber.zero))
-                }
-                suiBalances.sort {
-                    if ($0.0 == SUI_MAIN_DENOM) { return true }
-                    if ($1.0 == SUI_MAIN_DENOM) { return false }
-                    return false
                 }
                 
                 stakes?["result"].arrayValue.forEach({ stake in
                     suiStakedList.append(stake)
                 })
                 
-                await suiBalances.concurrentForEach { type, balance in
-                    if let metadata = try? await self.fetchCoinMetadata(type) {
-                        self.suiCoinMeta[type] = metadata?["result"]
+                await suiBalances.concurrentForEach { coinType, balance in
+                    if let metadata = try? await self.fetchCoinMetadata(coinType) {
+                        self.suiCoinMeta[coinType] = metadata?["result"]
                     }
                 }
             }
@@ -176,17 +164,17 @@ class SuiFetcher {
     }
     
     
-    func balanceAmount(_ type: String) -> NSDecimalNumber {
-        if let suiCoin = suiBalances.filter({ $0.0 == type }).first {
+    func balanceAmount(_ coinType: String) -> NSDecimalNumber {
+        if let suiCoin = suiBalances.filter({ $0.0 == coinType }).first {
             return suiCoin.1
         }
         return NSDecimalNumber.zero
     }
     
-    func balanceValue(_ type: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        let amount = balanceAmount(type)
+    func balanceValue(_ coinType: String, _ usd: Bool? = false) -> NSDecimalNumber {
+        let amount = balanceAmount(coinType)
         if (amount == NSDecimalNumber.zero) { return NSDecimalNumber.zero }
-        if let msAsset = BaseData.instance.getAsset(chain.apiName, type) {
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, coinType) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
         }
@@ -273,8 +261,47 @@ extension SuiFetcher {
         return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
     
-    func fetchCoinMetadata(_ type: String) async throws -> JSON? {
-        let parameters: Parameters = ["method": "suix_getCoinMetadata", "params": [type], "id" : 1, "jsonrpc" : "2.0"]
+    func fetchCoinMetadata(_ coinType: String) async throws -> JSON? {
+        let parameters: Parameters = ["method": "suix_getCoinMetadata", "params": [coinType], "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+}
+
+
+extension String {
+    func suiIsCoinType() -> Bool {
+        return self.starts(with: SUI_TYPE_COIN)
+    }
+    
+    /*
+     * "0x2::coin::Coin<0x549e8b69270defbfafd4f94e17ec44cdbdd99820b33bda2278dea3b9a32d3f55::cert::CERT> ->  0x549e8b69270defbfafd4f94e17ec44cdbdd99820b33bda2278dea3b9a32d3f55::cert::CERT
+     */
+    func suiCoinType() -> String? {
+        if (!suiIsCoinType()) { return nil }
+        if let s1 = self.components(separatedBy: "<").last,
+           let s2 = s1.components(separatedBy: ">").first {
+            return s2
+        }
+        return nil
+    }
+    
+    /*
+     * "0x2::coin::Coin<0x549e8b69270defbfafd4f94e17ec44cdbdd99820b33bda2278dea3b9a32d3f55::cert::CERT> ->  CERT
+     */
+    func suiCoinSymbol() -> String? {
+        if (!suiIsCoinType()) { return nil }
+        if let s1 = self.components(separatedBy: "<").last,
+           let s2 = s1.components(separatedBy: ">").first,
+           let symbol = s2.components(separatedBy: "::").last {
+            return symbol
+        }
+        return nil
+    }
+}
+
+
+extension JSON {
+    func assetImg() -> URL {
+        return URL(string: self["iconUrl"].stringValue) ?? URL(string: "")!
     }
 }
