@@ -15,11 +15,15 @@ class BaseNetWork {
     
     func fetchChainParams() {
 //        print("fetchChainParams ", BaseNetWork.msChainParams())
+        #if !DEBUG
+        if (!BaseData.instance.needChainParamUpdate()) { return }
+        #endif
         AF.request(BaseNetWork.msChainParams(), method: .get)
             .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
                 case .success(let value):
                     BaseData.instance.mintscanChainParams = value
+                    BaseData.instance.setLastChainParamTime()
                 case .failure:
                     print("fetchChainParams error ", response.error)
                 }

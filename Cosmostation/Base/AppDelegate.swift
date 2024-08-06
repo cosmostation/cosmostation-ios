@@ -111,6 +111,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        BaseNetWork().fetchPrices()
+        BaseNetWork().fetchChainParams()
+    }
+    
     public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.list, .banner])
     }
