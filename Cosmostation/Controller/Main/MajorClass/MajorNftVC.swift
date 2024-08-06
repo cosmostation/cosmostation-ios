@@ -18,7 +18,6 @@ class MajorNftVC: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     var refresher: UIRefreshControl!
 
-    var isBusy = false
     var selectedChain: BaseChain!
     var suiNFTs = Array<JSON>()
 
@@ -42,40 +41,42 @@ class MajorNftVC: BaseVC {
         refresher.tintColor = .color01
         collectionView.refreshControl = refresher
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchNFTDone(_:)), name: Notification.Name("FetchSuiNFTs"), object: nil)
-        onRequestFetch()
+        if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
+            suiNFTs = suiFetcher.suiNfts()
+        }
+        onUpdateView()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchSuiNFTs"), object: nil)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         refresher.endRefreshing()
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
     }
     
     @objc func onRequestFetch() {
-        if (isBusy) { return }
-        isBusy = true
-        
-        if let selectedChain = selectedChain as? ChainSui {
-            if let suiFetcher = selectedChain.getSuiFetcher() {
-                suiFetcher.fetchNFTs()
+        if (selectedChain.fetchState == FetchState.Busy) {
+            refresher.endRefreshing()
+        } else {
+            DispatchQueue.global().async {
+                self.selectedChain.fetchData(self.baseAccount.id)
             }
         }
     }
     
-    @objc func onFetchNFTDone(_ notification: NSNotification) {
+    @objc func onFetchDone(_ notification: NSNotification) {
         let tag = notification.object as! String
         if (selectedChain != nil && selectedChain.tag == tag ) {
             if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
-                isBusy = false
-                suiNFTs = suiFetcher.suiNFTs
-                DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-                    onUpdateView()
-                }
+                suiNFTs = suiFetcher.suiNfts()
+            }
+            
+            DispatchQueue.main.async {
+                self.onUpdateView()
             }
         }
     }
