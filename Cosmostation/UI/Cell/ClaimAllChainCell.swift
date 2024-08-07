@@ -14,6 +14,9 @@ class ClaimAllChainCell: UITableViewCell {
     @IBOutlet weak var rootView: FixCardView!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var rewardAddressStack: UIStackView!
+    @IBOutlet weak var rewardAddressLabel: UILabel!
+    @IBOutlet weak var changedLabel: UILabel!
     @IBOutlet weak var oldTag: RoundedPaddingLabel!
     @IBOutlet weak var rewardTitle: UILabel!
     @IBOutlet weak var valueCurrencyLabel: UILabel!
@@ -49,6 +52,8 @@ class ClaimAllChainCell: UITableViewCell {
         feeValueLabel.text = ""
         feeAmountLabel.text = ""
         feeDenomLabel.text = ""
+        
+        rewardAddressStack.isHidden = true
     }
     
     override func prepareForReuse() {
@@ -62,6 +67,8 @@ class ClaimAllChainCell: UITableViewCell {
         feeValueLabel.text = ""
         feeAmountLabel.text = ""
         feeDenomLabel.text = ""
+        
+        rewardAddressStack.isHidden = true
     }
     
     func onBindRewards(_ model: ClaimAllModel) {
@@ -78,6 +85,12 @@ class ClaimAllChainCell: UITableViewCell {
             oldTag.isHidden = false
         }
         
+        rewardAddressStack.isHidden = false
+        rewardAddressLabel.isHidden = false
+        rewardAddressLabel.text = !model.isDefaultRewardAddress() ? (chain.cosmosFetcher?.rewardAddress) : chain.bechAddress
+        rewardAddressLabel.textColor = !model.isDefaultRewardAddress() ? .colorRed : .color02
+        changedLabel.isHidden = model.isDefaultRewardAddress()
+
         var mainRewardDenom = ""
         var mainRewardAmount = NSDecimalNumber.zero
         if (chain is ChainDydx) {
