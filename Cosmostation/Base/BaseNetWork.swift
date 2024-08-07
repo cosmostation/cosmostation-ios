@@ -27,6 +27,7 @@ class BaseNetWork {
                 case .failure:
                     print("fetchChainParams error ", response.error)
                 }
+                NotificationCenter.default.post(name: Notification.Name("FetchParam"), object: nil, userInfo: nil)
             }
     }
     
