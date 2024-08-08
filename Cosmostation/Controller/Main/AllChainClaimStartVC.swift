@@ -267,8 +267,4 @@ struct ClaimAllModel {
         self.cosmosChain = cosmosChain
         self.rewards = rewards
     }
-    
-    func isDefaultRewardAddress() -> Bool {
-        return cosmosChain.bechAddress == cosmosChain.getCosmosfetcher()?.rewardAddress
-    }
 }

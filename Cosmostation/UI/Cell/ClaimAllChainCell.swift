@@ -77,7 +77,7 @@ class ClaimAllChainCell: UITableViewCell {
         let txFee = (model.txFee == nil) ? chain.getInitPayableFee() : model.txFee
         let isBusy = model.isBusy
         let result = model.txResponse
-        
+        let cosmosFetcher = chain.cosmosFetcher!
         
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
@@ -87,9 +87,9 @@ class ClaimAllChainCell: UITableViewCell {
         
         rewardAddressStack.isHidden = false
         rewardAddressLabel.isHidden = false
-        rewardAddressLabel.text = !model.isDefaultRewardAddress() ? (chain.cosmosFetcher?.rewardAddress) : chain.bechAddress
-        rewardAddressLabel.textColor = !model.isDefaultRewardAddress() ? .colorRed : .color02
-        changedLabel.isHidden = model.isDefaultRewardAddress()
+        rewardAddressLabel.text = cosmosFetcher.isRewardAddressChanged() ? cosmosFetcher.rewardAddress : chain.bechAddress
+        rewardAddressLabel.textColor = cosmosFetcher.isRewardAddressChanged() ? .colorRed : .color02
+        changedLabel.isHidden = !cosmosFetcher.isRewardAddressChanged()
 
         var mainRewardDenom = ""
         var mainRewardAmount = NSDecimalNumber.zero

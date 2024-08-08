@@ -174,6 +174,10 @@ class CosmosFetcher {
         return mintscanCw20Tokens.filter {  $0.getAmount() != NSDecimalNumber.zero }.count
     }
 
+    func isRewardAddressChanged() -> Bool {
+        return chain.bechAddress != rewardAddress
+    }
+
 }
 
 
