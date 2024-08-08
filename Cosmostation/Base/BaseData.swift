@@ -557,6 +557,19 @@ extension BaseData {
         return last < now ? true : false
     }
     
+    func setLastChainParamTime() {
+        let now = Date().millisecondsSince1970
+        UserDefaults.standard.set(String(now), forKey: KEY_LAST_CHAIN_PARAM_TIME)
+    }
+    
+    func needChainParamUpdate() -> Bool {
+        if (BaseData.instance.mintscanChainParams == nil) { return true }
+        let now = Date().millisecondsSince1970
+        let min: Int64 = 60000
+        let last = Int64(UserDefaults.standard.string(forKey: KEY_LAST_CHAIN_PARAM_TIME) ?? "0")! + (min * 30)
+        return last < now ? true : false
+    }
+    
     func setHideLegacy(_ hide : Bool) {
         UserDefaults.standard.set(hide, forKey: KEY_HIDE_LEGACY)
     }
