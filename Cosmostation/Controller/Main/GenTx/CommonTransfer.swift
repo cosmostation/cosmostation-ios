@@ -65,7 +65,7 @@ class CommonTransfer: BaseVC {
     var fromChain: BaseChain!
     var fromCosmosFetcher: CosmosFetcher!
     var sendType: SendAssetType!
-    var txStyle: TxStyle = .COSMOS_STYLE            // .CosmosEVM_Coin is only change tx style
+    var txStyle: SendTxStyle!                       // .COSMOS_EVM_MAIN_COIN is only change tx style
     
     var toSendDenom: String!                        // coin denom or contract addresss
     var toSendSymbol: String!                       // to send Asset's display symbol
@@ -81,11 +81,11 @@ class CommonTransfer: BaseVC {
     var toAddress = ""
     var toAmount = NSDecimalNumber.zero
     var txMemo = ""
-    
     var selectedFeePosition = 0
+    
     var cosmosFeeInfos = [FeeInfo]()
     var cosmosTxFee: Cosmos_Tx_V1beta1_Fee = Cosmos_Tx_V1beta1_Fee.init()
-    var txTip: Cosmos_Tx_V1beta1_Tip?
+    var cosmosTxTip: Cosmos_Tx_V1beta1_Tip?
     
     var evmTx: CodableTransaction?
     var evmTxType : TransactionType?
@@ -136,7 +136,7 @@ class CommonTransfer: BaseVC {
                 
                 self.loadingView.isHidden = true
                 self.onInitToChain()                     // set init toChain UI
-                self.onInitTxStyle()                     // init Tx style by to send denom stye. CosmosEVM_Coin is only changble tx style
+                self.onInitTxStyle()                     // init Tx style by to send denom stye. COSMOS_EVM_MAIN_COIN is only changble tx style
                 self.onInitFee()                         // set init fee for set send available
                 self.onInitView()                        // set selected asset display symbol, sendable amount, display decimal
                 self.onInitToChainsInfo()                // set recipientable chains for IBC tx
@@ -172,7 +172,7 @@ class CommonTransfer: BaseVC {
     }
     
     func onInitTxStyle() {
-        if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20) {
+        if (sendType == .EVM_COIN || sendType == .EVM_ERC20) {
             txStyle = .WEB3_STYLE
             memoCardView.isHidden = true
         }
@@ -222,7 +222,7 @@ class CommonTransfer: BaseVC {
     }
     
     func onInitView() {
-        if (sendType == .Only_Cosmos_Coin) {
+        if (sendType == .COSMOS_COIN) {
             titleCoinImg.sd_setImage(with: toSendMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = toSendMsAsset!.decimals
             toSendSymbol = toSendMsAsset!.symbol
@@ -232,19 +232,19 @@ class CommonTransfer: BaseVC {
                 availableAmount = availableAmount.subtracting(totalFeeAmount)
             }
             
-        } else if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20) {
+        } else if (sendType == .COSMOS_WASM || sendType == .EVM_ERC20) {
             titleCoinImg.sd_setImage(with: toSendMsToken.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = toSendMsToken!.decimals
             toSendSymbol = toSendMsToken!.symbol
             availableAmount = toSendMsToken!.getAmount()
             
-        } else if (sendType == .Only_EVM_Coin) {
+        } else if (sendType == .EVM_COIN) {
             titleCoinImg.image =  UIImage.init(named: fromChain.coinLogo)
             decimal = 18
             toSendSymbol = fromChain.coinSymbol
             availableAmount = fromChain.getEvmfetcher()!.evmBalances.subtracting(EVM_BASE_FEE)
             
-        } else if (sendType == .CosmosEVM_Coin) {
+        } else if (sendType == .COSMOS_EVM_MAIN_COIN) {
             if (txStyle == .WEB3_STYLE) {
                 titleCoinImg.image =  UIImage.init(named: fromChain.coinLogo)
                 decimal = 18
@@ -269,10 +269,10 @@ class CommonTransfer: BaseVC {
     func onInitToChainsInfo() {
         recipientableChains.append(fromChain)
         // check IBC support case for recipient chain
-        if (sendType == .Only_Cosmos_Coin || sendType == .CosmosEVM_Coin || sendType == .Only_Cosmos_CW20) {
+        if (sendType == .COSMOS_COIN || sendType == .COSMOS_EVM_MAIN_COIN || sendType == .COSMOS_WASM) {
             allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false && $0.supportCosmos })
             BaseData.instance.mintscanAssets?.forEach({ msAsset in
-                if (sendType == .Only_Cosmos_Coin || sendType == .CosmosEVM_Coin) {
+                if (sendType == .COSMOS_COIN || sendType == .COSMOS_EVM_MAIN_COIN) {
                     if (msAsset.chain == fromChain.apiName && msAsset.denom?.lowercased() == toSendDenom.lowercased()) {
                         //add backward path
                         if let sendable = allIbcChains.filter({ $0.apiName == msAsset.beforeChain(fromChain.apiName) }).first {
@@ -289,7 +289,7 @@ class CommonTransfer: BaseVC {
                         }
                     }
                     
-                } else if (sendType == .Only_Cosmos_CW20 ) {
+                } else if (sendType == .COSMOS_WASM ) {
                     //CW20 only support forward IBC path
                     if (msAsset.origin_chain == fromChain.apiName && msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
                         if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
@@ -316,8 +316,8 @@ class CommonTransfer: BaseVC {
     
     
     
-    func onUpdateTxStyle(_ style: TxStyle) {
-        if (sendType == .CosmosEVM_Coin && style != txStyle) {
+    func onUpdateTxStyle(_ style: SendTxStyle) {
+        if (sendType == .COSMOS_EVM_MAIN_COIN && style != txStyle) {
             txStyle = style
             if (txStyle == .WEB3_STYLE) {
                 decimal = 18
@@ -356,7 +356,7 @@ class CommonTransfer: BaseVC {
             toChainLabel.text = toChain.name.uppercased()
             onUpdateToAddressView("")
             
-            if (sendType == .CosmosEVM_Coin && fromChain.tag != toChain.tag) {
+            if (sendType == .COSMOS_EVM_MAIN_COIN && fromChain.tag != toChain.tag) {
                 onUpdateTxStyle(.COSMOS_STYLE)
             }
         }
@@ -386,7 +386,7 @@ class CommonTransfer: BaseVC {
             toAddressLabel.isHidden = false
             toAddressLabel.text = toAddress
             toAddressLabel.adjustsFontSizeToFitWidth = true
-            if (sendType == .CosmosEVM_Coin) {
+            if (sendType == .COSMOS_EVM_MAIN_COIN) {
                 if (toAddress.starts(with: "0x")) {
                     onUpdateTxStyle(.WEB3_STYLE)
                 } else {
@@ -422,21 +422,21 @@ class CommonTransfer: BaseVC {
             
         } else {
             toAmount = NSDecimalNumber(string: amount)
-            if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20) {
+            if (sendType == .COSMOS_WASM || sendType == .EVM_ERC20) {
                 let msPrice = BaseData.instance.getPrice(toSendMsToken!.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpToken(toSendMsToken!, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
-            } else if (sendType == .Only_Cosmos_Coin) {
+            } else if (sendType == .COSMOS_COIN) {
                 let msPrice = BaseData.instance.getPrice(toSendMsAsset!.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpCoin(toSendMsAsset, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
-            } else if (sendType == .Only_EVM_Coin) {
+            } else if (sendType == .EVM_COIN) {
                 let msPrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
@@ -445,7 +445,7 @@ class CommonTransfer: BaseVC {
                 toAssetDenomLabel.text = fromChain.coinSymbol
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                 
-            } else if (sendType == .CosmosEVM_Coin) {
+            } else if (sendType == .COSMOS_EVM_MAIN_COIN) {
                 let msPrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
@@ -550,7 +550,7 @@ class CommonTransfer: BaseVC {
                 WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
                 WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
                 
-                if (sendType == .Only_Cosmos_Coin || (sendType == .CosmosEVM_Coin && txStyle == .COSMOS_STYLE)) {
+                if (sendType == .COSMOS_COIN || (sendType == .COSMOS_EVM_MAIN_COIN && txStyle == .COSMOS_STYLE)) {
                     let stakeDenom = fromChain.stakeDenom!
                     let balanceAmount = fromCosmosFetcher.balanceAmount(toSendDenom)
                     if (cosmosTxFee.amount[0].denom == stakeDenom) {
@@ -636,16 +636,16 @@ class CommonTransfer: BaseVC {
                 return onUpdateWithSimul(nil)
             }
             if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                 // Inchain Send!
-                if (sendType == .Only_Cosmos_CW20) {                                // Inchain CW20 Send!
+                if (sendType == .COSMOS_WASM) {                                // Inchain CW20 Send!
                     inChainWasmSendSimul()
-                } else {                                                            // Inchain Coin Send!  (Only_Cosmos_Coin, CosmosEVM_Coin)
+                } else {                                                            // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                     inChainCoinSendSimul()
                 }
             } else {                                                                // IBC Send!
                 ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
-                if (sendType == .Only_Cosmos_CW20) {                                // CW20 IBC Send!
+                if (sendType == .COSMOS_WASM) {                                // CW20 IBC Send!
                     ibcWasmSendSimul()
-                } else {                                                            // Coin IBC Send! (Only_Cosmos_Coin, CosmosEVM_Coin)
+                } else {                                                            // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                     ibcCoinSendSimul()
                 }
             }
@@ -716,7 +716,7 @@ extension CommonTransfer {
             let calSendAmount = self.toAmount.multiplying(byPowerOf10: -decimal)
             var toAddress: EthereumAddress!
             
-            if (sendType == .Only_EVM_ERC20) {
+            if (sendType == .EVM_ERC20) {
                 toAddress = EthereumAddress.init(toSendMsToken.address!)
                 let erc20token = ERC20(web3: web3, provider: web3.provider, address: toAddress!)
                 let writeOperation = try await erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
@@ -1116,16 +1116,16 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                 
             } else if (txStyle == .COSMOS_STYLE) {
                 if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                     // Inchain Send!
-                    if (sendType == .Only_Cosmos_CW20) {                                    // Inchain CW20 Send!
+                    if (sendType == .COSMOS_WASM) {                                         // Inchain CW20 Send!
                         inChainWasmSend()
-                    } else {                                                                // Inchain Coin Send!  (Only_Cosmos_Coin, CosmosEVM_Coin)
+                    } else {                                                                // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                         inChainCoinSend()
                     }
                 } else {                                                                    // IBC Send!
                     ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
-                    if (sendType == .Only_Cosmos_CW20) {                                    // CW20 IBC Send!
+                    if (sendType == .COSMOS_WASM) {                                         // CW20 IBC Send!
                         ibcWasmSend()
-                    } else {                                                                // Coin IBC Send! (Only_Cosmos_Coin, CosmosEVM_Coin)
+                    } else {                                                                // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                         ibcCoinSend()
                     }
                 }
@@ -1135,14 +1135,16 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
 }
 
 public enum SendAssetType: Int {
-    case Only_Cosmos_Coin = 0               // support IBC, bank send                 (staking, ibc, native coins)
-    case Only_Cosmos_CW20 = 1               // support IBC, wasm send                 (cw20 tokens)
-    case Only_EVM_Coin = 2                  // not support IBC, only support Web3 tx  (evm main coin)
-    case Only_EVM_ERC20 = 3                 // not support IBC, only support Web3 tx  (erc20 tokens)
-    case CosmosEVM_Coin = 4                 // support IBC, bank send, Web3 tx        (staking, both tx style)
+    case COSMOS_COIN = 0                    // support IBC, bank send                 (staking, ibc, native coins)
+    case COSMOS_WASM = 1                    // support IBC, wasm send                 (cw20 tokens)
+    case EVM_COIN = 2                       // not support IBC, only support Web3 tx  (evm main coin)
+    case EVM_ERC20 = 3                      // not support IBC, only support Web3 tx  (erc20 tokens)
+    case COSMOS_EVM_MAIN_COIN = 4           // support IBC, bank send, Web3 tx        (staking, both tx style)
+    case SUI_COIN = 5                       // sui assets
 }
 
-public enum TxStyle: Int {
+public enum SendTxStyle: Int {
     case COSMOS_STYLE = 0
     case WEB3_STYLE = 1
+    case SUI_STYLE = 2
 }

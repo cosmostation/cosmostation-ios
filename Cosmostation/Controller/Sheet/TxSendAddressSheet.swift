@@ -91,7 +91,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             return
         }
         
-        if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20) {
+        if (sendType == .EVM_COIN || sendType == .EVM_ERC20) {
             //only support EVM address style
             if (!WUtils.isValidEvmAddress(userInput)) {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
@@ -100,7 +100,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
             self.dismiss(animated: true)
             
-        } else if (sendType == .Only_Cosmos_Coin || sendType == .Only_Cosmos_CW20) {
+        } else if (sendType == .COSMOS_COIN || sendType == .COSMOS_WASM) {
             //only support cosmos address style
             if (WUtils.isValidBechAddress(toChain, userInput)) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
@@ -109,7 +109,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             }
             onCheckNameServices(userInput!)
             
-        } else if (sendType == .CosmosEVM_Coin) {
+        } else if (sendType == .COSMOS_EVM_MAIN_COIN) {
             //support both style
             if (WUtils.isValidEvmAddress(userInput)) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)

@@ -54,8 +54,8 @@ class NftTransfer: BaseVC {
     @IBOutlet weak var sendBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var sendType: SendAssetType = .Only_Cosmos_CW20
-    var txStyle: TxStyle = .COSMOS_STYLE
+    var sendType: SendAssetType = .COSMOS_WASM
+    var txStyle: SendTxStyle = .COSMOS_STYLE
     
     var fromChain: BaseChain!
     var fromCosmosFetcher: CosmosFetcher!

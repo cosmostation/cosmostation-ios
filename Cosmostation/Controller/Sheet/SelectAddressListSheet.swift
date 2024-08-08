@@ -49,7 +49,7 @@ class SelectAddressListSheet: BaseVC {
         
         var tempRefBechAddresses = [RefAddress]()
         
-        if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20) {
+        if (sendType == .EVM_COIN || sendType == .EVM_ERC20) {
             //only support EVM address style
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
                 if (refAddress.chainTag == toChain.tag && refAddress.evmAddress != senderEvmAddress) {
@@ -66,7 +66,7 @@ class SelectAddressListSheet: BaseVC {
             cosmosStyleTableView.isHidden = true
             evmStyleTableView.isHidden = false
             
-        } else if (sendType == .Only_Cosmos_Coin || sendType == .Only_Cosmos_CW20) {
+        } else if (sendType == .COSMOS_COIN || sendType == .COSMOS_WASM) {
             //only support cosmos address style
             BaseData.instance.selectAllRefAddresses().filter {
                 $0.bechAddress.starts(with: toChain.bechAccountPrefix! + "1") &&
@@ -86,7 +86,7 @@ class SelectAddressListSheet: BaseVC {
             cosmosStyleTableView.isHidden = false
             evmStyleTableView.isHidden = true
             
-        } else if (sendType == .CosmosEVM_Coin) {
+        } else if (sendType == .COSMOS_EVM_MAIN_COIN) {
             //only support both address style
             BaseData.instance.selectAllRefAddresses().filter {
                 $0.bechAddress.starts(with: toChain.bechAccountPrefix! + "1") &&

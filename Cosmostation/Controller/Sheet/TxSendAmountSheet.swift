@@ -21,7 +21,7 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
     var sheetDelegate: SendAmountSheetDelegate?
     
     var sendType: SendAssetType!
-    var txStyle: TxStyle!
+    var txStyle: SendTxStyle!
     var fromChain: BaseChain!
     var toSendMsAsset: MintscanAsset!
     var toSendMsToken: MintscanToken!
@@ -54,18 +54,18 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
             amountTextField.text = existedAmount!.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal)).stringValue
         }
         
-        if (sendType == .Only_Cosmos_CW20 || sendType == .Only_EVM_ERC20) {
+        if (sendType == .COSMOS_WASM || sendType == .EVM_ERC20) {
             WDP.dpToken(toSendMsToken, nil, availableDenom, availableLabel, decimal)
             
-        } else if (sendType == .Only_Cosmos_Coin) {
+        } else if (sendType == .COSMOS_COIN) {
             WDP.dpCoin(toSendMsAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             
-        } else if (sendType == .Only_EVM_Coin) {
+        } else if (sendType == .EVM_COIN) {
             availableDenom.text = fromChain.coinSymbol
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
             
-        } else if (sendType == .CosmosEVM_Coin) {
+        } else if (sendType == .COSMOS_EVM_MAIN_COIN) {
             if (txStyle == .WEB3_STYLE) {
                 availableDenom.text = fromChain.coinSymbol
                 let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))

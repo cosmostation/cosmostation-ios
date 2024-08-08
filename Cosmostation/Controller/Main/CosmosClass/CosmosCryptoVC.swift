@@ -431,13 +431,13 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
         if let oktChain = selectedChain as? ChainOktEVM {
             if (oktChain.supportEvm) {
                 if (indexPath.section == 0 && searchOktBalances[indexPath.row]["denom"].stringValue == oktChain.stakeDenom) {
-                    onStartCoinTransferVC(.Only_EVM_Coin, searchOktBalances[indexPath.row]["denom"].stringValue)
+                    onStartCoinTransferVC(.EVM_COIN, searchOktBalances[indexPath.row]["denom"].stringValue)
                     
                 } else if (indexPath.section == 0) {
                     onStartLegacyTransferVC(searchOktBalances[indexPath.row]["denom"].stringValue)
                     
                 } else if (indexPath.section == 4) {
-                    onStartTokenTransferVC(.Only_EVM_ERC20, searchMintscanErc20Tokens[indexPath.row])
+                    onStartTokenTransferVC(.EVM_ERC20, searchMintscanErc20Tokens[indexPath.row])
                 }
                 
             } else {
@@ -446,22 +446,22 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             
         } else {
             if (indexPath.section == 0 && searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom && selectedChain.supportEvm) {
-                onStartCoinTransferVC(.CosmosEVM_Coin, searchNativeCoins[indexPath.row].denom)
+                onStartCoinTransferVC(.COSMOS_EVM_MAIN_COIN, searchNativeCoins[indexPath.row].denom)
                 
             } else if (indexPath.section == 0) {
-                onStartCoinTransferVC(.Only_Cosmos_Coin, searchNativeCoins[indexPath.row].denom)
+                onStartCoinTransferVC(.COSMOS_COIN, searchNativeCoins[indexPath.row].denom)
                 
             } else if (indexPath.section == 1) {
-                onStartCoinTransferVC(.Only_Cosmos_Coin, searchIbcCoins[indexPath.row].denom)
+                onStartCoinTransferVC(.COSMOS_COIN, searchIbcCoins[indexPath.row].denom)
                 
             } else if (indexPath.section == 2) {
-                onStartCoinTransferVC(.Only_Cosmos_Coin, searchBridgedCoins[indexPath.row].denom)
+                onStartCoinTransferVC(.COSMOS_COIN, searchBridgedCoins[indexPath.row].denom)
                 
             } else if (indexPath.section == 3) {
-                onStartTokenTransferVC(.Only_Cosmos_CW20, searchMintscanCw20Tokens[indexPath.row])
+                onStartTokenTransferVC(.COSMOS_WASM, searchMintscanCw20Tokens[indexPath.row])
                 
             } else if (indexPath.section == 4) {
-                onStartTokenTransferVC(.Only_EVM_ERC20, searchMintscanErc20Tokens[indexPath.row])
+                onStartTokenTransferVC(.EVM_ERC20, searchMintscanErc20Tokens[indexPath.row])
             }
             
         }

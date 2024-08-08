@@ -177,7 +177,7 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
         }
         if (indexPath.section == 0) {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-            transfer.sendType = .Only_Cosmos_CW20
+            transfer.sendType = .COSMOS_WASM
             transfer.fromChain = selectedChain
             transfer.toSendDenom = mintscanCw20Tokens[indexPath.row].address
             transfer.toSendMsToken = mintscanCw20Tokens[indexPath.row]
@@ -187,7 +187,7 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
             
         } else {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-            transfer.sendType = .Only_EVM_ERC20
+            transfer.sendType = .EVM_ERC20
             transfer.fromChain = selectedChain
             transfer.toSendDenom = mintscanErc20Tokens[indexPath.row].address
             transfer.toSendMsToken = mintscanErc20Tokens[indexPath.row]

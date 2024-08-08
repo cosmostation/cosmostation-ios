@@ -257,10 +257,13 @@ class BaseChain {
     
     
     
-    func isTxFeePayable() -> Bool {
-        if let oktChain = self as? ChainOktEVM {
-            let availableAmount = oktChain.getOktfetcher()?.oktBalanceAmount(stakeDenom!) ?? NSDecimalNumber.zero
+    func isTxFeePayable(_ txType: Int? = nil) -> Bool {
+        if let oktFetcher = (self as? ChainOktEVM)?.getOktfetcher() {
+            let availableAmount = oktFetcher.oktBalanceAmount(stakeDenom!)
             return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
+            
+        } else if let suiFetcher = (self as? ChainSui)?.getSuiFetcher() {
+            return suiFetcher.hasFee(txType)
             
         } else if (supportCosmos) {
             var result = false
@@ -600,7 +603,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainStargaze())
     // result.append(ChainStarname())
     result.append(ChainStride())
-    result.append(ChainSui())                           //MAJOR SUI
+    result.append(ChainSui())                           //MAJOR
     result.append(ChainTeritori())
     result.append(ChainTerra())
     result.append(ChainUmee())
