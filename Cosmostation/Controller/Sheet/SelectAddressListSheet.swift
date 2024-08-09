@@ -12,15 +12,16 @@ class SelectAddressListSheet: BaseVC {
     
     @IBOutlet weak var sheetTitle: UILabel!
     @IBOutlet weak var addressStyleSegment: UISegmentedControl!
+    @IBOutlet weak var majorStyleTableView: UITableView!
     @IBOutlet weak var cosmosStyleTableView: UITableView!
     @IBOutlet weak var evmStyleTableView: UITableView!
     
     var fromChain: BaseChain!
     var toChain: BaseChain!
     var sendType: SendAssetType!
-    var senderBechAddress: String!
-    var senderEvmAddress: String!
     
+    var refMajorAddresses = Array<RefAddress>()
+    var majorAddressBook = Array<AddressBook>()
     var refBechAddresses = Array<RefAddress>()
     var bechAddressBook = Array<AddressBook>()
     var refEvmAddresses = Array<RefAddress>()
@@ -30,6 +31,13 @@ class SelectAddressListSheet: BaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        majorStyleTableView.delegate = self
+        majorStyleTableView.dataSource = self
+        majorStyleTableView.separatorStyle = .none
+        majorStyleTableView.register(UINib(nibName: "SelectRefAddressCell", bundle: nil), forCellReuseIdentifier: "SelectRefAddressCell")
+        majorStyleTableView.register(UINib(nibName: "SelectAddressBookCell", bundle: nil), forCellReuseIdentifier: "SelectAddressBookCell")
+        majorStyleTableView.sectionHeaderTopPadding = 0
         
         cosmosStyleTableView.delegate = self
         cosmosStyleTableView.dataSource = self
@@ -47,9 +55,33 @@ class SelectAddressListSheet: BaseVC {
         
 //        print("sendType ", sendType)
         
+        let senderMajorAddress = fromChain.mainAddress
+        let senderBechAddress = fromChain.bechAddress
+        let senderEvmAddress = fromChain.evmAddress
+        
         var tempRefBechAddresses = [RefAddress]()
         
-        if (sendType == .EVM_COIN || sendType == .EVM_ERC20) {
+        
+        if (sendType == .SUI_COIN) {
+            //only support sui address style
+            BaseData.instance.selectAllRefAddresses().forEach { refAddress in
+                if (refAddress.chainTag == toChain.tag && refAddress.bechAddress != senderMajorAddress) {
+                    refMajorAddresses.append(refAddress)
+                }
+            }
+            BaseData.instance.selectAllAddressBooks().forEach { book in
+                if (book.dpAddress.starts(with: "0x") && book.dpAddress != senderMajorAddress) {
+                    majorAddressBook.append(book)
+                }
+            }
+            
+            addressStyleSegment.isHidden = true
+            sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
+            majorStyleTableView.isHidden = false
+            cosmosStyleTableView.isHidden = true
+            evmStyleTableView.isHidden = true
+            
+        } else if (sendType == .EVM_COIN || sendType == .EVM_ERC20) {
             //only support EVM address style
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
                 if (refAddress.chainTag == toChain.tag && refAddress.evmAddress != senderEvmAddress) {
@@ -63,6 +95,7 @@ class SelectAddressListSheet: BaseVC {
             }
             addressStyleSegment.isHidden = true
             sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
+            majorStyleTableView.isHidden = true
             cosmosStyleTableView.isHidden = true
             evmStyleTableView.isHidden = false
             
@@ -83,11 +116,12 @@ class SelectAddressListSheet: BaseVC {
             }
             addressStyleSegment.isHidden = true
             sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
+            majorStyleTableView.isHidden = true
             cosmosStyleTableView.isHidden = false
             evmStyleTableView.isHidden = true
             
         } else if (sendType == .COSMOS_EVM_MAIN_COIN) {
-            //only support both address style
+            //support both address style
             BaseData.instance.selectAllRefAddresses().filter {
                 $0.bechAddress.starts(with: toChain.bechAccountPrefix! + "1") &&
                 $0.bechAddress != senderBechAddress }.forEach { refAddress in
@@ -116,6 +150,7 @@ class SelectAddressListSheet: BaseVC {
             }
             addressStyleSegment.isHidden = false
             sheetTitle.isHidden = true
+            majorStyleTableView.isHidden = true
             cosmosStyleTableView.isHidden = false
             evmStyleTableView.isHidden = true
         }
@@ -168,7 +203,16 @@ extension SelectAddressListSheet: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseSheetHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (tableView == cosmosStyleTableView) {
+        if (tableView == majorStyleTableView) {
+            if (section == 0) {
+                view.titleLabel.text = "My Account"
+                view.cntLabel.text = String(refMajorAddresses.count)
+            } else if (section == 1) {
+                view.titleLabel.text = "Address Book"
+                view.cntLabel.text = String(majorAddressBook.count)
+            }
+            
+        } else if (tableView == cosmosStyleTableView) {
             if (section == 0) {
                 view.titleLabel.text = "My Account"
                 view.cntLabel.text = String(refBechAddresses.count)
@@ -190,7 +234,14 @@ extension SelectAddressListSheet: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (tableView == cosmosStyleTableView) {
+        if (tableView == majorStyleTableView) {
+            if (section == 0) {
+                return (refMajorAddresses.count > 0) ? 40 : 0
+            } else if (section == 1) {
+                return (majorAddressBook.count > 0) ? 40 : 0
+            }
+            
+        } else if (tableView == cosmosStyleTableView) {
             if (section == 0) {
                 return (refBechAddresses.count > 0) ? 40 : 0
             } else if (section == 1) {
@@ -208,12 +259,20 @@ extension SelectAddressListSheet: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (tableView == cosmosStyleTableView) {
+        if (tableView == majorStyleTableView) {
+            if (section == 0) {
+                return refMajorAddresses.count
+            } else if (section == 1) {
+                return majorAddressBook.count
+            }
+            
+        } else if (tableView == cosmosStyleTableView) {
             if (section == 0) {
                 return refBechAddresses.count
             } else if (section == 1) {
                 return bechAddressBook.count
             }
+            
         } else if (tableView == evmStyleTableView) {
             if (section == 0) {
                 return refEvmAddresses.count
@@ -225,7 +284,19 @@ extension SelectAddressListSheet: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (tableView == cosmosStyleTableView) {
+        if (tableView == majorStyleTableView) {
+            if (indexPath.section == 0) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRefAddressCell") as? SelectRefAddressCell
+                cell?.onBindMajorRefAddress(toChain, refMajorAddresses[indexPath.row])
+                return cell!
+                
+            } else if (indexPath.section == 1) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAddressBookCell") as? SelectAddressBookCell
+                cell?.onBindMajorAddressBook(toChain, majorAddressBook[indexPath.row])
+                return cell!
+            }
+            
+        } else if (tableView == cosmosStyleTableView) {
             if (indexPath.section == 0) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRefAddressCell") as? SelectRefAddressCell
                 cell?.onBindBechRefAddress(toChain, refBechAddresses[indexPath.row])
@@ -253,7 +324,16 @@ extension SelectAddressListSheet: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (tableView == cosmosStyleTableView) {
+        if (tableView == majorStyleTableView) {
+            if (indexPath.section == 0) {
+                let result: [String : Any] = ["address" : refMajorAddresses[indexPath.row].bechAddress]
+                addressListSheetDelegate?.onAddressSelected(result)
+                
+            } else if (indexPath.section == 1) {
+                let result: [String : Any] = ["address" : majorAddressBook[indexPath.row].dpAddress, "memo" : bechAddressBook[indexPath.row].memo]
+                addressListSheetDelegate?.onAddressSelected(result)
+            }
+        } else if (tableView == cosmosStyleTableView) {
             if (indexPath.section == 0) {
                 let result: [String : Any] = ["address" : refBechAddresses[indexPath.row].bechAddress]
                 addressListSheetDelegate?.onAddressSelected(result)

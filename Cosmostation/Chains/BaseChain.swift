@@ -23,7 +23,7 @@ class BaseChain {
     var publicKey: Data?
     
     //cosmos & grpc & lcd info
-    var cosmosEndPointType: CosmosEndPointType?
+    var cosmosEndPointType: CosmosEndPointType = .Unknown
     var chainIdCosmos: String?
     var bechAddress: String?
     var stakeDenom: String?
@@ -255,9 +255,59 @@ class BaseChain {
         }
     }
     
+    func assetSymbol(_ denom: String) -> String {
+        if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+            return msAsset.symbol ?? "UnKnown"
+        } else if supportCw20,
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return cw20Token.symbol ?? "UnKnown"
+        } else if supportEvm,
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return erc20Token.symbol ?? "UnKnown"
+        }
+        return "UnKnown"
+    }
     
+    func assetImgUrl(_ denom: String) -> URL {
+        if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+            return msAsset.assetImg()
+        } else if supportCw20,
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return cw20Token.assetImg()
+        } else if supportEvm,
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return erc20Token.assetImg()
+        }
+        return URL(string: "")!
+    }
     
-    func isTxFeePayable(_ txType: Int? = nil) -> Bool {
+    func assetDecimal(_ denom: String) -> Int16 {
+        if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+            return msAsset.decimals ?? 6
+        } else if supportCw20,
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return cw20Token.decimals ?? 6
+        } else if supportEvm,
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return erc20Token.decimals ?? 6
+        }
+        return 6
+    }
+    
+    func assetGeckoId(_ denom: String) -> String {
+        if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+            return msAsset.coinGeckoId ?? ""
+        } else if supportCw20,
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return cw20Token.coinGeckoId ?? ""
+        } else if supportEvm,
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return erc20Token.coinGeckoId ?? ""
+        }
+        return ""
+    }
+    
+    func isTxFeePayable(_ txType: TX_TYPE? = nil) -> Bool {
         if let oktFetcher = (self as? ChainOktEVM)?.getOktfetcher() {
             let availableAmount = oktFetcher.oktBalanceAmount(stakeDenom!)
             return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
@@ -304,7 +354,7 @@ class BaseChain {
     }
     
     var supportCosmos: Bool {
-        if (cosmosEndPointType == nil || cosmosEndPointType == .Unknown) {
+        if (cosmosEndPointType == .Unknown) {
             return false
         }
         return true
@@ -483,7 +533,14 @@ extension BaseChain {
 extension BaseChain {
     
     func getExplorerAccount() -> URL? {
-        let address: String = supportCosmos ? bechAddress! : evmAddress!
+        var address = ""
+        if (supportCosmos) {
+            address = bechAddress!
+        } else if (supportEvm) {
+            address = evmAddress!
+        } else {
+            address = mainAddress
+        }
         if let urlString = getChainListParam()["explorer"]["account"].string,
            let url = URL(string: urlString.replacingOccurrences(of: "${address}", with: address)) {
             return url
@@ -517,109 +574,109 @@ func ALLCHAINS() -> [BaseChain] {
     var result = [BaseChain]()
     
     result.append(ChainCosmos())
-    result.append(ChainAgoric564())
-    result.append(ChainAgoric118())
-    result.append(ChainAkash())
-    result.append(ChainAltheaEVM())                     //EVM
-    result.append(ChainAlthea118())
-    result.append(ChainArbitrum())                      //EVM
-    result.append(ChainArchway())
-    //result.append(ChainArtelaEVM())                   //EVM
-    result.append(ChainAssetMantle())
+//    result.append(ChainAgoric564())
+//    result.append(ChainAgoric118())
+//    result.append(ChainAkash())
+//    result.append(ChainAltheaEVM())                     //EVM
+//    result.append(ChainAlthea118())
+//    result.append(ChainArbitrum())                      //EVM
+//    result.append(ChainArchway())
+//    //result.append(ChainArtelaEVM())                   //EVM
+//    result.append(ChainAssetMantle())
     result.append(ChainAvalanche())                     //EVM
-    result.append(ChainAxelar())
-    result.append(ChainBand())
-    result.append(ChainBaseEVM())                       //EVM
-    result.append(ChainBinanceSmart())                  //EVM
-    result.append(ChainBitcana())
-    result.append(ChainBitsong())
-    result.append(ChainCantoEVM())                      //EVM
-    result.append(ChainCelestia())
-    result.append(ChainChihuahua())
-    result.append(ChainComdex())
-    result.append(ChainCoreum())
-    // result.append(ChainCrescent())
-    result.append(ChainCronos())                        //EVM
-    result.append(ChainCryptoorg())
-    result.append(ChainCudos())
-    result.append(ChainDesmos())
-    result.append(ChainDydx())
-    result.append(ChainDymensionEVM())                  //EVM
-    // result.append(ChainEmoney())
+//    result.append(ChainAxelar())
+//    result.append(ChainBand())
+//    result.append(ChainBaseEVM())                       //EVM
+//    result.append(ChainBinanceSmart())                  //EVM
+//    result.append(ChainBitcana())
+//    result.append(ChainBitsong())
+//    result.append(ChainCantoEVM())                      //EVM
+//    result.append(ChainCelestia())
+//    result.append(ChainChihuahua())
+//    result.append(ChainComdex())
+//    result.append(ChainCoreum())
+//    // result.append(ChainCrescent())
+//    result.append(ChainCronos())                        //EVM
+//    result.append(ChainCryptoorg())
+//    result.append(ChainCudos())
+//    result.append(ChainDesmos())
+//    result.append(ChainDydx())
+//    result.append(ChainDymensionEVM())                  //EVM
+//    // result.append(ChainEmoney())
     result.append(ChainEthereum())                      //EVM
-    result.append(ChainEvmosEVM())                      //EVM
-    result.append(ChainFetchAi())
-    result.append(ChainFetchAi60Old())
-    result.append(ChainFetchAi60Secp())
-    result.append(ChainFinschia())
-    result.append(ChainGovgen())
-    result.append(ChainGravityBridge())
-    result.append(ChainHumansEVM())                     //EVM
-    result.append(ChainInjective())
-    //result.append(ChainInitia())
-    result.append(ChainIris())
-    result.append(ChainIxo())
+//    result.append(ChainEvmosEVM())                      //EVM
+//    result.append(ChainFetchAi())
+//    result.append(ChainFetchAi60Old())
+//    result.append(ChainFetchAi60Secp())
+//    result.append(ChainFinschia())
+//    result.append(ChainGovgen())
+//    result.append(ChainGravityBridge())
+//    result.append(ChainHumansEVM())                     //EVM
+//    result.append(ChainInjective())
+//    //result.append(ChainInitia())
+//    result.append(ChainIris())
+//    result.append(ChainIxo())
     result.append(ChainJuno())
     result.append(ChainKavaEVM())                       //EVM
-    result.append(ChainKava459())
-    result.append(ChainKava118())
-    result.append(ChainKi())
-    result.append(ChainKyve())
-    result.append(ChainLava())
-    result.append(ChainLike())
-    result.append(ChainLum118())
-    result.append(ChainLum880())
-    result.append(ChainMars())
-    result.append(ChainMedibloc())
-    result.append(ChainNeutron())
-    result.append(ChainNibiru())
-    //result.append(ChainNillion())
-    result.append(ChainNoble())
-    result.append(ChainNyx())
-    result.append(ChainOktEVM())                        //EVM
-    result.append(ChainOkt996Keccak())                  //LCD
-    result.append(ChainOkt996Secp())                    //LCD
-    result.append(ChainOmniflix())
-    result.append(ChainOnomy())
-    result.append(ChainOptimism())                      //EVM
-    result.append(ChainOsmosis())
-    result.append(ChainPassage())
-    result.append(ChainPersistence118())
-    result.append(ChainPersistence750())
-    result.append(ChainPolygon())                       //EVM
-    result.append(ChainProvenance())
-    result.append(ChainQuasar())
-    result.append(ChainQuicksilver())
-    result.append(ChainRegen())
-    result.append(ChainRizon())
-    result.append(ChainSaga())
-    result.append(ChainSecret118())
-    result.append(ChainSecret529())
-    result.append(ChainSei())
-    result.append(ChainSentinel())
-    result.append(ChainShentu())
-    result.append(ChainSommelier())
-    result.append(ChainStafi())
-    result.append(ChainStargaze())
-    // result.append(ChainStarname())
-    result.append(ChainStride())
+//    result.append(ChainKava459())
+//    result.append(ChainKava118())
+//    result.append(ChainKi())
+//    result.append(ChainKyve())
+//    result.append(ChainLava())
+//    result.append(ChainLike())
+//    result.append(ChainLum118())
+//    result.append(ChainLum880())
+//    result.append(ChainMars())
+//    result.append(ChainMedibloc())
+//    result.append(ChainNeutron())
+//    result.append(ChainNibiru())
+//    //result.append(ChainNillion())
+//    result.append(ChainNoble())
+//    result.append(ChainNyx())
+//    result.append(ChainOktEVM())                        //EVM
+//    result.append(ChainOkt996Keccak())                  //LCD
+//    result.append(ChainOkt996Secp())                    //LCD
+//    result.append(ChainOmniflix())
+//    result.append(ChainOnomy())
+//    result.append(ChainOptimism())                      //EVM
+//    result.append(ChainOsmosis())
+//    result.append(ChainPassage())
+//    result.append(ChainPersistence118())
+//    result.append(ChainPersistence750())
+//    result.append(ChainPolygon())                       //EVM
+//    result.append(ChainProvenance())
+//    result.append(ChainQuasar())
+//    result.append(ChainQuicksilver())
+//    result.append(ChainRegen())
+//    result.append(ChainRizon())
+//    result.append(ChainSaga())
+//    result.append(ChainSecret118())
+//    result.append(ChainSecret529())
+//    result.append(ChainSei())
+//    result.append(ChainSentinel())
+//    result.append(ChainShentu())
+//    result.append(ChainSommelier())
+//    result.append(ChainStafi())
+//    result.append(ChainStargaze())
+//    // result.append(ChainStarname())
+//    result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
-    result.append(ChainTeritori())
-    result.append(ChainTerra())
-    result.append(ChainUmee())
-    result.append(ChainXplaEVM())                       //EVM
-    result.append(ChainXpla())
-    result.append(ChainZetaEVM())                       //EVM
-
-    
-    
-    
-    result.append(ChainCosmos_T())
-    result.append(ChainArtelaEVM_T())
-    //result.append(ChainInitia_T())
-    //result.append(ChainBeraEVM_T())
-    result.append(ChainNeutron_T())
-    result.append(ChainNillion_T())
+//    result.append(ChainTeritori())
+//    result.append(ChainTerra())
+//    result.append(ChainUmee())
+//    result.append(ChainXplaEVM())                       //EVM
+//    result.append(ChainXpla())
+//    result.append(ChainZetaEVM())                       //EVM
+//
+//    
+//    
+//    
+//    result.append(ChainCosmos_T())
+//    result.append(ChainArtelaEVM_T())
+//    //result.append(ChainInitia_T())
+//    //result.append(ChainBeraEVM_T())
+//    result.append(ChainNeutron_T())
+//    result.append(ChainNillion_T())
     
     
     result.forEach { chain in
@@ -649,13 +706,19 @@ enum FetchState: Int {
     case Fail = 2
 }
 
-
-
 enum CosmosEndPointType: Int {
     case Unknown = 0
     case UseGRPC = 1
     case UseLCD = 2
 }
+
+
+public enum TX_TYPE: Int {
+    case SUI_SEND_SUI = 0
+    case SUI_SEND_COIN = 1
+    case SUI_SEND_NFT = 2
+}
+
 
 
 let DEFUAL_DISPALY_CHAINS = ["cosmos118", "ethereum60", "neutron118", "kava60", "osmosis118", "dydx118"]

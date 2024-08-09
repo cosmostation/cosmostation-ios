@@ -24,6 +24,7 @@ class ChainSui: BaseChain  {
         coinSymbol = "SUI"
         stakeDenom = SUI_MAIN_DENOM
         coinGeckoId = "sui"
+        coinLogo = "tokenSui"
         
         mainUrl = "https://sui-mainnet-us-2.cosmostation.io"
     }
@@ -98,7 +99,48 @@ class ChainSui: BaseChain  {
     }
     
     
+    override func assetSymbol(_ denom: String) -> String {
+        if let suiFetcher = getSuiFetcher() {
+            if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+                return msAsset.symbol!
+            } else if let metaData = suiFetcher.suiCoinMeta[denom] {
+                return  metaData["symbol"].stringValue
+            }
+        }
+        return denom.suiCoinSymbol() ?? "UnKnown"
+    }
     
+    override func assetImgUrl(_ denom: String) -> URL {
+        if let suiFetcher = getSuiFetcher() {
+            if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+                return msAsset.assetImg()
+            } else if let metaData = suiFetcher.suiCoinMeta[denom] {
+                return  metaData.assetImg()
+            }
+        }
+        return URL(string: "")!
+    }
+    
+    override func assetDecimal(_ denom: String) -> Int16 {
+        if let suiFetcher = getSuiFetcher() {
+            if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+                return msAsset.decimals ?? 9
+            } else if let metaData = suiFetcher.suiCoinMeta[denom] {
+                return  metaData["decimals"].int16 ?? 9
+            }
+        }
+        return 9
+    }
+    
+    override func assetGeckoId(_ denom: String) -> String {
+        if let suiFetcher = getSuiFetcher() {
+            if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+                return msAsset.coinGeckoId ?? ""
+            }
+        }
+        return ""
+        
+    }
 }
 
 let SUI_TYPE_COIN = "0x2::coin::Coin"

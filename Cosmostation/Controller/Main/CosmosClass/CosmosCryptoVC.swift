@@ -243,7 +243,7 @@ class CosmosCryptoVC: BaseVC {
     
     func onStartCoinTransferVC(_ sendType: SendAssetType, _ denom: String) {
         let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-        transfer.sendType = sendType
+        transfer.sendAssetType = sendType
         transfer.fromChain = selectedChain
         transfer.toSendDenom = denom
         transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, denom)
@@ -253,7 +253,7 @@ class CosmosCryptoVC: BaseVC {
     
     func onStartTokenTransferVC(_ sendType: SendAssetType, _ token: MintscanToken) {
         let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-        transfer.sendType = sendType
+        transfer.sendAssetType = sendType
         transfer.fromChain = selectedChain
         transfer.toSendDenom = token.address
         transfer.toSendMsToken = token

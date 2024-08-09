@@ -161,8 +161,6 @@ class NftTransfer: BaseVC {
         addressSheet.fromChain = fromChain
         addressSheet.toChain = toChain
         addressSheet.sendType = sendType
-        addressSheet.senderBechAddress = fromChain.bechAddress
-        addressSheet.senderEvmAddress = fromChain.evmAddress
         addressSheet.existedAddress = toAddress
         addressSheet.sendAddressDelegate = self
         onStartSheet(addressSheet, 220, 0.6)

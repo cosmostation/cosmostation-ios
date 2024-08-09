@@ -167,6 +167,11 @@ public class WUtils {
         return false
     }
     
+    static func isValidSuiAdderss(_ address: String?) -> Bool {
+        let suiPattern = "^(0x)[A-Fa-f0-9]{64}$"
+        return address?.range(of: suiPattern, options: .regularExpression ) != nil
+    }
+    
     static func generateQrCode(_ content: String)  -> CIImage? {
         let data = content.data(using: String.Encoding.ascii, allowLossyConversion: false)
         let filter = CIFilter(name: "CIQRCodeGenerator")

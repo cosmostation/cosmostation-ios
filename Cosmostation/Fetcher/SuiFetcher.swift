@@ -208,11 +208,27 @@ class SuiFetcher {
     }
     
     //TODO chekc nft logic match with android & extention
-    func suiNfts() -> [JSON] {
+    func allNfts() -> [JSON] {
         return suiObjects.filter { object in
             let typeS = object["type"].string?.lowercased()
             return (typeS?.contains("stakedsui") == false && typeS?.contains("coin") == false)
         }
+    }
+    
+    
+    func hasFee(_ txType: TX_TYPE?) -> Bool {
+        let suiBalance = balanceAmount(SUI_MAIN_DENOM)
+        if (txType == TX_TYPE.SUI_SEND_SUI || txType == TX_TYPE.SUI_SEND_COIN) {
+            return suiBalance.compare(baseFee(txType)).rawValue > 0
+        }
+        return false
+    }
+    
+    func baseFee(_ txType: TX_TYPE?) -> NSDecimalNumber {
+        if (txType == TX_TYPE.SUI_SEND_SUI || txType == TX_TYPE.SUI_SEND_COIN) {
+            return NSDecimalNumber.init(string: "4000000")
+        }
+        return NSDecimalNumber.init(string: "700000000")
     }
     
     
@@ -273,6 +289,15 @@ extension SuiFetcher {
         let parameters: Parameters = ["method": "suix_getCoinMetadata", "params": [coinType], "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
+    
+    func fetchGasprice() async throws -> NSDecimalNumber {
+        let parameters: Parameters = ["method": "suix_getReferenceGasPrice", "params": [], "id" : 1, "jsonrpc" : "2.0"]
+        if let price = try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"].string {
+            print("fetchGasprice ", price)
+            return NSDecimalNumber.init(string: price)
+        }
+        return NSDecimalNumber.zero
+    }
 }
 
 
@@ -313,3 +338,4 @@ extension JSON {
         return URL(string: self["iconUrl"].stringValue) ?? URL(string: "")!
     }
 }
+

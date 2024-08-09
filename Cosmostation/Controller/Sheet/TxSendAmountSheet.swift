@@ -20,9 +20,10 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
     
     var sheetDelegate: SendAmountSheetDelegate?
     
-    var sendType: SendAssetType!
-    var txStyle: SendTxStyle!
     var fromChain: BaseChain!
+    var sendAssetType: SendAssetType!
+    var sendTxStyle: SendTxStyle!
+    var toSendDenom: String!
     var toSendMsAsset: MintscanAsset!
     var toSendMsToken: MintscanToken!
     var availableAmount: NSDecimalNumber!
@@ -54,26 +55,31 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
             amountTextField.text = existedAmount!.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal)).stringValue
         }
         
-        if (sendType == .COSMOS_WASM || sendType == .EVM_ERC20) {
+        if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20) {
             WDP.dpToken(toSendMsToken, nil, availableDenom, availableLabel, decimal)
             
-        } else if (sendType == .COSMOS_COIN) {
+        } else if (sendAssetType == .COSMOS_COIN) {
             WDP.dpCoin(toSendMsAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             
-        } else if (sendType == .EVM_COIN) {
+        } else if (sendAssetType == .EVM_COIN) {
             availableDenom.text = fromChain.coinSymbol
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
             
-        } else if (sendType == .COSMOS_EVM_MAIN_COIN) {
-            if (txStyle == .WEB3_STYLE) {
+        } else if (sendAssetType == .COSMOS_EVM_MAIN_COIN) {
+            if (sendTxStyle == .WEB3_STYLE) {
                 availableDenom.text = fromChain.coinSymbol
                 let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
                 
-            } else if (txStyle == .COSMOS_STYLE) {
+            } else if (sendTxStyle == .COSMOS_STYLE) {
                 WDP.dpCoin(toSendMsAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             }
+            
+        } else if (sendAssetType == .SUI_COIN) {
+            availableDenom.text = fromChain.assetSymbol(toSendDenom)
+            let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+            availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
             
         }
     }
