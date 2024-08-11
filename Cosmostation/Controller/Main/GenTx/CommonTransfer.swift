@@ -124,7 +124,6 @@ class CommonTransfer: BaseVC {
                 txStyle = .SUI_STYLE
                 suiFetcher = (fromChain as? ChainSui)?.getSuiFetcher()
                 suiGasPrice = try await suiFetcher.fetchGasprice()
-                print("suiGasPrice ", suiGasPrice)
                 
             } else {
                 txStyle = .COSMOS_STYLE

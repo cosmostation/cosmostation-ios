@@ -355,6 +355,8 @@
 "str_support_injection" = "インジェクションをサポート";
 "str_retry" = "リトライ";
 "str_change_end_point" = "End-Point 変更";
+"str_current_epoch" = "現在 Epoch";
+"str_next_reward_distibution" = "次の報酬分配";
 
 
 "btn_delegate" = "  委任する";
@@ -444,6 +446,10 @@
 "msg_already_changed_reward_address" = "すでにリワードアドレスを変更しました。";
 "msg_about_fee_tip" = "Feeはウォレットではなく、チェーンに支払われます。";
 "msg_support_injection" = "ユーザーの利便性と反応速度を向上させるため、インジェクション方式（EIP-6963）をサポートしています。DAppsを使用する際は、ブラウザ（デスクトップ）ウォレットを選択してください。\nデスクトップのエクステンションウォレットと同じユーザーエクスペリエンスを体験できます。\nEVM用DAppの場合、EIP-6963仕様をサポートしているため、快適なWeb3の旅をお楽しみいただけます。";
+"msg_sui_guide_0" = "エポックは 24 時間ごとに作成されます。";
+"msg_sui_guide_1" = "ステーキングを開始した場合、現在のEpoch(%@) が終了するまで「保留」状態のままになります。";
+"msg_sui_guide_2" = "次のEpoch (%@) の終了時に報酬が分配されます。後続の各エポックは繰り返されます。";
+"msg_sui_guide_3" = "報酬は複利で付与され、ステーキング解除開始後すぐに使用できます。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
