@@ -218,14 +218,14 @@ class SuiFetcher {
     
     func hasFee(_ txType: TX_TYPE?) -> Bool {
         let suiBalance = balanceAmount(SUI_MAIN_DENOM)
-        if (txType == TX_TYPE.SUI_SEND_SUI || txType == TX_TYPE.SUI_SEND_COIN) {
+        if (txType == .SUI_SEND_COIN || txType == .SUI_SEND_NFT) {
             return suiBalance.compare(baseFee(txType)).rawValue > 0
         }
         return false
     }
     
     func baseFee(_ txType: TX_TYPE?) -> NSDecimalNumber {
-        if (txType == TX_TYPE.SUI_SEND_SUI || txType == TX_TYPE.SUI_SEND_COIN) {
+        if (txType == .SUI_SEND_COIN || txType == .SUI_SEND_NFT) {
             return NSDecimalNumber.init(string: "4000000")
         }
         return NSDecimalNumber.init(string: "700000000")
@@ -314,6 +314,12 @@ extension SuiFetcher {
     func unsafePay(_ sender: String, _ inputCoinObjectIds: [String], _ receipients: [String], _ amounts: [String], _ gasBudget: String) async throws -> String? {
         let params: Any = [sender, inputCoinObjectIds,  receipients, amounts, NSNull(), gasBudget]
         let parameters: Parameters = ["method": "unsafe_pay", "params": params, "id" : 1, "jsonrpc" : "2.0"]
+        return try? await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["txBytes"].stringValue
+    }
+    
+    func unsafeTransferObject(_ sender: String, _ objectId: String, _ gasBudget: String, _ receipients: String) async throws -> String? {
+        let params: Any = [sender, objectId, NSNull(),  gasBudget, receipients]
+        let parameters: Parameters = ["method": "unsafe_transferObject", "params": params, "id" : 1, "jsonrpc" : "2.0"]
         return try? await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["txBytes"].stringValue
     }
     

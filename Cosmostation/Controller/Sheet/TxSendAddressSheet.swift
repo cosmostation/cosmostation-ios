@@ -102,7 +102,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         
         
         
-        if (sendType == .SUI_COIN) {
+        if (sendType == .SUI_COIN || sendType == .SUI_NFT) {
             //only support sui address style
             if (WUtils.isValidSuiAdderss(userInput)) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)

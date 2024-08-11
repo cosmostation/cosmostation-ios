@@ -62,7 +62,7 @@ class SelectAddressListSheet: BaseVC {
         var tempRefBechAddresses = [RefAddress]()
         
         
-        if (sendType == .SUI_COIN) {
+        if (sendType == .SUI_COIN || sendType == .SUI_NFT) {
             //only support sui address style
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
                 if (refAddress.chainTag == toChain.tag && refAddress.bechAddress != senderMajorAddress) {

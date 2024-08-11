@@ -64,7 +64,7 @@ class CommonTransfer: BaseVC {
     
     var fromChain: BaseChain!
     var sendAssetType: SendAssetType!
-    var sendTxStyle: SendTxStyle!                   // .COSMOS_EVM_MAIN_COIN is only change tx style
+    var txStyle: TxStyle!                   // .COSMOS_EVM_MAIN_COIN is only change tx style
     
     var toSendDenom: String!                        // coin denom or contract addresss
     var toSendMsAsset: MintscanAsset!               // to send Coin
@@ -118,16 +118,16 @@ class CommonTransfer: BaseVC {
         //set Txstyle and init
         Task {
             if (sendAssetType == .EVM_COIN || sendAssetType == .EVM_ERC20) {
-                sendTxStyle = .WEB3_STYLE
+                txStyle = .WEB3_STYLE
                 
             } else if (sendAssetType == .SUI_COIN) {
-                sendTxStyle = .SUI_STYLE
+                txStyle = .SUI_STYLE
                 suiFetcher = (fromChain as? ChainSui)?.getSuiFetcher()
                 suiGasPrice = try await suiFetcher.fetchGasprice()
                 print("suiGasPrice ", suiGasPrice)
                 
             } else {
-                sendTxStyle = .COSMOS_STYLE
+                txStyle = .COSMOS_STYLE
                 cosmosFetcher = fromChain.getCosmosfetcher()
             }
             
@@ -224,7 +224,7 @@ class CommonTransfer: BaseVC {
     }
     
     func onInitFee() {
-        if (sendTxStyle == .WEB3_STYLE) {
+        if (txStyle == .WEB3_STYLE) {
             feeSegments.removeAllSegments()
             for i in 0..<evmGasTitle.count {
                 feeSegments.insertSegment(withTitle: evmGasTitle[i], at: i, animated: false)
@@ -236,7 +236,7 @@ class CommonTransfer: BaseVC {
             feeSelectLabel.text = fromChain.coinSymbol
             feeDenomLabel.text = fromChain.coinSymbol
             
-        } else if (sendTxStyle == .SUI_STYLE) {
+        } else if (txStyle == .SUI_STYLE) {
             feeSegments.removeAllSegments()
             feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
             selectedFeePosition = 0
@@ -246,9 +246,9 @@ class CommonTransfer: BaseVC {
             feeSelectLabel.text = fromChain.coinSymbol
             feeDenomLabel.text = fromChain.coinSymbol
             
-            suiFeeBudget = suiFetcher.baseFee(TX_TYPE.SUI_SEND_SUI)
+            suiFeeBudget = suiFetcher.baseFee(.SUI_SEND_COIN)
             
-        } else if (sendTxStyle == .COSMOS_STYLE) {
+        } else if (txStyle == .COSMOS_STYLE) {
             if (cosmosFetcher.cosmosBaseFees.count > 0) {
                 feeSegments.removeAllSegments()
                 feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
@@ -322,7 +322,7 @@ class CommonTransfer: BaseVC {
         toChainCardView.isHidden = false
         toAddressCardView.isHidden = false
         toSendAssetCard.isHidden = false
-        memoCardView.isHidden = (sendTxStyle != .COSMOS_STYLE)
+        memoCardView.isHidden = (txStyle != .COSMOS_STYLE)
         feeCardView.isHidden = false
         sendBtn.isHidden = false
         view.isUserInteractionEnabled = true
@@ -331,15 +331,15 @@ class CommonTransfer: BaseVC {
     
     
     
-    func onUpdateTxStyle(_ style: SendTxStyle) {
-        if (sendAssetType == .COSMOS_EVM_MAIN_COIN && style != sendTxStyle) {
-            sendTxStyle = style
-            if (sendTxStyle == .WEB3_STYLE) {
+    func onUpdateTxStyle(_ style: TxStyle) {
+        if (sendAssetType == .COSMOS_EVM_MAIN_COIN && style != txStyle) {
+            txStyle = style
+            if (txStyle == .WEB3_STYLE) {
                 decimal = 18
                 availableAmount = evmFetcher.evmBalances.subtracting(EVM_BASE_FEE)
                 memoCardView.isHidden = true
                 
-            } else if (sendTxStyle == .COSMOS_STYLE) {
+            } else if (txStyle == .COSMOS_STYLE) {
                 decimal = toSendMsAsset!.decimals
                 availableAmount = cosmosFetcher.balanceAmount(toSendDenom)
                 if (cosmosTxFee.amount[0].denom == toSendDenom) {
@@ -413,7 +413,7 @@ class CommonTransfer: BaseVC {
         let amountSheet = TxSendAmountSheet(nibName: "TxSendAmountSheet", bundle: nil)
         amountSheet.fromChain = fromChain
         amountSheet.sendAssetType = sendAssetType
-        amountSheet.sendTxStyle = sendTxStyle
+        amountSheet.txStyle = txStyle
         amountSheet.toSendDenom = toSendDenom
         amountSheet.toSendMsAsset = toSendMsAsset
         amountSheet.toSendMsToken = toSendMsToken
@@ -464,11 +464,11 @@ class CommonTransfer: BaseVC {
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
-                if (sendTxStyle == .WEB3_STYLE) {
+                if (txStyle == .WEB3_STYLE) {
                     toAssetDenomLabel.text = fromChain.coinSymbol
                     toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                     
-                } else if (sendTxStyle == .COSMOS_STYLE) {
+                } else if (txStyle == .COSMOS_STYLE) {
                     WDP.dpCoin(toSendMsAsset, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
                 }
                 
@@ -517,7 +517,7 @@ class CommonTransfer: BaseVC {
     
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeePosition = sender.selectedSegmentIndex
-        if (sendTxStyle == .COSMOS_STYLE) {
+        if (txStyle == .COSMOS_STYLE) {
             if (cosmosFetcher.cosmosBaseFees.count > 0) {
                 if let baseFee = cosmosFetcher.cosmosBaseFees.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
@@ -534,7 +534,7 @@ class CommonTransfer: BaseVC {
     }
     
     @objc func onSelectFeeCoin() {
-        if (sendTxStyle == .COSMOS_STYLE) {                                     // only cosmos style support multi type fee denom
+        if (txStyle == .COSMOS_STYLE) {                                     // only cosmos style support multi type fee denom
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.targetChain = fromChain
             baseSheet.sheetDelegate = self
@@ -553,7 +553,7 @@ class CommonTransfer: BaseVC {
     func onUpdateFeeView() {
         sendBtn.isHidden = false
         errorCardView.isHidden = true
-        if (sendTxStyle == .WEB3_STYLE) {
+        if (txStyle == .WEB3_STYLE) {
             let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
             let totalGasPrice = evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1
             let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
@@ -562,14 +562,14 @@ class CommonTransfer: BaseVC {
             feeAmountLabel.attributedText = WDP.dpAmount(feeDpAmount.stringValue, feeAmountLabel!.font, 18)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
-        } else if (sendTxStyle == .SUI_STYLE) {
+        } else if (txStyle == .SUI_STYLE) {
             let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
             let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
             let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
             feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 18)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
-        } else if (sendTxStyle == .COSMOS_STYLE) {
+        } else if (txStyle == .COSMOS_STYLE) {
             if let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
                 feeSelectLabel.text = msAsset.symbol
                 let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
@@ -578,7 +578,7 @@ class CommonTransfer: BaseVC {
                 WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
                 WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
                 
-                if (sendAssetType == .COSMOS_COIN || (sendAssetType == .COSMOS_EVM_MAIN_COIN && sendTxStyle == .COSMOS_STYLE)) {
+                if (sendAssetType == .COSMOS_COIN || (sendAssetType == .COSMOS_EVM_MAIN_COIN && txStyle == .COSMOS_STYLE)) {
                     let stakeDenom = fromChain.stakeDenom!
                     let balanceAmount = cosmosFetcher.balanceAmount(toSendDenom)
                     if (cosmosTxFee.amount[0].denom == stakeDenom) {
@@ -599,7 +599,7 @@ class CommonTransfer: BaseVC {
     func onUpdateWithSimul(_ gasUsed: UInt64?) {
         view.isUserInteractionEnabled = true
         loadingView.isHidden = true
-        if (sendTxStyle == .WEB3_STYLE) {
+        if (txStyle == .WEB3_STYLE) {
             guard evmTx != nil else {
                 sendBtn.isHidden = true
                 errorCardView.isHidden = false
@@ -607,7 +607,7 @@ class CommonTransfer: BaseVC {
                 return
             }
             
-        } else if (sendTxStyle == .SUI_STYLE) {
+        } else if (txStyle == .SUI_STYLE) {
             guard let toGas = gasUsed else {
                 sendBtn.isHidden = true
                 errorCardView.isHidden = false
@@ -616,7 +616,7 @@ class CommonTransfer: BaseVC {
             }
             suiFeeBudget = NSDecimalNumber.init(value: toGas)
             
-        } else if (sendTxStyle == .COSMOS_STYLE) {
+        } else if (txStyle == .COSMOS_STYLE) {
             if (fromChain.isGasSimulable() == false) {
                 onUpdateFeeView()
                 sendBtn.isEnabled = true
@@ -661,13 +661,13 @@ class CommonTransfer: BaseVC {
         view.isUserInteractionEnabled = false
         loadingView.isHidden = false
         
-        if (sendTxStyle == .WEB3_STYLE) {
+        if (txStyle == .WEB3_STYLE) {
             evmSendSimul()
             
-        } else if (sendTxStyle == .SUI_STYLE) {
+        } else if (txStyle == .SUI_STYLE) {
             suiSendGasCheck()
             
-        } else if (sendTxStyle == .COSMOS_STYLE) {
+        } else if (txStyle == .COSMOS_STYLE) {
             // some chain not support simulate (assetmantle)  24.2.21
             if (fromChain.isGasSimulable() == false) {
                 if (fromChain.chainIdCosmos != toChain.chainIdCosmos) {
@@ -817,7 +817,7 @@ extension CommonTransfer {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                     self.loadingView.isHidden = true
                     let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
-                    txResult.txStyle = self.sendTxStyle
+                    txResult.txStyle = self.txStyle
                     txResult.fromChain = self.fromChain
                     txResult.toChain = self.toChain
                     txResult.toAddress = self.toAddress
@@ -874,7 +874,7 @@ extension CommonTransfer {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
-                        txResult.txStyle = self.sendTxStyle
+                        txResult.txStyle = self.txStyle
                         txResult.fromChain = self.fromChain
                         txResult.toChain = self.toChain
                         txResult.toAddress = self.toAddress
@@ -888,7 +888,6 @@ extension CommonTransfer {
                 //TODO handle Error
             }
         }
-        
     }
     
     func suiInputs() -> [String] {
@@ -935,7 +934,7 @@ extension CommonTransfer {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
-                        txResult.txStyle = self.sendTxStyle
+                        txResult.txStyle = self.txStyle
                         txResult.fromChain = self.fromChain
                         txResult.toChain = self.toChain
                         txResult.toAddress = self.toAddress
@@ -996,7 +995,7 @@ extension CommonTransfer {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
-                        txResult.txStyle = self.sendTxStyle
+                        txResult.txStyle = self.txStyle
                         txResult.fromChain = self.fromChain
                         txResult.toChain = self.toChain
                         txResult.toAddress = self.toAddress
@@ -1062,7 +1061,7 @@ extension CommonTransfer {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
-                        txResult.txStyle = self.sendTxStyle
+                        txResult.txStyle = self.txStyle
                         txResult.fromChain = self.fromChain
                         txResult.toChain = self.toChain
                         txResult.toAddress = self.toAddress
@@ -1132,7 +1131,7 @@ extension CommonTransfer {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
                         let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
-                        txResult.txStyle = self.sendTxStyle
+                        txResult.txStyle = self.txStyle
                         txResult.fromChain = self.fromChain
                         txResult.toChain = self.toChain
                         txResult.toAddress = self.toAddress
@@ -1220,13 +1219,13 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
             sendBtn.isEnabled = false
             loadingView.isHidden = false
             
-            if (sendTxStyle == .WEB3_STYLE) {
+            if (txStyle == .WEB3_STYLE) {
                 evmSend()
                 
-            } else if (sendTxStyle == .SUI_STYLE) {
+            } else if (txStyle == .SUI_STYLE) {
                 suiSend()
                 
-            } else if (sendTxStyle == .COSMOS_STYLE) {
+            } else if (txStyle == .COSMOS_STYLE) {
                 if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                     // Inchain Send!
                     if (sendAssetType == .COSMOS_WASM) {                                         // Inchain CW20 Send!
                         inChainWasmSend()
@@ -1253,10 +1252,7 @@ public enum SendAssetType: Int {
     case EVM_ERC20 = 3                      // not support IBC, only support Web3 tx  (erc20 tokens)
     case COSMOS_EVM_MAIN_COIN = 4           // support IBC, bank send, Web3 tx        (staking, both tx style)
     case SUI_COIN = 5                       // sui assets
+    case SUI_NFT = 6                        // sui nft
 }
 
-public enum SendTxStyle: Int {
-    case COSMOS_STYLE = 0
-    case WEB3_STYLE = 1
-    case SUI_STYLE = 2
-}
+

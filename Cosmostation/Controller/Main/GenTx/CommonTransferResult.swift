@@ -26,7 +26,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     @IBOutlet weak var confirmBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    var txStyle: SendTxStyle = .COSMOS_STYLE
+    var txStyle: TxStyle!
     var fromChain: BaseChain!
     var fromCosmosFetcher: CosmosFetcher!
     var fromEvmFetcher: EvmFetcher!
