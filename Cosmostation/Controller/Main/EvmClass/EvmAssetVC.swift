@@ -220,9 +220,8 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
         }
         if (indexPath.section == 0) {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-            transfer.sendType = .Only_EVM_Coin
+            transfer.sendAssetType = .EVM_COIN
             transfer.fromChain = selectedChain
-            transfer.toSendDenom = selectedChain.stakeDenom
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
             return
@@ -234,7 +233,7 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
                 return
             }
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-            transfer.sendType = .Only_EVM_ERC20
+            transfer.sendAssetType = .EVM_ERC20
             transfer.fromChain = selectedChain
             transfer.toSendDenom = token.address
             transfer.toSendMsToken = token

@@ -208,11 +208,27 @@ class SuiFetcher {
     }
     
     //TODO chekc nft logic match with android & extention
-    func suiNfts() -> [JSON] {
+    func allNfts() -> [JSON] {
         return suiObjects.filter { object in
             let typeS = object["type"].string?.lowercased()
             return (typeS?.contains("stakedsui") == false && typeS?.contains("coin") == false)
         }
+    }
+    
+    
+    func hasFee(_ txType: TX_TYPE?) -> Bool {
+        let suiBalance = balanceAmount(SUI_MAIN_DENOM)
+        if (txType == .SUI_SEND_COIN || txType == .SUI_SEND_NFT) {
+            return suiBalance.compare(baseFee(txType)).rawValue > 0
+        }
+        return false
+    }
+    
+    func baseFee(_ txType: TX_TYPE?) -> NSDecimalNumber {
+        if (txType == .SUI_SEND_COIN || txType == .SUI_SEND_NFT) {
+            return NSDecimalNumber.init(string: "4000000")
+        }
+        return NSDecimalNumber.init(string: "700000000")
     }
     
     
@@ -273,6 +289,50 @@ extension SuiFetcher {
         let parameters: Parameters = ["method": "suix_getCoinMetadata", "params": [coinType], "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
+    
+    func fetchGasprice() async throws -> NSDecimalNumber {
+        let parameters: Parameters = ["method": "suix_getReferenceGasPrice", "params": [], "id" : 1, "jsonrpc" : "2.0"]
+        if let price = try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"].string {
+            return NSDecimalNumber.init(string: price)
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    func unsafeCoinSend(_ sendDenom: String, _ sender: String, _ inputCoinObjectIds: [String], _ receipients: [String], _ amounts: [String], _ gasBudget: String) async throws -> String? {
+        if (sendDenom == SUI_MAIN_DENOM) {
+            return try await unsafePaySui(sender, inputCoinObjectIds, receipients, amounts, gasBudget)
+        }
+        return try await unsafePay(sender, inputCoinObjectIds, receipients, amounts, gasBudget)
+    }
+    
+    func unsafePaySui(_ sender: String, _ inputCoinObjectIds: [String], _ receipients: [String], _ amounts: [String], _ gasBudget: String) async throws -> String? {
+        let params: Any = [sender, inputCoinObjectIds,  receipients, amounts, gasBudget]
+        let parameters: Parameters = ["method": "unsafe_paySui", "params": params, "id" : 1, "jsonrpc" : "2.0"]
+        return try? await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["txBytes"].stringValue
+    }
+    
+    func unsafePay(_ sender: String, _ inputCoinObjectIds: [String], _ receipients: [String], _ amounts: [String], _ gasBudget: String) async throws -> String? {
+        let params: Any = [sender, inputCoinObjectIds,  receipients, amounts, NSNull(), gasBudget]
+        let parameters: Parameters = ["method": "unsafe_pay", "params": params, "id" : 1, "jsonrpc" : "2.0"]
+        return try? await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["txBytes"].stringValue
+    }
+    
+    func unsafeTransferObject(_ sender: String, _ objectId: String, _ gasBudget: String, _ receipients: String) async throws -> String? {
+        let params: Any = [sender, objectId, NSNull(),  gasBudget, receipients]
+        let parameters: Parameters = ["method": "unsafe_transferObject", "params": params, "id" : 1, "jsonrpc" : "2.0"]
+        return try? await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["txBytes"].stringValue
+    }
+    
+    func suiDryrun(_ tx_bytes: String) async throws -> JSON? {
+        let parameters: Parameters = ["method": "sui_dryRunTransactionBlock", "params": [tx_bytes], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func suiExecuteTx(_ tx_bytes: String, _ signatures: [String]) async throws -> JSON? {
+        let params: Any = [tx_bytes, signatures, ["showEffects": true], "WaitForLocalExecution"]
+        let parameters: Parameters = ["method": "sui_executeTransactionBlock", "params": params, "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
 }
 
 
@@ -313,3 +373,4 @@ extension JSON {
         return URL(string: self["iconUrl"].stringValue) ?? URL(string: "")!
     }
 }
+

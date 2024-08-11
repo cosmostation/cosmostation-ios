@@ -152,6 +152,21 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (selectedChain.isTxFeePayable(.SUI_SEND_COIN) == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        
+        let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+        transfer.sendAssetType = .SUI_COIN
+        transfer.fromChain = selectedChain
+        transfer.toSendDenom = suiBalances[indexPath.row].0
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+        
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {
             let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y

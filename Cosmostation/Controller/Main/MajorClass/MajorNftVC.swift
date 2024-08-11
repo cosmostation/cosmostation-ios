@@ -42,7 +42,7 @@ class MajorNftVC: BaseVC {
         collectionView.refreshControl = refresher
         
         if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
-            suiNFTs = suiFetcher.suiNfts()
+            suiNFTs = suiFetcher.allNfts()
         }
         onUpdateView()
     }
@@ -72,7 +72,7 @@ class MajorNftVC: BaseVC {
         let tag = notification.object as! String
         if (selectedChain != nil && selectedChain.tag == tag ) {
             if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
-                suiNFTs = suiFetcher.suiNfts()
+                suiNFTs = suiFetcher.allNfts()
             }
             
             DispatchQueue.main.async {
@@ -108,8 +108,8 @@ extension MajorNftVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -122,9 +122,19 @@ extension MajorNftVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         let height: CGFloat = width * 1.2
         return CGSize(width: width, height: height)
     }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8)
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (selectedChain.isTxFeePayable(.SUI_SEND_NFT) == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        
+        let transfer = NftTransfer(nibName: "NftTransfer", bundle: nil)
+        transfer.fromChain = selectedChain
+        transfer.toSendSuiNFT = suiNFTs[indexPath.row]
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+        
     }
 }
 

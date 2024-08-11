@@ -10,6 +10,8 @@ import Foundation
 import SwiftProtobuf
 import Web3Core
 import secp256k1
+import Blake2
+import ed25519swift
 
 class Signer {
     //Tx for Transfer
@@ -539,6 +541,19 @@ class Signer {
             result.append(emptyDayta)
         }
         return result
+    }
+}
+
+extension Signer  {
+    
+    static func suiSignatures(_ baseChain: BaseChain, _ txByte: String) -> [String] {
+        return suiSignatures(baseChain.privateKey!, baseChain.publicKey!, Data(base64Encoded: txByte)!)
+    }
+    
+    static func suiSignatures(_ privateKey: Data, _ pubKey: Data, _ data: Data) -> [String] {
+        let hash = try! Blake2b.hash(size: 32, data: Data([0, 0, 0]) + data)
+        let signature = Ed25519.sign(message: [UInt8](hash), secretKey: [UInt8](privateKey))
+        return [(Data([0x00]) + Data(signature) + pubKey).base64EncodedString()]
     }
 }
 

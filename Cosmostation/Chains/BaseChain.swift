@@ -23,7 +23,7 @@ class BaseChain {
     var publicKey: Data?
     
     //cosmos & grpc & lcd info
-    var cosmosEndPointType: CosmosEndPointType?
+    var cosmosEndPointType: CosmosEndPointType = .Unknown
     var chainIdCosmos: String?
     var bechAddress: String?
     var stakeDenom: String?
@@ -255,12 +255,65 @@ class BaseChain {
         }
     }
     
+    func assetSymbol(_ denom: String) -> String {
+        if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+            return msAsset.symbol ?? "UnKnown"
+        } else if supportCw20,
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return cw20Token.symbol ?? "UnKnown"
+        } else if supportEvm,
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return erc20Token.symbol ?? "UnKnown"
+        }
+        return "UnKnown"
+    }
     
+    func assetImgUrl(_ denom: String) -> URL {
+        if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+            return msAsset.assetImg()
+        } else if supportCw20,
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return cw20Token.assetImg()
+        } else if supportEvm,
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return erc20Token.assetImg()
+        }
+        return URL(string: "")!
+    }
     
-    func isTxFeePayable() -> Bool {
-        if let oktChain = self as? ChainOktEVM {
-            let availableAmount = oktChain.getOktfetcher()?.oktBalanceAmount(stakeDenom!) ?? NSDecimalNumber.zero
+    func assetDecimal(_ denom: String) -> Int16 {
+        if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+            return msAsset.decimals ?? 6
+        } else if supportCw20,
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return cw20Token.decimals ?? 6
+        } else if supportEvm,
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return erc20Token.decimals ?? 6
+        }
+        return 6
+    }
+    
+    func assetGeckoId(_ denom: String) -> String {
+        if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+            return msAsset.coinGeckoId ?? ""
+        } else if supportCw20,
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return cw20Token.coinGeckoId ?? ""
+        } else if supportEvm,
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return erc20Token.coinGeckoId ?? ""
+        }
+        return ""
+    }
+    
+    func isTxFeePayable(_ txType: TX_TYPE? = nil) -> Bool {
+        if let oktFetcher = (self as? ChainOktEVM)?.getOktfetcher() {
+            let availableAmount = oktFetcher.oktBalanceAmount(stakeDenom!)
             return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
+            
+        } else if let suiFetcher = (self as? ChainSui)?.getSuiFetcher() {
+            return suiFetcher.hasFee(txType)
             
         } else if (supportCosmos) {
             var result = false
@@ -301,7 +354,7 @@ class BaseChain {
     }
     
     var supportCosmos: Bool {
-        if (cosmosEndPointType == nil || cosmosEndPointType == .Unknown) {
+        if (cosmosEndPointType == .Unknown) {
             return false
         }
         return true
@@ -480,7 +533,14 @@ extension BaseChain {
 extension BaseChain {
     
     func getExplorerAccount() -> URL? {
-        let address: String = supportCosmos ? bechAddress! : evmAddress!
+        var address = ""
+        if (supportCosmos) {
+            address = bechAddress!
+        } else if (supportEvm) {
+            address = evmAddress!
+        } else {
+            address = mainAddress
+        }
         if let urlString = getChainListParam()["explorer"]["account"].string,
            let url = URL(string: urlString.replacingOccurrences(of: "${address}", with: address)) {
             return url
@@ -600,7 +660,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainStargaze())
     // result.append(ChainStarname())
     result.append(ChainStride())
-    result.append(ChainSui())                           //MAJOR SUI
+    result.append(ChainSui())                           //MAJOR
     result.append(ChainTeritori())
     result.append(ChainTerra())
     result.append(ChainUmee())
@@ -646,13 +706,24 @@ enum FetchState: Int {
     case Fail = 2
 }
 
-
-
 enum CosmosEndPointType: Int {
     case Unknown = 0
     case UseGRPC = 1
     case UseLCD = 2
 }
+
+
+public enum TxStyle: Int {
+    case COSMOS_STYLE = 0
+    case WEB3_STYLE = 1
+    case SUI_STYLE = 2
+}
+
+public enum TX_TYPE: Int {
+    case SUI_SEND_COIN = 0
+    case SUI_SEND_NFT = 1
+}
+
 
 
 let DEFUAL_DISPALY_CHAINS = ["cosmos118", "ethereum60", "neutron118", "kava60", "osmosis118", "dydx118"]
