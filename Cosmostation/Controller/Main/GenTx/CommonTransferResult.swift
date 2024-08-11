@@ -30,6 +30,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var fromChain: BaseChain!
     var fromCosmosFetcher: CosmosFetcher!
     var fromEvmFetcher: EvmFetcher!
+    var fromSuiFetcher: SuiFetcher!
     var toChain: BaseChain!
     var toAddress: String?
     var txMemo = ""
@@ -40,6 +41,8 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     
     var evmHash: String?
     var evmRecipient: JSON?
+    
+    var suiResult: JSON?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +68,17 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             fromEvmFetcher = fromChain.getEvmfetcher()
             fetchEvmTx()
             
+        } else if (txStyle == .SUI_STYLE) {
+            if (suiResult?["result"]["effects"]["status"]["status"].stringValue != "success") {
+                loadingView.isHidden = true
+                failView.isHidden = false
+                failMsgLabel.text = suiResult?["result"]["effects"]["status"]["error"].stringValue
+                confirmBtn.isEnabled = true
+                return
+            }
+            fromSuiFetcher = (fromChain as? ChainSui)?.getSuiFetcher()
+            onUpdateView()
+            
         } else if (txStyle == .COSMOS_STYLE) {
             guard (cosmosBroadcastTxResponse?.txhash) != nil else {
                 loadingView.isHidden = true
@@ -84,6 +98,11 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
         if (txStyle == .WEB3_STYLE) {
             successMsgLabel.text = evmHash
+            successExplorerBtn.setTitle("Check in Explorer", for: .normal)
+            failExplorerBtn.setTitle("Check in Explorer", for: .normal)
+            
+        } else if (txStyle == .SUI_STYLE) {
+            successMsgLabel.text = suiResult?["result"]["digest"].stringValue
             successExplorerBtn.setTitle("Check in Explorer", for: .normal)
             failExplorerBtn.setTitle("Check in Explorer", for: .normal)
             
@@ -108,6 +127,12 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                     self.onCheckAddAddressBook()
                 });
             }
+            
+        } else if (txStyle == .SUI_STYLE) {
+            successView.isHidden = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                self.onCheckAddAddressBook()
+            });
             
         } else if (txStyle == .COSMOS_STYLE) {
             if (cosmosTxResponse?.txResponse.code != 0) {
@@ -137,6 +162,10 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     @IBAction func onClickExplorer(_ sender: UIButton) {
         if (txStyle == .WEB3_STYLE) {
             guard let url = fromChain.getExplorerTx(evmHash) else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (txStyle == .SUI_STYLE) {
+            guard let url = fromChain.getExplorerTx(suiResult?["result"]["digest"].stringValue) else { return }
             self.onShowSafariWeb(url)
             
         } else if (txStyle == .COSMOS_STYLE) {
@@ -254,7 +283,6 @@ extension CommonTransferResult {
             }
         }
     }
-    
     
     func onShowMoreWait() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("more_wait_title", comment: ""), message: NSLocalizedString("more_wait_msg", comment: ""), preferredStyle: .alert)
