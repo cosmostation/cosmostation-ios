@@ -58,12 +58,12 @@ class HdPathSheet: BaseVC {
         ethAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.color01 , range: ethRange)
         ethereumPathLabel.attributedText = ethAttributedString
 
-        let kavaPath = "m/44'/459'/0'/0/X"
-        let dpKavaPath = kavaPath.replacingOccurrences(of: "X", with: String(hdPath))
-        let kavaRange = (kavaPath as NSString).range(of: "X")
-        let kavaAttributedString = NSMutableAttributedString(string: dpKavaPath)
-        kavaAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.color01 , range: kavaRange)
-        kavaPathLabel.attributedText = kavaAttributedString
+        let suiPath = "m/44'/784'/0'/0'/X'"
+        let dpSuiPath = suiPath.replacingOccurrences(of: "X", with: String(hdPath))
+        let suiRange = (suiPath as NSString).range(of: "X")
+        let suiAttributedString = NSMutableAttributedString(string: dpSuiPath)
+        suiAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.color01 , range: suiRange)
+        kavaPathLabel.attributedText = suiAttributedString
     }
 }
 
