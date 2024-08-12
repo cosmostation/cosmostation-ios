@@ -156,14 +156,11 @@ class SuiStakingInfoVC: BaseVC {
     }
     
     func onClickUnStake(_ stake: (String, JSON)) {
-        //TODO fee check
-        //TODO pending sattus check
-        
-        
-//        let suiUnstake = SuiUnstake(nibName: "SuiUnstake", bundle: nil)
-//        suiUnstake.selectedChain = selectedChain
-//        suiUnstake.modalTransitionStyle = .coverVertical
-//        self.present(suiUnstake, animated: true)
+        let suiUnstake = SuiUnstake(nibName: "SuiUnstake", bundle: nil)
+        suiUnstake.selectedChain = selectedChain
+        suiUnstake.fromValidator = stake
+        suiUnstake.modalTransitionStyle = .coverVertical
+        self.present(suiUnstake, animated: true)
     }
     
 }
@@ -203,7 +200,11 @@ extension SuiStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        onClickUnStake(stakedList[indexPath.row])
+        if stakedList[indexPath.row].1["status"].stringValue == "Pending" {
+            onShowToast(NSLocalizedString("error_pending", comment: "")) 
+        } else {
+            onClickUnStake(stakedList[indexPath.row])
+        }
     }
 
     func maskCell(cell: UITableViewCell, margin: Float) {
