@@ -124,7 +124,6 @@ class CommonTransfer: BaseVC {
                 txStyle = .SUI_STYLE
                 suiFetcher = (fromChain as? ChainSui)?.getSuiFetcher()
                 suiGasPrice = try await suiFetcher.fetchGasprice()
-                print("suiGasPrice ", suiGasPrice)
                 
             } else {
                 txStyle = .COSMOS_STYLE
@@ -551,7 +550,7 @@ class CommonTransfer: BaseVC {
     
     // user changed segment or fee coin denom kinds
     func onUpdateFeeView() {
-        sendBtn.isHidden = false
+        sendBtn.isEnabled = false
         errorCardView.isHidden = true
         if (txStyle == .WEB3_STYLE) {
             let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)

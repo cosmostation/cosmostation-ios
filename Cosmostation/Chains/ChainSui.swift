@@ -133,10 +133,8 @@ class ChainSui: BaseChain  {
     }
     
     override func assetGeckoId(_ denom: String) -> String {
-        if let suiFetcher = getSuiFetcher() {
-            if let msAsset = BaseData.instance.getAsset(apiName, denom) {
-                return msAsset.coinGeckoId ?? ""
-            }
+        if let msAsset = BaseData.instance.getAsset(apiName, denom) {
+            return msAsset.coinGeckoId ?? ""
         }
         return ""
         
@@ -145,3 +143,9 @@ class ChainSui: BaseChain  {
 
 let SUI_TYPE_COIN = "0x2::coin::Coin"
 let SUI_MAIN_DENOM = "0x2::sui::SUI"
+
+let SUI_MIN_STAKE       = NSDecimalNumber.init(string: "1000000000")
+let SUI_FEE_SEND        = NSDecimalNumber.init(string: "4000000")
+let SUI_FEE_STAKE       = NSDecimalNumber.init(string: "50000000")
+let SUI_FEE_UNSTAKE     = NSDecimalNumber.init(string: "50000000")
+let SUI_FEE_DEFAULT     = NSDecimalNumber.init(string: "70000000")

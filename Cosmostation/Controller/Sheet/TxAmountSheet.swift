@@ -148,6 +148,15 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
             }
         }
         
+        else if (sheetType == .TxSuiStake) {
+            amountTextField.label.text = NSLocalizedString("str_delegate_amount", comment: "")
+            availableTitle.text = NSLocalizedString("str_max_delegable", comment: "")
+            decimal = 9
+            let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: handler18Down)
+            availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
+            availableDenom.text = selectedChain.coinSymbol
+        }
+        
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -250,4 +259,7 @@ public enum AmountSheetType: Int {
     case TxMintWithdraw = 14
     case TxMintDrawDebt = 15
     case TxMintRepay = 16
+    
+    
+    case TxSuiStake = 30
 }
