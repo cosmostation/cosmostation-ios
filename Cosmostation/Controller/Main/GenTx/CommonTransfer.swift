@@ -550,7 +550,7 @@ class CommonTransfer: BaseVC {
     
     // user changed segment or fee coin denom kinds
     func onUpdateFeeView() {
-        sendBtn.isHidden = false
+        sendBtn.isEnabled = false
         errorCardView.isHidden = true
         if (txStyle == .WEB3_STYLE) {
             let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)

@@ -167,6 +167,14 @@
 		042DE8492AC4CD01003F3EA4 /* QrScanVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042DE8452AC4CD01003F3EA4 /* QrScanVC.xib */; };
 		043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043031EC28C2136F005FF935 /* MintscanPath.swift */; };
 		043031EE28C2136F005FF935 /* MintscanPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043031EC28C2136F005FF935 /* MintscanPath.swift */; };
+		043791F92C6964660078C2B3 /* SuiStake.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043791F82C6964660078C2B3 /* SuiStake.xib */; };
+		043791FA2C6964660078C2B3 /* SuiStake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043791F72C6964660078C2B3 /* SuiStake.swift */; };
+		043791FB2C6964660078C2B3 /* SuiStake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043791F72C6964660078C2B3 /* SuiStake.swift */; };
+		043791FC2C6964660078C2B3 /* SuiStake.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043791F82C6964660078C2B3 /* SuiStake.xib */; };
+		043791FF2C69647B0078C2B3 /* SuiUnstake.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043791FE2C69647B0078C2B3 /* SuiUnstake.xib */; };
+		043792002C69647B0078C2B3 /* SuiUnstake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043791FD2C69647B0078C2B3 /* SuiUnstake.swift */; };
+		043792012C69647B0078C2B3 /* SuiUnstake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043791FD2C69647B0078C2B3 /* SuiUnstake.swift */; };
+		043792022C69647B0078C2B3 /* SuiUnstake.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043791FE2C69647B0078C2B3 /* SuiUnstake.xib */; };
 		0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E086268C0A6700088391 /* RIPEMD160.swift */; };
 		0438A7E22AE0E9FA006FA213 /* TxAmountLpSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7E02AE0E9FA006FA213 /* TxAmountLpSheet.swift */; };
 		0438A7E32AE0E9FA006FA213 /* TxAmountLpSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7E02AE0E9FA006FA213 /* TxAmountLpSheet.swift */; };
@@ -2147,6 +2155,10 @@
 		042DE8442AC4CD01003F3EA4 /* QrScanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrScanVC.swift; sourceTree = "<group>"; };
 		042DE8452AC4CD01003F3EA4 /* QrScanVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QrScanVC.xib; sourceTree = "<group>"; };
 		043031EC28C2136F005FF935 /* MintscanPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanPath.swift; sourceTree = "<group>"; };
+		043791F72C6964660078C2B3 /* SuiStake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiStake.swift; sourceTree = "<group>"; };
+		043791F82C6964660078C2B3 /* SuiStake.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuiStake.xib; sourceTree = "<group>"; };
+		043791FD2C69647B0078C2B3 /* SuiUnstake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiUnstake.swift; sourceTree = "<group>"; };
+		043791FE2C69647B0078C2B3 /* SuiUnstake.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuiUnstake.xib; sourceTree = "<group>"; };
 		0437E086268C0A6700088391 /* RIPEMD160.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		0438A7E02AE0E9FA006FA213 /* TxAmountLpSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxAmountLpSheet.swift; sourceTree = "<group>"; };
 		0438A7E12AE0E9FA006FA213 /* TxAmountLpSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxAmountLpSheet.xib; sourceTree = "<group>"; };
@@ -3434,6 +3446,10 @@
 				0479F9782C68B1BF00CE1D29 /* Cell */,
 				0479F9722C68926B00CE1D29 /* SuiStakingInfoVC.swift */,
 				0479F9732C68926B00CE1D29 /* SuiStakingInfoVC.xib */,
+				043791F72C6964660078C2B3 /* SuiStake.swift */,
+				043791F82C6964660078C2B3 /* SuiStake.xib */,
+				043791FD2C69647B0078C2B3 /* SuiUnstake.swift */,
+				043791FE2C69647B0078C2B3 /* SuiUnstake.xib */,
 			);
 			path = Sui;
 			sourceTree = "<group>";
@@ -4929,8 +4945,10 @@
 				E1D2FC672B81FCA30080B638 /* CommonTransfer.xib in Resources */,
 				E10B1D7E2C2156430039283B /* KavaEarnListMyCell.xib in Resources */,
 				04B789F42ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */,
+				043791FC2C6964660078C2B3 /* SuiStake.xib in Resources */,
 				042DE8432AC4C518003F3EA4 /* TxMemoSheet.xib in Resources */,
 				E1D97C0A2B9EF65000496807 /* SelectEndpointSheet.xib in Resources */,
+				043792022C69647B0078C2B3 /* SuiUnstake.xib in Resources */,
 				E1F257E82BFB2009008F4D21 /* EvmCancelUnbonding.xib in Resources */,
 				E1D5382A2A96644F00FB0403 /* loading.json in Resources */,
 				E10B1E012C215EF20039283B /* OkAddShare.xib in Resources */,
@@ -5028,6 +5046,7 @@
 				04A68C312AC13A560041FA13 /* CosmosProposalsVC.xib in Resources */,
 				04CD24552AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */,
 				04FAD9C62AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
+				043791F92C6964660078C2B3 /* SuiStake.xib in Resources */,
 				E10B1DA52C2156430039283B /* KavaLendListVC.xib in Resources */,
 				E1F257F12BFCA223008F4D21 /* EvmVote.xib in Resources */,
 				0479F97B2C68B23B00CE1D29 /* SuiStakingCell.xib in Resources */,
@@ -5120,6 +5139,7 @@
 				04FAD9D22AB2032200143A3E /* SwapStartVC.xib in Resources */,
 				04F048C92AF89B19002A809D /* SelectAddressBookCell.xib in Resources */,
 				04FAD9E42AB6D8ED00143A3E /* ChainListVC.xib in Resources */,
+				043791FF2C69647B0078C2B3 /* SuiUnstake.xib in Resources */,
 				E10EB58E2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				E10B1D792C2156430039283B /* KavaEarnListCell.xib in Resources */,
 				E1F257DF2BFB1FF3008F4D21 /* EvmUndelegate.xib in Resources */,
@@ -5811,6 +5831,7 @@
 				04D279F12A67C98E00AF046A /* ChainEthereum.swift in Sources */,
 				04C816FF2BA98D75006B800A /* cosmos_msg_v1_msg.pb.swift in Sources */,
 				0400EEC82ADBB522007BA97F /* kava_incentive_v1beta1_genesis.pb.swift in Sources */,
+				043792012C69647B0078C2B3 /* SuiUnstake.swift in Sources */,
 				04B789782ACAC9B100E9BE88 /* ibc_core_channel_v1_genesis.pb.swift in Sources */,
 				04FAD9C52AB17FC000143A3E /* SwitchCurrencyCell.swift in Sources */,
 				0400EEBC2ADBB522007BA97F /* kava_incentive_v1beta1_query.grpc.swift in Sources */,
@@ -5833,6 +5854,7 @@
 				045032F62C1EFE5500235F6A /* ChainQuasar.swift in Sources */,
 				04C817792BA98D75006B800A /* cosmos_counter_v1_tx.grpc.swift in Sources */,
 				04C63D232B86FE8C00D4A366 /* CommonTransferResult.swift in Sources */,
+				043791FB2C6964660078C2B3 /* SuiStake.swift in Sources */,
 				0402B7F32ACC38BA00824B3F /* CosmosVote.swift in Sources */,
 				04C817B12BA98D75006B800A /* cosmos_bank_module_v1_module.pb.swift in Sources */,
 				04B789842ACAC9B100E9BE88 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
@@ -6625,6 +6647,7 @@
 				04C816FE2BA98D75006B800A /* cosmos_msg_v1_msg.pb.swift in Sources */,
 				04D279F02A67C98E00AF046A /* ChainEthereum.swift in Sources */,
 				0400EEC72ADBB522007BA97F /* kava_incentive_v1beta1_genesis.pb.swift in Sources */,
+				043792002C69647B0078C2B3 /* SuiUnstake.swift in Sources */,
 				04B789772ACAC9B100E9BE88 /* ibc_core_channel_v1_genesis.pb.swift in Sources */,
 				04FAD9C42AB17FC000143A3E /* SwitchCurrencyCell.swift in Sources */,
 				0400EEBB2ADBB522007BA97F /* kava_incentive_v1beta1_query.grpc.swift in Sources */,
@@ -6647,6 +6670,7 @@
 				045032F52C1EFE5500235F6A /* ChainQuasar.swift in Sources */,
 				04C817782BA98D75006B800A /* cosmos_counter_v1_tx.grpc.swift in Sources */,
 				04C63D222B86FE8C00D4A366 /* CommonTransferResult.swift in Sources */,
+				043791FA2C6964660078C2B3 /* SuiStake.swift in Sources */,
 				04C817B02BA98D75006B800A /* cosmos_bank_module_v1_module.pb.swift in Sources */,
 				0402B7F22ACC38BA00824B3F /* CosmosVote.swift in Sources */,
 				04C8167E2BA98D74006B800A /* cosmos_vesting_v1beta1_tx.pb.swift in Sources */,

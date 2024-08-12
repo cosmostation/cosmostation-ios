@@ -1198,6 +1198,8 @@
 "error_bera_vote_one_proposal" = "You can only vote for one BeraChain.";
 "error_wc2_failed" = "DApp integration (Wallet Connect V2) failed.";
 "error_not_support_dapp" = "%@ does not support mobile injection.";
+"error_not_enough_sui_stake" = "Not enough SUI coins (1.05 or more is possible). \nMinimum staking amount 1\nStaking fee 0.05";
+"error_staking_min_sui" = "Staking is possible from 1 SUI or more.";
 
 
 "alert_title_no_private_key" = "No Private Key";

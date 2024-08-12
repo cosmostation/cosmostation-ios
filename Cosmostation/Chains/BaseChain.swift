@@ -722,6 +722,8 @@ public enum TxStyle: Int {
 public enum TX_TYPE: Int {
     case SUI_SEND_COIN = 0
     case SUI_SEND_NFT = 1
+    case SUI_STAKE = 2
+    case SUI_UNSTAKE = 3
 }
 
 

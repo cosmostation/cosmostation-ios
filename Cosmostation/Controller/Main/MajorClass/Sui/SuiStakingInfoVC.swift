@@ -130,7 +130,6 @@ class SuiStakingInfoVC: BaseVC {
         tableView.isHidden = false
         tableView.reloadData()
         
-//        print("stakedList ", stakedList)
         if (stakedList.count == 0) {
             emptyStakeImg.isHidden = false
         } else {
@@ -139,6 +138,32 @@ class SuiStakingInfoVC: BaseVC {
     }
     
     @IBAction func onClickStake(_ sender: BaseButton) {
+        if (selectedChain.isTxFeePayable(.SUI_STAKE) == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        
+        let suiBalance = suiFehcer.balanceAmount(SUI_MAIN_DENOM)
+        if (suiBalance.compare(SUI_MIN_STAKE.adding(SUI_FEE_STAKE)).rawValue < 0) {
+            onShowToast(NSLocalizedString("error_not_enough_sui_stake", comment: ""))
+            return
+        }
+        
+        let suiStake = SuiStake(nibName: "SuiStake", bundle: nil)
+        suiStake.selectedChain = selectedChain
+        suiStake.modalTransitionStyle = .coverVertical
+        self.present(suiStake, animated: true)
+    }
+    
+    func onClickUnStake(_ stake: (String, JSON)) {
+        //TODO fee check
+        //TODO pending sattus check
+        
+        
+//        let suiUnstake = SuiUnstake(nibName: "SuiUnstake", bundle: nil)
+//        suiUnstake.selectedChain = selectedChain
+//        suiUnstake.modalTransitionStyle = .coverVertical
+//        self.present(suiUnstake, animated: true)
     }
     
 }
@@ -175,6 +200,10 @@ extension SuiStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
                 maskCell(cell: cell, margin: Float(hiddenFrameHeight))
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        onClickUnStake(stakedList[indexPath.row])
     }
 
     func maskCell(cell: UITableViewCell, margin: Float) {
