@@ -89,6 +89,10 @@ class MajorCryptoVC: BaseVC {
     func onUpdateView() {
         if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
             suiBalances = suiFetcher.suiBalances
+            //add zero sui for empty accoount
+            if (suiBalances.filter { $0.0 == SUI_MAIN_DENOM }.count == 0) {
+                suiBalances.append((SUI_MAIN_DENOM, NSDecimalNumber.zero))
+            }
             suiBalances.sort {
                 if ($0.0 == SUI_MAIN_DENOM) { return true }
                 if ($1.0 == SUI_MAIN_DENOM) { return false }

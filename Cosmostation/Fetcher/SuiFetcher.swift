@@ -80,10 +80,6 @@ class SuiFetcher {
                     }
                 }
                 
-                if (suiBalances.filter { $0.0 == SUI_MAIN_DENOM }.count == 0) {
-                    suiBalances.append((SUI_MAIN_DENOM, NSDecimalNumber.zero))
-                }
-                
                 stakes?["result"].arrayValue.forEach({ stake in
                     suiStakedList.append(stake)
                 })
