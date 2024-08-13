@@ -638,6 +638,7 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
         if navigationAction.targetFrame == nil {
             webView.load(navigationAction.request)
             decisionHandler(.allow)
+            return
         }
         
         if let url = navigationAction.request.url {
