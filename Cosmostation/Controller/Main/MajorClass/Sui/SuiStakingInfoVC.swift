@@ -10,6 +10,7 @@ import UIKit
 import Lottie
 import Alamofire
 import SwiftyJSON
+import MaterialComponents
 
 class SuiStakingInfoVC: BaseVC {
     
@@ -17,10 +18,7 @@ class SuiStakingInfoVC: BaseVC {
     @IBOutlet weak var epochLable: UILabel!
     @IBOutlet weak var timeTitle: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var guideMsg0: UILabel!
-    @IBOutlet weak var guideMsg1: UILabel!
-    @IBOutlet weak var guideMsg2: UILabel!
-    @IBOutlet weak var guideMsg3: UILabel!
+    @IBOutlet weak var tabbar: MDCTabBarView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var stakeBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
@@ -35,7 +33,9 @@ class SuiStakingInfoVC: BaseVC {
     var epochStartTimestampMs: Int64?
     var epochDurationMs: Int64?
     var stakedList = [(String, JSON)]()
-
+    var displayStakedList = [(String, JSON)]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,10 +54,10 @@ class SuiStakingInfoVC: BaseVC {
         epochDurationMs = suiFehcer.suiSystem["epochDurationMs"].int64Value
         epochLable.text = "#" + String(epoch!)
         
-        guideMsg0.text = NSLocalizedString("msg_sui_guide_0", comment: "")
-        guideMsg1.text = String(format: NSLocalizedString("msg_sui_guide_1", comment: ""), "#"+String(epoch!))
-        guideMsg2.text = String(format: NSLocalizedString("msg_sui_guide_2", comment: ""), "#"+String(epoch! + 1))
-        guideMsg3.text = NSLocalizedString("msg_sui_guide_3", comment: "")
+//        guideMsg0.text = NSLocalizedString("msg_sui_guide_0", comment: "")
+//        guideMsg1.text = String(format: NSLocalizedString("msg_sui_guide_1", comment: ""), "#"+String(epoch!))
+//        guideMsg2.text = String(format: NSLocalizedString("msg_sui_guide_2", comment: ""), "#"+String(epoch! + 1))
+//        guideMsg3.text = NSLocalizedString("msg_sui_guide_3", comment: "")
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onUpdateTime), userInfo: nil, repeats: true)
         onUpdateTime()
         
@@ -76,7 +76,27 @@ class SuiStakingInfoVC: BaseVC {
         tableView.addSubview(refresher)
         
         onUpdateView()
+        onSetTabbarView()
     }
+    
+    func onSetTabbarView() {
+        let activeTabBar = UITabBarItem(title: "Active", image: nil, tag: 0)
+        let pendingTabBar = UITabBarItem(title: "Pending", image: nil, tag: 1)
+        tabbar.items.append(activeTabBar)
+        tabbar.items.append(pendingTabBar)
+        
+        tabbar.barTintColor = .clear
+        tabbar.selectionIndicatorStrokeColor = .white
+        tabbar.setTitleFont(.fontSize14Bold, for: .normal)
+        tabbar.setTitleFont(.fontSize14Bold, for: .selected)
+        tabbar.setTitleColor(.color02, for: .normal)
+        tabbar.setTitleColor(.color02, for: .selected)
+        tabbar.setSelectedItem(activeTabBar, animated: false)
+        tabbar.tabBarDelegate = self
+        tabbar.preferredLayoutStyle = .fixedClusteredLeading
+        tabbar.setContentPadding(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), for: .scrollable)
+    }
+
     
     override func setLocalizedString() {
         navigationItem.title = NSLocalizedString("title_staking_info", comment: "")
@@ -125,8 +145,11 @@ class SuiStakingInfoVC: BaseVC {
             return $0.1["stakeRequestEpoch"].uInt64Value > $1.1["stakeRequestEpoch"].uInt64Value
         }
         
+        displayStakedList = stakedList
+        
         refresher.endRefreshing()
         loadingView.isHidden = true
+        tabbar.isHidden = false
         tableView.isHidden = false
         tableView.reloadData()
         
@@ -168,55 +191,49 @@ class SuiStakingInfoVC: BaseVC {
 
 extension SuiStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.titleLabel.text = NSLocalizedString("str_my_delegations", comment: "")
-        view.cntLabel.text = String(stakedList.count)
-        return view
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (stakedList.count > 0) ? 40 : 0
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+//        view.titleLabel.text = NSLocalizedString("str_my_delegations", comment: "")
+//        view.cntLabel.text = String(stakedList.count)
+//        return view
+//    }
+//    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return (stakedList.count > 0) ? 40 : 0
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stakedList.count
+        return displayStakedList.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"SuiStakingCell") as! SuiStakingCell
-        cell.onBindMyStake(selectedChain, stakedList[indexPath.row])
+        cell.onBindMyStake(selectedChain, displayStakedList[indexPath.row])
         return cell
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        for cell in tableView.visibleCells {
-            let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
-            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-            }
-        }
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if stakedList[indexPath.row].1["status"].stringValue == "Pending" {
-            onShowToast(NSLocalizedString("error_pending", comment: "")) 
+        if displayStakedList[indexPath.row].1["status"].stringValue == "Pending" {
+            onShowToast(NSLocalizedString("error_pending", comment: ""))
         } else {
-            onClickUnStake(stakedList[indexPath.row])
+            onClickUnStake(displayStakedList[indexPath.row])
         }
     }
+}
 
-    func maskCell(cell: UITableViewCell, margin: Float) {
-        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
-        cell.layer.masksToBounds = true
-    }
-
-    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
-        let mask = CAGradientLayer()
-        mask.frame = cell.bounds
-        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
-        return mask;
+extension SuiStakingInfoVC: MDCTabBarViewDelegate {
+    
+    func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
+        
+        if item.tag == 0 {
+            displayStakedList = stakedList.filter{ $0.1["status"].stringValue != "Pending" }
+        } else if item.tag == 1 {
+            displayStakedList = stakedList.filter{ $0.1["status"].stringValue == "Pending" }
+        }
+        
+        emptyStakeImg.isHidden = !displayStakedList.isEmpty
+        
+        tableView.reloadData()
     }
 }
