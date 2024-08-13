@@ -24,6 +24,8 @@ class MajorNftVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
+        baseAccount = BaseData.instance.baseAccount
+
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
