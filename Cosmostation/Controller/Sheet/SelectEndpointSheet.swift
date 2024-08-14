@@ -17,12 +17,12 @@ class SelectEndpointSheet: BaseVC {
     @IBOutlet weak var evmTableView: UITableView!
     
     var targetChain: BaseChain!
-    var seletcedType: EndPointType!
     var endpointDelegate: EndpointDelegate?
     
     var gRPCList: [JSON]?
     var lcdList: [JSON]?
     var evmRPCList: [JSON]?
+    var rpcList: [JSON]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,33 +43,33 @@ class SelectEndpointSheet: BaseVC {
         gRPCList = targetChain.getChainListParam()["grpc_endpoint"].array
         lcdList = targetChain.getChainListParam()["lcd_endpoint"].array
         evmRPCList = targetChain.getChainListParam()["evm_rpc_endpoint"].array
-        if (gRPCList == nil && lcdList == nil && evmRPCList == nil) {
-            return
-            
-        } else if ((gRPCList != nil || lcdList != nil) && evmRPCList == nil) {
-            seletcedType = EndPointType.cosmosEndPoint
-            titleLabel.text = NSLocalizedString("title_select_end_point", comment: "")
-            endpointTypeSegment.isHidden = true
-            evmTableView.isHidden = true
-            
-        } else if ((gRPCList == nil && lcdList == nil) && evmRPCList != nil) {
-            seletcedType = EndPointType.evmEndpoint
-            titleLabel.text = NSLocalizedString("title_select_end_point", comment: "")
-            endpointTypeSegment.isHidden = true
-            cosmosTableView.isHidden = true
-            
-        } else if ((gRPCList != nil || lcdList != nil) && evmRPCList != nil) {
-            titleLabel.text = NSLocalizedString("title_select_end_point", comment: "")
+        rpcList = targetChain.getChainListParam()["rpc_endpoint"].array
+        
+        if (targetChain.supportCosmos && targetChain.supportEvm) {
+            endpointTypeSegment.insertSegment(withTitle: "Cosmos Endpoint", at: 0, animated: false)
+            endpointTypeSegment.insertSegment(withTitle: "Evm Endpoint", at: 1, animated: false)
             endpointTypeSegment.isHidden = false
-            
-            endpointTypeSegment.insertSegment(withTitle: "Cosmos Endpoint", at: EndPointType.cosmosEndPoint.rawValue, animated: false)
-            endpointTypeSegment.insertSegment(withTitle: "Evm Endpoint", at: EndPointType.evmEndpoint.rawValue, animated: false)
-            seletcedType = EndPointType.cosmosEndPoint
-            
+            endpointTypeSegment.selectedSegmentIndex = 0
             cosmosTableView.isHidden = false
             evmTableView.isHidden = true
+            
+        } else if (targetChain.supportCosmos) {
+            endpointTypeSegment.isHidden = true
+            cosmosTableView.isHidden = false
+            evmTableView.isHidden = true
+            
+        } else if (targetChain.supportEvm) {
+            endpointTypeSegment.isHidden = true
+            cosmosTableView.isHidden = true
+            evmTableView.isHidden = false
         }
-        endpointTypeSegment.selectedSegmentIndex = seletcedType.rawValue
+        
+        if (targetChain is ChainSui) {                  //using evm table
+            endpointTypeSegment.isHidden = true
+            cosmosTableView.isHidden = true
+            evmTableView.isHidden = false
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -88,20 +88,17 @@ class SelectEndpointSheet: BaseVC {
     }
     
     override func setLocalizedString() {
+        titleLabel.text = NSLocalizedString("title_select_end_point", comment: "")
     }
     
     
     @IBAction func onClickSegment(_ sender: UISegmentedControl) {
-        if (sender.selectedSegmentIndex != seletcedType.rawValue) {
-            if (sender.selectedSegmentIndex == 0) {
-                seletcedType = EndPointType.cosmosEndPoint
-                cosmosTableView.isHidden = false
-                evmTableView.isHidden = true
-            } else {
-                seletcedType = EndPointType.evmEndpoint
-                cosmosTableView.isHidden = true
-                evmTableView.isHidden = false
-            }
+        if (sender.selectedSegmentIndex == 0) {
+            cosmosTableView.isHidden = false
+            evmTableView.isHidden = true
+        } else {
+            cosmosTableView.isHidden = true
+            evmTableView.isHidden = false
         }
     }
     
@@ -132,6 +129,7 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
             return nil
         }
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (tableView == cosmosTableView) {
             if (section == 0) {
@@ -151,6 +149,9 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
             return lcdList?.count ?? 0
             
         } else if (tableView == evmTableView) {
+            if (targetChain is ChainSui) {
+                return rpcList?.count ?? 0
+            }
             return evmRPCList?.count ?? 0
         }
         return 0
@@ -165,7 +166,11 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
                 cell?.onBindLcdEndpoint(indexPath.row, targetChain)
             }
         } else if (tableView == evmTableView) {
-            cell?.onBindEvmEndpoint(indexPath.row, targetChain)
+            if (targetChain is ChainSui) {
+                cell?.onBindRpcEndpoint(indexPath.row, targetChain)
+            } else {
+                cell?.onBindEvmEndpoint(indexPath.row, targetChain)
+            }
         }
         return cell!
     }
@@ -185,8 +190,15 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
                 }
                 
             } else if (tableView == evmTableView) {
-                let endpoint = targetChain.getChainListParam()["evm_rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
-                BaseData.instance.setEvmRpcEndpoint(targetChain, endpoint)
+                if (targetChain is ChainSui) {
+                    let endpoint = targetChain.getChainListParam()["rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                    BaseData.instance.setRpcEndpoint(targetChain, endpoint)
+                    
+                } else {
+                    let endpoint = targetChain.getChainListParam()["evm_rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                    BaseData.instance.setEvmRpcEndpoint(targetChain, endpoint)
+                }
+                
             }
             self.dismiss(animated: true) {
                 self.endpointDelegate?.onEndpointUpdated(["chainTag" : self.targetChain.tag])
@@ -202,9 +214,4 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
 
 protocol EndpointDelegate {
     func onEndpointUpdated(_ result: Dictionary<String, Any>?)
-}
-
-enum EndPointType: Int {
-    case cosmosEndPoint = 0
-    case evmEndpoint = 1
 }

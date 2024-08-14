@@ -98,6 +98,16 @@ class ChainSui: BaseChain  {
         }
     }
     
+    func fetchHistory() {
+        Task {
+            await getSuiFetcher()?.fetchSuiHistory()
+            
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name("fetchHistory"), object: self.tag, userInfo: nil)
+            })
+        }
+    }
+    
     
     override func assetSymbol(_ denom: String) -> String {
         if let suiFetcher = getSuiFetcher() {

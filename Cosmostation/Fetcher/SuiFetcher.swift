@@ -19,7 +19,9 @@ class SuiFetcher {
     var suiStakedList = [JSON]()
     var suiObjects = [JSON]()
     var suiValidators = [JSON]()
+    var suiApys = [JSON]()
     var suiCoinMeta: [String: JSON] = [:]
+    var suiHistory = [JSON]()
     
     init(_ chain: BaseChain) {
         self.chain = chain
@@ -54,6 +56,7 @@ class SuiFetcher {
         do {
             if let chainidentifier = try await fetchChainId(),
                let latestSuiSystemState = try await fetchSystemState(),
+               let apys = try await fetchAPYs(),
                let _ = try? await fetchOwnedObjects(chain.mainAddress, nil),
                let stakes = try? await fetchStakes(chain.mainAddress) {
                 
@@ -65,6 +68,10 @@ class SuiFetcher {
                     if ($0["name"].stringValue == "Cosmostation") { return true }
                     if ($1["name"].stringValue == "Cosmostation") { return false }
                     return $0["votingPower"].intValue > $1["votingPower"].intValue ? true : false
+                }
+                suiApys = apys
+                suiApys.sort {
+                    return $0["apy"].doubleValue > $1["apy"].doubleValue ? true : false
                 }
                 
                 suiObjects.forEach { object in
@@ -97,6 +104,25 @@ class SuiFetcher {
             return false
         }
     }
+    
+    func fetchSuiHistory() async {
+        suiHistory.removeAll()
+        
+        if let fromHistroy = try? await fetchFromHistroy(chain.mainAddress),
+           let toHistroy = try? await fetchToHistroy(chain.mainAddress) {
+            suiHistory.append(contentsOf: fromHistroy ?? [])
+            toHistroy?.forEach { to in
+                if (suiHistory.filter({ $0["digest"].stringValue == to["digest"].stringValue }).first == nil) {
+                    suiHistory.append(to)
+                }
+            }
+            suiHistory.sort {
+                return $0["checkpoint"].int64Value > $1["checkpoint"].int64Value
+            }
+        }
+        return
+    }
+    
     
     func stakedAmount() -> NSDecimalNumber {
         var staked = NSDecimalNumber.zero
@@ -231,6 +257,9 @@ class SuiFetcher {
     
     
     func getSuiRpc() -> String {
+        if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_RPC_ENDPOINT +  " : " + chain.name) {
+            return endpoint.trimmingCharacters(in: .whitespaces)
+        }
         return chain.mainUrl
     }
 }
@@ -295,6 +324,24 @@ extension SuiFetcher {
         }
         return NSDecimalNumber.zero
     }
+    
+    func fetchAPYs() async throws -> [JSON]?  {
+        let parameters: Parameters = ["method": "suix_getValidatorsApy", "params": [], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["apys"].array
+    }
+    
+    func fetchFromHistroy(_ address: String) async throws -> [JSON]? {
+        let params: Any = [["filter": ["FromAddress": address], "options": ["showEffects": true, "showInput":true, "showBalanceChanges":true]], nil, 50, true]
+        let parameters: Parameters = ["method": "suix_queryTransactionBlocks", "params": params, "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["data"].array
+    }
+    
+    func fetchToHistroy(_ address: String) async throws -> [JSON]? {
+        let params: Any = [["filter": ["ToAddress": address], "options": ["showEffects": true, "showInput":true, "showBalanceChanges":true]], nil, 50, true]
+        let parameters: Parameters = ["method": "suix_queryTransactionBlocks", "params": params, "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["data"].array
+    }
+    
     
     func unsafeCoinSend(_ sendDenom: String, _ sender: String, _ coins: [String], _ receipients: [String], _ amounts: [String], _ gasBudget: String) async throws -> String? {
         if (sendDenom == SUI_MAIN_DENOM) {
