@@ -136,7 +136,7 @@
                     </constraints>
                 </view>
                 <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEmptyStake" translatesAutoresizingMaskIntoConstraints="NO" id="kPG-ZY-AAD">
-                    <rect key="frame" x="86.666666666666686" y="396" width="220" height="220"/>
+                    <rect key="frame" x="86.666666666666686" y="369" width="220" height="220"/>
                 </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -149,11 +149,11 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="AsQ-D0-bQ0" secondAttribute="leading" id="IzC-of-qJ0"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gd4-ji-Ml8" secondAttribute="trailing" constant="12" id="JnA-py-wzM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="86d-nm-TyD" secondAttribute="trailing" constant="10" id="KEj-GP-2RH"/>
-                <constraint firstItem="6ff-Px-6r9" firstAttribute="top" secondItem="kPG-ZY-AAD" secondAttribute="bottom" constant="140" id="KJO-po-cdE"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6ff-Px-6r9" secondAttribute="trailing" constant="8" id="PtP-0c-Eut"/>
                 <constraint firstItem="6ff-Px-6r9" firstAttribute="top" secondItem="AsQ-D0-bQ0" secondAttribute="bottom" constant="8" id="Pts-bS-iVg"/>
                 <constraint firstItem="AbN-Ax-VRa" firstAttribute="trailing" secondItem="gd4-ji-Ml8" secondAttribute="trailing" id="Qe2-yB-Tqs"/>
                 <constraint firstItem="86d-nm-TyD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="9" id="S1B-Ju-6cs"/>
+                <constraint firstItem="kPG-ZY-AAD" firstAttribute="centerY" secondItem="AsQ-D0-bQ0" secondAttribute="centerY" id="ZnI-09-eNy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="6ff-Px-6r9" secondAttribute="bottom" constant="8" id="cRj-j9-I2U"/>
                 <constraint firstItem="kPG-ZY-AAD" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="dKS-zL-k5z"/>
                 <constraint firstItem="AbN-Ax-VRa" firstAttribute="leading" secondItem="gd4-ji-Ml8" secondAttribute="leading" id="gAG-SA-xzN"/>

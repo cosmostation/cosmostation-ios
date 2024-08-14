@@ -54,10 +54,6 @@ class SuiStakingInfoVC: BaseVC {
         epochDurationMs = suiFehcer.suiSystem["epochDurationMs"].int64Value
         epochLable.text = "#" + String(epoch!)
         
-//        guideMsg0.text = NSLocalizedString("msg_sui_guide_0", comment: "")
-//        guideMsg1.text = String(format: NSLocalizedString("msg_sui_guide_1", comment: ""), "#"+String(epoch!))
-//        guideMsg2.text = String(format: NSLocalizedString("msg_sui_guide_2", comment: ""), "#"+String(epoch! + 1))
-//        guideMsg3.text = NSLocalizedString("msg_sui_guide_3", comment: "")
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onUpdateTime), userInfo: nil, repeats: true)
         onUpdateTime()
         
@@ -74,6 +70,8 @@ class SuiStakingInfoVC: BaseVC {
         refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "iconInfo"), style: .plain, target: self, action: #selector(showInfoSheet))
         
         onUpdateView()
         onSetTabbarView()
@@ -131,6 +129,12 @@ class SuiStakingInfoVC: BaseVC {
         } else {
             timer?.invalidate()
         }
+    }
+    
+    @objc func showInfoSheet() {
+        let infoSheet = SuiStakingInfoSheet(nibName: "SuiStakingInfoSheet", bundle: nil)
+        infoSheet.suiFehcer = suiFehcer
+        onStartSheet(infoSheet, 420, 0.7)
     }
     
     func onUpdateView() {
@@ -191,21 +195,9 @@ class SuiStakingInfoVC: BaseVC {
 
 extension SuiStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-//        view.titleLabel.text = NSLocalizedString("str_my_delegations", comment: "")
-//        view.cntLabel.text = String(stakedList.count)
-//        return view
-//    }
-//    
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return (stakedList.count > 0) ? 40 : 0
-//    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return displayStakedList.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"SuiStakingCell") as! SuiStakingCell
