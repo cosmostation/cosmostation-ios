@@ -73,8 +73,28 @@ class SuiStakingInfoVC: BaseVC {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "iconInfo"), style: .plain, target: self, action: #selector(showInfoSheet))
         
-        onUpdateView()
         onSetTabbarView()
+        onUpdateView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        refresher.endRefreshing()
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+    }
+
+    @objc func onFetchDone(_ notification: NSNotification) {
+        let tag = notification.object as! String
+        if (selectedChain.tag == tag) {
+            onUpdateView()
+        }
     }
     
     func onSetTabbarView() {
@@ -94,7 +114,6 @@ class SuiStakingInfoVC: BaseVC {
         tabbar.preferredLayoutStyle = .fixedClusteredLeading
         tabbar.setContentPadding(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), for: .scrollable)
     }
-
     
     override func setLocalizedString() {
         navigationItem.title = NSLocalizedString("title_staking_info", comment: "")
@@ -149,7 +168,11 @@ class SuiStakingInfoVC: BaseVC {
             return $0.1["stakeRequestEpoch"].uInt64Value > $1.1["stakeRequestEpoch"].uInt64Value
         }
         
-        displayStakedList = stakedList
+        if tabbar.selectedItem?.tag == 0 {
+            displayStakedList = stakedList.filter{ $0.1["status"].stringValue != "Pending" }
+        } else {
+            displayStakedList = stakedList.filter{ $0.1["status"].stringValue == "Pending" }
+        }
         
         refresher.endRefreshing()
         loadingView.isHidden = true
