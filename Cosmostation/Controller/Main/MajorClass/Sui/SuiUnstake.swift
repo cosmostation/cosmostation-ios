@@ -84,7 +84,6 @@ class SuiUnstake: BaseVC {
     func onInitView() {
         onUpdateValidatorView()
 
-        loadingView.isHidden = true
         titleLabel.isHidden = false
         validatorCardView.isHidden = false
         feeCardView.isHidden = false
