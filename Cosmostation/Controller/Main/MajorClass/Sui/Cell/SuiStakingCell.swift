@@ -49,8 +49,8 @@ class SuiStakingCell: UITableViewCell {
         let principal = NSDecimalNumber(value: stake.1["principal"].uInt64Value).multiplying(byPowerOf10: -9)
         let estimatedReward = NSDecimalNumber(value: stake.1["estimatedReward"].uInt64Value).multiplying(byPowerOf10: -9)
         principalLabel?.attributedText = WDP.dpAmount(principal.stringValue, principalLabel!.font, 9)
-        estimatedRewardLabel?.attributedText = WDP.dpAmount(estimatedReward.stringValue, principalLabel!.font, 9)
-        totalStakedLabel?.attributedText = WDP.dpAmount(estimatedReward.adding(principal).stringValue, principalLabel!.font, 9)
+        estimatedRewardLabel?.attributedText = WDP.dpAmount(estimatedReward.stringValue, estimatedRewardLabel!.font, 9)
+        totalStakedLabel?.attributedText = WDP.dpAmount(estimatedReward.adding(principal).stringValue, totalStakedLabel!.font, 9)
         startEaringLabel.text = "Epoch #" + stake.1["stakeActiveEpoch"].stringValue
     }
 }

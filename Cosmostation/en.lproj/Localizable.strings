@@ -447,6 +447,7 @@
 "msg_about_fee_tip" = "Fees are paid to the chain,\nnot to the wallet.";
 "msg_support_injection" = "To enhance user convenience and response times, we support the injection method (EIP-6963). When using DApps, please select your browser(desktop) wallet accordingly.\nYou can experience the same user experience as with the desktop extension wallet.\nFor EVM-based DApps, by supporting the EIP-6963 specification, you can enjoy a seamless web3 experience.";
 "msg_sui_guide_0" = "Epochs are created every 24 hours.";
+"epoch_time" = "24 hours";
 "msg_sui_guide_1" = "If you have started staking, it will remain in a 'pending' state until the current epoch (%@) ends.";
 "msg_sui_guide_2" = "At the end of the next epoch (%@), rewards will be distributed. Each subsequent epoch will be repeated.";
 "msg_sui_guide_3" = "Rewards are compounded and can be used immediately after the start of unstaking.";
