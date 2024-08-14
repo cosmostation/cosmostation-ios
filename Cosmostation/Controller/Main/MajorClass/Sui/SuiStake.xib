@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -323,6 +323,9 @@ not the wallet.</string>
                     <state key="normal" title="Stake">
                         <color key="titleColor" name="_color01"/>
                     </state>
+                    <connections>
+                        <action selector="onClickStake:" destination="-1" eventType="touchUpInside" id="efo-na-SAt"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8k-1a-5OW" customClass="LottieAnimationView" customModule="Lottie">
                     <rect key="frame" x="106.66666666666669" y="383.66666666666669" width="180" height="110"/>

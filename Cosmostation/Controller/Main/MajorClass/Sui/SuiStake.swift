@@ -162,6 +162,12 @@ class SuiStake: BaseVC {
         WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
     }
     
+    @IBAction func onClickStake(_ sender: Any) {
+        let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
+        self.present(pinVC, animated: true)
+    }
+    
+    
     func onSimul() {
         stakeBtn.isEnabled = false
         if (toValidator == nil ) { return }
