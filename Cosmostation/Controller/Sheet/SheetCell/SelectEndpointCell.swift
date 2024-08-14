@@ -153,30 +153,72 @@ class SelectEndpointCell: UITableViewCell {
             
             let param: Parameters = ["method": "eth_getBalance", "params": ["0x8D97689C9818892B700e27F316cc3E41e17fBeb9", "latest"], "id" : 1, "jsonrpc" : "2.0"]
             AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in
-                    switch response.result {
-                    case .success(let value):
-                        self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
-                        DispatchQueue.main.async {
-                            let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
-                            if (self.gapTime! <= 1.2) {
-                                self.speedImg.image = UIImage.init(named: "ImgGovPassed")
-                            } else if (self.gapTime! <= 3) {
-                                self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
-                            } else {
-                                self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                            }
-                            self.speedTimeLabel.text = gapFormat
-                        }
-                        
-                    case .failure:
-                        DispatchQueue.main.async {
+                switch response.result {
+                case .success :
+                    self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
+                    DispatchQueue.main.async {
+                        let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
+                        if (self.gapTime! <= 1.2) {
+                            self.speedImg.image = UIImage.init(named: "ImgGovPassed")
+                        } else if (self.gapTime! <= 3) {
+                            self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
+                        } else {
                             self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                            self.speedTimeLabel.text = "Unknown"
                         }
+                        self.speedTimeLabel.text = gapFormat
+                    }
+                    
+                case .failure:
+                    DispatchQueue.main.async {
+                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                        self.speedTimeLabel.text = "Unknown"
                     }
                 }
+            }
         }
     }
+    
+    func onBindRpcEndpoint(_ position: Int, _ chain: BaseChain) {
+        if let suiFetcher = (chain as? ChainSui)?.getSuiFetcher() {
+            let endpoint = chain.getChainListParam()["rpc_endpoint"].arrayValue[position]
+            providerLabel.text = endpoint["provider"].string
+            endpointLabel.text = endpoint["url"].string?.replacingOccurrences(of: "https://", with: "")
+            endpointLabel.adjustsFontSizeToFitWidth = true
+            
+            let checkTime = CFAbsoluteTimeGetCurrent()
+            let url = endpoint["url"].stringValue
+            
+            seletedImg.isHidden = (suiFetcher.getSuiRpc() != url)
+            
+            let param: Parameters = ["method": "sui_getChainIdentifier", "params": [], "id" : 1, "jsonrpc" : "2.0"]
+            AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in
+                switch response.result {
+                case .success :
+                    self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
+                    DispatchQueue.main.async {
+                        let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
+                        if (self.gapTime! <= 1.2) {
+                            self.speedImg.image = UIImage.init(named: "ImgGovPassed")
+                        } else if (self.gapTime! <= 3) {
+                            self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
+                        } else {
+                            self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                        }
+                        self.speedTimeLabel.text = gapFormat
+                    }
+                    
+                case .failure:
+                    DispatchQueue.main.async {
+                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                        self.speedTimeLabel.text = "Unknown"
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
     
     func getConnection(_ host: String, _ port: Int) -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)

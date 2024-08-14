@@ -674,6 +674,10 @@ extension BaseData {
         return UserDefaults.standard.integer(forKey: KEY_LAST_TAB)
     }
     
+    func setRpcEndpoint(_ chain : BaseChain, _ endpoint: String) {
+        UserDefaults.standard.set(endpoint, forKey: KEY_CHAIN_RPC_ENDPOINT +  " : " + chain.name)
+    }
+    
     func setCosmosEndpointType(_ chain : BaseChain, _ type: CosmosEndPointType) {
         UserDefaults.standard.set(type.rawValue, forKey: KEY_COSMOS_ENDPOINT_TYPE +  " : " + chain.name)
     }

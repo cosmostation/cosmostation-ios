@@ -257,6 +257,9 @@ class SuiFetcher {
     
     
     func getSuiRpc() -> String {
+        if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_RPC_ENDPOINT +  " : " + chain.name) {
+            return endpoint.trimmingCharacters(in: .whitespaces)
+        }
         return chain.mainUrl
     }
 }
