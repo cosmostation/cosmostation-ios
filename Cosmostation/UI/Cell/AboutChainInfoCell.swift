@@ -47,7 +47,13 @@ class AboutChainInfoCell: UITableViewCell {
             initTimeabel.text = WDP.dpDate(inittime)
         }
         
-        if (chain.supportEvm && chain.supportCosmos) {
+        if (chain is ChainSui) {
+            chainIdcosmosView.isHidden = false
+            chainIdevmView.isHidden = true
+            chainIdcosmosTitle.text = NSLocalizedString("str_chain_id", comment: "")
+            chainIdcosmosLabel.text = json["params"]["chainlist_params"]["chain_id"].string
+            
+        } else if (chain.supportEvm && chain.supportCosmos) {
             chainIdcosmosView.isHidden = false
             chainIdevmView.isHidden = false
             chainIdcosmosTitle.text = NSLocalizedString("str_chain_id_cosmos", comment: "")

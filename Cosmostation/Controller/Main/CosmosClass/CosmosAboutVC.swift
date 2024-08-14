@@ -86,7 +86,6 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
         return 40
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }

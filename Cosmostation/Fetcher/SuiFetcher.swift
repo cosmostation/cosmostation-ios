@@ -19,6 +19,7 @@ class SuiFetcher {
     var suiStakedList = [JSON]()
     var suiObjects = [JSON]()
     var suiValidators = [JSON]()
+    var suiApys = [JSON]()
     var suiCoinMeta: [String: JSON] = [:]
     var suiHistory = [JSON]()
     
@@ -55,6 +56,7 @@ class SuiFetcher {
         do {
             if let chainidentifier = try await fetchChainId(),
                let latestSuiSystemState = try await fetchSystemState(),
+               let apys = try await fetchAPYs(),
                let _ = try? await fetchOwnedObjects(chain.mainAddress, nil),
                let stakes = try? await fetchStakes(chain.mainAddress) {
                 
@@ -66,6 +68,10 @@ class SuiFetcher {
                     if ($0["name"].stringValue == "Cosmostation") { return true }
                     if ($1["name"].stringValue == "Cosmostation") { return false }
                     return $0["votingPower"].intValue > $1["votingPower"].intValue ? true : false
+                }
+                suiApys = apys
+                suiApys.sort {
+                    return $0["apy"].doubleValue > $1["apy"].doubleValue ? true : false
                 }
                 
                 suiObjects.forEach { object in
@@ -314,6 +320,11 @@ extension SuiFetcher {
             return NSDecimalNumber.init(string: price)
         }
         return NSDecimalNumber.zero
+    }
+    
+    func fetchAPYs() async throws -> [JSON]?  {
+        let parameters: Parameters = ["method": "suix_getValidatorsApy", "params": [], "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["apys"].array
     }
     
     func fetchFromHistroy(_ address: String) async throws -> [JSON]? {

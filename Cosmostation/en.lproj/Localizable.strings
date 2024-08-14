@@ -233,6 +233,7 @@
 "str_mainnet" = "Mainnet";
 "str_testnet" = "Testnet";
 "str_gas_fee_coin" = "Coin for Gas";
+"str_instant" = "Instant";
 
 
 "str_tx_status" = "Status";

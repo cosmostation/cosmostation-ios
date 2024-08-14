@@ -233,6 +233,7 @@
 "str_mainnet" = "메인넷";
 "str_testnet" = "테스트넷";
 "str_gas_fee_coin" = "가스용 코인";
+"str_instant" = "즉시";
 
 
 "str_tx_status" = "결과";

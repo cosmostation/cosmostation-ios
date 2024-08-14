@@ -233,6 +233,7 @@
 "str_mainnet" = "メインネット";
 "str_testnet" = "テストネット";
 "str_gas_fee_coin" = "ガス用コイン";
+"str_instant" = "直ちに";
 
 
 "str_tx_status" = "結果";
