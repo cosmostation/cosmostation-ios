@@ -120,7 +120,7 @@ class SuiStake: BaseVC {
     }
     
     func onUpdateValidatorView() {
-        monikerImg.sd_setImage(with: toValidator.suiValidatorImg(), placeholderImage: UIImage(named: "validator_default"))
+        monikerImg.sd_setImage(with: toValidator.suiValidatorImg(), placeholderImage: UIImage(named: "validatorDefault"))
         monikerLabel.text = toValidator.suiValidatorName()
         commLabel?.attributedText = WDP.dpAmount(toValidator.suiValidatorCommission().stringValue, commLabel!.font, 2)
         onSimul()
