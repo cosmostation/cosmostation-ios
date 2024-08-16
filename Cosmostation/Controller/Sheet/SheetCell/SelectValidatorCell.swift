@@ -104,7 +104,7 @@ class SelectValidatorCell: UITableViewCell {
     
     
     func onBindSuiValidator(_ baseChain: BaseChain, _ validator: JSON) {
-        logoImg.sd_setImage(with: validator.suiValidatorImg(), placeholderImage: UIImage(named: "validator_default"))
+        logoImg.sd_setImage(with: validator.suiValidatorImg(), placeholderImage: UIImage(named: "validatorDefault"))
         nameLabel.text = validator.suiValidatorName()
         vpLabel?.attributedText = WDP.dpAmount(validator.suiValidatorVp().stringValue, vpLabel!.font, 0)
         commLabel?.attributedText = WDP.dpAmount(validator.suiValidatorCommission().stringValue, commLabel!.font, 2)

@@ -45,8 +45,7 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
         chainImg?.contentMode = .scaleToFill
         chainImg?.alpha = 0
         
-        view.addSubview(chainImg!)
-        view.insertSubview(chainImg!, at: 1)
+        view.insertSubview(chainImg!, at: 0)
         
         UIView.animate(withDuration: 3, animations: {
             self.chainImg?.alpha = 0.1

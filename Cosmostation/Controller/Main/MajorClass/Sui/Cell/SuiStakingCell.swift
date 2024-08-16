@@ -36,7 +36,7 @@ class SuiStakingCell: UITableViewCell {
     func onBindMyStake(_ baseChain: ChainSui, _ stake: (String, JSON)) {
         if let suiFetcher = baseChain.suiFetcher {
             if let validator = suiFetcher.suiValidators.filter({ $0["suiAddress"].stringValue == stake.0 }).first {
-                logoImg.sd_setImage(with: validator.suiValidatorImg(), placeholderImage: UIImage(named: "tokenDefault"))
+                logoImg.sd_setImage(with: validator.suiValidatorImg(), placeholderImage: UIImage(named: "validatorDefault"))
                 nameLabel.text = validator.suiValidatorName()
             }
         }
