@@ -48,6 +48,8 @@ class ChainListVC: BaseVC, EndpointDelegate {
         searchBar?.delegate = self
         tableView.tableHeaderView = searchBar
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "iconReset"), style: .plain, target: self, action: #selector(onClickResetBtn))
+        
         let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         dismissTap.cancelsTouchesInView = false
         view.addGestureRecognizer(dismissTap)
@@ -104,6 +106,36 @@ class ChainListVC: BaseVC, EndpointDelegate {
     }
 
     @IBAction func onClickAddChain(_ sender: UIButton) {
+    }
+    
+    @objc func onClickResetBtn() {
+        let alert = UIAlertController(title: NSLocalizedString("str_endpoint_reset_alert_title", comment: ""),
+                                      message: NSLocalizedString("str_endpoint_reset_alert_msg", comment: ""),
+                                      preferredStyle: .alert)
+
+        let cancel = UIAlertAction(title: NSLocalizedString("str_cancel", comment: ""), style: .cancel)
+        let ok = UIAlertAction(title: NSLocalizedString("str_ok", comment: ""), style: .destructive) { _ in
+            self.loadingView.isHidden = false
+            
+            DispatchQueue.global().async {
+                for chain in ALLCHAINS() {
+                    UserDefaults.standard.removeObject(forKey: KEY_CHAIN_RPC_ENDPOINT +  " : " + chain.name)
+                    UserDefaults.standard.removeObject(forKey: KEY_COSMOS_ENDPOINT_TYPE +  " : " + chain.name)
+                    UserDefaults.standard.removeObject(forKey: KEY_CHAIN_GRPC_ENDPOINT +  " : " + chain.name)
+                    UserDefaults.standard.removeObject(forKey: KEY_CHAIN_LCD_ENDPOINT +  " : " + chain.name)
+                    UserDefaults.standard.removeObject(forKey: KEY_CHAIN_EVM_RPC_ENDPOINT +  " : " + chain.name)
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.loadingView.isHidden = true
+                }
+            }
+        }
+
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        
+        present(alert, animated: true)
     }
 
 }
