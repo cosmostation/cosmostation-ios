@@ -28,6 +28,14 @@ class SelectRefAddressCell: UITableViewCell {
         keyTypeTag.isHidden = true
     }
     
+    func onBindMajorRefAddress(_ toChain: BaseChain, _ refAddress: RefAddress) {
+        if let account = BaseData.instance.selectAccount(refAddress.accountId) {
+            accountNameLabel.text = account.name
+        }
+        addressLabel.text = refAddress.bechAddress
+        addressLabel.adjustsFontSizeToFitWidth = true
+    }
+    
     func onBindBechRefAddress(_ toChain: BaseChain, _ refAddress: RefAddress) {
         if let account = BaseData.instance.selectAccount(refAddress.accountId) {
             accountNameLabel.text = account.name

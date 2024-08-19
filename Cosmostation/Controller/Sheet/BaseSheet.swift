@@ -47,6 +47,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var cdpType: String?
     var earnCoin: Cosmos_Base_V1beta1_Coin?
     
+    var suiValidators = [JSON]()
+    var suiValidatorsSearch = [JSON]()
+    
     
     var selectedAccount: BaseAccount?
 
@@ -233,7 +236,15 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectBuyCrypto) {
             sheetTitle.text = NSLocalizedString("title_buy_crypto", comment: "")
             
+        } else if (sheetType == .SelectSuiValidator) {
+            sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
+            sheetSearchBar.isHidden = false
+            
+            suiValidators = (targetChain as? ChainSui)?.getSuiFetcher()?.suiValidators ?? []
+            suiValidatorsSearch = suiValidators
+            
         }
+
     }
     
     @objc func dismissKeyboard() {
@@ -254,6 +265,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectValidator) {
             validatorsSearch = searchText.isEmpty ? validators : validators.filter { validator in
                 return validator.description_p.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+        } else if (sheetType == .SelectSuiValidator) {
+            suiValidatorsSearch = searchText.isEmpty ? suiValidators : suiValidators.filter { validator in
+                return validator.suiValidatorName().range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
         }
         sheetTableView.reloadData()
@@ -381,6 +396,8 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectBuyCrypto) {
             return 3
             
+        } else if (sheetType == .SelectSuiValidator) {
+            return suiValidatorsSearch.count
         }
         return 0
     }
@@ -521,6 +538,12 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseImgSheetCell") as? BaseImgSheetCell
             cell?.onBindBuyCrypto(indexPath.row)
             return cell!
+            
+        } else if (sheetType == .SelectSuiValidator) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectValidatorCell") as? SelectValidatorCell
+            cell?.onBindSuiValidator(targetChain, suiValidatorsSearch[indexPath.row])
+            return cell!
+            
         }
         return UITableViewCell()
     }
@@ -587,6 +610,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "targetCoin" : earnCoin!]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
+        } else if (sheetType == .SelectSuiValidator) {
+            let result: [String : Any] = ["index" : indexPath.row, "suiAddress" : suiValidatorsSearch[indexPath.row]["suiAddress"].stringValue]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
         } else {
             let result: [String : Any] = ["index" : indexPath.row]
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -639,4 +666,7 @@ public enum SheetType: Int {
     
     
     case SelectBuyCrypto = 71
+    
+    
+    case SelectSuiValidator = 81
 }

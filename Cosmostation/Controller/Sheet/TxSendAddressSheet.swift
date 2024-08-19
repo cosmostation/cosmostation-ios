@@ -20,8 +20,8 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
     var fromChain: BaseChain!
     var toChain: BaseChain!
     var sendType: SendAssetType!
-    var senderBechAddress: String!
-    var senderEvmAddress: String!
+//    var senderBechAddress: String!
+//    var senderEvmAddress: String!
     var existedAddress: String?
     var sendAddressDelegate: SendAddressDelegate?
     
@@ -63,8 +63,6 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         addressListSheet.fromChain = fromChain
         addressListSheet.toChain = toChain
         addressListSheet.sendType = sendType
-        addressListSheet.senderBechAddress = senderBechAddress
-        addressListSheet.senderEvmAddress = senderEvmAddress
         addressListSheet.addressListSheetDelegate = self
         onStartSheet(addressListSheet, 320, 0.6)
     }
@@ -86,12 +84,33 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return
         }
-        if (userInput?.lowercased() == senderBechAddress?.lowercased() || userInput?.lowercased()  == senderEvmAddress?.lowercased() ) {
-            self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
+        
+        if (fromChain.bechAddress?.isEmpty == false && userInput?.lowercased() == fromChain.bechAddress?.lowercased()) {
+            onShowToast(NSLocalizedString("error_self_send", comment: ""))
             return
         }
         
-        if (sendType == .Only_EVM_Coin || sendType == .Only_EVM_ERC20) {
+        if (fromChain.evmAddress?.isEmpty == false && userInput?.lowercased() == fromChain.evmAddress?.lowercased()) {
+            onShowToast(NSLocalizedString("error_self_send", comment: ""))
+            return
+        }
+        
+        if (fromChain.mainAddress.isEmpty == false && userInput?.lowercased() == fromChain.mainAddress.lowercased()) {
+            onShowToast(NSLocalizedString("error_self_send", comment: ""))
+            return
+        }
+        
+        
+        
+        if (sendType == .SUI_COIN || sendType == .SUI_NFT) {
+            //only support sui address style
+            if (WUtils.isValidSuiAdderss(userInput)) {
+                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+                self.dismiss(animated: true)
+                return
+            }
+            
+        } else if (sendType == .EVM_COIN || sendType == .EVM_ERC20) {
             //only support EVM address style
             if (!WUtils.isValidEvmAddress(userInput)) {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
@@ -100,7 +119,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
             self.dismiss(animated: true)
             
-        } else if (sendType == .Only_Cosmos_Coin || sendType == .Only_Cosmos_CW20) {
+        } else if (sendType == .COSMOS_COIN || sendType == .COSMOS_WASM) {
             //only support cosmos address style
             if (WUtils.isValidBechAddress(toChain, userInput)) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
@@ -109,9 +128,9 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             }
             onCheckNameServices(userInput!)
             
-        } else if (sendType == .CosmosEVM_Coin) {
+        } else if (sendType == .COSMOS_EVM_MAIN_COIN) {
             //support both style
-            if (WUtils.isValidEvmAddress(userInput)) {
+            if (WUtils.isValidEvmAddress(userInput) && (fromChain.tag == toChain.tag)) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return

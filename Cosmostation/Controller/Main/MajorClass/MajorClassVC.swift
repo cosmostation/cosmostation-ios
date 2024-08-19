@@ -73,6 +73,7 @@ class MajorClassVC: BaseVC {
         addressLabel.text = selectedChain.mainAddress
         
         onSetTabbarView()
+        onSetFabButton()
         
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
         addressTap.cancelsTouchesInView = false
@@ -105,6 +106,29 @@ class MajorClassVC: BaseVC {
             let tabVC = (self.parent)?.parent as? MainTabVC
             tabVC?.hideChainBgImg()
         }
+    }
+    
+    @IBAction func onClickHideValue(_ sender: UIButton) {
+        BaseData.instance.setHideValue(!BaseData.instance.getHideValue())
+        NotificationCenter.default.post(name: Notification.Name("ToggleHideValue"), object: nil, userInfo: nil)
+        if (BaseData.instance.getHideValue()) {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOff"), for: .normal)
+        } else {
+            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOn"), for: .normal)
+        }
+        totalValue = selectedChain.allValue()
+    }
+    
+    @objc func onShowAddress() {
+        let qrAddressVC = QrAddressVC(nibName: "QrAddressVC", bundle: nil)
+        qrAddressVC.selectedChain = selectedChain
+        qrAddressVC.modalPresentationStyle = .pageSheet
+        present(qrAddressVC, animated: true)
+    }
+    
+    @objc func onClickExplorer() {
+        guard let url = selectedChain.getExplorerAccount() else { return }
+        self.onShowSafariWeb(url)
     }
     
     func onSetTabbarView() {
@@ -147,27 +171,36 @@ class MajorClassVC: BaseVC {
         AboutList.alpha = 0
     }
     
-    @IBAction func onClickHideValue(_ sender: UIButton) {
-        BaseData.instance.setHideValue(!BaseData.instance.getHideValue())
-        NotificationCenter.default.post(name: Notification.Name("ToggleHideValue"), object: nil, userInfo: nil)
-        if (BaseData.instance.getHideValue()) {
-            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOff"), for: .normal)
-        } else {
-            hideValueBtn.setImage(UIImage.init(named: "iconHideValueOn"), for: .normal)
+    
+    func onSetFabButton() {
+        let mainFab = JJFloatingActionButton()
+        mainFab.handleSingleActionDirectly = true
+        mainFab.buttonImage = UIImage(named: "iconFab")
+        mainFab.buttonColor = .colorPrimary
+        mainFab.buttonImageSize = CGSize(width: 52, height: 52)
+        mainFab.buttonAnimationConfiguration.angle = 0
+        mainFab.itemAnimationConfiguration.opening = JJAnimationSettings(duration: 0.1, dampingRatio: 1.0, initialVelocity: 0.8, interItemDelay: 0.03)
+        mainFab.itemAnimationConfiguration.closing = JJAnimationSettings(duration: 0.1, dampingRatio: 1.0, initialVelocity: 0.8, interItemDelay: 0.01)
+        mainFab.overlayView.backgroundColor = UIColor(white: 0, alpha: 0.8)
+        mainFab.configureDefaultItem { item in
+            item.titlePosition = .leading
+            item.titleLabel.font = .fontSize12Bold
+            item.titleLabel.textColor = .color01
+            item.buttonColor = .color08
+            item.buttonImageColor = .color01
+            item.imageSize = CGSize(width: 24, height: 24)
         }
-        totalValue = selectedChain.allValue()
-    }
-    
-    @objc func onShowAddress() {
-        let qrAddressVC = QrAddressVC(nibName: "QrAddressVC", bundle: nil)
-        qrAddressVC.selectedChain = selectedChain
-        qrAddressVC.modalPresentationStyle = .pageSheet
-        present(qrAddressVC, animated: true)
-    }
-    
-    @objc func onClickExplorer() {
-        guard let url = selectedChain.getExplorerAccount() else { return }
-        self.onShowSafariWeb(url)
+        
+        if (selectedChain is ChainSui) {
+            mainFab.addItem(title: "Earn", image: UIImage(named: "iconFab")) { _ in
+                self.onSuiStake()
+            }
+        }
+        
+        view.addSubview(mainFab)
+        mainFab.translatesAutoresizingMaskIntoConstraints = false
+        mainFab.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        mainFab.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
     }
 
 }
@@ -224,5 +257,19 @@ extension MajorClassVC: MDCTabBarViewDelegate {
             ecosystemList.alpha = 0
             AboutList.alpha = 1
         }
+    }
+}
+
+
+extension MajorClassVC {
+    
+    func onSuiStake() {
+        
+        //TODO check gas
+        let stakingInfoVC = SuiStakingInfoVC(nibName: "SuiStakingInfoVC", bundle: nil)
+        stakingInfoVC.selectedChain = selectedChain as? ChainSui
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
+        
     }
 }

@@ -26,6 +26,12 @@ class SelectAddressBookCell: UITableViewCell {
         addressLabel.text = ""
     }
     
+    func onBindMajorAddressBook(_ toChain: BaseChain, _ book: AddressBook) {
+        bookNameLabel.text = book.bookName
+        addressLabel.text = book.dpAddress
+        memoLabel.text = ""
+    }
+    
     func onBindBechAddressBook(_ toChain: BaseChain, _ book: AddressBook) {
         bookNameLabel.text = book.bookName
         addressLabel.text = book.dpAddress

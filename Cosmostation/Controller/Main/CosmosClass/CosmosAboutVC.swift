@@ -34,6 +34,21 @@ class CosmosAboutVC: BaseVC {
         
         chainParam = selectedChain.getChainParam()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone), name: Notification.Name("FetchParam"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchParam"), object: nil)
+    }
+
+    @objc func onFetchDone() {
+        chainParam = selectedChain.getChainParam()
+        tableView.reloadData()
+    }
 }
 
 
@@ -70,7 +85,6 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
         if (section == 4) { return 0 }
         return 40
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1

@@ -426,7 +426,7 @@ extension CosmosClassVC {
         if (selectedChain.name == "OKT") {
             if (selectedChain.tag == "okt60_Keccak") {
                 let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-                transfer.sendType = .Only_EVM_Coin
+                transfer.sendAssetType = .EVM_COIN
                 transfer.fromChain = selectedChain
                 transfer.toSendDenom = selectedChain.stakeDenom
                 transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
@@ -443,7 +443,7 @@ extension CosmosClassVC {
             
         } else {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-            transfer.sendType = selectedChain.supportEvm ? .CosmosEVM_Coin : .Only_Cosmos_Coin
+            transfer.sendAssetType = selectedChain.supportEvm ? .COSMOS_EVM_MAIN_COIN : .COSMOS_COIN
             transfer.fromChain = selectedChain
             transfer.toSendDenom = selectedChain.stakeDenom
             transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)

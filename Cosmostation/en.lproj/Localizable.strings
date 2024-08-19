@@ -233,6 +233,7 @@
 "str_mainnet" = "Mainnet";
 "str_testnet" = "Testnet";
 "str_gas_fee_coin" = "Coin for Gas";
+"str_instant" = "Instant";
 
 
 "str_tx_status" = "Status";
@@ -355,7 +356,8 @@
 "str_support_injection" = "Support Injection";
 "str_retry" = "Retry";
 "str_change_end_point" = "Change End-Point";
-
+"str_current_epoch" = "Current Epoch";
+"str_next_reward_distibution" = "Next Reward";
 
 
 "btn_delegate" = "  Delegate";
@@ -445,6 +447,11 @@
 "msg_already_changed_reward_address" = "You changed a reward address";
 "msg_about_fee_tip" = "Fees are paid to the chain,\nnot to the wallet.";
 "msg_support_injection" = "To enhance user convenience and response times, we support the injection method (EIP-6963). When using DApps, please select your browser(desktop) wallet accordingly.\nYou can experience the same user experience as with the desktop extension wallet.\nFor EVM-based DApps, by supporting the EIP-6963 specification, you can enjoy a seamless web3 experience.";
+"msg_sui_guide_0" = "Epochs are created every 24 hours.";
+"epoch_time" = "24 hours";
+"msg_sui_guide_1" = "If you have started staking, it will remain in a 'pending' state until the current epoch (%@) ends.";
+"msg_sui_guide_2" = "At the end of the next epoch (%@), rewards will be distributed. Each subsequent epoch will be repeated.";
+"msg_sui_guide_3" = "Rewards are compounded and can be used immediately after the start of unstaking.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -1193,6 +1200,9 @@
 "error_bera_vote_one_proposal" = "You can only vote for one BeraChain.";
 "error_wc2_failed" = "DApp integration (Wallet Connect V2) failed.";
 "error_not_support_dapp" = "%@ does not support mobile injection.";
+"error_not_enough_sui_stake" = "Not enough SUI coins (1.05 or more is possible). \nMinimum staking amount 1\nStaking fee 0.05";
+"error_staking_min_sui" = "Staking is possible from 1 SUI or more.";
+"error_pending" = "Pending. Unstaking is not possible.";
 
 
 "alert_title_no_private_key" = "No Private Key";

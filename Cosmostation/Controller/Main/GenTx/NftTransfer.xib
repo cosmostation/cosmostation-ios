@@ -59,7 +59,7 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5U7-OU-MQi">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5U7-OU-MQi">
                     <rect key="frame" x="20" y="79" width="40" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                     <color key="textColor" name="_color01"/>
@@ -71,7 +71,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LWt-r0-Cka">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="689"/>
                             <subviews>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="doq-ct-4dv" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
+                                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="doq-ct-4dv" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
                                     <rect key="frame" x="8" y="4" width="377" height="68"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Chain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ds-he-VJO">
@@ -110,7 +110,7 @@
                                         <constraint firstItem="EoA-88-b9d" firstAttribute="trailing" secondItem="7ds-he-VJO" secondAttribute="trailing" id="rcW-wM-zyQ"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xF3-Gx-QgM" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xF3-Gx-QgM" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
                                     <rect key="frame" x="8" y="82.000000000000014" width="377" height="67.999999999999986"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PE9-gX-Q2K">
@@ -145,7 +145,7 @@
                                         <constraint firstItem="3RU-p4-kn1" firstAttribute="leading" secondItem="xF3-Gx-QgM" secondAttribute="leading" constant="12" id="uQz-Gy-aAJ"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKJ-u3-w7k" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKJ-u3-w7k" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
                                     <rect key="frame" x="8" y="160" width="377" height="68"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgNftPlaceHolder" translatesAutoresizingMaskIntoConstraints="NO" id="G54-A7-PB6">
@@ -161,13 +161,13 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nftName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z42-rW-N8r">
-                                            <rect key="frame" x="80" y="18" width="52" height="15.333333333333336"/>
+                                            <rect key="frame" x="80" y="18" width="281" height="15.333333333333336"/>
                                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                             <color key="textColor" name="_color01"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="collectionName" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2F-LL-faS">
-                                            <rect key="frame" x="80" y="38" width="92.666666666666686" height="15.333333333333336"/>
+                                            <rect key="frame" x="80" y="38" width="281" height="15.333333333333336"/>
                                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                             <color key="textColor" name="_color02"/>
                                             <nil key="highlightedColor"/>
@@ -176,15 +176,17 @@
                                     <color key="backgroundColor" name="_color06"/>
                                     <constraints>
                                         <constraint firstItem="G54-A7-PB6" firstAttribute="leading" secondItem="EKJ-u3-w7k" secondAttribute="leading" constant="12" id="6Jc-DL-rMh"/>
+                                        <constraint firstAttribute="trailing" secondItem="z42-rW-N8r" secondAttribute="trailing" constant="16" id="7gR-at-NUc"/>
                                         <constraint firstItem="z42-rW-N8r" firstAttribute="leading" secondItem="G54-A7-PB6" secondAttribute="trailing" constant="12" id="Gdu-yw-S0J"/>
                                         <constraint firstAttribute="height" constant="68" id="Qiq-KK-JOa"/>
                                         <constraint firstItem="f2F-LL-faS" firstAttribute="leading" secondItem="z42-rW-N8r" secondAttribute="leading" id="Y6Z-mF-sm9"/>
+                                        <constraint firstAttribute="trailing" secondItem="f2F-LL-faS" secondAttribute="trailing" constant="16" id="iPC-cN-2Ol"/>
                                         <constraint firstItem="z42-rW-N8r" firstAttribute="top" secondItem="EKJ-u3-w7k" secondAttribute="top" constant="18" id="lrj-a3-cQk"/>
                                         <constraint firstItem="f2F-LL-faS" firstAttribute="top" secondItem="z42-rW-N8r" secondAttribute="bottom" constant="4.6666666666666856" id="mj0-H4-jUP"/>
                                         <constraint firstItem="G54-A7-PB6" firstAttribute="centerY" secondItem="EKJ-u3-w7k" secondAttribute="centerY" id="zcz-Py-XR0"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w8u-DF-GqS" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w8u-DF-GqS" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
                                     <rect key="frame" x="8" y="383" width="377" height="68"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4C-Oa-Noa">
@@ -220,7 +222,7 @@
                                         <constraint firstItem="h6V-bs-wJq" firstAttribute="leading" secondItem="w8u-DF-GqS" secondAttribute="leading" constant="12" id="kyY-Zc-gfX"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KeJ-jC-Psp" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KeJ-jC-Psp" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
                                     <rect key="frame" x="8" y="461" width="377" height="150"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bu1-Lq-sK1">
@@ -233,7 +235,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILP-uC-g8D">
-                                            <rect key="frame" x="232.33333333333337" y="12" width="132.66666666666663" height="20.333333333333329"/>
+                                            <rect key="frame" x="232.33333333333337" y="11.999999999999998" width="132.66666666666663" height="20.333333333333329"/>
                                             <string key="text">Fees and tips are paid to the chain, 
 not the wallet.</string>
                                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
@@ -400,7 +402,7 @@ not the wallet.</string>
                                         <constraint firstItem="zUj-hp-aoC" firstAttribute="leading" secondItem="4gz-5V-QWf" secondAttribute="leading" constant="10" id="jFY-1F-zjQ"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Mp-Mp-AgV" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Mp-Mp-AgV" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
                                     <rect key="frame" x="8" y="627" width="377" height="54"/>
                                     <color key="backgroundColor" name="_primary"/>
                                     <constraints>

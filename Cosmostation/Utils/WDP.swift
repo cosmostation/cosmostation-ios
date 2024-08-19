@@ -201,6 +201,12 @@ public class WDP {
         return localFormatter.string(from: date)
     }
     
+    static func dpTime(_ milliseconds: Int) -> String {
+        let localFormatter = DateFormatter()
+        localFormatter.dateFormat = NSLocalizedString("HH:mm:ss", comment: "")
+        return localFormatter.string(from: Date(milliseconds: milliseconds))
+    }
+    
     static func dpFullTime(_ timeString: String?) -> String {
         if (timeString == nil) { return "-" }
         guard let date = WUtils.timeStringToDate(timeString!) else {

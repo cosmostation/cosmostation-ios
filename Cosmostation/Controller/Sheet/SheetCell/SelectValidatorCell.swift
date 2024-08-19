@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 import SDWebImage
 
 class SelectValidatorCell: UITableViewCell {
@@ -101,4 +102,17 @@ class SelectValidatorCell: UITableViewCell {
         stakingLabel.isHidden = false
     }
     
+    
+    func onBindSuiValidator(_ baseChain: BaseChain, _ validator: JSON) {
+        logoImg.sd_setImage(with: validator.suiValidatorImg(), placeholderImage: UIImage(named: "validatorDefault"))
+        nameLabel.text = validator.suiValidatorName()
+        vpLabel?.attributedText = WDP.dpAmount(validator.suiValidatorVp().stringValue, vpLabel!.font, 0)
+        commLabel?.attributedText = WDP.dpAmount(validator.suiValidatorCommission().stringValue, commLabel!.font, 2)
+        
+        vpTitle.isHidden = false
+        vpLabel.isHidden = false
+        commTitle.isHidden = false
+        commLabel.isHidden = false
+        commPercentLabel.isHidden = false
+    }
 }

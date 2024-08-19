@@ -89,6 +89,10 @@ class MajorCryptoVC: BaseVC {
     func onUpdateView() {
         if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
             suiBalances = suiFetcher.suiBalances
+            //add zero sui for empty accoount
+            if (suiBalances.filter { $0.0 == SUI_MAIN_DENOM }.count == 0) {
+                suiBalances.append((SUI_MAIN_DENOM, NSDecimalNumber.zero))
+            }
             suiBalances.sort {
                 if ($0.0 == SUI_MAIN_DENOM) { return true }
                 if ($1.0 == SUI_MAIN_DENOM) { return false }
@@ -150,6 +154,21 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             }
         }
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (selectedChain.isTxFeePayable(.SUI_SEND_COIN) == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        
+        let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+        transfer.sendAssetType = .SUI_COIN
+        transfer.fromChain = selectedChain
+        transfer.toSendDenom = suiBalances[indexPath.row].0
+        transfer.modalTransitionStyle = .coverVertical
+        self.present(transfer, animated: true)
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

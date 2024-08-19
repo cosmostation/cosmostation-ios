@@ -63,14 +63,20 @@ class DeriveCell: UITableViewCell {
     func bindDeriveChain(_ account: BaseAccount, _ chain: BaseChain, _ selectedList: [String]) {
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
-        if (chain.supportCosmos) {
-            bechAddressLabel.text = chain.bechAddress
-        }
-        if (chain.supportEvm) {
-            evmAddressLabel.text = chain.evmAddress
-        }
+        
         if (chain.supportCosmos && chain.supportEvm) {
+            bechAddressLabel.text = chain.bechAddress
+            evmAddressLabel.text = chain.evmAddress
             starEvmAddressAnimation()
+            
+        } else if (chain.supportCosmos) {
+            bechAddressLabel.text = chain.bechAddress
+            
+        } else if (chain.supportEvm) {
+            evmAddressLabel.text = chain.evmAddress
+            
+        } else {
+            bechAddressLabel.text = chain.mainAddress
         }
 //        if (account.type == .withMnemonic) {
 //            hdPathLabel.text =  chain.getHDPath(account.lastHDPath)
@@ -102,10 +108,15 @@ class DeriveCell: UITableViewCell {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
             loadingLabel.isHidden = true
             
-            if let oktChain = chain as? ChainOktEVM {
-                let dpAmount = oktChain.getOktfetcher()?.oktBalanceAmount(chain.stakeDenom!) ?? NSDecimalNumber.zero
-                denomLabel.text = "OKT"
+            if let okFetcher = (chain as? ChainOktEVM)?.getOktfetcher() {
+                let dpAmount = okFetcher.oktBalanceAmount(chain.stakeDenom!)
+                denomLabel.text = chain.coinSymbol
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
+                
+            } else if let suiFetcher = (chain as? ChainSui)?.getSuiFetcher() {
+                let dpAmount = suiFetcher.balanceAmount(SUI_MAIN_DENOM).multiplying(byPowerOf10: -9, withBehavior: handler18Down)
+                denomLabel.text = chain.coinSymbol
+                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
                 
             } else if (chain.supportEvm) {
                 let dpAmount = chain.getEvmfetcher()?.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18Down) ?? NSDecimalNumber.zero

@@ -14,6 +14,9 @@ class ClaimAllChainCell: UITableViewCell {
     @IBOutlet weak var rootView: FixCardView!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var rewardAddressStack: UIStackView!
+    @IBOutlet weak var rewardAddressLabel: UILabel!
+    @IBOutlet weak var changedLabel: UILabel!
     @IBOutlet weak var oldTag: RoundedPaddingLabel!
     @IBOutlet weak var rewardTitle: UILabel!
     @IBOutlet weak var valueCurrencyLabel: UILabel!
@@ -49,6 +52,8 @@ class ClaimAllChainCell: UITableViewCell {
         feeValueLabel.text = ""
         feeAmountLabel.text = ""
         feeDenomLabel.text = ""
+        
+        rewardAddressStack.isHidden = true
     }
     
     override func prepareForReuse() {
@@ -62,6 +67,8 @@ class ClaimAllChainCell: UITableViewCell {
         feeValueLabel.text = ""
         feeAmountLabel.text = ""
         feeDenomLabel.text = ""
+        
+        rewardAddressStack.isHidden = true
     }
     
     func onBindRewards(_ model: ClaimAllModel) {
@@ -70,7 +77,7 @@ class ClaimAllChainCell: UITableViewCell {
         let txFee = (model.txFee == nil) ? chain.getInitPayableFee() : model.txFee
         let isBusy = model.isBusy
         let result = model.txResponse
-        
+        let cosmosFetcher = chain.cosmosFetcher!
         
         logoImg1.image =  UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
@@ -78,6 +85,12 @@ class ClaimAllChainCell: UITableViewCell {
             oldTag.isHidden = false
         }
         
+        rewardAddressStack.isHidden = false
+        rewardAddressLabel.isHidden = false
+        rewardAddressLabel.text = cosmosFetcher.isRewardAddressChanged() ? cosmosFetcher.rewardAddress : chain.bechAddress
+        rewardAddressLabel.textColor = cosmosFetcher.isRewardAddressChanged() ? .colorRed : .color02
+        changedLabel.isHidden = !cosmosFetcher.isRewardAddressChanged()
+
         var mainRewardDenom = ""
         var mainRewardAmount = NSDecimalNumber.zero
         if (chain is ChainDydx) {
