@@ -864,6 +864,8 @@
 "str_bull" = "Bull";
 "str_bear" = "Bear";
 "str_select_price_color" = "Select price change color";
+"str_endpoint_reset_alert_title" = "Reset End-Point";
+"str_endpoint_reset_alert_msg" = "Would you like to reset all chains to their default End-Point?";
 
 "clear_all" = "Clear All";
 "close" = "Close";

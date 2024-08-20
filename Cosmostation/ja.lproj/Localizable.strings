@@ -864,6 +864,8 @@
 "str_bull" = "上昇";
 "str_bear" = "クマ";
 "str_select_price_color" = "価格変動の色を選択してください";
+"str_endpoint_reset_alert_title" = "エンドポイントの初期化";
+"str_endpoint_reset_alert_msg" = "すべてのチェーンをデフォルトのエンドポイントにリセットしますか？";
 
 "clear_all" = "すべてクリア";
 "close" = "閉じる";
