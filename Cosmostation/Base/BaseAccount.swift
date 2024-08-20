@@ -264,10 +264,10 @@ public enum PubKeyType: Int {
     case BERA_Secp256k1 = 3
     case ARTELA_Keccak256 = 4
     case SUI_Ed25519 = 5
-    case BITCOIN_Legacy = 6
-    case BITCOIN_Nested_Segwit = 7
-    case BITCOIN_Native_Segwit = 8
-    case BITCOIN_Taproot = 9
+    case BTC_Legacy = 6
+    case BTC_Nested_Segwit = 7
+    case BTC_Native_Segwit = 8
+    case BTC_Taproot = 9
     case unknown = 99
     
     var algorhythm: String? {
@@ -284,13 +284,13 @@ public enum PubKeyType: Int {
             return "keccak256"
         case PubKeyType.SUI_Ed25519:
             return "ed25519"
-        case PubKeyType.BITCOIN_Legacy:
+        case PubKeyType.BTC_Legacy:
             return "p2pkh"
-        case PubKeyType.BITCOIN_Nested_Segwit:
+        case PubKeyType.BTC_Nested_Segwit:
             return "p2wpkhSh"
-        case PubKeyType.BITCOIN_Native_Segwit:
+        case PubKeyType.BTC_Native_Segwit:
             return "p2wpkh"
-        case PubKeyType.BITCOIN_Taproot:
+        case PubKeyType.BTC_Taproot:
             return "p2tr"
         case PubKeyType.unknown:
             return "unknown"
@@ -311,13 +311,13 @@ public enum PubKeyType: Int {
 //            return "ethsecp256k1"
 //        case PubKeyType.SUI_Ed25519:
 //            return "ed25519"
-//        case PubKeyType.BITCOIN_LEGACY:
+//        case PubKeyType.BTC_Legacy:
 //            return "p2pkh"
-//        case PubKeyType.BITCOIN_NESTED_SEGWIT:
+//        case PubKeyType.BTC_Nested_Segwit:
 //            return "p2wpkhSh"
-//        case PubKeyType.BITCOIN_NATIVE_SEGWIT:
+//        case PubKeyType.BTC_Native_Segwit:
 //            return "p2wpkh"
-//        case PubKeyType.BITCOIN_TAPROOT:
+//        case PubKeyType.BTC_Taproot:
 //            return "p2tr"
 //        case PubKeyType.unknown:
 //            return "unknown"

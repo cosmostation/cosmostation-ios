@@ -24,8 +24,8 @@ class KeyFac {
             pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
             return getSecp256k1PriKey(seed, path)
             
-        } else if (pubKeyType == .BITCOIN_Legacy || pubKeyType == .BITCOIN_Nested_Segwit ||
-                   pubKeyType == .BITCOIN_Native_Segwit || pubKeyType == .BITCOIN_Taproot) {
+        } else if (pubKeyType == .BTC_Legacy || pubKeyType == .BTC_Nested_Segwit ||
+                   pubKeyType == .BTC_Native_Segwit || pubKeyType == .BTC_Taproot) {
             return getSecp256k1PriKey(seed, path)
             
         } else if (pubKeyType == .SUI_Ed25519) {
@@ -79,8 +79,8 @@ class KeyFac {
             pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
             return getSecp256k1PubKey(priKey)
             
-        } else if (pubKeyType == .BITCOIN_Legacy || pubKeyType == .BITCOIN_Nested_Segwit ||
-                   pubKeyType == .BITCOIN_Native_Segwit || pubKeyType == .BITCOIN_Taproot) {
+        } else if (pubKeyType == .BTC_Legacy || pubKeyType == .BTC_Nested_Segwit ||
+                   pubKeyType == .BTC_Native_Segwit || pubKeyType == .BTC_Taproot) {
             return getSecp256k1PubKey(priKey)
             
         } else if (pubKeyType == .SUI_Ed25519) {
@@ -106,19 +106,26 @@ class KeyFac {
         } else if (pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
             return Web3Core.Utilities.publicToAddressString(pubKey)!
             
-        } else if (pubKeyType == .BITCOIN_Legacy) {
+        } else if (pubKeyType == .BTC_Legacy) {
             let ripemd160 = RIPEMD160.hash(pubKey.sha256())
-            let networkByte: UInt8 = 0x00
-            let networkAndHash = Data([networkByte]) + ripemd160
+            let version: UInt8 = 0
+            let networkAndHash = Data([version]) + ripemd160
             return base58CheckEncode(networkAndHash)
             
-        } else if (pubKeyType == .BITCOIN_Nested_Segwit) {
+        } else if (pubKeyType == .BTC_Nested_Segwit) {
+            let ripemd160 = RIPEMD160.hash(pubKey.sha256())
+            let segwitscript = OpCode.segWitOutputScript(ripemd160, versionByte: 0)
+            let hashP2wpkhWrappedInP2sh = RIPEMD160.hash(segwitscript.sha256())
+            let version: UInt8 = 5
+            let withVersion = Data([version]) + hashP2wpkhWrappedInP2sh
+            return base58CheckEncode(withVersion)
             
-        } else if (pubKeyType == .BITCOIN_Native_Segwit) {
+        } else if (pubKeyType == .BTC_Native_Segwit) {
             let ripemd160 = RIPEMD160.hash(pubKey.sha256())
             return try! SegwitAddrCoder.shared.encodeBtc("bc", ripemd160)
             
-        } else if (pubKeyType == .BITCOIN_Taproot) {
+        } else if (pubKeyType == .BTC_Taproot) {
+            //Not support
             
         } else if (pubKeyType == .SUI_Ed25519) {
             let data = Data([UInt8](Data(count: 1)) + pubKey)
@@ -209,6 +216,3 @@ extension Data {
         return Data(array)
     }
 }
-
-
-
