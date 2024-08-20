@@ -563,6 +563,17 @@ extension DappDetailVC: WKScriptMessageHandler {
                 
             }
             
+            //Handle SUI Request
+            else if (method == "sui_getAccount") {
+                guard let pubKey = targetChain.publicKey?.hexEncodedString() else { return }
+                let data: JSON = ["address": targetChain.mainAddress, "publicKey": "0x" + pubKey]
+                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "sui_getChain") {
+                injectionRequestApprove("mainnet", messageJSON, bodyJSON["messageId"])
+                
+            }
+            
             else {
                 injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
             }
