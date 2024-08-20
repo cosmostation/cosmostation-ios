@@ -15,7 +15,7 @@ class SuiStakingCell: UITableViewCell {
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var pendingTag: RoundedPaddingLabel!
+    @IBOutlet weak var pendingTag: UIImageView!
     @IBOutlet weak var objectIdLabel: UILabel!
     @IBOutlet weak var totalStakedLabel: UILabel!
     @IBOutlet weak var principalLabel: UILabel!

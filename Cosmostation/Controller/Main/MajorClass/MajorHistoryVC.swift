@@ -49,8 +49,8 @@ class MajorHistoryVC: BaseVC {
         onRequestHistory()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onHistoryDone(_:)), name: Notification.Name("fetchHistory"), object: nil)
     }
     

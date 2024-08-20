@@ -14,7 +14,7 @@ class EcoListCell: UICollectionViewCell {
     
     @IBOutlet weak var rootView: FixCardView!
     @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var typeTagLabel: PaddingLabel!
+    @IBOutlet weak var typeTagLabel: RoundedPaddingLabel!
     @IBOutlet weak var supportImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
