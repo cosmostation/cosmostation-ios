@@ -1542,6 +1542,8 @@
 		2810084A2696D979002986A6 /* KeyFac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281008492696D979002986A6 /* KeyFac.swift */; };
 		28CE973625872B7C006DEBEE /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE973525872B7C006DEBEE /* Signer.swift */; };
 		28FC030C2652662B001C0319 /* MintscanPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC030B2652662B001C0319 /* MintscanPrice.swift */; };
+		792B9CBD2C747CB3001440DB /* DappSuiSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B9CBB2C747CB2001440DB /* DappSuiSignRequestSheet.swift */; };
+		792B9CBE2C747CB3001440DB /* DappSuiSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792B9CBC2C747CB2001440DB /* DappSuiSignRequestSheet.xib */; };
 		792D2B052C57767E0085007A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 792D2B042C57767E0085007A /* SDWebImage */; };
 		792D2B072C57768C0085007A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 792D2B062C57768C0085007A /* SDWebImage */; };
 		792D2B0A2C57769C0085007A /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 792D2B092C57769C0085007A /* SDWebImageSVGCoder */; };
@@ -2836,6 +2838,8 @@
 		28CE973525872B7C006DEBEE /* Signer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signer.swift; sourceTree = "<group>"; };
 		28FC030B2652662B001C0319 /* MintscanPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanPrice.swift; sourceTree = "<group>"; };
 		6ED0AF4867E1AFC41A279302 /* Pods-Cosmostation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.debug.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.debug.xcconfig"; sourceTree = "<group>"; };
+		792B9CBB2C747CB2001440DB /* DappSuiSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappSuiSignRequestSheet.swift; sourceTree = "<group>"; };
+		792B9CBC2C747CB2001440DB /* DappSuiSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappSuiSignRequestSheet.xib; sourceTree = "<group>"; };
 		796CC35F2C6B60CA00FEC658 /* SuiStakingInfoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiStakingInfoSheet.swift; sourceTree = "<group>"; };
 		796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuiStakingInfoSheet.xib; sourceTree = "<group>"; };
 		79BF332E2C50D0C300515D78 /* SearchBarWithTopPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarWithTopPadding.swift; sourceTree = "<group>"; };
@@ -3807,6 +3811,8 @@
 				15B24C852AE9039A0009B359 /* DappCosmosSignRequestSheet.xib */,
 				0497150A2C105C13008C45A0 /* DappEvmSignRequestSheet.swift */,
 				0497150B2C105C13008C45A0 /* DappEvmSignRequestSheet.xib */,
+				792B9CBB2C747CB2001440DB /* DappSuiSignRequestSheet.swift */,
+				792B9CBC2C747CB2001440DB /* DappSuiSignRequestSheet.xib */,
 				796CC35F2C6B60CA00FEC658 /* SuiStakingInfoSheet.swift */,
 				796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */,
 			);
@@ -5110,6 +5116,7 @@
 				041540FC2BA4126D00CD5AA1 /* VoteAllChainCell.xib in Resources */,
 				0409D2FD2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
 				0494CBFC2BAF442E00FA3E49 /* NftListHeader.xib in Resources */,
+				792B9CBE2C747CB3001440DB /* DappSuiSignRequestSheet.xib in Resources */,
 				15B24C882AE9039A0009B359 /* DappCosmosSignRequestSheet.xib in Resources */,
 				E131F44A2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */,
 				E1D2FC662B81FCA30080B638 /* CommonTransfer.xib in Resources */,
@@ -6258,6 +6265,7 @@
 				04C8175A2BA98D75006B800A /* cosmos_orm_query_v1alpha1_query.pb.swift in Sources */,
 				E1D931F12BCCD8C700AEEA10 /* AllChainCompoundingStartVC.swift in Sources */,
 				04C816D42BA98D75006B800A /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
+				792B9CBD2C747CB3001440DB /* DappSuiSignRequestSheet.swift in Sources */,
 				04C8177A2BA98D75006B800A /* cosmos_tx_v1beta1_tx.pb.swift in Sources */,
 				E1DF777B2AB75F830028BD51 /* CheckPrivateKeysVC.swift in Sources */,
 				047843D92AC991B300462F1C /* injective_insurance_v1beta1_insurance.pb.swift in Sources */,

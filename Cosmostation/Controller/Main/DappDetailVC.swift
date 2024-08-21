@@ -258,6 +258,17 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         self.present(evmSignRequestSheet, animated: true)
     }
     
+    private func popUpSuiRequestSign(_ method: String, _ request: JSON, _ messageId: JSON?) {
+        let suiSignRequestSheet = DappSuiSignRequestSheet(nibName: "DappSuiSignRequestSheet", bundle: nil)
+        suiSignRequestSheet.method = method
+        suiSignRequestSheet.requestToSign = request
+        suiSignRequestSheet.messageId = messageId
+        suiSignRequestSheet.selectedChain = targetChain
+        suiSignRequestSheet.webSignDelegate = self
+        suiSignRequestSheet.modalTransitionStyle = .coverVertical
+        self.present(suiSignRequestSheet, animated: true)
+    }
+
     
     func onCancleInjection(_ reseon: String, _ requestToSign: JSON, _ messageId: JSON) {
         injectionRequestReject(reseon, requestToSign, messageId)
@@ -567,11 +578,16 @@ extension DappDetailVC: WKScriptMessageHandler {
             else if (method == "sui_getAccount") {
                 guard let pubKey = targetChain.publicKey?.hexEncodedString() else { return }
                 let data: JSON = ["address": targetChain.mainAddress, "publicKey": "0x" + pubKey]
+                
+
                 injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "sui_getChain") {
                 injectionRequestApprove("mainnet", messageJSON, bodyJSON["messageId"])
                 
+            } else if (method == "sui_signTransaction") {
+                let toSign = messageJSON["params"]
+                popUpSuiRequestSign(method, toSign, bodyJSON["messageId"])
             }
             
             else {
