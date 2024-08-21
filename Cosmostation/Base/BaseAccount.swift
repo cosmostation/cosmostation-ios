@@ -264,6 +264,10 @@ public enum PubKeyType: Int {
     case BERA_Secp256k1 = 3
     case ARTELA_Keccak256 = 4
     case SUI_Ed25519 = 5
+    case BTC_Legacy = 6
+    case BTC_Nested_Segwit = 7
+    case BTC_Native_Segwit = 8
+    case BTC_Taproot = 9
     case unknown = 99
     
     var algorhythm: String? {
@@ -280,29 +284,45 @@ public enum PubKeyType: Int {
             return "keccak256"
         case PubKeyType.SUI_Ed25519:
             return "ed25519"
+        case PubKeyType.BTC_Legacy:
+            return "p2pkh"
+        case PubKeyType.BTC_Nested_Segwit:
+            return "p2wpkhSh"
+        case PubKeyType.BTC_Native_Segwit:
+            return "p2wpkh"
+        case PubKeyType.BTC_Taproot:
+            return "p2tr"
         case PubKeyType.unknown:
             return "unknown"
         }
     }
     
-    var cosmosPubkey: String? {
-        switch self {
-        case PubKeyType.ETH_Keccak256:
-            return "ethsecp256k1"
-        case PubKeyType.COSMOS_Secp256k1:
-            return "secp256k1"
-        case PubKeyType.INJECTIVE_Secp256k1:
-            return "ethsecp256k1"
-        case PubKeyType.BERA_Secp256k1:
-            return "ethsecp256k1"
-        case PubKeyType.ARTELA_Keccak256:
-            return "ethsecp256k1"
-        case PubKeyType.SUI_Ed25519:
-            return "ed25519"
-        case PubKeyType.unknown:
-            return "unknown"
-        }
-    }
+//    var cosmosPubkey: String? {
+//        switch self {
+//        case PubKeyType.ETH_Keccak256:
+//            return "ethsecp256k1"
+//        case PubKeyType.COSMOS_Secp256k1:
+//            return "secp256k1"
+//        case PubKeyType.INJECTIVE_Secp256k1:
+//            return "ethsecp256k1"
+//        case PubKeyType.BERA_Secp256k1:
+//            return "ethsecp256k1"
+//        case PubKeyType.ARTELA_Keccak256:
+//            return "ethsecp256k1"
+//        case PubKeyType.SUI_Ed25519:
+//            return "ed25519"
+//        case PubKeyType.BTC_Legacy:
+//            return "p2pkh"
+//        case PubKeyType.BTC_Nested_Segwit:
+//            return "p2wpkhSh"
+//        case PubKeyType.BTC_Native_Segwit:
+//            return "p2wpkh"
+//        case PubKeyType.BTC_Taproot:
+//            return "p2tr"
+//        case PubKeyType.unknown:
+//            return "unknown"
+//        }
+//    }
 }
 
 public enum BaseAccountType: Int64 {
