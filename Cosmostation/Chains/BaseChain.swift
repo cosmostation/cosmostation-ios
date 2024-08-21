@@ -680,6 +680,7 @@ func ALLCHAINS() -> [BaseChain] {
     //result.append(ChainBeraEVM_T())
     result.append(ChainNeutron_T())
     result.append(ChainNillion_T())
+    result.append(ChainMantra_T())
     
     
     result.forEach { chain in
