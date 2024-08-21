@@ -565,7 +565,7 @@ class CommonTransfer: BaseVC {
             let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
             let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
             let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
-            feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 18)
+            feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 9)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .COSMOS_STYLE) {
