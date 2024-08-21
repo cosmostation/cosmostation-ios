@@ -1224,7 +1224,6 @@
 
 "tx_send" = "Send";
 "tx_receive" = "Received";
-"tx_swap" = "Swap";
 "tx_transfer" = "Transfer";
 "tx_multi_send" = "Multi Send";
 "tx_multi_received" = "Multi Received";

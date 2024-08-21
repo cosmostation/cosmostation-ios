@@ -135,7 +135,7 @@ class HistoryCell: UITableViewCell {
             }
             txs.forEach { tx in
                 if (tx["MoveCall"]["function"].stringValue == "swap") {
-                    title = NSLocalizedString("tx_swap", comment: "")
+                    title = NSLocalizedString("title_swap_token", comment: "")
                 }
             }
         }

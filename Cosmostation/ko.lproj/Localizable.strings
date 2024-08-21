@@ -1223,7 +1223,6 @@
 
 "tx_send" = "보내기";
 "tx_receive" = "받기";
-"tx_swap" = "스왑";
 "tx_transfer" = "전송하기";
 "tx_multi_send" = "멀티 보내기";
 "tx_multi_received" = "멀티 받기";
