@@ -133,6 +133,11 @@ class HistoryCell: UITableViewCell {
                     title = NSLocalizedString("str_stake", comment: "")
                 }
             }
+            txs.forEach { tx in
+                if (tx["MoveCall"]["function"].stringValue == "swap") {
+                    title = NSLocalizedString("tx_swap", comment: "")
+                }
+            }
         }
         
         if title.isEmpty == true {
