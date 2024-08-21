@@ -26,6 +26,7 @@ class ChainMantra_T: BaseChain  {
         bechAccountPrefix = "mantra"
         validatorPrefix = "mantravaloper"
         grpcHost = "grpc-office-mantra.cosmostation.io"
+        lcdUrl = "https://lcd-office.cosmostation.io/mantra-testnet/"
     }
 }
 
