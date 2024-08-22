@@ -591,6 +591,17 @@ extension DappDetailVC: WKScriptMessageHandler {
                 signAfterAction(params: toSign, messageId: bodyJSON["messageId"], completionHandler: { hex in
                     self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
                 })
+            } else if (method == "sui_signAndExecuteTransaction") {
+                let toSign = messageJSON["params"]
+                signAfterAction(params: toSign, messageId: bodyJSON["messageId"], completionHandler: { hex in
+                    self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
+                })
+                
+            } else if (method == "sui_signAndExecuteTransactionBlock") {
+                let toSign = messageJSON["params"]
+                signAfterAction(params: toSign, messageId: bodyJSON["messageId"], completionHandler: { hex in
+                    self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
+                })
             }
             
             else {
@@ -615,6 +626,7 @@ extension DappDetailVC: WKScriptMessageHandler {
             self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
         } else {
             injectionRequestReject("Error", message, messageId)
+            print("실패")
         }
     }
     

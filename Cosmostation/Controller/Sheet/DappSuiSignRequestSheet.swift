@@ -58,7 +58,7 @@ class DappSuiSignRequestSheet: BaseVC {
         confirmBtn.isEnabled = true
 
         if let requestToSign {
-            toSignTextView.text = requestToSign.rawString(options: .prettyPrinted)?.replacingOccurrences(of: #"\"#, with: "\n")
+            toSignTextView.text = "\(requestToSign.rawValue)"
         }
         
     
@@ -73,8 +73,8 @@ class DappSuiSignRequestSheet: BaseVC {
                     requestToSign!["transactionBlockSerialized"]["gasData"] = gasData
 
                     
-                    print("!!!!", requestToSign?["transactionBlockSerialized"]["gasData"])
-                    print("===", gasData)
+//                    print("!!!!", requestToSign?["transactionBlockSerialized"]["gasData"])
+//                    print("===", gasData)
                     //TODO: 값 교체
                     
                     DispatchQueue.main.async {
@@ -112,9 +112,7 @@ class DappSuiSignRequestSheet: BaseVC {
         controlStakView.isHidden = false
         barView.isHidden = false
         
-        
-        print(requestToSign?.rawValue)
-        toSignTextView.text = "\(String(describing: requestToSign?.rawValue))"
+        toSignTextView.text = requestToSign?.rawString(options:.prettyPrinted)
 
         //
         
@@ -130,9 +128,13 @@ class DappSuiSignRequestSheet: BaseVC {
     
     @IBAction func onClickConfirm(_ sender: Any) {
         if method == "sui_signTransaction" {
-            
             let data: JSON = ["bytes": bytes, "signature": Signer.suiSignatures(selectedChain, bytes)]
             webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
+            
+        } else if method == "sui_signAndExecuteTransaction" || method == "sui_signAndExecuteTransactionBlock" {
+            let data: JSON = ["transactionBlockBytes": bytes, "signature": Signer.suiSignatures(selectedChain, bytes)]
+            webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
+
         }
         
         dismiss(animated: true)
