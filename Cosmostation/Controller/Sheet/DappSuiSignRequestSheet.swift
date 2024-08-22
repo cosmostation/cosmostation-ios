@@ -12,6 +12,7 @@ import SwiftyJSON
 import Web3Core
 import WalletConnectSign
 import SwiftProtobuf
+import Alamofire
 
 class DappSuiSignRequestSheet: BaseVC {
 
@@ -42,8 +43,8 @@ class DappSuiSignRequestSheet: BaseVC {
     var requestToSign: JSON?
     var messageId: JSON?
     var selectedChain: BaseChain!
-
-    
+    var bytes: String!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,22 +56,33 @@ class DappSuiSignRequestSheet: BaseVC {
         loadingView.play()
         
         confirmBtn.isEnabled = true
-                
-        if let requestToSign {
-            toSignTextView.text = "\(requestToSign.rawValue)"
-        }
 
+        if let requestToSign {
+            toSignTextView.text = requestToSign.rawString(options: .prettyPrinted)?.replacingOccurrences(of: #"\"#, with: "\n")
+        }
+        
+    
         
         
         Task {
             do {
-                
-                //
-                
-                DispatchQueue.main.async {
-                    self.loadingView.isHidden = true
-                    self.onInitView()
+                guard let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() else { return }
+                if let response = try await suiFetcher.suiDryrun(bytes) {
+
+                    let gasData = response["result"]["input"]["gasData"]
+                    requestToSign!["transactionBlockSerialized"]["gasData"] = gasData
+
+                    
+                    print("!!!!", requestToSign?["transactionBlockSerialized"]["gasData"])
+                    print("===", gasData)
+                    //TODO: 값 교체
+                    
+                    DispatchQueue.main.async {
+                        self.loadingView.isHidden = true
+                        self.onInitView()
+                    }
                 }
+                
                 
             } catch {
                 print("fetching error: \(error)")
@@ -79,9 +91,9 @@ class DappSuiSignRequestSheet: BaseVC {
                 }
             }
         }
-
     }
     
+
     override func setLocalizedString() {
         warnMsgLabel.text = NSLocalizedString("str_dapp_warn_msg", comment: "")
         safeMsgTitle.text = NSLocalizedString("str_affect_safe", comment: "")
@@ -89,7 +101,7 @@ class DappSuiSignRequestSheet: BaseVC {
     }
     
     func dismissWithFail() {
-//        webSignDelegate?.onCancleInjection("Cancel", requestToSign!, messageId!)
+        webSignDelegate?.onCancleInjection("Cancel", requestToSign!, messageId!)
         dismiss(animated: true)
     }
     
@@ -99,8 +111,16 @@ class DappSuiSignRequestSheet: BaseVC {
         bodyCardView.isHidden = false
         controlStakView.isHidden = false
         barView.isHidden = false
+        
+        
+        print(requestToSign?.rawValue)
+        toSignTextView.text = "\(String(describing: requestToSign?.rawValue))"
 
         //
+        
+        
+        
+
     }
     
 
@@ -110,12 +130,14 @@ class DappSuiSignRequestSheet: BaseVC {
     
     @IBAction func onClickConfirm(_ sender: Any) {
         if method == "sui_signTransaction" {
-            let data: JSON = ["bytes": "", "signature": ""]
+            
+            let data: JSON = ["bytes": bytes, "signature": Signer.suiSignatures(selectedChain, bytes)]
             webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
         }
         
         dismiss(animated: true)
     }
+    
     
 }
 

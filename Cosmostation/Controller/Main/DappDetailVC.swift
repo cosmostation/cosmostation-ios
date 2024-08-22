@@ -258,13 +258,14 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         self.present(evmSignRequestSheet, animated: true)
     }
     
-    private func popUpSuiRequestSign(_ method: String, _ request: JSON, _ messageId: JSON?) {
+    private func popUpSuiRequestSign(_ method: String, _ request: JSON, _ messageId: JSON?, _ bytes: String) {
         let suiSignRequestSheet = DappSuiSignRequestSheet(nibName: "DappSuiSignRequestSheet", bundle: nil)
         suiSignRequestSheet.method = method
         suiSignRequestSheet.requestToSign = request
         suiSignRequestSheet.messageId = messageId
         suiSignRequestSheet.selectedChain = targetChain
         suiSignRequestSheet.webSignDelegate = self
+        suiSignRequestSheet.bytes = bytes
         suiSignRequestSheet.modalTransitionStyle = .coverVertical
         self.present(suiSignRequestSheet, animated: true)
     }
@@ -587,7 +588,9 @@ extension DappDetailVC: WKScriptMessageHandler {
                 
             } else if (method == "sui_signTransaction") {
                 let toSign = messageJSON["params"]
-                popUpSuiRequestSign(method, toSign, bodyJSON["messageId"])
+                signAfterAction(params: toSign, messageId: bodyJSON["messageId"], completionHandler: { hex in
+                    self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
+                })
             }
             
             else {
@@ -619,6 +622,30 @@ extension DappDetailVC: WKScriptMessageHandler {
         let retVal = ["response": ["error": error], "message": message, "isCosmostation": true, "messageId": messageId]
         self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
     }
+    
+    private func signAfterAction(params:JSON, messageId: JSON, completionHandler: @escaping (_ hex: String) -> ()) {
+        guard let suiFetcher = (targetChain as? ChainSui)?.getSuiFetcher() else { return }
+        AF.request("https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildSuiTransaction",
+                   method: .post,
+                   parameters: ["rpc": suiFetcher.getSuiRpc(),
+                                "txBlock": params["transactionBlockSerialized"].stringValue,
+                                "address": params["transactionBlockSerialized"]["sender"].stringValue],
+                   encoder: JSONParameterEncoder.default).response { response in
+            switch response.result {
+            case .success(let value):
+                if let value = value, let hex = String(data: value, encoding: .utf8) {
+                    completionHandler(hex)
+                } else {
+                    self.injectionRequestReject("Cancel", params, messageId)
+                }
+            case .failure:
+                self.injectionRequestReject("Cancel", params, messageId)
+            }
+        }
+
+
+    }
+
 }
 
 extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate {
