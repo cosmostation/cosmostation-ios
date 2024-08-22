@@ -10,6 +10,12 @@ import Foundation
 
 class ChainBitCoin84: BaseChain {
     
+    public let pubKeyHash: UInt8 = 0
+    public let scriptHash: UInt8 = 5
+    public let bech32PrefixPattern: String = "bc"
+    
+    var btcFetcher: BtcFetcher?
+    
     override init() {
         super.init()
         
@@ -29,9 +35,21 @@ class ChainBitCoin84: BaseChain {
     override func setInfoWithPrivateKey(_ priKey: Data) {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        mainAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
+        mainAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bech32PrefixPattern, pubKeyHash, scriptHash)
         
         print("ChainBitCoin84 ", mainAddress)
     }
     
+    func getBtcFetcher() -> BtcFetcher? {
+        if (btcFetcher != nil) { return btcFetcher }
+        btcFetcher = BtcFetcher(self)
+        return btcFetcher
+    }
+    
+    override func fetchBalances() {
+        fetchState = .Busy
+        Task {
+            
+        }
+    }
 }

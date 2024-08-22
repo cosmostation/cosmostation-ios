@@ -25,7 +25,6 @@ class SuiFetcher {
     
     init(_ chain: BaseChain) {
         self.chain = chain
-    
     }
     
     func fetchSuiBalances() async -> Bool {

@@ -1,27 +1,27 @@
 //
-//  ChainBitCoin49.swift
+//  ChainBitCoin49_T.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 8/20/24.
+//  Created by yongjoo jung on 8/22/24.
 //  Copyright © 2024 wannabit. All rights reserved.
 //
 
 import Foundation
 
-class ChainBitCoin49: ChainBitCoin84 {
+class ChainBitCoin49_T: ChainBitCoin84_T {
     
     override init() {
         super.init()
         
         name = "BitCoin"
-        tag = "bitcoin49"
+        tag = "bitcoin49_T"
         logo1 = "chainBitcoin"
         isDefault = false
-        apiName = "bitcoin"
-        accountKeyType = AccountKeyType(.BTC_Nested_Segwit, "m/49'/0'/0'/0/X")
+        isTestnet = true
+        apiName = "bitcoin-testnet"
+        accountKeyType = AccountKeyType(.BTC_Nested_Segwit, "m/49'/1'/0'/0/X")
         
         coinSymbol = "BTC"
-        coinGeckoId = "bitcoin"
         coinLogo = "tokenBtc"
         
         mainUrl = ""
@@ -32,7 +32,6 @@ class ChainBitCoin49: ChainBitCoin84 {
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         mainAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bech32PrefixPattern, pubKeyHash, scriptHash)
         
-        print("ChainBitCoin49 ", mainAddress)
+        print("ChainBitCoin49_T ", mainAddress)
     }
-    
 }
