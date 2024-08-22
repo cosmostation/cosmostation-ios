@@ -10,10 +10,9 @@ import Foundation
 
 class ChainBitCoin84: BaseChain {
     
-    public let pubKeyHash: UInt8 = 0
-    public let scriptHash: UInt8 = 5
-    public let bech32PrefixPattern: String = "bc"
-    
+    var pubKeyHash: UInt8 = 0
+    var scriptHash: UInt8 = 5
+    var bech32PrefixPattern: String = "bc"
     var btcFetcher: BtcFetcher?
     
     override init() {
@@ -36,8 +35,7 @@ class ChainBitCoin84: BaseChain {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         mainAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bech32PrefixPattern, pubKeyHash, scriptHash)
-        
-        print("ChainBitCoin84 ", mainAddress)
+//        print("ChainBitCoin84 ", mainAddress)
     }
     
     func getBtcFetcher() -> BtcFetcher? {
@@ -47,9 +45,37 @@ class ChainBitCoin84: BaseChain {
     }
     
     override func fetchBalances() {
+    }
+    
+    override func fetchData(_ id: Int64) {
         fetchState = .Busy
         Task {
+            let btcResult = await getBtcFetcher()?.fetchBtcData(id)
             
+            if (btcResult == false) {
+                fetchState = .Fail
+            } else {
+                fetchState = .Success
+            }
+            
+            if let btcFetcher = getBtcFetcher(), fetchState == .Success {
+                coinsCnt = (btcFetcher.btcBalances == NSDecimalNumber.zero) ? 0 : 1
+                
+                allCoinValue = btcFetcher.allValue()
+                allCoinUSDValue = btcFetcher.allValue(true)
+                allTokenValue = NSDecimalNumber.zero
+                allTokenUSDValue = NSDecimalNumber.zero
+                
+                BaseData.instance.updateRefAddressesValue(
+                    RefAddress(id, self.tag, self.mainAddress, "",
+                               btcFetcher.btcBalances.stringValue, allCoinUSDValue.stringValue, allTokenUSDValue.stringValue,
+                               coinsCnt))
+            }
+            
+            
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
+            })
         }
     }
 }

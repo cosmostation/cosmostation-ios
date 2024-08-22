@@ -663,7 +663,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainStargaze())
 //    // result.append(ChainStarname())
 //    result.append(ChainStride())
-//    result.append(ChainSui())                           //MAJOR
+    result.append(ChainSui())                           //MAJOR
 //    result.append(ChainTeritori())
 //    result.append(ChainTerra())
 //    result.append(ChainUmee())
@@ -681,8 +681,8 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainNeutron_T())
 //    result.append(ChainNillion_T())
 //    result.append(ChainMantra_T())
-    result.append(ChainBitCoin44_T())
-    result.append(ChainBitCoin49_T())
+//    result.append(ChainBitCoin44_T())
+//    result.append(ChainBitCoin49_T())
     result.append(ChainBitCoin84_T())
     
     

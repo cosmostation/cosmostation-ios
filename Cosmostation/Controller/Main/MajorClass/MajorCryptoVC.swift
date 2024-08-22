@@ -19,6 +19,9 @@ class MajorCryptoVC: BaseVC {
     var selectedChain: BaseChain!
     
     var suiBalances = Array<(String, NSDecimalNumber)>()
+    var btcBalances = NSDecimalNumber.zero
+    var btcPendingInput = NSDecimalNumber.zero
+    var btcPendingOutput = NSDecimalNumber.zero
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +103,12 @@ class MajorCryptoVC: BaseVC {
                 let value1 = suiFetcher.balanceValue($1.0)
                 return value0.compare(value1).rawValue > 0 ? true : false
             }
+            
+        } else if let btcFetcher = (selectedChain as? ChainBitCoin84)?.getBtcFetcher() {
+            btcBalances = btcFetcher.btcBalances
+            btcPendingInput = btcFetcher.btcPendingInput
+            btcPendingOutput = btcFetcher.btcPendingOutput
+            
         }
         loadingView.isHidden = true
         tableView.reloadData()
@@ -111,24 +120,43 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if (selectedChain is ChainSui) {
             return 1
+        } else if (selectedChain is ChainBitCoin84) {
+            return 3
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if section == 0 {
+        if (selectedChain is ChainSui) {
             view.titleLabel.text = "Native Coins"
-            if (selectedChain is ChainSui) {
-                view.cntLabel.text = String(suiBalances.count)
+            view.cntLabel.text = String(suiBalances.count)
+            
+        } else if (selectedChain is ChainBitCoin84) {
+            if section == 0 {
+                view.titleLabel.text = "Avaibale"
+            } else if section == 1 {
+                view.titleLabel.text = "Pending Receive"
+            } else if section == 2 {
+                view.titleLabel.text = "Pending Spend"
             }
+            view.cntLabel.text = ""
         }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 0) {
+        if (selectedChain is ChainSui) {
             return 40
+            
+        } else if (selectedChain is ChainBitCoin84) {
+            if section == 0 {
+                return 40
+            } else if section == 1 && btcPendingInput != NSDecimalNumber.zero {
+                return 40
+            } else if section == 2 && btcPendingOutput != NSDecimalNumber.zero {
+                return 40
+            }
         }
         return 0
     }
@@ -136,6 +164,15 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (selectedChain is ChainSui) {
             return suiBalances.count
+            
+        } else if (selectedChain is ChainBitCoin84) {
+            if section == 0 {
+                return 1
+            } else if section == 1 && btcPendingInput != NSDecimalNumber.zero {
+                return 1
+            }else if section == 2 && btcPendingOutput != NSDecimalNumber.zero {
+                return 1
+            }
         }
         return 0
     }
@@ -152,23 +189,34 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 cell.bindSuiAsset(selectedChain, suiBalances[indexPath.row])
                 return cell
             }
+            
+        } else if (selectedChain is ChainBitCoin84) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+            cell.bindBtc(selectedChain, indexPath.section)
+            return cell
         }
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (selectedChain.isTxFeePayable(.SUI_SEND_COIN) == false) {
-            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-            return
+        if (selectedChain is ChainSui) {
+            if (selectedChain.isTxFeePayable(.SUI_SEND_COIN) == false) {
+                onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+                return
+            }
+            
+            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+            transfer.sendAssetType = .SUI_COIN
+            transfer.fromChain = selectedChain
+            transfer.toSendDenom = suiBalances[indexPath.row].0
+            transfer.modalTransitionStyle = .coverVertical
+            self.present(transfer, animated: true)
+            
+        } else if (selectedChain is ChainBitCoin84) {
+            if indexPath.section != 0 { return }
+            
+            //TODO BTC Send!!
         }
-        
-        let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-        transfer.sendAssetType = .SUI_COIN
-        transfer.fromChain = selectedChain
-        transfer.toSendDenom = suiBalances[indexPath.row].0
-        transfer.modalTransitionStyle = .coverVertical
-        self.present(transfer, animated: true)
-        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

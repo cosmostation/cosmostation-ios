@@ -13,7 +13,7 @@ class ChainBitCoin49_T: ChainBitCoin84_T {
     override init() {
         super.init()
         
-        name = "BitCoin"
+        name = "BitCoin Testnet"
         tag = "bitcoin49_T"
         logo1 = "chainBitcoin"
         isDefault = false
@@ -31,7 +31,6 @@ class ChainBitCoin49_T: ChainBitCoin84_T {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         mainAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bech32PrefixPattern, pubKeyHash, scriptHash)
-        
-        print("ChainBitCoin49_T ", mainAddress)
+//        print("ChainBitCoin49_T ", mainAddress)
     }
 }
