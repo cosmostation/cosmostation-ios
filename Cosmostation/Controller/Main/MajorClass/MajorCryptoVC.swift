@@ -19,9 +19,9 @@ class MajorCryptoVC: BaseVC {
     var selectedChain: BaseChain!
     
     var suiBalances = Array<(String, NSDecimalNumber)>()
-    var btcBalances = NSDecimalNumber.zero
-    var btcPendingInput = NSDecimalNumber.zero
-    var btcPendingOutput = NSDecimalNumber.zero
+//    var btcBalances = NSDecimalNumber.zero
+//    var btcPendingInput = NSDecimalNumber.zero
+//    var btcPendingOutput = NSDecimalNumber.zero
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +39,7 @@ class MajorCryptoVC: BaseVC {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "AssetSuiCell", bundle: nil), forCellReuseIdentifier: "AssetSuiCell")
+        tableView.register(UINib(nibName: "AssetBtcCell", bundle: nil), forCellReuseIdentifier: "AssetBtcCell")
         tableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
@@ -105,9 +106,9 @@ class MajorCryptoVC: BaseVC {
             }
             
         } else if let btcFetcher = (selectedChain as? ChainBitCoin84)?.getBtcFetcher() {
-            btcBalances = btcFetcher.btcBalances
-            btcPendingInput = btcFetcher.btcPendingInput
-            btcPendingOutput = btcFetcher.btcPendingOutput
+//            btcBalances = btcFetcher.btcBalances
+//            btcPendingInput = btcFetcher.btcPendingInput
+//            btcPendingOutput = btcFetcher.btcPendingOutput
             
         }
         loadingView.isHidden = true
@@ -121,7 +122,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
         if (selectedChain is ChainSui) {
             return 1
         } else if (selectedChain is ChainBitCoin84) {
-            return 3
+            return 1
         }
         return 0
     }
@@ -133,14 +134,9 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             view.cntLabel.text = String(suiBalances.count)
             
         } else if (selectedChain is ChainBitCoin84) {
-            if section == 0 {
-                view.titleLabel.text = "Avaibale"
-            } else if section == 1 {
-                view.titleLabel.text = "Pending Receive"
-            } else if section == 2 {
-                view.titleLabel.text = "Pending Spend"
-            }
+            view.titleLabel.text = "Native Coins"
             view.cntLabel.text = ""
+            
         }
         return view
     }
@@ -148,15 +144,8 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (selectedChain is ChainSui) {
             return 40
-            
         } else if (selectedChain is ChainBitCoin84) {
-            if section == 0 {
-                return 40
-            } else if section == 1 && btcPendingInput != NSDecimalNumber.zero {
-                return 40
-            } else if section == 2 && btcPendingOutput != NSDecimalNumber.zero {
-                return 40
-            }
+            return 40
         }
         return 0
     }
@@ -166,13 +155,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             return suiBalances.count
             
         } else if (selectedChain is ChainBitCoin84) {
-            if section == 0 {
-                return 1
-            } else if section == 1 && btcPendingInput != NSDecimalNumber.zero {
-                return 1
-            }else if section == 2 && btcPendingOutput != NSDecimalNumber.zero {
-                return 1
-            }
+            return 1
         }
         return 0
     }
@@ -191,8 +174,8 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             }
             
         } else if (selectedChain is ChainBitCoin84) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-            cell.bindBtc(selectedChain, indexPath.section)
+            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetBtcCell") as! AssetBtcCell
+            cell.bindBtcAsset(selectedChain)
             return cell
         }
         return UITableViewCell()
@@ -213,8 +196,6 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             self.present(transfer, animated: true)
             
         } else if (selectedChain is ChainBitCoin84) {
-            if indexPath.section != 0 { return }
-            
             //TODO BTC Send!!
         }
     }

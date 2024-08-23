@@ -59,7 +59,7 @@ class ChainBitCoin84: BaseChain {
             }
             
             if let btcFetcher = getBtcFetcher(), fetchState == .Success {
-                coinsCnt = (btcFetcher.btcBalances == NSDecimalNumber.zero) ? 0 : 1
+                coinsCnt = (btcFetcher.btcBalances == NSDecimalNumber.zero && btcFetcher.btcPendingInput == NSDecimalNumber.zero) ? 0 : 1
                 
                 allCoinValue = btcFetcher.allValue()
                 allCoinUSDValue = btcFetcher.allValue(true)

@@ -190,40 +190,4 @@ class AssetCell: UITableViewCell {
         }
     }
     
-    
-    func bindBtc(_ baseChain: BaseChain, _ section: Int) {
-        symbolLabel.text = baseChain.coinSymbol
-        coinImg.image =  UIImage.init(named: baseChain.coinLogo)
-        
-        if let btcFetcher = (baseChain as? ChainBitCoin84)?.getBtcFetcher() {
-            let msPrice = BaseData.instance.getPrice(baseChain.coinGeckoId)
-            var dpAmount = NSDecimalNumber.zero
-            var value = NSDecimalNumber.zero
-            if section == 0 {
-                dpAmount = btcFetcher.btcBalances.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
-                value = dpAmount.multiplying(by: msPrice, withBehavior: handler6)
-                
-            } else if section == 1 {
-                dpAmount = btcFetcher.btcPendingInput.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
-                value = dpAmount.multiplying(by: msPrice, withBehavior: handler6)
-                
-            } else if section == 2 {
-                dpAmount = btcFetcher.btcPendingOutput.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
-                value = dpAmount.multiplying(by: msPrice, withBehavior: handler6)
-                
-            }
-            amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
-            if (BaseData.instance.getHideValue()) {
-                hidenValueLabel.isHidden = false
-            } else {
-                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
-                amountLabel.isHidden = false
-                valueCurrencyLabel.isHidden = false
-                valueLabel.isHidden = false
-            } 
-        }
-        WDP.dpPrice(baseChain.coinGeckoId, priceCurrencyLabel, priceLabel)
-        WDP.dpPriceChanged(baseChain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
-    }
-    
 }
