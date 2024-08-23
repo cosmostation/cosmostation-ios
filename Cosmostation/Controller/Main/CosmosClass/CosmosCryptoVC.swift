@@ -16,6 +16,7 @@ class CosmosCryptoVC: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchEmptyLayer: UIView!
+    @IBOutlet weak var dropBtn: LottieAnimationView!
     
     var refresher: UIRefreshControl!
     var searchBar: UISearchBar?
@@ -45,7 +46,7 @@ class CosmosCryptoVC: BaseVC {
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
         loadingView.play()
-        
+    
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -72,6 +73,7 @@ class CosmosCryptoVC: BaseVC {
         view.addGestureRecognizer(dismissTap)
         
         onSortAssets()
+        onSetDrop()
         
         if (selectedChain.tag == "okt996_Keccak" || selectedChain.tag == "okt996_Secp") {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
@@ -94,7 +96,6 @@ class CosmosCryptoVC: BaseVC {
         }
 #endif
     }
-    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -268,7 +269,32 @@ class CosmosCryptoVC: BaseVC {
         transfer.modalTransitionStyle = .coverVertical
         self.present(transfer, animated: true)
     }
-
+    
+    
+    //For drop event
+    func onSetDrop() {
+        if (!BaseData.instance.showEvenReview()) { return }
+        if (selectedChain is ChainCosmos || selectedChain is ChainNeutron) {
+            dropBtn.animation = LottieAnimation.named("drop")
+            dropBtn.contentMode = .scaleAspectFit
+            dropBtn.loopMode = .loop
+            dropBtn.animationSpeed = 1.3
+            dropBtn.play()
+            dropBtn.isHidden = false
+    
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapDrop))
+            tapGesture.cancelsTouchesInView = false
+            dropBtn.addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    @objc func tapDrop() {
+        let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+        dappDetail.dappType = .INTERNAL_URL
+        dappDetail.dappUrl = URL(string: "https://app.drop.money/dashboard?referral_code=dropmaga")
+        dappDetail.modalPresentationStyle = .fullScreen
+        self.present(dappDetail, animated: true)
+    }
 }
 
 

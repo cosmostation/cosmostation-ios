@@ -747,6 +747,8 @@
 		04A4210A2C785FEE00C0E1A2 /* AssetBtcCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A421082C785FED00C0E1A2 /* AssetBtcCell.xib */; };
 		04A4210B2C785FEE00C0E1A2 /* AssetBtcCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A421082C785FED00C0E1A2 /* AssetBtcCell.xib */; };
 		04A4210C2C785FEE00C0E1A2 /* AssetBtcCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A421072C785FED00C0E1A2 /* AssetBtcCell.swift */; };
+		04A421142C7896A800C0E1A2 /* drop.json in Resources */ = {isa = PBXBuildFile; fileRef = 04A421132C7896A800C0E1A2 /* drop.json */; };
+		04A421152C7896A800C0E1A2 /* drop.json in Resources */ = {isa = PBXBuildFile; fileRef = 04A421132C7896A800C0E1A2 /* drop.json */; };
 		04A68C1D2ABDA3220041FA13 /* SelectSwapChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A68C1B2ABDA3220041FA13 /* SelectSwapChainCell.swift */; };
 		04A68C1E2ABDA3220041FA13 /* SelectSwapChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A68C1B2ABDA3220041FA13 /* SelectSwapChainCell.swift */; };
 		04A68C1F2ABDA3220041FA13 /* SelectSwapChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A68C1C2ABDA3220041FA13 /* SelectSwapChainCell.xib */; };
@@ -2469,6 +2471,7 @@
 		04A421012C77618E00C0E1A2 /* ChainBitCoin49_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin49_T.swift; sourceTree = "<group>"; };
 		04A421072C785FED00C0E1A2 /* AssetBtcCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBtcCell.swift; sourceTree = "<group>"; };
 		04A421082C785FED00C0E1A2 /* AssetBtcCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetBtcCell.xib; sourceTree = "<group>"; };
+		04A421132C7896A800C0E1A2 /* drop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = drop.json; sourceTree = "<group>"; };
 		04A68C1B2ABDA3220041FA13 /* SelectSwapChainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSwapChainCell.swift; sourceTree = "<group>"; };
 		04A68C1C2ABDA3220041FA13 /* SelectSwapChainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectSwapChainCell.xib; sourceTree = "<group>"; };
 		04A68C212ABDA3350041FA13 /* SelectSwapAssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSwapAssetCell.swift; sourceTree = "<group>"; };
@@ -3681,6 +3684,7 @@
 				E1BBF7462ABEBE3000D3082F /* BgImg */,
 				1809C35029D16C80008884C1 /* injectScript.js */,
 				04C940B22AE8D48C00415256 /* aes.js */,
+				04A421132C7896A800C0E1A2 /* drop.json */,
 				E1D538282A96644F00FB0403 /* loading.json */,
 				E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */,
 				E19993E92B295873000F4A6B /* loadingSmallWhite.json */,
@@ -5023,6 +5027,7 @@
 				E10B1D7A2C2156430039283B /* KavaEarnListCell.xib in Resources */,
 				046BF1C92B0F443100BC1FC8 /* OktSelectValidatorSheet.xib in Resources */,
 				E11EAE182AAD879A003BFC7F /* SettingSwitchCell.xib in Resources */,
+				04A421152C7896A800C0E1A2 /* drop.json in Resources */,
 				04C63D132B836DD800D4A366 /* TxSendAddressSheet.xib in Resources */,
 				04FA74822AA0CAA3001A2830 /* ImportPrivKeyVC.xib in Resources */,
 				796CC3632C6C3B0C00FEC658 /* SuiStakingInfoSheet.xib in Resources */,
@@ -5211,6 +5216,7 @@
 				0402B7EE2ACC248400824B3F /* CosmosRewardAddress.xib in Resources */,
 				04C63D182B83717A00D4A366 /* SelectAddressListSheet.xib in Resources */,
 				04FEDB4E2B05D1340095B7B6 /* WalletDeriveVC.xib in Resources */,
+				04A421142C7896A800C0E1A2 /* drop.json in Resources */,
 				047842DA2AC87C1000462F1C /* CosmosTxResult.xib in Resources */,
 				E10B1D8D2C2156430039283B /* KavaMintListCell.xib in Resources */,
 				04E250DD2B8F0354007D5AA0 /* basebg00.png in Resources */,
