@@ -639,7 +639,6 @@ extension DappDetailVC: WKScriptMessageHandler {
             self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
         } else {
             injectionRequestReject("Error", message, messageId)
-            print("실패")
         }
     }
     
@@ -659,6 +658,8 @@ extension DappDetailVC: WKScriptMessageHandler {
             switch response.result {
             case .success(let value):
                 if let value = value, let hex = String(data: value, encoding: .utf8) {
+                    
+                    print("HEX", hex)
                     completionHandler(hex)
                 } else {
                     self.injectionRequestReject("Cancel", params, messageId)
