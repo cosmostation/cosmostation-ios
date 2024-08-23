@@ -589,9 +589,9 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainBaseEVM())                       //EVM
 //    result.append(ChainBinanceSmart())                  //EVM
 //    result.append(ChainBitcana())
-    result.append(ChainBitCoin44())                     //MAJOR
-    result.append(ChainBitCoin49())                     //MAJOR
-    result.append(ChainBitCoin84())                     //MAJOR
+//    result.append(ChainBitCoin44())                     //MAJOR
+//    result.append(ChainBitCoin49())                     //MAJOR
+//    result.append(ChainBitCoin84())                     //MAJOR
 //    result.append(ChainBitsong())
 //    result.append(ChainCantoEVM())                      //EVM
 //    result.append(ChainCelestia())
@@ -644,8 +644,8 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainOptimism())                      //EVM
 //    result.append(ChainOsmosis())
 //    result.append(ChainPassage())
-//    result.append(ChainPersistence118())
-//    result.append(ChainPersistence750())
+    result.append(ChainPersistence118())
+    result.append(ChainPersistence750())
 //    result.append(ChainPolygon())                       //EVM
 //    result.append(ChainProvenance())
 //    result.append(ChainQuasar())
@@ -681,8 +681,8 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainNeutron_T())
 //    result.append(ChainNillion_T())
 //    result.append(ChainMantra_T())
-//    result.append(ChainBitCoin44_T())
-//    result.append(ChainBitCoin49_T())
+    result.append(ChainBitCoin44_T())
+    result.append(ChainBitCoin49_T())
     result.append(ChainBitCoin84_T())
     
     

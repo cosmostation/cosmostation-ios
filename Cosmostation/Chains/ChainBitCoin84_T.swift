@@ -15,12 +15,13 @@ class ChainBitCoin84_T: ChainBitCoin84 {
         
         name = "BitCoin Testnet"
         tag = "bitcoin84_T"
-        logo1 = "chainBitcoin"
+        logo1 = "chainBitcoin_T"
         isTestnet = true
         apiName = "bitcoin-testnet"
         accountKeyType = AccountKeyType(.BTC_Native_Segwit, "m/84'/1'/0'/0/X")
         
         coinSymbol = "BTC"
+        coinGeckoId = ""
         coinLogo = "tokenBtc"
         
         pubKeyHash = 111
@@ -34,7 +35,7 @@ class ChainBitCoin84_T: ChainBitCoin84 {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         mainAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bech32PrefixPattern, pubKeyHash, scriptHash)
-//        print("ChainBitCoin84_T ", mainAddress)
+        print("ChainBitCoin84_T ", mainAddress)
     }
     
     override func fetchBalances() {
