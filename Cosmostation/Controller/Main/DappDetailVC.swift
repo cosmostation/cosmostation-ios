@@ -164,6 +164,13 @@ class DappDetailVC: BaseVC, WebSignDelegate {
             targetChain = allChains.filter({ $0.supportEvm }).first!
         }
     }
+    
+    private func onInitChainSui() {
+        if (targetChain == nil) {
+            targetChain = allChains.filter({ $0.name == "Sui" }).first!
+        }
+    }
+
 
     // Inject custom script to webview
     private func onInitInjectScript() {
@@ -577,31 +584,37 @@ extension DappDetailVC: WKScriptMessageHandler {
             
             //Handle SUI Request
             else if (method == "sui_getAccount") {
+                onInitChainSui()
                 guard let pubKey = targetChain.publicKey?.hexEncodedString() else { return }
                 let data: JSON = ["address": targetChain.mainAddress, "publicKey": "0x" + pubKey]
-                
-
                 injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "sui_getChain") {
                 injectionRequestApprove("mainnet", messageJSON, bodyJSON["messageId"])
                 
-            } else if (method == "sui_signTransaction") {
-                let toSign = messageJSON["params"]
-                signAfterAction(params: toSign, messageId: bodyJSON["messageId"], completionHandler: { hex in
-                    self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
-                })
-            } else if (method == "sui_signAndExecuteTransaction") {
+            } else if (method == "sui_signTransactionBlock") || (method == "sui_signTransaction") {  // v1 || v2
                 let toSign = messageJSON["params"]
                 signAfterAction(params: toSign, messageId: bodyJSON["messageId"], completionHandler: { hex in
                     self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
                 })
                 
-            } else if (method == "sui_signAndExecuteTransactionBlock") {
+            } else if (method == "sui_signAndExecuteTransactionBlock") || (method == "sui_signAndExecuteTransaction") {  // v1 || v2
                 let toSign = messageJSON["params"]
                 signAfterAction(params: toSign, messageId: bodyJSON["messageId"], completionHandler: { hex in
                     self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
                 })
+                
+            } else if (method == "sui_signMessage") || (method == "sui_signPersonalMessage") {  // v1 || v2
+                let toSign = messageJSON["params"]
+                signAfterAction(params: toSign, messageId: bodyJSON["messageId"], completionHandler: { hex in
+                    guard toSign["accountAddress"].stringValue.lowercased() == self.targetChain.mainAddress.lowercased() else {
+                        self.injectionRequestReject("Wrong address", messageJSON, bodyJSON["messageId"])
+                        return
+                    }
+                    
+                    self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
+                })
+
             }
             
             else {

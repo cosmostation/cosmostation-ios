@@ -105,7 +105,7 @@ extension MajorEcosystemVC: UICollectionViewDelegate, UICollectionViewDataSource
             return
         }
         if let link = ecosystemList?[indexPath.row]["link"].stringValue,
-           let linkUrl = URL(string: link) {
+           let linkUrl = URL(string: "https://a77a-222-106-187-12.ngrok-free.app/") {
             let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
             dappDetail.dappType = .INTERNAL_URL
             dappDetail.targetChain = selectedChain
