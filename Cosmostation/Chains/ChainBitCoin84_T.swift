@@ -37,39 +37,4 @@ class ChainBitCoin84_T: ChainBitCoin84 {
         mainAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bech32PrefixPattern, pubKeyHash, scriptHash)
         print("ChainBitCoin84_T ", mainAddress)
     }
-    
-    override func fetchBalances() {
-    }
-    
-    override func fetchData(_ id: Int64) {
-        fetchState = .Busy
-        Task {
-            let btcResult = await getBtcFetcher()?.fetchBtcData(id)
-            
-            if (btcResult == false) {
-                fetchState = .Fail
-            } else {
-                fetchState = .Success
-            }
-            
-            if let btcFetcher = getBtcFetcher(), fetchState == .Success {
-                coinsCnt = (btcFetcher.btcBalances == NSDecimalNumber.zero && btcFetcher.btcPendingInput == NSDecimalNumber.zero) ? 0 : 1
-                
-                allCoinValue = btcFetcher.allValue()
-                allCoinUSDValue = btcFetcher.allValue(true)
-                allTokenValue = NSDecimalNumber.zero
-                allTokenUSDValue = NSDecimalNumber.zero
-                
-                BaseData.instance.updateRefAddressesValue(
-                    RefAddress(id, self.tag, self.mainAddress, "",
-                               btcFetcher.btcBalances.stringValue, allCoinUSDValue.stringValue, allTokenUSDValue.stringValue,
-                               coinsCnt))
-            }
-            
-            
-            DispatchQueue.main.async(execute: {
-                NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
-            })
-        }
-    }
 }

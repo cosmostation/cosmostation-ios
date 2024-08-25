@@ -21,6 +21,7 @@ class MajorHistoryVC: BaseVC {
     var selectedChain: BaseChain!
     
     var suiHistoryGroup = [SuiHistoryGroup]()
+    var btcHistory = [JSON]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +65,10 @@ class MajorHistoryVC: BaseVC {
         if (refresher.isRefreshing) { return }
         if let suiChain = selectedChain as? ChainSui {
             suiChain.fetchHistory()
+            
+        } else if let btcChain = selectedChain as? ChainBitCoin84 {
+            btcChain.fetchHistory()
+            
         }
     }
     
@@ -105,15 +110,31 @@ class MajorHistoryVC: BaseVC {
                 emptyDataView.isHidden = true
                 tableView.reloadData()
             }
+            
+        } else if let btcFetcher = (selectedChain as? ChainBitCoin84)?.getBtcFetcher() {
+            btcHistory.removeAll()
+            btcHistory = btcFetcher.btcHistory
+            
+            loadingView.isHidden = true
+            if (btcHistory.count <= 0) {
+                emptyDataView.isHidden = false
+            } else {
+                emptyDataView.isHidden = true
+                tableView.reloadData()
+            }
         }
     }
 }
 
 
+//else if let btcChain = selectedChain as? ChainBitCoin84 {
+
 extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if selectedChain is ChainSui {
             return suiHistoryGroup.count
+        } else if selectedChain is ChainBitCoin84 {
+            return 1
         }
         return 0
     }
@@ -128,6 +149,10 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
                 view.titleLabel.text = suiHistoryGroup[section].date
             }
             view.cntLabel.text = ""
+            
+        } else if selectedChain is ChainBitCoin84 {
+            view.titleLabel.text = "History"
+            view.cntLabel.text = String(btcHistory.count)
         }
         return view
     }
@@ -139,6 +164,8 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if selectedChain is ChainSui {
             return suiHistoryGroup[section].values.count
+        } else if selectedChain is ChainBitCoin84 {
+            return btcHistory.count
         }
         return 0
     }
@@ -147,6 +174,8 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as! HistoryCell
         if let suiChain = selectedChain as? ChainSui {
             cell.bindSuiHistory(suiChain, suiHistoryGroup[indexPath.section].values[indexPath.row])
+        } else if let btcChain = selectedChain as? ChainBitCoin84 {
+            cell.bindBtcHistory(btcChain, btcHistory[indexPath.row])
         }
         return cell
     }
@@ -156,6 +185,8 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
             let hash = suiHistoryGroup[indexPath.section].values[indexPath.row]["digest"].stringValue
             guard let url = selectedChain.getExplorerTx(hash) else { return }
             self.onShowSafariWeb(url)
+        } else if let btcChain = selectedChain as? ChainBitCoin84 {
+            //TODO Link
         }
     }
     

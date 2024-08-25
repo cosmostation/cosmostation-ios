@@ -18,13 +18,14 @@ class BtcFetcher {
     var btcBalances = NSDecimalNumber.zero
     var btcPendingInput = NSDecimalNumber.zero
     var btcPendingOutput = NSDecimalNumber.zero
+    var btcHistory = [JSON]()
     
     init(_ chain: BaseChain) {
         self.chain = chain
     }
     
     func fetchBtcBalances() async -> Bool {
-        if let balance = try? await fetchBalance(chain.mainAddress) {
+        if let balance = try? await fetchBalance() {
             print("balance ", balance)
         }
         return true
@@ -35,7 +36,7 @@ class BtcFetcher {
         btcPendingInput  = NSDecimalNumber.zero
         btcPendingOutput = NSDecimalNumber.zero
         do {
-            if let stats = try await fetchBalance(chain.mainAddress) {
+            if let stats = try await fetchBalance() {
                 print("stats ", stats)
                 guard let addresss = stats["address"].string, addresss == chain.mainAddress else {
                     print("fetchBtc error no address")
@@ -60,6 +61,14 @@ class BtcFetcher {
         }
     }
     
+    func fetchBtcHistory() async {
+        btcHistory.removeAll()
+        if let histroy = try? await fetchTxHistory() {
+            btcHistory.append(contentsOf: histroy ?? [])
+        }
+        return
+    }
+    
     
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
         let msPrice = BaseData.instance.getPrice(chain.coinGeckoId, usd)
@@ -81,27 +90,34 @@ class BtcFetcher {
 
 extension BtcFetcher {
     
-    func fetchBalance(_ address: String) async throws -> JSON? {
-        let url = mempoolUrl() + "address/" + address
+    func fetchBalance() async throws -> JSON? {
+        let url = mempoolUrl() + "address/" + chain.mainAddress
         return try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     
-    func fetchUtxos(_ address: String) async throws -> JSON? {
-        let url = mempoolUrl() + "address/" + address + "/utxo"
+    func fetchUtxos() async throws -> JSON? {
+        let url = mempoolUrl() + "address/" + chain.mainAddress + "/utxo"
         return try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     
-    func fetchMempool(_ address: String) async throws -> [JSON]? {
-        let url = mempoolUrl() + "address/" + address + "/txs/mempool"
+    func fetchTxHistory() async throws -> [JSON]? {
+        let url = mempoolUrl() + "address/" + chain.mainAddress + "/txs"
         return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
     }
     
-    func fetchHistroy(_ address: String) async throws -> [JSON]? {
-        let url = mempoolUrl() + "address/" + address + "/txs/chain"
+    func fetchMempool() async throws -> [JSON]? {
+        let url = mempoolUrl() + "address/" + chain.mainAddress + "/txs/mempool"
         return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
     }
     
-    func fetchFee(_ address: String) async throws -> JSON? {
+    func fetchTxChain() async throws -> [JSON]? {
+        let url = mempoolUrl() + "address/" + chain.mainAddress + "/txs/chain"
+        return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
+    }
+    
+    
+    
+    func fetchFee() async throws -> JSON? {
         let url = mempoolUrl() + "v1/fees/recommended"
         return try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }

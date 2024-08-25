@@ -171,4 +171,7 @@ class HistoryCell: UITableViewCell {
         }
         
     }
+    
+    func bindBtcHistory(_ suiChain: ChainBitCoin84, _ history: JSON) {
+    }
 }

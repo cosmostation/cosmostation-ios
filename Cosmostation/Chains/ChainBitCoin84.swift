@@ -78,4 +78,14 @@ class ChainBitCoin84: BaseChain {
             })
         }
     }
+    
+    func fetchHistory() {
+        Task {
+            await getBtcFetcher()?.fetchBtcHistory()
+            
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name("fetchHistory"), object: self.tag, userInfo: nil)
+            })
+        }
+    }
 }
