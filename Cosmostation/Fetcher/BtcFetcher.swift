@@ -18,6 +18,7 @@ class BtcFetcher {
     var btcBalances = NSDecimalNumber.zero
     var btcPendingInput = NSDecimalNumber.zero
     var btcPendingOutput = NSDecimalNumber.zero
+    var btcBlockHeight: UInt64?
     var btcHistory = [JSON]()
     
     init(_ chain: BaseChain) {
@@ -63,8 +64,13 @@ class BtcFetcher {
     
     func fetchBtcHistory() async {
         btcHistory.removeAll()
-        if let histroy = try? await fetchTxHistory() {
+        btcBlockHeight = nil
+        if let histroy = try? await fetchTxHistory(),
+           let height = try? await fetchBlockHeight() {
             btcHistory.append(contentsOf: histroy ?? [])
+            btcBlockHeight = height
+            print("btcHistory ", btcHistory.count)
+            print("btcBlockHeight ", btcBlockHeight)
         }
         return
     }
@@ -116,6 +122,11 @@ extension BtcFetcher {
     }
     
     
+    
+    func fetchBlockHeight() async throws -> UInt64? {
+        let url = mempoolUrl() + "blocks/tip/height"
+        return try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value.uInt64Value
+    }
     
     func fetchFee() async throws -> JSON? {
         let url = mempoolUrl() + "v1/fees/recommended"

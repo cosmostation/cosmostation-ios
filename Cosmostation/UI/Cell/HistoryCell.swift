@@ -172,6 +172,52 @@ class HistoryCell: UITableViewCell {
         
     }
     
-    func bindBtcHistory(_ suiChain: ChainBitCoin84, _ history: JSON) {
+    func bindBtcHistory(_ btcChain: ChainBitCoin84, _ history: JSON) {
+        if (history["status"]["confirmed"].boolValue == true) {
+            successImg.image = UIImage(named: "iconSuccess")
+            timeLabel.text = WDP.dpTime(history["status"]["block_time"].intValue)
+            if let blockHeight = btcChain.getBtcFetcher()?.btcBlockHeight,
+               let txHeight = history["status"]["block_height"].uInt64 {
+                blockLabel.text = "(" + String(blockHeight - txHeight) + " Confirmed)"
+            } else {
+                blockLabel.text = String(history["status"]["block_height"].uInt64Value)
+            }
+            
+        } else {
+            successImg.image = UIImage(named: "iconTxPending")
+            timeLabel.text = ""
+            blockLabel.text = ""
+        }
+        
+        var title = ""
+        var inputAmounts = NSDecimalNumber.zero
+        var outputAmount = NSDecimalNumber.zero
+        var displayAmount = NSDecimalNumber.zero
+        let inputs = history["vout"].arrayValue.filter { $0["prevout"]["scriptpubkey_address"].stringValue  == btcChain.mainAddress }
+        inputs.forEach { input in
+            inputAmounts = inputAmounts.adding(NSDecimalNumber(value: input["value"].uInt64Value))
+        }
+        let outputs = history["vout"].arrayValue.filter { $0["scriptpubkey_address"].stringValue  == btcChain.mainAddress }
+        outputs.forEach { output in
+            outputAmount = outputAmount.adding(NSDecimalNumber(value: output["value"].uInt64Value))
+        }
+        print("inputAmounts ", inputAmounts)
+        print("outputAmount ", outputAmount)
+        
+        if (inputs.count > 0) {
+            title = NSLocalizedString("tx_send", comment: "")
+            displayAmount = inputAmounts.subtracting(outputAmount).multiplying(byPowerOf10: -8, withBehavior: handler8Down)
+        } else {
+            title = NSLocalizedString("tx_receive", comment: "")
+            displayAmount = outputAmount.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
+        }
+        
+        denomLabel.text = btcChain.coinSymbol
+        amountLabel.attributedText = WDP.dpAmount(displayAmount.stringValue, amountLabel!.font, 8)
+        amountLabel.isHidden = false
+        denomLabel.isHidden = false
+        
+        msgsTitleLabel.text = title
+        hashLabel.text = history["txid"].stringValue
     }
 }
