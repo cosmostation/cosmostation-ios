@@ -296,33 +296,6 @@ public enum PubKeyType: Int {
             return "unknown"
         }
     }
-    
-//    var cosmosPubkey: String? {
-//        switch self {
-//        case PubKeyType.ETH_Keccak256:
-//            return "ethsecp256k1"
-//        case PubKeyType.COSMOS_Secp256k1:
-//            return "secp256k1"
-//        case PubKeyType.INJECTIVE_Secp256k1:
-//            return "ethsecp256k1"
-//        case PubKeyType.BERA_Secp256k1:
-//            return "ethsecp256k1"
-//        case PubKeyType.ARTELA_Keccak256:
-//            return "ethsecp256k1"
-//        case PubKeyType.SUI_Ed25519:
-//            return "ed25519"
-//        case PubKeyType.BTC_Legacy:
-//            return "p2pkh"
-//        case PubKeyType.BTC_Nested_Segwit:
-//            return "p2wpkhSh"
-//        case PubKeyType.BTC_Native_Segwit:
-//            return "p2wpkh"
-//        case PubKeyType.BTC_Taproot:
-//            return "p2tr"
-//        case PubKeyType.unknown:
-//            return "unknown"
-//        }
-//    }
 }
 
 public enum BaseAccountType: Int64 {

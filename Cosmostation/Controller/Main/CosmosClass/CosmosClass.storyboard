@@ -245,6 +245,15 @@
                                     <constraint firstItem="7Iz-rT-keH" firstAttribute="centerX" secondItem="cey-rR-HuE" secondAttribute="centerX" id="qTb-oT-rax"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zgc-Ru-qAP" customClass="LottieAnimationView" customModule="Lottie">
+                                <rect key="frame" x="321" y="484.33333333333326" width="60" height="60"/>
+                                <viewLayoutGuide key="safeArea" id="Xr5-tD-9KZ"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Wws-mM-86J"/>
+                                    <constraint firstAttribute="width" constant="60" id="isc-N1-ac0"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aYH-Cl-c1y"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -254,13 +263,16 @@
                             <constraint firstItem="cey-rR-HuE" firstAttribute="centerY" secondItem="aYH-Cl-c1y" secondAttribute="centerY" id="IRv-dF-0u5"/>
                             <constraint firstItem="cey-rR-HuE" firstAttribute="centerX" secondItem="aYH-Cl-c1y" secondAttribute="centerX" id="VvE-NQ-iVx"/>
                             <constraint firstItem="XNO-GG-9I6" firstAttribute="centerX" secondItem="aYH-Cl-c1y" secondAttribute="centerX" id="a2b-Nw-IFO"/>
+                            <constraint firstItem="aYH-Cl-c1y" firstAttribute="trailing" secondItem="Zgc-Ru-qAP" secondAttribute="trailing" constant="12" id="hrb-Eq-8XD"/>
                             <constraint firstAttribute="bottom" secondItem="AJM-90-cmx" secondAttribute="bottom" id="nzY-Yx-yyd"/>
                             <constraint firstItem="XNO-GG-9I6" firstAttribute="centerY" secondItem="aYH-Cl-c1y" secondAttribute="centerY" id="osP-zO-6vc"/>
+                            <constraint firstItem="aYH-Cl-c1y" firstAttribute="bottom" secondItem="Zgc-Ru-qAP" secondAttribute="bottom" constant="74" id="vYQ-EB-llO"/>
                             <constraint firstItem="AJM-90-cmx" firstAttribute="top" secondItem="KVq-Tq-0JA" secondAttribute="top" id="wwe-Bi-l9z"/>
                             <constraint firstItem="AJM-90-cmx" firstAttribute="leading" secondItem="KVq-Tq-0JA" secondAttribute="leading" id="zxi-7A-BeG"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dropBtn" destination="Zgc-Ru-qAP" id="pcB-Vu-Fn5"/>
                         <outlet property="loadingView" destination="XNO-GG-9I6" id="2vh-rS-NsE"/>
                         <outlet property="searchEmptyLayer" destination="cey-rR-HuE" id="5Tr-vS-25J"/>
                         <outlet property="tableView" destination="AJM-90-cmx" id="sA3-VZ-SaC"/>
@@ -635,10 +647,10 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color02">
-            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74509803921568629" green="0.81960784313725488" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

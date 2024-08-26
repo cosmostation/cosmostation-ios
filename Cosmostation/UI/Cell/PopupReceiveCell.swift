@@ -13,6 +13,7 @@ class PopupReceiveCell: UITableViewCell {
     @IBOutlet weak var rootView: FixCardView!
     @IBOutlet weak var cautionLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
+    @IBOutlet weak var btcTag: RoundedPaddingLabel!
     @IBOutlet weak var oldTag: RoundedPaddingLabel!
     @IBOutlet weak var keyTypeTag: RoundedPaddingLabel!
     @IBOutlet weak var rqImgView: UIImageView!
@@ -62,8 +63,31 @@ class PopupReceiveCell: UITableViewCell {
         } else if (section == 2 && !chain.mainAddress.isEmpty) {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
             let mainAddress = chain.mainAddress
-            addressLabel.numberOfLines = 2
-            addressLabel.text = mainAddress
+            
+            if (chain is ChainBitCoin84) {
+                addressLabel.numberOfLines = 1
+                addressLabel.text = mainAddress
+                addressLabel.adjustsFontSizeToFitWidth = true
+                
+                if chain.accountKeyType.pubkeyType == .BTC_Legacy {
+                    btcTag.text = "Legacy"
+                    btcTag.backgroundColor = .color06
+                    
+                } else if chain.accountKeyType.pubkeyType == .BTC_Nested_Segwit {
+                    btcTag.text = "Nested Segwit"
+                    btcTag.backgroundColor = .color06
+                    
+                } else if chain.accountKeyType.pubkeyType == .BTC_Native_Segwit {
+                    btcTag.text = "Native Segwit"
+                    btcTag.backgroundColor = .colorNativeSegwit
+                }
+                btcTag.isHidden = false
+                oldTag.isHidden = true
+                
+            } else {
+                addressLabel.numberOfLines = 2
+                addressLabel.text = mainAddress
+            }
             
             if let qrImage = WUtils.generateQrCode(mainAddress) {
                 rqImgView.image = UIImage(ciImage: qrImage)

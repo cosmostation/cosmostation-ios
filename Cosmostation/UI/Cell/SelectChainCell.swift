@@ -16,6 +16,7 @@ class SelectChainCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var bechAddressLabel: UILabel!
     @IBOutlet weak var evmAddressLabel: UILabel!
+    @IBOutlet weak var btcTag: RoundedPaddingLabel!
     @IBOutlet weak var oldTag: RoundedPaddingLabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
@@ -50,6 +51,7 @@ class SelectChainCell: UITableViewCell {
         assetCntLabel.text = ""
         bechAddressLabel.text = ""
         evmAddressLabel.text = ""
+        btcTag.isHidden = true
         oldTag.isHidden = true
         loadingLabel1.isHidden = false
         loadingLabel2.isHidden = false
@@ -84,7 +86,24 @@ class SelectChainCell: UITableViewCell {
             bechAddressLabel.text = chain.mainAddress
         }
         
-        oldTag.isHidden = chain.isDefault
+        if (chain is ChainBitCoin84) {
+            if chain.accountKeyType.pubkeyType == .BTC_Legacy {
+                btcTag.text = "Legacy"
+                btcTag.backgroundColor = .color06
+                
+            } else if chain.accountKeyType.pubkeyType == .BTC_Nested_Segwit {
+                btcTag.text = "Nested Segwit"
+                btcTag.backgroundColor = .color06
+                
+            } else if chain.accountKeyType.pubkeyType == .BTC_Native_Segwit {
+                btcTag.text = "Native Segwit"
+                btcTag.backgroundColor = .colorNativeSegwit
+            }
+            btcTag.isHidden = false
+            
+        } else {
+            oldTag.isHidden = chain.isDefault
+        }
         
         if (selectedList.contains(chain.tag)) {
             rootView.layer.borderWidth = 1.0

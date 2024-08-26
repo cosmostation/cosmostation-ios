@@ -153,7 +153,7 @@ class CommonTransfer: BaseVC {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
         let gap = UIScreen.main.bounds.size.height - 685
         if (gap > 0) { midGapConstraint.constant = gap }
         else { midGapConstraint.constant = 60 }
