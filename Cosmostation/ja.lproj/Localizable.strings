@@ -865,7 +865,8 @@
 "str_bear" = "クマ";
 "str_select_price_color" = "価格変動の色を選択してください";
 "str_endpoint_reset_alert_title" = "エンドポイントの初期化";
-"str_endpoint_reset_alert_msg" = "すべてのチェーンをデフォルトのエンドポイントにリセットしますか？";
+"str_endpoint_reset_alert_question" = "（推奨）すべてのチェーンのエンドポイントをデフォルト設定にリセットしますか？";
+"str_endpoint_reset_alert_explanation" = "エンドポイントはブロックチェーンネットワークへの接続を管理するサーバーであり、安定したエンドポイントを使用すると、データの送受信がスムーズに行われるようにします。";
 
 "clear_all" = "すべてクリア";
 "close" = "閉じる";
