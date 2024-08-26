@@ -1669,6 +1669,9 @@ extension JSON {
         if let result = self["account"]["account_number"]["account_number"].string {                            //Desmos_Profiles_V3_Profile
             return UInt64(result)!
         }
+        if let result = self["account"]["account_number"].string {                                              //Desmos_Profiles_V3_Profile
+            return UInt64(result)!
+        }
         return 0
     }
     
@@ -1690,6 +1693,9 @@ extension JSON {
             return UInt64(result)!
         }
         if let result = self["account"]["account_number"]["sequence"].string {                                  //Desmos_Profiles_V3_Profile
+            return UInt64(result)!
+        }
+        if let result = self["account"]["sequence"].string {                                                    //Desmos_Profiles_V3_Profile
             return UInt64(result)!
         }
         return 0
