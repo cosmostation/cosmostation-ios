@@ -11,6 +11,7 @@ import Web3Core
 import ed25519swift
 import CryptoSwift
 import Blake2
+import BigInt
 
 class KeyFac {
     
@@ -23,8 +24,13 @@ class KeyFac {
             pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
             return getSecp256k1PriKey(seed, path)
             
+        } else if (pubKeyType == .BTC_Legacy || pubKeyType == .BTC_Nested_Segwit ||
+                   pubKeyType == .BTC_Native_Segwit || pubKeyType == .BTC_Taproot) {
+            return getSecp256k1PriKey(seed, path)
+            
         } else if (pubKeyType == .SUI_Ed25519) {
             return getEd25519PriKey(seed, path)
+            
         }
         return nil
 
@@ -73,6 +79,10 @@ class KeyFac {
             pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
             return getSecp256k1PubKey(priKey)
             
+        } else if (pubKeyType == .BTC_Legacy || pubKeyType == .BTC_Nested_Segwit ||
+                   pubKeyType == .BTC_Native_Segwit || pubKeyType == .BTC_Taproot) {
+            return getSecp256k1PubKey(priKey)
+            
         } else if (pubKeyType == .SUI_Ed25519) {
             return getEd25519PubKey(priKey)
         }
@@ -95,6 +105,27 @@ class KeyFac {
             
         } else if (pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
             return Web3Core.Utilities.publicToAddressString(pubKey)!
+            
+        } else if (pubKeyType == .BTC_Legacy) {
+            let ripemd160 = RIPEMD160.hash(pubKey.sha256())
+            let version: UInt8 = 0
+            let networkAndHash = Data([version]) + ripemd160
+            return base58CheckEncode(networkAndHash)
+            
+        } else if (pubKeyType == .BTC_Nested_Segwit) {
+            let ripemd160 = RIPEMD160.hash(pubKey.sha256())
+            let segwitscript = OpCode.segWitOutputScript(ripemd160, versionByte: 0)
+            let hashP2wpkhWrappedInP2sh = RIPEMD160.hash(segwitscript.sha256())
+            let version: UInt8 = 5
+            let withVersion = Data([version]) + hashP2wpkhWrappedInP2sh
+            return base58CheckEncode(withVersion)
+            
+        } else if (pubKeyType == .BTC_Native_Segwit) {
+            let ripemd160 = RIPEMD160.hash(pubKey.sha256())
+            return try! SegwitAddrCoder.shared.encodeBtc("bc", ripemd160)
+            
+        } else if (pubKeyType == .BTC_Taproot) {
+            //Not support
             
         } else if (pubKeyType == .SUI_Ed25519) {
             let data = Data([UInt8](Data(count: 1)) + pubKey)
@@ -127,6 +158,31 @@ class KeyFac {
         return EthereumAddress.init(data!)!.address
     }
     
+    static func base58CheckEncode(_ data: Data) -> String {
+        let checksum = data.sha256().sha256().prefix(4)
+        let extendedData = data + checksum
+        return base58Encode(extendedData)
+    }
+    
+    static func base58Encode(_ data: Data) -> String {
+        let base58Alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+        
+        var x = BigUInt(data)
+        var answer = ""
+        
+        while x > 0 {
+            let (quotient, remainder) = x.quotientAndRemainder(dividingBy: 58)
+            answer = "\(base58Alphabet[String.Index(encodedOffset: Int(remainder))])" + answer
+            x = quotient
+        }
+        
+        // Leading zero bytes
+        for byte in data {
+            if byte != 0 { break }
+            answer = "1" + answer
+        }
+        return answer
+    }
 }
 
 extension UInt32 {

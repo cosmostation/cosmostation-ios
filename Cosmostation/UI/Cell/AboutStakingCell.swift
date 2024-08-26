@@ -64,19 +64,23 @@ class AboutStakingCell: UITableViewCell {
     }
     
     
-    func onBindSuiStakingInfo(_ chain: BaseChain, _ json: JSON) {
+    func onBindMajorInfo(_ chain: BaseChain, _ json: JSON) {
         if let suiChain = chain as? ChainSui {
-            if let symbol = json["params"]["chainlist_params"]["symbol"].string, chain.supportStaking {
-                stakingDenomLabel.text = symbol
-            }
-            
-            unbondingTimeLabel.text = NSLocalizedString("str_instant", comment: "")
-            
-            if let apy = suiChain.suiFetcher?.suiApys[0]["apy"].stringValue {
-                let nf = WUtils.getNumberFormatter(2)
-                let formatApr = nf.string(from: NSDecimalNumber(string: apy).multiplying(byPowerOf10: 2))!
-                stakingAprLabel.attributedText = WUtils.getDpAttributedString(formatApr, 2, stakingAprLabel.font)
-            }
+            onBindSuiStakingInfo(suiChain, json)
+        }
+    }
+    
+    func onBindSuiStakingInfo(_ suiChain: ChainSui, _ json: JSON) {
+        if let symbol = json["params"]["chainlist_params"]["symbol"].string, suiChain.supportStaking {
+            stakingDenomLabel.text = symbol
+        }
+        
+        unbondingTimeLabel.text = NSLocalizedString("str_instant", comment: "")
+        
+        if let apy = suiChain.suiFetcher?.suiApys[0]["apy"].stringValue {
+            let nf = WUtils.getNumberFormatter(2)
+            let formatApr = nf.string(from: NSDecimalNumber(string: apy).multiplying(byPowerOf10: 2))!
+            stakingAprLabel.attributedText = WUtils.getDpAttributedString(formatApr, 2, stakingAprLabel.font)
         }
     }
 }

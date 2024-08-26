@@ -1,6 +1,5 @@
 //
 //  SegwitAddrCoder.swift
-//  SplashWallet
 //
 
 import Foundation
@@ -48,6 +47,14 @@ public class SegwitAddrCoder {
     
     public func encode(_ hrp: String, _ program: Data) throws -> String {
         let enc = try convertBits(from: 8, to: 5, pad: true, idata: program)
+        let result = bech32.encode(hrp, values: enc)
+        return result
+    }
+    
+    public func encodeBtc(_ hrp: String, _ program: Data) throws -> String {
+        let version: UInt8 = 0
+        var enc = Data([version])
+        try enc.append(convertBits(from: 8, to: 5, pad: true, idata: program))
         let result = bech32.encode(hrp, values: enc)
         return result
     }

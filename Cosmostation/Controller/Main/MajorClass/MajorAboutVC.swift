@@ -97,7 +97,7 @@ extension MajorAboutVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (indexPath.section == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AboutStakingCell") as! AboutStakingCell
-            cell.onBindSuiStakingInfo(selectedChain as! ChainSui, chainParam)
+            cell.onBindMajorInfo(selectedChain, chainParam)
             return cell
             
         } else if (indexPath.section == 3) {
