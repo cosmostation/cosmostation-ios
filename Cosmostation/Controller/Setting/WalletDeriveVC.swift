@@ -24,14 +24,6 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
     var toAddAccount: BaseAccount!
     var hdPath = 0
     
-//    var allEvmChains = [EvmClass]()
-//    var selectedEvmTags = [String]()
-//    var allCosmosChains = [CosmosClass]()
-//    var selectedCosmosTags = [String]()
-//    var allChains = [BaseChain]()
-//    var selectedChainTags = [String]()
-    
-    
     var mainnetChains = [BaseChain]()
     var testnetChains = [BaseChain]()
     var selectedTags = [String]()

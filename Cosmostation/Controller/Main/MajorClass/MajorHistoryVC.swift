@@ -204,7 +204,9 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
             guard let url = selectedChain.getExplorerTx(hash) else { return }
             self.onShowSafariWeb(url)
         } else if let btcChain = selectedChain as? ChainBitCoin84 {
-            //TODO Link
+            let hash = historyGroup[indexPath.section].values[indexPath.row]["txid"].stringValue
+            guard let url = selectedChain.getExplorerTx(hash) else { return }
+            self.onShowSafariWeb(url)
         }
     }
     

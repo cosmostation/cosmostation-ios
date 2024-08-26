@@ -139,6 +139,13 @@ class DeriveCell: UITableViewCell {
                 denomLabel.text = chain.coinSymbol
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
                 
+            } else if let btcFetcher = (chain as? ChainBitCoin84)?.getBtcFetcher() {
+                let avaibaleAmount = btcFetcher.btcBalances.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
+                let pendingInputAmount = btcFetcher.btcPendingInput.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
+                let totalAmount = avaibaleAmount.adding(pendingInputAmount)
+                denomLabel.text = chain.coinSymbol
+                amountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 8)
+                
             } else if (chain.supportEvm) {
                 let dpAmount = chain.getEvmfetcher()?.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18Down) ?? NSDecimalNumber.zero
                 denomLabel.text = chain.coinSymbol

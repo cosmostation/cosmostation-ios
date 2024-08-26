@@ -26,8 +26,18 @@ class BtcFetcher {
     }
     
     func fetchBtcBalances() async -> Bool {
-        if let balance = try? await fetchBalance() {
-            print("balance ", balance)
+        if let stats = try? await fetchBalance() {
+            guard let addresss = stats?["address"].string, addresss == chain.mainAddress else {
+                return false
+            }
+            let chain_funded_txo_sum = NSDecimalNumber(value: stats?["chain_stats"]["funded_txo_sum"].uInt64Value ?? 0)
+            let chain_spent_txo_sum = NSDecimalNumber(value: stats?["chain_stats"]["spent_txo_sum"].uInt64Value ?? 0)
+            let mempool_funded_txo_sum = NSDecimalNumber(value: stats?["mempool_stats"]["funded_txo_sum"].uInt64Value ?? 0)
+            let mempool_spent_txo_sum = NSDecimalNumber(value: stats?["mempool_stats"]["spent_txo_sum"].uInt64Value ?? 0)
+            
+            btcBalances = chain_funded_txo_sum.subtracting(chain_spent_txo_sum).subtracting(mempool_spent_txo_sum)
+            btcPendingInput = mempool_funded_txo_sum
+            btcPendingOutput = mempool_spent_txo_sum
         }
         return true
     }
@@ -38,7 +48,7 @@ class BtcFetcher {
         btcPendingOutput = NSDecimalNumber.zero
         do {
             if let stats = try await fetchBalance() {
-                print("stats ", stats)
+//                print("stats ", stats)
                 guard let addresss = stats["address"].string, addresss == chain.mainAddress else {
                     print("fetchBtc error no address")
                     return false
@@ -69,8 +79,6 @@ class BtcFetcher {
            let height = try? await fetchBlockHeight() {
             btcHistory.append(contentsOf: histroy ?? [])
             btcBlockHeight = height
-            print("btcHistory ", btcHistory.count)
-            print("btcBlockHeight ", btcBlockHeight)
         }
         return
     }

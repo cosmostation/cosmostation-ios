@@ -45,6 +45,26 @@ class ChainBitCoin84: BaseChain {
     }
     
     override func fetchBalances() {
+        fetchState = .Busy
+        Task {
+            let btcResult = await getBtcFetcher()?.fetchBtcBalances()
+            
+            if (btcResult == false) {
+                fetchState = .Fail
+            } else {
+                fetchState = .Success
+            }
+            
+            if (self.fetchState == .Success) {
+                if let btcFetcher = getBtcFetcher() {
+                    coinsCnt = (btcFetcher.btcBalances == NSDecimalNumber.zero && btcFetcher.btcPendingInput == NSDecimalNumber.zero) ? 0 : 1
+                }
+            }
+            
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
+            })
+        }
     }
     
     override func fetchData(_ id: Int64) {

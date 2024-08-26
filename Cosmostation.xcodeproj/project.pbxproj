@@ -3205,6 +3205,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040AC0522C7C1B1300427AFD /* ChainMajor */ = {
+			isa = PBXGroup;
+			children = (
+				04D279F22A67C9A600AF046A /* ChainSui.swift */,
+				04A420E32C74B78D00C0E1A2 /* ChainBitCoin44.swift */,
+				04A420EF2C74CB8300C0E1A2 /* ChainBitCoin49.swift */,
+				04A420E62C74B7AA00C0E1A2 /* ChainBitCoin84.swift */,
+			);
+			path = ChainMajor;
+			sourceTree = "<group>";
+		};
 		0422967E2A890C54003C7630 /* ClassEVM */ = {
 			isa = PBXGroup;
 			children = (
@@ -3708,14 +3719,8 @@
 				04D279F82A69159E00AF046A /* BaseChain.swift */,
 				0422967F2A890C63003C7630 /* ClassCosmos */,
 				0422967E2A890C54003C7630 /* ClassEVM */,
+				040AC0522C7C1B1300427AFD /* ChainMajor */,
 				04D7855B2C32B454009D1A94 /* ClassTestnet */,
-				04D279F22A67C9A600AF046A /* ChainSui.swift */,
-				04A420E32C74B78D00C0E1A2 /* ChainBitCoin44.swift */,
-				04A420EF2C74CB8300C0E1A2 /* ChainBitCoin49.swift */,
-				04A420E62C74B7AA00C0E1A2 /* ChainBitCoin84.swift */,
-				04A420FE2C77618000C0E1A2 /* ChainBitCoin44_T.swift */,
-				04A421012C77618E00C0E1A2 /* ChainBitCoin49_T.swift */,
-				04A420FB2C77617000C0E1A2 /* ChainBitCoin84_T.swift */,
 			);
 			path = Chains;
 			sourceTree = "<group>";
@@ -3744,6 +3749,9 @@
 				E16FB7252C7595E6005660D1 /* ChainMantra_T.swift */,
 				04D785582C32B171009D1A94 /* ChainNeutron_T.swift */,
 				E18B21FB2C4A4EE900AD572F /* ChainNillion_T.swift */,
+				04A420FE2C77618000C0E1A2 /* ChainBitCoin44_T.swift */,
+				04A421012C77618E00C0E1A2 /* ChainBitCoin49_T.swift */,
+				04A420FB2C77617000C0E1A2 /* ChainBitCoin84_T.swift */,
 			);
 			path = ClassTestnet;
 			sourceTree = "<group>";
