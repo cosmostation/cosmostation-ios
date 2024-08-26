@@ -268,7 +268,7 @@ class BaseChain {
         return "UnKnown"
     }
     
-    func assetImgUrl(_ denom: String) -> URL {
+    func assetImgUrl(_ denom: String) -> URL? {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.assetImg()
         } else if supportCw20,
@@ -278,7 +278,7 @@ class BaseChain {
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.assetImg()
         }
-        return URL(string: "")!
+        return nil
     }
     
     func assetDecimal(_ denom: String) -> Int16 {
