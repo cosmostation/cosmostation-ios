@@ -126,13 +126,22 @@ class HistoryCell: UITableViewCell {
             txs.forEach { tx in
                 if (tx["MoveCall"]["function"].stringValue == "request_withdraw_stake") {
                     title = NSLocalizedString("str_unstake", comment: "")
-                }
-            }
-            txs.forEach { tx in
-                if (tx["MoveCall"]["function"].stringValue == "request_add_stake") {
+                    
+                } else if (tx["MoveCall"]["function"].stringValue == "request_add_stake") {
                     title = NSLocalizedString("str_stake", comment: "")
+                    
+                } else if (tx["MoveCall"]["function"].stringValue == "swap") {
+                    title = NSLocalizedString("title_swap_token", comment: "")
+                    
+                } else if (tx["MoveCall"]["function"].stringValue == "mint") {
+                    title = "Supply"
+                    
+                } else if (tx["MoveCall"]["function"].stringValue == "redeem") {
+                    title = "Redeem"
+                    
                 }
             }
+            
         }
         
         if title.isEmpty == true {

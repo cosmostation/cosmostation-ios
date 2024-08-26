@@ -109,10 +109,18 @@ class ChainListVC: BaseVC, EndpointDelegate {
     }
     
     @objc func onClickResetBtn() {
+        let message = NSLocalizedString("str_endpoint_reset_alert_question", comment: "") + "\n\n" + NSLocalizedString("str_endpoint_reset_alert_explanation", comment: "")
         let alert = UIAlertController(title: NSLocalizedString("str_endpoint_reset_alert_title", comment: ""),
-                                      message: NSLocalizedString("str_endpoint_reset_alert_msg", comment: ""),
+                                      message: message,
                                       preferredStyle: .alert)
+        
+        var messageMutableString = NSMutableAttributedString(string: message)
+        messageMutableString.addAttribute(.font, value: UIFont(name: "SpoqaHanSansNeo-Medium", size: 12)!, range: (message as NSString).range(of: NSLocalizedString("str_endpoint_reset_alert_question", comment: "")))
+        messageMutableString.addAttribute(.font, value: UIFont(name: "SpoqaHanSansNeo-Medium", size: 10)!, range: (message as NSString).range(of: NSLocalizedString("str_endpoint_reset_alert_explanation", comment: "")))
+        messageMutableString.addAttribute(.foregroundColor, value: UIColor.color02, range: (message as NSString).range(of: NSLocalizedString("str_endpoint_reset_alert_explanation", comment: "")))
 
+        alert.setValue(messageMutableString, forKey: "attributedMessage")
+        
         let cancel = UIAlertAction(title: NSLocalizedString("str_cancel", comment: ""), style: .cancel)
         let ok = UIAlertAction(title: NSLocalizedString("str_ok", comment: ""), style: .destructive) { _ in
             self.loadingView.isHidden = false
