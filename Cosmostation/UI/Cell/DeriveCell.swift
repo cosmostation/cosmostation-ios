@@ -17,6 +17,7 @@ class DeriveCell: UITableViewCell {
     @IBOutlet weak var bechAddressLabel: UILabel!
     @IBOutlet weak var evmAddressLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
+    @IBOutlet weak var btcTag: RoundedPaddingLabel!
     @IBOutlet weak var oldTag: RoundedPaddingLabel!
     @IBOutlet weak var keyTypeTag: RoundedPaddingLabel!
     @IBOutlet weak var amountLabel: UILabel!
@@ -43,6 +44,7 @@ class DeriveCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        btcTag.isHidden = true
         oldTag.isHidden = true
         keyTypeTag.isHidden = true
         loadingLabel.isHidden = false
@@ -78,13 +80,32 @@ class DeriveCell: UITableViewCell {
         } else {
             bechAddressLabel.text = chain.mainAddress
         }
+        
+        if (chain is ChainBitCoin84) {
+            if chain.accountKeyType.pubkeyType == .BTC_Legacy {
+                btcTag.text = "Legacy"
+                btcTag.backgroundColor = .color06
+                
+            } else if chain.accountKeyType.pubkeyType == .BTC_Nested_Segwit {
+                btcTag.text = "Nested Segwit"
+                btcTag.backgroundColor = .color06
+                
+            } else if chain.accountKeyType.pubkeyType == .BTC_Native_Segwit {
+                btcTag.text = "Native Segwit"
+                btcTag.backgroundColor = .colorNativeSegwit
+            }
+            btcTag.isHidden = false
+            
+        } else {
+            oldTag.isHidden = chain.isDefault
+        }
+        
 //        if (account.type == .withMnemonic) {
 //            hdPathLabel.text =  chain.getHDPath(account.lastHDPath)
 //            hdPathLabel.adjustsFontSizeToFitWidth = true
 //        } else {
 //            hdPathLabel.text = ""
 //        }
-        oldTag.isHidden = chain.isDefault
         
         if (chain.name == "OKT" && !chain.supportEvm) {
             keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
@@ -117,6 +138,13 @@ class DeriveCell: UITableViewCell {
                 let dpAmount = suiFetcher.balanceAmount(SUI_MAIN_DENOM).multiplying(byPowerOf10: -9, withBehavior: handler18Down)
                 denomLabel.text = chain.coinSymbol
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
+                
+            } else if let btcFetcher = (chain as? ChainBitCoin84)?.getBtcFetcher() {
+                let avaibaleAmount = btcFetcher.btcBalances.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
+                let pendingInputAmount = btcFetcher.btcPendingInput.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
+                let totalAmount = avaibaleAmount.adding(pendingInputAmount)
+                denomLabel.text = chain.coinSymbol
+                amountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 8)
                 
             } else if (chain.supportEvm) {
                 let dpAmount = chain.getEvmfetcher()?.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18Down) ?? NSDecimalNumber.zero

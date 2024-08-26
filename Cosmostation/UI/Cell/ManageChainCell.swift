@@ -64,6 +64,12 @@ class ManageChainCell: UITableViewCell {
             evmEndpointTag.text = "RPC"
             evmEndpointLabel.text = suiFetcher.getSuiRpc().replacingOccurrences(of: "https://", with: "")
             evmEndpointLabel.adjustsFontSizeToFitWidth = true
+        } else if let btcFetcher = (chain as? ChainBitCoin84)?.getBtcFetcher() {
+            //using evm field
+            evmLayer.isHidden = false
+            evmEndpointTag.text = "API"
+            evmEndpointLabel.text = btcFetcher.mempoolUrl().replacingOccurrences(of: "https://", with: "")
+            evmEndpointLabel.adjustsFontSizeToFitWidth = true
         }
     }
     

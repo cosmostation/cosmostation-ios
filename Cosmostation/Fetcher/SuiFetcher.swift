@@ -25,7 +25,6 @@ class SuiFetcher {
     
     init(_ chain: BaseChain) {
         self.chain = chain
-    
     }
     
     func fetchSuiBalances() async -> Bool {
@@ -397,10 +396,35 @@ extension SuiFetcher {
         return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
     
-    func suiExecuteTx(_ tx_bytes: String, _ signatures: [String]) async throws -> JSON? {
-        let params: Any = [tx_bytes, signatures, ["showEffects": true], "WaitForLocalExecution"]
-        let parameters: Parameters = ["method": "sui_executeTransactionBlock", "params": params, "id" : 1, "jsonrpc" : "2.0"]
-        return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    func suiExecuteTx(_ tx_bytes: String, _ signatures: [String], _ options: JSON?) async throws -> JSON? {
+        if let options {
+            
+            var defaultOptions = ["showInput": true, "showEffects": true, "showEvents": true]
+            
+            for (key, value) in options.dictionaryValue {
+                defaultOptions[key] = value.boolValue
+            }
+            
+            let params: Any = [tx_bytes, signatures, defaultOptions, "WaitForLocalExecution"]
+            let parameters: Parameters = ["method": "sui_executeTransactionBlock", "params": params, "id" : 1, "jsonrpc" : "2.0"]
+            return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+
+        } else {
+            let params: Any = [tx_bytes, signatures, ["showEffects": true], "WaitForLocalExecution"]
+            let parameters: Parameters = ["method": "sui_executeTransactionBlock", "params": params, "id" : 1, "jsonrpc" : "2.0"]
+            return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+        }
+    }
+    
+    func signAfterAction(params:JSON, messageId: JSON) async throws -> String? {
+        let url = "https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildSuiTransaction"
+        let parameters = [
+            "rpc": getSuiRpc(),
+            "txBlock": params["transactionBlockSerialized"].stringValue,
+            "address": params["transactionBlockSerialized"]["sender"].string ?? chain.mainAddress
+        ]
+        guard let value = await AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingData().response.value else { return nil }
+        return String(data: value, encoding: .utf8)
     }
 }
 

@@ -98,7 +98,8 @@ class KeyFac {
     }
     
     
-    static func getAddressFromPubKey(_ pubKey: Data, _ pubKeyType: PubKeyType, _ prefix: String? = nil) -> String {
+    static func getAddressFromPubKey(_ pubKey: Data, _ pubKeyType: PubKeyType, _ prefix: String? = nil, 
+                                     _ pubKeyHash: UInt8? = nil, _ scriptHash: UInt8? = nil) -> String {
         if (pubKeyType == .COSMOS_Secp256k1) {
             let ripemd160 = RIPEMD160.hash(pubKey.sha256())
             return try! SegwitAddrCoder.shared.encode(prefix!, ripemd160)
@@ -108,21 +109,19 @@ class KeyFac {
             
         } else if (pubKeyType == .BTC_Legacy) {
             let ripemd160 = RIPEMD160.hash(pubKey.sha256())
-            let version: UInt8 = 0
-            let networkAndHash = Data([version]) + ripemd160
+            let networkAndHash = Data([pubKeyHash!]) + ripemd160
             return base58CheckEncode(networkAndHash)
             
         } else if (pubKeyType == .BTC_Nested_Segwit) {
             let ripemd160 = RIPEMD160.hash(pubKey.sha256())
             let segwitscript = OpCode.segWitOutputScript(ripemd160, versionByte: 0)
             let hashP2wpkhWrappedInP2sh = RIPEMD160.hash(segwitscript.sha256())
-            let version: UInt8 = 5
-            let withVersion = Data([version]) + hashP2wpkhWrappedInP2sh
+            let withVersion = Data([scriptHash!]) + hashP2wpkhWrappedInP2sh
             return base58CheckEncode(withVersion)
             
         } else if (pubKeyType == .BTC_Native_Segwit) {
             let ripemd160 = RIPEMD160.hash(pubKey.sha256())
-            return try! SegwitAddrCoder.shared.encodeBtc("bc", ripemd160)
+            return try! SegwitAddrCoder.shared.encodeBtc(prefix!, ripemd160)
             
         } else if (pubKeyType == .BTC_Taproot) {
             //Not support

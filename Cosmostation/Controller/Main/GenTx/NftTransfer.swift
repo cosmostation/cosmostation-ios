@@ -419,7 +419,7 @@ extension NftTransfer {
             do {
                 if let txBytes = try await suiFetcher.unsafeTransferObject(fromChain.mainAddress, toSendSuiNFT["objectId"].stringValue, suiFeeBudget.stringValue, toAddress),
                    let dryRes = try await suiFetcher.suiDryrun(txBytes), dryRes["error"].isEmpty,
-                   let broadRes = try await suiFetcher.suiExecuteTx(txBytes, Signer.suiSignatures(fromChain, txBytes)) {
+                   let broadRes = try await suiFetcher.suiExecuteTx(txBytes, Signer.suiSignatures(fromChain, txBytes), nil) {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true

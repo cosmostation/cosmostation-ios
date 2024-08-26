@@ -14,6 +14,7 @@ class QrAddressPopupVC: BaseVC {
     @IBOutlet weak var rqImgView: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var hdPathLabel: UILabel!
+    @IBOutlet weak var btcTag: RoundedPaddingLabel!
     @IBOutlet weak var oldTag: RoundedPaddingLabel!
     @IBOutlet weak var keyTypeTag: RoundedPaddingLabel!
     
@@ -56,6 +57,24 @@ class QrAddressPopupVC: BaseVC {
             toDpAddress = selectedChain.mainAddress
             addressLabel.numberOfLines = 2
             addressLabel.text = toDpAddress
+            
+            if (selectedChain is ChainBitCoin84) {
+                if selectedChain.accountKeyType.pubkeyType == .BTC_Legacy {
+                    btcTag.text = "Legacy"
+                    btcTag.backgroundColor = .color06
+                    
+                } else if selectedChain.accountKeyType.pubkeyType == .BTC_Nested_Segwit {
+                    btcTag.text = "Nested Segwit"
+                    btcTag.backgroundColor = .color06
+                    
+                } else if selectedChain.accountKeyType.pubkeyType == .BTC_Native_Segwit {
+                    btcTag.text = "Native Segwit"
+                    btcTag.backgroundColor = .colorNativeSegwit
+                }
+                btcTag.isHidden = false
+                
+            }
+            
             if (baseAccount.type == .withMnemonic) {
                 hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)
             } else {

@@ -73,7 +73,9 @@ class MajorClassVC: BaseVC {
         addressLabel.text = selectedChain.mainAddress
         
         onSetTabbarView()
-        onSetFabButton()
+        if (selectedChain is ChainSui) {
+            onSetFabButton()
+        }
         
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
         addressTap.cancelsTouchesInView = false
@@ -138,19 +140,20 @@ class MajorClassVC: BaseVC {
         let historyTabBar = UITabBarItem(title: "History", image: nil, tag: 3)
         let ecosystemTabBar = UITabBarItem(title: "Ecosystem", image: nil, tag: 4)
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 5)
+        
         tabbar.items.append(coinTabBar)
-        tabbar.items.append(nftTabBar)
-        tabbar.items.append(receiveTabBar)
-        tabbar.items.append(historyTabBar)
-        tabbar.items.append(ecosystemTabBar)
-        tabbar.items.append(aboutTabBar)
-//        if (BaseData.instance.showEvenReview()) { tabbar.items.append(nftTabBar) }
-//        tabbar.items.append(receiveTabBar)
-//        tabbar.items.append(historyTabBar)
-//        if (BaseData.instance.showEvenReview() && selectedChain.isEcosystem()) { tabbar.items.append(ecosystemTabBar) }
-//        if (!selectedChain.getChainListParam().isEmpty) {
-//            tabbar.items.append(aboutTabBar)
-//        }
+        if (selectedChain is ChainSui) {
+            if (BaseData.instance.showEvenReview()) { tabbar.items.append(nftTabBar) }
+            tabbar.items.append(receiveTabBar)
+            tabbar.items.append(historyTabBar)
+            if (BaseData.instance.showEvenReview()) { tabbar.items.append(ecosystemTabBar) }
+            tabbar.items.append(aboutTabBar)
+            
+        } else if  (selectedChain is ChainBitCoin84) {
+            tabbar.items.append(receiveTabBar)
+            tabbar.items.append(historyTabBar)
+            tabbar.items.append(aboutTabBar)
+        }
         
         tabbar.barTintColor = .clear
         tabbar.selectionIndicatorStrokeColor = .white

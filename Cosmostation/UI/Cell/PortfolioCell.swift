@@ -14,6 +14,7 @@ class PortfolioCell: UITableViewCell {
     @IBOutlet weak var rootView: CardViewCell!
     @IBOutlet weak var logoImg1: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var btcTag: RoundedPaddingLabel!
     @IBOutlet weak var oldTag: RoundedPaddingLabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
@@ -34,6 +35,7 @@ class PortfolioCell: UITableViewCell {
     override func prepareForReuse() {
         currencyLabel.text = ""
         valueLabel.text = ""
+        btcTag.isHidden = true
         oldTag.isHidden = true
         loadingLabel.isHidden = false
         reposeErrorLabel.isHidden = true
@@ -44,7 +46,24 @@ class PortfolioCell: UITableViewCell {
         logoImg1.image = UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name.uppercased()
         
-        oldTag.isHidden = chain.isDefault
+        if (chain is ChainBitCoin84) {
+            if chain.accountKeyType.pubkeyType == .BTC_Legacy {
+                btcTag.text = "Legacy"
+                btcTag.backgroundColor = .color06
+                
+            } else if chain.accountKeyType.pubkeyType == .BTC_Nested_Segwit {
+                btcTag.text = "Nested Segwit"
+                btcTag.backgroundColor = .color06
+                
+            } else if chain.accountKeyType.pubkeyType == .BTC_Native_Segwit {
+                btcTag.text = "Native Segwit"
+                btcTag.backgroundColor = .colorNativeSegwit
+            }
+            btcTag.isHidden = false
+            
+        } else {
+            oldTag.isHidden = chain.isDefault
+        }
         
         if (chain.fetchState == .Fail) {
             loadingLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)

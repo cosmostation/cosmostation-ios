@@ -45,6 +45,9 @@ extension UIColor {
     static var colorBg: UIColor {
         UIColor(named: "_colorBg")!
     }
+    static var colorNativeSegwit: UIColor {
+        UIColor(named: "_btcNativeSegwit")!
+    }
     
     public convenience init?(hex: String) {
         let r, g, b: CGFloat

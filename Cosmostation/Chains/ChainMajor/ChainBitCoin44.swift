@@ -1,5 +1,5 @@
 //
-//  ChainBitCoin49.swift
+//  ChainBitCoin44.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 8/20/24.
@@ -8,17 +8,17 @@
 
 import Foundation
 
-class ChainBitCoin49: BaseChain {
+class ChainBitCoin44: ChainBitCoin84 {
     
     override init() {
         super.init()
         
         name = "BitCoin"
-        tag = "bitcoin49"
+        tag = "bitcoin44"
         logo1 = "chainBitcoin"
         isDefault = false
         apiName = "bitcoin"
-        accountKeyType = AccountKeyType(.BTC_Nested_Segwit, "m/49'/0'/0'/0/X")
+        accountKeyType = AccountKeyType(.BTC_Legacy, "m/44'/0'/0'/0/X")
         
         coinSymbol = "BTC"
         coinGeckoId = "bitcoin"
@@ -30,9 +30,8 @@ class ChainBitCoin49: BaseChain {
     override func setInfoWithPrivateKey(_ priKey: Data) {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        mainAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        
-        print("ChainBitCoin49 ", mainAddress)
+        mainAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bech32PrefixPattern, pubKeyHash, scriptHash)
+//        print("ChainBitCoin44 ", mainAddress)
     }
     
 }

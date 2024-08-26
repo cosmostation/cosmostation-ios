@@ -19,8 +19,7 @@ class MajorHistoryVC: BaseVC {
     var refresher: UIRefreshControl!
     
     var selectedChain: BaseChain!
-    
-    var suiHistoryGroup = [SuiHistoryGroup]()
+    var historyGroup = [HistoryGroup]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +63,10 @@ class MajorHistoryVC: BaseVC {
         if (refresher.isRefreshing) { return }
         if let suiChain = selectedChain as? ChainSui {
             suiChain.fetchHistory()
+            
+        } else if let btcChain = selectedChain as? ChainBitCoin84 {
+            btcChain.fetchHistory()
+            
         }
     }
     
@@ -80,26 +83,54 @@ class MajorHistoryVC: BaseVC {
         refresher.endRefreshing()
         
         if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
-            suiHistoryGroup.removeAll()
+            historyGroup.removeAll()
             suiFetcher.suiHistory.forEach { history in
                 let date = WDP.dpDate(history["timestampMs"].intValue)
                 var matched = -1
-                for i in 0 ..< suiHistoryGroup.count {
-                    if (suiHistoryGroup[i].date == date) {
+                for i in 0 ..< historyGroup.count {
+                    if (historyGroup[i].date == date) {
                         matched = i
                     }
                 }
                 if (matched >= 0) {
-                    var updated = suiHistoryGroup[matched].values
+                    var updated = historyGroup[matched].values
                     updated.append(history)
-                    suiHistoryGroup[matched].values = updated
+                    historyGroup[matched].values = updated
                 } else {
-                    suiHistoryGroup.append(SuiHistoryGroup.init(date, [history]))
+                    historyGroup.append(HistoryGroup.init(date, [history]))
                 }
             }
             
             loadingView.isHidden = true
-            if (suiHistoryGroup.count <= 0) {
+            if (historyGroup.count <= 0) {
+                emptyDataView.isHidden = false
+            } else {
+                emptyDataView.isHidden = true
+                tableView.reloadData()
+            }
+            
+        } else if let btcFetcher = (selectedChain as? ChainBitCoin84)?.getBtcFetcher() {
+            historyGroup.removeAll()
+            btcFetcher.btcHistory.forEach { history in
+                let date = history["status"]["confirmed"] == false ? "Pending" : WDP.dpDate(history["status"]["block_time"].intValue * 1000)
+                var matched = -1
+                for i in 0 ..< historyGroup.count {
+                    if (historyGroup[i].date == date) {
+                        matched = i
+                    }
+                }
+                if (matched >= 0) {
+                    var updated = historyGroup[matched].values
+                    updated.append(history)
+                    historyGroup[matched].values = updated
+                } else {
+                    historyGroup.append(HistoryGroup.init(date, [history]))
+                }
+                
+            }
+            
+            loadingView.isHidden = true
+            if (historyGroup.count <= 0) {
                 emptyDataView.isHidden = false
             } else {
                 emptyDataView.isHidden = true
@@ -110,10 +141,14 @@ class MajorHistoryVC: BaseVC {
 }
 
 
+//else if let btcChain = selectedChain as? ChainBitCoin84 {
+
 extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if selectedChain is ChainSui {
-            return suiHistoryGroup.count
+            return historyGroup.count
+        } else if selectedChain is ChainBitCoin84 {
+            return historyGroup.count
         }
         return 0
     }
@@ -122,10 +157,18 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if selectedChain is ChainSui {
             let today = WDP.dpDate(Int(Date().timeIntervalSince1970) * 1000)
-            if (suiHistoryGroup[section].date == today) {
+            if (historyGroup[section].date == today) {
                 view.titleLabel.text = "Today"
             } else {
-                view.titleLabel.text = suiHistoryGroup[section].date
+                view.titleLabel.text = historyGroup[section].date
+            }
+            view.cntLabel.text = ""
+            
+        } else if selectedChain is ChainBitCoin84 {
+            if (historyGroup[section].date == "Pending") {
+                view.titleLabel.text = "Mempool"
+            } else {
+                view.titleLabel.text = historyGroup[section].date
             }
             view.cntLabel.text = ""
         }
@@ -138,7 +181,9 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if selectedChain is ChainSui {
-            return suiHistoryGroup[section].values.count
+            return historyGroup[section].values.count
+        } else if selectedChain is ChainBitCoin84 {
+            return historyGroup[section].values.count
         }
         return 0
     }
@@ -146,14 +191,20 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as! HistoryCell
         if let suiChain = selectedChain as? ChainSui {
-            cell.bindSuiHistory(suiChain, suiHistoryGroup[indexPath.section].values[indexPath.row])
+            cell.bindSuiHistory(suiChain, historyGroup[indexPath.section].values[indexPath.row])
+        } else if let btcChain = selectedChain as? ChainBitCoin84 {
+            cell.bindBtcHistory(btcChain, historyGroup[indexPath.section].values[indexPath.row])
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let suiChain = selectedChain as? ChainSui {
-            let hash = suiHistoryGroup[indexPath.section].values[indexPath.row]["digest"].stringValue
+            let hash = historyGroup[indexPath.section].values[indexPath.row]["digest"].stringValue
+            guard let url = selectedChain.getExplorerTx(hash) else { return }
+            self.onShowSafariWeb(url)
+        } else if let btcChain = selectedChain as? ChainBitCoin84 {
+            let hash = historyGroup[indexPath.section].values[indexPath.row]["txid"].stringValue
             guard let url = selectedChain.getExplorerTx(hash) else { return }
             self.onShowSafariWeb(url)
         }
@@ -185,7 +236,7 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-struct SuiHistoryGroup {
+struct HistoryGroup {
     var date : String!
     var values = [JSON]()
     

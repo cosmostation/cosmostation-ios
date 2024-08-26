@@ -865,7 +865,8 @@
 "str_bear" = "Bear";
 "str_select_price_color" = "Select price change color";
 "str_endpoint_reset_alert_title" = "Reset End-Point";
-"str_endpoint_reset_alert_msg" = "Would you like to reset all chains to their default End-Point?";
+"str_endpoint_reset_alert_question" = "(Recommended) Would you like to reset the End-Points for all chains to their default settings?";
+"str_endpoint_reset_alert_explanation" = "End-Points are servers that manage connections to the blockchain network, ensuring that data can be transmitted and received smoothly when the stable End-Point is used.";
 
 "clear_all" = "Clear All";
 "close" = "Close";
