@@ -832,7 +832,7 @@ extension SwapStartVC {
                 if let msDescription = msAsset.description {
                     tempInputAssets[index].description = msDescription
                 }
-                tempInputAssets[index].image = msAsset.assetImg().absoluteString
+                tempInputAssets[index].image = msAsset.assetImg()?.absoluteString
                 targetInputAssets.append(tempInputAssets[index])
             }
         }
@@ -882,7 +882,7 @@ extension SwapStartVC {
                 if let msDescription = msAsset.description {
                     tempOutputAssets[index].description = msDescription
                 }
-                tempOutputAssets[index].image = msAsset.assetImg().absoluteString
+                tempOutputAssets[index].image = msAsset.assetImg()?.absoluteString
                 targetOutputAssets.append(tempOutputAssets[index])
             }
         }

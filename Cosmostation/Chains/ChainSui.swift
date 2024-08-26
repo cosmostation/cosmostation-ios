@@ -120,7 +120,7 @@ class ChainSui: BaseChain  {
         return denom.suiCoinSymbol() ?? "UnKnown"
     }
     
-    override func assetImgUrl(_ denom: String) -> URL {
+    override func assetImgUrl(_ denom: String) -> URL? {
         if let suiFetcher = getSuiFetcher() {
             if let msAsset = BaseData.instance.getAsset(apiName, denom) {
                 return msAsset.assetImg()
@@ -128,7 +128,7 @@ class ChainSui: BaseChain  {
                 return  metaData.assetImg()
             }
         }
-        return URL(string: "")!
+        return nil
     }
     
     override func assetDecimal(_ denom: String) -> Int16 {

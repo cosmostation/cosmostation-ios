@@ -438,8 +438,8 @@ extension String {
 
 
 extension JSON {
-    func assetImg() -> URL {
-        return URL(string: self["iconUrl"].stringValue) ?? URL(string: "")!
+    func assetImg() -> URL? {
+        return URL(string: self["iconUrl"].stringValue)
     }
     
     func suiValidatorImg() -> URL? {

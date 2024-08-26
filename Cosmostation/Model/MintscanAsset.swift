@@ -34,8 +34,8 @@ public struct MintscanAsset: Codable {
     var port: String?
     var counter_party: MintscanAssetCounterParty?
     
-    func assetImg() -> URL {
-        return URL(string: ResourceBase + image!) ?? URL(string: "")!
+    func assetImg() -> URL? {
+        return URL(string: ResourceBase + image!)
     }
     
     func beforeChain(_ chainApiName: String) -> String? {
