@@ -269,6 +269,9 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         let suiSignRequestSheet = DappSuiSignRequestSheet(nibName: "DappSuiSignRequestSheet", bundle: nil)
         suiSignRequestSheet.method = method
         suiSignRequestSheet.requestToSign = request
+        if let transactionBlock = request["transactionBlockSerialized"].stringValue.data(using: .utf8) {
+            suiSignRequestSheet.displayToSign = JSON(transactionBlock)
+        }
         suiSignRequestSheet.messageId = messageId
         suiSignRequestSheet.selectedChain = targetChain
         suiSignRequestSheet.webSignDelegate = self
@@ -593,28 +596,41 @@ extension DappDetailVC: WKScriptMessageHandler {
                 injectionRequestApprove("mainnet", messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "sui_signTransactionBlock") || (method == "sui_signTransaction") {  // v1 || v2
-                let toSign = messageJSON["params"]
-                signAfterAction(params: toSign, messageId: bodyJSON["messageId"], completionHandler: { hex in
+                Task {
+                    let toSign = messageJSON["params"]
+                    guard let suiFetcher = (targetChain as? ChainSui)?.getSuiFetcher() else { return }
+                    guard let hex = try await suiFetcher.signAfterAction(params: toSign, messageId: bodyJSON["messageId"]) else {
+                        self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])
+                        return
+                    }
                     self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
-                })
-                
+                }
+
             } else if (method == "sui_signAndExecuteTransactionBlock") || (method == "sui_signAndExecuteTransaction") {  // v1 || v2
-                let toSign = messageJSON["params"]
-                signAfterAction(params: toSign, messageId: bodyJSON["messageId"], completionHandler: { hex in
+                Task {
+                    let toSign = messageJSON["params"]
+                    guard let suiFetcher = (targetChain as? ChainSui)?.getSuiFetcher() else { return }
+                    guard let hex = try await suiFetcher.signAfterAction(params: toSign, messageId: bodyJSON["messageId"]) else {
+                        self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])
+                        return
+                    }
                     self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
-                })
+                }
                 
             } else if (method == "sui_signMessage") || (method == "sui_signPersonalMessage") {  // v1 || v2
-                let toSign = messageJSON["params"]
-                signAfterAction(params: toSign, messageId: bodyJSON["messageId"], completionHandler: { hex in
+                Task {
+                    let toSign = messageJSON["params"]
+                    guard let suiFetcher = (targetChain as? ChainSui)?.getSuiFetcher() else { return }
                     guard toSign["accountAddress"].stringValue.lowercased() == self.targetChain.mainAddress.lowercased() else {
                         self.injectionRequestReject("Wrong address", messageJSON, bodyJSON["messageId"])
                         return
                     }
-                    
+                    guard let hex = try await suiFetcher.signAfterAction(params: toSign, messageId: bodyJSON["messageId"]) else {
+                        self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])
+                        return
+                    }
                     self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
-                })
-
+                }
             }
             
             else {
@@ -647,30 +663,6 @@ extension DappDetailVC: WKScriptMessageHandler {
         self.webView.evaluateJavaScript("window.postMessage(\(try! retVal.json()));")
     }
     
-    private func signAfterAction(params:JSON, messageId: JSON, completionHandler: @escaping (_ hex: String) -> ()) {
-        guard let suiFetcher = (targetChain as? ChainSui)?.getSuiFetcher() else { return }
-        AF.request("https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildSuiTransaction",
-                   method: .post,
-                   parameters: ["rpc": suiFetcher.getSuiRpc(),
-                                "txBlock": params["transactionBlockSerialized"].stringValue,
-                                "address": params["transactionBlockSerialized"]["sender"].stringValue],
-                   encoder: JSONParameterEncoder.default).response { response in
-            switch response.result {
-            case .success(let value):
-                if let value = value, let hex = String(data: value, encoding: .utf8) {
-                    
-                    print("HEX", hex)
-                    completionHandler(hex)
-                } else {
-                    self.injectionRequestReject("Cancel", params, messageId)
-                }
-            case .failure:
-                self.injectionRequestReject("Cancel", params, messageId)
-            }
-        }
-
-
-    }
 
 }
 

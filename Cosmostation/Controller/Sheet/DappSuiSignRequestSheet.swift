@@ -41,11 +41,10 @@ class DappSuiSignRequestSheet: BaseVC {
     
     var method: String!
     var requestToSign: JSON?
+    var displayToSign: JSON?
     var messageId: JSON?
     var selectedChain: BaseChain!
     var bytes: String!
-    
-    var displayToSign: JSON?
     
     var suiFeeBudget = NSDecimalNumber.zero
     
@@ -59,8 +58,6 @@ class DappSuiSignRequestSheet: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         confirmBtn.isEnabled = false
-        
-            
             
         Task {
             if method == "sui_signAndExecuteTransaction" || method == "sui_signAndExecuteTransactionBlock" || method == "sui_signTransaction" || method == "sui_signTransactionBlock" {
@@ -72,7 +69,7 @@ class DappSuiSignRequestSheet: BaseVC {
             }
         }
     }
-
+    
     override func setLocalizedString() {
         if (method == "sui_signMessage") || (method == "sui_signPersonalMessage") {
             requestTitle.text = NSLocalizedString("str_permit_request", comment: "")
@@ -82,11 +79,6 @@ class DappSuiSignRequestSheet: BaseVC {
         warnMsgLabel.text = NSLocalizedString("str_dapp_warn_msg", comment: "")
         safeMsgTitle.text = NSLocalizedString("str_affect_safe", comment: "")
         dangerMsgTitle.text = NSLocalizedString("str_affect_danger", comment: "")
-    }
-    
-    func dismissWithFail() {
-        webSignDelegate?.onCancleInjection("Cancel", requestToSign!, messageId!)
-        dismiss(animated: true)
     }
     
     func onInitView() {
@@ -99,7 +91,6 @@ class DappSuiSignRequestSheet: BaseVC {
         confirmBtn.isEnabled = true
         
         if (method == "sui_signMessage") || (method == "sui_signPersonalMessage") {
-            
             let data = Data(base64Encoded: requestToSign!["message"].stringValue)
             if let decode = String(data: data!, encoding: .utf8) {
                 toSignTextView.text = decode
@@ -109,20 +100,15 @@ class DappSuiSignRequestSheet: BaseVC {
         } else {
             dangerMsgTitle.isHidden = false
             feeCardView.isHidden = false
-            
             toSignTextView.text = "\(displayToSign!)"
-            
             onInitFeeView()
         }
-        
-        
     }
 
     func onInitFeeView() {
         feeDenomLabel.text = selectedChain.coinSymbol
         onUpdateFeeView()
     }
-    
     
     func onUpdateFeeView() {
         let feePrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
@@ -136,9 +122,7 @@ class DappSuiSignRequestSheet: BaseVC {
         guard let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() else { return }
         
         do {
-            print("byte", bytes)
             if let response = try await suiFetcher.suiDryrun(bytes) {
-                
                 suiFeeBudget = {
                     let gasUsed = response["result"]["effects"]["gasUsed"]
                     let storageCost = gasUsed["storageCost"].intValue - gasUsed["storageRebate"].intValue
@@ -147,29 +131,22 @@ class DappSuiSignRequestSheet: BaseVC {
                 }()
                 
                 onUpdateFeeView()
-                print("RESPONSE", response)
+                
                 let gasData = response["result"]["input"]["gasData"]
-                print("GasData", gasData)
-                
-                
-                if let data = requestToSign?["transactionBlockSerialized"].stringValue.data(using: .utf8),
-                   let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []),
-                   let prettyData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) {
-                    
-                    displayToSign = JSON(prettyData)
-                }
-
-                //TODO: display tosign 만들기
                 displayToSign!["gasData"] = gasData
-                
-                print("11111", displayToSign)
             }
+            
         } catch {
             print("fetching error: \(error)")
             DispatchQueue.main.async {
                 self.dismissWithFail()
             }
         }
+    }
+    
+    func dismissWithFail() {
+        webSignDelegate?.onCancleInjection("Cancel", requestToSign!, messageId!)
+        dismiss(animated: true)
     }
     
     @IBAction func onClickCancel(_ sender: Any) {
@@ -198,14 +175,12 @@ class DappSuiSignRequestSheet: BaseVC {
             let data: JSON = ["messageBytes": messageBytes, "signature": Signer.suiSignatures(selectedChain, bytes)]
             webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
             
-            
         } else if (method == "sui_signPersonalMessage") {
             guard let messageBytes = requestToSign?["message"] else { return }
             let data: JSON = ["bytes": messageBytes, "signature": Signer.suiSignatures(selectedChain, bytes)]
             webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
             
         }
-        
         dismiss(animated: true)
     }
 }

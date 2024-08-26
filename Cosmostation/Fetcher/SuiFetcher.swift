@@ -416,6 +416,17 @@ extension SuiFetcher {
             return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
         }
     }
+    
+    func signAfterAction(params:JSON, messageId: JSON) async throws -> String? {
+        let url = "https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildSuiTransaction"
+        let parameters = [
+            "rpc": getSuiRpc(),
+            "txBlock": params["transactionBlockSerialized"].stringValue,
+            "address": params["transactionBlockSerialized"]["sender"].string ?? chain.mainAddress
+        ]
+        guard let value = await AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingData().response.value else { return nil }
+        return String(data: value, encoding: .utf8)
+    }
 }
 
 
