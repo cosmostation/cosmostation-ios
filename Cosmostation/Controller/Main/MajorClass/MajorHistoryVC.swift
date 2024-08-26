@@ -60,7 +60,6 @@ class MajorHistoryVC: BaseVC {
     }
     
     @objc func onRequestHistory() {
-        if (refresher.isRefreshing) { return }
         if let suiChain = selectedChain as? ChainSui {
             suiChain.fetchHistory()
             
