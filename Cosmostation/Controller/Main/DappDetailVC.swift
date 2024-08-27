@@ -65,7 +65,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
                 BaseData.instance.mintscanChainParams = try? await BaseNetWork().fetchChainParams()
             }
             wcV2Disconnect { result in
-                print("init wcV2Disconnect \(result)")
+//                print("init wcV2Disconnect \(result)")
             }
             
             allChains = await baseAccount.initAllKeys().filter({ $0.isTestnet == false && $0.isDefault })
@@ -84,7 +84,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         }
         
         onInitWeb3 { success in
-            print("onInitWeb3 ", success)
+//            print("onInitWeb3 ", success)
         }
         
         if (BaseData.instance.getInjectionWarn()) {
@@ -310,7 +310,7 @@ extension DappDetailVC: WKScriptMessageHandler {
             let bodyJSON = JSON(parseJSON: message.body as? String ?? "")
             let messageJSON = bodyJSON["message"]
             let method = messageJSON["method"].stringValue
-            print("DAPP REQUEST method \(method)")
+//            print("DAPP REQUEST method \(method)")
             
             //Handle Cosmos Request
             if (method == "cos_supportedChainIds") {
@@ -430,7 +430,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                     injectionRequestApprove(JSON.null, messageJSON, bodyJSON["messageId"])
                     emitToWeb(requestChain.chainIdEvm!)
                     onInitWeb3 { success in
-                        print("wallet_switchEthereumChain reInitWeb3 ", success)
+//                        print("wallet_switchEthereumChain reInitWeb3 ", success)
                     }
                 } else {
                     let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
