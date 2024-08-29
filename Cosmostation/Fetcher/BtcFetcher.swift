@@ -93,7 +93,7 @@ class BtcFetcher {
     func mempoolUrl() -> String {
         if (chain.isTestnet) {
 //            return "https://mempool.space/signet"
-            return "https://mempool.space/testnet"
+            return "https://mempool.space/testnet4"
         }
         return "https://mempool.space"
     }
@@ -105,39 +105,39 @@ class BtcFetcher {
 extension BtcFetcher {
     
     func fetchBalance() async throws -> JSON? {
-        let url = mempoolUrl() + "/apiaddress/" + chain.mainAddress
+        let url = mempoolUrl() + "/api/address/" + chain.mainAddress
         return try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchUtxos() async throws -> JSON? {
-        let url = mempoolUrl() + "/apiaddress/" + chain.mainAddress + "/utxo"
+        let url = mempoolUrl() + "/api/address/" + chain.mainAddress + "/utxo"
         return try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchTxHistory() async throws -> [JSON]? {
-        let url = mempoolUrl() + "/apiaddress/" + chain.mainAddress + "/txs"
+        let url = mempoolUrl() + "/api/address/" + chain.mainAddress + "/txs"
         return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
     }
     
     func fetchMempool() async throws -> [JSON]? {
-        let url = mempoolUrl() + "/apiaddress/" + chain.mainAddress + "/txs/mempool"
+        let url = mempoolUrl() + "/api/address/" + chain.mainAddress + "/txs/mempool"
         return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
     }
     
     func fetchTxChain() async throws -> [JSON]? {
-        let url = mempoolUrl() + "/apiaddress/" + chain.mainAddress + "/txs/chain"
+        let url = mempoolUrl() + "/api/address/" + chain.mainAddress + "/txs/chain"
         return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
     }
     
     
     
     func fetchBlockHeight() async throws -> UInt64? {
-        let url = mempoolUrl() + "/apiblocks/tip/height"
+        let url = mempoolUrl() + "/api/blocks/tip/height"
         return try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value.uInt64Value
     }
     
     func fetchFee() async throws -> JSON? {
-        let url = mempoolUrl() + "/apiv1/fees/recommended"
+        let url = mempoolUrl() + "/api/v1/fees/recommended"
         return try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
 }

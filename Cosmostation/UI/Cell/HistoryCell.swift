@@ -210,8 +210,6 @@ class HistoryCell: UITableViewCell {
         outputs.forEach { output in
             outputAmount = outputAmount.adding(NSDecimalNumber(value: output["value"].uInt64Value))
         }
-        print("inputAmounts ", inputAmounts)
-        print("outputAmount ", outputAmount)
         
         if (inputs.count > 0) {
             title = NSLocalizedString("tx_send", comment: "")
