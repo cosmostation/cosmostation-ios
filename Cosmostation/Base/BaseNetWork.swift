@@ -84,6 +84,8 @@ class BaseNetWork {
     static func getAccountHistoryUrl(_ chain: BaseChain, _ address: String) -> String {
         if (chain.tag.starts(with: "okt")) {
             return MINTSCAN_API_URL + "v10/utils/proxy/okc-transaction-list?device=IOS&chainShortName=okc&address=" + address + "&limit=50"
+        } else if (chain.supportEvm) {
+            return MINTSCAN_API_URL + "v10/" + chain.apiName + "/proxy/okx/account/" + address + "/txs"
         } else {
             return MINTSCAN_API_URL + "v10/" + chain.apiName + "/account/" + address + "/txs"
         }
