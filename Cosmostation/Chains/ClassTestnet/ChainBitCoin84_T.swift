@@ -35,6 +35,5 @@ class ChainBitCoin84_T: ChainBitCoin84 {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         mainAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bech32PrefixPattern, pubKeyHash, scriptHash)
-//        print("ChainBitCoin84_T ", mainAddress)
     }
 }
