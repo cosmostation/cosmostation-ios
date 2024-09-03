@@ -94,11 +94,11 @@ class CosmosProposalsVC: BaseVC {
     }
     
     func onFetchVoteInfos() {
-        votingPeriods.removeAll()
-        etcPeriods.removeAll()
-        filteredVotingPeriods.removeAll()
-        filteredEtcPeriods.removeAll()
-        myVotes.removeAll()
+        var newVotingPeriods = Array<MintscanProposal>()
+        var newEtcPeriods = Array<MintscanProposal>()
+        var newFilteredVotingPeriods = Array<MintscanProposal>()
+        var newFilteredEtcPeriods = Array<MintscanProposal>()
+        var newMyVotes = Array<MintscanMyVotes>()
         
         Task {
             if let proposals = try? await fetchProposals(selectedChain),
@@ -106,22 +106,28 @@ class CosmosProposalsVC: BaseVC {
                 proposals.forEach { proposal in
                     let msProposal = MintscanProposal(proposal)
                     if (msProposal.isVotingPeriod()) {
-                        votingPeriods.append(msProposal)
+                        newVotingPeriods.append(msProposal)
                         if (!msProposal.isScam()) {
-                            filteredVotingPeriods.append(msProposal)
+                            newFilteredVotingPeriods.append(msProposal)
                         }
                         
                     } else {
-                        etcPeriods.append(msProposal)
+                        newEtcPeriods.append(msProposal)
                         if (!msProposal.isScam()) {
-                            filteredEtcPeriods.append(msProposal)
+                            newFilteredEtcPeriods.append(msProposal)
                         }
                     }
                 }
                 votes["votes"].arrayValue.forEach { vote in
-                    myVotes.append(MintscanMyVotes(vote))
+                    newMyVotes.append(MintscanMyVotes(vote))
                 }
             }
+            
+            votingPeriods = newVotingPeriods
+            etcPeriods = newEtcPeriods
+            filteredVotingPeriods = newFilteredVotingPeriods
+            filteredEtcPeriods = newFilteredEtcPeriods
+            myVotes = newMyVotes
             
             DispatchQueue.main.async {
                 self.onUpdateView()
