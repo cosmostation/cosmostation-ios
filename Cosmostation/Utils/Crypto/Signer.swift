@@ -365,21 +365,36 @@ class Signer {
 
     
     
-    static func setFee(_ posiion: Int, _ baseFee: Cosmos_Tx_V1beta1_Fee) -> Cosmos_Tx_V1beta1_Fee {
+    static func setFee(_ posiion: Int, _ baseFee: Cosmos_Tx_V1beta1_Fee, _ isOsmosis: Bool = false) -> Cosmos_Tx_V1beta1_Fee {
         let feeDenom = baseFee.amount[0].denom
         let feeAmount = baseFee.amount[0].getAmount()
         
         var result = Cosmos_Tx_V1beta1_Fee()
         result.gasLimit = baseFee.gasLimit
-        if (posiion == 0) {
-            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount)]
-        } else if (posiion == 1) {
-            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "1.2"), withBehavior: handler0Down).stringValue)]
-        } else if (posiion == 2) {
-            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "1.5"), withBehavior: handler0Down).stringValue)]
-        } else if (posiion == 3) {
-            result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "2"), withBehavior: handler0Down).stringValue)]
+        
+        if isOsmosis {
+            if (posiion == 0) {
+                result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount)]
+            } else if (posiion == 1) {
+                result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "1.05"), withBehavior: handler0Down).stringValue)]
+            } else if (posiion == 2) {
+                result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "2"), withBehavior: handler0Down).stringValue)]
+            } else if (posiion == 3) {
+                result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "3"), withBehavior: handler0Down).stringValue)]
+            }
+
+        } else {
+            if (posiion == 0) {
+                result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount)]
+            } else if (posiion == 1) {
+                result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "1.2"), withBehavior: handler0Down).stringValue)]
+            } else if (posiion == 2) {
+                result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "1.5"), withBehavior: handler0Down).stringValue)]
+            } else if (posiion == 3) {
+                result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "2"), withBehavior: handler0Down).stringValue)]
+            }
         }
+        
         return result
     }
     

@@ -185,6 +185,22 @@ class NftTransfer: BaseVC {
                 cosmosTxFee.gasLimit = gasAmount.uint64Value
                 cosmosTxFee.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount)]
                 
+            } else if let osmosisFetcher = fromCosmosFetcher as? OsmosisFetcher {
+                feeSegments.removeAllSegments()
+                feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
+                feeSegments.insertSegment(withTitle: "Fast", at: 1, animated: false)
+                feeSegments.insertSegment(withTitle: "Faster", at: 2, animated: false)
+                feeSegments.insertSegment(withTitle: "Instant", at: 3, animated: false)
+                feeSegments.selectedSegmentIndex = selectedFeePosition
+                
+                if let baseFee = osmosisFetcher.osmosisBaseFee {
+                    let gasAmount: NSDecimalNumber = fromChain.getFeeBaseGasAmount()
+                    let feeDenom = baseFee.denom
+                    let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
+                    cosmosTxFee.gasLimit = gasAmount.uint64Value
+                    cosmosTxFee.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount)]
+                }
+
             } else {
                 cosmosFeeInfos = fromChain.getFeeInfos()
                 feeSegments.removeAllSegments()
@@ -272,6 +288,15 @@ class NftTransfer: BaseVC {
                 cosmosTxFee.amount[0].amount = feeAmount.stringValue
                 cosmosTxFee = Signer.setFee(selectedFeePosition, cosmosTxFee)
             }
+            
+        } else if let osmosisFetcher = fromCosmosFetcher as? OsmosisFetcher {
+            if let baseFee = osmosisFetcher.osmosisBaseFee {
+                let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
+                let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
+                cosmosTxFee.amount[0].amount = feeAmount.stringValue
+                cosmosTxFee = Signer.setFee(selectedFeePosition, cosmosTxFee, true)
+            }
+
         } else {
             cosmosTxFee = fromChain.getUserSelectedFee(selectedFeePosition, cosmosTxFee.amount[0].denom)
         }
@@ -286,6 +311,11 @@ class NftTransfer: BaseVC {
         if (fromCosmosFetcher.cosmosBaseFees.count > 0) {
             baseSheet.baseFeesDatas = fromCosmosFetcher.cosmosBaseFees
             baseSheet.sheetType = .SelectBaseFeeDenom
+            
+        } else if let osmosisFetcher = fromCosmosFetcher as? OsmosisFetcher {
+            baseSheet.baseFeesDatas = [Cosmos_Base_V1beta1_DecCoin(osmosisFetcher.osmosisBaseFee!.denom, NSDecimalNumber(string: osmosisFetcher.osmosisBaseFee?.amount))]
+            baseSheet.sheetType = .SelectBaseFeeDenom
+
         } else {
             baseSheet.feeDatas = cosmosFeeInfos[selectedFeePosition].FeeDatas
             baseSheet.sheetType = .SelectFeeDenom
@@ -346,6 +376,14 @@ class NftTransfer: BaseVC {
                     let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                     cosmosTxFee.amount[0].amount = feeAmount.stringValue
                     cosmosTxFee = Signer.setFee(selectedFeePosition, cosmosTxFee)
+                }
+                
+            } else if let osmosisFetcher = fromCosmosFetcher as? OsmosisFetcher {
+                if let baseFee = osmosisFetcher.osmosisBaseFee {
+                    let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
+                    let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
+                    cosmosTxFee.amount[0].amount = feeAmount.stringValue
+                    cosmosTxFee = Signer.setFee(selectedFeePosition, cosmosTxFee, true)
                 }
                 
             } else {
@@ -514,7 +552,12 @@ extension NftTransfer: BaseSheetDelegate, SendAddressDelegate, MemoDelegate, Pin
             }
         } else if (sheetType == .SelectBaseFeeDenom) {
             if let index = result["index"] as? Int {
-               let selectedDenom = fromCosmosFetcher.cosmosBaseFees[index].denom
+                var selectedDenom = ""
+                if let osmosisFetcher = fromCosmosFetcher as? OsmosisFetcher {
+                    selectedDenom = osmosisFetcher.osmosisBaseFee!.denom
+                } else {
+                    selectedDenom = fromCosmosFetcher.cosmosBaseFees[index].denom
+                }
                 cosmosTxFee.amount[0].denom = selectedDenom
                 onUpdateFeeView()
                 onSimul()

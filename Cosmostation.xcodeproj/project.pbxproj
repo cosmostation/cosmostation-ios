@@ -1577,6 +1577,15 @@
 		79BF33302C50D0C400515D78 /* SearchBarWithTopPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BF332E2C50D0C300515D78 /* SearchBarWithTopPadding.swift */; };
 		79EF66802C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79EF66812C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
+		79F316FB2C8801D3000CB2F8 /* osmosis_txfees_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F316F22C8801D2000CB2F8 /* osmosis_txfees_v1beta1_tx.pb.swift */; };
+		79F316FC2C8801D3000CB2F8 /* osmosis_txfees_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F316F32C8801D2000CB2F8 /* osmosis_txfees_v1beta1_query.grpc.swift */; };
+		79F316FD2C8801D3000CB2F8 /* osmosis_txfees_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F316F42C8801D2000CB2F8 /* osmosis_txfees_v1beta1_params.pb.swift */; };
+		79F316FF2C8801D3000CB2F8 /* osmosis_txfees_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F316F62C8801D2000CB2F8 /* osmosis_txfees_v1beta1_genesis.pb.swift */; };
+		79F317002C8801D3000CB2F8 /* osmosis_txfees_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F316F72C8801D2000CB2F8 /* osmosis_txfees_v1beta1_query.pb.swift */; };
+		79F317012C8801D3000CB2F8 /* osmosis_txfees_v1beta1_feetoken.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F316F82C8801D3000CB2F8 /* osmosis_txfees_v1beta1_feetoken.pb.swift */; };
+		79F317022C8801D3000CB2F8 /* osmosis_txfees_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F316F92C8801D3000CB2F8 /* osmosis_txfees_v1beta1_tx.grpc.swift */; };
+		79F317032C8801D3000CB2F8 /* osmosis_txfees_v1beta1_gov.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F316FA2C8801D3000CB2F8 /* osmosis_txfees_v1beta1_gov.pb.swift */; };
+		79F317052C880200000CB2F8 /* OsmosisFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F317042C880200000CB2F8 /* OsmosisFetcher.swift */; };
 		79FCA3682C3E5B31001C17D0 /* RoundedPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */; };
 		79FCA3692C3E5B31001C17D0 /* RoundedPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */; };
 		79FCA3B82C3F9E92001C17D0 /* artela_types_v1_web3.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FCA3A52C3F9E90001C17D0 /* artela_types_v1_web3.pb.swift */; };
@@ -2879,6 +2888,15 @@
 		796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuiStakingInfoSheet.xib; sourceTree = "<group>"; };
 		79BF332E2C50D0C300515D78 /* SearchBarWithTopPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarWithTopPadding.swift; sourceTree = "<group>"; };
 		79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgRandomButton.swift; sourceTree = "<group>"; };
+		79F316F22C8801D2000CB2F8 /* osmosis_txfees_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
+		79F316F32C8801D2000CB2F8 /* osmosis_txfees_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		79F316F42C8801D2000CB2F8 /* osmosis_txfees_v1beta1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_params.pb.swift; sourceTree = "<group>"; };
+		79F316F62C8801D2000CB2F8 /* osmosis_txfees_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		79F316F72C8801D2000CB2F8 /* osmosis_txfees_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		79F316F82C8801D3000CB2F8 /* osmosis_txfees_v1beta1_feetoken.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_feetoken.pb.swift; sourceTree = "<group>"; };
+		79F316F92C8801D3000CB2F8 /* osmosis_txfees_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
+		79F316FA2C8801D3000CB2F8 /* osmosis_txfees_v1beta1_gov.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_gov.pb.swift; sourceTree = "<group>"; };
+		79F317042C880200000CB2F8 /* OsmosisFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OsmosisFetcher.swift; sourceTree = "<group>"; };
 		79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedPaddingLabel.swift; sourceTree = "<group>"; };
 		79FCA3A52C3F9E90001C17D0 /* artela_types_v1_web3.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = artela_types_v1_web3.pb.swift; sourceTree = "<group>"; };
 		79FCA3A62C3F9E90001C17D0 /* artela_crypto_v1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = artela_crypto_v1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
@@ -3353,6 +3371,7 @@
 				045032222C1EE85900235F6A /* OktFetcher.swift */,
 				042D58572C5B5C46003DBDE0 /* SuiFetcher.swift */,
 				04A420F82C77409400C0E1A2 /* BtcFetcher.swift */,
+				79F317042C880200000CB2F8 /* OsmosisFetcher.swift */,
 			);
 			path = Fetcher;
 			sourceTree = "<group>";
@@ -3937,6 +3956,7 @@
 		282121BA25FDE71C0016ABFE /* ProtoBuff */ = {
 			isa = PBXGroup;
 			children = (
+				79F316F12C880167000CB2F8 /* Osmosis */,
 				15C4B8AB2C59663C0084B0A3 /* Stride */,
 				04D7852D2C326CA4009D1A94 /* Feemarket */,
 				04C817C22BA98FF0006B800A /* Gaia */,
@@ -3962,6 +3982,21 @@
 				B033DE716D0CD3ABABAD6866 /* Pods-CosmostationDev.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		79F316F12C880167000CB2F8 /* Osmosis */ = {
+			isa = PBXGroup;
+			children = (
+				79F316F82C8801D3000CB2F8 /* osmosis_txfees_v1beta1_feetoken.pb.swift */,
+				79F316F62C8801D2000CB2F8 /* osmosis_txfees_v1beta1_genesis.pb.swift */,
+				79F316FA2C8801D3000CB2F8 /* osmosis_txfees_v1beta1_gov.pb.swift */,
+				79F316F42C8801D2000CB2F8 /* osmosis_txfees_v1beta1_params.pb.swift */,
+				79F316F32C8801D2000CB2F8 /* osmosis_txfees_v1beta1_query.grpc.swift */,
+				79F316F72C8801D2000CB2F8 /* osmosis_txfees_v1beta1_query.pb.swift */,
+				79F316F92C8801D3000CB2F8 /* osmosis_txfees_v1beta1_tx.grpc.swift */,
+				79F316F22C8801D2000CB2F8 /* osmosis_txfees_v1beta1_tx.pb.swift */,
+			);
+			path = Osmosis;
 			sourceTree = "<group>";
 		};
 		79FCA3A42C3F9E49001C17D0 /* Artela */ = {
@@ -6234,6 +6269,7 @@
 				E122DC542A8A4712006D1E7B /* tendermint_types_evidence.pb.swift in Sources */,
 				04A68C2F2AC13A560041FA13 /* CosmosProposalsVC.swift in Sources */,
 				04B7898B2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift in Sources */,
+				79F317032C8801D3000CB2F8 /* osmosis_txfees_v1beta1_gov.pb.swift in Sources */,
 				04C8168E2BA98D74006B800A /* cosmos_tx_config_v1_config.pb.swift in Sources */,
 				04FA74582A9D97A0001A2830 /* PincodeAlphabetVC.swift in Sources */,
 				047843E32AC991B300462F1C /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift in Sources */,
@@ -6406,6 +6442,7 @@
 				0400EF092ADBF03B007BA97F /* kava_hard_v1beta1_tx.pb.swift in Sources */,
 				04C816782BA98D74006B800A /* cosmos_vesting_module_v1_module.pb.swift in Sources */,
 				E10B1DBE2C2159040039283B /* KavaClaimIncentives.swift in Sources */,
+				79F316FF2C8801D3000CB2F8 /* osmosis_txfees_v1beta1_genesis.pb.swift in Sources */,
 				046BF1C02B0F259C00BC1FC8 /* OktValidatorCell.swift in Sources */,
 				04C816662BA98D74006B800A /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */,
 				046EA8B52AD04A2600A2FCE7 /* desmos_profiles_v3_models_chain_links.pb.swift in Sources */,
@@ -6465,10 +6502,12 @@
 				04B789452ACAC9B100E9BE88 /* ibc_applications_fee_v1_metadata.pb.swift in Sources */,
 				E10B1D972C2156430039283B /* KavaSwapListMyCell.swift in Sources */,
 				E10B1DE22C215C120039283B /* NeutronDaoVC.swift in Sources */,
+				79F316FB2C8801D3000CB2F8 /* osmosis_txfees_v1beta1_tx.pb.swift in Sources */,
 				04527DB92A937CA2005F72D7 /* AssetCell.swift in Sources */,
 				0402B7EC2ACC248400824B3F /* CosmosRewardAddress.swift in Sources */,
 				04A420FF2C77618000C0E1A2 /* ChainBitCoin44_T.swift in Sources */,
 				E16200322AF0CFFD0008F397 /* SelectEndpointCell.swift in Sources */,
+				79F316FC2C8801D3000CB2F8 /* osmosis_txfees_v1beta1_query.grpc.swift in Sources */,
 				0400EF052ADBF03B007BA97F /* kava_hard_v1beta1_hard.pb.swift in Sources */,
 				E10B1D9F2C2156430039283B /* KavaEarnListVC.swift in Sources */,
 				04C817502BA98D75006B800A /* cosmos_bank_v1beta1_query.pb.swift in Sources */,
@@ -6688,6 +6727,7 @@
 				04965B3A2C3798EA00403605 /* ChainArtelaEVM.swift in Sources */,
 				049714FD2C0EB73B008C45A0 /* PopupReceiveCell.swift in Sources */,
 				045032A02C1EEFCA00235F6A /* ChainFetchAi60Old.swift in Sources */,
+				79F317022C8801D3000CB2F8 /* osmosis_txfees_v1beta1_tx.grpc.swift in Sources */,
 				0438A8062AE135B1006FA213 /* kava_cdp_v1beta1_query.grpc.swift in Sources */,
 				04C816D22BA98D75006B800A /* cosmos_gov_v1_genesis.pb.swift in Sources */,
 				E10B1DA72C2156430039283B /* KavaMintListVC.swift in Sources */,
@@ -6726,6 +6766,7 @@
 				0478431D2AC9918700462F1C /* ethermint_types_v1_indexer.pb.swift in Sources */,
 				E15F2CFE2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift in Sources */,
 				04CD24722AD2E99A00497EF5 /* kava_bep3_v1beta1_bep3.pb.swift in Sources */,
+				79F317012C8801D3000CB2F8 /* osmosis_txfees_v1beta1_feetoken.pb.swift in Sources */,
 				04C816DA2BA98D75006B800A /* cosmos_base_reflection_v1beta1_reflection.grpc.swift in Sources */,
 				04C63D1C2B839D3900D4A366 /* TxSendAmountSheet.swift in Sources */,
 				E10B1D7B2C2156430039283B /* KavaEarnListMyCell.swift in Sources */,
@@ -6810,6 +6851,7 @@
 				04D785502C328DB1009D1A94 /* feemarket_feemarket_v1_tx.pb.swift in Sources */,
 				04B789572ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift in Sources */,
 				E159809F2A83A9D70032892B /* SlideOutTransition.swift in Sources */,
+				79F317052C880200000CB2F8 /* OsmosisFetcher.swift in Sources */,
 				04C816F82BA98D75006B800A /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
 				045032AC2C1EEFCA00235F6A /* ChainIxo.swift in Sources */,
 				04C8174C2BA98D75006B800A /* cosmos_gov_v1_gov.pb.swift in Sources */,
@@ -6855,6 +6897,7 @@
 				04FF6B982B21EB74009DCA89 /* RewardDetailCell.swift in Sources */,
 				044222482B96F2B60063F031 /* SelectDisplayTokenListSheet.swift in Sources */,
 				E1DBD3E42B6220C60058E0DC /* EvmAssetVC.swift in Sources */,
+				79F317002C8801D3000CB2F8 /* osmosis_txfees_v1beta1_query.pb.swift in Sources */,
 				047843932AC991B300462F1C /* injective_exchange_v1beta1_query.pb.swift in Sources */,
 				045032BF2C1EFCE700235F6A /* ChainLum118.swift in Sources */,
 				04C817AA2BA98D75006B800A /* cosmos_slashing_v1beta1_slashing.pb.swift in Sources */,
@@ -6865,6 +6908,7 @@
 				E13FC5492B26C79A0082C66E /* kava_earn_v1beta1_genesis.pb.swift in Sources */,
 				04C817142BA98D75006B800A /* cosmos_auth_v1beta1_query.grpc.swift in Sources */,
 				E1A48DDE2BFEF5AE0084D770 /* CosmosEcosystemVC.swift in Sources */,
+				79F316FD2C8801D3000CB2F8 /* osmosis_txfees_v1beta1_params.pb.swift in Sources */,
 				04CD24782AD2E99A00497EF5 /* kava_bep3_v1beta1_tx.grpc.swift in Sources */,
 				0400EEC12ADBB522007BA97F /* kava_incentive_v1beta1_tx.pb.swift in Sources */,
 				045032492C1EEA9600235F6A /* ChainHumansEVM.swift in Sources */,
