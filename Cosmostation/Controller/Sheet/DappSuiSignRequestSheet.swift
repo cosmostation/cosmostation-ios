@@ -123,6 +123,14 @@ class DappSuiSignRequestSheet: BaseVC {
         
         do {
             if let response = try await suiFetcher.suiDryrun(bytes) {
+                if let error = response["error"]["message"].string {
+                    print("fetching error: \(error)")
+                    DispatchQueue.main.async {
+                        self.dismissWithFail()
+                    }
+                    return
+                }
+                
                 suiFeeBudget = {
                     let gasUsed = response["result"]["effects"]["gasUsed"]
                     let storageCost = gasUsed["storageCost"].intValue - gasUsed["storageRebate"].intValue
