@@ -7,7 +7,6 @@
 //
 
 import Foundation
-//import SwiftProtobuf
 import Alamofire
 import SwiftyJSON
 
@@ -37,23 +36,8 @@ class OsmosisFetcher: CosmosFetcher {
     
     override func updateBaseFee() async {
         cosmosBaseFees.removeAll()
-
-        if (getEndpointType() == .UseGRPC) {
-            let req = Osmosis_Txfees_V1beta1_QueryEipBaseFeeRequest()
-            let denomReq = Osmosis_Txfees_V1beta1_QueryBaseDenomRequest()
-            if let baseFee = try? await Osmosis_Txfees_V1beta1_QueryNIOClient(channel: getClient()).getEipBaseFee(req, callOptions: getCallOptions()).response.get().baseFee,
-               let denom = try? await Osmosis_Txfees_V1beta1_QueryNIOClient(channel: getClient()).baseDenom(denomReq).response.get().baseDenom {
-                osmosisBaseFee = OsmosisBaseFee(amount: baseFee, denom: denom)
-            }
-            
-        } else {
-            let url = getLcd() + "osmosis/txfees/v1beta1/"
-            if let baseFee = try? await AF.request(url+"cur_eip_base_fee", method: .get).serializingDecodable(JSON.self).value["base_fee"].stringValue,
-               let denom = try? await AF.request(url+"base_denom", method: .get).serializingDecodable(JSON.self).value["base_denom"].stringValue {
-                
-                osmosisBaseFee = OsmosisBaseFee(amount: NSDecimalNumber(string: baseFee).multiplying(byPowerOf10: 18).stringValue,
-                                                denom: denom)
-            }
+        Task {
+            osmosisBaseFee = try await fetchBaseFee()
         }
     }
         
@@ -76,18 +60,4 @@ class OsmosisFetcher: CosmosFetcher {
             return NSDecimalNumber(string: amount).multiplying(byPowerOf10: -18, withBehavior: handler18Down)
         }
     }
-}
-
-
-extension JSON {
-    func osmosisFeeMarket(denom: String?) -> [Cosmos_Base_V1beta1_DecCoin]? {
-        var result = [Cosmos_Base_V1beta1_DecCoin]()
-        var tempDecoin = Cosmos_Base_V1beta1_DecCoin()
-
-        tempDecoin.denom = denom!
-        tempDecoin.amount = NSDecimalNumber(string: self["base_fee"].stringValue).multiplying(byPowerOf10: 18).stringValue
-        result.append(tempDecoin)
-        return result
-    }
-
 }
