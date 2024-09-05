@@ -27,8 +27,11 @@ public struct TransactionOutPoint {
     }
 
     static func deserialize(_ byteStream: ByteStream) -> TransactionOutPoint {
+//        print("TransactionOutPoint deserialize!! ", byteStream.data.toHexString())
         let hash = Data(byteStream.read(Data.self, count: 32))
+        print("TransactionOutPoint hash", hash.hexEncodedString())
         let index = byteStream.read(UInt32.self)
+        print("TransactionOutPoint index", index)
         return TransactionOutPoint(hash: hash, index: index)
     }
 }

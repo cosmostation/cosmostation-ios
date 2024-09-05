@@ -41,10 +41,19 @@ public struct TransactionInput {
     }
 
     static func deserialize(_ byteStream: ByteStream) -> TransactionInput {
+//        print("TransactionInput deserialize!! ", byteStream.data.toHexString())
         let previousOutput = TransactionOutPoint.deserialize(byteStream)
+        print("previousOutput ", previousOutput)
+        print("previousOutput ", previousOutput.serialized().toHexString())
         let scriptLength = byteStream.read(VarInt.self)
+        print("scriptLength ", scriptLength)
+        print("scriptLength ", scriptLength.serialized().toHexString())
         let signatureScript = byteStream.read(Data.self, count: Int(scriptLength.underlyingValue))
+        print("signatureScript ", signatureScript.toHexString())
         let sequence = byteStream.read(UInt32.self)
+        print("sequence ", sequence.serialize32().toHexString())
+//        return TransactionInput(previousOutput: previousOutput, signatureScript: signatureScript, sequence: sequence)
+        
         return TransactionInput(previousOutput: previousOutput, signatureScript: signatureScript, sequence: sequence)
     }
 }

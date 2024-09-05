@@ -63,6 +63,7 @@ class ByteStream {
     }
 
     func read(_ type: Data.Type, count: Int) -> Data {
+//        print("read offset : ", offset, ",    count : ", count)
         let value = data[offset..<(offset + count)]
         offset += count
         return Data(value)
