@@ -225,7 +225,7 @@ class HistoryCell: UITableViewCell {
         var title = ""
         if (!history.isEmpty) {
             let sender = history["from"].first?.1["address"].stringValue
-            if (sender == chain.evmAddress) {
+            if (sender == chain.evmAddress || sender == chain.bechAddress) {
                 title = NSLocalizedString("tx_send", comment: "")
             } else {
                 title = NSLocalizedString("tx_receive", comment: "")

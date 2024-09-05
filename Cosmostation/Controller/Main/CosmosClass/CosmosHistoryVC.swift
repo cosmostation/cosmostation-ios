@@ -20,16 +20,13 @@ class CosmosHistoryVC: BaseVC {
     
     var selectedChain: BaseChain!
     var msHistoryGroup = Array<MintscanHistoryGroup>()
-    var msHistoyID = ""
-    var msHasMore = false
+    var histoyID = ""
+    var hasMore = false
     
-    var oktHistoyID = ""
-    var oktHasMore = false
-
     let BATCH_CNT = 30
-    let OKT_BATCH_CNT = 20
+    let EVM_BATCH_CNT = 20
 
-    var oktHistoryGroup = Array<EvmHistoryGroup>()        //For OKT chain
+    var evmHistoryGroup = Array<EvmHistoryGroup>()        //For EVM chain
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,15 +61,15 @@ class CosmosHistoryVC: BaseVC {
     }
     
     @objc func onRequestFetch() {
-        if (selectedChain.name == "OKT") {
+        histoyID = ""
+        hasMore = false
+        
+        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
             Task {
-                try await onFetchOktHistory(selectedChain.evmAddress!, oktHistoyID)
+                try await onFetchOktHistory(selectedChain.evmAddress!, histoyID)
             }
-            
         } else {
-            msHistoyID = ""
-            msHasMore = false
-            onFetchMsHistory(selectedChain.bechAddress, msHistoyID)
+            onFetchMsHistory(selectedChain.bechAddress, histoyID)
         }
     }
     
@@ -92,12 +89,12 @@ class CosmosHistoryVC: BaseVC {
                             self.msHistoryGroup.append(MintscanHistoryGroup.init(headerDate, [history]))
                         }
                     }
-                    self.msHistoyID = value.last?.search_after ?? ""
-                    self.msHasMore = value.count >= self.BATCH_CNT
+                    self.histoyID = value.last?.search_after ?? ""
+                    self.hasMore = value.count >= self.BATCH_CNT
                     
                 } else {
-                    self.msHasMore = false
-                    self.msHistoyID = ""
+                    self.hasMore = false
+                    self.histoyID = ""
                 }
                 
                 self.loadingView.isHidden = true
@@ -126,30 +123,29 @@ class CosmosHistoryVC: BaseVC {
             
             let histortJson = try await AF.request(url,
                                                    method: .get,
-                                                   parameters: ["search_after": oktHistoyID,
-                                                                "limit" : "\(OKT_BATCH_CNT)"]).serializingDecodable(JSON.self).value
-            
-            if (id == "") { self.oktHistoryGroup.removeAll() }
+                                                   parameters: ["search_after": histoyID,
+                                                                "limit" : "\(EVM_BATCH_CNT)"]).serializingDecodable(JSON.self).value
+            if (id == "") { self.evmHistoryGroup.removeAll() }
             if (histortJson["txs"].count > 0) {
                 histortJson["txs"].arrayValue.forEach { history in
                     let headerDate  = WDP.dpDate(history["txTime"].intValue)
-                    if let index = self.oktHistoryGroup.firstIndex(where: { $0.date == headerDate }) {
-                        self.oktHistoryGroup[index].values.append(history)
+                    if let index = self.evmHistoryGroup.firstIndex(where: { $0.date == headerDate }) {
+                        self.evmHistoryGroup[index].values.append(history)
                     } else {
-                        self.oktHistoryGroup.append(EvmHistoryGroup.init(headerDate, [history]))
+                        self.evmHistoryGroup.append(EvmHistoryGroup.init(headerDate, [history]))
                     }
                 }
-                self.oktHistoyID = String(histortJson["search_after"].intValue - 1)
-                self.oktHasMore = histortJson["txs"].count >= self.OKT_BATCH_CNT
+                self.histoyID = String(histortJson["search_after"].intValue - 1)
+                self.hasMore = histortJson["txs"].count >= self.EVM_BATCH_CNT
                 
             } else {
-                self.oktHasMore = false
-                self.oktHistoyID = ""
+                self.hasMore = false
+                self.histoyID = ""
                 
             }
             
             self.loadingView.isHidden = true
-            if (self.oktHistoryGroup.count > 0) {
+            if (self.evmHistoryGroup.count > 0) {
                 self.tableView.reloadData()
                 self.tableView.isHidden = false
                 self.emptyDataView.isHidden = true
@@ -170,8 +166,8 @@ class CosmosHistoryVC: BaseVC {
 extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (selectedChain.name == "OKT") {
-            return oktHistoryGroup.count
+        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
+            return evmHistoryGroup.count
         } else {
             return msHistoryGroup.count
         }
@@ -180,11 +176,11 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         let today = WDP.dpDate(Int(Date().timeIntervalSince1970) * 1000)
-        if (selectedChain.name == "OKT") {
-            if (oktHistoryGroup[section].date == today) {
+        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
+            if (evmHistoryGroup[section].date == today) {
                 view.titleLabel.text = "Today"
             } else {
-                view.titleLabel.text = oktHistoryGroup[section].date
+                view.titleLabel.text = evmHistoryGroup[section].date
             }
             view.cntLabel.text = ""
 
@@ -204,8 +200,8 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (selectedChain.name == "OKT") {
-            return oktHistoryGroup[section].values.count
+        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
+            return evmHistoryGroup[section].values.count
             
         } else {
             return msHistoryGroup[section].values.count
@@ -215,8 +211,8 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as! HistoryCell
-        if (selectedChain.name == "OKT") {
-            let history = oktHistoryGroup[indexPath.section].values[indexPath.row]
+        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
+            let history = evmHistoryGroup[indexPath.section].values[indexPath.row]
             cell.bindEvmClassHistory(baseAccount, selectedChain, history)
             
         } else {
@@ -227,22 +223,22 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if (selectedChain.name == "OKT") {
-            if (indexPath.section == self.oktHistoryGroup.count - 1
-                && indexPath.row == self.oktHistoryGroup.last!.values.count - 1
-                && oktHasMore == true) {
-                oktHasMore = false
+        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
+            if (indexPath.section == self.evmHistoryGroup.count - 1
+                && indexPath.row == self.evmHistoryGroup.last!.values.count - 1
+                && hasMore == true) {
+                hasMore = false
                 Task {
-                    try await onFetchOktHistory(selectedChain.evmAddress!, oktHistoyID)
+                    try await onFetchOktHistory(selectedChain.evmAddress!, histoyID)
                 }
             }
 
         } else {
             if (indexPath.section == self.msHistoryGroup.count - 1
                 && indexPath.row == self.msHistoryGroup.last!.values.count - 1
-                && msHasMore == true) {
-                msHasMore = false
-                onFetchMsHistory(selectedChain.bechAddress, msHistoyID)
+                && hasMore == true) {
+                hasMore = false
+                onFetchMsHistory(selectedChain.bechAddress, histoyID)
             }
 
         }
@@ -250,8 +246,8 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var hash: String?
-        if (selectedChain.name == "OKT") {
-            hash = oktHistoryGroup[indexPath.section].values[indexPath.row]["txHash"].stringValue
+        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
+            hash = evmHistoryGroup[indexPath.section].values[indexPath.row]["txHash"].stringValue
 
         } else {
             if let cell = tableView.cellForRow(at: indexPath) as? HistoryCell {

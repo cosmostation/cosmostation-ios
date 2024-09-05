@@ -59,6 +59,9 @@ class EvmHistoryVC: BaseVC {
     }
     
     @objc func onRequestFetch() {
+        histoyID = ""
+        hasMore = false
+
         Task {
             try await onFetchHistory(selectedChain.evmAddress!, histoyID)
         }
