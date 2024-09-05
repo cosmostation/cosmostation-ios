@@ -241,20 +241,20 @@ class HistoryCell: UITableViewCell {
         
         let contractAddress = history["tokenAddress"].stringValue
         
-        if contractAddress.isEmpty {
-            denomLabel.text = chain.coinSymbol
-            amountLabel.attributedText = WDP.dpAmount(history["amount"].stringValue, amountLabel!.font)
+        if history["amount"].stringValue != "0" {
             amountLabel.isHidden = false
             denomLabel.isHidden = false
             
-        } else if let _ = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.address?.lowercased() == contractAddress.lowercased() }) {
-            denomLabel.text = history["symbol"].stringValue
-            amountLabel.attributedText = WDP.dpAmount(history["amount"].stringValue, amountLabel!.font)
-
-            amountLabel.isHidden = false
-            denomLabel.isHidden = false
-            denomLabel.textColor = .color01
-            
+            if contractAddress.isEmpty {
+                denomLabel.text = chain.coinSymbol
+                amountLabel.attributedText = WDP.dpAmount(history["amount"].stringValue, amountLabel!.font)
+                
+            } else if let _ = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.address?.lowercased() == contractAddress.lowercased() }) {
+                denomLabel.text = history["symbol"].stringValue
+                amountLabel.attributedText = WDP.dpAmount(history["amount"].stringValue, amountLabel!.font)
+                denomLabel.textColor = .color01
+                
+            }
         }
     }
 
