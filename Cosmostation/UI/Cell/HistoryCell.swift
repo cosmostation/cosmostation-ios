@@ -85,21 +85,6 @@ class HistoryCell: UITableViewCell {
         }
     }
     
-    func bindOktHistory(_ account: BaseAccount, _ chain: BaseChain, _ history: OktHistory) {
-        if (history.state != "success") {
-            successImg.image = UIImage(named: "iconFail")
-        } else {
-            successImg.image = UIImage(named: "iconSuccess")
-        }
-        
-        msgsTitleLabel.text = history.height
-        hashLabel.text = history.txId
-        timeLabel.text = WDP.okcDpTime(Int64(history.transactionTime!))
-        blockLabel.isHidden = true
-        
-        denomLabel.text = WDP.okcDpTimeGap(Int64(history.transactionTime!))
-        denomLabel.isHidden = false
-    }
     
     func bindSuiHistory(_ suiChain: ChainSui, _ history: JSON) {
         if (history["effects"]["status"]["status"].stringValue != "success") {
