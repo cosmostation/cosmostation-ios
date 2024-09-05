@@ -64,7 +64,7 @@ class CosmosHistoryVC: BaseVC {
         histoyID = ""
         hasMore = false
         
-        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
+        if (selectedChain.name == "OKT") {
             Task {
                 try await onFetchOktHistory(selectedChain.evmAddress!, histoyID)
             }
@@ -166,7 +166,7 @@ class CosmosHistoryVC: BaseVC {
 extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
+        if (selectedChain.name == "OKT") {
             return evmHistoryGroup.count
         } else {
             return msHistoryGroup.count
@@ -176,7 +176,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         let today = WDP.dpDate(Int(Date().timeIntervalSince1970) * 1000)
-        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
+        if (selectedChain.name == "OKT") {
             if (evmHistoryGroup[section].date == today) {
                 view.titleLabel.text = "Today"
             } else {
@@ -200,7 +200,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
+        if (selectedChain.name == "OKT") {
             return evmHistoryGroup[section].values.count
             
         } else {
@@ -211,7 +211,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as! HistoryCell
-        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
+        if (selectedChain.name == "OKT") {
             let history = evmHistoryGroup[indexPath.section].values[indexPath.row]
             cell.bindEvmClassHistory(baseAccount, selectedChain, history)
             
@@ -223,7 +223,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
+        if (selectedChain.name == "OKT") {
             if (indexPath.section == self.evmHistoryGroup.count - 1
                 && indexPath.row == self.evmHistoryGroup.last!.values.count - 1
                 && hasMore == true) {
@@ -246,7 +246,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var hash: String?
-        if (selectedChain.name == "OKT" || selectedChain.supportEvm) {
+        if (selectedChain.name == "OKT") {
             hash = evmHistoryGroup[indexPath.section].values[indexPath.row]["txHash"].stringValue
 
         } else {
