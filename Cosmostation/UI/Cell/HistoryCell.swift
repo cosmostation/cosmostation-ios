@@ -85,21 +85,6 @@ class HistoryCell: UITableViewCell {
         }
     }
     
-    func bindOktHistory(_ account: BaseAccount, _ chain: BaseChain, _ history: OktHistory) {
-        if (history.state != "success") {
-            successImg.image = UIImage(named: "iconFail")
-        } else {
-            successImg.image = UIImage(named: "iconSuccess")
-        }
-        
-        msgsTitleLabel.text = history.height
-        hashLabel.text = history.txId
-        timeLabel.text = WDP.okcDpTime(Int64(history.transactionTime!))
-        blockLabel.isHidden = true
-        
-        denomLabel.text = WDP.okcDpTimeGap(Int64(history.transactionTime!))
-        denomLabel.isHidden = false
-    }
     
     func bindSuiHistory(_ suiChain: ChainSui, _ history: JSON) {
         if (history["effects"]["status"]["status"].stringValue != "success") {
@@ -237,8 +222,8 @@ class HistoryCell: UITableViewCell {
         
         var title = ""
         if (!history.isEmpty) {
-            let sender = history["from"].first?.1["address"].first?.1.stringValue
-            if (sender == chain.evmAddress) {
+            let sender = history["from"].first?.1["address"].stringValue
+            if (sender == chain.evmAddress || sender == chain.bechAddress) {
                 title = NSLocalizedString("tx_send", comment: "")
             } else {
                 title = NSLocalizedString("tx_receive", comment: "")
@@ -254,20 +239,23 @@ class HistoryCell: UITableViewCell {
         
         let contractAddress = history["tokenAddress"].stringValue
         
-        if contractAddress.isEmpty {
-            denomLabel.text = chain.coinSymbol
-            amountLabel.attributedText = WDP.dpAmount(history["amount"].stringValue, amountLabel!.font)
-            amountLabel.isHidden = false
-            denomLabel.isHidden = false
-            
-        } else if let _ = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.address?.lowercased() == contractAddress.lowercased() }) {
-            denomLabel.text = history["symbol"].stringValue
-            amountLabel.attributedText = WDP.dpAmount(history["amount"].stringValue, amountLabel!.font)
+        if history["amount"].stringValue != "0" {
+            if contractAddress.isEmpty {
+                amountLabel.isHidden = false
+                denomLabel.isHidden = false
 
-            amountLabel.isHidden = false
-            denomLabel.isHidden = false
-            denomLabel.textColor = .color01
-            
+                denomLabel.text = chain.coinSymbol
+                amountLabel.attributedText = WDP.dpAmount(history["amount"].stringValue, amountLabel!.font)
+                
+            } else if let _ = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.address?.lowercased() == contractAddress.lowercased() }) {
+                amountLabel.isHidden = false
+                denomLabel.isHidden = false
+
+                denomLabel.text = history["symbol"].stringValue
+                amountLabel.attributedText = WDP.dpAmount(history["amount"].stringValue, amountLabel!.font)
+                denomLabel.textColor = .color01
+                
+            }
         }
     }
 
