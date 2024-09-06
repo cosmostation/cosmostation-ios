@@ -546,7 +546,7 @@ class CommonTransfer: BaseVC {
                     let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
                     let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                     cosmosTxFee.amount[0].amount = feeAmount.stringValue
-                    cosmosTxFee = Signer.setFee(selectedFeePosition, cosmosTxFee, true)
+                    cosmosTxFee = Signer.setFee(selectedFeePosition, cosmosTxFee)
                 }
 
             } else {
@@ -671,7 +671,7 @@ class CommonTransfer: BaseVC {
                     let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
                     let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                     cosmosTxFee.amount[0].amount = feeAmount.stringValue
-                    cosmosTxFee = Signer.setFee(selectedFeePosition, cosmosTxFee, true)
+                    cosmosTxFee = Signer.setFee(selectedFeePosition, cosmosTxFee)
                 }
 
             } else {

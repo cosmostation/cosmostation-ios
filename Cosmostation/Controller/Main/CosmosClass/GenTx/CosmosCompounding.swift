@@ -202,7 +202,7 @@ class CosmosCompounding: BaseVC {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                 let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                 txFee.amount[0].amount = feeAmount.stringValue
-                txFee = Signer.setFee(selectedFeePosition, txFee, true)
+                txFee = Signer.setFee(selectedFeePosition, txFee)
             }
             
         } else {
@@ -240,7 +240,7 @@ class CosmosCompounding: BaseVC {
                     let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                     let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                     txFee.amount[0].amount = feeAmount.stringValue
-                    txFee = Signer.setFee(selectedFeePosition, txFee, true)
+                    txFee = Signer.setFee(selectedFeePosition, txFee)
                 }
 
             } else {
