@@ -20,11 +20,13 @@ class CosmosHistoryVC: BaseVC {
     
     var selectedChain: BaseChain!
     var msHistoryGroup = Array<MintscanHistoryGroup>()
-    var msHistoyID = ""
-    var msHasMore = false
-    let BATCH_CNT = 30
+    var histoyID = ""
+    var hasMore = false
     
-    var oktHistoey = Array<OktHistory>()        //For OKT chain
+    let BATCH_CNT = 30
+    let EVM_BATCH_CNT = 20
+
+    var evmHistoryGroup = Array<EvmHistoryGroup>()        //For EVM chain
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,13 +61,15 @@ class CosmosHistoryVC: BaseVC {
     }
     
     @objc func onRequestFetch() {
+        histoyID = ""
+        hasMore = false
+        
         if (selectedChain.name == "OKT") {
-            onFetchOktHistory(selectedChain.evmAddress!)
-            
+            Task {
+                try await onFetchOktHistory(selectedChain.evmAddress!, histoyID)
+            }
         } else {
-            msHistoyID = ""
-            msHasMore = false
-            onFetchMsHistory(selectedChain.bechAddress, msHistoyID)
+            onFetchMsHistory(selectedChain.bechAddress, histoyID)
         }
     }
     
@@ -85,12 +89,12 @@ class CosmosHistoryVC: BaseVC {
                             self.msHistoryGroup.append(MintscanHistoryGroup.init(headerDate, [history]))
                         }
                     }
-                    self.msHistoyID = value.last?.search_after ?? ""
-                    self.msHasMore = value.count >= self.BATCH_CNT
+                    self.histoyID = value.last?.search_after ?? ""
+                    self.hasMore = value.count >= self.BATCH_CNT
                     
                 } else {
-                    self.msHasMore = false
-                    self.msHistoyID = ""
+                    self.hasMore = false
+                    self.histoyID = ""
                 }
                 
                 self.loadingView.isHidden = true
@@ -113,39 +117,57 @@ class CosmosHistoryVC: BaseVC {
         }
     }
     
-    func onFetchOktHistory(_ evmAddress: String) {
+    func onFetchOktHistory(_ evmAddress: String, _ id: String) async throws {
         let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, evmAddress)
-        AF.request(url, method: .get, parameters: [:]).responseDecodable(of: OkHistoryRoot.self, queue: .main, decoder: JSONDecoder())  { response in
-            switch response.result {
-            case .success(let value):
-                if value.data?.count ?? 0 > 0,
-                   let txs = value.data?[0].transactionLists {
-                    self.oktHistoey = txs
+        do {
+            
+            let histortJson = try await AF.request(url,
+                                                   method: .get,
+                                                   parameters: ["search_after": histoyID,
+                                                                "limit" : "\(EVM_BATCH_CNT)"]).serializingDecodable(JSON.self).value
+            if (id == "") { self.evmHistoryGroup.removeAll() }
+            if (histortJson["txs"].count > 0) {
+                histortJson["txs"].arrayValue.forEach { history in
+                    let headerDate  = WDP.dpDate(history["txTime"].intValue)
+                    if let index = self.evmHistoryGroup.firstIndex(where: { $0.date == headerDate }) {
+                        self.evmHistoryGroup[index].values.append(history)
+                    } else {
+                        self.evmHistoryGroup.append(EvmHistoryGroup.init(headerDate, [history]))
+                    }
                 }
-                self.loadingView.isHidden = true
-                if (self.oktHistoey.count > 0) {
-                    self.tableView.reloadData()
-                    self.emptyDataView.isHidden = true
-                } else {
-                    self.emptyDataView.isHidden = false
-                }
+                self.histoyID = String(histortJson["search_after"].intValue - 1)
+                self.hasMore = histortJson["txs"].count >= self.EVM_BATCH_CNT
                 
+            } else {
+                self.hasMore = false
+                self.histoyID = ""
                 
-            case .failure:
-                print("onFetchOktHistory error", response.error)
             }
+            
+            self.loadingView.isHidden = true
+            if (self.evmHistoryGroup.count > 0) {
+                self.tableView.reloadData()
+                self.tableView.isHidden = false
+                self.emptyDataView.isHidden = true
+            } else {
+                self.tableView.isHidden = true
+                self.emptyDataView.isHidden = false
+            }
+        } catch {
+            print("onFetchOktHistory error", error)
+        }
             self.refresher.endRefreshing()
         }
     }
 
-}
+
 
 
 extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if (selectedChain.name == "OKT") {
-            return 1
+            return evmHistoryGroup.count
         } else {
             return msHistoryGroup.count
         }
@@ -153,12 +175,16 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        let today = WDP.dpDate(Int(Date().timeIntervalSince1970) * 1000)
         if (selectedChain.name == "OKT") {
-            view.titleLabel.text = "History"
-            view.cntLabel.text = String(oktHistoey.count)
-            
+            if (evmHistoryGroup[section].date == today) {
+                view.titleLabel.text = "Today"
+            } else {
+                view.titleLabel.text = evmHistoryGroup[section].date
+            }
+            view.cntLabel.text = ""
+
         } else {
-            let today = WDP.dpDate(Int(Date().timeIntervalSince1970) * 1000)
             if (msHistoryGroup[section].date == today) {
                 view.titleLabel.text = "Today"
             } else {
@@ -175,7 +201,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (selectedChain.name == "OKT") {
-            return oktHistoey.count
+            return evmHistoryGroup[section].values.count
             
         } else {
             return msHistoryGroup[section].values.count
@@ -186,8 +212,8 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as! HistoryCell
         if (selectedChain.name == "OKT") {
-            let history = oktHistoey[indexPath.row]
-            cell.bindOktHistory(baseAccount, selectedChain, history)
+            let history = evmHistoryGroup[indexPath.section].values[indexPath.row]
+            cell.bindEvmClassHistory(baseAccount, selectedChain, history)
             
         } else {
             let history = msHistoryGroup[indexPath.section].values[indexPath.row]
@@ -197,21 +223,32 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if (selectedChain.name != "OKT") {
+        if (selectedChain.name == "OKT") {
+            if (indexPath.section == self.evmHistoryGroup.count - 1
+                && indexPath.row == self.evmHistoryGroup.last!.values.count - 1
+                && hasMore == true) {
+                hasMore = false
+                Task {
+                    try await onFetchOktHistory(selectedChain.evmAddress!, histoyID)
+                }
+            }
+
+        } else {
             if (indexPath.section == self.msHistoryGroup.count - 1
                 && indexPath.row == self.msHistoryGroup.last!.values.count - 1
-                && msHasMore == true) {
-                msHasMore = false
-                onFetchMsHistory(selectedChain.bechAddress, msHistoyID)
+                && hasMore == true) {
+                hasMore = false
+                onFetchMsHistory(selectedChain.bechAddress, histoyID)
             }
+
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var hash: String?
         if (selectedChain.name == "OKT") {
-            hash = oktHistoey[indexPath.row].txId
-            
+            hash = evmHistoryGroup[indexPath.section].values[indexPath.row]["txHash"].stringValue
+
         } else {
             if let cell = tableView.cellForRow(at: indexPath) as? HistoryCell {
                 if (cell.msgsTitleLabel.text == NSLocalizedString("tx_send", comment: "")) {
