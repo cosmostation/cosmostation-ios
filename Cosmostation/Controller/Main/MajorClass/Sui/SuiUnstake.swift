@@ -131,11 +131,11 @@ class SuiUnstake: BaseVC {
         suiUnstakeGasCheck()
     }
     
-    func onUpdateWithSimul(_ gasUsed: UInt64?) {
+    func onUpdateWithSimul(_ gasUsed: UInt64?, _ errorMessage: String? = nil) {
         view.isUserInteractionEnabled = true
         loadingView.isHidden = true
         guard let toGas = gasUsed else {
-            onShowToast(NSLocalizedString("error_evm_simul", comment: ""))
+            onShowToast(errorMessage ?? NSLocalizedString("error_evm_simul", comment: ""))
             return
         }
         suiFeeBudget = NSDecimalNumber.init(value: toGas)
@@ -151,6 +151,13 @@ extension SuiUnstake {
         Task {
             if let txBytes = try await suiFetcher.unsafeUnstake(selectedChain.mainAddress, fromValidator.1["stakedSuiId"].stringValue, suiFeeBudget.stringValue),
                let response = try await suiFetcher.suiDryrun(txBytes) {
+                if let error = response["error"]["message"].string {
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(nil, error)
+                    }
+                    return
+                }
+                
                 let computationCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["computationCost"].stringValue)
                 let storageCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageCost"].stringValue)
                 let storageRebate = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageRebate"].stringValue)

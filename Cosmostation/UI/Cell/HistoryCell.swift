@@ -227,4 +227,48 @@ class HistoryCell: UITableViewCell {
         msgsTitleLabel.text = title
         hashLabel.text = history["txid"].stringValue
     }
+
+    func bindEvmClassHistory(_ account: BaseAccount, _ chain: BaseChain, _ history: JSON) {
+        if history["txStatus"].stringValue == "success" {
+            successImg.image = UIImage(named: "iconSuccess")
+        } else {
+            successImg.image = UIImage(named: "iconFail")
+        }
+        
+        var title = ""
+        if (!history.isEmpty) {
+            let sender = history["from"].first?.1["address"].first?.1.stringValue
+            if (sender == chain.evmAddress) {
+                title = NSLocalizedString("tx_send", comment: "")
+            } else {
+                title = NSLocalizedString("tx_receive", comment: "")
+            }
+        }
+        
+        msgsTitleLabel.text = title
+        msgsTitleLabel.adjustsFontSizeToFitWidth = true
+        
+        hashLabel.text = history["txHash"].stringValue
+        timeLabel.text = WDP.dpTime(history["txTime"].intValue)
+        blockLabel.isHidden = true
+        
+        let contractAddress = history["tokenAddress"].stringValue
+        
+        if contractAddress.isEmpty {
+            denomLabel.text = chain.coinSymbol
+            amountLabel.attributedText = WDP.dpAmount(history["amount"].stringValue, amountLabel!.font)
+            amountLabel.isHidden = false
+            denomLabel.isHidden = false
+            
+        } else if let _ = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.address?.lowercased() == contractAddress.lowercased() }) {
+            denomLabel.text = history["symbol"].stringValue
+            amountLabel.attributedText = WDP.dpAmount(history["amount"].stringValue, amountLabel!.font)
+
+            amountLabel.isHidden = false
+            denomLabel.isHidden = false
+            denomLabel.textColor = .color01
+            
+        }
+    }
+
 }

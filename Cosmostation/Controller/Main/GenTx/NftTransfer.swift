@@ -314,7 +314,7 @@ class NftTransfer: BaseVC {
         }
     }
     
-    func onUpdateWithSimul(_ gasUsed: UInt64?) {
+    func onUpdateWithSimul(_ gasUsed: UInt64?, _ errorMessage: String? = nil) {
         view.isUserInteractionEnabled = true
         loadingView.isHidden = true
         
@@ -322,7 +322,7 @@ class NftTransfer: BaseVC {
             guard let toGas = gasUsed else {
                 sendBtn.isHidden = true
                 errorCardView.isHidden = false
-                errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
+                errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
                 return
             }
             suiFeeBudget = NSDecimalNumber.init(value: toGas)
@@ -336,7 +336,7 @@ class NftTransfer: BaseVC {
             guard let toGas = gasUsed else {
                 feeCardView.isHidden = true
                 errorCardView.isHidden = false
-                errorMsgLabel.text = NSLocalizedString("error_evm_simul", comment: "")
+                errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
                 return
             }
             cosmosTxFee.gasLimit = UInt64(Double(toGas) * fromChain.gasMultiply())
@@ -392,6 +392,13 @@ extension NftTransfer {
         Task {
             if let txBytes = try await suiFetcher.unsafeTransferObject(fromChain.mainAddress, toSendSuiNFT["objectId"].stringValue, suiFeeBudget.stringValue, toAddress),
                let response = try await suiFetcher.suiDryrun(txBytes) {
+                if let error = response["error"]["message"].string {
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(nil, error)
+                    }
+                    return
+                }
+                
                 let computationCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["computationCost"].stringValue)
                 let storageCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageCost"].stringValue)
                 let storageRebate = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageRebate"].stringValue)
