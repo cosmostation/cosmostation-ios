@@ -121,7 +121,6 @@ class CosmosCancelUnbonding: BaseVC {
                 txFee.gasLimit = gasAmount.uint64Value
                 txFee.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount)]
             }
-            print("TEST unbonding fee", txFee.amount)
             
         } else {
             feeInfos = selectedChain.getFeeInfos()
