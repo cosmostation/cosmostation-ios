@@ -307,7 +307,12 @@ extension Cosmos_Base_V1beta1_Coin {
 }
 
 
-extension Cosmos_Base_V1beta1_DecCoin {
+extension Cosmos_Base_V1beta1_DecCoin {   
+    init (_ denom: String, _ amount: NSDecimalNumber) {
+        self.denom = denom
+        self.amount = amount.stringValue
+    }
+
     func getAmount() -> NSDecimalNumber {
         return NSDecimalNumber(string: amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
     }

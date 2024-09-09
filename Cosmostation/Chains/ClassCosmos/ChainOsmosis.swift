@@ -28,6 +28,20 @@ class ChainOsmosis: BaseChain  {
         lcdUrl = "https://lcd-osmosis.cosmostation.io/"
     }
     
+    override func getCosmosfetcher() -> CosmosFetcher? {
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = OsmosisFetcher.init(self)
+        }
+        return cosmosFetcher
+    }
+    
+    func getOsmosisFetcher() -> OsmosisFetcher? {
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = OsmosisFetcher.init(self)
+        }
+        return cosmosFetcher as? OsmosisFetcher
+    }
+
 }
 
 let OSMO_NAME_SERVICE = "osmo1xk0s8xgktn9x5vwcgtjdxqzadg88fgn33p8u9cnpdxwemvxscvast52cdd"

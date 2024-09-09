@@ -380,6 +380,7 @@ class Signer {
         } else if (posiion == 3) {
             result.amount = [Cosmos_Base_V1beta1_Coin(feeDenom, feeAmount.multiplying(by: NSDecimalNumber(string: "2"), withBehavior: handler0Down).stringValue)]
         }
+        
         return result
     }
     

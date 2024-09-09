@@ -177,6 +177,43 @@ class CosmosFetcher {
     func isRewardAddressChanged() -> Bool {
         return chain.bechAddress != rewardAddress
     }
+    
+    func updateBaseFee() async {
+        cosmosBaseFees.removeAll()
+        if (!chain.supportFeeMarket()) { return }
+        if (getEndpointType() == .UseGRPC) {
+            let req = Feemarket_Feemarket_V1_GasPricesRequest.init()
+            if let baseFees = try? await Feemarket_Feemarket_V1_QueryNIOClient(channel: getClient()).gasPrices(req, callOptions: getCallOptions()).response.get().prices {
+                baseFees.forEach({ basefee in
+                    if (BaseData.instance.getAsset(chain.apiName, basefee.denom) != nil) {
+                        self.cosmosBaseFees.append(basefee)
+                    }
+                })
+                self.cosmosBaseFees.sort {
+                    if ($0.denom == chain.stakeDenom) { return true }
+                    if ($1.denom == chain.stakeDenom) { return false }
+                    return false
+                }
+            }
+            
+        } else {
+            let url = getLcd() + "feemarket/v1/gas_prices"
+            let response = try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
+            if let result = response?.feeMarket() {
+                result.forEach { basefee in
+                    if (BaseData.instance.getAsset(chain.apiName, basefee.denom) != nil) {
+                        self.cosmosBaseFees.append(basefee)
+                    }
+                }
+                self.cosmosBaseFees.sort {
+                    if ($0.denom == chain.stakeDenom) { return true }
+                    if ($1.denom == chain.stakeDenom) { return false }
+                    return false
+                }
+            }
+        }
+    }
+
 
 }
 
@@ -788,41 +825,6 @@ extension CosmosFetcher {
         }
     }
     
-    func updateBaseFee() async {
-        cosmosBaseFees.removeAll()
-        if (!chain.supportFeeMarket()) { return }
-        if (getEndpointType() == .UseGRPC) {
-            let req = Feemarket_Feemarket_V1_GasPricesRequest.init()
-            if let baseFees = try? await Feemarket_Feemarket_V1_QueryNIOClient(channel: getClient()).gasPrices(req, callOptions: getCallOptions()).response.get().prices {
-                baseFees.forEach({ basefee in
-                    if (BaseData.instance.getAsset(chain.apiName, basefee.denom) != nil) {
-                        self.cosmosBaseFees.append(basefee)
-                    }
-                })
-                self.cosmosBaseFees.sort {
-                    if ($0.denom == chain.stakeDenom) { return true }
-                    if ($1.denom == chain.stakeDenom) { return false }
-                    return false
-                }
-            }
-            
-        } else {
-            let url = getLcd() + "feemarket/v1/gas_prices"
-            let response = try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
-            if let result = response?.feeMarket() {
-                result.forEach { basefee in
-                    if (BaseData.instance.getAsset(chain.apiName, basefee.denom) != nil) {
-                        self.cosmosBaseFees.append(basefee)
-                    }
-                }
-                self.cosmosBaseFees.sort {
-                    if ($0.denom == chain.stakeDenom) { return true }
-                    if ($1.denom == chain.stakeDenom) { return false }
-                    return false
-                }
-            }
-        }
-    }
     
     func fetchSmartContractState(_ request: Cosmwasm_Wasm_V1_QuerySmartContractStateRequest) async throws -> JSON? {
         if (getEndpointType() == .UseGRPC) {
