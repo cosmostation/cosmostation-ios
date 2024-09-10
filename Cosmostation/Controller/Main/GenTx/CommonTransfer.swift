@@ -55,6 +55,7 @@ class CommonTransfer: BaseVC {
     @IBOutlet weak var feeCurrencyLabel: UILabel!
     @IBOutlet weak var feeValueLabel: UILabel!
     @IBOutlet weak var feeSegments: UISegmentedControl!
+    @IBOutlet weak var arrowDownImage: UIImageView!
     
     @IBOutlet weak var errorCardView: RedFixCardView!
     @IBOutlet weak var errorMsgLabel: UILabel!
@@ -311,6 +312,10 @@ class CommonTransfer: BaseVC {
                 availableAmount = availableAmount.subtracting(suiFeeBudget)
             }
             
+        }
+        
+        if txStyle != .COSMOS_STYLE {
+            arrowDownImage.isHidden = true
         }
         
         titleLabel.text = String(format: NSLocalizedString("str_send_asset", comment: ""), symbol)

@@ -113,7 +113,7 @@ class SuiUnstake: BaseVC {
         let feePrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
         let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
         let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
-        feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 18)
+        feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 9)
         WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
     }
     

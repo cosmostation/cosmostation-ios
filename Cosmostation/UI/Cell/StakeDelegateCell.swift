@@ -17,8 +17,6 @@ class StakeDelegateCell: UITableViewCell {
     @IBOutlet weak var inactiveTag: UIImageView!
     @IBOutlet weak var jailedTag: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var vpTitle: UILabel!
-    @IBOutlet weak var vpLabel: UILabel!
     @IBOutlet weak var commTitle: UILabel!
     @IBOutlet weak var commLabel: UILabel!
     @IBOutlet weak var commPercentLabel: UILabel!
@@ -55,7 +53,6 @@ class StakeDelegateCell: UITableViewCell {
            let cosmosFetcher = baseChain.getCosmosfetcher() {
             
             let vpAmount = NSDecimalNumber(string: validator.tokens).multiplying(byPowerOf10: -msAsset.decimals!)
-            vpLabel?.attributedText = WDP.dpAmount(vpAmount.stringValue, vpLabel!.font, 0)
             
             let commission = NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
             commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)

@@ -141,19 +141,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4AB-1Z-w1q">
-                            <rect key="frame" x="12" y="36" width="25" height="16"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="16" id="hdL-az-RGM"/>
-                            </constraints>
+                            <rect key="frame" x="302.66666666666669" y="37" width="25" height="16"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3M3-Ee-boG">
-                            <rect key="frame" x="39" y="36" width="35.333333333333343" height="16"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="16" id="3he-Nr-ywo"/>
-                            </constraints>
+                            <rect key="frame" x="329.66666666666669" y="38.666666666666657" width="35.333333333333314" height="12.666666666666664"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -164,13 +158,13 @@
                         <constraint firstAttribute="bottom" secondItem="P4f-Yo-V8q" secondAttribute="bottom" constant="16" id="4qh-3z-GLv"/>
                         <constraint firstItem="87s-E4-r2R" firstAttribute="leading" secondItem="nN8-yW-KkU" secondAttribute="leading" constant="12" id="55V-bO-yz1"/>
                         <constraint firstItem="87s-E4-r2R" firstAttribute="top" secondItem="nN8-yW-KkU" secondAttribute="top" constant="14" id="8Uh-rc-cbH"/>
+                        <constraint firstAttribute="trailing" secondItem="3M3-Ee-boG" secondAttribute="trailing" constant="12" id="GFJ-t7-fOF"/>
                         <constraint firstItem="3M3-Ee-boG" firstAttribute="leading" secondItem="4AB-1Z-w1q" secondAttribute="trailing" constant="2" id="HEc-Bt-Zg2"/>
-                        <constraint firstItem="4AB-1Z-w1q" firstAttribute="top" secondItem="87s-E4-r2R" secondAttribute="bottom" constant="8" id="HTI-OS-3X5"/>
-                        <constraint firstItem="4AB-1Z-w1q" firstAttribute="leading" secondItem="87s-E4-r2R" secondAttribute="leading" id="OEd-AQ-asU"/>
                         <constraint firstItem="P4f-Yo-V8q" firstAttribute="top" secondItem="87s-E4-r2R" secondAttribute="bottom" constant="8" id="OOk-B1-rX6"/>
                         <constraint firstAttribute="trailing" secondItem="P4f-Yo-V8q" secondAttribute="trailing" constant="12" id="UmF-aF-1AV"/>
-                        <constraint firstItem="4AB-1Z-w1q" firstAttribute="centerY" secondItem="3M3-Ee-boG" secondAttribute="centerY" id="hBw-zr-n0V"/>
+                        <constraint firstItem="4AB-1Z-w1q" firstAttribute="centerY" secondItem="3M3-Ee-boG" secondAttribute="centerY" id="bbc-qO-aVW"/>
                         <constraint firstItem="P4f-Yo-V8q" firstAttribute="leading" secondItem="nN8-yW-KkU" secondAttribute="leading" constant="12" id="oCt-Th-KYu"/>
+                        <constraint firstAttribute="bottom" secondItem="3M3-Ee-boG" secondAttribute="bottom" constant="16" id="xVg-k7-gKg"/>
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t0D-ny-OUb" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
@@ -219,19 +213,10 @@ not the wallet.</string>
                                     <color key="textColor" name="_color01"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowDown" translatesAutoresizingMaskIntoConstraints="NO" id="taN-XZ-TZc">
-                                    <rect key="frame" x="138.33333333333334" y="7" width="18" height="18"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="18" id="SOD-tL-Oy0"/>
-                                        <constraint firstAttribute="width" constant="18" id="cPz-07-K5r"/>
-                                    </constraints>
-                                </imageView>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="P2G-gr-PBs" firstAttribute="leading" secondItem="6RS-eg-hGz" secondAttribute="trailing" constant="4" id="BnF-zP-EuP"/>
-                                <constraint firstItem="taN-XZ-TZc" firstAttribute="centerY" secondItem="Boj-mh-iVn" secondAttribute="centerY" id="JRP-RN-1iJ"/>
-                                <constraint firstAttribute="trailing" secondItem="taN-XZ-TZc" secondAttribute="trailing" constant="8" id="Mlj-QW-KlK"/>
                                 <constraint firstItem="6RS-eg-hGz" firstAttribute="centerY" secondItem="Boj-mh-iVn" secondAttribute="centerY" id="hrA-f6-AfH"/>
                                 <constraint firstAttribute="width" constant="164.33333333333337" id="nWg-2b-e5d"/>
                                 <constraint firstItem="P2G-gr-PBs" firstAttribute="centerY" secondItem="Boj-mh-iVn" secondAttribute="centerY" id="o0p-Re-YWh"/>

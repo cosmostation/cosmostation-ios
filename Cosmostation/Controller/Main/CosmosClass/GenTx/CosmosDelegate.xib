@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -165,7 +165,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSR-by-BAn">
-                            <rect key="frame" x="12" y="36" width="25" height="16"/>
+                            <rect key="frame" x="302.66666666666669" y="36" width="25" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="wNr-Fq-aqC"/>
                             </constraints>
@@ -174,7 +174,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l6p-02-1gp">
-                            <rect key="frame" x="39" y="36" width="35.333333333333343" height="16"/>
+                            <rect key="frame" x="329.66666666666669" y="36" width="35.333333333333314" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="K97-y5-cgl"/>
                             </constraints>
@@ -188,12 +188,12 @@
                         <constraint firstItem="520-LC-xI4" firstAttribute="top" secondItem="ASh-6v-gHm" secondAttribute="top" constant="14" id="1Nq-8M-YG4"/>
                         <constraint firstAttribute="trailing" secondItem="6qt-sc-93d" secondAttribute="trailing" constant="12" id="3E6-Cg-UDI"/>
                         <constraint firstItem="520-LC-xI4" firstAttribute="leading" secondItem="ASh-6v-gHm" secondAttribute="leading" constant="12" id="4d3-96-FUI"/>
-                        <constraint firstItem="OSR-by-BAn" firstAttribute="leading" secondItem="520-LC-xI4" secondAttribute="leading" id="8Db-Zj-c7n"/>
                         <constraint firstItem="6qt-sc-93d" firstAttribute="top" secondItem="520-LC-xI4" secondAttribute="bottom" constant="8" id="J5b-Wc-hOv"/>
                         <constraint firstItem="OSR-by-BAn" firstAttribute="top" secondItem="520-LC-xI4" secondAttribute="bottom" constant="8" id="JmE-wu-ut7"/>
                         <constraint firstItem="6qt-sc-93d" firstAttribute="leading" secondItem="ASh-6v-gHm" secondAttribute="leading" constant="12" id="WuO-Wh-zEO"/>
                         <constraint firstItem="l6p-02-1gp" firstAttribute="leading" secondItem="OSR-by-BAn" secondAttribute="trailing" constant="2" id="ZOm-yo-MHD"/>
                         <constraint firstAttribute="bottom" secondItem="6qt-sc-93d" secondAttribute="bottom" constant="16" id="a0X-PY-pkO"/>
+                        <constraint firstAttribute="trailing" secondItem="l6p-02-1gp" secondAttribute="trailing" constant="12" id="aY2-2F-6dh"/>
                         <constraint firstItem="OSR-by-BAn" firstAttribute="centerY" secondItem="l6p-02-1gp" secondAttribute="centerY" id="pH6-JB-8rh"/>
                     </constraints>
                 </view>
@@ -343,7 +343,7 @@
                             </connections>
                         </segmentedControl>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3b-3j-unu">
-                            <rect key="frame" x="232" y="11" width="132.66666666666663" height="20.333333333333314"/>
+                            <rect key="frame" x="232.33333333333337" y="10.999999999999998" width="132.66666666666663" height="20.333333333333329"/>
                             <string key="text">Fees and tips are paid to the chain, 
 not the wallet.</string>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="8"/>
@@ -438,22 +438,22 @@ not the wallet.</string>
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color02">
-            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74509803921568629" green="0.81960784313725488" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color03">
-            <color red="0.54100000858306885" green="0.60000002384185791" blue="0.68199998140335083" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.54117647058823526" green="0.59999999999999998" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color05">
-            <color red="0.31400001049041748" green="0.32199999690055847" blue="0.40400001406669617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.31372549019607843" green="0.32156862745098042" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color06">
-            <color red="0.27500000596046448" green="0.27799999713897705" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.27450980392156865" green="0.27843137254901962" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_colorBg">
-            <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.17254901960784313" green="0.17647058823529413" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
