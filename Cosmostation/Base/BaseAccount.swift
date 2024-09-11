@@ -287,7 +287,7 @@ public enum PubKeyType: Int {
         case PubKeyType.BTC_Legacy:
             return "p2pkh"
         case PubKeyType.BTC_Nested_Segwit:
-            return "p2wpkhSh"
+            return "p2sh"
         case PubKeyType.BTC_Native_Segwit:
             return "p2wpkh"
         case PubKeyType.BTC_Taproot:

@@ -196,7 +196,23 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             self.present(transfer, animated: true)
             
         } else if (selectedChain is ChainBitCoin84) {
-            //TODO BTC Send!!
+            Task {
+                if let btcFetcher = (selectedChain as? ChainBitCoin84)?.getBtcFetcher() {
+                    guard let fee = try await btcFetcher.initFee() else { return }
+                    if Int(truncating: btcFetcher.btcBalances) > fee {
+                        let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+                        transfer.sendAssetType = .BTC_COIN
+                        transfer.fromChain = selectedChain
+                        transfer.toSendDenom = selectedChain.coinSymbol.lowercased()
+                        transfer.modalTransitionStyle = .coverVertical
+                        self.present(transfer, animated: true)
+                        
+                    } else {
+                        onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+                        return
+                    }
+                }
+            }
         }
     }
     

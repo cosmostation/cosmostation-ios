@@ -681,8 +681,8 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainNeutron_T())
 //    result.append(ChainNillion_T())
 //    result.append(ChainMantra_T())
-//    result.append(ChainBitCoin44_T())
-//    result.append(ChainBitCoin49_T())
+    result.append(ChainBitCoin44_T())
+    result.append(ChainBitCoin49_T())
     result.append(ChainBitCoin84_T())
     
     
@@ -724,6 +724,7 @@ public enum TxStyle: Int {
     case COSMOS_STYLE = 0
     case WEB3_STYLE = 1
     case SUI_STYLE = 2
+    case BTC_STYLE = 3
 }
 
 public enum TX_TYPE: Int {

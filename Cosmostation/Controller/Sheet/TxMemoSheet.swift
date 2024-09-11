@@ -14,6 +14,8 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
     @IBOutlet weak var qrScanBtn: UIButton!
     @IBOutlet weak var confirmBtn: BaseButton!
     
+    @IBOutlet weak var btcByteLabel: UILabel!
+    
     var existedMemo: String?
     var memoDelegate: MemoDelegate?
 
@@ -38,8 +40,21 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
                 return false
             }
         }
+        
+        //TODO: 비트코인 일때만 글자 80바이트 막기    (byte - 한글 3 / 숫자, 영문, 기호 1byte / 이모지 4byte)
+        if textView.text.lengthOfBytes(using: .utf8) > 80 {
+            textView.text = String(textView.text.dropLast())
+            btcByteLabel.text = "\(textView.text.lengthOfBytes(using: .utf8)) / 80 bytes"
+
+            return false
+        }
         return true
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        btcByteLabel.text = "\(textView.text.lengthOfBytes(using: .utf8)) / 80 bytes"
+    }
+        
     
     @IBAction func onClickQRScan(_ sender: UIButton) {
         let qrScanVC = QrScanVC(nibName: "QrScanVC", bundle: nil)

@@ -31,6 +31,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var fromCosmosFetcher: CosmosFetcher!
     var fromEvmFetcher: EvmFetcher!
     var fromSuiFetcher: SuiFetcher!
+    var fromBtcFetcher: BtcFetcher!
     var toChain: BaseChain!
     var toAddress: String?
     var txMemo = ""
@@ -43,6 +44,8 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var evmRecipient: JSON?
     
     var suiResult: JSON?
+    
+    var btcResult: JSON?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +82,18 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             fromSuiFetcher = (fromChain as? ChainSui)?.getSuiFetcher()
             onUpdateView()
             
+        } else if (txStyle == .BTC_STYLE) {
+            guard let result = btcResult?["result"].string else {
+                loadingView.isHidden = true
+                failView.isHidden = false
+                failMsgLabel.text = btcResult?["error"]["message"].stringValue
+                confirmBtn.isEnabled = true
+                return
+            }
+            
+            fromBtcFetcher = (fromChain as? ChainBitCoin84)?.getBtcFetcher()
+            fetchBtcTx(result)
+
         } else if (txStyle == .COSMOS_STYLE) {
             guard (cosmosBroadcastTxResponse?.txhash) != nil else {
                 loadingView.isHidden = true
@@ -106,6 +121,11 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             successExplorerBtn.setTitle("Check in Explorer", for: .normal)
             failExplorerBtn.setTitle("Check in Explorer", for: .normal)
             
+        } else if (txStyle == .BTC_STYLE) {
+            successMsgLabel.text = btcResult?["result"].stringValue
+            successExplorerBtn.setTitle("Check in Explorer", for: .normal)
+            failExplorerBtn.setTitle("Check in Explorer", for: .normal)
+
         } else if (txStyle == .COSMOS_STYLE) {
             successMsgLabel.text = cosmosBroadcastTxResponse?.txhash
             successExplorerBtn.setTitle("Check in Mintscan", for: .normal)
@@ -134,6 +154,12 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                 self.onCheckAddAddressBook()
             });
             
+        } else if (txStyle == .BTC_STYLE) {
+            successView.isHidden = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                self.onCheckAddAddressBook()
+            });
+
         } else if (txStyle == .COSMOS_STYLE) {
             if (cosmosTxResponse?.txResponse.code != 0) {
                 failView.isHidden = false
@@ -168,6 +194,10 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             guard let url = fromChain.getExplorerTx(suiResult?["result"]["digest"].stringValue) else { return }
             self.onShowSafariWeb(url)
             
+        } else if (txStyle == .BTC_STYLE) {
+            guard let url = fromChain.getExplorerTx(btcResult?["result"].stringValue) else { return }
+            self.onShowSafariWeb(url)
+
         } else if (txStyle == .COSMOS_STYLE) {
             guard let url = fromChain.getExplorerTx(cosmosBroadcastTxResponse?.txhash) else { return }
             self.onShowSafariWeb(url)
@@ -284,6 +314,48 @@ extension CommonTransferResult {
         }
     }
     
+    func fetchBtcTx(_ hex: String) {
+        Task {
+            try await Task.sleep(nanoseconds: 2_000_000_000)
+            
+            do {
+                if let _ = try await fromBtcFetcher.fetchTx(hex) {//
+                    
+                    self.onUpdateView()
+                    
+                } else {
+                    
+                    self.confirmBtn.isEnabled = true
+                    self.fetchCnt -= 1
+                    if (self.fetchCnt > 0) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
+                            self.fetchBtcTx(self.btcResult!["result"].stringValue)
+                        });
+                        
+                    } else {
+                        DispatchQueue.main.async {
+                            self.onShowMoreWait()
+                        }
+                    }
+                }
+
+            } catch {
+                self.confirmBtn.isEnabled = true
+                self.fetchCnt -= 1
+                if (self.fetchCnt > 0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                        self.fetchTx()
+                    });
+                    
+                } else {
+                    DispatchQueue.main.async {
+                        self.onShowMoreWait()
+                    }
+                }
+            }
+        }
+    }
+    
     func onShowMoreWait() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("more_wait_title", comment: ""), message: NSLocalizedString("more_wait_msg", comment: ""), preferredStyle: .alert)
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
@@ -295,6 +367,8 @@ extension CommonTransferResult {
                 self.fetchEvmTx()
             } else if (self.txStyle == .COSMOS_STYLE) {
                 self.fetchTx()
+            } else if (self.txStyle == .BTC_STYLE) {
+                self.fetchBtcTx(self.btcResult!["result"].stringValue)
             }
         }))
         self.present(noticeAlert, animated: true)

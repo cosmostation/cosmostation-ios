@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,10 +12,14 @@
         <array key="SpoqaHanSansNeo-Bold.otf">
             <string>SpoqaHanSansNeo-Bold</string>
         </array>
+        <array key="SpoqaHanSansNeo-Regular.otf">
+            <string>SpoqaHanSansNeo-Regular</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TxMemoSheet" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="btcByteLabel" destination="vVh-1B-cK1" id="2J4-bq-oGp"/>
                 <outlet property="confirmBtn" destination="SKj-mc-Mqh" id="KLV-1d-UDh"/>
                 <outlet property="memoTextArea" destination="jMg-s2-pzW" id="5sT-GD-1mv"/>
                 <outlet property="qrScanBtn" destination="lGV-gk-2jp" id="QIq-dN-hwA"/>
@@ -66,17 +70,25 @@
                         <action selector="onClickConfirm:" destination="-1" eventType="touchUpInside" id="zCC-lU-CHO"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVh-1B-cK1">
+                    <rect key="frame" x="20" y="213.33333333333334" width="30.666666666666671" height="15.333333333333343"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Regular" family="Spoqa Han Sans Neo" pointSize="12"/>
+                    <color key="textColor" name="_color02"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="_colorBg"/>
             <color key="tintColor" name="_primary"/>
             <constraints>
                 <constraint firstItem="lGV-gk-2jp" firstAttribute="top" secondItem="jMg-s2-pzW" secondAttribute="bottom" constant="12" id="0QR-Np-27f"/>
+                <constraint firstItem="vVh-1B-cK1" firstAttribute="centerY" secondItem="lGV-gk-2jp" secondAttribute="centerY" id="5wV-Tr-F9S"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SKj-mc-Mqh" secondAttribute="trailing" constant="8" id="GkK-vV-PWO"/>
                 <constraint firstItem="SKj-mc-Mqh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="TTq-pm-1Rc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jMg-s2-pzW" secondAttribute="trailing" constant="20" id="W8z-Pl-CpH"/>
                 <constraint firstItem="jMg-s2-pzW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="bcB-E7-MXl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="SKj-mc-Mqh" secondAttribute="bottom" constant="8" id="hZ1-uS-VCa"/>
+                <constraint firstItem="vVh-1B-cK1" firstAttribute="leading" secondItem="jMg-s2-pzW" secondAttribute="leading" id="j4b-ZE-6E0"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lGV-gk-2jp" secondAttribute="trailing" constant="20" id="mBs-XD-Go9"/>
                 <constraint firstItem="jMg-s2-pzW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="n9W-wn-B4m"/>
             </constraints>
@@ -87,11 +99,14 @@
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74509803921568629" green="0.81960784313725488" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="_colorBg">
-            <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.17254901960784313" green="0.17647058823529413" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -81,6 +81,44 @@ class SelectAddressListSheet: BaseVC {
             cosmosStyleTableView.isHidden = true
             evmStyleTableView.isHidden = true
             
+        } else if (sendType == .BTC_COIN) {
+            //TODO: support btc address
+            
+            BaseData.instance.selectAllRefAddresses().forEach { refAddress in
+                
+                if toChain.isTestnet {
+                    if (refAddress.chainTag.contains("bitcoin") && (refAddress.chainTag.contains("_T")) && refAddress.bechAddress != senderMajorAddress) {
+                        refMajorAddresses.append(refAddress)
+                    }
+
+                } else {
+                    if (refAddress.chainTag.contains("bitcoin") && refAddress.bechAddress != senderMajorAddress) {
+                        refMajorAddresses.append(refAddress)
+                    }
+                }
+            }
+            
+            
+            BaseData.instance.selectAllAddressBooks().forEach { book in
+                if toChain.isTestnet {
+                    if (book.chainName.lowercased().contains("bitcoin") && book.dpAddress != senderMajorAddress) {
+                        majorAddressBook.append(book)
+                    }
+
+                } else {
+                    if (book.chainName.lowercased().contains("bitcoin") && book.chainName.lowercased().contains("testnet") && book.dpAddress != senderMajorAddress) {
+                        majorAddressBook.append(book)
+                    }
+                }
+            }//TODO: 주소록 추가하고 맞는 값만 나오는 지 테스트해보기
+            
+            addressStyleSegment.isHidden = true
+            sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
+            majorStyleTableView.isHidden = false
+            cosmosStyleTableView.isHidden = true
+            evmStyleTableView.isHidden = true
+
+            
         } else if (sendType == .EVM_COIN || sendType == .EVM_ERC20) {
             //only support EVM address style
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in

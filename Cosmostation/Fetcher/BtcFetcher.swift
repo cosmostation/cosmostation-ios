@@ -97,6 +97,14 @@ class BtcFetcher {
         }
         return "https://mempool.space"
     }
+    
+    func getBtcRpc() -> String {
+        if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_RPC_ENDPOINT +  " : " + chain.name) {
+            return endpoint.trimmingCharacters(in: .whitespaces)
+        }
+        return chain.mainUrl
+    }
+
 }
 
 
@@ -109,9 +117,9 @@ extension BtcFetcher {
         return try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     
-    func fetchUtxos() async throws -> JSON? {
+    func fetchUtxos() async throws -> [JSON]? {
         let url = mempoolUrl() + "/api/address/" + chain.mainAddress + "/utxo"
-        return try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
+        return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
     }
     
     func fetchTxHistory() async throws -> [JSON]? {
@@ -129,7 +137,12 @@ extension BtcFetcher {
         return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
     }
     
+    func fetchTx(_ hex: String) async throws -> JSON? {
+        let url = mempoolUrl() + "/api/tx/" + hex
+        return try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
+    }
     
+
     
     func fetchBlockHeight() async throws -> UInt64? {
         let url = mempoolUrl() + "/api/blocks/tip/height"
@@ -140,4 +153,180 @@ extension BtcFetcher {
         let url = mempoolUrl() + "/api/v1/fees/recommended"
         return try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
+    
+    func fetchEstimatesmartfee() async throws -> JSON {
+        let parameters: Parameters = ["jsonrpc": "2.0",
+                                      "id": 1,
+                                      "method": "estimatesmartfee",
+                                      "params": [2]]
+        return try await AF.request(getBtcRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchGetrawtransaction(_ utxo: JSON) async throws -> JSON {
+        let parameters: Parameters = ["jsonrpc": "2.0",
+                                      "id": 1,
+                                      "method": "getrawtransaction",
+                                      "params": [utxo["txid"].stringValue,
+                                                 false,
+                                                 utxo["status"]["block_hash"].stringValue]]
+        return try await AF.request(getBtcRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func sendRawtransaction(_ txHex: String) async throws -> JSON {
+        let parameters: Parameters = ["jsonrpc": "2.0",
+                                      "id": 1,
+                                      "method": "sendrawtransaction",
+                                      "params": [txHex]]
+        return try await AF.request(getBtcRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func initFee() async throws -> Int? {
+        if let utxos = try await fetchUtxos() {
+            do {
+                let type = BtcTxType.init(rawValue: chain.accountKeyType.pubkeyType.algorhythm!)!
+                let vbyte = (type.vbyte.overhead) + (type.vbyte.inputs * utxos.count) + (type.vbyte.output * 2)
+                let estimatesmartfee = try await fetchEstimatesmartfee()
+                let feeRate = estimatesmartfee["result"]["feerate"].doubleValue
+                
+                if let error = estimatesmartfee["error"].string {
+                    print("Fail fetch estimatesmartfee", error)
+                    
+                    return nil
+                }
+                return Int(ceil(Double(vbyte) * feeRate * 100000))
+                
+            } catch {
+                print("Fail fetch fee rate", error)
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
+    
+
+    func getTxString(_ utxo: [JSON], _ fromChain: BaseChain, _ receiver: String, _ toAmount: NSDecimalNumber, _ fee: UInt64, _ memo: String?) async -> String {
+        
+        var inputs = ""
+        var outputs = ""
+        
+        var allValue = 0
+        
+        let sender = fromChain.mainAddress
+        let publicKey = fromChain.publicKey!.toHexString()
+        let privateKey = fromChain.privateKey!.toHexString()
+        let network = fromChain.apiName.contains("testnet") ? "testnet" : "bitcoin" //
+        guard let type = BtcTxType(rawValue: fromChain.accountKeyType.pubkeyType.algorhythm!) else {
+            return "undefined"
+        }
+        
+
+        for utxo in utxo.filter({ $0["status"]["confirmed"].boolValue }) {
+            
+            switch type {
+                
+            case .p2wpkh:
+                inputs += """
+                            {
+                            hash: '\(utxo["txid"])',
+                            index: \(utxo["vout"]),
+                            witnessUtxo: {
+                                script: senderPayment.output,
+                                value: \(utxo["value"])
+                                }
+                            },
+                        """
+                
+            case .p2pkh:
+                do {
+                    if let result = try await fetchGetrawtransaction(utxo)["result"].string {
+                        inputs += """
+                            {
+                              hash: '\(utxo["txid"])',
+                              index: \(utxo["vout"]),
+                              nonWitnessUtxo: aTb('\(result)'),
+                            },
+                        """
+                    }
+                } catch {
+                    print("Fail getRawTransaction", error)
+                }
+                
+                
+            case .p2sh:
+                inputs += """
+                            {
+                                hash: '\(utxo["txid"])',
+                                index: \(utxo["vout"]),
+                                redeemScript: senderPayment.redeem.output,
+                                witnessUtxo: {
+                                  script: senderPayment.output,
+                                  value: \(utxo["value"]),
+                                },
+                            },
+                        """
+                
+            }
+                    
+            allValue += utxo["value"].intValue
+        }
+        
+        if let memo {
+            outputs = """
+                        {
+                            address: '\(receiver)',
+                            value: \(toAmount),
+                        },
+                        {
+                            address: '\(sender)',
+                            value: \(allValue) - \(toAmount) - \(fee),
+                        },
+                      
+                        m('\(memo)')
+                      
+                      """
+
+        } else {
+            outputs = """
+                        {
+                            address: '\(receiver)',
+                            value: \(toAmount),
+                        },
+                        {
+                            address: '\(sender)',
+                            value: \(allValue) - \(toAmount) - \(fee),
+                        },
+                      """
+        }
+        
+        let createTxString = """
+            function result() {
+        
+               const privateKey = '\(privateKey)';
+               const publicKey = '\(publicKey)';
+               const type = '\(type.rawValue)';
+               const network = '\(network)';
+        
+               const senderPayment = getPayment(publicKey, type, network);
+
+               const inputs = [
+                 \(inputs)
+               ];
+        
+               const outputs = [
+                 \(outputs)
+               ];
+        
+               const txHex = createTx(inputs, outputs, privateKey, network);
+        
+               return txHex;
+           };
+        """
+        print(createTxString)
+
+        return createTxString
+
+    }
+
+
 }

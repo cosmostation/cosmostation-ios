@@ -149,6 +149,8 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         if (WUtils.isValidEvmAddress(address)) {
             return true
             
+            //TODO: 어드레스 추가
+
         } else if let chain = ALLCHAINS().filter({ address!.starts(with: $0.bechAccountPrefix! + "1") == true }).first {
             if (WUtils.isValidBechAddress(chain, address!)) {
                 return true
@@ -163,6 +165,10 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         }
         if (WUtils.isValidEvmAddress(address)) {
             return ChainEthereum()
+            
+//        } else if  {
+            //TODO: 어드레스 추가
+            
         } else if let chain = ALLCHAINS().filter({ address!.starts(with: $0.bechAccountPrefix! + "1") == true }).first {
             return chain
         }
