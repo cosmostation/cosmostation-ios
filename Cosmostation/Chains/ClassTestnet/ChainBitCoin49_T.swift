@@ -25,7 +25,7 @@ class ChainBitCoin49_T: ChainBitCoin84_T {
         coinGeckoId = ""
         coinLogo = "tokenBtc"
         
-        mainUrl = ""
+        mainUrl = "https://rpc-office.cosmostation.io/bitcoin-testnet"
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {

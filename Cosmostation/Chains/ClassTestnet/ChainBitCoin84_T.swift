@@ -28,7 +28,7 @@ class ChainBitCoin84_T: ChainBitCoin84 {
         scriptHash = 196
         bech32PrefixPattern = "tb"
         
-        mainUrl = ""
+        mainUrl = "https://rpc-office.cosmostation.io/bitcoin-testnet"
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
