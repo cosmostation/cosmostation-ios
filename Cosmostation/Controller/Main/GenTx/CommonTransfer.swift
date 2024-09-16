@@ -97,6 +97,10 @@ class CommonTransfer: BaseVC {
     var suiFeeBudget = NSDecimalNumber.zero
     var suiGasPrice = NSDecimalNumber.zero
     
+    var btcFetcher: BtcFetcher!
+    var btcTxFee = NSDecimalNumber.zero
+    var btcTxHex = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -124,6 +128,9 @@ class CommonTransfer: BaseVC {
                 txStyle = .SUI_STYLE
                 suiFetcher = (fromChain as? ChainSui)?.getSuiFetcher()
                 suiGasPrice = try await suiFetcher.fetchGasprice()
+            } else if (sendAssetType == .BTC_COIN) {
+                txStyle = .BTC_STYLE
+                btcFetcher = (fromChain as? ChainBitCoin84)?.getBtcFetcher()
                 
             } else {
                 txStyle = .COSMOS_STYLE
@@ -247,6 +254,18 @@ class CommonTransfer: BaseVC {
             
             suiFeeBudget = suiFetcher.baseFee(.SUI_SEND_COIN)
             
+        } else if (txStyle == .BTC_STYLE) {
+            feeSegments.removeAllSegments()
+            feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
+            selectedFeePosition = 0
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            feeSelectImg.image =  UIImage.init(named: fromChain.coinLogo)
+            
+            feeSelectLabel.text = fromChain.coinSymbol
+            feeDenomLabel.text = fromChain.coinSymbol
+            
+            btcInitFee()
+            
         } else if (txStyle == .COSMOS_STYLE) {
             if (cosmosFetcher.cosmosBaseFees.count > 0) {
                 feeSegments.removeAllSegments()
@@ -311,6 +330,12 @@ class CommonTransfer: BaseVC {
                 availableAmount = availableAmount.subtracting(suiFeeBudget)
             }
             
+        } else if (sendAssetType == .BTC_COIN) {
+            titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
+            decimal = fromChain.assetDecimal(toSendDenom)
+            symbol = fromChain.assetSymbol(toSendDenom)
+            availableAmount = btcFetcher.btcBalances
+
         }
         
         titleLabel.text = String(format: NSLocalizedString("str_send_asset", comment: ""), symbol)
@@ -321,7 +346,7 @@ class CommonTransfer: BaseVC {
         toChainCardView.isHidden = false
         toAddressCardView.isHidden = false
         toSendAssetCard.isHidden = false
-        memoCardView.isHidden = (txStyle != .COSMOS_STYLE)
+        memoCardView.isHidden = (txStyle != .COSMOS_STYLE && txStyle != .BTC_STYLE)
         feeCardView.isHidden = false
         sendBtn.isHidden = false
         view.isUserInteractionEnabled = true
@@ -480,6 +505,15 @@ class CommonTransfer: BaseVC {
                 toAssetDenomLabel.text = fromChain.assetSymbol(toSendDenom)
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                 
+            } else if (sendAssetType == .BTC_COIN) {
+                let msPrice = BaseData.instance.getPrice(fromChain.coinGeckoId)     //
+                let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+                let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
+                WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
+                
+                toAssetDenomLabel.text = fromChain.assetSymbol(toSendDenom)
+                toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
+
             }
             toSendAssetHint.isHidden = true
             toAssetAmountLabel.isHidden = false
@@ -504,12 +538,13 @@ class CommonTransfer: BaseVC {
             if (txMemo.isEmpty) {
                 memoLabel.isHidden = true
                 memoHintLabel.isHidden = false
+                onSimul()
             } else {
                 memoLabel.text = txMemo
                 memoLabel.isHidden = false
                 memoHintLabel.isHidden = true
+                onSimul()
             }
-            onSimul()
         }
     }
     
@@ -568,6 +603,14 @@ class CommonTransfer: BaseVC {
             feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 9)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
+        } else if (txStyle == .BTC_STYLE) {
+            let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
+            let feeAmount = btcTxFee.multiplying(byPowerOf10: -8, withBehavior: getDivideHandler(8))
+            let feeValue = feePrice.multiplying(by: feeAmount, withBehavior: handler6)
+            feeAmountLabel.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 8)
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            availableAmount = availableAmount.subtracting(btcTxFee)
+
         } else if (txStyle == .COSMOS_STYLE) {
             if let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
                 feeSelectLabel.text = msAsset.symbol
@@ -591,7 +634,6 @@ class CommonTransfer: BaseVC {
                     }
                 }
             }
-            
         }
     }
     
@@ -615,6 +657,16 @@ class CommonTransfer: BaseVC {
             }
             suiFeeBudget = NSDecimalNumber.init(value: toGas)
             
+        } else if (txStyle == .BTC_STYLE) {
+            guard let toGas = gasUsed else {
+                sendBtn.isHidden = true
+                errorCardView.isHidden = false
+                errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
+                return
+            }
+            btcTxFee = NSDecimalNumber.init(value: toGas)
+            sendBtn.isHidden = false
+
         } else if (txStyle == .COSMOS_STYLE) {
             if (fromChain.isGasSimulable() == false) {
                 onUpdateFeeView()
@@ -666,6 +718,9 @@ class CommonTransfer: BaseVC {
         } else if (txStyle == .SUI_STYLE) {
             suiSendGasCheck()
             
+        } else if (txStyle == .BTC_STYLE) {
+            btcFetchTxHex()
+
         } else if (txStyle == .COSMOS_STYLE) {
             // some chain not support simulate (assetmantle)  24.2.21
             if (fromChain.isGasSimulable() == false) {
@@ -829,6 +884,107 @@ extension CommonTransfer {
                 print("error ", error)
             }
             
+        }
+    }
+}
+
+// BTC style tx getFee and broadcast
+extension CommonTransfer {
+    
+    func btcInitFee() {
+        Task {
+            do {
+                if let fee = try await btcFetcher.initFee() {
+                    btcTxFee = NSDecimalNumber(value: fee)
+                    onUpdateFeeView()
+
+                } else {
+                    print("Fail fetch fee rate")
+                }
+                
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    
+    func btcFetchTxHex() {
+        Task {
+            do {
+                if let utxos = try await btcFetcher.fetchUtxos() {
+                    
+                    let type = BtcTxType.init(rawValue: fromChain.accountKeyType.pubkeyType.algorhythm!)!
+                    let opReturnVbyte = !txMemo.isEmpty ? 83 : 0
+                    let vbyte = (type.vbyte.overhead) + (type.vbyte.inputs * utxos.count) + (type.vbyte.output * (!txMemo.isEmpty ? 3 : 2)) + (opReturnVbyte)
+                    let estimatesmartfee = try await btcFetcher.fetchEstimatesmartfee()
+                    let feeRate = estimatesmartfee["result"]["feerate"].doubleValue
+                    
+                    let fee = UInt64(ceil(Double(vbyte) * feeRate * 100000))
+                    if let error = estimatesmartfee["error"]["message"].string {
+                        DispatchQueue.main.async {
+                            self.onUpdateWithSimul(nil, error)
+                        }
+                        print("Fail fetch estimatesmartfee", error)
+                        return
+                    }
+                    
+                
+                    if UInt64(truncating: toAmount) < fee {
+                        self.onUpdateWithSimul(nil, "Unable to transfer less than fee (dust transaction)")
+                        
+                        let feeAmount = NSDecimalNumber.init(value: fee).multiplying(byPowerOf10: -8, withBehavior: getDivideHandler(8))
+                        feeAmountLabel.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 8)
+
+                        return
+                    }
+                    
+                    let txString = await btcFetcher.getTxString(utxos, fromChain, toAddress, toAmount, fee, !txMemo.isEmpty ? txMemo : nil)
+                    
+                    btcTxHex = BtcJS().getTxHex(txString)
+                    
+                    if btcTxHex == "undefined" {
+                        self.onUpdateWithSimul(nil, "Invalid transaction hex value")
+                        return
+                    }
+
+                    
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(fee)
+                    }
+                }
+            }
+            catch {
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(nil, error.localizedDescription)
+                }
+                
+                print("Fail BTC Fetch Tx Hex", error)
+            }
+        }
+    }
+    
+    func btcSend(_ txHex: String) {
+        Task {
+            do {
+                let result = try await btcFetcher.sendRawtransaction(txHex)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                    self.loadingView.isHidden = true
+                    let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                    txResult.txStyle = self.txStyle
+                    txResult.fromChain = self.fromChain
+                    txResult.toChain = self.toChain
+                    txResult.toAddress = self.toAddress
+                    txResult.btcResult = result
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
+                })
+                
+            } catch {
+                print("Fail Btc send",error)
+                onShowToast(error.localizedDescription)
+            }
         }
     }
 }
@@ -1231,6 +1387,9 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
             } else if (txStyle == .SUI_STYLE) {
                 suiSend()
                 
+            } else if (txStyle == .BTC_STYLE) {
+                btcSend(btcTxHex)
+                
             } else if (txStyle == .COSMOS_STYLE) {
                 if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                     // Inchain Send!
                     if (sendAssetType == .COSMOS_WASM) {                                         // Inchain CW20 Send!
@@ -1259,6 +1418,7 @@ public enum SendAssetType: Int {
     case COSMOS_EVM_MAIN_COIN = 4           // support IBC, bank send, Web3 tx        (staking, both tx style)
     case SUI_COIN = 5                       // sui assets
     case SUI_NFT = 6                        // sui nft
+    case BTC_COIN = 7                       // bitcoin
 }
 
 
