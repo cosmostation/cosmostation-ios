@@ -42,11 +42,13 @@ class SelectRefAddressCell: UITableViewCell {
                 if chain.accountKeyType.pubkeyType == .BTC_Legacy {
                     keyTypeTag.text = "Legacy"
                     keyTypeTag.backgroundColor = .color07
-                    
+                    keyTypeTag.textColor = .color02
+
                 } else if chain.accountKeyType.pubkeyType == .BTC_Nested_Segwit {
                     keyTypeTag.text = "Nested Segwit"
                     keyTypeTag.backgroundColor = .color07
-                    
+                    keyTypeTag.textColor = .color02
+
                 } else if chain.accountKeyType.pubkeyType == .BTC_Native_Segwit {
                     keyTypeTag.text = "Native Segwit"
                     keyTypeTag.backgroundColor = .colorNativeSegwit

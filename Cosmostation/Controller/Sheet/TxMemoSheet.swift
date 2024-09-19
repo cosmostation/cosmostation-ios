@@ -75,7 +75,7 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         let userInput = memoTextArea.textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         if (userInput.count > 200) {
-            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+            self.onShowToast(NSLocalizedString("error_memo_count", comment: ""))
             return
         }
         memoDelegate?.onInputedMemo(userInput)
