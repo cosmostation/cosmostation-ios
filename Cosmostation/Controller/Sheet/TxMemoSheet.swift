@@ -19,7 +19,7 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
     var existedMemo: String?
     var memoDelegate: MemoDelegate?
     
-    var isSendBTC: Bool?
+    var isSendBTC: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +29,8 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
         memoTextArea.textView.text = existedMemo
         memoTextArea.textView.delegate = self
         
-        if isSendBTC ?? false {
-            btcByteLabel.isHidden = false
-        }
+        btcByteLabel.isHidden = !isSendBTC
+        
     }
     
     override func setLocalizedString() {
@@ -47,7 +46,7 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
             }
         }
         
-        if isSendBTC ?? false {
+        if isSendBTC {
             let currentText = textView.text!
             guard let stringRange = Range(range, in: currentText) else { return false }
             let changedText = currentText.replacingCharacters(in: stringRange, with: text)
