@@ -145,11 +145,15 @@ class Signer {
     }
     
     //Tx for Common Vote
-    static func genVoteMsg(_ votes: [Cosmos_Gov_V1beta1_MsgVote]) -> [Google_Protobuf_Any] {
+    static func genVoteMsg(_ chain: BaseChain, _ votes: [Cosmos_Gov_V1beta1_MsgVote]) -> [Google_Protobuf_Any] {
         var anyMsgs = Array<Google_Protobuf_Any>()
         votes.forEach { vote in
             let anyMsg = Google_Protobuf_Any.with {
-                $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
+                if (chain is ChainGovgen) {
+                    $0.typeURL = "/govgen.gov.v1beta1.MsgVote"
+                } else {
+                    $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
+                }
                 $0.value = try! vote.serializedData()
             }
             anyMsgs.append(anyMsg)

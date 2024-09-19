@@ -20,12 +20,12 @@ class ChainMars: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "umars"
         bechAccountPrefix = "mars"
         validatorPrefix = "marsvaloper"
-        grpcHost = "grpc-mars-protocol.cosmostation.io"
-        lcdUrl = "https://lcd-mars-protocol.cosmostation.io/"
+        grpcHost = "mars-grpc.lavenderfive.com:443"
+        lcdUrl = "https://mars-api.polkachu.com/"
     }
 }
 

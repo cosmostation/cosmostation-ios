@@ -110,6 +110,26 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                 return
             }
             
+        } else if (sendType == .BTC_COIN) {
+            
+            var network = ""
+            if userInput!.starts(with: "1") || userInput!.starts(with: "bc1") || userInput!.starts(with: "3") {
+                network = "bitcoin"
+            } else {
+                network = "testnet"
+            }
+            let isValidAddress = BtcJS("validateAddress").callJSValueToBool(param: [userInput!, network])
+
+            if isValidAddress {
+                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+                self.dismiss(animated: true)
+                return
+                
+            } else {
+                self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+            }
+            
+
         } else if (sendType == .EVM_COIN || sendType == .EVM_ERC20) {
             //only support EVM address style
             if (!WUtils.isValidEvmAddress(userInput)) {

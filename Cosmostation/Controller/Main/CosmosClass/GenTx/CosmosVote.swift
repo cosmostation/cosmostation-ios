@@ -251,7 +251,7 @@ class CosmosVote: BaseVC {
             }
             toVote.append(voteMsg)
         }
-        return Signer.genVoteMsg(toVote)
+        return Signer.genVoteMsg(selectedChain, toVote)
     }
 
 }

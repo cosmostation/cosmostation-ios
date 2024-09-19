@@ -423,7 +423,7 @@ extension AllChainVoteStartVC {
 extension AllChainVoteStartVC {
     
     func simulateVoteTx(_ chain: BaseChain, _ msgVotes: [Cosmos_Gov_V1beta1_MsgVote]) async throws -> UInt64? {
-        let msgs = Signer.genVoteMsg(msgVotes)
+        let msgs = Signer.genVoteMsg(chain, msgVotes)
         if let cosmosFetcher = chain.getCosmosfetcher(),
            let simulReq = try await Signer.genSimul(chain, msgs, "", chain.getInitPayableFee()!, nil) {
             return try await cosmosFetcher.simulateTx(simulReq)
@@ -432,7 +432,7 @@ extension AllChainVoteStartVC {
     }
     
     func broadcastVoteTx(_ chain: BaseChain, _ msgVotes: [Cosmos_Gov_V1beta1_MsgVote], _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip? = nil) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let msgs = Signer.genVoteMsg(msgVotes)
+        let msgs = Signer.genVoteMsg(chain, msgVotes)
         if let cosmosFetcher = chain.getCosmosfetcher(),
            let broadReq = try await Signer.genTx(chain, msgs, "", fee, tip) {
             return try await cosmosFetcher.broadcastTx(broadReq)
