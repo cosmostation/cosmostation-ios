@@ -198,7 +198,7 @@ class HistoryCell: UITableViewCell {
         
         if (inputs.count > 0) {
             title = NSLocalizedString("tx_send", comment: "")
-            displayAmount = inputAmounts.subtracting(outputAmount).multiplying(byPowerOf10: -8, withBehavior: handler8Down)
+            displayAmount = inputAmounts.subtracting(outputAmount).subtracting(NSDecimalNumber(value: history["fee"].intValue)).multiplying(byPowerOf10: -8, withBehavior: handler8Down)
         } else {
             title = NSLocalizedString("tx_receive", comment: "")
             displayAmount = outputAmount.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
