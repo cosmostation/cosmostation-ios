@@ -30,13 +30,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="435" height="68"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Name" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ylP-Qx-5FA">
-                                <rect key="frame" x="20" y="14.000000000000002" width="395" height="17.666666666666671"/>
+                                <rect key="frame" x="20" y="14.000000000000002" width="99" height="17.666666666666671"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="z1D-Sj-mND">
-                                <rect key="frame" x="419" y="23" width="0.0" height="0.0"/>
+                                <rect key="frame" x="123" y="23" width="0.0" height="0.0"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8c-K1-bjh" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
@@ -85,7 +85,7 @@
                             <constraint firstItem="z1D-Sj-mND" firstAttribute="leading" secondItem="ylP-Qx-5FA" secondAttribute="trailing" constant="4" id="0cx-Fn-Wi8"/>
                             <constraint firstAttribute="bottom" secondItem="f2M-eA-bQ2" secondAttribute="bottom" id="1Vf-YN-lVm"/>
                             <constraint firstItem="ylP-Qx-5FA" firstAttribute="leading" secondItem="5D4-Ig-L21" secondAttribute="leading" constant="20" id="9Tf-Of-Ckf"/>
-                            <constraint firstAttribute="trailing" secondItem="ylP-Qx-5FA" secondAttribute="trailing" constant="20" id="KC1-so-gql"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ylP-Qx-5FA" secondAttribute="trailing" constant="20" id="SaQ-kf-vWq"/>
                             <constraint firstAttribute="height" constant="68" id="XGs-3q-KPG"/>
                             <constraint firstItem="XGK-xK-aly" firstAttribute="top" secondItem="ylP-Qx-5FA" secondAttribute="bottom" constant="4" id="XNA-MJ-CPi"/>
                             <constraint firstAttribute="trailing" secondItem="f2M-eA-bQ2" secondAttribute="trailing" constant="12" id="a8b-x8-0dO"/>

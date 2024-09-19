@@ -92,7 +92,7 @@ class SelectAddressListSheet: BaseVC {
                     }
 
                 } else {
-                    if (refAddress.chainTag.contains("bitcoin") && refAddress.bechAddress != senderMajorAddress) {
+                    if (refAddress.chainTag.contains("bitcoin") && !(refAddress.chainTag.contains("_T")) && refAddress.bechAddress != senderMajorAddress) {
                         refMajorAddresses.append(refAddress)
                     }
                 }
@@ -101,12 +101,15 @@ class SelectAddressListSheet: BaseVC {
             
             BaseData.instance.selectAllAddressBooks().forEach { book in
                 if toChain.isTestnet {
-                    if (book.chainName.lowercased().contains("bitcoin") && book.dpAddress != senderMajorAddress) {
+                    print(book.chainName.lowercased())
+                    if (book.chainName.lowercased().contains("bitcoin") && book.chainName.lowercased().contains("testnet") && book.dpAddress != senderMajorAddress) {
                         majorAddressBook.append(book)
                     }
 
                 } else {
-                    if (book.chainName.lowercased().contains("bitcoin") && book.chainName.lowercased().contains("testnet") && book.dpAddress != senderMajorAddress) {
+                    print(book.chainName.lowercased())
+
+                    if (book.chainName.lowercased().contains("bitcoin") && !book.chainName.lowercased().contains("testnet") && book.dpAddress != senderMajorAddress) {
                         majorAddressBook.append(book)
                     }
                 }
@@ -368,7 +371,7 @@ extension SelectAddressListSheet: UITableViewDelegate, UITableViewDataSource {
                 addressListSheetDelegate?.onAddressSelected(result)
                 
             } else if (indexPath.section == 1) {
-                let result: [String : Any] = ["address" : majorAddressBook[indexPath.row].dpAddress, "memo" : bechAddressBook[indexPath.row].memo]
+                let result: [String : Any] = ["address" : majorAddressBook[indexPath.row].dpAddress, "memo" : majorAddressBook[indexPath.row].memo]
                 addressListSheetDelegate?.onAddressSelected(result)
             }
         } else if (tableView == cosmosStyleTableView) {
