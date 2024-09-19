@@ -108,8 +108,28 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
             onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return
         }
-        
-        let memoInput = memoTextField.isHidden ? "" : memoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+
+        var memoInput = ""
+        let address = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        var network = ""
+        if address!.starts(with: "t") || address!.starts(with: "2") || address!.starts(with: "m") {
+            network = "testnet"
+        } else {
+            network = "bitcoin"
+        }
+
+        if BtcJS("validateAddress").callJSValueToBool(param: [address, network]) {
+            if memoTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).lengthOfBytes(using: .utf8) > 80 {
+                onShowToast(NSLocalizedString("error_memo_count", comment: ""))
+                return
+                
+            } else {
+                memoInput = memoTextField.isHidden ? "" : memoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            }
+            
+        } else {
+            memoInput = memoTextField.isHidden ? "" : memoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        }
         
         if (addressBookType == .ManualNew) {
             if let targetChain = getRecipinetChain(addressInput) {
@@ -143,15 +163,23 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
     }
     
     func onValidateAddress(_ address: String?) -> Bool {
+        var network = ""
+        if address!.starts(with: "t") || address!.starts(with: "2") || address!.starts(with: "m") {
+            network = "testnet"
+        } else {
+            network = "bitcoin"
+        }
+
         if (address?.isEmpty == true) {
             return false
         }
         if (WUtils.isValidEvmAddress(address)) {
             return true
             
-            //TODO: 어드레스 추가
+        } else if BtcJS("validateAddress").callJSValueToBool(param: [address, network]) {
+            return true
 
-        } else if let chain = ALLCHAINS().filter({ address!.starts(with: $0.bechAccountPrefix! + "1") == true }).first {
+        } else if let chain = ALLCHAINS().filter({ address!.starts(with: $0.bechAccountPrefix ?? "" + "1") == true }).first {
             if (WUtils.isValidBechAddress(chain, address!)) {
                 return true
             }
@@ -160,21 +188,43 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
     }
     
     func getRecipinetChain(_ address: String?) -> BaseChain? {
+        var network = ""
+        if address!.starts(with: "t") || address!.starts(with: "2") || address!.starts(with: "m") {
+            network = "testnet"
+        } else {
+            network = "bitcoin"
+        }
+
         if (address?.isEmpty == true) {
             return nil
         }
         if (WUtils.isValidEvmAddress(address)) {
             return ChainEthereum()
             
-//        } else if  {
-            //TODO: 어드레스 추가
-            
-        } else if let chain = ALLCHAINS().filter({ address!.starts(with: $0.bechAccountPrefix! + "1") == true }).first {
+        } else if BtcJS("validateAddress").callJSValueToBool(param: [address, network]) {
+            if address!.starts(with: "bc1") {
+                return ChainBitCoin84()
+            } else if address!.starts(with: "tb1") {
+                return ChainBitCoin84_T()
+            } else if address!.starts(with: "1") {
+                return ChainBitCoin44()
+            } else if address!.starts(with: "m") {
+                return ChainBitCoin44_T()
+            } else if address!.starts(with: "3") {
+                return ChainBitCoin49()
+            } else if address!.starts(with: "2") {
+                return ChainBitCoin49_T()
+            }
+
+        } else if let chain = ALLCHAINS().filter({ address!.starts(with: $0.bechAccountPrefix ?? "" + "1") == true }).first {
             return chain
         }
         return nil
     }
+    
 }
+
+
 
 protocol AddressBookDelegate {
     func onAddressBookUpdated(_ result: Int?)
