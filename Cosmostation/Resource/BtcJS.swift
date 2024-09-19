@@ -56,7 +56,6 @@ open class BtcJS {
     }
     
     open func callJSValueToBool(param: [Any?]? = nil) -> Bool {
-        print("TEST", jsValue, jsValue.call(withArguments: param)!)
         return jsValue.call(withArguments: param)!.toBool()
     }
 

@@ -83,15 +83,18 @@ class ReceiveCell: UITableViewCell {
                 addressLabel.adjustsFontSizeToFitWidth = true
                 if chain.accountKeyType.pubkeyType == .BTC_Legacy {
                     btcTag.text = "Legacy"
-                    btcTag.backgroundColor = .color06
-                    
+                    btcTag.backgroundColor = .color07
+                    btcTag.textColor = .color02
+
                 } else if chain.accountKeyType.pubkeyType == .BTC_Nested_Segwit {
                     btcTag.text = "Nested Segwit"
-                    btcTag.backgroundColor = .color06
-                    
+                    btcTag.backgroundColor = .color07
+                    btcTag.textColor = .color02
+
                 } else if chain.accountKeyType.pubkeyType == .BTC_Native_Segwit {
                     btcTag.text = "Native Segwit"
                     btcTag.backgroundColor = .colorNativeSegwit
+                    btcTag.textColor = .color01
                 }
                 btcTag.isHidden = false
                 oldTag.isHidden = true
