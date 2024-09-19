@@ -169,7 +169,7 @@ class HistoryCell: UITableViewCell {
     func bindBtcHistory(_ btcChain: ChainBitCoin84, _ history: JSON) {
         if (history["status"]["confirmed"].boolValue == true) {
             successImg.image = UIImage(named: "iconSuccess")
-            timeLabel.text = WDP.dpTime(history["status"]["block_time"].intValue)
+            timeLabel.text = WDP.dpTime(history["status"]["block_time"].intValue * 1000)
             if let blockHeight = btcChain.getBtcFetcher()?.btcBlockHeight,
                let txHeight = history["status"]["block_height"].uInt64 {
                 blockLabel.text = "(" + String(blockHeight - txHeight) + " Confirmed)"
