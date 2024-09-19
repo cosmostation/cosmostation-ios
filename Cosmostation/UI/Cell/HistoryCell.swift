@@ -187,9 +187,9 @@ class HistoryCell: UITableViewCell {
         var inputAmounts = NSDecimalNumber.zero
         var outputAmount = NSDecimalNumber.zero
         var displayAmount = NSDecimalNumber.zero
-        let inputs = history["vout"].arrayValue.filter { $0["prevout"]["scriptpubkey_address"].stringValue  == btcChain.mainAddress }
+        let inputs = history["vin"].arrayValue.filter { $0["prevout"]["scriptpubkey_address"].stringValue  == btcChain.mainAddress }
         inputs.forEach { input in
-            inputAmounts = inputAmounts.adding(NSDecimalNumber(value: input["value"].uInt64Value))
+            inputAmounts = inputAmounts.adding(NSDecimalNumber(value: input["prevout"]["value"].uInt64Value))
         }
         let outputs = history["vout"].arrayValue.filter { $0["scriptpubkey_address"].stringValue  == btcChain.mainAddress }
         outputs.forEach { output in
@@ -198,6 +198,7 @@ class HistoryCell: UITableViewCell {
         
         if (inputs.count > 0) {
             title = NSLocalizedString("tx_send", comment: "")
+            print(inputAmounts, outputAmount)
             displayAmount = inputAmounts.subtracting(outputAmount).multiplying(byPowerOf10: -8, withBehavior: handler8Down)
         } else {
             title = NSLocalizedString("tx_receive", comment: "")

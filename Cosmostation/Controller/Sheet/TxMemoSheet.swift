@@ -18,6 +18,8 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
     
     var existedMemo: String?
     var memoDelegate: MemoDelegate?
+    
+    var isSendBTC: Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,10 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
         memoTextArea.preferredContainerHeight = 100
         memoTextArea.textView.text = existedMemo
         memoTextArea.textView.delegate = self
+        
+        if isSendBTC ?? false {
+            btcByteLabel.isHidden = false
+        }
     }
     
     override func setLocalizedString() {
@@ -41,13 +47,14 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
             }
         }
         
-        //TODO: 비트코인 일때만 글자 80바이트 막기    (byte - 한글 3 / 숫자, 영문, 기호 1byte / 이모지 4byte)
-        if textView.text.lengthOfBytes(using: .utf8) > 80 {
-            textView.text = String(textView.text.dropLast())
-            btcByteLabel.text = "\(textView.text.lengthOfBytes(using: .utf8)) / 80 bytes"
+        if isSendBTC ?? false {
+            let currentText = textView.text!
+            guard let stringRange = Range(range, in: currentText) else { return false }
+            let changedText = currentText.replacingCharacters(in: stringRange, with: text)
 
-            return false
+            return changedText.lengthOfBytes(using: .utf8) <= 80
         }
+        
         return true
     }
     
