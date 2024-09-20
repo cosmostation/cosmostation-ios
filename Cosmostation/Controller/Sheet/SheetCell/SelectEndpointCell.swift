@@ -227,7 +227,7 @@ class SelectEndpointCell: UITableViewCell {
     
     func getCallOptions() -> CallOptions {
         var callOptions = CallOptions()
-        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(5000))
+        callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(20000))
         return callOptions
     }
 }
