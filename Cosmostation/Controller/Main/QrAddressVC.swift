@@ -58,20 +58,26 @@ class QrAddressVC: BaseVC {
     }
     
     @IBAction func onClickEvmShare(_ sender: BaseButton) {
-//        if let evmAddress = selectedChain.evmAddress {
-//            let activityViewController = UIActivityViewController(activityItems: [evmAddress], applicationActivities: nil)
-//            activityViewController.popoverPresentationController?.sourceView = self.view
-//            self.present(activityViewController, animated: true, completion: nil)
-//        }
+        if let evmAddress = selectedChain.evmAddress {
+            let activityViewController = UIActivityViewController(activityItems: [evmAddress], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+        }
     }
     
     
     @IBAction func onClickBechShare(_ sender: BaseButton) {
-//        if let bechAddress = selectedChain.bechAddress {
-//            let activityViewController = UIActivityViewController(activityItems: [bechAddress], applicationActivities: nil)
-//            activityViewController.popoverPresentationController?.sourceView = self.view
-//            self.present(activityViewController, animated: true, completion: nil)
-//        }
+        if let bechAddress = selectedChain.bechAddress {
+            let activityViewController = UIActivityViewController(activityItems: [bechAddress], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+        
+        if !selectedChain.mainAddress.isEmpty {
+            let activityViewController = UIActivityViewController(activityItems: [selectedChain.mainAddress], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+        }
     }
 }
 
