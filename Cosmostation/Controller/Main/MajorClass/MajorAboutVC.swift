@@ -76,10 +76,20 @@ extension MajorAboutVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 3) { return 0 }
+        
+        if selectedChain is ChainBitCoin84 && section == 2 {
+            return 0
+        }
+
         return 40
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if selectedChain is ChainBitCoin84 && section == 2 {
+            return 0
+        }
+
         return 1
     }
     
