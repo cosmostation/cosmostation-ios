@@ -13,7 +13,7 @@ class ChainBitCoin49: ChainBitCoin84 {
     override init() {
         super.init()
         
-        name = "BitCoin"
+        name = "Bitcoin"
         tag = "bitcoin49"
         logo1 = "chainBitcoin"
         isDefault = false
