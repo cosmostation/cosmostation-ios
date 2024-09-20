@@ -181,7 +181,7 @@ extension BtcFetcher {
     }
     
     func initFee() async throws -> Int? {
-        if let utxos = try await fetchUtxos() {
+        if let utxos = try await fetchUtxos()?.filter({ $0["status"]["confirmed"].boolValue }) {
             do {
                 let type = BtcTxType.init(rawValue: chain.accountKeyType.pubkeyType.algorhythm!)!
                 let vbyte = (type.vbyte.overhead) + (type.vbyte.inputs * utxos.count) + (type.vbyte.output * 2)
@@ -221,7 +221,7 @@ extension BtcFetcher {
         }
         
 
-        for utxo in utxo.filter({ $0["status"]["confirmed"].boolValue }) {
+        for utxo in utxo {
             
             switch type {
                 

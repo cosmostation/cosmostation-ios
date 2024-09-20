@@ -38,7 +38,7 @@ class AddressBookCell: UITableViewCell {
 //            if let chain = All_IBC_Chains().filter({ $0.name == book.chainName }).first {
 //                logoImg1.image = UIImage.init(named: chain.logo1)
 //            }
-            if let chain = ALLCHAINS().filter { $0.supportCosmos && $0.name == book.chainName }.first {
+            if let chain = ALLCHAINS().filter { $0.name.lowercased().contains(book.chainName.lowercased()) }.first {
                 logoImg1.image = UIImage.init(named: chain.logo1)
             }
         }

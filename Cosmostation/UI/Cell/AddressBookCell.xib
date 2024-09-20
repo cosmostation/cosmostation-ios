@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,8 +33,8 @@
                                     <constraint firstAttribute="width" constant="28" id="s8m-NB-OBn"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rH2-b3-aao">
-                                <rect key="frame" x="44" y="15.33333333333333" width="40.666666666666657" height="17.666666666666671"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rH2-b3-aao">
+                                <rect key="frame" x="44" y="15.33333333333333" width="330" height="17.666666666666671"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
@@ -73,6 +73,7 @@
                             <constraint firstItem="nNA-VT-IUR" firstAttribute="centerY" secondItem="rH2-b3-aao" secondAttribute="centerY" id="IwG-iU-teM"/>
                             <constraint firstAttribute="trailing" secondItem="Y8L-Fz-jx7" secondAttribute="trailing" id="MWM-Vv-kGZ"/>
                             <constraint firstItem="YuX-xC-DfQ" firstAttribute="top" secondItem="ndq-Qr-WPk" secondAttribute="bottom" constant="6" id="NO4-y6-blx"/>
+                            <constraint firstItem="nNA-VT-IUR" firstAttribute="leading" secondItem="rH2-b3-aao" secondAttribute="trailing" constant="10" id="UBh-px-ep3"/>
                             <constraint firstItem="rH2-b3-aao" firstAttribute="leading" secondItem="ndq-Qr-WPk" secondAttribute="trailing" constant="4" id="cn6-bF-VeP"/>
                             <constraint firstItem="ndq-Qr-WPk" firstAttribute="top" secondItem="D98-tm-Xkr" secondAttribute="top" constant="10" id="dRV-8W-BSc"/>
                             <constraint firstItem="ndq-Qr-WPk" firstAttribute="leading" secondItem="D98-tm-Xkr" secondAttribute="leading" constant="12" id="rBP-Xe-Dzy"/>
@@ -111,10 +112,10 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color02">
-            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74509803921568629" green="0.81960784313725488" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

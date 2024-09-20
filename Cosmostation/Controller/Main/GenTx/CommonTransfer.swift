@@ -534,6 +534,9 @@ class CommonTransfer: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
+        if toChain is ChainBitCoin84 {
+            memoSheet.isSendBTC = true
+        }
         onStartSheet(memoSheet, 260, 0.6)
     }
     
@@ -917,7 +920,7 @@ extension CommonTransfer {
     func btcFetchTxHex() {
         Task {
             do {
-                if let utxos = try await btcFetcher.fetchUtxos() {
+                if let utxos = try await btcFetcher.fetchUtxos()?.filter({ $0["status"]["confirmed"].boolValue }) {
                     
                     let type = BtcTxType.init(rawValue: fromChain.accountKeyType.pubkeyType.algorhythm!)!
                     let opReturnVbyte = !txMemo.isEmpty ? 83 : 0
