@@ -18,7 +18,7 @@ class ChainBitCoin84: BaseChain {
     override init() {
         super.init()
         
-        name = "BitCoin"
+        name = "Bitcoin"
         tag = "bitcoin84"
         logo1 = "chainBitcoin"
         apiName = "bitcoin"
