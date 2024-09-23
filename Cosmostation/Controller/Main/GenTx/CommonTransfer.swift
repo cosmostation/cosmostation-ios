@@ -173,6 +173,9 @@ class CommonTransfer: BaseVC {
         toSendAssetTitle.text = NSLocalizedString("str_amount", comment: "")
         toSendAssetHint.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
         memoTitle.text = NSLocalizedString("str_memo_optional", comment: "")
+        if fromChain is ChainBitCoin84 {
+            memoTitle.text = NSLocalizedString("str_op_return_optional", comment: "")
+        }
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
         feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
         sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)

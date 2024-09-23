@@ -36,6 +36,7 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
     override func setLocalizedString() {
         memoTextArea.label.text = NSLocalizedString("tx_set_memo", comment: "")
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
+        btcByteLabel.text = "\(memoTextArea.textView.text.lengthOfBytes(using: .utf8)) / 80 bytes"
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -51,6 +52,14 @@ class TxMemoSheet: BaseVC, UITextViewDelegate, QrScanDelegate {
             guard let stringRange = Range(range, in: currentText) else { return false }
             let changedText = currentText.replacingCharacters(in: stringRange, with: text)
 
+            if !(changedText.lengthOfBytes(using: .utf8) <= 80) {
+                let memoByteText = "\(textView.text.lengthOfBytes(using: .utf8)) / 80 bytes"
+                let attributedString = NSMutableAttributedString(string: memoByteText)
+                attributedString.addAttribute(.foregroundColor, value: UIColor.colorRed, range: (memoByteText as NSString).range(of: " 80 "))
+
+                btcByteLabel.attributedText = attributedString
+            }
+            
             return changedText.lengthOfBytes(using: .utf8) <= 80
         }
         
