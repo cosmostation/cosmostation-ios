@@ -117,6 +117,8 @@ extension AddressBookListVC: UITableViewDelegate, UITableViewDataSource, Address
     }
     
     func onAddressBookUpdated(_ result: Int?) {
+        emptyView.isHidden = true
+        tableView.isHidden = false
         addressBookLsit = BaseData.instance.selectAllAddressBooks()
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -126,6 +128,10 @@ extension AddressBookListVC: UITableViewDelegate, UITableViewDataSource, Address
     func onDeleted(_ book: AddressBook) {
         BaseData.instance.deleteAddressBook(book.id)
         addressBookLsit = BaseData.instance.selectAllAddressBooks()
+        if addressBookLsit.isEmpty {
+            emptyView.isHidden = false
+            tableView.isHidden = true
+        }
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
