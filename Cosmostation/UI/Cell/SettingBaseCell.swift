@@ -91,6 +91,12 @@ class SettingBaseCell: UITableViewCell {
         setDetailLabel.text = ""
     }
     
+    func onBindSetNotice() {
+        setImg.image = UIImage(named: "setAnnouncement")
+        setTitleLabel.text = NSLocalizedString("str_notice", comment: "")
+        setDetailLabel.text = ""
+    }
+
     
     
     func onBindSetTerm() {

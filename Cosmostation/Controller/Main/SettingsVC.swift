@@ -94,7 +94,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         } else if (section == 1) {
             return 8
         } else if (section == 2) {
-            return 2
+            return 3
         } else if (section == 3) {
             return 5
         }
@@ -214,6 +214,9 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 1) {
                 baseCell.onBindSetHomePage()
                 return baseCell
+            } else if (indexPath.row == 2) {
+                baseCell.onBindSetNotice()
+                return baseCell
             }
             
         } else if (indexPath.section == 3) {
@@ -320,6 +323,10 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 1) {
                 guard let url = URL(string: "https://www.cosmostation.io") else { return }
                 onShowSafariWeb(url)
+                
+            } else if (indexPath.row == 2) {
+                let vc = NoticeVC(nibName: "NoticeVC", bundle: nil)
+                navigationController?.pushViewController(vc, animated: true)
             }
             
         } else if (indexPath.section == 3) {

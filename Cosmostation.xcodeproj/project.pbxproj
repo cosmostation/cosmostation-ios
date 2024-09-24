@@ -1568,6 +1568,9 @@
 		2810084A2696D979002986A6 /* KeyFac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281008492696D979002986A6 /* KeyFac.swift */; };
 		28CE973625872B7C006DEBEE /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE973525872B7C006DEBEE /* Signer.swift */; };
 		28FC030C2652662B001C0319 /* MintscanPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC030B2652662B001C0319 /* MintscanPrice.swift */; };
+		79096B992CA3DEA2007C1C7E /* NoticeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79096B972CA3DEA2007C1C7E /* NoticeTableViewCell.swift */; };
+		79096B9A2CA3DEA2007C1C7E /* NoticeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79096B982CA3DEA2007C1C7E /* NoticeTableViewCell.xib */; };
+		79096BC92CA552E1007C1C7E /* CDMarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = 79096BC82CA552E1007C1C7E /* CDMarkdownKit */; };
 		792B9CBD2C747CB3001440DB /* DappSuiSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B9CBB2C747CB2001440DB /* DappSuiSignRequestSheet.swift */; };
 		792B9CBE2C747CB3001440DB /* DappSuiSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792B9CBC2C747CB2001440DB /* DappSuiSignRequestSheet.xib */; };
 		792D2B052C57767E0085007A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 792D2B042C57767E0085007A /* SDWebImage */; };
@@ -1576,6 +1579,8 @@
 		792D2B0C2C5776A50085007A /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 792D2B0B2C5776A50085007A /* SDWebImageSVGCoder */; };
 		795C0DC22C8E853C006D35A4 /* bitcoin.js in Resources */ = {isa = PBXBuildFile; fileRef = 795C0DC12C8E853C006D35A4 /* bitcoin.js */; };
 		795C0DC42C8E8547006D35A4 /* BtcJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795C0DC32C8E8547006D35A4 /* BtcJS.swift */; };
+		796640672CA24EC800D6ACDF /* NoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796640652CA24EC800D6ACDF /* NoticeVC.swift */; };
+		796640682CA24EC800D6ACDF /* NoticeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796640662CA24EC800D6ACDF /* NoticeVC.xib */; };
 		796CC3602C6B60CA00FEC658 /* SuiStakingInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796CC35F2C6B60CA00FEC658 /* SuiStakingInfoSheet.swift */; };
 		796CC3622C6B60E000FEC658 /* SuiStakingInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */; };
 		796CC3632C6C3B0C00FEC658 /* SuiStakingInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */; };
@@ -2879,10 +2884,14 @@
 		28CE973525872B7C006DEBEE /* Signer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signer.swift; sourceTree = "<group>"; };
 		28FC030B2652662B001C0319 /* MintscanPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanPrice.swift; sourceTree = "<group>"; };
 		6ED0AF4867E1AFC41A279302 /* Pods-Cosmostation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.debug.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.debug.xcconfig"; sourceTree = "<group>"; };
+		79096B972CA3DEA2007C1C7E /* NoticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTableViewCell.swift; sourceTree = "<group>"; };
+		79096B982CA3DEA2007C1C7E /* NoticeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeTableViewCell.xib; sourceTree = "<group>"; };
 		792B9CBB2C747CB2001440DB /* DappSuiSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappSuiSignRequestSheet.swift; sourceTree = "<group>"; };
 		792B9CBC2C747CB2001440DB /* DappSuiSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappSuiSignRequestSheet.xib; sourceTree = "<group>"; };
 		795C0DC12C8E853C006D35A4 /* bitcoin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bitcoin.js; sourceTree = "<group>"; };
 		795C0DC32C8E8547006D35A4 /* BtcJS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BtcJS.swift; sourceTree = "<group>"; };
+		796640652CA24EC800D6ACDF /* NoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeVC.swift; sourceTree = "<group>"; };
+		796640662CA24EC800D6ACDF /* NoticeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeVC.xib; sourceTree = "<group>"; };
 		796CC35F2C6B60CA00FEC658 /* SuiStakingInfoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiStakingInfoSheet.swift; sourceTree = "<group>"; };
 		796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuiStakingInfoSheet.xib; sourceTree = "<group>"; };
 		79BF332E2C50D0C300515D78 /* SearchBarWithTopPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarWithTopPadding.swift; sourceTree = "<group>"; };
@@ -3188,6 +3197,7 @@
 				04FA745C2A9DEE51001A2830 /* Toast in Frameworks */,
 				049C02D42C16D6D300A71604 /* web3swift in Frameworks */,
 				9EBDC03599A6A52BCFB81E33 /* Pods_Cosmostation.framework in Frameworks */,
+				79096BC92CA552E1007C1C7E /* CDMarkdownKit in Frameworks */,
 				E122DA212A8A18FB006D1E7B /* ed25519swift in Frameworks */,
 				04815BDE2A41DB120006A906 /* SwiftProtobuf in Frameworks */,
 				792D2B052C57767E0085007A /* SDWebImage in Frameworks */,
@@ -3818,6 +3828,10 @@
 				E16200402AF279560008F397 /* AddressBookListVC.xib */,
 				04FEDB4A2B05D1340095B7B6 /* WalletDeriveVC.swift */,
 				04FEDB4B2B05D1340095B7B6 /* WalletDeriveVC.xib */,
+				796640652CA24EC800D6ACDF /* NoticeVC.swift */,
+				796640662CA24EC800D6ACDF /* NoticeVC.xib */,
+				79096B972CA3DEA2007C1C7E /* NoticeTableViewCell.swift */,
+				79096B982CA3DEA2007C1C7E /* NoticeTableViewCell.xib */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -4791,6 +4805,7 @@
 				042DE6D82C19A0FA009CAC04 /* WalletConnectPairing */,
 				792D2B042C57767E0085007A /* SDWebImage */,
 				792D2B092C57769C0085007A /* SDWebImageSVGCoder */,
+				79096BC82CA552E1007C1C7E /* CDMarkdownKit */,
 			);
 			productName = Cosmostation;
 			productReference = E1945E24222E7C0600A1436F /* Cosmostation.app */;
@@ -4871,6 +4886,7 @@
 				042DE6D52C19A0FA009CAC04 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */,
 				792D2B032C57767E0085007A /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				792D2B082C57769C0085007A /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */,
+				79096BC72CA552E1007C1C7E /* XCRemoteSwiftPackageReference "CDMarkdownKit" */,
 			);
 			productRefGroup = E1945E25222E7C0600A1436F /* Products */;
 			projectDirPath = "";
@@ -5098,6 +5114,7 @@
 				04FA747B2AA0446A001A2830 /* BaseMsgSheetCell.xib in Resources */,
 				04FF6B9A2B21EB74009DCA89 /* RewardDetailCell.xib in Resources */,
 				041540F62BA2E4D500CD5AA1 /* AllChainVoteStartVC.xib in Resources */,
+				796640682CA24EC800D6ACDF /* NoticeVC.xib in Resources */,
 				04C940B32AE8D48C00415256 /* aes.js in Resources */,
 				E162004F2AF27C250008F397 /* AddressBookCell.xib in Resources */,
 				0442224A2B96F2B60063F031 /* SelectDisplayTokenListSheet.xib in Resources */,
@@ -5126,6 +5143,7 @@
 				E10B1DC82C2159040039283B /* KavaEarnWithdrawAction.xib in Resources */,
 				04D782BF2C2D28FF004B99CF /* AboutChainInfoCell.xib in Resources */,
 				04A68C312AC13A560041FA13 /* CosmosProposalsVC.xib in Resources */,
+				79096B9A2CA3DEA2007C1C7E /* NoticeTableViewCell.xib in Resources */,
 				04CD24552AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */,
 				04FAD9C62AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
 				043791F92C6964660078C2B3 /* SuiStake.xib in Resources */,
@@ -6281,6 +6299,7 @@
 				E11069C02AA4C57600EB02CA /* cosmwasm_wasm_v1_ibc.pb.swift in Sources */,
 				04FAD9F42AB71D5000143A3E /* DeleteAccountSheet.swift in Sources */,
 				04C8179C2BA98D75006B800A /* cosmos_group_v1_genesis.pb.swift in Sources */,
+				796640672CA24EC800D6ACDF /* NoticeVC.swift in Sources */,
 				045033022C1F029A00235F6A /* ChainSei.swift in Sources */,
 				04F23A9D2C4258E70030F70F /* ChainLava.swift in Sources */,
 				04C817282BA98D75006B800A /* cosmos_group_v1_query.grpc.swift in Sources */,
@@ -7030,6 +7049,7 @@
 				04C816BC2BA98D75006B800A /* cosmos_crypto_multisig_keys.pb.swift in Sources */,
 				E15980802A83A8CE0032892B /* BaseNavi.swift in Sources */,
 				04B7893D2ACAC9B100E9BE88 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */,
+				79096B992CA3DEA2007C1C7E /* NoticeTableViewCell.swift in Sources */,
 				04C817062BA98D75006B800A /* cosmos_counter_v1_query.grpc.swift in Sources */,
 				04C816982BA98D74006B800A /* cosmos_distribution_v1beta1_query.pb.swift in Sources */,
 				04C817D72BA9917D006B800A /* cosmos_upgrade_v1beta1_tx.pb.swift in Sources */,
@@ -7548,6 +7568,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		79096BC72CA552E1007C1C7E /* XCRemoteSwiftPackageReference "CDMarkdownKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/chrisdhaan/CDMarkdownKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
 		792D2B032C57767E0085007A /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
@@ -7722,6 +7750,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04815BDC2A41DB120006A906 /* XCRemoteSwiftPackageReference "swift-protobuf" */;
 			productName = SwiftProtobuf;
+		};
+		79096BC82CA552E1007C1C7E /* CDMarkdownKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79096BC72CA552E1007C1C7E /* XCRemoteSwiftPackageReference "CDMarkdownKit" */;
+			productName = CDMarkdownKit;
 		};
 		792D2B042C57767E0085007A /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
