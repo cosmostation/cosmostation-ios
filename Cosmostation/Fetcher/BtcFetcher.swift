@@ -61,8 +61,6 @@ class BtcFetcher {
                 btcBalances = chain_funded_txo_sum.subtracting(chain_spent_txo_sum).subtracting(mempool_spent_txo_sum)
                 btcPendingInput = mempool_funded_txo_sum
                 btcPendingOutput = mempool_spent_txo_sum
-                
-                print("", chain.mainAddress, "   ", btcBalances)
             }
             return true
             
