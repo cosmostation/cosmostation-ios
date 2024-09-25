@@ -101,7 +101,7 @@ class SuiUnstake: BaseVC {
         let estimatedReward = NSDecimalNumber(value: fromValidator.1["estimatedReward"].uInt64Value).multiplying(byPowerOf10: -9)
         principalLabel?.attributedText = WDP.dpAmount(principal.stringValue, principalLabel!.font, 9)
         estimatedRewardLabel?.attributedText = WDP.dpAmount(estimatedReward.stringValue, principalLabel!.font, 9)
-        totalStakedLabel?.attributedText = WDP.dpAmount(estimatedReward.adding(principal).stringValue, principalLabel!.font, 9)
+        totalStakedLabel?.attributedText = WDP.dpAmount(estimatedReward.adding(principal).stringValue, totalStakedLabel!.font, 9)
         startEaringLabel.text = "Epoch #" + fromValidator.1["stakeActiveEpoch"].stringValue
         
         onSimul()

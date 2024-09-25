@@ -26,6 +26,9 @@ class SuiStake: BaseVC {
     @IBOutlet weak var stakingAmountHintLabel: UILabel!
     @IBOutlet weak var stakingAmountLabel: UILabel!
     @IBOutlet weak var stakingDenomLabel: UILabel!
+    @IBOutlet weak var stakingCurrencyLabel: UILabel!
+    @IBOutlet weak var stakingValueLabel: UILabel!
+
     
     @IBOutlet weak var feeCardView: FixCardView!
     @IBOutlet weak var feeMsgLabel: UILabel!
@@ -140,11 +143,16 @@ class SuiStake: BaseVC {
         toStakeAmount = NSDecimalNumber(string: amount)
         
         let dpAmount = toStakeAmount.multiplying(byPowerOf10: -9, withBehavior: handler18Down)
+        let msPrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
+        let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
+        WDP.dpValue(value, stakingCurrencyLabel, stakingValueLabel)
         stakingAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, stakingAmountLabel!.font, 9)
         stakingDenomLabel.text = selectedChain.coinSymbol
         stakingAmountHintLabel.isHidden = true
         stakingAmountLabel.isHidden = false
         stakingDenomLabel.isHidden = false
+        stakingCurrencyLabel.isHidden = false
+        stakingValueLabel.isHidden = false
         onSimul()
         
         if (toStakeAmount.compare(SUI_MIN_STAKE).rawValue < 0) {

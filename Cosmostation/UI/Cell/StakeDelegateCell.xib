@@ -56,10 +56,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haF-lh-o1R">
-                                <rect key="frame" x="68" y="14.666666666666668" width="351" height="14"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="14" id="hgZ-88-9ou"/>
-                                </constraints>
+                                <rect key="frame" x="68" y="14.666666666666666" width="351" height="17.666666666666679"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
