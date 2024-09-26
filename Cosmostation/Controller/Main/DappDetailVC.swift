@@ -218,6 +218,9 @@ class DappDetailVC: BaseVC, WebSignDelegate {
             }
             self.wcV2SetSign()
             self.wcV2SetPair(uri: wcUrl) { _ in }
+            
+        } else if let host = url.host, let query = url.query?.removingPercentEncoding, host == "dapp" {
+            webView.load(URLRequest(url: URL(string: query)!))
         }
     }
     
