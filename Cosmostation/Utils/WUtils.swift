@@ -317,3 +317,7 @@ extension Cosmos_Base_V1beta1_DecCoin {
     }
 }
 
+/// Use when HTTP Request is successful but receives an error message as a result
+enum EmptyDataError: Error {
+    case error(message: String)
+}

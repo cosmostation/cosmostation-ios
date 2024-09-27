@@ -574,10 +574,12 @@ extension CosmosFetcher {
         } else {
             let param: Parameters = ["txBytes": try! simulTx.tx.serializedData().base64EncodedString() ]
             let url = getLcd() + "cosmos/tx/v1beta1/simulate"
-            if let result = try await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value["gas_info"]["gas_used"].string {
-                return UInt64(result)
+            let result = try await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
+            if let gasUsed = result["gas_info"]["gas_used"].string {
+                return UInt64(gasUsed)
+            } else {
+                throw EmptyDataError.error(message: result["message"].stringValue)
             }
-            return nil
         }
     }
     
