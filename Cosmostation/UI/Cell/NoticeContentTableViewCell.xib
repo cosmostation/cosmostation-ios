@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+        <array key="SpoqaHanSansNeo-Medium.otf">
+            <string>SpoqaHanSansNeo-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="375" id="KGk-i7-Jjw" customClass="NoticeContentTableViewCell" customModule="Cosmostation" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="405" height="375"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="405" height="375"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zD0-xX-Ba6" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
+                        <rect key="frame" x="12" y="8" width="381" height="359"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2e-bB-VIn">
+                                <rect key="frame" x="16" y="16" width="38" height="17.666666666666671"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                                <color key="textColor" name="_color01"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSH-cU-jiv" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                                <rect key="frame" x="16" y="41.666666666666664" width="23.666666666666671" height="11.333333333333336"/>
+                                <color key="backgroundColor" red="0.3411764706" green="0.3803921569" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="9"/>
+                                <color key="textColor" name="_color01"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJl-pk-0SS">
+                                <rect key="frame" x="51.666666666666664" y="39.666666666666664" width="31.333333333333336" height="15.333333333333336"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                <color key="textColor" name="_color02"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="|" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gN7-2r-dUe">
+                                <rect key="frame" x="44.666666666666664" y="41.666666666666664" width="2" height="11.333333333333336"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="9"/>
+                                <color key="textColor" name="_color03"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowExpanded" translatesAutoresizingMaskIntoConstraints="NO" id="lSa-1o-Y3s">
+                                <rect key="frame" x="345" y="24" width="20" height="20"/>
+                                <color key="tintColor" name="_color03"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="EC9-VX-UUs"/>
+                                    <constraint firstAttribute="width" constant="20" id="X0Z-H6-Mta"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7XY-qO-LnH">
+                                <rect key="frame" x="16" y="68" width="349" height="0.6666666666666714"/>
+                                <color key="backgroundColor" name="_color04"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.59999999999999998" id="Z0e-ha-RG0"/>
+                                </constraints>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="S7B-N1-USa">
+                                <rect key="frame" x="16" y="84.666666666666657" width="349" height="258.33333333333337"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="S7B-N1-USa" firstAttribute="leading" secondItem="zD0-xX-Ba6" secondAttribute="leading" constant="16" id="4h2-1I-cjt"/>
+                            <constraint firstItem="7XY-qO-LnH" firstAttribute="leading" secondItem="zD0-xX-Ba6" secondAttribute="leading" constant="16" id="60Q-UW-hlz"/>
+                            <constraint firstAttribute="trailing" secondItem="7XY-qO-LnH" secondAttribute="trailing" constant="16" id="7VW-Gc-A5Q"/>
+                            <constraint firstItem="S7B-N1-USa" firstAttribute="top" secondItem="7XY-qO-LnH" secondAttribute="bottom" constant="16" id="8sO-sQ-zRy"/>
+                            <constraint firstItem="FJl-pk-0SS" firstAttribute="centerY" secondItem="GSH-cU-jiv" secondAttribute="centerY" id="9PI-Zw-tcx"/>
+                            <constraint firstItem="GSH-cU-jiv" firstAttribute="leading" secondItem="zD0-xX-Ba6" secondAttribute="leading" constant="16" id="Eoi-6u-tpz"/>
+                            <constraint firstItem="f2e-bB-VIn" firstAttribute="top" secondItem="zD0-xX-Ba6" secondAttribute="top" constant="16" id="IAQ-kV-hu8"/>
+                            <constraint firstItem="lSa-1o-Y3s" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="f2e-bB-VIn" secondAttribute="trailing" constant="6" id="OVz-E6-Tck"/>
+                            <constraint firstItem="gN7-2r-dUe" firstAttribute="leading" secondItem="GSH-cU-jiv" secondAttribute="trailing" constant="5" id="TcC-RY-oQK"/>
+                            <constraint firstItem="FJl-pk-0SS" firstAttribute="leading" secondItem="gN7-2r-dUe" secondAttribute="trailing" constant="5" id="UWn-wI-CBP"/>
+                            <constraint firstItem="lSa-1o-Y3s" firstAttribute="top" secondItem="zD0-xX-Ba6" secondAttribute="top" constant="24" id="apd-sM-foD"/>
+                            <constraint firstAttribute="trailing" secondItem="S7B-N1-USa" secondAttribute="trailing" constant="16" id="bAF-EB-2Iz"/>
+                            <constraint firstAttribute="bottom" secondItem="S7B-N1-USa" secondAttribute="bottom" constant="16" id="d5W-aN-gPZ"/>
+                            <constraint firstItem="gN7-2r-dUe" firstAttribute="centerY" secondItem="GSH-cU-jiv" secondAttribute="centerY" id="jyx-Ai-HCY"/>
+                            <constraint firstAttribute="trailing" secondItem="lSa-1o-Y3s" secondAttribute="trailing" constant="16" id="k8o-Nv-bJK"/>
+                            <constraint firstItem="f2e-bB-VIn" firstAttribute="leading" secondItem="zD0-xX-Ba6" secondAttribute="leading" constant="16" id="qJ2-ap-xx3"/>
+                            <constraint firstItem="7XY-qO-LnH" firstAttribute="top" secondItem="FJl-pk-0SS" secondAttribute="bottom" constant="13" id="wxh-Is-lGY"/>
+                            <constraint firstItem="FJl-pk-0SS" firstAttribute="top" secondItem="f2e-bB-VIn" secondAttribute="bottom" constant="6" id="x9K-6c-hND"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="zD0-xX-Ba6" secondAttribute="trailing" constant="12" id="Ai1-5j-9ZQ"/>
+                    <constraint firstItem="zD0-xX-Ba6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="ONd-wU-Cdg"/>
+                    <constraint firstItem="zD0-xX-Ba6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="W2f-eW-Fee"/>
+                    <constraint firstAttribute="bottom" secondItem="zD0-xX-Ba6" secondAttribute="bottom" constant="8" id="ZoK-to-bh1"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="contentLabel" destination="S7B-N1-USa" id="kNb-ak-fVd"/>
+                <outlet property="dateLabel" destination="FJl-pk-0SS" id="EDg-fs-VNq"/>
+                <outlet property="rootView" destination="zD0-xX-Ba6" id="huX-4n-p80"/>
+                <outlet property="titleLabel" destination="f2e-bB-VIn" id="tpf-CO-u9u"/>
+                <outlet property="typeTag" destination="GSH-cU-jiv" id="9Qs-Ct-P6c"/>
+            </connections>
+            <point key="canvasLocation" x="-31.297709923664122" y="61.619718309859159"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="arrowExpanded" width="24" height="24"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74509803921568629" green="0.81960784313725488" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color03">
+            <color red="0.54117647058823526" green="0.59999999999999998" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color04">
+            <color red="0.42352941176470588" green="0.45882352941176469" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
