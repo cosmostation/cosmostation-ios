@@ -177,7 +177,7 @@ public class BaseAccount {
             
         } else if (privateKeyString != nil) {
             if !BaseData.instance.getHideLegacy() {
-                self.allChains = self.allChains.filter { $0.isDefault || $0.tag == "kava459" }
+                self.allChains = self.allChains.filter { $0.isDefault || $0.tag == "kava459" || $0 is ChainBitCoin84}
             }
             Task {
                 await allChains.concurrentForEach { chain in
