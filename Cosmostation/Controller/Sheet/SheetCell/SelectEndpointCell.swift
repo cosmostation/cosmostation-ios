@@ -99,11 +99,7 @@ class SelectEndpointCell: UITableViewCell {
             if (url.last != "/") {
                 url = url + "/"
             }
-            if (chain.name.starts(with: "G-Bridge") || chain.name.starts(with: "Sentinel")) {
-                url = url + "/node_info"
-            } else {
-                url = url + "cosmos/base/tendermint/v1beta1/node_info"
-            }
+            url = url + "cosmos/base/tendermint/v1beta1/node_info"
             
             if (cosmosFetcher.getEndpointType() == .UseLCD &&
                 cosmosFetcher.getLcd().contains(endpoint["url"].stringValue)) {
