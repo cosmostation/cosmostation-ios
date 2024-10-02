@@ -574,10 +574,12 @@ extension CosmosFetcher {
         } else {
             let param: Parameters = ["txBytes": try! simulTx.tx.serializedData().base64EncodedString() ]
             let url = getLcd() + "cosmos/tx/v1beta1/simulate"
-            if let result = try await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value["gas_info"]["gas_used"].string {
-                return UInt64(result)
+            let result = try await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
+            if let gasUsed = result["gas_info"]["gas_used"].string {
+                return UInt64(gasUsed)
+            } else {
+                throw EmptyDataError.error(message: result["message"].stringValue)
             }
-            return nil
         }
     }
     
@@ -643,12 +645,7 @@ extension CosmosFetcher {
             let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
             return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: getClient()).getLatestBlock(req, callOptions: getCallOptions()).response.get().block.header.height
         } else {
-            var url = ""
-            if (chain.name.starts(with: "G-Bridge")) {
-                url = getLcd() + "/blocks/latest"
-            } else {
-                url = getLcd() + "cosmos/base/tendermint/v1beta1/blocks/latest"
-            }
+            let url = getLcd() + "cosmos/base/tendermint/v1beta1/blocks/latest"
             let response = try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
             if let height = response?["block"]["header"]["height"].string {
                 return Int64(height)!

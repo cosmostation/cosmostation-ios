@@ -180,7 +180,7 @@ class SuiStakingInfoVC: BaseVC {
         tableView.isHidden = false
         tableView.reloadData()
         
-        if (stakedList.count == 0) {
+        if (displayStakedList.count == 0) {
             emptyStakeImg.isHidden = false
         } else {
             emptyStakeImg.isHidden = true
