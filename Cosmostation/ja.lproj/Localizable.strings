@@ -1082,6 +1082,7 @@
 "error_invalid_pincode" = "PIN 番号が違います。";
 "error_not_enough_fee" = "Tx手数料を支払う利用可能金額が不足しています。";
 "error_not_enough_balance_to_send" = "バランスが十分ではありません。";
+"error_pending_balance" = "前回の取引が処理されるのを待っています。";
 "error_wasting_fee" = "要請する利子がTx手数料よりも低く、手数料の無駄です。";
 "error_no_telegram" = "テレグラムがインストールされていません。ダウンロード後に利用可能です。";
 "error_access_camera_title" = "カメラへのアクセス";

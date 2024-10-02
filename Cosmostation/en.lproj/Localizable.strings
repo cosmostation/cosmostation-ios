@@ -1083,6 +1083,7 @@
 "error_invalid_pincode" = "Invalid PIN number";
 "error_not_enough_fee" = "No enough balance for fee.";
 "error_not_enough_balance_to_send" = "No enough balance for send.";
+"error_pending_balance" = "Waiting for the previous transaction to be processed.";
 "error_wasting_fee" = "Fee is bigger than reward. \nCoin would be wasted!";
 "error_no_telegram" = "Telegram not installed\nPlease install to continue.";
 "error_access_camera_title" = "Camera Access";

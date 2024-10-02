@@ -1081,6 +1081,7 @@
 "error_invalid_pincode" = "PIN 번호가 틀렸습니다.";
 "error_not_enough_fee" = "Tx 수수료를 지불할 만한 사용 가능 수량이 없습니다.";
 "error_not_enough_balance_to_send" = "현재 잔액이 적어 송금을 할 수 없습니다.";
+"error_pending_balance" = "이전 트랜잭션이 처리될 때까지 대기 중입니다.";
 "error_wasting_fee" = "요청할 이자가 Tx 수수료 보다 낮습니다.\n수수료 낭비 입니다.";
 "error_no_telegram" = "텔레그렘이 설치되어있지 않습니다.\n다운로드후 사용가능합니다.";
 "error_access_camera_title" = "카메라 권한";
