@@ -10,6 +10,7 @@ import UIKit
 import Lottie
 import Alamofire
 import SwiftyJSON
+import MaterialComponents
 
 class CosmosStakingInfoVC: BaseVC {
     
@@ -17,6 +18,7 @@ class CosmosStakingInfoVC: BaseVC {
     @IBOutlet weak var stakeBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var emptyStakeImg: UIImageView!
+    @IBOutlet weak var tabbar: MDCTabBarView!
     var refresher: UIRefreshControl!
     
     var selectedChain: BaseChain!
@@ -54,6 +56,7 @@ class CosmosStakingInfoVC: BaseVC {
         tableView.addSubview(refresher)
         
         onSetStakeData()
+        onSetTabbarView()
     }
     
     override func setLocalizedString() {
@@ -87,6 +90,24 @@ class CosmosStakingInfoVC: BaseVC {
         if (selectedChain.tag == tag) {
             onSetStakeData()
         }
+    }
+    
+    func onSetTabbarView() {
+        let stakingTabBar = UITabBarItem(title: "Staking", image: nil, tag: 0)
+        let unstakingTabBar = UITabBarItem(title: "Unstaking", image: nil, tag: 1)
+        tabbar.items.append(stakingTabBar)
+        tabbar.items.append(unstakingTabBar)
+        
+        tabbar.barTintColor = .clear
+        tabbar.selectionIndicatorStrokeColor = .white
+        tabbar.setTitleFont(.fontSize14Bold, for: .normal)
+        tabbar.setTitleFont(.fontSize14Bold, for: .selected)
+        tabbar.setTitleColor(.color02, for: .normal)
+        tabbar.setTitleColor(.color02, for: .selected)
+        tabbar.setSelectedItem(stakingTabBar, animated: false)
+        tabbar.tabBarDelegate = self
+        tabbar.preferredLayoutStyle = .fixedClusteredLeading
+        tabbar.setContentPadding(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), for: .scrollable)
     }
     
     func onSetStakeData() {
@@ -125,8 +146,9 @@ class CosmosStakingInfoVC: BaseVC {
         refresher.endRefreshing()
         loadingView.isHidden = true
         tableView.isHidden = false
+        tabbar.isHidden = false
         tableView.reloadData()
-        if (delegations.count == 0 && unbondings.count == 0) {
+        if (delegations.count == 0) {
             emptyStakeImg.isHidden = false
         } else {
             emptyStakeImg.isHidden = true
@@ -268,42 +290,17 @@ class CosmosStakingInfoVC: BaseVC {
 
 extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (section == 0) {
-            view.titleLabel.text = NSLocalizedString("str_my_delegations", comment: "")
-            view.cntLabel.text = String(delegations.count)
-        } else if (section == 1) {
-            view.titleLabel.text = NSLocalizedString("str_my_unbondings", comment: "")
-            view.cntLabel.text = String(unbondings.count)
-        }
-        return view
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 0) {
-            return (delegations.count > 0) ? 40 : 0
-        } else if (section == 1) {
-            return (unbondings.count > 0) ? 40 : 0
-        }
-        return 0
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (section == 0) {
+        if (tabbar.selectedItem?.tag == 0) {
             return delegations.count
-        } else if (section == 1) {
+        } else if (tabbar.selectedItem?.tag == 1) {
             return unbondings.count
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (indexPath.section == 0) {
+        if (tabbar.selectedItem?.tag == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"StakeDelegateCell") as! StakeDelegateCell
             let delegation = delegations[indexPath.row]
             if let validator = validators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
@@ -311,7 +308,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
             }
             return cell
             
-        } else if (indexPath.section == 1) {
+        } else if (tabbar.selectedItem?.tag == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"StakeUnbondingCell") as! StakeUnbondingCell
             let entry = unbondings[indexPath.row]
             if let validator = validators.filter({ $0.operatorAddress == entry.validatorAddress }).first {
@@ -328,14 +325,14 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (indexPath.section == 0) {
+        if (tabbar.selectedItem?.tag == 0) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
             baseSheet.delegation = delegations[indexPath.row]
             baseSheet.sheetType = .SelectDelegatedAction
             onStartSheet(baseSheet, 320, 0.6)
             
-        } else if (indexPath.section == 1) {
+        } else if (tabbar.selectedItem?.tag == 1) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
             baseSheet.unbondingEnrtyPosition = indexPath.row
@@ -345,7 +342,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        if (indexPath.section == 1) {
+        if (tabbar.selectedItem?.tag == 1) {
             let delegation = delegations[indexPath.row]
             let rewards = rewards?.filter { $0.validatorAddress == delegation.delegation.validatorAddress }
                 
@@ -360,28 +357,6 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         return nil
     }
     
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        for cell in tableView.visibleCells {
-            let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
-            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-            }
-        }
-    }
-
-    func maskCell(cell: UITableViewCell, margin: Float) {
-        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
-        cell.layer.masksToBounds = true
-    }
-
-    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
-        let mask = CAGradientLayer()
-        mask.frame = cell.bounds
-        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
-        return mask;
-    }
     
     func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         return makeTargetedPreview(for: configuration)
@@ -433,6 +408,22 @@ extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
     
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         
+    }
+}
+
+extension CosmosStakingInfoVC: MDCTabBarViewDelegate {
+    
+    func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
+        
+        if item.tag == 0 {
+            emptyStakeImg.isHidden = !delegations.isEmpty
+
+        } else if item.tag == 1 {
+            emptyStakeImg.isHidden = !unbondings.isEmpty
+            
+        }
+        
+        tableView.reloadData()
     }
 }
 

@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,6 +19,7 @@
                 <outlet property="emptyStakeImg" destination="wWP-Dn-0KN" id="eBo-ZH-6Xd"/>
                 <outlet property="loadingView" destination="0j9-dh-zkZ" id="tJu-oj-Kbd"/>
                 <outlet property="stakeBtn" destination="624-lZ-p19" id="qCq-7O-hF7"/>
+                <outlet property="tabbar" destination="2kO-JF-ME4" id="lkS-is-Bec"/>
                 <outlet property="tableView" destination="EAi-3C-2oH" id="FVH-am-ZB0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -28,8 +29,22 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gsE-3R-BsE">
+                    <rect key="frame" x="12" y="105" width="369" height="1"/>
+                    <color key="backgroundColor" name="_color04"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="lR6-iS-RbC"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2kO-JF-ME4" customClass="MDCTabBarView">
+                    <rect key="frame" x="12" y="59" width="369" height="48"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="F2g-q0-T1B"/>
+                    </constraints>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EAi-3C-2oH">
-                    <rect key="frame" x="0.0" y="59" width="393" height="689"/>
+                    <rect key="frame" x="0.0" y="117" width="393" height="631"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="624-lZ-p19" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
@@ -66,14 +81,20 @@
             <color key="tintColor" name="_primary"/>
             <constraints>
                 <constraint firstItem="0j9-dh-zkZ" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="1TP-xI-Q0p"/>
+                <constraint firstItem="2kO-JF-ME4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2He-pW-Gyj"/>
                 <constraint firstItem="wWP-Dn-0KN" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="2J4-Uw-Cj9"/>
-                <constraint firstItem="EAi-3C-2oH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5xq-78-PPh"/>
+                <constraint firstItem="EAi-3C-2oH" firstAttribute="top" secondItem="2kO-JF-ME4" secondAttribute="bottom" constant="10" id="5xq-78-PPh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EAi-3C-2oH" secondAttribute="trailing" id="Ads-i0-sKN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2kO-JF-ME4" secondAttribute="trailing" constant="12" id="E5l-AX-4Ra"/>
+                <constraint firstItem="gsE-3R-BsE" firstAttribute="bottom" secondItem="2kO-JF-ME4" secondAttribute="bottom" constant="-1" id="JzC-LS-RSz"/>
                 <constraint firstItem="wWP-Dn-0KN" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" constant="-40" id="NX0-kp-VSC"/>
+                <constraint firstItem="gsE-3R-BsE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="P55-A0-Neq"/>
                 <constraint firstItem="624-lZ-p19" firstAttribute="top" secondItem="EAi-3C-2oH" secondAttribute="bottom" constant="8" id="QZb-Mn-mbH"/>
                 <constraint firstItem="624-lZ-p19" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="VtP-PC-MkV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="624-lZ-p19" secondAttribute="bottom" constant="8" id="XAw-yA-Cmf"/>
                 <constraint firstItem="wWP-Dn-0KN" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="bCS-QP-xs0"/>
+                <constraint firstItem="2kO-JF-ME4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="cGW-mN-DuS"/>
+                <constraint firstAttribute="trailing" secondItem="gsE-3R-BsE" secondAttribute="trailing" constant="12" id="eqi-QZ-0xk"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="624-lZ-p19" secondAttribute="trailing" constant="8" id="qzY-XD-JmH"/>
                 <constraint firstItem="0j9-dh-zkZ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="wPb-Ht-7gb"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="EAi-3C-2oH" secondAttribute="leading" id="yfT-f1-Xa6"/>
@@ -86,8 +107,11 @@
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="_color04">
+            <color red="0.42352941176470588" green="0.45882352941176469" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="_primary">
-            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

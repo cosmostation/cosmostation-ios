@@ -28,7 +28,9 @@ class CosmosDelegate: BaseVC {
     @IBOutlet weak var stakingAmountHintLabel: UILabel!
     @IBOutlet weak var stakingAmountLabel: UILabel!
     @IBOutlet weak var stakingDenomLabel: UILabel!
-    
+    @IBOutlet weak var stakingCurrencyLabel: UILabel!
+    @IBOutlet weak var stakingValueLabel: UILabel!
+
     @IBOutlet weak var memoCardView: FixCardView!
     @IBOutlet weak var memoTitle: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
@@ -143,12 +145,18 @@ class CosmosDelegate: BaseVC {
     func onUpdateAmountView(_ amount: String) {
         let stakeDenom = selectedChain.stakeDenom!
         toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = stakeDenom; $0.amount = amount }
-        
+
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let dpAmount = NSDecimalNumber(string: toCoin?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
+            let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
+            WDP.dpValue(value, stakingCurrencyLabel, stakingValueLabel)
             WDP.dpCoin(msAsset, toCoin, nil, stakingDenomLabel, stakingAmountLabel, msAsset.decimals)
             stakingAmountHintLabel.isHidden = true
             stakingAmountLabel.isHidden = false
             stakingDenomLabel.isHidden = false
+            stakingCurrencyLabel.isHidden = false
+            stakingValueLabel.isHidden = false
         }
         onSimul()
     }

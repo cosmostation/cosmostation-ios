@@ -101,7 +101,7 @@ class SuiUnstake: BaseVC {
         let estimatedReward = NSDecimalNumber(value: fromValidator.1["estimatedReward"].uInt64Value).multiplying(byPowerOf10: -9)
         principalLabel?.attributedText = WDP.dpAmount(principal.stringValue, principalLabel!.font, 9)
         estimatedRewardLabel?.attributedText = WDP.dpAmount(estimatedReward.stringValue, principalLabel!.font, 9)
-        totalStakedLabel?.attributedText = WDP.dpAmount(estimatedReward.adding(principal).stringValue, principalLabel!.font, 9)
+        totalStakedLabel?.attributedText = WDP.dpAmount(estimatedReward.adding(principal).stringValue, totalStakedLabel!.font, 9)
         startEaringLabel.text = "Epoch #" + fromValidator.1["stakeActiveEpoch"].stringValue
         
         onSimul()
@@ -113,7 +113,7 @@ class SuiUnstake: BaseVC {
         let feePrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
         let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
         let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
-        feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 18)
+        feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 9)
         WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
     }
     

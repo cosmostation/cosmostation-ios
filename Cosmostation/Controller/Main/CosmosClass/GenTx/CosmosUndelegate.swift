@@ -27,7 +27,9 @@ class CosmosUndelegate: BaseVC {
     @IBOutlet weak var unStakingAmountHintLabel: UILabel!
     @IBOutlet weak var unStakingAmountLabel: UILabel!
     @IBOutlet weak var unStakingDenomLabel: UILabel!
-    
+    @IBOutlet weak var unStakingCurrencyLabel: UILabel!
+    @IBOutlet weak var unStakingValueLabel: UILabel!
+
     @IBOutlet weak var memoCardView: FixCardView!
     @IBOutlet weak var memoTitle: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
@@ -144,10 +146,16 @@ class CosmosUndelegate: BaseVC {
         toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = stakeDenom; $0.amount = amount }
         
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let dpAmount = NSDecimalNumber(string: toCoin?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
+            let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
+            WDP.dpValue(value, unStakingCurrencyLabel, unStakingValueLabel)
             WDP.dpCoin(msAsset, toCoin, nil, unStakingDenomLabel, unStakingAmountLabel, msAsset.decimals)
             unStakingAmountHintLabel.isHidden = true
             unStakingAmountLabel.isHidden = false
             unStakingDenomLabel.isHidden = false
+            unStakingCurrencyLabel.isHidden = false
+            unStakingValueLabel.isHidden = false
         }
         onSimul()
     }

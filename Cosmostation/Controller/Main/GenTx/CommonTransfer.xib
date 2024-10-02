@@ -19,6 +19,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommonTransfer" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="arrowDownImage" destination="J9D-s3-tCV" id="mzE-VM-joQ"/>
                 <outlet property="errorCardView" destination="ZgU-La-hVa" id="yDY-JC-Wk1"/>
                 <outlet property="errorMsgLabel" destination="YTJ-r7-HWX" id="mQv-32-2BK"/>
                 <outlet property="feeAmountLabel" destination="IBW-hD-K6J" id="Yhu-bv-elK"/>
@@ -316,20 +317,20 @@ not the wallet.</string>
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBW-hD-K6J">
-                                            <rect key="frame" x="302.66666666666669" y="53.666666666666629" width="25" height="16"/>
+                                            <rect key="frame" x="291.66666666666669" y="52.666666666666629" width="29" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="yaD-KZ-snK"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                             <color key="textColor" name="_color01"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eut-vZ-em3">
-                                            <rect key="frame" x="329.66666666666669" y="53.666666666666629" width="35.333333333333314" height="16"/>
+                                            <rect key="frame" x="322.66666666666669" y="53.666666666666629" width="42.333333333333314" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="abZ-go-hk8"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                             <color key="textColor" name="_color01"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -371,6 +372,7 @@ not the wallet.</string>
                                         <constraint firstAttribute="height" constant="150" id="4WW-we-HeD"/>
                                         <constraint firstAttribute="trailing" secondItem="Tqf-q9-Iqa" secondAttribute="trailing" constant="12" id="60M-r7-GDb"/>
                                         <constraint firstItem="kiR-yn-i6o" firstAttribute="top" secondItem="L7B-9h-6dk" secondAttribute="top" constant="15" id="8ts-ng-8Iy"/>
+                                        <constraint firstItem="IBW-hD-K6J" firstAttribute="bottom" secondItem="Eut-vZ-em3" secondAttribute="bottom" constant="-1" id="FLA-Mc-a5t"/>
                                         <constraint firstItem="Eut-vZ-em3" firstAttribute="leading" secondItem="IBW-hD-K6J" secondAttribute="trailing" constant="2" id="FWz-EF-pfP"/>
                                         <constraint firstAttribute="trailing" secondItem="Eut-vZ-em3" secondAttribute="trailing" constant="12" id="LdE-Ju-VSY"/>
                                         <constraint firstItem="kiR-yn-i6o" firstAttribute="leading" secondItem="L7B-9h-6dk" secondAttribute="leading" constant="12" id="OmD-Lr-nrn"/>
@@ -383,7 +385,6 @@ not the wallet.</string>
                                         <constraint firstItem="hFJ-AM-HYT" firstAttribute="top" secondItem="Tqf-q9-Iqa" secondAttribute="bottom" constant="12" id="aba-vU-eYz"/>
                                         <constraint firstItem="Eut-vZ-em3" firstAttribute="top" secondItem="Tqf-q9-Iqa" secondAttribute="bottom" constant="14" id="bYK-ow-6LR"/>
                                         <constraint firstAttribute="trailing" secondItem="TMF-9X-Vge" secondAttribute="trailing" constant="12" id="dZq-5U-oHx"/>
-                                        <constraint firstItem="IBW-hD-K6J" firstAttribute="centerY" secondItem="Eut-vZ-em3" secondAttribute="centerY" id="dmu-7s-yQA"/>
                                         <constraint firstItem="ZQD-7L-o46" firstAttribute="leading" secondItem="L7B-9h-6dk" secondAttribute="leading" constant="12" id="iF0-EN-m1K"/>
                                         <constraint firstAttribute="trailing" secondItem="hWq-ma-jPn" secondAttribute="trailing" constant="12" id="p5x-ZQ-dUM"/>
                                         <constraint firstItem="Tqf-q9-Iqa" firstAttribute="leading" secondItem="L7B-9h-6dk" secondAttribute="leading" constant="12" id="rfT-bq-7Wc"/>

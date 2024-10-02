@@ -38,6 +38,26 @@ class CheckPrivateKeyCell: UITableViewCell {
         hdPathLabel.text = chain.getHDPath(account.lastHDPath)
         pkeyLabel.text = "0x" + chain.privateKey!.toHexString()
         
-        oldTag.isHidden = chain.isDefault
+        if chain is ChainBitCoin84 {
+            if chain.accountKeyType.pubkeyType == .BTC_Legacy {
+                keyTypeTag.text = "Legacy"
+                keyTypeTag.backgroundColor = .color07
+                keyTypeTag.textColor = .color02
+
+            } else if chain.accountKeyType.pubkeyType == .BTC_Nested_Segwit {
+                keyTypeTag.text = "Nested Segwit"
+                keyTypeTag.backgroundColor = .color07
+                keyTypeTag.textColor = .color02
+
+            } else if chain.accountKeyType.pubkeyType == .BTC_Native_Segwit {
+                keyTypeTag.text = "Native Segwit"
+                keyTypeTag.backgroundColor = .colorNativeSegwit
+                keyTypeTag.textColor = .color01
+            }
+            keyTypeTag.isHidden = false
+            
+        } else {
+            oldTag.isHidden = chain.isDefault
+        }
     }
 }
