@@ -44,16 +44,17 @@ class StakeDelegateCell: UITableViewCell {
     func onBindMyDelegate(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator, _ delegation: Cosmos_Staking_V1beta1_DelegationResponse) {
         logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
         nameLabel.text = validator.description_p.moniker
+        
+        guard let cosmosFetcher = baseChain.getCosmosfetcher() else { return }
+        
         if (validator.jailed) {
             jailedTag.isHidden = false
         } else {
-            inactiveTag.isHidden = validator.status == .bonded
+            inactiveTag.isHidden = cosmosFetcher.isActiveValidator(validator)
         }
         
         if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom),
-           let cosmosFetcher = baseChain.getCosmosfetcher() {
-            
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
             let vpAmount = NSDecimalNumber(string: validator.tokens).multiplying(byPowerOf10: -msAsset.decimals!)
             vpLabel?.attributedText = WDP.dpAmount(vpAmount.stringValue, vpLabel!.font, 0)
             

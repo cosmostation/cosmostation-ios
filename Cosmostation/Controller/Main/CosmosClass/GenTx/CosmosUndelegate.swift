@@ -114,7 +114,7 @@ class CosmosUndelegate: BaseVC {
         if (fromValidator!.jailed) {
             jailedTag.isHidden = false
         } else {
-            inactiveTag.isHidden = fromValidator!.status == .bonded
+            inactiveTag.isHidden = cosmosFetcher.isActiveValidator(fromValidator!)
         }
         
         let stakeDenom = selectedChain.stakeDenom!

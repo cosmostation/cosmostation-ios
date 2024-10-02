@@ -131,7 +131,7 @@ class CosmosRedelegate: BaseVC {
         if (fromValidator!.jailed) {
             fromJailedTag.isHidden = false
         } else {
-            fromInactiveTag.isHidden = fromValidator!.status == .bonded
+            fromInactiveTag.isHidden = cosmosFetcher.isActiveValidator(fromValidator!)
         }
         
         let stakeDenom = selectedChain.stakeDenom!
@@ -159,7 +159,7 @@ class CosmosRedelegate: BaseVC {
         if (toValidator!.jailed) {
             toJailedTag.isHidden = false
         } else {
-            toInactiveTag.isHidden = toValidator!.status == .bonded
+            toInactiveTag.isHidden = cosmosFetcher.isActiveValidator(toValidator!)
         }
         
         let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)

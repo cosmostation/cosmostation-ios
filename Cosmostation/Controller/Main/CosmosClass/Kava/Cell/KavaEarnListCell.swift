@@ -40,7 +40,8 @@ class KavaEarnListCell: UITableViewCell {
             if (validator.jailed) {
                 jailedTag.isHidden = false
             } else {
-                inactiveTag.isHidden = validator.status == .bonded
+                guard let cosmosFetcher = chain.getCosmosfetcher() else { return }
+                inactiveTag.isHidden = cosmosFetcher.isActiveValidator(validator)
             }
         }
         

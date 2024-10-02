@@ -120,7 +120,8 @@ class KavaEarnDepositAction: BaseVC {
         if (toValidator!.jailed) {
             jailedTag.isHidden = false
         } else {
-            inactiveTag.isHidden = toValidator!.status == .bonded
+            guard let cosmosFetcher = selectedChain.getCosmosfetcher() else { return }
+            inactiveTag.isHidden = cosmosFetcher.isActiveValidator(toValidator!)
         }
         
         let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)

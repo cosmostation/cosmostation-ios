@@ -126,7 +126,7 @@ class EvmDelegate: BaseVC {
         if (toValidator!.jailed) {
             jailedTag.isHidden = false
         } else {
-            inactiveTag.isHidden = toValidator!.status == .bonded
+            inactiveTag.isHidden = baseChain.cosmosFetcher!.isActiveValidator(toValidator)
         }
         
         let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
