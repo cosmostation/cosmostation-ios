@@ -645,12 +645,7 @@ extension CosmosFetcher {
             let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
             return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: getClient()).getLatestBlock(req, callOptions: getCallOptions()).response.get().block.header.height
         } else {
-            var url = ""
-            if (chain.name.starts(with: "G-Bridge")) {
-                url = getLcd() + "/blocks/latest"
-            } else {
-                url = getLcd() + "cosmos/base/tendermint/v1beta1/blocks/latest"
-            }
+            let url = getLcd() + "cosmos/base/tendermint/v1beta1/blocks/latest"
             let response = try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
             if let height = response?["block"]["header"]["height"].string {
                 return Int64(height)!
