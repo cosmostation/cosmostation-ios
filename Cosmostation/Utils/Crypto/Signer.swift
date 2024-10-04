@@ -151,6 +151,10 @@ class Signer {
             let anyMsg = Google_Protobuf_Any.with {
                 if (chain is ChainGovgen) {
                     $0.typeURL = "/govgen.gov.v1beta1.MsgVote"
+                    
+                } else if (chain is ChainAtomone) {
+                    $0.typeURL = "/atomone.gov.v1beta1.MsgVote"
+                    
                 } else {
                     $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
                 }
