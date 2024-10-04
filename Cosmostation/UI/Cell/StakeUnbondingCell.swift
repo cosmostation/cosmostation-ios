@@ -40,7 +40,8 @@ class StakeUnbondingCell: UITableViewCell {
         if (validator.jailed) {
             jailedTag.isHidden = false
         } else {
-            inactiveTag.isHidden = validator.status == .bonded
+            guard let cosmosFetcher = baseChain.getCosmosfetcher() else { return }
+            inactiveTag.isHidden = cosmosFetcher.isActiveValidator(validator)
         }
         
         if let stakeDenom = baseChain.stakeDenom,

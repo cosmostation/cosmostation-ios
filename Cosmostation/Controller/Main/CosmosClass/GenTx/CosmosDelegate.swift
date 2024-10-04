@@ -121,7 +121,7 @@ class CosmosDelegate: BaseVC {
         if (toValidator!.jailed) {
             jailedTag.isHidden = false
         } else {
-            inactiveTag.isHidden = toValidator!.status == .bonded
+            inactiveTag.isHidden = cosmosFetcher.isActiveValidator(toValidator!)
         }
         
         let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)

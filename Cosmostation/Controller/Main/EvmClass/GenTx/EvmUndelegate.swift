@@ -116,7 +116,7 @@ class EvmUndelegate: BaseVC {
         if (fromValidator!.jailed) {
             jailedTag.isHidden = false
         } else {
-            inactiveTag.isHidden = fromValidator!.status == .bonded
+            inactiveTag.isHidden = baseChain.cosmosFetcher!.isActiveValidator(fromValidator)
         }
         
         let stakeDenom = selectedChain.stakeDenom!

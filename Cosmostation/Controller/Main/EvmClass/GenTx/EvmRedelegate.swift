@@ -122,7 +122,7 @@ class EvmRedelegate: BaseVC {
         if (fromValidator!.jailed) {
             fromJailedTag.isHidden = false
         } else {
-            fromInactiveTag.isHidden = fromValidator!.status == .bonded
+            fromInactiveTag.isHidden = baseChain.cosmosFetcher!.isActiveValidator(fromValidator)
         }
         
         let stakeDenom = selectedChain.stakeDenom!
@@ -150,7 +150,7 @@ class EvmRedelegate: BaseVC {
         if (toValidator!.jailed) {
             toJailedTag.isHidden = false
         } else {
-            toInactiveTag.isHidden = toValidator!.status == .bonded
+            toInactiveTag.isHidden = baseChain.cosmosFetcher!.isActiveValidator(toValidator)
         }
         
         let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)

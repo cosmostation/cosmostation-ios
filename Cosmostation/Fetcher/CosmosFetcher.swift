@@ -143,7 +143,23 @@ class CosmosFetcher {
     }
     
     
-    
+    func isActiveValidator(_ validator: Cosmos_Staking_V1beta1_Validator) -> Bool {
+        if let maxProviderConsensusCnt = chain.getMaxProviderConsensusValidator() {
+            
+            let bonded = cosmosValidators.filter { $0.status == .bonded }
+            
+            let active = bonded.sorted {
+                if ($0.jailed && !$1.jailed) { return false }
+                if (!$0.jailed && $1.jailed) { return true }
+                return Double($0.tokens)! > Double($1.tokens)!
+            }.prefix(maxProviderConsensusCnt)
+            
+            return active.contains(validator)
+            
+        } else {
+            return validator.status == .bonded
+        }
+    }
     
     func denomValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if (denom == chain.stakeDenom) {

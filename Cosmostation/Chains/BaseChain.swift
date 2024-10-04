@@ -372,6 +372,10 @@ extension BaseChain {
         return getChainParam()["params"]["chainlist_params"]
     }
     
+    func getMaxProviderConsensusValidator() -> Int? {
+        return Int(getChainParam()["params"]["interchain_provider_params"]["max_provider_consensus_validators"].stringValue)
+    }
+    
     func chainDappName() -> String? {
         return getChainListParam()["name_for_dapp"].string?.lowercased()
     }
