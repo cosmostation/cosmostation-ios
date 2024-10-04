@@ -1589,6 +1589,7 @@ extension JSON {
             unbonding["entries"].array?.forEach({ entry in
                 var tempEntry = Cosmos_Staking_V1beta1_UnbondingDelegationEntry()
                 tempEntry.balance = entry["balance"].stringValue
+                tempEntry.creationHeight = Int64(entry["creation_height"].stringValue) ?? 0
                 //TODO for refact!!
                 if let date = WDP.toDate(entry["completion_time"].stringValue) {
                     let time: Google_Protobuf_Timestamp = Google_Protobuf_Timestamp.init(timeIntervalSince1970: date.timeIntervalSince1970)
