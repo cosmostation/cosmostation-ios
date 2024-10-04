@@ -326,6 +326,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 
             } else if (indexPath.row == 2) {
                 let vc = NoticeVC(nibName: "NoticeVC", bundle: nil)
+                vc.hidesBottomBarWhenPushed = true
                 navigationController?.pushViewController(vc, animated: true)
             }
             
