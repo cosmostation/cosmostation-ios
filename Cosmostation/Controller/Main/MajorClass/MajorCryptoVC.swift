@@ -208,7 +208,11 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
                         self.present(transfer, animated: true)
                         
                     } else {
-                        onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+                        if btcFetcher.btcPendingInput != 0 {
+                            onShowToast(NSLocalizedString("error_pending_balance", comment: ""))
+                        } else {
+                            onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+                        }
                         return
                     }
                 }
