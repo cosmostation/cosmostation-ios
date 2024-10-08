@@ -1584,6 +1584,7 @@
 		79BF33302C50D0C400515D78 /* SearchBarWithTopPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BF332E2C50D0C300515D78 /* SearchBarWithTopPadding.swift */; };
 		79EF66802C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79EF66812C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
+		79F30ED92CAD36E400E42B2F /* ChainAtomone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */; };
 		79FCA3682C3E5B31001C17D0 /* RoundedPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */; };
 		79FCA3692C3E5B31001C17D0 /* RoundedPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */; };
 		79FCA3B82C3F9E92001C17D0 /* artela_types_v1_web3.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FCA3A52C3F9E90001C17D0 /* artela_types_v1_web3.pb.swift */; };
@@ -2889,6 +2890,7 @@
 		796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuiStakingInfoSheet.xib; sourceTree = "<group>"; };
 		79BF332E2C50D0C300515D78 /* SearchBarWithTopPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarWithTopPadding.swift; sourceTree = "<group>"; };
 		79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgRandomButton.swift; sourceTree = "<group>"; };
+		79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAtomone.swift; sourceTree = "<group>"; };
 		79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedPaddingLabel.swift; sourceTree = "<group>"; };
 		79FCA3A52C3F9E90001C17D0 /* artela_types_v1_web3.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = artela_types_v1_web3.pb.swift; sourceTree = "<group>"; };
 		79FCA3A62C3F9E90001C17D0 /* artela_crypto_v1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = artela_crypto_v1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
@@ -3265,6 +3267,7 @@
 				047843F22AC9A1B500462F1C /* ChainArchway.swift */,
 				E10FD3BD2B70D1F900B57DB4 /* ChainAlthea118.swift */,
 				E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */,
+				79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */,
 				044ECB162A95C2E40042DB3C /* ChainAxelar.swift */,
 				045032702C1EEDCC00235F6A /* ChainBand.swift */,
 				045032752C1EEDCD00235F6A /* ChainBitcana.swift */,
@@ -6739,6 +6742,7 @@
 				04FAD9DC2AB6D8DC00143A3E /* AccountListVC.swift in Sources */,
 				E122DC5E2A8A4712006D1E7B /* tendermint_types_validator.pb.swift in Sources */,
 				0400EEC92ADBB522007BA97F /* kava_incentive_v1beta1_claims.pb.swift in Sources */,
+				79F30ED92CAD36E400E42B2F /* ChainAtomone.swift in Sources */,
 				04FA74852AA0E2A9001A2830 /* CreateMnemonicVC.swift in Sources */,
 				0478431D2AC9918700462F1C /* ethermint_types_v1_indexer.pb.swift in Sources */,
 				E15F2CFE2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift in Sources */,
