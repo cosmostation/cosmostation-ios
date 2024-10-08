@@ -633,6 +633,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainLike())
     result.append(ChainLum118())
     result.append(ChainLum880())
+//    result.append(ChainMantra())
     result.append(ChainMars())
     result.append(ChainMedibloc())
     result.append(ChainNeutron())
