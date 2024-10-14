@@ -20,11 +20,11 @@ class ChainRizon: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uatolo"
         bechAccountPrefix = "rizon"
         validatorPrefix = "rizonvaloper"
         grpcHost = "grpc-rizon.cosmostation.io"
-        lcdUrl = "https://lcd-rizon.cosmostation.io/"
+        lcdUrl = "https://rizon.api.m.stavr.tech/"
     }
 }
