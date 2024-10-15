@@ -242,6 +242,14 @@ public class BaseAccount {
                 chain.allTokenValue = evmFetcher.allTokenValue()
                 chain.allTokenUSDValue = evmFetcher.allTokenValue(true)
                 
+            } else if let suiFetcher = (chain as? ChainSui)?.getSuiFetcher() {
+                chain.allCoinValue = suiFetcher.allValue()
+                chain.allCoinUSDValue = suiFetcher.allValue(true)
+
+            } else if let btcFetcher = (chain as? ChainBitCoin84)?.getBtcFetcher() {
+                chain.allCoinValue = btcFetcher.allValue()
+                chain.allCoinUSDValue = btcFetcher.allValue(true)
+
             }
         }
     }
