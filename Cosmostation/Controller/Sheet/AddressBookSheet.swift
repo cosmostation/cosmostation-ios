@@ -86,7 +86,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
     
     func onUpdateView() {
         let addressInput = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        if (WUtils.isValidEvmAddress(addressInput)) {
+        if (WUtils.isValidEvmAddress(addressInput) || WUtils.isValidSuiAdderss(addressInput)) {
             memoTextField.isHidden = true
             
         } else if let chain = ALLCHAINS().filter({ $0.supportCosmos && addressInput!.starts(with: $0.bechAccountPrefix! + "1") == true }).first {
@@ -176,6 +176,9 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         if (WUtils.isValidEvmAddress(address)) {
             return true
             
+        } else if WUtils.isValidSuiAdderss(address) {
+            return true
+            
         } else if BtcJS("validateAddress").callJSValueToBool(param: [address, network]) {
             return true
 
@@ -200,6 +203,9 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         }
         if (WUtils.isValidEvmAddress(address)) {
             return ChainEthereum()
+            
+        } else if WUtils.isValidSuiAdderss(address) {
+            return ChainSui()
             
         } else if BtcJS("validateAddress").callJSValueToBool(param: [address, network]) {
             if address!.starts(with: "bc1") {
