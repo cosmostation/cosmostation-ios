@@ -115,21 +115,24 @@ public class WUtils {
                 if (asset.chain == fromChain.apiName &&
                     asset.beforeChain(fromChain.apiName) == toChain.apiName &&
                     asset.denom?.lowercased() == denom.lowercased()) {
-                    result = MintscanPath.init(asset.channel!, asset.port!)
+                    guard let channel = asset.ibc_info?.client?.channel, let port = asset.ibc_info?.client?.port else { return }
+                    result = MintscanPath.init(channel, port)
                     return
                 }
                 if (asset.chain == toChain.apiName &&
                     asset.beforeChain(toChain.apiName) == fromChain.apiName &&
-                    asset.counter_party?.denom?.lowercased() == denom.lowercased()) {
-                    result = MintscanPath.init(asset.counter_party!.channel!, asset.counter_party!.port!)
+                    asset.ibc_info?.counterparty?.denom?.lowercased() == denom.lowercased()) {
+                    guard let channel = asset.ibc_info?.counterparty?.channel, let port = asset.ibc_info?.counterparty?.port else { return }
+                    result = MintscanPath.init(channel, port)
                     return
                 }
 
             } else if (msToken != nil) {
                 if (asset.chain == toChain.apiName &&
                     asset.beforeChain(toChain.apiName) == fromChain.apiName &&
-                    asset.counter_party?.denom?.lowercased() == msToken?.address!.lowercased()) {
-                    result = MintscanPath.init(asset.counter_party!.channel!, asset.counter_party!.port!)
+                    asset.ibc_info?.counterparty?.denom?.lowercased() == msToken?.address!.lowercased()) {
+                    guard let channel = asset.ibc_info?.counterparty?.channel, let port = asset.ibc_info?.counterparty?.port else { return }
+                    result = MintscanPath.init(channel, port)
                     return
                 }
             }

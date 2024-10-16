@@ -101,7 +101,7 @@ class BaseNetWork {
     }
     
     static func msAssetsUrl() -> String {
-        return MINTSCAN_API_URL + "v10/assets"
+        return MINTSCAN_API_URL + "v11/assets"
     }
     
     static func msCw20InfoUrl(_ chain: BaseChain) -> String {
