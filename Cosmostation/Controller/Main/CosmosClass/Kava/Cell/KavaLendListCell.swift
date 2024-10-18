@@ -29,6 +29,15 @@ class KavaLendListCell: UITableViewCell {
     override func prepareForReuse() {
         marketImg.sd_cancelCurrentImageLoad()
         marketImg.image = nil
+        marketNameLabel.text = "COIN : COIN"
+        supplyValueLabel.text = "0.00"
+        supplyAmountLabel.text = "0.00"
+        supplyDenomLabel.text = "Denom"
+        borrowValueLabel.text = "0.00"
+        borrowAmountLabel.text = "0.00"
+        borrowDenomLabel.text = "Denom"
+        supplyDenomLabel.textColor = .color02
+        borrowDenomLabel.textColor = .color02
     }
     
     func onBindHard(_ hardMarket: Kava_Hard_V1beta1_MoneyMarket?, _ priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?,
