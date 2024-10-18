@@ -22,12 +22,12 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="250" id="KGk-i7-Jjw" customClass="AssetCosmosClassCell" customModule="Cosmostation" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="475" height="244"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="475" height="244"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bET-Il-OK9" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
-                        <rect key="frame" x="8" y="4" width="459" height="237.33333333333331"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bET-Il-OK9" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
+                        <rect key="frame" x="8" y="4" width="459" height="236"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="3Kc-td-ZgN">
                                 <rect key="frame" x="16" y="14" width="36" height="36"/>
@@ -124,8 +124,8 @@
                                     <constraint firstAttribute="height" constant="0.5" id="Lcg-a2-dEd"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="stw-1k-txt">
-                                <rect key="frame" x="14" y="80.666666666666686" width="431" height="77"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="stw-1k-txt">
+                                <rect key="frame" x="14" y="76.666666666666671" width="431" height="42"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8si-2P-uhN">
                                         <rect key="frame" x="0.0" y="0.0" width="431" height="15"/>
@@ -177,17 +177,17 @@
                                             <constraint firstItem="oLx-qW-ZXD" firstAttribute="centerY" secondItem="teC-xe-z9F" secondAttribute="centerY" id="iX7-kf-vmE"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2PR-mX-WxD">
-                                        <rect key="frame" x="0.0" y="27" width="431" height="50"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2PR-mX-WxD">
+                                        <rect key="frame" x="0.0" y="27" width="431" height="15"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Staked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iK8-mJ-2E2">
-                                                <rect key="frame" x="0.0" y="0.33333333333334281" width="39.333333333333336" height="14"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Staked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iK8-mJ-2E2">
+                                                <rect key="frame" x="0.0" y="-0.33333333333334281" width="39.333333333333336" height="15.333333333333334"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1VO-fN-Q1X">
-                                                <rect key="frame" x="406" y="-0.66666666666665719" width="25" height="16.333333333333332"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1VO-fN-Q1X">
+                                                <rect key="frame" x="406" y="-0.33333333333334281" width="25" height="15.333333333333334"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
@@ -195,15 +195,15 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="iK8-mJ-2E2" firstAttribute="centerY" secondItem="2PR-mX-WxD" secondAttribute="centerY" id="LxM-uE-WYr"/>
-                                            <constraint firstItem="1VO-fN-Q1X" firstAttribute="centerY" secondItem="2PR-mX-WxD" secondAttribute="centerY" id="Mma-T9-isP"/>
-                                            <constraint firstAttribute="trailing" secondItem="1VO-fN-Q1X" secondAttribute="trailing" id="TMB-hC-njd"/>
+                                            <constraint firstItem="iK8-mJ-2E2" firstAttribute="leading" secondItem="2PR-mX-WxD" secondAttribute="leading" id="5oz-fT-Usx"/>
                                             <constraint firstAttribute="height" constant="15" id="VMz-DU-DUz"/>
-                                            <constraint firstItem="iK8-mJ-2E2" firstAttribute="leading" secondItem="2PR-mX-WxD" secondAttribute="leading" id="dUh-9J-ajO"/>
+                                            <constraint firstItem="1VO-fN-Q1X" firstAttribute="centerY" secondItem="2PR-mX-WxD" secondAttribute="centerY" id="Vr9-zo-4s0"/>
+                                            <constraint firstAttribute="trailing" secondItem="1VO-fN-Q1X" secondAttribute="trailing" id="WNv-vu-t6P"/>
+                                            <constraint firstItem="iK8-mJ-2E2" firstAttribute="centerY" secondItem="2PR-mX-WxD" secondAttribute="centerY" id="ePn-us-lwc"/>
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djb-yK-BmV">
-                                        <rect key="frame" x="0.0" y="76.999999999999986" width="431" height="15"/>
+                                        <rect key="frame" x="0.0" y="42" width="431" height="15"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unstaking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIZ-Rm-3Ml">
                                                 <rect key="frame" x="0.0" y="-0.33333333333334281" width="57.666666666666664" height="15.333333333333334"/>
@@ -228,7 +228,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xr9-xN-j4y">
-                                        <rect key="frame" x="0.0" y="76.999999999999986" width="431" height="15"/>
+                                        <rect key="frame" x="0.0" y="42" width="431" height="15"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward +3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4T-nz-xPc">
                                                 <rect key="frame" x="0.0" y="-0.33333333333334281" width="60.333333333333336" height="15.333333333333334"/>
@@ -253,7 +253,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e38-wk-FZl">
-                                        <rect key="frame" x="0.0" y="76.999999999999986" width="431" height="15"/>
+                                        <rect key="frame" x="0.0" y="42" width="431" height="15"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commission" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0M-5q-Gzt">
                                                 <rect key="frame" x="0.0" y="-0.33333333333334281" width="70.333333333333329" height="15.333333333333334"/>
@@ -306,7 +306,7 @@
                             <constraint firstAttribute="trailing" secondItem="qWP-3U-xJz" secondAttribute="trailing" constant="14" id="hzV-Ki-NpW"/>
                             <constraint firstItem="Vsp-zl-kwz" firstAttribute="centerY" secondItem="gRz-KV-t60" secondAttribute="centerY" id="kqz-01-soB"/>
                             <constraint firstItem="VBh-eE-Suk" firstAttribute="leading" secondItem="6Iq-uR-UZX" secondAttribute="trailing" constant="1" id="oXl-ZL-oM4"/>
-                            <constraint firstAttribute="bottom" secondItem="stw-1k-txt" secondAttribute="bottom" constant="14" id="pW7-J6-ssw"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="stw-1k-txt" secondAttribute="bottom" constant="14" id="pW7-J6-ssw"/>
                             <constraint firstItem="6Iq-uR-UZX" firstAttribute="firstBaseline" secondItem="VBh-eE-Suk" secondAttribute="firstBaseline" constant="-0.5" id="sXd-0Z-bfB"/>
                             <constraint firstAttribute="trailing" secondItem="stw-1k-txt" secondAttribute="trailing" constant="14" id="tm9-QJ-Poh"/>
                         </constraints>
