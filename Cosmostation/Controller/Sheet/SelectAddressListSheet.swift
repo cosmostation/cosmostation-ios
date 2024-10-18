@@ -70,7 +70,7 @@ class SelectAddressListSheet: BaseVC {
                 }
             }
             BaseData.instance.selectAllAddressBooks().forEach { book in
-                if (book.dpAddress.starts(with: "0x") && book.dpAddress != senderMajorAddress) {
+                if (WUtils.isValidSuiAdderss(book.dpAddress) && book.dpAddress != senderMajorAddress) {
                     majorAddressBook.append(book)
                 }
             }
@@ -82,8 +82,6 @@ class SelectAddressListSheet: BaseVC {
             evmStyleTableView.isHidden = true
             
         } else if (sendType == .BTC_COIN) {
-            //TODO: support btc address
-            
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
                 
                 if toChain.isTestnet {
@@ -101,19 +99,16 @@ class SelectAddressListSheet: BaseVC {
             
             BaseData.instance.selectAllAddressBooks().forEach { book in
                 if toChain.isTestnet {
-                    print(book.chainName.lowercased())
                     if (book.chainName.lowercased().contains("bitcoin") && book.chainName.lowercased().contains("testnet") && book.dpAddress != senderMajorAddress) {
                         majorAddressBook.append(book)
                     }
 
                 } else {
-                    print(book.chainName.lowercased())
-
                     if (book.chainName.lowercased().contains("bitcoin") && !book.chainName.lowercased().contains("testnet") && book.dpAddress != senderMajorAddress) {
                         majorAddressBook.append(book)
                     }
                 }
-            }//TODO: 주소록 추가하고 맞는 값만 나오는 지 테스트해보기
+            }
             
             addressStyleSegment.isHidden = true
             sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
@@ -130,7 +125,7 @@ class SelectAddressListSheet: BaseVC {
                 }
             }
             BaseData.instance.selectAllAddressBooks().forEach { book in
-                if (book.dpAddress.starts(with: "0x") && book.dpAddress != senderEvmAddress) {
+                if (WUtils.isValidEvmAddress(book.dpAddress) && book.dpAddress != senderEvmAddress) {
                     evmAddressBook.append(book)
                 }
             }
@@ -184,7 +179,7 @@ class SelectAddressListSheet: BaseVC {
                     }
                 }
                 BaseData.instance.selectAllAddressBooks().forEach { book in
-                    if (book.dpAddress.starts(with: "0x") && book.dpAddress != senderEvmAddress) {
+                    if (WUtils.isValidEvmAddress(book.dpAddress) && book.dpAddress != senderEvmAddress) {
                         evmAddressBook.append(book)
                     }
                 }
