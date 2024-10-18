@@ -46,6 +46,7 @@ class AssetCell: UITableViewCell {
         amountLabel.text = ""
         valueCurrencyLabel.text = ""
         valueLabel.text = ""
+        symbolLabel.textColor = .color01
         priceChangeLabel.text = ""
         priceLabel.text = ""
         amountLabel.isHidden = true
