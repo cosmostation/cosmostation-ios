@@ -10,17 +10,16 @@ import Foundation
 import SwiftyJSON
 
 public class MintscanToken: Codable {
-    var chainId: Int64?
-    var chainName: String?
-    var address: String?            //we handle contract address as denom
+    var chain: String?
+    var type: String?
+    var contract: String?   //we handle contract address as denom
+    var name: String?
     var symbol: String?
     var description: String?
     var decimals: Int16?
-    var display: Int16?
     var image: String?
-    var isdefault: Bool?
     var coinGeckoId: String?
-    var totalSupply: String?
+    var wallet_preload: Bool?
     var amount: String?
     
     func setAmount(_ rawAmount: String) {
@@ -32,22 +31,8 @@ public class MintscanToken: Codable {
     }
     
     func assetImg() -> URL {
-        return URL(string: ResourceBase + image!) ?? URL(string: "")!
+        return URL(string: image!) ?? URL(string: "")!
     }
-    
-    enum CodingKeys : String, CodingKey {
-        case chainId
-        case chainName
-        case address
-        case symbol
-        case description
-        case decimals
-        case display
-        case image
-        case isdefault = "default"
-        case coinGeckoId
-    }
-        
 }
 
 

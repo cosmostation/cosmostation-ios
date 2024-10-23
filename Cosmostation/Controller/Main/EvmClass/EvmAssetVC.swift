@@ -118,22 +118,22 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
                 
                 if let userCustomTokens = BaseData.instance.getDisplayErc20s(baseAccount.id, selectedChain.tag) {
                     allErc20Tokens.sort {
-                        if (userCustomTokens.contains($0.address!) && !userCustomTokens.contains($1.address!)) { return true }
-                        if (!userCustomTokens.contains($0.address!) && userCustomTokens.contains($1.address!)) { return false }
-                        let value0 = evmFetcher.tokenValue($0.address!)
-                        let value1 = evmFetcher.tokenValue($1.address!)
+                        if (userCustomTokens.contains($0.contract!) && !userCustomTokens.contains($1.contract!)) { return true }
+                        if (!userCustomTokens.contains($0.contract!) && userCustomTokens.contains($1.contract!)) { return false }
+                        let value0 = evmFetcher.tokenValue($0.contract!)
+                        let value1 = evmFetcher.tokenValue($1.contract!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     allErc20Tokens.forEach { tokens in
-                        if (userCustomTokens.contains(tokens.address!)) {
+                        if (userCustomTokens.contains(tokens.contract!)) {
                             toDisplayErc20Tokens.append(tokens)
                         }
                     }
                     
                 } else {
                     allErc20Tokens.sort {
-                        let value0 = evmFetcher.tokenValue($0.address!)
-                        let value1 = evmFetcher.tokenValue($1.address!)
+                        let value0 = evmFetcher.tokenValue($0.contract!)
+                        let value1 = evmFetcher.tokenValue($1.contract!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     allErc20Tokens.forEach { tokens in
@@ -155,7 +155,7 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
         let tokenListSheet = SelectDisplayTokenListSheet(nibName: "SelectDisplayTokenListSheet", bundle: nil)
         tokenListSheet.selectedChain = selectedChain
         tokenListSheet.allErc20Tokens = allErc20Tokens
-        tokenListSheet.toDisplayErc20Tokens = toDisplayErc20Tokens.map { $0.address! }
+        tokenListSheet.toDisplayErc20Tokens = toDisplayErc20Tokens.map { $0.contract! }
         tokenListSheet.tokensListDelegate = self
         onStartSheet(tokenListSheet, 680, 0.8)
     }
@@ -235,7 +235,7 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
             transfer.sendAssetType = .EVM_ERC20
             transfer.fromChain = selectedChain
-            transfer.toSendDenom = token.address
+            transfer.toSendDenom = token.contract
             transfer.toSendMsToken = token
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)

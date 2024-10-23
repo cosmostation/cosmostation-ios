@@ -29,7 +29,7 @@ class SelectDisplayTokenCell: UITableViewCell {
     }
     
     func bindErc20Token(_ chain: BaseChain, _ token: MintscanToken, _ selectedList: [String]) {
-        if (selectedList.contains(token.address!)) {
+        if (selectedList.contains(token.contract!)) {
             rootView.layer.borderWidth = 1.0
             rootView.layer.borderColor = UIColor.white.cgColor
         } else {

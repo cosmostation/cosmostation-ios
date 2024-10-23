@@ -91,8 +91,8 @@ class CosmosTokenVC: BaseVC {
                 }
             }
             mintscanCw20Tokens.sort {
-                let value0 = cosmosFetcher.tokenValue($0.address!)
-                let value1 = cosmosFetcher.tokenValue($1.address!)
+                let value0 = cosmosFetcher.tokenValue($0.contract!)
+                let value1 = cosmosFetcher.tokenValue($1.contract!)
                 return value0.compare(value1).rawValue > 0 ? true : false
             }
         }
@@ -104,8 +104,8 @@ class CosmosTokenVC: BaseVC {
                 }
             }
             mintscanErc20Tokens.sort {
-                let value0 = evmFetcher.tokenValue($0.address!)
-                let value1 = evmFetcher.tokenValue($1.address!)
+                let value0 = evmFetcher.tokenValue($0.contract!)
+                let value1 = evmFetcher.tokenValue($1.contract!)
                 return value0.compare(value1).rawValue > 0 ? true : false
             }
         }
@@ -179,7 +179,7 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
             transfer.sendAssetType = .COSMOS_WASM
             transfer.fromChain = selectedChain
-            transfer.toSendDenom = mintscanCw20Tokens[indexPath.row].address
+            transfer.toSendDenom = mintscanCw20Tokens[indexPath.row].contract
             transfer.toSendMsToken = mintscanCw20Tokens[indexPath.row]
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
@@ -189,7 +189,7 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
             transfer.sendAssetType = .EVM_ERC20
             transfer.fromChain = selectedChain
-            transfer.toSendDenom = mintscanErc20Tokens[indexPath.row].address
+            transfer.toSendDenom = mintscanErc20Tokens[indexPath.row].contract
             transfer.toSendMsToken = mintscanErc20Tokens[indexPath.row]
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)

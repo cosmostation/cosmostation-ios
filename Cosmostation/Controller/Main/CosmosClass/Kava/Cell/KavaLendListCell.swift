@@ -29,6 +29,15 @@ class KavaLendListCell: UITableViewCell {
     override func prepareForReuse() {
         marketImg.sd_cancelCurrentImageLoad()
         marketImg.image = nil
+        marketNameLabel.text = "COIN : COIN"
+        supplyValueLabel.text = "0.00"
+        supplyAmountLabel.text = "0.00"
+        supplyDenomLabel.text = "Denom"
+        borrowValueLabel.text = "0.00"
+        borrowAmountLabel.text = "0.00"
+        borrowDenomLabel.text = "Denom"
+        supplyDenomLabel.textColor = .color02
+        borrowDenomLabel.textColor = .color02
     }
     
     func onBindHard(_ hardMarket: Kava_Hard_V1beta1_MoneyMarket?, _ priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse?,
@@ -37,7 +46,7 @@ class KavaLendListCell: UITableViewCell {
         guard let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom == hardMarket?.denom }).first else {
             return
         }
-        let hardImgDenom = msAsset.origin_denom ?? ""
+        let hardImgDenom = msAsset.ibc_info?.counterparty?.denom ?? msAsset.denom ?? ""
         let url = KAVA_HARD_POOL_IMG_URL + "lp" + hardImgDenom.replacingOccurrences(of: "/", with: ":") + ".png"
         let title = hardMarket?.spotMarketID.replacingOccurrences(of: ":30", with: "").replacingOccurrences(of: ":720", with: "")
         marketImg.sd_setImage(with: URL(string: url)!)

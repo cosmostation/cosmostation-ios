@@ -195,7 +195,7 @@ class CommonTransfer: BaseVC {
                             recipientableChains.append(sendable)
                         }
                     }
-                } else if (msAsset.getjustBeforeChain() == fromChain.apiName && msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
+                } else if (msAsset.getjustBeforeChain() == fromChain.apiName && msAsset.ibc_info?.counterparty?.denom?.lowercased() == toSendDenom.lowercased()) {
                     //add forward path
                     if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
                         if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
@@ -206,7 +206,7 @@ class CommonTransfer: BaseVC {
                 
             } else if (sendAssetType == .COSMOS_WASM ) {
                 //CW20 only support forward IBC path
-                if (msAsset.origin_chain == fromChain.apiName && msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
+                if (msAsset.ibc_info?.counterparty?.chain == fromChain.apiName && msAsset.ibc_info?.counterparty?.denom?.lowercased() == toSendDenom.lowercased()) {
                     if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
                         if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
                             recipientableChains.append(sendable)
@@ -822,7 +822,7 @@ extension CommonTransfer {
             var toAddress: EthereumAddress!
             
             if (sendAssetType == .EVM_ERC20) {
-                toAddress = EthereumAddress.init(toSendMsToken.address!)
+                toAddress = EthereumAddress.init(toSendMsToken.contract!)
                 let erc20token = ERC20(web3: web3, provider: web3.provider, address: toAddress!)
                 let writeOperation = try await erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
                 if (evmTxType == .eip1559) {
@@ -1191,7 +1191,7 @@ extension CommonTransfer {
         let msgBase64 = try! msg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let wasmMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
             $0.sender = fromChain.bechAddress!
-            $0.contract = toSendMsToken.address!
+            $0.contract = toSendMsToken.contract!
             $0.msg = Data(base64Encoded: msgBase64)!
         }
         return Signer.genWasmMsg([wasmMsg])
@@ -1330,7 +1330,7 @@ extension CommonTransfer {
         let innerMsgBase64 = try! innerMsg.rawData(options: [.sortedKeys]).base64EncodedString()
         let ibcWasmMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
             $0.sender = fromChain.bechAddress!
-            $0.contract = toSendMsToken.address!
+            $0.contract = toSendMsToken.contract!
             $0.msg = Data(base64Encoded: innerMsgBase64)!
         }
         return Signer.genWasmMsg([ibcWasmMsg])
