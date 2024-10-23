@@ -194,8 +194,8 @@ class CosmosCryptoVC: BaseVC {
                     }
                 }
                 mintscanCw20Tokens.sort {
-                    let value0 = cosmosFetcher.tokenValue($0.address!)
-                    let value1 = cosmosFetcher.tokenValue($1.address!)
+                    let value0 = cosmosFetcher.tokenValue($0.contract!)
+                    let value1 = cosmosFetcher.tokenValue($1.contract!)
                     return value0.compare(value1).rawValue > 0 ? true : false
                 }
             }
@@ -207,8 +207,8 @@ class CosmosCryptoVC: BaseVC {
                     }
                 }
                 mintscanErc20Tokens.sort {
-                    let value0 = evmFetcher.tokenValue($0.address!)
-                    let value1 = evmFetcher.tokenValue($1.address!)
+                    let value0 = evmFetcher.tokenValue($0.contract!)
+                    let value1 = evmFetcher.tokenValue($1.contract!)
                     return value0.compare(value1).rawValue > 0 ? true : false
                 }
             }
@@ -256,7 +256,7 @@ class CosmosCryptoVC: BaseVC {
         let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
         transfer.sendAssetType = sendType
         transfer.fromChain = selectedChain
-        transfer.toSendDenom = token.address
+        transfer.toSendDenom = token.contract
         transfer.toSendMsToken = token
         transfer.modalTransitionStyle = .coverVertical
         self.present(transfer, animated: true)

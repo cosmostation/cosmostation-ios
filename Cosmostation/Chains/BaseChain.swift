@@ -259,10 +259,10 @@ class BaseChain {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.symbol ?? "UnKnown"
         } else if supportCw20,
-                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.symbol ?? "UnKnown"
         } else if supportEvm,
-                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.symbol ?? "UnKnown"
         }
         return "UnKnown"
@@ -272,10 +272,10 @@ class BaseChain {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.assetImg()
         } else if supportCw20,
-                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.assetImg()
         } else if supportEvm,
-                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.assetImg()
         }
         return nil
@@ -285,10 +285,10 @@ class BaseChain {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.decimals ?? 6
         } else if supportCw20,
-                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.decimals ?? 6
         } else if supportEvm,
-                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.decimals ?? 6
         }
         return 6
@@ -298,10 +298,10 @@ class BaseChain {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.coinGeckoId ?? ""
         } else if supportCw20,
-                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.coinGeckoId ?? ""
         } else if supportEvm,
-                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.coinGeckoId ?? ""
         }
         return ""

@@ -822,7 +822,7 @@ extension CommonTransfer {
             var toAddress: EthereumAddress!
             
             if (sendAssetType == .EVM_ERC20) {
-                toAddress = EthereumAddress.init(toSendMsToken.address!)
+                toAddress = EthereumAddress.init(toSendMsToken.contract!)
                 let erc20token = ERC20(web3: web3, provider: web3.provider, address: toAddress!)
                 let writeOperation = try await erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
                 if (evmTxType == .eip1559) {
@@ -1191,7 +1191,7 @@ extension CommonTransfer {
         let msgBase64 = try! msg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let wasmMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
             $0.sender = fromChain.bechAddress!
-            $0.contract = toSendMsToken.address!
+            $0.contract = toSendMsToken.contract!
             $0.msg = Data(base64Encoded: msgBase64)!
         }
         return Signer.genWasmMsg([wasmMsg])
@@ -1330,7 +1330,7 @@ extension CommonTransfer {
         let innerMsgBase64 = try! innerMsg.rawData(options: [.sortedKeys]).base64EncodedString()
         let ibcWasmMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
             $0.sender = fromChain.bechAddress!
-            $0.contract = toSendMsToken.address!
+            $0.contract = toSendMsToken.contract!
             $0.msg = Data(base64Encoded: innerMsgBase64)!
         }
         return Signer.genWasmMsg([ibcWasmMsg])

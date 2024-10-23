@@ -74,10 +74,10 @@ extension SelectDisplayTokenListSheet: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let toToggle = searchErc20Tokens[indexPath.row]
-        if (toDisplayErc20Tokens.contains(toToggle.address!)) {
-            toDisplayErc20Tokens.removeAll { $0 == toToggle.address! }
+        if (toDisplayErc20Tokens.contains(toToggle.contract!)) {
+            toDisplayErc20Tokens.removeAll { $0 == toToggle.contract! }
         } else {
-            toDisplayErc20Tokens.append(toToggle.address!)
+            toDisplayErc20Tokens.append(toToggle.contract!)
         }
         DispatchQueue.main.async {
             self.sheetTableView.beginUpdates()
