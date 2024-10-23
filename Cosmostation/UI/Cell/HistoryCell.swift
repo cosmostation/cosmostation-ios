@@ -247,7 +247,7 @@ class HistoryCell: UITableViewCell {
                 denomLabel.text = chain.coinSymbol
                 amountLabel.attributedText = WDP.dpAmount(history["amount"].stringValue, amountLabel!.font)
                 
-            } else if let _ = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.address?.lowercased() == contractAddress.lowercased() }) {
+            } else if let _ = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.contract?.lowercased() == contractAddress.lowercased() }) {
                 amountLabel.isHidden = false
                 denomLabel.isHidden = false
 

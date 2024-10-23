@@ -16,30 +16,23 @@ public struct MintscanAssets: Codable {
 
 public struct MintscanAsset: Codable {
     var chain: String?
-    var denom: String?
     var type: String?
-    var origin_chain: String?
-    var origin_denom: String?
-    var origin_type: String?
+    var denom: String?
+    var name: String?
     var symbol: String?
-    var decimals: Int16?
     var description: String?
+    var decimals: Int16?
     var image: String?
     var coinGeckoId: String?
     var color: String?
-    
-    var enable: Bool?
-    var path: String?
-    var channel: String?
-    var port: String?
-    var counter_party: MintscanAssetCounterParty?
+    var ibc_info: MintscanAssetIbcInfo?
     
     func assetImg() -> URL? {
-        return URL(string: ResourceBase + image!)
+        return URL(string: image!)
     }
     
     func beforeChain(_ chainApiName: String) -> String? {
-        let chainPath = path?.components(separatedBy: ">")
+        let chainPath = ibc_info?.path?.components(separatedBy: ">")
         if let matched = chainPath?.lastIndex(of: chainApiName) {
             if (matched > 0) {
                 return chainPath?[matched - 1]
@@ -49,7 +42,7 @@ public struct MintscanAsset: Codable {
     }
     
     func getjustBeforeChain() -> String? {
-        let chainPath = path?.components(separatedBy: ">")
+        let chainPath = ibc_info?.path?.components(separatedBy: ">")
         if (chainPath?.count ?? 0 > 1) {
             return String(chainPath![chainPath!.count - 2])
         }
@@ -64,8 +57,20 @@ public struct MintscanAsset: Codable {
     }
 }
 
+public struct MintscanAssetIbcInfo: Codable {
+    var path: String?
+    var client: MintscanAssetClient?
+    var counterparty: MintscanAssetCounterParty?
+}
+
+public struct MintscanAssetClient: Codable {
+    var channel: String?
+    var port: String?
+}
+    
 public struct MintscanAssetCounterParty: Codable {
     var channel: String?
     var port: String?
+    var chain: String?
     var denom: String?
 }

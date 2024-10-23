@@ -947,7 +947,7 @@ public struct MintscanHistory: Codable {
                    let wasmMsg = msgValue["msg__@stringify"].string,
                    let wasmFunc = try? JSONDecoder().decode(JSON.self, from: wasmMsg.data(using: .utf8) ?? Data()),
                    let amount = wasmFunc["transfer"]["amount"].string,
-                   let cw20 = chain.getCosmosfetcher()?.mintscanCw20Tokens.first(where: { $0.address == contractAddress }) {
+                   let cw20 = chain.getCosmosfetcher()?.mintscanCw20Tokens.first(where: { $0.contract == contractAddress }) {
                        return (cw20, NSDecimalNumber(string: amount))
                 }
                 
@@ -956,7 +956,7 @@ public struct MintscanHistory: Codable {
                    let data = dataValue["data"].string,
                    let hexData = Data(base64Encoded: data)?.toHexString(),
                    let contractAddress = dataValue["to"].string,
-                   let erc20 = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.address == contractAddress }) {
+                   let erc20 = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.contract == contractAddress }) {
                     let suffix = String(hexData.suffix(64))
                     if (suffix.count < 15) {
                         return (erc20, suffix.hexToNSDecimal())
