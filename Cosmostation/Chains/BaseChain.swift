@@ -624,8 +624,9 @@ func ALLCHAINS() -> [BaseChain] {
     //result.append(ChainInitia())
     result.append(ChainIris())
     result.append(ChainIxo())
+    result.append(ChainJackal())
     result.append(ChainJuno())
-    result.append(ChainKaia())
+    result.append(ChainKaia())                          //EVM
     result.append(ChainKavaEVM())                       //EVM
     result.append(ChainKava459())
     result.append(ChainKava118())
@@ -638,6 +639,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMantra())
     result.append(ChainMars())
     result.append(ChainMedibloc())
+    result.append(ChainMigaloo())
     result.append(ChainNeutron())
     result.append(ChainNibiru())
     //result.append(ChainNillion())
@@ -653,6 +655,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainPassage())
     result.append(ChainPersistence118())
     result.append(ChainPersistence750())
+    result.append(ChainPlanq())                         //EVM
     result.append(ChainPolygon())                       //EVM
     result.append(ChainProvenance())
     result.append(ChainPryzm())
@@ -667,6 +670,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainSentinel())
     result.append(ChainShentu())
     result.append(ChainSommelier())
+    result.append(ChainSource())
     result.append(ChainStafi())
     result.append(ChainStargaze())
     // result.append(ChainStarname())
@@ -675,6 +679,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainTeritori())
     result.append(ChainTerra())
     result.append(ChainUmee())
+    result.append(ChainUnification())
     result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
     result.append(ChainZetaEVM())                       //EVM
