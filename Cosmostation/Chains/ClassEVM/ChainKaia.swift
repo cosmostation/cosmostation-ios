@@ -22,7 +22,7 @@ class ChainKaia: BaseChain  {
         
         supportEvm = true
         coinSymbol = "KLAY"
-        coinGeckoId = ""
+        coinGeckoId = "klay-token"
         coinLogo = "tokenKaia"
         supportStaking = false
         evmRpcURL = "https://public-en.node.kaia.io"        

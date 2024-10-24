@@ -29,7 +29,7 @@ class ChainPlanq: BaseChain  {
         
         supportEvm = true
         coinSymbol = "PLANQ"
-        coinGeckoId = ""
+        coinGeckoId = "planq"
         coinLogo = "tokenPlq"
         evmRpcURL = "https://evm-rpc.planq.network"
     }
