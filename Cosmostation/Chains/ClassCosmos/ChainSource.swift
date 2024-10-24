@@ -25,6 +25,6 @@ class ChainSource: BaseChain {
         bechAccountPrefix = "source"
         validatorPrefix = "sourcevaloper"
         grpcHost = "source-grpc.polkachu.com"
-        lcdUrl = "https://api.source.nodestake.top/"
+        lcdUrl = "https://source.api.m.stavr.tech/"
     }
 }
