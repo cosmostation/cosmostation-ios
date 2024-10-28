@@ -46,10 +46,12 @@ class CosmosClassVC: BaseVC {
         }
     }
     
+    var cosmosCryptoVC: CosmosCryptoVC?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "embedCoinVC") {
             let target = segue.destination as! CosmosCryptoVC
             target.selectedChain = selectedChain
+            cosmosCryptoVC = target
         } else if (segue.identifier == "embedTokenVC") {
             let target = segue.destination as! CosmosTokenVC
             target.selectedChain = selectedChain
@@ -94,7 +96,7 @@ class CosmosClassVC: BaseVC {
         addressLayer.addGestureRecognizer(addressTap)
         
         let addtokenBtn: UIButton = UIButton(type: .custom)
-        addtokenBtn.setImage(UIImage(named: "iconAddTokenInfo"), for: .normal)
+        addtokenBtn.setImage(UIImage(named: "iconAddToken"), for: .normal)
         addtokenBtn.addTarget(self, action:  #selector(onClickAddToken), for: .touchUpInside)
         addtokenBtn.frame = CGRectMake(0, 0, 40, 30)
         addtokenBarBtn = UIBarButtonItem(customView: addtokenBtn)
@@ -182,10 +184,9 @@ class CosmosClassVC: BaseVC {
     }
     
     @objc func onClickAddToken() {
-        let warnSheet = NoticeSheet(nibName: "NoticeSheet", bundle: nil)
-        warnSheet.selectedChain = selectedChain
-        warnSheet.noticeType = .TokenGithub
-        onStartSheet(warnSheet, 420, 0.8)
+        if (cosmosCryptoVC != nil) {
+            cosmosCryptoVC?.onShowTokenListSheet()
+        }
     }
     
     @objc func onClickAddNft() {

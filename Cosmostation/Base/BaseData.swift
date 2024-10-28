@@ -515,6 +515,21 @@ extension BaseData {
         return nil
     }
     
+    func setDisplayCw20s(_ id: Int64, _ chainTag: String, _ contractAddress: [String])  {
+        if let encoded = try? JSONEncoder().encode(contractAddress) {
+            UserDefaults.standard.setValue(encoded, forKey: String(id) + " " + chainTag + " " + KEY_DISPLAY_CW20_TOKENS)
+        }
+    }
+    
+    func getDisplayCw20s(_ id: Int64, _ chainTag: String) -> [String]? {
+        if let savedData = UserDefaults.standard.object(forKey: String(id) + " " + chainTag + " " + KEY_DISPLAY_CW20_TOKENS) as? Data {
+            if let result = try? JSONDecoder().decode([String].self, from: savedData) {
+                return result
+            }
+        }
+        return nil
+    }
+
     func deleteDisplayErc20s(_ id: Int64)  {
         ALLCHAINS().filter { $0.supportEvm == true }.forEach { evmChain in
             UserDefaults.standard.removeObject(forKey: String(id) + " " + evmChain.tag + " " + KEY_DISPLAY_ERC20_TOKENS)

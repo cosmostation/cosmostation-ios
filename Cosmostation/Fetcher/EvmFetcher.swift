@@ -47,17 +47,13 @@ class EvmFetcher {
             
             let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)
             await mintscanErc20Tokens.concurrentForEach { erc20 in
-                if (self.chain.supportCosmos) {
-                    await self.fetchErc20Balance(erc20)
+                if (userDisplaytoken == nil) {
+                    if (erc20.wallet_preload == true) {
+                        await self.fetchErc20Balance(erc20)
+                    }
                 } else {
-                    if (userDisplaytoken == nil) {
-                        if (erc20.wallet_preload == true) {
-                            await self.fetchErc20Balance(erc20)
-                        }
-                    } else {
-                        if (userDisplaytoken?.contains(erc20.contract!) == true) {
-                            await self.fetchErc20Balance(erc20)
-                        }
+                    if (userDisplaytoken?.contains(erc20.contract!) == true) {
+                        await self.fetchErc20Balance(erc20)
                     }
                 }
             }
@@ -118,17 +114,13 @@ extension EvmFetcher {
         let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)
         Task {
             await mintscanErc20Tokens.concurrentForEach { erc20 in
-                if (self.chain.supportCosmos) {
-                    await self.fetchErc20Balance(erc20)
+                if (userDisplaytoken == nil) {
+                    if (erc20.wallet_preload == true) {
+                        await self.fetchErc20Balance(erc20)
+                    }
                 } else {
-                    if (userDisplaytoken == nil) {
-                        if (erc20.wallet_preload == true) {
-                            await self.fetchErc20Balance(erc20)
-                        }
-                    } else {
-                        if (userDisplaytoken?.contains(erc20.contract!) == true) {
-                            await self.fetchErc20Balance(erc20)
-                        }
+                    if (userDisplaytoken?.contains(erc20.contract!) == true) {
+                        await self.fetchErc20Balance(erc20)
                     }
                 }
             }
