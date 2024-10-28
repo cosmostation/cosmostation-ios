@@ -11,7 +11,7 @@ import SwiftyJSON
 import Lottie
 import StoreKit
 
-class CosmosCryptoVC: BaseVC {
+class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {    
     
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var tableView: UITableView!
@@ -29,8 +29,18 @@ class CosmosCryptoVC: BaseVC {
     var bridgedCoins = [Cosmos_Base_V1beta1_Coin]()
     var searchBridgedCoins = [Cosmos_Base_V1beta1_Coin]()               // section 2
     var mintscanCw20Tokens = [MintscanToken]()
+    var toDisplayCw20Tokens = [MintscanToken]() {
+        didSet {
+            searchMintscanCw20Tokens = toDisplayCw20Tokens
+        }
+    }
     var searchMintscanCw20Tokens = [MintscanToken]()                    // section 3
     var mintscanErc20Tokens = [MintscanToken]()
+    var toDisplayErc20Tokens = [MintscanToken]() {
+        didSet {
+            searchMintscanErc20Tokens = toDisplayErc20Tokens
+        }
+    }
     var searchMintscanErc20Tokens = [MintscanToken]()                   // section 4
     var oktBalances = [JSON]()
     var searchOktBalances = [JSON]()                                    // section 0 for legacy okt KIP10
@@ -117,7 +127,9 @@ class CosmosCryptoVC: BaseVC {
                 self.ibcCoins.removeAll()
                 self.bridgedCoins.removeAll()
                 self.mintscanCw20Tokens.removeAll()
+                self.toDisplayCw20Tokens.removeAll()
                 self.mintscanErc20Tokens.removeAll()
+                self.toDisplayErc20Tokens.removeAll()
                 self.oktBalances.removeAll()
                 self.onSortAssets()
             }
@@ -188,28 +200,69 @@ class CosmosCryptoVC: BaseVC {
             }
             
             if let cosmosFetcher = selectedChain.getCosmosfetcher() {
-                cosmosFetcher.mintscanCw20Tokens.forEach { tokenInfo in
-                    if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
-                        mintscanCw20Tokens.append(tokenInfo)
+                mintscanCw20Tokens = cosmosFetcher.mintscanCw20Tokens.sorted { $0.symbol!.lowercased() < $1.symbol!.lowercased() }
+                
+                if let userCustomTokens = BaseData.instance.getDisplayCw20s(baseAccount.id, selectedChain.tag) {
+                    mintscanCw20Tokens.sort {
+                        if (userCustomTokens.contains($0.contract!) && !userCustomTokens.contains($1.contract!)) { return true }
+                        if (!userCustomTokens.contains($0.contract!) && userCustomTokens.contains($1.contract!)) { return false }
+                        let value0 = cosmosFetcher.tokenValue($0.contract!)
+                        let value1 = cosmosFetcher.tokenValue($1.contract!)
+                        return value0.compare(value1).rawValue > 0 ? true : false
                     }
-                }
-                mintscanCw20Tokens.sort {
-                    let value0 = cosmosFetcher.tokenValue($0.contract!)
-                    let value1 = cosmosFetcher.tokenValue($1.contract!)
-                    return value0.compare(value1).rawValue > 0 ? true : false
+                    mintscanCw20Tokens.forEach { token in
+                        if (userCustomTokens.contains(token.contract!)) {
+                            toDisplayCw20Tokens.append(token)
+                        }
+                    }
+                } else {
+                    mintscanCw20Tokens.sort {
+                        if ($0.wallet_preload ?? false) && !($1.wallet_preload ?? false) { return true }
+                        if !($0.wallet_preload ?? false) && $1.wallet_preload ?? false { return false }
+                        let value0 = cosmosFetcher.tokenValue($0.contract!)
+                        let value1 = cosmosFetcher.tokenValue($1.contract!)
+                        return value0.compare(value1).rawValue > 0 ? true : false
+                    }
+                    mintscanCw20Tokens.forEach { token in
+                        if (token.getAmount() != NSDecimalNumber.zero && token.wallet_preload ?? false) {
+                            toDisplayCw20Tokens.append(token)
+                        
+                        }
+                    }
+
                 }
             }
             
             if let evmFetcher = selectedChain.getEvmfetcher() {
-                evmFetcher.mintscanErc20Tokens.forEach { tokenInfo in
-                    if (tokenInfo.getAmount() != NSDecimalNumber.zero) {
-                        mintscanErc20Tokens.append(tokenInfo)
+                mintscanErc20Tokens = evmFetcher.mintscanErc20Tokens.sorted { $0.symbol!.lowercased() < $1.symbol!.lowercased() }
+                 
+                if let userCustomTokens = BaseData.instance.getDisplayErc20s(baseAccount.id, selectedChain.tag) {
+                    mintscanErc20Tokens.sort {
+                        if (userCustomTokens.contains($0.contract!) && !userCustomTokens.contains($1.contract!)) { return true }
+                        if (!userCustomTokens.contains($0.contract!) && userCustomTokens.contains($1.contract!)) { return false }
+                        let value0 = evmFetcher.tokenValue($0.contract!)
+                        let value1 = evmFetcher.tokenValue($1.contract!)
+                        return value0.compare(value1).rawValue > 0 ? true : false
                     }
-                }
-                mintscanErc20Tokens.sort {
-                    let value0 = evmFetcher.tokenValue($0.contract!)
-                    let value1 = evmFetcher.tokenValue($1.contract!)
-                    return value0.compare(value1).rawValue > 0 ? true : false
+                    
+                    mintscanErc20Tokens.forEach { token in
+                        if (userCustomTokens.contains(token.contract!)) {
+                            toDisplayErc20Tokens.append(token)
+                        }
+                    }
+                } else {
+                    mintscanErc20Tokens.sort {
+                        if ($0.wallet_preload ?? false) && !($1.wallet_preload ?? false) { return true }
+                        if !($0.wallet_preload ?? false) && $1.wallet_preload ?? false { return false }
+                        let value0 = evmFetcher.tokenValue($0.contract!)
+                        let value1 = evmFetcher.tokenValue($1.contract!)
+                        return value0.compare(value1).rawValue > 0 ? true : false
+                    }
+                    mintscanErc20Tokens.forEach { token in
+                        if (token.getAmount() != NSDecimalNumber.zero && token.wallet_preload ?? false) {
+                            toDisplayErc20Tokens.append(token)
+                        }
+                    }
                 }
             }
             
@@ -217,15 +270,36 @@ class CosmosCryptoVC: BaseVC {
             searchNativeCoins = nativeCoins
             searchIbcCoins = ibcCoins
             searchBridgedCoins = bridgedCoins
-            searchMintscanCw20Tokens = mintscanCw20Tokens
-            searchMintscanErc20Tokens = mintscanErc20Tokens
-            
+            searchMintscanCw20Tokens = toDisplayCw20Tokens
+            searchMintscanErc20Tokens = toDisplayErc20Tokens
+
             DispatchQueue.main.async {
                 self.onUpdateView()
             }
         }
     }
     
+    func onShowTokenListSheet()  {
+        let tokenListSheet = SelectDisplayTokenListSheet(nibName: "SelectDisplayTokenListSheet", bundle: nil)
+        tokenListSheet.selectedChain = selectedChain
+        if selectedChain.supportCw20 {
+            tokenListSheet.allTokens = mintscanCw20Tokens
+            tokenListSheet.toDisplayTokens = toDisplayCw20Tokens.map { $0.contract! }
+        } else {
+            tokenListSheet.allTokens = mintscanErc20Tokens
+            tokenListSheet.toDisplayTokens = toDisplayErc20Tokens.map { $0.contract! }
+            
+        }
+        tokenListSheet.tokensListDelegate = self
+        onStartSheet(tokenListSheet, 680, 0.8)
+    }
+    
+    func onTokensSelected(_ result: [String]) {
+        loadingView.isHidden = false
+        onRequestFetch()
+    }
+
+
     func onUpdateView() {
         if (nativeCoins.count + ibcCoins.count + bridgedCoins.count + mintscanCw20Tokens.count + mintscanErc20Tokens.count < 10) {
             tableView.tableHeaderView = nil

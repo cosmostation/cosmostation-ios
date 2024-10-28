@@ -57,9 +57,17 @@ class NeutronFetcher: CosmosFetcher {
                     if ($1.denom == chain.stakeDenom) { return false }
                     return false
                 }
-                
+                let userDisplaytoken = BaseData.instance.getDisplayCw20s(id, self.chain.tag)
                 await mintscanCw20Tokens.concurrentForEach { cw20 in
-                    await self.fetchCw20Balance(cw20)
+                    if (userDisplaytoken == nil) {
+                        if (cw20.wallet_preload == true) {
+                            await self.fetchCw20Balance(cw20)
+                        }
+                    } else {
+                        if (userDisplaytoken?.contains(cw20.contract!) == true) {
+                            await self.fetchCw20Balance(cw20)
+                        }
+                    }
                 }
             }
             return true

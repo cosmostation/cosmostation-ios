@@ -8,27 +8,42 @@
 
 import UIKit
 import SDWebImage
+import SkeletonView
 
 class SelectDisplayTokenCell: UITableViewCell {
     
     @IBOutlet weak var rootView: UIView!
     @IBOutlet weak var coinImg: UIImageView!
     @IBOutlet weak var symbolLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-
+    @IBOutlet weak var contractLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var valueCurrencyLabel: UILabel!
+    @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var loadingAmountLabel: UILabel!
+    @IBOutlet weak var loadingValueLabel: UILabel!
+    
+    let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        loadingAmountLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)    
+        loadingValueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
     }
     
     override func prepareForReuse() {
         coinImg.sd_cancelCurrentImageLoad()
         coinImg.image = UIImage(named: "tokenDefault")
         symbolLabel.text = ""
-        descriptionLabel.text = ""
+        contractLabel.text = ""
+        nameLabel.text = ""
+        amountLabel.text = ""
+        valueCurrencyLabel.text = ""
+        valueLabel.text = ""
     }
     
-    func bindErc20Token(_ chain: BaseChain, _ token: MintscanToken, _ selectedList: [String]) {
+    func bindToken(_ chain: BaseChain, _ token: MintscanToken, _ selectedList: [String]) {
         if (selectedList.contains(token.contract!)) {
             rootView.layer.borderWidth = 1.0
             rootView.layer.borderColor = UIColor.white.cgColor
@@ -39,7 +54,49 @@ class SelectDisplayTokenCell: UITableViewCell {
         
         coinImg?.sd_setImage(with: token.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         symbolLabel.text = token.symbol
-        descriptionLabel.text = token.description
+        contractLabel.text = token.contract
+        nameLabel.text = token.name
+        
+        Task {
+            if !SelectDisplayTokenListSheet.tokenWithAmount.map({$0.contract}).contains(token.contract) {
+                showLoadingView()
+                await fetchTokenBalance(chain, token)
+                hideLoadingView()
+            }
+            
+            if let index = SelectDisplayTokenListSheet.tokenWithAmount.firstIndex(where: { $0.contract == token.contract }) {
+                let token = SelectDisplayTokenListSheet.tokenWithAmount[index]
+                let amount = token.getAmount().multiplying(byPowerOf10: -token.decimals!)
+                amountLabel.attributedText = WDP.dpAmount(amount.stringValue, amountLabel!.font)
+                let msPrice = BaseData.instance.getPrice(token.coinGeckoId)
+                let value = msPrice.multiplying(by: token.getAmount()).multiplying(byPowerOf10: -token.decimals!, withBehavior: handler6)
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+            }
+        }
+    }
+    
+    
+    private func fetchTokenBalance(_ chain: BaseChain, _ token: MintscanToken) async {
+        if let evmFetcher = chain.getEvmfetcher() {
+            await chain.getEvmfetcher()?.fetchErc20Balance(token)
+        } else {
+            await chain.getCosmosfetcher()?.fetchCw20Balance(token)
+        }
+        SelectDisplayTokenListSheet.tokenWithAmount.append(token)
+    }
+    
+    private func showLoadingView() {
+        loadingAmountLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
+        loadingAmountLabel.isHidden = false
+        loadingValueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
+        loadingValueLabel.isHidden = false
+    }
+    
+    private func hideLoadingView() {
+        loadingAmountLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+        loadingAmountLabel.isHidden = true
+        loadingValueLabel.hideSkeleton(reloadDataAfter: true, transition: SkeletonTransitionStyle.none)
+        loadingValueLabel.isHidden = true
     }
     
 }

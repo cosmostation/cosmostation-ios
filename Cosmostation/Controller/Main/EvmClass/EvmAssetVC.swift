@@ -132,12 +132,14 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
                     
                 } else {
                     allErc20Tokens.sort {
+                        if ($0.wallet_preload ?? false) && !($1.wallet_preload ?? false) { return true }
+                        if !($0.wallet_preload ?? false) && $1.wallet_preload ?? false { return false }
                         let value0 = evmFetcher.tokenValue($0.contract!)
                         let value1 = evmFetcher.tokenValue($1.contract!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     allErc20Tokens.forEach { tokens in
-                        if (tokens.getAmount() != NSDecimalNumber.zero) {
+                        if (tokens.getAmount() != NSDecimalNumber.zero && tokens.wallet_preload ?? false) {
                             toDisplayErc20Tokens.append(tokens)
                         }
                     }
@@ -154,13 +156,14 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
     func onShowTokenListSheet()  {
         let tokenListSheet = SelectDisplayTokenListSheet(nibName: "SelectDisplayTokenListSheet", bundle: nil)
         tokenListSheet.selectedChain = selectedChain
-        tokenListSheet.allErc20Tokens = allErc20Tokens
-        tokenListSheet.toDisplayErc20Tokens = toDisplayErc20Tokens.map { $0.contract! }
+        tokenListSheet.allTokens = allErc20Tokens
+        tokenListSheet.toDisplayTokens = toDisplayErc20Tokens.map { $0.contract! }
         tokenListSheet.tokensListDelegate = self
         onStartSheet(tokenListSheet, 680, 0.8)
     }
     
     func onTokensSelected(_ result: [String]) {
+        loadingView.isHidden = false
         onRequestFetch()
     }
 }
