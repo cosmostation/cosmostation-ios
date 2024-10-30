@@ -55,9 +55,6 @@
 		<string>SpoqaHanSansNeo-Bold.otf</string>
 		<string>SpoqaHanSansNeo-Medium.otf</string>
 		<string>SpoqaHanSansNeo-Regular.otf</string>
-		<string>Roboto-Medium.ttf</string>
-		<string>Roboto-Bold.ttf</string>
-		<string>RobotoMono-VariableFont_wght.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
