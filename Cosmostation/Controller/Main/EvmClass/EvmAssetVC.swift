@@ -132,14 +132,14 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
                     
                 } else {
                     allErc20Tokens.sort {
-                        if ($0.wallet_preload ?? false) && !($1.wallet_preload ?? false) { return true }
-                        if !($0.wallet_preload ?? false) && $1.wallet_preload ?? false { return false }
+                        if ($0.getAmount() != NSDecimalNumber.zero) && ($1.getAmount() == NSDecimalNumber.zero) { return true }
+                        if ($0.getAmount() == NSDecimalNumber.zero) && ($1.getAmount() != NSDecimalNumber.zero) { return false }
                         let value0 = evmFetcher.tokenValue($0.contract!)
                         let value1 = evmFetcher.tokenValue($1.contract!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     allErc20Tokens.forEach { tokens in
-                        if (tokens.getAmount() != NSDecimalNumber.zero && tokens.wallet_preload ?? false) {
+                        if (tokens.getAmount() != NSDecimalNumber.zero) {
                             toDisplayErc20Tokens.append(tokens)
                         }
                     }

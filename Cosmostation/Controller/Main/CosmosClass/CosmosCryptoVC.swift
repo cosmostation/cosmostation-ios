@@ -217,14 +217,14 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                     }
                 } else {
                     mintscanCw20Tokens.sort {
-                        if ($0.wallet_preload ?? false) && !($1.wallet_preload ?? false) { return true }
-                        if !($0.wallet_preload ?? false) && $1.wallet_preload ?? false { return false }
+                        if ($0.getAmount() != NSDecimalNumber.zero) && ($1.getAmount() == NSDecimalNumber.zero) { return true }
+                        if ($0.getAmount() == NSDecimalNumber.zero) && ($1.getAmount() != NSDecimalNumber.zero) { return false }
                         let value0 = cosmosFetcher.tokenValue($0.contract!)
                         let value1 = cosmosFetcher.tokenValue($1.contract!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     mintscanCw20Tokens.forEach { token in
-                        if (token.getAmount() != NSDecimalNumber.zero && token.wallet_preload ?? false) {
+                        if (token.getAmount() != NSDecimalNumber.zero) {
                             toDisplayCw20Tokens.append(token)
                         
                         }
@@ -252,14 +252,14 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                     }
                 } else {
                     mintscanErc20Tokens.sort {
-                        if ($0.wallet_preload ?? false) && !($1.wallet_preload ?? false) { return true }
-                        if !($0.wallet_preload ?? false) && $1.wallet_preload ?? false { return false }
+                        if ($0.getAmount() != NSDecimalNumber.zero) && ($1.getAmount() == NSDecimalNumber.zero) { return true }
+                        if ($0.getAmount() == NSDecimalNumber.zero) && ($1.getAmount() != NSDecimalNumber.zero) { return false }
                         let value0 = evmFetcher.tokenValue($0.contract!)
                         let value1 = evmFetcher.tokenValue($1.contract!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     mintscanErc20Tokens.forEach { token in
-                        if (token.getAmount() != NSDecimalNumber.zero && token.wallet_preload ?? false) {
+                        if (token.getAmount() != NSDecimalNumber.zero) {
                             toDisplayErc20Tokens.append(token)
                         }
                     }
@@ -558,9 +558,19 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 onStartCoinTransferVC(.COSMOS_COIN, searchBridgedCoins[indexPath.row].denom)
                 
             } else if (indexPath.section == 3) {
+                let token = searchMintscanCw20Tokens[indexPath.row]
+                if (token.getAmount() == NSDecimalNumber.zero) {
+                    onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+                    return
+                }
                 onStartTokenTransferVC(.COSMOS_WASM, searchMintscanCw20Tokens[indexPath.row])
                 
             } else if (indexPath.section == 4) {
+                let token = searchMintscanErc20Tokens[indexPath.row]
+                if (token.getAmount() == NSDecimalNumber.zero) {
+                    onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+                    return
+                }
                 onStartTokenTransferVC(.EVM_ERC20, searchMintscanErc20Tokens[indexPath.row])
             }
             
