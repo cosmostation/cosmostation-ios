@@ -519,7 +519,7 @@ extension PortfolioVC: BaseSheetDelegate {
                         let toAccount = BaseData.instance.selectAccount(toAddcountId)
                         BaseData.instance.setLastAccount(toAccount!.id)
                         BaseData.instance.baseAccount = toAccount
-                        
+                        SelectDisplayTokenListSheet.tokenWithAmount = []
                         DispatchQueue.main.async(execute: {
                             self.hideWait()
                             self.onStartMainTab()
