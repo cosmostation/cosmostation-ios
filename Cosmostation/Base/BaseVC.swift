@@ -120,6 +120,7 @@ class BaseVC: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = mainTabVC
         self.present(mainTabVC, animated: true, completion: nil)
+        SelectDisplayTokenListSheet.tokenWithAmount = []
     }
     
     func backBarButton(_ name: String?) -> UIBarButtonItem {
