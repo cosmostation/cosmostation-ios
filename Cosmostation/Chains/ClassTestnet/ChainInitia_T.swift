@@ -26,6 +26,7 @@ class ChainInitia_T: BaseChain  {
         bechAccountPrefix = "init"
         validatorPrefix = "initvaloper"
         supportStaking = false
-        grpcHost = "grpc-office-initia.cosmostation.io"
+        grpcHost = "grpc-office-initia-2.cosmostation.io"
+        lcdUrl = "https://lcd-office.cosmostation.io/initia-2-testnet/"
     }
 }
