@@ -40,6 +40,13 @@ class PortfolioVC: BaseVC {
         }
     }
     
+    var lastSortingType: SortingType = .value {
+        didSet {
+            UserDefaults.standard.setValue(lastSortingType.rawValue, forKey: KEY_CHAIN_SORT)
+            chainSortReloadView()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -107,7 +114,13 @@ class PortfolioVC: BaseVC {
         onUpdateSearchBar()
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
         
-        navigationItem.rightBarButtonItem = rightBarButton()
+        if let sortType = UserDefaults.standard.string(forKey: KEY_CHAIN_SORT) {
+            lastSortingType = SortingType(rawValue: sortType)!
+        } else {
+            lastSortingType = .value
+        }
+        
+        navigationItem.rightBarButtonItems = rightBarButton()
     }
     
     @objc func dismissKeyboard() {
@@ -195,7 +208,53 @@ class PortfolioVC: BaseVC {
         chainSelectVC.onChainSelected = {
             self.onChainSelected()
         }
+        chainSelectVC.chainSortingDelegate = self
         self.present(chainSelectVC, animated: true)
+    }
+    
+    func chainSortReloadView() {
+
+        switch lastSortingType {
+        case .name:
+            mainnetChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                return $0.name < $1.name
+            }
+            
+            testnetChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                return $0.name < $1.name
+            }
+        case .value:
+            mainnetChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
+            }
+            
+            testnetChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
+            }
+        }
+        
+        searchMainnets = searchBar!.text!.isEmpty ? mainnetChains : mainnetChains.filter { chain in
+            return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        searchTestnets = searchBar!.text!.isEmpty ? testnetChains : testnetChains.filter { chain in
+            return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        
+        searchEmptyLayer.isHidden = searchMainnets.count + searchTestnets.count > 0
+        tableView.reloadData()
+
+        if let button = navigationItem.rightBarButtonItems?[1].customView as? UIButton {
+            button.setImage(UIImage(named: SortingType(rawValue: lastSortingType.rawValue)!.rawValue), for: .normal)
+        }
+        print(#function, UserDefaults.standard.string(forKey: KEY_CHAIN_SORT))
     }
     
     func onChainSelected() {
@@ -492,15 +551,21 @@ extension PortfolioVC: BaseSheetDelegate {
         return UIBarButtonItem(customView: button)
     }
     
-    private func rightBarButton() -> UIBarButtonItem {
-        let rightBarButton = UIButton()
+    private func rightBarButton() -> [UIBarButtonItem] {
+        let chainSearchButton = UIButton()
+        let chainSortingButton = UIButton()
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "iconSearchChain")
         config.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
-        rightBarButton.configuration = config
-        rightBarButton.addTarget(self, action: #selector(onClickChainSelect), for: .touchUpInside)
         
-        return UIBarButtonItem(customView: rightBarButton)
+        chainSearchButton.configuration = config
+        chainSearchButton.setImage(UIImage(named: "iconSearchChain"), for: .normal)
+        chainSearchButton.addTarget(self, action: #selector(onClickChainSelect), for: .touchUpInside)
+        
+        chainSortingButton.configuration = config
+        chainSortingButton.setImage(UIImage(named: SortingType(rawValue: lastSortingType.rawValue)!.rawValue), for: .normal)
+        chainSortingButton.addTarget(self, action: #selector(onClickSortingButton), for: .touchUpInside)
+
+        return [UIBarButtonItem(customView: chainSearchButton), UIBarButtonItem(customView: chainSortingButton)]
     }
 
     @objc func onClickSwitchAccount(_ sender: UIButton) {
@@ -561,4 +626,25 @@ extension PortfolioVC: NoticeSheetDelegate, EndpointDelegate {
             onUpdateRow(chainTag)
         }
     }
+}
+
+extension PortfolioVC: ChainSortingTypeDelegate {
+    @objc func onClickSortingButton() {
+        switch lastSortingType {
+        case .name:
+            lastSortingType = .value
+            
+        case .value:
+            lastSortingType = .name
+        }
+    }
+}
+
+enum SortingType: String {
+    case name = "iconSortName"
+    case value = "iconSortValue"
+}
+
+protocol ChainSortingTypeDelegate {
+    func onClickSortingButton()
 }
