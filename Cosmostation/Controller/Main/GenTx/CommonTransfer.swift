@@ -632,9 +632,8 @@ class CommonTransfer: BaseVC {
                 WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
                 
                 if (sendAssetType == .COSMOS_COIN || (sendAssetType == .COSMOS_EVM_MAIN_COIN && txStyle == .COSMOS_STYLE)) {
-                    let stakeDenom = fromChain.stakeDenom!
                     let balanceAmount = cosmosFetcher.balanceAmount(toSendDenom)
-                    if (cosmosTxFee.amount[0].denom == stakeDenom) {
+                    if (cosmosTxFee.amount[0].denom == toSendDenom) {
                         if (totalFeeAmount.compare(balanceAmount).rawValue > 0) {
                             //ERROR short balance!!
                         }
