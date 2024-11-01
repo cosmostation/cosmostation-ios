@@ -1254,7 +1254,7 @@ extension CommonTransfer {
     func onBindIbcSendMsg(_ revisionNumber: UInt64, _ lastBlock: Int64) -> [Google_Protobuf_Any] {
         let height = Ibc_Core_Client_V1_Height.with {
             $0.revisionNumber = revisionNumber
-            $0.revisionHeight = UInt64(lastBlock) + (toChain.getTimeoutAdding() * 10)
+            $0.revisionHeight = UInt64(lastBlock) + (toChain.getTimeoutPadding() * 10)
         }
         let sendCoin = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = toSendDenom

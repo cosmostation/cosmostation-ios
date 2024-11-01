@@ -404,7 +404,7 @@ extension BaseChain {
         return getChainListParam()["cosmos_fee_info"]["is_feemarket"].bool ?? false
     }
     
-    func getTimeoutAdding() -> UInt64 {
+    func getTimeoutPadding() -> UInt64 {
         return getChainListParam()["tx_timeout_padding"].uInt64 ?? 30
     }
     
