@@ -394,7 +394,7 @@ extension BaseChain {
     }
     
     func gasMultiply() -> Double {
-        if let mutiply = getChainListParam()["cosmos_fee_info"]["simul_gas_multiply"].double {
+        if let mutiply = getChainListParam()["cosmos_fee_info"]["simulated_gas_multiply"].double {
             return mutiply
         }
         return 1.3
