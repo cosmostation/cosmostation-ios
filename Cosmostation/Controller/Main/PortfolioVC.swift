@@ -40,12 +40,7 @@ class PortfolioVC: BaseVC {
         }
     }
     
-    var lastSortingType: SortingType = .value {
-        didSet {
-            UserDefaults.standard.setValue(lastSortingType.rawValue, forKey: KEY_CHAIN_SORT)
-            chainSortReloadView()
-        }
-    }
+    var lastSortingType: SortingType = .value
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,11 +109,8 @@ class PortfolioVC: BaseVC {
         onUpdateSearchBar()
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
         
-        if let sortType = UserDefaults.standard.string(forKey: KEY_CHAIN_SORT) {
-            lastSortingType = SortingType(rawValue: sortType)!
-        } else {
-            lastSortingType = .value
-        }
+        let sortType = UserDefaults.standard.string(forKey: KEY_CHAIN_SORT) ?? SortingType.value.rawValue
+        lastSortingType = SortingType(rawValue: sortType)!
         
         navigationItem.rightBarButtonItems = rightBarButton()
     }
@@ -223,8 +215,6 @@ class PortfolioVC: BaseVC {
             }
             
             testnetChains.sort {
-                if ($0.tag == "cosmos118") { return true }
-                if ($1.tag == "cosmos118") { return false }
                 return $0.name < $1.name
             }
         case .value:
@@ -235,9 +225,7 @@ class PortfolioVC: BaseVC {
             }
             
             testnetChains.sort {
-                if ($0.tag == "cosmos118") { return true }
-                if ($1.tag == "cosmos118") { return false }
-                return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
+                return $0.name < $1.name
             }
         }
         
@@ -248,13 +236,11 @@ class PortfolioVC: BaseVC {
             return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         
-        searchEmptyLayer.isHidden = searchMainnets.count + searchTestnets.count > 0
         tableView.reloadData()
 
         if let button = navigationItem.rightBarButtonItems?[1].customView as? UIButton {
             button.setImage(UIImage(named: SortingType(rawValue: lastSortingType.rawValue)!.rawValue), for: .normal)
         }
-        print(#function, UserDefaults.standard.string(forKey: KEY_CHAIN_SORT))
     }
     
     func onChainSelected() {
@@ -637,6 +623,9 @@ extension PortfolioVC: ChainSortingTypeDelegate {
         case .value:
             lastSortingType = .name
         }
+        
+        UserDefaults.standard.setValue(lastSortingType.rawValue, forKey: KEY_CHAIN_SORT)
+        chainSortReloadView()
     }
 }
 

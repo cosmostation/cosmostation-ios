@@ -193,7 +193,8 @@ public class BaseAccount {
     }
     
     func initSortChains() {
-        if let chainSort = UserDefaults.standard.string(forKey: KEY_CHAIN_SORT), let sortType = SortingType(rawValue: chainSort) {
+        let chainSort = UserDefaults.standard.string(forKey: KEY_CHAIN_SORT) ?? SortingType.value.rawValue
+        if let sortType = SortingType(rawValue: chainSort) {
             switch sortType {
             case .name:
                 allChains.sort {
@@ -223,26 +224,12 @@ public class BaseAccount {
                     return false
                 }
             }
-        } else {
-            allChains.sort {
-                if ($0.tag == "cosmos118") { return true }
-                if ($1.tag == "cosmos118") { return false }
-                let ref0 = BaseData.instance.selectRefAddress(id, $0.tag)?.lastUsdValue() ?? NSDecimalNumber.zero
-                let ref1 = BaseData.instance.selectRefAddress(id, $1.tag)?.lastUsdValue() ?? NSDecimalNumber.zero
-                return ref0.compare(ref1).rawValue > 0 ? true : false
-            }
-            allChains.sort {
-                if ($0.tag == "cosmos118") { return true }
-                if ($1.tag == "cosmos118") { return false }
-                if (dpTags.contains($0.tag) == true && dpTags.contains($1.tag) == false) { return true }
-                return false
-            }
         }
-        
     }
     
     func reSortChains() {
-        if let chainSort = UserDefaults.standard.string(forKey: KEY_CHAIN_SORT), let sortType = SortingType(rawValue: chainSort) {
+        let chainSort = UserDefaults.standard.string(forKey: KEY_CHAIN_SORT) ?? SortingType.value.rawValue
+        if let sortType = SortingType(rawValue: chainSort) {
             switch sortType {
             case .name:
                 allChains.sort {
@@ -257,12 +244,6 @@ public class BaseAccount {
                     if ($1.tag == "cosmos118") { return false }
                     return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
                 }
-            }
-        } else {
-            allChains.sort {
-                if ($0.tag == "cosmos118") { return true }
-                if ($1.tag == "cosmos118") { return false }
-                return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
             }
         }
     }

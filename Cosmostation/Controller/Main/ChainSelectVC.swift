@@ -136,13 +136,9 @@ class ChainSelectVC: BaseVC {
             }
             
             testnetChains.sort {
-                if ($0.tag == "cosmos118") { return true }
-                if ($1.tag == "cosmos118") { return false }
                 return $0.name < $1.name
             }
             testnetChains.sort {
-                if ($0.tag == "cosmos118") { return true }
-                if ($1.tag == "cosmos118") { return false }
                 if (dpTags.contains($0.tag) == true && dpTags.contains($1.tag) == false) { return true }
                 return false
             }
@@ -160,13 +156,10 @@ class ChainSelectVC: BaseVC {
             }
 
             testnetChains.sort {
-                if ($0.tag == "cosmos118") { return true }
-                if ($1.tag == "cosmos118") { return false }
-                return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
+                // testnet no value => sort by name
+                return $0.name < $1.name
             }
             testnetChains.sort {
-                if ($0.tag == "cosmos118") { return true }
-                if ($1.tag == "cosmos118") { return false }
                 if (dpTags.contains($0.tag) == true && dpTags.contains($1.tag) == false) { return true }
                 return false
             }
@@ -178,12 +171,10 @@ class ChainSelectVC: BaseVC {
         searchTestnets = searchBar!.text!.isEmpty ? testnetChains : testnetChains.filter { chain in
             return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
-        searchEmptyLayer.isHidden = searchMainnets.count + searchTestnets.count > 0
+
         tableView.reloadData()
 
         sortButton.setImage(UIImage(named: SortingType(rawValue: lastSortingType.rawValue)!.rawValue), for: .normal)
-        
-        print(#function, UserDefaults.standard.string(forKey: KEY_CHAIN_SORT))
     }
     
     func onUpdateRow(_ tag: String) {
