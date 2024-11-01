@@ -69,7 +69,7 @@ class AboutChainInfoCell: UITableViewCell {
             
             gasFeeView.isHidden = false
             gasFeeTitle.text = NSLocalizedString("str_gas_fee_coin", comment: "")
-            gssFeeLabel.text = json["params"]["chainlist_params"]["symbol"].string
+            gssFeeLabel.text = json["params"]["chainlist_params"]["main_asset_symbol"].string
             
         } else if (chain.supportCosmos) {
             chainIdcosmosView.isHidden = false

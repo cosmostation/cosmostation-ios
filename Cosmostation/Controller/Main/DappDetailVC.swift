@@ -333,7 +333,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                 }
                 
             } else if (method == "cos_supportedChainNames") {
-                let chainNames = allChains.filter { $0.chainDappName() != nil }.map{ $0.chainDappName() }
+                let chainNames = allChains.filter { $0.name != nil }.map{ $0.name }
                 if (chainNames.count > 0) {
                     let data:JSON = ["official": chainNames, "unofficial": []]
                     injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
@@ -349,8 +349,8 @@ extension DappDetailVC: WKScriptMessageHandler {
                 let requestChainId = messageJSON["params"]["chainId"].stringValue
                 if let chain = allChains.filter({ $0.chainIdCosmos == requestChainId ||
                     $0.chainIdCosmos == requestChainName ||
-                    $0.chainDappName()?.lowercased() == requestChainId.lowercased() ||
-                    $0.chainDappName()?.lowercased() == requestChainName.lowercased()} ).first {
+                    $0.name.lowercased() == requestChainId.lowercased() ||
+                    $0.name.lowercased() == requestChainName.lowercased()} ).first {
                     targetChain = chain
                     var data = JSON()
                     data["isLedger"].boolValue = false

@@ -415,7 +415,7 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
 extension CosmosClassVC {
     
     func onSendTx() {
-        if (selectedChain.isBankLocked()) {
+        if (!selectedChain.isSendEnabled()) {
             onShowToast(NSLocalizedString("error_tranfer_disabled", comment: ""))
             return
         }
