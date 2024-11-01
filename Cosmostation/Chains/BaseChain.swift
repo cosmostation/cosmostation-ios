@@ -687,7 +687,6 @@ func ALLCHAINS() -> [BaseChain] {
     
     
     
-    result.append(ChainCosmos_T())
     result.append(ChainArtelaEVM_T())
     //result.append(ChainBeraEVM_T())
     result.append(ChainBitCoin44_T())
