@@ -106,8 +106,8 @@ class DappCosmosSignRequestSheet: BaseVC {
             
             if let chain = allChains.filter({ $0.chainIdCosmos == requestChainId ||
                 $0.chainIdCosmos == requestChainName ||
-                $0.chainDappName()?.lowercased() == requestChainId?.lowercased() ||
-                $0.chainDappName()?.lowercased() == requestChainName?.lowercased()} ).first {
+                $0.name.lowercased() == requestChainId?.lowercased() ||
+                $0.name.lowercased() == requestChainName?.lowercased()} ).first {
                 targetChain = chain
             } else {
                 print("Parsing error")

@@ -519,7 +519,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (selectedChain.isBankLocked()) {
+        if (!selectedChain.isSendEnabled()) {
             onShowToast(NSLocalizedString("error_tranfer_disabled", comment: ""))
             return
         }

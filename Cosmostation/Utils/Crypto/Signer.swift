@@ -429,7 +429,7 @@ class Signer {
             $0.memo = memo
             $0.messages = msgAnys
             if let height = timeout {
-                $0.timeoutHeight = UInt64(height) + baseChain.getTimeoutAdding()
+                $0.timeoutHeight = UInt64(height) + baseChain.getTimeoutPadding()
             }
         }
     }
