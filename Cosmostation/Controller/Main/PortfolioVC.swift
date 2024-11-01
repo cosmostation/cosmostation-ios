@@ -103,7 +103,7 @@ class PortfolioVC: BaseVC {
         mainnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == false })
         searchMainnets = mainnetChains
         
-        testnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == true })
+        testnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == true }).sorted{ $0.name < $1.name }
         searchTestnets = testnetChains
         
         onUpdateSearchBar()
@@ -205,7 +205,6 @@ class PortfolioVC: BaseVC {
     }
     
     func chainSortReloadView() {
-
         switch lastSortingType {
         case .name:
             mainnetChains.sort {
@@ -213,19 +212,11 @@ class PortfolioVC: BaseVC {
                 if ($1.tag == "cosmos118") { return false }
                 return $0.name < $1.name
             }
-            
-            testnetChains.sort {
-                return $0.name < $1.name
-            }
         case .value:
             mainnetChains.sort {
                 if ($0.tag == "cosmos118") { return true }
                 if ($1.tag == "cosmos118") { return false }
                 return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
-            }
-            
-            testnetChains.sort {
-                return $0.name < $1.name
             }
         }
         
@@ -248,7 +239,7 @@ class PortfolioVC: BaseVC {
         mainnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == false })
         searchMainnets = mainnetChains
         
-        testnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == true })
+        testnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == true }).sorted{ $0.name < $1.name }
         searchTestnets = testnetChains
         
         searchEmptyLayer.isHidden = true

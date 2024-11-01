@@ -134,14 +134,6 @@ class ChainSelectVC: BaseVC {
                 if (dpTags.contains($0.tag) == true && dpTags.contains($1.tag) == false) { return true }
                 return false
             }
-            
-            testnetChains.sort {
-                return $0.name < $1.name
-            }
-            testnetChains.sort {
-                if (dpTags.contains($0.tag) == true && dpTags.contains($1.tag) == false) { return true }
-                return false
-            }
         case .value:
             mainnetChains.sort {
                 if ($0.tag == "cosmos118") { return true }
@@ -154,15 +146,14 @@ class ChainSelectVC: BaseVC {
                 if (dpTags.contains($0.tag) == true && dpTags.contains($1.tag) == false) { return true }
                 return false
             }
-
-            testnetChains.sort {
-                // testnet no value => sort by name
-                return $0.name < $1.name
-            }
-            testnetChains.sort {
-                if (dpTags.contains($0.tag) == true && dpTags.contains($1.tag) == false) { return true }
-                return false
-            }
+        }
+        
+        testnetChains.sort {
+            return $0.name < $1.name
+        }
+        testnetChains.sort {
+            if (dpTags.contains($0.tag) == true && dpTags.contains($1.tag) == false) { return true }
+            return false
         }
         
         searchMainnets = searchBar!.text!.isEmpty ? mainnetChains : mainnetChains.filter { chain in
