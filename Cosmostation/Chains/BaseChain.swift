@@ -581,7 +581,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAlthea118())
     result.append(ChainArbitrum())                      //EVM
     result.append(ChainArchway())
-    //result.append(ChainArtelaEVM())                   //EVM
     result.append(ChainAssetMantle())
     result.append(ChainAtomone())
     result.append(ChainAvalanche())                     //EVM
@@ -599,14 +598,12 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainChihuahua())
     result.append(ChainComdex())
     result.append(ChainCoreum())
-    // result.append(ChainCrescent())
     result.append(ChainCronos())                        //EVM
     result.append(ChainCryptoorg())
-    result.append(ChainCudos())
     result.append(ChainDesmos())
     result.append(ChainDydx())
+    result.append(ChainDungeon())
     result.append(ChainDymensionEVM())                  //EVM
-    // result.append(ChainEmoney())
     result.append(ChainEthereum())                      //EVM
     result.append(ChainEvmosEVM())                      //EVM
     result.append(ChainFetchAi())
@@ -669,7 +666,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainSource())
     result.append(ChainStafi())
     result.append(ChainStargaze())
-    // result.append(ChainStarname())
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
     result.append(ChainTeritori())
@@ -683,8 +679,6 @@ func ALLCHAINS() -> [BaseChain] {
     
     
     
-    result.append(ChainCosmos_T())
-    result.append(ChainArtelaEVM_T())
     //result.append(ChainBeraEVM_T())
     result.append(ChainBitCoin44_T())
     result.append(ChainBitCoin49_T())
@@ -696,6 +690,16 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainStory_T())
 
     
+    
+    
+//    result.append(ChainArtelaEVM())                   //EVM
+//    result.append(ChainCrescent())
+//    result.append(ChainCudos())
+//    result.append(ChainEmoney())
+//    result.append(ChainStarname())
+//    
+//    result.append(ChainCosmos_T())
+//    result.append(ChainArtelaEVM_T())
     
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {

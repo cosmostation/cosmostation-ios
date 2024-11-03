@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -47,8 +47,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZk-Ok-B8N">
-                                        <rect key="frame" x="100.66666666666666" y="26.666666666666671" width="17" height="25.333333333333329"/>
-                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="20"/>
+                                        <rect key="frame" x="93.666666666666657" y="20.333333333333332" width="24" height="35.333333333333343"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="28"/>
                                         <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -56,12 +56,12 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Iuw-wd-z64" firstAttribute="centerY" secondItem="uaX-Dh-cwU" secondAttribute="centerY" id="0e7-of-fdp"/>
-                                    <constraint firstItem="lZk-Ok-B8N" firstAttribute="firstBaseline" secondItem="sqR-D5-yjj" secondAttribute="firstBaseline" constant="-1" id="53s-bJ-ipy"/>
                                     <constraint firstItem="Iuw-wd-z64" firstAttribute="leading" secondItem="uaX-Dh-cwU" secondAttribute="leading" id="6gU-iS-mHC"/>
                                     <constraint firstItem="sqR-D5-yjj" firstAttribute="centerX" secondItem="0An-sf-Sxo" secondAttribute="centerX" id="8gL-8U-P73"/>
                                     <constraint firstItem="uaX-Dh-cwU" firstAttribute="leading" secondItem="0An-sf-Sxo" secondAttribute="leading" constant="48" id="CzJ-B5-Xm8"/>
                                     <constraint firstItem="sqR-D5-yjj" firstAttribute="leading" secondItem="lZk-Ok-B8N" secondAttribute="trailing" constant="2" id="G2C-A2-S6b"/>
                                     <constraint firstAttribute="height" constant="56" id="LjO-Sz-SGM"/>
+                                    <constraint firstItem="lZk-Ok-B8N" firstAttribute="centerY" secondItem="sqR-D5-yjj" secondAttribute="centerY" id="PWk-pU-7Wf"/>
                                     <constraint firstAttribute="trailing" secondItem="uaX-Dh-cwU" secondAttribute="trailing" constant="48" id="Rur-kK-ZtB"/>
                                     <constraint firstItem="uaX-Dh-cwU" firstAttribute="centerX" secondItem="0An-sf-Sxo" secondAttribute="centerX" id="WQ4-eP-hKz"/>
                                     <constraint firstItem="Iuw-wd-z64" firstAttribute="centerX" secondItem="uaX-Dh-cwU" secondAttribute="centerX" id="Y5j-RE-jiK"/>

@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -96,9 +96,9 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rov-M3-rhY">
-                                <rect key="frame" x="274.33333333333331" y="18.333333333333332" width="3" height="15.333333333333332"/>
-                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text=" $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rov-M3-rhY">
+                                <rect key="frame" x="263.33333333333331" y="14.66666666666667" width="14" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -184,7 +184,6 @@
                             <constraint firstItem="2nt-Q9-wQJ" firstAttribute="centerY" secondItem="B7C-na-Kid" secondAttribute="centerY" id="18E-Qe-ggu"/>
                             <constraint firstItem="Zh3-K6-yqb" firstAttribute="centerY" secondItem="brX-jS-Hp5" secondAttribute="centerY" id="2KS-cQ-Iq9"/>
                             <constraint firstItem="QGE-gq-48I" firstAttribute="centerY" secondItem="YJ2-PH-o0E" secondAttribute="centerY" id="4bi-Cg-DqX"/>
-                            <constraint firstItem="rov-M3-rhY" firstAttribute="firstBaseline" secondItem="Zh3-K6-yqb" secondAttribute="firstBaseline" constant="-0.5" id="5GN-aZ-bvO"/>
                             <constraint firstItem="o5a-Xj-3hp" firstAttribute="trailing" secondItem="B7C-na-Kid" secondAttribute="trailing" id="5Tv-ez-CYc"/>
                             <constraint firstItem="hCI-tl-W78" firstAttribute="leading" secondItem="YJ2-PH-o0E" secondAttribute="leading" constant="12" id="AsN-be-Utj"/>
                             <constraint firstItem="B7C-na-Kid" firstAttribute="leading" secondItem="brX-jS-Hp5" secondAttribute="leading" id="BrY-R5-At6"/>
@@ -203,6 +202,7 @@
                             <constraint firstItem="RX1-4l-ZXX" firstAttribute="centerY" secondItem="Zh3-K6-yqb" secondAttribute="centerY" id="gJs-Ju-yxb"/>
                             <constraint firstAttribute="trailing" secondItem="QGE-gq-48I" secondAttribute="trailing" constant="16" id="lfm-CM-MRV"/>
                             <constraint firstItem="o5a-Xj-3hp" firstAttribute="leading" secondItem="B7C-na-Kid" secondAttribute="leading" id="qIY-9g-EoY"/>
+                            <constraint firstItem="rov-M3-rhY" firstAttribute="centerY" secondItem="Zh3-K6-yqb" secondAttribute="centerY" id="qct-M7-IWB"/>
                             <constraint firstItem="brX-jS-Hp5" firstAttribute="leading" secondItem="hCI-tl-W78" secondAttribute="trailing" constant="4" id="t6s-lZ-wdh"/>
                             <constraint firstItem="o5a-Xj-3hp" firstAttribute="centerY" secondItem="B7C-na-Kid" secondAttribute="centerY" id="xjw-FY-Wup"/>
                             <constraint firstAttribute="trailing" secondItem="RX1-4l-ZXX" secondAttribute="trailing" constant="16" id="yO2-Jw-URO"/>
