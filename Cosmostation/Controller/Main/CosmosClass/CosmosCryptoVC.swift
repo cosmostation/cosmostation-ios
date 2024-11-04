@@ -348,7 +348,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
     //For drop event
     func onSetDrop() {
         if (!BaseData.instance.showEvenReview()) { return }
-        if (selectedChain is ChainCosmos || selectedChain is ChainNeutron) {
+        if (selectedChain is ChainCosmos || selectedChain is ChainNeutron || selectedChain is ChainCelestia) {
             dropBtn.animation = LottieAnimation.named("drop")
             dropBtn.contentMode = .scaleAspectFit
             dropBtn.loopMode = .loop
