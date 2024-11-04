@@ -41,16 +41,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="viT-32-1st">
-                                        <rect key="frame" x="100.66666666666666" y="26.666666666666671" width="17" height="25.333333333333329"/>
-                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="20"/>
+                                        <rect key="frame" x="93.666666666666657" y="20.333333333333332" width="24" height="35.333333333333343"/>
+                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="28"/>
                                         <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="viT-32-1st" firstAttribute="firstBaseline" secondItem="ZL8-7D-z5y" secondAttribute="firstBaseline" constant="-1" id="GVw-5P-x3u"/>
                                     <constraint firstItem="530-4U-Moh" firstAttribute="leading" secondItem="4yH-GI-o1U" secondAttribute="leading" constant="48" id="HSG-Rq-VR6"/>
+                                    <constraint firstItem="viT-32-1st" firstAttribute="centerY" secondItem="ZL8-7D-z5y" secondAttribute="centerY" id="K18-Fp-bT1"/>
                                     <constraint firstItem="ZL8-7D-z5y" firstAttribute="centerX" secondItem="4yH-GI-o1U" secondAttribute="centerX" id="Ril-8d-p32"/>
                                     <constraint firstItem="530-4U-Moh" firstAttribute="top" secondItem="4yH-GI-o1U" secondAttribute="top" id="Wzg-Xz-Jh1"/>
                                     <constraint firstItem="530-4U-Moh" firstAttribute="centerX" secondItem="4yH-GI-o1U" secondAttribute="centerX" id="aX4-sV-hB0"/>

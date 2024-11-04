@@ -376,20 +376,16 @@ extension BaseChain {
         return Int(getChainParam()["params"]["interchain_provider_params"]["max_provider_consensus_validators"].stringValue)
     }
     
-    func chainDappName() -> String? {
-        return getChainListParam()["name_for_dapp"].string?.lowercased()
-    }
-    
     func isGasSimulable() -> Bool {
-        return getChainListParam()["fee"]["isSimulable"].bool ?? true
+        return getChainListParam()["cosmos_fee_info"]["is_simulable"].bool ?? true
     }
     
-    func isBankLocked() -> Bool {
-        return getChainListParam()["isBankLocked"].bool ?? false
+    func isSendEnabled() -> Bool {
+        return getChainListParam()["is_send_enabled"].bool ?? true
     }
     
     func isEcosystem() -> Bool {
-        return getChainListParam()["moblie_dapp"].bool ?? false
+        return getChainListParam()["is_support_moblie_dapp"].bool ?? false
     }
     
     func voteThreshold() -> NSDecimalNumber {
@@ -398,23 +394,23 @@ extension BaseChain {
     }
     
     func gasMultiply() -> Double {
-        if let mutiply = getChainListParam()["fee"]["simul_gas_multiply"].double {
+        if let mutiply = getChainListParam()["cosmos_fee_info"]["simulated_gas_multiply"].double {
             return mutiply
         }
         return 1.3
     }
     
     func supportFeeMarket() -> Bool {
-        return getChainListParam()["fee"]["feemarket"].bool ?? false
+        return getChainListParam()["cosmos_fee_info"]["is_feemarket"].bool ?? false
     }
     
-    func getTimeoutAdding() -> UInt64 {
-        return getChainListParam()["tx_timeout_add"].uInt64 ?? 30
+    func getTimeoutPadding() -> UInt64 {
+        return getChainListParam()["tx_timeout_padding"].uInt64 ?? 30
     }
     
     func getFeeInfos() -> [FeeInfo] {
         var result = [FeeInfo]()
-        getChainListParam()["fee"]["rate"].arrayValue.forEach { rate in
+        getChainListParam()["cosmos_fee_info"]["rate"].arrayValue.forEach { rate in
             result.append(FeeInfo.init(rate.stringValue))
         }
         if (result.count == 1) {
@@ -443,18 +439,18 @@ extension BaseChain {
     }
     
     func getFeeBasePosition() -> Int {
-        return getChainListParam()["fee"]["base"].intValue
+        return getChainListParam()["cosmos_fee_info"]["base"].intValue
     }
     
     func getFeeBaseGasAmount() -> UInt64 {
-        guard let limit = getChainListParam()["fee"]["init_gas_limit"].uInt64 else {
+        guard let limit = getChainListParam()["cosmos_fee_info"]["init_gas_limit"].uInt64 else {
             return UInt64(BASE_GAS_AMOUNT)!
         }
         return limit
     }
     
     func getFeeBaseGasAmountS() -> String {
-        guard let limit = getChainListParam()["fee"]["init_gas_limit"].string else {
+        guard let limit = getChainListParam()["cosmos_fee_info"]["init_gas_limit"].string else {
             return BASE_GAS_AMOUNT
         }
         return limit
@@ -513,19 +509,19 @@ extension BaseChain {
     
     
     func evmSupportEip1559() -> Bool {
-        return getChainListParam()["evm_fee"]["eip1559"].bool ?? false
+        return getChainListParam()["evm_fee_info"]["is_eip1559"].bool ?? false
     }
     
     
     func evmGasMultiply() -> BigUInt {
-        if let mutiply = getChainListParam()["evm_fee"]["simul_gas_multiply"].double {
+        if let mutiply = getChainListParam()["evm_fee_info"]["simulated_gas_multiply"].double {
             return BigUInt(mutiply * 10)
         }
         return 13
     }
     
     func getSkipAffiliate() -> String {
-        if let affiliate = BaseData.instance.mintscanChainParams?["cosmos"]["params"]["chainlist_params"]["skipAffiliate"].string {
+        if let affiliate = BaseData.instance.mintscanChainParams?["cosmos"]["params"]["chainlist_params"]["skip_affiliate"].string {
             return affiliate
         }
         return "50"
@@ -585,7 +581,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAlthea118())
     result.append(ChainArbitrum())                      //EVM
     result.append(ChainArchway())
-    //result.append(ChainArtelaEVM())                   //EVM
     result.append(ChainAssetMantle())
     result.append(ChainAtomone())
     result.append(ChainAvalanche())                     //EVM
@@ -603,14 +598,12 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainChihuahua())
     result.append(ChainComdex())
     result.append(ChainCoreum())
-    // result.append(ChainCrescent())
     result.append(ChainCronos())                        //EVM
     result.append(ChainCryptoorg())
-    result.append(ChainCudos())
     result.append(ChainDesmos())
     result.append(ChainDydx())
+    result.append(ChainDungeon())
     result.append(ChainDymensionEVM())                  //EVM
-    // result.append(ChainEmoney())
     result.append(ChainEthereum())                      //EVM
     result.append(ChainEvmosEVM())                      //EVM
     result.append(ChainFetchAi())
@@ -673,7 +666,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainSource())
     result.append(ChainStafi())
     result.append(ChainStargaze())
-    // result.append(ChainStarname())
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
     result.append(ChainTeritori())
@@ -687,8 +679,6 @@ func ALLCHAINS() -> [BaseChain] {
     
     
     
-    result.append(ChainCosmos_T())
-    result.append(ChainArtelaEVM_T())
     //result.append(ChainBeraEVM_T())
     result.append(ChainBitCoin44_T())
     result.append(ChainBitCoin49_T())
@@ -700,6 +690,16 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainStory_T())
 
     
+    
+    
+//    result.append(ChainArtelaEVM())                   //EVM
+//    result.append(ChainCrescent())
+//    result.append(ChainCudos())
+//    result.append(ChainEmoney())
+//    result.append(ChainStarname())
+//    
+//    result.append(ChainCosmos_T())
+//    result.append(ChainArtelaEVM_T())
     
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {
