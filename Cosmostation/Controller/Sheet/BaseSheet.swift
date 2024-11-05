@@ -50,7 +50,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var suiValidators = [JSON]()
     var suiValidatorsSearch = [JSON]()
     
-    
+    var initiaValidators = Array<Initia_Mstaking_V1_Validator>()
+    var initiaValidatorsSearch = Array<Initia_Mstaking_V1_Validator>()
+    var initiaDelegations = Array<Initia_Mstaking_V1_DelegationResponse>()
+    var initiaDelegation: Initia_Mstaking_V1_DelegationResponse!
     var selectedAccount: BaseAccount?
 
     override func viewDidLoad() {
@@ -169,7 +172,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectSwapSlippage) {
             sheetTitle.text = NSLocalizedString("title_select_slippage", comment: "")
             
-        } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectUnbondingAction) {
+        } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectUnbondingAction || sheetType == .SelectInitiaDelegatedAction) {
             sheetTitle.text = NSLocalizedString("title_select_options", comment: "")
             
         } else if (sheetType == .SelectFeeDenom || sheetType == .SelectBaseFeeDenom) {
@@ -243,8 +246,20 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             suiValidators = (targetChain as? ChainSui)?.getSuiFetcher()?.suiValidators ?? []
             suiValidatorsSearch = suiValidators
             
+        } else if (sheetType == .SelectInitiaValidator) {
+            sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
+            sheetSearchBar.isHidden = false
+            initiaValidatorsSearch = initiaValidators
+            
+        } else if (sheetType == .SelectInitiaUnStakeValidator) {
+            sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
+            initiaDelegations = ((targetChain as? ChainInitia)?.getInitiaFetcher()!.initiaDelegations)!
+            initiaDelegations.forEach { delegation in
+                if let validator = (targetChain as? ChainInitia)?.getInitiaFetcher()!.initiaValidators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
+                    initiaValidators.append(validator)
+                }
+            }
         }
-
     }
     
     @objc func dismissKeyboard() {
@@ -269,6 +284,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectSuiValidator) {
             suiValidatorsSearch = searchText.isEmpty ? suiValidators : suiValidators.filter { validator in
                 return validator.suiValidatorName().range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+        } else if (sheetType == .SelectInitiaValidator) {
+            initiaValidatorsSearch = searchText.isEmpty ? initiaValidators : initiaValidators.filter { validator in
+                return validator.description_p.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
         }
         sheetTableView.reloadData()
@@ -398,7 +417,17 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectSuiValidator) {
             return suiValidatorsSearch.count
+            
+        } else if (sheetType == .SelectInitiaValidator) {
+            return initiaValidatorsSearch.count
+            
+        } else if (sheetType == .SelectInitiaDelegatedAction) {
+            return 5
+            
+        } else if (sheetType == .SelectInitiaUnStakeValidator) {
+            return initiaValidators.count
         }
+        
         return 0
     }
     
@@ -544,7 +573,22 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindSuiValidator(targetChain, suiValidatorsSearch[indexPath.row])
             return cell!
             
+        } else if (sheetType == .SelectInitiaValidator) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SelectValidatorCell") as? SelectValidatorCell
+            cell?.onBindInitiaValidator(targetChain, initiaValidatorsSearch[indexPath.row])
+            return cell!
+            
+        } else if (sheetType == .SelectInitiaDelegatedAction) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
+            cell?.onBindDelegate(indexPath.row)
+            return cell!
+            
+        } else if (sheetType == .SelectInitiaUnStakeValidator) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectValidatorCell") as? SelectValidatorCell
+            cell?.onBindUnstakeValidator(targetChain, initiaValidators[indexPath.row])
+            return cell!
         }
+        
         return UITableViewCell()
     }
     
@@ -614,9 +658,22 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "suiAddress" : suiValidatorsSearch[indexPath.row]["suiAddress"].stringValue]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
+        } else if (sheetType == .SelectInitiaValidator) {
+            let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : initiaValidatorsSearch[indexPath.row].operatorAddress]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if (sheetType == .SelectInitiaDelegatedAction) {
+            let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : initiaDelegation.delegation.validatorAddress]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if (sheetType == .SelectInitiaUnStakeValidator) {
+            let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : initiaValidators[indexPath.row].operatorAddress]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
         } else {
             let result: [String : Any] = ["index" : indexPath.row]
             sheetDelegate?.onSelectedSheet(sheetType, result)
+            
         }
         dismiss(animated: true)
     }
@@ -669,4 +726,9 @@ public enum SheetType: Int {
     
     
     case SelectSuiValidator = 81
+    
+    case SelectInitiaValidator = 91
+    case SelectInitiaUnStakeValidator = 92
+    case SelectInitiaDelegatedAction = 93
+
 }

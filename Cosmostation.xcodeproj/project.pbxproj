@@ -1622,6 +1622,7 @@
 		792613CE2CD4B82800FAF47D /* initia_gov_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613982CD4B82700FAF47D /* initia_gov_v1_tx.pb.swift */; };
 		792613CF2CD4B82800FAF47D /* initia_move_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613992CD4B82800FAF47D /* initia_move_v1_query.pb.swift */; };
 		792613D02CD4B82800FAF47D /* initia_distribution_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926139A2CD4B82800FAF47D /* initia_distribution_v1_query.pb.swift */; };
+		792613D22CD8679400FAF47D /* InitiaFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613D12CD8679400FAF47D /* InitiaFetcher.swift */; };
 		792B9CBD2C747CB3001440DB /* DappSuiSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B9CBB2C747CB2001440DB /* DappSuiSignRequestSheet.swift */; };
 		792B9CBE2C747CB3001440DB /* DappSuiSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792B9CBC2C747CB2001440DB /* DappSuiSignRequestSheet.xib */; };
 		792D2B052C57767E0085007A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 792D2B042C57767E0085007A /* SDWebImage */; };
@@ -2997,6 +2998,7 @@
 		792613982CD4B82700FAF47D /* initia_gov_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = initia_gov_v1_tx.pb.swift; sourceTree = "<group>"; };
 		792613992CD4B82800FAF47D /* initia_move_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = initia_move_v1_query.pb.swift; sourceTree = "<group>"; };
 		7926139A2CD4B82800FAF47D /* initia_distribution_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = initia_distribution_v1_query.pb.swift; sourceTree = "<group>"; };
+		792613D12CD8679400FAF47D /* InitiaFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiaFetcher.swift; sourceTree = "<group>"; };
 		792B9CBB2C747CB2001440DB /* DappSuiSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappSuiSignRequestSheet.swift; sourceTree = "<group>"; };
 		792B9CBC2C747CB2001440DB /* DappSuiSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappSuiSignRequestSheet.xib; sourceTree = "<group>"; };
 		79514DB32CB527AA008D7ED8 /* ChainMantra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantra.swift; sourceTree = "<group>"; };
@@ -3497,6 +3499,7 @@
 				045032222C1EE85900235F6A /* OktFetcher.swift */,
 				042D58572C5B5C46003DBDE0 /* SuiFetcher.swift */,
 				04A420F82C77409400C0E1A2 /* BtcFetcher.swift */,
+				792613D12CD8679400FAF47D /* InitiaFetcher.swift */,
 			);
 			path = Fetcher;
 			sourceTree = "<group>";
@@ -7278,6 +7281,7 @@
 				79FCA3D22C3F9E92001C17D0 /* artela_fee_v1_query.grpc.swift in Sources */,
 				E1A82DD1224220910097CAEE /* Account.swift in Sources */,
 				04CB91332A910BDC00375354 /* CardViewCell.swift in Sources */,
+				792613D22CD8679400FAF47D /* InitiaFetcher.swift in Sources */,
 				79FCA3C82C3F9E92001C17D0 /* artela_evm_v1_events.pb.swift in Sources */,
 				04C8169A2BA98D74006B800A /* cosmos_group_v1_events.pb.swift in Sources */,
 				041540FA2BA4126D00CD5AA1 /* VoteAllChainCell.swift in Sources */,

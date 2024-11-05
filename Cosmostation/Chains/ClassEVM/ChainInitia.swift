@@ -24,7 +24,22 @@ class ChainInitia: BaseChain  {
         stakeDenom = "uinit"
         bechAccountPrefix = "init"
         validatorPrefix = "initvaloper"
-        supportStaking = false
+//        supportStaking = false
         grpcHost = ""
     }
+    
+    override func getCosmosfetcher() -> CosmosFetcher? {
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = InitiaFetcher.init(self)
+        }
+        return cosmosFetcher
+    }
+    
+    func getInitiaFetcher() -> InitiaFetcher? {
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = InitiaFetcher.init(self)
+        }
+        return cosmosFetcher as? InitiaFetcher
+    }
+
 }

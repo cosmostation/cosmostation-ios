@@ -67,11 +67,16 @@ class CosmosRedelegate: BaseVC {
     var toValidator: Cosmos_Staking_V1beta1_Validator?
     var toCoin: Cosmos_Base_V1beta1_Coin?
 
+    var fromValidatorInitia: Initia_Mstaking_V1_Validator?
+    var toValidatorInitia: Initia_Mstaking_V1_Validator?
+    var initiaFetcher: InitiaFetcher?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
         cosmosFetcher = selectedChain.getCosmosfetcher()
+        initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher()
         
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
@@ -86,16 +91,31 @@ class CosmosRedelegate: BaseVC {
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
-        if (fromValidator == nil) {
-            fromValidator = cosmosFetcher.cosmosValidators.filter { $0.operatorAddress == cosmosFetcher.cosmosDelegations[0].delegation.validatorAddress }.first
+        if let initiaFetcher {
+            if fromValidatorInitia == nil {
+                fromValidatorInitia = initiaFetcher.initiaValidators.filter({ $0.operatorAddress == initiaFetcher.initiaDelegations[0].delegation.validatorAddress }).first
+            }
+            
+            let cosmostation = initiaFetcher.initiaValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first
+            if (fromValidatorInitia?.operatorAddress == cosmostation?.operatorAddress) {
+                toValidatorInitia = initiaFetcher.initiaValidators.filter( { $0.operatorAddress != cosmostation?.operatorAddress }).first
+            } else {
+                toValidatorInitia = initiaFetcher.initiaValidators.filter( { $0.operatorAddress != fromValidatorInitia?.operatorAddress }).first
+            }
+            
+        } else {
+            if (fromValidator == nil) {
+                fromValidator = cosmosFetcher.cosmosValidators.filter { $0.operatorAddress == cosmosFetcher.cosmosDelegations[0].delegation.validatorAddress }.first
+            }
+            
+            let cosmostation = cosmosFetcher.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first
+            if (fromValidator?.operatorAddress == cosmostation?.operatorAddress) {
+                toValidator = cosmosFetcher.cosmosValidators.filter({ $0.operatorAddress != cosmostation!.operatorAddress }).first
+            } else {
+                toValidator = cosmosFetcher.cosmosValidators.filter({ $0.operatorAddress != fromValidator?.operatorAddress }).first
+            }
         }
         
-        let cosmostation = cosmosFetcher.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first
-        if (fromValidator?.operatorAddress == cosmostation?.operatorAddress) {
-            toValidator = cosmosFetcher.cosmosValidators.filter({ $0.operatorAddress != cosmostation!.operatorAddress }).first
-        } else {
-            toValidator = cosmosFetcher.cosmosValidators.filter({ $0.operatorAddress != fromValidator?.operatorAddress }).first
-        }
         
         Task {
             await cosmosFetcher.updateBaseFee()
@@ -120,50 +140,96 @@ class CosmosRedelegate: BaseVC {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = selectedChain
         baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectUnStakeValidator
+        if selectedChain is ChainInitia {
+            baseSheet.sheetType = .SelectInitiaUnStakeValidator
+        } else {
+            baseSheet.sheetType = .SelectUnStakeValidator
+        }
         onStartSheet(baseSheet, 680, 0.8)
     }
     
     func onUpdateFromValidatorView() {
         fromMonikerImg.image = UIImage(named: "validatorDefault")
-        fromMonikerImg.sd_setImage(with: selectedChain.monikerImg(fromValidator!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
-        fromMonikerLabel.text = fromValidator!.description_p.moniker
-        if (fromValidator!.jailed) {
-            fromJailedTag.isHidden = false
+        if let initiaFetcher {
+            fromMonikerImg.sd_setImage(with: selectedChain.monikerImg(fromValidatorInitia!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            fromMonikerLabel.text = fromValidatorInitia!.description_p.moniker
+            if (fromValidatorInitia!.jailed) {
+                fromJailedTag.isHidden = false
+            } else {
+                fromInactiveTag.isHidden = initiaFetcher.isActiveValidator(fromValidatorInitia!)
+            }
+            
+            let stakeDenom = selectedChain.stakeDenom!
+            if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
+                let staked = initiaFetcher.initiaDelegations.filter({ $0.delegation.validatorAddress == fromValidatorInitia?.operatorAddress }).first?.balance.filter({ $0.denom == stakeDenom }).first?.amount
+                let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
+                fromStakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, fromStakedLabel!.font, 6)
+            }
+
         } else {
-            fromInactiveTag.isHidden = cosmosFetcher.isActiveValidator(fromValidator!)
+            fromMonikerImg.sd_setImage(with: selectedChain.monikerImg(fromValidator!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            fromMonikerLabel.text = fromValidator!.description_p.moniker
+            if (fromValidator!.jailed) {
+                fromJailedTag.isHidden = false
+            } else {
+                fromInactiveTag.isHidden = cosmosFetcher.isActiveValidator(fromValidator!)
+            }
+            
+            let stakeDenom = selectedChain.stakeDenom!
+            if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
+                let staked = cosmosFetcher.cosmosDelegations.filter { $0.delegation.validatorAddress == fromValidator?.operatorAddress }.first?.balance.amount
+                let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
+                fromStakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, fromStakedLabel!.font, 6)
+            }
         }
         
-        let stakeDenom = selectedChain.stakeDenom!
-        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
-            let staked = cosmosFetcher.cosmosDelegations.filter { $0.delegation.validatorAddress == fromValidator?.operatorAddress }.first?.balance.amount
-            let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
-            fromStakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, fromStakedLabel!.font, 6)
-        }
         onSimul()
     }
     
     @objc func onClickToValidator() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        if let initiaFetcher {
+            baseSheet.initiaValidators = initiaFetcher.initiaValidators
+            baseSheet.sheetType = .SelectInitiaValidator
+
+        } else {
+            baseSheet.validators = cosmosFetcher.cosmosValidators
+            baseSheet.sheetType = .SelectValidator
+        }
+        
         baseSheet.targetChain = selectedChain
-        baseSheet.validators = cosmosFetcher.cosmosValidators
         baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectValidator
         onStartSheet(baseSheet, 680, 0.8)
     }
     
     func onUpdateToValidatorView() {
         toMonikerImg.image = UIImage(named: "validatorDefault")
-        toMonikerImg.sd_setImage(with: selectedChain.monikerImg(toValidator!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
-        toMonikerLabel.text = toValidator!.description_p.moniker
-        if (toValidator!.jailed) {
-            toJailedTag.isHidden = false
+        
+        if let initiaFetcher {
+            toMonikerImg.sd_setImage(with: selectedChain.monikerImg(toValidatorInitia!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            toMonikerLabel.text = toValidatorInitia!.description_p.moniker
+            if (toValidatorInitia!.jailed) {
+                toJailedTag.isHidden = false
+            } else {
+                toInactiveTag.isHidden = initiaFetcher.isActiveValidator(toValidatorInitia!)
+            }
+            
+            let commission = NSDecimalNumber(string: toValidatorInitia!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
+            toCommLabel?.attributedText = WDP.dpAmount(commission.stringValue, toCommLabel!.font, 2)
+
         } else {
-            toInactiveTag.isHidden = cosmosFetcher.isActiveValidator(toValidator!)
+            toMonikerImg.sd_setImage(with: selectedChain.monikerImg(toValidator!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            toMonikerLabel.text = toValidator!.description_p.moniker
+            if (toValidator!.jailed) {
+                toJailedTag.isHidden = false
+            } else {
+                toInactiveTag.isHidden = cosmosFetcher.isActiveValidator(toValidator!)
+            }
+            
+            let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
+            toCommLabel?.attributedText = WDP.dpAmount(commission.stringValue, toCommLabel!.font, 2)
         }
         
-        let commission = NSDecimalNumber(string: toValidator!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
-        toCommLabel?.attributedText = WDP.dpAmount(commission.stringValue, toCommLabel!.font, 2)
         onSimul()
     }
     
@@ -263,9 +329,14 @@ class CosmosRedelegate: BaseVC {
             WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }
-        
-        if let delegated = cosmosFetcher.cosmosDelegations.filter({ $0.delegation.validatorAddress == fromValidator?.operatorAddress }).first {
-            availableAmount = NSDecimalNumber(string: delegated.balance.amount)
+        if let initiaFetcher {
+            if let delegated = initiaFetcher.initiaDelegations.filter({ $0.delegation.validatorAddress == fromValidatorInitia?.operatorAddress }).first {
+                availableAmount = NSDecimalNumber(string: delegated.balance.filter({ $0.denom == selectedChain.stakeDenom }).first?.amount)
+            }
+        } else {
+            if let delegated = cosmosFetcher.cosmosDelegations.filter({ $0.delegation.validatorAddress == fromValidator?.operatorAddress }).first {
+                availableAmount = NSDecimalNumber(string: delegated.balance.amount)
+            }
         }
     }
     
@@ -352,13 +423,25 @@ class CosmosRedelegate: BaseVC {
     }
     
     func onBindRedelegateMsg() -> [Google_Protobuf_Any] {
-        let redelegate = Cosmos_Staking_V1beta1_MsgBeginRedelegate.with {
-            $0.delegatorAddress = selectedChain.bechAddress!
-            $0.validatorSrcAddress = fromValidator!.operatorAddress
-            $0.validatorDstAddress = toValidator!.operatorAddress
-            $0.amount = toCoin!
+        if selectedChain is ChainInitia {
+            let redelegate = Initia_Mstaking_V1_MsgBeginRedelegate.with {
+                $0.delegatorAddress = selectedChain.bechAddress!
+                $0.validatorSrcAddress = fromValidatorInitia!.operatorAddress
+                $0.validatorDstAddress = toValidatorInitia!.operatorAddress
+                $0.amount = [toCoin!]
+            }
+            return Signer.genRedelegateMsg(redelegate)
+
+        } else {
+            let redelegate = Cosmos_Staking_V1beta1_MsgBeginRedelegate.with {
+                $0.delegatorAddress = selectedChain.bechAddress!
+                $0.validatorSrcAddress = fromValidator!.operatorAddress
+                $0.validatorDstAddress = toValidator!.operatorAddress
+                $0.amount = toCoin!
+            }
+            return Signer.genRedelegateMsg(redelegate)
+
         }
-        return Signer.genRedelegateMsg(redelegate)
     }
 
 }
@@ -393,6 +476,19 @@ extension CosmosRedelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
                 txFee.amount[0].denom = selectedDenom
                 onUpdateFeeView()
                 onSimul()
+            }
+        } else if (sheetType == .SelectInitiaUnStakeValidator) {
+            if let validatorAddress = result["validatorAddress"] as? String, let initiaFetcher {
+                fromValidatorInitia = initiaFetcher.initiaValidators.filter({ $0.operatorAddress == validatorAddress }).first!
+                onUpdateFromValidatorView()
+                onUpdateFeeView()
+            }
+
+        } else if (sheetType == .SelectInitiaValidator) {
+            if let validatorAddress = result["validatorAddress"] as? String, let initiaFetcher {
+                toValidatorInitia = initiaFetcher.initiaValidators.filter({ $0.operatorAddress == validatorAddress }).first!
+                onUpdateToValidatorView()
+                onUpdateFeeView()
             }
         }
     }

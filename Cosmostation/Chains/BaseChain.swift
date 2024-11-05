@@ -245,6 +245,10 @@ class BaseChain {
         Task {
             if let oktChain = self as? ChainOktEVM {
                 _ = await oktChain.getOktfetcher()?.fetchCosmosValidators()
+                
+            } else if let chainInitia = self as? ChainInitia  {
+                _ = await chainInitia.getInitiaFetcher()?.fetchCosmosValidators()
+                
             } else if (supportCosmos == true && supportStaking == true) {
                 _ = await getCosmosfetcher()?.fetchCosmosValidators()
             }

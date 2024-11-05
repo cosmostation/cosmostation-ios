@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainInitia_T: BaseChain  {
+class ChainInitia_T: ChainInitia  {
     
     override init() {
         super.init()
