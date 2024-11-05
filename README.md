@@ -249,7 +249,7 @@ You can download each store.
 
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/fetchai/resource/chain_fetchai.png?raw=true" width="42" height = "42"></td>
-    <td><span style="font-weight:bold">FETCH.Ai</span></td>
+    <td><span style="font-weight:bold">ASI Alliance (FETCH.Ai)</span></td>
     <td><span>m/44'/118'/0'/0/X</span><br/>
         <span>m/44'/60'/0'/0/X</span><br/>
         <span>m/44'/60'/0'/X</span></td>
@@ -482,7 +482,7 @@ You can download each store.
     
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/omniflix/resource/chain_omniflix.png?raw=true" width="42" height = "42"></td>
-    <td><span style="font-weight:bold">Omniflix</span></td>
+    <td><span style="font-weight:bold">OMNIFLIX</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
