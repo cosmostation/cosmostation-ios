@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class ChainSelf: BaseChain  {
     
     override init() {

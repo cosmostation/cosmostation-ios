@@ -673,6 +673,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainTerra())
     result.append(ChainUmee())
     result.append(ChainUnification())
+//    result.append(ChainXion())
     result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
     result.append(ChainZetaEVM())                       //EVM
