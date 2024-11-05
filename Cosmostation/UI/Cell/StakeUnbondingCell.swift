@@ -55,4 +55,25 @@ class StakeUnbondingCell: UITableViewCell {
         }
     }
     
+    func onBindInitiaMyUnbonding(_ baseChain: BaseChain, _ validator: Initia_Mstaking_V1_Validator, _ unbonding: InitiaUnbondingEntry) {
+        
+        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        nameLabel.text = validator.description_p.moniker
+        if (validator.jailed) {
+            jailedTag.isHidden = false
+        } else {
+            guard let fetcher = (baseChain as? ChainInitia)?.getInitiaFetcher() else { return }
+            inactiveTag.isHidden = fetcher.isActiveValidator(validator)
+        }
+        
+        if let stakeDenom = baseChain.stakeDenom,
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+            let unbondingAmount = NSDecimalNumber(string: unbonding.entry.balance.filter({ $0.denom == stakeDenom }).first?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
+            unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
+            
+            let completionTime = unbonding.entry.completionTime
+            finishTimeLabel.text = WDP.protoDpTime(completionTime.seconds)
+            finishGapLabel.text = WDP.protoDpTimeGap(completionTime.seconds)
+        }
+    }
 }
