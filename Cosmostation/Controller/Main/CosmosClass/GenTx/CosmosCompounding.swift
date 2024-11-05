@@ -256,7 +256,12 @@ class CosmosCompounding: BaseVC {
     }
     
     func onBindCompoundingMsg() -> [Google_Protobuf_Any] {
-        return Signer.genCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+        if selectedChain is ChainInitia {
+            return Signer.genInitiaCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+
+        } else {
+            return Signer.genCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+        }
     }
     
 }
