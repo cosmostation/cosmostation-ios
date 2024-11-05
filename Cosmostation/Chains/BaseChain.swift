@@ -580,6 +580,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainCosmos())
     result.append(ChainAgoric564())
     result.append(ChainAgoric118())
+    result.append(ChainAioz())                          //EVM
     result.append(ChainAkash())
     result.append(ChainAltheaEVM())                     //EVM
     result.append(ChainAlthea118())
@@ -598,7 +599,10 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBitCoin84())                     //MAJOR
     result.append(ChainBitsong())
     result.append(ChainCantoEVM())                      //EVM
+    result.append(ChainCarbon())
     result.append(ChainCelestia())
+    result.append(ChainC4E())
+    result.append(ChainCheqd())
     result.append(ChainChihuahua())
     result.append(ChainComdex())
     result.append(ChainCoreum())
@@ -664,6 +668,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainSecret118())
     result.append(ChainSecret529())
     result.append(ChainSei())
+    result.append(ChainSelf())
     result.append(ChainSentinel())
     result.append(ChainShentu())
     result.append(ChainSommelier())
@@ -672,10 +677,12 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainStargaze())
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
+    result.append(ChainTenet())                         //EVM
     result.append(ChainTeritori())
     result.append(ChainTerra())
     result.append(ChainUmee())
     result.append(ChainUnification())
+//    result.append(ChainXion())
     result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
     result.append(ChainZetaEVM())                       //EVM
