@@ -17,7 +17,6 @@ class InitiaFetcher: CosmosFetcher {
     var initiaValidators = [Initia_Mstaking_V1_Validator]()
 
     override func fetchCosmosData(_ id: Int64) async -> Bool {
-        
         _ = await super.fetchCosmosData(id)
         
         initiaDelegations.removeAll()
@@ -37,14 +36,13 @@ class InitiaFetcher: CosmosFetcher {
             return true
             
         } catch {
-            print("fetchCosmos error \(error) ", chain.tag)
+            print("fetchInitia error \(error) ", chain.tag)
             return false
         }
     }
     
     override func fetchCosmosValidators() async -> Bool {
         if (initiaValidators.count > 0) { return true }
-
         if let bonded = try? await fetchBondedValidator_Initia(),
            let unbonding = try? await fetchUnbondingValidator_Initia(),
            let unbonded = try? await fetchUnbondedValidator_Initia() {
@@ -63,6 +61,27 @@ class InitiaFetcher: CosmosFetcher {
             return true
         }
         return false
+    }
+    
+    override func denomValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
+        if (denom == chain.stakeDenom) {
+            return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
+                .adding(initiaDelegationValueSum(usd)).adding(initiaUnbondingValueSum(usd)).adding(commissionValue(denom, usd))
+            
+        } else {
+            return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
+                .adding(commissionValue(denom, usd))
+        }
+    }
+    
+    override func allStakingDenomAmount() -> NSDecimalNumber {
+        return balanceAmount(chain.stakeDenom!).adding(vestingAmount(chain.stakeDenom!)).adding(initiaDelegationAmountSum())
+            .adding(initiaUnbondingAmountSum()).adding(rewardAmountSum(chain.stakeDenom!)).adding(commissionAmount(chain.stakeDenom!))
+    }
+    
+    override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
+        return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(initiaDelegationValueSum(usd))
+            .adding(initiaUnbondingValueSum(usd)).adding(rewardValueSum(usd)).adding(commissionValueSum(usd))
     }
 }
 
@@ -139,6 +158,15 @@ extension InitiaFetcher {
         return sum
     }
     
+    func initiaDelegationValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
+            let amount = initiaDelegationAmountSum()
+            return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+        }
+        return NSDecimalNumber.zero
+    }
+    
     func initiaUnbondingAmountSum() -> NSDecimalNumber {
         var sum = NSDecimalNumber.zero
         initiaUnbondings?.forEach({ unbonding in
@@ -147,6 +175,15 @@ extension InitiaFetcher {
             }
         })
         return sum
+    }
+    
+    func initiaUnbondingValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
+            let amount = initiaUnbondingAmountSum()
+            return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+        }
+        return NSDecimalNumber.zero
     }
 }
 
