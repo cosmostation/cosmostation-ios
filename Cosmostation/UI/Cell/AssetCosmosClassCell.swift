@@ -99,14 +99,28 @@ class AssetCosmosClassCell: UITableViewCell {
                     vestingLayer.isHidden = false
                     vestingLabel?.attributedText = WDP.dpAmount(vestingAmount.stringValue, vestingLabel!.font, 6)
                 }
+                var stakingAmount = NSDecimalNumber()
+                var unStakingAmount = NSDecimalNumber()
                 
-                let stakingAmount = cosmosFetcher.delegationAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
-                stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
-                
-                let unStakingAmount = cosmosFetcher.unbondingAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
-                if (unStakingAmount != NSDecimalNumber.zero) {
-                    unstakingLayer.isHidden = false
-                    unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
+                if let fetcher = (baseChain as? ChainInitia)?.getInitiaFetcher() {
+                    stakingAmount = fetcher.initiaDelegationAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
+                    stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
+                    
+                    unStakingAmount = fetcher.initiaUnbondingAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
+                    if (unStakingAmount != NSDecimalNumber.zero) {
+                        unstakingLayer.isHidden = false
+                        unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
+                    }
+                    
+                } else {
+                    stakingAmount = cosmosFetcher.delegationAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
+                    stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
+                    
+                    unStakingAmount = cosmosFetcher.unbondingAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
+                    if (unStakingAmount != NSDecimalNumber.zero) {
+                        unstakingLayer.isHidden = false
+                        unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
+                    }
                 }
                 
                 let rewardAmount = cosmosFetcher.rewardAmountSum(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)

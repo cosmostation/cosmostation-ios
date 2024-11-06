@@ -16,17 +16,11 @@ public class WDP {
         if (coin == nil) {
             amountLabel?.attributedText = dpAmount("0", amountLabel!.font, showDecimal ?? msAsset.decimals)
             denomLabel?.text = msAsset.symbol
-            if msAsset.type == "native" {
-                denomLabel?.textColor = msAsset.assetColor()
-            }
             coinImg?.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         } else {
             let amount = NSDecimalNumber(string: coin?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
             amountLabel?.attributedText = dpAmount(amount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
             denomLabel?.text = msAsset.symbol
-            if msAsset.type == "native" {
-                denomLabel?.textColor = msAsset.assetColor()
-            }
             coinImg?.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         }
     }
@@ -36,9 +30,6 @@ public class WDP {
         let deAmount = amount.multiplying(byPowerOf10: -msAsset.decimals!)
         amountLabel?.attributedText = dpAmount(deAmount.stringValue, amountLabel!.font, showDecimal ?? msAsset.decimals)
         denomLabel?.text = msAsset.symbol
-        if msAsset.type == "native" {
-            denomLabel?.textColor = msAsset.assetColor()
-        }
         coinImg?.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
     }
     

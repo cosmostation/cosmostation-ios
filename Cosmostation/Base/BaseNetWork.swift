@@ -121,7 +121,7 @@ class BaseNetWork {
     }
     
     static func msChainParams() -> String {
-        return MINTSCAN_API_URL + "v10/utils/params"
+        return MINTSCAN_API_URL + "v11/utils/params"
     }
     
     static func msCw721InfoUrl(_ chain: BaseChain) -> String {

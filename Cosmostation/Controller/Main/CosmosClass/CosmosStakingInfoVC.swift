@@ -28,6 +28,10 @@ class CosmosStakingInfoVC: BaseVC {
     var unbondings = [UnbondingEntry]()
     var rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]?
     var cosmostationValAddress: String?
+    
+    var initiaValidators = [Initia_Mstaking_V1_Validator]()
+    var initiaDelegations = [Initia_Mstaking_V1_DelegationResponse]()
+    var initiaUnbondings = [InitiaUnbondingEntry]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +116,31 @@ class CosmosStakingInfoVC: BaseVC {
     
     func onSetStakeData() {
         Task {
-            if let cosmosFetcher = selectedChain.getCosmosfetcher() {
+            if let initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher() {
+                rewardAddress = initiaFetcher.rewardAddress
+                initiaValidators = initiaFetcher.initiaValidators
+                initiaDelegations = initiaFetcher.initiaDelegations
+                rewards = initiaFetcher.cosmosRewards
+                initiaUnbondings.removeAll()
+                
+                initiaFetcher.initiaUnbondings?.forEach { unbonding in
+                    unbonding.entries.forEach { entry in
+                        initiaUnbondings.append(InitiaUnbondingEntry.init(validatorAddress: unbonding.validatorAddress, entry: entry))
+                    }
+                }
+                
+                cosmostationValAddress = initiaValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
+                initiaDelegations.sort {
+                    if ($0.delegation.validatorAddress == cosmostationValAddress) { return true }
+                    if ($1.delegation.validatorAddress == cosmostationValAddress) { return false }
+                    return Double($0.balance.filter({$0.denom == selectedChain.stakeDenom}).first!.amount)! > Double($1.balance.filter({$0.denom == selectedChain.stakeDenom}).first!.amount)!
+
+                }
+                initiaUnbondings.sort {
+                    return $0.entry.creationHeight < $1.entry.creationHeight
+                }
+                
+            } else if let cosmosFetcher = selectedChain.getCosmosfetcher() {
                 rewardAddress = cosmosFetcher.rewardAddress
                 validators = cosmosFetcher.cosmosValidators
                 delegations = cosmosFetcher.cosmosDelegations
@@ -148,10 +176,19 @@ class CosmosStakingInfoVC: BaseVC {
         tableView.isHidden = false
         tabbar.isHidden = false
         tableView.reloadData()
-        if (tabbar.selectedItem?.tag == 0 ? delegations.count : unbondings.count) == 0 {
-            emptyStakeImg.isHidden = false
+        if selectedChain is ChainInitia {
+            if (tabbar.selectedItem?.tag == 0 ? initiaDelegations.count : initiaUnbondings.count) == 0 {
+                emptyStakeImg.isHidden = false
+            } else {
+                emptyStakeImg.isHidden = true
+            }
+
         } else {
-            emptyStakeImg.isHidden = true
+            if (tabbar.selectedItem?.tag == 0 ? delegations.count : unbondings.count) == 0 {
+                emptyStakeImg.isHidden = false
+            } else {
+                emptyStakeImg.isHidden = true
+            }
         }
     }
     
@@ -172,6 +209,15 @@ class CosmosStakingInfoVC: BaseVC {
 //            }
 //            delegate.modalTransitionStyle = .coverVertical
 //            self.present(delegate, animated: true)
+            
+        } else if (selectedChain is ChainInitia) {
+            let delegate = CosmosDelegate(nibName: "CosmosDelegate", bundle: nil)
+            delegate.selectedChain = selectedChain
+            if (toValAddress != nil) {
+                delegate.toValidatorInitia = initiaValidators.filter({ $0.operatorAddress == toValAddress }).first
+            }
+            delegate.modalTransitionStyle = .coverVertical
+            self.present(delegate, animated: true)
             
         } else {
             let delegate = CosmosDelegate(nibName: "CosmosDelegate", bundle: nil)
@@ -196,6 +242,13 @@ class CosmosStakingInfoVC: BaseVC {
 //            undelegate.modalTransitionStyle = .coverVertical
 //            self.present(undelegate, animated: true)
             
+        } else if (selectedChain is ChainInitia) {
+            let undelegate = CosmosUndelegate(nibName: "CosmosUndelegate", bundle: nil)
+            undelegate.selectedChain = selectedChain
+            undelegate.fromValidatorInitia = initiaValidators.filter({ $0.operatorAddress == fromValAddress }).first
+            undelegate.modalTransitionStyle = .coverVertical
+            self.present(undelegate, animated: true)
+
         } else {
             let undelegate = CosmosUndelegate(nibName: "CosmosUndelegate", bundle: nil)
             undelegate.selectedChain = selectedChain
@@ -217,6 +270,13 @@ class CosmosStakingInfoVC: BaseVC {
 //            redelegate.modalTransitionStyle = .coverVertical
 //            self.present(redelegate, animated: true)
             
+        } else if (selectedChain is ChainInitia) {
+            let redelegate = CosmosRedelegate(nibName: "CosmosRedelegate", bundle: nil)
+            redelegate.selectedChain = selectedChain
+            redelegate.fromValidatorInitia = initiaValidators.filter({ $0.operatorAddress == fromValAddress }).first
+            redelegate.modalTransitionStyle = .coverVertical
+            self.present(redelegate, animated: true)
+
         } else {
             let redelegate = CosmosRedelegate(nibName: "CosmosRedelegate", bundle: nil)
             redelegate.selectedChain = selectedChain
@@ -277,6 +337,14 @@ class CosmosStakingInfoVC: BaseVC {
 //            cancel.unbondingEntry = unbondings[position]
 //            cancel.modalTransitionStyle = .coverVertical
 //            self.present(cancel, animated: true)
+            
+        } else if (selectedChain is ChainInitia) {
+            let cancel = CosmosCancelUnbonding(nibName: "CosmosCancelUnbonding", bundle: nil)
+            cancel.selectedChain = selectedChain
+            cancel.unbondingEntryInitia = initiaUnbondings[position]
+            cancel.modalTransitionStyle = .coverVertical
+            self.present(cancel, animated: true)
+            
         } else {
             let cancel = CosmosCancelUnbonding(nibName: "CosmosCancelUnbonding", bundle: nil)
             cancel.selectedChain = selectedChain
@@ -292,30 +360,49 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (tabbar.selectedItem?.tag == 0) {
-            return delegations.count
+            return (selectedChain is ChainInitia) ? initiaDelegations.count : delegations.count
         } else if (tabbar.selectedItem?.tag == 1) {
-            return unbondings.count
+            return (selectedChain is ChainInitia) ? initiaUnbondings.count : unbondings.count
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (tabbar.selectedItem?.tag == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"StakeDelegateCell") as! StakeDelegateCell
-            let delegation = delegations[indexPath.row]
-            if let validator = validators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
-                cell.onBindMyDelegate(selectedChain, validator, delegation)
+            if selectedChain is ChainInitia {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"StakeDelegateCell") as! StakeDelegateCell
+                let delegation = initiaDelegations[indexPath.row]
+                if let validator = initiaValidators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
+                    cell.onBindInitiaMyDelegate(selectedChain, validator, delegation)
+                }
+                return cell
+
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"StakeDelegateCell") as! StakeDelegateCell
+                let delegation = delegations[indexPath.row]
+                if let validator = validators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
+                    cell.onBindMyDelegate(selectedChain, validator, delegation)
+                }
+                return cell
             }
-            return cell
             
         } else if (tabbar.selectedItem?.tag == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"StakeUnbondingCell") as! StakeUnbondingCell
-            let entry = unbondings[indexPath.row]
-            if let validator = validators.filter({ $0.operatorAddress == entry.validatorAddress }).first {
-                cell.onBindMyUnbonding(selectedChain, validator, entry)
+            if selectedChain is ChainInitia {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"StakeUnbondingCell") as! StakeUnbondingCell
+                let entry = initiaUnbondings[indexPath.row]
+                if let validator = initiaValidators.filter({ $0.operatorAddress == entry.validatorAddress }).first {
+                    cell.onBindInitiaMyUnbonding(selectedChain, validator, entry)
+                }
+                return cell
+
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"StakeUnbondingCell") as! StakeUnbondingCell
+                let entry = unbondings[indexPath.row]
+                if let validator = validators.filter({ $0.operatorAddress == entry.validatorAddress }).first {
+                    cell.onBindMyUnbonding(selectedChain, validator, entry)
+                }
+                return cell
             }
-            return cell
-            
         }
         return UITableViewCell()
     }
@@ -326,11 +413,20 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (tabbar.selectedItem?.tag == 0) {
-            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-            baseSheet.sheetDelegate = self
-            baseSheet.delegation = delegations[indexPath.row]
-            baseSheet.sheetType = .SelectDelegatedAction
-            onStartSheet(baseSheet, 320, 0.6)
+            if selectedChain is ChainInitia {
+                let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                baseSheet.sheetDelegate = self
+                baseSheet.initiaDelegation = initiaDelegations[indexPath.row]
+                baseSheet.sheetType = .SelectInitiaDelegatedAction
+                onStartSheet(baseSheet, 320, 0.6)
+                
+            } else {
+                let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                baseSheet.sheetDelegate = self
+                baseSheet.delegation = delegations[indexPath.row]
+                baseSheet.sheetType = .SelectDelegatedAction
+                onStartSheet(baseSheet, 320, 0.6)
+            }
             
         } else if (tabbar.selectedItem?.tag == 1) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
@@ -343,15 +439,29 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         if (tabbar.selectedItem?.tag == 1) {
-            let delegation = delegations[indexPath.row]
-            let rewards = rewards?.filter { $0.validatorAddress == delegation.delegation.validatorAddress }
+            if selectedChain is ChainInitia {
+                let delegation = initiaDelegations[indexPath.row]
+                let rewards = rewards?.filter { $0.validatorAddress == delegation.delegation.validatorAddress }
                 
-            let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
-            rewardListPopupVC.selectedChain = selectedChain
-            rewardListPopupVC.rewards = rewards!
+                let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
+                rewardListPopupVC.selectedChain = selectedChain
+                rewardListPopupVC.rewards = rewards!
+                
+                return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return rewardListPopupVC }) { _ in
+                    UIMenu(title: "", children: [])
+                }
             
-            return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return rewardListPopupVC }) { _ in
-                UIMenu(title: "", children: [])
+            } else {
+                let delegation = delegations[indexPath.row]
+                let rewards = rewards?.filter { $0.validatorAddress == delegation.delegation.validatorAddress }
+                    
+                let rewardListPopupVC = CosmosRewardListPopupVC(nibName: "CosmosRewardListPopupVC", bundle: nil)
+                rewardListPopupVC.selectedChain = selectedChain
+                rewardListPopupVC.rewards = rewards!
+                
+                return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: { return rewardListPopupVC }) { _ in
+                    UIMenu(title: "", children: [])
+                }
             }
         }
         return nil
@@ -379,7 +489,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
 extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
     
     public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if (sheetType == .SelectDelegatedAction) {
+        if (sheetType == .SelectDelegatedAction || sheetType == .SelectInitiaDelegatedAction) {
             if let index = result["index"] as? Int,
                let valAddress = result["validatorAddress"] as? String {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
@@ -416,10 +526,10 @@ extension CosmosStakingInfoVC: MDCTabBarViewDelegate {
     func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
         
         if item.tag == 0 {
-            emptyStakeImg.isHidden = !delegations.isEmpty
+            emptyStakeImg.isHidden = !delegations.isEmpty || !initiaDelegations.isEmpty
 
         } else if item.tag == 1 {
-            emptyStakeImg.isHidden = !unbondings.isEmpty
+            emptyStakeImg.isHidden = !unbondings.isEmpty || !initiaUnbondings.isEmpty
             
         }
         
@@ -430,4 +540,9 @@ extension CosmosStakingInfoVC: MDCTabBarViewDelegate {
 struct UnbondingEntry {
     var validatorAddress: String = String()
     var entry: Cosmos_Staking_V1beta1_UnbondingDelegationEntry
+}
+
+struct InitiaUnbondingEntry {
+    var validatorAddress: String = String()
+    var entry: Initia_Mstaking_V1_UnbondingDelegationEntry
 }

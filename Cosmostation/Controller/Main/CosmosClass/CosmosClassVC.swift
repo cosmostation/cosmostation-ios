@@ -414,52 +414,20 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
 //Common Action
 extension CosmosClassVC {
     
-    func onSendTx() {
-        if (selectedChain.isBankLocked()) {
-            onShowToast(NSLocalizedString("error_tranfer_disabled", comment: ""))
-            return
-        }
-        if (selectedChain.isTxFeePayable() == false) {
-            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-            return
-        }
-        
-        if (selectedChain.name == "OKT") {
-            if (selectedChain.tag == "okt60_Keccak") {
-                let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-                transfer.sendAssetType = .EVM_COIN
-                transfer.fromChain = selectedChain
-                transfer.toSendDenom = selectedChain.stakeDenom
-                transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
-                transfer.modalTransitionStyle = .coverVertical
-                self.present(transfer, animated: true)
-                
-            } else {
-                let transfer = LegacyTransfer(nibName: "LegacyTransfer", bundle: nil)
-                transfer.selectedChain = selectedChain
-                transfer.toSendDenom = selectedChain.stakeDenom!
-                transfer.modalTransitionStyle = .coverVertical
-                self.present(transfer, animated: true)
-            }
-            
-        } else {
-            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-            transfer.sendAssetType = selectedChain.supportEvm ? .COSMOS_EVM_MAIN_COIN : .COSMOS_COIN
-            transfer.fromChain = selectedChain
-            transfer.toSendDenom = selectedChain.stakeDenom
-            transfer.toSendMsAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
-            transfer.modalTransitionStyle = .coverVertical
-            self.present(transfer, animated: true)
-        }
-    }
-    
     func onClaimRewardTx() {
         guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
             return
         }
-        if (comsosFetcher.cosmosValidators.count <= 0) {
-            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-            return
+        if let initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher() {
+            if (initiaFetcher.initiaValidators.count <= 0) {
+                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                return
+            }
+        } else {
+            if (comsosFetcher.cosmosValidators.count <= 0) {
+                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                return
+            }
         }
         if (comsosFetcher.rewardAllCoins().count == 0) {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
@@ -484,9 +452,16 @@ extension CosmosClassVC {
         guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
             return
         }
-        if (comsosFetcher.cosmosValidators.count <= 0) {
-            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-            return
+        if let initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher() {
+            if (initiaFetcher.initiaValidators.count <= 0) {
+                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                return
+            }
+        } else {
+            if (comsosFetcher.cosmosValidators.count <= 0) {
+                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                return
+            }
         }
         if (comsosFetcher.rewardAllCoins().count == 0) {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
@@ -536,10 +511,20 @@ extension CosmosClassVC {
         guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
             return
         }
-        if (comsosFetcher.cosmosValidators.count <= 0) {
-            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-            return
+        
+        if let initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher() {
+            if initiaFetcher.initiaValidators.count <= 0 {
+                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                return
+            }
+            
+        } else {
+            if (comsosFetcher.cosmosValidators.count <= 0) {
+                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                return
+            }
         }
+        
         let stakingInfoVC = CosmosStakingInfoVC(nibName: "CosmosStakingInfoVC", bundle: nil)
         stakingInfoVC.selectedChain = selectedChain
         self.navigationItem.title = ""

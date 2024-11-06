@@ -632,9 +632,8 @@ class CommonTransfer: BaseVC {
                 WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
                 
                 if (sendAssetType == .COSMOS_COIN || (sendAssetType == .COSMOS_EVM_MAIN_COIN && txStyle == .COSMOS_STYLE)) {
-                    let stakeDenom = fromChain.stakeDenom!
                     let balanceAmount = cosmosFetcher.balanceAmount(toSendDenom)
-                    if (cosmosTxFee.amount[0].denom == stakeDenom) {
+                    if (cosmosTxFee.amount[0].denom == toSendDenom) {
                         if (totalFeeAmount.compare(balanceAmount).rawValue > 0) {
                             //ERROR short balance!!
                         }
@@ -1255,7 +1254,7 @@ extension CommonTransfer {
     func onBindIbcSendMsg(_ revisionNumber: UInt64, _ lastBlock: Int64) -> [Google_Protobuf_Any] {
         let height = Ibc_Core_Client_V1_Height.with {
             $0.revisionNumber = revisionNumber
-            $0.revisionHeight = UInt64(lastBlock) + (toChain.getTimeoutAdding() * 10)
+            $0.revisionHeight = UInt64(lastBlock) + (toChain.getTimeoutPadding() * 10)
         }
         let sendCoin = Cosmos_Base_V1beta1_Coin.with {
             $0.denom = toSendDenom

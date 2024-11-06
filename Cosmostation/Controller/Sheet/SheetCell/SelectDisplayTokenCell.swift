@@ -16,7 +16,6 @@ class SelectDisplayTokenCell: UITableViewCell {
     @IBOutlet weak var coinImg: UIImageView!
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var contractLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var valueCurrencyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
@@ -28,8 +27,8 @@ class SelectDisplayTokenCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        loadingAmountLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)    
-        loadingValueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
+        loadingAmountLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
+        loadingValueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color04, .color03]), animation: skeletonAnimation, transition: .none)
     }
     
     override func prepareForReuse() {
@@ -37,7 +36,6 @@ class SelectDisplayTokenCell: UITableViewCell {
         coinImg.image = UIImage(named: "tokenDefault")
         symbolLabel.text = ""
         contractLabel.text = ""
-        nameLabel.text = ""
         amountLabel.text = ""
         valueCurrencyLabel.text = ""
         valueLabel.text = ""
@@ -55,7 +53,6 @@ class SelectDisplayTokenCell: UITableViewCell {
         coinImg?.sd_setImage(with: token.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         symbolLabel.text = token.symbol
         contractLabel.text = token.contract
-        nameLabel.text = token.name
         
         Task {
             if !SelectDisplayTokenListSheet.tokenWithAmount.map({$0.contract}).contains(token.contract) {
@@ -88,7 +85,7 @@ class SelectDisplayTokenCell: UITableViewCell {
     private func showLoadingView() {
         loadingAmountLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
         loadingAmountLabel.isHidden = false
-        loadingValueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)
+        loadingValueLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color04, .color03]), animation: skeletonAnimation, transition: .none)
         loadingValueLabel.isHidden = false
     }
     

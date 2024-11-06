@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -36,8 +36,8 @@
                                     <constraint firstAttribute="height" constant="48" id="FW2-WA-8S2"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="0dM-2b-jCf">
-                                <rect key="frame" x="64" y="27.333333333333329" width="83.666666666666686" height="21.666666666666671"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="0dM-2b-jCf">
+                                <rect key="frame" x="64" y="26.333333333333329" width="83.666666666666686" height="19.666666666666671"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChainName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OeQ-XM-yfu">
                                         <rect key="frame" x="4" y="0.0" width="79.666666666666671" height="17.666666666666668"/>
@@ -46,7 +46,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="nwD-TS-P8w">
-                                        <rect key="frame" x="2" y="21.666666666666668" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="4" y="19.666666666666668" width="0.0" height="0.0"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hzk-tM-PoY" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="12.666666666666666"/>
@@ -67,12 +67,12 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="OeQ-XM-yfu" firstAttribute="leading" secondItem="0dM-2b-jCf" secondAttribute="leading" constant="4" id="QJx-Sw-UFF"/>
-                                    <constraint firstItem="nwD-TS-P8w" firstAttribute="leading" secondItem="0dM-2b-jCf" secondAttribute="leading" constant="2" id="ZZn-QH-0US"/>
+                                    <constraint firstItem="nwD-TS-P8w" firstAttribute="leading" secondItem="0dM-2b-jCf" secondAttribute="leading" constant="4" id="ZZn-QH-0US"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCb-NS-yvk">
-                                <rect key="frame" x="268.33333333333331" y="29.333333333333332" width="3" height="15.333333333333332"/>
-                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCb-NS-yvk">
+                                <rect key="frame" x="257.33333333333331" y="26" width="14" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -120,14 +120,13 @@
                             <constraint firstItem="9Wa-Nb-JYD" firstAttribute="centerY" secondItem="fyB-xM-Oo9" secondAttribute="centerY" id="5Ol-an-aYl"/>
                             <constraint firstAttribute="trailing" secondItem="9Wa-Nb-JYD" secondAttribute="trailing" constant="14" id="5oy-oe-wjx"/>
                             <constraint firstItem="Suc-II-N3v" firstAttribute="centerY" secondItem="fyB-xM-Oo9" secondAttribute="centerY" id="7aV-Il-q6q"/>
+                            <constraint firstItem="0dM-2b-jCf" firstAttribute="centerY" secondItem="Suc-II-N3v" secondAttribute="centerY" id="7jc-YH-38D"/>
+                            <constraint firstItem="WCb-NS-yvk" firstAttribute="centerY" secondItem="9Wa-Nb-JYD" secondAttribute="centerY" id="AfX-Mn-89S"/>
                             <constraint firstAttribute="trailing" secondItem="iOm-4h-c1H" secondAttribute="trailing" constant="14" id="NGZ-If-1MN"/>
                             <constraint firstItem="iOm-4h-c1H" firstAttribute="centerY" secondItem="fyB-xM-Oo9" secondAttribute="centerY" id="Ri5-Fg-ttp"/>
-                            <constraint firstItem="Suc-II-N3v" firstAttribute="top" secondItem="fyB-xM-Oo9" secondAttribute="top" constant="12" id="TP7-Xo-Vlt"/>
                             <constraint firstAttribute="height" constant="72" id="XJ1-8H-GgX"/>
                             <constraint firstItem="cDe-Ml-zFv" firstAttribute="centerY" secondItem="fyB-xM-Oo9" secondAttribute="centerY" id="cFp-Po-wrK"/>
                             <constraint firstItem="0dM-2b-jCf" firstAttribute="leading" secondItem="Suc-II-N3v" secondAttribute="trailing" constant="4" id="oy2-JT-fhA"/>
-                            <constraint firstItem="0dM-2b-jCf" firstAttribute="centerY" secondItem="fyB-xM-Oo9" secondAttribute="centerY" constant="2" id="pkW-fI-a8o"/>
-                            <constraint firstItem="WCb-NS-yvk" firstAttribute="firstBaseline" secondItem="9Wa-Nb-JYD" secondAttribute="firstBaseline" constant="-0.5" id="vd7-Yb-OoY"/>
                             <constraint firstItem="9Wa-Nb-JYD" firstAttribute="leading" secondItem="WCb-NS-yvk" secondAttribute="trailing" constant="2" id="zGt-yG-mSI"/>
                         </constraints>
                     </view>
