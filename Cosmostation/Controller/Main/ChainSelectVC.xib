@@ -48,6 +48,7 @@
                 </view>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HEJ-Pb-ebw">
                     <rect key="frame" x="345" y="81.333333333333329" width="32" height="32"/>
+                    <color key="tintColor" name="_color01"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain"/>
                 </button>
