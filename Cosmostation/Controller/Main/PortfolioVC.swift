@@ -40,6 +40,10 @@ class PortfolioVC: BaseVC {
         }
     }
     
+    var lastSortingType: SortingType = .value
+    
+    var fetchDoneChainCnt = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,13 +105,17 @@ class PortfolioVC: BaseVC {
         mainnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == false })
         searchMainnets = mainnetChains
         
-        testnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == true })
+        testnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == true }).sorted{ $0.name < $1.name }
         searchTestnets = testnetChains
         
         onUpdateSearchBar()
         currencyLabel.text = BaseData.instance.getCurrencySymbol()
         
-        navigationItem.rightBarButtonItem = rightBarButton()
+        let sortType = UserDefaults.standard.string(forKey: KEY_CHAIN_SORT) ?? SortingType.value.rawValue
+        lastSortingType = SortingType(rawValue: sortType)!
+        
+        navigationItem.rightBarButtonItems = rightBarButton()
+        navigationItem.rightBarButtonItems?.last?.isEnabled = false
     }
     
     @objc func dismissKeyboard() {
@@ -115,6 +123,7 @@ class PortfolioVC: BaseVC {
     }
     
     @objc func onRequestFetch() {
+        navigationItem.rightBarButtonItems?.last?.isEnabled = false
         if (baseAccount.getDpChains().filter { $0.fetchState == .Busy }.count > 0) {
             refresher.endRefreshing()
         } else {
@@ -130,6 +139,12 @@ class PortfolioVC: BaseVC {
         let tag = notification.object as! String
         Task {
             onUpdateRow(tag)
+            fetchDoneChainCnt += 1
+            
+            if fetchDoneChainCnt == searchMainnets.count + searchTestnets.count {
+                self.navigationItem.rightBarButtonItems?.last?.isEnabled = true
+                fetchDoneChainCnt = 0
+            }
         }
     }
     
@@ -195,7 +210,42 @@ class PortfolioVC: BaseVC {
         chainSelectVC.onChainSelected = {
             self.onChainSelected()
         }
+        chainSelectVC.presentationController?.delegate = self
+        chainSelectVC.chainSortingDelegate = self
         self.present(chainSelectVC, animated: true)
+        
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchPrice"), object: nil)
+    }
+    
+    func chainSortReloadView() {
+        switch lastSortingType {
+        case .name:
+            mainnetChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                return $0.name < $1.name
+            }
+        case .value:
+            mainnetChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
+            }
+        }
+        
+        searchMainnets = searchBar!.text!.isEmpty ? mainnetChains : mainnetChains.filter { chain in
+            return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        searchTestnets = searchBar!.text!.isEmpty ? testnetChains : testnetChains.filter { chain in
+            return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        
+        tableView.reloadData()
+
+        if let button = navigationItem.rightBarButtonItems?[1].customView as? UIButton {
+            button.setImage(UIImage(named: SortingType(rawValue: lastSortingType.rawValue)!.rawValue), for: .normal)
+        }
     }
     
     func onChainSelected() {
@@ -203,7 +253,7 @@ class PortfolioVC: BaseVC {
         mainnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == false })
         searchMainnets = mainnetChains
         
-        testnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == true })
+        testnetChains = baseAccount.getDpChains().filter({ $0.isTestnet == true }).sorted{ $0.name < $1.name }
         searchTestnets = testnetChains
         
         searchEmptyLayer.isHidden = true
@@ -492,15 +542,21 @@ extension PortfolioVC: BaseSheetDelegate {
         return UIBarButtonItem(customView: button)
     }
     
-    private func rightBarButton() -> UIBarButtonItem {
-        let rightBarButton = UIButton()
+    private func rightBarButton() -> [UIBarButtonItem] {
+        let chainSearchButton = UIButton()
+        let chainSortingButton = UIButton()
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "iconSearchChain")
         config.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
-        rightBarButton.configuration = config
-        rightBarButton.addTarget(self, action: #selector(onClickChainSelect), for: .touchUpInside)
         
-        return UIBarButtonItem(customView: rightBarButton)
+        chainSearchButton.configuration = config
+        chainSearchButton.setImage(UIImage(named: "iconSearchChain"), for: .normal)
+        chainSearchButton.addTarget(self, action: #selector(onClickChainSelect), for: .touchUpInside)
+        
+        chainSortingButton.configuration = config
+        chainSortingButton.setImage(UIImage(named: SortingType(rawValue: lastSortingType.rawValue)!.rawValue), for: .normal)
+        chainSortingButton.addTarget(self, action: #selector(onClickSortingButton), for: .touchUpInside)
+
+        return [UIBarButtonItem(customView: chainSearchButton), UIBarButtonItem(customView: chainSortingButton)]
     }
 
     @objc func onClickSwitchAccount(_ sender: UIButton) {
@@ -561,4 +617,35 @@ extension PortfolioVC: NoticeSheetDelegate, EndpointDelegate {
             onUpdateRow(chainTag)
         }
     }
+}
+
+extension PortfolioVC: ChainSortingTypeDelegate {
+    @objc func onClickSortingButton() {
+        switch lastSortingType {
+        case .name:
+            lastSortingType = .value
+            
+        case .value:
+            lastSortingType = .name
+        }
+        
+        UserDefaults.standard.setValue(lastSortingType.rawValue, forKey: KEY_CHAIN_SORT)
+        chainSortReloadView()
+    }
+}
+
+extension PortfolioVC: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
+    }
+}
+
+enum SortingType: String {
+    case name = "iconSortName"
+    case value = "iconSortValue"
+}
+
+protocol ChainSortingTypeDelegate {
+    func onClickSortingButton()
 }
