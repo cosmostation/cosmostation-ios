@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -56,7 +56,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haF-lh-o1R">
-                                <rect key="frame" x="68" y="14.666666666666666" width="351" height="17.666666666666679"/>
+                                <rect key="frame" x="68" y="14.666666666666666" width="351" height="17.666666666666671"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
@@ -74,8 +74,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oF3-1v-R8d">
-                                <rect key="frame" x="161" y="39" width="9" height="12.666666666666664"/>
-                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                <rect key="frame" x="160" y="36.666666666666664" width="11" height="15.333333333333336"/>
+                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -174,12 +174,12 @@
                             <constraint firstItem="s56-Cy-p54" firstAttribute="centerY" secondItem="8rY-mF-njK" secondAttribute="centerY" id="7kh-GF-B3e"/>
                             <constraint firstItem="6EU-7C-FIC" firstAttribute="leading" secondItem="oPB-jM-OzH" secondAttribute="leading" constant="16" id="HP8-dj-fcz"/>
                             <constraint firstItem="haF-lh-o1R" firstAttribute="leading" secondItem="6EU-7C-FIC" secondAttribute="trailing" constant="12" id="MKr-OY-jOt"/>
-                            <constraint firstItem="oF3-1v-R8d" firstAttribute="leading" secondItem="8rY-mF-njK" secondAttribute="trailing" constant="2" id="NO6-bL-SKh"/>
+                            <constraint firstItem="oF3-1v-R8d" firstAttribute="leading" secondItem="8rY-mF-njK" secondAttribute="trailing" constant="1" id="NO6-bL-SKh"/>
                             <constraint firstItem="6EU-7C-FIC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="oPB-jM-OzH" secondAttribute="top" constant="12" id="PJ4-Mn-LMx"/>
                             <constraint firstItem="d9T-0n-dBs" firstAttribute="leading" secondItem="oPB-jM-OzH" secondAttribute="leading" constant="14" id="SzI-te-Bm5"/>
                             <constraint firstAttribute="trailing" secondItem="d9T-0n-dBs" secondAttribute="trailing" constant="14" id="b2A-1c-Sg0"/>
                             <constraint firstAttribute="bottom" secondItem="d9T-0n-dBs" secondAttribute="bottom" constant="18" id="fez-Fg-7Kz"/>
-                            <constraint firstItem="oF3-1v-R8d" firstAttribute="centerY" secondItem="8rY-mF-njK" secondAttribute="centerY" constant="1" id="kiQ-lg-YYa"/>
+                            <constraint firstItem="oF3-1v-R8d" firstAttribute="centerY" secondItem="8rY-mF-njK" secondAttribute="centerY" id="kiQ-lg-YYa"/>
                             <constraint firstItem="d9T-0n-dBs" firstAttribute="top" secondItem="XLx-kQ-fWj" secondAttribute="bottom" constant="14" id="lHc-aB-oNi"/>
                             <constraint firstItem="OiQ-uj-Xjt" firstAttribute="centerY" secondItem="6EU-7C-FIC" secondAttribute="centerY" id="mII-Cz-zqi"/>
                             <constraint firstItem="XLx-kQ-fWj" firstAttribute="top" secondItem="6EU-7C-FIC" secondAttribute="bottom" constant="14" id="mPP-0I-Eex"/>

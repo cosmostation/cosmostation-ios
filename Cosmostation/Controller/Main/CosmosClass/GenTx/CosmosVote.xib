@@ -158,7 +158,7 @@ not the wallet.</string>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0p4-wN-Vo5">
-                            <rect key="frame" x="303.66666666666669" y="53" width="25" height="16"/>
+                            <rect key="frame" x="303.66666666666669" y="52.666666666666629" width="25" height="16"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -200,9 +200,9 @@ not the wallet.</string>
                     <constraints>
                         <constraint firstItem="IR9-wi-qWh" firstAttribute="centerY" secondItem="1qB-YR-kAJ" secondAttribute="centerY" id="2YE-PB-ecQ"/>
                         <constraint firstAttribute="trailing" secondItem="lzt-zh-HYl" secondAttribute="trailing" constant="12" id="37O-XB-PMb"/>
+                        <constraint firstItem="0p4-wN-Vo5" firstAttribute="firstBaseline" secondItem="G0y-s7-9Lb" secondAttribute="firstBaseline" id="5Sg-wq-K54"/>
                         <constraint firstItem="G0y-s7-9Lb" firstAttribute="leading" secondItem="0p4-wN-Vo5" secondAttribute="trailing" constant="1" id="6zq-8T-1fF"/>
                         <constraint firstItem="3eU-A8-DoT" firstAttribute="centerY" secondItem="cdT-Z3-plJ" secondAttribute="centerY" id="DH5-jf-e7Q"/>
-                        <constraint firstItem="0p4-wN-Vo5" firstAttribute="centerY" secondItem="G0y-s7-9Lb" secondAttribute="centerY" id="E7p-9x-0j1"/>
                         <constraint firstAttribute="trailing" secondItem="iBW-6c-bXc" secondAttribute="trailing" constant="12" id="Iab-1b-uSB"/>
                         <constraint firstAttribute="height" constant="150" id="KWx-ha-IiJ"/>
                         <constraint firstItem="YEG-00-KqC" firstAttribute="leading" secondItem="ATz-S6-JdD" secondAttribute="leading" constant="12" id="M2r-cs-T8k"/>

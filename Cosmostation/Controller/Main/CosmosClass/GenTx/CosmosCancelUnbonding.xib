@@ -80,7 +80,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQh-ff-AE7">
-                            <rect key="frame" x="303.66666666666669" y="59.000000000000014" width="25" height="16"/>
+                            <rect key="frame" x="303.66666666666669" y="58.666666666666671" width="25" height="16"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -97,10 +97,10 @@
                         <constraint firstAttribute="bottom" secondItem="VmX-80-kVw" secondAttribute="bottom" constant="36" id="1f8-gH-qNq"/>
                         <constraint firstItem="nor-GL-H1C" firstAttribute="centerY" secondItem="VmX-80-kVw" secondAttribute="centerY" id="GoD-q2-YUr"/>
                         <constraint firstAttribute="trailing" secondItem="5ad-ve-ry3" secondAttribute="trailing" constant="12" id="H95-R0-YUd"/>
-                        <constraint firstItem="uQh-ff-AE7" firstAttribute="centerY" secondItem="nor-GL-H1C" secondAttribute="centerY" id="Ois-9e-Ajs"/>
                         <constraint firstItem="5ad-ve-ry3" firstAttribute="centerY" secondItem="EDX-Ii-p5r" secondAttribute="centerY" id="RPn-11-TO5"/>
                         <constraint firstItem="EDX-Ii-p5r" firstAttribute="leading" secondItem="5pJ-fA-yFf" secondAttribute="leading" constant="12" id="YKI-jK-cUH"/>
                         <constraint firstItem="EDX-Ii-p5r" firstAttribute="top" secondItem="5pJ-fA-yFf" secondAttribute="top" constant="14" id="Ya8-pX-Q6y"/>
+                        <constraint firstItem="uQh-ff-AE7" firstAttribute="firstBaseline" secondItem="nor-GL-H1C" secondAttribute="firstBaseline" id="YpA-3Q-vje"/>
                         <constraint firstAttribute="trailing" secondItem="nor-GL-H1C" secondAttribute="trailing" constant="12" id="eS0-xn-PYQ"/>
                         <constraint firstItem="VmX-80-kVw" firstAttribute="leading" secondItem="EDX-Ii-p5r" secondAttribute="leading" id="kKK-MF-c1Q"/>
                         <constraint firstItem="VmX-80-kVw" firstAttribute="top" secondItem="EDX-Ii-p5r" secondAttribute="bottom" constant="32" id="uxm-lF-r3Y"/>
@@ -211,7 +211,7 @@ not the wallet.</string>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DaX-BT-mZn">
-                            <rect key="frame" x="302.66666666666669" y="53" width="25" height="16"/>
+                            <rect key="frame" x="303.66666666666669" y="52.666666666666629" width="25" height="16"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -223,7 +223,7 @@ not the wallet.</string>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Miu-iM-Cf1">
-                            <rect key="frame" x="349" y="69.333333333333371" width="7" height="15.333333333333329"/>
+                            <rect key="frame" x="350" y="69.333333333333371" width="7" height="15.333333333333329"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
@@ -257,20 +257,20 @@ not the wallet.</string>
                         <constraint firstItem="h46-eU-sVC" firstAttribute="top" secondItem="DuG-t6-g4Y" secondAttribute="top" constant="14" id="5SH-xi-x6j"/>
                         <constraint firstAttribute="trailing" secondItem="DUh-E3-qLj" secondAttribute="trailing" constant="12" id="9Bp-S5-2xy"/>
                         <constraint firstItem="dTF-P4-KKC" firstAttribute="top" secondItem="atH-hG-4yO" secondAttribute="bottom" constant="2" id="Fu9-Tp-8ag"/>
-                        <constraint firstItem="dTF-P4-KKC" firstAttribute="leading" secondItem="Miu-iM-Cf1" secondAttribute="trailing" constant="2" id="Rm6-HK-MpM"/>
+                        <constraint firstItem="dTF-P4-KKC" firstAttribute="leading" secondItem="Miu-iM-Cf1" secondAttribute="trailing" constant="1" id="Rm6-HK-MpM"/>
                         <constraint firstItem="kOS-BK-7b5" firstAttribute="top" secondItem="DUh-E3-qLj" secondAttribute="bottom" constant="12" id="Rou-EA-wkK"/>
                         <constraint firstItem="UBW-fL-Hnt" firstAttribute="centerY" secondItem="h46-eU-sVC" secondAttribute="centerY" id="WKO-IJ-XpX"/>
                         <constraint firstItem="lh6-GT-Yap" firstAttribute="top" secondItem="kOS-BK-7b5" secondAttribute="bottom" constant="14" id="WTZ-nw-sUG"/>
                         <constraint firstItem="dTF-P4-KKC" firstAttribute="centerY" secondItem="Miu-iM-Cf1" secondAttribute="centerY" id="WYf-k1-BFU"/>
+                        <constraint firstItem="DaX-BT-mZn" firstAttribute="firstBaseline" secondItem="atH-hG-4yO" secondAttribute="firstBaseline" id="XtO-BP-XO3"/>
                         <constraint firstAttribute="trailing" secondItem="UBW-fL-Hnt" secondAttribute="trailing" constant="12" id="Yb3-Zh-kDX"/>
-                        <constraint firstItem="atH-hG-4yO" firstAttribute="leading" secondItem="DaX-BT-mZn" secondAttribute="trailing" constant="2" id="Z2p-bu-RR5"/>
+                        <constraint firstItem="atH-hG-4yO" firstAttribute="leading" secondItem="DaX-BT-mZn" secondAttribute="trailing" constant="1" id="Z2p-bu-RR5"/>
                         <constraint firstAttribute="trailing" secondItem="atH-hG-4yO" secondAttribute="trailing" constant="12" id="Z3h-Mg-6qx"/>
                         <constraint firstAttribute="trailing" secondItem="lh6-GT-Yap" secondAttribute="trailing" constant="12" id="bX9-aA-EhM"/>
                         <constraint firstItem="DUh-E3-qLj" firstAttribute="leading" secondItem="DuG-t6-g4Y" secondAttribute="leading" constant="12" id="eKG-Ny-aEu"/>
                         <constraint firstItem="atH-hG-4yO" firstAttribute="top" secondItem="DUh-E3-qLj" secondAttribute="bottom" constant="14" id="kyg-iR-N4V"/>
                         <constraint firstItem="lh6-GT-Yap" firstAttribute="leading" secondItem="DuG-t6-g4Y" secondAttribute="leading" constant="12" id="oQx-D7-STY"/>
                         <constraint firstAttribute="trailing" secondItem="dTF-P4-KKC" secondAttribute="trailing" constant="12" id="oh3-eV-5VW"/>
-                        <constraint firstItem="DaX-BT-mZn" firstAttribute="centerY" secondItem="atH-hG-4yO" secondAttribute="centerY" id="sQj-Uq-PaD"/>
                         <constraint firstItem="h46-eU-sVC" firstAttribute="leading" secondItem="DuG-t6-g4Y" secondAttribute="leading" constant="12" id="wef-gE-S1k"/>
                     </constraints>
                 </view>

@@ -81,7 +81,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGC-Uc-NzQ">
-                            <rect key="frame" x="303.66666666666669" y="59.000000000000014" width="25" height="16"/>
+                            <rect key="frame" x="303.66666666666669" y="58.666666666666671" width="25" height="16"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -111,7 +111,7 @@
                         <constraint firstItem="n5S-ao-hSF" firstAttribute="centerY" secondItem="fIp-pT-Ptl" secondAttribute="centerY" id="WWo-w9-dxt"/>
                         <constraint firstItem="ZU8-gW-fyx" firstAttribute="centerY" secondItem="6Nc-ap-VVO" secondAttribute="centerY" id="baP-fk-ulQ"/>
                         <constraint firstAttribute="trailing" secondItem="n5S-ao-hSF" secondAttribute="trailing" constant="12" id="gfd-g5-NUt"/>
-                        <constraint firstItem="EGC-Uc-NzQ" firstAttribute="centerY" secondItem="ZU8-gW-fyx" secondAttribute="centerY" id="isr-JB-NCW"/>
+                        <constraint firstItem="EGC-Uc-NzQ" firstAttribute="firstBaseline" secondItem="ZU8-gW-fyx" secondAttribute="firstBaseline" id="qSn-Fr-jrt"/>
                         <constraint firstAttribute="trailing" secondItem="1CH-rt-TLm" secondAttribute="trailing" constant="12" id="vA0-Jx-KGD"/>
                         <constraint firstItem="6Nc-ap-VVO" firstAttribute="leading" secondItem="fIp-pT-Ptl" secondAttribute="leading" id="yCF-mX-nX7"/>
                     </constraints>
@@ -220,7 +220,7 @@ not the wallet.</string>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yke-E9-kzK">
-                            <rect key="frame" x="303.66666666666669" y="53" width="25" height="16"/>
+                            <rect key="frame" x="303.66666666666669" y="52.666666666666629" width="25" height="16"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -273,13 +273,13 @@ not the wallet.</string>
                         <constraint firstItem="FI6-z5-7Oi" firstAttribute="top" secondItem="IFM-OL-s25" secondAttribute="bottom" constant="14" id="Pim-7h-CLN"/>
                         <constraint firstItem="RsA-7r-Wxl" firstAttribute="leading" secondItem="3Cf-Do-Utl" secondAttribute="leading" constant="12" id="V6T-Mr-eXH"/>
                         <constraint firstAttribute="trailing" secondItem="IFM-OL-s25" secondAttribute="trailing" constant="12" id="Yjo-5Q-NQt"/>
-                        <constraint firstItem="Yke-E9-kzK" firstAttribute="centerY" secondItem="FI6-z5-7Oi" secondAttribute="centerY" id="e6w-10-x6y"/>
                         <constraint firstAttribute="trailing" secondItem="0cT-Aa-s27" secondAttribute="trailing" constant="12" id="eRT-zP-gYz"/>
                         <constraint firstItem="txF-xH-Aur" firstAttribute="leading" secondItem="uUl-rL-P0K" secondAttribute="trailing" constant="1" id="eUm-sq-s3F"/>
                         <constraint firstItem="RsA-7r-Wxl" firstAttribute="top" secondItem="IFM-OL-s25" secondAttribute="bottom" constant="12" id="iYu-Kc-xkT"/>
                         <constraint firstItem="FI6-z5-7Oi" firstAttribute="leading" secondItem="Yke-E9-kzK" secondAttribute="trailing" constant="1" id="lo1-5Y-m0U"/>
                         <constraint firstItem="Stw-mp-hyA" firstAttribute="leading" secondItem="3Cf-Do-Utl" secondAttribute="leading" constant="12" id="q9Y-un-IU1"/>
                         <constraint firstItem="IFM-OL-s25" firstAttribute="leading" secondItem="3Cf-Do-Utl" secondAttribute="leading" constant="12" id="spe-2k-Rd8"/>
+                        <constraint firstItem="Yke-E9-kzK" firstAttribute="firstBaseline" secondItem="FI6-z5-7Oi" secondAttribute="firstBaseline" id="swV-v3-efy"/>
                         <constraint firstItem="txF-xH-Aur" firstAttribute="top" secondItem="FI6-z5-7Oi" secondAttribute="bottom" constant="2" id="xM8-69-9Uo"/>
                     </constraints>
                 </view>

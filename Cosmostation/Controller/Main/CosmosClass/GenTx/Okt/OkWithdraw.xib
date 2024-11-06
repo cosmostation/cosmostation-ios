@@ -87,7 +87,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enJ-Q5-nQL">
-                            <rect key="frame" x="315.33333333333331" y="39.333333333333329" width="49.666666666666686" height="17.666666666666671"/>
+                            <rect key="frame" x="315.33333333333331" y="40.000000000000014" width="49.666666666666686" height="17.666666666666671"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -118,12 +118,12 @@
                         <constraint firstItem="DpW-z2-fS6" firstAttribute="centerY" secondItem="AdW-Na-SNu" secondAttribute="centerY" id="Fv1-vl-Z8i"/>
                         <constraint firstItem="DpW-z2-fS6" firstAttribute="leading" secondItem="AdW-Na-SNu" secondAttribute="trailing" constant="1" id="IHT-Z9-Zcb"/>
                         <constraint firstAttribute="trailing" secondItem="wb8-WM-oBv" secondAttribute="trailing" constant="12" id="JNh-Y6-Ois"/>
+                        <constraint firstItem="fYr-ai-zO9" firstAttribute="firstBaseline" secondItem="enJ-Q5-nQL" secondAttribute="firstBaseline" id="MNc-qV-bZX"/>
                         <constraint firstItem="WFh-2X-gSV" firstAttribute="centerY" secondItem="Zrk-K4-pVZ" secondAttribute="centerY" id="Nln-2N-set"/>
                         <constraint firstItem="DpW-z2-fS6" firstAttribute="top" secondItem="fYr-ai-zO9" secondAttribute="bottom" constant="2" id="Rkj-YG-PuN"/>
                         <constraint firstAttribute="trailing" secondItem="DpW-z2-fS6" secondAttribute="trailing" constant="12" id="TU7-BV-hxS"/>
                         <constraint firstItem="wb8-WM-oBv" firstAttribute="centerY" secondItem="Zrk-K4-pVZ" secondAttribute="centerY" id="UaN-Fo-hoL"/>
                         <constraint firstItem="Zrk-K4-pVZ" firstAttribute="leading" secondItem="KIp-7C-eAI" secondAttribute="leading" constant="20" id="VrV-4Y-JE6"/>
-                        <constraint firstItem="enJ-Q5-nQL" firstAttribute="centerY" secondItem="fYr-ai-zO9" secondAttribute="centerY" id="XCq-ec-U74"/>
                         <constraint firstItem="fYr-ai-zO9" firstAttribute="top" secondItem="ki1-Ix-IKe" secondAttribute="bottom" constant="10" id="i9P-G0-VZF"/>
                         <constraint firstItem="WFh-2X-gSV" firstAttribute="leading" secondItem="Zrk-K4-pVZ" secondAttribute="trailing" constant="14" id="ije-wR-eoQ"/>
                         <constraint firstAttribute="height" constant="86" id="kkk-cN-ZfM"/>
@@ -205,7 +205,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5W8-Nw-Jtq">
-                            <rect key="frame" x="303.66666666666669" y="53" width="25" height="16"/>
+                            <rect key="frame" x="303.66666666666669" y="52.666666666666629" width="25" height="16"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -236,6 +236,7 @@
                         <constraint firstItem="oyA-LH-GM7" firstAttribute="leading" secondItem="Jlx-hE-5NA" secondAttribute="trailing" constant="1" id="8Xn-Mu-8qO"/>
                         <constraint firstItem="dRW-ex-cpf" firstAttribute="leading" secondItem="r9K-kI-9Lg" secondAttribute="trailing" constant="4" id="CpA-B2-XJl"/>
                         <constraint firstItem="oyA-LH-GM7" firstAttribute="top" secondItem="hiT-DI-NFH" secondAttribute="bottom" constant="2" id="Jgz-oK-fmU"/>
+                        <constraint firstItem="5W8-Nw-Jtq" firstAttribute="firstBaseline" secondItem="hiT-DI-NFH" secondAttribute="firstBaseline" id="MEG-xe-kyM"/>
                         <constraint firstAttribute="trailing" secondItem="Vpf-2H-NzW" secondAttribute="trailing" constant="12" id="WV9-Zv-79E"/>
                         <constraint firstAttribute="trailing" secondItem="hiT-DI-NFH" secondAttribute="trailing" constant="12" id="a3S-36-weP"/>
                         <constraint firstItem="dRW-ex-cpf" firstAttribute="centerY" secondItem="r9K-kI-9Lg" secondAttribute="centerY" id="a3v-U6-gYY"/>
@@ -243,7 +244,6 @@
                         <constraint firstItem="oyA-LH-GM7" firstAttribute="centerY" secondItem="Jlx-hE-5NA" secondAttribute="centerY" id="fMz-Hk-BlY"/>
                         <constraint firstItem="hiT-DI-NFH" firstAttribute="top" secondItem="Vpf-2H-NzW" secondAttribute="bottom" constant="14" id="fwo-aV-x8g"/>
                         <constraint firstAttribute="height" constant="110" id="hKN-8i-u3U"/>
-                        <constraint firstItem="5W8-Nw-Jtq" firstAttribute="centerY" secondItem="hiT-DI-NFH" secondAttribute="centerY" id="hg2-kh-PcC"/>
                         <constraint firstAttribute="trailing" secondItem="oyA-LH-GM7" secondAttribute="trailing" constant="12" id="wRE-ep-xhN"/>
                         <constraint firstItem="wZB-7H-lng" firstAttribute="leading" secondItem="leL-sI-vma" secondAttribute="leading" constant="12" id="xUP-7z-fLE"/>
                         <constraint firstItem="r9K-kI-9Lg" firstAttribute="leading" secondItem="leL-sI-vma" secondAttribute="leading" constant="12" id="yO8-Ew-gyr"/>

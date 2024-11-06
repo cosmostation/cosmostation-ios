@@ -79,7 +79,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fag-rm-6Qg">
-                            <rect key="frame" x="38" y="37.666666666666671" width="35.333333333333343" height="12.666666666666664"/>
+                            <rect key="frame" x="38" y="38.000000000000014" width="35.333333333333343" height="12.666666666666664"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -87,7 +87,6 @@
                     </subviews>
                     <color key="backgroundColor" name="_color06"/>
                     <constraints>
-                        <constraint firstItem="Tfb-H9-n2X" firstAttribute="centerY" secondItem="Fag-rm-6Qg" secondAttribute="centerY" id="2X0-9I-wXc"/>
                         <constraint firstAttribute="trailing" secondItem="Li4-27-cf4" secondAttribute="trailing" constant="12" id="8Lc-nI-Sh0"/>
                         <constraint firstItem="Tfb-H9-n2X" firstAttribute="leading" secondItem="ssi-Ky-tZC" secondAttribute="leading" id="8Xi-hH-u1Q"/>
                         <constraint firstAttribute="bottom" secondItem="Li4-27-cf4" secondAttribute="bottom" constant="16" id="EVi-8C-Gj1"/>
@@ -97,6 +96,7 @@
                         <constraint firstItem="Li4-27-cf4" firstAttribute="leading" secondItem="Hmh-wn-xqU" secondAttribute="leading" constant="12" id="iHp-fl-8Et"/>
                         <constraint firstItem="ssi-Ky-tZC" firstAttribute="top" secondItem="Hmh-wn-xqU" secondAttribute="top" constant="14" id="jcz-Fa-GJa"/>
                         <constraint firstItem="Li4-27-cf4" firstAttribute="top" secondItem="ssi-Ky-tZC" secondAttribute="bottom" constant="8" id="kf6-3Y-NKB"/>
+                        <constraint firstItem="Tfb-H9-n2X" firstAttribute="firstBaseline" secondItem="Fag-rm-6Qg" secondAttribute="firstBaseline" id="zNL-xs-bbs"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nC2-od-R1T" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
@@ -203,7 +203,7 @@ not the wallet.</string>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaC-zY-t0u">
-                            <rect key="frame" x="303.66666666666669" y="53" width="25" height="16"/>
+                            <rect key="frame" x="303.66666666666669" y="52.666666666666629" width="25" height="16"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -254,11 +254,11 @@ not the wallet.</string>
                         <constraint firstItem="6i7-li-e6b" firstAttribute="leading" secondItem="Iv1-FB-pcp" secondAttribute="trailing" constant="1" id="QCn-Nb-HeU"/>
                         <constraint firstItem="8Lk-nU-b4x" firstAttribute="top" secondItem="8ER-zo-b0n" secondAttribute="bottom" constant="14" id="X5f-qC-OhK"/>
                         <constraint firstItem="6i7-li-e6b" firstAttribute="top" secondItem="8Lk-nU-b4x" secondAttribute="bottom" constant="2" id="ZSG-yF-F8c"/>
-                        <constraint firstItem="HaC-zY-t0u" firstAttribute="centerY" secondItem="8Lk-nU-b4x" secondAttribute="centerY" id="bKV-XX-Jnb"/>
                         <constraint firstItem="vMj-75-KeP" firstAttribute="leading" secondItem="A1W-7M-5Z1" secondAttribute="leading" constant="12" id="cXi-El-v1x"/>
                         <constraint firstItem="8ER-zo-b0n" firstAttribute="leading" secondItem="A1W-7M-5Z1" secondAttribute="leading" constant="12" id="g6J-JL-nFH"/>
                         <constraint firstItem="zAT-ZG-fTf" firstAttribute="top" secondItem="vMj-75-KeP" secondAttribute="bottom" constant="14" id="gsP-Ir-7n6"/>
                         <constraint firstAttribute="height" constant="150" id="h9L-2F-deh"/>
+                        <constraint firstItem="HaC-zY-t0u" firstAttribute="firstBaseline" secondItem="8Lk-nU-b4x" secondAttribute="firstBaseline" id="hgM-Kk-VFc"/>
                         <constraint firstItem="zAT-ZG-fTf" firstAttribute="leading" secondItem="A1W-7M-5Z1" secondAttribute="leading" constant="12" id="nbj-ai-bhQ"/>
                         <constraint firstItem="Zzd-2T-5Hr" firstAttribute="centerY" secondItem="tTH-QN-E6F" secondAttribute="centerY" id="rlh-Fb-SL9"/>
                         <constraint firstAttribute="trailing" secondItem="6i7-li-e6b" secondAttribute="trailing" constant="12" id="ugG-gC-dlz"/>

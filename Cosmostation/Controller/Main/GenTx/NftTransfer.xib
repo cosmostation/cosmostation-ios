@@ -289,7 +289,7 @@ not the wallet.</string>
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuD-10-BTA">
-                                            <rect key="frame" x="303.66666666666669" y="52" width="25" height="16"/>
+                                            <rect key="frame" x="303.66666666666669" y="51.666666666666629" width="25" height="16"/>
                                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                             <color key="textColor" name="_color01"/>
                                             <nil key="highlightedColor"/>
@@ -333,13 +333,13 @@ not the wallet.</string>
                                         <constraint firstItem="HJg-2q-t66" firstAttribute="centerY" secondItem="9MS-wW-Ly8" secondAttribute="centerY" id="AYg-ci-DeT"/>
                                         <constraint firstItem="NzN-ui-omv" firstAttribute="leading" secondItem="KeJ-jC-Psp" secondAttribute="leading" constant="12" id="BCb-tB-0eB"/>
                                         <constraint firstAttribute="trailing" secondItem="9MS-wW-Ly8" secondAttribute="trailing" constant="12" id="J2l-Zg-zZQ"/>
-                                        <constraint firstItem="WuD-10-BTA" firstAttribute="centerY" secondItem="EZZ-R1-MOV" secondAttribute="centerY" id="JQg-sz-Nhf"/>
                                         <constraint firstItem="NzN-ui-omv" firstAttribute="top" secondItem="afH-wW-7K9" secondAttribute="bottom" constant="14" id="OhA-Wp-0Ae"/>
                                         <constraint firstItem="afH-wW-7K9" firstAttribute="leading" secondItem="KeJ-jC-Psp" secondAttribute="leading" constant="12" id="RW3-hX-TZR"/>
                                         <constraint firstItem="3Wv-gO-kYT" firstAttribute="leading" secondItem="KeJ-jC-Psp" secondAttribute="leading" constant="12" id="SLu-IG-cUd"/>
                                         <constraint firstItem="afH-wW-7K9" firstAttribute="top" secondItem="3Wv-gO-kYT" secondAttribute="bottom" constant="12" id="Wk4-bz-nMX"/>
                                         <constraint firstAttribute="trailing" secondItem="EZZ-R1-MOV" secondAttribute="trailing" constant="12" id="bds-fg-e3d"/>
                                         <constraint firstItem="9MS-wW-Ly8" firstAttribute="leading" secondItem="HJg-2q-t66" secondAttribute="trailing" constant="1" id="fB9-nO-Ujx"/>
+                                        <constraint firstItem="WuD-10-BTA" firstAttribute="firstBaseline" secondItem="EZZ-R1-MOV" secondAttribute="firstBaseline" id="fvN-M9-0iy"/>
                                         <constraint firstItem="EZZ-R1-MOV" firstAttribute="leading" secondItem="WuD-10-BTA" secondAttribute="trailing" constant="1" id="gjs-qp-kKm"/>
                                         <constraint firstAttribute="trailing" secondItem="3Wv-gO-kYT" secondAttribute="trailing" constant="12" id="h40-8L-9dP"/>
                                         <constraint firstItem="EZZ-R1-MOV" firstAttribute="top" secondItem="3Wv-gO-kYT" secondAttribute="bottom" constant="14" id="juc-LU-R1P"/>

@@ -158,7 +158,7 @@ not the wallet.</string>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bo-vj-v1S">
-                            <rect key="frame" x="303.66666666666669" y="53" width="25" height="16"/>
+                            <rect key="frame" x="303.66666666666669" y="52.666666666666629" width="25" height="16"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -201,9 +201,9 @@ not the wallet.</string>
                         <constraint firstItem="D7H-RB-pRf" firstAttribute="leading" secondItem="SwL-Va-9Xi" secondAttribute="leading" constant="12" id="1gs-I6-qLK"/>
                         <constraint firstAttribute="trailing" secondItem="2Ch-Kj-EXy" secondAttribute="trailing" constant="12" id="5WI-r6-8T5"/>
                         <constraint firstItem="gGA-hW-SXb" firstAttribute="top" secondItem="TT3-nv-5lo" secondAttribute="bottom" constant="12" id="As4-kl-iD5"/>
+                        <constraint firstItem="1Bo-vj-v1S" firstAttribute="firstBaseline" secondItem="gEs-a7-3S4" secondAttribute="firstBaseline" id="G8p-Ti-zXR"/>
                         <constraint firstAttribute="trailing" secondItem="Cmx-0d-p9x" secondAttribute="trailing" constant="12" id="Le6-PP-Erw"/>
                         <constraint firstItem="UXG-tu-lcV" firstAttribute="centerY" secondItem="xTV-ta-Emi" secondAttribute="centerY" id="Mt8-kR-ihU"/>
-                        <constraint firstItem="1Bo-vj-v1S" firstAttribute="centerY" secondItem="gEs-a7-3S4" secondAttribute="centerY" id="NAg-nU-Lvk"/>
                         <constraint firstAttribute="trailing" secondItem="UXG-tu-lcV" secondAttribute="trailing" constant="12" id="Tra-dv-auq"/>
                         <constraint firstItem="Cmx-0d-p9x" firstAttribute="top" secondItem="gGA-hW-SXb" secondAttribute="bottom" constant="14" id="WxS-iz-lWB"/>
                         <constraint firstAttribute="trailing" secondItem="TT3-nv-5lo" secondAttribute="trailing" constant="12" id="Ydf-8V-Miz"/>

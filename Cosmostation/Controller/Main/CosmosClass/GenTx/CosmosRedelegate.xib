@@ -276,7 +276,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKG-nf-luS">
-                            <rect key="frame" x="38" y="37.666666666666686" width="35.333333333333343" height="12.666666666666664"/>
+                            <rect key="frame" x="38" y="38" width="35.333333333333343" height="12.666666666666664"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -291,7 +291,7 @@
                         <constraint firstItem="6uf-72-twY" firstAttribute="leading" secondItem="NsS-aG-eMb" secondAttribute="leading" constant="12" id="DOY-yf-S9k"/>
                         <constraint firstAttribute="trailing" secondItem="6uf-72-twY" secondAttribute="trailing" constant="12" id="IDR-Ao-jlZ"/>
                         <constraint firstItem="3m0-fs-9LB" firstAttribute="leading" secondItem="2c9-yV-LT2" secondAttribute="leading" id="TSM-HG-UdX"/>
-                        <constraint firstItem="3m0-fs-9LB" firstAttribute="centerY" secondItem="sKG-nf-luS" secondAttribute="centerY" id="avA-hG-s6S"/>
+                        <constraint firstItem="3m0-fs-9LB" firstAttribute="firstBaseline" secondItem="sKG-nf-luS" secondAttribute="firstBaseline" id="gq3-cs-cDK"/>
                         <constraint firstAttribute="bottom" secondItem="6uf-72-twY" secondAttribute="bottom" constant="16" id="nFI-VD-lLg"/>
                         <constraint firstItem="3m0-fs-9LB" firstAttribute="top" secondItem="2c9-yV-LT2" secondAttribute="bottom" constant="8" id="s8G-kF-a5B"/>
                     </constraints>
@@ -400,7 +400,7 @@ not the wallet.</string>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGx-C8-blM">
-                            <rect key="frame" x="303.66666666666669" y="53" width="25" height="16"/>
+                            <rect key="frame" x="303.66666666666669" y="52.666666666666629" width="25" height="16"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
@@ -448,6 +448,7 @@ not the wallet.</string>
                         <constraint firstAttribute="height" constant="150" id="8QB-WH-a4d"/>
                         <constraint firstAttribute="trailing" secondItem="8di-ms-pW2" secondAttribute="trailing" constant="12" id="J3z-0i-qXK"/>
                         <constraint firstItem="ht5-mi-AQm" firstAttribute="leading" secondItem="c7D-TL-vzc" secondAttribute="leading" constant="12" id="MNG-BH-v1G"/>
+                        <constraint firstItem="WGx-C8-blM" firstAttribute="firstBaseline" secondItem="ES5-nj-HQj" secondAttribute="firstBaseline" id="NSx-RQ-2kw"/>
                         <constraint firstItem="LPu-2a-MZ8" firstAttribute="leading" secondItem="c7D-TL-vzc" secondAttribute="leading" constant="12" id="Nyw-qv-sDA"/>
                         <constraint firstAttribute="trailing" secondItem="DDh-HE-ont" secondAttribute="trailing" constant="12" id="Od3-D8-Dqw"/>
                         <constraint firstAttribute="trailing" secondItem="ES5-nj-HQj" secondAttribute="trailing" constant="12" id="QWB-1t-8Pm"/>
@@ -457,7 +458,6 @@ not the wallet.</string>
                         <constraint firstItem="4kN-aH-Q3u" firstAttribute="top" secondItem="ES5-nj-HQj" secondAttribute="bottom" constant="2" id="iFZ-fe-ZeI"/>
                         <constraint firstItem="DDh-HE-ont" firstAttribute="leading" secondItem="c7D-TL-vzc" secondAttribute="leading" constant="12" id="iYF-Uo-qwe"/>
                         <constraint firstItem="8di-ms-pW2" firstAttribute="centerY" secondItem="LPu-2a-MZ8" secondAttribute="centerY" id="jma-nN-iWC"/>
-                        <constraint firstItem="WGx-C8-blM" firstAttribute="centerY" secondItem="ES5-nj-HQj" secondAttribute="centerY" id="mON-ay-biK"/>
                         <constraint firstItem="ES5-nj-HQj" firstAttribute="top" secondItem="DDh-HE-ont" secondAttribute="bottom" constant="14" id="qMH-Sb-FGB"/>
                         <constraint firstItem="4kN-aH-Q3u" firstAttribute="leading" secondItem="waX-Kc-MoL" secondAttribute="trailing" constant="1" id="rBu-TJ-9dk"/>
                         <constraint firstAttribute="trailing" secondItem="ht5-mi-AQm" secondAttribute="trailing" constant="12" id="w28-wH-Lxg"/>
