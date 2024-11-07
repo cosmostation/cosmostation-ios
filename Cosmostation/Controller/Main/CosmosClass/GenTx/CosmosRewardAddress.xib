@@ -223,37 +223,25 @@ not the wallet.</string>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9od-Vc-b5B">
-                            <rect key="frame" x="302.66666666666669" y="54.666666666666629" width="25" height="16"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="16" id="OJ8-Oe-q2C"/>
-                            </constraints>
+                            <rect key="frame" x="303.66666666666669" y="52.666666666666629" width="25" height="16"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCl-0r-hnm">
-                            <rect key="frame" x="329.66666666666669" y="54.666666666666629" width="35.333333333333314" height="16"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="16" id="MLS-B7-DQ2"/>
-                            </constraints>
+                            <rect key="frame" x="329.66666666666669" y="54.666666666666629" width="35.333333333333314" height="12.666666666666671"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIE-P4-ZdX">
-                            <rect key="frame" x="350.33333333333331" y="73.666666666666629" width="5.6666666666666856" height="14"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="14" id="3Dd-FY-hjV"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
+                            <rect key="frame" x="350" y="69.333333333333371" width="7" height="15.333333333333329"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rmq-nU-VFj">
-                            <rect key="frame" x="358" y="72.666666666666629" width="7" height="14"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="14" id="Q10-du-gSc"/>
-                            </constraints>
+                            <rect key="frame" x="358" y="69.333333333333371" width="7" height="15.333333333333329"/>
                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                             <color key="textColor" name="_color02"/>
                             <nil key="highlightedColor"/>
@@ -275,12 +263,12 @@ not the wallet.</string>
                     </subviews>
                     <color key="backgroundColor" name="_color06"/>
                     <constraints>
+                        <constraint firstItem="9od-Vc-b5B" firstAttribute="firstBaseline" secondItem="qCl-0r-hnm" secondAttribute="firstBaseline" id="2Zz-tk-j8O"/>
                         <constraint firstAttribute="trailing" secondItem="qCl-0r-hnm" secondAttribute="trailing" constant="12" id="96i-hA-8g1"/>
                         <constraint firstAttribute="trailing" secondItem="Exi-WU-TJa" secondAttribute="trailing" constant="12" id="BKq-Ee-36k"/>
                         <constraint firstItem="Exi-WU-TJa" firstAttribute="top" secondItem="dHw-6O-LY2" secondAttribute="bottom" constant="14" id="BlK-ya-G8t"/>
-                        <constraint firstItem="Rmq-nU-VFj" firstAttribute="leading" secondItem="lIE-P4-ZdX" secondAttribute="trailing" constant="2" id="BrY-gl-b5K"/>
-                        <constraint firstItem="9od-Vc-b5B" firstAttribute="centerY" secondItem="qCl-0r-hnm" secondAttribute="centerY" id="CPH-zr-yNI"/>
-                        <constraint firstItem="Rmq-nU-VFj" firstAttribute="centerY" secondItem="lIE-P4-ZdX" secondAttribute="centerY" constant="-1" id="HrU-RN-c9b"/>
+                        <constraint firstItem="Rmq-nU-VFj" firstAttribute="leading" secondItem="lIE-P4-ZdX" secondAttribute="trailing" constant="1" id="BrY-gl-b5K"/>
+                        <constraint firstItem="Rmq-nU-VFj" firstAttribute="centerY" secondItem="lIE-P4-ZdX" secondAttribute="centerY" id="HrU-RN-c9b"/>
                         <constraint firstItem="54t-Ys-nVV" firstAttribute="top" secondItem="kjK-EB-kFx" secondAttribute="bottom" constant="12" id="MPW-cO-AQI"/>
                         <constraint firstItem="Rmq-nU-VFj" firstAttribute="top" secondItem="qCl-0r-hnm" secondAttribute="bottom" constant="2" id="NAS-iV-c6X"/>
                         <constraint firstAttribute="trailing" secondItem="54t-Ys-nVV" secondAttribute="trailing" constant="12" id="ODn-1Q-WBU"/>
@@ -292,7 +280,7 @@ not the wallet.</string>
                         <constraint firstItem="kjK-EB-kFx" firstAttribute="leading" secondItem="V74-LA-Cxy" secondAttribute="leading" constant="12" id="euy-jG-bbj"/>
                         <constraint firstItem="54t-Ys-nVV" firstAttribute="leading" secondItem="V74-LA-Cxy" secondAttribute="leading" constant="12" id="g5F-iI-je5"/>
                         <constraint firstAttribute="height" constant="150" id="gK4-G0-Pa3"/>
-                        <constraint firstItem="qCl-0r-hnm" firstAttribute="leading" secondItem="9od-Vc-b5B" secondAttribute="trailing" constant="2" id="jy3-Gn-eke"/>
+                        <constraint firstItem="qCl-0r-hnm" firstAttribute="leading" secondItem="9od-Vc-b5B" secondAttribute="trailing" constant="1" id="jy3-Gn-eke"/>
                         <constraint firstItem="dHw-6O-LY2" firstAttribute="leading" secondItem="V74-LA-Cxy" secondAttribute="leading" constant="12" id="sfH-Pu-0cl"/>
                         <constraint firstItem="kjK-EB-kFx" firstAttribute="top" secondItem="V74-LA-Cxy" secondAttribute="top" constant="14" id="tIk-uV-Kqt"/>
                         <constraint firstItem="dHw-6O-LY2" firstAttribute="top" secondItem="54t-Ys-nVV" secondAttribute="bottom" constant="12" id="xUZ-l0-xlW"/>
@@ -357,22 +345,22 @@ not the wallet.</string>
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color02">
-            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74509803921568629" green="0.81960784313725488" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color03">
-            <color red="0.54100000858306885" green="0.60000002384185791" blue="0.68199998140335083" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.54117647058823526" green="0.59999999999999998" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color05">
-            <color red="0.31400001049041748" green="0.32199999690055847" blue="0.40400001406669617" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.31372549019607843" green="0.32156862745098042" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color06">
-            <color red="0.27500000596046448" green="0.27799999713897705" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.27450980392156865" green="0.27843137254901962" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_colorBg">
-            <color red="0.16899999976158142" green="0.16899999976158142" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.17254901960784313" green="0.17647058823529413" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
