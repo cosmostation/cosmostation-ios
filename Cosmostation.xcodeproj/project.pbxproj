@@ -214,8 +214,8 @@
 		044ECB182A95C2E40042DB3C /* ChainAxelar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044ECB162A95C2E40042DB3C /* ChainAxelar.swift */; };
 		045032232C1EE85900235F6A /* OktFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032222C1EE85900235F6A /* OktFetcher.swift */; };
 		045032242C1EE85900235F6A /* OktFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032222C1EE85900235F6A /* OktFetcher.swift */; };
-		0450322B2C1EE98B00235F6A /* ChainBaseEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032282C1EE98B00235F6A /* ChainBaseEVM.swift */; };
-		0450322C2C1EE98B00235F6A /* ChainBaseEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032282C1EE98B00235F6A /* ChainBaseEVM.swift */; };
+		0450322B2C1EE98B00235F6A /* ChainBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032282C1EE98B00235F6A /* ChainBase.swift */; };
+		0450322C2C1EE98B00235F6A /* ChainBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032282C1EE98B00235F6A /* ChainBase.swift */; };
 		0450322D2C1EE98B00235F6A /* ChainArbitrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032292C1EE98B00235F6A /* ChainArbitrum.swift */; };
 		0450322E2C1EE98B00235F6A /* ChainArbitrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045032292C1EE98B00235F6A /* ChainArbitrum.swift */; };
 		0450322F2C1EE98B00235F6A /* ChainAvalanche.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0450322A2C1EE98B00235F6A /* ChainAvalanche.swift */; };
@@ -2291,7 +2291,7 @@
 		04449FC52ABD9287004CCD7C /* UITextField+DecimalCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+DecimalCheck.swift"; sourceTree = "<group>"; };
 		044ECB162A95C2E40042DB3C /* ChainAxelar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAxelar.swift; sourceTree = "<group>"; };
 		045032222C1EE85900235F6A /* OktFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktFetcher.swift; sourceTree = "<group>"; };
-		045032282C1EE98B00235F6A /* ChainBaseEVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainBaseEVM.swift; sourceTree = "<group>"; };
+		045032282C1EE98B00235F6A /* ChainBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainBase.swift; sourceTree = "<group>"; };
 		045032292C1EE98B00235F6A /* ChainArbitrum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainArbitrum.swift; sourceTree = "<group>"; };
 		0450322A2C1EE98B00235F6A /* ChainAvalanche.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainAvalanche.swift; sourceTree = "<group>"; };
 		045032312C1EEA9500235F6A /* ChainEvmosEVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainEvmosEVM.swift; sourceTree = "<group>"; };
@@ -3386,14 +3386,13 @@
 				045032292C1EE98B00235F6A /* ChainArbitrum.swift */,
 				04965B392C3798EA00403605 /* ChainArtelaEVM.swift */,
 				0450322A2C1EE98B00235F6A /* ChainAvalanche.swift */,
-				045032282C1EE98B00235F6A /* ChainBaseEVM.swift */,
+				045032282C1EE98B00235F6A /* ChainBase.swift */,
 				045032372C1EEA9600235F6A /* ChainBinanceSmart.swift */,
 				0450323A2C1EEA9600235F6A /* ChainCantoEVM.swift */,
 				045032392C1EEA9600235F6A /* ChainCronos.swift */,
 				045032342C1EEA9500235F6A /* ChainDymensionEVM.swift */,
 				045032312C1EEA9500235F6A /* ChainEvmosEVM.swift */,
 				045032382C1EEA9600235F6A /* ChainHumansEVM.swift */,
-				04965B3F2C37B39D00403605 /* ChainInitia.swift */,
 				79C5186E2CC76A8F00BC0E85 /* ChainKaia.swift */,
 				045032322C1EEA9500235F6A /* ChainKavaEVM.swift */,
 				042DE7002C1D7FCB009CAC04 /* ChainOktEVM.swift */,
@@ -3442,6 +3441,7 @@
 				0450328E2C1EEFC900235F6A /* ChainFinschia.swift */,
 				045032912C1EEFC900235F6A /* ChainGovgen.swift */,
 				0450329B2C1EEFCA00235F6A /* ChainGravityBridge.swift */,
+				04965B3F2C37B39D00403605 /* ChainInitia.swift */,
 				045032932C1EEFC900235F6A /* ChainInjective.swift */,
 				0450328F2C1EEFC900235F6A /* ChainIris.swift */,
 				045032962C1EEFC900235F6A /* ChainIxo.swift */,
@@ -6131,7 +6131,7 @@
 				E1DBD3EB2B6220EE0058E0DC /* EvmHistoryVC.swift in Sources */,
 				04D7854D2C328DB1009D1A94 /* feemarket_feemarket_v1_query.pb.swift in Sources */,
 				E1DBD3EE2B626BEE0058E0DC /* EvmClassVC.swift in Sources */,
-				0450322C2C1EE98B00235F6A /* ChainBaseEVM.swift in Sources */,
+				0450322C2C1EE98B00235F6A /* ChainBase.swift in Sources */,
 				E16200422AF279560008F397 /* AddressBookListVC.swift in Sources */,
 				79BF33302C50D0C400515D78 /* SearchBarWithTopPadding.swift in Sources */,
 				0450329F2C1EEFCA00235F6A /* ChainIris.swift in Sources */,
@@ -7004,7 +7004,7 @@
 				04C816742BA98D74006B800A /* cosmos_protocolpool_module_v1_module.pb.swift in Sources */,
 				04D7854C2C328DB1009D1A94 /* feemarket_feemarket_v1_query.pb.swift in Sources */,
 				E1DBD3ED2B626BEE0058E0DC /* EvmClassVC.swift in Sources */,
-				0450322B2C1EE98B00235F6A /* ChainBaseEVM.swift in Sources */,
+				0450322B2C1EE98B00235F6A /* ChainBase.swift in Sources */,
 				E16200412AF279560008F397 /* AddressBookListVC.swift in Sources */,
 				79BF332F2C50D0C300515D78 /* SearchBarWithTopPadding.swift in Sources */,
 				0450329E2C1EEFCA00235F6A /* ChainIris.swift in Sources */,
