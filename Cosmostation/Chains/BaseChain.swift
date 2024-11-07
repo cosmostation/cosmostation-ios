@@ -392,6 +392,10 @@ extension BaseChain {
         return getChainListParam()["is_support_moblie_dapp"].bool ?? false
     }
     
+    func isSupportMintscan() -> Bool {
+        return getChainListParam()["is_support_mintscan"].bool ?? false
+    }
+    
     func voteThreshold() -> NSDecimalNumber {
         let threshold = getChainListParam()["voting_threshold"].uInt64Value
         return NSDecimalNumber(value: threshold)
