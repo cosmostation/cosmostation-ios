@@ -1,5 +1,5 @@
 //
-//  ChainPlanq.swift
+//  ChainPlanqEVM.swift
 //  Cosmostation
 //
 //  Created by 차소민 on 10/24/24.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainPlanq: BaseChain  {
+class ChainPlanqEVM: BaseChain  {
     
     override init() {
         super.init()
