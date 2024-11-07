@@ -263,7 +263,7 @@ class BaseChain {
         } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.symbol ?? "UnKnown"
-        } else if supportEvm,
+        } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.symbol ?? "UnKnown"
         }
@@ -276,7 +276,7 @@ class BaseChain {
         } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.assetImg()
-        } else if supportEvm,
+        } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.assetImg()
         }
@@ -289,7 +289,7 @@ class BaseChain {
         } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.decimals ?? 6
-        } else if supportEvm,
+        } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.decimals ?? 6
         }
@@ -302,7 +302,7 @@ class BaseChain {
         } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.coinGeckoId ?? ""
-        } else if supportEvm,
+        } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.coinGeckoId ?? ""
         }
@@ -395,7 +395,7 @@ extension BaseChain {
     }
     
     func isSupportErc20() -> Bool {
-        return getChainListParam()["is_support_erc20"].bool ?? false
+        return (getChainListParam()["is_support_erc20"].bool ?? false && supportEvm)
     }
     
     func isSupportCw20() -> Bool {
@@ -606,7 +606,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAvalanche())                     //EVM
     result.append(ChainAxelar())
     result.append(ChainBand())
-    result.append(ChainBaseEVM())                       //EVM
+    result.append(ChainBase())                       //EVM
     result.append(ChainBinanceSmart())                  //EVM
     result.append(ChainBitcana())
     result.append(ChainBitCoin44())                     //MAJOR
@@ -671,7 +671,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainPassage())
     result.append(ChainPersistence118())
     result.append(ChainPersistence750())
-    result.append(ChainPlanqEVM())                         //EVM
+    result.append(ChainPlanqEVM())                      //EVM
     result.append(ChainPolygon())                       //EVM
     result.append(ChainProvenance())
     result.append(ChainPryzm())
@@ -692,7 +692,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainStargaze())
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
-    result.append(ChainTenetEVM())                         //EVM
+    result.append(ChainTenetEVM())                      //EVM
     result.append(ChainTeritori())
     result.append(ChainTerra())
     result.append(ChainUmee())
