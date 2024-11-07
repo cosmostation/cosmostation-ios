@@ -1,5 +1,5 @@
 //
-//  ChainTenet.swift
+//  ChainTenetEVM.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 11/5/24.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainTenet: BaseChain  {
+class ChainTenetEVM: BaseChain  {
     
     override init() {
         super.init()

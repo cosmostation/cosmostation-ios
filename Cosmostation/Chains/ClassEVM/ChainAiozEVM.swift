@@ -1,5 +1,5 @@
 //
-//  ChainAioz.swift
+//  ChainAiozEVM.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 11/5/24.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainAioz: BaseChain  {
+class ChainAiozEVM: BaseChain  {
     
     override init() {
         super.init()
