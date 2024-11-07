@@ -204,7 +204,7 @@ class CosmosClassVC: BaseVC {
         let ecosystemTabBar = UITabBarItem(title: "Ecosystem", image: nil, tag: 4)
         let aboutTabBar = UITabBarItem(title: "About", image: nil, tag: 5)
         tabbar.items.append(coinTabBar)
-        if (BaseData.instance.showEvenReview() && selectedChain.supportCw721) { tabbar.items.append(nftTabBar) }
+        if (BaseData.instance.showEvenReview() && selectedChain.isSupportCw721()) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(receiveTabBar)
         tabbar.items.append(historyTabBar)
         if (BaseData.instance.showEvenReview() && selectedChain.isSupportMobileDapp() && selectedChain.isDefault) { tabbar.items.append(ecosystemTabBar) }

@@ -24,7 +24,6 @@ class ChainTerra: BaseChain  {
         stakeDenom = "uluna"
         bechAccountPrefix = "terra"
         validatorPrefix = "terravaloper"
-//        supportCw721 = true
         grpcHost = "grpc-terra.cosmostation.io"
         lcdUrl = "https://lcd-terra.cosmostation.io/"
     }

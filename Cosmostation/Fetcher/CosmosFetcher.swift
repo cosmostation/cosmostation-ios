@@ -458,7 +458,7 @@ extension CosmosFetcher {
     }
     
     func fetchCw721Info() async throws -> [JSON]? {
-        if (!chain.supportCw721) { return [] }
+        if (!chain.isSupportCw721()) { return [] }
         return try await AF.request(BaseNetWork.msCw721InfoUrl(chain.apiName), method: .get).serializingDecodable([JSON].self).value
     }
 }

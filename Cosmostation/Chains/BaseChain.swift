@@ -30,7 +30,6 @@ class BaseChain {
     var bechAccountPrefix: String?
     var validatorPrefix: String?
     var bechOpAddress: String?
-    var supportCw721 = false
     var supportStaking = true
     var grpcHost = ""
     var grpcPort = 443
