@@ -131,7 +131,7 @@ class CosmosClaimCommission: BaseVC {
             feeSegments.selectedSegmentIndex = selectedFeePosition
             
             let baseFee = cosmosFetcher.cosmosBaseFees[0]
-            let gasAmount: NSDecimalNumber = selectedChain.getFeeBaseGasAmount()
+            let gasAmount: NSDecimalNumber = selectedChain.getInitGasLimit()
             let feeDenom = baseFee.denom
             let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
             txFee.gasLimit = gasAmount.uint64Value
@@ -143,7 +143,7 @@ class CosmosClaimCommission: BaseVC {
             for i in 0..<feeInfos.count {
                 feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
             }
-            selectedFeePosition = selectedChain.getFeeBasePosition()
+            selectedFeePosition = selectedChain.getBaseFeePosition()
             feeSegments.selectedSegmentIndex = selectedFeePosition
             txFee = selectedChain.getInitPayableFee()!
         }
@@ -196,7 +196,7 @@ class CosmosClaimCommission: BaseVC {
     
     func onUpdateWithSimul(_ gasUsed: UInt64?) {
         if let toGas = gasUsed {
-            txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
+            txFee.gasLimit = UInt64(Double(toGas) * selectedChain.getSimulatedGasMultiply())
             if (cosmosFetcher.cosmosBaseFees.count > 0) {
                 if let baseFee = cosmosFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
@@ -230,7 +230,7 @@ class CosmosClaimCommission: BaseVC {
         claimBtn.isEnabled = false
         loadingView.isHidden = false
         
-        if (selectedChain.isGasSimulable() == false) {
+        if (selectedChain.isSimulable() == false) {
             return onUpdateWithSimul(nil)
         }
         

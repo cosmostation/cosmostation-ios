@@ -25,7 +25,6 @@ class ChainNeutron: BaseChain {
         bechAccountPrefix = "neutron"
         validatorPrefix = "neutronvaloper"
         supportStaking = false
-        supportCw20 = true
         grpcHost = "grpc-neutron.cosmostation.io"
         lcdUrl = "https://lcd-neutron.cosmostation.io/"
     }

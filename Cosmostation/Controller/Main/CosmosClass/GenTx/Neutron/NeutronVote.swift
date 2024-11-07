@@ -97,7 +97,7 @@ class NeutronVote: BaseVC {
             feeSegments.selectedSegmentIndex = selectedFeePosition
             
             let baseFee = neutronFetcher.cosmosBaseFees[0]
-            let gasAmount: NSDecimalNumber = selectedChain.getFeeBaseGasAmount()
+            let gasAmount: NSDecimalNumber = selectedChain.getInitGasLimit()
             let feeDenom = baseFee.denom
             let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
             txFee.gasLimit = gasAmount.uint64Value
@@ -109,7 +109,7 @@ class NeutronVote: BaseVC {
             for i in 0..<feeInfos.count {
                 feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
             }
-            selectedFeePosition = selectedChain.getFeeBasePosition()
+            selectedFeePosition = selectedChain.getBaseFeePosition()
             feeSegments.selectedSegmentIndex = selectedFeePosition
             txFee = selectedChain.getInitPayableFee()!
         }
@@ -181,7 +181,7 @@ class NeutronVote: BaseVC {
     
     func onUpdateWithSimul(_ gasUsed: UInt64?) {
         if let toGas = gasUsed {
-            txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
+            txFee.gasLimit = UInt64(Double(toGas) * selectedChain.getSimulatedGasMultiply())
             if (neutronFetcher.cosmosBaseFees.count > 0) {
                 if let baseFee = neutronFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)

@@ -282,7 +282,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
     func onShowTokenListSheet()  {
         let tokenListSheet = SelectDisplayTokenListSheet(nibName: "SelectDisplayTokenListSheet", bundle: nil)
         tokenListSheet.selectedChain = selectedChain
-        if selectedChain.supportCw20 {
+        if selectedChain.isSupportCw20() {
             tokenListSheet.allTokens = mintscanCw20Tokens
             tokenListSheet.toDisplayTokens = toDisplayCw20Tokens.map { $0.contract! }
         } else {

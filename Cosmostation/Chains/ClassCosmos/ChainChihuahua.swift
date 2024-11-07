@@ -24,7 +24,6 @@ class ChainChihuahua: BaseChain  {
         stakeDenom = "uhuahua"
         bechAccountPrefix = "chihuahua"
         validatorPrefix = "chihuahuavaloper"
-        supportCw20 = true
         grpcHost = "grpc-chihuahua.cosmostation.io"
         lcdUrl = "https://lcd-chihuahua.cosmostation.io/"
     }

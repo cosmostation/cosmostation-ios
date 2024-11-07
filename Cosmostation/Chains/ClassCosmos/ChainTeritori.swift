@@ -24,7 +24,6 @@ class ChainTeritori: BaseChain  {
         stakeDenom = "utori"
         bechAccountPrefix = "tori"
         validatorPrefix = "torivaloper"
-//        supportCw721 = true
         grpcHost = "grpc-teritori.cosmostation.io"
         lcdUrl = "https://lcd-teritori.cosmostation.io/"
     }
