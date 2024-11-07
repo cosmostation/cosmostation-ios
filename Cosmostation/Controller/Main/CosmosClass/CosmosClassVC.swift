@@ -206,7 +206,7 @@ class CosmosClassVC: BaseVC {
         tabbar.items.append(coinTabBar)
         if (BaseData.instance.showEvenReview() && selectedChain.isSupportCw721()) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(receiveTabBar)
-        tabbar.items.append(historyTabBar)
+        if (selectedChain.name == "OKT" || selectedChain.isSupportMintscan()) { tabbar.items.append(historyTabBar) }
         if (BaseData.instance.showEvenReview() && selectedChain.isSupportMobileDapp() && selectedChain.isDefault) { tabbar.items.append(ecosystemTabBar) }
         if (!selectedChain.getChainListParam().isEmpty) { tabbar.items.append(aboutTabBar) }
         
