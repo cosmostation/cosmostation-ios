@@ -238,12 +238,12 @@ class SuiFetcher {
     }
     
     
-    func hasFee(_ txType: TX_TYPE?) -> Bool {
+    func hasFee(_ txType: TxType?) -> Bool {
         let suiBalance = balanceAmount(SUI_MAIN_DENOM)
         return suiBalance.compare(baseFee(txType)).rawValue > 0
     }
     
-    func baseFee(_ txType: TX_TYPE?) -> NSDecimalNumber {
+    func baseFee(_ txType: TxType?) -> NSDecimalNumber {
         if (txType == .SUI_SEND_COIN || txType == .SUI_SEND_NFT) {
             return SUI_FEE_SEND
         } else if (txType == .SUI_STAKE) {

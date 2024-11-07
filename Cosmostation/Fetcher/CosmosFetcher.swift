@@ -807,7 +807,7 @@ extension CosmosFetcher {
     }
     
     func fetchBaseFee() async throws -> [Cosmos_Base_V1beta1_DecCoin]? {
-        if (!chain.supportFeeMarket()) { return nil }
+        if (!chain.isSupportCosmosFeeMarket()) { return nil }
         if (getEndpointType() == .UseGRPC) {
             let req = Feemarket_Feemarket_V1_GasPricesRequest.init()
             return try? await Feemarket_Feemarket_V1_QueryNIOClient(channel: getClient()).gasPrices(req, callOptions: getCallOptions()).response.get().prices
@@ -820,7 +820,7 @@ extension CosmosFetcher {
     
     func updateBaseFee() async {
         cosmosBaseFees.removeAll()
-        if (!chain.supportFeeMarket()) { return }
+        if (!chain.isSupportCosmosFeeMarket()) { return }
         if (getEndpointType() == .UseGRPC) {
             let req = Feemarket_Feemarket_V1_GasPricesRequest.init()
             if let baseFees = try? await Feemarket_Feemarket_V1_QueryNIOClient(channel: getClient()).gasPrices(req, callOptions: getCallOptions()).response.get().prices {
