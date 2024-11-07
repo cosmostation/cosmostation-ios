@@ -24,7 +24,6 @@ class ChainJuno: BaseChain  {
         stakeDenom = "ujuno"
         bechAccountPrefix = "juno"
         validatorPrefix = "junovaloper"
-        supportCw20 = true
 //        supportCw721 = true
         grpcHost = "grpc-juno.cosmostation.io"
         lcdUrl = "https://lcd-juno.cosmostation.io/"

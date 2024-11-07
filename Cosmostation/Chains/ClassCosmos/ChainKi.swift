@@ -24,7 +24,6 @@ class ChainKi: BaseChain  {
         stakeDenom = "uxki"
         bechAccountPrefix = "ki"
         validatorPrefix = "kivaloper"
-        supportCw20 = true
         grpcHost = "grpc-ki-chain.cosmostation.io"
         lcdUrl = "https://lcd-ki-chain.cosmostation.io/"
     }

@@ -207,7 +207,7 @@ class CosmosFetcher {
 
 extension CosmosFetcher {
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        if (chain.supportCw20) {
+        if chain.isSupportCw20() {
             if let tokenInfo = mintscanCw20Tokens.filter({ $0.contract == address }).first {
                 let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
                 return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
@@ -218,7 +218,7 @@ extension CosmosFetcher {
     
     func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
-        if (chain.supportCw20) {
+        if chain.isSupportCw20() {
             mintscanCw20Tokens.forEach { tokenInfo in
                 let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
                 let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
@@ -453,7 +453,7 @@ extension CosmosFetcher {
 //about mintscan api
 extension CosmosFetcher {
     func fetchCw20Info() async throws -> [MintscanToken]? {
-        if (!chain.supportCw20) { return [] }
+        if (!chain.isSupportCw20()) { return [] }
         return try await AF.request(BaseNetWork.msCw20InfoUrl(chain.apiName), method: .get).serializingDecodable([MintscanToken].self).value
     }
     
@@ -680,7 +680,7 @@ extension CosmosFetcher {
     
     
     func fetchAllCw20Balance(_ id: Int64) async {
-        if (chain.supportCw20 == false) { return }
+        if (chain.isSupportCw20() == false) { return }
         let userDisplaytoken = BaseData.instance.getDisplayCw20s(id, self.chain.tag)
         Task {
             await mintscanCw20Tokens.concurrentForEach { cw20 in

@@ -50,7 +50,7 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
     }
 
     @IBAction func onClickConfirm(_ sender: BaseButton) {
-        if selectedChain.supportCw20 {
+        if selectedChain.isSupportCw20() {
             BaseData.instance.setDisplayCw20s(baseAccount.id, selectedChain.tag, toDisplayTokens)
         } else {
             BaseData.instance.setDisplayErc20s(baseAccount.id, selectedChain.tag, toDisplayTokens)

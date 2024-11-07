@@ -24,7 +24,6 @@ class ChainSei: BaseChain {
         stakeDenom = "usei"
         bechAccountPrefix = "sei"
         validatorPrefix = "seivaloper"
-        supportCw20 = true
         grpcHost = "grpc-sei.cosmostation.io"
         lcdUrl = "https://lcd-sei.cosmostation.io/"
     }

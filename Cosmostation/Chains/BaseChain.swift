@@ -30,7 +30,6 @@ class BaseChain {
     var bechAccountPrefix: String?
     var validatorPrefix: String?
     var bechOpAddress: String?
-    var supportCw20 = false
     var supportCw721 = false
     var supportStaking = true
     var grpcHost = ""
@@ -262,7 +261,7 @@ class BaseChain {
     func assetSymbol(_ denom: String) -> String {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.symbol ?? "UnKnown"
-        } else if supportCw20,
+        } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.symbol ?? "UnKnown"
         } else if supportEvm,
@@ -275,7 +274,7 @@ class BaseChain {
     func assetImgUrl(_ denom: String) -> URL? {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.assetImg()
-        } else if supportCw20,
+        } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.assetImg()
         } else if supportEvm,
@@ -288,7 +287,7 @@ class BaseChain {
     func assetDecimal(_ denom: String) -> Int16 {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.decimals ?? 6
-        } else if supportCw20,
+        } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.decimals ?? 6
         } else if supportEvm,
@@ -301,7 +300,7 @@ class BaseChain {
     func assetGeckoId(_ denom: String) -> String {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.coinGeckoId ?? ""
-        } else if supportCw20,
+        } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.coinGeckoId ?? ""
         } else if supportEvm,
