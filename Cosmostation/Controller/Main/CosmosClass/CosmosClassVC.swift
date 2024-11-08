@@ -501,10 +501,18 @@ extension CosmosClassVC {
     }
     
     func onProposalList() {
-        let proposalsVC = CosmosProposalsVC(nibName: "CosmosProposalsVC", bundle: nil)
-        proposalsVC.selectedChain = selectedChain
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(proposalsVC, animated: true)
+        if selectedChain.isSupportMintscan() || selectedChain is ChainIxo {
+            let proposalsVC = CosmosProposalsVC(nibName: "CosmosProposalsVC", bundle: nil)
+            proposalsVC.selectedChain = selectedChain
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(proposalsVC, animated: true)
+
+        } else {
+            let proposalsVC = OnChainProposalsVC(nibName: "OnChainProposalsVC", bundle: nil)
+            proposalsVC.selectedChain = selectedChain
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(proposalsVC, animated: true)
+        }
     }
     
     func onStakeInfo() {
