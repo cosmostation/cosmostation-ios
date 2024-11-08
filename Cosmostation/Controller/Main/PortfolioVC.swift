@@ -137,10 +137,7 @@ class PortfolioVC: BaseVC {
         let tag = notification.object as! String
         Task {
             onUpdateRow(tag)
-            
-            if baseAccount.getDpChains().filter({ $0.fetchState == .Busy }).count == 0 {
-                self.navigationItem.rightBarButtonItems?.last?.isEnabled = true
-            }
+            onUpdateSortButton()
         }
     }
     
@@ -153,6 +150,7 @@ class PortfolioVC: BaseVC {
         tableView.reloadData()
         onUpdateHideValue()
         onUpdateTotal()
+        onUpdateSortButton()
     }
     
     func onUpdateRow(_ tag: String) {
@@ -192,6 +190,12 @@ class PortfolioVC: BaseVC {
         }
         DispatchQueue.main.async {
             self.totalValue = sum
+        }
+    }
+    
+    func onUpdateSortButton() {
+        if baseAccount.getDpChains().filter({ $0.fetchState == .Busy }).count == 0 {
+            self.navigationItem.rightBarButtonItems?.last?.isEnabled = true
         }
     }
     
