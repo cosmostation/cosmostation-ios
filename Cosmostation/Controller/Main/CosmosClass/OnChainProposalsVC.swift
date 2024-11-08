@@ -56,7 +56,7 @@ class OnChainProposalsVC: BaseVC {
         etcPeriods.removeAll()
 
         Task {
-            try await fetchProposals(selectedChain)
+            try await fetchProposalsWithPaging()
             
             proposals.forEach { proposal in
                 if proposal.isVotingPeriod() {
@@ -237,30 +237,99 @@ extension OnChainProposalsVC: UITableViewDelegate, UITableViewDataSource {
 
 
 extension OnChainProposalsVC {
-    func fetchProposals(_ chain: BaseChain) async throws {
-        guard let cosmosFetcher = chain.getCosmosfetcher() else { return }
+    func fetchProposals(_ chain: BaseChain, _ hasPaginationKey: String? = nil) async throws -> String {
+        guard let cosmosFetcher = chain.getCosmosfetcher() else { return "" }
+        
         if (cosmosFetcher.getEndpointType() == .UseGRPC) {
-            let req = Cosmos_Gov_V1_QueryProposalsRequest()
-            if var proposals = try? await Cosmos_Gov_V1_QueryNIOClient(channel: cosmosFetcher.getClient()).proposals(req, callOptions: cosmosFetcher.getCallOptions()).response.get().proposals {
-                proposals.sort {
-                    $0.id > $1.id
-                }
-                proposals.forEach({
-                    self.proposals.append(MintscanProposal($0))
-                })
+            var page = Cosmos_Base_Query_V1beta1_PageRequest()
+            if let hasPaginationKey {
+                page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.reverse = true; $0.limit = 200; $0.key = Data(base64Encoded: hasPaginationKey)! }
+            } else {
+                page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.reverse = true; $0.limit = 200 }
             }
-
-        } else {
-            let url = cosmosFetcher.getLcd() + "cosmos/gov/v1/proposals"
-            if let response = try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value {
-                
-                let proposals = response["proposals"].arrayValue.sorted {
-                    $0["id"].uInt64Value > $1["id"].uInt64Value
-                }
-                proposals.forEach { proposal in
+            
+            let v1Req = Cosmos_Gov_V1_QueryProposalsRequest.with { $0.pagination = page }
+            let v1betaReq = Cosmos_Gov_V1beta1_QueryProposalsRequest.with { $0.pagination = page }
+                        
+            do {
+                let result = try await Cosmos_Gov_V1_QueryNIOClient(channel: cosmosFetcher.getClient()).proposals(v1Req, callOptions: cosmosFetcher.getCallOptions()).response.get()
+                result.proposals.forEach { proposal in
                     self.proposals.append(MintscanProposal(proposal))
                 }
+                
+                return result.pagination.nextKey.base64EncodedString()
+                
+            } catch {
+                do {
+                    let result = try await Cosmos_Gov_V1beta1_QueryNIOClient(channel: cosmosFetcher.getClient()).proposals(v1betaReq, callOptions: cosmosFetcher.getCallOptions()).response.get()
+                    result.proposals.forEach { proposal in
+                        self.proposals.append(MintscanProposal(proposal))
+                    }
+
+                    return result.pagination.nextKey.base64EncodedString()
+                    
+                } catch {
+                    print("Error: ", error)
+                }
             }
+                
+            return ""
+            
+        } else {    //case LCD
+            
+            do {
+                var url = ""
+                
+                if let hasPaginationKey {
+                    url = cosmosFetcher.getLcd() + "cosmos/gov/v1/proposals?&pagination.key=\(hasPaginationKey)&pagination.limit=500&pagination.reverse=true"
+                } else {
+                    url = cosmosFetcher.getLcd() + "cosmos/gov/v1/proposals?pagination.limit=200&pagination.reverse=true"
+                }
+                
+                let request = AF.request(url, method: .get).serializingDecodable(JSON.self)
+                let result = try await request.value
+                let statusCode = await request.response.response!.statusCode
+                
+                if !(200...299).contains(statusCode) {  // v1 Fail -> v1beta1
+                    if let hasPaginationKey {
+                        url = cosmosFetcher.getLcd() + "cosmos/gov/v1beta1/proposals?&pagination.key=\(hasPaginationKey)&pagination.limit=500&pagination.reverse=true"
+                    } else {
+                        url = cosmosFetcher.getLcd() + "cosmos/gov/v1beta1/proposals?pagination.limit=200&pagination.reverse=true"
+                    }
+                    
+                    let result = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
+                    result["proposals"].arrayValue.forEach { proposal in
+                        self.proposals.append(MintscanProposal(proposal))
+                    }
+                    
+                    return result["pagination"]["next_key"].stringValue
+                    
+                } else {
+                    result["proposals"].arrayValue.forEach { proposal in
+                        self.proposals.append(MintscanProposal(proposal))
+                    }
+                    
+                    return result["pagination"]["next_key"].stringValue
+                }
+                
+            } catch {
+                print("Error: ", error)
+            }
+            
+            return ""
+        }
+    }
+    
+    func fetchProposalsWithPaging() async throws {
+        do {
+            var paginationKey = try await fetchProposals(selectedChain)
+            
+            while paginationKey != "" {
+                paginationKey = try await fetchProposals(selectedChain, paginationKey)
+            }
+            
+        } catch {
+            print("Error: ", error)
         }
     }
     

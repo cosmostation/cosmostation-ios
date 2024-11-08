@@ -27,11 +27,12 @@ public struct MintscanProposal {
     var no_with_veto: NSDecimalNumber = NSDecimalNumber.zero
     
     init(_ json: JSON?) {
-        self.id = json?["id"].uInt64Value
+        let id = json?["id"].uInt64Value
+        self.id = id == 0 ? json?["proposal_id"].uInt64Value : id
         let title = json?["title"].stringValue
-        self.title = title == "" ? json?["messages"].arrayValue.first?["content"]["title"].string : title
+        self.title = title == "" ? json?["messages"].arrayValue.first?["content"]["title"].string ?? json?["content"]["title"].string : title
         let description = json?["description"].string ?? json?["summary"].stringValue
-        self.description = description == "" ? json?["messages"].arrayValue.first?["content"]["description"].string : description
+        self.description = description == "" ? json?["messages"].arrayValue.first?["content"]["description"].string ?? json?["content"]["description"].string : description
         self.proposal_type = json?["proposal_type"].string
         self.proposal_status = json?["proposal_status"].string ?? json?["status"].string
         self.voting_start_time = json?["voting_start_time"].stringValue
@@ -54,8 +55,8 @@ public struct MintscanProposal {
     
     init(_ data: Cosmos_Gov_V1_Proposal?) {
         self.id = data?.id
-        self.title = data?.title
-        print(data?.title)
+        let title = data?.title ?? ""
+        self.title = title == "" ? data?.messages.first?.typeURL.components(separatedBy: ".").last : title
         self.description = data?.summary
         
         switch data?.status {
@@ -71,7 +72,7 @@ public struct MintscanProposal {
             self.proposal_status = "rejected"
         case .failed:
             self.proposal_status = "failed"
-        case .UNRECOGNIZED(let int):
+        case .UNRECOGNIZED(_):
             self.proposal_status = nil
         case nil:
             self.proposal_status = nil
@@ -81,6 +82,33 @@ public struct MintscanProposal {
         self.voting_end_time = data?.votingEndTime.timestampToString()
     }
     
+    init(_ data: Cosmos_Gov_V1beta1_Proposal?) {
+        self.id = data?.proposalID
+        self.title = data?.content.typeURL.components(separatedBy: ".").last
+        self.description = JSON(data?.content.value.prettyJson as Any)["description"].string
+        
+        switch data?.status {
+        case .unspecified:
+            self.proposal_status = "unspecified"
+        case .depositPeriod:
+            self.proposal_status = "depositPeriod"
+        case .votingPeriod:
+            self.proposal_status = "votingPeriod"
+        case .passed:
+            self.proposal_status = "passed"
+        case .rejected:
+            self.proposal_status = "rejected"
+        case .failed:
+            self.proposal_status = "failed"
+        case .UNRECOGNIZED(_):
+            self.proposal_status = nil
+        case nil:
+            self.proposal_status = nil
+        }
+        
+        self.voting_start_time = data?.votingStartTime.timestampToString()
+        self.voting_end_time = data?.votingEndTime.timestampToString()
+    }
     public func getSum() ->NSDecimalNumber {
         var sum = NSDecimalNumber.zero
         sum = sum.adding(yes)

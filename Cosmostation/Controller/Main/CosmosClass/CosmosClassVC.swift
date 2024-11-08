@@ -501,7 +501,7 @@ extension CosmosClassVC {
     }
     
     func onProposalList() {
-        if selectedChain.isSupportMintscan() {
+        if selectedChain.isSupportMintscan() || selectedChain is ChainIxo {
             let proposalsVC = CosmosProposalsVC(nibName: "CosmosProposalsVC", bundle: nil)
             proposalsVC.selectedChain = selectedChain
             self.navigationItem.title = ""
