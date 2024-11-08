@@ -72,11 +72,10 @@ class ChainSelectVC: BaseVC {
         
         dpTags = BaseData.instance.getDisplayChainTags(baseAccount.id)
         
-        if let chainSort = UserDefaults.standard.string(forKey: KEY_CHAIN_SORT), let sortType = SortingType(rawValue: chainSort) {
+        let chainSort = UserDefaults.standard.string(forKey: KEY_CHAIN_SORT) ?? SortingType.value.rawValue
+        if let sortType = SortingType(rawValue: chainSort) {
             sortButton.setImage(UIImage(named: sortType.rawValue), for: .normal)
             sortButton.addTarget(self, action: #selector(onClickChainSort), for: .touchUpInside)
-        } else {
-            
         }
     }
     
