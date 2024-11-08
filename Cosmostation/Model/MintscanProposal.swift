@@ -30,7 +30,11 @@ public struct MintscanProposal {
         let id = json?["id"].uInt64Value
         self.id = id == 0 ? json?["proposal_id"].uInt64Value : id
         let title = json?["title"].stringValue
-        self.title = title == "" ? json?["messages"].arrayValue.first?["content"]["title"].string ?? json?["content"]["title"].string : title
+        self.title = title == "" ? json?["messages"].arrayValue.first?["content"]["title"].string
+                                    ?? json?["messages"].arrayValue.first?["@type"].string?.components(separatedBy: ".").last
+                                    ?? json?["content"]["title"].string
+                                    ?? json?["content"]["@type"].string?.components(separatedBy: ".").last
+                                 : title
         let description = json?["description"].string ?? json?["summary"].stringValue
         self.description = description == "" ? json?["messages"].arrayValue.first?["content"]["description"].string ?? json?["content"]["description"].string : description
         self.proposal_type = json?["proposal_type"].string
