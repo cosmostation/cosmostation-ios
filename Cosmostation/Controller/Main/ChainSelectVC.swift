@@ -17,6 +17,7 @@ class ChainSelectVC: BaseVC {
     @IBOutlet weak var selectBtn: SecButton!
     @IBOutlet weak var confirmBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
+    @IBOutlet weak var sortButton: UIButton!
     var searchBar: UISearchBar?
     
     var onChainSelected: (() -> Void)? = nil
@@ -25,6 +26,8 @@ class ChainSelectVC: BaseVC {
     var searchMainnets = [BaseChain]()
     var testnetChains = [BaseChain]()
     var searchTestnets = [BaseChain]()
+    
+    var chainSortingDelegate: ChainSortingTypeDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +71,13 @@ class ChainSelectVC: BaseVC {
         searchTestnets = testnetChains
         
         dpTags = BaseData.instance.getDisplayChainTags(baseAccount.id)
+        
+        if let chainSort = UserDefaults.standard.string(forKey: KEY_CHAIN_SORT), let sortType = SortingType(rawValue: chainSort) {
+            sortButton.setImage(UIImage(named: sortType.rawValue), for: .normal)
+            sortButton.addTarget(self, action: #selector(onClickChainSort), for: .touchUpInside)
+        } else {
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,6 +96,7 @@ class ChainSelectVC: BaseVC {
             DispatchQueue.main.async {
                 self.selectBtn.isEnabled = true
                 self.loadingView.isHidden = true
+                self.sortButton.isHidden = false
             }
         }
     }
@@ -105,6 +116,56 @@ class ChainSelectVC: BaseVC {
         Task {
             onUpdateRow(tag)
         }
+    }
+    
+    @objc func onClickChainSort() {
+        chainSortingDelegate?.onClickSortingButton()
+        guard let lastSortingType = SortingType(rawValue: UserDefaults.standard.string(forKey: KEY_CHAIN_SORT)!) else { return }
+        switch lastSortingType {
+        case .name:
+            mainnetChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                return $0.name < $1.name
+            }
+            mainnetChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                if (dpTags.contains($0.tag) == true && dpTags.contains($1.tag) == false) { return true }
+                return false
+            }
+        case .value:
+            mainnetChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                return $0.allValue(true).compare($1.allValue(true)).rawValue > 0 ? true : false
+            }
+            mainnetChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                if (dpTags.contains($0.tag) == true && dpTags.contains($1.tag) == false) { return true }
+                return false
+            }
+        }
+        
+        testnetChains.sort {
+            return $0.name < $1.name
+        }
+        testnetChains.sort {
+            if (dpTags.contains($0.tag) == true && dpTags.contains($1.tag) == false) { return true }
+            return false
+        }
+        
+        searchMainnets = searchBar!.text!.isEmpty ? mainnetChains : mainnetChains.filter { chain in
+            return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        searchTestnets = searchBar!.text!.isEmpty ? testnetChains : testnetChains.filter { chain in
+            return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+
+        tableView.reloadData()
+
+        sortButton.setImage(UIImage(named: SortingType(rawValue: lastSortingType.rawValue)!.rawValue), for: .normal)
     }
     
     func onUpdateRow(_ tag: String) {
@@ -131,6 +192,7 @@ class ChainSelectVC: BaseVC {
             DispatchQueue.main.async {
                 self.selectBtn.isEnabled = true
                 self.loadingView.isHidden = true
+                self.sortButton.isHidden = false
             }
         }
     }
