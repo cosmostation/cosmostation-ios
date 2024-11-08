@@ -26,7 +26,6 @@ class ChainNeutron_T: ChainNeutron {
         bechAccountPrefix = "neutron"
         validatorPrefix = "neutronvaloper"
         supportStaking = false
-        supportCw20 = false
         grpcHost = "grpc-office-neutron.cosmostation.io"
         lcdUrl = "https://rest-falcron.pion-1.ntrn.tech/"
         

@@ -76,7 +76,7 @@ class KavaEarnDepositAction: BaseVC {
         for i in 0..<feeInfos.count {
             feeSegments.insertSegment(withTitle: feeInfos[i].title, at: i, animated: false)
         }
-        selectedFeePosition = selectedChain.getFeeBasePosition()
+        selectedFeePosition = selectedChain.getBaseFeePosition()
         feeSegments.selectedSegmentIndex = selectedFeePosition
         txFee = selectedChain.getInitPayableFee()
         
@@ -216,7 +216,7 @@ class KavaEarnDepositAction: BaseVC {
     
     func onUpdateWithSimul(_ gasUsed: UInt64?) {
         if let toGas = gasUsed {
-            txFee.gasLimit = UInt64(Double(toGas) * selectedChain.gasMultiply())
+            txFee.gasLimit = UInt64(Double(toGas) * selectedChain.getSimulatedGasMultiply())
             if let gasRate = feeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                 let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
@@ -241,7 +241,7 @@ class KavaEarnDepositAction: BaseVC {
         addBtn.isEnabled = false
         loadingView.isHidden = false
         
-        if (selectedChain.isGasSimulable() == false) {
+        if (selectedChain.isSimulable() == false) {
             return onUpdateWithSimul(nil)
         }
         

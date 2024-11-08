@@ -30,8 +30,6 @@ class BaseChain {
     var bechAccountPrefix: String?
     var validatorPrefix: String?
     var bechOpAddress: String?
-    var supportCw20 = false
-    var supportCw721 = false
     var supportStaking = true
     var grpcHost = ""
     var grpcPort = 443
@@ -262,10 +260,10 @@ class BaseChain {
     func assetSymbol(_ denom: String) -> String {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.symbol ?? "UnKnown"
-        } else if supportCw20,
+        } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.symbol ?? "UnKnown"
-        } else if supportEvm,
+        } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.symbol ?? "UnKnown"
         }
@@ -275,10 +273,10 @@ class BaseChain {
     func assetImgUrl(_ denom: String) -> URL? {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.assetImg()
-        } else if supportCw20,
+        } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.assetImg()
-        } else if supportEvm,
+        } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.assetImg()
         }
@@ -288,10 +286,10 @@ class BaseChain {
     func assetDecimal(_ denom: String) -> Int16 {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.decimals ?? 6
-        } else if supportCw20,
+        } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.decimals ?? 6
-        } else if supportEvm,
+        } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.decimals ?? 6
         }
@@ -301,17 +299,17 @@ class BaseChain {
     func assetGeckoId(_ denom: String) -> String {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.coinGeckoId ?? ""
-        } else if supportCw20,
+        } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return cw20Token.coinGeckoId ?? ""
-        } else if supportEvm,
+        } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.coinGeckoId ?? ""
         }
         return ""
     }
     
-    func isTxFeePayable(_ txType: TX_TYPE? = nil) -> Bool {
+    func isTxFeePayable(_ txType: TxType? = nil) -> Bool {
         if let oktFetcher = (self as? ChainOktEVM)?.getOktfetcher() {
             let availableAmount = oktFetcher.oktBalanceAmount(stakeDenom!)
             return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
@@ -324,7 +322,7 @@ class BaseChain {
             if (getCosmosfetcher()?.cosmosBaseFees.count ?? 0 > 0) {
                 getCosmosfetcher()?.cosmosBaseFees.forEach({ basefee in
                     let availaAmount = getCosmosfetcher()?.balanceAmount(basefee.denom) ?? NSDecimalNumber.zero
-                    let minFeeAmount = basefee.getdAmount().multiplying(by: getFeeBaseGasAmount(), withBehavior: handler0Down)
+                    let minFeeAmount = basefee.getdAmount().multiplying(by: getInitGasLimit(), withBehavior: handler0Down)
                     if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
                         result = true
                         return
@@ -376,49 +374,77 @@ extension BaseChain {
         return getChainParam()["params"]["chainlist_params"]
     }
     
-    func getMaxProviderConsensusValidator() -> Int? {
-        return Int(getChainParam()["params"]["interchain_provider_params"]["max_provider_consensus_validators"].stringValue)
-    }
-    
-    func isGasSimulable() -> Bool {
-        return getChainListParam()["cosmos_fee_info"]["is_simulable"].bool ?? true
-    }
-    
     func isSendEnabled() -> Bool {
         return getChainListParam()["is_send_enabled"].bool ?? true
     }
     
-    func isEcosystem() -> Bool {
-        return getChainListParam()["is_support_moblie_dapp"].bool ?? false
+    func isStakeEnabled() -> Bool {
+        return getChainListParam()["is_stake_enabled"].bool ?? true
     }
     
     func isSupportMintscan() -> Bool {
         return getChainListParam()["is_support_mintscan"].bool ?? false
     }
     
-    func voteThreshold() -> NSDecimalNumber {
+    func isSupportMobileWallet() -> Bool {
+        return getChainListParam()["is_support_mobile_wallet"].bool ?? false
+    }
+    
+    func isSupportMobileDapp() -> Bool {
+        return getChainListParam()["is_support_moblie_dapp"].bool ?? false
+    }
+    
+    func isSupportErc20() -> Bool {
+        return (getChainListParam()["is_support_erc20"].bool ?? false && supportEvm)
+    }
+    
+    func isSupportCw20() -> Bool {
+        return getChainListParam()["is_support_cw20"].bool ?? false
+    }
+    
+    func isSupportCw721() -> Bool {
+        return getChainListParam()["is_support_cw721"].bool ?? false
+    }
+    
+    func votingThreshold() -> NSDecimalNumber {
         let threshold = getChainListParam()["voting_threshold"].uInt64Value
         return NSDecimalNumber(value: threshold)
     }
     
-    func gasMultiply() -> Double {
-        if let mutiply = getChainListParam()["cosmos_fee_info"]["simulated_gas_multiply"].double {
+    
+    func getCosmosFeeInfo() -> JSON {
+        return getChainListParam()["cosmos_fee_info"]
+    }
+    
+    func isSupportCosmosFeeMarket() -> Bool {
+        return getCosmosFeeInfo()["is_feemarket"].bool ?? false
+    }
+    
+    func isSimulable() -> Bool {
+        return getCosmosFeeInfo()["is_simulable"].bool ?? true
+    }
+    
+    func getSimulatedGasMultiply() -> Double {
+        if let mutiply = getCosmosFeeInfo()["simulated_gas_multiply"].double {
             return mutiply
         }
         return 1.3
     }
     
-    func supportFeeMarket() -> Bool {
-        return getChainListParam()["cosmos_fee_info"]["is_feemarket"].bool ?? false
+    func getBaseFeePosition() -> Int {
+        return getCosmosFeeInfo()["base"].intValue
     }
     
-    func getTimeoutPadding() -> UInt64 {
-        return getChainListParam()["tx_timeout_padding"].uInt64 ?? 30
+    func getInitGasLimit() -> NSDecimalNumber {
+        guard let limit = getCosmosFeeInfo()["init_gas_limit"].uInt64 else {
+            return NSDecimalNumber(string: BASE_GAS_AMOUNT)
+        }
+        return NSDecimalNumber(value: limit)
     }
     
     func getFeeInfos() -> [FeeInfo] {
         var result = [FeeInfo]()
-        getChainListParam()["cosmos_fee_info"]["rate"].arrayValue.forEach { rate in
+        getCosmosFeeInfo()["rate"].arrayValue.forEach { rate in
             result.append(FeeInfo.init(rate.stringValue))
         }
         if (result.count == 1) {
@@ -443,37 +469,15 @@ extension BaseChain {
     }
     
     func getBaseFeeInfo() -> FeeInfo {
-        return getFeeInfos()[getFeeBasePosition()]
-    }
-    
-    func getFeeBasePosition() -> Int {
-        return getChainListParam()["cosmos_fee_info"]["base"].intValue
-    }
-    
-    func getFeeBaseGasAmount() -> UInt64 {
-        guard let limit = getChainListParam()["cosmos_fee_info"]["init_gas_limit"].uInt64 else {
-            return UInt64(BASE_GAS_AMOUNT)!
-        }
-        return limit
-    }
-    
-    func getFeeBaseGasAmountS() -> String {
-        guard let limit = getChainListParam()["cosmos_fee_info"]["init_gas_limit"].string else {
-            return BASE_GAS_AMOUNT
-        }
-        return limit
-    }
-    
-    func getFeeBaseGasAmount() -> NSDecimalNumber {
-        return NSDecimalNumber(string: String(getFeeBaseGasAmount()))
+        return getFeeInfos()[getBaseFeePosition()]
     }
     
     //get chainlist suggest fees array
     func getDefaultFeeCoins() -> [Cosmos_Base_V1beta1_Coin] {
         var result = [Cosmos_Base_V1beta1_Coin]()
-        let gasAmount: NSDecimalNumber = getFeeBaseGasAmount()
+        let gasAmount: NSDecimalNumber = getInitGasLimit()
         if (getFeeInfos().count > 0) {
-            let feeDatas = getFeeInfos()[getFeeBasePosition()].FeeDatas
+            let feeDatas = getFeeInfos()[getBaseFeePosition()].FeeDatas
             feeDatas.forEach { feeData in
                 let amount = (feeData.gasRate)!.multiplying(by: gasAmount, withBehavior: handler0Up)
                 result.append(Cosmos_Base_V1beta1_Coin.with {  $0.denom = feeData.denom!; $0.amount = amount.stringValue })
@@ -495,7 +499,7 @@ extension BaseChain {
         }
         if (feeCoin != nil) {
             return Cosmos_Tx_V1beta1_Fee.with {
-                $0.gasLimit = getFeeBaseGasAmount()
+                $0.gasLimit = getInitGasLimit().uint64Value
                 $0.amount = [feeCoin!]
             }
         }
@@ -504,12 +508,12 @@ extension BaseChain {
     
     //get user selected fee
     func getUserSelectedFee(_ position: Int, _ denom: String) -> Cosmos_Tx_V1beta1_Fee {
-        let gasAmount: NSDecimalNumber = getFeeBaseGasAmount()
+        let gasAmount: NSDecimalNumber = getInitGasLimit()
         let feeDatas = getFeeInfos()[position].FeeDatas
         let rate = feeDatas.filter { $0.denom == denom }.first!.gasRate
         let coinAmount = rate!.multiplying(by: gasAmount, withBehavior: handler0Up)
         return Cosmos_Tx_V1beta1_Fee.with {
-            $0.gasLimit = getFeeBaseGasAmount()
+            $0.gasLimit = getInitGasLimit().uint64Value
             $0.amount = [Cosmos_Base_V1beta1_Coin.with {  $0.denom = denom; $0.amount = coinAmount.stringValue }]
         }
     }
@@ -519,7 +523,6 @@ extension BaseChain {
     func evmSupportEip1559() -> Bool {
         return getChainListParam()["evm_fee_info"]["is_eip1559"].bool ?? false
     }
-    
     
     func evmGasMultiply() -> BigUInt {
         if let mutiply = getChainListParam()["evm_fee_info"]["simulated_gas_multiply"].double {
@@ -535,6 +538,14 @@ extension BaseChain {
         return "50"
     }
     
+    
+    func getTimeoutPadding() -> UInt64 {
+        return getChainListParam()["tx_timeout_padding"].uInt64 ?? 30
+    }
+    
+    func getMaxProviderConsensusValidator() -> Int? {
+        return Int(getChainParam()["params"]["interchain_provider_params"]["max_provider_consensus_validators"].stringValue)
+    }
 }
 
 //for utils
@@ -584,7 +595,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainCosmos())
     result.append(ChainAgoric564())
     result.append(ChainAgoric118())
-    result.append(ChainAioz())                          //EVM
+    result.append(ChainAiozEVM())                       //EVM
     result.append(ChainAkash())
     result.append(ChainAltheaEVM())                     //EVM
     result.append(ChainAlthea118())
@@ -595,7 +606,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAvalanche())                     //EVM
     result.append(ChainAxelar())
     result.append(ChainBand())
-    result.append(ChainBaseEVM())                       //EVM
+    result.append(ChainBase())                       //EVM
     result.append(ChainBinanceSmart())                  //EVM
     result.append(ChainBitcana())
     result.append(ChainBitCoin44())                     //MAJOR
@@ -660,7 +671,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainPassage())
     result.append(ChainPersistence118())
     result.append(ChainPersistence750())
-    result.append(ChainPlanq())                         //EVM
+    result.append(ChainPlanqEVM())                      //EVM
     result.append(ChainPolygon())                       //EVM
     result.append(ChainProvenance())
     result.append(ChainPryzm())
@@ -681,7 +692,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainStargaze())
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
-    result.append(ChainTenet())                         //EVM
+    result.append(ChainTenetEVM())                      //EVM
     result.append(ChainTeritori())
     result.append(ChainTerra())
     result.append(ChainUmee())
@@ -757,7 +768,7 @@ public enum TxStyle: Int {
     case BTC_STYLE = 3
 }
 
-public enum TX_TYPE: Int {
+public enum TxType: Int {
     case SUI_SEND_COIN = 0
     case SUI_SEND_NFT = 1
     case SUI_STAKE = 2

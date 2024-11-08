@@ -497,8 +497,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     
     func onUpdateWithSimul(_ gasUsed: UInt64?, _ msg: JSON) {
         if let toGas = gasUsed {
-            txFee.gasLimit = UInt64(Double(toGas) * inputChain.gasMultiply())
-            let baseFeePosition = inputChain.getFeeBasePosition()
+            txFee.gasLimit = UInt64(Double(toGas) * inputChain.getSimulatedGasMultiply())
+            let baseFeePosition = inputChain.getBaseFeePosition()
             if let gasRate = inputChain.getFeeInfos()[baseFeePosition].FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                 let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)

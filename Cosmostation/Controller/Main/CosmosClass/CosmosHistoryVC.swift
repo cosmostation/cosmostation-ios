@@ -65,17 +65,15 @@ class CosmosHistoryVC: BaseVC {
         hasMore = false
         
         if (selectedChain.name == "OKT") {
-            Task {
-                try await onFetchOktHistory(selectedChain.evmAddress!, histoyID)
-            }
+            onFetchOktHistory(selectedChain.evmAddress!, histoyID)
         } else {
+            if (!selectedChain.isSupportMintscan()) { return }
             onFetchMsHistory(selectedChain.bechAddress, histoyID)
         }
     }
     
     func onFetchMsHistory(_ address: String?, _ id: String) {
         let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, address!)
-        print("url ", url)
         AF.request(url, method: .get, parameters: ["limit":String(BATCH_CNT), "search_after":id]).responseDecodable(of: [MintscanHistory].self, queue: .main, decoder: JSONDecoder()) { response in
             switch response.result {
             case .success(let value):
@@ -117,50 +115,49 @@ class CosmosHistoryVC: BaseVC {
         }
     }
     
-    func onFetchOktHistory(_ evmAddress: String, _ id: String) async throws {
+    func onFetchOktHistory(_ evmAddress: String, _ id: String) {
         let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, evmAddress)
-        do {
-            
-            let histortJson = try await AF.request(url,
-                                                   method: .get,
-                                                   parameters: ["search_after": histoyID,
-                                                                "limit" : "\(EVM_BATCH_CNT)"]).serializingDecodable(JSON.self).value
+        AF.request(url, method: .get, parameters: ["search_after": histoyID, "limit" : "\(EVM_BATCH_CNT)"]).responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
             if (id == "") { self.evmHistoryGroup.removeAll() }
-            if (histortJson["txs"].count > 0) {
-                histortJson["txs"].arrayValue.forEach { history in
-                    let headerDate  = WDP.dpDate(history["txTime"].intValue)
-                    if let index = self.evmHistoryGroup.firstIndex(where: { $0.date == headerDate }) {
-                        self.evmHistoryGroup[index].values.append(history)
-                    } else {
-                        self.evmHistoryGroup.append(EvmHistoryGroup.init(headerDate, [history]))
+            switch response.result {
+            case .success(let value):
+                if (value["txs"].count > 0) {
+                    value["txs"].arrayValue.forEach { history in
+                        let headerDate  = WDP.dpDate(history["txTime"].intValue)
+                        if let index = self.evmHistoryGroup.firstIndex(where: { $0.date == headerDate }) {
+                            self.evmHistoryGroup[index].values.append(history)
+                        } else {
+                            self.evmHistoryGroup.append(EvmHistoryGroup.init(headerDate, [history]))
+                        }
                     }
+                    self.histoyID = String(value["search_after"].intValue - 1)
+                    self.hasMore = value["txs"].count >= self.EVM_BATCH_CNT
+                    
+                } else {
+                    self.hasMore = false
+                    self.histoyID = ""
                 }
-                self.histoyID = String(histortJson["search_after"].intValue - 1)
-                self.hasMore = histortJson["txs"].count >= self.EVM_BATCH_CNT
+                self.loadingView.isHidden = true
+                if (self.evmHistoryGroup.count > 0) {
+                    self.tableView.reloadData()
+                    self.tableView.isHidden = false
+                    self.emptyDataView.isHidden = true
+                } else {
+                    self.tableView.isHidden = true
+                    self.emptyDataView.isHidden = false
+                }
                 
-            } else {
-                self.hasMore = false
-                self.histoyID = ""
-                
-            }
-            
-            self.loadingView.isHidden = true
-            if (self.evmHistoryGroup.count > 0) {
-                self.tableView.reloadData()
-                self.tableView.isHidden = false
-                self.emptyDataView.isHidden = true
-            } else {
+            case .failure:
+                print("onFetchOktHistory error")
+                self.loadingView.isHidden = true
                 self.tableView.isHidden = true
                 self.emptyDataView.isHidden = false
             }
-        } catch {
-            print("onFetchOktHistory error", error)
-        }
             self.refresher.endRefreshing()
         }
     }
-
-
+    
+}
 
 
 extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
@@ -228,9 +225,7 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
                 && indexPath.row == self.evmHistoryGroup.last!.values.count - 1
                 && hasMore == true) {
                 hasMore = false
-                Task {
-                    try await onFetchOktHistory(selectedChain.evmAddress!, histoyID)
-                }
+                onFetchOktHistory(selectedChain.evmAddress!, histoyID)
             }
 
         } else {
@@ -240,7 +235,6 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
                 hasMore = false
                 onFetchMsHistory(selectedChain.bechAddress, histoyID)
             }
-
         }
     }
     

@@ -100,7 +100,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
             baseAccount.getDpChains().filter { $0.isTestnet == false && $0.isDefault == true && $0.tag != "finschia438" }.forEach { chain in
                 if let cosmosFetcher = chain.getCosmosfetcher() {
                     let delegated = cosmosFetcher.delegationAmountSum()
-                    let voteThreshold = chain.voteThreshold()
+                    let voteThreshold = chain.votingThreshold()
                     let txFee = chain.getInitPayableFee()
                     if (delegated.compare(voteThreshold).rawValue > 0 && txFee != nil) {
                         stakedChains.append(chain)
@@ -186,7 +186,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
             onSectionReload(section)
         
             if let toGas = try await simulateVoteTx(chain, tempToVotes) {
-                txFee.gasLimit = UInt64(Double(toGas) * chain.gasMultiply())
+                txFee.gasLimit = UInt64(Double(toGas) * chain.getSimulatedGasMultiply())
                 if let gasRate = chain.getBaseFeeInfo().FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                     let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)

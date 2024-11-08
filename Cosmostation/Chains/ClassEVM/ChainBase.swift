@@ -1,5 +1,5 @@
 //
-//  ChainBaseEVM.swift
+//  ChainBase.swift
 //  Cosmostation
 //
 //  Created by yongjoo jung on 2024/03/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainBaseEVM: BaseChain  {
+class ChainBase: BaseChain  {
     
     override init() {
         super.init()

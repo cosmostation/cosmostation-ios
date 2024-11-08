@@ -102,7 +102,10 @@ class EvmFetcher {
 extension EvmFetcher {
     
     func fetchErc20Info() async throws -> [MintscanToken]?  {
-        return try await AF.request(BaseNetWork.msErc20InfoUrl(chain.apiName), method: .get).serializingDecodable([MintscanToken].self).value
+        if chain.isSupportErc20() {
+            return try await AF.request(BaseNetWork.msErc20InfoUrl(chain.apiName), method: .get).serializingDecodable([MintscanToken].self).value
+        }
+        return []
     }
     
     func fetchEvmBalance(_ address: String) async throws -> JSON? {

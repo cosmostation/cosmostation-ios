@@ -280,7 +280,7 @@ class CommonTransfer: BaseVC {
                 feeSegments.selectedSegmentIndex = selectedFeePosition
                 
                 let baseFee = cosmosFetcher.cosmosBaseFees[0]
-                let gasAmount: NSDecimalNumber = fromChain.getFeeBaseGasAmount()
+                let gasAmount: NSDecimalNumber = fromChain.getInitGasLimit()
                 let feeDenom = baseFee.denom
                 let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
                 cosmosTxFee.gasLimit = gasAmount.uint64Value
@@ -292,7 +292,7 @@ class CommonTransfer: BaseVC {
                 for i in 0..<cosmosFeeInfos.count {
                     feeSegments.insertSegment(withTitle: cosmosFeeInfos[i].title, at: i, animated: false)
                 }
-                selectedFeePosition = fromChain.getFeeBasePosition()
+                selectedFeePosition = fromChain.getBaseFeePosition()
                 feeSegments.selectedSegmentIndex = selectedFeePosition
                 cosmosTxFee = fromChain.getInitPayableFee()!
             }
@@ -678,7 +678,7 @@ class CommonTransfer: BaseVC {
             sendBtn.isHidden = false
 
         } else if (txStyle == .COSMOS_STYLE) {
-            if (fromChain.isGasSimulable() == false) {
+            if (fromChain.isSimulable() == false) {
                 onUpdateFeeView()
                 sendBtn.isEnabled = true
                 return
@@ -689,7 +689,7 @@ class CommonTransfer: BaseVC {
                 errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
                 return
             }
-            cosmosTxFee.gasLimit = UInt64(Double(toGas) * fromChain.gasMultiply())
+            cosmosTxFee.gasLimit = UInt64(Double(toGas) * fromChain.getSimulatedGasMultiply())
             if (cosmosFetcher.cosmosBaseFees.count > 0) {
                 if let baseFee = cosmosFetcher.cosmosBaseFees.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
@@ -733,7 +733,7 @@ class CommonTransfer: BaseVC {
 
         } else if (txStyle == .COSMOS_STYLE) {
             // some chain not support simulate (assetmantle)  24.2.21
-            if (fromChain.isGasSimulable() == false) {
+            if (fromChain.isSimulable() == false) {
                 if (fromChain.chainIdCosmos != toChain.chainIdCosmos) {
                     ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
                 }

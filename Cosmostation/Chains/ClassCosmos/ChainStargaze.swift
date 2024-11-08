@@ -24,7 +24,6 @@ class ChainStargaze: BaseChain {
         stakeDenom = "ustars"
         bechAccountPrefix = "stars"
         validatorPrefix = "starsvaloper"
-        supportCw721 = true
         grpcHost = "grpc-stargaze.cosmostation.io"
         lcdUrl = "https://lcd-stargaze.cosmostation.io/"
     }

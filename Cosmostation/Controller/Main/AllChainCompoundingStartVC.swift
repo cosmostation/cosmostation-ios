@@ -118,7 +118,7 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
     func onSimul() {
         for i in 0..<compoundableRewards.count {
             Task {
-                if (compoundableRewards[i].cosmosChain.isGasSimulable() == false) {
+                if (compoundableRewards[i].cosmosChain.isSimulable() == false) {
                     compoundableRewards[i].txFee = compoundableRewards[i].cosmosChain.getInitPayableFee()
                     
                 } else {
@@ -126,7 +126,7 @@ class AllChainCompoundingStartVC: BaseVC, PinDelegate {
                     let rewards = compoundableRewards[i].rewards
                     var txFee = chain.getInitPayableFee()!
                     if let toGas = try await simulateCompoundingTx(chain, rewards) {
-                        txFee.gasLimit = UInt64(Double(toGas) * chain.gasMultiply())
+                        txFee.gasLimit = UInt64(Double(toGas) * chain.getSimulatedGasMultiply())
                         if let gasRate = chain.getBaseFeeInfo().FeeDatas.filter({ $0.denom == txFee.amount[0].denom }).first {
                             let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                             let feeCoinAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)

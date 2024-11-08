@@ -179,7 +179,7 @@ class NftTransfer: BaseVC {
                 feeSegments.selectedSegmentIndex = selectedFeePosition
                 
                 let baseFee = fromCosmosFetcher.cosmosBaseFees[0]
-                let gasAmount: NSDecimalNumber = fromChain.getFeeBaseGasAmount()
+                let gasAmount: NSDecimalNumber = fromChain.getInitGasLimit()
                 let feeDenom = baseFee.denom
                 let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
                 cosmosTxFee.gasLimit = gasAmount.uint64Value
@@ -191,7 +191,7 @@ class NftTransfer: BaseVC {
                 for i in 0..<cosmosFeeInfos.count {
                     feeSegments.insertSegment(withTitle: cosmosFeeInfos[i].title, at: i, animated: false)
                 }
-                selectedFeePosition = fromChain.getFeeBasePosition()
+                selectedFeePosition = fromChain.getBaseFeePosition()
                 feeSegments.selectedSegmentIndex = selectedFeePosition
                 cosmosTxFee = fromChain.getInitPayableFee()!
             }
@@ -328,7 +328,7 @@ class NftTransfer: BaseVC {
             suiFeeBudget = NSDecimalNumber.init(value: toGas)
             
         } else if (txStyle == .COSMOS_STYLE) {
-            if (fromChain.isGasSimulable() == false) {
+            if (fromChain.isSimulable() == false) {
                 onUpdateFeeView()
                 sendBtn.isEnabled = true
                 return
@@ -339,7 +339,7 @@ class NftTransfer: BaseVC {
                 errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
                 return
             }
-            cosmosTxFee.gasLimit = UInt64(Double(toGas) * fromChain.gasMultiply())
+            cosmosTxFee.gasLimit = UInt64(Double(toGas) * fromChain.getSimulatedGasMultiply())
             if (fromCosmosFetcher.cosmosBaseFees.count > 0) {
                 if let baseFee = fromCosmosFetcher.cosmosBaseFees.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: cosmosTxFee.gasLimit)
@@ -376,7 +376,7 @@ class NftTransfer: BaseVC {
             suiNftSendGasCheck()
             
         } else if (txStyle == .COSMOS_STYLE) {
-            if (fromChain.isGasSimulable() == false) {
+            if (fromChain.isSimulable() == false) {
                 return onUpdateWithSimul(nil)
             }
             cw721SendSimul()
