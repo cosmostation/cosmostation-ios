@@ -62,9 +62,7 @@ class EvmHistoryVC: BaseVC {
         histoyID = ""
         hasMore = false
 
-        Task {
-            try await onFetchHistory(selectedChain.evmAddress!, histoyID)
-        }
+        evmHistoryGroup(selectedChain.evmAddress!, histoyID)
     }
 
     
@@ -73,48 +71,47 @@ class EvmHistoryVC: BaseVC {
         self.onShowSafariWeb(url)
     }
     
-    
-    func onFetchHistory(_ evmAddress: String, _ id: String) async throws {
+    func evmHistoryGroup(_ evmAddress: String, _ id: String) {
         let url = BaseNetWork.getAccountHistoryUrl(selectedChain!, evmAddress)
-        do {
-            let histortJson = try await AF.request(url, 
-                                                   method: .get,
-                                                   parameters: ["search_after": histoyID,
-                                                                "limit" : "\(BATCH_CNT)"]).serializingDecodable(JSON.self).value
+        AF.request(url, method: .get, parameters: ["search_after": histoyID, "limit" : "\(BATCH_CNT)"]).responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
             if (id == "") { self.historyGroup.removeAll() }
-            if (histortJson["txs"].count > 0) {
-                histortJson["txs"].arrayValue.forEach { history in
-                    let headerDate  = WDP.dpDate(history["txTime"].intValue)
-                    if let index = self.historyGroup.firstIndex(where: { $0.date == headerDate }) {
-                        self.historyGroup[index].values.append(history)
-                    } else {
-                        self.historyGroup.append(EvmHistoryGroup.init(headerDate, [history]))
+            switch response.result {
+            case .success(let value):
+                if (value["txs"].count > 0) {
+                    value["txs"].arrayValue.forEach { history in
+                        let headerDate  = WDP.dpDate(history["txTime"].intValue)
+                        if let index = self.historyGroup.firstIndex(where: { $0.date == headerDate }) {
+                            self.historyGroup[index].values.append(history)
+                        } else {
+                            self.historyGroup.append(EvmHistoryGroup.init(headerDate, [history]))
+                        }
                     }
+                    self.histoyID = String(value["search_after"].intValue - 1)
+                    self.hasMore = value["txs"].count >= self.BATCH_CNT
+                    
+                } else {
+                    self.hasMore = false
+                    self.histoyID = ""
                 }
-                self.histoyID = String(histortJson["search_after"].intValue - 1)
-                self.hasMore = histortJson["txs"].count >= self.BATCH_CNT
+                self.loadingView.isHidden = true
+                if (self.historyGroup.count > 0) {
+                    self.tableView.reloadData()
+                    self.tableView.isHidden = false
+                    self.emptyDataView.isHidden = true
+                } else {
+                    self.tableView.isHidden = true
+                    self.emptyDataView.isHidden = false
+                }
                 
-            } else {
-                self.hasMore = false
-                self.histoyID = ""
-            }
-            
-            self.loadingView.isHidden = true
-            if (self.historyGroup.count > 0) {
-                self.tableView.reloadData()
-                self.tableView.isHidden = false
-                self.emptyDataView.isHidden = true
-            } else {
+            case .failure:
+                print("onFetchEVMHistory error")
+                self.loadingView.isHidden = true
                 self.tableView.isHidden = true
                 self.emptyDataView.isHidden = false
             }
-        } catch {
-            print("onFetchEVMHistory error", error)
-
+            self.refresher.endRefreshing()
         }
-        self.refresher.endRefreshing()
     }
-
 }
 
 
@@ -156,9 +153,7 @@ extension EvmHistoryVC: UITableViewDelegate, UITableViewDataSource {
             && indexPath.row == self.historyGroup.last!.values.count - 1
             && hasMore == true) {
             hasMore = false
-            Task {
-                try await onFetchHistory(selectedChain.evmAddress!, histoyID)
-            }
+            evmHistoryGroup(selectedChain.evmAddress!, histoyID)
         }
     }
 

@@ -42,8 +42,6 @@ class PortfolioVC: BaseVC {
     
     var lastSortingType: SortingType = .value
     
-    var fetchDoneChainCnt = 0
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -139,11 +137,9 @@ class PortfolioVC: BaseVC {
         let tag = notification.object as! String
         Task {
             onUpdateRow(tag)
-            fetchDoneChainCnt += 1
             
-            if fetchDoneChainCnt == searchMainnets.count + searchTestnets.count {
+            if baseAccount.getDpChains().filter({ $0.fetchState == .Busy }).count == 0 {
                 self.navigationItem.rightBarButtonItems?.last?.isEnabled = true
-                fetchDoneChainCnt = 0
             }
         }
     }
@@ -210,12 +206,8 @@ class PortfolioVC: BaseVC {
         chainSelectVC.onChainSelected = {
             self.onChainSelected()
         }
-        chainSelectVC.presentationController?.delegate = self
         chainSelectVC.chainSortingDelegate = self
         self.present(chainSelectVC, animated: true)
-        
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchData"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("FetchPrice"), object: nil)
     }
     
     func chainSortReloadView() {
@@ -631,13 +623,6 @@ extension PortfolioVC: ChainSortingTypeDelegate {
         
         UserDefaults.standard.setValue(lastSortingType.rawValue, forKey: KEY_CHAIN_SORT)
         chainSortReloadView()
-    }
-}
-
-extension PortfolioVC: UIAdaptivePresentationControllerDelegate {
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
     }
 }
 
