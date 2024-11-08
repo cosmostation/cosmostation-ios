@@ -30,11 +30,15 @@ public struct MintscanProposal {
         let id = json?["id"].uInt64Value
         self.id = id == 0 ? json?["proposal_id"].uInt64Value : id
         let title = json?["title"].stringValue
-        self.title = title == "" ? json?["messages"].arrayValue.first?["content"]["title"].string
-                                    ?? json?["messages"].arrayValue.first?["@type"].string?.components(separatedBy: ".").last
-                                    ?? json?["content"]["title"].string
-                                    ?? json?["content"]["@type"].string?.components(separatedBy: ".").last
-                                 : title
+        self.title = title == "" ? json?["messages"].arrayValue.first?["content"]["title"].string ?? json?["content"]["title"].string ?? "" : title
+        if self.title == "" {
+            if let range = json?["metadata"].stringValue.range(of: #"(?<="title":")[^"]*"#, options: .regularExpression) {
+                self.title = String((json?["metadata"].stringValue[range]) ?? "")
+            } else {
+                self.title = json?["messages"].arrayValue.first?["@type"].string?.components(separatedBy: ".").last ?? json?["content"]["@type"].string?.components(separatedBy: ".").last ?? ""
+            }
+        }
+        
         let description = json?["description"].string ?? json?["summary"].stringValue
         self.description = description == "" ? json?["messages"].arrayValue.first?["content"]["description"].string ?? json?["content"]["description"].string : description
         self.proposal_type = json?["proposal_type"].string
@@ -59,8 +63,15 @@ public struct MintscanProposal {
     
     init(_ data: Cosmos_Gov_V1_Proposal?) {
         self.id = data?.id
-        let title = data?.title ?? ""
-        self.title = title == "" ? data?.messages.first?.typeURL.components(separatedBy: ".").last : title
+        self.title = data?.title ?? ""
+        if self.title == "" {
+            if let range = data?.metadata.range(of: #"(?<="title":")[^"]*"#, options: .regularExpression) {
+                self.title = String((data?.metadata[range]) ?? "")
+            } else {
+                self.title = data?.messages.first?.typeURL.components(separatedBy: ".").last
+            }
+        }
+
         self.description = data?.summary
         
         switch data?.status {
