@@ -269,7 +269,7 @@ extension OnChainProposalsVC {
                     return result.pagination.nextKey.base64EncodedString()
                     
                 } catch {
-                    print("Error: ", error)
+                    print("Proposals Fetch Error: ", error.localizedDescription)
                 }
             }
                 
@@ -277,26 +277,30 @@ extension OnChainProposalsVC {
             
         } else {    //case LCD
             
+            var url = ""
+            
             do {
-                var url = ""
-                
                 if let hasPaginationKey {
                     url = cosmosFetcher.getLcd() + "cosmos/gov/v1/proposals?&pagination.key=\(hasPaginationKey)&pagination.limit=500&pagination.reverse=true"
                 } else {
                     url = cosmosFetcher.getLcd() + "cosmos/gov/v1/proposals?pagination.limit=200&pagination.reverse=true"
                 }
                 
-                let request = AF.request(url, method: .get).serializingDecodable(JSON.self)
-                let result = try await request.value
-                let statusCode = await request.response.response!.statusCode
+                let result = try await AF.request(url, method: .get).validate(statusCode: 200...299).serializingDecodable(JSON.self).value
+                result["proposals"].arrayValue.forEach { proposal in
+                    self.proposals.append(MintscanProposal(proposal))
+                }
                 
-                if !(200...299).contains(statusCode) {  // v1 Fail -> v1beta1
-                    if let hasPaginationKey {
-                        url = cosmosFetcher.getLcd() + "cosmos/gov/v1beta1/proposals?&pagination.key=\(hasPaginationKey)&pagination.limit=500&pagination.reverse=true"
-                    } else {
-                        url = cosmosFetcher.getLcd() + "cosmos/gov/v1beta1/proposals?pagination.limit=200&pagination.reverse=true"
-                    }
-                    
+                return result["pagination"]["next_key"].stringValue
+                
+            } catch {
+                if let hasPaginationKey {
+                    url = cosmosFetcher.getLcd() + "cosmos/gov/v1beta1/proposals?&pagination.key=\(hasPaginationKey)&pagination.limit=500&pagination.reverse=true"
+                } else {
+                    url = cosmosFetcher.getLcd() + "cosmos/gov/v1beta1/proposals?pagination.limit=200&pagination.reverse=true"
+                }
+                
+                do {
                     let result = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
                     result["proposals"].arrayValue.forEach { proposal in
                         self.proposals.append(MintscanProposal(proposal))
@@ -304,16 +308,9 @@ extension OnChainProposalsVC {
                     
                     return result["pagination"]["next_key"].stringValue
                     
-                } else {
-                    result["proposals"].arrayValue.forEach { proposal in
-                        self.proposals.append(MintscanProposal(proposal))
-                    }
-                    
-                    return result["pagination"]["next_key"].stringValue
+                } catch {
+                    print("Proposals Fetch Error: ", error.localizedDescription)
                 }
-                
-            } catch {
-                print("Error: ", error)
             }
             
             return ""
@@ -329,7 +326,7 @@ extension OnChainProposalsVC {
             }
             
         } catch {
-            print("Error: ", error)
+            print("Proposals Fetch Error: ", error.localizedDescription)
         }
     }
     
