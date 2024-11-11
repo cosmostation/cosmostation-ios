@@ -121,7 +121,7 @@ public class WUtils {
                 }
                 if (asset.chain == toChain.apiName &&
                     asset.beforeChain(toChain.apiName) == fromChain.apiName &&
-                    asset.ibc_info?.counterparty?.denom?.lowercased() == denom.lowercased()) {
+                    asset.ibc_info?.counterparty?.getDenom?.lowercased() == denom.lowercased()) {
                     guard let channel = asset.ibc_info?.counterparty?.channel, let port = asset.ibc_info?.counterparty?.port else { return }
                     result = MintscanPath.init(channel, port)
                     return
@@ -130,7 +130,7 @@ public class WUtils {
             } else if (msToken != nil) {
                 if (asset.chain == toChain.apiName &&
                     asset.beforeChain(toChain.apiName) == fromChain.apiName &&
-                    asset.ibc_info?.counterparty?.denom?.lowercased() == msToken?.contract!.lowercased()) {
+                    asset.ibc_info?.counterparty?.getDenom?.lowercased() == msToken?.contract!.lowercased()) {
                     guard let channel = asset.ibc_info?.counterparty?.channel, let port = asset.ibc_info?.counterparty?.port else { return }
                     result = MintscanPath.init(channel, port)
                     return
@@ -249,6 +249,10 @@ extension String {
         return data
     }
     
+    func removingPrefix(_ prefix: String) -> String {
+        guard self.hasPrefix(prefix) else { return self }
+        return String(self.dropFirst(prefix.count))
+    }
 }
 
 extension UIColor {
