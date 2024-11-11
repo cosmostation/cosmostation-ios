@@ -1637,6 +1637,10 @@
 		792613CF2CD4B82800FAF47D /* initia_move_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613992CD4B82800FAF47D /* initia_move_v1_query.pb.swift */; };
 		792613D02CD4B82800FAF47D /* initia_distribution_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926139A2CD4B82800FAF47D /* initia_distribution_v1_query.pb.swift */; };
 		792613D22CD8679400FAF47D /* InitiaFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613D12CD8679400FAF47D /* InitiaFetcher.swift */; };
+		792613D52CDB362300FAF47D /* OnChainProposalsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613D32CDB362300FAF47D /* OnChainProposalsVC.swift */; };
+		792613D62CDB362300FAF47D /* OnChainProposalsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792613D42CDB362300FAF47D /* OnChainProposalsVC.xib */; };
+		792613DD2CDB5A5300FAF47D /* OnChainProposalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613DB2CDB5A5300FAF47D /* OnChainProposalCell.swift */; };
+		792613DE2CDB5A5300FAF47D /* OnChainProposalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792613DC2CDB5A5300FAF47D /* OnChainProposalCell.xib */; };
 		792B9CBD2C747CB3001440DB /* DappSuiSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B9CBB2C747CB2001440DB /* DappSuiSignRequestSheet.swift */; };
 		792B9CBE2C747CB3001440DB /* DappSuiSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792B9CBC2C747CB2001440DB /* DappSuiSignRequestSheet.xib */; };
 		792D2B052C57767E0085007A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 792D2B042C57767E0085007A /* SDWebImage */; };
@@ -3020,6 +3024,10 @@
 		792613992CD4B82800FAF47D /* initia_move_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = initia_move_v1_query.pb.swift; sourceTree = "<group>"; };
 		7926139A2CD4B82800FAF47D /* initia_distribution_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = initia_distribution_v1_query.pb.swift; sourceTree = "<group>"; };
 		792613D12CD8679400FAF47D /* InitiaFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiaFetcher.swift; sourceTree = "<group>"; };
+		792613D32CDB362300FAF47D /* OnChainProposalsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChainProposalsVC.swift; sourceTree = "<group>"; };
+		792613D42CDB362300FAF47D /* OnChainProposalsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnChainProposalsVC.xib; sourceTree = "<group>"; };
+		792613DB2CDB5A5300FAF47D /* OnChainProposalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChainProposalCell.swift; sourceTree = "<group>"; };
+		792613DC2CDB5A5300FAF47D /* OnChainProposalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnChainProposalCell.xib; sourceTree = "<group>"; };
 		792B9CBB2C747CB2001440DB /* DappSuiSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappSuiSignRequestSheet.swift; sourceTree = "<group>"; };
 		792B9CBC2C747CB2001440DB /* DappSuiSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappSuiSignRequestSheet.xib; sourceTree = "<group>"; };
 		79514DB32CB527AA008D7ED8 /* ChainMantra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantra.swift; sourceTree = "<group>"; };
@@ -3786,6 +3794,8 @@
 				E15F2CFD2ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib */,
 				04A68C2D2AC13A560041FA13 /* CosmosProposalsVC.swift */,
 				04A68C2E2AC13A560041FA13 /* CosmosProposalsVC.xib */,
+				792613D32CDB362300FAF47D /* OnChainProposalsVC.swift */,
+				792613D42CDB362300FAF47D /* OnChainProposalsVC.xib */,
 				04FF6B902B21E101009DCA89 /* CosmosRewardListPopupVC.swift */,
 				04FF6B912B21E101009DCA89 /* CosmosRewardListPopupVC.xib */,
 			);
@@ -4613,6 +4623,8 @@
 				E15F2D0F2ABF108500BAE105 /* StakeUnbondingCell.xib */,
 				04A68C332AC156AA0041FA13 /* CosmosProposalCell.swift */,
 				04A68C342AC156AA0041FA13 /* CosmosProposalCell.xib */,
+				792613DB2CDB5A5300FAF47D /* OnChainProposalCell.swift */,
+				792613DC2CDB5A5300FAF47D /* OnChainProposalCell.xib */,
 				0402B7F62ACC3F1400824B3F /* VoteCell.swift */,
 				0402B7F72ACC3F1400824B3F /* VoteCell.xib */,
 				E1B44B1D2ADA41CD0073C88A /* NeutronSingleVoteCell.swift */,
@@ -5462,6 +5474,8 @@
 				E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */,
 				04CD24492AD11D3400497EF5 /* LegacyTransfer.xib in Resources */,
 				E1F257D62BF77A7B008F4D21 /* EvmDelegate.xib in Resources */,
+				792613D62CDB362300FAF47D /* OnChainProposalsVC.xib in Resources */,
+				792613DE2CDB5A5300FAF47D /* OnChainProposalCell.xib in Resources */,
 				04FA74732AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
 				049714FE2C0EB73B008C45A0 /* PopupReceiveCell.xib in Resources */,
 				E10B1E002C215EF20039283B /* OkAddShare.xib in Resources */,
@@ -6806,6 +6820,7 @@
 				046EA8BD2AD04A2600A2FCE7 /* desmos_profiles_v3_genesis.pb.swift in Sources */,
 				79FCA3CC2C3F9E92001C17D0 /* artela_fee_v1_tx.grpc.swift in Sources */,
 				04D785542C328DB1009D1A94 /* feemarket_feemarket_v1_query.grpc.swift in Sources */,
+				792613DD2CDB5A5300FAF47D /* OnChainProposalCell.swift in Sources */,
 				792613CA2CD4B82800FAF47D /* initia_ibchooks_v1_query.pb.swift in Sources */,
 				E10B1DCE2C2159040039283B /* KavaMintAction.swift in Sources */,
 				047843E72AC991B300462F1C /* injective_insurance_v1beta1_query.pb.swift in Sources */,
@@ -6851,6 +6866,7 @@
 				E16200372AF139C60008F397 /* AddressBook.swift in Sources */,
 				0450324D2C1EEA9600235F6A /* ChainCantoEVM.swift in Sources */,
 				04CD246E2AD2E99A00497EF5 /* kava_bep3_v1beta1_genesis.pb.swift in Sources */,
+				792613D52CDB362300FAF47D /* OnChainProposalsVC.swift in Sources */,
 				792613B12CD4B82800FAF47D /* initia_mstaking_v1_tx.grpc.swift in Sources */,
 				04C8172C2BA98D75006B800A /* cosmos_consensus_v1_tx.pb.swift in Sources */,
 				04FEDB4C2B05D1340095B7B6 /* WalletDeriveVC.swift in Sources */,
