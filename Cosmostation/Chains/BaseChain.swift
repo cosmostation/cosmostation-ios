@@ -668,6 +668,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainOmniflix())
     result.append(ChainOnomy())
     result.append(ChainOptimism())                      //EVM
+    result.append(ChainOrai())
     result.append(ChainOsmosis())
     result.append(ChainPassage())
     result.append(ChainPersistence118())
