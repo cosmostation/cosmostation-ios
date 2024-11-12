@@ -688,6 +688,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainSelf())
     result.append(ChainSentinel())
     result.append(ChainShentu())
+    result.append(ChainShidoEVM())
     result.append(ChainSommelier())
     result.append(ChainSource())
     result.append(ChainStafi())

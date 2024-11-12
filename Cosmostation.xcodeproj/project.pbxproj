@@ -1663,6 +1663,7 @@
 		79C5187B2CC9E8C200BC0E85 /* ChainPlanqEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5187A2CC9E8C200BC0E85 /* ChainPlanqEVM.swift */; };
 		79D556052CE1FCB70023F1B9 /* ChainNolus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D556042CE1FCB70023F1B9 /* ChainNolus.swift */; };
 		79D556072CE2F0DD0023F1B9 /* ChainOrai.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D556062CE2F0DD0023F1B9 /* ChainOrai.swift */; };
+		79D556092CE2F2760023F1B9 /* ChainShidoEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D556082CE2F2760023F1B9 /* ChainShidoEVM.swift */; };
 		79EF66802C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79EF66812C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79F30ED92CAD36E400E42B2F /* ChainAtomone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */; };
@@ -3046,6 +3047,7 @@
 		79C5187A2CC9E8C200BC0E85 /* ChainPlanqEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPlanqEVM.swift; sourceTree = "<group>"; };
 		79D556042CE1FCB70023F1B9 /* ChainNolus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainNolus.swift; sourceTree = "<group>"; };
 		79D556062CE2F0DD0023F1B9 /* ChainOrai.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainOrai.swift; sourceTree = "<group>"; };
+		79D556082CE2F2760023F1B9 /* ChainShidoEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainShidoEVM.swift; sourceTree = "<group>"; };
 		79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgRandomButton.swift; sourceTree = "<group>"; };
 		79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAtomone.swift; sourceTree = "<group>"; };
 		79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedPaddingLabel.swift; sourceTree = "<group>"; };
@@ -3411,6 +3413,7 @@
 				045032362C1EEA9600235F6A /* ChainOptimism.swift */,
 				79C5187A2CC9E8C200BC0E85 /* ChainPlanqEVM.swift */,
 				045032332C1EEA9500235F6A /* ChainPolygon.swift */,
+				79D556082CE2F2760023F1B9 /* ChainShidoEVM.swift */,
 				0485A50C2CDA473400DE1661 /* ChainTenetEVM.swift */,
 				045032352C1EEA9600235F6A /* ChainXplaEVM.swift */,
 				04983BF72C4E745B004DD391 /* ChainZetaEVM.swift */,
@@ -6503,6 +6506,7 @@
 				04C8170C2BA98D75006B800A /* cosmos_base_v1beta1_coin.pb.swift in Sources */,
 				E122DC542A8A4712006D1E7B /* tendermint_types_evidence.pb.swift in Sources */,
 				04A68C2F2AC13A560041FA13 /* CosmosProposalsVC.swift in Sources */,
+				79D556092CE2F2760023F1B9 /* ChainShidoEVM.swift in Sources */,
 				04B7898B2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift in Sources */,
 				04C8168E2BA98D74006B800A /* cosmos_tx_config_v1_config.pb.swift in Sources */,
 				04FA74582A9D97A0001A2830 /* PincodeAlphabetVC.swift in Sources */,
