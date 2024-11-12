@@ -660,6 +660,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNibiru())
     //result.append(ChainNillion())
     result.append(ChainNoble())
+    result.append(ChainNolus())
     result.append(ChainNyx())
     result.append(ChainOktEVM())                        //EVM
     result.append(ChainOkt996Keccak())                  //LCD
