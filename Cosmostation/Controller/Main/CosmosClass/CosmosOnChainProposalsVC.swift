@@ -1,5 +1,5 @@
 //
-//  OnChainProposalsVC.swift
+//  CosmosOnChainProposalsVC.swift
 //  Cosmostation
 //
 //  Created by 차소민 on 11/6/24.
@@ -8,10 +8,9 @@
 
 import UIKit
 import Lottie
-import Alamofire
 import SwiftyJSON
 
-class OnChainProposalsVC: BaseVC {
+class CosmosOnChainProposalsVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var voteBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
@@ -52,12 +51,12 @@ class OnChainProposalsVC: BaseVC {
     }
     
     func onFetchVoteInfos() {
+        proposals.removeAll()
         votingPeriods.removeAll()
         etcPeriods.removeAll()
 
         Task {
-            try await fetchProposalsWithPaging()
-            
+            proposals = try await selectedChain.cosmosFetcher?.fetchOnChainProposals() ?? []
             proposals.forEach { proposal in
                 if proposal.isVotingPeriod() {
                     votingPeriods.append(proposal)
@@ -65,7 +64,6 @@ class OnChainProposalsVC: BaseVC {
                     etcPeriods.append(proposal)
                 }
             }
-                        
             onUpdateView()
         }
     }
@@ -130,7 +128,7 @@ class OnChainProposalsVC: BaseVC {
 }
 
 
-extension OnChainProposalsVC: UITableViewDelegate, UITableViewDataSource {
+extension CosmosOnChainProposalsVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -232,103 +230,4 @@ extension OnChainProposalsVC: UITableViewDelegate, UITableViewDataSource {
         mask.locations = [NSNumber(value: location), NSNumber(value: location)]
         return mask;
     }
-
 }
-
-
-extension OnChainProposalsVC {
-    func fetchProposals(_ chain: BaseChain, _ hasPaginationKey: String? = nil) async throws -> String {
-        guard let cosmosFetcher = chain.getCosmosfetcher() else { return "" }
-        
-        if (cosmosFetcher.getEndpointType() == .UseGRPC) {
-            var page = Cosmos_Base_Query_V1beta1_PageRequest()
-            if let hasPaginationKey {
-                page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.reverse = true; $0.limit = 200; $0.key = Data(base64Encoded: hasPaginationKey)! }
-            } else {
-                page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.reverse = true; $0.limit = 200 }
-            }
-            
-            let v1Req = Cosmos_Gov_V1_QueryProposalsRequest.with { $0.pagination = page }
-            let v1betaReq = Cosmos_Gov_V1beta1_QueryProposalsRequest.with { $0.pagination = page }
-                        
-            do {
-                let result = try await Cosmos_Gov_V1_QueryNIOClient(channel: cosmosFetcher.getClient()).proposals(v1Req, callOptions: cosmosFetcher.getCallOptions()).response.get()
-                result.proposals.forEach { proposal in
-                    self.proposals.append(MintscanProposal(proposal))
-                }
-                
-                return result.pagination.nextKey.base64EncodedString()
-                
-            } catch {
-                do {
-                    let result = try await Cosmos_Gov_V1beta1_QueryNIOClient(channel: cosmosFetcher.getClient()).proposals(v1betaReq, callOptions: cosmosFetcher.getCallOptions()).response.get()
-                    result.proposals.forEach { proposal in
-                        self.proposals.append(MintscanProposal(proposal))
-                    }
-
-                    return result.pagination.nextKey.base64EncodedString()
-                    
-                } catch {
-                    print("Proposals Fetch Error: ", error.localizedDescription)
-                }
-            }
-                
-            return ""
-            
-        } else {    //case LCD
-            
-            var url = ""
-            
-            do {
-                if let hasPaginationKey {
-                    url = cosmosFetcher.getLcd() + "cosmos/gov/v1/proposals?&pagination.key=\(hasPaginationKey)&pagination.limit=500&pagination.reverse=true"
-                } else {
-                    url = cosmosFetcher.getLcd() + "cosmos/gov/v1/proposals?pagination.limit=200&pagination.reverse=true"
-                }
-                
-                let result = try await AF.request(url, method: .get).validate(statusCode: 200...299).serializingDecodable(JSON.self).value
-                result["proposals"].arrayValue.forEach { proposal in
-                    self.proposals.append(MintscanProposal(proposal))
-                }
-                
-                return result["pagination"]["next_key"].stringValue
-                
-            } catch {
-                if let hasPaginationKey {
-                    url = cosmosFetcher.getLcd() + "cosmos/gov/v1beta1/proposals?&pagination.key=\(hasPaginationKey)&pagination.limit=500&pagination.reverse=true"
-                } else {
-                    url = cosmosFetcher.getLcd() + "cosmos/gov/v1beta1/proposals?pagination.limit=200&pagination.reverse=true"
-                }
-                
-                do {
-                    let result = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
-                    result["proposals"].arrayValue.forEach { proposal in
-                        self.proposals.append(MintscanProposal(proposal))
-                    }
-                    
-                    return result["pagination"]["next_key"].stringValue
-                    
-                } catch {
-                    print("Proposals Fetch Error: ", error.localizedDescription)
-                }
-            }
-            
-            return ""
-        }
-    }
-    
-    func fetchProposalsWithPaging() async throws {
-        do {
-            var paginationKey = try await fetchProposals(selectedChain)
-            
-            while paginationKey != "" {
-                paginationKey = try await fetchProposals(selectedChain, paginationKey)
-            }
-            
-        } catch {
-            print("Proposals Fetch Error: ", error.localizedDescription)
-        }
-    }
-    
-}
-

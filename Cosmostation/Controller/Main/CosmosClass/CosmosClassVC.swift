@@ -508,7 +508,7 @@ extension CosmosClassVC {
             self.navigationController?.pushViewController(proposalsVC, animated: true)
 
         } else {
-            let proposalsVC = OnChainProposalsVC(nibName: "OnChainProposalsVC", bundle: nil)
+            let proposalsVC = CosmosOnChainProposalsVC(nibName: "CosmosOnChainProposalsVC", bundle: nil)
             proposalsVC.selectedChain = selectedChain
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(proposalsVC, animated: true)

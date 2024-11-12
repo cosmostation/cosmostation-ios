@@ -1637,8 +1637,8 @@
 		792613CF2CD4B82800FAF47D /* initia_move_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613992CD4B82800FAF47D /* initia_move_v1_query.pb.swift */; };
 		792613D02CD4B82800FAF47D /* initia_distribution_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926139A2CD4B82800FAF47D /* initia_distribution_v1_query.pb.swift */; };
 		792613D22CD8679400FAF47D /* InitiaFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613D12CD8679400FAF47D /* InitiaFetcher.swift */; };
-		792613D52CDB362300FAF47D /* OnChainProposalsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613D32CDB362300FAF47D /* OnChainProposalsVC.swift */; };
-		792613D62CDB362300FAF47D /* OnChainProposalsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792613D42CDB362300FAF47D /* OnChainProposalsVC.xib */; };
+		792613D52CDB362300FAF47D /* CosmosOnChainProposalsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613D32CDB362300FAF47D /* CosmosOnChainProposalsVC.swift */; };
+		792613D62CDB362300FAF47D /* CosmosOnChainProposalsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792613D42CDB362300FAF47D /* CosmosOnChainProposalsVC.xib */; };
 		792613DD2CDB5A5300FAF47D /* OnChainProposalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613DB2CDB5A5300FAF47D /* OnChainProposalCell.swift */; };
 		792613DE2CDB5A5300FAF47D /* OnChainProposalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792613DC2CDB5A5300FAF47D /* OnChainProposalCell.xib */; };
 		792B9CBD2C747CB3001440DB /* DappSuiSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B9CBB2C747CB2001440DB /* DappSuiSignRequestSheet.swift */; };
@@ -3024,8 +3024,8 @@
 		792613992CD4B82800FAF47D /* initia_move_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = initia_move_v1_query.pb.swift; sourceTree = "<group>"; };
 		7926139A2CD4B82800FAF47D /* initia_distribution_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = initia_distribution_v1_query.pb.swift; sourceTree = "<group>"; };
 		792613D12CD8679400FAF47D /* InitiaFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiaFetcher.swift; sourceTree = "<group>"; };
-		792613D32CDB362300FAF47D /* OnChainProposalsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChainProposalsVC.swift; sourceTree = "<group>"; };
-		792613D42CDB362300FAF47D /* OnChainProposalsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnChainProposalsVC.xib; sourceTree = "<group>"; };
+		792613D32CDB362300FAF47D /* CosmosOnChainProposalsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosOnChainProposalsVC.swift; sourceTree = "<group>"; };
+		792613D42CDB362300FAF47D /* CosmosOnChainProposalsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosOnChainProposalsVC.xib; sourceTree = "<group>"; };
 		792613DB2CDB5A5300FAF47D /* OnChainProposalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChainProposalCell.swift; sourceTree = "<group>"; };
 		792613DC2CDB5A5300FAF47D /* OnChainProposalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnChainProposalCell.xib; sourceTree = "<group>"; };
 		792B9CBB2C747CB2001440DB /* DappSuiSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappSuiSignRequestSheet.swift; sourceTree = "<group>"; };
@@ -3794,8 +3794,8 @@
 				E15F2CFD2ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib */,
 				04A68C2D2AC13A560041FA13 /* CosmosProposalsVC.swift */,
 				04A68C2E2AC13A560041FA13 /* CosmosProposalsVC.xib */,
-				792613D32CDB362300FAF47D /* OnChainProposalsVC.swift */,
-				792613D42CDB362300FAF47D /* OnChainProposalsVC.xib */,
+				792613D32CDB362300FAF47D /* CosmosOnChainProposalsVC.swift */,
+				792613D42CDB362300FAF47D /* CosmosOnChainProposalsVC.xib */,
 				04FF6B902B21E101009DCA89 /* CosmosRewardListPopupVC.swift */,
 				04FF6B912B21E101009DCA89 /* CosmosRewardListPopupVC.xib */,
 			);
@@ -5474,7 +5474,7 @@
 				E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */,
 				04CD24492AD11D3400497EF5 /* LegacyTransfer.xib in Resources */,
 				E1F257D62BF77A7B008F4D21 /* EvmDelegate.xib in Resources */,
-				792613D62CDB362300FAF47D /* OnChainProposalsVC.xib in Resources */,
+				792613D62CDB362300FAF47D /* CosmosOnChainProposalsVC.xib in Resources */,
 				792613DE2CDB5A5300FAF47D /* OnChainProposalCell.xib in Resources */,
 				04FA74732AA04417001A2830 /* SwitchAccountCell.xib in Resources */,
 				049714FE2C0EB73B008C45A0 /* PopupReceiveCell.xib in Resources */,
@@ -6866,7 +6866,7 @@
 				E16200372AF139C60008F397 /* AddressBook.swift in Sources */,
 				0450324D2C1EEA9600235F6A /* ChainCantoEVM.swift in Sources */,
 				04CD246E2AD2E99A00497EF5 /* kava_bep3_v1beta1_genesis.pb.swift in Sources */,
-				792613D52CDB362300FAF47D /* OnChainProposalsVC.swift in Sources */,
+				792613D52CDB362300FAF47D /* CosmosOnChainProposalsVC.swift in Sources */,
 				792613B12CD4B82800FAF47D /* initia_mstaking_v1_tx.grpc.swift in Sources */,
 				04C8172C2BA98D75006B800A /* cosmos_consensus_v1_tx.pb.swift in Sources */,
 				04FEDB4C2B05D1340095B7B6 /* WalletDeriveVC.swift in Sources */,
