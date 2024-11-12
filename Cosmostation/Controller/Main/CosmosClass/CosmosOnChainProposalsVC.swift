@@ -1,5 +1,5 @@
 //
-//  OnChainProposalsVC.swift
+//  CosmosOnChainProposalsVC.swift
 //  Cosmostation
 //
 //  Created by 차소민 on 11/6/24.
@@ -11,7 +11,7 @@ import Lottie
 import Alamofire
 import SwiftyJSON
 
-class OnChainProposalsVC: BaseVC {
+class CosmosOnChainProposalsVC: BaseVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var voteBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
@@ -130,7 +130,7 @@ class OnChainProposalsVC: BaseVC {
 }
 
 
-extension OnChainProposalsVC: UITableViewDelegate, UITableViewDataSource {
+extension CosmosOnChainProposalsVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -236,7 +236,7 @@ extension OnChainProposalsVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-extension OnChainProposalsVC {
+extension CosmosOnChainProposalsVC {
     func fetchProposals(_ chain: BaseChain, _ hasPaginationKey: String? = nil) async throws -> String {
         guard let cosmosFetcher = chain.getCosmosfetcher() else { return "" }
         
