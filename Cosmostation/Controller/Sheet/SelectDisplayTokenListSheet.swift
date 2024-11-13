@@ -14,12 +14,16 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
     @IBOutlet weak var sheetTableView: UITableView!
     @IBOutlet weak var sheetSearchBar: UISearchBar!
     @IBOutlet weak var confirmBtn: BaseButton!
-    
+    @IBOutlet weak var segmentView: UIView!
+    @IBOutlet weak var segment: UISegmentedControl!
+
     var selectedChain: BaseChain!
     var allTokens = [MintscanToken]()
     var searchTokens = [MintscanToken]()
     var toDisplayTokens = [String]()
     var tokensListDelegate: SelectTokensListDelegate?
+    
+    private let tokenType = ["cw20", "erc20"]
     
     static var tokenWithAmount: [MintscanToken] = []
 
@@ -41,6 +45,7 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
         sheetTableView.sectionHeaderTopPadding = 0.0
         
         setTokensAmount()
+        setSegment()
         
     }
     
@@ -50,8 +55,16 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
     }
 
     @IBAction func onClickConfirm(_ sender: BaseButton) {
-        if selectedChain.isSupportCw20() {
+        if selectedChain.isSupportCw20() && selectedChain.isSupportErc20() {
+            let toDisplayCw20Tokens = toDisplayTokens.filter { allTokens.filter({ $0.type == "cw20" }).map({ $0.contract }).contains($0) }
+            let toDisplayErc20Tokens = toDisplayTokens.filter { allTokens.filter({ $0.type == "erc20" }).map({ $0.contract }).contains($0) }
+
+            BaseData.instance.setDisplayCw20s(baseAccount.id, selectedChain.tag, toDisplayCw20Tokens)
+            BaseData.instance.setDisplayErc20s(baseAccount.id, selectedChain.tag, toDisplayErc20Tokens)
+
+        } else if selectedChain.isSupportCw20() {
             BaseData.instance.setDisplayCw20s(baseAccount.id, selectedChain.tag, toDisplayTokens)
+            
         } else {
             BaseData.instance.setDisplayErc20s(baseAccount.id, selectedChain.tag, toDisplayTokens)
             
@@ -61,18 +74,43 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchTokens = searchText.isEmpty ? allTokens : allTokens.filter { token in
-            return token.symbol!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        if selectedChain.isSupportCw20() && selectedChain.isSupportErc20() {
+            searchTokens = searchText.isEmpty ? allTokens.filter { $0.type == tokenType[segment.selectedSegmentIndex] } : allTokens.filter({ $0.type == tokenType[segment.selectedSegmentIndex] }).filter { token in
+                return token.symbol!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+        } else {
+            searchTokens = searchText.isEmpty ? allTokens : allTokens.filter { token in
+                return token.symbol!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
         }
         sheetTableView.reloadData()
     }
     
     private func setTokensAmount() {
         for token in allTokens {
-            if let amount = token.amount {
+            if let _ = token.amount {
                 Self.tokenWithAmount.append(token)
             }
         }
+    }
+    
+    private func setSegment() {
+        if selectedChain.isSupportCw20() && selectedChain.isSupportErc20() {
+            segmentView.isHidden = false
+            segment.selectedSegmentIndex = 0
+            segment.addTarget(self, action: #selector(didChangeValue(_:)), for: .valueChanged)
+            didChangeValue(segment)
+            
+        } else {
+            segmentView.isHidden = true
+        }
+    }
+    
+    @objc func didChangeValue(_ segment: UISegmentedControl) {
+        searchTokens = allTokens.filter { $0.type == tokenType[segment.selectedSegmentIndex] }
+        
+        sheetTableView.reloadData()
+        sheetSearchBar.text = ""
     }
 }
 
