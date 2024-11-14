@@ -13,14 +13,14 @@ class ChainOrai: BaseChain  {
     override init() {
         super.init()
         
-        name = "Oraichain"
+        name = "Orai Chain"
         tag = "orai118"
         logo1 = "chainOrai"
         apiName = "orai-chain"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "orai"
         bechAccountPrefix = "orai"
         validatorPrefix = "oraivaloper"

@@ -600,12 +600,10 @@ extension CosmosFetcher {
             let v1betaReq = Cosmos_Gov_V1beta1_QueryProposalsRequest.init()
             if let result = try? await Cosmos_Gov_V1_QueryNIOClient(channel: getClient()).proposals(v1Req, callOptions: getCallOptions()).response.get() {
                 result.proposals.forEach { proposal in
-                    print("proposal A" , proposal)
                     resultProposals.append(MintscanProposal(proposal))
                 }
             } else if let result = try? await Cosmos_Gov_V1beta1_QueryNIOClient(channel: getClient()).proposals(v1betaReq, callOptions: getCallOptions()).response.get() {
                 result.proposals.forEach { proposal in
-                    print("proposal B" , proposal)
                     resultProposals.append(MintscanProposal(proposal))
                 }
             }
