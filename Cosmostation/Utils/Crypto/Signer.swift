@@ -23,6 +23,15 @@ class Signer {
         return [anyMsg]
     }
     
+    //Tx for Thor Send
+    static func genThorSendMsg(_ toSend: Types_MsgSend) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/types.MsgSend"
+            $0.value = try! toSend.serializedData()
+        }
+        return [anyMsg]
+    }
+    
     //Tx for Ibc Transfer
     static func genIbcSendMsg(_ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {

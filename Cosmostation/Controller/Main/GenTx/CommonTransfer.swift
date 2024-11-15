@@ -1128,12 +1128,22 @@ extension CommonTransfer {
             $0.denom = toSendDenom
             $0.amount = toAmount.stringValue
         }
-        let sendMsgs = Cosmos_Bank_V1beta1_MsgSend.with {
-            $0.fromAddress = fromChain.bechAddress!
-            $0.toAddress = toAddress
-            $0.amount = [sendCoin]
+        if (fromChain is ChainThor) {
+            let thorSendMSg = Types_MsgSend.with {
+                $0.fromAddress = fromChain.bechAddress!.data(using: .utf8)!
+                $0.toAddress = toAddress.data(using: .utf8)!
+                $0.amount = [sendCoin]
+            }
+            return Signer.genThorSendMsg(thorSendMSg)
+            
+        } else {
+            let sendMsgs = Cosmos_Bank_V1beta1_MsgSend.with {
+                $0.fromAddress = fromChain.bechAddress!
+                $0.toAddress = toAddress
+                $0.amount = [sendCoin]
+            }
+            return Signer.genSendMsg(sendMsgs)
         }
-        return Signer.genSendMsg(sendMsgs)
     }
     
     
