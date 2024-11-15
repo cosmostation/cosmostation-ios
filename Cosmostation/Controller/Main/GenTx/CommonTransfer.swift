@@ -1130,8 +1130,8 @@ extension CommonTransfer {
         }
         if (fromChain is ChainThor) {
             let thorSendMSg = Types_MsgSend.with {
-                $0.fromAddress = fromChain.bechAddress!.data(using: .utf8)!
-                $0.toAddress = toAddress.data(using: .utf8)!
+                $0.fromAddress = try! SegwitAddrCoder.shared.decode(fromChain.bechAddress!)!
+                $0.toAddress = try! SegwitAddrCoder.shared.decode(toAddress)!
                 $0.amount = [sendCoin]
             }
             return Signer.genThorSendMsg(thorSendMSg)
