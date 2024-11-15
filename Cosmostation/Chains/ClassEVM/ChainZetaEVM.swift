@@ -13,7 +13,7 @@ class ChainZetaEVM: BaseChain  {
     override init() {
         super.init()
         
-        name = "Zeta Chain"
+        name = "ZetaChain"
         tag = "zeta60"
         logo1 = "chainZeta"
         apiName = "zeta"

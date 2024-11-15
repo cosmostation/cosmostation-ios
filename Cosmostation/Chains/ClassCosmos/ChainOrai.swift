@@ -13,7 +13,7 @@ class ChainOrai: BaseChain  {
     override init() {
         super.init()
         
-        name = "Orai Chain"
+        name = "OraiChain"
         tag = "orai118"
         logo1 = "chainOrai"
         apiName = "orai-chain"
