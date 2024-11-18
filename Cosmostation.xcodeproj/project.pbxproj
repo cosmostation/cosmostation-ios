@@ -1665,6 +1665,7 @@
 		79D556072CE2F0DD0023F1B9 /* ChainOrai.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D556062CE2F0DD0023F1B9 /* ChainOrai.swift */; };
 		79D556092CE2F2760023F1B9 /* ChainShidoEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D556082CE2F2760023F1B9 /* ChainShidoEVM.swift */; };
 		79D5560B2CE352870023F1B9 /* ChainFantom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5560A2CE352870023F1B9 /* ChainFantom.swift */; };
+		79D556132CEB05730023F1B9 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D556122CEB05730023F1B9 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift */; };
 		79EF66802C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79EF66812C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79F30ED92CAD36E400E42B2F /* ChainAtomone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */; };
@@ -2058,8 +2059,6 @@
 		E1B44B262ADA41DE0073C88A /* NeutronMultiVoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B44B232ADA41DE0073C88A /* NeutronMultiVoteCell.swift */; };
 		E1B44B272ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B44B242ADA41DE0073C88A /* NeutronMultiVoteCell.xib */; };
 		E1B44B282ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B44B242ADA41DE0073C88A /* NeutronMultiVoteCell.xib */; };
-		E1BC05912CE739D30060A2B3 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BC05902CE739D30060A2B3 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift */; };
-		E1BC05922CE739D30060A2B3 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BC05902CE739D30060A2B3 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift */; };
 		E1BC05942CE73A1C0060A2B3 /* ChainThor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BC05932CE73A1C0060A2B3 /* ChainThor.swift */; };
 		E1BC05952CE73A1C0060A2B3 /* ChainThor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BC05932CE73A1C0060A2B3 /* ChainThor.swift */; };
 		E1C5007C2C5F0F3700406EE5 /* AssetSuiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C5007A2C5F0F3700406EE5 /* AssetSuiCell.swift */; };
@@ -3054,6 +3053,7 @@
 		79D556062CE2F0DD0023F1B9 /* ChainOrai.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainOrai.swift; sourceTree = "<group>"; };
 		79D556082CE2F2760023F1B9 /* ChainShidoEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainShidoEVM.swift; sourceTree = "<group>"; };
 		79D5560A2CE352870023F1B9 /* ChainFantom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFantom.swift; sourceTree = "<group>"; };
+		79D556122CEB05730023F1B9 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = thorchain_v1_x_thorchain_types_msg_send.pb.swift; sourceTree = "<group>"; };
 		79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgRandomButton.swift; sourceTree = "<group>"; };
 		79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAtomone.swift; sourceTree = "<group>"; };
 		79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedPaddingLabel.swift; sourceTree = "<group>"; };
@@ -3259,7 +3259,6 @@
 		E1B44B1E2ADA41CD0073C88A /* NeutronSingleVoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronSingleVoteCell.xib; sourceTree = "<group>"; };
 		E1B44B232ADA41DE0073C88A /* NeutronMultiVoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronMultiVoteCell.swift; sourceTree = "<group>"; };
 		E1B44B242ADA41DE0073C88A /* NeutronMultiVoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronMultiVoteCell.xib; sourceTree = "<group>"; };
-		E1BC05902CE739D30060A2B3 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = thorchain_v1_x_thorchain_types_msg_send.pb.swift; path = ../../../../../ibc_proto/gen/swift/thorchain_v1_x_thorchain_types_msg_send.pb.swift; sourceTree = "<group>"; };
 		E1BC05932CE73A1C0060A2B3 /* ChainThor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainThor.swift; sourceTree = "<group>"; };
 		E1C5007A2C5F0F3700406EE5 /* AssetSuiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetSuiCell.swift; sourceTree = "<group>"; };
 		E1C5007B2C5F0F3700406EE5 /* AssetSuiCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetSuiCell.xib; sourceTree = "<group>"; };
@@ -4890,7 +4889,7 @@
 		E1BC058F2CE739C50060A2B3 /* Thor */ = {
 			isa = PBXGroup;
 			children = (
-				E1BC05902CE739D30060A2B3 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift */,
+				79D556122CEB05730023F1B9 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift */,
 			);
 			path = Thor;
 			sourceTree = "<group>";
@@ -6335,7 +6334,6 @@
 				0450324A2C1EEA9600235F6A /* ChainHumansEVM.swift in Sources */,
 				0400EEC22ADBB522007BA97F /* kava_incentive_v1beta1_tx.pb.swift in Sources */,
 				047843042AC9918700462F1C /* ethermint_feemarket_v1_query.pb.swift in Sources */,
-				E1BC05922CE739D30060A2B3 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift in Sources */,
 				045032F42C1EFE5500235F6A /* ChainPersistence118.swift in Sources */,
 				047843882AC991B300462F1C /* injective_auction_v1beta1_tx.pb.swift in Sources */,
 				044ECB182A95C2E40042DB3C /* ChainAxelar.swift in Sources */,
@@ -6620,6 +6618,7 @@
 				047843192AC9918700462F1C /* ethermint_evm_v1_genesis.pb.swift in Sources */,
 				04C8173E2BA98D75006B800A /* cosmos_consensus_v1_query.pb.swift in Sources */,
 				04C816E62BA98D75006B800A /* cosmos_vesting_v1beta1_vesting.pb.swift in Sources */,
+				79D556132CEB05730023F1B9 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift in Sources */,
 				E122DC562A8A4712006D1E7B /* tendermint_types_params.pb.swift in Sources */,
 				04B7895B2ACAC9B100E9BE88 /* ibc_core_channel_v1_tx.pb.swift in Sources */,
 				045032842C1EEDCD00235F6A /* ChainBitcana.swift in Sources */,
@@ -7040,7 +7039,6 @@
 				79FCA3D82C3F9E92001C17D0 /* artela_types_v1_indexer.pb.swift in Sources */,
 				04C8176A2BA98D75006B800A /* cosmos_protocolpool_v1_query.grpc.swift in Sources */,
 				047843C72AC991B300462F1C /* injective_tokenfactory_v1beta1_tx.pb.swift in Sources */,
-				E1BC05912CE739D30060A2B3 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift in Sources */,
 				04C816762BA98D74006B800A /* cosmos_query_v1_query.pb.swift in Sources */,
 				0400F1322C2770FE00A7144B /* SmallButton.swift in Sources */,
 				04FAD9F92AB7221600143A3E /* BaseRedButton.swift in Sources */,
