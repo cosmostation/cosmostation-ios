@@ -160,7 +160,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     }
     
     private func onInitEvmChain() {
-        if (targetChain == nil) {
+        if !(targetChain.supportEvm) {
             targetChain = allChains.filter({ $0.supportEvm }).first!
         }
     }
