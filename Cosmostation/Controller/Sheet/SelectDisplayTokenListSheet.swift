@@ -76,11 +76,11 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if selectedChain.isSupportCw20() && selectedChain.isSupportErc20() {
             searchTokens = searchText.isEmpty ? allTokens.filter { $0.type == tokenType[segment.selectedSegmentIndex] } : allTokens.filter({ $0.type == tokenType[segment.selectedSegmentIndex] }).filter { token in
-                return token.symbol!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                return token.symbol!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || token.contract?.range(of: searchText, options: .caseInsensitive) != nil
             }
         } else {
             searchTokens = searchText.isEmpty ? allTokens : allTokens.filter { token in
-                return token.symbol!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                return token.symbol!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || token.contract?.range(of: searchText, options: .caseInsensitive) != nil
             }
         }
         sheetTableView.reloadData()
