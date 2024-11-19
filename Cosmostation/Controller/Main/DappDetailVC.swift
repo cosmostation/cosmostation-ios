@@ -361,6 +361,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                     data["publicKey"].stringValue = chain.publicKey!.toHexString()
                     injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
                 } else {
+                    injectionRequestReject(NSLocalizedString("error_not_support_cosmostation", comment: "") + "  " + requestChainName + "  " + requestChainId, messageJSON, bodyJSON["messageId"])
                     onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: "") + "  " + requestChainName + "  " + requestChainId)
                 }
                 
