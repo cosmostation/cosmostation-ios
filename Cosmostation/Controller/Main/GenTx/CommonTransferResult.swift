@@ -128,8 +128,13 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
 
         } else if (txStyle == .COSMOS_STYLE) {
             successMsgLabel.text = cosmosBroadcastTxResponse?.txhash
-            successExplorerBtn.setTitle("Check in Mintscan", for: .normal)
-            failExplorerBtn.setTitle("Check in Mintscan", for: .normal)
+            if fromChain.isSupportMintscan() {
+                successExplorerBtn.setTitle("Check in Mintscan", for: .normal)
+                failExplorerBtn.setTitle("Check in Mintscan", for: .normal)
+            } else {
+                successExplorerBtn.setTitle("Check in Explorer", for: .normal)
+                failExplorerBtn.setTitle("Check in Explorer", for: .normal)
+            }
         }
     }
     
