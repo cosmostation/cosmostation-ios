@@ -606,7 +606,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAvalanche())                     //EVM
     result.append(ChainAxelar())
     result.append(ChainBand())
-    result.append(ChainBase())                       //EVM
+    result.append(ChainBase())                          //EVM
     result.append(ChainBinanceSmart())                  //EVM
     result.append(ChainBitcana())
     result.append(ChainBitCoin44())                     //MAJOR
@@ -629,6 +629,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainDymensionEVM())                  //EVM
     result.append(ChainEthereum())                      //EVM
     result.append(ChainEvmosEVM())                      //EVM
+    result.append(ChainFantom())                        //EVM
     result.append(ChainFetchAi())
     result.append(ChainFetchAi60Old())
     result.append(ChainFetchAi60Secp())
@@ -660,6 +661,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNibiru())
     //result.append(ChainNillion())
     result.append(ChainNoble())
+    result.append(ChainNolus())
     result.append(ChainNyx())
     result.append(ChainOktEVM())                        //EVM
     result.append(ChainOkt996Keccak())                  //LCD
@@ -667,6 +669,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainOmniflix())
     result.append(ChainOnomy())
     result.append(ChainOptimism())                      //EVM
+    result.append(ChainOrai())
     result.append(ChainOsmosis())
     result.append(ChainPassage())
     result.append(ChainPersistence118())
@@ -695,9 +698,10 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainTenetEVM())                      //EVM
     result.append(ChainTeritori())
     result.append(ChainTerra())
+    result.append(ChainThor())
     result.append(ChainUmee())
     result.append(ChainUnification())
-//    result.append(ChainXion())
+    result.append(ChainXion())
     result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
     result.append(ChainZetaEVM())                       //EVM
@@ -722,8 +726,9 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainCrescent())
 //    result.append(ChainCudos())
 //    result.append(ChainEmoney())
+    //    result.append(ChainShidoEVM())                    //EVM
 //    result.append(ChainStarname())
-//    
+//
 //    result.append(ChainCosmos_T())
 //    result.append(ChainArtelaEVM_T())
     

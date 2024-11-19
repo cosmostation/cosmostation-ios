@@ -592,6 +592,39 @@ extension CosmosFetcher {
         }
     }
     
+    func fetchOnChainProposals() async throws -> [MintscanProposal]? {
+        var resultProposals = [MintscanProposal]()
+        if (getEndpointType() == .UseGRPC) {
+            let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.reverse = true; $0.limit = 200 }
+            let v1Req = Cosmos_Gov_V1_QueryProposalsRequest.init()
+            let v1betaReq = Cosmos_Gov_V1beta1_QueryProposalsRequest.init()
+            if let result = try? await Cosmos_Gov_V1_QueryNIOClient(channel: getClient()).proposals(v1Req, callOptions: getCallOptions()).response.get() {
+                result.proposals.forEach { proposal in
+                    resultProposals.append(MintscanProposal(proposal))
+                }
+            } else if let result = try? await Cosmos_Gov_V1beta1_QueryNIOClient(channel: getClient()).proposals(v1betaReq, callOptions: getCallOptions()).response.get() {
+                result.proposals.forEach { proposal in
+                    resultProposals.append(MintscanProposal(proposal))
+                }
+            }
+            
+        } else {
+            let v1Url = getLcd() + "cosmos/gov/v1/proposals?pagination.limit=200&pagination.reverse=true"
+            let v1beta1Url = getLcd() + "cosmos/gov/v1beta1/proposals?pagination.limit=200&pagination.reverse=true"
+            if let response = try? await AF.request(v1Url, method: .get).serializingDecodable(JSON.self).value {
+                response["proposals"].arrayValue.forEach { proposal in
+                    resultProposals.append(MintscanProposal(proposal))
+                }
+                
+            } else if let response = try? await AF.request(v1beta1Url, method: .get).serializingDecodable(JSON.self).value {
+                response["proposals"].arrayValue.forEach { proposal in
+                    resultProposals.append(MintscanProposal(proposal))
+                }
+            }
+        }
+        return resultProposals
+    }
+    
     func simulateTx(_ simulTx: Cosmos_Tx_V1beta1_SimulateRequest) async throws -> UInt64? {
         if (getEndpointType() == .UseGRPC) {
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).simulate(simulTx, callOptions: getCallOptions()).response.get().gasInfo.gasUsed
