@@ -46,7 +46,7 @@ class KavaLendListCell: UITableViewCell {
         guard let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom == hardMarket?.denom }).first else {
             return
         }
-        let hardImgDenom = msAsset.ibc_info?.counterparty?.denom ?? msAsset.denom ?? ""
+        let hardImgDenom = msAsset.ibc_info?.counterparty?.getDenom ?? msAsset.denom ?? ""
         let url = KAVA_HARD_POOL_IMG_URL + "lp" + hardImgDenom.replacingOccurrences(of: "/", with: ":") + ".png"
         let title = hardMarket?.spotMarketID.replacingOccurrences(of: ":30", with: "").replacingOccurrences(of: ":720", with: "")
         marketImg.sd_setImage(with: URL(string: url)!)

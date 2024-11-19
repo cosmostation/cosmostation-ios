@@ -160,7 +160,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     }
     
     private func onInitEvmChain() {
-        if (targetChain == nil) {
+        if !(targetChain.supportEvm) {
             targetChain = allChains.filter({ $0.supportEvm }).first!
         }
     }
@@ -361,6 +361,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                     data["publicKey"].stringValue = chain.publicKey!.toHexString()
                     injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
                 } else {
+                    injectionRequestReject(NSLocalizedString("error_not_support_cosmostation", comment: "") + "  " + requestChainName + "  " + requestChainId, messageJSON, bodyJSON["messageId"])
                     onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: "") + "  " + requestChainName + "  " + requestChainId)
                 }
                 

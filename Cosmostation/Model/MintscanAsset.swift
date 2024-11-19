@@ -72,5 +72,9 @@ public struct MintscanAssetCounterParty: Codable {
     var channel: String?
     var port: String?
     var chain: String?
-    var denom: String?
+    private var denom: String?
+    
+    var getDenom: String? {
+        return denom?.removingPrefix("cw20:")
+    }
 }

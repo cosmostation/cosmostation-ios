@@ -195,7 +195,7 @@ class CommonTransfer: BaseVC {
                             recipientableChains.append(sendable)
                         }
                     }
-                } else if (msAsset.getjustBeforeChain() == fromChain.apiName && msAsset.ibc_info?.counterparty?.denom?.lowercased() == toSendDenom.lowercased()) {
+                } else if (msAsset.getjustBeforeChain() == fromChain.apiName && msAsset.ibc_info?.counterparty?.getDenom?.lowercased() == toSendDenom.lowercased()) {
                     //add forward path
                     if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
                         if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
@@ -206,7 +206,7 @@ class CommonTransfer: BaseVC {
                 
             } else if (sendAssetType == .COSMOS_WASM ) {
                 //CW20 only support forward IBC path
-                if (msAsset.ibc_info?.counterparty?.chain == fromChain.apiName && msAsset.ibc_info?.counterparty?.denom?.lowercased() == toSendDenom.lowercased()) {
+                if (msAsset.ibc_info?.counterparty?.chain == fromChain.apiName && msAsset.ibc_info?.counterparty?.getDenom?.lowercased() == toSendDenom.lowercased()) {
                     if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
                         if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
                             recipientableChains.append(sendable)
