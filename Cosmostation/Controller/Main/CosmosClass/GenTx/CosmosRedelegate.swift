@@ -189,11 +189,11 @@ class CosmosRedelegate: BaseVC {
     @objc func onClickToValidator() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         if let initiaFetcher {
-            baseSheet.initiaValidators = initiaFetcher.initiaValidators
+            baseSheet.initiaValidators = initiaFetcher.initiaValidators.filter { $0 != fromValidatorInitia }
             baseSheet.sheetType = .SelectInitiaValidator
 
         } else {
-            baseSheet.validators = cosmosFetcher.cosmosValidators
+            baseSheet.validators = cosmosFetcher.cosmosValidators.filter { $0 != fromValidator }
             baseSheet.sheetType = .SelectValidator
         }
         
@@ -451,6 +451,10 @@ extension CosmosRedelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
         if (sheetType == .SelectUnStakeValidator) {
             if let validatorAddress = result["validatorAddress"] as? String {
                 fromValidator = cosmosFetcher.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first!
+                if fromValidator == toValidator {
+                    toValidator = cosmosFetcher.cosmosValidators.filter({ $0.operatorAddress != validatorAddress }).first
+                    onUpdateToValidatorView()
+                }
                 onUpdateFromValidatorView()
                 onUpdateFeeView()
             }
@@ -480,6 +484,10 @@ extension CosmosRedelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
         } else if (sheetType == .SelectInitiaUnStakeValidator) {
             if let validatorAddress = result["validatorAddress"] as? String, let initiaFetcher {
                 fromValidatorInitia = initiaFetcher.initiaValidators.filter({ $0.operatorAddress == validatorAddress }).first!
+                if fromValidatorInitia == toValidatorInitia {
+                    toValidatorInitia = initiaFetcher.initiaValidators.filter({ $0.operatorAddress != validatorAddress }).first
+                    onUpdateToValidatorView()
+                }
                 onUpdateFromValidatorView()
                 onUpdateFeeView()
             }
