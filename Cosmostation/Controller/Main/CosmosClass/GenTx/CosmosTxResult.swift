@@ -72,6 +72,15 @@ class CosmosTxResult: BaseVC {
             
             
         } else {
+            if selectedChain.isSupportMintscan() {
+                successMintscanBtn.setTitle("Check in Mintscan", for: .normal)
+                failMintscanBtn.setTitle("Check in Mintscan", for: .normal)
+
+            } else {
+                successMintscanBtn.setTitle("Check in Explorer", for: .normal)
+                failMintscanBtn.setTitle("Check in Explorer", for: .normal)
+            }
+            
             guard (broadcastTxResponse?.txhash) != nil else {
                 loadingView.isHidden = true
                 failView.isHidden = false
