@@ -145,8 +145,13 @@ class DappEvmSignRequestSheet: BaseVC {
             safeMsgTitle.isHidden = false
             confirmBtn.isEnabled = true
             
-            if let data = inComeChallenge?.stripHexPrefix().hexadecimal {
-                toSignTextView.text = String.init(data: data, encoding: .utf8)
+            if inComeChallenge!.isHex {
+                if let data = inComeChallenge?.stripHexPrefix().hexadecimal {
+                    toSignTextView.text = String.init(data: data, encoding: .utf8)
+                }
+                
+            } else {
+                toSignTextView.text = inComeChallenge
             }
             
         }
@@ -368,7 +373,13 @@ class DappEvmSignRequestSheet: BaseVC {
                     })
                     
                 } else if (method == "personal_sign") {
-                    let personalHash = Utilities.hashPersonalMessage(self.inComeChallenge!.stripHexPrefix().hexadecimal!)
+                    var personalHash: Data?
+                    if inComeChallenge!.isHex {
+                        personalHash = Utilities.hashPersonalMessage(self.inComeChallenge!.stripHexPrefix().hexadecimal!)
+                    } else {
+                        personalHash = Utilities.hashPersonalMessage(self.inComeChallenge!.data(using: .utf8)!)
+                    }
+                    
                     let (compressedSignature, _) = SECP256K1.signForRecovery(hash: personalHash!, privateKey: selectedChain.privateKey!)
                     let result = compressedSignature?.toHexString().addHexPrefix()
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
