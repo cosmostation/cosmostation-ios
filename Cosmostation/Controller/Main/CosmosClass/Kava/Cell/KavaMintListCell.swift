@@ -16,6 +16,7 @@ class KavaMintListCell: UITableViewCell {
     @IBOutlet weak var marketTypeLabel: UILabel!
     @IBOutlet weak var marketPairLabel: UILabel!
     @IBOutlet weak var minCollateralRate: UILabel!
+    @IBOutlet weak var stabilityFee: UILabel!
     @IBOutlet weak var liquidationPenalty: UILabel!
 
     override func awakeFromNib() {
@@ -34,6 +35,7 @@ class KavaMintListCell: UITableViewCell {
         marketTypeLabel.text = collateralParam?.type.uppercased()
         marketPairLabel.text = collateralParam?.spotMarketID.uppercased()
         minCollateralRate.attributedText = WDP.dpAmount(collateralParam!.getDpLiquidationRatio().stringValue, minCollateralRate.font, 2)
+        stabilityFee.attributedText = WDP.dpAmount(collateralParam!.getDpStabilityFee().stringValue, stabilityFee.font, 2)
         liquidationPenalty.attributedText = WDP.dpAmount(collateralParam!.getDpLiquidationPenalty().stringValue, liquidationPenalty.font, 2)
     }
 }
