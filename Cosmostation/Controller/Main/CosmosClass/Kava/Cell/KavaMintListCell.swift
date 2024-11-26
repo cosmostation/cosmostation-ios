@@ -16,6 +16,7 @@ class KavaMintListCell: UITableViewCell {
     @IBOutlet weak var marketTypeLabel: UILabel!
     @IBOutlet weak var marketPairLabel: UILabel!
     @IBOutlet weak var minCollateralRate: UILabel!
+    @IBOutlet weak var stabilityFee: UILabel!
     @IBOutlet weak var liquidationPenalty: UILabel!
 
     override func awakeFromNib() {
@@ -26,7 +27,13 @@ class KavaMintListCell: UITableViewCell {
     override func prepareForReuse() {
         marketImg.sd_cancelCurrentImageLoad()
         marketImg.image = nil
+        marketTypeLabel.text = ""
+        marketPairLabel.text = ""
+        minCollateralRate.text = ""
+        stabilityFee.text = ""
+        liquidationPenalty.text = ""
     }
+    
     func onBindCdp(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam?) {
         if (collateralParam == nil) { return }
         let url = KAVA_CDP_IMG_URL + collateralParam!.type + ".png"
@@ -34,6 +41,7 @@ class KavaMintListCell: UITableViewCell {
         marketTypeLabel.text = collateralParam?.type.uppercased()
         marketPairLabel.text = collateralParam?.spotMarketID.uppercased()
         minCollateralRate.attributedText = WDP.dpAmount(collateralParam!.getDpLiquidationRatio().stringValue, minCollateralRate.font, 2)
+        stabilityFee.attributedText = WDP.dpAmount(collateralParam!.getDpStabilityFee().stringValue, stabilityFee.font, 2)
         liquidationPenalty.attributedText = WDP.dpAmount(collateralParam!.getDpLiquidationPenalty().stringValue, liquidationPenalty.font, 2)
     }
 }

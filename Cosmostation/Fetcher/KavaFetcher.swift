@@ -171,6 +171,14 @@ extension Kava_Cdp_V1beta1_CollateralParam {
         return getLiquidationPenaltyAmount().multiplying(byPowerOf10: 2, withBehavior: handler2)
     }
     
+    public func getStabilityFee() -> NSDecimalNumber {
+        return NSDecimalNumber.init(string: stabilityFee).multiplying(byPowerOf10: -18).subtracting(1).multiplying(by: 31536000)
+    }
+    
+    public func getDpStabilityFee() -> NSDecimalNumber {
+        return getStabilityFee().multiplying(byPowerOf10: 2, withBehavior: handler2Down)
+    }
+    
     public func getExpectCollateralUsdxValue(_ collateralAmount: NSDecimalNumber, _ priceFeed: Kava_Pricefeed_V1beta1_QueryPricesResponse) -> NSDecimalNumber {
         let collateralPrice = priceFeed.getKavaOraclePrice(liquidationMarketID)
         let collateralValue = collateralAmount.multiplying(by: collateralPrice).multiplying(byPowerOf10: -Int16(conversionFactor)!, withBehavior: handler6)
