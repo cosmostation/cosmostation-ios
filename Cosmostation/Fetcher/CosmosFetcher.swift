@@ -611,13 +611,13 @@ extension CosmosFetcher {
         } else {
             let v1Url = getLcd() + "cosmos/gov/v1/proposals?pagination.limit=200&pagination.reverse=true"
             let v1beta1Url = getLcd() + "cosmos/gov/v1beta1/proposals?pagination.limit=200&pagination.reverse=true"
-            if let response = try? await AF.request(v1Url, method: .get).serializingDecodable(JSON.self).value {
-                response["proposals"].arrayValue.forEach { proposal in
+            if let proposals = try await AF.request(v1Url, method: .get).serializingDecodable(JSON.self).value["proposals"].array {
+                proposals.forEach { proposal in
                     resultProposals.append(MintscanProposal(proposal))
                 }
                 
-            } else if let response = try? await AF.request(v1beta1Url, method: .get).serializingDecodable(JSON.self).value {
-                response["proposals"].arrayValue.forEach { proposal in
+            } else if let proposals = try await AF.request(v1beta1Url, method: .get).serializingDecodable(JSON.self).value["proposals"].array {
+                proposals.forEach { proposal in
                     resultProposals.append(MintscanProposal(proposal))
                 }
             }
