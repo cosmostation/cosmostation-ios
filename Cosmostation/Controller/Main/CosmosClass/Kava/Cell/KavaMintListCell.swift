@@ -27,7 +27,13 @@ class KavaMintListCell: UITableViewCell {
     override func prepareForReuse() {
         marketImg.sd_cancelCurrentImageLoad()
         marketImg.image = nil
+        marketTypeLabel.text = ""
+        marketPairLabel.text = ""
+        minCollateralRate.text = ""
+        stabilityFee.text = ""
+        liquidationPenalty.text = ""
     }
+    
     func onBindCdp(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam?) {
         if (collateralParam == nil) { return }
         let url = KAVA_CDP_IMG_URL + collateralParam!.type + ".png"
