@@ -13,7 +13,7 @@ class ChainNyx: BaseChain  {
     override init() {
         super.init()
         
-        name = "Nyx"
+        name = "Nym"
         tag = "nyx118"
         logo1 = "chainNyx"
         apiName = "nyx"
