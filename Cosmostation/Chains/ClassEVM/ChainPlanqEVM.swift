@@ -25,12 +25,12 @@ class ChainPlanqEVM: BaseChain  {
         bechAccountPrefix = "plq"
         validatorPrefix = "plqvaloper"
         grpcHost = "grpc.planq.network"
-        lcdUrl = "https://rest.planq.network/"
+        lcdUrl = "https://planq.api.m.stavr.tech/"
         
         supportEvm = true
         coinSymbol = "PLANQ"
         coinGeckoId = "planq"
         coinLogo = "tokenPlq"
-        evmRpcURL = "https://evm-rpc.planq.network"
+        evmRpcURL = "https://planq-rpc.nodies.app"
     }
 }

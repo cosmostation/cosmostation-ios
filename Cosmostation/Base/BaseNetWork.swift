@@ -117,7 +117,7 @@ class BaseNetWork {
     }
     
     static func msCw721InfoUrl(_ apiName: String) -> String {
-        return ResourceBase + apiName + "/cw721.json"
+        return MINTSCAN_API_URL + "v11/assets/" + apiName + "/cw721"
     }
     
     static func msProposals(_ chain: BaseChain) -> String {
