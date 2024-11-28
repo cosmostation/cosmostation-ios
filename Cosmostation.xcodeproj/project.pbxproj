@@ -1672,6 +1672,7 @@
 		79D5561F2CEF09B60023F1B9 /* ChainNomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5561E2CEF09B60023F1B9 /* ChainNomic.swift */; };
 		79D556212CEF0A8E0023F1B9 /* ChainSeda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D556202CEF0A8E0023F1B9 /* ChainSeda.swift */; };
 		79D556232CEF0B810023F1B9 /* ChainSge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D556222CEF0B810023F1B9 /* ChainSge.swift */; };
+		79E7B3CA2CF83F0400C28D93 /* dydx.json in Resources */ = {isa = PBXBuildFile; fileRef = 79E7B3C92CF83F0400C28D93 /* dydx.json */; };
 		79EF66802C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79EF66812C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79F30ED92CAD36E400E42B2F /* ChainAtomone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */; };
@@ -3066,6 +3067,7 @@
 		79D5561E2CEF09B60023F1B9 /* ChainNomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainNomic.swift; sourceTree = "<group>"; };
 		79D556202CEF0A8E0023F1B9 /* ChainSeda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSeda.swift; sourceTree = "<group>"; };
 		79D556222CEF0B810023F1B9 /* ChainSge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSge.swift; sourceTree = "<group>"; };
+		79E7B3C92CF83F0400C28D93 /* dydx.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dydx.json; sourceTree = "<group>"; };
 		79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgRandomButton.swift; sourceTree = "<group>"; };
 		79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAtomone.swift; sourceTree = "<group>"; };
 		79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedPaddingLabel.swift; sourceTree = "<group>"; };
@@ -3922,6 +3924,7 @@
 				04C940B22AE8D48C00415256 /* aes.js */,
 				795C0DC12C8E853C006D35A4 /* bitcoin.js */,
 				04A421132C7896A800C0E1A2 /* drop.json */,
+				79E7B3C92CF83F0400C28D93 /* dydx.json */,
 				E1D538282A96644F00FB0403 /* loading.json */,
 				E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */,
 				E19993E92B295873000F4A6B /* loadingSmallWhite.json */,
@@ -5559,6 +5562,7 @@
 				04C6B9C72AAC59EC00B02A95 /* QrAddressPopupVC.xib in Resources */,
 				E16200432AF279560008F397 /* AddressBookListVC.xib in Resources */,
 				04F048CF2AF8D268002A809D /* CosmosCancelUnbonding.xib in Resources */,
+				79E7B3CA2CF83F0400C28D93 /* dydx.json in Resources */,
 				042DE8482AC4CD01003F3EA4 /* QrScanVC.xib in Resources */,
 				04F048D72AFCD34A002A809D /* basebg06.png in Resources */,
 				04F53F6A2BE4ED22000715FA /* SwitchStyleCell.xib in Resources */,

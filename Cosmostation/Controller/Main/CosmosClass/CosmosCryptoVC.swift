@@ -363,6 +363,19 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapDrop))
             tapGesture.cancelsTouchesInView = false
             dropBtn.addGestureRecognizer(tapGesture)
+            
+        } else if (selectedChain is ChainDydx) {
+            dropBtn.animation = LottieAnimation.named("dydx")
+            dropBtn.contentMode = .scaleAspectFit
+            dropBtn.loopMode = .loop
+            dropBtn.animationSpeed = 1.3
+            dropBtn.play()
+            dropBtn.isHidden = false
+    
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapDydx))
+            tapGesture.cancelsTouchesInView = false
+            dropBtn.addGestureRecognizer(tapGesture)
+
         }
     }
     
@@ -372,6 +385,11 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
         dappDetail.dappUrl = URL(string: "https://app.drop.money/dashboard?referral_code=dropmaga")
         dappDetail.modalPresentationStyle = .fullScreen
         self.present(dappDetail, animated: true)
+    }
+    
+    @objc func tapDydx() {
+        guard let url = URL(string: "https://apps.apple.com/kr/app/dydx/id6475599596") else { return }
+        self.onShowSafariWeb(url)
     }
 }
 
