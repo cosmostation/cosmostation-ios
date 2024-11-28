@@ -87,6 +87,9 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     var txFee: Cosmos_Tx_V1beta1_Fee!
     var txTip: Cosmos_Tx_V1beta1_Tip?
     var toMsg: JSON?
+    
+    var recentInputChainName = ""
+    var recentOutputChainName = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -263,12 +266,18 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     
     @objc func onInputAsset() {
         dismissKeyboard()
-        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.swapAssets = targetInputAssets
-        baseSheet.targetChain = inputChain
-        baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectSwapInputAsset
-        onStartSheet(baseSheet, 680, 0.8)
+        Task {
+            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+            if recentInputChainName != inputChain.name {
+                try await fetchTargetInputAssetsBalance()
+                recentInputChainName = inputChain.name
+            }
+            baseSheet.swapAssets = targetInputAssets.filter { $0.balance != 0 }
+            baseSheet.targetChain = inputChain
+            baseSheet.sheetDelegate = self
+            baseSheet.sheetType = .SelectSwapInputAsset
+            onStartSheet(baseSheet, 680, 0.8)
+        }
     }
     
     @objc func onOutputChain() {
@@ -282,12 +291,18 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     
     @objc func onOutputAsset() {
         dismissKeyboard()
-        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.swapAssets = targetOutputAssets
-        baseSheet.targetChain = outputChain
-        baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectSwapOutputAsset
-        onStartSheet(baseSheet, 680, 0.8)
+        Task {
+            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+            if recentOutputChainName != outputChain.name {
+                try await fetchTargetOutputAssetsBalance()
+                recentOutputChainName = outputChain.name
+            }
+            baseSheet.swapAssets = targetOutputAssets
+            baseSheet.targetChain = outputChain
+            baseSheet.sheetDelegate = self
+            baseSheet.sheetType = .SelectSwapOutputAsset
+            onStartSheet(baseSheet, 680, 0.8)
+        }
     }
     
     
@@ -663,7 +678,6 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     view.isUserInteractionEnabled = false
                     Task {
                         inputAsset = targetInputAssets.filter({ $0.denom == denom }).first
-                        try await fetchInputAssetBalance()
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
                         }
@@ -679,7 +693,6 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     view.isUserInteractionEnabled = false
                     Task {
                         outputAsset = targetOutputAssets.filter({ $0.denom == denom }).first
-                        try await fetchOutputAssetBalance()
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
                         }
@@ -816,7 +829,7 @@ extension SwapStartVC {
                                               skipInput["decimals"].int16Value,
                                               skipInput["logo_uri"].stringValue,
                                               skipInput["coingecko_id"].string,
-                                              skipInput["description"].string)
+                                              skipInput["name"].string)
             if !tempInputAssets.contains(where: { $0.denom.lowercased() == tempTarget.denom.lowercased() }) {
                 tempInputAssets.append(tempTarget)
             }
@@ -829,8 +842,8 @@ extension SwapStartVC {
                 if let msGeckoId = msAsset.coinGeckoId {
                     tempInputAssets[index].geckoId = msGeckoId
                 }
-                if let msDescription = msAsset.description {
-                    tempInputAssets[index].description = msDescription
+                if let msName = msAsset.name {
+                    tempInputAssets[index].name = msName
                 }
                 tempInputAssets[index].image = msAsset.assetImg()?.absoluteString
                 targetInputAssets.append(tempInputAssets[index])
@@ -866,7 +879,7 @@ extension SwapStartVC {
                                               skipOutput["decimals"].int16Value,
                                               skipOutput["logo_uri"].stringValue,
                                               skipOutput["coingecko_id"].string,
-                                              skipOutput["description"].string)
+                                              skipOutput["name"].string)
             if !tempOutputAssets.contains(where: { $0.denom.lowercased() == tempTarget.denom.lowercased() }) {
                 tempOutputAssets.append(tempTarget)
             }
@@ -879,8 +892,8 @@ extension SwapStartVC {
                 if let msGeckoId = msAsset.coinGeckoId {
                     tempOutputAssets[index].geckoId = msGeckoId
                 }
-                if let msDescription = msAsset.description {
-                    tempOutputAssets[index].description = msDescription
+                if let msName = msAsset.name {
+                    tempOutputAssets[index].name = msName
                 }
                 tempOutputAssets[index].image = msAsset.assetImg()?.absoluteString
                 targetOutputAssets.append(tempOutputAssets[index])
@@ -934,6 +947,43 @@ extension SwapStartVC {
         }
     }
     
+    
+    func fetchTargetInputAssetsBalance() async throws {
+        for index in 0..<targetInputAssets.count {
+            if targetInputAssets[index].type == .CW20 {
+                targetInputAssets[index].balance = try await inputChain.getCosmosfetcher()?.fetchCw20BalanceAmount(targetInputAssets[index].denom!) ?? NSDecimalNumber.zero
+                
+            } else if targetInputAssets[index].type == .ERC20 {
+                targetInputAssets[index].balance = try await inputChain.getEvmfetcher()?.fetchErc20BalanceAmount(targetInputAssets[index].denom!) ?? NSDecimalNumber.zero
+                
+            } else {
+                if (!inputChain.supportCosmos && inputChain.supportEvm) {
+                    targetInputAssets[index].balance = inputChain.getEvmfetcher()?.evmBalances ?? NSDecimalNumber.zero
+                } else {
+                    targetInputAssets[index].balance = inputChain.getCosmosfetcher()?.balanceAmount(targetInputAssets[index].denom) ?? NSDecimalNumber.zero
+                }
+            }
+        }
+    }
+    
+    func fetchTargetOutputAssetsBalance() async throws {
+        for index in 0..<targetOutputAssets.count {
+            if targetOutputAssets[index].type == .CW20 {
+                targetOutputAssets[index].balance = try await outputChain.getCosmosfetcher()?.fetchCw20BalanceAmount(targetOutputAssets[index].denom!) ?? NSDecimalNumber.zero
+                
+            } else if targetOutputAssets[index].type == .ERC20 {
+                targetOutputAssets[index].balance = try await outputChain.getEvmfetcher()?.fetchErc20BalanceAmount(targetOutputAssets[index].denom!) ?? NSDecimalNumber.zero
+                
+            } else {
+                if (!outputChain.supportCosmos && outputChain.supportEvm) {
+                    targetOutputAssets[index].balance = outputChain.getEvmfetcher()?.evmBalances ?? NSDecimalNumber.zero
+                } else {
+                    targetOutputAssets[index].balance = outputChain.getCosmosfetcher()?.balanceAmount(targetOutputAssets[index].denom) ?? NSDecimalNumber.zero
+                }
+            }
+        }
+    }
+
 }
 
 
@@ -943,17 +993,17 @@ public struct TargetAsset {
     var decimals: Int16!                    // skip - "decimals"                    squid - "decimals"
     var image: String?                      // skip - "logo_uri"                    squid - "logoURI"
     var geckoId: String?                    // skip - "coingecko_id"                squid - "coingeckoId"
-    var description: String?                // skip - "description"                 squid - "name"
+    var name: String?                       // skip - "name"                        squid - "name"
     var balance = NSDecimalNumber.zero      // fetched balacne
     var type = TargetAssetType.Native
     
-    init(_ denom: String, _ symbol: String, _ decimals: Int16, _ image: String?, _ geckoId: String?, _ description: String?) {
+    init(_ denom: String, _ symbol: String, _ decimals: Int16, _ image: String?, _ geckoId: String?, _ name: String?) {
         self.denom = denom
         self.symbol = symbol
         self.decimals = decimals
         self.image = image
         self.geckoId = geckoId
-        self.description = description
+        self.name = name
         
         if (denom.lowercased().starts(with: "0x")) {
             self.type = .ERC20
