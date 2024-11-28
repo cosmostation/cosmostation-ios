@@ -678,7 +678,6 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     view.isUserInteractionEnabled = false
                     Task {
                         inputAsset = targetInputAssets.filter({ $0.denom == denom }).first
-                        try await fetchInputAssetBalance()
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
                         }
@@ -694,7 +693,6 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     view.isUserInteractionEnabled = false
                     Task {
                         outputAsset = targetOutputAssets.filter({ $0.denom == denom }).first
-                        try await fetchOutputAssetBalance()
                         DispatchQueue.main.async {
                             self.onReadyToUserInsert()
                         }
