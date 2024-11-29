@@ -39,62 +39,30 @@ class SelectSwapAssetCell: UITableViewCell {
     func onBindAsset(_ chain: BaseChain, _ asset: TargetAsset) {
         symbolLabel.text = asset.symbol
         coinImg?.sd_setImage(with: asset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+        descriptionLabel.text = asset.name
+        descriptionLabel.lineBreakMode = .byTruncatingMiddle
+        
         if (asset.type == .ERC20) {
             erc20Tag.isHidden = false
-            descriptionLabel.text = asset.denom
-            descriptionLabel.lineBreakMode = .byTruncatingMiddle
             
         } else if (asset.type == .CW20) {
             cw20Tag.isHidden = false
-            descriptionLabel.text = asset.denom.replacingOccurrences(of: "cw20:", with: "")
-            descriptionLabel.lineBreakMode = .byTruncatingMiddle
             
         } else if (asset.type == .IBC) {
             ibcTag.isHidden = false
-            descriptionLabel.text = asset.denom
-            descriptionLabel.lineBreakMode = .byTruncatingMiddle
             
-        } else {
-            guard let description = asset.description else {
-                descriptionLabel.text = asset.denom
-                descriptionLabel.lineBreakMode = .byTruncatingMiddle
-                return
-            }
-            descriptionLabel.text = description
-            descriptionLabel.lineBreakMode = .byTruncatingTail
         }
-        Task {
-            let balance = try await fetchInputAssetBalance(chain, asset)
-            DispatchQueue.main.async {
-                if (balance != NSDecimalNumber.zero) {
-                    let dpInputBalance = balance.multiplying(byPowerOf10: -asset.decimals!)
-                    self.amountLabel?.attributedText = WDP.dpAmount(dpInputBalance.stringValue, self.amountLabel!.font, asset.decimals)
-                    self.amountLabel.isHidden = false
-                    
-                    let msPrice = BaseData.instance.getPrice(asset.geckoId)
-                    let msValue = msPrice.multiplying(by: dpInputBalance, withBehavior: handler6)
-                    WDP.dpValue(msValue, self.valueCurrencyLabel, self.valueLabel)
-                    self.valueCurrencyLabel.isHidden = false
-                    self.valueLabel.isHidden = false
-                }
-            }
-        }
-    }
-    
-    
-    func fetchInputAssetBalance(_ chian: BaseChain, _ asset: TargetAsset) async throws -> NSDecimalNumber {
-        if asset.type == .CW20 {
-            return try await chian.getCosmosfetcher()?.fetchCw20BalanceAmount(asset.denom!) ?? NSDecimalNumber.zero
+        
+        if (asset.balance != NSDecimalNumber.zero) {
+            let dpInputBalance = asset.balance.multiplying(byPowerOf10: -asset.decimals!)
+            self.amountLabel?.attributedText = WDP.dpAmount(dpInputBalance.stringValue, self.amountLabel!.font, asset.decimals)
+            self.amountLabel.isHidden = false
             
-        } else if asset.type == .ERC20 {
-            return try await chian.getEvmfetcher()?.fetchErc20BalanceAmount(asset.denom!) ?? NSDecimalNumber.zero
-            
-        } else {
-            if (!chian.supportCosmos && chian.supportEvm) {
-                return chian.getEvmfetcher()?.evmBalances ?? NSDecimalNumber.zero
-            } else {
-                return chian.getCosmosfetcher()?.balanceAmount(asset.denom) ?? NSDecimalNumber.zero
-            }
+            let msPrice = BaseData.instance.getPrice(asset.geckoId)
+            let msValue = msPrice.multiplying(by: dpInputBalance, withBehavior: handler6)
+            WDP.dpValue(msValue, self.valueCurrencyLabel, self.valueLabel)
+            self.valueCurrencyLabel.isHidden = false
+            self.valueLabel.isHidden = false
         }
     }
 }
