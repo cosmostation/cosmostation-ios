@@ -32,6 +32,8 @@ class CosmosStakingInfoVC: BaseVC {
     var initiaValidators = [Initia_Mstaking_V1_Validator]()
     var initiaDelegations = [Initia_Mstaking_V1_DelegationResponse]()
     var initiaUnbondings = [InitiaUnbondingEntry]()
+    
+    var cosmosCryptoVC: CosmosCryptoVC?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +96,11 @@ class CosmosStakingInfoVC: BaseVC {
         if (selectedChain.tag == tag) {
             onSetStakeData()
         }
+        
+        if let cosmosCryptoVC {
+            cosmosCryptoVC.onFetchDone(notification)
+        }
+        
     }
     
     func onSetTabbarView() {
