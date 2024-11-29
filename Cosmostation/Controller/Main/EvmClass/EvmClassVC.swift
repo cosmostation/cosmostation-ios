@@ -140,7 +140,7 @@ class EvmClassVC: BaseVC {
         tabbar.items.append(assetTabBar)
 //        if (BaseData.instance.showEvenReview()) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(receiveTabBar)
-        tabbar.items.append(historyTabBar)
+        if !(selectedChain is ChainBeraEVM) { tabbar.items.append(historyTabBar) }
         if (BaseData.instance.showEvenReview() && selectedChain.isSupportMobileDapp()) { tabbar.items.append(ecosystemTabBar) }
         if (!selectedChain.getChainListParam().isEmpty) {
             tabbar.items.append(aboutTabBar)
