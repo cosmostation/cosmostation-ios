@@ -535,6 +535,7 @@ extension CosmosClassVC {
         
         let stakingInfoVC = CosmosStakingInfoVC(nibName: "CosmosStakingInfoVC", bundle: nil)
         stakingInfoVC.selectedChain = selectedChain
+        stakingInfoVC.cosmosCryptoVC = cosmosCryptoVC
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(stakingInfoVC, animated: true)
     }

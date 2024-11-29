@@ -35,6 +35,7 @@ class SuiStakingInfoVC: BaseVC {
     var stakedList = [(String, JSON)]()
     var displayStakedList = [(String, JSON)]()
     
+    var majorCryptoVC: MajorCryptoVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +95,9 @@ class SuiStakingInfoVC: BaseVC {
         let tag = notification.object as! String
         if (selectedChain.tag == tag) {
             onUpdateView()
+        }
+        if let majorCryptoVC {
+            majorCryptoVC.onFetchDone(notification)
         }
     }
     
