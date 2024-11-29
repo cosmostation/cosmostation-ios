@@ -592,6 +592,12 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "personal_sign") {
                 onInitEvmChain()
                 let toSign = messageJSON["params"]
+                guard let web3 else {
+                    onInitWeb3 { success in
+                        self.popUpEvmRequestSign(method, toSign, bodyJSON["messageId"])
+                    }
+                    return
+                }
                 popUpEvmRequestSign(method, toSign, bodyJSON["messageId"])
                 
             }
