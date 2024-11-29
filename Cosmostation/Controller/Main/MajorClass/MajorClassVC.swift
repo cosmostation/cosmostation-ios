@@ -43,9 +43,11 @@ class MajorClassVC: BaseVC {
         }
     }
     
+    var majorCryptoVC: MajorCryptoVC?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "majorCryptoVC") {
             let target = segue.destination as! MajorCryptoVC
+            majorCryptoVC = target
             target.selectedChain = selectedChain
         } else if (segue.identifier == "majorNftVC") {
             let target = segue.destination as! MajorNftVC
@@ -271,6 +273,7 @@ extension MajorClassVC {
         //TODO check gas
         let stakingInfoVC = SuiStakingInfoVC(nibName: "SuiStakingInfoVC", bundle: nil)
         stakingInfoVC.selectedChain = selectedChain as? ChainSui
+        stakingInfoVC.majorCryptoVC = majorCryptoVC
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(stakingInfoVC, animated: true)
         
