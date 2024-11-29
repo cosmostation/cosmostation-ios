@@ -12,7 +12,7 @@ import SDWebImage
 
 class SelectSwapAssetCell: UITableViewCell {
     
-    @IBOutlet weak var coinImg: UIImageView!
+    @IBOutlet weak var coinImg: CircleImageView!
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var ibcTag: RoundedPaddingLabel!
     @IBOutlet weak var erc20Tag: RoundedPaddingLabel!

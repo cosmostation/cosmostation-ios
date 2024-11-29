@@ -27,7 +27,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var inputChainImg: UIImageView!
     @IBOutlet weak var inputChainLabel: UILabel!
     @IBOutlet weak var inputAssetView: DropDownView!
-    @IBOutlet weak var inputAssetImg: UIImageView!
+    @IBOutlet weak var inputAssetImg: CircleImageView!
     @IBOutlet weak var inputAssetLabel: UILabel!
     @IBOutlet weak var inputAmountTextField: UITextField!
     @IBOutlet weak var inputInvalidLabel: UILabel!
@@ -41,7 +41,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
     @IBOutlet weak var outputChainImg: UIImageView!
     @IBOutlet weak var outputChainLabel: UILabel!
     @IBOutlet weak var outputAssetView: DropDownView!
-    @IBOutlet weak var outputAssetImg: UIImageView!
+    @IBOutlet weak var outputAssetImg: CircleImageView!
     @IBOutlet weak var outputAssetLabel: UILabel!
     @IBOutlet weak var outputAmountLabel: UILabel!
     @IBOutlet weak var outputValueCurrency: UILabel!
