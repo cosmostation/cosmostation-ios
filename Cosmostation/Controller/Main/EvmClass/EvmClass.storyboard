@@ -383,7 +383,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Cjq-Xv-DKJ">
-                                <rect key="frame" x="0.0" y="12" width="393" height="641"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="icL-Wc-kbJ">
                                     <size key="itemSize" width="128" height="128"/>
@@ -434,7 +434,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="_primary"/>
                         <constraints>
-                            <constraint firstAttribute="top" secondItem="Cjq-Xv-DKJ" secondAttribute="top" constant="-12" id="KEY-60-Cif"/>
+                            <constraint firstAttribute="top" secondItem="Cjq-Xv-DKJ" secondAttribute="top" id="KEY-60-Cif"/>
                             <constraint firstItem="AyS-iq-evi" firstAttribute="centerX" secondItem="HgW-ec-Z36" secondAttribute="centerX" id="RyH-ip-Kq6"/>
                             <constraint firstItem="AyS-iq-evi" firstAttribute="centerY" secondItem="HgW-ec-Z36" secondAttribute="centerY" id="UtK-2U-cgu"/>
                             <constraint firstItem="hvO-5y-sZC" firstAttribute="centerY" secondItem="HgW-ec-Z36" secondAttribute="centerY" id="av8-iy-jQd"/>
