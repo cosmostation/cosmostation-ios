@@ -46,5 +46,23 @@ class EcoListCell: UICollectionViewCell {
             supportImageView.isHidden = support
         }
     }
+    
+    func onBindTestDapp(_ index: Int) {
+        let endpoint = "https://raw.githubusercontent.com/cosmostation/chainlist/master/wallet_mobile/mobile_ecosystem/cosmos/resource/"
+        if index == 0 {
+            let url = URL(string: endpoint + "injection.png")
+            thumbnailImageView.sd_setImage(with: url)
+            titleLabel.text = "Injection Example"
+            descriptionLabel.text = "This page offers examples and guidance for integrating and using the Cosmostation app in applications."
+            typeTagLabel.text = "Develop Tool"
+
+        } else {
+            let url = URL(string: endpoint + "github.png")
+            thumbnailImageView.sd_setImage(with: url)
+            titleLabel.text = "Injection Github"
+            descriptionLabel.text = "This Github provides sample code and guides for integrating Cosmostation Wallet with DApps."
+            typeTagLabel.text = "Github"
+        }
+    }
 
 }

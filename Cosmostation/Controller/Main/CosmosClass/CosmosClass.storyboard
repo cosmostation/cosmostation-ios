@@ -536,7 +536,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Gyj-hc-Arx">
-                                <rect key="frame" x="0.0" y="12" width="393" height="640.33333333333337"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zXr-43-Z7f">
                                     <size key="itemSize" width="128" height="128"/>
@@ -590,7 +590,7 @@
                             <constraint firstItem="Shj-9l-HEW" firstAttribute="centerX" secondItem="eog-Ha-bTa" secondAttribute="centerX" id="5To-of-icC"/>
                             <constraint firstItem="Gyj-hc-Arx" firstAttribute="trailing" secondItem="eog-Ha-bTa" secondAttribute="trailing" id="GMU-aQ-h6M"/>
                             <constraint firstItem="Gyj-hc-Arx" firstAttribute="bottom" secondItem="2ip-Ny-1iI" secondAttribute="bottom" id="ITK-HF-TC5"/>
-                            <constraint firstAttribute="top" secondItem="Gyj-hc-Arx" secondAttribute="top" constant="-12" id="Jz7-Go-gFa"/>
+                            <constraint firstAttribute="top" secondItem="Gyj-hc-Arx" secondAttribute="top" id="Jz7-Go-gFa"/>
                             <constraint firstItem="Shj-9l-HEW" firstAttribute="centerY" secondItem="eog-Ha-bTa" secondAttribute="centerY" id="Vab-2X-reO"/>
                             <constraint firstItem="Gyj-hc-Arx" firstAttribute="leading" secondItem="eog-Ha-bTa" secondAttribute="leading" id="aMl-lB-Sif"/>
                             <constraint firstItem="ed1-RP-lKd" firstAttribute="centerY" secondItem="eog-Ha-bTa" secondAttribute="centerY" id="eai-bX-rEh"/>
