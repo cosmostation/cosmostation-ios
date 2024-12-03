@@ -16,7 +16,7 @@
 <details open>
 <summary><h2 style='display: inline; font-size: 24px'>Key Features</h2></summary>
 <br>
-Non-custodial tendermint-based mobile walle application designed for managing and staking Cosmos-based assets. It supports various Cosmos SDK-based blockchains, enabling users to store, send, receive, and stake their tokens directly from their mobile devices. The wallet features a user-friendly interface, real-time transaction history, and secure private key management. It also provides integration with decentralized applications
+Non-custodial Tendermint-based mobile walle application designed for managing and staking Cosmos-based assets. It supports various Cosmos SDK-based blockchains, enabling users to store, send, receive, and stake their tokens directly from their mobile devices. The wallet features a user-friendly interface, real-time transaction history, and secure private key management. It also provides integration with decentralized applications
 
 1. Fully open-source
 2. We respect your privacy and ensure that no user data is collected, except for push notifications to keep you informed.
