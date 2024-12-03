@@ -58,9 +58,7 @@ class SelectSwapAssetCell: UITableViewCell {
             self.amountLabel?.attributedText = WDP.dpAmount(dpInputBalance.stringValue, self.amountLabel!.font, asset.decimals)
             self.amountLabel.isHidden = false
             
-            let msPrice = BaseData.instance.getPrice(asset.geckoId)
-            let msValue = msPrice.multiplying(by: dpInputBalance, withBehavior: handler6)
-            WDP.dpValue(msValue, self.valueCurrencyLabel, self.valueLabel)
+            WDP.dpValue(asset.value, self.valueCurrencyLabel, self.valueLabel)
             self.valueCurrencyLabel.isHidden = false
             self.valueLabel.isHidden = false
         }

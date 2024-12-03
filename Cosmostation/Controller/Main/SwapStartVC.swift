@@ -963,6 +963,20 @@ extension SwapStartVC {
                     targetInputAssets[index].balance = inputChain.getCosmosfetcher()?.balanceAmount(targetInputAssets[index].denom) ?? NSDecimalNumber.zero
                 }
             }
+            let dpInputBalance = targetInputAssets[index].balance.multiplying(byPowerOf10: -targetInputAssets[index].decimals!)
+            let price = BaseData.instance.getPrice(targetInputAssets[index].geckoId)
+            targetInputAssets[index].value = price.multiplying(by: dpInputBalance, withBehavior: handler6)
+        }
+        targetInputAssets.sort {
+            if ($0.denom == inputChain.stakeDenom) { return true }
+            if ($1.denom == inputChain.stakeDenom) { return false }
+            if ($0.symbol == inputChain.coinSymbol) { return true }
+            if ($1.symbol == inputChain.coinSymbol) { return false }
+            if ($0.value.decimalValue > $1.value.decimalValue) { return true }
+            if ($0.value.decimalValue < $1.value.decimalValue) { return false }
+            if ($0.balance.decimalValue > $1.balance.decimalValue) { return true }
+            if ($0.balance.decimalValue < $1.balance.decimalValue) { return false }
+            return $0.symbol < $1.symbol
         }
     }
     
@@ -981,7 +995,22 @@ extension SwapStartVC {
                     targetOutputAssets[index].balance = outputChain.getCosmosfetcher()?.balanceAmount(targetOutputAssets[index].denom) ?? NSDecimalNumber.zero
                 }
             }
+            let dpInputBalance = targetOutputAssets[index].balance.multiplying(byPowerOf10: -targetOutputAssets[index].decimals!)
+            let price = BaseData.instance.getPrice(targetOutputAssets[index].geckoId)
+            targetOutputAssets[index].value = price.multiplying(by: dpInputBalance, withBehavior: handler6)
         }
+        targetOutputAssets.sort {
+            if ($0.denom == outputChain.stakeDenom) { return true }
+            if ($1.denom == outputChain.stakeDenom) { return false }
+            if ($0.symbol == outputChain.coinSymbol) { return true }
+            if ($1.symbol == outputChain.coinSymbol) { return false }
+            if ($0.value.decimalValue > $1.value.decimalValue) { return true }
+            if ($0.value.decimalValue < $1.value.decimalValue) { return false }
+            if ($0.balance.decimalValue > $1.balance.decimalValue) { return true }
+            if ($0.balance.decimalValue < $1.balance.decimalValue) { return false }
+            return $0.symbol < $1.symbol
+        }
+
     }
 
 }
@@ -995,6 +1024,7 @@ public struct TargetAsset {
     var geckoId: String?                    // skip - "coingecko_id"                squid - "coingeckoId"
     var name: String?                       // skip - "name"                        squid - "name"
     var balance = NSDecimalNumber.zero      // fetched balacne
+    var value = NSDecimalNumber.zero
     var type = TargetAssetType.Native
     
     init(_ denom: String, _ symbol: String, _ decimals: Int16, _ image: String?, _ geckoId: String?, _ name: String?) {
