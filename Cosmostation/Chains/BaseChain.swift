@@ -593,6 +593,7 @@ func ALLCHAINS() -> [BaseChain] {
     var result = [BaseChain]()
     
     result.append(ChainCosmos())
+    result.append(ChainAaron())
     result.append(ChainAgoric564())
     result.append(ChainAgoric118())
     result.append(ChainAiozEVM())                       //EVM
