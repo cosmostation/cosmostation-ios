@@ -305,7 +305,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
 
 
     func onUpdateView() {
-        if (nativeCoins.count + ibcCoins.count + bridgedCoins.count + mintscanCw20Tokens.count + mintscanErc20Tokens.count < 10) {
+        if (nativeCoins.count + ibcCoins.count + bridgedCoins.count + toDisplayCw20Tokens.count + toDisplayErc20Tokens.count < 10) {
             tableView.tableHeaderView = nil
             tableView.headerView(forSection: 0)?.layoutSubviews()
             tableView.contentOffset = CGPoint(x: 0, y: 0)
@@ -679,11 +679,11 @@ extension CosmosCryptoVC: UISearchBarDelegate {
             return BaseData.instance.getAsset(selectedChain.apiName, coin.denom)?.symbol?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         
-        searchMintscanCw20Tokens = searchText.isEmpty ? mintscanCw20Tokens : mintscanCw20Tokens.filter { token in
+        searchMintscanCw20Tokens = searchText.isEmpty ? toDisplayCw20Tokens : toDisplayCw20Tokens.filter { token in
             return token.symbol?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         
-        searchMintscanErc20Tokens = searchText.isEmpty ? mintscanErc20Tokens : mintscanErc20Tokens.filter { token in
+        searchMintscanErc20Tokens = searchText.isEmpty ? toDisplayErc20Tokens : toDisplayErc20Tokens.filter { token in
             return token.symbol?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         
