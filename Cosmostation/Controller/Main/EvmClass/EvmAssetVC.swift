@@ -15,6 +15,7 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var tableView: UITableView!
     var refresher: UIRefreshControl!
+    var searchBar: UISearchBar?
     
     var selectedChain: BaseChain!
     var allErc20Tokens = [MintscanToken]()
@@ -26,8 +27,6 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
     var searchErc20Tokens = [MintscanToken]()
     
     var containCoinSymbol = true
-    
-    private lazy var searchBarView = SearchBarWithTopPadding(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 54))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,27 +52,19 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
         
-        searchBarView.searchBar.delegate = self
+        searchBar = UISearchBar(frame: CGRect(x: 0, y: 10, width: self.view.frame.size.width, height: 54))
+        searchBar?.searchTextField.textColor = .color01
+        searchBar?.tintColor = UIColor.white
+        searchBar?.barTintColor = UIColor.clear
+        searchBar?.searchTextField.font = .fontSize14Bold
+        searchBar?.backgroundImage = UIImage()
+        searchBar?.delegate = self
 
         onSortAssets()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if toDisplayErc20Tokens.count > 14 {
-            tableView.tableHeaderView = searchBarView
-
-            var contentOffset: CGPoint = tableView.contentOffset
-            if (contentOffset == CGPoint(x: 0, y: 0) &&
-                tableView.tableHeaderView != nil &&
-                searchBarView.searchBar.text?.isEmpty == true) {
-                contentOffset.y += (tableView.tableHeaderView?.frame)!.height
-                tableView.contentOffset = contentOffset
-            }
-            
-            tableView.reloadData()
-        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("FetchData"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onToggleValue(_:)), name: Notification.Name("ToggleHideValue"), object: nil)
@@ -147,6 +138,17 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
             }
             
             DispatchQueue.main.async {
+                if self.toDisplayErc20Tokens.count < 10 {
+                    self.tableView.tableHeaderView = nil
+                    self.tableView.headerView(forSection: 0)?.layoutSubviews()
+                    self.tableView.contentOffset = CGPoint(x: 0, y: 0)
+                } else {
+                    self.searchBar?.text = ""
+                    self.tableView.tableHeaderView = self.searchBar
+                    self.tableView.headerView(forSection: 0)?.layoutSubviews()
+                    self.tableView.contentOffset = CGPoint(x: 0, y: 54)
+                }
+
                 self.loadingView.isHidden = true
                 self.tableView.reloadData()
             }
