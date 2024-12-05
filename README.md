@@ -828,6 +828,15 @@ You can download each store.
     <td>gRPC or Rest</td>
     <td></td>
   </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/xion/resource/chain_xion.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">XION</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>gRPC or Rest</td>
+    <td></td>
+  </tr>
 
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/xpla/resource/chain_xpla.png?raw=true" width="42" height = "42"></td>
