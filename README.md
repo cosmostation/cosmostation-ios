@@ -245,6 +245,15 @@ You can download each store.
     <td>gRPC or Rest</td>
     <td></td>
   </tr>
+
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/doravota/resource/chain_doravota.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">DORAVOTA</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>gRPC or Rest</td>
+    <td></td>
+  </tr>
   
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/dungeon/resource/chain_dungeon.png?raw=true" width="42" height = "42"></td>
@@ -305,6 +314,15 @@ You can download each store.
   </tr>
 	 	
   <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/firmachain/resource/chain_firmachain.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">FIRMA CHAIN</span></td>
+    <td>m/44'/7777777'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>gRPC or Rest</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/govgen/resource/chain_govgen.png?raw=true" width="42" height = "42"></td>
     <td><span style="font-weight:bold">GOVGEN</span></td>
     <td>m/44'/118'/0'/0/X</td>
@@ -321,6 +339,16 @@ You can download each store.
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
     <td></td>
+  </tr>
+	 	
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/haqq/resource/chain_haqq.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">HAQQ</span></td>
+    <td>m/44'/60'/0'/0/X</td>
+    <td>keccak256</td>
+    <td>gRPC or Rest, evmRPC</td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
+    <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -495,6 +523,15 @@ You can download each store.
   </tr>
 	 	
   <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/nolus/resource/chain_nolus.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">NOLUS</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>gRPC or Rest</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/nyx/resource/chain_nyx.png?raw=true" width="42" height = "42"></td>
     <td><span style="font-weight:bold">NYX</span></td>
     <td>m/44'/118'/0'/0/X</td>
@@ -529,6 +566,15 @@ You can download each store.
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/onomy-protocol/resource/chain_onomy-protocol.png?raw=true" width="42" height = "42"></td>
     <td><span style="font-weight:bold">ONOMY</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>gRPC or Rest</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/orai-chain/resource/chain_oraichain.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">ORAI CHAIN</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
@@ -638,6 +684,15 @@ You can download each store.
   </tr>
     
   <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/seda/resource/chain_seda.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">SEDA</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>gRPC or Rest</td>
+    <td></td>
+  </tr>
+    
+  <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/sei/resource/chain_sei.png?raw=true" width="42" height = "42"></td>
     <td><span style="font-weight:bold">SEI</span></td>
     <td>m/44'/118'/0'/0/X</td>
@@ -658,6 +713,15 @@ You can download each store.
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/sentinel/resource/chain_sentinel.png?raw=true" width="42" height = "42"></td>
     <td><span style="font-weight:bold">SENTINEL</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>gRPC or Rest</td>
+    <td></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/sge/resource/chain_sge.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">SGE</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
@@ -748,6 +812,15 @@ You can download each store.
   </tr>
     
   <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/thorchain/resource/chain_thorchain.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">THOR CHAIN</span></td>
+    <td>m/44'/931'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>Rest</td>
+    <td></td>
+  </tr>
+    
+  <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/umee/resource/chain_umee.png?raw=true" width="42" height = "42"></td>
     <td><span style="font-weight:bold">UMEE</span></td>
     <td>m/44'/118'/0'/0/X</td>
@@ -822,7 +895,8 @@ You can download each store.
     <td>keccak256</td>
     <td>evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
-        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 
   <tr> 
@@ -832,7 +906,8 @@ You can download each store.
     <td>keccak256</td>
     <td>evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
-        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 
   <tr> 
@@ -853,7 +928,8 @@ You can download each store.
     <td>keccak256</td>
     <td>evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
-        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 
   <tr> 
@@ -863,7 +939,19 @@ You can download each store.
     <td>keccak256</td>
     <td>evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
-        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
+  </tr>
+
+  <tr> 
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/fantom/resource/chain_fantom.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">FANTOM</span></td>
+    <td>m/44'/60'/0'/0/X</td>
+    <td>keccak256</td>
+    <td>evmRPC</td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 
   <tr> 
@@ -873,7 +961,8 @@ You can download each store.
     <td>keccak256</td>
     <td>evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
-        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 
   <tr> 
@@ -883,7 +972,8 @@ You can download each store.
     <td>keccak256</td>
     <td>evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
-        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22">
+        <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_dapp.png?raw=true" width="48" height = "22"></td>
   </tr>
 
   <tr> 
