@@ -19,7 +19,7 @@ import SDWebImage
 class CommonTransfer: BaseVC {
     
     @IBOutlet weak var midGapConstraint: NSLayoutConstraint!
-    @IBOutlet weak var titleCoinImg: UIImageView!
+    @IBOutlet weak var titleCoinImg: CircleImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var toChainCardView: FixCardView!

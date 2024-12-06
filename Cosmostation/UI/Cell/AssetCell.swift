@@ -13,7 +13,7 @@ import SwiftyJSON
 class AssetCell: UITableViewCell {
     
     @IBOutlet weak var rootView: CardViewCell!
-    @IBOutlet weak var coinImg: UIImageView!
+    @IBOutlet weak var coinImg: CircleImageView!
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var priceCurrencyLabel: UILabel!

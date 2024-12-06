@@ -710,7 +710,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainThor())
     result.append(ChainUmee())
     result.append(ChainUnification())
-//    result.append(ChainXion())
+    result.append(ChainXion())
     result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
     result.append(ChainZetaEVM())                       //EVM
@@ -718,7 +718,7 @@ func ALLCHAINS() -> [BaseChain] {
     
     
     
-    result.append(ChainBeraEVM_T())                     //EVM
+//    result.append(ChainBeraEVM_T())                     //EVM
     result.append(ChainBitCoin44_T())
     result.append(ChainBitCoin49_T())
     result.append(ChainBitCoin84_T())

@@ -274,8 +274,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SelectSwapInputAsset || sheetType == .SelectSwapOutputAsset) {
             swapAssetsSearch = searchText.isEmpty ? swapAssets : swapAssets.filter { asset in
-                return (asset.symbol.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil ||
-                        asset.denom.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil)
+                return (asset.symbol.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil)
             }
         } else if (sheetType == .SelectValidator) {
             validatorsSearch = searchText.isEmpty ? validators : validators.filter { validator in

@@ -12,7 +12,7 @@ import SDWebImage
 
 class SelectSwapAssetCell: UITableViewCell {
     
-    @IBOutlet weak var coinImg: UIImageView!
+    @IBOutlet weak var coinImg: CircleImageView!
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var ibcTag: RoundedPaddingLabel!
     @IBOutlet weak var erc20Tag: RoundedPaddingLabel!
@@ -58,9 +58,7 @@ class SelectSwapAssetCell: UITableViewCell {
             self.amountLabel?.attributedText = WDP.dpAmount(dpInputBalance.stringValue, self.amountLabel!.font, asset.decimals)
             self.amountLabel.isHidden = false
             
-            let msPrice = BaseData.instance.getPrice(asset.geckoId)
-            let msValue = msPrice.multiplying(by: dpInputBalance, withBehavior: handler6)
-            WDP.dpValue(msValue, self.valueCurrencyLabel, self.valueLabel)
+            WDP.dpValue(asset.value, self.valueCurrencyLabel, self.valueLabel)
             self.valueCurrencyLabel.isHidden = false
             self.valueLabel.isHidden = false
         }

@@ -26,6 +26,6 @@ class ChainThor: BaseChain {
         validatorPrefix = "thorvaloper"
         supportStaking = false
         grpcHost = ""
-        lcdUrl = "https://thornode.thorchain.liquify.com/"
+        lcdUrl = "https://thornode.ninerealms.com/"
     }
 }

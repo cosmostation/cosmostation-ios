@@ -13,7 +13,7 @@ import SkeletonView
 class SelectDisplayTokenCell: UITableViewCell {
     
     @IBOutlet weak var rootView: UIView!
-    @IBOutlet weak var coinImg: UIImageView!
+    @IBOutlet weak var coinImg: CircleImageView!
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var contractLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!

@@ -36,6 +36,9 @@ class EvmEcosystemVC: BaseVC {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "EcoListCell", bundle: nil), forCellWithReuseIdentifier: "EcoListCell")
+        collectionView.register(EcoSystemSectionHeader.self,
+                                        forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                        withReuseIdentifier: "EcoSystemSectionHeader")
         
         onFetchEcoSystemList()
     }
@@ -72,14 +75,61 @@ class EvmEcosystemVC: BaseVC {
 
 extension EvmEcosystemVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        if selectedChain is ChainEthereum {
+            return 2
+        } else {
+            return 1
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "EcoSystemSectionHeader", for: indexPath) as? EcoSystemSectionHeader else { return UICollectionReusableView() }
+        
+        if selectedChain is ChainEthereum {
+            if indexPath.section == 0 {
+                sectionHeader.titleLabel.text = "Injection Example Guide"
+                sectionHeader.countLabel.text = "2"
+                return sectionHeader
+                
+            } else {
+                sectionHeader.titleLabel.text = "Dapp"
+                sectionHeader.countLabel.text = "\(ecosystemList?.count ?? 0)"
+                return sectionHeader
+                
+            }
+        } else {
+            return sectionHeader
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if selectedChain is ChainEthereum {
+            return CGSize(width: collectionView.frame.width, height: 44)
+        } else {
+            return CGSize(width: collectionView.frame.width, height: 12)
+        }
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ecosystemList?.count ?? 0
+        if selectedChain is ChainEthereum && section == 0 {
+            return 2
+        } else {
+            return ecosystemList?.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EcoListCell", for: indexPath) as! EcoListCell
-        cell.onBindEcoSystem(ecosystemList?[indexPath.row])
-        return cell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EcoListCell", for: indexPath) as? EcoListCell else { return UICollectionViewCell() }
+        
+        if selectedChain is ChainEthereum && indexPath.section == 0 {
+            cell.onBindTestDapp(indexPath.item)
+            return cell
+            
+        } else {
+            cell.onBindEcoSystem(ecosystemList?[indexPath.row])
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -98,20 +148,33 @@ extension EvmEcosystemVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let support = ecosystemList?[indexPath.row]["support"].bool, support == false {
-            let name = ecosystemList?[indexPath.row]["name"].stringValue ?? ""
-            onShowToast(String(format: NSLocalizedString("error_not_support_dapp", comment: ""), name))
-            return
-        }
-        if let link = ecosystemList?[indexPath.row]["link"].stringValue ,
-           let linkUrl = URL(string: link) {
-            let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
-            dappDetail.targetChain = selectedChain
-            dappDetail.dappType = .INTERNAL_URL
-            dappDetail.dappUrl = linkUrl
-            dappDetail.modalPresentationStyle = .fullScreen
-            self.present(dappDetail, animated: true)
+        if selectedChain is ChainEthereum && indexPath.section == 0 {
+            if indexPath.item == 0 {
+                let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+                dappDetail.dappType = .INTERNAL_URL
+                dappDetail.targetChain = selectedChain
+                dappDetail.dappUrl = URL(string: "https://cosmostation.github.io/cosmostation-app-injection-example/")!
+                dappDetail.modalPresentationStyle = .fullScreen
+                self.present(dappDetail, animated: true)
+            } else {
+                onShowSafariWeb(URL(string: "https://github.com/cosmostation/cosmostation-app-injection-example")!)
+            }
+            
+        } else {
+            if let support = ecosystemList?[indexPath.row]["support"].bool, support == false {
+                let name = ecosystemList?[indexPath.row]["name"].stringValue ?? ""
+                onShowToast(String(format: NSLocalizedString("error_not_support_dapp", comment: ""), name))
+                return
+            }
+            if let link = ecosystemList?[indexPath.row]["link"].stringValue ,
+               let linkUrl = URL(string: link) {
+                let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+                dappDetail.targetChain = selectedChain
+                dappDetail.dappType = .INTERNAL_URL
+                dappDetail.dappUrl = linkUrl
+                dappDetail.modalPresentationStyle = .fullScreen
+                self.present(dappDetail, animated: true)
+            }
         }
     }
-    
 }
