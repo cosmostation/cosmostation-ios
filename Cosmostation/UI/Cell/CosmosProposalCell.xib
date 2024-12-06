@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -61,13 +61,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjN-1v-Aah">
-                                <rect key="frame" x="60" y="37.666666666666664" width="50.333333333333343" height="15.333333333333336"/>
+                                <rect key="frame" x="60" y="37.666666666666664" width="63.666666666666657" height="15.333333333333336"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_expedited_proposal" translatesAutoresizingMaskIntoConstraints="NO" id="Lrn-Vh-K8f">
-                                <rect key="frame" x="114.33333333333333" y="39.333333333333336" width="12" height="12"/>
+                                <rect key="frame" x="127.66666666666666" y="39.333333333333336" width="12" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="12" id="eio-hl-2GN"/>
                                     <constraint firstAttribute="height" constant="12" id="sHk-3k-5NG"/>
@@ -105,6 +105,7 @@
                             <constraint firstItem="JuI-gf-uwO" firstAttribute="top" secondItem="RaA-TM-1v1" secondAttribute="top" constant="12" id="PJw-NK-fOH"/>
                             <constraint firstAttribute="trailing" secondItem="JsP-so-393" secondAttribute="trailing" constant="70" id="QiN-Dd-s8a"/>
                             <constraint firstItem="JsP-so-393" firstAttribute="leading" secondItem="UgN-iE-N60" secondAttribute="trailing" constant="4" id="Rrg-BC-Gjn"/>
+                            <constraint firstItem="Lrn-Vh-K8f" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="geH-vr-GNk" secondAttribute="trailing" constant="4" id="Ukz-49-pIS"/>
                             <constraint firstItem="Lrn-Vh-K8f" firstAttribute="centerY" secondItem="gjN-1v-Aah" secondAttribute="centerY" id="VGm-HY-9d2"/>
                             <constraint firstItem="Lrn-Vh-K8f" firstAttribute="leading" secondItem="gjN-1v-Aah" secondAttribute="trailing" constant="4" id="YOe-Hh-tDL"/>
                             <constraint firstItem="UgN-iE-N60" firstAttribute="top" secondItem="RaA-TM-1v1" secondAttribute="top" constant="14" id="bMX-LL-VS0"/>
@@ -114,6 +115,7 @@
                             <constraint firstAttribute="bottom" secondItem="JuI-gf-uwO" secondAttribute="bottom" constant="12" id="fEf-OX-Bfs"/>
                             <constraint firstItem="gjN-1v-Aah" firstAttribute="top" secondItem="JsP-so-393" secondAttribute="bottom" constant="6" id="kzP-dS-iBz"/>
                             <constraint firstItem="UgN-iE-N60" firstAttribute="leading" secondItem="JuI-gf-uwO" secondAttribute="trailing" constant="12.000000000000007" id="njO-dS-fo5"/>
+                            <constraint firstItem="Lrn-Vh-K8f" firstAttribute="centerY" secondItem="geH-vr-GNk" secondAttribute="centerY" id="oMp-jr-HQZ"/>
                             <constraint firstItem="xK0-0G-d5i" firstAttribute="centerY" secondItem="geH-vr-GNk" secondAttribute="centerY" id="xGS-e5-zWU"/>
                             <constraint firstItem="8al-dL-sB4" firstAttribute="centerY" secondItem="JuI-gf-uwO" secondAttribute="centerY" id="xtb-lR-4jS"/>
                             <constraint firstAttribute="trailing" secondItem="5lf-Bi-Sxx" secondAttribute="trailing" constant="10" id="zzN-FA-T9n"/>
@@ -153,10 +155,10 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_color02">
-            <color red="0.74500000476837158" green="0.81999999284744263" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74509803921568629" green="0.81960784313725488" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
-            <color red="0.48600000143051147" green="0.31000000238418579" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_voteYes">
             <color red="0.030999999493360519" green="0.81999999284744263" blue="0.32199999690055847" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

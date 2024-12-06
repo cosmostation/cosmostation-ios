@@ -33,6 +33,7 @@ class CosmosProposalCell: UITableViewCell {
         selectSwitch.isHidden = true
         selectSwitch.isOn = false
         timeLabel.isHidden = true
+        timeLabel.text = ""
         myVoteNumber.isHidden = true
         expectedImg.isHidden = true
         statusImg.isHidden = true
