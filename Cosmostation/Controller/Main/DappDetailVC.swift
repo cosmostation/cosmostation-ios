@@ -68,7 +68,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
 //                print("init wcV2Disconnect \(result)")
             }
             
-            allChains = await baseAccount.initAllKeys().filter({ $0.isTestnet == false && $0.isDefault })
+            allChains = await baseAccount.initAllKeys().filter({ $0.isDefault })
             
             DispatchQueue.main.async {
                 self.loadingView.isHidden = true
@@ -436,7 +436,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                 
             } else if (method == "wallet_switchEthereumChain") {
                 let requestChainId = messageJSON["params"].arrayValue[0]["chainId"].stringValue
-                if let requestChain = allChains.filter({ $0.chainIdEvm == requestChainId }).first {
+                if let requestChain = allChains.filter({ $0.chainIdEvm?.lowercased() == requestChainId.lowercased() }).first {
                     targetChain = requestChain
                     injectionRequestApprove(JSON.null, messageJSON, bodyJSON["messageId"])
                     emitToWeb(requestChain.chainIdEvm!)
