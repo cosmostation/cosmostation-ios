@@ -630,6 +630,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainDungeon())
     result.append(ChainDydx())
     result.append(ChainDymensionEVM())                  //EVM
+    result.append(ChainElys())
     result.append(ChainEthereum())                      //EVM
     result.append(ChainEvmosEVM())                      //EVM
     result.append(ChainFantom())                        //EVM
