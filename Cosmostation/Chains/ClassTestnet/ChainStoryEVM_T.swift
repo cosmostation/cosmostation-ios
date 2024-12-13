@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainStory_T: BaseChain  {
+class ChainStoryEVM_T: ChainStoryEVM  {
     
     override init() {
         super.init()
@@ -27,22 +27,14 @@ class ChainStory_T: BaseChain  {
         coinLogo = "tokenIp"
         evmRpcURL = "https://rpc-office-evm.cosmostation.io/story-testnet/"
         
-        
-        
-        bechAccountPrefix = "story"
-        validatorPrefix = "storyvaloper"
-        mainUrl = "https://lcd-office.cosmostation.io/story-testnet"
+//        bechAccountPrefix = "story"
+//        validatorPrefix = "storyvaloper"
+//        mainUrl = "https://lcd-office.cosmostation.io/story-testnet"
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-    }
-    
-    override func fetchBalances() {
-    }
-    
-    override func fetchData(_ id: Int64) {
     }
 }
