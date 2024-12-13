@@ -26,5 +26,7 @@ class ChainElys: BaseChain  {
         validatorPrefix = "elysvaloper"
         grpcHost = ""
         lcdUrl = "https://elys-api.polkachu.com/"
+        
+        supportStaking = false
     }
 }
