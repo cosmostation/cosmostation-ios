@@ -64,6 +64,7 @@ class CosmosVote: BaseVC {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "VoteCell", bundle: nil), forCellReuseIdentifier: "VoteCell")
+        tableView.register(UINib(nibName: "VoteThreeItemsCell", bundle: nil), forCellReuseIdentifier: "VoteThreeItemsCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
@@ -263,9 +264,7 @@ extension CosmosVote: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"VoteCell") as! VoteCell
-        cell.onBindVote(toVoteProposals[indexPath.row])
-        cell.actionToggle = { tag in
+        let actionToggle: ((Int) -> Void) = { tag in
             if (tag == 0) {
                 self.toVoteProposals[indexPath.row].toVoteOption = Cosmos_Gov_V1beta1_VoteOption.yes
             } else if (tag == 1) {
@@ -284,7 +283,20 @@ extension CosmosVote: UITableViewDelegate, UITableViewDataSource {
                 self.onSimul()
             })
         }
-        return cell
+        
+        if selectedChain is ChainAtomone {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "VoteThreeItemsCell") as! VoteThreeItemsCell
+            cell.onBindVote(toVoteProposals[indexPath.row])
+            cell.actionToggle = actionToggle
+            return cell
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"VoteCell") as! VoteCell
+            cell.onBindVote(toVoteProposals[indexPath.row])
+            cell.actionToggle = actionToggle
+            return cell
+
+        }
     }
 }
 

@@ -1678,6 +1678,8 @@
 		79D5561F2CEF09B60023F1B9 /* ChainNomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5561E2CEF09B60023F1B9 /* ChainNomic.swift */; };
 		79D556212CEF0A8E0023F1B9 /* ChainSeda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D556202CEF0A8E0023F1B9 /* ChainSeda.swift */; };
 		79D556232CEF0B810023F1B9 /* ChainSge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D556222CEF0B810023F1B9 /* ChainSge.swift */; };
+		79DD26672D0C00B500B4353C /* VoteThreeItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DD26652D0C00B500B4353C /* VoteThreeItemsCell.swift */; };
+		79DD26682D0C00B500B4353C /* VoteThreeItemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DD26662D0C00B500B4353C /* VoteThreeItemsCell.xib */; };
 		79E7B3CA2CF83F0400C28D93 /* dydx.json in Resources */ = {isa = PBXBuildFile; fileRef = 79E7B3C92CF83F0400C28D93 /* dydx.json */; };
 		79EF66802C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79EF66812C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
@@ -3080,6 +3082,8 @@
 		79D5561E2CEF09B60023F1B9 /* ChainNomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainNomic.swift; sourceTree = "<group>"; };
 		79D556202CEF0A8E0023F1B9 /* ChainSeda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSeda.swift; sourceTree = "<group>"; };
 		79D556222CEF0B810023F1B9 /* ChainSge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSge.swift; sourceTree = "<group>"; };
+		79DD26652D0C00B500B4353C /* VoteThreeItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteThreeItemsCell.swift; sourceTree = "<group>"; };
+		79DD26662D0C00B500B4353C /* VoteThreeItemsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteThreeItemsCell.xib; sourceTree = "<group>"; };
 		79E7B3C92CF83F0400C28D93 /* dydx.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dydx.json; sourceTree = "<group>"; };
 		79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgRandomButton.swift; sourceTree = "<group>"; };
 		79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAtomone.swift; sourceTree = "<group>"; };
@@ -4686,6 +4690,8 @@
 				792613DC2CDB5A5300FAF47D /* OnChainProposalCell.xib */,
 				0402B7F62ACC3F1400824B3F /* VoteCell.swift */,
 				0402B7F72ACC3F1400824B3F /* VoteCell.xib */,
+				79DD26652D0C00B500B4353C /* VoteThreeItemsCell.swift */,
+				79DD26662D0C00B500B4353C /* VoteThreeItemsCell.xib */,
 				E1B44B1D2ADA41CD0073C88A /* NeutronSingleVoteCell.swift */,
 				E1B44B1E2ADA41CD0073C88A /* NeutronSingleVoteCell.xib */,
 				E1B44B232ADA41DE0073C88A /* NeutronMultiVoteCell.swift */,
@@ -5420,6 +5426,7 @@
 				E10B1D752C2156430039283B /* KavaDefiCell.xib in Resources */,
 				E1CD6AF02AEAAEA300376909 /* AboutDescriptionCell.xib in Resources */,
 				04FAD9EA2AB6DBCE00143A3E /* ManageAccountCell.xib in Resources */,
+				79DD26682D0C00B500B4353C /* VoteThreeItemsCell.xib in Resources */,
 				E10B1DD42C2159040039283B /* KavaMintCreateAction.xib in Resources */,
 				E10B1DAD2C2156430039283B /* KavaSwapListVC.xib in Resources */,
 				040733052AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
@@ -6886,6 +6893,7 @@
 				04C8172A2BA98D75006B800A /* cosmos_gov_v1beta1_tx.grpc.swift in Sources */,
 				04CB911E2A90C9D900375354 /* ChainAkash.swift in Sources */,
 				04C8176E2BA98D75006B800A /* cosmos_slashing_v1beta1_query.pb.swift in Sources */,
+				79DD26672D0C00B500B4353C /* VoteThreeItemsCell.swift in Sources */,
 				7926139C2CD4B82800FAF47D /* initia_reward_module_v1_module.pb.swift in Sources */,
 				045032472C1EEA9600235F6A /* ChainBinanceSmart.swift in Sources */,
 				04C8176C2BA98D75006B800A /* cosmos_tx_v1beta1_service.grpc.swift in Sources */,
