@@ -688,8 +688,10 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainPryzm())
     result.append(ChainQuasar())
     result.append(ChainQuicksilver())
+    result.append(ChainRealioEVM())
     result.append(ChainRegen())
     result.append(ChainRizon())
+    result.append(ChainRouterEVM())
     result.append(ChainSaga())
     result.append(ChainSecret118())
     result.append(ChainSecret529())
@@ -705,6 +707,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainStargaze())
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
+    result.append(ChainSynternet())
     result.append(ChainTenetEVM())                      //EVM
     result.append(ChainTeritori())
     result.append(ChainTerra())
