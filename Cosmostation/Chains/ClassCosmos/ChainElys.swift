@@ -20,11 +20,12 @@ class ChainElys: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uelys"
         bechAccountPrefix = "elys"
         validatorPrefix = "elysvaloper"
-        grpcHost = ""
-        lcdUrl = "https://elys-api.polkachu.com/"
+        supportStaking = false
+        grpcHost = "grpc-elys.cosmostation.io"
+        lcdUrl = "lcd-elys.cosmostation.io/"
     }
 }
