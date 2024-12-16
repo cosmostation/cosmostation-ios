@@ -663,7 +663,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMars())
     result.append(ChainMedibloc())
     result.append(ChainMigaloo())
-//    result.append(ChainMilkyway())
+    result.append(ChainMilkyway())
     result.append(ChainNeutron())
     result.append(ChainNibiru())
     //result.append(ChainNillion())
@@ -705,6 +705,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainSource())
     result.append(ChainStafi())
     result.append(ChainStargaze())
+//    result.append(ChainStoryEVM())                      //EVM
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
     result.append(ChainSynternet())
@@ -730,7 +731,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNeutron_T())
     result.append(ChainNillion_T())
     result.append(ChainMantra_T())
-//    result.append(ChainStory_T())
+    result.append(ChainStoryEVM_T())
 
     
     
