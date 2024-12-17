@@ -89,14 +89,14 @@ class CosmosOnChainProposalsVC: BaseVC {
         if let initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher() {
             let delegated = initiaFetcher.initiaDelegationAmountSum()
             let voteThreshold = selectedChain.votingThreshold()
-            if (delegated.compare(voteThreshold).rawValue <= 0) {
+            if (delegated.compare(voteThreshold).rawValue < 0) {
                 onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
                 return
             }
         } else {
             if let delegated = selectedChain.getCosmosfetcher()?.delegationAmountSum() {
                 let voteThreshold = selectedChain.votingThreshold()
-                if (delegated.compare(voteThreshold).rawValue <= 0) {
+                if (delegated.compare(voteThreshold).rawValue < 0) {
                     onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
                     return
                 }

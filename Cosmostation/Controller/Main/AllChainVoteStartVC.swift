@@ -102,7 +102,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
                     let delegated = cosmosFetcher.delegationAmountSum()
                     let voteThreshold = chain.votingThreshold()
                     let txFee = chain.getInitPayableFee()
-                    if (delegated.compare(voteThreshold).rawValue > 0 && txFee != nil) {
+                    if (delegated.compare(voteThreshold).rawValue >= 0 && txFee != nil) {
                         stakedChains.append(chain)
                     }
                 }
