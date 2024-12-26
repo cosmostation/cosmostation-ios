@@ -59,6 +59,15 @@ You can download each store.
   </tr>
 	 	
   <tr> 
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/aaron/resource/chain_aaron.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">AARON</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>gRPC or Rest</td>
+    <td></td>
+  </tr>
+	 	
+  <tr> 
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/agoric/resource/chain_agoric.png?raw=true" width="42" height = "42"></td>
     <td><span style="font-weight:bold">AGORIC</span></td>
     <td><span>m/44'/564'/0'/0/X</span><br/>
@@ -216,7 +225,7 @@ You can download each store.
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
-    <td></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_ics.png?raw=true" width="42" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -281,6 +290,15 @@ You can download each store.
     <td>gRPC or Rest, evmRPC</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22">
     <img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_erc20.png?raw=true" width="52" height = "22"></td>
+  </tr>
+	 	
+  <tr> 
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/elys/resource/chain_elys.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">ELYS</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>gRPC or Rest</td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_ics.png?raw=true" width="42" height = "22"></td>
   </tr>
 	 	
   <tr>
@@ -486,6 +504,15 @@ You can download each store.
   </tr>
 	 	
   <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/milkyway/resource/chain_milkyway.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">MILKYWAY</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>gRPC or Rest</td>
+    <td></td>
+  </tr>
+	 	
+  <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/neutron/resource/chain_neutron.png?raw=true" width="42" height = "42"></td>
     <td><span style="font-weight:bold">NEUTRON</span></td>
     <td>m/44'/118'/0'/0/X</td>
@@ -645,6 +672,15 @@ You can download each store.
     <td>gRPC or Rest</td>
     <td></td>
   </tr>
+
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/realio/resource/chain_realio.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">REALIO</span></td>
+    <td>m/44'/60'/0'/0/X</td>
+    <td>keccak256</td>
+    <td>gRPC or Rest, evmRPC</td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22"></td>
+  </tr>
     
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/regen/resource/chain_regen.png?raw=true" width="42" height = "42"></td>
@@ -662,6 +698,15 @@ You can download each store.
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
     <td></td>
+  </tr>
+
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/routerchain/resource/chain_routerchain.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">ROUTER</span></td>
+    <td>m/44'/60'/0'/0/X</td>
+    <td>keccak256</td>
+    <td>gRPC or Rest, evmRPC</td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_evm.png?raw=true" width="42" height = "22"></td>
   </tr>
     
   <tr>
@@ -781,6 +826,15 @@ You can download each store.
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/resource/static/tag_ics.png?raw=true" width="42" height = "22"></td>
+  </tr>
+    
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/synternet/resource/chain_synternet.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">SYNTERNET</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>gRPC or Rest</td>
+    <td></td>
   </tr>
     
   <tr>
