@@ -1665,6 +1665,9 @@
 		7981F7622D0C333E00BB50DA /* ChainRouterEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */; };
 		7981F7642D0C343D00BB50DA /* ChainRealioEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F7632D0C343D00BB50DA /* ChainRealioEVM.swift */; };
 		7987524A2CFFF32C00308EAC /* ChainAaron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798752492CFFF32C00308EAC /* ChainAaron.swift */; };
+		799B4A772D1E439D00998833 /* ChainForma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A762D1E439D00998833 /* ChainForma.swift */; };
+		799B4A7B2D1EA21700998833 /* ChainPundix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A7A2D1EA21700998833 /* ChainPundix.swift */; };
+		799B4A7F2D223FA900998833 /* ChainFxcoreEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A7E2D223FA900998833 /* ChainFxcoreEVM.swift */; };
 		79C5186F2CC76A8F00BC0E85 /* ChainKaia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5186E2CC76A8F00BC0E85 /* ChainKaia.swift */; };
 		79C518732CC8E08D00BC0E85 /* ChainJackal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C518722CC8E08D00BC0E85 /* ChainJackal.swift */; };
 		79C518752CC8E26100BC0E85 /* ChainSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C518742CC8E26100BC0E85 /* ChainSource.swift */; };
@@ -3073,6 +3076,9 @@
 		7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainRouterEVM.swift; sourceTree = "<group>"; };
 		7981F7632D0C343D00BB50DA /* ChainRealioEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainRealioEVM.swift; sourceTree = "<group>"; };
 		798752492CFFF32C00308EAC /* ChainAaron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAaron.swift; sourceTree = "<group>"; };
+		799B4A762D1E439D00998833 /* ChainForma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainForma.swift; sourceTree = "<group>"; };
+		799B4A7A2D1EA21700998833 /* ChainPundix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPundix.swift; sourceTree = "<group>"; };
+		799B4A7E2D223FA900998833 /* ChainFxcoreEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFxcoreEVM.swift; sourceTree = "<group>"; };
 		79C5186E2CC76A8F00BC0E85 /* ChainKaia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKaia.swift; sourceTree = "<group>"; };
 		79C518722CC8E08D00BC0E85 /* ChainJackal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainJackal.swift; sourceTree = "<group>"; };
 		79C518742CC8E26100BC0E85 /* ChainSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSource.swift; sourceTree = "<group>"; };
@@ -3455,6 +3461,8 @@
 				045032342C1EEA9500235F6A /* ChainDymensionEVM.swift */,
 				045032312C1EEA9500235F6A /* ChainEvmosEVM.swift */,
 				79D5560A2CE352870023F1B9 /* ChainFantom.swift */,
+				799B4A762D1E439D00998833 /* ChainForma.swift */,
+				799B4A7E2D223FA900998833 /* ChainFxcoreEVM.swift */,
 				79D5561C2CEF068B0023F1B9 /* ChainHaqqEVM.swift */,
 				045032382C1EEA9600235F6A /* ChainHumansEVM.swift */,
 				79C5186E2CC76A8F00BC0E85 /* ChainKaia.swift */,
@@ -3548,6 +3556,7 @@
 				045032DB2C1EFE5400235F6A /* ChainPersistence750.swift */,
 				045032DA2C1EFE5400235F6A /* ChainProvenance.swift */,
 				040AC1862C9D3AA400427AFD /* ChainPryzm.swift */,
+				799B4A7A2D1EA21700998833 /* ChainPundix.swift */,
 				045032E02C1EFE5500235F6A /* ChainQuasar.swift */,
 				045032DC2C1EFE5400235F6A /* ChainQuicksilver.swift */,
 				045032D82C1EFE5400235F6A /* ChainRegen.swift */,
@@ -6924,6 +6933,7 @@
 				046EA8BD2AD04A2600A2FCE7 /* desmos_profiles_v3_genesis.pb.swift in Sources */,
 				79FCA3CC2C3F9E92001C17D0 /* artela_fee_v1_tx.grpc.swift in Sources */,
 				04D785542C328DB1009D1A94 /* feemarket_feemarket_v1_query.grpc.swift in Sources */,
+				799B4A7B2D1EA21700998833 /* ChainPundix.swift in Sources */,
 				792613DD2CDB5A5300FAF47D /* OnChainProposalCell.swift in Sources */,
 				792613CA2CD4B82800FAF47D /* initia_ibchooks_v1_query.pb.swift in Sources */,
 				E10B1DCE2C2159040039283B /* KavaMintAction.swift in Sources */,
@@ -7378,6 +7388,7 @@
 				792613CF2CD4B82800FAF47D /* initia_move_v1_query.pb.swift in Sources */,
 				047843CD2AC991B300462F1C /* injective_tokenfactory_v1beta1_params.pb.swift in Sources */,
 				79C518772CC8E3DA00BC0E85 /* ChainUnification.swift in Sources */,
+				799B4A772D1E439D00998833 /* ChainForma.swift in Sources */,
 				04C817922BA98D75006B800A /* cosmos_distribution_module_v1_module.pb.swift in Sources */,
 				79D556232CEF0B810023F1B9 /* ChainSge.swift in Sources */,
 				E1F257D72BF77A7B008F4D21 /* EvmDelegate.swift in Sources */,
@@ -7420,6 +7431,7 @@
 				04F048C72AF89B19002A809D /* SelectAddressBookCell.swift in Sources */,
 				04C817682BA98D75006B800A /* cosmos_auth_module_v1_module.pb.swift in Sources */,
 				79D5561D2CEF068B0023F1B9 /* ChainHaqqEVM.swift in Sources */,
+				799B4A7F2D223FA900998833 /* ChainFxcoreEVM.swift in Sources */,
 				045033222C1F045900235F6A /* ChainUmee.swift in Sources */,
 				E10B1DC22C2159040039283B /* KavaEarnDepositAction.swift in Sources */,
 				792613A82CD4B82800FAF47D /* initia_move_v1_authz.pb.swift in Sources */,

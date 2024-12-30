@@ -639,6 +639,8 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainFetchAi60Secp())
     result.append(ChainFinschia())
     result.append(ChainFirma())
+    result.append(ChainForma())                         //EVM
+    result.append(ChainFxcoreEVM())                     //EVM
     result.append(ChainGovgen())
     result.append(ChainGravityBridge())
     result.append(ChainHaqqEVM())                       //EVM
@@ -686,6 +688,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainPolygon())                       //EVM
     result.append(ChainProvenance())
     result.append(ChainPryzm())
+    result.append(ChainPundix())
     result.append(ChainQuasar())
     result.append(ChainQuicksilver())
     result.append(ChainRealioEVM())
