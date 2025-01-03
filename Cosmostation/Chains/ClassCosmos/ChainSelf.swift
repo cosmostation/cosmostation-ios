@@ -13,7 +13,7 @@ class ChainSelf: BaseChain  {
     override init() {
         super.init()
         
-        name = "Self Chain"
+        name = "SelfChain"
         tag = "selfchain"
         logo1 = "chainSelf"
         apiName = "selfchain"
