@@ -627,6 +627,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainCronos())                        //EVM
     result.append(ChainCryptoorg())
     result.append(ChainDesmos())
+    result.append(ChainDhealth())
     result.append(ChainDoraVota())
     result.append(ChainDungeon())
     result.append(ChainDydx())
