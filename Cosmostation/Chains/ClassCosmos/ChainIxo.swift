@@ -13,7 +13,7 @@ class ChainIxo: BaseChain  {
     override init() {
         super.init()
         
-        name = "Impact"
+        name = "Impact Hub"
         tag = "ixo118"
         logo1 = "chainIxo"
         apiName = "ixo"
