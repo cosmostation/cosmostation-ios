@@ -596,8 +596,8 @@ extension CosmosFetcher {
         var resultProposals = [MintscanProposal]()
         if (getEndpointType() == .UseGRPC) {
             let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.reverse = true; $0.limit = 200 }
-            let v1Req = Cosmos_Gov_V1_QueryProposalsRequest.init()
-            let v1betaReq = Cosmos_Gov_V1beta1_QueryProposalsRequest.init()
+            let v1Req = Cosmos_Gov_V1_QueryProposalsRequest.with { $0.pagination = page }
+            let v1betaReq = Cosmos_Gov_V1beta1_QueryProposalsRequest.with { $0.pagination = page }
             if let result = try? await Cosmos_Gov_V1_QueryNIOClient(channel: getClient()).proposals(v1Req, callOptions: getCallOptions()).response.get() {
                 result.proposals.forEach { proposal in
                     resultProposals.append(MintscanProposal(proposal))
