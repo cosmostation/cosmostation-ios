@@ -13,7 +13,7 @@ class ChainRouterEVM: BaseChain {
     override init() {
         super.init()
         
-        name = "Routerchain"
+        name = "RouterChain"
         tag = "router60"
         logo1 = "chainRouter"
         apiName = "routerchain"
