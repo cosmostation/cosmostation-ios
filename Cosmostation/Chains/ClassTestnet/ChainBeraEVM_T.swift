@@ -15,7 +15,7 @@ class ChainBeraEVM_T: ChainBeraEVM {
         
         name = "Bera Testnet"
         tag = "bera60_T"
-        logo1 = "chianBeraT"
+        logo1 = "chainBera_T"
         isTestnet = true
         apiName = "berachain-testnet"
         accountKeyType = AccountKeyType(.BERA_Secp256k1, "m/44'/60'/0'/0/X")

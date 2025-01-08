@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             object: nil,
             userInfo: dataDict
         )
-        print("didReceiveRegistrationToken ", fcmToken)
+//        print("didReceiveRegistrationToken ", fcmToken)
         if let token = fcmToken {
             PushUtils.shared.updateTokenIfNeed(token: token)
         }
