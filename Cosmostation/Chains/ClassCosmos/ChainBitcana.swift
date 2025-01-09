@@ -24,8 +24,8 @@ class ChainBitcana: BaseChain {
         stakeDenom = "ubcna"
         bechAccountPrefix = "bcna"
         validatorPrefix = "bcnavaloper"
-        grpcHost = "grpc-bitcanna.cosmostation.io"
-        lcdUrl = "https://lcd-bitcanna.cosmostation.io/"
+        grpcHost = "grpc.bitcanna.io"
+        lcdUrl = "https://lcd.bitcanna.io/"
     }
     
 }
