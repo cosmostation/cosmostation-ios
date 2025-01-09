@@ -90,8 +90,8 @@ class BtcFetcher {
     
     func mempoolUrl() -> String {
         if (chain.isTestnet) {
-//            return "https://mempool.space/signet"
-            return "https://mempool.space/testnet4"
+            return "https://mempool.space/signet"
+//            return "https://mempool.space/testnet4"
         }
         return "https://mempool.space"
     }
