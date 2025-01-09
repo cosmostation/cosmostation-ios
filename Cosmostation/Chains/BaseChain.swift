@@ -731,8 +731,8 @@ func ALLCHAINS() -> [BaseChain] {
     
     result.append(ChainBeraEVM_T())                     //EVM
     result.append(ChainBabylon_T())
-    result.append(ChainBitCoin44_T())
-    result.append(ChainBitCoin49_T())
+//    result.append(ChainBitCoin44_T())
+//    result.append(ChainBitCoin49_T())
     result.append(ChainBitCoin84_T())
     result.append(ChainInitia_T())
     result.append(ChainNeutron_T())
