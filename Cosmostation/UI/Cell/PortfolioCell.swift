@@ -44,7 +44,7 @@ class PortfolioCell: UITableViewCell {
     
     func bindChain(_ account: BaseAccount, _ chain: BaseChain) {
         logoImg1.image = UIImage.init(named: chain.logo1)
-        nameLabel.text = chain.name.uppercased()
+        nameLabel.text = chain.name
         
         if (chain is ChainBitCoin84) {
             if chain.accountKeyType.pubkeyType == .BTC_Legacy {

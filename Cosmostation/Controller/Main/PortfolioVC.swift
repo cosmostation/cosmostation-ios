@@ -64,6 +64,7 @@ class PortfolioVC: BaseVC {
         searchBar?.barTintColor = UIColor.clear
         searchBar?.searchTextField.font = .fontSize14Bold
         searchBar?.backgroundImage = UIImage()
+        searchBar?.autocorrectionType = .no
         searchBar?.delegate = self
         
         let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))

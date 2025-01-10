@@ -80,7 +80,7 @@ class ClaimAllChainCell: UITableViewCell {
         let cosmosFetcher = chain.cosmosFetcher!
         
         logoImg1.image =  UIImage.init(named: chain.logo1)
-        nameLabel.text = chain.name.uppercased()
+        nameLabel.text = chain.name
         if (!chain.isDefault) {
             oldTag.isHidden = false
         }
@@ -170,7 +170,7 @@ class ClaimAllChainCell: UITableViewCell {
         
         
         logoImg1.image =  UIImage.init(named: chain.logo1)
-        nameLabel.text = chain.name.uppercased()
+        nameLabel.text = chain.name
         if (!chain.isDefault) {
             oldTag.isHidden = false
         }

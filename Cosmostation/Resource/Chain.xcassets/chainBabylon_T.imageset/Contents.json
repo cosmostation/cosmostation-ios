@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "babylon(testnet).png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -13,7 +13,7 @@ class ChainCosmos: BaseChain {
     override init() {
         super.init()
         
-        name = "Cosmos"
+        name = "Cosmos Hub"
         tag = "cosmos118"
         logo1 = "chainCosmos"
         apiName = "cosmos"
