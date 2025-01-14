@@ -846,16 +846,16 @@ extension CosmosFetcher {
         let tokenBalancePath = "\(tokenPath).BalanceOf(\"\(chain.bechAddress!)\")"
         
         let param: Parameters = ["method": "abci_query", "params": ["vm/qeval", tokenBalancePath.data(using: .utf8)!.base64EncodedString(),"0",false], "id" : 1, "jsonrpc" : "2.0"]
-        var result = try? await AF.request(getRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
-        
-        if let _ = result?["error"]["message"].stringValue {
+        let result = try? await AF.request(getRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+
+        if let _ = result?["error"]["message"].string {
             tokenInfo.setAmount("0")
-        }
-        
-        if let encodedDataString = result?["result"]["response"]["ResponseBase"]["Data"].stringValue {
+            
+        } else if let encodedDataString = result?["result"]["response"]["ResponseBase"]["Data"].stringValue {
             let data = Data(base64Encoded: encodedDataString)
             if let balanceString = String(data: data!, encoding: .utf8) {
-                tokenInfo.setAmount(balanceString.components(separatedBy: " ").first!.filter{ $0.isNumber })
+                let amount = balanceString.components(separatedBy: " ").first?.filter{ $0.isNumber } ?? "0"
+                tokenInfo.setAmount(amount)
             }
         }
     }

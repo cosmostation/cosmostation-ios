@@ -187,7 +187,7 @@ class CommonTransfer: BaseVC {
         // check IBC support case for recipient chain
         let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false && $0.supportCosmos })
         BaseData.instance.mintscanAssets?.forEach({ msAsset in
-            if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN) {
+            if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN || sendAssetType == .GNO_COIN) {
                 if (msAsset.chain == fromChain.apiName && msAsset.denom?.lowercased() == toSendDenom.lowercased()) {
                     //add backward path
                     if let sendable = allIbcChains.filter({ $0.apiName == msAsset.beforeChain(fromChain.apiName) }).first {
@@ -302,7 +302,7 @@ class CommonTransfer: BaseVC {
     
     func onInitView() {
         var symbol = ""
-        if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN) {
+        if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN || sendAssetType == .GNO_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = fromChain.assetDecimal(toSendDenom)
             symbol = fromChain.assetSymbol(toSendDenom)
@@ -474,7 +474,7 @@ class CommonTransfer: BaseVC {
                 WDP.dpToken(toSendMsToken!, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
-            } else if (sendAssetType == .COSMOS_COIN) {
+            } else if (sendAssetType == .COSMOS_COIN || sendAssetType == .GNO_COIN) {
                 let msPrice = BaseData.instance.getPrice(toSendMsAsset!.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
@@ -631,7 +631,7 @@ class CommonTransfer: BaseVC {
                 WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
                 WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
                 
-                if (sendAssetType == .COSMOS_COIN || (sendAssetType == .COSMOS_EVM_MAIN_COIN && txStyle == .COSMOS_STYLE)) {
+                if (sendAssetType == .COSMOS_COIN || (sendAssetType == .COSMOS_EVM_MAIN_COIN && txStyle == .COSMOS_STYLE) || sendAssetType == .GNO_COIN) {
                     let balanceAmount = cosmosFetcher.balanceAmount(toSendDenom)
                     if (cosmosTxFee.amount[0].denom == toSendDenom) {
                         if (totalFeeAmount.compare(balanceAmount).rawValue > 0) {
@@ -752,8 +752,6 @@ class CommonTransfer: BaseVC {
                 if (sendAssetType == .COSMOS_WASM) {                                // CW20 IBC Send!
                     ibcWasmSendSimul()
                     
-                } else if (sendAssetType == .GNO_GRC20) {
-
                 } else {                                                            // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                     ibcCoinSendSimul()
                 }
@@ -1231,7 +1229,7 @@ extension CommonTransfer {
             
             return Signer.genGnoSendMsg(gnoSendMsg)
 
-        } else if fromChain is ChainGno {
+        } else if sendAssetType == .GNO_COIN {
             let gnoSendMsg = Gno_Bank_MsgSend.with {
                 $0.fromAddress = fromChain.bechAddress!
                 $0.toAddress = toAddress
@@ -1522,7 +1520,7 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                     } else if sendAssetType == .GNO_GRC20 {
                         gnoGrc20Send()
                         
-                    } else if fromChain is ChainGno {
+                    } else if sendAssetType == .GNO_COIN {
                         gnoSend()
                     } else {                                                                // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                         inChainCoinSend()

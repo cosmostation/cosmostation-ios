@@ -659,10 +659,10 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (selectedChain is ChainGno) {
             if (indexPath.section == 0 && searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom && selectedChain.supportEvm) {
-                onStartCoinTransferVC(.COSMOS_EVM_MAIN_COIN, searchNativeCoins[indexPath.row].denom)
+                onStartCoinTransferVC(.GNO_COIN, searchNativeCoins[indexPath.row].denom)
                 
             } else if (indexPath.section == 0) {
-                onStartCoinTransferVC(.COSMOS_COIN, searchNativeCoins[indexPath.row].denom)
+                onStartCoinTransferVC(.GNO_COIN, searchNativeCoins[indexPath.row].denom)
                 
             } else if (indexPath.section == 3) {
                 let token = searchMintscanGrc20Tokens[indexPath.row]

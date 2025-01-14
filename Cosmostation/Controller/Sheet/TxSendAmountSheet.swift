@@ -58,7 +58,7 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
         if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20 || sendAssetType == .GNO_GRC20) {
             WDP.dpToken(toSendMsToken, nil, availableDenom, availableLabel, decimal)
             
-        } else if (sendAssetType == .COSMOS_COIN) {
+        } else if (sendAssetType == .COSMOS_COIN || sendAssetType == .GNO_COIN) {
             WDP.dpCoin(toSendMsAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
             
         } else if (sendAssetType == .EVM_COIN) {
