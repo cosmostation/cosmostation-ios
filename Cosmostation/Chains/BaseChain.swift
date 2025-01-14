@@ -394,6 +394,14 @@ extension BaseChain {
         return getChainListParam()["is_support_moblie_dapp"].bool ?? false
     }
     
+    func isSupportBTCStaking() -> Bool {
+        return getChainListParam()["btc_staking"]["is_support_staking"].bool ?? false
+    }
+    
+    func btcStakingExplorerUrl() -> String {
+        return getChainListParam()["btc_staking"]["url"].string ?? ""
+    }
+    
     func isSupportErc20() -> Bool {
         return (getChainListParam()["is_support_erc20"].bool ?? false && supportEvm)
     }

@@ -44,8 +44,11 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     
     var allChains = [BaseChain]()
     var targetChain: BaseChain!
+    var btcTargetChain: BaseChain?
     var web3: Web3?
     
+    var btcNetwork: String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -171,6 +174,18 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         }
     }
 
+    private func onInitChainBitcoin() {
+        if (btcTargetChain == nil || btcTargetChain?.tag != "bitcoin84" || btcTargetChain?.tag != "bitcoin84_T") {
+            
+            if btcNetwork == nil || btcNetwork == "mainnet" {
+                btcTargetChain = allChains.filter({ $0.tag == "bitcoin84" }).first!
+                
+            } else if btcNetwork == "signet" {
+                btcTargetChain = allChains.filter({ $0.tag == "bitcoin84_T" }).first!
+            }
+            
+        }
+    }
 
     // Inject custom script to webview
     private func onInitInjectScript() {
@@ -288,6 +303,16 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         suiSignRequestSheet.bytes = bytes
         suiSignRequestSheet.modalTransitionStyle = .coverVertical
         self.present(suiSignRequestSheet, animated: true)
+    }
+    
+    private func popUpBtcRequestSign(_ method: String, _ request: JSON, _ messageId: JSON) {
+        let btcSignRequestSheet = DappBtcSignRequestSheet(nibName: "DappBtcSignRequestSheet", bundle: nil)
+        btcSignRequestSheet.method = method
+        btcSignRequestSheet.toSign = request
+        btcSignRequestSheet.messageId = messageId
+        btcSignRequestSheet.selectedChain = btcTargetChain
+        btcSignRequestSheet.modalTransitionStyle = .coverVertical
+        self.present(btcSignRequestSheet, animated: true)
     }
 
     
@@ -650,6 +675,73 @@ extension DappDetailVC: WKScriptMessageHandler {
                 }
             }
             
+            //Handle BTC Request
+            else if (method == "bit_requestAccount") {
+                onInitChainBitcoin()
+                injectionRequestApprove([btcTargetChain!.mainAddress], messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "bit_getPublicKeyHex") {
+                injectionRequestApprove(JSON(btcTargetChain!.publicKey!.toHexString()), messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "bit_getNetwork") {
+                injectionRequestApprove(JSON(btcNetwork ?? "mainnet"), messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "bit_getAddress") {
+                injectionRequestApprove(JSON(btcTargetChain!.mainAddress), messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "bit_switchNetwork") {
+                let params = messageJSON["params"].arrayValue
+                if params.isEmpty {
+                    injectionRequestReject("Cancel", messageJSON, bodyJSON["messageId"])
+                    return
+                } else {
+                    btcNetwork = params.first?.stringValue
+                    onInitChainBitcoin()
+                    injectionRequestApprove(params.first, messageJSON, bodyJSON["messageId"])
+                }
+                
+            } else if (method == "bit_getBalance") {
+                Task {
+                    if let btcFetcher = (btcTargetChain as? ChainBitCoin84)?.getBtcFetcher() {
+                        let _ = await btcFetcher.fetchBtcBalances()
+                        injectionRequestApprove(JSON(btcFetcher.btcBalances), messageJSON, bodyJSON["messageId"])
+                    }
+                }
+            } else if (method == "bit_pushTx") {
+                Task {
+                    let params = messageJSON["params"].arrayValue
+                    
+                    if params.isEmpty {
+                        injectionRequestReject("Cancel", messageJSON, bodyJSON["messageId"])
+                        return
+                        
+                    } else {
+                        guard let btcFetcher = (btcTargetChain as? ChainBitCoin84)?.getBtcFetcher() else { return }
+                        let result = try await btcFetcher.sendRawtransaction(params.first!.stringValue)
+                        
+                        if !result["error"]["message"].stringValue.isEmpty {
+                            injectionRequestReject("Cancel", messageJSON, bodyJSON["messageId"])
+                            
+                        } else {
+                            injectionRequestApprove(JSON(result["result"].stringValue), messageJSON, bodyJSON["messageId"])
+                        }
+                    }
+                }
+                
+            } else if (method == "bit_sendBitcoin") {
+                let params = messageJSON["params"]
+                popUpBtcRequestSign(method, params, bodyJSON["messageId"])
+                
+            } else if (method == "bit_signMessage") {
+                let params = messageJSON["params"]
+                popUpBtcRequestSign(method, params, bodyJSON["messageId"])
+                
+            } else if (method == "bit_signPsbt") {
+                let params = messageJSON["params"]
+                popUpBtcRequestSign(method, params, bodyJSON["messageId"])
+                
+            }
+
             else {
                 injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
             }
