@@ -139,7 +139,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
             self.dismiss(animated: true)
             
-        } else if (sendType == .COSMOS_COIN || sendType == .COSMOS_WASM) {
+        } else if (sendType == .COSMOS_COIN || sendType == .COSMOS_WASM || sendType == .GNO_GRC20 || sendType == .GNO_COIN) {
             //only support cosmos address style
             if (WUtils.isValidBechAddress(toChain, userInput)) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)

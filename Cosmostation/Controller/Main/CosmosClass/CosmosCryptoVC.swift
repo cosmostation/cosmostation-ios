@@ -42,6 +42,13 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
         }
     }
     var searchMintscanErc20Tokens = [MintscanToken]()                   // section 4
+    var mintscanGrc20Tokens = [MintscanToken]()
+    var toDisplayGrc20Tokens = [MintscanToken]() {
+        didSet {
+            searchMintscanGrc20Tokens = toDisplayGrc20Tokens
+        }
+    }
+    var searchMintscanGrc20Tokens = [MintscanToken]()
     var oktBalances = [JSON]()
     var searchOktBalances = [JSON]()                                    // section 0 for legacy okt KIP10
     
@@ -130,6 +137,8 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                 self.toDisplayCw20Tokens.removeAll()
                 self.mintscanErc20Tokens.removeAll()
                 self.toDisplayErc20Tokens.removeAll()
+                self.mintscanGrc20Tokens.removeAll()
+                self.toDisplayGrc20Tokens.removeAll()
                 self.oktBalances.removeAll()
                 self.onSortAssets()
             }
@@ -199,7 +208,40 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                 }
             }
             
-            if let cosmosFetcher = selectedChain.getCosmosfetcher() {
+            if let cosmosFetcher = selectedChain.getCosmosfetcher(),
+               selectedChain.isSupportGrc20() {
+                mintscanGrc20Tokens = cosmosFetcher.mintscanGrc20Tokens.sorted { $0.symbol!.lowercased() < $1.symbol!.lowercased() }
+                if let userCustomTokens = BaseData.instance.getDisplayGrc20s(baseAccount.id, selectedChain.tag) {
+                    mintscanGrc20Tokens.sort {
+                        if (userCustomTokens.contains($0.contract!) && !userCustomTokens.contains($1.contract!)) { return true }
+                        if (!userCustomTokens.contains($0.contract!) && userCustomTokens.contains($1.contract!)) { return false }
+                        let value0 = cosmosFetcher.tokenValue($0.contract!)
+                        let value1 = cosmosFetcher.tokenValue($1.contract!)
+                        return value0.compare(value1).rawValue > 0 ? true : false
+                    }
+                    mintscanGrc20Tokens.forEach { token in
+                        if (userCustomTokens.contains(token.contract!)) {
+                            toDisplayGrc20Tokens.append(token)
+                        }
+                    }
+                } else {
+                    mintscanGrc20Tokens.sort {
+                        if ($0.getAmount() != NSDecimalNumber.zero) && ($1.getAmount() == NSDecimalNumber.zero) { return true }
+                        if ($0.getAmount() == NSDecimalNumber.zero) && ($1.getAmount() != NSDecimalNumber.zero) { return false }
+                        let value0 = cosmosFetcher.tokenValue($0.contract!)
+                        let value1 = cosmosFetcher.tokenValue($1.contract!)
+                        return value0.compare(value1).rawValue > 0 ? true : false
+                    }
+                    mintscanGrc20Tokens.forEach { token in
+                        if (token.getAmount() != NSDecimalNumber.zero) {
+                            toDisplayGrc20Tokens.append(token)
+                        
+                        }
+                    }
+
+                }
+
+            } else if let cosmosFetcher = selectedChain.getCosmosfetcher() {
                 mintscanCw20Tokens = cosmosFetcher.mintscanCw20Tokens.sorted { $0.symbol!.lowercased() < $1.symbol!.lowercased() }
                 
                 if let userCustomTokens = BaseData.instance.getDisplayCw20s(baseAccount.id, selectedChain.tag) {
@@ -272,6 +314,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
             searchBridgedCoins = bridgedCoins
             searchMintscanCw20Tokens = toDisplayCw20Tokens
             searchMintscanErc20Tokens = toDisplayErc20Tokens
+            searchMintscanGrc20Tokens = toDisplayGrc20Tokens
 
             DispatchQueue.main.async {
                 self.onUpdateView()
@@ -282,7 +325,11 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
     func onShowTokenListSheet()  {
         let tokenListSheet = SelectDisplayTokenListSheet(nibName: "SelectDisplayTokenListSheet", bundle: nil)
         tokenListSheet.selectedChain = selectedChain
-        if selectedChain.isSupportCw20() && selectedChain.isSupportErc20() {
+        if selectedChain.isSupportGrc20() {
+            tokenListSheet.allTokens = mintscanGrc20Tokens
+            tokenListSheet.toDisplayTokens = toDisplayGrc20Tokens.map { $0.contract! }
+
+        } else if selectedChain.isSupportCw20() && selectedChain.isSupportErc20() {
             tokenListSheet.allTokens = mintscanCw20Tokens + mintscanErc20Tokens
             tokenListSheet.toDisplayTokens = toDisplayCw20Tokens.map { $0.contract! } + toDisplayErc20Tokens.map { $0.contract! }
 
@@ -305,7 +352,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
 
 
     func onUpdateView() {
-        if (nativeCoins.count + ibcCoins.count + bridgedCoins.count + toDisplayCw20Tokens.count + toDisplayErc20Tokens.count < 10) {
+        if (nativeCoins.count + ibcCoins.count + bridgedCoins.count + toDisplayCw20Tokens.count + toDisplayErc20Tokens.count + toDisplayGrc20Tokens.count < 10) {
             tableView.tableHeaderView = nil
             tableView.headerView(forSection: 0)?.layoutSubviews()
             tableView.contentOffset = CGPoint(x: 0, y: 0)
@@ -411,6 +458,16 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 view.cntLabel.text = String(searchMintscanErc20Tokens.count)
             }
             
+        } else if (selectedChain is ChainGno) {
+            if (section == 0 && nativeCoins.count > 0) {
+                view.titleLabel.text = "Native Coins"
+                view.cntLabel.text = String(searchNativeCoins.count)
+                
+            } else if (section == 3 && mintscanGrc20Tokens.count > 0) {
+                view.titleLabel.text = "Grc20 Tokens"
+                view.cntLabel.text = String(searchMintscanGrc20Tokens.count)
+            }
+            
         } else {
             if (section == 0 && nativeCoins.count > 0) {
                 view.titleLabel.text = "Native Coins"
@@ -443,6 +500,14 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             } else if (section == 4 ) {
                 return searchMintscanErc20Tokens.count > 0 ? 40 : 0
             }
+            
+        } else if (selectedChain is ChainGno) {
+            if (section == 0) {
+                return (searchNativeCoins.count > 0) ? 40 : 0
+            } else if (section == 3) {
+                return searchMintscanGrc20Tokens.count > 0 ? 40 : 0
+            }
+            
         } else {
             if (section == 0) {
                 return (searchNativeCoins.count > 0) ? 40 : 0
@@ -467,6 +532,13 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 return searchMintscanErc20Tokens.count
             }
             
+        } else if (selectedChain is ChainGno) {
+            if (section == 0) {
+                return searchNativeCoins.count
+            } else if (section == 3) {
+                return searchMintscanGrc20Tokens.count
+            }
+
         } else {
             if (section == 0) {
                 return searchNativeCoins.count
@@ -500,6 +572,25 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.section == 4) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
                 cell.bindEvmClassToken(oktChain, searchMintscanErc20Tokens[indexPath.row])
+                return cell
+            }
+            
+        } else if (selectedChain is ChainGno) {
+            if (indexPath.section == 0) {
+                if (searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom) {
+                    let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
+                    cell.bindCosmosStakeAsset(selectedChain)
+                    return cell
+                    
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                    cell.bindCosmosClassAsset(selectedChain, searchNativeCoins[indexPath.row])
+                    return cell
+                }
+                                
+            } else if (indexPath.section == 3) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                cell.bindCosmosClassToken(selectedChain, searchMintscanGrc20Tokens[indexPath.row])
                 return cell
             }
             
@@ -564,6 +655,22 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 
             } else {
                 onStartLegacyTransferVC(searchOktBalances[indexPath.row]["denom"].stringValue)
+            }
+            
+        } else if (selectedChain is ChainGno) {
+            if (indexPath.section == 0 && searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom && selectedChain.supportEvm) {
+                onStartCoinTransferVC(.GNO_COIN, searchNativeCoins[indexPath.row].denom)
+                
+            } else if (indexPath.section == 0) {
+                onStartCoinTransferVC(.GNO_COIN, searchNativeCoins[indexPath.row].denom)
+                
+            } else if (indexPath.section == 3) {
+                let token = searchMintscanGrc20Tokens[indexPath.row]
+                if (token.getAmount() == NSDecimalNumber.zero) {
+                    onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+                    return
+                }
+                onStartTokenTransferVC(.GNO_GRC20, searchMintscanGrc20Tokens[indexPath.row])
             }
             
         } else {
@@ -687,7 +794,11 @@ extension CosmosCryptoVC: UISearchBarDelegate {
             return token.symbol?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         
-        searchEmptyLayer.isHidden = searchNativeCoins.count + searchIbcCoins.count + searchBridgedCoins.count + searchMintscanCw20Tokens.count + searchMintscanErc20Tokens.count + searchOktBalances.count > 0
+        searchMintscanGrc20Tokens = searchText.isEmpty ? toDisplayGrc20Tokens : toDisplayGrc20Tokens.filter { token in
+            return token.symbol?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        
+        searchEmptyLayer.isHidden = searchNativeCoins.count + searchIbcCoins.count + searchBridgedCoins.count + searchMintscanCw20Tokens.count + searchMintscanErc20Tokens.count + searchOktBalances.count + searchMintscanGrc20Tokens.count > 0
         tableView.reloadData()
     }
 

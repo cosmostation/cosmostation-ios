@@ -12,6 +12,7 @@ import Web3Core
 import secp256k1
 import Blake2
 import ed25519swift
+import SwiftyJSON
 
 class Signer {
     //Tx for Transfer
@@ -31,6 +32,24 @@ class Signer {
         }
         return [anyMsg]
     }
+    
+    static func genGnoSendMsg(_ toSend: Gno_Bank_MsgSend) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/bank.MsgSend"
+            $0.value = try! toSend.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    // gno grc20 send
+    static func genGnoSendMsg(_ toSend: Gno_Vm_MsgCall) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/vm.m_call"
+            $0.value = try! toSend.serializedData()
+        }
+        return [anyMsg]
+    }
+
     
     //Tx for Ibc Transfer
     static func genIbcSendMsg(_ ibcTransfer: Ibc_Applications_Transfer_V1_MsgTransfer) -> [Google_Protobuf_Any] {
@@ -498,6 +517,29 @@ class Signer {
         }
         return nil
     }
+
+    /// for Gno chain
+    static func genTx(_ baseChain: BaseChain,
+                      _ msgs: [Google_Protobuf_Any],
+                      _ memo: String, _ fee: Tm2_Tx_TxFee,
+                      _ sig: Data) -> Tm2_Tx_Tx {
+        
+        let pub = Tm2_Tx_PubKeySecp256k1.with {
+            $0.key = baseChain.publicKey!
+        }
+        
+        let pubkey = Google_Protobuf_Any.with {
+            $0.typeURL = "/tm.PubKeySecp256k1"
+            $0.value = try! pub.serializedData()
+        }
+        
+        return Tm2_Tx_Tx.with {
+            $0.messages = msgs
+            $0.memo = memo
+            $0.fee = fee
+            $0.signatures = [Tm2_Tx_TxSignature.with { $0.pubKey = pubkey; $0.signature = sig }]
+        }
+    }
     
     static func getTxBody(_ baseChain: BaseChain, _ msgAnys: [Google_Protobuf_Any], _ memo: String, _ timeout: Int64?) -> Cosmos_Tx_V1beta1_TxBody {
         return Cosmos_Tx_V1beta1_TxBody.with {
@@ -637,6 +679,72 @@ extension Signer  {
         let hash = try! Blake2b.hash(size: 32, data: Data([0, 0, 0]) + data)
         let signature = Ed25519.sign(message: [UInt8](hash), secretKey: [UInt8](privateKey))
         return [(Data([0x00]) + Data(signature) + pubKey).base64EncodedString()]
+    }
+}
+
+// MARK: Gno chain
+extension Signer {
+    struct TxSignPayload: Codable {
+        let chain_id: String
+        let account_number: String
+        let sequence: String
+        let fee: Fee
+        let msgs: [Msg]
+        let memo: String
+    }
+    
+    struct Msg: Codable {
+        var type: String
+        
+        // bank.MsgSend
+        var from_address: String?
+        var to_address: String?
+        var amount: String?
+        
+        // vm.m_call
+        var caller: String?
+        var send: String?
+        var pkg_path: String?
+        var `func`: String?
+        var args: [String]?
+        
+        enum CodingKeys: String, CodingKey {
+            case type = "@type"
+            
+            case from_address
+            case to_address
+            case amount
+            
+            case caller
+            case send
+            case pkg_path
+            case `func`
+            case args
+        }
+    }
+    
+    struct Fee: Codable {
+        let gas_wanted: String
+        let gas_fee: String
+    }
+    
+    static func gnoSignature(_ baseChain: BaseChain, _ msgs: [Msg], _ memo: String, _ fee: Fee) -> Data? {
+        guard let fetcher = baseChain.getCosmosfetcher(),
+              let chainId = baseChain.chainIdCosmos,
+              let accountNum = fetcher.cosmosAccountNumber,
+              let sequence = fetcher.cosmosSequenceNum else { return nil }
+        
+        let txSignPayload = TxSignPayload(chain_id: chainId,
+                                          account_number: String(accountNum),
+                                          sequence: String(sequence),
+                                          fee: fee,
+                                          msgs: msgs,
+                                          memo: memo)
+        
+        guard let jsonString = try? txSignPayload.json(),
+              let sortedJsonData = try? JSON(parseJSON: jsonString).rawData(options: [.sortedKeys, .withoutEscapingSlashes]) else { return nil }
+        let sig = getByteSingleSignatures(sortedJsonData, baseChain)
+        return sig
     }
 }
 

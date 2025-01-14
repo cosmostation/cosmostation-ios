@@ -34,6 +34,7 @@ class BaseChain {
     var grpcHost = ""
     var grpcPort = 443
     var lcdUrl = ""
+    var rpcUrl = ""
     
     //evm & rpc info
     var supportEvm = false
@@ -266,6 +267,9 @@ class BaseChain {
         } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.symbol ?? "UnKnown"
+        } else if isSupportGrc20(),
+                  let grc20Token = getCosmosfetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+            return grc20Token.symbol ?? "UnKnown"
         }
         return "UnKnown"
     }
@@ -279,6 +283,10 @@ class BaseChain {
         } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.assetImg()
+            
+        } else if isSupportGrc20(),
+                  let grc20Token = getCosmosfetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+            return grc20Token.assetImg()
         }
         return nil
     }
@@ -292,6 +300,9 @@ class BaseChain {
         } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.decimals ?? 6
+        } else if isSupportGrc20(),
+                 let grc20Token = getCosmosfetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+           return grc20Token.decimals ?? 6
         }
         return 6
     }
@@ -305,6 +316,9 @@ class BaseChain {
         } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.coinGeckoId ?? ""
+        } else if isSupportGrc20(),
+                  let grc20Token = getCosmosfetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+            return grc20Token.coinGeckoId ?? ""
         }
         return ""
     }
@@ -412,6 +426,10 @@ extension BaseChain {
     
     func isSupportCw721() -> Bool {
         return getChainListParam()["is_support_cw721"].bool ?? false
+    }
+    
+    func isSupportGrc20() -> Bool {
+        return getChainListParam()["is_support_grc20"].bool ?? false
     }
     
     func votingThreshold() -> NSDecimalNumber {
@@ -652,6 +670,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainFirma())
     result.append(ChainForma())                         //EVM
     result.append(ChainFxcoreEVM())                     //EVM
+//    result.append(ChainGno())
     result.append(ChainGovgen())
     result.append(ChainGravityBridge())
     result.append(ChainHaqqEVM())                       //EVM
@@ -742,6 +761,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainBitCoin44_T())
 //    result.append(ChainBitCoin49_T())
     result.append(ChainBitCoin84_T())
+    result.append(ChainGno_T())
     result.append(ChainInitia_T())
     result.append(ChainNeutron_T())
     result.append(ChainNillion_T())
@@ -793,6 +813,7 @@ enum CosmosEndPointType: Int {
     case Unknown = 0
     case UseGRPC = 1
     case UseLCD = 2
+    case UseRPC = 3
 }
 
 

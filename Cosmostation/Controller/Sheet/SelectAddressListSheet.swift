@@ -135,7 +135,7 @@ class SelectAddressListSheet: BaseVC {
             cosmosStyleTableView.isHidden = true
             evmStyleTableView.isHidden = false
             
-        } else if (sendType == .COSMOS_COIN || sendType == .COSMOS_WASM) {
+        } else if (sendType == .COSMOS_COIN || sendType == .COSMOS_WASM || sendType == .GNO_GRC20 || sendType == .GNO_COIN) {
             //only support cosmos address style
             BaseData.instance.selectAllRefAddresses().filter {
                 $0.bechAddress.starts(with: toChain.bechAccountPrefix! + "1") &&

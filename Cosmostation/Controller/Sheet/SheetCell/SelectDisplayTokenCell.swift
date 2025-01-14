@@ -74,11 +74,16 @@ class SelectDisplayTokenCell: UITableViewCell {
     
     
     private func fetchTokenBalance(_ chain: BaseChain, _ token: MintscanToken) async {
-        if let evmFetcher = chain.getEvmfetcher() {
+        if chain.isSupportGrc20() {
+            await chain.getCosmosfetcher()?.fetchGrc20Balance(token)
+            
+        } else if chain.isSupportErc20() {
             await chain.getEvmfetcher()?.fetchErc20Balance(token)
-        } else {
+            
+        } else if chain.isSupportCw20() {
             await chain.getCosmosfetcher()?.fetchCw20Balance(token)
         }
+        
         SelectDisplayTokenListSheet.tokenWithAmount.append(token)
     }
     

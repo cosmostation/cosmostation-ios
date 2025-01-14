@@ -333,7 +333,7 @@ class CosmosClassVC: BaseVC {
     }
     
     private func isTokenPresent() -> Bool {
-        return selectedChain.isSupportCw20() || selectedChain.isSupportErc20()
+        return selectedChain.isSupportCw20() || selectedChain.isSupportErc20() || selectedChain.isSupportGrc20()
     }
 }
 
