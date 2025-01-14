@@ -204,6 +204,15 @@
                                     <constraint firstAttribute="width" constant="180" id="mM6-Np-Aq7"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6F-Rj-Y20" customClass="LottieAnimationView" customModule="Lottie">
+                                <rect key="frame" x="317" y="550.33333333333337" width="60" height="60"/>
+                                <viewLayoutGuide key="safeArea" id="pzm-Lm-OET"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="1aB-IW-fBM"/>
+                                    <constraint firstAttribute="width" constant="60" id="ecL-h2-g7C"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="q8P-dV-bG4"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -213,11 +222,14 @@
                             <constraint firstAttribute="bottom" secondItem="O5d-SO-gxk" secondAttribute="bottom" id="CZ5-ei-cfx"/>
                             <constraint firstItem="gmC-Ql-oRE" firstAttribute="centerY" secondItem="q8P-dV-bG4" secondAttribute="centerY" id="Jcr-T3-JXo"/>
                             <constraint firstItem="q8P-dV-bG4" firstAttribute="trailing" secondItem="O5d-SO-gxk" secondAttribute="trailing" id="MXh-eV-yVn"/>
+                            <constraint firstItem="q8P-dV-bG4" firstAttribute="trailing" secondItem="b6F-Rj-Y20" secondAttribute="trailing" constant="16" id="bJ0-ur-hAm"/>
                             <constraint firstItem="q8P-dV-bG4" firstAttribute="leading" secondItem="O5d-SO-gxk" secondAttribute="leading" id="h5O-pt-U41"/>
+                            <constraint firstItem="q8P-dV-bG4" firstAttribute="bottom" secondItem="b6F-Rj-Y20" secondAttribute="bottom" constant="8" id="vzI-mP-vBg"/>
                             <constraint firstItem="gmC-Ql-oRE" firstAttribute="centerX" secondItem="q8P-dV-bG4" secondAttribute="centerX" id="z0V-Kd-g5d"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="floatingBtn" destination="b6F-Rj-Y20" id="mrJ-dT-uGp"/>
                         <outlet property="loadingView" destination="gmC-Ql-oRE" id="WMG-F1-D30"/>
                         <outlet property="tableView" destination="O5d-SO-gxk" id="y8Y-3B-GU4"/>
                     </connections>

@@ -1666,6 +1666,9 @@
 		792D2B072C57768C0085007A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 792D2B062C57768C0085007A /* SDWebImage */; };
 		792D2B0A2C57769C0085007A /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 792D2B092C57769C0085007A /* SDWebImageSVGCoder */; };
 		792D2B0C2C5776A50085007A /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 792D2B0B2C5776A50085007A /* SDWebImageSVGCoder */; };
+		7939A25A2D30C2E2006674E3 /* btcStaking.json in Resources */ = {isa = PBXBuildFile; fileRef = 7939A2592D30C2E2006674E3 /* btcStaking.json */; };
+		7939A25D2D34DD85006674E3 /* DappBtcSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7939A25C2D34DD85006674E3 /* DappBtcSignRequestSheet.xib */; };
+		7939A25E2D34DD85006674E3 /* DappBtcSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7939A25B2D34DD85006674E3 /* DappBtcSignRequestSheet.swift */; };
 		79514DB42CB527AA008D7ED8 /* ChainMantra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79514DB32CB527AA008D7ED8 /* ChainMantra.swift */; };
 		795C0DC22C8E853C006D35A4 /* bitcoin.js in Resources */ = {isa = PBXBuildFile; fileRef = 795C0DC12C8E853C006D35A4 /* bitcoin.js */; };
 		795C0DC42C8E8547006D35A4 /* BtcJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795C0DC32C8E8547006D35A4 /* BtcJS.swift */; };
@@ -3084,6 +3087,9 @@
 		792613DC2CDB5A5300FAF47D /* OnChainProposalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnChainProposalCell.xib; sourceTree = "<group>"; };
 		792B9CBB2C747CB2001440DB /* DappSuiSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappSuiSignRequestSheet.swift; sourceTree = "<group>"; };
 		792B9CBC2C747CB2001440DB /* DappSuiSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappSuiSignRequestSheet.xib; sourceTree = "<group>"; };
+		7939A2592D30C2E2006674E3 /* btcStaking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = btcStaking.json; sourceTree = "<group>"; };
+		7939A25B2D34DD85006674E3 /* DappBtcSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappBtcSignRequestSheet.swift; sourceTree = "<group>"; };
+		7939A25C2D34DD85006674E3 /* DappBtcSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappBtcSignRequestSheet.xib; sourceTree = "<group>"; };
 		79514DB32CB527AA008D7ED8 /* ChainMantra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantra.swift; sourceTree = "<group>"; };
 		795C0DC12C8E853C006D35A4 /* bitcoin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bitcoin.js; sourceTree = "<group>"; };
 		795C0DC32C8E8547006D35A4 /* BtcJS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BtcJS.swift; sourceTree = "<group>"; };
@@ -3991,6 +3997,7 @@
 				795C0DC12C8E853C006D35A4 /* bitcoin.js */,
 				04A421132C7896A800C0E1A2 /* drop.json */,
 				79E7B3C92CF83F0400C28D93 /* dydx.json */,
+				7939A2592D30C2E2006674E3 /* btcStaking.json */,
 				E1D538282A96644F00FB0403 /* loading.json */,
 				E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */,
 				E19993E92B295873000F4A6B /* loadingSmallWhite.json */,
@@ -4160,6 +4167,8 @@
 				0497150B2C105C13008C45A0 /* DappEvmSignRequestSheet.xib */,
 				792B9CBB2C747CB2001440DB /* DappSuiSignRequestSheet.swift */,
 				792B9CBC2C747CB2001440DB /* DappSuiSignRequestSheet.xib */,
+				7939A25B2D34DD85006674E3 /* DappBtcSignRequestSheet.swift */,
+				7939A25C2D34DD85006674E3 /* DappBtcSignRequestSheet.xib */,
 				796CC35F2C6B60CA00FEC658 /* SuiStakingInfoSheet.swift */,
 				796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */,
 			);
@@ -5614,6 +5623,7 @@
 				E10B1DC02C2159040039283B /* KavaClaimIncentives.xib in Resources */,
 				047842E62AC8B2D600462F1C /* CosmosRedelegate.xib in Resources */,
 				0409D2F72AC5DC6D0021E192 /* CosmosDelegate.xib in Resources */,
+				7939A25A2D30C2E2006674E3 /* btcStaking.json in Resources */,
 				04C63D242B86FE8C00D4A366 /* CommonTransferResult.xib in Resources */,
 				E10B1D912C2156430039283B /* KavaMintListMyCell.xib in Resources */,
 				E10B1D892C2156430039283B /* KavaLendListMyCell.xib in Resources */,
@@ -5634,6 +5644,7 @@
 				04C6B9C72AAC59EC00B02A95 /* QrAddressPopupVC.xib in Resources */,
 				E16200432AF279560008F397 /* AddressBookListVC.xib in Resources */,
 				04F048CF2AF8D268002A809D /* CosmosCancelUnbonding.xib in Resources */,
+				7939A25D2D34DD85006674E3 /* DappBtcSignRequestSheet.xib in Resources */,
 				79E7B3CA2CF83F0400C28D93 /* dydx.json in Resources */,
 				042DE8482AC4CD01003F3EA4 /* QrScanVC.xib in Resources */,
 				04F048D72AFCD34A002A809D /* basebg06.png in Resources */,
@@ -7493,6 +7504,7 @@
 				04D279F32A67C9A600AF046A /* ChainSui.swift in Sources */,
 				04A420F62C74D3B200C0E1A2 /* OpCode.swift in Sources */,
 				0478439D2AC991B300462F1C /* injective_wasmx_v1_proposal.pb.swift in Sources */,
+				7939A25E2D34DD85006674E3 /* DappBtcSignRequestSheet.swift in Sources */,
 				048F8DC92B285EC900432437 /* kava_router_v1beta1_tx.grpc.swift in Sources */,
 				04B7899F2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift in Sources */,
 				79FCA3B82C3F9E92001C17D0 /* artela_types_v1_web3.pb.swift in Sources */,

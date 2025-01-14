@@ -14,6 +14,8 @@ class MajorCryptoVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingView: LottieAnimationView!
+    @IBOutlet weak var floatingBtn: LottieAnimationView!
+    
     var refresher: UIRefreshControl!
     
     var selectedChain: BaseChain!
@@ -49,6 +51,7 @@ class MajorCryptoVC: BaseVC {
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
         
+        onSetFloatingBtn()
         onUpdateView()
     }
     
@@ -114,6 +117,32 @@ class MajorCryptoVC: BaseVC {
         loadingView.isHidden = true
         tableView.reloadData()
     }
+    
+    func onSetFloatingBtn() {
+        if (!BaseData.instance.showEvenReview()) { return }
+        if (selectedChain.isSupportBTCStaking()) {
+            floatingBtn.animation = LottieAnimation.named("btcStaking")
+            floatingBtn.contentMode = .scaleAspectFit
+            floatingBtn.loopMode = .loop
+            floatingBtn.animationSpeed = 1.3
+            floatingBtn.play()
+            floatingBtn.isHidden = false
+    
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn))
+            tapGesture.cancelsTouchesInView = false
+            floatingBtn.addGestureRecognizer(tapGesture)
+            
+        }
+    }
+    
+    @objc func tapFloatingBtn() {
+        let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+        dappDetail.dappType = .INTERNAL_URL
+        dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
+        dappDetail.modalPresentationStyle = .fullScreen
+        self.present(dappDetail, animated: true)
+    }
+
 }
 
 extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
