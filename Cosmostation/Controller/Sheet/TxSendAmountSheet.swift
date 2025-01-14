@@ -55,7 +55,7 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
             amountTextField.text = existedAmount!.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal)).stringValue
         }
         
-        if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20) {
+        if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20 || sendAssetType == .GNO_GRC20) {
             WDP.dpToken(toSendMsToken, nil, availableDenom, availableLabel, decimal)
             
         } else if (sendAssetType == .COSMOS_COIN) {

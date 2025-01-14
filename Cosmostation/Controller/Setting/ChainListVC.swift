@@ -204,8 +204,7 @@ extension ChainListVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDe
             chain = searchTestnets[indexPath.row]
         }
         
-        if chain is ChainOktEVM { return }
-        if chain is ChainBitCoin84 { return }
+        if chain is ChainOktEVM || chain is ChainBitCoin84 || chain is ChainGno { return }
         
         loadingView.isHidden = false
         self.onDisplayEndPointSheet(chain)

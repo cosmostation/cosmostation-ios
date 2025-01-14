@@ -36,6 +36,7 @@ class CosmosFetcher {
     var mintscanCw20Tokens = [MintscanToken]()
     var mintscanCw721List = [JSON]()
     var cw721Models = [Cw721Model]()
+    var mintscanGrc20Tokens = [MintscanToken]()
     
     var grpcConnection: ClientConnection?
     
@@ -56,6 +57,7 @@ class CosmosFetcher {
     func fetchCosmosData(_ id: Int64) async -> Bool {
         mintscanCw20Tokens.removeAll()
         mintscanCw721List.removeAll()
+        mintscanGrc20Tokens.removeAll()
         cosmosLcdAuth = nil
         cosmosGrpcAuth = nil
         cosmosBalances = nil
@@ -71,6 +73,7 @@ class CosmosFetcher {
         do {
             if let cw20Tokens = try? await fetchCw20Info(),
                let cw721List = try? await fetchCw721Info(),
+               let grc20Tokens = try? await fetchGrc20Info(),
                let balance = try await fetchBalance(),
                let _ = try? await fetchAuth(),
                let delegations = try? await fetchDelegation(),
@@ -81,6 +84,7 @@ class CosmosFetcher {
                let baseFees = try? await fetchBaseFee() {
                 self.mintscanCw20Tokens = cw20Tokens ?? []
                 self.mintscanCw721List = cw721List ?? []
+                self.mintscanGrc20Tokens = grc20Tokens
                 self.cosmosBalances = balance
                 
                 delegations?.forEach({ delegation in
@@ -116,6 +120,19 @@ class CosmosFetcher {
                     } else {
                         if (userDisplaytoken?.contains(cw20.contract!) == true) {
                             await self.fetchCw20Balance(cw20)
+                        }
+                    }
+                }
+                
+                let userDisplayGrc20token = BaseData.instance.getDisplayGrc20s(id, self.chain.tag)
+                await mintscanGrc20Tokens.concurrentForEach { grc20 in
+                    if (userDisplayGrc20token == nil) {
+                        if (grc20.wallet_preload == true) {
+                            await self.fetchGrc20Balance(grc20)
+                        }
+                    } else {
+                        if (userDisplayGrc20token?.contains(grc20.contract!) == true) {
+                            await self.fetchGrc20Balance(grc20)
                         }
                     }
                 }
@@ -195,7 +212,11 @@ class CosmosFetcher {
     }
     
     func valueTokenCnt() -> Int {
-        return mintscanCw20Tokens.filter {  $0.getAmount() != NSDecimalNumber.zero }.count
+        if chain.isSupportGrc20() {
+            return mintscanGrc20Tokens.filter({ $0.getAmount() != NSDecimalNumber.zero }).count
+        } else {
+            return mintscanCw20Tokens.filter {  $0.getAmount() != NSDecimalNumber.zero }.count
+        }
     }
 
     func isRewardAddressChanged() -> Bool {
@@ -207,7 +228,14 @@ class CosmosFetcher {
 
 extension CosmosFetcher {
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        if chain.isSupportCw20() {
+        if chain.isSupportGrc20() {
+            if let tokenInfo = mintscanGrc20Tokens.filter({ $0.contract == address }).first {
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                if msPrice != 0 {
+                    return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                }
+            }
+        } else if chain.isSupportCw20() {
             if let tokenInfo = mintscanCw20Tokens.filter({ $0.contract == address }).first {
                 let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
                 return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
@@ -218,7 +246,16 @@ extension CosmosFetcher {
     
     func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
-        if chain.isSupportCw20() {
+        
+        if chain.isSupportGrc20() {
+            mintscanGrc20Tokens.forEach { tokenInfo in
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                if msPrice != 0 {
+                    let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                    result = result.adding(value)
+                }
+            }
+        } else if chain.isSupportCw20() {
             mintscanCw20Tokens.forEach { tokenInfo in
                 let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
                 let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
@@ -461,6 +498,13 @@ extension CosmosFetcher {
         if (!chain.isSupportCw721()) { return [] }
         return try await AF.request(BaseNetWork.msCw721InfoUrl(chain.apiName), method: .get).serializingDecodable(JSON.self).value["assets"].arrayValue
     }
+    
+    func fetchGrc20Info() async throws -> [MintscanToken] {
+        if (!chain.isSupportGrc20()) { return [] }
+         
+        let result = try await AF.request(BaseNetWork.msGrc20InfoUrl(chain.apiName), method: .get).serializingDecodable([MintscanToken].self).value
+        return result
+    }
 }
 
 //about web3 call api
@@ -507,13 +551,30 @@ extension CosmosFetcher {
         cosmosGrpcAuth = nil
         cosmosAccountNumber = nil
         cosmosSequenceNum = nil
-        if (getEndpointType() == .UseGRPC) {
+        
+        if chain is ChainGno {
+            let params: Parameters = ["jsonrpc":"2.0",
+                                      "method": "abci_query",
+                                      "params": ["auth/accounts/\(chain.bechAddress!)", "", "0", false],
+                                      "id": 1]
+            let response = try await AF.request(getRpc(), method: .post, parameters: params, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+            let encodedDataString = response["result"]["response"]["ResponseBase"]["Data"].stringValue
+            let data = Data(base64Encoded: encodedDataString)
+            if String(data: data!, encoding: .utf8) == "null" {
+                return
+            }
+            let jsonData = try JSON(data: data!)
+            cosmosAccountNumber = jsonData["BaseAccount"]["account_number"].uInt64Value
+            cosmosSequenceNum = jsonData["BaseAccount"]["sequence"].uInt64Value
+            
+        } else if (getEndpointType() == .UseGRPC) {
             let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = chain.bechAddress! }
             if let result = try? await Cosmos_Auth_V1beta1_QueryNIOClient(channel: getClient()).account(req, callOptions: getCallOptions()).response.get().account {
                 cosmosGrpcAuth = result
                 cosmosAccountNumber = result.accountInfos().1
                 cosmosSequenceNum = result.accountInfos().2
             }
+            
         } else {
             let url = getLcd() + "cosmos/auth/v1beta1/accounts/${address}".replacingOccurrences(of: "${address}", with: chain.bechAddress!)
             if let response = try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value["account"] {
@@ -525,10 +586,30 @@ extension CosmosFetcher {
     }
     
     func fetchBalance() async throws -> [Cosmos_Base_V1beta1_Coin]? {
-        if (getEndpointType() == .UseGRPC) {
+        if chain is ChainGno {
+            let params: Parameters = ["jsonrpc":"2.0",
+                                      "method": "abci_query",
+                                      "params": ["bank/balances/\(chain.bechAddress!)", "", "0", false],
+                                      "id": 1]
+            let response = try await AF.request(getRpc(), method: .post, parameters: params, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+            let encodedDataString = response["result"]["response"]["ResponseBase"]["Data"].stringValue
+            
+            let data = Data(base64Encoded: encodedDataString)
+            let coins = String(data: data!, encoding: .utf8) ?? ""
+            if coins.isEmpty {
+                return []
+            }
+            
+            let amount = coins.filter { $0.isNumber }
+            let denom = coins.filter { !$0.isNumber }.trimmingCharacters(in: ["\""])
+
+            return [Cosmos_Base_V1beta1_Coin.init(denom, amount)]
+            
+        } else if (getEndpointType() == .UseGRPC) {
             let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
             let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = chain.bechAddress!; $0.pagination = page }
             return try await Cosmos_Bank_V1beta1_QueryNIOClient(channel: getClient()).allBalances(req, callOptions: getCallOptions()).response.get().balances
+            
         } else {
             let url = getLcd() + "cosmos/bank/v1beta1/balances/${address}?pagination.limit=2000".replacingOccurrences(of: "${address}", with: chain.bechAddress!)
             let response = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
@@ -657,7 +738,36 @@ extension CosmosFetcher {
         }
     }
     
+    func broadcastTx(_ broadTx: Tm2_Tx_Tx) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+        let params: Parameters = ["jsonrpc":"2.0",
+                                  "method": "broadcast_tx_async",
+                                  "params": [try broadTx.serializedData().base64EncodedString()],
+                                  "id": 1]
+        let result = try await AF.request(getRpc(), method: .post, parameters: params, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+        let hash = result["result"]["hash"].stringValue
+        let log = result["result"]["log"].stringValue
+        var response = Cosmos_Base_Abci_V1beta1_TxResponse()
+        response.txhash = hash
+        response.rawLog = log
+        return response
+    }
+    
     func fetchTx( _ hash: String) async throws -> Cosmos_Tx_V1beta1_GetTxResponse? {
+        if chain is ChainGno {
+            let param: Parameters = ["method": "tx", "params": [hash], "id" : 1, "jsonrpc" : "2.0"]
+            let result = try await AF.request(getRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+
+            if !result["error"].isEmpty || !result["result"]["tx_result"]["ResponseBase"]["Error"].isEmpty {
+                throw AFError.explicitlyCancelled
+            }
+            var response = Cosmos_Tx_V1beta1_GetTxResponse()
+            var txResponse = Cosmos_Base_Abci_V1beta1_TxResponse()
+            txResponse.txhash = result["result"]["hash"].stringValue
+            txResponse.code = 0
+            txResponse.rawLog = result["result"]["tx_result"]["ResponseBase"]["Log"].stringValue
+            response.txResponse = txResponse
+            return response
+        }
         if (getEndpointType() == .UseGRPC) {
             let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = hash }
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).getTx(req, callOptions: getCallOptions()).response.get()
@@ -726,6 +836,26 @@ extension CosmosFetcher {
                         await self.fetchCw20Balance(cw20)
                     }
                 }
+            }
+        }
+    }
+    
+    /// Gno chain
+    func fetchGrc20Balance(_ tokenInfo: MintscanToken) async {
+        let tokenPath = tokenInfo.contract! // "gno.land/r/onbloc/usdc"
+        let tokenBalancePath = "\(tokenPath).BalanceOf(\"\(chain.bechAddress!)\")"
+        
+        let param: Parameters = ["method": "abci_query", "params": ["vm/qeval", tokenBalancePath.data(using: .utf8)!.base64EncodedString(),"0",false], "id" : 1, "jsonrpc" : "2.0"]
+        var result = try? await AF.request(getRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+        
+        if let _ = result?["error"]["message"].stringValue {
+            tokenInfo.setAmount("0")
+        }
+        
+        if let encodedDataString = result?["result"]["response"]["ResponseBase"]["Data"].stringValue {
+            let data = Data(base64Encoded: encodedDataString)
+            if let balanceString = String(data: data!, encoding: .utf8) {
+                tokenInfo.setAmount(balanceString.components(separatedBy: " ").first!.filter{ $0.isNumber })
             }
         }
     }
@@ -909,6 +1039,8 @@ extension CosmosFetcher {
             return .UseGRPC
         } else if (endpointType == CosmosEndPointType.UseLCD.rawValue) {
             return .UseLCD
+        } else if (endpointType == CosmosEndPointType.UseRPC.rawValue) {
+            return .UseRPC
         } else {
             return chain.cosmosEndPointType
         }
@@ -936,6 +1068,19 @@ extension CosmosFetcher {
             }
         }
         return (chain.grpcHost, chain.grpcPort)
+    }
+    
+    func getRpc() -> String {
+        var url = ""
+        if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_RPC_ENDPOINT +  " : " + chain.name) {
+            url = endpoint
+        } else {
+            url = chain.rpcUrl
+        }
+        if (url.last != "/") {
+            return url + "/"
+        }
+        return url
     }
     
     func getClient() -> ClientConnection {

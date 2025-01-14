@@ -112,6 +112,10 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v11/assets/" +  apiName + "/erc20/info"
     }
     
+    static func msGrc20InfoUrl(_ apiName: String) -> String {
+        return MINTSCAN_API_URL + "v11/assets/" +  apiName + "/grc20/info"
+    }
+    
     static func msChainParams() -> String {
         return MINTSCAN_API_URL + "v11/utils/params"
     }

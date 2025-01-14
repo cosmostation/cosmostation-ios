@@ -49,6 +49,12 @@ class ManageChainCell: UITableViewCell {
             cosmosEndpointTag.text = "Rest"
             cosmosEndpointLabel.text = chain.getCosmosfetcher()?.getLcd().replacingOccurrences(of: "https://", with: "")
             cosmosEndpointLabel.adjustsFontSizeToFitWidth = true
+            
+        } else if (chain.getCosmosfetcher()?.getEndpointType() == .UseRPC) {
+            cosmosLayer.isHidden = false
+            cosmosEndpointTag.text = "RPC"
+            cosmosEndpointLabel.text = chain.getCosmosfetcher()?.getRpc().replacingOccurrences(of: "https://", with: "")
+            cosmosEndpointLabel.adjustsFontSizeToFitWidth = true
         }
         
         if (chain.supportEvm) {

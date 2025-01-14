@@ -204,7 +204,7 @@ class CommonTransfer: BaseVC {
                     }
                 }
                 
-            } else if (sendAssetType == .COSMOS_WASM ) {
+            } else if (sendAssetType == .COSMOS_WASM || sendAssetType == .GNO_GRC20) {
                 //CW20 only support forward IBC path
                 if (msAsset.ibc_info?.counterparty?.chain == fromChain.apiName && msAsset.ibc_info?.counterparty?.getDenom?.lowercased() == toSendDenom.lowercased()) {
                     if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
@@ -313,12 +313,12 @@ class CommonTransfer: BaseVC {
             }
             
         } else if (sendAssetType == .EVM_COIN) {
-            titleCoinImg.image =  UIImage.init(named: fromChain.coinLogo)
+            titleCoinImg.image = UIImage.init(named: fromChain.coinLogo)
             decimal = 18
             symbol = fromChain.coinSymbol
             availableAmount = evmFetcher.evmBalances.subtracting(EVM_BASE_FEE)
             
-        } else if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20) {
+        } else if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20 || sendAssetType == .GNO_GRC20) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = fromChain.assetDecimal(toSendDenom)
             symbol = fromChain.assetSymbol(toSendDenom)
@@ -467,7 +467,7 @@ class CommonTransfer: BaseVC {
             
         } else {
             toAmount = NSDecimalNumber(string: amount)
-            if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20) {
+            if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20 || sendAssetType == .GNO_GRC20) {
                 let msPrice = BaseData.instance.getPrice(toSendMsToken!.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
@@ -742,6 +742,8 @@ class CommonTransfer: BaseVC {
             if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                 // Inchain Send!
                 if (sendAssetType == .COSMOS_WASM) {                                // Inchain CW20 Send!
                     inChainWasmSendSimul()
+                } else if (sendAssetType == .GNO_GRC20) {
+                    
                 } else {                                                            // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                     inChainCoinSendSimul()
                 }
@@ -749,6 +751,9 @@ class CommonTransfer: BaseVC {
                 ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
                 if (sendAssetType == .COSMOS_WASM) {                                // CW20 IBC Send!
                     ibcWasmSendSimul()
+                    
+                } else if (sendAssetType == .GNO_GRC20) {
+
                 } else {                                                            // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                     ibcCoinSendSimul()
                 }
@@ -894,6 +899,84 @@ extension CommonTransfer {
                 print("error ", error)
             }
             
+        }
+    }
+}
+
+// Gno style tx
+extension CommonTransfer {
+    func gnoSend() {
+        Task {
+            guard let gasRate = self.cosmosTxFee.amount.filter({ $0.denom == self.cosmosTxFee.amount[0].denom }).first else { return }
+            let fee = Tm2_Tx_TxFee.with {
+                $0.gasWanted = Int64(cosmosTxFee.gasLimit)
+                $0.gasFee = gasRate.amount + gasRate.denom
+            }
+                        
+            guard let sig = Signer.gnoSignature(fromChain,
+                                                [.init(type: "/bank.MsgSend", from_address: fromChain.bechAddress!, to_address: toAddress, amount: toAmount.stringValue + toSendDenom)],
+                                                txMemo,
+                                                .init(gas_wanted: String(fee.gasWanted), gas_fee: fee.gasFee)) else { return }
+
+            do {
+                let broadReq = Signer.genTx(fromChain, onBindSendMsg(), txMemo, fee, sig)
+                if let broadRes = try await fromChain.getCosmosfetcher()?.broadcastTx(broadReq) {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        self.loadingView.isHidden = true
+                        let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                        txResult.txStyle = self.txStyle
+                        txResult.fromChain = self.fromChain
+                        txResult.toChain = self.toChain
+                        txResult.toAddress = self.toAddress
+                        txResult.txMemo = self.txMemo
+                        txResult.cosmosBroadcastTxResponse = broadRes
+                        txResult.modalPresentationStyle = .fullScreen
+                        self.present(txResult, animated: true)
+                    })
+                }
+                
+            } catch {
+                loadingView.isHidden = true
+                onShowToast("Error: \(error)")
+            }
+        }
+    }
+    
+    func gnoGrc20Send() {
+        Task {
+            guard let gasRate = self.cosmosTxFee.amount.filter({ $0.denom == self.cosmosTxFee.amount[0].denom }).first else { return }
+            let fee = Tm2_Tx_TxFee.with {
+                $0.gasWanted = Int64(cosmosTxFee.gasLimit)
+                $0.gasFee = gasRate.amount + gasRate.denom
+            }
+            
+            guard let sig = Signer.gnoSignature(fromChain,
+                                                [.init(type: "/vm.m_call", caller: fromChain.bechAddress!, send: "", pkg_path: toSendMsToken.contract!, func: "Transfer", args: [toAddress, toAmount.stringValue])],
+                                                txMemo,
+                                                .init(gas_wanted: String(fee.gasWanted), gas_fee: fee.gasFee)) else { return }
+            do {
+                let broadReq = Signer.genTx(fromChain, onBindSendMsg(), txMemo, fee, sig)
+                if let broadRes = try await fromChain.getCosmosfetcher()?.broadcastTx(broadReq) {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        self.loadingView.isHidden = true
+                        let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                        txResult.txStyle = self.txStyle
+                        txResult.fromChain = self.fromChain
+                        txResult.toChain = self.toChain
+                        txResult.toAddress = self.toAddress
+                        txResult.txMemo = self.txMemo
+                        txResult.cosmosBroadcastTxResponse = broadRes
+                        txResult.modalPresentationStyle = .fullScreen
+                        self.present(txResult, animated: true)
+                    })
+                }
+                
+            } catch {
+                loadingView.isHidden = true
+                onShowToast("Error: \(error)")
+            }
         }
     }
 }
@@ -1136,6 +1219,27 @@ extension CommonTransfer {
             }
             return Signer.genThorSendMsg(thorSendMSg)
             
+        } else if sendAssetType == .GNO_GRC20 {
+            let gnoSendMsg = Gno_Vm_MsgCall.with {
+                $0.args = [toAddress,
+                           toAmount.stringValue]
+                $0.caller = fromChain.bechAddress!
+                $0.func = "Transfer"
+                $0.send = ""
+                $0.pkgPath = toSendMsToken.contract!
+            }
+            
+            return Signer.genGnoSendMsg(gnoSendMsg)
+
+        } else if fromChain is ChainGno {
+            let gnoSendMsg = Gno_Bank_MsgSend.with {
+                $0.fromAddress = fromChain.bechAddress!
+                $0.toAddress = toAddress
+                $0.amount = toAmount.stringValue + toSendDenom
+            }
+            return Signer.genGnoSendMsg(gnoSendMsg)
+            
+
         } else {
             let sendMsgs = Cosmos_Bank_V1beta1_MsgSend.with {
                 $0.fromAddress = fromChain.bechAddress!
@@ -1414,6 +1518,12 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                 if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                     // Inchain Send!
                     if (sendAssetType == .COSMOS_WASM) {                                         // Inchain CW20 Send!
                         inChainWasmSend()
+                        
+                    } else if sendAssetType == .GNO_GRC20 {
+                        gnoGrc20Send()
+                        
+                    } else if fromChain is ChainGno {
+                        gnoSend()
                     } else {                                                                // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                         inChainCoinSend()
                     }
@@ -1439,6 +1549,8 @@ public enum SendAssetType: Int {
     case SUI_COIN = 5                       // sui assets
     case SUI_NFT = 6                        // sui nft
     case BTC_COIN = 7                       // bitcoin
+    case GNO_COIN = 8
+    case GNO_GRC20 = 9
 }
 
 

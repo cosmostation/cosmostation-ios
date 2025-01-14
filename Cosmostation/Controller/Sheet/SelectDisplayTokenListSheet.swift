@@ -55,7 +55,10 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
     }
 
     @IBAction func onClickConfirm(_ sender: BaseButton) {
-        if selectedChain.isSupportCw20() && selectedChain.isSupportErc20() {
+        if selectedChain.isSupportGrc20() {
+            BaseData.instance.setDisplayGrc20s(baseAccount.id, selectedChain.tag, toDisplayTokens)
+
+        } else if selectedChain.isSupportCw20() && selectedChain.isSupportErc20() {
             let toDisplayCw20Tokens = toDisplayTokens.filter { allTokens.filter({ $0.type == "cw20" }).map({ $0.contract }).contains($0) }
             let toDisplayErc20Tokens = toDisplayTokens.filter { allTokens.filter({ $0.type == "erc20" }).map({ $0.contract }).contains($0) }
 
