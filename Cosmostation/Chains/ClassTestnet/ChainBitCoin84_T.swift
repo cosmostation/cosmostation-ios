@@ -20,7 +20,7 @@ class ChainBitCoin84_T: ChainBitCoin84 {
         apiName = "bitcoin-testnet"
         accountKeyType = AccountKeyType(.BTC_Native_Segwit, "m/84'/1'/0'/0/X")
         
-        coinSymbol = "BTC"
+        coinSymbol = "sBTC"
         coinGeckoId = ""
         coinLogo = "tokenBtc"
         
