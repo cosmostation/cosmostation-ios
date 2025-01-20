@@ -24,7 +24,7 @@ class ChainDungeon: BaseChain  {
         stakeDenom = "udgn"
         bechAccountPrefix = "dungeon"
         validatorPrefix = "dungeonvaloper"
-        grpcHost = "dungeon.grpc.quasarstaking.ai:80"
+        grpcHost = ""
         lcdUrl = "https://dungeon-wallet.api.quasarstaking.ai"
     }
     
