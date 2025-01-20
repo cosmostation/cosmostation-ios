@@ -311,6 +311,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         btcSignRequestSheet.toSign = request
         btcSignRequestSheet.messageId = messageId
         btcSignRequestSheet.selectedChain = btcTargetChain
+        btcSignRequestSheet.webSignDelegate = self
         btcSignRequestSheet.modalTransitionStyle = .coverVertical
         self.present(btcSignRequestSheet, animated: true)
     }

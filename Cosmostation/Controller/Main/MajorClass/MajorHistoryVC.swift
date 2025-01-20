@@ -121,11 +121,14 @@ class MajorHistoryVC: BaseVC {
                 if (matched >= 0) {
                     var updated = historyGroup[matched].values
                     updated.append(history)
-                    historyGroup[matched].values = updated
+                    historyGroup[matched].values = updated.sorted{ $0["status"]["block_time"].intValue > $1["status"]["block_time"].intValue }
                 } else {
                     historyGroup.append(HistoryGroup.init(date, [history]))
                 }
-                
+            }
+            
+            historyGroup.sort {
+                $0.date > $1.date
             }
             
             loadingView.isHidden = true

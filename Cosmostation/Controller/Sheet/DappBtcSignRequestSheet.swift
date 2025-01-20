@@ -167,6 +167,7 @@ class DappBtcSignRequestSheet: BaseVC {
     func onInitFeeView() {
         Task {
             feeDenomLabel.text = selectedChain.coinSymbol
+            feeLabel.text = selectedChain.coinSymbol
             do {
                 try await onUpdateFeeView()
                 try checkValidate()

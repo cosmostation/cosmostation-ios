@@ -23,7 +23,7 @@ class ChainBitCoin44_T: ChainBitCoin84_T {
         
         coinSymbol = "BTC"
         coinGeckoId = ""
-        coinLogo = "tokenBtc"
+        coinLogo = "tokenBtc_signet"
         
         mainUrl = "https://rpc-office.cosmostation.io/bitcoin-testnet"
     }

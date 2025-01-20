@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "btc(signet).png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
