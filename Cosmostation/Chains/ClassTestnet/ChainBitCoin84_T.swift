@@ -22,7 +22,7 @@ class ChainBitCoin84_T: ChainBitCoin84 {
         
         coinSymbol = "sBTC"
         coinGeckoId = ""
-        coinLogo = "tokenBtc"
+        coinLogo = "tokenBtc_signet"
         
         pubKeyHash = 111
         scriptHash = 196
