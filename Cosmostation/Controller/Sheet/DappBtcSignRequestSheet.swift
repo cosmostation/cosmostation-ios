@@ -73,7 +73,7 @@ class DappBtcSignRequestSheet: BaseVC {
             onSuccessInitView()
             
         } else if method == "bit_signPsbt" {
-            let network = self.selectedChain.isTestnet ? "testnet" : "bitcoin"
+            let network = self.selectedChain.isTestnet ? "testnet" : "mainnet"
             inOutputs = BtcJS.init("getInOutPuts").callJSValue(param: [toSign.stringValue, network])
             onInitFeeView()
 
@@ -83,13 +83,11 @@ class DappBtcSignRequestSheet: BaseVC {
     }
     
     override func setLocalizedString() {
-        if method == "bit_sendBitcoin" {
+        if method == "bit_sendBitcoin" || method == "bit_signPsbt" {
             requestTitle.text = NSLocalizedString("str_tx_request", comment: "")
             
         } else if method == "bit_signMessage" {
             requestTitle.text = NSLocalizedString("str_permit_request", comment: "")
-            
-        } else if method == "bit_signPsbt" {
             
         }
         
