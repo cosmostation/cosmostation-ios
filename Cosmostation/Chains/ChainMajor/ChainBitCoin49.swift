@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainBitCoin49: ChainBitCoin84 {
+class ChainBitCoin49: ChainBitCoin86 {
     
     override init() {
         super.init()
@@ -30,7 +30,7 @@ class ChainBitCoin49: ChainBitCoin84 {
     override func setInfoWithPrivateKey(_ priKey: Data) {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        mainAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bech32PrefixPattern, pubKeyHash, scriptHash)
+        mainAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil, "mainnet")
 //        print("ChainBitCoin49 ", mainAddress)
     }
     

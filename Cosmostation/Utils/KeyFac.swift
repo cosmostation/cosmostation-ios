@@ -98,8 +98,7 @@ class KeyFac {
     }
     
     
-    static func getAddressFromPubKey(_ pubKey: Data, _ pubKeyType: PubKeyType, _ prefix: String? = nil, 
-                                     _ pubKeyHash: UInt8? = nil, _ scriptHash: UInt8? = nil) -> String {
+    static func getAddressFromPubKey(_ pubKey: Data, _ pubKeyType: PubKeyType, _ prefix: String? = nil, _ network: String? = nil) -> String {
         if (pubKeyType == .COSMOS_Secp256k1) {
             let ripemd160 = RIPEMD160.hash(pubKey.sha256())
             return try! SegwitAddrCoder.shared.encode(prefix!, ripemd160)
@@ -107,25 +106,9 @@ class KeyFac {
         } else if (pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
             return Web3Core.Utilities.publicToAddressString(pubKey)!
             
-        } else if (pubKeyType == .BTC_Legacy) {
-            let ripemd160 = RIPEMD160.hash(pubKey.sha256())
-            let networkAndHash = Data([pubKeyHash!]) + ripemd160
-            return base58CheckEncode(networkAndHash)
-            
-        } else if (pubKeyType == .BTC_Nested_Segwit) {
-            let ripemd160 = RIPEMD160.hash(pubKey.sha256())
-            let segwitscript = OpCode.segWitOutputScript(ripemd160, versionByte: 0)
-            let hashP2wpkhWrappedInP2sh = RIPEMD160.hash(segwitscript.sha256())
-            let withVersion = Data([scriptHash!]) + hashP2wpkhWrappedInP2sh
-            return base58CheckEncode(withVersion)
-            
-        } else if (pubKeyType == .BTC_Native_Segwit) {
-            let ripemd160 = RIPEMD160.hash(pubKey.sha256())
-            return try! SegwitAddrCoder.shared.encodeBtc(prefix!, ripemd160)
-            
-        } else if (pubKeyType == .BTC_Taproot) {
-            //Not support
-            
+        } else if (pubKeyType == .BTC_Legacy || pubKeyType == .BTC_Nested_Segwit || pubKeyType == .BTC_Native_Segwit || pubKeyType == .BTC_Taproot) {
+            return BtcJS.shared.callJSValue(key: "getAddress", param: [pubKey.toHexString(), pubKeyType.algorhythm, network])
+        
         } else if (pubKeyType == .SUI_Ed25519) {
             let data = Data([UInt8](Data(count: 1)) + pubKey)
             let hash = try! Blake2b.hash(size: 32, data: data)

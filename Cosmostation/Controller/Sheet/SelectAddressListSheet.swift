@@ -99,12 +99,12 @@ class SelectAddressListSheet: BaseVC {
             
             BaseData.instance.selectAllAddressBooks().forEach { book in
                 if toChain.isTestnet {
-                    if (book.chainName.lowercased().contains("bitcoin") && book.chainName.lowercased().contains("testnet") && book.dpAddress != senderMajorAddress) {
+                    if (book.chainName.lowercased().contains("bitcoin") && book.chainName.lowercased().contains("signet") && book.dpAddress != senderMajorAddress) {
                         majorAddressBook.append(book)
                     }
 
                 } else {
-                    if (book.chainName.lowercased().contains("bitcoin") && !book.chainName.lowercased().contains("testnet") && book.dpAddress != senderMajorAddress) {
+                    if (book.chainName.lowercased().contains("bitcoin") && !book.chainName.lowercased().contains("signet") && book.dpAddress != senderMajorAddress) {
                         majorAddressBook.append(book)
                     }
                 }

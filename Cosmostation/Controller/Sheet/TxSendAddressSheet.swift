@@ -118,7 +118,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             } else {
                 network = "testnet"
             }
-            let isValidAddress = BtcJS("validateAddress").callJSValueToBool(param: [userInput!, network])
+            let isValidAddress = BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [userInput!, network])
 
             if isValidAddress {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)

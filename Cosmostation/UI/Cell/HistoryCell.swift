@@ -166,7 +166,7 @@ class HistoryCell: UITableViewCell {
         
     }
     
-    func bindBtcHistory(_ btcChain: ChainBitCoin84, _ history: JSON) {
+    func bindBtcHistory(_ btcChain: ChainBitCoin86, _ history: JSON) {
         if (history["status"]["confirmed"].boolValue == true) {
             successImg.image = UIImage(named: "iconSuccess")
             timeLabel.text = WDP.dpTime(history["status"]["block_time"].intValue * 1000)

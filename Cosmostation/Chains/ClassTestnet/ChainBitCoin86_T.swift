@@ -1,30 +1,28 @@
 //
-//  ChainBitCoin84_T.swift
+//  ChainBitCoin86_T.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 8/22/24.
-//  Copyright © 2024 wannabit. All rights reserved.
+//  Created by 차소민 on 1/21/25.
+//  Copyright © 2025 wannabit. All rights reserved.
 //
 
 import Foundation
-
-class ChainBitCoin84_T: ChainBitCoin86_T {
+class ChainBitCoin86_T: ChainBitCoin86 {
     
     override init() {
         super.init()
         
         name = "Bitcoin Signet"
-        tag = "bitcoin84_T"
+        tag = "bitcoin86_T"
         logo1 = "chainBitcoin_T"
-        isDefault = false
         isTestnet = true
         apiName = "bitcoin-testnet"
-        accountKeyType = AccountKeyType(.BTC_Native_Segwit, "m/84'/1'/0'/0/X")
+        accountKeyType = AccountKeyType(.BTC_Taproot, "m/86'/1'/0'/0/X")
         
         coinSymbol = "sBTC"
         coinGeckoId = ""
         coinLogo = "tokenBtc_signet"
-                
+        
         mainUrl = "https://rpc-office.cosmostation.io/bitcoin-testnet"
     }
     
@@ -32,6 +30,5 @@ class ChainBitCoin84_T: ChainBitCoin86_T {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         mainAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil, "testnet")
-//        print("ChainBitCoin84_T ", mainAddress)
     }
 }

@@ -59,7 +59,7 @@ class AssetBtcCell: UITableViewCell {
         WDP.dpPrice(baseChain.coinGeckoId, priceCurrencyLabel, priceLabel)
         WDP.dpPriceChanged(baseChain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
         
-        if let btcFetcher = (baseChain as? ChainBitCoin84)?.getBtcFetcher() {
+        if let btcFetcher = (baseChain as? ChainBitCoin86)?.getBtcFetcher() {
             let msPrice = BaseData.instance.getPrice(baseChain.coinGeckoId)
             let avaibaleAmount = btcFetcher.btcBalances.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
             let pendingInputAmount = btcFetcher.btcPendingInput.multiplying(byPowerOf10: -8, withBehavior: handler8Down)

@@ -175,16 +175,26 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     }
 
     private func onInitChainBitcoin() {
-        if (btcTargetChain == nil || btcTargetChain?.tag != "bitcoin84" || btcTargetChain?.tag != "bitcoin84_T") {
+        if (btcTargetChain == nil) {
             
             if btcNetwork == nil || btcNetwork == "mainnet" {
-                btcTargetChain = allChains.filter({ $0.tag == "bitcoin84" }).first!
+                btcTargetChain = allChains.filter({ $0.tag == "bitcoin86" }).first!
                 
             } else if btcNetwork == "signet" {
-                btcTargetChain = allChains.filter({ $0.tag == "bitcoin84_T" }).first!
+                btcTargetChain = allChains.filter({ $0.tag == "bitcoin86_T" }).first!
+            }
+            
+        } else {
+            
+            if btcNetwork == "mainnet" && btcTargetChain!.isTestnet {
+                btcTargetChain = allChains.filter({ $0.tag == "bitcoin86" }).first!
+                
+            } else if btcNetwork == "signet" && !btcTargetChain!.isTestnet {
+                btcTargetChain = allChains.filter({ $0.tag == "bitcoin86_T" }).first!
             }
             
         }
+        
     }
 
     // Inject custom script to webview
@@ -703,7 +713,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                 
             } else if (method == "bit_getBalance") {
                 Task {
-                    if let btcFetcher = (btcTargetChain as? ChainBitCoin84)?.getBtcFetcher() {
+                    if let btcFetcher = (btcTargetChain as? ChainBitCoin86)?.getBtcFetcher() {
                         let _ = await btcFetcher.fetchBtcBalances()
                         injectionRequestApprove(JSON(btcFetcher.btcBalances), messageJSON, bodyJSON["messageId"])
                     }
@@ -717,7 +727,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                         return
                         
                     } else {
-                        guard let btcFetcher = (btcTargetChain as? ChainBitCoin84)?.getBtcFetcher() else { return }
+                        guard let btcFetcher = (btcTargetChain as? ChainBitCoin86)?.getBtcFetcher() else { return }
                         let result = try await btcFetcher.sendRawtransaction(params.first!.stringValue)
                         
                         if !result["error"]["message"].stringValue.isEmpty {

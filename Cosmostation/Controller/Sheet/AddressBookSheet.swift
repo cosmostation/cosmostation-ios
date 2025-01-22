@@ -118,7 +118,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
             network = "bitcoin"
         }
 
-        if BtcJS("validateAddress").callJSValueToBool(param: [address, network]) {
+        if BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [address, network]) {
             if memoTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).lengthOfBytes(using: .utf8) > 80 {
                 onShowToast(NSLocalizedString("error_memo_count", comment: ""))
                 return
@@ -179,7 +179,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         } else if WUtils.isValidSuiAdderss(address) {
             return true
             
-        } else if BtcJS("validateAddress").callJSValueToBool(param: [address, network]) {
+        } else if BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [address, network]) {
             return true
 
         } else if let chain = ALLCHAINS().filter({ address!.starts(with: $0.bechAccountPrefix ?? "" + "1") == true }).first {
@@ -207,11 +207,11 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         } else if WUtils.isValidSuiAdderss(address) {
             return ChainSui()
             
-        } else if BtcJS("validateAddress").callJSValueToBool(param: [address, network]) {
+        } else if BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [address, network]) {
             if address!.starts(with: "bc1") {
-                return ChainBitCoin84()
+                return ChainBitCoin86()
             } else if address!.starts(with: "tb1") {
-                return ChainBitCoin84_T()
+                return ChainBitCoin86_T()
             } else if address!.starts(with: "1") {
                 return ChainBitCoin44()
             } else if address!.starts(with: "m") {

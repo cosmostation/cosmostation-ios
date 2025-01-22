@@ -11,16 +11,13 @@ import JavaScriptCore
 import SwiftyJSON
 
 open class BtcJS {
+    static let shared = BtcJS()
+    
     private var btcJScontext = JSContext()
     
-    fileprivate var key: String!
     fileprivate var jsValue: JSValue!
-    var test: String!
     
-    
-    init(_ key: String = "") {
-        
-        self.key = key
+    private init() {
         
         // Retrieve the content of bitcoin.js
         let btcJSpath = Bundle.main.path(forResource: "bitcoin", ofType: "js")
@@ -33,8 +30,6 @@ open class BtcJS {
                 // Evaluate bitcoin.js
                 _ = btcJScontext?.evaluateScript(btcJS)
                                 
-                // Reference functions
-                jsValue = btcJScontext?.objectForKeyedSubscript(key)
             }
             catch {
                 print("Unable to load bitcoin.js")
@@ -46,16 +41,18 @@ open class BtcJS {
         
     }
     
-    open func getTxHex(_ txString: String) -> String {
+    func getTxHex(_ txString: String) -> String {
         btcJScontext?.evaluateScript(txString)
         return "\(btcJScontext!.objectForKeyedSubscript("result").call(withArguments: nil)!)"
     }
     
-    open func callJSValue(param: [Any?]? = nil) -> String {
+    func callJSValue(key: String = "", param: [Any?]? = nil) -> String {
+        jsValue = btcJScontext?.objectForKeyedSubscript(key)
         return "\(jsValue.call(withArguments: param)!)"
     }
     
-    open func callJSValueToBool(param: [Any?]? = nil) -> Bool {
+    func callJSValueToBool(key: String = "", param: [Any?]? = nil) -> Bool {
+        jsValue = btcJScontext?.objectForKeyedSubscript(key)
         return jsValue.call(withArguments: param)!.toBool()
     }
 
@@ -67,6 +64,7 @@ public enum BtcTxType: String {
     case p2wpkh
     case p2pkh
     case p2sh
+    case p2tr
     
     var vbyte: Vbytes {
         switch self {
@@ -78,6 +76,9 @@ public enum BtcTxType: String {
 
         case .p2sh:
             Vbytes(overhead: 10, inputs: 297, output: 32)
+            
+        case .p2tr:
+            Vbytes(overhead: 11, inputs: 58, output: 43)
         }
     }
 

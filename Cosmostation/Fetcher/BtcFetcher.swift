@@ -213,12 +213,12 @@ extension BtcFetcher {
         let sender = fromChain.mainAddress
         let publicKey = fromChain.publicKey!.toHexString()
         let privateKey = fromChain.privateKey!.toHexString()
-        let network = fromChain.apiName.contains("testnet") ? "testnet" : "bitcoin" //
+        let network = fromChain.isTestnet ? "testnet" : "bitcoin"
         guard let type = BtcTxType(rawValue: fromChain.accountKeyType.pubkeyType.algorhythm!) else {
             return "undefined"
         }
         
-
+        
         for utxo in utxo {
             
             switch type {
@@ -264,7 +264,20 @@ extension BtcFetcher {
                             },
                         """
                 
+            case .p2tr:
+                inputs += """
+                            {
+                            hash: '\(utxo["txid"])',
+                            index: \(utxo["vout"]),
+                            witnessUtxo: {
+                                script: senderPayment.output,
+                                value: \(utxo["value"]),
+                                },
+                            tapInternalKey: senderPayment.internalPubkey,
+                            },
+                        """
             }
+        
                     
             allValue += utxo["value"].intValue
         }
@@ -297,7 +310,35 @@ extension BtcFetcher {
                       """
         }
         
-        let createTxString = """
+        var createTxString = ""
+        
+        if type == .p2tr {
+            createTxString = """
+            function result() {
+        
+               const privateKey = '\(privateKey)';
+               const publicKey = '\(publicKey)';
+               const type = '\(type.rawValue)';
+               const network = '\(network)';
+        
+               const senderPayment = getPayment(publicKey, type, network);
+
+               const inputs = [
+                 \(inputs)
+               ];
+        
+               const outputs = [
+                 \(outputs)
+               ];
+        
+               const txHex = createTaprootTx(inputs, outputs, privateKey, network);
+        
+               return txHex;
+           };
+        """
+
+        } else {
+            createTxString = """
             function result() {
         
                const privateKey = '\(privateKey)';
@@ -320,6 +361,8 @@ extension BtcFetcher {
                return txHex;
            };
         """
+
+        }
         print(createTxString)
 
         return createTxString

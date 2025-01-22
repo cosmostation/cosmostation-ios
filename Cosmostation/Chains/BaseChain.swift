@@ -641,6 +641,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBitCoin44())                     //MAJOR
     result.append(ChainBitCoin49())                     //MAJOR
     result.append(ChainBitCoin84())                     //MAJOR
+    result.append(ChainBitCoin86())                     //MAJOR
     result.append(ChainBitsong())
     result.append(ChainBostrom())
     result.append(ChainCantoEVM())                      //EVM
@@ -761,6 +762,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainBitCoin44_T())
 //    result.append(ChainBitCoin49_T())
     result.append(ChainBitCoin84_T())
+    result.append(ChainBitCoin86_T())
     result.append(ChainGno_T())
     result.append(ChainInitia_T())
     result.append(ChainNeutron_T())

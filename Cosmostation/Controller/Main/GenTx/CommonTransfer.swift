@@ -131,7 +131,7 @@ class CommonTransfer: BaseVC {
                 suiGasPrice = try await suiFetcher.fetchGasprice()
             } else if (sendAssetType == .BTC_COIN) {
                 txStyle = .BTC_STYLE
-                btcFetcher = (fromChain as? ChainBitCoin84)?.getBtcFetcher()
+                btcFetcher = (fromChain as? ChainBitCoin86)?.getBtcFetcher()
                 
             } else {
                 txStyle = .COSMOS_STYLE
@@ -174,7 +174,7 @@ class CommonTransfer: BaseVC {
         toSendAssetTitle.text = NSLocalizedString("str_amount", comment: "")
         toSendAssetHint.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
         memoTitle.text = NSLocalizedString("str_memo_optional", comment: "")
-        if fromChain is ChainBitCoin84 {
+        if fromChain is ChainBitCoin86 {
             memoTitle.text = NSLocalizedString("str_op_return_optional", comment: "")
         }
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
@@ -537,7 +537,7 @@ class CommonTransfer: BaseVC {
         let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
         memoSheet.existedMemo = txMemo
         memoSheet.memoDelegate = self
-        if toChain is ChainBitCoin84 {
+        if toChain is ChainBitCoin86 {
             memoSheet.isSendBTC = true
         }
         onStartSheet(memoSheet, 260, 0.6)
@@ -1032,7 +1032,7 @@ extension CommonTransfer {
                     
                     let txString = await btcFetcher.getTxString(utxos, fromChain, toAddress, toAmount, fee, !txMemo.isEmpty ? txMemo : nil)
                     
-                    btcTxHex = BtcJS().getTxHex(txString)
+                    btcTxHex = BtcJS.shared.getTxHex(txString)
                     
                     if btcTxHex == "undefined" {
                         self.onUpdateWithSimul(nil, "Invalid transaction hex value")

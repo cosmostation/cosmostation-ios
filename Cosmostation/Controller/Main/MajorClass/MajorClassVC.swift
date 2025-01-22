@@ -151,7 +151,7 @@ class MajorClassVC: BaseVC {
             if (BaseData.instance.showEvenReview()) { tabbar.items.append(ecosystemTabBar) }
             tabbar.items.append(aboutTabBar)
             
-        } else if  (selectedChain is ChainBitCoin84) {
+        } else if  (selectedChain is ChainBitCoin86) {
             tabbar.items.append(receiveTabBar)
             tabbar.items.append(historyTabBar)
             tabbar.items.append(aboutTabBar)
