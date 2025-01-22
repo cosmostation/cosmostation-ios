@@ -203,7 +203,7 @@ class DappBtcSignRequestSheet: BaseVC {
     }
 
     func checkValidate() throws {
-        //check
+        
         var allValue = 0
         
         utxos!.forEach { utxo in
@@ -219,14 +219,15 @@ class DappBtcSignRequestSheet: BaseVC {
             if inOutputs == "undefined" {
                 throw DappBtcSignError.failLoadData
             }
-            if let data = inOutputs?.data(using: .utf8) {
-                let json = try JSON(data: data)
-                let amount = json["outputs"].arrayValue.filter({ $0["address"].stringValue != selectedChain.mainAddress }).map({ $0["value"].uInt64Value }).reduce(0, +)
-                if allValue < (amount + btcTxFee!) {
-                    throw DappBtcSignError.notEnoughBalance
-                }
-                
-            }
+//            if let data = inOutputs?.data(using: .utf8) {
+//                let json = try JSON(data: data)
+//                let amount = json["outputs"].arrayValue.filter({ $0["address"].stringValue != selectedChain.mainAddress }).map({ $0["value"].uInt64Value }).reduce(0, +)
+//                print(allValue, amount, btcTxFee)
+//                if allValue < (amount + btcTxFee!) {
+//                    throw DappBtcSignError.notEnoughBalance
+//                }
+//                
+//            } ///unbonding에서 output이 내 주소가 아닌 다른 주소로 감 (provider 마다 다른듯) => 남의 주소로 빠진다고 생각해서 현재 가진 밸런스보다 output이 많으면 notEnoughBalance 에러를 던짐
         }
     }
     
