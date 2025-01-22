@@ -423,7 +423,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
             tapGesture.cancelsTouchesInView = false
             dropBtn.addGestureRecognizer(tapGesture)
 
-        } else if (selectedChain is ChainBabylon_T) {
+        } else if (selectedChain.isSupportBTCStaking()) {
             dropBtn.animation = LottieAnimation.named("btcStaking")
             dropBtn.contentMode = .scaleAspectFit
             dropBtn.loopMode = .loop
@@ -453,7 +453,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
     @objc func tapFloatingBtn() {
         let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
         dappDetail.dappType = .INTERNAL_URL
-        dappDetail.dappUrl = URL(string: "https://btcstaking.testnet.babylonlabs.io/")
+        dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
         dappDetail.modalPresentationStyle = .fullScreen
         self.present(dappDetail, animated: true)
     }
