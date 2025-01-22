@@ -363,7 +363,7 @@ extension BtcFetcher {
         """
 
         }
-        print(createTxString)
+//        print(createTxString)
 
         return createTxString
 

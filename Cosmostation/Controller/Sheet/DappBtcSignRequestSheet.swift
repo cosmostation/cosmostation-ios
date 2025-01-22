@@ -332,8 +332,9 @@ class DappBtcSignRequestSheet: BaseVC {
                 return
                 
             } else {
-                let hex = BtcJS.shared.callJSValue(key: "signPsbt", param: [toSign.stringValue, selectedChain.privateKey?.toHexString()])
-                
+                let network = self.selectedChain.isTestnet ? "testnet" : "mainnet"
+                let hex = BtcJS.shared.callJSValue(key: "signPsbt", param: [toSign.stringValue, selectedChain.privateKey?.toHexString(), network])
+
                 if hex == "undefined" {
                     dismissWithFail()
                     return
