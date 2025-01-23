@@ -81,7 +81,7 @@ class AssetCosmosClassCell: UITableViewCell {
                 let value = cosmosFetcher.denomValue(stakeDenom)
                 
                 coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
-                symbolLabel.text = msAsset.symbol?.uppercased()
+                symbolLabel.text = msAsset.symbol//?.uppercased()
                 
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
                 WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
