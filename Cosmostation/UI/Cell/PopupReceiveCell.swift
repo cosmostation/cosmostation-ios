@@ -64,7 +64,7 @@ class PopupReceiveCell: UITableViewCell {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
             let mainAddress = chain.mainAddress
             
-            if (chain is ChainBitCoin84) {
+            if (chain is ChainBitCoin86) {
                 addressLabel.numberOfLines = 1
                 addressLabel.text = mainAddress
                 addressLabel.adjustsFontSizeToFitWidth = true
@@ -82,6 +82,11 @@ class PopupReceiveCell: UITableViewCell {
                 } else if chain.accountKeyType.pubkeyType == .BTC_Native_Segwit {
                     btcTag.text = "Native Segwit"
                     btcTag.backgroundColor = .colorNativeSegwit
+                    btcTag.textColor = .color01
+                
+                } else if chain.accountKeyType.pubkeyType == .BTC_Taproot {
+                    btcTag.text = "Taproot"
+                    btcTag.backgroundColor = .colorBtcTaproot
                     btcTag.textColor = .color01
                 }
                 btcTag.isHidden = false

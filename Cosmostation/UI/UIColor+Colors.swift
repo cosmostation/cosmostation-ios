@@ -48,7 +48,10 @@ extension UIColor {
     static var colorNativeSegwit: UIColor {
         UIColor(named: "_btcNativeSegwit")!
     }
-    
+    static var colorBtcTaproot: UIColor {
+        UIColor(named: "_btcTaproot")!
+    }
+
     public convenience init?(hex: String) {
         let r, g, b: CGFloat
         

@@ -74,7 +74,7 @@ class DappBtcSignRequestSheet: BaseVC {
             
         } else if method == "bit_signPsbt" {
             let network = self.selectedChain.isTestnet ? "testnet" : "mainnet"
-            inOutputs = BtcJS.init("getInOutPuts").callJSValue(param: [toSign.stringValue, network])
+            inOutputs = BtcJS.shared.callJSValue(key: "getInOutPuts", param: [toSign.stringValue, network])
             onInitFeeView()
 
         }
@@ -203,7 +203,7 @@ class DappBtcSignRequestSheet: BaseVC {
     }
 
     func checkValidate() throws {
-        //check
+        
         var allValue = 0
         
         utxos!.forEach { utxo in
@@ -216,19 +216,14 @@ class DappBtcSignRequestSheet: BaseVC {
             }
             
         } else if method == "bit_signPsbt" {
-            if let data = inOutputs?.data(using: .utf8) {
-                let json = try JSON(data: data)
-                let amount = json["outputs"].arrayValue.filter({ $0["address"].stringValue != selectedChain.mainAddress }).map({ $0["value"].uInt64Value }).reduce(0, +)
-                if allValue < (amount + btcTxFee!) {
-                    throw DappBtcSignError.notEnoughBalance
-                }
-                
+            if inOutputs == "undefined" {
+                throw DappBtcSignError.failLoadData
             }
         }
     }
     
     func getFee() async throws {
-        guard let btcFetcher = (selectedChain as? ChainBitCoin84)?.getBtcFetcher() else { return }
+        guard let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher() else { return }
         
         if let utxos = try await btcFetcher.fetchUtxos()?.filter({ $0["status"]["confirmed"].boolValue }) {
             
@@ -258,10 +253,10 @@ class DappBtcSignRequestSheet: BaseVC {
     }
     
     func getTxHex() async throws {
-        guard let btcFetcher = (selectedChain as? ChainBitCoin84)?.getBtcFetcher() else { return }
+        guard let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher() else { return }
         
         let txString = await btcFetcher.getTxString(utxos!, selectedChain, toAddress, amount, btcTxFee!, nil)
-        txHex = BtcJS().getTxHex(txString)
+        txHex = BtcJS.shared.getTxHex(txString)
         
         if txHex == "undefined" {
             throw DappBtcSignError.invalidTxHex
@@ -283,7 +278,7 @@ class DappBtcSignRequestSheet: BaseVC {
         
         if method == "bit_sendBitcoin" {
             Task {
-                guard let btcFetcher = (selectedChain as? ChainBitCoin84)?.getBtcFetcher(),
+                guard let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher(),
                       let txHex else { return }
                 do {
                     let result = try await btcFetcher.sendRawtransaction(txHex)
@@ -307,11 +302,11 @@ class DappBtcSignRequestSheet: BaseVC {
             
             if toSign["type"].stringValue == "ecdsa" {
                 let message = toSign["message"].stringValue
-                result = BtcJS.init("signMessageECDSA").callJSValue(param: [message, selectedChain.privateKey?.toHexString()])
+                result = BtcJS.shared.callJSValue(key: "signMessageECDSA", param: [message, selectedChain.privateKey?.toHexString()])
                 
             } else if toSign["type"].stringValue == "bip322-simple" {
                 let message = toSign["message"].stringValue
-                result = BtcJS.init("signMessageBIP322").callJSValue(param: [message, selectedChain.privateKey?.toHexString(), selectedChain.mainAddress])
+                result = BtcJS.shared.callJSValue(key:"signMessageBIP322", param: [message, selectedChain.privateKey?.toHexString(), selectedChain.mainAddress])
             }
                         
             if result == "undefined" {
@@ -322,15 +317,16 @@ class DappBtcSignRequestSheet: BaseVC {
             webSignDelegate?.onAcceptInjection(JSON(result), toSign, messageId)
 
         } else if method == "bit_signPsbt" {
-            let psbtValidate = BtcJS.init("formatPsbtHex").callJSValue(param: [toSign.stringValue])
+            let psbtValidate = BtcJS.shared.callJSValue(key: "formatPsbtHex", param: [toSign.stringValue])
             
             if psbtValidate == "undefined" {
                 dismissWithFail()
                 return
                 
             } else {
-                let hex = BtcJS.init("signPsbt").callJSValue(param: [toSign.stringValue, selectedChain.privateKey?.toHexString()])
-                
+                let network = self.selectedChain.isTestnet ? "testnet" : "mainnet"
+                let hex = BtcJS.shared.callJSValue(key: "signPsbt", param: [toSign.stringValue, selectedChain.privateKey?.toHexString(), network])
+
                 if hex == "undefined" {
                     dismissWithFail()
                     return
@@ -344,9 +340,10 @@ class DappBtcSignRequestSheet: BaseVC {
     
     
     enum DappBtcSignError: String, LocalizedError {
-        case invalidTxHex
-        case invalidFee
-        case notEnoughBalance
+        case invalidTxHex = "tx hex value is invalid"
+        case invalidFee = "Failed to get fee value"
+        case notEnoughBalance = "Not enough balance"
+        case failLoadData = "Failed to load data"
         
         var errorDescription: String {
             switch self {
@@ -355,6 +352,8 @@ class DappBtcSignRequestSheet: BaseVC {
             case .invalidFee:
                 return self.rawValue
             case .notEnoughBalance:
+                return self.rawValue
+            case .failLoadData:
                 return self.rawValue
             }
         }

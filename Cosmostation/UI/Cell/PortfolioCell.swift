@@ -46,7 +46,7 @@ class PortfolioCell: UITableViewCell {
         logoImg1.image = UIImage.init(named: chain.logo1)
         nameLabel.text = chain.name
         
-        if (chain is ChainBitCoin84) {
+        if (chain is ChainBitCoin86) {
             if chain.accountKeyType.pubkeyType == .BTC_Legacy {
                 btcTag.text = "Legacy"
                 btcTag.backgroundColor = .color07
@@ -60,6 +60,11 @@ class PortfolioCell: UITableViewCell {
             } else if chain.accountKeyType.pubkeyType == .BTC_Native_Segwit {
                 btcTag.text = "Native Segwit"
                 btcTag.backgroundColor = .colorNativeSegwit
+                btcTag.textColor = .color01
+                
+            } else if chain.accountKeyType.pubkeyType == .BTC_Taproot {
+                btcTag.text = "Taproot"
+                btcTag.backgroundColor = .colorBtcTaproot
                 btcTag.textColor = .color01
             }
             btcTag.isHidden = false

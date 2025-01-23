@@ -38,7 +38,7 @@ class SelectRefAddressCell: UITableViewCell {
         let allChain = ALLCHAINS()
         if let chain = allChain.filter({ $0.tag == refAddress.chainTag }).first {
             
-            if (chain is ChainBitCoin84) {
+            if (chain is ChainBitCoin86) {
                 if chain.accountKeyType.pubkeyType == .BTC_Legacy {
                     keyTypeTag.text = "Legacy"
                     keyTypeTag.backgroundColor = .color07
@@ -52,6 +52,11 @@ class SelectRefAddressCell: UITableViewCell {
                 } else if chain.accountKeyType.pubkeyType == .BTC_Native_Segwit {
                     keyTypeTag.text = "Native Segwit"
                     keyTypeTag.backgroundColor = .colorNativeSegwit
+                    keyTypeTag.textColor = .color01
+
+                } else if chain.accountKeyType.pubkeyType == .BTC_Taproot {
+                    keyTypeTag.text = "Taproot"
+                    keyTypeTag.backgroundColor = .colorBtcTaproot
                     keyTypeTag.textColor = .color01
                 }
                 keyTypeTag.isHidden = false

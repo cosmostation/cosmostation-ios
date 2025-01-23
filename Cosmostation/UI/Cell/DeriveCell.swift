@@ -81,7 +81,7 @@ class DeriveCell: UITableViewCell {
             bechAddressLabel.text = chain.mainAddress
         }
         
-        if (chain is ChainBitCoin84) {
+        if (chain is ChainBitCoin86) {
             if chain.accountKeyType.pubkeyType == .BTC_Legacy {
                 btcTag.text = "Legacy"
                 btcTag.backgroundColor = .color07
@@ -95,6 +95,11 @@ class DeriveCell: UITableViewCell {
             } else if chain.accountKeyType.pubkeyType == .BTC_Native_Segwit {
                 btcTag.text = "Native Segwit"
                 btcTag.backgroundColor = .colorNativeSegwit
+                btcTag.textColor = .color01
+            
+            } else if chain.accountKeyType.pubkeyType == .BTC_Taproot {
+                btcTag.text = "Taproot"
+                btcTag.backgroundColor = .colorBtcTaproot
                 btcTag.textColor = .color01
             }
             btcTag.isHidden = false
@@ -142,7 +147,7 @@ class DeriveCell: UITableViewCell {
                 denomLabel.text = chain.coinSymbol
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
                 
-            } else if let btcFetcher = (chain as? ChainBitCoin84)?.getBtcFetcher() {
+            } else if let btcFetcher = (chain as? ChainBitCoin86)?.getBtcFetcher() {
                 let avaibaleAmount = btcFetcher.btcBalances.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
                 let pendingInputAmount = btcFetcher.btcPendingInput.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
                 let totalAmount = avaibaleAmount.adding(pendingInputAmount)

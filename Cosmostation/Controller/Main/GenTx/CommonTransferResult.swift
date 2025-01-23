@@ -91,7 +91,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                 return
             }
             
-            fromBtcFetcher = (fromChain as? ChainBitCoin84)?.getBtcFetcher()
+            fromBtcFetcher = (fromChain as? ChainBitCoin86)?.getBtcFetcher()
             fetchBtcTx(result)
 
         } else if (txStyle == .COSMOS_STYLE) {

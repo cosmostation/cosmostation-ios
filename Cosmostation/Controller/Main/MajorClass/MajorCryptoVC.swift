@@ -108,7 +108,7 @@ class MajorCryptoVC: BaseVC {
                 return value0.compare(value1).rawValue > 0 ? true : false
             }
             
-        } else if let btcFetcher = (selectedChain as? ChainBitCoin84)?.getBtcFetcher() {
+        } else if let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher() {
 //            btcBalances = btcFetcher.btcBalances
 //            btcPendingInput = btcFetcher.btcPendingInput
 //            btcPendingOutput = btcFetcher.btcPendingOutput
@@ -139,6 +139,7 @@ class MajorCryptoVC: BaseVC {
         let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
         dappDetail.dappType = .INTERNAL_URL
         dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
+        dappDetail.btcTargetChain = selectedChain
         dappDetail.modalPresentationStyle = .fullScreen
         self.present(dappDetail, animated: true)
     }
@@ -150,7 +151,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if (selectedChain is ChainSui) {
             return 1
-        } else if (selectedChain is ChainBitCoin84) {
+        } else if (selectedChain is ChainBitCoin86) {
             return 1
         }
         return 0
@@ -162,7 +163,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             view.titleLabel.text = "Native Coins"
             view.cntLabel.text = String(suiBalances.count)
             
-        } else if (selectedChain is ChainBitCoin84) {
+        } else if (selectedChain is ChainBitCoin86) {
             view.titleLabel.text = "Native Coins"
             view.cntLabel.text = ""
             
@@ -173,7 +174,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (selectedChain is ChainSui) {
             return 40
-        } else if (selectedChain is ChainBitCoin84) {
+        } else if (selectedChain is ChainBitCoin86) {
             return 40
         }
         return 0
@@ -183,7 +184,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
         if (selectedChain is ChainSui) {
             return suiBalances.count
             
-        } else if (selectedChain is ChainBitCoin84) {
+        } else if (selectedChain is ChainBitCoin86) {
             return 1
         }
         return 0
@@ -202,7 +203,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
             
-        } else if (selectedChain is ChainBitCoin84) {
+        } else if (selectedChain is ChainBitCoin86) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AssetBtcCell") as! AssetBtcCell
             cell.bindBtcAsset(selectedChain)
             return cell
@@ -224,9 +225,9 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
             
-        } else if (selectedChain is ChainBitCoin84) {
+        } else if (selectedChain is ChainBitCoin86) {
             Task {
-                if let btcFetcher = (selectedChain as? ChainBitCoin84)?.getBtcFetcher() {
+                if let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher() {
                     guard let fee = try await btcFetcher.initFee() else { return }
                     if Int(truncating: btcFetcher.btcBalances) > fee {
                         let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)

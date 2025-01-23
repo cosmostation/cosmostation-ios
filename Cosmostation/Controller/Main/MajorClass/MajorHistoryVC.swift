@@ -63,7 +63,7 @@ class MajorHistoryVC: BaseVC {
         if let suiChain = selectedChain as? ChainSui {
             suiChain.fetchHistory()
             
-        } else if let btcChain = selectedChain as? ChainBitCoin84 {
+        } else if let btcChain = selectedChain as? ChainBitCoin86 {
             btcChain.fetchHistory()
             
         }
@@ -108,7 +108,7 @@ class MajorHistoryVC: BaseVC {
                 tableView.reloadData()
             }
             
-        } else if let btcFetcher = (selectedChain as? ChainBitCoin84)?.getBtcFetcher() {
+        } else if let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher() {
             historyGroup.removeAll()
             btcFetcher.btcHistory.forEach { history in
                 let date = history["status"]["confirmed"] == false ? "Pending" : WDP.dpDate(history["status"]["block_time"].intValue * 1000)
@@ -143,13 +143,13 @@ class MajorHistoryVC: BaseVC {
 }
 
 
-//else if let btcChain = selectedChain as? ChainBitCoin84 {
+//else if let btcChain = selectedChain as? ChainBitCoin86 {
 
 extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if selectedChain is ChainSui {
             return historyGroup.count
-        } else if selectedChain is ChainBitCoin84 {
+        } else if selectedChain is ChainBitCoin86 {
             return historyGroup.count
         }
         return 0
@@ -166,7 +166,7 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
             }
             view.cntLabel.text = ""
             
-        } else if selectedChain is ChainBitCoin84 {
+        } else if selectedChain is ChainBitCoin86 {
             if (historyGroup[section].date == "Pending") {
                 view.titleLabel.text = "Mempool"
             } else {
@@ -184,7 +184,7 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if selectedChain is ChainSui {
             return historyGroup[section].values.count
-        } else if selectedChain is ChainBitCoin84 {
+        } else if selectedChain is ChainBitCoin86 {
             return historyGroup[section].values.count
         }
         return 0
@@ -194,7 +194,7 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as! HistoryCell
         if let suiChain = selectedChain as? ChainSui {
             cell.bindSuiHistory(suiChain, historyGroup[indexPath.section].values[indexPath.row])
-        } else if let btcChain = selectedChain as? ChainBitCoin84 {
+        } else if let btcChain = selectedChain as? ChainBitCoin86 {
             cell.bindBtcHistory(btcChain, historyGroup[indexPath.section].values[indexPath.row])
         }
         return cell
@@ -205,7 +205,7 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
             let hash = historyGroup[indexPath.section].values[indexPath.row]["digest"].stringValue
             guard let url = selectedChain.getExplorerTx(hash) else { return }
             self.onShowSafariWeb(url)
-        } else if let btcChain = selectedChain as? ChainBitCoin84 {
+        } else if let btcChain = selectedChain as? ChainBitCoin86 {
             let hash = historyGroup[indexPath.section].values[indexPath.row]["txid"].stringValue
             guard let url = selectedChain.getExplorerTx(hash) else { return }
             self.onShowSafariWeb(url)

@@ -58,7 +58,7 @@ class QrAddressPopupVC: BaseVC {
             addressLabel.numberOfLines = 2
             addressLabel.text = toDpAddress
             
-            if (selectedChain is ChainBitCoin84) {
+            if (selectedChain is ChainBitCoin86) {
                 if selectedChain.accountKeyType.pubkeyType == .BTC_Legacy {
                     btcTag.text = "Legacy"
                     btcTag.backgroundColor = .color07
@@ -70,6 +70,11 @@ class QrAddressPopupVC: BaseVC {
                 } else if selectedChain.accountKeyType.pubkeyType == .BTC_Native_Segwit {
                     btcTag.text = "Native Segwit"
                     btcTag.backgroundColor = .colorNativeSegwit
+                    btcTag.textColor = .color01
+                    
+                } else if selectedChain.accountKeyType.pubkeyType == .BTC_Taproot {
+                    btcTag.text = "Taproot"
+                    btcTag.backgroundColor = .colorBtcTaproot
                     btcTag.textColor = .color01
                 }
                 btcTag.isHidden = false

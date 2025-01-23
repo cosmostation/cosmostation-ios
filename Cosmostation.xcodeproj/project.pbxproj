@@ -1675,6 +1675,8 @@
 		796CC3602C6B60CA00FEC658 /* SuiStakingInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796CC35F2C6B60CA00FEC658 /* SuiStakingInfoSheet.swift */; };
 		796CC3622C6B60E000FEC658 /* SuiStakingInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */; };
 		796CC3632C6C3B0C00FEC658 /* SuiStakingInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */; };
+		79813A4E2D3F4A990083A1F5 /* ChainBitCoin86_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */; };
+		79813A502D3F6ED80083A1F5 /* ChainBitCoin86.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */; };
 		7981F75C2D0C1CAB00BB50DA /* ChainElys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F75B2D0C1CAB00BB50DA /* ChainElys.swift */; };
 		7981F75E2D0C31E900BB50DA /* ChainSynternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F75D2D0C31E900BB50DA /* ChainSynternet.swift */; };
 		7981F7622D0C333E00BB50DA /* ChainRouterEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */; };
@@ -3100,6 +3102,8 @@
 		795C0DC32C8E8547006D35A4 /* BtcJS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BtcJS.swift; sourceTree = "<group>"; };
 		796CC35F2C6B60CA00FEC658 /* SuiStakingInfoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiStakingInfoSheet.swift; sourceTree = "<group>"; };
 		796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuiStakingInfoSheet.xib; sourceTree = "<group>"; };
+		79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86_T.swift; sourceTree = "<group>"; };
+		79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86.swift; sourceTree = "<group>"; };
 		7981F75B2D0C1CAB00BB50DA /* ChainElys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainElys.swift; sourceTree = "<group>"; };
 		7981F75D2D0C31E900BB50DA /* ChainSynternet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSynternet.swift; sourceTree = "<group>"; };
 		7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainRouterEVM.swift; sourceTree = "<group>"; };
@@ -3474,6 +3478,7 @@
 				04A420E32C74B78D00C0E1A2 /* ChainBitCoin44.swift */,
 				04A420EF2C74CB8300C0E1A2 /* ChainBitCoin49.swift */,
 				04A420E62C74B7AA00C0E1A2 /* ChainBitCoin84.swift */,
+				79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */,
 			);
 			path = ChainMajor;
 			sourceTree = "<group>";
@@ -4062,6 +4067,7 @@
 				04A420FE2C77618000C0E1A2 /* ChainBitCoin44_T.swift */,
 				04A421012C77618E00C0E1A2 /* ChainBitCoin49_T.swift */,
 				04A420FB2C77617000C0E1A2 /* ChainBitCoin84_T.swift */,
+				79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */,
 				799B4A892D2E744F00998833 /* ChainGno_T.swift */,
 				04965B422C37B3AE00403605 /* ChainInitia_T.swift */,
 				E16FB7252C7595E6005660D1 /* ChainMantra_T.swift */,
@@ -7012,6 +7018,7 @@
 				04B789352ACAC9B100E9BE88 /* ibc_lightclients_localhost_v2_localhost.pb.swift in Sources */,
 				04C817422BA98D75006B800A /* cosmos_staking_v1beta1_authz.pb.swift in Sources */,
 				04C816C22BA98D75006B800A /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,
+				79813A502D3F6ED80083A1F5 /* ChainBitCoin86.swift in Sources */,
 				046EA8652AD04A2500A2FCE7 /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */,
 				79D5560B2CE352870023F1B9 /* ChainFantom.swift in Sources */,
 				0450331C2C1F045900235F6A /* ChainXpla.swift in Sources */,
@@ -7102,6 +7109,7 @@
 				04C8171C2BA98D75006B800A /* cosmos_params_v1beta1_query.grpc.swift in Sources */,
 				047843DD2AC991B300462F1C /* injective_exchange_v1beta1_authz.pb.swift in Sources */,
 				E1A48DE12BFEF5C40084D770 /* CosmosReceiveVC.swift in Sources */,
+				79813A4E2D3F4A990083A1F5 /* ChainBitCoin86_T.swift in Sources */,
 				04C8170E2BA98D75006B800A /* cosmos_gov_v1beta1_query.pb.swift in Sources */,
 				04A1A8022AC80AA50014EF92 /* TxAmountSheet.swift in Sources */,
 				79FCA3D62C3F9E92001C17D0 /* artela_fee_v1_tx.pb.swift in Sources */,
