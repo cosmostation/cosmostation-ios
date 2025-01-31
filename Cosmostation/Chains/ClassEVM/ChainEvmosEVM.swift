@@ -20,17 +20,17 @@ class ChainEvmosEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "aevmos"
         bechAccountPrefix = "evmos"
         validatorPrefix = "evmosvaloper"
-        grpcHost = "grpc-evmos.cosmostation.io"
-        lcdUrl = "https://lcd-evmos.cosmostation.io/"
+        grpcHost = "evmos-grpc.stake-town.com"
+        lcdUrl = "https://evmos-api.polkachu.com/"
     
         supportEvm = true
         coinSymbol = "EVMOS"
         coinGeckoId = "evmos"
         coinLogo = "tokenEvmos"
-        evmRpcURL = "https://rpc-evmos-evm.cosmostation.io"
+        evmRpcURL = "https://evmos-evm.publicnode.com"
     }
 }

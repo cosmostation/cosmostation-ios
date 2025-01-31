@@ -20,11 +20,11 @@ class ChainAssetMantle: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "umntl"
         bechAccountPrefix = "mantle"
         validatorPrefix = "mantlevaloper"
-        grpcHost = "grpc-asset-mantle.cosmostation.io"
-        lcdUrl = "https://lcd-asset-mantle.cosmostation.io/"
+        grpcHost = "assetmantle-grpc.stakerhouse.com"
+        lcdUrl = "https://assetmantle-api.polkachu.com/"
     }
 }

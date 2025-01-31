@@ -20,12 +20,12 @@ class ChainUmee: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uumee"
         bechAccountPrefix = "umee"
         validatorPrefix = "umeevaloper"
-        grpcHost = "grpc-umee.cosmostation.io"
-        lcdUrl = "https://lcd-umee.cosmostation.io/"
+        grpcHost = "umee-grpc.stake-town.com"
+        lcdUrl = "https://umee-api.polkachu.com/"
     }
     
 }
