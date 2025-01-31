@@ -1126,10 +1126,12 @@ You can download each store.
   <tr> 
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/bitcoin/resource/chain_bitcoin.png?raw=true" width="42" height = "42"></td>
     <td><span style="font-weight:bold">BITCOIN</span></td>
-    <td><span>m/84'/0'/0'/0/X</span><br/>
+    <td><span>m/86'/0'/0'/0/X</span><br/>
+        <span>m/84'/0'/0'/0/X</span><br/>
         <span>m/49'/0'/0'/0/X</span><br/>
         <span>m/44'/0'/0'/0/X</span></td>
-    <td><span>p2wpkh</span><br/>
+    <td><span>p2tr</span><br/>
+        <span>p2wpkh</span><br/>
         <span>p2sh</span><br/>
         <span>p2pkh</span></td>
     <td>Rest</td>
