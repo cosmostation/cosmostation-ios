@@ -154,6 +154,13 @@ class DeriveCell: UITableViewCell {
                 denomLabel.text = chain.coinSymbol
                 amountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 8)
                 
+            } else if let gnoFetcher = (chain as? ChainGno)?.getGnoFetcher() {
+                let stakeDenom = chain.stakeDenom!
+                let availableAmount = gnoFetcher.balanceAmount(stakeDenom)
+                if let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+                    WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)
+                }
+
             } else if (chain.supportEvm) {
                 let dpAmount = chain.getEvmfetcher()?.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18Down) ?? NSDecimalNumber.zero
                 denomLabel.text = chain.coinSymbol
