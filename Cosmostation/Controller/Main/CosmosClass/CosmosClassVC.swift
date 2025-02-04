@@ -87,7 +87,10 @@ class CosmosClassVC: BaseVC {
         }
         
         onSetTabbarView()
-        onSetFabButton()
+        
+        if !(selectedChain is ChainGno) {
+            onSetFabButton()
+        }
         
         selectedChain.fetchValidatorInfos()
         
