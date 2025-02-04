@@ -469,6 +469,13 @@ extension BaseChain {
         return 1.3
     }
     
+    func getSimulatedGasAdjustment() -> Double {
+        if let mutiply = getCosmosFeeInfo()["simulated_gas_adjustment"].double {
+            return mutiply
+        }
+        return 1.6
+    }
+    
     func getBaseFeePosition() -> Int {
         return getCosmosFeeInfo()["base"].intValue
     }

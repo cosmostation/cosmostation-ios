@@ -174,23 +174,43 @@ extension GnoFetcher {
     }
     
     func fetchBalance() async throws -> [Cosmos_Base_V1beta1_Coin]? {
-            let params: Parameters = ["jsonrpc":"2.0",
-                                      "method": "abci_query",
-                                      "params": ["bank/balances/\(chain.bechAddress!)", "", "0", false],
-                                      "id": 1]
-            let response = try await AF.request(getRpc(), method: .post, parameters: params, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
-            let encodedDataString = response["result"]["response"]["ResponseBase"]["Data"].stringValue
+        let params: Parameters = ["jsonrpc":"2.0",
+                                  "method": "abci_query",
+                                  "params": ["bank/balances/\(chain.bechAddress!)", "", "0", false],
+                                  "id": 1]
+        let response = try await AF.request(getRpc(), method: .post, parameters: params, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+        let encodedDataString = response["result"]["response"]["ResponseBase"]["Data"].stringValue
+        
+        let data = Data(base64Encoded: encodedDataString)
+        let coins = String(data: data!, encoding: .utf8) ?? ""
+        if coins.isEmpty {
+            return []
+        }
+        
+        let amount = coins.filter { $0.isNumber }
+        let denom = coins.filter { !$0.isNumber }.trimmingCharacters(in: ["\""])
+        
+        return [Cosmos_Base_V1beta1_Coin.init(denom, amount)]
+    }
+    
+    func simulateTx(_ simulTx: Tm2_Tx_Tx) async throws -> Tm2_Abci_ResponseDeliverTx? {
+        let param: Parameters = ["jsonrpc":"2.0",
+                                 "method": "abci_query",
+                                 "params": [
+                                    ".app/simulate",
+                                    try simulTx.serializedData().base64EncodedString(),
+                                    "0",
+                                    false],
+                                 "id": 1]
+        
+        let result = try await AF.request(getRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+        
+        if let value = result["result"]["response"]["Value"].string {
+            return try Tm2_Abci_ResponseDeliverTx.init(serializedBytes: Data(base64Encoded: value)!)
             
-            let data = Data(base64Encoded: encodedDataString)
-            let coins = String(data: data!, encoding: .utf8) ?? ""
-            if coins.isEmpty {
-                return []
-            }
-            
-            let amount = coins.filter { $0.isNumber }
-            let denom = coins.filter { !$0.isNumber }.trimmingCharacters(in: ["\""])
-            
-            return [Cosmos_Base_V1beta1_Coin.init(denom, amount)]
+        } else {
+            return nil
+        }
     }
     
     func broadcastTx(_ broadTx: Tm2_Tx_Tx) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
