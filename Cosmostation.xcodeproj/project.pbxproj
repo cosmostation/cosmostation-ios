@@ -1677,6 +1677,8 @@
 		796CC3632C6C3B0C00FEC658 /* SuiStakingInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */; };
 		79813A4E2D3F4A990083A1F5 /* ChainBitCoin86_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */; };
 		79813A502D3F6ED80083A1F5 /* ChainBitCoin86.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */; };
+		79813A572D506DCA0083A1F5 /* GnoFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A562D506DCA0083A1F5 /* GnoFetcher.swift */; };
+		79813A5B2D50CE010083A1F5 /* tm2_abci.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A5A2D50CE010083A1F5 /* tm2_abci.pb.swift */; };
 		7981F75C2D0C1CAB00BB50DA /* ChainElys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F75B2D0C1CAB00BB50DA /* ChainElys.swift */; };
 		7981F75E2D0C31E900BB50DA /* ChainSynternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F75D2D0C31E900BB50DA /* ChainSynternet.swift */; };
 		7981F7622D0C333E00BB50DA /* ChainRouterEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */; };
@@ -3104,6 +3106,8 @@
 		796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuiStakingInfoSheet.xib; sourceTree = "<group>"; };
 		79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86_T.swift; sourceTree = "<group>"; };
 		79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86.swift; sourceTree = "<group>"; };
+		79813A562D506DCA0083A1F5 /* GnoFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GnoFetcher.swift; sourceTree = "<group>"; };
+		79813A5A2D50CE010083A1F5 /* tm2_abci.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tm2_abci.pb.swift; sourceTree = "<group>"; };
 		7981F75B2D0C1CAB00BB50DA /* ChainElys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainElys.swift; sourceTree = "<group>"; };
 		7981F75D2D0C31E900BB50DA /* ChainSynternet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSynternet.swift; sourceTree = "<group>"; };
 		7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainRouterEVM.swift; sourceTree = "<group>"; };
@@ -3662,6 +3666,7 @@
 				04A420F82C77409400C0E1A2 /* BtcFetcher.swift */,
 				792613D12CD8679400FAF47D /* InitiaFetcher.swift */,
 				04C2216F2CF70A9C00B64057 /* BeraFetcher.swift */,
+				79813A562D506DCA0083A1F5 /* GnoFetcher.swift */,
 			);
 			path = Fetcher;
 			sourceTree = "<group>";
@@ -4352,6 +4357,7 @@
 		799B4A822D2CFCE500998833 /* Gno */ = {
 			isa = PBXGroup;
 			children = (
+				79813A5A2D50CE010083A1F5 /* tm2_abci.pb.swift */,
 				799B4A832D2CFCF500998833 /* tm2_tx.pb.swift */,
 				799B4A852D2D157000998833 /* gno_bank.pb.swift */,
 				799B4A862D2D157300998833 /* gno_vm.pb.swift */,
@@ -6669,6 +6675,7 @@
 				E122DC542A8A4712006D1E7B /* tendermint_types_evidence.pb.swift in Sources */,
 				04A68C2F2AC13A560041FA13 /* CosmosProposalsVC.swift in Sources */,
 				79D556092CE2F2760023F1B9 /* ChainShidoEVM.swift in Sources */,
+				79813A5B2D50CE010083A1F5 /* tm2_abci.pb.swift in Sources */,
 				04B7898B2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift in Sources */,
 				04C8168E2BA98D74006B800A /* cosmos_tx_config_v1_config.pb.swift in Sources */,
 				04FA74582A9D97A0001A2830 /* PincodeAlphabetVC.swift in Sources */,
@@ -7568,6 +7575,7 @@
 				04C817D72BA9917D006B800A /* cosmos_upgrade_v1beta1_tx.pb.swift in Sources */,
 				047843132AC9918700462F1C /* ethermint_types_v1_web3.pb.swift in Sources */,
 				E1D2FC642B81FCA30080B638 /* CommonTransfer.swift in Sources */,
+				79813A572D506DCA0083A1F5 /* GnoFetcher.swift in Sources */,
 				045032A42C1EEFCA00235F6A /* ChainDydx.swift in Sources */,
 				792613A52CD4B82800FAF47D /* initia_gov_v1_query.grpc.swift in Sources */,
 			);

@@ -102,6 +102,8 @@ class CommonTransfer: BaseVC {
     var btcTxFee = NSDecimalNumber.zero
     var btcTxHex = ""
 
+    var gnoFetcher: GnoFetcher!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -132,6 +134,10 @@ class CommonTransfer: BaseVC {
             } else if (sendAssetType == .BTC_COIN) {
                 txStyle = .BTC_STYLE
                 btcFetcher = (fromChain as? ChainBitCoin86)?.getBtcFetcher()
+                
+            } else if (sendAssetType == .GNO_COIN || sendAssetType == .GNO_GRC20) {
+                txStyle = .GNO_STYLE
+                gnoFetcher = (fromChain as? ChainGno)?.getGnoFetcher()
                 
             } else {
                 txStyle = .COSMOS_STYLE
@@ -270,6 +276,16 @@ class CommonTransfer: BaseVC {
             
             btcInitFee()
             
+        } else if (txStyle == .GNO_STYLE) {
+            cosmosFeeInfos = fromChain.getFeeInfos()
+            feeSegments.removeAllSegments()
+            for i in 0..<cosmosFeeInfos.count {
+                feeSegments.insertSegment(withTitle: cosmosFeeInfos[i].title, at: i, animated: false)
+            }
+            selectedFeePosition = fromChain.getBaseFeePosition()
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            cosmosTxFee = fromChain.getInitPayableFee()!
+
         } else if (txStyle == .COSMOS_STYLE) {
             if (cosmosFetcher.cosmosBaseFees.count > 0) {
                 feeSegments.removeAllSegments()
@@ -302,7 +318,7 @@ class CommonTransfer: BaseVC {
     
     func onInitView() {
         var symbol = ""
-        if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN || sendAssetType == .GNO_COIN) {
+        if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = fromChain.assetDecimal(toSendDenom)
             symbol = fromChain.assetSymbol(toSendDenom)
@@ -340,6 +356,15 @@ class CommonTransfer: BaseVC {
             symbol = fromChain.assetSymbol(toSendDenom)
             availableAmount = btcFetcher.btcBalances
 
+        } else if (sendAssetType == .GNO_COIN) {
+            titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
+            decimal = fromChain.assetDecimal(toSendDenom)
+            symbol = fromChain.assetSymbol(toSendDenom)
+            availableAmount = gnoFetcher.balanceAmount(toSendDenom)
+            if (cosmosTxFee.amount[0].denom == toSendDenom) {
+                let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
+                availableAmount = availableAmount.subtracting(totalFeeAmount)
+            }
         }
         
         if txStyle != .COSMOS_STYLE {
@@ -379,7 +404,17 @@ class CommonTransfer: BaseVC {
                     availableAmount = availableAmount.subtracting(feeAmount)
                 }
                 memoCardView.isHidden = false
+                
+            } else if (txStyle == .GNO_STYLE) {
+                decimal = toSendMsAsset!.decimals
+                availableAmount = gnoFetcher.balanceAmount(toSendDenom)
+                if (cosmosTxFee.amount[0].denom == toSendDenom) {
+                    let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
+                    availableAmount = availableAmount.subtracting(feeAmount)
+                }
+                memoCardView.isHidden = false
             }
+            
             onInitFee()
             onUpdateAmountView("")
         }
@@ -573,6 +608,9 @@ class CommonTransfer: BaseVC {
             } else {
                 cosmosTxFee = fromChain.getUserSelectedFee(selectedFeePosition, cosmosTxFee.amount[0].denom)
             }
+            
+        } else if (txStyle == .GNO_STYLE) {
+            cosmosTxFee = fromChain.getUserSelectedFee(selectedFeePosition, cosmosTxFee.amount[0].denom)
         }
         onUpdateFeeView()
         onSimul()
@@ -590,6 +628,14 @@ class CommonTransfer: BaseVC {
                 baseSheet.feeDatas = cosmosFeeInfos[selectedFeePosition].FeeDatas
                 baseSheet.sheetType = .SelectFeeDenom
             }
+            onStartSheet(baseSheet, 240, 0.6)
+            
+        } else if (txStyle == .GNO_STYLE) {
+            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+            baseSheet.targetChain = fromChain
+            baseSheet.sheetDelegate = self
+            baseSheet.feeDatas = cosmosFeeInfos[selectedFeePosition].FeeDatas
+            baseSheet.sheetType = .SelectFeeDenom
             onStartSheet(baseSheet, 240, 0.6)
         }
     }
@@ -621,6 +667,29 @@ class CommonTransfer: BaseVC {
             feeAmountLabel.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 8)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             availableAmount = availableAmount.subtracting(btcTxFee)
+            
+        } else if (txStyle == .GNO_STYLE) {
+            if let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
+                feeSelectLabel.text = msAsset.symbol
+                let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
+                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+                let value = msPrice.multiplying(by: totalFeeAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+                WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+                WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
+                
+                if (sendAssetType == .GNO_COIN) {
+                    let balanceAmount = gnoFetcher.balanceAmount(toSendDenom)
+                    if (cosmosTxFee.amount[0].denom == toSendDenom) {
+                        if (totalFeeAmount.compare(balanceAmount).rawValue > 0) {
+                            //ERROR short balance!!
+                        }
+                        availableAmount = balanceAmount.subtracting(totalFeeAmount)
+                        
+                    } else {
+                        availableAmount = balanceAmount
+                    }
+                }
+            }
 
         } else if (txStyle == .COSMOS_STYLE) {
             if let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
@@ -631,7 +700,7 @@ class CommonTransfer: BaseVC {
                 WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
                 WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
                 
-                if (sendAssetType == .COSMOS_COIN || (sendAssetType == .COSMOS_EVM_MAIN_COIN && txStyle == .COSMOS_STYLE) || sendAssetType == .GNO_COIN) {
+                if (sendAssetType == .COSMOS_COIN || (sendAssetType == .COSMOS_EVM_MAIN_COIN && txStyle == .COSMOS_STYLE)) {
                     let balanceAmount = cosmosFetcher.balanceAmount(toSendDenom)
                     if (cosmosTxFee.amount[0].denom == toSendDenom) {
                         if (totalFeeAmount.compare(balanceAmount).rawValue > 0) {
@@ -676,7 +745,25 @@ class CommonTransfer: BaseVC {
             }
             btcTxFee = NSDecimalNumber.init(value: toGas)
             sendBtn.isHidden = false
+            
+        } else if (txStyle == .GNO_STYLE) {
+            guard let toGas = gasUsed else {
+                sendBtn.isHidden = true
+                errorCardView.isHidden = false
+                errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
+                return
+            }
+            cosmosTxFee.gasLimit = UInt64(Double(toGas == 0 ? fromChain.getInitGasLimit().uint64Value : toGas) * fromChain.getSimulatedGasMultiply())
+            
+            if let gasRate = cosmosFeeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
+                let gasLimit = NSDecimalNumber.init(value: UInt64(Double(toGas == 0 ? fromChain.getInitGasLimit().uint64Value : toGas) * fromChain.getSimulatedGasMultiply() * fromChain.getSimulatedGasAdjustment()))
+                let feeAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
+                cosmosTxFee.amount[0].amount = feeAmount!.stringValue
+            }
 
+            onUpdateFeeView()
+            sendBtn.isEnabled = true
+            
         } else if (txStyle == .COSMOS_STYLE) {
             if (fromChain.isSimulable() == false) {
                 onUpdateFeeView()
@@ -730,7 +817,10 @@ class CommonTransfer: BaseVC {
             
         } else if (txStyle == .BTC_STYLE) {
             btcFetchTxHex()
-
+            
+        } else if (txStyle == .GNO_STYLE) {
+            gnoSimul()
+            
         } else if (txStyle == .COSMOS_STYLE) {
             // some chain not support simulate (assetmantle)  24.2.21
             if (fromChain.isSimulable() == false) {
@@ -742,7 +832,6 @@ class CommonTransfer: BaseVC {
             if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                 // Inchain Send!
                 if (sendAssetType == .COSMOS_WASM) {                                // Inchain CW20 Send!
                     inChainWasmSendSimul()
-                } else if (sendAssetType == .GNO_GRC20) {
                     
                 } else {                                                            // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                     inChainCoinSendSimul()
@@ -903,6 +992,34 @@ extension CommonTransfer {
 
 // Gno style tx
 extension CommonTransfer {
+    func gnoSimul() {
+        Task {
+            guard let gasRate = self.cosmosTxFee.amount.filter({ $0.denom == self.cosmosTxFee.amount[0].denom }).first else { return }
+            let fee = Tm2_Tx_TxFee.with {
+                $0.gasWanted = Int64(cosmosTxFee.gasLimit)
+                $0.gasFee = gasRate.amount + gasRate.denom
+            }
+            
+            do {
+                if let simulReq = Signer.genSimul(fromChain, onBindSendMsg(), txMemo, fee),
+                   let simulRes = try await (fromChain as? ChainGno)?.getGnoFetcher()?.simulateTx(simulReq) {
+                    
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(UInt64(simulRes.gasUsed))
+                    }
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
+                }
+            }
+        }
+    }
+    
     func gnoSend() {
         Task {
             guard let gasRate = self.cosmosTxFee.amount.filter({ $0.denom == self.cosmosTxFee.amount[0].denom }).first else { return }
@@ -918,7 +1035,7 @@ extension CommonTransfer {
 
             do {
                 let broadReq = Signer.genTx(fromChain, onBindSendMsg(), txMemo, fee, sig)
-                if let broadRes = try await fromChain.getCosmosfetcher()?.broadcastTx(broadReq) {
+                if let broadRes = try await (fromChain as? ChainGno)?.getGnoFetcher()?.broadcastTx(broadReq) {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -955,7 +1072,7 @@ extension CommonTransfer {
                                                 .init(gas_wanted: String(fee.gasWanted), gas_fee: fee.gasFee)) else { return }
             do {
                 let broadReq = Signer.genTx(fromChain, onBindSendMsg(), txMemo, fee, sig)
-                if let broadRes = try await fromChain.getCosmosfetcher()?.broadcastTx(broadReq) {
+                if let broadRes = try await (fromChain as? ChainGno)?.getGnoFetcher()?.broadcastTx(broadReq) {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -1512,16 +1629,18 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
             } else if (txStyle == .BTC_STYLE) {
                 btcSend(btcTxHex)
                 
+            } else if (txStyle == .GNO_STYLE) {
+                if sendAssetType == .GNO_GRC20 {
+                    gnoGrc20Send()
+                    
+                } else if sendAssetType == .GNO_COIN {
+                    gnoSend()
+                }
+                
             } else if (txStyle == .COSMOS_STYLE) {
                 if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                     // Inchain Send!
                     if (sendAssetType == .COSMOS_WASM) {                                         // Inchain CW20 Send!
                         inChainWasmSend()
-                        
-                    } else if sendAssetType == .GNO_GRC20 {
-                        gnoGrc20Send()
-                        
-                    } else if sendAssetType == .GNO_COIN {
-                        gnoSend()
                     } else {                                                                // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                         inChainCoinSend()
                     }

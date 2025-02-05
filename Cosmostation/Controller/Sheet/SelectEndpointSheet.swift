@@ -70,6 +70,12 @@ class SelectEndpointSheet: BaseVC {
             evmTableView.isHidden = false
         }
         
+        if (targetChain is ChainGno) {                  //using evm table
+            rpcList = targetChain.getChainListParam()["cosmos_rpc_endpoint"].array
+            endpointTypeSegment.isHidden = true
+            cosmosTableView.isHidden = true
+            evmTableView.isHidden = false
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -149,7 +155,7 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
             return lcdList?.count ?? 0
             
         } else if (tableView == evmTableView) {
-            if (targetChain is ChainSui) {
+            if (targetChain is ChainSui || targetChain is ChainGno) {
                 return rpcList?.count ?? 0
             }
             return evmRPCList?.count ?? 0
@@ -168,6 +174,10 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (tableView == evmTableView) {
             if (targetChain is ChainSui) {
                 cell?.onBindRpcEndpoint(indexPath.row, targetChain)
+                
+            } else if (targetChain is ChainGno) {
+                cell?.onBindGnoRpcEndpoint(indexPath.row, targetChain)
+
             } else {
                 cell?.onBindEvmEndpoint(indexPath.row, targetChain)
             }
@@ -194,6 +204,10 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
                     let endpoint = targetChain.getChainListParam()["rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
                     BaseData.instance.setRpcEndpoint(targetChain, endpoint)
                     
+                } else if (targetChain is ChainGno) {
+                    let endpoint = targetChain.getChainListParam()["cosmos_rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                    BaseData.instance.setRpcEndpoint(targetChain, endpoint)
+
                 } else {
                     let endpoint = targetChain.getChainListParam()["evm_rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
                     BaseData.instance.setEvmRpcEndpoint(targetChain, endpoint)

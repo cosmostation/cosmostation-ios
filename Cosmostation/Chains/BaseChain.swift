@@ -268,7 +268,7 @@ class BaseChain {
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.symbol ?? "UnKnown"
         } else if isSupportGrc20(),
-                  let grc20Token = getCosmosfetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return grc20Token.symbol ?? "UnKnown"
         }
         return "UnKnown"
@@ -285,7 +285,7 @@ class BaseChain {
             return erc20Token.assetImg()
             
         } else if isSupportGrc20(),
-                  let grc20Token = getCosmosfetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return grc20Token.assetImg()
         }
         return nil
@@ -301,7 +301,7 @@ class BaseChain {
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.decimals ?? 6
         } else if isSupportGrc20(),
-                 let grc20Token = getCosmosfetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                 let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
            return grc20Token.decimals ?? 6
         }
         return 6
@@ -317,7 +317,7 @@ class BaseChain {
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return erc20Token.coinGeckoId ?? ""
         } else if isSupportGrc20(),
-                  let grc20Token = getCosmosfetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
             return grc20Token.coinGeckoId ?? ""
         }
         return ""
@@ -331,6 +331,18 @@ class BaseChain {
         } else if let suiFetcher = (self as? ChainSui)?.getSuiFetcher() {
             return suiFetcher.hasFee(txType)
             
+        } else if let gnoFetcher = (self as? ChainGno)?.getGnoFetcher() {
+            var result = false
+            getDefaultFeeCoins().forEach { minFee in
+                let availaAmount = gnoFetcher.balanceAmount(minFee.denom)
+                let minFeeAmount = NSDecimalNumber.init(string: minFee.amount)
+                if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
+                    result = true
+                    return
+                }
+            }
+            return result
+
         } else if (supportCosmos) {
             var result = false
             if (getCosmosfetcher()?.cosmosBaseFees.count ?? 0 > 0) {
@@ -457,6 +469,13 @@ extension BaseChain {
         return 1.3
     }
     
+    func getSimulatedGasAdjustment() -> Double {
+        if let mutiply = getCosmosFeeInfo()["simulated_gas_adjustment"].double {
+            return mutiply
+        }
+        return 1.6
+    }
+    
     func getBaseFeePosition() -> Int {
         return getCosmosFeeInfo()["base"].intValue
     }
@@ -514,15 +533,28 @@ extension BaseChain {
     
     //get first payable fee with this account
     func getInitPayableFee() -> Cosmos_Tx_V1beta1_Fee? {
-        guard let cosmosFetcher = getCosmosfetcher() else { return nil }
         var feeCoin: Cosmos_Base_V1beta1_Coin?
-        for i in 0..<getDefaultFeeCoins().count {
-            let minFee = getDefaultFeeCoins()[i]
-            if (cosmosFetcher.balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
-                feeCoin = minFee
-                break
+        
+        if let gnoFetcher = (self as? ChainGno)?.getGnoFetcher() {
+            for i in 0..<getDefaultFeeCoins().count {
+                let minFee = getDefaultFeeCoins()[i]
+                if (gnoFetcher.balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+                    feeCoin = minFee
+                    break
+                }
             }
+            
+        } else if let cosmosFetcher = getCosmosfetcher() {
+            for i in 0..<getDefaultFeeCoins().count {
+                let minFee = getDefaultFeeCoins()[i]
+                if (cosmosFetcher.balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+                    feeCoin = minFee
+                    break
+                }
+            }
+            
         }
+        
         if (feeCoin != nil) {
             return Cosmos_Tx_V1beta1_Fee.with {
                 $0.gasLimit = getInitGasLimit().uint64Value
@@ -824,6 +856,7 @@ public enum TxStyle: Int {
     case WEB3_STYLE = 1
     case SUI_STYLE = 2
     case BTC_STYLE = 3
+    case GNO_STYLE = 4
 }
 
 public enum TxType: Int {

@@ -517,29 +517,6 @@ class Signer {
         }
         return nil
     }
-
-    /// for Gno chain
-    static func genTx(_ baseChain: BaseChain,
-                      _ msgs: [Google_Protobuf_Any],
-                      _ memo: String, _ fee: Tm2_Tx_TxFee,
-                      _ sig: Data) -> Tm2_Tx_Tx {
-        
-        let pub = Tm2_Tx_PubKeySecp256k1.with {
-            $0.key = baseChain.publicKey!
-        }
-        
-        let pubkey = Google_Protobuf_Any.with {
-            $0.typeURL = "/tm.PubKeySecp256k1"
-            $0.value = try! pub.serializedData()
-        }
-        
-        return Tm2_Tx_Tx.with {
-            $0.messages = msgs
-            $0.memo = memo
-            $0.fee = fee
-            $0.signatures = [Tm2_Tx_TxSignature.with { $0.pubKey = pubkey; $0.signature = sig }]
-        }
-    }
     
     static func getTxBody(_ baseChain: BaseChain, _ msgAnys: [Google_Protobuf_Any], _ memo: String, _ timeout: Int64?) -> Cosmos_Tx_V1beta1_TxBody {
         return Cosmos_Tx_V1beta1_TxBody.with {
@@ -729,10 +706,10 @@ extension Signer {
     }
     
     static func gnoSignature(_ baseChain: BaseChain, _ msgs: [Msg], _ memo: String, _ fee: Fee) -> Data? {
-        guard let fetcher = baseChain.getCosmosfetcher(),
+        guard let fetcher = (baseChain as? ChainGno)?.getGnoFetcher(),
               let chainId = baseChain.chainIdCosmos,
-              let accountNum = fetcher.cosmosAccountNumber,
-              let sequence = fetcher.cosmosSequenceNum else { return nil }
+              let accountNum = fetcher.gnoAccountNumber,
+              let sequence = fetcher.gnoSequenceNum else { return nil }
         
         let txSignPayload = TxSignPayload(chain_id: chainId,
                                           account_number: String(accountNum),
@@ -745,6 +722,40 @@ extension Signer {
               let sortedJsonData = try? JSON(parseJSON: jsonString).rawData(options: [.sortedKeys, .withoutEscapingSlashes]) else { return nil }
         let sig = getByteSingleSignatures(sortedJsonData, baseChain)
         return sig
+    }
+    
+    static func genSimul(_ baseChain: BaseChain,
+                         _ msgs: [Google_Protobuf_Any],
+                         _ memo: String, _ fee: Tm2_Tx_TxFee) -> Tm2_Tx_Tx? {
+        
+        return Tm2_Tx_Tx.with {
+            $0.messages = msgs
+            $0.memo = memo
+            $0.fee = fee
+            $0.signatures = [Tm2_Tx_TxSignature()]
+        }
+    }
+    
+    static func genTx(_ baseChain: BaseChain,
+                      _ msgs: [Google_Protobuf_Any],
+                      _ memo: String, _ fee: Tm2_Tx_TxFee,
+                      _ sig: Data) -> Tm2_Tx_Tx {
+        
+        let pub = Tm2_Tx_PubKeySecp256k1.with {
+            $0.key = baseChain.publicKey!
+        }
+        
+        let pubkey = Google_Protobuf_Any.with {
+            $0.typeURL = "/tm.PubKeySecp256k1"
+            $0.value = try! pub.serializedData()
+        }
+        
+        return Tm2_Tx_Tx.with {
+            $0.messages = msgs
+            $0.memo = memo
+            $0.fee = fee
+            $0.signatures = [Tm2_Tx_TxSignature.with { $0.pubKey = pubkey; $0.signature = sig }]
+        }
     }
 }
 

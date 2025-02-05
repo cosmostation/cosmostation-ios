@@ -175,6 +175,24 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                 }
                 searchOktBalances = oktBalances
                 
+            } else if let gnofetcher = (selectedChain as? ChainGno)?.getGnoFetcher() {
+                gnofetcher.gnoBalances?.forEach({ coin in
+                    let coinType = BaseData.instance.getAsset(selectedChain.apiName, coin.denom)?.type
+                    if (coinType == "staking" || coinType == "native") {
+                        nativeCoins.append(coin)
+                    }
+                })
+                if (nativeCoins.filter { $0.denom == selectedChain.stakeDenom }.first == nil) {
+                    nativeCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = selectedChain.stakeDenom!; $0.amount = "0" })
+                }
+                nativeCoins.sort {
+                    if ($0.denom == selectedChain.stakeDenom) { return true }
+                    if ($1.denom == selectedChain.stakeDenom) { return false }
+                    let value0 = gnofetcher.balanceValue($0.denom)
+                    let value1 = gnofetcher.balanceValue($1.denom)
+                    return value0.compare(value1).rawValue > 0 ? true : false
+                }
+                
             } else if let cosmosFetcher = selectedChain.getCosmosfetcher() {
                 cosmosFetcher.cosmosBalances?.forEach { coin in
                     let coinType = BaseData.instance.getAsset(selectedChain.apiName, coin.denom)?.type
@@ -208,15 +226,15 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                 }
             }
             
-            if let cosmosFetcher = selectedChain.getCosmosfetcher(),
+            if let gnoFetcher = (selectedChain as? ChainGno)?.getGnoFetcher(),
                selectedChain.isSupportGrc20() {
-                mintscanGrc20Tokens = cosmosFetcher.mintscanGrc20Tokens.sorted { $0.symbol!.lowercased() < $1.symbol!.lowercased() }
+                mintscanGrc20Tokens = gnoFetcher.mintscanGrc20Tokens.sorted { $0.symbol!.lowercased() < $1.symbol!.lowercased() }
                 if let userCustomTokens = BaseData.instance.getDisplayGrc20s(baseAccount.id, selectedChain.tag) {
                     mintscanGrc20Tokens.sort {
                         if (userCustomTokens.contains($0.contract!) && !userCustomTokens.contains($1.contract!)) { return true }
                         if (!userCustomTokens.contains($0.contract!) && userCustomTokens.contains($1.contract!)) { return false }
-                        let value0 = cosmosFetcher.tokenValue($0.contract!)
-                        let value1 = cosmosFetcher.tokenValue($1.contract!)
+                        let value0 = gnoFetcher.tokenValue($0.contract!)
+                        let value1 = gnoFetcher.tokenValue($1.contract!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     mintscanGrc20Tokens.forEach { token in
@@ -228,8 +246,8 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                     mintscanGrc20Tokens.sort {
                         if ($0.getAmount() != NSDecimalNumber.zero) && ($1.getAmount() == NSDecimalNumber.zero) { return true }
                         if ($0.getAmount() == NSDecimalNumber.zero) && ($1.getAmount() != NSDecimalNumber.zero) { return false }
-                        let value0 = cosmosFetcher.tokenValue($0.contract!)
-                        let value1 = cosmosFetcher.tokenValue($1.contract!)
+                        let value0 = gnoFetcher.tokenValue($0.contract!)
+                        let value1 = gnoFetcher.tokenValue($1.contract!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     mintscanGrc20Tokens.forEach { token in
@@ -597,20 +615,20 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (selectedChain is ChainGno) {
             if (indexPath.section == 0) {
-                if (searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
-                    cell.bindCosmosStakeAsset(selectedChain)
-                    return cell
-                    
-                } else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-                    cell.bindCosmosClassAsset(selectedChain, searchNativeCoins[indexPath.row])
-                    return cell
-                }
-                                
+                //                if (searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom) {
+                //                    let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
+                //                    cell.bindCosmosStakeAsset(selectedChain)
+                //                    return cell
+                //
+                //                } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                cell.bindGnoClassAsset(selectedChain, searchNativeCoins[indexPath.row])
+                return cell
+                //                }
+                
             } else if (indexPath.section == 3) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-                cell.bindCosmosClassToken(selectedChain, searchMintscanGrc20Tokens[indexPath.row])
+                cell.bindGnoClassToken(selectedChain, searchMintscanGrc20Tokens[indexPath.row])
                 return cell
             }
             

@@ -249,7 +249,7 @@ public class BaseAccount {
     }
     
     func updateAllValue() {
-        getDpChains().forEach { chain in
+        allChains.forEach { chain in
             if let chain = chain as? ChainOktEVM {
                 if let oktFetcher = chain.getOktfetcher(), let evmFetcher = chain.getEvmfetcher() {
                     chain.allCoinValue = oktFetcher.allCoinValue()
@@ -281,7 +281,12 @@ public class BaseAccount {
             } else if let btcFetcher = (chain as? ChainBitCoin86)?.getBtcFetcher() {
                 chain.allCoinValue = btcFetcher.allValue()
                 chain.allCoinUSDValue = btcFetcher.allValue(true)
-
+                
+            } else if let gnoFetcher = (chain as? ChainGno)?.getGnoFetcher() {
+                chain.allCoinValue = gnoFetcher.allCoinValue()
+                chain.allCoinUSDValue = gnoFetcher.allCoinValue(true)
+                chain.allTokenValue = gnoFetcher.allTokenValue()
+                chain.allTokenUSDValue = gnoFetcher.allTokenValue(true)
             }
         }
     }
