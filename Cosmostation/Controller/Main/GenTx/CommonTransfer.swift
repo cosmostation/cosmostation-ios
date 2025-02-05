@@ -753,16 +753,10 @@ class CommonTransfer: BaseVC {
                 errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
                 return
             }
-            if toGas == 0 {
-                onUpdateFeeView()
-                sendBtn.isEnabled = true
-                return
-            }
-            
-            cosmosTxFee.gasLimit = UInt64(Double(toGas) * fromChain.getSimulatedGasMultiply())
+            cosmosTxFee.gasLimit = UInt64(Double(toGas == 0 ? cosmosTxFee.gasLimit : toGas) * fromChain.getSimulatedGasMultiply())
             
             if let gasRate = cosmosFeeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
-                let gasLimit = NSDecimalNumber.init(value: UInt64(Double(toGas) * fromChain.getSimulatedGasMultiply() * fromChain.getSimulatedGasAdjustment()))
+                let gasLimit = NSDecimalNumber.init(value: UInt64(Double(toGas == 0 ? cosmosTxFee.gasLimit : toGas) * fromChain.getSimulatedGasMultiply() * fromChain.getSimulatedGasAdjustment()))
                 let feeAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
                 cosmosTxFee.amount[0].amount = feeAmount!.stringValue
             }
