@@ -627,6 +627,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAgoric118())
     result.append(ChainAiozEVM())                       //EVM
     result.append(ChainAkash())
+    result.append(ChainAllora())
     result.append(ChainAltheaEVM())                     //EVM
     result.append(ChainAlthea118())
     result.append(ChainArbitrum())                      //EVM

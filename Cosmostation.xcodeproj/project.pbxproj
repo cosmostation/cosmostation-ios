@@ -1677,6 +1677,7 @@
 		796CC3632C6C3B0C00FEC658 /* SuiStakingInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */; };
 		79813A4E2D3F4A990083A1F5 /* ChainBitCoin86_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */; };
 		79813A502D3F6ED80083A1F5 /* ChainBitCoin86.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */; };
+		79813A5D2D53035D0083A1F5 /* ChainAllora.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A5C2D53035D0083A1F5 /* ChainAllora.swift */; };
 		79813A612D530A9E0083A1F5 /* ChainZenrock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A602D530A9E0083A1F5 /* ChainZenrock.swift */; };
 		79813A6D2D530F890083A1F5 /* zrchain_validation_module_module.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A632D530F870083A1F5 /* zrchain_validation_module_module.pb.swift */; };
 		79813A6E2D530F890083A1F5 /* zrchain_validation_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A642D530F880083A1F5 /* zrchain_validation_genesis.pb.swift */; };
@@ -3116,6 +3117,7 @@
 		796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuiStakingInfoSheet.xib; sourceTree = "<group>"; };
 		79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86_T.swift; sourceTree = "<group>"; };
 		79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86.swift; sourceTree = "<group>"; };
+		79813A5C2D53035D0083A1F5 /* ChainAllora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAllora.swift; sourceTree = "<group>"; };
 		79813A602D530A9E0083A1F5 /* ChainZenrock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainZenrock.swift; sourceTree = "<group>"; };
 		79813A632D530F870083A1F5 /* zrchain_validation_module_module.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_module_module.pb.swift; sourceTree = "<group>"; };
 		79813A642D530F880083A1F5 /* zrchain_validation_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_genesis.pb.swift; sourceTree = "<group>"; };
@@ -3554,8 +3556,9 @@
 				04E979E82C4F997300E94BCB /* ChainAgoric564.swift */,
 				04E979EB2C4F998600E94BCB /* ChainAgoric118.swift */,
 				04CB911D2A90C9D900375354 /* ChainAkash.swift */,
-				047843F22AC9A1B500462F1C /* ChainArchway.swift */,
+				79813A5C2D53035D0083A1F5 /* ChainAllora.swift */,
 				E10FD3BD2B70D1F900B57DB4 /* ChainAlthea118.swift */,
+				047843F22AC9A1B500462F1C /* ChainArchway.swift */,
 				E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */,
 				79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */,
 				044ECB162A95C2E40042DB3C /* ChainAxelar.swift */,
@@ -7195,6 +7198,7 @@
 				047843052AC9918700462F1C /* ethermint_types_v1_dynamic_fee.pb.swift in Sources */,
 				047843C92AC991B300462F1C /* injective_auction_v1beta1_query.grpc.swift in Sources */,
 				04C817402BA98D75006B800A /* cosmos_protocolpool_v1_tx.grpc.swift in Sources */,
+				79813A5D2D53035D0083A1F5 /* ChainAllora.swift in Sources */,
 				E10B1DFE2C215EF20039283B /* OkAddShare.swift in Sources */,
 				04C817002BA98D75006B800A /* cosmos_autocli_v1_query.pb.swift in Sources */,
 				0400EF0B2ADBF03B007BA97F /* kava_hard_v1beta1_query.pb.swift in Sources */,
