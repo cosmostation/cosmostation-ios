@@ -775,7 +775,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMantra_T())
     result.append(ChainStoryEVM_T())
     result.append(ChainTabiEVM_T())
-
+    result.append(ChainXion_T())
     
     
     
