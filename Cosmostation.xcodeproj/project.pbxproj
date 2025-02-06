@@ -1678,6 +1678,7 @@
 		79813A4E2D3F4A990083A1F5 /* ChainBitCoin86_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */; };
 		79813A502D3F6ED80083A1F5 /* ChainBitCoin86.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */; };
 		79813A5D2D53035D0083A1F5 /* ChainAllora.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A5C2D53035D0083A1F5 /* ChainAllora.swift */; };
+		79813A5F2D53049F0083A1F5 /* ChainGgez.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A5E2D53049F0083A1F5 /* ChainGgez.swift */; };
 		79813A612D530A9E0083A1F5 /* ChainZenrock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A602D530A9E0083A1F5 /* ChainZenrock.swift */; };
 		79813A6D2D530F890083A1F5 /* zrchain_validation_module_module.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A632D530F870083A1F5 /* zrchain_validation_module_module.pb.swift */; };
 		79813A6E2D530F890083A1F5 /* zrchain_validation_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A642D530F880083A1F5 /* zrchain_validation_genesis.pb.swift */; };
@@ -3119,6 +3120,7 @@
 		79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86_T.swift; sourceTree = "<group>"; };
 		79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86.swift; sourceTree = "<group>"; };
 		79813A5C2D53035D0083A1F5 /* ChainAllora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAllora.swift; sourceTree = "<group>"; };
+		79813A5E2D53049F0083A1F5 /* ChainGgez.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainGgez.swift; sourceTree = "<group>"; };
 		79813A602D530A9E0083A1F5 /* ChainZenrock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainZenrock.swift; sourceTree = "<group>"; };
 		79813A632D530F870083A1F5 /* zrchain_validation_module_module.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_module_module.pb.swift; sourceTree = "<group>"; };
 		79813A642D530F880083A1F5 /* zrchain_validation_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_genesis.pb.swift; sourceTree = "<group>"; };
@@ -3591,6 +3593,7 @@
 				045032952C1EEFC900235F6A /* ChainFetchAi60Secp.swift */,
 				0450328E2C1EEFC900235F6A /* ChainFinschia.swift */,
 				79D5561A2CEF05D00023F1B9 /* ChainFirma.swift */,
+				79813A5E2D53049F0083A1F5 /* ChainGgez.swift */,
 				799B4A802D2BDC0E00998833 /* ChainGno.swift */,
 				045032912C1EEFC900235F6A /* ChainGovgen.swift */,
 				0450329B2C1EEFCA00235F6A /* ChainGravityBridge.swift */,
@@ -7165,6 +7168,7 @@
 				047843E12AC991B300462F1C /* injective_oracle_v1beta1_events.pb.swift in Sources */,
 				04C8171C2BA98D75006B800A /* cosmos_params_v1beta1_query.grpc.swift in Sources */,
 				047843DD2AC991B300462F1C /* injective_exchange_v1beta1_authz.pb.swift in Sources */,
+				79813A5F2D53049F0083A1F5 /* ChainGgez.swift in Sources */,
 				E1A48DE12BFEF5C40084D770 /* CosmosReceiveVC.swift in Sources */,
 				79813A4E2D3F4A990083A1F5 /* ChainBitCoin86_T.swift in Sources */,
 				04C8170E2BA98D75006B800A /* cosmos_gov_v1beta1_query.pb.swift in Sources */,
