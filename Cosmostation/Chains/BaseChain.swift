@@ -248,6 +248,9 @@ class BaseChain {
             } else if let chainInitia = self as? ChainInitia  {
                 _ = await chainInitia.getInitiaFetcher()?.fetchCosmosValidators()
                 
+            } else if let chainZenrock = self as? ChainZenrock {
+                _ = await chainZenrock.getZenrockFetcher()?.fetchCosmosValidators()
+
             } else if (supportCosmos == true && supportStaking == true) {
                 _ = await getCosmosfetcher()?.fetchCosmosValidators()
             }
@@ -752,6 +755,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainXion())
     result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
+    result.append(ChainZenrock())
     result.append(ChainZetaEVM())                       //EVM
 
     

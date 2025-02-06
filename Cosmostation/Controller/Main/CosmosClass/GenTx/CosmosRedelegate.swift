@@ -70,6 +70,11 @@ class CosmosRedelegate: BaseVC {
     var fromValidatorInitia: Initia_Mstaking_V1_Validator?
     var toValidatorInitia: Initia_Mstaking_V1_Validator?
     var initiaFetcher: InitiaFetcher?
+    
+    var fromValidatorZenrock: Zrchain_Validation_ValidatorHV?
+    var toValidatorZenrock: Zrchain_Validation_ValidatorHV?
+    var zenrockFetcher: ZenrockFetcher?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +82,8 @@ class CosmosRedelegate: BaseVC {
         baseAccount = BaseData.instance.baseAccount
         cosmosFetcher = selectedChain.getCosmosfetcher()
         initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher()
-        
+        zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher()
+
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
@@ -101,6 +107,18 @@ class CosmosRedelegate: BaseVC {
                 toValidatorInitia = initiaFetcher.initiaValidators.filter( { $0.operatorAddress != cosmostation?.operatorAddress }).first
             } else {
                 toValidatorInitia = initiaFetcher.initiaValidators.filter( { $0.operatorAddress != fromValidatorInitia?.operatorAddress }).first
+            }
+            
+        } else if let zenrockFetcher {
+            if fromValidatorZenrock == nil {
+                fromValidatorZenrock = zenrockFetcher.validators.filter({ $0.operatorAddress == zenrockFetcher.delegations[0].delegation.validatorAddress }).first
+            }
+            
+            let cosmostation = zenrockFetcher.validators.filter({ $0.description_p.moniker == "Cosmostation" }).first
+            if (fromValidatorZenrock?.operatorAddress == cosmostation?.operatorAddress) {
+                toValidatorZenrock = zenrockFetcher.validators.filter( { $0.operatorAddress != cosmostation?.operatorAddress }).first
+            } else {
+                toValidatorZenrock = zenrockFetcher.validators.filter( { $0.operatorAddress != fromValidatorZenrock?.operatorAddress }).first
             }
             
         } else {
@@ -142,6 +160,8 @@ class CosmosRedelegate: BaseVC {
         baseSheet.sheetDelegate = self
         if selectedChain is ChainInitia {
             baseSheet.sheetType = .SelectInitiaUnStakeValidator
+        } else if selectedChain is ChainZenrock {
+            baseSheet.sheetType = .SelectZenrockUnStakeValidator
         } else {
             baseSheet.sheetType = .SelectUnStakeValidator
         }
@@ -162,6 +182,22 @@ class CosmosRedelegate: BaseVC {
             let stakeDenom = selectedChain.stakeDenom!
             if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
                 let staked = initiaFetcher.initiaDelegations.filter({ $0.delegation.validatorAddress == fromValidatorInitia?.operatorAddress }).first?.balance.filter({ $0.denom == stakeDenom }).first?.amount
+                let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
+                fromStakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, fromStakedLabel!.font, 6)
+            }
+            
+        } else if let zenrockFetcher {
+            fromMonikerImg.sd_setImage(with: selectedChain.monikerImg(fromValidatorZenrock!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            fromMonikerLabel.text = fromValidatorZenrock!.description_p.moniker
+            if (fromValidatorZenrock!.jailed) {
+                fromJailedTag.isHidden = false
+            } else {
+                fromInactiveTag.isHidden = zenrockFetcher.isActiveValidator(fromValidatorZenrock!)
+            }
+            
+            let stakeDenom = selectedChain.stakeDenom!
+            if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
+                let staked = zenrockFetcher.delegations.filter { $0.delegation.validatorAddress == fromValidatorZenrock?.operatorAddress }.first?.balance.amount
                 let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
                 fromStakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, fromStakedLabel!.font, 6)
             }
@@ -191,7 +227,11 @@ class CosmosRedelegate: BaseVC {
         if let initiaFetcher {
             baseSheet.initiaValidators = initiaFetcher.initiaValidators.filter { $0 != fromValidatorInitia }
             baseSheet.sheetType = .SelectInitiaValidator
-
+            
+        } else if let zenrockFetcher {
+            baseSheet.zenrockValidators = zenrockFetcher.validators.filter { $0 != fromValidatorZenrock }
+            baseSheet.sheetType = .SelectZenrockValidator
+            
         } else {
             baseSheet.validators = cosmosFetcher.cosmosValidators.filter { $0 != fromValidator }
             baseSheet.sheetType = .SelectValidator
@@ -215,6 +255,18 @@ class CosmosRedelegate: BaseVC {
             }
             
             let commission = NSDecimalNumber(string: toValidatorInitia!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
+            toCommLabel?.attributedText = WDP.dpAmount(commission.stringValue, toCommLabel!.font, 2)
+            
+        } else if let zenrockFetcher {
+            toMonikerImg.sd_setImage(with: selectedChain.monikerImg(toValidatorZenrock!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            toMonikerLabel.text = toValidatorZenrock!.description_p.moniker
+            if (toValidatorZenrock!.jailed) {
+                toJailedTag.isHidden = false
+            } else {
+                toInactiveTag.isHidden = zenrockFetcher.isActiveValidator(toValidatorZenrock!)
+            }
+            
+            let commission = NSDecimalNumber(string: toValidatorZenrock!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
             toCommLabel?.attributedText = WDP.dpAmount(commission.stringValue, toCommLabel!.font, 2)
 
         } else {
@@ -333,6 +385,12 @@ class CosmosRedelegate: BaseVC {
             if let delegated = initiaFetcher.initiaDelegations.filter({ $0.delegation.validatorAddress == fromValidatorInitia?.operatorAddress }).first {
                 availableAmount = NSDecimalNumber(string: delegated.balance.filter({ $0.denom == selectedChain.stakeDenom }).first?.amount)
             }
+            
+        } else if let zenrockFetcher {
+            if let delegated = zenrockFetcher.delegations.filter({ $0.delegation.validatorAddress == fromValidatorZenrock?.operatorAddress }).first {
+                availableAmount = NSDecimalNumber(string: delegated.balance.amount)
+            }
+
         } else {
             if let delegated = cosmosFetcher.cosmosDelegations.filter({ $0.delegation.validatorAddress == fromValidator?.operatorAddress }).first {
                 availableAmount = NSDecimalNumber(string: delegated.balance.amount)
@@ -431,6 +489,15 @@ class CosmosRedelegate: BaseVC {
                 $0.amount = [toCoin!]
             }
             return Signer.genRedelegateMsg(redelegate)
+            
+        } else if selectedChain is ChainZenrock {
+            let redelegate = Zrchain_Validation_MsgBeginRedelegate.with {
+                $0.delegatorAddress = selectedChain.bechAddress!
+                $0.validatorSrcAddress = fromValidatorZenrock!.operatorAddress
+                $0.validatorDstAddress = toValidatorZenrock!.operatorAddress
+                $0.amount = toCoin!
+            }
+            return Signer.genRedelegateMsg(redelegate)
 
         } else {
             let redelegate = Cosmos_Staking_V1beta1_MsgBeginRedelegate.with {
@@ -495,6 +562,23 @@ extension CosmosRedelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
         } else if (sheetType == .SelectInitiaValidator) {
             if let validatorAddress = result["validatorAddress"] as? String, let initiaFetcher {
                 toValidatorInitia = initiaFetcher.initiaValidators.filter({ $0.operatorAddress == validatorAddress }).first!
+                onUpdateToValidatorView()
+                onUpdateFeeView()
+            }
+        } else if (sheetType == .SelectZenrockUnStakeValidator) {
+            if let validatorAddress = result["validatorAddress"] as? String, let zenrockFetcher {
+                fromValidatorZenrock = zenrockFetcher.validators.filter({ $0.operatorAddress == validatorAddress }).first!
+                if fromValidatorZenrock == toValidatorZenrock {
+                    toValidatorZenrock = zenrockFetcher.validators.filter({ $0.operatorAddress != validatorAddress }).first
+                    onUpdateToValidatorView()
+                }
+                onUpdateFromValidatorView()
+                onUpdateFeeView()
+            }
+
+        } else if (sheetType == .SelectZenrockValidator) {
+            if let validatorAddress = result["validatorAddress"] as? String, let zenrockFetcher {
+                toValidatorZenrock = zenrockFetcher.validators.filter({ $0.operatorAddress == validatorAddress }).first!
                 onUpdateToValidatorView()
                 onUpdateFeeView()
             }

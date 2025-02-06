@@ -76,4 +76,27 @@ class StakeUnbondingCell: UITableViewCell {
             finishGapLabel.text = WDP.protoDpTimeGap(completionTime.seconds)
         }
     }
+    
+    func onBindZenrockMyUnbonding(_ baseChain: BaseChain, _ validator: Zrchain_Validation_ValidatorHV, _ unbonding: ZenrockUnbondingEntry) {
+        
+        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        nameLabel.text = validator.description_p.moniker
+        if (validator.jailed) {
+            jailedTag.isHidden = false
+        } else {
+            guard let fetcher = (baseChain as? ChainZenrock)?.getZenrockFetcher() else { return }
+            inactiveTag.isHidden = fetcher.isActiveValidator(validator)
+        }
+        
+        if let stakeDenom = baseChain.stakeDenom,
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+            let unbondingAmount = NSDecimalNumber(string: unbonding.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
+            unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
+            
+            let completionTime = unbonding.entry.completionTime
+            finishTimeLabel.text = WDP.protoDpTime(completionTime.seconds)
+            finishGapLabel.text = WDP.protoDpTimeGap(completionTime.seconds)
+        }
+    }
+
 }

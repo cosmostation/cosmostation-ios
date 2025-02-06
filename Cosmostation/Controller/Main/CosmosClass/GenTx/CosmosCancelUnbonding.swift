@@ -46,8 +46,10 @@ class CosmosCancelUnbonding: BaseVC {
     
     var unbondingEntry: UnbondingEntry!
     var unbondingEntryInitia: InitiaUnbondingEntry!
-    
+    var unbondingEntryZenrock: ZenrockUnbondingEntry!
+
     var initiaFetcher: InitiaFetcher?
+    var zenrockFetcher: ZenrockFetcher?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +57,8 @@ class CosmosCancelUnbonding: BaseVC {
         baseAccount = BaseData.instance.baseAccount
         cosmosFetcher = selectedChain.getCosmosfetcher()
         initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher()
-        
+        zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher()
+
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
@@ -75,6 +78,18 @@ class CosmosCancelUnbonding: BaseVC {
                 amountDenomLabel.text = msAsset.symbol
             }
             
+        } else if let zenrockFetcher {
+            if let validator = zenrockFetcher.validators.filter({ $0.operatorAddress == unbondingEntryZenrock.validatorAddress }).first  {
+                validatorsLabel.text = validator.description_p.moniker
+            }
+            
+            let stakeDenom = selectedChain.stakeDenom!
+            if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
+                let unbondingAmount = NSDecimalNumber(string: unbondingEntryZenrock.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
+                amountLabel.attributedText = WDP.dpAmount(unbondingAmount.stringValue, amountLabel.font, msAsset.decimals)
+                amountDenomLabel.text = msAsset.symbol
+            }
+
         } else {
             if let validator = cosmosFetcher.cosmosValidators.filter({ $0.operatorAddress == unbondingEntry.validatorAddress }).first {
                 validatorsLabel.text = validator.description_p.moniker
@@ -270,6 +285,20 @@ class CosmosCancelUnbonding: BaseVC {
                 $0.validatorAddress = unbondingEntryInitia.validatorAddress
                 $0.creationHeight = unbondingEntryInitia.entry.creationHeight
                 $0.amount = [toCoin]
+            }
+            return Signer.genCancelUnbondingMsg(toCancelMsg)
+            
+        } else if selectedChain is ChainZenrock {
+            let toCoin = Cosmos_Base_V1beta1_Coin.with { coin in
+                coin.denom = selectedChain.stakeDenom!
+                coin.amount = unbondingEntryZenrock.entry.balance
+            }
+            
+            let toCancelMsg = Zrchain_Validation_MsgCancelUnbondingDelegation.with {
+                $0.delegatorAddress = selectedChain.bechAddress!
+                $0.validatorAddress = unbondingEntryZenrock.validatorAddress
+                $0.creationHeight = unbondingEntryZenrock.entry.creationHeight
+                $0.amount = toCoin
             }
             return Signer.genCancelUnbondingMsg(toCancelMsg)
             

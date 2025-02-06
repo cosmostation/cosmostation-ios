@@ -166,5 +166,54 @@ class SelectValidatorCell: UITableViewCell {
         stakingTitle.isHidden = false
         stakingLabel.isHidden = false
     }
+    
+    func onBindValidator(_ baseChain: BaseChain, _ validator: Zrchain_Validation_ValidatorHV) {
+        
+        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        nameLabel.text = validator.description_p.moniker
+        if (validator.jailed) {
+            jailedTag.isHidden = false
+        }
+        
+        if let stakeDenom = baseChain.stakeDenom,
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+            
+            let vpAmount = NSDecimalNumber(string: validator.tokensNative).multiplying(byPowerOf10: -msAsset.decimals!)
+            vpLabel?.attributedText = WDP.dpAmount(vpAmount.stringValue, vpLabel!.font, 0)
+            
+            let commission = NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
+            commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
+        }
+        
+        vpTitle.isHidden = false
+        vpLabel.isHidden = false
+        
+        commTitle.isHidden = false
+        commLabel.isHidden = false
+        commPercentLabel.isHidden = false
+    }
+    
+    func onBindUnstakeValidator(_ baseChain: BaseChain, _ validator: Zrchain_Validation_ValidatorHV) {
+        
+        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        nameLabel.text = validator.description_p.moniker
+        if (validator.jailed) {
+            jailedTag.isHidden = false
+        } else {
+            guard let zenrockFetcher = (baseChain as? ChainZenrock)?.getZenrockFetcher() else { return }
+            inactiveTag.isHidden = zenrockFetcher.isActiveValidator(validator)
+        }
+        
+        if let stakeDenom = baseChain.stakeDenom,
+           let delegations = (baseChain as? ChainZenrock)?.getZenrockFetcher()?.delegations,
+        let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+            let staked = delegations.filter { $0.delegation.validatorAddress == validator.operatorAddress }.first?.balance.amount
+            let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
+            stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
+        }
+        
+        stakingTitle.isHidden = false
+        stakingLabel.isHidden = false
+    }
 
 }
