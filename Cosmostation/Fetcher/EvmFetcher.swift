@@ -131,7 +131,12 @@ extension EvmFetcher {
     }
     
     func fetchErc20Balance(_ tokenInfo: MintscanToken) async {
-        let data = "0x70a08231000000000000000000000000" + self.chain.evmAddress!.stripHexPrefix()
+        var data = ""
+        if tokenInfo.symbol == "BGT" {
+            data = "0x9203ad5d000000000000000000000000" + self.chain.evmAddress!.stripHexPrefix()
+        } else {
+            data = "0x70a08231000000000000000000000000" + self.chain.evmAddress!.stripHexPrefix()
+        }
         let param: Parameters = ["method": "eth_call", "id" : 1, "jsonrpc" : "2.0",
                                  "params": [["data": data, "to" : tokenInfo.contract], "latest"]]
         if let erc20BalanceJson = try? await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value {

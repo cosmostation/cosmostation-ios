@@ -215,11 +215,13 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         webView.allowsBackForwardNavigationGestures = true
         webView.allowsLinkPreview = false
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
-        if let dictionary = Bundle.main.infoDictionary,
-            let version = dictionary["CFBundleShortVersionString"] as? String {
-            webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
-                let originUserAgent = result as! String
-                self.webView.customUserAgent = "Cosmostation/APP/iOS/\(version) \(originUserAgent)"
+        if ((dappUrl?.absoluteString.contains("berachain")) == nil) {
+            if let dictionary = Bundle.main.infoDictionary,
+               let version = dictionary["CFBundleShortVersionString"] as? String {
+                webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
+                    let originUserAgent = result as! String
+                    self.webView.customUserAgent = "Cosmostation/APP/iOS/\(version) \(originUserAgent)"
+                }
             }
         }
     }
@@ -960,25 +962,66 @@ extension DappDetailVC {
             return
         }
         var sessionNamespaces = [String: SessionNamespace]()
-        proposal.requiredNamespaces.forEach { namespaces in
-            let caip2Namespace = namespaces.key
-            let proposalNamespace = namespaces.value
-            if let targetChain = allChains.filter({ $0.chainIdCosmos == proposalNamespace.chains?.first?.reference }).first {
-                self.targetChain = targetChain
-                let accounts = Set(namespaces.value.chains!.filter { chain in
-                    allChains.filter({ $0.chainIdCosmos == chain.reference }).first != nil
-                }.compactMap { chain in
-                    WalletConnectUtils.Account(chainIdentifier: chain.absoluteString, address: targetChain.bechAddress!)
-                })
-                
-                let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
-                sessionNamespaces[caip2Namespace] = sessionNamespace
-                self.wcV2ApproveProposal(proposalId:  proposal.id, namespaces: sessionNamespaces)
-                
-            } else {
-                let rejectResponse: RejectionReason = .userRejectedChains
-                self.wcV2RejectProposal(proposalId:  proposal.id, reason: rejectResponse)
-                self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
+        
+        if proposal.requiredNamespaces.isEmpty {
+            
+            proposal.optionalNamespaces?.forEach({ namespaces in
+                let caip2Namespace = namespaces.key
+                let proposalNamespace = namespaces.value
+                if let targetChain = allChains.filter({ $0.chainIdCosmos == proposalNamespace.chains?.first?.reference }).first {
+                    self.targetChain = targetChain
+                    let accounts = Set(namespaces.value.chains!.filter { chain in
+                        allChains.filter({ $0.chainIdCosmos == chain.reference }).first != nil
+                    }.compactMap { chain in
+                        WalletConnectUtils.Account(chainIdentifier: chain.absoluteString, address: targetChain.bechAddress!)
+                    })
+                    
+                    let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
+                    sessionNamespaces[caip2Namespace] = sessionNamespace
+
+                    self.wcV2ApproveProposal(proposalId:  proposal.id, namespaces: sessionNamespaces)
+                    
+                } else if let targetChain = allChains.filter({ $0.chainIdEvmDecimal == proposalNamespace.chains?.first?.reference }).first {
+                    self.targetChain = targetChain
+                    let accounts = Set(namespaces.value.chains!.filter { chain in
+                        allChains.filter({ $0.chainIdEvmDecimal == chain.reference }).first != nil
+                    }.compactMap { chain in
+                        WalletConnectUtils.Account(chainIdentifier: chain.absoluteString, address: targetChain.evmAddress!)
+                    })
+                    
+                    let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
+                    sessionNamespaces[caip2Namespace] = sessionNamespace
+                    
+                    self.wcV2ApproveProposal(proposalId:  proposal.id, namespaces: sessionNamespaces)
+                    
+                } else {
+                    let rejectResponse: RejectionReason = .userRejectedChains
+                    self.wcV2RejectProposal(proposalId:  proposal.id, reason: rejectResponse)
+                    self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
+                }
+            })
+            
+        } else {
+            proposal.requiredNamespaces.forEach { namespaces in
+                let caip2Namespace = namespaces.key
+                let proposalNamespace = namespaces.value
+                if let targetChain = allChains.filter({ $0.chainIdCosmos == proposalNamespace.chains?.first?.reference }).first {
+                    self.targetChain = targetChain
+                    let accounts = Set(namespaces.value.chains!.filter { chain in
+                        allChains.filter({ $0.chainIdCosmos == chain.reference }).first != nil
+                    }.compactMap { chain in
+                        WalletConnectUtils.Account(chainIdentifier: chain.absoluteString, address: targetChain.bechAddress!)
+                    })
+                    
+                    let sessionNamespace = SessionNamespace(accounts: accounts, methods: proposalNamespace.methods, events: proposalNamespace.events)
+                    sessionNamespaces[caip2Namespace] = sessionNamespace
+                    self.wcV2ApproveProposal(proposalId:  proposal.id, namespaces: sessionNamespaces)
+                    
+                } else {
+                    let rejectResponse: RejectionReason = .userRejectedChains
+                    self.wcV2RejectProposal(proposalId:  proposal.id, reason: rejectResponse)
+                    self.onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: ""))
+                }
             }
         }
     }
