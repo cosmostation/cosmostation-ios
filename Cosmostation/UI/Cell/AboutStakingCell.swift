@@ -45,10 +45,19 @@ class AboutStakingCell: UITableViewCell {
             stakingDenomLabel.text = symbol
         }
         
-        let unbondingSec = json["params"]["staking_params"]["params"]["unbonding_time"].stringValue.filter({ $0.isNumber })
-        if let time = UInt64(unbondingSec) {
-            let unbondingDay = UInt16(time / 24 / 60 / 60)
-            unbondingTimeLabel.text = String(unbondingDay) + " " + NSLocalizedString("str_days", comment: "")
+        if chain is ChainZenrock {
+            let unbondingSec = json["params"]["staking_params"]["Params"]["unbonding_time"].stringValue.filter({ $0.isNumber })
+            if let time = UInt64(unbondingSec) {
+                let unbondingDay = UInt16(time / 24 / 60 / 60)
+                unbondingTimeLabel.text = String(unbondingDay) + " " + NSLocalizedString("str_days", comment: "")
+            }
+
+        } else {
+            let unbondingSec = json["params"]["staking_params"]["params"]["unbonding_time"].stringValue.filter({ $0.isNumber })
+            if let time = UInt64(unbondingSec) {
+                let unbondingDay = UInt16(time / 24 / 60 / 60)
+                unbondingTimeLabel.text = String(unbondingDay) + " " + NSLocalizedString("str_days", comment: "")
+            }
         }
         
         let nf = WUtils.getNumberFormatter(2)

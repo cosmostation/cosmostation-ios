@@ -1677,6 +1677,21 @@
 		796CC3632C6C3B0C00FEC658 /* SuiStakingInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */; };
 		79813A4E2D3F4A990083A1F5 /* ChainBitCoin86_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */; };
 		79813A502D3F6ED80083A1F5 /* ChainBitCoin86.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */; };
+		79813A5D2D53035D0083A1F5 /* ChainAllora.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A5C2D53035D0083A1F5 /* ChainAllora.swift */; };
+		79813A5F2D53049F0083A1F5 /* ChainGgez.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A5E2D53049F0083A1F5 /* ChainGgez.swift */; };
+		79813A612D530A9E0083A1F5 /* ChainZenrock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A602D530A9E0083A1F5 /* ChainZenrock.swift */; };
+		79813A6D2D530F890083A1F5 /* zrchain_validation_module_module.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A632D530F870083A1F5 /* zrchain_validation_module_module.pb.swift */; };
+		79813A6E2D530F890083A1F5 /* zrchain_validation_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A642D530F880083A1F5 /* zrchain_validation_genesis.pb.swift */; };
+		79813A6F2D530F890083A1F5 /* zrchain_validation_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A652D530F880083A1F5 /* zrchain_validation_query.pb.swift */; };
+		79813A702D530F890083A1F5 /* zrchain_validation_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A662D530F880083A1F5 /* zrchain_validation_tx.grpc.swift */; };
+		79813A712D530F890083A1F5 /* zrchain_validation_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A672D530F880083A1F5 /* zrchain_validation_tx.pb.swift */; };
+		79813A722D530F890083A1F5 /* zrchain_validation_hybrid_validation.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A682D530F880083A1F5 /* zrchain_validation_hybrid_validation.pb.swift */; };
+		79813A732D530F890083A1F5 /* zrchain_validation_authz.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A692D530F880083A1F5 /* zrchain_validation_authz.pb.swift */; };
+		79813A742D530F890083A1F5 /* zrchain_validation_asset_data.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A6A2D530F890083A1F5 /* zrchain_validation_asset_data.pb.swift */; };
+		79813A752D530F890083A1F5 /* zrchain_validation_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A6B2D530F890083A1F5 /* zrchain_validation_query.grpc.swift */; };
+		79813A762D530F890083A1F5 /* zrchain_validation_staking.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A6C2D530F890083A1F5 /* zrchain_validation_staking.pb.swift */; };
+		79813A782D5327ED0083A1F5 /* ZenrockFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A772D5327ED0083A1F5 /* ZenrockFetcher.swift */; };
+		79813A7A2D5477FC0083A1F5 /* ChainXion_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A792D5477FC0083A1F5 /* ChainXion_T.swift */; };
 		79813A572D506DCA0083A1F5 /* GnoFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A562D506DCA0083A1F5 /* GnoFetcher.swift */; };
 		79813A5B2D50CE010083A1F5 /* tm2_abci.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A5A2D50CE010083A1F5 /* tm2_abci.pb.swift */; };
 		7981F75C2D0C1CAB00BB50DA /* ChainElys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F75B2D0C1CAB00BB50DA /* ChainElys.swift */; };
@@ -3106,6 +3121,21 @@
 		796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuiStakingInfoSheet.xib; sourceTree = "<group>"; };
 		79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86_T.swift; sourceTree = "<group>"; };
 		79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86.swift; sourceTree = "<group>"; };
+		79813A5C2D53035D0083A1F5 /* ChainAllora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAllora.swift; sourceTree = "<group>"; };
+		79813A5E2D53049F0083A1F5 /* ChainGgez.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainGgez.swift; sourceTree = "<group>"; };
+		79813A602D530A9E0083A1F5 /* ChainZenrock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainZenrock.swift; sourceTree = "<group>"; };
+		79813A632D530F870083A1F5 /* zrchain_validation_module_module.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_module_module.pb.swift; sourceTree = "<group>"; };
+		79813A642D530F880083A1F5 /* zrchain_validation_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_genesis.pb.swift; sourceTree = "<group>"; };
+		79813A652D530F880083A1F5 /* zrchain_validation_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_query.pb.swift; sourceTree = "<group>"; };
+		79813A662D530F880083A1F5 /* zrchain_validation_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_tx.grpc.swift; sourceTree = "<group>"; };
+		79813A672D530F880083A1F5 /* zrchain_validation_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_tx.pb.swift; sourceTree = "<group>"; };
+		79813A682D530F880083A1F5 /* zrchain_validation_hybrid_validation.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_hybrid_validation.pb.swift; sourceTree = "<group>"; };
+		79813A692D530F880083A1F5 /* zrchain_validation_authz.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_authz.pb.swift; sourceTree = "<group>"; };
+		79813A6A2D530F890083A1F5 /* zrchain_validation_asset_data.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_asset_data.pb.swift; sourceTree = "<group>"; };
+		79813A6B2D530F890083A1F5 /* zrchain_validation_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_query.grpc.swift; sourceTree = "<group>"; };
+		79813A6C2D530F890083A1F5 /* zrchain_validation_staking.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_staking.pb.swift; sourceTree = "<group>"; };
+		79813A772D5327ED0083A1F5 /* ZenrockFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenrockFetcher.swift; sourceTree = "<group>"; };
+		79813A792D5477FC0083A1F5 /* ChainXion_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainXion_T.swift; sourceTree = "<group>"; };
 		79813A562D506DCA0083A1F5 /* GnoFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GnoFetcher.swift; sourceTree = "<group>"; };
 		79813A5A2D50CE010083A1F5 /* tm2_abci.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tm2_abci.pb.swift; sourceTree = "<group>"; };
 		7981F75B2D0C1CAB00BB50DA /* ChainElys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainElys.swift; sourceTree = "<group>"; };
@@ -3534,8 +3564,9 @@
 				04E979E82C4F997300E94BCB /* ChainAgoric564.swift */,
 				04E979EB2C4F998600E94BCB /* ChainAgoric118.swift */,
 				04CB911D2A90C9D900375354 /* ChainAkash.swift */,
-				047843F22AC9A1B500462F1C /* ChainArchway.swift */,
+				79813A5C2D53035D0083A1F5 /* ChainAllora.swift */,
 				E10FD3BD2B70D1F900B57DB4 /* ChainAlthea118.swift */,
+				047843F22AC9A1B500462F1C /* ChainArchway.swift */,
 				E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */,
 				79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */,
 				044ECB162A95C2E40042DB3C /* ChainAxelar.swift */,
@@ -3566,6 +3597,7 @@
 				045032952C1EEFC900235F6A /* ChainFetchAi60Secp.swift */,
 				0450328E2C1EEFC900235F6A /* ChainFinschia.swift */,
 				79D5561A2CEF05D00023F1B9 /* ChainFirma.swift */,
+				79813A5E2D53049F0083A1F5 /* ChainGgez.swift */,
 				799B4A802D2BDC0E00998833 /* ChainGno.swift */,
 				045032912C1EEFC900235F6A /* ChainGovgen.swift */,
 				0450329B2C1EEFCA00235F6A /* ChainGravityBridge.swift */,
@@ -3632,6 +3664,7 @@
 				79C518762CC8E3DA00BC0E85 /* ChainUnification.swift */,
 				0485A4FD2CD9FC3A00DE1661 /* ChainXion.swift */,
 				045033182C1F045900235F6A /* ChainXpla.swift */,
+				79813A602D530A9E0083A1F5 /* ChainZenrock.swift */,
 				042DE6FA2C1D7664009CAC04 /* ChainOkt996Keccak.swift */,
 				042DE6FB2C1D7665009CAC04 /* ChainOkt996Secp.swift */,
 			);
@@ -3666,6 +3699,7 @@
 				04A420F82C77409400C0E1A2 /* BtcFetcher.swift */,
 				792613D12CD8679400FAF47D /* InitiaFetcher.swift */,
 				04C2216F2CF70A9C00B64057 /* BeraFetcher.swift */,
+				79813A772D5327ED0083A1F5 /* ZenrockFetcher.swift */,
 				79813A562D506DCA0083A1F5 /* GnoFetcher.swift */,
 			);
 			path = Fetcher;
@@ -4081,6 +4115,7 @@
 				040AC1832C9BDC5F00427AFD /* ChainStoryEVM_T.swift */,
 				04E4138E2D27C788001378D3 /* ChainTabiEVM_T.swift */,
 				048CB5412D2E8A2100061729 /* ChainBabylon_T.swift */,
+				79813A792D5477FC0083A1F5 /* ChainXion_T.swift */,
 			);
 			path = ClassTestnet;
 			sourceTree = "<group>";
@@ -4263,6 +4298,7 @@
 		282121BA25FDE71C0016ABFE /* ProtoBuff */ = {
 			isa = PBXGroup;
 			children = (
+				79813A622D530F5B0083A1F5 /* Zenrock */,
 				799B4A822D2CFCE500998833 /* Gno */,
 				E1BC058F2CE739C50060A2B3 /* Thor */,
 				15C4B8AB2C59663C0084B0A3 /* Stride */,
@@ -4352,6 +4388,23 @@
 				792613922CD4B82700FAF47D /* initia_tx_v1_query.pb.swift */,
 			);
 			path = Initia;
+			sourceTree = "<group>";
+		};
+		79813A622D530F5B0083A1F5 /* Zenrock */ = {
+			isa = PBXGroup;
+			children = (
+				79813A6A2D530F890083A1F5 /* zrchain_validation_asset_data.pb.swift */,
+				79813A692D530F880083A1F5 /* zrchain_validation_authz.pb.swift */,
+				79813A642D530F880083A1F5 /* zrchain_validation_genesis.pb.swift */,
+				79813A682D530F880083A1F5 /* zrchain_validation_hybrid_validation.pb.swift */,
+				79813A632D530F870083A1F5 /* zrchain_validation_module_module.pb.swift */,
+				79813A6B2D530F890083A1F5 /* zrchain_validation_query.grpc.swift */,
+				79813A652D530F880083A1F5 /* zrchain_validation_query.pb.swift */,
+				79813A6C2D530F890083A1F5 /* zrchain_validation_staking.pb.swift */,
+				79813A662D530F880083A1F5 /* zrchain_validation_tx.grpc.swift */,
+				79813A672D530F880083A1F5 /* zrchain_validation_tx.pb.swift */,
+			);
+			path = Zenrock;
 			sourceTree = "<group>";
 		};
 		799B4A822D2CFCE500998833 /* Gno */ = {
@@ -6770,6 +6823,7 @@
 				04C8173E2BA98D75006B800A /* cosmos_consensus_v1_query.pb.swift in Sources */,
 				04C816E62BA98D75006B800A /* cosmos_vesting_v1beta1_vesting.pb.swift in Sources */,
 				790782C62CF987870063515D /* CircleImageView.swift in Sources */,
+				79813A762D530F890083A1F5 /* zrchain_validation_staking.pb.swift in Sources */,
 				79D556132CEB05730023F1B9 /* thorchain_v1_x_thorchain_types_msg_send.pb.swift in Sources */,
 				E122DC562A8A4712006D1E7B /* tendermint_types_params.pb.swift in Sources */,
 				04B7895B2ACAC9B100E9BE88 /* ibc_core_channel_v1_tx.pb.swift in Sources */,
@@ -6952,6 +7006,7 @@
 				E10B1DF32C215E250039283B /* NeutronVote.swift in Sources */,
 				04C816482BA98D74006B800A /* cosmos_base_reflection_v2alpha1_reflection.grpc.swift in Sources */,
 				79C5187B2CC9E8C200BC0E85 /* ChainPlanqEVM.swift in Sources */,
+				79813A612D530A9E0083A1F5 /* ChainZenrock.swift in Sources */,
 				15C4B8B32C5966610084B0A3 /* stride_vesting_vesting.pb.swift in Sources */,
 				E122DC522A8A4712006D1E7B /* tendermint_libs_bits_types.pb.swift in Sources */,
 				79D556052CE1FCB70023F1B9 /* ChainNolus.swift in Sources */,
@@ -7055,6 +7110,7 @@
 				792613AE2CD4B82800FAF47D /* initia_bank_v1_tx.pb.swift in Sources */,
 				042DE6F82C1D4DFC009CAC04 /* EvmFetcher.swift in Sources */,
 				E14E297A2A99C2CA00939AD2 /* BaseButton.swift in Sources */,
+				79813A722D530F890083A1F5 /* zrchain_validation_hybrid_validation.pb.swift in Sources */,
 				04A68C352AC156AA0041FA13 /* CosmosProposalCell.swift in Sources */,
 				04C816E22BA98D75006B800A /* cosmos_bank_v1beta1_tx.grpc.swift in Sources */,
 				E1044EAD2BD798BC00DA05C2 /* NftTransfer.swift in Sources */,
@@ -7062,6 +7118,8 @@
 				046EA88B2AD04A2500A2FCE7 /* desmos_profiles_v3_models_params.pb.swift in Sources */,
 				04527DBF2A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */,
 				047843772AC991B300462F1C /* injective_ocr_v1beta1_tx.pb.swift in Sources */,
+				79813A6F2D530F890083A1F5 /* zrchain_validation_query.pb.swift in Sources */,
+				79813A702D530F890083A1F5 /* zrchain_validation_tx.grpc.swift in Sources */,
 				E16200372AF139C60008F397 /* AddressBook.swift in Sources */,
 				0450324D2C1EEA9600235F6A /* ChainCantoEVM.swift in Sources */,
 				04CD246E2AD2E99A00497EF5 /* kava_bep3_v1beta1_genesis.pb.swift in Sources */,
@@ -7079,6 +7137,7 @@
 				E1F257E62BFB2009008F4D21 /* EvmCancelUnbonding.swift in Sources */,
 				047843732AC991B300462F1C /* injective_wasmx_v1_events.pb.swift in Sources */,
 				04C817102BA98D75006B800A /* cosmos_evidence_v1beta1_genesis.pb.swift in Sources */,
+				79813A732D530F890083A1F5 /* zrchain_validation_authz.pb.swift in Sources */,
 				04C817602BA98D75006B800A /* cosmos_base_abci_v1beta1_abci.pb.swift in Sources */,
 				04C8166C2BA98D74006B800A /* cosmos_mint_v1beta1_tx.pb.swift in Sources */,
 				043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */,
@@ -7099,6 +7158,7 @@
 				792613CC2CD4B82800FAF47D /* initia_reward_v1_tx.pb.swift in Sources */,
 				0400EEBF2ADBB522007BA97F /* kava_incentive_v1beta1_tx.grpc.swift in Sources */,
 				047843B12AC991B300462F1C /* injective_tokenfactory_v1beta1_tx.grpc.swift in Sources */,
+				79813A712D530F890083A1F5 /* zrchain_validation_tx.pb.swift in Sources */,
 				047843D72AC991B300462F1C /* injective_tokenfactory_v1beta1_authorityMetadata.pb.swift in Sources */,
 				04B789872ACAC9B100E9BE88 /* ibc_applications_fee_v1_query.grpc.swift in Sources */,
 				E10B1D932C2156430039283B /* KavaSwapListCell.swift in Sources */,
@@ -7115,6 +7175,7 @@
 				047843E12AC991B300462F1C /* injective_oracle_v1beta1_events.pb.swift in Sources */,
 				04C8171C2BA98D75006B800A /* cosmos_params_v1beta1_query.grpc.swift in Sources */,
 				047843DD2AC991B300462F1C /* injective_exchange_v1beta1_authz.pb.swift in Sources */,
+				79813A5F2D53049F0083A1F5 /* ChainGgez.swift in Sources */,
 				E1A48DE12BFEF5C40084D770 /* CosmosReceiveVC.swift in Sources */,
 				79813A4E2D3F4A990083A1F5 /* ChainBitCoin86_T.swift in Sources */,
 				04C8170E2BA98D75006B800A /* cosmos_gov_v1beta1_query.pb.swift in Sources */,
@@ -7151,6 +7212,7 @@
 				047843052AC9918700462F1C /* ethermint_types_v1_dynamic_fee.pb.swift in Sources */,
 				047843C92AC991B300462F1C /* injective_auction_v1beta1_query.grpc.swift in Sources */,
 				04C817402BA98D75006B800A /* cosmos_protocolpool_v1_tx.grpc.swift in Sources */,
+				79813A5D2D53035D0083A1F5 /* ChainAllora.swift in Sources */,
 				E10B1DFE2C215EF20039283B /* OkAddShare.swift in Sources */,
 				04C817002BA98D75006B800A /* cosmos_autocli_v1_query.pb.swift in Sources */,
 				0400EF0B2ADBF03B007BA97F /* kava_hard_v1beta1_query.pb.swift in Sources */,
@@ -7251,6 +7313,7 @@
 				792613CE2CD4B82800FAF47D /* initia_gov_v1_tx.pb.swift in Sources */,
 				04B789772ACAC9B100E9BE88 /* ibc_core_channel_v1_genesis.pb.swift in Sources */,
 				04FAD9C42AB17FC000143A3E /* SwitchCurrencyCell.swift in Sources */,
+				79813A6E2D530F890083A1F5 /* zrchain_validation_genesis.pb.swift in Sources */,
 				0400EEBB2ADBB522007BA97F /* kava_incentive_v1beta1_query.grpc.swift in Sources */,
 				04C8173C2BA98D75006B800A /* cosmos_base_query_v1beta1_pagination.pb.swift in Sources */,
 				045032AE2C1EEFCA00235F6A /* ChainDesmos.swift in Sources */,
@@ -7306,6 +7369,7 @@
 				0478431B2AC9918700462F1C /* ethermint_feemarket_v1_tx.grpc.swift in Sources */,
 				E122DC5A2A8A4712006D1E7B /* tendermint_types_types.pb.swift in Sources */,
 				04C817622BA98D75006B800A /* cosmos_gov_v1_tx.grpc.swift in Sources */,
+				79813A752D530F890083A1F5 /* zrchain_validation_query.grpc.swift in Sources */,
 				046BF1C62B0F443100BC1FC8 /* OktSelectValidatorSheet.swift in Sources */,
 				04C817802BA98D75006B800A /* cosmos_params_v1beta1_params.pb.swift in Sources */,
 				0485A4FB2CD9F94200DE1661 /* ChainSelf.swift in Sources */,
@@ -7350,6 +7414,7 @@
 				04B789632ACAC9B100E9BE88 /* ibc_core_channel_v1_query.grpc.swift in Sources */,
 				04C817302BA98D75006B800A /* cosmos_bank_v1beta1_authz.pb.swift in Sources */,
 				0450332B2C252DD400235F6A /* KavaFetcher.swift in Sources */,
+				79813A782D5327ED0083A1F5 /* ZenrockFetcher.swift in Sources */,
 				047843AD2AC991B300462F1C /* injective_ocr_v1beta1_tx.grpc.swift in Sources */,
 				E10B1DD22C2159040039283B /* KavaMintCreateAction.swift in Sources */,
 				047843BB2AC991B300462F1C /* injective_peggy_v1_query.pb.swift in Sources */,
@@ -7370,6 +7435,7 @@
 				7926139E2CD4B82800FAF47D /* initia_distribution_module_v1_module.pb.swift in Sources */,
 				0450322D2C1EE98B00235F6A /* ChainArbitrum.swift in Sources */,
 				0492AE972A83CCB9001360F0 /* SettingsVC.swift in Sources */,
+				79813A7A2D5477FC0083A1F5 /* ChainXion_T.swift in Sources */,
 				04FF6B982B21EB74009DCA89 /* RewardDetailCell.swift in Sources */,
 				790D8B882CFD5837003A15F7 /* ChainMilkyway.swift in Sources */,
 				044222482B96F2B60063F031 /* SelectDisplayTokenListSheet.swift in Sources */,
@@ -7501,6 +7567,7 @@
 				E122DC4A2A8A4712006D1E7B /* tendermint_version_types.pb.swift in Sources */,
 				04C816BE2BA98D75006B800A /* cosmos_counter_v1_tx.pb.swift in Sources */,
 				046EA87B2AD04A2500A2FCE7 /* desmos_profiles_v3_models_profile.pb.swift in Sources */,
+				79813A6D2D530F890083A1F5 /* zrchain_validation_module_module.pb.swift in Sources */,
 				04C816442BA98D74006B800A /* cosmos_tx_signing_v1beta1_signing.pb.swift in Sources */,
 				04C817862BA98D75006B800A /* cosmos_base_node_v1beta1_query.grpc.swift in Sources */,
 				79FCA3DA2C3F9E92001C17D0 /* artela_fee_v1_genesis.pb.swift in Sources */,
@@ -7549,6 +7616,7 @@
 				0478439D2AC991B300462F1C /* injective_wasmx_v1_proposal.pb.swift in Sources */,
 				7939A25E2D34DD85006674E3 /* DappBtcSignRequestSheet.swift in Sources */,
 				048F8DC92B285EC900432437 /* kava_router_v1beta1_tx.grpc.swift in Sources */,
+				79813A742D530F890083A1F5 /* zrchain_validation_asset_data.pb.swift in Sources */,
 				04B7899F2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift in Sources */,
 				79FCA3B82C3F9E92001C17D0 /* artela_types_v1_web3.pb.swift in Sources */,
 				792613C42CD4B82800FAF47D /* initia_mstaking_v1_genesis.pb.swift in Sources */,

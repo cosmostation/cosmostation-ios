@@ -248,6 +248,9 @@ class BaseChain {
             } else if let chainInitia = self as? ChainInitia  {
                 _ = await chainInitia.getInitiaFetcher()?.fetchCosmosValidators()
                 
+            } else if let chainZenrock = self as? ChainZenrock {
+                _ = await chainZenrock.getZenrockFetcher()?.fetchCosmosValidators()
+
             } else if (supportCosmos == true && supportStaking == true) {
                 _ = await getCosmosfetcher()?.fetchCosmosValidators()
             }
@@ -656,6 +659,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAgoric118())
     result.append(ChainAiozEVM())                       //EVM
     result.append(ChainAkash())
+    result.append(ChainAllora())
     result.append(ChainAltheaEVM())                     //EVM
     result.append(ChainAlthea118())
     result.append(ChainArbitrum())                      //EVM
@@ -667,7 +671,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainBabylon())
     result.append(ChainBand())
     result.append(ChainBase())                          //EVM
-//    result.append(ChainBeraEVM())                     //EVM
+    result.append(ChainBeraEVM())                       //EVM
     result.append(ChainBinanceSmart())                  //EVM
     result.append(ChainBitcana())
     result.append(ChainBitCoin44())                     //MAJOR
@@ -703,6 +707,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainFirma())
     result.append(ChainForma())                         //EVM
     result.append(ChainFxcoreEVM())                     //EVM
+    result.append(ChainGgez())
 //    result.append(ChainGno())
     result.append(ChainGovgen())
     result.append(ChainGravityBridge())
@@ -784,6 +789,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainXion())
     result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
+    result.append(ChainZenrock())
     result.append(ChainZetaEVM())                       //EVM
 
     
@@ -802,7 +808,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMantra_T())
     result.append(ChainStoryEVM_T())
     result.append(ChainTabiEVM_T())
-
+    result.append(ChainXion_T())
     
     
     

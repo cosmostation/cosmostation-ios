@@ -17,7 +17,7 @@ class ChainBeraEVM: BaseChain  {
         
         name = "Bera Chain"
         tag = "bera60"
-        logo1 = "chianBera"
+        logo1 = "chainBera"
         apiName = "berachain"
         accountKeyType = AccountKeyType(.BERA_Secp256k1, "m/44'/60'/0'/0/X")
         
@@ -32,9 +32,9 @@ class ChainBeraEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "BERA"
-        coinGeckoId = ""
+        coinGeckoId = "berachain-bera"
         coinLogo = "tokenBera"
-        evmRpcURL = ""
+        evmRpcURL = "https://rpc.berachain.com"
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {

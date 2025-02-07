@@ -426,6 +426,13 @@ extension CosmosClassVC {
                 onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
                 return
             }
+            
+        } else if let zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher() {
+            if zenrockFetcher.validators.count <= 0 {
+                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                return
+            }
+            
         } else {
             if (comsosFetcher.cosmosValidators.count <= 0) {
                 onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
@@ -460,6 +467,13 @@ extension CosmosClassVC {
                 onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
                 return
             }
+            
+        } else if let zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher() {
+            if zenrockFetcher.validators.count <= 0 {
+                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                return
+            }
+            
         } else {
             if (comsosFetcher.cosmosValidators.count <= 0) {
                 onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
@@ -525,6 +539,12 @@ extension CosmosClassVC {
         
         if let initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher() {
             if initiaFetcher.initiaValidators.count <= 0 {
+                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                return
+            }
+            
+        } else if let zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher() {
+            if zenrockFetcher.validators.count <= 0 {
                 onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
                 return
             }

@@ -64,13 +64,18 @@ class CosmosDelegate: BaseVC {
     var toValidatorInitia: Initia_Mstaking_V1_Validator?
     var initiaFetcher: InitiaFetcher?
     
+    var toValidatorZenrock: Zrchain_Validation_ValidatorHV?
+    var zenrockFetcher: ZenrockFetcher?
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
         cosmosFetcher = selectedChain.getCosmosfetcher()
         initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher()
-        
+        zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher()
+
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
@@ -90,6 +95,16 @@ class CosmosDelegate: BaseVC {
                     
                 } else {
                     toValidatorInitia = initiaFetcher.initiaValidators[0]
+                }
+            }
+            
+        } else if let zenrockFetcher {
+            if toValidatorZenrock == nil {
+                if let validator = zenrockFetcher.validators.filter({ $0.description_p.moniker == "Cosmostation" }).first {
+                    toValidatorZenrock = validator
+                    
+                } else {
+                    toValidatorZenrock = zenrockFetcher.validators[0]
                 }
             }
             
@@ -129,6 +144,10 @@ class CosmosDelegate: BaseVC {
             baseSheet.initiaValidators = initiaFetcher.initiaValidators
             baseSheet.sheetType = .SelectInitiaValidator
             
+        } else if let zenrockFetcher {
+            baseSheet.zenrockValidators = zenrockFetcher.validators
+            baseSheet.sheetType = .SelectZenrockValidator
+            
         } else {
             baseSheet.validators = cosmosFetcher.cosmosValidators
             baseSheet.sheetType = .SelectValidator
@@ -151,7 +170,20 @@ class CosmosDelegate: BaseVC {
             
             let commission = NSDecimalNumber(string: toValidatorInitia!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
             commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
+            
+        } else if let zenrockFetcher {
+            monikerImg.sd_setImage(with: selectedChain.monikerImg(toValidatorZenrock!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            monikerLabel.text = toValidatorZenrock!.description_p.moniker
+            if (toValidatorZenrock!.jailed) {
+                jailedTag.isHidden = false
+            } else {
+                inactiveTag.isHidden = zenrockFetcher.isActiveValidator(toValidatorZenrock!)
+            }
+            
+            let commission = NSDecimalNumber(string: toValidatorZenrock!.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
+            commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
 
+            
         } else {
             monikerImg.sd_setImage(with: selectedChain.monikerImg(toValidator!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
             monikerLabel.text = toValidator!.description_p.moniker
@@ -377,7 +409,15 @@ class CosmosDelegate: BaseVC {
                 $0.amount = [toCoin!]
             }
             return Signer.genDelegateMsg(delegateMsg)
-
+            
+        } else if selectedChain is ChainZenrock {
+            let delegateMsg = Zrchain_Validation_MsgDelegate.with {
+                $0.delegatorAddress = selectedChain.bechAddress!
+                $0.validatorAddress = toValidatorZenrock!.operatorAddress
+                $0.amount = toCoin!
+            }
+            return Signer.genDelegateMsg(delegateMsg)
+            
         } else {
             let delegateMsg = Cosmos_Staking_V1beta1_MsgDelegate.with {
                 $0.delegatorAddress = selectedChain.bechAddress!
@@ -417,6 +457,12 @@ extension CosmosDelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
         } else if sheetType == .SelectInitiaValidator {
             if let validatorAddress = result["validatorAddress"] as? String, let chain = selectedChain as? ChainInitia, let fetcher = chain.getInitiaFetcher() {
                 toValidatorInitia = fetcher.initiaValidators.filter({ $0.operatorAddress == validatorAddress }).first!
+                onUpdateValidatorView()
+            }
+            
+        } else if sheetType == .SelectZenrockValidator {
+            if let validatorAddress = result["validatorAddress"] as? String, let fetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher() {
+                toValidatorZenrock = fetcher.validators.filter({ $0.operatorAddress == validatorAddress }).first!
                 onUpdateValidatorView()
             }
         }
