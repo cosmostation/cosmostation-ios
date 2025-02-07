@@ -191,4 +191,38 @@ class AssetCell: UITableViewCell {
         }
     }
     
+    func bindGnoClassAsset(_ baseChain: BaseChain, _ coin: Cosmos_Base_V1beta1_Coin) {
+        if let gnoFether = (baseChain as? ChainGno)?.getGnoFetcher(),
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, coin.denom) {
+            let value = gnoFether.denomValue(coin.denom)
+            WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, 6)
+            WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
+        }
+    }
+    
+    func bindGnoClassToken(_ baseChain: BaseChain, _ token: MintscanToken) {
+        if let gnoFetcher = (baseChain as? ChainGno)?.getGnoFetcher() {
+            let value = gnoFetcher.tokenValue(token.contract!)
+            WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
+            WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
+        }
+    }
 }

@@ -32,6 +32,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var fromEvmFetcher: EvmFetcher!
     var fromSuiFetcher: SuiFetcher!
     var fromBtcFetcher: BtcFetcher!
+    var fromGnoFetcher: GnoFetcher!
     var toChain: BaseChain!
     var toAddress: String?
     var txMemo = ""
@@ -93,6 +94,17 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             
             fromBtcFetcher = (fromChain as? ChainBitCoin86)?.getBtcFetcher()
             fetchBtcTx(result)
+            
+        } else if (txStyle == .GNO_STYLE) {
+            guard (cosmosBroadcastTxResponse?.txhash) != nil else {
+                loadingView.isHidden = true
+                failView.isHidden = false
+                failMsgLabel.text = cosmosBroadcastTxResponse?.rawLog
+                confirmBtn.isEnabled = true
+                return
+            }
+            fromGnoFetcher = (fromChain as? ChainGno)?.getGnoFetcher()
+            fetchGnoTx()
 
         } else if (txStyle == .COSMOS_STYLE) {
             guard (cosmosBroadcastTxResponse?.txhash) != nil else {
@@ -126,7 +138,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             successExplorerBtn.setTitle("Check in Explorer", for: .normal)
             failExplorerBtn.setTitle("Check in Explorer", for: .normal)
 
-        } else if (txStyle == .COSMOS_STYLE) {
+        } else if (txStyle == .COSMOS_STYLE || txStyle == .GNO_STYLE) {
             successMsgLabel.text = cosmosBroadcastTxResponse?.txhash
             if fromChain.isSupportMintscan() {
                 successExplorerBtn.setTitle("Check in Mintscan", for: .normal)
@@ -165,7 +177,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                 self.onCheckAddAddressBook()
             });
 
-        } else if (txStyle == .COSMOS_STYLE) {
+        } else if (txStyle == .COSMOS_STYLE || txStyle == .GNO_STYLE) {
             if (cosmosTxResponse?.txResponse.code != 0) {
                 failView.isHidden = false
                 failExplorerBtn.isHidden = false
@@ -203,7 +215,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             guard let url = fromChain.getExplorerTx(btcResult?["result"].stringValue) else { return }
             self.onShowSafariWeb(url)
 
-        } else if (txStyle == .COSMOS_STYLE) {
+        } else if (txStyle == .COSMOS_STYLE || txStyle == .GNO_STYLE) {
             guard let url = fromChain.getExplorerTx(cosmosBroadcastTxResponse?.txhash) else { return }
             self.onShowSafariWeb(url)
         }
@@ -265,6 +277,32 @@ extension CommonTransferResult {
                 if (self.fetchCnt > 0) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
                         self.fetchTx()
+                    });
+                    
+                } else {
+                    DispatchQueue.main.async {
+                        self.onShowMoreWait()
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchGnoTx() {
+        Task {
+            do {
+                let result = try await fromGnoFetcher.fetchTx(cosmosBroadcastTxResponse!.txhash)
+                self.cosmosTxResponse = result
+                DispatchQueue.main.async {
+                    self.onUpdateView()
+                }
+                
+            } catch {
+                self.confirmBtn.isEnabled = true
+                self.fetchCnt = self.fetchCnt - 1
+                if (self.fetchCnt > 0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                        self.fetchGnoTx()
                     });
                     
                 } else {
@@ -374,6 +412,8 @@ extension CommonTransferResult {
                 self.fetchTx()
             } else if (self.txStyle == .BTC_STYLE) {
                 self.fetchBtcTx(self.btcResult!["result"].stringValue)
+            } else if (self.txStyle == .GNO_STYLE) {
+                self.fetchGnoTx()
             }
         }))
         self.present(noticeAlert, animated: true)

@@ -20,11 +20,11 @@ class ChainPassage: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "upasg"
         bechAccountPrefix = "pasg"
         validatorPrefix = "pasgvaloper"
-        grpcHost = "grpc-passage.cosmostation.io"
-        lcdUrl = "https://lcd-passage.cosmostation.io/"
+        grpcHost = "passage-grpc.stakerhouse.com"
+        lcdUrl = "https://rest-passage.ecostake.com/"
     }
 }

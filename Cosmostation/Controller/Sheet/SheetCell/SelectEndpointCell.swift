@@ -213,7 +213,48 @@ class SelectEndpointCell: UITableViewCell {
         }
     }
     
-    
+    func onBindGnoRpcEndpoint(_ position: Int, _ chain: BaseChain) {
+        if let gnoFetcher = (chain as? ChainGno)?.getGnoFetcher() {
+            let endpoint = chain.getChainListParam()["cosmos_rpc_endpoint"].arrayValue[position]
+            providerLabel.text = endpoint["provider"].string
+            endpointLabel.text = endpoint["url"].string?.replacingOccurrences(of: "https://", with: "")
+            endpointLabel.adjustsFontSizeToFitWidth = true
+            
+            let checkTime = CFAbsoluteTimeGetCurrent()
+            var url = endpoint["url"].stringValue
+            if (url.last != "/") {
+                url += "/"
+            }
+
+            seletedImg.isHidden = (gnoFetcher.getRpc() != url)
+            
+            let param: Parameters = ["method": "health", "params": [], "id" : 1, "jsonrpc" : "2.0"]
+            AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in
+                switch response.result {
+                case .success :
+                    self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
+                    DispatchQueue.main.async {
+                        let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
+                        if (self.gapTime! <= 1.2) {
+                            self.speedImg.image = UIImage.init(named: "ImgGovPassed")
+                        } else if (self.gapTime! <= 3) {
+                            self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
+                        } else {
+                            self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                        }
+                        self.speedTimeLabel.text = gapFormat
+                    }
+                    
+                case .failure:
+                    DispatchQueue.main.async {
+                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
+                        self.speedTimeLabel.text = "Unknown"
+                    }
+                }
+            }
+        }
+    }
+
     
     
     func getConnection(_ host: String, _ port: Int) -> ClientConnection {
