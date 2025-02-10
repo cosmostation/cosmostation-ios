@@ -621,6 +621,9 @@ extension BaseChain {
         } else {
             address = mainAddress
         }
+        if self is ChainShidoEVM {
+            address = evmAddress!
+        }
         if let urlString = getChainListParam()["explorer"]["account"].string,
            let url = URL(string: urlString.replacingOccurrences(of: "${address}", with: address)) {
             return url
