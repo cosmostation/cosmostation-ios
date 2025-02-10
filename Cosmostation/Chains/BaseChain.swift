@@ -621,6 +621,9 @@ extension BaseChain {
         } else {
             address = mainAddress
         }
+        if self is ChainShidoEVM {
+            address = evmAddress!
+        }
         if let urlString = getChainListParam()["explorer"]["account"].string,
            let url = URL(string: urlString.replacingOccurrences(of: "${address}", with: address)) {
             return url
@@ -772,6 +775,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainSentinel())
     result.append(ChainSge())
     result.append(ChainShentu())
+    result.append(ChainShidoEVM())                    //EVM
     result.append(ChainSommelier())
     result.append(ChainSource())
     result.append(ChainStafi())
@@ -816,7 +820,6 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainCrescent())
 //    result.append(ChainCudos())
 //    result.append(ChainEmoney())
-//    result.append(ChainShidoEVM())                    //EVM
 //    result.append(ChainStarname())
 //    
 //    result.append(ChainCosmos_T())
