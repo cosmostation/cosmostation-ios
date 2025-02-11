@@ -110,6 +110,11 @@ class MajorHistoryVC: BaseVC {
             
         } else if let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher() {
             historyGroup.removeAll()
+            
+            btcFetcher.btcHistory.sort {
+                $0["status"]["block_time"].intValue > $1["status"]["block_time"].intValue
+            }
+            
             btcFetcher.btcHistory.forEach { history in
                 let date = history["status"]["confirmed"] == false ? "Pending" : WDP.dpDate(history["status"]["block_time"].intValue * 1000)
                 var matched = -1
@@ -125,10 +130,6 @@ class MajorHistoryVC: BaseVC {
                 } else {
                     historyGroup.append(HistoryGroup.init(date, [history]))
                 }
-            }
-            
-            historyGroup.sort {
-                $0.date > $1.date
             }
             
             loadingView.isHidden = true
