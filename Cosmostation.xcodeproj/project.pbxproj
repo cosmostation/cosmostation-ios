@@ -1677,6 +1677,8 @@
 		796CC3632C6C3B0C00FEC658 /* SuiStakingInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */; };
 		79813A4E2D3F4A990083A1F5 /* ChainBitCoin86_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */; };
 		79813A502D3F6ED80083A1F5 /* ChainBitCoin86.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */; };
+		79813A572D506DCA0083A1F5 /* GnoFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A562D506DCA0083A1F5 /* GnoFetcher.swift */; };
+		79813A5B2D50CE010083A1F5 /* tm2_abci.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A5A2D50CE010083A1F5 /* tm2_abci.pb.swift */; };
 		79813A5D2D53035D0083A1F5 /* ChainAllora.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A5C2D53035D0083A1F5 /* ChainAllora.swift */; };
 		79813A5F2D53049F0083A1F5 /* ChainGgez.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A5E2D53049F0083A1F5 /* ChainGgez.swift */; };
 		79813A612D530A9E0083A1F5 /* ChainZenrock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A602D530A9E0083A1F5 /* ChainZenrock.swift */; };
@@ -1692,8 +1694,6 @@
 		79813A762D530F890083A1F5 /* zrchain_validation_staking.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A6C2D530F890083A1F5 /* zrchain_validation_staking.pb.swift */; };
 		79813A782D5327ED0083A1F5 /* ZenrockFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A772D5327ED0083A1F5 /* ZenrockFetcher.swift */; };
 		79813A7A2D5477FC0083A1F5 /* ChainXion_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A792D5477FC0083A1F5 /* ChainXion_T.swift */; };
-		79813A572D506DCA0083A1F5 /* GnoFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A562D506DCA0083A1F5 /* GnoFetcher.swift */; };
-		79813A5B2D50CE010083A1F5 /* tm2_abci.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A5A2D50CE010083A1F5 /* tm2_abci.pb.swift */; };
 		7981F75C2D0C1CAB00BB50DA /* ChainElys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F75B2D0C1CAB00BB50DA /* ChainElys.swift */; };
 		7981F75E2D0C31E900BB50DA /* ChainSynternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F75D2D0C31E900BB50DA /* ChainSynternet.swift */; };
 		7981F7622D0C333E00BB50DA /* ChainRouterEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */; };
@@ -3121,6 +3121,8 @@
 		796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuiStakingInfoSheet.xib; sourceTree = "<group>"; };
 		79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86_T.swift; sourceTree = "<group>"; };
 		79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86.swift; sourceTree = "<group>"; };
+		79813A562D506DCA0083A1F5 /* GnoFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GnoFetcher.swift; sourceTree = "<group>"; };
+		79813A5A2D50CE010083A1F5 /* tm2_abci.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tm2_abci.pb.swift; sourceTree = "<group>"; };
 		79813A5C2D53035D0083A1F5 /* ChainAllora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAllora.swift; sourceTree = "<group>"; };
 		79813A5E2D53049F0083A1F5 /* ChainGgez.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainGgez.swift; sourceTree = "<group>"; };
 		79813A602D530A9E0083A1F5 /* ChainZenrock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainZenrock.swift; sourceTree = "<group>"; };
@@ -3136,8 +3138,6 @@
 		79813A6C2D530F890083A1F5 /* zrchain_validation_staking.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zrchain_validation_staking.pb.swift; sourceTree = "<group>"; };
 		79813A772D5327ED0083A1F5 /* ZenrockFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenrockFetcher.swift; sourceTree = "<group>"; };
 		79813A792D5477FC0083A1F5 /* ChainXion_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainXion_T.swift; sourceTree = "<group>"; };
-		79813A562D506DCA0083A1F5 /* GnoFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GnoFetcher.swift; sourceTree = "<group>"; };
-		79813A5A2D50CE010083A1F5 /* tm2_abci.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tm2_abci.pb.swift; sourceTree = "<group>"; };
 		7981F75B2D0C1CAB00BB50DA /* ChainElys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainElys.swift; sourceTree = "<group>"; };
 		7981F75D2D0C31E900BB50DA /* ChainSynternet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSynternet.swift; sourceTree = "<group>"; };
 		7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainRouterEVM.swift; sourceTree = "<group>"; };
@@ -7701,7 +7701,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 297;
+				CURRENT_PROJECT_VERSION = 298;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7713,7 +7713,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.20;
+				MARKETING_VERSION = 1.10.21;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -7734,7 +7734,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 297;
+				CURRENT_PROJECT_VERSION = 298;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7747,7 +7747,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.20;
+				MARKETING_VERSION = 1.10.21;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Cosmostation debug provisioning profile";
@@ -7888,7 +7888,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 297;
+				CURRENT_PROJECT_VERSION = 298;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7902,7 +7902,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.20;
+				MARKETING_VERSION = 1.10.21;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -7922,7 +7922,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 297;
+				CURRENT_PROJECT_VERSION = 298;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7936,7 +7936,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.20;
+				MARKETING_VERSION = 1.10.21;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
