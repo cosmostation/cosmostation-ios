@@ -96,7 +96,7 @@ class HistoryCell: UITableViewCell {
         var title = ""
         var description = ""
         let txs = history["transaction"]["data"]["transaction"]["transactions"].arrayValue
-        if (!txs[0].isEmpty) {
+        if (((txs.first?.isEmpty) == nil)) {
             description = txs.last?.dictionaryValue.keys.first ?? "Unknown"
             if (txs.count > 1) {
                 description = description +  " + " + String(txs.count)
@@ -155,7 +155,7 @@ class HistoryCell: UITableViewCell {
                     amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
                     
                 } else {
-                    denomLabel.text = symbol
+                    denomLabel.text = symbol.suiCoinSymbol()
                     let dpAmount = NSDecimalNumber(value: intAmount).multiplying(byPowerOf10: -9, withBehavior: handler18Down)
                     amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
                 }
