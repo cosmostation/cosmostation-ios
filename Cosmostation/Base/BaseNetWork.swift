@@ -125,7 +125,7 @@ class BaseNetWork {
     }
     
     static func msProposals(_ chain: BaseChain) -> String {
-        return MINTSCAN_API_URL + "v10/" + chain.apiName + "/proposals"
+        return MINTSCAN_API_URL + "v11/" + chain.apiName + "/proposals"
     }
     
     static func msMyVoteHistory(_ chain: BaseChain, _ address: String) -> String {
