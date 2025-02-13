@@ -527,7 +527,6 @@
 "setting_section_support" = "Support";
 "setting_section_about" = "About";
 "setting_account_title" = "Account";
-"setting_qr_import_account" = "Import account with QR scan";
 "setting_hide_legacy" = "Enable Old Addresses";
 "setting_show_testnet" = "Enable Testnet";
 "setting_chain_title" = "Manage Chains";
@@ -640,6 +639,9 @@
 "import_mnemonic_msg" = "Restore an account with your mnemonics";
 "import_private_key" = "Import Private Key";
 "import_private_key_msg" = "Restore an account with your private key";
+"import_qr" = "Import Mnemonic QR";
+"import_qr_msg" = "Restore an account with QR Code";
+
 "show_mnemonics" = "Show Mnemonics";
 "prepare" = "Preparing...";
 "address_copied" = "Address copied";
@@ -683,8 +685,6 @@
 "sort_by_value" = "By Value";
 "wallet_dash" = "Wallet ";
 "with_mnemonic" = "With Mnemonics ";
-"import_menmonic" = "Import Mnemonic";
-"import_private_key" = "Import PrivateKey";
 "change_wallet_name" = "Change Wallet Name";
 "change_url" = "Change URL";
 "set_mnemonic_name" = "Set Mnemonic Name";

@@ -355,7 +355,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (sheetType == .SelectCreateAccount) {
-            return 3
+            return 4
             
         } else if (sheetType == .SelectOptionMnemonicAccount) {
             return 4

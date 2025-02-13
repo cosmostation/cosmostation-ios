@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Web3Core
 import Lottie
 
 class SettingsVC: BaseVC {
@@ -90,7 +89,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
-            return 6
+            return 5
         } else if (section == 1) {
             return 8
         } else if (section == 2) {
@@ -112,10 +111,6 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 return baseCell
                 
             } else if (indexPath.row == 1) {
-                baseCell.onBindImportQR()
-                return baseCell
-                
-            } else if (indexPath.row == 2) {
                 switchCell.onBindHideLegacy()
                 switchCell.actionToggle = { request in
                     if (request == BaseData.instance.getHideLegacy()) {
@@ -129,7 +124,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 }
                 return switchCell
                 
-            } else if (indexPath.row == 3) {
+            } else if (indexPath.row == 2) {
                 switchCell.onBindTestnet()
                 switchCell.actionToggle = { request in
                     if (request != BaseData.instance.getShowTestnet()) {
@@ -143,11 +138,11 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 }
                 return switchCell
                 
-            } else if (indexPath.row == 4) {
+            } else if (indexPath.row == 3) {
                 baseCell.onBindSetChain()
                 return baseCell
                 
-            } else if (indexPath.row == 5) {
+            } else if (indexPath.row == 4) {
                 baseCell.onBindSetAddressBook()
                 return baseCell
             }
@@ -249,18 +244,13 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(accountListVC, animated: true)
                 
-            } else if (indexPath.row == 1) {
-                let qrScanVC = QrScanVC(nibName: "QrScanVC", bundle: nil)
-                qrScanVC.scanDelegate = self
-                present(qrScanVC, animated: true)
-                
-            } else if (indexPath.row == 4) {
+            } else if (indexPath.row == 3) {
                 let chainListVC = ChainListVC(nibName: "ChainListVC", bundle: nil)
                 chainListVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(chainListVC, animated: true)
                 
-            } else if (indexPath.row == 5) {
+            } else if (indexPath.row == 4) {
                 let addressBookVC = AddressBookListVC(nibName: "AddressBookListVC", bundle: nil)
                 addressBookVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
@@ -374,7 +364,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegate, PinDelegate {
+extension SettingsVC: BaseSheetDelegate, PinDelegate {
     
     func leftBarButton(_ name: String?, _ imge: UIImage? = nil) -> UIBarButtonItem {
         let button = UIButton(type: .system)
@@ -478,40 +468,7 @@ extension SettingsVC: BaseSheetDelegate, QrScanDelegate, QrImportCheckKeyDelegat
             }
             reloadRows(IndexPath(row: 5, section: 1))
         }
-    }
-    
-    func onScanned(_ result: String) {
-        let scanedStr = result.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        if let rawWords = BIP39.seedFromMmemonics(scanedStr, password: "", language: .english) {
-            let importMnemonicCheckVC = ImportMnemonicCheckVC(nibName: "ImportMnemonicCheckVC", bundle: nil)
-            importMnemonicCheckVC.mnemonic = scanedStr
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(importMnemonicCheckVC, animated: true)
-            return
-        }
-        
-        let data = Data(base64Encoded: scanedStr.data(using: .utf8)!)
-        if (data?.toHexString().starts(with: "53616c74") == true) {
-//            if (data?.dataToHexString().starts(with: "53616c74") == true) {
-            //start with salted
-            let qrImportCheckKeySheet = QrImportCheckKeySheet(nibName: "QrImportCheckKeySheet", bundle: nil)
-            qrImportCheckKeySheet.toDecryptString = scanedStr
-            qrImportCheckKeySheet.qrImportCheckKeyDelegate = self
-            onStartSheet(qrImportCheckKeySheet, 240, 0.6)
-            return
-        }
-        onShowToast(NSLocalizedString("error_unknown_qr_code", comment: ""))
-    }
-    
-    func onQrImportConfirmed(_ mnemonic: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-            let importMnemonicCheckVC = ImportMnemonicCheckVC(nibName: "ImportMnemonicCheckVC", bundle: nil)
-            importMnemonicCheckVC.mnemonic = mnemonic
-            importMnemonicCheckVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(importMnemonicCheckVC, animated: true)
-        });
-    }
+    } 
      
     func reloadRows(_ indexPath : IndexPath) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {

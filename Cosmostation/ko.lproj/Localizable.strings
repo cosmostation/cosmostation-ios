@@ -527,7 +527,6 @@
 "setting_section_support" = "지원";
 "setting_section_about" = "앱 정보";
 "setting_account_title" = "계정 관리";
-"setting_qr_import_account" = "QR로 계정 추가";
 "setting_hide_legacy" = "구 주소 활성화";
 "setting_show_testnet" = "테스트넷 활성화";
 "setting_chain_title" = "체인 관리";
@@ -640,6 +639,9 @@
 "import_mnemonic_msg" = "기존 니모닉으로 계정 복구하기";
 "import_private_key" = "계정 복구 (개인키)";
 "import_private_key_msg" = "기존 개인키로 계정 복구하기";
+"import_qr" = "계정 복구 (QR)";
+"import_qr_msg" = "QR 코드를 스캔하여 계정 복구하기";
+
 "show_mnemonics" = "니모닉 보기";
 "prepare" = "준비중 입니다..";
 "address_copied" = "클립보드에 복사하였습니다.";
@@ -683,8 +685,6 @@
 "sort_by_value" = "금액으로 정렬";
 "wallet_dash" = "내 지갑 ";
 "with_mnemonic" = "전송 가능 지갑";
-"import_menmonic" = "니모닉으로 복원";
-"import_private_key" = "개인키로 복원";
 "change_wallet_name" = "지갑 별칭 변경";
 "change_url" = "URL 입력";
 "wallet_name" = "별칭";

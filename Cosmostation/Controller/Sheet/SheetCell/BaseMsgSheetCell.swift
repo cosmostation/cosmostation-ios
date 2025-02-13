@@ -30,6 +30,10 @@ class BaseMsgSheetCell: UITableViewCell {
             titleLabel.text = NSLocalizedString("import_private_key", comment: "")
             descriptionLabel.text = NSLocalizedString("import_private_key_msg", comment: "")
             
+        } else if (position == 3) {
+            titleLabel.text = NSLocalizedString("import_qr", comment: "")
+            descriptionLabel.text = NSLocalizedString("import_qr_msg", comment: "")
+            
         } else {
             titleLabel.text = ""
         }
