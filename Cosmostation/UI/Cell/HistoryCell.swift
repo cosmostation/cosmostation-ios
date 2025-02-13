@@ -28,6 +28,7 @@ class HistoryCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        msgsTitleLabel.text = ""
         sendtxImg.isHidden = true
         amountLabel.isHidden = true
         denomLabel.isHidden = true
@@ -96,18 +97,20 @@ class HistoryCell: UITableViewCell {
         var title = ""
         var description = ""
         let txs = history["transaction"]["data"]["transaction"]["transactions"].arrayValue
-        if (((txs.first?.isEmpty) == nil)) {
+        
+        let sender = history["transaction"]["data"]["sender"].stringValue
+        if (sender == suiChain.mainAddress) {
+            title = NSLocalizedString("tx_send", comment: "")
+        } else {
+            title = NSLocalizedString("tx_receive", comment: "")
+        }
+        
+        if (((txs.first?.isEmpty) == false)) {
             description = txs.last?.dictionaryValue.keys.first ?? "Unknown"
             if (txs.count > 1) {
                 description = description +  " + " + String(txs.count)
             }
-            
-            let sender = history["transaction"]["data"]["sender"].stringValue
-            if (sender == suiChain.mainAddress) {
-                title = NSLocalizedString("tx_send", comment: "")
-            } else {
-                title = NSLocalizedString("tx_receive", comment: "")
-            }
+
             txs.forEach { tx in
                 if (tx["MoveCall"]["function"].stringValue == "request_withdraw_stake") {
                     title = NSLocalizedString("str_unstake", comment: "")
@@ -123,10 +126,8 @@ class HistoryCell: UITableViewCell {
                     
                 } else if (tx["MoveCall"]["function"].stringValue == "redeem") {
                     title = "Redeem"
-                    
                 }
             }
-            
         }
         
         if title.isEmpty == true {
