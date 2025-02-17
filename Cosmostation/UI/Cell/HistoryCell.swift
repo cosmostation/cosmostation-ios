@@ -297,7 +297,7 @@ class HistoryCell: UITableViewCell {
         
         let contractAddress = history["tokenAddress"].stringValue
         
-        if history["amount"].stringValue != "0" {
+        if history["amount"].stringValue != "0" && !history["amount"].stringValue.isEmpty {
             if contractAddress.isEmpty {
                 amountLabel.isHidden = false
                 denomLabel.isHidden = false
