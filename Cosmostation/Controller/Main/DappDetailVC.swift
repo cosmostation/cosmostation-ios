@@ -899,6 +899,10 @@ extension DappDetailVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate
 extension DappDetailVC {
     
     private func wcV2SetSign() {
+        if !publishers.isEmpty {
+            publishers.removeAll()
+        }
+        
         Sign.instance.sessionProposalPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sessionProposal, context in
