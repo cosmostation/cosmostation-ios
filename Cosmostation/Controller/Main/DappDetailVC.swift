@@ -900,6 +900,7 @@ extension DappDetailVC {
     
     private func wcV2SetSign() {
         if !publishers.isEmpty {
+            publishers.forEach { $0.cancel() }
             publishers.removeAll()
         }
         
