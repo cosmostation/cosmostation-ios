@@ -101,6 +101,7 @@ class MajorHistoryVC: BaseVC {
             }
             
             loadingView.isHidden = true
+            view.isUserInteractionEnabled = true
             if (historyGroup.count <= 0) {
                 emptyDataView.isHidden = false
             } else {
@@ -110,6 +111,7 @@ class MajorHistoryVC: BaseVC {
             
         } else if let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher() {
             historyGroup.removeAll()
+            
             btcFetcher.btcHistory.forEach { history in
                 let date = history["status"]["confirmed"] == false ? "Pending" : WDP.dpDate(history["status"]["block_time"].intValue * 1000)
                 var matched = -1
@@ -127,11 +129,8 @@ class MajorHistoryVC: BaseVC {
                 }
             }
             
-            historyGroup.sort {
-                $0.date > $1.date
-            }
-            
             loadingView.isHidden = true
+            view.isUserInteractionEnabled = true
             if (historyGroup.count <= 0) {
                 emptyDataView.isHidden = false
             } else {
@@ -211,7 +210,20 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
             self.onShowSafariWeb(url)
         }
     }
-    
+   
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let bitcoin = selectedChain as? ChainBitCoin86, let btcFetcher = bitcoin.getBtcFetcher() {
+            if let txid = btcFetcher.btcHistory.last?["txid"].string,
+                btcFetcher.hasMoreHistory,
+                indexPath.section == self.historyGroup.count - 1,
+                indexPath.row == self.historyGroup.last!.values.count - 1 {
+                
+                loadingView.isHidden = false
+                view.isUserInteractionEnabled = false
+                bitcoin.fetchHistory(txid)
+            }
+        }
+    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells {

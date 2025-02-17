@@ -739,7 +739,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMilkyway())
     result.append(ChainNeutron())
     result.append(ChainNibiru())
-    //result.append(ChainNillion())
+    result.append(ChainNillion())
     result.append(ChainNoble())
     result.append(ChainNolus())
 //    result.append(ChainNomic())

@@ -215,7 +215,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         webView.allowsBackForwardNavigationGestures = true
         webView.allowsLinkPreview = false
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
-        if ((dappUrl?.absoluteString.contains("berachain")) == nil) {
+        if ((dappUrl?.absoluteString.contains("berachain")) == false) {
             if let dictionary = Bundle.main.infoDictionary,
                let version = dictionary["CFBundleShortVersionString"] as? String {
                 webView.evaluateJavaScript("navigator.userAgent") { (result, error) in

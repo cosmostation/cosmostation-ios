@@ -1263,7 +1263,7 @@ extension CommonTransfer {
     func suiInputs() -> [String] {
         var result = [String]()
         suiFetcher.suiObjects.forEach { object in
-            if (object["type"].stringValue.contains(toSendDenom)) {
+            if (object["type"].stringValue.suiCoinType() == toSendDenom) {
                 result.append(object["objectId"].stringValue)
             }
         }

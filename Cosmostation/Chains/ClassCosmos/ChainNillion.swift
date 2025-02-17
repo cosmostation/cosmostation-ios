@@ -24,6 +24,7 @@ class ChainNillion: BaseChain {
         stakeDenom = "unil"
         bechAccountPrefix = "nillion"
         validatorPrefix = "nillionvaloper"
-        grpcHost = ""
+        grpcHost = "grpc-nillion.cosmostation.io"
+        lcdUrl = "https://lcd-nillion.cosmostation.io/"
     }
 }
