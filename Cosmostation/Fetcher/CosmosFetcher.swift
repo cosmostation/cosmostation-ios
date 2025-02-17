@@ -1822,6 +1822,12 @@ extension Google_Protobuf_Any {
                   let auth = try? Artela_Types_V1_EthAccount.init(serializedData: rawAccount.value) {
             let baseAccount = auth.baseAccount
             return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+            
+        } else if (rawAccount.typeURL.contains(Eth_Types_V1_EthAccount.protoMessageName)),
+                  let auth = try? Eth_Types_V1_EthAccount.init(serializedData: rawAccount.value) {
+            let baseAccount = auth.baseAccount
+            return (baseAccount.address, baseAccount.accountNumber, baseAccount.sequence)
+
         }
         
         return (nil, nil, nil)

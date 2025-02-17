@@ -91,8 +91,8 @@ class SuiFetcher {
                 })
                 
                 await suiBalances.concurrentForEach { coinType, balance in
-                    if let metadata = try? await self.fetchCoinMetadata(coinType) {
-                        self.suiCoinMeta[coinType] = metadata?["result"]
+                    if let metadata = try? await self.fetchCoinMetadata(coinType)?["result"], metadata != JSON.null {
+                        self.suiCoinMeta[coinType] = metadata
                     }
                 }
             }
@@ -439,9 +439,13 @@ extension String {
      */
     func suiCoinType() -> String? {
         if (!suiIsCoinType()) { return nil }
-        if let s1 = self.components(separatedBy: "<").last,
-           let s2 = s1.components(separatedBy: ">").first {
-            return s2
+        let pattern = "<(.+)>"
+        let regex = try! NSRegularExpression(pattern: pattern)
+        
+        if let match = regex.firstMatch(in: self, range: NSRange(self.startIndex..., in: self)) {
+            if let range = Range(match.range(at: 1), in: self) {
+                return String(self[range])
+            }
         }
         return nil
     }
@@ -450,11 +454,13 @@ extension String {
      * "0x2::coin::Coin<0x549e8b69270defbfafd4f94e17ec44cdbdd99820b33bda2278dea3b9a32d3f55::cert::CERT> ->  CERT
      */
     func suiCoinSymbol() -> String? {
-        if (!suiIsCoinType()) { return nil }
-        if let s1 = self.components(separatedBy: "<").last,
-           let s2 = s1.components(separatedBy: ">").first,
-           let symbol = s2.components(separatedBy: "::").last {
-            return symbol
+        let pattern = "::([a-zA-Z0-9_]+)(?:<.*>)?$"
+        let regex = try! NSRegularExpression(pattern: pattern)
+        
+        if let match = regex.firstMatch(in: self, range: NSRange(self.startIndex..., in: self)) {
+            if let range = Range(match.range(at: 1), in: self) {
+                return String(self[range])
+            }
         }
         return nil
     }

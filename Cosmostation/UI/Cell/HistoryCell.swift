@@ -28,6 +28,10 @@ class HistoryCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        msgsTitleLabel.text = ""
+        hashLabel.text = ""
+        timeLabel.text = ""
+        blockLabel.text = ""
         sendtxImg.isHidden = true
         amountLabel.isHidden = true
         denomLabel.isHidden = true
@@ -87,27 +91,31 @@ class HistoryCell: UITableViewCell {
     
     
     func bindSuiHistory(_ suiChain: ChainSui, _ history: JSON) {
+        // status check
         if (history["effects"]["status"]["status"].stringValue != "success") {
             successImg.image = UIImage(named: "iconFail")
         } else {
             successImg.image = UIImage(named: "iconSuccess")
         }
         
+        // title check
         var title = ""
         var description = ""
         let txs = history["transaction"]["data"]["transaction"]["transactions"].arrayValue
-        if (!txs[0].isEmpty) {
+        
+        let sender = history["transaction"]["data"]["sender"].stringValue
+        if (sender == suiChain.mainAddress) {
+            title = NSLocalizedString("tx_send", comment: "")
+        } else {
+            title = NSLocalizedString("tx_receive", comment: "")
+        }
+        
+        if (((txs.first?.isEmpty) == false)) {
             description = txs.last?.dictionaryValue.keys.first ?? "Unknown"
             if (txs.count > 1) {
                 description = description +  " + " + String(txs.count)
             }
-            
-            let sender = history["transaction"]["data"]["sender"].stringValue
-            if (sender == suiChain.mainAddress) {
-                title = NSLocalizedString("tx_send", comment: "")
-            } else {
-                title = NSLocalizedString("tx_receive", comment: "")
-            }
+
             txs.forEach { tx in
                 if (tx["MoveCall"]["function"].stringValue == "request_withdraw_stake") {
                     title = NSLocalizedString("str_unstake", comment: "")
@@ -115,7 +123,7 @@ class HistoryCell: UITableViewCell {
                 } else if (tx["MoveCall"]["function"].stringValue == "request_add_stake") {
                     title = NSLocalizedString("str_stake", comment: "")
                     
-                } else if (tx["MoveCall"]["function"].stringValue == "swap") {
+                } else if (tx["MoveCall"]["function"].stringValue == "swap") || tx["MoveCall"]["function"].stringValue == "swap_a_b" {
                     title = NSLocalizedString("title_swap_token", comment: "")
                     
                 } else if (tx["MoveCall"]["function"].stringValue == "mint") {
@@ -124,9 +132,10 @@ class HistoryCell: UITableViewCell {
                 } else if (tx["MoveCall"]["function"].stringValue == "redeem") {
                     title = "Redeem"
                     
+                } else if tx["MoveCall"]["function"].stringValue == "unwrap"{
+                    title = "Contract Interaction"
                 }
             }
-            
         }
         
         if title.isEmpty == true {
@@ -134,36 +143,85 @@ class HistoryCell: UITableViewCell {
         } else {
             msgsTitleLabel.text = title
         }
-        hashLabel.text = history["digest"].stringValue
-        timeLabel.text = WDP.dpTime(history["timestampMs"].intValue)
-        blockLabel.text = "(" +  history["checkpoint"].stringValue + ")"
         
-        if let change = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue == suiChain.mainAddress }).first {
-            
-            if let symbol = change["coinType"].string,
-               let amount = change["amount"].string,
-               let suiFetcher = suiChain.getSuiFetcher(),
-               var intAmount = Int64(amount) {
-                
-                intAmount = abs(intAmount)
-                if let msAsset = BaseData.instance.getAsset(suiChain.apiName, symbol) {
-                    WDP.dpCoin(msAsset, NSDecimalNumber(value: intAmount), nil, denomLabel, amountLabel, msAsset.decimals)
-                    
-                } else if let metaData = suiFetcher.suiCoinMeta[symbol] {
-                    denomLabel.text = metaData["symbol"].stringValue
-                    let dpAmount = NSDecimalNumber(value: intAmount).multiplying(byPowerOf10: -metaData["decimals"].int16Value, withBehavior: handler18Down)
-                    amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
-                    
+        
+        // denom, amount check
+        var symbol = ""
+        var amount = "0"
+        
+        if let suiFetcher = suiChain.getSuiFetcher(),
+           let inputs = history["transaction"]["data"]["transaction"]["inputs"].array {
+                        
+            amountLabel.isHidden = false
+            denomLabel.isHidden = false
+                        
+            if title == NSLocalizedString("tx_send", comment: "") {
+                if let sendSymbol = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue != suiChain.mainAddress }).first?["coinType"].string,
+                      let sendAmount = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue != suiChain.mainAddress }).first?["amount"].string {
+                    symbol = sendSymbol
+                    amount = sendAmount
                 } else {
-                    denomLabel.text = symbol
-                    let dpAmount = NSDecimalNumber(value: intAmount).multiplying(byPowerOf10: -9, withBehavior: handler18Down)
-                    amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
+                    amountLabel.isHidden = true
+                    denomLabel.isHidden = true
                 }
-                amountLabel.isHidden = false
-                denomLabel.isHidden = false
+
+            } else if title == NSLocalizedString("tx_receive", comment: "") {
+                if let receiveSymbol = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue == suiChain.mainAddress }).first?["coinType"].string,
+                      let receiveAmount = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue == suiChain.mainAddress }).first?["amount"].string {
+                    symbol = receiveSymbol
+                    amount = receiveAmount
+                } else {
+                    amountLabel.isHidden = true
+                    denomLabel.isHidden = true
+                }
+                
+            } else if title == NSLocalizedString("str_stake", comment: "") {
+                symbol = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue == suiChain.mainAddress }).first?["coinType"].string ?? ""
+                amount = inputs.filter({ Int($0["value"].stringValue) != nil }).map({ $0["value"].stringValue }).first ?? "0"
+                
+            } else if title == NSLocalizedString("str_unstake", comment: "") {
+                let computationCost = NSDecimalNumber(string: history["effects"]["gasUsed"]["computationCost"].stringValue)
+                let storageCost = NSDecimalNumber(string: history["effects"]["gasUsed"]["storageCost"].stringValue)
+                let storageRebate = NSDecimalNumber(string: history["effects"]["gasUsed"]["storageRebate"].stringValue)
+                
+                var gasCost: UInt64 = 0
+                if (storageCost.compare(storageRebate).rawValue > 0) {
+                    gasCost = UInt64(truncating: computationCost.adding(storageCost).subtracting(storageRebate))
+                    if let unstakeAmount = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue == suiChain.mainAddress }).first?["amount"].string {
+                        amount = String(UInt64(unstakeAmount)! + gasCost)
+                        symbol = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue == suiChain.mainAddress }).first?["coinType"].string ?? ""
+                    }
+                } else {
+                    amountLabel.isHidden = true
+                    denomLabel.isHidden = true
+                }
+                
+            } else {
+                amountLabel.isHidden = true
+                denomLabel.isHidden = true
+            }
+            
+            let intAmount = abs(Int(amount)!)
+            if let msAsset = BaseData.instance.getAsset(suiChain.apiName, symbol) {
+                WDP.dpCoin(msAsset, NSDecimalNumber(value: intAmount), nil, denomLabel, amountLabel, msAsset.decimals)
+                
+            } else if let metaData = suiFetcher.suiCoinMeta[symbol] {
+                denomLabel.text = metaData["symbol"].stringValue
+                let dpAmount = NSDecimalNumber(value: intAmount).multiplying(byPowerOf10: -metaData["decimals"].int16Value, withBehavior: handler18Down)
+                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
+                
+            } else {
+                denomLabel.text = symbol.suiCoinSymbol()
+                let dpAmount = NSDecimalNumber(value: intAmount).multiplying(byPowerOf10: -9, withBehavior: handler18Down)
+                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
             }
         }
         
+
+        //hash, time, block
+        hashLabel.text = history["digest"].stringValue
+        timeLabel.text = WDP.dpTime(history["timestampMs"].intValue)
+        blockLabel.text = "(" +  history["checkpoint"].stringValue + ")"
     }
     
     func bindBtcHistory(_ btcChain: ChainBitCoin86, _ history: JSON) {
@@ -239,7 +297,7 @@ class HistoryCell: UITableViewCell {
         
         let contractAddress = history["tokenAddress"].stringValue
         
-        if history["amount"].stringValue != "0" {
+        if history["amount"].stringValue != "0" && !history["amount"].stringValue.isEmpty {
             if contractAddress.isEmpty {
                 amountLabel.isHidden = false
                 denomLabel.isHidden = false

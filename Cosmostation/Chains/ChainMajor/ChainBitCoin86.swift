@@ -95,9 +95,19 @@ class ChainBitCoin86: BaseChain {
         }
     }
     
-    func fetchHistory() {
+    func fetchHistory(_ after_txid: String? = nil) {
         Task {
-            await getBtcFetcher()?.fetchBtcHistory()
+            await getBtcFetcher()?.fetchBtcHistory(after_txid)
+            
+            getBtcFetcher()?.btcHistory.sort {
+                if $0["status"]["confirmed"].boolValue == false {
+                    return true
+                }
+                if $1["status"]["confirmed"].boolValue == false {
+                    return false
+                }
+                return $0["status"]["block_time"].intValue > $1["status"]["block_time"].intValue
+            }
             
             DispatchQueue.main.async(execute: {
                 NotificationCenter.default.post(name: Notification.Name("fetchHistory"), object: self.tag, userInfo: nil)

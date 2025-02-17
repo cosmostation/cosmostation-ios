@@ -21,6 +21,8 @@ class BtcFetcher {
     var btcBlockHeight: UInt64?
     var btcHistory = [JSON]()
     
+    var hasMoreHistory: Bool = true
+    
     init(_ chain: BaseChain) {
         self.chain = chain
     }
@@ -70,12 +72,18 @@ class BtcFetcher {
         }
     }
     
-    func fetchBtcHistory() async {
-        btcHistory.removeAll()
+    func fetchBtcHistory(_ after_txid: String? = nil) async {
         btcBlockHeight = nil
-        if let histroy = try? await fetchTxHistory(),
+        if let history = try? await fetchTxHistory(after_txid),
            let height = try? await fetchBlockHeight() {
-            btcHistory.append(contentsOf: histroy ?? [])
+            
+            if (history!.count < 50) {
+                hasMoreHistory = false
+            } else {
+                hasMoreHistory = true
+            }
+            
+            btcHistory.append(contentsOf: history?.filter{ !btcHistory.contains($0) } ?? [])
             btcBlockHeight = height
         }
         return
@@ -120,8 +128,12 @@ extension BtcFetcher {
         return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
     }
     
-    func fetchTxHistory() async throws -> [JSON]? {
-        let url = mempoolUrl() + "/api/address/" + chain.mainAddress + "/txs"
+    func fetchTxHistory(_ after_txid: String? = nil) async throws -> [JSON]? {
+        var url = mempoolUrl() + "/api/address/" + chain.mainAddress + "/txs"
+        
+        if let after_txid {
+            url += "?after_txid=\(after_txid)"
+        }
         return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
     }
     
