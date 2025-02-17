@@ -59,6 +59,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var zenrockValidatorsSearch = Array<Zrchain_Validation_ValidatorHV>()
     var zenrockDelegations = Array<Zrchain_Validation_DelegationResponse>()
     var zenrockDelegation: Zrchain_Validation_DelegationResponse!
+    
+    var swapSlippage: String?
 
     var selectedAccount: BaseAccount?
 
@@ -353,7 +355,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (sheetType == .SelectCreateAccount) {
-            return 3
+            return 4
             
         } else if (sheetType == .SelectOptionMnemonicAccount) {
             return 4
@@ -520,7 +522,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectSwapSlippage) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
-            cell?.onSkipSwapSlippage(indexPath.row)
+            cell?.onSkipSwapSlippage(indexPath.row, swapSlippage)
             return cell!
             
         } else if (sheetType == .SelectDelegatedAction) {

@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import Web3Core
 
 class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, DeleteDelegate {
 
@@ -134,6 +135,11 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                         let importPrivKeyVC = ImportPrivKeyVC(nibName: "ImportPrivKeyVC", bundle: nil)
                         self.navigationItem.title = ""
                         self.navigationController?.pushViewController(importPrivKeyVC, animated: true)
+                        
+                    } else if (index == 3) {
+                        let qrScanVC = QrScanVC(nibName: "QrScanVC", bundle: nil)
+                        qrScanVC.scanDelegate = self
+                        self.present(qrScanVC, animated: true)
                     }
                 });
             }
@@ -377,6 +383,41 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource, UITableView
     }
 }
 
+
+extension AccountListVC: QrScanDelegate, QrImportCheckKeyDelegate {
+    func onScanned(_ result: String) {
+        let scanedStr = result.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        if let rawWords = BIP39.seedFromMmemonics(scanedStr, password: "", language: .english) {
+            let importMnemonicCheckVC = ImportMnemonicCheckVC(nibName: "ImportMnemonicCheckVC", bundle: nil)
+            importMnemonicCheckVC.mnemonic = scanedStr
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(importMnemonicCheckVC, animated: true)
+            return
+        }
+        
+        let data = Data(base64Encoded: scanedStr.data(using: .utf8)!)
+        if (data?.toHexString().starts(with: "53616c74") == true) {
+//            if (data?.dataToHexString().starts(with: "53616c74") == true) {
+            //start with salted
+            let qrImportCheckKeySheet = QrImportCheckKeySheet(nibName: "QrImportCheckKeySheet", bundle: nil)
+            qrImportCheckKeySheet.toDecryptString = scanedStr
+            qrImportCheckKeySheet.qrImportCheckKeyDelegate = self
+            onStartSheet(qrImportCheckKeySheet, 240, 0.6)
+            return
+        }
+        onShowToast(NSLocalizedString("error_unknown_qr_code", comment: ""))
+    }
+    
+    func onQrImportConfirmed(_ mnemonic: String) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+            let importMnemonicCheckVC = ImportMnemonicCheckVC(nibName: "ImportMnemonicCheckVC", bundle: nil)
+            importMnemonicCheckVC.mnemonic = mnemonic
+            importMnemonicCheckVC.hidesBottomBarWhenPushed = true
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(importMnemonicCheckVC, animated: true)
+        });
+    }
+}
 
 class StringProvider: NSObject, NSItemProviderWriting {
     let string: String

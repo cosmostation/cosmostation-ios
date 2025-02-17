@@ -28,12 +28,6 @@ class SettingBaseCell: UITableViewCell {
         setDetailLabel.text = BaseData.instance.baseAccount?.getRefreshName()
     }
     
-    func onBindImportQR() {
-        setImg.image = UIImage(named: "setQrImport")
-        setTitleLabel.text = NSLocalizedString("setting_qr_import_account", comment: "")
-        setDetailLabel.text = ""
-    }
-    
     func onBindSetChain() {
         setImg.image = UIImage(named: "setChain")
         setTitleLabel.text = NSLocalizedString("setting_chain_title", comment: "")

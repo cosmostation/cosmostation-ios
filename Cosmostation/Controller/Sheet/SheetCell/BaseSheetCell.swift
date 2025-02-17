@@ -88,13 +88,20 @@ class BaseSheetCell: UITableViewCell {
         }
     }
     
-    func onSkipSwapSlippage(_ position: Int) {
+    func onSkipSwapSlippage(_ position: Int, _ slippage: String?) {
+
         if (position == 0) {
             titleLabel.text = "1%"
         } else if (position == 1) {
             titleLabel.text = "3%"
         } else if (position == 2) {
             titleLabel.text = "5%"
+        }
+        
+        if let slippage, slippage == titleLabel.text?.filter({ $0.isNumber }) {
+            checkedImg.isHidden = false
+        } else {
+            checkedImg.isHidden = true
         }
     }
     

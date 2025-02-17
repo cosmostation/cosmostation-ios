@@ -312,6 +312,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectSwapSlippage
+        baseSheet.swapSlippage = skipSlippage
         onStartSheet(baseSheet, 320, 0.6)
     }
     

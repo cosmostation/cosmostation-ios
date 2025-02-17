@@ -527,7 +527,6 @@
 "setting_section_support" = "サポート";
 "setting_section_about" = "アプリ情報";
 "setting_account_title" = "アカウント管理";
-"setting_qr_import_account" = "QRスキャンでアカウントをインポート";
 "setting_hide_legacy" = "旧アドレス有効化";
 "setting_show_testnet" = "テストネットの有効化";
 "setting_chain_title" = "チェーン管理";
@@ -636,10 +635,13 @@
 "create_wallet" = "新しいアカウントを作成する";
 "create_wallet_msg" = "一連のニーモニックを使用してアカウントを作成する";
 "import_wallet" = "財布の復元";
-"import_mnemonic" = "ニーモニックに復元";
-"import_mnemonic_msg" = "ニーモニックを使用してアカウントを復元する";
-"import_private_key" = "秘密鍵で復元";
-"import_private_key_msg" = "秘密キーを使用してアカウントを復元する";
+"import_mnemonic" = "アカウント復元（ニーモニック）";
+"import_mnemonic_msg" = "既存のニーモニックでアカウントを復元";
+"import_private_key" = "アカウント復元（秘密鍵）";
+"import_private_key_msg" = "既存の秘密鍵でアカウントを復元";
+"import_qr" = "アカウント復元（QR）";
+"import_qr_msg" = "QRコードをスキャンしてアカウントを復元";
+
 "show_mnemonics" = "ニーモニックを見る";
 "prepare" = "準備中...";
 "address_copied" = "クリップボードにコピーしました";
@@ -683,8 +685,6 @@
 "sort_by_value" = "金額で並べ替え";
 "wallet_dash" = "財布 ";
 "with_mnemonic" = "ニーモニック付き";
-"import_menmonic" = "ニーモニックをインポートします";
-"import_private_key" = "秘密キーをインポートします";
 "change_wallet_name" = "ウォレット名変更";
 "change_url" = "URL を変更";
 "set_mnemonic_name" = "ニーモニック名の設定";
