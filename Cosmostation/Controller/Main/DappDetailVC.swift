@@ -177,9 +177,16 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     private func onInitChainBitcoin() {
         if (btcTargetChain == nil) {
             
-            if btcNetwork == nil || btcNetwork == "mainnet" {
-                btcTargetChain = allChains.filter({ $0.tag == "bitcoin86" }).first!
+            if btcNetwork == nil {
+                if dappUrl!.absoluteString.contains("testnet") {
+                    btcTargetChain = allChains.filter({ $0.tag == "bitcoin86_T" }).first!
+                } else {
+                    btcTargetChain = allChains.filter({ $0.tag == "bitcoin86" }).first!
+                }
                 
+            } else if btcNetwork == "mainnet" {
+                btcTargetChain = allChains.filter({ $0.tag == "bitcoin86" }).first!
+
             } else if btcNetwork == "signet" {
                 btcTargetChain = allChains.filter({ $0.tag == "bitcoin86_T" }).first!
             }
@@ -358,7 +365,7 @@ extension DappDetailVC: WKScriptMessageHandler {
             let bodyJSON = JSON(parseJSON: message.body as? String ?? "")
             let messageJSON = bodyJSON["message"]
             let method = messageJSON["method"].stringValue
-//            print("DAPP REQUEST method \(method)")
+            print("DAPP REQUEST method \(method)")
             
             //Handle Cosmos Request
             if (method == "cos_supportedChainIds") {
@@ -753,6 +760,20 @@ extension DappDetailVC: WKScriptMessageHandler {
                 let params = messageJSON["params"]
                 popUpBtcRequestSign(method, params, bodyJSON["messageId"])
                 
+            } else if (method == "bit_getBTCTipHeight") {
+                Task {
+                    guard let btcFetcher = (btcTargetChain as? ChainBitCoin86)?.getBtcFetcher() else { return }
+                    let height = try await btcFetcher.fetchBlockHeight()
+                    injectionRequestApprove(JSON(height!), messageJSON, bodyJSON["messageId"])
+                }
+                
+            } else if (method == "bit_getNetworkFees") {
+                Task {
+                    guard let btcFetcher = (btcTargetChain as? ChainBitCoin86)?.getBtcFetcher() else { return }
+                    let fee = try await btcFetcher.fetchFee()
+                    injectionRequestApprove(fee, messageJSON, bodyJSON["messageId"])
+                }
+
             }
 
             else {
