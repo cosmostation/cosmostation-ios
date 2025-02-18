@@ -74,16 +74,16 @@ class BtcFetcher {
     
     func fetchBtcHistory(_ after_txid: String? = nil) async {
         btcBlockHeight = nil
-        if let history = try? await fetchTxHistory(after_txid),
+        if let history = try? await fetchTxHistory(after_txid) ?? [],
            let height = try? await fetchBlockHeight() {
             
-            if (history!.count < 50) {
+            if (history.count < 50) {
                 hasMoreHistory = false
             } else {
                 hasMoreHistory = true
             }
             
-            btcHistory.append(contentsOf: history?.filter{ !btcHistory.contains($0) } ?? [])
+            btcHistory.append(contentsOf: history.filter{ !btcHistory.contains($0) })
             btcBlockHeight = height
         }
         return
