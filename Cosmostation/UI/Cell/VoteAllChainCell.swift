@@ -69,18 +69,19 @@ class VoteAllChainCell: UITableViewCell {
             
         }
         
+        self.myVotedImg.isHidden = false
         if let rawVote = myVotes.filter({ $0.proposal_id == proposal.id }).first {
             if (rawVote.votes.count > 1) {
                 self.myVotedImg.image = UIImage.init(named: "imgMyVoteWeight")
             } else {
                 let myVote = rawVote.votes[0]
-                if (myVote.option?.contains("OPTION_YES") == true) {
+                if (myVote.option?.uppercased().contains("YES") == true) {
                     self.myVotedImg.image = UIImage.init(named: "imgMyVoteYes")
-                } else if (myVote.option?.contains("OPTION_NO_WITH_VETO") == true) {
+                } else if (myVote.option?.uppercased().contains("VETO") == true) {
                     self.myVotedImg.image = UIImage.init(named: "imgMyVoteVeto")
-                } else if (myVote.option?.contains("OPTION_NO") == true) {
+                } else if (myVote.option?.uppercased().contains("NO") == true) {
                     self.myVotedImg.image = UIImage.init(named: "imgMyVoteNo")
-                } else if (myVote.option?.contains("OPTION_ABSTAIN") == true) {
+                } else if (myVote.option?.uppercased().contains("ABSTAIN") == true) {
                     self.myVotedImg.image = UIImage.init(named: "imgMyVoteAbstain")
                 } else {
                     self.myVotedImg.image = nil

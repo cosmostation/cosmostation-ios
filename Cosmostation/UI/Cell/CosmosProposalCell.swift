@@ -71,16 +71,16 @@ class CosmosProposalCell: UITableViewCell {
                 self.myVoteImg.image = UIImage.init(named: "imgMyVoteWeight")
             } else {
                 let myVote = rawVote.votes[0]
-                if (myVote.option?.contains("OPTION_YES") == true) {
+                if (myVote.option?.uppercased().contains("YES") == true) {
                     self.myVoteImg.image = UIImage.init(named: "imgMyVoteYes")
                     return
-                } else if (myVote.option?.contains("OPTION_NO_WITH_VETO") == true) {
+                } else if (myVote.option?.uppercased().contains("VETO") == true) {
                     self.myVoteImg.image = UIImage.init(named: "imgMyVoteVeto")
                     return
-                } else if (myVote.option?.contains("OPTION_NO") == true) {
+                } else if (myVote.option?.uppercased().contains("NO") == true) {
                     self.myVoteImg.image = UIImage.init(named: "imgMyVoteNo")
                     return
-                } else if (myVote.option?.contains("OPTION_ABSTAIN") == true) {
+                } else if (myVote.option?.uppercased().contains("ABSTAIN") == true) {
                     self.myVoteImg.image = UIImage.init(named: "imgMyVoteAbstain")
                     return
                 } else {
