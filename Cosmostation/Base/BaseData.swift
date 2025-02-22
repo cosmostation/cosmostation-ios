@@ -773,7 +773,7 @@ extension BaseData {
         return last < now
     }
     
-    // set user last seleted swap ui for convenience
+    // set user last selected swap ui for convenience
     // [fromChainTag, fromChainDenom, toChainTag, toChainDenom]
     func setLastSwapSet(_ swapSet: [String]) {
         if let encoded = try? JSONEncoder().encode(swapSet) {
