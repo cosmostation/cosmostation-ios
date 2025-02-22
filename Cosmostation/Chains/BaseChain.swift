@@ -11,7 +11,7 @@ import SwiftyJSON
 import BigInt
 
 class BaseChain {
-    //account and commmon info
+    //account and common info
     var name: String!
     var tag: String!
     var logo1: String!
