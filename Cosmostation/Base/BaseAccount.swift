@@ -315,7 +315,7 @@ public enum PubKeyType: Int {
     case BTC_Taproot = 9
     case unknown = 99
     
-    var algorhythm: String? {
+    var algorithm: String? {
         switch self {
         case PubKeyType.ETH_Keccak256:
             return "keccak256"
