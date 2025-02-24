@@ -54,7 +54,7 @@ struct Artela_Evm_V1_GenesisAccount {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// address defines an ethereum hex formated address of an account
+  /// address defines an ethereum hex formatted address of an account
   var address: String = String()
 
   /// code defines the hex bytes of the account code.

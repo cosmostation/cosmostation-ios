@@ -287,7 +287,7 @@ class CosmosClassVC: BaseVC {
                     self.onClaimCommissionTx()
                 }
             }
-//            if !(selectedChain is ChainBeraEVM) {                                                                       //disbale for bera
+//            if !(selectedChain is ChainBeraEVM) {                                                                       //disable for bera
                 mainFab.addItem(title: "Compound All", image: UIImage(named: "iconFabCompounding")) { _ in
                     self.onClaimCompoundingTx()
                 }
