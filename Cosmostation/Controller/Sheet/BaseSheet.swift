@@ -823,4 +823,9 @@ public enum SheetType: Int {
     case SelectFinalityProvider
     case SelectUnStakeFinalityProvider
     case SelectBtcDelegatedAction
+    
+    case MoveBabylonDappDetail
+    case MoveDropDetail
+    case MoveDydx
+
 }

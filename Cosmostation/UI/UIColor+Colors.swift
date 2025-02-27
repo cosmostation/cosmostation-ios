@@ -51,6 +51,9 @@ extension UIColor {
     static var colorBtcTaproot: UIColor {
         UIColor(named: "_btcTaproot")!
     }
+    static var colorBabylon: UIColor {
+        UIColor.init(hexString: "#FF7B17")
+    }
 
     public convenience init?(hex: String) {
         let r, g, b: CGFloat

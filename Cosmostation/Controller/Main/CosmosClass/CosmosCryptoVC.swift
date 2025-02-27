@@ -425,6 +425,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
             dropBtn.animationSpeed = 1.3
             dropBtn.play()
             dropBtn.isHidden = false
+            dropBtn.tag = 0
     
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapDrop))
             tapGesture.cancelsTouchesInView = false
@@ -437,7 +438,8 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
             dropBtn.animationSpeed = 1.3
             dropBtn.play()
             dropBtn.isHidden = false
-    
+            dropBtn.tag = 1
+
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapDydx))
             tapGesture.cancelsTouchesInView = false
             dropBtn.addGestureRecognizer(tapGesture)
@@ -449,7 +451,8 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
             dropBtn.animationSpeed = 1.3
             dropBtn.play()
             dropBtn.isHidden = false
-            
+            dropBtn.tag = 2
+
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn))
             tapGesture.cancelsTouchesInView = false
             dropBtn.addGestureRecognizer(tapGesture)
@@ -470,11 +473,12 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
     }
     
     @objc func tapFloatingBtn() {
-        let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
-        dappDetail.dappType = .INTERNAL_URL
-        dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
-        dappDetail.modalPresentationStyle = .fullScreen
-        self.present(dappDetail, animated: true)
+        let dappPopUpView = EcosystemPopUpSheet(nibName: "EcosystemPopUpSheet", bundle: nil)
+        dappPopUpView.selectedChain = selectedChain
+        dappPopUpView.tag = dropBtn.tag
+        dappPopUpView.sheetDelegate = self
+        dappPopUpView.modalPresentationStyle = .overFullScreen
+        self.present(dappPopUpView, animated: true)
     }
 
 }
@@ -903,5 +907,17 @@ extension CosmosCryptoVC: BtcStakeSheetDelegate {
         stakingInfoVC.selectedChain = selectedChain
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(stakingInfoVC, animated: true)
+    }
+}
+
+extension CosmosCryptoVC: BaseSheetDelegate {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
+        if sheetType == .MoveBabylonDappDetail {
+            let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+            dappDetail.dappType = .INTERNAL_URL
+            dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
+            dappDetail.modalPresentationStyle = .fullScreen
+            self.present(dappDetail, animated: true)
+        }
     }
 }
