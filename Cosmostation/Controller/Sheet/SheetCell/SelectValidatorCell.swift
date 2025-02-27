@@ -216,4 +216,25 @@ class SelectValidatorCell: UITableViewCell {
         stakingLabel.isHidden = false
     }
 
+    func onBindFinalityProvider(_ baseChain: BaseChain, _ provider: FinalityProvider) {
+        logoImg.sd_setImage(with: URL(string: ResourceBase + baseChain.apiName + "/finality-provider/" + provider.btcPk + ".png"), placeholderImage: UIImage(named: "validatorDefault"))
+        nameLabel.text = provider.moniker
+        if provider.jailed {
+            jailedTag.isHidden = false
+        }
+        if let stakeDenom = baseChain.stakeDenom,
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+            let vpAmount = NSDecimalNumber(string: provider.votingPower).multiplying(byPowerOf10: -msAsset.decimals!)
+            vpLabel?.attributedText = WDP.dpAmount(vpAmount.stringValue, vpLabel!.font, 0)
+            
+            let commission = NSDecimalNumber(string: provider.commission).multiplying(byPowerOf10: 2) //
+            commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
+        }
+        vpTitle.isHidden = false
+        vpLabel.isHidden = false
+        
+        commTitle.isHidden = false
+        commLabel.isHidden = false
+        commPercentLabel.isHidden = false
+    }
 }

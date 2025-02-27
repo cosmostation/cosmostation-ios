@@ -255,6 +255,10 @@ class BaseChain {
                 _ = await getCosmosfetcher()?.fetchCosmosValidators()
             }
             
+            if let babylonBtcFetcher = (self as? ChainBabylon)?.getBabylonBtcFetcher() {
+                _ = await babylonBtcFetcher.fetchFinalityProvidersInfo()
+            }
+            
             DispatchQueue.main.async(execute: {
                 NotificationCenter.default.post(name: Notification.Name("FetchValidator"), object: self.tag, userInfo: nil)
             })

@@ -205,7 +205,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6F-Rj-Y20" customClass="LottieAnimationView" customModule="Lottie">
-                                <rect key="frame" x="317" y="550.33333333333337" width="60" height="60"/>
+                                <rect key="frame" x="317" y="484.33333333333326" width="60" height="60"/>
                                 <viewLayoutGuide key="safeArea" id="pzm-Lm-OET"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -224,7 +224,7 @@
                             <constraint firstItem="q8P-dV-bG4" firstAttribute="trailing" secondItem="O5d-SO-gxk" secondAttribute="trailing" id="MXh-eV-yVn"/>
                             <constraint firstItem="q8P-dV-bG4" firstAttribute="trailing" secondItem="b6F-Rj-Y20" secondAttribute="trailing" constant="16" id="bJ0-ur-hAm"/>
                             <constraint firstItem="q8P-dV-bG4" firstAttribute="leading" secondItem="O5d-SO-gxk" secondAttribute="leading" id="h5O-pt-U41"/>
-                            <constraint firstItem="q8P-dV-bG4" firstAttribute="bottom" secondItem="b6F-Rj-Y20" secondAttribute="bottom" constant="8" id="vzI-mP-vBg"/>
+                            <constraint firstItem="q8P-dV-bG4" firstAttribute="bottom" secondItem="b6F-Rj-Y20" secondAttribute="bottom" constant="74" id="vzI-mP-vBg"/>
                             <constraint firstItem="gmC-Ql-oRE" firstAttribute="centerX" secondItem="q8P-dV-bG4" secondAttribute="centerX" id="z0V-Kd-g5d"/>
                         </constraints>
                     </view>

@@ -68,6 +68,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "AssetCosmosClassCell", bundle: nil), forCellReuseIdentifier: "AssetCosmosClassCell")
+        tableView.register(UINib(nibName: "AssetBabylonCell", bundle: nil), forCellReuseIdentifier: "AssetBabylonCell")
         tableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
@@ -632,6 +633,41 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
             
+        } else if (selectedChain is ChainBabylon) {
+            if (indexPath.section == 0) {
+                if (searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom) {
+                    let cell = tableView.dequeueReusableCell(withIdentifier:"AssetBabylonCell") as! AssetBabylonCell
+                    cell.btcStakeDelegate = self
+                    cell.bindStakeAsset(selectedChain)
+                    return cell
+                    
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                    cell.bindCosmosClassAsset(selectedChain, searchNativeCoins[indexPath.row])
+                    return cell
+                }
+                
+            } else if (indexPath.section == 1) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                cell.bindCosmosClassAsset(selectedChain, searchIbcCoins[indexPath.row])
+                return cell
+                
+            } else if (indexPath.section == 2) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                cell.bindCosmosClassAsset(selectedChain, searchBridgedCoins[indexPath.row])
+                return cell
+                
+            } else if (indexPath.section == 3) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                cell.bindCosmosClassToken(selectedChain, searchMintscanCw20Tokens[indexPath.row])
+                return cell
+                
+            } else if (indexPath.section == 4) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                cell.bindEvmClassToken(selectedChain, searchMintscanErc20Tokens[indexPath.row])
+                return cell
+            }
+            
         } else {
             if (indexPath.section == 0) {
                 if (searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom) {
@@ -846,3 +882,26 @@ extension CosmosCryptoVC: UISearchBarDelegate {
 }
 
 
+extension CosmosCryptoVC: BtcStakeSheetDelegate {
+    func onBindBtcStakeSheet() {
+        let sheet = BtcStakeSheet(nibName: "BtcStakeSheet", bundle: nil)
+        sheet.btcStakeDelegate = self
+        sheet.selectedChain = selectedChain
+        onStartSheet(sheet, 320, 0.6)
+    }
+    
+    func onBindBtcStakingInfoVC() {
+        self.dismiss(animated: true)
+        
+        if let providerCount = (selectedChain as? ChainBabylon)?.getBabylonBtcFetcher()?.finalityProviders.count,
+           providerCount <= 0 {
+            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+            return
+        }
+
+        let stakingInfoVC = BtcStakingInfoVC(nibName: "BtcStakingInfoVC", bundle: nil)
+        stakingInfoVC.selectedChain = selectedChain
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
+    }
+}
