@@ -425,9 +425,9 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
             dropBtn.animationSpeed = 1.3
             dropBtn.play()
             dropBtn.isHidden = false
-            dropBtn.tag = 0
+            dropBtn.tag = SheetType.MoveDropDetail.rawValue
     
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapDrop))
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn))
             tapGesture.cancelsTouchesInView = false
             dropBtn.addGestureRecognizer(tapGesture)
             
@@ -438,40 +438,14 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
             dropBtn.animationSpeed = 1.3
             dropBtn.play()
             dropBtn.isHidden = false
-            dropBtn.tag = 1
-
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapDydx))
-            tapGesture.cancelsTouchesInView = false
-            dropBtn.addGestureRecognizer(tapGesture)
-
-        } else if (selectedChain.isSupportBTCStaking()) {
-            dropBtn.animation = LottieAnimation.named("btcStaking")
-            dropBtn.contentMode = .scaleAspectFit
-            dropBtn.loopMode = .loop
-            dropBtn.animationSpeed = 1.3
-            dropBtn.play()
-            dropBtn.isHidden = false
-            dropBtn.tag = 2
+            dropBtn.tag = SheetType.MoveDydx.rawValue
 
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn))
             tapGesture.cancelsTouchesInView = false
             dropBtn.addGestureRecognizer(tapGesture)
         }
     }
-    
-    @objc func tapDrop() {
-        let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
-        dappDetail.dappType = .INTERNAL_URL
-        dappDetail.dappUrl = URL(string: "https://app.drop.money/dashboard?referral_code=dropmaga")
-        dappDetail.modalPresentationStyle = .fullScreen
-        self.present(dappDetail, animated: true)
-    }
-    
-    @objc func tapDydx() {
-        guard let url = URL(string: "https://apps.apple.com/kr/app/dydx/id6475599596") else { return }
-        self.onShowSafariWeb(url)
-    }
-    
+
     @objc func tapFloatingBtn() {
         let dappPopUpView = EcosystemPopUpSheet(nibName: "EcosystemPopUpSheet", bundle: nil)
         dappPopUpView.selectedChain = selectedChain
@@ -912,12 +886,17 @@ extension CosmosCryptoVC: BtcStakeSheetDelegate {
 
 extension CosmosCryptoVC: BaseSheetDelegate {
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if sheetType == .MoveBabylonDappDetail {
+        if sheetType == .MoveDropDetail {
             let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
             dappDetail.dappType = .INTERNAL_URL
-            dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
+            dappDetail.dappUrl = URL(string: "https://app.drop.money/dashboard?referral_code=dropmaga")
             dappDetail.modalPresentationStyle = .fullScreen
             self.present(dappDetail, animated: true)
+
+        } else if sheetType == .MoveDydx {
+            guard let url = URL(string: "https://apps.apple.com/kr/app/dydx/id6475599596") else { return }
+            self.onShowSafariWeb(url)
+
         }
     }
 }

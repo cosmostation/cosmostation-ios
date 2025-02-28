@@ -21,7 +21,6 @@
                 <outlet property="ecosystemBtnLabel" destination="HJn-bO-R6l" id="8zm-AA-auT"/>
                 <outlet property="ecosystemButton" destination="nr2-X6-bzk" id="3I6-u3-zUK"/>
                 <outlet property="hideButton" destination="49K-Ff-yMI" id="mza-Qq-Ou3"/>
-                <outlet property="hideLabel" destination="6ib-fv-6jk" id="20b-N5-wtj"/>
                 <outlet property="imageView" destination="wHY-Oe-tTQ" id="USA-3s-wL3"/>
                 <outlet property="popUpView" destination="7wW-jA-ROK" id="Z0E-Sw-Cv0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -72,20 +71,6 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCj-qA-oow">
                             <rect key="frame" x="0.0" y="349.66666666666674" width="339" height="40"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49K-Ff-yMI">
-                                    <rect key="frame" x="12" y="10" width="20" height="20"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" secondItem="49K-Ff-yMI" secondAttribute="height" id="mAA-dL-7TV"/>
-                                    </constraints>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="iconUnCheckedBox"/>
-                                </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hide for the next 7 days" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ib-fv-6jk">
-                                    <rect key="frame" x="36" y="12.666666666666629" width="138.33333333333334" height="15"/>
-                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
-                                    <color key="textColor" name="_color01"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l23-LT-3Q4">
                                     <rect key="frame" x="294" y="12.666666666666629" width="33" height="15"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -105,19 +90,39 @@
                                         <action selector="closePopUpView:" destination="-1" eventType="touchUpInside" id="lNW-Dn-xvc"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49K-Ff-yMI">
+                                    <rect key="frame" x="12" y="10" width="190.33333333333334" height="20"/>
+                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="4" maxY="0.0"/>
+                                    <state key="normal" title="Hide for the next 7 days" image="iconUnCheckedBox">
+                                        <attributedString key="attributedTitle">
+                                            <fragment content="Hide for the next 7 days">
+                                                <attributes>
+                                                    <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <font key="NSFont" size="12" name="SpoqaHanSansNeo-Bold"/>
+                                                    <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration"/>
+                                    </state>
+                                    <buttonConfiguration key="configuration" style="plain" image="iconUnCheckedBox" title="Hide for the next 7 days" imagePadding="4">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                        <fontDescription key="titleFontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                    </buttonConfiguration>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.059999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstItem="6ib-fv-6jk" firstAttribute="top" secondItem="49K-Ff-yMI" secondAttribute="top" constant="2.5" id="4pP-b1-fkB"/>
                                 <constraint firstAttribute="bottom" secondItem="49K-Ff-yMI" secondAttribute="bottom" constant="10" id="D90-EP-OeV"/>
                                 <constraint firstAttribute="height" constant="40" id="HBx-Vs-fHF"/>
                                 <constraint firstAttribute="trailing" secondItem="l23-LT-3Q4" secondAttribute="trailing" constant="12" id="Mr4-l9-wi6"/>
                                 <constraint firstItem="l23-LT-3Q4" firstAttribute="top" secondItem="fCj-qA-oow" secondAttribute="top" constant="12.5" id="QFp-zN-pqg"/>
                                 <constraint firstAttribute="bottom" secondItem="l23-LT-3Q4" secondAttribute="bottom" constant="12.5" id="eBB-7p-KxF"/>
                                 <constraint firstItem="49K-Ff-yMI" firstAttribute="leading" secondItem="fCj-qA-oow" secondAttribute="leading" constant="12" id="kv8-pm-FcO"/>
-                                <constraint firstItem="6ib-fv-6jk" firstAttribute="bottom" secondItem="49K-Ff-yMI" secondAttribute="bottom" constant="-2.5" id="v95-JT-YXL"/>
                                 <constraint firstItem="49K-Ff-yMI" firstAttribute="top" secondItem="fCj-qA-oow" secondAttribute="top" constant="10" id="w43-EI-1Lg"/>
-                                <constraint firstItem="6ib-fv-6jk" firstAttribute="leading" secondItem="49K-Ff-yMI" secondAttribute="trailing" constant="4" id="yQN-GB-lDg"/>
                             </constraints>
                         </view>
                     </subviews>
