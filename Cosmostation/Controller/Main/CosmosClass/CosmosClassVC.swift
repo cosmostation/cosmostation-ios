@@ -217,8 +217,8 @@ class CosmosClassVC: BaseVC {
         tabbar.selectionIndicatorStrokeColor = .white
         tabbar.setTitleFont(.fontSize14Bold, for: .normal)
         tabbar.setTitleFont(.fontSize14Bold, for: .selected)
-        tabbar.setTitleColor(.color02, for: .normal)
-        tabbar.setTitleColor(.color02, for: .selected)
+        tabbar.setTitleColor(.color03, for: .normal)
+        tabbar.setTitleColor(.color01, for: .selected)
         tabbar.setSelectedItem(coinTabBar, animated: false)
         tabbar.tabBarDelegate = self
         tabbar.preferredLayoutStyle = .fixed
