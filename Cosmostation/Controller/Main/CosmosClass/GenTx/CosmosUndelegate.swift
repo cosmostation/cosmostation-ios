@@ -403,6 +403,14 @@ class CosmosUndelegate: BaseVC {
             }
             return Signer.genUndelegateMsg(unDelegateMsg)
             
+        } else if selectedChain is ChainBabylon {
+            let unDelegateMsg = Babylon_Epoching_V1_MsgWrappedUndelegate.with {
+                $0.msg.delegatorAddress = selectedChain.bechAddress!
+                $0.msg.validatorAddress = fromValidator!.operatorAddress
+                $0.msg.amount = toCoin!
+            }
+            return Signer.genUndelegateMsg(unDelegateMsg)
+            
         } else {
             let unDelegateMsg = Cosmos_Staking_V1beta1_MsgUndelegate.with {
                 $0.delegatorAddress = selectedChain.bechAddress!

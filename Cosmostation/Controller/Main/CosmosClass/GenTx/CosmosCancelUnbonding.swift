@@ -302,6 +302,16 @@ class CosmosCancelUnbonding: BaseVC {
             }
             return Signer.genCancelUnbondingMsg(toCancelMsg)
             
+        } else if selectedChain is ChainBabylon {
+            let toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = selectedChain.stakeDenom!; $0.amount = unbondingEntry.entry.balance }
+            let toCancelMsg = Babylon_Epoching_V1_MsgWrappedCancelUnbondingDelegation.with {
+                $0.msg.delegatorAddress = selectedChain.bechAddress!
+                $0.msg.validatorAddress = unbondingEntry.validatorAddress
+                $0.msg.creationHeight = unbondingEntry.entry.creationHeight
+                $0.msg.amount = toCoin
+            }
+            return Signer.genCancelUnbondingMsg(toCancelMsg)
+
         } else {
             let toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = selectedChain.stakeDenom!; $0.amount = unbondingEntry.entry.balance }
             let toCancelMsg = Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation.with {

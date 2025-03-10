@@ -498,7 +498,16 @@ class CosmosRedelegate: BaseVC {
                 $0.amount = toCoin!
             }
             return Signer.genRedelegateMsg(redelegate)
-
+            
+        } else if selectedChain is ChainBabylon {
+            let redelegate = Babylon_Epoching_V1_MsgWrappedBeginRedelegate.with {
+                $0.msg.delegatorAddress = selectedChain.bechAddress!
+                $0.msg.validatorSrcAddress = fromValidator!.operatorAddress
+                $0.msg.validatorDstAddress = toValidator!.operatorAddress
+                $0.msg.amount = toCoin!
+            }
+            return Signer.genRedelegateMsg(redelegate)
+            
         } else {
             let redelegate = Cosmos_Staking_V1beta1_MsgBeginRedelegate.with {
                 $0.delegatorAddress = selectedChain.bechAddress!

@@ -18,6 +18,8 @@ class CosmosCompounding: BaseVC {
     @IBOutlet weak var validatorsCntLabel: UILabel!
     @IBOutlet weak var rewardAmountLabel: UILabel!
     @IBOutlet weak var rewardDenomLabel: UILabel!
+    @IBOutlet weak var babylonRewardInfoView: UIView!
+    @IBOutlet weak var babylonRewardInfoLabel: UILabel!
     
     @IBOutlet weak var memoCardView: FixCardView!
     @IBOutlet weak var memoTitle: UILabel!
@@ -104,6 +106,10 @@ class CosmosCompounding: BaseVC {
         }
         if (claimableRewards.count > 1) {
             validatorsCntLabel.text = "+ " + String(claimableRewards.count - 1)
+            if selectedChain is ChainBabylon {
+                babylonRewardInfoLabel.text = "\(selectedChain.isTestnet ? "sBTC" : "BTC") Staking Reward is excluded from compounding"
+                babylonRewardInfoView.isHidden = false
+            }
         } else {
             validatorsCntLabel.isHidden = true
         }
@@ -278,7 +284,10 @@ class CosmosCompounding: BaseVC {
             
         } else if selectedChain is ChainZenrock {
             return Signer.genZenrockCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
-
+            
+        } else if selectedChain is ChainBabylon {
+            return Signer.genBabylonCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+            
         } else {
             return Signer.genCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
         }

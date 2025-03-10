@@ -418,6 +418,14 @@ class CosmosDelegate: BaseVC {
             }
             return Signer.genDelegateMsg(delegateMsg)
             
+        } else if selectedChain is ChainBabylon {
+            let delegateMsg = Babylon_Epoching_V1_MsgWrappedDelegate.with {
+                $0.msg.delegatorAddress = selectedChain.bechAddress!
+                $0.msg.validatorAddress = toValidator!.operatorAddress
+                $0.msg.amount = toCoin!
+            }
+            return Signer.genDelegateMsg(delegateMsg)
+            
         } else {
             let delegateMsg = Cosmos_Staking_V1beta1_MsgDelegate.with {
                 $0.delegatorAddress = selectedChain.bechAddress!
