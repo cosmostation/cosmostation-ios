@@ -447,12 +447,17 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
     }
 
     @objc func tapFloatingBtn() {
-        let dappPopUpView = EcosystemPopUpSheet(nibName: "EcosystemPopUpSheet", bundle: nil)
-        dappPopUpView.selectedChain = selectedChain
-        dappPopUpView.tag = dropBtn.tag
-        dappPopUpView.sheetDelegate = self
-        dappPopUpView.modalPresentationStyle = .overFullScreen
-        self.present(dappPopUpView, animated: true)
+        if BaseData.instance.getEcosystemPopUpActiveStatus(SheetType(rawValue: dropBtn.tag)!) {
+            let dappPopUpView = EcosystemPopUpSheet(nibName: "EcosystemPopUpSheet", bundle: nil)
+            dappPopUpView.selectedChain = selectedChain
+            dappPopUpView.tag = dropBtn.tag
+            dappPopUpView.sheetDelegate = self
+            dappPopUpView.modalPresentationStyle = .overFullScreen
+            self.present(dappPopUpView, animated: true)
+            
+        } else {
+            onSelectedSheet(SheetType(rawValue: dropBtn.tag)!, [:])
+        }
     }
 
 }

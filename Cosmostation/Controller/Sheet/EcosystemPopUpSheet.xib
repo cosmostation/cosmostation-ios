@@ -93,7 +93,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49K-Ff-yMI">
                                     <rect key="frame" x="12" y="10" width="190.33333333333334" height="20"/>
                                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
-                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="4" maxY="0.0"/>
                                     <state key="normal" title="Hide for the next 7 days" image="iconUnCheckedBox">
                                         <attributedString key="attributedTitle">
@@ -108,10 +108,14 @@
                                         </attributedString>
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration"/>
                                     </state>
-                                    <buttonConfiguration key="configuration" style="plain" image="iconUnCheckedBox" title="Hide for the next 7 days" imagePadding="4">
+                                    <buttonConfiguration key="configuration" style="plain" image="iconCheckboxOff" title="Hide for the next 7 days" imagePadding="4">
                                         <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
                                         <fontDescription key="titleFontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                        <color key="baseForegroundColor" name="_color01"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="onBindHideOption:" destination="-1" eventType="touchUpInside" id="boV-A0-KeZ"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.059999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -155,6 +159,7 @@
     </objects>
     <resources>
         <image name="iconArrowRight2" width="29" height="28"/>
+        <image name="iconCheckboxOff" width="24" height="24"/>
         <image name="iconUnCheckedBox" width="24" height="24"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -805,7 +805,43 @@ extension BaseData {
         return last < now
     }
     
-    
+    func setEcosystemPopUpTime(_ type: SheetType) {
+        var dayComponent = DateComponents()
+        dayComponent.day = 7
+
+        let theCalendar = Calendar.current
+        let nextDate = theCalendar.date(byAdding: dayComponent, to: Date())
+        let nextTime = nextDate?.millisecondsSince1970 ?? 0
+        var key = ""
+        if type == .MoveDropDetail {
+            key = KEY_DROP_POPUP
+            
+        } else if type == .MoveDydx {
+            key = KEY_DYDX_POPUP
+
+        } else if type == .MoveBabylonDappDetail {
+            key = KEY_BABYLON_POPUP
+        }
+        UserDefaults.standard.set(String(nextTime), forKey: key)
+    }
+
+    func getEcosystemPopUpActiveStatus(_ type: SheetType) -> Bool {
+        var key = ""
+
+        if type == .MoveDropDetail {
+            key = KEY_DROP_POPUP
+            
+        } else if type == .MoveDydx {
+            key = KEY_DYDX_POPUP
+
+        } else if type == .MoveBabylonDappDetail {
+            key = KEY_BABYLON_POPUP
+        }
+        
+        let last = Int64(UserDefaults.standard.string(forKey: key) ?? "0")!
+        let now = Date().millisecondsSince1970
+        return last < now
+    }
     
     func setInstallTime() {
         var dayComponent = DateComponents()
