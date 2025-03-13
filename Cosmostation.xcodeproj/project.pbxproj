@@ -1708,6 +1708,8 @@
 		799B4A872D2D157400998833 /* gno_bank.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A852D2D157000998833 /* gno_bank.pb.swift */; };
 		799B4A882D2D157400998833 /* gno_vm.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A862D2D157300998833 /* gno_vm.pb.swift */; };
 		799B4A8A2D2E744F00998833 /* ChainGno_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A892D2E744F00998833 /* ChainGno_T.swift */; };
+		79B7F3632D8177A500AA755B /* ChainStratosEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F3622D8177A500AA755B /* ChainStratosEVM.swift */; };
+		79B7F3662D827B5000AA755B /* stratos_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F3652D827B4F00AA755B /* stratos_crypto_v1_ethsecp256k1_keys.pb.swift */; };
 		79C5186F2CC76A8F00BC0E85 /* ChainKaia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5186E2CC76A8F00BC0E85 /* ChainKaia.swift */; };
 		79C518732CC8E08D00BC0E85 /* ChainJackal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C518722CC8E08D00BC0E85 /* ChainJackal.swift */; };
 		79C518752CC8E26100BC0E85 /* ChainSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C518742CC8E26100BC0E85 /* ChainSource.swift */; };
@@ -3154,6 +3156,8 @@
 		799B4A852D2D157000998833 /* gno_bank.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gno_bank.pb.swift; sourceTree = "<group>"; };
 		799B4A862D2D157300998833 /* gno_vm.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gno_vm.pb.swift; sourceTree = "<group>"; };
 		799B4A892D2E744F00998833 /* ChainGno_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainGno_T.swift; sourceTree = "<group>"; };
+		79B7F3622D8177A500AA755B /* ChainStratosEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStratosEVM.swift; sourceTree = "<group>"; };
+		79B7F3652D827B4F00AA755B /* stratos_crypto_v1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stratos_crypto_v1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
 		79C5186E2CC76A8F00BC0E85 /* ChainKaia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKaia.swift; sourceTree = "<group>"; };
 		79C518722CC8E08D00BC0E85 /* ChainJackal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainJackal.swift; sourceTree = "<group>"; };
 		79C518742CC8E26100BC0E85 /* ChainSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSource.swift; sourceTree = "<group>"; };
@@ -3552,6 +3556,7 @@
 				7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */,
 				79D556082CE2F2760023F1B9 /* ChainShidoEVM.swift */,
 				E15F81EF2D0B1D9C0069C533 /* ChainStoryEVM.swift */,
+				79B7F3622D8177A500AA755B /* ChainStratosEVM.swift */,
 				0485A50C2CDA473400DE1661 /* ChainTenetEVM.swift */,
 				045032352C1EEA9600235F6A /* ChainXplaEVM.swift */,
 				04983BF72C4E745B004DD391 /* ChainZetaEVM.swift */,
@@ -4320,6 +4325,7 @@
 				E122DC3D2A8A4701006D1E7B /* Tendermint */,
 				79FCA3A42C3F9E49001C17D0 /* Artela */,
 				792613642CD4B80800FAF47D /* Initia */,
+				79B7F3642D827B3B00AA755B /* Stratos */,
 			);
 			path = ProtoBuff;
 			sourceTree = "<group>";
@@ -4422,6 +4428,14 @@
 				799B4A862D2D157300998833 /* gno_vm.pb.swift */,
 			);
 			path = Gno;
+			sourceTree = "<group>";
+		};
+		79B7F3642D827B3B00AA755B /* Stratos */ = {
+			isa = PBXGroup;
+			children = (
+				79B7F3652D827B4F00AA755B /* stratos_crypto_v1_ethsecp256k1_keys.pb.swift */,
+			);
+			path = Stratos;
 			sourceTree = "<group>";
 		};
 		79DB1D4C2D5B4CE1002E1059 /* Nibiru */ = {
@@ -7196,6 +7210,7 @@
 				79813A4E2D3F4A990083A1F5 /* ChainBitCoin86_T.swift in Sources */,
 				04C8170E2BA98D75006B800A /* cosmos_gov_v1beta1_query.pb.swift in Sources */,
 				04A1A8022AC80AA50014EF92 /* TxAmountSheet.swift in Sources */,
+				79B7F3632D8177A500AA755B /* ChainStratosEVM.swift in Sources */,
 				79FCA3D62C3F9E92001C17D0 /* artela_fee_v1_tx.pb.swift in Sources */,
 				047842DE2AC8963100462F1C /* CosmosUndelegate.swift in Sources */,
 				047843A92AC991B300462F1C /* injective_auction_v1beta1_auction.pb.swift in Sources */,
@@ -7340,6 +7355,7 @@
 				047843E92AC991B300462F1C /* injective_oracle_v1beta1_proposal.pb.swift in Sources */,
 				0438A8002AE135B1006FA213 /* kava_cdp_v1beta1_cdp.pb.swift in Sources */,
 				047843692AC991B300462F1C /* injective_exchange_v1beta1_genesis.pb.swift in Sources */,
+				79B7F3662D827B5000AA755B /* stratos_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */,
 				04B7895F2ACAC9B100E9BE88 /* ibc_applications_transfer_v1_query.grpc.swift in Sources */,
 				047842D82AC87C1000462F1C /* CosmosTxResult.swift in Sources */,
 				E1DF776F2AB74ED50028BD51 /* CheckMenmonicVC.swift in Sources */,
