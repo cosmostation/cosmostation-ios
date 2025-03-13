@@ -1708,6 +1708,7 @@
 		799B4A872D2D157400998833 /* gno_bank.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A852D2D157000998833 /* gno_bank.pb.swift */; };
 		799B4A882D2D157400998833 /* gno_vm.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A862D2D157300998833 /* gno_vm.pb.swift */; };
 		799B4A8A2D2E744F00998833 /* ChainGno_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A892D2E744F00998833 /* ChainGno_T.swift */; };
+		79B7F35B2D8165D300AA755B /* ChainKopi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35A2D8165D300AA755B /* ChainKopi.swift */; };
 		79B7F3632D8177A500AA755B /* ChainStratosEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F3622D8177A500AA755B /* ChainStratosEVM.swift */; };
 		79B7F3662D827B5000AA755B /* stratos_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F3652D827B4F00AA755B /* stratos_crypto_v1_ethsecp256k1_keys.pb.swift */; };
 		79C5186F2CC76A8F00BC0E85 /* ChainKaia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5186E2CC76A8F00BC0E85 /* ChainKaia.swift */; };
@@ -3156,6 +3157,7 @@
 		799B4A852D2D157000998833 /* gno_bank.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gno_bank.pb.swift; sourceTree = "<group>"; };
 		799B4A862D2D157300998833 /* gno_vm.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gno_vm.pb.swift; sourceTree = "<group>"; };
 		799B4A892D2E744F00998833 /* ChainGno_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainGno_T.swift; sourceTree = "<group>"; };
+		79B7F35A2D8165D300AA755B /* ChainKopi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKopi.swift; sourceTree = "<group>"; };
 		79B7F3622D8177A500AA755B /* ChainStratosEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStratosEVM.swift; sourceTree = "<group>"; };
 		79B7F3652D827B4F00AA755B /* stratos_crypto_v1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stratos_crypto_v1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
 		79C5186E2CC76A8F00BC0E85 /* ChainKaia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKaia.swift; sourceTree = "<group>"; };
@@ -3620,6 +3622,7 @@
 				04D279EC2A67C96F00AF046A /* ChainKava459.swift */,
 				042296802A890C9B003C7630 /* ChainKava118.swift */,
 				045032BA2C1EFCE600235F6A /* ChainKi.swift */,
+				79B7F35A2D8165D300AA755B /* ChainKopi.swift */,
 				045032BC2C1EFCE700235F6A /* ChainKyve.swift */,
 				04F23A9C2C4258E70030F70F /* ChainLava.swift */,
 				045032BD2C1EFCE700235F6A /* ChainLike.swift */,
@@ -6789,6 +6792,7 @@
 				E122DC4E2A8A4712006D1E7B /* tendermint_types_block.pb.swift in Sources */,
 				E10B1DC62C2159040039283B /* KavaEarnWithdrawAction.swift in Sources */,
 				79FCA3C62C3F9E92001C17D0 /* artela_evm_v1_evm.pb.swift in Sources */,
+				79B7F35B2D8165D300AA755B /* ChainKopi.swift in Sources */,
 				E131F44E2AEEAAB800E760A0 /* CreateNameSheet.swift in Sources */,
 				045032EB2C1EFE5500235F6A /* ChainPersistence750.swift in Sources */,
 				E122DC602A8A4712006D1E7B /* tendermint_abci_types.pb.swift in Sources */,
