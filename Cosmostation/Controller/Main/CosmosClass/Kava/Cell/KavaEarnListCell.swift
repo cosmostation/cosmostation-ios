@@ -35,7 +35,7 @@ class KavaEarnListCell: UITableViewCell {
     func onBindEarnView(_ chain: BaseChain, _ deposit: Cosmos_Base_V1beta1_Coin) {
         let valOpAddress = deposit.denom.replacingOccurrences(of: "bkava-", with: "")
         if let validator = chain.getCosmosfetcher()?.cosmosValidators.filter({ $0.operatorAddress == valOpAddress }).first {
-            logoImg.sd_setImage(with: chain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            logoImg.setMonikerImg(chain, validator.operatorAddress)
             nameLabel.text = validator.description_p.moniker
             if (validator.jailed) {
                 jailedTag.isHidden = false

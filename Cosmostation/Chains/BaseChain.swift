@@ -649,7 +649,7 @@ extension BaseChain {
     }
     
     func monikerImg(_ opAddress: String) -> URL {
-        return URL(string: ResourceBase + apiName + "/moniker/" + opAddress + ".png") ?? URL(string: "")!
+        return URL(string: ResourceDevBase + "/assets/moniker/" + apiName + "/64/" + opAddress + ".png") ?? URL(string: "")!
     }
 }
 
