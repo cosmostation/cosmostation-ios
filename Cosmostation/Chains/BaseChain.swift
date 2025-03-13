@@ -754,6 +754,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainOptimism())                      //EVM
     result.append(ChainOrai())
     result.append(ChainOsmosis())
+    result.append(ChainPaloma())
     result.append(ChainPassage())
     result.append(ChainPersistence118())
     result.append(ChainPersistence750())
