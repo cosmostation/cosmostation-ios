@@ -20,8 +20,7 @@ class KeyFac {
     }
     
     static func getPriKeyFromSeed(_ pubKeyType: PubKeyType, _ seed: Data, _ path: String) -> Data? {
-        if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || 
-            pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
+        if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || pubKeyType == .STRATOS_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
             return getSecp256k1PriKey(seed, path)
             
         } else if (pubKeyType == .BTC_Legacy || pubKeyType == .BTC_Nested_Segwit ||
@@ -75,7 +74,7 @@ class KeyFac {
     
     
     static func getPubKeyFromPrivateKey(_ priKey: Data, _ pubKeyType: PubKeyType) -> Data? {
-        if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || 
+        if (pubKeyType == .COSMOS_Secp256k1 || pubKeyType == .ETH_Keccak256 || pubKeyType == .STRATOS_Keccak256 ||
             pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
             return getSecp256k1PubKey(priKey)
             
@@ -103,7 +102,7 @@ class KeyFac {
             let ripemd160 = RIPEMD160.hash(pubKey.sha256())
             return try! SegwitAddrCoder.shared.encode(prefix!, ripemd160)
             
-        } else if (pubKeyType == .ETH_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
+        } else if (pubKeyType == .ETH_Keccak256 || pubKeyType == .STRATOS_Keccak256 || pubKeyType == .INJECTIVE_Secp256k1 || pubKeyType == .BERA_Secp256k1 || pubKeyType == .ARTELA_Keccak256) {
             return Web3Core.Utilities.publicToAddressString(pubKey)!
             
         } else if (pubKeyType == .BTC_Legacy || pubKeyType == .BTC_Nested_Segwit || pubKeyType == .BTC_Native_Segwit || pubKeyType == .BTC_Taproot) {

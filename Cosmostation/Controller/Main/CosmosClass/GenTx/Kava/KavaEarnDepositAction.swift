@@ -115,7 +115,7 @@ class KavaEarnDepositAction: BaseVC {
     
     func onUpdateValidatorView() {
         monikerImg.image = UIImage(named: "validatorDefault")
-        monikerImg.sd_setImage(with: selectedChain.monikerImg(toValidator!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        monikerImg.setMonikerImg(selectedChain, toValidator!.operatorAddress)
         monikerLabel.text = toValidator!.description_p.moniker
         if (toValidator!.jailed) {
             jailedTag.isHidden = false

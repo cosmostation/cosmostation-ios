@@ -32,7 +32,7 @@ class OktValidatorCell: UITableViewCell {
     }
     
     func bindOktValidator( _ chain: BaseChain, _ validator: JSON) {
-        logoImg.sd_setImage(with: chain.monikerImg(validator["operator_address"].stringValue), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(chain, validator["operator_address"].stringValue)
         nameLabel.text = validator["description"]["moniker"].stringValue
         
         let vp = validator["delegator_shares"].doubleValue

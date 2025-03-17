@@ -34,7 +34,7 @@ class SelectOktValidatorCell: UITableViewCell {
     
 
     func onBindSelectValidator( _ chain: BaseChain, _ validatorInfo: JSON, _ selectedList: [JSON]) {
-        logoImg.sd_setImage(with: chain.monikerImg(validatorInfo["operator_address"].stringValue), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(chain, validatorInfo["operator_address"].stringValue)
         nameLabel.text = validatorInfo["description"]["moniker"].stringValue
         
         if (validatorInfo["jailed"].boolValue) {

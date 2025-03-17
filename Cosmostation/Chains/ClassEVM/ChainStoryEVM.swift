@@ -24,7 +24,7 @@ class ChainStoryEVM: BaseChain {
         coinSymbol = "IP"
         coinGeckoId = ""
         coinLogo = "tokenIp"
-        evmRpcURL = ""
+        evmRpcURL = "https://mainnet.storyrpc.io"
     }
     
 //    override func fetchBalances() {

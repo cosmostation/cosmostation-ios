@@ -40,7 +40,7 @@ class StakeDelegateCell: UITableViewCell {
     }
     
     func onBindMyDelegate(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator, _ delegation: Cosmos_Staking_V1beta1_DelegationResponse) {
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
         nameLabel.text = validator.description_p.moniker
         
         guard let cosmosFetcher = baseChain.getCosmosfetcher() else { return }
@@ -102,7 +102,7 @@ class StakeDelegateCell: UITableViewCell {
     }
     
     func onBindInitiaMyDelegate(_ baseChain: BaseChain, _ validator: Initia_Mstaking_V1_Validator, _ delegation: Initia_Mstaking_V1_DelegationResponse) {
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
         nameLabel.text = validator.description_p.moniker
         
         guard let fetcher = (baseChain as? ChainInitia)?.getInitiaFetcher() else { return }
@@ -164,7 +164,7 @@ class StakeDelegateCell: UITableViewCell {
     
     
     func onBindZenrockMyDelegate(_ baseChain: BaseChain, _ validator: Zrchain_Validation_ValidatorHV, _ delegation: Zrchain_Validation_DelegationResponse) {
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
         nameLabel.text = validator.description_p.moniker
         
         guard let fetcher = (baseChain as? ChainZenrock)?.getZenrockFetcher() else { return }

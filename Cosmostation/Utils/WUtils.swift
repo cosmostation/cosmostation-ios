@@ -328,3 +328,14 @@ extension Cosmos_Base_V1beta1_DecCoin {
 enum EmptyDataError: Error {
     case error(message: String)
 }
+
+
+extension UIImageView {
+    func setMonikerImg(_ chain: BaseChain, _ opAddress: String) {
+        if chain.getChainListParam()["reported_validators"].arrayValue.contains(where: { $0.stringValue == opAddress }) {
+            self.image = UIImage(named: "iconFake")
+        } else {
+            self.sd_setImage(with: chain.monikerImg(opAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        }
+    }
+}
