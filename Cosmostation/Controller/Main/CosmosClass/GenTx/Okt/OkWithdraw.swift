@@ -44,7 +44,7 @@ class OkWithdraw: BaseVC {
     var selectedChain: ChainOktEVM!
     var oktFetcher: OktFetcher!
     var stakeDenom: String!
-    var tokenInfo: JSON!
+    var msAsset: MintscanAsset!
     var availableAmount = NSDecimalNumber.zero
     var toWithdrawAmount = NSDecimalNumber.zero
     var txMemo = ""
@@ -58,11 +58,10 @@ class OkWithdraw: BaseVC {
         baseAccount = BaseData.instance.baseAccount
         oktFetcher = selectedChain.getOktfetcher()
         stakeDenom = selectedChain.stakeDenom
+        msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom)
         
-        tokenInfo = oktFetcher.oktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
-        let original_symbol = tokenInfo["original_symbol"].stringValue
-        toWithdrawAssetImg.sd_setImage(with: ChainOktEVM.assetImg(original_symbol), placeholderImage: UIImage(named: "tokenDefault"))
-        toWithdrawSymbolLabel.text = original_symbol.uppercased()
+        toWithdrawAssetImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+        toWithdrawSymbolLabel.text = msAsset.symbol?.uppercased()
         availableAmount = oktFetcher.oktDepositAmount()
         
         toWithdrawAssetCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
@@ -81,7 +80,7 @@ class OkWithdraw: BaseVC {
     @objc func onClickAmount() {
         let amountSheet = TxAmountLegacySheet(nibName: "TxAmountLegacySheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
-        amountSheet.tokenInfo = tokenInfo
+        amountSheet.tokenSymbol = msAsset.symbol?.uppercased()
         amountSheet.availableAmount = availableAmount
         if (toWithdrawAmount != NSDecimalNumber.zero) {
             amountSheet.existedAmount = toWithdrawAmount
@@ -102,7 +101,7 @@ class OkWithdraw: BaseVC {
             
         } else {
             toWithdrawAmount = NSDecimalNumber(string: amount)
-            toWithdrawDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
+            toWithdrawDenomLabel.text = msAsset.symbol?.uppercased()
             toWithdrawAmountLabel?.attributedText = WDP.dpAmount(toWithdrawAmount.stringValue, toWithdrawAmountLabel!.font, 18)
             toWithdrawAssetHint.isHidden = true
             toWithdrawAmountLabel.isHidden = false
@@ -138,7 +137,7 @@ class OkWithdraw: BaseVC {
     }
     
     func onUpdateFeeView() {
-        feeSelectImg.sd_setImage(with: ChainOktEVM.assetImg(stakeDenom), placeholderImage: UIImage(named: "tokenDefault"))
+        feeSelectImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         feeSelectLabel.text = stakeDenom.uppercased()
         
         let existCnt = oktFetcher.oktDeposits["validator_address"].arrayValue.count

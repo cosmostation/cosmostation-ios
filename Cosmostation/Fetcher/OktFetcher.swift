@@ -17,7 +17,6 @@ class OktFetcher: CosmosFetcher {
     
     var oktDeposits = JSON()
     var oktWithdaws = JSON()
-    var oktTokens = Array<JSON>()
     var oktValidators = Array<JSON>()
     
     override func fetchCosmosBalances() async -> Bool {
@@ -44,23 +43,18 @@ class OktFetcher: CosmosFetcher {
         oktAccountInfo = JSON()
         oktDeposits = JSON()
         oktWithdaws = JSON()
-        oktTokens.removeAll()
 
         do {
             if let nodeInfo = try await fetchNodeInfo(),
                let balance = try await fetchBalance(),
                let accountInfo = try await fetchAccountInfo(chain.bechAddress!),
                let okDeposit = try await fetchOktDeposited(chain.bechAddress!),
-               let okWithdraw = try await fetchOktWithdraw(chain.bechAddress!),
-               let okTokens = try await fetchOktTokens() {
+               let okWithdraw = try await fetchOktWithdraw(chain.bechAddress!) {
                 self.oktNodeInfo = nodeInfo
                 self.cosmosBalances = balance
                 self.oktAccountInfo = accountInfo
                 self.oktDeposits = okDeposit
                 self.oktWithdaws = okWithdraw
-                okTokens["data"].array?.forEach({ value in
-                    self.oktTokens.append(value)
-                })
             }
             return true
         } catch {
@@ -161,11 +155,6 @@ extension OktFetcher {
     
     func fetchOktWithdraw(_ address: String) async throws -> JSON? {
         let url = getLcd() + "staking/delegators/" + address + "/unbonding_delegations"
-        return try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
-    }
-    
-    func fetchOktTokens() async throws -> JSON? {
-        let url = getLcd() + "tokens"
         return try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     
