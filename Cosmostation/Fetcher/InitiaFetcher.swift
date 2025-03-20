@@ -50,7 +50,13 @@ class InitiaFetcher: CosmosFetcher {
             initiaValidators.append(contentsOf: bonded ?? [])
             initiaValidators.append(contentsOf: unbonding ?? [])
             initiaValidators.append(contentsOf: unbonded ?? [])
-                        
+            
+            initiaValidators = initiaValidators.map { validator in
+                var updatedValidator = validator
+                updatedValidator.description_p.moniker = validator.description_p.moniker.trimmingCharacters(in: .whitespaces)
+                return updatedValidator
+            }
+            
             initiaValidators.sort {
                 if ($0.description_p.moniker == "Cosmostation") { return true }
                 if ($1.description_p.moniker == "Cosmostation") { return false }

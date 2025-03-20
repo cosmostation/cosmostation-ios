@@ -138,6 +138,12 @@ class CosmosFetcher {
             cosmosValidators.append(contentsOf: unbonding ?? [])
             cosmosValidators.append(contentsOf: unbonded ?? [])
             
+            cosmosValidators = cosmosValidators.map { validator in
+                var updatedValidator = validator
+                updatedValidator.description_p.moniker = validator.description_p.moniker.trimmingCharacters(in: .whitespaces)
+                return updatedValidator
+            }
+            
             cosmosValidators.sort {
                 if ($0.description_p.moniker == "Cosmostation") { return true }
                 if ($1.description_p.moniker == "Cosmostation") { return false }

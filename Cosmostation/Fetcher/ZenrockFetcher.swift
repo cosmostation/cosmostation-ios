@@ -51,7 +51,13 @@ class ZenrockFetcher: CosmosFetcher {
             validators.append(contentsOf: bonded ?? [])
             validators.append(contentsOf: unbonding ?? [])
             validators.append(contentsOf: unbonded ?? [])
-                        
+            
+            validators = validators.map { validator in
+                var updatedValidator = validator
+                updatedValidator.description_p.moniker = validator.description_p.moniker.trimmingCharacters(in: .whitespaces)
+                return updatedValidator
+            }
+            
             validators.sort {
                 if ($0.description_p.moniker == "Cosmostation") { return true }
                 if ($1.description_p.moniker == "Cosmostation") { return false }
