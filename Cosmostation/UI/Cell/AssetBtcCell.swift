@@ -25,6 +25,12 @@ class AssetBtcCell: UITableViewCell {
     
     @IBOutlet weak var availableTitle: UILabel!
     @IBOutlet weak var availableLabel: UILabel!
+    @IBOutlet weak var stakedView: UIView!
+    @IBOutlet weak var stakedLabel: UILabel!
+    @IBOutlet weak var unstakingView: UIView!
+    @IBOutlet weak var unstakingLabel: UILabel!
+    @IBOutlet weak var withdrawableView: UIView!
+    @IBOutlet weak var withdrawableLabel: UILabel!
     @IBOutlet weak var pendingTitle: UILabel!
     @IBOutlet weak var pendingLabel: UILabel!
 
@@ -53,21 +59,32 @@ class AssetBtcCell: UITableViewCell {
     
     
     func bindBtcAsset(_ baseChain: BaseChain) {
+        stakedView.isHidden = !baseChain.isSupportBTCStaking()
+        unstakingView.isHidden = !baseChain.isSupportBTCStaking()
+        withdrawableView.isHidden = !baseChain.isSupportBTCStaking()
+        
         symbolLabel.text = baseChain.coinSymbol
         coinImg.image =  UIImage.init(named: baseChain.coinLogo)
         
         WDP.dpPrice(baseChain.coinGeckoId, priceCurrencyLabel, priceLabel)
         WDP.dpPriceChanged(baseChain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
-        
-        if let btcFetcher = (baseChain as? ChainBitCoin86)?.getBtcFetcher() {
+                
+        if let btcFetcher = (baseChain as? ChainBitCoin86)?.getBtcFetcher(),
+           let babylonBtcFetcher = (baseChain as? ChainBitCoin86)?.getBabylonBtcFetcher() {
             let msPrice = BaseData.instance.getPrice(baseChain.coinGeckoId)
             let avaibaleAmount = btcFetcher.btcBalances.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
+            let stakedAmount = babylonBtcFetcher.btcStakingAmount.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
+            let unstakingAmount = babylonBtcFetcher.btcUnstakingAmount.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
+            let withdrawableAmount = babylonBtcFetcher.btcWithdrawableAmount.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
             let pendingInputAmount = btcFetcher.btcPendingInput.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
-            let totalAmount = avaibaleAmount.adding(pendingInputAmount)
+            let totalAmount = avaibaleAmount.adding(pendingInputAmount).adding(stakedAmount)
             let value = totalAmount.multiplying(by: msPrice, withBehavior: handler6)
             
             amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 6)
             availableLabel?.attributedText = WDP.dpAmount(avaibaleAmount.stringValue, availableLabel!.font, 6)
+            stakedLabel.attributedText = WDP.dpAmount(stakedAmount.stringValue, stakedLabel.font, 6)
+            unstakingLabel.attributedText = WDP.dpAmount(unstakingAmount.stringValue, unstakingLabel.font, 6)
+            withdrawableLabel.attributedText = WDP.dpAmount(withdrawableAmount.stringValue, withdrawableLabel.font, 6)
             pendingLabel?.attributedText = WDP.dpAmount(pendingInputAmount.stringValue, pendingLabel!.font, 6)
             WDP.dpValue(value, valueCurrencyLabel, valueLabel)
             
