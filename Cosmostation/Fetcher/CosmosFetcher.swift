@@ -714,14 +714,23 @@ extension CosmosFetcher {
     }
     
     func fetchLastBlock() async throws -> Int64? {
-        if (getEndpointType() == .UseGRPC) {
-            let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
-            return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: getClient()).getLatestBlock(req, callOptions: getCallOptions()).response.get().block.header.height
-        } else {
-            let url = getLcd() + "cosmos/base/tendermint/v1beta1/blocks/latest"
+        if chain is ChainCelestia {
+            let url = chain.lcdUrl + "cosmos/base/tendermint/v1beta1/blocks/latest"
             let response = try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
             if let height = response?["block"]["header"]["height"].string {
                 return Int64(height)!
+            }
+            
+        } else {
+            if (getEndpointType() == .UseGRPC) {
+                let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
+                return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: getClient()).getLatestBlock(req, callOptions: getCallOptions()).response.get().block.header.height
+            } else {
+                let url = getLcd() + "cosmos/base/tendermint/v1beta1/blocks/latest"
+                let response = try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
+                if let height = response?["block"]["header"]["height"].string {
+                    return Int64(height)!
+                }
             }
         }
         return nil
