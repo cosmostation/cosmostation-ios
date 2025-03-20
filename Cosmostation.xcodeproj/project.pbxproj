@@ -5953,6 +5953,7 @@
 				04A68C252ABDA3350041FA13 /* SelectSwapAssetCell.xib in Resources */,
 				04F4061729ED119800CD88E4 /* Init.storyboard in Resources */,
 				047F69392BE5FBCE00C3BC34 /* Portfolio2Cell.xib in Resources */,
+				790970212D7E895500DEB959 /* BabylonStakingInfoVC.xib in Resources */,
 				044222562B96F4370063F031 /* SelectDisplayTokenCell.xib in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
 				182CCB832BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy in Resources */,
