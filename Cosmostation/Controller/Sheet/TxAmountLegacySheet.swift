@@ -22,7 +22,7 @@ class TxAmountLegacySheet: BaseVC, UITextFieldDelegate {
     
     var sheetDelegate: LegacyAmountSheetDelegate?
     var selectedChain: BaseChain!
-    var tokenInfo: JSON!
+    var tokenSymbol: String!
     var availableAmount: NSDecimalNumber!
     var existedAmount: NSDecimalNumber?
     
@@ -56,7 +56,7 @@ class TxAmountLegacySheet: BaseVC, UITextFieldDelegate {
     func onUpdateView() {
         if (selectedChain.name == "OKT") {
             decimal = 18
-            availableDenom.text = tokenInfo["original_symbol"].stringValue.uppercased()
+            availableDenom.text = tokenSymbol
             availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 18)
         }
     }

@@ -96,12 +96,10 @@ class AssetCell: UITableViewCell {
     
     func bindOktAsset(_ oktChain: ChainOktEVM, _ coin: JSON) {
         if let oktFetcher = oktChain.oktFetcher,
-           let token = oktFetcher.oktTokens.filter({ $0["symbol"].string == coin["denom"].string }).first {
-            let original_symbol = token["original_symbol"].stringValue
-            
-            symbolLabel.text = original_symbol.uppercased()
-            priceCurrencyLabel.text = token["description"].string
-            coinImg.sd_setImage(with: ChainOktEVM.assetImg(original_symbol), placeholderImage: UIImage(named: "tokenDefault"))
+           let msAsset = BaseData.instance.getAsset(oktChain.apiName, coin["denom"].stringValue) {
+            symbolLabel.text = msAsset.symbol?.uppercased()
+            priceCurrencyLabel.text = msAsset.description
+            coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
             
             let availableAmount = oktFetcher.oktBalanceAmount(coin["denom"].stringValue)
             amountLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, amountLabel!.font, 18)
