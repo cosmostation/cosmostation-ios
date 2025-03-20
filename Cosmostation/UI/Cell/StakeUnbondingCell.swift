@@ -50,7 +50,7 @@ class StakeUnbondingCell: UITableViewCell {
             unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
             
             let completionTime = unbonding.entry.completionTime
-            finishTimeLabel.text = WDP.protoDpTime(completionTime.seconds)
+            finishTimeLabel.text = WDP.dpDateWithSimpleTime(WUtils.timeInt64ToDate(completionTime.seconds * 1000))
             finishGapLabel.text = WDP.protoDpTimeGap(completionTime.seconds)
         }
     }
@@ -72,7 +72,7 @@ class StakeUnbondingCell: UITableViewCell {
             unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
             
             let completionTime = unbonding.entry.completionTime
-            finishTimeLabel.text = WDP.protoDpTime(completionTime.seconds)
+            finishTimeLabel.text = WDP.dpDateWithSimpleTime(WUtils.timeInt64ToDate(completionTime.seconds * 1000))
             finishGapLabel.text = WDP.protoDpTimeGap(completionTime.seconds)
         }
     }
@@ -94,9 +94,34 @@ class StakeUnbondingCell: UITableViewCell {
             unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
             
             let completionTime = unbonding.entry.completionTime
-            finishTimeLabel.text = WDP.protoDpTime(completionTime.seconds)
+            finishTimeLabel.text = WDP.dpDateWithSimpleTime(WUtils.timeInt64ToDate(completionTime.seconds * 1000))
             finishGapLabel.text = WDP.protoDpTimeGap(completionTime.seconds)
         }
     }
 
+    func onBindBabylonUnbonding(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator, _ unbonding: UnbondingEntry) {
+        
+        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        nameLabel.text = validator.description_p.moniker
+        if (validator.jailed) {
+            jailedTag.isHidden = false
+        } else {
+            guard let cosmosFetcher = baseChain.getCosmosfetcher() else { return }
+            inactiveTag.isHidden = cosmosFetcher.isActiveValidator(validator)
+        }
+        
+        if let stakeDenom = baseChain.stakeDenom,
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+            let unbondingAmount = NSDecimalNumber(string: unbonding.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
+            unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
+            
+            let daysToSubtract: Int64 = Int64(baseChain.getChainParam()["params"]["staking_params"]["params"]["unbonding_time"].stringValue.filter({ $0.isNumber })) ?? 0
+            let unbondedTime = unbonding.entry.completionTime.seconds - daysToSubtract
+            let unbondingAverageTime: Int64 = 24 * 60 * 60
+            let completionTime = unbondedTime + unbondingAverageTime
+            
+            finishTimeLabel.text = WDP.dpDateWithSimpleTime(WUtils.timeInt64ToDate(completionTime * 1000))
+            finishGapLabel.text = "Est. " + WDP.dpTimeUntil(completionTime)
+        }
+    }
 }
