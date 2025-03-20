@@ -38,6 +38,8 @@ class AssetBabylonCell: UITableViewCell {
     @IBOutlet weak var btcRewardLabel: UILabel!
     
     @IBOutlet weak var btcStakeView: UIView!
+    @IBOutlet weak var btcCoinImg: UIImageView!
+    @IBOutlet weak var btcStakeTitle: UILabel!
     
     var btcStakeDelegate: BtcStakeSheetDelegate?
     
@@ -73,6 +75,9 @@ class AssetBabylonCell: UITableViewCell {
     }
 
     func bindStakeAsset(_ baseChain: BaseChain) {
+        btcCoinImg.image = baseChain.isTestnet ? UIImage(named: "tokenBtc_signet") : UIImage(named: "tokenBtc")
+        btcStakeTitle.text = String(format: NSLocalizedString("str_staked_coin_status", comment: ""), baseChain.isTestnet ? "sBTC" : "BTC")
+        btcRewardTitle.text = "\(baseChain.isTestnet ? "sBTC" : "BTC") Staking Reward"
         let stakeDenom = baseChain.stakeDenom!
         if let cosmosFetcher = baseChain.getCosmosfetcher(),
            let babylonBtcFetcher = (baseChain as? ChainBabylon)?.getBabylonBtcFetcher(),
@@ -100,31 +105,21 @@ class AssetBabylonCell: UITableViewCell {
             stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
             
             let unStakingAmount = cosmosFetcher.unbondingAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
-            if (unStakingAmount != NSDecimalNumber.zero) {
-                unstakingLayer.isHidden = false
-                unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
-            }
+            unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
             
             let rewardAmount = cosmosFetcher.rewardAmountSum(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-            if (cosmosFetcher.rewardAllCoins().count > 0) {
-                rewardLayer.isHidden = false
-                if (cosmosFetcher.rewardOtherDenomTypeCnts() > 0) {
-                    rewardTitle.text = "Reward + " + String(cosmosFetcher.rewardOtherDenomTypeCnts())
-                } else {
-                    rewardTitle.text = "Reward"
-                }
-                rewardLabel?.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardLabel!.font, 6)
-            }
+            rewardLabel?.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardLabel!.font, 6)
             
-            //TODO: BTC reward
-            let btcStakedReward = babylonBtcFetcher.btcStakedReward.multiplying(byPowerOf10: -msAsset.decimals!)
-            if btcStakedReward != .zero {
-                btcRewardLayer.isHidden = false
-                btcRewardLabel.attributedText = WDP.dpAmount(btcStakedReward.stringValue, btcRewardLabel!.font, 6)
+            let btcStakedRewardAmount = babylonBtcFetcher.btcStakingRewardAmountSum(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+            if babylonBtcFetcher.rewardOtherDenomTypeCnts() > 0 {
+                btcRewardTitle.text = "sBTC Staking Reward + " + String(babylonBtcFetcher.rewardOtherDenomTypeCnts())
+            } else {
+                btcRewardTitle.text = "sBTC Staking Reward"
             }
+            btcRewardLabel.attributedText = WDP.dpAmount(btcStakedRewardAmount.stringValue, btcRewardLabel!.font, 6)
             
             let totalAmount = availableAmount.adding(stakingAmount)
-                .adding(unStakingAmount).adding(rewardAmount)
+                .adding(unStakingAmount).adding(rewardAmount).adding(btcStakedRewardAmount)
             amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 6)
             
             if (BaseData.instance.getHideValue()) {
@@ -140,5 +135,4 @@ class AssetBabylonCell: UITableViewCell {
 
 protocol BtcStakeSheetDelegate {
     func onBindBtcStakeSheet()
-    func onBindBtcStakingInfoVC()
 }

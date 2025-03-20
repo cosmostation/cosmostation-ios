@@ -346,6 +346,17 @@ extension CosmosFetcher {
                 }
             }
         })
+        if let babylonBtcFetcher = (chain as? ChainBabylon)?.getBabylonBtcFetcher() {
+            let btcStakingRewards = babylonBtcFetcher.btcStakedRewards
+            btcStakingRewards.forEach { reward in
+                if let index = cosmosRewardCoins?.firstIndex(where: { $0.denom == reward.denom }) {
+                    let amount = NSDecimalNumber(string: cosmosRewardCoins?[index].amount)
+                    cosmosRewardCoins?[index].amount = amount.adding(NSDecimalNumber(string: reward.amount)).stringValue
+                } else {
+                    cosmosRewardCoins?.append(Cosmos_Base_V1beta1_Coin(reward.denom, reward.amount))
+                }
+            }
+        }
         return cosmosRewardCoins!
     }
     
