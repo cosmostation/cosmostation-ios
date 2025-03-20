@@ -181,8 +181,8 @@ class CosmosFetcher {
                 .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(commissionValue(denom, usd))
             
         } else {
-            return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
-                .adding(commissionValue(denom, usd))
+            return balanceValue(denom, usd).adding(vestingValue(denom, usd))//.adding(rewardValue(denom, usd))
+                //.adding(commissionValue(denom, usd))
         }
     }
     
