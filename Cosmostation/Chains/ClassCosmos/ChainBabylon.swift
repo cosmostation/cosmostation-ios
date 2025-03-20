@@ -10,6 +10,7 @@ import Foundation
 
 class ChainBabylon: BaseChain {
     var babylonBtcFetcher: BabylonBTCFetcher?
+    var babylonFetcher: BabylonFetcher?
     
     override init() {
         super.init()
@@ -87,6 +88,11 @@ class ChainBabylon: BaseChain {
         return babylonBtcFetcher
     }
     
+    func getBabylonFetcher() -> BabylonFetcher? {
+        if (babylonFetcher != nil) { return babylonFetcher }
+        babylonFetcher = BabylonFetcher(self)
+        
+        return babylonFetcher
     }
 }
 
