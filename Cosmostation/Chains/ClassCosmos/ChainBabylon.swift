@@ -10,9 +10,6 @@ import Foundation
 
 class ChainBabylon: BaseChain {
     var babylonBtcFetcher: BabylonBTCFetcher?
-    var btcPriKey: Data?
-    var btcPubKey: String?
-    var btcAddress: String?
     
     override init() {
         super.init()
@@ -78,7 +75,6 @@ class ChainBabylon: BaseChain {
                                coinsCnt))
             }
             DispatchQueue.main.async(execute: {
-                print("", self.tag, " FetchData post")
                 NotificationCenter.default.post(name: Notification.Name("FetchData"), object: self.tag, userInfo: nil)
             })
         }
@@ -91,19 +87,6 @@ class ChainBabylon: BaseChain {
         return babylonBtcFetcher
     }
     
-    override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
-        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
-        btcPriKey = KeyFac.getPriKeyFromSeed(.BTC_Taproot, seed, "m/86'/0'/0'/0/X".replacingOccurrences(of: "X", with: lastPath))
-        setInfoWithPrivateKey(privateKey!)
     }
-    
-    override func setInfoWithPrivateKey(_ priKey: Data) {
-        privateKey = priKey
-        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        btcPubKey = KeyFac.getPubKeyFromPrivateKey(btcPriKey ?? privateKey!, .BTC_Taproot)?.toHexString()
-        bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
-        mainAddress = KeyFac.getAddressFromPubKey(Data(hex: btcPubKey!), .BTC_Taproot,  nil, "mainnet")
-    }
-
 }
 

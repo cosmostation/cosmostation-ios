@@ -28,19 +28,4 @@ class ChainBabylon_T: ChainBabylon {
         grpcHost = "grpc-office-babylon.cosmostation.io"
         lcdUrl = "https://lcd-office.cosmostation.io/babylon-testnet/"
     }
-    
-    
-    override func setInfoWithSeed(_ seed: Data, _ lastPath: String) {
-        privateKey = KeyFac.getPriKeyFromSeed(accountKeyType.pubkeyType, seed, getHDPath(lastPath))
-        btcPriKey = KeyFac.getPriKeyFromSeed(.BTC_Taproot, seed, "m/86'/1'/0'/0/X".replacingOccurrences(of: "X", with: lastPath))
-        setInfoWithPrivateKey(privateKey!)
-    }
-    
-    override func setInfoWithPrivateKey(_ priKey: Data) {
-        privateKey = priKey
-        publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        btcPubKey = KeyFac.getPubKeyFromPrivateKey(btcPriKey ?? privateKey!, .BTC_Taproot)?.toHexString()
-        bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
-        mainAddress = KeyFac.getAddressFromPubKey(Data(hex: btcPubKey!), .BTC_Taproot,  nil, "testnet")
-    }
 }
