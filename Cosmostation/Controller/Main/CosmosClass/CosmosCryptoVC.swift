@@ -443,6 +443,19 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn))
             tapGesture.cancelsTouchesInView = false
             dropBtn.addGestureRecognizer(tapGesture)
+            
+        } else if (selectedChain is ChainBabylon) {
+            dropBtn.animation = LottieAnimation.named("btcStaking")
+            dropBtn.contentMode = .scaleAspectFit
+            dropBtn.loopMode = .loop
+            dropBtn.animationSpeed = 1.3
+            dropBtn.play()
+            dropBtn.isHidden = false
+            dropBtn.tag = SheetType.MoveBabylonDappDetail.rawValue
+
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn))
+            tapGesture.cancelsTouchesInView = false
+            dropBtn.addGestureRecognizer(tapGesture)
         }
     }
 
@@ -868,24 +881,8 @@ extension CosmosCryptoVC: UISearchBarDelegate {
 extension CosmosCryptoVC: BtcStakeSheetDelegate {
     func onBindBtcStakeSheet() {
         let sheet = BtcStakeSheet(nibName: "BtcStakeSheet", bundle: nil)
-        sheet.btcStakeDelegate = self
         sheet.selectedChain = selectedChain
         onStartSheet(sheet, 320, 0.6)
-    }
-    
-    func onBindBtcStakingInfoVC() {
-        self.dismiss(animated: true)
-        
-        if let providerCount = (selectedChain as? ChainBabylon)?.getBabylonBtcFetcher()?.finalityProviders.count,
-           providerCount <= 0 {
-            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-            return
-        }
-
-        let stakingInfoVC = BtcStakingInfoVC(nibName: "BtcStakingInfoVC", bundle: nil)
-        stakingInfoVC.selectedChain = selectedChain
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
     }
 }
 
@@ -902,6 +899,12 @@ extension CosmosCryptoVC: BaseSheetDelegate {
             guard let url = URL(string: "https://apps.apple.com/kr/app/dydx/id6475599596") else { return }
             self.onShowSafariWeb(url)
 
+        } else if sheetType == .MoveBabylonDappDetail {
+            let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+            dappDetail.dappType = .INTERNAL_URL
+            dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
+            dappDetail.modalPresentationStyle = .fullScreen
+            self.present(dappDetail, animated: true)
         }
     }
 }
