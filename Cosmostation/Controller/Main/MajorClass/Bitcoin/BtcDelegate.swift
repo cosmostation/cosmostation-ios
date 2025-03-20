@@ -12,11 +12,13 @@ import SDWebImage
 import SwiftyJSON
 
 class BtcDelegate: BaseVC {
+    @IBOutlet weak var titleCoinImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var validatorCardView: FixCardView!
     @IBOutlet weak var monikerImg: UIImageView!
     @IBOutlet weak var monikerLabel: UILabel!
+    @IBOutlet weak var inactiveTag: UIImageView!
     @IBOutlet weak var jailedTag: UIImageView!
     @IBOutlet weak var commLabel: UILabel!
     @IBOutlet weak var commPercentLabel: UILabel!
@@ -60,6 +62,9 @@ class BtcDelegate: BaseVC {
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
         loadingView.play()
+        
+        let image = UIImage(named: selectedChain.coinLogo)
+        titleCoinImage.image = image
 
         validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
         stakingAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
@@ -82,13 +87,28 @@ class BtcDelegate: BaseVC {
 
 
     }
-
+    override func setLocalizedString() {
+        let symbol = selectedChain.coinSymbol
+        titleLabel.text = String(format: NSLocalizedString("title_coin_stake", comment: ""), symbol)
+    }
+    
     func onUpdateValidatorView() {
         monikerImg.sd_setImage(with: URL(string: ResourceBase + selectedChain.apiName + "/finality-provider/" + toProvider!.btcPk + ".png"), placeholderImage: UIImage(named: "validatorDefault"))
         monikerLabel.text = toProvider!.moniker
-        jailedTag.isHidden = !(toProvider!.jailed)
         
-        let commission = NSDecimalNumber(string: toProvider!.commission).multiplying(byPowerOf10: 2)
+        if toProvider!.jailed {
+            jailedTag.isHidden = false
+        } else if toProvider!.votingPower == "0" {
+            inactiveTag.isHidden = false
+        }
+
+        var commission = NSDecimalNumber.zero
+        if NSDecimalNumber(string: toProvider!.commission).compare(1) == .orderedDescending {
+            commission = NSDecimalNumber(string: toProvider!.commission).multiplying(byPowerOf10: -16)
+        } else {
+            commission = NSDecimalNumber(string: toProvider!.commission).multiplying(byPowerOf10: 2)
+        }
+
         commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
 
         onSimul()

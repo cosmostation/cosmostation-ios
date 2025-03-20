@@ -75,7 +75,7 @@ class MajorClassVC: BaseVC {
         addressLabel.text = selectedChain.mainAddress
         
         onSetTabbarView()
-        if (selectedChain is ChainSui) {
+        if (selectedChain is ChainSui || selectedChain.isSupportBTCStaking()) {
             onSetFabButton()
         }
         
@@ -91,6 +91,13 @@ class MajorClassVC: BaseVC {
         
         navigationItem.rightBarButtonItems = [explorerBarBtn]
         navigationItem.titleView = BgRandomButton()
+        
+        Task {
+            if let babylonBtcFetcher = (selectedChain as? ChainBitCoin86)?.getBabylonBtcFetcher(),
+               selectedChain.isSupportBTCStaking() {
+                _ = await babylonBtcFetcher.fetchFinalityProvidersInfo()
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -200,6 +207,10 @@ class MajorClassVC: BaseVC {
             mainFab.addItem(title: "Earn", image: UIImage(named: "iconFab")) { _ in
                 self.onSuiStake()
             }
+        } else if (selectedChain.isSupportBTCStaking()) {
+            mainFab.addItem(title: "Earn", image: UIImage(named: "iconFab")) { _ in
+                self.onBtcStake()
+            }
         }
         
         view.addSubview(mainFab)
@@ -278,4 +289,19 @@ extension MajorClassVC {
         self.navigationController?.pushViewController(stakingInfoVC, animated: true)
         
     }
+    
+    func onBtcStake() {
+        onShowToast("Coming Soon")
+//        if let babylonBtcFetcher = (selectedChain as? ChainBitCoin86)?.getBabylonBtcFetcher() {
+//            if babylonBtcFetcher.finalityProviders.isEmpty {
+//                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+//                return
+//            }
+//        }
+//
+//        let stakingInfoVC = BtcStakingInfoVC(nibName: "BtcStakingInfoVC", bundle: nil)
+//        stakingInfoVC.selectedChain = selectedChain as? ChainBitCoin86
+//        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
+    }
+
 }

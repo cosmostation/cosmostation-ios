@@ -18,12 +18,14 @@ class BtcStakingInfoVC: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     @IBOutlet weak var emptyStakeImg: UIImageView!
     @IBOutlet weak var tabbar: MDCTabBarView!
+    @IBOutlet weak var tabbarDivider: UIView!
     var refresher: UIRefreshControl!
 
-    var selectedChain: BaseChain!
+    var selectedChain: ChainBitCoin86!
         
     var delegations: [BtcDelegation] = []
     var providers: [FinalityProvider] = []
+    var timeLockWeeks: Int = 0
     
     var displayData = [BtcDelegation]()
 
@@ -47,6 +49,7 @@ class BtcStakingInfoVC: BaseVC {
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "BtcStakingCell", bundle: nil), forCellReuseIdentifier: "BtcStakingCell")
         tableView.register(UINib(nibName: "StakeUnbondingCell", bundle: nil), forCellReuseIdentifier: "StakeUnbondingCell")
+        tableView.register(UINib(nibName: "UnstakingApproxCell", bundle: nil), forCellReuseIdentifier: "UnstakingApproxCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
@@ -55,6 +58,8 @@ class BtcStakingInfoVC: BaseVC {
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "iconInfo"), style: .plain, target: self, action: #selector(showInfoSheet))
+        navigationItem.rightBarButtonItem?.isEnabled = false
         onSetStakeData()
         onSetTabbarView()
 
@@ -73,11 +78,16 @@ class BtcStakingInfoVC: BaseVC {
     }
     
     override func setLocalizedString() {
-        navigationItem.title = NSLocalizedString("title_staking_info", comment: "")
+        navigationItem.title = String(format: NSLocalizedString("str_coin_manage_stake", comment: ""), selectedChain.coinSymbol)
         stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
     }
     
-
+    @objc func showInfoSheet() {
+        let infoSheet = BtcStakingInfoSheet(nibName: "BtcStakingInfoSheet", bundle: nil)
+        infoSheet.chain = selectedChain
+        onStartSheet(infoSheet, 420, 0.7)
+    }
+    
     @objc func onRequestFetch() {
         if (selectedChain.fetchState == .Busy) {
             refresher.endRefreshing()
@@ -97,18 +107,22 @@ class BtcStakingInfoVC: BaseVC {
 
 
     func onSetStakeData() {
-        guard let fetcher = (selectedChain as? ChainBabylon)?.getBabylonBtcFetcher() else { return }
-        delegations = fetcher.btcDelegations
-        providers = fetcher.finalityProviders
-        
-        DispatchQueue.main.async {
-            self.onUpdateView()
+        guard let fetcher = selectedChain.getBabylonBtcFetcher() else { return }
+        Task {
+            await fetcher.updateProvidersVotingPower()
+            delegations = fetcher.btcDelegations
+            providers = fetcher.finalityProviders
+            timeLockWeeks = fetcher.btcStakingTimeLockWeeks
+            
+            DispatchQueue.main.async {
+                self.onUpdateView()
+            }
         }
     }
     
     func onSetTabbarView() {
-        let stakingTabBar = UITabBarItem(title: "Active", image: nil, tag: 0)
-        let unstakingTabBar = UITabBarItem(title: "Unbonding", image: nil, tag: 1)
+        let stakingTabBar = UITabBarItem(title: "Staking", image: nil, tag: 0)
+        let unstakingTabBar = UITabBarItem(title: "Unstaking", image: nil, tag: 1)
         tabbar.items.append(stakingTabBar)
         tabbar.items.append(unstakingTabBar)
         
@@ -129,14 +143,16 @@ class BtcStakingInfoVC: BaseVC {
         if tabbar.selectedItem?.tag == 0 {
             displayData = delegations.filter({ $0.state.uppercased().contains("ACTIVE")})
         } else {
-            displayData = delegations.filter({ $0.state.uppercased().contains("WITHDRAWABLE") || $0.state.uppercased().contains("UNBONDING")})
+            displayData = delegations.filter({ $0.state.uppercased() == "EARLY_UNBONDING" || $0.state.uppercased() == "EARLY_UNBONDING_WITHDRAWABLE"})
         }
 
         refresher.endRefreshing()
         loadingView.isHidden = true
         tableView.isHidden = false
         tabbar.isHidden = false
+        tabbarDivider.isHidden = false
         tableView.reloadData()
+        navigationItem.rightBarButtonItem?.isEnabled = true
         if (displayData.count) == 0 {
             emptyStakeImg.isHidden = false
         } else {
@@ -171,9 +187,18 @@ extension BtcStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"BtcStakingCell") as! BtcStakingCell
-        cell.onBindBtcMyDelegate(selectedChain, displayData[indexPath.row])
-        return cell
+        if tabbar.selectedItem?.tag == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BtcStakingCell") as! BtcStakingCell
+            let provider = providers.filter({ $0.btcPk == displayData[indexPath.row].providerPk }).first
+            cell.onBindBtcMyDelegate(selectedChain, displayData[indexPath.row], provider, timeLockWeeks)
+            return cell
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"UnstakingApproxCell") as! UnstakingApproxCell
+            let provider = providers.filter({ $0.btcPk == displayData[indexPath.row].providerPk }).first
+            cell.onBindBtcUndelegate(selectedChain, displayData[indexPath.row], provider)
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -185,8 +210,7 @@ extension BtcStakingInfoVC: MDCTabBarViewDelegate {
         if item.tag == 0 {
             displayData = delegations.filter({ $0.state.uppercased().contains("ACTIVE")})
         } else {
-            displayData = delegations.filter({ $0.state.uppercased().contains("WITHDRAWABLE") || $0.state.uppercased().contains("UNBONDING")})
-
+            displayData = delegations.filter({ $0.state.uppercased() == "EARLY_UNBONDING" || $0.state.uppercased() == "EARLY_UNBONDING_WITHDRAWABLE"})
         }
         emptyStakeImg.isHidden = !displayData.isEmpty
         tableView.reloadData()

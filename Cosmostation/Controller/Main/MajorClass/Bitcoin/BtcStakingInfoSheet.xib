@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BtcStakingInfoSheet" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="timeLockDescriptionLabel" destination="CNh-ci-k2a" id="7vg-W2-dms"/>
+                <outlet property="unstakingDescriptionLabel" destination="D9L-8L-TdM" id="JhP-CK-3Hk"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Lock and Unstaking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQi-p9-EA1">
+                    <rect key="frame" x="20" y="99" width="197" height="21.333333333333329"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <color key="textColor" name="_color01"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MgR-TR-mqh">
+                    <rect key="frame" x="12" y="136.33333333333334" width="369" height="1"/>
+                    <color key="backgroundColor" name="_color08"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="pHz-BQ-c6x"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Lock" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyx-57-8SV">
+                    <rect key="frame" x="20" y="153.33333333333334" width="70.333333333333329" height="17.666666666666657"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                    <color key="textColor" name="_color01"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNh-ci-k2a">
+                    <rect key="frame" x="20" y="179" width="353" height="51.333333333333343"/>
+                    <attributedString key="attributedText">
+                        <fragment content="After staking sBTC, it is locked for up to ">
+                            <attributes>
+                                <color key="NSColor" name="_color03"/>
+                                <font key="NSFont" size="12" name="SpoqaHanSansNeo-Medium"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="65 weeks">
+                            <attributes>
+                                <color key="NSColor" red="0.74509803921568629" green="0.81960784313725488" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="12" name="SpoqaHanSansNeo-Medium"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment>
+                            <string key="content">.
+After this period, it becomes automatically withdrawable without unstaking.</string>
+                            <attributes>
+                                <color key="NSColor" name="_color03"/>
+                                <font key="NSFont" size="12" name="SpoqaHanSansNeo-Medium"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unstaking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLe-Cp-7v0">
+                    <rect key="frame" x="20" y="260.33333333333331" width="69.666666666666671" height="17.666666666666686"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
+                    <color key="textColor" name="_color01"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9L-8L-TdM">
+                    <rect key="frame" x="20" y="286" width="353" height="33.333333333333314"/>
+                    <attributedString key="attributedText">
+                        <fragment content="You can unstake at any time, It will become withdrawable after a ">
+                            <attributes>
+                                <color key="NSColor" name="_color03"/>
+                                <font key="NSFont" size="12" name="SpoqaHanSansNeo-Medium"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="7-day">
+                            <attributes>
+                                <color key="NSColor" red="0.74509803921568629" green="0.81960784313725488" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <font key="NSFont" size="12" name="SpoqaHanSansNeo-Medium"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content=" unstaking period.">
+                            <attributes>
+                                <color key="NSColor" name="_color03"/>
+                                <font key="NSFont" size="12" name="SpoqaHanSansNeo-Medium"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MIS-W6-8ks" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="12" y="752" width="369" height="54"/>
+                    <color key="backgroundColor" name="_primary"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="XjJ-g8-cEh"/>
+                    </constraints>
+                    <color key="tintColor" name="_color01"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Confirm">
+                        <fontDescription key="titleFontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="onBindConfirm:" destination="-1" eventType="touchUpInside" id="sFY-pJ-aIj"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="_colorBg"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="D9L-8L-TdM" secondAttribute="trailing" constant="20" id="4bC-1l-xCS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="MIS-W6-8ks" secondAttribute="bottom" constant="12" id="78k-mt-4Aw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="CNh-ci-k2a" secondAttribute="trailing" constant="20" id="854-pG-agT"/>
+                <constraint firstItem="DQi-p9-EA1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="8hB-05-SdI"/>
+                <constraint firstItem="MIS-W6-8ks" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="96e-y4-9fY"/>
+                <constraint firstItem="DQi-p9-EA1" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="98U-A2-jMk"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MIS-W6-8ks" secondAttribute="trailing" constant="12" id="IDh-5o-hJA"/>
+                <constraint firstItem="Yyx-57-8SV" firstAttribute="top" secondItem="MgR-TR-mqh" secondAttribute="bottom" constant="16" id="Rxi-Cw-Jsp"/>
+                <constraint firstItem="D9L-8L-TdM" firstAttribute="top" secondItem="SLe-Cp-7v0" secondAttribute="bottom" constant="8" id="Scd-2T-ObX"/>
+                <constraint firstItem="MgR-TR-mqh" firstAttribute="top" secondItem="DQi-p9-EA1" secondAttribute="bottom" constant="16" id="Uyv-0c-f5R"/>
+                <constraint firstItem="Yyx-57-8SV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="bjp-8v-SR3"/>
+                <constraint firstItem="D9L-8L-TdM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="hJg-aB-TAL"/>
+                <constraint firstItem="MgR-TR-mqh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="hVK-yL-NGa"/>
+                <constraint firstItem="CNh-ci-k2a" firstAttribute="top" secondItem="Yyx-57-8SV" secondAttribute="bottom" constant="8" id="oAL-Vj-FRn"/>
+                <constraint firstItem="SLe-Cp-7v0" firstAttribute="top" secondItem="CNh-ci-k2a" secondAttribute="bottom" constant="30" id="oQi-g5-6yu"/>
+                <constraint firstItem="CNh-ci-k2a" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="s0w-ff-J69"/>
+                <constraint firstItem="SLe-Cp-7v0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="soo-ET-z2V"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MgR-TR-mqh" secondAttribute="trailing" constant="12" id="wVT-hj-KnH"/>
+            </constraints>
+            <point key="canvasLocation" x="9.9236641221374047" y="-11.267605633802818"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color03">
+            <color red="0.54117647058823526" green="0.59999999999999998" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color08">
+            <color red="0.22352941176470589" green="0.22745098039215686" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorBg">
+            <color red="0.17254901960784313" green="0.17647058823529413" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

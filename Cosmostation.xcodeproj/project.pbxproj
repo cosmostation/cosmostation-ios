@@ -1751,6 +1751,8 @@
 		799261822D77EE66007E9911 /* babylon_incentive_rewards.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799261582D77EE66007E9911 /* babylon_incentive_rewards.pb.swift */; };
 		799261832D77EE66007E9911 /* babylon_incentive_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799261592D77EE66007E9911 /* babylon_incentive_tx.grpc.swift */; };
 		799261842D77EE66007E9911 /* babylon_incentive_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992615A2D77EE66007E9911 /* babylon_incentive_tx.pb.swift */; };
+		799261872D781EBE007E9911 /* UnstakingApproxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799261852D781EBE007E9911 /* UnstakingApproxCell.swift */; };
+		799261882D781EBE007E9911 /* UnstakingApproxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 799261862D781EBE007E9911 /* UnstakingApproxCell.xib */; };
 		7992618B2D783FD3007E9911 /* BabylonClaimRewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799261892D783FD3007E9911 /* BabylonClaimRewards.swift */; };
 		7992618C2D783FD3007E9911 /* BabylonClaimRewards.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7992618A2D783FD3007E9911 /* BabylonClaimRewards.xib */; };
 		799B4A772D1E439D00998833 /* ChainForma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A762D1E439D00998833 /* ChainForma.swift */; };
@@ -1787,6 +1789,8 @@
 		79D5561F2CEF09B60023F1B9 /* ChainNomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5561E2CEF09B60023F1B9 /* ChainNomic.swift */; };
 		79D556212CEF0A8E0023F1B9 /* ChainSeda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D556202CEF0A8E0023F1B9 /* ChainSeda.swift */; };
 		79D556232CEF0B810023F1B9 /* ChainSge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D556222CEF0B810023F1B9 /* ChainSge.swift */; };
+		79D966352D797B1C00688447 /* BtcStakingInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79D966342D797B1C00688447 /* BtcStakingInfoSheet.xib */; };
+		79D966362D797B1C00688447 /* BtcStakingInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D966332D797B1C00688447 /* BtcStakingInfoSheet.swift */; };
 		79DB1D4E2D5B4CEF002E1059 /* eth_types_v1_account.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DB1D4D2D5B4CEF002E1059 /* eth_types_v1_account.pb.swift */; };
 		79DD26672D0C00B500B4353C /* VoteThreeItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DD26652D0C00B500B4353C /* VoteThreeItemsCell.swift */; };
 		79DD26682D0C00B500B4353C /* VoteThreeItemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DD26662D0C00B500B4353C /* VoteThreeItemsCell.xib */; };
@@ -3261,6 +3265,8 @@
 		799261582D77EE66007E9911 /* babylon_incentive_rewards.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = babylon_incentive_rewards.pb.swift; sourceTree = "<group>"; };
 		799261592D77EE66007E9911 /* babylon_incentive_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = babylon_incentive_tx.grpc.swift; sourceTree = "<group>"; };
 		7992615A2D77EE66007E9911 /* babylon_incentive_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = babylon_incentive_tx.pb.swift; sourceTree = "<group>"; };
+		799261852D781EBE007E9911 /* UnstakingApproxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnstakingApproxCell.swift; sourceTree = "<group>"; };
+		799261862D781EBE007E9911 /* UnstakingApproxCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnstakingApproxCell.xib; sourceTree = "<group>"; };
 		799261892D783FD3007E9911 /* BabylonClaimRewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonClaimRewards.swift; sourceTree = "<group>"; };
 		7992618A2D783FD3007E9911 /* BabylonClaimRewards.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BabylonClaimRewards.xib; sourceTree = "<group>"; };
 		799B4A762D1E439D00998833 /* ChainForma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainForma.swift; sourceTree = "<group>"; };
@@ -3297,6 +3303,8 @@
 		79D5561E2CEF09B60023F1B9 /* ChainNomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainNomic.swift; sourceTree = "<group>"; };
 		79D556202CEF0A8E0023F1B9 /* ChainSeda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSeda.swift; sourceTree = "<group>"; };
 		79D556222CEF0B810023F1B9 /* ChainSge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSge.swift; sourceTree = "<group>"; };
+		79D966332D797B1C00688447 /* BtcStakingInfoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtcStakingInfoSheet.swift; sourceTree = "<group>"; };
+		79D966342D797B1C00688447 /* BtcStakingInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BtcStakingInfoSheet.xib; sourceTree = "<group>"; };
 		79DB1D4D2D5B4CEF002E1059 /* eth_types_v1_account.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eth_types_v1_account.pb.swift; sourceTree = "<group>"; };
 		79DD26652D0C00B500B4353C /* VoteThreeItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteThreeItemsCell.swift; sourceTree = "<group>"; };
 		79DD26662D0C00B500B4353C /* VoteThreeItemsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteThreeItemsCell.xib; sourceTree = "<group>"; };
@@ -4540,6 +4548,8 @@
 				79287C6D2D670DCE003845D2 /* BtcStakingInfoVC.xib */,
 				79AB34072D6EB0CE00F1426C /* BtcDelegate.swift */,
 				79AB34082D6EB0CE00F1426C /* BtcDelegate.xib */,
+				79D966332D797B1C00688447 /* BtcStakingInfoSheet.swift */,
+				79D966342D797B1C00688447 /* BtcStakingInfoSheet.xib */,
 			);
 			path = Bitcoin;
 			sourceTree = "<group>";
@@ -5036,10 +5046,12 @@
 				E162004C2AF27C250008F397 /* AddressBookCell.xib */,
 				E15F2D082ABF107300BAE105 /* StakeDelegateCell.swift */,
 				E15F2D092ABF107300BAE105 /* StakeDelegateCell.xib */,
-				79AB340B2D6EDC1100F1426C /* BtcStakingCell.swift */,
-				79AB340C2D6EDC1100F1426C /* BtcStakingCell.xib */,
 				E15F2D0E2ABF108500BAE105 /* StakeUnbondingCell.swift */,
 				E15F2D0F2ABF108500BAE105 /* StakeUnbondingCell.xib */,
+				79AB340B2D6EDC1100F1426C /* BtcStakingCell.swift */,
+				79AB340C2D6EDC1100F1426C /* BtcStakingCell.xib */,
+				799261852D781EBE007E9911 /* UnstakingApproxCell.swift */,
+				799261862D781EBE007E9911 /* UnstakingApproxCell.xib */,
 				790970272D8016C000DEB959 /* PendingDelegateCell.swift */,
 				790970282D8016C000DEB959 /* PendingDelegateCell.xib */,
 				7909702B2D8016D500DEB959 /* PendingUnbondingCell.swift */,
@@ -5860,6 +5872,7 @@
 				E1DBD3E02B620B760058E0DC /* EvmClass.storyboard in Resources */,
 				E1A48DF12C0065310084D770 /* EcoListCell.xib in Resources */,
 				79B7F36D2D87F74F00AA755B /* BabylonStatusInfoSheet.xib in Resources */,
+				799261882D781EBE007E9911 /* UnstakingApproxCell.xib in Resources */,
 				04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				04951DC52B7F6E6200A03FB1 /* QrAddressPopup2VC.xib in Resources */,
 				E10B1D7D2C2156430039283B /* KavaEarnListMyCell.xib in Resources */,
@@ -5916,6 +5929,7 @@
 				E15F2D0C2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */,
 				E1044EA72BD641DB00DA05C2 /* SendResultSheet.xib in Resources */,
 				0402B7FA2ACC3F1400824B3F /* VoteCell.xib in Resources */,
+				79D966352D797B1C00688447 /* BtcStakingInfoSheet.xib in Resources */,
 				E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */,
 				04CD24492AD11D3400497EF5 /* LegacyTransfer.xib in Resources */,
 				E1F257D62BF77A7B008F4D21 /* EvmDelegate.xib in Resources */,
@@ -7072,6 +7086,7 @@
 				79FCA3CE2C3F9E92001C17D0 /* artela_evm_v1_tx.pb.swift in Sources */,
 				04C817BA2BA98D75006B800A /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				04806BC52BB06DCA0048F232 /* Cw721Model.swift in Sources */,
+				79D966362D797B1C00688447 /* BtcStakingInfoSheet.swift in Sources */,
 				7992617F2D77EE66007E9911 /* babylon_incentive_params.pb.swift in Sources */,
 				79FCA3CA2C3F9E92001C17D0 /* artela_evm_v1_tx.grpc.swift in Sources */,
 				045032E12C1EFE5500235F6A /* ChainOnomy.swift in Sources */,
@@ -7325,6 +7340,7 @@
 				79B7F36E2D87F74F00AA755B /* BabylonStatusInfoSheet.swift in Sources */,
 				046EA8BD2AD04A2600A2FCE7 /* desmos_profiles_v3_genesis.pb.swift in Sources */,
 				79FCA3CC2C3F9E92001C17D0 /* artela_fee_v1_tx.grpc.swift in Sources */,
+				799261872D781EBE007E9911 /* UnstakingApproxCell.swift in Sources */,
 				04D785542C328DB1009D1A94 /* feemarket_feemarket_v1_query.grpc.swift in Sources */,
 				799B4A7B2D1EA21700998833 /* ChainPundix.swift in Sources */,
 				792613DD2CDB5A5300FAF47D /* OnChainProposalCell.swift in Sources */,

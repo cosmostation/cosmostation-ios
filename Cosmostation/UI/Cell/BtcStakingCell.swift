@@ -18,8 +18,7 @@ class BtcStakingCell: UITableViewCell {
     @IBOutlet weak var commLabel: UILabel!
     @IBOutlet weak var stakingLabel: UILabel!
     @IBOutlet weak var symbolLabel: UILabel!
-    @IBOutlet weak var inceptionLabel: UILabel!
-    @IBOutlet weak var transactionIdLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,24 +32,33 @@ class BtcStakingCell: UITableViewCell {
         inactiveTag.isHidden = true
     }
     
-    func onBindBtcMyDelegate(_ baseChain: BaseChain, _ delegation: BtcDelegation?) {
+    func onBindBtcMyDelegate(_ baseChain: ChainBitCoin86, _ delegation: BtcDelegation?, _ provider: FinalityProvider?, _ timeLockWeeks: Int) {
         guard let delegation else { return }
-                
-        logoImg.sd_setImage(with: URL(string: ResourceBase + baseChain.apiName + "/finality-provider/" + delegation.providerPk + ".png"), placeholderImage: UIImage(named: "validatorDefault"))
+        let apiName = baseChain.isTestnet ? "babylon-testnet" : "babylon"
+        logoImg.sd_setImage(with: URL(string: ResourceBase + apiName + "/finality-provider/" + delegation.providerPk + ".png"), placeholderImage: UIImage(named: "validatorDefault"))
         
-        jailedTag.isHidden = !(delegation.jailed)
+        if delegation.jailed {
+            jailedTag.isHidden = false
+        } else if provider?.votingPower == "0" {
+            inactiveTag.isHidden = false
+        }
         
         nameLabel.text = delegation.moniker
-        let commission = NSDecimalNumber(string: delegation.commission).multiplying(byPowerOf10: 2)
+        var commission: NSDecimalNumber = .zero
+        if NSDecimalNumber(string: delegation.commission).compare(1) == .orderedDescending {
+            commission = NSDecimalNumber(string: delegation.commission).multiplying(byPowerOf10: -16)
+        } else {
+            commission = NSDecimalNumber(string: delegation.commission).multiplying(byPowerOf10: 2)
+        }
         commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
         
         let stakedAmount = NSDecimalNumber(integerLiteral: delegation.amount).multiplying(byPowerOf10: -8)
-        stakingLabel.text = stakedAmount.stringValue
+        stakingLabel.attributedText = WDP.dpAmount(stakedAmount.stringValue, stakingLabel.font, 8)
         
-        symbolLabel.text = baseChain.isTestnet ? "sBTC" : "BTC"
+        symbolLabel.text = baseChain.coinSymbol
+                
         
-        inceptionLabel.text = WDP.dpFullTime(delegation.inceptionTime)
-        
-        transactionIdLabel.text = delegation.transactionID
+        let timeLock = Calendar.current.date(byAdding: .weekOfYear, value: timeLockWeeks, to: WUtils.timeStringToDate(delegation.inceptionTime) ?? Date())
+        timeLabel.text = WDP.dpDateWithSimpleTime(timeLock)
     }
 }

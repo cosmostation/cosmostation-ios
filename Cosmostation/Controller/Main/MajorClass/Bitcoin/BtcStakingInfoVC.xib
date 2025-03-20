@@ -20,6 +20,7 @@
                 <outlet property="loadingView" destination="Phq-nt-vCt" id="Jbf-gZ-4TU"/>
                 <outlet property="stakeBtn" destination="qbK-X6-xCz" id="siJ-BF-rax"/>
                 <outlet property="tabbar" destination="0Ch-CX-RSk" id="MIK-uL-4wV"/>
+                <outlet property="tabbarDivider" destination="gtv-97-eyH" id="fD4-qi-box"/>
                 <outlet property="tableView" destination="EGs-kc-9ri" id="uee-bE-gsZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -36,7 +37,7 @@
                         <constraint firstAttribute="height" constant="48" id="ny1-dj-fNz"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtv-97-eyH">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtv-97-eyH">
                     <rect key="frame" x="12" y="106" width="369" height="1"/>
                     <color key="backgroundColor" name="_color04"/>
                     <constraints>
@@ -59,7 +60,7 @@
                     <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Stake Now">
+                    <state key="normal" title="Stake">
                         <color key="titleColor" name="_color01"/>
                     </state>
                     <connections>
