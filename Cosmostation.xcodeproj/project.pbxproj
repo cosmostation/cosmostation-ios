@@ -1598,6 +1598,10 @@
 		790970212D7E895500DEB959 /* BabylonStakingInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 790970202D7E895500DEB959 /* BabylonStakingInfoVC.xib */; };
 		790970222D7E895500DEB959 /* BabylonStakingInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7909701F2D7E895500DEB959 /* BabylonStakingInfoVC.swift */; };
 		790970242D7EB34D00DEB959 /* BabylonFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790970232D7EB34D00DEB959 /* BabylonFetcher.swift */; };
+		790970292D8016C000DEB959 /* PendingDelegateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790970272D8016C000DEB959 /* PendingDelegateCell.swift */; };
+		7909702A2D8016C000DEB959 /* PendingDelegateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 790970282D8016C000DEB959 /* PendingDelegateCell.xib */; };
+		7909702D2D8016D500DEB959 /* PendingUnbondingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7909702B2D8016D500DEB959 /* PendingUnbondingCell.swift */; };
+		7909702E2D8016D500DEB959 /* PendingUnbondingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7909702C2D8016D500DEB959 /* PendingUnbondingCell.xib */; };
 		790D8B882CFD5837003A15F7 /* ChainMilkyway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790D8B872CFD5837003A15F7 /* ChainMilkyway.swift */; };
 		790D8B8A2CFD9730003A15F7 /* EcoSystemSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790D8B892CFD9730003A15F7 /* EcoSystemSectionHeader.swift */; };
 		7926139B2CD4B82800FAF47D /* initia_gov_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613652CD4B82300FAF47D /* initia_gov_v1_genesis.pb.swift */; };
@@ -3109,6 +3113,10 @@
 		7909701F2D7E895500DEB959 /* BabylonStakingInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonStakingInfoVC.swift; sourceTree = "<group>"; };
 		790970202D7E895500DEB959 /* BabylonStakingInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BabylonStakingInfoVC.xib; sourceTree = "<group>"; };
 		790970232D7EB34D00DEB959 /* BabylonFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonFetcher.swift; sourceTree = "<group>"; };
+		790970272D8016C000DEB959 /* PendingDelegateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDelegateCell.swift; sourceTree = "<group>"; };
+		790970282D8016C000DEB959 /* PendingDelegateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PendingDelegateCell.xib; sourceTree = "<group>"; };
+		7909702B2D8016D500DEB959 /* PendingUnbondingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingUnbondingCell.swift; sourceTree = "<group>"; };
+		7909702C2D8016D500DEB959 /* PendingUnbondingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PendingUnbondingCell.xib; sourceTree = "<group>"; };
 		790D8B872CFD5837003A15F7 /* ChainMilkyway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMilkyway.swift; sourceTree = "<group>"; };
 		790D8B892CFD9730003A15F7 /* EcoSystemSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoSystemSectionHeader.swift; sourceTree = "<group>"; };
 		792613652CD4B82300FAF47D /* initia_gov_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = initia_gov_v1_genesis.pb.swift; sourceTree = "<group>"; };
@@ -5032,6 +5040,10 @@
 				79AB340C2D6EDC1100F1426C /* BtcStakingCell.xib */,
 				E15F2D0E2ABF108500BAE105 /* StakeUnbondingCell.swift */,
 				E15F2D0F2ABF108500BAE105 /* StakeUnbondingCell.xib */,
+				790970272D8016C000DEB959 /* PendingDelegateCell.swift */,
+				790970282D8016C000DEB959 /* PendingDelegateCell.xib */,
+				7909702B2D8016D500DEB959 /* PendingUnbondingCell.swift */,
+				7909702C2D8016D500DEB959 /* PendingUnbondingCell.xib */,
 				04A68C332AC156AA0041FA13 /* CosmosProposalCell.swift */,
 				04A68C342AC156AA0041FA13 /* CosmosProposalCell.xib */,
 				792613DB2CDB5A5300FAF47D /* OnChainProposalCell.swift */,
@@ -5853,6 +5865,7 @@
 				E10B1D7D2C2156430039283B /* KavaEarnListMyCell.xib in Resources */,
 				79287C6E2D670DCE003845D2 /* BtcStakingInfoVC.xib in Resources */,
 				E10B1DA92C2156430039283B /* KavaMintListVC.xib in Resources */,
+				7909702E2D8016D500DEB959 /* PendingUnbondingCell.xib in Resources */,
 				041540FC2BA4126D00CD5AA1 /* VoteAllChainCell.xib in Resources */,
 				0409D2FD2AC5ECDD0021E192 /* SelectValidatorCell.xib in Resources */,
 				79AB340E2D6EDC1100F1426C /* BtcStakingCell.xib in Resources */,
@@ -5922,6 +5935,7 @@
 				795C0DC22C8E853C006D35A4 /* bitcoin.js in Resources */,
 				04E250DD2B8F0354007D5AA0 /* basebg00.png in Resources */,
 				E15F2D002ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib in Resources */,
+				7909702A2D8016C000DEB959 /* PendingDelegateCell.xib in Resources */,
 				E1D97C092B9EF65000496807 /* SelectEndpointSheet.xib in Resources */,
 				E10B1DC02C2159040039283B /* KavaClaimIncentives.xib in Resources */,
 				047842E62AC8B2D600462F1C /* CosmosRedelegate.xib in Resources */,
@@ -6912,6 +6926,7 @@
 				79FCA3682C3E5B31001C17D0 /* RoundedPaddingLabel.swift in Sources */,
 				04A420E42C74B78D00C0E1A2 /* ChainBitCoin44.swift in Sources */,
 				E1ECE6BF2B1D992D00FDFD91 /* AllChainClaimStartVC.swift in Sources */,
+				790970292D8016C000DEB959 /* PendingDelegateCell.swift in Sources */,
 				E18B21FC2C4A4EE900AD572F /* ChainNillion_T.swift in Sources */,
 				7992616D2D77EE66007E9911 /* babylon_epoching_v1_epoching.pb.swift in Sources */,
 				04B789692ACAC9B100E9BE88 /* ibc_applications_fee_v1_fee.pb.swift in Sources */,
@@ -7517,6 +7532,7 @@
 				04C816762BA98D74006B800A /* cosmos_query_v1_query.pb.swift in Sources */,
 				0400F1322C2770FE00A7144B /* SmallButton.swift in Sources */,
 				04FAD9F92AB7221600143A3E /* BaseRedButton.swift in Sources */,
+				7909702D2D8016D500DEB959 /* PendingUnbondingCell.swift in Sources */,
 				15C4B8AF2C5966610084B0A3 /* stride_vesting_tx.grpc.swift in Sources */,
 				047843BF2AC991B300462F1C /* injective_oracle_v1beta1_tx.pb.swift in Sources */,
 				0478438D2AC991B300462F1C /* injective_peggy_v1_attestation.pb.swift in Sources */,
