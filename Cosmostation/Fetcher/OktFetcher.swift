@@ -69,6 +69,12 @@ class OktFetcher: CosmosFetcher {
                 self.oktValidators.append(validator)
             }
             
+            oktValidators = oktValidators.map { validator in
+                var updatedValidator = validator
+                updatedValidator["description"]["moniker"].stringValue = validator["description"]["moniker"].stringValue.trimmingCharacters(in: .whitespaces)
+                return updatedValidator
+            }
+            
             self.oktValidators.sort {
                 if ($0["description"]["moniker"].stringValue == "Cosmostation") {
                     return true

@@ -12,6 +12,7 @@ import SwiftProtobuf
 
 class CosmosCancelUnbonding: BaseVC {
     
+    @IBOutlet weak var titleCoinImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var validatorsLabel: UILabel!
@@ -66,6 +67,8 @@ class CosmosCancelUnbonding: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+        
         if let initiaFetcher {
             if let validator = initiaFetcher.initiaValidators.filter({ $0.operatorAddress == unbondingEntryInitia.validatorAddress }).first  {
                 validatorsLabel.text = validator.description_p.moniker
@@ -117,6 +120,8 @@ class CosmosCancelUnbonding: BaseVC {
     }
     
     override func setLocalizedString() {
+        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        titleLabel.text = String(format: NSLocalizedString("title_coin_cancel_unstaking", comment: ""), symbol)
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
         feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
         cancelBtn.setTitle(NSLocalizedString("str_cancle_unstake", comment: ""), for: .normal)
@@ -302,6 +307,16 @@ class CosmosCancelUnbonding: BaseVC {
             }
             return Signer.genCancelUnbondingMsg(toCancelMsg)
             
+        } else if selectedChain is ChainBabylon {
+            let toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = selectedChain.stakeDenom!; $0.amount = unbondingEntry.entry.balance }
+            let toCancelMsg = Babylon_Epoching_V1_MsgWrappedCancelUnbondingDelegation.with {
+                $0.msg.delegatorAddress = selectedChain.bechAddress!
+                $0.msg.validatorAddress = unbondingEntry.validatorAddress
+                $0.msg.creationHeight = unbondingEntry.entry.creationHeight
+                $0.msg.amount = toCoin
+            }
+            return Signer.genCancelUnbondingMsg(toCancelMsg)
+
         } else {
             let toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = selectedChain.stakeDenom!; $0.amount = unbondingEntry.entry.balance }
             let toCancelMsg = Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation.with {

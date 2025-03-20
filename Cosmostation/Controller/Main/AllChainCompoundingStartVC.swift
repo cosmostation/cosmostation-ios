@@ -238,13 +238,29 @@ extension AllChainCompoundingStartVC: UITableViewDelegate, UITableViewDataSource
 extension AllChainCompoundingStartVC {
     
     func simulateCompoundingTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) async throws -> UInt64? {
-        let msgs = Signer.genCompoundingMsg(chain.bechAddress!, claimableRewards, chain.stakeDenom!)
+        let msgs = onBindCompoundingMsg(chain, claimableRewards)
         if let cosmosFetcher = chain.getCosmosfetcher(),
            let simulReq = try await Signer.genSimul(chain, msgs, "", chain.getInitPayableFee()!, nil) {
             return try await cosmosFetcher.simulateTx(simulReq)
         }
         return nil
     }
+    
+    func onBindCompoundingMsg(_ selectedChain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) -> [Google_Protobuf_Any] {
+        if selectedChain is ChainInitia {
+            return Signer.genInitiaCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+            
+        } else if selectedChain is ChainZenrock {
+            return Signer.genZenrockCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+            
+        } else if selectedChain is ChainBabylon {
+            return Signer.genBabylonCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+            
+        } else {
+            return Signer.genCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+        }
+    }
+
     
     func broadcastCompoundingTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip? = nil) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {

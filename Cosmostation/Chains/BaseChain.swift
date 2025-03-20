@@ -495,6 +495,12 @@ extension BaseChain {
         getCosmosFeeInfo()["rate"].arrayValue.forEach { rate in
             result.append(FeeInfo.init(rate.stringValue))
         }
+        
+        for (i, feeInfo) in result.enumerated() {
+            let feeDatas = feeInfo.FeeDatas.filter({ BaseData.instance.getAsset(apiName, $0.denom ?? "") != nil })
+            result[i].FeeDatas = feeDatas
+        }
+        
         if (result.count == 1) {
             result[0].title = NSLocalizedString("str_fixed", comment: "")
         } else if (result.count == 2) {

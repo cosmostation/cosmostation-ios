@@ -110,21 +110,15 @@ class AssetCosmosClassCell: UITableViewCell {
                 stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
                 
                 let unStakingAmount = cosmosFetcher.unbondingAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
-                if (unStakingAmount != NSDecimalNumber.zero) {
-                    unstakingLayer.isHidden = false
-                    unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
-                }
+                unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
                 
                 let rewardAmount = cosmosFetcher.rewardAmountSum(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-                if (cosmosFetcher.rewardAllCoins().count > 0) {
-                    rewardLayer.isHidden = false
-                    if (cosmosFetcher.rewardOtherDenomTypeCnts() > 0) {
-                        rewardTitle.text = "Reward + " + String(cosmosFetcher.rewardOtherDenomTypeCnts())
-                    } else {
-                        rewardTitle.text = "Reward"
-                    }
-                    rewardLabel?.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardLabel!.font, 6)
+                if (cosmosFetcher.rewardOtherDenomTypeCnts() > 0) {
+                    rewardTitle.text = "Reward + " + String(cosmosFetcher.rewardOtherDenomTypeCnts())
+                } else {
+                    rewardTitle.text = "Reward"
                 }
+                rewardLabel?.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardLabel!.font, 6)
                 
                 let commissionAmount = cosmosFetcher.commissionAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
                 if (cosmosFetcher.cosmosCommissions.count > 0) {
@@ -278,21 +272,15 @@ class AssetCosmosClassCell: UITableViewCell {
             stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
             
             let unStakingAmount = initiaFetcher.initiaUnbondingAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
-            if (unStakingAmount != NSDecimalNumber.zero) {
-                unstakingLayer.isHidden = false
-                unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
-            }
+            unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
             
             let rewardAmount = initiaFetcher.rewardAmountSum(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-            if (initiaFetcher.rewardAllCoins().count > 0) {
-                rewardLayer.isHidden = false
-                if (initiaFetcher.rewardOtherDenomTypeCnts() > 0) {
-                    rewardTitle.text = "Reward + " + String(initiaFetcher.rewardOtherDenomTypeCnts())
-                } else {
-                    rewardTitle.text = "Reward"
-                }
-                rewardLabel?.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardLabel!.font, 6)
+            if (initiaFetcher.rewardOtherDenomTypeCnts() > 0) {
+                rewardTitle.text = "Reward + " + String(initiaFetcher.rewardOtherDenomTypeCnts())
+            } else {
+                rewardTitle.text = "Reward"
             }
+            rewardLabel?.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardLabel!.font, 6)
             
             let commissionAmount = initiaFetcher.commissionAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
             if (initiaFetcher.cosmosCommissions.count > 0) {
@@ -355,21 +343,15 @@ class AssetCosmosClassCell: UITableViewCell {
             stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
             
             let unStakingAmount = zenrockFetcher.zenrockUnbondingAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
-            if (unStakingAmount != NSDecimalNumber.zero) {
-                unstakingLayer.isHidden = false
-                unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
-            }
+            unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
             
             let rewardAmount = zenrockFetcher.rewardAmountSum(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-            if (zenrockFetcher.rewardAllCoins().count > 0) {
-                rewardLayer.isHidden = false
-                if (zenrockFetcher.rewardOtherDenomTypeCnts() > 0) {
-                    rewardTitle.text = "Reward + " + String(zenrockFetcher.rewardOtherDenomTypeCnts())
-                } else {
-                    rewardTitle.text = "Reward"
-                }
-                rewardLabel?.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardLabel!.font, 6)
+            if (zenrockFetcher.rewardOtherDenomTypeCnts() > 0) {
+                rewardTitle.text = "Reward + " + String(zenrockFetcher.rewardOtherDenomTypeCnts())
+            } else {
+                rewardTitle.text = "Reward"
             }
+            rewardLabel?.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardLabel!.font, 6)
             
             let commissionAmount = zenrockFetcher.commissionAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
             if (zenrockFetcher.cosmosCommissions.count > 0) {

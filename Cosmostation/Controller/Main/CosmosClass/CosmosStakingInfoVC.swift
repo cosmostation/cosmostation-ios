@@ -70,7 +70,8 @@ class CosmosStakingInfoVC: BaseVC {
     }
     
     override func setLocalizedString() {
-        navigationItem.title = NSLocalizedString("title_staking_info", comment: "")
+        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        navigationItem.title = String(format: NSLocalizedString("str_coin_manage_stake", comment: ""), symbol)
         stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
     }
     
@@ -117,8 +118,8 @@ class CosmosStakingInfoVC: BaseVC {
         tabbar.selectionIndicatorStrokeColor = .white
         tabbar.setTitleFont(.fontSize14Bold, for: .normal)
         tabbar.setTitleFont(.fontSize14Bold, for: .selected)
-        tabbar.setTitleColor(.color02, for: .normal)
-        tabbar.setTitleColor(.color02, for: .selected)
+        tabbar.setTitleColor(.color03, for: .normal)
+        tabbar.setTitleColor(.color01, for: .selected)
         tabbar.setSelectedItem(stakingTabBar, animated: false)
         tabbar.tabBarDelegate = self
         tabbar.preferredLayoutStyle = .fixedClusteredLeading

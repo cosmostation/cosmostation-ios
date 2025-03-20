@@ -62,6 +62,34 @@ public class WUtils {
         }
     }
     
+    static func getGapTime(_ seconds: Double) -> String {
+        let date = Date(timeIntervalSince1970: seconds)
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        return formatter.string(from: date)
+    }
+    
+    static func getRemainingTime(_ date: Date) -> String {
+        let minute = 60
+        let hour = 60 * minute
+        let day = 24 * hour
+        var gapTime = Int(Date().timeIntervalSince(date))
+        gapTime = gapTime * -1
+        
+        if gapTime < minute {
+            return "\(gapTime) seconds left"
+        } else if gapTime < hour {
+            return "\(gapTime / minute) minutes left"
+        } else if gapTime < day {
+            return "\(gapTime / hour) hours left"
+        } else {
+            return "\(gapTime / day) days left"
+        }
+    }
+    
     //for okt ("0.1"  -> "0.10000000000000000")
     static func getFormattedNumber(_ amount: NSDecimalNumber, _ dpPoint:Int16) -> String {
         let nf = NumberFormatter()

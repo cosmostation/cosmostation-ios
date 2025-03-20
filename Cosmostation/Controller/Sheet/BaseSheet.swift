@@ -60,6 +60,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var zenrockDelegations = Array<Zrchain_Validation_DelegationResponse>()
     var zenrockDelegation: Zrchain_Validation_DelegationResponse!
     
+    var finalityProviders = [FinalityProvider]()
+    var finalityProvidersSearch = [FinalityProvider]()
+
     var swapSlippage: String?
 
     var selectedAccount: BaseAccount?
@@ -280,6 +283,11 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                     zenrockValidators.append(validator)
                 }
             }
+            
+        } else if (sheetType == .SelectFinalityProvider) {
+            sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
+            sheetSearchBar.isHidden = false
+            finalityProvidersSearch = finalityProviders
         }
     }
     
@@ -312,6 +320,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectZenrockValidator) {
             zenrockValidatorsSearch = searchText.isEmpty ? zenrockValidators: zenrockValidators.filter { validator in
                 return validator.description_p.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+        } else if (sheetType == .SelectFinalityProvider) {
+            finalityProvidersSearch = searchText.isEmpty ? finalityProviders : finalityProviders.filter { provider in
+                return provider.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
         }
         sheetTableView.reloadData()
@@ -459,6 +471,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectZenrockUnStakeValidator) {
             return zenrockValidators.count
+            
+        } else if (sheetType == .SelectFinalityProvider) {
+            return finalityProvidersSearch.count
         }
         
         return 0
@@ -636,6 +651,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindUnstakeValidator(targetChain, zenrockValidators[indexPath.row])
             return cell!
 
+        } else if (sheetType == .SelectFinalityProvider) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SelectValidatorCell") as? SelectValidatorCell
+            cell?.onBindFinalityProvider(targetChain, finalityProvidersSearch[indexPath.row])
+            return cell!
         }
         
         return UITableViewCell()
@@ -731,6 +750,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : zenrockValidators[indexPath.row].operatorAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
+        } else if (sheetType == .SelectFinalityProvider) {
+            let result: [String : Any] = ["index" : indexPath.row, "finalityProviderBtcPk" : finalityProvidersSearch[indexPath.row].btcPk]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+
+            
         } else {
             let result: [String : Any] = ["index" : indexPath.row]
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -795,5 +819,13 @@ public enum SheetType: Int {
     case SelectZenrockValidator = 94
     case SelectZenrockUnStakeValidator = 95
     case SelectZenrockDelegatedAction = 96
+    
+    case SelectFinalityProvider
+    case SelectUnStakeFinalityProvider
+    case SelectBtcDelegatedAction
+    
+    case MoveDropDetail = 100
+    case MoveDydx = 101
+    case MoveBabylonDappDetail = 102
 
 }

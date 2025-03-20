@@ -48,7 +48,7 @@ class SelectEndpointCell: UITableViewCell {
             
             let checkTime = CFAbsoluteTimeGetCurrent()
             let host = endpoint["url"].stringValue.components(separatedBy: ":")[0].trimmingCharacters(in: .whitespaces)
-            let port = Int(endpoint["url"].stringValue.components(separatedBy: ":")[1].trimmingCharacters(in: .whitespaces)) ?? 443
+            let port = Int(endpoint["url"].stringValue.components(separatedBy: ":").first?.trimmingCharacters(in: .whitespaces) ?? "443") ?? 443
             
             if (cosmosFetcher.getEndpointType() == .UseGRPC &&
                 cosmosFetcher.getGrpc().host == host) {

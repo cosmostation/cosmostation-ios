@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EcosystemPopUpSheet" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="closeButton" destination="l23-LT-3Q4" id="XI8-oL-fsz"/>
+                <outlet property="ecosystemBtnLabel" destination="HJn-bO-R6l" id="8zm-AA-auT"/>
+                <outlet property="ecosystemButton" destination="nr2-X6-bzk" id="3I6-u3-zUK"/>
+                <outlet property="hideButton" destination="49K-Ff-yMI" id="mza-Qq-Ou3"/>
+                <outlet property="imageView" destination="wHY-Oe-tTQ" id="USA-3s-wL3"/>
+                <outlet property="popUpView" destination="7wW-jA-ROK" id="Z0E-Sw-Cv0"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7wW-jA-ROK">
+                    <rect key="frame" x="27" y="243.66666666666666" width="339" height="389.66666666666674"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wHY-Oe-tTQ">
+                            <rect key="frame" x="0.0" y="0.0" width="339" height="349.66666666666669"/>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nr2-X6-bzk">
+                            <rect key="frame" x="90" y="269.66666666666674" width="159" height="40"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ZbO-TH-GQF">
+                                    <rect key="frame" x="39.666666666666664" y="12.666666666666629" width="79.666666666666686" height="15"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stake Now" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJn-bO-R6l">
+                                            <rect key="frame" x="0.0" y="0.0" width="62.666666666666664" height="15"/>
+                                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                            <color key="textColor" name="_color01"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowRight2" translatesAutoresizingMaskIntoConstraints="NO" id="4B8-wt-K9F">
+                                            <rect key="frame" x="64.666666666666686" y="0.0" width="15" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="4B8-wt-K9F" secondAttribute="height" id="jYp-BD-tns"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="15" id="MrV-bF-5qN"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBlueColor"/>
+                            <constraints>
+                                <constraint firstItem="ZbO-TH-GQF" firstAttribute="centerX" secondItem="nr2-X6-bzk" secondAttribute="centerX" id="28Z-Y7-qEu"/>
+                                <constraint firstItem="ZbO-TH-GQF" firstAttribute="centerY" secondItem="nr2-X6-bzk" secondAttribute="centerY" id="2je-VZ-a99"/>
+                                <constraint firstAttribute="height" constant="40" id="5wD-uD-Jm9"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCj-qA-oow">
+                            <rect key="frame" x="0.0" y="349.66666666666674" width="339" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l23-LT-3Q4">
+                                    <rect key="frame" x="294" y="12.666666666666629" width="33" height="15"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Button">
+                                        <attributedString key="attributedTitle">
+                                            <fragment content="Close">
+                                                <attributes>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="12" name="SpoqaHanSansNeo-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    <integer key="NSUnderline" value="1"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                    </state>
+                                    <connections>
+                                        <action selector="closePopUpView:" destination="-1" eventType="touchUpInside" id="lNW-Dn-xvc"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49K-Ff-yMI">
+                                    <rect key="frame" x="12" y="10" width="190.33333333333334" height="20"/>
+                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="4" maxY="0.0"/>
+                                    <state key="normal" title="Hide for the next 7 days" image="iconUnCheckedBox">
+                                        <attributedString key="attributedTitle">
+                                            <fragment content="Hide for the next 7 days">
+                                                <attributes>
+                                                    <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <font key="NSFont" size="12" name="SpoqaHanSansNeo-Bold"/>
+                                                    <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration"/>
+                                    </state>
+                                    <buttonConfiguration key="configuration" style="plain" image="iconCheckboxOff" title="Hide for the next 7 days" imagePadding="4">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                        <fontDescription key="titleFontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                        <color key="baseForegroundColor" name="_color01"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="onBindHideOption:" destination="-1" eventType="touchUpInside" id="boV-A0-KeZ"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.059999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="49K-Ff-yMI" secondAttribute="bottom" constant="10" id="D90-EP-OeV"/>
+                                <constraint firstAttribute="height" constant="40" id="HBx-Vs-fHF"/>
+                                <constraint firstAttribute="trailing" secondItem="l23-LT-3Q4" secondAttribute="trailing" constant="12" id="Mr4-l9-wi6"/>
+                                <constraint firstItem="l23-LT-3Q4" firstAttribute="top" secondItem="fCj-qA-oow" secondAttribute="top" constant="12.5" id="QFp-zN-pqg"/>
+                                <constraint firstAttribute="bottom" secondItem="l23-LT-3Q4" secondAttribute="bottom" constant="12.5" id="eBB-7p-KxF"/>
+                                <constraint firstItem="49K-Ff-yMI" firstAttribute="leading" secondItem="fCj-qA-oow" secondAttribute="leading" constant="12" id="kv8-pm-FcO"/>
+                                <constraint firstItem="49K-Ff-yMI" firstAttribute="top" secondItem="fCj-qA-oow" secondAttribute="top" constant="10" id="w43-EI-1Lg"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" name="_colorBg"/>
+                    <constraints>
+                        <constraint firstItem="fCj-qA-oow" firstAttribute="top" secondItem="wHY-Oe-tTQ" secondAttribute="bottom" id="1LM-4N-oLq"/>
+                        <constraint firstAttribute="width" secondItem="7wW-jA-ROK" secondAttribute="height" multiplier="1:1.15" id="C6d-Od-W3y"/>
+                        <constraint firstItem="wHY-Oe-tTQ" firstAttribute="top" secondItem="7wW-jA-ROK" secondAttribute="top" id="KBi-MT-Blp"/>
+                        <constraint firstAttribute="trailing" secondItem="fCj-qA-oow" secondAttribute="trailing" id="Xpt-qb-pGf"/>
+                        <constraint firstItem="nr2-X6-bzk" firstAttribute="leading" secondItem="7wW-jA-ROK" secondAttribute="leading" constant="90" id="ePh-Vn-Klz"/>
+                        <constraint firstItem="nr2-X6-bzk" firstAttribute="centerX" secondItem="7wW-jA-ROK" secondAttribute="centerX" id="fgL-SW-Rqn"/>
+                        <constraint firstAttribute="bottom" secondItem="fCj-qA-oow" secondAttribute="bottom" id="nzh-Kj-PCz"/>
+                        <constraint firstItem="wHY-Oe-tTQ" firstAttribute="leading" secondItem="7wW-jA-ROK" secondAttribute="leading" id="ody-Nh-D8F"/>
+                        <constraint firstItem="fCj-qA-oow" firstAttribute="leading" secondItem="7wW-jA-ROK" secondAttribute="leading" id="qAs-eN-i17"/>
+                        <constraint firstAttribute="trailing" secondItem="nr2-X6-bzk" secondAttribute="trailing" constant="90" id="t3D-a0-5Rm"/>
+                        <constraint firstItem="fCj-qA-oow" firstAttribute="top" secondItem="nr2-X6-bzk" secondAttribute="bottom" constant="40" id="xLp-Wr-1Xr"/>
+                        <constraint firstAttribute="trailing" secondItem="wHY-Oe-tTQ" secondAttribute="trailing" id="yMv-Kk-6qf"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.34178394039735099" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7wW-jA-ROK" secondAttribute="trailing" constant="27" id="1UK-MB-Np9"/>
+                <constraint firstItem="7wW-jA-ROK" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="Ke5-R8-bbQ"/>
+                <constraint firstItem="7wW-jA-ROK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="27" id="Wga-lR-xuK"/>
+            </constraints>
+            <point key="canvasLocation" x="0.76335877862595414" y="-11.267605633802818"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconArrowRight2" width="29" height="28"/>
+        <image name="iconCheckboxOff" width="24" height="24"/>
+        <image name="iconUnCheckedBox" width="24" height="24"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorBg">
+            <color red="0.17254901960784313" green="0.17647058823529413" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

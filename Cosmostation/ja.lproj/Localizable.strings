@@ -314,11 +314,12 @@
 "str_stake_msg" = "ステーキング数量を追加します。";
 "str_unstake" = "ステークを解除する";
 "str_unstake_msg" = "アンステーキングを開始します。";
-"str_switch_validator" = "スイッチバリデータ";
+"str_switch_validator" = "バリデーターを切り替える";
 "str_switch_validator_msg" = "ステーキング中の資産の検証者を変更します。";
 "str_cliam_reward" = "利息を受け取る";
 "str_cliam_reward_msg" = "積み重ねられた利子を受け取ります。";
-"str_compounding" = "配合";
+"str_cliam_commission" = "コミッションを請求";
+"str_compounding" = "コンパウンディング";
 "str_compounding_msg" = "積み上げ利子をすぐにステーキングします。";
 "str_cancel_unbonding" = "アンステーキングのキャンセル";
 "str_cancel_unbonding_msg" = "アンステーキングをキャンセルし、すぐにステーキング状態に戻ります。";
@@ -359,6 +360,10 @@
 "str_change_end_point" = "End-Point 変更";
 "str_current_epoch" = "現在 Epoch";
 "str_next_reward_distibution" = "次の報酬分配";
+"str_next_epoch" = "次のエポックを有効化";
+"str_coin_manage_stake" = "%@ステーキング管理";
+"str_staked_coin" = "ステーキングされた%@";
+"str_staked_coin_status" = "ステーキングされた%@のステータス";
 
 
 "btn_delegate" = "  委任する";
@@ -453,6 +458,13 @@
 "msg_sui_guide_1" = "ステーキングを開始した場合、現在のEpoch(%@) が終了するまで「保留」状態のままになります。";
 "msg_sui_guide_2" = "次のEpoch (%@) の終了時に報酬が分配されます。後続の各エポックは繰り返されます。";
 "msg_sui_guide_3" = "報酬は複利で付与され、ステーキング解除開始後すぐに使用できます。";
+"msg_btc_stake" = "これは、TaprootおよびNative Segwitにステーキングされた%@の合計額です。";
+"msg_btc_stake_timelock" = "%@をステーキングすると、最大%@ロックされます。\nこの期間が過ぎると、アンステーキングなしで自動的に引き出し可能になります。";
+"btc_timelock_weeks" = "%d週間";
+"msg_btc_unstake_period" = "いつでもアンステーキングできます。%@のアンステーキング期間の後、出金可能になります。";
+"btc_unstake_period_days" = "%d日間";
+"msg_babylon_pending_state" = "BABYLONチェーンでは、ステーキング操作（ステーク、アンステーク、バリデーターの変更、アンステークキャンセルなど）は \"Pending\" 状態から始まります。現在のエポックが終了し、次のエポックが始まると、ステーキング操作は \"Active\" 状態に移行します。";
+"msg_babylon_active_state" = "\"Active\" 状態とは、\"Pending\" 状態が終了し、実行された操作が完全にアクティブになったことを意味します。この状態では、ユーザーがリクエストしたすべてのステーキング機能が正常に動作しています。";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -1017,6 +1029,13 @@
 "title_earn_list" = "Earning List";
 "title_claimable_chains" = "リワード対象チェーン";
 "title_voting_period_proposals" = "Voting Period Proposals";
+"title_coin_stake" = "%@ ステーク";
+"title_coin_unstake" = "%@ ステークを解除する";
+"title_coin_cancel_unstaking" = "%@ アンステーキングをキャンセル";
+"title_coin_switch_validator" = "%@ バリデーターを切り替える";
+"title_coin_rewards_claim" = "%@ 利息を受け取る";
+"title_coin_commission_claim" = "%@ コミッションを請求";
+"title_coin_compounding" = "%@ コンパウンディング";
 
 
 "proposal_type_basic" = "Basic";
@@ -1412,6 +1431,7 @@
 
 "date_format" = "yyyy-MM-dd";
 "full_time_format" = "yyyy-MM-dd HH:mm:ss";
+"date_simple_time_format" = "yyyy年M月d日 (HH:mm)";
 
 "new_account_restore" = "ウォレットを復元";
 "new_account_private_key" = "プライベートキー";

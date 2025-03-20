@@ -107,7 +107,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="stw-1k-txt">
-                                <rect key="frame" x="14" y="76.666666666666671" width="431" height="42"/>
+                                <rect key="frame" x="14" y="76.666666666666671" width="431" height="96.000000000000014"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8si-2P-uhN">
                                         <rect key="frame" x="0.0" y="0.0" width="431" height="15"/>
@@ -184,17 +184,17 @@
                                             <constraint firstItem="iK8-mJ-2E2" firstAttribute="centerY" secondItem="2PR-mX-WxD" secondAttribute="centerY" id="ePn-us-lwc"/>
                                         </constraints>
                                     </view>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djb-yK-BmV">
-                                        <rect key="frame" x="0.0" y="42" width="431" height="15"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djb-yK-BmV">
+                                        <rect key="frame" x="0.0" y="53.999999999999986" width="431" height="15"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unstaking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIZ-Rm-3Ml">
-                                                <rect key="frame" x="0.0" y="-0.33333333333334281" width="57.666666666666664" height="15.333333333333334"/>
+                                                <rect key="frame" x="0.0" y="-0.33333333333331439" width="57.666666666666664" height="15.333333333333334"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33Q-oJ-LnP">
-                                                <rect key="frame" x="406" y="-0.33333333333334281" width="25" height="15.333333333333334"/>
+                                                <rect key="frame" x="406" y="-0.33333333333331439" width="25" height="15.333333333333334"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
@@ -209,17 +209,17 @@
                                             <constraint firstItem="NIZ-Rm-3Ml" firstAttribute="centerY" secondItem="djb-yK-BmV" secondAttribute="centerY" id="k7t-cq-vcX"/>
                                         </constraints>
                                     </view>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xr9-xN-j4y">
-                                        <rect key="frame" x="0.0" y="42" width="431" height="15"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xr9-xN-j4y">
+                                        <rect key="frame" x="0.0" y="80.999999999999986" width="431" height="15"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward +3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4T-nz-xPc">
-                                                <rect key="frame" x="0.0" y="-0.33333333333334281" width="60.333333333333336" height="15.333333333333334"/>
+                                                <rect key="frame" x="0.0" y="-0.33333333333331439" width="60.333333333333336" height="15.333333333333334"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBH-LP-7VW">
-                                                <rect key="frame" x="406" y="-0.33333333333334281" width="25" height="15.333333333333334"/>
+                                                <rect key="frame" x="406" y="-0.33333333333331439" width="25" height="15.333333333333334"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
@@ -235,16 +235,16 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e38-wk-FZl">
-                                        <rect key="frame" x="0.0" y="42" width="431" height="15"/>
+                                        <rect key="frame" x="0.0" y="95.999999999999986" width="431" height="15"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commission" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0M-5q-Gzt">
-                                                <rect key="frame" x="0.0" y="-0.33333333333334281" width="70.333333333333329" height="15.333333333333334"/>
+                                                <rect key="frame" x="0.0" y="-0.33333333333331439" width="70.333333333333329" height="15.333333333333334"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKV-rn-qg2">
-                                                <rect key="frame" x="406" y="-0.33333333333334281" width="25" height="15.333333333333334"/>
+                                                <rect key="frame" x="406" y="-0.33333333333331439" width="25" height="15.333333333333334"/>
                                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                                 <color key="textColor" name="_color01"/>
                                                 <nil key="highlightedColor"/>
@@ -353,7 +353,7 @@
             <color red="0.74509803921568629" green="0.81960784313725488" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_divider">
-            <color red="1" green="1" blue="1" alpha="0.20200000703334808" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="0.10000000149011612" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_voteYes">
             <color red="0.030999999493360519" green="0.81999999284744263" blue="0.32199999690055847" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

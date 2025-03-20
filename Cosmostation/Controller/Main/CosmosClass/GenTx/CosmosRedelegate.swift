@@ -13,6 +13,7 @@ import SDWebImage
 
 class CosmosRedelegate: BaseVC {
     
+    @IBOutlet weak var titleCoinImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var fromCardView: FixCardView!
@@ -91,6 +92,8 @@ class CosmosRedelegate: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+
         fromCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickFromValidator)))
         toCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToValidator)))
         amountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
@@ -147,6 +150,8 @@ class CosmosRedelegate: BaseVC {
     }
     
     override func setLocalizedString() {
+        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        titleLabel.text = String(format: NSLocalizedString("title_coin_switch_validator", comment: ""), symbol)
         amountTitle.text = NSLocalizedString("str_redelegate_amount", comment: "")
         amountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
@@ -498,7 +503,16 @@ class CosmosRedelegate: BaseVC {
                 $0.amount = toCoin!
             }
             return Signer.genRedelegateMsg(redelegate)
-
+            
+        } else if selectedChain is ChainBabylon {
+            let redelegate = Babylon_Epoching_V1_MsgWrappedBeginRedelegate.with {
+                $0.msg.delegatorAddress = selectedChain.bechAddress!
+                $0.msg.validatorSrcAddress = fromValidator!.operatorAddress
+                $0.msg.validatorDstAddress = toValidator!.operatorAddress
+                $0.msg.amount = toCoin!
+            }
+            return Signer.genRedelegateMsg(redelegate)
+            
         } else {
             let redelegate = Cosmos_Staking_V1beta1_MsgBeginRedelegate.with {
                 $0.delegatorAddress = selectedChain.bechAddress!

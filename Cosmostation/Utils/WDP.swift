@@ -282,4 +282,32 @@ public class WDP {
         return WUtils.getGapTime(date)
     }
     
+    static func dpTimeUntil(_ timeInt: Int64?) -> String {
+        guard let date = WUtils.timeInt64ToDate(timeInt! * 1000) else {
+            return ""
+        }
+        return WUtils.getRemainingTime(date)
+    }
+    
+    
+    static func dpDateWithSimpleTime(_ date: Date?) -> String {
+        guard let date else { return "-" }
+        
+        let localFormatter = DateFormatter()
+        localFormatter.locale = Locale(identifier: "en-US")
+        localFormatter.dateFormat = String(format: NSLocalizedString("date_simple_time_format", comment: ""), WDP.daySuffix(for: date))
+        return localFormatter.string(from: date)
+    }
+    
+    private static func daySuffix(for date: Date) -> String {
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: date)
+        
+        switch day {
+        case 1, 21, 31: return "st"
+        case 2, 22: return "nd"
+        case 3, 23: return "rd"
+        default: return "th"
+        }
+    }
 }

@@ -68,6 +68,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "AssetCosmosClassCell", bundle: nil), forCellReuseIdentifier: "AssetCosmosClassCell")
+        tableView.register(UINib(nibName: "AssetBabylonCell", bundle: nil), forCellReuseIdentifier: "AssetBabylonCell")
         tableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
@@ -424,8 +425,9 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
             dropBtn.animationSpeed = 1.3
             dropBtn.play()
             dropBtn.isHidden = false
+            dropBtn.tag = SheetType.MoveDropDetail.rawValue
     
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapDrop))
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn))
             tapGesture.cancelsTouchesInView = false
             dropBtn.addGestureRecognizer(tapGesture)
             
@@ -436,44 +438,39 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
             dropBtn.animationSpeed = 1.3
             dropBtn.play()
             dropBtn.isHidden = false
-    
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapDydx))
+            dropBtn.tag = SheetType.MoveDydx.rawValue
+
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn))
             tapGesture.cancelsTouchesInView = false
             dropBtn.addGestureRecognizer(tapGesture)
-
-        } else if (selectedChain.isSupportBTCStaking()) {
+            
+        } else if (selectedChain is ChainBabylon) {
             dropBtn.animation = LottieAnimation.named("btcStaking")
             dropBtn.contentMode = .scaleAspectFit
             dropBtn.loopMode = .loop
             dropBtn.animationSpeed = 1.3
             dropBtn.play()
             dropBtn.isHidden = false
-            
+            dropBtn.tag = SheetType.MoveBabylonDappDetail.rawValue
+
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn))
             tapGesture.cancelsTouchesInView = false
             dropBtn.addGestureRecognizer(tapGesture)
         }
     }
-    
-    @objc func tapDrop() {
-        let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
-        dappDetail.dappType = .INTERNAL_URL
-        dappDetail.dappUrl = URL(string: "https://app.drop.money/dashboard?referral_code=dropmaga")
-        dappDetail.modalPresentationStyle = .fullScreen
-        self.present(dappDetail, animated: true)
-    }
-    
-    @objc func tapDydx() {
-        guard let url = URL(string: "https://apps.apple.com/kr/app/dydx/id6475599596") else { return }
-        self.onShowSafariWeb(url)
-    }
-    
+
     @objc func tapFloatingBtn() {
-        let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
-        dappDetail.dappType = .INTERNAL_URL
-        dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
-        dappDetail.modalPresentationStyle = .fullScreen
-        self.present(dappDetail, animated: true)
+        if BaseData.instance.getEcosystemPopUpActiveStatus(SheetType(rawValue: dropBtn.tag)!) {
+            let dappPopUpView = EcosystemPopUpSheet(nibName: "EcosystemPopUpSheet", bundle: nil)
+            dappPopUpView.selectedChain = selectedChain
+            dappPopUpView.tag = dropBtn.tag
+            dappPopUpView.sheetDelegate = self
+            dappPopUpView.modalPresentationStyle = .overFullScreen
+            self.present(dappPopUpView, animated: true)
+            
+        } else {
+            onSelectedSheet(SheetType(rawValue: dropBtn.tag)!, [:])
+        }
     }
 
 }
@@ -629,6 +626,41 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.section == 3) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
                 cell.bindGnoClassToken(selectedChain, searchMintscanGrc20Tokens[indexPath.row])
+                return cell
+            }
+            
+        } else if (selectedChain is ChainBabylon) {
+            if (indexPath.section == 0) {
+                if (searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom) {
+                    let cell = tableView.dequeueReusableCell(withIdentifier:"AssetBabylonCell") as! AssetBabylonCell
+                    cell.btcStakeDelegate = self
+                    cell.bindStakeAsset(selectedChain)
+                    return cell
+                    
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                    cell.bindCosmosClassAsset(selectedChain, searchNativeCoins[indexPath.row])
+                    return cell
+                }
+                
+            } else if (indexPath.section == 1) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                cell.bindCosmosClassAsset(selectedChain, searchIbcCoins[indexPath.row])
+                return cell
+                
+            } else if (indexPath.section == 2) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                cell.bindCosmosClassAsset(selectedChain, searchBridgedCoins[indexPath.row])
+                return cell
+                
+            } else if (indexPath.section == 3) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                cell.bindCosmosClassToken(selectedChain, searchMintscanCw20Tokens[indexPath.row])
+                return cell
+                
+            } else if (indexPath.section == 4) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                cell.bindEvmClassToken(selectedChain, searchMintscanErc20Tokens[indexPath.row])
                 return cell
             }
             
@@ -841,3 +873,33 @@ extension CosmosCryptoVC: UISearchBarDelegate {
 }
 
 
+extension CosmosCryptoVC: BtcStakeSheetDelegate {
+    func onBindBtcStakeSheet() {
+        let sheet = BtcStakeSheet(nibName: "BtcStakeSheet", bundle: nil)
+        sheet.selectedChain = selectedChain
+        onStartSheet(sheet, 320, 0.6)
+    }
+}
+
+extension CosmosCryptoVC: BaseSheetDelegate {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
+        if sheetType == .MoveDropDetail {
+            let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+            dappDetail.dappType = .INTERNAL_URL
+            dappDetail.dappUrl = URL(string: "https://app.drop.money/dashboard?referral_code=dropmaga")
+            dappDetail.modalPresentationStyle = .fullScreen
+            self.present(dappDetail, animated: true)
+
+        } else if sheetType == .MoveDydx {
+            guard let url = URL(string: "https://apps.apple.com/kr/app/dydx/id6475599596") else { return }
+            self.onShowSafariWeb(url)
+
+        } else if sheetType == .MoveBabylonDappDetail {
+            let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+            dappDetail.dappType = .INTERNAL_URL
+            dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
+            dappDetail.modalPresentationStyle = .fullScreen
+            self.present(dappDetail, animated: true)
+        }
+    }
+}

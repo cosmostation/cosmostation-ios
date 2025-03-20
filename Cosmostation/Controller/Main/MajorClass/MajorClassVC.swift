@@ -75,7 +75,7 @@ class MajorClassVC: BaseVC {
         addressLabel.text = selectedChain.mainAddress
         
         onSetTabbarView()
-        if (selectedChain is ChainSui) {
+        if (selectedChain is ChainSui || selectedChain.isSupportBTCStaking()) {
             onSetFabButton()
         }
         
@@ -91,6 +91,13 @@ class MajorClassVC: BaseVC {
         
         navigationItem.rightBarButtonItems = [explorerBarBtn]
         navigationItem.titleView = BgRandomButton()
+        
+        Task {
+            if let babylonBtcFetcher = (selectedChain as? ChainBitCoin86)?.getBabylonBtcFetcher(),
+               selectedChain.isSupportBTCStaking() {
+                _ = await babylonBtcFetcher.fetchFinalityProvidersInfo()
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -161,8 +168,8 @@ class MajorClassVC: BaseVC {
         tabbar.selectionIndicatorStrokeColor = .white
         tabbar.setTitleFont(.fontSize14Bold, for: .normal)
         tabbar.setTitleFont(.fontSize14Bold, for: .selected)
-        tabbar.setTitleColor(.color02, for: .normal)
-        tabbar.setTitleColor(.color02, for: .selected)
+        tabbar.setTitleColor(.color03, for: .normal)
+        tabbar.setTitleColor(.color01, for: .selected)
         tabbar.setSelectedItem(coinTabBar, animated: false)
         tabbar.tabBarDelegate = self
         tabbar.preferredLayoutStyle = .fixed
@@ -199,6 +206,10 @@ class MajorClassVC: BaseVC {
         if (selectedChain is ChainSui) {
             mainFab.addItem(title: "Earn", image: UIImage(named: "iconFab")) { _ in
                 self.onSuiStake()
+            }
+        } else if (selectedChain.isSupportBTCStaking()) {
+            mainFab.addItem(title: "Earn", image: UIImage(named: "iconFab")) { _ in
+                self.onBtcStake()
             }
         }
         
@@ -278,4 +289,19 @@ extension MajorClassVC {
         self.navigationController?.pushViewController(stakingInfoVC, animated: true)
         
     }
+    
+    func onBtcStake() {
+        onShowToast("Coming Soon")
+//        if let babylonBtcFetcher = (selectedChain as? ChainBitCoin86)?.getBabylonBtcFetcher() {
+//            if babylonBtcFetcher.finalityProviders.isEmpty {
+//                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+//                return
+//            }
+//        }
+//
+//        let stakingInfoVC = BtcStakingInfoVC(nibName: "BtcStakingInfoVC", bundle: nil)
+//        stakingInfoVC.selectedChain = selectedChain as? ChainBitCoin86
+//        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
+    }
+
 }

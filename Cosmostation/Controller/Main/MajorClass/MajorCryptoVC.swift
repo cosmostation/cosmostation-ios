@@ -127,7 +127,8 @@ class MajorCryptoVC: BaseVC {
             floatingBtn.animationSpeed = 1.3
             floatingBtn.play()
             floatingBtn.isHidden = false
-    
+            floatingBtn.tag = SheetType.MoveBabylonDappDetail.rawValue
+
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn))
             tapGesture.cancelsTouchesInView = false
             floatingBtn.addGestureRecognizer(tapGesture)
@@ -136,12 +137,17 @@ class MajorCryptoVC: BaseVC {
     }
     
     @objc func tapFloatingBtn() {
-        let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
-        dappDetail.dappType = .INTERNAL_URL
-        dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
-        dappDetail.btcTargetChain = selectedChain
-        dappDetail.modalPresentationStyle = .fullScreen
-        self.present(dappDetail, animated: true)
+        if BaseData.instance.getEcosystemPopUpActiveStatus(SheetType(rawValue: floatingBtn.tag)!) {
+            let dappPopUpView = EcosystemPopUpSheet(nibName: "EcosystemPopUpSheet", bundle: nil)
+            dappPopUpView.selectedChain = selectedChain
+            dappPopUpView.tag = floatingBtn.tag
+            dappPopUpView.sheetDelegate = self
+            dappPopUpView.modalPresentationStyle = .overFullScreen
+            self.present(dappPopUpView, animated: true)
+            
+        } else {
+            onSelectedSheet(SheetType(rawValue: floatingBtn.tag)!, [:])
+        }
     }
 
 }
@@ -272,5 +278,17 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
         mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
         mask.locations = [NSNumber(value: location), NSNumber(value: location)]
         return mask;
+    }
+}
+
+extension MajorCryptoVC: BaseSheetDelegate {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
+        if sheetType == .MoveBabylonDappDetail {
+           let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+           dappDetail.dappType = .INTERNAL_URL
+           dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
+           dappDetail.modalPresentationStyle = .fullScreen
+           self.present(dappDetail, animated: true)
+       }
     }
 }

@@ -50,6 +50,7 @@ let KEY_SKIP_CHAIN_INFO                 = "KEY_SKIP_CHAIN_INFO"
 let KEY_SKIP_ASSET_INFO                 = "KEY_SKIP_ASSET_INFO"
 let KEY_HIDE_VALUE                      = "KEY_HIDE_VALUE"
 let KEY_INJECTION_WARN                  = "KEY_INJECTION_WARN"
+let KEY_POPUP_SHEET                     = "KEY_POPUP_SHEET"
 let KEY_CHAIN_SORT                      = "KEY_CHAIN_SORT"
 
 let MINTSCAN_DEV_API_URL                = "https://dev.api.mintscan.io/";

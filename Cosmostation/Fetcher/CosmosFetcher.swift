@@ -138,6 +138,12 @@ class CosmosFetcher {
             cosmosValidators.append(contentsOf: unbonding ?? [])
             cosmosValidators.append(contentsOf: unbonded ?? [])
             
+            cosmosValidators = cosmosValidators.map { validator in
+                var updatedValidator = validator
+                updatedValidator.description_p.moniker = validator.description_p.moniker.trimmingCharacters(in: .whitespaces)
+                return updatedValidator
+            }
+            
             cosmosValidators.sort {
                 if ($0.description_p.moniker == "Cosmostation") { return true }
                 if ($1.description_p.moniker == "Cosmostation") { return false }
@@ -175,8 +181,8 @@ class CosmosFetcher {
                 .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(commissionValue(denom, usd))
             
         } else {
-            return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
-                .adding(commissionValue(denom, usd))
+            return balanceValue(denom, usd).adding(vestingValue(denom, usd))//.adding(rewardValue(denom, usd))
+                //.adding(commissionValue(denom, usd))
         }
     }
     
@@ -346,6 +352,17 @@ extension CosmosFetcher {
                 }
             }
         })
+        if let babylonBtcFetcher = (chain as? ChainBabylon)?.getBabylonBtcFetcher() {
+            let btcStakingRewards = babylonBtcFetcher.btcStakedRewards
+            btcStakingRewards.forEach { reward in
+                if let index = cosmosRewardCoins?.firstIndex(where: { $0.denom == reward.denom }) {
+                    let amount = NSDecimalNumber(string: cosmosRewardCoins?[index].amount)
+                    cosmosRewardCoins?[index].amount = amount.adding(NSDecimalNumber(string: reward.amount)).stringValue
+                } else {
+                    cosmosRewardCoins?.append(Cosmos_Base_V1beta1_Coin(reward.denom, reward.amount))
+                }
+            }
+        }
         return cosmosRewardCoins!
     }
     
@@ -703,14 +720,23 @@ extension CosmosFetcher {
     }
     
     func fetchLastBlock() async throws -> Int64? {
-        if (getEndpointType() == .UseGRPC) {
-            let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
-            return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: getClient()).getLatestBlock(req, callOptions: getCallOptions()).response.get().block.header.height
-        } else {
-            let url = getLcd() + "cosmos/base/tendermint/v1beta1/blocks/latest"
+        if chain is ChainCelestia {
+            let url = chain.lcdUrl + "cosmos/base/tendermint/v1beta1/blocks/latest"
             let response = try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
             if let height = response?["block"]["header"]["height"].string {
                 return Int64(height)!
+            }
+            
+        } else {
+            if (getEndpointType() == .UseGRPC) {
+                let req = Cosmos_Base_Tendermint_V1beta1_GetLatestBlockRequest()
+                return try? await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: getClient()).getLatestBlock(req, callOptions: getCallOptions()).response.get().block.header.height
+            } else {
+                let url = getLcd() + "cosmos/base/tendermint/v1beta1/blocks/latest"
+                let response = try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
+                if let height = response?["block"]["header"]["height"].string {
+                    return Int64(height)!
+                }
             }
         }
         return nil

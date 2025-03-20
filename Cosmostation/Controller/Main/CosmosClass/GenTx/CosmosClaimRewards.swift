@@ -12,6 +12,7 @@ import SwiftProtobuf
 
 class CosmosClaimRewards: BaseVC {
     
+    @IBOutlet weak var titleCoinImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var validatorsLabel: UILabel!
@@ -135,8 +136,15 @@ class CosmosClaimRewards: BaseVC {
             }
             if (anotherRewardDenom.count > 0) {
                 rewardCntLabel.text = "+ " + String(anotherRewardDenom.count)
+                titleCoinImage.isHidden = true
+                titleLabel.text = NSLocalizedString("str_cliam_reward", comment: "")
             } else {
                 rewardCntLabel.isHidden = true
+                titleCoinImage.isHidden = false
+                let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+                titleLabel.text = String(format: NSLocalizedString("title_coin_rewards_claim", comment: ""), symbol)
+                titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+                
             }
         }
     }
