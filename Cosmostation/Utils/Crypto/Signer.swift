@@ -223,6 +223,34 @@ class Signer {
         return anyMsgs
     }
     
+    static func genBabylonClaimStakingRewardMsg(_ address: String, _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) -> [Google_Protobuf_Any] {
+        var anyMsgs = [Google_Protobuf_Any]()
+        for reward in rewards {
+            let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
+                $0.delegatorAddress = address
+                $0.validatorAddress = reward.validatorAddress
+            }
+            let anyMsg = Google_Protobuf_Any.with {
+                $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
+                $0.value = try! claimMsg.serializedData()
+            }
+            anyMsgs.append(anyMsg)
+        }
+        
+        let claimMsg = Babylon_Incentive_MsgWithdrawReward.with {
+            $0.address = address
+            $0.type = "btc_delegation"
+        }
+        
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/babylon.incentive.MsgWithdrawReward"
+            $0.value = try! claimMsg.serializedData()
+        }
+        anyMsgs.append(anyMsg)
+
+        return anyMsgs
+    }
+    
     //Tx for Common Claim Commission
     static func genClaimCommissionMsg(_ commission: Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
