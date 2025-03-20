@@ -13,6 +13,7 @@ import SDWebImage
 
 class CosmosUndelegate: BaseVC {
     
+    @IBOutlet weak var titleCoinImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var validatorCardView: FixCardView!
@@ -81,6 +82,7 @@ class CosmosUndelegate: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
         
         validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
         unStakingAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
@@ -114,6 +116,8 @@ class CosmosUndelegate: BaseVC {
     }
     
     override func setLocalizedString() {
+        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        titleLabel.text = String(format: NSLocalizedString("title_coin_unstake", comment: ""), symbol)
         unStakingAmountTitle.text = NSLocalizedString("str_undelegate_amount", comment: "")
         unStakingAmountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")

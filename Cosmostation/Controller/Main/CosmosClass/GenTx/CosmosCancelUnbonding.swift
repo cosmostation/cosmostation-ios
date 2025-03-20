@@ -12,6 +12,7 @@ import SwiftProtobuf
 
 class CosmosCancelUnbonding: BaseVC {
     
+    @IBOutlet weak var titleCoinImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var validatorsLabel: UILabel!
@@ -66,6 +67,8 @@ class CosmosCancelUnbonding: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+        
         if let initiaFetcher {
             if let validator = initiaFetcher.initiaValidators.filter({ $0.operatorAddress == unbondingEntryInitia.validatorAddress }).first  {
                 validatorsLabel.text = validator.description_p.moniker
@@ -117,6 +120,8 @@ class CosmosCancelUnbonding: BaseVC {
     }
     
     override func setLocalizedString() {
+        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        titleLabel.text = String(format: NSLocalizedString("title_coin_cancel_unstaking", comment: ""), symbol)
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
         feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
         cancelBtn.setTitle(NSLocalizedString("str_cancle_unstake", comment: ""), for: .normal)

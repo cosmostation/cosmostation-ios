@@ -70,7 +70,8 @@ class CosmosStakingInfoVC: BaseVC {
     }
     
     override func setLocalizedString() {
-        navigationItem.title = NSLocalizedString("title_staking_info", comment: "")
+        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        navigationItem.title = String(format: NSLocalizedString("str_coin_manage_stake", comment: ""), symbol)
         stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
     }
     

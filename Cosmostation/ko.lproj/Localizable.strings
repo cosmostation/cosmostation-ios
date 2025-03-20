@@ -318,6 +318,7 @@
 "str_switch_validator_msg" = "스테이킹중인 자산의 검증인을 변경합니다.";
 "str_cliam_reward" = "이자 받기";
 "str_cliam_reward_msg" = "쌓인 이자를 받습니다.";
+"str_cliam_commission" = "커미션 받기";
 "str_compounding" = "컴파운딩";
 "str_compounding_msg" = "쌓인 이자를 즉시 스테이킹 합니다.";
 "str_cancel_unbonding" = "언스테이킹 취소";
@@ -359,6 +360,10 @@
 "str_change_end_point" = "End-Point 변경";
 "str_current_epoch" = "현재 에포치";
 "str_next_reward_distibution" = "다음 보상 분배";
+"str_next_epoch" = "다음 에포치 활성화";
+"str_coin_manage_stake" = "%@ 스테이킹 관리";
+"str_staked_coin" = "스테이킹된 %@";
+"str_staked_coin_status" = "스테이킹된 %@ 상태";
 
 
 "btn_delegate" = "  위임 하기";
@@ -453,6 +458,14 @@
 "msg_sui_guide_1" = "스테이킹을 시작한 경우 현재 에포치(%@)가 끝날 때까지 펜딩상태로 유지됩니다.(언스테이킹 불가)";
 "msg_sui_guide_2" = "다음 에포치(%@)가 완료된 후 리워드가 발생하며, 이후 에포치 마다 추가적인 보상이 제공됩니다.";
 "msg_sui_guide_3" = "보상은 복리로 누적되며, 언스테이킹을 하는 즉시 해당 수량을 모두 사용할 수 있습니다.";
+"msg_btc_stake" = "Taproot 및 Native Segwit에 스테이킹된 %@의 총합입니다.";
+"msg_btc_stake_timelock" = "%@를 스테이킹하면 최대 %@ 동안 잠깁니다.\n이 기간이 지나면 언스테이킹 없이 자동으로 출금할 수 있습니다.";
+"btc_timelock_weeks" = "%d주";
+"msg_btc_unstake_period" = "언제든지 언스테이킹할 수 있으며, %@의 언스테이킹 기간 후 출금이 가능합니다.";
+"btc_unstake_period_days" = "%d일";
+"msg_babylon_pending_state" = "BABYLON 체인에서는 스테이킹 관련 기능(Stake, Unstake, Validator, Switch Validator, Unstake Cancel 등)을 실행하면 우선 Pending 상태로 시작됩니다.\n이후 현재 에포크가 종료되고 다음 에포크로 넘어가면, 해당 스테이킹 작업은 즉시 활성화 상태로 전환됩니다.";
+"msg_babylon_active_state" = "Active 상태란 Pending 상태가 종료되고 실행한 기능들이 정상적으로 활성화되고 있는 상태를 의미합니다.\n이 상태에서는 사용자가 요청한 스테이킹 관련 기능들이 모두 정상적으로 동작하게 됩니다.";
+
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";
@@ -1016,6 +1029,13 @@
 "title_reward_detail_list" = "리워드 상세";
 "title_earn_list" = "어닝 목록";
 "title_claimable_chains" = "리워드 대상 체인";
+"title_coin_stake" = "%@ 스테이크";
+"title_coin_unstake" = "%@ 언스테이크";
+"title_coin_cancel_unstaking" = "%@ 언스테이킹 취소";
+"title_coin_switch_validator" = "%@ 검증인 변경";
+"title_coin_rewards_claim" = "%@ 이자 받기";
+"title_coin_commission_claim" = "%@ 커미션 받기";
+"title_coin_compounding" = "%@ 컴파운딩";
 
 
 "proposal_type_basic" = "기본";
@@ -1411,6 +1431,7 @@
 
 "date_format" = "yyyy-MM-dd";
 "full_time_format" = "yyyy-MM-dd HH:mm:ss";
+"date_simple_time_format" = "yyyy년 M월 d일 (HH:mm)";
 
 "new_account_restore" = "지갑 복원";
 "new_account_private_key" = "개인키";

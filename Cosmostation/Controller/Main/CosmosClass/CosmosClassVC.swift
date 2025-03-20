@@ -299,7 +299,8 @@ class CosmosClassVC: BaseVC {
         }
         
         if (selectedChain.supportStaking) {
-            mainFab.addItem(title: "Manage Stake", image: UIImage(named: "iconFabStake")) { _ in
+            let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+            mainFab.addItem(title: "\(symbol) Manage stake", image: UIImage(named: "iconFabStake")) { _ in
                 self.onStakeInfo()
             }
         }
@@ -421,23 +422,9 @@ extension CosmosClassVC {
         guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
             return
         }
-        if let initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher() {
-            if (initiaFetcher.initiaValidators.count <= 0) {
-                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-                return
-            }
-            
-        } else if let zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher() {
-            if zenrockFetcher.validators.count <= 0 {
-                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-                return
-            }
-            
-        } else {
-            if (comsosFetcher.cosmosValidators.count <= 0) {
-                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-                return
-            }
+        if isValidatorsEmpty() {
+            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+            return
         }
         if (comsosFetcher.rewardAllCoins().count == 0) {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
@@ -451,6 +438,15 @@ extension CosmosClassVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
+        
+        if selectedChain is ChainBabylon {
+            let claimRewards = BabylonClaimRewards(nibName: "BabylonClaimRewards", bundle: nil)
+            claimRewards.selectedChain = selectedChain as? ChainBabylon
+            claimRewards.modalTransitionStyle = .coverVertical
+            self.present(claimRewards, animated: true)
+            return
+        }
+
         let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
         claimRewards.claimableRewards = comsosFetcher.claimableRewards()
         claimRewards.selectedChain = selectedChain
@@ -462,24 +458,11 @@ extension CosmosClassVC {
         guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
             return
         }
-        if let initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher() {
-            if (initiaFetcher.initiaValidators.count <= 0) {
-                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-                return
-            }
-            
-        } else if let zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher() {
-            if zenrockFetcher.validators.count <= 0 {
-                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-                return
-            }
-            
-        } else {
-            if (comsosFetcher.cosmosValidators.count <= 0) {
-                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-                return
-            }
+        if isValidatorsEmpty() {
+            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+            return
         }
+        
         if (comsosFetcher.rewardAllCoins().count == 0) {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return
@@ -533,30 +516,48 @@ extension CosmosClassVC {
     }
     
     func onStakeInfo() {
-        guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
+        guard let _ = selectedChain.getCosmosfetcher() else {
             return
         }
         
+        if isValidatorsEmpty() {
+            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+            return
+        }
+        
+        if selectedChain is ChainBabylon {
+            onBindBabylonStakeInfo()
+            return
+        }
+        
+        let stakingInfoVC = CosmosStakingInfoVC(nibName: "CosmosStakingInfoVC", bundle: nil)
+        stakingInfoVC.selectedChain = selectedChain
+        stakingInfoVC.cosmosCryptoVC = cosmosCryptoVC
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
+    }
+    
+    func isValidatorsEmpty() -> Bool {
         if let initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher() {
             if initiaFetcher.initiaValidators.count <= 0 {
-                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-                return
+                return true
             }
             
         } else if let zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher() {
             if zenrockFetcher.validators.count <= 0 {
-                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-                return
+                return true
             }
             
-        } else {
-            if (comsosFetcher.cosmosValidators.count <= 0) {
-                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-                return
+        } else if let cosmosFetcher = selectedChain.getCosmosfetcher() {
+            if (cosmosFetcher.cosmosValidators.count <= 0) {
+                return true
             }
         }
-        
-        let stakingInfoVC = CosmosStakingInfoVC(nibName: "CosmosStakingInfoVC", bundle: nil)
+        return false
+    }
+    
+    func onBindBabylonStakeInfo() {
+        let stakingInfoVC = BabylonStakingInfoVC(nibName: "BabylonStakingInfoVC", bundle: nil)
         stakingInfoVC.selectedChain = selectedChain
         stakingInfoVC.cosmosCryptoVC = cosmosCryptoVC
         self.navigationItem.title = ""

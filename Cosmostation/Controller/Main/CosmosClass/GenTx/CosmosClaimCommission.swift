@@ -12,6 +12,7 @@ import SwiftProtobuf
 
 class CosmosClaimCommission: BaseVC {
     
+    @IBOutlet weak var titleCoinImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var validatorsLabel: UILabel!
@@ -96,8 +97,15 @@ class CosmosClaimCommission: BaseVC {
         }
         if (cosmosFetcher.cosmosCommissions.count > 1) {
             commissionCntLabel.text = "+ " + String(cosmosFetcher.cosmosCommissions.count - 1)
+            titleCoinImage.isHidden = true
+            titleLabel.text = NSLocalizedString("str_cliam_commission", comment: "")
+            
         } else {
             commissionCntLabel.isHidden = true
+            titleCoinImage.isHidden = false
+            let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+            titleLabel.text = String(format: NSLocalizedString("title_coin_commission_claim", comment: ""), symbol)
+            titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
         }
     }
     

@@ -13,6 +13,7 @@ import SDWebImage
 
 class CosmosDelegate: BaseVC {
     
+    @IBOutlet weak var titleCoinImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var validatorCardView: FixCardView!
@@ -83,6 +84,8 @@ class CosmosDelegate: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+        
         validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
         stakingAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
@@ -129,6 +132,8 @@ class CosmosDelegate: BaseVC {
     }
     
     override func setLocalizedString() {
+        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        titleLabel.text = String(format: NSLocalizedString("title_coin_stake", comment: ""), symbol)
         stakingAmountTitle.text = NSLocalizedString("str_delegate_amount", comment: "")
         stakingAmountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")

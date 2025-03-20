@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class SuiUnstake: BaseVC {
     
+    @IBOutlet weak var titleCoinImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var validatorCardView: FixCardView!
@@ -65,6 +66,7 @@ class SuiUnstake: BaseVC {
     }
     
     override func setLocalizedString() {
+        titleLabel.text = String(format: NSLocalizedString("title_coin_unstake", comment: ""), "SUI")
         feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
         unstakeBtn.setTitle(NSLocalizedString("str_unstake", comment: ""), for: .normal)
     }
@@ -83,7 +85,7 @@ class SuiUnstake: BaseVC {
     
     func onInitView() {
         onUpdateValidatorView()
-
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
         titleLabel.isHidden = false
         validatorCardView.isHidden = false
         feeCardView.isHidden = false

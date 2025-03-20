@@ -195,7 +195,7 @@
 "str_create_another_account" = "Create Another Account";
 "str_delete" = "Delete";
 "str_delete_address_book" = "Delete Address Book";
-"str_select_valuables" = "Select Wallets with Asset";
+"str_select_valuables" = "Select wallet with assets";
 "str_select_hd_path" = "Select HD Path";
 "str_to_add_amount" = "To Add Amount";
 "str_to_remove_amount" = "To Remove Amount";
@@ -318,6 +318,7 @@
 "str_switch_validator_msg" = "Continue staking with changing validators.";
 "str_cliam_reward" = "Claim Rewards";
 "str_cliam_reward_msg" = "You receive accumulated rewards.";
+"str_cliam_commission" = "Claim Commission";
 "str_compounding" = "Compounding";
 "str_compounding_msg" = "Immediately stake the accumulated rewards.";
 "str_cancel_unbonding" = "Cancel Unstaking";
@@ -359,6 +360,10 @@
 "str_change_end_point" = "Change End-Point";
 "str_current_epoch" = "Current Epoch";
 "str_next_reward_distibution" = "Next Reward";
+"str_next_epoch" = "Activate Next Epoch";
+"str_coin_manage_stake" = "%@ Manage stake";
+"str_staked_coin" = "Staked %@";
+"str_staked_coin_status" = "Staked %@ Status";
 
 
 "btn_delegate" = "  Delegate";
@@ -453,6 +458,13 @@
 "msg_sui_guide_1" = "If you have started staking, it will remain in a 'pending' state until the current epoch (%@) ends.";
 "msg_sui_guide_2" = "At the end of the next epoch (%@), rewards will be distributed. Each subsequent epoch will be repeated.";
 "msg_sui_guide_3" = "Rewards are compounded and can be used immediately after the start of unstaking.";
+"msg_btc_stake" = "This is the combined amount of %@ staked in Taproot and Native Segwit.";
+"msg_btc_stake_timelock" = "After staking %@, it is locked for up to %@.\nAfter this period, it becomes automatically withdrawable without unstaking.";
+"btc_timelock_weeks" = "%d weeks";
+"msg_btc_unstake_period" = "You can unstake at any time, It will become withdrawable after a %@ unstaking period.";
+"btc_unstake_period_days" = "%d-day";
+"msg_babylon_pending_state" = "On the BABYLON chain, staking actions (Stake, Unstake, Validator, Switch Validator, Unstake Cancel, etc.) start in a Pending state. Once the current epoch ends and the next epoch begins, the staking action will transition to Active.";
+"msg_babylon_active_state" = "The Active state means that the Pending state has ended, and the executed actions are now fully activated. In this state, all staking functions requested by the user are working as intended.";
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -1017,6 +1029,13 @@
 "title_earn_list" = "Earning List";
 "title_claimable_chains" = "Claimable Chains";
 "title_voting_period_proposals" = "Voting Period Proposals";
+"title_coin_stake" = "%@ Stake";
+"title_coin_unstake" = "%@ Unstake";
+"title_coin_cancel_unstaking" = "%@ Cancel Unstaking";
+"title_coin_switch_validator" = "%@ Switch Validator";
+"title_coin_rewards_claim" = "%@ Rewards Claim";
+"title_coin_commission_claim" = "%@ Commission Claim";
+"title_coin_compounding" = "%@ Compounding";
 
 
 "proposal_type_basic" = "Basic";
@@ -1413,6 +1432,8 @@
 
 "date_format" = "MMMM dd, yyyy";
 "full_time_format" = "dd-MM-yyyy HH:mm:ss";
+"date_simple_time_format" = "MMM d'%@', yyyy (HH:mm)";
+
 
 "new_account_restore" = "Restore with";
 "new_account_private_key" = "Private Key";

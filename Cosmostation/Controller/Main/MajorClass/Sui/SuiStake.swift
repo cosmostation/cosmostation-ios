@@ -13,6 +13,7 @@ import SDWebImage
 
 class SuiStake: BaseVC {
     
+    @IBOutlet weak var titleCoinImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var validatorCardView: FixCardView!
@@ -80,6 +81,7 @@ class SuiStake: BaseVC {
     }
     
     override func setLocalizedString() {
+        titleLabel.text = String(format: NSLocalizedString("title_coin_stake", comment: ""), "SUI")
         stakingAmountTitle.text = NSLocalizedString("str_delegate_amount", comment: "")
         stakingAmountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
         feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
@@ -103,6 +105,8 @@ class SuiStake: BaseVC {
         onUpdateValidatorView()
         
         availableAmount = suiFetcher.balanceAmount(SUI_MAIN_DENOM).subtracting(suiFeeBudget)
+        
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
         
         loadingView.isHidden = true
         titleLabel.isHidden = false

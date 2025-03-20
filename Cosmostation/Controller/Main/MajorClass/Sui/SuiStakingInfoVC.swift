@@ -120,7 +120,7 @@ class SuiStakingInfoVC: BaseVC {
     }
     
     override func setLocalizedString() {
-        navigationItem.title = NSLocalizedString("title_staking_info", comment: "")
+        navigationItem.title = String(format: NSLocalizedString("str_coin_manage_stake", comment: ""), "SUI")
         epochTitle.text = NSLocalizedString("str_current_epoch", comment: "")
         timeTitle.text = NSLocalizedString("str_next_reward_distibution", comment: "")
         stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
