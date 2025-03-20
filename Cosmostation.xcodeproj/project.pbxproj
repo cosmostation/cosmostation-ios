@@ -1700,6 +1700,7 @@
 		7981F7622D0C333E00BB50DA /* ChainRouterEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */; };
 		7981F7642D0C343D00BB50DA /* ChainRealioEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F7632D0C343D00BB50DA /* ChainRealioEVM.swift */; };
 		7987524A2CFFF32C00308EAC /* ChainAaron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798752492CFFF32C00308EAC /* ChainAaron.swift */; };
+		79909BCD2D8BB51D000CE2ED /* ChainSelf_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79909BCC2D8BB51D000CE2ED /* ChainSelf_T.swift */; };
 		799B4A772D1E439D00998833 /* ChainForma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A762D1E439D00998833 /* ChainForma.swift */; };
 		799B4A7B2D1EA21700998833 /* ChainPundix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A7A2D1EA21700998833 /* ChainPundix.swift */; };
 		799B4A7F2D223FA900998833 /* ChainFxcoreEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A7E2D223FA900998833 /* ChainFxcoreEVM.swift */; };
@@ -3151,6 +3152,7 @@
 		7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainRouterEVM.swift; sourceTree = "<group>"; };
 		7981F7632D0C343D00BB50DA /* ChainRealioEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainRealioEVM.swift; sourceTree = "<group>"; };
 		798752492CFFF32C00308EAC /* ChainAaron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAaron.swift; sourceTree = "<group>"; };
+		79909BCC2D8BB51D000CE2ED /* ChainSelf_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSelf_T.swift; sourceTree = "<group>"; };
 		799B4A762D1E439D00998833 /* ChainForma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainForma.swift; sourceTree = "<group>"; };
 		799B4A7A2D1EA21700998833 /* ChainPundix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPundix.swift; sourceTree = "<group>"; };
 		799B4A7E2D223FA900998833 /* ChainFxcoreEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFxcoreEVM.swift; sourceTree = "<group>"; };
@@ -4131,6 +4133,7 @@
 				E16FB7252C7595E6005660D1 /* ChainMantra_T.swift */,
 				04D785582C32B171009D1A94 /* ChainNeutron_T.swift */,
 				E18B21FB2C4A4EE900AD572F /* ChainNillion_T.swift */,
+				79909BCC2D8BB51D000CE2ED /* ChainSelf_T.swift */,
 				040AC1832C9BDC5F00427AFD /* ChainStoryEVM_T.swift */,
 				04E4138E2D27C788001378D3 /* ChainTabiEVM_T.swift */,
 				048CB5412D2E8A2100061729 /* ChainBabylon_T.swift */,
@@ -7655,6 +7658,7 @@
 				04C8179E2BA98D75006B800A /* cosmos_authz_v1beta1_query.pb.swift in Sources */,
 				045033142C1F029A00235F6A /* ChainSecret529.swift in Sources */,
 				E122DC582A8A4712006D1E7B /* tendermint_crypto_keys.pb.swift in Sources */,
+				79909BCD2D8BB51D000CE2ED /* ChainSelf_T.swift in Sources */,
 				04D279F32A67C9A600AF046A /* ChainSui.swift in Sources */,
 				04A420F62C74D3B200C0E1A2 /* OpCode.swift in Sources */,
 				0478439D2AC991B300462F1C /* injective_wasmx_v1_proposal.pb.swift in Sources */,
