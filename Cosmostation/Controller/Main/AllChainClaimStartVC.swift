@@ -235,12 +235,21 @@ extension AllChainClaimStartVC: UITableViewDelegate, UITableViewDataSource {
 extension AllChainClaimStartVC {
     
     func simulateClaimTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) async throws -> UInt64? {
-        let msgs = Signer.genClaimStakingRewardMsg(chain.bechAddress!, claimableRewards)
+        let msgs = onBindRewardMsg(chain, claimableRewards)
         if let cosmosFetcher = chain.getCosmosfetcher(),
            let simulReq = try await Signer.genSimul(chain, msgs, "", chain.getInitPayableFee()!, nil) {
             return try await cosmosFetcher.simulateTx(simulReq)
         }
         return nil
+    }
+    
+    func onBindRewardMsg(_ selectedChain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) -> [Google_Protobuf_Any] {
+        if selectedChain is ChainBabylon {
+            return Signer.genBabylonClaimStakingRewardMsg(selectedChain.bechAddress!, claimableRewards)
+            
+        } else {
+            return Signer.genClaimStakingRewardMsg(selectedChain.bechAddress!, claimableRewards)
+        }
     }
     
     func broadcastClaimTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward], 
