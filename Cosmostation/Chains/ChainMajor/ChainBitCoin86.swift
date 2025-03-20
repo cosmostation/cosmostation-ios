@@ -11,7 +11,8 @@ import Foundation
 class ChainBitCoin86: BaseChain {
     
     var btcFetcher: BtcFetcher?
-
+    var babylonBtcFetcher: BabylonBTCFetcher?
+    
     override init() {
         super.init()
         
@@ -38,6 +39,12 @@ class ChainBitCoin86: BaseChain {
         if (btcFetcher != nil) { return btcFetcher }
         btcFetcher = BtcFetcher(self)
         return btcFetcher
+    }
+    
+    func getBabylonBtcFetcher() -> BabylonBTCFetcher? {
+        if (babylonBtcFetcher != nil) { return babylonBtcFetcher }
+        babylonBtcFetcher = BabylonBTCFetcher(self)
+        return babylonBtcFetcher
     }
     
     override func fetchBalances() {
@@ -67,6 +74,7 @@ class ChainBitCoin86: BaseChain {
         fetchState = .Busy
         Task {
             let btcResult = await getBtcFetcher()?.fetchBtcData(id)
+            let _ = await getBabylonBtcFetcher()?.fetchBtcStakingData()
             
             if (btcResult == false) {
                 fetchState = .Fail
