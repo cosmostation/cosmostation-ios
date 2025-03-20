@@ -1595,6 +1595,8 @@
 		28CE973625872B7C006DEBEE /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE973525872B7C006DEBEE /* Signer.swift */; };
 		28FC030C2652662B001C0319 /* MintscanPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC030B2652662B001C0319 /* MintscanPrice.swift */; };
 		790782C62CF987870063515D /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790782C52CF987870063515D /* CircleImageView.swift */; };
+		790970212D7E895500DEB959 /* BabylonStakingInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 790970202D7E895500DEB959 /* BabylonStakingInfoVC.xib */; };
+		790970222D7E895500DEB959 /* BabylonStakingInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7909701F2D7E895500DEB959 /* BabylonStakingInfoVC.swift */; };
 		790970242D7EB34D00DEB959 /* BabylonFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790970232D7EB34D00DEB959 /* BabylonFetcher.swift */; };
 		790D8B882CFD5837003A15F7 /* ChainMilkyway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790D8B872CFD5837003A15F7 /* ChainMilkyway.swift */; };
 		790D8B8A2CFD9730003A15F7 /* EcoSystemSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790D8B892CFD9730003A15F7 /* EcoSystemSectionHeader.swift */; };
@@ -3100,6 +3102,8 @@
 		28FC030B2652662B001C0319 /* MintscanPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanPrice.swift; sourceTree = "<group>"; };
 		6ED0AF4867E1AFC41A279302 /* Pods-Cosmostation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.debug.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.debug.xcconfig"; sourceTree = "<group>"; };
 		790782C52CF987870063515D /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
+		7909701F2D7E895500DEB959 /* BabylonStakingInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonStakingInfoVC.swift; sourceTree = "<group>"; };
+		790970202D7E895500DEB959 /* BabylonStakingInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BabylonStakingInfoVC.xib; sourceTree = "<group>"; };
 		790970232D7EB34D00DEB959 /* BabylonFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonFetcher.swift; sourceTree = "<group>"; };
 		790D8B872CFD5837003A15F7 /* ChainMilkyway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMilkyway.swift; sourceTree = "<group>"; };
 		790D8B892CFD9730003A15F7 /* EcoSystemSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoSystemSectionHeader.swift; sourceTree = "<group>"; };
@@ -4070,6 +4074,8 @@
 				E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */,
 				E15F2CFC2ABF0E6A00BAE105 /* CosmosStakingInfoVC.swift */,
 				E15F2CFD2ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib */,
+				7909701F2D7E895500DEB959 /* BabylonStakingInfoVC.swift */,
+				790970202D7E895500DEB959 /* BabylonStakingInfoVC.xib */,
 				04A68C2D2AC13A560041FA13 /* CosmosProposalsVC.swift */,
 				04A68C2E2AC13A560041FA13 /* CosmosProposalsVC.xib */,
 				792613D32CDB362300FAF47D /* CosmosOnChainProposalsVC.swift */,
@@ -7414,6 +7420,7 @@
 				04FF6B8C2B204BCB009DCA89 /* ClaimAllChainCell.swift in Sources */,
 				04C817942BA98D75006B800A /* cosmos_evidence_v1beta1_query.grpc.swift in Sources */,
 				04D785562C328DB1009D1A94 /* feemarket_feemarket_v1_tx.grpc.swift in Sources */,
+				790970222D7E895500DEB959 /* BabylonStakingInfoVC.swift in Sources */,
 				04FA74502A9D97A0001A2830 /* PincodeInputVC.swift in Sources */,
 				047843C52AC991B300462F1C /* injective_peggy_v1_types.pb.swift in Sources */,
 				04FA74522A9D97A0001A2830 /* PincodeDecimalVC.swift in Sources */,
