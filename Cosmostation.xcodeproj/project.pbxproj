@@ -1747,6 +1747,8 @@
 		799261822D77EE66007E9911 /* babylon_incentive_rewards.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799261582D77EE66007E9911 /* babylon_incentive_rewards.pb.swift */; };
 		799261832D77EE66007E9911 /* babylon_incentive_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799261592D77EE66007E9911 /* babylon_incentive_tx.grpc.swift */; };
 		799261842D77EE66007E9911 /* babylon_incentive_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992615A2D77EE66007E9911 /* babylon_incentive_tx.pb.swift */; };
+		7992618B2D783FD3007E9911 /* BabylonClaimRewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799261892D783FD3007E9911 /* BabylonClaimRewards.swift */; };
+		7992618C2D783FD3007E9911 /* BabylonClaimRewards.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7992618A2D783FD3007E9911 /* BabylonClaimRewards.xib */; };
 		799B4A772D1E439D00998833 /* ChainForma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A762D1E439D00998833 /* ChainForma.swift */; };
 		799B4A7B2D1EA21700998833 /* ChainPundix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A7A2D1EA21700998833 /* ChainPundix.swift */; };
 		799B4A7F2D223FA900998833 /* ChainFxcoreEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A7E2D223FA900998833 /* ChainFxcoreEVM.swift */; };
@@ -3251,6 +3253,8 @@
 		799261582D77EE66007E9911 /* babylon_incentive_rewards.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = babylon_incentive_rewards.pb.swift; sourceTree = "<group>"; };
 		799261592D77EE66007E9911 /* babylon_incentive_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = babylon_incentive_tx.grpc.swift; sourceTree = "<group>"; };
 		7992615A2D77EE66007E9911 /* babylon_incentive_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = babylon_incentive_tx.pb.swift; sourceTree = "<group>"; };
+		799261892D783FD3007E9911 /* BabylonClaimRewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonClaimRewards.swift; sourceTree = "<group>"; };
+		7992618A2D783FD3007E9911 /* BabylonClaimRewards.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BabylonClaimRewards.xib; sourceTree = "<group>"; };
 		799B4A762D1E439D00998833 /* ChainForma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainForma.swift; sourceTree = "<group>"; };
 		799B4A7A2D1EA21700998833 /* ChainPundix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPundix.swift; sourceTree = "<group>"; };
 		799B4A7E2D223FA900998833 /* ChainFxcoreEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFxcoreEVM.swift; sourceTree = "<group>"; };
@@ -5314,6 +5318,8 @@
 				047842E32AC8B2D600462F1C /* CosmosRedelegate.xib */,
 				E1D5A3E22AC33B8000453914 /* CosmosClaimRewards.swift */,
 				E1D5A3E32AC33B8000453914 /* CosmosClaimRewards.xib */,
+				799261892D783FD3007E9911 /* BabylonClaimRewards.swift */,
+				7992618A2D783FD3007E9911 /* BabylonClaimRewards.xib */,
 				E14577FA2B3EC50C00EEFA8E /* CosmosClaimCommission.swift */,
 				E14577FB2B3EC50C00EEFA8E /* CosmosClaimCommission.xib */,
 				0402B7E42ACC132200824B3F /* CosmosCompounding.swift */,
@@ -5774,6 +5780,7 @@
 				E10B1DD42C2159040039283B /* KavaMintCreateAction.xib in Resources */,
 				E10B1DAD2C2156430039283B /* KavaSwapListVC.xib in Resources */,
 				040733052AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
+				7992618C2D783FD3007E9911 /* BabylonClaimRewards.xib in Resources */,
 				040732FD2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */,
 				E1A48DEB2BFF0DE90084D770 /* ReceiveCell.xib in Resources */,
 				79705CB12D7059FF00B89830 /* EcosystemPopUpSheet.xib in Resources */,
@@ -7576,6 +7583,7 @@
 				E10B1DCA2C2159040039283B /* KavaLendAction.swift in Sources */,
 				E10FD3BE2B70D1F900B57DB4 /* ChainAlthea118.swift in Sources */,
 				045032F52C1EFE5500235F6A /* ChainQuasar.swift in Sources */,
+				7992618B2D783FD3007E9911 /* BabylonClaimRewards.swift in Sources */,
 				04C817782BA98D75006B800A /* cosmos_counter_v1_tx.grpc.swift in Sources */,
 				04C63D222B86FE8C00D4A366 /* CommonTransferResult.swift in Sources */,
 				043791FA2C6964660078C2B3 /* SuiStake.swift in Sources */,
