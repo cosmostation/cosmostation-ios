@@ -1762,6 +1762,8 @@
 		79AB340A2D6EB0CE00F1426C /* BtcDelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AB34082D6EB0CE00F1426C /* BtcDelegate.xib */; };
 		79AB340D2D6EDC1100F1426C /* BtcStakingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AB340B2D6EDC1100F1426C /* BtcStakingCell.swift */; };
 		79AB340E2D6EDC1100F1426C /* BtcStakingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AB340C2D6EDC1100F1426C /* BtcStakingCell.xib */; };
+		79B7F36D2D87F74F00AA755B /* BabylonStatusInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B7F36C2D87F74F00AA755B /* BabylonStatusInfoSheet.xib */; };
+		79B7F36E2D87F74F00AA755B /* BabylonStatusInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F36B2D87F74F00AA755B /* BabylonStatusInfoSheet.swift */; };
 		79C5186F2CC76A8F00BC0E85 /* ChainKaia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5186E2CC76A8F00BC0E85 /* ChainKaia.swift */; };
 		79C518732CC8E08D00BC0E85 /* ChainJackal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C518722CC8E08D00BC0E85 /* ChainJackal.swift */; };
 		79C518752CC8E26100BC0E85 /* ChainSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C518742CC8E26100BC0E85 /* ChainSource.swift */; };
@@ -3264,6 +3266,8 @@
 		79AB34082D6EB0CE00F1426C /* BtcDelegate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BtcDelegate.xib; sourceTree = "<group>"; };
 		79AB340B2D6EDC1100F1426C /* BtcStakingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtcStakingCell.swift; sourceTree = "<group>"; };
 		79AB340C2D6EDC1100F1426C /* BtcStakingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BtcStakingCell.xib; sourceTree = "<group>"; };
+		79B7F36B2D87F74F00AA755B /* BabylonStatusInfoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonStatusInfoSheet.swift; sourceTree = "<group>"; };
+		79B7F36C2D87F74F00AA755B /* BabylonStatusInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BabylonStatusInfoSheet.xib; sourceTree = "<group>"; };
 		79C5186E2CC76A8F00BC0E85 /* ChainKaia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKaia.swift; sourceTree = "<group>"; };
 		79C518722CC8E08D00BC0E85 /* ChainJackal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainJackal.swift; sourceTree = "<group>"; };
 		79C518742CC8E26100BC0E85 /* ChainSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSource.swift; sourceTree = "<group>"; };
@@ -4352,6 +4356,8 @@
 				79AB34002D6C392B00F1426C /* BtcStakeSheet.xib */,
 				79705CAE2D7059FF00B89830 /* EcosystemPopUpSheet.swift */,
 				79705CAF2D7059FF00B89830 /* EcosystemPopUpSheet.xib */,
+				79B7F36B2D87F74F00AA755B /* BabylonStatusInfoSheet.swift */,
+				79B7F36C2D87F74F00AA755B /* BabylonStatusInfoSheet.xib */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -5834,6 +5840,7 @@
 				04FF6B942B21E101009DCA89 /* CosmosRewardListPopupVC.xib in Resources */,
 				E1DBD3E02B620B760058E0DC /* EvmClass.storyboard in Resources */,
 				E1A48DF12C0065310084D770 /* EcoListCell.xib in Resources */,
+				79B7F36D2D87F74F00AA755B /* BabylonStatusInfoSheet.xib in Resources */,
 				04527DBB2A937CA2005F72D7 /* AssetCell.xib in Resources */,
 				04951DC52B7F6E6200A03FB1 /* QrAddressPopup2VC.xib in Resources */,
 				E10B1D7D2C2156430039283B /* KavaEarnListMyCell.xib in Resources */,
@@ -7292,6 +7299,7 @@
 				04B789E52ACB140900E9BE88 /* SelectNameServiceCell.swift in Sources */,
 				792613AC2CD4B82800FAF47D /* initia_distribution_v1_tx.pb.swift in Sources */,
 				E15980A62A83AC9E0032892B /* PortfolioVC.swift in Sources */,
+				79B7F36E2D87F74F00AA755B /* BabylonStatusInfoSheet.swift in Sources */,
 				046EA8BD2AD04A2600A2FCE7 /* desmos_profiles_v3_genesis.pb.swift in Sources */,
 				79FCA3CC2C3F9E92001C17D0 /* artela_fee_v1_tx.grpc.swift in Sources */,
 				04D785542C328DB1009D1A94 /* feemarket_feemarket_v1_query.grpc.swift in Sources */,
