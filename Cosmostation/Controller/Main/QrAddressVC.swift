@@ -55,6 +55,17 @@ class QrAddressVC: BaseVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
         
+        setFooterView()
+    }
+    
+    func setFooterView() {
+        let footerLabel = UILabel()
+        footerLabel.text = "Powered by COSMOSTATION"
+        footerLabel.textColor = .color04
+        footerLabel.font = UIFont(name: "SpoqaHanSansNeo-Medium", size: 11)!
+        footerLabel.textAlignment = .center
+        footerLabel.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50)
+        tableView.tableFooterView = footerLabel
     }
     
     @IBAction func onClickEvmShare(_ sender: BaseButton) {

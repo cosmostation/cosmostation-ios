@@ -142,7 +142,7 @@ class CosmosUndelegate: BaseVC {
     func onUpdateValidatorView() {
         monikerImg.image = UIImage(named: "validatorDefault")
         if let initiaFetcher {
-            monikerImg.sd_setImage(with: selectedChain.monikerImg(fromValidatorInitia!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            monikerImg.setMonikerImg(selectedChain, fromValidatorInitia!.operatorAddress)
             monikerLabel.text = fromValidatorInitia!.description_p.moniker
             if (fromValidatorInitia!.jailed) {
                 jailedTag.isHidden = false
@@ -158,7 +158,7 @@ class CosmosUndelegate: BaseVC {
             }
             
         } else if let zenrockFetcher {
-            monikerImg.sd_setImage(with: selectedChain.monikerImg(fromValidatorZenrock!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            monikerImg.setMonikerImg(selectedChain, fromValidatorZenrock!.operatorAddress)
             monikerLabel.text = fromValidatorZenrock!.description_p.moniker
             if (fromValidatorZenrock!.jailed) {
                 jailedTag.isHidden = false
@@ -174,7 +174,7 @@ class CosmosUndelegate: BaseVC {
             }
         
         } else {
-            monikerImg.sd_setImage(with: selectedChain.monikerImg(fromValidator!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            monikerImg.setMonikerImg(selectedChain, fromValidator!.operatorAddress)
             monikerLabel.text = fromValidator!.description_p.moniker
             if (fromValidator!.jailed) {
                 jailedTag.isHidden = false

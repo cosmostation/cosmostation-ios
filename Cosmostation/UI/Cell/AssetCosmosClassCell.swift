@@ -150,13 +150,14 @@ class AssetCosmosClassCell: UITableViewCell {
     
     func bindOktAsset(_ oktChain: ChainOktEVM) {
         if let oktFetcher = oktChain.getOktfetcher(),
-           let stakeDenom = oktChain.stakeDenom {
+           let stakeDenom = oktChain.stakeDenom ,
+           let msAsset = BaseData.instance.getAsset(oktChain.apiName, stakeDenom) {
             stakingTitle.text = "Deposited"
             unstakingTitle.text = "Withdrawing"
             
             let value = oktFetcher.allCoinValue()
-            coinImg.sd_setImage(with: ChainOktEVM.assetImg(stakeDenom), placeholderImage: UIImage(named: "tokenDefault"))
-            symbolLabel.text = stakeDenom.uppercased()
+            coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+            symbolLabel.text = msAsset.symbol?.uppercased()
             
             WDP.dpPrice(OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)

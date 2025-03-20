@@ -24,8 +24,8 @@ class ChainJuno: BaseChain  {
         stakeDenom = "ujuno"
         bechAccountPrefix = "juno"
         validatorPrefix = "junovaloper"
-        grpcHost = "juno-grpc.lavenderfive.com"
-        lcdUrl = "https://juno-api.lavenderfive.com/"
+        grpcHost = "juno-grpc.chainroot.io"
+        lcdUrl = "https://juno-api.chainroot.io/"
     }
     
 }

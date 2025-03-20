@@ -115,10 +115,6 @@ class ChainOktEVM: BaseChain {
             })
         }
     }
-    
-    static func assetImg(_ original_symbol: String) -> URL {
-        return URL(string: ResourceBase + "okc/asset/" + original_symbol.lowercased() + ".png") ?? URL(string: "")!
-    }
 }
 
 

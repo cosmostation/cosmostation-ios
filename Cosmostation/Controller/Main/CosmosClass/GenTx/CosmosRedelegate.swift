@@ -176,7 +176,7 @@ class CosmosRedelegate: BaseVC {
     func onUpdateFromValidatorView() {
         fromMonikerImg.image = UIImage(named: "validatorDefault")
         if let initiaFetcher {
-            fromMonikerImg.sd_setImage(with: selectedChain.monikerImg(fromValidatorInitia!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            fromMonikerImg.setMonikerImg(selectedChain, fromValidatorInitia!.operatorAddress)
             fromMonikerLabel.text = fromValidatorInitia!.description_p.moniker
             if (fromValidatorInitia!.jailed) {
                 fromJailedTag.isHidden = false
@@ -192,7 +192,7 @@ class CosmosRedelegate: BaseVC {
             }
             
         } else if let zenrockFetcher {
-            fromMonikerImg.sd_setImage(with: selectedChain.monikerImg(fromValidatorZenrock!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            fromMonikerImg.setMonikerImg(selectedChain, fromValidatorZenrock!.operatorAddress)
             fromMonikerLabel.text = fromValidatorZenrock!.description_p.moniker
             if (fromValidatorZenrock!.jailed) {
                 fromJailedTag.isHidden = false
@@ -208,7 +208,7 @@ class CosmosRedelegate: BaseVC {
             }
 
         } else {
-            fromMonikerImg.sd_setImage(with: selectedChain.monikerImg(fromValidator!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            fromMonikerImg.setMonikerImg(selectedChain, fromValidator!.operatorAddress)
             fromMonikerLabel.text = fromValidator!.description_p.moniker
             if (fromValidator!.jailed) {
                 fromJailedTag.isHidden = false
@@ -251,7 +251,7 @@ class CosmosRedelegate: BaseVC {
         toMonikerImg.image = UIImage(named: "validatorDefault")
         
         if let initiaFetcher {
-            toMonikerImg.sd_setImage(with: selectedChain.monikerImg(toValidatorInitia!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            toMonikerImg.setMonikerImg(selectedChain, toValidatorInitia!.operatorAddress)
             toMonikerLabel.text = toValidatorInitia!.description_p.moniker
             if (toValidatorInitia!.jailed) {
                 toJailedTag.isHidden = false
@@ -263,7 +263,7 @@ class CosmosRedelegate: BaseVC {
             toCommLabel?.attributedText = WDP.dpAmount(commission.stringValue, toCommLabel!.font, 2)
             
         } else if let zenrockFetcher {
-            toMonikerImg.sd_setImage(with: selectedChain.monikerImg(toValidatorZenrock!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            toMonikerImg.setMonikerImg(selectedChain, toValidatorZenrock!.operatorAddress)
             toMonikerLabel.text = toValidatorZenrock!.description_p.moniker
             if (toValidatorZenrock!.jailed) {
                 toJailedTag.isHidden = false
@@ -275,7 +275,7 @@ class CosmosRedelegate: BaseVC {
             toCommLabel?.attributedText = WDP.dpAmount(commission.stringValue, toCommLabel!.font, 2)
 
         } else {
-            toMonikerImg.sd_setImage(with: selectedChain.monikerImg(toValidator!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            toMonikerImg.setMonikerImg(selectedChain, toValidator!.operatorAddress)
             toMonikerLabel.text = toValidator!.description_p.moniker
             if (toValidator!.jailed) {
                 toJailedTag.isHidden = false

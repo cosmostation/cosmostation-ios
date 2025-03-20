@@ -55,14 +55,14 @@ class LegacyTransfer: BaseVC {
     var toSendAmount = NSDecimalNumber.zero
     var recipientAddress: String?
     var txMemo = ""
+    var msAsset: MintscanAsset!
     
-    var tokenInfo: JSON!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
         stakeDenom = selectedChain.stakeDenom
+        msAsset = BaseData.instance.getAsset(selectedChain.apiName, toSendDenom)
         
         loadingView.isHidden = true
         loadingView.animation = LottieAnimation.named("loading")
@@ -74,10 +74,8 @@ class LegacyTransfer: BaseVC {
         //display to send asset info
         if let oktChain = selectedChain as? ChainOktEVM,
            let oktFetcher = oktChain.getOktfetcher() {
-            tokenInfo = oktFetcher.oktTokens.filter({ $0["symbol"].string == toSendDenom }).first!
-            let original_symbol = tokenInfo["original_symbol"].stringValue
-            toSendAssetImg.sd_setImage(with: ChainOktEVM.assetImg(original_symbol), placeholderImage: UIImage(named: "tokenDefault"))
-            toSendSymbolLabel.text = original_symbol.uppercased()
+            toSendAssetImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+            toSendSymbolLabel.text = msAsset.symbol?.uppercased()
             
             let available = oktFetcher.oktBalanceAmount(toSendDenom)
             if (toSendDenom == stakeDenom) {
@@ -118,7 +116,7 @@ class LegacyTransfer: BaseVC {
     @objc func onClickAmount() {
         let amountSheet = TxAmountLegacySheet(nibName: "TxAmountLegacySheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
-        amountSheet.tokenInfo = tokenInfo
+        amountSheet.tokenSymbol = msAsset.symbol?.uppercased()
         amountSheet.availableAmount = availableAmount
         if (toSendAmount != NSDecimalNumber.zero) {
             amountSheet.existedAmount = toSendAmount
@@ -141,7 +139,7 @@ class LegacyTransfer: BaseVC {
             toSendAmount = NSDecimalNumber(string: amount)
             
             if (selectedChain.name == "OKT") {
-                toAssetDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
+                toAssetDenomLabel.text = msAsset.symbol?.uppercased()
                 toAssetAmountLabel?.attributedText = WDP.dpAmount(toSendAmount.stringValue, toAssetAmountLabel!.font, 18)
                 toSendAssetHint.isHidden = true
                 toAssetAmountLabel.isHidden = false
@@ -206,7 +204,7 @@ class LegacyTransfer: BaseVC {
     
     func onUpdateFeeView() {
         if (selectedChain.name == "OKT") {
-            feeSelectImg.sd_setImage(with: ChainOktEVM.assetImg(stakeDenom), placeholderImage: UIImage(named: "tokenDefault"))
+            feeSelectImg.sd_setImage(with: selectedChain.assetImgUrl(stakeDenom), placeholderImage: UIImage(named: "tokenDefault"))
             feeSelectLabel.text = stakeDenom.uppercased()
             
             let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)

@@ -165,7 +165,7 @@ class CosmosDelegate: BaseVC {
     func onUpdateValidatorView() {
         monikerImg.image = UIImage(named: "validatorDefault")
         if let initiaFetcher {
-            monikerImg.sd_setImage(with: selectedChain.monikerImg(toValidatorInitia!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            monikerImg.setMonikerImg(selectedChain, toValidatorInitia!.operatorAddress)
             monikerLabel.text = toValidatorInitia!.description_p.moniker
             if (toValidatorInitia!.jailed) {
                 jailedTag.isHidden = false
@@ -177,7 +177,7 @@ class CosmosDelegate: BaseVC {
             commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
             
         } else if let zenrockFetcher {
-            monikerImg.sd_setImage(with: selectedChain.monikerImg(toValidatorZenrock!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            monikerImg.setMonikerImg(selectedChain, toValidatorZenrock!.operatorAddress)
             monikerLabel.text = toValidatorZenrock!.description_p.moniker
             if (toValidatorZenrock!.jailed) {
                 jailedTag.isHidden = false
@@ -190,7 +190,7 @@ class CosmosDelegate: BaseVC {
 
             
         } else {
-            monikerImg.sd_setImage(with: selectedChain.monikerImg(toValidator!.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            monikerImg.setMonikerImg(selectedChain, toValidator!.operatorAddress)
             monikerLabel.text = toValidator!.description_p.moniker
             if (toValidator!.jailed) {
                 jailedTag.isHidden = false
@@ -515,3 +515,4 @@ extension CosmosDelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate, 
         }
     }
 }
+

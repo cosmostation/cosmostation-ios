@@ -44,7 +44,7 @@ class OkDeposit: BaseVC {
     var selectedChain: ChainOktEVM!
     var oktFetcher: OktFetcher!
     var stakeDenom: String!
-    var tokenInfo: JSON!
+    var msAsset: MintscanAsset!
     var availableAmount = NSDecimalNumber.zero
     var toDepositAmount = NSDecimalNumber.zero
     var txMemo = ""
@@ -58,13 +58,12 @@ class OkDeposit: BaseVC {
         baseAccount = BaseData.instance.baseAccount
         oktFetcher = selectedChain.getOktfetcher()
         stakeDenom = selectedChain.stakeDenom
+        msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom)
         
         onUpdateFeeView()
         
-        tokenInfo = oktFetcher.oktTokens.filter({ $0["symbol"].string == stakeDenom }).first!
-        let original_symbol = tokenInfo["original_symbol"].stringValue
-        toDepositAssetImg.sd_setImage(with: ChainOktEVM.assetImg(original_symbol), placeholderImage: UIImage(named: "tokenDefault"))
-        toDepositSymbolLabel.text = original_symbol.uppercased()
+        toDepositAssetImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+        toDepositSymbolLabel.text = msAsset.symbol?.uppercased()
         
         let available = oktFetcher.oktBalanceAmount(stakeDenom)
         availableAmount = available.subtracting(gasFee)
@@ -83,7 +82,7 @@ class OkDeposit: BaseVC {
     @objc func onClickAmount() {
         let amountSheet = TxAmountLegacySheet(nibName: "TxAmountLegacySheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
-        amountSheet.tokenInfo = tokenInfo
+        amountSheet.tokenSymbol = msAsset.symbol?.uppercased()
         amountSheet.availableAmount = availableAmount
         if (toDepositAmount != NSDecimalNumber.zero) {
             amountSheet.existedAmount = toDepositAmount
@@ -104,7 +103,7 @@ class OkDeposit: BaseVC {
             
         } else {
             toDepositAmount = NSDecimalNumber(string: amount)
-            toDepositDenomLabel.text = tokenInfo["original_symbol"].stringValue.uppercased()
+            toDepositDenomLabel.text = msAsset.symbol?.uppercased()
             toDepositAmountLabel?.attributedText = WDP.dpAmount(toDepositAmount.stringValue, toDepositAmountLabel!.font, 18)
             toDepositAssetHint.isHidden = true
             toDepositAmountLabel.isHidden = false
@@ -140,7 +139,7 @@ class OkDeposit: BaseVC {
     }
     
     func onUpdateFeeView() {
-        feeSelectImg.sd_setImage(with: ChainOktEVM.assetImg(stakeDenom), placeholderImage: UIImage(named: "tokenDefault"))
+        feeSelectImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         feeSelectLabel.text = stakeDenom.uppercased()
         
         let existCnt = oktFetcher.oktDeposits["validator_address"].arrayValue.count

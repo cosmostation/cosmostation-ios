@@ -655,7 +655,7 @@ extension BaseChain {
     }
     
     func monikerImg(_ opAddress: String) -> URL {
-        return URL(string: ResourceBase + apiName + "/moniker/" + opAddress + ".png") ?? URL(string: "")!
+        return URL(string: ResourceDevBase + "/assets/moniker/" + apiName + "/64/" + opAddress + ".png") ?? URL(string: "")!
     }
 }
 
@@ -671,6 +671,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAllora())
     result.append(ChainAltheaEVM())                     //EVM
     result.append(ChainAlthea118())
+    result.append(ChainAndromeda())
     result.append(ChainArbitrum())                      //EVM
     result.append(ChainArchway())
     result.append(ChainAssetMantle())
@@ -723,6 +724,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainHaqqEVM())                       //EVM
     result.append(ChainHumansEVM())                     //EVM
     result.append(ChainInjective())
+    result.append(ChainInt3face())
     //result.append(ChainInitia())
     result.append(ChainIris())
     result.append(ChainIxo())
@@ -733,6 +735,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainKava459())
     result.append(ChainKava118())
     result.append(ChainKi())
+    result.append(ChainKopi())
     result.append(ChainKyve())
     result.append(ChainLava())
     result.append(ChainLike())
@@ -758,6 +761,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainOptimism())                      //EVM
     result.append(ChainOrai())
     result.append(ChainOsmosis())
+    result.append(ChainPaloma())
     result.append(ChainPassage())
     result.append(ChainPersistence118())
     result.append(ChainPersistence750())
@@ -781,12 +785,13 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainSentinel())
     result.append(ChainSge())
     result.append(ChainShentu())
-    result.append(ChainShidoEVM())                    //EVM
+    result.append(ChainShidoEVM())                      //EVM
     result.append(ChainSommelier())
     result.append(ChainSource())
     result.append(ChainStafi())
     result.append(ChainStargaze())
-//    result.append(ChainStoryEVM())                      //EVM
+    result.append(ChainStoryEVM())                      //EVM
+    result.append(ChainStratosEVM())                    //EVM
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
     result.append(ChainSynternet())
@@ -805,7 +810,7 @@ func ALLCHAINS() -> [BaseChain] {
     
     
     
-    result.append(ChainBeraEVM_T())                     //EVM
+//    result.append(ChainBeraEVM_T())                     //EVM
     result.append(ChainBabylon_T())
 //    result.append(ChainBitCoin44_T())
 //    result.append(ChainBitCoin49_T())
@@ -816,7 +821,8 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNeutron_T())
     result.append(ChainNillion_T())
     result.append(ChainMantra_T())
-    result.append(ChainStoryEVM_T())
+    result.append(ChainSelf_T())
+//    result.append(ChainStoryEVM_T())
     result.append(ChainTabiEVM_T())
     result.append(ChainXion_T())
     

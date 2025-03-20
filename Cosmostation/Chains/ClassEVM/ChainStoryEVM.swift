@@ -22,9 +22,9 @@ class ChainStoryEVM: BaseChain {
         
         supportEvm = true
         coinSymbol = "IP"
-        coinGeckoId = ""
+        coinGeckoId = "story-2"
         coinLogo = "tokenIp"
-        evmRpcURL = ""
+        evmRpcURL = "https://evmrpc.story.nodestake.org"
     }
     
 //    override func fetchBalances() {

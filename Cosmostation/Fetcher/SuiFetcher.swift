@@ -107,10 +107,10 @@ class SuiFetcher {
     func fetchSuiHistory() async {
         suiHistory.removeAll()
         
-        if let fromHistroy = try? await fetchFromHistroy(chain.mainAddress),
-           let toHistroy = try? await fetchToHistroy(chain.mainAddress) {
-            suiHistory.append(contentsOf: fromHistroy ?? [])
-            toHistroy?.forEach { to in
+        if let fromHistory = try? await fetchFromHistory(chain.mainAddress),
+           let toHistory = try? await fetchToHistory(chain.mainAddress) {
+            suiHistory.append(contentsOf: fromHistory ?? [])
+            toHistory?.forEach { to in
                 if (suiHistory.filter({ $0["digest"].stringValue == to["digest"].stringValue }).first == nil) {
                     suiHistory.append(to)
                 }
@@ -229,7 +229,7 @@ class SuiFetcher {
         return allBalanceValue(usd).adding(stakedValue(usd))
     }
     
-    //TODO chekc nft logic match with android & extention
+    //TODO check nft logic match with android & extension
     func allNfts() -> [JSON] {
         return suiObjects.filter { object in
             let typeS = object["type"].string?.lowercased()
@@ -329,40 +329,40 @@ extension SuiFetcher {
         return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["apys"].array
     }
     
-    func fetchFromHistroy(_ address: String) async throws -> [JSON]? {
+    func fetchFromHistory(_ address: String) async throws -> [JSON]? {
         let params: Any = [["filter": ["FromAddress": address], "options": ["showEffects": true, "showInput":true, "showBalanceChanges":true]], nil, 50, true]
         let parameters: Parameters = ["method": "suix_queryTransactionBlocks", "params": params, "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["data"].array
     }
     
-    func fetchToHistroy(_ address: String) async throws -> [JSON]? {
+    func fetchToHistory(_ address: String) async throws -> [JSON]? {
         let params: Any = [["filter": ["ToAddress": address], "options": ["showEffects": true, "showInput":true, "showBalanceChanges":true]], nil, 50, true]
         let parameters: Parameters = ["method": "suix_queryTransactionBlocks", "params": params, "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["data"].array
     }
     
     
-    func unsafeCoinSend(_ sendDenom: String, _ sender: String, _ coins: [String], _ receipients: [String], _ amounts: [String], _ gasBudget: String) async throws -> String? {
+    func unsafeCoinSend(_ sendDenom: String, _ sender: String, _ coins: [String], _ recipients: [String], _ amounts: [String], _ gasBudget: String) async throws -> String? {
         if (sendDenom == SUI_MAIN_DENOM) {
-            return try await unsafePaySui(sender, coins, receipients, amounts, gasBudget)
+            return try await unsafePaySui(sender, coins, recipients, amounts, gasBudget)
         }
-        return try await unsafePay(sender, coins, receipients, amounts, gasBudget)
+        return try await unsafePay(sender, coins, recipients, amounts, gasBudget)
     }
     
-    func unsafePaySui(_ sender: String, _ coins: [String], _ receipients: [String], _ amounts: [String], _ gasBudget: String) async throws -> String? {
-        let params: Any = [sender, coins,  receipients, amounts, gasBudget]
+    func unsafePaySui(_ sender: String, _ coins: [String], _ recipients: [String], _ amounts: [String], _ gasBudget: String) async throws -> String? {
+        let params: Any = [sender, coins,  recipients, amounts, gasBudget]
         let parameters: Parameters = ["method": "unsafe_paySui", "params": params, "id" : 1, "jsonrpc" : "2.0"]
         return try? await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["txBytes"].stringValue
     }
     
-    func unsafePay(_ sender: String, _ coins: [String], _ receipients: [String], _ amounts: [String], _ gasBudget: String) async throws -> String? {
-        let params: Any = [sender, coins,  receipients, amounts, NSNull(), gasBudget]
+    func unsafePay(_ sender: String, _ coins: [String], _ recipients: [String], _ amounts: [String], _ gasBudget: String) async throws -> String? {
+        let params: Any = [sender, coins,  recipients, amounts, NSNull(), gasBudget]
         let parameters: Parameters = ["method": "unsafe_pay", "params": params, "id" : 1, "jsonrpc" : "2.0"]
         return try? await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["txBytes"].stringValue
     }
     
-    func unsafeTransferObject(_ sender: String, _ objectId: String, _ gasBudget: String, _ receipients: String) async throws -> String? {
-        let params: Any = [sender, objectId, NSNull(),  gasBudget, receipients]
+    func unsafeTransferObject(_ sender: String, _ objectId: String, _ gasBudget: String, _ recipients: String) async throws -> String? {
+        let params: Any = [sender, objectId, NSNull(),  gasBudget, recipients]
         let parameters: Parameters = ["method": "unsafe_transferObject", "params": params, "id" : 1, "jsonrpc" : "2.0"]
         return try? await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["txBytes"].stringValue
     }

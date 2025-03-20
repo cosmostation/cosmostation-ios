@@ -35,7 +35,7 @@ class StakeUnbondingCell: UITableViewCell {
     }
     func onBindMyUnbonding(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator, _ unbonding: UnbondingEntry) {
         
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false
@@ -57,7 +57,7 @@ class StakeUnbondingCell: UITableViewCell {
     
     func onBindInitiaMyUnbonding(_ baseChain: BaseChain, _ validator: Initia_Mstaking_V1_Validator, _ unbonding: InitiaUnbondingEntry) {
         
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false
@@ -79,7 +79,7 @@ class StakeUnbondingCell: UITableViewCell {
     
     func onBindZenrockMyUnbonding(_ baseChain: BaseChain, _ validator: Zrchain_Validation_ValidatorHV, _ unbonding: ZenrockUnbondingEntry) {
         
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false

@@ -835,13 +835,8 @@ extension CosmosCryptoVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if let oktFetcher = (selectedChain as? ChainOktEVM)?.getOktfetcher() {
-            searchOktBalances = searchText.isEmpty ? oktBalances : oktBalances.filter { coin in
-                if let token = oktFetcher.oktTokens.filter({ $0["symbol"].string == coin["denom"].string }).first {
-                    return token["original_symbol"].string?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-                }
-                return false
-            }
+        searchOktBalances = searchText.isEmpty ? oktBalances : oktBalances.filter { coin in
+            return BaseData.instance.getAsset(selectedChain.apiName, coin["denom"].stringValue)?.symbol?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         
         searchNativeCoins = searchText.isEmpty ? nativeCoins : nativeCoins.filter { coin in

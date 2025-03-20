@@ -52,7 +52,7 @@ class SelectValidatorCell: UITableViewCell {
     
     func onBindValidator(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator) {
         
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false
@@ -82,7 +82,7 @@ class SelectValidatorCell: UITableViewCell {
     
     func onBindUnstakeValidator(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator) {
         
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false
@@ -120,7 +120,7 @@ class SelectValidatorCell: UITableViewCell {
     
     func onBindInitiaValidator(_ baseChain: BaseChain, _ validator: Initia_Mstaking_V1_Validator) {
         
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false
@@ -146,7 +146,7 @@ class SelectValidatorCell: UITableViewCell {
     
     func onBindUnstakeValidator(_ baseChain: BaseChain, _ validator: Initia_Mstaking_V1_Validator) {
         
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false
@@ -169,7 +169,7 @@ class SelectValidatorCell: UITableViewCell {
     
     func onBindValidator(_ baseChain: BaseChain, _ validator: Zrchain_Validation_ValidatorHV) {
         
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false
@@ -195,7 +195,7 @@ class SelectValidatorCell: UITableViewCell {
     
     func onBindUnstakeValidator(_ baseChain: BaseChain, _ validator: Zrchain_Validation_ValidatorHV) {
         
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false
