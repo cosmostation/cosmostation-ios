@@ -16,8 +16,8 @@ class BabylonStatusInfoSheet: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pendingLabel.text = NSLocalizedString("msg_babylon_pending_state", comment: "")
-        activeLabel.text = NSLocalizedString("msg_babylon_active_state", comment: "")
+        pendingLabel.setLineSpacing(text: NSLocalizedString("msg_babylon_pending_state", comment: ""), font: .fontSize12Medium)
+        activeLabel.setLineSpacing(text: NSLocalizedString("msg_babylon_active_state", comment: ""), font: .fontSize12Medium)
     }
     
     @IBAction func onBindConfirm(_ sender: Any) {

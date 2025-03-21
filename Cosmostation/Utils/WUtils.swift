@@ -312,6 +312,22 @@ extension UIColor {
     }
 }
 
+extension UILabel {
+    func setLineSpacing(text: String, font: UIFont?, alignment: NSTextAlignment? = .left) {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 3.0
+        paragraphStyle.alignment = alignment!
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: font ?? UIFont.systemFont(ofSize: 12),
+            .paragraphStyle: paragraphStyle
+        ]
+
+        let attributedText = NSAttributedString(string: text, attributes: attributes)
+        
+        self.attributedText = attributedText
+    }
+}
 
 extension Encodable {
     public var encoded: Data {

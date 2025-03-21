@@ -31,7 +31,8 @@ class BtcStakeSheet: BaseVC {
             
             titleLabel.text = String(format: NSLocalizedString("str_staked_coin", comment: ""), btcSymbol)
             symbolLabel.text = btcSymbol
-            descriptionLabel.text = String(format: NSLocalizedString("msg_btc_stake", comment: ""), btcSymbol)
+            
+            descriptionLabel.setLineSpacing(text: String(format: NSLocalizedString("msg_btc_stake", comment: ""), btcSymbol), font: .fontSize12Medium, alignment: .center)
             
             amountLabel.attributedText = WDP.dpAmount(fetcher.btcStakingAmount.multiplying(byPowerOf10: -8, withBehavior: handler6).stringValue, amountLabel.font, 8)
             mainButton.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)

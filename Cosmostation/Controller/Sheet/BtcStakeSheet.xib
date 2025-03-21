@@ -50,11 +50,8 @@
                         <constraint firstAttribute="width" constant="40" id="aph-im-ILd"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ady-R4-uee">
-                    <rect key="frame" x="46.666666666666657" y="251.00000000000003" width="300" height="34.333333333333343"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="300" id="BfL-IB-2FR"/>
-                    </constraints>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ady-R4-uee">
+                    <rect key="frame" x="71.333333333333329" y="251.00000000000003" width="250.33333333333337" height="34.333333333333343"/>
                     <attributedString key="attributedText">
                         <fragment>
                             <string key="content">This is the combined amount of sBTC staked
@@ -107,14 +104,14 @@ in Taproot and Native Segwit.</string>
                 <constraint firstItem="za2-TD-2Fl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="3j2-Wc-WlC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="1Dk-DC-Auk" secondAttribute="bottom" constant="12" id="3sV-B4-N35"/>
                 <constraint firstItem="ufC-j7-KvN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="8JW-3W-yUc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ady-R4-uee" secondAttribute="trailing" constant="20" id="8yd-4j-hJ7"/>
                 <constraint firstItem="za2-TD-2Fl" firstAttribute="top" secondItem="ufC-j7-KvN" secondAttribute="bottom" constant="16" id="93o-uM-pwS"/>
                 <constraint firstItem="1Dk-DC-Auk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="DZg-i4-MtP"/>
                 <constraint firstItem="ady-R4-uee" firstAttribute="top" secondItem="3VQ-RF-nkJ" secondAttribute="bottom" constant="16" id="I6T-db-Vtg"/>
                 <constraint firstItem="ady-R4-uee" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="NqF-ma-dpa"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ady-R4-uee" secondAttribute="trailing" constant="15" id="Oer-BH-Mhp"/>
                 <constraint firstItem="6G6-iS-BzM" firstAttribute="top" secondItem="za2-TD-2Fl" secondAttribute="bottom" constant="30" id="RgD-NI-W4Q"/>
+                <constraint firstItem="ady-R4-uee" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="WmH-L3-nk9"/>
                 <constraint firstItem="6G6-iS-BzM" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="e4t-ZV-Z2i"/>
-                <constraint firstItem="ady-R4-uee" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="eVm-RW-Vv2"/>
                 <constraint firstItem="ufC-j7-KvN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="34" id="fDS-BS-qaz"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1Dk-DC-Auk" secondAttribute="trailing" constant="12" id="fqr-xR-mDJ"/>
                 <constraint firstItem="3VQ-RF-nkJ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="q8A-el-xTP"/>
