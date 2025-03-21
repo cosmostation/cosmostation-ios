@@ -77,7 +77,7 @@ class AssetBtcCell: UITableViewCell {
             let unstakingAmount = babylonBtcFetcher.btcUnstakingAmount.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
             let withdrawableAmount = babylonBtcFetcher.btcWithdrawableAmount.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
             let pendingInputAmount = btcFetcher.btcPendingInput.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
-            let totalAmount = avaibaleAmount.adding(pendingInputAmount).adding(stakedAmount)
+            let totalAmount = avaibaleAmount.adding(pendingInputAmount).adding(stakedAmount).adding(unstakingAmount).adding(withdrawableAmount)
             let value = totalAmount.multiplying(by: msPrice, withBehavior: handler6)
             
             amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 6)
