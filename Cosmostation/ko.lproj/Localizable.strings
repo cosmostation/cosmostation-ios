@@ -458,7 +458,7 @@
 "msg_sui_guide_1" = "스테이킹을 시작한 경우 현재 에포치(%@)가 끝날 때까지 펜딩상태로 유지됩니다.(언스테이킹 불가)";
 "msg_sui_guide_2" = "다음 에포치(%@)가 완료된 후 리워드가 발생하며, 이후 에포치 마다 추가적인 보상이 제공됩니다.";
 "msg_sui_guide_3" = "보상은 복리로 누적되며, 언스테이킹을 하는 즉시 해당 수량을 모두 사용할 수 있습니다.";
-"msg_btc_stake" = "Taproot 및 Native Segwit에 스테이킹된 %@의 총합입니다.";
+"msg_btc_stake" = "Taproot 및 Native Segwit에 스테이킹된\n%@의 총합입니다.";
 "msg_btc_stake_timelock" = "%@를 스테이킹하면 최대 %@ 동안 잠깁니다.\n이 기간이 지나면 언스테이킹 없이 자동으로 출금할 수 있습니다.";
 "btc_timelock_weeks" = "%d주";
 "msg_btc_unstake_period" = "언제든지 언스테이킹할 수 있으며, %@의 언스테이킹 기간 후 출금이 가능합니다.";

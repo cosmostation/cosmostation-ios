@@ -458,7 +458,7 @@
 "msg_sui_guide_1" = "If you have started staking, it will remain in a 'pending' state until the current epoch (%@) ends.";
 "msg_sui_guide_2" = "At the end of the next epoch (%@), rewards will be distributed. Each subsequent epoch will be repeated.";
 "msg_sui_guide_3" = "Rewards are compounded and can be used immediately after the start of unstaking.";
-"msg_btc_stake" = "This is the combined amount of %@ staked in Taproot and Native Segwit.";
+"msg_btc_stake" = "This is the combined amount of %@ staked\nin Taproot and Native Segwit.";
 "msg_btc_stake_timelock" = "After staking %@, it is locked for up to %@.\nAfter this period, it becomes automatically withdrawable without unstaking.";
 "btc_timelock_weeks" = "%d weeks";
 "msg_btc_unstake_period" = "You can unstake at any time, It will become withdrawable after a %@ unstaking period.";

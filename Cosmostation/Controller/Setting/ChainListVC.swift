@@ -115,8 +115,8 @@ class ChainListVC: BaseVC, EndpointDelegate {
                                       preferredStyle: .alert)
         
         var messageMutableString = NSMutableAttributedString(string: message)
-        messageMutableString.addAttribute(.font, value: UIFont(name: "SpoqaHanSansNeo-Medium", size: 12)!, range: (message as NSString).range(of: NSLocalizedString("str_endpoint_reset_alert_question", comment: "")))
-        messageMutableString.addAttribute(.font, value: UIFont(name: "SpoqaHanSansNeo-Medium", size: 10)!, range: (message as NSString).range(of: NSLocalizedString("str_endpoint_reset_alert_explanation", comment: "")))
+        messageMutableString.addAttribute(.font, value: UIFont.fontSize12Medium, range: (message as NSString).range(of: NSLocalizedString("str_endpoint_reset_alert_question", comment: "")))
+        messageMutableString.addAttribute(.font, value: UIFont.fontSize10Medium, range: (message as NSString).range(of: NSLocalizedString("str_endpoint_reset_alert_explanation", comment: "")))
         messageMutableString.addAttribute(.foregroundColor, value: UIColor.color02, range: (message as NSString).range(of: NSLocalizedString("str_endpoint_reset_alert_explanation", comment: "")))
 
         alert.setValue(messageMutableString, forKey: "attributedMessage")

@@ -42,6 +42,7 @@ class CosmosCompounding: BaseVC {
     
     var selectedChain: BaseChain!
     var cosmosFetcher: CosmosFetcher!
+    var isCompoundingAll = false
     var claimableRewards = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
     var feeInfos = [FeeInfo]()
     var txFee: Cosmos_Tx_V1beta1_Fee = Cosmos_Tx_V1beta1_Fee.init()
@@ -82,7 +83,7 @@ class CosmosCompounding: BaseVC {
         feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
         compoundingBtn.setTitle(NSLocalizedString("str_compounding", comment: ""), for: .normal)
         
-        if selectedChain is ChainBabylon {
+        if selectedChain is ChainBabylon && isCompoundingAll {
             babylonRewardInfoLabel.text = "\(selectedChain.isTestnet ? "sBTC" : "BTC") Staking Reward is excluded from compounding"
             babylonRewardInfoView.isHidden = false
         }

@@ -458,7 +458,7 @@
 "msg_sui_guide_1" = "ステーキングを開始した場合、現在のEpoch(%@) が終了するまで「保留」状態のままになります。";
 "msg_sui_guide_2" = "次のEpoch (%@) の終了時に報酬が分配されます。後続の各エポックは繰り返されます。";
 "msg_sui_guide_3" = "報酬は複利で付与され、ステーキング解除開始後すぐに使用できます。";
-"msg_btc_stake" = "これは、TaprootおよびNative Segwitにステーキングされた%@の合計額です。";
+"msg_btc_stake" = "これは、TaprootおよびNative Segwitにステーキングされた\n%@の合計額です。";
 "msg_btc_stake_timelock" = "%@をステーキングすると、最大%@ロックされます。\nこの期間が過ぎると、アンステーキングなしで自動的に引き出し可能になります。";
 "btc_timelock_weeks" = "%d週間";
 "msg_btc_unstake_period" = "いつでもアンステーキングできます。%@のアンステーキング期間の後、出金可能になります。";

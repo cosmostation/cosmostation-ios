@@ -180,7 +180,11 @@ class AssetCosmosClassCell: UITableViewCell {
             if (withdrawAmount != NSDecimalNumber.zero) {
                 unstakingLayer.isHidden = false
                 unstakingLabel?.attributedText = WDP.dpAmount(withdrawAmount.stringValue, unstakingLabel!.font, 18)
+            } else {
+                unstakingLayer.isHidden = true
             }
+            
+            rewardLayer.isHidden = true
             
             let totalAmount = availableAmount.adding(depositAmount).adding(withdrawAmount)
             amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 18)
