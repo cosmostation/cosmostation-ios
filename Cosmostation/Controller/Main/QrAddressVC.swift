@@ -62,7 +62,7 @@ class QrAddressVC: BaseVC {
         let footerLabel = UILabel()
         footerLabel.text = "Powered by COSMOSTATION"
         footerLabel.textColor = .color04
-        footerLabel.font = UIFont(name: "SpoqaHanSansNeo-Medium", size: 11)!
+        footerLabel.font = .fontSize11Medium
         footerLabel.textAlignment = .center
         footerLabel.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50)
         tableView.tableFooterView = footerLabel
