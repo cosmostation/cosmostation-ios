@@ -1598,11 +1598,11 @@
 		790970212D7E895500DEB959 /* BabylonStakingInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 790970202D7E895500DEB959 /* BabylonStakingInfoVC.xib */; };
 		790970222D7E895500DEB959 /* BabylonStakingInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7909701F2D7E895500DEB959 /* BabylonStakingInfoVC.swift */; };
 		790970242D7EB34D00DEB959 /* BabylonFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790970232D7EB34D00DEB959 /* BabylonFetcher.swift */; };
+		790970262D7EDE9700DEB959 /* ChainAndromeda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790970252D7EDE9700DEB959 /* ChainAndromeda.swift */; };
 		790970292D8016C000DEB959 /* PendingDelegateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790970272D8016C000DEB959 /* PendingDelegateCell.swift */; };
 		7909702A2D8016C000DEB959 /* PendingDelegateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 790970282D8016C000DEB959 /* PendingDelegateCell.xib */; };
 		7909702D2D8016D500DEB959 /* PendingUnbondingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7909702B2D8016D500DEB959 /* PendingUnbondingCell.swift */; };
 		7909702E2D8016D500DEB959 /* PendingUnbondingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7909702C2D8016D500DEB959 /* PendingUnbondingCell.xib */; };
-		790970262D7EDE9700DEB959 /* ChainAndromeda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790970252D7EDE9700DEB959 /* ChainAndromeda.swift */; };
 		790D8B882CFD5837003A15F7 /* ChainMilkyway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790D8B872CFD5837003A15F7 /* ChainMilkyway.swift */; };
 		790D8B8A2CFD9730003A15F7 /* EcoSystemSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790D8B892CFD9730003A15F7 /* EcoSystemSectionHeader.swift */; };
 		7926139B2CD4B82800FAF47D /* initia_gov_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613652CD4B82300FAF47D /* initia_gov_v1_genesis.pb.swift */; };
@@ -1711,6 +1711,7 @@
 		7981F7622D0C333E00BB50DA /* ChainRouterEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */; };
 		7981F7642D0C343D00BB50DA /* ChainRealioEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981F7632D0C343D00BB50DA /* ChainRealioEVM.swift */; };
 		7987524A2CFFF32C00308EAC /* ChainAaron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798752492CFFF32C00308EAC /* ChainAaron.swift */; };
+		79909BCD2D8BB51D000CE2ED /* ChainSelf_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79909BCC2D8BB51D000CE2ED /* ChainSelf_T.swift */; };
 		7992615C2D77EE66007E9911 /* babylon_btccheckpoint_v1_btccheckpoint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799261322D77EE66007E9911 /* babylon_btccheckpoint_v1_btccheckpoint.pb.swift */; };
 		7992615D2D77EE66007E9911 /* babylon_btccheckpoint_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799261332D77EE66007E9911 /* babylon_btccheckpoint_v1_genesis.pb.swift */; };
 		7992615E2D77EE66007E9911 /* babylon_btccheckpoint_v1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799261342D77EE66007E9911 /* babylon_btccheckpoint_v1_params.pb.swift */; };
@@ -1756,7 +1757,6 @@
 		799261882D781EBE007E9911 /* UnstakingApproxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 799261862D781EBE007E9911 /* UnstakingApproxCell.xib */; };
 		7992618B2D783FD3007E9911 /* BabylonClaimRewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799261892D783FD3007E9911 /* BabylonClaimRewards.swift */; };
 		7992618C2D783FD3007E9911 /* BabylonClaimRewards.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7992618A2D783FD3007E9911 /* BabylonClaimRewards.xib */; };
-		79909BCD2D8BB51D000CE2ED /* ChainSelf_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79909BCC2D8BB51D000CE2ED /* ChainSelf_T.swift */; };
 		799B4A772D1E439D00998833 /* ChainForma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A762D1E439D00998833 /* ChainForma.swift */; };
 		799B4A7B2D1EA21700998833 /* ChainPundix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A7A2D1EA21700998833 /* ChainPundix.swift */; };
 		799B4A7F2D223FA900998833 /* ChainFxcoreEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B4A7E2D223FA900998833 /* ChainFxcoreEVM.swift */; };
@@ -1772,13 +1772,13 @@
 		79AB340A2D6EB0CE00F1426C /* BtcDelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AB34082D6EB0CE00F1426C /* BtcDelegate.xib */; };
 		79AB340D2D6EDC1100F1426C /* BtcStakingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AB340B2D6EDC1100F1426C /* BtcStakingCell.swift */; };
 		79AB340E2D6EDC1100F1426C /* BtcStakingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AB340C2D6EDC1100F1426C /* BtcStakingCell.xib */; };
-		79B7F36D2D87F74F00AA755B /* BabylonStatusInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B7F36C2D87F74F00AA755B /* BabylonStatusInfoSheet.xib */; };
-		79B7F36E2D87F74F00AA755B /* BabylonStatusInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F36B2D87F74F00AA755B /* BabylonStatusInfoSheet.swift */; };
 		79B7F35B2D8165D300AA755B /* ChainKopi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35A2D8165D300AA755B /* ChainKopi.swift */; };
 		79B7F35D2D8175C300AA755B /* ChainPaloma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35C2D8175C300AA755B /* ChainPaloma.swift */; };
 		79B7F35F2D81769C00AA755B /* ChainInt3face.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35E2D81769C00AA755B /* ChainInt3face.swift */; };
 		79B7F3632D8177A500AA755B /* ChainStratosEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F3622D8177A500AA755B /* ChainStratosEVM.swift */; };
 		79B7F3662D827B5000AA755B /* stratos_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F3652D827B4F00AA755B /* stratos_crypto_v1_ethsecp256k1_keys.pb.swift */; };
+		79B7F36D2D87F74F00AA755B /* BabylonStatusInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B7F36C2D87F74F00AA755B /* BabylonStatusInfoSheet.xib */; };
+		79B7F36E2D87F74F00AA755B /* BabylonStatusInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F36B2D87F74F00AA755B /* BabylonStatusInfoSheet.swift */; };
 		79C5186F2CC76A8F00BC0E85 /* ChainKaia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5186E2CC76A8F00BC0E85 /* ChainKaia.swift */; };
 		79C518732CC8E08D00BC0E85 /* ChainJackal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C518722CC8E08D00BC0E85 /* ChainJackal.swift */; };
 		79C518752CC8E26100BC0E85 /* ChainSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C518742CC8E26100BC0E85 /* ChainSource.swift */; };
@@ -3124,11 +3124,11 @@
 		7909701F2D7E895500DEB959 /* BabylonStakingInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonStakingInfoVC.swift; sourceTree = "<group>"; };
 		790970202D7E895500DEB959 /* BabylonStakingInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BabylonStakingInfoVC.xib; sourceTree = "<group>"; };
 		790970232D7EB34D00DEB959 /* BabylonFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonFetcher.swift; sourceTree = "<group>"; };
+		790970252D7EDE9700DEB959 /* ChainAndromeda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAndromeda.swift; sourceTree = "<group>"; };
 		790970272D8016C000DEB959 /* PendingDelegateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDelegateCell.swift; sourceTree = "<group>"; };
 		790970282D8016C000DEB959 /* PendingDelegateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PendingDelegateCell.xib; sourceTree = "<group>"; };
 		7909702B2D8016D500DEB959 /* PendingUnbondingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingUnbondingCell.swift; sourceTree = "<group>"; };
 		7909702C2D8016D500DEB959 /* PendingUnbondingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PendingUnbondingCell.xib; sourceTree = "<group>"; };
-		790970252D7EDE9700DEB959 /* ChainAndromeda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAndromeda.swift; sourceTree = "<group>"; };
 		790D8B872CFD5837003A15F7 /* ChainMilkyway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMilkyway.swift; sourceTree = "<group>"; };
 		790D8B892CFD9730003A15F7 /* EcoSystemSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoSystemSectionHeader.swift; sourceTree = "<group>"; };
 		792613652CD4B82300FAF47D /* initia_gov_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = initia_gov_v1_genesis.pb.swift; sourceTree = "<group>"; };
@@ -3232,6 +3232,7 @@
 		7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainRouterEVM.swift; sourceTree = "<group>"; };
 		7981F7632D0C343D00BB50DA /* ChainRealioEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainRealioEVM.swift; sourceTree = "<group>"; };
 		798752492CFFF32C00308EAC /* ChainAaron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAaron.swift; sourceTree = "<group>"; };
+		79909BCC2D8BB51D000CE2ED /* ChainSelf_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSelf_T.swift; sourceTree = "<group>"; };
 		799261322D77EE66007E9911 /* babylon_btccheckpoint_v1_btccheckpoint.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = babylon_btccheckpoint_v1_btccheckpoint.pb.swift; sourceTree = "<group>"; };
 		799261332D77EE66007E9911 /* babylon_btccheckpoint_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = babylon_btccheckpoint_v1_genesis.pb.swift; sourceTree = "<group>"; };
 		799261342D77EE66007E9911 /* babylon_btccheckpoint_v1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = babylon_btccheckpoint_v1_params.pb.swift; sourceTree = "<group>"; };
@@ -3277,7 +3278,6 @@
 		799261862D781EBE007E9911 /* UnstakingApproxCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnstakingApproxCell.xib; sourceTree = "<group>"; };
 		799261892D783FD3007E9911 /* BabylonClaimRewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonClaimRewards.swift; sourceTree = "<group>"; };
 		7992618A2D783FD3007E9911 /* BabylonClaimRewards.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BabylonClaimRewards.xib; sourceTree = "<group>"; };
-		79909BCC2D8BB51D000CE2ED /* ChainSelf_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSelf_T.swift; sourceTree = "<group>"; };
 		799B4A762D1E439D00998833 /* ChainForma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainForma.swift; sourceTree = "<group>"; };
 		799B4A7A2D1EA21700998833 /* ChainPundix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPundix.swift; sourceTree = "<group>"; };
 		799B4A7E2D223FA900998833 /* ChainFxcoreEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFxcoreEVM.swift; sourceTree = "<group>"; };
@@ -3293,13 +3293,13 @@
 		79AB34082D6EB0CE00F1426C /* BtcDelegate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BtcDelegate.xib; sourceTree = "<group>"; };
 		79AB340B2D6EDC1100F1426C /* BtcStakingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtcStakingCell.swift; sourceTree = "<group>"; };
 		79AB340C2D6EDC1100F1426C /* BtcStakingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BtcStakingCell.xib; sourceTree = "<group>"; };
-		79B7F36B2D87F74F00AA755B /* BabylonStatusInfoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonStatusInfoSheet.swift; sourceTree = "<group>"; };
-		79B7F36C2D87F74F00AA755B /* BabylonStatusInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BabylonStatusInfoSheet.xib; sourceTree = "<group>"; };
 		79B7F35A2D8165D300AA755B /* ChainKopi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKopi.swift; sourceTree = "<group>"; };
 		79B7F35C2D8175C300AA755B /* ChainPaloma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPaloma.swift; sourceTree = "<group>"; };
 		79B7F35E2D81769C00AA755B /* ChainInt3face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainInt3face.swift; sourceTree = "<group>"; };
 		79B7F3622D8177A500AA755B /* ChainStratosEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStratosEVM.swift; sourceTree = "<group>"; };
 		79B7F3652D827B4F00AA755B /* stratos_crypto_v1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stratos_crypto_v1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
+		79B7F36B2D87F74F00AA755B /* BabylonStatusInfoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonStatusInfoSheet.swift; sourceTree = "<group>"; };
+		79B7F36C2D87F74F00AA755B /* BabylonStatusInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BabylonStatusInfoSheet.xib; sourceTree = "<group>"; };
 		79C5186E2CC76A8F00BC0E85 /* ChainKaia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKaia.swift; sourceTree = "<group>"; };
 		79C518722CC8E08D00BC0E85 /* ChainJackal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainJackal.swift; sourceTree = "<group>"; };
 		79C518742CC8E26100BC0E85 /* ChainSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSource.swift; sourceTree = "<group>"; };
@@ -8037,7 +8037,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 303;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8049,7 +8049,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.22;
+				MARKETING_VERSION = 1.10.23;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -8070,7 +8070,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 303;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -8083,7 +8083,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.22;
+				MARKETING_VERSION = 1.10.23;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Cosmostation debug provisioning profile";
@@ -8224,7 +8224,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 303;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8238,7 +8238,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.22;
+				MARKETING_VERSION = 1.10.23;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -8258,7 +8258,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 303;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8272,7 +8272,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.22;
+				MARKETING_VERSION = 1.10.23;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
