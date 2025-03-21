@@ -25,6 +25,19 @@ class MajorReceiveVC: BaseVC {
         tableView.register(UINib(nibName: "ReceiveCell", bundle: nil), forCellReuseIdentifier: "ReceiveCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
+        
+        setFooterView()
+    }
+    
+    func setFooterView() {
+        let footerLabel = UILabel()
+        footerLabel.text = "Powered by COSMOSTATION"
+        footerLabel.textColor = .color04
+        footerLabel.font = .fontSize11Medium
+        footerLabel.textAlignment = .center
+        footerLabel.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20)
+        
+        tableView.tableFooterView = footerLabel
     }
 }
 
