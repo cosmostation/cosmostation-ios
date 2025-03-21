@@ -482,6 +482,7 @@ extension CosmosClassVC {
         let compounding = CosmosCompounding(nibName: "CosmosCompounding", bundle: nil)
         compounding.claimableRewards = comsosFetcher.claimableRewards()
         compounding.selectedChain = selectedChain
+        compounding.isCompoundingAll = true
         compounding.modalTransitionStyle = .coverVertical
         self.present(compounding, animated: true)
     }
