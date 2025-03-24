@@ -19,7 +19,6 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.view.addBackground()
         if (BaseData.instance.getDBVersion() < DB_VERSION) {
             onUpdateMigration()
         }

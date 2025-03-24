@@ -33,6 +33,16 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
         BaseData.instance.setLastTab(tabBarController.selectedIndex)
     }
     
+    //Disable default tabbar change animation with iOS 18
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if let targetIndex = tabBarController.viewControllers?.firstIndex(where: { $0 == viewController }) {
+            UIView.performWithoutAnimation {
+                tabBarController.selectedIndex = targetIndex
+            }
+        }
+        return false
+    }
+    
     var chainImg: UIImageView?
     func showChainBgImage(_ uiImge: UIImage) {
         if (chainImg?.isHidden == false) { return }
@@ -84,7 +94,6 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
         }
     }
 }
-
 
 extension UIView {
     func addBackground() {
