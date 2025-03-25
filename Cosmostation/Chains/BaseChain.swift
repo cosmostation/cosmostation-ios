@@ -742,7 +742,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainLum118())
     result.append(ChainLum880())
     result.append(ChainMantra())
-    result.append(ChainMars())
     result.append(ChainMedibloc())
     result.append(ChainMigaloo())
     result.append(ChainMilkyway())
@@ -833,6 +832,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainCrescent())
 //    result.append(ChainCudos())
 //    result.append(ChainEmoney())
+//    result.append(ChainMars())
 //    result.append(ChainStarname())
 //    
 //    result.append(ChainCosmos_T())
