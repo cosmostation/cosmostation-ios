@@ -200,7 +200,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         //From UI update
         fromAddressLabel.text = inputChain.bechAddress ?? inputChain.evmAddress
         inputChainImg.image = UIImage(named: inputChain.logo1)
-        inputChainLabel.text = inputChain.name.uppercased()
+        inputChainLabel.text = inputChain.name
         if let inputMsAsset = BaseData.instance.getAsset(inputChain.apiName, inputAsset.denom) {
             inputAssetImg.sd_setImage(with: inputMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
             inputAssetLabel.text = inputMsAsset.symbol
@@ -229,7 +229,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         //To UI update
         toAddressLabel.text = outputChain.bechAddress ?? outputChain.evmAddress
         outputChainImg.image = UIImage(named: outputChain.logo1)
-        outputChainLabel.text = outputChain.name.uppercased()
+        outputChainLabel.text = outputChain.name
         if let outputMsAsset = BaseData.instance.getAsset(outputChain.apiName, outputAsset!.denom) {
             outputAssetImg.sd_setImage(with: outputMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
             outputAssetLabel.text = outputMsAsset.symbol

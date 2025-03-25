@@ -28,7 +28,7 @@ public struct MintscanAsset: Codable {
     var ibc_info: MintscanAssetIbcInfo?
     
     func assetImg() -> URL? {
-        return URL(string: image!)
+        return URL(string: image ?? "")
     }
     
     func beforeChain(_ chainApiName: String) -> String? {

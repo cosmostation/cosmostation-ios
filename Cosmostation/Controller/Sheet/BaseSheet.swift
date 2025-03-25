@@ -155,7 +155,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             swapChains.sort {
                 if ($0.tag == "cosmos118") { return true }
                 if ($1.tag == "cosmos118") { return false }
-                return $0.name < $1.name
+                return $0.name.lowercased() < $1.name.lowercased()
             }
             swapChainsSearch = swapChains
             
@@ -165,7 +165,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             swapChains.sort {
                 if ($0.tag == "cosmos118") { return true }
                 if ($1.tag == "cosmos118") { return false }
-                return $0.name < $1.name
+                return $0.name.lowercased() < $1.name.lowercased()
             }
             swapChainsSearch = swapChains
             
