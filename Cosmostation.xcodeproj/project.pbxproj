@@ -1677,6 +1677,8 @@
 		7939A25A2D30C2E2006674E3 /* btcStaking.json in Resources */ = {isa = PBXBuildFile; fileRef = 7939A2592D30C2E2006674E3 /* btcStaking.json */; };
 		7939A25D2D34DD85006674E3 /* DappBtcSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7939A25C2D34DD85006674E3 /* DappBtcSignRequestSheet.xib */; };
 		7939A25E2D34DD85006674E3 /* DappBtcSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7939A25B2D34DD85006674E3 /* DappBtcSignRequestSheet.swift */; };
+		7948D6752D911D98005208B2 /* ChainXrplEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948D6742D911D98005208B2 /* ChainXrplEVM.swift */; };
+		7948D6772D911E3F005208B2 /* ChainXrplEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948D6762D911E3F005208B2 /* ChainXrplEVM_T.swift */; };
 		79514DB42CB527AA008D7ED8 /* ChainMantra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79514DB32CB527AA008D7ED8 /* ChainMantra.swift */; };
 		795C0DC22C8E853C006D35A4 /* bitcoin.js in Resources */ = {isa = PBXBuildFile; fileRef = 795C0DC12C8E853C006D35A4 /* bitcoin.js */; };
 		795C0DC42C8E8547006D35A4 /* BtcJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795C0DC32C8E8547006D35A4 /* BtcJS.swift */; };
@@ -3199,6 +3201,8 @@
 		7939A2592D30C2E2006674E3 /* btcStaking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = btcStaking.json; sourceTree = "<group>"; };
 		7939A25B2D34DD85006674E3 /* DappBtcSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappBtcSignRequestSheet.swift; sourceTree = "<group>"; };
 		7939A25C2D34DD85006674E3 /* DappBtcSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappBtcSignRequestSheet.xib; sourceTree = "<group>"; };
+		7948D6742D911D98005208B2 /* ChainXrplEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainXrplEVM.swift; sourceTree = "<group>"; };
+		7948D6762D911E3F005208B2 /* ChainXrplEVM_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainXrplEVM_T.swift; sourceTree = "<group>"; };
 		79514DB32CB527AA008D7ED8 /* ChainMantra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantra.swift; sourceTree = "<group>"; };
 		795C0DC12C8E853C006D35A4 /* bitcoin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bitcoin.js; sourceTree = "<group>"; };
 		795C0DC32C8E8547006D35A4 /* BtcJS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BtcJS.swift; sourceTree = "<group>"; };
@@ -3703,6 +3707,7 @@
 				79B7F3622D8177A500AA755B /* ChainStratosEVM.swift */,
 				0485A50C2CDA473400DE1661 /* ChainTenetEVM.swift */,
 				045032352C1EEA9600235F6A /* ChainXplaEVM.swift */,
+				7948D6742D911D98005208B2 /* ChainXrplEVM.swift */,
 				04983BF72C4E745B004DD391 /* ChainZetaEVM.swift */,
 				04E4138B2D27C76E001378D3 /* ChainTabiEVM.swift */,
 			);
@@ -4279,6 +4284,7 @@
 				04E4138E2D27C788001378D3 /* ChainTabiEVM_T.swift */,
 				048CB5412D2E8A2100061729 /* ChainBabylon_T.swift */,
 				79813A792D5477FC0083A1F5 /* ChainXion_T.swift */,
+				7948D6762D911E3F005208B2 /* ChainXrplEVM_T.swift */,
 			);
 			path = ClassTestnet;
 			sourceTree = "<group>";
@@ -7110,6 +7116,7 @@
 				04B7895B2ACAC9B100E9BE88 /* ibc_core_channel_v1_tx.pb.swift in Sources */,
 				045032842C1EEDCD00235F6A /* ChainBitcana.swift in Sources */,
 				E10B1E062C215EF20039283B /* OkWithdraw.swift in Sources */,
+				7948D6772D911E3F005208B2 /* ChainXrplEVM_T.swift in Sources */,
 				046EA8EF2AD04A2600A2FCE7 /* desmos_profiles_v3_msg_server.grpc.swift in Sources */,
 				047843A72AC991B300462F1C /* injective_exchange_v1beta1_tx.pb.swift in Sources */,
 				E10B1DE82C215C120039283B /* NeutronSingleDao.swift in Sources */,
@@ -7795,6 +7802,7 @@
 				047843B72AC991B300462F1C /* injective_types_v1beta1_tx_response.pb.swift in Sources */,
 				046EA8EB2AD04A2600A2FCE7 /* desmos_profiles_v3_query.pb.swift in Sources */,
 				0478430D2AC9918700462F1C /* ethermint_evm_v1_tx.pb.swift in Sources */,
+				7948D6752D911D98005208B2 /* ChainXrplEVM.swift in Sources */,
 				04C816942BA98D74006B800A /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */,
 				047843D32AC991B300462F1C /* injective_tokenfactory_v1beta1_genesis.pb.swift in Sources */,
 				0485A50A2CDA465100DE1661 /* ChainCheqd.swift in Sources */,
