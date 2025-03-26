@@ -827,6 +827,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainTabiEVM_T())
     result.append(ChainXion_T())
     result.append(ChainXrplEVM_T())
+    result.append(ChainZkCloud_T())
     
     
     
