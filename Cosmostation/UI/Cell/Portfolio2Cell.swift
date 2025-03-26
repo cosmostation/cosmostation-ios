@@ -18,6 +18,7 @@ class Portfolio2Cell: UITableViewCell {
     @IBOutlet weak var evmAddressLabel: UILabel!
     @IBOutlet weak var btcTag: RoundedPaddingLabel!
     @IBOutlet weak var oldTag: RoundedPaddingLabel!
+    @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var priceCurrencyLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var priceChangeLabel: UILabel!
@@ -38,6 +39,7 @@ class Portfolio2Cell: UITableViewCell {
         valuecurrencyLabel.text = ""
         valueLabel.text = ""
         assetCntLabel.text = ""
+        symbolLabel.text = ""
         priceCurrencyLabel.text = ""
         priceLabel.text = ""
         priceChangeLabel.text = ""
@@ -58,6 +60,7 @@ class Portfolio2Cell: UITableViewCell {
         oldTag.isHidden = true
         bechAddressLabel.text = ""
         evmAddressLabel.text = ""
+        symbolLabel.text = ""
         priceCurrencyLabel.text = ""
         priceLabel.text = ""
         priceChangeLabel.text = ""
@@ -150,6 +153,13 @@ class Portfolio2Cell: UITableViewCell {
             valueLoadingLabel.isHidden = false
             assetCntLoadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color04, .color03]), animation: skeletonAnimation, transition: .none)
             assetCntLoadingLabel.isHidden = false
+        }
+        
+        if let stakeDenom = chain.stakeDenom,
+           let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+            symbolLabel.text = msAsset.symbol
+        } else {
+            symbolLabel.text = chain.coinSymbol
         }
         
         //DP Price

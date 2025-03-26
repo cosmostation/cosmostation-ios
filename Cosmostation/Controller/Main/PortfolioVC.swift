@@ -232,10 +232,22 @@ class PortfolioVC: BaseVC {
         }
         
         searchMainnets = searchBar!.text!.isEmpty ? mainnetChains : mainnetChains.filter { chain in
-            return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+            var symbol = ""
+            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? "") {
+                symbol = msAsset.symbol ?? ""
+            } else {
+                symbol = chain.coinSymbol
+            }
+            return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil || symbol.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         searchTestnets = searchBar!.text!.isEmpty ? testnetChains : testnetChains.filter { chain in
-            return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+            var symbol = ""
+            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? "") {
+                symbol = msAsset.symbol ?? ""
+            } else {
+                symbol = chain.coinSymbol
+            }
+            return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil || symbol.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         
         tableView.reloadData()
@@ -486,10 +498,22 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchMainnets = searchText.isEmpty ? mainnetChains : mainnetChains.filter { chain in
-            return chain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            var symbol = ""
+            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? "") {
+                symbol = msAsset.symbol ?? ""
+            } else {
+                symbol = chain.coinSymbol
+            }
+            return chain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || symbol.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         searchTestnets = searchText.isEmpty ? testnetChains : testnetChains.filter { chain in
-            return chain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            var symbol = ""
+            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? "") {
+                symbol = msAsset.symbol ?? ""
+            } else {
+                symbol = chain.coinSymbol
+            }
+            return chain.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || symbol.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         searchEmptyLayer.isHidden = searchMainnets.count + searchTestnets.count > 0
         tableView.reloadData()
