@@ -30,8 +30,8 @@ public class MintscanToken: Codable {
         return NSDecimalNumber.init(string: amount ?? "0")
     }
     
-    func assetImg() -> URL {
-        return URL(string: image!) ?? URL(string: "")!
+    func assetImg() -> URL? {
+        return URL(string: image ?? "")
     }
 }
 

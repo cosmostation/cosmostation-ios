@@ -26,8 +26,10 @@ class EvmFetcher {
     func fetchEvmBalances() async -> Bool {
         evmBalances = NSDecimalNumber.zero
         if let balanceJson = try? await fetchEvmBalance(chain.evmAddress!),
-           let balance = balanceJson?["result"].stringValue.hexToNSDecimal() {
+           let balance = balanceJson?["result"].string?.hexToNSDecimal() {
             self.evmBalances = balance
+        } else {
+            return false
         }
         return true
     }
@@ -41,8 +43,10 @@ class EvmFetcher {
             if let erc20Tokens = erc20Tokens {
                 self.mintscanErc20Tokens = erc20Tokens
             }
-            if let balance = balanceJson?["result"].stringValue.hexToNSDecimal() {
+            if let balance = balanceJson?["result"].string?.hexToNSDecimal() {
                 self.evmBalances = balance
+            } else {
+                return false
             }
             
             let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)

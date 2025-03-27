@@ -13,7 +13,7 @@ class ChainFxcoreEVM: BaseChain {
     override init() {
         super.init()
         
-        name = "FUNCTION-X"
+        name = "Function-X"
         tag = "fxcore60"
         logo1 = "chainFxcore"
         apiName = "fxcore"

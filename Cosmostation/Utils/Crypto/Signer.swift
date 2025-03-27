@@ -239,7 +239,7 @@ class Signer {
         
         let claimMsg = Babylon_Incentive_MsgWithdrawReward.with {
             $0.address = address
-            $0.type = "btc_delegation"
+            $0.type = "BTC_STAKER"
         }
         
         let anyMsg = Google_Protobuf_Any.with {

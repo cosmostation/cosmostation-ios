@@ -200,6 +200,9 @@ class AssetCosmosClassCell: UITableViewCell {
     func bindNeutron(_ baseChain: ChainNeutron) {
         if let neutronFetcher = baseChain.getNeutronFetcher(),
            let stakeDenom = baseChain.stakeDenom {
+            rewardLayer.isHidden = true
+            unstakingLayer.isHidden = true
+            
             stakingTitle.text = "Vault Deposited"
             if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
                 let value = neutronFetcher.denomValue(stakeDenom)
