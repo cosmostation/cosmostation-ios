@@ -24,7 +24,7 @@ class ChainAvalanche: BaseChain  {
         coinSymbol = "AVAX"
         coinGeckoId = "avalanche-2"
         coinLogo = "tokenAvax"
-        evmRpcURL = "https://avalanche.public-rpc.com"
+        evmRpcURL = "https://avalanche.drpc.org"
     }
     
 }
