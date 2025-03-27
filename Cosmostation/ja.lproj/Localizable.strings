@@ -362,8 +362,6 @@
 "str_next_reward_distibution" = "次の報酬分配";
 "str_next_epoch" = "次のエポックを有効化";
 "str_coin_manage_stake" = "%@ステーキング管理";
-"str_staked_coin" = "ステーキングされた%@";
-"str_staked_coin_status" = "ステーキングされた%@のステータス";
 
 
 "btn_delegate" = "  委任する";

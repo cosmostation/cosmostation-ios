@@ -44,7 +44,7 @@ class BabylonBTCFetcher {
             if let chain = (chain as? ChainBabylon) {
                 delegations = try await fetchBtcDelegations(chain.bechAddress!)
                 btcStakingAmount = NSDecimalNumber(value: delegations.filter({ $0["status_desc"] == "ACTIVE" }).map({ UInt64($0["total_sat"].stringValue) ?? 0 }).reduce(0, +))
-                btcStakedRewards = try await fetchBtcStakedRewards()
+                btcStakedRewards = await fetchBtcStakedRewards()
                 
             //bitcoin
             } else if let chain = (chain as? ChainBitCoin86),
@@ -212,36 +212,42 @@ extension BabylonBTCFetcher {
         return try await AF.request(url, method: .get).serializingDecodable(JSON.self).value.finalityProviderWithVotingPower()
     }
     
-    func fetchBtcStakedRewards() async throws -> [Cosmos_Base_V1beta1_Coin] {
-        if (getEndpointType() == .UseGRPC) {
-            let req = Babylon_Incentive_QueryRewardGaugesRequest.with { $0.address = chain.bechAddress! }
-            let rewardGauges = try await Babylon_Incentive_QueryNIOClient(channel: getClient()).rewardGauges(req, callOptions: getCallOptions()).response.get().rewardGauges
-            var result = [Cosmos_Base_V1beta1_Coin]()
+    func fetchBtcStakedRewards() async -> [Cosmos_Base_V1beta1_Coin] {
+        do {
+            if (getEndpointType() == .UseGRPC) {
+                let req = Babylon_Incentive_QueryRewardGaugesRequest.with { $0.address = chain.bechAddress! }
+                let rewardGauges = try await Babylon_Incentive_QueryNIOClient(channel: getClient()).rewardGauges(req, callOptions: getCallOptions()).response.get().rewardGauges
+                var result = [Cosmos_Base_V1beta1_Coin]()
+                                
+                rewardGauges["BTC_STAKER"]?.coins.forEach({ coin in
+                    if let withdrawn = rewardGauges["BTC_STAKER"]?.withdrawnCoins.filter({ $0.denom == coin.denom }).first {
+                        let amount = (UInt64(coin.amount) ?? 0) - (UInt64(withdrawn.amount) ?? 0)
+                        result.append(Cosmos_Base_V1beta1_Coin(coin.denom, String(amount)))
+                    } else {
+                        result.append(coin)
+                    }
+                })
+                return result
+                
+            } else {
+                let url = getLcd() + "babylon/incentive/address/" + chain.bechAddress! + "/reward_gauge"
+                let rewardGauges = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value["reward_gauges"]["BTC_STAKER"]
+                var result = [Cosmos_Base_V1beta1_Coin]()
+                
+                rewardGauges["coins"].arrayValue.forEach({ coin in
+                    if let withdrawn = rewardGauges["withdrawn_coins"].arrayValue.filter({ $0["denom"].stringValue == coin["denom"].stringValue }).first {
+                        let amount = (UInt64(coin["amount"].stringValue) ?? 0) - (UInt64(withdrawn["amount"].stringValue) ?? 0)
+                        result.append(Cosmos_Base_V1beta1_Coin(coin["denom"].stringValue, String(amount)))
+                    } else {
+                        result.append(Cosmos_Base_V1beta1_Coin(coin["denom"].stringValue,coin["amount"].stringValue))
+                    }
+                })
+                return result
+            }
             
-            rewardGauges["btc_delegation"]?.coins.forEach({ coin in
-                if let withdrawn = rewardGauges["btc_delegation"]?.withdrawnCoins.filter({ $0.denom == coin.denom }).first {
-                    let amount = (UInt64(coin.amount) ?? 0) - (UInt64(withdrawn.amount) ?? 0)
-                    result.append(Cosmos_Base_V1beta1_Coin(coin.denom, String(amount)))
-                } else {
-                    result.append(coin)
-                }
-            })
-            return result
-            
-        } else {
-            let url = getLcd() + "babylon/incentive/address/" + chain.bechAddress! + "/reward_gauge"
-            let rewardGauges = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value["reward_gauges"]["btc_delegation"]
-            var result = [Cosmos_Base_V1beta1_Coin]()
-            
-            rewardGauges["coins"].arrayValue.forEach({ coin in
-                if let withdrawn = rewardGauges["withdrawn_coins"].arrayValue.filter({ $0["denom"].stringValue == coin["denom"].stringValue }).first {
-                    let amount = (UInt64(coin["amount"].stringValue) ?? 0) - (UInt64(withdrawn["amount"].stringValue) ?? 0)
-                    result.append(Cosmos_Base_V1beta1_Coin(coin["denom"].stringValue, String(amount)))
-                } else {
-                    result.append(Cosmos_Base_V1beta1_Coin(coin["denom"].stringValue,coin["amount"].stringValue))
-                }
-            })
-            return result
+        } catch {
+            print("Error: \(#function)")
+            return []
         }
     }
 }

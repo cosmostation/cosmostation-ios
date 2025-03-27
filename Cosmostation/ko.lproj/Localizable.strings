@@ -362,8 +362,6 @@
 "str_next_reward_distibution" = "다음 보상 분배";
 "str_next_epoch" = "다음 에포치 활성화";
 "str_coin_manage_stake" = "%@ 스테이킹 관리";
-"str_staked_coin" = "스테이킹된 %@";
-"str_staked_coin_status" = "스테이킹된 %@ 상태";
 
 
 "btn_delegate" = "  위임 하기";
