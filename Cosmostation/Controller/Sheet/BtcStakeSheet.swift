@@ -29,7 +29,7 @@ class BtcStakeSheet: BaseVC {
             
             let btcSymbol = chain.isTestnet ? "sBTC" : "BTC"
             
-            titleLabel.text = String(format: NSLocalizedString("str_staked_coin", comment: ""), btcSymbol)
+            titleLabel.text = "Staked \(btcSymbol)"
             symbolLabel.text = btcSymbol
             
             descriptionLabel.setLineSpacing(text: String(format: NSLocalizedString("msg_btc_stake", comment: ""), btcSymbol), font: .fontSize12Medium, alignment: .center)
