@@ -51,6 +51,8 @@ class AboutStakingCell: UITableViewCell {
                 let unbondingDay = UInt16(time / 24 / 60 / 60)
                 unbondingTimeLabel.text = String(unbondingDay) + " " + NSLocalizedString("str_days", comment: "")
             }
+        } else if chain is ChainBabylon {
+            unbondingTimeLabel.text = "Est." + "1 " + NSLocalizedString("str_days", comment: "")
 
         } else {
             let unbondingSec = json["params"]["staking_params"]["params"]["unbonding_time"].stringValue.filter({ $0.isNumber })
