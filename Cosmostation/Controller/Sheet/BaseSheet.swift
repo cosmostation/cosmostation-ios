@@ -26,6 +26,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var swapChainsSearch = Array<BaseChain>()
     var swapAssets = Array<TargetAsset>()
     var swapAssetsSearch = Array<TargetAsset>()
+    var recipientChain: BaseChain!
     
     var feeDatas = Array<FeeData>()
     var baseFeesDatas = [Cosmos_Base_V1beta1_DecCoin]()
@@ -97,6 +98,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SelectSwapAssetCell", bundle: nil), forCellReuseIdentifier: "SelectSwapAssetCell")
         sheetTableView.register(UINib(nibName: "SelectAccountCell", bundle: nil), forCellReuseIdentifier: "SelectAccountCell")
         sheetTableView.register(UINib(nibName: "SelectEndpointCell", bundle: nil), forCellReuseIdentifier: "SelectEndpointCell")
+        sheetTableView.register(UINib(nibName: "SelectRecipientChainCell", bundle: nil), forCellReuseIdentifier: "SelectRecipientChainCell")
         
         sheetTableView.register(UINib(nibName: "SelectFeeCoinCell", bundle: nil), forCellReuseIdentifier: "SelectFeeCoinCell")
         sheetTableView.register(UINib(nibName: "SelectValidatorCell", bundle: nil), forCellReuseIdentifier: "SelectValidatorCell")
@@ -571,8 +573,8 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             return cell!
             
         } else if (sheetType == .SelectCosmosRecipientChain) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapChainCell") as? SelectSwapChainCell
-            cell?.onBindCosmosChain(cosmosChainList[indexPath.row])
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRecipientChainCell") as? SelectRecipientChainCell
+            cell?.onBindChain(cosmosChainList[indexPath.row], recipientChain, targetChain)
             return cell!
             
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {

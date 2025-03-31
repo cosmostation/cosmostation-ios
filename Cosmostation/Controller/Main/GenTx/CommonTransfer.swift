@@ -26,6 +26,8 @@ class CommonTransfer: BaseVC {
     @IBOutlet weak var toChainTitle: UILabel!
     @IBOutlet weak var toChainImg: UIImageView!
     @IBOutlet weak var toChainLabel: UILabel!
+    @IBOutlet weak var ibcSendCardView: UIView!
+    @IBOutlet weak var ibcSendLabel: UILabel!
     
     @IBOutlet weak var toAddressCardView: FixCardView!
     @IBOutlet weak var toAddressTitle: UILabel!
@@ -185,7 +187,6 @@ class CommonTransfer: BaseVC {
         }
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
         feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
-        sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
     }
     
     func onInitIbcInfo() {
@@ -236,7 +237,7 @@ class CommonTransfer: BaseVC {
     func onInitToChain() {
         toChain = fromChain
         toChainImg.image = UIImage.init(named: toChain.logo1)
-        toChainLabel.text = toChain.name.uppercased()
+        toChainLabel.text = toChain.name
     }
     
     func onInitFee() {
@@ -317,6 +318,8 @@ class CommonTransfer: BaseVC {
     }
     
     func onInitView() {
+        sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
+        
         var symbol = ""
         if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
@@ -423,6 +426,8 @@ class CommonTransfer: BaseVC {
     
     @objc func onClickToChain() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.targetChain = fromChain
+        baseSheet.recipientChain = toChain
         baseSheet.cosmosChainList = recipientableChains
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectCosmosRecipientChain
@@ -433,12 +438,35 @@ class CommonTransfer: BaseVC {
         if (chain.tag != toChain.tag) {
             toChain = chain
             toChainImg.image = UIImage.init(named: toChain.logo1)
-            toChainLabel.text = toChain.name.uppercased()
+            toChainLabel.text = toChain.name
             onUpdateToAddressView("")
+            sendBtn.isEnabled = false
             
             if (sendAssetType == .COSMOS_EVM_MAIN_COIN && fromChain.tag != toChain.tag) {
                 onUpdateTxStyle(.COSMOS_STYLE)
             }
+        }
+        
+        if fromChain.tag == toChain.tag {
+            ibcSendCardView.isHidden = true
+            sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
+            
+        } else {
+            ibcSendCardView.isHidden = false
+            
+            let fromChainName = fromChain.name ?? ""
+            let toChainName = toChain.name ?? ""
+            let fullText = "IBC Send from \(fromChainName) to \(toChainName) network"
+            let attributedString = NSMutableAttributedString(string: fullText)
+            let fullRange = (fullText as NSString).range(of: fullText)
+            let fromChainRange = (fullText as NSString).range(of: fromChainName)
+            let toChainRange = (fullText as NSString).range(of: toChainName)
+            attributedString.addAttributes([.font: UIFont.fontSize11Medium, .foregroundColor: UIColor.color03], range: fullRange)
+            attributedString.addAttributes([.font: UIFont.fontSize11Bold, .foregroundColor: UIColor.color02], range: fromChainRange)
+            attributedString.addAttributes([.font: UIFont.fontSize11Bold, .foregroundColor: UIColor.color02], range: toChainRange)
+            ibcSendLabel.attributedText = attributedString
+            
+            sendBtn.setTitle(NSLocalizedString("title_ibc_transfer", comment: ""), for: .normal)
         }
     }
     

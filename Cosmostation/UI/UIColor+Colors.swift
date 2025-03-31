@@ -60,6 +60,15 @@ extension UIColor {
     static var colorDydx: UIColor {
         UIColor.init(hexString: "#7471FF")
     }
+    static var colorSubGreen01: UIColor {
+        UIColor(named: "_subGreen01")!
+    }
+    static var colorSubYellow01: UIColor {
+        UIColor(named: "_subYellow01")!
+    }
+    static var colorSubRed01: UIColor {
+        UIColor(named: "_subRed01")!
+    }
 
     public convenience init?(hex: String) {
         let r, g, b: CGFloat
