@@ -3,7 +3,7 @@
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -37,7 +37,7 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="u7J-ah-eu2">
-                                <rect key="frame" x="64" y="9" width="249" height="54"/>
+                                <rect key="frame" x="64" y="9" width="241" height="54"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ChainName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sM7-9E-XG9">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="18"/>
@@ -46,21 +46,21 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7WX-oH-PtV">
-                                        <rect key="frame" x="0.0" y="22" width="249" height="32"/>
+                                        <rect key="frame" x="0.0" y="22" width="241" height="32"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tiZ-76-ziU">
-                                                <rect key="frame" x="0.0" y="0.0" width="249" height="14"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="241" height="14"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="cosmos endpoint" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TML-z6-PjT">
-                                                        <rect key="frame" x="0.0" y="-0.5" width="98.5" height="15.5"/>
-                                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
-                                                        <color key="textColor" name="_color02"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="90" height="14"/>
+                                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="11"/>
+                                                        <color key="textColor" name="_color03"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GRPC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcP-dy-U5V" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                                        <rect key="frame" x="222.5" y="0.5" width="26.5" height="13"/>
+                                                        <rect key="frame" x="217" y="1.5" width="24" height="11.5"/>
                                                         <color key="backgroundColor" red="0.29803921570000003" green="0.29411764709999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="9"/>
                                                         <color key="textColor" name="_color02"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -76,18 +76,18 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEV-WA-f2s">
-                                                <rect key="frame" x="0.0" y="18" width="249" height="14"/>
+                                                <rect key="frame" x="0.0" y="18" width="241" height="14"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="evm endpoint" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPx-ST-okQ">
-                                                        <rect key="frame" x="0.0" y="-0.5" width="79.5" height="15.5"/>
-                                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
-                                                        <color key="textColor" name="_color02"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="73" height="14"/>
+                                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="11"/>
+                                                        <color key="textColor" name="_color03"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Evm RPC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzo-IO-vvV" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
-                                                        <rect key="frame" x="206.5" y="0.5" width="42.5" height="13"/>
+                                                        <rect key="frame" x="202.5" y="1.5" width="38.5" height="11.5"/>
                                                         <color key="backgroundColor" red="0.29803921570000003" green="0.29411764709999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="10"/>
+                                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="9"/>
                                                         <color key="textColor" name="_color02"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -122,7 +122,7 @@
                             <constraint firstItem="pxi-La-Rot" firstAttribute="centerY" secondItem="3OO-8x-n0x" secondAttribute="centerY" id="Qh8-Ca-hka"/>
                             <constraint firstAttribute="height" constant="72" id="ZQx-T1-htA"/>
                             <constraint firstItem="pxi-La-Rot" firstAttribute="leading" secondItem="3OO-8x-n0x" secondAttribute="leading" constant="12" id="kCT-3m-GyL"/>
-                            <constraint firstAttribute="trailing" secondItem="u7J-ah-eu2" secondAttribute="trailing" constant="8" id="lvG-WN-mIw"/>
+                            <constraint firstAttribute="trailing" secondItem="u7J-ah-eu2" secondAttribute="trailing" constant="16" id="lvG-WN-mIw"/>
                             <constraint firstItem="u7J-ah-eu2" firstAttribute="leading" secondItem="pxi-La-Rot" secondAttribute="trailing" constant="4" id="mZ5-OD-BZ5"/>
                         </constraints>
                     </view>
@@ -158,6 +158,9 @@
         </namedColor>
         <namedColor name="_color02">
             <color red="0.74509803921568629" green="0.81960784313725488" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color03">
+            <color red="0.54117647058823526" green="0.59999999999999998" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_primary">
             <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
