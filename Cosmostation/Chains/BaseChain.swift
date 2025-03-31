@@ -808,11 +808,8 @@ func ALLCHAINS() -> [BaseChain] {
 
     
     
-    
-//    result.append(ChainBeraEVM_T())                     //EVM
+
     result.append(ChainBabylon_T())
-//    result.append(ChainBitCoin44_T())
-//    result.append(ChainBitCoin49_T())
     result.append(ChainBitCoin84_T())
     result.append(ChainBitCoin86_T())
     result.append(ChainGno_T())
@@ -821,7 +818,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNillion_T())
     result.append(ChainMantra_T())
     result.append(ChainSelf_T())
-//    result.append(ChainStoryEVM_T())
     result.append(ChainTabiEVM_T())
     result.append(ChainXion_T())
     result.append(ChainXrplEVM_T())
@@ -837,6 +833,10 @@ func ALLCHAINS() -> [BaseChain] {
 //    
 //    result.append(ChainCosmos_T())
 //    result.append(ChainArtelaEVM_T())
+//    result.append(ChainBeraEVM_T())                     //EVM
+//    result.append(ChainBitCoin44_T())
+//    result.append(ChainBitCoin49_T())
+//    result.append(ChainStoryEVM_T())
     
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {
@@ -890,4 +890,4 @@ public enum TxType: Int {
 
 
 
-let DEFUAL_DISPALY_CHAINS = ["cosmos118", "ethereum60", "neutron118", "kava60", "osmosis118", "dydx118"]
+let DEFUAL_DISPALY_CHAINS = ["cosmos118", "bitcoin86", "ethereum60", "suiMainnet", "neutron118", "kava60", "osmosis118", "dydx118", "mantra118"]
