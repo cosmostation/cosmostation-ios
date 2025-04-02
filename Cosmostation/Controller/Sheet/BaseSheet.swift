@@ -26,6 +26,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var swapChainsSearch = Array<BaseChain>()
     var swapAssets = Array<TargetAsset>()
     var swapAssetsSearch = Array<TargetAsset>()
+    var dappNetworks: [DappNetwork] = []
+    var dappNetworksSearch = [DappNetwork]()
+    var dappSelectedNetwork: BaseChain?
     
     var feeDatas = Array<FeeData>()
     var baseFeesDatas = [Cosmos_Base_V1beta1_DecCoin]()
@@ -66,6 +69,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var swapSlippage: String?
 
     var selectedAccount: BaseAccount?
+    
+    var selectedDappSortType: DappSortType?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +102,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SelectSwapAssetCell", bundle: nil), forCellReuseIdentifier: "SelectSwapAssetCell")
         sheetTableView.register(UINib(nibName: "SelectAccountCell", bundle: nil), forCellReuseIdentifier: "SelectAccountCell")
         sheetTableView.register(UINib(nibName: "SelectEndpointCell", bundle: nil), forCellReuseIdentifier: "SelectEndpointCell")
+        sheetTableView.register(UINib(nibName: "BaseImgMsgCheckCell", bundle: nil), forCellReuseIdentifier: "BaseImgMsgCheckCell")
+        
         
         sheetTableView.register(UINib(nibName: "SelectFeeCoinCell", bundle: nil), forCellReuseIdentifier: "SelectFeeCoinCell")
         sheetTableView.register(UINib(nibName: "SelectValidatorCell", bundle: nil), forCellReuseIdentifier: "SelectValidatorCell")
@@ -288,6 +295,15 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
             sheetSearchBar.isHidden = false
             finalityProvidersSearch = finalityProviders
+            
+        } else if sheetType == .SelectDappSort {
+            sheetTitle.text = "Select Sort Option"
+            
+        } else if sheetType == .SelectDappNetwork {
+            sheetTitle.text = "Select chain"
+            sheetSearchBar.isHidden = false
+            dappNetworksSearch = dappNetworks
+
         }
     }
     
@@ -324,6 +340,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectFinalityProvider) {
             finalityProvidersSearch = searchText.isEmpty ? finalityProviders : finalityProviders.filter { provider in
                 return provider.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+            
+        } else if sheetType == .SelectDappNetwork {
+            dappNetworksSearch = searchText.isEmpty ? dappNetworks : dappNetworks.filter { ($0.chain?.name ?? "").range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
         }
         sheetTableView.reloadData()
@@ -474,7 +494,14 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectFinalityProvider) {
             return finalityProvidersSearch.count
+            
+        } else if sheetType == .SelectDappSort {
+            return 2
+            
+        } else if sheetType == .SelectDappNetwork {
+            return dappNetworksSearch.count
         }
+
         
         return 0
     }
@@ -655,6 +682,17 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SelectValidatorCell") as? SelectValidatorCell
             cell?.onBindFinalityProvider(targetChain, finalityProvidersSearch[indexPath.row])
             return cell!
+        
+        } else if sheetType == .SelectDappSort {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BaseMsgSheetCell") as? BaseMsgSheetCell
+            cell?.onBindDappSort(indexPath.row, selectedDappSortType)
+            return cell!
+            
+        } else if sheetType == .SelectDappNetwork {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BaseImgMsgCheckCell") as? BaseImgMsgCheckCell
+            cell?.onBindDappNetwork(indexPath.row, dappNetworksSearch[indexPath.row].chain, dappNetworksSearch[indexPath.row].dappCount, dappSelectedNetwork)
+            return cell!
+
         }
         
         return UITableViewCell()
@@ -754,6 +792,14 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "finalityProviderBtcPk" : finalityProvidersSearch[indexPath.row].btcPk]
             sheetDelegate?.onSelectedSheet(sheetType, result)
 
+        } else if sheetType == .SelectDappSort {
+            let result: [String : Any] = ["index" : indexPath.row]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if sheetType == .SelectDappNetwork {
+            let result: [String : Any] = ["chain" : dappNetworksSearch[indexPath.row].chain]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+
             
         } else {
             let result: [String : Any] = ["index" : indexPath.row]
@@ -827,5 +873,7 @@ public enum SheetType: Int {
     case MoveDropDetail = 100
     case MoveDydx = 101
     case MoveBabylonDappDetail = 102
-
+    
+    case SelectDappSort
+    case SelectDappNetwork
 }
