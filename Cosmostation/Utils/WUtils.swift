@@ -317,6 +317,7 @@ extension UILabel {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 3.0
         paragraphStyle.alignment = alignment!
+        paragraphStyle.lineBreakMode = .byTruncatingTail
         
         let attributes: [NSAttributedString.Key: Any] = [
             .font: font ?? UIFont.systemFont(ofSize: 12),
