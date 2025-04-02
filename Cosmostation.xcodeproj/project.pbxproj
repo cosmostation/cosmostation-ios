@@ -1687,6 +1687,8 @@
 		79705CB12D7059FF00B89830 /* EcosystemPopUpSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79705CAF2D7059FF00B89830 /* EcosystemPopUpSheet.xib */; };
 		79705CC62D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79705CC42D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.pb.swift */; };
 		79705CC72D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79705CC52D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.grpc.swift */; };
+		79734EE22D8D3B7900574B41 /* AllDappListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79734EE02D8D3B7900574B41 /* AllDappListCell.swift */; };
+		79734EE32D8D3B7900574B41 /* AllDappListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79734EE12D8D3B7900574B41 /* AllDappListCell.xib */; };
 		79734EE62D8D3BA100574B41 /* DappListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79734EE42D8D3BA000574B41 /* DappListViewController.xib */; };
 		79734EE72D8D3BA100574B41 /* DappListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79734EE52D8D3BA100574B41 /* DappListViewController.swift */; };
 		79813A4E2D3F4A990083A1F5 /* ChainBitCoin86_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */; };
@@ -3210,6 +3212,8 @@
 		79705CAF2D7059FF00B89830 /* EcosystemPopUpSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EcosystemPopUpSheet.xib; sourceTree = "<group>"; };
 		79705CC42D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_base_node_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		79705CC52D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_base_node_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		79734EE02D8D3B7900574B41 /* AllDappListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllDappListCell.swift; sourceTree = "<group>"; };
+		79734EE12D8D3B7900574B41 /* AllDappListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllDappListCell.xib; sourceTree = "<group>"; };
 		79734EE42D8D3BA000574B41 /* DappListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappListViewController.xib; sourceTree = "<group>"; };
 		79734EE52D8D3BA100574B41 /* DappListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappListViewController.swift; sourceTree = "<group>"; };
 		79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86_T.swift; sourceTree = "<group>"; };
@@ -5131,6 +5135,8 @@
 				E1A48DF02C0065310084D770 /* EcoListCell.xib */,
 				049714FB2C0EB73B008C45A0 /* PopupReceiveCell.swift */,
 				049714FC2C0EB73B008C45A0 /* PopupReceiveCell.xib */,
+				79734EE02D8D3B7900574B41 /* AllDappListCell.swift */,
+				79734EE12D8D3B7900574B41 /* AllDappListCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -5988,6 +5994,7 @@
 				E1D97C092B9EF65000496807 /* SelectEndpointSheet.xib in Resources */,
 				E10B1DC02C2159040039283B /* KavaClaimIncentives.xib in Resources */,
 				047842E62AC8B2D600462F1C /* CosmosRedelegate.xib in Resources */,
+				79734EE32D8D3B7900574B41 /* AllDappListCell.xib in Resources */,
 				0409D2F72AC5DC6D0021E192 /* CosmosDelegate.xib in Resources */,
 				7939A25A2D30C2E2006674E3 /* btcStaking.json in Resources */,
 				04C63D242B86FE8C00D4A366 /* CommonTransferResult.xib in Resources */,
@@ -7212,6 +7219,7 @@
 				04B789892ACAC9B100E9BE88 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
 				0400EF0D2ADBF03B007BA97F /* kava_hard_v1beta1_tx.grpc.swift in Sources */,
 				04C817842BA98D75006B800A /* cosmos_gov_v1beta1_gov.pb.swift in Sources */,
+				79734EE22D8D3B7900574B41 /* AllDappListCell.swift in Sources */,
 				04965B402C37B39D00403605 /* ChainInitia.swift in Sources */,
 				E1F257F22BFCA223008F4D21 /* EvmVote.swift in Sources */,
 				04F53F692BE4ED22000715FA /* SwitchStyleCell.swift in Sources */,
