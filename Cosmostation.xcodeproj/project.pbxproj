@@ -1677,6 +1677,8 @@
 		7939A25A2D30C2E2006674E3 /* btcStaking.json in Resources */ = {isa = PBXBuildFile; fileRef = 7939A2592D30C2E2006674E3 /* btcStaking.json */; };
 		7939A25D2D34DD85006674E3 /* DappBtcSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7939A25C2D34DD85006674E3 /* DappBtcSignRequestSheet.xib */; };
 		7939A25E2D34DD85006674E3 /* DappBtcSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7939A25B2D34DD85006674E3 /* DappBtcSignRequestSheet.swift */; };
+		794C04472D9CE72E00F3383A /* BaseImgMsgCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794C04452D9CE72E00F3383A /* BaseImgMsgCheckCell.swift */; };
+		794C04482D9CE72E00F3383A /* BaseImgMsgCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794C04462D9CE72E00F3383A /* BaseImgMsgCheckCell.xib */; };
 		79514DB42CB527AA008D7ED8 /* ChainMantra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79514DB32CB527AA008D7ED8 /* ChainMantra.swift */; };
 		795C0DC22C8E853C006D35A4 /* bitcoin.js in Resources */ = {isa = PBXBuildFile; fileRef = 795C0DC12C8E853C006D35A4 /* bitcoin.js */; };
 		795C0DC42C8E8547006D35A4 /* BtcJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795C0DC32C8E8547006D35A4 /* BtcJS.swift */; };
@@ -3204,6 +3206,8 @@
 		7939A2592D30C2E2006674E3 /* btcStaking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = btcStaking.json; sourceTree = "<group>"; };
 		7939A25B2D34DD85006674E3 /* DappBtcSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappBtcSignRequestSheet.swift; sourceTree = "<group>"; };
 		7939A25C2D34DD85006674E3 /* DappBtcSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappBtcSignRequestSheet.xib; sourceTree = "<group>"; };
+		794C04452D9CE72E00F3383A /* BaseImgMsgCheckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseImgMsgCheckCell.swift; sourceTree = "<group>"; };
+		794C04462D9CE72E00F3383A /* BaseImgMsgCheckCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseImgMsgCheckCell.xib; sourceTree = "<group>"; };
 		79514DB32CB527AA008D7ED8 /* ChainMantra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantra.swift; sourceTree = "<group>"; };
 		795C0DC12C8E853C006D35A4 /* bitcoin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bitcoin.js; sourceTree = "<group>"; };
 		795C0DC32C8E8547006D35A4 /* BtcJS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BtcJS.swift; sourceTree = "<group>"; };
@@ -4424,6 +4428,8 @@
 				04FA74782AA0446A001A2830 /* BaseMsgSheetCell.xib */,
 				04C940DE2AEB92F800415256 /* BaseImgSheetCell.swift */,
 				04C940DF2AEB92F800415256 /* BaseImgSheetCell.xib */,
+				794C04452D9CE72E00F3383A /* BaseImgMsgCheckCell.swift */,
+				794C04462D9CE72E00F3383A /* BaseImgMsgCheckCell.xib */,
 				04FA74722AA04417001A2830 /* SwitchAccountCell.swift */,
 				04FA74712AA04416001A2830 /* SwitchAccountCell.xib */,
 				04FAD9B02AB011AC00143A3E /* SwitchPriceDisplayCell.swift */,
@@ -5880,6 +5886,7 @@
 				79AB340A2D6EB0CE00F1426C /* BtcDelegate.xib in Resources */,
 				E1CD6AF62AEAAEC200376909 /* AboutStakingCell.xib in Resources */,
 				04C940CD2AEA56C200415256 /* basebg02.png in Resources */,
+				794C04482D9CE72E00F3383A /* BaseImgMsgCheckCell.xib in Resources */,
 				04FAD9F62AB71D5000143A3E /* DeleteAccountSheet.xib in Resources */,
 				0472D4852B03588F00B9E6E8 /* NoticeSheet.xib in Resources */,
 				79287C722D6C1B00003845D2 /* AssetBabylonCell.xib in Resources */,
@@ -7509,6 +7516,7 @@
 				047842DE2AC8963100462F1C /* CosmosUndelegate.swift in Sources */,
 				047843A92AC991B300462F1C /* injective_auction_v1beta1_auction.pb.swift in Sources */,
 				04B789332ACAC9B100E9BE88 /* ibc_core_types_v1_genesis.pb.swift in Sources */,
+				794C04472D9CE72E00F3383A /* BaseImgMsgCheckCell.swift in Sources */,
 				0400EEE52ADBE1D3007BA97F /* kava_pricefeed_v1beta1_tx.grpc.swift in Sources */,
 				045032E72C1EFE5500235F6A /* ChainRizon.swift in Sources */,
 				047843012AC9918700462F1C /* ethermint_evm_v1_evm.pb.swift in Sources */,
