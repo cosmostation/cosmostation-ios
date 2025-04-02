@@ -1687,6 +1687,8 @@
 		79705CB12D7059FF00B89830 /* EcosystemPopUpSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79705CAF2D7059FF00B89830 /* EcosystemPopUpSheet.xib */; };
 		79705CC62D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79705CC42D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.pb.swift */; };
 		79705CC72D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79705CC52D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.grpc.swift */; };
+		79734EE62D8D3BA100574B41 /* DappListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79734EE42D8D3BA000574B41 /* DappListViewController.xib */; };
+		79734EE72D8D3BA100574B41 /* DappListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79734EE52D8D3BA100574B41 /* DappListViewController.swift */; };
 		79813A4E2D3F4A990083A1F5 /* ChainBitCoin86_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */; };
 		79813A502D3F6ED80083A1F5 /* ChainBitCoin86.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */; };
 		79813A572D506DCA0083A1F5 /* GnoFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A562D506DCA0083A1F5 /* GnoFetcher.swift */; };
@@ -3208,6 +3210,8 @@
 		79705CAF2D7059FF00B89830 /* EcosystemPopUpSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EcosystemPopUpSheet.xib; sourceTree = "<group>"; };
 		79705CC42D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_base_node_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		79705CC52D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_base_node_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		79734EE42D8D3BA000574B41 /* DappListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappListViewController.xib; sourceTree = "<group>"; };
+		79734EE52D8D3BA100574B41 /* DappListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappListViewController.swift; sourceTree = "<group>"; };
 		79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86_T.swift; sourceTree = "<group>"; };
 		79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86.swift; sourceTree = "<group>"; };
 		79813A562D506DCA0083A1F5 /* GnoFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GnoFetcher.swift; sourceTree = "<group>"; };
@@ -5197,6 +5201,8 @@
 				E1D931F02BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib */,
 				041540F22BA2E4D500CD5AA1 /* AllChainVoteStartVC.swift */,
 				041540F32BA2E4D500CD5AA1 /* AllChainVoteStartVC.xib */,
+				79734EE52D8D3BA100574B41 /* DappListViewController.swift */,
+				79734EE42D8D3BA000574B41 /* DappListViewController.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -6019,6 +6025,7 @@
 				047F69392BE5FBCE00C3BC34 /* Portfolio2Cell.xib in Resources */,
 				790970212D7E895500DEB959 /* BabylonStakingInfoVC.xib in Resources */,
 				044222562B96F4370063F031 /* SelectDisplayTokenCell.xib in Resources */,
+				79734EE62D8D3BA100574B41 /* DappListViewController.xib in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
 				182CCB832BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy in Resources */,
 				18F4EAD12A4DA0A200CFBE2B /* ApiKeyDev.plist in Resources */,
@@ -7557,6 +7564,7 @@
 				042D58622C5CF074003DBDE0 /* MajorCryptoVC.swift in Sources */,
 				04C8179A2BA98D75006B800A /* cosmos_gov_v1_query.pb.swift in Sources */,
 				792613BC2CD4B82800FAF47D /* initia_distribution_v1_genesis.pb.swift in Sources */,
+				79734EE72D8D3BA100574B41 /* DappListViewController.swift in Sources */,
 				0494CBF52BAF39BA00FA3E49 /* NftListCell.swift in Sources */,
 				792613BE2CD4B82800FAF47D /* initia_ibchooks_v1_query.grpc.swift in Sources */,
 				045032232C1EE85900235F6A /* OktFetcher.swift in Sources */,
