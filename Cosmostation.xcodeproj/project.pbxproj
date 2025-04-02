@@ -1691,6 +1691,7 @@
 		79734EE32D8D3B7900574B41 /* AllDappListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79734EE12D8D3B7900574B41 /* AllDappListCell.xib */; };
 		79734EE62D8D3BA100574B41 /* DappListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79734EE42D8D3BA000574B41 /* DappListViewController.xib */; };
 		79734EE72D8D3BA100574B41 /* DappListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79734EE52D8D3BA100574B41 /* DappListViewController.swift */; };
+		79734EE92D8D4E3F00574B41 /* DappDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79734EE82D8D4E3F00574B41 /* DappDetailSheet.swift */; };
 		79813A4E2D3F4A990083A1F5 /* ChainBitCoin86_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */; };
 		79813A502D3F6ED80083A1F5 /* ChainBitCoin86.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */; };
 		79813A572D506DCA0083A1F5 /* GnoFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79813A562D506DCA0083A1F5 /* GnoFetcher.swift */; };
@@ -3216,6 +3217,7 @@
 		79734EE12D8D3B7900574B41 /* AllDappListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllDappListCell.xib; sourceTree = "<group>"; };
 		79734EE42D8D3BA000574B41 /* DappListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DappListViewController.xib; sourceTree = "<group>"; };
 		79734EE52D8D3BA100574B41 /* DappListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappListViewController.swift; sourceTree = "<group>"; };
+		79734EE82D8D4E3F00574B41 /* DappDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappDetailSheet.swift; sourceTree = "<group>"; };
 		79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86_T.swift; sourceTree = "<group>"; };
 		79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitCoin86.swift; sourceTree = "<group>"; };
 		79813A562D506DCA0083A1F5 /* GnoFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GnoFetcher.swift; sourceTree = "<group>"; };
@@ -4406,6 +4408,7 @@
 				79705CAF2D7059FF00B89830 /* EcosystemPopUpSheet.xib */,
 				79B7F36B2D87F74F00AA755B /* BabylonStatusInfoSheet.swift */,
 				79B7F36C2D87F74F00AA755B /* BabylonStatusInfoSheet.xib */,
+				79734EE82D8D4E3F00574B41 /* DappDetailSheet.swift */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -7512,6 +7515,7 @@
 				04D785592C32B171009D1A94 /* ChainNeutron_T.swift in Sources */,
 				04C8175C2BA98D75006B800A /* cosmos_auth_v1beta1_query.pb.swift in Sources */,
 				04C817362BA98D75006B800A /* cosmos_circuit_v1_tx.pb.swift in Sources */,
+				79734EE92D8D4E3F00574B41 /* DappDetailSheet.swift in Sources */,
 				04FF6B8C2B204BCB009DCA89 /* ClaimAllChainCell.swift in Sources */,
 				04C817942BA98D75006B800A /* cosmos_evidence_v1beta1_query.grpc.swift in Sources */,
 				04D785562C328DB1009D1A94 /* feemarket_feemarket_v1_tx.grpc.swift in Sources */,
