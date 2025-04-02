@@ -52,6 +52,9 @@ let KEY_HIDE_VALUE                      = "KEY_HIDE_VALUE"
 let KEY_INJECTION_WARN                  = "KEY_INJECTION_WARN"
 let KEY_POPUP_SHEET                     = "KEY_POPUP_SHEET"
 let KEY_CHAIN_SORT                      = "KEY_CHAIN_SORT"
+let KEY_DAPP_FAVORITES                  = "KEY_DAPP_FAVORITES"
+let KEY_DAPP_DETAIL_HIDE                = "KEY_DAPP_DETAIL_HIDE"
+let KEY_DAPP_SORT_OPTION                = "KEY_DAPP_SORT_OPTION"
 
 let MINTSCAN_DEV_API_URL                = "https://dev.api.mintscan.io/";
 let MINTSCAN_API_URL                    = "https://front.api.mintscan.io/";
