@@ -11,6 +11,8 @@ class BaseMsgSheetCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var checkImageView: UIImageView!
+    @IBOutlet weak var checkColorView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -106,4 +108,19 @@ class BaseMsgSheetCell: UITableViewCell {
         descriptionLabel.text = NSLocalizedString("str_cancel_unbonding_msg", comment: "")
     }
     
+    func onBindDappSort(_ position: Int, _ selectedSortType: DappSortType?) {
+        checkImageView.isHidden = !(position == selectedSortType?.rawValue)
+        checkColorView.isHidden = !(position == selectedSortType?.rawValue)
+        contentView.backgroundColor = position == selectedSortType?.rawValue ? UIColor.color08 : UIColor.clear
+        descriptionLabel.textColor = .color03
+
+        if position == 0 {
+            titleLabel.text = "Alphabetical Asc. (A -> Z)"
+            descriptionLabel.text = "Sort the list alphabetically"
+
+        } else {
+            titleLabel.text = "Multi-Network Support"
+            descriptionLabel.text = "Sort the list by the number of supported networks"
+        }
+    }
 }
