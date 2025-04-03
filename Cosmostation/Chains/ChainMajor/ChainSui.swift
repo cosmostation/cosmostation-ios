@@ -23,8 +23,6 @@ class ChainSui: BaseChain  {
     
         coinSymbol = "SUI"
         stakeDenom = SUI_MAIN_DENOM
-        coinGeckoId = "sui"
-        coinLogo = "tokenSui"
         
         mainUrl = "https://sui-mainnet-us-2.cosmostation.io"
     }

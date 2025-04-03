@@ -22,8 +22,6 @@ class ChainOptimism: BaseChain  {
         
         supportEvm = true
         coinSymbol = "ETH"
-        coinGeckoId = "weth"
-        coinLogo = "tokenEth_Op"
         evmRpcURL = "https://mainnet.optimism.io"
     }
     

@@ -30,6 +30,7 @@ class BtcStakeSheet: BaseVC {
             let btcSymbol = chain.isTestnet ? "sBTC" : "BTC"
             
             titleLabel.text = "Staked \(btcSymbol)"
+            tokenImageView.image = UIImage(named: chain.isTestnet ? "tokenBtc_signet" : "tokenBtc")
             symbolLabel.text = btcSymbol
             
             descriptionLabel.setLineSpacing(text: String(format: NSLocalizedString("msg_btc_stake", comment: ""), btcSymbol), font: .fontSize12Medium, alignment: .center)

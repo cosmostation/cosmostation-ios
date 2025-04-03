@@ -92,7 +92,7 @@ class SuiStake: BaseVC {
         feeSegments.removeAllSegments()
         feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
         feeSegments.selectedSegmentIndex = 0
-        feeSelectImg.image =  UIImage.init(named: selectedChain.coinLogo)
+        feeSelectImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? selectedChain.coinSymbol), placeholderImage: UIImage(named: "tokenDefault"))
         
         feeSelectLabel.text = selectedChain.coinSymbol
         feeDenomLabel.text = selectedChain.coinSymbol
@@ -146,8 +146,9 @@ class SuiStake: BaseVC {
     func onUpdateAmountView(_ amount: String) {
         toStakeAmount = NSDecimalNumber(string: amount)
         
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol) else { return }
         let dpAmount = toStakeAmount.multiplying(byPowerOf10: -9, withBehavior: handler18Down)
-        let msPrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
+        let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
         let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
         WDP.dpValue(value, stakingCurrencyLabel, stakingValueLabel)
         stakingAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, stakingAmountLabel!.font, 9)
@@ -167,7 +168,8 @@ class SuiStake: BaseVC {
     func onUpdateFeeView() {
         stakeBtn.isEnabled = false
         
-        let feePrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol) else { return }
+        let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
         let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
         let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
         feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 9)

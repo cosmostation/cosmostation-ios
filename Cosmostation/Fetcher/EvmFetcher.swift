@@ -70,8 +70,11 @@ class EvmFetcher {
     }
     
     func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        let msPrice = BaseData.instance.getPrice(chain.coinGeckoId, usd)
-        return evmBalances.multiplying(by: msPrice).multiplying(byPowerOf10: -18, withBehavior: handler6)
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.coinSymbol) {
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
+            return evmBalances.multiplying(by: msPrice).multiplying(byPowerOf10: -18, withBehavior: handler6)
+        }
+        return NSDecimalNumber.zero
     }
     
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {

@@ -29,8 +29,6 @@ class ChainEvmosEVM: BaseChain  {
     
         supportEvm = true
         coinSymbol = "EVMOS"
-        coinGeckoId = "evmos"
-        coinLogo = "tokenEvmos"
         evmRpcURL = "https://evmos-evm.publicnode.com"
     }
 }

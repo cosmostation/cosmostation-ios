@@ -32,8 +32,6 @@ class ChainBeraEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "BERA"
-        coinGeckoId = "berachain-bera"
-        coinLogo = "tokenBera"
         evmRpcURL = "https://rpc.berachain.com"
     }
     

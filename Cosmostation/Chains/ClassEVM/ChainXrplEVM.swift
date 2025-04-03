@@ -21,8 +21,6 @@ class ChainXrplEVM: BaseChain {
         
         supportEvm = true
         coinSymbol = "XRP"
-        coinGeckoId = ""
-        coinLogo = "tokenXrp"
         evmRpcURL = ""
     }
 }

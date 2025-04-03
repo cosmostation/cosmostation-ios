@@ -31,8 +31,6 @@ class ChainKavaEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "KAVA"
-        coinGeckoId = "kava"
-        coinLogo = "tokenKava"
         evmRpcURL = "https://rpc-kava-evm.cosmostation.io"
     }
     

@@ -29,8 +29,6 @@ class ChainArtelaEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "ART"
-        coinGeckoId = ""
-        coinLogo = "tokenArt"
         evmRpcURL = ""
     }
 }

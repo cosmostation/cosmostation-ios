@@ -29,8 +29,6 @@ class ChainAiozEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "AIOZ"
-        coinGeckoId = "aioz-network"
-        coinLogo = "tokenAioz"
         evmRpcURL = "https://eth-dataseed.aioz.network"
     }
 }

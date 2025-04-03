@@ -29,8 +29,6 @@ class ChainXplaEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "XPLA"
-        coinGeckoId = "xpla"
-        coinLogo = "tokenXpla"
         evmRpcURL = "https://rpc-xpla-evm.cosmostation.io"
     }
 }

@@ -21,9 +21,7 @@ class ChainBinanceSmart: BaseChain  {
         
         
         supportEvm = true
-        coinSymbol = "BNB "
-        coinGeckoId = "binancecoin"
-        coinLogo = "tokenBnb"
+        coinSymbol = "BNB"
         evmRpcURL = "https://bsc-dataseed.binance.org"
     }
     

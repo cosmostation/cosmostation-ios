@@ -22,8 +22,6 @@ class ChainCronos: BaseChain  {
         
         supportEvm = true
         coinSymbol = "CRO"
-        coinGeckoId = "crypto-com-chain"
-        coinLogo = "tokenCro"
         evmRpcURL = "https://evm.cronos.org"
     }
     

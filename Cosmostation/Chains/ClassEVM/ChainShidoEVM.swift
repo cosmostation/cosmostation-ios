@@ -29,8 +29,6 @@ class ChainShidoEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "SHIDO"
-        coinGeckoId = "shido-2"
-        coinLogo = "tokenShido"
         evmRpcURL = "https://rpc-nodes.shidoscan.com"
     }
 }

@@ -32,8 +32,6 @@ class ChainArtelaEVM_T: BaseChain {
         
         supportEvm = true
         coinSymbol = "ART"
-        coinGeckoId = ""
-        coinLogo = "tokenArt"
         evmRpcURL = "https://rpc-office-evm.cosmostation.io/artela-testnet/"
     }
 }

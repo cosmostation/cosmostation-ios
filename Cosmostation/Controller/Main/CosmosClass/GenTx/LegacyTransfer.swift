@@ -146,7 +146,8 @@ class LegacyTransfer: BaseVC {
                 toAssetDenomLabel.isHidden = false
                 
                 if (toSendDenom == stakeDenom) {
-                    let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
+                    guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? selectedChain.coinSymbol) else { return }
+                    let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                     let toSendValue = msPrice.multiplying(by: toSendAmount, withBehavior: handler6)
                     WDP.dpValue(toSendValue, toAssetCurrencyLabel, toAssetValueLabel)
                     toAssetCurrencyLabel.isHidden = false
@@ -206,8 +207,8 @@ class LegacyTransfer: BaseVC {
         if (selectedChain.name == "OKT") {
             feeSelectImg.sd_setImage(with: selectedChain.assetImgUrl(stakeDenom), placeholderImage: UIImage(named: "tokenDefault"))
             feeSelectLabel.text = stakeDenom.uppercased()
-            
-            let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID)
+            guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? selectedChain.coinSymbol) else { return }
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeAmount = NSDecimalNumber(string: OKT_BASE_FEE)
             let feeValue = msPrice.multiplying(by: feeAmount, withBehavior: handler6)
             feeAmountLabel?.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 18)

@@ -29,8 +29,6 @@ class ChainStratosEVM: BaseChain {
         
         supportEvm = true
         coinSymbol = "STOS"
-        coinGeckoId = "stratos"
-        coinLogo = "tokenStos"
         evmRpcURL = "https://web3-rpc.thestratos.org"
     }
 }

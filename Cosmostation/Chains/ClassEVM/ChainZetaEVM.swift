@@ -29,8 +29,6 @@ class ChainZetaEVM: BaseChain  {
     
         supportEvm = true
         coinSymbol = "ZETA"
-        coinGeckoId = "zetachain"
-        coinLogo = "tokenZeta"
         evmRpcURL = "https://rpc-zeta-evm.cosmostation.io"
     }
 }

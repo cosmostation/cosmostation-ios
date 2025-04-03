@@ -22,8 +22,6 @@ class ChainStoryEVM: BaseChain {
         
         supportEvm = true
         coinSymbol = "IP"
-        coinGeckoId = "story-2"
-        coinLogo = "tokenIp"
         evmRpcURL = "https://evmrpc.story.nodestake.org"
     }
     

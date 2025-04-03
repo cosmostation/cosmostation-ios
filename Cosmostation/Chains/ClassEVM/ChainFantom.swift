@@ -22,8 +22,6 @@ class ChainFantom: BaseChain {
         
         supportEvm = true
         coinSymbol = "FTM"
-        coinGeckoId = "fantom"
-        coinLogo = "tokenFantom"
         evmRpcURL = "https://fantom.drpc.org"
     }
 }

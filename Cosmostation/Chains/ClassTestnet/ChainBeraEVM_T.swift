@@ -31,8 +31,6 @@ class ChainBeraEVM_T: ChainBeraEVM {
         
         supportEvm = true
         coinSymbol = "BERA"
-        coinGeckoId = ""
-        coinLogo = "tokenBera"
         evmRpcURL = "https://bartio.rpc.berachain.com/"
     }
 }

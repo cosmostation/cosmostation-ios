@@ -154,8 +154,9 @@ class Portfolio2Cell: UITableViewCell {
         
         //DP Price
         if (chain.name == "OKT") {
-            WDP.dpPrice(OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+            guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? chain.coinSymbol) else { return }
+            WDP.dpPrice(msAsset.coinGeckoId, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(msAsset.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
             
         } else if (chain.supportCosmos) {
             if let stakeDenom = chain.stakeDenom,
@@ -165,12 +166,22 @@ class Portfolio2Cell: UITableViewCell {
             }
             
         } else if (chain.supportEvm) {
-            WDP.dpPrice(chain.coinGeckoId, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(chain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.coinSymbol) {
+                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+            }
             
         } else {
-            WDP.dpPrice(chain.coinGeckoId, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(chain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+            if let stakeDenom = chain.stakeDenom,
+               let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+
+            } else if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.coinSymbol) {
+                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+
+            }
         }
     }
     
