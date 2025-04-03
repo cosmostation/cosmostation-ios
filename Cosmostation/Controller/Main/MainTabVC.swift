@@ -29,16 +29,13 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
         self.onHandleEvent()
     }
     
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        BaseData.instance.setLastTab(tabBarController.selectedIndex)
-    }
-    
     //Disable default tabbar change animation with iOS 18
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if let targetIndex = tabBarController.viewControllers?.firstIndex(where: { $0 == viewController }) {
             UIView.performWithoutAnimation {
                 tabBarController.selectedIndex = targetIndex
             }
+            BaseData.instance.setLastTab(tabBarController.selectedIndex)
         }
         return false
     }
