@@ -41,7 +41,7 @@ class AboutStakingCell: UITableViewCell {
     }
     
     func onBindStakingInfo(_ chain: BaseChain, _ json: JSON) {
-        if let symbol = json["params"]["chainlist_params"]["main_asset_symbol"].string, chain.supportStaking {
+        if let symbol = json["params"]["chainlist_params"]["staking_asset_symbol"].string, chain.supportStaking {
             stakingDenomLabel.text = symbol
         }
         
