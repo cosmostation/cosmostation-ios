@@ -132,7 +132,6 @@ class DappListViewController: BaseVC {
                     dappDetail.dappType = .INTERNAL_URL
                     dappDetail.dappUrl = URL(string: self.dappDetailVCStateModel.link)
                     dappDetail.targetChain = self.selectedNetwork
-                    print("TEST", self.selectedNetwork)
                     dappDetail.modalPresentationStyle = .fullScreen
                     self.present(dappDetail, animated: false)
                 }

@@ -69,15 +69,22 @@ class AllDappListCell: UICollectionViewCell {
             chainLabel.text = chain.apiName.uppercased()
 
         } else {
-            for (i, chainName) in chains.enumerated() {
-                guard let chain = ALLCHAINS().filter({ $0.apiName == chainName }).first else { return }
-                chainImageViews[i].isHidden = false
-                chainImageViews[i].image = UIImage(named: chain.logo1)
-            }
-            
             if chains.count <= 7 {
+                for (i, chainName) in chains.enumerated() {
+                    guard let chain = ALLCHAINS().filter({ $0.apiName == chainName }).first else { return }
+                    chainImageViews[i].isHidden = false
+                    chainImageViews[i].image = UIImage(named: chain.logo1)
+                }
+                
                 chainLabel.isHidden = true
+                
             } else {
+                for i in 0...6 {
+                    guard let chain = ALLCHAINS().filter({ $0.apiName == chains[i] }).first else { return }
+                    chainImageViews[i].isHidden = false
+                    chainImageViews[i].image = UIImage(named: chain.logo1)
+                }
+                
                 let cnt = chains.count - 7
                 chainLabel.isHidden = false
                 chainLabel.text = "+\(cnt)"
