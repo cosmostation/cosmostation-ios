@@ -278,9 +278,11 @@ class CosmosClassVC: BaseVC {
             }
         }
         
-        if (selectedChain.supportStaking) {
-            mainFab.addItem(title: "Vote", image: UIImage(named: "iconFabGov")) { _ in
-                self.onProposalList()
+        if (selectedChain.isStakeEnabled()) {
+            if !(selectedChain is ChainNeutron) {
+                mainFab.addItem(title: "Vote", image: UIImage(named: "iconFabGov")) { _ in
+                    self.onProposalList()
+                }
             }
             if (selectedChain.getCosmosfetcher()?.cosmosCommissions.count ?? 0 > 0) {
                 mainFab.addItem(title: "Claim Commission", image: UIImage(named: "iconFabCommission")) { _ in
@@ -296,14 +298,13 @@ class CosmosClassVC: BaseVC {
                 }
 //            }
             
-        }
-        
-        if (selectedChain.supportStaking) {
             let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
             mainFab.addItem(title: "\(symbol) Manage stake", image: UIImage(named: "iconFabStake")) { _ in
                 self.onStakeInfo()
             }
+
         }
+        
         
         view.addSubview(mainFab)
         mainFab.translatesAutoresizingMaskIntoConstraints = false
@@ -475,6 +476,17 @@ extension CosmosClassVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
+        
+        if let chainNeutron = selectedChain as? ChainNeutron {
+            let compounding = NeutronCompounding(nibName: "NeutronCompounding", bundle: nil)
+            compounding.claimableRewards = chainNeutron.getNeutronFetcher()?.claimableRewards() ?? []
+            compounding.selectedChain = chainNeutron
+            compounding.isCompoundingAll = true
+            compounding.modalTransitionStyle = .coverVertical
+            self.present(compounding, animated: true)
+            return
+        }
+        
         if (comsosFetcher.rewardAddress != selectedChain.bechAddress) {
             onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
             return

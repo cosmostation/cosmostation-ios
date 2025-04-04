@@ -1778,6 +1778,8 @@
 		79AB340A2D6EB0CE00F1426C /* BtcDelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AB34082D6EB0CE00F1426C /* BtcDelegate.xib */; };
 		79AB340D2D6EDC1100F1426C /* BtcStakingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AB340B2D6EDC1100F1426C /* BtcStakingCell.swift */; };
 		79AB340E2D6EDC1100F1426C /* BtcStakingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AB340C2D6EDC1100F1426C /* BtcStakingCell.xib */; };
+		79B4225C2D9E759D0022A4F9 /* NeutronCompounding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B4225B2D9E759D0022A4F9 /* NeutronCompounding.xib */; };
+		79B4225D2D9E759D0022A4F9 /* NeutronCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B4225A2D9E759D0022A4F9 /* NeutronCompounding.swift */; };
 		79B7F35B2D8165D300AA755B /* ChainKopi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35A2D8165D300AA755B /* ChainKopi.swift */; };
 		79B7F35D2D8175C300AA755B /* ChainPaloma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35C2D8175C300AA755B /* ChainPaloma.swift */; };
 		79B7F35F2D81769C00AA755B /* ChainInt3face.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35E2D81769C00AA755B /* ChainInt3face.swift */; };
@@ -3305,6 +3307,8 @@
 		79AB34082D6EB0CE00F1426C /* BtcDelegate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BtcDelegate.xib; sourceTree = "<group>"; };
 		79AB340B2D6EDC1100F1426C /* BtcStakingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtcStakingCell.swift; sourceTree = "<group>"; };
 		79AB340C2D6EDC1100F1426C /* BtcStakingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BtcStakingCell.xib; sourceTree = "<group>"; };
+		79B4225A2D9E759D0022A4F9 /* NeutronCompounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronCompounding.swift; sourceTree = "<group>"; };
+		79B4225B2D9E759D0022A4F9 /* NeutronCompounding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronCompounding.xib; sourceTree = "<group>"; };
 		79B7F35A2D8165D300AA755B /* ChainKopi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKopi.swift; sourceTree = "<group>"; };
 		79B7F35C2D8175C300AA755B /* ChainPaloma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPaloma.swift; sourceTree = "<group>"; };
 		79B7F35E2D81769C00AA755B /* ChainInt3face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainInt3face.swift; sourceTree = "<group>"; };
@@ -5395,6 +5399,8 @@
 				E14577FB2B3EC50C00EEFA8E /* CosmosClaimCommission.xib */,
 				0402B7E42ACC132200824B3F /* CosmosCompounding.swift */,
 				0402B7E52ACC132200824B3F /* CosmosCompounding.xib */,
+				79B4225A2D9E759D0022A4F9 /* NeutronCompounding.swift */,
+				79B4225B2D9E759D0022A4F9 /* NeutronCompounding.xib */,
 				0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */,
 				0402B7EB2ACC248400824B3F /* CosmosRewardAddress.xib */,
 				0402B7F02ACC38BA00824B3F /* CosmosVote.swift */,
@@ -5949,6 +5955,7 @@
 				E1DF77772AB74EE80028BD51 /* CheckPrivateKeyVC.xib in Resources */,
 				049715032C0ED276008C45A0 /* basebg05.png in Resources */,
 				E18D73B82AB484AB00FCB1AA /* DappStartVC.xib in Resources */,
+				79B4225C2D9E759D0022A4F9 /* NeutronCompounding.xib in Resources */,
 				04FAD9B42AB011AC00143A3E /* SwitchPriceDisplayCell.xib in Resources */,
 				E1F257E52BFB2009008F4D21 /* EvmCancelUnbonding.xib in Resources */,
 				04FAD9BA2AB0125400143A3E /* BaseSheetCell.xib in Resources */,
@@ -7591,6 +7598,7 @@
 				04C816D22BA98D75006B800A /* cosmos_gov_v1_genesis.pb.swift in Sources */,
 				E10B1DA72C2156430039283B /* KavaMintListVC.swift in Sources */,
 				0485A5072CDA449C00DE1661 /* ChainC4E.swift in Sources */,
+				79B4225D2D9E759D0022A4F9 /* NeutronCompounding.swift in Sources */,
 				18744703293094CB00849EE4 /* BundleExtension.swift in Sources */,
 				04FA746C2A9F8652001A2830 /* BaseSheet.swift in Sources */,
 				792613AA2CD4B82800FAF47D /* initia_intertx_v1_tx.grpc.swift in Sources */,
