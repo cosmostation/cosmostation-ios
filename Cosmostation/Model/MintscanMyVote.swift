@@ -15,9 +15,23 @@ public struct MintscanMyVotes {
     
     init(_ json: JSON?) {
         self.proposal_id = json?["proposal_id"].uInt64Value
-        json?["votes"].arrayValue.forEach({ vote in
-            self.votes.append(MintscanMyVote(vote))
-        })
+        if let votes = json?["votes"].array {
+            votes.forEach({ vote in
+                self.votes.append(MintscanMyVote(vote))
+            })
+        } else {
+            votes = [MintscanMyVote(json)]
+        }
+    }
+    
+    init(_ vote: Cosmos_Gov_V1_Vote?) {
+        proposal_id = vote?.proposalID
+        votes = [MintscanMyVote(vote)]
+    }
+ 
+    init(_ vote: Cosmos_Gov_V1beta1_Vote?) {
+        proposal_id = vote?.proposalID
+        votes = [MintscanMyVote(vote)]
     }
 }
 
@@ -28,13 +42,32 @@ public struct MintscanMyVote {
     var timestamp: String?
     var answer: String?
     
+    var options = ["unspecified", "yes", "abstain", "no", "noWithVeto"]
+    
     init(_ json: JSON?) {
         self.voter = json?["voter"].stringValue
-        self.option = json?["option"].stringValue
-        self.tx_hash = json?["tx_hash"].stringValue
-        self.timestamp = json?["timestamp"].stringValue
-        self.answer = json?["answer"].stringValue
+        self.option = json?["option"].string ?? json?["options"].array?.first?["option"].string
+        self.tx_hash = json?["tx_hash"].string ?? ""
+        self.timestamp = json?["timestamp"].string ?? ""
+        self.answer = json?["answer"].string ?? ""
     }
+    
+    init(_ vote: Cosmos_Gov_V1_Vote?) {
+        self.voter = vote?.voter
+        self.option = options[vote?.options.first?.option.rawValue ?? 0]
+        self.tx_hash = ""
+        self.timestamp = ""
+        self.answer = ""
+    }
+    
+    init(_ vote: Cosmos_Gov_V1beta1_Vote?) {
+        self.voter = vote?.voter
+        self.option = options[vote?.options.first?.option.rawValue ?? 0]
+        self.tx_hash = ""
+        self.timestamp = ""
+        self.answer = ""
+    }
+
 }
 
 

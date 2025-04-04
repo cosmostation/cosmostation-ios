@@ -647,6 +647,31 @@ extension CosmosFetcher {
         return resultProposals
     }
     
+    func fetchOnChainProposalHistory(_ id: UInt64, _ address: String) async -> MintscanMyVotes? {
+        if (getEndpointType() == .UseGRPC) {
+            let v1Req = Cosmos_Gov_V1_QueryVoteRequest.with { $0.proposalID = id; $0.voter = address}
+            let v1betaReq = Cosmos_Gov_V1beta1_QueryVoteRequest.with { $0.proposalID = id; $0.voter = address}
+            if let result = try? await Cosmos_Gov_V1_QueryNIOClient(channel: getClient()).vote(v1Req, callOptions: getCallOptions()).response.get() {
+                return .init(result.vote)
+                
+            } else if let result = try? await Cosmos_Gov_V1beta1_QueryNIOClient(channel: getClient()).vote(v1betaReq, callOptions: getCallOptions()).response.get() {
+                return .init(result.vote)
+            }
+
+        } else {
+            let v1Url = getLcd() + "cosmos/gov/v1/proposals/" + String(id) + "/votes/" + address
+            let v1beta1Url = getLcd() + "cosmos/gov/v1beta1/proposals/" + String(id) + "/votes/" + address
+            if let vote = try? await AF.request(v1Url, method: .get).serializingDecodable(JSON.self).value["vote"] {
+                return .init(vote)
+                
+            } else if let vote = try? await AF.request(v1beta1Url, method: .get).serializingDecodable(JSON.self).value["vote"] {
+                return .init(vote)
+            }
+        }
+        
+        return nil
+    }
+    
     func simulateTx(_ simulTx: Cosmos_Tx_V1beta1_SimulateRequest) async throws -> UInt64? {
         if (getEndpointType() == .UseGRPC) {
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).simulate(simulTx, callOptions: getCallOptions()).response.get().gasInfo.gasUsed
