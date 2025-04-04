@@ -29,8 +29,6 @@ class ChainAltheaEVM: BaseChain {
         
         supportEvm = true
         coinSymbol = "ALTHEA"
-        coinGeckoId = "althea"
-        coinLogo = "tokenAltg"
         evmRpcURL = "https://rpc-althea-evm.cosmostation.io"
     }
 }

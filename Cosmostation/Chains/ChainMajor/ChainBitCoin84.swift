@@ -21,8 +21,6 @@ class ChainBitCoin84: ChainBitCoin86 {
         accountKeyType = AccountKeyType(.BTC_Native_Segwit, "m/84'/0'/0'/0/X")
         
         coinSymbol = "BTC"
-        coinGeckoId = "bitcoin"
-        coinLogo = "tokenBtc"
         
         mainUrl = "https://rpc-office.cosmostation.io/bitcoin-mainnet"
     }

@@ -227,6 +227,7 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
             transfer.sendAssetType = .EVM_COIN
             transfer.fromChain = selectedChain
+            transfer.toSendDenom = selectedChain.coinSymbol
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
             return

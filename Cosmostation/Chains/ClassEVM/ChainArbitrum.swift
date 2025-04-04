@@ -22,8 +22,6 @@ class ChainArbitrum: BaseChain  {
         
         supportEvm = true
         coinSymbol = "ETH"
-        coinGeckoId = "ethereum"
-        coinLogo = "tokenEth_arb"
         evmRpcURL = "https://arb1.arbitrum.io/rpc"
     }
     

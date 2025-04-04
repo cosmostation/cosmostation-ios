@@ -114,8 +114,9 @@ class OktFetcher: CosmosFetcher {
     
     func oktBalanceValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if (denom == chain.stakeDenom) {
+            guard let msAsset = BaseData.instance.getAsset(chain.apiName, denom) else { return .zero }
             let amount = oktBalanceAmount(denom)
-            let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             return msPrice.multiplying(by: amount, withBehavior: handler6)
         }
         return NSDecimalNumber.zero
@@ -126,7 +127,8 @@ class OktFetcher: CosmosFetcher {
     }
     
     func oktDepositValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
+        guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? chain.coinSymbol) else { return .zero }
+        let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
         let amount = oktDepositAmount()
         return msPrice.multiplying(by: amount, withBehavior: handler6)
     }
@@ -136,7 +138,8 @@ class OktFetcher: CosmosFetcher {
     }
     
     func oktWithdrawValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        let msPrice = BaseData.instance.getPrice(OKT_GECKO_ID, usd)
+        guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? chain.coinSymbol) else { return .zero }
+        let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
         let amount = oktWithdrawAmount()
         return msPrice.multiplying(by: amount, withBehavior: handler6)
     }

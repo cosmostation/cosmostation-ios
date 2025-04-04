@@ -116,14 +116,15 @@ class AssetCell: UITableViewCell {
     
     
     func bindEvmClassCoin(_ baseChain: BaseChain) {
-        symbolLabel.text = baseChain.coinSymbol
-        coinImg.image =  UIImage.init(named: baseChain.coinLogo)
-        
-        if let evmFetcher = baseChain.getEvmfetcher() {
+        if let evmFetcher = baseChain.getEvmfetcher(),
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.coinSymbol) {
+            symbolLabel.text = baseChain.coinSymbol
+            coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+            
             let dpAmount = evmFetcher.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18Down)
             let value = evmFetcher.allCoinValue()
-            WDP.dpPrice(baseChain.coinGeckoId, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(baseChain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+            WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
             amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
             if (BaseData.instance.getHideValue()) {
                 hidenValueLabel.isHidden = false

@@ -64,14 +64,15 @@ class AssetBtcCell: UITableViewCell {
         withdrawableView.isHidden = !baseChain.isSupportBTCStaking()
         
         symbolLabel.text = baseChain.coinSymbol
-        coinImg.image =  UIImage.init(named: baseChain.coinLogo)
         
-        WDP.dpPrice(baseChain.coinGeckoId, priceCurrencyLabel, priceLabel)
-        WDP.dpPriceChanged(baseChain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
-                
+        guard let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.coinSymbol) else { return }
+        coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+        WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+        WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+        
         if let btcFetcher = (baseChain as? ChainBitCoin86)?.getBtcFetcher(),
            let babylonBtcFetcher = (baseChain as? ChainBitCoin86)?.getBabylonBtcFetcher() {
-            let msPrice = BaseData.instance.getPrice(baseChain.coinGeckoId)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let avaibaleAmount = btcFetcher.btcBalances.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
             let stakedAmount = babylonBtcFetcher.btcStakingAmount.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
             let unstakingAmount = babylonBtcFetcher.btcUnstakingAmount.multiplying(byPowerOf10: -8, withBehavior: handler8Down)

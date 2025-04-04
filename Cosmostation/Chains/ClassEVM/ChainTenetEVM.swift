@@ -29,8 +29,6 @@ class ChainTenetEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "TENET"
-        coinGeckoId = "tenet-1b000f7b-59cb-4e06-89ce-d62b32d362b9"
-        coinLogo = "tokenTenet"
         evmRpcURL = "https://eth-dataseed.aioz.network"
     }
 }

@@ -40,13 +40,13 @@ class ManageChainCell: UITableViewCell {
         
         if (chain.getCosmosfetcher()?.getEndpointType() == .UseGRPC) {
             cosmosLayer.isHidden = false
-            cosmosEndpointTag.text = "gRPC"
+            cosmosEndpointTag.text = "GRPC"
             cosmosEndpointLabel.text = chain.getCosmosfetcher()!.getGrpc().host + " : " +  String(chain.getCosmosfetcher()!.getGrpc().port)
             cosmosEndpointLabel.adjustsFontSizeToFitWidth = true
             
         } else if (chain.getCosmosfetcher()?.getEndpointType() == .UseLCD) {
             cosmosLayer.isHidden = false
-            cosmosEndpointTag.text = "Rest"
+            cosmosEndpointTag.text = "REST"
             cosmosEndpointLabel.text = chain.getCosmosfetcher()?.getLcd().replacingOccurrences(of: "https://", with: "")
             cosmosEndpointLabel.adjustsFontSizeToFitWidth = true
             
@@ -59,7 +59,7 @@ class ManageChainCell: UITableViewCell {
         
         if (chain.supportEvm) {
             evmLayer.isHidden = false
-            evmEndpointTag.text = "Evm RPC"
+            evmEndpointTag.text = "EVM RPC"
             evmEndpointLabel.text = chain.getEvmfetcher()!.getEvmRpc().replacingOccurrences(of: "https://", with: "")
             evmEndpointLabel.adjustsFontSizeToFitWidth = true
         }

@@ -29,8 +29,6 @@ class ChainHaqqEVM: BaseChain  {
     
         supportEvm = true
         coinSymbol = "ISLM"
-        coinGeckoId = "deenar-gold"
-        coinLogo = "tokenIslm"
         evmRpcURL = "https://rpc.eth.haqq.network"
     }
     

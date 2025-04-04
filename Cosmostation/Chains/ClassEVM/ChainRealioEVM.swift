@@ -29,8 +29,6 @@ class ChainRealioEVM: BaseChain {
         
         supportEvm = true
         coinSymbol = "RIO"
-        coinGeckoId = "realio-network"
-        coinLogo = "tokenRio"
         evmRpcURL = "https://realio-rpc-evm.genznodes.dev"
     }
 

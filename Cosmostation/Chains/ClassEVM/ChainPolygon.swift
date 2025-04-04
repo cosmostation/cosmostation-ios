@@ -22,8 +22,6 @@ class ChainPolygon: BaseChain  {
         
         supportEvm = true
         coinSymbol = "MATIC"
-        coinGeckoId = "matic-network"
-        coinLogo = "tokenMatic"
         evmRpcURL = "https://polygon-rpc.com"
     }
     

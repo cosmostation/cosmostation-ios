@@ -22,8 +22,6 @@ class ChainBase: BaseChain  {
         
         supportEvm = true
         coinSymbol = "ETH"
-        coinGeckoId = "weth"
-        coinLogo = "tokenEth_base"
         evmRpcURL = "https://mainnet.base.org"
     }
     

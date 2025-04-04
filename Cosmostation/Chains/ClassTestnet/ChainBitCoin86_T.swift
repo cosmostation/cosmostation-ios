@@ -20,8 +20,6 @@ class ChainBitCoin86_T: ChainBitCoin86 {
         accountKeyType = AccountKeyType(.BTC_Taproot, "m/86'/1'/0'/0/X")
         
         coinSymbol = "sBTC"
-        coinGeckoId = ""
-        coinLogo = "tokenBtc_signet"
         
         mainUrl = "https://rpc-office.cosmostation.io/bitcoin-testnet"
     }

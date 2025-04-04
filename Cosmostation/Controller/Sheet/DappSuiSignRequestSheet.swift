@@ -111,7 +111,8 @@ class DappSuiSignRequestSheet: BaseVC {
     }
     
     func onUpdateFeeView() {
-        let feePrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol) else { return }
+        let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
         let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
         let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
         feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 9)

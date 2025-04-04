@@ -29,8 +29,6 @@ class ChainFxcoreEVM: BaseChain {
     
         supportEvm = true
         coinSymbol = "FX"
-        coinGeckoId = "fx-coin"
-        coinLogo = "tokenFx"
         evmRpcURL = "https://fx-json-web3.functionx.io:8545/"
     }
 }

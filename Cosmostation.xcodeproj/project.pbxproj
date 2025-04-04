@@ -1682,6 +1682,8 @@
 		79514DB42CB527AA008D7ED8 /* ChainMantra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79514DB32CB527AA008D7ED8 /* ChainMantra.swift */; };
 		795C0DC22C8E853C006D35A4 /* bitcoin.js in Resources */ = {isa = PBXBuildFile; fileRef = 795C0DC12C8E853C006D35A4 /* bitcoin.js */; };
 		795C0DC42C8E8547006D35A4 /* BtcJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795C0DC32C8E8547006D35A4 /* BtcJS.swift */; };
+		7967DCB82D9A4193007D74CE /* SelectRecipientChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7967DCB72D9A4193007D74CE /* SelectRecipientChainCell.xib */; };
+		7967DCB92D9A4193007D74CE /* SelectRecipientChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7967DCB62D9A4193007D74CE /* SelectRecipientChainCell.swift */; };
 		796CC3602C6B60CA00FEC658 /* SuiStakingInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796CC35F2C6B60CA00FEC658 /* SuiStakingInfoSheet.swift */; };
 		796CC3622C6B60E000FEC658 /* SuiStakingInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */; };
 		796CC3632C6C3B0C00FEC658 /* SuiStakingInfoSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */; };
@@ -3206,6 +3208,8 @@
 		79514DB32CB527AA008D7ED8 /* ChainMantra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantra.swift; sourceTree = "<group>"; };
 		795C0DC12C8E853C006D35A4 /* bitcoin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bitcoin.js; sourceTree = "<group>"; };
 		795C0DC32C8E8547006D35A4 /* BtcJS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BtcJS.swift; sourceTree = "<group>"; };
+		7967DCB62D9A4193007D74CE /* SelectRecipientChainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRecipientChainCell.swift; sourceTree = "<group>"; };
+		7967DCB72D9A4193007D74CE /* SelectRecipientChainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectRecipientChainCell.xib; sourceTree = "<group>"; };
 		796CC35F2C6B60CA00FEC658 /* SuiStakingInfoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiStakingInfoSheet.swift; sourceTree = "<group>"; };
 		796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuiStakingInfoSheet.xib; sourceTree = "<group>"; };
 		79705CAE2D7059FF00B89830 /* EcosystemPopUpSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemPopUpSheet.swift; sourceTree = "<group>"; };
@@ -4447,6 +4451,8 @@
 				046BF1CB2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib */,
 				044222522B96F4370063F031 /* SelectDisplayTokenCell.swift */,
 				044222532B96F4370063F031 /* SelectDisplayTokenCell.xib */,
+				7967DCB62D9A4193007D74CE /* SelectRecipientChainCell.swift */,
+				7967DCB72D9A4193007D74CE /* SelectRecipientChainCell.xib */,
 			);
 			path = SheetCell;
 			sourceTree = "<group>";
@@ -5853,6 +5859,7 @@
 				E10B1DC82C2159040039283B /* KavaEarnWithdrawAction.xib in Resources */,
 				04D782BF2C2D28FF004B99CF /* AboutChainInfoCell.xib in Resources */,
 				04A68C312AC13A560041FA13 /* CosmosProposalsVC.xib in Resources */,
+				7967DCB82D9A4193007D74CE /* SelectRecipientChainCell.xib in Resources */,
 				04CD24552AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */,
 				04FAD9C62AB17FC000143A3E /* SwitchCurrencyCell.xib in Resources */,
 				043791F92C6964660078C2B3 /* SuiStake.xib in Resources */,
@@ -7090,6 +7097,7 @@
 				047843972AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */,
 				04B7897F2ACAC9B100E9BE88 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
 				E1D6B8D12AA499A400177D30 /* CosmosNftVC.swift in Sources */,
+				7967DCB92D9A4193007D74CE /* SelectRecipientChainCell.swift in Sources */,
 				E1A48DEC2BFF0DE90084D770 /* ReceiveCell.swift in Sources */,
 				7992617B2D77EE66007E9911 /* babylon_finality_v1_tx.grpc.swift in Sources */,
 				792613B82CD4B82800FAF47D /* initia_intertx_module_v1_module.pb.swift in Sources */,
