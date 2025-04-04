@@ -18,6 +18,7 @@ class Portfolio2Cell: UITableViewCell {
     @IBOutlet weak var evmAddressLabel: UILabel!
     @IBOutlet weak var btcTag: RoundedPaddingLabel!
     @IBOutlet weak var oldTag: RoundedPaddingLabel!
+    @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var priceCurrencyLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var priceChangeLabel: UILabel!
@@ -38,6 +39,7 @@ class Portfolio2Cell: UITableViewCell {
         valuecurrencyLabel.text = ""
         valueLabel.text = ""
         assetCntLabel.text = ""
+        symbolLabel.text = ""
         priceCurrencyLabel.text = ""
         priceLabel.text = ""
         priceChangeLabel.text = ""
@@ -58,6 +60,7 @@ class Portfolio2Cell: UITableViewCell {
         oldTag.isHidden = true
         bechAddressLabel.text = ""
         evmAddressLabel.text = ""
+        symbolLabel.text = ""
         priceCurrencyLabel.text = ""
         priceLabel.text = ""
         priceChangeLabel.text = ""
@@ -151,6 +154,8 @@ class Portfolio2Cell: UITableViewCell {
             assetCntLoadingLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color04, .color03]), animation: skeletonAnimation, transition: .none)
             assetCntLoadingLabel.isHidden = false
         }
+        
+        symbolLabel.text = chain.getChainListParam()["main_asset_symbol"].string ?? chain.getChainListParam()["staking_asset_symbol"].string
         
         //DP Price
         if (chain.name == "OKT") {

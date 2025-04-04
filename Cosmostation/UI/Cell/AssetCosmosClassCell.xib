@@ -29,7 +29,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bET-Il-OK9" customClass="CardViewCell" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="8" y="4" width="459" height="236"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="3Kc-td-ZgN">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="3Kc-td-ZgN" customClass="CircleImageView" customModule="Cosmostation" customModuleProvider="target">
                                 <rect key="frame" x="16" y="14" width="36" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="lti-GW-v2E"/>
@@ -234,6 +234,31 @@
                                             <constraint firstItem="z4T-nz-xPc" firstAttribute="centerY" secondItem="Xr9-xN-j4y" secondAttribute="centerY" id="vod-QS-0LN"/>
                                         </constraints>
                                     </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N5O-KQ-v83">
+                                        <rect key="frame" x="0.0" y="95.999999999999986" width="431" height="15"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vault Deposited" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nu8-1C-X7a" userLabel="Vault Deposited">
+                                                <rect key="frame" x="0.0" y="-0.33333333333331439" width="89.666666666666671" height="15.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color01"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ly-0Q-rIe">
+                                                <rect key="frame" x="406" y="-0.33333333333331439" width="25" height="15.333333333333334"/>
+                                                <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                                <color key="textColor" name="_color01"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="0ly-0Q-rIe" firstAttribute="centerY" secondItem="N5O-KQ-v83" secondAttribute="centerY" id="5ey-Ls-nyT"/>
+                                            <constraint firstItem="nu8-1C-X7a" firstAttribute="leading" secondItem="N5O-KQ-v83" secondAttribute="leading" id="CsQ-fP-EvY"/>
+                                            <constraint firstAttribute="trailing" secondItem="0ly-0Q-rIe" secondAttribute="trailing" id="LOS-42-ukt"/>
+                                            <constraint firstAttribute="height" constant="15" id="SGg-gK-WdI"/>
+                                            <constraint firstItem="nu8-1C-X7a" firstAttribute="centerY" secondItem="N5O-KQ-v83" secondAttribute="centerY" id="ftZ-nT-2wv"/>
+                                        </constraints>
+                                    </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e38-wk-FZl">
                                         <rect key="frame" x="0.0" y="95.999999999999986" width="431" height="15"/>
                                         <subviews>
@@ -337,6 +362,8 @@
                 <outlet property="unstakingTitle" destination="NIZ-Rm-3Ml" id="xEH-dR-1z9"/>
                 <outlet property="valueCurrencyLabel" destination="7eS-c5-c7d" id="Xk4-C9-oeF"/>
                 <outlet property="valueLabel" destination="qWP-3U-xJz" id="CM6-gi-t3p"/>
+                <outlet property="vaultDepositedLabel" destination="0ly-0Q-rIe" id="70d-Ay-F8j"/>
+                <outlet property="vaultDepositedLayer" destination="N5O-KQ-v83" id="SCc-gg-pbF"/>
                 <outlet property="vestingLabel" destination="oLx-qW-ZXD" id="07y-UH-hx6"/>
                 <outlet property="vestingLayer" destination="teC-xe-z9F" id="mgh-al-d63"/>
                 <outlet property="vestingTitle" destination="OT5-EQ-KkH" id="UyC-3E-x8Y"/>

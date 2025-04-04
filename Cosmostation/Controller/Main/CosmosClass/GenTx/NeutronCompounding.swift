@@ -1,26 +1,30 @@
 //
-//  CosmosClaimRewards.swift
+//  NeutronCompounding.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2023/09/27.
-//  Copyright © 2023 wannabit. All rights reserved.
+//  Created by 차소민 on 4/3/25.
+//  Copyright © 2025 wannabit. All rights reserved.
 //
 
 import UIKit
 import Lottie
 import SwiftProtobuf
 
-class CosmosClaimRewards: BaseVC {
+class NeutronCompounding: BaseVC {
     
     @IBOutlet weak var titleCoinImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var validatorsLabel: UILabel!
-    @IBOutlet weak var validatorsCntLabel: UILabel!
+    @IBOutlet weak var validatorCardView: FixCardView!
+    @IBOutlet weak var validatorImage: CircleImageView!
+    @IBOutlet weak var validatorLabel: UILabel!
+    @IBOutlet weak var commissionLabel: UILabel!
+    
     @IBOutlet weak var rewardAmountLabel: UILabel!
     @IBOutlet weak var rewardDenomLabel: UILabel!
-    @IBOutlet weak var rewardCntLabel: UILabel!
-    
+    @IBOutlet weak var rewardCurrencyLabel: UILabel!
+    @IBOutlet weak var rewardValueLabel: UILabel!
+
     @IBOutlet weak var memoCardView: FixCardView!
     @IBOutlet weak var memoTitle: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
@@ -36,37 +40,38 @@ class CosmosClaimRewards: BaseVC {
     @IBOutlet weak var feeValueLabel: UILabel!
     @IBOutlet weak var feeSegments: UISegmentedControl!
     
-    @IBOutlet weak var claimBtn: BaseButton!
+    @IBOutlet weak var compoundingBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
-    
-    var selectedChain: BaseChain!
-    var cosmosFetcher: CosmosFetcher!
+    var selectedChain: ChainNeutron!
+    var fetcher: NeutronFetcher!
+    var isCompoundingAll = false
     var claimableRewards = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
     var feeInfos = [FeeInfo]()
     var txFee: Cosmos_Tx_V1beta1_Fee = Cosmos_Tx_V1beta1_Fee.init()
     var txTip: Cosmos_Tx_V1beta1_Tip?
     var txMemo = ""
     var selectedFeePosition = 0
+    var selectedValidator = Cosmos_Staking_V1beta1_Validator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        cosmosFetcher = selectedChain.getCosmosfetcher()
+        fetcher = selectedChain.getNeutronFetcher()
         
-        loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
         loadingView.contentMode = .scaleAspectFit
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+        validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectValidator)))
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         
         Task {
-            await cosmosFetcher.updateBaseFee()
+            await fetcher.updateBaseFee()
             DispatchQueue.main.async {
                 self.loadingView.isHidden = true
                 self.onInitView()
@@ -77,60 +82,31 @@ class CosmosClaimRewards: BaseVC {
     }
     
     override func setLocalizedString() {
+        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        titleLabel.text = String(format: NSLocalizedString("title_coin_compounding", comment: ""), symbol)
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
         feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
-        claimBtn.setTitle(NSLocalizedString("tx_get_reward", comment: ""), for: .normal)
+        compoundingBtn.setTitle(NSLocalizedString("str_compounding", comment: ""), for: .normal)
     }
     
     func onInitView() {
-        if let initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher() {
-            let cosmostationValAddress = initiaFetcher.initiaValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
-            if (claimableRewards.filter { $0.validatorAddress == cosmostationValAddress }.count > 0) {
-                validatorsLabel.text = "Cosmostation"
-            } else {
-                validatorsLabel.text = initiaFetcher.initiaValidators.filter { $0.operatorAddress == claimableRewards[0].validatorAddress }.first?.description_p.moniker
-            }
-            
-        } else if let zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher() {
-            let cosmostationValAddress = zenrockFetcher.validators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
-            if (claimableRewards.filter { $0.validatorAddress == cosmostationValAddress }.count > 0) {
-                validatorsLabel.text = "Cosmostation"
-            } else {
-                validatorsLabel.text = zenrockFetcher.validators.filter { $0.operatorAddress == claimableRewards[0].validatorAddress }.first?.description_p.moniker
-            }
-            
-        } else if let neutronFetcher = (selectedChain as? ChainNeutron)?.getNeutronFetcher() {
-            let stakedValidatorAddress = neutronFetcher.cosmosDelegations
-                                            .map{ $0.delegation.validatorAddress }
-            
-            let cosmostationValAddress = neutronFetcher.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
-            if stakedValidatorAddress.filter({ $0 == cosmostationValAddress}).count > 0 {
-                validatorsLabel.text = "Cosmostation"
-            } else {
-                let validatorAddress = neutronFetcher.cosmosDelegations.sorted { NSDecimalNumber(string: $0.balance.amount).compare(NSDecimalNumber(string: $1.balance.amount)).rawValue > 0 }.first?.delegation.validatorAddress
-                validatorsLabel.text = neutronFetcher.cosmosValidators.filter{ $0.operatorAddress == validatorAddress }.first?.description_p.moniker
-            }
-
-        } else {
-            let cosmostationValAddress = cosmosFetcher.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
-            if (claimableRewards.filter { $0.validatorAddress == cosmostationValAddress }.count > 0) {
-                validatorsLabel.text = "Cosmostation"
-            } else {
-                validatorsLabel.text = cosmosFetcher.cosmosValidators.filter { $0.operatorAddress == claimableRewards[0].validatorAddress }.first?.description_p.moniker
-            }
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+        if let cosmostation = fetcher.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first {
+            validatorLabel.text = cosmostation.description_p.moniker
+            validatorImage.setMonikerImg(selectedChain, cosmostation.operatorAddress)
+            let commission = NSDecimalNumber(string: cosmostation.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
+            commissionLabel.attributedText = WDP.dpAmount(commission.stringValue, commissionLabel.font, 2)
+            selectedValidator = cosmostation
+        } else if let validator = fetcher.cosmosValidators.first {
+            validatorLabel.text = validator.description_p.moniker
+            validatorImage.setMonikerImg(selectedChain, validator.operatorAddress)
+            let commission = NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
+            commissionLabel.attributedText = WDP.dpAmount(commission.stringValue, commissionLabel.font, 2)
+            selectedValidator = validator
         }
         
-        if (claimableRewards.count > 1) {
-            validatorsCntLabel.text = "+ " + String(claimableRewards.count - 1)
-        } else if let neutronFetcher = (selectedChain as? ChainNeutron)?.getNeutronFetcher() {
-            if neutronFetcher.cosmosDelegations.count == 1 {
-                validatorsCntLabel.isHidden = true
-            } else {
-                validatorsCntLabel.text = "+ " + String(neutronFetcher.cosmosDelegations.count - 1)
-            }
-        } else {
-            validatorsCntLabel.isHidden = true
-        }
+        
+        
         
         let stakeDenom = selectedChain.stakeDenom!
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
@@ -139,36 +115,36 @@ class CosmosClaimRewards: BaseVC {
                 let rawAmount =  NSDecimalNumber(string: reward.reward.filter{ $0.denom == stakeDenom }.first?.amount ?? "0")
                 rewardAmount = rewardAmount.adding(rawAmount.multiplying(byPowerOf10: -18, withBehavior: handler0Down))
             }
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let value = msPrice.multiplying(by: rewardAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+
             WDP.dpCoin(msAsset, rewardAmount, nil, rewardDenomLabel, rewardAmountLabel, msAsset.decimals)
-            
-            var anotherRewardDenom = Array<String>()
-            claimableRewards.forEach { reward in
-                reward.reward.filter { $0.denom != stakeDenom }.forEach { anotherRewards in
-                    let anotherAmount = NSDecimalNumber(string: anotherRewards.amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
-                    if (anotherAmount != NSDecimalNumber.zero) {
-                        if (!anotherRewardDenom.contains(anotherRewards.denom)) {
-                            anotherRewardDenom.append(anotherRewards.denom)
-                        }
-                    }
-                }
-            }
-            if (anotherRewardDenom.count > 0) {
-                rewardCntLabel.text = "+ " + String(anotherRewardDenom.count)
-                titleCoinImage.isHidden = true
-                titleLabel.text = NSLocalizedString("str_cliam_reward", comment: "")
-            } else {
-                rewardCntLabel.isHidden = true
-                titleCoinImage.isHidden = false
-                let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
-                titleLabel.text = String(format: NSLocalizedString("title_coin_rewards_claim", comment: ""), symbol)
-                titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
-                
-            }
+            WDP.dpValue(value, rewardCurrencyLabel, rewardValueLabel)
         }
     }
     
+    @objc func onClickMemo() {
+        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
+        memoSheet.existedMemo = txMemo
+        memoSheet.memoDelegate = self
+        onStartSheet(memoSheet, 260, 0.6)
+    }
+    
+    func onUpdateMemoView(_ memo: String) {
+        txMemo = memo
+        if (txMemo.isEmpty) {
+            memoLabel.isHidden = true
+            memoHintLabel.isHidden = false
+        } else {
+            memoLabel.text = txMemo
+            memoLabel.isHidden = false
+            memoHintLabel.isHidden = true
+        }
+        onSimul()
+    }
+    
     func oninitFeeView() {
-        if (cosmosFetcher.cosmosBaseFees.count > 0) {
+        if (fetcher.cosmosBaseFees.count > 0) {
             feeSegments.removeAllSegments()
             feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
             feeSegments.insertSegment(withTitle: "Fast", at: 1, animated: false)
@@ -176,7 +152,7 @@ class CosmosClaimRewards: BaseVC {
             feeSegments.insertSegment(withTitle: "Instant", at: 3, animated: false)
             feeSegments.selectedSegmentIndex = selectedFeePosition
             
-            let baseFee = cosmosFetcher.cosmosBaseFees[0]
+            let baseFee = fetcher.cosmosBaseFees[0]
             let gasAmount: NSDecimalNumber = selectedChain.getInitGasLimit()
             let feeDenom = baseFee.denom
             let feeAmount = baseFee.getdAmount().multiplying(by: gasAmount, withBehavior: handler0Down)
@@ -200,8 +176,8 @@ class CosmosClaimRewards: BaseVC {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = selectedChain
         baseSheet.sheetDelegate = self
-        if (cosmosFetcher.cosmosBaseFees.count > 0) {
-            baseSheet.baseFeesDatas = cosmosFetcher.cosmosBaseFees
+        if (fetcher.cosmosBaseFees.count > 0) {
+            baseSheet.baseFeesDatas = fetcher.cosmosBaseFees
             baseSheet.sheetType = .SelectBaseFeeDenom
         } else {
             baseSheet.feeDatas = feeInfos[selectedFeePosition].FeeDatas
@@ -210,10 +186,20 @@ class CosmosClaimRewards: BaseVC {
         onStartSheet(baseSheet, 240, 0.6)
     }
     
+    @objc func onSelectValidator() {
+        let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.targetChain = selectedChain
+        baseSheet.sheetDelegate = self
+        baseSheet.sheetType = .SelectValidator
+        baseSheet.validators = fetcher.cosmosValidators
+        onStartSheet(baseSheet, 680, 0.8)
+    }
+    
+    
     @IBAction func feeSegmentSelected(_ sender: UISegmentedControl) {
         selectedFeePosition = sender.selectedSegmentIndex
-        if (cosmosFetcher.cosmosBaseFees.count > 0) {
-            if let baseFee = cosmosFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
+        if (fetcher.cosmosBaseFees.count > 0) {
+            if let baseFee = fetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
                 let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                 let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                 txFee.amount[0].amount = feeAmount.stringValue
@@ -239,31 +225,11 @@ class CosmosClaimRewards: BaseVC {
         }
     }
     
-    @objc func onClickMemo() {
-        let memoSheet = TxMemoSheet(nibName: "TxMemoSheet", bundle: nil)
-        memoSheet.existedMemo = txMemo
-        memoSheet.memoDelegate = self
-        onStartSheet(memoSheet, 260, 0.6)
-    }
-    
-    func onUpdateMemoView(_ memo: String) {
-        txMemo = memo
-        if (txMemo.isEmpty) {
-            memoLabel.isHidden = true
-            memoHintLabel.isHidden = false
-        } else {
-            memoLabel.text = txMemo
-            memoLabel.isHidden = false
-            memoHintLabel.isHidden = true
-        }
-        onSimul()
-    }
-    
     func onUpdateWithSimul(_ gasUsed: UInt64?) {
         if let toGas = gasUsed {
             txFee.gasLimit = UInt64(Double(toGas) * selectedChain.getSimulatedGasMultiply())
-            if (cosmosFetcher.cosmosBaseFees.count > 0) {
-                if let baseFee = cosmosFetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
+            if (fetcher.cosmosBaseFees.count > 0) {
+                if let baseFee = fetcher.cosmosBaseFees.filter({ $0.denom == txFee.amount[0].denom }).first {
                     let gasLimit = NSDecimalNumber.init(value: txFee.gasLimit)
                     let feeAmount = baseFee.getdAmount().multiplying(by: gasLimit, withBehavior: handler0Up)
                     txFee.amount[0].amount = feeAmount.stringValue
@@ -278,29 +244,31 @@ class CosmosClaimRewards: BaseVC {
                 }
             }
         }
+        
         onUpdateFeeView()
         view.isUserInteractionEnabled = true
         loadingView.isHidden = true
-        claimBtn.isEnabled = true
+        compoundingBtn.isEnabled = true
     }
     
-    @IBAction func onClickClaim(_ sender: BaseButton) {
+    @IBAction func onClickCompounding(_ sender: BaseButton) {
         let pinVC = UIStoryboard.PincodeVC(self, .ForDataCheck)
         self.present(pinVC, animated: true)
     }
     
     func onSimul() {
         view.isUserInteractionEnabled = false
-        claimBtn.isEnabled = false
+        compoundingBtn.isEnabled = false
         loadingView.isHidden = false
+        
         if (selectedChain.isSimulable() == false) {
             return onUpdateWithSimul(nil)
         }
         
         Task {
             do {
-                if let simulReq = try await Signer.genSimul(selectedChain, onBindRewardMsgs(), txMemo, txFee, nil),
-                   let simulRes = try await cosmosFetcher.simulateTx(simulReq) {
+                if let simulReq = try await Signer.genSimul(selectedChain, onBindCompoundingMsg(), txMemo, txFee, nil),
+                   let simulRes = try await fetcher.simulateTx(simulReq) {
                     DispatchQueue.main.async {
                         self.onUpdateWithSimul(simulRes)
                     }
@@ -317,17 +285,14 @@ class CosmosClaimRewards: BaseVC {
         }
     }
     
-    func onBindRewardMsgs() -> [Google_Protobuf_Any] {
-        if selectedChain is ChainNeutron {
-            return Signer.genNeutronClaimStakingRewardMsg(selectedChain.bechAddress!)
-
-        } else {
-            return Signer.genClaimStakingRewardMsg(selectedChain.bechAddress!, claimableRewards)
-        }
+    func onBindCompoundingMsg() -> [Google_Protobuf_Any] {
+        return Signer.genNeutronCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!, selectedValidator.operatorAddress)
     }
+    
 }
 
-extension CosmosClaimRewards: MemoDelegate, BaseSheetDelegate, PinDelegate {
+
+extension NeutronCompounding: MemoDelegate, BaseSheetDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectFeeDenom) {
@@ -340,10 +305,23 @@ extension CosmosClaimRewards: MemoDelegate, BaseSheetDelegate, PinDelegate {
             
         } else if (sheetType == .SelectBaseFeeDenom) {
             if let index = result["index"] as? Int {
-               let selectedDenom = cosmosFetcher.cosmosBaseFees[index].denom
+               let selectedDenom = fetcher.cosmosBaseFees[index].denom
                 txFee.amount[0].denom = selectedDenom
                 onUpdateFeeView()
                 onSimul()
+            }
+            
+        } else if (sheetType == .SelectValidator) {
+            if let validatorAddress = result["validatorAddress"] as? String {
+                if let validator = fetcher.cosmosValidators.filter({ $0.operatorAddress == validatorAddress }).first {
+                    validatorLabel.text = validator.description_p.moniker
+                    validatorImage.setMonikerImg(selectedChain, validator.operatorAddress)
+                    let commission = NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
+                    commissionLabel.attributedText = WDP.dpAmount(commission.stringValue, commissionLabel.font, 2)
+                    selectedValidator = validator
+                } else {
+                    onShowToast("invalid validator")
+                }
             }
         }
     }
@@ -355,12 +333,12 @@ extension CosmosClaimRewards: MemoDelegate, BaseSheetDelegate, PinDelegate {
     func onPinResponse(_ request: LockType, _ result: UnLockResult) {
         if (result == .success) {
             view.isUserInteractionEnabled = false
-            claimBtn.isEnabled = false
+            compoundingBtn.isEnabled = false
             loadingView.isHidden = false
             Task {
                 do {
-                    if let broadReq = try await Signer.genTx(selectedChain, onBindRewardMsgs(), txMemo, txFee, nil),
-                       let broadRes = try await cosmosFetcher.broadcastTx(broadReq) {
+                    if let broadReq = try await Signer.genTx(selectedChain, onBindCompoundingMsg(), txMemo, txFee, nil),
+                       let broadRes = try await fetcher.broadcastTx(broadReq) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
                             let txResult = CosmosTxResult(nibName: "CosmosTxResult", bundle: nil)

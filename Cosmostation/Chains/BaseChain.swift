@@ -99,7 +99,7 @@ class BaseChain {
             }
         }
         
-        if (supportCosmos && supportStaking) {
+        if (supportCosmos && isStakeEnabled()) {
             bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, validatorPrefix)
         }
     }
@@ -251,7 +251,7 @@ class BaseChain {
             } else if let chainZenrock = self as? ChainZenrock {
                 _ = await chainZenrock.getZenrockFetcher()?.fetchCosmosValidators()
 
-            } else if (supportCosmos == true && supportStaking == true) {
+            } else if (supportCosmos == true && isStakeEnabled() == true) {
                 _ = await getCosmosfetcher()?.fetchCosmosValidators()
             }
             
@@ -814,6 +814,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBitCoin86_T())
     result.append(ChainGno_T())
     result.append(ChainInitia_T())
+    result.append(ChainLombard_T())
     result.append(ChainNeutron_T())
     result.append(ChainNillion_T())
     result.append(ChainMantra_T())
@@ -821,6 +822,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainTabiEVM_T())
     result.append(ChainXion_T())
     result.append(ChainXrplEVM_T())
+    result.append(ChainZkCloud_T())
     
     
     

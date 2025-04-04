@@ -130,10 +130,15 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     allErc20Tokens.forEach { tokens in
-                        if (tokens.getAmount() != NSDecimalNumber.zero) {
+                        if (tokens.symbol == selectedChain.getChainListParam()["main_asset_symbol"].string || tokens.getAmount() != NSDecimalNumber.zero) {
                             toDisplayErc20Tokens.append(tokens)
                         }
                     }
+                }
+                toDisplayErc20Tokens.sort {
+                    if ($0.symbol == selectedChain.getChainListParam()["main_asset_symbol"].string) { return true }
+                    if ($1.symbol == selectedChain.getChainListParam()["main_asset_symbol"].string) { return false }
+                    return false
                 }
             }
             
