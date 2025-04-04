@@ -155,12 +155,7 @@ class Portfolio2Cell: UITableViewCell {
             assetCntLoadingLabel.isHidden = false
         }
         
-        if let stakeDenom = chain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
-            symbolLabel.text = msAsset.symbol
-        } else {
-            symbolLabel.text = chain.coinSymbol
-        }
+        symbolLabel.text = chain.getChainListParam()["main_asset_symbol"].string ?? chain.getChainListParam()["staking_asset_symbol"].string
         
         //DP Price
         if (chain.name == "OKT") {
