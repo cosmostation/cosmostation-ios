@@ -19,7 +19,10 @@ extension UIFont {
     static var fontSize11Medium: UIFont {
         UIFont(name: "SpoqaHanSansNeo-Medium", size: 11)!
     }
-    
+    static var fontSize11Bold: UIFont {
+        UIFont(name: "SpoqaHanSansNeo-Bold", size: 11)!
+    }
+
     static var fontSize12Medium: UIFont {
         UIFont(name: "SpoqaHanSansNeo-Medium", size: 12)!
     }

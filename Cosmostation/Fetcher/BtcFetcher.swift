@@ -91,7 +91,8 @@ class BtcFetcher {
     
     
     func allValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        let msPrice = BaseData.instance.getPrice(chain.coinGeckoId, usd)
+        guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.coinSymbol) else { return .zero }
+        let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
         let babylonBtcFetcher = (chain as? ChainBitCoin86)?.getBabylonBtcFetcher()
         
         return btcBalances.adding(btcPendingInput).adding(babylonBtcFetcher?.btcStakingAmount ?? 0).adding(babylonBtcFetcher?.btcUnstakingAmount ?? 0).adding(babylonBtcFetcher?.btcWithdrawableAmount ?? 0).multiplying(by: msPrice).multiplying(byPowerOf10: -8, withBehavior: handler6)

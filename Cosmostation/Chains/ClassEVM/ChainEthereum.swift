@@ -22,8 +22,6 @@ class ChainEthereum: BaseChain {
         
         supportEvm = true
         coinSymbol = "ETH"
-        coinGeckoId = "ethereum"
-        coinLogo = "tokenEth"
         evmRpcURL = "https://rpc-ethereum-evm.cosmostation.io/rpc"
     }
 }

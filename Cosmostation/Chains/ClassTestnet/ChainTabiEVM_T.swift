@@ -30,8 +30,6 @@ class ChainTabiEVM_T: ChainTabiEVM  {
     
         supportEvm = true
         coinSymbol = "TABI"
-        coinGeckoId = ""
-        coinLogo = "tokenTabi"
         evmRpcURL = "https://rpc.testnetv2.tabichain.com/"
     }
 }

@@ -29,8 +29,6 @@ class ChainCantoEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "CANTO"
-        coinGeckoId = "canto"
-        coinLogo = "tokenCanto"
         evmRpcURL = "https://canto.slingshot.finance"
     }
 }

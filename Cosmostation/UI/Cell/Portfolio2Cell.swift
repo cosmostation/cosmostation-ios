@@ -18,6 +18,7 @@ class Portfolio2Cell: UITableViewCell {
     @IBOutlet weak var evmAddressLabel: UILabel!
     @IBOutlet weak var btcTag: RoundedPaddingLabel!
     @IBOutlet weak var oldTag: RoundedPaddingLabel!
+    @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var priceCurrencyLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var priceChangeLabel: UILabel!
@@ -38,6 +39,7 @@ class Portfolio2Cell: UITableViewCell {
         valuecurrencyLabel.text = ""
         valueLabel.text = ""
         assetCntLabel.text = ""
+        symbolLabel.text = ""
         priceCurrencyLabel.text = ""
         priceLabel.text = ""
         priceChangeLabel.text = ""
@@ -58,6 +60,7 @@ class Portfolio2Cell: UITableViewCell {
         oldTag.isHidden = true
         bechAddressLabel.text = ""
         evmAddressLabel.text = ""
+        symbolLabel.text = ""
         priceCurrencyLabel.text = ""
         priceLabel.text = ""
         priceChangeLabel.text = ""
@@ -152,25 +155,44 @@ class Portfolio2Cell: UITableViewCell {
             assetCntLoadingLabel.isHidden = false
         }
         
+        symbolLabel.text = chain.getChainListParam()["main_asset_symbol"].string ?? chain.getChainListParam()["staking_asset_symbol"].string
+        
         //DP Price
         if (chain.name == "OKT") {
-            WDP.dpPrice(OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+            guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? chain.coinSymbol) else { return }
+            WDP.dpPrice(msAsset.coinGeckoId, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(msAsset.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
             
         } else if (chain.supportCosmos) {
-            if let stakeDenom = chain.stakeDenom,
-               let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+            if let denom = chain.getChainListParam()["main_asset_denom"].string ?? chain.getChainListParam()["staking_asset_denom"].string,
+               let msAsset = BaseData.instance.getAsset(chain.apiName, denom) {
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
                 WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
             }
             
         } else if (chain.supportEvm) {
-            WDP.dpPrice(chain.coinGeckoId, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(chain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+            if let denom = chain.getChainListParam()["main_asset_denom"].string,
+               let msAsset = BaseData.instance.getAsset(chain.apiName, denom) {
+                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+                
+            } else if let symbol = chain.getChainListParam()["main_asset_symbol"].string,
+               let geckoId = chain.getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.symbol == symbol }).first?.coinGeckoId {
+                WDP.dpPrice(geckoId, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(geckoId, priceChangeLabel, priceChangePercentLabel)
+            }
             
         } else {
-            WDP.dpPrice(chain.coinGeckoId, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(chain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+            if let stakeDenom = chain.stakeDenom,
+               let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+
+            } else if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.coinSymbol) {
+                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+
+            }
         }
     }
     

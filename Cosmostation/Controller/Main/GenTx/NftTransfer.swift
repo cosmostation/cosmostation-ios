@@ -39,6 +39,7 @@ class NftTransfer: BaseVC {
     
     @IBOutlet weak var feeCardView: FixCardView!
     @IBOutlet weak var feeSelectView: DropDownView!
+    @IBOutlet weak var feeArrowImg: UIImageView!
     @IBOutlet weak var feeMsgLabel: UILabel!
     @IBOutlet weak var feeSelectImg: UIImageView!
     @IBOutlet weak var feeSelectLabel: UILabel!
@@ -162,11 +163,7 @@ class NftTransfer: BaseVC {
             feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
             selectedFeePosition = 0
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectImg.image =  UIImage.init(named: fromChain.coinLogo)
-            
-            feeSelectLabel.text = fromChain.coinSymbol
-            feeDenomLabel.text = fromChain.coinSymbol
-            
+            feeSelectLabel.text = fromChain.coinSymbol            
             suiFeeBudget = suiFetcher.baseFee(.SUI_SEND_NFT)
             
         } else if (txStyle == .COSMOS_STYLE) {
@@ -201,7 +198,7 @@ class NftTransfer: BaseVC {
     
     func onInitView() {
         if (sendType == .SUI_NFT) {
-            
+            feeArrowImg.isHidden = true
         } else if (sendType == .COSMOS_WASM) {
             memoCardView.isHidden = false
         }
@@ -280,6 +277,8 @@ class NftTransfer: BaseVC {
     }
     
     @objc func onSelectFeeDenom() {
+        if txStyle == .SUI_STYLE { return }
+        
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = fromChain
         baseSheet.sheetDelegate = self
@@ -295,10 +294,10 @@ class NftTransfer: BaseVC {
     
     func onUpdateFeeView() {
         if (txStyle == .SUI_STYLE) {
-            let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
-            let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
-            let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
-            feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 18)
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let feeValue = feePrice.multiplying(by: suiFeeBudget).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(9))
+            WDP.dpCoin(msAsset, suiFeeBudget, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .COSMOS_STYLE) {

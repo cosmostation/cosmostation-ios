@@ -29,8 +29,6 @@ class ChainTabiEVM: BaseChain  {
     
         supportEvm = true
         coinSymbol = "TABI"
-        coinGeckoId = ""
-        coinLogo = ""
         evmRpcURL = ""
     }
 }

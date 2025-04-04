@@ -98,6 +98,18 @@ class CosmosClaimRewards: BaseVC {
             } else {
                 validatorsLabel.text = zenrockFetcher.validators.filter { $0.operatorAddress == claimableRewards[0].validatorAddress }.first?.description_p.moniker
             }
+            
+        } else if let neutronFetcher = (selectedChain as? ChainNeutron)?.getNeutronFetcher() {
+            let stakedValidatorAddress = neutronFetcher.cosmosDelegations
+                                            .map{ $0.delegation.validatorAddress }
+            
+            let cosmostationValAddress = neutronFetcher.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
+            if stakedValidatorAddress.filter({ $0 == cosmostationValAddress}).count > 0 {
+                validatorsLabel.text = "Cosmostation"
+            } else {
+                let validatorAddress = neutronFetcher.cosmosDelegations.sorted { NSDecimalNumber(string: $0.balance.amount).compare(NSDecimalNumber(string: $1.balance.amount)).rawValue > 0 }.first?.delegation.validatorAddress
+                validatorsLabel.text = neutronFetcher.cosmosValidators.filter{ $0.operatorAddress == validatorAddress }.first?.description_p.moniker
+            }
 
         } else {
             let cosmostationValAddress = cosmosFetcher.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
@@ -110,6 +122,12 @@ class CosmosClaimRewards: BaseVC {
         
         if (claimableRewards.count > 1) {
             validatorsCntLabel.text = "+ " + String(claimableRewards.count - 1)
+        } else if let neutronFetcher = (selectedChain as? ChainNeutron)?.getNeutronFetcher() {
+            if neutronFetcher.cosmosDelegations.count == 1 {
+                validatorsCntLabel.isHidden = true
+            } else {
+                validatorsCntLabel.text = "+ " + String(neutronFetcher.cosmosDelegations.count - 1)
+            }
         } else {
             validatorsCntLabel.isHidden = true
         }
@@ -300,7 +318,12 @@ class CosmosClaimRewards: BaseVC {
     }
     
     func onBindRewardMsgs() -> [Google_Protobuf_Any] {
-        return Signer.genClaimStakingRewardMsg(selectedChain.bechAddress!, claimableRewards)
+        if selectedChain is ChainNeutron {
+            return Signer.genNeutronClaimStakingRewardMsg(selectedChain.bechAddress!)
+
+        } else {
+            return Signer.genClaimStakingRewardMsg(selectedChain.bechAddress!, claimableRewards)
+        }
     }
 }
 

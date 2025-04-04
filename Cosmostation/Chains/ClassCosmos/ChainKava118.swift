@@ -30,8 +30,6 @@ class ChainKava118: ChainKavaEVM  {
         
         supportEvm = false
         coinSymbol = ""
-        coinGeckoId = ""
-        coinLogo = ""
         evmRpcURL = ""
     }
 }

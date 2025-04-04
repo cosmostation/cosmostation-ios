@@ -251,6 +251,25 @@ class Signer {
         return anyMsgs
     }
     
+    static func genNeutronClaimStakingRewardMsg(_ address: String) -> [Google_Protobuf_Any] {
+        var anyMsgs = [Google_Protobuf_Any]()
+        let claimMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+            $0.sender = address
+            $0.contract = "neutron1h62p45vv3fg2q6sm00r93gqgmhqt9tfgq5hz33qyrhq8f0pqqj0s36wgc3"
+            $0.funds = []
+            let msg: JSON = ["claim_rewards" : JSON()]
+            $0.msg = try! msg.rawData()
+        }
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
+            $0.value = try! claimMsg.serializedData()
+        }
+        anyMsgs.append(anyMsg)
+        
+        return anyMsgs
+    }
+    
+    
     //Tx for Common Claim Commission
     static func genClaimCommissionMsg(_ commission: Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
@@ -365,8 +384,8 @@ class Signer {
     }
     
     static func genBabylonCompoundingMsg(_ address: String,
-                                  _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                  _ stakingDenom: String) -> [Google_Protobuf_Any] {
+                                         _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
+                                         _ stakingDenom: String) -> [Google_Protobuf_Any] {
         var anyMsgs = [Google_Protobuf_Any]()
         rewards.forEach { reward in
             let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
@@ -391,6 +410,44 @@ class Signer {
             }
             let deleAnyMsg = Google_Protobuf_Any.with {
                 $0.typeURL = "/babylon.epoching.v1.MsgWrappedDelegate"
+                $0.value = try! deleMsg.serializedData()
+            }
+            anyMsgs.append(deleAnyMsg)
+        }
+        return anyMsgs
+    }
+    
+    static func genNeutronCompoundingMsg(_ address: String,
+                                         _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
+                                         _ stakingDenom: String,
+                                         _ validatorAddress: String) -> [Google_Protobuf_Any] {
+        var anyMsgs = [Google_Protobuf_Any]()
+        let claimMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+            $0.sender = address
+            $0.contract = "neutron1h62p45vv3fg2q6sm00r93gqgmhqt9tfgq5hz33qyrhq8f0pqqj0s36wgc3"
+            $0.funds = []
+            let msg: JSON = ["claim_rewards" : JSON()]
+            $0.msg = try! msg.rawData()
+        }
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
+            $0.value = try! claimMsg.serializedData()
+        }
+        anyMsgs.append(anyMsg)
+            
+        rewards.forEach { reward in
+            let rewardCoin = reward.reward.filter({ $0.denom == stakingDenom }).first
+            let deleCoin = Cosmos_Base_V1beta1_Coin.with {
+                $0.denom = rewardCoin!.denom
+                $0.amount = NSDecimalNumber.init(string: rewardCoin!.amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down).stringValue
+            }
+            let deleMsg = Cosmos_Staking_V1beta1_MsgDelegate.with {
+                $0.delegatorAddress = address
+                $0.validatorAddress = validatorAddress
+                $0.amount = deleCoin
+            }
+            let deleAnyMsg = Google_Protobuf_Any.with {
+                $0.typeURL = "/cosmos.staking.v1beta1.MsgDelegate"
                 $0.value = try! deleMsg.serializedData()
             }
             anyMsgs.append(deleAnyMsg)

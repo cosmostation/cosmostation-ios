@@ -22,8 +22,6 @@ class ChainForma: BaseChain  {
         
         supportEvm = true
         coinSymbol = "TIA"
-        coinGeckoId = "celestia"
-        coinLogo = "tokenTia"
         evmRpcURL = "https://rpc.forma.art"
     }
 }

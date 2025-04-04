@@ -75,7 +75,7 @@ class SuiUnstake: BaseVC {
         feeSegments.removeAllSegments()
         feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
         feeSegments.selectedSegmentIndex = 0
-        feeSelectImg.image =  UIImage.init(named: selectedChain.coinLogo)
+        feeSelectImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? selectedChain.coinSymbol), placeholderImage: UIImage(named: "tokenDefault"))
         
         feeSelectLabel.text = selectedChain.coinSymbol
         feeDenomLabel.text = selectedChain.coinSymbol
@@ -112,7 +112,8 @@ class SuiUnstake: BaseVC {
     func onUpdateFeeView() {
         unstakeBtn.isEnabled = false
         
-        let feePrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol) else { return }
+        let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
         let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
         let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
         feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 9)

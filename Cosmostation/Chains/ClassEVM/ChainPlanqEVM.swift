@@ -29,8 +29,6 @@ class ChainPlanqEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "PLANQ"
-        coinGeckoId = "planq"
-        coinLogo = "tokenPlq"
         evmRpcURL = "https://planq-rpc.nodies.app"
     }
 }

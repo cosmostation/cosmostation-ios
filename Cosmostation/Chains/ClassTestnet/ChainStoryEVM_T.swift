@@ -23,8 +23,6 @@ class ChainStoryEVM_T: ChainStoryEVM  {
         
         supportEvm = true
         coinSymbol = "IP"
-        coinGeckoId = ""
-        coinLogo = "tokenIp"
         evmRpcURL = "https://rpc-office-evm.cosmostation.io/story-testnet/"
         
 //        bechAccountPrefix = "story"

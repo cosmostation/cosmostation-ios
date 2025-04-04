@@ -63,8 +63,7 @@ class BtcDelegate: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        let image = UIImage(named: selectedChain.coinLogo)
-        titleCoinImage.image = image
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.coinSymbol), placeholderImage: UIImage(named: "tokenDefault"))
 
         validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
         stakingAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))

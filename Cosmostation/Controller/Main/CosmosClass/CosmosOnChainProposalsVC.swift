@@ -22,6 +22,7 @@ class CosmosOnChainProposalsVC: BaseVC {
     var votingPeriods: [MintscanProposal] = []
     var etcPeriods: [MintscanProposal] = []
     var toVoteList = Array<UInt64>()
+    var myVotes = Array<MintscanMyVotes>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,7 @@ class CosmosOnChainProposalsVC: BaseVC {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "CosmosProposalCell", bundle: nil), forCellReuseIdentifier: "CosmosProposalCell")
         tableView.register(UINib(nibName: "OnChainProposalCell", bundle: nil), forCellReuseIdentifier: "OnChainProposalCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
@@ -57,8 +59,12 @@ class CosmosOnChainProposalsVC: BaseVC {
 
         Task {
             proposals = try await selectedChain.cosmosFetcher?.fetchOnChainProposals() ?? []
-            proposals.forEach { proposal in
+            await proposals.concurrentForEach { [weak self] proposal in
+                guard let self else { return }
                 if proposal.isVotingPeriod() {
+                    if let voteHistory = await selectedChain.cosmosFetcher?.fetchOnChainProposalHistory(proposal.id ?? 0, selectedChain.bechAddress ?? "") {
+                        myVotes.append(voteHistory)
+                    }
                     votingPeriods.append(proposal)
                 } else {
                     etcPeriods.append(proposal)
@@ -89,14 +95,14 @@ class CosmosOnChainProposalsVC: BaseVC {
         if let initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher() {
             let delegated = initiaFetcher.initiaDelegationAmountSum()
             let voteThreshold = selectedChain.votingThreshold()
-            if (delegated.compare(voteThreshold).rawValue < 0) {
+            if (delegated.compare(voteThreshold).rawValue <= 0) {
                 onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
                 return
             }
         } else {
             if let delegated = selectedChain.getCosmosfetcher()?.delegationAmountSum() {
                 let voteThreshold = selectedChain.votingThreshold()
-                if (delegated.compare(voteThreshold).rawValue < 0) {
+                if (delegated.compare(voteThreshold).rawValue <= 0) {
                     onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
                     return
                 }
@@ -169,11 +175,11 @@ extension CosmosOnChainProposalsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"OnChainProposalCell") as! OnChainProposalCell
         if (indexPath.section == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"CosmosProposalCell") as! CosmosProposalCell
             var proposal: MintscanProposal!
             proposal = votingPeriods[indexPath.row]
-            cell.onBindProposal(proposal, toVoteList)
+            cell.onBindProposal(proposal, myVotes, toVoteList)
             cell.actionToggle = { request in
                 if (request && !self.toVoteList.contains(proposal.id!)) {
                     self.toVoteList.append(proposal.id!)
@@ -189,12 +195,13 @@ extension CosmosOnChainProposalsVC: UITableViewDelegate, UITableViewDataSource {
                     self.voteBtn.isEnabled = !self.toVoteList.isEmpty
                 })
             }
+            return cell
 
         } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"OnChainProposalCell") as! OnChainProposalCell
             cell.onBindProposal(etcPeriods[indexPath.row], toVoteList)
+            return cell
         }
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

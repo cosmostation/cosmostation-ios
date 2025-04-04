@@ -22,8 +22,6 @@ class ChainAvalanche: BaseChain  {
         
         supportEvm = true
         coinSymbol = "AVAX"
-        coinGeckoId = "avalanche-2"
-        coinLogo = "tokenAvax"
         evmRpcURL = "https://avalanche.drpc.org"
     }
     

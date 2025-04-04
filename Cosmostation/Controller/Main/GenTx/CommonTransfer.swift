@@ -26,6 +26,8 @@ class CommonTransfer: BaseVC {
     @IBOutlet weak var toChainTitle: UILabel!
     @IBOutlet weak var toChainImg: UIImageView!
     @IBOutlet weak var toChainLabel: UILabel!
+    @IBOutlet weak var ibcSendCardView: UIView!
+    @IBOutlet weak var ibcSendLabel: UILabel!
     
     @IBOutlet weak var toAddressCardView: FixCardView!
     @IBOutlet weak var toAddressTitle: UILabel!
@@ -185,7 +187,6 @@ class CommonTransfer: BaseVC {
         }
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
         feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
-        sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
     }
     
     func onInitIbcInfo() {
@@ -236,7 +237,7 @@ class CommonTransfer: BaseVC {
     func onInitToChain() {
         toChain = fromChain
         toChainImg.image = UIImage.init(named: toChain.logo1)
-        toChainLabel.text = toChain.name.uppercased()
+        toChainLabel.text = toChain.name
     }
     
     func onInitFee() {
@@ -247,20 +248,14 @@ class CommonTransfer: BaseVC {
             }
             selectedFeePosition = 1
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectImg.image =  UIImage.init(named: fromChain.coinLogo)
-            
             feeSelectLabel.text = fromChain.coinSymbol
-            feeDenomLabel.text = fromChain.coinSymbol
             
         } else if (txStyle == .SUI_STYLE) {
             feeSegments.removeAllSegments()
             feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
             selectedFeePosition = 0
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectImg.image =  UIImage.init(named: fromChain.coinLogo)
-            
             feeSelectLabel.text = fromChain.coinSymbol
-            feeDenomLabel.text = fromChain.coinSymbol
             
             suiFeeBudget = suiFetcher.baseFee(.SUI_SEND_COIN)
             
@@ -269,10 +264,7 @@ class CommonTransfer: BaseVC {
             feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
             selectedFeePosition = 0
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectImg.image =  UIImage.init(named: fromChain.coinLogo)
-            
             feeSelectLabel.text = fromChain.coinSymbol
-            feeDenomLabel.text = fromChain.coinSymbol
             
             btcInitFee()
             
@@ -317,6 +309,8 @@ class CommonTransfer: BaseVC {
     }
     
     func onInitView() {
+        sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
+        
         var symbol = ""
         if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
@@ -329,7 +323,7 @@ class CommonTransfer: BaseVC {
             }
             
         } else if (sendAssetType == .EVM_COIN) {
-            titleCoinImg.image = UIImage.init(named: fromChain.coinLogo)
+            titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = 18
             symbol = fromChain.coinSymbol
             availableAmount = evmFetcher.evmBalances.subtracting(EVM_BASE_FEE)
@@ -423,6 +417,8 @@ class CommonTransfer: BaseVC {
     
     @objc func onClickToChain() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        baseSheet.targetChain = fromChain
+        baseSheet.recipientChain = toChain
         baseSheet.cosmosChainList = recipientableChains
         baseSheet.sheetDelegate = self
         baseSheet.sheetType = .SelectCosmosRecipientChain
@@ -433,12 +429,35 @@ class CommonTransfer: BaseVC {
         if (chain.tag != toChain.tag) {
             toChain = chain
             toChainImg.image = UIImage.init(named: toChain.logo1)
-            toChainLabel.text = toChain.name.uppercased()
+            toChainLabel.text = toChain.name
             onUpdateToAddressView("")
+            sendBtn.isEnabled = false
             
             if (sendAssetType == .COSMOS_EVM_MAIN_COIN && fromChain.tag != toChain.tag) {
                 onUpdateTxStyle(.COSMOS_STYLE)
             }
+        }
+        
+        if fromChain.tag == toChain.tag {
+            ibcSendCardView.isHidden = true
+            sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
+            
+        } else {
+            ibcSendCardView.isHidden = false
+            
+            let fromChainName = fromChain.name ?? ""
+            let toChainName = toChain.name ?? ""
+            let fullText = "IBC Send from \(fromChainName) to \(toChainName) network"
+            let attributedString = NSMutableAttributedString(string: fullText)
+            let fullRange = (fullText as NSString).range(of: fullText)
+            let fromChainRange = (fullText as NSString).range(of: fromChainName)
+            let toChainRange = (fullText as NSString).range(of: toChainName)
+            attributedString.addAttributes([.font: UIFont.fontSize11Medium, .foregroundColor: UIColor.color03], range: fullRange)
+            attributedString.addAttributes([.font: UIFont.fontSize11Bold, .foregroundColor: UIColor.color02], range: fromChainRange)
+            attributedString.addAttributes([.font: UIFont.fontSize11Bold, .foregroundColor: UIColor.color02], range: toChainRange)
+            ibcSendLabel.attributedText = attributedString
+            
+            sendBtn.setTitle(NSLocalizedString("title_ibc_transfer", comment: ""), for: .normal)
         }
     }
     
@@ -517,7 +536,8 @@ class CommonTransfer: BaseVC {
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
             } else if (sendAssetType == .EVM_COIN) {
-                let msPrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
+                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
@@ -526,7 +546,8 @@ class CommonTransfer: BaseVC {
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                 
             } else if (sendAssetType == .COSMOS_EVM_MAIN_COIN) {
-                let msPrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
+                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
@@ -549,7 +570,8 @@ class CommonTransfer: BaseVC {
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                 
             } else if (sendAssetType == .BTC_COIN) {
-                let msPrice = BaseData.instance.getPrice(fromChain.coinGeckoId)     //
+                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)     //
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
@@ -645,26 +667,29 @@ class CommonTransfer: BaseVC {
         sendBtn.isEnabled = false
         errorCardView.isHidden = true
         if (txStyle == .WEB3_STYLE) {
-            let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let totalGasPrice = evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1
             let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
             let feeDpAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(18))
             let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
-            feeAmountLabel.attributedText = WDP.dpAmount(feeDpAmount.stringValue, feeAmountLabel!.font, 18)
+            WDP.dpCoin(msAsset, feeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .SUI_STYLE) {
-            let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
             let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
-            feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 9)
+            WDP.dpCoin(msAsset, suiFeeBudget, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .BTC_STYLE) {
-            let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeAmount = btcTxFee.multiplying(byPowerOf10: -8, withBehavior: getDivideHandler(8))
             let feeValue = feePrice.multiplying(by: feeAmount, withBehavior: handler6)
-            feeAmountLabel.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 8)
+            WDP.dpCoin(msAsset, btcTxFee, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             availableAmount = availableAmount.subtracting(btcTxFee)
             

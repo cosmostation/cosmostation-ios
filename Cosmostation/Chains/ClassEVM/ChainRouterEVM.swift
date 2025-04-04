@@ -29,8 +29,6 @@ class ChainRouterEVM: BaseChain {
         
         supportEvm = true
         coinSymbol = "ROUTE"
-        coinGeckoId = "router-protocol-2"
-        coinLogo = "tokenRoute"
         evmRpcURL = "https://sentry.evm.rpc.routerprotocol.com"
     }
 }
