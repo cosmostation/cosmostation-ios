@@ -164,16 +164,22 @@ class Portfolio2Cell: UITableViewCell {
             WDP.dpPriceChanged(msAsset.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
             
         } else if (chain.supportCosmos) {
-            if let stakeDenom = chain.stakeDenom,
-               let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+            if let denom = chain.getChainListParam()["main_asset_denom"].string ?? chain.getChainListParam()["staking_asset_denom"].string,
+               let msAsset = BaseData.instance.getAsset(chain.apiName, denom) {
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
                 WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
             }
             
         } else if (chain.supportEvm) {
-            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.coinSymbol) {
+            if let denom = chain.getChainListParam()["main_asset_denom"].string,
+               let msAsset = BaseData.instance.getAsset(chain.apiName, denom) {
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
                 WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+                
+            } else if let symbol = chain.getChainListParam()["main_asset_symbol"].string,
+               let geckoId = chain.getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.symbol == symbol }).first?.coinGeckoId {
+                WDP.dpPrice(geckoId, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(geckoId, priceChangeLabel, priceChangePercentLabel)
             }
             
         } else {
