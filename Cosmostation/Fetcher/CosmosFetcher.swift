@@ -661,8 +661,8 @@ extension CosmosFetcher {
         } else {
             let v1Url = getLcd() + "cosmos/gov/v1/proposals/" + String(id) + "/votes/" + address
             let v1beta1Url = getLcd() + "cosmos/gov/v1beta1/proposals/" + String(id) + "/votes/" + address
-            if let vote = try? await AF.request(v1Url, method: .get).serializingDecodable(JSON.self).value["vote"] {
-                return .init(vote)
+            if let value = try? await AF.request(v1Url, method: .get).serializingDecodable(JSON.self).value, value["vote"].exists() {
+                return .init(value["vote"])
                 
             } else if let vote = try? await AF.request(v1beta1Url, method: .get).serializingDecodable(JSON.self).value["vote"] {
                 return .init(vote)
