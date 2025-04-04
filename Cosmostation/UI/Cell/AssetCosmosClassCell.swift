@@ -159,8 +159,8 @@ class AssetCosmosClassCell: UITableViewCell {
             coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
             symbolLabel.text = msAsset.symbol?.uppercased()
             
-            WDP.dpPrice(OKT_GECKO_ID, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(OKT_GECKO_ID, priceChangeLabel, priceChangePercentLabel)
+            WDP.dpPrice(msAsset.coinGeckoId, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(msAsset.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
             if (BaseData.instance.getHideValue()) {
                 hidenValueLabel.isHidden = false
             } else {
