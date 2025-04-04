@@ -32,6 +32,9 @@ enum Ibc_Core_Channel_V1_ResponseResultType: SwiftProtobuf.Enum {
 
   /// The message was executed successfully
   case success // = 2
+
+  /// The message was executed unsuccessfully
+  case failure // = 3
   case UNRECOGNIZED(Int)
 
   init() {
@@ -43,6 +46,7 @@ enum Ibc_Core_Channel_V1_ResponseResultType: SwiftProtobuf.Enum {
     case 0: self = .unspecified
     case 1: self = .noop
     case 2: self = .success
+    case 3: self = .failure
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -52,6 +56,7 @@ enum Ibc_Core_Channel_V1_ResponseResultType: SwiftProtobuf.Enum {
     case .unspecified: return 0
     case .noop: return 1
     case .success: return 2
+    case .failure: return 3
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -66,6 +71,7 @@ extension Ibc_Core_Channel_V1_ResponseResultType: CaseIterable {
     .unspecified,
     .noop,
     .success,
+    .failure,
   ]
 }
 
@@ -572,6 +578,7 @@ extension Ibc_Core_Channel_V1_ResponseResultType: SwiftProtobuf._ProtoNameProvid
     0: .same(proto: "RESPONSE_RESULT_TYPE_UNSPECIFIED"),
     1: .same(proto: "RESPONSE_RESULT_TYPE_NOOP"),
     2: .same(proto: "RESPONSE_RESULT_TYPE_SUCCESS"),
+    3: .same(proto: "RESPONSE_RESULT_TYPE_FAILURE"),
   ]
 }
 

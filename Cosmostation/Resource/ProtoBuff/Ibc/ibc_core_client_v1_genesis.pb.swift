@@ -44,7 +44,8 @@ struct Ibc_Core_Client_V1_GenesisState {
   /// Clears the value of `params`. Subsequent reads from it will return its default value.
   mutating func clearParams() {self._params = nil}
 
-  /// create localhost on initialization
+  /// Deprecated: create_localhost has been deprecated.
+  /// The localhost client is automatically created at genesis.
   var createLocalhost: Bool = false
 
   /// the sequence for the next generated client identifier
@@ -57,8 +58,8 @@ struct Ibc_Core_Client_V1_GenesisState {
   fileprivate var _params: Ibc_Core_Client_V1_Params? = nil
 }
 
-/// GenesisMetadata defines the genesis type for metadata that clients may return
-/// with ExportMetadata
+/// GenesisMetadata defines the genesis type for metadata that will be used
+/// to export all client store keys that are not client or consensus states.
 struct Ibc_Core_Client_V1_GenesisMetadata {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for

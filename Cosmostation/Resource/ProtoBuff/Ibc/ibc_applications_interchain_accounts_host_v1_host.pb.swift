@@ -38,8 +38,29 @@ struct Ibc_Applications_InterchainAccounts_Host_V1_Params {
   init() {}
 }
 
+/// QueryRequest defines the parameters for a particular query request
+/// by an interchain account.
+struct Ibc_Applications_InterchainAccounts_Host_V1_QueryRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// path defines the path of the query request as defined by ADR-021.
+  /// https://github.com/cosmos/cosmos-sdk/blob/main/docs/architecture/adr-021-protobuf-query-encoding.md#custom-query-registration-and-routing
+  var path: String = String()
+
+  /// data defines the payload of the query request as defined by ADR-021.
+  /// https://github.com/cosmos/cosmos-sdk/blob/main/docs/architecture/adr-021-protobuf-query-encoding.md#custom-query-registration-and-routing
+  var data: Data = Data()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Ibc_Applications_InterchainAccounts_Host_V1_Params: @unchecked Sendable {}
+extension Ibc_Applications_InterchainAccounts_Host_V1_QueryRequest: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -79,6 +100,44 @@ extension Ibc_Applications_InterchainAccounts_Host_V1_Params: SwiftProtobuf.Mess
   static func ==(lhs: Ibc_Applications_InterchainAccounts_Host_V1_Params, rhs: Ibc_Applications_InterchainAccounts_Host_V1_Params) -> Bool {
     if lhs.hostEnabled != rhs.hostEnabled {return false}
     if lhs.allowMessages != rhs.allowMessages {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ibc_Applications_InterchainAccounts_Host_V1_QueryRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "path"),
+    2: .same(proto: "data"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.path) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.data) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.path.isEmpty {
+      try visitor.visitSingularStringField(value: self.path, fieldNumber: 1)
+    }
+    if !self.data.isEmpty {
+      try visitor.visitSingularBytesField(value: self.data, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ibc_Applications_InterchainAccounts_Host_V1_QueryRequest, rhs: Ibc_Applications_InterchainAccounts_Host_V1_QueryRequest) -> Bool {
+    if lhs.path != rhs.path {return false}
+    if lhs.data != rhs.data {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

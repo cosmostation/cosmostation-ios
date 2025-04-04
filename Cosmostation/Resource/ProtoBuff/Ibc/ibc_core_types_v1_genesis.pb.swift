@@ -56,6 +56,26 @@ struct Ibc_Core_Types_V1_GenesisState {
   /// Clears the value of `channelGenesis`. Subsequent reads from it will return its default value.
   mutating func clearChannelGenesis() {_uniqueStorage()._channelGenesis = nil}
 
+  /// ICS002 - Clients/v2 genesis state
+  var clientV2Genesis: Ibc_Core_Client_V2_GenesisState {
+    get {return _storage._clientV2Genesis ?? Ibc_Core_Client_V2_GenesisState()}
+    set {_uniqueStorage()._clientV2Genesis = newValue}
+  }
+  /// Returns true if `clientV2Genesis` has been explicitly set.
+  var hasClientV2Genesis: Bool {return _storage._clientV2Genesis != nil}
+  /// Clears the value of `clientV2Genesis`. Subsequent reads from it will return its default value.
+  mutating func clearClientV2Genesis() {_uniqueStorage()._clientV2Genesis = nil}
+
+  /// ICS004 - Channel/v2 genesis state
+  var channelV2Genesis: Ibc_Core_Channel_V2_GenesisState {
+    get {return _storage._channelV2Genesis ?? Ibc_Core_Channel_V2_GenesisState()}
+    set {_uniqueStorage()._channelV2Genesis = newValue}
+  }
+  /// Returns true if `channelV2Genesis` has been explicitly set.
+  var hasChannelV2Genesis: Bool {return _storage._channelV2Genesis != nil}
+  /// Clears the value of `channelV2Genesis`. Subsequent reads from it will return its default value.
+  mutating func clearChannelV2Genesis() {_uniqueStorage()._channelV2Genesis = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -77,12 +97,16 @@ extension Ibc_Core_Types_V1_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._
     1: .standard(proto: "client_genesis"),
     2: .standard(proto: "connection_genesis"),
     3: .standard(proto: "channel_genesis"),
+    4: .standard(proto: "client_v2_genesis"),
+    5: .standard(proto: "channel_v2_genesis"),
   ]
 
   fileprivate class _StorageClass {
     var _clientGenesis: Ibc_Core_Client_V1_GenesisState? = nil
     var _connectionGenesis: Ibc_Core_Connection_V1_GenesisState? = nil
     var _channelGenesis: Ibc_Core_Channel_V1_GenesisState? = nil
+    var _clientV2Genesis: Ibc_Core_Client_V2_GenesisState? = nil
+    var _channelV2Genesis: Ibc_Core_Channel_V2_GenesisState? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -92,6 +116,8 @@ extension Ibc_Core_Types_V1_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._
       _clientGenesis = source._clientGenesis
       _connectionGenesis = source._connectionGenesis
       _channelGenesis = source._channelGenesis
+      _clientV2Genesis = source._clientV2Genesis
+      _channelV2Genesis = source._channelV2Genesis
     }
   }
 
@@ -113,6 +139,8 @@ extension Ibc_Core_Types_V1_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._
         case 1: try { try decoder.decodeSingularMessageField(value: &_storage._clientGenesis) }()
         case 2: try { try decoder.decodeSingularMessageField(value: &_storage._connectionGenesis) }()
         case 3: try { try decoder.decodeSingularMessageField(value: &_storage._channelGenesis) }()
+        case 4: try { try decoder.decodeSingularMessageField(value: &_storage._clientV2Genesis) }()
+        case 5: try { try decoder.decodeSingularMessageField(value: &_storage._channelV2Genesis) }()
         default: break
         }
       }
@@ -134,6 +162,12 @@ extension Ibc_Core_Types_V1_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._
       try { if let v = _storage._channelGenesis {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
       } }()
+      try { if let v = _storage._clientV2Genesis {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      } }()
+      try { if let v = _storage._channelV2Genesis {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      } }()
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -146,6 +180,8 @@ extension Ibc_Core_Types_V1_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._
         if _storage._clientGenesis != rhs_storage._clientGenesis {return false}
         if _storage._connectionGenesis != rhs_storage._connectionGenesis {return false}
         if _storage._channelGenesis != rhs_storage._channelGenesis {return false}
+        if _storage._clientV2Genesis != rhs_storage._clientV2Genesis {return false}
+        if _storage._channelV2Genesis != rhs_storage._channelV2Genesis {return false}
         return true
       }
       if !storagesAreEqual {return false}

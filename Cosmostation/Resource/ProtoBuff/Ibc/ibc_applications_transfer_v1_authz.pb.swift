@@ -38,6 +38,10 @@ struct Ibc_Applications_Transfer_V1_Allocation {
   /// allow list of receivers, an empty allow list permits any receiver address
   var allowList: [String] = []
 
+  /// allow list of memo strings, an empty list prohibits all memo strings;
+  /// a list only with "*" permits any memo string
+  var allowedPacketData: [String] = []
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -74,6 +78,7 @@ extension Ibc_Applications_Transfer_V1_Allocation: SwiftProtobuf.Message, SwiftP
     2: .standard(proto: "source_channel"),
     3: .standard(proto: "spend_limit"),
     4: .standard(proto: "allow_list"),
+    5: .standard(proto: "allowed_packet_data"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -86,6 +91,7 @@ extension Ibc_Applications_Transfer_V1_Allocation: SwiftProtobuf.Message, SwiftP
       case 2: try { try decoder.decodeSingularStringField(value: &self.sourceChannel) }()
       case 3: try { try decoder.decodeRepeatedMessageField(value: &self.spendLimit) }()
       case 4: try { try decoder.decodeRepeatedStringField(value: &self.allowList) }()
+      case 5: try { try decoder.decodeRepeatedStringField(value: &self.allowedPacketData) }()
       default: break
       }
     }
@@ -104,6 +110,9 @@ extension Ibc_Applications_Transfer_V1_Allocation: SwiftProtobuf.Message, SwiftP
     if !self.allowList.isEmpty {
       try visitor.visitRepeatedStringField(value: self.allowList, fieldNumber: 4)
     }
+    if !self.allowedPacketData.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.allowedPacketData, fieldNumber: 5)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -112,6 +121,7 @@ extension Ibc_Applications_Transfer_V1_Allocation: SwiftProtobuf.Message, SwiftP
     if lhs.sourceChannel != rhs.sourceChannel {return false}
     if lhs.spendLimit != rhs.spendLimit {return false}
     if lhs.allowList != rhs.allowList {return false}
+    if lhs.allowedPacketData != rhs.allowedPacketData {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

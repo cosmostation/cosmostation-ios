@@ -21,7 +21,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 }
 
 /// State defines if a channel is in one of the following states:
-/// CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.
+/// CLOSED, INIT, TRYOPEN, OPEN, or UNINITIALIZED.
 enum Ibc_Core_Channel_V1_State: SwiftProtobuf.Enum {
   typealias RawValue = Int
 
@@ -308,7 +308,7 @@ struct Ibc_Core_Channel_V1_PacketState {
   init() {}
 }
 
-/// PacketId is an identifer for a unique Packet
+/// PacketId is an identifier for a unique Packet
 /// Source chains refer to packets by source port/channel
 /// Destination chains refer to packets by destination port/channel
 struct Ibc_Core_Channel_V1_PacketId {
@@ -392,14 +392,14 @@ struct Ibc_Core_Channel_V1_Acknowledgement {
 }
 
 /// Timeout defines an execution deadline structure for 04-channel handlers.
-/// This includes packet lifecycle handlers as well as the upgrade handshake handlers.
+/// This includes packet lifecycle handlers.
 /// A valid Timeout contains either one or both of a timestamp and block height (sequence).
 struct Ibc_Core_Channel_V1_Timeout {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// block height after which the packet or upgrade times out
+  /// block height after which the packet times out
   var height: Ibc_Core_Client_V1_Height {
     get {return _height ?? Ibc_Core_Client_V1_Height()}
     set {_height = newValue}
@@ -409,7 +409,7 @@ struct Ibc_Core_Channel_V1_Timeout {
   /// Clears the value of `height`. Subsequent reads from it will return its default value.
   mutating func clearHeight() {self._height = nil}
 
-  /// block timestamp (in nanoseconds) after which the packet or upgrade times out
+  /// block timestamp (in nanoseconds) after which the packet times out
   var timestamp: UInt64 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
