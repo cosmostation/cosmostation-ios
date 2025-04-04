@@ -99,7 +99,7 @@ class BaseChain {
             }
         }
         
-        if (supportCosmos && supportStaking) {
+        if (supportCosmos && isStakeEnabled()) {
             bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, validatorPrefix)
         }
     }
@@ -251,7 +251,7 @@ class BaseChain {
             } else if let chainZenrock = self as? ChainZenrock {
                 _ = await chainZenrock.getZenrockFetcher()?.fetchCosmosValidators()
 
-            } else if (supportCosmos == true && supportStaking == true) {
+            } else if (supportCosmos == true && isStakeEnabled() == true) {
                 _ = await getCosmosfetcher()?.fetchCosmosValidators()
             }
             
