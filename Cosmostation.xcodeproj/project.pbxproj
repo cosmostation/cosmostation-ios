@@ -1783,6 +1783,8 @@
 		79AB340E2D6EDC1100F1426C /* BtcStakingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AB340C2D6EDC1100F1426C /* BtcStakingCell.xib */; };
 		79B4225C2D9E759D0022A4F9 /* NeutronCompounding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B4225B2D9E759D0022A4F9 /* NeutronCompounding.xib */; };
 		79B4225D2D9E759D0022A4F9 /* NeutronCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B4225A2D9E759D0022A4F9 /* NeutronCompounding.swift */; };
+		79B422642DA37CC90022A4F9 /* NeutronStakingInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B422632DA37CC90022A4F9 /* NeutronStakingInfoVC.xib */; };
+		79B422652DA37CC90022A4F9 /* NeutronStakingInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B422622DA37CC90022A4F9 /* NeutronStakingInfoVC.swift */; };
 		79B7F35B2D8165D300AA755B /* ChainKopi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35A2D8165D300AA755B /* ChainKopi.swift */; };
 		79B7F35D2D8175C300AA755B /* ChainPaloma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35C2D8175C300AA755B /* ChainPaloma.swift */; };
 		79B7F35F2D81769C00AA755B /* ChainInt3face.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35E2D81769C00AA755B /* ChainInt3face.swift */; };
@@ -3315,6 +3317,8 @@
 		79AB340C2D6EDC1100F1426C /* BtcStakingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BtcStakingCell.xib; sourceTree = "<group>"; };
 		79B4225A2D9E759D0022A4F9 /* NeutronCompounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronCompounding.swift; sourceTree = "<group>"; };
 		79B4225B2D9E759D0022A4F9 /* NeutronCompounding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronCompounding.xib; sourceTree = "<group>"; };
+		79B422622DA37CC90022A4F9 /* NeutronStakingInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronStakingInfoVC.swift; sourceTree = "<group>"; };
+		79B422632DA37CC90022A4F9 /* NeutronStakingInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronStakingInfoVC.xib; sourceTree = "<group>"; };
 		79B7F35A2D8165D300AA755B /* ChainKopi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKopi.swift; sourceTree = "<group>"; };
 		79B7F35C2D8175C300AA755B /* ChainPaloma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPaloma.swift; sourceTree = "<group>"; };
 		79B7F35E2D81769C00AA755B /* ChainInt3face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainInt3face.swift; sourceTree = "<group>"; };
@@ -4145,6 +4149,8 @@
 				E15F2CFD2ABF0E6A00BAE105 /* CosmosStakingInfoVC.xib */,
 				7909701F2D7E895500DEB959 /* BabylonStakingInfoVC.swift */,
 				790970202D7E895500DEB959 /* BabylonStakingInfoVC.xib */,
+				79B422622DA37CC90022A4F9 /* NeutronStakingInfoVC.swift */,
+				79B422632DA37CC90022A4F9 /* NeutronStakingInfoVC.xib */,
 				04A68C2D2AC13A560041FA13 /* CosmosProposalsVC.swift */,
 				04A68C2E2AC13A560041FA13 /* CosmosProposalsVC.xib */,
 				792613D32CDB362300FAF47D /* CosmosOnChainProposalsVC.swift */,
@@ -6031,6 +6037,7 @@
 				E159805C2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
 				04B789F32ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */,
 				E1044EAC2BD798BC00DA05C2 /* NftTransfer.xib in Resources */,
+				79B422642DA37CC90022A4F9 /* NeutronStakingInfoVC.xib in Resources */,
 				E131F4502AEEAAB800E760A0 /* CreateNameSheet.xib in Resources */,
 				E1B44B212ADA41CD0073C88A /* NeutronSingleVoteCell.xib in Resources */,
 				0443B89828589B570027A6B9 /* Color.xcassets in Resources */,
@@ -7289,6 +7296,7 @@
 				047843232AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift in Sources */,
 				799261692D77EE66007E9911 /* babylon_btcstaking_v1_query.grpc.swift in Sources */,
 				792613B22CD4B82800FAF47D /* initia_reward_v1_types.pb.swift in Sources */,
+				79B422652DA37CC90022A4F9 /* NeutronStakingInfoVC.swift in Sources */,
 				E131F4482AEE9BC000E760A0 /* QrImportCheckKeySheet.swift in Sources */,
 				0479F9752C68926B00CE1D29 /* SuiStakingInfoVC.swift in Sources */,
 				E16D9B1522489B030019B7BB /* IntroVC.swift in Sources */,
