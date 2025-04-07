@@ -1683,6 +1683,7 @@
 		7948D6732D91035B005208B2 /* ChainZkCloud_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948D6722D91035B005208B2 /* ChainZkCloud_T.swift */; };
 		7948D6752D911D98005208B2 /* ChainXrplEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948D6742D911D98005208B2 /* ChainXrplEVM.swift */; };
 		7948D6772D911E3F005208B2 /* ChainXrplEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948D6762D911E3F005208B2 /* ChainXrplEVM_T.swift */; };
+		7948D6872D927F4F005208B2 /* ChainManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948D6862D927F4F005208B2 /* ChainManifest.swift */; };
 		79514DB42CB527AA008D7ED8 /* ChainMantra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79514DB32CB527AA008D7ED8 /* ChainMantra.swift */; };
 		795C0DC22C8E853C006D35A4 /* bitcoin.js in Resources */ = {isa = PBXBuildFile; fileRef = 795C0DC12C8E853C006D35A4 /* bitcoin.js */; };
 		795C0DC42C8E8547006D35A4 /* BtcJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795C0DC32C8E8547006D35A4 /* BtcJS.swift */; };
@@ -3215,6 +3216,7 @@
 		7948D6722D91035B005208B2 /* ChainZkCloud_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainZkCloud_T.swift; sourceTree = "<group>"; };
 		7948D6742D911D98005208B2 /* ChainXrplEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainXrplEVM.swift; sourceTree = "<group>"; };
 		7948D6762D911E3F005208B2 /* ChainXrplEVM_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainXrplEVM_T.swift; sourceTree = "<group>"; };
+		7948D6862D927F4F005208B2 /* ChainManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainManifest.swift; sourceTree = "<group>"; };
 		79514DB32CB527AA008D7ED8 /* ChainMantra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantra.swift; sourceTree = "<group>"; };
 		795C0DC12C8E853C006D35A4 /* bitcoin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bitcoin.js; sourceTree = "<group>"; };
 		795C0DC32C8E8547006D35A4 /* BtcJS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BtcJS.swift; sourceTree = "<group>"; };
@@ -3793,6 +3795,7 @@
 				7948D66E2D91016B005208B2 /* ChainLombard.swift */,
 				045032B82C1EFCE600235F6A /* ChainLum118.swift */,
 				045032BB2C1EFCE700235F6A /* ChainLum880.swift */,
+				7948D6862D927F4F005208B2 /* ChainManifest.swift */,
 				79514DB32CB527AA008D7ED8 /* ChainMantra.swift */,
 				045032BE2C1EFCE700235F6A /* ChainMars.swift */,
 				045032B92C1EFCE600235F6A /* ChainMedibloc.swift */,
@@ -7438,6 +7441,7 @@
 				0450323D2C1EEA9600235F6A /* ChainKavaEVM.swift in Sources */,
 				045032D22C1EFE3F00235F6A /* ChainNibiru.swift in Sources */,
 				047F693A2BE5FBCE00C3BC34 /* Portfolio2Cell.swift in Sources */,
+				7948D6872D927F4F005208B2 /* ChainManifest.swift in Sources */,
 				04B7893B2ACAC9B100E9BE88 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
 				E1E0DBC62A9B0FE3006DA6BB /* HistoryCell.swift in Sources */,
 				04C817562BA98D75006B800A /* cosmos_reflection_v1_reflection.grpc.swift in Sources */,
