@@ -22,7 +22,7 @@ class ChainLombard_T: ChainLombard  {
         
         
         cosmosEndPointType = .UseLCD
-        stakeDenom = "ulom"
+        stakeDenom = "ustake"
         bechAccountPrefix = "lom"
         validatorPrefix = "lomvaloper"
         grpcHost = "grpc.testnet.lombard.cosmostation.io"
