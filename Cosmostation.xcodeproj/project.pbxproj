@@ -1900,6 +1900,8 @@
 		E11069BF2AA4C57600EB02CA /* cosmwasm_wasm_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11069B02AA4C57600EB02CA /* cosmwasm_wasm_v1_query.grpc.swift */; };
 		E11069C02AA4C57600EB02CA /* cosmwasm_wasm_v1_ibc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11069B12AA4C57600EB02CA /* cosmwasm_wasm_v1_ibc.pb.swift */; };
 		E11069C12AA4C57600EB02CA /* cosmwasm_wasm_v1_ibc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11069B12AA4C57600EB02CA /* cosmwasm_wasm_v1_ibc.pb.swift */; };
+		E111DA3B2DA3A2A100D7E326 /* Eureka_ABI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E111DA3A2DA3A29F00D7E326 /* Eureka_ABI.swift */; };
+		E111DA3C2DA3A2A100D7E326 /* Eureka_ABI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E111DA3A2DA3A29F00D7E326 /* Eureka_ABI.swift */; };
 		E11EAE0F2AAD8786003BFC7F /* SettingBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EAE0D2AAD8786003BFC7F /* SettingBaseCell.swift */; };
 		E11EAE102AAD8786003BFC7F /* SettingBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11EAE0D2AAD8786003BFC7F /* SettingBaseCell.swift */; };
 		E11EAE112AAD8786003BFC7F /* SettingBaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E11EAE0E2AAD8786003BFC7F /* SettingBaseCell.xib */; };
@@ -3462,6 +3464,7 @@
 		E11069AF2AA4C57600EB02CA /* cosmwasm_wasm_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_genesis.pb.swift; sourceTree = "<group>"; };
 		E11069B02AA4C57600EB02CA /* cosmwasm_wasm_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_query.grpc.swift; sourceTree = "<group>"; };
 		E11069B12AA4C57600EB02CA /* cosmwasm_wasm_v1_ibc.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_ibc.pb.swift; sourceTree = "<group>"; };
+		E111DA3A2DA3A29F00D7E326 /* Eureka_ABI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eureka_ABI.swift; sourceTree = "<group>"; };
 		E11EAE0D2AAD8786003BFC7F /* SettingBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingBaseCell.swift; sourceTree = "<group>"; };
 		E11EAE0E2AAD8786003BFC7F /* SettingBaseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingBaseCell.xib; sourceTree = "<group>"; };
 		E11EAE132AAD879A003BFC7F /* SettingSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSwitchCell.swift; sourceTree = "<group>"; };
@@ -5485,6 +5488,7 @@
 				181099DE28AE92FC00C178B5 /* PushUtils.swift */,
 				18744702293094CB00849EE4 /* BundleExtension.swift */,
 				E1F257D02BF72CE6008F4D21 /* Bera_ABI.swift */,
+				E111DA3A2DA3A29F00D7E326 /* Eureka_ABI.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -7117,6 +7121,7 @@
 				04C816652BA98D74006B800A /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
 				047843162AC9918700462F1C /* ethermint_feemarket_v1_query.grpc.swift in Sources */,
 				040AC1852C9BDC5F00427AFD /* ChainStoryEVM_T.swift in Sources */,
+				E111DA3C2DA3A2A100D7E326 /* Eureka_ABI.swift in Sources */,
 				045032CC2C1EFCE700235F6A /* ChainMars.swift in Sources */,
 				04A68C242ABDA3350041FA13 /* SelectSwapAssetCell.swift in Sources */,
 				E15980612A722CFF0032892B /* CardView.swift in Sources */,
@@ -7207,6 +7212,7 @@
 				E162003B2AF242B70008F397 /* AddressBookSheet.swift in Sources */,
 				04C817042BA98D75006B800A /* cosmos_circuit_v1_query.pb.swift in Sources */,
 				E11069BA2AA4C57600EB02CA /* cosmwasm_wasm_v1_types.pb.swift in Sources */,
+				E111DA3B2DA3A2A100D7E326 /* Eureka_ABI.swift in Sources */,
 				04C817A22BA98D75006B800A /* cosmos_feegrant_v1beta1_genesis.pb.swift in Sources */,
 				E122DC662A8DBD28006D1E7B /* BaseHeader.swift in Sources */,
 				0400EEE32ADBE1D3007BA97F /* kava_pricefeed_v1beta1_genesis.pb.swift in Sources */,
