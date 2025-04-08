@@ -21,7 +21,7 @@ class ChainLombard: BaseChain  {
         
         
         cosmosEndPointType = .UseGRPC
-        stakeDenom = "ulom"
+        stakeDenom = "ustake"
         bechAccountPrefix = "lom"
         validatorPrefix = "lomvaloper"
         grpcHost = ""
