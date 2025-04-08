@@ -24,6 +24,7 @@ public class MintscanToken: Codable {
     var image: String?
     var coinGeckoId: String?
     var wallet_preload: Bool?
+    var ibc_info: MintscanAssetIbcInfo?
     var amount: String?
     
     func setAmount(_ rawAmount: String) {

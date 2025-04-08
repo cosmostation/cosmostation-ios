@@ -131,6 +131,53 @@ public class WUtils {
         return attributedString1
     }
     
+    
+    static func checkIBCrecipientableChains(_ fromChain: BaseChain, _ toSendDenom: String, _ sendAssetType: SendAssetType!) -> [BaseChain] {
+        var result = [BaseChain]()
+        result.append(fromChain)
+        
+        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false })
+        BaseData.instance.mintscanAssets?.forEach({ msAsset in
+            if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN || sendAssetType == .GNO_COIN) {
+                if (msAsset.chain == fromChain.apiName && msAsset.denom?.lowercased() == toSendDenom.lowercased()) {
+                    //add backward path
+                    if let sendable = allIbcChains.filter({ $0.apiName == msAsset.beforeChain(fromChain.apiName) }).first {
+                        if !result.contains(where: { $0.apiName == sendable.apiName }) {
+                            result.append(sendable)
+                        }
+                    }
+                    
+                } else if (msAsset.getjustBeforeChain() == fromChain.apiName && msAsset.getcounterPartyDenom() == toSendDenom.lowercased()) {
+                    //add forward path
+                    if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
+                        if !result.contains(where: { $0.apiName == sendable.apiName }) {
+                            result.append(sendable)
+                        }
+                    }
+                }
+                
+            } else if (sendAssetType == .COSMOS_WASM || sendAssetType == .GNO_GRC20) {
+                //CW20 only support forward IBC path
+                if (msAsset.ibc_info?.counterparty?.chain == fromChain.apiName && msAsset.getcounterPartyDenom() == toSendDenom.lowercased()) {
+                    if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
+                        if !result.contains(where: { $0.apiName == sendable.apiName }) {
+                            result.append(sendable)
+                        }
+                    }
+                }
+            }
+        })
+        
+        result.sort {
+            if ($0.name == fromChain.name) { return true }
+            if ($1.name == fromChain.name) { return false }
+            if ($0.name == "Cosmos") { return true }
+            if ($1.name == "Cosmos") { return false }
+            return false
+        }
+        return result
+    }
+    
     static func getMintscanPath(_ fromChain: BaseChain, _ toChain: BaseChain, _ denom: String) -> MintscanPath? {
         let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom?.lowercased() == denom.lowercased() }).first
 //        print("msAsset ", msAsset)
@@ -145,9 +192,9 @@ public class WUtils {
                     asset.beforeChain(fromChain.apiName) == toChain.apiName &&
                     asset.denom?.lowercased() == denom.lowercased()) {
                     //check backward path
-//                    guard let channel = asset.ibc_info?.client?.channel, let port = asset.ibc_info?.client?.port else { return }
-//                    result = MintscanPath.init(channel, port)
-                    result = MintscanPath.init(asset.ibc_info?.client)
+                    guard let channel = asset.ibc_info?.client?.channel, let port = asset.ibc_info?.client?.port else { return }
+                    result = MintscanPath.init(channel, port)
+//                    result = MintscanPath.init(asset.ibc_info?.client)
                     return
                 }
                 if (asset.chain == toChain.apiName &&
@@ -155,9 +202,9 @@ public class WUtils {
                     asset.ibc_info?.counterparty?.getDenom?.lowercased() == denom.lowercased()) {
                     //check forword path
 //                    print("asset ", asset)
-//                    guard let channel = asset.ibc_info?.counterparty?.channel, let port = asset.ibc_info?.counterparty?.port else { return }
-//                    result = MintscanPath.init(channel, port)
-                    result = MintscanPath.init(asset.ibc_info?.counterparty)
+                    guard let channel = asset.ibc_info?.counterparty?.channel, let port = asset.ibc_info?.counterparty?.port else { return }
+                    result = MintscanPath.init(channel, port)
+//                    result = MintscanPath.init(asset.ibc_info?.counterparty)
                     return
                 }
 
@@ -165,9 +212,9 @@ public class WUtils {
                 if (asset.chain == toChain.apiName &&
                     asset.beforeChain(toChain.apiName) == fromChain.apiName &&
                     asset.ibc_info?.counterparty?.getDenom?.lowercased() == msToken?.address!.lowercased()) {
-//                    guard let channel = asset.ibc_info?.counterparty?.channel, let port = asset.ibc_info?.counterparty?.port else { return }
-//                    result = MintscanPath.init(channel, port)
-                    result = MintscanPath.init(asset.ibc_info?.counterparty)
+                    guard let channel = asset.ibc_info?.counterparty?.channel, let port = asset.ibc_info?.counterparty?.port else { return }
+                    result = MintscanPath.init(channel, port)
+//                    result = MintscanPath.init(asset.ibc_info?.counterparty)
                     return
                 }
             }

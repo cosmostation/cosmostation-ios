@@ -12,14 +12,14 @@ public class MintscanPath {
     var channel: String?
     var port: String?
     
-    // FOR IBC V2
-    var source_client: String?
-    var source_port: String?
-    var destination_port: String?
-    var version: String?
-    var encoding: String?
-    var ICS20ContractAddress: String?
-    var BeaconProxyAddress: String?
+//    // FOR IBC V2
+//    var source_client: String?
+//    var source_port: String?
+//    var destination_port: String?
+//    var version: String?
+//    var encoding: String?
+//    var ICS20ContractAddress: String?
+//    var BeaconProxyAddress: String?
     
     init(_ channel: String?, _ port: String?) {
         self.channel = channel
@@ -27,25 +27,25 @@ public class MintscanPath {
     }
     
     
-    //init with backward
-    init(_ client: MintscanAssetClient?) {
-        self.channel = client?.channel
-        self.port = client?.port
-    }
-    
-    //init with forward
-    init(_ counterParty: MintscanAssetCounterParty?) {
-        self.channel = counterParty?.channel
-        self.port = counterParty?.port
-        
-        self.source_client = counterParty?.source_client
-        self.source_port = counterParty?.source_port
-        self.destination_port = counterParty?.destination_port
-        self.version = counterParty?.version
-        self.encoding = counterParty?.encoding
-        self.ICS20ContractAddress = counterParty?.ICS20ContractAddress
-        self.BeaconProxyAddress = counterParty?.BeaconProxyAddress
-    }
+//    //init with backward
+//    init(_ client: MintscanAssetClient?) {
+//        self.channel = client?.channel
+//        self.port = client?.port
+//    }
+//    
+//    //init with forward
+//    init(_ counterParty: MintscanAssetCounterParty?) {
+//        self.channel = counterParty?.channel
+//        self.port = counterParty?.port
+//        
+//        self.source_client = counterParty?.source_client
+//        self.source_port = counterParty?.source_port
+//        self.destination_port = counterParty?.destination_port
+//        self.version = counterParty?.version
+//        self.encoding = counterParty?.encoding
+//        self.ICS20ContractAddress = counterParty?.ICS20ContractAddress
+//        self.BeaconProxyAddress = counterParty?.BeaconProxyAddress
+//    }
     
     func getIBCContract() -> String {
         return self.port!.replacingOccurrences(of: "wasm.", with: "")
