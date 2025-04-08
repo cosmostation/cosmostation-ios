@@ -61,10 +61,13 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
         }
     }
     
+    //TODO check fetch ending
     func onFetchMsData() {
         BaseNetWork().fetchChainParams()
-        BaseNetWork().fetchPrices()
+        BaseNetWork().fetchCw20Tokens()
+        BaseNetWork().fetchErc20Tokens()
         BaseNetWork().fetchAssets()
+        BaseNetWork().fetchPrices()
     }
     
     func onStartInit() {

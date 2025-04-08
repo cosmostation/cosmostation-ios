@@ -52,7 +52,7 @@ class GnoFetcher {
                             await self.fetchGrc20Balance(grc20)
                         }
                     } else {
-                        if (userDisplayGrc20token?.contains(grc20.contract!) == true) {
+                        if (userDisplayGrc20token?.contains(grc20.address!) == true) {
                             await self.fetchGrc20Balance(grc20)
                         }
                     }
@@ -93,7 +93,7 @@ extension GnoFetcher {
     
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if chain.isSupportGrc20() {
-            if let tokenInfo = mintscanGrc20Tokens.filter({ $0.contract == address }).first {
+            if let tokenInfo = mintscanGrc20Tokens.filter({ $0.address == address }).first {
                 let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
                 if msPrice != 0 {
                     return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
@@ -244,7 +244,7 @@ extension GnoFetcher {
     }
     
     func fetchGrc20Balance(_ tokenInfo: MintscanToken) async {
-        let tokenPath = tokenInfo.contract!
+        let tokenPath = tokenInfo.address!
         let tokenBalancePath = "\(tokenPath).BalanceOf(\"\(chain.bechAddress!)\")"
         
         let param: Parameters = ["method": "abci_query", "params": ["vm/qeval", tokenBalancePath.data(using: .utf8)!.base64EncodedString(),"0",false], "id" : 1, "jsonrpc" : "2.0"]

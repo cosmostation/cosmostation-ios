@@ -197,7 +197,6 @@ class CommonTransfer: BaseVC {
     func onInitIbcInfo() {
         recipientableChains.append(fromChain)
         // check IBC support case for recipient chain
-//        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false && $0.supportCosmos })
         let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false })
         BaseData.instance.mintscanAssets?.forEach({ msAsset in
             if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN || sendAssetType == .GNO_COIN) {
@@ -227,7 +226,12 @@ class CommonTransfer: BaseVC {
                         }
                     }
                 }
+                
+            } else if (sendAssetType == .EVM_ERC20) {
+                
             }
+            
+            
         })
         recipientableChains.sort {
             if ($0.name == fromChain.name) { return true }
@@ -990,7 +994,7 @@ extension CommonTransfer {
             var toAddress: EthereumAddress!
             
             if (sendAssetType == .EVM_ERC20) {
-                toAddress = EthereumAddress.init(toSendMsToken.contract!)
+                toAddress = EthereumAddress.init(toSendMsToken.address!)
                 let erc20token = ERC20(web3: web3, provider: web3.provider, address: toAddress!)
                 let writeOperation = try await erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
                 if (evmTxType == .eip1559) {
@@ -1145,7 +1149,7 @@ extension CommonTransfer {
             }
             
             guard let sig = Signer.gnoSignature(fromChain,
-                                                [.init(type: "/vm.m_call", caller: fromChain.bechAddress!, send: "", pkg_path: toSendMsToken.contract!, func: "Transfer", args: [toAddress, toAmount.stringValue])],
+                                                [.init(type: "/vm.m_call", caller: fromChain.bechAddress!, send: "", pkg_path: toSendMsToken.address!, func: "Transfer", args: [toAddress, toAmount.stringValue])],
                                                 txMemo,
                                                 .init(gas_wanted: String(fee.gasWanted), gas_fee: fee.gasFee)) else { return }
             do {
@@ -1418,7 +1422,7 @@ extension CommonTransfer {
                 $0.caller = fromChain.bechAddress!
                 $0.func = "Transfer"
                 $0.send = ""
-                $0.pkgPath = toSendMsToken.contract!
+                $0.pkgPath = toSendMsToken.address!
             }
             
             return Signer.genGnoSendMsg(gnoSendMsg)
@@ -1494,7 +1498,7 @@ extension CommonTransfer {
         let msgBase64 = try! msg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let wasmMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
             $0.sender = fromChain.bechAddress!
-            $0.contract = toSendMsToken.contract!
+            $0.contract = toSendMsToken.address!
             $0.msg = Data(base64Encoded: msgBase64)!
         }
         return Signer.genWasmMsg([wasmMsg])
@@ -1629,7 +1633,7 @@ extension CommonTransfer {
         let innerMsgBase64 = try! innerMsg.rawData(options: [.sortedKeys]).base64EncodedString()
         let ibcWasmMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
             $0.sender = fromChain.bechAddress!
-            $0.contract = toSendMsToken.contract!
+            $0.contract = toSendMsToken.address!
             $0.msg = Data(base64Encoded: innerMsgBase64)!
         }
         return Signer.genWasmMsg([ibcWasmMsg])
@@ -1682,8 +1686,7 @@ extension CommonTransfer {
     }
     
     func onBindIbcEurekaMSg() -> [Google_Protobuf_Any] {
-        //TODO check memo
-        let recipientAddress = EthereumAddress.init(toAddress)!\
+        let recipientAddress = EthereumAddress.init(toAddress)!
         let abiEncoded = ABIEncoder.encode(types: [.string, .string, .string, .uint(bits: 64), .string], values: [toSendDenom, fromChain.bechAddress!, recipientAddress.address.stripHexPrefix(), toAmount.uint64Value, EUREKA_MEMO])!.toHexString()
         let payload = Ibc_Core_Channel_V2_Payload.with {
             $0.sourcePort = ibcPath!.source_port!
@@ -1814,5 +1817,3 @@ public enum SendAssetType: Int {
     case GNO_COIN = 8
     case GNO_GRC20 = 9
 }
-
-

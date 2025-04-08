@@ -135,7 +135,7 @@ public class WUtils {
         let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom?.lowercased() == denom.lowercased() }).first
 //        print("msAsset ", msAsset)
         var msToken: MintscanToken?
-        if let tokenInfo = fromChain.getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract == denom }).first {
+        if let tokenInfo = fromChain.getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address == denom }).first {
             msToken = tokenInfo
         }
         var result: MintscanPath?
@@ -164,7 +164,7 @@ public class WUtils {
             } else if (msToken != nil) {
                 if (asset.chain == toChain.apiName &&
                     asset.beforeChain(toChain.apiName) == fromChain.apiName &&
-                    asset.ibc_info?.counterparty?.getDenom?.lowercased() == msToken?.contract!.lowercased()) {
+                    asset.ibc_info?.counterparty?.getDenom?.lowercased() == msToken?.address!.lowercased()) {
 //                    guard let channel = asset.ibc_info?.counterparty?.channel, let port = asset.ibc_info?.counterparty?.port else { return }
 //                    result = MintscanPath.init(channel, port)
                     result = MintscanPath.init(asset.ibc_info?.counterparty)
