@@ -863,9 +863,32 @@ class CommonTransfer: BaseVC {
             gnoSimul()
             
         } else if (txStyle == .COSMOS_STYLE) {
-            
-            ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
+            ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)       // nil able
             print("ibcPath ", ibcPath?.channel, "  ", ibcPath?.version)
+            
+            // some chain not support simulate (assetmantle)  24.2.21
+            if (fromChain.isSimulable() == false) {                                 // Chain not support imul
+                return onUpdateWithSimul(nil)
+            }
+            
+            
+            if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                 // Inchain Send!
+                if (sendAssetType == .COSMOS_WASM) {
+                    inChainWasmSendSimul()                                          // Inchain CW20 Send!
+                } else {
+                    inChainCoinSendSimul()                                          // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
+                }
+                
+            } else if (toChain.supportCosmos == false) {                            // IBC Eureka Send!
+                ibcEurekaSendSimul()
+                
+            } else {                                                                // IBC Send!
+                if (sendAssetType == .COSMOS_WASM) {
+                    ibcWasmSendSimul()                                              // CW20 IBC Send!
+                } else {
+                    ibcCoinSendSimul()                                              // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
+                }
+            }
             
             /*
             // some chain not support simulate (assetmantle)  24.2.21
@@ -906,7 +929,7 @@ class CommonTransfer: BaseVC {
 
 
 
-//Evm style tx simul and broadcast
+// EVM style tx simul and broadcast
 extension CommonTransfer {
     
     func evmSendSimul() {
@@ -1044,7 +1067,7 @@ extension CommonTransfer {
     }
 }
 
-// Gno style tx
+// GNO style tx
 extension CommonTransfer {
     
     func gnoSimul() {
@@ -1252,7 +1275,7 @@ extension CommonTransfer {
 }
 
 
-//Sui style tx dryrun and broadcast
+// SUI style tx dryrun and broadcast
 extension CommonTransfer {
     
     func suiSendGasCheck() {
@@ -1326,7 +1349,7 @@ extension CommonTransfer {
     
 }
 
-//Cosmos style tx simul and broadcast
+// Cosmos style tx simul and broadcast
 extension CommonTransfer {
    
     func inChainCoinSendSimul() {
@@ -1420,7 +1443,6 @@ extension CommonTransfer {
     }
     
     
-    
     func inChainWasmSendSimul() {
         Task {
             do {
@@ -1477,7 +1499,6 @@ extension CommonTransfer {
         }
         return Signer.genWasmMsg([wasmMsg])
     }
-    
     
     
     func ibcCoinSendSimul() {
@@ -1552,7 +1573,6 @@ extension CommonTransfer {
         }
         return Signer.genIbcSendMsg(ibcSendMsg)
     }
-    
     
     
     func ibcWasmSendSimul() {
@@ -1663,20 +1683,20 @@ extension CommonTransfer {
     
     func onBindIbcEurekaMSg() -> [Google_Protobuf_Any] {
         //TODO check memo
-        let jsonMsg: JSON = ["token" : toSendDenom, "from" : fromChain.bechAddress!, "to" : toAddress, "amount" : toAmount.stringValue, "memo" : "Eureka via Cosmostation Wallet!"]
-        let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys]).base64EncodedString()
+        let recipientAddress = EthereumAddress.init(toAddress)!\
+        let abiEncoded = ABIEncoder.encode(types: [.string, .string, .string, .uint(bits: 64), .string], values: [toSendDenom, fromChain.bechAddress!, recipientAddress.address.stripHexPrefix(), toAmount.uint64Value, EUREKA_MEMO])!.toHexString()
         let payload = Ibc_Core_Channel_V2_Payload.with {
-            $0.sourcePort = ""
-            $0.destinationPort = ""
-            $0.version = ""
-            $0.encoding = ""
-            $0.value = Data(base64Encoded: jsonMsgBase64)!
+            $0.sourcePort = ibcPath!.source_port!
+            $0.destinationPort = ibcPath!.destination_port!
+            $0.version = ibcPath!.version!
+            $0.encoding = ibcPath!.encoding!
+            $0.value = Data(hex: abiEncoded.addABIPrefix())
         }
         let eurekaSendMsg = Ibc_Core_Channel_V2_MsgSendPacket.with {
-            $0.sourceClient = ""
-            $0.timeoutTimestamp = 0
+            $0.sourceClient = ibcPath!.source_client!
+            $0.timeoutTimestamp = Date().hourAfter6UInt64
             $0.payloads = [payload]
-            $0.signer = ""
+            $0.signer = fromChain.bechAddress!
         }
         return Signer.genIbcEurekaSendMsg([eurekaSendMsg])
     }
@@ -1758,17 +1778,20 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                 
             } else if (txStyle == .COSMOS_STYLE) {
                 if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                     // Inchain Send!
-                    if (sendAssetType == .COSMOS_WASM) {                                    // Inchain CW20 Send!
-                        inChainWasmSend()
-                    } else {                                                                // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
-                        inChainCoinSend()
+                    if (sendAssetType == .COSMOS_WASM) {
+                        inChainWasmSend()                                                   // Inchain CW20 Send!
+                    } else {
+                        inChainCoinSend()                                                   // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                     }
+                    
+                } else if (toChain.supportCosmos == false) {                                // IBC Eureka Send!
+                    ibcEurekaSend()
+                    
                 } else {                                                                    // IBC Send!
-                    ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
-                    if (sendAssetType == .COSMOS_WASM) {                                    // CW20 IBC Send!
-                        ibcWasmSend()
-                    } else {                                                                // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
-                        ibcCoinSend()
+                    if (sendAssetType == .COSMOS_WASM) {
+                        ibcWasmSend()                                                       // CW20 IBC Send!
+                    } else {
+                        ibcCoinSend()                                                       // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                     }
                 }
             }

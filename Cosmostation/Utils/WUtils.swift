@@ -224,6 +224,11 @@ public class WUtils {
 }
 
 extension Date {
+    
+    var hourAfter6UInt64: UInt64 {
+        return UInt64((self.timeIntervalSince1970 + 21600).rounded())
+    }
+    
     var millisecondsSince1970:Int64 {
         return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
     }
@@ -287,6 +292,10 @@ extension String {
     func removingPrefix(_ prefix: String) -> String {
         guard self.hasPrefix(prefix) else { return self }
         return String(self.dropFirst(prefix.count))
+    }
+    
+    func addABIPrefix() -> String {
+        return "0000000000000000000000000000000000000000000000000000000000000020" + self
     }
 }
 

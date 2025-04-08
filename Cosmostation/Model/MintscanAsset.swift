@@ -81,6 +81,7 @@ public struct MintscanAssetCounterParty: Codable {
     private var denom: String?
     
     // FOR IBC V2
+    var source_client: String?
     var source_port: String?
     var destination_port: String?
     var version: String?

@@ -13,6 +13,7 @@ public class MintscanPath {
     var port: String?
     
     // FOR IBC V2
+    var source_client: String?
     var source_port: String?
     var destination_port: String?
     var version: String?
@@ -37,7 +38,7 @@ public class MintscanPath {
         self.channel = counterParty?.channel
         self.port = counterParty?.port
         
-        
+        self.source_client = counterParty?.source_client
         self.source_port = counterParty?.source_port
         self.destination_port = counterParty?.destination_port
         self.version = counterParty?.version
