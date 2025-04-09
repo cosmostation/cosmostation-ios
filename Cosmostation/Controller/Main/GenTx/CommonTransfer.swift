@@ -810,8 +810,12 @@ class CommonTransfer: BaseVC {
         view.isUserInteractionEnabled = false
         loadingView.isHidden = false
         
+        ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)       // nil able
+        print("ibcPath ", ibcPath?.direction, "  ", ibcPath?.ibcInfo)
+        
         if (txStyle == .WEB3_STYLE) {
-            evmSendSimul()
+//            evmSendSimul()
+            //TODO eureka check
             
         } else if (txStyle == .SUI_STYLE) {
             suiSendGasCheck()
@@ -823,14 +827,10 @@ class CommonTransfer: BaseVC {
             gnoSimul()
             
         } else if (txStyle == .COSMOS_STYLE) {
-            ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)       // nil able
-//            print("ibcPath ", ibcPath?.channel, "  ", ibcPath?.version)
-            
             // some chain not support simulate (assetmantle)  24.2.21
             if (fromChain.isSimulable() == false) {                                 // Chain not support imul
                 return onUpdateWithSimul(nil)
             }
-            
             
             if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                 // Inchain Send!
                 if (sendAssetType == .COSMOS_WASM) {
@@ -849,39 +849,6 @@ class CommonTransfer: BaseVC {
                     ibcCoinSendSimul()                                              // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                 }
             }
-            
-            /*
-            // some chain not support simulate (assetmantle)  24.2.21
-            if (fromChain.isSimulable() == false) {
-                if (fromChain.chainIdCosmos != toChain.chainIdCosmos) {
-                    ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
-                }
-                return onUpdateWithSimul(nil)
-                
-            }
-            if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                 // Inchain Send!
-                if (sendAssetType == .COSMOS_WASM) {                                // Inchain CW20 Send!
-                    inChainWasmSendSimul()
-                    
-                } else {                                                            // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
-                    inChainCoinSendSimul()
-                }
-                
-                
-            } else if (toChain.supportCosmos == false) {                            // IBC Eureka Send!
-
-                
-                
-            } else {                                                                // IBC Send!
-                ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
-                if (sendAssetType == .COSMOS_WASM) {                                // CW20 IBC Send!
-                    ibcWasmSendSimul()
-                    
-                } else {                                                            // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
-                    ibcCoinSendSimul()
-                }
-            }
-            */
         }
     }
 
@@ -1234,7 +1201,6 @@ extension CommonTransfer {
     }
 }
 
-
 // SUI style tx dryrun and broadcast
 extension CommonTransfer {
     
@@ -1525,8 +1491,8 @@ extension CommonTransfer {
         let ibcSendMsg = Ibc_Applications_Transfer_V1_MsgTransfer.with {
             $0.sender = fromChain.bechAddress!
             $0.receiver = toAddress
-            $0.sourceChannel = ibcPath!.channel!
-            $0.sourcePort = ibcPath!.port!
+            $0.sourceChannel = ibcPath!.getChannel()!
+            $0.sourcePort = ibcPath!.getPort()!
             $0.timeoutHeight = height
             $0.timeoutTimestamp = 0
             $0.token = sendCoin
@@ -1582,10 +1548,10 @@ extension CommonTransfer {
     }
     
     func onBindCw20IbcSendMsg() -> [Google_Protobuf_Any] {
-        let jsonMsg: JSON = ["channel" : ibcPath!.channel!, "remote_address" : toAddress, "timeout" : 900]
+        let jsonMsg: JSON = ["channel" : ibcPath!.getChannel()!, "remote_address" : toAddress, "timeout" : 900]
         let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys]).base64EncodedString()
         
-        let innerMsg: JSON = ["send" : ["contract" : ibcPath!.getIBCContract(), "amount" : toAmount.stringValue, "msg" : jsonMsgBase64]]
+        let innerMsg: JSON = ["send" : ["contract" : ibcPath!.getPort()!, "amount" : toAmount.stringValue, "msg" : jsonMsgBase64]]
         let innerMsgBase64 = try! innerMsg.rawData(options: [.sortedKeys]).base64EncodedString()
         let ibcWasmMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
             $0.sender = fromChain.bechAddress!
@@ -1645,14 +1611,14 @@ extension CommonTransfer {
         let recipientAddress = EthereumAddress.init(toAddress)!
         let abiEncoded = ABIEncoder.encode(types: [.string, .string, .string, .uint(bits: 64), .string], values: [toSendDenom, fromChain.bechAddress!, recipientAddress.address.stripHexPrefix(), toAmount.uint64Value, EUREKA_MEMO])!.toHexString()
         let payload = Ibc_Core_Channel_V2_Payload.with {
-//            $0.sourcePort = ibcPath!.source_port!
-//            $0.destinationPort = ibcPath!.destination_port!
-//            $0.version = ibcPath!.version!
-//            $0.encoding = ibcPath!.encoding!
+            $0.sourcePort = ibcPath!.ibcInfo!.counterparty!.port!
+            $0.destinationPort = ibcPath!.ibcInfo!.client!.port!
+            $0.version = ibcPath!.ibcInfo!.client!.version!
+            $0.encoding = ibcPath!.ibcInfo!.client!.encoding!
             $0.value = Data(hex: abiEncoded.addABIPrefix())
         }
         let eurekaSendMsg = Ibc_Core_Channel_V2_MsgSendPacket.with {
-//            $0.sourceClient = ibcPath!.source_client!
+            $0.sourceClient = ibcPath!.ibcInfo!.counterparty!.channel!
             $0.timeoutTimestamp = Date().hourAfter6UInt64
             $0.payloads = [payload]
             $0.signer = fromChain.bechAddress!

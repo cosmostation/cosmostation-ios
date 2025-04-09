@@ -722,15 +722,15 @@ extension CosmosFetcher {
     func fetchIbcClient(_ ibcPath: MintscanPath) async throws -> UInt64? {
         if (getEndpointType() == .UseGRPC) {
             let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
-                $0.channelID = ibcPath.channel!
-                $0.portID = ibcPath.port!
+                $0.channelID = ibcPath.getChannel()!
+                $0.portID = ibcPath.getPort()!
             }
             if let result = try? await Ibc_Core_Channel_V1_QueryNIOClient(channel: getClient()).channelClientState(req, callOptions: getCallOptions()).response.get().identifiedClientState.clientState.value,
                let latestHeight = try? Ibc_Lightclients_Tendermint_V1_ClientState.init(serializedData: result).latestHeight.revisionNumber {
                 return latestHeight
             }
         } else {
-            let url = getLcd() + "ibc/core/channel/v1/channels/${channel}/ports/${port}/client_state".replacingOccurrences(of: "${channel}", with: ibcPath.channel!).replacingOccurrences(of: "${port}", with: ibcPath.port!)
+            let url = getLcd() + "ibc/core/channel/v1/channels/${channel}/ports/${port}/client_state".replacingOccurrences(of: "${channel}", with: ibcPath.getChannel()!).replacingOccurrences(of: "${port}", with: ibcPath.getPort()!)
             let result = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
             if let revision_number = result["identified_client_state"]["client_state"]["latest_height"]["revision_number"].string {
                 return UInt64(revision_number)

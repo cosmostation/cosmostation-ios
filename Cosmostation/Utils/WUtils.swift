@@ -147,7 +147,8 @@ public class WUtils {
             }
         }
         
-        //Native & IBC & Cw20 check forward path if wallet support tochain
+        //IBC & Eureka_IBC
+        //Native & IBC & Cw20 & Erc20 check forward path if wallet support tochain
         BaseData.instance.mintscanAssets?.forEach { msAsset in
             if msAsset.ibc_info?.counterparty?.chain == fromChain.apiName,
                msAsset.ibc_info?.counterparty?.getDenom == toSendDenom,
@@ -158,8 +159,8 @@ public class WUtils {
             }
         }
         
-        //IBC Eureka
-        //Erc20 coin shoud check backward path if possible
+        //Eureka_IBC
+        //Erc20 token shoud check backward path if possible
         //ex: Atom(Erc20) on ethereum should back to cosmos
         if toSendDenom.starts(with: "0x"),
            let msToken = BaseData.instance.mintscanErc20Tokens?.filter({ $0.chainName == fromChain.apiName && $0.address == toSendDenom }).first,
@@ -169,7 +170,7 @@ public class WUtils {
             }
         }
         
-        //IBC Eureka
+        //Eureka_IBC
         //Native & IBC Coin check forward path to Ethereum chains
         //ex: Atom on Cosmos can go etheruem
         BaseData.instance.mintscanErc20Tokens?.forEach { msToken in
@@ -196,48 +197,45 @@ public class WUtils {
         return result
     }
     
-    static func getMintscanPath(_ fromChain: BaseChain, _ toChain: BaseChain, _ denom: String) -> MintscanPath? {
-        let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom?.lowercased() == denom.lowercased() }).first
-//        print("msAsset ", msAsset)
-        var msToken: MintscanToken?
-        if let tokenInfo = fromChain.getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address == denom }).first {
-            msToken = tokenInfo
+    static func getMintscanPath(_ fromChain: BaseChain, _ toChain: BaseChain, _ toSendDenom: String) -> MintscanPath? {
+//        var result: MintscanPath?
+        
+        //Check IBC Coin backward case
+        if let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.chain == fromChain.apiName && $0.denom == toSendDenom }).first,
+           msAsset.ibc_info?.counterparty?.chain == toChain.apiName {
+            print("BACKWRAD ", msAsset.ibc_info)
+            return MintscanPath.init(.BACKWRAD, msAsset.ibc_info)
         }
-        var result: MintscanPath?
-        BaseData.instance.mintscanAssets?.forEach { asset in
-            if (msAsset != nil) {
-                if (asset.chain == fromChain.apiName &&
-                    asset.beforeChain(fromChain.apiName) == toChain.apiName &&
-                    asset.denom?.lowercased() == denom.lowercased()) {
-                    //check backward path
-                    guard let channel = asset.ibc_info?.client?.channel, let port = asset.ibc_info?.client?.port else { return }
-                    result = MintscanPath.init(channel, port)
-//                    result = MintscanPath.init(asset.ibc_info?.client)
-                    return
-                }
-                if (asset.chain == toChain.apiName &&
-                    asset.beforeChain(toChain.apiName) == fromChain.apiName &&
-                    asset.ibc_info?.counterparty?.getDenom?.lowercased() == denom.lowercased()) {
-                    //check forword path
-//                    print("asset ", asset)
-                    guard let channel = asset.ibc_info?.counterparty?.channel, let port = asset.ibc_info?.counterparty?.port else { return }
-                    result = MintscanPath.init(channel, port)
-//                    result = MintscanPath.init(asset.ibc_info?.counterparty)
-                    return
-                }
-
-            } else if (msToken != nil) {
-                if (asset.chain == toChain.apiName &&
-                    asset.beforeChain(toChain.apiName) == fromChain.apiName &&
-                    asset.ibc_info?.counterparty?.getDenom?.lowercased() == msToken?.address!.lowercased()) {
-                    guard let channel = asset.ibc_info?.counterparty?.channel, let port = asset.ibc_info?.counterparty?.port else { return }
-                    result = MintscanPath.init(channel, port)
-//                    result = MintscanPath.init(asset.ibc_info?.counterparty)
-                    return
-                }
-            }
+        
+        //IBC & Eureka_IBC
+        //Check Native & IBC & Cw20 & Erc20 Coin forward case
+        if let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.chain == toChain.apiName &&
+            $0.ibc_info?.counterparty?.chain == fromChain.apiName &&
+            $0.ibc_info?.counterparty?.getDenom == toSendDenom }).first {
+            print("FORWARD ", msAsset.ibc_info)
+            return MintscanPath.init(.FORWARD, msAsset.ibc_info)
         }
-        return result
+        
+        //IBC Eureka
+        //Check Erc20 token backward case
+        //ex: Atom(Erc20) on ethereum should back to cosmos
+        if let msToken = BaseData.instance.mintscanErc20Tokens?.filter({ $0.chainName == fromChain.apiName &&
+            $0.address == toSendDenom &&
+            $0.ibc_info?.counterparty?.chain == toChain.apiName }).first {
+            print("EUREKA BACKWRAD ", msToken.ibc_info)
+            return MintscanPath.init(.BACKWRAD, msToken.ibc_info)
+        }
+        
+        //IBC Eureka
+        //Check Native & IBC Coin forward case
+        //ex: Atom on Cosmos can go etheruem
+        if let msToken = BaseData.instance.mintscanErc20Tokens?.filter({ $0.chainName == toChain.apiName &&
+            $0.ibc_info?.counterparty?.chain == fromChain.apiName &&
+            $0.ibc_info?.counterparty?.getDenom == toSendDenom }).first {
+            print("EUREKA FORWARD ", msToken.ibc_info)
+            return MintscanPath.init(.FORWARD, msToken.ibc_info)
+        }
+        return nil
     }
     
     
