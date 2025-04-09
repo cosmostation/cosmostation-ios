@@ -131,9 +131,10 @@ public class WUtils {
         return attributedString1
     }
     
-    
+    //TODO Temp hide Eureka
     static func checkIBCrecipientableChains(_ fromChain: BaseChain, _ toSendDenom: String) -> [BaseChain] {
-        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false })
+        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false && $0.supportCosmos == true })
+//        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false })
         
         var result = [BaseChain]()
         result.append(fromChain)
@@ -159,6 +160,7 @@ public class WUtils {
             }
         }
         
+        /*
         //Eureka_IBC
         //Erc20 token shoud check backward path if possible
         //ex: Atom(Erc20) on ethereum should back to cosmos
@@ -182,6 +184,7 @@ public class WUtils {
                 }
             }
         }
+        */
         
         result.sort {
             if ($0.name == fromChain.name) { return true }
@@ -203,7 +206,7 @@ public class WUtils {
         //Check IBC Coin backward case
         if let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.chain == fromChain.apiName && $0.denom == toSendDenom }).first,
            msAsset.ibc_info?.counterparty?.chain == toChain.apiName {
-            print("BACKWRAD ", msAsset.ibc_info)
+//            print("BACKWRAD ", msAsset.ibc_info)
             return MintscanPath.init(.BACKWRAD, msAsset.ibc_info)
         }
         
@@ -212,7 +215,7 @@ public class WUtils {
         if let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.chain == toChain.apiName &&
             $0.ibc_info?.counterparty?.chain == fromChain.apiName &&
             $0.ibc_info?.counterparty?.getDenom == toSendDenom }).first {
-            print("FORWARD ", msAsset.ibc_info)
+//            print("FORWARD ", msAsset.ibc_info)
             return MintscanPath.init(.FORWARD, msAsset.ibc_info)
         }
         
@@ -222,7 +225,7 @@ public class WUtils {
         if let msToken = BaseData.instance.mintscanErc20Tokens?.filter({ $0.chainName == fromChain.apiName &&
             $0.address == toSendDenom &&
             $0.ibc_info?.counterparty?.chain == toChain.apiName }).first {
-            print("EUREKA BACKWRAD ", msToken.ibc_info)
+//            print("EUREKA BACKWRAD ", msToken.ibc_info)
             return MintscanPath.init(.BACKWRAD, msToken.ibc_info)
         }
         
@@ -232,7 +235,7 @@ public class WUtils {
         if let msToken = BaseData.instance.mintscanErc20Tokens?.filter({ $0.chainName == toChain.apiName &&
             $0.ibc_info?.counterparty?.chain == fromChain.apiName &&
             $0.ibc_info?.counterparty?.getDenom == toSendDenom }).first {
-            print("EUREKA FORWARD ", msToken.ibc_info)
+//            print("EUREKA FORWARD ", msToken.ibc_info)
             return MintscanPath.init(.FORWARD, msToken.ibc_info)
         }
         return nil
@@ -290,6 +293,10 @@ extension Date {
     
     var hourAfter6UInt64: UInt64 {
         return UInt64((self.timeIntervalSince1970 + 21600).rounded())
+    }
+    
+    var hourAfter6Int32: Int32 {
+        return Int32((self.timeIntervalSince1970 + 21600).rounded())
     }
     
     var millisecondsSince1970:Int64 {

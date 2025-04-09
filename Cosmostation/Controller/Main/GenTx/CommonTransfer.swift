@@ -126,7 +126,6 @@ class CommonTransfer: BaseVC {
         memoCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickMemo)))
         feeSelectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSelectFeeCoin)))
         
-        print("sendAssetType ", sendAssetType)
         //set Txstyle and init
         Task {
             if (sendAssetType == .EVM_COIN || sendAssetType == .EVM_ERC20) {
@@ -811,11 +810,14 @@ class CommonTransfer: BaseVC {
         loadingView.isHidden = false
         
         ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)       // nil able
-        print("ibcPath ", ibcPath?.direction, "  ", ibcPath?.ibcInfo)
+//        print("ibcPath ", ibcPath?.direction, "  ", ibcPath?.ibcInfo)
         
         if (txStyle == .WEB3_STYLE) {
-//            evmSendSimul()
-            //TODO eureka check
+            if (fromChain.apiName == toChain.apiName) {
+                evmSendSimul()
+            } else if (toChain.supportCosmos) {
+                evmEurekaSimul()
+            }
             
         } else if (txStyle == .SUI_STYLE) {
             suiSendGasCheck()
@@ -961,6 +963,12 @@ extension CommonTransfer {
         }
     }
     
+    func evmEurekaSimul() {
+        print("evmEurekaSimul")
+        Task {
+        }
+    }
+    
     func evmSend() {
         Task {
             guard let web3 = self.web3 else {
@@ -992,6 +1000,8 @@ extension CommonTransfer {
             
         }
     }
+    
+    
 }
 
 // GNO style tx

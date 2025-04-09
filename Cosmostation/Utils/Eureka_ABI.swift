@@ -37,7 +37,8 @@ public class EUREKA_ICS20Transfer {
     
     public func sendTransfer(_ denom: EthereumAddress, _ amount: BigUInt, _ receiver: String,
                              _ sourceClient: String, _ destPort: String, _ timeoutTimestamp: Int32, _ memo: String) throws -> WriteOperation? {
-        return contract.createWriteOperation("sendTransfer", parameters: [denom, amount, receiver, sourceClient, destPort, timeoutTimestamp, memo])
+        return contract.createWriteOperation("sendTransfer",
+                                             parameters: [denom, amount, receiver, sourceClient, destPort, timeoutTimestamp, memo] as [AnyObject])
     }
     
 }
