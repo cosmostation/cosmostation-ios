@@ -68,6 +68,11 @@ internal protocol Ibc_Core_Client_V1_QueryClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Ibc_Core_Client_V1_QueryClientParamsRequest, Ibc_Core_Client_V1_QueryClientParamsResponse>
 
+  func clientCreator(
+    _ request: Ibc_Core_Client_V1_QueryClientCreatorRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Ibc_Core_Client_V1_QueryClientCreatorRequest, Ibc_Core_Client_V1_QueryClientCreatorResponse>
+
   func upgradedClientState(
     _ request: Ibc_Core_Client_V1_QueryUpgradedClientStateRequest,
     callOptions: CallOptions?
@@ -77,6 +82,11 @@ internal protocol Ibc_Core_Client_V1_QueryClientProtocol: GRPCClient {
     _ request: Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest, Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse>
+
+  func verifyMembership(
+    _ request: Ibc_Core_Client_V1_QueryVerifyMembershipRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Ibc_Core_Client_V1_QueryVerifyMembershipRequest, Ibc_Core_Client_V1_QueryVerifyMembershipResponse>
 }
 
 extension Ibc_Core_Client_V1_QueryClientProtocol {
@@ -212,6 +222,24 @@ extension Ibc_Core_Client_V1_QueryClientProtocol {
     )
   }
 
+  /// ClientCreator queries the creator of a given client.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to ClientCreator.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func clientCreator(
+    _ request: Ibc_Core_Client_V1_QueryClientCreatorRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Ibc_Core_Client_V1_QueryClientCreatorRequest, Ibc_Core_Client_V1_QueryClientCreatorResponse> {
+    return self.makeUnaryCall(
+      path: Ibc_Core_Client_V1_QueryClientMetadata.Methods.clientCreator.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeClientCreatorInterceptors() ?? []
+    )
+  }
+
   /// UpgradedClientState queries an Upgraded IBC light client.
   ///
   /// - Parameters:
@@ -245,6 +273,24 @@ extension Ibc_Core_Client_V1_QueryClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeUpgradedConsensusStateInterceptors() ?? []
+    )
+  }
+
+  /// VerifyMembership queries an IBC light client for proof verification of a value at a given key path.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to VerifyMembership.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func verifyMembership(
+    _ request: Ibc_Core_Client_V1_QueryVerifyMembershipRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Ibc_Core_Client_V1_QueryVerifyMembershipRequest, Ibc_Core_Client_V1_QueryVerifyMembershipResponse> {
+    return self.makeUnaryCall(
+      path: Ibc_Core_Client_V1_QueryClientMetadata.Methods.verifyMembership.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeVerifyMembershipInterceptors() ?? []
     )
   }
 }
@@ -347,6 +393,11 @@ internal protocol Ibc_Core_Client_V1_QueryAsyncClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Ibc_Core_Client_V1_QueryClientParamsRequest, Ibc_Core_Client_V1_QueryClientParamsResponse>
 
+  func makeClientCreatorCall(
+    _ request: Ibc_Core_Client_V1_QueryClientCreatorRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Ibc_Core_Client_V1_QueryClientCreatorRequest, Ibc_Core_Client_V1_QueryClientCreatorResponse>
+
   func makeUpgradedClientStateCall(
     _ request: Ibc_Core_Client_V1_QueryUpgradedClientStateRequest,
     callOptions: CallOptions?
@@ -356,6 +407,11 @@ internal protocol Ibc_Core_Client_V1_QueryAsyncClientProtocol: GRPCClient {
     _ request: Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest, Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse>
+
+  func makeVerifyMembershipCall(
+    _ request: Ibc_Core_Client_V1_QueryVerifyMembershipRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Ibc_Core_Client_V1_QueryVerifyMembershipRequest, Ibc_Core_Client_V1_QueryVerifyMembershipResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -452,6 +508,18 @@ extension Ibc_Core_Client_V1_QueryAsyncClientProtocol {
     )
   }
 
+  internal func makeClientCreatorCall(
+    _ request: Ibc_Core_Client_V1_QueryClientCreatorRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Ibc_Core_Client_V1_QueryClientCreatorRequest, Ibc_Core_Client_V1_QueryClientCreatorResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Ibc_Core_Client_V1_QueryClientMetadata.Methods.clientCreator.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeClientCreatorInterceptors() ?? []
+    )
+  }
+
   internal func makeUpgradedClientStateCall(
     _ request: Ibc_Core_Client_V1_QueryUpgradedClientStateRequest,
     callOptions: CallOptions? = nil
@@ -473,6 +541,18 @@ extension Ibc_Core_Client_V1_QueryAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeUpgradedConsensusStateInterceptors() ?? []
+    )
+  }
+
+  internal func makeVerifyMembershipCall(
+    _ request: Ibc_Core_Client_V1_QueryVerifyMembershipRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Ibc_Core_Client_V1_QueryVerifyMembershipRequest, Ibc_Core_Client_V1_QueryVerifyMembershipResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Ibc_Core_Client_V1_QueryClientMetadata.Methods.verifyMembership.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeVerifyMembershipInterceptors() ?? []
     )
   }
 }
@@ -563,6 +643,18 @@ extension Ibc_Core_Client_V1_QueryAsyncClientProtocol {
     )
   }
 
+  internal func clientCreator(
+    _ request: Ibc_Core_Client_V1_QueryClientCreatorRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Ibc_Core_Client_V1_QueryClientCreatorResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Ibc_Core_Client_V1_QueryClientMetadata.Methods.clientCreator.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeClientCreatorInterceptors() ?? []
+    )
+  }
+
   internal func upgradedClientState(
     _ request: Ibc_Core_Client_V1_QueryUpgradedClientStateRequest,
     callOptions: CallOptions? = nil
@@ -584,6 +676,18 @@ extension Ibc_Core_Client_V1_QueryAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeUpgradedConsensusStateInterceptors() ?? []
+    )
+  }
+
+  internal func verifyMembership(
+    _ request: Ibc_Core_Client_V1_QueryVerifyMembershipRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Ibc_Core_Client_V1_QueryVerifyMembershipResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Ibc_Core_Client_V1_QueryClientMetadata.Methods.verifyMembership.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeVerifyMembershipInterceptors() ?? []
     )
   }
 }
@@ -628,11 +732,17 @@ internal protocol Ibc_Core_Client_V1_QueryClientInterceptorFactoryProtocol: Send
   /// - Returns: Interceptors to use when invoking 'clientParams'.
   func makeClientParamsInterceptors() -> [ClientInterceptor<Ibc_Core_Client_V1_QueryClientParamsRequest, Ibc_Core_Client_V1_QueryClientParamsResponse>]
 
+  /// - Returns: Interceptors to use when invoking 'clientCreator'.
+  func makeClientCreatorInterceptors() -> [ClientInterceptor<Ibc_Core_Client_V1_QueryClientCreatorRequest, Ibc_Core_Client_V1_QueryClientCreatorResponse>]
+
   /// - Returns: Interceptors to use when invoking 'upgradedClientState'.
   func makeUpgradedClientStateInterceptors() -> [ClientInterceptor<Ibc_Core_Client_V1_QueryUpgradedClientStateRequest, Ibc_Core_Client_V1_QueryUpgradedClientStateResponse>]
 
   /// - Returns: Interceptors to use when invoking 'upgradedConsensusState'.
   func makeUpgradedConsensusStateInterceptors() -> [ClientInterceptor<Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest, Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'verifyMembership'.
+  func makeVerifyMembershipInterceptors() -> [ClientInterceptor<Ibc_Core_Client_V1_QueryVerifyMembershipRequest, Ibc_Core_Client_V1_QueryVerifyMembershipResponse>]
 }
 
 internal enum Ibc_Core_Client_V1_QueryClientMetadata {
@@ -647,8 +757,10 @@ internal enum Ibc_Core_Client_V1_QueryClientMetadata {
       Ibc_Core_Client_V1_QueryClientMetadata.Methods.consensusStateHeights,
       Ibc_Core_Client_V1_QueryClientMetadata.Methods.clientStatus,
       Ibc_Core_Client_V1_QueryClientMetadata.Methods.clientParams,
+      Ibc_Core_Client_V1_QueryClientMetadata.Methods.clientCreator,
       Ibc_Core_Client_V1_QueryClientMetadata.Methods.upgradedClientState,
       Ibc_Core_Client_V1_QueryClientMetadata.Methods.upgradedConsensusState,
+      Ibc_Core_Client_V1_QueryClientMetadata.Methods.verifyMembership,
     ]
   )
 
@@ -695,6 +807,12 @@ internal enum Ibc_Core_Client_V1_QueryClientMetadata {
       type: GRPCCallType.unary
     )
 
+    internal static let clientCreator = GRPCMethodDescriptor(
+      name: "ClientCreator",
+      path: "/ibc.core.client.v1.Query/ClientCreator",
+      type: GRPCCallType.unary
+    )
+
     internal static let upgradedClientState = GRPCMethodDescriptor(
       name: "UpgradedClientState",
       path: "/ibc.core.client.v1.Query/UpgradedClientState",
@@ -704,6 +822,12 @@ internal enum Ibc_Core_Client_V1_QueryClientMetadata {
     internal static let upgradedConsensusState = GRPCMethodDescriptor(
       name: "UpgradedConsensusState",
       path: "/ibc.core.client.v1.Query/UpgradedConsensusState",
+      type: GRPCCallType.unary
+    )
+
+    internal static let verifyMembership = GRPCMethodDescriptor(
+      name: "VerifyMembership",
+      path: "/ibc.core.client.v1.Query/VerifyMembership",
       type: GRPCCallType.unary
     )
   }
@@ -738,11 +862,17 @@ internal protocol Ibc_Core_Client_V1_QueryProvider: CallHandlerProvider {
   /// ClientParams queries all parameters of the ibc client submodule.
   func clientParams(request: Ibc_Core_Client_V1_QueryClientParamsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Client_V1_QueryClientParamsResponse>
 
+  /// ClientCreator queries the creator of a given client.
+  func clientCreator(request: Ibc_Core_Client_V1_QueryClientCreatorRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Client_V1_QueryClientCreatorResponse>
+
   /// UpgradedClientState queries an Upgraded IBC light client.
   func upgradedClientState(request: Ibc_Core_Client_V1_QueryUpgradedClientStateRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Client_V1_QueryUpgradedClientStateResponse>
 
   /// UpgradedConsensusState queries an Upgraded IBC consensus state.
   func upgradedConsensusState(request: Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse>
+
+  /// VerifyMembership queries an IBC light client for proof verification of a value at a given key path.
+  func verifyMembership(request: Ibc_Core_Client_V1_QueryVerifyMembershipRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Client_V1_QueryVerifyMembershipResponse>
 }
 
 extension Ibc_Core_Client_V1_QueryProvider {
@@ -820,6 +950,15 @@ extension Ibc_Core_Client_V1_QueryProvider {
         userFunction: self.clientParams(request:context:)
       )
 
+    case "ClientCreator":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ibc_Core_Client_V1_QueryClientCreatorRequest>(),
+        responseSerializer: ProtobufSerializer<Ibc_Core_Client_V1_QueryClientCreatorResponse>(),
+        interceptors: self.interceptors?.makeClientCreatorInterceptors() ?? [],
+        userFunction: self.clientCreator(request:context:)
+      )
+
     case "UpgradedClientState":
       return UnaryServerHandler(
         context: context,
@@ -836,6 +975,15 @@ extension Ibc_Core_Client_V1_QueryProvider {
         responseSerializer: ProtobufSerializer<Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse>(),
         interceptors: self.interceptors?.makeUpgradedConsensusStateInterceptors() ?? [],
         userFunction: self.upgradedConsensusState(request:context:)
+      )
+
+    case "VerifyMembership":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ibc_Core_Client_V1_QueryVerifyMembershipRequest>(),
+        responseSerializer: ProtobufSerializer<Ibc_Core_Client_V1_QueryVerifyMembershipResponse>(),
+        interceptors: self.interceptors?.makeVerifyMembershipInterceptors() ?? [],
+        userFunction: self.verifyMembership(request:context:)
       )
 
     default:
@@ -896,6 +1044,12 @@ internal protocol Ibc_Core_Client_V1_QueryAsyncProvider: CallHandlerProvider {
     context: GRPCAsyncServerCallContext
   ) async throws -> Ibc_Core_Client_V1_QueryClientParamsResponse
 
+  /// ClientCreator queries the creator of a given client.
+  @Sendable func clientCreator(
+    request: Ibc_Core_Client_V1_QueryClientCreatorRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Ibc_Core_Client_V1_QueryClientCreatorResponse
+
   /// UpgradedClientState queries an Upgraded IBC light client.
   @Sendable func upgradedClientState(
     request: Ibc_Core_Client_V1_QueryUpgradedClientStateRequest,
@@ -907,6 +1061,12 @@ internal protocol Ibc_Core_Client_V1_QueryAsyncProvider: CallHandlerProvider {
     request: Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse
+
+  /// VerifyMembership queries an IBC light client for proof verification of a value at a given key path.
+  @Sendable func verifyMembership(
+    request: Ibc_Core_Client_V1_QueryVerifyMembershipRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Ibc_Core_Client_V1_QueryVerifyMembershipResponse
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -991,6 +1151,15 @@ extension Ibc_Core_Client_V1_QueryAsyncProvider {
         wrapping: self.clientParams(request:context:)
       )
 
+    case "ClientCreator":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ibc_Core_Client_V1_QueryClientCreatorRequest>(),
+        responseSerializer: ProtobufSerializer<Ibc_Core_Client_V1_QueryClientCreatorResponse>(),
+        interceptors: self.interceptors?.makeClientCreatorInterceptors() ?? [],
+        wrapping: self.clientCreator(request:context:)
+      )
+
     case "UpgradedClientState":
       return GRPCAsyncServerHandler(
         context: context,
@@ -1007,6 +1176,15 @@ extension Ibc_Core_Client_V1_QueryAsyncProvider {
         responseSerializer: ProtobufSerializer<Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse>(),
         interceptors: self.interceptors?.makeUpgradedConsensusStateInterceptors() ?? [],
         wrapping: self.upgradedConsensusState(request:context:)
+      )
+
+    case "VerifyMembership":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ibc_Core_Client_V1_QueryVerifyMembershipRequest>(),
+        responseSerializer: ProtobufSerializer<Ibc_Core_Client_V1_QueryVerifyMembershipResponse>(),
+        interceptors: self.interceptors?.makeVerifyMembershipInterceptors() ?? [],
+        wrapping: self.verifyMembership(request:context:)
       )
 
     default:
@@ -1045,6 +1223,10 @@ internal protocol Ibc_Core_Client_V1_QueryServerInterceptorFactoryProtocol {
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeClientParamsInterceptors() -> [ServerInterceptor<Ibc_Core_Client_V1_QueryClientParamsRequest, Ibc_Core_Client_V1_QueryClientParamsResponse>]
 
+  /// - Returns: Interceptors to use when handling 'clientCreator'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeClientCreatorInterceptors() -> [ServerInterceptor<Ibc_Core_Client_V1_QueryClientCreatorRequest, Ibc_Core_Client_V1_QueryClientCreatorResponse>]
+
   /// - Returns: Interceptors to use when handling 'upgradedClientState'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeUpgradedClientStateInterceptors() -> [ServerInterceptor<Ibc_Core_Client_V1_QueryUpgradedClientStateRequest, Ibc_Core_Client_V1_QueryUpgradedClientStateResponse>]
@@ -1052,6 +1234,10 @@ internal protocol Ibc_Core_Client_V1_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'upgradedConsensusState'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeUpgradedConsensusStateInterceptors() -> [ServerInterceptor<Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest, Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse>]
+
+  /// - Returns: Interceptors to use when handling 'verifyMembership'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeVerifyMembershipInterceptors() -> [ServerInterceptor<Ibc_Core_Client_V1_QueryVerifyMembershipRequest, Ibc_Core_Client_V1_QueryVerifyMembershipResponse>]
 }
 
 internal enum Ibc_Core_Client_V1_QueryServerMetadata {
@@ -1066,8 +1252,10 @@ internal enum Ibc_Core_Client_V1_QueryServerMetadata {
       Ibc_Core_Client_V1_QueryServerMetadata.Methods.consensusStateHeights,
       Ibc_Core_Client_V1_QueryServerMetadata.Methods.clientStatus,
       Ibc_Core_Client_V1_QueryServerMetadata.Methods.clientParams,
+      Ibc_Core_Client_V1_QueryServerMetadata.Methods.clientCreator,
       Ibc_Core_Client_V1_QueryServerMetadata.Methods.upgradedClientState,
       Ibc_Core_Client_V1_QueryServerMetadata.Methods.upgradedConsensusState,
+      Ibc_Core_Client_V1_QueryServerMetadata.Methods.verifyMembership,
     ]
   )
 
@@ -1114,6 +1302,12 @@ internal enum Ibc_Core_Client_V1_QueryServerMetadata {
       type: GRPCCallType.unary
     )
 
+    internal static let clientCreator = GRPCMethodDescriptor(
+      name: "ClientCreator",
+      path: "/ibc.core.client.v1.Query/ClientCreator",
+      type: GRPCCallType.unary
+    )
+
     internal static let upgradedClientState = GRPCMethodDescriptor(
       name: "UpgradedClientState",
       path: "/ibc.core.client.v1.Query/UpgradedClientState",
@@ -1123,6 +1317,12 @@ internal enum Ibc_Core_Client_V1_QueryServerMetadata {
     internal static let upgradedConsensusState = GRPCMethodDescriptor(
       name: "UpgradedConsensusState",
       path: "/ibc.core.client.v1.Query/UpgradedConsensusState",
+      type: GRPCCallType.unary
+    )
+
+    internal static let verifyMembership = GRPCMethodDescriptor(
+      name: "VerifyMembership",
+      path: "/ibc.core.client.v1.Query/VerifyMembership",
       type: GRPCCallType.unary
     )
   }

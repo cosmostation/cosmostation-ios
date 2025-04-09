@@ -26,8 +26,8 @@ class ChainBabylon: BaseChain {
         stakeDenom = "ubbn"
         bechAccountPrefix = "bbn"
         validatorPrefix = "bbnvaloper"
-        grpcHost = ""
-        lcdUrl = ""
+        grpcHost = "grpc.mainnet.babylon.cosmostation.io"
+        lcdUrl = "https://lcd.mainnet.babylon.cosmostation.io"
     }
     
     override func fetchData(_ id: Int64) {

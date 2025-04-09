@@ -67,7 +67,6 @@ class BaseNetWork {
     }
     
     func fetchAssets() {
-//        print("fetchAssets Start ", BaseNetWork.msAssetsUrl())
         AF.request(BaseNetWork.msAssetsUrl(), method: .get)
             .responseDecodable(of: MintscanAssets.self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
@@ -78,6 +77,32 @@ class BaseNetWork {
                     print("fetchAssets error ", response.error)
                 }
                 NotificationCenter.default.post(name: Notification.Name("FetchAssets"), object: nil, userInfo: nil)
+            }
+    }
+    
+    func fetchCw20Tokens() {
+        AF.request(BaseNetWork.msCw20Url(), method: .get)
+            .responseDecodable(of: MintscanTokens.self, queue: .main, decoder: JSONDecoder()) { response in
+                switch response.result {
+                case .success(let value):
+                    BaseData.instance.mintscanCw20Tokens = value.assets
+                case .failure:
+                    print("fetchCw20 error ", response.error)
+                }
+                NotificationCenter.default.post(name: Notification.Name("FetchCw20s"), object: nil, userInfo: nil)
+            }
+    }
+    
+    func fetchErc20Tokens() {
+        AF.request(BaseNetWork.msErc20Url(), method: .get)
+            .responseDecodable(of: MintscanTokens.self, queue: .main, decoder: JSONDecoder()) { response in
+                switch response.result {
+                case .success(let value):
+                    BaseData.instance.mintscanErc20Tokens = value.assets
+                case .failure:
+                    print("fetchErc20 error ", response.error)
+                }
+                NotificationCenter.default.post(name: Notification.Name("FetchErc20s"), object: nil, userInfo: nil)
             }
     }
     
@@ -104,12 +129,12 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v11/assets"
     }
     
-    static func msCw20InfoUrl(_ apiName: String) -> String {
-        return MINTSCAN_API_URL + "v11/assets/" +  apiName + "/cw20/info"
+    static func msCw20Url() -> String {
+        return MINTSCAN_API_URL + "v11/assets/cw20"
     }
     
-    static func msErc20InfoUrl(_ apiName: String) -> String {
-        return MINTSCAN_API_URL + "v11/assets/" +  apiName + "/erc20/info"
+    static func msErc20Url() -> String {
+        return MINTSCAN_API_URL + "v11/assets/erc20"
     }
     
     static func msGrc20InfoUrl(_ apiName: String) -> String {

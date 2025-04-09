@@ -32,6 +32,8 @@ struct Ibc_Applications_InterchainAccounts_Controller_V1_MsgRegisterInterchainAc
 
   var version: String = String()
 
+  var ordering: Ibc_Core_Channel_V1_Order = .noneUnspecified
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -95,11 +97,52 @@ struct Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTxResponse {
   init() {}
 }
 
+/// MsgUpdateParams defines the payload for Msg/UpdateParams
+struct Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// signer address
+  var signer: String = String()
+
+  /// params defines the 27-interchain-accounts/controller parameters to update.
+  ///
+  /// NOTE: All parameters must be supplied.
+  var params: Ibc_Applications_InterchainAccounts_Controller_V1_Params {
+    get {return _params ?? Ibc_Applications_InterchainAccounts_Controller_V1_Params()}
+    set {_params = newValue}
+  }
+  /// Returns true if `params` has been explicitly set.
+  var hasParams: Bool {return self._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
+  mutating func clearParams() {self._params = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _params: Ibc_Applications_InterchainAccounts_Controller_V1_Params? = nil
+}
+
+/// MsgUpdateParamsResponse defines the response for Msg/UpdateParams
+struct Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgRegisterInterchainAccount: @unchecked Sendable {}
 extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgRegisterInterchainAccountResponse: @unchecked Sendable {}
 extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTx: @unchecked Sendable {}
 extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTxResponse: @unchecked Sendable {}
+extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams: @unchecked Sendable {}
+extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -112,6 +155,7 @@ extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgRegisterInterchai
     1: .same(proto: "owner"),
     2: .standard(proto: "connection_id"),
     3: .same(proto: "version"),
+    4: .same(proto: "ordering"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -123,6 +167,7 @@ extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgRegisterInterchai
       case 1: try { try decoder.decodeSingularStringField(value: &self.owner) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.connectionID) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.version) }()
+      case 4: try { try decoder.decodeSingularEnumField(value: &self.ordering) }()
       default: break
       }
     }
@@ -138,6 +183,9 @@ extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgRegisterInterchai
     if !self.version.isEmpty {
       try visitor.visitSingularStringField(value: self.version, fieldNumber: 3)
     }
+    if self.ordering != .noneUnspecified {
+      try visitor.visitSingularEnumField(value: self.ordering, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -145,6 +193,7 @@ extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgRegisterInterchai
     if lhs.owner != rhs.owner {return false}
     if lhs.connectionID != rhs.connectionID {return false}
     if lhs.version != rhs.version {return false}
+    if lhs.ordering != rhs.ordering {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -269,6 +318,67 @@ extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTxResponse: S
 
   static func ==(lhs: Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTxResponse, rhs: Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTxResponse) -> Bool {
     if lhs.sequence != rhs.sequence {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgUpdateParams"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "signer"),
+    2: .same(proto: "params"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.signer) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._params) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.signer.isEmpty {
+      try visitor.visitSingularStringField(value: self.signer, fieldNumber: 1)
+    }
+    try { if let v = self._params {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams, rhs: Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams) -> Bool {
+    if lhs.signer != rhs.signer {return false}
+    if lhs._params != rhs._params {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgUpdateParamsResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse, rhs: Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

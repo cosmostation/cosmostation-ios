@@ -73,6 +73,19 @@ class Signer {
         return result
     }
     
+    //Tx for Ibc Eureka Transfer
+    static func genIbcEurekaSendMsg(_ ibcEurekaTransfer: [Ibc_Core_Channel_V2_MsgSendPacket]) -> [Google_Protobuf_Any] {
+        var result = [Google_Protobuf_Any]()
+        ibcEurekaTransfer.forEach { msg in
+            let anyMsg = Google_Protobuf_Any.with {
+                $0.typeURL = "/ibc.core.channel.v2.MsgSendPacket"
+                $0.value = try! msg.serializedData()
+            }
+            result.append(anyMsg)
+        }
+        return result
+    }
+    
     //Tx for Common Delegate
     static func genDelegateMsg(_ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {

@@ -20,25 +20,6 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-/// DenomTrace contains the base denomination for ICS20 fungible tokens and the
-/// source tracing information path.
-struct Ibc_Applications_Transfer_V1_DenomTrace {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  /// path defines the chain of port/channel identifiers used for tracing the
-  /// source of the fungible token.
-  var path: String = String()
-
-  /// base denomination of the relayed fungible token.
-  var baseDenom: String = String()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
 /// Params defines the set of IBC transfer parameters.
 /// NOTE: To prevent a single token from being transferred, set the
 /// TransfersEnabled parameter to true and then set the bank module's SendEnabled
@@ -62,51 +43,12 @@ struct Ibc_Applications_Transfer_V1_Params {
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
-extension Ibc_Applications_Transfer_V1_DenomTrace: @unchecked Sendable {}
 extension Ibc_Applications_Transfer_V1_Params: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "ibc.applications.transfer.v1"
-
-extension Ibc_Applications_Transfer_V1_DenomTrace: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".DenomTrace"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "path"),
-    2: .standard(proto: "base_denom"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.path) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.baseDenom) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.path.isEmpty {
-      try visitor.visitSingularStringField(value: self.path, fieldNumber: 1)
-    }
-    if !self.baseDenom.isEmpty {
-      try visitor.visitSingularStringField(value: self.baseDenom, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Ibc_Applications_Transfer_V1_DenomTrace, rhs: Ibc_Applications_Transfer_V1_DenomTrace) -> Bool {
-    if lhs.path != rhs.path {return false}
-    if lhs.baseDenom != rhs.baseDenom {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
 
 extension Ibc_Applications_Transfer_V1_Params: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".Params"

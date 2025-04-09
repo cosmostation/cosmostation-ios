@@ -232,14 +232,14 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                 mintscanGrc20Tokens = gnoFetcher.mintscanGrc20Tokens.sorted { $0.symbol!.lowercased() < $1.symbol!.lowercased() }
                 if let userCustomTokens = BaseData.instance.getDisplayGrc20s(baseAccount.id, selectedChain.tag) {
                     mintscanGrc20Tokens.sort {
-                        if (userCustomTokens.contains($0.contract!) && !userCustomTokens.contains($1.contract!)) { return true }
-                        if (!userCustomTokens.contains($0.contract!) && userCustomTokens.contains($1.contract!)) { return false }
-                        let value0 = gnoFetcher.tokenValue($0.contract!)
-                        let value1 = gnoFetcher.tokenValue($1.contract!)
+                        if (userCustomTokens.contains($0.address!) && !userCustomTokens.contains($1.address!)) { return true }
+                        if (!userCustomTokens.contains($0.address!) && userCustomTokens.contains($1.address!)) { return false }
+                        let value0 = gnoFetcher.tokenValue($0.address!)
+                        let value1 = gnoFetcher.tokenValue($1.address!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     mintscanGrc20Tokens.forEach { token in
-                        if (userCustomTokens.contains(token.contract!)) {
+                        if (userCustomTokens.contains(token.address!)) {
                             toDisplayGrc20Tokens.append(token)
                         }
                     }
@@ -247,8 +247,8 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                     mintscanGrc20Tokens.sort {
                         if ($0.getAmount() != NSDecimalNumber.zero) && ($1.getAmount() == NSDecimalNumber.zero) { return true }
                         if ($0.getAmount() == NSDecimalNumber.zero) && ($1.getAmount() != NSDecimalNumber.zero) { return false }
-                        let value0 = gnoFetcher.tokenValue($0.contract!)
-                        let value1 = gnoFetcher.tokenValue($1.contract!)
+                        let value0 = gnoFetcher.tokenValue($0.address!)
+                        let value1 = gnoFetcher.tokenValue($1.address!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     mintscanGrc20Tokens.forEach { token in
@@ -265,14 +265,14 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                 
                 if let userCustomTokens = BaseData.instance.getDisplayCw20s(baseAccount.id, selectedChain.tag) {
                     mintscanCw20Tokens.sort {
-                        if (userCustomTokens.contains($0.contract!) && !userCustomTokens.contains($1.contract!)) { return true }
-                        if (!userCustomTokens.contains($0.contract!) && userCustomTokens.contains($1.contract!)) { return false }
-                        let value0 = cosmosFetcher.tokenValue($0.contract!)
-                        let value1 = cosmosFetcher.tokenValue($1.contract!)
+                        if (userCustomTokens.contains($0.address!) && !userCustomTokens.contains($1.address!)) { return true }
+                        if (!userCustomTokens.contains($0.address!) && userCustomTokens.contains($1.address!)) { return false }
+                        let value0 = cosmosFetcher.tokenValue($0.address!)
+                        let value1 = cosmosFetcher.tokenValue($1.address!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     mintscanCw20Tokens.forEach { token in
-                        if (userCustomTokens.contains(token.contract!)) {
+                        if (userCustomTokens.contains(token.address!)) {
                             toDisplayCw20Tokens.append(token)
                         }
                     }
@@ -280,8 +280,8 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                     mintscanCw20Tokens.sort {
                         if ($0.getAmount() != NSDecimalNumber.zero) && ($1.getAmount() == NSDecimalNumber.zero) { return true }
                         if ($0.getAmount() == NSDecimalNumber.zero) && ($1.getAmount() != NSDecimalNumber.zero) { return false }
-                        let value0 = cosmosFetcher.tokenValue($0.contract!)
-                        let value1 = cosmosFetcher.tokenValue($1.contract!)
+                        let value0 = cosmosFetcher.tokenValue($0.address!)
+                        let value1 = cosmosFetcher.tokenValue($1.address!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     mintscanCw20Tokens.forEach { token in
@@ -299,15 +299,15 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                  
                 if let userCustomTokens = BaseData.instance.getDisplayErc20s(baseAccount.id, selectedChain.tag) {
                     mintscanErc20Tokens.sort {
-                        if (userCustomTokens.contains($0.contract!) && !userCustomTokens.contains($1.contract!)) { return true }
-                        if (!userCustomTokens.contains($0.contract!) && userCustomTokens.contains($1.contract!)) { return false }
-                        let value0 = evmFetcher.tokenValue($0.contract!)
-                        let value1 = evmFetcher.tokenValue($1.contract!)
+                        if (userCustomTokens.contains($0.address!) && !userCustomTokens.contains($1.address!)) { return true }
+                        if (!userCustomTokens.contains($0.address!) && userCustomTokens.contains($1.address!)) { return false }
+                        let value0 = evmFetcher.tokenValue($0.address!)
+                        let value1 = evmFetcher.tokenValue($1.address!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     
                     mintscanErc20Tokens.forEach { token in
-                        if (userCustomTokens.contains(token.contract!)) {
+                        if (userCustomTokens.contains(token.address!)) {
                             toDisplayErc20Tokens.append(token)
                         }
                     }
@@ -315,8 +315,8 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                     mintscanErc20Tokens.sort {
                         if ($0.getAmount() != NSDecimalNumber.zero) && ($1.getAmount() == NSDecimalNumber.zero) { return true }
                         if ($0.getAmount() == NSDecimalNumber.zero) && ($1.getAmount() != NSDecimalNumber.zero) { return false }
-                        let value0 = evmFetcher.tokenValue($0.contract!)
-                        let value1 = evmFetcher.tokenValue($1.contract!)
+                        let value0 = evmFetcher.tokenValue($0.address!)
+                        let value1 = evmFetcher.tokenValue($1.address!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     mintscanErc20Tokens.forEach { token in
@@ -346,19 +346,19 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
         tokenListSheet.selectedChain = selectedChain
         if selectedChain.isSupportGrc20() {
             tokenListSheet.allTokens = mintscanGrc20Tokens
-            tokenListSheet.toDisplayTokens = toDisplayGrc20Tokens.map { $0.contract! }
+            tokenListSheet.toDisplayTokens = toDisplayGrc20Tokens.map { $0.address! }
 
         } else if selectedChain.isSupportCw20() && selectedChain.isSupportErc20() {
             tokenListSheet.allTokens = mintscanCw20Tokens + mintscanErc20Tokens
-            tokenListSheet.toDisplayTokens = toDisplayCw20Tokens.map { $0.contract! } + toDisplayErc20Tokens.map { $0.contract! }
+            tokenListSheet.toDisplayTokens = toDisplayCw20Tokens.map { $0.address! } + toDisplayErc20Tokens.map { $0.address! }
 
         } else if selectedChain.isSupportCw20() {
             tokenListSheet.allTokens = mintscanCw20Tokens
-            tokenListSheet.toDisplayTokens = toDisplayCw20Tokens.map { $0.contract! }
+            tokenListSheet.toDisplayTokens = toDisplayCw20Tokens.map { $0.address! }
             
         } else {
             tokenListSheet.allTokens = mintscanErc20Tokens
-            tokenListSheet.toDisplayTokens = toDisplayErc20Tokens.map { $0.contract! }
+            tokenListSheet.toDisplayTokens = toDisplayErc20Tokens.map { $0.address! }
         }
         tokenListSheet.tokensListDelegate = self
         onStartSheet(tokenListSheet, 680, 0.8)
@@ -400,7 +400,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
         let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
         transfer.sendAssetType = sendType
         transfer.fromChain = selectedChain
-        transfer.toSendDenom = token.contract
+        transfer.toSendDenom = token.address
         transfer.toSendMsToken = token
         transfer.modalTransitionStyle = .coverVertical
         self.present(transfer, animated: true)

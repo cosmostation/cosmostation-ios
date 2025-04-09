@@ -20,8 +20,6 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
     var fromChain: BaseChain!
     var toChain: BaseChain!
     var sendType: SendAssetType!
-//    var senderBechAddress: String!
-//    var senderEvmAddress: String!
     var existedAddress: String?
     var sendAddressDelegate: SendAddressDelegate?
     
@@ -79,6 +77,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
     }
     
     @IBAction func onClickConfirm(_ sender: BaseButton?) {
+        print("onClickConfirm ", sendType)
         let userInput = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         if (userInput?.isEmpty == true || userInput?.count ?? 0 < 5) {
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
@@ -101,66 +100,110 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         }
         
         
-        
-        if (sendType == .SUI_COIN || sendType == .SUI_NFT) {
+        if (toChain is ChainSui) {
             //only support sui address style
             if (WUtils.isValidSuiAdderss(userInput)) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
+            } else {
+                self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                return
             }
             
-        } else if (sendType == .BTC_COIN) {
-            
+        } else if (toChain is ChainBitCoin86 || toChain is ChainBitCoin86_T) {
             var network = ""
             if userInput!.starts(with: "1") || userInput!.starts(with: "bc1") || userInput!.starts(with: "3") {
                 network = "bitcoin"
             } else {
                 network = "testnet"
             }
-            let isValidAddress = BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [userInput!, network])
-
-            if isValidAddress {
+            if BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [userInput!, network]) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
-                
             } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                return
             }
             
-
-        } else if (sendType == .EVM_COIN || sendType == .EVM_ERC20) {
+        } else if (toChain.supportEvm == true && toChain.supportCosmos == false) {
             //only support EVM address style
-            if (!WUtils.isValidEvmAddress(userInput)) {
+            if (WUtils.isValidEvmAddress(userInput)) {
+                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+                self.dismiss(animated: true)
+                return
+            } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-                return;
+                return
             }
-            self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
-            self.dismiss(animated: true)
             
-        } else if (sendType == .COSMOS_COIN || sendType == .COSMOS_WASM || sendType == .GNO_GRC20 || sendType == .GNO_COIN) {
-            //only support cosmos address style
+        } else if (toChain.supportEvm == false && toChain.supportCosmos == true) {
             if (WUtils.isValidBechAddress(toChain, userInput)) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
+            } else {
+                onCheckNameServices(userInput!)
             }
-            onCheckNameServices(userInput!)
             
-        } else if (sendType == .COSMOS_EVM_MAIN_COIN) {
-            //support both style
-            if (WUtils.isValidEvmAddress(userInput) && (fromChain.tag == toChain.tag)) {
-                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
-                self.dismiss(animated: true)
-                return
+        } else if (toChain.supportEvm == true && toChain.supportCosmos == true) {
+            if (sendType == .COSMOS_COIN) {
+                //코스모스만
+                if (WUtils.isValidBechAddress(toChain, userInput)) {
+                    self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+                    self.dismiss(animated: true)
+                    return
+                } else {
+                    onCheckNameServices(userInput!)
+                }
+                
+            } else if (sendType == .COSMOS_EVM_MAIN_COIN && fromChain.tag == toChain.tag) {
+                //둘다지원
+                if (WUtils.isValidEvmAddress(userInput) && (fromChain.tag == toChain.tag)) {
+                    self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+                    self.dismiss(animated: true)
+                    return
+                } else if (WUtils.isValidBechAddress(toChain, userInput)) {
+                    self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+                    self.dismiss(animated: true)
+                    return
+                } else {
+                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                    return
+                }
+                
+            } else if (sendType == .COSMOS_EVM_MAIN_COIN && fromChain.tag != toChain.tag) {
+                //코스모스만
+                if (WUtils.isValidBechAddress(toChain, userInput)) {
+                    self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+                    self.dismiss(animated: true)
+                    return
+                } else {
+                    onCheckNameServices(userInput!)
+                }
+                
+            } else if (sendType == .EVM_ERC20 && fromChain.tag == toChain.tag) {
+                //이더리움만 지원
+                if (WUtils.isValidEvmAddress(userInput)) {
+                    self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+                    self.dismiss(animated: true)
+                    return
+                } else {
+                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                    return
+                }
+                
+            } else if (sendType == .EVM_ERC20 && fromChain.tag != toChain.tag) {
+                //코스모스만(유레카)
+                if (WUtils.isValidBechAddress(toChain, userInput)) {
+                    self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+                    self.dismiss(animated: true)
+                    return
+                } else {
+                    onCheckNameServices(userInput!)
+                }
             }
-            if (WUtils.isValidBechAddress(toChain, userInput)) {
-                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
-                self.dismiss(animated: true)
-                return
-            }
-            onCheckNameServices(userInput!)
         }
     }
     
@@ -170,10 +213,14 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
     
     
     func onCheckNameServices(_ userInput: String)  {
+        guard let prefix = toChain.bechAccountPrefix else {
+            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+            return
+        }
+        
         view.isUserInteractionEnabled = false
         loadingView.isHidden = false
         nameservices.removeAll()
-        let prefix = toChain.bechAccountPrefix!
         
         Task {
             if let icns = try await checkOsmoname(userInput, prefix) {

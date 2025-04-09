@@ -89,6 +89,7 @@ struct Ibc_Core_Connection_V1_MsgConnectionOpenTry {
     set {_uniqueStorage()._previousConnectionID = newValue}
   }
 
+  /// Deprecated: this field is unused.
   var clientState: SwiftProtobuf.Google_Protobuf_Any {
     get {return _storage._clientState ?? SwiftProtobuf.Google_Protobuf_Any()}
     set {_uniqueStorage()._clientState = newValue}
@@ -126,25 +127,26 @@ struct Ibc_Core_Connection_V1_MsgConnectionOpenTry {
   /// Clears the value of `proofHeight`. Subsequent reads from it will return its default value.
   mutating func clearProofHeight() {_uniqueStorage()._proofHeight = nil}
 
-  /// proof of the initialization the connection on Chain A: `UNITIALIZED ->
+  /// proof of the initialization the connection on Chain A: `UNINITIALIZED ->
   /// INIT`
   var proofInit: Data {
     get {return _storage._proofInit}
     set {_uniqueStorage()._proofInit = newValue}
   }
 
-  /// proof of client state included in message
+  /// Deprecated: this field is unused.
   var proofClient: Data {
     get {return _storage._proofClient}
     set {_uniqueStorage()._proofClient = newValue}
   }
 
-  /// proof of client consensus state
+  /// Deprecated: this field is unused.
   var proofConsensus: Data {
     get {return _storage._proofConsensus}
     set {_uniqueStorage()._proofConsensus = newValue}
   }
 
+  /// Deprecated: this field is unused.
   var consensusHeight: Ibc_Core_Client_V1_Height {
     get {return _storage._consensusHeight ?? Ibc_Core_Client_V1_Height()}
     set {_uniqueStorage()._consensusHeight = newValue}
@@ -159,7 +161,7 @@ struct Ibc_Core_Connection_V1_MsgConnectionOpenTry {
     set {_uniqueStorage()._signer = newValue}
   }
 
-  /// optional proof data for host state machines that are unable to introspect their own consensus state
+  /// Deprecated: this field is unused.
   var hostConsensusStateProof: Data {
     get {return _storage._hostConsensusStateProof}
     set {_uniqueStorage()._hostConsensusStateProof = newValue}
@@ -203,6 +205,7 @@ struct Ibc_Core_Connection_V1_MsgConnectionOpenAck {
   /// Clears the value of `version`. Subsequent reads from it will return its default value.
   mutating func clearVersion() {self._version = nil}
 
+  /// Deprecated: this field is unused.
   var clientState: SwiftProtobuf.Google_Protobuf_Any {
     get {return _clientState ?? SwiftProtobuf.Google_Protobuf_Any()}
     set {_clientState = newValue}
@@ -221,16 +224,17 @@ struct Ibc_Core_Connection_V1_MsgConnectionOpenAck {
   /// Clears the value of `proofHeight`. Subsequent reads from it will return its default value.
   mutating func clearProofHeight() {self._proofHeight = nil}
 
-  /// proof of the initialization the connection on Chain B: `UNITIALIZED ->
+  /// proof of the initialization the connection on Chain B: `UNINITIALIZED ->
   /// TRYOPEN`
   var proofTry: Data = Data()
 
-  /// proof of client state included in message
+  /// Deprecated: this field is unused.
   var proofClient: Data = Data()
 
-  /// proof of client consensus state
+  /// Deprecated: this field is unused.
   var proofConsensus: Data = Data()
 
+  /// Deprecated: this field is unused.
   var consensusHeight: Ibc_Core_Client_V1_Height {
     get {return _consensusHeight ?? Ibc_Core_Client_V1_Height()}
     set {_consensusHeight = newValue}
@@ -242,7 +246,7 @@ struct Ibc_Core_Connection_V1_MsgConnectionOpenAck {
 
   var signer: String = String()
 
-  /// optional proof data for host state machines that are unable to introspect their own consensus state
+  /// Deprecated: this field is unused.
   var hostConsensusStateProof: Data = Data()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -308,6 +312,45 @@ struct Ibc_Core_Connection_V1_MsgConnectionOpenConfirmResponse {
   init() {}
 }
 
+/// MsgUpdateParams defines the sdk.Msg type to update the connection parameters.
+struct Ibc_Core_Connection_V1_MsgUpdateParams {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// signer address
+  var signer: String = String()
+
+  /// params defines the connection parameters to update.
+  ///
+  /// NOTE: All parameters must be supplied.
+  var params: Ibc_Core_Connection_V1_Params {
+    get {return _params ?? Ibc_Core_Connection_V1_Params()}
+    set {_params = newValue}
+  }
+  /// Returns true if `params` has been explicitly set.
+  var hasParams: Bool {return self._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
+  mutating func clearParams() {self._params = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _params: Ibc_Core_Connection_V1_Params? = nil
+}
+
+/// MsgUpdateParamsResponse defines the MsgUpdateParams response type.
+struct Ibc_Core_Connection_V1_MsgUpdateParamsResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Ibc_Core_Connection_V1_MsgConnectionOpenInit: @unchecked Sendable {}
 extension Ibc_Core_Connection_V1_MsgConnectionOpenInitResponse: @unchecked Sendable {}
@@ -317,6 +360,8 @@ extension Ibc_Core_Connection_V1_MsgConnectionOpenAck: @unchecked Sendable {}
 extension Ibc_Core_Connection_V1_MsgConnectionOpenAckResponse: @unchecked Sendable {}
 extension Ibc_Core_Connection_V1_MsgConnectionOpenConfirm: @unchecked Sendable {}
 extension Ibc_Core_Connection_V1_MsgConnectionOpenConfirmResponse: @unchecked Sendable {}
+extension Ibc_Core_Connection_V1_MsgUpdateParams: @unchecked Sendable {}
+extension Ibc_Core_Connection_V1_MsgUpdateParamsResponse: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -768,6 +813,67 @@ extension Ibc_Core_Connection_V1_MsgConnectionOpenConfirmResponse: SwiftProtobuf
   }
 
   static func ==(lhs: Ibc_Core_Connection_V1_MsgConnectionOpenConfirmResponse, rhs: Ibc_Core_Connection_V1_MsgConnectionOpenConfirmResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ibc_Core_Connection_V1_MsgUpdateParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgUpdateParams"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "signer"),
+    2: .same(proto: "params"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.signer) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._params) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.signer.isEmpty {
+      try visitor.visitSingularStringField(value: self.signer, fieldNumber: 1)
+    }
+    try { if let v = self._params {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ibc_Core_Connection_V1_MsgUpdateParams, rhs: Ibc_Core_Connection_V1_MsgUpdateParams) -> Bool {
+    if lhs.signer != rhs.signer {return false}
+    if lhs._params != rhs._params {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ibc_Core_Connection_V1_MsgUpdateParamsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgUpdateParamsResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ibc_Core_Connection_V1_MsgUpdateParamsResponse, rhs: Ibc_Core_Connection_V1_MsgUpdateParamsResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

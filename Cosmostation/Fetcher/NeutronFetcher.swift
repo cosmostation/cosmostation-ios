@@ -36,8 +36,7 @@ class NeutronFetcher: CosmosFetcher {
         cosmosBaseFees.removeAll()
         
         do {
-            if let cw20Tokens = try? await fetchCw20Info(),
-               let balance = try await fetchBalance(),
+            if let balance = try await fetchBalance(),
                let auth = try? await fetchAuth(),
                let vault = try? await fetchVaultDeposit(),
                let vesting = try? await fetchNeutronVesting(),
@@ -46,7 +45,8 @@ class NeutronFetcher: CosmosFetcher {
                let rewards = try? await fetchNeutronStakingRewards(),
                let commission = try? await fetchCommission(),
                let baseFees = try? await fetchBaseFee() {
-                self.mintscanCw20Tokens = cw20Tokens ?? []
+                
+                self.mintscanCw20Tokens =  BaseData.instance.mintscanCw20Tokens?.filter({ $0.chainName == chain.apiName }) ?? []
                 self.cosmosBalances = balance
                 
                 delegations?.forEach({ delegation in
@@ -87,7 +87,7 @@ class NeutronFetcher: CosmosFetcher {
                             await self.fetchCw20Balance(cw20)
                         }
                     } else {
-                        if (userDisplaytoken?.contains(cw20.contract!) == true) {
+                        if (userDisplaytoken?.contains(cw20.address!) == true) {
                             await self.fetchCw20Balance(cw20)
                         }
                     }

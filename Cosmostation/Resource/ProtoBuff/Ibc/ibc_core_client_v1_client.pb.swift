@@ -100,76 +100,6 @@ struct Ibc_Core_Client_V1_ClientConsensusStates {
   init() {}
 }
 
-/// ClientUpdateProposal is a governance proposal. If it passes, the substitute
-/// client's latest consensus state is copied over to the subject client. The proposal
-/// handler may fail if the subject and the substitute do not match in client and
-/// chain parameters (with exception to latest height, frozen height, and chain-id).
-struct Ibc_Core_Client_V1_ClientUpdateProposal {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  /// the title of the update proposal
-  var title: String = String()
-
-  /// the description of the proposal
-  var description_p: String = String()
-
-  /// the client identifier for the client to be updated if the proposal passes
-  var subjectClientID: String = String()
-
-  /// the substitute client identifier for the client standing in for the subject
-  /// client
-  var substituteClientID: String = String()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-/// UpgradeProposal is a gov Content type for initiating an IBC breaking
-/// upgrade.
-struct Ibc_Core_Client_V1_UpgradeProposal {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var title: String = String()
-
-  var description_p: String = String()
-
-  var plan: Cosmos_Upgrade_V1beta1_Plan {
-    get {return _plan ?? Cosmos_Upgrade_V1beta1_Plan()}
-    set {_plan = newValue}
-  }
-  /// Returns true if `plan` has been explicitly set.
-  var hasPlan: Bool {return self._plan != nil}
-  /// Clears the value of `plan`. Subsequent reads from it will return its default value.
-  mutating func clearPlan() {self._plan = nil}
-
-  /// An UpgradedClientState must be provided to perform an IBC breaking upgrade.
-  /// This will make the chain commit to the correct upgraded (self) client state
-  /// before the upgrade occurs, so that connecting chains can verify that the
-  /// new upgraded client is valid by verifying a proof on the previous version
-  /// of the chain. This will allow IBC connections to persist smoothly across
-  /// planned chain upgrades
-  var upgradedClientState: SwiftProtobuf.Google_Protobuf_Any {
-    get {return _upgradedClientState ?? SwiftProtobuf.Google_Protobuf_Any()}
-    set {_upgradedClientState = newValue}
-  }
-  /// Returns true if `upgradedClientState` has been explicitly set.
-  var hasUpgradedClientState: Bool {return self._upgradedClientState != nil}
-  /// Clears the value of `upgradedClientState`. Subsequent reads from it will return its default value.
-  mutating func clearUpgradedClientState() {self._upgradedClientState = nil}
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  fileprivate var _plan: Cosmos_Upgrade_V1beta1_Plan? = nil
-  fileprivate var _upgradedClientState: SwiftProtobuf.Google_Protobuf_Any? = nil
-}
-
 /// Height is a monotonically increasing data type
 /// that can be compared against another Height for the purposes of updating and
 /// freezing clients
@@ -180,6 +110,9 @@ struct Ibc_Core_Client_V1_UpgradeProposal {
 /// breaking changes In these cases, the RevisionNumber is incremented so that
 /// height continues to be monitonically increasing even as the RevisionHeight
 /// gets reset
+///
+/// Please note that json tags for generated Go code are overridden to explicitly exclude the omitempty jsontag.
+/// This enforces the Go json marshaller to always emit zero values for both revision_number and revision_height.
 struct Ibc_Core_Client_V1_Height {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -216,8 +149,6 @@ struct Ibc_Core_Client_V1_Params {
 extension Ibc_Core_Client_V1_IdentifiedClientState: @unchecked Sendable {}
 extension Ibc_Core_Client_V1_ConsensusStateWithHeight: @unchecked Sendable {}
 extension Ibc_Core_Client_V1_ClientConsensusStates: @unchecked Sendable {}
-extension Ibc_Core_Client_V1_ClientUpdateProposal: @unchecked Sendable {}
-extension Ibc_Core_Client_V1_UpgradeProposal: @unchecked Sendable {}
 extension Ibc_Core_Client_V1_Height: @unchecked Sendable {}
 extension Ibc_Core_Client_V1_Params: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
@@ -343,110 +274,6 @@ extension Ibc_Core_Client_V1_ClientConsensusStates: SwiftProtobuf.Message, Swift
   static func ==(lhs: Ibc_Core_Client_V1_ClientConsensusStates, rhs: Ibc_Core_Client_V1_ClientConsensusStates) -> Bool {
     if lhs.clientID != rhs.clientID {return false}
     if lhs.consensusStates != rhs.consensusStates {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Ibc_Core_Client_V1_ClientUpdateProposal: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".ClientUpdateProposal"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "title"),
-    2: .same(proto: "description"),
-    3: .standard(proto: "subject_client_id"),
-    4: .standard(proto: "substitute_client_id"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.title) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.description_p) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self.subjectClientID) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.substituteClientID) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.title.isEmpty {
-      try visitor.visitSingularStringField(value: self.title, fieldNumber: 1)
-    }
-    if !self.description_p.isEmpty {
-      try visitor.visitSingularStringField(value: self.description_p, fieldNumber: 2)
-    }
-    if !self.subjectClientID.isEmpty {
-      try visitor.visitSingularStringField(value: self.subjectClientID, fieldNumber: 3)
-    }
-    if !self.substituteClientID.isEmpty {
-      try visitor.visitSingularStringField(value: self.substituteClientID, fieldNumber: 4)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Ibc_Core_Client_V1_ClientUpdateProposal, rhs: Ibc_Core_Client_V1_ClientUpdateProposal) -> Bool {
-    if lhs.title != rhs.title {return false}
-    if lhs.description_p != rhs.description_p {return false}
-    if lhs.subjectClientID != rhs.subjectClientID {return false}
-    if lhs.substituteClientID != rhs.substituteClientID {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Ibc_Core_Client_V1_UpgradeProposal: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".UpgradeProposal"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "title"),
-    2: .same(proto: "description"),
-    3: .same(proto: "plan"),
-    4: .standard(proto: "upgraded_client_state"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.title) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.description_p) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._plan) }()
-      case 4: try { try decoder.decodeSingularMessageField(value: &self._upgradedClientState) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    if !self.title.isEmpty {
-      try visitor.visitSingularStringField(value: self.title, fieldNumber: 1)
-    }
-    if !self.description_p.isEmpty {
-      try visitor.visitSingularStringField(value: self.description_p, fieldNumber: 2)
-    }
-    try { if let v = self._plan {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    } }()
-    try { if let v = self._upgradedClientState {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    } }()
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Ibc_Core_Client_V1_UpgradeProposal, rhs: Ibc_Core_Client_V1_UpgradeProposal) -> Bool {
-    if lhs.title != rhs.title {return false}
-    if lhs.description_p != rhs.description_p {return false}
-    if lhs._plan != rhs._plan {return false}
-    if lhs._upgradedClientState != rhs._upgradedClientState {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

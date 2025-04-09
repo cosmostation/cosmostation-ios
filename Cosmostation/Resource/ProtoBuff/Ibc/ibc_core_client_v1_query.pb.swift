@@ -142,7 +142,7 @@ struct Ibc_Core_Client_V1_QueryConsensusStateRequest {
   /// consensus state revision height
   var revisionHeight: UInt64 = 0
 
-  /// latest_height overrrides the height field and queries the latest stored
+  /// latest_height overrides the height field and queries the latest stored
   /// ConsensusState
   var latestHeight: Bool = false
 
@@ -362,6 +362,36 @@ struct Ibc_Core_Client_V1_QueryClientParamsResponse {
   fileprivate var _params: Ibc_Core_Client_V1_Params? = nil
 }
 
+/// QueryClientCreatorRequest is the request type for the Query/ClientCreator RPC
+/// method.
+struct Ibc_Core_Client_V1_QueryClientCreatorRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// client unique identifier
+  var clientID: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// QueryClientCreatorResponse is the response type for the Query/ClientCreator RPC
+/// method.
+struct Ibc_Core_Client_V1_QueryClientCreatorResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// creator of the client
+  var creator: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 /// QueryUpgradedClientStateRequest is the request type for the
 /// Query/UpgradedClientState RPC method
 struct Ibc_Core_Client_V1_QueryUpgradedClientStateRequest {
@@ -434,6 +464,69 @@ struct Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse {
   fileprivate var _upgradedConsensusState: SwiftProtobuf.Google_Protobuf_Any? = nil
 }
 
+/// QueryVerifyMembershipRequest is the request type for the Query/VerifyMembership RPC method
+struct Ibc_Core_Client_V1_QueryVerifyMembershipRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// client unique identifier.
+  var clientID: String = String()
+
+  /// the proof to be verified by the client.
+  var proof: Data = Data()
+
+  /// the height of the commitment root at which the proof is verified.
+  var proofHeight: Ibc_Core_Client_V1_Height {
+    get {return _proofHeight ?? Ibc_Core_Client_V1_Height()}
+    set {_proofHeight = newValue}
+  }
+  /// Returns true if `proofHeight` has been explicitly set.
+  var hasProofHeight: Bool {return self._proofHeight != nil}
+  /// Clears the value of `proofHeight`. Subsequent reads from it will return its default value.
+  mutating func clearProofHeight() {self._proofHeight = nil}
+
+  /// the value which is proven.
+  var value: Data = Data()
+
+  /// optional time delay
+  var timeDelay: UInt64 = 0
+
+  /// optional block delay
+  var blockDelay: UInt64 = 0
+
+  /// the commitment key path.
+  var merklePath: Ibc_Core_Commitment_V2_MerklePath {
+    get {return _merklePath ?? Ibc_Core_Commitment_V2_MerklePath()}
+    set {_merklePath = newValue}
+  }
+  /// Returns true if `merklePath` has been explicitly set.
+  var hasMerklePath: Bool {return self._merklePath != nil}
+  /// Clears the value of `merklePath`. Subsequent reads from it will return its default value.
+  mutating func clearMerklePath() {self._merklePath = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _proofHeight: Ibc_Core_Client_V1_Height? = nil
+  fileprivate var _merklePath: Ibc_Core_Commitment_V2_MerklePath? = nil
+}
+
+/// QueryVerifyMembershipResponse is the response type for the Query/VerifyMembership RPC method
+struct Ibc_Core_Client_V1_QueryVerifyMembershipResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// boolean indicating success or failure of proof verification.
+  var success: Bool = false
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Ibc_Core_Client_V1_QueryClientStateRequest: @unchecked Sendable {}
 extension Ibc_Core_Client_V1_QueryClientStateResponse: @unchecked Sendable {}
@@ -449,10 +542,14 @@ extension Ibc_Core_Client_V1_QueryClientStatusRequest: @unchecked Sendable {}
 extension Ibc_Core_Client_V1_QueryClientStatusResponse: @unchecked Sendable {}
 extension Ibc_Core_Client_V1_QueryClientParamsRequest: @unchecked Sendable {}
 extension Ibc_Core_Client_V1_QueryClientParamsResponse: @unchecked Sendable {}
+extension Ibc_Core_Client_V1_QueryClientCreatorRequest: @unchecked Sendable {}
+extension Ibc_Core_Client_V1_QueryClientCreatorResponse: @unchecked Sendable {}
 extension Ibc_Core_Client_V1_QueryUpgradedClientStateRequest: @unchecked Sendable {}
 extension Ibc_Core_Client_V1_QueryUpgradedClientStateResponse: @unchecked Sendable {}
 extension Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest: @unchecked Sendable {}
 extension Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse: @unchecked Sendable {}
+extension Ibc_Core_Client_V1_QueryVerifyMembershipRequest: @unchecked Sendable {}
+extension Ibc_Core_Client_V1_QueryVerifyMembershipResponse: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -1002,6 +1099,70 @@ extension Ibc_Core_Client_V1_QueryClientParamsResponse: SwiftProtobuf.Message, S
   }
 }
 
+extension Ibc_Core_Client_V1_QueryClientCreatorRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryClientCreatorRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "client_id"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.clientID) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.clientID.isEmpty {
+      try visitor.visitSingularStringField(value: self.clientID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ibc_Core_Client_V1_QueryClientCreatorRequest, rhs: Ibc_Core_Client_V1_QueryClientCreatorRequest) -> Bool {
+    if lhs.clientID != rhs.clientID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ibc_Core_Client_V1_QueryClientCreatorResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryClientCreatorResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "creator"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.creator) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.creator.isEmpty {
+      try visitor.visitSingularStringField(value: self.creator, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ibc_Core_Client_V1_QueryClientCreatorResponse, rhs: Ibc_Core_Client_V1_QueryClientCreatorResponse) -> Bool {
+    if lhs.creator != rhs.creator {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Ibc_Core_Client_V1_QueryUpgradedClientStateRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".QueryUpgradedClientStateRequest"
   static let _protobuf_nameMap = SwiftProtobuf._NameMap()
@@ -1107,6 +1268,110 @@ extension Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse: SwiftProtobuf.
 
   static func ==(lhs: Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse, rhs: Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse) -> Bool {
     if lhs._upgradedConsensusState != rhs._upgradedConsensusState {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ibc_Core_Client_V1_QueryVerifyMembershipRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryVerifyMembershipRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "client_id"),
+    2: .same(proto: "proof"),
+    3: .standard(proto: "proof_height"),
+    5: .same(proto: "value"),
+    6: .standard(proto: "time_delay"),
+    7: .standard(proto: "block_delay"),
+    8: .standard(proto: "merkle_path"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.clientID) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.proof) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._proofHeight) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self.value) }()
+      case 6: try { try decoder.decodeSingularUInt64Field(value: &self.timeDelay) }()
+      case 7: try { try decoder.decodeSingularUInt64Field(value: &self.blockDelay) }()
+      case 8: try { try decoder.decodeSingularMessageField(value: &self._merklePath) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.clientID.isEmpty {
+      try visitor.visitSingularStringField(value: self.clientID, fieldNumber: 1)
+    }
+    if !self.proof.isEmpty {
+      try visitor.visitSingularBytesField(value: self.proof, fieldNumber: 2)
+    }
+    try { if let v = self._proofHeight {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    if !self.value.isEmpty {
+      try visitor.visitSingularBytesField(value: self.value, fieldNumber: 5)
+    }
+    if self.timeDelay != 0 {
+      try visitor.visitSingularUInt64Field(value: self.timeDelay, fieldNumber: 6)
+    }
+    if self.blockDelay != 0 {
+      try visitor.visitSingularUInt64Field(value: self.blockDelay, fieldNumber: 7)
+    }
+    try { if let v = self._merklePath {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ibc_Core_Client_V1_QueryVerifyMembershipRequest, rhs: Ibc_Core_Client_V1_QueryVerifyMembershipRequest) -> Bool {
+    if lhs.clientID != rhs.clientID {return false}
+    if lhs.proof != rhs.proof {return false}
+    if lhs._proofHeight != rhs._proofHeight {return false}
+    if lhs.value != rhs.value {return false}
+    if lhs.timeDelay != rhs.timeDelay {return false}
+    if lhs.blockDelay != rhs.blockDelay {return false}
+    if lhs._merklePath != rhs._merklePath {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ibc_Core_Client_V1_QueryVerifyMembershipResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryVerifyMembershipResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "success"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBoolField(value: &self.success) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.success != false {
+      try visitor.visitSingularBoolField(value: self.success, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ibc_Core_Client_V1_QueryVerifyMembershipResponse, rhs: Ibc_Core_Client_V1_QueryVerifyMembershipResponse) -> Bool {
+    if lhs.success != rhs.success {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
