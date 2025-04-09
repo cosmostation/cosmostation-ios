@@ -678,7 +678,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAtomone())
     result.append(ChainAvalanche())                     //EVM
     result.append(ChainAxelar())
-//    result.append(ChainBabylon())
+    result.append(ChainBabylon())
     result.append(ChainBand())
     result.append(ChainBase())                          //EVM
     result.append(ChainBeraEVM())                       //EVM
