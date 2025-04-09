@@ -720,7 +720,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainGgez())
 ////    result.append(ChainGno())
 //    result.append(ChainGovgen())
-//    result.append(ChainGravityBridge())
+    result.append(ChainGravityBridge())
 //    result.append(ChainHaqqEVM())                       //EVM
 //    result.append(ChainHumansEVM())                     //EVM
 //    result.append(ChainInjective())
@@ -744,8 +744,8 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainMantra())
 //    result.append(ChainMedibloc())
 //    result.append(ChainMigaloo())
-//    result.append(ChainMilkyway())
-//    result.append(ChainNeutron())
+    result.append(ChainMilkyway())
+    result.append(ChainNeutron())
 //    result.append(ChainNibiru())
 //    result.append(ChainNillion())
 //    result.append(ChainNoble())
@@ -759,11 +759,11 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainOnomy())
 //    result.append(ChainOptimism())                      //EVM
 //    result.append(ChainOrai())
-//    result.append(ChainOsmosis())
+    result.append(ChainOsmosis())
 //    result.append(ChainPaloma())
 //    result.append(ChainPassage())
-//    result.append(ChainPersistence118())
-//    result.append(ChainPersistence750())
+    result.append(ChainPersistence118())
+    result.append(ChainPersistence750())
 //    result.append(ChainPlanqEVM())                      //EVM
 //    result.append(ChainPolygon())                       //EVM
 //    result.append(ChainProvenance())

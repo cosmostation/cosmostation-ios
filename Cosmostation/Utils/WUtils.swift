@@ -132,47 +132,65 @@ public class WUtils {
     }
     
     
-    static func checkIBCrecipientableChains(_ fromChain: BaseChain, _ toSendDenom: String, _ sendAssetType: SendAssetType!) -> [BaseChain] {
+    static func checkIBCrecipientableChains(_ fromChain: BaseChain, _ toSendDenom: String) -> [BaseChain] {
+        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false })
+        
         var result = [BaseChain]()
         result.append(fromChain)
         
-        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false })
-        BaseData.instance.mintscanAssets?.forEach({ msAsset in
-            if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN || sendAssetType == .GNO_COIN) {
-                if (msAsset.chain == fromChain.apiName && msAsset.denom?.lowercased() == toSendDenom.lowercased()) {
-                    //add backward path
-                    if let sendable = allIbcChains.filter({ $0.apiName == msAsset.beforeChain(fromChain.apiName) }).first {
-                        if !result.contains(where: { $0.apiName == sendable.apiName }) {
-                            result.append(sendable)
-                        }
-                    }
-                    
-                } else if (msAsset.getjustBeforeChain() == fromChain.apiName && msAsset.getcounterPartyDenom() == toSendDenom.lowercased()) {
-                    //add forward path
-                    if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
-                        if !result.contains(where: { $0.apiName == sendable.apiName }) {
-                            result.append(sendable)
-                        }
-                    }
-                }
-                
-            } else if (sendAssetType == .COSMOS_WASM || sendAssetType == .GNO_GRC20) {
-                //CW20 only support forward IBC path
-                if (msAsset.ibc_info?.counterparty?.chain == fromChain.apiName && msAsset.getcounterPartyDenom() == toSendDenom.lowercased()) {
-                    if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
-                        if !result.contains(where: { $0.apiName == sendable.apiName }) {
-                            result.append(sendable)
-                        }
-                    }
+        //IBC Coin should add backward path if wallet support fromchain
+        if toSendDenom.starts(with: "ibc/"),
+           let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.chain == fromChain.apiName && $0.denom == toSendDenom }).first,
+           let sendable = allIbcChains.filter({ $0.apiName == msAsset.ibc_info?.counterparty?.chain }).first {
+            if !result.contains(where: { $0.apiName == sendable.apiName }) {
+                result.append(sendable)
+            }
+        }
+        
+        //Native & IBC & Cw20 check forward path if wallet support tochain
+        BaseData.instance.mintscanAssets?.forEach { msAsset in
+            if msAsset.ibc_info?.counterparty?.chain == fromChain.apiName,
+               msAsset.ibc_info?.counterparty?.getDenom == toSendDenom,
+               let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
+                if !result.contains(where: { $0.apiName == sendable.apiName }) {
+                    result.append(sendable)
                 }
             }
-        })
+        }
+        
+        //IBC Eureka
+        //Erc20 coin shoud check backward path if possible
+        //ex: Atom(Erc20) on ethereum should back to cosmos
+        if toSendDenom.starts(with: "0x"),
+           let msToken = BaseData.instance.mintscanErc20Tokens?.filter({ $0.chainName == fromChain.apiName && $0.address == toSendDenom }).first,
+           let sendable = allIbcChains.filter({ $0.apiName == msToken.ibc_info?.counterparty?.chain }).first {
+            if !result.contains(where: { $0.apiName == sendable.apiName }) {
+                result.append(sendable)
+            }
+        }
+        
+        //IBC Eureka
+        //Native & IBC Coin check forward path to Ethereum chains
+        //ex: Atom on Cosmos can go etheruem
+        BaseData.instance.mintscanErc20Tokens?.forEach { msToken in
+            if msToken.ibc_info?.counterparty?.chain == fromChain.apiName,
+               msToken.ibc_info?.counterparty?.getDenom == toSendDenom,
+               let sendable = allIbcChains.filter({ $0.apiName == msToken.chainName }).first {
+                if !result.contains(where: { $0.apiName == sendable.apiName }) {
+                    result.append(sendable)
+                }
+            }
+        }
         
         result.sort {
             if ($0.name == fromChain.name) { return true }
             if ($1.name == fromChain.name) { return false }
             if ($0.name == "Cosmos") { return true }
             if ($1.name == "Cosmos") { return false }
+            if ($0.name == "Ethereum") { return true }
+            if ($1.name == "Ethereum") { return false }
+            if ($0.name == "Osmosis") { return true }
+            if ($1.name == "Osmosis") { return false }
             return false
         }
         return result

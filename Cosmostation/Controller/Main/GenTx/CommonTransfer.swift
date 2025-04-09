@@ -195,51 +195,7 @@ class CommonTransfer: BaseVC {
     }
     
     func onInitIbcInfo() {
-        recipientableChains.append(fromChain)
-        // check IBC support case for recipient chain
-        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false })
-        BaseData.instance.mintscanAssets?.forEach({ msAsset in
-            if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN || sendAssetType == .GNO_COIN) {
-                if (msAsset.chain == fromChain.apiName && msAsset.denom?.lowercased() == toSendDenom.lowercased()) {
-                    //add backward path
-                    if let sendable = allIbcChains.filter({ $0.apiName == msAsset.beforeChain(fromChain.apiName) }).first {
-                        if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
-                            recipientableChains.append(sendable)
-                        }
-                    }
-                    
-                } else if (msAsset.getjustBeforeChain() == fromChain.apiName && msAsset.getcounterPartyDenom() == toSendDenom.lowercased()) {
-                    //add forward path
-                    if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
-                        if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
-                            recipientableChains.append(sendable)
-                        }
-                    }
-                }
-                
-            } else if (sendAssetType == .COSMOS_WASM || sendAssetType == .GNO_GRC20) {
-                //CW20 only support forward IBC path
-                if (msAsset.ibc_info?.counterparty?.chain == fromChain.apiName && msAsset.getcounterPartyDenom() == toSendDenom.lowercased()) {
-                    if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
-                        if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
-                            recipientableChains.append(sendable)
-                        }
-                    }
-                }
-                
-            } else if (sendAssetType == .EVM_ERC20) {
-                
-            }
-            
-            
-        })
-        recipientableChains.sort {
-            if ($0.name == fromChain.name) { return true }
-            if ($1.name == fromChain.name) { return false }
-            if ($0.name == "Cosmos") { return true }
-            if ($1.name == "Cosmos") { return false }
-            return false
-        }
+        recipientableChains = WUtils.checkIBCrecipientableChains(fromChain, toSendDenom)
         if (recipientableChains.count > 1) {
             toChainCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToChain)))
         }
@@ -868,7 +824,7 @@ class CommonTransfer: BaseVC {
             
         } else if (txStyle == .COSMOS_STYLE) {
             ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)       // nil able
-            print("ibcPath ", ibcPath?.channel, "  ", ibcPath?.version)
+//            print("ibcPath ", ibcPath?.channel, "  ", ibcPath?.version)
             
             // some chain not support simulate (assetmantle)  24.2.21
             if (fromChain.isSimulable() == false) {                                 // Chain not support imul
@@ -1689,14 +1645,14 @@ extension CommonTransfer {
         let recipientAddress = EthereumAddress.init(toAddress)!
         let abiEncoded = ABIEncoder.encode(types: [.string, .string, .string, .uint(bits: 64), .string], values: [toSendDenom, fromChain.bechAddress!, recipientAddress.address.stripHexPrefix(), toAmount.uint64Value, EUREKA_MEMO])!.toHexString()
         let payload = Ibc_Core_Channel_V2_Payload.with {
-            $0.sourcePort = ibcPath!.source_port!
-            $0.destinationPort = ibcPath!.destination_port!
-            $0.version = ibcPath!.version!
-            $0.encoding = ibcPath!.encoding!
+//            $0.sourcePort = ibcPath!.source_port!
+//            $0.destinationPort = ibcPath!.destination_port!
+//            $0.version = ibcPath!.version!
+//            $0.encoding = ibcPath!.encoding!
             $0.value = Data(hex: abiEncoded.addABIPrefix())
         }
         let eurekaSendMsg = Ibc_Core_Channel_V2_MsgSendPacket.with {
-            $0.sourceClient = ibcPath!.source_client!
+//            $0.sourceClient = ibcPath!.source_client!
             $0.timeoutTimestamp = Date().hourAfter6UInt64
             $0.payloads = [payload]
             $0.signer = fromChain.bechAddress!
