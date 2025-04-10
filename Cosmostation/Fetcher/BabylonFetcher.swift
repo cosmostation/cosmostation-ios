@@ -23,10 +23,23 @@ class BabylonFetcher {
     var epoch: Babylon_Epoching_V1_QueryCurrentEpochResponse?
     var txs: [PendingTx]?
     
+    var unbondingCompletionTime: UInt32?
+    
     init(_ chain: ChainBabylon) {
         self.chain = chain
     }
     
+    func fetchCheckPointTime() async {
+        do {
+            let param = try await fetchBtcCheckPointParam()
+            let depth = param.params.btcConfirmationDepth
+            let timeout = param.params.checkpointFinalizationTimeout
+            unbondingCompletionTime = depth * timeout * 60 + 10000
+        } catch {
+            unbondingCompletionTime = nil
+        }
+    }
+
     func getLcd() -> String {
         var url = ""
         if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_LCD_ENDPOINT +  " : " + chain.name) {
@@ -161,6 +174,24 @@ extension BabylonFetcher {
             let value = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
             let txs = value["tx"]["body"]["messages"].arrayValue
             return PendingTx(txs)
+        }
+    }
+    
+    func fetchBtcCheckPointParam() async throws -> Babylon_Btccheckpoint_V1_QueryParamsResponse {
+        if (getEndpointType() == .UseGRPC) {
+            let req = Babylon_Btccheckpoint_V1_QueryParamsRequest()
+            return try await Babylon_Btccheckpoint_V1_QueryNIOClient(channel: getClient()).params(req, callOptions: getCallOptions()).response.get()
+            
+        } else {
+            let url = getLcd() + "babylon/btccheckpoint/v1/params"
+            let value = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
+            return Babylon_Btccheckpoint_V1_QueryParamsResponse.with {
+                $0.params = Babylon_Btccheckpoint_V1_Params.with {
+                    $0.btcConfirmationDepth = value["params"]["btc_confirmation_depth"].uInt32Value
+                    $0.checkpointFinalizationTimeout = value["params"]["checkpoint_finalization_timeout"].uInt32Value
+                    $0.checkpointTag = value["params"]["checkpoint_tag"].stringValue
+                }
+            }
         }
     }
 }

@@ -42,8 +42,8 @@ class BabylonBTCFetcher {
         do {
             // babylon
             if let chain = (chain as? ChainBabylon) {
-                delegations = try await fetchBtcDelegations(chain.bechAddress!)
-                btcStakingAmount = NSDecimalNumber(value: delegations.filter({ $0["status_desc"] == "ACTIVE" }).map({ UInt64($0["total_sat"].stringValue) ?? 0 }).reduce(0, +))
+                
+                btcStakingAmount = try await fetchBtcDelegationAmount(chain.bechAddress!)
                 btcStakedRewards = await fetchBtcStakedRewards()
                 
             //bitcoin
@@ -255,30 +255,41 @@ extension BabylonBTCFetcher {
 extension BabylonBTCFetcher {
     func fetchBtcDelegations(_ babylonAddr: String) async throws -> [JSON] {
         let limit = 60
-        let url = MINTSCAN_API_URL + "v11/" + chain.apiName + "/btc/staker"
+        let url = MINTSCAN_API_URL + "v11/" + chain.apiName + "/btc/stakers"
         let param = "?limit=\(limit)&staker_addr=\(babylonAddr)"
         var searchAfter = ""
         
-        var delegations: [JSON] = []
+        var total = 0
         var result: [JSON] = []
         repeat {
             let pagination = "&search_after=\(searchAfter)"
-            delegations = try await AF.request(url+param+pagination).serializingDecodable(JSON.self).value.arrayValue
+            let value = try await AF.request(url+param+pagination).serializingDecodable(JSON.self).value
+            let delegations = value["data"].arrayValue
+            total = value["total"].intValue
             result.append(contentsOf: delegations)
             searchAfter = result.last?["search_after"].stringValue ?? ""
-        } while !searchAfter.isEmpty && delegations.count == limit
+        } while !searchAfter.isEmpty && total > result.count
         
         return result
     }
+    
+    func fetchBtcDelegationAmount(_ babylonAddr: String) async throws -> NSDecimalNumber {
+        let url = MINTSCAN_API_URL + "v11/" + chain.apiName + "/btc/staker/amount"
+        let param = "?staker_addr=\(babylonAddr)&active=true"
+        let value = try await AF.request(url+param).serializingDecodable(JSON.self).value
+        let amount = value["data"].arrayValue.first?["amount"].uInt64Value ?? 0
+        return NSDecimalNumber(value: amount)
+    }
+
 }
 
 // MARK: babylon api fetch <limit> 50 reqs in 10 secs / 100 reqs in 1 min
 extension BabylonBTCFetcher {
-    func getBabylonApiUrl() -> String{
+    func getBabylonApiUrl(_ version: Int? = 2) -> String{
         if chain.isTestnet {
-            return "https://staking-api.testnet.babylonlabs.io/v2/"
+            return "https://staking-api.testnet.babylonlabs.io/v\(version!)/"
         } else {
-            return "https://staking-api.babylonlabs.io/v2"
+            return "https://staking-api.babylonlabs.io/v\(version!)"
         }
     }
     

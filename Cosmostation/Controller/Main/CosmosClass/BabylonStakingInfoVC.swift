@@ -150,6 +150,12 @@ class BabylonStakingInfoVC: BaseVC {
                 
             }
             
+            if let babylonFetcher = (selectedChain as? ChainBabylon)?.getBabylonFetcher() {
+                if babylonFetcher.unbondingCompletionTime == nil || babylonFetcher.unbondingCompletionTime == 0 {
+                    await babylonFetcher.fetchCheckPointTime()
+                }
+            }
+            
             await onSetEpochPending()
             
             DispatchQueue.main.async {
