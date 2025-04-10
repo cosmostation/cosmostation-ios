@@ -299,7 +299,7 @@ class CosmosClassVC: BaseVC {
 //            }
             
             let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
-            mainFab.addItem(title: "\(symbol) Manage stake", image: UIImage(named: "iconFabStake")) { _ in
+            mainFab.addItem(title: "\(symbol) Manage Stake", image: UIImage(named: "iconFabStake")) { _ in
                 self.onStakeInfo()
             }
 
@@ -541,6 +541,10 @@ extension CosmosClassVC {
         if selectedChain is ChainBabylon {
             onBindBabylonStakeInfo()
             return
+            
+        } else if selectedChain is ChainNeutron {
+            onBindNeutronStakeInfo()
+            return
         }
         
         let stakingInfoVC = CosmosStakingInfoVC(nibName: "CosmosStakingInfoVC", bundle: nil)
@@ -577,6 +581,14 @@ extension CosmosClassVC {
         self.navigationController?.pushViewController(stakingInfoVC, animated: true)
     }
     
+    func onBindNeutronStakeInfo() {
+        let stakingInfoVC = NeutronStakingInfoVC(nibName: "NeutronStakingInfoVC", bundle: nil)
+        stakingInfoVC.selectedChain = selectedChain as? ChainNeutron
+        stakingInfoVC.cosmosCryptoVC = cosmosCryptoVC
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
+    }
+
 }
 
 //Custom Action For Kava

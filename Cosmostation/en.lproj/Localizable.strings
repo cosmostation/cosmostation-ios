@@ -361,7 +361,7 @@
 "str_current_epoch" = "Current Epoch";
 "str_next_reward_distibution" = "Next Reward";
 "str_next_epoch" = "Activate Next Epoch";
-"str_coin_manage_stake" = "%@ Manage stake";
+"str_coin_manage_stake" = "%@ Manage Stake";
 
 
 "btn_delegate" = "  Delegate";

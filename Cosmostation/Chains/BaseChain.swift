@@ -742,6 +742,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainLombard())
     result.append(ChainLum118())
     result.append(ChainLum880())
+//    result.append(ChainManifest())
     result.append(ChainMantra())
     result.append(ChainMedibloc())
     result.append(ChainMigaloo())

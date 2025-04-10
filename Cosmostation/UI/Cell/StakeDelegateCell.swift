@@ -22,8 +22,10 @@ class StakeDelegateCell: UITableViewCell {
     @IBOutlet weak var commPercentLabel: UILabel!
     @IBOutlet weak var stakingTitle: UILabel!
     @IBOutlet weak var stakingLabel: UILabel!
+    @IBOutlet weak var rewardView: UIView!
     @IBOutlet weak var rewardTitle: UILabel!
     @IBOutlet weak var rewardLabel: UILabel!
+    @IBOutlet weak var estView: UIView!
     @IBOutlet weak var estTitleLabel: UILabel!
     @IBOutlet weak var estLabel: UILabel!
     
@@ -223,6 +225,35 @@ class StakeDelegateCell: UITableViewCell {
         }
         
     }
+    
+    func onBindNeutronMyDelegate(_ baseChain: ChainNeutron, _ validator: Cosmos_Staking_V1beta1_Validator, _ delegation: Cosmos_Staking_V1beta1_DelegationResponse) {
+        rewardView.isHidden = true
+        estView.isHidden = true
+        
+        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
+        nameLabel.text = validator.description_p.moniker
+        
+        guard let fetcher = baseChain.getNeutronFetcher() else { return }
+        
+        if (validator.jailed) {
+            jailedTag.isHidden = false
+        } else {
+            inactiveTag.isHidden = fetcher.isActiveValidator(validator)
+        }
+        
+        if let stakeDenom = baseChain.stakeDenom,
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+            
+            let commission = NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
+            commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
+            
+            let stakedAmount = NSDecimalNumber(string: delegation.balance.amount).multiplying(byPowerOf10: -msAsset.decimals!)
+            stakingLabel?.attributedText = WDP.dpAmount(stakedAmount.stringValue, stakingLabel!.font, msAsset.decimals!)
+            
+        }
+        
+    }
+
 
 }
 

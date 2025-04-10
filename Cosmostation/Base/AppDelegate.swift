@@ -63,11 +63,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             BaseData.instance.appUserInfo = userInfo
         }
         
-        // SVG, GIF Coder
+        // SVG, GIF, aPNG Coder
         let svgCoder = SDImageSVGCoder.shared
         SDImageCodersManager.shared.addCoder(svgCoder)
         let gifCoder = SDImageGIFCoder.shared
         SDImageCodersManager.shared.addCoder(gifCoder)
+        let apngCoder = SDImageAPNGCoder.shared
+        SDImageCodersManager.shared.addCoder(apngCoder)
 
         return true
     }

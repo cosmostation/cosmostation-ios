@@ -208,6 +208,10 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                 if (nativeCoins.filter { $0.denom == selectedChain.stakeDenom }.first == nil) {
                     nativeCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = selectedChain.stakeDenom!; $0.amount = "0" })
                 }
+                if let mainAssetDenom = selectedChain.getChainListParam()["main_asset_denom"].string,
+                   nativeCoins.filter({ $0.denom == mainAssetDenom }).isEmpty {
+                    nativeCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = mainAssetDenom; $0.amount = "0" })
+                }
                 nativeCoins.sort {
                     if ($0.denom == selectedChain.stakeDenom) { return true }
                     if ($1.denom == selectedChain.stakeDenom) { return false }
@@ -285,9 +289,10 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     mintscanCw20Tokens.forEach { token in
-                        if (token.getAmount() != NSDecimalNumber.zero) {
+                        if token.wallet_preload == true {
                             toDisplayCw20Tokens.append(token)
-                        
+                        } else if (token.getAmount() != NSDecimalNumber.zero) {
+                            toDisplayCw20Tokens.append(token)
                         }
                     }
 

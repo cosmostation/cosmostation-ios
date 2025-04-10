@@ -291,7 +291,18 @@ extension MajorClassVC {
     }
     
     func onBtcStake() {
-        onShowToast("Coming Soon")
+        if BaseData.instance.getEcosystemPopUpActiveStatus(.MoveBabylonDappDetail) {
+            let dappPopUpView = EcosystemPopUpSheet(nibName: "EcosystemPopUpSheet", bundle: nil)
+            dappPopUpView.selectedChain = selectedChain
+            dappPopUpView.tag = 102
+            dappPopUpView.sheetDelegate = self
+            dappPopUpView.modalPresentationStyle = .overFullScreen
+            self.present(dappPopUpView, animated: true)
+            
+        } else {
+            onSelectedSheet(.MoveBabylonDappDetail, [:])
+        }
+
 //        if let babylonBtcFetcher = (selectedChain as? ChainBitCoin86)?.getBabylonBtcFetcher() {
 //            if babylonBtcFetcher.finalityProviders.isEmpty {
 //                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
@@ -304,4 +315,16 @@ extension MajorClassVC {
 //        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
     }
 
+}
+
+extension MajorClassVC: BaseSheetDelegate {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
+        if sheetType == .MoveBabylonDappDetail {
+           let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+           dappDetail.dappType = .INTERNAL_URL
+           dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
+           dappDetail.modalPresentationStyle = .fullScreen
+           self.present(dappDetail, animated: true)
+       }
+    }
 }

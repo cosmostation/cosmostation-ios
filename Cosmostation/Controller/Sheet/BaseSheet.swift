@@ -185,7 +185,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectSwapSlippage) {
             sheetTitle.text = NSLocalizedString("title_select_slippage", comment: "")
             
-        } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectUnbondingAction || sheetType == .SelectInitiaDelegatedAction || sheetType == .SelectZenrockDelegatedAction) {
+        } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectUnbondingAction || sheetType == .SelectInitiaDelegatedAction || sheetType == .SelectZenrockDelegatedAction || sheetType == .SelectNeutronDelegatedAction) {
             sheetTitle.text = NSLocalizedString("title_select_options", comment: "")
             
         } else if (sheetType == .SelectFeeDenom || sheetType == .SelectBaseFeeDenom) {
@@ -407,6 +407,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectDelegatedAction) {
             return 5
             
+        } else if (sheetType == .SelectNeutronDelegatedAction) {
+            return 3
+            
         } else if (sheetType == .SelectUnbondingAction) {
             return 1
             
@@ -542,7 +545,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onSkipSwapSlippage(indexPath.row, swapSlippage)
             return cell!
             
-        } else if (sheetType == .SelectDelegatedAction) {
+        } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectNeutronDelegatedAction) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
             cell?.onBindDelegate(indexPath.row)
             return cell!
@@ -671,7 +674,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "account" : selectedAccount]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
-        } else if (sheetType == .SelectDelegatedAction) {
+        } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectNeutronDelegatedAction) {
             let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : delegation.delegation.validatorAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
@@ -792,7 +795,8 @@ public enum SheetType: Int {
     
     case SelectDelegatedAction = 31
     case SelectUnbondingAction = 32
-    
+    case SelectNeutronDelegatedAction = 33
+
     case SelectFeeDenom = 41
     case SelectValidator = 42
     case SelectUnStakeValidator = 43
