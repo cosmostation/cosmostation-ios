@@ -112,9 +112,9 @@ class AssetBabylonCell: UITableViewCell {
             
             let btcStakedRewardAmount = babylonBtcFetcher.btcStakingRewardAmountSum(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
             if babylonBtcFetcher.rewardOtherDenomTypeCnts() > 0 {
-                btcRewardTitle.text = "sBTC Staking Reward + " + String(babylonBtcFetcher.rewardOtherDenomTypeCnts())
+                btcRewardTitle.text = "\(baseChain.isTestnet ? "sBTC" : "BTC") Staking Reward + " + String(babylonBtcFetcher.rewardOtherDenomTypeCnts())
             } else {
-                btcRewardTitle.text = "sBTC Staking Reward"
+                btcRewardTitle.text = "\(baseChain.isTestnet ? "sBTC" : "BTC") Staking Reward"
             }
             btcRewardLabel.attributedText = WDP.dpAmount(btcStakedRewardAmount.stringValue, btcRewardLabel!.font, 6)
             
