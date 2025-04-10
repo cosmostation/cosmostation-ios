@@ -139,6 +139,11 @@ public class WUtils {
         var result = [BaseChain]()
         result.append(fromChain)
         
+        //TODO Temp hide Eureka
+        if(toSendDenom.starts(with: "0x")) {
+            return result
+        }
+        
         //IBC Coin should add backward path if wallet support fromchain
         if toSendDenom.starts(with: "ibc/"),
            let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.chain == fromChain.apiName && $0.denom == toSendDenom }).first,
