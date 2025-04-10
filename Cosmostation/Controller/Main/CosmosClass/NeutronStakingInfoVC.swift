@@ -164,7 +164,10 @@ class NeutronStakingInfoVC: BaseVC {
         }
         
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? "") {
-            coinImageView.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+            let filePath = Bundle.main.path(forResource: "ntrnCoin", ofType: "png")
+            let url = URL(fileURLWithPath: filePath ?? "")
+
+            coinImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "tokenDefault"))
             var rewardAmount = NSDecimalNumber.zero
             rewards?.forEach { reward in
                 let rawAmount =  NSDecimalNumber(string: reward.reward.filter{ $0.denom == selectedChain.stakeDenom }.first?.amount ?? "0")

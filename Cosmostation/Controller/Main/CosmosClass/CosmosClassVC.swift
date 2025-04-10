@@ -299,7 +299,7 @@ class CosmosClassVC: BaseVC {
 //            }
             
             let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
-            mainFab.addItem(title: "\(symbol) Manage stake", image: UIImage(named: "iconFabStake")) { _ in
+            mainFab.addItem(title: "\(symbol) Manage Stake", image: UIImage(named: "iconFabStake")) { _ in
                 self.onStakeInfo()
             }
 

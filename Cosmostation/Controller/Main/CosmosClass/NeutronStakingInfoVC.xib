@@ -71,7 +71,7 @@
                     </connections>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="DXN-qd-S5w">
-                    <rect key="frame" x="129.66666666666666" y="131" width="133.99999999999997" height="22.666666666666657"/>
+                    <rect key="frame" x="132.33333333333331" y="131" width="128.33333333333331" height="22.666666666666657"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VkR-Mt-4xi">
                             <rect key="frame" x="0.0" y="0.0" width="80.333333333333329" height="22.666666666666668"/>
@@ -80,8 +80,8 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NTRN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Hn-wf-Vsl">
-                            <rect key="frame" x="83.333333333333343" y="0.0" width="50.666666666666657" height="22.666666666666668"/>
-                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="18"/>
+                            <rect key="frame" x="83.333333333333314" y="0.0" width="45" height="22.666666666666668"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
                             <color key="textColor" name="_color01"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -111,11 +111,12 @@
                             <color key="tintColor" name="_color02"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" image="iconFabClaim" imagePadding="4">
+                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="14" scale="small"/>
                                 <attributedString key="attributedTitle">
                                     <fragment content="Claim All">
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="12" name="SpoqaHanSansNeo-Regular"/>
+                                            <font key="NSFont" size="12" name="SpoqaHanSansNeo-Medium"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
@@ -132,8 +133,9 @@
                             <color key="tintColor" name="_color02"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" image="iconFabCompounding" imagePadding="4">
+                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="14" scale="small"/>
                                 <attributedString key="attributedTitle">
-                                    <fragment content="Compound all">
+                                    <fragment content="Compound All">
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="12" name="SpoqaHanSansNeo-Medium"/>
