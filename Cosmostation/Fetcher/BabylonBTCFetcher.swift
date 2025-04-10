@@ -289,7 +289,7 @@ extension BabylonBTCFetcher {
         if chain.isTestnet {
             return "https://staking-api.testnet.babylonlabs.io/v\(version!)/"
         } else {
-            return "https://staking-api.babylonlabs.io/v\(version!)"
+            return "https://staking-api.babylonlabs.io/v\(version!)/"
         }
     }
     
