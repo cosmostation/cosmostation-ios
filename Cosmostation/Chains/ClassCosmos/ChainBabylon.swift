@@ -26,7 +26,7 @@ class ChainBabylon: BaseChain {
         stakeDenom = "ubbn"
         bechAccountPrefix = "bbn"
         validatorPrefix = "bbnvaloper"
-        grpcHost = "https://grpc.mainnet.babylon.cosmostation.io"
+        grpcHost = "grpc.mainnet.babylon.cosmostation.io"
         lcdUrl = "https://lcd.mainnet.babylon.cosmostation.io"
     }
     

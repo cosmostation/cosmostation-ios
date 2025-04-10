@@ -15,7 +15,7 @@ class ChainLombard: BaseChain  {
         
         name = "Lombard"
         tag = "lombard118"
-        logo1 = ""
+        logo1 = "chainLombard"
         apiName = "lombard"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
@@ -24,7 +24,7 @@ class ChainLombard: BaseChain  {
         stakeDenom = "ustake"
         bechAccountPrefix = "lom"
         validatorPrefix = "lomvaloper"
-        grpcHost = ""
-        lcdUrl = ""
+        grpcHost = "grpc-lombard.cosmostation.io"
+        lcdUrl = "https://lcd-lombard.cosmostation.io/"
     }
 }

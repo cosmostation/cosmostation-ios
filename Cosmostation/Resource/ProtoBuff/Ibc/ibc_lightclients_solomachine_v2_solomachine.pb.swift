@@ -165,7 +165,7 @@ struct Ibc_Lightclients_Solomachine_V2_ConsensusState {
   /// Clears the value of `publicKey`. Subsequent reads from it will return its default value.
   mutating func clearPublicKey() {self._publicKey = nil}
 
-  /// diversifier allows the same public key to be re-used across different solo
+  /// diversifier allows the same public key to be reused across different solo
   /// machine clients (potentially on different chains) without being considered
   /// misbehaviour.
   var diversifier: String = String()

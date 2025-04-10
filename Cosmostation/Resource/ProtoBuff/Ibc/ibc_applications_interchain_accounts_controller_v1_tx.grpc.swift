@@ -42,6 +42,11 @@ internal protocol Ibc_Applications_InterchainAccounts_Controller_V1_MsgClientPro
     _ request: Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTx,
     callOptions: CallOptions?
   ) -> UnaryCall<Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTx, Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTxResponse>
+
+  func updateParams(
+    _ request: Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams, Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse>
 }
 
 extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgClientProtocol {
@@ -82,6 +87,24 @@ extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeSendTxInterceptors() ?? []
+    )
+  }
+
+  /// UpdateParams defines a rpc handler for MsgUpdateParams.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UpdateParams.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func updateParams(
+    _ request: Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams, Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse> {
+    return self.makeUnaryCall(
+      path: Ibc_Applications_InterchainAccounts_Controller_V1_MsgClientMetadata.Methods.updateParams.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
     )
   }
 }
@@ -158,6 +181,11 @@ internal protocol Ibc_Applications_InterchainAccounts_Controller_V1_MsgAsyncClie
     _ request: Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTx,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTx, Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTxResponse>
+
+  func makeUpdateParamsCall(
+    _ request: Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams, Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -193,6 +221,18 @@ extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgAsyncClientProtoc
       interceptors: self.interceptors?.makeSendTxInterceptors() ?? []
     )
   }
+
+  internal func makeUpdateParamsCall(
+    _ request: Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams, Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Ibc_Applications_InterchainAccounts_Controller_V1_MsgClientMetadata.Methods.updateParams.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -218,6 +258,18 @@ extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgAsyncClientProtoc
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeSendTxInterceptors() ?? []
+    )
+  }
+
+  internal func updateParams(
+    _ request: Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams,
+    callOptions: CallOptions? = nil
+  ) async throws -> Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Ibc_Applications_InterchainAccounts_Controller_V1_MsgClientMetadata.Methods.updateParams.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
     )
   }
 }
@@ -246,6 +298,9 @@ internal protocol Ibc_Applications_InterchainAccounts_Controller_V1_MsgClientInt
 
   /// - Returns: Interceptors to use when invoking 'sendTx'.
   func makeSendTxInterceptors() -> [ClientInterceptor<Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTx, Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTxResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'updateParams'.
+  func makeUpdateParamsInterceptors() -> [ClientInterceptor<Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams, Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse>]
 }
 
 internal enum Ibc_Applications_InterchainAccounts_Controller_V1_MsgClientMetadata {
@@ -255,6 +310,7 @@ internal enum Ibc_Applications_InterchainAccounts_Controller_V1_MsgClientMetadat
     methods: [
       Ibc_Applications_InterchainAccounts_Controller_V1_MsgClientMetadata.Methods.registerInterchainAccount,
       Ibc_Applications_InterchainAccounts_Controller_V1_MsgClientMetadata.Methods.sendTx,
+      Ibc_Applications_InterchainAccounts_Controller_V1_MsgClientMetadata.Methods.updateParams,
     ]
   )
 
@@ -268,6 +324,12 @@ internal enum Ibc_Applications_InterchainAccounts_Controller_V1_MsgClientMetadat
     internal static let sendTx = GRPCMethodDescriptor(
       name: "SendTx",
       path: "/ibc.applications.interchain_accounts.controller.v1.Msg/SendTx",
+      type: GRPCCallType.unary
+    )
+
+    internal static let updateParams = GRPCMethodDescriptor(
+      name: "UpdateParams",
+      path: "/ibc.applications.interchain_accounts.controller.v1.Msg/UpdateParams",
       type: GRPCCallType.unary
     )
   }
@@ -284,6 +346,9 @@ internal protocol Ibc_Applications_InterchainAccounts_Controller_V1_MsgProvider:
 
   /// SendTx defines a rpc handler for MsgSendTx.
   func sendTx(request: Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTx, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTxResponse>
+
+  /// UpdateParams defines a rpc handler for MsgUpdateParams.
+  func updateParams(request: Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse>
 }
 
 extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgProvider {
@@ -316,6 +381,15 @@ extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgProvider {
         userFunction: self.sendTx(request:context:)
       )
 
+    case "UpdateParams":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams>(),
+        responseSerializer: ProtobufSerializer<Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse>(),
+        interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? [],
+        userFunction: self.updateParams(request:context:)
+      )
+
     default:
       return nil
     }
@@ -341,6 +415,12 @@ internal protocol Ibc_Applications_InterchainAccounts_Controller_V1_MsgAsyncProv
     request: Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTx,
     context: GRPCAsyncServerCallContext
   ) async throws -> Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTxResponse
+
+  /// UpdateParams defines a rpc handler for MsgUpdateParams.
+  @Sendable func updateParams(
+    request: Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -380,6 +460,15 @@ extension Ibc_Applications_InterchainAccounts_Controller_V1_MsgAsyncProvider {
         wrapping: self.sendTx(request:context:)
       )
 
+    case "UpdateParams":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams>(),
+        responseSerializer: ProtobufSerializer<Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse>(),
+        interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? [],
+        wrapping: self.updateParams(request:context:)
+      )
+
     default:
       return nil
     }
@@ -395,6 +484,10 @@ internal protocol Ibc_Applications_InterchainAccounts_Controller_V1_MsgServerInt
   /// - Returns: Interceptors to use when handling 'sendTx'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeSendTxInterceptors() -> [ServerInterceptor<Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTx, Ibc_Applications_InterchainAccounts_Controller_V1_MsgSendTxResponse>]
+
+  /// - Returns: Interceptors to use when handling 'updateParams'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUpdateParamsInterceptors() -> [ServerInterceptor<Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParams, Ibc_Applications_InterchainAccounts_Controller_V1_MsgUpdateParamsResponse>]
 }
 
 internal enum Ibc_Applications_InterchainAccounts_Controller_V1_MsgServerMetadata {
@@ -404,6 +497,7 @@ internal enum Ibc_Applications_InterchainAccounts_Controller_V1_MsgServerMetadat
     methods: [
       Ibc_Applications_InterchainAccounts_Controller_V1_MsgServerMetadata.Methods.registerInterchainAccount,
       Ibc_Applications_InterchainAccounts_Controller_V1_MsgServerMetadata.Methods.sendTx,
+      Ibc_Applications_InterchainAccounts_Controller_V1_MsgServerMetadata.Methods.updateParams,
     ]
   )
 
@@ -417,6 +511,12 @@ internal enum Ibc_Applications_InterchainAccounts_Controller_V1_MsgServerMetadat
     internal static let sendTx = GRPCMethodDescriptor(
       name: "SendTx",
       path: "/ibc.applications.interchain_accounts.controller.v1.Msg/SendTx",
+      type: GRPCCallType.unary
+    )
+
+    internal static let updateParams = GRPCMethodDescriptor(
+      name: "UpdateParams",
+      path: "/ibc.applications.interchain_accounts.controller.v1.Msg/UpdateParams",
       type: GRPCCallType.unary
     )
   }

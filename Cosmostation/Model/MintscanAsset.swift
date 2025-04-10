@@ -42,9 +42,15 @@ public struct MintscanAsset: Codable {
     }
     
     func getjustBeforeChain() -> String? {
-        let chainPath = ibc_info?.path?.components(separatedBy: ">")
-        if (chainPath?.count ?? 0 > 1) {
-            return String(chainPath![chainPath!.count - 2])
+        if let chainPath = ibc_info?.path?.components(separatedBy: ">"), chainPath.count > 1 {
+            return String(chainPath[chainPath.count - 2])
+        }
+        return nil
+    }
+    
+    func getcounterPartyDenom() -> String? {
+        if let denom = ibc_info?.counterparty?.getDenom {
+            return denom.lowercased()
         }
         return nil
     }
@@ -66,6 +72,10 @@ public struct MintscanAssetIbcInfo: Codable {
 public struct MintscanAssetClient: Codable {
     var channel: String?
     var port: String?
+    
+    // FOR IBC V2
+    var version: String?
+    var encoding: String?
 }
     
 public struct MintscanAssetCounterParty: Codable {
@@ -73,6 +83,11 @@ public struct MintscanAssetCounterParty: Codable {
     var port: String?
     var chain: String?
     private var denom: String?
+    
+    // FOR IBC V2
+    var ICS20ContractAddress: String?
+    var BeaconProxyAddress: String?
+    
     
     var getDenom: String? {
         return denom?.removingPrefix("cw20:")

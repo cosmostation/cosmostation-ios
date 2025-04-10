@@ -52,6 +52,11 @@ internal protocol Ibc_Core_Connection_V1_MsgClientProtocol: GRPCClient {
     _ request: Ibc_Core_Connection_V1_MsgConnectionOpenConfirm,
     callOptions: CallOptions?
   ) -> UnaryCall<Ibc_Core_Connection_V1_MsgConnectionOpenConfirm, Ibc_Core_Connection_V1_MsgConnectionOpenConfirmResponse>
+
+  func updateConnectionParams(
+    _ request: Ibc_Core_Connection_V1_MsgUpdateParams,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Ibc_Core_Connection_V1_MsgUpdateParams, Ibc_Core_Connection_V1_MsgUpdateParamsResponse>
 }
 
 extension Ibc_Core_Connection_V1_MsgClientProtocol {
@@ -129,6 +134,25 @@ extension Ibc_Core_Connection_V1_MsgClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeConnectionOpenConfirmInterceptors() ?? []
+    )
+  }
+
+  /// UpdateConnectionParams defines a rpc handler method for
+  /// MsgUpdateParams.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UpdateConnectionParams.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func updateConnectionParams(
+    _ request: Ibc_Core_Connection_V1_MsgUpdateParams,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Ibc_Core_Connection_V1_MsgUpdateParams, Ibc_Core_Connection_V1_MsgUpdateParamsResponse> {
+    return self.makeUnaryCall(
+      path: Ibc_Core_Connection_V1_MsgClientMetadata.Methods.updateConnectionParams.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateConnectionParamsInterceptors() ?? []
     )
   }
 }
@@ -215,6 +239,11 @@ internal protocol Ibc_Core_Connection_V1_MsgAsyncClientProtocol: GRPCClient {
     _ request: Ibc_Core_Connection_V1_MsgConnectionOpenConfirm,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Ibc_Core_Connection_V1_MsgConnectionOpenConfirm, Ibc_Core_Connection_V1_MsgConnectionOpenConfirmResponse>
+
+  func makeUpdateConnectionParamsCall(
+    _ request: Ibc_Core_Connection_V1_MsgUpdateParams,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Ibc_Core_Connection_V1_MsgUpdateParams, Ibc_Core_Connection_V1_MsgUpdateParamsResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -274,6 +303,18 @@ extension Ibc_Core_Connection_V1_MsgAsyncClientProtocol {
       interceptors: self.interceptors?.makeConnectionOpenConfirmInterceptors() ?? []
     )
   }
+
+  internal func makeUpdateConnectionParamsCall(
+    _ request: Ibc_Core_Connection_V1_MsgUpdateParams,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Ibc_Core_Connection_V1_MsgUpdateParams, Ibc_Core_Connection_V1_MsgUpdateParamsResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Ibc_Core_Connection_V1_MsgClientMetadata.Methods.updateConnectionParams.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateConnectionParamsInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -325,6 +366,18 @@ extension Ibc_Core_Connection_V1_MsgAsyncClientProtocol {
       interceptors: self.interceptors?.makeConnectionOpenConfirmInterceptors() ?? []
     )
   }
+
+  internal func updateConnectionParams(
+    _ request: Ibc_Core_Connection_V1_MsgUpdateParams,
+    callOptions: CallOptions? = nil
+  ) async throws -> Ibc_Core_Connection_V1_MsgUpdateParamsResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Ibc_Core_Connection_V1_MsgClientMetadata.Methods.updateConnectionParams.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateConnectionParamsInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -357,6 +410,9 @@ internal protocol Ibc_Core_Connection_V1_MsgClientInterceptorFactoryProtocol: Se
 
   /// - Returns: Interceptors to use when invoking 'connectionOpenConfirm'.
   func makeConnectionOpenConfirmInterceptors() -> [ClientInterceptor<Ibc_Core_Connection_V1_MsgConnectionOpenConfirm, Ibc_Core_Connection_V1_MsgConnectionOpenConfirmResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'updateConnectionParams'.
+  func makeUpdateConnectionParamsInterceptors() -> [ClientInterceptor<Ibc_Core_Connection_V1_MsgUpdateParams, Ibc_Core_Connection_V1_MsgUpdateParamsResponse>]
 }
 
 internal enum Ibc_Core_Connection_V1_MsgClientMetadata {
@@ -368,6 +424,7 @@ internal enum Ibc_Core_Connection_V1_MsgClientMetadata {
       Ibc_Core_Connection_V1_MsgClientMetadata.Methods.connectionOpenTry,
       Ibc_Core_Connection_V1_MsgClientMetadata.Methods.connectionOpenAck,
       Ibc_Core_Connection_V1_MsgClientMetadata.Methods.connectionOpenConfirm,
+      Ibc_Core_Connection_V1_MsgClientMetadata.Methods.updateConnectionParams,
     ]
   )
 
@@ -395,6 +452,12 @@ internal enum Ibc_Core_Connection_V1_MsgClientMetadata {
       path: "/ibc.core.connection.v1.Msg/ConnectionOpenConfirm",
       type: GRPCCallType.unary
     )
+
+    internal static let updateConnectionParams = GRPCMethodDescriptor(
+      name: "UpdateConnectionParams",
+      path: "/ibc.core.connection.v1.Msg/UpdateConnectionParams",
+      type: GRPCCallType.unary
+    )
   }
 }
 
@@ -416,6 +479,10 @@ internal protocol Ibc_Core_Connection_V1_MsgProvider: CallHandlerProvider {
   /// ConnectionOpenConfirm defines a rpc handler method for
   /// MsgConnectionOpenConfirm.
   func connectionOpenConfirm(request: Ibc_Core_Connection_V1_MsgConnectionOpenConfirm, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Connection_V1_MsgConnectionOpenConfirmResponse>
+
+  /// UpdateConnectionParams defines a rpc handler method for
+  /// MsgUpdateParams.
+  func updateConnectionParams(request: Ibc_Core_Connection_V1_MsgUpdateParams, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Connection_V1_MsgUpdateParamsResponse>
 }
 
 extension Ibc_Core_Connection_V1_MsgProvider {
@@ -466,6 +533,15 @@ extension Ibc_Core_Connection_V1_MsgProvider {
         userFunction: self.connectionOpenConfirm(request:context:)
       )
 
+    case "UpdateConnectionParams":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ibc_Core_Connection_V1_MsgUpdateParams>(),
+        responseSerializer: ProtobufSerializer<Ibc_Core_Connection_V1_MsgUpdateParamsResponse>(),
+        interceptors: self.interceptors?.makeUpdateConnectionParamsInterceptors() ?? [],
+        userFunction: self.updateConnectionParams(request:context:)
+      )
+
     default:
       return nil
     }
@@ -504,6 +580,13 @@ internal protocol Ibc_Core_Connection_V1_MsgAsyncProvider: CallHandlerProvider {
     request: Ibc_Core_Connection_V1_MsgConnectionOpenConfirm,
     context: GRPCAsyncServerCallContext
   ) async throws -> Ibc_Core_Connection_V1_MsgConnectionOpenConfirmResponse
+
+  /// UpdateConnectionParams defines a rpc handler method for
+  /// MsgUpdateParams.
+  @Sendable func updateConnectionParams(
+    request: Ibc_Core_Connection_V1_MsgUpdateParams,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Ibc_Core_Connection_V1_MsgUpdateParamsResponse
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -561,6 +644,15 @@ extension Ibc_Core_Connection_V1_MsgAsyncProvider {
         wrapping: self.connectionOpenConfirm(request:context:)
       )
 
+    case "UpdateConnectionParams":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ibc_Core_Connection_V1_MsgUpdateParams>(),
+        responseSerializer: ProtobufSerializer<Ibc_Core_Connection_V1_MsgUpdateParamsResponse>(),
+        interceptors: self.interceptors?.makeUpdateConnectionParamsInterceptors() ?? [],
+        wrapping: self.updateConnectionParams(request:context:)
+      )
+
     default:
       return nil
     }
@@ -584,6 +676,10 @@ internal protocol Ibc_Core_Connection_V1_MsgServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'connectionOpenConfirm'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeConnectionOpenConfirmInterceptors() -> [ServerInterceptor<Ibc_Core_Connection_V1_MsgConnectionOpenConfirm, Ibc_Core_Connection_V1_MsgConnectionOpenConfirmResponse>]
+
+  /// - Returns: Interceptors to use when handling 'updateConnectionParams'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUpdateConnectionParamsInterceptors() -> [ServerInterceptor<Ibc_Core_Connection_V1_MsgUpdateParams, Ibc_Core_Connection_V1_MsgUpdateParamsResponse>]
 }
 
 internal enum Ibc_Core_Connection_V1_MsgServerMetadata {
@@ -595,6 +691,7 @@ internal enum Ibc_Core_Connection_V1_MsgServerMetadata {
       Ibc_Core_Connection_V1_MsgServerMetadata.Methods.connectionOpenTry,
       Ibc_Core_Connection_V1_MsgServerMetadata.Methods.connectionOpenAck,
       Ibc_Core_Connection_V1_MsgServerMetadata.Methods.connectionOpenConfirm,
+      Ibc_Core_Connection_V1_MsgServerMetadata.Methods.updateConnectionParams,
     ]
   )
 
@@ -620,6 +717,12 @@ internal enum Ibc_Core_Connection_V1_MsgServerMetadata {
     internal static let connectionOpenConfirm = GRPCMethodDescriptor(
       name: "ConnectionOpenConfirm",
       path: "/ibc.core.connection.v1.Msg/ConnectionOpenConfirm",
+      type: GRPCCallType.unary
+    )
+
+    internal static let updateConnectionParams = GRPCMethodDescriptor(
+      name: "UpdateConnectionParams",
+      path: "/ibc.core.connection.v1.Msg/UpdateConnectionParams",
       type: GRPCCallType.unary
     )
   }

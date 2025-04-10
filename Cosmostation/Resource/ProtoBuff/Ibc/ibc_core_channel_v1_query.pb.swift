@@ -729,7 +729,7 @@ struct Ibc_Core_Channel_V1_QueryNextSequenceReceiveRequest {
   init() {}
 }
 
-/// QuerySequenceResponse is the request type for the
+/// QuerySequenceResponse is the response type for the
 /// Query/QueryNextSequenceReceiveResponse RPC method
 struct Ibc_Core_Channel_V1_QueryNextSequenceReceiveResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the

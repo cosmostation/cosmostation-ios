@@ -49,21 +49,6 @@ struct Ibc_Core_Commitment_V1_MerklePrefix {
   init() {}
 }
 
-/// MerklePath is the path used to verify commitment proofs, which can be an
-/// arbitrary structured object (defined by a commitment type).
-/// MerklePath is represented from root-to-leaf
-struct Ibc_Core_Commitment_V1_MerklePath {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var keyPath: [String] = []
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
 /// MerkleProof is a wrapper type over a chain of CommitmentProofs.
 /// It demonstrates membership or non-membership for an element or set of
 /// elements, verifiable in conjunction with a known commitment root. Proofs
@@ -84,7 +69,6 @@ struct Ibc_Core_Commitment_V1_MerkleProof {
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Ibc_Core_Commitment_V1_MerkleRoot: @unchecked Sendable {}
 extension Ibc_Core_Commitment_V1_MerklePrefix: @unchecked Sendable {}
-extension Ibc_Core_Commitment_V1_MerklePath: @unchecked Sendable {}
 extension Ibc_Core_Commitment_V1_MerkleProof: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
@@ -151,38 +135,6 @@ extension Ibc_Core_Commitment_V1_MerklePrefix: SwiftProtobuf.Message, SwiftProto
 
   static func ==(lhs: Ibc_Core_Commitment_V1_MerklePrefix, rhs: Ibc_Core_Commitment_V1_MerklePrefix) -> Bool {
     if lhs.keyPrefix != rhs.keyPrefix {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Ibc_Core_Commitment_V1_MerklePath: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MerklePath"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "key_path"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeRepeatedStringField(value: &self.keyPath) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.keyPath.isEmpty {
-      try visitor.visitRepeatedStringField(value: self.keyPath, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Ibc_Core_Commitment_V1_MerklePath, rhs: Ibc_Core_Commitment_V1_MerklePath) -> Bool {
-    if lhs.keyPath != rhs.keyPath {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

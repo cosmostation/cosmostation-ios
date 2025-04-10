@@ -265,13 +265,13 @@ class BaseChain {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.symbol ?? "UnKnown"
         } else if isSupportCw20(),
-                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return cw20Token.symbol ?? "UnKnown"
         } else if isSupportErc20(),
-                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.symbol ?? "UnKnown"
         } else if isSupportGrc20(),
-                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return grc20Token.symbol ?? "UnKnown"
         }
         return "UnKnown"
@@ -281,14 +281,14 @@ class BaseChain {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.assetImg()
         } else if isSupportCw20(),
-                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return cw20Token.assetImg()
         } else if isSupportErc20(),
-                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.assetImg()
             
         } else if isSupportGrc20(),
-                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return grc20Token.assetImg()
         }
         return nil
@@ -298,13 +298,13 @@ class BaseChain {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.decimals ?? 6
         } else if isSupportCw20(),
-                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return cw20Token.decimals ?? 6
         } else if isSupportErc20(),
-                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.decimals ?? 6
         } else if isSupportGrc20(),
-                 let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                 let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
            return grc20Token.decimals ?? 6
         }
         return 6
@@ -314,13 +314,13 @@ class BaseChain {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.coinGeckoId ?? ""
         } else if isSupportCw20(),
-                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return cw20Token.coinGeckoId ?? ""
         } else if isSupportErc20(),
-                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.coinGeckoId ?? ""
         } else if isSupportGrc20(),
-                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return grc20Token.coinGeckoId ?? ""
         }
         return ""
@@ -678,7 +678,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAtomone())
     result.append(ChainAvalanche())                     //EVM
     result.append(ChainAxelar())
-//    result.append(ChainBabylon())
+    result.append(ChainBabylon())
     result.append(ChainBand())
     result.append(ChainBase())                          //EVM
     result.append(ChainBeraEVM())                       //EVM
@@ -739,6 +739,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainKyve())
     result.append(ChainLava())
     result.append(ChainLike())
+    result.append(ChainLombard())
     result.append(ChainLum118())
     result.append(ChainLum880())
     result.append(ChainManifest())
@@ -813,7 +814,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBabylon_T())
     result.append(ChainBitCoin84_T())
     result.append(ChainBitCoin86_T())
-    result.append(ChainGno_T())
+//    result.append(ChainGno_T())
     result.append(ChainInitia_T())
 //    result.append(ChainLombard_T())
     result.append(ChainNeutron_T())

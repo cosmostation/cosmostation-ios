@@ -37,6 +37,11 @@ internal protocol Ibc_Applications_InterchainAccounts_Host_V1_MsgClientProtocol:
     _ request: Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParams,
     callOptions: CallOptions?
   ) -> UnaryCall<Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParams, Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParamsResponse>
+
+  func moduleQuerySafe(
+    _ request: Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe, Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafeResponse>
 }
 
 extension Ibc_Applications_InterchainAccounts_Host_V1_MsgClientProtocol {
@@ -59,6 +64,24 @@ extension Ibc_Applications_InterchainAccounts_Host_V1_MsgClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
+    )
+  }
+
+  /// ModuleQuerySafe defines a rpc handler for MsgModuleQuerySafe.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to ModuleQuerySafe.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func moduleQuerySafe(
+    _ request: Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe, Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafeResponse> {
+    return self.makeUnaryCall(
+      path: Ibc_Applications_InterchainAccounts_Host_V1_MsgClientMetadata.Methods.moduleQuerySafe.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeModuleQuerySafeInterceptors() ?? []
     )
   }
 }
@@ -130,6 +153,11 @@ internal protocol Ibc_Applications_InterchainAccounts_Host_V1_MsgAsyncClientProt
     _ request: Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParams,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParams, Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParamsResponse>
+
+  func makeModuleQuerySafeCall(
+    _ request: Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe, Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafeResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -153,6 +181,18 @@ extension Ibc_Applications_InterchainAccounts_Host_V1_MsgAsyncClientProtocol {
       interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
     )
   }
+
+  internal func makeModuleQuerySafeCall(
+    _ request: Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe, Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafeResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Ibc_Applications_InterchainAccounts_Host_V1_MsgClientMetadata.Methods.moduleQuerySafe.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeModuleQuerySafeInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -166,6 +206,18 @@ extension Ibc_Applications_InterchainAccounts_Host_V1_MsgAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeUpdateParamsInterceptors() ?? []
+    )
+  }
+
+  internal func moduleQuerySafe(
+    _ request: Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe,
+    callOptions: CallOptions? = nil
+  ) async throws -> Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafeResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Ibc_Applications_InterchainAccounts_Host_V1_MsgClientMetadata.Methods.moduleQuerySafe.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeModuleQuerySafeInterceptors() ?? []
     )
   }
 }
@@ -191,6 +243,9 @@ internal protocol Ibc_Applications_InterchainAccounts_Host_V1_MsgClientIntercept
 
   /// - Returns: Interceptors to use when invoking 'updateParams'.
   func makeUpdateParamsInterceptors() -> [ClientInterceptor<Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParams, Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParamsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'moduleQuerySafe'.
+  func makeModuleQuerySafeInterceptors() -> [ClientInterceptor<Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe, Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafeResponse>]
 }
 
 internal enum Ibc_Applications_InterchainAccounts_Host_V1_MsgClientMetadata {
@@ -199,6 +254,7 @@ internal enum Ibc_Applications_InterchainAccounts_Host_V1_MsgClientMetadata {
     fullName: "ibc.applications.interchain_accounts.host.v1.Msg",
     methods: [
       Ibc_Applications_InterchainAccounts_Host_V1_MsgClientMetadata.Methods.updateParams,
+      Ibc_Applications_InterchainAccounts_Host_V1_MsgClientMetadata.Methods.moduleQuerySafe,
     ]
   )
 
@@ -206,6 +262,12 @@ internal enum Ibc_Applications_InterchainAccounts_Host_V1_MsgClientMetadata {
     internal static let updateParams = GRPCMethodDescriptor(
       name: "UpdateParams",
       path: "/ibc.applications.interchain_accounts.host.v1.Msg/UpdateParams",
+      type: GRPCCallType.unary
+    )
+
+    internal static let moduleQuerySafe = GRPCMethodDescriptor(
+      name: "ModuleQuerySafe",
+      path: "/ibc.applications.interchain_accounts.host.v1.Msg/ModuleQuerySafe",
       type: GRPCCallType.unary
     )
   }
@@ -219,6 +281,9 @@ internal protocol Ibc_Applications_InterchainAccounts_Host_V1_MsgProvider: CallH
 
   /// UpdateParams defines a rpc handler for MsgUpdateParams.
   func updateParams(request: Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParams, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParamsResponse>
+
+  /// ModuleQuerySafe defines a rpc handler for MsgModuleQuerySafe.
+  func moduleQuerySafe(request: Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafeResponse>
 }
 
 extension Ibc_Applications_InterchainAccounts_Host_V1_MsgProvider {
@@ -242,6 +307,15 @@ extension Ibc_Applications_InterchainAccounts_Host_V1_MsgProvider {
         userFunction: self.updateParams(request:context:)
       )
 
+    case "ModuleQuerySafe":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe>(),
+        responseSerializer: ProtobufSerializer<Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafeResponse>(),
+        interceptors: self.interceptors?.makeModuleQuerySafeInterceptors() ?? [],
+        userFunction: self.moduleQuerySafe(request:context:)
+      )
+
     default:
       return nil
     }
@@ -261,6 +335,12 @@ internal protocol Ibc_Applications_InterchainAccounts_Host_V1_MsgAsyncProvider: 
     request: Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParams,
     context: GRPCAsyncServerCallContext
   ) async throws -> Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParamsResponse
+
+  /// ModuleQuerySafe defines a rpc handler for MsgModuleQuerySafe.
+  @Sendable func moduleQuerySafe(
+    request: Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafeResponse
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -291,6 +371,15 @@ extension Ibc_Applications_InterchainAccounts_Host_V1_MsgAsyncProvider {
         wrapping: self.updateParams(request:context:)
       )
 
+    case "ModuleQuerySafe":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe>(),
+        responseSerializer: ProtobufSerializer<Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafeResponse>(),
+        interceptors: self.interceptors?.makeModuleQuerySafeInterceptors() ?? [],
+        wrapping: self.moduleQuerySafe(request:context:)
+      )
+
     default:
       return nil
     }
@@ -302,6 +391,10 @@ internal protocol Ibc_Applications_InterchainAccounts_Host_V1_MsgServerIntercept
   /// - Returns: Interceptors to use when handling 'updateParams'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeUpdateParamsInterceptors() -> [ServerInterceptor<Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParams, Ibc_Applications_InterchainAccounts_Host_V1_MsgUpdateParamsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'moduleQuerySafe'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeModuleQuerySafeInterceptors() -> [ServerInterceptor<Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafe, Ibc_Applications_InterchainAccounts_Host_V1_MsgModuleQuerySafeResponse>]
 }
 
 internal enum Ibc_Applications_InterchainAccounts_Host_V1_MsgServerMetadata {
@@ -310,6 +403,7 @@ internal enum Ibc_Applications_InterchainAccounts_Host_V1_MsgServerMetadata {
     fullName: "ibc.applications.interchain_accounts.host.v1.Msg",
     methods: [
       Ibc_Applications_InterchainAccounts_Host_V1_MsgServerMetadata.Methods.updateParams,
+      Ibc_Applications_InterchainAccounts_Host_V1_MsgServerMetadata.Methods.moduleQuerySafe,
     ]
   )
 
@@ -317,6 +411,12 @@ internal enum Ibc_Applications_InterchainAccounts_Host_V1_MsgServerMetadata {
     internal static let updateParams = GRPCMethodDescriptor(
       name: "UpdateParams",
       path: "/ibc.applications.interchain_accounts.host.v1.Msg/UpdateParams",
+      type: GRPCCallType.unary
+    )
+
+    internal static let moduleQuerySafe = GRPCMethodDescriptor(
+      name: "ModuleQuerySafe",
+      path: "/ibc.applications.interchain_accounts.host.v1.Msg/ModuleQuerySafe",
       type: GRPCCallType.unary
     )
   }

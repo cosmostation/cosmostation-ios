@@ -35,7 +35,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var delegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     var delegation: Cosmos_Staking_V1beta1_DelegationResponse!
     var unbondingEnrtyPosition: Int?
-    var cosmosChainList = Array<BaseChain>()
+    var recipientableChains = Array<BaseChain>()
     var nameservices = Array<NameService>()
     var oktValidators = [JSON]()
     
@@ -205,7 +205,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                 }
             }
             
-        } else if (sheetType == .SelectCosmosRecipientChain) {
+        } else if (sheetType == .SelectIBCRecipientChain) {
             sheetTitle.text = NSLocalizedString("title_select_recipient_chain", comment: "")
             
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {
@@ -425,8 +425,8 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectUnStakeValidator) {
             return validators.count
             
-        } else if (sheetType == .SelectCosmosRecipientChain) {
-            return cosmosChainList.count
+        } else if (sheetType == .SelectIBCRecipientChain) {
+            return recipientableChains.count
             
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {
             if (section == 0) {
@@ -575,9 +575,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindUnstakeValidator(targetChain, validators[indexPath.row])
             return cell!
             
-        } else if (sheetType == .SelectCosmosRecipientChain) {
+        } else if (sheetType == .SelectIBCRecipientChain) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRecipientChainCell") as? SelectRecipientChainCell
-            cell?.onBindChain(cosmosChainList[indexPath.row], recipientChain, targetChain)
+            cell?.onBindChain(recipientableChains[indexPath.row], recipientChain, targetChain)
             return cell!
             
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {
@@ -698,8 +698,8 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : validators[indexPath.row].operatorAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
-        } else if (sheetType == .SelectCosmosRecipientChain) {
-            let result: [String : Any] = ["index" : indexPath.row, "chainId" : cosmosChainList[indexPath.row].chainIdCosmos]
+        } else if (sheetType == .SelectIBCRecipientChain) {
+            let result: [String : Any] = ["index" : indexPath.row, "chainTag" : recipientableChains[indexPath.row].tag]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {
@@ -800,7 +800,7 @@ public enum SheetType: Int {
     case SelectFeeDenom = 41
     case SelectValidator = 42
     case SelectUnStakeValidator = 43
-    case SelectCosmosRecipientChain = 44
+    case SelectIBCRecipientChain = 44
     case SelectCosmosRecipientBechAddress = 45
     case SelectCosmosNameServiceAddress = 46
     case SelectBaseFeeDenom = 47
