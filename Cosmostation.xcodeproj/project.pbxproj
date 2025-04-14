@@ -1678,6 +1678,8 @@
 		79B422642DA37CC90022A4F9 /* NeutronStakingInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B422632DA37CC90022A4F9 /* NeutronStakingInfoVC.xib */; };
 		79B422652DA37CC90022A4F9 /* NeutronStakingInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B422622DA37CC90022A4F9 /* NeutronStakingInfoVC.swift */; };
 		79B4226F2DA761B20022A4F9 /* ntrnCoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 79B4226E2DA761B10022A4F9 /* ntrnCoin.png */; };
+		79B4226C2DA63EA30022A4F9 /* AdditionalFeeSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B4226B2DA63EA30022A4F9 /* AdditionalFeeSheet.xib */; };
+		79B4226D2DA63EA30022A4F9 /* AdditionalFeeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B4226A2DA63EA30022A4F9 /* AdditionalFeeSheet.swift */; };
 		79B7F35B2D8165D300AA755B /* ChainKopi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35A2D8165D300AA755B /* ChainKopi.swift */; };
 		79B7F35D2D8175C300AA755B /* ChainPaloma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35C2D8175C300AA755B /* ChainPaloma.swift */; };
 		79B7F35F2D81769C00AA755B /* ChainInt3face.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35E2D81769C00AA755B /* ChainInt3face.swift */; };
@@ -3341,6 +3343,8 @@
 		79B422622DA37CC90022A4F9 /* NeutronStakingInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronStakingInfoVC.swift; sourceTree = "<group>"; };
 		79B422632DA37CC90022A4F9 /* NeutronStakingInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronStakingInfoVC.xib; sourceTree = "<group>"; };
 		79B4226E2DA761B10022A4F9 /* ntrnCoin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ntrnCoin.png; sourceTree = "<group>"; };
+		79B4226A2DA63EA30022A4F9 /* AdditionalFeeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalFeeSheet.swift; sourceTree = "<group>"; };
+		79B4226B2DA63EA30022A4F9 /* AdditionalFeeSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdditionalFeeSheet.xib; sourceTree = "<group>"; };
 		79B7F35A2D8165D300AA755B /* ChainKopi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKopi.swift; sourceTree = "<group>"; };
 		79B7F35C2D8175C300AA755B /* ChainPaloma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPaloma.swift; sourceTree = "<group>"; };
 		79B7F35E2D81769C00AA755B /* ChainInt3face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainInt3face.swift; sourceTree = "<group>"; };
@@ -4583,6 +4587,8 @@
 				79705CAF2D7059FF00B89830 /* EcosystemPopUpSheet.xib */,
 				79B7F36B2D87F74F00AA755B /* BabylonStatusInfoSheet.swift */,
 				79B7F36C2D87F74F00AA755B /* BabylonStatusInfoSheet.xib */,
+				79B4226A2DA63EA30022A4F9 /* AdditionalFeeSheet.swift */,
+				79B4226B2DA63EA30022A4F9 /* AdditionalFeeSheet.xib */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -6208,6 +6214,7 @@
 				047BA8D12A94756A00D3F7DD /* CosmosClass.storyboard in Resources */,
 				E10B1DA12C2156430039283B /* KavaEarnListVC.xib in Resources */,
 				E19993EA2B295873000F4A6B /* loadingSmallWhite.json in Resources */,
+				79B4226C2DA63EA30022A4F9 /* AdditionalFeeSheet.xib in Resources */,
 				04A68C252ABDA3350041FA13 /* SelectSwapAssetCell.xib in Resources */,
 				04F4061729ED119800CD88E4 /* Init.storyboard in Resources */,
 				047F69392BE5FBCE00C3BC34 /* Portfolio2Cell.xib in Resources */,
@@ -8090,6 +8097,7 @@
 				E13FC54F2B26C79A0082C66E /* kava_earn_v1beta1_query.pb.swift in Sources */,
 				7981F75E2D0C31E900BB50DA /* ChainSynternet.swift in Sources */,
 				792613A32CD4B82800FAF47D /* initia_intertx_v1_query.pb.swift in Sources */,
+				79B4226D2DA63EA30022A4F9 /* AdditionalFeeSheet.swift in Sources */,
 				E122DC4A2A8A4712006D1E7B /* tendermint_version_types.pb.swift in Sources */,
 				04C816BE2BA98D75006B800A /* cosmos_counter_v1_tx.pb.swift in Sources */,
 				046EA87B2AD04A2500A2FCE7 /* desmos_profiles_v3_models_profile.pb.swift in Sources */,
