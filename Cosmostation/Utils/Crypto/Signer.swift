@@ -119,6 +119,14 @@ class Signer {
         return [anyMsg]
     }
     
+    static func genDelegateMsg(_ toDelegate: Babylon_Btcstaking_V1_MsgCreateBTCDelegation) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/babylon.btcstaking.v1.MsgCreateBTCDelegation"
+            $0.value = try! toDelegate.serializedData()
+        }
+        return [anyMsg]
+    }
+    
     //Tx for Common UnDelegate
     static func genUndelegateMsg(_ toUndelegate: Cosmos_Staking_V1beta1_MsgUndelegate) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
