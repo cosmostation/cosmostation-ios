@@ -106,4 +106,10 @@ class BaseMsgSheetCell: UITableViewCell {
         descriptionLabel.text = NSLocalizedString("str_cancel_unbonding_msg", comment: "")
     }
     
+    func onBindBtcWithdraw() {
+        titleLabel.text = NSLocalizedString("str_withdraw", comment: "")
+        descriptionLabel.text = NSLocalizedString("str_withdraw_msg", comment: "")
+    }
+    
+
 }
