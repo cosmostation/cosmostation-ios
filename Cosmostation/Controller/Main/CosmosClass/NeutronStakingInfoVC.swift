@@ -164,9 +164,7 @@ class NeutronStakingInfoVC: BaseVC {
         }
         
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? "") {
-            let filePath = Bundle.main.path(forResource: "ntrnCoin", ofType: "png")
-            let url = URL(fileURLWithPath: filePath ?? "")
-
+            let url = URL(string: ResourceBase + "\(selectedChain.apiName!)/resource/ntrn.png")
             coinImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "tokenDefault"))
             var rewardAmount = NSDecimalNumber.zero
             rewards?.forEach { reward in
@@ -263,7 +261,7 @@ class NeutronStakingInfoVC: BaseVC {
     @IBAction func onCompoundingAll(_ sender: Any) {
         guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
             return
-        }        
+        }
         if (comsosFetcher.rewardAllCoins().count == 0) {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return
