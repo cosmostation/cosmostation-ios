@@ -94,8 +94,10 @@ class MajorClassVC: BaseVC {
         
         Task {
             if let babylonBtcFetcher = (selectedChain as? ChainBitCoin86)?.getBabylonBtcFetcher(),
-               selectedChain.isSupportBTCStaking() {
+               selectedChain.isSupportBTCStaking(),
+               let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher() {
                 _ = await babylonBtcFetcher.fetchFinalityProvidersInfo()
+                btcFetcher.fastestFee = try await btcFetcher.fetchFee()?["fastestFee"].intValue
             }
         }
     }
