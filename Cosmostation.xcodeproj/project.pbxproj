@@ -1680,6 +1680,8 @@
 		79B4226F2DA761B20022A4F9 /* ntrnCoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 79B4226E2DA761B10022A4F9 /* ntrnCoin.png */; };
 		79B4226C2DA63EA30022A4F9 /* AdditionalFeeSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B4226B2DA63EA30022A4F9 /* AdditionalFeeSheet.xib */; };
 		79B4226D2DA63EA30022A4F9 /* AdditionalFeeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B4226A2DA63EA30022A4F9 /* AdditionalFeeSheet.swift */; };
+		79B422762DA79E170022A4F9 /* BtcUndelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B422742DA79E170022A4F9 /* BtcUndelegate.swift */; };
+		79B422772DA79E170022A4F9 /* BtcUndelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B422752DA79E170022A4F9 /* BtcUndelegate.xib */; };
 		79B7F35B2D8165D300AA755B /* ChainKopi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35A2D8165D300AA755B /* ChainKopi.swift */; };
 		79B7F35D2D8175C300AA755B /* ChainPaloma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35C2D8175C300AA755B /* ChainPaloma.swift */; };
 		79B7F35F2D81769C00AA755B /* ChainInt3face.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F35E2D81769C00AA755B /* ChainInt3face.swift */; };
@@ -3345,6 +3347,8 @@
 		79B4226E2DA761B10022A4F9 /* ntrnCoin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ntrnCoin.png; sourceTree = "<group>"; };
 		79B4226A2DA63EA30022A4F9 /* AdditionalFeeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalFeeSheet.swift; sourceTree = "<group>"; };
 		79B4226B2DA63EA30022A4F9 /* AdditionalFeeSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdditionalFeeSheet.xib; sourceTree = "<group>"; };
+		79B422742DA79E170022A4F9 /* BtcUndelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtcUndelegate.swift; sourceTree = "<group>"; };
+		79B422752DA79E170022A4F9 /* BtcUndelegate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BtcUndelegate.xib; sourceTree = "<group>"; };
 		79B7F35A2D8165D300AA755B /* ChainKopi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKopi.swift; sourceTree = "<group>"; };
 		79B7F35C2D8175C300AA755B /* ChainPaloma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPaloma.swift; sourceTree = "<group>"; };
 		79B7F35E2D81769C00AA755B /* ChainInt3face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainInt3face.swift; sourceTree = "<group>"; };
@@ -4762,6 +4766,8 @@
 				79287C6D2D670DCE003845D2 /* BtcStakingInfoVC.xib */,
 				79AB34072D6EB0CE00F1426C /* BtcDelegate.swift */,
 				79AB34082D6EB0CE00F1426C /* BtcDelegate.xib */,
+				79B422742DA79E170022A4F9 /* BtcUndelegate.swift */,
+				79B422752DA79E170022A4F9 /* BtcUndelegate.xib */,
 				79D966332D797B1C00688447 /* BtcStakingInfoSheet.swift */,
 				79D966342D797B1C00688447 /* BtcStakingInfoSheet.xib */,
 			);
@@ -6113,6 +6119,7 @@
 				792B9CBE2C747CB3001440DB /* DappSuiSignRequestSheet.xib in Resources */,
 				15B24C882AE9039A0009B359 /* DappCosmosSignRequestSheet.xib in Resources */,
 				E131F44A2AEE9BC000E760A0 /* QrImportCheckKeySheet.xib in Resources */,
+				79B422772DA79E170022A4F9 /* BtcUndelegate.xib in Resources */,
 				E1D2FC662B81FCA30080B638 /* CommonTransfer.xib in Resources */,
 				0400EE842AD41FC5007BA97F /* ServiceCell.xib in Resources */,
 				E1B44B272ADA41DE0073C88A /* NeutronMultiVoteCell.xib in Resources */,
@@ -7476,6 +7483,7 @@
 				7992617D2D77EE66007E9911 /* babylon_incentive_genesis.pb.swift in Sources */,
 				047843232AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift in Sources */,
 				799261692D77EE66007E9911 /* babylon_btcstaking_v1_query.grpc.swift in Sources */,
+				79B422762DA79E170022A4F9 /* BtcUndelegate.swift in Sources */,
 				792613B22CD4B82800FAF47D /* initia_reward_v1_types.pb.swift in Sources */,
 				79B422652DA37CC90022A4F9 /* NeutronStakingInfoVC.swift in Sources */,
 				E131F4482AEE9BC000E760A0 /* QrImportCheckKeySheet.swift in Sources */,
