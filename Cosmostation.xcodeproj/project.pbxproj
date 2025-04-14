@@ -1677,7 +1677,6 @@
 		79B4225D2D9E759D0022A4F9 /* NeutronCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B4225A2D9E759D0022A4F9 /* NeutronCompounding.swift */; };
 		79B422642DA37CC90022A4F9 /* NeutronStakingInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B422632DA37CC90022A4F9 /* NeutronStakingInfoVC.xib */; };
 		79B422652DA37CC90022A4F9 /* NeutronStakingInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B422622DA37CC90022A4F9 /* NeutronStakingInfoVC.swift */; };
-		79B4226F2DA761B20022A4F9 /* ntrnCoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 79B4226E2DA761B10022A4F9 /* ntrnCoin.png */; };
 		79B4226C2DA63EA30022A4F9 /* AdditionalFeeSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B4226B2DA63EA30022A4F9 /* AdditionalFeeSheet.xib */; };
 		79B4226D2DA63EA30022A4F9 /* AdditionalFeeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B4226A2DA63EA30022A4F9 /* AdditionalFeeSheet.swift */; };
 		79B422762DA79E170022A4F9 /* BtcUndelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B422742DA79E170022A4F9 /* BtcUndelegate.swift */; };
@@ -3344,7 +3343,6 @@
 		79B4225B2D9E759D0022A4F9 /* NeutronCompounding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronCompounding.xib; sourceTree = "<group>"; };
 		79B422622DA37CC90022A4F9 /* NeutronStakingInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronStakingInfoVC.swift; sourceTree = "<group>"; };
 		79B422632DA37CC90022A4F9 /* NeutronStakingInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronStakingInfoVC.xib; sourceTree = "<group>"; };
-		79B4226E2DA761B10022A4F9 /* ntrnCoin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ntrnCoin.png; sourceTree = "<group>"; };
 		79B4226A2DA63EA30022A4F9 /* AdditionalFeeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalFeeSheet.swift; sourceTree = "<group>"; };
 		79B4226B2DA63EA30022A4F9 /* AdditionalFeeSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdditionalFeeSheet.xib; sourceTree = "<group>"; };
 		79B422742DA79E170022A4F9 /* BtcUndelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtcUndelegate.swift; sourceTree = "<group>"; };
@@ -4418,7 +4416,6 @@
 				E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */,
 				E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */,
 				E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */,
-				79B4226E2DA761B10022A4F9 /* ntrnCoin.png */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -6048,7 +6045,6 @@
 				04FA74872AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
 				E10B1DC82C2159040039283B /* KavaEarnWithdrawAction.xib in Resources */,
 				04D782BF2C2D28FF004B99CF /* AboutChainInfoCell.xib in Resources */,
-				79B4226F2DA761B20022A4F9 /* ntrnCoin.png in Resources */,
 				04A68C312AC13A560041FA13 /* CosmosProposalsVC.xib in Resources */,
 				7967DCB82D9A4193007D74CE /* SelectRecipientChainCell.xib in Resources */,
 				04CD24552AD1621800497EF5 /* TxAmountLegacySheet.xib in Resources */,
