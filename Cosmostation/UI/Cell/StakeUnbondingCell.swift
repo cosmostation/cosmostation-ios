@@ -117,9 +117,9 @@ class StakeUnbondingCell: UITableViewCell {
             unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
             
             
-            let daysToSubtract: Int64 = Int64(baseChain.getChainParam()["params"]["staking_params"]["params"]["unbonding_time"].stringValue.filter({ $0.isNumber })) ?? 0
+            let daysToSubtract: Int64 = 1814400
             let unbondedTime = unbonding.entry.completionTime.seconds - daysToSubtract
-            let completionTime = unbondedTime + Int64(fetcher.unbondingCompletionTime ?? 0)
+            let completionTime = unbondedTime + Int64(baseChain.getChainParam()["params"]["staking_params"]["params"]["unbonding_time"].stringValue.filter({ $0.isNumber }))!
             
             finishTimeLabel.text = WDP.dpDateWithSimpleTime(WUtils.timeInt64ToDate(completionTime * 1000))
             finishGapLabel.text = "Est. " + WDP.dpTimeUntil(completionTime)
