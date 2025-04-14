@@ -23,6 +23,8 @@ class BtcFetcher {
     
     var hasMoreHistory: Bool = true
     
+    var fastestFee: Int?
+    
     init(_ chain: BaseChain) {
         self.chain = chain
     }
@@ -129,6 +131,11 @@ extension BtcFetcher {
     func fetchUtxos() async throws -> [JSON]? {
         let url = mempoolUrl() + "/api/address/" + chain.mainAddress + "/utxo"
         return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
+    }
+    
+    func fetchValidate() async throws -> JSON? {
+        let url = mempoolUrl() + "/api/v1/validate-address/" + chain.mainAddress
+        return try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value
     }
     
     func fetchTxHistory(_ after_txid: String? = nil) async throws -> [JSON]? {
