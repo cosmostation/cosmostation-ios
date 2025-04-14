@@ -44,7 +44,6 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
         sheetTableView.rowHeight = UITableView.automaticDimension
         sheetTableView.sectionHeaderTopPadding = 0.0
         
-        setTokensAmount()
         setSegment()
         
     }
@@ -89,13 +88,6 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
         sheetTableView.reloadData()
     }
     
-    private func setTokensAmount() {
-        for token in allTokens {
-            if let _ = token.amount {
-                Self.tokenWithAmount.append(token)
-            }
-        }
-    }
     
     private func setSegment() {
         if selectedChain.isSupportCw20() && selectedChain.isSupportErc20() {
