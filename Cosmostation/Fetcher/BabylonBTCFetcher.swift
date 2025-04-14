@@ -26,6 +26,10 @@ class BabylonBTCFetcher {
     var btcStakingTimeLockWeeks = 0
     var btcUnbondingTimeDays = 0
     
+    var networkInfo: [JSON] = []
+    
+    var unbondingFeeSat: Int64?
+    
     var grpcConnection: ClientConnection?
 
     init(_ chain: BaseChain) {
@@ -56,6 +60,8 @@ class BabylonBTCFetcher {
                 }
                 
                 if let params = try await fetchParams() {
+                    unbondingFeeSat = params.unbondingFeeSat
+                    
                     let blockPerHour = 6.0
                     
                     let stakingBlock = Double(params.maxStakingTimeBlocks)
@@ -79,9 +85,9 @@ class BabylonBTCFetcher {
                 
                 let stakingAmount = btcDelegations.filter({ $0.state.uppercased() == "ACTIVE"}).map({ $0.amount }).reduce(0, +)
                 btcStakingAmount = NSDecimalNumber(integerLiteral: stakingAmount)
-                let unstakingAmount = btcDelegations.filter({ $0.state.uppercased() == "EARLY_UNBONDING" }).map({ $0.amount }).reduce(0, +)
+                let unstakingAmount = btcDelegations.filter({$0.state.uppercased() == "TIMELOCK_UNBONDING" || $0.state.uppercased() == "EARLY_UNBONDING"}).map({ $0.amount }).reduce(0, +)
                 btcUnstakingAmount = NSDecimalNumber(integerLiteral: unstakingAmount)
-                let withdrawableAmount = btcDelegations.filter({ $0.state.uppercased() == "EARLY_UNBONDING_WITHDRAWABLE" }).map({ $0.amount }).reduce(0, +)
+                let withdrawableAmount = btcDelegations.filter({ $0.state.uppercased().contains("WITHDRAWABLE") }).map({ $0.amount }).reduce(0, +)
                 btcWithdrawableAmount = NSDecimalNumber(integerLiteral: withdrawableAmount)
                 
                 btcDelegations.sort {
@@ -164,7 +170,38 @@ class BabylonBTCFetcher {
         }
         return denoms.count
     }
-
+    
+    func simulateTx(_ simulTx: Cosmos_Tx_V1beta1_SimulateRequest) async throws -> UInt64? {
+        if (getEndpointType() == .UseGRPC) {
+            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).simulate(simulTx, callOptions: getCallOptions()).response.get().gasInfo.gasUsed
+        } else {
+            let param: Parameters = ["txBytes": try! simulTx.tx.serializedData().base64EncodedString() ]
+            let url = getLcd() + "cosmos/tx/v1beta1/simulate"
+            let result = try await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
+            if let gasUsed = result["gas_info"]["gas_used"].string {
+                return UInt64(gasUsed)
+            } else {
+                throw EmptyDataError.error(message: result["message"].stringValue)
+            }
+        }
+    }
+    
+    func broadcastTx(_ broadTx: Cosmos_Tx_V1beta1_BroadcastTxRequest) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
+        if (getEndpointType() == .UseGRPC) {
+            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).broadcastTx(broadTx, callOptions: getCallOptions()).response.get().txResponse
+        } else {
+            let param: Parameters = ["mode" : Cosmos_Tx_V1beta1_BroadcastMode.async.rawValue, "tx_bytes": try broadTx.txBytes.base64EncodedString() ]
+            let url = getLcd() + "cosmos/tx/v1beta1/txs"
+            let result = try await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
+            if (!result["tx_response"].isEmpty) {
+                var response = Cosmos_Base_Abci_V1beta1_TxResponse()
+                response.txhash = result["tx_response"]["txhash"].stringValue
+                response.rawLog = result["tx_response"]["raw_log"].stringValue
+                return response
+            }
+            throw AFError.explicitlyCancelled
+        }
+    }
 }
 
 // MARK: grpc, lcd Fetch
@@ -250,6 +287,62 @@ extension BabylonBTCFetcher {
             return []
         }
     }
+    
+    func fetchTipHeight() async throws -> JSON {
+        let url = getLcd() + "babylon/btclightclient/v1/tip"
+        let response = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value["header"]
+        return response
+    }
+    
+    
+    func fetchAvailableUTXOs(address: String) async throws -> [JSON] {
+        do {
+            guard let btcFetcher = (chain as? ChainBitCoin86)?.getBtcFetcher() else { return [] }
+            var sortedUTXOs = try await btcFetcher.fetchUtxos() ?? []
+            sortedUTXOs.sort { $0["value"].intValue > $1["value"].intValue }
+            
+            let validateInfo = try await btcFetcher.fetchValidate() ?? JSON()
+            guard validateInfo["isvalid"].boolValue else {
+                print("Invalid address")
+                return []
+            }
+            let scriptPubKey = validateInfo["scriptPubKey"].stringValue
+
+            let dataList = sortedUTXOs.map { utxo -> JSON in
+                var updatedUTXO = utxo
+                updatedUTXO["scriptPubKey"].stringValue = scriptPubKey
+                return updatedUTXO
+            }
+            
+            let confirmedList = dataList.filter { $0["status"]["confirmed"].boolValue }
+            let filteredUTXOs = filterDust(confirmedList)
+
+            let verifiedUTXOs = try await postVerifyUtxoOrdinals(utxos: filteredUTXOs, address: address)
+
+            let ordinals = verifiedUTXOs.filter { $0["inscription"].boolValue }
+            let ordinalMap = Dictionary(uniqueKeysWithValues: ordinals.map { ($0["txid"].stringValue, $0) })
+            let availableUTXOs = filteredUTXOs.filter { ordinalMap[$0["txid"].stringValue] == nil }
+
+            return availableUTXOs
+        } catch {
+            print("Error fetching UTXOs: \(error)")
+            throw error
+        }
+    }
+
+}
+
+// MARK: - Helper Functions
+extension BabylonBTCFetcher {
+    func filterDust(_ utxos: [JSON], limit: Int = LOW_VALUE_UTXO_THRESHOLD) -> [JSON] {
+        return utxos.filter { $0["value"].intValue > limit }
+    }
+
+    func chunkArray(_ array: [JSON], size: Int) -> [[JSON]] {
+        return stride(from: 0, to: array.count, by: size).map {
+            Array(array[$0..<min($0 + size, array.count)])
+        }
+    }
 }
 
 extension BabylonBTCFetcher {
@@ -303,6 +396,43 @@ extension BabylonBTCFetcher {
         } else {
             return nil
         }
+    }
+    
+    func fetchNetworkInfo() async throws {
+        let url = getBabylonApiUrl() + "network-info"
+        networkInfo = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value["data"]["params"]["bbn"].arrayValue
+    }
+    
+    func postVerifyUtxoOrdinals(utxos: [JSON], address: String) async throws -> [JSON] {
+        let url = getBabylonApiUrl(1) + "ordinals/verify-utxos"
+        
+        let utxoChunks = chunkArray(utxos, size: BATCH_SIZE)
+
+        var verifiedUTXOs: [JSON] = []
+
+        for chunk in utxoChunks {
+            let parameters: Parameters = [
+                "address": address,
+                "utxos": chunk.map { ["txid": $0["txid"].stringValue, "vout": $0["vout"].intValue] }
+            ]
+
+            do {
+                let response = try await AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+                let utxoInfos = response["data"].arrayValue
+                utxoInfos.forEach { utxo in
+                    verifiedUTXOs.append(JSON(["txid": utxo["txid"].stringValue,
+                                   "vout": utxo["vout"].intValue,
+                                   "value": utxo["value"].uInt64Value,
+                                   "scriptPubKey": utxo["scriptPubKey"].stringValue,
+                                   "confirmed": utxo["status"]["confirmed"].boolValue]))
+                }
+                
+            } catch {
+                print("UTXO verification failed: \(error)")
+            }
+        }
+
+        return verifiedUTXOs
     }
 }
 
@@ -364,24 +494,28 @@ extension BabylonBTCFetcher {
 
 // Delegation + FinalityProvider
 struct BtcDelegation {
+    var version: Int
     var providerPk: String
     var moniker: String
     var commission: String
     var jailed: Bool
     var inceptionTime: String
     var transactionID: String
+    var stakingTxHex: String
     var amount: Int
     var state: String
     var delegationUnbonding: JSON
     var delegationStaking: JSON
     
     init(_ delegation: JSON, _ provider: FinalityProvider?) {
+        version = delegation["params_version"].intValue
         providerPk = delegation["finality_provider_btc_pks_hex"].array?.first?.stringValue ?? ""
         moniker = provider?.moniker ?? ""
         commission = provider?.commission ?? "0"
         jailed = provider?.jailed ?? true
         inceptionTime = delegation["delegation_staking"]["bbn_inception_time"].stringValue
         transactionID = delegation["delegation_staking"]["staking_tx_hash_hex"].stringValue
+        stakingTxHex = delegation["delegation_staking"]["staking_tx_hex"].stringValue
         amount = delegation["delegation_staking"]["staking_amount"].intValue
         state = delegation["state"].stringValue
         delegationUnbonding = delegation["delegation_unbonding"]
@@ -428,6 +562,7 @@ extension JSON {
             param.minStakingTimeBlocks = self["min_staking_time_blocks"].uInt32Value
             param.maxStakingTimeBlocks = self["max_staking_time_blocks"].uInt32Value
             param.unbondingTimeBlocks = self["unbonding_time_blocks"].uInt32Value
+            param.unbondingFeeSat = self["unbonding_fee_sat"].int64Value
         }
     }
     
@@ -458,3 +593,8 @@ extension JSON {
         return result
     }
 }
+
+// MARK: - Constants
+let LOW_VALUE_UTXO_THRESHOLD = 10000
+let BATCH_SIZE = 30
+
