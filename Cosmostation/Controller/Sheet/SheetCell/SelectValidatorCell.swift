@@ -224,20 +224,18 @@ class SelectValidatorCell: UITableViewCell {
         } else if provider.votingPower == "0" {
             inactiveTag.isHidden = false
         }
-        if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
-            let vpAmount = NSDecimalNumber(string: provider.votingPower).multiplying(byPowerOf10: -msAsset.decimals!)
-            vpLabel?.attributedText = WDP.dpAmount(vpAmount.stringValue, vpLabel!.font, 0)
-            
-            var commission = NSDecimalNumber.zero
-            if NSDecimalNumber(string: provider.commission).compare(1) == .orderedDescending {
-                commission = NSDecimalNumber(string: provider.commission).multiplying(byPowerOf10: -16)
-            } else {
-                commission = NSDecimalNumber(string: provider.commission).multiplying(byPowerOf10: 2)
-            }
-
-            commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
+        let vpAmount = NSDecimalNumber(string: provider.votingPower).multiplying(byPowerOf10: -8)
+        vpLabel?.attributedText = WDP.dpAmount(vpAmount.stringValue, vpLabel!.font, 8)
+        
+        var commission = NSDecimalNumber.zero
+        if NSDecimalNumber(string: provider.commission).compare(1) == .orderedDescending {
+            commission = NSDecimalNumber(string: provider.commission).multiplying(byPowerOf10: -16)
+        } else {
+            commission = NSDecimalNumber(string: provider.commission).multiplying(byPowerOf10: 2)
         }
+        
+        commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
+        
         vpTitle.isHidden = false
         vpLabel.isHidden = false
         
@@ -245,4 +243,31 @@ class SelectValidatorCell: UITableViewCell {
         commLabel.isHidden = false
         commPercentLabel.isHidden = false
     }
+    
+    func onBindUnstakeValidator(_ baseChain: BaseChain, _ delegation: BtcDelegation) {
+        if let provider = (baseChain as? ChainBitCoin86)?.getBabylonBtcFetcher()?.finalityProviders.filter({ $0.btcPk == delegation.providerPk }).first {
+            let babylon = baseChain.isTestnet ? ChainBabylon_T() : ChainBabylon()
+            logoImg.sd_setImage(with: URL(string: ResourceBase + babylon.apiName + "/finality-provider/" + provider.btcPk + ".png"), placeholderImage: UIImage(named: "validatorDefault"))
+            
+            nameLabel.text = provider.moniker
+            if provider.jailed {
+                jailedTag.isHidden = false
+            } else if provider.votingPower == "0" {
+                inactiveTag.isHidden = false
+            }
+            
+            if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.coinSymbol) {
+                let stakingAmount = NSDecimalNumber(integerLiteral: delegation.amount).multiplying(byPowerOf10: -msAsset.decimals!)
+                stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
+            }
+            
+            if delegation.state.contains("WITHDRAWABLE") {
+                stakingTitle.text = "Withdrawable"
+            }
+            
+            stakingTitle.isHidden = false
+            stakingLabel.isHidden = false
+        }
+    }
+    
 }
