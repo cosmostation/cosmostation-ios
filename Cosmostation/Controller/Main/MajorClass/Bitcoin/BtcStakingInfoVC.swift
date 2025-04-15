@@ -243,10 +243,24 @@ extension BtcStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let withdrawable = displayData.filter({$0.state.uppercased().contains("WITHDRAWABLE")})
+        let unstaking = displayData.filter({$0.state.uppercased() == "TIMELOCK_UNBONDING" || $0.state.uppercased() == "EARLY_UNBONDING"})
+        
         if tabbar.selectedItem?.tag == 0 {
             return 0
         } else {
-            return 40
+            if section == 0 {
+                if withdrawable.isEmpty {
+                    return 0
+                }
+                return 40
+
+            } else {
+                if unstaking.isEmpty {
+                    return 0
+                }
+                return 40
+            }
         }
     }
     
