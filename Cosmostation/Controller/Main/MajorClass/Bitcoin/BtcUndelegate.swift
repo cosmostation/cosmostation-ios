@@ -201,6 +201,7 @@ class BtcUndelegate: BaseVC {
             let totalFeeAmount  = NSDecimalNumber(value: btcFee)
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let value = msPrice.multiplying(by: totalFeeAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+            feeSelectLabel.text = selectedChain.coinSymbol
             WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }
