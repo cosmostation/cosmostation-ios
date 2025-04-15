@@ -131,13 +131,19 @@ public class WUtils {
         return attributedString1
     }
     
-    //TODO Temp hide Eureka
+    
     static func checkIBCrecipientableChains(_ fromChain: BaseChain, _ toSendDenom: String) -> [BaseChain] {
-        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false && $0.supportCosmos == true })
+        //Hide Eureka
 //        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false })
+        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false && $0.supportCosmos == true })
         
         var result = [BaseChain]()
         result.append(fromChain)
+        
+        //Hide Eureka
+        if(toSendDenom.starts(with: "0x")) {
+            return result
+        }
         
         //IBC Coin should add backward path if wallet support fromchain
         if toSendDenom.starts(with: "ibc/"),
@@ -201,7 +207,6 @@ public class WUtils {
     }
     
     static func getMintscanPath(_ fromChain: BaseChain, _ toChain: BaseChain, _ toSendDenom: String) -> MintscanPath? {
-//        var result: MintscanPath?
         
         //Check IBC Coin backward case
         if let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.chain == fromChain.apiName && $0.denom == toSendDenom }).first,

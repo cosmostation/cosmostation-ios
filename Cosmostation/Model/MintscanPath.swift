@@ -36,6 +36,15 @@ public class MintscanPath {
         }
         return nil
     }
+    
+    func getICS20ContractAddress() -> String? {
+        if (direction == .BACKWRAD) {
+            return ibcInfo?.client?.ICS20ContractAddress
+        } else if (direction == .FORWARD) {
+            return ibcInfo?.counterparty?.ICS20ContractAddress
+        }
+        return nil
+    }
 }
 
 enum DirectionIBC: Int {

@@ -374,6 +374,186 @@
 		045CF9652C450D72000DAD08 /* CosmosFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CF9632C450D72000DAD08 /* CosmosFetcher.swift */; };
 		046269072B9740F300648059 /* basebg04.png in Resources */ = {isa = PBXBuildFile; fileRef = 046269062B9740F300648059 /* basebg04.png */; };
 		046269082B9740F300648059 /* basebg04.png in Resources */ = {isa = PBXBuildFile; fileRef = 046269062B9740F300648059 /* basebg04.png */; };
+		046651EE2DACDB2700F9C125 /* ibc_applications_perm_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B12DACDB2700F9C125 /* ibc_applications_perm_v1_genesis.pb.swift */; };
+		046651EF2DACDB2700F9C125 /* ibc_core_connection_v1_connection.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651DD2DACDB2700F9C125 /* ibc_core_connection_v1_connection.pb.swift */; };
+		046651F02DACDB2700F9C125 /* ibc_applications_fee_v1_metadata.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651972DACDB2700F9C125 /* ibc_applications_fee_v1_metadata.pb.swift */; };
+		046651F12DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651AA2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_genesis.pb.swift */; };
+		046651F22DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B02DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_types.pb.swift */; };
+		046651F32DACDB2700F9C125 /* ibc_core_connection_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E22DACDB2700F9C125 /* ibc_core_connection_v1_tx.pb.swift */; };
+		046651F42DACDB2700F9C125 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E62DACDB2700F9C125 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift */; };
+		046651F52DACDB2700F9C125 /* ibc_core_channel_v1_channel.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C22DACDB2700F9C125 /* ibc_core_channel_v1_channel.pb.swift */; };
+		046651F62DACDB2700F9C125 /* ibc_applications_transfer_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651BB2DACDB2700F9C125 /* ibc_applications_transfer_v1_query.grpc.swift */; };
+		046651F72DACDB2700F9C125 /* ibc_core_channel_v2_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651CD2DACDB2700F9C125 /* ibc_core_channel_v2_tx.pb.swift */; };
+		046651F82DACDB2700F9C125 /* ibc_core_client_v2_config.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D42DACDB2700F9C125 /* ibc_core_client_v2_config.pb.swift */; };
+		046651F92DACDB2700F9C125 /* ibc_applications_transfer_v1_denomtrace.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B82DACDB2700F9C125 /* ibc_applications_transfer_v1_denomtrace.pb.swift */; };
+		046651FA2DACDB2700F9C125 /* ibc_applications_fee_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466519B2DACDB2700F9C125 /* ibc_applications_fee_v1_tx.pb.swift */; };
+		046651FB2DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A62DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift */; };
+		046651FC2DACDB2700F9C125 /* ibc_core_client_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651CF2DACDB2700F9C125 /* ibc_core_client_v1_genesis.pb.swift */; };
+		046651FD2DACDB2700F9C125 /* ibc_core_commitment_v1_commitment.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651DB2DACDB2700F9C125 /* ibc_core_commitment_v1_commitment.pb.swift */; };
+		046651FE2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651AB2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_packet.pb.swift */; };
+		046651FF2DACDB2700F9C125 /* ibc_applications_fee_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651982DACDB2700F9C125 /* ibc_applications_fee_v1_query.grpc.swift */; };
+		046652002DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466519E2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift */; };
+		046652012DACDB2700F9C125 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A12DACDB2700F9C125 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift */; };
+		046652022DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651AE2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.grpc.swift */; };
+		046652032DACDB2700F9C125 /* ibc_applications_perm_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B22DACDB2700F9C125 /* ibc_applications_perm_v1_query.grpc.swift */; };
+		046652042DACDB2700F9C125 /* ibc_core_channel_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C62DACDB2700F9C125 /* ibc_core_channel_v1_tx.grpc.swift */; };
+		046652052DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A72DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_account.pb.swift */; };
+		046652062DACDB2700F9C125 /* ibc_core_channel_v2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C82DACDB2700F9C125 /* ibc_core_channel_v2_genesis.pb.swift */; };
+		046652072DACDB2700F9C125 /* ibc_core_channel_v2_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651CC2DACDB2700F9C125 /* ibc_core_channel_v2_tx.grpc.swift */; };
+		046652082DACDB2700F9C125 /* ibc_core_client_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D12DACDB2700F9C125 /* ibc_core_client_v1_query.pb.swift */; };
+		046652092DACDB2700F9C125 /* ibc_core_client_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D32DACDB2700F9C125 /* ibc_core_client_v1_tx.pb.swift */; };
+		0466520A2DACDB2700F9C125 /* ibc_core_client_v2_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651DA2DACDB2700F9C125 /* ibc_core_client_v2_tx.pb.swift */; };
+		0466520B2DACDB2700F9C125 /* ibc_core_commitment_v2_commitment.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651DC2DACDB2700F9C125 /* ibc_core_commitment_v2_commitment.pb.swift */; };
+		0466520C2DACDB2700F9C125 /* ibc_applications_fee_v1_ack.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651942DACDB2700F9C125 /* ibc_applications_fee_v1_ack.pb.swift */; };
+		0466520D2DACDB2700F9C125 /* ibc_core_client_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D02DACDB2700F9C125 /* ibc_core_client_v1_query.grpc.swift */; };
+		0466520E2DACDB2700F9C125 /* ibc_core_connection_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E02DACDB2700F9C125 /* ibc_core_connection_v1_query.pb.swift */; };
+		0466520F2DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A22DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift */; };
+		046652102DACDB2700F9C125 /* ibc_core_channel_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C32DACDB2700F9C125 /* ibc_core_channel_v1_genesis.pb.swift */; };
+		046652112DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651EC2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.pb.swift */; };
+		046652122DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A42DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift */; };
+		046652132DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651BF2DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.grpc.swift */; };
+		046652142DACDB2700F9C125 /* ibc_applications_transfer_v1_authz.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B72DACDB2700F9C125 /* ibc_applications_transfer_v1_authz.pb.swift */; };
+		046652152DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651AF2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.pb.swift */; };
+		046652162DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651AC2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.grpc.swift */; };
+		046652172DACDB2700F9C125 /* ibc_applications_fee_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651962DACDB2700F9C125 /* ibc_applications_fee_v1_genesis.pb.swift */; };
+		046652182DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466519F2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift */; };
+		046652192DACDB2700F9C125 /* ibc_applications_transfer_v2_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C12DACDB2700F9C125 /* ibc_applications_transfer_v2_packet.pb.swift */; };
+		0466521A2DACDB2700F9C125 /* ibc_core_channel_v2_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C92DACDB2700F9C125 /* ibc_core_channel_v2_packet.pb.swift */; };
+		0466521B2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651AD2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.pb.swift */; };
+		0466521C2DACDB2700F9C125 /* ibc_applications_perm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B52DACDB2700F9C125 /* ibc_applications_perm_v1_tx.pb.swift */; };
+		0466521D2DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A82DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift */; };
+		0466521E2DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A92DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_packet.pb.swift */; };
+		0466521F2DACDB2700F9C125 /* ibc_core_connection_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651DE2DACDB2700F9C125 /* ibc_core_connection_v1_genesis.pb.swift */; };
+		046652202DACDB2700F9C125 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E72DACDB2700F9C125 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */; };
+		046652212DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466519C2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift */; };
+		046652222DACDB2700F9C125 /* ibc_lightclients_wasm_v1_wasm.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651ED2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_wasm.pb.swift */; };
+		046652232DACDB2700F9C125 /* ibc_core_channel_v2_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651CA2DACDB2700F9C125 /* ibc_core_channel_v2_query.grpc.swift */; };
+		046652242DACDB2700F9C125 /* ibc_core_channel_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C42DACDB2700F9C125 /* ibc_core_channel_v1_query.grpc.swift */; };
+		046652252DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C02DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.pb.swift */; };
+		046652262DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A52DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift */; };
+		046652272DACDB2700F9C125 /* ibc_applications_perm_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B62DACDB2700F9C125 /* ibc_applications_perm_v1_types.pb.swift */; };
+		046652282DACDB2700F9C125 /* ibc_applications_transfer_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651BC2DACDB2700F9C125 /* ibc_applications_transfer_v1_query.pb.swift */; };
+		046652292DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466519D2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift */; };
+		0466522A2DACDB2700F9C125 /* ibc_core_client_v2_counterparty.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D52DACDB2700F9C125 /* ibc_core_client_v2_counterparty.pb.swift */; };
+		0466522B2DACDB2700F9C125 /* ibc_core_client_v2_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D92DACDB2700F9C125 /* ibc_core_client_v2_tx.grpc.swift */; };
+		0466522C2DACDB2700F9C125 /* ibc_core_channel_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C72DACDB2700F9C125 /* ibc_core_channel_v1_tx.pb.swift */; };
+		0466522D2DACDB2700F9C125 /* ibc_applications_fee_v1_fee.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651952DACDB2700F9C125 /* ibc_applications_fee_v1_fee.pb.swift */; };
+		0466522E2DACDB2700F9C125 /* ibc_core_connection_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651DF2DACDB2700F9C125 /* ibc_core_connection_v1_query.grpc.swift */; };
+		0466522F2DACDB2700F9C125 /* ibc_core_types_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E32DACDB2700F9C125 /* ibc_core_types_v1_genesis.pb.swift */; };
+		046652302DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651EB2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.grpc.swift */; };
+		046652312DACDB2700F9C125 /* ibc_core_channel_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C52DACDB2700F9C125 /* ibc_core_channel_v1_query.pb.swift */; };
+		046652322DACDB2700F9C125 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651BE2DACDB2700F9C125 /* ibc_applications_transfer_v1_transfer.pb.swift */; };
+		046652332DACDB2700F9C125 /* ibc_applications_perm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B32DACDB2700F9C125 /* ibc_applications_perm_v1_query.pb.swift */; };
+		046652342DACDB2700F9C125 /* ibc_applications_transfer_v1_token.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651BD2DACDB2700F9C125 /* ibc_applications_transfer_v1_token.pb.swift */; };
+		046652352DACDB2700F9C125 /* ibc_applications_fee_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651992DACDB2700F9C125 /* ibc_applications_fee_v1_query.pb.swift */; };
+		046652362DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A32DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift */; };
+		046652372DACDB2700F9C125 /* ibc_applications_transfer_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B92DACDB2700F9C125 /* ibc_applications_transfer_v1_genesis.pb.swift */; };
+		046652382DACDB2700F9C125 /* ibc_core_channel_v2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651CB2DACDB2700F9C125 /* ibc_core_channel_v2_query.pb.swift */; };
+		046652392DACDB2700F9C125 /* ibc_core_client_v2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D62DACDB2700F9C125 /* ibc_core_client_v2_genesis.pb.swift */; };
+		0466523A2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A02DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift */; };
+		0466523B2DACDB2700F9C125 /* ibc_applications_perm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B42DACDB2700F9C125 /* ibc_applications_perm_v1_tx.grpc.swift */; };
+		0466523C2DACDB2700F9C125 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E52DACDB2700F9C125 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift */; };
+		0466523D2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E92DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.grpc.swift */; };
+		0466523E2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651EA2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.pb.swift */; };
+		0466523F2DACDB2700F9C125 /* ibc_core_client_v1_client.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651CE2DACDB2700F9C125 /* ibc_core_client_v1_client.pb.swift */; };
+		046652402DACDB2700F9C125 /* ibc_applications_fee_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466519A2DACDB2700F9C125 /* ibc_applications_fee_v1_tx.grpc.swift */; };
+		046652412DACDB2700F9C125 /* ibc_lightclients_wasm_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E82DACDB2700F9C125 /* ibc_lightclients_wasm_v1_genesis.pb.swift */; };
+		046652422DACDB2700F9C125 /* ibc_lightclients_localhost_v2_localhost.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E42DACDB2700F9C125 /* ibc_lightclients_localhost_v2_localhost.pb.swift */; };
+		046652432DACDB2700F9C125 /* ibc_core_client_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D22DACDB2700F9C125 /* ibc_core_client_v1_tx.grpc.swift */; };
+		046652442DACDB2700F9C125 /* ibc_applications_transfer_v1_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651BA2DACDB2700F9C125 /* ibc_applications_transfer_v1_packet.pb.swift */; };
+		046652452DACDB2700F9C125 /* ibc_core_client_v2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D82DACDB2700F9C125 /* ibc_core_client_v2_query.pb.swift */; };
+		046652462DACDB2700F9C125 /* ibc_core_client_v2_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D72DACDB2700F9C125 /* ibc_core_client_v2_query.grpc.swift */; };
+		046652472DACDB2700F9C125 /* ibc_core_connection_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E12DACDB2700F9C125 /* ibc_core_connection_v1_tx.grpc.swift */; };
+		046652482DACDB2700F9C125 /* ibc_applications_perm_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B12DACDB2700F9C125 /* ibc_applications_perm_v1_genesis.pb.swift */; };
+		046652492DACDB2700F9C125 /* ibc_core_connection_v1_connection.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651DD2DACDB2700F9C125 /* ibc_core_connection_v1_connection.pb.swift */; };
+		0466524A2DACDB2700F9C125 /* ibc_applications_fee_v1_metadata.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651972DACDB2700F9C125 /* ibc_applications_fee_v1_metadata.pb.swift */; };
+		0466524B2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651AA2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_genesis.pb.swift */; };
+		0466524C2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B02DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_types.pb.swift */; };
+		0466524D2DACDB2700F9C125 /* ibc_core_connection_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E22DACDB2700F9C125 /* ibc_core_connection_v1_tx.pb.swift */; };
+		0466524E2DACDB2700F9C125 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E62DACDB2700F9C125 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift */; };
+		0466524F2DACDB2700F9C125 /* ibc_core_channel_v1_channel.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C22DACDB2700F9C125 /* ibc_core_channel_v1_channel.pb.swift */; };
+		046652502DACDB2700F9C125 /* ibc_applications_transfer_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651BB2DACDB2700F9C125 /* ibc_applications_transfer_v1_query.grpc.swift */; };
+		046652512DACDB2700F9C125 /* ibc_core_channel_v2_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651CD2DACDB2700F9C125 /* ibc_core_channel_v2_tx.pb.swift */; };
+		046652522DACDB2700F9C125 /* ibc_core_client_v2_config.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D42DACDB2700F9C125 /* ibc_core_client_v2_config.pb.swift */; };
+		046652532DACDB2700F9C125 /* ibc_applications_transfer_v1_denomtrace.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B82DACDB2700F9C125 /* ibc_applications_transfer_v1_denomtrace.pb.swift */; };
+		046652542DACDB2700F9C125 /* ibc_applications_fee_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466519B2DACDB2700F9C125 /* ibc_applications_fee_v1_tx.pb.swift */; };
+		046652552DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A62DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift */; };
+		046652562DACDB2700F9C125 /* ibc_core_client_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651CF2DACDB2700F9C125 /* ibc_core_client_v1_genesis.pb.swift */; };
+		046652572DACDB2700F9C125 /* ibc_core_commitment_v1_commitment.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651DB2DACDB2700F9C125 /* ibc_core_commitment_v1_commitment.pb.swift */; };
+		046652582DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651AB2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_packet.pb.swift */; };
+		046652592DACDB2700F9C125 /* ibc_applications_fee_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651982DACDB2700F9C125 /* ibc_applications_fee_v1_query.grpc.swift */; };
+		0466525A2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466519E2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift */; };
+		0466525B2DACDB2700F9C125 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A12DACDB2700F9C125 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift */; };
+		0466525C2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651AE2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.grpc.swift */; };
+		0466525D2DACDB2700F9C125 /* ibc_applications_perm_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B22DACDB2700F9C125 /* ibc_applications_perm_v1_query.grpc.swift */; };
+		0466525E2DACDB2700F9C125 /* ibc_core_channel_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C62DACDB2700F9C125 /* ibc_core_channel_v1_tx.grpc.swift */; };
+		0466525F2DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A72DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_account.pb.swift */; };
+		046652602DACDB2700F9C125 /* ibc_core_channel_v2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C82DACDB2700F9C125 /* ibc_core_channel_v2_genesis.pb.swift */; };
+		046652612DACDB2700F9C125 /* ibc_core_channel_v2_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651CC2DACDB2700F9C125 /* ibc_core_channel_v2_tx.grpc.swift */; };
+		046652622DACDB2700F9C125 /* ibc_core_client_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D12DACDB2700F9C125 /* ibc_core_client_v1_query.pb.swift */; };
+		046652632DACDB2700F9C125 /* ibc_core_client_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D32DACDB2700F9C125 /* ibc_core_client_v1_tx.pb.swift */; };
+		046652642DACDB2700F9C125 /* ibc_core_client_v2_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651DA2DACDB2700F9C125 /* ibc_core_client_v2_tx.pb.swift */; };
+		046652652DACDB2700F9C125 /* ibc_core_commitment_v2_commitment.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651DC2DACDB2700F9C125 /* ibc_core_commitment_v2_commitment.pb.swift */; };
+		046652662DACDB2700F9C125 /* ibc_applications_fee_v1_ack.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651942DACDB2700F9C125 /* ibc_applications_fee_v1_ack.pb.swift */; };
+		046652672DACDB2700F9C125 /* ibc_core_client_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D02DACDB2700F9C125 /* ibc_core_client_v1_query.grpc.swift */; };
+		046652682DACDB2700F9C125 /* ibc_core_connection_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E02DACDB2700F9C125 /* ibc_core_connection_v1_query.pb.swift */; };
+		046652692DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A22DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift */; };
+		0466526A2DACDB2700F9C125 /* ibc_core_channel_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C32DACDB2700F9C125 /* ibc_core_channel_v1_genesis.pb.swift */; };
+		0466526B2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651EC2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.pb.swift */; };
+		0466526C2DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A42DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift */; };
+		0466526D2DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651BF2DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.grpc.swift */; };
+		0466526E2DACDB2700F9C125 /* ibc_applications_transfer_v1_authz.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B72DACDB2700F9C125 /* ibc_applications_transfer_v1_authz.pb.swift */; };
+		0466526F2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651AF2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.pb.swift */; };
+		046652702DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651AC2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.grpc.swift */; };
+		046652712DACDB2700F9C125 /* ibc_applications_fee_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651962DACDB2700F9C125 /* ibc_applications_fee_v1_genesis.pb.swift */; };
+		046652722DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466519F2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift */; };
+		046652732DACDB2700F9C125 /* ibc_applications_transfer_v2_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C12DACDB2700F9C125 /* ibc_applications_transfer_v2_packet.pb.swift */; };
+		046652742DACDB2700F9C125 /* ibc_core_channel_v2_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C92DACDB2700F9C125 /* ibc_core_channel_v2_packet.pb.swift */; };
+		046652752DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651AD2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.pb.swift */; };
+		046652762DACDB2700F9C125 /* ibc_applications_perm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B52DACDB2700F9C125 /* ibc_applications_perm_v1_tx.pb.swift */; };
+		046652772DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A82DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift */; };
+		046652782DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A92DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_packet.pb.swift */; };
+		046652792DACDB2700F9C125 /* ibc_core_connection_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651DE2DACDB2700F9C125 /* ibc_core_connection_v1_genesis.pb.swift */; };
+		0466527A2DACDB2700F9C125 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E72DACDB2700F9C125 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */; };
+		0466527B2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466519C2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift */; };
+		0466527C2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_wasm.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651ED2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_wasm.pb.swift */; };
+		0466527D2DACDB2700F9C125 /* ibc_core_channel_v2_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651CA2DACDB2700F9C125 /* ibc_core_channel_v2_query.grpc.swift */; };
+		0466527E2DACDB2700F9C125 /* ibc_core_channel_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C42DACDB2700F9C125 /* ibc_core_channel_v1_query.grpc.swift */; };
+		0466527F2DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C02DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.pb.swift */; };
+		046652802DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A52DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift */; };
+		046652812DACDB2700F9C125 /* ibc_applications_perm_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B62DACDB2700F9C125 /* ibc_applications_perm_v1_types.pb.swift */; };
+		046652822DACDB2700F9C125 /* ibc_applications_transfer_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651BC2DACDB2700F9C125 /* ibc_applications_transfer_v1_query.pb.swift */; };
+		046652832DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466519D2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift */; };
+		046652842DACDB2700F9C125 /* ibc_core_client_v2_counterparty.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D52DACDB2700F9C125 /* ibc_core_client_v2_counterparty.pb.swift */; };
+		046652852DACDB2700F9C125 /* ibc_core_client_v2_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D92DACDB2700F9C125 /* ibc_core_client_v2_tx.grpc.swift */; };
+		046652862DACDB2700F9C125 /* ibc_core_channel_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C72DACDB2700F9C125 /* ibc_core_channel_v1_tx.pb.swift */; };
+		046652872DACDB2700F9C125 /* ibc_applications_fee_v1_fee.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651952DACDB2700F9C125 /* ibc_applications_fee_v1_fee.pb.swift */; };
+		046652882DACDB2700F9C125 /* ibc_core_connection_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651DF2DACDB2700F9C125 /* ibc_core_connection_v1_query.grpc.swift */; };
+		046652892DACDB2700F9C125 /* ibc_core_types_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E32DACDB2700F9C125 /* ibc_core_types_v1_genesis.pb.swift */; };
+		0466528A2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651EB2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.grpc.swift */; };
+		0466528B2DACDB2700F9C125 /* ibc_core_channel_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651C52DACDB2700F9C125 /* ibc_core_channel_v1_query.pb.swift */; };
+		0466528C2DACDB2700F9C125 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651BE2DACDB2700F9C125 /* ibc_applications_transfer_v1_transfer.pb.swift */; };
+		0466528D2DACDB2700F9C125 /* ibc_applications_perm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B32DACDB2700F9C125 /* ibc_applications_perm_v1_query.pb.swift */; };
+		0466528E2DACDB2700F9C125 /* ibc_applications_transfer_v1_token.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651BD2DACDB2700F9C125 /* ibc_applications_transfer_v1_token.pb.swift */; };
+		0466528F2DACDB2700F9C125 /* ibc_applications_fee_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651992DACDB2700F9C125 /* ibc_applications_fee_v1_query.pb.swift */; };
+		046652902DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A32DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift */; };
+		046652912DACDB2700F9C125 /* ibc_applications_transfer_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B92DACDB2700F9C125 /* ibc_applications_transfer_v1_genesis.pb.swift */; };
+		046652922DACDB2700F9C125 /* ibc_core_channel_v2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651CB2DACDB2700F9C125 /* ibc_core_channel_v2_query.pb.swift */; };
+		046652932DACDB2700F9C125 /* ibc_core_client_v2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D62DACDB2700F9C125 /* ibc_core_client_v2_genesis.pb.swift */; };
+		046652942DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651A02DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift */; };
+		046652952DACDB2700F9C125 /* ibc_applications_perm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651B42DACDB2700F9C125 /* ibc_applications_perm_v1_tx.grpc.swift */; };
+		046652962DACDB2700F9C125 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E52DACDB2700F9C125 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift */; };
+		046652972DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E92DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.grpc.swift */; };
+		046652982DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651EA2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.pb.swift */; };
+		046652992DACDB2700F9C125 /* ibc_core_client_v1_client.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651CE2DACDB2700F9C125 /* ibc_core_client_v1_client.pb.swift */; };
+		0466529A2DACDB2700F9C125 /* ibc_applications_fee_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466519A2DACDB2700F9C125 /* ibc_applications_fee_v1_tx.grpc.swift */; };
+		0466529B2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E82DACDB2700F9C125 /* ibc_lightclients_wasm_v1_genesis.pb.swift */; };
+		0466529C2DACDB2700F9C125 /* ibc_lightclients_localhost_v2_localhost.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E42DACDB2700F9C125 /* ibc_lightclients_localhost_v2_localhost.pb.swift */; };
+		0466529D2DACDB2700F9C125 /* ibc_core_client_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D22DACDB2700F9C125 /* ibc_core_client_v1_tx.grpc.swift */; };
+		0466529E2DACDB2700F9C125 /* ibc_applications_transfer_v1_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651BA2DACDB2700F9C125 /* ibc_applications_transfer_v1_packet.pb.swift */; };
+		0466529F2DACDB2700F9C125 /* ibc_core_client_v2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D82DACDB2700F9C125 /* ibc_core_client_v2_query.pb.swift */; };
+		046652A02DACDB2700F9C125 /* ibc_core_client_v2_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651D72DACDB2700F9C125 /* ibc_core_client_v2_query.grpc.swift */; };
+		046652A12DACDB2700F9C125 /* ibc_core_connection_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046651E12DACDB2700F9C125 /* ibc_core_connection_v1_tx.grpc.swift */; };
 		046BF1C02B0F259C00BC1FC8 /* OktValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BF1BE2B0F259C00BC1FC8 /* OktValidatorCell.swift */; };
 		046BF1C12B0F259C00BC1FC8 /* OktValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BF1BE2B0F259C00BC1FC8 /* OktValidatorCell.swift */; };
 		046BF1C22B0F259C00BC1FC8 /* OktValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BF1BF2B0F259C00BC1FC8 /* OktValidatorCell.xib */; };
@@ -2100,186 +2280,6 @@
 		E1A48DF72C006E820084D770 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A48DF52C006E820084D770 /* PaddingLabel.swift */; };
 		E1A82DD1224220910097CAEE /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD0224220910097CAEE /* Account.swift */; };
 		E1A82DE822448E940097CAEE /* WUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE722448E940097CAEE /* WUtils.swift */; };
-		E1AEEB1B2D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_wasm.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB1A2D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_wasm.pb.swift */; };
-		E1AEEB1C2D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF32D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.grpc.swift */; };
-		E1AEEB1D2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEADE2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_genesis.pb.swift */; };
-		E1AEEB1E2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEADF2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.grpc.swift */; };
-		E1AEEB1F2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE32D9FF0BA001AE3F4 /* ibc_applications_perm_v1_types.pb.swift */; };
-		E1AEEB202D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE22D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.pb.swift */; };
-		E1AEEB212D9FF0BA001AE3F4 /* ibc_core_channel_v2_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF62D9FF0BA001AE3F4 /* ibc_core_channel_v2_packet.pb.swift */; };
-		E1AEEB222D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAFF2D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.grpc.swift */; };
-		E1AEEB232D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB0E2D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.grpc.swift */; };
-		E1AEEB242D9FF0BA001AE3F4 /* ibc_core_channel_v1_channel.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAEF2D9FF0BA001AE3F4 /* ibc_core_channel_v1_channel.pb.swift */; };
-		E1AEEB252D9FF0BA001AE3F4 /* ibc_applications_fee_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC32D9FF0BA001AE3F4 /* ibc_applications_fee_v1_genesis.pb.swift */; };
-		E1AEEB262D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEADA2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.pb.swift */; };
-		E1AEEB272D9FF0BA001AE3F4 /* ibc_applications_fee_v1_metadata.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC42D9FF0BA001AE3F4 /* ibc_applications_fee_v1_metadata.pb.swift */; };
-		E1AEEB282D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC52D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.grpc.swift */; };
-		E1AEEB292D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF12D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.grpc.swift */; };
-		E1AEEB2A2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEACA2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift */; };
-		E1AEEB2B2D9FF0BA001AE3F4 /* ibc_core_connection_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB0B2D9FF0BA001AE3F4 /* ibc_core_connection_v1_genesis.pb.swift */; };
-		E1AEEB2C2D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF92D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.grpc.swift */; };
-		E1AEEB2D2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_authz.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE42D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_authz.pb.swift */; };
-		E1AEEB2E2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEACE2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift */; };
-		E1AEEB2F2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE72D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_packet.pb.swift */; };
-		E1AEEB302D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE82D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.grpc.swift */; };
-		E1AEEB312D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD92D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.grpc.swift */; };
-		E1AEEB322D9FF0BA001AE3F4 /* ibc_core_client_v2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB052D9FF0BA001AE3F4 /* ibc_core_client_v2_query.pb.swift */; };
-		E1AEEB332D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF22D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.pb.swift */; };
-		E1AEEB342D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD82D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_packet.pb.swift */; };
-		E1AEEB352D9FF0BA001AE3F4 /* ibc_core_client_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAFE2D9FF0BA001AE3F4 /* ibc_core_client_v1_query.pb.swift */; };
-		E1AEEB362D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB122D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift */; };
-		E1AEEB372D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB192D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.pb.swift */; };
-		E1AEEB382D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB0D2D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.pb.swift */; };
-		E1AEEB392D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE62D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_genesis.pb.swift */; };
-		E1AEEB3A2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE12D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.grpc.swift */; };
-		E1AEEB3B2D9FF0BA001AE3F4 /* ibc_lightclients_localhost_v2_localhost.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB112D9FF0BA001AE3F4 /* ibc_lightclients_localhost_v2_localhost.pb.swift */; };
-		E1AEEB3C2D9FF0BA001AE3F4 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB142D9FF0BA001AE3F4 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */; };
-		E1AEEB3D2D9FF0BA001AE3F4 /* ibc_core_types_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB102D9FF0BA001AE3F4 /* ibc_core_types_v1_genesis.pb.swift */; };
-		E1AEEB3E2D9FF0BA001AE3F4 /* ibc_core_client_v2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB032D9FF0BA001AE3F4 /* ibc_core_client_v2_genesis.pb.swift */; };
-		E1AEEB3F2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEADD2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_types.pb.swift */; };
-		E1AEEB402D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC82D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.pb.swift */; };
-		E1AEEB412D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC92D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift */; };
-		E1AEEB422D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEACD2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift */; };
-		E1AEEB432D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD22D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift */; };
-		E1AEEB442D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAEC2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.grpc.swift */; };
-		E1AEEB452D9FF0BA001AE3F4 /* ibc_core_channel_v2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF52D9FF0BA001AE3F4 /* ibc_core_channel_v2_genesis.pb.swift */; };
-		E1AEEB462D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF72D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.grpc.swift */; };
-		E1AEEB472D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD52D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift */; };
-		E1AEEB482D9FF0BA001AE3F4 /* ibc_applications_fee_v1_fee.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC22D9FF0BA001AE3F4 /* ibc_applications_fee_v1_fee.pb.swift */; };
-		E1AEEB492D9FF0BA001AE3F4 /* ibc_core_connection_v1_connection.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB0A2D9FF0BA001AE3F4 /* ibc_core_connection_v1_connection.pb.swift */; };
-		E1AEEB4A2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD12D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift */; };
-		E1AEEB4B2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD02D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift */; };
-		E1AEEB4C2D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC72D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.grpc.swift */; };
-		E1AEEB4D2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEACB2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift */; };
-		E1AEEB4E2D9FF0BA001AE3F4 /* ibc_applications_fee_v1_ack.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC12D9FF0BA001AE3F4 /* ibc_applications_fee_v1_ack.pb.swift */; };
-		E1AEEB4F2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD42D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_account.pb.swift */; };
-		E1AEEB502D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAED2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.pb.swift */; };
-		E1AEEB512D9FF0BA001AE3F4 /* ibc_applications_transfer_v2_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAEE2D9FF0BA001AE3F4 /* ibc_applications_transfer_v2_packet.pb.swift */; };
-		E1AEEB522D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC62D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.pb.swift */; };
-		E1AEEB532D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD62D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_packet.pb.swift */; };
-		E1AEEB542D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB0F2D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.pb.swift */; };
-		E1AEEB552D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_denomtrace.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE52D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_denomtrace.pb.swift */; };
-		E1AEEB562D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB062D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.grpc.swift */; };
-		E1AEEB572D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEADB2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.grpc.swift */; };
-		E1AEEB582D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB152D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_genesis.pb.swift */; };
-		E1AEEB592D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD72D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_genesis.pb.swift */; };
-		E1AEEB5A2D9FF0BA001AE3F4 /* ibc_core_client_v2_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB042D9FF0BA001AE3F4 /* ibc_core_client_v2_query.grpc.swift */; };
-		E1AEEB5B2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE02D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.pb.swift */; };
-		E1AEEB5C2D9FF0BA001AE3F4 /* ibc_core_channel_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF02D9FF0BA001AE3F4 /* ibc_core_channel_v1_genesis.pb.swift */; };
-		E1AEEB5D2D9FF0BA001AE3F4 /* ibc_core_commitment_v2_commitment.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB092D9FF0BA001AE3F4 /* ibc_core_commitment_v2_commitment.pb.swift */; };
-		E1AEEB5E2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEACC2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift */; };
-		E1AEEB5F2D9FF0BA001AE3F4 /* ibc_core_client_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAFC2D9FF0BA001AE3F4 /* ibc_core_client_v1_genesis.pb.swift */; };
-		E1AEEB602D9FF0BA001AE3F4 /* ibc_core_commitment_v1_commitment.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB082D9FF0BA001AE3F4 /* ibc_core_commitment_v1_commitment.pb.swift */; };
-		E1AEEB612D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD32D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift */; };
-		E1AEEB622D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB002D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.pb.swift */; };
-		E1AEEB632D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB162D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.grpc.swift */; };
-		E1AEEB642D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF42D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.pb.swift */; };
-		E1AEEB652D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE92D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.pb.swift */; };
-		E1AEEB662D9FF0BA001AE3F4 /* ibc_core_client_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAFD2D9FF0BA001AE3F4 /* ibc_core_client_v1_query.grpc.swift */; };
-		E1AEEB672D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB072D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.pb.swift */; };
-		E1AEEB682D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB172D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.pb.swift */; };
-		E1AEEB692D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB182D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.grpc.swift */; };
-		E1AEEB6A2D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB0C2D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.grpc.swift */; };
-		E1AEEB6B2D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF82D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.pb.swift */; };
-		E1AEEB6C2D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAFA2D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.pb.swift */; };
-		E1AEEB6D2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_token.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAEA2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_token.pb.swift */; };
-		E1AEEB6E2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEACF2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift */; };
-		E1AEEB6F2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAEB2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_transfer.pb.swift */; };
-		E1AEEB702D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB132D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift */; };
-		E1AEEB712D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEADC2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.pb.swift */; };
-		E1AEEB722D9FF0BA001AE3F4 /* ibc_core_client_v2_config.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB012D9FF0BA001AE3F4 /* ibc_core_client_v2_config.pb.swift */; };
-		E1AEEB732D9FF0BA001AE3F4 /* ibc_core_client_v2_counterparty.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB022D9FF0BA001AE3F4 /* ibc_core_client_v2_counterparty.pb.swift */; };
-		E1AEEB742D9FF0BA001AE3F4 /* ibc_core_client_v1_client.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAFB2D9FF0BA001AE3F4 /* ibc_core_client_v1_client.pb.swift */; };
-		E1AEEB752D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_wasm.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB1A2D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_wasm.pb.swift */; };
-		E1AEEB762D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF32D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.grpc.swift */; };
-		E1AEEB772D9FF0BA001AE3F4 /* ibc_applications_perm_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEADE2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_genesis.pb.swift */; };
-		E1AEEB782D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEADF2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.grpc.swift */; };
-		E1AEEB792D9FF0BA001AE3F4 /* ibc_applications_perm_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE32D9FF0BA001AE3F4 /* ibc_applications_perm_v1_types.pb.swift */; };
-		E1AEEB7A2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE22D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.pb.swift */; };
-		E1AEEB7B2D9FF0BA001AE3F4 /* ibc_core_channel_v2_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF62D9FF0BA001AE3F4 /* ibc_core_channel_v2_packet.pb.swift */; };
-		E1AEEB7C2D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAFF2D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.grpc.swift */; };
-		E1AEEB7D2D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB0E2D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.grpc.swift */; };
-		E1AEEB7E2D9FF0BA001AE3F4 /* ibc_core_channel_v1_channel.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAEF2D9FF0BA001AE3F4 /* ibc_core_channel_v1_channel.pb.swift */; };
-		E1AEEB7F2D9FF0BA001AE3F4 /* ibc_applications_fee_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC32D9FF0BA001AE3F4 /* ibc_applications_fee_v1_genesis.pb.swift */; };
-		E1AEEB802D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEADA2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.pb.swift */; };
-		E1AEEB812D9FF0BA001AE3F4 /* ibc_applications_fee_v1_metadata.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC42D9FF0BA001AE3F4 /* ibc_applications_fee_v1_metadata.pb.swift */; };
-		E1AEEB822D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC52D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.grpc.swift */; };
-		E1AEEB832D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF12D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.grpc.swift */; };
-		E1AEEB842D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEACA2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift */; };
-		E1AEEB852D9FF0BA001AE3F4 /* ibc_core_connection_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB0B2D9FF0BA001AE3F4 /* ibc_core_connection_v1_genesis.pb.swift */; };
-		E1AEEB862D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF92D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.grpc.swift */; };
-		E1AEEB872D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_authz.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE42D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_authz.pb.swift */; };
-		E1AEEB882D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEACE2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift */; };
-		E1AEEB892D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE72D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_packet.pb.swift */; };
-		E1AEEB8A2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE82D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.grpc.swift */; };
-		E1AEEB8B2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD92D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.grpc.swift */; };
-		E1AEEB8C2D9FF0BA001AE3F4 /* ibc_core_client_v2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB052D9FF0BA001AE3F4 /* ibc_core_client_v2_query.pb.swift */; };
-		E1AEEB8D2D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF22D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.pb.swift */; };
-		E1AEEB8E2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD82D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_packet.pb.swift */; };
-		E1AEEB8F2D9FF0BA001AE3F4 /* ibc_core_client_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAFE2D9FF0BA001AE3F4 /* ibc_core_client_v1_query.pb.swift */; };
-		E1AEEB902D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB122D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift */; };
-		E1AEEB912D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB192D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.pb.swift */; };
-		E1AEEB922D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB0D2D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.pb.swift */; };
-		E1AEEB932D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE62D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_genesis.pb.swift */; };
-		E1AEEB942D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE12D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.grpc.swift */; };
-		E1AEEB952D9FF0BA001AE3F4 /* ibc_lightclients_localhost_v2_localhost.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB112D9FF0BA001AE3F4 /* ibc_lightclients_localhost_v2_localhost.pb.swift */; };
-		E1AEEB962D9FF0BA001AE3F4 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB142D9FF0BA001AE3F4 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */; };
-		E1AEEB972D9FF0BA001AE3F4 /* ibc_core_types_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB102D9FF0BA001AE3F4 /* ibc_core_types_v1_genesis.pb.swift */; };
-		E1AEEB982D9FF0BA001AE3F4 /* ibc_core_client_v2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB032D9FF0BA001AE3F4 /* ibc_core_client_v2_genesis.pb.swift */; };
-		E1AEEB992D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEADD2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_types.pb.swift */; };
-		E1AEEB9A2D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC82D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.pb.swift */; };
-		E1AEEB9B2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC92D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift */; };
-		E1AEEB9C2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEACD2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift */; };
-		E1AEEB9D2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD22D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift */; };
-		E1AEEB9E2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAEC2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.grpc.swift */; };
-		E1AEEB9F2D9FF0BA001AE3F4 /* ibc_core_channel_v2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF52D9FF0BA001AE3F4 /* ibc_core_channel_v2_genesis.pb.swift */; };
-		E1AEEBA02D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF72D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.grpc.swift */; };
-		E1AEEBA12D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD52D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift */; };
-		E1AEEBA22D9FF0BA001AE3F4 /* ibc_applications_fee_v1_fee.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC22D9FF0BA001AE3F4 /* ibc_applications_fee_v1_fee.pb.swift */; };
-		E1AEEBA32D9FF0BA001AE3F4 /* ibc_core_connection_v1_connection.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB0A2D9FF0BA001AE3F4 /* ibc_core_connection_v1_connection.pb.swift */; };
-		E1AEEBA42D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD12D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift */; };
-		E1AEEBA52D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD02D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift */; };
-		E1AEEBA62D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC72D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.grpc.swift */; };
-		E1AEEBA72D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEACB2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift */; };
-		E1AEEBA82D9FF0BA001AE3F4 /* ibc_applications_fee_v1_ack.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC12D9FF0BA001AE3F4 /* ibc_applications_fee_v1_ack.pb.swift */; };
-		E1AEEBA92D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD42D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_account.pb.swift */; };
-		E1AEEBAA2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAED2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.pb.swift */; };
-		E1AEEBAB2D9FF0BA001AE3F4 /* ibc_applications_transfer_v2_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAEE2D9FF0BA001AE3F4 /* ibc_applications_transfer_v2_packet.pb.swift */; };
-		E1AEEBAC2D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAC62D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.pb.swift */; };
-		E1AEEBAD2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD62D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_packet.pb.swift */; };
-		E1AEEBAE2D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB0F2D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.pb.swift */; };
-		E1AEEBAF2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_denomtrace.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE52D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_denomtrace.pb.swift */; };
-		E1AEEBB02D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB062D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.grpc.swift */; };
-		E1AEEBB12D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEADB2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.grpc.swift */; };
-		E1AEEBB22D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB152D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_genesis.pb.swift */; };
-		E1AEEBB32D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD72D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_genesis.pb.swift */; };
-		E1AEEBB42D9FF0BA001AE3F4 /* ibc_core_client_v2_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB042D9FF0BA001AE3F4 /* ibc_core_client_v2_query.grpc.swift */; };
-		E1AEEBB52D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE02D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.pb.swift */; };
-		E1AEEBB62D9FF0BA001AE3F4 /* ibc_core_channel_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF02D9FF0BA001AE3F4 /* ibc_core_channel_v1_genesis.pb.swift */; };
-		E1AEEBB72D9FF0BA001AE3F4 /* ibc_core_commitment_v2_commitment.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB092D9FF0BA001AE3F4 /* ibc_core_commitment_v2_commitment.pb.swift */; };
-		E1AEEBB82D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEACC2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift */; };
-		E1AEEBB92D9FF0BA001AE3F4 /* ibc_core_client_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAFC2D9FF0BA001AE3F4 /* ibc_core_client_v1_genesis.pb.swift */; };
-		E1AEEBBA2D9FF0BA001AE3F4 /* ibc_core_commitment_v1_commitment.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB082D9FF0BA001AE3F4 /* ibc_core_commitment_v1_commitment.pb.swift */; };
-		E1AEEBBB2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAD32D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift */; };
-		E1AEEBBC2D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB002D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.pb.swift */; };
-		E1AEEBBD2D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB162D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.grpc.swift */; };
-		E1AEEBBE2D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF42D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.pb.swift */; };
-		E1AEEBBF2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAE92D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.pb.swift */; };
-		E1AEEBC02D9FF0BA001AE3F4 /* ibc_core_client_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAFD2D9FF0BA001AE3F4 /* ibc_core_client_v1_query.grpc.swift */; };
-		E1AEEBC12D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB072D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.pb.swift */; };
-		E1AEEBC22D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB172D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.pb.swift */; };
-		E1AEEBC32D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB182D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.grpc.swift */; };
-		E1AEEBC42D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB0C2D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.grpc.swift */; };
-		E1AEEBC52D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAF82D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.pb.swift */; };
-		E1AEEBC62D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAFA2D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.pb.swift */; };
-		E1AEEBC72D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_token.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAEA2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_token.pb.swift */; };
-		E1AEEBC82D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEACF2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift */; };
-		E1AEEBC92D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAEB2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_transfer.pb.swift */; };
-		E1AEEBCA2D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB132D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift */; };
-		E1AEEBCB2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEADC2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.pb.swift */; };
-		E1AEEBCC2D9FF0BA001AE3F4 /* ibc_core_client_v2_config.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB012D9FF0BA001AE3F4 /* ibc_core_client_v2_config.pb.swift */; };
-		E1AEEBCD2D9FF0BA001AE3F4 /* ibc_core_client_v2_counterparty.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEB022D9FF0BA001AE3F4 /* ibc_core_client_v2_counterparty.pb.swift */; };
-		E1AEEBCE2D9FF0BA001AE3F4 /* ibc_core_client_v1_client.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AEEAFB2D9FF0BA001AE3F4 /* ibc_core_client_v1_client.pb.swift */; };
 		E1B44B1F2ADA41CD0073C88A /* NeutronSingleVoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B44B1D2ADA41CD0073C88A /* NeutronSingleVoteCell.swift */; };
 		E1B44B202ADA41CD0073C88A /* NeutronSingleVoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B44B1D2ADA41CD0073C88A /* NeutronSingleVoteCell.swift */; };
 		E1B44B212ADA41CD0073C88A /* NeutronSingleVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B44B1E2ADA41CD0073C88A /* NeutronSingleVoteCell.xib */; };
@@ -2611,6 +2611,96 @@
 		04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClassVC.swift; sourceTree = "<group>"; };
 		045CF9632C450D72000DAD08 /* CosmosFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosFetcher.swift; sourceTree = "<group>"; };
 		046269062B9740F300648059 /* basebg04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg04.png; sourceTree = "<group>"; };
+		046651942DACDB2700F9C125 /* ibc_applications_fee_v1_ack.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_ack.pb.swift; sourceTree = "<group>"; };
+		046651952DACDB2700F9C125 /* ibc_applications_fee_v1_fee.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_fee.pb.swift; sourceTree = "<group>"; };
+		046651962DACDB2700F9C125 /* ibc_applications_fee_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		046651972DACDB2700F9C125 /* ibc_applications_fee_v1_metadata.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_metadata.pb.swift; sourceTree = "<group>"; };
+		046651982DACDB2700F9C125 /* ibc_applications_fee_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_query.grpc.swift; sourceTree = "<group>"; };
+		046651992DACDB2700F9C125 /* ibc_applications_fee_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_query.pb.swift; sourceTree = "<group>"; };
+		0466519A2DACDB2700F9C125 /* ibc_applications_fee_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		0466519B2DACDB2700F9C125 /* ibc_applications_fee_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_tx.pb.swift; sourceTree = "<group>"; };
+		0466519C2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_controller_v1_controller.pb.swift; sourceTree = "<group>"; };
+		0466519D2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_controller_v1_query.grpc.swift; sourceTree = "<group>"; };
+		0466519E2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_controller_v1_query.pb.swift; sourceTree = "<group>"; };
+		0466519F2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		046651A02DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_controller_v1_tx.pb.swift; sourceTree = "<group>"; };
+		046651A12DACDB2700F9C125 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		046651A22DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_host_v1_host.pb.swift; sourceTree = "<group>"; };
+		046651A32DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_host_v1_query.grpc.swift; sourceTree = "<group>"; };
+		046651A42DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_host_v1_query.pb.swift; sourceTree = "<group>"; };
+		046651A52DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_host_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		046651A62DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_host_v1_tx.pb.swift; sourceTree = "<group>"; };
+		046651A72DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_account.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_v1_account.pb.swift; sourceTree = "<group>"; };
+		046651A82DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_v1_metadata.pb.swift; sourceTree = "<group>"; };
+		046651A92DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_packet.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_v1_packet.pb.swift; sourceTree = "<group>"; };
+		046651AA2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		046651AB2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_packet.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_packet.pb.swift; sourceTree = "<group>"; };
+		046651AC2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_query.grpc.swift; sourceTree = "<group>"; };
+		046651AD2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_query.pb.swift; sourceTree = "<group>"; };
+		046651AE2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		046651AF2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_tx.pb.swift; sourceTree = "<group>"; };
+		046651B02DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_types.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_types.pb.swift; sourceTree = "<group>"; };
+		046651B12DACDB2700F9C125 /* ibc_applications_perm_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_perm_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		046651B22DACDB2700F9C125 /* ibc_applications_perm_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_perm_v1_query.grpc.swift; sourceTree = "<group>"; };
+		046651B32DACDB2700F9C125 /* ibc_applications_perm_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_perm_v1_query.pb.swift; sourceTree = "<group>"; };
+		046651B42DACDB2700F9C125 /* ibc_applications_perm_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_perm_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		046651B52DACDB2700F9C125 /* ibc_applications_perm_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_perm_v1_tx.pb.swift; sourceTree = "<group>"; };
+		046651B62DACDB2700F9C125 /* ibc_applications_perm_v1_types.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_perm_v1_types.pb.swift; sourceTree = "<group>"; };
+		046651B72DACDB2700F9C125 /* ibc_applications_transfer_v1_authz.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_authz.pb.swift; sourceTree = "<group>"; };
+		046651B82DACDB2700F9C125 /* ibc_applications_transfer_v1_denomtrace.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_denomtrace.pb.swift; sourceTree = "<group>"; };
+		046651B92DACDB2700F9C125 /* ibc_applications_transfer_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		046651BA2DACDB2700F9C125 /* ibc_applications_transfer_v1_packet.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_packet.pb.swift; sourceTree = "<group>"; };
+		046651BB2DACDB2700F9C125 /* ibc_applications_transfer_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_query.grpc.swift; sourceTree = "<group>"; };
+		046651BC2DACDB2700F9C125 /* ibc_applications_transfer_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_query.pb.swift; sourceTree = "<group>"; };
+		046651BD2DACDB2700F9C125 /* ibc_applications_transfer_v1_token.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_token.pb.swift; sourceTree = "<group>"; };
+		046651BE2DACDB2700F9C125 /* ibc_applications_transfer_v1_transfer.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_transfer.pb.swift; sourceTree = "<group>"; };
+		046651BF2DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		046651C02DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_tx.pb.swift; sourceTree = "<group>"; };
+		046651C12DACDB2700F9C125 /* ibc_applications_transfer_v2_packet.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v2_packet.pb.swift; sourceTree = "<group>"; };
+		046651C22DACDB2700F9C125 /* ibc_core_channel_v1_channel.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_channel.pb.swift; sourceTree = "<group>"; };
+		046651C32DACDB2700F9C125 /* ibc_core_channel_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		046651C42DACDB2700F9C125 /* ibc_core_channel_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_query.grpc.swift; sourceTree = "<group>"; };
+		046651C52DACDB2700F9C125 /* ibc_core_channel_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_query.pb.swift; sourceTree = "<group>"; };
+		046651C62DACDB2700F9C125 /* ibc_core_channel_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		046651C72DACDB2700F9C125 /* ibc_core_channel_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_tx.pb.swift; sourceTree = "<group>"; };
+		046651C82DACDB2700F9C125 /* ibc_core_channel_v2_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v2_genesis.pb.swift; sourceTree = "<group>"; };
+		046651C92DACDB2700F9C125 /* ibc_core_channel_v2_packet.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v2_packet.pb.swift; sourceTree = "<group>"; };
+		046651CA2DACDB2700F9C125 /* ibc_core_channel_v2_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v2_query.grpc.swift; sourceTree = "<group>"; };
+		046651CB2DACDB2700F9C125 /* ibc_core_channel_v2_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v2_query.pb.swift; sourceTree = "<group>"; };
+		046651CC2DACDB2700F9C125 /* ibc_core_channel_v2_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v2_tx.grpc.swift; sourceTree = "<group>"; };
+		046651CD2DACDB2700F9C125 /* ibc_core_channel_v2_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v2_tx.pb.swift; sourceTree = "<group>"; };
+		046651CE2DACDB2700F9C125 /* ibc_core_client_v1_client.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_client.pb.swift; sourceTree = "<group>"; };
+		046651CF2DACDB2700F9C125 /* ibc_core_client_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		046651D02DACDB2700F9C125 /* ibc_core_client_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_query.grpc.swift; sourceTree = "<group>"; };
+		046651D12DACDB2700F9C125 /* ibc_core_client_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_query.pb.swift; sourceTree = "<group>"; };
+		046651D22DACDB2700F9C125 /* ibc_core_client_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		046651D32DACDB2700F9C125 /* ibc_core_client_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_tx.pb.swift; sourceTree = "<group>"; };
+		046651D42DACDB2700F9C125 /* ibc_core_client_v2_config.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_config.pb.swift; sourceTree = "<group>"; };
+		046651D52DACDB2700F9C125 /* ibc_core_client_v2_counterparty.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_counterparty.pb.swift; sourceTree = "<group>"; };
+		046651D62DACDB2700F9C125 /* ibc_core_client_v2_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_genesis.pb.swift; sourceTree = "<group>"; };
+		046651D72DACDB2700F9C125 /* ibc_core_client_v2_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_query.grpc.swift; sourceTree = "<group>"; };
+		046651D82DACDB2700F9C125 /* ibc_core_client_v2_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_query.pb.swift; sourceTree = "<group>"; };
+		046651D92DACDB2700F9C125 /* ibc_core_client_v2_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_tx.grpc.swift; sourceTree = "<group>"; };
+		046651DA2DACDB2700F9C125 /* ibc_core_client_v2_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_tx.pb.swift; sourceTree = "<group>"; };
+		046651DB2DACDB2700F9C125 /* ibc_core_commitment_v1_commitment.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_commitment_v1_commitment.pb.swift; sourceTree = "<group>"; };
+		046651DC2DACDB2700F9C125 /* ibc_core_commitment_v2_commitment.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_commitment_v2_commitment.pb.swift; sourceTree = "<group>"; };
+		046651DD2DACDB2700F9C125 /* ibc_core_connection_v1_connection.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_connection.pb.swift; sourceTree = "<group>"; };
+		046651DE2DACDB2700F9C125 /* ibc_core_connection_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		046651DF2DACDB2700F9C125 /* ibc_core_connection_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_query.grpc.swift; sourceTree = "<group>"; };
+		046651E02DACDB2700F9C125 /* ibc_core_connection_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_query.pb.swift; sourceTree = "<group>"; };
+		046651E12DACDB2700F9C125 /* ibc_core_connection_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		046651E22DACDB2700F9C125 /* ibc_core_connection_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_tx.pb.swift; sourceTree = "<group>"; };
+		046651E32DACDB2700F9C125 /* ibc_core_types_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_types_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		046651E42DACDB2700F9C125 /* ibc_lightclients_localhost_v2_localhost.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_localhost_v2_localhost.pb.swift; sourceTree = "<group>"; };
+		046651E52DACDB2700F9C125 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_solomachine_v2_solomachine.pb.swift; sourceTree = "<group>"; };
+		046651E62DACDB2700F9C125 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_solomachine_v3_solomachine.pb.swift; sourceTree = "<group>"; };
+		046651E72DACDB2700F9C125 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_tendermint_v1_tendermint.pb.swift; sourceTree = "<group>"; };
+		046651E82DACDB2700F9C125 /* ibc_lightclients_wasm_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_wasm_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		046651E92DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_wasm_v1_query.grpc.swift; sourceTree = "<group>"; };
+		046651EA2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_wasm_v1_query.pb.swift; sourceTree = "<group>"; };
+		046651EB2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_wasm_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		046651EC2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_wasm_v1_tx.pb.swift; sourceTree = "<group>"; };
+		046651ED2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_wasm.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_wasm_v1_wasm.pb.swift; sourceTree = "<group>"; };
 		046BF1BE2B0F259C00BC1FC8 /* OktValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktValidatorCell.swift; sourceTree = "<group>"; };
 		046BF1BF2B0F259C00BC1FC8 /* OktValidatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OktValidatorCell.xib; sourceTree = "<group>"; };
 		046BF1C42B0F443100BC1FC8 /* OktSelectValidatorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktSelectValidatorSheet.swift; sourceTree = "<group>"; };
@@ -3580,96 +3670,6 @@
 		E1A48DF52C006E820084D770 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		E1A82DD0224220910097CAEE /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		E1A82DE722448E940097CAEE /* WUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WUtils.swift; sourceTree = "<group>"; };
-		E1AEEAC12D9FF0BA001AE3F4 /* ibc_applications_fee_v1_ack.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_ack.pb.swift; sourceTree = "<group>"; };
-		E1AEEAC22D9FF0BA001AE3F4 /* ibc_applications_fee_v1_fee.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_fee.pb.swift; sourceTree = "<group>"; };
-		E1AEEAC32D9FF0BA001AE3F4 /* ibc_applications_fee_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_genesis.pb.swift; sourceTree = "<group>"; };
-		E1AEEAC42D9FF0BA001AE3F4 /* ibc_applications_fee_v1_metadata.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_metadata.pb.swift; sourceTree = "<group>"; };
-		E1AEEAC52D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_query.grpc.swift; sourceTree = "<group>"; };
-		E1AEEAC62D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_query.pb.swift; sourceTree = "<group>"; };
-		E1AEEAC72D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		E1AEEAC82D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_fee_v1_tx.pb.swift; sourceTree = "<group>"; };
-		E1AEEAC92D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_controller_v1_controller.pb.swift; sourceTree = "<group>"; };
-		E1AEEACA2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_controller_v1_query.grpc.swift; sourceTree = "<group>"; };
-		E1AEEACB2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_controller_v1_query.pb.swift; sourceTree = "<group>"; };
-		E1AEEACC2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		E1AEEACD2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_controller_v1_tx.pb.swift; sourceTree = "<group>"; };
-		E1AEEACE2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift; sourceTree = "<group>"; };
-		E1AEEACF2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_host_v1_host.pb.swift; sourceTree = "<group>"; };
-		E1AEEAD02D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_host_v1_query.grpc.swift; sourceTree = "<group>"; };
-		E1AEEAD12D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_host_v1_query.pb.swift; sourceTree = "<group>"; };
-		E1AEEAD22D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_host_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		E1AEEAD32D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_host_v1_tx.pb.swift; sourceTree = "<group>"; };
-		E1AEEAD42D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_account.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_v1_account.pb.swift; sourceTree = "<group>"; };
-		E1AEEAD52D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_v1_metadata.pb.swift; sourceTree = "<group>"; };
-		E1AEEAD62D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_packet.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_interchain_accounts_v1_packet.pb.swift; sourceTree = "<group>"; };
-		E1AEEAD72D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_genesis.pb.swift; sourceTree = "<group>"; };
-		E1AEEAD82D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_packet.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_packet.pb.swift; sourceTree = "<group>"; };
-		E1AEEAD92D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_query.grpc.swift; sourceTree = "<group>"; };
-		E1AEEADA2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_query.pb.swift; sourceTree = "<group>"; };
-		E1AEEADB2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		E1AEEADC2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_tx.pb.swift; sourceTree = "<group>"; };
-		E1AEEADD2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_types.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_nft_transfer_v1_types.pb.swift; sourceTree = "<group>"; };
-		E1AEEADE2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_perm_v1_genesis.pb.swift; sourceTree = "<group>"; };
-		E1AEEADF2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_perm_v1_query.grpc.swift; sourceTree = "<group>"; };
-		E1AEEAE02D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_perm_v1_query.pb.swift; sourceTree = "<group>"; };
-		E1AEEAE12D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_perm_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		E1AEEAE22D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_perm_v1_tx.pb.swift; sourceTree = "<group>"; };
-		E1AEEAE32D9FF0BA001AE3F4 /* ibc_applications_perm_v1_types.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_perm_v1_types.pb.swift; sourceTree = "<group>"; };
-		E1AEEAE42D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_authz.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_authz.pb.swift; sourceTree = "<group>"; };
-		E1AEEAE52D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_denomtrace.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_denomtrace.pb.swift; sourceTree = "<group>"; };
-		E1AEEAE62D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_genesis.pb.swift; sourceTree = "<group>"; };
-		E1AEEAE72D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_packet.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_packet.pb.swift; sourceTree = "<group>"; };
-		E1AEEAE82D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_query.grpc.swift; sourceTree = "<group>"; };
-		E1AEEAE92D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_query.pb.swift; sourceTree = "<group>"; };
-		E1AEEAEA2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_token.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_token.pb.swift; sourceTree = "<group>"; };
-		E1AEEAEB2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_transfer.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_transfer.pb.swift; sourceTree = "<group>"; };
-		E1AEEAEC2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		E1AEEAED2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_tx.pb.swift; sourceTree = "<group>"; };
-		E1AEEAEE2D9FF0BA001AE3F4 /* ibc_applications_transfer_v2_packet.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v2_packet.pb.swift; sourceTree = "<group>"; };
-		E1AEEAEF2D9FF0BA001AE3F4 /* ibc_core_channel_v1_channel.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_channel.pb.swift; sourceTree = "<group>"; };
-		E1AEEAF02D9FF0BA001AE3F4 /* ibc_core_channel_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_genesis.pb.swift; sourceTree = "<group>"; };
-		E1AEEAF12D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_query.grpc.swift; sourceTree = "<group>"; };
-		E1AEEAF22D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_query.pb.swift; sourceTree = "<group>"; };
-		E1AEEAF32D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		E1AEEAF42D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_tx.pb.swift; sourceTree = "<group>"; };
-		E1AEEAF52D9FF0BA001AE3F4 /* ibc_core_channel_v2_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v2_genesis.pb.swift; sourceTree = "<group>"; };
-		E1AEEAF62D9FF0BA001AE3F4 /* ibc_core_channel_v2_packet.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v2_packet.pb.swift; sourceTree = "<group>"; };
-		E1AEEAF72D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v2_query.grpc.swift; sourceTree = "<group>"; };
-		E1AEEAF82D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v2_query.pb.swift; sourceTree = "<group>"; };
-		E1AEEAF92D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v2_tx.grpc.swift; sourceTree = "<group>"; };
-		E1AEEAFA2D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v2_tx.pb.swift; sourceTree = "<group>"; };
-		E1AEEAFB2D9FF0BA001AE3F4 /* ibc_core_client_v1_client.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_client.pb.swift; sourceTree = "<group>"; };
-		E1AEEAFC2D9FF0BA001AE3F4 /* ibc_core_client_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_genesis.pb.swift; sourceTree = "<group>"; };
-		E1AEEAFD2D9FF0BA001AE3F4 /* ibc_core_client_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_query.grpc.swift; sourceTree = "<group>"; };
-		E1AEEAFE2D9FF0BA001AE3F4 /* ibc_core_client_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_query.pb.swift; sourceTree = "<group>"; };
-		E1AEEAFF2D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		E1AEEB002D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_tx.pb.swift; sourceTree = "<group>"; };
-		E1AEEB012D9FF0BA001AE3F4 /* ibc_core_client_v2_config.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_config.pb.swift; sourceTree = "<group>"; };
-		E1AEEB022D9FF0BA001AE3F4 /* ibc_core_client_v2_counterparty.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_counterparty.pb.swift; sourceTree = "<group>"; };
-		E1AEEB032D9FF0BA001AE3F4 /* ibc_core_client_v2_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_genesis.pb.swift; sourceTree = "<group>"; };
-		E1AEEB042D9FF0BA001AE3F4 /* ibc_core_client_v2_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_query.grpc.swift; sourceTree = "<group>"; };
-		E1AEEB052D9FF0BA001AE3F4 /* ibc_core_client_v2_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_query.pb.swift; sourceTree = "<group>"; };
-		E1AEEB062D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_tx.grpc.swift; sourceTree = "<group>"; };
-		E1AEEB072D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v2_tx.pb.swift; sourceTree = "<group>"; };
-		E1AEEB082D9FF0BA001AE3F4 /* ibc_core_commitment_v1_commitment.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_commitment_v1_commitment.pb.swift; sourceTree = "<group>"; };
-		E1AEEB092D9FF0BA001AE3F4 /* ibc_core_commitment_v2_commitment.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_commitment_v2_commitment.pb.swift; sourceTree = "<group>"; };
-		E1AEEB0A2D9FF0BA001AE3F4 /* ibc_core_connection_v1_connection.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_connection.pb.swift; sourceTree = "<group>"; };
-		E1AEEB0B2D9FF0BA001AE3F4 /* ibc_core_connection_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_genesis.pb.swift; sourceTree = "<group>"; };
-		E1AEEB0C2D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_query.grpc.swift; sourceTree = "<group>"; };
-		E1AEEB0D2D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_query.pb.swift; sourceTree = "<group>"; };
-		E1AEEB0E2D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		E1AEEB0F2D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_tx.pb.swift; sourceTree = "<group>"; };
-		E1AEEB102D9FF0BA001AE3F4 /* ibc_core_types_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_core_types_v1_genesis.pb.swift; sourceTree = "<group>"; };
-		E1AEEB112D9FF0BA001AE3F4 /* ibc_lightclients_localhost_v2_localhost.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_localhost_v2_localhost.pb.swift; sourceTree = "<group>"; };
-		E1AEEB122D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_solomachine_v2_solomachine.pb.swift; sourceTree = "<group>"; };
-		E1AEEB132D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_solomachine_v3_solomachine.pb.swift; sourceTree = "<group>"; };
-		E1AEEB142D9FF0BA001AE3F4 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_tendermint_v1_tendermint.pb.swift; sourceTree = "<group>"; };
-		E1AEEB152D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_wasm_v1_genesis.pb.swift; sourceTree = "<group>"; };
-		E1AEEB162D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_wasm_v1_query.grpc.swift; sourceTree = "<group>"; };
-		E1AEEB172D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_wasm_v1_query.pb.swift; sourceTree = "<group>"; };
-		E1AEEB182D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_wasm_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		E1AEEB192D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_wasm_v1_tx.pb.swift; sourceTree = "<group>"; };
-		E1AEEB1A2D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_wasm.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_wasm_v1_wasm.pb.swift; sourceTree = "<group>"; };
 		E1B44B1D2ADA41CD0073C88A /* NeutronSingleVoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronSingleVoteCell.swift; sourceTree = "<group>"; };
 		E1B44B1E2ADA41CD0073C88A /* NeutronSingleVoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeutronSingleVoteCell.xib; sourceTree = "<group>"; };
 		E1B44B232ADA41DE0073C88A /* NeutronMultiVoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutronMultiVoteCell.swift; sourceTree = "<group>"; };
@@ -4180,96 +4180,96 @@
 		04B788FA2ACAC99F00E9BE88 /* Ibc */ = {
 			isa = PBXGroup;
 			children = (
-				E1AEEAC12D9FF0BA001AE3F4 /* ibc_applications_fee_v1_ack.pb.swift */,
-				E1AEEAC22D9FF0BA001AE3F4 /* ibc_applications_fee_v1_fee.pb.swift */,
-				E1AEEAC32D9FF0BA001AE3F4 /* ibc_applications_fee_v1_genesis.pb.swift */,
-				E1AEEAC42D9FF0BA001AE3F4 /* ibc_applications_fee_v1_metadata.pb.swift */,
-				E1AEEAC52D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.grpc.swift */,
-				E1AEEAC62D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.pb.swift */,
-				E1AEEAC72D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.grpc.swift */,
-				E1AEEAC82D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.pb.swift */,
-				E1AEEAC92D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift */,
-				E1AEEACA2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift */,
-				E1AEEACB2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift */,
-				E1AEEACC2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift */,
-				E1AEEACD2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift */,
-				E1AEEACE2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift */,
-				E1AEEACF2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift */,
-				E1AEEAD02D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift */,
-				E1AEEAD12D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift */,
-				E1AEEAD22D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift */,
-				E1AEEAD32D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift */,
-				E1AEEAD42D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_account.pb.swift */,
-				E1AEEAD52D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift */,
-				E1AEEAD62D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_packet.pb.swift */,
-				E1AEEAD72D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_genesis.pb.swift */,
-				E1AEEAD82D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_packet.pb.swift */,
-				E1AEEAD92D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.grpc.swift */,
-				E1AEEADA2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.pb.swift */,
-				E1AEEADB2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.grpc.swift */,
-				E1AEEADC2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.pb.swift */,
-				E1AEEADD2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_types.pb.swift */,
-				E1AEEADE2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_genesis.pb.swift */,
-				E1AEEADF2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.grpc.swift */,
-				E1AEEAE02D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.pb.swift */,
-				E1AEEAE12D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.grpc.swift */,
-				E1AEEAE22D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.pb.swift */,
-				E1AEEAE32D9FF0BA001AE3F4 /* ibc_applications_perm_v1_types.pb.swift */,
-				E1AEEAE42D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_authz.pb.swift */,
-				E1AEEAE52D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_denomtrace.pb.swift */,
-				E1AEEAE62D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_genesis.pb.swift */,
-				E1AEEAE72D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_packet.pb.swift */,
-				E1AEEAE82D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.grpc.swift */,
-				E1AEEAE92D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.pb.swift */,
-				E1AEEAEA2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_token.pb.swift */,
-				E1AEEAEB2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_transfer.pb.swift */,
-				E1AEEAEC2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.grpc.swift */,
-				E1AEEAED2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.pb.swift */,
-				E1AEEAEE2D9FF0BA001AE3F4 /* ibc_applications_transfer_v2_packet.pb.swift */,
-				E1AEEAEF2D9FF0BA001AE3F4 /* ibc_core_channel_v1_channel.pb.swift */,
-				E1AEEAF02D9FF0BA001AE3F4 /* ibc_core_channel_v1_genesis.pb.swift */,
-				E1AEEAF12D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.grpc.swift */,
-				E1AEEAF22D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.pb.swift */,
-				E1AEEAF32D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.grpc.swift */,
-				E1AEEAF42D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.pb.swift */,
-				E1AEEAF52D9FF0BA001AE3F4 /* ibc_core_channel_v2_genesis.pb.swift */,
-				E1AEEAF62D9FF0BA001AE3F4 /* ibc_core_channel_v2_packet.pb.swift */,
-				E1AEEAF72D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.grpc.swift */,
-				E1AEEAF82D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.pb.swift */,
-				E1AEEAF92D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.grpc.swift */,
-				E1AEEAFA2D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.pb.swift */,
-				E1AEEAFB2D9FF0BA001AE3F4 /* ibc_core_client_v1_client.pb.swift */,
-				E1AEEAFC2D9FF0BA001AE3F4 /* ibc_core_client_v1_genesis.pb.swift */,
-				E1AEEAFD2D9FF0BA001AE3F4 /* ibc_core_client_v1_query.grpc.swift */,
-				E1AEEAFE2D9FF0BA001AE3F4 /* ibc_core_client_v1_query.pb.swift */,
-				E1AEEAFF2D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.grpc.swift */,
-				E1AEEB002D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.pb.swift */,
-				E1AEEB012D9FF0BA001AE3F4 /* ibc_core_client_v2_config.pb.swift */,
-				E1AEEB022D9FF0BA001AE3F4 /* ibc_core_client_v2_counterparty.pb.swift */,
-				E1AEEB032D9FF0BA001AE3F4 /* ibc_core_client_v2_genesis.pb.swift */,
-				E1AEEB042D9FF0BA001AE3F4 /* ibc_core_client_v2_query.grpc.swift */,
-				E1AEEB052D9FF0BA001AE3F4 /* ibc_core_client_v2_query.pb.swift */,
-				E1AEEB062D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.grpc.swift */,
-				E1AEEB072D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.pb.swift */,
-				E1AEEB082D9FF0BA001AE3F4 /* ibc_core_commitment_v1_commitment.pb.swift */,
-				E1AEEB092D9FF0BA001AE3F4 /* ibc_core_commitment_v2_commitment.pb.swift */,
-				E1AEEB0A2D9FF0BA001AE3F4 /* ibc_core_connection_v1_connection.pb.swift */,
-				E1AEEB0B2D9FF0BA001AE3F4 /* ibc_core_connection_v1_genesis.pb.swift */,
-				E1AEEB0C2D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.grpc.swift */,
-				E1AEEB0D2D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.pb.swift */,
-				E1AEEB0E2D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.grpc.swift */,
-				E1AEEB0F2D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.pb.swift */,
-				E1AEEB102D9FF0BA001AE3F4 /* ibc_core_types_v1_genesis.pb.swift */,
-				E1AEEB112D9FF0BA001AE3F4 /* ibc_lightclients_localhost_v2_localhost.pb.swift */,
-				E1AEEB122D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift */,
-				E1AEEB132D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift */,
-				E1AEEB142D9FF0BA001AE3F4 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */,
-				E1AEEB152D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_genesis.pb.swift */,
-				E1AEEB162D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.grpc.swift */,
-				E1AEEB172D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.pb.swift */,
-				E1AEEB182D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.grpc.swift */,
-				E1AEEB192D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.pb.swift */,
-				E1AEEB1A2D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_wasm.pb.swift */,
+				046651942DACDB2700F9C125 /* ibc_applications_fee_v1_ack.pb.swift */,
+				046651952DACDB2700F9C125 /* ibc_applications_fee_v1_fee.pb.swift */,
+				046651962DACDB2700F9C125 /* ibc_applications_fee_v1_genesis.pb.swift */,
+				046651972DACDB2700F9C125 /* ibc_applications_fee_v1_metadata.pb.swift */,
+				046651982DACDB2700F9C125 /* ibc_applications_fee_v1_query.grpc.swift */,
+				046651992DACDB2700F9C125 /* ibc_applications_fee_v1_query.pb.swift */,
+				0466519A2DACDB2700F9C125 /* ibc_applications_fee_v1_tx.grpc.swift */,
+				0466519B2DACDB2700F9C125 /* ibc_applications_fee_v1_tx.pb.swift */,
+				0466519C2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift */,
+				0466519D2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift */,
+				0466519E2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift */,
+				0466519F2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift */,
+				046651A02DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift */,
+				046651A12DACDB2700F9C125 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift */,
+				046651A22DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift */,
+				046651A32DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift */,
+				046651A42DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift */,
+				046651A52DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift */,
+				046651A62DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift */,
+				046651A72DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_account.pb.swift */,
+				046651A82DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift */,
+				046651A92DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_packet.pb.swift */,
+				046651AA2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_genesis.pb.swift */,
+				046651AB2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_packet.pb.swift */,
+				046651AC2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.grpc.swift */,
+				046651AD2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.pb.swift */,
+				046651AE2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.grpc.swift */,
+				046651AF2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.pb.swift */,
+				046651B02DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_types.pb.swift */,
+				046651B12DACDB2700F9C125 /* ibc_applications_perm_v1_genesis.pb.swift */,
+				046651B22DACDB2700F9C125 /* ibc_applications_perm_v1_query.grpc.swift */,
+				046651B32DACDB2700F9C125 /* ibc_applications_perm_v1_query.pb.swift */,
+				046651B42DACDB2700F9C125 /* ibc_applications_perm_v1_tx.grpc.swift */,
+				046651B52DACDB2700F9C125 /* ibc_applications_perm_v1_tx.pb.swift */,
+				046651B62DACDB2700F9C125 /* ibc_applications_perm_v1_types.pb.swift */,
+				046651B72DACDB2700F9C125 /* ibc_applications_transfer_v1_authz.pb.swift */,
+				046651B82DACDB2700F9C125 /* ibc_applications_transfer_v1_denomtrace.pb.swift */,
+				046651B92DACDB2700F9C125 /* ibc_applications_transfer_v1_genesis.pb.swift */,
+				046651BA2DACDB2700F9C125 /* ibc_applications_transfer_v1_packet.pb.swift */,
+				046651BB2DACDB2700F9C125 /* ibc_applications_transfer_v1_query.grpc.swift */,
+				046651BC2DACDB2700F9C125 /* ibc_applications_transfer_v1_query.pb.swift */,
+				046651BD2DACDB2700F9C125 /* ibc_applications_transfer_v1_token.pb.swift */,
+				046651BE2DACDB2700F9C125 /* ibc_applications_transfer_v1_transfer.pb.swift */,
+				046651BF2DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.grpc.swift */,
+				046651C02DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.pb.swift */,
+				046651C12DACDB2700F9C125 /* ibc_applications_transfer_v2_packet.pb.swift */,
+				046651C22DACDB2700F9C125 /* ibc_core_channel_v1_channel.pb.swift */,
+				046651C32DACDB2700F9C125 /* ibc_core_channel_v1_genesis.pb.swift */,
+				046651C42DACDB2700F9C125 /* ibc_core_channel_v1_query.grpc.swift */,
+				046651C52DACDB2700F9C125 /* ibc_core_channel_v1_query.pb.swift */,
+				046651C62DACDB2700F9C125 /* ibc_core_channel_v1_tx.grpc.swift */,
+				046651C72DACDB2700F9C125 /* ibc_core_channel_v1_tx.pb.swift */,
+				046651C82DACDB2700F9C125 /* ibc_core_channel_v2_genesis.pb.swift */,
+				046651C92DACDB2700F9C125 /* ibc_core_channel_v2_packet.pb.swift */,
+				046651CA2DACDB2700F9C125 /* ibc_core_channel_v2_query.grpc.swift */,
+				046651CB2DACDB2700F9C125 /* ibc_core_channel_v2_query.pb.swift */,
+				046651CC2DACDB2700F9C125 /* ibc_core_channel_v2_tx.grpc.swift */,
+				046651CD2DACDB2700F9C125 /* ibc_core_channel_v2_tx.pb.swift */,
+				046651CE2DACDB2700F9C125 /* ibc_core_client_v1_client.pb.swift */,
+				046651CF2DACDB2700F9C125 /* ibc_core_client_v1_genesis.pb.swift */,
+				046651D02DACDB2700F9C125 /* ibc_core_client_v1_query.grpc.swift */,
+				046651D12DACDB2700F9C125 /* ibc_core_client_v1_query.pb.swift */,
+				046651D22DACDB2700F9C125 /* ibc_core_client_v1_tx.grpc.swift */,
+				046651D32DACDB2700F9C125 /* ibc_core_client_v1_tx.pb.swift */,
+				046651D42DACDB2700F9C125 /* ibc_core_client_v2_config.pb.swift */,
+				046651D52DACDB2700F9C125 /* ibc_core_client_v2_counterparty.pb.swift */,
+				046651D62DACDB2700F9C125 /* ibc_core_client_v2_genesis.pb.swift */,
+				046651D72DACDB2700F9C125 /* ibc_core_client_v2_query.grpc.swift */,
+				046651D82DACDB2700F9C125 /* ibc_core_client_v2_query.pb.swift */,
+				046651D92DACDB2700F9C125 /* ibc_core_client_v2_tx.grpc.swift */,
+				046651DA2DACDB2700F9C125 /* ibc_core_client_v2_tx.pb.swift */,
+				046651DB2DACDB2700F9C125 /* ibc_core_commitment_v1_commitment.pb.swift */,
+				046651DC2DACDB2700F9C125 /* ibc_core_commitment_v2_commitment.pb.swift */,
+				046651DD2DACDB2700F9C125 /* ibc_core_connection_v1_connection.pb.swift */,
+				046651DE2DACDB2700F9C125 /* ibc_core_connection_v1_genesis.pb.swift */,
+				046651DF2DACDB2700F9C125 /* ibc_core_connection_v1_query.grpc.swift */,
+				046651E02DACDB2700F9C125 /* ibc_core_connection_v1_query.pb.swift */,
+				046651E12DACDB2700F9C125 /* ibc_core_connection_v1_tx.grpc.swift */,
+				046651E22DACDB2700F9C125 /* ibc_core_connection_v1_tx.pb.swift */,
+				046651E32DACDB2700F9C125 /* ibc_core_types_v1_genesis.pb.swift */,
+				046651E42DACDB2700F9C125 /* ibc_lightclients_localhost_v2_localhost.pb.swift */,
+				046651E52DACDB2700F9C125 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift */,
+				046651E62DACDB2700F9C125 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift */,
+				046651E72DACDB2700F9C125 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */,
+				046651E82DACDB2700F9C125 /* ibc_lightclients_wasm_v1_genesis.pb.swift */,
+				046651E92DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.grpc.swift */,
+				046651EA2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.pb.swift */,
+				046651EB2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.grpc.swift */,
+				046651EC2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.pb.swift */,
+				046651ED2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_wasm.pb.swift */,
 			);
 			path = Ibc;
 			sourceTree = "<group>";
@@ -6992,6 +6992,96 @@
 				E15F2D112ABF108500BAE105 /* StakeUnbondingCell.swift in Sources */,
 				18FFB5C5281AF533004E65BB /* MintscanPrice.swift in Sources */,
 				04C8178D2BA98D75006B800A /* cosmos_bank_v1beta1_tx.pb.swift in Sources */,
+				046651EE2DACDB2700F9C125 /* ibc_applications_perm_v1_genesis.pb.swift in Sources */,
+				046651EF2DACDB2700F9C125 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
+				046651F02DACDB2700F9C125 /* ibc_applications_fee_v1_metadata.pb.swift in Sources */,
+				046651F12DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_genesis.pb.swift in Sources */,
+				046651F22DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_types.pb.swift in Sources */,
+				046651F32DACDB2700F9C125 /* ibc_core_connection_v1_tx.pb.swift in Sources */,
+				046651F42DACDB2700F9C125 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift in Sources */,
+				046651F52DACDB2700F9C125 /* ibc_core_channel_v1_channel.pb.swift in Sources */,
+				046651F62DACDB2700F9C125 /* ibc_applications_transfer_v1_query.grpc.swift in Sources */,
+				046651F72DACDB2700F9C125 /* ibc_core_channel_v2_tx.pb.swift in Sources */,
+				046651F82DACDB2700F9C125 /* ibc_core_client_v2_config.pb.swift in Sources */,
+				046651F92DACDB2700F9C125 /* ibc_applications_transfer_v1_denomtrace.pb.swift in Sources */,
+				046651FA2DACDB2700F9C125 /* ibc_applications_fee_v1_tx.pb.swift in Sources */,
+				046651FB2DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift in Sources */,
+				046651FC2DACDB2700F9C125 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
+				046651FD2DACDB2700F9C125 /* ibc_core_commitment_v1_commitment.pb.swift in Sources */,
+				046651FE2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_packet.pb.swift in Sources */,
+				046651FF2DACDB2700F9C125 /* ibc_applications_fee_v1_query.grpc.swift in Sources */,
+				046652002DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift in Sources */,
+				046652012DACDB2700F9C125 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
+				046652022DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.grpc.swift in Sources */,
+				046652032DACDB2700F9C125 /* ibc_applications_perm_v1_query.grpc.swift in Sources */,
+				046652042DACDB2700F9C125 /* ibc_core_channel_v1_tx.grpc.swift in Sources */,
+				046652052DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */,
+				046652062DACDB2700F9C125 /* ibc_core_channel_v2_genesis.pb.swift in Sources */,
+				046652072DACDB2700F9C125 /* ibc_core_channel_v2_tx.grpc.swift in Sources */,
+				046652082DACDB2700F9C125 /* ibc_core_client_v1_query.pb.swift in Sources */,
+				046652092DACDB2700F9C125 /* ibc_core_client_v1_tx.pb.swift in Sources */,
+				0466520A2DACDB2700F9C125 /* ibc_core_client_v2_tx.pb.swift in Sources */,
+				0466520B2DACDB2700F9C125 /* ibc_core_commitment_v2_commitment.pb.swift in Sources */,
+				0466520C2DACDB2700F9C125 /* ibc_applications_fee_v1_ack.pb.swift in Sources */,
+				0466520D2DACDB2700F9C125 /* ibc_core_client_v1_query.grpc.swift in Sources */,
+				0466520E2DACDB2700F9C125 /* ibc_core_connection_v1_query.pb.swift in Sources */,
+				0466520F2DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift in Sources */,
+				046652102DACDB2700F9C125 /* ibc_core_channel_v1_genesis.pb.swift in Sources */,
+				046652112DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.pb.swift in Sources */,
+				046652122DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift in Sources */,
+				046652132DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.grpc.swift in Sources */,
+				046652142DACDB2700F9C125 /* ibc_applications_transfer_v1_authz.pb.swift in Sources */,
+				046652152DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.pb.swift in Sources */,
+				046652162DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.grpc.swift in Sources */,
+				046652172DACDB2700F9C125 /* ibc_applications_fee_v1_genesis.pb.swift in Sources */,
+				046652182DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift in Sources */,
+				046652192DACDB2700F9C125 /* ibc_applications_transfer_v2_packet.pb.swift in Sources */,
+				0466521A2DACDB2700F9C125 /* ibc_core_channel_v2_packet.pb.swift in Sources */,
+				0466521B2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.pb.swift in Sources */,
+				0466521C2DACDB2700F9C125 /* ibc_applications_perm_v1_tx.pb.swift in Sources */,
+				0466521D2DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift in Sources */,
+				0466521E2DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_packet.pb.swift in Sources */,
+				0466521F2DACDB2700F9C125 /* ibc_core_connection_v1_genesis.pb.swift in Sources */,
+				046652202DACDB2700F9C125 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift in Sources */,
+				046652212DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */,
+				046652222DACDB2700F9C125 /* ibc_lightclients_wasm_v1_wasm.pb.swift in Sources */,
+				046652232DACDB2700F9C125 /* ibc_core_channel_v2_query.grpc.swift in Sources */,
+				046652242DACDB2700F9C125 /* ibc_core_channel_v1_query.grpc.swift in Sources */,
+				046652252DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.pb.swift in Sources */,
+				046652262DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift in Sources */,
+				046652272DACDB2700F9C125 /* ibc_applications_perm_v1_types.pb.swift in Sources */,
+				046652282DACDB2700F9C125 /* ibc_applications_transfer_v1_query.pb.swift in Sources */,
+				046652292DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift in Sources */,
+				0466522A2DACDB2700F9C125 /* ibc_core_client_v2_counterparty.pb.swift in Sources */,
+				0466522B2DACDB2700F9C125 /* ibc_core_client_v2_tx.grpc.swift in Sources */,
+				0466522C2DACDB2700F9C125 /* ibc_core_channel_v1_tx.pb.swift in Sources */,
+				0466522D2DACDB2700F9C125 /* ibc_applications_fee_v1_fee.pb.swift in Sources */,
+				0466522E2DACDB2700F9C125 /* ibc_core_connection_v1_query.grpc.swift in Sources */,
+				0466522F2DACDB2700F9C125 /* ibc_core_types_v1_genesis.pb.swift in Sources */,
+				046652302DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.grpc.swift in Sources */,
+				046652312DACDB2700F9C125 /* ibc_core_channel_v1_query.pb.swift in Sources */,
+				046652322DACDB2700F9C125 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */,
+				046652332DACDB2700F9C125 /* ibc_applications_perm_v1_query.pb.swift in Sources */,
+				046652342DACDB2700F9C125 /* ibc_applications_transfer_v1_token.pb.swift in Sources */,
+				046652352DACDB2700F9C125 /* ibc_applications_fee_v1_query.pb.swift in Sources */,
+				046652362DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift in Sources */,
+				046652372DACDB2700F9C125 /* ibc_applications_transfer_v1_genesis.pb.swift in Sources */,
+				046652382DACDB2700F9C125 /* ibc_core_channel_v2_query.pb.swift in Sources */,
+				046652392DACDB2700F9C125 /* ibc_core_client_v2_genesis.pb.swift in Sources */,
+				0466523A2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift in Sources */,
+				0466523B2DACDB2700F9C125 /* ibc_applications_perm_v1_tx.grpc.swift in Sources */,
+				0466523C2DACDB2700F9C125 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift in Sources */,
+				0466523D2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.grpc.swift in Sources */,
+				0466523E2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.pb.swift in Sources */,
+				0466523F2DACDB2700F9C125 /* ibc_core_client_v1_client.pb.swift in Sources */,
+				046652402DACDB2700F9C125 /* ibc_applications_fee_v1_tx.grpc.swift in Sources */,
+				046652412DACDB2700F9C125 /* ibc_lightclients_wasm_v1_genesis.pb.swift in Sources */,
+				046652422DACDB2700F9C125 /* ibc_lightclients_localhost_v2_localhost.pb.swift in Sources */,
+				046652432DACDB2700F9C125 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
+				046652442DACDB2700F9C125 /* ibc_applications_transfer_v1_packet.pb.swift in Sources */,
+				046652452DACDB2700F9C125 /* ibc_core_client_v2_query.pb.swift in Sources */,
+				046652462DACDB2700F9C125 /* ibc_core_client_v2_query.grpc.swift in Sources */,
+				046652472DACDB2700F9C125 /* ibc_core_connection_v1_tx.grpc.swift in Sources */,
 				04C817352BA98D75006B800A /* cosmos_feegrant_v1beta1_query.pb.swift in Sources */,
 				04C816852BA98D74006B800A /* cosmos_distribution_v1beta1_distribution.pb.swift in Sources */,
 				046EA8902AD04A2500A2FCE7 /* desmos_profiles_v3_msg_server.pb.swift in Sources */,
@@ -7026,96 +7116,6 @@
 				04C817AD2BA98D75006B800A /* cosmos_auth_v1beta1_auth.pb.swift in Sources */,
 				0400EF3C2ADD49BB007BA97F /* kava_swap_v1beta1_tx.pb.swift in Sources */,
 				04C816932BA98D74006B800A /* cosmos_group_v1_types.pb.swift in Sources */,
-				E1AEEB1B2D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_wasm.pb.swift in Sources */,
-				E1AEEB1C2D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.grpc.swift in Sources */,
-				E1AEEB1D2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_genesis.pb.swift in Sources */,
-				E1AEEB1E2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.grpc.swift in Sources */,
-				E1AEEB1F2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_types.pb.swift in Sources */,
-				E1AEEB202D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.pb.swift in Sources */,
-				E1AEEB212D9FF0BA001AE3F4 /* ibc_core_channel_v2_packet.pb.swift in Sources */,
-				E1AEEB222D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
-				E1AEEB232D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.grpc.swift in Sources */,
-				E1AEEB242D9FF0BA001AE3F4 /* ibc_core_channel_v1_channel.pb.swift in Sources */,
-				E1AEEB252D9FF0BA001AE3F4 /* ibc_applications_fee_v1_genesis.pb.swift in Sources */,
-				E1AEEB262D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.pb.swift in Sources */,
-				E1AEEB272D9FF0BA001AE3F4 /* ibc_applications_fee_v1_metadata.pb.swift in Sources */,
-				E1AEEB282D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.grpc.swift in Sources */,
-				E1AEEB292D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.grpc.swift in Sources */,
-				E1AEEB2A2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift in Sources */,
-				E1AEEB2B2D9FF0BA001AE3F4 /* ibc_core_connection_v1_genesis.pb.swift in Sources */,
-				E1AEEB2C2D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.grpc.swift in Sources */,
-				E1AEEB2D2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_authz.pb.swift in Sources */,
-				E1AEEB2E2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
-				E1AEEB2F2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_packet.pb.swift in Sources */,
-				E1AEEB302D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.grpc.swift in Sources */,
-				E1AEEB312D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.grpc.swift in Sources */,
-				E1AEEB322D9FF0BA001AE3F4 /* ibc_core_client_v2_query.pb.swift in Sources */,
-				E1AEEB332D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.pb.swift in Sources */,
-				E1AEEB342D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_packet.pb.swift in Sources */,
-				E1AEEB352D9FF0BA001AE3F4 /* ibc_core_client_v1_query.pb.swift in Sources */,
-				E1AEEB362D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift in Sources */,
-				E1AEEB372D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.pb.swift in Sources */,
-				E1AEEB382D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.pb.swift in Sources */,
-				E1AEEB392D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_genesis.pb.swift in Sources */,
-				E1AEEB3A2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.grpc.swift in Sources */,
-				E1AEEB3B2D9FF0BA001AE3F4 /* ibc_lightclients_localhost_v2_localhost.pb.swift in Sources */,
-				E1AEEB3C2D9FF0BA001AE3F4 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift in Sources */,
-				E1AEEB3D2D9FF0BA001AE3F4 /* ibc_core_types_v1_genesis.pb.swift in Sources */,
-				E1AEEB3E2D9FF0BA001AE3F4 /* ibc_core_client_v2_genesis.pb.swift in Sources */,
-				E1AEEB3F2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_types.pb.swift in Sources */,
-				E1AEEB402D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.pb.swift in Sources */,
-				E1AEEB412D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */,
-				E1AEEB422D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift in Sources */,
-				E1AEEB432D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift in Sources */,
-				E1AEEB442D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.grpc.swift in Sources */,
-				E1AEEB452D9FF0BA001AE3F4 /* ibc_core_channel_v2_genesis.pb.swift in Sources */,
-				E1AEEB462D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.grpc.swift in Sources */,
-				E1AEEB472D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift in Sources */,
-				E1AEEB482D9FF0BA001AE3F4 /* ibc_applications_fee_v1_fee.pb.swift in Sources */,
-				E1AEEB492D9FF0BA001AE3F4 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
-				E1AEEB4A2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift in Sources */,
-				E1AEEB4B2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift in Sources */,
-				E1AEEB4C2D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.grpc.swift in Sources */,
-				E1AEEB4D2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift in Sources */,
-				E1AEEB4E2D9FF0BA001AE3F4 /* ibc_applications_fee_v1_ack.pb.swift in Sources */,
-				E1AEEB4F2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */,
-				E1AEEB502D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.pb.swift in Sources */,
-				E1AEEB512D9FF0BA001AE3F4 /* ibc_applications_transfer_v2_packet.pb.swift in Sources */,
-				E1AEEB522D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.pb.swift in Sources */,
-				E1AEEB532D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_packet.pb.swift in Sources */,
-				E1AEEB542D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.pb.swift in Sources */,
-				E1AEEB552D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_denomtrace.pb.swift in Sources */,
-				E1AEEB562D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.grpc.swift in Sources */,
-				E1AEEB572D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.grpc.swift in Sources */,
-				E1AEEB582D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_genesis.pb.swift in Sources */,
-				E1AEEB592D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_genesis.pb.swift in Sources */,
-				E1AEEB5A2D9FF0BA001AE3F4 /* ibc_core_client_v2_query.grpc.swift in Sources */,
-				E1AEEB5B2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.pb.swift in Sources */,
-				E1AEEB5C2D9FF0BA001AE3F4 /* ibc_core_channel_v1_genesis.pb.swift in Sources */,
-				E1AEEB5D2D9FF0BA001AE3F4 /* ibc_core_commitment_v2_commitment.pb.swift in Sources */,
-				E1AEEB5E2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift in Sources */,
-				E1AEEB5F2D9FF0BA001AE3F4 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
-				E1AEEB602D9FF0BA001AE3F4 /* ibc_core_commitment_v1_commitment.pb.swift in Sources */,
-				E1AEEB612D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift in Sources */,
-				E1AEEB622D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.pb.swift in Sources */,
-				E1AEEB632D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.grpc.swift in Sources */,
-				E1AEEB642D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.pb.swift in Sources */,
-				E1AEEB652D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.pb.swift in Sources */,
-				E1AEEB662D9FF0BA001AE3F4 /* ibc_core_client_v1_query.grpc.swift in Sources */,
-				E1AEEB672D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.pb.swift in Sources */,
-				E1AEEB682D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.pb.swift in Sources */,
-				E1AEEB692D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.grpc.swift in Sources */,
-				E1AEEB6A2D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.grpc.swift in Sources */,
-				E1AEEB6B2D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.pb.swift in Sources */,
-				E1AEEB6C2D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.pb.swift in Sources */,
-				E1AEEB6D2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_token.pb.swift in Sources */,
-				E1AEEB6E2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift in Sources */,
-				E1AEEB6F2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */,
-				E1AEEB702D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift in Sources */,
-				E1AEEB712D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.pb.swift in Sources */,
-				E1AEEB722D9FF0BA001AE3F4 /* ibc_core_client_v2_config.pb.swift in Sources */,
-				E1AEEB732D9FF0BA001AE3F4 /* ibc_core_client_v2_counterparty.pb.swift in Sources */,
-				E1AEEB742D9FF0BA001AE3F4 /* ibc_core_client_v1_client.pb.swift in Sources */,
 				045032D12C1EFE3F00235F6A /* ChainNoble.swift in Sources */,
 				047BA8D52A94777600D3F7DD /* CosmosCryptoVC.swift in Sources */,
 				046EA8D42AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_dtag_requests.pb.swift in Sources */,
@@ -7626,7 +7626,6 @@
 				045032D22C1EFE3F00235F6A /* ChainNibiru.swift in Sources */,
 				047F693A2BE5FBCE00C3BC34 /* Portfolio2Cell.swift in Sources */,
 				7948D6872D927F4F005208B2 /* ChainManifest.swift in Sources */,
-				04B7893B2ACAC9B100E9BE88 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
 				E1E0DBC62A9B0FE3006DA6BB /* HistoryCell.swift in Sources */,
 				04C817562BA98D75006B800A /* cosmos_reflection_v1_reflection.grpc.swift in Sources */,
 				04D279EA2A67C96500AF046A /* ChainCosmos.swift in Sources */,
@@ -8111,6 +8110,96 @@
 				0450327A2C1EEDCD00235F6A /* ChainBand.swift in Sources */,
 				04C816642BA98D74006B800A /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
 				792613BD2CD4B82800FAF47D /* initia_intertx_v1_tx.pb.swift in Sources */,
+				046652482DACDB2700F9C125 /* ibc_applications_perm_v1_genesis.pb.swift in Sources */,
+				046652492DACDB2700F9C125 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
+				0466524A2DACDB2700F9C125 /* ibc_applications_fee_v1_metadata.pb.swift in Sources */,
+				0466524B2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_genesis.pb.swift in Sources */,
+				0466524C2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_types.pb.swift in Sources */,
+				0466524D2DACDB2700F9C125 /* ibc_core_connection_v1_tx.pb.swift in Sources */,
+				0466524E2DACDB2700F9C125 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift in Sources */,
+				0466524F2DACDB2700F9C125 /* ibc_core_channel_v1_channel.pb.swift in Sources */,
+				046652502DACDB2700F9C125 /* ibc_applications_transfer_v1_query.grpc.swift in Sources */,
+				046652512DACDB2700F9C125 /* ibc_core_channel_v2_tx.pb.swift in Sources */,
+				046652522DACDB2700F9C125 /* ibc_core_client_v2_config.pb.swift in Sources */,
+				046652532DACDB2700F9C125 /* ibc_applications_transfer_v1_denomtrace.pb.swift in Sources */,
+				046652542DACDB2700F9C125 /* ibc_applications_fee_v1_tx.pb.swift in Sources */,
+				046652552DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift in Sources */,
+				046652562DACDB2700F9C125 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
+				046652572DACDB2700F9C125 /* ibc_core_commitment_v1_commitment.pb.swift in Sources */,
+				046652582DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_packet.pb.swift in Sources */,
+				046652592DACDB2700F9C125 /* ibc_applications_fee_v1_query.grpc.swift in Sources */,
+				0466525A2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift in Sources */,
+				0466525B2DACDB2700F9C125 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
+				0466525C2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.grpc.swift in Sources */,
+				0466525D2DACDB2700F9C125 /* ibc_applications_perm_v1_query.grpc.swift in Sources */,
+				0466525E2DACDB2700F9C125 /* ibc_core_channel_v1_tx.grpc.swift in Sources */,
+				0466525F2DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */,
+				046652602DACDB2700F9C125 /* ibc_core_channel_v2_genesis.pb.swift in Sources */,
+				046652612DACDB2700F9C125 /* ibc_core_channel_v2_tx.grpc.swift in Sources */,
+				046652622DACDB2700F9C125 /* ibc_core_client_v1_query.pb.swift in Sources */,
+				046652632DACDB2700F9C125 /* ibc_core_client_v1_tx.pb.swift in Sources */,
+				046652642DACDB2700F9C125 /* ibc_core_client_v2_tx.pb.swift in Sources */,
+				046652652DACDB2700F9C125 /* ibc_core_commitment_v2_commitment.pb.swift in Sources */,
+				046652662DACDB2700F9C125 /* ibc_applications_fee_v1_ack.pb.swift in Sources */,
+				046652672DACDB2700F9C125 /* ibc_core_client_v1_query.grpc.swift in Sources */,
+				046652682DACDB2700F9C125 /* ibc_core_connection_v1_query.pb.swift in Sources */,
+				046652692DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift in Sources */,
+				0466526A2DACDB2700F9C125 /* ibc_core_channel_v1_genesis.pb.swift in Sources */,
+				0466526B2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.pb.swift in Sources */,
+				0466526C2DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift in Sources */,
+				0466526D2DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.grpc.swift in Sources */,
+				0466526E2DACDB2700F9C125 /* ibc_applications_transfer_v1_authz.pb.swift in Sources */,
+				0466526F2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.pb.swift in Sources */,
+				046652702DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.grpc.swift in Sources */,
+				046652712DACDB2700F9C125 /* ibc_applications_fee_v1_genesis.pb.swift in Sources */,
+				046652722DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift in Sources */,
+				046652732DACDB2700F9C125 /* ibc_applications_transfer_v2_packet.pb.swift in Sources */,
+				046652742DACDB2700F9C125 /* ibc_core_channel_v2_packet.pb.swift in Sources */,
+				046652752DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_query.pb.swift in Sources */,
+				046652762DACDB2700F9C125 /* ibc_applications_perm_v1_tx.pb.swift in Sources */,
+				046652772DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift in Sources */,
+				046652782DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_packet.pb.swift in Sources */,
+				046652792DACDB2700F9C125 /* ibc_core_connection_v1_genesis.pb.swift in Sources */,
+				0466527A2DACDB2700F9C125 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift in Sources */,
+				0466527B2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */,
+				0466527C2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_wasm.pb.swift in Sources */,
+				0466527D2DACDB2700F9C125 /* ibc_core_channel_v2_query.grpc.swift in Sources */,
+				0466527E2DACDB2700F9C125 /* ibc_core_channel_v1_query.grpc.swift in Sources */,
+				0466527F2DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.pb.swift in Sources */,
+				046652802DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift in Sources */,
+				046652812DACDB2700F9C125 /* ibc_applications_perm_v1_types.pb.swift in Sources */,
+				046652822DACDB2700F9C125 /* ibc_applications_transfer_v1_query.pb.swift in Sources */,
+				046652832DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift in Sources */,
+				046652842DACDB2700F9C125 /* ibc_core_client_v2_counterparty.pb.swift in Sources */,
+				046652852DACDB2700F9C125 /* ibc_core_client_v2_tx.grpc.swift in Sources */,
+				046652862DACDB2700F9C125 /* ibc_core_channel_v1_tx.pb.swift in Sources */,
+				046652872DACDB2700F9C125 /* ibc_applications_fee_v1_fee.pb.swift in Sources */,
+				046652882DACDB2700F9C125 /* ibc_core_connection_v1_query.grpc.swift in Sources */,
+				046652892DACDB2700F9C125 /* ibc_core_types_v1_genesis.pb.swift in Sources */,
+				0466528A2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.grpc.swift in Sources */,
+				0466528B2DACDB2700F9C125 /* ibc_core_channel_v1_query.pb.swift in Sources */,
+				0466528C2DACDB2700F9C125 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */,
+				0466528D2DACDB2700F9C125 /* ibc_applications_perm_v1_query.pb.swift in Sources */,
+				0466528E2DACDB2700F9C125 /* ibc_applications_transfer_v1_token.pb.swift in Sources */,
+				0466528F2DACDB2700F9C125 /* ibc_applications_fee_v1_query.pb.swift in Sources */,
+				046652902DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift in Sources */,
+				046652912DACDB2700F9C125 /* ibc_applications_transfer_v1_genesis.pb.swift in Sources */,
+				046652922DACDB2700F9C125 /* ibc_core_channel_v2_query.pb.swift in Sources */,
+				046652932DACDB2700F9C125 /* ibc_core_client_v2_genesis.pb.swift in Sources */,
+				046652942DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift in Sources */,
+				046652952DACDB2700F9C125 /* ibc_applications_perm_v1_tx.grpc.swift in Sources */,
+				046652962DACDB2700F9C125 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift in Sources */,
+				046652972DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.grpc.swift in Sources */,
+				046652982DACDB2700F9C125 /* ibc_lightclients_wasm_v1_query.pb.swift in Sources */,
+				046652992DACDB2700F9C125 /* ibc_core_client_v1_client.pb.swift in Sources */,
+				0466529A2DACDB2700F9C125 /* ibc_applications_fee_v1_tx.grpc.swift in Sources */,
+				0466529B2DACDB2700F9C125 /* ibc_lightclients_wasm_v1_genesis.pb.swift in Sources */,
+				0466529C2DACDB2700F9C125 /* ibc_lightclients_localhost_v2_localhost.pb.swift in Sources */,
+				0466529D2DACDB2700F9C125 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
+				0466529E2DACDB2700F9C125 /* ibc_applications_transfer_v1_packet.pb.swift in Sources */,
+				0466529F2DACDB2700F9C125 /* ibc_core_client_v2_query.pb.swift in Sources */,
+				046652A02DACDB2700F9C125 /* ibc_core_client_v2_query.grpc.swift in Sources */,
+				046652A12DACDB2700F9C125 /* ibc_core_connection_v1_tx.grpc.swift in Sources */,
 				047843152AC9918700462F1C /* ethermint_feemarket_v1_query.grpc.swift in Sources */,
 				049B691F29D1736B0027B82D /* MintscanProposal.swift in Sources */,
 				045032CB2C1EFCE700235F6A /* ChainMars.swift in Sources */,
@@ -8121,96 +8210,6 @@
 				E10B1D8F2C2156430039283B /* KavaMintListMyCell.swift in Sources */,
 				04C817DF2BA9917D006B800A /* cosmos_upgrade_v1beta1_query.grpc.swift in Sources */,
 				045032C32C1EFCE700235F6A /* ChainKi.swift in Sources */,
-				E1AEEB752D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_wasm.pb.swift in Sources */,
-				E1AEEB762D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.grpc.swift in Sources */,
-				E1AEEB772D9FF0BA001AE3F4 /* ibc_applications_perm_v1_genesis.pb.swift in Sources */,
-				E1AEEB782D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.grpc.swift in Sources */,
-				E1AEEB792D9FF0BA001AE3F4 /* ibc_applications_perm_v1_types.pb.swift in Sources */,
-				E1AEEB7A2D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.pb.swift in Sources */,
-				E1AEEB7B2D9FF0BA001AE3F4 /* ibc_core_channel_v2_packet.pb.swift in Sources */,
-				E1AEEB7C2D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
-				E1AEEB7D2D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.grpc.swift in Sources */,
-				E1AEEB7E2D9FF0BA001AE3F4 /* ibc_core_channel_v1_channel.pb.swift in Sources */,
-				E1AEEB7F2D9FF0BA001AE3F4 /* ibc_applications_fee_v1_genesis.pb.swift in Sources */,
-				E1AEEB802D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.pb.swift in Sources */,
-				E1AEEB812D9FF0BA001AE3F4 /* ibc_applications_fee_v1_metadata.pb.swift in Sources */,
-				E1AEEB822D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.grpc.swift in Sources */,
-				E1AEEB832D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.grpc.swift in Sources */,
-				E1AEEB842D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift in Sources */,
-				E1AEEB852D9FF0BA001AE3F4 /* ibc_core_connection_v1_genesis.pb.swift in Sources */,
-				E1AEEB862D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.grpc.swift in Sources */,
-				E1AEEB872D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_authz.pb.swift in Sources */,
-				E1AEEB882D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
-				E1AEEB892D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_packet.pb.swift in Sources */,
-				E1AEEB8A2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.grpc.swift in Sources */,
-				E1AEEB8B2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_query.grpc.swift in Sources */,
-				E1AEEB8C2D9FF0BA001AE3F4 /* ibc_core_client_v2_query.pb.swift in Sources */,
-				E1AEEB8D2D9FF0BA001AE3F4 /* ibc_core_channel_v1_query.pb.swift in Sources */,
-				E1AEEB8E2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_packet.pb.swift in Sources */,
-				E1AEEB8F2D9FF0BA001AE3F4 /* ibc_core_client_v1_query.pb.swift in Sources */,
-				E1AEEB902D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v2_solomachine.pb.swift in Sources */,
-				E1AEEB912D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.pb.swift in Sources */,
-				E1AEEB922D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.pb.swift in Sources */,
-				E1AEEB932D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_genesis.pb.swift in Sources */,
-				E1AEEB942D9FF0BA001AE3F4 /* ibc_applications_perm_v1_tx.grpc.swift in Sources */,
-				E1AEEB952D9FF0BA001AE3F4 /* ibc_lightclients_localhost_v2_localhost.pb.swift in Sources */,
-				E1AEEB962D9FF0BA001AE3F4 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift in Sources */,
-				E1AEEB972D9FF0BA001AE3F4 /* ibc_core_types_v1_genesis.pb.swift in Sources */,
-				E1AEEB982D9FF0BA001AE3F4 /* ibc_core_client_v2_genesis.pb.swift in Sources */,
-				E1AEEB992D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_types.pb.swift in Sources */,
-				E1AEEB9A2D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.pb.swift in Sources */,
-				E1AEEB9B2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */,
-				E1AEEB9C2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.pb.swift in Sources */,
-				E1AEEB9D2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift in Sources */,
-				E1AEEB9E2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.grpc.swift in Sources */,
-				E1AEEB9F2D9FF0BA001AE3F4 /* ibc_core_channel_v2_genesis.pb.swift in Sources */,
-				E1AEEBA02D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.grpc.swift in Sources */,
-				E1AEEBA12D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift in Sources */,
-				E1AEEBA22D9FF0BA001AE3F4 /* ibc_applications_fee_v1_fee.pb.swift in Sources */,
-				E1AEEBA32D9FF0BA001AE3F4 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
-				E1AEEBA42D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.pb.swift in Sources */,
-				E1AEEBA52D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_query.grpc.swift in Sources */,
-				E1AEEBA62D9FF0BA001AE3F4 /* ibc_applications_fee_v1_tx.grpc.swift in Sources */,
-				E1AEEBA72D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift in Sources */,
-				E1AEEBA82D9FF0BA001AE3F4 /* ibc_applications_fee_v1_ack.pb.swift in Sources */,
-				E1AEEBA92D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */,
-				E1AEEBAA2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_tx.pb.swift in Sources */,
-				E1AEEBAB2D9FF0BA001AE3F4 /* ibc_applications_transfer_v2_packet.pb.swift in Sources */,
-				E1AEEBAC2D9FF0BA001AE3F4 /* ibc_applications_fee_v1_query.pb.swift in Sources */,
-				E1AEEBAD2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_v1_packet.pb.swift in Sources */,
-				E1AEEBAE2D9FF0BA001AE3F4 /* ibc_core_connection_v1_tx.pb.swift in Sources */,
-				E1AEEBAF2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_denomtrace.pb.swift in Sources */,
-				E1AEEBB02D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.grpc.swift in Sources */,
-				E1AEEBB12D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.grpc.swift in Sources */,
-				E1AEEBB22D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_genesis.pb.swift in Sources */,
-				E1AEEBB32D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_genesis.pb.swift in Sources */,
-				E1AEEBB42D9FF0BA001AE3F4 /* ibc_core_client_v2_query.grpc.swift in Sources */,
-				E1AEEBB52D9FF0BA001AE3F4 /* ibc_applications_perm_v1_query.pb.swift in Sources */,
-				E1AEEBB62D9FF0BA001AE3F4 /* ibc_core_channel_v1_genesis.pb.swift in Sources */,
-				E1AEEBB72D9FF0BA001AE3F4 /* ibc_core_commitment_v2_commitment.pb.swift in Sources */,
-				E1AEEBB82D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_controller_v1_tx.grpc.swift in Sources */,
-				E1AEEBB92D9FF0BA001AE3F4 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
-				E1AEEBBA2D9FF0BA001AE3F4 /* ibc_core_commitment_v1_commitment.pb.swift in Sources */,
-				E1AEEBBB2D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift in Sources */,
-				E1AEEBBC2D9FF0BA001AE3F4 /* ibc_core_client_v1_tx.pb.swift in Sources */,
-				E1AEEBBD2D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.grpc.swift in Sources */,
-				E1AEEBBE2D9FF0BA001AE3F4 /* ibc_core_channel_v1_tx.pb.swift in Sources */,
-				E1AEEBBF2D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_query.pb.swift in Sources */,
-				E1AEEBC02D9FF0BA001AE3F4 /* ibc_core_client_v1_query.grpc.swift in Sources */,
-				E1AEEBC12D9FF0BA001AE3F4 /* ibc_core_client_v2_tx.pb.swift in Sources */,
-				E1AEEBC22D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_query.pb.swift in Sources */,
-				E1AEEBC32D9FF0BA001AE3F4 /* ibc_lightclients_wasm_v1_tx.grpc.swift in Sources */,
-				E1AEEBC42D9FF0BA001AE3F4 /* ibc_core_connection_v1_query.grpc.swift in Sources */,
-				E1AEEBC52D9FF0BA001AE3F4 /* ibc_core_channel_v2_query.pb.swift in Sources */,
-				E1AEEBC62D9FF0BA001AE3F4 /* ibc_core_channel_v2_tx.pb.swift in Sources */,
-				E1AEEBC72D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_token.pb.swift in Sources */,
-				E1AEEBC82D9FF0BA001AE3F4 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift in Sources */,
-				E1AEEBC92D9FF0BA001AE3F4 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */,
-				E1AEEBCA2D9FF0BA001AE3F4 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift in Sources */,
-				E1AEEBCB2D9FF0BA001AE3F4 /* ibc_applications_nft_transfer_v1_tx.pb.swift in Sources */,
-				E1AEEBCC2D9FF0BA001AE3F4 /* ibc_core_client_v2_config.pb.swift in Sources */,
-				E1AEEBCD2D9FF0BA001AE3F4 /* ibc_core_client_v2_counterparty.pb.swift in Sources */,
-				E1AEEBCE2D9FF0BA001AE3F4 /* ibc_core_client_v1_client.pb.swift in Sources */,
 				04F048C72AF89B19002A809D /* SelectAddressBookCell.swift in Sources */,
 				04C817682BA98D75006B800A /* cosmos_auth_module_v1_module.pb.swift in Sources */,
 				79D5561D2CEF068B0023F1B9 /* ChainHaqqEVM.swift in Sources */,
@@ -8328,7 +8327,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 303;
+				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8340,7 +8339,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.23;
+				MARKETING_VERSION = 1.10.25;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -8361,7 +8360,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 303;
+				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -8374,7 +8373,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.23;
+				MARKETING_VERSION = 1.10.25;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Cosmostation debug provisioning profile";
@@ -8515,7 +8514,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 303;
+				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8529,7 +8528,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.23;
+				MARKETING_VERSION = 1.10.25;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -8549,7 +8548,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 303;
+				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8563,7 +8562,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.23;
+				MARKETING_VERSION = 1.10.25;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
