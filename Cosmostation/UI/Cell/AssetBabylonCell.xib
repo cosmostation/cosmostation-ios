@@ -252,7 +252,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6c8-Pb-gNt">
                                 <rect key="frame" x="14" y="214.33333333333334" width="290" height="50.000000000000028"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenBtc_signet" translatesAutoresizingMaskIntoConstraints="NO" id="eIF-Sf-HcH">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="eIF-Sf-HcH">
                                         <rect key="frame" x="0.0" y="16" width="18" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="18" id="d4W-qV-tuh"/>
@@ -372,7 +372,6 @@
     </objects>
     <resources>
         <image name="iconArrowRight2" width="29" height="28"/>
-        <image name="tokenBtc_signet" width="192" height="192"/>
         <image name="tokenDefault" width="48" height="48"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

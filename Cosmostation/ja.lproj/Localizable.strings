@@ -336,6 +336,7 @@
 "str_restore_wallets" = "財布の復元";
 "str_deposit" = "預金";
 "str_withdraw" = "出金";
+"str_withdraw_msg" = "ステーキングした数量を引き出します。";
 "str_copy_evm_address" = "EVM スタイルのアドレスをコピー";
 "str_share_evm_address" = "EVM スタイルのアドレスを共有する";
 "str_share_evm_address2" = "EVM\nスタイルのアドレスを共有する";
@@ -463,6 +464,9 @@
 "btc_unstake_period_days" = "%d日間";
 "msg_babylon_pending_state" = "BABYLONチェーンでは、ステーキング操作（ステーク、アンステーク、バリデーターの変更、アンステークキャンセルなど）は \"Pending\" 状態から始まります。現在のエポックが終了し、次のエポックが始まると、ステーキング操作は \"Active\" 状態に移行します。";
 "msg_babylon_active_state" = "\"Active\" 状態とは、\"Pending\" 状態が終了し、実行された操作が完全にアクティブになったことを意味します。この状態では、ユーザーがリクエストしたすべてのステーキング機能が正常に動作しています。";
+"title_btc_staking_additional_fee" = "Additional Fee in $%@";
+"msg_btc_staking_additional_fee" = "%@ staking requires an additional fee in %@, deducted\nfrom your %@ balance at %@.";
+"msg_insufficient_balance" = "Insufficient %@ balance for fees.";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -1034,6 +1038,7 @@
 "title_coin_rewards_claim" = "%@ 利息を受け取る";
 "title_coin_commission_claim" = "%@ コミッションを請求";
 "title_coin_compounding" = "%@ コンパウンディング";
+"title_coin_withdraw" = "%@ Withdraw";
 
 
 "proposal_type_basic" = "Basic";

@@ -336,6 +336,7 @@
 "str_restore_wallets" = "지갑 복원";
 "str_deposit" = "예치";
 "str_withdraw" = "출금";
+"str_withdraw_msg" = "스테이킹 수량을 출금합니다.";
 "str_copy_evm_address" = "Evm형식 주소복사";
 "str_share_evm_address" = "Evm형식 주소공유";
 "str_share_evm_address2" = "Evm형식\n주소공유";
@@ -463,6 +464,10 @@
 "btc_unstake_period_days" = "%d일";
 "msg_babylon_pending_state" = "BABYLON 체인에서는 스테이킹 관련 기능(Stake, Unstake, Validator, Switch Validator, Unstake Cancel 등)을 실행하면 우선 Pending 상태로 시작됩니다.\n이후 현재 에포크가 종료되고 다음 에포크로 넘어가면, 해당 스테이킹 작업은 즉시 활성화 상태로 전환됩니다.";
 "msg_babylon_active_state" = "Active 상태란 Pending 상태가 종료되고 실행한 기능들이 정상적으로 활성화되고 있는 상태를 의미합니다.\n이 상태에서는 사용자가 요청한 스테이킹 관련 기능들이 모두 정상적으로 동작하게 됩니다.";
+
+"title_btc_staking_additional_fee" = "%@ 코인이 추가 수수료로 사용됩니다.";
+"msg_btc_staking_additional_fee" = "%@ 스테이킹에는 %@ 코인 외에 %@ 코인이 추가 수수료로\n사용되며, 추가 수수료는 %@ 주소에 보유한\n%@ 코인에서 차감됩니다.";
+"msg_insufficient_balance" = "Insufficient %@ balance for fees.";
 
 
 
@@ -1034,6 +1039,7 @@
 "title_coin_rewards_claim" = "%@ 이자 받기";
 "title_coin_commission_claim" = "%@ 커미션 받기";
 "title_coin_compounding" = "%@ 컴파운딩";
+"title_coin_withdraw" = "%@ Withdraw";
 
 
 "proposal_type_basic" = "기본";

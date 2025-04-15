@@ -165,6 +165,7 @@ class DappBtcSignRequestSheet: BaseVC {
     func onInitFeeView() {
         Task {
             feeDenomLabel.text = selectedChain.coinSymbol
+            feeImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.coinSymbol))
             feeLabel.text = selectedChain.coinSymbol
             do {
                 try await onUpdateFeeView()

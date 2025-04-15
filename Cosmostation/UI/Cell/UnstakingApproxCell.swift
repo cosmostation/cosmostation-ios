@@ -67,7 +67,7 @@ class UnstakingApproxCell: UITableViewCell {
             statusDescriptionLabel.text = "Ready to Withdraw"
             arrowImage.isHidden = false
         } else {
-            unstakingAnimationView.isHidden = false
+//            unstakingAnimationView.isHidden = false
             statusLabel.text = "Unstaking"
             statusDescriptionLabel.text = "Takes around 7 days"
         }

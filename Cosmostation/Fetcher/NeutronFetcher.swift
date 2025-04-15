@@ -19,6 +19,7 @@ class NeutronFetcher: CosmosFetcher {
     var daosList: [JSON]?
     var neutronDeposited = NSDecimalNumber.zero
     var neutronVesting: JSON?
+    var reward: JSON?
     
     override func fetchCosmosData(_ id: Int64) async -> Bool {
         cosmosLcdAuth = nil
@@ -28,6 +29,7 @@ class NeutronFetcher: CosmosFetcher {
         neutronVesting = nil
         vaultsList = chain.getChainListParam()["vaults"].array
         daosList = chain.getChainListParam()["daos"].array
+        reward = chain.getChainListParam()["reward"]
         cosmosDelegations.removeAll()
         cosmosUnbondings = nil
         cosmosRewards = nil
@@ -190,7 +192,7 @@ extension NeutronFetcher {
         let query: JSON = ["rewards" : ["user" : chain.bechAddress!]]
         let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
-            $0.address = "neutron1h62p45vv3fg2q6sm00r93gqgmhqt9tfgq5hz33qyrhq8f0pqqj0s36wgc3"
+            $0.address = reward?["address"].stringValue ?? ""
             $0.queryData = Data(base64Encoded: queryBase64)!
         }
         guard let rewards = try await self.fetchSmartContractState(req) else { return [] }

@@ -164,9 +164,7 @@ class NeutronStakingInfoVC: BaseVC {
         }
         
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? "") {
-            let filePath = Bundle.main.path(forResource: "ntrnCoin", ofType: "png")
-            let url = URL(fileURLWithPath: filePath ?? "")
-
+            let url = URL(string: ResourceBase + "\(selectedChain.apiName!)/resource/ntrn.png")
             coinImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "tokenDefault"))
             var rewardAmount = NSDecimalNumber.zero
             rewards?.forEach { reward in
@@ -236,6 +234,22 @@ class NeutronStakingInfoVC: BaseVC {
     }
     
     @IBAction func onClaimAllTx(_ sender: Any) {
+        guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
+            return
+        }
+        if (comsosFetcher.rewardAllCoins().count == 0) {
+            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+            return
+        }
+        if (comsosFetcher.claimableRewards().count == 0) {
+            onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
+            return
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+
         guard let fetcher = selectedChain.getNeutronFetcher() else { return }
         let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
         claimRewards.claimableRewards = fetcher.claimableRewards()
@@ -245,6 +259,22 @@ class NeutronStakingInfoVC: BaseVC {
     }
     
     @IBAction func onCompoundingAll(_ sender: Any) {
+        guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
+            return
+        }
+        if (comsosFetcher.rewardAllCoins().count == 0) {
+            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+            return
+        }
+        if (comsosFetcher.claimableRewards().count == 0) {
+            onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
+            return
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+
         guard let fetcher = selectedChain.getNeutronFetcher() else { return }
         let compounding = NeutronCompounding(nibName: "NeutronCompounding", bundle: nil)
         compounding.claimableRewards = fetcher.claimableRewards()
