@@ -28,9 +28,10 @@ class BtcStakeSheet: BaseVC {
            let fetcher = chain.getBabylonBtcFetcher() {
             
             let btcSymbol = chain.isTestnet ? "sBTC" : "BTC"
+            let btcImg = chain.isTestnet ? ChainBitCoin86_T().assetImgUrl(btcSymbol) : ChainBitCoin86().assetImgUrl(btcSymbol)
             
             titleLabel.text = "Staked \(btcSymbol)"
-            tokenImageView.image = UIImage(named: chain.isTestnet ? "tokenBtc_signet" : "tokenBtc")
+            tokenImageView.sd_setImage(with: btcImg, placeholderImage: UIImage(named: "tokenDefault"))
             symbolLabel.text = btcSymbol
             
             descriptionLabel.setLineSpacing(text: String(format: NSLocalizedString("msg_btc_stake", comment: ""), btcSymbol), font: .fontSize12Medium, alignment: .center)

@@ -52,7 +52,7 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenBbn" translatesAutoresizingMaskIntoConstraints="NO" id="eGU-bJ-PBT">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="eGU-bJ-PBT">
                     <rect key="frame" x="20" y="79" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="ArW-wA-KzO"/>
@@ -427,7 +427,6 @@ not the wallet.</string>
     <resources>
         <image name="iconArrowDown" width="24" height="24"/>
         <image name="imgClassfy" width="24" height="24"/>
-        <image name="tokenBbn" width="192" height="192"/>
         <image name="tokenDefault" width="48" height="48"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

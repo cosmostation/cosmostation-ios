@@ -75,9 +75,12 @@ class AssetBabylonCell: UITableViewCell {
     }
 
     func bindStakeAsset(_ baseChain: BaseChain) {
-        btcCoinImg.image = baseChain.isTestnet ? UIImage(named: "tokenBtc_signet") : UIImage(named: "tokenBtc")
-        btcStakeTitle.text = "Staked \(baseChain.isTestnet ? "sBTC" : "BTC") Status"
-        btcRewardTitle.text = "\(baseChain.isTestnet ? "sBTC" : "BTC") Staking Reward"
+        let btcSymbol = baseChain.isTestnet ? "sBTC" : "BTC"
+        let btcImg = baseChain.isTestnet ? ChainBitCoin86_T().assetImgUrl(btcSymbol) : ChainBitCoin86().assetImgUrl(btcSymbol)
+
+        btcCoinImg.sd_setImage(with: btcImg, placeholderImage: UIImage(named: "tokenDefault"))
+        btcStakeTitle.text = "Staked \(btcSymbol) Status"
+        btcRewardTitle.text = "\(btcSymbol) Staking Reward"
         let stakeDenom = baseChain.stakeDenom!
         if let cosmosFetcher = baseChain.getCosmosfetcher(),
            let babylonBtcFetcher = (baseChain as? ChainBabylon)?.getBabylonBtcFetcher(),
