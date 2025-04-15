@@ -94,10 +94,9 @@ class AdditionalFeeSheet: BaseVC {
                     onShowToast(NSLocalizedString("error_not_enough_to_balance", comment: ""))
                 }
 
-                availableAmount = cosmosFetcher.balanceAmount(stakeDenom).adding(vestingAmount).subtracting(feeAmount)
+                availableAmount = cosmosFetcher.balanceAmount(stakeDenom).adding(vestingAmount)
                 WDP.dpCoin(msAsset, availableAmount, nil, symbolLabel, availableAmountLabel, msAsset.decimals!)
-                
-                if availableAmount.compare(0).rawValue < 0 {
+                if availableAmount.subtracting(feeAmount).compare(0).rawValue < 0 {
                     insufficientLabel.isHidden = false
                     stakeBtn.isEnabled = false
                 }
