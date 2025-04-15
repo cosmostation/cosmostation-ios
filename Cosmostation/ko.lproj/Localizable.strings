@@ -1330,7 +1330,9 @@
 "tx_kava_earn_withdraw" = "어닝 리퀴디티 출금";
 
 "tx_ibc_send" = "IBC 보내기";
+"tx_ibc_eureka_send" = "IBC 유레카 보내기";
 "tx_ibc_receive" = "IBC 받기";
+"tx_ibc_eureka_receive" = "IBC 유레카 받기";
 "tx_ibc_client_update" = "IBC 클라이언트 업데이트";
 "tx_ibc_acknowledgement" = "IBC 승인";
 
