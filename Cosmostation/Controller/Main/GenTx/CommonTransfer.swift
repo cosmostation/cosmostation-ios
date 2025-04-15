@@ -169,6 +169,7 @@ class CommonTransfer: BaseVC {
                 self.onInitView()                           // set selected asset display symbol, sendable amount, display decimal
             }
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -400,6 +401,7 @@ class CommonTransfer: BaseVC {
             sendBtn.isEnabled = false
             
             if (sendAssetType == .COSMOS_EVM_MAIN_COIN && fromChain.tag != toChain.tag) {
+                onUpdateTxStyle(.COSMOS_STYLE)
                 onUpdateTxStyle(.COSMOS_STYLE)
             }
         }
@@ -935,7 +937,7 @@ extension CommonTransfer {
                 
             } else {
                 toAddress = recipientAddress
-                let value = Web3Core.Utilities.parseToBigUInt(calSendAmount.stringValue, units: .ether)!
+                let value = Web3Core.Utilities.parseToBigUInt(self.toAmount.stringValue, decimals: 0)!
                 if (evmTxType == .eip1559) {
                     evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
                                                     chainID: chainID!, value: value,
@@ -948,8 +950,6 @@ extension CommonTransfer {
                 }
             }
             evmTx?.from = senderAddress
-            
-//            print("evmTxA ", evmTx)
             if let estimateGas = try? await web3.eth.estimateGas(for: evmTx!) {
                 evmGasLimit = estimateGas * fromChain.evmGasMultiply() / 10
                 evmTx?.gasLimit = evmGasLimit
@@ -963,9 +963,85 @@ extension CommonTransfer {
         }
     }
     
+    //This is unused logic (2025.04.15 yongjoo)
+    //Not support Eureka (no way to get eureka_fee onchain)
     func evmEurekaSimul() {
         print("evmEurekaSimul")
         Task {
+            guard let web3 = self.web3 else {
+                evmTxType = nil
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(nil)
+                }
+                return
+            }
+            
+            let oracle = Web3Core.Oracle.init(web3.provider)
+            if let feeHistory = await oracle.bothFeesPercentiles(),
+               feeHistory.baseFee.count > 0 {
+                if (fromChain.evmSupportEip1559()) {
+                    for i in 0..<3 {
+                        let baseFee = feeHistory.baseFee[i]
+                        let tip = feeHistory.tip[i]
+                        evmGas[i] = (baseFee, tip)
+                    }
+                    
+                } else {
+                    for i in 0..<3 {
+                        let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
+                        let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
+                        evmGas[i] = (baseFee, tip)
+                    }
+                }
+                evmTxType = .eip1559
+                
+            } else if let gasprice = try? await web3.eth.gasPrice() {
+                evmGas[0].0 = gasprice
+                evmGas[1].0 = gasprice * 12 / 10
+                evmGas[2].0 = gasprice * 20 / 10
+                evmTxType = .legacy
+                
+            } else {
+                evmTxType = nil
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(nil)
+                }
+                return
+            }
+            print("evmEurekaSimul evmGas ", evmGas)
+            
+            let chainID = web3.provider.network?.chainID
+            let senderAddress = EthereumAddress.init(fromChain.evmAddress!)!
+            let ercContractAddress = EthereumAddress.init(toSendMsToken.address!)!
+            let iCS20ContractAddress = EthereumAddress.init(ibcPath!.getICS20ContractAddress()!)!
+            let nonce = try? await web3.eth.getTransactionCount(for: senderAddress)
+            let calSendAmount = self.toAmount.multiplying(byPowerOf10: -decimal)
+            let erc20 = ERC20(web3: web3, provider: web3.provider, address: ercContractAddress)
+            let approveWriteOperation = try await erc20.approve(from: senderAddress, spender: iCS20ContractAddress, amount: calSendAmount.stringValue)
+            
+            if (evmTxType == .eip1559) {
+                evmTx = CodableTransaction.init(type: evmTxType, to: ercContractAddress, nonce: nonce!,
+                                                       chainID: chainID!, data: approveWriteOperation.data!,
+                                                       maxFeePerGas: evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1,
+                                                       maxPriorityFeePerGas: evmGas[selectedFeePosition].1)
+            } else {
+                evmTx = CodableTransaction.init(type: evmTxType, to: ercContractAddress, nonce: nonce!,
+                                                       chainID: chainID!, data: approveWriteOperation.data!,
+                                                       gasPrice: evmGas[selectedFeePosition].0)
+            }
+            evmTx?.from = senderAddress
+            
+            if let estimateGas = try? await web3.eth.estimateGas(for: evmTx!) {
+                evmGasLimit = estimateGas * fromChain.evmGasMultiply() / 10 * 3  //check approve and send tx fee sum
+                evmTx?.gasLimit = evmGasLimit
+            } else {
+                print("evmEurekaSimul Error")
+                evmTxType = nil
+            }
+            
+            DispatchQueue.main.async {
+                self.onUpdateWithSimul(nil)
+            }
         }
     }
     
@@ -1001,7 +1077,145 @@ extension CommonTransfer {
         }
     }
     
-    
+    //This is unused logic (2025.04.15 yongjoo)
+    //Not support Eureka (no way to get eureka_fee onchain)
+    //Approve than send amount
+    func evmEurekaSend() {
+        print("evmEurekaSend")
+        Task {
+            guard let web3 = self.web3 else {
+                print("web3 init error")
+                return
+            }
+            
+            do {
+                let oracle = Web3Core.Oracle.init(web3.provider)
+                if let feeHistory = await oracle.bothFeesPercentiles(),
+                   feeHistory.baseFee.count > 0 {
+                    if (fromChain.evmSupportEip1559()) {
+                        for i in 0..<3 {
+                            let baseFee = feeHistory.baseFee[i]
+                            let tip = feeHistory.tip[i]
+                            evmGas[i] = (baseFee, tip)
+                        }
+                        
+                    } else {
+                        for i in 0..<3 {
+                            let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
+                            let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
+                            evmGas[i] = (baseFee, tip)
+                        }
+                    }
+                    evmTxType = .eip1559
+                    
+                } else if let gasprice = try? await web3.eth.gasPrice() {
+                    evmGas[0].0 = gasprice
+                    evmGas[1].0 = gasprice * 12 / 10
+                    evmGas[2].0 = gasprice * 20 / 10
+                    evmTxType = .legacy
+                    
+                } else {
+                    evmTxType = nil
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(nil)
+                    }
+                    return
+                }
+                print("evmEurekaSend evmGas ", evmGas)
+                
+                let chainID = web3.provider.network?.chainID
+                let senderAddress = EthereumAddress.init(fromChain.evmAddress!)!
+                let ercContractAddress = EthereumAddress.init(toSendMsToken.address!)!
+                let iCS20ContractAddress = EthereumAddress.init(ibcPath!.getICS20ContractAddress()!)!
+                var nonce = try? await web3.eth.getTransactionCount(for: senderAddress)
+                let calSendAmount = self.toAmount.multiplying(byPowerOf10: -decimal)
+                let bigUIntAmount = Web3Core.Utilities.parseToBigUInt(self.toAmount.stringValue, decimals: 0)!
+                let erc20 = ERC20(web3: web3, provider: web3.provider, address: ercContractAddress)
+                let approveWriteOperation = try await erc20.approve(from: senderAddress, spender: iCS20ContractAddress, amount: calSendAmount.stringValue)
+                
+                var evmApproveTx: CodableTransaction?
+                if (evmTxType == .eip1559) {
+                    evmApproveTx = CodableTransaction.init(type: evmTxType, to: ercContractAddress, nonce: nonce!,
+                                                           chainID: chainID!, data: approveWriteOperation.data!,
+                                                           maxFeePerGas: evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1,
+                                                           maxPriorityFeePerGas: evmGas[selectedFeePosition].1)
+                } else {
+                    evmApproveTx = CodableTransaction.init(type: evmTxType, to: ercContractAddress, nonce: nonce!,
+                                                           chainID: chainID!, data: approveWriteOperation.data!,
+                                                           gasPrice: evmGas[selectedFeePosition].0)
+                }
+                evmApproveTx?.from = senderAddress
+                if let estimateApproveGas = try? await web3.eth.estimateGas(for: evmApproveTx!) {
+                    evmApproveTx?.gasLimit = estimateApproveGas * fromChain.evmGasMultiply() / 10
+                } else {
+                    //TODO Handle Error
+                    print("estimateApproveGas Error")
+                }
+                print("evmApproveTx ", evmApproveTx, "\n\n\n")
+
+                try evmApproveTx?.sign(privateKey: fromChain.privateKey!)
+                let encodeApproveTx = evmApproveTx?.encode(for: .transaction)
+                let resultApprove = try await web3.eth.send(raw : encodeApproveTx!)
+                print("resultApprove ", resultApprove)
+                
+                //TODO check Approve is onchain
+                
+                
+                
+                
+                /*
+                nonce = try? await web3.eth.getTransactionCount(for: senderAddress)
+                let time = Date().hourAfter6Int32
+                let sourceClient = ibcPath!.getChannel()!
+                let destPort = ibcPath!.getPort()!
+                let eurekaWriteOperation = try await EUREKA_ICS20Transfer.init(web3: web3, contractAddress: iCS20ContractAddress).sendTransfer(ercContractAddress, bigUIntAmount, toAddress, sourceClient, destPort, time, EUREKA_MEMO)
+                
+                var evmEurekaTx: CodableTransaction?
+                if (evmTxType == .eip1559) {
+                    evmEurekaTx = CodableTransaction.init(type: evmTxType, to: iCS20ContractAddress, nonce: nonce!,
+                                                          chainID: chainID!, data: eurekaWriteOperation!.data!,
+                                                          maxFeePerGas: evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1,
+                                                          maxPriorityFeePerGas: evmGas[selectedFeePosition].1)
+                } else {
+                    evmEurekaTx = CodableTransaction.init(type: evmTxType, to: iCS20ContractAddress, nonce: nonce!,
+                                                          chainID: chainID!, data: eurekaWriteOperation!.data!,
+                                                          gasPrice: evmGas[selectedFeePosition].0)
+                }
+                evmEurekaTx?.from = senderAddress
+                print("evmEurekaTx ", evmEurekaTx)
+                
+                
+                
+                if let estimateEurekaGas = try? await web3.eth.estimateGas(for: evmEurekaTx!) {
+                    evmEurekaTx?.gasLimit = estimateEurekaGas * fromChain.evmGasMultiply() / 10
+                } else {
+                    //TODO Handle Error
+                    print("estimateEurekaGas Error")
+                }
+                
+                try evmEurekaTx?.sign(privateKey: fromChain.privateKey!)
+                let encodeEurekaTx = evmEurekaTx?.encode(for: .transaction)
+                let resultEureka = try await web3.eth.send(raw : encodeEurekaTx!)
+                print("resultEureka ", resultEureka)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                    self.loadingView.isHidden = true
+                    let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                    txResult.txStyle = self.txStyle
+                    txResult.fromChain = self.fromChain
+//                    txResult.toChain = self.toChain
+                    txResult.toAddress = self.toAddress
+                    txResult.evmHash = resultEureka.hash
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
+                })
+                 */
+                
+            } catch {
+                print("error ", error)
+            }
+        }
+    }
 }
 
 // GNO style tx
@@ -1637,6 +1851,7 @@ extension CommonTransfer {
     }
 }
 
+
 extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountSheetDelegate, MemoDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
@@ -1695,7 +1910,11 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
             loadingView.isHidden = false
             
             if (txStyle == .WEB3_STYLE) {
-                evmSend()
+                if (fromChain.apiName == toChain.apiName) {
+                    evmSend()
+                } else if (toChain.supportCosmos) {
+                    evmEurekaSend()
+                }
                 
             } else if (txStyle == .SUI_STYLE) {
                 suiSend()

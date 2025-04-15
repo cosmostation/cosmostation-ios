@@ -23,12 +23,6 @@ public class EUREKA_ICS20Transfer {
         self.contractAddress = contractAddress
     }
     
-    //test harcode
-    public init(web3: Web3) {
-        self.web3 = web3
-        self.contractAddress = EthereumAddress.init("0xa348cfe719b63151f228e3c30eb424ba5a983012")!
-    }
-    
     lazy var contract: Web3.Contract = {
         let contract = self.web3.contract(Web3.Utils.ics20TransferABI, at: self.contractAddress, abiVersion: 2)
         precondition(contract != nil)
@@ -38,7 +32,7 @@ public class EUREKA_ICS20Transfer {
     public func sendTransfer(_ denom: EthereumAddress, _ amount: BigUInt, _ receiver: String,
                              _ sourceClient: String, _ destPort: String, _ timeoutTimestamp: Int32, _ memo: String) throws -> WriteOperation? {
         return contract.createWriteOperation("sendTransfer",
-                                             parameters: [denom, amount, receiver, sourceClient, destPort, timeoutTimestamp, memo] as [AnyObject])
+                                             parameters: [[denom, amount, receiver, sourceClient, destPort, timeoutTimestamp, memo]] as [AnyObject])
     }
     
 }

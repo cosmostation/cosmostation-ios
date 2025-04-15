@@ -74,6 +74,7 @@ public struct MintscanAssetClient: Codable {
     var port: String?
     
     // FOR IBC V2
+    var ICS20ContractAddress: String?
     var version: String?
     var encoding: String?
 }
@@ -86,7 +87,6 @@ public struct MintscanAssetCounterParty: Codable {
     
     // FOR IBC V2
     var ICS20ContractAddress: String?
-    var BeaconProxyAddress: String?
     
     
     var getDenom: String? {
