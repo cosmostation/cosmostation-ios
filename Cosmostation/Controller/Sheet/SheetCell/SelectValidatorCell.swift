@@ -258,7 +258,7 @@ class SelectValidatorCell: UITableViewCell {
             
             if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.coinSymbol) {
                 let stakingAmount = NSDecimalNumber(integerLiteral: delegation.amount).multiplying(byPowerOf10: -msAsset.decimals!)
-                stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
+                stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 8)
             }
             
             if delegation.state.contains("WITHDRAWABLE") {

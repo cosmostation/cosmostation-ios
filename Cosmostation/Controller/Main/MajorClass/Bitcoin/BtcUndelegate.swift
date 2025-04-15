@@ -162,7 +162,7 @@ class BtcUndelegate: BaseVC {
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol),
            let staked = delegation?.amount {
             let stakingAmount = NSDecimalNumber(integerLiteral: staked).multiplying(byPowerOf10: -msAsset.decimals!)
-            stakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakedLabel!.font, 6)
+            stakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakedLabel!.font, 8)
             stakedSymbolLabel.text = selectedChain.coinSymbol
             
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
