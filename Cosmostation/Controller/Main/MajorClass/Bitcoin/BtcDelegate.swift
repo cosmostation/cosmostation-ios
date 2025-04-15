@@ -266,7 +266,7 @@ class BtcDelegate: BaseVC {
 
             do {
                 if let simulReq = try await Signer.genSimul(chainBabylon!, onBindDelegateMsg(preStakeResult), "", babylonTxFee, nil),
-                   let simulRes = try await babylonBtcfetcher.simulateTx(simulReq) {
+                   let simulRes = try await cosmosFetcher.simulateTx(simulReq) {
                     babylonTxFee.gasLimit = UInt64(Double(simulRes) * chainBabylon.getSimulatedGasMultiply())
                     if let gasRate = babylonFeeInfos[0].FeeDatas.filter({ $0.denom == babylonTxFee.amount[0].denom }).first {
                         let gasLimit = NSDecimalNumber.init(value: babylonTxFee.gasLimit)
@@ -451,7 +451,7 @@ extension BtcDelegate: PinDelegate {
             Task {
                 do {
                     if let broadReq = try await Signer.genTx(chainBabylon, onBindDelegateMsg(preStakeResult), "", babylonTxFee, nil),
-                       let broadRes = try await babylonBtcfetcher.broadcastTx(broadReq) {
+                       let broadRes = try await cosmosFetcher.broadcastTx(broadReq) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: { [weak self] in
                             guard let self else {return}
                             loadingView.isHidden = true

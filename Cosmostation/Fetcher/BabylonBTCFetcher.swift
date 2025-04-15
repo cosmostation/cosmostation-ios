@@ -170,38 +170,6 @@ class BabylonBTCFetcher {
         }
         return denoms.count
     }
-    
-    func simulateTx(_ simulTx: Cosmos_Tx_V1beta1_SimulateRequest) async throws -> UInt64? {
-        if (getEndpointType() == .UseGRPC) {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).simulate(simulTx, callOptions: getCallOptions()).response.get().gasInfo.gasUsed
-        } else {
-            let param: Parameters = ["txBytes": try! simulTx.tx.serializedData().base64EncodedString() ]
-            let url = getLcd() + "cosmos/tx/v1beta1/simulate"
-            let result = try await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
-            if let gasUsed = result["gas_info"]["gas_used"].string {
-                return UInt64(gasUsed)
-            } else {
-                throw EmptyDataError.error(message: result["message"].stringValue)
-            }
-        }
-    }
-    
-    func broadcastTx(_ broadTx: Cosmos_Tx_V1beta1_BroadcastTxRequest) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        if (getEndpointType() == .UseGRPC) {
-            return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).broadcastTx(broadTx, callOptions: getCallOptions()).response.get().txResponse
-        } else {
-            let param: Parameters = ["mode" : Cosmos_Tx_V1beta1_BroadcastMode.async.rawValue, "tx_bytes": try broadTx.txBytes.base64EncodedString() ]
-            let url = getLcd() + "cosmos/tx/v1beta1/txs"
-            let result = try await AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]).serializingDecodable(JSON.self).value
-            if (!result["tx_response"].isEmpty) {
-                var response = Cosmos_Base_Abci_V1beta1_TxResponse()
-                response.txhash = result["tx_response"]["txhash"].stringValue
-                response.rawLog = result["tx_response"]["raw_log"].stringValue
-                return response
-            }
-            throw AFError.explicitlyCancelled
-        }
-    }
 }
 
 // MARK: grpc, lcd Fetch
