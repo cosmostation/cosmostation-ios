@@ -59,9 +59,9 @@ class AssetBtcCell: UITableViewCell {
     
     
     func bindBtcAsset(_ baseChain: BaseChain) {
-        stakedView.isHidden = !baseChain.isSupportBTCStaking()
-        unstakingView.isHidden = !baseChain.isSupportBTCStaking()
-        withdrawableView.isHidden = !baseChain.isSupportBTCStaking()
+        stakedView.isHidden = !baseChain.isSupportBTCStaking() || baseChain is ChainBitCoin44 || baseChain is ChainBitCoin49
+        unstakingView.isHidden = !baseChain.isSupportBTCStaking() || baseChain is ChainBitCoin44 || baseChain is ChainBitCoin49
+        withdrawableView.isHidden = !baseChain.isSupportBTCStaking() || baseChain is ChainBitCoin44 || baseChain is ChainBitCoin49
         
         symbolLabel.text = baseChain.coinSymbol
         

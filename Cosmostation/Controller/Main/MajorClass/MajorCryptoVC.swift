@@ -51,7 +51,9 @@ class MajorCryptoVC: BaseVC {
         refresher.tintColor = .color01
         tableView.addSubview(refresher)
         
-        onSetFloatingBtn()
+        if selectedChain.isSupportBTCStaking() {
+            onSetFloatingBtn()
+        }
         onUpdateView()
     }
     
@@ -120,20 +122,19 @@ class MajorCryptoVC: BaseVC {
     
     func onSetFloatingBtn() {
         if (!BaseData.instance.showEvenReview()) { return }
-        if (selectedChain.isSupportBTCStaking()) {
-            floatingBtn.animation = LottieAnimation.named("btcStaking")
-            floatingBtn.contentMode = .scaleAspectFit
-            floatingBtn.loopMode = .loop
-            floatingBtn.animationSpeed = 1.3
-            floatingBtn.play()
-            floatingBtn.isHidden = false
-            floatingBtn.tag = SheetType.MoveBabylonDappDetail.rawValue
-
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn))
-            tapGesture.cancelsTouchesInView = false
-            floatingBtn.addGestureRecognizer(tapGesture)
-            
-        }
+        if (selectedChain is ChainBitCoin44 || selectedChain is ChainBitCoin49) { return }
+        
+        floatingBtn.animation = LottieAnimation.named("btcStaking")
+        floatingBtn.contentMode = .scaleAspectFit
+        floatingBtn.loopMode = .loop
+        floatingBtn.animationSpeed = 1.3
+        floatingBtn.play()
+        floatingBtn.isHidden = false
+        floatingBtn.tag = SheetType.MoveBabylonDappDetail.rawValue
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn))
+        tapGesture.cancelsTouchesInView = false
+        floatingBtn.addGestureRecognizer(tapGesture)
     }
     
     @objc func tapFloatingBtn() {
@@ -284,11 +285,12 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
 extension MajorCryptoVC: BaseSheetDelegate {
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if sheetType == .MoveBabylonDappDetail {
-           let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
-           dappDetail.dappType = .INTERNAL_URL
-           dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
-           dappDetail.modalPresentationStyle = .fullScreen
-           self.present(dappDetail, animated: true)
-       }
+            let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+            dappDetail.dappType = .INTERNAL_URL
+            dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
+            dappDetail.btcTargetChain = selectedChain
+            dappDetail.modalPresentationStyle = .fullScreen
+            self.present(dappDetail, animated: true)
+        }
     }
 }
