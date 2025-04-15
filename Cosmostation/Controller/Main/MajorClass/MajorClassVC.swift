@@ -293,30 +293,36 @@ extension MajorClassVC {
     }
     
     func onBtcStake() {
-        if BaseData.instance.getEcosystemPopUpActiveStatus(.MoveBabylonDappDetail) {
-            let dappPopUpView = EcosystemPopUpSheet(nibName: "EcosystemPopUpSheet", bundle: nil)
-            dappPopUpView.selectedChain = selectedChain
-            dappPopUpView.tag = 102
-            dappPopUpView.sheetDelegate = self
-            dappPopUpView.modalPresentationStyle = .overFullScreen
-            self.present(dappPopUpView, animated: true)
+        if selectedChain.isStakeEnabled() {
+            if let babylonBtcFetcher = (selectedChain as? ChainBitCoin86)?.getBabylonBtcFetcher() {
+                if babylonBtcFetcher.finalityProviders.isEmpty {
+                    onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                    return
+                }
+            }
+            
+            let stakingInfoVC = BtcStakingInfoVC(nibName: "BtcStakingInfoVC", bundle: nil)
+            stakingInfoVC.selectedChain = selectedChain as? ChainBitCoin86
+            self.navigationController?.pushViewController(stakingInfoVC, animated: true)
             
         } else {
-            onSelectedSheet(.MoveBabylonDappDetail, [:])
+            if BaseData.instance.getEcosystemPopUpActiveStatus(.MoveBabylonDappDetail) {
+                let dappPopUpView = EcosystemPopUpSheet(nibName: "EcosystemPopUpSheet", bundle: nil)
+                dappPopUpView.selectedChain = selectedChain
+                dappPopUpView.tag = 102
+                dappPopUpView.sheetDelegate = self
+                dappPopUpView.modalPresentationStyle = .overFullScreen
+                self.present(dappPopUpView, animated: true)
+                
+            } else {
+                onSelectedSheet(.MoveBabylonDappDetail, [:])
+            }
+            
         }
-
-//        if let babylonBtcFetcher = (selectedChain as? ChainBitCoin86)?.getBabylonBtcFetcher() {
-//            if babylonBtcFetcher.finalityProviders.isEmpty {
-//                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-//                return
-//            }
-//        }
-//
-//        let stakingInfoVC = BtcStakingInfoVC(nibName: "BtcStakingInfoVC", bundle: nil)
-//        stakingInfoVC.selectedChain = selectedChain as? ChainBitCoin86
-//        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
     }
 
+    
+    
 }
 
 extension MajorClassVC: BaseSheetDelegate {
