@@ -286,7 +286,12 @@ class NeutronCompounding: BaseVC {
     }
     
     func onBindCompoundingMsg() -> [Google_Protobuf_Any] {
-        return Signer.genNeutronCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!, selectedValidator.operatorAddress)
+        guard let reward = fetcher.reward else { return [] }
+        return Signer.genNeutronCompoundingMsg(selectedChain.bechAddress!,
+                                               claimableRewards,
+                                               selectedChain.stakeDenom!,
+                                               selectedValidator.operatorAddress,
+                                               reward["address"].stringValue)
     }
     
 }

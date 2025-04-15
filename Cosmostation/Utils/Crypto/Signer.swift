@@ -272,11 +272,11 @@ class Signer {
         return anyMsgs
     }
     
-    static func genNeutronClaimStakingRewardMsg(_ address: String) -> [Google_Protobuf_Any] {
+    static func genNeutronClaimStakingRewardMsg(_ address: String, _ contract: String) -> [Google_Protobuf_Any] {
         var anyMsgs = [Google_Protobuf_Any]()
         let claimMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
             $0.sender = address
-            $0.contract = "neutron1h62p45vv3fg2q6sm00r93gqgmhqt9tfgq5hz33qyrhq8f0pqqj0s36wgc3"
+            $0.contract = contract
             $0.funds = []
             let msg: JSON = ["claim_rewards" : JSON()]
             $0.msg = try! msg.rawData()
@@ -441,11 +441,12 @@ class Signer {
     static func genNeutronCompoundingMsg(_ address: String,
                                          _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                          _ stakingDenom: String,
-                                         _ validatorAddress: String) -> [Google_Protobuf_Any] {
+                                         _ validatorAddress: String,
+                                         _ contract: String) -> [Google_Protobuf_Any] {
         var anyMsgs = [Google_Protobuf_Any]()
         let claimMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
             $0.sender = address
-            $0.contract = "neutron1h62p45vv3fg2q6sm00r93gqgmhqt9tfgq5hz33qyrhq8f0pqqj0s36wgc3"
+            $0.contract = contract
             $0.funds = []
             let msg: JSON = ["claim_rewards" : JSON()]
             $0.msg = try! msg.rawData()

@@ -318,8 +318,8 @@ class CosmosClaimRewards: BaseVC {
     }
     
     func onBindRewardMsgs() -> [Google_Protobuf_Any] {
-        if selectedChain is ChainNeutron {
-            return Signer.genNeutronClaimStakingRewardMsg(selectedChain.bechAddress!)
+        if let reward = (selectedChain as? ChainNeutron)?.getNeutronFetcher()?.reward {
+            return Signer.genNeutronClaimStakingRewardMsg(selectedChain.bechAddress!, reward["address"].stringValue)
 
         } else {
             return Signer.genClaimStakingRewardMsg(selectedChain.bechAddress!, claimableRewards)
