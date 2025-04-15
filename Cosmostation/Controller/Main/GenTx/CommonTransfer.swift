@@ -937,12 +937,7 @@ extension CommonTransfer {
                 
             } else {
                 toAddress = recipientAddress
-                
-                
-                let value = Web3Core.Utilities.parseToBigUInt(calSendAmount.stringValue, units: .ether)!
-                print("value ", value)
-                let value2 = Web3Core.Utilities.parseToBigUInt(self.toAmount.stringValue, decimals: 0)!
-                print("value2 ", value2)
+                let value = Web3Core.Utilities.parseToBigUInt(self.toAmount.stringValue, decimals: 0)!
                 if (evmTxType == .eip1559) {
                     evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
                                                     chainID: chainID!, value: value,
@@ -968,7 +963,8 @@ extension CommonTransfer {
         }
     }
     
-    //Only check Approve tx gas fee and show * 3 amount
+    //This is unused logic (2025.04.15 yongjoo)
+    //Not support Eureka (no way to get eureka_fee onchain)
     func evmEurekaSimul() {
         print("evmEurekaSimul")
         Task {
@@ -1081,6 +1077,8 @@ extension CommonTransfer {
         }
     }
     
+    //This is unused logic (2025.04.15 yongjoo)
+    //Not support Eureka (no way to get eureka_fee onchain)
     //Approve than send amount
     func evmEurekaSend() {
         print("evmEurekaSend")
