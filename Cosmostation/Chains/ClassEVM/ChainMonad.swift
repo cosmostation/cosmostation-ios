@@ -1,26 +1,26 @@
 //
-//  ChainXrplEVM.swift
+//  ChainMonad.swift
 //  Cosmostation
 //
-//  Created by 차소민 on 3/24/25.
+//  Created by yongjoo jung on 4/16/25.
 //  Copyright © 2025 wannabit. All rights reserved.
 //
 
 import Foundation
 
-class ChainXrplEVM: BaseChain {
+class ChainMonad: BaseChain {
     
     override init() {
         super.init()
         
-        name = "XRPL EVM Sidechain"
-        tag = "xrplevm60"
-        logo1 = "chainXrplevm"
-        apiName = "xrplevm"
+        name = "Monad"
+        tag = "monad60"
+        logo1 = "chainMonad"
+        apiName = "monad"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         supportEvm = true
-        coinSymbol = "XRP"
+        coinSymbol = "MON"
         evmRpcURL = ""
     }
 }
