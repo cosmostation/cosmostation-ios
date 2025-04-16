@@ -59,7 +59,6 @@ class BaseNetWork {
                 switch response.result {
                 case .success(let value):
                     BaseData.instance.mintscanUSDPrices = value
-                    
                 case .failure:
                     print("fetchUSDPrices error")
                 }
