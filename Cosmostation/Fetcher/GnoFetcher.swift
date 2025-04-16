@@ -39,11 +39,10 @@ class GnoFetcher {
         mintscanGrc20Tokens.removeAll()
         gnoBalances = nil
         do {
-            if let grc20Tokens = try? await fetchGrc20Info(),
-               let balance = try await fetchBalance(),
+            if let balance = try await fetchBalance(),
                let _ = try? await fetchAuth() {
                 
-                self.mintscanGrc20Tokens = grc20Tokens
+                self.mintscanGrc20Tokens = BaseData.instance.mintscanGrc20Tokens?.filter({ $0.chainName == chain.apiName }) ?? []
                 self.gnoBalances = balance
                 let userDisplayGrc20token = BaseData.instance.getDisplayGrc20s(id, self.chain.tag)
                 await mintscanGrc20Tokens.concurrentForEach { grc20 in
@@ -138,16 +137,6 @@ extension GnoFetcher {
         gnoBalances?.forEach { balance in
             result = result.adding(balanceValue(balance.denom, usd))
         }
-        return result
-    }
-}
-
-
-extension GnoFetcher {
-    func fetchGrc20Info() async throws -> [MintscanToken] {
-        if (!chain.isSupportGrc20()) { return [] }
-         
-        let result = try await AF.request(BaseNetWork.msGrc20InfoUrl(chain.apiName), method: .get).serializingDecodable([MintscanToken].self).value
         return result
     }
 }

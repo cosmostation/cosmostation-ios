@@ -66,6 +66,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
         BaseNetWork().fetchChainParams()
         BaseNetWork().fetchCw20Tokens()
         BaseNetWork().fetchErc20Tokens()
+        BaseNetWork().fetchGrc20Tokens()
         BaseNetWork().fetchAssets()
         BaseNetWork().fetchPrices()
     }
