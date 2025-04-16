@@ -52,15 +52,21 @@ class AboutStakingCell: UITableViewCell {
                 unbondingTimeLabel.text = String(unbondingDay) + " " + NSLocalizedString("str_days", comment: "")
             }
         } else if chain is ChainBabylon_T {
-            unbondingTimeLabel.text = "Est." + "1 " + NSLocalizedString("str_days", comment: "")
-        } else if chain is ChainBabylon {
-            unbondingTimeLabel.text = "Est." + "7 " + NSLocalizedString("str_days", comment: "")
-
+            let unbondingSec = json["params"]["staking_params"]["params"]["unbonding_time"].stringValue.filter({ $0.isNumber })
+            if let time = UInt64(unbondingSec) {
+                let unbondingHours = UInt16(time / 60 / 60)
+                unbondingTimeLabel.text = "Est." + "\(unbondingHours) " + NSLocalizedString("str_hours", comment: "")
+            }
+            
         } else {
             let unbondingSec = json["params"]["staking_params"]["params"]["unbonding_time"].stringValue.filter({ $0.isNumber })
             if let time = UInt64(unbondingSec) {
                 let unbondingDay = UInt16(time / 24 / 60 / 60)
-                unbondingTimeLabel.text = String(unbondingDay) + " " + NSLocalizedString("str_days", comment: "")
+                if chain is ChainBabylon {
+                    unbondingTimeLabel.text = "Est." + "\(unbondingDay) " + NSLocalizedString("str_days", comment: "")
+                } else {
+                    unbondingTimeLabel.text = String(unbondingDay) + " " + NSLocalizedString("str_days", comment: "")
+                }
             }
         }
         

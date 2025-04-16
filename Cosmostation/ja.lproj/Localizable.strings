@@ -1249,6 +1249,7 @@
 "theme_dark_msg" = "落ち着いた雰囲気で、より深く没入できるダークテーマ。";
 "theme_cosmic_msg" = "宇宙のワンシーンのように——毎回新しいビューを楽しめるテーマ。";
 "str_dark" = "ダーク";
+"str_hours" = "時間";
 "str_cosmic" = "コズミック";
 
 "currency_fetch_success" = "価格情報を更新しました。";
