@@ -1,0 +1,55 @@
+//
+//  SelectThemeCell.swift
+//  Cosmostation
+//
+//  Created by 차소민 on 4/16/25.
+//  Copyright © 2025 wannabit. All rights reserved.
+//
+
+import UIKit
+
+class SelectThemeCell: UITableViewCell {
+
+    @IBOutlet weak var rootView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var themeImageView: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        selectionStyle = .none
+        
+        rootView.layer.cornerRadius = 12
+        rootView.layer.borderWidth = 1
+        rootView.layer.borderColor = UIColor.color07.cgColor
+        rootView.backgroundColor = .color08
+    }
+    
+    override func prepareForReuse() {
+        rootView.layer.cornerRadius = 12
+        rootView.layer.borderWidth = 1
+        rootView.layer.borderColor = UIColor.color07.cgColor
+        rootView.backgroundColor = .color08
+    }
+
+    func onBindTheme(_ position: Int) {
+        if (position == 0) {
+            titleLabel.text = "1. " + NSLocalizedString("theme_dark", comment: "")
+            descriptionLabel.text = NSLocalizedString("theme_dark_msg", comment: "")
+            themeImageView.image = UIImage(named: "imgThemeDark")
+
+        } else {
+            titleLabel.text = "2. " + NSLocalizedString("theme_cosmic", comment: "")
+            descriptionLabel.text = NSLocalizedString("theme_cosmic_msg", comment: "")
+            themeImageView.image = UIImage(named: "imgThemeCosmic")
+
+        }
+        
+        if (position == BaseData.instance.getTheme()) {
+            rootView.layer.borderColor = UIColor.white.cgColor
+        } else {
+            rootView.layer.borderColor = UIColor.color07.cgColor
+        }
+    }
+
+}

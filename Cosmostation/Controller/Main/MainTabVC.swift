@@ -94,9 +94,17 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
 
 extension UIView {
     func addBackground() {
-        guard let background = BASE_BG_IMG.randomElement() else { return }
-        let img = UIImage(named: background)
-        layer.contents = img?.cgImage
-        contentMode = .scaleAspectFill
+        if BaseData.instance.getTheme() == 0 {
+            let img = UIImage(named: "basebgDark")
+            layer.contents = img?.cgImage
+            contentMode = .scaleAspectFill
+
+        } else {
+            guard let background = BASE_BG_IMG.randomElement() else { return }
+            let img = UIImage(named: background)
+            layer.contents = img?.cgImage
+            contentMode = .scaleAspectFill
+
+        }
     }
 }

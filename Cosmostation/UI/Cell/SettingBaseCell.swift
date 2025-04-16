@@ -53,6 +53,13 @@ class SettingBaseCell: UITableViewCell {
         setDetailLabel.text = Language.getLanguages()[BaseData.instance.getLanguage()].description
     }
     
+    func onBindSetTheme() {
+        setImg.image = UIImage(named: "setTheme")
+        setTitleLabel.text = NSLocalizedString("setting_theme_title", comment: "")
+        setDetailLabel.text = ThemeStyle(rawValue: BaseData.instance.getTheme())?.description
+    }
+
+    
     func onBindSetCurrency() {
         setImg.image = UIImage(named: "setCurrency")
         setTitleLabel.text = NSLocalizedString("setting_currecny_title", comment: "")

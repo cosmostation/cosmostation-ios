@@ -546,6 +546,7 @@
 "setting_chain_title" = "チェーン管理";
 "setting_addressbook_title" = "連絡先の管理";
 "setting_language_title" = "言語";
+"setting_theme_title" = "テーマ";
 "setting_currecny_title" = "通貨";
 "setting_notification_title" = "通知";
 "setting_app_lock_title" = "App Lock";
@@ -1243,6 +1244,12 @@
 "style_pro" = "プロ";
 "style_simple_msg" = "オンチェーン資産の合計価値を表示します。";
 "style_pro_msg" = "さらに、主要資産の価格と価格変動が表示されます。";
+"theme_dark" = "ダークテーマ";
+"theme_cosmic" = "コズミックテーマ";
+"theme_dark_msg" = "落ち着いた雰囲気で、より深く没入できるダークテーマ。";
+"theme_cosmic_msg" = "宇宙のワンシーンのように——毎回新しいビューを楽しめるテーマ。";
+"str_dark" = "ダーク";
+"str_cosmic" = "コズミック";
 
 "currency_fetch_success" = "価格情報を更新しました。";
 "currency_fetch_failed" = "価格情報の更新に失敗しました。";

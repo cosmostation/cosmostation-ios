@@ -548,6 +548,7 @@
 "setting_chain_title" = "체인 관리";
 "setting_addressbook_title" = "주소록 관리";
 "setting_language_title" = "언어";
+"setting_theme_title" = "테마";
 "setting_currecny_title" = "통화";
 "setting_notification_title" = "알람";
 "setting_app_lock_title" = "앱락";
@@ -1244,6 +1245,12 @@
 "style_pro" = "프로";
 "style_simple_msg" = "온 체인상 자산의 가치를 표시합니다.";
 "style_pro_msg" = "메인 자산의 가격과 변동수치가 추가로 표시됩니다.";
+"theme_dark" = "다크 테마";
+"theme_cosmic" = "코스믹 테마";
+"theme_dark_msg" = "부드럽고 차분하게. 다크 테마와 함께 더 깊이 빠져보세요.";
+"theme_cosmic_msg" = "우주에서 펼쳐지는 한 장면처럼 — 볼 때마다 새로운 뷰";
+"str_dark" = "다크";
+"str_cosmic" = "코스믹";
 
 "currency_fetch_success" = "가격 정보를 갱신 하였습니다.";
 "currency_fetch_failed" = "가격 정보 갱신에 실패하였습니다.";
