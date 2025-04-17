@@ -19,6 +19,7 @@ class SelectThemeCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         
+        rootView.clipsToBounds = true
         rootView.layer.cornerRadius = 12
         rootView.layer.borderWidth = 1
         rootView.layer.borderColor = UIColor.color07.cgColor
@@ -26,6 +27,7 @@ class SelectThemeCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        rootView.clipsToBounds = true
         rootView.layer.cornerRadius = 12
         rootView.layer.borderWidth = 1
         rootView.layer.borderColor = UIColor.color07.cgColor
