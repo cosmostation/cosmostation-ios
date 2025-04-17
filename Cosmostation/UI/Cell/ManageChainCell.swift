@@ -35,7 +35,7 @@ class ManageChainCell: UITableViewCell {
     
     
     func bindManageChain(_ chain: BaseChain) {
-        logoImg1.image =  UIImage.init(named: chain.logo1)
+        logoImg1.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
         nameLabel.text = chain.name
         
         if (chain.getCosmosfetcher()?.getEndpointType() == .UseGRPC) {

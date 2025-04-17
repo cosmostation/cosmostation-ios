@@ -136,7 +136,7 @@ class NftTransfer: BaseVC {
     
     func onInitToChain() {
         toChain = fromChain
-        toChainImg.image = UIImage.init(named: toChain.logo1)
+        toChainImg.sd_setImage(with: toChain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
         toChainLabel.text = toChain.name.uppercased()
     }
     

@@ -55,7 +55,7 @@ class ReceiveCell: UITableViewCell {
             
             if let bechQrImage = WUtils.generateQrCode(evmAddress) {
                 rqImgView.image = UIImage(ciImage: bechQrImage)
-                let chainLogo = UIImage.init(named: chain.logo1)
+                let chainLogo = chain.getChainImage()
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }
             
@@ -70,7 +70,7 @@ class ReceiveCell: UITableViewCell {
             
             if let bechQrImage = WUtils.generateQrCode(bechAddress) {
                 rqImgView.image = UIImage(ciImage: bechQrImage)
-                let chainLogo = UIImage.init(named: chain.logo1)
+                let chainLogo = chain.getChainImage()
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }
         } else if !chain.mainAddress.isEmpty {
@@ -111,7 +111,7 @@ class ReceiveCell: UITableViewCell {
             
             if let qrImage = WUtils.generateQrCode(mainAddress) {
                 rqImgView.image = UIImage(ciImage: qrImage)
-                let chainLogo = UIImage.init(named: chain.logo1)
+                let chainLogo = chain.getChainImage()
                 chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
             }
             

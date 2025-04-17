@@ -285,7 +285,7 @@ extension AllChainVoteStartVC: UITableViewDelegate, UITableViewDataSource {
         let view = VoteAllChainHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         let model = toDisplayInfos[section]
         let chain = model.basechain!
-        view.chainImg.image = UIImage.init(named: chain.logo1)
+        view.chainImg.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
         view.titleLabel.text = chain.name
         view.cntLabel.text = String(model.msProposals.count)
         

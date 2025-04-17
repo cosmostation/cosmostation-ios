@@ -43,7 +43,7 @@ class PortfolioCell: UITableViewCell {
     
     
     func bindChain(_ account: BaseAccount, _ chain: BaseChain) {
-        logoImg1.image = UIImage.init(named: chain.logo1)
+        logoImg1.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
         nameLabel.text = chain.name
         
         if (chain is ChainBitCoin86) {

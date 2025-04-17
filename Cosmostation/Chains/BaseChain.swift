@@ -447,6 +447,10 @@ extension BaseChain {
         return getChainListParam()["is_support_grc20"].bool ?? false
     }
     
+    func getChainImage() -> URL? {
+        return URL(string: getChainListParam()["chain_image"].stringValue)
+    }
+    
     func votingThreshold() -> NSDecimalNumber {
         let threshold = getChainListParam()["voting_threshold"].uInt64Value
         return NSDecimalNumber(value: threshold)

@@ -105,7 +105,7 @@ class MajorClassVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let tabVC = (self.parent)?.parent as? MainTabVC
-        tabVC?.showChainBgImage(UIImage(named: selectedChain.logo1)!)
+        tabVC?.showChainBgImage(selectedChain.getChainImage())
         if (BaseData.instance.getHideValue()) {
             hideValueBtn.setImage(UIImage.init(named: "iconHideValueOff"), for: .normal)
         } else {
