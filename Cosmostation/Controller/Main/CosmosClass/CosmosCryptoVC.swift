@@ -323,7 +323,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
                     mintscanErc20Tokens.forEach { token in
-                        if (token.getAmount() != NSDecimalNumber.zero) {
+                        if token.wallet_preload == true {
                             toDisplayErc20Tokens.append(token)
                         }
                     }

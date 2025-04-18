@@ -61,9 +61,9 @@ class ChainBabylon: BaseChain {
                     coinsValue = cosmosFetcher.allCoinValue()
                     coinsUSDValue = cosmosFetcher.allCoinValue(true)
                     mainCoinAmount = cosmosFetcher.allStakingDenomAmount()
-                    tokensCnt = cosmosFetcher.valueTokenCnt()
-                    tokensValue = cosmosFetcher.allTokenValue()
-                    tokensUSDValue = cosmosFetcher.allTokenValue(true)
+                    tokensCnt = cosmosFetcher.valueTokenCnt(id)
+                    tokensValue = cosmosFetcher.allTokenValue(id)
+                    tokensUSDValue = cosmosFetcher.allTokenValue(id, true)
                 }
                 allCoinValue = coinsValue
                 allCoinUSDValue = coinsUSDValue
