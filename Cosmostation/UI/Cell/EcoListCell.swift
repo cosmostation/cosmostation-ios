@@ -40,7 +40,7 @@ class EcoListCell: UICollectionViewCell {
             thumbnailImageView?.sd_setImage(with: url)
         }
         titleLabel.text = info["name"].string
-        descriptionLabel.text = info["description"].string
+        descriptionLabel.setLineSpacing(text: info["description"].stringValue, font: .fontSize11Medium)
         typeTagLabel.text = info["type"].string
         if let support = info["support"].bool {
             supportImageView.isHidden = support
@@ -53,14 +53,14 @@ class EcoListCell: UICollectionViewCell {
             let url = URL(string: endpoint + "injection.png")
             thumbnailImageView.sd_setImage(with: url)
             titleLabel.text = "Injection Example"
-            descriptionLabel.text = "This page offers examples and guidance for integrating and using the Cosmostation app in applications."
+            descriptionLabel.setLineSpacing(text: "This page offers examples and guidance for integrating and using the Cosmostation app in applications.", font: .fontSize11Medium)
             typeTagLabel.text = "Develop Tool"
 
         } else {
             let url = URL(string: endpoint + "github.png")
             thumbnailImageView.sd_setImage(with: url)
             titleLabel.text = "Injection Github"
-            descriptionLabel.text = "This Github provides sample code and guides for integrating Cosmostation Wallet with DApps."
+            descriptionLabel.setLineSpacing(text: "This Github provides sample code and guides for integrating Cosmostation Wallet with DApps.", font: .fontSize11Medium)
             typeTagLabel.text = "Github"
         }
     }
