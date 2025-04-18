@@ -67,9 +67,9 @@ class ChainInitia: BaseChain  {
                 coinsValue = initiaFetcher.allCoinValue()
                 coinsUSDValue = initiaFetcher.allCoinValue(true)
                 mainCoinAmount = initiaFetcher.allStakingDenomAmount()
-                tokensCnt = initiaFetcher.valueTokenCnt()
-                tokensValue = initiaFetcher.allTokenValue()
-                tokensUSDValue = initiaFetcher.allTokenValue(true)
+                tokensCnt = initiaFetcher.valueTokenCnt(id)
+                tokensValue = initiaFetcher.allTokenValue(id)
+                tokensUSDValue = initiaFetcher.allTokenValue(id, true)
                 
                 allCoinValue = coinsValue
                 allCoinUSDValue = coinsUSDValue

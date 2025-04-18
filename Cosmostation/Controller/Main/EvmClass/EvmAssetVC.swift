@@ -129,8 +129,15 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
                         let value1 = evmFetcher.tokenValue($1.address!)
                         return value0.compare(value1).rawValue > 0 ? true : false
                     }
+                    
+                    //if user not edited custom token
+                    //evm main token show always
+                    //wallet_preload true show always
+                    //has amount show always
                     allErc20Tokens.forEach { tokens in
-                        if (tokens.symbol == selectedChain.getChainListParam()["main_asset_symbol"].string || tokens.getAmount() != NSDecimalNumber.zero) {
+                        if (tokens.symbol == selectedChain.getChainListParam()["main_asset_symbol"].string) {
+                            toDisplayErc20Tokens.append(tokens)
+                        } else if tokens.wallet_preload == true {
                             toDisplayErc20Tokens.append(tokens)
                         }
                     }

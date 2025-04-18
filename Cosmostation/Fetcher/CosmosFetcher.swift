@@ -69,8 +69,7 @@ class CosmosFetcher {
         cosmosBaseFees.removeAll()
         
         do {
-            if let cw721List = try? await fetchCw721Info(),
-               let balance = try await fetchBalance(),
+            if let balance = try await fetchBalance(),
                let _ = try? await fetchAuth(),
                let delegations = try? await fetchDelegation(),
                let unbonding = try? await fetchUnbondings(),
@@ -80,7 +79,8 @@ class CosmosFetcher {
                let baseFees = try? await fetchBaseFee() {
                 
                 self.mintscanCw20Tokens =  BaseData.instance.mintscanCw20Tokens?.filter({ $0.chainName == chain.apiName }) ?? []
-                self.mintscanCw721List = cw721List ?? []
+                self.mintscanCw721List = BaseData.instance.mintscanCw721?.filter({ $0["chain"].stringValue == chain.apiName }) ?? []
+
                 self.cosmosBalances = balance
                 
                 delegations?.forEach({ delegation in
@@ -109,6 +109,7 @@ class CosmosFetcher {
                 }
                 let userDisplaytoken = BaseData.instance.getDisplayCw20s(id, self.chain.tag)
                 await mintscanCw20Tokens.concurrentForEach { cw20 in
+                    cw20.type = "cw20"
                     if (userDisplaytoken == nil) {
                         if (cw20.wallet_preload == true) {
                             await self.fetchCw20Balance(cw20)
@@ -200,8 +201,13 @@ class CosmosFetcher {
         return cosmosBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0
     }
     
-    func valueTokenCnt() -> Int {
-        return mintscanCw20Tokens.filter {  $0.getAmount() != NSDecimalNumber.zero }.count
+    func valueTokenCnt(_ id: Int64) -> Int {
+        if let tokens = BaseData.instance.getDisplayCw20s(id, chain.tag) {
+            return tokens.count
+            
+        } else {
+            return mintscanCw20Tokens.filter({ $0.wallet_preload == true }).count
+        }
     }
 
     func isRewardAddressChanged() -> Bool {
@@ -222,15 +228,23 @@ extension CosmosFetcher {
         return NSDecimalNumber.zero
     }
     
-    func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
+    func allTokenValue(_ id: Int64, _ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         
-        if chain.isSupportCw20() {
-            mintscanCw20Tokens.forEach { tokenInfo in
+        if let tokens = BaseData.instance.getDisplayCw20s(id, chain.tag) {
+            mintscanCw20Tokens.filter({ tokens.contains($0.address ?? "") }).forEach { tokenInfo in
                 let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
                 let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
                 result = result.adding(value)
             }
+            
+        } else {
+            mintscanCw20Tokens.filter({ $0.wallet_preload == true }).forEach { tokenInfo in
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
+            }
+            
         }
         return result
     }
@@ -466,15 +480,6 @@ extension CosmosFetcher {
     func commissionOtherDenoms() -> Int {
         return cosmosCommissions.filter { $0.denom != chain.stakeDenom }.count
     }
-}
-
-//about mintscan api
-extension CosmosFetcher {
-    func fetchCw721Info() async throws -> [JSON]? {
-        if (!chain.isSupportCw721()) { return [] }
-        return try await AF.request(BaseNetWork.msCw721InfoUrl(chain.apiName), method: .get).serializingDecodable(JSON.self).value["assets"].arrayValue
-    }
-
 }
 
 //about web3 call api

@@ -48,6 +48,7 @@ class EvmFetcher {
             let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)
             self.mintscanErc20Tokens = BaseData.instance.mintscanErc20Tokens?.filter({ $0.chainName == chain.apiName }) ?? []
             await mintscanErc20Tokens.concurrentForEach { erc20 in
+                erc20.type = "erc20"
                 if (userDisplaytoken == nil) {
                     if (erc20.wallet_preload == true) {
                         await self.fetchErc20Balance(erc20)
@@ -82,12 +83,23 @@ class EvmFetcher {
         return NSDecimalNumber.zero
     }
     
-    func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
+    func allTokenValue(_ id: Int64, _ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
-        mintscanErc20Tokens.forEach { tokenInfo in
-            let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
-            let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
-            result = result.adding(value)
+        
+        if let tokens = BaseData.instance.getDisplayErc20s(id, chain.tag) {
+            mintscanErc20Tokens.filter({ tokens.contains($0.address ?? "") }).forEach { tokenInfo in
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
+            }
+            
+        } else {
+            mintscanErc20Tokens.filter({ $0.wallet_preload == true }).forEach { tokenInfo in
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
+            }
+            
         }
         return result
     }
@@ -96,8 +108,13 @@ class EvmFetcher {
         return evmBalances != NSDecimalNumber.zero ? 1 : 0
     }
     
-    func valueTokenCnt() -> Int {
-        return mintscanErc20Tokens.filter {  $0.getAmount() != NSDecimalNumber.zero }.count
+    func valueTokenCnt(_ id: Int64) -> Int {
+        if let tokens = BaseData.instance.getDisplayErc20s(id, chain.tag) {
+            return tokens.count
+            
+        } else {
+            return mintscanErc20Tokens.filter({ $0.wallet_preload == true }).count
+        }
     }
     
 }

@@ -84,9 +84,9 @@ class ChainGno: BaseChain  {
                     coinsValue = gnoFetcher.allCoinValue()
                     coinsUSDValue = gnoFetcher.allCoinValue(true)
                     mainCoinAmount = gnoFetcher.allStakingDenomAmount()
-                    tokensCnt = gnoFetcher.valueTokenCnt()
-                    tokensValue = gnoFetcher.allTokenValue()
-                    tokensUSDValue = gnoFetcher.allTokenValue(true)
+                    tokensCnt = gnoFetcher.valueTokenCnt(id)
+                    tokensValue = gnoFetcher.allTokenValue(id)
+                    tokensUSDValue = gnoFetcher.allTokenValue(id, true)
                 }
                 
                 allCoinValue = coinsValue

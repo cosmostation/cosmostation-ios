@@ -225,6 +225,7 @@
 "str_inflation" = "インフレーション";
 "str_est_apr" = "予想収益率";
 "str_days" = "日";
+"str_hours" = "時間";
 "str_staking_asset" = "ステーキングコイン";
 "str_chain_id" = "チェーンID";
 "str_chain_id_cosmos" = "チェーンID(cosmos形式)";
@@ -1337,7 +1338,9 @@
 "tx_kava_earn_withdraw" = "Earn Liquidate Withdraw";
 
 "tx_ibc_send" = "IBC Send";
+"tx_ibc_eureka_send" = "IBC Eureka Send";
 "tx_ibc_receive" = "IBC Received";
+"tx_ibc_eureka_receive" = "IBC Eureka Received";
 "tx_ibc_client_update" = "IBC Client Update";
 "tx_ibc_acknowledgement" = "IBC Ack";
 

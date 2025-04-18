@@ -69,9 +69,9 @@ class ChainNeutron: BaseChain {
                 coinsValue = neutronFetcher.allCoinValue()
                 coinsUSDValue = neutronFetcher.allCoinValue(true)
                 mainCoinAmount = neutronFetcher.allStakingDenomAmount()
-                tokensCnt = neutronFetcher.valueTokenCnt()
-                tokensValue = neutronFetcher.allTokenValue()
-                tokensUSDValue = neutronFetcher.allTokenValue(true)
+                tokensCnt = neutronFetcher.valueTokenCnt(id)
+                tokensValue = neutronFetcher.allTokenValue(id)
+                tokensUSDValue = neutronFetcher.allTokenValue(id, true)
                 
                 allCoinValue = coinsValue
                 allCoinUSDValue = coinsUSDValue

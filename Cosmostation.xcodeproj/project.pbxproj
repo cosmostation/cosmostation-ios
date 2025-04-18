@@ -2173,6 +2173,10 @@
 		E14577FD2B3EC50C00EEFA8E /* CosmosClaimCommission.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14577FA2B3EC50C00EEFA8E /* CosmosClaimCommission.swift */; };
 		E14577FE2B3EC50C00EEFA8E /* CosmosClaimCommission.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14577FB2B3EC50C00EEFA8E /* CosmosClaimCommission.xib */; };
 		E14577FF2B3EC50C00EEFA8E /* CosmosClaimCommission.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14577FB2B3EC50C00EEFA8E /* CosmosClaimCommission.xib */; };
+		E14B92DB2DAFEF670030D4F0 /* ChainMonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14B92DA2DAFEF670030D4F0 /* ChainMonad.swift */; };
+		E14B92DC2DAFEF670030D4F0 /* ChainMonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14B92DA2DAFEF670030D4F0 /* ChainMonad.swift */; };
+		E14B92DE2DAFEF7C0030D4F0 /* ChainMonad_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14B92DD2DAFEF7C0030D4F0 /* ChainMonad_T.swift */; };
+		E14B92DF2DAFEF7C0030D4F0 /* ChainMonad_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14B92DD2DAFEF7C0030D4F0 /* ChainMonad_T.swift */; };
 		E14E29752A98DA5300939AD2 /* SelectChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29732A98DA5300939AD2 /* SelectChainCell.swift */; };
 		E14E29762A98DA5300939AD2 /* SelectChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29732A98DA5300939AD2 /* SelectChainCell.swift */; };
 		E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14E29742A98DA5300939AD2 /* SelectChainCell.xib */; };
@@ -3614,6 +3618,8 @@
 		E13FC5462B26C7990082C66E /* kava_earn_v1beta1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_earn_v1beta1_params.pb.swift; sourceTree = "<group>"; };
 		E14577FA2B3EC50C00EEFA8E /* CosmosClaimCommission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClaimCommission.swift; sourceTree = "<group>"; };
 		E14577FB2B3EC50C00EEFA8E /* CosmosClaimCommission.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosClaimCommission.xib; sourceTree = "<group>"; };
+		E14B92DA2DAFEF670030D4F0 /* ChainMonad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMonad.swift; sourceTree = "<group>"; };
+		E14B92DD2DAFEF7C0030D4F0 /* ChainMonad_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMonad_T.swift; sourceTree = "<group>"; };
 		E14E29732A98DA5300939AD2 /* SelectChainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChainCell.swift; sourceTree = "<group>"; };
 		E14E29742A98DA5300939AD2 /* SelectChainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChainCell.xib; sourceTree = "<group>"; };
 		E14E29792A99C2CA00939AD2 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
@@ -3845,6 +3851,7 @@
 				045032322C1EEA9500235F6A /* ChainKavaEVM.swift */,
 				042DE7002C1D7FCB009CAC04 /* ChainOktEVM.swift */,
 				045032362C1EEA9600235F6A /* ChainOptimism.swift */,
+				E14B92DA2DAFEF670030D4F0 /* ChainMonad.swift */,
 				79C5187A2CC9E8C200BC0E85 /* ChainPlanqEVM.swift */,
 				045032332C1EEA9500235F6A /* ChainPolygon.swift */,
 				7981F7632D0C343D00BB50DA /* ChainRealioEVM.swift */,
@@ -4466,6 +4473,7 @@
 				04965B422C37B3AE00403605 /* ChainInitia_T.swift */,
 				7948D66C2D9100F6005208B2 /* ChainLombard_T.swift */,
 				E16FB7252C7595E6005660D1 /* ChainMantra_T.swift */,
+				E14B92DD2DAFEF7C0030D4F0 /* ChainMonad_T.swift */,
 				04D785582C32B171009D1A94 /* ChainNeutron_T.swift */,
 				E18B21FB2C4A4EE900AD572F /* ChainNillion_T.swift */,
 				79909BCC2D8BB51D000CE2ED /* ChainSelf_T.swift */,
@@ -6580,6 +6588,7 @@
 				045033052C1F029A00235F6A /* ChainStarname.swift in Sources */,
 				E1D5A3E52AC33B8000453914 /* CosmosClaimRewards.swift in Sources */,
 				045032D52C1EFE3F00235F6A /* ChainNyx.swift in Sources */,
+				E14B92DB2DAFEF670030D4F0 /* ChainMonad.swift in Sources */,
 				046EA87A2AD04A2500A2FCE7 /* desmos_profiles_v3_query.grpc.swift in Sources */,
 				04C8170B2BA98D75006B800A /* cosmos_capability_module_v1_module.pb.swift in Sources */,
 				042D58692C5CF098003DBDE0 /* MajorHistoryVC.swift in Sources */,
@@ -6973,6 +6982,7 @@
 				04C8175F2BA98D75006B800A /* cosmos_base_tendermint_v1beta1_query.grpc.swift in Sources */,
 				04CD24792AD2E99A00497EF5 /* kava_bep3_v1beta1_tx.grpc.swift in Sources */,
 				E1A48DDF2BFEF5AE0084D770 /* CosmosEcosystemVC.swift in Sources */,
+				E14B92DF2DAFEF7C0030D4F0 /* ChainMonad_T.swift in Sources */,
 				E13FC54A2B26C79A0082C66E /* kava_earn_v1beta1_genesis.pb.swift in Sources */,
 				04C817152BA98D75006B800A /* cosmos_auth_v1beta1_query.grpc.swift in Sources */,
 				0450324A2C1EEA9600235F6A /* ChainHumansEVM.swift in Sources */,
@@ -7551,6 +7561,7 @@
 				04C817BE2BA98D75006B800A /* cosmos_distribution_v1beta1_genesis.pb.swift in Sources */,
 				E13FC5532B26C79A0082C66E /* kava_earn_v1beta1_strategy.pb.swift in Sources */,
 				0409D2FB2AC5ECDD0021E192 /* SelectValidatorCell.swift in Sources */,
+				E14B92DE2DAFEF7C0030D4F0 /* ChainMonad_T.swift in Sources */,
 				04C816CE2BA98D75006B800A /* cosmos_bank_v1beta1_query.grpc.swift in Sources */,
 				E1CD6AF42AEAAEC200376909 /* AboutStakingCell.swift in Sources */,
 				0492AE912A83CC9B001360F0 /* ServiceVC.swift in Sources */,
@@ -8236,6 +8247,7 @@
 				04C816F02BA98D75006B800A /* cosmos_evidence_v1beta1_tx.pb.swift in Sources */,
 				045032B02C1EEFCA00235F6A /* ChainJuno.swift in Sources */,
 				E10F88212C1E1B5800EA4272 /* ChainBeraEVM_T.swift in Sources */,
+				E14B92DC2DAFEF670030D4F0 /* ChainMonad.swift in Sources */,
 				799261662D77EE66007E9911 /* babylon_btcstaking_v1_incentive.pb.swift in Sources */,
 				045032ED2C1EFE5500235F6A /* ChainQuicksilver.swift in Sources */,
 				04CD245F2AD1CD2F00497EF5 /* L_Generator.swift in Sources */,
@@ -8339,7 +8351,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 305;
+				CURRENT_PROJECT_VERSION = 306;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8351,7 +8363,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.25;
+				MARKETING_VERSION = 1.10.26;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -8372,7 +8384,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 305;
+				CURRENT_PROJECT_VERSION = 306;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -8385,7 +8397,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.25;
+				MARKETING_VERSION = 1.10.26;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Cosmostation debug provisioning profile";
@@ -8526,7 +8538,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 305;
+				CURRENT_PROJECT_VERSION = 306;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8540,7 +8552,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.25;
+				MARKETING_VERSION = 1.10.26;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -8560,7 +8572,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 305;
+				CURRENT_PROJECT_VERSION = 306;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8574,7 +8586,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.25;
+				MARKETING_VERSION = 1.10.26;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

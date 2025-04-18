@@ -46,11 +46,19 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
         
         setSegment()
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
     }
     
     override func setLocalizedString() {
         sheetTitle.text = NSLocalizedString("str_edit_token_list", comment: "")
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
+    }
+    
+    @objc func keyboardDismiss() {
+        view.endEditing(true)
     }
 
     @IBAction func onClickConfirm(_ sender: BaseButton) {
@@ -86,6 +94,10 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
             }
         }
         sheetTableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
     }
     
     

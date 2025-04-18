@@ -92,9 +92,9 @@ class ChainOktEVM: BaseChain {
                 coinsValue = oktFetcher.allCoinValue()
                 coinsUSDValue = oktFetcher.allCoinValue(true)
                 mainCoinAmount = oktFetcher.oktAllStakingDenomAmount()
-                tokensCnt = evmFetcher.valueTokenCnt()
-                tokensValue = evmFetcher.allTokenValue()
-                tokensUSDValue = evmFetcher.allTokenValue(true)
+                tokensCnt = evmFetcher.valueTokenCnt(id)
+                tokensValue = evmFetcher.allTokenValue(id)
+                tokensUSDValue = evmFetcher.allTokenValue(id, true)
                 
                 allCoinValue = coinsValue
                 allCoinUSDValue = coinsUSDValue

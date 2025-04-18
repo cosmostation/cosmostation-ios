@@ -72,9 +72,9 @@ class ChainBeraEVM: BaseChain  {
                     coinsValue = evmFetcher.allCoinValue()
                     coinsUSDValue = evmFetcher.allCoinValue(true)
                     mainCoinAmount = evmFetcher.evmBalances
-                    tokensCnt = evmFetcher.valueTokenCnt()
-                    tokensValue = evmFetcher.allTokenValue()
-                    tokensUSDValue = evmFetcher.allTokenValue(true)
+                    tokensCnt = evmFetcher.valueTokenCnt(id)
+                    tokensValue = evmFetcher.allTokenValue(id)
+                    tokensUSDValue = evmFetcher.allTokenValue(id, true)
                 }
                 allCoinValue = coinsValue
                 allCoinUSDValue = coinsUSDValue

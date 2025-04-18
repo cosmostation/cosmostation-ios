@@ -189,14 +189,14 @@ class BaseChain {
                         coinsValue = cosmosFetcher.allCoinValue()
                         coinsUSDValue = cosmosFetcher.allCoinValue(true)
                         mainCoinAmount = cosmosFetcher.allStakingDenomAmount()
-                        tokensCnt = cosmosFetcher.valueTokenCnt()
-                        tokensValue = cosmosFetcher.allTokenValue()
-                        tokensUSDValue = cosmosFetcher.allTokenValue(true)
+                        tokensCnt = cosmosFetcher.valueTokenCnt(id)
+                        tokensValue = cosmosFetcher.allTokenValue(id)
+                        tokensUSDValue = cosmosFetcher.allTokenValue(id, true)
                     }
                     if let evmFetcher = getEvmfetcher() {
-                        tokensCnt = tokensCnt + evmFetcher.valueTokenCnt()
-                        tokensValue = tokensValue.adding(evmFetcher.allTokenValue())
-                        tokensUSDValue = tokensUSDValue.adding(evmFetcher.allTokenValue(true))
+                        tokensCnt = tokensCnt + evmFetcher.valueTokenCnt(id)
+                        tokensValue = tokensValue.adding(evmFetcher.allTokenValue(id))
+                        tokensUSDValue = tokensUSDValue.adding(evmFetcher.allTokenValue(id, true))
                     }
                     
                 } else if (supportCosmos) {
@@ -205,9 +205,9 @@ class BaseChain {
                         coinsValue = cosmosFetcher.allCoinValue()
                         coinsUSDValue = cosmosFetcher.allCoinValue(true)
                         mainCoinAmount = cosmosFetcher.allStakingDenomAmount()
-                        tokensCnt = cosmosFetcher.valueTokenCnt()
-                        tokensValue = cosmosFetcher.allTokenValue()
-                        tokensUSDValue = cosmosFetcher.allTokenValue(true)
+                        tokensCnt = cosmosFetcher.valueTokenCnt(id)
+                        tokensValue = cosmosFetcher.allTokenValue(id)
+                        tokensUSDValue = cosmosFetcher.allTokenValue(id, true)
                     }
                     
                 } else if (supportEvm) {
@@ -216,9 +216,9 @@ class BaseChain {
                         coinsValue = evmFetcher.allCoinValue()
                         coinsUSDValue = evmFetcher.allCoinValue(true)
                         mainCoinAmount = evmFetcher.evmBalances
-                        tokensCnt = evmFetcher.valueTokenCnt()
-                        tokensValue = evmFetcher.allTokenValue()
-                        tokensUSDValue = evmFetcher.allTokenValue(true)
+                        tokensCnt = evmFetcher.valueTokenCnt(id)
+                        tokensValue = evmFetcher.allTokenValue(id)
+                        tokensUSDValue = evmFetcher.allTokenValue(id, true)
                     }
                 }
                 allCoinValue = coinsValue
@@ -302,8 +302,8 @@ class BaseChain {
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.decimals ?? 6
         } else if isSupportGrc20(),
-                 let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
-           return grc20Token.decimals ?? 6
+                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return grc20Token.decimals ?? 6
         }
         return 6
     }
@@ -744,11 +744,12 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainLombard())
     result.append(ChainLum118())
     result.append(ChainLum880())
-//    result.append(ChainManifest())
+    result.append(ChainManifest())
     result.append(ChainMantra())
     result.append(ChainMedibloc())
     result.append(ChainMigaloo())
     result.append(ChainMilkyway())
+//    result.append(ChainMonad())                         //EVM
     result.append(ChainNeutron())
     result.append(ChainNibiru())
     result.append(ChainNillion())
@@ -807,6 +808,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainXion())
     result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
+//    result.append(ChainXrplEVM())                       //EVM
     result.append(ChainZenrock())
     result.append(ChainZetaEVM())                       //EVM
 
@@ -822,11 +824,12 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNeutron_T())
     result.append(ChainNillion_T())
     result.append(ChainMantra_T())
+    result.append(ChainMonad_T())
     result.append(ChainSelf_T())
     result.append(ChainTabiEVM_T())
     result.append(ChainXion_T())
-//    result.append(ChainXrplEVM_T())
-//    result.append(ChainZkCloud_T())
+    result.append(ChainXrplEVM_T())
+    result.append(ChainZkCloud_T())
     
     
     

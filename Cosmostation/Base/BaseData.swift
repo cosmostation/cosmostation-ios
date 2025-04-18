@@ -28,6 +28,7 @@ final class BaseData: NSObject{
     var mintscanCw20Tokens: [MintscanToken]?
     var mintscanErc20Tokens: [MintscanToken]?
     var mintscanGrc20Tokens: [MintscanToken]?
+    var mintscanCw721: [JSON]?
     var baseAccount: BaseAccount?
     
     

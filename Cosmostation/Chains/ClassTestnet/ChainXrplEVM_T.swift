@@ -12,7 +12,7 @@ class ChainXrplEVM_T: ChainXrplEVM {
     override init() {
         super.init()
         
-        name = "XRPL EVM Testnet"
+        name = "XRPL EVM Sidechain Testnet"
         tag = "xrplevm60_T"
         isTestnet = true
         apiName = "xrplevm-testnet"

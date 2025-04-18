@@ -254,8 +254,8 @@ public class BaseAccount {
                 if let oktFetcher = chain.getOktfetcher(), let evmFetcher = chain.getEvmfetcher() {
                     chain.allCoinValue = oktFetcher.allCoinValue()
                     chain.allCoinUSDValue = oktFetcher.allCoinValue(true)
-                    chain.allTokenValue = evmFetcher.allTokenValue()
-                    chain.allTokenUSDValue = evmFetcher.allTokenValue(true)
+                    chain.allTokenValue = evmFetcher.allTokenValue(id)
+                    chain.allTokenUSDValue = evmFetcher.allTokenValue(id, true)
                     
                 } else if let oktFetcher = chain.getOktfetcher() {
                     chain.allCoinValue = oktFetcher.allCoinValue()
@@ -265,14 +265,14 @@ public class BaseAccount {
             } else if let cosmosFetcher = chain.getCosmosfetcher() {
                 chain.allCoinValue = cosmosFetcher.allCoinValue()
                 chain.allCoinUSDValue = cosmosFetcher.allCoinValue(true)
-                chain.allTokenValue = cosmosFetcher.allTokenValue()
-                chain.allTokenUSDValue = cosmosFetcher.allTokenValue(true)
+                chain.allTokenValue = cosmosFetcher.allTokenValue(id)
+                chain.allTokenUSDValue = cosmosFetcher.allTokenValue(id, true)
                 
             } else if let evmFetcher = chain.getEvmfetcher() {
                 chain.allCoinValue = evmFetcher.allCoinValue()
                 chain.allCoinUSDValue = evmFetcher.allCoinValue(true)
-                chain.allTokenValue = evmFetcher.allTokenValue()
-                chain.allTokenUSDValue = evmFetcher.allTokenValue(true)
+                chain.allTokenValue = evmFetcher.allTokenValue(id)
+                chain.allTokenUSDValue = evmFetcher.allTokenValue(id, true)
                 
             } else if let suiFetcher = (chain as? ChainSui)?.getSuiFetcher() {
                 chain.allCoinValue = suiFetcher.allValue()
@@ -285,8 +285,8 @@ public class BaseAccount {
             } else if let gnoFetcher = (chain as? ChainGno)?.getGnoFetcher() {
                 chain.allCoinValue = gnoFetcher.allCoinValue()
                 chain.allCoinUSDValue = gnoFetcher.allCoinValue(true)
-                chain.allTokenValue = gnoFetcher.allTokenValue()
-                chain.allTokenUSDValue = gnoFetcher.allTokenValue(true)
+                chain.allTokenValue = gnoFetcher.allTokenValue(id)
+                chain.allTokenUSDValue = gnoFetcher.allTokenValue(id, true)
             }
         }
     }
