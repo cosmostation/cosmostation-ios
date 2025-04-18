@@ -17,7 +17,7 @@ class ChainInitia: BaseChain  {
         tag = "initia"
         logo1 = "chainInitia"
         apiName = "initia"
-        accountKeyType = AccountKeyType(.INITIA_Keccak256, "m/44'/118'/0'/0/X")
+        accountKeyType = AccountKeyType(.INITIA_Keccak256, "m/44'/60'/0'/0/X")
         
         
         cosmosEndPointType = .UseGRPC
