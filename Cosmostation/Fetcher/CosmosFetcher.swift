@@ -69,8 +69,7 @@ class CosmosFetcher {
         cosmosBaseFees.removeAll()
         
         do {
-            if let cw721List = try? await fetchCw721Info(),
-               let balance = try await fetchBalance(),
+            if let balance = try await fetchBalance(),
                let _ = try? await fetchAuth(),
                let delegations = try? await fetchDelegation(),
                let unbonding = try? await fetchUnbondings(),
@@ -80,7 +79,8 @@ class CosmosFetcher {
                let baseFees = try? await fetchBaseFee() {
                 
                 self.mintscanCw20Tokens =  BaseData.instance.mintscanCw20Tokens?.filter({ $0.chainName == chain.apiName }) ?? []
-                self.mintscanCw721List = cw721List ?? []
+                self.mintscanCw721List = BaseData.instance.mintscanCw721?.filter({ $0["chain"].stringValue == chain.apiName }) ?? []
+
                 self.cosmosBalances = balance
                 
                 delegations?.forEach({ delegation in
@@ -109,6 +109,7 @@ class CosmosFetcher {
                 }
                 let userDisplaytoken = BaseData.instance.getDisplayCw20s(id, self.chain.tag)
                 await mintscanCw20Tokens.concurrentForEach { cw20 in
+                    cw20.type = "cw20"
                     if (userDisplaytoken == nil) {
                         if (cw20.wallet_preload == true) {
                             await self.fetchCw20Balance(cw20)
@@ -479,15 +480,6 @@ extension CosmosFetcher {
     func commissionOtherDenoms() -> Int {
         return cosmosCommissions.filter { $0.denom != chain.stakeDenom }.count
     }
-}
-
-//about mintscan api
-extension CosmosFetcher {
-    func fetchCw721Info() async throws -> [JSON]? {
-        if (!chain.isSupportCw721()) { return [] }
-        return try await AF.request(BaseNetWork.msCw721InfoUrl(chain.apiName), method: .get).serializingDecodable(JSON.self).value["assets"].arrayValue
-    }
-
 }
 
 //about web3 call api

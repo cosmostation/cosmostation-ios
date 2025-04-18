@@ -105,6 +105,20 @@ class BaseNetWork {
             }
     }
     
+    func fetchCw721s() {
+        AF.request(BaseNetWork.msCw721Url(), method: .get)
+            .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
+                switch response.result {
+                case .success(let value):
+                    BaseData.instance.mintscanCw721 = value["assets"].arrayValue
+                case .failure:
+                    print("fetchErc20 error ", response.error)
+                }
+                NotificationCenter.default.post(name: Notification.Name("FetchCw721s"), object: nil, userInfo: nil)
+            }
+    }
+
+    
     static func getAccountHistoryUrl(_ chain: BaseChain, _ address: String) -> String {
         if (chain.tag.starts(with: "okt")) {
             return MINTSCAN_API_URL + "v10/" + chain.apiName + "/proxy/okx/account/" + address + "/txs"
@@ -144,8 +158,8 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v11/utils/params"
     }
     
-    static func msCw721InfoUrl(_ apiName: String) -> String {
-        return MINTSCAN_API_URL + "v11/assets/" + apiName + "/cw721"
+    static func msCw721Url() -> String {
+        return MINTSCAN_API_URL + "v11/assets/cw721"
     }
     
     static func msProposals(_ chain: BaseChain) -> String {
