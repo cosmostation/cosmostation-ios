@@ -423,7 +423,7 @@ class DappCosmosSignRequestSheet: BaseVC {
             sig = SECP256K1.compactsign(signData.sha3(.keccak256), privateKey: privateKey)!
             type = INJECTIVE_KEY_TYPE_PUBLIC
             
-        } else if (targetChain.accountKeyType.pubkeyType == .ETH_Keccak256 || targetChain.accountKeyType.pubkeyType == .STRATOS_Keccak256) {
+        } else if (targetChain.accountKeyType.pubkeyType == .ETH_Keccak256 || targetChain.accountKeyType.pubkeyType == .STRATOS_Keccak256 || targetChain.accountKeyType.pubkeyType == .INITIA_Keccak256) {
             sig = SECP256K1.compactsign(signData.sha3(.keccak256), privateKey: privateKey)!
             type = ETHERMINT_KEY_TYPE_PUBLIC
             

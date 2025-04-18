@@ -314,6 +314,7 @@ public enum PubKeyType: Int {
     case BTC_Native_Segwit = 8
     case BTC_Taproot = 9
     case STRATOS_Keccak256 = 10
+    case INITIA_Keccak256 = 11
     case unknown = 99
     
     var algorhythm: String? {
@@ -339,6 +340,8 @@ public enum PubKeyType: Int {
         case PubKeyType.BTC_Taproot:
             return "p2tr"
         case PubKeyType.STRATOS_Keccak256:
+            return "keccak256"
+        case PubKeyType.INITIA_Keccak256:
             return "keccak256"
         case PubKeyType.unknown:
             return "unknown"

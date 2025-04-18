@@ -18,7 +18,7 @@ class ChainInitia_T: ChainInitia  {
         logo1 = "chainInitia_T"
         isTestnet = true
         apiName = "initia-testnet"
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        accountKeyType = AccountKeyType(.INITIA_Keccak256, "m/44'/60'/0'/0/X")
         
         
         cosmosEndPointType = .UseGRPC
