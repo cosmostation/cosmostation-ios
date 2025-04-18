@@ -225,6 +225,7 @@
 "str_inflation" = "インフレーション";
 "str_est_apr" = "予想収益率";
 "str_days" = "日";
+"str_hours" = "時間";
 "str_staking_asset" = "ステーキングコイン";
 "str_chain_id" = "チェーンID";
 "str_chain_id_cosmos" = "チェーンID(cosmos形式)";

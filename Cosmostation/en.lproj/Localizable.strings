@@ -225,6 +225,7 @@
 "str_inflation" = "Inflation";
 "str_est_apr" = "Staking APR (est)";
 "str_days" = "Days";
+"str_hours" = "Hours";
 "str_staking_asset" = "Staking Asset";
 "str_chain_id" = "Chain Id";
 "str_chain_id_cosmos" = "Chain Id (cosmos style)";
