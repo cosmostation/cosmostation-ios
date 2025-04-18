@@ -15,7 +15,6 @@ class ChainLombard_T: ChainLombard  {
         
         name = "Lombard Testnet"
         tag = "lombard118_T"
-        logo1 = "chainLombard_T"
         isTestnet = true
         apiName = "lombard-testnet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

@@ -15,7 +15,6 @@ class ChainBitCoin49_T: ChainBitCoin86_T {
         
         name = "Bitcoin Signet"
         tag = "bitcoin49_T"
-        logo1 = "chainBitcoin_T"
         isDefault = false
         isTestnet = true
         apiName = "bitcoin-testnet"

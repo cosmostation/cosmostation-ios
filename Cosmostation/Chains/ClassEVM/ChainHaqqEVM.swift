@@ -15,7 +15,6 @@ class ChainHaqqEVM: BaseChain  {
         
         name = "Haqq"
         tag = "haqq60"
-        logo1 = "chainHaqq"
         apiName = "haqq"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

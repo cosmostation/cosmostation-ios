@@ -15,7 +15,6 @@ class ChainOrai: BaseChain  {
         
         name = "OraiChain"
         tag = "orai118"
-        logo1 = "chainOrai"
         apiName = "orai-chain"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

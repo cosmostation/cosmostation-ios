@@ -15,7 +15,6 @@ class ChainTabiEVM_T: ChainTabiEVM  {
         
         name = "TabiChain Testnet"
         tag = "tabi_T"
-        logo1 = "chainTabi_T"
         isTestnet = true
         apiName = "tabichain-testnet"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")

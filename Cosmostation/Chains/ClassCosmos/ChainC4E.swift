@@ -15,7 +15,6 @@ class ChainC4E: BaseChain  {
         
         name = "Chain4Energy"
         tag = "chain4energy"
-        logo1 = "chainC4e"
         apiName = "chain4energy"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

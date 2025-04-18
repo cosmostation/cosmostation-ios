@@ -15,7 +15,6 @@ class ChainAssetMantle: BaseChain  {
         
         name = "AssetMantle"
         tag = "assetmantle118"
-        logo1 = "chainAssetmantle"
         apiName = "asset-mantle"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

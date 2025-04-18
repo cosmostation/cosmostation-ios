@@ -15,7 +15,6 @@ class ChainMedibloc: BaseChain  {
         
         name = "Medibloc"
         tag = "medibloc371"
-        logo1 = "chainMedibloc"
         apiName = "medibloc"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/371'/0'/0/X")
         

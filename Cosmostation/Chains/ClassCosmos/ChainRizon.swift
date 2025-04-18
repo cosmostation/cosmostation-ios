@@ -15,7 +15,6 @@ class ChainRizon: BaseChain  {
         
         name = "Rizon"
         tag = "rizon118"
-        logo1 = "chainRizon"
         apiName = "rizon"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

@@ -15,7 +15,6 @@ class ChainXrplEVM: BaseChain {
         
         name = "XRPL EVM"
         tag = "xrplevm60"
-        logo1 = "chainXrplevm"
         apiName = "xrplevm"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

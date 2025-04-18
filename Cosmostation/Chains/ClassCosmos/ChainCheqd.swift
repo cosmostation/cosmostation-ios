@@ -15,7 +15,6 @@ class ChainCheqd: BaseChain  {
         
         name = "Cheqd"
         tag = "cheqd118"
-        logo1 = "chainCheqd"
         apiName = "cheqd"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

@@ -14,7 +14,6 @@ class BaseChain {
     //account and common info
     var name: String!
     var tag: String!
-    var logo1: String!
     var isTestnet = false
     var isDefault = true
     var apiName: String!
@@ -53,8 +52,7 @@ class BaseChain {
     }
     var evmAddress: String?
     var coinSymbol = ""
-    var coinGeckoId = ""
-    var coinLogo = ""
+
     var evmRpcURL = ""
     
     

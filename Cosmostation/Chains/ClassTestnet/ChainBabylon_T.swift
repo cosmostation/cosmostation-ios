@@ -15,7 +15,6 @@ class ChainBabylon_T: ChainBabylon {
         
         name = "Babylon Testnet"
         tag = "babylon118_T"
-        logo1 = "chainBabylon_T"
         isTestnet = true
         apiName = "babylon-testnet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

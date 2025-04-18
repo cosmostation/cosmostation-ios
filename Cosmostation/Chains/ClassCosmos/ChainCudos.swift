@@ -15,7 +15,6 @@ class ChainCudos: BaseChain {
         
         name = "Cudos"
         tag = "cudos118"
-        logo1 = "chainCudos"
         apiName = "cudos"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

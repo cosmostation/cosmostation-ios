@@ -15,7 +15,6 @@ class ChainHumansEVM: BaseChain  {
         
         name = "Humans"
         tag = "humans60"
-        logo1 = "chainHumans"
         apiName = "humans"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

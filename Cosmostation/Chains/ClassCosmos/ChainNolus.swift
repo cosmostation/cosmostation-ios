@@ -15,7 +15,6 @@ class ChainNolus: BaseChain  {
         
         name = "Nolus"
         tag = "nolus118"
-        logo1 = "chainNolus"
         apiName = "nolus"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

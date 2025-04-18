@@ -15,7 +15,6 @@ class ChainCosmos: BaseChain {
         
         name = "Cosmos Hub"
         tag = "cosmos118"
-        logo1 = "chainCosmos"
         apiName = "cosmos"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

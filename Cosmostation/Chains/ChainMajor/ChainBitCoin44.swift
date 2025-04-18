@@ -15,7 +15,6 @@ class ChainBitCoin44: ChainBitCoin86 {
         
         name = "Bitcoin"
         tag = "bitcoin44"
-        logo1 = "chainBitcoin"
         isDefault = false
         apiName = "bitcoin"
         accountKeyType = AccountKeyType(.BTC_Legacy, "m/44'/0'/0'/0/X")

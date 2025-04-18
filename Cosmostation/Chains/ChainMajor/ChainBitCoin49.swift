@@ -15,7 +15,6 @@ class ChainBitCoin49: ChainBitCoin86 {
         
         name = "Bitcoin"
         tag = "bitcoin49"
-        logo1 = "chainBitcoin"
         isDefault = false
         apiName = "bitcoin"
         accountKeyType = AccountKeyType(.BTC_Nested_Segwit, "m/49'/0'/0'/0/X")

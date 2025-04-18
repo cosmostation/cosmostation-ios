@@ -15,7 +15,6 @@ class ChainNoble: BaseChain  {
         
         name = "Noble"
         tag = "noble118"
-        logo1 = "chainNoble"
         apiName = "noble"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

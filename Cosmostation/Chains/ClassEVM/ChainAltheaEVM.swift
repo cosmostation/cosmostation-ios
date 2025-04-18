@@ -15,7 +15,6 @@ class ChainAltheaEVM: BaseChain {
         
         name = "Althea"
         tag = "althea60"
-        logo1 = "chainAltheaEvm"
         apiName = "althea"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

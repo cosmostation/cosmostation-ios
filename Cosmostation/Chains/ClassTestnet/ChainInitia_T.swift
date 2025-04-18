@@ -15,7 +15,6 @@ class ChainInitia_T: ChainInitia  {
         
         name = "Initia Testnet"
         tag = "initia_T"
-        logo1 = "chainInitia_T"
         isTestnet = true
         apiName = "initia-testnet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

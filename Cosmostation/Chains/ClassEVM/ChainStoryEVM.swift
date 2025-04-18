@@ -15,7 +15,6 @@ class ChainStoryEVM: BaseChain {
         
         name = "Story"
         tag = "story"
-        logo1 = "chainStory"
         apiName = "story"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

@@ -15,7 +15,6 @@ class ChainRealioEVM: BaseChain {
         
         name = "Realio"
         tag = "realio60"
-        logo1 = "chainRealio"
         apiName = "realio"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

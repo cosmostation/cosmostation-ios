@@ -15,7 +15,6 @@ class ChainGno_T: ChainGno {
         
         name = "Gno Testnet"
         tag = "gno118_T"
-        logo1 = "chainGno_T"
         isTestnet = true
         apiName = "gno-testnet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
