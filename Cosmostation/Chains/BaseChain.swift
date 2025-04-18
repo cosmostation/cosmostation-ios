@@ -304,8 +304,8 @@ class BaseChain {
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.decimals ?? 6
         } else if isSupportGrc20(),
-                 let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
-           return grc20Token.decimals ?? 6
+                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return grc20Token.decimals ?? 6
         }
         return 6
     }
@@ -816,7 +816,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBabylon_T())
     result.append(ChainBitCoin84_T())
     result.append(ChainBitCoin86_T())
-//    result.append(ChainGno_T())
+    result.append(ChainGno_T())
     result.append(ChainInitia_T())
 //    result.append(ChainLombard_T())
     result.append(ChainNeutron_T())

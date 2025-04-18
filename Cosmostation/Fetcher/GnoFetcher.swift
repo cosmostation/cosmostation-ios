@@ -181,8 +181,8 @@ extension GnoFetcher {
             return
         }
         let jsonData = try JSON(data: data!)
-        gnoAccountNumber = jsonData["BaseAccount"]["account_number"].uInt64Value
-        gnoSequenceNum = jsonData["BaseAccount"]["sequence"].uInt64Value
+        gnoAccountNumber = UInt64(jsonData["BaseAccount"]["account_number"].stringValue)
+        gnoSequenceNum = UInt64(jsonData["BaseAccount"]["sequence"].stringValue)
     }
     
     func fetchBalance() async throws -> [Cosmos_Base_V1beta1_Coin]? {
