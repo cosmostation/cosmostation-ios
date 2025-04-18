@@ -191,14 +191,14 @@ class BaseChain {
                         coinsValue = cosmosFetcher.allCoinValue()
                         coinsUSDValue = cosmosFetcher.allCoinValue(true)
                         mainCoinAmount = cosmosFetcher.allStakingDenomAmount()
-                        tokensCnt = cosmosFetcher.valueTokenCnt()
-                        tokensValue = cosmosFetcher.allTokenValue()
-                        tokensUSDValue = cosmosFetcher.allTokenValue(true)
+                        tokensCnt = cosmosFetcher.valueTokenCnt(id)
+                        tokensValue = cosmosFetcher.allTokenValue(id)
+                        tokensUSDValue = cosmosFetcher.allTokenValue(id, true)
                     }
                     if let evmFetcher = getEvmfetcher() {
-                        tokensCnt = tokensCnt + evmFetcher.valueTokenCnt()
-                        tokensValue = tokensValue.adding(evmFetcher.allTokenValue())
-                        tokensUSDValue = tokensUSDValue.adding(evmFetcher.allTokenValue(true))
+                        tokensCnt = tokensCnt + evmFetcher.valueTokenCnt(id)
+                        tokensValue = tokensValue.adding(evmFetcher.allTokenValue(id))
+                        tokensUSDValue = tokensUSDValue.adding(evmFetcher.allTokenValue(id, true))
                     }
                     
                 } else if (supportCosmos) {
@@ -207,9 +207,9 @@ class BaseChain {
                         coinsValue = cosmosFetcher.allCoinValue()
                         coinsUSDValue = cosmosFetcher.allCoinValue(true)
                         mainCoinAmount = cosmosFetcher.allStakingDenomAmount()
-                        tokensCnt = cosmosFetcher.valueTokenCnt()
-                        tokensValue = cosmosFetcher.allTokenValue()
-                        tokensUSDValue = cosmosFetcher.allTokenValue(true)
+                        tokensCnt = cosmosFetcher.valueTokenCnt(id)
+                        tokensValue = cosmosFetcher.allTokenValue(id)
+                        tokensUSDValue = cosmosFetcher.allTokenValue(id, true)
                     }
                     
                 } else if (supportEvm) {
@@ -218,9 +218,9 @@ class BaseChain {
                         coinsValue = evmFetcher.allCoinValue()
                         coinsUSDValue = evmFetcher.allCoinValue(true)
                         mainCoinAmount = evmFetcher.evmBalances
-                        tokensCnt = evmFetcher.valueTokenCnt()
-                        tokensValue = evmFetcher.allTokenValue()
-                        tokensUSDValue = evmFetcher.allTokenValue(true)
+                        tokensCnt = evmFetcher.valueTokenCnt(id)
+                        tokensValue = evmFetcher.allTokenValue(id)
+                        tokensUSDValue = evmFetcher.allTokenValue(id, true)
                     }
                 }
                 allCoinValue = coinsValue

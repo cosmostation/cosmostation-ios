@@ -200,8 +200,13 @@ class CosmosFetcher {
         return cosmosBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0
     }
     
-    func valueTokenCnt() -> Int {
-        return mintscanCw20Tokens.filter {  $0.getAmount() != NSDecimalNumber.zero }.count
+    func valueTokenCnt(_ id: Int64) -> Int {
+        if let tokens = BaseData.instance.getDisplayCw20s(id, chain.tag) {
+            return tokens.count
+            
+        } else {
+            return mintscanCw20Tokens.filter({ $0.wallet_preload == true }).count
+        }
     }
 
     func isRewardAddressChanged() -> Bool {
@@ -222,15 +227,23 @@ extension CosmosFetcher {
         return NSDecimalNumber.zero
     }
     
-    func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
+    func allTokenValue(_ id: Int64, _ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         
-        if chain.isSupportCw20() {
-            mintscanCw20Tokens.forEach { tokenInfo in
+        if let tokens = BaseData.instance.getDisplayCw20s(id, chain.tag) {
+            mintscanCw20Tokens.filter({ tokens.contains($0.address ?? "") }).forEach { tokenInfo in
                 let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
                 let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
                 result = result.adding(value)
             }
+            
+        } else {
+            mintscanCw20Tokens.filter({ $0.wallet_preload == true }).forEach { tokenInfo in
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
+            }
+            
         }
         return result
     }

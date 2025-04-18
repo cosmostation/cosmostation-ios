@@ -47,6 +47,7 @@ class GnoFetcher {
                 self.gnoBalances = balance
                 let userDisplayGrc20token = BaseData.instance.getDisplayGrc20s(id, self.chain.tag)
                 await mintscanGrc20Tokens.concurrentForEach { grc20 in
+                    grc20.type = "grc20"
                     if (userDisplayGrc20token == nil) {
                         if (grc20.wallet_preload == true) {
                             await self.fetchGrc20Balance(grc20)
@@ -83,8 +84,13 @@ class GnoFetcher {
         return gnoBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0
     }
     
-    func valueTokenCnt() -> Int {
-            return mintscanGrc20Tokens.filter({ $0.getAmount() != NSDecimalNumber.zero }).count
+    func valueTokenCnt(_ id: Int64) -> Int {
+        if let tokens = BaseData.instance.getDisplayGrc20s(id, chain.tag) {
+            return tokens.count
+            
+        } else {
+            return mintscanGrc20Tokens.filter({ $0.wallet_preload == true }).count
+        }
     }
 }
 
@@ -103,17 +109,23 @@ extension GnoFetcher {
         return NSDecimalNumber.zero
     }
     
-    func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
+    func allTokenValue(_ id: Int64, _ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         
-        if chain.isSupportGrc20() {
-            mintscanGrc20Tokens.forEach { tokenInfo in
+        if let tokens = BaseData.instance.getDisplayGrc20s(id, chain.tag) {
+            mintscanGrc20Tokens.filter({ tokens.contains($0.address ?? "") }).forEach { tokenInfo in
                 let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
-                if msPrice != 0 {
-                    let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
-                    result = result.adding(value)
-                }
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
             }
+            
+        } else {
+            mintscanGrc20Tokens.filter({ $0.wallet_preload == true }).forEach { tokenInfo in
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
+            }
+            
         }
         
         return result
