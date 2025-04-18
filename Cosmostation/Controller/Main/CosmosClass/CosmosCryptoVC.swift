@@ -291,8 +291,6 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                     mintscanCw20Tokens.forEach { token in
                         if token.wallet_preload == true {
                             toDisplayCw20Tokens.append(token)
-                        } else if (token.getAmount() != NSDecimalNumber.zero) {
-                            toDisplayCw20Tokens.append(token)
                         }
                     }
 

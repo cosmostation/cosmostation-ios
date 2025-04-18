@@ -139,8 +139,6 @@ class EvmAssetVC: BaseVC, SelectTokensListDelegate {
                             toDisplayErc20Tokens.append(tokens)
                         } else if tokens.wallet_preload == true {
                             toDisplayErc20Tokens.append(tokens)
-                        } else if tokens.getAmount() != NSDecimalNumber.zero {
-                            toDisplayErc20Tokens.append(tokens)
                         }
                     }
                 }
