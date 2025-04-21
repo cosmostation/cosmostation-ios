@@ -49,11 +49,19 @@ class DappListViewController: BaseVC {
         switch DappSortType(rawValue: rawValue) ?? .alphabet {
         case .alphabet :
             self.allEcosystems.sort {
-                $0["name"].stringValue < $1["name"].stringValue
+                if favoriteModel.favorites.contains($0["id"].intValue) != favoriteModel.favorites.contains($1["id"].intValue)  {
+                    return favoriteModel.favorites.contains($0["id"].intValue) && !favoriteModel.favorites.contains($1["id"].intValue)
+                } else {
+                    return $0["name"].stringValue < $1["name"].stringValue
+                }
             }
         case .networks:
             self.allEcosystems.sort {
-                $0["chains"].arrayValue.count > $1["chains"].arrayValue.count
+                if favoriteModel.favorites.contains($0["id"].intValue) != favoriteModel.favorites.contains($1["id"].intValue)  {
+                    return favoriteModel.favorites.contains($0["id"].intValue) && !favoriteModel.favorites.contains($1["id"].intValue)
+                } else {
+                    return $0["chains"].arrayValue.count > $1["chains"].arrayValue.count
+                }
             }
         }
         
@@ -342,12 +350,20 @@ extension DappListViewController: BaseSheetDelegate {
                 
                 switch DappSortType(rawValue: index) ?? .alphabet {
                 case .alphabet :
-                    allEcosystems.sort {
-                        $0["name"].stringValue < $1["name"].stringValue
+                    self.allEcosystems.sort {
+                        if favoriteModel.favorites.contains($0["id"].intValue) != favoriteModel.favorites.contains($1["id"].intValue)  {
+                            return favoriteModel.favorites.contains($0["id"].intValue) && !favoriteModel.favorites.contains($1["id"].intValue)
+                        } else {
+                            return $0["name"].stringValue < $1["name"].stringValue
+                        }
                     }
                 case .networks:
-                    allEcosystems.sort {
-                        $0["chains"].arrayValue.count > $1["chains"].arrayValue.count
+                    self.allEcosystems.sort {
+                        if favoriteModel.favorites.contains($0["id"].intValue) != favoriteModel.favorites.contains($1["id"].intValue)  {
+                            return favoriteModel.favorites.contains($0["id"].intValue) && !favoriteModel.favorites.contains($1["id"].intValue)
+                        } else {
+                            return $0["chains"].arrayValue.count > $1["chains"].arrayValue.count
+                        }
                     }
                 }
                 
