@@ -14,10 +14,11 @@ class ChainInitia_T: ChainInitia  {
         super.init()
         
         name = "Initia Testnet"
-        tag = "initia_T"
+        tag = "initia60_T"
+        logo1 = "chainInitia_T"
         isTestnet = true
         apiName = "initia-testnet"
-        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        accountKeyType = AccountKeyType(.INITIA_Keccak256, "m/44'/60'/0'/0/X")
         
         
         cosmosEndPointType = .UseGRPC
