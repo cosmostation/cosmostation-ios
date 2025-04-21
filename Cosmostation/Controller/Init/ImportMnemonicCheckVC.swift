@@ -12,10 +12,10 @@ class ImportMnemonicCheckVC: BaseVC {
     
     @IBOutlet weak var nextBtn: BaseButton!
     
-    @IBOutlet weak var inputCheckMsgCardView: CardView!
+    @IBOutlet weak var inputCheckMsgCardView: FixCardView!
     @IBOutlet weak var inputCheckMsgLabel: UILabel!
     
-    @IBOutlet weak var wordCardView: CardView!
+    @IBOutlet weak var wordCardView: FixCardView!
     @IBOutlet weak var word00: UILabel!
     @IBOutlet weak var word01: UILabel!
     @IBOutlet weak var word02: UILabel!

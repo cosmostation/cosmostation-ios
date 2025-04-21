@@ -11,14 +11,14 @@ import Web3Core
 class CreateMnemonicVC: BaseVC, PinDelegate, CreateNameDelegate {
     
     @IBOutlet weak var nextBtn: BaseButton!
-    @IBOutlet weak var warningCardView: CardView!
+    @IBOutlet weak var warningCardView: FixCardView!
     @IBOutlet weak var warningTitleLabel: UILabel!
     @IBOutlet weak var warningMsgLabel: UILabel!
     @IBOutlet weak var mnemonicTitle: UILabel!
     @IBOutlet weak var wordCntBtn: UIButton!
     @IBOutlet weak var tapToCopyLabel: UILabel!
     
-    @IBOutlet weak var wordCardView: CardView!
+    @IBOutlet weak var wordCardView: FixCardView!
     @IBOutlet weak var word00: UILabel!
     @IBOutlet weak var word01: UILabel!
     @IBOutlet weak var word02: UILabel!
