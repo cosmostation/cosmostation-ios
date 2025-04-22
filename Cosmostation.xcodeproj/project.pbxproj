@@ -1894,6 +1894,7 @@
 		79DD26672D0C00B500B4353C /* VoteThreeItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DD26652D0C00B500B4353C /* VoteThreeItemsCell.swift */; };
 		79DD26682D0C00B500B4353C /* VoteThreeItemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DD26662D0C00B500B4353C /* VoteThreeItemsCell.xib */; };
 		79E7B3CA2CF83F0400C28D93 /* dydx.json in Resources */ = {isa = PBXBuildFile; fileRef = 79E7B3C92CF83F0400C28D93 /* dydx.json */; };
+		79ED0BCC2DB75C6500C84DB7 /* ChainHippo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED0BCB2DB75C6500C84DB7 /* ChainHippo.swift */; };
 		79EF66802C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79EF66812C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79F30ED92CAD36E400E42B2F /* ChainAtomone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */; };
@@ -3477,6 +3478,7 @@
 		79DD26652D0C00B500B4353C /* VoteThreeItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteThreeItemsCell.swift; sourceTree = "<group>"; };
 		79DD26662D0C00B500B4353C /* VoteThreeItemsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteThreeItemsCell.xib; sourceTree = "<group>"; };
 		79E7B3C92CF83F0400C28D93 /* dydx.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dydx.json; sourceTree = "<group>"; };
+		79ED0BCB2DB75C6500C84DB7 /* ChainHippo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainHippo.swift; sourceTree = "<group>"; };
 		79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgRandomButton.swift; sourceTree = "<group>"; };
 		79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAtomone.swift; sourceTree = "<group>"; };
 		79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedPaddingLabel.swift; sourceTree = "<group>"; };
@@ -3914,6 +3916,7 @@
 				799B4A802D2BDC0E00998833 /* ChainGno.swift */,
 				045032912C1EEFC900235F6A /* ChainGovgen.swift */,
 				0450329B2C1EEFCA00235F6A /* ChainGravityBridge.swift */,
+				79ED0BCB2DB75C6500C84DB7 /* ChainHippo.swift */,
 				04965B3F2C37B39D00403605 /* ChainInitia.swift */,
 				045032932C1EEFC900235F6A /* ChainInjective.swift */,
 				79B7F35E2D81769C00AA755B /* ChainInt3face.swift */,
@@ -7303,6 +7306,7 @@
 				E131F44E2AEEAAB800E760A0 /* CreateNameSheet.swift in Sources */,
 				045032EB2C1EFE5500235F6A /* ChainPersistence750.swift in Sources */,
 				E122DC602A8A4712006D1E7B /* tendermint_abci_types.pb.swift in Sources */,
+				79ED0BCC2DB75C6500C84DB7 /* ChainHippo.swift in Sources */,
 				0400EE882AD425F9007BA97F /* DappDetailVC.swift in Sources */,
 				792613B42CD4B82800FAF47D /* initia_distribution_v1_tx.grpc.swift in Sources */,
 				0497150C2C105C13008C45A0 /* DappEvmSignRequestSheet.swift in Sources */,
