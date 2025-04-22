@@ -249,6 +249,8 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                     }
                 } else {
                     mintscanGrc20Tokens.sort {
+                        if $0.wallet_preload == true && $1.wallet_preload == false { return true }
+                        if $0.wallet_preload == false && $1.wallet_preload == true { return false }
                         if ($0.getAmount() != NSDecimalNumber.zero) && ($1.getAmount() == NSDecimalNumber.zero) { return true }
                         if ($0.getAmount() == NSDecimalNumber.zero) && ($1.getAmount() != NSDecimalNumber.zero) { return false }
                         let value0 = gnoFetcher.tokenValue($0.address!)
@@ -282,6 +284,8 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                     }
                 } else {
                     mintscanCw20Tokens.sort {
+                        if $0.wallet_preload == true && $1.wallet_preload == false { return true }
+                        if $0.wallet_preload == false && $1.wallet_preload == true { return false }
                         if ($0.getAmount() != NSDecimalNumber.zero) && ($1.getAmount() == NSDecimalNumber.zero) { return true }
                         if ($0.getAmount() == NSDecimalNumber.zero) && ($1.getAmount() != NSDecimalNumber.zero) { return false }
                         let value0 = cosmosFetcher.tokenValue($0.address!)
@@ -316,6 +320,8 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                     }
                 } else {
                     mintscanErc20Tokens.sort {
+                        if $0.wallet_preload == true && $1.wallet_preload == false { return true }
+                        if $0.wallet_preload == false && $1.wallet_preload == true { return false }
                         if ($0.getAmount() != NSDecimalNumber.zero) && ($1.getAmount() == NSDecimalNumber.zero) { return true }
                         if ($0.getAmount() == NSDecimalNumber.zero) && ($1.getAmount() != NSDecimalNumber.zero) { return false }
                         let value0 = evmFetcher.tokenValue($0.address!)
