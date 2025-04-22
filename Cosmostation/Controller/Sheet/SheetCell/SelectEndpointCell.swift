@@ -144,7 +144,7 @@ class SelectEndpointCell: UITableViewCell {
             endpointLabel.adjustsFontSizeToFitWidth = true
             
             let checkTime = CFAbsoluteTimeGetCurrent()
-            let url = endpoint["url"].stringValue.hasSuffix("/") ? String(endpoint["url"].stringValue.dropLast()) : endpoint["url"].stringValue
+            let url = endpoint["url"].stringValue
             
             if evmFetcher.getEvmRpc().contains(url) {
                 seletedImg.isHidden = false
