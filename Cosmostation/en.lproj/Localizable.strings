@@ -1247,10 +1247,6 @@
 "style_pro" = "Pro";
 "style_simple_msg" = "Display total value of on-chain assets.";
 "style_pro_msg" = "additionally, main asset's price and price change are displayed.";
-"theme_dark" = "Dark Theme";
-"theme_cosmic" = "Cosmic Theme";
-"theme_dark_msg" = "Softly, calmly. Dive deeper with Dark Theme";
-"theme_cosmic_msg" = "Like a scene from space — a new view every time";
 "str_dark" = "Dark";
 "str_cosmic" = "Cosmic";
 

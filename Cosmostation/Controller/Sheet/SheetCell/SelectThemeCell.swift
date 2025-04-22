@@ -36,13 +36,13 @@ class SelectThemeCell: UITableViewCell {
 
     func onBindTheme(_ position: Int) {
         if (position == 0) {
-            titleLabel.text = "1. " + NSLocalizedString("theme_dark", comment: "")
-            descriptionLabel.text = NSLocalizedString("theme_dark_msg", comment: "")
+            titleLabel.text = "1. Dark Theme"
+            descriptionLabel.text = "Softly, calmly. Dive deeper with Dark Theme"
             themeImageView.image = UIImage(named: "imgThemeDark")
 
         } else {
-            titleLabel.text = "2. " + NSLocalizedString("theme_cosmic", comment: "")
-            descriptionLabel.text = NSLocalizedString("theme_cosmic_msg", comment: "")
+            titleLabel.text = "2. Cosmic Theme"
+            descriptionLabel.text = "Like a scene from space — a new view every time"
             themeImageView.image = UIImage(named: "imgThemeCosmic")
 
         }
