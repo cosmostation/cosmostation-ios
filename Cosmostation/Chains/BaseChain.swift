@@ -20,6 +20,7 @@ class BaseChain {
     var accountKeyType: AccountKeyType!
     var privateKey: Data?
     var publicKey: Data?
+    var isOtherChainImage = false
     
     //cosmos & grpc & lcd info
     var cosmosEndPointType: CosmosEndPointType = .Unknown
@@ -446,6 +447,9 @@ extension BaseChain {
     }
     
     func getChainImage() -> URL? {
+        if isOtherChainImage {
+            return URL(string: "https://raw.githubusercontent.com/cosmostation/chainlist/master/chain/\(apiName!)/resource/chain_\(apiName!)2.png")
+        }
         return URL(string: getChainListParam()["chain_image"].stringValue)
     }
     

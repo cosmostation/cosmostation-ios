@@ -18,6 +18,7 @@ class ChainOkt996Secp: ChainOkt996Keccak {
         isDefault = false
         apiName = "okc"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/996'/0'/0/X")
+        isOtherChainImage = true
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
