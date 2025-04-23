@@ -15,7 +15,6 @@ class ChainFxcoreEVM: BaseChain {
         
         name = "Function-X"
         tag = "fxcore60"
-        logo1 = "chainFxcore"
         apiName = "fxcore"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

@@ -105,6 +105,19 @@ class BaseNetWork {
             }
     }
     
+    func fetchGrc20Tokens() {
+        AF.request(BaseNetWork.msGrc20Url(), method: .get)
+            .responseDecodable(of: MintscanTokens.self, queue: .main, decoder: JSONDecoder()) { response in
+                switch response.result {
+                case .success(let value):
+                    BaseData.instance.mintscanGrc20Tokens = value.assets
+                case .failure:
+                    print("fetchGrc20 error ", response.error)
+                }
+                NotificationCenter.default.post(name: Notification.Name("FetchErc20s"), object: nil, userInfo: nil)
+            }
+    }
+
     func fetchCw721s() {
         AF.request(BaseNetWork.msCw721Url(), method: .get)
             .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
@@ -150,8 +163,8 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v11/assets/erc20"
     }
     
-    static func msGrc20InfoUrl(_ apiName: String) -> String {
-        return MINTSCAN_API_URL + "v11/assets/" +  apiName + "/grc20/info"
+    static func msGrc20Url() -> String {
+        return MINTSCAN_API_URL + "v11/assets/grc20"
     }
     
     static func msChainParams() -> String {

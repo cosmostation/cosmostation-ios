@@ -14,7 +14,6 @@ class ChainBitCoin86_T: ChainBitCoin86 {
         
         name = "Bitcoin Signet"
         tag = "bitcoin86_T"
-        logo1 = "chainBitcoin_T"
         isTestnet = true
         apiName = "bitcoin-testnet"
         accountKeyType = AccountKeyType(.BTC_Taproot, "m/86'/1'/0'/0/X")

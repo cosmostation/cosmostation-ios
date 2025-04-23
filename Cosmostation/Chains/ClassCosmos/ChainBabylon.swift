@@ -17,7 +17,6 @@ class ChainBabylon: BaseChain {
         
         name = "Babylon"
         tag = "babylon118"
-        logo1 = "chainBabylon"
         apiName = "babylon"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

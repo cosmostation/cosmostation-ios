@@ -15,7 +15,6 @@ class ChainZkCloud_T: ChainZkCloud {
         
         name = "ZkCloud Testnet"
         tag = "zkCloud118_T"
-        logo1 = "chainZkCloud_T"
         isTestnet = true
         apiName = "zkcloud-testnet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

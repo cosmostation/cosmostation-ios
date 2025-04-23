@@ -17,7 +17,6 @@ class ChainSui: BaseChain  {
         
         name = "Sui"
         tag = "suiMainnet"
-        logo1 = "chainSui"
         apiName = "sui"
         accountKeyType = AccountKeyType(.SUI_Ed25519, "m/44'/784'/0'/0'/X'")
     

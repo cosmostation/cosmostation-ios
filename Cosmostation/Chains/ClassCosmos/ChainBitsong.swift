@@ -15,7 +15,6 @@ class ChainBitsong: BaseChain  {
         
         name = "Bitsong"
         tag = "bitsong639"
-        logo1 = "chainBitsong"
         apiName = "bitsong"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/639'/0'/0/X")
         

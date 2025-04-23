@@ -15,11 +15,11 @@ class ChainKava118: ChainKavaEVM  {
         
         name = "Kava"
         tag = "kava118"
-        logo1 = "chainKava"
         isDefault = false
         apiName = "kava"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        
+        isOtherChainImage = true
+
         
         cosmosEndPointType = .UseGRPC
         stakeDenom = "ukava"

@@ -27,6 +27,7 @@ final class BaseData: NSObject{
     var mintscanAssets: [MintscanAsset]?
     var mintscanCw20Tokens: [MintscanToken]?
     var mintscanErc20Tokens: [MintscanToken]?
+    var mintscanGrc20Tokens: [MintscanToken]?
     var mintscanCw721: [JSON]?
     var baseAccount: BaseAccount?
     
@@ -664,6 +665,14 @@ extension BaseData {
         return ProtfolioStyle.getProtfolioStyles()[getStyle()].description
     }
     
+    func setTheme(_ theme : Int) {
+        UserDefaults.standard.set(theme, forKey: KEY_THEME)
+    }
+    
+    func getTheme() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_THEME)
+    }
+        
     func setAutoPass(_ mode : Int) {
         UserDefaults.standard.set(mode, forKey: KEY_AUTO_PASS)
     }

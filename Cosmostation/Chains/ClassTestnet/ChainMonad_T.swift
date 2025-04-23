@@ -15,7 +15,6 @@ class ChainMonad_T: ChainMonad {
         
         name = "Monad Testnet"
         tag = "monad60_T"
-        logo1 = "chainMonad_T"
         isTestnet = true
         apiName = "monad-testnet"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")

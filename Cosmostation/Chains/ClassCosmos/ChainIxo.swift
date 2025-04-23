@@ -15,7 +15,6 @@ class ChainIxo: BaseChain  {
         
         name = "Impact Hub"
         tag = "ixo118"
-        logo1 = "chainIxo"
         apiName = "ixo"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

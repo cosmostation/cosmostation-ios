@@ -13,10 +13,10 @@ class FixCardView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        backgroundColor = UIColor.white.withAlphaComponent(0.05)
+        backgroundColor = UIColor.white.withAlphaComponent(0.06)
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 12
-        layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
+        layer.borderColor = UIColor.white.withAlphaComponent(0.04).cgColor
         layer.borderWidth = 0.5
         clipsToBounds = true
         layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
@@ -31,10 +31,10 @@ class FixCardStackView: UIStackView {
     required init(coder: NSCoder) {
         super.init(coder: coder)
         
-        backgroundColor = UIColor.white.withAlphaComponent(0.05)
+        backgroundColor = UIColor.white.withAlphaComponent(0.06)
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 12
-        layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
+        layer.borderColor = UIColor.white.withAlphaComponent(0.04).cgColor
         layer.borderWidth = 0.5
         clipsToBounds = true
         layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor

@@ -1675,6 +1675,9 @@
 		7909702A2D8016C000DEB959 /* PendingDelegateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 790970282D8016C000DEB959 /* PendingDelegateCell.xib */; };
 		7909702D2D8016D500DEB959 /* PendingUnbondingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7909702B2D8016D500DEB959 /* PendingUnbondingCell.swift */; };
 		7909702E2D8016D500DEB959 /* PendingUnbondingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7909702C2D8016D500DEB959 /* PendingUnbondingCell.xib */; };
+		790A15CE2DAF760500EE6E78 /* basebgDark.png in Resources */ = {isa = PBXBuildFile; fileRef = 790A15CD2DAF760500EE6E78 /* basebgDark.png */; };
+		790A15D92DAF7A5D00EE6E78 /* SelectThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 790A15D82DAF7A5D00EE6E78 /* SelectThemeCell.xib */; };
+		790A15DA2DAF7A5D00EE6E78 /* SelectThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790A15D72DAF7A5D00EE6E78 /* SelectThemeCell.swift */; };
 		790D8B882CFD5837003A15F7 /* ChainMilkyway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790D8B872CFD5837003A15F7 /* ChainMilkyway.swift */; };
 		790D8B8A2CFD9730003A15F7 /* EcoSystemSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790D8B892CFD9730003A15F7 /* EcoSystemSectionHeader.swift */; };
 		7926139B2CD4B82800FAF47D /* initia_gov_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792613652CD4B82300FAF47D /* initia_gov_v1_genesis.pb.swift */; };
@@ -1891,6 +1894,7 @@
 		79DD26672D0C00B500B4353C /* VoteThreeItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DD26652D0C00B500B4353C /* VoteThreeItemsCell.swift */; };
 		79DD26682D0C00B500B4353C /* VoteThreeItemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DD26662D0C00B500B4353C /* VoteThreeItemsCell.xib */; };
 		79E7B3CA2CF83F0400C28D93 /* dydx.json in Resources */ = {isa = PBXBuildFile; fileRef = 79E7B3C92CF83F0400C28D93 /* dydx.json */; };
+		79ED0BCC2DB75C6500C84DB7 /* ChainHippo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED0BCB2DB75C6500C84DB7 /* ChainHippo.swift */; };
 		79EF66802C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79EF66812C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79F30ED92CAD36E400E42B2F /* ChainAtomone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */; };
@@ -3260,6 +3264,9 @@
 		790970282D8016C000DEB959 /* PendingDelegateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PendingDelegateCell.xib; sourceTree = "<group>"; };
 		7909702B2D8016D500DEB959 /* PendingUnbondingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingUnbondingCell.swift; sourceTree = "<group>"; };
 		7909702C2D8016D500DEB959 /* PendingUnbondingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PendingUnbondingCell.xib; sourceTree = "<group>"; };
+		790A15CD2DAF760500EE6E78 /* basebgDark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebgDark.png; sourceTree = "<group>"; };
+		790A15D72DAF7A5D00EE6E78 /* SelectThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectThemeCell.swift; sourceTree = "<group>"; };
+		790A15D82DAF7A5D00EE6E78 /* SelectThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectThemeCell.xib; sourceTree = "<group>"; };
 		790D8B872CFD5837003A15F7 /* ChainMilkyway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMilkyway.swift; sourceTree = "<group>"; };
 		790D8B892CFD9730003A15F7 /* EcoSystemSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoSystemSectionHeader.swift; sourceTree = "<group>"; };
 		792613652CD4B82300FAF47D /* initia_gov_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = initia_gov_v1_genesis.pb.swift; sourceTree = "<group>"; };
@@ -3471,6 +3478,7 @@
 		79DD26652D0C00B500B4353C /* VoteThreeItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteThreeItemsCell.swift; sourceTree = "<group>"; };
 		79DD26662D0C00B500B4353C /* VoteThreeItemsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteThreeItemsCell.xib; sourceTree = "<group>"; };
 		79E7B3C92CF83F0400C28D93 /* dydx.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dydx.json; sourceTree = "<group>"; };
+		79ED0BCB2DB75C6500C84DB7 /* ChainHippo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainHippo.swift; sourceTree = "<group>"; };
 		79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgRandomButton.swift; sourceTree = "<group>"; };
 		79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAtomone.swift; sourceTree = "<group>"; };
 		79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedPaddingLabel.swift; sourceTree = "<group>"; };
@@ -3908,6 +3916,7 @@
 				799B4A802D2BDC0E00998833 /* ChainGno.swift */,
 				045032912C1EEFC900235F6A /* ChainGovgen.swift */,
 				0450329B2C1EEFCA00235F6A /* ChainGravityBridge.swift */,
+				79ED0BCB2DB75C6500C84DB7 /* ChainHippo.swift */,
 				04965B3F2C37B39D00403605 /* ChainInitia.swift */,
 				045032932C1EEFC900235F6A /* ChainInjective.swift */,
 				79B7F35E2D81769C00AA755B /* ChainInt3face.swift */,
@@ -4643,6 +4652,8 @@
 				044222532B96F4370063F031 /* SelectDisplayTokenCell.xib */,
 				7967DCB62D9A4193007D74CE /* SelectRecipientChainCell.swift */,
 				7967DCB72D9A4193007D74CE /* SelectRecipientChainCell.xib */,
+				790A15D72DAF7A5D00EE6E78 /* SelectThemeCell.swift */,
+				790A15D82DAF7A5D00EE6E78 /* SelectThemeCell.xib */,
 			);
 			path = SheetCell;
 			sourceTree = "<group>";
@@ -5535,6 +5546,7 @@
 				04E250DF2B8F035E007D5AA0 /* basebg07.png */,
 				04E250E02B8F035E007D5AA0 /* basebg08.png */,
 				E165ED372B98C9D400C15809 /* basebg09.png */,
+				790A15CD2DAF760500EE6E78 /* basebgDark.png */,
 			);
 			path = BgImg;
 			sourceTree = "<group>";
@@ -6166,6 +6178,7 @@
 				E10B1D792C2156430039283B /* KavaEarnListCell.xib in Resources */,
 				E1F257DF2BFB1FF3008F4D21 /* EvmUndelegate.xib in Resources */,
 				E15F2D0C2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */,
+				790A15D92DAF7A5D00EE6E78 /* SelectThemeCell.xib in Resources */,
 				E1044EA72BD641DB00DA05C2 /* SendResultSheet.xib in Resources */,
 				0402B7FA2ACC3F1400824B3F /* VoteCell.xib in Resources */,
 				79D966352D797B1C00688447 /* BtcStakingInfoSheet.xib in Resources */,
@@ -6196,6 +6209,7 @@
 				7939A25A2D30C2E2006674E3 /* btcStaking.json in Resources */,
 				04C63D242B86FE8C00D4A366 /* CommonTransferResult.xib in Resources */,
 				E10B1D912C2156430039283B /* KavaMintListMyCell.xib in Resources */,
+				790A15CE2DAF760500EE6E78 /* basebgDark.png in Resources */,
 				E10B1D892C2156430039283B /* KavaLendListMyCell.xib in Resources */,
 				04B789E72ACB140900E9BE88 /* SelectNameServiceCell.xib in Resources */,
 				E12E9D2F2AE415D900336449 /* loadingSmallYellow.json in Resources */,
@@ -7292,6 +7306,7 @@
 				E131F44E2AEEAAB800E760A0 /* CreateNameSheet.swift in Sources */,
 				045032EB2C1EFE5500235F6A /* ChainPersistence750.swift in Sources */,
 				E122DC602A8A4712006D1E7B /* tendermint_abci_types.pb.swift in Sources */,
+				79ED0BCC2DB75C6500C84DB7 /* ChainHippo.swift in Sources */,
 				0400EE882AD425F9007BA97F /* DappDetailVC.swift in Sources */,
 				792613B42CD4B82800FAF47D /* initia_distribution_v1_tx.grpc.swift in Sources */,
 				0497150C2C105C13008C45A0 /* DappEvmSignRequestSheet.swift in Sources */,
@@ -7673,6 +7688,7 @@
 				047843732AC991B300462F1C /* injective_wasmx_v1_events.pb.swift in Sources */,
 				04C817102BA98D75006B800A /* cosmos_evidence_v1beta1_genesis.pb.swift in Sources */,
 				79813A732D530F890083A1F5 /* zrchain_validation_authz.pb.swift in Sources */,
+				790A15DA2DAF7A5D00EE6E78 /* SelectThemeCell.swift in Sources */,
 				04C817602BA98D75006B800A /* cosmos_base_abci_v1beta1_abci.pb.swift in Sources */,
 				04C8166C2BA98D74006B800A /* cosmos_mint_v1beta1_tx.pb.swift in Sources */,
 				043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */,

@@ -15,7 +15,6 @@ class ChainZkCloud: BaseChain {
         
         name = "ZkCloud"
         tag = "zkCloud118"
-        logo1 = ""
         apiName = "zkcloud"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
 

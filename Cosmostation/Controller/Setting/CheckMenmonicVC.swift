@@ -15,7 +15,7 @@ class CheckMenmonicVC: BaseVC {
     @IBOutlet weak var createBtn: SecButton!
     @IBOutlet weak var checkBtn: BaseButton!
     
-    @IBOutlet weak var wordCardView: CardView!
+    @IBOutlet weak var wordCardView: FixCardView!
     @IBOutlet weak var word00: UILabel!
     @IBOutlet weak var word01: UILabel!
     @IBOutlet weak var word02: UILabel!

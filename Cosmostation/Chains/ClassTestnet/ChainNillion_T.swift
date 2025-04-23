@@ -15,7 +15,6 @@ class ChainNillion_T: ChainNillion {
         
         name = "Nillion Testnet"
         tag = "nillion118_T"
-        logo1 = "chainNillion_T"
         isTestnet = true
         apiName = "nillion-testnet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

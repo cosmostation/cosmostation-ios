@@ -17,7 +17,6 @@ class ChainGno: BaseChain  {
         
         name = "Gno"
         tag = "gno118"
-        logo1 = "chainGno"
         apiName = "gno"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

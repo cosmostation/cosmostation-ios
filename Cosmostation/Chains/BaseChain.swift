@@ -14,13 +14,13 @@ class BaseChain {
     //account and common info
     var name: String!
     var tag: String!
-    var logo1: String!
     var isTestnet = false
     var isDefault = true
     var apiName: String!
     var accountKeyType: AccountKeyType!
     var privateKey: Data?
     var publicKey: Data?
+    var isOtherChainImage = false
     
     //cosmos & grpc & lcd info
     var cosmosEndPointType: CosmosEndPointType = .Unknown
@@ -53,8 +53,7 @@ class BaseChain {
     }
     var evmAddress: String?
     var coinSymbol = ""
-    var coinGeckoId = ""
-    var coinLogo = ""
+
     var evmRpcURL = ""
     
     
@@ -447,6 +446,13 @@ extension BaseChain {
         return getChainListParam()["is_support_grc20"].bool ?? false
     }
     
+    func getChainImage() -> URL? {
+        if isOtherChainImage {
+            return URL(string: "https://raw.githubusercontent.com/cosmostation/chainlist/master/chain/\(apiName!)/resource/chain_\(apiName!)2.png")
+        }
+        return URL(string: getChainListParam()["chain_image"].stringValue)
+    }
+    
     func votingThreshold() -> NSDecimalNumber {
         let threshold = getChainListParam()["voting_threshold"].uInt64Value
         return NSDecimalNumber(value: threshold)
@@ -722,6 +728,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainGovgen())
     result.append(ChainGravityBridge())
     result.append(ChainHaqqEVM())                       //EVM
+    result.append(ChainHippo())
     result.append(ChainHumansEVM())                     //EVM
     result.append(ChainInjective())
 //    result.append(ChainInt3face())

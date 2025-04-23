@@ -15,7 +15,6 @@ class ChainMantra_T: BaseChain  {
         
         name = "Mantra Testnet"
         tag = "mantra_T"
-        logo1 = "chainMantra_T"
         isTestnet = true
         apiName = "mantra-testnet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

@@ -15,7 +15,6 @@ class ChainTenetEVM: BaseChain  {
         
         name = "Tenet"
         tag = "tenet60"
-        logo1 = "chainTenet"
         apiName = "tenet"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

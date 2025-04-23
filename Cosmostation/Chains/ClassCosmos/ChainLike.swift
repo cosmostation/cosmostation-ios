@@ -15,7 +15,6 @@ class ChainLike: BaseChain  {
         
         name = "Likecoin"
         tag = "likecoin118"
-        logo1 = "chainLike"
         apiName = "likecoin"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

@@ -15,7 +15,6 @@ class ChainFantom: BaseChain {
         
         name = "Fantom"
         tag = "fantom60"
-        logo1 = "chainFantom"
         apiName = "fantom"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

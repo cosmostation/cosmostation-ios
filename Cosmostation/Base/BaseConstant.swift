@@ -389,6 +389,18 @@ public enum ProtfolioStyle: Int {
     }
 }
 
+public enum ThemeStyle: Int {
+    case Dark = 0
+    case Cosmic = 1
+    
+    var description: String {
+        switch self {
+        case .Dark: return NSLocalizedString("str_dark", comment: "")
+        case .Cosmic: return NSLocalizedString("str_cosmic", comment: "")
+        }
+    }
+}
+
 
 let BASE_BG_IMG = ["basebg00", "basebg01", "basebg02", "basebg03", "basebg04", "basebg05", "basebg06", "basebg07", "basebg08", "basebg09"]
 

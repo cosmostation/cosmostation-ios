@@ -79,7 +79,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 1 && indexPath.row == 7) {
+        if (indexPath.section == 1 && indexPath.row == 8) {
             return 0
         } else if (indexPath.section == 3 && indexPath.row == 4 && !BaseData.instance.showEvenReview()) {
             return 0
@@ -91,7 +91,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         if (section == 0) {
             return 5
         } else if (section == 1) {
-            return 8
+            return 9
         } else if (section == 2) {
             return 2
         } else if (section == 3) {
@@ -153,18 +153,22 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 return baseCell
                 
             } else if (indexPath.row == 1) {
+                baseCell.onBindSetTheme()
+                return baseCell
+
+            } else if (indexPath.row == 2) {
                 baseCell.onBindSetCurrency()
                 return baseCell
                 
-            } else if (indexPath.row == 2) {
+            } else if (indexPath.row == 3) {
                 baseCell.onBindSetStyle()
                 return baseCell
                 
-            } else if (indexPath.row == 3) {
+            } else if (indexPath.row == 4) {
                 priceCell.onBindSetDpPrice()
                 return priceCell
                 
-            } else if (indexPath.row == 4) {
+            } else if (indexPath.row == 5) {
                 switchCell.onBindSetNotification()
                 switchCell.actionToggle = { request in
                     self.showWait()
@@ -176,7 +180,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 }
                 return switchCell
                 
-            } else if (indexPath.row == 5) {
+            } else if (indexPath.row == 6) {
                 switchCell.onBindSetAppLock()
                 switchCell.actionToggle = { request in
                     if (request == false) {
@@ -188,14 +192,14 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 }
                 return switchCell
                 
-            } else if (indexPath.row == 6) {
+            } else if (indexPath.row == 7) {
                 switchCell.onBindSetBioAuth()
                 switchCell.actionToggle = { request in
                     BaseData.instance.setUsingBioAuth(request)
                 }
                 return switchCell
                 
-            } else if (indexPath.row == 7) {
+            } else if (indexPath.row == 8) {
                 baseCell.onBindSetAutoPass()
                 return baseCell
             }
@@ -267,10 +271,21 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             } else if (indexPath.row == 1) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
+                baseSheet.sheetType = .SwitchTheme
+                guard let sheet = baseSheet.presentationController as? UISheetPresentationController else {
+                    return
+                }
+                sheet.largestUndimmedDetentIdentifier = .large
+                sheet.prefersGrabberVisible = true
+                present(baseSheet, animated: true)
+
+            } else if (indexPath.row == 2) {
+                let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchCurrency
                 onStartSheet(baseSheet, 320, 0.9)
                 
-            } else if (indexPath.row == 2) {
+            } else if (indexPath.row == 3) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchStyle
@@ -281,13 +296,13 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 sheet.prefersGrabberVisible = true
                 present(baseSheet, animated: true)
                 
-            } else if (indexPath.row == 3) {
+            } else if (indexPath.row == 4) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchPriceColor
                 onStartSheet(baseSheet, 240, 0.6)
                 
-            } else if (indexPath.row == 7) {
+            } else if (indexPath.row == 8) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SwitchAutoPass
@@ -420,12 +435,22 @@ extension SettingsVC: BaseSheetDelegate, PinDelegate {
                 }
             }
             
+        } else if (sheetType == .SwitchTheme) {
+            if let index = result["index"] as? Int {
+                if (BaseData.instance.getTheme() != index) {
+                    BaseData.instance.setTheme(index)
+                    DispatchQueue.main.async {
+                        self.onStartMainTab()
+                    }
+                }
+            }
+
         } else if (sheetType == .SwitchCurrency) {
             if let index = result["index"] as? Int {
                 if (BaseData.instance.getCurrency() != index) {
                     BaseData.instance.setCurrency(index)
                     BaseNetWork().fetchPrices(true)
-                    reloadRows(IndexPath(row: 1, section: 1))
+                    reloadRows(IndexPath(row: 2, section: 1))
                 }
             }
             
@@ -436,7 +461,7 @@ extension SettingsVC: BaseSheetDelegate, PinDelegate {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2000), execute: {
                         BaseData.instance.setStyle(index)
                         BaseNetWork().fetchPrices(true)
-                        self.reloadRows(IndexPath(row: 2, section: 1))
+                        self.reloadRows(IndexPath(row: 3, section: 1))
                         self.hideWait()
                     })
                 }
@@ -446,7 +471,7 @@ extension SettingsVC: BaseSheetDelegate, PinDelegate {
             if let index = result["index"] as? Int {
                 if (BaseData.instance.getPriceChaingColor() != index) {
                     BaseData.instance.setPriceChaingColor(index)
-                    reloadRows(IndexPath(row: 3, section: 1))
+                    reloadRows(IndexPath(row: 4, section: 1))
                 }
             }
             
@@ -454,7 +479,7 @@ extension SettingsVC: BaseSheetDelegate, PinDelegate {
             if let index = result["index"] as? Int {
                 if (BaseData.instance.getAutoPass() != index) {
                     BaseData.instance.setAutoPass(index)
-                    reloadRows(IndexPath(row: 8, section: 1))
+                    reloadRows(IndexPath(row: 9, section: 1))
                 }
             }
         }
@@ -466,7 +491,7 @@ extension SettingsVC: BaseSheetDelegate, PinDelegate {
             if (result == .success) {
                 BaseData.instance.setUsingAppLock(false)
             }
-            reloadRows(IndexPath(row: 5, section: 1))
+            reloadRows(IndexPath(row: 6, section: 1))
         }
     } 
      

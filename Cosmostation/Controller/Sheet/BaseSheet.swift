@@ -96,6 +96,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SwitchCurrencyCell", bundle: nil), forCellReuseIdentifier: "SwitchCurrencyCell")
         sheetTableView.register(UINib(nibName: "SwitchPriceDisplayCell", bundle: nil), forCellReuseIdentifier: "SwitchPriceDisplayCell")
         sheetTableView.register(UINib(nibName: "SwitchStyleCell", bundle: nil), forCellReuseIdentifier: "SwitchStyleCell")
+        sheetTableView.register(UINib(nibName: "SelectThemeCell", bundle: nil), forCellReuseIdentifier: "SelectThemeCell")
+
         
         sheetTableView.register(UINib(nibName: "SelectSwapChainCell", bundle: nil), forCellReuseIdentifier: "SelectSwapChainCell")
         sheetTableView.register(UINib(nibName: "SelectSwapAssetCell", bundle: nil), forCellReuseIdentifier: "SelectSwapAssetCell")
@@ -154,6 +156,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SwitchStyle) {
             sheetTitle.text = NSLocalizedString("str_select_style", comment: "")
             
+        } else if (sheetType == .SwitchTheme) {
+            sheetTitle.text = "Select option"
+
         } else if (sheetType == .SelectSwapInputChain) {
             sheetTitle.text = NSLocalizedString("title_select_input_chain", comment: "")
             sheetSearchBar.isHidden = false
@@ -404,7 +409,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SwitchAutoPass) {
             return AutoPass.getAutoPasses().count
             
-        } else if (sheetType == .SwitchStyle) {
+        } else if (sheetType == .SwitchStyle || sheetType == .SwitchTheme) {
             return 2
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
@@ -551,6 +556,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindStyle(indexPath.row)
             return cell!
             
+        } else if (sheetType == .SwitchTheme) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SelectThemeCell") as? SelectThemeCell
+            cell?.onBindTheme(indexPath.row)
+            return cell!
+
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapChainCell") as? SelectSwapChainCell
             cell?.onBindCosmosChain(swapChainsSearch[indexPath.row])
@@ -837,7 +847,8 @@ public enum SheetType: Int {
     case SwitchPriceColor = 14
     case SwitchAutoPass = 15
     case SwitchStyle = 16
-    
+    case SwitchTheme = 17
+
     case SelectSwapInputChain = 21
     case SelectSwapOutputChain = 22
     case SelectSwapInputAsset = 23

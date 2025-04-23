@@ -548,6 +548,7 @@
 "setting_chain_title" = "Manage Chains";
 "setting_addressbook_title" = "Address Book";
 "setting_language_title" = "Language";
+"setting_theme_title" = "Theme";
 "setting_currecny_title" = "Currency";
 "setting_notification_title" = "Notification";
 "setting_app_lock_title" = "App Lock";
@@ -1246,6 +1247,8 @@
 "style_pro" = "Pro";
 "style_simple_msg" = "Display total value of on-chain assets.";
 "style_pro_msg" = "additionally, main asset's price and price change are displayed.";
+"str_dark" = "Dark";
+"str_cosmic" = "Cosmic";
 
 "currency_fetch_success" = "Currency updated";
 "currency_fetch_failed" = "Currency fetching failed";

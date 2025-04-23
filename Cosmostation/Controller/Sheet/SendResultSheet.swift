@@ -58,7 +58,7 @@ class SendResultSheet: BaseVC {
             WDP.dpCoin(msAsset, coin, coinImgView, coinSymbolLabel, coinAmountLabel, msAsset.decimals)
         }
         
-        showChainBgImage(UIImage(named: selectedChain.logo1)!)
+        showChainBgImage(selectedChain.getChainImage())
     }
     
     override func setLocalizedString() {
@@ -82,13 +82,13 @@ class SendResultSheet: BaseVC {
         self.dismiss(animated: true)
     }
     
-    func showChainBgImage(_ uiImge: UIImage) {
+    func showChainBgImage(_ imgUrl: URL?) {
         let width = UIScreen.main.bounds.size.width
         let height = UIScreen.main.bounds.size.height
         let x = CGFloat.random(in: -100..<(width-100))
         let y = CGFloat.random(in: 200..<(height-100))
         let chainImg = UIImageView(frame: CGRectMake(x, y, 300, 300))
-        chainImg.image = uiImge
+        chainImg.sd_setImage(with: imgUrl, placeholderImage: UIImage(named: "chainDefault"))
         chainImg.contentMode = .scaleToFill
         chainImg.alpha = 0
         

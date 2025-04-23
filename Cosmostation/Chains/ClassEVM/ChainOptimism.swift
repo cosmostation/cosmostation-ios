@@ -15,7 +15,6 @@ class ChainOptimism: BaseChain  {
         
         name = "Optimism"
         tag = "optimism60"
-        logo1 = "chainOptimism"
         apiName = "optimism"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

@@ -14,7 +14,6 @@ class ChainManifest: BaseChain {
         
         name = "Manifest"
         tag = "manifest118"
-        logo1 = "chainManifest"
         apiName = "manifest"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

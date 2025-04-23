@@ -15,7 +15,6 @@ class ChainKyve: BaseChain  {
         
         name = "Kyve"
         tag = "kyve118"
-        logo1 = "chainKyve"
         apiName = "kyve"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

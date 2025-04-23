@@ -15,7 +15,6 @@ class ChainMilkyway: BaseChain {
         
         name = "Milkyway"
         tag = "milkyway118"
-        logo1 = "chainMilkyway"
         apiName = "milkyway"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

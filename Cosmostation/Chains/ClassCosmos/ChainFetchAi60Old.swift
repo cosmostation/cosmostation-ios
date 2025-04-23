@@ -15,7 +15,6 @@ class ChainFetchAi60Old: BaseChain {
         
         name = "ASI Alliance"
         tag = "fetchai60_Old"
-        logo1 = "chainASIAlliance"
         isDefault = false
         apiName = "fetchai"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/60'/0'/X")

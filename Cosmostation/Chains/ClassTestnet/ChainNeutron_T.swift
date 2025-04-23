@@ -15,7 +15,6 @@ class ChainNeutron_T: ChainNeutron {
         
         name = "Neutron Testnet"
         tag = "neutron118_T"
-        logo1 = "chainNeutron_T"
         isTestnet = true
         apiName = "neutron-testnet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

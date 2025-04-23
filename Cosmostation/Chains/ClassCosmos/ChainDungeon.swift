@@ -15,7 +15,6 @@ class ChainDungeon: BaseChain  {
         
         name = "Dungeon"
         tag = "dungeon"
-        logo1 = "chainDungeon"
         apiName = "dungeon"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

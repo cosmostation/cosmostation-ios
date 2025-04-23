@@ -15,7 +15,6 @@ class ChainGravityBridge: BaseChain  {
         
         name = "G-Bridge"
         tag = "gravity-bridge118"
-        logo1 = "chainGravityBridge"
         apiName = "gravity-bridge"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
