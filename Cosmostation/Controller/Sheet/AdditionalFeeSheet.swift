@@ -50,7 +50,7 @@ class AdditionalFeeSheet: BaseVC {
         titleLabel.text = String(format: NSLocalizedString("title_btc_staking_additional_fee", comment: ""), babylonSymbol)
         
         var description = ""
-        if Locale.current.languageCode == "ko" {
+        if (BaseData.instance.getLanguage() == 0 && Locale.current.languageCode == "ko") || BaseData.instance.getLanguage() == 2 {
             description = String(format: NSLocalizedString("msg_btc_staking_additional_fee", comment: ""), bitcoinSymbol, bitcoinSymbol, babylonSymbol, address, babylonSymbol)
         } else {
             description = String(format: NSLocalizedString("msg_btc_staking_additional_fee", comment: ""), bitcoinSymbol, babylonSymbol, babylonSymbol, address)
