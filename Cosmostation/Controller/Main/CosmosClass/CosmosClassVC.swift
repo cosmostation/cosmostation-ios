@@ -294,6 +294,11 @@ class CosmosClassVC: BaseVC {
                     self.onClaimCompoundingTx()
                 }
                 mainFab.addItem(title: "Claim All", image: UIImage(named: "iconFabClaim")) { _ in
+                    if let babylonChain = (self.selectedChain as? ChainBabylon),
+                       let babylonBtcFetcher = babylonChain.getBabylonBtcFetcher() {
+                        self.onBabylonClaimRewardTx(babylonChain, babylonBtcFetcher)
+                        return
+                    }
                     self.onClaimRewardTx()
                 }
 //            }
@@ -440,17 +445,39 @@ extension CosmosClassVC {
             return
         }
         
-        if selectedChain is ChainBabylon {
-            let claimRewards = BabylonClaimRewards(nibName: "BabylonClaimRewards", bundle: nil)
-            claimRewards.selectedChain = selectedChain as? ChainBabylon
-            claimRewards.modalTransitionStyle = .coverVertical
-            self.present(claimRewards, animated: true)
-            return
-        }
-
         let claimRewards = CosmosClaimRewards(nibName: "CosmosClaimRewards", bundle: nil)
         claimRewards.claimableRewards = comsosFetcher.claimableRewards()
         claimRewards.selectedChain = selectedChain
+        claimRewards.modalTransitionStyle = .coverVertical
+        self.present(claimRewards, animated: true)
+    }
+    
+    func onBabylonClaimRewardTx(_ babylonChain: ChainBabylon, _ babylonBtcFetcher: BabylonBTCFetcher) {
+        guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
+            return
+        }
+        
+        if isValidatorsEmpty() {
+            onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+            return
+        }
+        if (comsosFetcher.rewardAllCoins().count == 0) {
+            onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+            return
+        }
+        if comsosFetcher.rewardAmountSum(babylonChain.stakeDenom!)
+            .adding(NSDecimalNumber(string: babylonBtcFetcher.btcStakedRewards.filter({ $0.denom == babylonChain.stakeDenom }).first?.amount ?? "0"))
+            .multiplying(byPowerOf10: -6)
+            .compare(0.1).rawValue < 0 {
+            onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
+            return
+        }
+        if (selectedChain.isTxFeePayable() == false) {
+            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let claimRewards = BabylonClaimRewards(nibName: "BabylonClaimRewards", bundle: nil)
+        claimRewards.selectedChain = selectedChain as? ChainBabylon
         claimRewards.modalTransitionStyle = .coverVertical
         self.present(claimRewards, animated: true)
     }
