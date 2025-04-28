@@ -14,7 +14,6 @@ import SDWebImage
 
 class NftTransfer: BaseVC {
     
-    @IBOutlet weak var midGapConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var toChainCardView: FixCardView!
@@ -115,14 +114,7 @@ class NftTransfer: BaseVC {
             }
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        let gap = UIScreen.main.bounds.size.height - 685
-        if (gap > 0) { midGapConstraint.constant = gap }
-        else { midGapConstraint.constant = 60 }
-    }
-    
+        
     override func setLocalizedString() {
         titleLabel.text = String(format: NSLocalizedString("str_send_asset", comment: ""), "NFT")
         toChainTitle.text = NSLocalizedString("str_recipient_chain", comment: "")
