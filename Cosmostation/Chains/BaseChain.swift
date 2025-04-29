@@ -824,6 +824,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBitCoin84_T())
     result.append(ChainBitCoin86_T())
     result.append(ChainGno_T())
+//    result.append(ChainImuaEVM_T())
     result.append(ChainInitia_T())
 //    result.append(ChainLombard_T())
     result.append(ChainNeutron_T())
