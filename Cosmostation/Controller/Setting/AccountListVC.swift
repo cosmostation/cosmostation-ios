@@ -42,6 +42,7 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
         
         searchMnmonicAccounts = mnmonicAccounts
         searchPkeyAccounts = pkeyAccounts
+        searchBar.searchTextField.font = .fontSize12Medium
     }
     
     override func viewDidAppear(_ animated: Bool) {
