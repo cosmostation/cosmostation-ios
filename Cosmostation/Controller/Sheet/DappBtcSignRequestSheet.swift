@@ -165,6 +165,7 @@ class DappBtcSignRequestSheet: BaseVC {
     func onInitFeeView() {
         Task {
             feeDenomLabel.text = selectedChain.coinSymbol
+            feeImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.coinSymbol))
             feeLabel.text = selectedChain.coinSymbol
             do {
                 try await onUpdateFeeView()
@@ -182,9 +183,10 @@ class DappBtcSignRequestSheet: BaseVC {
     }
     
     func onUpdateFeeView() async throws {
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol) else { return }
         if method == "bit_sendBitcoin" {
             try await getFee()
-            let feePrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeAmount = NSDecimalNumber.init(value: btcTxFee!).multiplying(byPowerOf10: -8, withBehavior: getDivideHandler(8))
             let feeValue = feePrice.multiplying(by: feeAmount, withBehavior: handler6)
             feeAmountLabel.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 8)
@@ -194,7 +196,7 @@ class DappBtcSignRequestSheet: BaseVC {
             
         } else if method == "bit_signPsbt" {
             try await getFee()
-            let feePrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeAmount = NSDecimalNumber.init(value: btcTxFee!).multiplying(byPowerOf10: -8, withBehavior: getDivideHandler(8))
             let feeValue = feePrice.multiplying(by: feeAmount, withBehavior: handler6)
             feeAmountLabel.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 8)

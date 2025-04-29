@@ -15,7 +15,6 @@ class ChainNibiru: BaseChain  {
         
         name = "Nibiru"
         tag = "nibiru118"
-        logo1 = "chainNibiru"
         apiName = "nibiru"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

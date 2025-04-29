@@ -94,8 +94,10 @@ class MajorClassVC: BaseVC {
         
         Task {
             if let babylonBtcFetcher = (selectedChain as? ChainBitCoin86)?.getBabylonBtcFetcher(),
-               selectedChain.isSupportBTCStaking() {
+               selectedChain.isSupportBTCStaking(),
+               let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher() {
                 _ = await babylonBtcFetcher.fetchFinalityProvidersInfo()
+                btcFetcher.fastestFee = try await btcFetcher.fetchFee()?["fastestFee"].intValue
             }
         }
     }
@@ -103,7 +105,7 @@ class MajorClassVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let tabVC = (self.parent)?.parent as? MainTabVC
-        tabVC?.showChainBgImage(UIImage(named: selectedChain.logo1)!)
+        tabVC?.showChainBgImage(selectedChain.getChainImage())
         if (BaseData.instance.getHideValue()) {
             hideValueBtn.setImage(UIImage.init(named: "iconHideValueOff"), for: .normal)
         } else {
@@ -185,6 +187,8 @@ class MajorClassVC: BaseVC {
     
     
     func onSetFabButton() {
+        if (selectedChain is ChainBitCoin44 || selectedChain is ChainBitCoin49) { return }
+        
         let mainFab = JJFloatingActionButton()
         mainFab.handleSingleActionDirectly = true
         mainFab.buttonImage = UIImage(named: "iconFab")
@@ -291,17 +295,49 @@ extension MajorClassVC {
     }
     
     func onBtcStake() {
-        onShowToast("Coming Soon")
-//        if let babylonBtcFetcher = (selectedChain as? ChainBitCoin86)?.getBabylonBtcFetcher() {
-//            if babylonBtcFetcher.finalityProviders.isEmpty {
-//                onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
-//                return
-//            }
-//        }
-//
-//        let stakingInfoVC = BtcStakingInfoVC(nibName: "BtcStakingInfoVC", bundle: nil)
-//        stakingInfoVC.selectedChain = selectedChain as? ChainBitCoin86
-//        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
+        if selectedChain.isStakeEnabled() {
+            if let babylonBtcFetcher = (selectedChain as? ChainBitCoin86)?.getBabylonBtcFetcher() {
+                if babylonBtcFetcher.finalityProviders.isEmpty {
+                    onShowToast(NSLocalizedString("error_wait_moment", comment: ""))
+                    return
+                }
+            }
+            
+            let stakingInfoVC = BtcStakingInfoVC(nibName: "BtcStakingInfoVC", bundle: nil)
+            stakingInfoVC.selectedChain = selectedChain as? ChainBitCoin86
+            self.navigationController?.pushViewController(stakingInfoVC, animated: true)
+            
+        } else {
+            if (!BaseData.instance.showEvenReview()) { onShowToast("Please try again later."); return }
+            
+            if BaseData.instance.getEcosystemPopUpActiveStatus(.MoveBabylonDappDetail) {
+                let dappPopUpView = EcosystemPopUpSheet(nibName: "EcosystemPopUpSheet", bundle: nil)
+                dappPopUpView.selectedChain = selectedChain
+                dappPopUpView.tag = 102
+                dappPopUpView.sheetDelegate = self
+                dappPopUpView.modalPresentationStyle = .overFullScreen
+                self.present(dappPopUpView, animated: true)
+                
+            } else {
+                onSelectedSheet(.MoveBabylonDappDetail, [:])
+            }
+            
+        }
     }
 
+    
+    
+}
+
+extension MajorClassVC: BaseSheetDelegate {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
+        if sheetType == .MoveBabylonDappDetail {
+            let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+            dappDetail.dappType = .INTERNAL_URL
+            dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
+            dappDetail.btcTargetChain = selectedChain
+            dappDetail.modalPresentationStyle = .fullScreen
+            self.present(dappDetail, animated: true)
+        }
+    }
 }

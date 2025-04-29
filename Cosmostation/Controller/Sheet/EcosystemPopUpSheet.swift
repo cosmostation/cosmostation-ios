@@ -31,6 +31,15 @@ class EcosystemPopUpSheet: BaseVC {
         
         ecosystemButton.layer.cornerRadius = 4
         
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.fontSize12Bold,
+            .foregroundColor: UIColor.color01,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+
+        let attributedTitle = NSAttributedString(string: "Close", attributes: attributes)
+        closeButton.setAttributedTitle(attributedTitle, for: .normal)
+            
         hideButton.configuration?.contentInsets = .zero
         hideButton.configurationUpdateHandler = { button in
             button.configuration?.image = button.isSelected ? UIImage(named: "iconCheckboxOn"): UIImage(named: "iconCheckboxOff")

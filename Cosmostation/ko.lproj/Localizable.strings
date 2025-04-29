@@ -225,6 +225,7 @@
 "str_inflation" = "인플래이션";
 "str_est_apr" = "예상 수익률";
 "str_days" = "일";
+"str_hours" = "시간";
 "str_staking_asset" = "스테이킹 코인";
 "str_chain_id" = "체인 아이디";
 "str_chain_id_cosmos" = "체인 아이디 (cosmos 형식)";
@@ -336,6 +337,7 @@
 "str_restore_wallets" = "지갑 복원";
 "str_deposit" = "예치";
 "str_withdraw" = "출금";
+"str_withdraw_msg" = "스테이킹 수량을 출금합니다.";
 "str_copy_evm_address" = "Evm형식 주소복사";
 "str_share_evm_address" = "Evm형식 주소공유";
 "str_share_evm_address2" = "Evm형식\n주소공유";
@@ -362,8 +364,6 @@
 "str_next_reward_distibution" = "다음 보상 분배";
 "str_next_epoch" = "다음 에포치 활성화";
 "str_coin_manage_stake" = "%@ 스테이킹 관리";
-"str_staked_coin" = "스테이킹된 %@";
-"str_staked_coin_status" = "스테이킹된 %@ 상태";
 
 
 "btn_delegate" = "  위임 하기";
@@ -466,6 +466,10 @@
 "msg_babylon_pending_state" = "BABYLON 체인에서는 스테이킹 관련 기능(Stake, Unstake, Validator, Switch Validator, Unstake Cancel 등)을 실행하면 우선 Pending 상태로 시작됩니다.\n이후 현재 에포크가 종료되고 다음 에포크로 넘어가면, 해당 스테이킹 작업은 즉시 활성화 상태로 전환됩니다.";
 "msg_babylon_active_state" = "Active 상태란 Pending 상태가 종료되고 실행한 기능들이 정상적으로 활성화되고 있는 상태를 의미합니다.\n이 상태에서는 사용자가 요청한 스테이킹 관련 기능들이 모두 정상적으로 동작하게 됩니다.";
 
+"title_btc_staking_additional_fee" = "%@ 코인이 추가 수수료로 사용됩니다.";
+"msg_btc_staking_additional_fee" = "%@ 스테이킹에는 %@ 코인 외에 %@ 코인이 추가 수수료로\n사용되며, 추가 수수료는 %@ 주소에 보유한\n%@ 코인에서 차감됩니다.";
+"msg_insufficient_balance" = "Insufficient %@ balance for fees.";
+
 
 
 "guide_msg_cosmos" = "Tendermint BFT와 ABCI \n기반의 분산형 블록체인 네트워크.";
@@ -545,6 +549,7 @@
 "setting_chain_title" = "체인 관리";
 "setting_addressbook_title" = "주소록 관리";
 "setting_language_title" = "언어";
+"setting_theme_title" = "테마";
 "setting_currecny_title" = "통화";
 "setting_notification_title" = "알람";
 "setting_app_lock_title" = "앱락";
@@ -1036,6 +1041,7 @@
 "title_coin_rewards_claim" = "%@ 이자 받기";
 "title_coin_commission_claim" = "%@ 커미션 받기";
 "title_coin_compounding" = "%@ 컴파운딩";
+"title_coin_withdraw" = "%@ Withdraw";
 
 
 "proposal_type_basic" = "기본";
@@ -1240,6 +1246,8 @@
 "style_pro" = "프로";
 "style_simple_msg" = "온 체인상 자산의 가치를 표시합니다.";
 "style_pro_msg" = "메인 자산의 가격과 변동수치가 추가로 표시됩니다.";
+"str_dark" = "다크";
+"str_cosmic" = "코스믹";
 
 "currency_fetch_success" = "가격 정보를 갱신 하였습니다.";
 "currency_fetch_failed" = "가격 정보 갱신에 실패하였습니다.";
@@ -1326,7 +1334,9 @@
 "tx_kava_earn_withdraw" = "어닝 리퀴디티 출금";
 
 "tx_ibc_send" = "IBC 보내기";
+"tx_ibc_eureka_send" = "IBC 유레카 보내기";
 "tx_ibc_receive" = "IBC 받기";
+"tx_ibc_eureka_receive" = "IBC 유레카 받기";
 "tx_ibc_client_update" = "IBC 클라이언트 업데이트";
 "tx_ibc_acknowledgement" = "IBC 승인";
 

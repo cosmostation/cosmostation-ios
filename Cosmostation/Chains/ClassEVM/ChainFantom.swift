@@ -15,15 +15,12 @@ class ChainFantom: BaseChain {
         
         name = "Fantom"
         tag = "fantom60"
-        logo1 = "chainFantom"
         apiName = "fantom"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
         supportEvm = true
         coinSymbol = "FTM"
-        coinGeckoId = "fantom"
-        coinLogo = "tokenFantom"
-        evmRpcURL = "https://rpc.ftm.tools"
+        evmRpcURL = "https://fantom.drpc.org"
     }
 }

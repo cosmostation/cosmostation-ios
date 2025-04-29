@@ -25,6 +25,10 @@ final class BaseData: NSObject{
     var mintscanUSDPrices: [MintscanPrice]?
     var mintscanPrices: [MintscanPrice]?
     var mintscanAssets: [MintscanAsset]?
+    var mintscanCw20Tokens: [MintscanToken]?
+    var mintscanErc20Tokens: [MintscanToken]?
+    var mintscanGrc20Tokens: [MintscanToken]?
+    var mintscanCw721: [JSON]?
     var baseAccount: BaseAccount?
     
     var allEcosystems: [JSON]?
@@ -40,7 +44,9 @@ final class BaseData: NSObject{
     }
     
     func getAsset(_ chainApiName: String, _ denom: String) -> MintscanAsset? {
-        return mintscanAssets?.filter({ $0.chain == chainApiName && $0.denom?.lowercased() == denom.lowercased() }).first
+        return mintscanAssets?.filter({
+            $0.chain == chainApiName && ($0.denom?.lowercased() == denom.lowercased() || $0.symbol?.lowercased() == denom.lowercased())
+        }).first
     }
     
     func getPrice(_ geckoId: String?, _ usd: Bool? = false) -> NSDecimalNumber {
@@ -660,6 +666,14 @@ extension BaseData {
         return ProtfolioStyle.getProtfolioStyles()[getStyle()].description
     }
     
+    func setTheme(_ theme : Int) {
+        UserDefaults.standard.set(theme, forKey: KEY_THEME)
+    }
+    
+    func getTheme() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_THEME)
+    }
+        
     func setAutoPass(_ mode : Int) {
         UserDefaults.standard.set(mode, forKey: KEY_AUTO_PASS)
     }

@@ -15,7 +15,6 @@ class ChainShidoEVM: BaseChain  {
         
         name = "Shido"
         tag = "shido60"
-        logo1 = "chainShido"
         apiName = "shido"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
@@ -29,8 +28,6 @@ class ChainShidoEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "SHIDO"
-        coinGeckoId = "shido-2"
-        coinLogo = "tokenShido"
         evmRpcURL = "https://rpc-nodes.shidoscan.com"
     }
 }

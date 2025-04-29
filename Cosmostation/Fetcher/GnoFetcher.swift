@@ -39,20 +39,20 @@ class GnoFetcher {
         mintscanGrc20Tokens.removeAll()
         gnoBalances = nil
         do {
-            if let grc20Tokens = try? await fetchGrc20Info(),
-               let balance = try await fetchBalance(),
+            if let balance = try await fetchBalance(),
                let _ = try? await fetchAuth() {
                 
-                self.mintscanGrc20Tokens = grc20Tokens
+                self.mintscanGrc20Tokens = BaseData.instance.mintscanGrc20Tokens?.filter({ $0.chainName == chain.apiName }) ?? []
                 self.gnoBalances = balance
                 let userDisplayGrc20token = BaseData.instance.getDisplayGrc20s(id, self.chain.tag)
                 await mintscanGrc20Tokens.concurrentForEach { grc20 in
+                    grc20.type = "grc20"
                     if (userDisplayGrc20token == nil) {
                         if (grc20.wallet_preload == true) {
                             await self.fetchGrc20Balance(grc20)
                         }
                     } else {
-                        if (userDisplayGrc20token?.contains(grc20.contract!) == true) {
+                        if (userDisplayGrc20token?.contains(grc20.address!) == true) {
                             await self.fetchGrc20Balance(grc20)
                         }
                     }
@@ -83,8 +83,13 @@ class GnoFetcher {
         return gnoBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0
     }
     
-    func valueTokenCnt() -> Int {
-            return mintscanGrc20Tokens.filter({ $0.getAmount() != NSDecimalNumber.zero }).count
+    func valueTokenCnt(_ id: Int64) -> Int {
+        if let tokens = BaseData.instance.getDisplayGrc20s(id, chain.tag) {
+            return tokens.count
+            
+        } else {
+            return mintscanGrc20Tokens.filter({ $0.wallet_preload == true }).count
+        }
     }
 }
 
@@ -93,7 +98,7 @@ extension GnoFetcher {
     
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if chain.isSupportGrc20() {
-            if let tokenInfo = mintscanGrc20Tokens.filter({ $0.contract == address }).first {
+            if let tokenInfo = mintscanGrc20Tokens.filter({ $0.address == address }).first {
                 let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
                 if msPrice != 0 {
                     return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
@@ -103,17 +108,23 @@ extension GnoFetcher {
         return NSDecimalNumber.zero
     }
     
-    func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
+    func allTokenValue(_ id: Int64, _ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         
-        if chain.isSupportGrc20() {
-            mintscanGrc20Tokens.forEach { tokenInfo in
+        if let tokens = BaseData.instance.getDisplayGrc20s(id, chain.tag) {
+            mintscanGrc20Tokens.filter({ tokens.contains($0.address ?? "") }).forEach { tokenInfo in
                 let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
-                if msPrice != 0 {
-                    let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
-                    result = result.adding(value)
-                }
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
             }
+            
+        } else {
+            mintscanGrc20Tokens.filter({ $0.wallet_preload == true }).forEach { tokenInfo in
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
+            }
+            
         }
         
         return result
@@ -144,16 +155,6 @@ extension GnoFetcher {
 
 
 extension GnoFetcher {
-    func fetchGrc20Info() async throws -> [MintscanToken] {
-        if (!chain.isSupportGrc20()) { return [] }
-         
-        let result = try await AF.request(BaseNetWork.msGrc20InfoUrl(chain.apiName), method: .get).serializingDecodable([MintscanToken].self).value
-        return result
-    }
-}
-
-
-extension GnoFetcher {
     func fetchAuth() async throws {
         gnoAccountNumber = nil
         gnoSequenceNum = nil
@@ -169,8 +170,8 @@ extension GnoFetcher {
             return
         }
         let jsonData = try JSON(data: data!)
-        gnoAccountNumber = jsonData["BaseAccount"]["account_number"].uInt64Value
-        gnoSequenceNum = jsonData["BaseAccount"]["sequence"].uInt64Value
+        gnoAccountNumber = UInt64(jsonData["BaseAccount"]["account_number"].stringValue)
+        gnoSequenceNum = UInt64(jsonData["BaseAccount"]["sequence"].stringValue)
     }
     
     func fetchBalance() async throws -> [Cosmos_Base_V1beta1_Coin]? {
@@ -244,7 +245,7 @@ extension GnoFetcher {
     }
     
     func fetchGrc20Balance(_ tokenInfo: MintscanToken) async {
-        let tokenPath = tokenInfo.contract!
+        let tokenPath = tokenInfo.address!
         let tokenBalancePath = "\(tokenPath).BalanceOf(\"\(chain.bechAddress!)\")"
         
         let param: Parameters = ["method": "abci_query", "params": ["vm/qeval", tokenBalancePath.data(using: .utf8)!.base64EncodedString(),"0",false], "id" : 1, "jsonrpc" : "2.0"]

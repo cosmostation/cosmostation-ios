@@ -17,7 +17,6 @@ class ChainGno: BaseChain  {
         
         name = "Gno"
         tag = "gno118"
-        logo1 = "chainGno"
         apiName = "gno"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
@@ -85,9 +84,9 @@ class ChainGno: BaseChain  {
                     coinsValue = gnoFetcher.allCoinValue()
                     coinsUSDValue = gnoFetcher.allCoinValue(true)
                     mainCoinAmount = gnoFetcher.allStakingDenomAmount()
-                    tokensCnt = gnoFetcher.valueTokenCnt()
-                    tokensValue = gnoFetcher.allTokenValue()
-                    tokensUSDValue = gnoFetcher.allTokenValue(true)
+                    tokensCnt = gnoFetcher.valueTokenCnt(id)
+                    tokensValue = gnoFetcher.allTokenValue(id)
+                    tokensUSDValue = gnoFetcher.allTokenValue(id, true)
                 }
                 
                 allCoinValue = coinsValue

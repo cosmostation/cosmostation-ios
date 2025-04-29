@@ -69,9 +69,7 @@ class CosmosFetcher {
         cosmosBaseFees.removeAll()
         
         do {
-            if let cw20Tokens = try? await fetchCw20Info(),
-               let cw721List = try? await fetchCw721Info(),
-               let balance = try await fetchBalance(),
+            if let balance = try await fetchBalance(),
                let _ = try? await fetchAuth(),
                let delegations = try? await fetchDelegation(),
                let unbonding = try? await fetchUnbondings(),
@@ -79,8 +77,10 @@ class CosmosFetcher {
                let commission = try? await fetchCommission(),
                let rewardaddr = try? await fetchRewardAddress(),
                let baseFees = try? await fetchBaseFee() {
-                self.mintscanCw20Tokens = cw20Tokens ?? []
-                self.mintscanCw721List = cw721List ?? []
+                
+                self.mintscanCw20Tokens =  BaseData.instance.mintscanCw20Tokens?.filter({ $0.chainName == chain.apiName }) ?? []
+                self.mintscanCw721List = BaseData.instance.mintscanCw721?.filter({ $0["chain"].stringValue == chain.apiName }) ?? []
+
                 self.cosmosBalances = balance
                 
                 delegations?.forEach({ delegation in
@@ -109,12 +109,13 @@ class CosmosFetcher {
                 }
                 let userDisplaytoken = BaseData.instance.getDisplayCw20s(id, self.chain.tag)
                 await mintscanCw20Tokens.concurrentForEach { cw20 in
+                    cw20.type = "cw20"
                     if (userDisplaytoken == nil) {
                         if (cw20.wallet_preload == true) {
                             await self.fetchCw20Balance(cw20)
                         }
                     } else {
-                        if (userDisplaytoken?.contains(cw20.contract!) == true) {
+                        if (userDisplaytoken?.contains(cw20.address!) == true) {
                             await self.fetchCw20Balance(cw20)
                         }
                     }
@@ -200,8 +201,13 @@ class CosmosFetcher {
         return cosmosBalances?.filter({ BaseData.instance.getAsset(chain.apiName, $0.denom) != nil }).count ?? 0
     }
     
-    func valueTokenCnt() -> Int {
-        return mintscanCw20Tokens.filter {  $0.getAmount() != NSDecimalNumber.zero }.count
+    func valueTokenCnt(_ id: Int64) -> Int {
+        if let tokens = BaseData.instance.getDisplayCw20s(id, chain.tag) {
+            return tokens.count
+            
+        } else {
+            return mintscanCw20Tokens.filter({ $0.wallet_preload == true }).count
+        }
     }
 
     func isRewardAddressChanged() -> Bool {
@@ -214,7 +220,7 @@ class CosmosFetcher {
 extension CosmosFetcher {
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if chain.isSupportCw20() {
-            if let tokenInfo = mintscanCw20Tokens.filter({ $0.contract == address }).first {
+            if let tokenInfo = mintscanCw20Tokens.filter({ $0.address == address }).first {
                 let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
                 return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
             }
@@ -222,15 +228,23 @@ extension CosmosFetcher {
         return NSDecimalNumber.zero
     }
     
-    func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
+    func allTokenValue(_ id: Int64, _ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         
-        if chain.isSupportCw20() {
-            mintscanCw20Tokens.forEach { tokenInfo in
+        if let tokens = BaseData.instance.getDisplayCw20s(id, chain.tag) {
+            mintscanCw20Tokens.filter({ tokens.contains($0.address ?? "") }).forEach { tokenInfo in
                 let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
                 let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
                 result = result.adding(value)
             }
+            
+        } else {
+            mintscanCw20Tokens.filter({ $0.wallet_preload == true }).forEach { tokenInfo in
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
+            }
+            
         }
         return result
     }
@@ -468,20 +482,6 @@ extension CosmosFetcher {
     }
 }
 
-//about mintscan api
-extension CosmosFetcher {
-    func fetchCw20Info() async throws -> [MintscanToken]? {
-        if (!chain.isSupportCw20()) { return [] }
-        return try await AF.request(BaseNetWork.msCw20InfoUrl(chain.apiName), method: .get).serializingDecodable([MintscanToken].self).value
-    }
-    
-    func fetchCw721Info() async throws -> [JSON]? {
-        if (!chain.isSupportCw721()) { return [] }
-        return try await AF.request(BaseNetWork.msCw721InfoUrl(chain.apiName), method: .get).serializingDecodable(JSON.self).value["assets"].arrayValue
-    }
-
-}
-
 //about web3 call api
 extension CosmosFetcher {
     
@@ -647,6 +647,31 @@ extension CosmosFetcher {
         return resultProposals
     }
     
+    func fetchOnChainProposalHistory(_ id: UInt64, _ address: String) async -> MintscanMyVotes? {
+        if (getEndpointType() == .UseGRPC) {
+            let v1Req = Cosmos_Gov_V1_QueryVoteRequest.with { $0.proposalID = id; $0.voter = address}
+            let v1betaReq = Cosmos_Gov_V1beta1_QueryVoteRequest.with { $0.proposalID = id; $0.voter = address}
+            if let result = try? await Cosmos_Gov_V1_QueryNIOClient(channel: getClient()).vote(v1Req, callOptions: getCallOptions()).response.get() {
+                return .init(result.vote)
+                
+            } else if let result = try? await Cosmos_Gov_V1beta1_QueryNIOClient(channel: getClient()).vote(v1betaReq, callOptions: getCallOptions()).response.get() {
+                return .init(result.vote)
+            }
+
+        } else {
+            let v1Url = getLcd() + "cosmos/gov/v1/proposals/" + String(id) + "/votes/" + address
+            let v1beta1Url = getLcd() + "cosmos/gov/v1beta1/proposals/" + String(id) + "/votes/" + address
+            if let value = try? await AF.request(v1Url, method: .get).serializingDecodable(JSON.self).value, value["vote"].exists() {
+                return .init(value["vote"])
+                
+            } else if let vote = try? await AF.request(v1beta1Url, method: .get).serializingDecodable(JSON.self).value["vote"] {
+                return .init(vote)
+            }
+        }
+        
+        return nil
+    }
+    
     func simulateTx(_ simulTx: Cosmos_Tx_V1beta1_SimulateRequest) async throws -> UInt64? {
         if (getEndpointType() == .UseGRPC) {
             return try await Cosmos_Tx_V1beta1_ServiceNIOClient(channel: getClient()).simulate(simulTx, callOptions: getCallOptions()).response.get().gasInfo.gasUsed
@@ -702,15 +727,15 @@ extension CosmosFetcher {
     func fetchIbcClient(_ ibcPath: MintscanPath) async throws -> UInt64? {
         if (getEndpointType() == .UseGRPC) {
             let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
-                $0.channelID = ibcPath.channel!
-                $0.portID = ibcPath.port!
+                $0.channelID = ibcPath.getChannel()!
+                $0.portID = ibcPath.getPort()!
             }
             if let result = try? await Ibc_Core_Channel_V1_QueryNIOClient(channel: getClient()).channelClientState(req, callOptions: getCallOptions()).response.get().identifiedClientState.clientState.value,
                let latestHeight = try? Ibc_Lightclients_Tendermint_V1_ClientState.init(serializedData: result).latestHeight.revisionNumber {
                 return latestHeight
             }
         } else {
-            let url = getLcd() + "ibc/core/channel/v1/channels/${channel}/ports/${port}/client_state".replacingOccurrences(of: "${channel}", with: ibcPath.channel!).replacingOccurrences(of: "${port}", with: ibcPath.port!)
+            let url = getLcd() + "ibc/core/channel/v1/channels/${channel}/ports/${port}/client_state".replacingOccurrences(of: "${channel}", with: ibcPath.getChannel()!).replacingOccurrences(of: "${port}", with: ibcPath.getPort()!)
             let result = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
             if let revision_number = result["identified_client_state"]["client_state"]["latest_height"]["revision_number"].string {
                 return UInt64(revision_number)
@@ -753,7 +778,7 @@ extension CosmosFetcher {
                         await self.fetchCw20Balance(cw20)
                     }
                 } else {
-                    if (userDisplaytoken?.contains(cw20.contract!) == true) {
+                    if (userDisplaytoken?.contains(cw20.address!) == true) {
                         await self.fetchCw20Balance(cw20)
                     }
                 }
@@ -766,7 +791,7 @@ extension CosmosFetcher {
             let query: JSON = ["balance" : ["address" : self.chain.bechAddress!]]
             let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
             let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
-                $0.address = tokenInfo.contract!
+                $0.address = tokenInfo.address!
                 $0.queryData = Data(base64Encoded: queryBase64)!
             }
             if let response = try? await Cosmwasm_Wasm_V1_QueryNIOClient(channel: getClient()).smartContractState(req, callOptions: self.getCallOptions()).response.get() {
@@ -776,7 +801,7 @@ extension CosmosFetcher {
         } else {
             let query: JSON = ["balance" : ["address" : self.chain.bechAddress!]]
             let queryBase64 = try! query.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
-            let url = getLcd() + "cosmwasm/wasm/v1/contract/${address}/smart/${query_data}".replacingOccurrences(of: "${address}", with: tokenInfo.contract!).replacingOccurrences(of: "${query_data}", with: queryBase64)
+            let url = getLcd() + "cosmwasm/wasm/v1/contract/${address}/smart/${query_data}".replacingOccurrences(of: "${address}", with: tokenInfo.address!).replacingOccurrences(of: "${query_data}", with: queryBase64)
             if let response = try? await AF.request(url, method: .get).serializingDecodable(JSON.self).value["data"] {
                 if let balance = response["balance"].string {
                     tokenInfo.setAmount(balance)

@@ -130,7 +130,7 @@ class CosmosClassVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let tabVC = (self.parent)?.parent as? MainTabVC
-        tabVC?.showChainBgImage(UIImage(named: selectedChain.logo1)!)
+        tabVC?.showChainBgImage(selectedChain.getChainImage())
         if (BaseData.instance.getHideValue()) {
             hideValueBtn.setImage(UIImage.init(named: "iconHideValueOff"), for: .normal)
         } else {
@@ -278,9 +278,11 @@ class CosmosClassVC: BaseVC {
             }
         }
         
-        if (selectedChain.supportStaking) {
-            mainFab.addItem(title: "Vote", image: UIImage(named: "iconFabGov")) { _ in
-                self.onProposalList()
+        if (selectedChain.isStakeEnabled()) {
+            if !(selectedChain is ChainNeutron) {
+                mainFab.addItem(title: "Vote", image: UIImage(named: "iconFabGov")) { _ in
+                    self.onProposalList()
+                }
             }
             if (selectedChain.getCosmosfetcher()?.cosmosCommissions.count ?? 0 > 0) {
                 mainFab.addItem(title: "Claim Commission", image: UIImage(named: "iconFabCommission")) { _ in
@@ -296,14 +298,13 @@ class CosmosClassVC: BaseVC {
                 }
 //            }
             
-        }
-        
-        if (selectedChain.supportStaking) {
             let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
-            mainFab.addItem(title: "\(symbol) Manage stake", image: UIImage(named: "iconFabStake")) { _ in
+            mainFab.addItem(title: "\(symbol) Manage Stake", image: UIImage(named: "iconFabStake")) { _ in
                 self.onStakeInfo()
             }
+
         }
+        
         
         view.addSubview(mainFab)
         mainFab.translatesAutoresizingMaskIntoConstraints = false
@@ -475,6 +476,17 @@ extension CosmosClassVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
+        
+        if let chainNeutron = selectedChain as? ChainNeutron {
+            let compounding = NeutronCompounding(nibName: "NeutronCompounding", bundle: nil)
+            compounding.claimableRewards = chainNeutron.getNeutronFetcher()?.claimableRewards() ?? []
+            compounding.selectedChain = chainNeutron
+            compounding.isCompoundingAll = true
+            compounding.modalTransitionStyle = .coverVertical
+            self.present(compounding, animated: true)
+            return
+        }
+        
         if (comsosFetcher.rewardAddress != selectedChain.bechAddress) {
             onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
             return
@@ -529,6 +541,10 @@ extension CosmosClassVC {
         if selectedChain is ChainBabylon {
             onBindBabylonStakeInfo()
             return
+            
+        } else if selectedChain is ChainNeutron {
+            onBindNeutronStakeInfo()
+            return
         }
         
         let stakingInfoVC = CosmosStakingInfoVC(nibName: "CosmosStakingInfoVC", bundle: nil)
@@ -565,6 +581,14 @@ extension CosmosClassVC {
         self.navigationController?.pushViewController(stakingInfoVC, animated: true)
     }
     
+    func onBindNeutronStakeInfo() {
+        let stakingInfoVC = NeutronStakingInfoVC(nibName: "NeutronStakingInfoVC", bundle: nil)
+        stakingInfoVC.selectedChain = selectedChain as? ChainNeutron
+        stakingInfoVC.cosmosCryptoVC = cosmosCryptoVC
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
+    }
+
 }
 
 //Custom Action For Kava

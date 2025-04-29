@@ -123,4 +123,11 @@ class BaseMsgSheetCell: UITableViewCell {
             descriptionLabel.text = "Sort the list by the number of supported networks"
         }
     }
+    
+    func onBindBtcWithdraw() {
+        titleLabel.text = NSLocalizedString("str_withdraw", comment: "")
+        descriptionLabel.text = NSLocalizedString("str_withdraw_msg", comment: "")
+    }
+    
+
 }

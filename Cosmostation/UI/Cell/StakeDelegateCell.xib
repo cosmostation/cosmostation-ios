@@ -223,12 +223,14 @@
                 <outlet property="commPercentLabel" destination="oF3-1v-R8d" id="B2J-an-nBt"/>
                 <outlet property="estLabel" destination="QCq-ob-sxv" id="2rg-ic-Vgw"/>
                 <outlet property="estTitleLabel" destination="Oog-wy-rdI" id="nA7-qr-UQx"/>
+                <outlet property="estView" destination="y97-bH-CGz" id="Eq1-Dt-yJc"/>
                 <outlet property="inactiveTag" destination="OiQ-uj-Xjt" id="Dhy-4m-6WE"/>
                 <outlet property="jailedTag" destination="g6Y-WS-Wef" id="neu-9e-Aw2"/>
                 <outlet property="logoImg" destination="6EU-7C-FIC" id="CLV-da-I42"/>
                 <outlet property="nameLabel" destination="haF-lh-o1R" id="Dia-Fs-7lc"/>
                 <outlet property="rewardLabel" destination="eU2-D9-d1o" id="CeR-X6-rTS"/>
                 <outlet property="rewardTitle" destination="3hL-iH-ygw" id="Ewg-vz-avu"/>
+                <outlet property="rewardView" destination="I5L-Ma-cfd" id="nJh-RX-KXK"/>
                 <outlet property="rootView" destination="oPB-jM-OzH" id="a0s-XL-u7N"/>
                 <outlet property="stakingLabel" destination="7Jj-f9-mPc" id="8Ho-Hs-NVh"/>
                 <outlet property="stakingTitle" destination="3Vp-oN-t06" id="W4C-JD-4wl"/>

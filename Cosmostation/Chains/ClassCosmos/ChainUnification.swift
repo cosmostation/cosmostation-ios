@@ -15,7 +15,6 @@ class ChainUnification: BaseChain {
         
         name = "Unification"
         tag = "unification5555"
-        logo1 = "chainUnification"
         apiName = "unification"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/5555'/0'/0/X")
         

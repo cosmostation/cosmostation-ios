@@ -38,10 +38,10 @@ class AddressBookCell: UITableViewCell {
         } else {
             memoLabel.isHidden = false
 //            if let chain = All_IBC_Chains().filter({ $0.name == book.chainName }).first {
-//                logoImg1.image = UIImage.init(named: chain.logo1)
+//                logoImg1.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
 //            }
             if let chain = ALLCHAINS().filter({ $0.name.lowercased() == book.chainName.lowercased() }).first {
-                logoImg1.image = UIImage.init(named: chain.logo1)
+                logoImg1.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
             }
         }
         nameLabel.text = book.bookName

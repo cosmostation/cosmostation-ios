@@ -17,14 +17,11 @@ class ChainSui: BaseChain  {
         
         name = "Sui"
         tag = "suiMainnet"
-        logo1 = "chainSui"
         apiName = "sui"
         accountKeyType = AccountKeyType(.SUI_Ed25519, "m/44'/784'/0'/0'/X'")
     
         coinSymbol = "SUI"
         stakeDenom = SUI_MAIN_DENOM
-        coinGeckoId = "sui"
-        coinLogo = "tokenSui"
         
         mainUrl = "https://sui-mainnet-us-2.cosmostation.io"
     }

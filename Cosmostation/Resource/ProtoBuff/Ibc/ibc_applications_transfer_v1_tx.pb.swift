@@ -34,7 +34,7 @@ struct Ibc_Applications_Transfer_V1_MsgTransfer {
   /// the channel by which the packet will be sent
   var sourceChannel: String = String()
 
-  /// the tokens to be transferred
+  /// token to be transferred
   var token: Cosmos_Base_V1beta1_Coin {
     get {return _token ?? Cosmos_Base_V1beta1_Coin()}
     set {_token = newValue}
@@ -51,7 +51,8 @@ struct Ibc_Applications_Transfer_V1_MsgTransfer {
   var receiver: String = String()
 
   /// Timeout height relative to the current block height.
-  /// The timeout is disabled when set to 0.
+  /// If you are sending with IBC v1 protocol, either timeout_height or timeout_timestamp must be set.
+  /// If you are sending with IBC v2 protocol, timeout_timestamp must be set, and timeout_height must be omitted.
   var timeoutHeight: Ibc_Core_Client_V1_Height {
     get {return _timeoutHeight ?? Ibc_Core_Client_V1_Height()}
     set {_timeoutHeight = newValue}
@@ -62,11 +63,15 @@ struct Ibc_Applications_Transfer_V1_MsgTransfer {
   mutating func clearTimeoutHeight() {self._timeoutHeight = nil}
 
   /// Timeout timestamp in absolute nanoseconds since unix epoch.
-  /// The timeout is disabled when set to 0.
+  /// If you are sending with IBC v1 protocol, either timeout_height or timeout_timestamp must be set.
+  /// If you are sending with IBC v2 protocol, timeout_timestamp must be set.
   var timeoutTimestamp: UInt64 = 0
 
   /// optional memo
   var memo: String = String()
+
+  /// optional encoding
+  var encoding: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -96,8 +101,8 @@ struct Ibc_Applications_Transfer_V1_MsgUpdateParams {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// authority is the address that controls the module (defaults to x/gov unless overwritten).
-  var authority: String = String()
+  /// signer address
+  var signer: String = String()
 
   /// params defines the transfer parameters to update.
   ///
@@ -152,6 +157,7 @@ extension Ibc_Applications_Transfer_V1_MsgTransfer: SwiftProtobuf.Message, Swift
     6: .standard(proto: "timeout_height"),
     7: .standard(proto: "timeout_timestamp"),
     8: .same(proto: "memo"),
+    9: .same(proto: "encoding"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -168,6 +174,7 @@ extension Ibc_Applications_Transfer_V1_MsgTransfer: SwiftProtobuf.Message, Swift
       case 6: try { try decoder.decodeSingularMessageField(value: &self._timeoutHeight) }()
       case 7: try { try decoder.decodeSingularUInt64Field(value: &self.timeoutTimestamp) }()
       case 8: try { try decoder.decodeSingularStringField(value: &self.memo) }()
+      case 9: try { try decoder.decodeSingularStringField(value: &self.encoding) }()
       default: break
       }
     }
@@ -202,6 +209,9 @@ extension Ibc_Applications_Transfer_V1_MsgTransfer: SwiftProtobuf.Message, Swift
     if !self.memo.isEmpty {
       try visitor.visitSingularStringField(value: self.memo, fieldNumber: 8)
     }
+    if !self.encoding.isEmpty {
+      try visitor.visitSingularStringField(value: self.encoding, fieldNumber: 9)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -214,6 +224,7 @@ extension Ibc_Applications_Transfer_V1_MsgTransfer: SwiftProtobuf.Message, Swift
     if lhs._timeoutHeight != rhs._timeoutHeight {return false}
     if lhs.timeoutTimestamp != rhs.timeoutTimestamp {return false}
     if lhs.memo != rhs.memo {return false}
+    if lhs.encoding != rhs.encoding {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -254,7 +265,7 @@ extension Ibc_Applications_Transfer_V1_MsgTransferResponse: SwiftProtobuf.Messag
 extension Ibc_Applications_Transfer_V1_MsgUpdateParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".MsgUpdateParams"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "authority"),
+    1: .same(proto: "signer"),
     2: .same(proto: "params"),
   ]
 
@@ -264,7 +275,7 @@ extension Ibc_Applications_Transfer_V1_MsgUpdateParams: SwiftProtobuf.Message, S
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.authority) }()
+      case 1: try { try decoder.decodeSingularStringField(value: &self.signer) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._params) }()
       default: break
       }
@@ -276,8 +287,8 @@ extension Ibc_Applications_Transfer_V1_MsgUpdateParams: SwiftProtobuf.Message, S
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
-    if !self.authority.isEmpty {
-      try visitor.visitSingularStringField(value: self.authority, fieldNumber: 1)
+    if !self.signer.isEmpty {
+      try visitor.visitSingularStringField(value: self.signer, fieldNumber: 1)
     }
     try { if let v = self._params {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
@@ -286,7 +297,7 @@ extension Ibc_Applications_Transfer_V1_MsgUpdateParams: SwiftProtobuf.Message, S
   }
 
   static func ==(lhs: Ibc_Applications_Transfer_V1_MsgUpdateParams, rhs: Ibc_Applications_Transfer_V1_MsgUpdateParams) -> Bool {
-    if lhs.authority != rhs.authority {return false}
+    if lhs.signer != rhs.signer {return false}
     if lhs._params != rhs._params {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

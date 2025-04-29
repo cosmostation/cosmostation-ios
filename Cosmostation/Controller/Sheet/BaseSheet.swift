@@ -29,6 +29,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var dappNetworks: [DappNetwork] = []
     var dappNetworksSearch = [DappNetwork]()
     var dappSelectedNetwork: BaseChain?
+    var recipientChain: BaseChain!
     
     var feeDatas = Array<FeeData>()
     var baseFeesDatas = [Cosmos_Base_V1beta1_DecCoin]()
@@ -37,10 +38,13 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var delegations = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     var delegation: Cosmos_Staking_V1beta1_DelegationResponse!
     var unbondingEnrtyPosition: Int?
-    var cosmosChainList = Array<BaseChain>()
+    var recipientableChains = Array<BaseChain>()
     var nameservices = Array<NameService>()
     var oktValidators = [JSON]()
-    
+    var btcFinalityProvider: FinalityProvider!
+    var btcDelegations = [BtcDelegation]()
+    var btcDelegation: BtcDelegation?
+
     var senderAddress: String!
     var refAddresses = Array<RefAddress>()
     var addressBook = Array<AddressBook>()
@@ -97,13 +101,15 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SwitchCurrencyCell", bundle: nil), forCellReuseIdentifier: "SwitchCurrencyCell")
         sheetTableView.register(UINib(nibName: "SwitchPriceDisplayCell", bundle: nil), forCellReuseIdentifier: "SwitchPriceDisplayCell")
         sheetTableView.register(UINib(nibName: "SwitchStyleCell", bundle: nil), forCellReuseIdentifier: "SwitchStyleCell")
+        sheetTableView.register(UINib(nibName: "SelectThemeCell", bundle: nil), forCellReuseIdentifier: "SelectThemeCell")
+
         
         sheetTableView.register(UINib(nibName: "SelectSwapChainCell", bundle: nil), forCellReuseIdentifier: "SelectSwapChainCell")
         sheetTableView.register(UINib(nibName: "SelectSwapAssetCell", bundle: nil), forCellReuseIdentifier: "SelectSwapAssetCell")
         sheetTableView.register(UINib(nibName: "SelectAccountCell", bundle: nil), forCellReuseIdentifier: "SelectAccountCell")
         sheetTableView.register(UINib(nibName: "SelectEndpointCell", bundle: nil), forCellReuseIdentifier: "SelectEndpointCell")
         sheetTableView.register(UINib(nibName: "BaseImgMsgCheckCell", bundle: nil), forCellReuseIdentifier: "BaseImgMsgCheckCell")
-        
+        sheetTableView.register(UINib(nibName: "SelectRecipientChainCell", bundle: nil), forCellReuseIdentifier: "SelectRecipientChainCell")
         
         sheetTableView.register(UINib(nibName: "SelectFeeCoinCell", bundle: nil), forCellReuseIdentifier: "SelectFeeCoinCell")
         sheetTableView.register(UINib(nibName: "SelectValidatorCell", bundle: nil), forCellReuseIdentifier: "SelectValidatorCell")
@@ -156,13 +162,16 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SwitchStyle) {
             sheetTitle.text = NSLocalizedString("str_select_style", comment: "")
             
+        } else if (sheetType == .SwitchTheme) {
+            sheetTitle.text = "Select option"
+
         } else if (sheetType == .SelectSwapInputChain) {
             sheetTitle.text = NSLocalizedString("title_select_input_chain", comment: "")
             sheetSearchBar.isHidden = false
             swapChains.sort {
                 if ($0.tag == "cosmos118") { return true }
                 if ($1.tag == "cosmos118") { return false }
-                return $0.name < $1.name
+                return $0.name.lowercased() < $1.name.lowercased()
             }
             swapChainsSearch = swapChains
             
@@ -172,7 +181,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             swapChains.sort {
                 if ($0.tag == "cosmos118") { return true }
                 if ($1.tag == "cosmos118") { return false }
-                return $0.name < $1.name
+                return $0.name.lowercased() < $1.name.lowercased()
             }
             swapChainsSearch = swapChains
             
@@ -190,7 +199,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectSwapSlippage) {
             sheetTitle.text = NSLocalizedString("title_select_slippage", comment: "")
             
-        } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectUnbondingAction || sheetType == .SelectInitiaDelegatedAction || sheetType == .SelectZenrockDelegatedAction) {
+        } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectUnbondingAction || sheetType == .SelectInitiaDelegatedAction || sheetType == .SelectZenrockDelegatedAction || sheetType == .SelectNeutronDelegatedAction || sheetType == .SelectBtcDelegatedAction || sheetType == .SelectBtcWithdrawAction) {
             sheetTitle.text = NSLocalizedString("title_select_options", comment: "")
             
         } else if (sheetType == .SelectFeeDenom || sheetType == .SelectBaseFeeDenom) {
@@ -210,7 +219,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                 }
             }
             
-        } else if (sheetType == .SelectCosmosRecipientChain) {
+        } else if (sheetType == .SelectIBCRecipientChain) {
             sheetTitle.text = NSLocalizedString("title_select_recipient_chain", comment: "")
             
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {
@@ -292,7 +301,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             }
             
         } else if (sheetType == .SelectFinalityProvider) {
-            sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
+            sheetTitle.text = "Select Finality Provider"
             sheetSearchBar.isHidden = false
             finalityProvidersSearch = finalityProviders
             
@@ -303,7 +312,13 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             sheetTitle.text = "Select chain"
             sheetSearchBar.isHidden = false
             dappNetworksSearch = dappNetworks
-
+        } else if (sheetType == .SelectUnstakeFinalityProvider) {
+            sheetTitle.text = "Select stake to unbond"
+            btcDelegations = (targetChain as? ChainBitCoin86)?.getBabylonBtcFetcher()!.btcDelegations.filter({ $0.state == "ACTIVE" }) ?? []
+            
+        } else if (sheetType == .SelectBtcWithdraw) {
+            sheetTitle.text = "Select withdrawable stake"
+            btcDelegations = (targetChain as? ChainBitCoin86)?.getBabylonBtcFetcher()!.btcDelegations.filter({ $0.state.contains("WITHDRAWABLE") }) ?? []
         }
     }
     
@@ -410,7 +425,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SwitchAutoPass) {
             return AutoPass.getAutoPasses().count
             
-        } else if (sheetType == .SwitchStyle) {
+        } else if (sheetType == .SwitchStyle || sheetType == .SwitchTheme) {
             return 2
             
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
@@ -425,7 +440,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectDelegatedAction) {
             return 5
             
-        } else if (sheetType == .SelectUnbondingAction) {
+        } else if (sheetType == .SelectNeutronDelegatedAction) {
+            return 3
+            
+        } else if (sheetType == .SelectUnbondingAction || sheetType == .SelectBtcWithdrawAction) {
             return 1
             
         } else if (sheetType == .SelectFeeDenom) {
@@ -440,8 +458,8 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectUnStakeValidator) {
             return validators.count
             
-        } else if (sheetType == .SelectCosmosRecipientChain) {
-            return cosmosChainList.count
+        } else if (sheetType == .SelectIBCRecipientChain) {
+            return recipientableChains.count
             
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {
             if (section == 0) {
@@ -502,7 +520,16 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             return dappNetworksSearch.count
         }
 
-        
+        } else if (sheetType == .SelectBtcDelegatedAction) {
+            return 2
+            
+        } else if (sheetType == .SelectUnstakeFinalityProvider) {
+            return btcDelegations.count
+            
+        } else if (sheetType == .SelectBtcWithdraw) {
+            return btcDelegations.count
+        }
+
         return 0
     }
     
@@ -552,6 +579,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindStyle(indexPath.row)
             return cell!
             
+        } else if (sheetType == .SwitchTheme) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SelectThemeCell") as? SelectThemeCell
+            cell?.onBindTheme(indexPath.row)
+            return cell!
+
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapChainCell") as? SelectSwapChainCell
             cell?.onBindCosmosChain(swapChainsSearch[indexPath.row])
@@ -567,7 +599,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onSkipSwapSlippage(indexPath.row, swapSlippage)
             return cell!
             
-        } else if (sheetType == .SelectDelegatedAction) {
+        } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectNeutronDelegatedAction || sheetType == .SelectBtcDelegatedAction) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
             cell?.onBindDelegate(indexPath.row)
             return cell!
@@ -577,6 +609,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindUndelegate(indexPath.row)
             return cell!
             
+        } else if (sheetType == .SelectBtcWithdrawAction) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
+            cell?.onBindBtcWithdraw()
+            return cell!
+
         } else if (sheetType == .SelectFeeDenom) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectFeeCoinCell") as? SelectFeeCoinCell
             cell?.onBindFeeCoin(targetChain, feeDatas[indexPath.row])
@@ -597,9 +634,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindUnstakeValidator(targetChain, validators[indexPath.row])
             return cell!
             
-        } else if (sheetType == .SelectCosmosRecipientChain) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectSwapChainCell") as? SelectSwapChainCell
-            cell?.onBindCosmosChain(cosmosChainList[indexPath.row])
+        } else if (sheetType == .SelectIBCRecipientChain) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRecipientChainCell") as? SelectRecipientChainCell
+            cell?.onBindChain(recipientableChains[indexPath.row], recipientChain, targetChain)
             return cell!
             
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {
@@ -693,6 +730,16 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindDappNetwork(indexPath.row, dappNetworksSearch[indexPath.row].chain, dappNetworksSearch[indexPath.row].dappCount, dappSelectedNetwork)
             return cell!
 
+            
+        } else if sheetType == .SelectUnstakeFinalityProvider {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectValidatorCell") as? SelectValidatorCell
+            cell?.onBindUnstakeValidator(targetChain, btcDelegations[indexPath.row])
+            return cell!
+
+        } else if sheetType == .SelectBtcWithdraw {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectValidatorCell") as? SelectValidatorCell
+            cell?.onBindUnstakeValidator(targetChain, btcDelegations[indexPath.row])
+            return cell!
         }
         
         return UITableViewCell()
@@ -707,14 +754,22 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "account" : selectedAccount]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
-        } else if (sheetType == .SelectDelegatedAction) {
+        } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectNeutronDelegatedAction) {
             let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : delegation.delegation.validatorAddress]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if (sheetType == .SelectBtcDelegatedAction) {
+            let result: [String : Any] = ["index" : indexPath.row, "finalityProvider" : btcFinalityProvider, "delegation": btcDelegation]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectUnbondingAction) {
             let result: [String : Any] = ["index" : indexPath.row, "entryPosition" : unbondingEnrtyPosition!]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
+        } else if (sheetType == .SelectBtcWithdrawAction) {
+            let result: [String : Any] = ["index" : indexPath.row, "delegation" : btcDelegation]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+
         } else if (sheetType == .SelectSwapInputChain || sheetType == .SelectSwapOutputChain) {
             let result: [String : Any] = ["index" : indexPath.row, "chainName" : swapChainsSearch[indexPath.row].name]
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -731,8 +786,8 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : validators[indexPath.row].operatorAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
-        } else if (sheetType == .SelectCosmosRecipientChain) {
-            let result: [String : Any] = ["index" : indexPath.row, "chainId" : cosmosChainList[indexPath.row].chainIdCosmos]
+        } else if (sheetType == .SelectIBCRecipientChain) {
+            let result: [String : Any] = ["index" : indexPath.row, "chainTag" : recipientableChains[indexPath.row].tag]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {
@@ -801,6 +856,14 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             sheetDelegate?.onSelectedSheet(sheetType, result)
 
             
+        } else if sheetType == .SelectUnstakeFinalityProvider {
+            let result: [String : Any] = ["index" : indexPath.row, "delegation" : btcDelegations[indexPath.row]]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if sheetType == .SelectBtcWithdraw {
+            let result: [String : Any] = ["index" : indexPath.row, "delegation" : btcDelegations[indexPath.row]]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+
         } else {
             let result: [String : Any] = ["index" : indexPath.row]
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -827,7 +890,8 @@ public enum SheetType: Int {
     case SwitchPriceColor = 14
     case SwitchAutoPass = 15
     case SwitchStyle = 16
-    
+    case SwitchTheme = 17
+
     case SelectSwapInputChain = 21
     case SelectSwapOutputChain = 22
     case SelectSwapInputAsset = 23
@@ -836,11 +900,12 @@ public enum SheetType: Int {
     
     case SelectDelegatedAction = 31
     case SelectUnbondingAction = 32
-    
+    case SelectNeutronDelegatedAction = 33
+
     case SelectFeeDenom = 41
     case SelectValidator = 42
     case SelectUnStakeValidator = 43
-    case SelectCosmosRecipientChain = 44
+    case SelectIBCRecipientChain = 44
     case SelectCosmosRecipientBechAddress = 45
     case SelectCosmosNameServiceAddress = 46
     case SelectBaseFeeDenom = 47
@@ -866,14 +931,19 @@ public enum SheetType: Int {
     case SelectZenrockUnStakeValidator = 95
     case SelectZenrockDelegatedAction = 96
     
-    case SelectFinalityProvider
-    case SelectUnStakeFinalityProvider
-    case SelectBtcDelegatedAction
-    
+
     case MoveDropDetail = 100
     case MoveDydx = 101
     case MoveBabylonDappDetail = 102
     
     case SelectDappSort
     case SelectDappNetwork
+
+    case SelectFinalityProvider
+    case SelectUnstakeFinalityProvider
+    case SelectBtcWithdraw
+    case SelectBtcDelegatedAction
+    case SelectBtcWithdrawAction
+
+
 }

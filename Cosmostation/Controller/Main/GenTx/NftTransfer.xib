@@ -3,7 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,6 +22,7 @@
                 <outlet property="errorCardView" destination="4gz-5V-QWf" id="Iov-mD-IZp"/>
                 <outlet property="errorMsgLabel" destination="sQ8-UA-cd4" id="AHR-NT-m0c"/>
                 <outlet property="feeAmountLabel" destination="WuD-10-BTA" id="FKL-4i-76e"/>
+                <outlet property="feeArrowImg" destination="lNG-Wf-H4d" id="1WH-in-zk9"/>
                 <outlet property="feeCardView" destination="KeJ-jC-Psp" id="rGO-ny-Ehg"/>
                 <outlet property="feeCurrencyLabel" destination="HJg-2q-t66" id="Ncf-0A-V21"/>
                 <outlet property="feeDenomLabel" destination="EZZ-R1-MOV" id="k6U-0d-eUg"/>
@@ -289,25 +290,25 @@ not the wallet.</string>
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuD-10-BTA">
-                                            <rect key="frame" x="303.66666666666669" y="51.666666666666629" width="25" height="16"/>
+                                            <rect key="frame" x="303.66666666666669" y="51.666666666666629" width="25" height="15.333333333333329"/>
                                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                             <color key="textColor" name="_color01"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZZ-R1-MOV">
-                                            <rect key="frame" x="329.66666666666669" y="53.666666666666629" width="35.333333333333314" height="12.666666666666671"/>
+                                            <rect key="frame" x="329.66666666666669" y="53.666666666666629" width="35.333333333333314" height="11.666666666666671"/>
                                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
                                             <color key="textColor" name="_color01"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJg-2q-t66">
-                                            <rect key="frame" x="350" y="68.333333333333258" width="7" height="15.333333333333329"/>
+                                            <rect key="frame" x="350" y="67.333333333333258" width="7" height="15.333333333333329"/>
                                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                             <color key="textColor" name="_color02"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9MS-wW-Ly8">
-                                            <rect key="frame" x="358" y="68.333333333333258" width="7" height="15.333333333333329"/>
+                                            <rect key="frame" x="358" y="67.333333333333258" width="7" height="15.333333333333329"/>
                                             <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                             <color key="textColor" name="_color02"/>
                                             <nil key="highlightedColor"/>

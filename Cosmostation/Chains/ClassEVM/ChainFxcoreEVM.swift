@@ -13,9 +13,8 @@ class ChainFxcoreEVM: BaseChain {
     override init() {
         super.init()
         
-        name = "FUNCTION-X"
+        name = "Function-X"
         tag = "fxcore60"
-        logo1 = "chainFxcore"
         apiName = "fxcore"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
@@ -29,8 +28,6 @@ class ChainFxcoreEVM: BaseChain {
     
         supportEvm = true
         coinSymbol = "FX"
-        coinGeckoId = "fx-coin"
-        coinLogo = "tokenFx"
         evmRpcURL = "https://fx-json-web3.functionx.io:8545/"
     }
 }

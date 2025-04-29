@@ -26,8 +26,10 @@ class EvmFetcher {
     func fetchEvmBalances() async -> Bool {
         evmBalances = NSDecimalNumber.zero
         if let balanceJson = try? await fetchEvmBalance(chain.evmAddress!),
-           let balance = balanceJson?["result"].stringValue.hexToNSDecimal() {
+           let balance = balanceJson?["result"].string?.hexToNSDecimal() {
             self.evmBalances = balance
+        } else {
+            return false
         }
         return true
     }
@@ -36,23 +38,23 @@ class EvmFetcher {
         mintscanErc20Tokens.removeAll()
         
         do {
-            let erc20Tokens = try await self.fetchErc20Info()
             let balanceJson = try await fetchEvmBalance(self.chain.evmAddress!)
-            if let erc20Tokens = erc20Tokens {
-                self.mintscanErc20Tokens = erc20Tokens
-            }
-            if let balance = balanceJson?["result"].stringValue.hexToNSDecimal() {
+            if let balance = balanceJson?["result"].string?.hexToNSDecimal() {
                 self.evmBalances = balance
+            } else {
+                return false
             }
             
             let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)
+            self.mintscanErc20Tokens = BaseData.instance.mintscanErc20Tokens?.filter({ $0.chainName == chain.apiName }) ?? []
             await mintscanErc20Tokens.concurrentForEach { erc20 in
+                erc20.type = "erc20"
                 if (userDisplaytoken == nil) {
                     if (erc20.wallet_preload == true) {
                         await self.fetchErc20Balance(erc20)
                     }
                 } else {
-                    if (userDisplaytoken?.contains(erc20.contract!) == true) {
+                    if (userDisplaytoken?.contains(erc20.address!) == true) {
                         await self.fetchErc20Balance(erc20)
                     }
                 }
@@ -66,24 +68,38 @@ class EvmFetcher {
     }
     
     func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        let msPrice = BaseData.instance.getPrice(chain.coinGeckoId, usd)
-        return evmBalances.multiplying(by: msPrice).multiplying(byPowerOf10: -18, withBehavior: handler6)
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.coinSymbol) {
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
+            return evmBalances.multiplying(by: msPrice).multiplying(byPowerOf10: -18, withBehavior: handler6)
+        }
+        return NSDecimalNumber.zero
     }
     
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        if let tokenInfo = mintscanErc20Tokens.filter({ $0.contract == address }).first {
+        if let tokenInfo = mintscanErc20Tokens.filter({ $0.address == address }).first {
             let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
             return msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
         }
         return NSDecimalNumber.zero
     }
     
-    func allTokenValue(_ usd: Bool? = false) -> NSDecimalNumber {
+    func allTokenValue(_ id: Int64, _ usd: Bool? = false) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
-        mintscanErc20Tokens.forEach { tokenInfo in
-            let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
-            let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
-            result = result.adding(value)
+        
+        if let tokens = BaseData.instance.getDisplayErc20s(id, chain.tag) {
+            mintscanErc20Tokens.filter({ tokens.contains($0.address ?? "") }).forEach { tokenInfo in
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
+            }
+            
+        } else {
+            mintscanErc20Tokens.filter({ $0.wallet_preload == true }).forEach { tokenInfo in
+                let msPrice = BaseData.instance.getPrice(tokenInfo.coinGeckoId, usd)
+                let value = msPrice.multiplying(by: tokenInfo.getAmount()).multiplying(byPowerOf10: -tokenInfo.decimals!, withBehavior: handler6)
+                result = result.adding(value)
+            }
+            
         }
         return result
     }
@@ -92,21 +108,19 @@ class EvmFetcher {
         return evmBalances != NSDecimalNumber.zero ? 1 : 0
     }
     
-    func valueTokenCnt() -> Int {
-        return mintscanErc20Tokens.filter {  $0.getAmount() != NSDecimalNumber.zero }.count
+    func valueTokenCnt(_ id: Int64) -> Int {
+        if let tokens = BaseData.instance.getDisplayErc20s(id, chain.tag) {
+            return tokens.count
+            
+        } else {
+            return mintscanErc20Tokens.filter({ $0.wallet_preload == true }).count
+        }
     }
     
 }
 
 //about mintscan api
 extension EvmFetcher {
-    
-    func fetchErc20Info() async throws -> [MintscanToken]?  {
-        if chain.isSupportErc20() {
-            return try await AF.request(BaseNetWork.msErc20InfoUrl(chain.apiName), method: .get).serializingDecodable([MintscanToken].self).value
-        }
-        return []
-    }
     
     func fetchEvmBalance(_ address: String) async throws -> JSON? {
         let param: Parameters = ["method": "eth_getBalance", "params": [address, "latest"], "id" : 1, "jsonrpc" : "2.0"]
@@ -122,7 +136,7 @@ extension EvmFetcher {
                         await self.fetchErc20Balance(erc20)
                     }
                 } else {
-                    if (userDisplaytoken?.contains(erc20.contract!) == true) {
+                    if (userDisplaytoken?.contains(erc20.address!) == true) {
                         await self.fetchErc20Balance(erc20)
                     }
                 }
@@ -138,7 +152,7 @@ extension EvmFetcher {
             data = "0x70a08231000000000000000000000000" + self.chain.evmAddress!.stripHexPrefix()
         }
         let param: Parameters = ["method": "eth_call", "id" : 1, "jsonrpc" : "2.0",
-                                 "params": [["data": data, "to" : tokenInfo.contract], "latest"]]
+                                 "params": [["data": data, "to" : tokenInfo.address], "latest"]]
         if let erc20BalanceJson = try? await AF.request(getEvmRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value {
             let erc20Balance = erc20BalanceJson["result"].stringValue.hexToNSDecimal()
 //            print("fetchErc20Balance ", tokenInfo.symbol, "  ", erc20Balance().stringValue)

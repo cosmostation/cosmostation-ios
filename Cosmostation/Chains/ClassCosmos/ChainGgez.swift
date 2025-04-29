@@ -15,7 +15,6 @@ class ChainGgez: BaseChain {
         
         name = "GGEZ1 Chain"
         tag = "ggez118"
-        logo1 = "chainGgez"
         apiName = "ggezchain"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

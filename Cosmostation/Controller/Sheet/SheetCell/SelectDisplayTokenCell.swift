@@ -42,7 +42,7 @@ class SelectDisplayTokenCell: UITableViewCell {
     }
     
     func bindToken(_ chain: BaseChain, _ token: MintscanToken, _ selectedList: [String]) {
-        if (selectedList.contains(token.contract!)) {
+        if (selectedList.contains(token.address!)) {
             rootView.layer.borderWidth = 1.0
             rootView.layer.borderColor = UIColor.white.cgColor
         } else {
@@ -52,16 +52,16 @@ class SelectDisplayTokenCell: UITableViewCell {
         
         coinImg?.sd_setImage(with: token.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         symbolLabel.text = token.symbol
-        contractLabel.text = token.contract
+        contractLabel.text = token.address
         
         Task {
-            if !SelectDisplayTokenListSheet.tokenWithAmount.map({$0.contract}).contains(token.contract) {
+            if !SelectDisplayTokenListSheet.tokenWithAmount.map({$0.address}).contains(token.address) {
                 showLoadingView()
                 await fetchTokenBalance(chain, token)
                 hideLoadingView()
             }
             
-            if let index = SelectDisplayTokenListSheet.tokenWithAmount.firstIndex(where: { $0.contract == token.contract }) {
+            if let index = SelectDisplayTokenListSheet.tokenWithAmount.firstIndex(where: { $0.address == token.address }) {
                 let token = SelectDisplayTokenListSheet.tokenWithAmount[index]
                 let amount = token.getAmount().multiplying(byPowerOf10: -token.decimals!)
                 amountLabel.attributedText = WDP.dpAmount(amount.stringValue, amountLabel!.font)

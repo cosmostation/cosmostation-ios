@@ -15,7 +15,6 @@ class ChainPlanqEVM: BaseChain  {
         
         name = "Planq"
         tag = "planq60"
-        logo1 = "chainPlanq"
         apiName = "planq"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
@@ -29,8 +28,6 @@ class ChainPlanqEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "PLANQ"
-        coinGeckoId = "planq"
-        coinLogo = "tokenPlq"
         evmRpcURL = "https://planq-rpc.nodies.app"
     }
 }

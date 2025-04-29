@@ -59,7 +59,6 @@ class BaseNetWork {
                 switch response.result {
                 case .success(let value):
                     BaseData.instance.mintscanUSDPrices = value
-                    
                 case .failure:
                     print("fetchUSDPrices error")
                 }
@@ -67,7 +66,6 @@ class BaseNetWork {
     }
     
     func fetchAssets() {
-//        print("fetchAssets Start ", BaseNetWork.msAssetsUrl())
         AF.request(BaseNetWork.msAssetsUrl(), method: .get)
             .responseDecodable(of: MintscanAssets.self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
@@ -92,6 +90,59 @@ class BaseNetWork {
         }
     }
     
+    func fetchCw20Tokens() {
+        AF.request(BaseNetWork.msCw20Url(), method: .get)
+            .responseDecodable(of: MintscanTokens.self, queue: .main, decoder: JSONDecoder()) { response in
+                switch response.result {
+                case .success(let value):
+                    BaseData.instance.mintscanCw20Tokens = value.assets
+                case .failure:
+                    print("fetchCw20 error ", response.error)
+                }
+                NotificationCenter.default.post(name: Notification.Name("FetchCw20s"), object: nil, userInfo: nil)
+            }
+    }
+    
+    func fetchErc20Tokens() {
+        AF.request(BaseNetWork.msErc20Url(), method: .get)
+            .responseDecodable(of: MintscanTokens.self, queue: .main, decoder: JSONDecoder()) { response in
+                switch response.result {
+                case .success(let value):
+                    BaseData.instance.mintscanErc20Tokens = value.assets
+                case .failure:
+                    print("fetchErc20 error ", response.error)
+                }
+                NotificationCenter.default.post(name: Notification.Name("FetchErc20s"), object: nil, userInfo: nil)
+            }
+    }
+    
+    func fetchGrc20Tokens() {
+        AF.request(BaseNetWork.msGrc20Url(), method: .get)
+            .responseDecodable(of: MintscanTokens.self, queue: .main, decoder: JSONDecoder()) { response in
+                switch response.result {
+                case .success(let value):
+                    BaseData.instance.mintscanGrc20Tokens = value.assets
+                case .failure:
+                    print("fetchGrc20 error ", response.error)
+                }
+                NotificationCenter.default.post(name: Notification.Name("FetchErc20s"), object: nil, userInfo: nil)
+            }
+    }
+
+    func fetchCw721s() {
+        AF.request(BaseNetWork.msCw721Url(), method: .get)
+            .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
+                switch response.result {
+                case .success(let value):
+                    BaseData.instance.mintscanCw721 = value["assets"].arrayValue
+                case .failure:
+                    print("fetchErc20 error ", response.error)
+                }
+                NotificationCenter.default.post(name: Notification.Name("FetchCw721s"), object: nil, userInfo: nil)
+            }
+    }
+
+    
     static func getAccountHistoryUrl(_ chain: BaseChain, _ address: String) -> String {
         if (chain.tag.starts(with: "okt")) {
             return MINTSCAN_API_URL + "v10/" + chain.apiName + "/proxy/okx/account/" + address + "/txs"
@@ -115,24 +166,24 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v11/assets"
     }
     
-    static func msCw20InfoUrl(_ apiName: String) -> String {
-        return MINTSCAN_API_URL + "v11/assets/" +  apiName + "/cw20/info"
+    static func msCw20Url() -> String {
+        return MINTSCAN_API_URL + "v11/assets/cw20"
     }
     
-    static func msErc20InfoUrl(_ apiName: String) -> String {
-        return MINTSCAN_API_URL + "v11/assets/" +  apiName + "/erc20/info"
+    static func msErc20Url() -> String {
+        return MINTSCAN_API_URL + "v11/assets/erc20"
     }
     
-    static func msGrc20InfoUrl(_ apiName: String) -> String {
-        return MINTSCAN_API_URL + "v11/assets/" +  apiName + "/grc20/info"
+    static func msGrc20Url() -> String {
+        return MINTSCAN_API_URL + "v11/assets/grc20"
     }
     
     static func msChainParams() -> String {
         return MINTSCAN_API_URL + "v11/utils/params"
     }
     
-    static func msCw721InfoUrl(_ apiName: String) -> String {
-        return MINTSCAN_API_URL + "v11/assets/" + apiName + "/cw721"
+    static func msCw721Url() -> String {
+        return MINTSCAN_API_URL + "v11/assets/cw721"
     }
     
     static func msProposals(_ chain: BaseChain) -> String {

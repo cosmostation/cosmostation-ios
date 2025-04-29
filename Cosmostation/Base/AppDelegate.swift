@@ -63,11 +63,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             BaseData.instance.appUserInfo = userInfo
         }
         
-        // SVG, GIF Coder
+        // SVG, GIF, aPNG Coder
         let svgCoder = SDImageSVGCoder.shared
         SDImageCodersManager.shared.addCoder(svgCoder)
         let gifCoder = SDImageGIFCoder.shared
         SDImageCodersManager.shared.addCoder(gifCoder)
+        let apngCoder = SDImageAPNGCoder.shared
+        SDImageCodersManager.shared.addCoder(apngCoder)
 
         return true
     }
@@ -239,7 +241,9 @@ private extension AppDelegate {
         
         let tabBarApperance = UITabBarAppearance()
         tabBarApperance.configureWithOpaqueBackground()
-        tabBarApperance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        tabBarApperance.backgroundColor = UIColor.color07
+        tabBarApperance.stackedLayoutAppearance.normal.iconColor = UIColor.color03
+        tabBarApperance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.color03]
         UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
         UITabBar.appearance().standardAppearance = tabBarApperance
         

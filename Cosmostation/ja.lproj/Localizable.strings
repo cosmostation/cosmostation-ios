@@ -225,6 +225,7 @@
 "str_inflation" = "インフレーション";
 "str_est_apr" = "予想収益率";
 "str_days" = "日";
+"str_hours" = "時間";
 "str_staking_asset" = "ステーキングコイン";
 "str_chain_id" = "チェーンID";
 "str_chain_id_cosmos" = "チェーンID(cosmos形式)";
@@ -336,6 +337,7 @@
 "str_restore_wallets" = "財布の復元";
 "str_deposit" = "預金";
 "str_withdraw" = "出金";
+"str_withdraw_msg" = "ステーキングした数量を引き出します。";
 "str_copy_evm_address" = "EVM スタイルのアドレスをコピー";
 "str_share_evm_address" = "EVM スタイルのアドレスを共有する";
 "str_share_evm_address2" = "EVM\nスタイルのアドレスを共有する";
@@ -362,8 +364,6 @@
 "str_next_reward_distibution" = "次の報酬分配";
 "str_next_epoch" = "次のエポックを有効化";
 "str_coin_manage_stake" = "%@ステーキング管理";
-"str_staked_coin" = "ステーキングされた%@";
-"str_staked_coin_status" = "ステーキングされた%@のステータス";
 
 
 "btn_delegate" = "  委任する";
@@ -465,6 +465,9 @@
 "btc_unstake_period_days" = "%d日間";
 "msg_babylon_pending_state" = "BABYLONチェーンでは、ステーキング操作（ステーク、アンステーク、バリデーターの変更、アンステークキャンセルなど）は \"Pending\" 状態から始まります。現在のエポックが終了し、次のエポックが始まると、ステーキング操作は \"Active\" 状態に移行します。";
 "msg_babylon_active_state" = "\"Active\" 状態とは、\"Pending\" 状態が終了し、実行された操作が完全にアクティブになったことを意味します。この状態では、ユーザーがリクエストしたすべてのステーキング機能が正常に動作しています。";
+"title_btc_staking_additional_fee" = "Additional Fee in $%@";
+"msg_btc_staking_additional_fee" = "%@ staking requires an additional fee in %@, deducted\nfrom your %@ balance at %@.";
+"msg_insufficient_balance" = "Insufficient %@ balance for fees.";
 
 
 "guide_msg_cosmos" = "Tendermint BFTとABCIベースの分散型ブロックチェーンネットワーク。";
@@ -544,6 +547,7 @@
 "setting_chain_title" = "チェーン管理";
 "setting_addressbook_title" = "連絡先の管理";
 "setting_language_title" = "言語";
+"setting_theme_title" = "テーマ";
 "setting_currecny_title" = "通貨";
 "setting_notification_title" = "通知";
 "setting_app_lock_title" = "App Lock";
@@ -1036,6 +1040,7 @@
 "title_coin_rewards_claim" = "%@ 利息を受け取る";
 "title_coin_commission_claim" = "%@ コミッションを請求";
 "title_coin_compounding" = "%@ コンパウンディング";
+"title_coin_withdraw" = "%@ Withdraw";
 
 
 "proposal_type_basic" = "Basic";
@@ -1240,6 +1245,8 @@
 "style_pro" = "プロ";
 "style_simple_msg" = "オンチェーン資産の合計価値を表示します。";
 "style_pro_msg" = "さらに、主要資産の価格と価格変動が表示されます。";
+"str_dark" = "ダーク";
+"str_cosmic" = "コズミック";
 
 "currency_fetch_success" = "価格情報を更新しました。";
 "currency_fetch_failed" = "価格情報の更新に失敗しました。";
@@ -1326,7 +1333,9 @@
 "tx_kava_earn_withdraw" = "Earn Liquidate Withdraw";
 
 "tx_ibc_send" = "IBC Send";
+"tx_ibc_eureka_send" = "IBC Eureka Send";
 "tx_ibc_receive" = "IBC Received";
+"tx_ibc_eureka_receive" = "IBC Eureka Received";
 "tx_ibc_client_update" = "IBC Client Update";
 "tx_ibc_acknowledgement" = "IBC Ack";
 

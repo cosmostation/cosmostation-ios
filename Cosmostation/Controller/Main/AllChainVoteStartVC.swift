@@ -102,7 +102,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
                     let delegated = cosmosFetcher.delegationAmountSum()
                     let voteThreshold = chain.votingThreshold()
                     let txFee = chain.getInitPayableFee()
-                    if (delegated.compare(voteThreshold).rawValue >= 0 && txFee != nil) {
+                    if (delegated.compare(voteThreshold).rawValue > 0 && txFee != nil) {
                         stakedChains.append(chain)
                     }
                 }
@@ -138,7 +138,7 @@ class AllChainVoteStartVC: BaseVC, PinDelegate {
                 let proposals = info.msProposals
                 let myVotes = info.msMyVotes
                 proposals.forEach { proposal in
-                    if (myVotes.filter({ $0.proposal_id == proposal.id }).count ==  0) {
+                    if (myVotes.filter({ $0.proposal_id == proposal.id }).count == 0) {
                         filteredProposal.append(proposal)
                     }
                 }
@@ -285,7 +285,7 @@ extension AllChainVoteStartVC: UITableViewDelegate, UITableViewDataSource {
         let view = VoteAllChainHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         let model = toDisplayInfos[section]
         let chain = model.basechain!
-        view.chainImg.image = UIImage.init(named: chain.logo1)
+        view.chainImg.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
         view.titleLabel.text = chain.name
         view.cntLabel.text = String(model.msProposals.count)
         
@@ -324,6 +324,8 @@ extension AllChainVoteStartVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier:"VoteAllChainCell") as! VoteAllChainCell
         let liveProposal = toDisplayInfos[indexPath.section].msProposals[indexPath.row]
         let myVotedList = toDisplayInfos[indexPath.section].msMyVotes
+        let chain = toDisplayInfos[indexPath.section].basechain
+        
         cell.onBindVote(liveProposal, myVotedList)
         cell.actionToggle = { tag in
             let voteOption = Cosmos_Gov_V1beta1_VoteOption.init(rawValue: tag)
@@ -390,6 +392,9 @@ extension AllChainVoteStartVC {
             var progress = 0
             await stakedChains.concurrentForEach { chain in
                 var toShowProposals = [MintscanProposal]()
+                let address = chain.bechAddress!
+                var myVotes = [MintscanMyVotes]()
+
                 if let proposals = try? await AF.request(BaseNetWork.msProposals(chain), method: .get).serializingDecodable([JSON].self).value {
                     proposals.forEach { proposal in
                         let msProposal = MintscanProposal(proposal)
@@ -397,20 +402,37 @@ extension AllChainVoteStartVC {
                             toShowProposals.append(msProposal)
                         }
                     }
-                }
-                
-                if (!toShowProposals.isEmpty) {
-                    let address = chain.bechAddress!
-                    var myVotes = [MintscanMyVotes]()
-                    if let votes = try? await AF.request(BaseNetWork.msMyVoteHistory(chain, address), method: .get).serializingDecodable(JSON.self).value {
-                        votes["votes"].arrayValue.forEach { vote in
-                            myVotes.append(MintscanMyVotes(vote))
+                    
+                    if (!toShowProposals.isEmpty) {
+                        if let votes = try? await AF.request(BaseNetWork.msMyVoteHistory(chain, address), method: .get).serializingDecodable(JSON.self).value {
+                            votes["votes"].arrayValue.forEach { vote in
+                                myVotes.append(MintscanMyVotes(vote))
+                            }
+                        }
+                        self.allLiveInfo.append(VoteAllModel.init(chain, toShowProposals, myVotes))
+                    }
+                    progress = progress + 1
+                    self.onUpdateProgress(progress, stakedChains.count)
+
+                } else if let proposals = try? await chain.getCosmosfetcher()?.fetchOnChainProposals() {
+                    proposals?.forEach { proposal in
+                        if (proposal.isVotingPeriod() /*&& !proposal.isScam()*/) {
+                            toShowProposals.append(proposal)
                         }
                     }
-                    self.allLiveInfo.append(VoteAllModel.init(chain, toShowProposals,myVotes))
+                    
+                    if (!toShowProposals.isEmpty) {
+                        await toShowProposals.concurrentForEach { proposal in
+                            if let votes = await chain.getCosmosfetcher()?.fetchOnChainProposalHistory(proposal.id!, address) {
+                                myVotes.append(votes)
+                            }
+                        }
+                        self.allLiveInfo.append(VoteAllModel.init(chain, toShowProposals, myVotes))
+                    }
+
+                    progress = progress + 1
+                    self.onUpdateProgress(progress, stakedChains.count)
                 }
-                progress = progress + 1
-                self.onUpdateProgress(progress, stakedChains.count)
             }
             
             DispatchQueue.main.async(execute: {

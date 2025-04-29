@@ -15,11 +15,11 @@ class ChainAlthea118: BaseChain {
         
         name = "Althea"
         tag = "althea118"
-        logo1 = "chainAlthea"
         isDefault = false
         apiName = "althea"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
-        
+        isOtherChainImage = true
+
         
         cosmosEndPointType = .UseGRPC
         stakeDenom = "aalthea"

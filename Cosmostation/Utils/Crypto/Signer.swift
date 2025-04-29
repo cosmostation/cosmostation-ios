@@ -73,6 +73,19 @@ class Signer {
         return result
     }
     
+    //Tx for Ibc Eureka Transfer
+    static func genIbcEurekaSendMsg(_ ibcEurekaTransfer: [Ibc_Core_Channel_V2_MsgSendPacket]) -> [Google_Protobuf_Any] {
+        var result = [Google_Protobuf_Any]()
+        ibcEurekaTransfer.forEach { msg in
+            let anyMsg = Google_Protobuf_Any.with {
+                $0.typeURL = "/ibc.core.channel.v2.MsgSendPacket"
+                $0.value = try! msg.serializedData()
+            }
+            result.append(anyMsg)
+        }
+        return result
+    }
+    
     //Tx for Common Delegate
     static func genDelegateMsg(_ toDelegate: Cosmos_Staking_V1beta1_MsgDelegate) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
@@ -101,6 +114,14 @@ class Signer {
     static func genDelegateMsg(_ toDelegate: Babylon_Epoching_V1_MsgWrappedDelegate) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/babylon.epoching.v1.MsgWrappedDelegate"
+            $0.value = try! toDelegate.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    static func genDelegateMsg(_ toDelegate: Babylon_Btcstaking_V1_MsgCreateBTCDelegation) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/babylon.btcstaking.v1.MsgCreateBTCDelegation"
             $0.value = try! toDelegate.serializedData()
         }
         return [anyMsg]
@@ -239,7 +260,7 @@ class Signer {
         
         let claimMsg = Babylon_Incentive_MsgWithdrawReward.with {
             $0.address = address
-            $0.type = "btc_delegation"
+            $0.type = "BTC_STAKER"
         }
         
         let anyMsg = Google_Protobuf_Any.with {
@@ -250,6 +271,25 @@ class Signer {
 
         return anyMsgs
     }
+    
+    static func genNeutronClaimStakingRewardMsg(_ address: String, _ contract: String) -> [Google_Protobuf_Any] {
+        var anyMsgs = [Google_Protobuf_Any]()
+        let claimMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+            $0.sender = address
+            $0.contract = contract
+            $0.funds = []
+            let msg: JSON = ["claim_rewards" : JSON()]
+            $0.msg = try! msg.rawData()
+        }
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
+            $0.value = try! claimMsg.serializedData()
+        }
+        anyMsgs.append(anyMsg)
+        
+        return anyMsgs
+    }
+    
     
     //Tx for Common Claim Commission
     static func genClaimCommissionMsg(_ commission: Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission) -> [Google_Protobuf_Any] {
@@ -365,8 +405,8 @@ class Signer {
     }
     
     static func genBabylonCompoundingMsg(_ address: String,
-                                  _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                  _ stakingDenom: String) -> [Google_Protobuf_Any] {
+                                         _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
+                                         _ stakingDenom: String) -> [Google_Protobuf_Any] {
         var anyMsgs = [Google_Protobuf_Any]()
         rewards.forEach { reward in
             let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
@@ -391,6 +431,45 @@ class Signer {
             }
             let deleAnyMsg = Google_Protobuf_Any.with {
                 $0.typeURL = "/babylon.epoching.v1.MsgWrappedDelegate"
+                $0.value = try! deleMsg.serializedData()
+            }
+            anyMsgs.append(deleAnyMsg)
+        }
+        return anyMsgs
+    }
+    
+    static func genNeutronCompoundingMsg(_ address: String,
+                                         _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
+                                         _ stakingDenom: String,
+                                         _ validatorAddress: String,
+                                         _ contract: String) -> [Google_Protobuf_Any] {
+        var anyMsgs = [Google_Protobuf_Any]()
+        let claimMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+            $0.sender = address
+            $0.contract = contract
+            $0.funds = []
+            let msg: JSON = ["claim_rewards" : JSON()]
+            $0.msg = try! msg.rawData()
+        }
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
+            $0.value = try! claimMsg.serializedData()
+        }
+        anyMsgs.append(anyMsg)
+            
+        rewards.forEach { reward in
+            let rewardCoin = reward.reward.filter({ $0.denom == stakingDenom }).first
+            let deleCoin = Cosmos_Base_V1beta1_Coin.with {
+                $0.denom = rewardCoin!.denom
+                $0.amount = NSDecimalNumber.init(string: rewardCoin!.amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down).stringValue
+            }
+            let deleMsg = Cosmos_Staking_V1beta1_MsgDelegate.with {
+                $0.delegatorAddress = address
+                $0.validatorAddress = validatorAddress
+                $0.amount = deleCoin
+            }
+            let deleAnyMsg = Google_Protobuf_Any.with {
+                $0.typeURL = "/cosmos.staking.v1beta1.MsgDelegate"
                 $0.value = try! deleMsg.serializedData()
             }
             anyMsgs.append(deleAnyMsg)
@@ -741,6 +820,16 @@ class Signer {
                 $0.typeURL = "/stratos.crypto.v1.ethsecp256k1.PubKey"
                 $0.value = try! pub.serializedData()
             }
+            
+        } else if (baseChain.accountKeyType.pubkeyType == .INITIA_Keccak256) {
+            let pub = Initia_Crypto_V1beta1_Ethsecp256k1_PubKey.with {
+                $0.key = baseChain.publicKey!
+            }
+            pubKey = Google_Protobuf_Any.with {
+                $0.typeURL = "/initia.crypto.v1beta1.ethsecp256k1.PubKey"
+                $0.value = try! pub.serializedData()
+            }
+            
         } else {
             let pub = Cosmos_Crypto_Secp256k1_PubKey.with {
                 $0.key = baseChain.publicKey!
@@ -796,7 +885,8 @@ class Signer {
             baseChain.accountKeyType.pubkeyType == .INJECTIVE_Secp256k1 ||
             baseChain.accountKeyType.pubkeyType == .ETH_Keccak256 ||
             baseChain.accountKeyType.pubkeyType == .STRATOS_Keccak256 ||
-            baseChain.accountKeyType.pubkeyType == .ARTELA_Keccak256) {
+            baseChain.accountKeyType.pubkeyType == .ARTELA_Keccak256 ||
+            baseChain.accountKeyType.pubkeyType == .INITIA_Keccak256) {
             hash = toSignByte.sha3(.keccak256)
             
         } else {

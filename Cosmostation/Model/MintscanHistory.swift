@@ -637,8 +637,14 @@ public struct MintscanHistory: Codable {
                 if (msgType.contains("MsgTransfer")) {
                     result = NSLocalizedString("tx_ibc_send", comment: "")
                     
+                } else if (msgType.contains("v2.MsgSendPacket")) {
+                    result = NSLocalizedString("tx_ibc_eureka_send", comment: "")
+                    
                 } else if (msgType.contains("MsgUpdateClient")) {
                     result = NSLocalizedString("tx_ibc_client_update", comment: "")
+                    
+                } else if (msgType.contains("v2.MsgRecvPacket")) {
+                    result = NSLocalizedString("tx_ibc_eureka_receive", comment: "")
                     
                 } else if (msgType.contains("MsgRecvPacket")) {
                     result = NSLocalizedString("tx_ibc_receive", comment: "")
@@ -656,6 +662,11 @@ public struct MintscanHistory: Codable {
                     getMsgs()?.forEach({ msg in
                         if (msg["@type"].string?.contains("MsgRecvPacket") == true) {
                             result = NSLocalizedString("tx_ibc_receive", comment: "")
+                        }
+                    })
+                    getMsgs()?.forEach({ msg in
+                        if (msg["@type"].string?.contains("v2.MsgRecvPacket") == true) {
+                            result = NSLocalizedString("tx_ibc_eureka_receive", comment: "")
                         }
                     })
                 }
@@ -828,6 +839,33 @@ public struct MintscanHistory: Codable {
                 })
                 return sortedCoins(chain, result)
             }
+            
+            var ibcEurekaSend = false
+            getMsgs()?.forEach({ msg in
+                if (msg["@type"].string?.contains("ibc") == true && msg["@type"].string?.contains("v2.MsgSendPacket") == true) {
+                    ibcEurekaSend = true
+                }
+            })
+            if (ibcEurekaSend) {
+                data?.logs?.forEach({ log in
+                    if let event = log["events"].array?.filter({ $0["type"].string == "ibc_transfer" }).first {
+                        event["attributes"].array?.forEach({ attribute in
+                            if (attribute["value"].string == chain.bechAddress) {
+                                if let rawAmount = event["attributes"].array?.filter({ $0["key"].string == "amount" }).first?["value"].string,
+                                   let rawDenom = event["attributes"].array?.filter({ $0["key"].string == "denom" }).first?["value"].string {
+                                    let value = Cosmos_Base_V1beta1_Coin.with {
+                                        $0.denom = rawDenom
+                                        $0.amount = rawAmount
+                                    }
+                                    result.append(value)
+                                }
+                            }
+                        })
+                    }
+                })
+                return sortedCoins(chain, result)
+            }
+            
         }
         
         //display re-invset amount
@@ -947,7 +985,7 @@ public struct MintscanHistory: Codable {
                    let wasmMsg = msgValue["msg__@stringify"].string,
                    let wasmFunc = try? JSONDecoder().decode(JSON.self, from: wasmMsg.data(using: .utf8) ?? Data()),
                    let amount = wasmFunc["transfer"]["amount"].string,
-                   let cw20 = chain.getCosmosfetcher()?.mintscanCw20Tokens.first(where: { $0.contract == contractAddress }) {
+                   let cw20 = chain.getCosmosfetcher()?.mintscanCw20Tokens.first(where: { $0.address == contractAddress }) {
                        return (cw20, NSDecimalNumber(string: amount))
                 }
                 
@@ -956,7 +994,7 @@ public struct MintscanHistory: Codable {
                    let data = dataValue["data"].string,
                    let hexData = Data(base64Encoded: data)?.toHexString(),
                    let contractAddress = dataValue["to"].string,
-                   let erc20 = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.contract == contractAddress }) {
+                   let erc20 = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.address == contractAddress }) {
                     let suffix = String(hexData.suffix(64))
                     if (suffix.count < 15) {
                         return (erc20, suffix.hexToNSDecimal())

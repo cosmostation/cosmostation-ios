@@ -11,6 +11,7 @@ import SwiftyJSON
 
 class SelectEndpointSheet: BaseVC {
 
+    @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var endpointTypeSegment: UISegmentedControl!
     @IBOutlet weak var cosmosTableView: UITableView!
@@ -46,8 +47,8 @@ class SelectEndpointSheet: BaseVC {
         rpcList = targetChain.getChainListParam()["rpc_endpoint"].array
         
         if (targetChain.supportCosmos && targetChain.supportEvm) {
-            endpointTypeSegment.insertSegment(withTitle: "Cosmos Endpoint", at: 0, animated: false)
-            endpointTypeSegment.insertSegment(withTitle: "Evm Endpoint", at: 1, animated: false)
+            endpointTypeSegment.insertSegment(withTitle: "COSMOS Endpoint", at: 0, animated: false)
+            endpointTypeSegment.insertSegment(withTitle: "EVM RPC Endpoint", at: 1, animated: false)
             endpointTypeSegment.isHidden = false
             endpointTypeSegment.selectedSegmentIndex = 0
             cosmosTableView.isHidden = false
@@ -94,7 +95,8 @@ class SelectEndpointSheet: BaseVC {
     }
     
     override func setLocalizedString() {
-        titleLabel.text = NSLocalizedString("title_select_end_point", comment: "")
+        titleLabel.text = "\(targetChain.name.uppercased()) Endpoint"
+        titleImageView.sd_setImage(with: targetChain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
     }
     
     
@@ -121,15 +123,44 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (section == 0 && gRPCList != nil) {
-            view.titleLabel.text = "gRPC"
-            view.cntLabel.text = String(gRPCList!.count)
-            return view
+        if tableView == cosmosTableView {
+            if (section == 0 && gRPCList != nil) {
+                view.imageView.isHidden = false
+                view.imageView.image = UIImage(named: "iconGrpc")
+                view.imageView.tintColor = .color03
+                view.titleLabel.text = "GRPC"
+                view.cntLabel.text = String(gRPCList!.count)
+                return view
+            } else if (section == 1 && lcdList != nil) {
+                view.imageView.isHidden = false
+                view.imageView.image = UIImage(named: "iconRest")
+                view.imageView.tintColor = .color03
+                view.titleLabel.text = "REST"
+                view.cntLabel.text = String(lcdList!.count)
+                return view
+            } else {
+                return nil
+            }
             
-        } else if (section == 1 && lcdList != nil) {
-            view.titleLabel.text = "Rest"
-            view.cntLabel.text = String(lcdList!.count)
-            return view
+        } else if tableView == evmTableView {
+            if (targetChain is ChainSui || targetChain is ChainGno) && rpcList != nil {
+                view.imageView.isHidden = false
+                view.imageView.image = UIImage(named: "iconGrpc")
+                view.imageView.tintColor = .color03
+                view.titleLabel.text = "RPC"
+                view.cntLabel.text = String(rpcList!.count)
+                return view
+
+            } else if evmRPCList != nil {
+                view.imageView.isHidden = false
+                view.imageView.image = UIImage(named: "iconGrpc")
+                view.imageView.tintColor = .color03
+                view.titleLabel.text = "EVM RPC"
+                view.cntLabel.text = String(evmRPCList!.count)
+                return view
+            } else {
+                return nil
+            }
             
         } else {
             return nil
@@ -142,6 +173,12 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
                 return (gRPCList != nil) ? 40 : 0
             } else if (section == 1) {
                 return (lcdList != nil) ? 40 : 0
+            }
+        } else if (tableView == evmTableView) {
+            if (targetChain is ChainSui || targetChain is ChainGno) {
+                return (rpcList != nil) ? 40 : 0
+            } else {
+                return (evmRPCList != nil) ? 40 : 0
             }
         }
         return 0

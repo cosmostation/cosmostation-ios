@@ -172,6 +172,7 @@ let TOKEN_HTLC_KAVA_TEST_BTC                = "btcb"
 
 let SWAP_MEMO_CREATE                        = "Create Atomic Swap via Cosmostation iOS Wallet"
 let SWAP_MEMO_CLAIM                         = "Claim Atomic Swap via Cosmostation iOS Wallet"
+let EUREKA_MEMO                             = "Eureka via Cosmostation Wallet!!"
 
 
 let handler18Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 18, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
@@ -387,6 +388,18 @@ public enum ProtfolioStyle: Int {
         switch self {
         case .Simple: return NSLocalizedString("style_simple", comment: "")
         case .Pro: return NSLocalizedString("style_pro", comment: "")
+        }
+    }
+}
+
+public enum ThemeStyle: Int {
+    case Dark = 0
+    case Cosmic = 1
+    
+    var description: String {
+        switch self {
+        case .Dark: return NSLocalizedString("str_dark", comment: "")
+        case .Cosmic: return NSLocalizedString("str_cosmic", comment: "")
         }
     }
 }

@@ -15,15 +15,12 @@ class ChainBinanceSmart: BaseChain  {
         
         name = "BSC"
         tag = "binance60"
-        logo1 = "chainBinanceSmart"
         apiName = "bnb-smart-chain"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
         supportEvm = true
-        coinSymbol = "BNB "
-        coinGeckoId = "binancecoin"
-        coinLogo = "tokenBnb"
+        coinSymbol = "BNB"
         evmRpcURL = "https://bsc-dataseed.binance.org"
     }
     

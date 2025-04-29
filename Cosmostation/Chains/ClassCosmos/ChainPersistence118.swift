@@ -15,7 +15,6 @@ class ChainPersistence118: BaseChain  {
         
         name = "Persistence"
         tag = "persistence118"
-        logo1 = "chainPersistence"
         apiName = "persistence"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

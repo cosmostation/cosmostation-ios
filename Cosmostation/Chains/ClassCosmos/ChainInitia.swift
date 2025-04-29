@@ -15,16 +15,16 @@ class ChainInitia: BaseChain  {
         
         name = "Initia"
         tag = "initia"
-        logo1 = "chainInitia"
         apiName = "initia"
-        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        accountKeyType = AccountKeyType(.INITIA_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uinit"
         bechAccountPrefix = "init"
         validatorPrefix = "initvaloper"
         grpcHost = ""
+        lcdUrl = "https://rest.initia.xyz/"
     }
     
     override func getCosmosfetcher() -> CosmosFetcher? {
@@ -68,9 +68,9 @@ class ChainInitia: BaseChain  {
                 coinsValue = initiaFetcher.allCoinValue()
                 coinsUSDValue = initiaFetcher.allCoinValue(true)
                 mainCoinAmount = initiaFetcher.allStakingDenomAmount()
-                tokensCnt = initiaFetcher.valueTokenCnt()
-                tokensValue = initiaFetcher.allTokenValue()
-                tokensUSDValue = initiaFetcher.allTokenValue(true)
+                tokensCnt = initiaFetcher.valueTokenCnt(id)
+                tokensValue = initiaFetcher.allTokenValue(id)
+                tokensUSDValue = initiaFetcher.allTokenValue(id, true)
                 
                 allCoinValue = coinsValue
                 allCoinUSDValue = coinsUSDValue

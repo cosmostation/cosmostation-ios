@@ -225,6 +225,7 @@
 "str_inflation" = "Inflation";
 "str_est_apr" = "Staking APR (est)";
 "str_days" = "Days";
+"str_hours" = "Hours";
 "str_staking_asset" = "Staking Asset";
 "str_chain_id" = "Chain Id";
 "str_chain_id_cosmos" = "Chain Id (cosmos style)";
@@ -336,6 +337,7 @@
 "str_restore_wallets" = "Restore Wallets";
 "str_deposit" = "Deposit";
 "str_withdraw" = "Withdraw";
+"str_withdraw_msg" = "Withdraw your staked amount.";
 "str_copy_evm_address" = "Copy Evm style address";
 "str_share_evm_address" = "Share Evm style address";
 "str_share_evm_address2" = "Share\nEvm Style Address";
@@ -361,9 +363,7 @@
 "str_current_epoch" = "Current Epoch";
 "str_next_reward_distibution" = "Next Reward";
 "str_next_epoch" = "Activate Next Epoch";
-"str_coin_manage_stake" = "%@ Manage stake";
-"str_staked_coin" = "Staked %@";
-"str_staked_coin_status" = "Staked %@ Status";
+"str_coin_manage_stake" = "%@ Manage Stake";
 
 
 "btn_delegate" = "  Delegate";
@@ -451,7 +451,7 @@
 "msg_reward_address" = "This address is where you receive reward assets.\nTap here for change reward address. (not recommend)";
 "msg_reward_address_under" = "Tap here for change reward address.";
 "msg_already_changed_reward_address" = "You changed a reward address";
-"msg_about_fee_tip" = "Fees are paid to the chain,\nnot to the wallet.";
+"msg_about_fee_tip" = "Fees are pay to the chain, not to wallet";
 "msg_support_injection" = "To enhance user convenience and response times, we support the injection method (EIP-6963). When using DApps, please select your browser(desktop) wallet accordingly.\nYou can experience the same user experience as with the desktop extension wallet.\nFor EVM-based DApps, by supporting the EIP-6963 specification, you can enjoy a seamless web3 experience.";
 "msg_sui_guide_0" = "Epochs are created every 24 hours.";
 "epoch_time" = "24 hours";
@@ -465,6 +465,10 @@
 "btc_unstake_period_days" = "%d-day";
 "msg_babylon_pending_state" = "On the BABYLON chain, staking actions (Stake, Unstake, Validator, Switch Validator, Unstake Cancel, etc.) start in a Pending state. Once the current epoch ends and the next epoch begins, the staking action will transition to Active.";
 "msg_babylon_active_state" = "The Active state means that the Pending state has ended, and the executed actions are now fully activated. In this state, all staking functions requested by the user are working as intended.";
+"title_btc_staking_additional_fee" = "Additional Fee in $%@";
+"msg_btc_staking_additional_fee" = "%@ staking requires an additional fee in %@, deducted\nfrom your %@ balance at %@.";
+"msg_insufficient_balance" = "수수료로 사용할 %@ 코인이 부족합니다.";
+
 
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
@@ -544,6 +548,7 @@
 "setting_chain_title" = "Manage Chains";
 "setting_addressbook_title" = "Address Book";
 "setting_language_title" = "Language";
+"setting_theme_title" = "Theme";
 "setting_currecny_title" = "Currency";
 "setting_notification_title" = "Notification";
 "setting_app_lock_title" = "App Lock";
@@ -1036,6 +1041,7 @@
 "title_coin_rewards_claim" = "%@ Rewards Claim";
 "title_coin_commission_claim" = "%@ Commission Claim";
 "title_coin_compounding" = "%@ Compounding";
+"title_coin_withdraw" = "%@ Withdraw";
 
 
 "proposal_type_basic" = "Basic";
@@ -1241,6 +1247,8 @@
 "style_pro" = "Pro";
 "style_simple_msg" = "Display total value of on-chain assets.";
 "style_pro_msg" = "additionally, main asset's price and price change are displayed.";
+"str_dark" = "Dark";
+"str_cosmic" = "Cosmic";
 
 "currency_fetch_success" = "Currency updated";
 "currency_fetch_failed" = "Currency fetching failed";
@@ -1327,7 +1335,9 @@
 "tx_kava_earn_withdraw" = "Earn Liquidate Withdraw";
 
 "tx_ibc_send" = "IBC Send";
+"tx_ibc_eureka_send" = "IBC Eureka Send";
 "tx_ibc_receive" = "IBC Received";
+"tx_ibc_eureka_receive" = "IBC Eureka Received";
 "tx_ibc_client_update" = "IBC Client Update";
 "tx_ibc_acknowledgement" = "IBC Ack";
 

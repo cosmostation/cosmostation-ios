@@ -20,7 +20,6 @@ class ChainOktEVM: BaseChain {
         
         name = "OKT"
         tag = "okt60_Keccak"
-        logo1 = "chainOktEVM"
         apiName = "okc"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
@@ -34,8 +33,6 @@ class ChainOktEVM: BaseChain {
         
         supportEvm = true
         coinSymbol = "OKT"
-        coinGeckoId = "oec-token"
-        coinLogo = "tokenOkt"
         evmRpcURL = "https://exchainrpc.okex.org"
 //        evmRpcURL = "https://oktc-mainnet.public.blastapi.io"
     }
@@ -95,9 +92,9 @@ class ChainOktEVM: BaseChain {
                 coinsValue = oktFetcher.allCoinValue()
                 coinsUSDValue = oktFetcher.allCoinValue(true)
                 mainCoinAmount = oktFetcher.oktAllStakingDenomAmount()
-                tokensCnt = evmFetcher.valueTokenCnt()
-                tokensValue = evmFetcher.allTokenValue()
-                tokensUSDValue = evmFetcher.allTokenValue(true)
+                tokensCnt = evmFetcher.valueTokenCnt(id)
+                tokensValue = evmFetcher.allTokenValue(id)
+                tokensUSDValue = evmFetcher.allTokenValue(id, true)
                 
                 allCoinValue = coinsValue
                 allCoinUSDValue = coinsUSDValue

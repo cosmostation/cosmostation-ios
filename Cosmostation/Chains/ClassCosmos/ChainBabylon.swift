@@ -17,7 +17,6 @@ class ChainBabylon: BaseChain {
         
         name = "Babylon"
         tag = "babylon118"
-        logo1 = "chainBabylon"
         apiName = "babylon"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
@@ -26,8 +25,8 @@ class ChainBabylon: BaseChain {
         stakeDenom = "ubbn"
         bechAccountPrefix = "bbn"
         validatorPrefix = "bbnvaloper"
-        grpcHost = ""
-        lcdUrl = ""
+        grpcHost = "grpc.mainnet.babylon.cosmostation.io"
+        lcdUrl = "https://lcd.mainnet.babylon.cosmostation.io"
     }
     
     override func fetchData(_ id: Int64) {
@@ -61,9 +60,9 @@ class ChainBabylon: BaseChain {
                     coinsValue = cosmosFetcher.allCoinValue()
                     coinsUSDValue = cosmosFetcher.allCoinValue(true)
                     mainCoinAmount = cosmosFetcher.allStakingDenomAmount()
-                    tokensCnt = cosmosFetcher.valueTokenCnt()
-                    tokensValue = cosmosFetcher.allTokenValue()
-                    tokensUSDValue = cosmosFetcher.allTokenValue(true)
+                    tokensCnt = cosmosFetcher.valueTokenCnt(id)
+                    tokensValue = cosmosFetcher.allTokenValue(id)
+                    tokensUSDValue = cosmosFetcher.allTokenValue(id, true)
                 }
                 allCoinValue = coinsValue
                 allCoinUSDValue = coinsUSDValue

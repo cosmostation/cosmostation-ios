@@ -15,7 +15,6 @@ class ChainXplaEVM: BaseChain  {
         
         name = "Xpla"
         tag = "xplaKeccak256"
-        logo1 = "chainXplaEVM"
         apiName = "xpla"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
@@ -29,8 +28,6 @@ class ChainXplaEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "XPLA"
-        coinGeckoId = "xpla"
-        coinLogo = "tokenXpla"
         evmRpcURL = "https://rpc-xpla-evm.cosmostation.io"
     }
 }

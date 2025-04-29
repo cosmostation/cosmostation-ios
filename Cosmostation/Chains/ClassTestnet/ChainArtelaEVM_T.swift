@@ -16,7 +16,6 @@ class ChainArtelaEVM_T: BaseChain {
         
         name = "Artela Testnet"
         tag = "artela60_T"
-        logo1 = "chainArtela_T"
         isTestnet = true
         apiName = "artela-testnet"
         accountKeyType = AccountKeyType(.ARTELA_Keccak256, "m/44'/60'/0'/0/X")
@@ -32,8 +31,6 @@ class ChainArtelaEVM_T: BaseChain {
         
         supportEvm = true
         coinSymbol = "ART"
-        coinGeckoId = ""
-        coinLogo = "tokenArt"
         evmRpcURL = "https://rpc-office-evm.cosmostation.io/artela-testnet/"
     }
 }

@@ -18,13 +18,10 @@ class ChainBitCoin86: BaseChain {
         
         name = "Bitcoin"
         tag = "bitcoin86"
-        logo1 = "chainBitcoin"
         apiName = "bitcoin"
         accountKeyType = AccountKeyType(.BTC_Taproot, "m/86'/0'/0'/0/X")
         
         coinSymbol = "BTC"
-        coinGeckoId = "bitcoin"
-        coinLogo = "tokenBtc"
         
         mainUrl = "https://rpc-office.cosmostation.io/bitcoin-mainnet"
     }

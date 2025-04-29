@@ -17,7 +17,6 @@ class ChainKavaEVM: BaseChain  {
         
         name = "Kava"
         tag = "kava60"
-        logo1 = "chainKavaEVM"
         apiName = "kava"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
@@ -31,8 +30,6 @@ class ChainKavaEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "KAVA"
-        coinGeckoId = "kava"
-        coinLogo = "tokenKava"
         evmRpcURL = "https://rpc-kava-evm.cosmostation.io"
     }
     

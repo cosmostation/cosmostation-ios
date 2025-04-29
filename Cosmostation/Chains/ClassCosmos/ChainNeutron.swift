@@ -15,7 +15,6 @@ class ChainNeutron: BaseChain {
         
         name = "Neutron"
         tag = "neutron118"
-        logo1 = "chainNeutron"
         apiName = "neutron"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
@@ -70,9 +69,9 @@ class ChainNeutron: BaseChain {
                 coinsValue = neutronFetcher.allCoinValue()
                 coinsUSDValue = neutronFetcher.allCoinValue(true)
                 mainCoinAmount = neutronFetcher.allStakingDenomAmount()
-                tokensCnt = neutronFetcher.valueTokenCnt()
-                tokensValue = neutronFetcher.allTokenValue()
-                tokensUSDValue = neutronFetcher.allTokenValue(true)
+                tokensCnt = neutronFetcher.valueTokenCnt(id)
+                tokensValue = neutronFetcher.allTokenValue(id)
+                tokensUSDValue = neutronFetcher.allTokenValue(id, true)
                 
                 allCoinValue = coinsValue
                 allCoinUSDValue = coinsUSDValue

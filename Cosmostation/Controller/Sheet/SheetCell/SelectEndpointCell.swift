@@ -13,15 +13,16 @@ import NIO
 import SwiftProtobuf
 import SwiftyJSON
 import web3swift
+import Lottie
 
 class SelectEndpointCell: UITableViewCell {
     
     @IBOutlet weak var rootView: UIView!
     @IBOutlet weak var providerLabel: UILabel!
-    @IBOutlet weak var seletedImg: UIImageView!
+    @IBOutlet weak var seletedImg: UIView!
     @IBOutlet weak var endpointLabel: UILabel!
-    @IBOutlet weak var speedImg: UIImageView!
-    @IBOutlet weak var speedTimeLabel: UILabel!
+    @IBOutlet weak var speedLabel: RoundedPaddingLabel!
+    @IBOutlet weak var loadingView: LottieAnimationView!
     
     var gapTime: CFAbsoluteTime?
 
@@ -29,14 +30,29 @@ class SelectEndpointCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = .none
         self.seletedImg.isHidden = true
+        speedLabel.layer.borderWidth = 1
+        
+        self.providerLabel.textColor = .color04
+        self.endpointLabel.textColor = .color04
+        
+        loadingView.isHidden = false
+        loadingView.animation = LottieAnimation.named("loadingSmallYellow")
+        loadingView.contentMode = .scaleAspectFit
+        loadingView.loopMode = .loop
+        loadingView.animationSpeed = 1.3
+        loadingView.play()
     }
     
     override func prepareForReuse() {
         self.providerLabel.text = ""
         self.endpointLabel.text = ""
-        self.speedImg.image = nil
-        self.speedTimeLabel.text = ""
+        self.speedLabel.isHidden = true
         self.seletedImg.isHidden = true
+        self.rootView.backgroundColor = .clear
+        self.providerLabel.textColor = .color04
+        self.endpointLabel.textColor = .color04
+        self.speedLabel.textColor = .color01
+        self.loadingView.isHidden = false
     }
     
     func onBindGrpcEndpoint(_ position: Int, _ chain: BaseChain) {
@@ -53,6 +69,7 @@ class SelectEndpointCell: UITableViewCell {
             if (cosmosFetcher.getEndpointType() == .UseGRPC &&
                 cosmosFetcher.getGrpc().host == host) {
                 seletedImg.isHidden = false
+                rootView.backgroundColor = .color08
             }
             
             Task {
@@ -62,26 +79,15 @@ class SelectEndpointCell: UITableViewCell {
                     let nodeInfo = try await Cosmos_Base_Tendermint_V1beta1_ServiceNIOClient(channel: channel).getNodeInfo(req, callOptions: getCallOptions()).response.get()
                     if (nodeInfo.defaultNodeInfo.network == chain.chainIdCosmos) {
                         self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
-                        let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
-                        if (self.gapTime! <= 1.2) {
-                            self.speedImg.image = UIImage.init(named: "ImgGovPassed")
-                        } else if (self.gapTime! <= 3) {
-                            self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
-                        } else {
-                            self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        }
-                        self.speedTimeLabel.text = gapFormat
-                        
+                        configureSpeedLabel()
                     } else {
-                        try? channel.close()
-                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        self.speedTimeLabel.text = "ChainID Failed"
+                        _ = channel.close()
+                        configureClosedNode()
                     }
                     
                 } catch {
-                    try? channel.close()
-                    self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                    self.speedTimeLabel.text = "Unknown"
+                    _ = channel.close()
+                    configureClosedNode()
                 }
             }
         }
@@ -101,9 +107,14 @@ class SelectEndpointCell: UITableViewCell {
             }
             url = url + "cosmos/base/tendermint/v1beta1/node_info"
             
+            var endpointURL = endpoint["url"].stringValue
+            if endpointURL.hasSuffix("/") {
+                endpointURL = String(endpointURL.dropLast())
+            }
             if (cosmosFetcher.getEndpointType() == .UseLCD &&
-                cosmosFetcher.getLcd().contains(endpoint["url"].stringValue)) {
+                cosmosFetcher.getLcd().contains(endpointURL)) {
                 seletedImg.isHidden = false
+                rootView.backgroundColor = .color08
             }
             
             Task {
@@ -112,24 +123,14 @@ class SelectEndpointCell: UITableViewCell {
                     if (response["default_node_info"]["network"].stringValue == chain.chainIdCosmos ||
                         response["node_info"]["network"].stringValue == chain.chainIdCosmos) {
                         self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
-                        let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
-                        if (self.gapTime! <= 1.2) {
-                            self.speedImg.image = UIImage.init(named: "ImgGovPassed")
-                        } else if (self.gapTime! <= 3) {
-                            self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
-                        } else {
-                            self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        }
-                        self.speedTimeLabel.text = gapFormat
+                        configureSpeedLabel()
                         
                     } else {
-                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        self.speedTimeLabel.text = "ChainID Failed"
+                        configureClosedNode()
                     }
                     
                 } catch {
-                    self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                    self.speedTimeLabel.text = "Unknown"
+                    configureClosedNode()
                 }
             }
         }
@@ -145,30 +146,25 @@ class SelectEndpointCell: UITableViewCell {
             let checkTime = CFAbsoluteTimeGetCurrent()
             let url = endpoint["url"].stringValue
             
-            seletedImg.isHidden = (evmFetcher.getEvmRpc() != url)
+            if evmFetcher.getEvmRpc().contains(url) {
+                seletedImg.isHidden = false
+                rootView.backgroundColor = .color08
+            }
             
             let param: Parameters = ["method": "eth_getBalance", "params": ["0x8D97689C9818892B700e27F316cc3E41e17fBeb9", "latest"], "id" : 1, "jsonrpc" : "2.0"]
-            AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in
+            AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).validate().responseDecodable(of: JSON.self) { response in
                 switch response.result {
-                case .success :
-                    self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
-                    DispatchQueue.main.async {
-                        let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
-                        if (self.gapTime! <= 1.2) {
-                            self.speedImg.image = UIImage.init(named: "ImgGovPassed")
-                        } else if (self.gapTime! <= 3) {
-                            self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
-                        } else {
-                            self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        }
-                        self.speedTimeLabel.text = gapFormat
+                case .success(let success) :
+                    guard let _ = success["result"].string else {
+                        self.configureClosedNode()
+                        return
                     }
+
+                    self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
+                    self.configureSpeedLabel()
                     
                 case .failure:
-                    DispatchQueue.main.async {
-                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        self.speedTimeLabel.text = "Unknown"
-                    }
+                    self.configureClosedNode()
                 }
             }
         }
@@ -182,32 +178,22 @@ class SelectEndpointCell: UITableViewCell {
             endpointLabel.adjustsFontSizeToFitWidth = true
             
             let checkTime = CFAbsoluteTimeGetCurrent()
-            let url = endpoint["url"].stringValue
-            
-            seletedImg.isHidden = (suiFetcher.getSuiRpc() != url)
+            let url = endpoint["url"].stringValue.hasSuffix("/") ? String(endpoint["url"].stringValue.dropLast()) : endpoint["url"].stringValue
+
+            if suiFetcher.getSuiRpc().contains(url) {
+                seletedImg.isHidden = false
+                rootView.backgroundColor = .color08
+            }
             
             let param: Parameters = ["method": "sui_getChainIdentifier", "params": [], "id" : 1, "jsonrpc" : "2.0"]
             AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in
                 switch response.result {
                 case .success :
                     self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
-                    DispatchQueue.main.async {
-                        let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
-                        if (self.gapTime! <= 1.2) {
-                            self.speedImg.image = UIImage.init(named: "ImgGovPassed")
-                        } else if (self.gapTime! <= 3) {
-                            self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
-                        } else {
-                            self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        }
-                        self.speedTimeLabel.text = gapFormat
-                    }
+                    self.configureSpeedLabel()
                     
                 case .failure:
-                    DispatchQueue.main.async {
-                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        self.speedTimeLabel.text = "Unknown"
-                    }
+                    self.configureClosedNode()
                 }
             }
         }
@@ -221,35 +207,22 @@ class SelectEndpointCell: UITableViewCell {
             endpointLabel.adjustsFontSizeToFitWidth = true
             
             let checkTime = CFAbsoluteTimeGetCurrent()
-            var url = endpoint["url"].stringValue
-            if (url.last != "/") {
-                url += "/"
-            }
+            let url = endpoint["url"].stringValue.hasSuffix("/") ? String(endpoint["url"].stringValue.dropLast()) : endpoint["url"].stringValue
 
-            seletedImg.isHidden = (gnoFetcher.getRpc() != url)
+            if gnoFetcher.getRpc().contains(url) {
+                seletedImg.isHidden = false
+                rootView.backgroundColor = .color08
+            }
             
             let param: Parameters = ["method": "health", "params": [], "id" : 1, "jsonrpc" : "2.0"]
             AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in
                 switch response.result {
                 case .success :
                     self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
-                    DispatchQueue.main.async {
-                        let gapFormat = WUtils.getNumberFormatter(4).string(from: self.gapTime! as NSNumber)
-                        if (self.gapTime! <= 1.2) {
-                            self.speedImg.image = UIImage.init(named: "ImgGovPassed")
-                        } else if (self.gapTime! <= 3) {
-                            self.speedImg.image = UIImage.init(named: "ImgGovDoposit")
-                        } else {
-                            self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        }
-                        self.speedTimeLabel.text = gapFormat
-                    }
+                    self.configureSpeedLabel()
                     
                 case .failure:
-                    DispatchQueue.main.async {
-                        self.speedImg.image = UIImage.init(named: "ImgGovRejected")
-                        self.speedTimeLabel.text = "Unknown"
-                    }
+                    self.configureClosedNode()
                 }
             }
         }
@@ -266,5 +239,41 @@ class SelectEndpointCell: UITableViewCell {
         var callOptions = CallOptions()
         callOptions.timeLimit = TimeLimit.timeout(TimeAmount.milliseconds(20000))
         return callOptions
+    }
+    
+    func configureSpeedLabel() {
+        DispatchQueue.main.async {
+            self.speedLabel.isHidden = false
+            self.loadingView.isHidden = true
+            self.providerLabel.textColor = .color01
+            self.endpointLabel.textColor = .color02
+
+            if (self.gapTime! <= 1.2) {
+                self.speedLabel.layer.borderColor = UIColor.colorSubGreen01.cgColor
+                self.speedLabel.text = "Faster"
+                
+            } else if (self.gapTime! <= 3) {
+                self.speedLabel.layer.borderColor = UIColor.colorSubYellow01.cgColor
+                self.speedLabel.text = "Normal"
+                
+            } else {
+                self.speedLabel.layer.borderColor = UIColor.colorSubRed01.cgColor
+                self.speedLabel.text = "Slower"
+            }
+        }
+    }
+    
+    func configureClosedNode() {
+        DispatchQueue.main.async {
+            self.speedLabel.isHidden = false
+            self.loadingView.isHidden = true
+            
+            self.speedLabel.layer.borderColor = UIColor.color04.cgColor
+            self.speedLabel.text = "Closed"
+            self.speedLabel.textColor = .color04
+            
+            self.providerLabel.textColor = .color04
+            self.endpointLabel.textColor = .color04
+        }
     }
 }

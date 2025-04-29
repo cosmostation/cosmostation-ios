@@ -15,7 +15,6 @@ class ChainCarbon: BaseChain  {
         
         name = "Carbon"
         tag = "carbon118"
-        logo1 = "chainCarbon"
         apiName = "carbon"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

@@ -15,15 +15,12 @@ class ChainBitCoin84_T: ChainBitCoin86_T {
         
         name = "Bitcoin Signet"
         tag = "bitcoin84_T"
-        logo1 = "chainBitcoin_T"
         isDefault = false
         isTestnet = true
         apiName = "bitcoin-testnet"
         accountKeyType = AccountKeyType(.BTC_Native_Segwit, "m/84'/1'/0'/0/X")
         
         coinSymbol = "sBTC"
-        coinGeckoId = ""
-        coinLogo = "tokenBtc_signet"
                 
         mainUrl = "https://rpc-office.cosmostation.io/bitcoin-testnet"
     }

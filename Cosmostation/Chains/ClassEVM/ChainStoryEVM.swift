@@ -15,15 +15,12 @@ class ChainStoryEVM: BaseChain {
         
         name = "Story"
         tag = "story"
-        logo1 = "chainStory"
         apiName = "story"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
         supportEvm = true
         coinSymbol = "IP"
-        coinGeckoId = "story-2"
-        coinLogo = "tokenIp"
         evmRpcURL = "https://evmrpc.story.nodestake.org"
     }
     

@@ -292,7 +292,8 @@ class DappEvmSignRequestSheet: BaseVC {
     }
     
     func onUpdateFeeView() {
-        let feePrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol) else { return }
+        let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
         let totalGasPrice = evmGas[feePosition].0 + evmGas[feePosition].1
         let feeAmountBigInt = totalGasPrice.multiplied(by: evmGas[feePosition].2)
         let feeAmount = NSDecimalNumber(string: String(feeAmountBigInt))

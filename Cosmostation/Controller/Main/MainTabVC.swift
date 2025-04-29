@@ -29,19 +29,26 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
         self.onHandleEvent()
     }
     
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        BaseData.instance.setLastTab(tabBarController.selectedIndex)
+    //Disable default tabbar change animation with iOS 18
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if let targetIndex = tabBarController.viewControllers?.firstIndex(where: { $0 == viewController }) {
+            UIView.performWithoutAnimation {
+                tabBarController.selectedIndex = targetIndex
+            }
+            BaseData.instance.setLastTab(tabBarController.selectedIndex)
+        }
+        return false
     }
     
     var chainImg: UIImageView?
-    func showChainBgImage(_ uiImge: UIImage) {
+    func showChainBgImage(_ imgUrl: URL?) {
         if (chainImg?.isHidden == false) { return }
         let width = UIScreen.main.bounds.size.width
         let height = UIScreen.main.bounds.size.height
         let x = CGFloat.random(in: -150..<(width-150))
         let y = CGFloat.random(in: 300..<(height-150))
         chainImg = UIImageView(frame: CGRectMake(x, y, 300, 300))
-        chainImg?.image = uiImge
+        chainImg?.sd_setImage(with: imgUrl, placeholderImage: UIImage(named: "chainDefault"))
         chainImg?.contentMode = .scaleToFill
         chainImg?.alpha = 0
         
@@ -85,12 +92,19 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
     }
 }
 
-
 extension UIView {
     func addBackground() {
-        guard let background = BASE_BG_IMG.randomElement() else { return }
-        let img = UIImage(named: background)
-        layer.contents = img?.cgImage
-        contentMode = .scaleAspectFill
+        if BaseData.instance.getTheme() == 0 {
+            let img = UIImage(named: "basebgDark")
+            layer.contents = img?.cgImage
+            contentMode = .scaleAspectFill
+
+        } else {
+            guard let background = BASE_BG_IMG.randomElement() else { return }
+            let img = UIImage(named: background)
+            layer.contents = img?.cgImage
+            contentMode = .scaleAspectFill
+
+        }
     }
 }

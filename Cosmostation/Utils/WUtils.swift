@@ -131,41 +131,119 @@ public class WUtils {
         return attributedString1
     }
     
-    static func getMintscanPath(_ fromChain: BaseChain, _ toChain: BaseChain, _ denom: String) -> MintscanPath? {
-        let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.denom?.lowercased() == denom.lowercased() }).first
-        var msToken: MintscanToken?
-        if let tokenInfo = fromChain.getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract == denom }).first {
-            msToken = tokenInfo
+    
+    static func checkIBCrecipientableChains(_ fromChain: BaseChain, _ toSendDenom: String) -> [BaseChain] {
+        //Hide Eureka
+//        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false })
+        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false && $0.supportCosmos == true })
+        
+        var result = [BaseChain]()
+        result.append(fromChain)
+        
+        //Hide Eureka
+        if(toSendDenom.starts(with: "0x")) {
+            return result
         }
-        var result: MintscanPath?
-        BaseData.instance.mintscanAssets?.forEach { asset in
-            if (msAsset != nil) {
-                if (asset.chain == fromChain.apiName &&
-                    asset.beforeChain(fromChain.apiName) == toChain.apiName &&
-                    asset.denom?.lowercased() == denom.lowercased()) {
-                    guard let channel = asset.ibc_info?.client?.channel, let port = asset.ibc_info?.client?.port else { return }
-                    result = MintscanPath.init(channel, port)
-                    return
-                }
-                if (asset.chain == toChain.apiName &&
-                    asset.beforeChain(toChain.apiName) == fromChain.apiName &&
-                    asset.ibc_info?.counterparty?.getDenom?.lowercased() == denom.lowercased()) {
-                    guard let channel = asset.ibc_info?.counterparty?.channel, let port = asset.ibc_info?.counterparty?.port else { return }
-                    result = MintscanPath.init(channel, port)
-                    return
-                }
-
-            } else if (msToken != nil) {
-                if (asset.chain == toChain.apiName &&
-                    asset.beforeChain(toChain.apiName) == fromChain.apiName &&
-                    asset.ibc_info?.counterparty?.getDenom?.lowercased() == msToken?.contract!.lowercased()) {
-                    guard let channel = asset.ibc_info?.counterparty?.channel, let port = asset.ibc_info?.counterparty?.port else { return }
-                    result = MintscanPath.init(channel, port)
-                    return
+        
+        //IBC Coin should add backward path if wallet support fromchain
+        if toSendDenom.starts(with: "ibc/"),
+           let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.chain == fromChain.apiName && $0.denom == toSendDenom }).first,
+           let sendable = allIbcChains.filter({ $0.apiName == msAsset.ibc_info?.counterparty?.chain }).first {
+            if !result.contains(where: { $0.apiName == sendable.apiName }) {
+                result.append(sendable)
+            }
+        }
+        
+        //IBC & Eureka_IBC
+        //Native & IBC & Cw20 & Erc20 check forward path if wallet support tochain
+        BaseData.instance.mintscanAssets?.forEach { msAsset in
+            if msAsset.ibc_info?.counterparty?.chain == fromChain.apiName,
+               msAsset.ibc_info?.counterparty?.getDenom == toSendDenom,
+               let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
+                if !result.contains(where: { $0.apiName == sendable.apiName }) {
+                    result.append(sendable)
                 }
             }
         }
+        
+        /*
+        //Eureka_IBC
+        //Erc20 token shoud check backward path if possible
+        //ex: Atom(Erc20) on ethereum should back to cosmos
+        if toSendDenom.starts(with: "0x"),
+           let msToken = BaseData.instance.mintscanErc20Tokens?.filter({ $0.chainName == fromChain.apiName && $0.address == toSendDenom }).first,
+           let sendable = allIbcChains.filter({ $0.apiName == msToken.ibc_info?.counterparty?.chain }).first {
+            if !result.contains(where: { $0.apiName == sendable.apiName }) {
+                result.append(sendable)
+            }
+        }
+        
+        //Eureka_IBC
+        //Native & IBC Coin check forward path to Ethereum chains
+        //ex: Atom on Cosmos can go etheruem
+        BaseData.instance.mintscanErc20Tokens?.forEach { msToken in
+            if msToken.ibc_info?.counterparty?.chain == fromChain.apiName,
+               msToken.ibc_info?.counterparty?.getDenom == toSendDenom,
+               let sendable = allIbcChains.filter({ $0.apiName == msToken.chainName }).first {
+                if !result.contains(where: { $0.apiName == sendable.apiName }) {
+                    result.append(sendable)
+                }
+            }
+        }
+        */
+        
+        result.sort {
+            if ($0.name == fromChain.name) { return true }
+            if ($1.name == fromChain.name) { return false }
+            if ($0.name == "Cosmos") { return true }
+            if ($1.name == "Cosmos") { return false }
+            if ($0.name == "Ethereum") { return true }
+            if ($1.name == "Ethereum") { return false }
+            if ($0.name == "Osmosis") { return true }
+            if ($1.name == "Osmosis") { return false }
+            return false
+        }
         return result
+    }
+    
+    static func getMintscanPath(_ fromChain: BaseChain, _ toChain: BaseChain, _ toSendDenom: String) -> MintscanPath? {
+        
+        //Check IBC Coin backward case
+        if let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.chain == fromChain.apiName && $0.denom == toSendDenom }).first,
+           msAsset.ibc_info?.counterparty?.chain == toChain.apiName {
+//            print("BACKWRAD ", msAsset.ibc_info)
+            return MintscanPath.init(.BACKWRAD, msAsset.ibc_info)
+        }
+        
+        //IBC & Eureka_IBC
+        //Check Native & IBC & Cw20 & Erc20 Coin forward case
+        if let msAsset = BaseData.instance.mintscanAssets?.filter({ $0.chain == toChain.apiName &&
+            $0.ibc_info?.counterparty?.chain == fromChain.apiName &&
+            $0.ibc_info?.counterparty?.getDenom == toSendDenom }).first {
+//            print("FORWARD ", msAsset.ibc_info)
+            return MintscanPath.init(.FORWARD, msAsset.ibc_info)
+        }
+        
+        //IBC Eureka
+        //Check Erc20 token backward case
+        //ex: Atom(Erc20) on ethereum should back to cosmos
+        if let msToken = BaseData.instance.mintscanErc20Tokens?.filter({ $0.chainName == fromChain.apiName &&
+            $0.address == toSendDenom &&
+            $0.ibc_info?.counterparty?.chain == toChain.apiName }).first {
+//            print("EUREKA BACKWRAD ", msToken.ibc_info)
+            return MintscanPath.init(.BACKWRAD, msToken.ibc_info)
+        }
+        
+        //IBC Eureka
+        //Check Native & IBC Coin forward case
+        //ex: Atom on Cosmos can go etheruem
+        if let msToken = BaseData.instance.mintscanErc20Tokens?.filter({ $0.chainName == toChain.apiName &&
+            $0.ibc_info?.counterparty?.chain == fromChain.apiName &&
+            $0.ibc_info?.counterparty?.getDenom == toSendDenom }).first {
+//            print("EUREKA FORWARD ", msToken.ibc_info)
+            return MintscanPath.init(.FORWARD, msToken.ibc_info)
+        }
+        return nil
     }
     
     
@@ -217,6 +295,15 @@ public class WUtils {
 }
 
 extension Date {
+    
+    var hourAfter6UInt64: UInt64 {
+        return UInt64((self.timeIntervalSince1970 + 21600).rounded())
+    }
+    
+    var hourAfter6Int32: Int32 {
+        return Int32((self.timeIntervalSince1970 + 21600).rounded())
+    }
+    
     var millisecondsSince1970:Int64 {
         return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
     }
@@ -280,6 +367,10 @@ extension String {
     func removingPrefix(_ prefix: String) -> String {
         guard self.hasPrefix(prefix) else { return self }
         return String(self.dropFirst(prefix.count))
+    }
+    
+    func addABIPrefix() -> String {
+        return "0000000000000000000000000000000000000000000000000000000000000020" + self
     }
 }
 

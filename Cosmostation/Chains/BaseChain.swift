@@ -14,13 +14,13 @@ class BaseChain {
     //account and common info
     var name: String!
     var tag: String!
-    var logo1: String!
     var isTestnet = false
     var isDefault = true
     var apiName: String!
     var accountKeyType: AccountKeyType!
     var privateKey: Data?
     var publicKey: Data?
+    var isOtherChainImage = false
     
     //cosmos & grpc & lcd info
     var cosmosEndPointType: CosmosEndPointType = .Unknown
@@ -53,8 +53,7 @@ class BaseChain {
     }
     var evmAddress: String?
     var coinSymbol = ""
-    var coinGeckoId = ""
-    var coinLogo = ""
+
     var evmRpcURL = ""
     
     
@@ -99,7 +98,7 @@ class BaseChain {
             }
         }
         
-        if (supportCosmos && supportStaking) {
+        if (supportCosmos && isStakeEnabled()) {
             bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, validatorPrefix)
         }
     }
@@ -191,14 +190,14 @@ class BaseChain {
                         coinsValue = cosmosFetcher.allCoinValue()
                         coinsUSDValue = cosmosFetcher.allCoinValue(true)
                         mainCoinAmount = cosmosFetcher.allStakingDenomAmount()
-                        tokensCnt = cosmosFetcher.valueTokenCnt()
-                        tokensValue = cosmosFetcher.allTokenValue()
-                        tokensUSDValue = cosmosFetcher.allTokenValue(true)
+                        tokensCnt = cosmosFetcher.valueTokenCnt(id)
+                        tokensValue = cosmosFetcher.allTokenValue(id)
+                        tokensUSDValue = cosmosFetcher.allTokenValue(id, true)
                     }
                     if let evmFetcher = getEvmfetcher() {
-                        tokensCnt = tokensCnt + evmFetcher.valueTokenCnt()
-                        tokensValue = tokensValue.adding(evmFetcher.allTokenValue())
-                        tokensUSDValue = tokensUSDValue.adding(evmFetcher.allTokenValue(true))
+                        tokensCnt = tokensCnt + evmFetcher.valueTokenCnt(id)
+                        tokensValue = tokensValue.adding(evmFetcher.allTokenValue(id))
+                        tokensUSDValue = tokensUSDValue.adding(evmFetcher.allTokenValue(id, true))
                     }
                     
                 } else if (supportCosmos) {
@@ -207,9 +206,9 @@ class BaseChain {
                         coinsValue = cosmosFetcher.allCoinValue()
                         coinsUSDValue = cosmosFetcher.allCoinValue(true)
                         mainCoinAmount = cosmosFetcher.allStakingDenomAmount()
-                        tokensCnt = cosmosFetcher.valueTokenCnt()
-                        tokensValue = cosmosFetcher.allTokenValue()
-                        tokensUSDValue = cosmosFetcher.allTokenValue(true)
+                        tokensCnt = cosmosFetcher.valueTokenCnt(id)
+                        tokensValue = cosmosFetcher.allTokenValue(id)
+                        tokensUSDValue = cosmosFetcher.allTokenValue(id, true)
                     }
                     
                 } else if (supportEvm) {
@@ -218,9 +217,9 @@ class BaseChain {
                         coinsValue = evmFetcher.allCoinValue()
                         coinsUSDValue = evmFetcher.allCoinValue(true)
                         mainCoinAmount = evmFetcher.evmBalances
-                        tokensCnt = evmFetcher.valueTokenCnt()
-                        tokensValue = evmFetcher.allTokenValue()
-                        tokensUSDValue = evmFetcher.allTokenValue(true)
+                        tokensCnt = evmFetcher.valueTokenCnt(id)
+                        tokensValue = evmFetcher.allTokenValue(id)
+                        tokensUSDValue = evmFetcher.allTokenValue(id, true)
                     }
                 }
                 allCoinValue = coinsValue
@@ -251,7 +250,7 @@ class BaseChain {
             } else if let chainZenrock = self as? ChainZenrock {
                 _ = await chainZenrock.getZenrockFetcher()?.fetchCosmosValidators()
 
-            } else if (supportCosmos == true && supportStaking == true) {
+            } else if (supportCosmos == true && isStakeEnabled() == true) {
                 _ = await getCosmosfetcher()?.fetchCosmosValidators()
             }
             
@@ -265,13 +264,13 @@ class BaseChain {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.symbol ?? "UnKnown"
         } else if isSupportCw20(),
-                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return cw20Token.symbol ?? "UnKnown"
         } else if isSupportErc20(),
-                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.symbol ?? "UnKnown"
         } else if isSupportGrc20(),
-                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return grc20Token.symbol ?? "UnKnown"
         }
         return "UnKnown"
@@ -281,14 +280,14 @@ class BaseChain {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.assetImg()
         } else if isSupportCw20(),
-                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return cw20Token.assetImg()
         } else if isSupportErc20(),
-                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.assetImg()
             
         } else if isSupportGrc20(),
-                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return grc20Token.assetImg()
         }
         return nil
@@ -298,14 +297,14 @@ class BaseChain {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.decimals ?? 6
         } else if isSupportCw20(),
-                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return cw20Token.decimals ?? 6
         } else if isSupportErc20(),
-                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.decimals ?? 6
         } else if isSupportGrc20(),
-                 let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
-           return grc20Token.decimals ?? 6
+                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return grc20Token.decimals ?? 6
         }
         return 6
     }
@@ -314,13 +313,13 @@ class BaseChain {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.coinGeckoId ?? ""
         } else if isSupportCw20(),
-                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return cw20Token.coinGeckoId ?? ""
         } else if isSupportErc20(),
-                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.coinGeckoId ?? ""
         } else if isSupportGrc20(),
-                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.contract?.lowercased() == denom.lowercased() }).first {
+                  let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return grc20Token.coinGeckoId ?? ""
         }
         return ""
@@ -445,6 +444,13 @@ extension BaseChain {
     
     func isSupportGrc20() -> Bool {
         return getChainListParam()["is_support_grc20"].bool ?? false
+    }
+    
+    func getChainImage() -> URL? {
+        if isOtherChainImage {
+            return URL(string: "https://raw.githubusercontent.com/cosmostation/chainlist/master/chain/\(apiName!)/resource/chain_\(apiName!)2.png")
+        }
+        return URL(string: getChainListParam()["chain_image"].stringValue)
     }
     
     func votingThreshold() -> NSDecimalNumber {
@@ -678,7 +684,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAtomone())
     result.append(ChainAvalanche())                     //EVM
     result.append(ChainAxelar())
-//    result.append(ChainBabylon())
+    result.append(ChainBabylon())
     result.append(ChainBand())
     result.append(ChainBase())                          //EVM
     result.append(ChainBeraEVM())                       //EVM
@@ -722,10 +728,11 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainGovgen())
     result.append(ChainGravityBridge())
     result.append(ChainHaqqEVM())                       //EVM
+    result.append(ChainHippo())
     result.append(ChainHumansEVM())                     //EVM
     result.append(ChainInjective())
-    result.append(ChainInt3face())
-    //result.append(ChainInitia())
+//    result.append(ChainInt3face())
+    result.append(ChainInitia())
     result.append(ChainIris())
     result.append(ChainIxo())
     result.append(ChainJackal())
@@ -739,13 +746,15 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainKyve())
     result.append(ChainLava())
     result.append(ChainLike())
+    result.append(ChainLombard())
     result.append(ChainLum118())
     result.append(ChainLum880())
+    result.append(ChainManifest())
     result.append(ChainMantra())
-    result.append(ChainMars())
     result.append(ChainMedibloc())
     result.append(ChainMigaloo())
     result.append(ChainMilkyway())
+//    result.append(ChainMonad())                         //EVM
     result.append(ChainNeutron())
     result.append(ChainNibiru())
     result.append(ChainNillion())
@@ -804,27 +813,28 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainXion())
     result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
+//    result.append(ChainXrplEVM())                       //EVM
     result.append(ChainZenrock())
     result.append(ChainZetaEVM())                       //EVM
 
     
     
-    
-//    result.append(ChainBeraEVM_T())                     //EVM
+
     result.append(ChainBabylon_T())
-//    result.append(ChainBitCoin44_T())
-//    result.append(ChainBitCoin49_T())
     result.append(ChainBitCoin84_T())
     result.append(ChainBitCoin86_T())
     result.append(ChainGno_T())
     result.append(ChainInitia_T())
+//    result.append(ChainLombard_T())
     result.append(ChainNeutron_T())
     result.append(ChainNillion_T())
     result.append(ChainMantra_T())
+    result.append(ChainMonad_T())
     result.append(ChainSelf_T())
-//    result.append(ChainStoryEVM_T())
     result.append(ChainTabiEVM_T())
     result.append(ChainXion_T())
+    result.append(ChainXrplEVM_T())
+    result.append(ChainZkCloud_T())
     
     
     
@@ -832,10 +842,15 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainCrescent())
 //    result.append(ChainCudos())
 //    result.append(ChainEmoney())
+//    result.append(ChainMars())
 //    result.append(ChainStarname())
 //    
 //    result.append(ChainCosmos_T())
 //    result.append(ChainArtelaEVM_T())
+//    result.append(ChainBeraEVM_T())                     //EVM
+//    result.append(ChainBitCoin44_T())
+//    result.append(ChainBitCoin49_T())
+//    result.append(ChainStoryEVM_T())
     
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {
@@ -889,4 +904,4 @@ public enum TxType: Int {
 
 
 
-let DEFUAL_DISPALY_CHAINS = ["cosmos118", "ethereum60", "neutron118", "kava60", "osmosis118", "dydx118"]
+let DEFUAL_DISPALY_CHAINS = ["cosmos118", "bitcoin86", "ethereum60", "suiMainnet", "neutron118", "kava60", "osmosis118", "dydx118", "mantra118"]

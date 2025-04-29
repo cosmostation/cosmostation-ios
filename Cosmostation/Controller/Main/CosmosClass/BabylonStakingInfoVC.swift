@@ -12,7 +12,7 @@ import MaterialComponents
 
 class BabylonStakingInfoVC: BaseVC {
     
-    @IBOutlet weak var epochView: CardView!
+    @IBOutlet weak var epochView: FixCardView!
     @IBOutlet weak var epochTitle: UILabel!
     @IBOutlet weak var epochLable: UILabel!
     @IBOutlet weak var timeTitle: UILabel!
@@ -148,6 +148,12 @@ class BabylonStakingInfoVC: BaseVC {
                     return $0.entry.creationHeight < $1.entry.creationHeight
                 }
                 
+            }
+            
+            if let babylonFetcher = (selectedChain as? ChainBabylon)?.getBabylonFetcher() {
+                if babylonFetcher.unbondingCompletionTime == nil || babylonFetcher.unbondingCompletionTime == 0 {
+                    await babylonFetcher.fetchCheckPointTime()
+                }
             }
             
             await onSetEpochPending()

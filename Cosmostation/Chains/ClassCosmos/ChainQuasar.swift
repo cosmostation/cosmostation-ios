@@ -15,7 +15,6 @@ class ChainQuasar: BaseChain  {
         
         name = "Quasar"
         tag = "quasar118"
-        logo1 = "chainQuasar"
         apiName = "quasar"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

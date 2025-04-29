@@ -15,7 +15,6 @@ class ChainTeritori: BaseChain  {
         
         name = "Teritori"
         tag = "teritori118"
-        logo1 = "chainTeritori"
         apiName = "teritori"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

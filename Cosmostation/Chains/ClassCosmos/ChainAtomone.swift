@@ -15,7 +15,6 @@ class ChainAtomone: BaseChain {
         
         name = "Atomone"
         tag = "atomone118"
-        logo1 = "chainAtomone"
         apiName = "atomone"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

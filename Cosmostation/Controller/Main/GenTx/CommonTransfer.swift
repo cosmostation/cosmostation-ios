@@ -26,6 +26,8 @@ class CommonTransfer: BaseVC {
     @IBOutlet weak var toChainTitle: UILabel!
     @IBOutlet weak var toChainImg: UIImageView!
     @IBOutlet weak var toChainLabel: UILabel!
+    @IBOutlet weak var ibcSendGuideView: UIView!
+    @IBOutlet weak var ibcSendLabel: UILabel!
     
     @IBOutlet weak var toAddressCardView: FixCardView!
     @IBOutlet weak var toAddressTitle: UILabel!
@@ -63,9 +65,11 @@ class CommonTransfer: BaseVC {
     @IBOutlet weak var sendBtn: BaseButton!
     @IBOutlet weak var loadingView: LottieAnimationView!
     
+    fileprivate var VIEW_HEIGHT: CGFloat = 710
+    
     var fromChain: BaseChain!
     var sendAssetType: SendAssetType!
-    var txStyle: TxStyle!                   // .COSMOS_EVM_MAIN_COIN is only change tx style
+    var txStyle: TxStyle!                           // .COSMOS_EVM_MAIN_COIN is only changable tx style
     
     var toSendDenom: String!                        // coin denom or contract addresss
     var toSendMsAsset: MintscanAsset!               // to send Coin
@@ -131,6 +135,7 @@ class CommonTransfer: BaseVC {
                 txStyle = .SUI_STYLE
                 suiFetcher = (fromChain as? ChainSui)?.getSuiFetcher()
                 suiGasPrice = try await suiFetcher.fetchGasprice()
+                
             } else if (sendAssetType == .BTC_COIN) {
                 txStyle = .BTC_STYLE
                 btcFetcher = (fromChain as? ChainBitCoin86)?.getBtcFetcher()
@@ -164,13 +169,15 @@ class CommonTransfer: BaseVC {
                 self.onInitView()                           // set selected asset display symbol, sendable amount, display decimal
             }
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let gap = UIScreen.main.bounds.size.height - 685
-        if (gap > 0) { midGapConstraint.constant = gap }
-        else { midGapConstraint.constant = 60 }
+//        let gap = UIScreen.main.bounds.size.height - 685
+//        let gap = UIScreen.main.bounds.size.height - VIEW_HEIGHT
+//        if (gap > 0) { midGapConstraint.constant = gap }
+//        else { midGapConstraint.constant = 60 }
     }
     
     override func setLocalizedString() {
@@ -185,49 +192,10 @@ class CommonTransfer: BaseVC {
         }
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
         feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
-        sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
     }
     
     func onInitIbcInfo() {
-        recipientableChains.append(fromChain)
-        // check IBC support case for recipient chain
-        let allIbcChains = ALLCHAINS().filter({ $0.isTestnet == false && $0.supportCosmos })
-        BaseData.instance.mintscanAssets?.forEach({ msAsset in
-            if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN || sendAssetType == .GNO_COIN) {
-                if (msAsset.chain == fromChain.apiName && msAsset.denom?.lowercased() == toSendDenom.lowercased()) {
-                    //add backward path
-                    if let sendable = allIbcChains.filter({ $0.apiName == msAsset.beforeChain(fromChain.apiName) }).first {
-                        if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
-                            recipientableChains.append(sendable)
-                        }
-                    }
-                } else if (msAsset.getjustBeforeChain() == fromChain.apiName && msAsset.ibc_info?.counterparty?.getDenom?.lowercased() == toSendDenom.lowercased()) {
-                    //add forward path
-                    if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
-                        if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
-                            recipientableChains.append(sendable)
-                        }
-                    }
-                }
-                
-            } else if (sendAssetType == .COSMOS_WASM || sendAssetType == .GNO_GRC20) {
-                //CW20 only support forward IBC path
-                if (msAsset.ibc_info?.counterparty?.chain == fromChain.apiName && msAsset.ibc_info?.counterparty?.getDenom?.lowercased() == toSendDenom.lowercased()) {
-                    if let sendable = allIbcChains.filter({ $0.apiName == msAsset.chain }).first {
-                        if !recipientableChains.contains(where: { $0.apiName == sendable.apiName }) {
-                            recipientableChains.append(sendable)
-                        }
-                    }
-                }
-            }
-        })
-        recipientableChains.sort {
-            if ($0.name == fromChain.name) { return true }
-            if ($1.name == fromChain.name) { return false }
-            if ($0.name == "Cosmos") { return true }
-            if ($1.name == "Cosmos") { return false }
-            return false
-        }
+        recipientableChains = WUtils.checkIBCrecipientableChains(fromChain, toSendDenom)
         if (recipientableChains.count > 1) {
             toChainCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToChain)))
         }
@@ -235,8 +203,8 @@ class CommonTransfer: BaseVC {
     
     func onInitToChain() {
         toChain = fromChain
-        toChainImg.image = UIImage.init(named: toChain.logo1)
-        toChainLabel.text = toChain.name.uppercased()
+        toChainImg.sd_setImage(with: toChain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
+        toChainLabel.text = toChain.name
     }
     
     func onInitFee() {
@@ -247,20 +215,14 @@ class CommonTransfer: BaseVC {
             }
             selectedFeePosition = 1
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectImg.image =  UIImage.init(named: fromChain.coinLogo)
-            
             feeSelectLabel.text = fromChain.coinSymbol
-            feeDenomLabel.text = fromChain.coinSymbol
             
         } else if (txStyle == .SUI_STYLE) {
             feeSegments.removeAllSegments()
             feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
             selectedFeePosition = 0
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectImg.image =  UIImage.init(named: fromChain.coinLogo)
-            
             feeSelectLabel.text = fromChain.coinSymbol
-            feeDenomLabel.text = fromChain.coinSymbol
             
             suiFeeBudget = suiFetcher.baseFee(.SUI_SEND_COIN)
             
@@ -269,10 +231,7 @@ class CommonTransfer: BaseVC {
             feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
             selectedFeePosition = 0
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectImg.image =  UIImage.init(named: fromChain.coinLogo)
-            
             feeSelectLabel.text = fromChain.coinSymbol
-            feeDenomLabel.text = fromChain.coinSymbol
             
             btcInitFee()
             
@@ -317,6 +276,8 @@ class CommonTransfer: BaseVC {
     }
     
     func onInitView() {
+        sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
+        
         var symbol = ""
         if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
@@ -329,7 +290,7 @@ class CommonTransfer: BaseVC {
             }
             
         } else if (sendAssetType == .EVM_COIN) {
-            titleCoinImg.image = UIImage.init(named: fromChain.coinLogo)
+            titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = 18
             symbol = fromChain.coinSymbol
             availableAmount = evmFetcher.evmBalances.subtracting(EVM_BASE_FEE)
@@ -423,23 +384,58 @@ class CommonTransfer: BaseVC {
     
     @objc func onClickToChain() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-        baseSheet.cosmosChainList = recipientableChains
+        baseSheet.targetChain = fromChain
+        baseSheet.recipientChain = toChain
+        baseSheet.recipientableChains = recipientableChains
         baseSheet.sheetDelegate = self
-        baseSheet.sheetType = .SelectCosmosRecipientChain
+        baseSheet.sheetType = .SelectIBCRecipientChain
         onStartSheet(baseSheet, 400, 0.8)
     }
     
     func onUpdateToChain(_ chain: BaseChain) {
         if (chain.tag != toChain.tag) {
             toChain = chain
-            toChainImg.image = UIImage.init(named: toChain.logo1)
-            toChainLabel.text = toChain.name.uppercased()
+            toChainImg.sd_setImage(with: toChain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
+            toChainLabel.text = toChain.name
             onUpdateToAddressView("")
+            sendBtn.isEnabled = false
             
             if (sendAssetType == .COSMOS_EVM_MAIN_COIN && fromChain.tag != toChain.tag) {
                 onUpdateTxStyle(.COSMOS_STYLE)
+                onUpdateTxStyle(.COSMOS_STYLE)
             }
         }
+        
+        if fromChain.tag == toChain.tag {
+            ibcSendGuideView.isHidden = true
+            sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
+            
+        } else {
+            ibcSendGuideView.isHidden = false
+            let fromChainName = fromChain.name ?? ""
+            let toChainName = toChain.name ?? ""
+            let fullText = "IBC Send from \(fromChainName) to \(toChainName) network"
+            let attributedString = NSMutableAttributedString(string: fullText)
+            let fullRange = (fullText as NSString).range(of: fullText)
+            let fromChainRange = (fullText as NSString).range(of: fromChainName)
+            let toChainRange = (fullText as NSString).range(of: toChainName)
+            attributedString.addAttributes([.font: UIFont.fontSize11Medium, .foregroundColor: UIColor.color03], range: fullRange)
+            attributedString.addAttributes([.font: UIFont.fontSize11Bold, .foregroundColor: UIColor.color02], range: fromChainRange)
+            attributedString.addAttributes([.font: UIFont.fontSize11Bold, .foregroundColor: UIColor.color02], range: toChainRange)
+            ibcSendLabel.attributedText = attributedString
+            
+            sendBtn.setTitle(NSLocalizedString("title_ibc_transfer", comment: ""), for: .normal)
+        }
+        
+//        if (ibcSendGuideView.isHidden) {
+//            let gap = UIScreen.main.bounds.size.height - VIEW_HEIGHT
+//            if (gap > 0) { midGapConstraint.constant = gap }
+//            else { midGapConstraint.constant = 60 }
+//        } else {
+//            let gap = UIScreen.main.bounds.size.height - VIEW_HEIGHT - 50
+//            if (gap > 0) { midGapConstraint.constant = gap }
+//            else { midGapConstraint.constant = 60 }
+//        }
     }
     
     @objc func onClickToAddress() {
@@ -517,7 +513,8 @@ class CommonTransfer: BaseVC {
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
             } else if (sendAssetType == .EVM_COIN) {
-                let msPrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
+                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
@@ -526,7 +523,8 @@ class CommonTransfer: BaseVC {
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                 
             } else if (sendAssetType == .COSMOS_EVM_MAIN_COIN) {
-                let msPrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
+                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
@@ -549,7 +547,8 @@ class CommonTransfer: BaseVC {
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                 
             } else if (sendAssetType == .BTC_COIN) {
-                let msPrice = BaseData.instance.getPrice(fromChain.coinGeckoId)     //
+                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)     //
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
@@ -645,26 +644,29 @@ class CommonTransfer: BaseVC {
         sendBtn.isEnabled = false
         errorCardView.isHidden = true
         if (txStyle == .WEB3_STYLE) {
-            let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let totalGasPrice = evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1
             let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
             let feeDpAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(18))
             let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
-            feeAmountLabel.attributedText = WDP.dpAmount(feeDpAmount.stringValue, feeAmountLabel!.font, 18)
+            WDP.dpCoin(msAsset, feeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .SUI_STYLE) {
-            let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
             let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
-            feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 9)
+            WDP.dpCoin(msAsset, suiFeeBudget, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .BTC_STYLE) {
-            let feePrice = BaseData.instance.getPrice(fromChain.coinGeckoId)
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeAmount = btcTxFee.multiplying(byPowerOf10: -8, withBehavior: getDivideHandler(8))
             let feeValue = feePrice.multiplying(by: feeAmount, withBehavior: handler6)
-            feeAmountLabel.attributedText = WDP.dpAmount(feeAmount.stringValue, feeAmountLabel!.font, 8)
+            WDP.dpCoin(msAsset, btcTxFee, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             availableAmount = availableAmount.subtracting(btcTxFee)
             
@@ -809,8 +811,15 @@ class CommonTransfer: BaseVC {
         view.isUserInteractionEnabled = false
         loadingView.isHidden = false
         
+        ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)       // nil able
+//        print("ibcPath ", ibcPath?.direction, "  ", ibcPath?.ibcInfo)
+        
         if (txStyle == .WEB3_STYLE) {
-            evmSendSimul()
+            if (fromChain.apiName == toChain.apiName) {
+                evmSendSimul()
+            } else if (toChain.supportCosmos) {
+                evmEurekaSimul()
+            }
             
         } else if (txStyle == .SUI_STYLE) {
             suiSendGasCheck()
@@ -823,26 +832,25 @@ class CommonTransfer: BaseVC {
             
         } else if (txStyle == .COSMOS_STYLE) {
             // some chain not support simulate (assetmantle)  24.2.21
-            if (fromChain.isSimulable() == false) {
-                if (fromChain.chainIdCosmos != toChain.chainIdCosmos) {
-                    ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
-                }
+            if (fromChain.isSimulable() == false) {                                 // Chain not support imul
                 return onUpdateWithSimul(nil)
             }
+            
             if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                 // Inchain Send!
-                if (sendAssetType == .COSMOS_WASM) {                                // Inchain CW20 Send!
-                    inChainWasmSendSimul()
-                    
-                } else {                                                            // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
-                    inChainCoinSendSimul()
+                if (sendAssetType == .COSMOS_WASM) {
+                    inChainWasmSendSimul()                                          // Inchain CW20 Send!
+                } else {
+                    inChainCoinSendSimul()                                          // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                 }
+                
+            } else if (toChain.supportCosmos == false) {                            // IBC Eureka Send!
+                ibcEurekaSendSimul()
+                
             } else {                                                                // IBC Send!
-                ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
-                if (sendAssetType == .COSMOS_WASM) {                                // CW20 IBC Send!
-                    ibcWasmSendSimul()
-                    
-                } else {                                                            // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
-                    ibcCoinSendSimul()
+                if (sendAssetType == .COSMOS_WASM) {
+                    ibcWasmSendSimul()                                              // CW20 IBC Send!
+                } else {
+                    ibcCoinSendSimul()                                              // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                 }
             }
         }
@@ -852,7 +860,7 @@ class CommonTransfer: BaseVC {
 
 
 
-//Evm style tx simul and broadcast
+// EVM style tx simul and broadcast
 extension CommonTransfer {
     
     func evmSendSimul() {
@@ -913,7 +921,7 @@ extension CommonTransfer {
             var toAddress: EthereumAddress!
             
             if (sendAssetType == .EVM_ERC20) {
-                toAddress = EthereumAddress.init(toSendMsToken.contract!)
+                toAddress = EthereumAddress.init(toSendMsToken.address!)
                 let erc20token = ERC20(web3: web3, provider: web3.provider, address: toAddress!)
                 let writeOperation = try await erc20token.transfer(from: senderAddress!, to: recipientAddress!, amount: calSendAmount.stringValue)
                 if (evmTxType == .eip1559) {
@@ -929,7 +937,7 @@ extension CommonTransfer {
                 
             } else {
                 toAddress = recipientAddress
-                let value = Web3Core.Utilities.parseToBigUInt(calSendAmount.stringValue, units: .ether)!
+                let value = Web3Core.Utilities.parseToBigUInt(self.toAmount.stringValue, decimals: 0)!
                 if (evmTxType == .eip1559) {
                     evmTx = CodableTransaction.init(type: evmTxType, to: toAddress, nonce: nonce!,
                                                     chainID: chainID!, value: value,
@@ -942,12 +950,92 @@ extension CommonTransfer {
                 }
             }
             evmTx?.from = senderAddress
-            
-//            print("evmTxA ", evmTx)
             if let estimateGas = try? await web3.eth.estimateGas(for: evmTx!) {
                 evmGasLimit = estimateGas * fromChain.evmGasMultiply() / 10
                 evmTx?.gasLimit = evmGasLimit
             } else {
+                evmTxType = nil
+            }
+            
+            DispatchQueue.main.async {
+                self.onUpdateWithSimul(nil)
+            }
+        }
+    }
+    
+    //This is unused logic (2025.04.15 yongjoo)
+    //Not support Eureka (no way to get eureka_fee onchain)
+    func evmEurekaSimul() {
+        print("evmEurekaSimul")
+        Task {
+            guard let web3 = self.web3 else {
+                evmTxType = nil
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(nil)
+                }
+                return
+            }
+            
+            let oracle = Web3Core.Oracle.init(web3.provider)
+            if let feeHistory = await oracle.bothFeesPercentiles(),
+               feeHistory.baseFee.count > 0 {
+                if (fromChain.evmSupportEip1559()) {
+                    for i in 0..<3 {
+                        let baseFee = feeHistory.baseFee[i]
+                        let tip = feeHistory.tip[i]
+                        evmGas[i] = (baseFee, tip)
+                    }
+                    
+                } else {
+                    for i in 0..<3 {
+                        let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
+                        let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
+                        evmGas[i] = (baseFee, tip)
+                    }
+                }
+                evmTxType = .eip1559
+                
+            } else if let gasprice = try? await web3.eth.gasPrice() {
+                evmGas[0].0 = gasprice
+                evmGas[1].0 = gasprice * 12 / 10
+                evmGas[2].0 = gasprice * 20 / 10
+                evmTxType = .legacy
+                
+            } else {
+                evmTxType = nil
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(nil)
+                }
+                return
+            }
+            print("evmEurekaSimul evmGas ", evmGas)
+            
+            let chainID = web3.provider.network?.chainID
+            let senderAddress = EthereumAddress.init(fromChain.evmAddress!)!
+            let ercContractAddress = EthereumAddress.init(toSendMsToken.address!)!
+            let iCS20ContractAddress = EthereumAddress.init(ibcPath!.getICS20ContractAddress()!)!
+            let nonce = try? await web3.eth.getTransactionCount(for: senderAddress)
+            let calSendAmount = self.toAmount.multiplying(byPowerOf10: -decimal)
+            let erc20 = ERC20(web3: web3, provider: web3.provider, address: ercContractAddress)
+            let approveWriteOperation = try await erc20.approve(from: senderAddress, spender: iCS20ContractAddress, amount: calSendAmount.stringValue)
+            
+            if (evmTxType == .eip1559) {
+                evmTx = CodableTransaction.init(type: evmTxType, to: ercContractAddress, nonce: nonce!,
+                                                       chainID: chainID!, data: approveWriteOperation.data!,
+                                                       maxFeePerGas: evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1,
+                                                       maxPriorityFeePerGas: evmGas[selectedFeePosition].1)
+            } else {
+                evmTx = CodableTransaction.init(type: evmTxType, to: ercContractAddress, nonce: nonce!,
+                                                       chainID: chainID!, data: approveWriteOperation.data!,
+                                                       gasPrice: evmGas[selectedFeePosition].0)
+            }
+            evmTx?.from = senderAddress
+            
+            if let estimateGas = try? await web3.eth.estimateGas(for: evmTx!) {
+                evmGasLimit = estimateGas * fromChain.evmGasMultiply() / 10 * 3  //check approve and send tx fee sum
+                evmTx?.gasLimit = evmGasLimit
+            } else {
+                print("evmEurekaSimul Error")
                 evmTxType = nil
             }
             
@@ -988,10 +1076,151 @@ extension CommonTransfer {
             
         }
     }
+    
+    //This is unused logic (2025.04.15 yongjoo)
+    //Not support Eureka (no way to get eureka_fee onchain)
+    //Approve than send amount
+    func evmEurekaSend() {
+        print("evmEurekaSend")
+        Task {
+            guard let web3 = self.web3 else {
+                print("web3 init error")
+                return
+            }
+            
+            do {
+                let oracle = Web3Core.Oracle.init(web3.provider)
+                if let feeHistory = await oracle.bothFeesPercentiles(),
+                   feeHistory.baseFee.count > 0 {
+                    if (fromChain.evmSupportEip1559()) {
+                        for i in 0..<3 {
+                            let baseFee = feeHistory.baseFee[i]
+                            let tip = feeHistory.tip[i]
+                            evmGas[i] = (baseFee, tip)
+                        }
+                        
+                    } else {
+                        for i in 0..<3 {
+                            let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
+                            let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
+                            evmGas[i] = (baseFee, tip)
+                        }
+                    }
+                    evmTxType = .eip1559
+                    
+                } else if let gasprice = try? await web3.eth.gasPrice() {
+                    evmGas[0].0 = gasprice
+                    evmGas[1].0 = gasprice * 12 / 10
+                    evmGas[2].0 = gasprice * 20 / 10
+                    evmTxType = .legacy
+                    
+                } else {
+                    evmTxType = nil
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(nil)
+                    }
+                    return
+                }
+                print("evmEurekaSend evmGas ", evmGas)
+                
+                let chainID = web3.provider.network?.chainID
+                let senderAddress = EthereumAddress.init(fromChain.evmAddress!)!
+                let ercContractAddress = EthereumAddress.init(toSendMsToken.address!)!
+                let iCS20ContractAddress = EthereumAddress.init(ibcPath!.getICS20ContractAddress()!)!
+                var nonce = try? await web3.eth.getTransactionCount(for: senderAddress)
+                let calSendAmount = self.toAmount.multiplying(byPowerOf10: -decimal)
+                let bigUIntAmount = Web3Core.Utilities.parseToBigUInt(self.toAmount.stringValue, decimals: 0)!
+                let erc20 = ERC20(web3: web3, provider: web3.provider, address: ercContractAddress)
+                let approveWriteOperation = try await erc20.approve(from: senderAddress, spender: iCS20ContractAddress, amount: calSendAmount.stringValue)
+                
+                var evmApproveTx: CodableTransaction?
+                if (evmTxType == .eip1559) {
+                    evmApproveTx = CodableTransaction.init(type: evmTxType, to: ercContractAddress, nonce: nonce!,
+                                                           chainID: chainID!, data: approveWriteOperation.data!,
+                                                           maxFeePerGas: evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1,
+                                                           maxPriorityFeePerGas: evmGas[selectedFeePosition].1)
+                } else {
+                    evmApproveTx = CodableTransaction.init(type: evmTxType, to: ercContractAddress, nonce: nonce!,
+                                                           chainID: chainID!, data: approveWriteOperation.data!,
+                                                           gasPrice: evmGas[selectedFeePosition].0)
+                }
+                evmApproveTx?.from = senderAddress
+                if let estimateApproveGas = try? await web3.eth.estimateGas(for: evmApproveTx!) {
+                    evmApproveTx?.gasLimit = estimateApproveGas * fromChain.evmGasMultiply() / 10
+                } else {
+                    //TODO Handle Error
+                    print("estimateApproveGas Error")
+                }
+                print("evmApproveTx ", evmApproveTx, "\n\n\n")
+
+                try evmApproveTx?.sign(privateKey: fromChain.privateKey!)
+                let encodeApproveTx = evmApproveTx?.encode(for: .transaction)
+                let resultApprove = try await web3.eth.send(raw : encodeApproveTx!)
+                print("resultApprove ", resultApprove)
+                
+                //TODO check Approve is onchain
+                
+                
+                
+                
+                /*
+                nonce = try? await web3.eth.getTransactionCount(for: senderAddress)
+                let time = Date().hourAfter6Int32
+                let sourceClient = ibcPath!.getChannel()!
+                let destPort = ibcPath!.getPort()!
+                let eurekaWriteOperation = try await EUREKA_ICS20Transfer.init(web3: web3, contractAddress: iCS20ContractAddress).sendTransfer(ercContractAddress, bigUIntAmount, toAddress, sourceClient, destPort, time, EUREKA_MEMO)
+                
+                var evmEurekaTx: CodableTransaction?
+                if (evmTxType == .eip1559) {
+                    evmEurekaTx = CodableTransaction.init(type: evmTxType, to: iCS20ContractAddress, nonce: nonce!,
+                                                          chainID: chainID!, data: eurekaWriteOperation!.data!,
+                                                          maxFeePerGas: evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1,
+                                                          maxPriorityFeePerGas: evmGas[selectedFeePosition].1)
+                } else {
+                    evmEurekaTx = CodableTransaction.init(type: evmTxType, to: iCS20ContractAddress, nonce: nonce!,
+                                                          chainID: chainID!, data: eurekaWriteOperation!.data!,
+                                                          gasPrice: evmGas[selectedFeePosition].0)
+                }
+                evmEurekaTx?.from = senderAddress
+                print("evmEurekaTx ", evmEurekaTx)
+                
+                
+                
+                if let estimateEurekaGas = try? await web3.eth.estimateGas(for: evmEurekaTx!) {
+                    evmEurekaTx?.gasLimit = estimateEurekaGas * fromChain.evmGasMultiply() / 10
+                } else {
+                    //TODO Handle Error
+                    print("estimateEurekaGas Error")
+                }
+                
+                try evmEurekaTx?.sign(privateKey: fromChain.privateKey!)
+                let encodeEurekaTx = evmEurekaTx?.encode(for: .transaction)
+                let resultEureka = try await web3.eth.send(raw : encodeEurekaTx!)
+                print("resultEureka ", resultEureka)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                    self.loadingView.isHidden = true
+                    let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                    txResult.txStyle = self.txStyle
+                    txResult.fromChain = self.fromChain
+//                    txResult.toChain = self.toChain
+                    txResult.toAddress = self.toAddress
+                    txResult.evmHash = resultEureka.hash
+                    txResult.modalPresentationStyle = .fullScreen
+                    self.present(txResult, animated: true)
+                })
+                 */
+                
+            } catch {
+                print("error ", error)
+            }
+        }
+    }
 }
 
-// Gno style tx
+// GNO style tx
 extension CommonTransfer {
+    
     func gnoSimul() {
         Task {
             guard let gasRate = self.cosmosTxFee.amount.filter({ $0.denom == self.cosmosTxFee.amount[0].denom }).first else { return }
@@ -1067,7 +1296,7 @@ extension CommonTransfer {
             }
             
             guard let sig = Signer.gnoSignature(fromChain,
-                                                [.init(type: "/vm.m_call", caller: fromChain.bechAddress!, send: "", pkg_path: toSendMsToken.contract!, func: "Transfer", args: [toAddress, toAmount.stringValue])],
+                                                [.init(type: "/vm.m_call", caller: fromChain.bechAddress!, send: "", pkg_path: toSendMsToken.address!, func: "Transfer", args: [toAddress, toAmount.stringValue])],
                                                 txMemo,
                                                 .init(gas_wanted: String(fee.gasWanted), gas_fee: fee.gasFee)) else { return }
             do {
@@ -1116,7 +1345,6 @@ extension CommonTransfer {
         }
     }
 
-    
     func btcFetchTxHex() {
         Task {
             do {
@@ -1197,8 +1425,7 @@ extension CommonTransfer {
     }
 }
 
-
-//Sui style tx dryrun and broadcast
+// SUI style tx dryrun and broadcast
 extension CommonTransfer {
     
     func suiSendGasCheck() {
@@ -1272,7 +1499,7 @@ extension CommonTransfer {
     
 }
 
-//Cosmos style tx simul and broadcast
+// Cosmos style tx simul and broadcast
 extension CommonTransfer {
    
     func inChainCoinSendSimul() {
@@ -1341,7 +1568,7 @@ extension CommonTransfer {
                 $0.caller = fromChain.bechAddress!
                 $0.func = "Transfer"
                 $0.send = ""
-                $0.pkgPath = toSendMsToken.contract!
+                $0.pkgPath = toSendMsToken.address!
             }
             
             return Signer.genGnoSendMsg(gnoSendMsg)
@@ -1364,7 +1591,6 @@ extension CommonTransfer {
             return Signer.genSendMsg(sendMsgs)
         }
     }
-    
     
     
     func inChainWasmSendSimul() {
@@ -1413,18 +1639,16 @@ extension CommonTransfer {
         }
     }
     
-    
     func onBindCw20SendMsg() -> [Google_Protobuf_Any]  {
         let msg: JSON = ["transfer" : ["recipient" : toAddress , "amount" : toAmount.stringValue]]
         let msgBase64 = try! msg.rawData(options: [.sortedKeys, .withoutEscapingSlashes]).base64EncodedString()
         let wasmMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
             $0.sender = fromChain.bechAddress!
-            $0.contract = toSendMsToken.contract!
+            $0.contract = toSendMsToken.address!
             $0.msg = Data(base64Encoded: msgBase64)!
         }
         return Signer.genWasmMsg([wasmMsg])
     }
-    
     
     
     func ibcCoinSendSimul() {
@@ -1479,7 +1703,6 @@ extension CommonTransfer {
         }
     }
 
-    
     func onBindIbcSendMsg(_ revisionNumber: UInt64, _ lastBlock: Int64) -> [Google_Protobuf_Any] {
         let height = Ibc_Core_Client_V1_Height.with {
             $0.revisionNumber = revisionNumber
@@ -1492,15 +1715,14 @@ extension CommonTransfer {
         let ibcSendMsg = Ibc_Applications_Transfer_V1_MsgTransfer.with {
             $0.sender = fromChain.bechAddress!
             $0.receiver = toAddress
-            $0.sourceChannel = ibcPath!.channel!
-            $0.sourcePort = ibcPath!.port!
+            $0.sourceChannel = ibcPath!.getChannel()!
+            $0.sourcePort = ibcPath!.getPort()!
             $0.timeoutHeight = height
             $0.timeoutTimestamp = 0
             $0.token = sendCoin
         }
         return Signer.genIbcSendMsg(ibcSendMsg)
     }
-    
     
     
     func ibcWasmSendSimul() {
@@ -1549,31 +1771,97 @@ extension CommonTransfer {
         }
     }
     
-    
     func onBindCw20IbcSendMsg() -> [Google_Protobuf_Any] {
-        let jsonMsg: JSON = ["channel" : ibcPath!.channel!, "remote_address" : toAddress, "timeout" : 900]
+        let jsonMsg: JSON = ["channel" : ibcPath!.getChannel()!, "remote_address" : toAddress, "timeout" : 900]
         let jsonMsgBase64 = try! jsonMsg.rawData(options: [.sortedKeys]).base64EncodedString()
         
-        let innerMsg: JSON = ["send" : ["contract" : ibcPath!.getIBCContract(), "amount" : toAmount.stringValue, "msg" : jsonMsgBase64]]
+        let innerMsg: JSON = ["send" : ["contract" : ibcPath!.getPort()!, "amount" : toAmount.stringValue, "msg" : jsonMsgBase64]]
         let innerMsgBase64 = try! innerMsg.rawData(options: [.sortedKeys]).base64EncodedString()
         let ibcWasmMsg = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
             $0.sender = fromChain.bechAddress!
-            $0.contract = toSendMsToken.contract!
+            $0.contract = toSendMsToken.address!
             $0.msg = Data(base64Encoded: innerMsgBase64)!
         }
         return Signer.genWasmMsg([ibcWasmMsg])
     }
+    
+    
+    func ibcEurekaSendSimul() {
+        Task {
+            do {
+                if let simulReq = try await Signer.genSimul(fromChain, onBindIbcEurekaMSg(), txMemo, cosmosTxFee, nil),
+                   let simulRes = try await cosmosFetcher.simulateTx(simulReq) {
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(simulRes)
+                    }
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
+                }
+            }
+        }    }
+    
+    func ibcEurekaSend() {
+        Task {
+            do {
+                if let broadReq = try await Signer.genTx(fromChain, onBindIbcEurekaMSg(), txMemo, cosmosTxFee, nil),
+                   let broadRes = try await cosmosFetcher.broadcastTx(broadReq) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        self.loadingView.isHidden = true
+                        let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                        txResult.txStyle = self.txStyle
+                        txResult.fromChain = self.fromChain
+                        txResult.toChain = self.toChain
+                        txResult.toAddress = self.toAddress
+                        txResult.txMemo = self.txMemo
+                        txResult.cosmosBroadcastTxResponse = broadRes
+                        txResult.modalPresentationStyle = .fullScreen
+                        self.present(txResult, animated: true)
+                    })
+                }
+                
+            } catch {
+                //TODO handle Error
+            }
+        }
+    }
+    
+    func onBindIbcEurekaMSg() -> [Google_Protobuf_Any] {
+        let recipientAddress = EthereumAddress.init(toAddress)!
+        let abiEncoded = ABIEncoder.encode(types: [.string, .string, .string, .uint(bits: 64), .string], values: [toSendDenom, fromChain.bechAddress!, recipientAddress.address.stripHexPrefix(), toAmount.uint64Value, EUREKA_MEMO])!.toHexString()
+        let payload = Ibc_Core_Channel_V2_Payload.with {
+            $0.sourcePort = ibcPath!.ibcInfo!.counterparty!.port!
+            $0.destinationPort = ibcPath!.ibcInfo!.client!.port!
+            $0.version = ibcPath!.ibcInfo!.client!.version!
+            $0.encoding = ibcPath!.ibcInfo!.client!.encoding!
+            $0.value = Data(hex: abiEncoded.addABIPrefix())
+        }
+        let eurekaSendMsg = Ibc_Core_Channel_V2_MsgSendPacket.with {
+            $0.sourceClient = ibcPath!.ibcInfo!.counterparty!.channel!
+            $0.timeoutTimestamp = Date().hourAfter6UInt64
+            $0.payloads = [payload]
+            $0.signer = fromChain.bechAddress!
+        }
+        return Signer.genIbcEurekaSendMsg([eurekaSendMsg])
+    }
 }
+
 
 extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountSheetDelegate, MemoDelegate, PinDelegate {
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if (sheetType == .SelectCosmosRecipientChain) {
-            if let chainId = result["chainId"] as? String {
-                if (chainId != toChain.chainIdCosmos) {
-                    onUpdateToChain(recipientableChains.filter({ $0.chainIdCosmos == chainId }).first!)
+        if (sheetType == .SelectIBCRecipientChain) {
+            if let chainTag = result["chainTag"] as? String {
+                if (chainTag != toChain.tag) {
+                    onUpdateToChain(recipientableChains.filter({ $0.tag == chainTag }).first!)
                 }
             }
+            
         } else if (sheetType == .SelectFeeDenom) {
             if let index = result["index"] as? Int,
                let selectedDenom = cosmosFeeInfos[selectedFeePosition].FeeDatas[index].denom {
@@ -1581,6 +1869,7 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                 onUpdateFeeView()
                 onSimul()
             }
+            
         } else if (sheetType == .SelectBaseFeeDenom) {
             if let index = result["index"] as? Int {
                let selectedDenom = cosmosFetcher.cosmosBaseFees[index].denom
@@ -1621,7 +1910,11 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
             loadingView.isHidden = false
             
             if (txStyle == .WEB3_STYLE) {
-                evmSend()
+                if (fromChain.apiName == toChain.apiName) {
+                    evmSend()
+                } else if (toChain.supportCosmos) {
+                    evmEurekaSend()
+                }
                 
             } else if (txStyle == .SUI_STYLE) {
                 suiSend()
@@ -1639,17 +1932,20 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                 
             } else if (txStyle == .COSMOS_STYLE) {
                 if (fromChain.chainIdCosmos == toChain.chainIdCosmos) {                     // Inchain Send!
-                    if (sendAssetType == .COSMOS_WASM) {                                         // Inchain CW20 Send!
-                        inChainWasmSend()
-                    } else {                                                                // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
-                        inChainCoinSend()
+                    if (sendAssetType == .COSMOS_WASM) {
+                        inChainWasmSend()                                                   // Inchain CW20 Send!
+                    } else {
+                        inChainCoinSend()                                                   // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                     }
+                    
+                } else if (toChain.supportCosmos == false) {                                // IBC Eureka Send!
+                    ibcEurekaSend()
+                    
                 } else {                                                                    // IBC Send!
-                    ibcPath = WUtils.getMintscanPath(fromChain, toChain, toSendDenom)
-                    if (sendAssetType == .COSMOS_WASM) {                                         // CW20 IBC Send!
-                        ibcWasmSend()
-                    } else {                                                                // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
-                        ibcCoinSend()
+                    if (sendAssetType == .COSMOS_WASM) {
+                        ibcWasmSend()                                                       // CW20 IBC Send!
+                    } else {
+                        ibcCoinSend()                                                       // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
                     }
                 }
             }
@@ -1657,17 +1953,18 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
     }
 }
 
+
 public enum SendAssetType: Int {
     case COSMOS_COIN = 0                    // support IBC, bank send                 (staking, ibc, native coins)
     case COSMOS_WASM = 1                    // support IBC, wasm send                 (cw20 tokens)
     case EVM_COIN = 2                       // not support IBC, only support Web3 tx  (evm main coin)
     case EVM_ERC20 = 3                      // not support IBC, only support Web3 tx  (erc20 tokens)
     case COSMOS_EVM_MAIN_COIN = 4           // support IBC, bank send, Web3 tx        (staking, both tx style)
+    
+    
     case SUI_COIN = 5                       // sui assets
     case SUI_NFT = 6                        // sui nft
     case BTC_COIN = 7                       // bitcoin
     case GNO_COIN = 8
     case GNO_GRC20 = 9
 }
-
-

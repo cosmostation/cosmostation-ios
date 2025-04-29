@@ -15,15 +15,12 @@ class ChainKaia: BaseChain  {
         
         name = "Kaia"
         tag = "kaia60"
-        logo1 = "chainKaia"
         apiName = "kaia"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
         supportEvm = true
         coinSymbol = "KLAY"
-        coinGeckoId = "klay-token"
-        coinLogo = "tokenKaia"
         evmRpcURL = "https://public-en.node.kaia.io"        
     }
 }

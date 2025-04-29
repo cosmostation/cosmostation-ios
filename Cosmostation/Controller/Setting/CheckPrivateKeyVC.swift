@@ -11,9 +11,9 @@ import UIKit
 class CheckPrivateKeyVC: BaseVC {
     
     @IBOutlet weak var checkBtn: BaseButton!
-    @IBOutlet weak var nameCardView: CardView!
+    @IBOutlet weak var nameCardView: FixCardView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var privateKeyView: CardView!
+    @IBOutlet weak var privateKeyView: FixCardView!
     @IBOutlet weak var privateKeyLabel: UILabel!
     
     var toCheckAccount: BaseAccount!

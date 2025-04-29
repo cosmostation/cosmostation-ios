@@ -49,14 +49,26 @@ public struct MintscanProposal {
         
         if let rawYes = json?["yes"].stringValue, !rawYes.isEmpty {
             self.yes = NSDecimalNumber.init(string: rawYes)
+            
+        } else if let rawYes = json?["final_tally_result"]["yes_count"].stringValue, !rawYes.isEmpty {
+            self.yes = NSDecimalNumber.init(string: rawYes)
         }
+        
         if let rawAbstain = json?["abstain"].stringValue, !rawAbstain.isEmpty {
             self.abstain = NSDecimalNumber.init(string: rawAbstain)
+        } else if let rawAbstain = json?["final_tally_result"]["abstain_count"].stringValue, !rawAbstain.isEmpty {
+            self.abstain = NSDecimalNumber.init(string: rawAbstain)
         }
+        
         if let rawNo = json?["no"].stringValue, !rawNo.isEmpty {
             self.no = NSDecimalNumber.init(string: rawNo)
+        } else if let rawNo = json?["final_tally_result"]["no_count"].stringValue, !rawNo.isEmpty {
+            self.no = NSDecimalNumber.init(string: rawNo)
         }
+        
         if let rawNowithVeto = json?["no_with_veto"].stringValue, !rawNowithVeto.isEmpty {
+            self.no_with_veto = NSDecimalNumber.init(string: rawNowithVeto)
+        } else if let rawNowithVeto = json?["final_tally_result"]["no_with_veto_count"].stringValue, !rawNowithVeto.isEmpty {
             self.no_with_veto = NSDecimalNumber.init(string: rawNowithVeto)
         }
     }

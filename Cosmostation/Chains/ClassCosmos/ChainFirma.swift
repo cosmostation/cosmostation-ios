@@ -15,7 +15,6 @@ class ChainFirma: BaseChain  {
         
         name = "FirmaChain"
         tag = "firmachain7777777"
-        logo1 = "chainFirma"
         apiName = "firmachain"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/7777777'/0'/0/X")
         

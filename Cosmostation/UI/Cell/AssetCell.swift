@@ -79,7 +79,7 @@ class AssetCell: UITableViewCell {
     
     func bindCosmosClassToken(_ baseChain: BaseChain, _ token: MintscanToken) {
         if let cosmosFetcher = baseChain.getCosmosfetcher() {
-            let value = cosmosFetcher.tokenValue(token.contract!)
+            let value = cosmosFetcher.tokenValue(token.address!)
             WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
             WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
@@ -116,14 +116,15 @@ class AssetCell: UITableViewCell {
     
     
     func bindEvmClassCoin(_ baseChain: BaseChain) {
-        symbolLabel.text = baseChain.coinSymbol
-        coinImg.image =  UIImage.init(named: baseChain.coinLogo)
-        
-        if let evmFetcher = baseChain.getEvmfetcher() {
+        if let evmFetcher = baseChain.getEvmfetcher(),
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.coinSymbol) {
+            symbolLabel.text = baseChain.coinSymbol
+            coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+            
             let dpAmount = evmFetcher.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18Down)
             let value = evmFetcher.allCoinValue()
-            WDP.dpPrice(baseChain.coinGeckoId, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(baseChain.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+            WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
             amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
             if (BaseData.instance.getHideValue()) {
                 hidenValueLabel.isHidden = false
@@ -139,7 +140,7 @@ class AssetCell: UITableViewCell {
     
     func bindEvmClassToken(_ baseChain: BaseChain, _ token: MintscanToken) {
         if let evmFetcher = baseChain.getEvmfetcher() {
-            let value = evmFetcher.tokenValue(token.contract!)
+            let value = evmFetcher.tokenValue(token.address!)
             WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
             WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
@@ -209,7 +210,7 @@ class AssetCell: UITableViewCell {
     
     func bindGnoClassToken(_ baseChain: BaseChain, _ token: MintscanToken) {
         if let gnoFetcher = (baseChain as? ChainGno)?.getGnoFetcher() {
-            let value = gnoFetcher.tokenValue(token.contract!)
+            let value = gnoFetcher.tokenValue(token.address!)
             WDP.dpToken(token, coinImg, symbolLabel, amountLabel, 6)
             WDP.dpPrice(token.coinGeckoId, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(token.coinGeckoId, priceChangeLabel, priceChangePercentLabel)

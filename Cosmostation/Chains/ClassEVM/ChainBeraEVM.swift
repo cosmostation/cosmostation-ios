@@ -17,7 +17,6 @@ class ChainBeraEVM: BaseChain  {
         
         name = "Bera Chain"
         tag = "bera60"
-        logo1 = "chainBera"
         apiName = "berachain"
         accountKeyType = AccountKeyType(.BERA_Secp256k1, "m/44'/60'/0'/0/X")
         
@@ -32,8 +31,6 @@ class ChainBeraEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "BERA"
-        coinGeckoId = "berachain-bera"
-        coinLogo = "tokenBera"
         evmRpcURL = "https://rpc.berachain.com"
     }
     
@@ -75,9 +72,9 @@ class ChainBeraEVM: BaseChain  {
                     coinsValue = evmFetcher.allCoinValue()
                     coinsUSDValue = evmFetcher.allCoinValue(true)
                     mainCoinAmount = evmFetcher.evmBalances
-                    tokensCnt = evmFetcher.valueTokenCnt()
-                    tokensValue = evmFetcher.allTokenValue()
-                    tokensUSDValue = evmFetcher.allTokenValue(true)
+                    tokensCnt = evmFetcher.valueTokenCnt(id)
+                    tokensValue = evmFetcher.allTokenValue(id)
+                    tokensUSDValue = evmFetcher.allTokenValue(id, true)
                 }
                 allCoinValue = coinsValue
                 allCoinUSDValue = coinsUSDValue

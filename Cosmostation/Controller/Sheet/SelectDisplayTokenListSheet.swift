@@ -44,8 +44,11 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
         sheetTableView.rowHeight = UITableView.automaticDimension
         sheetTableView.sectionHeaderTopPadding = 0.0
         
-        setTokensAmount()
         setSegment()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
         
     }
     
@@ -53,14 +56,18 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
         sheetTitle.text = NSLocalizedString("str_edit_token_list", comment: "")
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
+    
+    @objc func keyboardDismiss() {
+        view.endEditing(true)
+    }
 
     @IBAction func onClickConfirm(_ sender: BaseButton) {
         if selectedChain.isSupportGrc20() {
             BaseData.instance.setDisplayGrc20s(baseAccount.id, selectedChain.tag, toDisplayTokens)
 
         } else if selectedChain.isSupportCw20() && selectedChain.isSupportErc20() {
-            let toDisplayCw20Tokens = toDisplayTokens.filter { allTokens.filter({ $0.type == "cw20" }).map({ $0.contract }).contains($0) }
-            let toDisplayErc20Tokens = toDisplayTokens.filter { allTokens.filter({ $0.type == "erc20" }).map({ $0.contract }).contains($0) }
+            let toDisplayCw20Tokens = toDisplayTokens.filter { allTokens.filter({ $0.type == "cw20" }).map({ $0.address }).contains($0) }
+            let toDisplayErc20Tokens = toDisplayTokens.filter { allTokens.filter({ $0.type == "erc20" }).map({ $0.address }).contains($0) }
 
             BaseData.instance.setDisplayCw20s(baseAccount.id, selectedChain.tag, toDisplayCw20Tokens)
             BaseData.instance.setDisplayErc20s(baseAccount.id, selectedChain.tag, toDisplayErc20Tokens)
@@ -79,23 +86,20 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if selectedChain.isSupportCw20() && selectedChain.isSupportErc20() {
             searchTokens = searchText.isEmpty ? allTokens.filter { $0.type == tokenType[segment.selectedSegmentIndex] } : allTokens.filter({ $0.type == tokenType[segment.selectedSegmentIndex] }).filter { token in
-                return token.symbol!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || token.contract?.range(of: searchText, options: .caseInsensitive) != nil
+                return token.symbol!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || token.address?.range(of: searchText, options: .caseInsensitive) != nil
             }
         } else {
             searchTokens = searchText.isEmpty ? allTokens : allTokens.filter { token in
-                return token.symbol!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || token.contract?.range(of: searchText, options: .caseInsensitive) != nil
+                return token.symbol!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || token.address?.range(of: searchText, options: .caseInsensitive) != nil
             }
         }
         sheetTableView.reloadData()
     }
     
-    private func setTokensAmount() {
-        for token in allTokens {
-            if let _ = token.amount {
-                Self.tokenWithAmount.append(token)
-            }
-        }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
     }
+    
     
     private func setSegment() {
         if selectedChain.isSupportCw20() && selectedChain.isSupportErc20() {
@@ -133,10 +137,10 @@ extension SelectDisplayTokenListSheet: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let toToggle = searchTokens[indexPath.row]
-        if (toDisplayTokens.contains(toToggle.contract!)) {
-            toDisplayTokens.removeAll { $0 == toToggle.contract! }
+        if (toDisplayTokens.contains(toToggle.address!)) {
+            toDisplayTokens.removeAll { $0 == toToggle.address! }
         } else {
-            toDisplayTokens.append(toToggle.contract!)
+            toDisplayTokens.append(toToggle.address!)
         }
         DispatchQueue.main.async {
             self.sheetTableView.beginUpdates()
