@@ -27,6 +27,7 @@ final class BaseData: NSObject{
     var mintscanAssets: [MintscanAsset]?
     var baseAccount: BaseAccount?
     
+    var allEcosystems: [JSON]?
     
     var appUserInfo: [AnyHashable : Any]?
     var appSchemeUrl: URL?

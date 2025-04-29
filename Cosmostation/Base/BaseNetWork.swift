@@ -81,6 +81,17 @@ class BaseNetWork {
             }
     }
     
+    func fetchEcosystems() {
+        Task {
+            do {
+                let url = "https://raw.githubusercontent.com/cosmostation/chainlist/master/wallet/eco_list.json"
+                BaseData.instance.allEcosystems = try await AF.request(url, method: .get).serializingDecodable([JSON].self).value
+            } catch {
+                print("fetchEcosystems error", error)
+            }
+        }
+    }
+    
     static func getAccountHistoryUrl(_ chain: BaseChain, _ address: String) -> String {
         if (chain.tag.starts(with: "okt")) {
             return MINTSCAN_API_URL + "v10/" + chain.apiName + "/proxy/okx/account/" + address + "/txs"

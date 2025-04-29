@@ -65,6 +65,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
         BaseNetWork().fetchChainParams()
         BaseNetWork().fetchPrices()
         BaseNetWork().fetchAssets()
+        BaseNetWork().fetchEcosystems()
     }
     
     func onStartInit() {
