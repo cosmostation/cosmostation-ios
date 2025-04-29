@@ -518,8 +518,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if sheetType == .SelectDappNetwork {
             return dappNetworksSearch.count
-        }
-
+            
         } else if (sheetType == .SelectBtcDelegatedAction) {
             return 2
             
@@ -719,7 +718,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SelectValidatorCell") as? SelectValidatorCell
             cell?.onBindFinalityProvider(targetChain, finalityProvidersSearch[indexPath.row])
             return cell!
-        
+
         } else if sheetType == .SelectDappSort {
             let cell = tableView.dequeueReusableCell(withIdentifier: "BaseMsgSheetCell") as? BaseMsgSheetCell
             cell?.onBindDappSort(indexPath.row, selectedDappSortType)

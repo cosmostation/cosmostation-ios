@@ -62,32 +62,43 @@ class AllDappListCell: UICollectionViewCell {
     }
     
     private func setSupportChains(chains: [String]) {
-        if chains.count == 1 {
-            guard let chain = ALLCHAINS().filter({ $0.apiName == chains.first }).first else { return }
-            chainImageViews.first?.image = UIImage(named: chain.logo1)
-            chainLabel.isHidden = false
-            chainLabel.text = chain.apiName.uppercased()
-
-        } else {
-            if chains.count <= 7 {
-                for (i, chainName) in chains.enumerated() {
-                    guard let chain = ALLCHAINS().filter({ $0.apiName == chainName }).first else { return }
-                    chainImageViews[i].isHidden = false
-                    chainImageViews[i].image = UIImage(named: chain.logo1)
+        DispatchQueue.global().async {
+            if chains.count == 1 {
+                guard let chain = ALLCHAINS().filter({ $0.apiName == chains.first }).first else { return }
+                DispatchQueue.main.async {
+                    self.chainImageViews.first?.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
+                    self.chainLabel.isHidden = false
+                    self.chainLabel.text = chain.apiName.uppercased()
                 }
-                
-                chainLabel.isHidden = true
-                
             } else {
-                for i in 0...6 {
-                    guard let chain = ALLCHAINS().filter({ $0.apiName == chains[i] }).first else { return }
-                    chainImageViews[i].isHidden = false
-                    chainImageViews[i].image = UIImage(named: chain.logo1)
+                if chains.count <= 7 {
+                    DispatchQueue.main.async {
+                        self.chainLabel.isHidden = true
+                    }
+                    
+                    for (i, chainName) in chains.enumerated() {
+                        guard let chain = ALLCHAINS().filter({ $0.apiName == chainName }).first else { return }
+                        DispatchQueue.main.async {
+                            self.chainImageViews[i].isHidden = false
+                            self.chainImageViews[i].sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
+                        }
+                    }
+                } else {
+                    for i in 0...6 {
+                        guard let chain = ALLCHAINS().filter({ $0.apiName == chains[i] }).first else { return }
+                        DispatchQueue.main.async {
+                            self.chainImageViews[i].isHidden = false
+                            self.chainImageViews[i].sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
+                        }
+                    }
+                    
+                    let cnt = chains.count - 7
+                    DispatchQueue.main.async {
+                        
+                        self.chainLabel.isHidden = false
+                        self.chainLabel.text = "+\(cnt)"
+                    }
                 }
-                
-                let cnt = chains.count - 7
-                chainLabel.isHidden = false
-                chainLabel.text = "+\(cnt)"
             }
         }
     }

@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 import Combine
 import SwiftyJSON
+import Lottie
 
 class DappListViewController: BaseVC {
     
@@ -25,6 +26,7 @@ class DappListViewController: BaseVC {
     @IBOutlet weak var typeScrollView: UIScrollView!
     @IBOutlet weak var typeStackView: UIStackView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var loadingView: LottieAnimationView!
     var typeButtons: [UIButton] = []
     
     var allEcosystems = [JSON()]
@@ -32,6 +34,7 @@ class DappListViewController: BaseVC {
     var types = ["Popular","All"]
     var selectedType = "Popular"
     var selectedNetwork: BaseChain? = nil
+    var allChains: [BaseChain] = []
     
     let favoriteModel = DappFavoriteModel()
     let dappDetailVCStateModel = DappDetailVCState()
@@ -40,11 +43,24 @@ class DappListViewController: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingView.isHidden = false
+        loadingView.animation = LottieAnimation.named("loading")
+        loadingView.contentMode = .scaleAspectFit
+        loadingView.loopMode = .loop
+        loadingView.animationSpeed = 1.3
+        loadingView.play()
+        collectionView.isHidden = true
+        view.isUserInteractionEnabled = false
         
         //data setting
         baseAccount = BaseData.instance.baseAccount
         allEcosystems = BaseData.instance.allEcosystems ?? []
-        
+        Task {
+            allChains = await baseAccount.initAllKeys().filter { $0.isDefault }
+            loadingView.isHidden = true
+            view.isUserInteractionEnabled = true
+            collectionView.isHidden = false
+        }
         let rawValue = UserDefaults.standard.integer(forKey: KEY_DAPP_SORT_OPTION)
         switch DappSortType(rawValue: rawValue) ?? .alphabet {
         case .alphabet :
@@ -139,7 +155,7 @@ class DappListViewController: BaseVC {
                     let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
                     dappDetail.dappType = .INTERNAL_URL
                     dappDetail.dappUrl = URL(string: self.dappDetailVCStateModel.link)
-                    dappDetail.targetChain = self.selectedNetwork
+                    dappDetail.targetChain = self.selectedNetwork ?? self.allChains.filter({ $0.apiName == self.dappDetailVCStateModel.chains.first }).first
                     dappDetail.modalPresentationStyle = .fullScreen
                     self.present(dappDetail, animated: false)
                 }
@@ -150,7 +166,7 @@ class DappListViewController: BaseVC {
     func setNetworkUI(_ chain: BaseChain? = nil) {
         if let chain {
             networkLabel.text = chain.name
-            networkImageView.image = UIImage(named: chain.logo1)
+            networkImageView.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
             
         } else {
             networkLabel.text = "All Network"
@@ -165,8 +181,6 @@ class DappListViewController: BaseVC {
     @objc func onBindSelectNetworkSheet() {
         Task {
             var network = [DappNetwork(chain: nil, dappCount: allEcosystems.count)]
-            let allChains = await baseAccount.initAllKeys().filter { $0.isDefault }
-            
             let sheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             sheet.sheetDelegate = self
             sheet.sheetType = .SelectDappNetwork
@@ -334,7 +348,7 @@ extension DappListViewController: UICollectionViewDelegate, UICollectionViewData
             let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
             dappDetail.dappType = .INTERNAL_URL
             dappDetail.dappUrl = URL(string: ecosystem["link"].stringValue)
-            dappDetail.targetChain = selectedNetwork
+            dappDetail.targetChain = selectedNetwork ?? self.allChains.filter({ $0.apiName == self.dappDetailVCStateModel.chains.first }).first
             dappDetail.modalPresentationStyle = .fullScreen
             self.present(dappDetail, animated: true)
         }
@@ -441,6 +455,7 @@ class DappFavoriteModel: ObservableObject {
 class DappDetailVCState: ObservableObject {
     @Published var shouldPresentVC: Bool = false
     @Published var link: String = ""
+    @Published var chains: [String] = []
 }
 
 

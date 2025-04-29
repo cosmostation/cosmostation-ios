@@ -115,10 +115,17 @@ struct DappDetailSheet: View {
                             id: \.apiName
                         ) { chain in
                             HStack(spacing: 2) {
-                                Image(uiImage: UIImage(named: chain.logo1)!)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 16, height: 16)
+                                
+                                AsyncImage(url: chain.getChainImage()) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                } placeholder: {
+                                    Image(uiImage: UIImage(named: "chainDefault")!)
+                                        .resizable()
+                                }
+                                .frame(width: 16, height: 16)
+                                
                                 Text(chain.name.uppercased())
                                     .foregroundStyle(Color.base03)
                                     .font(.system15)
@@ -174,6 +181,7 @@ struct DappDetailSheet: View {
                     BaseData.instance.setDappDetailHideTime(ecosystem["id"].intValue)
                     dismiss()
                     dappDetailVCState.link = ecosystem["link"].stringValue
+                    dappDetailVCState.chains = ecosystem["chains"].arrayValue.map{$0.stringValue}
                     dappDetailVCState.shouldPresentVC = true
                 } //Hide 7 Days Btn
                 .frame(maxWidth: .infinity, maxHeight: 54)
@@ -189,6 +197,7 @@ struct DappDetailSheet: View {
                     dismiss()
 
                     dappDetailVCState.link = ecosystem["link"].stringValue
+                    dappDetailVCState.chains = ecosystem["chains"].arrayValue.map{$0.stringValue}
                     dappDetailVCState.shouldPresentVC = true
                 } label: {
                     HStack {
@@ -206,6 +215,7 @@ struct DappDetailSheet: View {
 
             } //close buttons
             .frame(maxWidth: .infinity, maxHeight: 54)
+            .padding(.top, 20)
         } //root
         .padding(.horizontal, 12)
         .background(Color.base09)
