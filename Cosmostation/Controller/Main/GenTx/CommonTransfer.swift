@@ -18,7 +18,6 @@ import SDWebImage
 
 class CommonTransfer: BaseVC {
     
-    @IBOutlet weak var midGapConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleCoinImg: CircleImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -181,13 +180,6 @@ class CommonTransfer: BaseVC {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        let gap = UIScreen.main.bounds.size.height - 685
-//        let gap = UIScreen.main.bounds.size.height - VIEW_HEIGHT
-//        if (gap > 0) { midGapConstraint.constant = gap }
-//        else { midGapConstraint.constant = 60 }
-    }
     
     override func setLocalizedString() {
         toChainTitle.text = NSLocalizedString("str_recipient_chain", comment: "")
@@ -415,16 +407,6 @@ class CommonTransfer: BaseVC {
             
             sendBtn.setTitle(NSLocalizedString("title_ibc_transfer", comment: ""), for: .normal)
         }
-        
-//        if (ibcSendGuideView.isHidden) {
-//            let gap = UIScreen.main.bounds.size.height - VIEW_HEIGHT
-//            if (gap > 0) { midGapConstraint.constant = gap }
-//            else { midGapConstraint.constant = 60 }
-//        } else {
-//            let gap = UIScreen.main.bounds.size.height - VIEW_HEIGHT - 50
-//            if (gap > 0) { midGapConstraint.constant = gap }
-//            else { midGapConstraint.constant = 60 }
-//        }
     }
     
     @objc func onClickToAddress() {
