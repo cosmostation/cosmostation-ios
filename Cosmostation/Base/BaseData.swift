@@ -31,6 +31,7 @@ final class BaseData: NSObject{
     var mintscanCw721: [JSON]?
     var baseAccount: BaseAccount?
     
+    var allEcosystems: [JSON]?
     
     var appUserInfo: [AnyHashable : Any]?
     var appSchemeUrl: URL?
@@ -832,6 +833,24 @@ extension BaseData {
 
     func getEcosystemPopUpActiveStatus(_ type: SheetType) -> Bool {
         let key = KEY_POPUP_SHEET + String(type.rawValue)
+        let last = Int64(UserDefaults.standard.string(forKey: key) ?? "0")!
+        let now = Date().millisecondsSince1970
+        return last < now
+    }
+    
+    func setDappDetailHideTime(_ id: Int) {
+        var dayComponent = DateComponents()
+        dayComponent.day = 7
+
+        let theCalendar = Calendar.current
+        let nextDate = theCalendar.date(byAdding: dayComponent, to: Date())
+        let nextTime = nextDate?.millisecondsSince1970 ?? 0
+        let key = KEY_DAPP_DETAIL_HIDE + String(id)
+        UserDefaults.standard.set(String(nextTime), forKey: key)
+    }
+
+    func getDappDetailActiveStatus(_ id: Int) -> Bool {
+        let key = KEY_DAPP_DETAIL_HIDE + String(id)
         let last = Int64(UserDefaults.standard.string(forKey: key) ?? "0")!
         let now = Date().millisecondsSince1970
         return last < now
