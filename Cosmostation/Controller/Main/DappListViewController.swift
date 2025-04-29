@@ -184,11 +184,13 @@ class DappListViewController: BaseVC {
             let sheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             sheet.sheetDelegate = self
             sheet.sheetType = .SelectDappNetwork
-            allChains.filter({ !$0.isTestnet }).forEach { chain in
+            allChains.forEach { chain in
                 let count = allEcosystems.filter({ ecosystem in
                     ecosystem["chains"].arrayValue.map({$0.stringValue}).contains(chain.apiName)
                 }).count
-                network.append(DappNetwork(chain: chain, dappCount: count))
+                if count != 0 {
+                    network.append(DappNetwork(chain: chain, dappCount: count))
+                }
             }
             sheet.dappNetworks = network
             sheet.dappSelectedNetwork = allChains.filter({ $0.name == networkLabel.text }).first
