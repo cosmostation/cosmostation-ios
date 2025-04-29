@@ -43,23 +43,14 @@ class DappListViewController: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadingView.isHidden = false
-        loadingView.animation = LottieAnimation.named("loading")
-        loadingView.contentMode = .scaleAspectFit
-        loadingView.loopMode = .loop
-        loadingView.animationSpeed = 1.3
-        loadingView.play()
-        collectionView.isHidden = true
-        view.isUserInteractionEnabled = false
         
         //data setting
         baseAccount = BaseData.instance.baseAccount
         allEcosystems = BaseData.instance.allEcosystems ?? []
-        Task {
-            allChains = await baseAccount.initAllKeys().filter { $0.isDefault }
-            loadingView.isHidden = true
-            view.isUserInteractionEnabled = true
-            collectionView.isHidden = false
+        allChains = ALLCHAINS().filter({ $0.isDefault }).sorted {
+            if !$0.isTestnet && $1.isTestnet { return true }
+            if $0.isTestnet && !$1.isTestnet { return false }
+            return $0.name < $1.name
         }
         let rawValue = UserDefaults.standard.integer(forKey: KEY_DAPP_SORT_OPTION)
         switch DappSortType(rawValue: rawValue) ?? .alphabet {
