@@ -53,4 +53,26 @@ class SuiStakingCell: UITableViewCell {
         totalStakedLabel?.attributedText = WDP.dpAmount(estimatedReward.adding(principal).stringValue, totalStakedLabel!.font, 9)
         startEaringLabel.text = "Epoch #" + stake.1["stakeActiveEpoch"].stringValue
     }
+    
+    func onBindMyStake(_ baseChain: ChainIota, _ stake: (String, JSON)) {
+        if let iotaFetcher = baseChain.iotaFetcher {
+            if let validator = iotaFetcher.iotaValidators.filter({ $0["iotaAddress"].stringValue == stake.0 }).first {
+                logoImg.sd_setImage(with: validator.iotaValidatorImg(), placeholderImage: UIImage(named: "validatorDefault"))
+                nameLabel.text = validator.iotaValidatorName()
+            }
+        }
+        
+        if (stake.1["status"].stringValue == "Pending") {
+            pendingTag.isHidden = false
+        }
+        objectIdLabel.text = stake.1["stakedIotaId"].stringValue
+        
+        let principal = NSDecimalNumber(value: stake.1["principal"].uInt64Value).multiplying(byPowerOf10: -9)
+        let estimatedReward = NSDecimalNumber(value: stake.1["estimatedReward"].uInt64Value).multiplying(byPowerOf10: -9)
+        principalLabel?.attributedText = WDP.dpAmount(principal.stringValue, principalLabel!.font, 9)
+        estimatedRewardLabel?.attributedText = WDP.dpAmount(estimatedReward.stringValue, estimatedRewardLabel!.font, 9)
+        totalStakedLabel?.attributedText = WDP.dpAmount(estimatedReward.adding(principal).stringValue, totalStakedLabel!.font, 9)
+        startEaringLabel.text = "Epoch #" + stake.1["stakeActiveEpoch"].stringValue
+    }
+
 }

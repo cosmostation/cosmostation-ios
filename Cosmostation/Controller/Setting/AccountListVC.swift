@@ -12,11 +12,15 @@ import Web3Core
 
 class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, DeleteDelegate {
 
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addAccountBtn: BaseButton!
     
     var mnmonicAccounts = Array<BaseAccount>()
     var pkeyAccounts = Array<BaseAccount>()
+    var searchMnmonicAccounts = Array<BaseAccount>()
+    var searchPkeyAccounts = Array<BaseAccount>()
+
     var toDeleteAccount: BaseAccount?
     var toCheckAccount: BaseAccount?
     
@@ -35,6 +39,10 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
         
         updateAccountsData()
         updateAccountsOrder()
+        
+        searchMnmonicAccounts = mnmonicAccounts
+        searchPkeyAccounts = pkeyAccounts
+        searchBar.searchTextField.font = .fontSize12Medium
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,6 +77,8 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
         pkeyAccounts.removeAll()
         mnmonicAccounts = BaseData.instance.selectAccounts(.withMnemonic)
         pkeyAccounts = BaseData.instance.selectAccounts(.onlyPrivateKey)
+        searchMnmonicAccounts = mnmonicAccounts
+        searchPkeyAccounts = pkeyAccounts
     }
 
     @IBAction func onClickNewAccount(_ sender: UIButton) {
@@ -255,20 +265,20 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource, UITableView
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == 0) {
             view.titleLabel.text = NSLocalizedString("str_account_with_mnemonic", comment: "")
-            view.cntLabel.text = String(mnmonicAccounts.count)
+            view.cntLabel.text = String(searchMnmonicAccounts.count)
 
         } else if (section == 1) {
             view.titleLabel.text = NSLocalizedString("str_account_with_privateKey", comment: "")
-            view.cntLabel.text = String(pkeyAccounts.count)
+            view.cntLabel.text = String(searchPkeyAccounts.count)
         }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0) {
-            return (mnmonicAccounts.count > 0) ? 40 : 0
+            return (searchMnmonicAccounts.count > 0) ? 40 : 0
         } else if (section == 1) {
-            return (pkeyAccounts.count > 0) ? 40 : 0
+            return (searchPkeyAccounts.count > 0) ? 40 : 0
         }
         return 0
     }
@@ -276,9 +286,9 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
-             return mnmonicAccounts.count
+             return searchMnmonicAccounts.count
         } else if (section == 1) {
-            return pkeyAccounts.count
+            return searchPkeyAccounts.count
         }
         return 0
     }
@@ -286,9 +296,9 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"ManageAccountCell") as! ManageAccountCell
         if (indexPath.section == 0) {
-            cell.bindAccount(mnmonicAccounts[indexPath.row])
+            cell.bindAccount(searchMnmonicAccounts[indexPath.row])
         } else {
-            cell.bindAccount(pkeyAccounts[indexPath.row])
+            cell.bindAccount(searchPkeyAccounts[indexPath.row])
         }
         return cell
     }
@@ -297,29 +307,32 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource, UITableView
         if (indexPath.section == 0) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
-            baseSheet.selectedAccount = mnmonicAccounts[indexPath.row]
+            baseSheet.selectedAccount = searchMnmonicAccounts[indexPath.row]
             baseSheet.sheetType = .SelectOptionMnemonicAccount
             onStartSheet(baseSheet, 320, 0.6)
             
         } else if (indexPath.section == 1) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
-            baseSheet.selectedAccount = pkeyAccounts[indexPath.row]
+            baseSheet.selectedAccount = searchPkeyAccounts[indexPath.row]
             baseSheet.sheetType = .SelectOptionPrivateKeyAccount
             onStartSheet(baseSheet, 320, 0.6)
         }
     }
     
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        if (mnmonicAccounts.count != searchMnmonicAccounts.count) || (pkeyAccounts.count != searchPkeyAccounts.count) {
+            return []
+        }
         if (indexPath.section == 0) {
-            let item = mnmonicAccounts[indexPath.row]
+            let item = searchMnmonicAccounts[indexPath.row]
             let itemProvider = NSItemProvider(object: StringProvider(string: String(item.id)))
             let dragItem = UIDragItem(itemProvider: itemProvider)
             dragItem.localObject = item
             return [dragItem]
             
         } else {
-            let item = pkeyAccounts[indexPath.row]
+            let item = searchPkeyAccounts[indexPath.row]
             let itemProvider = NSItemProvider(object: StringProvider(string: String(item.id)))
             let dragItem = UIDragItem(itemProvider: itemProvider)
             dragItem.localObject = item
@@ -329,10 +342,17 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        if (mnmonicAccounts.count != searchMnmonicAccounts.count) || (pkeyAccounts.count != searchPkeyAccounts.count) {
+            return UITableViewDropProposal(operation: .forbidden)
+        }
+
         return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
     }
     
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        if (mnmonicAccounts.count != searchMnmonicAccounts.count) || (pkeyAccounts.count != searchPkeyAccounts.count) {
+            return
+        }
         guard let destinationIndexPath = coordinator.destinationIndexPath,
               let sourceIndexPath = coordinator.items[0].sourceIndexPath else {
             return
@@ -341,11 +361,15 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource, UITableView
             let sourceItem = mnmonicAccounts[sourceIndexPath.row]
             mnmonicAccounts.remove(at: sourceIndexPath.row)
             mnmonicAccounts.insert(sourceItem, at: destinationIndexPath.row)
+            searchMnmonicAccounts.remove(at: sourceIndexPath.row)
+            searchMnmonicAccounts.insert(sourceItem, at: destinationIndexPath.row)
             
         } else if (sourceIndexPath.section == 1 && destinationIndexPath.section == 1) {
             let sourceItem = pkeyAccounts[sourceIndexPath.row]
             pkeyAccounts.remove(at: sourceIndexPath.row)
             pkeyAccounts.insert(sourceItem, at: destinationIndexPath.row)
+            searchPkeyAccounts.remove(at: sourceIndexPath.row)
+            searchPkeyAccounts.insert(sourceItem, at: destinationIndexPath.row)
         }
         
         DispatchQueue.main.async {
@@ -416,6 +440,18 @@ extension AccountListVC: QrScanDelegate, QrImportCheckKeyDelegate {
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(importMnemonicCheckVC, animated: true)
         });
+    }
+}
+
+extension AccountListVC: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchMnmonicAccounts = searchText.isEmpty ? mnmonicAccounts : mnmonicAccounts.filter { account in
+            return account.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        searchPkeyAccounts = searchText.isEmpty ? pkeyAccounts : pkeyAccounts.filter { account in
+            return account.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        tableView.reloadData()
     }
 }
 

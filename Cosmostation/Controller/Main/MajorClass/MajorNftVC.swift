@@ -19,7 +19,7 @@ class MajorNftVC: BaseVC {
     var refresher: UIRefreshControl!
 
     var selectedChain: BaseChain!
-    var suiNFTs = Array<JSON>()
+    var NFTs = Array<JSON>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,9 @@ class MajorNftVC: BaseVC {
         collectionView.refreshControl = refresher
         
         if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
-            suiNFTs = suiFetcher.allNfts()
+            NFTs = suiFetcher.allNfts()
+        } else if let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() {
+            NFTs = iotaFetcher.allNfts()
         }
         onUpdateView()
     }
@@ -74,7 +76,9 @@ class MajorNftVC: BaseVC {
         let tag = notification.object as! String
         if (selectedChain != nil && selectedChain.tag == tag ) {
             if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
-                suiNFTs = suiFetcher.allNfts()
+                NFTs = suiFetcher.allNfts()
+            } else if let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() {
+                NFTs = iotaFetcher.allNfts()
             }
             
             DispatchQueue.main.async {
@@ -86,7 +90,7 @@ class MajorNftVC: BaseVC {
     func onUpdateView() {
         refresher.endRefreshing()
         loadingView.isHidden = true
-        if (suiNFTs.count <= 0) {
+        if (NFTs.count <= 0) {
             emptyDataView.isHidden = false
             collectionView.isHidden = true
         } else {
@@ -100,13 +104,13 @@ class MajorNftVC: BaseVC {
 extension MajorNftVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return suiNFTs.count
+        return NFTs.count
     }
         
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NftListCell", for: indexPath) as! NftListCell
-        let suiNFT = suiNFTs[indexPath.row]
-        cell.onBindNft(suiNFT)
+        let suiNFT = NFTs[indexPath.row]
+        cell.onBindNft(suiNFT)  // TEST
         return cell
     }
     
@@ -126,14 +130,18 @@ extension MajorNftVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if (selectedChain.isTxFeePayable(.SUI_SEND_NFT) == false) {
+        if (selectedChain.isTxFeePayable(.SUI_SEND_NFT) == false) {  //test
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         
         let transfer = NftTransfer(nibName: "NftTransfer", bundle: nil)
         transfer.fromChain = selectedChain
-        transfer.toSendSuiNFT = suiNFTs[indexPath.row]
+        if selectedChain is ChainSui {
+            transfer.toSendSuiNFT = NFTs[indexPath.row]
+        } else if selectedChain is ChainIota {
+            transfer.toSendIotaNFT = NFTs[indexPath.row]
+        }
         transfer.modalTransitionStyle = .coverVertical
         self.present(transfer, animated: true)
         
@@ -160,4 +168,22 @@ extension JSON {
         }
         return nil
     }
+    
+    public func iotaNftULR() -> URL? {
+        if var urlString = iotaRawNftUrlString() {
+            if urlString.starts(with: "ipfs://") {
+                urlString = urlString.replacingOccurrences(of: "ipfs://", with: "https://ipfs.io/ipfs/")
+            }
+            return URL(string: urlString)
+        }
+        return nil
+    }
+    
+    public func iotaRawNftUrlString() -> String? {
+        if let url = self["display"]["data"]["image_url"].string {
+            return url
+        }
+        return nil
+    }
+
 }

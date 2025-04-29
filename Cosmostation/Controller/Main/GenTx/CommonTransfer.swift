@@ -18,7 +18,6 @@ import SDWebImage
 
 class CommonTransfer: BaseVC {
     
-    @IBOutlet weak var midGapConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleCoinImg: CircleImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -69,7 +68,7 @@ class CommonTransfer: BaseVC {
     
     var fromChain: BaseChain!
     var sendAssetType: SendAssetType!
-    var txStyle: TxStyle!                           // .COSMOS_EVM_MAIN_COIN is only changable tx style
+    var txStyle: TxStyle!
     
     var toSendDenom: String!                        // coin denom or contract addresss
     var toSendMsAsset: MintscanAsset!               // to send Coin
@@ -102,6 +101,10 @@ class CommonTransfer: BaseVC {
     var suiFeeBudget = NSDecimalNumber.zero
     var suiGasPrice = NSDecimalNumber.zero
     
+    var iotaFetcher: IotaFetcher!
+    var iotaFeeBudget = NSDecimalNumber.zero
+    var iotaGasPrice = NSDecimalNumber.zero
+
     var btcFetcher: BtcFetcher!
     var btcTxFee = NSDecimalNumber.zero
     var btcTxHex = ""
@@ -135,6 +138,11 @@ class CommonTransfer: BaseVC {
                 txStyle = .SUI_STYLE
                 suiFetcher = (fromChain as? ChainSui)?.getSuiFetcher()
                 suiGasPrice = try await suiFetcher.fetchGasprice()
+                
+            } else if (sendAssetType == .IOTA_COIN) {
+                txStyle = .IOTA_STYLE
+                iotaFetcher = (fromChain as? ChainIota)?.getIotaFetcher()
+                iotaGasPrice = try await iotaFetcher.fetchGasprice()
                 
             } else if (sendAssetType == .BTC_COIN) {
                 txStyle = .BTC_STYLE
@@ -172,13 +180,6 @@ class CommonTransfer: BaseVC {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        let gap = UIScreen.main.bounds.size.height - 685
-//        let gap = UIScreen.main.bounds.size.height - VIEW_HEIGHT
-//        if (gap > 0) { midGapConstraint.constant = gap }
-//        else { midGapConstraint.constant = 60 }
-    }
     
     override func setLocalizedString() {
         toChainTitle.text = NSLocalizedString("str_recipient_chain", comment: "")
@@ -196,7 +197,7 @@ class CommonTransfer: BaseVC {
     
     func onInitIbcInfo() {
         recipientableChains = WUtils.checkIBCrecipientableChains(fromChain, toSendDenom)
-        if (recipientableChains.count > 1) {
+        if (recipientableChains.count > 1 && txStyle == .COSMOS_STYLE) {
             toChainCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToChain)))
         }
     }
@@ -225,6 +226,15 @@ class CommonTransfer: BaseVC {
             feeSelectLabel.text = fromChain.coinSymbol
             
             suiFeeBudget = suiFetcher.baseFee(.SUI_SEND_COIN)
+            
+        } else if (txStyle == .IOTA_STYLE) {
+            feeSegments.removeAllSegments()
+            feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
+            selectedFeePosition = 0
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            feeSelectLabel.text = fromChain.coinSymbol
+            
+            iotaFeeBudget = iotaFetcher.baseFee(.IOTA_SEND_COIN)     //test
             
         } else if (txStyle == .BTC_STYLE) {
             feeSegments.removeAllSegments()
@@ -279,7 +289,7 @@ class CommonTransfer: BaseVC {
         sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
         
         var symbol = ""
-        if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN) {
+        if (sendAssetType == .COSMOS_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = fromChain.assetDecimal(toSendDenom)
             symbol = fromChain.assetSymbol(toSendDenom)
@@ -309,6 +319,16 @@ class CommonTransfer: BaseVC {
             
             if (fromChain.stakeDenom == toSendDenom) {
                 availableAmount = availableAmount.subtracting(suiFeeBudget)
+            }
+            
+        } else if (sendAssetType == .IOTA_COIN) {
+            titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
+            decimal = fromChain.assetDecimal(toSendDenom)
+            symbol = fromChain.assetSymbol(toSendDenom)
+            availableAmount = iotaFetcher.balanceAmount(toSendDenom)
+            
+            if (fromChain.stakeDenom == toSendDenom) {
+                availableAmount = availableAmount.subtracting(iotaFeeBudget)
             }
             
         } else if (sendAssetType == .BTC_COIN) {
@@ -348,40 +368,6 @@ class CommonTransfer: BaseVC {
     
     
     
-    
-    func onUpdateTxStyle(_ style: TxStyle) {
-        if (sendAssetType == .COSMOS_EVM_MAIN_COIN && style != txStyle) {
-            txStyle = style
-            if (txStyle == .WEB3_STYLE) {
-                decimal = 18
-                availableAmount = evmFetcher.evmBalances.subtracting(EVM_BASE_FEE)
-                memoCardView.isHidden = true
-                
-            } else if (txStyle == .COSMOS_STYLE) {
-                decimal = toSendMsAsset!.decimals
-                availableAmount = cosmosFetcher.balanceAmount(toSendDenom)
-                if (cosmosTxFee.amount[0].denom == toSendDenom) {
-                    let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
-                    availableAmount = availableAmount.subtracting(feeAmount)
-                }
-                memoCardView.isHidden = false
-                
-            } else if (txStyle == .GNO_STYLE) {
-                decimal = toSendMsAsset!.decimals
-                availableAmount = gnoFetcher.balanceAmount(toSendDenom)
-                if (cosmosTxFee.amount[0].denom == toSendDenom) {
-                    let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
-                    availableAmount = availableAmount.subtracting(feeAmount)
-                }
-                memoCardView.isHidden = false
-            }
-            
-            onInitFee()
-            onUpdateAmountView("")
-        }
-    }
-    
-    
     @objc func onClickToChain() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = fromChain
@@ -399,11 +385,6 @@ class CommonTransfer: BaseVC {
             toChainLabel.text = toChain.name
             onUpdateToAddressView("")
             sendBtn.isEnabled = false
-            
-            if (sendAssetType == .COSMOS_EVM_MAIN_COIN && fromChain.tag != toChain.tag) {
-                onUpdateTxStyle(.COSMOS_STYLE)
-                onUpdateTxStyle(.COSMOS_STYLE)
-            }
         }
         
         if fromChain.tag == toChain.tag {
@@ -426,16 +407,6 @@ class CommonTransfer: BaseVC {
             
             sendBtn.setTitle(NSLocalizedString("title_ibc_transfer", comment: ""), for: .normal)
         }
-        
-//        if (ibcSendGuideView.isHidden) {
-//            let gap = UIScreen.main.bounds.size.height - VIEW_HEIGHT
-//            if (gap > 0) { midGapConstraint.constant = gap }
-//            else { midGapConstraint.constant = 60 }
-//        } else {
-//            let gap = UIScreen.main.bounds.size.height - VIEW_HEIGHT - 50
-//            if (gap > 0) { midGapConstraint.constant = gap }
-//            else { midGapConstraint.constant = 60 }
-//        }
     }
     
     @objc func onClickToAddress() {
@@ -461,13 +432,6 @@ class CommonTransfer: BaseVC {
             toAddressLabel.text = toAddress
             toAddressLabel.adjustsFontSizeToFitWidth = true
             
-            if (sendAssetType == .COSMOS_EVM_MAIN_COIN) {
-                if (toAddress.starts(with: "0x")) {
-                    onUpdateTxStyle(.WEB3_STYLE)
-                } else {
-                    onUpdateTxStyle(.COSMOS_STYLE)
-                }
-            }
             onSimul()
         }
     }
@@ -521,22 +485,7 @@ class CommonTransfer: BaseVC {
                 
                 toAssetDenomLabel.text = fromChain.coinSymbol
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
-                
-            } else if (sendAssetType == .COSMOS_EVM_MAIN_COIN) {
-                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
-                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-                let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
-                let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
-                WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
-                
-                if (txStyle == .WEB3_STYLE) {
-                    toAssetDenomLabel.text = fromChain.coinSymbol
-                    toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
-                    
-                } else if (txStyle == .COSMOS_STYLE) {
-                    WDP.dpCoin(toSendMsAsset, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
-                }
-                
+                                
             } else if (sendAssetType == .SUI_COIN) {
                 let msPrice = BaseData.instance.getPrice(fromChain.assetGeckoId(toSendDenom))
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
@@ -545,6 +494,14 @@ class CommonTransfer: BaseVC {
                 
                 toAssetDenomLabel.text = fromChain.assetSymbol(toSendDenom)
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
+                
+            } else if (sendAssetType == .IOTA_COIN) {
+                    let msPrice = BaseData.instance.getPrice(fromChain.assetGeckoId(toSendDenom))
+                    let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+                    let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
+                    WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
+                    toAssetDenomLabel.text = fromChain.assetSymbol(toSendDenom)
+                    toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel.font, decimal)
                 
             } else if (sendAssetType == .BTC_COIN) {
                 guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
@@ -650,7 +607,10 @@ class CommonTransfer: BaseVC {
             let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
             let feeDpAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(18))
             let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
-            WDP.dpCoin(msAsset, feeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            let deAmount = feeAmount.multiplying(byPowerOf10: -18)
+            feeAmountLabel.attributedText = WDP.dpAmount(deAmount.stringValue, feeAmountLabel!.font, 18)
+            feeDenomLabel.text = msAsset.symbol
+            feeSelectImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .SUI_STYLE) {
@@ -659,6 +619,14 @@ class CommonTransfer: BaseVC {
             let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
             let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
             WDP.dpCoin(msAsset, suiFeeBudget, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            
+        } else if (txStyle == .IOTA_STYLE) {
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let feeDpBudge = iotaFeeBudget.multiplying(byPowerOf10: -(msAsset.decimals ?? 9), withBehavior: getDivideHandler(msAsset.decimals ?? 9))
+            let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
+            WDP.dpCoin(msAsset, iotaFeeBudget, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .BTC_STYLE) {
@@ -702,7 +670,7 @@ class CommonTransfer: BaseVC {
                 WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
                 WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
                 
-                if (sendAssetType == .COSMOS_COIN || (sendAssetType == .COSMOS_EVM_MAIN_COIN && txStyle == .COSMOS_STYLE)) {
+                if (sendAssetType == .COSMOS_COIN) {
                     let balanceAmount = cosmosFetcher.balanceAmount(toSendDenom)
                     if (cosmosTxFee.amount[0].denom == toSendDenom) {
                         if (totalFeeAmount.compare(balanceAmount).rawValue > 0) {
@@ -737,6 +705,15 @@ class CommonTransfer: BaseVC {
                 return
             }
             suiFeeBudget = NSDecimalNumber.init(value: toGas)
+            
+        } else if (txStyle == .IOTA_STYLE) {
+            guard let toGas = gasUsed else {
+                sendBtn.isHidden = true
+                errorCardView.isHidden = false
+                errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
+                return
+            }
+            iotaFeeBudget = NSDecimalNumber.init(value: toGas)
             
         } else if (txStyle == .BTC_STYLE) {
             guard let toGas = gasUsed else {
@@ -824,6 +801,9 @@ class CommonTransfer: BaseVC {
         } else if (txStyle == .SUI_STYLE) {
             suiSendGasCheck()
             
+        } else if (txStyle == .IOTA_STYLE) {
+            iotaSendGasCheck()
+            
         } else if (txStyle == .BTC_STYLE) {
             btcFetchTxHex()
             
@@ -840,7 +820,7 @@ class CommonTransfer: BaseVC {
                 if (sendAssetType == .COSMOS_WASM) {
                     inChainWasmSendSimul()                                          // Inchain CW20 Send!
                 } else {
-                    inChainCoinSendSimul()                                          // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
+                    inChainCoinSendSimul()                                          // Inchain Coin Send!  (COSMOS_COIN)
                 }
                 
             } else if (toChain.supportCosmos == false) {                            // IBC Eureka Send!
@@ -850,7 +830,7 @@ class CommonTransfer: BaseVC {
                 if (sendAssetType == .COSMOS_WASM) {
                     ibcWasmSendSimul()                                              // CW20 IBC Send!
                 } else {
-                    ibcCoinSendSimul()                                              // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
+                    ibcCoinSendSimul()                                              // Coin IBC Send! (COSMOS_COIN)
                 }
             }
         }
@@ -1499,6 +1479,81 @@ extension CommonTransfer {
     
 }
 
+// IOTA style tx dryrun and broadcast
+extension CommonTransfer {
+    
+    func iotaSendGasCheck() {
+        Task {
+            if let txBytes = try await iotaFetcher.unsafeCoinSend(toSendDenom, fromChain.mainAddress, iotaInputs(), [toAddress], [toAmount.stringValue], iotaFeeBudget.stringValue),
+               let response = try await iotaFetcher.iotaDryrun(txBytes) {
+                if let error = response["error"]["message"].string {
+                   DispatchQueue.main.async {
+                       self.onUpdateWithSimul(nil, error)
+                   }
+                   return
+               }
+
+                let computationCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["computationCost"].stringValue)
+                let storageCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageCost"].stringValue)
+                let storageRebate = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageRebate"].stringValue)
+                
+                var gasCost: UInt64 = 0
+                if (storageCost.compare(storageRebate).rawValue > 0) {
+                    gasCost = computationCost.adding(storageCost).subtracting(storageRebate).multiplying(by: NSDecimalNumber(string: "1.3") , withBehavior: handler0Down).uint64Value
+                } else {
+                    gasCost = computationCost.multiplying(by: NSDecimalNumber(string: "1.3") , withBehavior: handler0Down).uint64Value
+                }
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(gasCost)
+                }
+                
+            } else {
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(nil)
+                }
+            }
+        }
+    }
+    
+    func iotaSend() {
+        Task {
+            do {
+                if let txBytes = try await iotaFetcher.unsafeCoinSend(toSendDenom, fromChain.mainAddress, iotaInputs(), [toAddress], [toAmount.stringValue], iotaFeeBudget.stringValue),
+                   let dryRes = try await iotaFetcher.iotaDryrun(txBytes), dryRes["error"].isEmpty,
+                   let broadRes = try await iotaFetcher.iotaExecuteTx(txBytes, Signer.iotaSignatures(fromChain, txBytes), nil) {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        self.loadingView.isHidden = true
+                        let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                        txResult.txStyle = self.txStyle
+                        txResult.fromChain = self.fromChain
+                        txResult.toChain = self.toChain
+                        txResult.toAddress = self.toAddress
+                        txResult.iotaResult = broadRes
+                        txResult.modalPresentationStyle = .fullScreen
+                        self.present(txResult, animated: true)
+                    })
+                }
+                
+            } catch {
+                //TODO handle Error
+            }
+        }
+    }
+    
+    func iotaInputs() -> [String] {
+        var result = [String]()
+        iotaFetcher.iotaObjects.forEach { object in
+            if (object["type"].stringValue.iotaCoinType() == toSendDenom) {
+                result.append(object["objectId"].stringValue)
+            }
+        }
+        return result
+    }
+    
+}
+
+
 // Cosmos style tx simul and broadcast
 extension CommonTransfer {
    
@@ -1919,6 +1974,9 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
             } else if (txStyle == .SUI_STYLE) {
                 suiSend()
                 
+            } else if (txStyle == .IOTA_STYLE) {
+                iotaSend()
+                
             } else if (txStyle == .BTC_STYLE) {
                 btcSend(btcTxHex)
                 
@@ -1935,7 +1993,7 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                     if (sendAssetType == .COSMOS_WASM) {
                         inChainWasmSend()                                                   // Inchain CW20 Send!
                     } else {
-                        inChainCoinSend()                                                   // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
+                        inChainCoinSend()                                                   // Inchain Coin Send!  (COSMOS_COIN)
                     }
                     
                 } else if (toChain.supportCosmos == false) {                                // IBC Eureka Send!
@@ -1945,7 +2003,7 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                     if (sendAssetType == .COSMOS_WASM) {
                         ibcWasmSend()                                                       // CW20 IBC Send!
                     } else {
-                        ibcCoinSend()                                                       // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
+                        ibcCoinSend()                                                       // Coin IBC Send! (COSMOS_COIN)
                     }
                 }
             }
@@ -1959,7 +2017,6 @@ public enum SendAssetType: Int {
     case COSMOS_WASM = 1                    // support IBC, wasm send                 (cw20 tokens)
     case EVM_COIN = 2                       // not support IBC, only support Web3 tx  (evm main coin)
     case EVM_ERC20 = 3                      // not support IBC, only support Web3 tx  (erc20 tokens)
-    case COSMOS_EVM_MAIN_COIN = 4           // support IBC, bank send, Web3 tx        (staking, both tx style)
     
     
     case SUI_COIN = 5                       // sui assets
@@ -1967,4 +2024,7 @@ public enum SendAssetType: Int {
     case BTC_COIN = 7                       // bitcoin
     case GNO_COIN = 8
     case GNO_GRC20 = 9
+    case IOTA_COIN = 10
+    case IOTA_NFT = 11
+
 }

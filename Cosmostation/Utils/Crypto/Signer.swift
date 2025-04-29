@@ -916,6 +916,17 @@ extension Signer  {
         let signature = Ed25519.sign(message: [UInt8](hash), secretKey: [UInt8](privateKey))
         return [(Data([0x00]) + Data(signature) + pubKey).base64EncodedString()]
     }
+    
+    static func iotaSignatures(_ baseChain: BaseChain, _ txByte: String) -> [String] {
+        return iotaSignatures(baseChain.privateKey!, baseChain.publicKey!, Data(base64Encoded: txByte)!)
+    }
+    
+    static func iotaSignatures(_ privateKey: Data, _ pubKey: Data, _ data: Data) -> [String] {
+        let hash = try! Blake2b.hash(size: 32, data: Data([0, 0, 0]) + data)
+        let signature = Ed25519.sign(message: [UInt8](hash), secretKey: [UInt8](privateKey))
+        return [(Data([0x00]) + Data(signature) + pubKey).base64EncodedString()]
+    }
+
 }
 
 // MARK: Gno chain

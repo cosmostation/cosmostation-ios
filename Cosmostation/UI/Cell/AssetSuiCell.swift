@@ -101,4 +101,50 @@ class AssetSuiCell: UITableViewCell {
         }
     }
     
+    func bindIotaStakeAsset(_ baseChain: BaseChain) {
+        guard let stakeDenom = baseChain.stakeDenom,
+              let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) else {
+            return
+        }
+        
+        coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+        symbolLabel.text = msAsset.symbol?.uppercased()
+        
+        WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+        WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+        
+        if let fetcher = (baseChain as? ChainIota)?.getIotaFetcher() {
+            
+            let allIota = fetcher.allIotaAmount().multiplying(byPowerOf10: -msAsset.decimals!)
+            amountLabel?.attributedText = WDP.dpAmount(allIota.stringValue, amountLabel!.font, 6)
+            
+            let allIotaValue = fetcher.allIotaValue()
+            WDP.dpValue(allIotaValue, valueCurrencyLabel, valueLabel)
+            
+            let available = fetcher.balanceAmount(IOTA_MAIN_DENOM).multiplying(byPowerOf10: -msAsset.decimals!)
+            availableLabel?.attributedText = WDP.dpAmount(available.stringValue, availableLabel!.font, 6)
+            
+            let staked = fetcher.stakedAmount().multiplying(byPowerOf10: -msAsset.decimals!)
+            totalStakedLabel?.attributedText = WDP.dpAmount(staked.stringValue, totalStakedLabel!.font, 6)
+            
+            let principal = fetcher.principalAmount().multiplying(byPowerOf10: -msAsset.decimals!)
+            principalLabel?.attributedText = WDP.dpAmount(principal.stringValue, principalLabel!.font, 6)
+            
+            let estimatedReward = fetcher.estimatedRewardAmount().multiplying(byPowerOf10: -msAsset.decimals!)
+            estimatedRewardLabel?.attributedText = WDP.dpAmount(estimatedReward.stringValue, estimatedRewardLabel!.font, 6)
+            
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+                availableLabel.text = "✱✱✱✱"
+                totalStakedLabel.text = "✱✱✱✱"
+                principalLabel.text = "✱✱✱✱"
+                estimatedRewardLabel.text = "✱✱✱✱"
+            } else {
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
+        }
+    }
+
 }

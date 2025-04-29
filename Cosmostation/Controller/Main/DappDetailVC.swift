@@ -73,6 +73,10 @@ class DappDetailVC: BaseVC, WebSignDelegate {
             
             allChains = await baseAccount.initAllKeys().filter({ $0.isDefault })
             
+            if targetChain != nil {
+                targetChain = allChains.filter({ $0.apiName == targetChain.apiName }).first
+            }
+            
             DispatchQueue.main.async {
                 self.loadingView.isHidden = true
                 if (self.baseAccount == nil || BaseData.instance.mintscanChainParams == nil) {

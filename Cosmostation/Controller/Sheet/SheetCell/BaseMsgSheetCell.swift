@@ -11,6 +11,8 @@ class BaseMsgSheetCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var checkImageView: UIImageView!
+    @IBOutlet weak var checkColorView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -106,10 +108,46 @@ class BaseMsgSheetCell: UITableViewCell {
         descriptionLabel.text = NSLocalizedString("str_cancel_unbonding_msg", comment: "")
     }
     
+    func onBindDappSort(_ position: Int, _ selectedSortType: DappSortType?) {
+        checkImageView.isHidden = !(position == selectedSortType?.rawValue)
+        checkColorView.isHidden = !(position == selectedSortType?.rawValue)
+        contentView.backgroundColor = position == selectedSortType?.rawValue ? UIColor.color08 : UIColor.clear
+        descriptionLabel.textColor = .color03
+
+        if position == 0 {
+            titleLabel.text = "Alphabetical Asc. (A -> Z)"
+            descriptionLabel.text = "Sort the list alphabetically"
+
+        } else {
+            titleLabel.text = "Multi-Network Support"
+            descriptionLabel.text = "Sort the list by the number of supported networks"
+        }
+    }
+    
     func onBindBtcWithdraw() {
         titleLabel.text = NSLocalizedString("str_withdraw", comment: "")
         descriptionLabel.text = NSLocalizedString("str_withdraw_msg", comment: "")
     }
     
+    func onBindSendType(_ position: Int, _ targetChain: BaseChain) {
+        if position == 0 {
+            titleLabel.text = "Send to EVM Style Address"
+            descriptionLabel.textColor = .color03
+            let fullText = "Use this option for ‘0x...’ address"
+            let attributedString = NSMutableAttributedString(string: fullText)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.color02, range: (fullText as NSString).range(of: "‘0x...’"))
+            descriptionLabel.attributedText = attributedString
+
+            
+        } else {
+            guard let prefix = targetChain.bechAccountPrefix else { return }
+            titleLabel.text = "Send to COSMOS Style Address"
+            descriptionLabel.textColor = .color03
+            let fullText = "Use this option for ‘\(prefix)1...’ address or IBC Send"
+            let attributedString = NSMutableAttributedString(string: fullText)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.color02, range: (fullText as NSString).range(of: "‘\(prefix)1...’"))
+            descriptionLabel.attributedText = attributedString
+        }
+    }
 
 }

@@ -333,6 +333,9 @@ class BaseChain {
         } else if let suiFetcher = (self as? ChainSui)?.getSuiFetcher() {
             return suiFetcher.hasFee(txType)
             
+        } else if let iotaFetcher = (self as? ChainIota)?.getIotaFetcher() {
+            return iotaFetcher.hasFee(txType)
+            
         } else if let gnoFetcher = (self as? ChainGno)?.getGnoFetcher() {
             var result = false
             getDefaultFeeCoins().forEach { minFee in
@@ -733,6 +736,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainInjective())
 //    result.append(ChainInt3face())
     result.append(ChainInitia())
+//    result.append(ChainIota())
     result.append(ChainIris())
     result.append(ChainIxo())
     result.append(ChainJackal())
@@ -824,6 +828,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBitCoin84_T())
     result.append(ChainBitCoin86_T())
     result.append(ChainGno_T())
+//    result.append(ChainImuaEVM_T())
     result.append(ChainInitia_T())
 //    result.append(ChainLombard_T())
     result.append(ChainNeutron_T())
@@ -893,6 +898,7 @@ public enum TxStyle: Int {
     case SUI_STYLE = 2
     case BTC_STYLE = 3
     case GNO_STYLE = 4
+    case IOTA_STYLE = 5
 }
 
 public enum TxType: Int {
@@ -900,6 +906,12 @@ public enum TxType: Int {
     case SUI_SEND_NFT = 1
     case SUI_STAKE = 2
     case SUI_UNSTAKE = 3
+    
+    case IOTA_SEND_COIN = 4
+    case IOTA_SEND_NFT = 5
+    case IOTA_STAKE = 6
+    case IOTA_UNSTAKE = 7
+
 }
 
 

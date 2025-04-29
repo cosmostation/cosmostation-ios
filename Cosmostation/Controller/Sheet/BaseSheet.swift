@@ -26,6 +26,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var swapChainsSearch = Array<BaseChain>()
     var swapAssets = Array<TargetAsset>()
     var swapAssetsSearch = Array<TargetAsset>()
+    var dappNetworks: [DappNetwork] = []
+    var dappNetworksSearch = [DappNetwork]()
+    var dappSelectedNetwork: BaseChain?
     var recipientChain: BaseChain!
     
     var feeDatas = Array<FeeData>()
@@ -54,6 +57,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var suiValidators = [JSON]()
     var suiValidatorsSearch = [JSON]()
     
+    var iotaValidators = [JSON]()
+    var iotaValidatorsSearch = [JSON]()
+
     var initiaValidators = Array<Initia_Mstaking_V1_Validator>()
     var initiaValidatorsSearch = Array<Initia_Mstaking_V1_Validator>()
     var initiaDelegations = Array<Initia_Mstaking_V1_DelegationResponse>()
@@ -70,6 +76,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var swapSlippage: String?
 
     var selectedAccount: BaseAccount?
+    
+    var selectedCoinDenom: String?
+
+    var selectedDappSortType: DappSortType?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +113,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         sheetTableView.register(UINib(nibName: "SelectSwapAssetCell", bundle: nil), forCellReuseIdentifier: "SelectSwapAssetCell")
         sheetTableView.register(UINib(nibName: "SelectAccountCell", bundle: nil), forCellReuseIdentifier: "SelectAccountCell")
         sheetTableView.register(UINib(nibName: "SelectEndpointCell", bundle: nil), forCellReuseIdentifier: "SelectEndpointCell")
+        sheetTableView.register(UINib(nibName: "BaseImgMsgCheckCell", bundle: nil), forCellReuseIdentifier: "BaseImgMsgCheckCell")
         sheetTableView.register(UINib(nibName: "SelectRecipientChainCell", bundle: nil), forCellReuseIdentifier: "SelectRecipientChainCell")
         
         sheetTableView.register(UINib(nibName: "SelectFeeCoinCell", bundle: nil), forCellReuseIdentifier: "SelectFeeCoinCell")
@@ -267,6 +278,13 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             suiValidators = (targetChain as? ChainSui)?.getSuiFetcher()?.suiValidators ?? []
             suiValidatorsSearch = suiValidators
             
+        } else if (sheetType == .SelectIotaValidator) {
+            sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
+            sheetSearchBar.isHidden = false
+            
+            iotaValidators = (targetChain as? ChainIota)?.getIotaFetcher()?.iotaValidators ?? []
+            iotaValidatorsSearch = iotaValidators
+
         } else if (sheetType == .SelectInitiaValidator) {
             sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
             sheetSearchBar.isHidden = false
@@ -299,6 +317,13 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             sheetSearchBar.isHidden = false
             finalityProvidersSearch = finalityProviders
             
+        } else if sheetType == .SelectDappSort {
+            sheetTitle.text = "Select Sort Option"
+            
+        } else if sheetType == .SelectDappNetwork {
+            sheetTitle.text = "Select chain"
+            sheetSearchBar.isHidden = false
+            dappNetworksSearch = dappNetworks
         } else if (sheetType == .SelectUnstakeFinalityProvider) {
             sheetTitle.text = "Select stake to unbond"
             btcDelegations = (targetChain as? ChainBitCoin86)?.getBabylonBtcFetcher()!.btcDelegations.filter({ $0.state == "ACTIVE" }) ?? []
@@ -307,6 +332,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             sheetTitle.text = "Select withdrawable stake"
             btcDelegations = (targetChain as? ChainBitCoin86)?.getBabylonBtcFetcher()!.btcDelegations.filter({ $0.state.contains("WITHDRAWABLE") }) ?? []
 
+        } else if sheetType == .SelectSendType {
+            sheetTitle.text = "Select Send Type"
         }
     }
     
@@ -332,6 +359,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             suiValidatorsSearch = searchText.isEmpty ? suiValidators : suiValidators.filter { validator in
                 return validator.suiValidatorName().range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
+        } else if (sheetType == .SelectIotaValidator) {
+            iotaValidatorsSearch = searchText.isEmpty ? iotaValidators : iotaValidators.filter { validator in
+                return validator.iotaValidatorName().range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
         } else if (sheetType == .SelectInitiaValidator) {
             initiaValidatorsSearch = searchText.isEmpty ? initiaValidators : initiaValidators.filter { validator in
                 return validator.description_p.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
@@ -343,6 +374,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectFinalityProvider) {
             finalityProvidersSearch = searchText.isEmpty ? finalityProviders : finalityProviders.filter { provider in
                 return provider.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+            
+        } else if sheetType == .SelectDappNetwork {
+            dappNetworksSearch = searchText.isEmpty ? dappNetworks : dappNetworks.filter { ($0.chain?.name ?? "").range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
         }
         sheetTableView.reloadData()
@@ -476,6 +511,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectSuiValidator) {
             return suiValidatorsSearch.count
             
+        } else if (sheetType == .SelectIotaValidator) {
+            return iotaValidatorsSearch.count
+            
         } else if (sheetType == .SelectInitiaValidator) {
             return initiaValidatorsSearch.count
             
@@ -497,6 +535,12 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectFinalityProvider) {
             return finalityProvidersSearch.count
             
+        } else if sheetType == .SelectDappSort {
+            return 2
+            
+        } else if sheetType == .SelectDappNetwork {
+            return dappNetworksSearch.count
+            
         } else if (sheetType == .SelectBtcDelegatedAction) {
             return 2
             
@@ -505,6 +549,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectBtcWithdraw) {
             return btcDelegations.count
+            
+        } else if (sheetType == .SelectSendType) {
+            return 2
         }
 
         return 0
@@ -662,6 +709,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindSuiValidator(targetChain, suiValidatorsSearch[indexPath.row])
             return cell!
             
+        } else if (sheetType == .SelectIotaValidator) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SelectValidatorCell") as? SelectValidatorCell
+            cell?.onBindIotaValidator(targetChain, iotaValidatorsSearch[indexPath.row])
+            return cell!
+            
         } else if (sheetType == .SelectInitiaValidator) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SelectValidatorCell") as? SelectValidatorCell
             cell?.onBindInitiaValidator(targetChain, initiaValidatorsSearch[indexPath.row])
@@ -696,6 +748,17 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SelectValidatorCell") as? SelectValidatorCell
             cell?.onBindFinalityProvider(targetChain, finalityProvidersSearch[indexPath.row])
             return cell!
+
+        } else if sheetType == .SelectDappSort {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BaseMsgSheetCell") as? BaseMsgSheetCell
+            cell?.onBindDappSort(indexPath.row, selectedDappSortType)
+            return cell!
+            
+        } else if sheetType == .SelectDappNetwork {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BaseImgMsgCheckCell") as? BaseImgMsgCheckCell
+            cell?.onBindDappNetwork(indexPath.row, dappNetworksSearch[indexPath.row].chain, dappNetworksSearch[indexPath.row].dappCount, dappSelectedNetwork)
+            return cell!
+
             
         } else if sheetType == .SelectUnstakeFinalityProvider {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectValidatorCell") as? SelectValidatorCell
@@ -706,6 +769,12 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectValidatorCell") as? SelectValidatorCell
             cell?.onBindUnstakeValidator(targetChain, btcDelegations[indexPath.row])
             return cell!
+            
+        } else if sheetType == .SelectSendType {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
+            cell?.onBindSendType(indexPath.row, targetChain)
+            return cell!
+
         }
         
         return UITableViewCell()
@@ -785,6 +854,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "suiAddress" : suiValidatorsSearch[indexPath.row]["suiAddress"].stringValue]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
+        } else if (sheetType == .SelectIotaValidator) {
+            let result: [String : Any] = ["index" : indexPath.row, "iotaAddress" : iotaValidatorsSearch[indexPath.row]["iotaAddress"].stringValue]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
         } else if (sheetType == .SelectInitiaValidator) {
             let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : initiaValidatorsSearch[indexPath.row].operatorAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -812,6 +884,15 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectFinalityProvider) {
             let result: [String : Any] = ["index" : indexPath.row, "finalityProviderBtcPk" : finalityProvidersSearch[indexPath.row].btcPk]
             sheetDelegate?.onSelectedSheet(sheetType, result)
+
+        } else if sheetType == .SelectDappSort {
+            let result: [String : Any] = ["index" : indexPath.row]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
+        } else if sheetType == .SelectDappNetwork {
+            let result: [String : Any] = ["chain" : dappNetworksSearch[indexPath.row].chain]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+
             
         } else if sheetType == .SelectUnstakeFinalityProvider {
             let result: [String : Any] = ["index" : indexPath.row, "delegation" : btcDelegations[indexPath.row]]
@@ -820,7 +901,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if sheetType == .SelectBtcWithdraw {
             let result: [String : Any] = ["index" : indexPath.row, "delegation" : btcDelegations[indexPath.row]]
             sheetDelegate?.onSelectedSheet(sheetType, result)
-
+            
+        } else if sheetType == .SelectSendType {
+            let result: [String : Any] = ["index" : indexPath.row, "denom" : selectedCoinDenom]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
         } else {
             let result: [String : Any] = ["index" : indexPath.row]
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -879,7 +964,8 @@ public enum SheetType: Int {
     
     
     case SelectSuiValidator = 81
-    
+    case SelectIotaValidator
+
     case SelectInitiaValidator = 91
     case SelectInitiaUnStakeValidator = 92
     case SelectInitiaDelegatedAction = 93
@@ -893,11 +979,16 @@ public enum SheetType: Int {
     case MoveDydx = 101
     case MoveBabylonDappDetail = 102
     
+    case SelectDappSort
+    case SelectDappNetwork
+
     case SelectFinalityProvider
     case SelectUnstakeFinalityProvider
     case SelectBtcWithdraw
     case SelectBtcDelegatedAction
     case SelectBtcWithdrawAction
 
+    case SelectSendType
+    
 
 }

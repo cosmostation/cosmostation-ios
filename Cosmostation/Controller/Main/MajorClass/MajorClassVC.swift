@@ -75,7 +75,7 @@ class MajorClassVC: BaseVC {
         addressLabel.text = selectedChain.mainAddress
         
         onSetTabbarView()
-        if (selectedChain is ChainSui || selectedChain.isSupportBTCStaking()) {
+        if (selectedChain is ChainSui || selectedChain.isSupportBTCStaking() || selectedChain is ChainIota) {
             onSetFabButton()
         }
         
@@ -164,6 +164,13 @@ class MajorClassVC: BaseVC {
             tabbar.items.append(receiveTabBar)
             tabbar.items.append(historyTabBar)
             tabbar.items.append(aboutTabBar)
+            
+        } else if (selectedChain is ChainIota) {
+            if (BaseData.instance.showEvenReview()) { tabbar.items.append(nftTabBar) }
+            tabbar.items.append(receiveTabBar)
+            tabbar.items.append(historyTabBar)
+            if (BaseData.instance.showEvenReview() && selectedChain.isSupportMobileDapp()) { tabbar.items.append(ecosystemTabBar) }
+            tabbar.items.append(aboutTabBar)
         }
         
         tabbar.barTintColor = .clear
@@ -215,6 +222,11 @@ class MajorClassVC: BaseVC {
             mainFab.addItem(title: "Earn", image: UIImage(named: "iconFab")) { _ in
                 self.onBtcStake()
             }
+        } else if (selectedChain is ChainIota) {
+            mainFab.addItem(title: "Earn", image: UIImage(named: "iconFab")) { _ in
+                self.onIotaStake()
+            }
+
         }
         
         view.addSubview(mainFab)
@@ -293,6 +305,16 @@ extension MajorClassVC {
         self.navigationController?.pushViewController(stakingInfoVC, animated: true)
         
     }
+    
+    func onIotaStake() {
+        let stakingInfoVC = IotaStakingInfoVC(nibName: "IotaStakingInfoVC", bundle: nil)
+        stakingInfoVC.selectedChain = selectedChain as? ChainIota
+        stakingInfoVC.majorCryptoVC = majorCryptoVC
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(stakingInfoVC, animated: true)
+        
+    }
+
     
     func onBtcStake() {
         if selectedChain.isStakeEnabled() {

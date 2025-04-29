@@ -61,7 +61,7 @@ class SelectAddressListSheet: BaseVC {
         
         var tempRefBechAddresses = [RefAddress]()
         
-        if (toChain is ChainSui) {
+        if (toChain is ChainSui || toChain is ChainIota) { //test
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
                 if (refAddress.chainTag == toChain.tag && refAddress.bechAddress != senderMajorAddress) {
                     refMajorAddresses.append(refAddress)
@@ -169,20 +169,8 @@ class SelectAddressListSheet: BaseVC {
                 cosmosStyleTableView.isHidden = false
                 evmStyleTableView.isHidden = true
                 
-            } else if (sendType == .COSMOS_EVM_MAIN_COIN && fromChain.tag == toChain.tag) {
-                //same chain, main coin (both EVM address, BECH address)
-                BaseData.instance.selectAllRefAddresses().filter {
-                    $0.bechAddress.starts(with: toChain.bechAccountPrefix! + "1") &&
-                    $0.bechAddress != senderBechAddress }.forEach { refAddress in
-                        if (tempRefBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
-                            tempRefBechAddresses.append(refAddress)
-                        }
-                    }
-                BaseData.instance.selectAllAddressBooks().forEach { book in
-                    if (book.chainName == toChain.name && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
-                        bechAddressBook.append(book)
-                    }
-                }
+            } else if sendType == .EVM_COIN {
+                //only support EVM address style
                 BaseData.instance.selectAllRefAddresses().forEach { refAddress in
                     if (refAddress.chainTag == toChain.tag && refAddress.evmAddress != senderEvmAddress) {
                         refEvmAddresses.append(refAddress)
@@ -193,32 +181,12 @@ class SelectAddressListSheet: BaseVC {
                         evmAddressBook.append(book)
                     }
                 }
-                addressStyleSegment.isHidden = false
-                sheetTitle.isHidden = true
-                majorStyleTableView.isHidden = true
-                cosmosStyleTableView.isHidden = false
-                evmStyleTableView.isHidden = true
-                
-            } else if (sendType == .COSMOS_EVM_MAIN_COIN && fromChain.tag != toChain.tag) {
-                //differ chain only ibc BECH address
-                BaseData.instance.selectAllRefAddresses().filter {
-                    $0.bechAddress.starts(with: toChain.bechAccountPrefix! + "1") &&
-                    $0.bechAddress != senderBechAddress }.forEach { refAddress in
-                        if (tempRefBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
-                            tempRefBechAddresses.append(refAddress)
-                        }
-                    }
-                BaseData.instance.selectAllAddressBooks().forEach { book in
-                    if (book.chainName == toChain.name && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
-                        bechAddressBook.append(book)
-                    }
-                }
                 addressStyleSegment.isHidden = true
-                sheetTitle.isHidden = true
+                sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
                 majorStyleTableView.isHidden = true
-                cosmosStyleTableView.isHidden = false
-                evmStyleTableView.isHidden = true
-                
+                cosmosStyleTableView.isHidden = true
+                evmStyleTableView.isHidden = false
+                                
             } else if (sendType == .EVM_ERC20 && fromChain.tag == toChain.tag) {
                 //same chain, erc token only EVM address
                 BaseData.instance.selectAllRefAddresses().forEach { refAddress in

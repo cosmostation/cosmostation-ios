@@ -224,6 +224,141 @@ class HistoryCell: UITableViewCell {
         blockLabel.text = "(" +  history["checkpoint"].stringValue + ")"
     }
     
+    func bindIotaHistory(_ chain: ChainIota, _ history: JSON) {
+        // status check
+        if (history["effects"]["status"]["status"].stringValue != "success") {
+            successImg.image = UIImage(named: "iconFail")
+        } else {
+            successImg.image = UIImage(named: "iconSuccess")
+        }
+        
+        // title check
+        var title = ""
+        var description = ""
+        let txs = history["transaction"]["data"]["transaction"]["transactions"].arrayValue
+        
+        let sender = history["transaction"]["data"]["sender"].stringValue
+        if (sender == chain.mainAddress) {
+            title = NSLocalizedString("tx_send", comment: "")
+        } else {
+            title = NSLocalizedString("tx_receive", comment: "")
+        }
+        
+        if (((txs.first?.isEmpty) == false)) {
+            description = txs.last?.dictionaryValue.keys.first ?? "Unknown"
+            if (txs.count > 1) {
+                description = description +  " + " + String(txs.count)
+            }
+
+            txs.forEach { tx in
+                if (tx["MoveCall"]["function"].stringValue == "request_withdraw_stake") {
+                    title = NSLocalizedString("str_unstake", comment: "")
+                    
+                } else if (tx["MoveCall"]["function"].stringValue == "request_add_stake") {
+                    title = NSLocalizedString("str_stake", comment: "")
+                    
+                } else if (tx["MoveCall"]["function"].stringValue == "swap") || tx["MoveCall"]["function"].stringValue == "swap_a_b" {
+                    title = NSLocalizedString("title_swap_token", comment: "")
+                    
+                } else if (tx["MoveCall"]["function"].stringValue == "mint") {
+                    title = "Supply"
+                    
+                } else if (tx["MoveCall"]["function"].stringValue == "redeem") {
+                    title = "Redeem"
+                    
+                } else if tx["MoveCall"]["function"].stringValue == "unwrap"{
+                    title = "Contract Interaction"
+                }
+            }
+        }
+        
+        if title.isEmpty == true {
+            msgsTitleLabel.text = description
+        } else {
+            msgsTitleLabel.text = title
+        }
+        
+        
+        // denom, amount check
+        var symbol = ""
+        var amount = "0"
+        
+        if let fetcher = chain.getIotaFetcher(),
+           let inputs = history["transaction"]["data"]["transaction"]["inputs"].array {
+                        
+            amountLabel.isHidden = false
+            denomLabel.isHidden = false
+                        
+            if title == NSLocalizedString("tx_send", comment: "") {
+                if let sendSymbol = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue != chain.mainAddress }).first?["coinType"].string,
+                      let sendAmount = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue != chain.mainAddress }).first?["amount"].string {
+                    symbol = sendSymbol
+                    amount = sendAmount
+                } else {
+                    amountLabel.isHidden = true
+                    denomLabel.isHidden = true
+                }
+
+            } else if title == NSLocalizedString("tx_receive", comment: "") {
+                if let receiveSymbol = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue == chain.mainAddress }).first?["coinType"].string,
+                      let receiveAmount = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue == chain.mainAddress }).first?["amount"].string {
+                    symbol = receiveSymbol
+                    amount = receiveAmount
+                } else {
+                    amountLabel.isHidden = true
+                    denomLabel.isHidden = true
+                }
+                
+            } else if title == NSLocalizedString("str_stake", comment: "") {
+                symbol = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue == chain.mainAddress }).first?["coinType"].string ?? ""
+                amount = inputs.filter({ Int($0["value"].stringValue) != nil }).map({ $0["value"].stringValue }).first ?? "0"
+                
+            } else if title == NSLocalizedString("str_unstake", comment: "") {
+                let computationCost = NSDecimalNumber(string: history["effects"]["gasUsed"]["computationCost"].stringValue)
+                let storageCost = NSDecimalNumber(string: history["effects"]["gasUsed"]["storageCost"].stringValue)
+                let storageRebate = NSDecimalNumber(string: history["effects"]["gasUsed"]["storageRebate"].stringValue)
+                
+                var gasCost: UInt64 = 0
+                if (storageCost.compare(storageRebate).rawValue > 0) {
+                    gasCost = UInt64(truncating: computationCost.adding(storageCost).subtracting(storageRebate))
+                    if let unstakeAmount = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue == chain.mainAddress }).first?["amount"].string {
+                        amount = String(UInt64(unstakeAmount)! + gasCost)
+                        symbol = history["balanceChanges"].arrayValue.filter({ $0["owner"]["AddressOwner"].stringValue == chain.mainAddress }).first?["coinType"].string ?? ""
+                    }
+                } else {
+                    amountLabel.isHidden = true
+                    denomLabel.isHidden = true
+                }
+                
+            } else {
+                amountLabel.isHidden = true
+                denomLabel.isHidden = true
+            }
+            
+            let intAmount = abs(Int(amount)!)
+            if let msAsset = BaseData.instance.getAsset(chain.apiName, symbol) {
+                WDP.dpCoin(msAsset, NSDecimalNumber(value: intAmount), nil, denomLabel, amountLabel, msAsset.decimals)
+                
+            } else if let metaData = fetcher.iotaCoinMeta[symbol] {
+                denomLabel.text = metaData["symbol"].stringValue
+                let dpAmount = NSDecimalNumber(value: intAmount).multiplying(byPowerOf10: -metaData["decimals"].int16Value, withBehavior: handler18Down)
+                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
+                
+            } else {
+                denomLabel.text = symbol.iotaCoinSymbol()
+                let dpAmount = NSDecimalNumber(value: intAmount).multiplying(byPowerOf10: -9, withBehavior: handler18Down)
+                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
+            }
+        }
+        
+
+        //hash, time, block
+        hashLabel.text = history["digest"].stringValue
+        timeLabel.text = WDP.dpTime(history["timestampMs"].intValue)
+        blockLabel.text = "(" +  history["checkpoint"].stringValue + ")"
+    }
+
+    
     func bindBtcHistory(_ btcChain: ChainBitCoin86, _ history: JSON) {
         if (history["status"]["confirmed"].boolValue == true) {
             successImg.image = UIImage(named: "iconSuccess")

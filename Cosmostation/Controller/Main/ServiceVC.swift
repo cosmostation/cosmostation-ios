@@ -142,7 +142,7 @@ extension ServiceVC: UITableViewDelegate, UITableViewDataSource {
             self.present(swapStartVC, animated: true)
             
         } else if (indexPath.row == 5) {
-            let dappStartVC = DappStartVC(nibName: "DappStartVC", bundle: nil)
+            let dappStartVC = DappListViewController(nibName: "DappListViewController", bundle: nil)
             dappStartVC.modalTransitionStyle = .coverVertical
             self.present(dappStartVC, animated: true)
             

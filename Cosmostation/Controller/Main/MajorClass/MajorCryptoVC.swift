@@ -21,6 +21,9 @@ class MajorCryptoVC: BaseVC {
     var selectedChain: BaseChain!
     
     var suiBalances = Array<(String, NSDecimalNumber)>()
+    
+    var iotaBalances = Array<(String, NSDecimalNumber)>()
+
 //    var btcBalances = NSDecimalNumber.zero
 //    var btcPendingInput = NSDecimalNumber.zero
 //    var btcPendingOutput = NSDecimalNumber.zero
@@ -110,6 +113,20 @@ class MajorCryptoVC: BaseVC {
                 return value0.compare(value1).rawValue > 0 ? true : false
             }
             
+        } else if let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() {
+            iotaBalances = iotaFetcher.iotaBalances
+            if iotaBalances.filter({ $0.0 == IOTA_MAIN_DENOM }).count == 0 {
+                iotaBalances.append((IOTA_MAIN_DENOM, NSDecimalNumber.zero))
+            }
+            iotaBalances.sort {
+                if ($0.0 == IOTA_MAIN_DENOM) { return true }
+                if ($1.0 == IOTA_MAIN_DENOM) { return false }
+                let value0 = iotaFetcher.balanceValue($0.0)
+                let value1 = iotaFetcher.balanceValue($1.0)
+                return value0.compare(value1).rawValue > 0 ? true : false
+
+            }
+            
         } else if let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher() {
 //            btcBalances = btcFetcher.btcBalances
 //            btcPendingInput = btcFetcher.btcPendingInput
@@ -156,7 +173,7 @@ class MajorCryptoVC: BaseVC {
 extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (selectedChain is ChainSui) {
+        if (selectedChain is ChainSui || selectedChain is ChainIota) {
             return 1
         } else if (selectedChain is ChainBitCoin86) {
             return 1
@@ -170,6 +187,10 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             view.titleLabel.text = "Native Coins"
             view.cntLabel.text = String(suiBalances.count)
             
+        } else if selectedChain is ChainIota {
+            view.titleLabel.text = "Native Coins"
+            view.cntLabel.text = String(iotaBalances.count)
+
         } else if (selectedChain is ChainBitCoin86) {
             view.titleLabel.text = "Native Coins"
             view.cntLabel.text = ""
@@ -179,7 +200,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (selectedChain is ChainSui) {
+        if (selectedChain is ChainSui || selectedChain is ChainIota) {
             return 40
         } else if (selectedChain is ChainBitCoin86) {
             return 40
@@ -190,6 +211,9 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (selectedChain is ChainSui) {
             return suiBalances.count
+            
+        } else if selectedChain is ChainIota {
+            return iotaBalances.count
             
         } else if (selectedChain is ChainBitCoin86) {
             return 1
@@ -209,6 +233,19 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 cell.bindSuiAsset(selectedChain, suiBalances[indexPath.row])
                 return cell
             }
+            
+        } else if selectedChain is ChainIota {
+            if (indexPath.row == 0) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetSuiCell") as! AssetSuiCell
+                cell.bindIotaStakeAsset(selectedChain)
+                return cell
+                
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                cell.bindIotaAsset(selectedChain, iotaBalances[indexPath.row])
+                return cell
+            }
+
             
         } else if (selectedChain is ChainBitCoin86) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AssetBtcCell") as! AssetBtcCell
@@ -231,6 +268,20 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             transfer.toSendDenom = suiBalances[indexPath.row].0
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
+            
+        } else if selectedChain is ChainIota {
+            if (selectedChain.isTxFeePayable(.IOTA_SEND_COIN) == false) {    //test
+                onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+                return
+            }
+            
+            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+            transfer.sendAssetType = .IOTA_COIN
+            transfer.fromChain = selectedChain
+            transfer.toSendDenom = iotaBalances[indexPath.row].0
+            transfer.modalTransitionStyle = .coverVertical
+            self.present(transfer, animated: true)
+
             
         } else if (selectedChain is ChainBitCoin86) {
             Task {

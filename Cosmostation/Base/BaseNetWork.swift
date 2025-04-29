@@ -79,6 +79,17 @@ class BaseNetWork {
             }
     }
     
+    func fetchEcosystems() {
+        Task {
+            do {
+                let url = "https://raw.githubusercontent.com/cosmostation/chainlist/master/wallet/eco_list.json"
+                BaseData.instance.allEcosystems = try await AF.request(url, method: .get).serializingDecodable([JSON].self).value
+            } catch {
+                print("fetchEcosystems error", error)
+            }
+        }
+    }
+    
     func fetchCw20Tokens() {
         AF.request(BaseNetWork.msCw20Url(), method: .get)
             .responseDecodable(of: MintscanTokens.self, queue: .main, decoder: JSONDecoder()) { response in

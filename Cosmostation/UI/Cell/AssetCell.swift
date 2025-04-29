@@ -190,6 +190,41 @@ class AssetCell: UITableViewCell {
         }
     }
     
+    func bindIotaAsset(_ baseChain: BaseChain, _ balance: (String, NSDecimalNumber)) {
+        if let fetcher = (baseChain as? ChainIota)?.getIotaFetcher() {
+            if let msAsset = BaseData.instance.getAsset(baseChain.apiName, balance.0) {
+                WDP.dpCoin(msAsset, balance.1, coinImg, symbolLabel, amountLabel, 6)
+                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+                
+            } else if let metaData = fetcher.iotaCoinMeta[balance.0] {
+                coinImg.sd_setImage(with: metaData.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
+                symbolLabel.text = metaData["symbol"].stringValue
+                let dpAmount = balance.1.multiplying(byPowerOf10: -metaData["decimals"].int16Value, withBehavior: handler18Down)
+                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
+                
+            } else {
+                symbolLabel.text = balance.0.iotaCoinSymbol()
+                let dpAmount = balance.1.multiplying(byPowerOf10: -9, withBehavior: handler18Down)
+                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
+                
+            }
+            
+            let value = fetcher.balanceValue(balance.0)
+            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+        }
+        
+        if (BaseData.instance.getHideValue()) {
+            hidenValueLabel.isHidden = false
+            
+        } else {
+            amountLabel.isHidden = false
+            valueCurrencyLabel.isHidden = false
+            valueLabel.isHidden = false
+        }
+    }
+
+    
     func bindGnoClassAsset(_ baseChain: BaseChain, _ coin: Cosmos_Base_V1beta1_Coin) {
         if let gnoFether = (baseChain as? ChainGno)?.getGnoFetcher(),
            let msAsset = BaseData.instance.getAsset(baseChain.apiName, coin.denom) {

@@ -63,6 +63,9 @@ class MajorHistoryVC: BaseVC {
         if let suiChain = selectedChain as? ChainSui {
             suiChain.fetchHistory()
             
+        } else if let iotaChain = selectedChain as? ChainIota {
+            iotaChain.fetchHistory()
+            
         } else if let btcChain = selectedChain as? ChainBitCoin86 {
             btcChain.fetchHistory()
             
@@ -84,6 +87,34 @@ class MajorHistoryVC: BaseVC {
         if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
             historyGroup.removeAll()
             suiFetcher.suiHistory.forEach { history in
+                let date = WDP.dpDate(history["timestampMs"].intValue)
+                var matched = -1
+                for i in 0 ..< historyGroup.count {
+                    if (historyGroup[i].date == date) {
+                        matched = i
+                    }
+                }
+                if (matched >= 0) {
+                    var updated = historyGroup[matched].values
+                    updated.append(history)
+                    historyGroup[matched].values = updated
+                } else {
+                    historyGroup.append(HistoryGroup.init(date, [history]))
+                }
+            }
+            
+            loadingView.isHidden = true
+            view.isUserInteractionEnabled = true
+            if (historyGroup.count <= 0) {
+                emptyDataView.isHidden = false
+            } else {
+                emptyDataView.isHidden = true
+                tableView.reloadData()
+            }
+            
+        } else if let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() {
+            historyGroup.removeAll()
+            iotaFetcher.iotaHistory.forEach { history in
                 let date = WDP.dpDate(history["timestampMs"].intValue)
                 var matched = -1
                 for i in 0 ..< historyGroup.count {
@@ -146,7 +177,7 @@ class MajorHistoryVC: BaseVC {
 
 extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        if selectedChain is ChainSui {
+        if selectedChain is ChainSui || selectedChain is ChainIota {
             return historyGroup.count
         } else if selectedChain is ChainBitCoin86 {
             return historyGroup.count
@@ -156,7 +187,7 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if selectedChain is ChainSui {
+        if selectedChain is ChainSui || selectedChain is ChainIota {
             let today = WDP.dpDate(Int(Date().timeIntervalSince1970) * 1000)
             if (historyGroup[section].date == today) {
                 view.titleLabel.text = "Today"
@@ -181,7 +212,7 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if selectedChain is ChainSui {
+        if selectedChain is ChainSui || selectedChain is ChainIota {
             return historyGroup[section].values.count
         } else if selectedChain is ChainBitCoin86 {
             return historyGroup[section].values.count
@@ -193,6 +224,10 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as! HistoryCell
         if let suiChain = selectedChain as? ChainSui {
             cell.bindSuiHistory(suiChain, historyGroup[indexPath.section].values[indexPath.row])
+            
+        } else if let iotaChain = selectedChain as? ChainIota {
+            cell.bindIotaHistory(iotaChain, historyGroup[indexPath.section].values[indexPath.row])
+
         } else if let btcChain = selectedChain as? ChainBitCoin86 {
             cell.bindBtcHistory(btcChain, historyGroup[indexPath.section].values[indexPath.row])
         }
@@ -204,6 +239,12 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
             let hash = historyGroup[indexPath.section].values[indexPath.row]["digest"].stringValue
             guard let url = selectedChain.getExplorerTx(hash) else { return }
             self.onShowSafariWeb(url)
+            
+        } else if selectedChain is ChainIota {
+            let hash = historyGroup[indexPath.section].values[indexPath.row]["digest"].stringValue
+            guard let url = selectedChain.getExplorerTx(hash) else { return }
+            self.onShowSafariWeb(url)
+
         } else if let btcChain = selectedChain as? ChainBitCoin86 {
             let hash = historyGroup[indexPath.section].values[indexPath.row]["txid"].stringValue
             guard let url = selectedChain.getExplorerTx(hash) else { return }
