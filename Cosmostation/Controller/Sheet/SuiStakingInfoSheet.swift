@@ -19,7 +19,8 @@ class SuiStakingInfoSheet: BaseVC {
     
     @IBOutlet weak var confirmBtn: BaseButton!
     
-    var suiFehcer: SuiFetcher!
+    var suiFehcer: SuiFetcher?
+    var iotaFetcher: IotaFetcher?
     var epoch: Int64?
 
     override func viewDidLoad() {
@@ -27,8 +28,12 @@ class SuiStakingInfoSheet: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
 
-        epoch = suiFehcer.suiSystem["epoch"].int64Value
+        if let suiFehcer {
+            epoch = suiFehcer.suiSystem["epoch"].int64Value
+        } else if let iotaFetcher {
+            epoch = iotaFetcher.iotaSystem["epoch"].int64Value
 
+        }
         titleLabel.text = NSLocalizedString("title_staking_info", comment: "")
         
         let msgSuiGuide0 = NSLocalizedString("msg_sui_guide_0", comment: "")

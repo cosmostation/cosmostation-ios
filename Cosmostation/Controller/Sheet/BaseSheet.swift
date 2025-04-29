@@ -54,6 +54,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var suiValidators = [JSON]()
     var suiValidatorsSearch = [JSON]()
     
+    var iotaValidators = [JSON]()
+    var iotaValidatorsSearch = [JSON]()
+
     var initiaValidators = Array<Initia_Mstaking_V1_Validator>()
     var initiaValidatorsSearch = Array<Initia_Mstaking_V1_Validator>()
     var initiaDelegations = Array<Initia_Mstaking_V1_DelegationResponse>()
@@ -269,6 +272,13 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             suiValidators = (targetChain as? ChainSui)?.getSuiFetcher()?.suiValidators ?? []
             suiValidatorsSearch = suiValidators
             
+        } else if (sheetType == .SelectIotaValidator) {
+            sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
+            sheetSearchBar.isHidden = false
+            
+            iotaValidators = (targetChain as? ChainIota)?.getIotaFetcher()?.iotaValidators ?? []
+            iotaValidatorsSearch = iotaValidators
+
         } else if (sheetType == .SelectInitiaValidator) {
             sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
             sheetSearchBar.isHidden = false
@@ -335,6 +345,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectSuiValidator) {
             suiValidatorsSearch = searchText.isEmpty ? suiValidators : suiValidators.filter { validator in
                 return validator.suiValidatorName().range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+        } else if (sheetType == .SelectIotaValidator) {
+            iotaValidatorsSearch = searchText.isEmpty ? iotaValidators : iotaValidators.filter { validator in
+                return validator.iotaValidatorName().range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
         } else if (sheetType == .SelectInitiaValidator) {
             initiaValidatorsSearch = searchText.isEmpty ? initiaValidators : initiaValidators.filter { validator in
@@ -479,6 +493,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectSuiValidator) {
             return suiValidatorsSearch.count
+            
+        } else if (sheetType == .SelectIotaValidator) {
+            return iotaValidatorsSearch.count
             
         } else if (sheetType == .SelectInitiaValidator) {
             return initiaValidatorsSearch.count
@@ -669,6 +686,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindSuiValidator(targetChain, suiValidatorsSearch[indexPath.row])
             return cell!
             
+        } else if (sheetType == .SelectIotaValidator) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SelectValidatorCell") as? SelectValidatorCell
+            cell?.onBindIotaValidator(targetChain, iotaValidatorsSearch[indexPath.row])
+            return cell!
+            
         } else if (sheetType == .SelectInitiaValidator) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SelectValidatorCell") as? SelectValidatorCell
             cell?.onBindInitiaValidator(targetChain, initiaValidatorsSearch[indexPath.row])
@@ -798,6 +820,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "suiAddress" : suiValidatorsSearch[indexPath.row]["suiAddress"].stringValue]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
+        } else if (sheetType == .SelectIotaValidator) {
+            let result: [String : Any] = ["index" : indexPath.row, "iotaAddress" : iotaValidatorsSearch[indexPath.row]["iotaAddress"].stringValue]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
         } else if (sheetType == .SelectInitiaValidator) {
             let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : initiaValidatorsSearch[indexPath.row].operatorAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -896,7 +921,8 @@ public enum SheetType: Int {
     
     
     case SelectSuiValidator = 81
-    
+    case SelectIotaValidator
+
     case SelectInitiaValidator = 91
     case SelectInitiaUnStakeValidator = 92
     case SelectInitiaDelegatedAction = 93

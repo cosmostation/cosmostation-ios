@@ -27,7 +27,7 @@ class KeyFac {
                    pubKeyType == .BTC_Native_Segwit || pubKeyType == .BTC_Taproot) {
             return getSecp256k1PriKey(seed, path)
             
-        } else if (pubKeyType == .SUI_Ed25519) {
+        } else if (pubKeyType == .SUI_Ed25519 || pubKeyType == .IOTA_Ed25519) {
             return getEd25519PriKey(seed, path)
             
         }
@@ -82,7 +82,7 @@ class KeyFac {
                    pubKeyType == .BTC_Native_Segwit || pubKeyType == .BTC_Taproot) {
             return getSecp256k1PubKey(priKey)
             
-        } else if (pubKeyType == .SUI_Ed25519) {
+        } else if (pubKeyType == .SUI_Ed25519 || pubKeyType == .IOTA_Ed25519) {
             return getEd25519PubKey(priKey)
         }
         return nil
@@ -112,6 +112,11 @@ class KeyFac {
             let data = Data([UInt8](Data(count: 1)) + pubKey)
             let hash = try! Blake2b.hash(size: 32, data: data)
             return "0x" + hash.toHexString()
+            
+        } else if (pubKeyType == .IOTA_Ed25519) {
+            let hash = try! Blake2b.hash(size: 32, data: pubKey)
+            return "0x" + hash.toHexString()
+
         }
         return ""
     }

@@ -31,6 +31,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var fromCosmosFetcher: CosmosFetcher!
     var fromEvmFetcher: EvmFetcher!
     var fromSuiFetcher: SuiFetcher!
+    var fromIotaFetcher: IotaFetcher!
     var fromBtcFetcher: BtcFetcher!
     var fromGnoFetcher: GnoFetcher!
     var toChain: BaseChain!
@@ -45,6 +46,8 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var evmRecipient: JSON?
     
     var suiResult: JSON?
+    
+    var iotaResult: JSON?
     
     var btcResult: JSON?
 
@@ -81,6 +84,17 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                 return
             }
             fromSuiFetcher = (fromChain as? ChainSui)?.getSuiFetcher()
+            onUpdateView()
+            
+        } else if (txStyle == .IOTA_STYLE) {
+            if (iotaResult?["result"]["effects"]["status"]["status"].stringValue != "success") {
+                loadingView.isHidden = true
+                failView.isHidden = false
+                failMsgLabel.text = iotaResult?["result"]["effects"]["status"]["error"].stringValue
+                confirmBtn.isEnabled = true
+                return
+            }
+            fromIotaFetcher = (fromChain as? ChainIota)?.getIotaFetcher()
             onUpdateView()
             
         } else if (txStyle == .BTC_STYLE) {
@@ -133,6 +147,11 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             successExplorerBtn.setTitle("Check in Explorer", for: .normal)
             failExplorerBtn.setTitle("Check in Explorer", for: .normal)
             
+        } else if (txStyle == .IOTA_STYLE) {
+            successMsgLabel.text = iotaResult?["result"]["digest"].stringValue
+            successExplorerBtn.setTitle("Check in Explorer", for: .normal)
+            failExplorerBtn.setTitle("Check in Explorer", for: .normal)
+
         } else if (txStyle == .BTC_STYLE) {
             successMsgLabel.text = btcResult?["result"].stringValue
             successExplorerBtn.setTitle("Check in Explorer", for: .normal)
@@ -166,6 +185,12 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             }
             
         } else if (txStyle == .SUI_STYLE) {
+            successView.isHidden = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                self.onCheckAddAddressBook()
+            });
+            
+        } else if (txStyle == .IOTA_STYLE) {
             successView.isHidden = false
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
                 self.onCheckAddAddressBook()
@@ -211,6 +236,9 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             guard let url = fromChain.getExplorerTx(suiResult?["result"]["digest"].stringValue) else { return }
             self.onShowSafariWeb(url)
             
+        } else if (txStyle == .IOTA_STYLE) {
+            guard let url = fromChain.getExplorerTx(iotaResult?["result"]["digest"].stringValue) else { return }
+            self.onShowSafariWeb(url)
         } else if (txStyle == .BTC_STYLE) {
             guard let url = fromChain.getExplorerTx(btcResult?["result"].stringValue) else { return }
             self.onShowSafariWeb(url)

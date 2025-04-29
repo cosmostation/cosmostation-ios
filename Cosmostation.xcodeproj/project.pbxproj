@@ -1895,8 +1895,16 @@
 		79DD26682D0C00B500B4353C /* VoteThreeItemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DD26662D0C00B500B4353C /* VoteThreeItemsCell.xib */; };
 		79E7B3CA2CF83F0400C28D93 /* dydx.json in Resources */ = {isa = PBXBuildFile; fileRef = 79E7B3C92CF83F0400C28D93 /* dydx.json */; };
 		79ED0BCC2DB75C6500C84DB7 /* ChainHippo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED0BCB2DB75C6500C84DB7 /* ChainHippo.swift */; };
+		79ED0BCE2DB8890E00C84DB7 /* ChainIota.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED0BCD2DB8890E00C84DB7 /* ChainIota.swift */; };
+		79ED0BD02DB8894300C84DB7 /* IotaFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED0BCF2DB8894300C84DB7 /* IotaFetcher.swift */; };
 		79ED0BD22DB8AB6F00C84DB7 /* ChainImuaEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED0BD12DB8AB6F00C84DB7 /* ChainImuaEVM.swift */; };
 		79ED0BD42DB8AD0800C84DB7 /* ChainImuaEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED0BD32DB8AD0800C84DB7 /* ChainImuaEVM_T.swift */; };
+		79ED0BD82DBA18F900C84DB7 /* IotaStakingInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79ED0BD72DBA18F800C84DB7 /* IotaStakingInfoVC.xib */; };
+		79ED0BD92DBA18F900C84DB7 /* IotaStakingInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED0BD62DBA18F800C84DB7 /* IotaStakingInfoVC.swift */; };
+		79ED0BDC2DBA311500C84DB7 /* IotaStake.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79ED0BDB2DBA311500C84DB7 /* IotaStake.xib */; };
+		79ED0BDD2DBA311500C84DB7 /* IotaStake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED0BDA2DBA311500C84DB7 /* IotaStake.swift */; };
+		79ED0BE02DBA312200C84DB7 /* IotaUnstake.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79ED0BDF2DBA312200C84DB7 /* IotaUnstake.xib */; };
+		79ED0BE12DBA312200C84DB7 /* IotaUnstake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED0BDE2DBA312200C84DB7 /* IotaUnstake.swift */; };
 		79EF66802C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79EF66812C40C2DA00A38A3F /* BgRandomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */; };
 		79F30ED92CAD36E400E42B2F /* ChainAtomone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */; };
@@ -3481,8 +3489,16 @@
 		79DD26662D0C00B500B4353C /* VoteThreeItemsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteThreeItemsCell.xib; sourceTree = "<group>"; };
 		79E7B3C92CF83F0400C28D93 /* dydx.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dydx.json; sourceTree = "<group>"; };
 		79ED0BCB2DB75C6500C84DB7 /* ChainHippo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainHippo.swift; sourceTree = "<group>"; };
+		79ED0BCD2DB8890E00C84DB7 /* ChainIota.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainIota.swift; sourceTree = "<group>"; };
+		79ED0BCF2DB8894300C84DB7 /* IotaFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IotaFetcher.swift; sourceTree = "<group>"; };
 		79ED0BD12DB8AB6F00C84DB7 /* ChainImuaEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainImuaEVM.swift; sourceTree = "<group>"; };
 		79ED0BD32DB8AD0800C84DB7 /* ChainImuaEVM_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainImuaEVM_T.swift; sourceTree = "<group>"; };
+		79ED0BD62DBA18F800C84DB7 /* IotaStakingInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IotaStakingInfoVC.swift; sourceTree = "<group>"; };
+		79ED0BD72DBA18F800C84DB7 /* IotaStakingInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IotaStakingInfoVC.xib; sourceTree = "<group>"; };
+		79ED0BDA2DBA311500C84DB7 /* IotaStake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IotaStake.swift; sourceTree = "<group>"; };
+		79ED0BDB2DBA311500C84DB7 /* IotaStake.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IotaStake.xib; sourceTree = "<group>"; };
+		79ED0BDE2DBA312200C84DB7 /* IotaUnstake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IotaUnstake.swift; sourceTree = "<group>"; };
+		79ED0BDF2DBA312200C84DB7 /* IotaUnstake.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IotaUnstake.xib; sourceTree = "<group>"; };
 		79EF667F2C40C2DA00A38A3F /* BgRandomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgRandomButton.swift; sourceTree = "<group>"; };
 		79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAtomone.swift; sourceTree = "<group>"; };
 		79FCA3672C3E5B31001C17D0 /* RoundedPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedPaddingLabel.swift; sourceTree = "<group>"; };
@@ -3925,6 +3941,7 @@
 				04965B3F2C37B39D00403605 /* ChainInitia.swift */,
 				045032932C1EEFC900235F6A /* ChainInjective.swift */,
 				79B7F35E2D81769C00AA755B /* ChainInt3face.swift */,
+				79ED0BCD2DB8890E00C84DB7 /* ChainIota.swift */,
 				0450328F2C1EEFC900235F6A /* ChainIris.swift */,
 				045032962C1EEFC900235F6A /* ChainIxo.swift */,
 				79C518722CC8E08D00BC0E85 /* ChainJackal.swift */,
@@ -4003,6 +4020,7 @@
 			children = (
 				79287C6B2D670DB3003845D2 /* Bitcoin */,
 				0479F9712C68923C00CE1D29 /* Sui */,
+				79ED0BD52DBA18D300C84DB7 /* Iota */,
 				042D585B2C5CEF43003DBDE0 /* MajorClass.storyboard */,
 				042D585E2C5CF05E003DBDE0 /* MajorClassVC.swift */,
 				042D58612C5CF074003DBDE0 /* MajorCryptoVC.swift */,
@@ -4031,6 +4049,7 @@
 				79813A562D506DCA0083A1F5 /* GnoFetcher.swift */,
 				790970232D7EB34D00DEB959 /* BabylonFetcher.swift */,
 				79AB34032D6C3F3400F1426C /* BabylonBTCFetcher.swift */,
+				79ED0BCF2DB8894300C84DB7 /* IotaFetcher.swift */,
 			);
 			path = Fetcher;
 			sourceTree = "<group>";
@@ -4886,6 +4905,19 @@
 				79DB1D4D2D5B4CEF002E1059 /* eth_types_v1_account.pb.swift */,
 			);
 			path = Nibiru;
+			sourceTree = "<group>";
+		};
+		79ED0BD52DBA18D300C84DB7 /* Iota */ = {
+			isa = PBXGroup;
+			children = (
+				79ED0BD62DBA18F800C84DB7 /* IotaStakingInfoVC.swift */,
+				79ED0BD72DBA18F800C84DB7 /* IotaStakingInfoVC.xib */,
+				79ED0BDA2DBA311500C84DB7 /* IotaStake.swift */,
+				79ED0BDB2DBA311500C84DB7 /* IotaStake.xib */,
+				79ED0BDE2DBA312200C84DB7 /* IotaUnstake.swift */,
+				79ED0BDF2DBA312200C84DB7 /* IotaUnstake.xib */,
+			);
+			path = Iota;
 			sourceTree = "<group>";
 		};
 		79FCA3A42C3F9E49001C17D0 /* Artela */ = {
@@ -6054,6 +6086,7 @@
 				E10B1D752C2156430039283B /* KavaDefiCell.xib in Resources */,
 				E1CD6AF02AEAAEA300376909 /* AboutDescriptionCell.xib in Resources */,
 				04FAD9EA2AB6DBCE00143A3E /* ManageAccountCell.xib in Resources */,
+				79ED0BD82DBA18F900C84DB7 /* IotaStakingInfoVC.xib in Resources */,
 				79DD26682D0C00B500B4353C /* VoteThreeItemsCell.xib in Resources */,
 				E10B1DD42C2159040039283B /* KavaMintCreateAction.xib in Resources */,
 				E10B1DAD2C2156430039283B /* KavaSwapListVC.xib in Resources */,
@@ -6225,6 +6258,7 @@
 				046BF1C22B0F259C00BC1FC8 /* OktValidatorCell.xib in Resources */,
 				E159805C2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
 				04B789F32ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */,
+				79ED0BDC2DBA311500C84DB7 /* IotaStake.xib in Resources */,
 				E1044EAC2BD798BC00DA05C2 /* NftTransfer.xib in Resources */,
 				79B422642DA37CC90022A4F9 /* NeutronStakingInfoVC.xib in Resources */,
 				E131F4502AEEAAB800E760A0 /* CreateNameSheet.xib in Resources */,
@@ -6251,6 +6285,7 @@
 				047F69392BE5FBCE00C3BC34 /* Portfolio2Cell.xib in Resources */,
 				790970212D7E895500DEB959 /* BabylonStakingInfoVC.xib in Resources */,
 				044222562B96F4370063F031 /* SelectDisplayTokenCell.xib in Resources */,
+				79ED0BE02DBA312200C84DB7 /* IotaUnstake.xib in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
 				182CCB832BC4FEF300FC48E0 /* PrivacyInfo.xcprivacy in Resources */,
 				18F4EAD12A4DA0A200CFBE2B /* ApiKeyDev.plist in Resources */,
@@ -7407,6 +7442,7 @@
 				047843112AC9918700462F1C /* ethermint_types_v1_account.pb.swift in Sources */,
 				7981F7642D0C343D00BB50DA /* ChainRealioEVM.swift in Sources */,
 				04C816AE2BA98D75006B800A /* cosmos_genutil_v1beta1_genesis.pb.swift in Sources */,
+				79ED0BD92DBA18F900C84DB7 /* IotaStakingInfoVC.swift in Sources */,
 				790970242D7EB34D00DEB959 /* BabylonFetcher.swift in Sources */,
 				04C816FA2BA98D75006B800A /* cosmos_gov_v1_query.grpc.swift in Sources */,
 				04CD24762AD2E99A00497EF5 /* kava_bep3_v1beta1_query.grpc.swift in Sources */,
@@ -7447,6 +7483,7 @@
 				04FAD9B22AB011AC00143A3E /* SwitchPriceDisplayCell.swift in Sources */,
 				E1A48DE72BFEF9430084D770 /* EvmEcosystemVC.swift in Sources */,
 				E1B44B1F2ADA41CD0073C88A /* NeutronSingleVoteCell.swift in Sources */,
+				79ED0BE12DBA312200C84DB7 /* IotaUnstake.swift in Sources */,
 				04FAD9B82AB0125400143A3E /* BaseSheetCell.swift in Sources */,
 				2810084A2696D979002986A6 /* KeyFac.swift in Sources */,
 				04C816F22BA98D75006B800A /* cosmos_crypto_keyring_v1_record.pb.swift in Sources */,
@@ -8166,6 +8203,7 @@
 				0466525A2DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift in Sources */,
 				0466525B2DACDB2700F9C125 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
 				0466525C2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.grpc.swift in Sources */,
+				79ED0BDD2DBA311500C84DB7 /* IotaStake.swift in Sources */,
 				0466525D2DACDB2700F9C125 /* ibc_applications_perm_v1_query.grpc.swift in Sources */,
 				0466525E2DACDB2700F9C125 /* ibc_core_channel_v1_tx.grpc.swift in Sources */,
 				0466525F2DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_account.pb.swift in Sources */,
@@ -8176,6 +8214,7 @@
 				046652642DACDB2700F9C125 /* ibc_core_client_v2_tx.pb.swift in Sources */,
 				046652652DACDB2700F9C125 /* ibc_core_commitment_v2_commitment.pb.swift in Sources */,
 				046652662DACDB2700F9C125 /* ibc_applications_fee_v1_ack.pb.swift in Sources */,
+				79ED0BD02DB8894300C84DB7 /* IotaFetcher.swift in Sources */,
 				046652672DACDB2700F9C125 /* ibc_core_client_v1_query.grpc.swift in Sources */,
 				046652682DACDB2700F9C125 /* ibc_core_connection_v1_query.pb.swift in Sources */,
 				046652692DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_host.pb.swift in Sources */,
@@ -8269,6 +8308,7 @@
 				0400EF072ADBF03B007BA97F /* kava_hard_v1beta1_query.grpc.swift in Sources */,
 				045032E92C1EFE5500235F6A /* ChainProvenance.swift in Sources */,
 				E1C8B2062CD72C39000B6C47 /* ChainDungeon.swift in Sources */,
+				79ED0BCE2DB8890E00C84DB7 /* ChainIota.swift in Sources */,
 				04C816DC2BA98D75006B800A /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */,
 				04C8179E2BA98D75006B800A /* cosmos_authz_v1beta1_query.pb.swift in Sources */,
 				045033142C1F029A00235F6A /* ChainSecret529.swift in Sources */,

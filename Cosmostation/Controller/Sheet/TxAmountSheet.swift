@@ -155,6 +155,14 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: handler18Down)
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
             availableDenom.text = selectedChain.coinSymbol
+            
+        } else if (sheetType == .TxIotaStake) {
+            amountTextField.label.text = NSLocalizedString("str_delegate_amount", comment: "")
+            availableTitle.text = NSLocalizedString("str_max_delegable", comment: "")
+            decimal = 9
+            let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: handler18Down)
+            availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
+            availableDenom.text = selectedChain.coinSymbol
         }
         
     }
@@ -262,4 +270,5 @@ public enum AmountSheetType: Int {
     
     
     case TxSuiStake = 30
+    case TxIotaStake = 31
 }

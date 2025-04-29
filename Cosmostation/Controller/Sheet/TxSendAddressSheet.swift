@@ -111,6 +111,16 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                 return
             }
             
+        } else if toChain is ChainIota {
+            if (WUtils.isValidSuiAdderss(userInput)) {  //TEST
+                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+                self.dismiss(animated: true)
+                return
+            } else {
+                self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                return
+            }
+            
         } else if (toChain is ChainBitCoin86 || toChain is ChainBitCoin86_T) {
             var network = ""
             if userInput!.starts(with: "1") || userInput!.starts(with: "bc1") || userInput!.starts(with: "3") {

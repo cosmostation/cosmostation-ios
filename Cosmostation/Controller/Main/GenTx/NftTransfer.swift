@@ -75,6 +75,12 @@ class NftTransfer: BaseVC {
     var suiFetcher: SuiFetcher!
     var suiFeeBudget = NSDecimalNumber.zero
     var suiGasPrice = NSDecimalNumber.zero
+    
+    var toSendIotaNFT: JSON!
+    var iotaFetcher: IotaFetcher!
+    var iotaFeeBudget = NSDecimalNumber.zero
+    var iotaGasPrice = NSDecimalNumber.zero
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,6 +110,12 @@ class NftTransfer: BaseVC {
                 txStyle = .SUI_STYLE
                 suiFetcher = suiChain.getSuiFetcher()
                 suiGasPrice = try await suiFetcher.fetchGasprice()
+                
+            } else if let iotaChain = fromChain as? ChainIota {
+                sendType = .IOTA_NFT
+                txStyle = .IOTA_STYLE
+                iotaFetcher = iotaChain.getIotaFetcher()
+                iotaGasPrice = try await iotaFetcher.fetchGasprice()
             }
             
             DispatchQueue.main.async {
@@ -140,6 +152,13 @@ class NftTransfer: BaseVC {
             toSendNftName.text = toSendSuiNFT["display"]["data"]["name"].stringValue
             toSendNftCollectionName.text = toSendSuiNFT["objectId"].stringValue
             
+        } else if (txStyle == .IOTA_STYLE) {
+            if let url = toSendIotaNFT.iotaNftULR() {
+                toSendNftImage.sd_setImage(with: url, placeholderImage: UIImage(named: "imgNftPlaceHolder"))
+            }
+            toSendNftName.text = toSendIotaNFT["display"]["data"]["name"].stringValue
+            toSendNftCollectionName.text = toSendIotaNFT["objectId"].stringValue
+            
         } else if (txStyle == .COSMOS_STYLE) {
             if let url = toSendNFT.tokens[0].tokenDetails["url"].string {
                 toSendNftImage?.sd_setImage(with: URL(string: url)!, placeholderImage: UIImage(named: "imgNftPlaceHolder"))
@@ -157,6 +176,14 @@ class NftTransfer: BaseVC {
             feeSegments.selectedSegmentIndex = selectedFeePosition
             feeSelectLabel.text = fromChain.coinSymbol            
             suiFeeBudget = suiFetcher.baseFee(.SUI_SEND_NFT)
+            
+        } else if txStyle == .IOTA_STYLE {
+            feeSegments.removeAllSegments()
+            feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
+            selectedFeePosition = 0
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            feeSelectLabel.text = fromChain.coinSymbol
+            iotaFeeBudget = iotaFetcher.baseFee(.IOTA_SEND_NFT)
             
         } else if (txStyle == .COSMOS_STYLE) {
             if (fromCosmosFetcher.cosmosBaseFees.count > 0) {
@@ -190,6 +217,8 @@ class NftTransfer: BaseVC {
     
     func onInitView() {
         if (sendType == .SUI_NFT) {
+            feeArrowImg.isHidden = true
+        } else if sendType == .IOTA_NFT {
             feeArrowImg.isHidden = true
         } else if (sendType == .COSMOS_WASM) {
             memoCardView.isHidden = false
@@ -269,7 +298,7 @@ class NftTransfer: BaseVC {
     }
     
     @objc func onSelectFeeDenom() {
-        if txStyle == .SUI_STYLE { return }
+        if txStyle == .SUI_STYLE || txStyle == .IOTA_STYLE { return }
         
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = fromChain
@@ -291,6 +320,14 @@ class NftTransfer: BaseVC {
             let feeValue = feePrice.multiplying(by: suiFeeBudget).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(9))
             WDP.dpCoin(msAsset, suiFeeBudget, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            
+        } else if txStyle == .IOTA_STYLE {
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let feeValue = feePrice.multiplying(by: iotaFeeBudget).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(9))
+            WDP.dpCoin(msAsset, iotaFeeBudget, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            
             
         } else if (txStyle == .COSMOS_STYLE) {
             if let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
@@ -317,6 +354,15 @@ class NftTransfer: BaseVC {
                 return
             }
             suiFeeBudget = NSDecimalNumber.init(value: toGas)
+            
+        } else if txStyle == .IOTA_STYLE {
+            guard let toGas = gasUsed else {
+                sendBtn.isHidden = true
+                errorCardView.isHidden = false
+                errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
+                return
+            }
+            iotaFeeBudget = NSDecimalNumber.init(value: toGas)
             
         } else if (txStyle == .COSMOS_STYLE) {
             if (fromChain.isSimulable() == false) {
@@ -365,6 +411,9 @@ class NftTransfer: BaseVC {
         
         if (txStyle == .SUI_STYLE) {
             suiNftSendGasCheck()
+            
+        } else if txStyle == .IOTA_STYLE {
+            iotaNftSendGasCheck()
             
         } else if (txStyle == .COSMOS_STYLE) {
             if (fromChain.isSimulable() == false) {
@@ -438,6 +487,70 @@ extension NftTransfer {
         }
     }
 }
+
+//Iota style tx dryrun and broadcast
+extension NftTransfer {
+    
+    func iotaNftSendGasCheck() {
+        Task {
+            if let txBytes = try await iotaFetcher.unsafeTransferObject(fromChain.mainAddress, toSendIotaNFT["objectId"].stringValue, iotaFeeBudget.stringValue, toAddress),
+               let response = try await iotaFetcher.iotaDryrun(txBytes) {
+                if let error = response["error"]["message"].string {
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(nil, error)
+                    }
+                    return
+                }
+                
+                let computationCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["computationCost"].stringValue)
+                let storageCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageCost"].stringValue)
+                let storageRebate = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageRebate"].stringValue)
+                
+                var gasCost: UInt64 = 0
+                if (storageCost.compare(storageRebate).rawValue > 0) {
+                    gasCost = computationCost.adding(storageCost).subtracting(storageRebate).multiplying(by: NSDecimalNumber(string: "1.3") , withBehavior: handler0Down).uint64Value
+                } else {
+                    gasCost = computationCost.multiplying(by: NSDecimalNumber(string: "1.3") , withBehavior: handler0Down).uint64Value
+                }
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(gasCost)
+                }
+                
+            } else {
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(nil)
+                }
+            }
+        }
+    }
+    
+    func iotaNftSend() {
+        Task {
+            do {
+                if let txBytes = try await iotaFetcher.unsafeTransferObject(fromChain.mainAddress, toSendIotaNFT["objectId"].stringValue, iotaFeeBudget.stringValue, toAddress),
+                   let dryRes = try await iotaFetcher.iotaDryrun(txBytes), dryRes["error"].isEmpty,
+                   let broadRes = try await iotaFetcher.iotaExecuteTx(txBytes, Signer.iotaSignatures(fromChain, txBytes), nil) {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        self.loadingView.isHidden = true
+                        let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                        txResult.txStyle = self.txStyle
+                        txResult.fromChain = self.fromChain
+                        txResult.toChain = self.toChain
+                        txResult.toAddress = self.toAddress
+                        txResult.iotaResult = broadRes
+                        txResult.modalPresentationStyle = .fullScreen
+                        self.present(txResult, animated: true)
+                    })
+                }
+                
+            } catch {
+                //TODO handle Error
+            }
+        }
+    }
+}
+
 
 //Cosmos style tx simul and broadcast
 extension NftTransfer {
@@ -547,6 +660,9 @@ extension NftTransfer: BaseSheetDelegate, SendAddressDelegate, MemoDelegate, Pin
             
             if (txStyle == .SUI_STYLE) {
                 suiNftSend()
+                
+            } else if txStyle == .IOTA_STYLE {
+                iotaNftSend()
                 
             } else if (txStyle == .COSMOS_STYLE) {
                 cw721Send()

@@ -102,6 +102,10 @@ class CommonTransfer: BaseVC {
     var suiFeeBudget = NSDecimalNumber.zero
     var suiGasPrice = NSDecimalNumber.zero
     
+    var iotaFetcher: IotaFetcher!
+    var iotaFeeBudget = NSDecimalNumber.zero
+    var iotaGasPrice = NSDecimalNumber.zero
+
     var btcFetcher: BtcFetcher!
     var btcTxFee = NSDecimalNumber.zero
     var btcTxHex = ""
@@ -135,6 +139,11 @@ class CommonTransfer: BaseVC {
                 txStyle = .SUI_STYLE
                 suiFetcher = (fromChain as? ChainSui)?.getSuiFetcher()
                 suiGasPrice = try await suiFetcher.fetchGasprice()
+                
+            } else if (sendAssetType == .IOTA_COIN) {
+                txStyle = .IOTA_STYLE
+                iotaFetcher = (fromChain as? ChainIota)?.getIotaFetcher()
+                iotaGasPrice = try await iotaFetcher.fetchGasprice()
                 
             } else if (sendAssetType == .BTC_COIN) {
                 txStyle = .BTC_STYLE
@@ -226,6 +235,15 @@ class CommonTransfer: BaseVC {
             
             suiFeeBudget = suiFetcher.baseFee(.SUI_SEND_COIN)
             
+        } else if (txStyle == .IOTA_STYLE) {
+            feeSegments.removeAllSegments()
+            feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
+            selectedFeePosition = 0
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            feeSelectLabel.text = fromChain.coinSymbol
+            
+            iotaFeeBudget = iotaFetcher.baseFee(.IOTA_SEND_COIN)     //test
+            
         } else if (txStyle == .BTC_STYLE) {
             feeSegments.removeAllSegments()
             feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
@@ -309,6 +327,16 @@ class CommonTransfer: BaseVC {
             
             if (fromChain.stakeDenom == toSendDenom) {
                 availableAmount = availableAmount.subtracting(suiFeeBudget)
+            }
+            
+        } else if (sendAssetType == .IOTA_COIN) {
+            titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
+            decimal = fromChain.assetDecimal(toSendDenom)
+            symbol = fromChain.assetSymbol(toSendDenom)
+            availableAmount = iotaFetcher.balanceAmount(toSendDenom)
+            
+            if (fromChain.stakeDenom == toSendDenom) {
+                availableAmount = availableAmount.subtracting(iotaFeeBudget)
             }
             
         } else if (sendAssetType == .BTC_COIN) {
@@ -485,6 +513,14 @@ class CommonTransfer: BaseVC {
                 toAssetDenomLabel.text = fromChain.assetSymbol(toSendDenom)
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                 
+            } else if (sendAssetType == .IOTA_COIN) {
+                    let msPrice = BaseData.instance.getPrice(fromChain.assetGeckoId(toSendDenom))
+                    let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
+                    let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
+                    WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
+                    toAssetDenomLabel.text = fromChain.assetSymbol(toSendDenom)
+                    toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel.font, decimal)
+                
             } else if (sendAssetType == .BTC_COIN) {
                 guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
                 let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)     //
@@ -603,6 +639,14 @@ class CommonTransfer: BaseVC {
             WDP.dpCoin(msAsset, suiFeeBudget, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
+        } else if (txStyle == .IOTA_STYLE) {
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let feeDpBudge = iotaFeeBudget.multiplying(byPowerOf10: -(msAsset.decimals ?? 9), withBehavior: getDivideHandler(msAsset.decimals ?? 9))
+            let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
+            WDP.dpCoin(msAsset, iotaFeeBudget, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            
         } else if (txStyle == .BTC_STYLE) {
             guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
@@ -679,6 +723,15 @@ class CommonTransfer: BaseVC {
                 return
             }
             suiFeeBudget = NSDecimalNumber.init(value: toGas)
+            
+        } else if (txStyle == .IOTA_STYLE) {
+            guard let toGas = gasUsed else {
+                sendBtn.isHidden = true
+                errorCardView.isHidden = false
+                errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
+                return
+            }
+            iotaFeeBudget = NSDecimalNumber.init(value: toGas)
             
         } else if (txStyle == .BTC_STYLE) {
             guard let toGas = gasUsed else {
@@ -765,6 +818,9 @@ class CommonTransfer: BaseVC {
             
         } else if (txStyle == .SUI_STYLE) {
             suiSendGasCheck()
+            
+        } else if (txStyle == .IOTA_STYLE) {
+            iotaSendGasCheck()
             
         } else if (txStyle == .BTC_STYLE) {
             btcFetchTxHex()
@@ -1441,6 +1497,81 @@ extension CommonTransfer {
     
 }
 
+// IOTA style tx dryrun and broadcast
+extension CommonTransfer {
+    
+    func iotaSendGasCheck() {
+        Task {
+            if let txBytes = try await iotaFetcher.unsafeCoinSend(toSendDenom, fromChain.mainAddress, iotaInputs(), [toAddress], [toAmount.stringValue], iotaFeeBudget.stringValue),
+               let response = try await iotaFetcher.iotaDryrun(txBytes) {
+                if let error = response["error"]["message"].string {
+                   DispatchQueue.main.async {
+                       self.onUpdateWithSimul(nil, error)
+                   }
+                   return
+               }
+
+                let computationCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["computationCost"].stringValue)
+                let storageCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageCost"].stringValue)
+                let storageRebate = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageRebate"].stringValue)
+                
+                var gasCost: UInt64 = 0
+                if (storageCost.compare(storageRebate).rawValue > 0) {
+                    gasCost = computationCost.adding(storageCost).subtracting(storageRebate).multiplying(by: NSDecimalNumber(string: "1.3") , withBehavior: handler0Down).uint64Value
+                } else {
+                    gasCost = computationCost.multiplying(by: NSDecimalNumber(string: "1.3") , withBehavior: handler0Down).uint64Value
+                }
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(gasCost)
+                }
+                
+            } else {
+                DispatchQueue.main.async {
+                    self.onUpdateWithSimul(nil)
+                }
+            }
+        }
+    }
+    
+    func iotaSend() {
+        Task {
+            do {
+                if let txBytes = try await iotaFetcher.unsafeCoinSend(toSendDenom, fromChain.mainAddress, iotaInputs(), [toAddress], [toAmount.stringValue], iotaFeeBudget.stringValue),
+                   let dryRes = try await iotaFetcher.iotaDryrun(txBytes), dryRes["error"].isEmpty,
+                   let broadRes = try await iotaFetcher.iotaExecuteTx(txBytes, Signer.iotaSignatures(fromChain, txBytes), nil) {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                        self.loadingView.isHidden = true
+                        let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                        txResult.txStyle = self.txStyle
+                        txResult.fromChain = self.fromChain
+                        txResult.toChain = self.toChain
+                        txResult.toAddress = self.toAddress
+                        txResult.iotaResult = broadRes
+                        txResult.modalPresentationStyle = .fullScreen
+                        self.present(txResult, animated: true)
+                    })
+                }
+                
+            } catch {
+                //TODO handle Error
+            }
+        }
+    }
+    
+    func iotaInputs() -> [String] {
+        var result = [String]()
+        iotaFetcher.iotaObjects.forEach { object in
+            if (object["type"].stringValue.iotaCoinType() == toSendDenom) {
+                result.append(object["objectId"].stringValue)
+            }
+        }
+        return result
+    }
+    
+}
+
+
 // Cosmos style tx simul and broadcast
 extension CommonTransfer {
    
@@ -1861,6 +1992,9 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
             } else if (txStyle == .SUI_STYLE) {
                 suiSend()
                 
+            } else if (txStyle == .IOTA_STYLE) {
+                iotaSend()
+                
             } else if (txStyle == .BTC_STYLE) {
                 btcSend(btcTxHex)
                 
@@ -1908,4 +2042,7 @@ public enum SendAssetType: Int {
     case BTC_COIN = 7                       // bitcoin
     case GNO_COIN = 8
     case GNO_GRC20 = 9
+    case IOTA_COIN = 10
+    case IOTA_NFT = 11
+
 }

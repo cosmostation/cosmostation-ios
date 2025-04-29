@@ -118,6 +118,19 @@ class SelectValidatorCell: UITableViewCell {
         commPercentLabel.isHidden = false
     }
     
+    func onBindIotaValidator(_ baseChain: BaseChain, _ validator: JSON) {
+        logoImg.sd_setImage(with: validator.iotaValidatorImg(), placeholderImage: UIImage(named: "validatorDefault"))
+        nameLabel.text = validator.iotaValidatorName()
+        vpLabel?.attributedText = WDP.dpAmount(validator.iotaValidatorVp().stringValue, vpLabel!.font, 0)
+        commLabel?.attributedText = WDP.dpAmount(validator.iotaValidatorCommission().stringValue, commLabel!.font, 2)
+        
+        vpTitle.isHidden = false
+        vpLabel.isHidden = false
+        commTitle.isHidden = false
+        commLabel.isHidden = false
+        commPercentLabel.isHidden = false
+    }
+    
     func onBindInitiaValidator(_ baseChain: BaseChain, _ validator: Initia_Mstaking_V1_Validator) {
         
         logoImg.setMonikerImg(baseChain, validator.operatorAddress)

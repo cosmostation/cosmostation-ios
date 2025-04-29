@@ -66,6 +66,7 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
             
+        } else if (sendAssetType == .SUI_COIN || sendAssetType == .IOTA_COIN) { //test
             availableDenom.text = fromChain.assetSymbol(toSendDenom)
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
