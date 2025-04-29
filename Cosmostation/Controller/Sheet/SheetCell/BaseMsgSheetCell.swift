@@ -111,5 +111,25 @@ class BaseMsgSheetCell: UITableViewCell {
         descriptionLabel.text = NSLocalizedString("str_withdraw_msg", comment: "")
     }
     
+    func onBindSendType(_ position: Int, _ targetChain: BaseChain) {
+        if position == 0 {
+            titleLabel.text = "Send to EVM Style Address"
+            descriptionLabel.textColor = .color03
+            let fullText = "Use this option for ‘0x...’ address"
+            let attributedString = NSMutableAttributedString(string: fullText)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.color02, range: (fullText as NSString).range(of: "‘0x...’"))
+            descriptionLabel.attributedText = attributedString
+
+            
+        } else {
+            guard let prefix = targetChain.bechAccountPrefix else { return }
+            titleLabel.text = "Send to COSMOS Style Address"
+            descriptionLabel.textColor = .color03
+            let fullText = "Use this option for ‘\(prefix)1...’ address or IBC Send"
+            let attributedString = NSMutableAttributedString(string: fullText)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.color02, range: (fullText as NSString).range(of: "‘\(prefix)1...’"))
+            descriptionLabel.attributedText = attributedString
+        }
+    }
 
 }

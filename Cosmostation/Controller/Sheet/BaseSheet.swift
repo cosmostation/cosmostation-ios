@@ -70,6 +70,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var swapSlippage: String?
 
     var selectedAccount: BaseAccount?
+    
+    var selectedCoinDenom: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -307,6 +309,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             sheetTitle.text = "Select withdrawable stake"
             btcDelegations = (targetChain as? ChainBitCoin86)?.getBabylonBtcFetcher()!.btcDelegations.filter({ $0.state.contains("WITHDRAWABLE") }) ?? []
 
+        } else if sheetType == .SelectSendType {
+            sheetTitle.text = "Select Send Type"
         }
     }
     
@@ -505,6 +509,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectBtcWithdraw) {
             return btcDelegations.count
+            
+        } else if (sheetType == .SelectSendType) {
+            return 2
         }
 
         return 0
@@ -706,6 +713,12 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectValidatorCell") as? SelectValidatorCell
             cell?.onBindUnstakeValidator(targetChain, btcDelegations[indexPath.row])
             return cell!
+            
+        } else if sheetType == .SelectSendType {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
+            cell?.onBindSendType(indexPath.row, targetChain)
+            return cell!
+
         }
         
         return UITableViewCell()
@@ -820,7 +833,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if sheetType == .SelectBtcWithdraw {
             let result: [String : Any] = ["index" : indexPath.row, "delegation" : btcDelegations[indexPath.row]]
             sheetDelegate?.onSelectedSheet(sheetType, result)
-
+            
+        } else if sheetType == .SelectSendType {
+            let result: [String : Any] = ["index" : indexPath.row, "denom" : selectedCoinDenom]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+            
         } else {
             let result: [String : Any] = ["index" : indexPath.row]
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -899,5 +916,7 @@ public enum SheetType: Int {
     case SelectBtcDelegatedAction
     case SelectBtcWithdrawAction
 
+    case SelectSendType
+    
 
 }

@@ -754,7 +754,12 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             
         } else {
             if (indexPath.section == 0 && searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom && selectedChain.supportEvm) {
-                onStartCoinTransferVC(.COSMOS_EVM_MAIN_COIN, searchNativeCoins[indexPath.row].denom)
+                let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                baseSheet.sheetDelegate = self
+                baseSheet.sheetType = .SelectSendType
+                baseSheet.selectedCoinDenom = searchNativeCoins[indexPath.row].denom
+                baseSheet.targetChain = selectedChain
+                onStartSheet(baseSheet, 320, 0.6)
                 
             } else if (indexPath.section == 0) {
                 onStartCoinTransferVC(.COSMOS_COIN, searchNativeCoins[indexPath.row].denom)
@@ -909,6 +914,20 @@ extension CosmosCryptoVC: BaseSheetDelegate {
             dappDetail.dappUrl = URL(string: selectedChain.btcStakingExplorerUrl())
             dappDetail.modalPresentationStyle = .fullScreen
             self.present(dappDetail, animated: true)
+            
+        } else if sheetType == .SelectSendType {
+            if let index = result["index"] as? Int,
+               let denom = result["denom"] as? String {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                    if index == 0 {
+                        self.onStartCoinTransferVC(.EVM_COIN, denom)
+                        
+                    } else {
+                        self.onStartCoinTransferVC(.COSMOS_COIN, denom)
+                        
+                    }
+                })
+            }
         }
     }
 }

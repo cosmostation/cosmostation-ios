@@ -69,7 +69,7 @@ class CommonTransfer: BaseVC {
     
     var fromChain: BaseChain!
     var sendAssetType: SendAssetType!
-    var txStyle: TxStyle!                           // .COSMOS_EVM_MAIN_COIN is only changable tx style
+    var txStyle: TxStyle!
     
     var toSendDenom: String!                        // coin denom or contract addresss
     var toSendMsAsset: MintscanAsset!               // to send Coin
@@ -196,7 +196,7 @@ class CommonTransfer: BaseVC {
     
     func onInitIbcInfo() {
         recipientableChains = WUtils.checkIBCrecipientableChains(fromChain, toSendDenom)
-        if (recipientableChains.count > 1) {
+        if (recipientableChains.count > 1 && txStyle == .COSMOS_STYLE) {
             toChainCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickToChain)))
         }
     }
@@ -279,7 +279,7 @@ class CommonTransfer: BaseVC {
         sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
         
         var symbol = ""
-        if (sendAssetType == .COSMOS_COIN || sendAssetType == .COSMOS_EVM_MAIN_COIN) {
+        if (sendAssetType == .COSMOS_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = fromChain.assetDecimal(toSendDenom)
             symbol = fromChain.assetSymbol(toSendDenom)
@@ -348,40 +348,6 @@ class CommonTransfer: BaseVC {
     
     
     
-    
-    func onUpdateTxStyle(_ style: TxStyle) {
-        if (sendAssetType == .COSMOS_EVM_MAIN_COIN && style != txStyle) {
-            txStyle = style
-            if (txStyle == .WEB3_STYLE) {
-                decimal = 18
-                availableAmount = evmFetcher.evmBalances.subtracting(EVM_BASE_FEE)
-                memoCardView.isHidden = true
-                
-            } else if (txStyle == .COSMOS_STYLE) {
-                decimal = toSendMsAsset!.decimals
-                availableAmount = cosmosFetcher.balanceAmount(toSendDenom)
-                if (cosmosTxFee.amount[0].denom == toSendDenom) {
-                    let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
-                    availableAmount = availableAmount.subtracting(feeAmount)
-                }
-                memoCardView.isHidden = false
-                
-            } else if (txStyle == .GNO_STYLE) {
-                decimal = toSendMsAsset!.decimals
-                availableAmount = gnoFetcher.balanceAmount(toSendDenom)
-                if (cosmosTxFee.amount[0].denom == toSendDenom) {
-                    let feeAmount = NSDecimalNumber.init(string: cosmosTxFee.amount[0].amount)
-                    availableAmount = availableAmount.subtracting(feeAmount)
-                }
-                memoCardView.isHidden = false
-            }
-            
-            onInitFee()
-            onUpdateAmountView("")
-        }
-    }
-    
-    
     @objc func onClickToChain() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.targetChain = fromChain
@@ -399,11 +365,6 @@ class CommonTransfer: BaseVC {
             toChainLabel.text = toChain.name
             onUpdateToAddressView("")
             sendBtn.isEnabled = false
-            
-            if (sendAssetType == .COSMOS_EVM_MAIN_COIN && fromChain.tag != toChain.tag) {
-                onUpdateTxStyle(.COSMOS_STYLE)
-                onUpdateTxStyle(.COSMOS_STYLE)
-            }
         }
         
         if fromChain.tag == toChain.tag {
@@ -461,13 +422,6 @@ class CommonTransfer: BaseVC {
             toAddressLabel.text = toAddress
             toAddressLabel.adjustsFontSizeToFitWidth = true
             
-            if (sendAssetType == .COSMOS_EVM_MAIN_COIN) {
-                if (toAddress.starts(with: "0x")) {
-                    onUpdateTxStyle(.WEB3_STYLE)
-                } else {
-                    onUpdateTxStyle(.COSMOS_STYLE)
-                }
-            }
             onSimul()
         }
     }
@@ -521,22 +475,7 @@ class CommonTransfer: BaseVC {
                 
                 toAssetDenomLabel.text = fromChain.coinSymbol
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
-                
-            } else if (sendAssetType == .COSMOS_EVM_MAIN_COIN) {
-                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
-                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-                let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
-                let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
-                WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
-                
-                if (txStyle == .WEB3_STYLE) {
-                    toAssetDenomLabel.text = fromChain.coinSymbol
-                    toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
-                    
-                } else if (txStyle == .COSMOS_STYLE) {
-                    WDP.dpCoin(toSendMsAsset, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
-                }
-                
+                                
             } else if (sendAssetType == .SUI_COIN) {
                 let msPrice = BaseData.instance.getPrice(fromChain.assetGeckoId(toSendDenom))
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
@@ -650,7 +589,10 @@ class CommonTransfer: BaseVC {
             let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
             let feeDpAmount = feeAmount.multiplying(byPowerOf10: -18, withBehavior: getDivideHandler(18))
             let feeValue = feePrice.multiplying(by: feeDpAmount, withBehavior: handler6)
-            WDP.dpCoin(msAsset, feeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            let deAmount = feeAmount.multiplying(byPowerOf10: -18)
+            feeAmountLabel.attributedText = WDP.dpAmount(deAmount.stringValue, feeAmountLabel!.font, 18)
+            feeDenomLabel.text = msAsset.symbol
+            feeSelectImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .SUI_STYLE) {
@@ -702,7 +644,7 @@ class CommonTransfer: BaseVC {
                 WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
                 WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
                 
-                if (sendAssetType == .COSMOS_COIN || (sendAssetType == .COSMOS_EVM_MAIN_COIN && txStyle == .COSMOS_STYLE)) {
+                if (sendAssetType == .COSMOS_COIN) {
                     let balanceAmount = cosmosFetcher.balanceAmount(toSendDenom)
                     if (cosmosTxFee.amount[0].denom == toSendDenom) {
                         if (totalFeeAmount.compare(balanceAmount).rawValue > 0) {
@@ -840,7 +782,7 @@ class CommonTransfer: BaseVC {
                 if (sendAssetType == .COSMOS_WASM) {
                     inChainWasmSendSimul()                                          // Inchain CW20 Send!
                 } else {
-                    inChainCoinSendSimul()                                          // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
+                    inChainCoinSendSimul()                                          // Inchain Coin Send!  (COSMOS_COIN)
                 }
                 
             } else if (toChain.supportCosmos == false) {                            // IBC Eureka Send!
@@ -850,7 +792,7 @@ class CommonTransfer: BaseVC {
                 if (sendAssetType == .COSMOS_WASM) {
                     ibcWasmSendSimul()                                              // CW20 IBC Send!
                 } else {
-                    ibcCoinSendSimul()                                              // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
+                    ibcCoinSendSimul()                                              // Coin IBC Send! (COSMOS_COIN)
                 }
             }
         }
@@ -1935,7 +1877,7 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                     if (sendAssetType == .COSMOS_WASM) {
                         inChainWasmSend()                                                   // Inchain CW20 Send!
                     } else {
-                        inChainCoinSend()                                                   // Inchain Coin Send!  (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
+                        inChainCoinSend()                                                   // Inchain Coin Send!  (COSMOS_COIN)
                     }
                     
                 } else if (toChain.supportCosmos == false) {                                // IBC Eureka Send!
@@ -1945,7 +1887,7 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
                     if (sendAssetType == .COSMOS_WASM) {
                         ibcWasmSend()                                                       // CW20 IBC Send!
                     } else {
-                        ibcCoinSend()                                                       // Coin IBC Send! (COSMOS_COIN, COSMOS_EVM_MAIN_COIN)
+                        ibcCoinSend()                                                       // Coin IBC Send! (COSMOS_COIN)
                     }
                 }
             }
@@ -1959,7 +1901,6 @@ public enum SendAssetType: Int {
     case COSMOS_WASM = 1                    // support IBC, wasm send                 (cw20 tokens)
     case EVM_COIN = 2                       // not support IBC, only support Web3 tx  (evm main coin)
     case EVM_ERC20 = 3                      // not support IBC, only support Web3 tx  (erc20 tokens)
-    case COSMOS_EVM_MAIN_COIN = 4           // support IBC, bank send, Web3 tx        (staking, both tx style)
     
     
     case SUI_COIN = 5                       // sui assets

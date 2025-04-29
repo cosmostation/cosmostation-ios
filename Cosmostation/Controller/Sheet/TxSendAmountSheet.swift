@@ -66,17 +66,6 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
             
-        } else if (sendAssetType == .COSMOS_EVM_MAIN_COIN) {
-            if (txStyle == .WEB3_STYLE) {
-                availableDenom.text = fromChain.coinSymbol
-                let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
-                availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
-                
-            } else if (txStyle == .COSMOS_STYLE) {
-                WDP.dpCoin(toSendMsAsset, availableAmount, nil, availableDenom, availableLabel, decimal)
-            }
-            
-        } else if (sendAssetType == .SUI_COIN) {
             availableDenom.text = fromChain.assetSymbol(toSendDenom)
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)

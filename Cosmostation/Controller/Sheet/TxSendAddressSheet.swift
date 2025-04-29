@@ -158,13 +158,8 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                     onCheckNameServices(userInput!)
                 }
                 
-            } else if (sendType == .COSMOS_EVM_MAIN_COIN && fromChain.tag == toChain.tag) {
-                //둘다지원
-                if (WUtils.isValidEvmAddress(userInput) && (fromChain.tag == toChain.tag)) {
-                    self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
-                    self.dismiss(animated: true)
-                    return
-                } else if (WUtils.isValidBechAddress(toChain, userInput)) {
+            } else if (sendType == .EVM_COIN) {
+                if (WUtils.isValidEvmAddress(userInput)) {
                     self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                     self.dismiss(animated: true)
                     return
@@ -172,17 +167,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                     self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                     return
                 }
-                
-            } else if (sendType == .COSMOS_EVM_MAIN_COIN && fromChain.tag != toChain.tag) {
-                //코스모스만
-                if (WUtils.isValidBechAddress(toChain, userInput)) {
-                    self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
-                    self.dismiss(animated: true)
-                    return
-                } else {
-                    onCheckNameServices(userInput!)
-                }
-                
+
             } else if (sendType == .EVM_ERC20 && fromChain.tag == toChain.tag) {
                 //이더리움만 지원
                 if (WUtils.isValidEvmAddress(userInput)) {
