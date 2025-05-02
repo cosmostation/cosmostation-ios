@@ -63,8 +63,8 @@ class DeriveCell: UITableViewCell {
     }
     
     func bindDeriveChain(_ account: BaseAccount, _ chain: BaseChain, _ selectedList: [String]) {
-        logoImg1.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
         nameLabel.text = chain.name
+        logoImg1.image = chain.getChainImage()
         
         if (chain.supportCosmos && chain.supportEvm) {
             bechAddressLabel.text = chain.bechAddress

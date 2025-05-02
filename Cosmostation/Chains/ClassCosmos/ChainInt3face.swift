@@ -15,6 +15,7 @@ class ChainInt3face: BaseChain  {
         
         name = "Int3face"
         tag = "int3face118"
+        chainImg = "chainInt3face"
         apiName = "int3face"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

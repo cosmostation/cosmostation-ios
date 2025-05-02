@@ -15,6 +15,7 @@ class ChainInitia: BaseChain  {
         
         name = "Initia"
         tag = "initia"
+        chainImg = "chainInitia"
         apiName = "initia"
         accountKeyType = AccountKeyType(.INITIA_Keccak256, "m/44'/60'/0'/0/X")
         

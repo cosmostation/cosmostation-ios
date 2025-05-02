@@ -55,8 +55,7 @@ class ReceiveCell: UITableViewCell {
             
             if let bechQrImage = WUtils.generateQrCode(evmAddress) {
                 rqImgView.image = UIImage(ciImage: bechQrImage)
-                let chainLogo = chain.getChainImage()
-                chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
+                chain.getChainImage().addToCenter(of: rqImgView, width: 60, height: 60)
             }
             
         } else if chain.supportCosmos {
@@ -70,8 +69,7 @@ class ReceiveCell: UITableViewCell {
             
             if let bechQrImage = WUtils.generateQrCode(bechAddress) {
                 rqImgView.image = UIImage(ciImage: bechQrImage)
-                let chainLogo = chain.getChainImage()
-                chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
+                chain.getChainImage().addToCenter(of: rqImgView, width: 60, height: 60)
             }
         } else if !chain.mainAddress.isEmpty {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
@@ -111,8 +109,7 @@ class ReceiveCell: UITableViewCell {
             
             if let qrImage = WUtils.generateQrCode(mainAddress) {
                 rqImgView.image = UIImage(ciImage: qrImage)
-                let chainLogo = chain.getChainImage()
-                chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
+                chain.getChainImage().addToCenter(of: rqImgView, width: 60, height: 60)
             }
             
         }

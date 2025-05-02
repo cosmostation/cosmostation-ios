@@ -15,6 +15,7 @@ class ChainAxelar: BaseChain {
         
         name = "Axelar"
         tag = "axelar118"
+        chainImg = "chainAxelar"
         apiName = "axelar"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

@@ -116,15 +116,19 @@ struct DappDetailSheet: View {
                         ) { chain in
                             HStack(spacing: 2) {
                                 
-                                AsyncImage(url: chain.getChainImage()) { image in
-                                    image
-                                        .resizable()
-                                        .scaledToFit()
-                                } placeholder: {
-                                    Image(uiImage: UIImage(named: "chainDefault")!)
-                                        .resizable()
-                                }
-                                .frame(width: 16, height: 16)
+//                                AsyncImage(url: chain.getChainImage()) { image in
+//                                    image
+//                                        .resizable()
+//                                        .scaledToFit()
+//                                } placeholder: {
+//                                    Image(uiImage: UIImage(named: "chainDefault")!)
+//                                        .resizable()
+//                                }
+//                                .frame(width: 16, height: 16)
+                                Image(uiImage: chain.getChainImage())
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 16, height: 16)
                                 
                                 Text(chain.name.uppercased())
                                     .foregroundStyle(Color.base03)

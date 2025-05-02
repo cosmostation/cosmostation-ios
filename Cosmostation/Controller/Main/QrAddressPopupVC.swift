@@ -91,8 +91,7 @@ class QrAddressPopupVC: BaseVC {
             
         if let qrImage = WUtils.generateQrCode(toDpAddress) {
             rqImgView.image = UIImage(ciImage: qrImage)
-            let chainLogo = selectedChain.getChainImage()
-            chainLogo?.addToCenter(of: rqImgView)
+            selectedChain.getChainImage().addToCenter(of: rqImgView)
         }
     }
 }

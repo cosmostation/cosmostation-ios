@@ -15,6 +15,7 @@ class ChainAndromeda: BaseChain {
         
         name = "Andromeda"
         tag = "andromeda118"
+        chainImg = "chainAndromeda"
         apiName = "andromeda"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

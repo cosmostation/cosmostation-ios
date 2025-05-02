@@ -15,6 +15,7 @@ class ChainCryptoorg: BaseChain  {
         
         name = "Cronos POS"
         tag = "crypto-org394"
+        chainImg = "chainCryptoorg"
         apiName = "crypto-org"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/394'/0'/0/X")
         

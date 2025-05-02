@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "chain_kyve.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

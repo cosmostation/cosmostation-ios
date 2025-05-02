@@ -15,6 +15,7 @@ class ChainLava: BaseChain  {
         
         name = "Lava"
         tag = "lava118"
+        chainImg = "chainLava"
         apiName = "lava"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

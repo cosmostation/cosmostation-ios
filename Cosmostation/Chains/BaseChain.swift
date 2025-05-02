@@ -9,11 +9,13 @@
 import Foundation
 import SwiftyJSON
 import BigInt
+import UIKit
 
 class BaseChain {
     //account and common info
     var name: String!
     var tag: String!
+    var chainImg: String = "chainDefault"
     var isTestnet = false
     var isDefault = true
     var apiName: String!
@@ -449,11 +451,8 @@ extension BaseChain {
         return getChainListParam()["is_support_grc20"].bool ?? false
     }
     
-    func getChainImage() -> URL? {
-        if isOtherChainImage {
-            return URL(string: "https://raw.githubusercontent.com/cosmostation/chainlist/master/chain/\(apiName!)/resource/chain_\(apiName!)2.png")
-        }
-        return URL(string: getChainListParam()["chain_image"].stringValue)
+    func getChainImage() -> UIImage {
+        return UIImage.init(named: chainImg)!
     }
     
     func votingThreshold() -> NSDecimalNumber {

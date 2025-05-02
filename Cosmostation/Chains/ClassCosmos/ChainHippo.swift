@@ -14,6 +14,7 @@ class ChainHippo: BaseChain {
         
         name = "Hippo Protocol"
         tag = "hippocrat"
+        chainImg = "chainHippo"
         apiName = "hippocrat"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/0'/0'/0/X")
         

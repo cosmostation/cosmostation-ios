@@ -35,8 +35,8 @@ class ManageChainCell: UITableViewCell {
     
     
     func bindManageChain(_ chain: BaseChain) {
-        logoImg1.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
         nameLabel.text = chain.name
+        logoImg1.image = chain.getChainImage()
         
         if (chain.getCosmosfetcher()?.getEndpointType() == .UseGRPC) {
             cosmosLayer.isHidden = false

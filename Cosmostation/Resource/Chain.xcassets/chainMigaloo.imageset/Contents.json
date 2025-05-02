@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "chain_migaloo.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

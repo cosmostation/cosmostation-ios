@@ -31,7 +31,7 @@ class BaseImgMsgCheckCell: UITableViewCell {
         
         if let chain {
             networkLabel.text = chain.name
-            networkImageView.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault")) 
+            networkImageView.image = chain.getChainImage()
             dappCountLabel.text = String(dappCount)
 
             if let selectedNetwork {

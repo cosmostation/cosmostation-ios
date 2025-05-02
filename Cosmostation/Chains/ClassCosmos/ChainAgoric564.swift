@@ -15,6 +15,7 @@ class ChainAgoric564: BaseChain {
         
         name = "Agoric"
         tag = "agoric459"
+        chainImg = "chainAgoric"
         apiName = "agoric"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/564'/0'/0/X")
         

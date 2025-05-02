@@ -15,6 +15,7 @@ class ChainSecret118: BaseChain  {
         
         name = "Secret"
         tag = "secret118"
+        chainImg = "chainSecret"
         isDefault = false
         apiName = "secret"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

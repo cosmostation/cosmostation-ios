@@ -15,6 +15,7 @@ class ChainInjective: BaseChain  {
         
         name = "Injective"
         tag = "injective60"
+        chainImg = "chainInjective"
         apiName = "injective"
         accountKeyType = AccountKeyType(.INJECTIVE_Secp256k1, "m/44'/60'/0'/0/X")
         

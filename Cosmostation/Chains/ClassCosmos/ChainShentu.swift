@@ -15,6 +15,7 @@ class ChainShentu: BaseChain {
         
         name = "Shentu"
         tag = "shentu118"
+        chainImg = "chainShentu"
         apiName = "shentu"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

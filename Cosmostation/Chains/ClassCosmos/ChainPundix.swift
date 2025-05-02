@@ -15,6 +15,7 @@ class ChainPundix: BaseChain  {
         
         name = "Pundi-X"
         tag = "pundix60"
+        chainImg = "chainPundix"
         apiName = "pundix"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

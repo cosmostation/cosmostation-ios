@@ -15,6 +15,7 @@ class ChainPassage: BaseChain  {
         
         name = "Passage"
         tag = "passage118"
+        chainImg = "chainPassage"
         apiName = "passage"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

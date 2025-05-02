@@ -15,6 +15,7 @@ class ChainKopi: BaseChain  {
         
         name = "Kopi"
         tag = "kopi118"
+        chainImg = "chainKopi"
         apiName = "kopi"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

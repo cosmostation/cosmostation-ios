@@ -75,8 +75,8 @@ class Portfolio2Cell: UITableViewCell {
     }
     
     func bindChain(_ account: BaseAccount, _ chain: BaseChain) {
-        logoImg1.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
         nameLabel.text = chain.name
+        logoImg1.image = chain.getChainImage()
         
         if (chain.supportCosmos && chain.supportEvm) {
             bechAddressLabel.text = chain.bechAddress

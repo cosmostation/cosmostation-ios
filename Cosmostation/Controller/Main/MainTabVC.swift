@@ -41,14 +41,14 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
     }
     
     var chainImg: UIImageView?
-    func showChainBgImage(_ imgUrl: URL?) {
+    func showChainBgImage(_ uiImge: UIImage) {
         if (chainImg?.isHidden == false) { return }
         let width = UIScreen.main.bounds.size.width
         let height = UIScreen.main.bounds.size.height
         let x = CGFloat.random(in: -150..<(width-150))
         let y = CGFloat.random(in: 300..<(height-150))
         chainImg = UIImageView(frame: CGRectMake(x, y, 300, 300))
-        chainImg?.sd_setImage(with: imgUrl, placeholderImage: UIImage(named: "chainDefault"))
+        chainImg?.image = uiImge
         chainImg?.contentMode = .scaleToFill
         chainImg?.alpha = 0
         

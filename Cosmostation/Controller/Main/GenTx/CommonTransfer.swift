@@ -204,7 +204,7 @@ class CommonTransfer: BaseVC {
     
     func onInitToChain() {
         toChain = fromChain
-        toChainImg.sd_setImage(with: toChain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
+        toChainImg.image = toChain.getChainImage()
         toChainLabel.text = toChain.name
     }
     
@@ -381,8 +381,8 @@ class CommonTransfer: BaseVC {
     func onUpdateToChain(_ chain: BaseChain) {
         if (chain.tag != toChain.tag) {
             toChain = chain
-            toChainImg.sd_setImage(with: toChain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
             toChainLabel.text = toChain.name
+            toChainImg.image = toChain.getChainImage()
             onUpdateToAddressView("")
             sendBtn.isEnabled = false
         }

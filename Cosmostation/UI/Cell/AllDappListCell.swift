@@ -66,7 +66,8 @@ class AllDappListCell: UICollectionViewCell {
             if chains.count == 1 {
                 guard let chain = ALLCHAINS().filter({ $0.apiName == chains.first }).first else { return }
                 DispatchQueue.main.async {
-                    self.chainImageViews.first?.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
+                    
+                    self.chainImageViews.first?.image = chain.getChainImage()
                     self.chainLabel.isHidden = false
                     self.chainLabel.text = chain.apiName.uppercased()
                 }
@@ -80,7 +81,7 @@ class AllDappListCell: UICollectionViewCell {
                         guard let chain = ALLCHAINS().filter({ $0.apiName == chainName }).first else { return }
                         DispatchQueue.main.async {
                             self.chainImageViews[i].isHidden = false
-                            self.chainImageViews[i].sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
+                            self.chainImageViews[i].image = chain.getChainImage()
                         }
                     }
                 } else {
@@ -88,7 +89,7 @@ class AllDappListCell: UICollectionViewCell {
                         guard let chain = ALLCHAINS().filter({ $0.apiName == chains[i] }).first else { return }
                         DispatchQueue.main.async {
                             self.chainImageViews[i].isHidden = false
-                            self.chainImageViews[i].sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
+                            self.chainImageViews[i].image = chain.getChainImage()
                         }
                     }
                     

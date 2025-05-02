@@ -15,6 +15,7 @@ class ChainSge: BaseChain {
         
         name = "Sge"
         tag = "sge118"
+        chainImg = "chainSge"
         apiName = "sge"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

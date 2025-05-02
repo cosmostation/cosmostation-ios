@@ -44,8 +44,7 @@ class PopupReceiveCell: UITableViewCell {
             
             if let qrImage = WUtils.generateQrCode(evmAddress) {
                 rqImgView.image = UIImage(ciImage: qrImage)
-                let chainLogo = chain.getChainImage()
-                chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
+                chain.getChainImage().addToCenter(of: rqImgView, width: 60, height: 60)
             }
             
         } else if (section == 1 && chain.supportCosmos) {
@@ -56,8 +55,7 @@ class PopupReceiveCell: UITableViewCell {
             
             if let qrImage = WUtils.generateQrCode(bechAddress) {
                 rqImgView.image = UIImage(ciImage: qrImage)
-                let chainLogo = chain.getChainImage()
-                chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
+                chain.getChainImage().addToCenter(of: rqImgView, width: 60, height: 60)
             }
             
         } else if (section == 2 && !chain.mainAddress.isEmpty) {
@@ -99,8 +97,7 @@ class PopupReceiveCell: UITableViewCell {
             
             if let qrImage = WUtils.generateQrCode(mainAddress) {
                 rqImgView.image = UIImage(ciImage: qrImage)
-                let chainLogo = chain.getChainImage()
-                chainLogo?.addToCenter(of: rqImgView, width: 60, height: 60)
+                chain.getChainImage().addToCenter(of: rqImgView, width: 60, height: 60)
             }
             
         }

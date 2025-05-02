@@ -15,6 +15,7 @@ class ChainGovgen: BaseChain  {
         
         name = "Govgen"
         tag = "govgen118"
+        chainImg = "chainGovgen"
         apiName = "govgen"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

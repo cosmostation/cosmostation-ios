@@ -15,6 +15,7 @@ class ChainNillion: BaseChain {
         
         name = "Nillion"
         tag = "nillion118"
+        chainImg = "chainNillion"
         apiName = "nillion"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

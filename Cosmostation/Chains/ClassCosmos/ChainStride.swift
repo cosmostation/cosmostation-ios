@@ -15,6 +15,7 @@ class ChainStride: BaseChain {
         
         name = "Stride"
         tag = "stride118"
+        chainImg = "chainStride"
         apiName = "stride"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

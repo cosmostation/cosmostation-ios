@@ -15,6 +15,7 @@ class ChainThor: BaseChain {
         
         name = "ThorChain"
         tag = "thor"
+        chainImg = "chainThor"
         apiName = "thorchain"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/931'/0'/0/X")
         

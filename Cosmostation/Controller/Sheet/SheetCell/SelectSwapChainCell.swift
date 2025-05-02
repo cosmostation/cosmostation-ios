@@ -20,7 +20,7 @@ class SelectSwapChainCell: UITableViewCell {
     }
     
     func onBindCosmosChain(_ chain: BaseChain) {
-        chainLogoImg.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
+        chainLogoImg.image = chain.getChainImage()
         chainNameLabel.text = chain.name
     }
 }

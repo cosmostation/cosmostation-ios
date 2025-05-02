@@ -17,6 +17,7 @@ class ChainIota: BaseChain {
         
         name = "Iota"
         tag = "iota"
+        chainImg = "chainIota"
         apiName = "iota"
         accountKeyType = AccountKeyType(.IOTA_Ed25519, "m/44'/4218'/0'/0'/X'")
     

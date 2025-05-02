@@ -15,6 +15,7 @@ class ChainBand: BaseChain  {
         
         name = "Band"
         tag = "band494"
+        chainImg = "chainBand"
         apiName = "band"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/494'/0'/0/X")
         

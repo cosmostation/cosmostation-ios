@@ -82,13 +82,13 @@ class SendResultSheet: BaseVC {
         self.dismiss(animated: true)
     }
     
-    func showChainBgImage(_ imgUrl: URL?) {
+    func showChainBgImage(_ uiImge: UIImage) {
         let width = UIScreen.main.bounds.size.width
         let height = UIScreen.main.bounds.size.height
         let x = CGFloat.random(in: -100..<(width-100))
         let y = CGFloat.random(in: 200..<(height-100))
         let chainImg = UIImageView(frame: CGRectMake(x, y, 300, 300))
-        chainImg.sd_setImage(with: imgUrl, placeholderImage: UIImage(named: "chainDefault"))
+        chainImg.image = uiImge
         chainImg.contentMode = .scaleToFill
         chainImg.alpha = 0
         

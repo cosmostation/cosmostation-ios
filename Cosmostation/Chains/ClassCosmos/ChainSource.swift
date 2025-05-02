@@ -15,6 +15,7 @@ class ChainSource: BaseChain {
         
         name = "Source"
         tag = "source118"
+        chainImg = "chainSource"
         apiName = "source"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

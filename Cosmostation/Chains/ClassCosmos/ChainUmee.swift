@@ -15,6 +15,7 @@ class ChainUmee: BaseChain {
         
         name = "UX(Umee)"
         tag = "umee118"
+        chainImg = "chainUmee"
         apiName = "umee"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

@@ -15,6 +15,7 @@ class ChainKava459: ChainKavaEVM {
         
         name = "Kava"
         tag = "kava459"
+        chainImg = "chainKava"
         isDefault = false
         apiName = "kava"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/459'/0'/0/X")

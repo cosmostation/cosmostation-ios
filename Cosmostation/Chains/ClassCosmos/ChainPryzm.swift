@@ -16,6 +16,7 @@ class ChainPryzm: BaseChain  {
         
         name = "Pryzm"
         tag = "pryzm"
+        chainImg = "chainPryzm"
         apiName = "pryzm"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

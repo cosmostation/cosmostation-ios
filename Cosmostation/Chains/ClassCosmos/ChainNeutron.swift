@@ -15,6 +15,7 @@ class ChainNeutron: BaseChain {
         
         name = "Neutron"
         tag = "neutron118"
+        chainImg = "chainNeutron"
         apiName = "neutron"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

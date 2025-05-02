@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "chain_saga.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

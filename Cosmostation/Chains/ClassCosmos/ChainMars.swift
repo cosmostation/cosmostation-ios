@@ -15,6 +15,7 @@ class ChainMars: BaseChain  {
         
         name = "Mars"
         tag = "mars-protocol118"
+        chainImg = "chainMars"
         apiName = "mars-protocol"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

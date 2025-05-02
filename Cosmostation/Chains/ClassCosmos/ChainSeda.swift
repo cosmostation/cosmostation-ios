@@ -15,6 +15,7 @@ class ChainSeda: BaseChain {
         
         name = "Seda"
         tag = "seda118"
+        chainImg = "chainSeda"
         apiName = "seda"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

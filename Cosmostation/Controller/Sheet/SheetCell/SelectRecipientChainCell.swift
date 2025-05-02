@@ -28,7 +28,7 @@ class SelectRecipientChainCell: UITableViewCell {
     }
     
     func onBindChain(_ chain: BaseChain, _ toChain: BaseChain, _ fromChain: BaseChain) {
-        chainLogoImg.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
+        chainLogoImg.image = chain.getChainImage()
         chainNameLabel.text = chain.name
 
         ibcSendTag.isHidden = fromChain.tag == chain.tag

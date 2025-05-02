@@ -15,6 +15,7 @@ class ChainAllora: BaseChain {
         
         name = "Allora"
         tag = "allora118"
+        chainImg = "chainAllora"
         apiName = "allora"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

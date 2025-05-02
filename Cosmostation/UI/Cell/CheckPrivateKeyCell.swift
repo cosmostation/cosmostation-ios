@@ -32,8 +32,8 @@ class CheckPrivateKeyCell: UITableViewCell {
     }
     
     func bindPrivateKey(_ account: BaseAccount, _ chain: BaseChain) {
-        logoImg1.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
         nameLabel.text = chain.name
+        logoImg1.image = chain.getChainImage()
         
         hdPathLabel.text = chain.getHDPath(account.lastHDPath)
         pkeyLabel.text = "0x" + chain.privateKey!.toHexString()

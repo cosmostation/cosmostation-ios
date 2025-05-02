@@ -15,6 +15,7 @@ class ChainNomic: BaseChain  {
         
         name = "Nomic"
         tag = "nomic118"
+        chainImg = "chainNomic"
         apiName = "nomic"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

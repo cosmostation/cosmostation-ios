@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "chain_mars-protocol.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

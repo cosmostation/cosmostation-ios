@@ -15,6 +15,7 @@ class ChainFinschia: BaseChain  {
         
         name = "Finschia"
         tag = "finschia438"
+        chainImg = "chainFinshia"
         apiName = "finschia"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/438'/0'/0/X")
         

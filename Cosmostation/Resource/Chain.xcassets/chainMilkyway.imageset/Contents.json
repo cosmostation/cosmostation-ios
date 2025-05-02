@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "chain_milkyway.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -15,6 +15,7 @@ class ChainTerra: BaseChain  {
         
         name = "Terra"
         tag = "terra330"
+        chainImg = "chainTerra"
         apiName = "terra"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/330'/0'/0/X")
         

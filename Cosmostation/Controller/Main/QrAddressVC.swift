@@ -140,10 +140,9 @@ extension QrAddressVC: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension URL {
+extension UIImage {
     func addToCenter(of superView: UIView, width: CGFloat = 80, height: CGFloat = 80) {
-        let overlayImageView = UIImageView()
-        overlayImageView.sd_setImage(with: self, placeholderImage: UIImage(named: "chainDefault"))
+        let overlayImageView = UIImageView(image: self)
         overlayImageView.translatesAutoresizingMaskIntoConstraints = false
         overlayImageView.contentMode = .scaleAspectFit
         superView.addSubview(overlayImageView)

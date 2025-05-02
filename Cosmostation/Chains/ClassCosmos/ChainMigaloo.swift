@@ -15,6 +15,7 @@ class ChainMigaloo: BaseChain  {
         
         name = "Migaloo"
         tag = "migaloo118"
+        chainImg = "chainMigaloo"
         apiName = "migaloo"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

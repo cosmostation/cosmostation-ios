@@ -15,6 +15,7 @@ class ChainJackal: BaseChain  {
         
         name = "Jackal"
         tag = "jackal118"
+        chainImg = "chainJackal"
         apiName = "jackal"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

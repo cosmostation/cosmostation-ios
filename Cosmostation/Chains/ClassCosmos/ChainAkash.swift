@@ -15,6 +15,7 @@ class ChainAkash: BaseChain {
         
         name = "Akash"
         tag = "akash118"
+        chainImg = "chainAkash"
         apiName = "akash"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

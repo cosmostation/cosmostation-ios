@@ -15,6 +15,7 @@ class ChainDhealth: BaseChain {
         
         name = "dHealth"
         tag = "dhealth118"
+        chainImg = "chainDhealth"
         apiName = "dhealth"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/10111'/0'/0/X")
         

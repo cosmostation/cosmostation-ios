@@ -15,6 +15,7 @@ class ChainChihuahua: BaseChain  {
         
         name = "Chihuahua"
         tag = "chihuahua118"
+        chainImg = "chainChihuahua"
         apiName = "chihuahua"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

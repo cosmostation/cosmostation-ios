@@ -15,6 +15,7 @@ class ChainPaloma: BaseChain  {
         
         name = "Paloma"
         tag = "paloma118"
+        chainImg = "chainPaloma"
         apiName = "paloma"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

@@ -15,6 +15,7 @@ class ChainCrescent: BaseChain  {
         
         name = "Crescent"
         tag = "crescent118"
+        chainImg = "chainCrescent"
         apiName = "crescent"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
