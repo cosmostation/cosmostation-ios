@@ -21,6 +21,6 @@ class SelectSwapChainCell: UITableViewCell {
     
     func onBindCosmosChain(_ chain: BaseChain) {
         chainLogoImg.image = chain.getChainImage()
-        chainNameLabel.text = chain.name
+        chainNameLabel.text = chain.getChainName()
     }
 }

@@ -205,7 +205,7 @@ class CommonTransfer: BaseVC {
     func onInitToChain() {
         toChain = fromChain
         toChainImg.image = toChain.getChainImage()
-        toChainLabel.text = toChain.name
+        toChainLabel.text = toChain.getChainName()
     }
     
     func onInitFee() {
@@ -381,7 +381,7 @@ class CommonTransfer: BaseVC {
     func onUpdateToChain(_ chain: BaseChain) {
         if (chain.tag != toChain.tag) {
             toChain = chain
-            toChainLabel.text = toChain.name
+            toChainLabel.text = toChain.getChainName()
             toChainImg.image = toChain.getChainImage()
             onUpdateToAddressView("")
             sendBtn.isEnabled = false

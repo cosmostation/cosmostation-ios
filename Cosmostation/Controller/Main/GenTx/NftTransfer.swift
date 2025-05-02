@@ -140,7 +140,7 @@ class NftTransfer: BaseVC {
     
     func onInitToChain() {
         toChain = fromChain
-        toChainLabel.text = toChain.name
+        toChainLabel.text = toChain.getChainName()
         toChainImg.image = toChain.getChainImage()
     }
     

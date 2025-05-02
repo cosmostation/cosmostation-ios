@@ -156,7 +156,7 @@ class DappListViewController: BaseVC {
     
     func setNetworkUI(_ chain: BaseChain? = nil) {
         if let chain {
-            networkLabel.text = chain.name
+            networkLabel.text = chain.getChainName()
             networkImageView.image = chain.getChainImage()
             
         } else {

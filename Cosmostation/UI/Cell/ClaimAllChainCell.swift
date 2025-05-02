@@ -79,7 +79,7 @@ class ClaimAllChainCell: UITableViewCell {
         let result = model.txResponse
         let cosmosFetcher = chain.cosmosFetcher!
         
-        nameLabel.text = chain.name
+        nameLabel.text = chain.getChainName()
         logoImg1.image = chain.getChainImage()
         if (!chain.isDefault) {
             oldTag.isHidden = false
@@ -168,7 +168,7 @@ class ClaimAllChainCell: UITableViewCell {
         let isBusy = model.isBusy
         let result = model.txResponse
         
-        nameLabel.text = chain.name
+        nameLabel.text = chain.getChainName()
         logoImg1.image = chain.getChainImage()
         if (!chain.isDefault) {
             oldTag.isHidden = false

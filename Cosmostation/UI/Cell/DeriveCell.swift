@@ -63,7 +63,7 @@ class DeriveCell: UITableViewCell {
     }
     
     func bindDeriveChain(_ account: BaseAccount, _ chain: BaseChain, _ selectedList: [String]) {
-        nameLabel.text = chain.name
+        nameLabel.text = chain.getChainName()
         logoImg1.image = chain.getChainImage()
         
         if (chain.supportCosmos && chain.supportEvm) {

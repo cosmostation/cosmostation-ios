@@ -22,7 +22,6 @@ class BaseChain {
     var accountKeyType: AccountKeyType!
     var privateKey: Data?
     var publicKey: Data?
-    var isOtherChainImage = false
     
     //cosmos & grpc & lcd info
     var cosmosEndPointType: CosmosEndPointType = .Unknown
@@ -449,6 +448,10 @@ extension BaseChain {
     
     func isSupportGrc20() -> Bool {
         return getChainListParam()["is_support_grc20"].bool ?? false
+    }
+    
+    func getChainName() -> String {
+        return name
     }
     
     func getChainImage() -> UIImage {

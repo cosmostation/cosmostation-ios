@@ -29,7 +29,7 @@ class SelectRecipientChainCell: UITableViewCell {
     
     func onBindChain(_ chain: BaseChain, _ toChain: BaseChain, _ fromChain: BaseChain) {
         chainLogoImg.image = chain.getChainImage()
-        chainNameLabel.text = chain.name
+        chainNameLabel.text = chain.getChainName()
 
         ibcSendTag.isHidden = fromChain.tag == chain.tag
         

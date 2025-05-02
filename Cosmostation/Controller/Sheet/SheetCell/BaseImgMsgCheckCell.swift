@@ -30,7 +30,7 @@ class BaseImgMsgCheckCell: UITableViewCell {
     func onBindDappNetwork(_ position: Int, _ chain: BaseChain?, _ dappCount: Int,  _ selectedNetwork: BaseChain?) {
         
         if let chain {
-            networkLabel.text = chain.name
+            networkLabel.text = chain.getChainName()
             networkImageView.image = chain.getChainImage()
             dappCountLabel.text = String(dappCount)
 

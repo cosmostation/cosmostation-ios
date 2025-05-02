@@ -75,7 +75,7 @@ class Portfolio2Cell: UITableViewCell {
     }
     
     func bindChain(_ account: BaseAccount, _ chain: BaseChain) {
-        nameLabel.text = chain.name
+        nameLabel.text = chain.getChainName()
         logoImg1.image = chain.getChainImage()
         
         if (chain.supportCosmos && chain.supportEvm) {

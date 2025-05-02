@@ -199,7 +199,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         
         //From UI update
         fromAddressLabel.text = inputChain.bechAddress ?? inputChain.evmAddress
-        inputChainLabel.text = inputChain.name
+        inputChainLabel.text = inputChain.getChainName()
         inputChainImg.image = inputChain.getChainImage()
         if let inputMsAsset = BaseData.instance.getAsset(inputChain.apiName, inputAsset.denom) {
             inputAssetImg.sd_setImage(with: inputMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
@@ -228,7 +228,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         
         //To UI update
         toAddressLabel.text = outputChain.bechAddress ?? outputChain.evmAddress
-        outputChainLabel.text = outputChain.name
+        outputChainLabel.text = outputChain.getChainName()
         outputChainImg.image = outputChain.getChainImage()
         if let outputMsAsset = BaseData.instance.getAsset(outputChain.apiName, outputAsset!.denom) {
             outputAssetImg.sd_setImage(with: outputMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
@@ -270,7 +270,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             if recentInputChainName != inputChain.name {
                 try await fetchTargetInputAssetsBalance()
-                recentInputChainName = inputChain.name
+                recentInputChainName = inputChain.getChainName()
             }
             baseSheet.swapAssets = targetInputAssets.filter { $0.balance != 0 }
             baseSheet.targetChain = inputChain
@@ -295,7 +295,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             if recentOutputChainName != outputChain.name {
                 try await fetchTargetOutputAssetsBalance()
-                recentOutputChainName = outputChain.name
+                recentOutputChainName = outputChain.getChainName()
             }
             baseSheet.swapAssets = targetOutputAssets
             baseSheet.targetChain = outputChain

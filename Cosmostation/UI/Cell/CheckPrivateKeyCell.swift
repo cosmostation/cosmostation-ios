@@ -32,7 +32,7 @@ class CheckPrivateKeyCell: UITableViewCell {
     }
     
     func bindPrivateKey(_ account: BaseAccount, _ chain: BaseChain) {
-        nameLabel.text = chain.name
+        nameLabel.text = chain.getChainName()
         logoImg1.image = chain.getChainImage()
         
         hdPathLabel.text = chain.getHDPath(account.lastHDPath)

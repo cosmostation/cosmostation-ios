@@ -18,7 +18,6 @@ class ChainXpla: BaseChain  {
         isDefault = false
         apiName = "xpla"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/60'/0'/0/X")
-        isOtherChainImage = true
 
         
         cosmosEndPointType = .UseGRPC

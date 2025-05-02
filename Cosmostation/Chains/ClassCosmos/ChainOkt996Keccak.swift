@@ -21,7 +21,6 @@ class ChainOkt996Keccak: ChainOktEVM  {
         isDefault = false
         apiName = "okc"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/996'/0'/0/X")
-        isOtherChainImage = true
         
         
         cosmosEndPointType = .UseLCD

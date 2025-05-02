@@ -21,7 +21,7 @@ class AboutDescriptionCell: UITableViewCell {
     }
     
     func onBindDescription(_ chain: BaseChain, _ json: JSON) {
-        chainNameLabel.text = chain.name
+        chainNameLabel.text = chain.getChainName()
         let languageCode = Locale.current.languageCode
         if (BaseData.instance.getLanguage() == 1 && !json["en"].stringValue.isEmpty) {
             chainDescriptionLabel.text = json["en"].stringValue
