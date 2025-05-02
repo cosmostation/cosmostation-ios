@@ -4505,6 +4505,7 @@
 			children = (
 				04965B452C37C94500403605 /* ChainCosmos_T.swift */,
 				04965B3C2C379A9C00403605 /* ChainArtelaEVM_T.swift */,
+				048CB5412D2E8A2100061729 /* ChainBabylon_T.swift */,
 				E10F88202C1E1B5800EA4272 /* ChainBeraEVM_T.swift */,
 				04A420FE2C77618000C0E1A2 /* ChainBitCoin44_T.swift */,
 				04A421012C77618E00C0E1A2 /* ChainBitCoin49_T.swift */,
@@ -4521,7 +4522,6 @@
 				79909BCC2D8BB51D000CE2ED /* ChainSelf_T.swift */,
 				040AC1832C9BDC5F00427AFD /* ChainStoryEVM_T.swift */,
 				04E4138E2D27C788001378D3 /* ChainTabiEVM_T.swift */,
-				048CB5412D2E8A2100061729 /* ChainBabylon_T.swift */,
 				79813A792D5477FC0083A1F5 /* ChainXion_T.swift */,
 				7948D6762D911E3F005208B2 /* ChainXrplEVM_T.swift */,
 				7948D6722D91035B005208B2 /* ChainZkCloud_T.swift */,

@@ -15,6 +15,7 @@ class ChainSelf_T: ChainSelf {
         
         name = "SelfChain Testnet"
         tag = "selfchain_T"
+        chainImg = "chainSelf_T"
         isTestnet = true
         apiName = "selfchain-testnet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

@@ -18,6 +18,7 @@ class ChainBitCoin86: BaseChain {
         
         name = "Bitcoin"
         tag = "bitcoin86"
+        chainImg = "chainBitcoin"
         apiName = "bitcoin"
         accountKeyType = AccountKeyType(.BTC_Taproot, "m/86'/0'/0'/0/X")
         

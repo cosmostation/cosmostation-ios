@@ -15,6 +15,7 @@ class ChainXion_T: ChainXion {
         
         name = "Xion Testnet"
         tag = "xion118_T"
+        chainImg = "chainXion_T"
         isTestnet = true
         apiName = "xion-testnet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

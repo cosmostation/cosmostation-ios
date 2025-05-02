@@ -15,6 +15,7 @@ class ChainCosmos_T: BaseChain {
         
         name = "Cosmos Testnet"
         tag = "cosmos118_T"
+        chainImg = "chainMantra_T"
         isTestnet = true
         apiName = "cosmos-testnet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

@@ -8,13 +8,14 @@
 
 import Foundation
 
-class ChainMantra_T: BaseChain  {
+class ChainMantra_T: ChainMantra  {
     
     override init() {
         super.init()
         
         name = "Mantra Testnet"
         tag = "mantra_T"
+        chainImg = "chainMantra_T"
         isTestnet = true
         apiName = "mantra-testnet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")

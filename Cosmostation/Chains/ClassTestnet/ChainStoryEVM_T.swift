@@ -15,6 +15,7 @@ class ChainStoryEVM_T: ChainStoryEVM  {
         
         name = "Story Testnet"
         tag = "story_T"
+        chainImg = "chainStory_T"
         isTestnet = true
         apiName = "story-testnet"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")

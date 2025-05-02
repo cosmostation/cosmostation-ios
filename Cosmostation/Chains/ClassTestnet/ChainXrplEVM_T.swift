@@ -14,6 +14,7 @@ class ChainXrplEVM_T: ChainXrplEVM {
         
         name = "XRPL EVM Sidechain Testnet"
         tag = "xrplevm60_T"
+        chainImg = "chainXrplside_T"
         isTestnet = true
         apiName = "xrplevm-testnet"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
