@@ -15,6 +15,7 @@ class ChainPolygon: BaseChain  {
         
         name = "Polygon"
         tag = "polygon60"
+        chainImg = "chainPolygon"
         apiName = "polygon"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

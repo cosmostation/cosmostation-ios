@@ -15,6 +15,7 @@ class ChainForma: BaseChain  {
         
         name = "Forma"
         tag = "forma60"
+        chainImg = "chainForma"
         apiName = "forma"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

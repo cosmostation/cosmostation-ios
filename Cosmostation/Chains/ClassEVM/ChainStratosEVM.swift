@@ -15,6 +15,7 @@ class ChainStratosEVM: BaseChain {
         
         name = "Stratos"
         tag = "stratos60"
+        chainImg = "chainStratos_E"
         apiName = "stratos"
         accountKeyType = AccountKeyType(.STRATOS_Keccak256, "m/44'/60'/0'/0/X")
         

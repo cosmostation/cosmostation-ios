@@ -15,6 +15,7 @@ class ChainArtelaEVM: BaseChain  {
         
         name = "Artela"
         tag = "artela60"
+        chainImg = "chainArtela_E"
         apiName = "artela"
         accountKeyType = AccountKeyType(.ARTELA_Keccak256, "m/44'/60'/0'/0/X")
         

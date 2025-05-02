@@ -15,6 +15,7 @@ class ChainImuaEVM: BaseChain  {
         
         name = "Imua"
         tag = "imua60"
+        chainImg = "chainImua_E"
         apiName = "imua"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

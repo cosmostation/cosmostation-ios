@@ -15,6 +15,7 @@ class ChainRouterEVM: BaseChain {
         
         name = "RouterChain"
         tag = "router60"
+        chainImg = "chainRouter_E"
         apiName = "routerchain"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

@@ -15,6 +15,7 @@ class ChainDymensionEVM: BaseChain  {
         
         name = "Dymension"
         tag = "dymension60"
+        chainImg = "chainDymension_E"
         apiName = "dymension"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         

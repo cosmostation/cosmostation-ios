@@ -20,6 +20,7 @@ class ChainOktEVM: BaseChain {
         
         name = "OKT"
         tag = "okt60_Keccak"
+        chainImg = "chainOkt_E"
         apiName = "okc"
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
