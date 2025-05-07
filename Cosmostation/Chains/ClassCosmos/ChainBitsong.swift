@@ -20,12 +20,12 @@ class ChainBitsong: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/639'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "ubtsg"
         bechAccountPrefix = "bitsong"
         validatorPrefix = "bitsongvaloper"
-        grpcHost = "grpc-bitsong.cosmostation.io"
-        lcdUrl = "https://lcd-bitsong.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://lcd.explorebitsong.com/"
     }
     
 }
