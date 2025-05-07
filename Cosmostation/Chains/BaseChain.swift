@@ -785,7 +785,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainProvenance())
     result.append(ChainPryzm())
     result.append(ChainPundix())
-    result.append(ChainQuasar())
     result.append(ChainQuicksilver())
     result.append(ChainRealioEVM())
     result.append(ChainRegen())
@@ -803,7 +802,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainShidoEVM())                      //EVM
     result.append(ChainSommelier())
     result.append(ChainSource())
-    result.append(ChainStafi())
     result.append(ChainStargaze())
     result.append(ChainStoryEVM())                      //EVM
     result.append(ChainStratosEVM())                    //EVM
@@ -850,6 +848,8 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainCudos())
 //    result.append(ChainEmoney())
 //    result.append(ChainMars())
+//    result.append(ChainQuasar())
+//    result.append(ChainStafi())
 //    result.append(ChainStarname())
 //    
 //    result.append(ChainCosmos_T())
