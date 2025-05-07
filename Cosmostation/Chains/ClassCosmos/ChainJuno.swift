@@ -25,7 +25,7 @@ class ChainJuno: BaseChain  {
         bechAccountPrefix = "juno"
         validatorPrefix = "junovaloper"
         grpcHost = "juno-grpc.chainroot.io"
-        lcdUrl = "https://juno-api.chainroot.io/"
+        lcdUrl = "https://juno-rest.publicnode.com/"
     }
     
 }
