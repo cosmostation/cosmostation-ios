@@ -199,6 +199,35 @@ class SelectEndpointCell: UITableViewCell {
         }
     }
     
+    func onBindIotaRpcEndpoint(_ position: Int, _ chain: ChainIota) {
+        if let iotaFetcher = chain.getIotaFetcher() {
+            let endpoint = chain.getChainListParam()["rpc_endpoint"].arrayValue[position]
+            providerLabel.text = endpoint["provider"].string
+            endpointLabel.text = endpoint["url"].string?.replacingOccurrences(of: "https://", with: "")
+            endpointLabel.adjustsFontSizeToFitWidth = true
+            
+            let checkTime = CFAbsoluteTimeGetCurrent()
+            let url = endpoint["url"].stringValue.hasSuffix("/") ? String(endpoint["url"].stringValue.dropLast()) : endpoint["url"].stringValue
+
+            if iotaFetcher.getIotaRpc().contains(url) {
+                seletedImg.isHidden = false
+                rootView.backgroundColor = .color08
+            }
+            
+            let param: Parameters = ["method": "iota_getChainIdentifier", "params": [], "id" : 1, "jsonrpc" : "2.0"]
+            AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in
+                switch response.result {
+                case .success :
+                    self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
+                    self.configureSpeedLabel()
+                    
+                case .failure:
+                    self.configureClosedNode()
+                }
+            }
+        }
+    }
+
     func onBindGnoRpcEndpoint(_ position: Int, _ chain: BaseChain) {
         if let gnoFetcher = (chain as? ChainGno)?.getGnoFetcher() {
             let endpoint = chain.getChainListParam()["cosmos_rpc_endpoint"].arrayValue[position]

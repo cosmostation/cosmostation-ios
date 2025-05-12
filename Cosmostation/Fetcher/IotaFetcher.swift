@@ -243,16 +243,15 @@ class IotaFetcher {
         return iotaBalance.compare(baseFee(txType)).rawValue > 0
     }
     
-    //test
     func baseFee(_ txType: TxType?) -> NSDecimalNumber {
         if (txType == .IOTA_SEND_COIN || txType == .IOTA_SEND_NFT) {
-            return SUI_FEE_SEND
+            return IOTA_FEE_SEND
         } else if (txType == .IOTA_STAKE) {
-            return SUI_FEE_STAKE
+            return IOTA_FEE_STAKE
         } else if (txType == .IOTA_UNSTAKE) {
-            return SUI_FEE_UNSTAKE
+            return IOTA_FEE_UNSTAKE
         }
-        return SUI_FEE_DEFAULT
+        return IOTA_FEE_DEFAULT
     }
     
     
@@ -362,7 +361,7 @@ extension IotaFetcher {
     }
     
     func unsafeStake(_ sender: String, _ coins: [String], _ amount: String, _ validator: String, _ gasBudget: String) async throws -> String? {
-        if let result = try? await AF.request("https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildStakingRequest",
+        if let result = try? await AF.request("https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildIotaStakingRequest",
                                               method: .post,
                                               parameters: ["address" : sender, "validatorAddress" : validator, "gas" : gasBudget, "amount" : amount, "rpc": getIotaRpc()],
                                               encoder: JSONParameterEncoder.default).serializingData().value {
@@ -374,7 +373,7 @@ extension IotaFetcher {
     }
     
     func unsafeUnstake(_ sender: String, _ objectId: String, _ gasBudget: String) async throws -> String? {
-        if let result = try? await AF.request("https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildUnstakingRequest",
+        if let result = try? await AF.request("https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildIotaUnstakingRequest",
                                               method: .post,
                                               parameters: ["address" : sender, "objectId" : objectId, "gas" : gasBudget, "rpc": getIotaRpc()],
                                               encoder: JSONParameterEncoder.default).serializingData().value {
@@ -411,7 +410,7 @@ extension IotaFetcher {
     }
     
     func signAfterAction(params:JSON, messageId: JSON) async throws -> String? { //
-        let url = "https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildSuiTransaction"
+        let url = "https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildIotaTransaction"
         let parameters = [
             "rpc": getIotaRpc(),
             "txBlock": params["transactionBlockSerialized"].stringValue,

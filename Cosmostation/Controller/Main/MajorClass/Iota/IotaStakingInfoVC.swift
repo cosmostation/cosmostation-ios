@@ -199,8 +199,8 @@ class IotaStakingInfoVC: BaseVC {
         }
         
         let iotaBalance = iotaFetcher.balanceAmount(IOTA_MAIN_DENOM)
-        if (iotaBalance.compare(IOTA_MIN_STAKE.adding(IOTA_FEE_STAKE)).rawValue < 0) {      //test
-            onShowToast(NSLocalizedString("error_not_enough_iota_stake", comment: ""))       //TEST
+        if (iotaBalance.compare(IOTA_MIN_STAKE.adding(IOTA_FEE_STAKE)).rawValue < 0) {
+            onShowToast(NSLocalizedString("error_not_enough_iota_stake", comment: ""))
             return
         }
 

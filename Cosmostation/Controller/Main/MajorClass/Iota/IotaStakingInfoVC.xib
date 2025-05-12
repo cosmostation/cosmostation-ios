@@ -107,11 +107,11 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="HHM-mf-RTs">
-                    <rect key="frame" x="0.0" y="209.66666666666669" width="393" height="554.33333333333326"/>
+                    <rect key="frame" x="0.0" y="209.66666666666669" width="393" height="538.33333333333326"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SLI-sh-H5j" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="8" y="772" width="377" height="54"/>
+                    <rect key="frame" x="8" y="756" width="377" height="54"/>
                     <color key="backgroundColor" name="_primary"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="rnM-yK-YPx"/>
@@ -136,7 +136,7 @@
                     </constraints>
                 </view>
                 <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEmptyStake" translatesAutoresizingMaskIntoConstraints="NO" id="CL5-c6-ATn">
-                    <rect key="frame" x="86.666666666666686" y="377" width="220" height="220"/>
+                    <rect key="frame" x="86.666666666666686" y="369" width="220" height="220"/>
                 </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -147,10 +147,9 @@
                 <constraint firstItem="SLI-sh-H5j" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="9zY-4M-c7M"/>
                 <constraint firstItem="HHM-mf-RTs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="BF1-Yp-DZG"/>
                 <constraint firstItem="ghC-fW-Ptf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="C3v-aR-qTD"/>
-                <constraint firstItem="SLI-sh-H5j" firstAttribute="top" secondItem="HHM-mf-RTs" secondAttribute="bottom" constant="8" id="CiU-E7-iP3"/>
                 <constraint firstItem="CL5-c6-ATn" firstAttribute="centerY" secondItem="HHM-mf-RTs" secondAttribute="centerY" id="DAt-eT-4P5"/>
-                <constraint firstItem="SLI-sh-H5j" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="8" id="Gjy-Zy-nAt"/>
                 <constraint firstItem="HHM-mf-RTs" firstAttribute="top" secondItem="ghC-fW-Ptf" secondAttribute="bottom" constant="10" id="M9r-hy-iNk"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="SLI-sh-H5j" secondAttribute="bottom" constant="8" id="MpU-9g-ecu"/>
                 <constraint firstItem="9lQ-hQ-J6I" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="QXl-iG-cZy"/>
                 <constraint firstItem="9lQ-hQ-J6I" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QqJ-Zw-je2"/>
                 <constraint firstItem="ghC-fW-Ptf" firstAttribute="top" secondItem="dzf-4k-1Cd" secondAttribute="bottom" constant="10" id="ZYf-0l-msX"/>

@@ -106,6 +106,7 @@
             <connections>
                 <outlet property="checkImageView" destination="v8a-AQ-AaX" id="QPG-lm-54s"/>
                 <outlet property="dappCountLabel" destination="n1e-la-lro" id="cJS-pT-fc1"/>
+                <outlet property="descriptionView" destination="at7-xi-9dC" id="mj6-wk-ziM"/>
                 <outlet property="networkImageView" destination="d84-Sr-g72" id="87V-l3-91o"/>
                 <outlet property="networkLabel" destination="CJZ-TY-hAL" id="YXq-cP-zji"/>
                 <outlet property="selectedColorView" destination="GdS-3f-bdV" id="65H-Qo-wvH"/>

@@ -177,7 +177,7 @@ public class BaseAccount {
             
         } else if (privateKeyString != nil) {
             if !BaseData.instance.getHideLegacy() {
-                self.allChains = self.allChains.filter { $0.isDefault || $0.tag == "kava459" || $0 is ChainBitCoin86}
+                self.allChains = self.allChains.filter { $0.isDefault || $0.tag == "kava459" }
             }
             Task {
                 await allChains.concurrentForEach { chain in
@@ -277,7 +277,11 @@ public class BaseAccount {
             } else if let suiFetcher = (chain as? ChainSui)?.getSuiFetcher() {
                 chain.allCoinValue = suiFetcher.allValue()
                 chain.allCoinUSDValue = suiFetcher.allValue(true)
-
+                
+            } else if let iotaFetcher = (chain as? ChainIota)?.getIotaFetcher() {
+                chain.allCoinValue = iotaFetcher.allValue()
+                chain.allCoinUSDValue = iotaFetcher.allValue(true)
+                
             } else if let btcFetcher = (chain as? ChainBitCoin86)?.getBtcFetcher() {
                 chain.allCoinValue = btcFetcher.allValue()
                 chain.allCoinUSDValue = btcFetcher.allValue(true)

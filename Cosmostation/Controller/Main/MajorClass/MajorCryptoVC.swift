@@ -270,7 +270,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             self.present(transfer, animated: true)
             
         } else if selectedChain is ChainIota {
-            if (selectedChain.isTxFeePayable(.IOTA_SEND_COIN) == false) {    //test
+            if (selectedChain.isTxFeePayable(.IOTA_SEND_COIN) == false) {
                 onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
                 return
             }

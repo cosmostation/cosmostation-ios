@@ -86,17 +86,32 @@ class AboutStakingCell: UITableViewCell {
     func onBindMajorInfo(_ chain: BaseChain, _ json: JSON) {
         if let suiChain = chain as? ChainSui {
             onBindSuiStakingInfo(suiChain, json)
+        } else if let iotaChain = chain as? ChainIota {
+            onBindIotaStakingInfo(iotaChain, json)
         }
     }
     
     func onBindSuiStakingInfo(_ suiChain: ChainSui, _ json: JSON) {
-        if let symbol = json["params"]["chainlist_params"]["main_asset_symbol"].string, suiChain.isStakeEnabled() {
+        if let symbol = json["params"]["chainlist_params"]["staking_asset_symbol"].string, suiChain.isStakeEnabled() {
             stakingDenomLabel.text = symbol
         }
         
         unbondingTimeLabel.text = NSLocalizedString("str_instant", comment: "")
         
         if let apy = suiChain.suiFetcher?.suiApys[0]["apy"].stringValue {
+            let nf = WUtils.getNumberFormatter(2)
+            let formatApr = nf.string(from: NSDecimalNumber(string: apy).multiplying(byPowerOf10: 2))!
+            stakingAprLabel.attributedText = WUtils.getDpAttributedString(formatApr, 2, stakingAprLabel.font)
+        }
+    }
+    func onBindIotaStakingInfo(_ iotaChain: ChainIota, _ json: JSON) {
+        if let symbol = json["params"]["chainlist_params"]["staking_asset_symbol"].string, iotaChain.isStakeEnabled() {
+            stakingDenomLabel.text = symbol
+        }
+        
+        unbondingTimeLabel.text = NSLocalizedString("str_instant", comment: "")
+        
+        if let apy = iotaChain.getIotaFetcher()?.iotaApys[0]["apy"].stringValue {
             let nf = WUtils.getNumberFormatter(2)
             let formatApr = nf.string(from: NSDecimalNumber(string: apy).multiplying(byPowerOf10: 2))!
             stakingAprLabel.attributedText = WUtils.getDpAttributedString(formatApr, 2, stakingAprLabel.font)

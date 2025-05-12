@@ -62,6 +62,8 @@ class DappSuiSignRequestSheet: BaseVC {
         Task {
             if method == "sui_signAndExecuteTransaction" || method == "sui_signAndExecuteTransactionBlock" || method == "sui_signTransaction" || method == "sui_signTransactionBlock" {
                 await dryrun()
+            } else if method == "iota_signAndExecuteTransaction" || method == "iota_signAndExecuteTransactionBlock" || method == "iota_signTransaction" || method == "iota_signTransactionBlock" {
+                await iotaDryrun()
             }
             
             DispatchQueue.main.async {
@@ -71,7 +73,7 @@ class DappSuiSignRequestSheet: BaseVC {
     }
     
     override func setLocalizedString() {
-        if (method == "sui_signMessage") || (method == "sui_signPersonalMessage") {
+        if (method == "sui_signMessage") || (method == "sui_signPersonalMessage") || (method == "iota_signMessage") || (method == "iota_signPersonalMessage") {
             requestTitle.text = NSLocalizedString("str_permit_request", comment: "")
         } else {
             requestTitle.text = NSLocalizedString("str_tx_request", comment: "")
@@ -90,7 +92,7 @@ class DappSuiSignRequestSheet: BaseVC {
         barView.isHidden = false
         confirmBtn.isEnabled = true
         
-        if (method == "sui_signMessage") || (method == "sui_signPersonalMessage") {
+        if (method == "sui_signMessage") || (method == "sui_signPersonalMessage") || (method == "iota_signMessage") || (method == "iota_signPersonalMessage") {
             let data = Data(base64Encoded: requestToSign!["message"].stringValue)
             if let decode = String(data: data!, encoding: .utf8) {
                 toSignTextView.text = decode
@@ -107,6 +109,7 @@ class DappSuiSignRequestSheet: BaseVC {
 
     func onInitFeeView() {
         feeImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? selectedChain.coinSymbol), placeholderImage: UIImage(named: "tokenDefault"))
+        feeLabel.text = selectedChain.coinSymbol
         feeDenomLabel.text = selectedChain.coinSymbol
         onUpdateFeeView()
     }
@@ -153,7 +156,40 @@ class DappSuiSignRequestSheet: BaseVC {
             }
         }
     }
-    
+    private func iotaDryrun() async {
+        guard let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() else { return }
+        
+        do {
+            if let response = try await iotaFetcher.iotaDryrun(bytes) {
+                if let error = response["error"]["message"].string {
+                    print("fetching error: \(error)")
+                    DispatchQueue.main.async {
+                        self.dismissWithFail()
+                    }
+                    return
+                }
+                
+                suiFeeBudget = {
+                    let gasUsed = response["result"]["effects"]["gasUsed"]
+                    let storageCost = gasUsed["storageCost"].intValue - gasUsed["storageRebate"].intValue
+                    let cost = gasUsed["computationCost"].intValue + (storageCost > 0 ? storageCost : 0)
+                    return NSDecimalNumber(value: cost)
+                }()
+                
+                onUpdateFeeView()
+                
+                let gasData = response["result"]["input"]["gasData"]
+                displayToSign!["gasData"] = gasData
+            }
+            
+        } catch {
+            print("fetching error: \(error)")
+            DispatchQueue.main.async {
+                self.dismissWithFail()
+            }
+        }
+    }
+
     func dismissWithFail() {
         webSignDelegate?.onCancleInjection("Cancel", requestToSign!, messageId!)
         dismiss(animated: true)
@@ -191,6 +227,28 @@ class DappSuiSignRequestSheet: BaseVC {
             webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
             
         }
+        
+        else if (method == "iota_signTransactionBlock" || method == "iota_signTransaction") {
+            let data: JSON = ["bytes": bytes, "signature": Signer.iotaSignatures(selectedChain, bytes)]
+            webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
+
+        } else if (method == "iota_signAndExecuteTransactionBlock") || (method == "iota_signAndExecuteTransaction") {
+            guard let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() else { return }
+            Task {
+                let options = requestToSign!["options"]
+                if let data = try await iotaFetcher.iotaExecuteTx(self.bytes, Signer.iotaSignatures(selectedChain, bytes), options) {
+                    webSignDelegate?.onAcceptInjection(data["result"], requestToSign!, messageId!)
+                    
+                } else {
+                    webSignDelegate?.onCancleInjection("Fail iotaExecuteTx request", requestToSign!, messageId!)
+                }
+            }
+        } else if (method == "iota_signMessage") || (method == "iota_signPersonalMessage") {
+            guard let messageBytes = requestToSign?["message"] else { return }
+            let data: JSON = ["bytes": messageBytes, "signature": Signer.iotaSignatures(selectedChain, bytes)]
+            webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
+        }
+        
         dismiss(animated: true)
     }
 }

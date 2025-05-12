@@ -434,7 +434,7 @@
 "msg_kava_earn_msg" = "Earn KAVA. Take advantage of Farming strategies compound your earnings.";
 "msg_create_another_msg" = "You can create a new account using the same mnemonic, but with a different HD Path.\n\nIn general, there is a possibility that it may not be compatible with other wallets, and it is recommended to be used only by those with background knowledge of crypto keys and HD Path.";
 "msg_enter_encription_key" = "Enter the Encryption Key displayed on the screen to restore your account.";
-"msg_addressbook_add" = "For convenience, you can register frequently used addresses.";
+"msg_addressbook_add" = "Register your frequently used addresses in the address book to streamline your future transactions.";
 "msg_addressbook_memo_changed" = "The memo has changed compared to the existing address book.\nWould you like to update with new memo?";
 "msg_addressbook_updated" = "The address book has been updated.";
 "msg_swap_warn" = "This wallet is a non-custodial service, meaning the user is responsible for all transaction executions. Always carefully verify the details before sending any transactions.\n\nWe do not take responsibility for any losses incurred from transactions made through the app.";
@@ -467,9 +467,9 @@
 "msg_babylon_active_state" = "The Active state means that the Pending state has ended, and the executed actions are now fully activated. In this state, all staking functions requested by the user are working as intended.";
 "title_btc_staking_additional_fee" = "Additional Fee in $%@";
 "msg_btc_staking_additional_fee" = "%@ staking requires an additional fee in %@, deducted\nfrom your %@ balance at %@.";
-"msg_insufficient_balance" = "수수료로 사용할 %@ 코인이 부족합니다.";
-
-
+"msg_insufficient_balance" = "Insufficient %@ balance for fees.";
+"msg_evm_universal_address" = "A single address can connect multiple EVM networks, but not recommended for exchanges.";
+"msg_cosmos_memo" = "Depositing Cosmos ecosystem coins to a centralized exchange without a memo may result in asset loss.";
 
 "guide_msg_cosmos" = "Decentralized network of blockchains \npowered by Tendermint BFT and ABCI";
 "guide_msg_iris" = "Interchain service infrastructure \nfor a distributed business ecosystem";
@@ -546,7 +546,7 @@
 "setting_hide_legacy" = "Enable Old Addresses";
 "setting_show_testnet" = "Enable Testnet";
 "setting_chain_title" = "Manage Chains";
-"setting_addressbook_title" = "Address Book";
+"setting_addressbook_title" = "Add Address Book";
 "setting_language_title" = "Language";
 "setting_theme_title" = "Theme";
 "setting_currecny_title" = "Currency";

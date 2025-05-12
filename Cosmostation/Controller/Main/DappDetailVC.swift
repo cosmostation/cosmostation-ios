@@ -178,6 +178,13 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         }
     }
 
+    
+    private func onInitChainIota() {
+        if (targetChain == nil || targetChain.apiName != "iota") {
+            targetChain = allChains.filter({ $0.apiName == "iota" }).first!
+        }
+    }
+
     private func onInitChainBitcoin() {
         if (btcTargetChain == nil) {
             
@@ -757,6 +764,54 @@ extension DappDetailVC: WKScriptMessageHandler {
                 let params = messageJSON["params"]
                 popUpBtcRequestSign(method, params, bodyJSON["messageId"])
                 
+            }
+            
+            //Handle IOTA Request
+            else if (method == "iota_getAccount") {
+                onInitChainIota()
+                guard let pubKey = targetChain.publicKey?.hexEncodedString() else { return }
+                let data: JSON = ["address": targetChain.mainAddress, "publicKey": "0x" + pubKey]
+                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "iota_getChain") {
+                injectionRequestApprove("mainnet", messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "iota_signTransactionBlock" || method == "iota_signTransaction") {
+                Task {
+                    let toSign = messageJSON["params"]
+                    guard let iotaFetcher = (targetChain as? ChainIota)?.getIotaFetcher() else { return }
+                    guard let hex = try await iotaFetcher.signAfterAction(params: toSign, messageId: bodyJSON["messageId"]) else {
+                        self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])
+                        return
+                    }
+                    self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
+                }
+
+            } else if (method == "iota_signAndExecuteTransactionBlock") || (method == "iota_signAndExecuteTransaction") {  // v1 || v2
+                Task {
+                    let toSign = messageJSON["params"]
+                    guard let iotaFetcher = (targetChain as? ChainIota)?.getIotaFetcher() else { return }
+                    guard let hex = try await iotaFetcher.signAfterAction(params: toSign, messageId: bodyJSON["messageId"]) else {
+                        self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])
+                        return
+                    }
+                    self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
+                }
+                
+            } else if (method == "iota_signMessage") || (method == "iota_signPersonalMessage") {  // v1 || v2
+                Task {
+                    let toSign = messageJSON["params"]
+                    guard let iotaFetcher = (targetChain as? ChainIota)?.getIotaFetcher() else { return }
+                    guard toSign["accountAddress"].stringValue.lowercased() == self.targetChain.mainAddress.lowercased() else {
+                        self.injectionRequestReject("Wrong address", messageJSON, bodyJSON["messageId"])
+                        return
+                    }
+                    guard let hex = try await iotaFetcher.signAfterAction(params: toSign, messageId: bodyJSON["messageId"]) else {
+                        self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])
+                        return
+                    }
+                    self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
+                }
             }
 
             else {

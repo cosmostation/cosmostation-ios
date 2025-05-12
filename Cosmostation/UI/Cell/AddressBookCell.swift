@@ -32,15 +32,13 @@ class AddressBookCell: UITableViewCell {
     func bindAddressBook(_ book: AddressBook) {
         if (book.dpAddress.starts(with: "0x")) {
             memoLabel.isHidden = true
-            if WUtils.isValidSuiAdderss(book.dpAddress) {
-                logoImg1.image = UIImage.init(named: "chainSui")
-            }
         } else {
             memoLabel.isHidden = false
-//            if let chain = All_IBC_Chains().filter({ $0.name == book.chainName }).first {
-//                logoImg1.sd_setImage(with: chain.getChainImage(), placeholderImage: UIImage(named: "chainDefault"))
-//            }
-            if let chain = ALLCHAINS().filter({ $0.name.lowercased() == book.chainName.lowercased() }).first {
+        }
+        if book.chainName == EVM_UNIVERSAL {
+            logoImg1.image = UIImage(named: book.chainName)
+        } else {
+            if let chain = ALLCHAINS().filter({ $0.tag.lowercased() == book.chainName.lowercased() }).first {
                 logoImg1.image = chain.getChainImage()
             }
         }

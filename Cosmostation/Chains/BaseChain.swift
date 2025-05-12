@@ -738,7 +738,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainInjective())
     result.append(ChainInt3face())
     result.append(ChainInitia())
-//    result.append(ChainIota())
+    result.append(ChainIota())
     result.append(ChainIris())
     result.append(ChainIxo())
     result.append(ChainJackal())

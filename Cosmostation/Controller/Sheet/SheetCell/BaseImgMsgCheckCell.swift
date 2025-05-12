@@ -13,6 +13,7 @@ class BaseImgMsgCheckCell: UITableViewCell {
     @IBOutlet weak var selectedColorView: UIView!
     @IBOutlet weak var networkImageView: UIImageView!
     @IBOutlet weak var networkLabel: UILabel!
+    @IBOutlet weak var descriptionView: UIStackView!
     @IBOutlet weak var dappCountLabel: UILabel!
     @IBOutlet weak var checkImageView: UIImageView!
     
@@ -50,6 +51,42 @@ class BaseImgMsgCheckCell: UITableViewCell {
             networkLabel.text = "All Network"
             networkImageView.image = UIImage(named: "iconNetwork")
             dappCountLabel.text = String(dappCount)
+            
+            if chain == nil && selectedNetwork == nil {
+                selectedColorView.isHidden = false
+                checkImageView.isHidden = false
+                contentView.backgroundColor = .color08
+            } else {
+                selectedColorView.isHidden = true
+                checkImageView.isHidden = true
+                contentView.backgroundColor = .clear
+            }
+        }
+        
+    }
+
+    func onBindNetwork(_ position: Int, _ chain: BaseChain?, _ selectedNetwork: BaseChain?) {
+        descriptionView.isHidden = true
+        
+        if let chain {
+            networkLabel.text = chain.getChainName()
+            networkImageView.image = chain.getChainImage()
+
+            if let selectedNetwork {
+                if chain.apiName == selectedNetwork.apiName {
+                    selectedColorView.isHidden = false
+                    checkImageView.isHidden = false
+                    contentView.backgroundColor = .color08
+                } else {
+                    selectedColorView.isHidden = true
+                    checkImageView.isHidden = true
+                    contentView.backgroundColor = .clear
+                }
+            }
+            
+        } else {
+            networkLabel.text = "EVM Networks (Universal)"
+            networkImageView.image = UIImage(named: EVM_UNIVERSAL)
             
             if chain == nil && selectedNetwork == nil {
                 selectedColorView.isHidden = false

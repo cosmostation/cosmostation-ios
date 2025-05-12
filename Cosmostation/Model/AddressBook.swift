@@ -10,7 +10,7 @@ import Foundation
 
 public struct AddressBook {
     var id: Int64 = -1
-    var bookName: String = ""
+    var bookName: String = ""   //tag
     var chainName: String = ""
     var dpAddress: String = ""
     var memo: String = ""

@@ -234,7 +234,7 @@ class CommonTransfer: BaseVC {
             feeSegments.selectedSegmentIndex = selectedFeePosition
             feeSelectLabel.text = fromChain.coinSymbol
             
-            iotaFeeBudget = iotaFetcher.baseFee(.IOTA_SEND_COIN)     //test
+            iotaFeeBudget = iotaFetcher.baseFee(.IOTA_SEND_COIN)
             
         } else if (txStyle == .BTC_STYLE) {
             feeSegments.removeAllSegments()

@@ -10,13 +10,19 @@ import UIKit
 import MaterialComponents
 import web3swift
 
-class AddressBookSheet: BaseVC, UITextFieldDelegate {
+class AddressBookSheet: BaseVC, UITextFieldDelegate ,UITextViewDelegate {
     
     @IBOutlet weak var addressBookTitle: UILabel!
     @IBOutlet weak var addressBookMsg: UILabel!
+    @IBOutlet weak var chainCardView: FixCardView!
+    @IBOutlet weak var chainNameLabel: UILabel!
+    @IBOutlet weak var chainImageView: UIImageView!
     @IBOutlet weak var nameTextField: MDCOutlinedTextField!
-    @IBOutlet weak var addressTextField: MDCOutlinedTextField!
+    @IBOutlet weak var addressTextField: MDCOutlinedTextArea!
     @IBOutlet weak var memoTextField: MDCOutlinedTextField!
+    @IBOutlet weak var infoView: UIView!
+    @IBOutlet weak var infoTitleLabel: UILabel!
+    @IBOutlet weak var infoDescriptionLabel: UILabel!
     @IBOutlet weak var confirmBtn: BaseButton!
     
     var addressBookType: AddressBookType?
@@ -31,9 +37,13 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         
         nameTextField.setup()
         addressTextField.setup()
+        addressTextField.textView.font = .fontSize12Bold
         memoTextField.setup()
+        infoView.layer.cornerRadius = 8
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectRecipientChain))
+        chainCardView.addGestureRecognizer(tapGesture)
         nameTextField.delegate = self
-        addressTextField.delegate = self
+        addressTextField.textView.delegate = self
         addressTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         memoTextField.delegate = self
         
@@ -42,22 +52,23 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
             
         } else if (addressBookType == .ManualEdit) {
             nameTextField.text = addressBook?.bookName
-            addressTextField.text = addressBook?.dpAddress
+            addressTextField.textView.text = addressBook?.dpAddress
             memoTextField.text = addressBook?.memo
             addressTextField.isEnabled = false
             
         } else if (addressBookType == .AfterTxEdit) {
             nameTextField.text = addressBook?.bookName
-            addressTextField.text = addressBook?.dpAddress
+            addressTextField.textView.text = addressBook?.dpAddress
             memoTextField.text = memo
             addressTextField.isEnabled = false
             
         } else if (addressBookType == .AfterTxNew) {
-            addressTextField.text = recipinetAddress
+            addressTextField.textView.text = recipinetAddress
             memoTextField.text = memo
             addressTextField.isEnabled = false
             memoTextField.isEnabled = false
         }
+        setChainCardView()
         onUpdateView()
     }
     
@@ -65,7 +76,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         addressBookTitle.text = NSLocalizedString("setting_addressbook_title", comment: "")
         nameTextField.label.text = NSLocalizedString("str_name", comment: "")
         addressTextField.label.text = NSLocalizedString("str_address", comment: "")
-        memoTextField.label.text = NSLocalizedString("str_memo", comment: "")
+        memoTextField.label.text = NSLocalizedString("str_memo_optional", comment: "")
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
         
         if (addressBookType == .AfterTxEdit) {
@@ -80,20 +91,81 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         return true
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
         onUpdateView()
     }
     
-    func onUpdateView() {
-        let addressInput = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        if (WUtils.isValidEvmAddress(addressInput) || WUtils.isValidSuiAdderss(addressInput)) {
-            memoTextField.isHidden = true
-            
-        } else if let chain = ALLCHAINS().filter({ $0.supportCosmos && addressInput!.starts(with: $0.bechAccountPrefix! + "1") == true }).first {
-            if (WUtils.isValidBechAddress(chain, addressInput!)) {
-                memoTextField.isHidden = false
-            }
+    @objc func selectRecipientChain() {
+        if addressBookType != .ManualNew {
+            return
         }
+        
+        let sheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+        sheet.sheetDelegate = self
+        sheet.sheetType = .SelectAddressBookChain
+        sheet.selectedNetwork = recipientChain
+        self.present(sheet, animated: true)
+    }
+    
+    private func setChainCardView() {
+        if recipientChain == nil {
+                chainNameLabel.text = "EVM Networks (Universal)"
+                chainImageView.image = UIImage(named: EVM_UNIVERSAL)
+        } else {
+            chainNameLabel.text = recipientChain?.name
+            chainImageView.image = recipientChain?.getChainImage()
+        }
+    }
+    
+    private func setInfoView() {
+        let addressInput = addressTextField.textView.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if recipientChain == nil {
+            infoView.isHidden = false
+            infoTitleLabel.text = "Universal Address"
+            infoDescriptionLabel.setLineSpacing(text: NSLocalizedString("msg_evm_universal_address", comment: ""), font: .fontSize11Medium)
+            
+        } else if memoTextField.isHidden == false {
+            infoView.isHidden = false
+            infoTitleLabel.text = "Enter Memo"
+            infoDescriptionLabel.setLineSpacing(text: NSLocalizedString("msg_cosmos_memo", comment: ""), font: .fontSize11Medium)
+            
+
+        } else {
+            infoView.isHidden = true
+        }
+    }
+    
+    func onUpdateView() {
+        let addressInput = addressTextField.textView.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let recipientChain else {
+            memoTextField.isHidden = true
+            setInfoView()
+            return
+        }
+        
+        if (recipientChain.supportCosmos && !recipientChain.supportEvm) {
+            memoTextField.isHidden = false
+            
+        } else if recipientChain is ChainBitCoin86 {
+            memoTextField.isHidden = false
+
+        } else if (recipientChain.supportCosmos && recipientChain.supportEvm) && (WUtils.isValidBechAddress(recipientChain, addressInput!)) {
+            memoTextField.isHidden = false
+            
+        } else {
+            memoTextField.isHidden = true
+        }
+        
+        setInfoView()
     }
     
     @IBAction func onClickConfirm(_ sender: UIButton) {
@@ -103,14 +175,14 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
             return
         }
         
-        let addressInput = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let addressInput = addressTextField.textView.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         if (!onValidateAddress(addressInput)) {
             onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return
         }
 
         var memoInput = ""
-        let address = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let address = addressTextField.textView.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         var network = ""
         if address!.starts(with: "t") || address!.starts(with: "2") || address!.starts(with: "m") {
             network = "testnet"
@@ -132,8 +204,8 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         }
         
         if (addressBookType == .ManualNew) {
-            if let targetChain = getRecipinetChain(addressInput) {
-                let addressBook = AddressBook.init(nameInput!, targetChain.name, addressInput!, memoInput, Date().millisecondsSince1970)
+            if onValidateAddress(addressInput) {
+                let addressBook = AddressBook.init(nameInput!, recipientChain?.tag ?? EVM_UNIVERSAL, addressInput!, memoInput, Date().millisecondsSince1970)
                 let result = BaseData.instance.updateAddressBook(addressBook)
                 bookDelegate?.onAddressBookUpdated(result)
                 dismiss(animated: true)
@@ -155,7 +227,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
             dismiss(animated: true)
             
         } else if (addressBookType == .AfterTxNew) {
-            let addressBook = AddressBook.init(nameInput!, recipientChain!.name, addressInput!, memoInput, Date().millisecondsSince1970)
+            let addressBook = AddressBook.init(nameInput!, recipientChain!.tag, addressInput!, memoInput, Date().millisecondsSince1970)
             let result = BaseData.instance.updateAddressBook(addressBook)
             bookDelegate?.onAddressBookUpdated(result)
             dismiss(animated: true)
@@ -169,22 +241,30 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
         } else {
             network = "bitcoin"
         }
-
+        
         if (address?.isEmpty == true) {
             return false
         }
-        if (WUtils.isValidEvmAddress(address)) {
-            return true
-            
-        } else if WUtils.isValidSuiAdderss(address) {
-            return true
-            
-        } else if BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [address, network]) {
-            return true
-
-        } else if let chain = ALLCHAINS().filter({ address!.starts(with: $0.bechAccountPrefix ?? "" + "1") == true }).first {
-            if (WUtils.isValidBechAddress(chain, address!)) {
+        
+        if let chain = recipientChain {
+            if chain.supportEvm && (WUtils.isValidEvmAddress(address)) {
                 return true
+                
+            } else if (chain is ChainSui || chain is ChainIota) && WUtils.isValidSuiAdderss(address) {
+                return true
+                
+            } else if chain is ChainBitCoin86 && BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [address, network]) {
+                return true
+                
+            } else if chain.supportCosmos && WUtils.isValidBechAddress(chain, address) {
+                return true
+            }
+            
+        } else {
+            if WUtils.isValidEvmAddress(address) {
+                return true
+            } else {
+                return false
             }
         }
         return false
@@ -230,6 +310,17 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate {
     
 }
 
+
+
+extension AddressBookSheet: BaseSheetDelegate {
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
+        if sheetType == .SelectAddressBookChain {
+            recipientChain = result["chain"] as? BaseChain
+            setChainCardView()
+            onUpdateView()
+        }
+    }
+}
 
 
 protocol AddressBookDelegate {

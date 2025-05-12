@@ -65,7 +65,7 @@ class SelectEndpointSheet: BaseVC {
             evmTableView.isHidden = false
         }
         
-        if (targetChain is ChainSui) {                  //using evm table
+        if (targetChain is ChainSui || targetChain is ChainIota) {                  //using evm table
             endpointTypeSegment.isHidden = true
             cosmosTableView.isHidden = true
             evmTableView.isHidden = false
@@ -143,7 +143,7 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
             }
             
         } else if tableView == evmTableView {
-            if (targetChain is ChainSui || targetChain is ChainGno) && rpcList != nil {
+            if (targetChain is ChainSui || targetChain is ChainIota || targetChain is ChainGno) && rpcList != nil {
                 view.imageView.isHidden = false
                 view.imageView.image = UIImage(named: "iconGrpc")
                 view.imageView.tintColor = .color03
@@ -175,7 +175,7 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
                 return (lcdList != nil) ? 40 : 0
             }
         } else if (tableView == evmTableView) {
-            if (targetChain is ChainSui || targetChain is ChainGno) {
+            if (targetChain is ChainSui || targetChain is ChainIota || targetChain is ChainGno) {
                 return (rpcList != nil) ? 40 : 0
             } else {
                 return (evmRPCList != nil) ? 40 : 0
@@ -192,7 +192,7 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
             return lcdList?.count ?? 0
             
         } else if (tableView == evmTableView) {
-            if (targetChain is ChainSui || targetChain is ChainGno) {
+            if (targetChain is ChainSui || targetChain is ChainIota || targetChain is ChainGno) {
                 return rpcList?.count ?? 0
             }
             return evmRPCList?.count ?? 0
@@ -212,6 +212,9 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
             if (targetChain is ChainSui) {
                 cell?.onBindRpcEndpoint(indexPath.row, targetChain)
                 
+            } else if let chain = targetChain as? ChainIota {
+                cell?.onBindIotaRpcEndpoint(indexPath.row, chain)
+
             } else if (targetChain is ChainGno) {
                 cell?.onBindGnoRpcEndpoint(indexPath.row, targetChain)
 
@@ -237,7 +240,7 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
                 }
                 
             } else if (tableView == evmTableView) {
-                if (targetChain is ChainSui) {
+                if (targetChain is ChainSui || targetChain is ChainIota) {
                     let endpoint = targetChain.getChainListParam()["rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
                     BaseData.instance.setRpcEndpoint(targetChain, endpoint)
                     
