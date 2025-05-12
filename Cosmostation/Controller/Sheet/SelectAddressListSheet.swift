@@ -137,7 +137,7 @@ class SelectAddressListSheet: BaseVC {
                     }
                 }
             BaseData.instance.selectAllAddressBooks().forEach { book in
-                if (book.chainName == toChain.tag && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
+                if (WUtils.isValidBechAddress(toChain, book.dpAddress) && book.dpAddress != senderBechAddress) {
                     bechAddressBook.append(book)
                 }
             }
@@ -159,7 +159,7 @@ class SelectAddressListSheet: BaseVC {
                         }
                     }
                 BaseData.instance.selectAllAddressBooks().forEach { book in
-                    if (book.chainName == toChain.tag && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
+                    if (WUtils.isValidBechAddress(toChain, book.dpAddress) && book.dpAddress != senderBechAddress) {
                         bechAddressBook.append(book)
                     }
                 }
