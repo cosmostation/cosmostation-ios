@@ -82,8 +82,7 @@ class BaseNetWork {
     func fetchEcosystems() {
         Task {
             do {
-                let url = "https://raw.githubusercontent.com/cosmostation/chainlist/master/wallet/eco_list.json"
-                BaseData.instance.allEcosystems = try await AF.request(url, method: .get).serializingDecodable([JSON].self).value
+                BaseData.instance.allEcosystems = try await AF.request(BaseNetWork.getAllDappURL(), method: .get).serializingDecodable([JSON].self).value
             } catch {
                 print("fetchEcosystems error", error)
             }
@@ -208,6 +207,10 @@ class BaseNetWork {
     
     static func setPushStatus() -> String {
         return MINTSCAN_API_URL + "v10/notification"
+    }
+    
+    static func getAllDappURL() -> String {
+        return MINTSCAN_API_URL + "v11/dapp"
     }
     
     static func SkipChains() -> String {
