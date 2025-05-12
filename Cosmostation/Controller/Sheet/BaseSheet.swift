@@ -30,6 +30,9 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var dappNetworksSearch = [DappNetwork]()
     var dappSelectedNetwork: BaseChain?
     var recipientChain: BaseChain!
+    var allChains: [BaseChain?] = [nil] + ALLCHAINS().filter{ $0.isDefault }
+    var allChainsSearch = [BaseChain?]()
+    var selectedNetwork: BaseChain?
     
     var feeDatas = Array<FeeData>()
     var baseFeesDatas = [Cosmos_Base_V1beta1_DecCoin]()
@@ -334,6 +337,11 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
 
         } else if sheetType == .SelectSendType {
             sheetTitle.text = "Select Send Type"
+            
+        } else if sheetType == .SelectAddressBookChain {
+            sheetTitle.text = "Select chain"
+            sheetSearchBar.isHidden = false
+            allChainsSearch = allChains
         }
     }
     
@@ -379,6 +387,10 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if sheetType == .SelectDappNetwork {
             dappNetworksSearch = searchText.isEmpty ? dappNetworks : dappNetworks.filter { ($0.chain?.name ?? "").range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
+            
+        } else if sheetType == .SelectAddressBookChain {
+            allChainsSearch = searchText.isEmpty ? allChains : allChains.filter({ $0?.name.range(of: searchText, options: .caseInsensitive
+            , range: nil, locale: nil) != nil })
         }
         sheetTableView.reloadData()
     }
@@ -552,6 +564,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectSendType) {
             return 2
+            
+        } else if (sheetType == .SelectAddressBookChain) {
+            return allChainsSearch.count
         }
 
         return 0
@@ -775,6 +790,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindSendType(indexPath.row, targetChain)
             return cell!
 
+        } else if sheetType == .SelectAddressBookChain {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BaseImgMsgCheckCell") as? BaseImgMsgCheckCell
+            cell?.onBindNetwork(indexPath.row, allChainsSearch[indexPath.row], selectedNetwork)
+            return cell!
+
         }
         
         return UITableViewCell()
@@ -906,6 +926,10 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "denom" : selectedCoinDenom]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
+        } else if sheetType == .SelectAddressBookChain {
+            let result: [String : Any] = ["chain" : allChainsSearch[indexPath.row]]
+            sheetDelegate?.onSelectedSheet(sheetType, result)
+
         } else {
             let result: [String : Any] = ["index" : indexPath.row]
             sheetDelegate?.onSelectedSheet(sheetType, result)
@@ -990,5 +1014,6 @@ public enum SheetType: Int {
 
     case SelectSendType
     
+    case SelectAddressBookChain
 
 }

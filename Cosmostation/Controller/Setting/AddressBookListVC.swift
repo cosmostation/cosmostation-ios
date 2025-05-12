@@ -43,15 +43,16 @@ class AddressBookListVC: BaseVC {
         let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
         addressBookSheet.addressBookType = .ManualNew
         addressBookSheet.bookDelegate = self
-        onStartSheet(addressBookSheet, 420, 0.8)
+        present(addressBookSheet, animated: true)
     }
     
     func onShowEditSheet(_ book: AddressBook) {
         let addressBookSheet = AddressBookSheet(nibName: "AddressBookSheet", bundle: nil)
         addressBookSheet.addressBookType = .ManualEdit
         addressBookSheet.addressBook = book
+        addressBookSheet.recipientChain = ALLCHAINS().filter{ $0.tag.lowercased() == book.chainName.lowercased() }.first
         addressBookSheet.bookDelegate = self
-        onStartSheet(addressBookSheet, 420, 0.8)
+        present(addressBookSheet, animated: true)
     }
     
     func onDeleteBook(_ book: AddressBook) {

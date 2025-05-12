@@ -75,6 +75,7 @@ let CSS_MOON_PAY                        = CSS_URL + "v1/sign/moonpay";
 //let WALLET_API_SYNC_PUSH_URL            = CSS_URL + "v1/push/token/address";
 //let WALLET_API_PUSH_STATUS_URL          = CSS_URL + "v1/push/alarm/status";
 
+let EVM_UNIVERSAL = "EVM-universal"
 
 let DB_VERSION                          = 3
 

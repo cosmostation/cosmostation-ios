@@ -47,7 +47,7 @@ class ServiceCell: UITableViewCell {
             msgLabel.text = "Exchange the coins you have\nfor a variety of different coins."
             
         } else if (position == 5) {
-            serviceImg.image = UIImage(named: "imgServiceDapp")
+            serviceImg.image = UIImage(named: "imgServiceDappNEW")
             titleLabel.text = "DAPP"
             msgLabel.text = "Discover, Track & Trade\nEverything DeFi, NFT and\nGaming."
             

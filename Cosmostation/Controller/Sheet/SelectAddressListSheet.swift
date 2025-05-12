@@ -61,14 +61,14 @@ class SelectAddressListSheet: BaseVC {
         
         var tempRefBechAddresses = [RefAddress]()
         
-        if (toChain is ChainSui || toChain is ChainIota) { //test
+        if (toChain is ChainSui || toChain is ChainIota) {
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
                 if (refAddress.chainTag == toChain.tag && refAddress.bechAddress != senderMajorAddress) {
                     refMajorAddresses.append(refAddress)
                 }
             }
             BaseData.instance.selectAllAddressBooks().forEach { book in
-                if (WUtils.isValidSuiAdderss(book.dpAddress) && book.dpAddress != senderMajorAddress) {
+                if (WUtils.isValidSuiAdderss(book.dpAddress) && book.dpAddress != senderMajorAddress && book.chainName == toChain.tag) {
                     majorAddressBook.append(book)
                 }
             }
@@ -93,12 +93,12 @@ class SelectAddressListSheet: BaseVC {
             }
             BaseData.instance.selectAllAddressBooks().forEach { book in
                 if toChain.isTestnet {
-                    if (book.chainName.lowercased().contains("bitcoin") && book.chainName.lowercased().contains("signet") && book.dpAddress != senderMajorAddress) {
+                    if (BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [book.dpAddress, "testnet"]) == true && book.dpAddress != senderMajorAddress) {
                         majorAddressBook.append(book)
                     }
 
                 } else {
-                    if (book.chainName.lowercased().contains("bitcoin") && !book.chainName.lowercased().contains("signet") && book.dpAddress != senderMajorAddress) {
+                    if (BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [book.dpAddress, "bitcoin"]) == true && book.dpAddress != senderMajorAddress) {
                         majorAddressBook.append(book)
                     }
                 }
@@ -137,7 +137,7 @@ class SelectAddressListSheet: BaseVC {
                     }
                 }
             BaseData.instance.selectAllAddressBooks().forEach { book in
-                if (book.chainName == toChain.name && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
+                if (WUtils.isValidBechAddress(toChain, book.dpAddress) && book.dpAddress != senderBechAddress) {
                     bechAddressBook.append(book)
                 }
             }
@@ -159,7 +159,7 @@ class SelectAddressListSheet: BaseVC {
                         }
                     }
                 BaseData.instance.selectAllAddressBooks().forEach { book in
-                    if (book.chainName == toChain.name && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
+                    if (WUtils.isValidBechAddress(toChain, book.dpAddress) && book.dpAddress != senderBechAddress) {
                         bechAddressBook.append(book)
                     }
                 }
@@ -215,7 +215,7 @@ class SelectAddressListSheet: BaseVC {
                         }
                     }
                 BaseData.instance.selectAllAddressBooks().forEach { book in
-                    if (book.chainName == toChain.name && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
+                    if (book.chainName == toChain.tag && !book.dpAddress.starts(with: "0x") && book.dpAddress != senderBechAddress) {
                         bechAddressBook.append(book)
                     }
                 }

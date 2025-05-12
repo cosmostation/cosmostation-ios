@@ -37,7 +37,8 @@ class MajorEcosystemVC: BaseVC {
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "EcoListCell", bundle: nil), forCellWithReuseIdentifier: "EcoListCell")
         
-        onFetchEcoSystemList()
+        ecosystemList = BaseData.instance.allEcosystems?.filter({ $0["chains"].arrayValue.map({ $0.stringValue }).contains(selectedChain.apiName) }).sorted { $0["is_default"].boolValue && !$1["is_default"].boolValue }
+        onUpdateView()
     }
     
     func onUpdateView() {
@@ -51,23 +52,6 @@ class MajorEcosystemVC: BaseVC {
             collectionView.isHidden = false
         }
     }
-    
-    
-    func onFetchEcoSystemList() {
-        guard let url = URL(string: EcosystemUrl.replacingOccurrences(of: "${apiName}", with: selectedChain.apiName)) else {
-            self.onUpdateView()
-            return
-        }
-        AF.request(url, method: .get, parameters: [:]).responseDecodable(of: [JSON].self, queue: .main, decoder: JSONDecoder())  { response in
-            switch response.result {
-            case .success(let value):
-                self.ecosystemList = value
-            case .failure: break
-            }
-            self.onUpdateView()
-        }
-    }
-
 }
 
 

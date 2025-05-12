@@ -20,11 +20,11 @@ class ChainOnomy: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "anom"
         bechAccountPrefix = "onomy"
         validatorPrefix = "onomyvaloper"
-        grpcHost = "grpc-onomy-protocol.cosmostation.io"
-        lcdUrl = "https://lcd-onomy-protocol.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://rest-mainnet.onomy.io/"
     }
 }

@@ -24,7 +24,7 @@ class ChainIota: BaseChain {
         coinSymbol = "IOTA"
         stakeDenom = IOTA_MAIN_DENOM
         
-        mainUrl = "https://api.testnet.iota.cafe"   //test
+        mainUrl = "https://api.mainnet.iota.cafe"
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {

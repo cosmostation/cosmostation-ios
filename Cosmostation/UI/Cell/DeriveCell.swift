@@ -147,6 +147,11 @@ class DeriveCell: UITableViewCell {
                 denomLabel.text = chain.coinSymbol
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
                 
+            } else if let iotaFetcher = (chain as? ChainIota)?.getIotaFetcher() {
+                let dpAmount = iotaFetcher.balanceAmount(IOTA_MAIN_DENOM).multiplying(byPowerOf10: -9, withBehavior: handler18Down)
+                denomLabel.text = chain.coinSymbol
+                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
+                
             } else if let btcFetcher = (chain as? ChainBitCoin86)?.getBtcFetcher() {
                 let avaibaleAmount = btcFetcher.btcBalances.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
                 let pendingInputAmount = btcFetcher.btcPendingInput.multiplying(byPowerOf10: -8, withBehavior: handler8Down)

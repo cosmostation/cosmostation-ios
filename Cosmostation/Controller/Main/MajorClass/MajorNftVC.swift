@@ -110,7 +110,7 @@ extension MajorNftVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NftListCell", for: indexPath) as! NftListCell
         let suiNFT = NFTs[indexPath.row]
-        cell.onBindNft(suiNFT)  // TEST
+        cell.onBindNft(suiNFT)
         return cell
     }
     
@@ -130,9 +130,16 @@ extension MajorNftVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if (selectedChain.isTxFeePayable(.SUI_SEND_NFT) == false) {  //test
-            onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-            return
+        if selectedChain is ChainSui {
+            if (selectedChain.isTxFeePayable(.SUI_SEND_NFT) == false) {
+                onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+                return
+            }
+        } else if selectedChain is ChainIota {
+            if (selectedChain.isTxFeePayable(.IOTA_SEND_NFT) == false) {
+                onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+                return
+            }
         }
         
         let transfer = NftTransfer(nibName: "NftTransfer", bundle: nil)

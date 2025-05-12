@@ -257,8 +257,9 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                 addressBookSheet.addressBookType = .AfterTxEdit
                 addressBookSheet.addressBook = existed
                 addressBookSheet.memo = txMemo
+                addressBookSheet.recipientChain = ALLCHAINS().filter { $0.name.lowercased() == existed.chainName }.first
                 addressBookSheet.bookDelegate = self
-                onStartSheet(addressBookSheet, 420, 0.8)
+                present(addressBookSheet, animated: true)
                 return
             }
             
@@ -269,7 +270,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             addressBookSheet.recipinetAddress = toAddress
             addressBookSheet.memo = txMemo
             addressBookSheet.bookDelegate = self
-            onStartSheet(addressBookSheet, 420, 0.8)
+            present(addressBookSheet, animated: true)
             return
         }
     }

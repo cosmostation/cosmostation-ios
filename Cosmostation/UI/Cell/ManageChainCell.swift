@@ -70,6 +70,14 @@ class ManageChainCell: UITableViewCell {
             evmEndpointTag.text = "RPC"
             evmEndpointLabel.text = suiFetcher.getSuiRpc().replacingOccurrences(of: "https://", with: "")
             evmEndpointLabel.adjustsFontSizeToFitWidth = true
+            
+        } else if let iotaFetcher = (chain as? ChainIota)?.getIotaFetcher() {
+            //using evm field
+            evmLayer.isHidden = false
+            evmEndpointTag.text = "RPC"
+            evmEndpointLabel.text = iotaFetcher.getIotaRpc().replacingOccurrences(of: "https://", with: "")
+            evmEndpointLabel.adjustsFontSizeToFitWidth = true
+
         } else if let btcFetcher = (chain as? ChainBitCoin86)?.getBtcFetcher() {
             //using evm field
             evmLayer.isHidden = false

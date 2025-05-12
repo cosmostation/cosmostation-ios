@@ -112,7 +112,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             }
             
         } else if toChain is ChainIota {
-            if (WUtils.isValidSuiAdderss(userInput)) {  //TEST
+            if (WUtils.isValidSuiAdderss(userInput)) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return

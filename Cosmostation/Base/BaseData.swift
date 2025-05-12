@@ -389,6 +389,16 @@ extension BaseData {
     }
     
     @discardableResult
+    public func updateAddressBookChainName(_ addressBook: AddressBook) -> Int? {
+        if (selectAddressBooks(addressBook.id) != nil) {
+            let target = TABLE_ADDRESSBOOK.filter(ADDRESSBOOK_ID == addressBook.id)
+            return try? database.run(target.update(ADDRESSBOOK_CHAIN_NAME <- addressBook.chainName))
+        } else {
+            return Int(insertAddressBook(addressBook))
+        }
+    }
+    
+    @discardableResult
     public func insertAddressBook(_ addressBook: AddressBook) -> Int64 {
         let toInsert = TABLE_ADDRESSBOOK.insert(ADDRESSBOOK_NAME <- addressBook.bookName,
                                                 ADDRESSBOOK_CHAIN_NAME <- addressBook.chainName,

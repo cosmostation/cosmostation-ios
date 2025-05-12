@@ -19,12 +19,12 @@ class ChainSommelier: BaseChain {
         apiName = "sommelier"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "usomm"
         bechAccountPrefix = "somm"
         validatorPrefix = "sommvaloper"
-        grpcHost = "grpc-sommelier.cosmostation.io"
-        lcdUrl = "https://lcd-sommelier.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://sommelier-api.polkachu.com/"
     }
     
 }

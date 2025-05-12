@@ -11,6 +11,7 @@ import Alamofire
 import Firebase
 import SwiftKeychainWrapper
 import SwiftyJSON
+import SQLite3
 
 class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
     
@@ -22,6 +23,48 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
         self.navigationController?.view.addBackground()
         if (BaseData.instance.getDBVersion() < DB_VERSION) {
             onUpdateMigration()
+        }
+        if UserDefaults.standard.bool(forKey: "UPDATED_ADDRESSBOOK") == false {
+            var chainTag = ""
+            BaseData.instance.selectAllAddressBooks().forEach { addressBook in
+                if let tag = ALLCHAINS().filter({ $0.isDefault && $0.name.lowercased() == addressBook.chainName.lowercased() }).first?.tag {
+                    if tag == ChainEthereum().tag {
+                        chainTag = EVM_UNIVERSAL
+
+                    } else {
+                        chainTag = tag
+                    }
+                    
+                } else {
+                    if addressBook.dpAddress.starts(with: "0x") {
+                        if WUtils.isValidEvmAddress(addressBook.dpAddress) {
+                            chainTag = EVM_UNIVERSAL
+                            
+                        } else {
+                            chainTag = ChainSui().tag
+                        }
+                        
+                    } else if BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [addressBook.dpAddress, "testnet"]) {
+                        chainTag = ChainBitCoin86_T().tag
+                        
+                    } else if BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [addressBook.dpAddress, "bitcoin"]) {
+                        chainTag = ChainBitCoin86().tag
+                        
+                    } else {
+                        let prefix = addressBook.dpAddress.components(separatedBy: "1").first ?? ""
+                        chainTag = ALLCHAINS().filter({ $0.isDefault && $0.bechAccountPrefix == prefix }).first?.tag ?? ""
+                    }
+                }
+                let updatedData = AddressBook(addressBook.id,
+                                              addressBook.bookName,
+                                              chainTag,
+                                              addressBook.dpAddress,
+                                              addressBook.memo,
+                                              addressBook.lastTime)
+                BaseData.instance.updateAddressBookChainName(updatedData)
+
+            }
+            UserDefaults.standard.set(true, forKey: "UPDATED_ADDRESSBOOK")
         }
         onAppVersionCheck()
     }
