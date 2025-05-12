@@ -44,7 +44,6 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate ,UITextViewDelegate {
         chainCardView.addGestureRecognizer(tapGesture)
         nameTextField.delegate = self
         addressTextField.textView.delegate = self
-        addressTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         memoTextField.delegate = self
         
         if (addressBookType == .ManualNew) {
@@ -99,7 +98,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate ,UITextViewDelegate {
         return true
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
+    func textViewDidChange(_ textView: UITextView) {
         onUpdateView()
     }
     
@@ -126,8 +125,6 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate ,UITextViewDelegate {
     }
     
     private func setInfoView() {
-        let addressInput = addressTextField.textView.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        
         if recipientChain == nil {
             infoView.isHidden = false
             infoTitleLabel.text = "Universal Address"
