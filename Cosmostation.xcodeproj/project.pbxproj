@@ -1900,6 +1900,8 @@
 		79DB1D4E2D5B4CEF002E1059 /* eth_types_v1_account.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DB1D4D2D5B4CEF002E1059 /* eth_types_v1_account.pb.swift */; };
 		79DD26672D0C00B500B4353C /* VoteThreeItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DD26652D0C00B500B4353C /* VoteThreeItemsCell.swift */; };
 		79DD26682D0C00B500B4353C /* VoteThreeItemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DD26662D0C00B500B4353C /* VoteThreeItemsCell.xib */; };
+		79E381EA2DCB221800DB0AD6 /* ChainLumera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E381E92DCB221800DB0AD6 /* ChainLumera.swift */; };
+		79E381EC2DCC91E600DB0AD6 /* ChainLumera_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E381EB2DCC91E600DB0AD6 /* ChainLumera_T.swift */; };
 		79E7B3CA2CF83F0400C28D93 /* dydx.json in Resources */ = {isa = PBXBuildFile; fileRef = 79E7B3C92CF83F0400C28D93 /* dydx.json */; };
 		79ED0BCC2DB75C6500C84DB7 /* ChainHippo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED0BCB2DB75C6500C84DB7 /* ChainHippo.swift */; };
 		79ED0BCE2DB8890E00C84DB7 /* ChainIota.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED0BCD2DB8890E00C84DB7 /* ChainIota.swift */; };
@@ -3501,6 +3503,8 @@
 		79DB1D4D2D5B4CEF002E1059 /* eth_types_v1_account.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eth_types_v1_account.pb.swift; sourceTree = "<group>"; };
 		79DD26652D0C00B500B4353C /* VoteThreeItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteThreeItemsCell.swift; sourceTree = "<group>"; };
 		79DD26662D0C00B500B4353C /* VoteThreeItemsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteThreeItemsCell.xib; sourceTree = "<group>"; };
+		79E381E92DCB221800DB0AD6 /* ChainLumera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainLumera.swift; sourceTree = "<group>"; };
+		79E381EB2DCC91E600DB0AD6 /* ChainLumera_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainLumera_T.swift; sourceTree = "<group>"; };
 		79E7B3C92CF83F0400C28D93 /* dydx.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dydx.json; sourceTree = "<group>"; };
 		79ED0BCB2DB75C6500C84DB7 /* ChainHippo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainHippo.swift; sourceTree = "<group>"; };
 		79ED0BCD2DB8890E00C84DB7 /* ChainIota.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainIota.swift; sourceTree = "<group>"; };
@@ -3970,6 +3974,7 @@
 				7948D66E2D91016B005208B2 /* ChainLombard.swift */,
 				045032B82C1EFCE600235F6A /* ChainLum118.swift */,
 				045032BB2C1EFCE700235F6A /* ChainLum880.swift */,
+				79E381E92DCB221800DB0AD6 /* ChainLumera.swift */,
 				7948D6862D927F4F005208B2 /* ChainManifest.swift */,
 				79514DB32CB527AA008D7ED8 /* ChainMantra.swift */,
 				045032BE2C1EFCE700235F6A /* ChainMars.swift */,
@@ -4515,6 +4520,7 @@
 				79ED0BD32DB8AD0800C84DB7 /* ChainImuaEVM_T.swift */,
 				04965B422C37B3AE00403605 /* ChainInitia_T.swift */,
 				7948D66C2D9100F6005208B2 /* ChainLombard_T.swift */,
+				79E381EB2DCC91E600DB0AD6 /* ChainLumera_T.swift */,
 				E16FB7252C7595E6005660D1 /* ChainMantra_T.swift */,
 				E14B92DD2DAFEF7C0030D4F0 /* ChainMonad_T.swift */,
 				04D785582C32B171009D1A94 /* ChainNeutron_T.swift */,
@@ -7315,6 +7321,7 @@
 				E1D97C072B9EF65000496807 /* SelectEndpointSheet.swift in Sources */,
 				04FF6B922B21E101009DCA89 /* CosmosRewardListPopupVC.swift in Sources */,
 				79D556192CEF04AE0023F1B9 /* ChainDoraVota.swift in Sources */,
+				79E381EC2DCC91E600DB0AD6 /* ChainLumera_T.swift in Sources */,
 				04C817702BA98D75006B800A /* cosmos_staking_v1beta1_tx.grpc.swift in Sources */,
 				04C816AC2BA98D75006B800A /* cosmos_bank_v1beta1_bank.pb.swift in Sources */,
 				0438A8022AE135B1006FA213 /* kava_cdp_v1beta1_tx.grpc.swift in Sources */,
@@ -7686,6 +7693,7 @@
 				04C8172E2BA98D75006B800A /* cosmos_circuit_v1_tx.grpc.swift in Sources */,
 				04B789E52ACB140900E9BE88 /* SelectNameServiceCell.swift in Sources */,
 				792613AC2CD4B82800FAF47D /* initia_distribution_v1_tx.pb.swift in Sources */,
+				79E381EA2DCB221800DB0AD6 /* ChainLumera.swift in Sources */,
 				E15980A62A83AC9E0032892B /* PortfolioVC.swift in Sources */,
 				79B7F36E2D87F74F00AA755B /* BabylonStatusInfoSheet.swift in Sources */,
 				046EA8BD2AD04A2600A2FCE7 /* desmos_profiles_v3_genesis.pb.swift in Sources */,
