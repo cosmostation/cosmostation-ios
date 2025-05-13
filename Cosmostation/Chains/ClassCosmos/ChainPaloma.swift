@@ -25,6 +25,6 @@ class ChainPaloma: BaseChain  {
         bechAccountPrefix = "paloma"
         validatorPrefix = "palomavaloper"
         grpcHost = "paloma.grpc.kjnodes.com"
-        lcdUrl = "https://paloma.api.kjnodes.com/"
+        lcdUrl = "https://api-1.paloma.nodes.guru/"
     }
 }
