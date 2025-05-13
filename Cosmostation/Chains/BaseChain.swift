@@ -451,7 +451,7 @@ extension BaseChain {
     }
     
     func getChainName() -> String {
-        return name
+        return getChainListParam()["chain_name"].string ?? name
     }
     
     func getChainImage() -> UIImage {
