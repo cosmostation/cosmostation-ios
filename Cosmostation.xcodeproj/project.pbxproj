@@ -2161,6 +2161,8 @@
 		E122DC6C2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */; };
 		E122DC6D2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */; };
 		E1271B04224B17230083AF17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
+		E12DFA742DD48A7300E53C10 /* ChainUnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12DFA732DD48A7200E53C10 /* ChainUnion.swift */; };
+		E12DFA752DD48A7300E53C10 /* ChainUnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12DFA732DD48A7200E53C10 /* ChainUnion.swift */; };
 		E12E9D2F2AE415D900336449 /* loadingSmallYellow.json in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */; };
 		E12E9D302AE415D900336449 /* loadingSmallYellow.json in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */; };
 		E131F4482AEE9BC000E760A0 /* QrImportCheckKeySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131F4462AEE9BC000E760A0 /* QrImportCheckKeySheet.swift */; };
@@ -3641,6 +3643,7 @@
 		E122DC652A8DBD28006D1E7B /* BaseHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHeader.swift; sourceTree = "<group>"; };
 		E122DC682A8DBD3B006D1E7B /* BaseHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseHeader.xib; sourceTree = "<group>"; };
 		E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetWork.swift; sourceTree = "<group>"; };
+		E12DFA732DD48A7200E53C10 /* ChainUnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainUnion.swift; sourceTree = "<group>"; };
 		E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingSmallYellow.json; sourceTree = "<group>"; };
 		E131F4462AEE9BC000E760A0 /* QrImportCheckKeySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrImportCheckKeySheet.swift; sourceTree = "<group>"; };
 		E131F4472AEE9BC000E760A0 /* QrImportCheckKeySheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QrImportCheckKeySheet.xib; sourceTree = "<group>"; };
@@ -4024,6 +4027,7 @@
 				E1BC05932CE73A1C0060A2B3 /* ChainThor.swift */,
 				0450331B2C1F045900235F6A /* ChainUmee.swift */,
 				79C518762CC8E3DA00BC0E85 /* ChainUnification.swift */,
+				E12DFA732DD48A7200E53C10 /* ChainUnion.swift */,
 				0485A4FD2CD9FC3A00DE1661 /* ChainXion.swift */,
 				045033182C1F045900235F6A /* ChainXpla.swift */,
 				79813A602D530A9E0083A1F5 /* ChainZenrock.swift */,
@@ -6748,6 +6752,7 @@
 				E1657B0C2AD0159D00264A21 /* SecButton.swift in Sources */,
 				04C8177F2BA98D75006B800A /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
 				0400EEEA2ADBE1D3007BA97F /* kava_pricefeed_v1beta1_query.pb.swift in Sources */,
+				E12DFA752DD48A7300E53C10 /* ChainUnion.swift in Sources */,
 				E18B21FA2C4A19FE00AD572F /* NeutronFetcher.swift in Sources */,
 				04C940E12AEB92F800415256 /* BaseImgSheetCell.swift in Sources */,
 				046EA8562AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
@@ -8036,6 +8041,7 @@
 				E159809F2A83A9D70032892B /* SlideOutTransition.swift in Sources */,
 				79705CC62D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.pb.swift in Sources */,
 				04C816F82BA98D75006B800A /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
+				E12DFA742DD48A7300E53C10 /* ChainUnion.swift in Sources */,
 				045032AC2C1EEFCA00235F6A /* ChainIxo.swift in Sources */,
 				04C8174C2BA98D75006B800A /* cosmos_gov_v1_gov.pb.swift in Sources */,
 				0400EEC52ADBB522007BA97F /* kava_incentive_v1beta1_params.pb.swift in Sources */,
