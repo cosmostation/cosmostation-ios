@@ -143,7 +143,7 @@ class BaseNetWork {
 
     
     static func getAccountHistoryUrl(_ chain: BaseChain, _ address: String) -> String {
-        if (chain.tag.starts(with: "okt")) {
+        if chain is ChainOktEVM {
             return MINTSCAN_API_URL + "v10/" + chain.apiName + "/proxy/okx/account/" + address + "/txs"
         } else if (!chain.supportCosmos && chain.supportEvm) {
             return MINTSCAN_API_URL + "v10/" + chain.apiName + "/proxy/okx/account/" + address + "/txs"

@@ -73,7 +73,7 @@ class SelectRefAddressCell: UITableViewCell {
         let allChain = ALLCHAINS()
         if let chain = allChain.filter({ $0.tag == refAddress.chainTag }).first {
             oldTag.isHidden = chain.isDefault
-            if (chain.name == "OKT" && !chain.supportEvm) {
+            if chain is ChainOkt996Keccak {
                 keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
                 keyTypeTag.isHidden = false
             }

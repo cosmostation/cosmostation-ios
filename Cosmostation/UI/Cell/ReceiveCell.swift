@@ -39,7 +39,7 @@ class ReceiveCell: UITableViewCell {
             hdPathLabel.text = ""
         }
         oldTag.isHidden = chain.isDefault
-        if (chain.name == "OKT" && !chain.supportEvm) {
+        if chain is ChainOkt996Keccak {
             keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
             keyTypeTag.isHidden = false
         }
@@ -49,9 +49,6 @@ class ReceiveCell: UITableViewCell {
             let evmAddress = chain.evmAddress!
             addressLabel.text = evmAddress
             addressLabel.adjustsFontSizeToFitWidth = true
-            
-//            keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
-//            keyTypeTag.isHidden = false
             
             if let bechQrImage = WUtils.generateQrCode(evmAddress) {
                 rqImgView.image = UIImage(ciImage: bechQrImage)
@@ -63,9 +60,6 @@ class ReceiveCell: UITableViewCell {
             let bechAddress = chain.bechAddress!
             addressLabel.text = bechAddress
             addressLabel.adjustsFontSizeToFitWidth = true
-            
-//            keyTypeTag.text = chain.accountKeyType.pubkeyType.cosmosPubkey
-//            keyTypeTag.isHidden = false
             
             if let bechQrImage = WUtils.generateQrCode(bechAddress) {
                 rqImgView.image = UIImage(ciImage: bechQrImage)

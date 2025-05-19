@@ -54,7 +54,7 @@ class TxAmountLegacySheet: BaseVC, UITextFieldDelegate {
     }
     
     func onUpdateView() {
-        if (selectedChain.name == "OKT") {
+        if selectedChain is ChainOktEVM {
             decimal = 18
             availableDenom.text = tokenSymbol
             availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 18)
