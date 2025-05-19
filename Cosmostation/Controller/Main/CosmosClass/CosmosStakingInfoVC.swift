@@ -243,16 +243,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain is ChainBeraEVM_T) {
-//            let delegate = EvmDelegate(nibName: "EvmDelegate", bundle: nil)
-//            delegate.selectedChain = selectedChain as? EvmClass
-//            if (toValAddress != nil) {
-//                delegate.toValidator = validators.filter({ $0.operatorAddress == toValAddress }).first
-//            }
-//            delegate.modalTransitionStyle = .coverVertical
-//            self.present(delegate, animated: true)
-            
-        } else if (selectedChain is ChainInitia) {
+        if (selectedChain is ChainInitia) {
             let delegate = CosmosDelegate(nibName: "CosmosDelegate", bundle: nil)
             delegate.selectedChain = selectedChain
             if (toValAddress != nil) {
@@ -287,14 +278,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain is ChainBeraEVM_T) {
-//            let undelegate = EvmUndelegate(nibName: "EvmUndelegate", bundle: nil)
-//            undelegate.selectedChain = selectedChain as? EvmClass
-//            undelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
-//            undelegate.modalTransitionStyle = .coverVertical
-//            self.present(undelegate, animated: true)
-            
-        } else if (selectedChain is ChainInitia) {
+        if (selectedChain is ChainInitia) {
             let undelegate = CosmosUndelegate(nibName: "CosmosUndelegate", bundle: nil)
             undelegate.selectedChain = selectedChain
             undelegate.fromValidatorInitia = initiaValidators.filter({ $0.operatorAddress == fromValAddress }).first
@@ -322,14 +306,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain is ChainBeraEVM_T) {
-//            let redelegate = EvmRedelegate(nibName: "EvmRedelegate", bundle: nil)
-//            redelegate.selectedChain = selectedChain as? EvmClass
-//            redelegate.fromValidator = validators.filter({ $0.operatorAddress == fromValAddress }).first
-//            redelegate.modalTransitionStyle = .coverVertical
-//            self.present(redelegate, animated: true)
-            
-        } else if (selectedChain is ChainInitia) {
+        if (selectedChain is ChainInitia) {
             let redelegate = CosmosRedelegate(nibName: "CosmosRedelegate", bundle: nil)
             redelegate.selectedChain = selectedChain
             redelegate.fromValidatorInitia = initiaValidators.filter({ $0.operatorAddress == fromValAddress }).first
@@ -397,14 +374,7 @@ class CosmosStakingInfoVC: BaseVC {
             onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (selectedChain is ChainBeraEVM_T) {
-//            let cancel = EvmCancelUnbonding(nibName: "EvmCancelUnbonding", bundle: nil)
-//            cancel.selectedChain = selectedChain as? EvmClass
-//            cancel.unbondingEntry = unbondings[position]
-//            cancel.modalTransitionStyle = .coverVertical
-//            self.present(cancel, animated: true)
-            
-        } else if (selectedChain is ChainInitia) {
+        if (selectedChain is ChainInitia) {
             let cancel = CosmosCancelUnbonding(nibName: "CosmosCancelUnbonding", bundle: nil)
             cancel.selectedChain = selectedChain
             cancel.unbondingEntryInitia = initiaUnbondings[position]

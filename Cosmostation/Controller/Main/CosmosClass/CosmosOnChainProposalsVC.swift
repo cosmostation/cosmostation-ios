@@ -116,19 +116,11 @@ class CosmosOnChainProposalsVC: BaseVC {
             }
         }
         
-        if (selectedChain is ChainBeraEVM_T) {
-            if (toVoteProposals.count > 1) {
-                onShowToast(NSLocalizedString("error_bera_vote_one_proposal", comment: ""))
-                return
-            }
-        } else {
-            let vote = CosmosVote(nibName: "CosmosVote", bundle: nil)
-            vote.selectedChain = selectedChain
-            vote.toVoteProposals = toVoteProposals
-            vote.modalTransitionStyle = .coverVertical
-            self.present(vote, animated: true)
-        }
-        
+        let vote = CosmosVote(nibName: "CosmosVote", bundle: nil)
+        vote.selectedChain = selectedChain
+        vote.toVoteProposals = toVoteProposals
+        vote.modalTransitionStyle = .coverVertical
+        self.present(vote, animated: true)
     }
 
 }

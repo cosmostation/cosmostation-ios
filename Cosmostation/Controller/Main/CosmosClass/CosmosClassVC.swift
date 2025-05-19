@@ -289,19 +289,17 @@ class CosmosClassVC: BaseVC {
                     self.onClaimCommissionTx()
                 }
             }
-//            if !(selectedChain is ChainBeraEVM) {                                                                       //disable for bera
-                mainFab.addItem(title: "Compound All", image: UIImage(named: "iconFabCompounding")) { _ in
-                    self.onClaimCompoundingTx()
+            mainFab.addItem(title: "Compound All", image: UIImage(named: "iconFabCompounding")) { _ in
+                self.onClaimCompoundingTx()
+            }
+            mainFab.addItem(title: "Claim All", image: UIImage(named: "iconFabClaim")) { _ in
+                if let babylonChain = (self.selectedChain as? ChainBabylon),
+                   let babylonBtcFetcher = babylonChain.getBabylonBtcFetcher() {
+                    self.onBabylonClaimRewardTx(babylonChain, babylonBtcFetcher)
+                    return
                 }
-                mainFab.addItem(title: "Claim All", image: UIImage(named: "iconFabClaim")) { _ in
-                    if let babylonChain = (self.selectedChain as? ChainBabylon),
-                       let babylonBtcFetcher = babylonChain.getBabylonBtcFetcher() {
-                        self.onBabylonClaimRewardTx(babylonChain, babylonBtcFetcher)
-                        return
-                    }
-                    self.onClaimRewardTx()
-                }
-//            }
+                self.onClaimRewardTx()
+            }
             
             let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
             mainFab.addItem(title: "\(symbol) Manage Stake", image: UIImage(named: "iconFabStake")) { _ in
