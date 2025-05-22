@@ -2431,6 +2431,10 @@
 		E1F257F32BFCA223008F4D21 /* EvmVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257EF2BFCA223008F4D21 /* EvmVote.swift */; };
 		E1F257F42BFCA223008F4D21 /* EvmVote.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F257F02BFCA223008F4D21 /* EvmVote.xib */; };
 		E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F2AE50227EC05100C87F3F /* InfoPlist.strings */; };
+		E1F945552DDF203D00672DE1 /* ChainWardenEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F945542DDF203D00672DE1 /* ChainWardenEVM.swift */; };
+		E1F945562DDF203D00672DE1 /* ChainWardenEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F945542DDF203D00672DE1 /* ChainWardenEVM.swift */; };
+		E1F945582DDF205200672DE1 /* ChainWardenEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F945572DDF205200672DE1 /* ChainWardenEVM_T.swift */; };
+		E1F945592DDF205200672DE1 /* ChainWardenEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F945572DDF205200672DE1 /* ChainWardenEVM_T.swift */; };
 		EB85535FBF1815AEAECE43D4 /* Pods_CosmostationDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE90772AFD2E77BC9578D8B2 /* Pods_CosmostationDev.framework */; };
 /* End PBXBuildFile section */
 
@@ -3790,6 +3794,8 @@
 		E1F2AE4B227E865D00C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1F2AE4F227EC05100C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E1F2AE51227EC06900C87F3F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E1F945542DDF203D00672DE1 /* ChainWardenEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainWardenEVM.swift; sourceTree = "<group>"; };
+		E1F945572DDF205200672DE1 /* ChainWardenEVM_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainWardenEVM_T.swift; sourceTree = "<group>"; };
 		FA3F07B8EA5FD2C04B9EB807 /* Pods_Cosmostation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cosmostation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -3905,6 +3911,7 @@
 				79B7F3622D8177A500AA755B /* ChainStratosEVM.swift */,
 				04E4138B2D27C76E001378D3 /* ChainTabiEVM.swift */,
 				0485A50C2CDA473400DE1661 /* ChainTenetEVM.swift */,
+				E1F945542DDF203D00672DE1 /* ChainWardenEVM.swift */,
 				045032352C1EEA9600235F6A /* ChainXplaEVM.swift */,
 				7948D6742D911D98005208B2 /* ChainXrplEVM.swift */,
 				04983BF72C4E745B004DD391 /* ChainZetaEVM.swift */,
@@ -4532,6 +4539,7 @@
 				79909BCC2D8BB51D000CE2ED /* ChainSelf_T.swift */,
 				040AC1832C9BDC5F00427AFD /* ChainStoryEVM_T.swift */,
 				04E4138E2D27C788001378D3 /* ChainTabiEVM_T.swift */,
+				E1F945572DDF205200672DE1 /* ChainWardenEVM_T.swift */,
 				79813A792D5477FC0083A1F5 /* ChainXion_T.swift */,
 				7948D6762D911E3F005208B2 /* ChainXrplEVM_T.swift */,
 				7948D6722D91035B005208B2 /* ChainZkCloud_T.swift */,
@@ -6479,6 +6487,7 @@
 				045032F02C1EFE5500235F6A /* ChainOsmosis.swift in Sources */,
 				047843CC2AC991B300462F1C /* injective_peggy_v1_ethereum_signer.pb.swift in Sources */,
 				04C817032BA98D75006B800A /* cosmos_tx_v1beta1_service.pb.swift in Sources */,
+				E1F945552DDF203D00672DE1 /* ChainWardenEVM.swift in Sources */,
 				E122DC4F2A8A4712006D1E7B /* tendermint_types_block.pb.swift in Sources */,
 				E131F44F2AEEAAB800E760A0 /* CreateNameSheet.swift in Sources */,
 				E10B1DC72C2159040039283B /* KavaEarnWithdrawAction.swift in Sources */,
@@ -6859,6 +6868,7 @@
 				E10B1DFF2C215EF20039283B /* OkAddShare.swift in Sources */,
 				E11069B72AA4C57600EB02CA /* cosmwasm_wasm_v1_proposal.pb.swift in Sources */,
 				04C817832BA98D75006B800A /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift in Sources */,
+				E1F945582DDF205200672DE1 /* ChainWardenEVM_T.swift in Sources */,
 				04C8167D2BA98D74006B800A /* cosmos_nft_v1beta1_tx.pb.swift in Sources */,
 				04D279DD2A66863C00AF046A /* BaseAccount.swift in Sources */,
 				18F4129A286062FA0007E3F2 /* MWords.swift in Sources */,
@@ -7398,6 +7408,7 @@
 				04C817282BA98D75006B800A /* cosmos_group_v1_query.grpc.swift in Sources */,
 				04C816E02BA98D75006B800A /* cosmos_evidence_v1beta1_evidence.pb.swift in Sources */,
 				0450331E2C1F045900235F6A /* ChainTerra.swift in Sources */,
+				E1F945592DDF205200672DE1 /* ChainWardenEVM_T.swift in Sources */,
 				04CD24532AD1621800497EF5 /* TxAmountLegacySheet.swift in Sources */,
 				79FCA3BE2C3F9E92001C17D0 /* artela_evm_v1_genesis.pb.swift in Sources */,
 				792613D02CD4B82800FAF47D /* initia_distribution_v1_query.pb.swift in Sources */,
@@ -7585,6 +7596,7 @@
 				7992617D2D77EE66007E9911 /* babylon_incentive_genesis.pb.swift in Sources */,
 				047843232AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift in Sources */,
 				799261692D77EE66007E9911 /* babylon_btcstaking_v1_query.grpc.swift in Sources */,
+				E1F945562DDF203D00672DE1 /* ChainWardenEVM.swift in Sources */,
 				79B422762DA79E170022A4F9 /* BtcUndelegate.swift in Sources */,
 				792613B22CD4B82800FAF47D /* initia_reward_v1_types.pb.swift in Sources */,
 				79B422652DA37CC90022A4F9 /* NeutronStakingInfoVC.swift in Sources */,
