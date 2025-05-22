@@ -451,7 +451,7 @@ extension BaseChain {
     }
     
     func getChainName() -> String {
-        return name
+        return getChainListParam()["chain_name"].string ?? name
     }
     
     func getChainImage() -> UIImage {
@@ -815,6 +815,8 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainThor())
     result.append(ChainUmee())
     result.append(ChainUnification())
+    result.append(ChainUnion())
+//    result.append(ChainWardenEVM())                     //EVM
     result.append(ChainXion())
     result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
@@ -839,6 +841,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMonad_T())
     result.append(ChainSelf_T())
     result.append(ChainTabiEVM_T())
+    result.append(ChainWardenEVM_T())
     result.append(ChainXion_T())
     result.append(ChainXrplEVM_T())
     result.append(ChainZkCloud_T())

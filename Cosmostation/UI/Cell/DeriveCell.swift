@@ -115,7 +115,7 @@ class DeriveCell: UITableViewCell {
 //            hdPathLabel.text = ""
 //        }
         
-        if (chain.name == "OKT" && !chain.supportEvm) {
+        if chain is ChainOkt996Keccak {
             keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
             keyTypeTag.isHidden = false
         }

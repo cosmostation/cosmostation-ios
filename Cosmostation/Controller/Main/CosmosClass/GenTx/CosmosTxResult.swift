@@ -45,7 +45,7 @@ class CosmosTxResult: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        if (selectedChain.name != "OKT") {
+        if !(selectedChain is ChainOktEVM) {
             cosmosFetcher = selectedChain.getCosmosfetcher()
         }
         
@@ -57,7 +57,7 @@ class CosmosTxResult: BaseVC {
         loadingView.play()
         
         confirmBtn.isEnabled = false
-        if (selectedChain.name == "OKT") {
+        if selectedChain is ChainOktEVM {
             successMintscanBtn.setTitle("Check in Explorer", for: .normal)
             failMintscanBtn.setTitle("Check in Explorer", for: .normal)
             guard legacyResult != nil else {
@@ -226,7 +226,7 @@ class CosmosTxResult: BaseVC {
             
         } else {
             var hash: String?
-            if (selectedChain.name == "OKT") {
+            if selectedChain is ChainOktEVM {
                 hash = legacyResult!["txhash"].string
             } else {
                 hash = broadcastTxResponse?.txhash

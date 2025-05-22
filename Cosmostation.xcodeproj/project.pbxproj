@@ -2161,6 +2161,8 @@
 		E122DC6C2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */; };
 		E122DC6D2A8F5BE3006D1E7B /* BaseNetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */; };
 		E1271B04224B17230083AF17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
+		E12DFA742DD48A7300E53C10 /* ChainUnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12DFA732DD48A7200E53C10 /* ChainUnion.swift */; };
+		E12DFA752DD48A7300E53C10 /* ChainUnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12DFA732DD48A7200E53C10 /* ChainUnion.swift */; };
 		E12E9D2F2AE415D900336449 /* loadingSmallYellow.json in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */; };
 		E12E9D302AE415D900336449 /* loadingSmallYellow.json in Resources */ = {isa = PBXBuildFile; fileRef = E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */; };
 		E131F4482AEE9BC000E760A0 /* QrImportCheckKeySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131F4462AEE9BC000E760A0 /* QrImportCheckKeySheet.swift */; };
@@ -2429,6 +2431,10 @@
 		E1F257F32BFCA223008F4D21 /* EvmVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257EF2BFCA223008F4D21 /* EvmVote.swift */; };
 		E1F257F42BFCA223008F4D21 /* EvmVote.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F257F02BFCA223008F4D21 /* EvmVote.xib */; };
 		E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F2AE50227EC05100C87F3F /* InfoPlist.strings */; };
+		E1F945552DDF203D00672DE1 /* ChainWardenEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F945542DDF203D00672DE1 /* ChainWardenEVM.swift */; };
+		E1F945562DDF203D00672DE1 /* ChainWardenEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F945542DDF203D00672DE1 /* ChainWardenEVM.swift */; };
+		E1F945582DDF205200672DE1 /* ChainWardenEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F945572DDF205200672DE1 /* ChainWardenEVM_T.swift */; };
+		E1F945592DDF205200672DE1 /* ChainWardenEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F945572DDF205200672DE1 /* ChainWardenEVM_T.swift */; };
 		EB85535FBF1815AEAECE43D4 /* Pods_CosmostationDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE90772AFD2E77BC9578D8B2 /* Pods_CosmostationDev.framework */; };
 /* End PBXBuildFile section */
 
@@ -3641,6 +3647,7 @@
 		E122DC652A8DBD28006D1E7B /* BaseHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHeader.swift; sourceTree = "<group>"; };
 		E122DC682A8DBD3B006D1E7B /* BaseHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseHeader.xib; sourceTree = "<group>"; };
 		E122DC6B2A8F5BE3006D1E7B /* BaseNetWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetWork.swift; sourceTree = "<group>"; };
+		E12DFA732DD48A7200E53C10 /* ChainUnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainUnion.swift; sourceTree = "<group>"; };
 		E12E9D2E2AE415D900336449 /* loadingSmallYellow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingSmallYellow.json; sourceTree = "<group>"; };
 		E131F4462AEE9BC000E760A0 /* QrImportCheckKeySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrImportCheckKeySheet.swift; sourceTree = "<group>"; };
 		E131F4472AEE9BC000E760A0 /* QrImportCheckKeySheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QrImportCheckKeySheet.xib; sourceTree = "<group>"; };
@@ -3787,6 +3794,8 @@
 		E1F2AE4B227E865D00C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1F2AE4F227EC05100C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E1F2AE51227EC06900C87F3F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E1F945542DDF203D00672DE1 /* ChainWardenEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainWardenEVM.swift; sourceTree = "<group>"; };
+		E1F945572DDF205200672DE1 /* ChainWardenEVM_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainWardenEVM_T.swift; sourceTree = "<group>"; };
 		FA3F07B8EA5FD2C04B9EB807 /* Pods_Cosmostation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cosmostation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -3902,6 +3911,7 @@
 				79B7F3622D8177A500AA755B /* ChainStratosEVM.swift */,
 				04E4138B2D27C76E001378D3 /* ChainTabiEVM.swift */,
 				0485A50C2CDA473400DE1661 /* ChainTenetEVM.swift */,
+				E1F945542DDF203D00672DE1 /* ChainWardenEVM.swift */,
 				045032352C1EEA9600235F6A /* ChainXplaEVM.swift */,
 				7948D6742D911D98005208B2 /* ChainXrplEVM.swift */,
 				04983BF72C4E745B004DD391 /* ChainZetaEVM.swift */,
@@ -4024,6 +4034,7 @@
 				E1BC05932CE73A1C0060A2B3 /* ChainThor.swift */,
 				0450331B2C1F045900235F6A /* ChainUmee.swift */,
 				79C518762CC8E3DA00BC0E85 /* ChainUnification.swift */,
+				E12DFA732DD48A7200E53C10 /* ChainUnion.swift */,
 				0485A4FD2CD9FC3A00DE1661 /* ChainXion.swift */,
 				045033182C1F045900235F6A /* ChainXpla.swift */,
 				79813A602D530A9E0083A1F5 /* ChainZenrock.swift */,
@@ -4528,6 +4539,7 @@
 				79909BCC2D8BB51D000CE2ED /* ChainSelf_T.swift */,
 				040AC1832C9BDC5F00427AFD /* ChainStoryEVM_T.swift */,
 				04E4138E2D27C788001378D3 /* ChainTabiEVM_T.swift */,
+				E1F945572DDF205200672DE1 /* ChainWardenEVM_T.swift */,
 				79813A792D5477FC0083A1F5 /* ChainXion_T.swift */,
 				7948D6762D911E3F005208B2 /* ChainXrplEVM_T.swift */,
 				7948D6722D91035B005208B2 /* ChainZkCloud_T.swift */,
@@ -6475,6 +6487,7 @@
 				045032F02C1EFE5500235F6A /* ChainOsmosis.swift in Sources */,
 				047843CC2AC991B300462F1C /* injective_peggy_v1_ethereum_signer.pb.swift in Sources */,
 				04C817032BA98D75006B800A /* cosmos_tx_v1beta1_service.pb.swift in Sources */,
+				E1F945552DDF203D00672DE1 /* ChainWardenEVM.swift in Sources */,
 				E122DC4F2A8A4712006D1E7B /* tendermint_types_block.pb.swift in Sources */,
 				E131F44F2AEEAAB800E760A0 /* CreateNameSheet.swift in Sources */,
 				E10B1DC72C2159040039283B /* KavaEarnWithdrawAction.swift in Sources */,
@@ -6748,6 +6761,7 @@
 				E1657B0C2AD0159D00264A21 /* SecButton.swift in Sources */,
 				04C8177F2BA98D75006B800A /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
 				0400EEEA2ADBE1D3007BA97F /* kava_pricefeed_v1beta1_query.pb.swift in Sources */,
+				E12DFA752DD48A7300E53C10 /* ChainUnion.swift in Sources */,
 				E18B21FA2C4A19FE00AD572F /* NeutronFetcher.swift in Sources */,
 				04C940E12AEB92F800415256 /* BaseImgSheetCell.swift in Sources */,
 				046EA8562AD04A2500A2FCE7 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
@@ -6854,6 +6868,7 @@
 				E10B1DFF2C215EF20039283B /* OkAddShare.swift in Sources */,
 				E11069B72AA4C57600EB02CA /* cosmwasm_wasm_v1_proposal.pb.swift in Sources */,
 				04C817832BA98D75006B800A /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift in Sources */,
+				E1F945582DDF205200672DE1 /* ChainWardenEVM_T.swift in Sources */,
 				04C8167D2BA98D74006B800A /* cosmos_nft_v1beta1_tx.pb.swift in Sources */,
 				04D279DD2A66863C00AF046A /* BaseAccount.swift in Sources */,
 				18F4129A286062FA0007E3F2 /* MWords.swift in Sources */,
@@ -7393,6 +7408,7 @@
 				04C817282BA98D75006B800A /* cosmos_group_v1_query.grpc.swift in Sources */,
 				04C816E02BA98D75006B800A /* cosmos_evidence_v1beta1_evidence.pb.swift in Sources */,
 				0450331E2C1F045900235F6A /* ChainTerra.swift in Sources */,
+				E1F945592DDF205200672DE1 /* ChainWardenEVM_T.swift in Sources */,
 				04CD24532AD1621800497EF5 /* TxAmountLegacySheet.swift in Sources */,
 				79FCA3BE2C3F9E92001C17D0 /* artela_evm_v1_genesis.pb.swift in Sources */,
 				792613D02CD4B82800FAF47D /* initia_distribution_v1_query.pb.swift in Sources */,
@@ -7580,6 +7596,7 @@
 				7992617D2D77EE66007E9911 /* babylon_incentive_genesis.pb.swift in Sources */,
 				047843232AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift in Sources */,
 				799261692D77EE66007E9911 /* babylon_btcstaking_v1_query.grpc.swift in Sources */,
+				E1F945562DDF203D00672DE1 /* ChainWardenEVM.swift in Sources */,
 				79B422762DA79E170022A4F9 /* BtcUndelegate.swift in Sources */,
 				792613B22CD4B82800FAF47D /* initia_reward_v1_types.pb.swift in Sources */,
 				79B422652DA37CC90022A4F9 /* NeutronStakingInfoVC.swift in Sources */,
@@ -8036,6 +8053,7 @@
 				E159809F2A83A9D70032892B /* SlideOutTransition.swift in Sources */,
 				79705CC62D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.pb.swift in Sources */,
 				04C816F82BA98D75006B800A /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */,
+				E12DFA742DD48A7300E53C10 /* ChainUnion.swift in Sources */,
 				045032AC2C1EEFCA00235F6A /* ChainIxo.swift in Sources */,
 				04C8174C2BA98D75006B800A /* cosmos_gov_v1_gov.pb.swift in Sources */,
 				0400EEC52ADBB522007BA97F /* kava_incentive_v1beta1_params.pb.swift in Sources */,

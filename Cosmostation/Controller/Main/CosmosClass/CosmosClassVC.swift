@@ -209,7 +209,7 @@ class CosmosClassVC: BaseVC {
         tabbar.items.append(coinTabBar)
         if (BaseData.instance.showEvenReview() && selectedChain.isSupportCw721()) { tabbar.items.append(nftTabBar) }
         tabbar.items.append(receiveTabBar)
-        if (selectedChain.name == "OKT" || selectedChain.isSupportMintscan()) { tabbar.items.append(historyTabBar) }
+        if (selectedChain is ChainOktEVM || selectedChain.isSupportMintscan()) { tabbar.items.append(historyTabBar) }
         if (BaseData.instance.showEvenReview() && selectedChain.isSupportMobileDapp() && selectedChain.isDefault) { tabbar.items.append(ecosystemTabBar) }
         if (!selectedChain.getChainListParam().isEmpty) { tabbar.items.append(aboutTabBar) }
         
@@ -251,7 +251,7 @@ class CosmosClassVC: BaseVC {
             item.imageSize = CGSize(width: 24, height: 24)
         }
         
-        if (selectedChain is ChainNeutron) {
+        if selectedChain is ChainNeutron {
             mainFab.addItem(title: "Vault", image: UIImage(named: "iconFabVault")) { _ in
                 self.onNeutronVault()
             }
@@ -259,14 +259,14 @@ class CosmosClassVC: BaseVC {
                 self.onNeutronProposals()
             }
             
-        } else if (selectedChain.name == "Kava") {
+        } else if selectedChain is ChainKavaEVM {
             if (BaseData.instance.showEvenReview()) {
                 mainFab.addItem(title: "DeFi", image: UIImage(named: "iconFabDefi")) { _ in
                     self.onKavaDefi()
                 }
             }
             
-        } else if (selectedChain.name == "OKT") {
+        } else if selectedChain is ChainOktEVM {
             mainFab.addItem(title: "Select Validators", image: UIImage(named: "iconFabAddShare")) { _ in
                 self.onOkAddShareTx()
             }
@@ -289,19 +289,17 @@ class CosmosClassVC: BaseVC {
                     self.onClaimCommissionTx()
                 }
             }
-//            if !(selectedChain is ChainBeraEVM) {                                                                       //disable for bera
-                mainFab.addItem(title: "Compound All", image: UIImage(named: "iconFabCompounding")) { _ in
-                    self.onClaimCompoundingTx()
+            mainFab.addItem(title: "Compound All", image: UIImage(named: "iconFabCompounding")) { _ in
+                self.onClaimCompoundingTx()
+            }
+            mainFab.addItem(title: "Claim All", image: UIImage(named: "iconFabClaim")) { _ in
+                if let babylonChain = (self.selectedChain as? ChainBabylon),
+                   let babylonBtcFetcher = babylonChain.getBabylonBtcFetcher() {
+                    self.onBabylonClaimRewardTx(babylonChain, babylonBtcFetcher)
+                    return
                 }
-                mainFab.addItem(title: "Claim All", image: UIImage(named: "iconFabClaim")) { _ in
-                    if let babylonChain = (self.selectedChain as? ChainBabylon),
-                       let babylonBtcFetcher = babylonChain.getBabylonBtcFetcher() {
-                        self.onBabylonClaimRewardTx(babylonChain, babylonBtcFetcher)
-                        return
-                    }
-                    self.onClaimRewardTx()
-                }
-//            }
+                self.onClaimRewardTx()
+            }
             
             let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
             mainFab.addItem(title: "\(symbol) Manage Stake", image: UIImage(named: "iconFabStake")) { _ in

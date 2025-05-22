@@ -158,7 +158,7 @@ class Portfolio2Cell: UITableViewCell {
         symbolLabel.text = chain.getChainListParam()["main_asset_symbol"].string ?? chain.getChainListParam()["staking_asset_symbol"].string
         
         //DP Price
-        if (chain.name == "OKT") {
+        if chain is ChainOktEVM {
             guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? chain.coinSymbol) else { return }
             WDP.dpPrice(msAsset.coinGeckoId, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(msAsset.coinGeckoId, priceChangeLabel, priceChangePercentLabel)

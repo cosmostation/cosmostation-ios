@@ -20,11 +20,11 @@ class ChainPaloma: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "ugrain"
         bechAccountPrefix = "paloma"
         validatorPrefix = "palomavaloper"
         grpcHost = "paloma.grpc.kjnodes.com"
-        lcdUrl = "https://paloma.api.kjnodes.com/"
+        lcdUrl = "https://api-1.paloma.nodes.guru/"
     }
 }

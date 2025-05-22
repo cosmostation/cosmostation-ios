@@ -138,7 +138,7 @@ class LegacyTransfer: BaseVC {
         } else {
             toSendAmount = NSDecimalNumber(string: amount)
             
-            if (selectedChain.name == "OKT") {
+            if selectedChain is ChainOktEVM {
                 toAssetDenomLabel.text = msAsset.symbol?.uppercased()
                 toAssetAmountLabel?.attributedText = WDP.dpAmount(toSendAmount.stringValue, toAssetAmountLabel!.font, 18)
                 toSendAssetHint.isHidden = true
@@ -204,7 +204,7 @@ class LegacyTransfer: BaseVC {
     }
     
     func onUpdateFeeView() {
-        if (selectedChain.name == "OKT") {
+        if selectedChain is ChainOktEVM {
             feeSelectImg.sd_setImage(with: selectedChain.assetImgUrl(stakeDenom), placeholderImage: UIImage(named: "tokenDefault"))
             feeSelectLabel.text = stakeDenom.uppercased()
             guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? selectedChain.coinSymbol) else { return }

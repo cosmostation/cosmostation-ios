@@ -48,7 +48,7 @@ class QrAddressPopupVC: BaseVC {
             }
             
             oldTag.isHidden = selectedChain.isDefault
-            if (selectedChain.name == "OKT" && !selectedChain.supportEvm) {
+            if selectedChain is ChainOkt996Keccak {
                 keyTypeTag.text = selectedChain.accountKeyType.pubkeyType.algorhythm
                 keyTypeTag.isHidden = false
             }

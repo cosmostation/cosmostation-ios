@@ -134,7 +134,7 @@ extension CosmosTokenVC: UITableViewDelegate, UITableViewDataSource {
             view.titleLabel.text = "Cw20 Tokens"
             view.cntLabel.text = String(mintscanCw20Tokens.count)
         } else {
-            if (selectedChain.name == "OKT") {
+            if selectedChain is ChainOktEVM {
                 view.titleLabel.text = "Kip20 Tokens"
             } else {
                 view.titleLabel.text = "Erc20 Tokens"
