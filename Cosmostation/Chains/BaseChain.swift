@@ -792,6 +792,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainRizon())
     result.append(ChainRouterEVM())
     result.append(ChainSaga())
+//    result.append(ChainSaharaAiEVM())                   //EVM
     result.append(ChainSecret118())
     result.append(ChainSecret529())
     result.append(ChainSeda())
@@ -822,6 +823,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainXpla())
 //    result.append(ChainXrplEVM())                       //EVM
     result.append(ChainZenrock())
+//    result.append(ChainZeroGravityEVM())                //EVM
     result.append(ChainZetaEVM())                       //EVM
 
     
@@ -839,11 +841,13 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNillion_T())
     result.append(ChainMantra_T())
     result.append(ChainMonad_T())
+    result.append(ChainSaharaAiEVM_T())
     result.append(ChainSelf_T())
     result.append(ChainTabiEVM_T())
     result.append(ChainWardenEVM_T())
     result.append(ChainXion_T())
     result.append(ChainXrplEVM_T())
+    result.append(ChainZeroGravityEVM_T())
     result.append(ChainZkCloud_T())
     
     
