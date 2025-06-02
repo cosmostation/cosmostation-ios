@@ -504,6 +504,7 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
         affiliate["osmosis-1"] = ["affiliates" : [ ["address" : "osmo1clpqr4nrk4khgkxj78fcwwh6dl3uw4epasmvnj", "basis_points_fee" : fee]]]
         affiliate["neutron-1"] = ["affiliates" : [ ["address" : "neutron1clpqr4nrk4khgkxj78fcwwh6dl3uw4ep35p7l8", "basis_points_fee" : fee]]]
         affiliate["phoenix-1"] = ["affiliates" : [ ["address" : "terra1564j3fq8p8np4yhh4lytnftz33japc03wuejxm", "basis_points_fee" : fee]]]
+        affiliate["columbus-5"] = ["affiliates" : [ ["address" : "terra1dq8kly92022xla22xjq6qht624yltkz3l95fac", "basis_points_fee" : fee]]]
         affiliate["pacific-1"] = ["affiliates" : [ ["address" : "sei1hnkkqnzwmyw652muh6wfea7xlfgplnyj3edm09", "basis_points_fee" : fee]]]
         affiliate["injective-1"] = ["affiliates" : [ ["address" : "inj1rvqzf9u2uxttmshn302anlknfgsatrh5mcu6la", "basis_points_fee" : fee]]]
         affiliate["chihuahua-1"] = ["affiliates" : [ ["address" : "chihuahua1tgcypttehx3afugys6eq28h0kpmswfkgcuewfw", "basis_points_fee" : fee]]]
