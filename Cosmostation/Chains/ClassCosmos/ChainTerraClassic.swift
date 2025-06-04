@@ -20,11 +20,11 @@ class ChainTerraClassic: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/330'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uluna"
         bechAccountPrefix = "terra"
         validatorPrefix = "terravaloper"
-        grpcHost = "https://terra-classic-grpc-web.publicnode.com"
+        grpcHost = ""
         lcdUrl = "https://terra-classic-lcd.publicnode.com/"
     }
 }
