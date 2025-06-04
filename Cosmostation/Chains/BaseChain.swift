@@ -784,6 +784,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainProvenance())
     result.append(ChainPryzm())
     result.append(ChainPundix())
+//    result.append(ChainQubeticsEVM())                   //EVM
     result.append(ChainQuicksilver())
     result.append(ChainRealioEVM())
     result.append(ChainRegen())
@@ -840,6 +841,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNillion_T())
     result.append(ChainMantra_T())
     result.append(ChainMonad_T())
+    result.append(ChainQubeticsEVM_T())
     result.append(ChainSaharaAiEVM_T())
     result.append(ChainSelf_T())
     result.append(ChainTabiEVM_T())
