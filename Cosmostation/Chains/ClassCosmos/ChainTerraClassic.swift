@@ -8,15 +8,15 @@
 
 import Foundation
 
-class ChainTerra: BaseChain  {
+class ChainTerraClassic: BaseChain  {
     
     override init() {
         super.init()
         
         name = "TerraClassic"
-        tag = "terra330"
-        chainImg = "chainTerra"
-        apiName = "terra"
+        tag = "terraclassic330"
+        chainImg = "chainTerraClassic"
+        apiName = "terra-classic"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/330'/0'/0/X")
         
         

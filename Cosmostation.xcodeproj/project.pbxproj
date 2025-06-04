@@ -2439,6 +2439,8 @@
 		E1F257F32BFCA223008F4D21 /* EvmVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F257EF2BFCA223008F4D21 /* EvmVote.swift */; };
 		E1F257F42BFCA223008F4D21 /* EvmVote.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F257F02BFCA223008F4D21 /* EvmVote.xib */; };
 		E1F2AE4E227EC05100C87F3F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F2AE50227EC05100C87F3F /* InfoPlist.strings */; };
+		E1F469FD2DF0131A00D34038 /* ChainTerraClassic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F469FC2DF0131A00D34038 /* ChainTerraClassic.swift */; };
+		E1F469FE2DF0131A00D34038 /* ChainTerraClassic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F469FC2DF0131A00D34038 /* ChainTerraClassic.swift */; };
 		E1F945552DDF203D00672DE1 /* ChainWardenEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F945542DDF203D00672DE1 /* ChainWardenEVM.swift */; };
 		E1F945562DDF203D00672DE1 /* ChainWardenEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F945542DDF203D00672DE1 /* ChainWardenEVM.swift */; };
 		E1F945582DDF205200672DE1 /* ChainWardenEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F945572DDF205200672DE1 /* ChainWardenEVM_T.swift */; };
@@ -3806,6 +3808,7 @@
 		E1F2AE4B227E865D00C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1F2AE4F227EC05100C87F3F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E1F2AE51227EC06900C87F3F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E1F469FC2DF0131A00D34038 /* ChainTerraClassic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainTerraClassic.swift; sourceTree = "<group>"; };
 		E1F945542DDF203D00672DE1 /* ChainWardenEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainWardenEVM.swift; sourceTree = "<group>"; };
 		E1F945572DDF205200672DE1 /* ChainWardenEVM_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainWardenEVM_T.swift; sourceTree = "<group>"; };
 		FA3F07B8EA5FD2C04B9EB807 /* Pods_Cosmostation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cosmostation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4045,6 +4048,7 @@
 				7981F75D2D0C31E900BB50DA /* ChainSynternet.swift */,
 				0450331A2C1F045900235F6A /* ChainTeritori.swift */,
 				045033192C1F045900235F6A /* ChainTerra.swift */,
+				E1F469FC2DF0131A00D34038 /* ChainTerraClassic.swift */,
 				E1BC05932CE73A1C0060A2B3 /* ChainThor.swift */,
 				0450331B2C1F045900235F6A /* ChainUmee.swift */,
 				79C518762CC8E3DA00BC0E85 /* ChainUnification.swift */,
@@ -7137,6 +7141,7 @@
 				046651FC2DACDB2700F9C125 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
 				046651FD2DACDB2700F9C125 /* ibc_core_commitment_v1_commitment.pb.swift in Sources */,
 				046651FE2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_packet.pb.swift in Sources */,
+				E1F469FE2DF0131A00D34038 /* ChainTerraClassic.swift in Sources */,
 				046651FF2DACDB2700F9C125 /* ibc_applications_fee_v1_query.grpc.swift in Sources */,
 				046652002DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift in Sources */,
 				046652012DACDB2700F9C125 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
@@ -7879,6 +7884,7 @@
 				E11069B62AA4C57600EB02CA /* cosmwasm_wasm_v1_proposal.pb.swift in Sources */,
 				04CD245C2AD1CB4300497EF5 /* L_Tx.swift in Sources */,
 				799261842D77EE66007E9911 /* babylon_incentive_tx.pb.swift in Sources */,
+				E1F469FD2DF0131A00D34038 /* ChainTerraClassic.swift in Sources */,
 				04C816F42BA98D75006B800A /* cosmos_authz_v1beta1_authz.pb.swift in Sources */,
 				79FCA3D02C3F9E92001C17D0 /* artela_fee_v1_events.pb.swift in Sources */,
 				04D279DC2A66863C00AF046A /* BaseAccount.swift in Sources */,
