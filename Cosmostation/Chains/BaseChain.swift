@@ -813,6 +813,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainTenetEVM())                      //EVM
     result.append(ChainTeritori())
     result.append(ChainTerra())
+    result.append(ChainTerraClassic())
     result.append(ChainThor())
     result.append(ChainUmee())
     result.append(ChainUnification())
