@@ -772,7 +772,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainOkt996Keccak())                  //LCD
     result.append(ChainOkt996Secp())                    //LCD
     result.append(ChainOmniflix())
-    result.append(ChainOnomy())
     result.append(ChainOptimism())                      //EVM
     result.append(ChainOrai())
     result.append(ChainOsmosis())
@@ -785,6 +784,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainProvenance())
     result.append(ChainPryzm())
     result.append(ChainPundix())
+//    result.append(ChainQubeticsEVM())                   //EVM
     result.append(ChainQuicksilver())
     result.append(ChainRealioEVM())
     result.append(ChainRegen())
@@ -825,6 +825,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainZenrock())
 //    result.append(ChainZeroGravityEVM())                //EVM
     result.append(ChainZetaEVM())                       //EVM
+//    result.append(ChainZigChain())
 
     
     
@@ -841,6 +842,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNillion_T())
     result.append(ChainMantra_T())
     result.append(ChainMonad_T())
+    result.append(ChainQubeticsEVM_T())
     result.append(ChainSaharaAiEVM_T())
     result.append(ChainSelf_T())
     result.append(ChainTabiEVM_T())
@@ -848,6 +850,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainXion_T())
     result.append(ChainXrplEVM_T())
     result.append(ChainZeroGravityEVM_T())
+    result.append(ChainZigChain_T())
     result.append(ChainZkCloud_T())
     
     
@@ -858,6 +861,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainEmoney())
 //    result.append(ChainGovgen())
 //    result.append(ChainMars())
+//    result.append(ChainOnomy())
 //    result.append(ChainQuasar())
 //    result.append(ChainStafi())
 //    result.append(ChainStarname())
