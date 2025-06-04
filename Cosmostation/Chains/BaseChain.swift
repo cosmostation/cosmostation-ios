@@ -772,7 +772,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainOkt996Keccak())                  //LCD
     result.append(ChainOkt996Secp())                    //LCD
     result.append(ChainOmniflix())
-    result.append(ChainOnomy())
     result.append(ChainOptimism())                      //EVM
     result.append(ChainOrai())
     result.append(ChainOsmosis())
@@ -858,6 +857,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainEmoney())
 //    result.append(ChainGovgen())
 //    result.append(ChainMars())
+//    result.append(ChainOnomy())
 //    result.append(ChainQuasar())
 //    result.append(ChainStafi())
 //    result.append(ChainStarname())
