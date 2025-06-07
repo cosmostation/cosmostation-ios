@@ -14,9 +14,8 @@ import SwiftyJSON
 class BaseNetWork {
     
     func fetchChainParams() {
-//        print("fetchChainParams ", BaseNetWork.msChainParams())
         #if !DEBUG
-        if (!BaseData.instance.needChainParamUpdate()) { return }
+        if (!BaseData.instance.needChainParamUpdate() && BaseData.instance.mintscanChainParam != nil) { return }
         #endif
         AF.request(BaseNetWork.msChainParams(), method: .get)
             .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
@@ -35,9 +34,11 @@ class BaseNetWork {
         return try await AF.request(BaseNetWork.msChainParams(), method: .get).serializingDecodable(JSON.self).value
     }
     
+    
     func fetchPrices(_ force: Bool? = false) {
-//        print("fetchPrices ", BaseNetWork.msPricesUrl())
+        #if !DEBUG
         if (!BaseData.instance.needPriceUpdate() && force == false) { return }
+        #endif
         AF.request(BaseNetWork.msPricesUrl(), method: .get)
             .responseDecodable(of: [MintscanPrice].self, queue: .main, decoder: JSONDecoder()) { response in
                 switch response.result {
@@ -65,80 +66,37 @@ class BaseNetWork {
             }
     }
     
-    func fetchAssets() {
-        AF.request(BaseNetWork.msAssetsUrl(), method: .get)
-            .responseDecodable(of: MintscanAssets.self, queue: .main, decoder: JSONDecoder()) { response in
-                switch response.result {
-                case .success(let value):
-                    BaseData.instance.mintscanAssets = value.assets
-//                    print("mintscanAssets ", BaseData.instance.mintscanAssets?.count)
-                case .failure:
-                    print("fetchAssets error ", response.error)
-                }
-                NotificationCenter.default.post(name: Notification.Name("FetchAssets"), object: nil, userInfo: nil)
-            }
+    func fetchPricesUser(_ force: Bool? = false) async throws -> [MintscanPrice] {
+        return try await AF.request(BaseNetWork.msPricesUrl(), method: .get).serializingDecodable([MintscanPrice].self).value
     }
     
-    func fetchEcosystems() {
-        Task {
-            do {
-                BaseData.instance.allEcosystems = try await AF.request(BaseNetWork.getAllDappURL(), method: .get).serializingDecodable([JSON].self).value
-            } catch {
-                print("fetchEcosystems error", error)
-            }
-        }
+    func fetchPricesUSD(_ force: Bool? = false) async throws -> [MintscanPrice] {
+        return try await AF.request(BaseNetWork.msUSDPricesUrl(), method: .get).serializingDecodable([MintscanPrice].self).value
     }
     
-    func fetchCw20Tokens() {
-        AF.request(BaseNetWork.msCw20Url(), method: .get)
-            .responseDecodable(of: MintscanTokens.self, queue: .main, decoder: JSONDecoder()) { response in
-                switch response.result {
-                case .success(let value):
-                    BaseData.instance.mintscanCw20Tokens = value.assets
-                case .failure:
-                    print("fetchCw20 error ", response.error)
-                }
-                NotificationCenter.default.post(name: Notification.Name("FetchCw20s"), object: nil, userInfo: nil)
-            }
+    
+    func fetchAssets(_ force: Bool? = false) async throws -> MintscanAssets {
+        return try await AF.request(BaseNetWork.msAssetsUrl(), method: .get).serializingDecodable(MintscanAssets.self).value
     }
     
-    func fetchErc20Tokens() {
-        AF.request(BaseNetWork.msErc20Url(), method: .get)
-            .responseDecodable(of: MintscanTokens.self, queue: .main, decoder: JSONDecoder()) { response in
-                switch response.result {
-                case .success(let value):
-                    BaseData.instance.mintscanErc20Tokens = value.assets
-                case .failure:
-                    print("fetchErc20 error ", response.error)
-                }
-                NotificationCenter.default.post(name: Notification.Name("FetchErc20s"), object: nil, userInfo: nil)
-            }
+    func fetchEcosystems() async throws -> [JSON] {
+        return try await AF.request(BaseNetWork.getAllDappURL(), method: .get).serializingDecodable([JSON].self).value
     }
     
-    func fetchGrc20Tokens() {
-        AF.request(BaseNetWork.msGrc20Url(), method: .get)
-            .responseDecodable(of: MintscanTokens.self, queue: .main, decoder: JSONDecoder()) { response in
-                switch response.result {
-                case .success(let value):
-                    BaseData.instance.mintscanGrc20Tokens = value.assets
-                case .failure:
-                    print("fetchGrc20 error ", response.error)
-                }
-                NotificationCenter.default.post(name: Notification.Name("FetchErc20s"), object: nil, userInfo: nil)
-            }
+    func fetchCw20Tokens() async throws -> MintscanTokens {
+        return try await AF.request(BaseNetWork.msCw20Url(), method: .get).serializingDecodable(MintscanTokens.self).value
     }
-
-    func fetchCw721s() {
-        AF.request(BaseNetWork.msCw721Url(), method: .get)
-            .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
-                switch response.result {
-                case .success(let value):
-                    BaseData.instance.mintscanCw721 = value["assets"].arrayValue
-                case .failure:
-                    print("fetchErc20 error ", response.error)
-                }
-                NotificationCenter.default.post(name: Notification.Name("FetchCw721s"), object: nil, userInfo: nil)
-            }
+    
+    func fetchErc20Tokens() async throws -> MintscanTokens {
+        return try await AF.request(BaseNetWork.msErc20Url(), method: .get).serializingDecodable(MintscanTokens.self).value
+    }
+    
+    func fetchGrc20Tokens() async throws -> MintscanTokens {
+        return try await AF.request(BaseNetWork.msGrc20Url(), method: .get).serializingDecodable(MintscanTokens.self).value
+    }
+    
+    func fetchCw721s() async throws -> JSON {
+        return try await AF.request(BaseNetWork.msCw721Url(), method: .get).serializingDecodable(JSON.self).value
     }
 
     
