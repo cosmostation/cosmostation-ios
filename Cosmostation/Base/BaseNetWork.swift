@@ -15,7 +15,7 @@ class BaseNetWork {
     
     func fetchChainParams() {
         #if !DEBUG
-        if (!BaseData.instance.needChainParamUpdate() && BaseData.instance.mintscanChainParam != nil) { return }
+        if (!BaseData.instance.needChainParamUpdate() && BaseData.instance.mintscanChainParams != nil) { return }
         #endif
         AF.request(BaseNetWork.msChainParams(), method: .get)
             .responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
