@@ -3893,11 +3893,12 @@
 		040AC0522C7C1B1300427AFD /* ChainMajor */ = {
 			isa = PBXGroup;
 			children = (
-				04D279F22A67C9A600AF046A /* ChainSui.swift */,
 				04A420E32C74B78D00C0E1A2 /* ChainBitCoin44.swift */,
 				04A420EF2C74CB8300C0E1A2 /* ChainBitCoin49.swift */,
 				04A420E62C74B7AA00C0E1A2 /* ChainBitCoin84.swift */,
 				79813A4F2D3F6ED80083A1F5 /* ChainBitCoin86.swift */,
+				79ED0BCD2DB8890E00C84DB7 /* ChainIota.swift */,
+				04D279F22A67C9A600AF046A /* ChainSui.swift */,
 			);
 			path = ChainMajor;
 			sourceTree = "<group>";
@@ -3999,7 +4000,6 @@
 				04965B3F2C37B39D00403605 /* ChainInitia.swift */,
 				045032932C1EEFC900235F6A /* ChainInjective.swift */,
 				79B7F35E2D81769C00AA755B /* ChainInt3face.swift */,
-				79ED0BCD2DB8890E00C84DB7 /* ChainIota.swift */,
 				0450328F2C1EEFC900235F6A /* ChainIris.swift */,
 				045032962C1EEFC900235F6A /* ChainIxo.swift */,
 				79C518722CC8E08D00BC0E85 /* ChainJackal.swift */,
