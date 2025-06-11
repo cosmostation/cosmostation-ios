@@ -398,7 +398,7 @@ You can download each store.
 	 	
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/govgen/resource/chain_govgen.png?raw=true" width="42" height = "42"></td>
-    <td><span style="font-weight:bold; text-decoration:line-through">GOVGEN</span></td>
+    <td><span style="font-weight:boldh"><del>GOVGEN</del></span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
@@ -602,7 +602,7 @@ You can download each store.
 	 	
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/mars-protocol/resource/chain_mars-protocol.png?raw=true" width="42" height = "42"></td>
-    <td><span style="font-weight:bold; text-decoration:line-through">MARS PROTOCOL</span></td>
+    <td><span style="font-weight:bold"><del>MARS PROTOCOL</del></span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
@@ -714,7 +714,7 @@ You can download each store.
     
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/onomy-protocol/resource/chain_onomy-protocol.png?raw=true" width="42" height = "42"></td>
-    <td><span style="font-weight:bold; text-decoration:line-through">ONOMY</span></td>
+    <td><span style="font-weight:bold"><del>ONOMY</dev></span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
@@ -805,7 +805,7 @@ You can download each store.
     
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/quasar/resource/chain_quasar.png?raw=true" width="42" height = "42"></td>
-    <td><span style="font-weight:bold; text-decoration:line-through">QUASAR</span></td>
+    <td><span style="font-weight:bold"><del>QUASAR<del></span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
@@ -959,7 +959,7 @@ You can download each store.
     
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/stafi/resource/chain_stafi.png?raw=true" width="42" height = "42"></td>
-    <td><span style="font-weight:bold; text-decoration:line-through">STAFI</span></td>
+    <td><span style="font-weight:bold"><del>STAFI<del></span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
