@@ -1300,7 +1300,7 @@ You can download each store.
 <br>
 
 
-<details open>
+<details>
 <summary><h2 style='display: inline; font-size: 24px'>Supporting Testnet</h2></summary>
 <br>
 <table border="1">
