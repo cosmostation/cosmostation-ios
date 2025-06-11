@@ -104,41 +104,56 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
         }
     }
     
-    //TODO check fetch ending
-    func onFetchMsData() {
-        BaseNetWork().fetchChainParams()
-        BaseNetWork().fetchCw20Tokens()
-        BaseNetWork().fetchErc20Tokens()
-        BaseNetWork().fetchGrc20Tokens()
-        BaseNetWork().fetchCw721s()
-        BaseNetWork().fetchAssets()
-        BaseNetWork().fetchPrices()
-        BaseNetWork().fetchEcosystems()
+    func onFetchMsData() async {
+        if let msParam = try? await BaseNetWork().fetchChainParams(),
+           let msPriceUser = try? await BaseNetWork().fetchPricesUser(),
+           let msPriceUSD = try? await BaseNetWork().fetchPricesUSD(),
+           let msAsset = try? await BaseNetWork().fetchAssets(),
+           let msErc20 = try? await BaseNetWork().fetchErc20Tokens(),
+           let msCw20 = try? await BaseNetWork().fetchCw20Tokens(),
+           let msCw721 = try? await BaseNetWork().fetchCw721s(),
+           let msEcosystems = try? await BaseNetWork().fetchEcosystems() {
+            BaseData.instance.mintscanChainParams = msParam
+            BaseData.instance.setLastChainParamTime()
+            BaseData.instance.mintscanPrices = msPriceUser
+            BaseData.instance.mintscanUSDPrices = msPriceUSD
+            BaseData.instance.setLastPriceTime()
+            BaseData.instance.mintscanAssets = msAsset.assets
+            BaseData.instance.mintscanErc20Tokens = msErc20.assets
+            BaseData.instance.mintscanCw20Tokens = msCw20.assets
+            BaseData.instance.mintscanCw721 = msCw721["assets"].arrayValue
+            BaseData.instance.allEcosystems = msEcosystems
+        }
     }
     
     func onStartInit() {
-        onFetchMsData()
-        if let account = BaseData.instance.getLastAccount() {
-            BaseData.instance.baseAccount = account
-            if (BaseData.instance.getUsingAppLock()) {
-                let pinVC = UIStoryboard.PincodeVC(self, .ForIntroLock)
-                self.present(pinVC, animated: true)
-                
-            } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(5000), execute: {
-                    self.onStartMainTab()
-                })
-            }
-
-        } else {
-            UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut, animations: {
-                self.bottomLogoView.alpha = 0.0
-            }, completion: { (finished) -> Void in
-                UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
-                    self.bottomControlView.alpha = 1.0
-                }, completion: nil)
+        Task {
+            await onFetchMsData()
+            
+            DispatchQueue.main.async(execute: {
+                if let account = BaseData.instance.getLastAccount() {
+                    BaseData.instance.baseAccount = account
+                    if (BaseData.instance.getUsingAppLock()) {
+                        let pinVC = UIStoryboard.PincodeVC(self, .ForIntroLock)
+                        self.present(pinVC, animated: true)
+                        
+                    } else {
+                        self.onStartMainTab()
+                    }
+                    
+                } else {
+                    UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut, animations: {
+                        self.bottomLogoView.alpha = 0.0
+                    }, completion: { (finished) -> Void in
+                        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
+                            self.bottomControlView.alpha = 1.0
+                        }, completion: nil)
+                    })
+                    
+                }
             })
         }
+        
     }
     
     
