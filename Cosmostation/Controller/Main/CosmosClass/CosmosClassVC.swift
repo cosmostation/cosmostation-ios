@@ -276,6 +276,11 @@ class CosmosClassVC: BaseVC {
             mainFab.addItem(title: "Deposit", image: UIImage(named: "iconFabDeposit")) { _ in
                 self.onOkDepositTx()
             }
+            
+        } else if selectedChain is ChainAtomone {
+            mainFab.addItem(title: "Bun & Mint", image: UIImage(named: "iconFabMint")) { _ in
+                self.onAtomoneMint()
+            }
         }
         
         if (selectedChain.isStakeEnabled()) {
@@ -421,7 +426,6 @@ extension CosmosClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
 
 //Common Action
 extension CosmosClassVC {
-    
     func onClaimRewardTx() {
         guard let comsosFetcher = selectedChain.getCosmosfetcher() else {
             return
@@ -618,7 +622,6 @@ extension CosmosClassVC {
 
 //Custom Action For Kava
 extension CosmosClassVC {
-    
     func onKavaDefi() {
         let defiVC = KavaDefiVC(nibName: "KavaDefiVC", bundle: nil)
         defiVC.selectedChain = selectedChain
@@ -629,7 +632,6 @@ extension CosmosClassVC {
 
 //Custom Action For Neutron
 extension CosmosClassVC {
-    
     func onNeutronVault() {
         let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
         baseSheet.sheetDelegate = self
@@ -671,7 +673,6 @@ extension CosmosClassVC {
 
 //Custom Action For OKT
 extension CosmosClassVC {
-    
     func onOkDepositTx() {
         if let oktFetcher = (selectedChain as? ChainOktEVM)?.getOktfetcher() {
             let validators = oktFetcher.oktValidators.count
@@ -734,5 +735,14 @@ extension CosmosClassVC {
         okAddShare.selectedChain = selectedChain as? ChainOktEVM
         okAddShare.modalTransitionStyle = .coverVertical
         self.present(okAddShare, animated: true)
+    }
+}
+
+//Custom Action For ATOMONE
+extension CosmosClassVC {
+    func onAtomoneMint() {
+        let atomoneMint = AtomoneMintVC(nibName: "AtomoneMintVC", bundle: nil)
+        atomoneMint.modalTransitionStyle = .coverVertical
+        self.present(atomoneMint, animated: true)
     }
 }
