@@ -580,8 +580,14 @@ extension BaseChain {
                 $0.gasLimit = getInitGasLimit().uint64Value
                 $0.amount = [feeCoin!]
             }
+            
+        } else {
+            //return empty fee
+            return Cosmos_Tx_V1beta1_Fee.with {
+                $0.gasLimit = 0
+                $0.amount = [Cosmos_Base_V1beta1_Coin(stakeDenom!, "0")]
+            }
         }
-        return nil
     }
     
     //get user selected fee
