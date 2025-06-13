@@ -364,6 +364,7 @@
 "str_next_reward_distibution" = "次の報酬分配";
 "str_next_epoch" = "次のエポックを有効化";
 "str_coin_manage_stake" = "%@ステーキング管理";
+"str_mint_photon" = "PHOTON発行";
 
 
 "btn_delegate" = "  委任する";

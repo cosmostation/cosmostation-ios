@@ -108,6 +108,12 @@ class AtomoneMintVC: BaseVC, UITextFieldDelegate {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
     
+    override func setLocalizedString() {
+        memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
+        feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
+        mintBtn.setTitle(NSLocalizedString("str_mint_photon", comment: ""), for: .normal)
+    }
+    
     func onInitView() {
         titleLabel.isHidden = false
         rootScrollView.isHidden = false

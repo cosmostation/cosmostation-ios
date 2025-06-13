@@ -364,6 +364,7 @@
 "str_next_reward_distibution" = "Next Reward";
 "str_next_epoch" = "Activate Next Epoch";
 "str_coin_manage_stake" = "%@ Manage Stake";
+"str_mint_photon" = "mint PHOTON";
 
 
 "btn_delegate" = "  Delegate";
