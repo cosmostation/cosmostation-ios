@@ -983,6 +983,8 @@
 		04A967032DF9ACF100A712C3 /* atomone_photon_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F72DF9ACF100A712C3 /* atomone_photon_v1_query.pb.swift */; };
 		04A967042DF9ACF100A712C3 /* atomone_photon_v1_photon.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F52DF9ACF100A712C3 /* atomone_photon_v1_photon.pb.swift */; };
 		04A967052DF9ACF100A712C3 /* atomone_photon_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F62DF9ACF100A712C3 /* atomone_photon_v1_query.grpc.swift */; };
+		04A967072DFBE93300A712C3 /* AtomoneFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A967062DFBE93300A712C3 /* AtomoneFetcher.swift */; };
+		04A967082DFBE93300A712C3 /* AtomoneFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A967062DFBE93300A712C3 /* AtomoneFetcher.swift */; };
 		04B2A2F22BB42560001300E9 /* EvmAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A2F12BB42560001300E9 /* EvmAboutVC.swift */; };
 		04B2A2F32BB42560001300E9 /* EvmAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A2F12BB42560001300E9 /* EvmAboutVC.swift */; };
 		04B7899F2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7899D2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift */; };
@@ -2981,6 +2983,7 @@
 		04A966F72DF9ACF100A712C3 /* atomone_photon_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = atomone_photon_v1_query.pb.swift; sourceTree = "<group>"; };
 		04A966F82DF9ACF100A712C3 /* atomone_photon_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = atomone_photon_v1_tx.grpc.swift; sourceTree = "<group>"; };
 		04A966F92DF9ACF100A712C3 /* atomone_photon_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = atomone_photon_v1_tx.pb.swift; sourceTree = "<group>"; };
+		04A967062DFBE93300A712C3 /* AtomoneFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomoneFetcher.swift; sourceTree = "<group>"; };
 		04B2A2F12BB42560001300E9 /* EvmAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmAboutVC.swift; sourceTree = "<group>"; };
 		04B7899D2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxAddressLegacySheet.swift; sourceTree = "<group>"; };
 		04B7899E2ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxAddressLegacySheet.xib; sourceTree = "<group>"; };
@@ -4136,6 +4139,7 @@
 				790970232D7EB34D00DEB959 /* BabylonFetcher.swift */,
 				79AB34032D6C3F3400F1426C /* BabylonBTCFetcher.swift */,
 				79ED0BCF2DB8894300C84DB7 /* IotaFetcher.swift */,
+				04A967062DFBE93300A712C3 /* AtomoneFetcher.swift */,
 			);
 			path = Fetcher;
 			sourceTree = "<group>";
@@ -4438,7 +4442,6 @@
 			children = (
 				E1D5A3E12AC33A5600453914 /* GenTx */,
 				E10B1D722C2156430039283B /* Kava */,
-				045A924A2DF976BD0090BBE5 /* Atomone */,
 				E10B1DDF2C215C120039283B /* Neutron */,
 				047BA8D02A94756A00D3F7DD /* CosmosClass.storyboard */,
 				04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */,
@@ -5736,6 +5739,7 @@
 		E1D5A3E12AC33A5600453914 /* GenTx */ = {
 			isa = PBXGroup;
 			children = (
+				045A924A2DF976BD0090BBE5 /* Atomone */,
 				E10B1DBD2C2159040039283B /* Kava */,
 				E10B1DEE2C215E250039283B /* Neutron */,
 				E10B1DFD2C215EF20039283B /* Okt */,
@@ -7221,6 +7225,7 @@
 				E1F469FE2DF0131A00D34038 /* ChainTerraClassic.swift in Sources */,
 				046651FF2DACDB2700F9C125 /* ibc_applications_fee_v1_query.grpc.swift in Sources */,
 				046652002DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.pb.swift in Sources */,
+				04A967072DFBE93300A712C3 /* AtomoneFetcher.swift in Sources */,
 				046652012DACDB2700F9C125 /* ibc_applications_interchain_accounts_genesis_v1_genesis.pb.swift in Sources */,
 				046652022DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_tx.grpc.swift in Sources */,
 				046652032DACDB2700F9C125 /* ibc_applications_perm_v1_query.grpc.swift in Sources */,
@@ -7773,6 +7778,7 @@
 				046EA8AB2AD04A2600A2FCE7 /* desmos_profiles_v3_msgs_profile.pb.swift in Sources */,
 				04C817A82BA98D75006B800A /* cosmos_mint_v1beta1_genesis.pb.swift in Sources */,
 				04E413952D27D08C001378D3 /* ChainDhealth.swift in Sources */,
+				04A967082DFBE93300A712C3 /* AtomoneFetcher.swift in Sources */,
 				0438A7E22AE0E9FA006FA213 /* TxAmountLpSheet.swift in Sources */,
 				04527DC52A938FC9005F72D7 /* CosmosClassVC.swift in Sources */,
 				042D586B2C5CF0A7003DBDE0 /* MajorEcosystemVC.swift in Sources */,

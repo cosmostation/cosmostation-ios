@@ -742,6 +742,7 @@ extension CosmosClassVC {
 extension CosmosClassVC {
     func onAtomoneMint() {
         let atomoneMint = AtomoneMintVC(nibName: "AtomoneMintVC", bundle: nil)
+        atomoneMint.selectedChain = selectedChain as? ChainAtomone
         atomoneMint.modalTransitionStyle = .coverVertical
         self.present(atomoneMint, animated: true)
     }

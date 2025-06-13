@@ -703,6 +703,17 @@ class Signer {
         return [anyMsg]
     }
     
+    
+    
+    //Tx for Atomone burn and mint photon
+    static func genPhtonMintMsg(_ mint: Atomone_Photon_V1_MsgMintPhoton) -> [Google_Protobuf_Any] {
+        let anyMsg = Google_Protobuf_Any.with {
+            $0.typeURL = "/atomone.photon.v1.MsgMintPhoton"
+            $0.value = try! mint.serializedData()
+        }
+        return [anyMsg]
+    }
+    
 
     
     
