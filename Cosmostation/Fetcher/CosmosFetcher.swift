@@ -557,9 +557,20 @@ extension CosmosFetcher {
             let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
             let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = chain.bechAddress!; $0.pagination = page }
             return try await Cosmos_Bank_V1beta1_QueryNIOClient(channel: getClient()).allBalances(req, callOptions: getCallOptions()).response.get().balances
-            
         } else {
             let url = getLcd() + "cosmos/bank/v1beta1/balances/${address}?pagination.limit=2000".replacingOccurrences(of: "${address}", with: chain.bechAddress!)
+            let response = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
+            return response.balances()
+        }
+    }
+    
+    func fetchSpendableBalance() async throws -> [Cosmos_Base_V1beta1_Coin]? {
+        if (getEndpointType() == .UseGRPC) {
+            let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
+            let req = Cosmos_Bank_V1beta1_QuerySpendableBalancesRequest.with { $0.address = chain.bechAddress!; $0.pagination = page }
+            return try await Cosmos_Bank_V1beta1_QueryNIOClient(channel: getClient()).spendableBalances(req, callOptions: getCallOptions()).response.get().balances
+        } else {
+            let url = getLcd() + "cosmos/bank/v1beta1/spendable_balances/${address}?pagination.limit=2000".replacingOccurrences(of: "${address}", with: chain.bechAddress!)
             let response = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
             return response.balances()
         }
