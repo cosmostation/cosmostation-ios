@@ -182,7 +182,7 @@ class KavaEarnDepositAction: BaseVC {
         }
         
         let stakeDenom = selectedChain.stakeDenom!
-        let balanceAmount = kavaFetcher.balanceAmount(stakeDenom)
+        let balanceAmount = kavaFetcher.availableAmount(stakeDenom)
         if (txFee.amount[0].denom == stakeDenom) {
             let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
             if (feeAmount.compare(balanceAmount).rawValue > 0) {

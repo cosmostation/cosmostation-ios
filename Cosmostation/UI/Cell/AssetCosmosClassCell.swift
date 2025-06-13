@@ -99,7 +99,7 @@ class AssetCosmosClassCell: UITableViewCell {
                     valueLabel.isHidden = false
                 }
                 
-                let availableAmount = cosmosFetcher.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+                let availableAmount = cosmosFetcher.availableAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
                 availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
                 
                 let vestingAmount = cosmosFetcher.vestingAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)

@@ -57,7 +57,7 @@ class ChainInitia: BaseChain  {
             }
             
             if let initiaFetcher = getCosmosfetcher(), fetchState == .Success {
-                initiaFetcher.onCheckVesting()
+//                initiaFetcher.onCheckVesting()
                 
                 var coinsValue = NSDecimalNumber.zero
                 var coinsUSDValue = NSDecimalNumber.zero

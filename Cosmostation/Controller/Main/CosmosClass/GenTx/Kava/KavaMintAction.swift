@@ -88,7 +88,7 @@ class KavaMintAction: BaseVC {
         if (mintActionType == .Deposit) {
             toMintSymbolLabel.text = collateralMsAsset.symbol
             toMintAssetImg.sd_setImage(with: collateralMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
-            let balanceAmount = kavaFetcher.balanceAmount(collateralParam.denom)
+            let balanceAmount = kavaFetcher.availableAmount(collateralParam.denom)
             if (txFee.amount[0].denom == collateralParam.denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 collateralAvailableAmount = balanceAmount.subtracting(feeAmount)
@@ -116,7 +116,7 @@ class KavaMintAction: BaseVC {
         } else if (mintActionType == .Repay) {
             toMintSymbolLabel.text = principalMsAsset.symbol
             toMintAssetImg.sd_setImage(with: principalMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
-            principalAvailableAmount = kavaFetcher.balanceAmount("usdx")
+            principalAvailableAmount = kavaFetcher.availableAmount("usdx")
         }
         
         

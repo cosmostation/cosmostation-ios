@@ -309,18 +309,17 @@ class CosmosDelegate: BaseVC {
             
             let stakeDenom = selectedChain.stakeDenom!
             let balanceAmount = cosmosFetcher.balanceAmount(stakeDenom)
-            let vestingAmount = cosmosFetcher.vestingAmount(stakeDenom)
             
             if (txFee.amount[0].denom == stakeDenom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 if (feeAmount.compare(balanceAmount).rawValue > 0) {
                     //ERROR short balance!!
                 }
-                availableAmount = balanceAmount.adding(vestingAmount).subtracting(feeAmount)
+                availableAmount = balanceAmount.subtracting(feeAmount)
                 
             } else {
                 //fee pay with another denom
-                availableAmount = balanceAmount.adding(vestingAmount)
+                availableAmount = balanceAmount
             }
         }
     }

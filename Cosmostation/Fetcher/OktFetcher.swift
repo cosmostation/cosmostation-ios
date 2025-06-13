@@ -171,6 +171,7 @@ extension OktFetcher {
         let url = getLcd() + "staking/validators"
         return try await AF.request(url, method: .get, parameters: ["status":"all"]).serializingDecodable([JSON].self).value
     }
+    
 }
 
 

@@ -32,7 +32,7 @@ class KavaEarnListMyCell: UITableViewCell {
         if let kavaAsset = BaseData.instance.getAsset(chain.apiName, "ukava") {
             WDP.dpCoin(kavaAsset, sum, nil, myLiquidityDenomLabel, myLiquidityAmountLabel, kavaAsset.decimals)
             
-            let availableAmount = chain.getCosmosfetcher()!.balanceAmount(chain.stakeDenom!)
+            let availableAmount = chain.getCosmosfetcher()!.availableAmount(chain.stakeDenom!)
             WDP.dpCoin(kavaAsset, availableAmount, nil, myAvailableDenomLabel, myAvailableAmountLabel, kavaAsset.decimals)
         }
     }

@@ -142,9 +142,9 @@ class BaseChain {
                 fetchState = .Success
             }
             
-            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
-                cosmosFetcher.onCheckVesting()
-            }
+//            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
+//                cosmosFetcher.onCheckVesting()
+//            }
             
             DispatchQueue.main.async(execute: {
                 NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
@@ -174,9 +174,9 @@ class BaseChain {
             
             
             
-            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
-                cosmosFetcher.onCheckVesting()
-            }
+//            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
+//                cosmosFetcher.onCheckVesting()
+//            }
             
             if (self.fetchState == .Success) {
                 var coinsValue = NSDecimalNumber.zero
@@ -353,7 +353,7 @@ class BaseChain {
             var result = false
             if (getCosmosfetcher()?.cosmosBaseFees.count ?? 0 > 0) {
                 getCosmosfetcher()?.cosmosBaseFees.forEach({ basefee in
-                    let availaAmount = getCosmosfetcher()?.balanceAmount(basefee.denom) ?? NSDecimalNumber.zero
+                    let availaAmount = getCosmosfetcher()?.availableAmount(basefee.denom) ?? NSDecimalNumber.zero
                     let minFeeAmount = basefee.getdAmount().multiplying(by: getInitGasLimit(), withBehavior: handler0Down)
                     if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
                         result = true
@@ -363,7 +363,7 @@ class BaseChain {
                 
             } else {
                 getDefaultFeeCoins().forEach { minFee in
-                    let availaAmount = getCosmosfetcher()?.balanceAmount(minFee.denom) ?? NSDecimalNumber.zero
+                    let availaAmount = getCosmosfetcher()?.availableAmount(minFee.denom) ?? NSDecimalNumber.zero
                     let minFeeAmount = NSDecimalNumber.init(string: minFee.amount)
                     if (availaAmount.compare(minFeeAmount).rawValue >= 0) {
                         result = true
@@ -567,7 +567,7 @@ extension BaseChain {
         } else if let cosmosFetcher = getCosmosfetcher() {
             for i in 0..<getDefaultFeeCoins().count {
                 let minFee = getDefaultFeeCoins()[i]
-                if (cosmosFetcher.balanceAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+                if (cosmosFetcher.availableAmount(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
                     feeCoin = minFee
                     break
                 }

@@ -134,7 +134,7 @@ class AtomoneMintVC: BaseVC, UITextFieldDelegate {
         let dpInputBalance = availableAmount.multiplying(byPowerOf10: -inputAsset.decimals!)
         inputBalanceLabel?.attributedText = WDP.dpAmount(dpInputBalance.stringValue, inputBalanceLabel!.font, inputAsset.decimals)
         
-        let dpOutputBalance = atomoneFetcher.balanceAmount(outputAsset.denom!).multiplying(byPowerOf10: -outputAsset.decimals!)
+        let dpOutputBalance = atomoneFetcher.availableAmount(outputAsset.denom!).multiplying(byPowerOf10: -outputAsset.decimals!)
         outputBalanceLabel?.attributedText = WDP.dpAmount(dpOutputBalance.stringValue, outputBalanceLabel!.font, outputAsset.decimals)
     }
     
@@ -291,7 +291,7 @@ class AtomoneMintVC: BaseVC, UITextFieldDelegate {
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
             feeSelectLabel.text = msAsset.symbol
             
-            let balanceAmount = atomoneFetcher.balanceAmount(inputAsset.denom!)
+            let balanceAmount = atomoneFetcher.availableAmount(inputAsset.denom!)
             if (txFee.amount[0].denom == inputAsset.denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 if (feeAmount.compare(balanceAmount).rawValue > 0) {

@@ -94,7 +94,7 @@ class KavaMintCreateAction: BaseVC {
         principalSymbolLabel.text = principalMsAsset.symbol
         principalImg.sd_setImage(with: principalMsAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         
-        let balanceAmount = kavaFetcher.balanceAmount(collateralParam.denom)
+        let balanceAmount = kavaFetcher.availableAmount(collateralParam.denom)
         if (txFee.amount[0].denom == collateralParam.denom) {
             let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
             collateralAvailableAmount = balanceAmount.subtracting(feeAmount)

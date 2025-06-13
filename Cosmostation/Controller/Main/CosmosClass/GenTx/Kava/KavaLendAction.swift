@@ -89,7 +89,7 @@ class KavaLendAction: BaseVC {
         toHardAssetImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         
         if (hardActionType == .Deposit) {
-            let balanceAmount = kavaFetcher.balanceAmount(hardMarket.denom)
+            let balanceAmount = kavaFetcher.availableAmount(hardMarket.denom)
             if (txFee.amount[0].denom == hardMarket.denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 availableAmount = balanceAmount.subtracting(feeAmount)
@@ -106,7 +106,7 @@ class KavaLendAction: BaseVC {
             var borrowedAmount = hardMyBorrow?.filter({ $0.denom == hardMarket.denom }).first?.getAmount() ?? NSDecimalNumber.zero
             borrowedAmount = borrowedAmount.multiplying(by: NSDecimalNumber.init(string: "1.1"), withBehavior: handler0Down)
             
-            var balanceAmount = kavaFetcher.balanceAmount(hardMarket.denom)
+            var balanceAmount = kavaFetcher.availableAmount(hardMarket.denom)
             if (txFee.amount[0].denom == hardMarket.denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 balanceAmount = balanceAmount.subtracting(feeAmount)
