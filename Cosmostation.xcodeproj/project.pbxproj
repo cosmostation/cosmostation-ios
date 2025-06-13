@@ -971,6 +971,18 @@
 		04A68C362AC156AA0041FA13 /* CosmosProposalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A68C332AC156AA0041FA13 /* CosmosProposalCell.swift */; };
 		04A68C372AC156AA0041FA13 /* CosmosProposalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A68C342AC156AA0041FA13 /* CosmosProposalCell.xib */; };
 		04A68C382AC156AA0041FA13 /* CosmosProposalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A68C342AC156AA0041FA13 /* CosmosProposalCell.xib */; };
+		04A966FA2DF9ACF100A712C3 /* atomone_photon_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F82DF9ACF100A712C3 /* atomone_photon_v1_tx.grpc.swift */; };
+		04A966FB2DF9ACF100A712C3 /* atomone_photon_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F92DF9ACF100A712C3 /* atomone_photon_v1_tx.pb.swift */; };
+		04A966FC2DF9ACF100A712C3 /* atomone_photon_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F42DF9ACF100A712C3 /* atomone_photon_v1_genesis.pb.swift */; };
+		04A966FD2DF9ACF100A712C3 /* atomone_photon_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F72DF9ACF100A712C3 /* atomone_photon_v1_query.pb.swift */; };
+		04A966FE2DF9ACF100A712C3 /* atomone_photon_v1_photon.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F52DF9ACF100A712C3 /* atomone_photon_v1_photon.pb.swift */; };
+		04A966FF2DF9ACF100A712C3 /* atomone_photon_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F62DF9ACF100A712C3 /* atomone_photon_v1_query.grpc.swift */; };
+		04A967002DF9ACF100A712C3 /* atomone_photon_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F82DF9ACF100A712C3 /* atomone_photon_v1_tx.grpc.swift */; };
+		04A967012DF9ACF100A712C3 /* atomone_photon_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F92DF9ACF100A712C3 /* atomone_photon_v1_tx.pb.swift */; };
+		04A967022DF9ACF100A712C3 /* atomone_photon_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F42DF9ACF100A712C3 /* atomone_photon_v1_genesis.pb.swift */; };
+		04A967032DF9ACF100A712C3 /* atomone_photon_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F72DF9ACF100A712C3 /* atomone_photon_v1_query.pb.swift */; };
+		04A967042DF9ACF100A712C3 /* atomone_photon_v1_photon.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F52DF9ACF100A712C3 /* atomone_photon_v1_photon.pb.swift */; };
+		04A967052DF9ACF100A712C3 /* atomone_photon_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F62DF9ACF100A712C3 /* atomone_photon_v1_query.grpc.swift */; };
 		04B2A2F22BB42560001300E9 /* EvmAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A2F12BB42560001300E9 /* EvmAboutVC.swift */; };
 		04B2A2F32BB42560001300E9 /* EvmAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A2F12BB42560001300E9 /* EvmAboutVC.swift */; };
 		04B7899F2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7899D2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift */; };
@@ -2963,6 +2975,12 @@
 		04A68C2E2AC13A560041FA13 /* CosmosProposalsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosProposalsVC.xib; sourceTree = "<group>"; };
 		04A68C332AC156AA0041FA13 /* CosmosProposalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosProposalCell.swift; sourceTree = "<group>"; };
 		04A68C342AC156AA0041FA13 /* CosmosProposalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosProposalCell.xib; sourceTree = "<group>"; };
+		04A966F42DF9ACF100A712C3 /* atomone_photon_v1_genesis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = atomone_photon_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		04A966F52DF9ACF100A712C3 /* atomone_photon_v1_photon.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = atomone_photon_v1_photon.pb.swift; sourceTree = "<group>"; };
+		04A966F62DF9ACF100A712C3 /* atomone_photon_v1_query.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = atomone_photon_v1_query.grpc.swift; sourceTree = "<group>"; };
+		04A966F72DF9ACF100A712C3 /* atomone_photon_v1_query.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = atomone_photon_v1_query.pb.swift; sourceTree = "<group>"; };
+		04A966F82DF9ACF100A712C3 /* atomone_photon_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = atomone_photon_v1_tx.grpc.swift; sourceTree = "<group>"; };
+		04A966F92DF9ACF100A712C3 /* atomone_photon_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = atomone_photon_v1_tx.pb.swift; sourceTree = "<group>"; };
 		04B2A2F12BB42560001300E9 /* EvmAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmAboutVC.swift; sourceTree = "<group>"; };
 		04B7899D2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxAddressLegacySheet.swift; sourceTree = "<group>"; };
 		04B7899E2ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxAddressLegacySheet.xib; sourceTree = "<group>"; };
@@ -4294,6 +4312,19 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		04A966F32DF9ACE100A712C3 /* Atomone */ = {
+			isa = PBXGroup;
+			children = (
+				04A966F42DF9ACF100A712C3 /* atomone_photon_v1_genesis.pb.swift */,
+				04A966F52DF9ACF100A712C3 /* atomone_photon_v1_photon.pb.swift */,
+				04A966F62DF9ACF100A712C3 /* atomone_photon_v1_query.grpc.swift */,
+				04A966F72DF9ACF100A712C3 /* atomone_photon_v1_query.pb.swift */,
+				04A966F82DF9ACF100A712C3 /* atomone_photon_v1_tx.grpc.swift */,
+				04A966F92DF9ACF100A712C3 /* atomone_photon_v1_tx.pb.swift */,
+			);
+			path = Atomone;
+			sourceTree = "<group>";
+		};
 		04B788FA2ACAC99F00E9BE88 /* Ibc */ = {
 			isa = PBXGroup;
 			children = (
@@ -4792,6 +4823,7 @@
 		282121BA25FDE71C0016ABFE /* ProtoBuff */ = {
 			isa = PBXGroup;
 			children = (
+				04A966F32DF9ACE100A712C3 /* Atomone */,
 				79DB1D4C2D5B4CE1002E1059 /* Nibiru */,
 				79813A622D530F5B0083A1F5 /* Zenrock */,
 				799B4A822D2CFCE500998833 /* Gno */,
@@ -6871,6 +6903,12 @@
 				0450324C2C1EEA9600235F6A /* ChainCronos.swift in Sources */,
 				E13FC5562B26C79A0082C66E /* kava_earn_v1beta1_query.grpc.swift in Sources */,
 				04C8169F2BA98D75006B800A /* cosmos_nft_v1beta1_query.pb.swift in Sources */,
+				04A966FA2DF9ACF100A712C3 /* atomone_photon_v1_tx.grpc.swift in Sources */,
+				04A966FB2DF9ACF100A712C3 /* atomone_photon_v1_tx.pb.swift in Sources */,
+				04A966FC2DF9ACF100A712C3 /* atomone_photon_v1_genesis.pb.swift in Sources */,
+				04A966FD2DF9ACF100A712C3 /* atomone_photon_v1_query.pb.swift in Sources */,
+				04A966FE2DF9ACF100A712C3 /* atomone_photon_v1_photon.pb.swift in Sources */,
+				04A966FF2DF9ACF100A712C3 /* atomone_photon_v1_query.grpc.swift in Sources */,
 				E119ECFD2DF0488200CD2C9B /* ChainQubeticsEVM.swift in Sources */,
 				047843A22AC991B300462F1C /* injective_auction_v1beta1_tx.grpc.swift in Sources */,
 				04C817DE2BA9917D006B800A /* cosmos_upgrade_module_v1_module.pb.swift in Sources */,
@@ -8407,6 +8445,12 @@
 				045032CB2C1EFCE700235F6A /* ChainMars.swift in Sources */,
 				04A68C232ABDA3350041FA13 /* SelectSwapAssetCell.swift in Sources */,
 				E15980602A722CFF0032892B /* CardView.swift in Sources */,
+				04A967002DF9ACF100A712C3 /* atomone_photon_v1_tx.grpc.swift in Sources */,
+				04A967012DF9ACF100A712C3 /* atomone_photon_v1_tx.pb.swift in Sources */,
+				04A967022DF9ACF100A712C3 /* atomone_photon_v1_genesis.pb.swift in Sources */,
+				04A967032DF9ACF100A712C3 /* atomone_photon_v1_query.pb.swift in Sources */,
+				04A967042DF9ACF100A712C3 /* atomone_photon_v1_photon.pb.swift in Sources */,
+				04A967052DF9ACF100A712C3 /* atomone_photon_v1_query.grpc.swift in Sources */,
 				047DCEE228855F4800253CAA /* MintscanMyVote.swift in Sources */,
 				045032C92C1EFCE700235F6A /* ChainLike.swift in Sources */,
 				E10B1D8F2C2156430039283B /* KavaMintListMyCell.swift in Sources */,
