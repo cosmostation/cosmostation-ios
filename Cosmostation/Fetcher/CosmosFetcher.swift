@@ -45,14 +45,18 @@ class CosmosFetcher {
         self.chain = chain
     }
     
+    func fetchCosmosAvailables() async -> Bool {
+        cosmosAvailable = [Cosmos_Base_V1beta1_Coin]()
+        if let available = try? await fetchSpendableBalance() {
+            self.cosmosAvailable = available
+        }
+        return true
+    }
+    
     func fetchCosmosBalances() async -> Bool {
         cosmosBalances = [Cosmos_Base_V1beta1_Coin]()
-        cosmosAvailable = [Cosmos_Base_V1beta1_Coin]()
-        if let _ = try? await fetchAuth(),
-           let balance = try? await fetchBalance(),
-           let available = try? await fetchSpendableBalance() {
+        if let balance = try? await fetchBalance() {
             self.cosmosBalances = balance
-            self.cosmosAvailable = available
         }
         return true
     }
@@ -60,8 +64,6 @@ class CosmosFetcher {
     func fetchCosmosData(_ id: Int64) async -> Bool {
         mintscanCw20Tokens.removeAll()
         mintscanCw721List.removeAll()
-        cosmosLcdAuth = nil
-        cosmosGrpcAuth = nil
         cosmosBalances = nil
         cosmosDelegations.removeAll()
         cosmosUnbondings = nil
@@ -217,11 +219,10 @@ class CosmosFetcher {
     func isRewardAddressChanged() -> Bool {
         return chain.bechAddress != rewardAddress
     }
-
-}
-
-
-extension CosmosFetcher {
+    
+    
+    
+    // data handleing
     func tokenValue(_ address: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if chain.isSupportCw20() {
             if let tokenInfo = mintscanCw20Tokens.filter({ $0.address == address }).first {
@@ -306,6 +307,15 @@ extension CosmosFetcher {
             let amount = vestingAmount(denom)
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
         }
+        return NSDecimalNumber.zero
+    }
+    
+    //for special case (ex: Coreum) 25.06
+    func lockedAmount(_ denom: String) -> NSDecimalNumber {
+        return NSDecimalNumber.zero
+    }
+    
+    func lockedValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
         return NSDecimalNumber.zero
     }
     

@@ -132,8 +132,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             inputChain = targetChains.filter { $0.tag == lastSwapSet[0] }.first ?? targetChains[0]
             outputChain = targetChains.filter { $0.tag == lastSwapSet[2] }.first ?? targetChains[1]
             
-            try await fetchInputAssetBalances()             // fetching coins balance and vesting
-            try await fetchOutputAssetBalances()            // fetching coins balance and vesting
+            try await fetchInputAssetAvailables()             // fetching coins balance and vesting
+            try await fetchOutputAssetAvailables()            // fetching coins balance and vesting
             
             try await fetchInputAssets()
             try await fetchOutputAssets()
@@ -644,7 +644,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     loadingView.isHidden = false
                     Task {
                         inputChain = targetChains.filter({ $0.name == chainName }).first!
-                        try await fetchInputAssetBalances()
+                        try await fetchInputAssetAvailables()
                         try await fetchInputAssets()
                         inputAsset = targetInputAssets[0]
                         try await fetchInputAssetBalance()
@@ -662,7 +662,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     view.isUserInteractionEnabled = false
                     Task {
                         outputChain = targetChains.filter({ $0.name == chainName }).first!
-                        try await fetchOutputAssetBalances()
+                        try await fetchOutputAssetAvailables()
                         try await fetchOutputAssets()
                         outputAsset = targetOutputAssets[0]
                         try await fetchOutputAssetBalance()
@@ -805,12 +805,12 @@ extension SwapStartVC {
     }
     
     
-    func fetchInputAssetBalances() async throws {
-        _ = await inputChain.getCosmosfetcher()?.fetchCosmosBalances()
+    func fetchInputAssetAvailables() async throws {
+        _ = await inputChain.getCosmosfetcher()?.fetchCosmosAvailables()
     }
     
-    func fetchOutputAssetBalances() async throws {
-        _ = await outputChain.getCosmosfetcher()?.fetchCosmosBalances()
+    func fetchOutputAssetAvailables() async throws {
+        _ = await outputChain.getCosmosfetcher()?.fetchCosmosAvailables()
     }
     
     

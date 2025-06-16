@@ -985,6 +985,8 @@
 		04A967052DF9ACF100A712C3 /* atomone_photon_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A966F62DF9ACF100A712C3 /* atomone_photon_v1_query.grpc.swift */; };
 		04A967072DFBE93300A712C3 /* AtomoneFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A967062DFBE93300A712C3 /* AtomoneFetcher.swift */; };
 		04A967082DFBE93300A712C3 /* AtomoneFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A967062DFBE93300A712C3 /* AtomoneFetcher.swift */; };
+		04A9670A2DFFD5E100A712C3 /* CoreumFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A967092DFFD5E100A712C3 /* CoreumFetcher.swift */; };
+		04A9670B2DFFD5E100A712C3 /* CoreumFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A967092DFFD5E100A712C3 /* CoreumFetcher.swift */; };
 		04B2A2F22BB42560001300E9 /* EvmAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A2F12BB42560001300E9 /* EvmAboutVC.swift */; };
 		04B2A2F32BB42560001300E9 /* EvmAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2A2F12BB42560001300E9 /* EvmAboutVC.swift */; };
 		04B7899F2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7899D2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift */; };
@@ -2984,6 +2986,7 @@
 		04A966F82DF9ACF100A712C3 /* atomone_photon_v1_tx.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = atomone_photon_v1_tx.grpc.swift; sourceTree = "<group>"; };
 		04A966F92DF9ACF100A712C3 /* atomone_photon_v1_tx.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = atomone_photon_v1_tx.pb.swift; sourceTree = "<group>"; };
 		04A967062DFBE93300A712C3 /* AtomoneFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomoneFetcher.swift; sourceTree = "<group>"; };
+		04A967092DFFD5E100A712C3 /* CoreumFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreumFetcher.swift; sourceTree = "<group>"; };
 		04B2A2F12BB42560001300E9 /* EvmAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmAboutVC.swift; sourceTree = "<group>"; };
 		04B7899D2ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxAddressLegacySheet.swift; sourceTree = "<group>"; };
 		04B7899E2ACAEB5F00E9BE88 /* TxAddressLegacySheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxAddressLegacySheet.xib; sourceTree = "<group>"; };
@@ -4140,6 +4143,7 @@
 				79AB34032D6C3F3400F1426C /* BabylonBTCFetcher.swift */,
 				79ED0BCF2DB8894300C84DB7 /* IotaFetcher.swift */,
 				04A967062DFBE93300A712C3 /* AtomoneFetcher.swift */,
+				04A967092DFFD5E100A712C3 /* CoreumFetcher.swift */,
 			);
 			path = Fetcher;
 			sourceTree = "<group>";
@@ -7257,6 +7261,7 @@
 				0466521D2DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_metadata.pb.swift in Sources */,
 				0466521E2DACDB2700F9C125 /* ibc_applications_interchain_accounts_v1_packet.pb.swift in Sources */,
 				0466521F2DACDB2700F9C125 /* ibc_core_connection_v1_genesis.pb.swift in Sources */,
+				04A9670B2DFFD5E100A712C3 /* CoreumFetcher.swift in Sources */,
 				046652202DACDB2700F9C125 /* ibc_lightclients_tendermint_v1_tendermint.pb.swift in Sources */,
 				046652212DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_controller.pb.swift in Sources */,
 				046652222DACDB2700F9C125 /* ibc_lightclients_wasm_v1_wasm.pb.swift in Sources */,
@@ -7817,6 +7822,7 @@
 				E1E0DBCB2A9B1579006DA6BB /* MintscanHistory.swift in Sources */,
 				79DB1D4E2D5B4CEF002E1059 /* eth_types_v1_account.pb.swift in Sources */,
 				79FCA3C02C3F9E92001C17D0 /* artela_types_v1_dynamic_fee.pb.swift in Sources */,
+				04A9670A2DFFD5E100A712C3 /* CoreumFetcher.swift in Sources */,
 				045032AA2C1EEFCA00235F6A /* ChainFetchAi60Secp.swift in Sources */,
 				04C8172E2BA98D75006B800A /* cosmos_circuit_v1_tx.grpc.swift in Sources */,
 				04B789E52ACB140900E9BE88 /* SelectNameServiceCell.swift in Sources */,

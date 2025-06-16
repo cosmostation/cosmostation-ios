@@ -22,8 +22,6 @@ class NeutronFetcher: CosmosFetcher {
     var reward: JSON?
     
     override func fetchCosmosData(_ id: Int64) async -> Bool {
-        cosmosLcdAuth = nil
-        cosmosGrpcAuth = nil
         cosmosBalances = nil
         neutronDeposited = NSDecimalNumber.zero
         neutronVesting = nil
@@ -39,7 +37,6 @@ class NeutronFetcher: CosmosFetcher {
         
         do {
             if let balance = try await fetchBalance(),
-               let auth = try? await fetchAuth(),
                let vault = try? await fetchVaultDeposit(),
                let vesting = try? await fetchNeutronVesting(),
                let delegations = try? await fetchDelegation(),
