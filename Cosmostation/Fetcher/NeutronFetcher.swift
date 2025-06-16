@@ -37,6 +37,7 @@ class NeutronFetcher: CosmosFetcher {
         
         do {
             if let balance = try await fetchBalance(),
+               let available = try await fetchSpendableBalance(),
                let vault = try? await fetchVaultDeposit(),
                let vesting = try? await fetchNeutronVesting(),
                let delegations = try? await fetchDelegation(),
@@ -46,7 +47,9 @@ class NeutronFetcher: CosmosFetcher {
                let baseFees = try? await fetchBaseFee() {
                 
                 self.mintscanCw20Tokens =  BaseData.instance.mintscanCw20Tokens?.filter({ $0.chainName == chain.apiName }) ?? []
+                
                 self.cosmosBalances = balance
+                self.cosmosAvailable = available
                 
                 delegations?.forEach({ delegation in
                     if (delegation.balance.amount != "0") {
