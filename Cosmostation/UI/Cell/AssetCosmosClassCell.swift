@@ -106,15 +106,12 @@ class AssetCosmosClassCell: UITableViewCell {
                 availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
                 
                 let lockedAmount = cosmosFetcher.lockedAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-                print("lockedAmount ", lockedAmount)
                 lockedLayer.isHidden = (lockedAmount == NSDecimalNumber.zero)
                 lockedLabel?.attributedText = WDP.dpAmount(lockedAmount.stringValue, lockedLabel!.font, 6)
  
                 let vestingAmount = cosmosFetcher.vestingAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-                if (vestingAmount != NSDecimalNumber.zero) {
-                    vestingLayer.isHidden = false
-                    vestingLabel?.attributedText = WDP.dpAmount(vestingAmount.stringValue, vestingLabel!.font, 6)
-                }
+                vestingLayer.isHidden = (vestingAmount == NSDecimalNumber.zero)
+                vestingLabel?.attributedText = WDP.dpAmount(vestingAmount.stringValue, vestingLabel!.font, 6)
                 
                 let stakingAmount = cosmosFetcher.delegationAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
                 stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
