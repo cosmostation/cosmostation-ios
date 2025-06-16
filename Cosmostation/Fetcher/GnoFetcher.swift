@@ -23,7 +23,6 @@ class GnoFetcher {
         self.chain = chain
     }
     
-    
     func fetchGnoBalances() async -> Bool {
         gnoBalances = [Cosmos_Base_V1beta1_Coin]()
         if let _ = try? await fetchAuth(),

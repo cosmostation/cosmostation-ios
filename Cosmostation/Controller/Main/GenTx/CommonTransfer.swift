@@ -75,7 +75,7 @@ class CommonTransfer: BaseVC {
     var toSendMsToken: MintscanToken!               // to send Token
     var ibcPath: MintscanPath?                      // to IBC send path
     var recipientableChains = [BaseChain]()
-    var availableAmount = NSDecimalNumber.zero
+    var sendableAmount = NSDecimalNumber.zero
     var decimal: Int16!
     
     var toChain: BaseChain!
@@ -293,58 +293,58 @@ class CommonTransfer: BaseVC {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = fromChain.assetDecimal(toSendDenom)
             symbol = fromChain.assetSymbol(toSendDenom)
-            availableAmount = cosmosFetcher.balanceAmount(toSendDenom)
+            sendableAmount = cosmosFetcher.availableAmount(toSendDenom)
             if (cosmosTxFee.amount[0].denom == toSendDenom) {
                 let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
-                availableAmount = availableAmount.subtracting(totalFeeAmount)
+                sendableAmount = sendableAmount.subtracting(totalFeeAmount)
             }
             
         } else if (sendAssetType == .EVM_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = 18
             symbol = fromChain.coinSymbol
-            availableAmount = evmFetcher.evmBalances.subtracting(EVM_BASE_FEE)
+            sendableAmount = evmFetcher.evmBalances.subtracting(EVM_BASE_FEE)
             
         } else if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20 || sendAssetType == .GNO_GRC20) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = fromChain.assetDecimal(toSendDenom)
             symbol = fromChain.assetSymbol(toSendDenom)
-            availableAmount = toSendMsToken!.getAmount()
+            sendableAmount = toSendMsToken!.getAmount()
             
         } else if (sendAssetType == .SUI_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = fromChain.assetDecimal(toSendDenom)
             symbol = fromChain.assetSymbol(toSendDenom)
-            availableAmount = suiFetcher.balanceAmount(toSendDenom)
+            sendableAmount = suiFetcher.balanceAmount(toSendDenom)
             
             if (fromChain.stakeDenom == toSendDenom) {
-                availableAmount = availableAmount.subtracting(suiFeeBudget)
+                sendableAmount = sendableAmount.subtracting(suiFeeBudget)
             }
             
         } else if (sendAssetType == .IOTA_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = fromChain.assetDecimal(toSendDenom)
             symbol = fromChain.assetSymbol(toSendDenom)
-            availableAmount = iotaFetcher.balanceAmount(toSendDenom)
+            sendableAmount = iotaFetcher.balanceAmount(toSendDenom)
             
             if (fromChain.stakeDenom == toSendDenom) {
-                availableAmount = availableAmount.subtracting(iotaFeeBudget)
+                sendableAmount = sendableAmount.subtracting(iotaFeeBudget)
             }
             
         } else if (sendAssetType == .BTC_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = fromChain.assetDecimal(toSendDenom)
             symbol = fromChain.assetSymbol(toSendDenom)
-            availableAmount = btcFetcher.btcBalances
+            sendableAmount = btcFetcher.btcBalances
 
         } else if (sendAssetType == .GNO_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = fromChain.assetDecimal(toSendDenom)
             symbol = fromChain.assetSymbol(toSendDenom)
-            availableAmount = gnoFetcher.balanceAmount(toSendDenom)
+            sendableAmount = gnoFetcher.balanceAmount(toSendDenom)
             if (cosmosTxFee.amount[0].denom == toSendDenom) {
                 let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
-                availableAmount = availableAmount.subtracting(totalFeeAmount)
+                sendableAmount = sendableAmount.subtracting(totalFeeAmount)
             }
         }
         
@@ -444,7 +444,7 @@ class CommonTransfer: BaseVC {
         amountSheet.toSendDenom = toSendDenom
         amountSheet.toSendMsAsset = toSendMsAsset
         amountSheet.toSendMsToken = toSendMsToken
-        amountSheet.availableAmount = availableAmount
+        amountSheet.availableAmount = sendableAmount
         amountSheet.existedAmount = toAmount
         amountSheet.decimal = decimal
         amountSheet.sheetDelegate = self
@@ -636,7 +636,7 @@ class CommonTransfer: BaseVC {
             let feeValue = feePrice.multiplying(by: feeAmount, withBehavior: handler6)
             WDP.dpCoin(msAsset, btcTxFee, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
-            availableAmount = availableAmount.subtracting(btcTxFee)
+            sendableAmount = sendableAmount.subtracting(btcTxFee)
             
         } else if (txStyle == .GNO_STYLE) {
             if let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
@@ -653,10 +653,10 @@ class CommonTransfer: BaseVC {
                         if (totalFeeAmount.compare(balanceAmount).rawValue > 0) {
                             //ERROR short balance!!
                         }
-                        availableAmount = balanceAmount.subtracting(totalFeeAmount)
+                        sendableAmount = balanceAmount.subtracting(totalFeeAmount)
                         
                     } else {
-                        availableAmount = balanceAmount
+                        sendableAmount = balanceAmount
                     }
                 }
             }
@@ -671,15 +671,15 @@ class CommonTransfer: BaseVC {
                 WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
                 
                 if (sendAssetType == .COSMOS_COIN) {
-                    let balanceAmount = cosmosFetcher.balanceAmount(toSendDenom)
+                    let availableAmount = cosmosFetcher.availableAmount(toSendDenom)
                     if (cosmosTxFee.amount[0].denom == toSendDenom) {
-                        if (totalFeeAmount.compare(balanceAmount).rawValue > 0) {
+                        if (totalFeeAmount.compare(availableAmount).rawValue > 0) {
                             //ERROR short balance!!
                         }
-                        availableAmount = balanceAmount.subtracting(totalFeeAmount)
+                        sendableAmount = availableAmount.subtracting(totalFeeAmount)
                         
                     } else {
-                        availableAmount = balanceAmount
+                        sendableAmount = availableAmount
                     }
                 }
             }

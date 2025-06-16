@@ -58,7 +58,7 @@ class ChainNeutron: BaseChain {
             }
             
             if let neutronFetcher = getCosmosfetcher(), fetchState == .Success {
-                neutronFetcher.onCheckVesting()
+//                neutronFetcher.onCheckVesting()
                 
                 var coinsValue = NSDecimalNumber.zero
                 var coinsUSDValue = NSDecimalNumber.zero

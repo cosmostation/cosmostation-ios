@@ -28,4 +28,17 @@ class ChainCoreum: BaseChain  {
         lcdUrl = "https://lcd-coreum.cosmostation.io/"
     }
     
+    override func getCosmosfetcher() -> CosmosFetcher? {
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = CoreumFetcher.init(self)
+        }
+        return cosmosFetcher
+    }
+    
+    func getCoreumFetcher() -> CoreumFetcher? {
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = CoreumFetcher.init(self)
+        }
+        return cosmosFetcher as? CoreumFetcher
+    }
 }

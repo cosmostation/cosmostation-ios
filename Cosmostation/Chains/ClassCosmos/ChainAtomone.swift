@@ -27,4 +27,18 @@ class ChainAtomone: BaseChain {
         grpcHost = "grpc-atomone.cosmostation.io"
         lcdUrl = "https://lcd-atomone.cosmostation.io/"
     }
+    
+    override func getCosmosfetcher() -> CosmosFetcher? {
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = AtomoneFetcher.init(self)
+        }
+        return cosmosFetcher
+    }
+    
+    func getAtomoneFetcher() -> AtomoneFetcher? {
+        if (cosmosFetcher == nil) {
+            cosmosFetcher = AtomoneFetcher.init(self)
+        }
+        return cosmosFetcher as? AtomoneFetcher
+    }
 }

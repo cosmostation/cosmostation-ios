@@ -81,7 +81,7 @@ class DappCosmosSignRequestSheet: BaseVC {
         Task {
             try await onParsingRequest()
             if (method == "cos_signDirect" || method == "cosmos_signDirect") {
-                try? await targetChain?.getCosmosfetcher()?.fetchCosmosBalances()
+                try? await targetChain?.getCosmosfetcher()?.fetchCosmosAvailables()
             }
             DispatchQueue.main.async {
                 self.loadingView.isHidden = true

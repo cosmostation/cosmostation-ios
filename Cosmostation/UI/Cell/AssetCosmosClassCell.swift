@@ -28,6 +28,9 @@ class AssetCosmosClassCell: UITableViewCell {
     @IBOutlet weak var vestingLayer: UIView!
     @IBOutlet weak var vestingTitle: UILabel!
     @IBOutlet weak var vestingLabel: UILabel!
+    @IBOutlet weak var lockedLayer: UIView!
+    @IBOutlet weak var lockedTitle: UILabel!
+    @IBOutlet weak var lockedLabel: UILabel!
     @IBOutlet weak var stakingLayer: UIView!
     @IBOutlet weak var stakingTitle: UILabel!
     @IBOutlet weak var stakingLabel: UILabel!
@@ -86,7 +89,7 @@ class AssetCosmosClassCell: UITableViewCell {
                 let value = cosmosFetcher.denomValue(stakeDenom)
                 
                 coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
-                symbolLabel.text = msAsset.symbol//?.uppercased()
+                symbolLabel.text = msAsset.symbol
                 
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
                 WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
@@ -99,9 +102,14 @@ class AssetCosmosClassCell: UITableViewCell {
                     valueLabel.isHidden = false
                 }
                 
-                let availableAmount = cosmosFetcher.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+                let availableAmount = cosmosFetcher.availableAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
                 availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
                 
+                let lockedAmount = cosmosFetcher.lockedAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+                print("lockedAmount ", lockedAmount)
+                lockedLayer.isHidden = (lockedAmount == NSDecimalNumber.zero)
+                lockedLabel?.attributedText = WDP.dpAmount(lockedAmount.stringValue, lockedLabel!.font, 6)
+ 
                 let vestingAmount = cosmosFetcher.vestingAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
                 if (vestingAmount != NSDecimalNumber.zero) {
                     vestingLayer.isHidden = false
@@ -133,12 +141,13 @@ class AssetCosmosClassCell: UITableViewCell {
                     commissionLabel?.attributedText = WDP.dpAmount(commissionAmount.stringValue, commissionLabel!.font, 6)
                 }
                 
-                let totalAmount = availableAmount.adding(vestingAmount).adding(stakingAmount)
+                let totalAmount = availableAmount.adding(lockedAmount).adding(vestingAmount).adding(stakingAmount)
                     .adding(unStakingAmount).adding(rewardAmount).adding(commissionAmount)
                 amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 6)
                 
                 if (BaseData.instance.getHideValue()) {
                     availableLabel.text = "✱✱✱✱"
+                    lockedLabel.text = "✱✱✱✱"
                     vestingLabel.text = "✱✱✱✱"
                     stakingLabel.text = "✱✱✱✱"
                     unstakingLabel.text = "✱✱✱✱"

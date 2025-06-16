@@ -132,8 +132,8 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
             inputChain = targetChains.filter { $0.tag == lastSwapSet[0] }.first ?? targetChains[0]
             outputChain = targetChains.filter { $0.tag == lastSwapSet[2] }.first ?? targetChains[1]
             
-            try await fetchInputAssetBalances()             // fetching coins balance and vesting
-            try await fetchOutputAssetBalances()            // fetching coins balance and vesting
+            try await fetchInputAssetAvailables()             // fetching coins balance and vesting
+            try await fetchOutputAssetAvailables()            // fetching coins balance and vesting
             
             try await fetchInputAssets()
             try await fetchOutputAssets()
@@ -644,7 +644,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     loadingView.isHidden = false
                     Task {
                         inputChain = targetChains.filter({ $0.name == chainName }).first!
-                        try await fetchInputAssetBalances()
+                        try await fetchInputAssetAvailables()
                         try await fetchInputAssets()
                         inputAsset = targetInputAssets[0]
                         try await fetchInputAssetBalance()
@@ -662,7 +662,7 @@ extension SwapStartVC: BaseSheetDelegate, PinDelegate {
                     view.isUserInteractionEnabled = false
                     Task {
                         outputChain = targetChains.filter({ $0.name == chainName }).first!
-                        try await fetchOutputAssetBalances()
+                        try await fetchOutputAssetAvailables()
                         try await fetchOutputAssets()
                         outputAsset = targetOutputAssets[0]
                         try await fetchOutputAssetBalance()
@@ -805,14 +805,12 @@ extension SwapStartVC {
     }
     
     
-    func fetchInputAssetBalances() async throws {
-        _ = await inputChain.getCosmosfetcher()?.fetchCosmosBalances()
-        inputChain.getCosmosfetcher()?.onCheckVesting()
+    func fetchInputAssetAvailables() async throws {
+        _ = await inputChain.getCosmosfetcher()?.fetchCosmosAvailables()
     }
     
-    func fetchOutputAssetBalances() async throws {
-        _ = await outputChain.getCosmosfetcher()?.fetchCosmosBalances()
-        outputChain.getCosmosfetcher()?.onCheckVesting()
+    func fetchOutputAssetAvailables() async throws {
+        _ = await outputChain.getCosmosfetcher()?.fetchCosmosAvailables()
     }
     
     
@@ -928,7 +926,7 @@ extension SwapStartVC {
             if (!inputChain.supportCosmos && inputChain.supportEvm) {
                 inputAsset.balance = inputChain.getEvmfetcher()?.evmBalances ?? NSDecimalNumber.zero
             } else {
-                inputAsset.balance = inputChain.getCosmosfetcher()?.balanceAmount(inputAsset.denom) ?? NSDecimalNumber.zero
+                inputAsset.balance = inputChain.getCosmosfetcher()?.availableAmount(inputAsset.denom) ?? NSDecimalNumber.zero
             }
         }
     }
@@ -944,7 +942,7 @@ extension SwapStartVC {
             if (!outputChain.supportCosmos && outputChain.supportEvm) {
                 outputAsset.balance = outputChain.getEvmfetcher()?.evmBalances ?? NSDecimalNumber.zero
             } else {
-                outputAsset.balance = outputChain.getCosmosfetcher()?.balanceAmount(outputAsset.denom) ?? NSDecimalNumber.zero
+                outputAsset.balance = outputChain.getCosmosfetcher()?.availableAmount(outputAsset.denom) ?? NSDecimalNumber.zero
             }
         }
     }
@@ -962,7 +960,7 @@ extension SwapStartVC {
                 if (!inputChain.supportCosmos && inputChain.supportEvm) {
                     targetInputAssets[index].balance = inputChain.getEvmfetcher()?.evmBalances ?? NSDecimalNumber.zero
                 } else {
-                    targetInputAssets[index].balance = inputChain.getCosmosfetcher()?.balanceAmount(targetInputAssets[index].denom) ?? NSDecimalNumber.zero
+                    targetInputAssets[index].balance = inputChain.getCosmosfetcher()?.availableAmount(targetInputAssets[index].denom) ?? NSDecimalNumber.zero
                 }
             }
             let dpInputBalance = targetInputAssets[index].balance.multiplying(byPowerOf10: -targetInputAssets[index].decimals!)
@@ -994,7 +992,7 @@ extension SwapStartVC {
                 if (!outputChain.supportCosmos && outputChain.supportEvm) {
                     targetOutputAssets[index].balance = outputChain.getEvmfetcher()?.evmBalances ?? NSDecimalNumber.zero
                 } else {
-                    targetOutputAssets[index].balance = outputChain.getCosmosfetcher()?.balanceAmount(targetOutputAssets[index].denom) ?? NSDecimalNumber.zero
+                    targetOutputAssets[index].balance = outputChain.getCosmosfetcher()?.availableAmount(targetOutputAssets[index].denom) ?? NSDecimalNumber.zero
                 }
             }
             let dpInputBalance = targetOutputAssets[index].balance.multiplying(byPowerOf10: -targetOutputAssets[index].decimals!)

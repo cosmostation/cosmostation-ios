@@ -67,9 +67,16 @@ class CheckPrivateKeysVC: BaseVC {
             let allChain = await toCheckAccount.initAllKeys()
             mainnetChains = allChain.filter({ $0.isTestnet == false && $0.tag != "okt996_Secp" })   //only display 1 okt legacy
             testnetChains = allChain.filter({ $0.isTestnet == true })
+            mainnetChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                return $0.name.lowercased() < $1.name.lowercased()
+            }
+            testnetChains.sort {
+                return $0.name < $1.name
+            }
             searchMainnets = mainnetChains
             searchTestnets = testnetChains
-            
             DispatchQueue.main.async {
                 self.loadingView.isHidden = true
                 self.tableView.reloadData()

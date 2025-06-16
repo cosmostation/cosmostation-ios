@@ -115,12 +115,12 @@ class KavaSwapAction: BaseVC {
             
             let poolCoin1Amount = swapPool.coins[0].getAmount()
             let poolCoin2Amount = swapPool.coins[1].getAmount()
-            var availabelCoin1Amount = kavaFetcher.balanceAmount(swapPool.coins[0].denom)
+            var availabelCoin1Amount = kavaFetcher.availableAmount(swapPool.coins[0].denom)
             if (txFee.amount[0].denom == swapPool.coins[0].denom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 availabelCoin1Amount = availabelCoin1Amount.subtracting(feeAmount)
             }
-            let availabelCoin2Amount = kavaFetcher.balanceAmount(swapPool.coins[1].denom)
+            let availabelCoin2Amount = kavaFetcher.availableAmount(swapPool.coins[1].denom)
             
             swapRate = poolCoin1Amount.dividing(by: poolCoin2Amount, withBehavior: handler24Down)
             let availabelRate = availabelCoin1Amount.dividing(by: availabelCoin2Amount, withBehavior: handler24Down)

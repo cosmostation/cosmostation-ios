@@ -55,6 +55,14 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
                     self.toAddAccount.fetchForPreCreate(self.seed!, nil)
                     self.mainnetChains = self.toAddAccount.allChains.filter({ $0.isTestnet == false })
                     self.testnetChains = self.toAddAccount.allChains.filter({ $0.isTestnet == true })
+                    self.mainnetChains.sort {
+                        if ($0.tag == "cosmos118") { return true }
+                        if ($1.tag == "cosmos118") { return false }
+                        return $0.name.lowercased() < $1.name.lowercased()
+                    }
+                    self.testnetChains.sort {
+                        return $0.name < $1.name
+                    }
                     self.onUpdateview()
                 });
             }
@@ -71,6 +79,14 @@ class WalletDeriveVC: BaseVC, HdPathDelegate, CreateNameDelegate {
             toAddAccount.fetchForPreCreate(nil, privateKeyString)
             mainnetChains = toAddAccount.allChains.filter({ $0.isTestnet == false })
             testnetChains = toAddAccount.allChains.filter({ $0.isTestnet == true })
+            mainnetChains.sort {
+                if ($0.tag == "cosmos118") { return true }
+                if ($1.tag == "cosmos118") { return false }
+                return $0.name.lowercased() < $1.name.lowercased()
+            }
+            testnetChains.sort {
+                return $0.name < $1.name
+            }
             onUpdateview()
             
         } else {

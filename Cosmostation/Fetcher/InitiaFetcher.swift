@@ -71,22 +71,22 @@ class InitiaFetcher: CosmosFetcher {
     
     override func denomValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if (denom == chain.stakeDenom) {
-            return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
+            return balanceValue(denom, usd).adding(rewardValue(denom, usd))
                 .adding(initiaDelegationValueSum(usd)).adding(initiaUnbondingValueSum(usd)).adding(commissionValue(denom, usd))
             
         } else {
-            return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
+            return balanceValue(denom, usd).adding(rewardValue(denom, usd))
                 .adding(commissionValue(denom, usd))
         }
     }
     
     override func allStakingDenomAmount() -> NSDecimalNumber {
-        return balanceAmount(chain.stakeDenom!).adding(vestingAmount(chain.stakeDenom!)).adding(initiaDelegationAmountSum())
+        return balanceAmount(chain.stakeDenom!).adding(initiaDelegationAmountSum())
             .adding(initiaUnbondingAmountSum()).adding(rewardAmountSum(chain.stakeDenom!)).adding(commissionAmount(chain.stakeDenom!))
     }
     
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(initiaDelegationValueSum(usd))
+        return balanceValueSum(usd).adding(initiaDelegationValueSum(usd))
             .adding(initiaUnbondingValueSum(usd)).adding(rewardValueSum(usd)).adding(commissionValueSum(usd))
     }
 }

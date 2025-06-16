@@ -45,9 +45,9 @@ class ChainBabylon: BaseChain {
                 fetchState = .Success
             }
 
-            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
-                cosmosFetcher.onCheckVesting()
-            }
+//            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
+//                cosmosFetcher.onCheckVesting()
+//            }
 
             if (self.fetchState == .Success) {
                 var coinsValue = NSDecimalNumber.zero

@@ -82,12 +82,12 @@ class ZenrockFetcher: CosmosFetcher {
     }
     
     override func allStakingDenomAmount() -> NSDecimalNumber {
-        return balanceAmount(chain.stakeDenom!).adding(vestingAmount(chain.stakeDenom!)).adding(zenrockDelegationAmountSum())
+        return balanceAmount(chain.stakeDenom!).adding(zenrockDelegationAmountSum())
             .adding(zenrockUnbondingAmountSum()).adding(rewardAmountSum(chain.stakeDenom!)).adding(commissionAmount(chain.stakeDenom!))
     }
     
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        return balanceValueSum(usd).adding(vestingValueSum(usd)).adding(zenrockDelegationValueSum(usd))
+        return balanceValueSum(usd).adding(zenrockDelegationValueSum(usd))
             .adding(zenrockUnbondingValueSum(usd)).adding(rewardValueSum(usd)).adding(commissionValueSum(usd))
     }
 }
