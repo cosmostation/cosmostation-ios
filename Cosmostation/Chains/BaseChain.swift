@@ -772,7 +772,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNillion())
     result.append(ChainNoble())
     result.append(ChainNolus())
-//    result.append(ChainNomic())
     result.append(ChainNyx())
     result.append(ChainOktEVM())                        //EVM
     result.append(ChainOkt996Keccak())                  //LCD
@@ -866,6 +865,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainCudos())
 //    result.append(ChainEmoney())
 //    result.append(ChainGovgen())
+//    result.append(ChainNomic())
 //    result.append(ChainMars())
 //    result.append(ChainOnomy())
 //    result.append(ChainQuasar())
