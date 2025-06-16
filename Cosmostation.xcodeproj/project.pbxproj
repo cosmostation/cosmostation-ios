@@ -69,6 +69,8 @@
 		0400EF442ADD49BB007BA97F /* kava_swap_v1beta1_swap.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0400EF382ADD49BB007BA97F /* kava_swap_v1beta1_swap.pb.swift */; };
 		0400F1322C2770FE00A7144B /* SmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0400F1312C2770FE00A7144B /* SmallButton.swift */; };
 		0400F1332C2770FE00A7144B /* SmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0400F1312C2770FE00A7144B /* SmallButton.swift */; };
+		04010E092E002DF900B07D8D /* ChainArkeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E082E002DF900B07D8D /* ChainArkeo.swift */; };
+		04010E0A2E002DF900B07D8D /* ChainArkeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E082E002DF900B07D8D /* ChainArkeo.swift */; };
 		0402B7E62ACC132200824B3F /* CosmosCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7E42ACC132200824B3F /* CosmosCompounding.swift */; };
 		0402B7E72ACC132200824B3F /* CosmosCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7E42ACC132200824B3F /* CosmosCompounding.swift */; };
 		0402B7E82ACC132200824B3F /* CosmosCompounding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7E52ACC132200824B3F /* CosmosCompounding.xib */; };
@@ -2532,6 +2534,7 @@
 		0400EF372ADD49BB007BA97F /* kava_swap_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_swap_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		0400EF382ADD49BB007BA97F /* kava_swap_v1beta1_swap.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_swap_v1beta1_swap.pb.swift; sourceTree = "<group>"; };
 		0400F1312C2770FE00A7144B /* SmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallButton.swift; sourceTree = "<group>"; };
+		04010E082E002DF900B07D8D /* ChainArkeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainArkeo.swift; sourceTree = "<group>"; };
 		0402B7E42ACC132200824B3F /* CosmosCompounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosCompounding.swift; sourceTree = "<group>"; };
 		0402B7E52ACC132200824B3F /* CosmosCompounding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosCompounding.xib; sourceTree = "<group>"; };
 		0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosRewardAddress.swift; sourceTree = "<group>"; };
@@ -3992,6 +3995,7 @@
 				E10FD3BD2B70D1F900B57DB4 /* ChainAlthea118.swift */,
 				790970252D7EDE9700DEB959 /* ChainAndromeda.swift */,
 				047843F22AC9A1B500462F1C /* ChainArchway.swift */,
+				04010E082E002DF900B07D8D /* ChainArkeo.swift */,
 				E18A4EBA2A95149100D8BC05 /* ChainAssetMantle.swift */,
 				79F30ED82CAD36E400E42B2F /* ChainAtomone.swift */,
 				044ECB162A95C2E40042DB3C /* ChainAxelar.swift */,
@@ -6846,6 +6850,7 @@
 				E10B1DCF2C2159040039283B /* KavaMintAction.swift in Sources */,
 				046EA8662AD04A2500A2FCE7 /* desmos_profiles_v3_query_dtag_requests.pb.swift in Sources */,
 				04C817432BA98D75006B800A /* cosmos_staking_v1beta1_authz.pb.swift in Sources */,
+				04010E092E002DF900B07D8D /* ChainArkeo.swift in Sources */,
 				04E165BE28B62133000F12C0 /* MintscanToken.swift in Sources */,
 				04C816C32BA98D75006B800A /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,
 				04C816A32BA98D75006B800A /* cosmos_gov_v1_tx.pb.swift in Sources */,
@@ -8058,6 +8063,7 @@
 				04C816742BA98D74006B800A /* cosmos_protocolpool_module_v1_module.pb.swift in Sources */,
 				04D7854C2C328DB1009D1A94 /* feemarket_feemarket_v1_query.pb.swift in Sources */,
 				E1DBD3ED2B626BEE0058E0DC /* EvmClassVC.swift in Sources */,
+				04010E0A2E002DF900B07D8D /* ChainArkeo.swift in Sources */,
 				7992615E2D77EE66007E9911 /* babylon_btccheckpoint_v1_params.pb.swift in Sources */,
 				0450322B2C1EE98B00235F6A /* ChainBase.swift in Sources */,
 				E16200412AF279560008F397 /* AddressBookListVC.swift in Sources */,
