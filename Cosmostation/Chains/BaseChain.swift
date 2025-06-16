@@ -691,6 +691,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAndromeda())
     result.append(ChainArbitrum())                      //EVM
     result.append(ChainArchway())
+    result.append(ChainArkeo())                      
     result.append(ChainAssetMantle())
     result.append(ChainAtomone())
     result.append(ChainAvalanche())                     //EVM
@@ -760,7 +761,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainLombard())
     result.append(ChainLum118())
     result.append(ChainLum880())
-//    result.append(ChainLumera())
+    result.append(ChainLumera())
     result.append(ChainManifest())
     result.append(ChainMantra())
     result.append(ChainMedibloc())
@@ -772,7 +773,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNillion())
     result.append(ChainNoble())
     result.append(ChainNolus())
-//    result.append(ChainNomic())
     result.append(ChainNyx())
     result.append(ChainOktEVM())                        //EVM
     result.append(ChainOkt996Keccak())                  //LCD
@@ -866,6 +866,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainCudos())
 //    result.append(ChainEmoney())
 //    result.append(ChainGovgen())
+//    result.append(ChainNomic())
 //    result.append(ChainMars())
 //    result.append(ChainOnomy())
 //    result.append(ChainQuasar())
@@ -938,4 +939,4 @@ public enum TxType: Int {
 
 
 
-let DEFUAL_DISPALY_CHAINS = ["cosmos118", "bitcoin86", "ethereum60", "suiMainnet", "neutron118", "kava60", "osmosis118", "dydx118", "mantra118"]
+let DEFUAL_DISPALY_CHAINS = ["cosmos118", "bitcoin86", "ethereum60", "suiMainnet", "neutron118", "kava60", "osmosis118", "dydx118", "atomone118", "babylon118"]
