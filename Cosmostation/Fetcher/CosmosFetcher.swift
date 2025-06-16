@@ -513,6 +513,11 @@ class CosmosFetcher {
     func commissionOtherDenoms() -> Int {
         return cosmosCommissions.filter { $0.denom != chain.stakeDenom }.count
     }
+    
+    func delegatableAmount() -> NSDecimalNumber {
+        return balanceAmount(chain.stakeDenom!)
+    }
+    
 }
 
 //about web3 call api

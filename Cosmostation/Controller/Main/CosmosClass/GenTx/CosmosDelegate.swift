@@ -300,26 +300,23 @@ class CosmosDelegate: BaseVC {
     func onUpdateFeeView() {
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, txFee.amount[0].denom) {
             feeSelectLabel.text = msAsset.symbol
-            
+            let delegatableAmount = cosmosFetcher.delegatableAmount()
             let totalFeeAmount = NSDecimalNumber(string: txFee.amount[0].amount)
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let value = msPrice.multiplying(by: totalFeeAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
             WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
             
-            let stakeDenom = selectedChain.stakeDenom!
-            let balanceAmount = cosmosFetcher.balanceAmount(stakeDenom)
-            
-            if (txFee.amount[0].denom == stakeDenom) {
+            if (txFee.amount[0].denom == selectedChain.stakeDenom) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
-                if (feeAmount.compare(balanceAmount).rawValue > 0) {
+                if (feeAmount.compare(delegatableAmount).rawValue > 0) {
                     //ERROR short balance!!
                 }
-                availableAmount = balanceAmount.subtracting(feeAmount)
+                availableAmount = delegatableAmount.subtracting(feeAmount)
                 
             } else {
                 //fee pay with another denom
-                availableAmount = balanceAmount
+                availableAmount = delegatableAmount
             }
         }
     }

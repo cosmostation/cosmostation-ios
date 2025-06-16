@@ -38,4 +38,8 @@ class CoreumFetcher: CosmosFetcher {
         return NSDecimalNumber.zero
     }
     
+    override func delegatableAmount() -> NSDecimalNumber {
+        return availableAmount(chain.stakeDenom!)
+    }
+    
 }
