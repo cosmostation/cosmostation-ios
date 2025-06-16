@@ -19,11 +19,11 @@ class ChainLumera: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ulume"
         bechAccountPrefix = "lumera"
         validatorPrefix = "lumeravaloper"
-        grpcHost = "grpc.lumera.io"
-        lcdUrl = "https://lcd.lumera.io"
+        grpcHost = "grpc.lumera.mainnet.cosmostation.io"
+        lcdUrl = "https://lcd.lumera.mainnet.cosmostation.io"
     }
 }
