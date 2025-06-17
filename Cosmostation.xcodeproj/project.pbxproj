@@ -71,6 +71,8 @@
 		0400F1332C2770FE00A7144B /* SmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0400F1312C2770FE00A7144B /* SmallButton.swift */; };
 		04010E092E002DF900B07D8D /* ChainArkeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E082E002DF900B07D8D /* ChainArkeo.swift */; };
 		04010E0A2E002DF900B07D8D /* ChainArkeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E082E002DF900B07D8D /* ChainArkeo.swift */; };
+		04010E0C2E01520A00B07D8D /* ChainBeezee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E0B2E01520A00B07D8D /* ChainBeezee.swift */; };
+		04010E0D2E01520A00B07D8D /* ChainBeezee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E0B2E01520A00B07D8D /* ChainBeezee.swift */; };
 		0402B7E62ACC132200824B3F /* CosmosCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7E42ACC132200824B3F /* CosmosCompounding.swift */; };
 		0402B7E72ACC132200824B3F /* CosmosCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7E42ACC132200824B3F /* CosmosCompounding.swift */; };
 		0402B7E82ACC132200824B3F /* CosmosCompounding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7E52ACC132200824B3F /* CosmosCompounding.xib */; };
@@ -2535,6 +2537,7 @@
 		0400EF382ADD49BB007BA97F /* kava_swap_v1beta1_swap.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_swap_v1beta1_swap.pb.swift; sourceTree = "<group>"; };
 		0400F1312C2770FE00A7144B /* SmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallButton.swift; sourceTree = "<group>"; };
 		04010E082E002DF900B07D8D /* ChainArkeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainArkeo.swift; sourceTree = "<group>"; };
+		04010E0B2E01520A00B07D8D /* ChainBeezee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBeezee.swift; sourceTree = "<group>"; };
 		0402B7E42ACC132200824B3F /* CosmosCompounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosCompounding.swift; sourceTree = "<group>"; };
 		0402B7E52ACC132200824B3F /* CosmosCompounding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosCompounding.xib; sourceTree = "<group>"; };
 		0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosRewardAddress.swift; sourceTree = "<group>"; };
@@ -4001,6 +4004,7 @@
 				044ECB162A95C2E40042DB3C /* ChainAxelar.swift */,
 				048CB53E2D2E899B00061729 /* ChainBabylon.swift */,
 				045032702C1EEDCC00235F6A /* ChainBand.swift */,
+				04010E0B2E01520A00B07D8D /* ChainBeezee.swift */,
 				045032752C1EEDCD00235F6A /* ChainBitcana.swift */,
 				045032772C1EEDCD00235F6A /* ChainBitsong.swift */,
 				04E413912D27CE16001378D3 /* ChainBostrom.swift */,
@@ -7230,6 +7234,7 @@
 				046651FB2DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.pb.swift in Sources */,
 				046651FC2DACDB2700F9C125 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
 				046651FD2DACDB2700F9C125 /* ibc_core_commitment_v1_commitment.pb.swift in Sources */,
+				04010E0D2E01520A00B07D8D /* ChainBeezee.swift in Sources */,
 				046651FE2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_packet.pb.swift in Sources */,
 				E1F469FE2DF0131A00D34038 /* ChainTerraClassic.swift in Sources */,
 				046651FF2DACDB2700F9C125 /* ibc_applications_fee_v1_query.grpc.swift in Sources */,
@@ -8044,6 +8049,7 @@
 				047843D12AC991B300462F1C /* injective_exchange_v1beta1_events.pb.swift in Sources */,
 				046EA8832AD04A2500A2FCE7 /* desmos_profiles_v2_models_dtag_requests.pb.swift in Sources */,
 				04C816EC2BA98D75006B800A /* cosmos_staking_v1beta1_query.grpc.swift in Sources */,
+				04010E0C2E01520A00B07D8D /* ChainBeezee.swift in Sources */,
 				79FCA3D82C3F9E92001C17D0 /* artela_types_v1_indexer.pb.swift in Sources */,
 				04C8176A2BA98D75006B800A /* cosmos_protocolpool_v1_query.grpc.swift in Sources */,
 				047843C72AC991B300462F1C /* injective_tokenfactory_v1beta1_tx.pb.swift in Sources */,

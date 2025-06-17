@@ -700,6 +700,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBand())
     result.append(ChainBase())                          //EVM
     result.append(ChainBeraEVM())                       //EVM
+    result.append(ChainBeezee())
     result.append(ChainBinanceSmart())                  //EVM
     result.append(ChainBitcana())
     result.append(ChainBitCoin44())                     //MAJOR
