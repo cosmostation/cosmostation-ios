@@ -73,6 +73,8 @@
 		04010E0A2E002DF900B07D8D /* ChainArkeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E082E002DF900B07D8D /* ChainArkeo.swift */; };
 		04010E0C2E01520A00B07D8D /* ChainBeezee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E0B2E01520A00B07D8D /* ChainBeezee.swift */; };
 		04010E0D2E01520A00B07D8D /* ChainBeezee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E0B2E01520A00B07D8D /* ChainBeezee.swift */; };
+		04010E0F2E01530D00B07D8D /* ChainKima.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E0E2E01530D00B07D8D /* ChainKima.swift */; };
+		04010E102E01530D00B07D8D /* ChainKima.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E0E2E01530D00B07D8D /* ChainKima.swift */; };
 		0402B7E62ACC132200824B3F /* CosmosCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7E42ACC132200824B3F /* CosmosCompounding.swift */; };
 		0402B7E72ACC132200824B3F /* CosmosCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7E42ACC132200824B3F /* CosmosCompounding.swift */; };
 		0402B7E82ACC132200824B3F /* CosmosCompounding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7E52ACC132200824B3F /* CosmosCompounding.xib */; };
@@ -2538,6 +2540,7 @@
 		0400F1312C2770FE00A7144B /* SmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallButton.swift; sourceTree = "<group>"; };
 		04010E082E002DF900B07D8D /* ChainArkeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainArkeo.swift; sourceTree = "<group>"; };
 		04010E0B2E01520A00B07D8D /* ChainBeezee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBeezee.swift; sourceTree = "<group>"; };
+		04010E0E2E01530D00B07D8D /* ChainKima.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKima.swift; sourceTree = "<group>"; };
 		0402B7E42ACC132200824B3F /* CosmosCompounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosCompounding.swift; sourceTree = "<group>"; };
 		0402B7E52ACC132200824B3F /* CosmosCompounding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosCompounding.xib; sourceTree = "<group>"; };
 		0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosRewardAddress.swift; sourceTree = "<group>"; };
@@ -4045,6 +4048,7 @@
 				04D279EC2A67C96F00AF046A /* ChainKava459.swift */,
 				042296802A890C9B003C7630 /* ChainKava118.swift */,
 				045032BA2C1EFCE600235F6A /* ChainKi.swift */,
+				04010E0E2E01530D00B07D8D /* ChainKima.swift */,
 				79B7F35A2D8165D300AA755B /* ChainKopi.swift */,
 				045032BC2C1EFCE700235F6A /* ChainKyve.swift */,
 				04F23A9C2C4258E70030F70F /* ChainLava.swift */,
@@ -7413,6 +7417,7 @@
 				0478439E2AC991B300462F1C /* injective_wasmx_v1_proposal.pb.swift in Sources */,
 				048F8DCA2B285EC900432437 /* kava_router_v1beta1_tx.grpc.swift in Sources */,
 				04B789A02ACAEB5F00E9BE88 /* TxAddressLegacySheet.swift in Sources */,
+				04010E0F2E01530D00B07D8D /* ChainKima.swift in Sources */,
 				79FCA3B92C3F9E92001C17D0 /* artela_types_v1_web3.pb.swift in Sources */,
 				79FCA3D32C3F9E92001C17D0 /* artela_fee_v1_query.grpc.swift in Sources */,
 				18FFB66B281AF533004E65BB /* Account.swift in Sources */,
@@ -8254,6 +8259,7 @@
 				04C63D162B83717A00D4A366 /* SelectAddressListSheet.swift in Sources */,
 				04C8173A2BA98D75006B800A /* cosmos_bank_v1beta1_genesis.pb.swift in Sources */,
 				045032E52C1EFE5500235F6A /* ChainRegen.swift in Sources */,
+				04010E102E01530D00B07D8D /* ChainKima.swift in Sources */,
 				04C817522BA98D75006B800A /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
 				E1DF77752AB74EE80028BD51 /* CheckPrivateKeyVC.swift in Sources */,
 				047843B72AC991B300462F1C /* injective_types_v1beta1_tx_response.pb.swift in Sources */,
