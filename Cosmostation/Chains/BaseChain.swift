@@ -792,7 +792,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainProvenance())
     result.append(ChainPryzm())
     result.append(ChainPundix())
-//    result.append(ChainQubeticsEVM())                   //EVM
+    result.append(ChainQubeticsEVM())                   //EVM
     result.append(ChainQuicksilver())
     result.append(ChainRealioEVM())
     result.append(ChainRegen())

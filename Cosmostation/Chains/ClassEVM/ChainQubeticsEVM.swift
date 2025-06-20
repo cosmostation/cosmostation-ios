@@ -20,16 +20,16 @@ class ChainQubeticsEVM: BaseChain {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .Unknown
+        cosmosEndPointType = .UseLCD
         stakeDenom = "tics"
         bechAccountPrefix = "qubetics"
         validatorPrefix = "qubeticsvaloper"
-        grpcHost = ""
-        lcdUrl = ""
+        grpcHost = "grpc.qubetics.com"
+        lcdUrl = "https://swagger.qubetics.com/"
         
         supportEvm = true
         coinSymbol = "TICS"
-        evmRpcURL = ""
+        evmRpcURL = "https://rpc.qubetics.com/"
     }
 
 }
