@@ -25,10 +25,10 @@ class ChainShidoEVM: BaseChain  {
         bechAccountPrefix = "shido"
         validatorPrefix = "shidovaloper"
         grpcHost = "grpc.shidoscan.com"
-        lcdUrl = "https://swagger.shidoscan.com"
+        lcdUrl = "https://api.shidoscan.net/"
         
         supportEvm = true
         coinSymbol = "SHIDO"
-        evmRpcURL = "https://rpc-nodes.shidoscan.com"
+        evmRpcURL = "https://evm.shidoscan.net/"
     }
 }
