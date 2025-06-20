@@ -21,11 +21,11 @@ class ChainZigChain_T: ChainZigChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uzig"
         bechAccountPrefix = "zig"
         validatorPrefix = "zigvaloper"
-        grpcHost = "grpc.zigchain.testnet.cosmostation.io"
-        lcdUrl = "https://lcd.zigchain.testnet.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://testnet-api.zigchain.com/"
     }
 }
