@@ -75,6 +75,8 @@
 		04010E0D2E01520A00B07D8D /* ChainBeezee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E0B2E01520A00B07D8D /* ChainBeezee.swift */; };
 		04010E0F2E01530D00B07D8D /* ChainKima.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E0E2E01530D00B07D8D /* ChainKima.swift */; };
 		04010E102E01530D00B07D8D /* ChainKima.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E0E2E01530D00B07D8D /* ChainKima.swift */; };
+		04010E152E096D3100B07D8D /* ChainMantraEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E142E096D3100B07D8D /* ChainMantraEVM_T.swift */; };
+		04010E162E096D3100B07D8D /* ChainMantraEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04010E142E096D3100B07D8D /* ChainMantraEVM_T.swift */; };
 		0402B7E62ACC132200824B3F /* CosmosCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7E42ACC132200824B3F /* CosmosCompounding.swift */; };
 		0402B7E72ACC132200824B3F /* CosmosCompounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0402B7E42ACC132200824B3F /* CosmosCompounding.swift */; };
 		0402B7E82ACC132200824B3F /* CosmosCompounding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0402B7E52ACC132200824B3F /* CosmosCompounding.xib */; };
@@ -2541,6 +2543,7 @@
 		04010E082E002DF900B07D8D /* ChainArkeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainArkeo.swift; sourceTree = "<group>"; };
 		04010E0B2E01520A00B07D8D /* ChainBeezee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBeezee.swift; sourceTree = "<group>"; };
 		04010E0E2E01530D00B07D8D /* ChainKima.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainKima.swift; sourceTree = "<group>"; };
+		04010E142E096D3100B07D8D /* ChainMantraEVM_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantraEVM_T.swift; sourceTree = "<group>"; };
 		0402B7E42ACC132200824B3F /* CosmosCompounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosCompounding.swift; sourceTree = "<group>"; };
 		0402B7E52ACC132200824B3F /* CosmosCompounding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosCompounding.xib; sourceTree = "<group>"; };
 		0402B7EA2ACC248400824B3F /* CosmosRewardAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosRewardAddress.swift; sourceTree = "<group>"; };
@@ -4630,6 +4633,7 @@
 				04965B422C37B3AE00403605 /* ChainInitia_T.swift */,
 				7948D66C2D9100F6005208B2 /* ChainLombard_T.swift */,
 				79E381EB2DCC91E600DB0AD6 /* ChainLumera_T.swift */,
+				04010E142E096D3100B07D8D /* ChainMantraEVM_T.swift */,
 				E16FB7252C7595E6005660D1 /* ChainMantra_T.swift */,
 				E14B92DD2DAFEF7C0030D4F0 /* ChainMonad_T.swift */,
 				04D785582C32B171009D1A94 /* ChainNeutron_T.swift */,
@@ -6545,6 +6549,7 @@
 				E18B21FD2C4A4EE900AD572F /* ChainNillion_T.swift in Sources */,
 				04C817A12BA98D75006B800A /* cosmos_distribution_v1beta1_tx.pb.swift in Sources */,
 				042296822A890C9B003C7630 /* ChainKava118.swift in Sources */,
+				04010E162E096D3100B07D8D /* ChainMantraEVM_T.swift in Sources */,
 				0400EEE22ADBE1D3007BA97F /* kava_pricefeed_v1beta1_tx.pb.swift in Sources */,
 				0409D2F62AC5DC6D0021E192 /* CosmosDelegate.swift in Sources */,
 				E10B1DE52C215C120039283B /* NeutronMultiDao.swift in Sources */,
@@ -7841,6 +7846,7 @@
 				045032AA2C1EEFCA00235F6A /* ChainFetchAi60Secp.swift in Sources */,
 				04C8172E2BA98D75006B800A /* cosmos_circuit_v1_tx.grpc.swift in Sources */,
 				04B789E52ACB140900E9BE88 /* SelectNameServiceCell.swift in Sources */,
+				04010E152E096D3100B07D8D /* ChainMantraEVM_T.swift in Sources */,
 				792613AC2CD4B82800FAF47D /* initia_distribution_v1_tx.pb.swift in Sources */,
 				79E381EA2DCB221800DB0AD6 /* ChainLumera.swift in Sources */,
 				E15980A62A83AC9E0032892B /* PortfolioVC.swift in Sources */,

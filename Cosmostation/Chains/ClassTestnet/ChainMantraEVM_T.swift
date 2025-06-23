@@ -1,25 +1,24 @@
 //
-//  ChainMantra_T.swift
+//  ChainMantraEVM_T.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 8/21/24.
-//  Copyright © 2024 wannabit. All rights reserved.
+//  Created by yongjoo jung on 6/23/25.
+//  Copyright © 2025 wannabit. All rights reserved.
 //
 
 import Foundation
 
-class ChainMantra_T: ChainMantra  {
+class ChainMantraEVM_T: BaseChain  {
     
     override init() {
         super.init()
         
         name = "Mantra Testnet"
-        tag = "mantra_T"
+        tag = "mantraevm60_T"
         chainImg = "chainMantra_T"
         isTestnet = true
-        isDefault = false
         apiName = "mantra-testnet"
-        accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
+        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
         cosmosEndPointType = .UseGRPC
@@ -28,6 +27,10 @@ class ChainMantra_T: ChainMantra  {
         validatorPrefix = "mantravaloper"
         grpcHost = "grpc-office-mantra.cosmostation.io"
         lcdUrl = "https://lcd-office.cosmostation.io/mantra-testnet/"
+        
+        supportEvm = true
+        coinSymbol = "OM"
+        evmRpcURL = "https://rpc-office-evm.cosmostation.io/mantra-testnet/"
     }
 }
 
