@@ -30,7 +30,7 @@ class ChainMantraEVM_T: BaseChain  {
         
         supportEvm = true
         coinSymbol = "OM"
-        evmRpcURL = "https://rpc-office-evm.cosmostation.io/mantra-testnet/"
+        evmRpcURL = "https://rpc.evm.mantra.testnet.cosmostation.io"
     }
 }
 
