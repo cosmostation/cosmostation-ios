@@ -320,6 +320,7 @@ public enum PubKeyType: Int {
     case STRATOS_Keccak256 = 10
     case INITIA_Keccak256 = 11
     case IOTA_Ed25519 = 12
+    case COSMOS_EVM_Keccak256 = 13
 
     case unknown = 99
     
@@ -351,6 +352,8 @@ public enum PubKeyType: Int {
             return "keccak256"
         case PubKeyType.IOTA_Ed25519:
             return "ed25519"
+        case PubKeyType.COSMOS_EVM_Keccak256:
+            return "keccak256"
         case PubKeyType.unknown:
             return "unknown"
         }
