@@ -1663,6 +1663,8 @@
 		15C4B8B22C5966610084B0A3 /* stride_vesting_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C4B8AD2C5966600084B0A3 /* stride_vesting_tx.pb.swift */; };
 		15C4B8B32C5966610084B0A3 /* stride_vesting_vesting.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C4B8AE2C5966600084B0A3 /* stride_vesting_vesting.pb.swift */; };
 		15C4B8B42C5966610084B0A3 /* stride_vesting_vesting.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C4B8AE2C5966600084B0A3 /* stride_vesting_vesting.pb.swift */; };
+		15D637D72E0E72C2000BCE79 /* cosmos_evm_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D637D62E0E72C2000BCE79 /* cosmos_evm_crypto_v1_ethsecp256k1_keys.pb.swift */; };
+		15D637D82E0E72C2000BCE79 /* cosmos_evm_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D637D62E0E72C2000BCE79 /* cosmos_evm_crypto_v1_ethsecp256k1_keys.pb.swift */; };
 		1809C35129D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
 		1809C35229D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
 		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
@@ -3326,6 +3328,7 @@
 		15C4B8AC2C5966600084B0A3 /* stride_vesting_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_vesting_tx.grpc.swift; sourceTree = "<group>"; };
 		15C4B8AD2C5966600084B0A3 /* stride_vesting_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_vesting_tx.pb.swift; sourceTree = "<group>"; };
 		15C4B8AE2C5966600084B0A3 /* stride_vesting_vesting.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_vesting_vesting.pb.swift; sourceTree = "<group>"; };
+		15D637D62E0E72C2000BCE79 /* cosmos_evm_crypto_v1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_evm_crypto_v1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
 		1809C35029D16C80008884C1 /* injectScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = injectScript.js; sourceTree = "<group>"; };
 		181099DE28AE92FC00C178B5 /* PushUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUtils.swift; sourceTree = "<group>"; };
 		1812D46128E184D800AC7D61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -5295,6 +5298,7 @@
 				04C816282BA98D73006B800A /* cosmos_evidence_v1beta1_query.pb.swift */,
 				04C816402BA98D74006B800A /* cosmos_evidence_v1beta1_tx.grpc.swift */,
 				04C815DB2BA98D6E006B800A /* cosmos_evidence_v1beta1_tx.pb.swift */,
+				15D637D62E0E72C2000BCE79 /* cosmos_evm_crypto_v1_ethsecp256k1_keys.pb.swift */,
 				04C815FF2BA98D70006B800A /* cosmos_feegrant_module_v1_module.pb.swift */,
 				04C815B32BA98D6B006B800A /* cosmos_feegrant_v1beta1_feegrant.pb.swift */,
 				04C816342BA98D73006B800A /* cosmos_feegrant_v1beta1_genesis.pb.swift */,
@@ -7300,6 +7304,7 @@
 				0466522F2DACDB2700F9C125 /* ibc_core_types_v1_genesis.pb.swift in Sources */,
 				046652302DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.grpc.swift in Sources */,
 				046652312DACDB2700F9C125 /* ibc_core_channel_v1_query.pb.swift in Sources */,
+				15D637D82E0E72C2000BCE79 /* cosmos_evm_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */,
 				046652322DACDB2700F9C125 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */,
 				046652332DACDB2700F9C125 /* ibc_applications_perm_v1_query.pb.swift in Sources */,
 				046652342DACDB2700F9C125 /* ibc_applications_transfer_v1_token.pb.swift in Sources */,
@@ -7727,6 +7732,7 @@
 				792613B02CD4B82800FAF47D /* initia_bank_v1_tx.grpc.swift in Sources */,
 				E10B1D832C2156430039283B /* KavaLendListCell.swift in Sources */,
 				E13FC5472B26C79A0082C66E /* kava_earn_v1beta1_vault.pb.swift in Sources */,
+				15D637D72E0E72C2000BCE79 /* cosmos_evm_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */,
 				7992617D2D77EE66007E9911 /* babylon_incentive_genesis.pb.swift in Sources */,
 				047843232AC9918700462F1C /* ethermint_evm_v1_tx.grpc.swift in Sources */,
 				799261692D77EE66007E9911 /* babylon_btcstaking_v1_query.grpc.swift in Sources */,

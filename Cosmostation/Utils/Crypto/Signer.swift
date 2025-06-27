@@ -841,6 +841,15 @@ class Signer {
                 $0.value = try! pub.serializedData()
             }
             
+        } else if (baseChain.accountKeyType.pubkeyType == .COSMOS_EVM_Keccak256) {
+            let pub = Cosmos_Evm_Crypto_V1_Ethsecp256k1_PubKey.with {
+                $0.key = baseChain.publicKey!
+            }
+            pubKey = Google_Protobuf_Any.with {
+                $0.typeURL = "/cosmos.evm.crypto.v1.ethsecp256k1.PubKey"
+                $0.value = try! pub.serializedData()
+            }
+            
         } else {
             let pub = Cosmos_Crypto_Secp256k1_PubKey.with {
                 $0.key = baseChain.publicKey!
@@ -897,7 +906,8 @@ class Signer {
             baseChain.accountKeyType.pubkeyType == .ETH_Keccak256 ||
             baseChain.accountKeyType.pubkeyType == .STRATOS_Keccak256 ||
             baseChain.accountKeyType.pubkeyType == .ARTELA_Keccak256 ||
-            baseChain.accountKeyType.pubkeyType == .INITIA_Keccak256) {
+            baseChain.accountKeyType.pubkeyType == .INITIA_Keccak256 ||
+            baseChain.accountKeyType.pubkeyType == .COSMOS_EVM_Keccak256) {
             hash = toSignByte.sha3(.keccak256)
             
         } else {

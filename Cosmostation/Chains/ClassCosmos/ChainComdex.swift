@@ -24,8 +24,8 @@ class ChainComdex: BaseChain  {
         stakeDenom = "ucmdx"
         bechAccountPrefix = "comdex"
         validatorPrefix = "comdexvaloper"
-        grpcHost = "comdex-grpc.lavenderfive.com"
-        lcdUrl = "https://rest.comdex.one/"
+        grpcHost = ""
+        lcdUrl = "https://comdex.api.m.stavr.tech/"
     }
     
 }

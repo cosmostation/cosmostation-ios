@@ -21,6 +21,6 @@ class ChainXrplEVM: BaseChain {
         
         supportEvm = true
         coinSymbol = "XRP"
-        evmRpcURL = ""
+        evmRpcURL = "https://rpc.evm.xrplevm.mainnet.cosmostation.io"
     }
 }

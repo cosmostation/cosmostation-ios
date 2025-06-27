@@ -18,7 +18,7 @@ class ChainMantraEVM_T: BaseChain  {
         chainImg = "chainMantra_T"
         isTestnet = true
         apiName = "mantra-testnet"
-        accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
+        accountKeyType = AccountKeyType(.COSMOS_EVM_Keccak256, "m/44'/60'/0'/0/X")
         
         
         cosmosEndPointType = .UseGRPC
