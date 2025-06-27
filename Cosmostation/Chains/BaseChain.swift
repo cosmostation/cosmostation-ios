@@ -829,7 +829,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainXion())
     result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
-//    result.append(ChainXrplEVM())                       //EVM
+    result.append(ChainXrplEVM())                       //EVM
     result.append(ChainZenrock())
 //    result.append(ChainZeroGravityEVM())                //EVM
     result.append(ChainZetaEVM())                       //EVM
