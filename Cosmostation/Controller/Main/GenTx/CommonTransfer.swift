@@ -894,7 +894,6 @@ extension CommonTransfer {
 //            print("evmGas ", evmGas)
             
             let chainID = web3.provider.network?.chainID
-            print("chainID ", chainID)
             let senderAddress = EthereumAddress.init(fromChain.evmAddress!)
             let recipientAddress = EthereumAddress.init(toAddress)
             let nonce = try? await web3.eth.getTransactionCount(for: senderAddress!)

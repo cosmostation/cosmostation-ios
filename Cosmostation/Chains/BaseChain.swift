@@ -142,10 +142,6 @@ class BaseChain {
                 fetchState = .Success
             }
             
-//            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
-//                cosmosFetcher.onCheckVesting()
-//            }
-            
             DispatchQueue.main.async(execute: {
                 NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
             })
@@ -171,12 +167,6 @@ class BaseChain {
             } else {
                 fetchState = .Success
             }
-            
-            
-            
-//            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
-//                cosmosFetcher.onCheckVesting()
-//            }
             
             if (self.fetchState == .Success) {
                 var coinsValue = NSDecimalNumber.zero
