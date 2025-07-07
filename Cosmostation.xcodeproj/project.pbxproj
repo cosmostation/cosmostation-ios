@@ -204,6 +204,8 @@
 		0438A8072AE135B1006FA213 /* kava_cdp_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7FC2AE135B0006FA213 /* kava_cdp_v1beta1_query.grpc.swift */; };
 		0438A8082AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7FD2AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift */; };
 		0438A8092AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438A7FD2AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift */; };
+		043E69632E1B67280094EAB5 /* ChainInjective_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E69622E1B67280094EAB5 /* ChainInjective_T.swift */; };
+		043E69642E1B67280094EAB5 /* ChainInjective_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E69622E1B67280094EAB5 /* ChainInjective_T.swift */; };
 		044222482B96F2B60063F031 /* SelectDisplayTokenListSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044222462B96F2B60063F031 /* SelectDisplayTokenListSheet.swift */; };
 		044222492B96F2B60063F031 /* SelectDisplayTokenListSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044222462B96F2B60063F031 /* SelectDisplayTokenListSheet.swift */; };
 		0442224A2B96F2B60063F031 /* SelectDisplayTokenListSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044222472B96F2B60063F031 /* SelectDisplayTokenListSheet.xib */; };
@@ -2607,6 +2609,7 @@
 		0438A7FB2AE135B0006FA213 /* kava_cdp_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_cdp_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
 		0438A7FC2AE135B0006FA213 /* kava_cdp_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_cdp_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		0438A7FD2AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_cdp_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		043E69622E1B67280094EAB5 /* ChainInjective_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainInjective_T.swift; sourceTree = "<group>"; };
 		044222462B96F2B60063F031 /* SelectDisplayTokenListSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDisplayTokenListSheet.swift; sourceTree = "<group>"; };
 		044222472B96F2B60063F031 /* SelectDisplayTokenListSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectDisplayTokenListSheet.xib; sourceTree = "<group>"; };
 		044222522B96F4370063F031 /* SelectDisplayTokenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDisplayTokenCell.swift; sourceTree = "<group>"; };
@@ -4632,6 +4635,7 @@
 				04A420FB2C77617000C0E1A2 /* ChainBitCoin84_T.swift */,
 				79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */,
 				799B4A892D2E744F00998833 /* ChainGno_T.swift */,
+				043E69622E1B67280094EAB5 /* ChainInjective_T.swift */,
 				79ED0BD32DB8AD0800C84DB7 /* ChainImuaEVM_T.swift */,
 				04965B422C37B3AE00403605 /* ChainInitia_T.swift */,
 				7948D66C2D9100F6005208B2 /* ChainLombard_T.swift */,
@@ -7301,6 +7305,7 @@
 				0466522D2DACDB2700F9C125 /* ibc_applications_fee_v1_fee.pb.swift in Sources */,
 				04E2288A2DE8501E00EBE768 /* ChainZeroGravityEVM_T.swift in Sources */,
 				0466522E2DACDB2700F9C125 /* ibc_core_connection_v1_query.grpc.swift in Sources */,
+				043E69642E1B67280094EAB5 /* ChainInjective_T.swift in Sources */,
 				0466522F2DACDB2700F9C125 /* ibc_core_types_v1_genesis.pb.swift in Sources */,
 				046652302DACDB2700F9C125 /* ibc_lightclients_wasm_v1_tx.grpc.swift in Sources */,
 				046652312DACDB2700F9C125 /* ibc_core_channel_v1_query.pb.swift in Sources */,
@@ -7507,6 +7512,7 @@
 				04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */,
 				045033122C1F029A00235F6A /* ChainStride.swift in Sources */,
 				04C940B62AE8D4A100415256 /* CryptoJS.swift in Sources */,
+				043E69632E1B67280094EAB5 /* ChainInjective_T.swift in Sources */,
 				04FAD9E82AB6DBCE00143A3E /* ManageAccountCell.swift in Sources */,
 				792613B52CD4B82800FAF47D /* initia_mstaking_module_v1_module.pb.swift in Sources */,
 				0450330E2C1F029A00235F6A /* ChainSecret118.swift in Sources */,
