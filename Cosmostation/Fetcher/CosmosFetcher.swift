@@ -1042,6 +1042,11 @@ extension CosmosFetcher {
                 return (host, port!)
             }
         }
+        if (chain.grpcHost.components(separatedBy: ":").count == 2) {
+            let host = chain.grpcHost.components(separatedBy: ":")[0].trimmingCharacters(in: .whitespaces)
+            let port = Int(chain.grpcHost.components(separatedBy: ":")[1].trimmingCharacters(in: .whitespaces))
+            return (host, port!)
+        }
         return (chain.grpcHost, chain.grpcPort)
     }
     
