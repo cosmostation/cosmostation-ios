@@ -44,6 +44,9 @@ class BaseChain {
         guard let hex = chainIdEvm else { return nil }
         return hex.hexToString()
     }
+    var chainIdEvmBigint: BigUInt {
+        return BigUInt(chainIdEvm?.stripHexPrefix() ?? "0x1", radix: 16)!
+    }
     var chainIdForSwap: String {
         if (supportCosmos) {
             return chainIdCosmos!
