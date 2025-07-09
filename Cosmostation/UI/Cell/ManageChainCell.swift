@@ -84,6 +84,12 @@ class ManageChainCell: UITableViewCell {
             evmEndpointTag.text = "API"
             evmEndpointLabel.text = btcFetcher.mempoolUrl().replacingOccurrences(of: "https://", with: "")
             evmEndpointLabel.adjustsFontSizeToFitWidth = true
+            
+        } else if let solanaFetcher = (chain as? ChainSolana)?.getSolanaFetcher() {
+            evmLayer.isHidden = false
+            evmEndpointTag.text = "RPC"
+            evmEndpointLabel.text = solanaFetcher.getSolanaRpc().replacingOccurrences(of: "https://", with: "")
+            evmEndpointLabel.adjustsFontSizeToFitWidth = true
         }
     }
     

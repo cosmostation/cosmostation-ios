@@ -259,4 +259,21 @@ class AssetCell: UITableViewCell {
             }
         }
     }
+    
+    func bindSolanaClassAsset(_ baseChain: BaseChain) {
+        if let solanaFetcher = (baseChain as? ChainSolana)?.getSolanaFetcher(),
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.coinSymbol) {
+            WDP.dpCoin(msAsset, solanaFetcher.balanceAmount(), coinImg, symbolLabel, amountLabel, 6)
+            WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(solanaFetcher.balanceValue(), valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
+        }
+    }
 }

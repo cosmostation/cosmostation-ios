@@ -23,11 +23,7 @@ class MajorCryptoVC: BaseVC {
     var suiBalances = Array<(String, NSDecimalNumber)>()
     
     var iotaBalances = Array<(String, NSDecimalNumber)>()
-
-//    var btcBalances = NSDecimalNumber.zero
-//    var btcPendingInput = NSDecimalNumber.zero
-//    var btcPendingOutput = NSDecimalNumber.zero
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -127,11 +123,6 @@ class MajorCryptoVC: BaseVC {
 
             }
             
-        } else if let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher() {
-//            btcBalances = btcFetcher.btcBalances
-//            btcPendingInput = btcFetcher.btcPendingInput
-//            btcPendingOutput = btcFetcher.btcPendingOutput
-            
         }
         loadingView.isHidden = true
         tableView.reloadData()
@@ -173,12 +164,7 @@ class MajorCryptoVC: BaseVC {
 extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (selectedChain is ChainSui || selectedChain is ChainIota) {
-            return 1
-        } else if (selectedChain is ChainBitCoin86) {
-            return 1
-        }
-        return 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -191,7 +177,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             view.titleLabel.text = "Native Coins"
             view.cntLabel.text = String(iotaBalances.count)
 
-        } else if (selectedChain is ChainBitCoin86) {
+        } else if (selectedChain is ChainBitCoin86 || selectedChain is ChainSolana) {
             view.titleLabel.text = "Native Coins"
             view.cntLabel.text = ""
             
@@ -200,12 +186,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (selectedChain is ChainSui || selectedChain is ChainIota) {
-            return 40
-        } else if (selectedChain is ChainBitCoin86) {
-            return 40
-        }
-        return 0
+        return 40
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -215,7 +196,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
         } else if selectedChain is ChainIota {
             return iotaBalances.count
             
-        } else if (selectedChain is ChainBitCoin86) {
+        } else if (selectedChain is ChainBitCoin86 || selectedChain is ChainSolana) {
             return 1
         }
         return 0
@@ -251,7 +232,13 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AssetBtcCell") as! AssetBtcCell
             cell.bindBtcAsset(selectedChain)
             return cell
+            
+        } else if (selectedChain is ChainSolana) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+            cell.bindSolanaClassAsset(selectedChain)
+            return cell
         }
+        
         return UITableViewCell()
     }
     
