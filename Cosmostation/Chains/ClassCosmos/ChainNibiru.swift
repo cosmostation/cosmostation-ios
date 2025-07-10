@@ -20,12 +20,12 @@ class ChainNibiru: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "unibi"
         bechAccountPrefix = "nibi"
         validatorPrefix = "nibivaloper"
-        grpcHost = "grpc-nibiru.cosmostation.io"
-        lcdUrl = "https://lcd-nibiru.cosmostation.io/"
+        grpcHost = "grpc.nibiru.fi"
+        lcdUrl = "https://nibiru-api.cogwheel.zone/"
     }
 }
 

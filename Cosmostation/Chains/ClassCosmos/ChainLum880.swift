@@ -20,12 +20,12 @@ class ChainLum880: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/880'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "ulum"
         bechAccountPrefix = "lum"
         validatorPrefix = "lumvaloper"
-        grpcHost = "grpc-lum.cosmostation.io"
-        lcdUrl = "https://lcd-lum.cosmostation.io/"
+        grpcHost = "lum-grpc.stakerhouse.com"
+        lcdUrl = "https://lum.api.m.stavr.tech/"
     }
     
 }
