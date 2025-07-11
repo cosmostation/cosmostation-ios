@@ -24,11 +24,11 @@ class ChainTenetEVM: BaseChain  {
         stakeDenom = "atenet"
         bechAccountPrefix = "tenet"
         validatorPrefix = "tenetvaloper"
-        grpcHost = "tenet-grpc.publicnode.com:443"
-        lcdUrl = "https://app.rpc.tenet.org/"
+        grpcHost = ""
+        lcdUrl = "https://tenet-rest.publicnode.com/"
         
         supportEvm = true
         coinSymbol = "TENET"
-        evmRpcURL = "https://eth-dataseed.aioz.network"
+        evmRpcURL = "https://tenet-evm.publicnode.com"
     }
 }

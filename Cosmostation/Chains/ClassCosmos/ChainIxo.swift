@@ -20,11 +20,11 @@ class ChainIxo: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uixo"
         bechAccountPrefix = "ixo"
         validatorPrefix = "ixovaloper"
-        grpcHost = "grpc-ixo.cosmostation.io"
-        lcdUrl = "https://lcd-ixo.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://impacthub.ixo.world/rest/"
     }
 }
