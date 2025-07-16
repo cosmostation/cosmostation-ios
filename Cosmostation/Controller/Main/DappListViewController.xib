@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -57,7 +57,7 @@
                     <viewLayoutGuide key="frameLayoutGuide" id="Mzs-Zo-MSS"/>
                 </scrollView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="EjX-xa-9ND">
-                    <rect key="frame" x="0.0" y="224.33333333333331" width="393" height="593.66666666666674"/>
+                    <rect key="frame" x="0.0" y="224.33333333333331" width="393" height="627.66666666666674"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jpy-ct-9td">
                         <size key="itemSize" width="128" height="128"/>
@@ -165,7 +165,7 @@
                 <constraint firstItem="fG5-OH-y5a" firstAttribute="centerY" secondItem="Fbk-yv-O7b" secondAttribute="centerY" id="Zo3-O5-crC"/>
                 <constraint firstItem="EjX-xa-9ND" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="aUp-ab-MoE"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fG5-OH-y5a" secondAttribute="trailing" constant="16" id="acI-dw-T7s"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="EjX-xa-9ND" secondAttribute="bottom" id="b1D-uT-6K1"/>
+                <constraint firstAttribute="bottom" secondItem="EjX-xa-9ND" secondAttribute="bottom" id="b1D-uT-6K1"/>
                 <constraint firstItem="Fbk-yv-O7b" firstAttribute="top" secondItem="xWk-43-lhI" secondAttribute="bottom" constant="12" id="blD-ms-6Ds"/>
                 <constraint firstItem="Fbk-yv-O7b" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="dXU-Al-cRa"/>
                 <constraint firstItem="xWk-43-lhI" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="hsT-lQ-QA6"/>

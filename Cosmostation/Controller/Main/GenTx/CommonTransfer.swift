@@ -160,7 +160,7 @@ class CommonTransfer: BaseVC {
             if (fromChain.supportEvm) {
                 evmFetcher = fromChain.getEvmfetcher()
                 if let url = URL(string: evmFetcher.getEvmRpc()),
-                   let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil) {
+                   let web3Provider = try? await Web3HttpProvider.init(url: url, network: .Custom(networkID: fromChain.chainIdEvmBigint)) {
                     self.web3 = Web3.init(provider: web3Provider)
                 } else {
                     DispatchQueue.main.async {
@@ -1051,7 +1051,7 @@ extension CommonTransfer {
                 })
                 
             } catch {
-                print("error ", error)
+                print("evmSend error ", error)
             }
             
         }

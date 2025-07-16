@@ -69,7 +69,7 @@ class EvmCancelUnbonding: BaseVC {
             DispatchQueue.global().async { [self] in
                 do {
                     self.web3 = try Web3.new(url)
- let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil)
+ let web3Provider = try? await Web3HttpProvider.init(url: url, network: .Custom(networkID: fromChain.chainIdEvmBigint))
                     DispatchQueue.main.async {
                         self.onSimul()
                     }

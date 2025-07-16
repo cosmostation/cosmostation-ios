@@ -278,7 +278,7 @@ class CosmosClassVC: BaseVC {
             }
             
         } else if selectedChain is ChainAtomone {
-            mainFab.addItem(title: "Bun & Mint", image: UIImage(named: "iconFabMint")) { _ in
+            mainFab.addItem(title: "Burn & Mint", image: UIImage(named: "iconFabMint")) { _ in
                 self.onAtomoneMint()
             }
         }
