@@ -2217,6 +2217,8 @@
 		E131F44F2AEEAAB800E760A0 /* CreateNameSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131F44C2AEEAAB800E760A0 /* CreateNameSheet.swift */; };
 		E131F4502AEEAAB800E760A0 /* CreateNameSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E131F44D2AEEAAB800E760A0 /* CreateNameSheet.xib */; };
 		E131F4512AEEAAB800E760A0 /* CreateNameSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E131F44D2AEEAAB800E760A0 /* CreateNameSheet.xib */; };
+		E13E96D22E2782B00001BAD4 /* ChainSomnia.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13E96D12E2782B00001BAD4 /* ChainSomnia.swift */; };
+		E13E96D32E2782B00001BAD4 /* ChainSomnia.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13E96D12E2782B00001BAD4 /* ChainSomnia.swift */; };
 		E13FC5472B26C79A0082C66E /* kava_earn_v1beta1_vault.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13FC53E2B26C7990082C66E /* kava_earn_v1beta1_vault.pb.swift */; };
 		E13FC5482B26C79A0082C66E /* kava_earn_v1beta1_vault.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13FC53E2B26C7990082C66E /* kava_earn_v1beta1_vault.pb.swift */; };
 		E13FC5492B26C79A0082C66E /* kava_earn_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13FC53F2B26C7990082C66E /* kava_earn_v1beta1_genesis.pb.swift */; };
@@ -3726,6 +3728,7 @@
 		E131F44C2AEEAAB800E760A0 /* CreateNameSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNameSheet.swift; sourceTree = "<group>"; };
 		E131F44D2AEEAAB800E760A0 /* CreateNameSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateNameSheet.xib; sourceTree = "<group>"; };
 		E136D8A223039493001BEBB8 /* Cosmostation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cosmostation.entitlements; sourceTree = "<group>"; };
+		E13E96D12E2782B00001BAD4 /* ChainSomnia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSomnia.swift; sourceTree = "<group>"; };
 		E13FC53E2B26C7990082C66E /* kava_earn_v1beta1_vault.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_earn_v1beta1_vault.pb.swift; sourceTree = "<group>"; };
 		E13FC53F2B26C7990082C66E /* kava_earn_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_earn_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		E13FC5402B26C7990082C66E /* kava_earn_v1beta1_proposal.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_earn_v1beta1_proposal.pb.swift; sourceTree = "<group>"; };
@@ -3985,6 +3988,7 @@
 				7981F7612D0C333E00BB50DA /* ChainRouterEVM.swift */,
 				E16F39E32DE0645A008A830D /* ChainSaharaAiEVM.swift */,
 				79D556082CE2F2760023F1B9 /* ChainShidoEVM.swift */,
+				E13E96D12E2782B00001BAD4 /* ChainSomnia.swift */,
 				E15F81EF2D0B1D9C0069C533 /* ChainStoryEVM.swift */,
 				79B7F3622D8177A500AA755B /* ChainStratosEVM.swift */,
 				04E4138B2D27C76E001378D3 /* ChainTabiEVM.swift */,
@@ -6839,6 +6843,7 @@
 				E10B1DF02C215E250039283B /* NeutronVault.swift in Sources */,
 				04C8174F2BA98D75006B800A /* cosmos_auth_v1beta1_genesis.pb.swift in Sources */,
 				04BA9BD62A985771003E2404 /* ChainSelectVC.swift in Sources */,
+				E13E96D32E2782B00001BAD4 /* ChainSomnia.swift in Sources */,
 				E18D73B72AB484AB00FCB1AA /* DappStartVC.swift in Sources */,
 				E11069BD2AA4C57600EB02CA /* cosmwasm_wasm_v1_genesis.pb.swift in Sources */,
 				E10B1E032C215EF20039283B /* OkDeposit.swift in Sources */,
@@ -7571,6 +7576,7 @@
 				0402B7F82ACC3F1400824B3F /* VoteCell.swift in Sources */,
 				04C817182BA98D75006B800A /* cosmos_ics23_v1_proofs.pb.swift in Sources */,
 				0400EEE72ADBE1D3007BA97F /* kava_pricefeed_v1beta1_query.grpc.swift in Sources */,
+				E13E96D22E2782B00001BAD4 /* ChainSomnia.swift in Sources */,
 				04C6B9C52AAC59EC00B02A95 /* QrAddressPopupVC.swift in Sources */,
 				E14577FC2B3EC50C00EEFA8E /* CosmosClaimCommission.swift in Sources */,
 				047843972AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */,
