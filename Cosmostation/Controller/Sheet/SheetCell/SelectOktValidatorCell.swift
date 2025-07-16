@@ -26,7 +26,7 @@ class SelectOktValidatorCell: UITableViewCell {
     
     override func prepareForReuse() {
         logoImg.sd_cancelCurrentImageLoad()
-        logoImg.image = UIImage(named: "validatorDefault")
+        logoImg.image = UIImage(named: "iconValidatorDefault")
         inactiveTag.isHidden = true
         jailedTag.isHidden = true
     }

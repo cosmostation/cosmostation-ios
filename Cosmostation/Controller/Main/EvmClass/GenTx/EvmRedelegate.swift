@@ -116,7 +116,7 @@ class EvmRedelegate: BaseVC {
     }
     
     func onInitFromValidatorView() {
-        fromMonikerImg.image = UIImage(named: "validatorDefault")
+        fromMonikerImg.image = UIImage(named: "iconValidatorDefault")
         fromMonikerImg.af.setImage(withURL: selectedChain.monikerImg(fromValidator!.operatorAddress))
         fromMonikerLabel.text = fromValidator!.description_p.moniker
         if (fromValidator!.jailed) {
@@ -144,7 +144,7 @@ class EvmRedelegate: BaseVC {
     }
     
     func onUpdateToValidatorView() {
-        toMonikerImg.image = UIImage(named: "validatorDefault")
+        toMonikerImg.image = UIImage(named: "iconValidatorDefault")
         toMonikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
         toMonikerLabel.text = toValidator!.description_p.moniker
         if (toValidator!.jailed) {

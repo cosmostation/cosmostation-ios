@@ -26,7 +26,7 @@ class PendingUnbondingCell: UITableViewCell {
     
     override func prepareForReuse() {
         logoImg.sd_cancelCurrentImageLoad()
-        logoImg.image = UIImage(named: "validatorDefault")
+        logoImg.image = UIImage(named: "iconValidatorDefault")
         inactiveTag.isHidden = true
         jailedTag.isHidden = true
     }
@@ -37,7 +37,7 @@ class PendingUnbondingCell: UITableViewCell {
             unstakingTitle.text = statusStr
         }
         
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "iconValidatorDefault"))
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false

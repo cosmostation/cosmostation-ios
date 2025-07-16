@@ -32,7 +32,7 @@ class PendingDelegateCell: UITableViewCell {
     
     override func prepareForReuse() {
         logoImg.sd_cancelCurrentImageLoad()
-        logoImg.image = UIImage(named: "validatorDefault")
+        logoImg.image = UIImage(named: "iconValidatorDefault")
         jailedTag.isHidden = true
         inactiveTag.isHidden = true
     }
@@ -44,7 +44,7 @@ class PendingDelegateCell: UITableViewCell {
             pendingInfoLabel.text = "\(statusStr) will activate in Next Epoch #\(epoch + 1)"
         }
         
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "iconValidatorDefault"))
         nameLabel.text = validator.description_p.moniker
             
         guard let cosmosFetcher = baseChain.getCosmosfetcher() else { return }

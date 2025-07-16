@@ -29,14 +29,14 @@ class SuiStakingCell: UITableViewCell {
     
     override func prepareForReuse() {
         logoImg.sd_cancelCurrentImageLoad()
-        logoImg.image = UIImage(named: "validatorDefault")
+        logoImg.image = UIImage(named: "iconValidatorDefault")
         pendingTag.isHidden = true
     }
     
     func onBindMyStake(_ baseChain: ChainSui, _ stake: (String, JSON)) {
         if let suiFetcher = baseChain.suiFetcher {
             if let validator = suiFetcher.suiValidators.filter({ $0["suiAddress"].stringValue == stake.0 }).first {
-                logoImg.sd_setImage(with: validator.suiValidatorImg(), placeholderImage: UIImage(named: "validatorDefault"))
+                logoImg.sd_setImage(with: validator.suiValidatorImg(), placeholderImage: UIImage(named: "iconValidatorDefault"))
                 nameLabel.text = validator.suiValidatorName()
             }
         }
@@ -57,7 +57,7 @@ class SuiStakingCell: UITableViewCell {
     func onBindMyStake(_ baseChain: ChainIota, _ stake: (String, JSON)) {
         if let iotaFetcher = baseChain.iotaFetcher {
             if let validator = iotaFetcher.iotaValidators.filter({ $0["iotaAddress"].stringValue == stake.0 }).first {
-                logoImg.sd_setImage(with: validator.iotaValidatorImg(), placeholderImage: UIImage(named: "validatorDefault"))
+                logoImg.sd_setImage(with: validator.iotaValidatorImg(), placeholderImage: UIImage(named: "iconValidatorDefault"))
                 nameLabel.text = validator.iotaValidatorName()
             }
         }

@@ -114,7 +114,7 @@ class KavaEarnDepositAction: BaseVC {
     }
     
     func onUpdateValidatorView() {
-        monikerImg.image = UIImage(named: "validatorDefault")
+        monikerImg.image = UIImage(named: "iconValidatorDefault")
         monikerImg.setMonikerImg(selectedChain, toValidator!.operatorAddress)
         monikerLabel.text = toValidator!.description_p.moniker
         if (toValidator!.jailed) {
