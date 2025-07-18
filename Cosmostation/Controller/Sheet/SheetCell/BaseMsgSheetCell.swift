@@ -131,7 +131,7 @@ class BaseMsgSheetCell: UITableViewCell {
     
     func onBindSendType(_ position: Int, _ targetChain: BaseChain) {
         if position == 0 {
-            titleLabel.text = "Send to EVM Style Address"
+            titleLabel.text = "Send to EVM Type Address"
             descriptionLabel.textColor = .color03
             let fullText = "Use this option for ‘0x...’ address"
             let attributedString = NSMutableAttributedString(string: fullText)
@@ -141,7 +141,7 @@ class BaseMsgSheetCell: UITableViewCell {
             
         } else {
             guard let prefix = targetChain.bechAccountPrefix else { return }
-            titleLabel.text = "Send to COSMOS Style Address"
+            titleLabel.text = "Send to COSMOS Type Address"
             descriptionLabel.textColor = .color03
             let fullText = "Use this option for ‘\(prefix)1...’ address or IBC Send"
             let attributedString = NSMutableAttributedString(string: fullText)

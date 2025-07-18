@@ -56,9 +56,9 @@ extension CosmosReceiveVC: UITableViewDelegate, UITableViewDataSource {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (selectedChain.supportEvm) {
             if (section == 0) {
-                view.titleLabel.text = "My Address (EVM style)"
+                view.titleLabel.text = "My Address (EVM Type)"
             } else {
-                view.titleLabel.text = "My Address (COSMOS style)"
+                view.titleLabel.text = "My Address (COSMOS Type)"
             }
         } else {
             view.titleLabel.text = "My Address"
