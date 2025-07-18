@@ -64,28 +64,28 @@
                     <color key="textColor" name="_color01"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passp" translatesAutoresizingMaskIntoConstraints="NO" id="JfG-hf-9Xu">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pinFill" translatesAutoresizingMaskIntoConstraints="NO" id="JfG-hf-9Xu">
                     <rect key="frame" x="20" y="160.33333333333334" width="5" height="5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="5" id="3Pk-Pa-jm5"/>
                         <constraint firstAttribute="height" constant="5" id="mbN-aA-aUz"/>
                     </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passp" translatesAutoresizingMaskIntoConstraints="NO" id="zFi-QE-tcb">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pinFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFi-QE-tcb">
                     <rect key="frame" x="20" y="203" width="5" height="5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="5" id="gfA-wL-izE"/>
                         <constraint firstAttribute="height" constant="5" id="v22-u5-MFz"/>
                     </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passp" translatesAutoresizingMaskIntoConstraints="NO" id="DwM-nx-rlx">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pinFill" translatesAutoresizingMaskIntoConstraints="NO" id="DwM-nx-rlx">
                     <rect key="frame" x="20" y="245.66666666666666" width="5" height="5"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="5" id="QwG-fi-XPs"/>
                         <constraint firstAttribute="width" constant="5" id="VHe-Df-pQP"/>
                     </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passp" translatesAutoresizingMaskIntoConstraints="NO" id="7wc-HI-ga2">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pinFill" translatesAutoresizingMaskIntoConstraints="NO" id="7wc-HI-ga2">
                     <rect key="frame" x="20" y="288.33333333333331" width="5" height="5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="5" id="MyB-8M-uzg"/>
@@ -159,7 +159,7 @@
         </view>
     </objects>
     <resources>
-        <image name="passp" width="14" height="14"/>
+        <image name="pinFill" width="24" height="24"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -1696,7 +1696,6 @@
 		18FFB5CF281AF533004E65BB /* Bech32.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E3D222E7E2900A1436F /* Bech32.swift */; };
 		18FFB5F2281AF533004E65BB /* SegwitAddrCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E3C222E7E2900A1436F /* SegwitAddrCoder.swift */; };
 		18FFB66B281AF533004E65BB /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD0224220910097CAEE /* Account.swift */; };
-		18FFB6E2281AF533004E65BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16D9B182248C4880019B7BB /* Assets.xcassets */; };
 		18FFB78E281AF533004E65BB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1F2AE50227EC05100C87F3F /* InfoPlist.strings */; };
 		18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
 		2810084A2696D979002986A6 /* KeyFac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281008492696D979002986A6 /* KeyFac.swift */; };
@@ -2306,7 +2305,6 @@
 		E165ED382B98C9D500C15809 /* basebg09.png in Resources */ = {isa = PBXBuildFile; fileRef = E165ED372B98C9D400C15809 /* basebg09.png */; };
 		E165ED392B98C9D500C15809 /* basebg09.png in Resources */ = {isa = PBXBuildFile; fileRef = E165ED372B98C9D400C15809 /* basebg09.png */; };
 		E16D9B1522489B030019B7BB /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1422489B030019B7BB /* IntroVC.swift */; };
-		E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16D9B182248C4880019B7BB /* Assets.xcassets */; };
 		E16F39E42DE0645A008A830D /* ChainSaharaAiEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16F39E32DE0645A008A830D /* ChainSaharaAiEVM.swift */; };
 		E16F39E52DE0645B008A830D /* ChainSaharaAiEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16F39E32DE0645A008A830D /* ChainSaharaAiEVM.swift */; };
 		E16F39E72DE06487008A830D /* ChainSaharaAiEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16F39E62DE06487008A830D /* ChainSaharaAiEVM_T.swift */; };
@@ -3773,7 +3771,6 @@
 		E1657B0A2AD0159D00264A21 /* SecButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecButton.swift; sourceTree = "<group>"; };
 		E165ED372B98C9D400C15809 /* basebg09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basebg09.png; sourceTree = "<group>"; };
 		E16D9B1422489B030019B7BB /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
-		E16D9B182248C4880019B7BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E16F39E32DE0645A008A830D /* ChainSaharaAiEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSaharaAiEVM.swift; sourceTree = "<group>"; };
 		E16F39E62DE06487008A830D /* ChainSaharaAiEVM_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSaharaAiEVM_T.swift; sourceTree = "<group>"; };
 		E16FB7252C7595E6005660D1 /* ChainMantra_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantra_T.swift; sourceTree = "<group>"; };
@@ -4590,7 +4587,6 @@
 				0443B89728589B570027A6B9 /* Color.xcassets */,
 				0443B8A1285C7F050027A6B9 /* Chain.xcassets */,
 				0494B3B52B68FA930064BCD5 /* Token.xcassets */,
-				E16D9B182248C4880019B7BB /* Assets.xcassets */,
 				E122DC622A8CA052006D1E7B /* Resources.xcassets */,
 				04C940B52AE8D4A100415256 /* CryptoJS.swift */,
 				795C0DC32C8E8547006D35A4 /* BtcJS.swift */,
@@ -6070,7 +6066,6 @@
 				E10B1DA62C2156430039283B /* KavaLendListVC.xib in Resources */,
 				E1E0DBC92A9B0FE3006DA6BB /* HistoryCell.xib in Resources */,
 				E10B1DC12C2159040039283B /* KavaClaimIncentives.xib in Resources */,
-				18FFB6E2281AF533004E65BB /* Assets.xcassets in Resources */,
 				04FEDB552B05DE230095B7B6 /* DeriveCell.xib in Resources */,
 				E14E29782A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
 				049714FF2C0EB73B008C45A0 /* PopupReceiveCell.xib in Resources */,
@@ -6290,7 +6285,6 @@
 				79287C722D6C1B00003845D2 /* AssetBabylonCell.xib in Resources */,
 				0400EE8A2AD425F9007BA97F /* DappDetailVC.xib in Resources */,
 				04E250E12B8F035E007D5AA0 /* basebg07.png in Resources */,
-				E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */,
 				04C940E22AEB92F800415256 /* BaseImgSheetCell.xib in Resources */,
 				0402B7E82ACC132200824B3F /* CosmosCompounding.xib in Resources */,
 				E10B1D952C2156430039283B /* KavaSwapListCell.xib in Resources */,

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,7 +39,7 @@
                                 </constraints>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8al-dL-sB4">
-                                <rect key="frame" x="-2" y="24.333333333333332" width="60" height="15.333333333333332"/>
+                                <rect key="frame" x="-2" y="25" width="60" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="g3M-fF-Jg2"/>
                                 </constraints>
@@ -49,39 +48,39 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgN-iE-N60">
-                                <rect key="frame" x="60" y="14.000000000000002" width="23" height="17.666666666666671"/>
+                                <rect key="frame" x="60.000000000000007" y="13.999999999999998" width="21.333333333333336" height="16.333333333333329"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsP-so-393">
-                                <rect key="frame" x="87" y="14.000000000000002" width="277" height="17.666666666666671"/>
+                                <rect key="frame" x="85.333333333333343" y="13.999999999999998" width="278.66666666666663" height="16.333333333333329"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="14"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjN-1v-Aah">
-                                <rect key="frame" x="60" y="37.666666666666664" width="63.666666666666657" height="15.333333333333336"/>
+                                <rect key="frame" x="60" y="36.333333333333336" width="59.666666666666657" height="14"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color02"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_expedited_proposal" translatesAutoresizingMaskIntoConstraints="NO" id="Lrn-Vh-K8f">
-                                <rect key="frame" x="127.66666666666666" y="39.333333333333336" width="12" height="12"/>
+                                <rect key="frame" x="123.66666666666666" y="37.333333333333336" width="12" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="12" id="eio-hl-2GN"/>
                                     <constraint firstAttribute="height" constant="12" id="sHk-3k-5NG"/>
                                 </constraints>
                             </imageView>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImgGovPassed" translatesAutoresizingMaskIntoConstraints="NO" id="xK0-0G-d5i">
-                                <rect key="frame" x="60" y="41.333333333333336" width="8" height="8"/>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgGovPassed" translatesAutoresizingMaskIntoConstraints="NO" id="xK0-0G-d5i">
+                                <rect key="frame" x="60" y="39.333333333333336" width="8" height="8"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="8" id="RMf-uj-x9e"/>
                                     <constraint firstAttribute="height" constant="8" id="Uax-FH-Tlg"/>
                                 </constraints>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rejected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geH-vr-GNk">
-                                <rect key="frame" x="72" y="37.666666666666664" width="51.666666666666657" height="15.333333333333336"/>
+                                <rect key="frame" x="72" y="36.333333333333336" width="47.666666666666657" height="14"/>
                                 <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
                                 <color key="textColor" name="_color01"/>
                                 <nil key="highlightedColor"/>
@@ -148,8 +147,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ImgGovPassed" width="6" height="6"/>
         <image name="icon_expedited_proposal" width="24" height="24"/>
+        <image name="imgGovPassed" width="128" height="128"/>
         <image name="imgMyVoteNone" width="40" height="40"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

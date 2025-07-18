@@ -179,13 +179,13 @@ public struct MintscanProposal {
     
     func onProposalStatusImg() -> UIImage? {
         if (proposal_status?.localizedCaseInsensitiveContains("DEPOSIT") == true) {
-            return UIImage.init(named: "ImgGovDoposit")
+            return UIImage.init(named: "imgGovDoposit")
         } else if (proposal_status?.localizedCaseInsensitiveContains("VOTING") == true) {
-            return UIImage.init(named: "ImgGovVoting")
+            return UIImage.init(named: "imgGovVoting")
         } else if (proposal_status?.localizedCaseInsensitiveContains("PASSED") == true) {
-            return UIImage.init(named: "ImgGovPassed")
+            return UIImage.init(named: "imgGovPassed")
         } else if (proposal_status?.localizedCaseInsensitiveContains("REJECTED") == true) {
-            return UIImage.init(named: "ImgGovRejected")
+            return UIImage.init(named: "imgGovRejected")
         }
         return UIImage.init(named: "ImgGovFailed")
     }
