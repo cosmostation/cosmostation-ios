@@ -113,6 +113,8 @@
 		040AC1852C9BDC5F00427AFD /* ChainStoryEVM_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040AC1832C9BDC5F00427AFD /* ChainStoryEVM_T.swift */; };
 		040AC1872C9D3AA400427AFD /* ChainPryzm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040AC1862C9D3AA400427AFD /* ChainPryzm.swift */; };
 		040AC1882C9D3AA400427AFD /* ChainPryzm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040AC1862C9D3AA400427AFD /* ChainPryzm.swift */; };
+		040B43E82E3724360018850C /* ChainBluzelle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B43E72E3724360018850C /* ChainBluzelle.swift */; };
+		040B43E92E3724360018850C /* ChainBluzelle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B43E72E3724360018850C /* ChainBluzelle.swift */; };
 		041540F42BA2E4D500CD5AA1 /* AllChainVoteStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041540F22BA2E4D500CD5AA1 /* AllChainVoteStartVC.swift */; };
 		041540F52BA2E4D500CD5AA1 /* AllChainVoteStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041540F22BA2E4D500CD5AA1 /* AllChainVoteStartVC.swift */; };
 		041540F62BA2E4D500CD5AA1 /* AllChainVoteStartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041540F32BA2E4D500CD5AA1 /* AllChainVoteStartVC.xib */; };
@@ -2566,6 +2568,7 @@
 		0409D2FA2AC5ECDD0021E192 /* SelectValidatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectValidatorCell.xib; sourceTree = "<group>"; };
 		040AC1832C9BDC5F00427AFD /* ChainStoryEVM_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStoryEVM_T.swift; sourceTree = "<group>"; };
 		040AC1862C9D3AA400427AFD /* ChainPryzm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPryzm.swift; sourceTree = "<group>"; };
+		040B43E72E3724360018850C /* ChainBluzelle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBluzelle.swift; sourceTree = "<group>"; };
 		041540F22BA2E4D500CD5AA1 /* AllChainVoteStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChainVoteStartVC.swift; sourceTree = "<group>"; };
 		041540F32BA2E4D500CD5AA1 /* AllChainVoteStartVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllChainVoteStartVC.xib; sourceTree = "<group>"; };
 		041540F82BA4126D00CD5AA1 /* VoteAllChainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteAllChainCell.swift; sourceTree = "<group>"; };
@@ -4020,6 +4023,7 @@
 				04010E0B2E01520A00B07D8D /* ChainBeezee.swift */,
 				045032752C1EEDCD00235F6A /* ChainBitcana.swift */,
 				045032772C1EEDCD00235F6A /* ChainBitsong.swift */,
+				040B43E72E3724360018850C /* ChainBluzelle.swift */,
 				04E413912D27CE16001378D3 /* ChainBostrom.swift */,
 				0485A5032CDA41E300DE1661 /* ChainCarbon.swift */,
 				045032732C1EEDCC00235F6A /* ChainCelestia.swift */,
@@ -6590,6 +6594,7 @@
 				04E228872DE8500C00EBE768 /* ChainZeroGravityEVM.swift in Sources */,
 				E11069BF2AA4C57600EB02CA /* cosmwasm_wasm_v1_query.grpc.swift in Sources */,
 				04C816912BA98D74006B800A /* cosmos_consensus_v1_tx.grpc.swift in Sources */,
+				040B43E82E3724360018850C /* ChainBluzelle.swift in Sources */,
 				18FFB2EC281AF533004E65BB /* BaseData.swift in Sources */,
 				E1D6B8CF2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */,
 				04C940B72AE8D4A100415256 /* CryptoJS.swift in Sources */,
@@ -8401,6 +8406,7 @@
 				0466524B2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_genesis.pb.swift in Sources */,
 				0466524C2DACDB2700F9C125 /* ibc_applications_nft_transfer_v1_types.pb.swift in Sources */,
 				0466524D2DACDB2700F9C125 /* ibc_core_connection_v1_tx.pb.swift in Sources */,
+				040B43E92E3724360018850C /* ChainBluzelle.swift in Sources */,
 				0466524E2DACDB2700F9C125 /* ibc_lightclients_solomachine_v3_solomachine.pb.swift in Sources */,
 				0466524F2DACDB2700F9C125 /* ibc_core_channel_v1_channel.pb.swift in Sources */,
 				046652502DACDB2700F9C125 /* ibc_applications_transfer_v1_query.grpc.swift in Sources */,
