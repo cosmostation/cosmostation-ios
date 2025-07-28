@@ -805,7 +805,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainShentu())
     result.append(ChainShidoEVM())                      //EVM
     result.append(ChainSommelier())
-    result.append(ChainSomnia())                        //EVM
+//    result.append(ChainSomnia())                        //EVM
     result.append(ChainSource())
     result.append(ChainStargaze())
     result.append(ChainStoryEVM())                      //EVM
