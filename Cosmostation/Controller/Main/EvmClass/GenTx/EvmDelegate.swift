@@ -120,7 +120,7 @@ class EvmDelegate: BaseVC {
     }
     
     func onUpdateValidatorView() {
-        monikerImg.image = UIImage(named: "validatorDefault")
+        monikerImg.image = UIImage(named: "iconValidatorDefault")
         monikerImg.af.setImage(withURL: selectedChain.monikerImg(toValidator!.operatorAddress))
         monikerLabel.text = toValidator!.description_p.moniker
         if (toValidator!.jailed) {

@@ -145,9 +145,9 @@ class BtcUndelegate: BaseVC {
     }
     
     func onUpdateValidatorView() {
-        monikerImg.image = UIImage(named: "validatorDefault")
+        monikerImg.image = UIImage(named: "iconValidatorDefault")
         let chainBabylon = selectedChain.isTestnet ? ChainBabylon_T() : ChainBabylon()
-        monikerImg.sd_setImage(with: URL(string: ResourceBase + chainBabylon.apiName + "/finality-provider/" + fromProvider!.btcPk + ".png"), placeholderImage: UIImage(named: "validatorDefault"))
+        monikerImg.sd_setImage(with: URL(string: ResourceBase + chainBabylon.apiName + "/finality-provider/" + fromProvider!.btcPk + ".png"), placeholderImage: UIImage(named: "iconValidatorDefault"))
         monikerLabel.text = fromProvider!.moniker
         
         if fromProvider!.jailed {

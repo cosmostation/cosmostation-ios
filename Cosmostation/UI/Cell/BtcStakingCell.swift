@@ -27,7 +27,7 @@ class BtcStakingCell: UITableViewCell {
     
     override func prepareForReuse() {
         logoImg.sd_cancelCurrentImageLoad()
-        logoImg.image = UIImage(named: "validatorDefault")
+        logoImg.image = UIImage(named: "iconValidatorDefault")
         jailedTag.isHidden = true
         inactiveTag.isHidden = true
     }
@@ -35,7 +35,7 @@ class BtcStakingCell: UITableViewCell {
     func onBindBtcMyDelegate(_ baseChain: ChainBitCoin86, _ delegation: BtcDelegation?, _ provider: FinalityProvider?, _ timeLockWeeks: Int) {
         guard let delegation else { return }
         let apiName = baseChain.isTestnet ? "babylon-testnet" : "babylon"
-        logoImg.sd_setImage(with: URL(string: ResourceBase + apiName + "/finality-provider/" + delegation.providerPk + ".png"), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.sd_setImage(with: URL(string: ResourceBase + apiName + "/finality-provider/" + delegation.providerPk + ".png"), placeholderImage: UIImage(named: "iconValidatorDefault"))
         
         if delegation.jailed {
             jailedTag.isHidden = false

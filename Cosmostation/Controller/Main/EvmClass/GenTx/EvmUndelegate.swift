@@ -110,7 +110,7 @@ class EvmUndelegate: BaseVC {
     }
     
     func onUpdateValidatorView() {
-        monikerImg.image = UIImage(named: "validatorDefault")
+        monikerImg.image = UIImage(named: "iconValidatorDefault")
         monikerImg.af.setImage(withURL: selectedChain.monikerImg(fromValidator!.operatorAddress))
         monikerLabel.text = fromValidator!.description_p.moniker
         if (fromValidator!.jailed) {

@@ -35,7 +35,7 @@ class SelectValidatorCell: UITableViewCell {
     
     override func prepareForReuse() {
         logoImg.sd_cancelCurrentImageLoad()
-        logoImg.image = UIImage(named: "validatorDefault")
+        logoImg.image = UIImage(named: "iconValidatorDefault")
         inactiveTag.isHidden = true
         jailedTag.isHidden = true
         
@@ -106,7 +106,7 @@ class SelectValidatorCell: UITableViewCell {
     
     
     func onBindSuiValidator(_ baseChain: BaseChain, _ validator: JSON) {
-        logoImg.sd_setImage(with: validator.suiValidatorImg(), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.sd_setImage(with: validator.suiValidatorImg(), placeholderImage: UIImage(named: "iconValidatorDefault"))
         nameLabel.text = validator.suiValidatorName()
         vpLabel?.attributedText = WDP.dpAmount(validator.suiValidatorVp().stringValue, vpLabel!.font, 0)
         commLabel?.attributedText = WDP.dpAmount(validator.suiValidatorCommission().stringValue, commLabel!.font, 2)
@@ -119,7 +119,7 @@ class SelectValidatorCell: UITableViewCell {
     }
     
     func onBindIotaValidator(_ baseChain: BaseChain, _ validator: JSON) {
-        logoImg.sd_setImage(with: validator.iotaValidatorImg(), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.sd_setImage(with: validator.iotaValidatorImg(), placeholderImage: UIImage(named: "iconValidatorDefault"))
         nameLabel.text = validator.iotaValidatorName()
         vpLabel?.attributedText = WDP.dpAmount(validator.iotaValidatorVp().stringValue, vpLabel!.font, 0)
         commLabel?.attributedText = WDP.dpAmount(validator.iotaValidatorCommission().stringValue, commLabel!.font, 2)
@@ -230,7 +230,7 @@ class SelectValidatorCell: UITableViewCell {
     }
 
     func onBindFinalityProvider(_ baseChain: BaseChain, _ provider: FinalityProvider) {
-        logoImg.sd_setImage(with: URL(string: ResourceBase + baseChain.apiName + "/finality-provider/" + provider.btcPk + ".png"), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.sd_setImage(with: URL(string: ResourceBase + baseChain.apiName + "/finality-provider/" + provider.btcPk + ".png"), placeholderImage: UIImage(named: "iconValidatorDefault"))
         nameLabel.text = provider.moniker
         if provider.jailed {
             jailedTag.isHidden = false
@@ -260,7 +260,7 @@ class SelectValidatorCell: UITableViewCell {
     func onBindUnstakeValidator(_ baseChain: BaseChain, _ delegation: BtcDelegation) {
         if let provider = (baseChain as? ChainBitCoin86)?.getBabylonBtcFetcher()?.finalityProviders.filter({ $0.btcPk == delegation.providerPk }).first {
             let babylon = baseChain.isTestnet ? ChainBabylon_T() : ChainBabylon()
-            logoImg.sd_setImage(with: URL(string: ResourceBase + babylon.apiName + "/finality-provider/" + provider.btcPk + ".png"), placeholderImage: UIImage(named: "validatorDefault"))
+            logoImg.sd_setImage(with: URL(string: ResourceBase + babylon.apiName + "/finality-provider/" + provider.btcPk + ".png"), placeholderImage: UIImage(named: "iconValidatorDefault"))
             
             nameLabel.text = provider.moniker
             if provider.jailed {

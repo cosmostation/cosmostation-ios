@@ -163,7 +163,7 @@ class CosmosDelegate: BaseVC {
     }
     
     func onUpdateValidatorView() {
-        monikerImg.image = UIImage(named: "validatorDefault")
+        monikerImg.image = UIImage(named: "iconValidatorDefault")
         if let initiaFetcher {
             monikerImg.setMonikerImg(selectedChain, toValidatorInitia!.operatorAddress)
             monikerLabel.text = toValidatorInitia!.description_p.moniker

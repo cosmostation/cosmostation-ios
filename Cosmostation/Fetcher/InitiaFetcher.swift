@@ -159,7 +159,8 @@ extension InitiaFetcher {
     func initiaDelegationAmountSum() -> NSDecimalNumber {
         var sum = NSDecimalNumber.zero
         initiaDelegations.forEach({ delegation in
-            sum = sum.adding(NSDecimalNumber(string: delegation.balance.filter({ $0.denom == chain.stakeDenom}).first?.amount))
+            let bondingAmount = delegation.balance.filter({ $0.denom == chain.stakeDenom }).first?.amount ?? "0"
+            sum = sum.adding(NSDecimalNumber(string: bondingAmount))
         })
         return sum
     }
@@ -177,7 +178,8 @@ extension InitiaFetcher {
         var sum = NSDecimalNumber.zero
         initiaUnbondings?.forEach({ unbonding in
             for entry in unbonding.entries {
-                sum = sum.adding(NSDecimalNumber(string: entry.balance.filter({ $0.denom == chain.stakeDenom }).first?.amount))
+                let unbondingAmount = entry.balance.filter({ $0.denom == chain.stakeDenom }).first?.amount ?? "0"
+                sum = sum.adding(NSDecimalNumber(string: unbondingAmount))
             }
         })
         return sum

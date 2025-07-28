@@ -27,7 +27,7 @@ class KavaEarnListCell: UITableViewCell {
     
     override func prepareForReuse() {
         logoImg.sd_cancelCurrentImageLoad()
-        logoImg.image = UIImage(named: "validatorDefault")
+        logoImg.image = UIImage(named: "iconValidatorDefault")
         jailedTag.isHidden = true
         inactiveTag.isHidden = true
     }

@@ -127,7 +127,7 @@ class IotaStake: BaseVC {
     }
     
     func onUpdateValidatorView() {
-        monikerImg.sd_setImage(with: toValidator.iotaValidatorImg(), placeholderImage: UIImage(named: "validatorDefault"))
+        monikerImg.sd_setImage(with: toValidator.iotaValidatorImg(), placeholderImage: UIImage(named: "iconValidatorDefault"))
         monikerLabel.text = toValidator.iotaValidatorName()
         commLabel?.attributedText = WDP.dpAmount(toValidator.iotaValidatorCommission().stringValue, commLabel!.font, 2)
         onSimul()
