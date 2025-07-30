@@ -20,11 +20,11 @@ class ChainLike: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "nanolike"
         bechAccountPrefix = "like"
         validatorPrefix = "likevaloper"
-        grpcHost = "grpc-likecoin.cosmostation.io"
-        lcdUrl = "https://lcd-likecoin.cosmostation.io/"
+        grpcHost = "grpc-likecoin-mainnet.pikaser.net"
+        lcdUrl = "https://mainnet-node.like.co/"
     }
 }

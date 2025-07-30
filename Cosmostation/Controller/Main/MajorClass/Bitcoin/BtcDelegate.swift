@@ -144,7 +144,7 @@ class BtcDelegate: BaseVC {
     
     func onUpdateValidatorView() {
         validatorCardView.isHidden = false
-        monikerImg.sd_setImage(with: URL(string: ResourceBase + chainBabylon.apiName + "/finality-provider/" + toProvider!.btcPk + ".png"), placeholderImage: UIImage(named: "validatorDefault"))
+        monikerImg.sd_setImage(with: URL(string: ResourceBase + chainBabylon.apiName + "/finality-provider/" + toProvider!.btcPk + ".png"), placeholderImage: UIImage(named: "iconValidatorDefault"))
         monikerLabel.text = toProvider!.moniker
         
         if toProvider!.jailed {

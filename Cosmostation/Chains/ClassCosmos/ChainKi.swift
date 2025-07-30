@@ -20,12 +20,12 @@ class ChainKi: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uxki"
         bechAccountPrefix = "ki"
         validatorPrefix = "kivaloper"
         grpcHost = "grpc-ki-chain.cosmostation.io"
-        lcdUrl = "https://lcd-ki-chain.cosmostation.io/"
+        lcdUrl = "https://api-mainnet.blockchain.ki/"
     }
     
 }

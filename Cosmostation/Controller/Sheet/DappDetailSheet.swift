@@ -115,16 +115,6 @@ struct DappDetailSheet: View {
                             id: \.apiName
                         ) { chain in
                             HStack(spacing: 2) {
-                                
-//                                AsyncImage(url: chain.getChainImage()) { image in
-//                                    image
-//                                        .resizable()
-//                                        .scaledToFit()
-//                                } placeholder: {
-//                                    Image(uiImage: UIImage(named: "chainDefault")!)
-//                                        .resizable()
-//                                }
-//                                .frame(width: 16, height: 16)
                                 Image(uiImage: chain.getChainImage())
                                     .resizable()
                                     .scaledToFit()
@@ -159,7 +149,7 @@ struct DappDetailSheet: View {
                             Button {
                                 selectedSocialURL = SocialURL(urlString: social.stringValue)
                             } label: {
-                                Image(uiImage: UIImage(named: key.description.lowercased()) ?? UIImage(systemName: "circle.fill")!)
+                                Image(uiImage: socialImg(key.description))
                                     .resizable()
                                     .frame(width: 20, height:20)
                             }
@@ -223,6 +213,23 @@ struct DappDetailSheet: View {
         } //root
         .padding(.horizontal, 12)
         .background(Color.base09)
+    }
+    
+    func socialImg(_ social: String) -> UIImage {
+        switch social {
+        case "github":
+            UIImage.init(named: "iconSocialGithub")!
+        case "telegram":
+            UIImage.init(named: "iconSocialTelegram")!
+        case "twitter":
+            UIImage.init(named: "iconSocialTwitter")!
+        case "discord":
+            UIImage.init(named: "iconSocialDiscord")!
+        case "reddit":
+            UIImage.init(named: "iconSocialReddit")!
+        default:
+            UIImage(systemName: "circle.fill")!
+        }
     }
 }
 

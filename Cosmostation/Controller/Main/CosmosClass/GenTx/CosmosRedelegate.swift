@@ -174,7 +174,7 @@ class CosmosRedelegate: BaseVC {
     }
     
     func onUpdateFromValidatorView() {
-        fromMonikerImg.image = UIImage(named: "validatorDefault")
+        fromMonikerImg.image = UIImage(named: "iconValidatorDefault")
         if let initiaFetcher {
             fromMonikerImg.setMonikerImg(selectedChain, fromValidatorInitia!.operatorAddress)
             fromMonikerLabel.text = fromValidatorInitia!.description_p.moniker
@@ -248,7 +248,7 @@ class CosmosRedelegate: BaseVC {
     }
     
     func onUpdateToValidatorView() {
-        toMonikerImg.image = UIImage(named: "validatorDefault")
+        toMonikerImg.image = UIImage(named: "iconValidatorDefault")
         
         if let initiaFetcher {
             toMonikerImg.setMonikerImg(selectedChain, toValidatorInitia!.operatorAddress)

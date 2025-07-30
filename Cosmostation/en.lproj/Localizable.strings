@@ -228,8 +228,8 @@
 "str_hours" = "Hours";
 "str_staking_asset" = "Staking Asset";
 "str_chain_id" = "Chain Id";
-"str_chain_id_cosmos" = "Chain Id (cosmos style)";
-"str_chain_id_evm" = "Chain Id (evm style)";
+"str_chain_id_cosmos" = "Chain Id (cosmos type)";
+"str_chain_id_evm" = "Chain Id (evm type)";
 "str_initial_issue" = "Initial Issue";
 "str_network" = "Network";
 "str_mainnet" = "Mainnet";

@@ -1,16 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "close btnbrowse.pdf",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
       "filename" : "close.pdf",
       "idiom" : "universal"
     }

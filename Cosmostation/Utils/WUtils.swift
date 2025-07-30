@@ -471,7 +471,7 @@ extension UIImageView {
         if chain.getChainListParam()["reported_validators"].arrayValue.contains(where: { $0.stringValue == opAddress }) {
             self.image = UIImage(named: "iconFake")
         } else {
-            self.sd_setImage(with: chain.monikerImg(opAddress), placeholderImage: UIImage(named: "validatorDefault"))
+            self.sd_setImage(with: chain.monikerImg(opAddress), placeholderImage: UIImage(named: "iconValidatorDefault"))
         }
     }
 }

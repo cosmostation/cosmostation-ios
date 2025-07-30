@@ -119,9 +119,9 @@ class CosmosProposalCell: UITableViewCell {
         } else {
             selectSwitch.isHidden = true
             if (status == "passed" || status == "executed") {
-                statusImg.image = UIImage.init(named: "ImgGovPassed")
+                statusImg.image = UIImage.init(named: "imgGovPassed")
             } else if (status == "rejected" || status == "failed" || status == "execution_failed") {
-                statusImg.image = UIImage.init(named: "ImgGovRejected")
+                statusImg.image = UIImage.init(named: "imgGovRejected")
             }
             statusImg.isHidden = false
             statusLabel.text = status.uppercased()

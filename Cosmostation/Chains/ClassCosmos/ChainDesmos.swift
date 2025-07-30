@@ -20,12 +20,12 @@ class ChainDesmos: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/852'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "udsm"
         bechAccountPrefix = "desmos"
         validatorPrefix = "desmosvaloper"
-        grpcHost = "grpc-desmos.cosmostation.io"
-        lcdUrl = "https://lcd-desmos.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://desmos-rest.staketab.org/"
     }
     
 }

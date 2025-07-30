@@ -29,7 +29,7 @@ class StakeUnbondingCell: UITableViewCell {
     
     override func prepareForReuse() {
         logoImg.sd_cancelCurrentImageLoad()
-        logoImg.image = UIImage(named: "validatorDefault")
+        logoImg.image = UIImage(named: "iconValidatorDefault")
         inactiveTag.isHidden = true
         jailedTag.isHidden = true
     }
@@ -101,7 +101,7 @@ class StakeUnbondingCell: UITableViewCell {
 
     func onBindBabylonUnbonding(_ baseChain: BaseChain, _ validator: Cosmos_Staking_V1beta1_Validator, _ unbonding: UnbondingEntry) {
         
-        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "validatorDefault"))
+        logoImg.sd_setImage(with: baseChain.monikerImg(validator.operatorAddress), placeholderImage: UIImage(named: "iconValidatorDefault"))
         nameLabel.text = validator.description_p.moniker
         if (validator.jailed) {
             jailedTag.isHidden = false

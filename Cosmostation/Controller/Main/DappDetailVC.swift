@@ -278,7 +278,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         Task {
             if let evmFetcher = targetChain.getEvmfetcher(),
                let url = URL(string: evmFetcher.getEvmRpc()),
-               let web3Provider = try? await Web3HttpProvider.init(url: url, network: nil) {
+               let web3Provider = try? await Web3HttpProvider.init(url: url, network: .Custom(networkID: targetChain.chainIdEvmBigint)) {
                 self.web3 = Web3.init(provider: web3Provider)
                 completionHandler(true)
             } else {

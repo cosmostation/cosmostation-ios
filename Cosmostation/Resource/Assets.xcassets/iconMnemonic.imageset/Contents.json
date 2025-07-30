@@ -1,17 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "iconMnemonicLight.pdf",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "iconMnemonicDark.pdf",
+      "filename" : "mnemonics.pdf",
       "idiom" : "universal"
     }
   ],

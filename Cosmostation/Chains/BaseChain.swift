@@ -44,6 +44,9 @@ class BaseChain {
         guard let hex = chainIdEvm else { return nil }
         return hex.hexToString()
     }
+    var chainIdEvmBigint: BigUInt {
+        return BigUInt(chainIdEvm?.stripHexPrefix() ?? "0x1", radix: 16)!
+    }
     var chainIdForSwap: String {
         if (supportCosmos) {
             return chainIdCosmos!
@@ -142,10 +145,6 @@ class BaseChain {
                 fetchState = .Success
             }
             
-//            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
-//                cosmosFetcher.onCheckVesting()
-//            }
-            
             DispatchQueue.main.async(execute: {
                 NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
             })
@@ -171,12 +170,6 @@ class BaseChain {
             } else {
                 fetchState = .Success
             }
-            
-            
-            
-//            if let cosmosFetcher = getCosmosfetcher(), fetchState == .Success {
-//                cosmosFetcher.onCheckVesting()
-//            }
             
             if (self.fetchState == .Success) {
                 var coinsValue = NSDecimalNumber.zero
@@ -708,6 +701,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBitCoin84())                     //MAJOR
     result.append(ChainBitCoin86())                     //MAJOR
     result.append(ChainBitsong())
+    result.append(ChainBluzelle())
     result.append(ChainBostrom())
     result.append(ChainCantoEVM())                      //EVM
     result.append(ChainCarbon())
@@ -737,6 +731,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainForma())                         //EVM
     result.append(ChainFxcoreEVM())                     //EVM
     result.append(ChainGgez())
+    result.append(ChainGitopia())
 //    result.append(ChainGno())
     result.append(ChainGravityBridge())
     result.append(ChainHaqqEVM())                       //EVM
@@ -811,6 +806,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainShidoEVM())                      //EVM
     result.append(ChainSolana())                      //EVM
     result.append(ChainSommelier())
+//    result.append(ChainSomnia())                        //EVM
     result.append(ChainSource())
     result.append(ChainStargaze())
     result.append(ChainStoryEVM())                      //EVM
@@ -844,6 +840,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBitCoin86_T())
     result.append(ChainGno_T())
 //    result.append(ChainImuaEVM_T())
+    result.append(ChainInjective_T())
     result.append(ChainInitia_T())
 //    result.append(ChainLombard_T())
     result.append(ChainLumera_T())
