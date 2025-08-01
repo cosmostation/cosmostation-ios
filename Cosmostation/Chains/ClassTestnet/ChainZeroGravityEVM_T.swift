@@ -13,7 +13,7 @@ class ChainZeroGravityEVM_T: ChainZeroGravityEVM  {
     override init() {
         super.init()
         
-        name = "0G Testnet"
+        name = "ØG Testnet"
         tag = "zero-gravity_T"
         chainImg = "chainZeroGravity_T"
         isTestnet = true
@@ -22,7 +22,7 @@ class ChainZeroGravityEVM_T: ChainZeroGravityEVM  {
         
         
         supportEvm = true
-        coinSymbol = "0G"
+        coinSymbol = "ØG"
         evmRpcURL = "https://evmrpc-testnet.0g.ai"
     }
 }

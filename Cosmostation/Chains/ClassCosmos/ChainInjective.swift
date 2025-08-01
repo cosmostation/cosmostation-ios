@@ -15,7 +15,7 @@ class ChainInjective: BaseChain  {
         
         name = "Injective"
         tag = "injective60"
-        chainImg = "chainInjective"
+        chainImg = "chainInjective_E"
         apiName = "injective"
         accountKeyType = AccountKeyType(.INJECTIVE_Secp256k1, "m/44'/60'/0'/0/X")
         
@@ -26,5 +26,9 @@ class ChainInjective: BaseChain  {
         validatorPrefix = "injvaloper"
         grpcHost = "grpc-injective.cosmostation.io"
         lcdUrl = "https://lcd-injective.cosmostation.io/"
+        
+        supportEvm = true
+        coinSymbol = "INJ"
+        evmRpcURL = "https://rpc.evm.injective.mainnet.cosmostation.io"
     }
 }
