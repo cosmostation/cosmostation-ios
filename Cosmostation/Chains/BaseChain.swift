@@ -672,192 +672,193 @@ extension BaseChain {
 func ALLCHAINS() -> [BaseChain] {
     var result = [BaseChain]()
     
-    result.append(ChainCosmos())
-    result.append(ChainAaron())
-    result.append(ChainAgoric564())
-    result.append(ChainAgoric118())
-    result.append(ChainAiozEVM())                       //EVM
-    result.append(ChainAkash())
-    result.append(ChainAllora())
-    result.append(ChainAltheaEVM())                     //EVM
-    result.append(ChainAlthea118())
-    result.append(ChainAndromeda())
-    result.append(ChainArbitrum())                      //EVM
-    result.append(ChainArchway())
-    result.append(ChainArkeo())                      
-    result.append(ChainAssetMantle())
-    result.append(ChainAtomone())
-    result.append(ChainAvalanche())                     //EVM
-    result.append(ChainAxelar())
-    result.append(ChainBabylon())
-    result.append(ChainBand())
-    result.append(ChainBase())                          //EVM
-    result.append(ChainBeraEVM())                       //EVM
-    result.append(ChainBeezee())
-    result.append(ChainBinanceSmart())                  //EVM
-    result.append(ChainBitcana())
-    result.append(ChainBitCoin44())                     //MAJOR
-    result.append(ChainBitCoin49())                     //MAJOR
-    result.append(ChainBitCoin84())                     //MAJOR
-    result.append(ChainBitCoin86())                     //MAJOR
-    result.append(ChainBitsong())
-    result.append(ChainBluzelle())
-    result.append(ChainBostrom())
-    result.append(ChainCantoEVM())                      //EVM
-    result.append(ChainCarbon())
-    result.append(ChainCelestia())
-    result.append(ChainC4E())
-    result.append(ChainCheqd())
-    result.append(ChainChihuahua())
-    result.append(ChainComdex())
-    result.append(ChainCoreum())
-    result.append(ChainCronos())                        //EVM
-    result.append(ChainCryptoorg())
-    result.append(ChainDesmos())
-    result.append(ChainDhealth())
-    result.append(ChainDoraVota())
-    result.append(ChainDungeon())
-    result.append(ChainDydx())
-    result.append(ChainDymensionEVM())                  //EVM
-    result.append(ChainElys())
-    result.append(ChainEthereum())                      //EVM
-    result.append(ChainEvmosEVM())                      //EVM
-    result.append(ChainFantom())                        //EVM
-    result.append(ChainFetchAi())
-    result.append(ChainFetchAi60Old())
-    result.append(ChainFetchAi60Secp())
-    result.append(ChainFinschia())
-    result.append(ChainFirma())
-    result.append(ChainForma())                         //EVM
-    result.append(ChainFxcoreEVM())                     //EVM
-    result.append(ChainGgez())
-    result.append(ChainGitopia())
-//    result.append(ChainGno())
-    result.append(ChainGravityBridge())
-    result.append(ChainHaqqEVM())                       //EVM
-    result.append(ChainHippo())
-    result.append(ChainHumansEVM())                     //EVM
-    result.append(ChainInjective())                     //EVM
-    result.append(ChainInt3face())
-    result.append(ChainInitia())
-    result.append(ChainIota())
-    result.append(ChainIris())
-    result.append(ChainIxo())
-    result.append(ChainJackal())
-    result.append(ChainJuno())
-    result.append(ChainKaia())                          //EVM
-    result.append(ChainKavaEVM())                       //EVM
-    result.append(ChainKava459())
-    result.append(ChainKava118())
-    result.append(ChainKi())
-    result.append(ChainKima())
-    result.append(ChainKopi())
-    result.append(ChainKyve())
-    result.append(ChainLava())
-    result.append(ChainLike())
-    result.append(ChainLombard())
-    result.append(ChainLum118())
-    result.append(ChainLum880())
-    result.append(ChainLumera())
-    result.append(ChainManifest())
-    result.append(ChainMantra())
-    result.append(ChainMedibloc())
-    result.append(ChainMigaloo())
-    result.append(ChainMilkyway())
-//    result.append(ChainMonad())                         //EVM
-    result.append(ChainNeutron())
-    result.append(ChainNibiru())
-    result.append(ChainNillion())
-    result.append(ChainNoble())
-    result.append(ChainNolus())
-    result.append(ChainNyx())
-    result.append(ChainOktEVM())                        //EVM
-    result.append(ChainOkt996Keccak())                  //LCD
-    result.append(ChainOkt996Secp())                    //LCD
-    result.append(ChainOmniflix())
-    result.append(ChainOptimism())                      //EVM
-    result.append(ChainOrai())
-    result.append(ChainOsmosis())
-    result.append(ChainPaloma())
-    result.append(ChainPassage())
-    result.append(ChainPersistence118())
-    result.append(ChainPersistence750())
-    result.append(ChainPlanqEVM())                      //EVM
-    result.append(ChainPolygon())                       //EVM
-    result.append(ChainProvenance())
-    result.append(ChainPryzm())
-    result.append(ChainPundix())
-    result.append(ChainQubeticsEVM())                   //EVM
-    result.append(ChainQuicksilver())
-    result.append(ChainRealioEVM())
-    result.append(ChainRegen())
-    result.append(ChainRizon())
-    result.append(ChainRouterEVM())
-    result.append(ChainSaga())
-//    result.append(ChainSaharaAiEVM())                   //EVM
-    result.append(ChainSecret118())
-    result.append(ChainSecret529())
-    result.append(ChainSeda())
+//    result.append(ChainCosmos())
+//    result.append(ChainAaron())
+//    result.append(ChainAgoric564())
+//    result.append(ChainAgoric118())
+//    result.append(ChainAiozEVM())                       //EVM
+//    result.append(ChainAkash())
+//    result.append(ChainAllora())
+//    result.append(ChainAltheaEVM())                     //EVM
+//    result.append(ChainAlthea118())
+//    result.append(ChainAndromeda())
+//    result.append(ChainArbitrum())                      //EVM
+//    result.append(ChainArchway())
+//    result.append(ChainArkeo())                      
+//    result.append(ChainAssetMantle())
+//    result.append(ChainAtomone())
+//    result.append(ChainAvalanche())                     //EVM
+//    result.append(ChainAxelar())
+//    result.append(ChainBabylon())
+//    result.append(ChainBand())
+//    result.append(ChainBase())                          //EVM
+//    result.append(ChainBeraEVM())                       //EVM
+//    result.append(ChainBeezee())
+//    result.append(ChainBinanceSmart())                  //EVM
+//    result.append(ChainBitcana())
+//    result.append(ChainBitCoin44())                     //MAJOR
+//    result.append(ChainBitCoin49())                     //MAJOR
+//    result.append(ChainBitCoin84())                     //MAJOR
+//    result.append(ChainBitCoin86())                     //MAJOR
+//    result.append(ChainBitsong())
+//    result.append(ChainBluzelle())
+//    result.append(ChainBostrom())
+//    result.append(ChainCantoEVM())                      //EVM
+//    result.append(ChainCarbon())
+//    result.append(ChainCelestia())
+//    result.append(ChainC4E())
+//    result.append(ChainCheqd())
+//    result.append(ChainChihuahua())
+//    result.append(ChainComdex())
+//    result.append(ChainCoreum())
+//    result.append(ChainCronos())                        //EVM
+//    result.append(ChainCryptoorg())
+//    result.append(ChainDesmos())
+//    result.append(ChainDhealth())
+//    result.append(ChainDoraVota())
+//    result.append(ChainDungeon())
+//    result.append(ChainDydx())
+//    result.append(ChainDymensionEVM())                  //EVM
+//    result.append(ChainElys())
+//    result.append(ChainEthereum())                      //EVM
+//    result.append(ChainEvmosEVM())                      //EVM
+//    result.append(ChainFantom())                        //EVM
+//    result.append(ChainFetchAi())
+//    result.append(ChainFetchAi60Old())
+//    result.append(ChainFetchAi60Secp())
+//    result.append(ChainFinschia())
+//    result.append(ChainFirma())
+//    result.append(ChainForma())                         //EVM
+//    result.append(ChainFxcoreEVM())                     //EVM
+//    result.append(ChainGgez())
+//    result.append(ChainGitopia())
+////    result.append(ChainGno())
+//    result.append(ChainGravityBridge())
+//    result.append(ChainHaqqEVM())                       //EVM
+//    result.append(ChainHippo())
+//    result.append(ChainHumansEVM())                     //EVM
+//    result.append(ChainInjective())                     //EVM
+//    result.append(ChainInt3face())
+//    result.append(ChainInitia())
+//    result.append(ChainIota())
+//    result.append(ChainIris())
+//    result.append(ChainIxo())
+//    result.append(ChainJackal())
+//    result.append(ChainJuno())
+//    result.append(ChainKaia())                          //EVM
+//    result.append(ChainKavaEVM())                       //EVM
+//    result.append(ChainKava459())
+//    result.append(ChainKava118())
+//    result.append(ChainKi())
+//    result.append(ChainKima())
+//    result.append(ChainKopi())
+//    result.append(ChainKyve())
+//    result.append(ChainLava())
+//    result.append(ChainLike())
+//    result.append(ChainLombard())
+//    result.append(ChainLum118())
+//    result.append(ChainLum880())
+//    result.append(ChainLumera())
+//    result.append(ChainManifest())
+//    result.append(ChainMantra())
+//    result.append(ChainMedibloc())
+//    result.append(ChainMigaloo())
+//    result.append(ChainMilkyway())
+////    result.append(ChainMonad())                         //EVM
+//    result.append(ChainNeutron())
+//    result.append(ChainNibiru())
+//    result.append(ChainNillion())
+//    result.append(ChainNoble())
+//    result.append(ChainNolus())
+//    result.append(ChainNyx())
+//    result.append(ChainOktEVM())                        //EVM
+//    result.append(ChainOkt996Keccak())                  //LCD
+//    result.append(ChainOkt996Secp())                    //LCD
+//    result.append(ChainOmniflix())
+//    result.append(ChainOptimism())                      //EVM
+//    result.append(ChainOrai())
+//    result.append(ChainOsmosis())
+//    result.append(ChainPaloma())
+//    result.append(ChainPassage())
+//    result.append(ChainPersistence118())
+//    result.append(ChainPersistence750())
+//    result.append(ChainPlanqEVM())                      //EVM
+//    result.append(ChainPolygon())                       //EVM
+//    result.append(ChainProvenance())
+//    result.append(ChainPryzm())
+//    result.append(ChainPundix())
+//    result.append(ChainQubeticsEVM())                   //EVM
+//    result.append(ChainQuicksilver())
+//    result.append(ChainRealioEVM())
+//    result.append(ChainRegen())
+//    result.append(ChainRizon())
+//    result.append(ChainRouterEVM())
+//    result.append(ChainSaga())
+////    result.append(ChainSaharaAiEVM())                   //EVM
+//    result.append(ChainSecret118())
+//    result.append(ChainSecret529())
+//    result.append(ChainSeda())
+    result.append(ChainSeiEVM())
     result.append(ChainSei())
-    result.append(ChainSelf())
-    result.append(ChainSentinel())
-    result.append(ChainSge())
-    result.append(ChainShentu())
-    result.append(ChainShidoEVM())                      //EVM
-    result.append(ChainSommelier())
-//    result.append(ChainSomnia())                        //EVM
-    result.append(ChainSource())
-    result.append(ChainStargaze())
-    result.append(ChainStoryEVM())                      //EVM
-    result.append(ChainStratosEVM())                    //EVM
-    result.append(ChainStride())
-    result.append(ChainSui())                           //MAJOR
-    result.append(ChainSynternet())
-    result.append(ChainTenetEVM())                      //EVM
-    result.append(ChainTeritori())
-    result.append(ChainTerra())
-    result.append(ChainTerraClassic())
-    result.append(ChainThor())
-    result.append(ChainUmee())
-    result.append(ChainUnification())
-    result.append(ChainUnion())
-//    result.append(ChainWardenEVM())                     //EVM
-    result.append(ChainXion())
-    result.append(ChainXplaEVM())                       //EVM
-    result.append(ChainXpla())
-    result.append(ChainXrplEVM())                       //EVM
-    result.append(ChainZenrock())
-//    result.append(ChainZeroGravityEVM())                //EVM
-    result.append(ChainZetaEVM())                       //EVM
-//    result.append(ChainZigChain())
-
-    
-    
-
-    result.append(ChainBabylon_T())
-    result.append(ChainBitCoin84_T())
-    result.append(ChainBitCoin86_T())
-    result.append(ChainGno_T())
-//    result.append(ChainImuaEVM_T())
-    result.append(ChainInjective_T())
-    result.append(ChainInitia_T())
-//    result.append(ChainLombard_T())
-    result.append(ChainLumera_T())
-    result.append(ChainMantraEVM_T())
-    result.append(ChainMantra_T())
-    result.append(ChainMonad_T())
-    result.append(ChainNeutron_T())
-    result.append(ChainNillion_T())
-    result.append(ChainQubeticsEVM_T())
-    result.append(ChainSaharaAiEVM_T())
-    result.append(ChainSelf_T())
-    result.append(ChainTabiEVM_T())
-    result.append(ChainWardenEVM_T())
-    result.append(ChainXion_T())
-    result.append(ChainXrplEVM_T())
-    result.append(ChainZeroGravityEVM_T())
-    result.append(ChainZigChain_T())
-    result.append(ChainZkCloud_T())
+//    result.append(ChainSelf())
+//    result.append(ChainSentinel())
+//    result.append(ChainSge())
+//    result.append(ChainShentu())
+//    result.append(ChainShidoEVM())                      //EVM
+//    result.append(ChainSommelier())
+////    result.append(ChainSomnia())                        //EVM
+//    result.append(ChainSource())
+//    result.append(ChainStargaze())
+//    result.append(ChainStoryEVM())                      //EVM
+//    result.append(ChainStratosEVM())                    //EVM
+//    result.append(ChainStride())
+//    result.append(ChainSui())                           //MAJOR
+//    result.append(ChainSynternet())
+//    result.append(ChainTenetEVM())                      //EVM
+//    result.append(ChainTeritori())
+//    result.append(ChainTerra())
+//    result.append(ChainTerraClassic())
+//    result.append(ChainThor())
+//    result.append(ChainUmee())
+//    result.append(ChainUnification())
+//    result.append(ChainUnion())
+////    result.append(ChainWardenEVM())                     //EVM
+//    result.append(ChainXion())
+//    result.append(ChainXplaEVM())                       //EVM
+//    result.append(ChainXpla())
+//    result.append(ChainXrplEVM())                       //EVM
+//    result.append(ChainZenrock())
+////    result.append(ChainZeroGravityEVM())                //EVM
+//    result.append(ChainZetaEVM())                       //EVM
+////    result.append(ChainZigChain())
+//
+//    
+//    
+//
+//    result.append(ChainBabylon_T())
+//    result.append(ChainBitCoin84_T())
+//    result.append(ChainBitCoin86_T())
+//    result.append(ChainGno_T())
+////    result.append(ChainImuaEVM_T())
+//    result.append(ChainInjective_T())
+//    result.append(ChainInitia_T())
+////    result.append(ChainLombard_T())
+//    result.append(ChainLumera_T())
+//    result.append(ChainMantraEVM_T())
+//    result.append(ChainMantra_T())
+//    result.append(ChainMonad_T())
+//    result.append(ChainNeutron_T())
+//    result.append(ChainNillion_T())
+//    result.append(ChainQubeticsEVM_T())
+//    result.append(ChainSaharaAiEVM_T())
+//    result.append(ChainSelf_T())
+//    result.append(ChainTabiEVM_T())
+//    result.append(ChainWardenEVM_T())
+//    result.append(ChainXion_T())
+//    result.append(ChainXrplEVM_T())
+//    result.append(ChainZeroGravityEVM_T())
+//    result.append(ChainZigChain_T())
+//    result.append(ChainZkCloud_T())
     
     
     

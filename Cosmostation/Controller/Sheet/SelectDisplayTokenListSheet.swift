@@ -25,7 +25,8 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
     
     private let tokenType = ["cw20", "erc20"]
     
-    static var tokenWithAmount: [MintscanToken] = []
+//    static var tokenWithAmount: [MintscanToken] = []
+//    var tokenWithAmount: [MintscanToken] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
