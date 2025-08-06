@@ -21,7 +21,7 @@ class ChainSeiEVM: ChainSei {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "usei"
         bechAccountPrefix = "sei"
         validatorPrefix = "seivaloper"

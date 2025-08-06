@@ -41,11 +41,13 @@ class GnoFetcher {
             if let balance = try await fetchBalance(),
                let _ = try? await fetchAuth() {
                 
-                self.mintscanGrc20Tokens = BaseData.instance.mintscanGrc20Tokens?.filter({ $0.chainName == chain.apiName }) ?? []
+                self.mintscanGrc20Tokens = BaseData.instance.mintscanGrc20Tokens?.filter({ $0.chainName == chain.apiName }).map { token in
+                    return token.copy() as! MintscanToken
+                } ?? []
+                
                 self.gnoBalances = balance
                 let userDisplayGrc20token = BaseData.instance.getDisplayGrc20s(id, self.chain.tag)
                 await mintscanGrc20Tokens.concurrentForEach { grc20 in
-                    grc20.type = "grc20"
                     if (userDisplayGrc20token == nil) {
                         if (grc20.wallet_preload == true) {
                             await self.fetchGrc20Balance(grc20)

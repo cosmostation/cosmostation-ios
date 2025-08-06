@@ -46,9 +46,11 @@ class EvmFetcher {
             }
             
             let userDisplaytoken = BaseData.instance.getDisplayErc20s(id, self.chain.tag)
-            self.mintscanErc20Tokens = BaseData.instance.mintscanErc20Tokens?.filter({ $0.chainName == chain.apiName }) ?? []
+            self.mintscanErc20Tokens = BaseData.instance.mintscanErc20Tokens?.filter({ $0.chainName == chain.apiName }).map { token in
+                return token.copy() as! MintscanToken
+            } ?? []
+            
             await mintscanErc20Tokens.concurrentForEach { erc20 in
-                erc20.type = "erc20"
                 if (userDisplaytoken == nil) {
                     if (erc20.wallet_preload == true) {
                         await self.fetchErc20Balance(erc20)
