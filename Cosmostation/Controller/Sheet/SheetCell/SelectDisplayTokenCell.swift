@@ -24,6 +24,9 @@ class SelectDisplayTokenCell: UITableViewCell {
     
     let skeletonAnimation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
     
+    var getTokens: (() -> [MintscanToken])? = nil
+    var addToken: ((MintscanToken) -> Void)? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
@@ -54,38 +57,37 @@ class SelectDisplayTokenCell: UITableViewCell {
         symbolLabel.text = token.symbol
         contractLabel.text = token.address
         
-//        Task {
-//            if !SelectDisplayTokenListSheet.tokenWithAmount.map({$0.address}).contains(token.address) {
-//                showLoadingView()
-//                await fetchTokenBalance(chain, token)
-//                hideLoadingView()
-//            }
-//            
-//            if let index = SelectDisplayTokenListSheet.tokenWithAmount.firstIndex(where: { $0.address == token.address }) {
-//                let token = SelectDisplayTokenListSheet.tokenWithAmount[index]
-//                let amount = token.getAmount().multiplying(byPowerOf10: -token.decimals!)
-//                amountLabel.attributedText = WDP.dpAmount(amount.stringValue, amountLabel!.font)
-//                let msPrice = BaseData.instance.getPrice(token.coinGeckoId)
-//                let value = msPrice.multiplying(by: token.getAmount()).multiplying(byPowerOf10: -token.decimals!, withBehavior: handler6)
-//                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
-//            }
-//        }
+        Task {
+            if getTokens?().map({$0.address}).contains(token.address) == false {
+                showLoadingView()
+                await fetchTokenBalance(chain, token)
+                hideLoadingView()
+            }
+            
+            if let index = getTokens?().firstIndex(where: { $0.address == token.address }),
+               let token = getTokens?()[index] {
+                let amount = token.getAmount().multiplying(byPowerOf10: -token.decimals!)
+                amountLabel.attributedText = WDP.dpAmount(amount.stringValue, amountLabel!.font)
+                let msPrice = BaseData.instance.getPrice(token.coinGeckoId)
+                let value = msPrice.multiplying(by: token.getAmount()).multiplying(byPowerOf10: -token.decimals!, withBehavior: handler6)
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+            }
+        }
     }
     
     
-//    private func fetchTokenBalance(_ chain: BaseChain, _ token: MintscanToken) async {
-//        if chain.isSupportGrc20() {
-//            await (chain as? ChainGno)?.getGnoFetcher()?.fetchGrc20Balance(token)
-//            
-//        } else if chain.isSupportErc20() {
-//            await chain.getEvmfetcher()?.fetchErc20Balance(token)
-//            
-//        } else if chain.isSupportCw20() {
-//            await chain.getCosmosfetcher()?.fetchCw20Balance(token)
-//        }
-//        
-//        SelectDisplayTokenListSheet.tokenWithAmount.append(token)
-//    }
+    private func fetchTokenBalance(_ chain: BaseChain, _ token: MintscanToken) async {
+        if chain.isSupportGrc20() {
+            await (chain as? ChainGno)?.getGnoFetcher()?.fetchGrc20Balance(token)
+            
+        } else if chain.isSupportErc20() {
+            await chain.getEvmfetcher()?.fetchErc20Balance(token)
+            
+        } else if chain.isSupportCw20() {
+            await chain.getCosmosfetcher()?.fetchCw20Balance(token)
+        }
+        addToken?(token)
+    }
     
     private func showLoadingView() {
         loadingAmountLabel.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.color03, .color02]), animation: skeletonAnimation, transition: .none)

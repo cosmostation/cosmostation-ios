@@ -24,9 +24,7 @@ class SelectDisplayTokenListSheet: BaseVC, UISearchBarDelegate{
     var tokensListDelegate: SelectTokensListDelegate?
     
     private let tokenType = ["cw20", "erc20"]
-    
-//    static var tokenWithAmount: [MintscanToken] = []
-//    var tokenWithAmount: [MintscanToken] = []
+    var tokenWithAmount: [MintscanToken] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,6 +131,12 @@ extension SelectDisplayTokenListSheet: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"SelectDisplayTokenCell") as! SelectDisplayTokenCell
         cell.bindToken(selectedChain, searchTokens[indexPath.row], toDisplayTokens)
+        cell.getTokens = {
+            return self.tokenWithAmount
+        }
+        cell.addToken = { token in
+            self.tokenWithAmount.append(token)
+        }
         return cell
     }
     
