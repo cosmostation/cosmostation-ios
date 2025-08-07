@@ -89,7 +89,7 @@ class GnoFetcher {
             return tokens.count
             
         } else {
-            return mintscanGrc20Tokens.filter({ $0.wallet_preload == true }).count
+            return mintscanGrc20Tokens.filter({ $0.getAmount() != NSDecimalNumber.zero }).count
         }
     }
 }
