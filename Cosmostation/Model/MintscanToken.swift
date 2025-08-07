@@ -9,25 +9,39 @@
 import Foundation
 import SwiftyJSON
 
-public struct MintscanTokens: Codable {
+public class MintscanTokens: Codable {
     var assets: [MintscanToken]?
 }
 
-public class MintscanToken: Codable {
-    var chainName: String?
+
+public class MintscanToken: Codable, NSCopying {
     var type: String?
-    var address: String?   //we handle contract address as denom
+    var chainName: String?
     var name: String?
+    var address: String?                //we handle contract address as denom
     var symbol: String?
-    var description: String?
     var decimals: Int16?
+    var description: String?
     var image: String?
     var coinGeckoId: String?
     var wallet_preload: Bool?
-    var ibc_info: MintscanAssetIbcInfo?
     var amount: String?
     
-    func setAmount(_ rawAmount: String) {
+    init(type: String? = nil, chainName: String? = nil, name: String? = nil, address: String? = nil, symbol: String? = nil, decimals: Int16? = nil, description: String? = nil, image: String? = nil, coinGeckoId: String? = nil, wallet_preload: Bool? = nil, amount: String? = nil) {
+        self.type = type
+        self.chainName = chainName
+        self.name = name
+        self.address = address
+        self.symbol = symbol
+        self.decimals = decimals
+        self.description = description
+        self.image = image
+        self.coinGeckoId = coinGeckoId
+        self.wallet_preload = wallet_preload
+        self.amount = amount
+    }
+    
+    func setAmount(_ rawAmount: String?) {
         self.amount = rawAmount
     }
     
@@ -39,59 +53,7 @@ public class MintscanToken: Codable {
         return URL(string: image ?? "")
     }
     
-    enum CodingKeys: String, CodingKey {
-        case chainName
-        case chain
-        case type
-        case address
-        case contract
-        case name
-        case symbol
-        case description
-        case decimals
-        case image
-        case coinGeckoId
-        case wallet_preload
-        case ibc_info
-        case amount
-    }
-
-    required public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        self.chainName = try container.decodeIfPresent(String.self, forKey: .chainName) ?? container.decodeIfPresent(String.self, forKey: .chain)
-        self.type = try container.decodeIfPresent(String.self, forKey: .type)
-        self.address = try container.decodeIfPresent(String.self, forKey: .address) ?? container.decodeIfPresent(String.self, forKey: .contract)
-        self.name = try container.decodeIfPresent(String.self, forKey: .name)
-        self.symbol = try container.decodeIfPresent(String.self, forKey: .symbol)
-        self.description = try container.decodeIfPresent(String.self, forKey: .description)
-        self.decimals = try container.decodeIfPresent(Int16.self, forKey: .decimals)
-        self.image = try container.decodeIfPresent(String.self, forKey: .image)
-        self.coinGeckoId = try container.decodeIfPresent(String.self, forKey: .coinGeckoId)
-        self.wallet_preload = try container.decodeIfPresent(Bool.self, forKey: .wallet_preload)
-        self.ibc_info = try container.decodeIfPresent(MintscanAssetIbcInfo.self, forKey: .ibc_info)
-        self.amount = try container.decodeIfPresent(String.self, forKey: .amount)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        
-        try container.encodeIfPresent(chainName, forKey: .chainName)
-        try container.encodeIfPresent(chainName, forKey: .chain)
-        try container.encodeIfPresent(type, forKey: .type)
-        try container.encodeIfPresent(address, forKey: .address)
-        try container.encodeIfPresent(address, forKey: .contract)
-        try container.encodeIfPresent(name, forKey: .name)
-        try container.encodeIfPresent(symbol, forKey: .symbol)
-        try container.encodeIfPresent(description, forKey: .description)
-        try container.encodeIfPresent(decimals, forKey: .decimals)
-        try container.encodeIfPresent(image, forKey: .image)
-        try container.encodeIfPresent(coinGeckoId, forKey: .coinGeckoId)
-        try container.encodeIfPresent(wallet_preload, forKey: .wallet_preload)
-        try container.encodeIfPresent(ibc_info, forKey: .ibc_info)
-        try container.encodeIfPresent(amount, forKey: .amount)
+    public func copy(with zone: NSZone? = nil) -> Any {
+        return MintscanToken(type: type, chainName: chainName, name: name, address: address, symbol: symbol, decimals: decimals, description: description, image: image, coinGeckoId: coinGeckoId, wallet_preload: wallet_preload, amount: amount)
     }
 }
-
-
-

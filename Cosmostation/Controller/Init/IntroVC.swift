@@ -120,7 +120,13 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
             BaseData.instance.setLastPriceTime()
             BaseData.instance.mintscanAssets = msAsset.assets
             BaseData.instance.mintscanErc20Tokens = msErc20.assets
+            BaseData.instance.mintscanErc20Tokens?.forEach({ token in
+                token.type = "erc20"
+            })
             BaseData.instance.mintscanCw20Tokens = msCw20.assets
+            BaseData.instance.mintscanCw20Tokens?.forEach({ token in
+                token.type = "cw20"
+            })
             BaseData.instance.mintscanCw721 = msCw721["assets"].arrayValue
             BaseData.instance.allEcosystems = msEcosystems
         }
