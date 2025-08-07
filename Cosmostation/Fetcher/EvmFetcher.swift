@@ -115,7 +115,7 @@ class EvmFetcher {
             return tokens.count
             
         } else {
-            return mintscanErc20Tokens.filter({ $0.wallet_preload == true }).count
+            return mintscanErc20Tokens.filter({ $0.getAmount() != NSDecimalNumber.zero }).count
         }
     }
     

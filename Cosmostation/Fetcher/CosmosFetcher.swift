@@ -118,9 +118,7 @@ class CosmosFetcher {
                 let userDisplaytoken = BaseData.instance.getDisplayCw20s(id, self.chain.tag)
                 await mintscanCw20Tokens.concurrentForEach { cw20 in
                     if (userDisplaytoken == nil) {
-                        if (cw20.wallet_preload == true) {
-                            await self.fetchCw20Balance(cw20)
-                        }
+                        await self.fetchCw20Balance(cw20)
                     } else {
                         if (userDisplaytoken?.contains(cw20.address!) == true) {
                             await self.fetchCw20Balance(cw20)
@@ -213,7 +211,7 @@ class CosmosFetcher {
             return tokens.count
             
         } else {
-            return mintscanCw20Tokens.filter({ $0.wallet_preload == true }).count
+            return mintscanCw20Tokens.filter({ $0.getAmount() != NSDecimalNumber.zero }).count
         }
     }
 
