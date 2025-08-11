@@ -276,4 +276,38 @@ class AssetCell: UITableViewCell {
             }
         }
     }
+    
+    func bindSplToken(_ baseChain: BaseChain, _ tokenInfo: (String, JSON)) {
+        if let solanaFetcher = (baseChain as? ChainSolana)?.getSolanaFetcher(),
+           let splToken = solanaFetcher.mintscanSplTokens.filter({ $0.address == tokenInfo.1["mint"].stringValue }).first {
+            let value = solanaFetcher.splTokenValue(splToken.address ?? "")
+            WDP.dpToken(splToken, coinImg, symbolLabel, amountLabel, 6)
+            WDP.dpPrice(splToken.coinGeckoId, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(splToken.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
+            
+        } else {
+            let amount = tokenInfo.1["tokenAmount"]["uiAmountString"].stringValue
+            let decimals = tokenInfo.1["tokenAmount"]["decimals"].int16Value
+            coinImg.image = UIImage(named: "tokenDefault")
+            symbolLabel.text = "UNKNOWN"
+            WDP.dpPrice("", priceCurrencyLabel, priceLabel)
+            amountLabel?.attributedText = WDP.dpAmount(amount, amountLabel!.font, decimals)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(NSDecimalNumber.zero, valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
+        }
+    }
 }

@@ -43,19 +43,23 @@ class ChainSolana: BaseChain {
         fetchState = .Busy
         Task {
             coinsCnt = 0
-//            let suiResult = await getSolanaFetcher()?.fetchSuiBalances()
+            let solanaResult = await getSolanaFetcher()?.fetchSolanaBalance()
             
-//            if (suiResult == false) {
-//                fetchState = .Fail
-//            } else {
-//                fetchState = .Success
-//            }
+            if (solanaResult == false) {
+                fetchState = .Fail
+            } else {
+                fetchState = .Success
+            }
             
-//            if (self.fetchState == .Success) {
-//                if let suiFetcher = getSuiFetcher() {
-//                    coinsCnt = suiFetcher.suiBalances.count
-//                }
-//            }
+            if (self.fetchState == .Success) {
+                if let solanaFetcher = getSolanaFetcher() {
+                    if (solanaFetcher.balanceAmount() == NSDecimalNumber.zero) {
+                        coinsCnt = 0
+                    } else {
+                        coinsCnt = 1
+                    }
+                }
+            }
             
             DispatchQueue.main.async(execute: {
                 NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
@@ -75,12 +79,7 @@ class ChainSolana: BaseChain {
             }
             
             if let solanaFetcher = getSolanaFetcher(), fetchState == .Success {
-                if (solanaFetcher.balanceAmount() == NSDecimalNumber.zero) {
-                    coinsCnt = 0
-                } else {
-                    coinsCnt = 1
-                }
-                
+                coinsCnt = solanaFetcher.valueCoinCnt()
                 allCoinValue = solanaFetcher.allCoinValue()
                 allCoinUSDValue = solanaFetcher.allCoinValue(true)
                 let mainCoinAmount = solanaFetcher.balanceAmount()

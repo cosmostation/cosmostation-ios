@@ -295,8 +295,8 @@ public class BaseAccount {
             } else if let solanaFetcher = (chain as? ChainSolana)?.getSolanaFetcher() {
                 chain.allCoinValue = solanaFetcher.allCoinValue()
                 chain.allCoinUSDValue = solanaFetcher.allCoinValue(true)
-                chain.allTokenValue = solanaFetcher.allTokenValue(id)
-                chain.allTokenUSDValue = solanaFetcher.allTokenValue(id, true)
+                chain.allTokenValue = solanaFetcher.allTokenValue()
+                chain.allTokenUSDValue = solanaFetcher.allTokenValue(true)
             }
         }
     }

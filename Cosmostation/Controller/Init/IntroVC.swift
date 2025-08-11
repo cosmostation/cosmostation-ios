@@ -111,6 +111,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
            let msAsset = try? await BaseNetWork().fetchAssets(),
            let msErc20 = try? await BaseNetWork().fetchErc20Tokens(),
            let msCw20 = try? await BaseNetWork().fetchCw20Tokens(),
+           let msSpl = try? await BaseNetWork().fetchSplTokens(),
            let msCw721 = try? await BaseNetWork().fetchCw721s(),
            let msEcosystems = try? await BaseNetWork().fetchEcosystems() {
             BaseData.instance.mintscanChainParams = msParam
@@ -121,6 +122,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
             BaseData.instance.mintscanAssets = msAsset.assets
             BaseData.instance.mintscanErc20Tokens = msErc20.assets
             BaseData.instance.mintscanCw20Tokens = msCw20.assets
+            BaseData.instance.mintscanSplTokens = msSpl.assets
             BaseData.instance.mintscanCw721 = msCw721["assets"].arrayValue
             BaseData.instance.allEcosystems = msEcosystems
         }

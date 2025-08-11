@@ -24,6 +24,9 @@ class MajorCryptoVC: BaseVC {
     
     var iotaBalances = Array<(String, NSDecimalNumber)>()
     
+    var allSplokens = [(String, JSON)]()
+    var searchSplTokens = [(String, JSON)]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -123,7 +126,16 @@ class MajorCryptoVC: BaseVC {
 
             }
             
+        } else if let solanaFetcher = (selectedChain as? ChainSolana)?.getSolanaFetcher() {
+            allSplokens = solanaFetcher.solanaTokenInfo
+            allSplokens.sort {
+                let value0 = solanaFetcher.splTokenValue($0.1["mint"].stringValue)
+                let value1 = solanaFetcher.splTokenValue($1.1["mint"].stringValue)
+                return value0.compare(value1).rawValue > 0 ? true : false
+            }
+            searchSplTokens = allSplokens
         }
+        
         loadingView.isHidden = true
         tableView.reloadData()
     }
@@ -164,7 +176,7 @@ class MajorCryptoVC: BaseVC {
 extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -177,27 +189,47 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             view.titleLabel.text = "Native Coins"
             view.cntLabel.text = String(iotaBalances.count)
 
-        } else if (selectedChain is ChainBitCoin86 || selectedChain is ChainSolana) {
+        } else if (selectedChain is ChainBitCoin86) {
             view.titleLabel.text = "Native Coins"
             view.cntLabel.text = ""
             
+        } else if (selectedChain is ChainSolana) {
+            if (section == 0) {
+                view.titleLabel.text = "Native Coins"
+                view.cntLabel.text = ""
+            } else {
+                view.titleLabel.text = "Spl Tokens"
+                view.cntLabel.text = String(searchSplTokens.count)
+            }
         }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        if (selectedChain is ChainSolana) {
+            if (section == 0) {
+                return 40
+            } else if (section == 1 ) {
+                return searchSplTokens.count > 0 ? 40 : 0
+            }
+        } else {
+            return (section == 0) ? 40 : 0
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (selectedChain is ChainSui) {
-            return suiBalances.count
+            return (section == 0) ? suiBalances.count : 0
             
         } else if selectedChain is ChainIota {
-            return iotaBalances.count
+            return (section == 0) ? iotaBalances.count : 0
             
-        } else if (selectedChain is ChainBitCoin86 || selectedChain is ChainSolana) {
-            return 1
+        } else if (selectedChain is ChainBitCoin86) {
+            return (section == 0) ? 1 : 0
+            
+        } else if (selectedChain is ChainSolana) {
+            return (section == 0) ? 1 : searchSplTokens.count
         }
         return 0
     }
@@ -235,7 +267,11 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (selectedChain is ChainSolana) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-            cell.bindSolanaClassAsset(selectedChain)
+            if (indexPath.section == 0) {
+                cell.bindSolanaClassAsset(selectedChain)
+            } else {
+                cell.bindSplToken(selectedChain, searchSplTokens[indexPath.row])
+            }
             return cell
         }
         

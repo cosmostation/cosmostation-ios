@@ -166,6 +166,13 @@ class DeriveCell: UITableViewCell {
                     WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)
                 }
 
+            } else if let solanaFetcher = (chain as? ChainSolana)?.getSolanaFetcher() {
+                let stakeDenom = chain.stakeDenom ?? ""
+                let availableAmount = solanaFetcher.balanceAmount()
+                if let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+                    WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)
+                }
+
             } else if (chain.supportEvm) {
                 let dpAmount = chain.getEvmfetcher()?.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18Down) ?? NSDecimalNumber.zero
                 denomLabel.text = chain.coinSymbol

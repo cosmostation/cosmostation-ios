@@ -174,7 +174,6 @@ class MajorClassVC: BaseVC {
             
         } else if (selectedChain is ChainSolana) {
             tabbar.items.append(receiveTabBar)
-            tabbar.items.append(historyTabBar)
             if (BaseData.instance.showEvenReview() && selectedChain.isSupportMobileDapp()) { tabbar.items.append(ecosystemTabBar) }
             tabbar.items.append(aboutTabBar)
         }
