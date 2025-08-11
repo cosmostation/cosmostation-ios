@@ -16,6 +16,7 @@ class ChainSei: BaseChain {
         name = "Sei"
         tag = "sei118"
         chainImg = "chainSei"
+        isDefault = false
         apiName = "sei"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

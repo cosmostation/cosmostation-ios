@@ -83,7 +83,9 @@ class CosmosFetcher {
                let rewardaddr = try? await fetchRewardAddress(),
                let baseFees = try? await fetchBaseFee() {
                 
-                self.mintscanCw20Tokens =  BaseData.instance.mintscanCw20Tokens?.filter({ $0.chainName == chain.apiName }) ?? []
+                self.mintscanCw20Tokens = BaseData.instance.mintscanCw20Tokens?.filter({ $0.chainName == chain.apiName }).map { token in
+                    return token.copy() as! MintscanToken
+                } ?? []
                 self.mintscanCw721List = BaseData.instance.mintscanCw721?.filter({ $0["chain"].stringValue == chain.apiName }) ?? []
 
                 self.cosmosBalances = balance
@@ -115,11 +117,8 @@ class CosmosFetcher {
                 }
                 let userDisplaytoken = BaseData.instance.getDisplayCw20s(id, self.chain.tag)
                 await mintscanCw20Tokens.concurrentForEach { cw20 in
-                    cw20.type = "cw20"
                     if (userDisplaytoken == nil) {
-                        if (cw20.wallet_preload == true) {
-                            await self.fetchCw20Balance(cw20)
-                        }
+                        await self.fetchCw20Balance(cw20)
                     } else {
                         if (userDisplaytoken?.contains(cw20.address!) == true) {
                             await self.fetchCw20Balance(cw20)
@@ -212,7 +211,7 @@ class CosmosFetcher {
             return tokens.count
             
         } else {
-            return mintscanCw20Tokens.filter({ $0.wallet_preload == true }).count
+            return mintscanCw20Tokens.filter({ $0.getAmount() != NSDecimalNumber.zero }).count
         }
     }
 

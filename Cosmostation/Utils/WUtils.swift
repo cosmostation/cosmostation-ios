@@ -224,6 +224,7 @@ public class WUtils {
             return MintscanPath.init(.FORWARD, msAsset.ibc_info)
         }
         
+        /*
         //IBC Eureka
         //Check Erc20 token backward case
         //ex: Atom(Erc20) on ethereum should back to cosmos
@@ -243,6 +244,7 @@ public class WUtils {
 //            print("EUREKA FORWARD ", msToken.ibc_info)
             return MintscanPath.init(.FORWARD, msToken.ibc_info)
         }
+         */
         return nil
     }
     
