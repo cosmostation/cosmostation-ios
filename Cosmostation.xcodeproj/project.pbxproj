@@ -1659,6 +1659,8 @@
 		04FF6B992B21EB74009DCA89 /* RewardDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FF6B962B21EB74009DCA89 /* RewardDetailCell.swift */; };
 		04FF6B9A2B21EB74009DCA89 /* RewardDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FF6B972B21EB74009DCA89 /* RewardDetailCell.xib */; };
 		04FF6B9B2B21EB74009DCA89 /* RewardDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FF6B972B21EB74009DCA89 /* RewardDetailCell.xib */; };
+		1505030E2E49DF260001415A /* solana.js in Resources */ = {isa = PBXBuildFile; fileRef = 1505030D2E49DF250001415A /* solana.js */; };
+		1505030F2E49DF260001415A /* solana.js in Resources */ = {isa = PBXBuildFile; fileRef = 1505030D2E49DF250001415A /* solana.js */; };
 		15B24C862AE9039A0009B359 /* DappCosmosSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B24C842AE9039A0009B359 /* DappCosmosSignRequestSheet.swift */; };
 		15B24C872AE9039A0009B359 /* DappCosmosSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B24C842AE9039A0009B359 /* DappCosmosSignRequestSheet.swift */; };
 		15B24C882AE9039A0009B359 /* DappCosmosSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15B24C852AE9039A0009B359 /* DappCosmosSignRequestSheet.xib */; };
@@ -3336,6 +3338,7 @@
 		04FF6B912B21E101009DCA89 /* CosmosRewardListPopupVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosRewardListPopupVC.xib; sourceTree = "<group>"; };
 		04FF6B962B21EB74009DCA89 /* RewardDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardDetailCell.swift; sourceTree = "<group>"; };
 		04FF6B972B21EB74009DCA89 /* RewardDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardDetailCell.xib; sourceTree = "<group>"; };
+		1505030D2E49DF250001415A /* solana.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = solana.js; sourceTree = "<group>"; };
 		15B24C842AE9039A0009B359 /* DappCosmosSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappCosmosSignRequestSheet.swift; sourceTree = "<group>"; };
 		15B24C852AE9039A0009B359 /* DappCosmosSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappCosmosSignRequestSheet.xib; sourceTree = "<group>"; };
 		15C4B8AC2C5966600084B0A3 /* stride_vesting_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_vesting_tx.grpc.swift; sourceTree = "<group>"; };
@@ -4594,6 +4597,7 @@
 				1809C35029D16C80008884C1 /* injectScript.js */,
 				04C940B22AE8D48C00415256 /* aes.js */,
 				795C0DC12C8E853C006D35A4 /* bitcoin.js */,
+				1505030D2E49DF250001415A /* solana.js */,
 				04A421132C7896A800C0E1A2 /* drop.json */,
 				79E7B3C92CF83F0400C28D93 /* dydx.json */,
 				7939A2592D30C2E2006674E3 /* btcStaking.json */,
@@ -6122,6 +6126,7 @@
 				187447012930942400849EE4 /* ApiKeyDev.plist in Resources */,
 				E14577FF2B3EC50C00EEFA8E /* CosmosClaimCommission.xib in Resources */,
 				E1CD6AF72AEAAEC200376909 /* AboutStakingCell.xib in Resources */,
+				1505030F2E49DF260001415A /* solana.js in Resources */,
 				04C63D252B86FE8C00D4A366 /* CommonTransferResult.xib in Resources */,
 				E10EB58F2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				0402B7F52ACC38BA00824B3F /* CosmosVote.xib in Resources */,
@@ -6433,6 +6438,7 @@
 				E1044EAC2BD798BC00DA05C2 /* NftTransfer.xib in Resources */,
 				79B422642DA37CC90022A4F9 /* NeutronStakingInfoVC.xib in Resources */,
 				E131F4502AEEAAB800E760A0 /* CreateNameSheet.xib in Resources */,
+				1505030E2E49DF260001415A /* solana.js in Resources */,
 				E1B44B212ADA41CD0073C88A /* NeutronSingleVoteCell.xib in Resources */,
 				0443B89828589B570027A6B9 /* Color.xcassets in Resources */,
 				E14E29772A98DA5300939AD2 /* SelectChainCell.xib in Resources */,
