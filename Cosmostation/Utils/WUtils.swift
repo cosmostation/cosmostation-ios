@@ -261,7 +261,7 @@ public class WUtils {
             return false
         }
         
-        if (!address!.starts(with: chain.bechAccountPrefix! + "1")) {
+        if (!address!.starts(with: chain.bechAddressPrefix() + "1")) {
             return false
         }
         return true

@@ -299,7 +299,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate ,UITextViewDelegate {
                 return ChainBitCoin49_T()
             }
 
-        } else if let chain = ALLCHAINS().filter({ address!.starts(with: $0.bechAccountPrefix ?? "" + "1") == true }).first {
+        } else if let chain = ALLCHAINS().filter({ address!.starts(with: $0.bechAddressPrefix() + "1") == true }).first {
             return chain
         }
         return nil

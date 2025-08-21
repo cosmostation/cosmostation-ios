@@ -61,7 +61,7 @@ class LegacyTransfer: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        stakeDenom = selectedChain.stakeDenom
+        stakeDenom = selectedChain.stakingAssetDenom()
         msAsset = BaseData.instance.getAsset(selectedChain.apiName, toSendDenom)
         
         loadingView.isHidden = true
@@ -146,7 +146,7 @@ class LegacyTransfer: BaseVC {
                 toAssetDenomLabel.isHidden = false
                 
                 if (toSendDenom == stakeDenom) {
-                    guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? selectedChain.coinSymbol) else { return }
+                    guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakingAssetDenom()) else { return }
                     let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                     let toSendValue = msPrice.multiplying(by: toSendAmount, withBehavior: handler6)
                     WDP.dpValue(toSendValue, toAssetCurrencyLabel, toAssetValueLabel)
@@ -207,7 +207,7 @@ class LegacyTransfer: BaseVC {
         if selectedChain is ChainOktEVM {
             feeSelectImg.sd_setImage(with: selectedChain.assetImgUrl(stakeDenom), placeholderImage: UIImage(named: "tokenDefault"))
             feeSelectLabel.text = stakeDenom.uppercased()
-            guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? selectedChain.coinSymbol) else { return }
+            guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakingAssetDenom()) else { return }
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeAmount = NSDecimalNumber(string: OKT_BASE_FEE)
             let feeValue = msPrice.multiplying(by: feeAmount, withBehavior: handler6)

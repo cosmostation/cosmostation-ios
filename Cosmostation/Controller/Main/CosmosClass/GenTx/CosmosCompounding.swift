@@ -77,7 +77,7 @@ class CosmosCompounding: BaseVC {
     }
     
     override func setLocalizedString() {
-        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        let symbol = selectedChain.assetSymbol(selectedChain.stakingAssetDenom())
         titleLabel.text = String(format: NSLocalizedString("title_coin_compounding", comment: ""), symbol)
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
         feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
@@ -90,7 +90,7 @@ class CosmosCompounding: BaseVC {
     }
     
     func onInitView() {
-        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom()), placeholderImage: UIImage(named: "tokenDefault"))
         
         if let initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher() {
             let cosmostationValAddress = initiaFetcher.initiaValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
@@ -121,7 +121,7 @@ class CosmosCompounding: BaseVC {
             validatorsCntLabel.isHidden = true
         }
         
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
             var rewardAmount = NSDecimalNumber.zero
             claimableRewards.forEach { reward in
@@ -287,16 +287,16 @@ class CosmosCompounding: BaseVC {
     
     func onBindCompoundingMsg() -> [Google_Protobuf_Any] {
         if selectedChain is ChainInitia {
-            return Signer.genInitiaCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+            return Signer.genInitiaCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())
             
         } else if selectedChain is ChainZenrock {
-            return Signer.genZenrockCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+            return Signer.genZenrockCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())
             
         } else if selectedChain is ChainBabylon {
-            return Signer.genBabylonCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+            return Signer.genBabylonCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())
             
         } else {
-            return Signer.genCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+            return Signer.genCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())
         }
     }
     

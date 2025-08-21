@@ -83,7 +83,7 @@ class AssetCosmosClassCell: UITableViewCell {
             bindZenrock(zenrockChain)
             
         } else {
-            let stakeDenom = baseChain.stakeDenom!
+            let stakeDenom = baseChain.stakingAssetDenom()
             if let cosmosFetcher = baseChain.getCosmosfetcher(),
                let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
                 let value = cosmosFetcher.denomValue(stakeDenom)
@@ -157,8 +157,8 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     func bindOktAsset(_ oktChain: ChainOktEVM) {
+        let stakeDenom = oktChain.stakingAssetDenom()
         if let oktFetcher = oktChain.getOktfetcher(),
-           let stakeDenom = oktChain.stakeDenom ,
            let msAsset = BaseData.instance.getAsset(oktChain.apiName, stakeDenom) {
             stakingTitle.text = "Deposited"
             unstakingTitle.text = "Withdrawing"
@@ -206,8 +206,8 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     func bindNeutron(_ baseChain: ChainNeutron) {
-        if let neutronFetcher = baseChain.getNeutronFetcher(),
-           let stakeDenom = baseChain.stakeDenom {
+        let stakeDenom = baseChain.stakingAssetDenom()
+        if let neutronFetcher = baseChain.getNeutronFetcher() {
             vaultDepositedLayer.isHidden = false
             if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
                 let value = neutronFetcher.denomValue(stakeDenom)
@@ -280,10 +280,9 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     func bindInitia(_ baseChain: ChainInitia)  {
+        let stakeDenom = baseChain.stakingAssetDenom()
         if let initiaFetcher = baseChain.getInitiaFetcher(),
-           let stakeDenom = baseChain.stakeDenom,
            let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
-            
             let value = initiaFetcher.denomValue(stakeDenom)
             
             coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
@@ -351,10 +350,9 @@ class AssetCosmosClassCell: UITableViewCell {
     }
     
     func bindZenrock(_ baseChain: ChainZenrock) {
+        let stakeDenom = baseChain.stakingAssetDenom()
         if let zenrockFetcher = baseChain.getZenrockFetcher(),
-           let stakeDenom = baseChain.stakeDenom,
            let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
-            
             let value = zenrockFetcher.denomValue(stakeDenom)
             
             coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))

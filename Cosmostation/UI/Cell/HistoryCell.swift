@@ -397,7 +397,7 @@ class HistoryCell: UITableViewCell {
             displayAmount = outputAmount.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
         }
         
-        denomLabel.text = btcChain.coinSymbol
+        denomLabel.text = btcChain.mainAssetSymbol()
         amountLabel.attributedText = WDP.dpAmount(displayAmount.stringValue, amountLabel!.font, 8)
         amountLabel.isHidden = false
         denomLabel.isHidden = false
@@ -437,7 +437,7 @@ class HistoryCell: UITableViewCell {
                 amountLabel.isHidden = false
                 denomLabel.isHidden = false
 
-                denomLabel.text = chain.coinSymbol
+                denomLabel.text = chain.mainAssetSymbol()
                 amountLabel.attributedText = WDP.dpAmount(history["amount"].stringValue, amountLabel!.font)
                 
             } else if let _ = chain.getEvmfetcher()?.mintscanErc20Tokens.first(where: { $0.address?.lowercased() == contractAddress.lowercased() }) {

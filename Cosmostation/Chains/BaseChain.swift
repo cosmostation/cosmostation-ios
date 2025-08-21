@@ -27,9 +27,8 @@ class BaseChain {
     var cosmosEndPointType: CosmosEndPointType = .Unknown
     var chainIdCosmos: String?
     var bechAddress: String?
-    var stakeDenom: String?
-    var bechAccountPrefix: String?
-    var validatorPrefix: String?
+    var bechAccountPrefix = ""
+    var validatorPrefix = ""
     var bechOpAddress: String?
     var supportStaking = true
     var grpcHost = ""
@@ -56,9 +55,10 @@ class BaseChain {
         return ""
     }
     var evmAddress: String?
-    var coinSymbol = ""
-
     var evmRpcURL = ""
+    
+    var stakeDenom = ""
+    var coinSymbol = ""
     
     
     //FOR BTC or SUI or majorChains
@@ -93,17 +93,17 @@ class BaseChain {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         if (accountKeyType.pubkeyType == .COSMOS_Secp256k1) {
-            bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
+            bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAddressPrefix())
             
         } else {
             evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
             if (supportCosmos) {
-                bechAddress = KeyFac.convertEvmToBech32(evmAddress!, bechAccountPrefix!)
+                bechAddress = KeyFac.convertEvmToBech32(evmAddress!, bechAddressPrefix())
             }
         }
         
         if (supportCosmos && isStakeEnabled()) {
-            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, validatorPrefix)
+            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, bechOpAddressPrefix())
         }
     }
     
@@ -321,7 +321,7 @@ class BaseChain {
     
     func isTxFeePayable(_ txType: TxType? = nil) -> Bool {
         if let oktFetcher = (self as? ChainOktEVM)?.getOktfetcher() {
-            let availableAmount = oktFetcher.oktBalanceAmount(stakeDenom!)
+            let availableAmount = oktFetcher.oktBalanceAmount(stakingAssetDenom())
             return availableAmount.compare(NSDecimalNumber(string: OKT_BASE_FEE)).rawValue > 0
             
         } else if let suiFetcher = (self as? ChainSui)?.getSuiFetcher() {
@@ -397,6 +397,22 @@ extension BaseChain {
     
     func getChainListParam() -> JSON {
         return getChainParam()["params"]["chainlist_params"]
+    }
+    
+    func mainAssetSymbol() -> String {
+        return getChainListParam()["main_asset_symbol"].string ?? coinSymbol
+    }
+    
+    func stakingAssetDenom() -> String {
+        return getChainListParam()["staking_asset_denom"].string ?? stakeDenom
+    }
+    
+    func bechAddressPrefix() -> String {
+        return getChainListParam()["bech_account_prefix"].string ?? bechAccountPrefix
+    }
+    
+    func bechOpAddressPrefix() -> String? {
+        return getChainListParam()["bech_validator_prefix"].string ?? validatorPrefix
     }
     
     func isSendEnabled() -> Bool {
@@ -578,7 +594,7 @@ extension BaseChain {
             //return empty fee
             return Cosmos_Tx_V1beta1_Fee.with {
                 $0.gasLimit = 0
-                $0.amount = [Cosmos_Base_V1beta1_Coin(stakeDenom!, "0")]
+                $0.amount = [Cosmos_Base_V1beta1_Coin(stakingAssetDenom(), "0")]
             }
         }
     }

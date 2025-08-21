@@ -71,7 +71,7 @@ class ZenrockFetcher: CosmosFetcher {
     }
     
     override func denomValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        if (denom == chain.stakeDenom) {
+        if (denom == chain.stakingAssetDenom()) {
             return balanceValue(denom, usd).adding(vestingValue(denom, usd)).adding(rewardValue(denom, usd))
                 .adding(zenrockDelegationValueSum(usd)).adding(zenrockUnbondingValueSum(usd)).adding(commissionValue(denom, usd))
             
@@ -82,8 +82,8 @@ class ZenrockFetcher: CosmosFetcher {
     }
     
     override func allStakingDenomAmount() -> NSDecimalNumber {
-        return balanceAmount(chain.stakeDenom!).adding(zenrockDelegationAmountSum())
-            .adding(zenrockUnbondingAmountSum()).adding(rewardAmountSum(chain.stakeDenom!)).adding(commissionAmount(chain.stakeDenom!))
+        return balanceAmount(chain.stakingAssetDenom()).adding(zenrockDelegationAmountSum())
+            .adding(zenrockUnbondingAmountSum()).adding(rewardAmountSum(chain.stakingAssetDenom())).adding(commissionAmount(chain.stakingAssetDenom()))
     }
     
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
@@ -166,7 +166,7 @@ extension ZenrockFetcher {
     }
     
     func zenrockDelegationValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
-        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = zenrockDelegationAmountSum()
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
@@ -185,7 +185,7 @@ extension ZenrockFetcher {
     }
     
     func zenrockUnbondingValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
-        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = zenrockUnbondingAmountSum()
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)

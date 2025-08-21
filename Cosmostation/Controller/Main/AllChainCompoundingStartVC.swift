@@ -248,23 +248,23 @@ extension AllChainCompoundingStartVC {
     
     func onBindCompoundingMsg(_ selectedChain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]) -> [Google_Protobuf_Any] {
         if selectedChain is ChainInitia {
-            return Signer.genInitiaCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+            return Signer.genInitiaCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())
             
         } else if selectedChain is ChainZenrock {
-            return Signer.genZenrockCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+            return Signer.genZenrockCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())
             
         } else if selectedChain is ChainBabylon {
-            return Signer.genBabylonCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+            return Signer.genBabylonCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())
             
         } else {
-            return Signer.genCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakeDenom!)
+            return Signer.genCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())
         }
     }
 
     
     func broadcastCompoundingTx(_ chain: BaseChain, _ claimableRewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
                                 _ fee: Cosmos_Tx_V1beta1_Fee, _ tip: Cosmos_Tx_V1beta1_Tip? = nil) async throws -> Cosmos_Base_Abci_V1beta1_TxResponse? {
-        let msgs = Signer.genCompoundingMsg(chain.bechAddress!, claimableRewards, chain.stakeDenom!)
+        let msgs = Signer.genCompoundingMsg(chain.bechAddress!, claimableRewards, chain.stakingAssetDenom())
         if let cosmosFetcher = chain.getCosmosfetcher(),
            let broadReq = try await Signer.genTx(chain, msgs, "", fee, tip) {
             return try await cosmosFetcher.broadcastTx(broadReq)

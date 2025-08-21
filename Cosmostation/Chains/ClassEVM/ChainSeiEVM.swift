@@ -37,8 +37,8 @@ class ChainSeiEVM: ChainSei {
     override func setInfoWithPrivateKey(_ priKey: Data) {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
-        bechAddress = KeyFac.getAddressFromPubKey(publicKey!, .COSMOS_Secp256k1, bechAccountPrefix)
+        bechAddress = KeyFac.getAddressFromPubKey(publicKey!, .COSMOS_Secp256k1, bechAddressPrefix())
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, .ETH_Keccak256, nil)
-        bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, validatorPrefix)
+        bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, bechOpAddressPrefix())
     }
 }

@@ -82,7 +82,7 @@ class CosmosUndelegate: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom()), placeholderImage: UIImage(named: "tokenDefault"))
         
         validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
         unStakingAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
@@ -116,7 +116,7 @@ class CosmosUndelegate: BaseVC {
     }
     
     override func setLocalizedString() {
-        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        let symbol = selectedChain.assetSymbol(selectedChain.stakingAssetDenom())
         titleLabel.text = String(format: NSLocalizedString("title_coin_unstake", comment: ""), symbol)
         unStakingAmountTitle.text = NSLocalizedString("str_undelegate_amount", comment: "")
         unStakingAmountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
@@ -150,7 +150,7 @@ class CosmosUndelegate: BaseVC {
                 inactiveTag.isHidden = initiaFetcher.isActiveValidator(fromValidatorInitia!)
             }
             
-            let stakeDenom = selectedChain.stakeDenom!
+            let stakeDenom = selectedChain.stakingAssetDenom()
             if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
                 let staked = initiaFetcher.initiaDelegations.filter { $0.delegation.validatorAddress == fromValidatorInitia?.operatorAddress }.first?.balance.filter({$0.denom == stakeDenom}).first?.amount
                 let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
@@ -166,7 +166,7 @@ class CosmosUndelegate: BaseVC {
                 inactiveTag.isHidden = zenrockFetcher.isActiveValidator(fromValidatorZenrock!)
             }
             
-            let stakeDenom = selectedChain.stakeDenom!
+            let stakeDenom = selectedChain.stakingAssetDenom()
             if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
                 let staked = zenrockFetcher.delegations.filter { $0.delegation.validatorAddress == fromValidatorZenrock?.operatorAddress }.first?.balance.amount
                 let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
@@ -182,7 +182,7 @@ class CosmosUndelegate: BaseVC {
                 inactiveTag.isHidden = cosmosFetcher.isActiveValidator(fromValidator!)
             }
             
-            let stakeDenom = selectedChain.stakeDenom!
+            let stakeDenom = selectedChain.stakingAssetDenom()
             if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
                 let staked = cosmosFetcher.cosmosDelegations.filter { $0.delegation.validatorAddress == fromValidator?.operatorAddress }.first?.balance.amount
                 let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
@@ -196,7 +196,7 @@ class CosmosUndelegate: BaseVC {
     @objc func onClickAmount() {
         let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
-        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
+        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakingAssetDenom())
         amountSheet.availableAmount = availableAmount
         if let existedAmount = toCoin?.amount {
             amountSheet.existedAmount = NSDecimalNumber(string: existedAmount)
@@ -207,7 +207,7 @@ class CosmosUndelegate: BaseVC {
     }
     
     func onUpdateAmountView(_ amount: String) {
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = stakeDenom; $0.amount = amount }
         
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
@@ -300,7 +300,7 @@ class CosmosUndelegate: BaseVC {
             availableAmount = NSDecimalNumber(string: delegated.balance.amount)
         }
         if let initiaFetcher, let delegated = initiaFetcher.initiaDelegations.filter({ $0.delegation.validatorAddress == fromValidatorInitia?.operatorAddress }).first {
-            availableAmount = NSDecimalNumber(string: delegated.balance.filter({ $0.denom == selectedChain.stakeDenom}).first?.amount)
+            availableAmount = NSDecimalNumber(string: delegated.balance.filter({ $0.denom == selectedChain.stakingAssetDenom()}).first?.amount)
         }
         if let delegated = zenrockFetcher?.delegations.filter({ $0.delegation.validatorAddress == fromValidatorZenrock?.operatorAddress }).first {
             availableAmount = NSDecimalNumber(string: delegated.balance.amount)

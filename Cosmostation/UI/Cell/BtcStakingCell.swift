@@ -55,7 +55,7 @@ class BtcStakingCell: UITableViewCell {
         let stakedAmount = NSDecimalNumber(integerLiteral: delegation.amount).multiplying(byPowerOf10: -8)
         stakingLabel.attributedText = WDP.dpAmount(stakedAmount.stringValue, stakingLabel.font, 8)
         
-        symbolLabel.text = baseChain.coinSymbol
+        symbolLabel.text = baseChain.mainAssetSymbol()
                 
         
         let timeLock = Calendar.current.date(byAdding: .weekOfYear, value: timeLockWeeks, to: WUtils.timeStringToDate(delegation.inceptionTime) ?? Date())

@@ -233,19 +233,19 @@ class PortfolioVC: BaseVC {
         
         searchMainnets = searchBar!.text!.isEmpty ? mainnetChains : mainnetChains.filter { chain in
             var symbol = ""
-            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? "") {
+            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
                 symbol = msAsset.symbol ?? ""
             } else {
-                symbol = chain.coinSymbol
+                symbol = chain.mainAssetSymbol()
             }
             return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil || symbol.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         searchTestnets = searchBar!.text!.isEmpty ? testnetChains : testnetChains.filter { chain in
             var symbol = ""
-            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? "") {
+            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
                 symbol = msAsset.symbol ?? ""
             } else {
-                symbol = chain.coinSymbol
+                symbol = chain.mainAssetSymbol()
             }
             return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil || symbol.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
         }

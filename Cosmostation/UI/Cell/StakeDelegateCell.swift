@@ -53,8 +53,8 @@ class StakeDelegateCell: UITableViewCell {
             inactiveTag.isHidden = cosmosFetcher.isActiveValidator(validator)
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        let stakeDenom = baseChain.stakingAssetDenom()
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
             let vpAmount = NSDecimalNumber(string: validator.tokens).multiplying(byPowerOf10: -msAsset.decimals!)
             
             let commission = NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
@@ -115,8 +115,8 @@ class StakeDelegateCell: UITableViewCell {
             inactiveTag.isHidden = fetcher.isActiveValidator(validator)
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        let stakeDenom = baseChain.stakingAssetDenom()
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
             
             let commission = NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
             commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
@@ -177,8 +177,8 @@ class StakeDelegateCell: UITableViewCell {
             inactiveTag.isHidden = fetcher.isActiveValidator(validator)
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        let stakeDenom = baseChain.stakingAssetDenom()
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
             
             let commission = NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
             commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
@@ -241,8 +241,7 @@ class StakeDelegateCell: UITableViewCell {
             inactiveTag.isHidden = fetcher.isActiveValidator(validator)
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.stakingAssetDenom()) {
             
             let commission = NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
             commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)

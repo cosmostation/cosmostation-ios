@@ -117,8 +117,8 @@ class AssetCell: UITableViewCell {
     
     func bindEvmClassCoin(_ baseChain: BaseChain) {
         if let evmFetcher = baseChain.getEvmfetcher(),
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.coinSymbol) {
-            symbolLabel.text = baseChain.coinSymbol
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.mainAssetSymbol()) {
+            symbolLabel.text = baseChain.mainAssetSymbol()
             coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
             
             let dpAmount = evmFetcher.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18Down)

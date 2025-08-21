@@ -78,7 +78,7 @@ class BabylonStakingInfoVC: BaseVC {
     }
     
     override func setLocalizedString() {
-        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        let symbol = selectedChain.assetSymbol(selectedChain.stakingAssetDenom())
         navigationItem.title = String(format: NSLocalizedString("str_coin_manage_stake", comment: ""), symbol)
         
         epochTitle.text = NSLocalizedString("str_current_epoch", comment: "")

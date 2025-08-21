@@ -208,10 +208,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
     
     
     func onCheckNameServices(_ userInput: String)  {
-        guard let prefix = toChain.bechAccountPrefix else {
-            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-            return
-        }
+        let prefix = toChain.bechAddressPrefix()
         
         view.isUserInteractionEnabled = false
         loadingView.isHidden = false

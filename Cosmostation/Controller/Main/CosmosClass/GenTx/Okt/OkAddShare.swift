@@ -50,7 +50,7 @@ class OkAddShare: BaseVC {
         
         baseAccount = BaseData.instance.baseAccount
         oktFetcher = selectedChain.getOktfetcher()
-        stakeDenom = selectedChain.stakeDenom
+        stakeDenom = selectedChain.stakingAssetDenom()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -129,7 +129,7 @@ class OkAddShare: BaseVC {
             gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "4"))
         }
         
-        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? selectedChain.coinSymbol) else { return }
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakingAssetDenom()) else { return }
         let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
         let feeValue = msPrice.multiplying(by: gasFee, withBehavior: handler6)
         feeAmountLabel?.attributedText = WDP.dpAmount(gasFee.stringValue, feeAmountLabel!.font, 18)

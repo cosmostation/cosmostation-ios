@@ -78,8 +78,8 @@ class NeutronFetcher: CosmosFetcher {
                     }
                 })
                 self.cosmosBaseFees.sort {
-                    if ($0.denom == chain.stakeDenom) { return true }
-                    if ($1.denom == chain.stakeDenom) { return false }
+                    if ($0.denom == chain.stakingAssetDenom()) { return true }
+                    if ($1.denom == chain.stakingAssetDenom()) { return false }
                     return false
                 }
                 let userDisplaytoken = BaseData.instance.getDisplayCw20s(id, self.chain.tag)
@@ -105,7 +105,7 @@ class NeutronFetcher: CosmosFetcher {
     
     
     override func denomValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        if (denom == chain.stakeDenom) {
+        if (denom == chain.stakingAssetDenom()) {
             return balanceValue(denom, usd).adding(neutronVestingValue(usd)).adding(neutronDepositedValue(usd)).adding(rewardValue(denom, usd))
                 .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(commissionValue(denom, usd))
         } else {
@@ -114,8 +114,8 @@ class NeutronFetcher: CosmosFetcher {
     }
     
     override func allStakingDenomAmount() -> NSDecimalNumber {
-        return balanceAmount(chain.stakeDenom!).adding(neutronVestingAmount()).adding(neutronDeposited).adding(delegationAmountSum())
-            .adding(unbondingAmountSum()).adding(rewardAmountSum(chain.stakeDenom!)).adding(commissionAmount(chain.stakeDenom!))
+        return balanceAmount(chain.stakingAssetDenom()).adding(neutronVestingAmount()).adding(neutronDeposited).adding(delegationAmountSum())
+            .adding(unbondingAmountSum()).adding(rewardAmountSum(chain.stakingAssetDenom())).adding(commissionAmount(chain.stakingAssetDenom()))
     }
     
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
@@ -137,7 +137,7 @@ extension NeutronFetcher {
     }
     
     func neutronVestingValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = neutronVestingAmount()
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
@@ -146,7 +146,7 @@ extension NeutronFetcher {
     }
     
     func neutronDepositedValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = neutronDeposited
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)

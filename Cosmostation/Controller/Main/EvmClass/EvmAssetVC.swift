@@ -241,7 +241,7 @@ extension EvmAssetVC: UITableViewDelegate, UITableViewDataSource {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
             transfer.sendAssetType = .EVM_COIN
             transfer.fromChain = selectedChain
-            transfer.toSendDenom = selectedChain.coinSymbol
+            transfer.toSendDenom = selectedChain.mainAssetSymbol()
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
             return
@@ -308,7 +308,7 @@ extension EvmAssetVC: UISearchBarDelegate {
             return symbol.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         
-        let symbol = selectedChain.coinSymbol
+        let symbol = selectedChain.mainAssetSymbol()
         if symbol.range(of: searchText, options: .caseInsensitive) != nil {
             containCoinSymbol = true
         } else {

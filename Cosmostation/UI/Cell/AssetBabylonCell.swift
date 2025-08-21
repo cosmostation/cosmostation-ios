@@ -81,7 +81,7 @@ class AssetBabylonCell: UITableViewCell {
         btcCoinImg.sd_setImage(with: btcImg, placeholderImage: UIImage(named: "tokenDefault"))
         btcStakeTitle.text = "Staked \(btcSymbol) Status"
         btcRewardTitle.text = "\(btcSymbol) Staking Reward"
-        let stakeDenom = baseChain.stakeDenom!
+        let stakeDenom = baseChain.stakingAssetDenom()
         if let cosmosFetcher = baseChain.getCosmosfetcher(),
            let babylonBtcFetcher = (baseChain as? ChainBabylon)?.getBabylonBtcFetcher(),
            let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
