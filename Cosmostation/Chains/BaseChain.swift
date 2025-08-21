@@ -28,7 +28,7 @@ class BaseChain {
     var chainIdCosmos: String?
     var bechAddress: String?
     var bechAccountPrefix = ""
-    var validatorPrefix: String?
+    var validatorPrefix = ""
     var bechOpAddress: String?
     var supportStaking = true
     var grpcHost = ""
@@ -103,7 +103,7 @@ class BaseChain {
         }
         
         if (supportCosmos && isStakeEnabled()) {
-            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, validatorPrefix)
+            bechOpAddress = KeyFac.getOpAddressFromAddress(bechAddress!, bechOpAddressPrefix())
         }
     }
     
