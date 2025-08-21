@@ -169,8 +169,8 @@ class EvmDelegate: BaseVC {
         selectedFeePosition = 1
         feeSegments.selectedSegmentIndex = selectedFeePosition
         feeSelectImg.image =  UIImage.init(named: selectedChain.coinLogo)
-        feeSelectLabel.text = selectedChain.coinSymbol
-        feeDenomLabel.text = selectedChain.coinSymbol
+        feeSelectLabel.text = selectedChain.mainAssetSymbol()
+        feeDenomLabel.text = selectedChain.mainAssetSymbol()
         
         let feePrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
         let totalGasPrice = evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1

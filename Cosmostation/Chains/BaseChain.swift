@@ -56,9 +56,8 @@ class BaseChain {
         return ""
     }
     var evmAddress: String?
-    var coinSymbol = ""
-
     var evmRpcURL = ""
+    var coinSymbol = ""
     
     
     //FOR BTC or SUI or majorChains
@@ -397,6 +396,10 @@ extension BaseChain {
     
     func getChainListParam() -> JSON {
         return getChainParam()["params"]["chainlist_params"]
+    }
+    
+    func mainAssetSymbol() -> String {
+        return getChainListParam()["main_asset_symbol"].string ?? coinSymbol
     }
     
     func isSendEnabled() -> Bool {

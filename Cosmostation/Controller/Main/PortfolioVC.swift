@@ -236,7 +236,7 @@ class PortfolioVC: BaseVC {
             if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? "") {
                 symbol = msAsset.symbol ?? ""
             } else {
-                symbol = chain.coinSymbol
+                symbol = chain.mainAssetSymbol()
             }
             return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil || symbol.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
@@ -245,7 +245,7 @@ class PortfolioVC: BaseVC {
             if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? "") {
                 symbol = msAsset.symbol ?? ""
             } else {
-                symbol = chain.coinSymbol
+                symbol = chain.mainAssetSymbol()
             }
             return chain.name.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil || symbol.range(of: searchBar!.text!, options: .caseInsensitive, range: nil, locale: nil) != nil
         }

@@ -853,8 +853,8 @@ extension SwapStartVC {
         targetInputAssets.sort {
             if ($0.denom == inputChain.stakeDenom) { return true }
             if ($1.denom == inputChain.stakeDenom) { return false }
-            if ($0.symbol == inputChain.coinSymbol) { return true }
-            if ($1.symbol == inputChain.coinSymbol) { return false }
+            if ($0.symbol == inputChain.mainAssetSymbol()) { return true }
+            if ($1.symbol == inputChain.mainAssetSymbol()) { return false }
             if ($0.type.rawValue < $1.type.rawValue ) { return true }
             if ($0.type.rawValue > $1.type.rawValue ) { return false }
             return $0.symbol < $1.symbol
@@ -903,8 +903,8 @@ extension SwapStartVC {
         targetOutputAssets.sort {
             if ($0.denom == outputChain.stakeDenom) { return true }
             if ($1.denom == outputChain.stakeDenom) { return false }
-            if ($0.symbol == outputChain.coinSymbol) { return true }
-            if ($1.symbol == outputChain.coinSymbol) { return false }
+            if ($0.symbol == outputChain.mainAssetSymbol()) { return true }
+            if ($1.symbol == outputChain.mainAssetSymbol()) { return false }
             if ($0.type.rawValue < $1.type.rawValue ) { return true }
             if ($0.type.rawValue > $1.type.rawValue ) { return false }
             return $0.symbol < $1.symbol
@@ -970,8 +970,8 @@ extension SwapStartVC {
         targetInputAssets.sort {
             if ($0.denom == inputChain.stakeDenom) { return true }
             if ($1.denom == inputChain.stakeDenom) { return false }
-            if ($0.symbol == inputChain.coinSymbol) { return true }
-            if ($1.symbol == inputChain.coinSymbol) { return false }
+            if ($0.symbol == inputChain.mainAssetSymbol()) { return true }
+            if ($1.symbol == inputChain.mainAssetSymbol()) { return false }
             if ($0.value.decimalValue > $1.value.decimalValue) { return true }
             if ($0.value.decimalValue < $1.value.decimalValue) { return false }
             if ($0.balance.decimalValue > $1.balance.decimalValue) { return true }
@@ -1002,8 +1002,8 @@ extension SwapStartVC {
         targetOutputAssets.sort {
             if ($0.denom == outputChain.stakeDenom) { return true }
             if ($1.denom == outputChain.stakeDenom) { return false }
-            if ($0.symbol == outputChain.coinSymbol) { return true }
-            if ($1.symbol == outputChain.coinSymbol) { return false }
+            if ($0.symbol == outputChain.mainAssetSymbol()) { return true }
+            if ($1.symbol == outputChain.mainAssetSymbol()) { return false }
             if ($0.value.decimalValue > $1.value.decimalValue) { return true }
             if ($0.value.decimalValue < $1.value.decimalValue) { return false }
             if ($0.balance.decimalValue > $1.balance.decimalValue) { return true }

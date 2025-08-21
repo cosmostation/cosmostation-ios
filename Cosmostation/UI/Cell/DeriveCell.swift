@@ -139,24 +139,24 @@ class DeriveCell: UITableViewCell {
             
             if let okFetcher = (chain as? ChainOktEVM)?.getOktfetcher() {
                 let dpAmount = okFetcher.oktBalanceAmount(chain.stakeDenom!)
-                denomLabel.text = chain.coinSymbol
+                denomLabel.text = chain.mainAssetSymbol()
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
                 
             } else if let suiFetcher = (chain as? ChainSui)?.getSuiFetcher() {
                 let dpAmount = suiFetcher.balanceAmount(SUI_MAIN_DENOM).multiplying(byPowerOf10: -9, withBehavior: handler18Down)
-                denomLabel.text = chain.coinSymbol
+                denomLabel.text = chain.mainAssetSymbol()
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
                 
             } else if let iotaFetcher = (chain as? ChainIota)?.getIotaFetcher() {
                 let dpAmount = iotaFetcher.balanceAmount(IOTA_MAIN_DENOM).multiplying(byPowerOf10: -9, withBehavior: handler18Down)
-                denomLabel.text = chain.coinSymbol
+                denomLabel.text = chain.mainAssetSymbol()
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
                 
             } else if let btcFetcher = (chain as? ChainBitCoin86)?.getBtcFetcher() {
                 let avaibaleAmount = btcFetcher.btcBalances.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
                 let pendingInputAmount = btcFetcher.btcPendingInput.multiplying(byPowerOf10: -8, withBehavior: handler8Down)
                 let totalAmount = avaibaleAmount.adding(pendingInputAmount)
-                denomLabel.text = chain.coinSymbol
+                denomLabel.text = chain.mainAssetSymbol()
                 amountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 8)
                 
             } else if let gnoFetcher = (chain as? ChainGno)?.getGnoFetcher() {
@@ -168,7 +168,7 @@ class DeriveCell: UITableViewCell {
 
             } else if (chain.supportEvm) {
                 let dpAmount = chain.getEvmfetcher()?.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18Down) ?? NSDecimalNumber.zero
-                denomLabel.text = chain.coinSymbol
+                denomLabel.text = chain.mainAssetSymbol()
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
                 
             } else if (chain.supportCosmos) {

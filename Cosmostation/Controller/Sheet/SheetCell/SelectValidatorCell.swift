@@ -269,7 +269,7 @@ class SelectValidatorCell: UITableViewCell {
                 inactiveTag.isHidden = false
             }
             
-            if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.coinSymbol) {
+            if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.mainAssetSymbol()) {
                 let stakingAmount = NSDecimalNumber(integerLiteral: delegation.amount).multiplying(byPowerOf10: -msAsset.decimals!)
                 stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 8)
             }

@@ -89,7 +89,7 @@ class BtcStakingInfoVC: BaseVC {
     }
     
     override func setLocalizedString() {
-        navigationItem.title = String(format: NSLocalizedString("str_coin_manage_stake", comment: ""), selectedChain.coinSymbol)
+        navigationItem.title = String(format: NSLocalizedString("str_coin_manage_stake", comment: ""), selectedChain.mainAssetSymbol())
         stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
     }
     
@@ -185,7 +185,7 @@ class BtcStakingInfoVC: BaseVC {
         if let btcFetcher = selectedChain.getBtcFetcher(),
            let minStakingValue = selectedChain.getBabylonBtcFetcher()?.networkInfo.last?["min_staking_value_sat"].uInt64Value,
            btcFetcher.btcBalances.compare(NSDecimalNumber(value: minStakingValue)).rawValue <= 0 {
-            onShowToast("Staking amount must be at least \(NSDecimalNumber(value: minStakingValue).multiplying(byPowerOf10: -8)) \(selectedChain.coinSymbol).")
+            onShowToast("Staking amount must be at least \(NSDecimalNumber(value: minStakingValue).multiplying(byPowerOf10: -8)) \(selectedChain.mainAssetSymbol()).")
             return
         }
         

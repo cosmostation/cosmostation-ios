@@ -43,7 +43,7 @@ class AdditionalFeeSheet: BaseVC {
     }
     
     override func setLocalizedString() {
-        let bitcoinSymbol = bitcoin.coinSymbol
+        let bitcoinSymbol = bitcoin.mainAssetSymbol()
         let babylonSymbol = babylon.assetSymbol(babylon.stakeDenom ?? "")
         let address = babylon.bechAddress!.ellipsizeMiddle()
 

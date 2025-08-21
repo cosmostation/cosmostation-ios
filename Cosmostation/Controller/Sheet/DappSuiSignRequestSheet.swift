@@ -108,14 +108,14 @@ class DappSuiSignRequestSheet: BaseVC {
     }
 
     func onInitFeeView() {
-        feeImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? selectedChain.coinSymbol), placeholderImage: UIImage(named: "tokenDefault"))
-        feeLabel.text = selectedChain.coinSymbol
-        feeDenomLabel.text = selectedChain.coinSymbol
+        feeImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? selectedChain.mainAssetSymbol()), placeholderImage: UIImage(named: "tokenDefault"))
+        feeLabel.text = selectedChain.mainAssetSymbol()
+        feeDenomLabel.text = selectedChain.mainAssetSymbol()
         onUpdateFeeView()
     }
     
     func onUpdateFeeView() {
-        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol) else { return }
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.mainAssetSymbol()) else { return }
         let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
         let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
         let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)

@@ -133,7 +133,7 @@ class OktFetcher: CosmosFetcher {
     }
     
     func oktDepositValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? chain.coinSymbol) else { return .zero }
+        guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? chain.mainAssetSymbol()) else { return .zero }
         let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
         let amount = oktDepositAmount()
         return msPrice.multiplying(by: amount, withBehavior: handler6)
@@ -144,7 +144,7 @@ class OktFetcher: CosmosFetcher {
     }
     
     func oktWithdrawValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? chain.coinSymbol) else { return .zero }
+        guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? chain.mainAssetSymbol()) else { return .zero }
         let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
         let amount = oktWithdrawAmount()
         return msPrice.multiplying(by: amount, withBehavior: handler6)

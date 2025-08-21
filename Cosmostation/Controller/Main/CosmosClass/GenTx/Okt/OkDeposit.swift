@@ -109,7 +109,7 @@ class OkDeposit: BaseVC {
             toDepositAmountLabel.isHidden = false
             toDepositDenomLabel.isHidden = false
             
-            guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? selectedChain.coinSymbol) else { return }
+            guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? selectedChain.mainAssetSymbol()) else { return }
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let toSendValue = msPrice.multiplying(by: toDepositAmount, withBehavior: handler6)
             WDP.dpValue(toSendValue, toDepositCurrencyLabel, toDepositValueLabel)
@@ -156,7 +156,7 @@ class OkDeposit: BaseVC {
             gasAmount = gasAmount.multiplying(by: NSDecimalNumber(string: "4"))
         }
         
-        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? selectedChain.coinSymbol) else { return }
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? selectedChain.mainAssetSymbol()) else { return }
         let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
         let feeValue = msPrice.multiplying(by: gasFee, withBehavior: handler6)
         feeAmountLabel?.attributedText = WDP.dpAmount(gasFee.stringValue, feeAmountLabel!.font, 18)
