@@ -851,8 +851,8 @@ extension SwapStartVC {
         }
         
         targetInputAssets.sort {
-            if ($0.denom == inputChain.stakeDenom) { return true }
-            if ($1.denom == inputChain.stakeDenom) { return false }
+            if ($0.denom == inputChain.stakingAssetDenom()) { return true }
+            if ($1.denom == inputChain.stakingAssetDenom()) { return false }
             if ($0.symbol == inputChain.mainAssetSymbol()) { return true }
             if ($1.symbol == inputChain.mainAssetSymbol()) { return false }
             if ($0.type.rawValue < $1.type.rawValue ) { return true }
@@ -901,8 +901,8 @@ extension SwapStartVC {
         }
         
         targetOutputAssets.sort {
-            if ($0.denom == outputChain.stakeDenom) { return true }
-            if ($1.denom == outputChain.stakeDenom) { return false }
+            if ($0.denom == outputChain.stakingAssetDenom()) { return true }
+            if ($1.denom == outputChain.stakingAssetDenom()) { return false }
             if ($0.symbol == outputChain.mainAssetSymbol()) { return true }
             if ($1.symbol == outputChain.mainAssetSymbol()) { return false }
             if ($0.type.rawValue < $1.type.rawValue ) { return true }
@@ -968,8 +968,8 @@ extension SwapStartVC {
             targetInputAssets[index].value = price.multiplying(by: dpInputBalance, withBehavior: handler6)
         }
         targetInputAssets.sort {
-            if ($0.denom == inputChain.stakeDenom) { return true }
-            if ($1.denom == inputChain.stakeDenom) { return false }
+            if ($0.denom == inputChain.stakingAssetDenom()) { return true }
+            if ($1.denom == inputChain.stakingAssetDenom()) { return false }
             if ($0.symbol == inputChain.mainAssetSymbol()) { return true }
             if ($1.symbol == inputChain.mainAssetSymbol()) { return false }
             if ($0.value.decimalValue > $1.value.decimalValue) { return true }
@@ -1000,8 +1000,8 @@ extension SwapStartVC {
             targetOutputAssets[index].value = price.multiplying(by: dpInputBalance, withBehavior: handler6)
         }
         targetOutputAssets.sort {
-            if ($0.denom == outputChain.stakeDenom) { return true }
-            if ($1.denom == outputChain.stakeDenom) { return false }
+            if ($0.denom == outputChain.stakingAssetDenom()) { return true }
+            if ($1.denom == outputChain.stakingAssetDenom()) { return false }
             if ($0.symbol == outputChain.mainAssetSymbol()) { return true }
             if ($1.symbol == outputChain.mainAssetSymbol()) { return false }
             if ($0.value.decimalValue > $1.value.decimalValue) { return true }

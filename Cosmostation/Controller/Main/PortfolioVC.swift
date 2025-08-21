@@ -233,7 +233,7 @@ class PortfolioVC: BaseVC {
         
         searchMainnets = searchBar!.text!.isEmpty ? mainnetChains : mainnetChains.filter { chain in
             var symbol = ""
-            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? "") {
+            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
                 symbol = msAsset.symbol ?? ""
             } else {
                 symbol = chain.mainAssetSymbol()
@@ -242,7 +242,7 @@ class PortfolioVC: BaseVC {
         }
         searchTestnets = searchBar!.text!.isEmpty ? testnetChains : testnetChains.filter { chain in
             var symbol = ""
-            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? "") {
+            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
                 symbol = msAsset.symbol ?? ""
             } else {
                 symbol = chain.mainAssetSymbol()

@@ -85,7 +85,7 @@ class CosmosClaimCommission: BaseVC {
         validatorsLabel.text = selfValidator?.description_p.moniker
         
         
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         var mainCoin: Cosmos_Base_V1beta1_Coin!
         if let mainCommi = cosmosFetcher.cosmosCommissions.filter({ $0.denom == stakeDenom }).first {
             mainCoin = mainCommi
@@ -103,9 +103,9 @@ class CosmosClaimCommission: BaseVC {
         } else {
             commissionCntLabel.isHidden = true
             titleCoinImage.isHidden = false
-            let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+            let symbol = selectedChain.assetSymbol(selectedChain.stakingAssetDenom())
             titleLabel.text = String(format: NSLocalizedString("title_coin_commission_claim", comment: ""), symbol)
-            titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+            titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom()), placeholderImage: UIImage(named: "tokenDefault"))
         }
     }
     

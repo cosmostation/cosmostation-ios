@@ -92,7 +92,7 @@ class IotaStake: BaseVC {
         feeSegments.removeAllSegments()
         feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
         feeSegments.selectedSegmentIndex = 0
-        feeSelectImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? selectedChain.mainAssetSymbol()), placeholderImage: UIImage(named: "tokenDefault"))
+        feeSelectImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom()), placeholderImage: UIImage(named: "tokenDefault"))
         
         feeSelectLabel.text = selectedChain.mainAssetSymbol()
         feeDenomLabel.text = selectedChain.mainAssetSymbol()
@@ -106,7 +106,7 @@ class IotaStake: BaseVC {
         
         availableAmount = iotaFetcher.balanceAmount(IOTA_MAIN_DENOM).subtracting(iotaFeeBudget)
         
-        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom()), placeholderImage: UIImage(named: "tokenDefault"))
         
         loadingView.isHidden = true
         titleLabel.isHidden = false

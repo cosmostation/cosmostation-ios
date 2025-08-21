@@ -73,7 +73,7 @@ class GnoFetcher {
     }
     
     func allStakingDenomAmount() -> NSDecimalNumber {
-        return balanceAmount(chain.stakeDenom!)
+        return balanceAmount(chain.stakingAssetDenom())
     }
 
     func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {

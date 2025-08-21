@@ -44,7 +44,7 @@ class AdditionalFeeSheet: BaseVC {
     
     override func setLocalizedString() {
         let bitcoinSymbol = bitcoin.mainAssetSymbol()
-        let babylonSymbol = babylon.assetSymbol(babylon.stakeDenom ?? "")
+        let babylonSymbol = babylon.assetSymbol(babylon.stakingAssetDenom())
         let address = babylon.bechAddress!.ellipsizeMiddle()
 
         titleLabel.text = String(format: NSLocalizedString("title_btc_staking_additional_fee", comment: ""), babylonSymbol)
@@ -83,7 +83,7 @@ class AdditionalFeeSheet: BaseVC {
             WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
             
-            let stakeDenom = babylon.stakeDenom!
+            let stakeDenom = babylon.stakingAssetDenom()
             let balanceAmount = cosmosFetcher.balanceAmount(stakeDenom)
             let vestingAmount = cosmosFetcher.vestingAmount(stakeDenom)
             

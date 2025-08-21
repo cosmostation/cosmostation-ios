@@ -317,7 +317,7 @@ class CommonTransfer: BaseVC {
             symbol = fromChain.assetSymbol(toSendDenom)
             sendableAmount = suiFetcher.balanceAmount(toSendDenom)
             
-            if (fromChain.stakeDenom == toSendDenom) {
+            if (fromChain.stakingAssetDenom() == toSendDenom) {
                 sendableAmount = sendableAmount.subtracting(suiFeeBudget)
             }
             
@@ -327,7 +327,7 @@ class CommonTransfer: BaseVC {
             symbol = fromChain.assetSymbol(toSendDenom)
             sendableAmount = iotaFetcher.balanceAmount(toSendDenom)
             
-            if (fromChain.stakeDenom == toSendDenom) {
+            if (fromChain.stakingAssetDenom() == toSendDenom) {
                 sendableAmount = sendableAmount.subtracting(iotaFeeBudget)
             }
             

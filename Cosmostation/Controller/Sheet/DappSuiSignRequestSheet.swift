@@ -108,7 +108,7 @@ class DappSuiSignRequestSheet: BaseVC {
     }
 
     func onInitFeeView() {
-        feeImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? selectedChain.mainAssetSymbol()), placeholderImage: UIImage(named: "tokenDefault"))
+        feeImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom()), placeholderImage: UIImage(named: "tokenDefault"))
         feeLabel.text = selectedChain.mainAssetSymbol()
         feeDenomLabel.text = selectedChain.mainAssetSymbol()
         onUpdateFeeView()

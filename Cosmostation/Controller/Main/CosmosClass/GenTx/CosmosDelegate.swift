@@ -84,7 +84,7 @@ class CosmosDelegate: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom()), placeholderImage: UIImage(named: "tokenDefault"))
         
         validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
         stakingAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
@@ -132,7 +132,7 @@ class CosmosDelegate: BaseVC {
     }
     
     override func setLocalizedString() {
-        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        let symbol = selectedChain.assetSymbol(selectedChain.stakingAssetDenom())
         titleLabel.text = String(format: NSLocalizedString("title_coin_stake", comment: ""), symbol)
         stakingAmountTitle.text = NSLocalizedString("str_delegate_amount", comment: "")
         stakingAmountHintLabel.text = NSLocalizedString("msg_tap_for_add_amount", comment: "")
@@ -208,7 +208,7 @@ class CosmosDelegate: BaseVC {
     @objc func onClickAmount() {
         let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
-        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
+        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakingAssetDenom())
         amountSheet.availableAmount = availableAmount
         if let existedAmount = toCoin?.amount {
             amountSheet.existedAmount = NSDecimalNumber(string: existedAmount)
@@ -219,7 +219,7 @@ class CosmosDelegate: BaseVC {
     }
     
     func onUpdateAmountView(_ amount: String) {
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = stakeDenom; $0.amount = amount }
 
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
@@ -307,7 +307,7 @@ class CosmosDelegate: BaseVC {
             WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
             
-            if (txFee.amount[0].denom == selectedChain.stakeDenom) {
+            if (txFee.amount[0].denom == selectedChain.stakingAssetDenom()) {
                 let feeAmount = NSDecimalNumber.init(string: txFee.amount[0].amount)
                 if (feeAmount.compare(delegatableAmount).rawValue > 0) {
                     //ERROR short balance!!

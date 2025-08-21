@@ -104,11 +104,11 @@ class OktFetcher: CosmosFetcher {
     }
     
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        return oktBalanceValue(chain.stakeDenom!, usd).adding(oktDepositValue(usd)).adding(oktWithdrawValue(usd))
+        return oktBalanceValue(chain.stakingAssetDenom(), usd).adding(oktDepositValue(usd)).adding(oktWithdrawValue(usd))
     }
     
     func oktAllStakingDenomAmount() -> NSDecimalNumber {
-        return oktBalanceAmount(chain.stakeDenom!).adding(oktDepositAmount()).adding(oktWithdrawAmount())
+        return oktBalanceAmount(chain.stakingAssetDenom()).adding(oktDepositAmount()).adding(oktWithdrawAmount())
     }
     
     func oktBalanceAmount(_ denom: String) -> NSDecimalNumber {
@@ -119,7 +119,7 @@ class OktFetcher: CosmosFetcher {
     }
     
     func oktBalanceValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        if (denom == chain.stakeDenom) {
+        if (denom == chain.stakingAssetDenom()) {
             guard let msAsset = BaseData.instance.getAsset(chain.apiName, denom) else { return .zero }
             let amount = oktBalanceAmount(denom)
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
@@ -133,7 +133,7 @@ class OktFetcher: CosmosFetcher {
     }
     
     func oktDepositValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? chain.mainAssetSymbol()) else { return .zero }
+        guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) else { return .zero }
         let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
         let amount = oktDepositAmount()
         return msPrice.multiplying(by: amount, withBehavior: handler6)
@@ -144,7 +144,7 @@ class OktFetcher: CosmosFetcher {
     }
     
     func oktWithdrawValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? chain.mainAssetSymbol()) else { return .zero }
+        guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) else { return .zero }
         let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
         let amount = oktWithdrawAmount()
         return msPrice.multiplying(by: amount, withBehavior: handler6)

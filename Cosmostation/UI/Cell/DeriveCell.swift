@@ -138,7 +138,7 @@ class DeriveCell: UITableViewCell {
             loadingLabel.isHidden = true
             
             if let okFetcher = (chain as? ChainOktEVM)?.getOktfetcher() {
-                let dpAmount = okFetcher.oktBalanceAmount(chain.stakeDenom!)
+                let dpAmount = okFetcher.oktBalanceAmount(chain.stakingAssetDenom())
                 denomLabel.text = chain.mainAssetSymbol()
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
                 
@@ -160,7 +160,7 @@ class DeriveCell: UITableViewCell {
                 amountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 8)
                 
             } else if let gnoFetcher = (chain as? ChainGno)?.getGnoFetcher() {
-                let stakeDenom = chain.stakeDenom!
+                let stakeDenom = chain.stakingAssetDenom()
                 let availableAmount = gnoFetcher.balanceAmount(stakeDenom)
                 if let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
                     WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)
@@ -172,7 +172,7 @@ class DeriveCell: UITableViewCell {
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 18)
                 
             } else if (chain.supportCosmos) {
-                let stakeDenom = chain.stakeDenom!
+                let stakeDenom = chain.stakingAssetDenom()
                 let availableAmount = chain.getCosmosfetcher()?.balanceAmount(stakeDenom) ?? NSDecimalNumber.zero
                 if let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
                     WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)

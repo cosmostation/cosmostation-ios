@@ -125,7 +125,7 @@ class EvmRedelegate: BaseVC {
             fromInactiveTag.isHidden = baseChain.cosmosFetcher!.isActiveValidator(fromValidator)
         }
         
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
             let staked = selectedChain.cosmosDelegations.filter { $0.delegation.validatorAddress == fromValidator?.operatorAddress }.first?.balance.amount
             availableAmount = NSDecimalNumber(string: staked)
@@ -161,7 +161,7 @@ class EvmRedelegate: BaseVC {
     @objc func onClickAmount() {
         let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
-        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
+        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakingAssetDenom())
         amountSheet.availableAmount = availableAmount
         if let redelegateAmount = redelegateAmount {
             amountSheet.existedAmount = redelegateAmount
@@ -172,7 +172,7 @@ class EvmRedelegate: BaseVC {
     }
     
     func onUpdateAmountView(_ amount: String) {
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
             redelegateAmount = NSDecimalNumber(string: amount)
             WDP.dpCoin(msAsset, redelegateAmount!, nil, amountDenomLabel, amountLabel, msAsset.decimals)

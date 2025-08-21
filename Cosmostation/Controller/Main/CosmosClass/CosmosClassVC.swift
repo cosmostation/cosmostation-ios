@@ -306,7 +306,7 @@ class CosmosClassVC: BaseVC {
                 self.onClaimRewardTx()
             }
             
-            let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+            let symbol = selectedChain.assetSymbol(selectedChain.stakingAssetDenom())
             mainFab.addItem(title: "\(symbol) Manage Stake", image: UIImage(named: "iconFabStake")) { _ in
                 self.onStakeInfo()
             }
@@ -467,8 +467,8 @@ extension CosmosClassVC {
             onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return
         }
-        if comsosFetcher.rewardAmountSum(babylonChain.stakeDenom!)
-            .adding(NSDecimalNumber(string: babylonBtcFetcher.btcStakedRewards.filter({ $0.denom == babylonChain.stakeDenom }).first?.amount ?? "0"))
+        if comsosFetcher.rewardAmountSum(babylonChain.stakingAssetDenom())
+            .adding(NSDecimalNumber(string: babylonBtcFetcher.btcStakedRewards.filter({ $0.denom == babylonChain.stakingAssetDenom() }).first?.amount ?? "0"))
             .multiplying(byPowerOf10: -6)
             .compare(0.1).rawValue < 0 {
             onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))

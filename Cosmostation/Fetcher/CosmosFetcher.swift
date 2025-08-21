@@ -111,8 +111,8 @@ class CosmosFetcher {
                     }
                 })
                 self.cosmosBaseFees.sort {
-                    if ($0.denom == chain.stakeDenom) { return true }
-                    if ($1.denom == chain.stakeDenom) { return false }
+                    if ($0.denom == chain.stakingAssetDenom()) { return true }
+                    if ($1.denom == chain.stakingAssetDenom()) { return false }
                     return false
                 }
                 let userDisplaytoken = BaseData.instance.getDisplayCw20s(id, self.chain.tag)
@@ -182,7 +182,7 @@ class CosmosFetcher {
     }
     
     func denomValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        if (denom == chain.stakeDenom) {
+        if (denom == chain.stakingAssetDenom()) {
             return balanceValue(denom, usd).adding(rewardValue(denom, usd))
                 .adding(delegationValueSum(usd)).adding(unbondingValueSum(usd)).adding(commissionValue(denom, usd))
             
@@ -193,8 +193,8 @@ class CosmosFetcher {
     }
     
     func allStakingDenomAmount() -> NSDecimalNumber {
-        return balanceAmount(chain.stakeDenom!).adding(delegationAmountSum())
-            .adding(unbondingAmountSum()).adding(rewardAmountSum(chain.stakeDenom!)).adding(commissionAmount(chain.stakeDenom!))
+        return balanceAmount(chain.stakingAssetDenom()).adding(delegationAmountSum())
+            .adding(unbondingAmountSum()).adding(rewardAmountSum(chain.stakingAssetDenom())).adding(commissionAmount(chain.stakingAssetDenom()))
     }
     
     func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
@@ -327,7 +327,7 @@ class CosmosFetcher {
     }
     
     func delegationValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
-        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = delegationAmountSum()
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
@@ -346,7 +346,7 @@ class CosmosFetcher {
     }
     
     func unbondingValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
-        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = unbondingAmountSum()
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
@@ -407,7 +407,7 @@ class CosmosFetcher {
     
     func rewardOtherDenomTypeCnts() -> Int {
         var denoms = [String]()
-        rewardAllCoins().filter { $0.denom != chain.stakeDenom }.forEach { reward in
+        rewardAllCoins().filter { $0.denom != chain.stakingAssetDenom() }.forEach { reward in
             if (denoms.contains(reward.denom) == false) {
                 denoms.append(reward.denom)
             }
@@ -476,8 +476,8 @@ class CosmosFetcher {
     func compoundableRewards() -> [Cosmos_Distribution_V1beta1_DelegationDelegatorReward] {
         var result = [Cosmos_Distribution_V1beta1_DelegationDelegatorReward]()
         cosmosRewards?.forEach { reward in
-            if let rewardAmount = reward.reward.filter({ $0.denom == chain.stakeDenom }).first?.getAmount(),
-               let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
+            if let rewardAmount = reward.reward.filter({ $0.denom == chain.stakingAssetDenom() }).first?.getAmount(),
+               let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
                 let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, true)
                 let value = msPrice.multiplying(by: rewardAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
                 if (value.compare(NSDecimalNumber.init(string: "0.1")).rawValue >= 0) {
@@ -510,11 +510,11 @@ class CosmosFetcher {
     }
     
     func commissionOtherDenoms() -> Int {
-        return cosmosCommissions.filter { $0.denom != chain.stakeDenom }.count
+        return cosmosCommissions.filter { $0.denom != chain.stakingAssetDenom() }.count
     }
     
     func delegatableAmount() -> NSDecimalNumber {
-        return balanceAmount(chain.stakeDenom!)
+        return balanceAmount(chain.stakingAssetDenom())
     }
     
 }
@@ -967,8 +967,8 @@ extension CosmosFetcher {
                     }
                 })
                 self.cosmosBaseFees.sort {
-                    if ($0.denom == chain.stakeDenom) { return true }
-                    if ($1.denom == chain.stakeDenom) { return false }
+                    if ($0.denom == chain.stakingAssetDenom()) { return true }
+                    if ($1.denom == chain.stakingAssetDenom()) { return false }
                     return false
                 }
             }
@@ -983,8 +983,8 @@ extension CosmosFetcher {
                     }
                 }
                 self.cosmosBaseFees.sort {
-                    if ($0.denom == chain.stakeDenom) { return true }
-                    if ($1.denom == chain.stakeDenom) { return false }
+                    if ($0.denom == chain.stakingAssetDenom()) { return true }
+                    if ($1.denom == chain.stakingAssetDenom()) { return false }
                     return false
                 }
             }

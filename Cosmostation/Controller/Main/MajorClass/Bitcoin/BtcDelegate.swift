@@ -167,7 +167,7 @@ class BtcDelegate: BaseVC {
     
     func onUpdateRewardView() {
         rewardView.isHidden = false
-        let coinSymbol = chainBabylon.assetSymbol(chainBabylon.stakeDenom ?? "")
+        let coinSymbol = chainBabylon.assetSymbol(chainBabylon.stakingAssetDenom())
         rewardInfoLabel.text = "$\(coinSymbol) Reward Distribution"
         rewardAddressLabel.text = chainBabylon.bechAddress
         rewardDescriptionLabel.text = "Rewards are paid in $\(coinSymbol) to your BABYLON address."

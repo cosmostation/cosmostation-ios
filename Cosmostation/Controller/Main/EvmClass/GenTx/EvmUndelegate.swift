@@ -119,7 +119,7 @@ class EvmUndelegate: BaseVC {
             inactiveTag.isHidden = baseChain.cosmosFetcher!.isActiveValidator(fromValidator)
         }
         
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
             let staked = selectedChain.cosmosDelegations.filter { $0.delegation.validatorAddress == fromValidator?.operatorAddress }.first?.balance.amount
             let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
@@ -131,7 +131,7 @@ class EvmUndelegate: BaseVC {
     @objc func onClickAmount() {
         let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
-        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
+        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakingAssetDenom())
         amountSheet.availableAmount = availableAmount
         if let undelegateAmount = undelegateAmount {
             amountSheet.existedAmount = undelegateAmount
@@ -142,7 +142,7 @@ class EvmUndelegate: BaseVC {
     }
     
     func onUpdateAmountView(_ amount: String) {
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
             undelegateAmount = NSDecimalNumber(string: amount)
             WDP.dpCoin(msAsset, undelegateAmount!, nil, unStakingDenomLabel, unStakingAmountLabel, msAsset.decimals)

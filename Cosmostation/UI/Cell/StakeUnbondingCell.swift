@@ -44,8 +44,7 @@ class StakeUnbondingCell: UITableViewCell {
             inactiveTag.isHidden = cosmosFetcher.isActiveValidator(validator)
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.stakingAssetDenom()) {
             let unbondingAmount = NSDecimalNumber(string: unbonding.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
             unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
             
@@ -66,8 +65,8 @@ class StakeUnbondingCell: UITableViewCell {
             inactiveTag.isHidden = fetcher.isActiveValidator(validator)
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        let stakeDenom = baseChain.stakingAssetDenom()
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
             let unbondingAmount = NSDecimalNumber(string: unbonding.entry.balance.filter({ $0.denom == stakeDenom }).first?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
             unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
             
@@ -88,8 +87,7 @@ class StakeUnbondingCell: UITableViewCell {
             inactiveTag.isHidden = fetcher.isActiveValidator(validator)
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.stakingAssetDenom()) {
             let unbondingAmount = NSDecimalNumber(string: unbonding.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
             unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
             
@@ -110,8 +108,7 @@ class StakeUnbondingCell: UITableViewCell {
             inactiveTag.isHidden = cosmosFetcher.isActiveValidator(validator)
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom),
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.stakingAssetDenom()),
            let fetcher = (baseChain as? ChainBabylon)?.getBabylonFetcher() {
             let unbondingAmount = NSDecimalNumber(string: unbonding.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
             unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)

@@ -91,7 +91,7 @@ class EvmCancelUnbonding: BaseVC {
             validatorsLabel.text = validator.description_p.moniker
         }
         
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
             let unbondingAmount = NSDecimalNumber(string: unbondingEntry.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
             amountLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, amountLabel!.font, msAsset.decimals!)

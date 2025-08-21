@@ -70,7 +70,7 @@ class CosmosStakingInfoVC: BaseVC {
     }
     
     override func setLocalizedString() {
-        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        let symbol = selectedChain.assetSymbol(selectedChain.stakingAssetDenom())
         navigationItem.title = String(format: NSLocalizedString("str_coin_manage_stake", comment: ""), symbol)
         stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
     }
@@ -145,7 +145,7 @@ class CosmosStakingInfoVC: BaseVC {
                 initiaDelegations.sort {
                     if ($0.delegation.validatorAddress == cosmostationValAddress) { return true }
                     if ($1.delegation.validatorAddress == cosmostationValAddress) { return false }
-                    return Double($0.balance.filter({$0.denom == selectedChain.stakeDenom}).first!.amount)! > Double($1.balance.filter({$0.denom == selectedChain.stakeDenom}).first!.amount)!
+                    return Double($0.balance.filter({$0.denom == selectedChain.stakingAssetDenom()}).first!.amount)! > Double($1.balance.filter({$0.denom == selectedChain.stakingAssetDenom()}).first!.amount)!
 
                 }
                 initiaUnbondings.sort {
