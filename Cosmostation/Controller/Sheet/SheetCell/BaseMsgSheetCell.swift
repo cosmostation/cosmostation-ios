@@ -140,7 +140,7 @@ class BaseMsgSheetCell: UITableViewCell {
 
             
         } else {
-            guard let prefix = targetChain.bechAccountPrefix else { return }
+            let prefix = targetChain.bechAddressPrefix()
             titleLabel.text = "Send to COSMOS Type Address"
             descriptionLabel.textColor = .color03
             let fullText = "Use this option for ‘\(prefix)1...’ address or IBC Send"

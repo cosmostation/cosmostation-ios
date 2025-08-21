@@ -27,7 +27,7 @@ class BaseChain {
     var cosmosEndPointType: CosmosEndPointType = .Unknown
     var chainIdCosmos: String?
     var bechAddress: String?
-    var bechAccountPrefix: String?
+    var bechAccountPrefix = ""
     var validatorPrefix: String?
     var bechOpAddress: String?
     var supportStaking = true
@@ -93,12 +93,12 @@ class BaseChain {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         if (accountKeyType.pubkeyType == .COSMOS_Secp256k1) {
-            bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAccountPrefix)
+            bechAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, bechAddressPrefix())
             
         } else {
             evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
             if (supportCosmos) {
-                bechAddress = KeyFac.convertEvmToBech32(evmAddress!, bechAccountPrefix!)
+                bechAddress = KeyFac.convertEvmToBech32(evmAddress!, bechAddressPrefix())
             }
         }
         
@@ -405,6 +405,14 @@ extension BaseChain {
     
     func stakingAssetDenom() -> String {
         return getChainListParam()["staking_asset_denom"].string ?? stakeDenom
+    }
+    
+    func bechAddressPrefix() -> String {
+        return getChainListParam()["bech_account_prefix"].string ?? bechAccountPrefix
+    }
+    
+    func bechOpAddressPrefix() -> String? {
+        return getChainListParam()["bech_validator_prefix"].string ?? validatorPrefix
     }
     
     func isSendEnabled() -> Bool {
