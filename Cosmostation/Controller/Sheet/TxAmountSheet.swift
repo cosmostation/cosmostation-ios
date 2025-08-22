@@ -154,7 +154,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
             decimal = 9
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: handler18Down)
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
-            availableDenom.text = selectedChain.coinSymbol
+            availableDenom.text = selectedChain.mainAssetSymbol()
             
         } else if (sheetType == .TxIotaStake) {
             amountTextField.label.text = NSLocalizedString("str_delegate_amount", comment: "")
@@ -162,7 +162,7 @@ class TxAmountSheet: BaseVC, UITextFieldDelegate {
             decimal = 9
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: handler18Down)
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
-            availableDenom.text = selectedChain.coinSymbol
+            availableDenom.text = selectedChain.mainAssetSymbol()
         }
         
     }

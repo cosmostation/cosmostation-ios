@@ -962,7 +962,7 @@ public struct MintscanHistory: Codable {
                             if (chain.tag == "kava60") {
                                 $0.denom = "akava"
                             } else {
-                                $0.denom = chain.stakeDenom ?? ""
+                                $0.denom = chain.stakingAssetDenom()
                             }
                             $0.amount = amount
                         }
@@ -1040,7 +1040,7 @@ public struct MintscanHistory: Codable {
             }
         }
         sorted.sort {
-            if ($0.denom == chain.stakeDenom && $1.denom != chain.stakeDenom) { return true }
+            if ($0.denom == chain.stakingAssetDenom() && $1.denom != chain.stakingAssetDenom()) { return true }
             return false
         }
         return sorted

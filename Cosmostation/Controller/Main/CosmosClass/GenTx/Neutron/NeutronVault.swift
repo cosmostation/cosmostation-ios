@@ -96,7 +96,7 @@ class NeutronVault: BaseVC {
     @objc func onClickAmount() {
         let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
-        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
+        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakingAssetDenom())
         amountSheet.availableAmount = availableAmount
         if let existedAmount = toCoin?.amount {
             amountSheet.existedAmount = NSDecimalNumber(string: existedAmount)
@@ -111,7 +111,7 @@ class NeutronVault: BaseVC {
     }
     
     func onUpdateAmountView(_ amount: String) {
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = stakeDenom; $0.amount = amount }
         
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
@@ -194,7 +194,7 @@ class NeutronVault: BaseVC {
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
             
             if (vaultType == .Deposit) {
-                let stakeDenom = selectedChain.stakeDenom!
+                let stakeDenom = selectedChain.stakingAssetDenom()
                 let balanceAmount = neutronFetcher.balanceAmount(stakeDenom)
                 if (txFee.amount[0].denom == stakeDenom) {
                     if (totalFeeAmount.compare(balanceAmount).rawValue > 0) {

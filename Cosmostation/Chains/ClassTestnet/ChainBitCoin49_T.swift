@@ -20,7 +20,7 @@ class ChainBitCoin49_T: ChainBitCoin86_T {
         apiName = "bitcoin-testnet"
         accountKeyType = AccountKeyType(.BTC_Nested_Segwit, "m/49'/1'/0'/0/X")
         
-        coinSymbol = "BTC"
+        coinSymbol = "sBTC"
         
         mainUrl = "https://rpc-office.cosmostation.io/bitcoin-testnet"
     }

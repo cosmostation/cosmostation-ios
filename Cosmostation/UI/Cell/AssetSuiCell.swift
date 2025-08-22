@@ -56,8 +56,7 @@ class AssetSuiCell: UITableViewCell {
     }
     
     func bindStakeAsset(_ baseChain: BaseChain) {
-        guard let stakeDenom = baseChain.stakeDenom,
-              let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) else {
+        guard let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.stakingAssetDenom()) else {
             return
         }
         
@@ -102,8 +101,7 @@ class AssetSuiCell: UITableViewCell {
     }
     
     func bindIotaStakeAsset(_ baseChain: BaseChain) {
-        guard let stakeDenom = baseChain.stakeDenom,
-              let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) else {
+        guard let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.stakingAssetDenom()) else {
             return
         }
         

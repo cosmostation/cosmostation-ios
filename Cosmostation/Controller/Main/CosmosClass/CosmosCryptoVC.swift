@@ -166,12 +166,12 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                 oktFetcher.oktAccountInfo.oktCoins?.forEach { balance in
                     oktBalances.append(balance)
                 }
-                if (oktBalances.filter { $0["denom"].string == selectedChain.stakeDenom }.first == nil) {
+                if (oktBalances.filter { $0["denom"].string == selectedChain.stakingAssetDenom() }.first == nil) {
                     oktBalances.append(JSON(["denom":"okt", "amount": "0"]))
                 }
                 oktBalances.sort {
-                    if ($0["denom"].string == selectedChain.stakeDenom) { return true }
-                    if ($1["denom"].string == selectedChain.stakeDenom) { return false }
+                    if ($0["denom"].string == selectedChain.stakingAssetDenom()) { return true }
+                    if ($1["denom"].string == selectedChain.stakingAssetDenom()) { return false }
                     return false
                 }
                 searchOktBalances = oktBalances
@@ -183,12 +183,12 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                         nativeCoins.append(coin)
                     }
                 })
-                if (nativeCoins.filter { $0.denom == selectedChain.stakeDenom }.first == nil) {
-                    nativeCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = selectedChain.stakeDenom!; $0.amount = "0" })
+                if (nativeCoins.filter { $0.denom == selectedChain.stakingAssetDenom() }.first == nil) {
+                    nativeCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = selectedChain.stakingAssetDenom(); $0.amount = "0" })
                 }
                 nativeCoins.sort {
-                    if ($0.denom == selectedChain.stakeDenom) { return true }
-                    if ($1.denom == selectedChain.stakeDenom) { return false }
+                    if ($0.denom == selectedChain.stakingAssetDenom()) { return true }
+                    if ($1.denom == selectedChain.stakingAssetDenom()) { return false }
                     let value0 = gnofetcher.balanceValue($0.denom)
                     let value1 = gnofetcher.balanceValue($1.denom)
                     return value0.compare(value1).rawValue > 0 ? true : false
@@ -205,16 +205,16 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
                         ibcCoins.append(coin)
                     }
                 }
-                if (nativeCoins.filter { $0.denom == selectedChain.stakeDenom }.first == nil) {
-                    nativeCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = selectedChain.stakeDenom!; $0.amount = "0" })
+                if (nativeCoins.filter { $0.denom == selectedChain.stakingAssetDenom() }.first == nil) {
+                    nativeCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = selectedChain.stakingAssetDenom(); $0.amount = "0" })
                 }
                 if let mainAssetDenom = selectedChain.getChainListParam()["main_asset_denom"].string,
                    nativeCoins.filter({ $0.denom == mainAssetDenom }).isEmpty {
                     nativeCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = mainAssetDenom; $0.amount = "0" })
                 }
                 nativeCoins.sort {
-                    if ($0.denom == selectedChain.stakeDenom) { return true }
-                    if ($1.denom == selectedChain.stakeDenom) { return false }
+                    if ($0.denom == selectedChain.stakingAssetDenom()) { return true }
+                    if ($1.denom == selectedChain.stakingAssetDenom()) { return false }
                     let value0 = cosmosFetcher.balanceValue($0.denom)
                     let value1 = cosmosFetcher.balanceValue($1.denom)
                     return value0.compare(value1).rawValue > 0 ? true : false
@@ -602,7 +602,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let oktChain = selectedChain as? ChainOktEVM {
             if (indexPath.section == 0) {
-                if (searchOktBalances[indexPath.row]["denom"].stringValue == oktChain.stakeDenom) {
+                if (searchOktBalances[indexPath.row]["denom"].stringValue == oktChain.stakingAssetDenom()) {
                     let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
                     cell.bindCosmosStakeAsset(oktChain)
                     return cell
@@ -621,7 +621,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (selectedChain is ChainGno) {
             if (indexPath.section == 0) {
-                //                if (searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom) {
+                //                if (searchNativeCoins[indexPath.row].denom == selectedChain.stakingAssetDenom()) {
                 //                    let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
                 //                    cell.bindCosmosStakeAsset(selectedChain)
                 //                    return cell
@@ -640,7 +640,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (selectedChain is ChainBabylon) {
             if (indexPath.section == 0) {
-                if (searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom) {
+                if (searchNativeCoins[indexPath.row].denom == selectedChain.stakingAssetDenom()) {
                     let cell = tableView.dequeueReusableCell(withIdentifier:"AssetBabylonCell") as! AssetBabylonCell
                     cell.btcStakeDelegate = self
                     cell.bindStakeAsset(selectedChain)
@@ -675,7 +675,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             
         } else {
             if (indexPath.section == 0) {
-                if (searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom) {
+                if (searchNativeCoins[indexPath.row].denom == selectedChain.stakingAssetDenom()) {
                     let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
                     cell.bindCosmosStakeAsset(selectedChain)
                     return cell
@@ -722,7 +722,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
         
         if let oktChain = selectedChain as? ChainOktEVM {
             if (oktChain.supportEvm) {
-                if (indexPath.section == 0 && searchOktBalances[indexPath.row]["denom"].stringValue == oktChain.stakeDenom) {
+                if (indexPath.section == 0 && searchOktBalances[indexPath.row]["denom"].stringValue == oktChain.stakingAssetDenom()) {
                     onStartCoinTransferVC(.EVM_COIN, searchOktBalances[indexPath.row]["denom"].stringValue)
                     
                 } else if (indexPath.section == 0) {
@@ -737,7 +737,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             }
             
         } else if (selectedChain is ChainGno) {
-            if (indexPath.section == 0 && searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom && selectedChain.supportEvm) {
+            if (indexPath.section == 0 && searchNativeCoins[indexPath.row].denom == selectedChain.stakingAssetDenom() && selectedChain.supportEvm) {
                 onStartCoinTransferVC(.GNO_COIN, searchNativeCoins[indexPath.row].denom)
                 
             } else if (indexPath.section == 0) {
@@ -753,7 +753,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             }
             
         } else {
-            if (indexPath.section == 0 && searchNativeCoins[indexPath.row].denom == selectedChain.stakeDenom && selectedChain.supportEvm) {
+            if (indexPath.section == 0 && searchNativeCoins[indexPath.row].denom == selectedChain.stakingAssetDenom() && selectedChain.supportEvm) {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
                 baseSheet.sheetType = .SelectSendType

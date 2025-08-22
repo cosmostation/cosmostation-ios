@@ -130,7 +130,7 @@ class SelectAddressListSheet: BaseVC {
         } else if (toChain.supportEvm == false && toChain.supportCosmos == true) {
             //only support BECH address style
             BaseData.instance.selectAllRefAddresses().filter {
-                $0.bechAddress.starts(with: toChain.bechAccountPrefix! + "1") &&
+                $0.bechAddress.starts(with: toChain.bechAddressPrefix() + "1") &&
                 $0.bechAddress != senderBechAddress }.forEach { refAddress in
                     if (tempRefBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
                         tempRefBechAddresses.append(refAddress)
@@ -152,7 +152,7 @@ class SelectAddressListSheet: BaseVC {
             if (sendType == .COSMOS_COIN) {
                 //only cosmos style bank asset support bech address
                 BaseData.instance.selectAllRefAddresses().filter {
-                    $0.bechAddress.starts(with: toChain.bechAccountPrefix! + "1") &&
+                    $0.bechAddress.starts(with: toChain.bechAddressPrefix() + "1") &&
                     $0.bechAddress != senderBechAddress }.forEach { refAddress in
                         if (tempRefBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
                             tempRefBechAddresses.append(refAddress)
@@ -208,7 +208,7 @@ class SelectAddressListSheet: BaseVC {
             } else if (sendType == .EVM_ERC20 && fromChain.tag != toChain.tag) {
                 //differ chain erc token(ibc eureka) only BECH address
                 BaseData.instance.selectAllRefAddresses().filter {
-                    $0.bechAddress.starts(with: toChain.bechAccountPrefix! + "1") &&
+                    $0.bechAddress.starts(with: toChain.bechAddressPrefix() + "1") &&
                     $0.bechAddress != senderBechAddress }.forEach { refAddress in
                         if (tempRefBechAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
                             tempRefBechAddresses.append(refAddress)

@@ -70,7 +70,7 @@ class BtcUndelegate: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? selectedChain.coinSymbol), placeholderImage: UIImage(named: "tokenDefault"))
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom()), placeholderImage: UIImage(named: "tokenDefault"))
         
         validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
         
@@ -109,7 +109,7 @@ class BtcUndelegate: BaseVC {
     }
     
     override func setLocalizedString() {
-        let symbol = selectedChain.assetSymbol(selectedChain.coinSymbol)
+        let symbol = selectedChain.assetSymbol(selectedChain.mainAssetSymbol())
         
         if actionType == .unstake {
             titleLabel.text = String(format: NSLocalizedString("title_coin_unstake", comment: ""), symbol)
@@ -159,11 +159,11 @@ class BtcUndelegate: BaseVC {
             inactiveTag.isHidden = true
         }
         
-        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol),
+        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.mainAssetSymbol()),
            let staked = delegation?.amount {
             let stakingAmount = NSDecimalNumber(integerLiteral: staked).multiplying(byPowerOf10: -msAsset.decimals!)
             stakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakedLabel!.font, 8)
-            stakedSymbolLabel.text = selectedChain.coinSymbol
+            stakedSymbolLabel.text = selectedChain.mainAssetSymbol()
             
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let value = msPrice.multiplying(by: stakingAmount, withBehavior: handler6)
@@ -196,12 +196,12 @@ class BtcUndelegate: BaseVC {
     }
     
     func onUpdateFeeView() {
-        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol),
+        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.mainAssetSymbol()),
            let btcFee {
             let totalFeeAmount  = NSDecimalNumber(value: btcFee)
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let value = msPrice.multiplying(by: totalFeeAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
-            feeSelectLabel.text = selectedChain.coinSymbol
+            feeSelectLabel.text = selectedChain.mainAssetSymbol()
             WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }

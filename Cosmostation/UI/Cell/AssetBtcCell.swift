@@ -63,9 +63,9 @@ class AssetBtcCell: UITableViewCell {
         unstakingView.isHidden = !baseChain.isSupportBTCStaking() || baseChain is ChainBitCoin44 || baseChain is ChainBitCoin49
         withdrawableView.isHidden = !baseChain.isSupportBTCStaking() || baseChain is ChainBitCoin44 || baseChain is ChainBitCoin49
         
-        symbolLabel.text = baseChain.coinSymbol
+        symbolLabel.text = baseChain.mainAssetSymbol()
         
-        guard let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.coinSymbol) else { return }
+        guard let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.mainAssetSymbol()) else { return }
         coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
         WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
         WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)

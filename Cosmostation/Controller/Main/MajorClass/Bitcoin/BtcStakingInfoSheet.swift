@@ -30,7 +30,7 @@ class BtcStakingInfoSheet: BaseVC {
     }
     
     private func configureTimeLockDescription(_ fetcher: BabylonBTCFetcher, _ style: NSMutableParagraphStyle) {
-        let symbol = chain.coinSymbol
+        let symbol = chain.mainAssetSymbol()
         
         let timeLockWeeks = fetcher.btcStakingTimeLockWeeks
         let weeksString = String(format: NSLocalizedString("btc_timelock_weeks", comment: ""), timeLockWeeks)

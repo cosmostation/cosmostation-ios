@@ -314,7 +314,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
                         let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
                         transfer.sendAssetType = .BTC_COIN
                         transfer.fromChain = selectedChain
-                        transfer.toSendDenom = selectedChain.coinSymbol.lowercased()
+                        transfer.toSendDenom = selectedChain.mainAssetSymbol().lowercased()
                         transfer.modalTransitionStyle = .coverVertical
                         self.present(transfer, animated: true)
                         

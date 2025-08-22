@@ -163,7 +163,7 @@ class BabylonBTCFetcher {
     
     func rewardOtherDenomTypeCnts() -> Int {
         var denoms = [String]()
-        btcStakedRewards.filter { $0.denom != chain.stakeDenom }.forEach { reward in
+        btcStakedRewards.filter { $0.denom != chain.stakingAssetDenom() }.forEach { reward in
             if (denoms.contains(reward.denom) == false) {
                 denoms.append(reward.denom)
             }

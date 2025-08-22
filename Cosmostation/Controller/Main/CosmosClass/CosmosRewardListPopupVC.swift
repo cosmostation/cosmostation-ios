@@ -30,8 +30,8 @@ class CosmosRewardListPopupVC: BaseVC {
         if let cosmosFetcher = selectedChain.getCosmosfetcher() {
             rewardCoins = cosmosFetcher.rewardAllCoins()
             rewardCoins.sort {
-                if ($0.denom == selectedChain.stakeDenom) { return true }
-                if ($1.denom == selectedChain.stakeDenom) { return false }
+                if ($0.denom == selectedChain.stakingAssetDenom()) { return true }
+                if ($1.denom == selectedChain.stakingAssetDenom()) { return false }
                 if ($0.denom == DYDX_USDC_DENOM) { return true }
                 if ($1.denom == DYDX_USDC_DENOM) { return false }
                 

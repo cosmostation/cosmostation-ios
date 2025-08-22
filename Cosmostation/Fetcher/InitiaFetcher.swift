@@ -27,7 +27,7 @@ class InitiaFetcher: CosmosFetcher {
                let unbondingInitia = try await fetchUnbondings_initia() {
 
                 delegationsInitia.forEach({ delegation in
-                    if delegation.balance.filter({ $0.denom == chain.stakeDenom }).first?.amount != "0" {
+                    if delegation.balance.filter({ $0.denom == chain.stakingAssetDenom() }).first?.amount != "0" {
                         self.initiaDelegations.append(delegation)
                     }
                 })
@@ -62,7 +62,7 @@ class InitiaFetcher: CosmosFetcher {
                 if ($1.description_p.moniker == "Cosmostation") { return false }
                 if ($0.jailed && !$1.jailed) { return false }
                 if (!$0.jailed && $1.jailed) { return true }
-                return Double($0.tokens.filter({$0.denom == chain.stakeDenom}).first!.amount)! > Double($1.tokens.filter({$0.denom == chain.stakeDenom}).first!.amount)!
+                return Double($0.tokens.filter({$0.denom == chain.stakingAssetDenom()}).first!.amount)! > Double($1.tokens.filter({$0.denom == chain.stakingAssetDenom()}).first!.amount)!
             }
             return true
         }
@@ -70,7 +70,7 @@ class InitiaFetcher: CosmosFetcher {
     }
     
     override func denomValue(_ denom: String, _ usd: Bool? = false) -> NSDecimalNumber {
-        if (denom == chain.stakeDenom) {
+        if (denom == chain.stakingAssetDenom()) {
             return balanceValue(denom, usd).adding(rewardValue(denom, usd))
                 .adding(initiaDelegationValueSum(usd)).adding(initiaUnbondingValueSum(usd)).adding(commissionValue(denom, usd))
             
@@ -81,8 +81,8 @@ class InitiaFetcher: CosmosFetcher {
     }
     
     override func allStakingDenomAmount() -> NSDecimalNumber {
-        return balanceAmount(chain.stakeDenom!).adding(initiaDelegationAmountSum())
-            .adding(initiaUnbondingAmountSum()).adding(rewardAmountSum(chain.stakeDenom!)).adding(commissionAmount(chain.stakeDenom!))
+        return balanceAmount(chain.stakingAssetDenom()).adding(initiaDelegationAmountSum())
+            .adding(initiaUnbondingAmountSum()).adding(rewardAmountSum(chain.stakingAssetDenom())).adding(commissionAmount(chain.stakingAssetDenom()))
     }
     
     override func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
@@ -159,14 +159,14 @@ extension InitiaFetcher {
     func initiaDelegationAmountSum() -> NSDecimalNumber {
         var sum = NSDecimalNumber.zero
         initiaDelegations.forEach({ delegation in
-            let bondingAmount = delegation.balance.filter({ $0.denom == chain.stakeDenom }).first?.amount ?? "0"
+            let bondingAmount = delegation.balance.filter({ $0.denom == chain.stakingAssetDenom() }).first?.amount ?? "0"
             sum = sum.adding(NSDecimalNumber(string: bondingAmount))
         })
         return sum
     }
     
     func initiaDelegationValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
-        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = initiaDelegationAmountSum()
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
@@ -178,7 +178,7 @@ extension InitiaFetcher {
         var sum = NSDecimalNumber.zero
         initiaUnbondings?.forEach({ unbonding in
             for entry in unbonding.entries {
-                let unbondingAmount = entry.balance.filter({ $0.denom == chain.stakeDenom }).first?.amount ?? "0"
+                let unbondingAmount = entry.balance.filter({ $0.denom == chain.stakingAssetDenom() }).first?.amount ?? "0"
                 sum = sum.adding(NSDecimalNumber(string: unbondingAmount))
             }
         })
@@ -186,7 +186,7 @@ extension InitiaFetcher {
     }
     
     func initiaUnbondingValueSum(_ usd: Bool? = false) -> NSDecimalNumber {
-        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom!) {
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, usd)
             let amount = initiaUnbondingAmountSum()
             return msPrice.multiplying(by: amount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)

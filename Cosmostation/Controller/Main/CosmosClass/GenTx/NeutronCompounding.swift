@@ -82,7 +82,7 @@ class NeutronCompounding: BaseVC {
     }
     
     override func setLocalizedString() {
-        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        let symbol = selectedChain.assetSymbol(selectedChain.stakingAssetDenom())
         titleLabel.text = String(format: NSLocalizedString("title_coin_compounding", comment: ""), symbol)
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
         feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
@@ -90,7 +90,7 @@ class NeutronCompounding: BaseVC {
     }
     
     func onInitView() {
-        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom()), placeholderImage: UIImage(named: "tokenDefault"))
         if let cosmostation = fetcher.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first {
             validatorLabel.text = cosmostation.description_p.moniker
             validatorImage.setMonikerImg(selectedChain, cosmostation.operatorAddress)
@@ -108,7 +108,7 @@ class NeutronCompounding: BaseVC {
         
         
         
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
             var rewardAmount = NSDecimalNumber.zero
             claimableRewards.forEach { reward in
@@ -289,7 +289,7 @@ class NeutronCompounding: BaseVC {
         guard let reward = fetcher.reward else { return [] }
         return Signer.genNeutronCompoundingMsg(selectedChain.bechAddress!,
                                                claimableRewards,
-                                               selectedChain.stakeDenom!,
+                                               selectedChain.stakingAssetDenom(),
                                                selectedValidator.operatorAddress,
                                                reward["address"].stringValue)
     }

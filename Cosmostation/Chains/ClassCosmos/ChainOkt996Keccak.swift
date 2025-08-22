@@ -36,7 +36,7 @@ class ChainOkt996Keccak: ChainOktEVM  {
         privateKey = priKey
         publicKey = KeyFac.getPubKeyFromPrivateKey(privateKey!, accountKeyType.pubkeyType)
         evmAddress = KeyFac.getAddressFromPubKey(publicKey!, accountKeyType.pubkeyType, nil)
-        bechAddress = KeyFac.convertEvmToBech32(evmAddress!, bechAccountPrefix!)
+        bechAddress = KeyFac.convertEvmToBech32(evmAddress!, bechAddressPrefix())
     }
     
     override func fetchData(_ id: Int64) {

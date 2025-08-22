@@ -46,11 +46,9 @@ class PendingUnbondingCell: UITableViewCell {
             inactiveTag.isHidden = cosmosFetcher.isActiveValidator(validator)
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.stakingAssetDenom()) {
             let unbondingAmount = NSDecimalNumber(string: pendingData.msg.amount).multiplying(byPowerOf10: -msAsset.decimals!)
             unstakingLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unstakingLabel!.font, msAsset.decimals!)
-            
         }
     }
 

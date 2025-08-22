@@ -25,6 +25,6 @@ class ChainQuicksilver: BaseChain  {
         bechAccountPrefix = "quick"
         validatorPrefix = "quickvaloper"
         grpcHost = "quicksilver-grpc.stake-town.com"
-        lcdUrl = "https://m-quicksilver.api.utsa.tech/"
+        lcdUrl = "https://lcd.quicksilver.zone/"
     }
 }
