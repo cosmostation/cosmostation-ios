@@ -132,7 +132,7 @@ class CosmosClaimRewards: BaseVC {
             validatorsCntLabel.isHidden = true
         }
         
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
             var rewardAmount = NSDecimalNumber.zero
             claimableRewards.forEach { reward in
@@ -159,9 +159,9 @@ class CosmosClaimRewards: BaseVC {
             } else {
                 rewardCntLabel.isHidden = true
                 titleCoinImage.isHidden = false
-                let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+                let symbol = selectedChain.assetSymbol(selectedChain.stakingAssetDenom())
                 titleLabel.text = String(format: NSLocalizedString("title_coin_rewards_claim", comment: ""), symbol)
-                titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+                titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom() ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
                 
             }
         }

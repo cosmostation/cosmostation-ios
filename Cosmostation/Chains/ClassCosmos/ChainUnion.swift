@@ -21,7 +21,7 @@ class ChainUnion: BaseChain {
         
         
         cosmosEndPointType = .UseLCD
-        stakeDenom = "upoa"
+        stakeDenom = "au"
         bechAccountPrefix = "union"
         validatorPrefix = "unionvaloper"
         grpcHost = "grpc.rpc-node.union-1.union.build"

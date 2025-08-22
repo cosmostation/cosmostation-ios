@@ -159,7 +159,7 @@ class Portfolio2Cell: UITableViewCell {
         
         //DP Price
         if chain is ChainOktEVM {
-            guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakeDenom ?? chain.coinSymbol) else { return }
+            guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) else { return }
             WDP.dpPrice(msAsset.coinGeckoId, priceCurrencyLabel, priceLabel)
             WDP.dpPriceChanged(msAsset.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
             
@@ -183,12 +183,11 @@ class Portfolio2Cell: UITableViewCell {
             }
             
         } else {
-            if let stakeDenom = chain.stakeDenom,
-               let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
                 WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
 
-            } else if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.coinSymbol) {
+            } else if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.mainAssetSymbol()) {
                 WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
                 WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
 

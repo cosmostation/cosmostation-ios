@@ -75,17 +75,17 @@ class SuiUnstake: BaseVC {
         feeSegments.removeAllSegments()
         feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
         feeSegments.selectedSegmentIndex = 0
-        feeSelectImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? selectedChain.coinSymbol), placeholderImage: UIImage(named: "tokenDefault"))
+        feeSelectImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom()), placeholderImage: UIImage(named: "tokenDefault"))
         
-        feeSelectLabel.text = selectedChain.coinSymbol
-        feeDenomLabel.text = selectedChain.coinSymbol
+        feeSelectLabel.text = selectedChain.mainAssetSymbol()
+        feeDenomLabel.text = selectedChain.mainAssetSymbol()
         suiFeeBudget = suiFetcher.baseFee(.SUI_UNSTAKE)
         onUpdateFeeView()
     }
     
     func onInitView() {
         onUpdateValidatorView()
-        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom()), placeholderImage: UIImage(named: "tokenDefault"))
         titleLabel.isHidden = false
         validatorCardView.isHidden = false
         feeCardView.isHidden = false
@@ -112,7 +112,7 @@ class SuiUnstake: BaseVC {
     func onUpdateFeeView() {
         unstakeBtn.isEnabled = false
         
-        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol) else { return }
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.mainAssetSymbol()) else { return }
         let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
         let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
         let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)

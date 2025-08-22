@@ -132,7 +132,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         view.addGestureRecognizer(dismissTap)
         
 //        print("senderAddress ", senderAddress)
-//        print("targetChain ", targetChain.bechAccountPrefix)
+//        print("targetChain ", targetChain.bechAddressPrefix())
 //        
 //        let ref = BaseData.instance.selectAllRefAddresses()
 //        print("ref ", ref.count)
@@ -233,7 +233,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         } else if (sheetType == .SelectCosmosRecipientBechAddress) {
             sheetTitle.text = NSLocalizedString("str_address_book_list", comment: "")
             BaseData.instance.selectAllRefAddresses().filter {
-                $0.bechAddress.starts(with: targetChain.bechAccountPrefix! + "1") &&
+                $0.bechAddress.starts(with: targetChain.bechAddressPrefix() + "1") &&
                 $0.bechAddress != senderAddress }.forEach { refAddress in
                     if (refAddresses.filter { $0.bechAddress == refAddress.bechAddress && $0.accountId == refAddress.accountId }.count == 0) {
                         refAddresses.append(refAddress)
@@ -248,7 +248,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             }
             
             BaseData.instance.selectAllAddressBooks().filter { 
-                $0.dpAddress.starts(with: targetChain.bechAccountPrefix! + "1") &&
+                $0.dpAddress.starts(with: targetChain.bechAddressPrefix() + "1") &&
                 $0.dpAddress != senderAddress }.forEach { book in
                     addressBook.append(book)
                 }

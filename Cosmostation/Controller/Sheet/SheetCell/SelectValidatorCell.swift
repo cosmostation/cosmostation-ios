@@ -61,8 +61,7 @@ class SelectValidatorCell: UITableViewCell {
             inactiveTag.isHidden = cosmosFetcher.isActiveValidator(validator)
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.stakingAssetDenom()) {
             
             let vpAmount = NSDecimalNumber(string: validator.tokens).multiplying(byPowerOf10: -msAsset.decimals!)
             vpLabel?.attributedText = WDP.dpAmount(vpAmount.stringValue, vpLabel!.font, 0)
@@ -91,9 +90,8 @@ class SelectValidatorCell: UITableViewCell {
             inactiveTag.isHidden = cosmosFetcher.isActiveValidator(validator)
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let delegations = baseChain.getCosmosfetcher()?.cosmosDelegations,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        if let delegations = baseChain.getCosmosfetcher()?.cosmosDelegations,
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.stakingAssetDenom()) {
             
             let staked = delegations.filter { $0.delegation.validatorAddress == validator.operatorAddress }.first?.balance.amount
             let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
@@ -139,8 +137,8 @@ class SelectValidatorCell: UITableViewCell {
             jailedTag.isHidden = false
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        let stakeDenom = baseChain.stakingAssetDenom()
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
             
             let vpAmount = NSDecimalNumber(string: validator.tokens.filter({$0.denom == stakeDenom}).first?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
             vpLabel?.attributedText = WDP.dpAmount(vpAmount.stringValue, vpLabel!.font, 0)
@@ -168,9 +166,9 @@ class SelectValidatorCell: UITableViewCell {
             inactiveTag.isHidden = initiaFetcher.isActiveValidator(validator)
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let delegations = (baseChain as? ChainInitia)?.getInitiaFetcher()?.initiaDelegations,
-        let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        let stakeDenom = baseChain.stakingAssetDenom()
+        if let delegations = (baseChain as? ChainInitia)?.getInitiaFetcher()?.initiaDelegations,
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
             let staked = delegations.filter { $0.delegation.validatorAddress == validator.operatorAddress }.first?.balance.filter({ $0.denom == stakeDenom }).first?.amount
             let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
             stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
@@ -188,8 +186,7 @@ class SelectValidatorCell: UITableViewCell {
             jailedTag.isHidden = false
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.stakingAssetDenom()) {
             
             let vpAmount = NSDecimalNumber(string: validator.tokensNative).multiplying(byPowerOf10: -msAsset.decimals!)
             vpLabel?.attributedText = WDP.dpAmount(vpAmount.stringValue, vpLabel!.font, 0)
@@ -217,9 +214,8 @@ class SelectValidatorCell: UITableViewCell {
             inactiveTag.isHidden = zenrockFetcher.isActiveValidator(validator)
         }
         
-        if let stakeDenom = baseChain.stakeDenom,
-           let delegations = (baseChain as? ChainZenrock)?.getZenrockFetcher()?.delegations,
-        let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
+        if let delegations = (baseChain as? ChainZenrock)?.getZenrockFetcher()?.delegations,
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.stakingAssetDenom()) {
             let staked = delegations.filter { $0.delegation.validatorAddress == validator.operatorAddress }.first?.balance.amount
             let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
             stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
@@ -269,7 +265,7 @@ class SelectValidatorCell: UITableViewCell {
                 inactiveTag.isHidden = false
             }
             
-            if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.coinSymbol) {
+            if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.mainAssetSymbol()) {
                 let stakingAmount = NSDecimalNumber(integerLiteral: delegation.amount).multiplying(byPowerOf10: -msAsset.decimals!)
                 stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 8)
             }

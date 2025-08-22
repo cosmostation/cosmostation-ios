@@ -81,7 +81,7 @@ class EvmDelegate: BaseVC {
                 toValidator = selectedChain.cosmosValidators[0]
             }
         }
-        availableAmount = selectedChain.balanceAmount(selectedChain.stakeDenom)
+        availableAmount = selectedChain.balanceAmount(selectedChain.stakingAssetDenom())
         
         onInitFee()
         onUpdateValidatorView()
@@ -137,7 +137,7 @@ class EvmDelegate: BaseVC {
     @objc func onClickAmount() {
         let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
-        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom!)
+        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakingAssetDenom())
         amountSheet.availableAmount = availableAmount
         if let delegateAmount = delegateAmount {
             amountSheet.existedAmount = delegateAmount
@@ -148,7 +148,7 @@ class EvmDelegate: BaseVC {
     }
     
     func onUpdateAmountView(_ amount: String) {
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
             delegateAmount = NSDecimalNumber(string: amount)
             WDP.dpCoin(msAsset, delegateAmount!, nil, stakingDenomLabel, stakingAmountLabel, msAsset.decimals)
@@ -169,8 +169,8 @@ class EvmDelegate: BaseVC {
         selectedFeePosition = 1
         feeSegments.selectedSegmentIndex = selectedFeePosition
         feeSelectImg.image =  UIImage.init(named: selectedChain.coinLogo)
-        feeSelectLabel.text = selectedChain.coinSymbol
-        feeDenomLabel.text = selectedChain.coinSymbol
+        feeSelectLabel.text = selectedChain.mainAssetSymbol()
+        feeDenomLabel.text = selectedChain.mainAssetSymbol()
         
         let feePrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
         let totalGasPrice = evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1

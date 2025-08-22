@@ -87,7 +87,7 @@ class BtcDelegate: BaseVC {
             loadingView.animationSpeed = 1.3
             loadingView.play()
             
-            titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.coinSymbol), placeholderImage: UIImage(named: "tokenDefault"))
+            titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.mainAssetSymbol()), placeholderImage: UIImage(named: "tokenDefault"))
             
             validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
             stakingAmountCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickAmount)))
@@ -138,7 +138,7 @@ class BtcDelegate: BaseVC {
 
     }
     override func setLocalizedString() {
-        let symbol = selectedChain.coinSymbol
+        let symbol = selectedChain.mainAssetSymbol()
         titleLabel.text = String(format: NSLocalizedString("title_coin_stake", comment: ""), symbol)
     }
     
@@ -167,7 +167,7 @@ class BtcDelegate: BaseVC {
     
     func onUpdateRewardView() {
         rewardView.isHidden = false
-        let coinSymbol = chainBabylon.assetSymbol(chainBabylon.stakeDenom ?? "")
+        let coinSymbol = chainBabylon.assetSymbol(chainBabylon.stakingAssetDenom())
         rewardInfoLabel.text = "$\(coinSymbol) Reward Distribution"
         rewardAddressLabel.text = chainBabylon.bechAddress
         rewardDescriptionLabel.text = "Rewards are paid in $\(coinSymbol) to your BABYLON address."
@@ -187,7 +187,7 @@ class BtcDelegate: BaseVC {
     @objc func onClickAmount() {
         let amountSheet = TxAmountSheet(nibName: "TxAmountSheet", bundle: nil)
         amountSheet.selectedChain = selectedChain
-        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol)
+        amountSheet.msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.mainAssetSymbol())
         amountSheet.availableAmount = availableAmount
         amountSheet.existedAmount = sendAmount
         amountSheet.sheetDelegate = self
@@ -210,7 +210,7 @@ class BtcDelegate: BaseVC {
                 return
             }
             
-            if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol) {
+            if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.mainAssetSymbol()) {
                 feeSelectLabel.text = msAsset.symbol
                 
                 let totalFeeAmount = NSDecimalNumber(string: estimateBtcStakingFee)
@@ -232,7 +232,7 @@ class BtcDelegate: BaseVC {
             sendAmount = NSDecimalNumber(string: amount)
             
             if let sendAmount,
-               let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol) {
+               let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.mainAssetSymbol()) {
                 let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                 let dpAmount = sendAmount.multiplying(byPowerOf10: -msAsset.decimals!)
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
@@ -420,18 +420,18 @@ extension BtcDelegate: BaseSheetDelegate, AmountSheetDelegate {
         if let min = babylonBtcfetcher.networkInfo.last?["min_staking_value_sat"].uInt64Value,
            let max = babylonBtcfetcher.networkInfo.last?["max_staking_value_sat"].uInt64Value,
            let amountIntValue = UInt64(amount),
-           let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol) {
+           let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.mainAssetSymbol()) {
             
             if amountIntValue < min {
-                onShowToast("Staking amount must be at least \(NSDecimalNumber(value: min).multiplying(byPowerOf10: -msAsset.decimals!)) \(selectedChain.coinSymbol).")
+                onShowToast("Staking amount must be at least \(NSDecimalNumber(value: min).multiplying(byPowerOf10: -msAsset.decimals!)) \(selectedChain.mainAssetSymbol()).")
                 return
                 
             } else if amountIntValue > availableAmount.uint64Value {
-                onShowToast("Staking amount exceeds your balance (\(availableAmount.multiplying(byPowerOf10: -msAsset.decimals!)) \(selectedChain.coinSymbol))!")
+                onShowToast("Staking amount exceeds your balance (\(availableAmount.multiplying(byPowerOf10: -msAsset.decimals!)) \(selectedChain.mainAssetSymbol()))!")
                 return
                 
             } else if amountIntValue > max {
-                onShowToast("Staking amount must be no more than \(NSDecimalNumber(value: max).multiplying(byPowerOf10: -msAsset.decimals!)) \(selectedChain.coinSymbol).")
+                onShowToast("Staking amount must be no more than \(NSDecimalNumber(value: max).multiplying(byPowerOf10: -msAsset.decimals!)) \(selectedChain.mainAssetSymbol()).")
                 return
                 
             } else {

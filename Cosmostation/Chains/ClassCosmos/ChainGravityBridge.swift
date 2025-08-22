@@ -13,7 +13,7 @@ class ChainGravityBridge: BaseChain  {
     override init() {
         super.init()
         
-        name = "G-Bridge"
+        name = "Gravity Bridge"
         tag = "gravity-bridge118"
         chainImg = "chainGravitybridge"
         apiName = "gravity-bridge"

@@ -174,7 +174,7 @@ class NftTransfer: BaseVC {
             feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
             selectedFeePosition = 0
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectLabel.text = fromChain.coinSymbol            
+            feeSelectLabel.text = fromChain.mainAssetSymbol()            
             suiFeeBudget = suiFetcher.baseFee(.SUI_SEND_NFT)
             
         } else if txStyle == .IOTA_STYLE {
@@ -182,7 +182,7 @@ class NftTransfer: BaseVC {
             feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
             selectedFeePosition = 0
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectLabel.text = fromChain.coinSymbol
+            feeSelectLabel.text = fromChain.mainAssetSymbol()
             iotaFeeBudget = iotaFetcher.baseFee(.IOTA_SEND_NFT)
             
         } else if (txStyle == .COSMOS_STYLE) {
@@ -315,14 +315,14 @@ class NftTransfer: BaseVC {
     
     func onUpdateFeeView() {
         if (txStyle == .SUI_STYLE) {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeValue = feePrice.multiplying(by: suiFeeBudget).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(9))
             WDP.dpCoin(msAsset, suiFeeBudget, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if txStyle == .IOTA_STYLE {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeValue = feePrice.multiplying(by: iotaFeeBudget).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(9))
             WDP.dpCoin(msAsset, iotaFeeBudget, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)

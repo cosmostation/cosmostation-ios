@@ -164,9 +164,9 @@ class DappBtcSignRequestSheet: BaseVC {
 
     func onInitFeeView() {
         Task {
-            feeDenomLabel.text = selectedChain.coinSymbol
-            feeImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.coinSymbol))
-            feeLabel.text = selectedChain.coinSymbol
+            feeDenomLabel.text = selectedChain.mainAssetSymbol()
+            feeImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.mainAssetSymbol()))
+            feeLabel.text = selectedChain.mainAssetSymbol()
             do {
                 try await onUpdateFeeView()
                 try checkValidate()
@@ -183,7 +183,7 @@ class DappBtcSignRequestSheet: BaseVC {
     }
     
     func onUpdateFeeView() async throws {
-        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.coinSymbol) else { return }
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.mainAssetSymbol()) else { return }
         if method == "bit_sendBitcoin" {
             try await getFee()
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)

@@ -67,14 +67,14 @@ class CosmosCancelUnbonding: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakeDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom()), placeholderImage: UIImage(named: "tokenDefault"))
         
         if let initiaFetcher {
             if let validator = initiaFetcher.initiaValidators.filter({ $0.operatorAddress == unbondingEntryInitia.validatorAddress }).first  {
                 validatorsLabel.text = validator.description_p.moniker
             }
             
-            let stakeDenom = selectedChain.stakeDenom!
+            let stakeDenom = selectedChain.stakingAssetDenom()
             if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
                 let unbondingAmount = NSDecimalNumber(string: unbondingEntryInitia.entry.balance.filter({ $0.denom == stakeDenom }).first?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
                 amountLabel.attributedText = WDP.dpAmount(unbondingAmount.stringValue, amountLabel.font, msAsset.decimals)
@@ -86,7 +86,7 @@ class CosmosCancelUnbonding: BaseVC {
                 validatorsLabel.text = validator.description_p.moniker
             }
             
-            let stakeDenom = selectedChain.stakeDenom!
+            let stakeDenom = selectedChain.stakingAssetDenom()
             if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
                 let unbondingAmount = NSDecimalNumber(string: unbondingEntryZenrock.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
                 amountLabel.attributedText = WDP.dpAmount(unbondingAmount.stringValue, amountLabel.font, msAsset.decimals)
@@ -98,7 +98,7 @@ class CosmosCancelUnbonding: BaseVC {
                 validatorsLabel.text = validator.description_p.moniker
             }
             
-            let stakeDenom = selectedChain.stakeDenom!
+            let stakeDenom = selectedChain.stakingAssetDenom()
             if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
                 let unbondingAmount = NSDecimalNumber(string: unbondingEntry.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
                 amountLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, amountLabel!.font, msAsset.decimals!)
@@ -120,7 +120,7 @@ class CosmosCancelUnbonding: BaseVC {
     }
     
     override func setLocalizedString() {
-        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        let symbol = selectedChain.assetSymbol(selectedChain.stakingAssetDenom())
         titleLabel.text = String(format: NSLocalizedString("title_coin_cancel_unstaking", comment: ""), symbol)
         memoHintLabel.text = NSLocalizedString("msg_tap_for_add_memo", comment: "")
         feeMsgLabel.text = NSLocalizedString("msg_about_fee_tip", comment: "")
@@ -281,8 +281,8 @@ class CosmosCancelUnbonding: BaseVC {
     func onBindCancelUnbondingMsg() -> [Google_Protobuf_Any] {
         if selectedChain is ChainInitia {
             let toCoin = Cosmos_Base_V1beta1_Coin.with { coin in
-                coin.denom = selectedChain.stakeDenom!
-                coin.amount = unbondingEntryInitia.entry.balance.filter({ $0.denom == selectedChain.stakeDenom }).first!.amount
+                coin.denom = selectedChain.stakingAssetDenom()
+                coin.amount = unbondingEntryInitia.entry.balance.filter({ $0.denom == selectedChain.stakingAssetDenom() }).first!.amount
             }
             
             let toCancelMsg = Initia_Mstaking_V1_MsgCancelUnbondingDelegation.with {
@@ -295,7 +295,7 @@ class CosmosCancelUnbonding: BaseVC {
             
         } else if selectedChain is ChainZenrock {
             let toCoin = Cosmos_Base_V1beta1_Coin.with { coin in
-                coin.denom = selectedChain.stakeDenom!
+                coin.denom = selectedChain.stakingAssetDenom()
                 coin.amount = unbondingEntryZenrock.entry.balance
             }
             
@@ -308,7 +308,7 @@ class CosmosCancelUnbonding: BaseVC {
             return Signer.genCancelUnbondingMsg(toCancelMsg)
             
         } else if selectedChain is ChainBabylon {
-            let toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = selectedChain.stakeDenom!; $0.amount = unbondingEntry.entry.balance }
+            let toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = selectedChain.stakingAssetDenom(); $0.amount = unbondingEntry.entry.balance }
             let toCancelMsg = Babylon_Epoching_V1_MsgWrappedCancelUnbondingDelegation.with {
                 $0.msg.delegatorAddress = selectedChain.bechAddress!
                 $0.msg.validatorAddress = unbondingEntry.validatorAddress
@@ -318,7 +318,7 @@ class CosmosCancelUnbonding: BaseVC {
             return Signer.genCancelUnbondingMsg(toCancelMsg)
 
         } else {
-            let toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = selectedChain.stakeDenom!; $0.amount = unbondingEntry.entry.balance }
+            let toCoin = Cosmos_Base_V1beta1_Coin.with {  $0.denom = selectedChain.stakingAssetDenom(); $0.amount = unbondingEntry.entry.balance }
             let toCancelMsg = Cosmos_Staking_V1beta1_MsgCancelUnbondingDelegation.with {
                 $0.delegatorAddress = selectedChain.bechAddress!
                 $0.validatorAddress = unbondingEntry.validatorAddress

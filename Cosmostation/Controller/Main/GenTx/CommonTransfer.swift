@@ -216,14 +216,14 @@ class CommonTransfer: BaseVC {
             }
             selectedFeePosition = 1
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectLabel.text = fromChain.coinSymbol
+            feeSelectLabel.text = fromChain.mainAssetSymbol()
             
         } else if (txStyle == .SUI_STYLE) {
             feeSegments.removeAllSegments()
             feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
             selectedFeePosition = 0
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectLabel.text = fromChain.coinSymbol
+            feeSelectLabel.text = fromChain.mainAssetSymbol()
             
             suiFeeBudget = suiFetcher.baseFee(.SUI_SEND_COIN)
             
@@ -232,7 +232,7 @@ class CommonTransfer: BaseVC {
             feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
             selectedFeePosition = 0
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectLabel.text = fromChain.coinSymbol
+            feeSelectLabel.text = fromChain.mainAssetSymbol()
             
             iotaFeeBudget = iotaFetcher.baseFee(.IOTA_SEND_COIN)
             
@@ -241,7 +241,7 @@ class CommonTransfer: BaseVC {
             feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
             selectedFeePosition = 0
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectLabel.text = fromChain.coinSymbol
+            feeSelectLabel.text = fromChain.mainAssetSymbol()
             
             btcInitFee()
             
@@ -302,7 +302,7 @@ class CommonTransfer: BaseVC {
         } else if (sendAssetType == .EVM_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = 18
-            symbol = fromChain.coinSymbol
+            symbol = fromChain.mainAssetSymbol()
             sendableAmount = evmFetcher.evmBalances.subtracting(EVM_BASE_FEE)
             
         } else if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20 || sendAssetType == .GNO_GRC20) {
@@ -317,7 +317,7 @@ class CommonTransfer: BaseVC {
             symbol = fromChain.assetSymbol(toSendDenom)
             sendableAmount = suiFetcher.balanceAmount(toSendDenom)
             
-            if (fromChain.stakeDenom == toSendDenom) {
+            if (fromChain.stakingAssetDenom() == toSendDenom) {
                 sendableAmount = sendableAmount.subtracting(suiFeeBudget)
             }
             
@@ -327,7 +327,7 @@ class CommonTransfer: BaseVC {
             symbol = fromChain.assetSymbol(toSendDenom)
             sendableAmount = iotaFetcher.balanceAmount(toSendDenom)
             
-            if (fromChain.stakeDenom == toSendDenom) {
+            if (fromChain.stakingAssetDenom() == toSendDenom) {
                 sendableAmount = sendableAmount.subtracting(iotaFeeBudget)
             }
             
@@ -477,13 +477,13 @@ class CommonTransfer: BaseVC {
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
             } else if (sendAssetType == .EVM_COIN) {
-                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
                 let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
-                toAssetDenomLabel.text = fromChain.coinSymbol
+                toAssetDenomLabel.text = fromChain.mainAssetSymbol()
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                                 
             } else if (sendAssetType == .SUI_COIN) {
@@ -504,7 +504,7 @@ class CommonTransfer: BaseVC {
                     toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel.font, decimal)
                 
             } else if (sendAssetType == .BTC_COIN) {
-                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
                 let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)     //
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
@@ -601,7 +601,7 @@ class CommonTransfer: BaseVC {
         sendBtn.isEnabled = false
         errorCardView.isHidden = true
         if (txStyle == .WEB3_STYLE) {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let totalGasPrice = evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1
             let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
@@ -614,7 +614,7 @@ class CommonTransfer: BaseVC {
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .SUI_STYLE) {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
             let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
@@ -622,7 +622,7 @@ class CommonTransfer: BaseVC {
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .IOTA_STYLE) {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeDpBudge = iotaFeeBudget.multiplying(byPowerOf10: -(msAsset.decimals ?? 9), withBehavior: getDivideHandler(msAsset.decimals ?? 9))
             let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
@@ -630,7 +630,7 @@ class CommonTransfer: BaseVC {
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .BTC_STYLE) {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.coinSymbol) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeAmount = btcTxFee.multiplying(byPowerOf10: -8, withBehavior: getDivideHandler(8))
             let feeValue = feePrice.multiplying(by: feeAmount, withBehavior: handler6)

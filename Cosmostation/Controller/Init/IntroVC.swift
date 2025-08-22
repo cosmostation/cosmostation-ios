@@ -52,7 +52,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
                         
                     } else {
                         let prefix = addressBook.dpAddress.components(separatedBy: "1").first ?? ""
-                        chainTag = ALLCHAINS().filter({ $0.isDefault && $0.bechAccountPrefix == prefix }).first?.tag ?? ""
+                        chainTag = ALLCHAINS().filter({ $0.isDefault && $0.bechAddressPrefix() == prefix }).first?.tag ?? ""
                     }
                 }
                 let updatedData = AddressBook(addressBook.id,

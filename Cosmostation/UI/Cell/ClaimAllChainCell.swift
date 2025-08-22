@@ -96,7 +96,7 @@ class ClaimAllChainCell: UITableViewCell {
         if (chain is ChainDydx) {
             mainRewardDenom = DYDX_USDC_DENOM
         } else {
-            mainRewardDenom = chain.stakeDenom!
+            mainRewardDenom = chain.stakingAssetDenom()
         }
         
         rewards.forEach { reward in
@@ -174,7 +174,7 @@ class ClaimAllChainCell: UITableViewCell {
             oldTag.isHidden = false
         }
         
-        let mainRewardDenom = chain.stakeDenom
+        let mainRewardDenom = chain.stakingAssetDenom()
         var mainRewardAmount = NSDecimalNumber.zero
         rewards.forEach { reward in
             if let rewardCoin = reward.reward.filter({ $0.denom == mainRewardDenom }).first {
@@ -182,8 +182,8 @@ class ClaimAllChainCell: UITableViewCell {
                 mainRewardAmount = mainRewardAmount.adding(amount)
             }
         }
-        let mainRewardCoin = Cosmos_Base_V1beta1_Coin(mainRewardDenom!, mainRewardAmount.stringValue)
-        if let msAsset = BaseData.instance.getAsset(chain.apiName, mainRewardDenom!) {
+        let mainRewardCoin = Cosmos_Base_V1beta1_Coin(mainRewardDenom, mainRewardAmount.stringValue)
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, mainRewardDenom) {
             let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId, false)
             let value = msPrice.multiplying(by: mainRewardAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
             WDP.dpCoin(msAsset, mainRewardCoin, nil, denomLabel, amountLabel, msAsset.decimals)

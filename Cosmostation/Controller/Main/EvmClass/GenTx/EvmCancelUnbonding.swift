@@ -91,7 +91,7 @@ class EvmCancelUnbonding: BaseVC {
             validatorsLabel.text = validator.description_p.moniker
         }
         
-        let stakeDenom = selectedChain.stakeDenom!
+        let stakeDenom = selectedChain.stakingAssetDenom()
         if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
             let unbondingAmount = NSDecimalNumber(string: unbondingEntry.entry.balance).multiplying(byPowerOf10: -msAsset.decimals!)
             amountLabel?.attributedText = WDP.dpAmount(unbondingAmount.stringValue, amountLabel!.font, msAsset.decimals!)
@@ -107,8 +107,8 @@ class EvmCancelUnbonding: BaseVC {
         selectedFeePosition = 1
         feeSegments.selectedSegmentIndex = selectedFeePosition
         feeSelectImg.image =  UIImage.init(named: selectedChain.coinLogo)
-        feeSelectLabel.text = selectedChain.coinSymbol
-        feeDenomLabel.text = selectedChain.coinSymbol
+        feeSelectLabel.text = selectedChain.mainAssetSymbol()
+        feeDenomLabel.text = selectedChain.mainAssetSymbol()
         
         let feePrice = BaseData.instance.getPrice(selectedChain.coinGeckoId)
         let totalGasPrice = evmGasPrice[selectedFeePosition].0 + evmGasPrice[selectedFeePosition].1

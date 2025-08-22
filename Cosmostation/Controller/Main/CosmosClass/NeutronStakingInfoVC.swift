@@ -63,7 +63,7 @@ class NeutronStakingInfoVC: BaseVC {
     }
     
     override func setLocalizedString() {
-        let symbol = selectedChain.assetSymbol(selectedChain.stakeDenom ?? "")
+        let symbol = selectedChain.assetSymbol(selectedChain.stakingAssetDenom())
         navigationItem.title = String(format: NSLocalizedString("str_coin_manage_stake", comment: ""), symbol)
         stakeBtn.setTitle(NSLocalizedString("str_start_stake", comment: ""), for: .normal)
     }
@@ -163,12 +163,12 @@ class NeutronStakingInfoVC: BaseVC {
             emptyStakeImg.isHidden = true
         }
         
-        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakeDenom ?? "") {
+        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakingAssetDenom()) {
             let url = URL(string: ResourceBase + "\(selectedChain.apiName!)/resource/ntrn.png")
             coinImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "tokenDefault"))
             var rewardAmount = NSDecimalNumber.zero
             rewards?.forEach { reward in
-                let rawAmount =  NSDecimalNumber(string: reward.reward.filter{ $0.denom == selectedChain.stakeDenom }.first?.amount ?? "0")
+                let rawAmount =  NSDecimalNumber(string: reward.reward.filter{ $0.denom == selectedChain.stakingAssetDenom() }.first?.amount ?? "0")
                 rewardAmount = rewardAmount.adding(rawAmount.multiplying(byPowerOf10: -18, withBehavior: handler0Down))
             }
             WDP.dpCoin(msAsset, rewardAmount, nil, rewardDenomLabel, rewardAmountLabel, msAsset.decimals)
