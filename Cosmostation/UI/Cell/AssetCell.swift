@@ -277,9 +277,9 @@ class AssetCell: UITableViewCell {
         }
     }
     
-    func bindSplToken(_ baseChain: BaseChain, _ tokenInfo: (String, JSON)) {
+    func bindSplToken(_ baseChain: BaseChain, _ tokenInfo: JSON) {
         if let solanaFetcher = (baseChain as? ChainSolana)?.getSolanaFetcher(),
-           let splToken = solanaFetcher.mintscanSplTokens.filter({ $0.address == tokenInfo.1["mint"].stringValue }).first {
+           let splToken = solanaFetcher.mintscanSplTokens.filter({ $0.address == tokenInfo["mint"].stringValue }).first {
             let value = solanaFetcher.splTokenValue(splToken.address ?? "")
             WDP.dpToken(splToken, coinImg, symbolLabel, amountLabel, 6)
             WDP.dpPrice(splToken.coinGeckoId, priceCurrencyLabel, priceLabel)
@@ -294,8 +294,8 @@ class AssetCell: UITableViewCell {
             }
             
         } else {
-            let amount = tokenInfo.1["tokenAmount"]["uiAmountString"].stringValue
-            let decimals = tokenInfo.1["tokenAmount"]["decimals"].int16Value
+            let amount = tokenInfo["tokenAmount"]["uiAmountString"].stringValue
+            let decimals = tokenInfo["tokenAmount"]["decimals"].int16Value
             coinImg.image = UIImage(named: "tokenDefault")
             symbolLabel.text = "UNKNOWN"
             WDP.dpPrice("", priceCurrencyLabel, priceLabel)

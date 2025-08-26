@@ -33,34 +33,34 @@ class KeyFac {
             
         }
         return nil
-
+        
     }
     
     static func getEd25519PriKey(_ seed: Data, _ path: String) -> Data? {
         do {
             let mac = try CryptoSwift.HMAC(key: "ed25519 seed", variant: .sha2(.sha512)).authenticate(seed.bytes)
             let macSeed = Data(mac)
-
+            
             let macSeedLeft = macSeed.subdata(in: 0..<32)
             let macSeedRight = macSeed.subdata(in: 32..<64)
-
+            
             var seedKey = macSeedLeft
             var seedChain = macSeedRight
-
+            
             let components = path.components(separatedBy: "/")
             var nodes = [UInt32]()
             for component in components[1 ..< components.count] {
                 let index = UInt32(component.trimmingCharacters(in: CharacterSet(charactersIn: "'")))
                 nodes.append(index!)
             }
-
+            
             try nodes.forEach { node in
                 let buf = Data(UInt32(0x80000000 + node).bytes)
                 let databuf = Data(count: 1) + seedKey + buf
-
+                
                 let reduceMac = try CryptoSwift.HMAC(key: seedChain.bytes, variant: .sha2(.sha512)).authenticate(databuf.bytes)
                 let reduceMacSeed = Data(reduceMac)
-
+                
                 seedKey = reduceMacSeed.subdata(in: 0..<32)
                 seedChain = reduceMacSeed.subdata(in: 32..<64)
             }
@@ -68,7 +68,7 @@ class KeyFac {
         } catch { print("error ", error) }
         return nil
     }
-
+    
     static func getSecp256k1PriKey(_ seed: Data, _ path: String) -> Data? {
         return (HDNode(seed: seed)?.derive(path: path, derivePrivateKey: true)!.privateKey)!
     }
@@ -108,7 +108,7 @@ class KeyFac {
             
         } else if (pubKeyType == .BTC_Legacy || pubKeyType == .BTC_Nested_Segwit || pubKeyType == .BTC_Native_Segwit || pubKeyType == .BTC_Taproot) {
             return BtcJS.shared.callJSValue(key: "getAddress", param: [pubKey.toHexString(), pubKeyType.algorhythm, network])
-        
+            
         } else if (pubKeyType == .SUI_Ed25519) {
             let data = Data([UInt8](Data(count: 1)) + pubKey)
             let hash = try! Blake2b.hash(size: 32, data: data)
@@ -117,7 +117,7 @@ class KeyFac {
         } else if (pubKeyType == .IOTA_Ed25519) {
             let hash = try! Blake2b.hash(size: 32, data: pubKey)
             return "0x" + hash.toHexString()
-
+            
         } else if (pubKeyType == .SOLANA_Ed25519) {
             return base58Encode(pubKey)
         }
@@ -171,6 +171,36 @@ class KeyFac {
             answer = "1" + answer
         }
         return answer
+    }
+    
+    static func base58Decode(_ address: String) -> [UInt8]? {
+        guard !address.isEmpty else { return [] }
+        var bytes = [Int]()
+        
+        for ch in address {
+            let base58Alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+            
+            var m = [Character: Int]()
+            for (i, c) in base58Alphabet.enumerated() { m[c] = i }
+            let indexMap = m
+            
+            guard let value = indexMap[ch] else { return nil }
+            var carry = value
+            for i in 0..<bytes.count {
+                let x = bytes[i] * 58 + carry
+                bytes[i] = x & 0xff
+                carry = x >> 8
+            }
+            while carry > 0 {
+                bytes.append(carry & 0xff)
+                carry >>= 8
+            }
+        }
+        
+        for ch in address {
+            if ch == "1" { bytes.append(0) } else { break }
+        }
+        return bytes.reversed().map { UInt8($0) }
     }
 }
 

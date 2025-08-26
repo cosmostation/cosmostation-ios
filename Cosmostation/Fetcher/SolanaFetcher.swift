@@ -15,7 +15,7 @@ class SolanaFetcher {
     var chain: BaseChain!
     
     var solanaAccountInfo = JSON()
-    var solanaTokenInfo = [(String, JSON)]()
+    var solanaTokenInfo = [JSON]()
     
     var mintscanSplTokens = [MintscanToken]()
     
@@ -50,14 +50,12 @@ class SolanaFetcher {
                     solanaAccountInfo = accountInfo["result"]
                     tokenInfo["result"]["value"].arrayValue.forEach{ tokenValue in
                         let info = tokenValue["account"]["data"]["parsed"]["info"]
-                        let pubKey = tokenValue["pubkey"].stringValue
-                        
-                        solanaTokenInfo.append((pubKey, info))
+                        solanaTokenInfo.append(info)
                     }
                     
                     solanaTokenInfo.forEach { tokenInfo in
-                        let mintAddress = tokenInfo.1["mint"].stringValue
-                        let amount = tokenInfo.1["tokenAmount"]["amount"].stringValue
+                        let mintAddress = tokenInfo["mint"].stringValue
+                        let amount = tokenInfo["tokenAmount"]["amount"].stringValue
                         
                         if let splToken = self.mintscanSplTokens.filter({ $0.address?.lowercased() == mintAddress.lowercased() }).first {
                             splToken.type = "spl"
@@ -76,29 +74,6 @@ class SolanaFetcher {
             print("solana error \(error) ", chain.tag)
             return false
         }
-    }
-    
-    func getSolanaRpc() -> String {
-        if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_RPC_ENDPOINT +  " : " + chain.name) {
-            return endpoint.trimmingCharacters(in: .whitespaces)
-        }
-        return chain.mainUrl
-    }
-}
-
-
-extension SolanaFetcher {
-    
-    func fetchAccountInfo(_ address: String) async throws -> JSON? {
-        let params: Any = [address, ["encoding": "base58"]]
-        let parameters: Parameters = ["method": "getAccountInfo", "params": params , "id" : 1, "jsonrpc" : "2.0"]
-        return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
-    }
-    
-    func fetchTokenInfo(_ address: String) async throws -> JSON? {
-        let params: Any = [address, ["programId": SOLANA_PROGRAM_ID], ["encoding": "jsonParsed"]]
-        let parameters: Parameters = ["method": "getTokenAccountsByOwner", "params": params , "id" : 1, "jsonrpc" : "2.0"]
-        return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
     
     func balanceAmount() -> NSDecimalNumber {
@@ -131,7 +106,7 @@ extension SolanaFetcher {
         var result = NSDecimalNumber.zero
         
         solanaTokenInfo.forEach { info in
-            if let splToken = mintscanSplTokens.filter({ $0.address == info.1["mint"].stringValue }).first {
+            if let splToken = mintscanSplTokens.filter({ $0.address == info["mint"].stringValue }).first {
                 let msPrice = BaseData.instance.getPrice(splToken.coinGeckoId, usd)
                 let value = msPrice.multiplying(by: splToken.getAmount()).multiplying(byPowerOf10: -splToken.decimals!, withBehavior: handler6)
                 result = result.adding(value)
@@ -146,5 +121,100 @@ extension SolanaFetcher {
     
     func valueTokenCnt(_ id: Int64) -> Int {
         return solanaTokenInfo.count
+    }
+    
+    func getSolanaRpc() -> String {
+        if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_RPC_ENDPOINT +  " : " + chain.name) {
+            return endpoint.trimmingCharacters(in: .whitespaces)
+        }
+        return chain.mainUrl
+    }
+}
+
+
+extension SolanaFetcher {
+    
+    func fetchAccountInfo(_ address: String) async throws -> JSON? {
+        let params: Any = [address, ["encoding": "base58"]]
+        let parameters: Parameters = ["method": "getAccountInfo", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchTokenInfo(_ address: String) async throws -> JSON? {
+        let params: Any = [address, ["programId": SOLANA_PROGRAM_ID], ["encoding": "jsonParsed"]]
+        let parameters: Parameters = ["method": "getTokenAccountsByOwner", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchMinimumRentBalanceInfo(_ dataSize: Int) async throws -> JSON? {
+        let params: Any = [dataSize, ["commitment": "finalized"]]
+        let parameters: Parameters = ["method": "getMinimumBalanceForRentExemption", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchLatestBlockHash() async throws -> String? {
+        let params: Any = [["commitment": "finalized"]]
+        let parameters: Parameters = ["method": "getLatestBlockhash", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        let result = try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]
+        return result["value"]["blockhash"].stringValue
+    }
+    
+    func createTransferTransaction(_ from: String, _ to: String, _ toAmount: String, _ recentBlockHash: String?) -> String? {
+        let createTransactionHex = SolanaJS.shared.callJSValue(key: "createTransferTransactionWithSerialize", param: [from, to, toAmount, recentBlockHash])
+        return createTransactionHex
+    }
+    
+    func fetchSimulate(_ txBase64: String) async throws -> JSON? {
+        let params: Any = [txBase64, ["commitment": "confirmed", "encoding": "base64", "replaceRecentBlockhash": true]]
+        let parameters: Parameters = ["method": "simulateTransaction", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchFeeMessage(_ txMessageBase64: String) async throws -> JSON? {
+        let params: Any = [txMessageBase64, ["commitment": "processed"]]
+        let parameters: Parameters = ["method": "getFeeForMessage", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchPrioritizationFee() async throws -> JSON? {
+        let params: Any = [[chain.mainAddress]]
+        let parameters: Parameters = ["method": "getRecentPrioritizationFees", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    // Set baseFee + tip
+    func overwriteComputeBudgetProgram(_ txBase64: String, _ computeUnitLimit: UInt64, _ computeUnitPrice: Double) -> String {
+        let overwriteProgramTxHex = """
+        function overwriteComputeBudgetProgramFunction() {
+            const txBase64 = '\(txBase64)';
+            const computeUnitLimit = \(computeUnitLimit);
+            const computeUnitPrice = \(computeUnitPrice);
+            
+            const programTx = overwriteComputeBudgetProgram(txBase64, {
+                units: computeUnitLimit,
+                microLamports: Math.ceil(computeUnitPrice * 1000000)
+            });
+            return programTx;
+        };
+        """
+        
+        return SolanaJS.shared.overwriteProgramTx(overwriteProgramTxHex)
+    }
+    
+    func signTransaction(_ programTxHex: String, _ privateKey: String) -> String? {
+        let signTransactionHex = SolanaJS.shared.callJSValue(key: "signTransaction", param: [programTxHex, privateKey])
+        return signTransactionHex
+    }
+    
+    func fetchSendTransaction(_ txHex: String) async throws -> JSON? {
+        let params: Any = [txHex, ["encoding": "base64"]]
+        let parameters: Parameters = ["method": "sendTransaction", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func fetchTxStatusInfo(_ txHash: String) async throws -> JSON? {
+        let params: Any = [[txHash], ["searchTransactionHistory": true]]
+        let parameters: Parameters = ["method": "getSignatureStatuses", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
 }

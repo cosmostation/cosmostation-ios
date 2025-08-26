@@ -20,7 +20,7 @@ class ChainSolana: BaseChain {
         tag = "solana501"
         chainImg = "chainSolana"
         apiName = "solana"
-        accountKeyType = AccountKeyType(.SOLANA_Ed25519, "m/44'/501'/0'/X")
+        accountKeyType = AccountKeyType(.SOLANA_Ed25519, "m/44'/501'/X/0'")
         
         coinSymbol = "SOL"
         
@@ -101,3 +101,6 @@ class ChainSolana: BaseChain {
 }
 
 let SOLANA_PROGRAM_ID = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+
+let SOLANA_DEFAULT_FEE = NSDecimalNumber.init(string: "5000")
+let SOLANA_MAX_PRIORITY_TIP = NSDecimalNumber.init(string: "2000")

@@ -177,7 +177,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                     self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                     return
                 }
-
+                
             } else if (sendType == .EVM_ERC20 && fromChain.tag == toChain.tag) {
                 //이더리움만 지원
                 if (WUtils.isValidEvmAddress(userInput)) {
@@ -198,6 +198,16 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                 } else {
                     onCheckNameServices(userInput!)
                 }
+            }
+            
+        } else if (toChain is ChainSolana) {
+            if (WUtils.isValidSolanaAddress(userInput)) {
+                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+                self.dismiss(animated: true)
+                return
+            } else {
+                self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                return
             }
         }
     }

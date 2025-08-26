@@ -944,6 +944,7 @@ public enum TxStyle: Int {
     case BTC_STYLE = 3
     case GNO_STYLE = 4
     case IOTA_STYLE = 5
+    case SOLANA_STYLE = 6
 }
 
 public enum TxType: Int {
