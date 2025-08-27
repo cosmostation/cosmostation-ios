@@ -25,7 +25,7 @@ class SolanaFetcher {
     
     func fetchSolanaBalance() async -> Bool {
         solanaAccountInfo = JSON()
-        if let accountInfo = try? await fetchAccountInfo(chain.mainAddress) {
+        if let accountInfo = try? await fetchAccountInfo(chain.mainAddress, "base58") {
             guard let result = accountInfo?["result"], result.exists() else {
                 return false
             }
@@ -41,7 +41,7 @@ class SolanaFetcher {
         solanaTokenInfo.removeAll()
         
         do {
-            if let accountInfo = try await fetchAccountInfo(chain.mainAddress),
+            if let accountInfo = try await fetchAccountInfo(chain.mainAddress, "base58"),
                let tokenInfo = try await fetchTokenInfo(chain.mainAddress) {
                 
                 self.mintscanSplTokens = BaseData.instance.mintscanSplTokens?.filter({ $0.chainName == chain.apiName }) ?? []
@@ -134,18 +134,21 @@ class SolanaFetcher {
 
 extension SolanaFetcher {
     
-    func fetchAccountInfo(_ address: String) async throws -> JSON? {
-        let params: Any = [address, ["encoding": "base58"]]
+    // account & sol info
+    func fetchAccountInfo(_ address: String, _ addressType: String) async throws -> JSON? {
+        let params: Any = [address, ["encoding": addressType]]
         let parameters: Parameters = ["method": "getAccountInfo", "params": params , "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
     
+    // spl info
     func fetchTokenInfo(_ address: String) async throws -> JSON? {
         let params: Any = [address, ["programId": SOLANA_PROGRAM_ID], ["encoding": "jsonParsed"]]
         let parameters: Parameters = ["method": "getTokenAccountsByOwner", "params": params , "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
     
+    // rent balance
     func fetchMinimumRentBalanceInfo(_ dataSize: Int) async throws -> JSON? {
         let params: Any = [dataSize, ["commitment": "finalized"]]
         let parameters: Parameters = ["method": "getMinimumBalanceForRentExemption", "params": params , "id" : 1, "jsonrpc" : "2.0"]
@@ -159,9 +162,16 @@ extension SolanaFetcher {
         return result["value"]["blockhash"].stringValue
     }
     
-    func createTransferTransaction(_ from: String, _ to: String, _ toAmount: String, _ recentBlockHash: String?) -> String? {
+    // sol send Tx
+    func createTransferTransaction(_ from: String, _ to: String, _ toAmount: String, _ recentBlockHash: String?) async throws -> String? {
         let createTransactionHex = SolanaJS.shared.callJSValue(key: "createTransferTransactionWithSerialize", param: [from, to, toAmount, recentBlockHash])
         return createTransactionHex
+    }
+    
+    // spl send Tx
+    func createSplTokenTransferTransaction(_ from: String, _ to: String, _ mint: String, _ toAmount: String, _ recentBlockHash: String?, _ isCreateATA: Bool) async throws -> String? {
+        let createSplTokenTransactionHex = SolanaJS.shared.callJSValue(key: "createSplTokenTransferTransactionWithSerialize", param: [from, to, mint, toAmount, recentBlockHash, isCreateATA])
+        return createSplTokenTransactionHex
     }
     
     func fetchSimulate(_ txBase64: String) async throws -> JSON? {
@@ -183,7 +193,7 @@ extension SolanaFetcher {
     }
     
     // Set baseFee + tip
-    func overwriteComputeBudgetProgram(_ txBase64: String, _ computeUnitLimit: UInt64, _ computeUnitPrice: Double) -> String {
+    func overwriteComputeBudgetProgram(_ txBase64: String, _ computeUnitLimit: UInt64, _ computeUnitPrice: Double) async throws -> String {
         let overwriteProgramTxHex = """
         function overwriteComputeBudgetProgramFunction() {
             const txBase64 = '\(txBase64)';
@@ -201,7 +211,7 @@ extension SolanaFetcher {
         return SolanaJS.shared.overwriteProgramTx(overwriteProgramTxHex)
     }
     
-    func signTransaction(_ programTxHex: String, _ privateKey: String) -> String? {
+    func signTransaction(_ programTxHex: String, _ privateKey: String) async throws -> String? {
         let signTransactionHex = SolanaJS.shared.callJSValue(key: "signTransaction", param: [programTxHex, privateKey])
         return signTransactionHex
     }
@@ -212,9 +222,15 @@ extension SolanaFetcher {
         return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
     
+    // TxHash
     func fetchTxStatusInfo(_ txHash: String) async throws -> JSON? {
         let params: Any = [[txHash], ["searchTransactionHistory": true]]
         let parameters: Parameters = ["method": "getSignatureStatuses", "params": params , "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func associatedTokenAddress(_ mint: String, _ to: String) async throws -> String? {
+        let receiverATA = SolanaJS.shared.callJSValue(key: "getAssociatedTokenAddress", param: [mint, to])
+        return receiverATA
     }
 }

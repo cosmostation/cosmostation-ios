@@ -112,7 +112,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             fromBtcFetcher = (fromChain as? ChainBitCoin86)?.getBtcFetcher()
             fetchBtcTx(result)
             
-        } else if (txStyle == .SOLANA_STYLE) {
+        } else if (txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
             guard let result = solanaResult?["result"].string else {
                 loadingView.isHidden = true
                 failView.isHidden = false
@@ -198,30 +198,12 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                 });
             }
             
-        } else if (txStyle == .SUI_STYLE) {
+        } else if (txStyle == .SUI_STYLE || txStyle == .IOTA_STYLE || txStyle == .BTC_STYLE || txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
             successView.isHidden = false
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
                 self.onCheckAddAddressBook()
             });
             
-        } else if (txStyle == .IOTA_STYLE) {
-            successView.isHidden = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-                self.onCheckAddAddressBook()
-            });
-            
-        } else if (txStyle == .BTC_STYLE) {
-            successView.isHidden = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-                self.onCheckAddAddressBook()
-            });
-
-        } else if (txStyle == .SOLANA_STYLE) {
-            successView.isHidden = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-                self.onCheckAddAddressBook()
-            });
-
         } else if (txStyle == .COSMOS_STYLE || txStyle == .GNO_STYLE) {
             if (cosmosTxResponse?.txResponse.code != 0) {
                 failView.isHidden = false
@@ -264,7 +246,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             guard let url = fromChain.getExplorerTx(btcResult?["result"].stringValue) else { return }
             self.onShowSafariWeb(url)
 
-        } else if (txStyle == .SOLANA_STYLE) {
+        } else if (txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
             guard let url = fromChain.getExplorerTx(solanaResult?["result"].stringValue) else { return }
             self.onShowSafariWeb(url)
 
@@ -501,6 +483,8 @@ extension CommonTransferResult {
                 self.fetchBtcTx(self.btcResult!["result"].stringValue)
             } else if (self.txStyle == .GNO_STYLE) {
                 self.fetchGnoTx()
+            } else if (self.txStyle == .SOLANA_STYLE || self.txStyle == .SPL_STYLE) {
+                self.fetchSolanaTx(self.solanaResult!["result"].stringValue)
             }
         }))
         self.present(noticeAlert, animated: true)

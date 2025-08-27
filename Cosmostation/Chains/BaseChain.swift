@@ -257,15 +257,22 @@ class BaseChain {
     func assetSymbol(_ denom: String) -> String {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.symbol ?? "UnKnown"
+            
         } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return cw20Token.symbol ?? "UnKnown"
+            
         } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.symbol ?? "UnKnown"
+            
         } else if isSupportGrc20(),
                   let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return grc20Token.symbol ?? "UnKnown"
+            
+        } else if isSupportSpl(),
+                  let splToken = (self as? ChainSolana)?.getSolanaFetcher()?.mintscanSplTokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return splToken.symbol ?? "UnKnown"
         }
         return "UnKnown"
     }
@@ -273,9 +280,11 @@ class BaseChain {
     func assetImgUrl(_ denom: String) -> URL? {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.assetImg()
+            
         } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return cw20Token.assetImg()
+            
         } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.assetImg()
@@ -283,6 +292,10 @@ class BaseChain {
         } else if isSupportGrc20(),
                   let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return grc20Token.assetImg()
+            
+        } else if isSupportSpl(),
+                  let splToken = (self as? ChainSolana)?.getSolanaFetcher()?.mintscanSplTokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return splToken.assetImg()
         }
         return nil
     }
@@ -290,15 +303,22 @@ class BaseChain {
     func assetDecimal(_ denom: String) -> Int16 {
         if let msAsset = BaseData.instance.getAsset(apiName, denom) {
             return msAsset.decimals ?? 6
+            
         } else if isSupportCw20(),
                   let cw20Token = getCosmosfetcher()?.mintscanCw20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return cw20Token.decimals ?? 6
+            
         } else if isSupportErc20(),
                   let erc20Token = getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return erc20Token.decimals ?? 6
+            
         } else if isSupportGrc20(),
                   let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return grc20Token.decimals ?? 6
+            
+        } else if isSupportSpl(),
+                  let splToken = (self as? ChainSolana)?.getSolanaFetcher()?.mintscanSplTokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return splToken.decimals ?? 8
         }
         return 6
     }
@@ -315,6 +335,10 @@ class BaseChain {
         } else if isSupportGrc20(),
                   let grc20Token = (self as? ChainGno)?.getGnoFetcher()?.mintscanGrc20Tokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
             return grc20Token.coinGeckoId ?? ""
+            
+        } else if isSupportSpl(),
+                  let splToken = (self as? ChainSolana)?.getSolanaFetcher()?.mintscanSplTokens.filter({ $0.address?.lowercased() == denom.lowercased() }).first {
+            return splToken.coinGeckoId ?? ""
         }
         return ""
     }
@@ -457,6 +481,10 @@ extension BaseChain {
     
     func isSupportGrc20() -> Bool {
         return getChainListParam()["is_support_grc20"].bool ?? false
+    }
+    
+    func isSupportSpl() -> Bool {
+        return getChainListParam()["is_support_spl"].bool ?? false
     }
     
     func getChainName() -> String {
@@ -945,6 +973,7 @@ public enum TxStyle: Int {
     case GNO_STYLE = 4
     case IOTA_STYLE = 5
     case SOLANA_STYLE = 6
+    case SPL_STYLE = 7
 }
 
 public enum TxType: Int {

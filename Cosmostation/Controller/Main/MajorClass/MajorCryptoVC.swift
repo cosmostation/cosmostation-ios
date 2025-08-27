@@ -24,7 +24,7 @@ class MajorCryptoVC: BaseVC {
     
     var iotaBalances = Array<(String, NSDecimalNumber)>()
     
-    var allSplokens = [JSON]()
+    var allSplTokens = [JSON]()
     var searchSplTokens = [JSON]()
     
     override func viewDidLoad() {
@@ -127,13 +127,13 @@ class MajorCryptoVC: BaseVC {
             }
             
         } else if let solanaFetcher = (selectedChain as? ChainSolana)?.getSolanaFetcher() {
-            allSplokens = solanaFetcher.solanaTokenInfo
-            allSplokens.sort {
+            allSplTokens = solanaFetcher.solanaTokenInfo
+            allSplTokens.sort {
                 let value0 = solanaFetcher.splTokenValue($0["mint"].stringValue)
                 let value1 = solanaFetcher.splTokenValue($1["mint"].stringValue)
                 return value0.compare(value1).rawValue > 0 ? true : false
             }
-            searchSplTokens = allSplokens
+            searchSplTokens = allSplTokens
         }
         
         loadingView.isHidden = true
@@ -339,15 +339,18 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 return
                 
             } else {
-                let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
-//                transfer.sendAssetType = .EVM_ERC20
-//                transfer.fromChain = selectedChain
-//                transfer.toSendDenom = mintscanErc20Tokens[indexPath.row].address
-//                transfer.toSendMsToken = mintscanErc20Tokens[indexPath.row]
-//                transfer.modalTransitionStyle = .coverVertical
-//                self.present(transfer, animated: true)
-//                return
-//                
+                let mintAddress = searchSplTokens[indexPath.row]["mint"].stringValue
+                if let solanaFetcher = (selectedChain as? ChainSolana)?.getSolanaFetcher(),
+                   let splToken = solanaFetcher.mintscanSplTokens.filter({ $0.chainName == selectedChain.apiName && $0.address?.lowercased() == mintAddress.lowercased() }).first {
+                    let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+                    transfer.sendAssetType = .SOLANA_SPL
+                    transfer.fromChain = selectedChain
+                    transfer.toSendDenom = splToken.address
+                    transfer.toSendMsToken = splToken
+                    transfer.modalTransitionStyle = .coverVertical
+                    self.present(transfer, animated: true)
+                    return
+                }
             }
         }
     }

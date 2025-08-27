@@ -55,7 +55,7 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
             amountTextField.text = existedAmount!.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal)).stringValue
         }
         
-        if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20 || sendAssetType == .GNO_GRC20) {
+        if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20 || sendAssetType == .GNO_GRC20 || sendAssetType == .SOLANA_SPL) {
             WDP.dpToken(toSendMsToken, nil, availableDenom, availableLabel, decimal)
             
         } else if (sendAssetType == .COSMOS_COIN || sendAssetType == .GNO_COIN) {
@@ -66,16 +66,10 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
             
-        } else if (sendAssetType == .SUI_COIN || sendAssetType == .IOTA_COIN || sendAssetType == .SOLANA_COIN) {
+        } else if (sendAssetType == .BTC_COIN || sendAssetType == .SUI_COIN || sendAssetType == .IOTA_COIN || sendAssetType == .SOLANA_COIN) {
             availableDenom.text = fromChain.assetSymbol(toSendDenom)
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
-            
-        } else if (sendAssetType == .BTC_COIN) {
-            availableDenom.text = fromChain.assetSymbol(toSendDenom)
-            let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
-            availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
-
         }
     }
     
