@@ -255,6 +255,9 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate ,UITextViewDelegate {
                 
             } else if chain.supportCosmos && WUtils.isValidBechAddress(chain, address) {
                 return true
+                
+            } else if chain is ChainSolana && WUtils.isValidSolanaAddress(address) {
+                return true
             }
             
         } else {
@@ -266,45 +269,6 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate ,UITextViewDelegate {
         }
         return false
     }
-    
-    func getRecipinetChain(_ address: String?) -> BaseChain? {
-        var network = ""
-        if address!.starts(with: "t") || address!.starts(with: "2") || address!.starts(with: "m") {
-            network = "testnet"
-        } else {
-            network = "bitcoin"
-        }
-
-        if (address?.isEmpty == true) {
-            return nil
-        }
-        if (WUtils.isValidEvmAddress(address)) {
-            return ChainEthereum()
-            
-        } else if WUtils.isValidSuiAdderss(address) {
-            return ChainSui()
-            
-        } else if BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [address, network]) {
-            if address!.starts(with: "bc1") {
-                return ChainBitCoin86()
-            } else if address!.starts(with: "tb1") {
-                return ChainBitCoin86_T()
-            } else if address!.starts(with: "1") {
-                return ChainBitCoin44()
-            } else if address!.starts(with: "m") {
-                return ChainBitCoin44_T()
-            } else if address!.starts(with: "3") {
-                return ChainBitCoin49()
-            } else if address!.starts(with: "2") {
-                return ChainBitCoin49_T()
-            }
-
-        } else if let chain = ALLCHAINS().filter({ address!.starts(with: $0.bechAddressPrefix() + "1") == true }).first {
-            return chain
-        }
-        return nil
-    }
-    
 }
 
 

@@ -1645,7 +1645,6 @@ extension CommonTransfer {
                        let prioritizationFees = try await solanaFetcher.fetchPrioritizationFee() {
                         
                         if (simulateResponse["result"]["value"]["err"].exists() && simulateResponse["result"]["value"]["err"].type != .null) {
-                            print("Test12345 : ", simulateResponse["result"]["value"]["err"])
                             DispatchQueue.main.async {
                                 self.view.isUserInteractionEnabled = true
                                 self.loadingView.isHidden = true

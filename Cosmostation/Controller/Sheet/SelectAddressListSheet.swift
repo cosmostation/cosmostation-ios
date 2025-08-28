@@ -68,7 +68,7 @@ class SelectAddressListSheet: BaseVC {
                 }
             }
             BaseData.instance.selectAllAddressBooks().forEach { book in
-                if (WUtils.isValidSuiAdderss(book.dpAddress) && book.dpAddress != senderMajorAddress && book.chainName == toChain.tag) {
+                if (book.dpAddress != senderMajorAddress && book.chainName == toChain.tag) {
                     majorAddressBook.append(book)
                 }
             }
