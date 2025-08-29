@@ -2429,6 +2429,8 @@
 		E1D97C082B9EF65000496807 /* SelectEndpointSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D97C052B9EF65000496807 /* SelectEndpointSheet.swift */; };
 		E1D97C092B9EF65000496807 /* SelectEndpointSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D97C062B9EF65000496807 /* SelectEndpointSheet.xib */; };
 		E1D97C0A2B9EF65000496807 /* SelectEndpointSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D97C062B9EF65000496807 /* SelectEndpointSheet.xib */; };
+		E1DAED742E61831E00B3F56D /* ChainWemix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DAED732E61831E00B3F56D /* ChainWemix.swift */; };
+		E1DAED752E61831E00B3F56D /* ChainWemix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DAED732E61831E00B3F56D /* ChainWemix.swift */; };
 		E1DBD3E02B620B760058E0DC /* EvmClass.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DBD3DF2B620B760058E0DC /* EvmClass.storyboard */; };
 		E1DBD3E12B620B760058E0DC /* EvmClass.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1DBD3DF2B620B760058E0DC /* EvmClass.storyboard */; };
 		E1DBD3E42B6220C60058E0DC /* EvmAssetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DBD3E32B6220C60058E0DC /* EvmAssetVC.swift */; };
@@ -3851,6 +3853,7 @@
 		E1D931F02BCCD8C700AEEA10 /* AllChainCompoundingStartVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllChainCompoundingStartVC.xib; sourceTree = "<group>"; };
 		E1D97C052B9EF65000496807 /* SelectEndpointSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEndpointSheet.swift; sourceTree = "<group>"; };
 		E1D97C062B9EF65000496807 /* SelectEndpointSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectEndpointSheet.xib; sourceTree = "<group>"; };
+		E1DAED732E61831E00B3F56D /* ChainWemix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainWemix.swift; sourceTree = "<group>"; };
 		E1DBD3DF2B620B760058E0DC /* EvmClass.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = EvmClass.storyboard; path = Cosmostation/Controller/Main/EvmClass/EvmClass.storyboard; sourceTree = SOURCE_ROOT; };
 		E1DBD3E32B6220C60058E0DC /* EvmAssetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmAssetVC.swift; sourceTree = "<group>"; };
 		E1DBD3E62B6220DC0058E0DC /* EvmNftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvmNftVC.swift; sourceTree = "<group>"; };
@@ -4014,6 +4017,7 @@
 				04E4138B2D27C76E001378D3 /* ChainTabiEVM.swift */,
 				0485A50C2CDA473400DE1661 /* ChainTenetEVM.swift */,
 				E1F945542DDF203D00672DE1 /* ChainWardenEVM.swift */,
+				E1DAED732E61831E00B3F56D /* ChainWemix.swift */,
 				045032352C1EEA9600235F6A /* ChainXplaEVM.swift */,
 				7948D6742D911D98005208B2 /* ChainXrplEVM.swift */,
 				04E228862DE8500C00EBE768 /* ChainZeroGravityEVM.swift */,
@@ -7186,6 +7190,7 @@
 				04C8174D2BA98D75006B800A /* cosmos_gov_v1_gov.pb.swift in Sources */,
 				E10B1D8C2C2156430039283B /* KavaMintListCell.swift in Sources */,
 				18FFB59F281AF533004E65BB /* Signer.swift in Sources */,
+				E1DAED752E61831E00B3F56D /* ChainWemix.swift in Sources */,
 				047843722AC991B300462F1C /* injective_tokenfactory_v1beta1_query.grpc.swift in Sources */,
 				04FA747A2AA0446A001A2830 /* BaseMsgSheetCell.swift in Sources */,
 				04D279EE2A67C96F00AF046A /* ChainKava459.swift in Sources */,
@@ -8206,6 +8211,7 @@
 				04FAD9CC2AB1B29B00143A3E /* UIStoryboard+StoryBoard.swift in Sources */,
 				E1F257EC2BFB2024008F4D21 /* EvmRedelegate.swift in Sources */,
 				E122DC4C2A8A4712006D1E7B /* tendermint_p2p_types.pb.swift in Sources */,
+				E1DAED742E61831E00B3F56D /* ChainWemix.swift in Sources */,
 				792613C92CD4B82800FAF47D /* initia_move_v1_query.grpc.swift in Sources */,
 				04C816FC2BA98D75006B800A /* cosmos_staking_v1beta1_query.pb.swift in Sources */,
 				045032A22C1EEFCA00235F6A /* ChainGovgen.swift in Sources */,
