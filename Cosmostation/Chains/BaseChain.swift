@@ -427,6 +427,10 @@ extension BaseChain {
         return getChainListParam()["main_asset_symbol"].string ?? coinSymbol
     }
     
+    func gasAssetSymbol() -> String {
+        return getChainListParam()["gas_asset_symbol"].string ?? coinSymbol
+    }
+    
     func stakingAssetDenom() -> String {
         return getChainListParam()["staking_asset_denom"].string ?? stakeDenom
     }
@@ -806,6 +810,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainLum880())
     result.append(ChainLumera())
     result.append(ChainManifest())
+    result.append(ChainMantle())                        //EVM
     result.append(ChainMantra())
     result.append(ChainMedibloc())
     result.append(ChainMigaloo())
@@ -872,6 +877,8 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainUnification())
     result.append(ChainUnion())
 //    result.append(ChainWardenEVM())                     //EVM
+    result.append(ChainWemix())                         //EVM
+    result.append(ChainWorldchain())                    //EVM
     result.append(ChainXion())
     result.append(ChainXplaEVM())                       //EVM
     result.append(ChainXpla())
