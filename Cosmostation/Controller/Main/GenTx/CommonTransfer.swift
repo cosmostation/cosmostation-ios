@@ -229,7 +229,7 @@ class CommonTransfer: BaseVC {
             }
             selectedFeePosition = 1
             feeSegments.selectedSegmentIndex = selectedFeePosition
-            feeSelectLabel.text = fromChain.mainAssetSymbol()
+            feeSelectLabel.text = fromChain.gasAssetSymbol()
             
         } else if (txStyle == .SUI_STYLE) {
             feeSegments.removeAllSegments()
@@ -326,7 +326,7 @@ class CommonTransfer: BaseVC {
         } else if (sendAssetType == .EVM_COIN) {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = 18
-            symbol = fromChain.mainAssetSymbol()
+            symbol = fromChain.gasAssetSymbol()
             sendableAmount = evmFetcher.evmBalances.subtracting(EVM_BASE_FEE)
             
         } else if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20 || sendAssetType == .GNO_GRC20) {
@@ -508,13 +508,13 @@ class CommonTransfer: BaseVC {
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
             } else if (sendAssetType == .EVM_COIN) {
-                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
+                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.gasAssetSymbol()) else { return }
                 let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
-                toAssetDenomLabel.text = fromChain.mainAssetSymbol()
+                toAssetDenomLabel.text = fromChain.gasAssetSymbol()
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                                 
             } else if (sendAssetType == .SUI_COIN || sendAssetType == .IOTA_COIN) {
