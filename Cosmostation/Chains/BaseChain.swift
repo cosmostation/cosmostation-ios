@@ -403,6 +403,10 @@ extension BaseChain {
         return getChainListParam()["main_asset_symbol"].string ?? coinSymbol
     }
     
+    func gasAssetSymbol() -> String {
+        return getChainListParam()["gas_asset_symbol"].string ?? coinSymbol
+    }
+    
     func stakingAssetDenom() -> String {
         return getChainListParam()["staking_asset_denom"].string ?? stakeDenom
     }
