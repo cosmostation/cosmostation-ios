@@ -945,6 +945,8 @@
 		049E2A0E2E4C5BCB00E660DC /* ChainGravityAlpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E2A0C2E4C5BCB00E660DC /* ChainGravityAlpha.swift */; };
 		049E2A102E66AA7700E660DC /* ChainMantle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E2A0F2E66AA7700E660DC /* ChainMantle.swift */; };
 		049E2A112E66AA7700E660DC /* ChainMantle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E2A0F2E66AA7700E660DC /* ChainMantle.swift */; };
+		049E2A162E66ACAF00E660DC /* ChainWorldchain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E2A152E66ACAF00E660DC /* ChainWorldchain.swift */; };
+		049E2A172E66ACAF00E660DC /* ChainWorldchain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049E2A152E66ACAF00E660DC /* ChainWorldchain.swift */; };
 		04A116F128F7DB42003605E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */; };
 		04A116F228F7DB42003605E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */; };
 		04A1A8022AC80AA50014EF92 /* TxAmountSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1A8002AC80AA50014EF92 /* TxAmountSheet.swift */; };
@@ -2994,6 +2996,7 @@
 		049E2A092E4C59F800E660DC /* ChainCelo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCelo.swift; sourceTree = "<group>"; };
 		049E2A0C2E4C5BCB00E660DC /* ChainGravityAlpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainGravityAlpha.swift; sourceTree = "<group>"; };
 		049E2A0F2E66AA7700E660DC /* ChainMantle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantle.swift; sourceTree = "<group>"; };
+		049E2A152E66ACAF00E660DC /* ChainWorldchain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainWorldchain.swift; sourceTree = "<group>"; };
 		04A116F028F7DB42003605E5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04A1A8002AC80AA50014EF92 /* TxAmountSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxAmountSheet.swift; sourceTree = "<group>"; };
 		04A1A8012AC80AA50014EF92 /* TxAmountSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxAmountSheet.xib; sourceTree = "<group>"; };
@@ -4022,6 +4025,7 @@
 				0485A50C2CDA473400DE1661 /* ChainTenetEVM.swift */,
 				E1F945542DDF203D00672DE1 /* ChainWardenEVM.swift */,
 				E1DAED732E61831E00B3F56D /* ChainWemix.swift */,
+				049E2A152E66ACAF00E660DC /* ChainWorldchain.swift */,
 				045032352C1EEA9600235F6A /* ChainXplaEVM.swift */,
 				7948D6742D911D98005208B2 /* ChainXrplEVM.swift */,
 				04E228862DE8500C00EBE768 /* ChainZeroGravityEVM.swift */,
@@ -7264,6 +7268,7 @@
 				045032302C1EE98B00235F6A /* ChainAvalanche.swift in Sources */,
 				79FCA3C32C3F9E92001C17D0 /* artela_types_v1_account.pb.swift in Sources */,
 				0450329D2C1EEFCA00235F6A /* ChainFinschia.swift in Sources */,
+				049E2A162E66ACAF00E660DC /* ChainWorldchain.swift in Sources */,
 				04C816A92BA98D75006B800A /* cosmos_circuit_v1_types.pb.swift in Sources */,
 				E1831BA52AB82FE60078A28B /* ManageChainCell.swift in Sources */,
 				E1F257E12BFB1FF3008F4D21 /* EvmUndelegate.swift in Sources */,
@@ -8087,6 +8092,7 @@
 				046EA8E32AD04A2600A2FCE7 /* desmos_profiles_v1beta1_models_profile.pb.swift in Sources */,
 				E15980A92A83ADB60032892B /* MainTabVC.swift in Sources */,
 				04C816CA2BA98D75006B800A /* cosmos_app_v1alpha1_config.pb.swift in Sources */,
+				049E2A172E66ACAF00E660DC /* ChainWorldchain.swift in Sources */,
 				047843792AC991B300462F1C /* injective_insurance_v1beta1_tx.pb.swift in Sources */,
 				04965B3D2C379A9C00403605 /* ChainArtelaEVM_T.swift in Sources */,
 				7987524A2CFFF32C00308EAC /* ChainAaron.swift in Sources */,
