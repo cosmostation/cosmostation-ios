@@ -623,7 +623,7 @@ class CommonTransfer: BaseVC {
         sendBtn.isEnabled = false
         errorCardView.isHidden = true
         if (txStyle == .WEB3_STYLE) {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.gasAssetSymbol()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let totalGasPrice = evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1
             let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
