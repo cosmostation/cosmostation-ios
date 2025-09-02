@@ -108,13 +108,6 @@ class DeriveCell: UITableViewCell {
             oldTag.isHidden = chain.isDefault
         }
         
-//        if (account.type == .withMnemonic) {
-//            hdPathLabel.text =  chain.getHDPath(account.lastHDPath)
-//            hdPathLabel.adjustsFontSizeToFitWidth = true
-//        } else {
-//            hdPathLabel.text = ""
-//        }
-        
         if chain is ChainOkt996Keccak {
             keyTypeTag.text = chain.accountKeyType.pubkeyType.algorhythm
             keyTypeTag.isHidden = false
@@ -163,6 +156,12 @@ class DeriveCell: UITableViewCell {
                 let stakeDenom = chain.stakingAssetDenom()
                 let availableAmount = gnoFetcher.balanceAmount(stakeDenom)
                 if let msAsset = BaseData.instance.getAsset(chain.apiName, stakeDenom) {
+                    WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)
+                }
+
+            } else if let solanaFetcher = (chain as? ChainSolana)?.getSolanaFetcher() {
+                let availableAmount = solanaFetcher.balanceAmount()
+                if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.mainAssetSymbol()) {
                     WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)
                 }
 

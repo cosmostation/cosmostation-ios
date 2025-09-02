@@ -1235,6 +1235,7 @@
 "error_staking_min_sui" = "1 SUI以上からステーキング可能です。";
 "error_staking_min_iota" = "1 IOTA以上からステーキング可能です。";
 "error_pending" = "保留中の状態です。\nアンステーキングはできません。";
+"error_minimum_rent" = "レントのために最低でも %@ SOL を送金してください。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

@@ -283,6 +283,16 @@ public class WUtils {
         return address?.range(of: suiPattern, options: .regularExpression ) != nil
     }
     
+    static func isValidSolanaAddress(_ address: String?) -> Bool {
+        let test = KeyFac.base58Decode(address ?? "")
+        guard let addr = address?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !addr.isEmpty,
+              let decoded = KeyFac.base58Decode(addr) else {
+            return false
+        }
+        return decoded.count == 32
+    }
+    
     static func generateQrCode(_ content: String)  -> CIImage? {
         let data = content.data(using: String.Encoding.ascii, allowLossyConversion: false)
         let filter = CIFilter(name: "CIQRCodeGenerator")

@@ -257,6 +257,34 @@ class SelectEndpointCell: UITableViewCell {
         }
     }
 
+    func onBindSolanaRpcEndpoint(_ position: Int, _ chain: BaseChain) {
+        if let solanaFetcher = (chain as? ChainSolana)?.getSolanaFetcher() {
+            let endpoint = chain.getChainListParam()["solana_rpc_endpoint"].arrayValue[position]
+            providerLabel.text = endpoint["provider"].string
+            endpointLabel.text = endpoint["url"].string?.replacingOccurrences(of: "https://", with: "")
+            endpointLabel.adjustsFontSizeToFitWidth = true
+            
+            let checkTime = CFAbsoluteTimeGetCurrent()
+            let url = endpoint["url"].stringValue.hasSuffix("/") ? String(endpoint["url"].stringValue.dropLast()) : endpoint["url"].stringValue
+
+            if solanaFetcher.getSolanaRpc().contains(url) {
+                seletedImg.isHidden = false
+                rootView.backgroundColor = .color08
+            }
+            
+            let param: Parameters = ["method": "getHealth", "params": [], "id" : 1, "jsonrpc" : "2.0"]
+            AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in
+                switch response.result {
+                case .success :
+                    self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
+                    self.configureSpeedLabel()
+                    
+                case .failure:
+                    self.configureClosedNode()
+                }
+            }
+        }
+    }
     
     
     func getConnection(_ host: String, _ port: Int) -> ClientConnection {

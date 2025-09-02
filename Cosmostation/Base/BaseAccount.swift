@@ -291,6 +291,12 @@ public class BaseAccount {
                 chain.allCoinUSDValue = gnoFetcher.allCoinValue(true)
                 chain.allTokenValue = gnoFetcher.allTokenValue(id)
                 chain.allTokenUSDValue = gnoFetcher.allTokenValue(id, true)
+                
+            } else if let solanaFetcher = (chain as? ChainSolana)?.getSolanaFetcher() {
+                chain.allCoinValue = solanaFetcher.allCoinValue()
+                chain.allCoinUSDValue = solanaFetcher.allCoinValue(true)
+                chain.allTokenValue = solanaFetcher.allTokenValue()
+                chain.allTokenUSDValue = solanaFetcher.allTokenValue(true)
             }
         }
     }
@@ -321,6 +327,7 @@ public enum PubKeyType: Int {
     case INITIA_Keccak256 = 11
     case IOTA_Ed25519 = 12
     case COSMOS_EVM_Keccak256 = 13
+    case SOLANA_Ed25519 = 14
 
     case unknown = 99
     
@@ -354,6 +361,8 @@ public enum PubKeyType: Int {
             return "ed25519"
         case PubKeyType.COSMOS_EVM_Keccak256:
             return "keccak256"
+        case PubKeyType.SOLANA_Ed25519:
+            return "ed25519"
         case PubKeyType.unknown:
             return "unknown"
         }

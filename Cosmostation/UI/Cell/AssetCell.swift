@@ -259,4 +259,55 @@ class AssetCell: UITableViewCell {
             }
         }
     }
+    
+    func bindSolanaClassAsset(_ baseChain: BaseChain) {
+        if let solanaFetcher = (baseChain as? ChainSolana)?.getSolanaFetcher(),
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.coinSymbol) {
+            WDP.dpCoin(msAsset, solanaFetcher.balanceAmount(), coinImg, symbolLabel, amountLabel, 6)
+            WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(solanaFetcher.balanceValue(), valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
+        }
+    }
+    
+    func bindSplToken(_ baseChain: BaseChain, _ tokenInfo: JSON) {
+        if let solanaFetcher = (baseChain as? ChainSolana)?.getSolanaFetcher(),
+           let splToken = solanaFetcher.mintscanSplTokens.filter({ $0.address == tokenInfo["mint"].stringValue }).first {
+            let value = solanaFetcher.splTokenValue(splToken.address ?? "")
+            WDP.dpToken(splToken, coinImg, symbolLabel, amountLabel, 6)
+            WDP.dpPrice(splToken.coinGeckoId, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(splToken.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
+            
+        } else {
+            let amount = tokenInfo["tokenAmount"]["uiAmountString"].stringValue
+            let decimals = tokenInfo["tokenAmount"]["decimals"].int16Value
+            coinImg.image = UIImage(named: "tokenDefault")
+            symbolLabel.text = "UNKNOWN"
+            WDP.dpPrice("", priceCurrencyLabel, priceLabel)
+            amountLabel?.attributedText = WDP.dpAmount(amount, amountLabel!.font, decimals)
+            if (BaseData.instance.getHideValue()) {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(NSDecimalNumber.zero, valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
+        }
+    }
 }

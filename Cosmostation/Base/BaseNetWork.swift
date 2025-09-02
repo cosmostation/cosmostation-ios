@@ -95,6 +95,10 @@ class BaseNetWork {
         return try await AF.request(BaseNetWork.msGrc20Url(), method: .get).serializingDecodable(MintscanTokens.self).value
     }
     
+    func fetchSplTokens() async throws -> MintscanTokens {
+        return try await AF.request(BaseNetWork.msSplUrl(), method: .get).serializingDecodable(MintscanTokens.self).value
+    }
+    
     func fetchCw721s() async throws -> JSON {
         return try await AF.request(BaseNetWork.msCw721Url(), method: .get).serializingDecodable(JSON.self).value
     }
@@ -133,6 +137,10 @@ class BaseNetWork {
     
     static func msGrc20Url() -> String {
         return MINTSCAN_API_URL + "v11/assets/grc20"
+    }
+    
+    static func msSplUrl() -> String {
+        return MINTSCAN_API_URL + "v11/assets/spl"
     }
     
     static func msChainParams() -> String {

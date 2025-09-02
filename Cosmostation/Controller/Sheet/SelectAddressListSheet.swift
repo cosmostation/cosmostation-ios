@@ -61,14 +61,14 @@ class SelectAddressListSheet: BaseVC {
         
         var tempRefBechAddresses = [RefAddress]()
         
-        if (toChain is ChainSui || toChain is ChainIota) {
+        if (toChain is ChainSui || toChain is ChainIota || toChain is ChainSolana) {
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
                 if (refAddress.chainTag == toChain.tag && refAddress.bechAddress != senderMajorAddress) {
                     refMajorAddresses.append(refAddress)
                 }
             }
             BaseData.instance.selectAllAddressBooks().forEach { book in
-                if (WUtils.isValidSuiAdderss(book.dpAddress) && book.dpAddress != senderMajorAddress && book.chainName == toChain.tag) {
+                if (book.dpAddress != senderMajorAddress && book.chainName == toChain.tag) {
                     majorAddressBook.append(book)
                 }
             }

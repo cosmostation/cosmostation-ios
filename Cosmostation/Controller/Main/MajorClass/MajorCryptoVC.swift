@@ -23,11 +23,10 @@ class MajorCryptoVC: BaseVC {
     var suiBalances = Array<(String, NSDecimalNumber)>()
     
     var iotaBalances = Array<(String, NSDecimalNumber)>()
-
-//    var btcBalances = NSDecimalNumber.zero
-//    var btcPendingInput = NSDecimalNumber.zero
-//    var btcPendingOutput = NSDecimalNumber.zero
-
+    
+    var allSplTokens = [JSON]()
+    var searchSplTokens = [JSON]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -127,12 +126,16 @@ class MajorCryptoVC: BaseVC {
 
             }
             
-        } else if let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher() {
-//            btcBalances = btcFetcher.btcBalances
-//            btcPendingInput = btcFetcher.btcPendingInput
-//            btcPendingOutput = btcFetcher.btcPendingOutput
-            
+        } else if let solanaFetcher = (selectedChain as? ChainSolana)?.getSolanaFetcher() {
+            allSplTokens = solanaFetcher.solanaTokenInfo
+            allSplTokens.sort {
+                let value0 = solanaFetcher.splTokenValue($0["mint"].stringValue)
+                let value1 = solanaFetcher.splTokenValue($1["mint"].stringValue)
+                return value0.compare(value1).rawValue > 0 ? true : false
+            }
+            searchSplTokens = allSplTokens
         }
+        
         loadingView.isHidden = true
         tableView.reloadData()
     }
@@ -173,12 +176,7 @@ class MajorCryptoVC: BaseVC {
 extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (selectedChain is ChainSui || selectedChain is ChainIota) {
-            return 1
-        } else if (selectedChain is ChainBitCoin86) {
-            return 1
-        }
-        return 0
+        return 2
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -195,28 +193,43 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             view.titleLabel.text = "Native Coins"
             view.cntLabel.text = ""
             
+        } else if (selectedChain is ChainSolana) {
+            if (section == 0) {
+                view.titleLabel.text = "Native Coins"
+                view.cntLabel.text = ""
+            } else {
+                view.titleLabel.text = "Spl Tokens"
+                view.cntLabel.text = String(searchSplTokens.count)
+            }
         }
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (selectedChain is ChainSui || selectedChain is ChainIota) {
-            return 40
-        } else if (selectedChain is ChainBitCoin86) {
-            return 40
+        if (selectedChain is ChainSolana) {
+            if (section == 0) {
+                return 40
+            } else if (section == 1 ) {
+                return searchSplTokens.count > 0 ? 40 : 0
+            }
+        } else {
+            return (section == 0) ? 40 : 0
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (selectedChain is ChainSui) {
-            return suiBalances.count
+            return (section == 0) ? suiBalances.count : 0
             
         } else if selectedChain is ChainIota {
-            return iotaBalances.count
+            return (section == 0) ? iotaBalances.count : 0
             
         } else if (selectedChain is ChainBitCoin86) {
-            return 1
+            return (section == 0) ? 1 : 0
+            
+        } else if (selectedChain is ChainSolana) {
+            return (section == 0) ? 1 : searchSplTokens.count
         }
         return 0
     }
@@ -251,7 +264,17 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AssetBtcCell") as! AssetBtcCell
             cell.bindBtcAsset(selectedChain)
             return cell
+            
+        } else if (selectedChain is ChainSolana) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+            if (indexPath.section == 0) {
+                cell.bindSolanaClassAsset(selectedChain)
+            } else {
+                cell.bindSplToken(selectedChain, searchSplTokens[indexPath.row])
+            }
+            return cell
         }
+        
         return UITableViewCell()
     }
     
@@ -281,7 +304,6 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             transfer.toSendDenom = iotaBalances[indexPath.row].0
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
-
             
         } else if (selectedChain is ChainBitCoin86) {
             Task {
@@ -303,6 +325,31 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
                         }
                         return
                     }
+                }
+            }
+            
+        } else if selectedChain is ChainSolana {
+            if (indexPath.section == 0) {
+                let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+                transfer.sendAssetType = .SOLANA_COIN
+                transfer.fromChain = selectedChain
+                transfer.toSendDenom = selectedChain.coinSymbol
+                transfer.modalTransitionStyle = .coverVertical
+                self.present(transfer, animated: true)
+                return
+                
+            } else {
+                let mintAddress = searchSplTokens[indexPath.row]["mint"].stringValue
+                if let solanaFetcher = (selectedChain as? ChainSolana)?.getSolanaFetcher(),
+                   let splToken = solanaFetcher.mintscanSplTokens.filter({ $0.chainName == selectedChain.apiName && $0.address?.lowercased() == mintAddress.lowercased() }).first {
+                    let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+                    transfer.sendAssetType = .SOLANA_SPL
+                    transfer.fromChain = selectedChain
+                    transfer.toSendDenom = splToken.address
+                    transfer.toSendMsToken = splToken
+                    transfer.modalTransitionStyle = .coverVertical
+                    self.present(transfer, animated: true)
+                    return
                 }
             }
         }

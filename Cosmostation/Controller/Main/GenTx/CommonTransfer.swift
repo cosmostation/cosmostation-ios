@@ -110,6 +110,11 @@ class CommonTransfer: BaseVC {
     var btcTxHex = ""
 
     var gnoFetcher: GnoFetcher!
+    
+    var solanaFetcher: SolanaFetcher!
+    var solanaFeeAmount = NSDecimalNumber.zero
+    var solanaMinimumRentAmount = NSDecimalNumber.zero
+    var solanaTxHex = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,6 +156,14 @@ class CommonTransfer: BaseVC {
             } else if (sendAssetType == .GNO_COIN || sendAssetType == .GNO_GRC20) {
                 txStyle = .GNO_STYLE
                 gnoFetcher = (fromChain as? ChainGno)?.getGnoFetcher()
+                
+            } else if (sendAssetType == .SOLANA_COIN) {
+                solanaFetcher = (fromChain as? ChainSolana)?.getSolanaFetcher()
+                txStyle = .SOLANA_STYLE
+                
+            } else if (sendAssetType == .SOLANA_SPL) {
+                solanaFetcher = (fromChain as? ChainSolana)?.getSolanaFetcher()
+                txStyle = .SPL_STYLE
                 
             } else {
                 txStyle = .COSMOS_STYLE
@@ -255,6 +268,17 @@ class CommonTransfer: BaseVC {
             feeSegments.selectedSegmentIndex = selectedFeePosition
             cosmosTxFee = fromChain.getInitPayableFee()!
 
+        } else if (txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
+            feeSegments.removeAllSegments()
+            feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
+            selectedFeePosition = 0
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            feeSelectLabel.text = fromChain.mainAssetSymbol()
+            
+            solanaMinimumRentBalance()
+            
+            solanaFeeAmount = SOLANA_DEFAULT_FEE
+
         } else if (txStyle == .COSMOS_STYLE) {
             if (cosmosFetcher.cosmosBaseFees.count > 0) {
                 feeSegments.removeAllSegments()
@@ -346,6 +370,11 @@ class CommonTransfer: BaseVC {
                 let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
                 sendableAmount = sendableAmount.subtracting(totalFeeAmount)
             }
+            
+        } else if (sendAssetType == .SOLANA_COIN || sendAssetType == .SOLANA_SPL) {
+            titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
+            decimal = fromChain.assetDecimal(toSendDenom)
+            symbol = fromChain.assetSymbol(toSendDenom)
         }
         
         if txStyle != .COSMOS_STYLE {
@@ -462,10 +491,11 @@ class CommonTransfer: BaseVC {
             
         } else {
             toAmount = NSDecimalNumber(string: amount)
-            if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20 || sendAssetType == .GNO_GRC20) {
+            if (sendAssetType == .COSMOS_WASM || sendAssetType == .EVM_ERC20 || sendAssetType == .GNO_GRC20 || sendAssetType == .SOLANA_SPL) {
                 let msPrice = BaseData.instance.getPrice(toSendMsToken!.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
+                
                 WDP.dpToken(toSendMsToken!, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
@@ -473,6 +503,7 @@ class CommonTransfer: BaseVC {
                 let msPrice = BaseData.instance.getPrice(toSendMsAsset!.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
+                
                 WDP.dpCoin(toSendMsAsset, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
@@ -486,7 +517,7 @@ class CommonTransfer: BaseVC {
                 toAssetDenomLabel.text = fromChain.mainAssetSymbol()
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                                 
-            } else if (sendAssetType == .SUI_COIN) {
+            } else if (sendAssetType == .SUI_COIN || sendAssetType == .IOTA_COIN) {
                 let msPrice = BaseData.instance.getPrice(fromChain.assetGeckoId(toSendDenom))
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
@@ -495,25 +526,16 @@ class CommonTransfer: BaseVC {
                 toAssetDenomLabel.text = fromChain.assetSymbol(toSendDenom)
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                 
-            } else if (sendAssetType == .IOTA_COIN) {
-                    let msPrice = BaseData.instance.getPrice(fromChain.assetGeckoId(toSendDenom))
-                    let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
-                    let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
-                    WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
-                    toAssetDenomLabel.text = fromChain.assetSymbol(toSendDenom)
-                    toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel.font, decimal)
-                
-            } else if (sendAssetType == .BTC_COIN) {
+            } else if (sendAssetType == .BTC_COIN || sendAssetType == .SOLANA_COIN) {
                 guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
                 let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)     //
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
-                WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
-                toAssetDenomLabel.text = fromChain.assetSymbol(toSendDenom)
-                toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
-
+                WDP.dpCoin(msAsset, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
+                WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
             }
+            
             toSendAssetHint.isHidden = true
             toAssetAmountLabel.isHidden = false
             toAssetDenomLabel.isHidden = false
@@ -661,6 +683,14 @@ class CommonTransfer: BaseVC {
                 }
             }
 
+        } else if (txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let feeAmount = solanaFeeAmount.multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+            let feeValue = feePrice.multiplying(by: feeAmount, withBehavior: handler6)
+            WDP.dpCoin(msAsset, solanaFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            
         } else if (txStyle == .COSMOS_STYLE) {
             if let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
                 feeSelectLabel.text = msAsset.symbol
@@ -723,6 +753,16 @@ class CommonTransfer: BaseVC {
                 return
             }
             btcTxFee = NSDecimalNumber.init(value: toGas)
+            sendBtn.isHidden = false
+            
+        } else if (txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
+            guard let toGas = gasUsed else {
+                sendBtn.isHidden = true
+                errorCardView.isHidden = false
+                errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
+                return
+            }
+            solanaFeeAmount = NSDecimalNumber.init(value: toGas)
             sendBtn.isHidden = false
             
         } else if (txStyle == .GNO_STYLE) {
@@ -833,6 +873,12 @@ class CommonTransfer: BaseVC {
                     ibcCoinSendSimul()                                              // Coin IBC Send! (COSMOS_COIN)
                 }
             }
+            
+        } else if (txStyle == .SOLANA_STYLE) {                                      // SOLANA SOL Send
+            solSendSimul()
+            
+        } else if (txStyle == .SPL_STYLE) {                                         // SOLANA SPL TOKEN Send
+            splSendSimul()
         }
     }
 
@@ -1553,6 +1599,219 @@ extension CommonTransfer {
     
 }
 
+extension CommonTransfer {
+    
+    func solanaMinimumRentBalance() {
+        Task {
+            do {
+                var dataSize = 0
+                if (sendAssetType == .SOLANA_COIN) {
+                    dataSize = 0
+                } else {
+                    dataSize = 165
+                }
+                if let minimumRentBalance = try await solanaFetcher.fetchMinimumRentBalanceInfo(dataSize) {
+                    if (!minimumRentBalance["err"].exists()) {
+                        solanaMinimumRentAmount = NSDecimalNumber(value: minimumRentBalance["result"].uInt64Value)
+                        if (sendAssetType == .SOLANA_COIN) {
+                            sendableAmount = solanaFetcher.balanceAmount().subtracting(solanaMinimumRentAmount).subtracting(SOLANA_MAX_PRIORITY_TIP)
+                        } else {
+                            sendableAmount = NSDecimalNumber.init(string: toSendMsToken.amount)
+                        }
+                        
+                        if (sendableAmount.compare(NSDecimalNumber.zero).rawValue <= 0) {
+                            sendableAmount = NSDecimalNumber.zero
+                        }
+                    } else {
+                        onShowToast(NSLocalizedString("error_evm_simul", comment: ""))
+                    }
+                }
+            }
+        }
+    }
+    
+    func solSendSimul() {
+        Task {
+            do {
+                if let recentBlockHash = try await solanaFetcher.fetchLatestBlockHash(),
+                   let createTransactionHex = try await solanaFetcher.createTransferTransaction(fromChain.mainAddress, toAddress, toAmount.stringValue, recentBlockHash) {
+                    let createTransactionHexJsonData = try JSON(data: Data(createTransactionHex.utf8))
+                    
+                    let txBase64 = createTransactionHexJsonData["serializedTxWithBase64"].stringValue
+                    let txMessageWithBase64 = createTransactionHexJsonData["serializedTxMessageWithBase64"].stringValue
+                    
+                    if let simulateResponse = try await solanaFetcher.fetchSimulate(txBase64),
+                       let feeForMessage = try await solanaFetcher.fetchFeeMessage(txMessageWithBase64),
+                       let prioritizationFees = try await solanaFetcher.fetchPrioritizationFee() {
+                        
+                        if (simulateResponse["result"]["value"]["err"].exists() && simulateResponse["result"]["value"]["err"].type != .null) {
+                            DispatchQueue.main.async {
+                                self.view.isUserInteractionEnabled = true
+                                self.loadingView.isHidden = true
+                                self.sendBtn.isEnabled = false
+                                if (simulateResponse["result"]["value"]["err"]["InsufficientFundsForRent"].exists()) {
+                                    guard let msAsset = BaseData.instance.getAsset(self.fromChain.apiName, self.fromChain.mainAssetSymbol()) else { return }
+                                    let dpAmount = String(describing: self.solanaMinimumRentAmount.multiplying(byPowerOf10: -(msAsset.decimals ?? 8), withBehavior: getDivideHandler(msAsset.decimals ?? 8)))
+                                    let errorText = String(format: NSLocalizedString("error_minimum_rent", comment: ""), dpAmount)
+                                    
+                                    self.sendBtn.setTitle(NSLocalizedString(errorText, comment: ""), for: .normal)
+                                    self.sendBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+                                } else {
+                                    self.sendBtn.setTitle(NSLocalizedString("Simulate Error", comment: ""), for: .normal)
+                                }
+                                return
+                            }
+
+                        } else {
+                            let unitsConsumed = simulateResponse["result"]["value"]["unitsConsumed"].uInt64Value
+                            let baseFee = feeForMessage["result"]["value"].uInt64Value
+                            
+                            var sumFee: UInt64 = 0
+                            let recentPrioritizationFees = prioritizationFees["result"].arrayValue
+                            if (recentPrioritizationFees.count > 0) {
+                                recentPrioritizationFees.forEach { fee in
+                                    sumFee += fee["prioritizationFee"].uInt64Value
+                                }
+                            }
+                            
+                            let tipFee: UInt64 = (sumFee > 0 && recentPrioritizationFees.count > 0) ? (sumFee / UInt64(recentPrioritizationFees.count) / 1_000_000) + baseFee / 10 : baseFee / 10
+                            
+                            let computeUnitLimit = unitsConsumed + baseFee / 10
+                            let computeUnitPrice = Double(tipFee) / Double(computeUnitLimit)
+                            
+                            solanaTxHex = try await solanaFetcher.overwriteComputeBudgetProgram(txBase64, computeUnitLimit, computeUnitPrice)
+                            
+                            let tip = Double(computeUnitLimit) * computeUnitPrice
+                            let fee = baseFee + UInt64(ceil(tip))
+                            
+                            DispatchQueue.main.async {
+                                self.onUpdateWithSimul(fee)
+                                self.sendBtn.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
+                            }
+                        }
+                    }
+                    
+                } else {
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(nil)
+                    }
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
+                }
+            }
+        }
+    }
+    
+    func splSendSimul() {
+        Task {
+            do {
+                if let receiverATA = try await solanaFetcher.associatedTokenAddress(toSendDenom, toAddress),
+                   let accountATAInfo = try await solanaFetcher.fetchAccountInfo(receiverATA, "base64"),
+                   let recentBlockHash = try await solanaFetcher.fetchLatestBlockHash() {
+                    let isCreateAssociatedTokenAccount = accountATAInfo["result"]["value"].type == .null
+                    
+                    if let createSplTransactionHex = try await solanaFetcher.createSplTokenTransferTransaction(fromChain.mainAddress, toAddress, toSendDenom, toAmount.stringValue, recentBlockHash, isCreateAssociatedTokenAccount) {
+                        let createSplTransactionHexJsonData = try JSON(data: Data(createSplTransactionHex.utf8))
+                        
+                        let txBase64 = createSplTransactionHexJsonData["serializedTxWithBase64"].stringValue
+                        let txMessageWithBase64 = createSplTransactionHexJsonData["serializedTxMessageWithBase64"].stringValue
+                        
+                        if let simulateResponse = try await solanaFetcher.fetchSimulate(txBase64),
+                           let feeForMessage = try await solanaFetcher.fetchFeeMessage(txMessageWithBase64),
+                           let prioritizationFees = try await solanaFetcher.fetchPrioritizationFee() {
+                            
+                            if (simulateResponse["result"]["value"]["err"].exists() && simulateResponse["result"]["value"]["err"].type != .null) {
+                                DispatchQueue.main.async {
+                                    self.view.isUserInteractionEnabled = true
+                                    self.loadingView.isHidden = true
+                                    self.sendBtn.isEnabled = false
+                                    let errorMsg = simulateResponse["result"]["value"]["err"]
+                                    self.onShowToast(String(describing: errorMsg))
+                                    return
+                                }
+                                
+                            } else {
+                                let unitsConsumed = simulateResponse["result"]["value"]["unitsConsumed"].uInt64Value
+                                let baseFee = feeForMessage["result"]["value"].uInt64Value
+                                
+                                var sumFee: UInt64 = 0
+                                let recentPrioritizationFees = prioritizationFees["result"].arrayValue
+                                if (recentPrioritizationFees.count > 0) {
+                                    recentPrioritizationFees.forEach { fee in
+                                        sumFee += fee["prioritizationFee"].uInt64Value
+                                    }
+                                }
+                                
+                                let tipFee: UInt64 = (sumFee > 0 && recentPrioritizationFees.count > 0) ? (sumFee / UInt64(recentPrioritizationFees.count) / 1_000_000) + baseFee / 10 : baseFee / 10
+                                
+                                let computeUnitLimit = unitsConsumed + baseFee / 10
+                                let computeUnitPrice = Double(tipFee) / Double(computeUnitLimit)
+                                
+                                solanaTxHex = try await solanaFetcher.overwriteComputeBudgetProgram(txBase64, computeUnitLimit, computeUnitPrice)
+                                
+                                let tip = Double(computeUnitLimit) * computeUnitPrice
+                                var fee = baseFee + UInt64(ceil(tip))
+                                
+                                if (isCreateAssociatedTokenAccount) {
+                                    fee = fee + UInt64(truncating: solanaMinimumRentAmount)
+                                }
+                                
+                                DispatchQueue.main.async {
+                                    self.onUpdateWithSimul(fee)
+                                }
+                            }
+                        }
+                    }
+                    
+                } else {
+                    DispatchQueue.main.async {
+                        self.onUpdateWithSimul(nil)
+                    }
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
+                }
+            }
+        }
+    }
+    
+    func solanaSend() {
+        Task {
+            do {
+                if let privateKey = fromChain.privateKey?.toHexString(),
+                   let signTransactionHex = try await solanaFetcher.signTransaction(solanaTxHex, privateKey),
+                   let sendTransaction = try await solanaFetcher.fetchSendTransaction(signTransactionHex) {
+                       DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                           self.loadingView.isHidden = true
+                           let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                           txResult.txStyle = self.txStyle
+                           txResult.fromChain = self.fromChain
+                           txResult.toChain = self.toChain
+                           txResult.toAddress = self.toAddress
+                           txResult.solanaResult = sendTransaction
+                           txResult.modalPresentationStyle = .fullScreen
+                           self.present(txResult, animated: true)
+                       })
+                   }
+
+            } catch {
+                //TODO handle Error
+            }
+        }
+    }
+}
+
 
 // Cosmos style tx simul and broadcast
 extension CommonTransfer {
@@ -1980,6 +2239,9 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
             } else if (txStyle == .BTC_STYLE) {
                 btcSend(btcTxHex)
                 
+            } else if (txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
+                solanaSend()
+                
             } else if (txStyle == .GNO_STYLE) {
                 if sendAssetType == .GNO_GRC20 {
                     gnoGrc20Send()
@@ -2026,5 +2288,6 @@ public enum SendAssetType: Int {
     case GNO_GRC20 = 9
     case IOTA_COIN = 10
     case IOTA_NFT = 11
-
+    case SOLANA_COIN = 12                   // solana sol send
+    case SOLANA_SPL = 13                    // solana spl send
 }

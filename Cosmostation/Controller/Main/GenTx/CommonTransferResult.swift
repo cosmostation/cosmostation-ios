@@ -34,6 +34,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var fromIotaFetcher: IotaFetcher!
     var fromBtcFetcher: BtcFetcher!
     var fromGnoFetcher: GnoFetcher!
+    var fromSolanaFetcher: SolanaFetcher!
     var toChain: BaseChain!
     var toAddress: String?
     var txMemo = ""
@@ -50,6 +51,8 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var iotaResult: JSON?
     
     var btcResult: JSON?
+    
+    var solanaResult: JSON?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,6 +112,17 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             fromBtcFetcher = (fromChain as? ChainBitCoin86)?.getBtcFetcher()
             fetchBtcTx(result)
             
+        } else if (txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
+            guard let result = solanaResult?["result"].string else {
+                loadingView.isHidden = true
+                failView.isHidden = false
+                failMsgLabel.text = solanaResult?["error"]["message"].stringValue
+                confirmBtn.isEnabled = true
+                return
+            }
+            fromSolanaFetcher = (fromChain as? ChainSolana)?.getSolanaFetcher()
+            fetchSolanaTx(result)
+
         } else if (txStyle == .GNO_STYLE) {
             guard (cosmosBroadcastTxResponse?.txhash) != nil else {
                 loadingView.isHidden = true
@@ -184,24 +198,12 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                 });
             }
             
-        } else if (txStyle == .SUI_STYLE) {
+        } else if (txStyle == .SUI_STYLE || txStyle == .IOTA_STYLE || txStyle == .BTC_STYLE || txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
             successView.isHidden = false
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
                 self.onCheckAddAddressBook()
             });
             
-        } else if (txStyle == .IOTA_STYLE) {
-            successView.isHidden = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-                self.onCheckAddAddressBook()
-            });
-            
-        } else if (txStyle == .BTC_STYLE) {
-            successView.isHidden = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-                self.onCheckAddAddressBook()
-            });
-
         } else if (txStyle == .COSMOS_STYLE || txStyle == .GNO_STYLE) {
             if (cosmosTxResponse?.txResponse.code != 0) {
                 failView.isHidden = false
@@ -239,8 +241,13 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
         } else if (txStyle == .IOTA_STYLE) {
             guard let url = fromChain.getExplorerTx(iotaResult?["result"]["digest"].stringValue) else { return }
             self.onShowSafariWeb(url)
+            
         } else if (txStyle == .BTC_STYLE) {
             guard let url = fromChain.getExplorerTx(btcResult?["result"].stringValue) else { return }
+            self.onShowSafariWeb(url)
+
+        } else if (txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
+            guard let url = fromChain.getExplorerTx(solanaResult?["result"].stringValue) else { return }
             self.onShowSafariWeb(url)
 
         } else if (txStyle == .COSMOS_STYLE || txStyle == .GNO_STYLE) {
@@ -428,6 +435,39 @@ extension CommonTransferResult {
         }
     }
     
+    func fetchSolanaTx(_ hex: String) {
+        Task {
+            do {
+                if let statusInfoRes = try await fromSolanaFetcher.fetchTxStatusInfo(hex) {
+                    let statusInfos = statusInfoRes["result"]["value"].arrayValue
+                    if (statusInfos.count > 0) {
+                        if (statusInfos.first?.type == .null) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                                self.fetchSolanaTx(hex)
+                            })
+                        } else {
+                            self.onUpdateView()
+                        }
+                    }
+                }
+                
+            } catch {
+                self.confirmBtn.isEnabled = true
+                self.fetchCnt = self.fetchCnt - 1
+                if (self.fetchCnt > 0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                        self.fetchSolanaTx(hex)
+                    });
+                    
+                } else {
+                    DispatchQueue.main.async {
+                        self.onShowMoreWait()
+                    }
+                }
+            }
+        }
+    }
+    
     func onShowMoreWait() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("more_wait_title", comment: ""), message: NSLocalizedString("more_wait_msg", comment: ""), preferredStyle: .alert)
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
@@ -443,6 +483,8 @@ extension CommonTransferResult {
                 self.fetchBtcTx(self.btcResult!["result"].stringValue)
             } else if (self.txStyle == .GNO_STYLE) {
                 self.fetchGnoTx()
+            } else if (self.txStyle == .SOLANA_STYLE || self.txStyle == .SPL_STYLE) {
+                self.fetchSolanaTx(self.solanaResult!["result"].stringValue)
             }
         }))
         self.present(noticeAlert, animated: true)
