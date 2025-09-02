@@ -778,6 +778,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainLum880())
     result.append(ChainLumera())
     result.append(ChainManifest())
+    result.append(ChainMantle())                        //EVM
     result.append(ChainMantra())
     result.append(ChainMedibloc())
     result.append(ChainMigaloo())
