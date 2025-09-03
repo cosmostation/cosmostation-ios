@@ -315,14 +315,14 @@ class NftTransfer: BaseVC {
     
     func onUpdateFeeView() {
         if (txStyle == .SUI_STYLE) {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.gasAssetDenom()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeValue = feePrice.multiplying(by: suiFeeBudget).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(9))
             WDP.dpCoin(msAsset, suiFeeBudget, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if txStyle == .IOTA_STYLE {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.gasAssetDenom()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeValue = feePrice.multiplying(by: iotaFeeBudget).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: getDivideHandler(9))
             WDP.dpCoin(msAsset, iotaFeeBudget, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
@@ -330,15 +330,14 @@ class NftTransfer: BaseVC {
             
             
         } else if (txStyle == .COSMOS_STYLE) {
-            if let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
-                feeSelectLabel.text = msAsset.symbol
-            
-                let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
-                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-                let value = msPrice.multiplying(by: totalFeeAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
-                WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
-                WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
-            }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) else { return }
+            feeSelectLabel.text = msAsset.symbol
+        
+            let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let value = msPrice.multiplying(by: totalFeeAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+            WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
         }
     }
     
