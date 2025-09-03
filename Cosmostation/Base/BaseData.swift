@@ -44,10 +44,26 @@ final class BaseData: NSObject{
         }
     }
     
-    func getAsset(_ chainApiName: String, _ denom: String) -> MintscanAsset? {
-        return mintscanAssets?.filter({
-            $0.chain == chainApiName && ($0.denom?.lowercased() == denom.lowercased() || $0.symbol?.lowercased() == denom.lowercased())
-        }).first
+    func getAsset(_ chainApiName: String, _ denom: String?) -> MintscanAsset? {
+        if denom == nil  { return nil }
+        return mintscanAssets?.filter({ $0.chain == chainApiName && $0.denom?.lowercased() == denom!.lowercased() }).first
+    }
+    
+    func getToken(_ chainApiName: String, _ denom: String?) -> MintscanToken? {
+        if denom == nil  { return nil }
+        if let token = mintscanCw20Tokens?.filter({ $0.chainName == chainApiName && $0.address?.lowercased() == denom!.lowercased() }).first {
+            return token
+            
+        } else if let token = mintscanErc20Tokens?.filter({ $0.chainName == chainApiName && $0.address?.lowercased() == denom!.lowercased() }).first {
+            return token
+            
+        } else if let token = mintscanGrc20Tokens?.filter({ $0.chainName == chainApiName && $0.address?.lowercased() == denom!.lowercased() }).first {
+            return token
+            
+        } else if let token = mintscanSplTokens?.filter({ $0.chainName == chainApiName && $0.address?.lowercased() == denom!.lowercased() }).first {
+            return token
+        }
+        return nil
     }
     
     func getPrice(_ geckoId: String?, _ usd: Bool? = false) -> NSDecimalNumber {
