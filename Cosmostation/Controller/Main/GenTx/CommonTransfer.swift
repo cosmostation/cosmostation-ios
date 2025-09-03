@@ -508,14 +508,13 @@ class CommonTransfer: BaseVC {
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
             } else if (sendAssetType == .EVM_COIN) {
-                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.gasAssetSymbol()) else { return }
+                guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.gasAssetDenom()) else { return }
                 let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
-                WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                 
-                toAssetDenomLabel.text = fromChain.gasAssetSymbol()
-                toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
+                WDP.dpCoin(msAsset, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
+                WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
                                 
             } else if (sendAssetType == .SUI_COIN || sendAssetType == .IOTA_COIN) {
                 let msPrice = BaseData.instance.getPrice(fromChain.assetGeckoId(toSendDenom))
@@ -623,7 +622,7 @@ class CommonTransfer: BaseVC {
         sendBtn.isEnabled = false
         errorCardView.isHidden = true
         if (txStyle == .WEB3_STYLE) {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.gasAssetSymbol()) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.gasAssetDenom()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let totalGasPrice = evmGas[selectedFeePosition].0 + evmGas[selectedFeePosition].1
             let feeAmount = NSDecimalNumber(string: String(totalGasPrice.multiplied(by: evmGasLimit)))
@@ -636,7 +635,7 @@ class CommonTransfer: BaseVC {
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .SUI_STYLE) {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.gasAssetDenom()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
             let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
@@ -644,7 +643,7 @@ class CommonTransfer: BaseVC {
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .IOTA_STYLE) {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.gasAssetDenom()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeDpBudge = iotaFeeBudget.multiplying(byPowerOf10: -(msAsset.decimals ?? 9), withBehavior: getDivideHandler(msAsset.decimals ?? 9))
             let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
@@ -652,7 +651,7 @@ class CommonTransfer: BaseVC {
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .BTC_STYLE) {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetDenom()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeAmount = btcTxFee.multiplying(byPowerOf10: -8, withBehavior: getDivideHandler(8))
             let feeValue = feePrice.multiplying(by: feeAmount, withBehavior: handler6)
@@ -660,57 +659,55 @@ class CommonTransfer: BaseVC {
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             sendableAmount = sendableAmount.subtracting(btcTxFee)
             
-        } else if (txStyle == .GNO_STYLE) {
-            if let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
-                feeSelectLabel.text = msAsset.symbol
-                let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
-                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-                let value = msPrice.multiplying(by: totalFeeAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
-                WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
-                WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
-                
-                if (sendAssetType == .GNO_COIN) {
-                    let balanceAmount = gnoFetcher.balanceAmount(toSendDenom)
-                    if (cosmosTxFee.amount[0].denom == toSendDenom) {
-                        if (totalFeeAmount.compare(balanceAmount).rawValue > 0) {
-                            //ERROR short balance!!
-                        }
-                        sendableAmount = balanceAmount.subtracting(totalFeeAmount)
-                        
-                    } else {
-                        sendableAmount = balanceAmount
-                    }
-                }
-            }
-
         } else if (txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
-            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.mainAssetSymbol()) else { return }
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.gasAssetDenom()) else { return }
             let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
             let feeAmount = solanaFeeAmount.multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
             let feeValue = feePrice.multiplying(by: feeAmount, withBehavior: handler6)
             WDP.dpCoin(msAsset, solanaFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
-        } else if (txStyle == .COSMOS_STYLE) {
-            if let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) {
-                feeSelectLabel.text = msAsset.symbol
-                let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
-                let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-                let value = msPrice.multiplying(by: totalFeeAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
-                WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
-                WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
-                
-                if (sendAssetType == .COSMOS_COIN) {
-                    let availableAmount = cosmosFetcher.availableAmount(toSendDenom)
-                    if (cosmosTxFee.amount[0].denom == toSendDenom) {
-                        if (totalFeeAmount.compare(availableAmount).rawValue > 0) {
-                            //ERROR short balance!!
-                        }
-                        sendableAmount = availableAmount.subtracting(totalFeeAmount)
-                        
-                    } else {
-                        sendableAmount = availableAmount
+        } else if (txStyle == .GNO_STYLE) {
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) else { return }
+            feeSelectLabel.text = msAsset.symbol
+            let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let value = msPrice.multiplying(by: totalFeeAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+            WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
+            
+            if (sendAssetType == .GNO_COIN) {
+                let balanceAmount = gnoFetcher.balanceAmount(toSendDenom)
+                if (cosmosTxFee.amount[0].denom == toSendDenom) {
+                    if (totalFeeAmount.compare(balanceAmount).rawValue > 0) {
+                        //ERROR short balance!!
                     }
+                    sendableAmount = balanceAmount.subtracting(totalFeeAmount)
+                    
+                } else {
+                    sendableAmount = balanceAmount
+                }
+            }
+
+        } else if (txStyle == .COSMOS_STYLE) {
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) else { return }
+            feeSelectLabel.text = msAsset.symbol
+            let totalFeeAmount = NSDecimalNumber(string: cosmosTxFee.amount[0].amount)
+            let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let value = msPrice.multiplying(by: totalFeeAmount).multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+            WDP.dpCoin(msAsset, totalFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            WDP.dpValue(value, feeCurrencyLabel, feeValueLabel)
+            
+            if (sendAssetType == .COSMOS_COIN) {
+                let availableAmount = cosmosFetcher.availableAmount(toSendDenom)
+                if (cosmosTxFee.amount[0].denom == toSendDenom) {
+                    if (totalFeeAmount.compare(availableAmount).rawValue > 0) {
+                        //ERROR short balance!!
+                    }
+                    sendableAmount = availableAmount.subtracting(totalFeeAmount)
+                    
+                } else {
+                    sendableAmount = availableAmount
                 }
             }
         }

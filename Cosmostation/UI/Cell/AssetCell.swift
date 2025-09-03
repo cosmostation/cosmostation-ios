@@ -117,7 +117,7 @@ class AssetCell: UITableViewCell {
     
     func bindEvmClassCoin(_ baseChain: BaseChain) {
         if let evmFetcher = baseChain.getEvmfetcher(),
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.gasAssetSymbol()) {
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.gasAssetDenom()) {
             symbolLabel.text = msAsset.symbol?.uppercased()
             coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
             

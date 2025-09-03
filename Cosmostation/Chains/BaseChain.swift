@@ -436,7 +436,16 @@ extension BaseChain {
     }
     
     func gasAssetDenom() -> String? {
-        return getChainListParam()["gas_asset_denom"].string
+        if let gasdemon = getChainListParam()["gas_asset_denom"].string {
+            return gasdemon
+        } else {
+            //ethermint case staking asset is gas
+            return stakingAssetDenom()
+        }
+    }
+    
+    func stakingAssetSymbol() -> String {
+        return getChainListParam()["staking_asset_symbol"].stringValue
     }
     
     func stakingAssetDenom() -> String {

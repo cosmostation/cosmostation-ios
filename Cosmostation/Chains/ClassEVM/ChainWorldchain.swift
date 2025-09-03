@@ -22,7 +22,7 @@ class ChainWorldchain: BaseChain  {
         
         supportEvm = true
         coinSymbol = "ETH"
-        evmRpcURL = "https://worldchain.drpc.org"
+        evmRpcURL = "https://worldchain-mainnet.g.alchemy.com/public"
     }
     
 }

@@ -737,10 +737,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             }
             
         } else if (selectedChain is ChainGno) {
-            if (indexPath.section == 0 && searchNativeCoins[indexPath.row].denom == selectedChain.stakingAssetDenom() && selectedChain.supportEvm) {
-                onStartCoinTransferVC(.GNO_COIN, searchNativeCoins[indexPath.row].denom)
-                
-            } else if (indexPath.section == 0) {
+            if (indexPath.section == 0) {
                 onStartCoinTransferVC(.GNO_COIN, searchNativeCoins[indexPath.row].denom)
                 
             } else if (indexPath.section == 3) {
