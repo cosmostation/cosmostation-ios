@@ -287,12 +287,12 @@ class DappEvmSignRequestSheet: BaseVC {
             feeSegments.insertSegment(withTitle: evmGasTitle[i], at: i, animated: false)
         }
         feeSegments.selectedSegmentIndex = feePosition
-        feeDenomLabel.text = selectedChain.mainAssetSymbol()
+        feeDenomLabel.text = selectedChain.gasAssetSymbol()
         onUpdateFeeView()
     }
     
     func onUpdateFeeView() {
-        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.mainAssetSymbol()) else { return }
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.gasAssetDenom()) else { return }
         let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
         let totalGasPrice = evmGas[feePosition].0 + evmGas[feePosition].1
         let feeAmountBigInt = totalGasPrice.multiplied(by: evmGas[feePosition].2)
