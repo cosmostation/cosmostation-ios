@@ -158,41 +158,16 @@ class Portfolio2Cell: UITableViewCell {
         symbolLabel.text = chain.getChainListParam()["main_asset_symbol"].string ?? chain.getChainListParam()["staking_asset_symbol"].string
         
         //DP Price
-        if chain is ChainOktEVM {
-            guard let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) else { return }
-            WDP.dpPrice(msAsset.coinGeckoId, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(msAsset.coinGeckoId, priceChangeLabel, priceChangePercentLabel)
-            
-        } else if (chain.supportCosmos) {
-            if let denom = chain.getChainListParam()["main_asset_denom"].string ?? chain.getChainListParam()["staking_asset_denom"].string,
-               let msAsset = BaseData.instance.getAsset(chain.apiName, denom) {
-                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
-                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
-            }
-            
-        } else if (chain.supportEvm) {
-            if let denom = chain.getChainListParam()["main_asset_denom"].string,
-               let msAsset = BaseData.instance.getAsset(chain.apiName, denom) {
-                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
-                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
-                
-            } else if let symbol = chain.getChainListParam()["main_asset_symbol"].string,
-               let geckoId = chain.getEvmfetcher()?.mintscanErc20Tokens.filter({ $0.symbol == symbol }).first?.coinGeckoId {
-                WDP.dpPrice(geckoId, priceCurrencyLabel, priceLabel)
-                WDP.dpPriceChanged(geckoId, priceChangeLabel, priceChangePercentLabel)
-            }
-            
-        } else {
-            if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
-                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
-                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
-
-            } else if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.mainAssetSymbol()) {
-                WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
-                WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
-
-            }
+        var coinGeckoId: String?
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
+            coinGeckoId =  msAsset.coinGeckoId
+        } else if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.mainAssetDenom()) {
+            coinGeckoId =  msAsset.coinGeckoId
+        } else if let msTokne = BaseData.instance.getToken(chain.apiName, chain.mainAssetDenom()) {
+            coinGeckoId =  msTokne.coinGeckoId
         }
+        WDP.dpPrice(coinGeckoId, priceCurrencyLabel, priceLabel)
+        WDP.dpPriceChanged(coinGeckoId, priceChangeLabel, priceChangePercentLabel)
     }
     
     func starEvmAddressAnimation() {
