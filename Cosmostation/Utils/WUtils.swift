@@ -272,13 +272,13 @@ public class WUtils {
         if (address?.isEmpty == true) {
             return false
         }
-        if let evmAddess = EthereumAddress.init(address!) {
+        if let evmAddress = EthereumAddress.init(address!) {
             return true
         }
         return false
     }
     
-    static func isValidSuiAdderss(_ address: String?) -> Bool {
+    static func isValidSuiAddress(_ address: String?) -> Bool {
         let suiPattern = "^(0x)[A-Fa-f0-9]{64}$"
         return address?.range(of: suiPattern, options: .regularExpression ) != nil
     }
