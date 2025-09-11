@@ -1686,6 +1686,8 @@
 		15D637DE2E1BB10B000BCE79 /* ChainSolana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D637DC2E1BB10B000BCE79 /* ChainSolana.swift */; };
 		15D637E02E1BB66D000BCE79 /* SolanaFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D637DF2E1BB66D000BCE79 /* SolanaFetcher.swift */; };
 		15D637E12E1BB66D000BCE79 /* SolanaFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D637DF2E1BB66D000BCE79 /* SolanaFetcher.swift */; };
+		15D865202E729EF600C201C8 /* DappSolanaSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D8651F2E729EF600C201C8 /* DappSolanaSignRequestSheet.xib */; };
+		15D865212E729EF600C201C8 /* DappSolanaSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8651E2E729EF600C201C8 /* DappSolanaSignRequestSheet.swift */; };
 		1809C35129D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
 		1809C35229D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
 		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
@@ -3367,6 +3369,8 @@
 		15D637D62E0E72C2000BCE79 /* cosmos_evm_crypto_v1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_evm_crypto_v1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
 		15D637DC2E1BB10B000BCE79 /* ChainSolana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSolana.swift; sourceTree = "<group>"; };
 		15D637DF2E1BB66D000BCE79 /* SolanaFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolanaFetcher.swift; sourceTree = "<group>"; };
+		15D8651E2E729EF600C201C8 /* DappSolanaSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappSolanaSignRequestSheet.swift; sourceTree = "<group>"; };
+		15D8651F2E729EF600C201C8 /* DappSolanaSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappSolanaSignRequestSheet.xib; sourceTree = "<group>"; };
 		1809C35029D16C80008884C1 /* injectScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = injectScript.js; sourceTree = "<group>"; };
 		181099DE28AE92FC00C178B5 /* PushUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUtils.swift; sourceTree = "<group>"; };
 		1812D46128E184D800AC7D61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -4818,6 +4822,8 @@
 				792B9CBC2C747CB2001440DB /* DappSuiSignRequestSheet.xib */,
 				7939A25B2D34DD85006674E3 /* DappBtcSignRequestSheet.swift */,
 				7939A25C2D34DD85006674E3 /* DappBtcSignRequestSheet.xib */,
+				15D8651E2E729EF600C201C8 /* DappSolanaSignRequestSheet.swift */,
+				15D8651F2E729EF600C201C8 /* DappSolanaSignRequestSheet.xib */,
 				796CC35F2C6B60CA00FEC658 /* SuiStakingInfoSheet.swift */,
 				796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */,
 				79AB33FF2D6C392B00F1426C /* BtcStakeSheet.swift */,
@@ -6398,6 +6404,7 @@
 				049715032C0ED276008C45A0 /* basebg05.png in Resources */,
 				E18D73B82AB484AB00FCB1AA /* DappStartVC.xib in Resources */,
 				79B4225C2D9E759D0022A4F9 /* NeutronCompounding.xib in Resources */,
+				15D865202E729EF600C201C8 /* DappSolanaSignRequestSheet.xib in Resources */,
 				04FAD9B42AB011AC00143A3E /* SwitchPriceDisplayCell.xib in Resources */,
 				E1F257E52BFB2009008F4D21 /* EvmCancelUnbonding.xib in Resources */,
 				04FAD9BA2AB0125400143A3E /* BaseSheetCell.xib in Resources */,
@@ -8462,6 +8469,7 @@
 				046EA87B2AD04A2500A2FCE7 /* desmos_profiles_v3_models_profile.pb.swift in Sources */,
 				040B43EB2E3725F10018850C /* ChainGitopia.swift in Sources */,
 				79813A6D2D530F890083A1F5 /* zrchain_validation_module_module.pb.swift in Sources */,
+				15D865212E729EF600C201C8 /* DappSolanaSignRequestSheet.swift in Sources */,
 				04C816442BA98D74006B800A /* cosmos_tx_signing_v1beta1_signing.pb.swift in Sources */,
 				79FCA3DA2C3F9E92001C17D0 /* artela_fee_v1_genesis.pb.swift in Sources */,
 				0450327A2C1EEDCD00235F6A /* ChainBand.swift in Sources */,

@@ -47,6 +47,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     var suiTargetChain: BaseChain?
     var iotaTargetChain: BaseChain?
     var btcTargetChain: BaseChain?
+    var solanaTargetChain: BaseChain?
     var web3: Web3?
     
     var btcNetwork: String?
@@ -207,7 +208,12 @@ class DappDetailVC: BaseVC, WebSignDelegate {
             }
             
         }
-        
+    }
+    
+    private func onInitChainSolana() {
+        if (solanaTargetChain == nil) {
+            solanaTargetChain = allChains.filter({ $0.apiName == "solana" }).first!
+        }
     }
 
     // Inject custom script to webview
@@ -355,7 +361,11 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         btcSignRequestSheet.modalTransitionStyle = .coverVertical
         self.present(btcSignRequestSheet, animated: true)
     }
-
+    
+    private func popUpSolanaRequestSign(_ method: String, _ request: JSON, _ messageId: JSON?, _ bytes: String) {
+        let solanaSignRequestSheet = DappSolanaSignRequestSheet(nibName: "DappSolanaSignRequestSheet", bundle: nil)
+        self.present(suiSignRequestSheet, animated: true)
+    }
     
     func onCancleInjection(_ reseon: String, _ requestToSign: JSON, _ messageId: JSON) {
         injectionRequestReject(reseon, requestToSign, messageId)
@@ -386,7 +396,7 @@ extension DappDetailVC: WKScriptMessageHandler {
             let bodyJSON = JSON(parseJSON: message.body as? String ?? "")
             let messageJSON = bodyJSON["message"]
             let method = messageJSON["method"].stringValue
-//            print("DAPP REQUEST method \(method)")
+            print("DAPP REQUEST method \(method)")
             
             //Handle Cosmos Request
             if (method == "cos_supportedChainIds") {
@@ -829,6 +839,17 @@ extension DappDetailVC: WKScriptMessageHandler {
                     }
                     self.popUpIotaRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
                 }
+            }
+            
+            //Handle SOLANA Request
+            else if (method == "solana_connect") {
+                onInitChainSolana()
+                guard let pubKey = solanaTargetChain!.publicKey?.hexEncodedString() else { return }
+                let data: JSON = ["publicKey": pubKey]
+                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "solana_signMessage") {
+                
             }
 
             else {
