@@ -170,8 +170,12 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     }
     
     private func onInitEvmChain() {
-        if !(targetChain.supportEvm) {
+        if (targetChain == nil) {
             targetChain = allChains.filter({ $0.supportEvm }).first!
+        } else {
+            if !(targetChain.supportEvm) {
+                targetChain = allChains.filter({ $0.supportEvm }).first!
+            }
         }
     }
     
@@ -362,9 +366,15 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         self.present(btcSignRequestSheet, animated: true)
     }
     
-    private func popUpSolanaRequestSign(_ method: String, _ request: JSON, _ messageId: JSON?, _ bytes: String) {
+    private func popUpSolanaRequestSign(_ method: String, _ request: JSON, _ messageId: JSON?) {
         let solanaSignRequestSheet = DappSolanaSignRequestSheet(nibName: "DappSolanaSignRequestSheet", bundle: nil)
-        self.present(suiSignRequestSheet, animated: true)
+        solanaSignRequestSheet.method = method
+        solanaSignRequestSheet.requestToSign = request
+        solanaSignRequestSheet.messageId = messageId
+        solanaSignRequestSheet.selectedChain = solanaTargetChain
+        solanaSignRequestSheet.webSignDelegate = self
+        solanaSignRequestSheet.modalTransitionStyle = .coverVertical
+        self.present(solanaSignRequestSheet, animated: true)
     }
     
     func onCancleInjection(_ reseon: String, _ requestToSign: JSON, _ messageId: JSON) {
@@ -849,7 +859,8 @@ extension DappDetailVC: WKScriptMessageHandler {
                 injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "solana_signMessage") {
-                
+                let params = messageJSON["params"]
+                self.popUpSolanaRequestSign(method, params, bodyJSON["messageId"])
             }
 
             else {

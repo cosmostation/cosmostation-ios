@@ -38,6 +38,7 @@
                 <outlet property="requestTitle" destination="urc-yH-Gul" id="8ig-YF-r8n"/>
                 <outlet property="safeMsgTitle" destination="fWS-Ug-bex" id="CWH-Mi-mrf"/>
                 <outlet property="toSignTextView" destination="c2Q-uq-zHS" id="AS9-Dw-jD5"/>
+                <outlet property="view" destination="RYu-Gm-abD" id="68Y-DL-Ysb"/>
                 <outlet property="warnMsgLabel" destination="zHs-Me-A1M" id="ACA-uH-Act"/>
             </connections>
         </placeholder>

@@ -38,9 +38,11 @@ class DappSolanaSignRequestSheet: BaseVC {
     
     var method: String!
     var requestToSign: JSON?
-    var displayToSign: JSON?
-    var messageId: JSON?
+    var messageId: JSON!
     var selectedChain: BaseChain!
+    
+    var signature: String!
+    var data: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,11 +54,79 @@ class DappSolanaSignRequestSheet: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         confirmBtn.isEnabled = false
+        
+        paringRequest()
+    }
+    
+    override func setLocalizedString() {
+        if (method == "solana_signMessage") {
+            requestTitle.text = NSLocalizedString("str_permit_request", comment: "")
+        } else {
+            requestTitle.text = NSLocalizedString("str_tx_request", comment: "")
+        }
+        warnMsgLabel.text = NSLocalizedString("str_dapp_warn_msg", comment: "")
+        safeMsgTitle.text = NSLocalizedString("str_affect_safe", comment: "")
+        dangerMsgTitle.text = NSLocalizedString("str_affect_danger", comment: "")
+    }
+    
+    func paringRequest() {
+        guard let solanaFetcher = (selectedChain as? ChainSolana)?.getSolanaFetcher() else { return }
+        
+        Task {
+            if method == "solana_signMessage" {
+                do {
+                    if let parseMessage = try await solanaFetcher.parseMessage(requestToSign!),
+                       let signMessage = try await solanaFetcher.signMessage(requestToSign!, selectedChain.privateKey?.hexEncodedString()) {
+                        let serializedSignMessageJsonData = try JSON(data: Data(signMessage.utf8))
+                        
+                        data = serializedSignMessageJsonData["publicKey"].stringValue
+                        signature = serializedSignMessageJsonData["signature"].stringValue
+                        
+                        DispatchQueue.main.async {
+                            self.onInitView()
+                            self.toSignTextView.text = parseMessage
+                            self.safeMsgTitle.isHidden = false
+                        }
+                    }
+                    
+                } catch {
+                    print("fetching error: \(error)")
+                    DispatchQueue.main.async {
+                        self.dismissWithFail()
+                    }
+                }
+                
+            } else {
+                
+            }
+        }
+    }
+    
+    func onInitView() {
+        loadingView.isHidden = true
+        requestTitle.isHidden = false
+        warnMsgLabel.isHidden = false
+        bodyCardView.isHidden = false
+        controlStakView.isHidden = false
+        barView.isHidden = false
+        confirmBtn.isEnabled = true
+    }
+    
+    func dismissWithFail() {
+        webSignDelegate?.onCancleInjection("Cancel", requestToSign!, messageId)
+        dismiss(animated: true)
     }
     
     @IBAction func onClickCancel(_ sender: Any) {
+        dismissWithFail()
     }
     
     @IBAction func onClickConfirm(_ sender: Any) {
+        if method == "solana_signMessage" {
+            let data: JSON = ["signature": signature, "publicKey": data]
+            webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
+        }
+        
+        dismiss(animated: true)
     }
 }
