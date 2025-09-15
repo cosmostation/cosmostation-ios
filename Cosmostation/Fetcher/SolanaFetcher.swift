@@ -243,4 +243,20 @@ extension SolanaFetcher {
         let message = params["message"].stringValue
         return SolanaJS.shared.callJSValue(key: "signMessage", param: [message, privateKey])
     }
+    
+    func parseInstructionsFromTx(_ params: JSON) async throws -> String? {
+        let serializedTx = params["serializedTx"].stringValue
+        return SolanaJS.shared.callJSValue(key: "parseInstructionsFromTx", param: [serializedTx])
+    }
+    
+    func serializedTxMessageFromTx(_ params: JSON) async throws -> String? {
+        let serializedTx = params["serializedTx"].stringValue
+        return SolanaJS.shared.callJSValue(key: "getSerializedTxMessageFromTx", param: [serializedTx])
+    }
+    
+    func fetchDappSendTransaction(_ txHex: String, _ preflightCommitment: String) async throws -> JSON? {
+        let params: Any = [txHex, ["encoding": "base64", "preflightCommitment": preflightCommitment]]
+        let parameters: Parameters = ["method": "sendTransaction", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
 }

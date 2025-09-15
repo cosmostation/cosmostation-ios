@@ -41,8 +41,11 @@ class DappSolanaSignRequestSheet: BaseVC {
     var messageId: JSON!
     var selectedChain: BaseChain!
     
-    var signature: String!
     var data: String!
+    // sign message
+    var signature: String!
+    // sign and sendTransaction
+    var preflightCommitment: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,26 +86,93 @@ class DappSolanaSignRequestSheet: BaseVC {
                         signature = serializedSignMessageJsonData["signature"].stringValue
                         
                         DispatchQueue.main.async {
-                            self.onInitView()
+                            self.onUpdateView()
                             self.toSignTextView.text = parseMessage
                             self.safeMsgTitle.isHidden = false
                         }
                     }
                     
                 } catch {
-                    print("fetching error: \(error)")
                     DispatchQueue.main.async {
                         self.dismissWithFail()
                     }
                 }
                 
-            } else {
+            } else if method == "solana_signAndSendTransaction" {
+                do {
+                    if let parseInstruction = try await solanaFetcher.parseInstructionsFromTx(requestToSign!),
+                       let serializedTxMessage = try await solanaFetcher.serializedTxMessageFromTx(requestToSign!),
+                       let feeForMessage = try await solanaFetcher.fetchFeeMessage(serializedTxMessage) {
+                        
+                        let serializedTx = requestToSign?["serializedTx"].stringValue ?? ""
+                        preflightCommitment = requestToSign?["preflightCommitment"].stringValue ?? ""
+                        let displayJson = JSON(parseInstruction.data(using: .utf8) ?? "")
+                        let baseFee = feeForMessage["result"]["value"].uInt64Value
+                        
+                        if let privateKey = selectedChain.privateKey?.hexEncodedString(),
+                           let signTransaction = try await solanaFetcher.signTransaction(serializedTx, privateKey) {
+                            data = signTransaction
+                            
+                            DispatchQueue.main.async {
+                                self.dangerMsgTitle.isHidden = false
+                                self.feeCardView.isHidden = false
+                                self.onUpdateView(NSDecimalNumber(value: baseFee))
+                                self.toSignTextView.text = "\(displayJson)"
+                                self.warnMsgLabel.isHidden = false
+                            }
+                        }
+                    }
+                    
+                } catch {
+                    DispatchQueue.main.async {
+                        self.dismissWithFail()
+                    }
+                }
                 
+            } else if method == "solana_signTransaction" {
+                do {
+                    if let parseInstruction = try await solanaFetcher.parseInstructionsFromTx(requestToSign!),
+                       let serializedTxMessage = try await solanaFetcher.serializedTxMessageFromTx(requestToSign!),
+                       let feeForMessage = try await solanaFetcher.fetchFeeMessage(serializedTxMessage) {
+                        
+                        let serializedTx = requestToSign?["serializedTx"].stringValue ?? ""
+                        let displayJson = JSON(parseInstruction.data(using: .utf8) ?? "")
+                        let fee = feeForMessage["result"]["value"].uInt64Value
+                        
+                        if let privateKey = selectedChain.privateKey?.hexEncodedString(),
+                           let signTransaction = try await solanaFetcher.signTransaction(serializedTx, privateKey) {
+                            data = signTransaction
+                            
+                            DispatchQueue.main.async {
+                                self.dangerMsgTitle.isHidden = false
+                                self.feeCardView.isHidden = false
+                                self.onUpdateView(NSDecimalNumber(value: fee))
+                                self.toSignTextView.text = "\(displayJson)"
+                                self.warnMsgLabel.isHidden = false
+                            }
+                        }
+                    }
+                    
+                } catch {
+                    DispatchQueue.main.async {
+                        self.dismissWithFail()
+                    }
+                }
+                
+            } else if method == "solana_signAllTransactions" {
+                do {
+                    print("test12345 : ", requestToSign)
+                    
+                } catch {
+                    DispatchQueue.main.async {
+                        self.dismissWithFail()
+                    }
+                }
             }
         }
     }
     
-    func onInitView() {
+    func onUpdateView(_ fee: NSDecimalNumber? = NSDecimalNumber.zero) {
         loadingView.isHidden = true
         requestTitle.isHidden = false
         warnMsgLabel.isHidden = false
@@ -110,6 +180,14 @@ class DappSolanaSignRequestSheet: BaseVC {
         controlStakView.isHidden = false
         barView.isHidden = false
         confirmBtn.isEnabled = true
+        
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.gasAssetDenom()) else { return }
+        let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+        let feeDpBudge = fee?.multiplying(byPowerOf10: -(msAsset.decimals ?? 9), withBehavior: getDivideHandler(msAsset.decimals ?? 9)) ?? NSDecimalNumber.zero
+        let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
+        feeLabel.text = selectedChain.gasAssetDenom()?.uppercased()
+        WDP.dpCoin(msAsset, fee ?? NSDecimalNumber.zero, feeImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+        WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
     }
     
     func dismissWithFail() {
@@ -125,6 +203,24 @@ class DappSolanaSignRequestSheet: BaseVC {
         if method == "solana_signMessage" {
             let data: JSON = ["signature": signature, "publicKey": data]
             webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
+            
+        } else if method == "solana_signAndSendTransaction" {
+            guard let solanaFetcher = (selectedChain as? ChainSolana)?.getSolanaFetcher() else { return }
+            Task {
+                if let sendTransaction = try await solanaFetcher.fetchDappSendTransaction(data, preflightCommitment) {
+                    let data: JSON = ["publicKey": selectedChain.mainAddress, "signature": sendTransaction["result"]]
+                    webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
+                    
+                } else {
+                    webSignDelegate?.onCancleInjection("Fail Solana Tx Request", requestToSign!, messageId!)
+                }
+            }
+            
+        } else if method == "solana_signTransaction" {
+            webSignDelegate?.onAcceptInjection([data], requestToSign!, messageId!)
+            
+        } else if method == "solana_signAllTransactions" {
+            webSignDelegate?.onAcceptInjection([data], requestToSign!, messageId!)
         }
         
         dismiss(animated: true)

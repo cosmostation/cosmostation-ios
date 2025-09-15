@@ -861,6 +861,30 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "solana_signMessage") {
                 let params = messageJSON["params"]
                 self.popUpSolanaRequestSign(method, params, bodyJSON["messageId"])
+                
+            } else if (method == "solana_signAndSendTransaction") {
+                let params = messageJSON["params"]
+                if params.count > 0 {
+                    self.popUpSolanaRequestSign(method, params[0], bodyJSON["messageId"])
+                } else {
+                    injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
+                }
+                
+            } else if (method == "solana_signTransaction") {
+                let params = messageJSON["params"]
+                if params.count > 0 {
+                    self.popUpSolanaRequestSign(method, params[0], bodyJSON["messageId"])
+                } else {
+                    injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
+                }
+                
+            } else if (method == "solana_signAllTransactions") {
+                let params = messageJSON["params"]
+                if params.count > 0 {
+                    self.popUpSolanaRequestSign(method, params, bodyJSON["messageId"])
+                } else {
+                    injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
+                }
             }
 
             else {
