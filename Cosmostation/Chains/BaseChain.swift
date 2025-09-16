@@ -859,6 +859,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainPersistence118())
     result.append(ChainPersistence750())
     result.append(ChainPlanqEVM())                      //EVM
+    result.append(ChainPocket())
     result.append(ChainPolygon())                       //EVM
     result.append(ChainProvenance())
     result.append(ChainPryzm())
