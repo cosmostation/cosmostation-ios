@@ -146,13 +146,13 @@ class IotaStake: BaseVC {
     func onUpdateAmountView(_ amount: String) {
         toStakeAmount = NSDecimalNumber(string: amount)
         
-        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.mainAssetSymbol()) else { return }
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakingAssetDenom()) else { return }
         let dpAmount = toStakeAmount.multiplying(byPowerOf10: -9, withBehavior: handler18Down)
         let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
         let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
         WDP.dpValue(value, stakingCurrencyLabel, stakingValueLabel)
         stakingAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, stakingAmountLabel!.font, 9)
-        stakingDenomLabel.text = selectedChain.mainAssetSymbol()
+        stakingDenomLabel.text = selectedChain.stakingAssetSymbol()
         stakingAmountHintLabel.isHidden = true
         stakingAmountLabel.isHidden = false
         stakingDenomLabel.isHidden = false
@@ -168,7 +168,7 @@ class IotaStake: BaseVC {
     func onUpdateFeeView() {
         stakeBtn.isEnabled = false
         
-        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.mainAssetSymbol()) else { return }
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakingAssetDenom()) else { return }
         let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
         let feeDpBudge = iotaFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
         let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)

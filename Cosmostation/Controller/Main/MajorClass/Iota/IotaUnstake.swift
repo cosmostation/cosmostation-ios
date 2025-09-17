@@ -112,7 +112,7 @@ class IotaUnstake: BaseVC {
     func onUpdateFeeView() {
         unstakeBtn.isEnabled = false
         
-        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.mainAssetSymbol()) else { return }
+        guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.stakingAssetDenom()) else { return }
         let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
         let feeDpBudge = iotaFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
         let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
