@@ -860,6 +860,7 @@ class Signer {
             }
         }
         
+        
         let signerInfo =  Cosmos_Tx_V1beta1_SignerInfo.with {
             $0.publicKey = pubKey!
             $0.modeInfo = mode
@@ -917,12 +918,8 @@ class Signer {
     }
     
     static func getSimulsignatures(_ cnt: Int) -> [Data] {
-        var result = [Data]()
-        let emptyDayta = Data(capacity: 64)
-        for _ in 0..<cnt {
-            result.append(emptyDayta)
-        }
-        return result
+        let dummySig = Data(repeating: 0, count: 64)
+        return Array(repeating: dummySig, count: cnt)
     }
 }
 
