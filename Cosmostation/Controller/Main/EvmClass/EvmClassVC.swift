@@ -75,6 +75,9 @@ class EvmClassVC: BaseVC {
         totalValue = selectedChain.allValue()
         addressLabel.text = selectedChain.evmAddress
         
+        if selectedChain.isSupportEthStaking() {
+            onSetFabButton()
+        }
         onSetTabbarView()
         
         let addressTap = UITapGestureRecognizer(target: self, action: #selector(onShowAddress))
@@ -163,6 +166,39 @@ class EvmClassVC: BaseVC {
         historyList.alpha = 0
         ecosystemList.alpha = 0
         AboutList.alpha = 0
+    }
+    
+    func onSetFabButton() {
+        let mainFab = JJFloatingActionButton()
+        mainFab.handleSingleActionDirectly = true
+        mainFab.buttonImageSize = CGSize(width: 52, height: 52)
+        mainFab.buttonColor = .clear
+        mainFab.buttonAnimationConfiguration.angle = 0
+        mainFab.itemAnimationConfiguration.opening = JJAnimationSettings(duration: 0.1, dampingRatio: 1.0, initialVelocity: 0.8, interItemDelay: 0.03)
+        mainFab.itemAnimationConfiguration.closing = JJAnimationSettings(duration: 0.1, dampingRatio: 1.0, initialVelocity: 0.8, interItemDelay: 0.01)
+        mainFab.overlayView.backgroundColor = UIColor(white: 0, alpha: 0.8)
+        mainFab.addItem(title: nil, image: UIImage(named: "iconEthFab")) { _ in
+            self.tapFloatingBtn()
+        }
+        
+        view.addSubview(mainFab)
+        mainFab.translatesAutoresizingMaskIntoConstraints = false
+        mainFab.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        mainFab.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+    }
+    
+    func tapFloatingBtn() {
+        if (!BaseData.instance.showEvenReview()) { return }
+        if BaseData.instance.getEcosystemPopUpActiveStatus(SheetType.MoveEthStaking) {
+            let dappPopUpView = EcosystemPopUpSheet(nibName: "EcosystemPopUpSheet", bundle: nil)
+            dappPopUpView.selectedChain = selectedChain
+            dappPopUpView.tag = SheetType.MoveEthStaking.rawValue
+            dappPopUpView.sheetDelegate = self
+            dappPopUpView.modalPresentationStyle = .overFullScreen
+            self.present(dappPopUpView, animated: true)
+        } else {
+            onSelectedSheet(SheetType.MoveEthStaking, [:])
+        }
     }
     
     @IBAction func onClickHideValue(_ sender: UIButton) {
@@ -256,5 +292,10 @@ extension EvmClassVC: MDCTabBarViewDelegate, BaseSheetDelegate {
     }
     
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
+        let dappDetail = DappDetailVC(nibName: "DappDetailVC", bundle: nil)
+        dappDetail.dappType = .INTERNAL_URL
+        dappDetail.dappUrl = URL(string: selectedChain.ethStakingExplorerUrl())
+        dappDetail.modalPresentationStyle = .fullScreen
+        self.present(dappDetail, animated: true)
     }
 }

@@ -63,6 +63,11 @@ class EcosystemPopUpSheet: BaseVC {
             imageView.image = UIImage(named: "popUpBabylon")
             ecosystemButton.backgroundColor = .colorBabylon
             ecosystemBtnLabel.text = "Stake Now"
+            
+        } else if tag == SheetType.MoveEthStaking.rawValue {
+            imageView.image = UIImage(named: "popUpEthStaking")
+            ecosystemButton.backgroundColor = .colorEthStaking
+            ecosystemBtnLabel.text = "Stake Now"
         }
         ecosystemButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(moveToDapp)))
     }

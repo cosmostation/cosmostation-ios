@@ -218,12 +218,10 @@ let STATION_NFT_DENOM           = "station";
 
 
 let ResourceBase = "https://raw.githubusercontent.com/cosmostation/chainlist/master/chain/"
-let ResourceDappBase = "https://raw.githubusercontent.com/cosmostation/chainlist/master/wallet_mobile/dapp/"
 let ResourceDevBase = "https://serve.dev-mintscan.com"
 let MintscanUrl = "https://www.mintscan.io/"
 let MintscanTxUrl = "https://www.mintscan.io/${apiName}/tx/${hash}"
 let GeckoUrl = "https://www.coingecko.com/en/coins/"
-let EcosystemUrl = "https://raw.githubusercontent.com/cosmostation/chainlist/master/wallet_mobile/mobile_ecosystem/${apiName}/eco_list.json"
 
 
 
