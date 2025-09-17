@@ -60,6 +60,9 @@ extension UIColor {
     static var colorDydx: UIColor {
         UIColor.init(hexString: "#7471FF")
     }
+    static var colorEthStaking: UIColor {
+        UIColor.init(hexString: "#5A43FF")
+    }
     static var colorSubGreen01: UIColor {
         UIColor(named: "_subGreen01")!
     }

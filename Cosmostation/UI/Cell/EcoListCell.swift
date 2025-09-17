@@ -48,7 +48,7 @@ class EcoListCell: UICollectionViewCell {
     }
     
     func onBindTestDapp(_ index: Int) {
-        let endpoint = "https://raw.githubusercontent.com/cosmostation/chainlist/master/wallet_mobile/mobile_ecosystem/cosmos/resource/"
+        let endpoint = "https://raw.githubusercontent.com/cosmostation/chainlist/master/wallet/resource/"
         if index == 0 {
             let url = URL(string: endpoint + "injection.png")
             thumbnailImageView.sd_setImage(with: url)
@@ -64,5 +64,4 @@ class EcoListCell: UICollectionViewCell {
             typeTagLabel.text = "Github"
         }
     }
-
 }

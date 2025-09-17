@@ -70,7 +70,7 @@ class BtcUndelegate: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom()), placeholderImage: UIImage(named: "tokenDefault"))
+        titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.mainAssetSymbol()), placeholderImage: UIImage(named: "tokenDefault"))
         
         validatorCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClickValidator)))
         

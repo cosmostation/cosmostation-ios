@@ -1002,6 +1002,7 @@ public enum SheetType: Int {
     case MoveDropDetail = 100
     case MoveDydx = 101
     case MoveBabylonDappDetail = 102
+    case MoveEthStaking = 103
     
     case SelectDappSort
     case SelectDappNetwork
