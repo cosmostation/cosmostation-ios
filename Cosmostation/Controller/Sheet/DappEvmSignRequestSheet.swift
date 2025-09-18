@@ -241,21 +241,12 @@ class DappEvmSignRequestSheet: BaseVC {
     func onCheckGasPrice() async throws  {
         let oracle = Web3Core.Oracle.init(web3!.provider)
         if let feeHistory = await oracle.bothFeesPercentiles(),
-           feeHistory.baseFee.count > 0 {
-            //support EIP1559
-            print("feeHistory ", feeHistory)
-            if (selectedChain.evmSupportEip1559()) {
-                for i in 0..<3 {
-                    let baseFee = feeHistory.baseFee[i]
-                    let tip = feeHistory.tip[i]
-                    evmGas[i] = (baseFee, tip, checkedGas!)
-                }
-            } else {
-                for i in 0..<3 {
-                    let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
-                    let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
-                    evmGas[i] = (baseFee, tip, checkedGas!)
-                }
+           feeHistory.baseFee.count > 0,
+           selectedChain.evmSupportEip1559() {
+            for i in 0..<3 {
+                let baseFee = feeHistory.baseFee[i]
+                let tip = feeHistory.tip[i]
+                evmGas[i] = (baseFee, tip, checkedGas!)
             }
             if (inComeMaxFeePerGas != nil && inComeMaxPriorityFeePerGas != nil) {
                 evmGas.append((inComeMaxFeePerGas!, inComeMaxPriorityFeePerGas!, inComeGas ?? checkedGas!))
@@ -276,7 +267,6 @@ class DappEvmSignRequestSheet: BaseVC {
                 feePosition = 3
             }
             evmTxType = .legacy
-            
         }
         print("fixed fee ", evmGas)
     }
