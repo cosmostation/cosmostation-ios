@@ -102,7 +102,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         
         if (toChain is ChainSui) {
             //only support sui address style
-            if (WUtils.isValidSuiAdderss(userInput)) {
+            if (WUtils.isValidSuiAddress(userInput)) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
@@ -112,7 +112,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             }
             
         } else if toChain is ChainIota {
-            if (WUtils.isValidSuiAdderss(userInput)) {
+            if (WUtils.isValidSuiAddress(userInput)) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return

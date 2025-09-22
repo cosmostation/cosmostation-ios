@@ -512,9 +512,10 @@ class CommonTransfer: BaseVC {
                 let msPrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
-                
-                WDP.dpCoin(msAsset, toAmount, nil, toAssetDenomLabel, toAssetAmountLabel, decimal)
                 WDP.dpValue(value, toAssetCurrencyLabel, toAssetValueLabel)
+                
+                toAssetDenomLabel.text = fromChain.assetSymbol(toSendDenom)
+                toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                                 
             } else if (sendAssetType == .SUI_COIN || sendAssetType == .IOTA_COIN) {
                 let msPrice = BaseData.instance.getPrice(fromChain.assetGeckoId(toSendDenom))
@@ -899,35 +900,22 @@ extension CommonTransfer {
             
             let oracle = Web3Core.Oracle.init(web3.provider)
             if let feeHistory = await oracle.bothFeesPercentiles(),
-               feeHistory.baseFee.count > 0 {
-                //support EIP1559
-//                print("feeHistory ", feeHistory)
-                if (fromChain.evmSupportEip1559()) {
-                    for i in 0..<3 {
-                        let baseFee = feeHistory.baseFee[i]
-                        let tip = feeHistory.tip[i]
-                        evmGas[i] = (baseFee, tip)
-                    }
-                    
-                } else {
-                    for i in 0..<3 {
-                        let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
-                        let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
-                        evmGas[i] = (baseFee, tip)
-                    }
+               feeHistory.baseFee.count > 0,
+               fromChain.evmSupportEip1559() {
+                for i in 0..<3 {
+                    let baseFee = feeHistory.baseFee[i]
+                    let tip = feeHistory.tip[i]
+                    evmGas[i] = (baseFee, tip)
                 }
                 evmTxType = .eip1559
                 
             } else if let gasprice = try? await web3.eth.gasPrice() {
-                //only Legacy
-//                print("gasprice ", gasprice)
                 evmGas[0].0 = gasprice
                 evmGas[1].0 = gasprice * 12 / 10
                 evmGas[2].0 = gasprice * 20 / 10
                 evmTxType = .legacy
                 
             } else {
-//                print("no gas error")
                 evmTxType = nil
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(nil)
@@ -1001,20 +989,12 @@ extension CommonTransfer {
             
             let oracle = Web3Core.Oracle.init(web3.provider)
             if let feeHistory = await oracle.bothFeesPercentiles(),
-               feeHistory.baseFee.count > 0 {
-                if (fromChain.evmSupportEip1559()) {
-                    for i in 0..<3 {
-                        let baseFee = feeHistory.baseFee[i]
-                        let tip = feeHistory.tip[i]
-                        evmGas[i] = (baseFee, tip)
-                    }
-                    
-                } else {
-                    for i in 0..<3 {
-                        let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
-                        let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
-                        evmGas[i] = (baseFee, tip)
-                    }
+               feeHistory.baseFee.count > 0,
+               fromChain.evmSupportEip1559() {
+                for i in 0..<3 {
+                    let baseFee = feeHistory.baseFee[i]
+                    let tip = feeHistory.tip[i]
+                    evmGas[i] = (baseFee, tip)
                 }
                 evmTxType = .eip1559
                 
@@ -1114,20 +1094,12 @@ extension CommonTransfer {
             do {
                 let oracle = Web3Core.Oracle.init(web3.provider)
                 if let feeHistory = await oracle.bothFeesPercentiles(),
-                   feeHistory.baseFee.count > 0 {
-                    if (fromChain.evmSupportEip1559()) {
-                        for i in 0..<3 {
-                            let baseFee = feeHistory.baseFee[i]
-                            let tip = feeHistory.tip[i]
-                            evmGas[i] = (baseFee, tip)
-                        }
-                        
-                    } else {
-                        for i in 0..<3 {
-                            let baseFee = feeHistory.baseFee[i] > 500000000 ? feeHistory.baseFee[i] : 500000000
-                            let tip = feeHistory.tip[i] > 1000000000 ? feeHistory.tip[i] : 1000000000
-                            evmGas[i] = (baseFee, tip)
-                        }
+                   feeHistory.baseFee.count > 0,
+                   fromChain.evmSupportEip1559() {
+                    for i in 0..<3 {
+                        let baseFee = feeHistory.baseFee[i]
+                        let tip = feeHistory.tip[i]
+                        evmGas[i] = (baseFee, tip)
                     }
                     evmTxType = .eip1559
                     

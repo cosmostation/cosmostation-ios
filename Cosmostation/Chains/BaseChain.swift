@@ -836,6 +836,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainLumera())
     result.append(ChainManifest())
     result.append(ChainMantle())                        //EVM
+    result.append(ChainMantraEVM())                     //EVM
     result.append(ChainMantra())
     result.append(ChainMedibloc())
     result.append(ChainMigaloo())
@@ -869,17 +870,16 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainRealioEVM())
     result.append(ChainRegen())
     result.append(ChainRizon())
-    result.append(ChainRouterEVM())
+    result.append(ChainRouterEVM())                     //EVM
     result.append(ChainSaga())
 //    result.append(ChainSaharaAiEVM())                   //EVM
     result.append(ChainSecret118())
     result.append(ChainSecret529())
     result.append(ChainSeda())
-    result.append(ChainSeiEVM())
+    result.append(ChainSeiEVM())                        //EVM
     result.append(ChainSei())
     result.append(ChainSelf())
     result.append(ChainSentinel())
-//    result.append(ChainSge())
     result.append(ChainShardeum())                      //EVM
     result.append(ChainShentu())
     result.append(ChainShidoEVM())                      //EVM
@@ -921,10 +921,8 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBitCoin84_T())
     result.append(ChainBitCoin86_T())
     result.append(ChainGno_T())
-//    result.append(ChainImuaEVM_T())
     result.append(ChainInjective_T())
     result.append(ChainInitia_T())
-//    result.append(ChainLombard_T())
     result.append(ChainLumera_T())
     result.append(ChainMantraEVM_T())
     result.append(ChainMantra_T())
@@ -953,6 +951,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainMars())
 //    result.append(ChainOnomy())
 //    result.append(ChainQuasar())
+//    result.append(ChainSge())
 //    result.append(ChainStafi())
 //    result.append(ChainStarname())
 //    
@@ -961,6 +960,8 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainBeraEVM_T())                     //EVM
 //    result.append(ChainBitCoin44_T())
 //    result.append(ChainBitCoin49_T())
+//    result.append(ChainImuaEVM_T())
+//    result.append(ChainLombard_T())
 //    result.append(ChainStoryEVM_T())
     
     result.forEach { chain in
