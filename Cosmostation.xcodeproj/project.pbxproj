@@ -1671,6 +1671,7 @@
 		1505030F2E49DF260001415A /* solana.js in Resources */ = {isa = PBXBuildFile; fileRef = 1505030D2E49DF250001415A /* solana.js */; };
 		150503112E5C7F890001415A /* SolanaJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150503102E5C7F890001415A /* SolanaJS.swift */; };
 		158BE1892E79985A00A02B4A /* ChainPocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158BE1882E79985A00A02B4A /* ChainPocket.swift */; };
+		158BE18F2E828D6900A02B4A /* ChainTerraClassic_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158BE18E2E828D6900A02B4A /* ChainTerraClassic_T.swift */; };
 		15B24C862AE9039A0009B359 /* DappCosmosSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B24C842AE9039A0009B359 /* DappCosmosSignRequestSheet.swift */; };
 		15B24C872AE9039A0009B359 /* DappCosmosSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B24C842AE9039A0009B359 /* DappCosmosSignRequestSheet.swift */; };
 		15B24C882AE9039A0009B359 /* DappCosmosSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15B24C852AE9039A0009B359 /* DappCosmosSignRequestSheet.xib */; };
@@ -3363,6 +3364,7 @@
 		1505030D2E49DF250001415A /* solana.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = solana.js; sourceTree = "<group>"; };
 		150503102E5C7F890001415A /* SolanaJS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolanaJS.swift; sourceTree = "<group>"; };
 		158BE1882E79985A00A02B4A /* ChainPocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPocket.swift; sourceTree = "<group>"; };
+		158BE18E2E828D6900A02B4A /* ChainTerraClassic_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainTerraClassic_T.swift; sourceTree = "<group>"; };
 		15B24C842AE9039A0009B359 /* DappCosmosSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappCosmosSignRequestSheet.swift; sourceTree = "<group>"; };
 		15B24C852AE9039A0009B359 /* DappCosmosSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappCosmosSignRequestSheet.xib; sourceTree = "<group>"; };
 		15C4B8AC2C5966600084B0A3 /* stride_vesting_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stride_vesting_tx.grpc.swift; sourceTree = "<group>"; };
@@ -4714,6 +4716,7 @@
 				04E228892DE8501E00EBE768 /* ChainZeroGravityEVM_T.swift */,
 				E119ED042DF04BE700CD2C9B /* ChainZigChain_T.swift */,
 				7948D6722D91035B005208B2 /* ChainZkCloud_T.swift */,
+				158BE18E2E828D6900A02B4A /* ChainTerraClassic_T.swift */,
 			);
 			path = ClassTestnet;
 			sourceTree = "<group>";
@@ -7764,6 +7767,7 @@
 				792613C02CD4B82800FAF47D /* initia_reward_v1_query.pb.swift in Sources */,
 				04E2CE522E4210A50008C536 /* ChainSeiEVM.swift in Sources */,
 				04B789F02ACB3FC900E9BE88 /* BaseSheetHeader.swift in Sources */,
+				158BE18F2E828D6900A02B4A /* ChainTerraClassic_T.swift in Sources */,
 				E162004D2AF27C250008F397 /* AddressBookCell.swift in Sources */,
 				0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */,
 				04C8178A2BA98D75006B800A /* cosmos_evidence_v1beta1_query.pb.swift in Sources */,

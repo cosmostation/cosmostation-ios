@@ -933,6 +933,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainSaharaAiEVM_T())
     result.append(ChainSelf_T())
     result.append(ChainTabiEVM_T())
+    result.append(ChainTerraClassic_T())
     result.append(ChainWardenEVM_T())
     result.append(ChainXion_T())
     result.append(ChainXrplEVM_T())
