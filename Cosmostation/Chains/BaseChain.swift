@@ -910,7 +910,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainXpla())
     result.append(ChainXrplEVM())                       //EVM
     result.append(ChainZenrock())
-//    result.append(ChainZeroGravityEVM())                //EVM
+    result.append(ChainZeroGravityEVM())                //EVM
     result.append(ChainZetaEVM())                       //EVM
 //    result.append(ChainZigChain())
 
