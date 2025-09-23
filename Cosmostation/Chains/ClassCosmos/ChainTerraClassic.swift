@@ -24,7 +24,7 @@ class ChainTerraClassic: BaseChain  {
         stakeDenom = "uluna"
         bechAccountPrefix = "terra"
         validatorPrefix = "terravaloper"
-        grpcHost = "terra-classic-grpc.publicnode.com:443"
-        lcdUrl = "https://terra-classic-lcd.publicnode.com/"
+        grpcHost = "grpc.terra-classic.hexxagon.io:443"
+        lcdUrl = "https://lcd.terra-classic.hexxagon.io/"
     }
 }
