@@ -893,6 +893,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainStratosEVM())                    //EVM
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
+    result.append(ChainSunrise())
     result.append(ChainSynternet())
     result.append(ChainTenetEVM())                      //EVM
     result.append(ChainTeritori())
