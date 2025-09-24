@@ -893,6 +893,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainStratosEVM())                    //EVM
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
+    result.append(ChainSunrise())
     result.append(ChainSynternet())
     result.append(ChainTenetEVM())                      //EVM
     result.append(ChainTeritori())
@@ -910,7 +911,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainXpla())
     result.append(ChainXrplEVM())                       //EVM
     result.append(ChainZenrock())
-//    result.append(ChainZeroGravityEVM())                //EVM
+    result.append(ChainZeroGravityEVM())                //EVM
     result.append(ChainZetaEVM())                       //EVM
 //    result.append(ChainZigChain())
 
@@ -933,6 +934,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainSaharaAiEVM_T())
     result.append(ChainSelf_T())
     result.append(ChainTabiEVM_T())
+    result.append(ChainTerraClassic_T())
     result.append(ChainWardenEVM_T())
     result.append(ChainXion_T())
     result.append(ChainXrplEVM_T())

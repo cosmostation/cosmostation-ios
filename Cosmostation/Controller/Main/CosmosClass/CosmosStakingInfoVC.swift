@@ -504,6 +504,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
             } else {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
+                baseSheet.targetChain = selectedChain
                 baseSheet.delegation = delegations[indexPath.row]
                 baseSheet.sheetType = .SelectDelegatedAction
                 onStartSheet(baseSheet, 320, 0.6)

@@ -469,6 +469,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             return 3
             
         } else if (sheetType == .SelectDelegatedAction) {
+            if targetChain is ChainSunrise {
+                return 4
+            }
             return 5
             
         } else if (sheetType == .SelectNeutronDelegatedAction) {

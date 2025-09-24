@@ -1236,6 +1236,7 @@
 "error_staking_min_iota" = "1 IOTA以上からステーキング可能です。";
 "error_pending" = "保留中の状態です。\nアンステーキングはできません。";
 "error_minimum_rent" = "レントのために最低でも %@ SOL を送金してください。";
+"error_tranfer_disabled_vrise" = "vRISE コインはステーキング専用の資産です。\n送信できません。";
 
 
 "alert_title_no_private_key" = "観察モードウォーレット";

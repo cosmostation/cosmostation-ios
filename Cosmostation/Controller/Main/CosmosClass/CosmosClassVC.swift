@@ -294,8 +294,10 @@ class CosmosClassVC: BaseVC {
                     self.onClaimCommissionTx()
                 }
             }
-            mainFab.addItem(title: "Compound All", image: UIImage(named: "iconFabCompounding")) { _ in
-                self.onClaimCompoundingTx()
+            if !(selectedChain is ChainSunrise) {
+                mainFab.addItem(title: "Compound All", image: UIImage(named: "iconFabCompounding")) { _ in
+                    self.onClaimCompoundingTx()
+                }
             }
             mainFab.addItem(title: "Claim All", image: UIImage(named: "iconFabClaim")) { _ in
                 if let babylonChain = (self.selectedChain as? ChainBabylon),

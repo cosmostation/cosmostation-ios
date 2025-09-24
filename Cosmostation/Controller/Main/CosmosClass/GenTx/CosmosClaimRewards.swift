@@ -132,18 +132,21 @@ class CosmosClaimRewards: BaseVC {
             validatorsCntLabel.isHidden = true
         }
         
-        let stakeDenom = selectedChain.stakingAssetDenom()
-        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
+        let rewardDenom = (selectedChain is ChainSunrise)
+            ? selectedChain.mainAssetDenom()
+            : selectedChain.stakingAssetDenom()
+        
+        if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, rewardDenom) {
             var rewardAmount = NSDecimalNumber.zero
             claimableRewards.forEach { reward in
-                let rawAmount =  NSDecimalNumber(string: reward.reward.filter{ $0.denom == stakeDenom }.first?.amount ?? "0")
+                let rawAmount =  NSDecimalNumber(string: reward.reward.filter{ $0.denom == rewardDenom }.first?.amount ?? "0")
                 rewardAmount = rewardAmount.adding(rawAmount.multiplying(byPowerOf10: -18, withBehavior: handler0Down))
             }
             WDP.dpCoin(msAsset, rewardAmount, nil, rewardDenomLabel, rewardAmountLabel, msAsset.decimals)
             
             var anotherRewardDenom = Array<String>()
             claimableRewards.forEach { reward in
-                reward.reward.filter { $0.denom != stakeDenom }.forEach { anotherRewards in
+                reward.reward.filter { $0.denom != rewardDenom }.forEach { anotherRewards in
                     let anotherAmount = NSDecimalNumber(string: anotherRewards.amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down)
                     if (anotherAmount != NSDecimalNumber.zero) {
                         if (!anotherRewardDenom.contains(anotherRewards.denom)) {
@@ -159,10 +162,9 @@ class CosmosClaimRewards: BaseVC {
             } else {
                 rewardCntLabel.isHidden = true
                 titleCoinImage.isHidden = false
-                let symbol = selectedChain.assetSymbol(selectedChain.stakingAssetDenom())
+                let symbol = selectedChain.assetSymbol(rewardDenom ?? "")
                 titleLabel.text = String(format: NSLocalizedString("title_coin_rewards_claim", comment: ""), symbol)
-                titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.stakingAssetDenom() ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
-                
+                titleCoinImage.sd_setImage(with: selectedChain.assetImgUrl(rewardDenom ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
             }
         }
     }

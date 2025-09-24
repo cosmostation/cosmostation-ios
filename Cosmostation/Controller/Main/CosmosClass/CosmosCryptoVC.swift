@@ -759,6 +759,10 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 onStartSheet(baseSheet, 320, 0.6)
                 
             } else if (indexPath.section == 0) {
+                if selectedChain is ChainSunrise {
+                    onShowToast(NSLocalizedString("error_tranfer_disabled_vrise", comment: ""))
+                    return
+                }
                 onStartCoinTransferVC(.COSMOS_COIN, searchNativeCoins[indexPath.row].denom)
                 
             } else if (indexPath.section == 1) {
