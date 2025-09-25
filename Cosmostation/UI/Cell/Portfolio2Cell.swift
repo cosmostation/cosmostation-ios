@@ -159,9 +159,9 @@ class Portfolio2Cell: UITableViewCell {
         
         //DP Price
         var coinGeckoId: String?
-        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
+        if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.mainAssetDenom()) {
             coinGeckoId =  msAsset.coinGeckoId
-        } else if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.mainAssetDenom()) {
+        } else if let msAsset = BaseData.instance.getAsset(chain.apiName, chain.stakingAssetDenom()) {
             coinGeckoId =  msAsset.coinGeckoId
         } else if let msTokne = BaseData.instance.getToken(chain.apiName, chain.mainAssetDenom()) {
             coinGeckoId =  msTokne.coinGeckoId
