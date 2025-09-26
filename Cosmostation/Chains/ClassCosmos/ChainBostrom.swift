@@ -15,7 +15,7 @@ class ChainBostrom: BaseChain {
         
         name = "Bostrom"
         tag = "bostrom118"
-        chainImg = "ChainBostrom"
+        chainImg = "chainBostrom"
         apiName = "bostrom"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
