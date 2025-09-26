@@ -831,6 +831,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainKyve())
     result.append(ChainLava())
     result.append(ChainLike())
+    result.append(ChainLinea())
     result.append(ChainLombard())
     result.append(ChainLum118())
     result.append(ChainLum880())
