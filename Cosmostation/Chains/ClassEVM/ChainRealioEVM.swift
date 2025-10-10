@@ -25,11 +25,11 @@ class ChainRealioEVM: BaseChain {
         bechAccountPrefix = "realio"
         validatorPrefix = "realiovaloper"
         grpcHost = ""
-        lcdUrl = "https://realio-api.genznodes.dev/"
+        lcdUrl = "https://api-realio-network.nodeist.net/"
         
         supportEvm = true
         coinSymbol = "RIO"
-        evmRpcURL = "https://realio-rpc-evm.genznodes.dev"
+        evmRpcURL = "https://json-rpc.realio.network"
     }
 
 }

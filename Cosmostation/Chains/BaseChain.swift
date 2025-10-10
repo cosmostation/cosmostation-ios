@@ -776,7 +776,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBitsong())
     result.append(ChainBlast())                         //EVM
     result.append(ChainBluzelle())
-    result.append(ChainBostrom())
     result.append(ChainCantoEVM())                      //EVM
     result.append(ChainCarbon())
     result.append(ChainCelestia())
@@ -801,7 +800,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainFetchAi())
     result.append(ChainFetchAi60Old())
     result.append(ChainFetchAi60Secp())
-    result.append(ChainFinschia())
     result.append(ChainFirma())
     result.append(ChainForma())                         //EVM
     result.append(ChainFxcoreEVM())                     //EVM
@@ -815,6 +813,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainHumansEVM())                     //EVM
     result.append(ChainInjective())                     //EVM
     result.append(ChainInt3face())
+    result.append(ChainIntento())
     result.append(ChainInitia())
     result.append(ChainIota())
     result.append(ChainIris())
@@ -915,7 +914,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainZenrock())
     result.append(ChainZeroGravityEVM())                //EVM
     result.append(ChainZetaEVM())                       //EVM
-//    result.append(ChainZigChain())
+    result.append(ChainZigChain())
 
     
     
@@ -947,9 +946,11 @@ func ALLCHAINS() -> [BaseChain] {
     
     
 //    result.append(ChainArtelaEVM())                   //EVM
+//    result.append(ChainBostrom())
 //    result.append(ChainCrescent())
 //    result.append(ChainCudos())
 //    result.append(ChainEmoney())
+//    result.append(ChainFinschia())
 //    result.append(ChainGovgen())
 //    result.append(ChainNomic())
 //    result.append(ChainMars())

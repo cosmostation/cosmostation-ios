@@ -383,6 +383,15 @@ class SwapStartVC: BaseVC, UITextFieldDelegate {
                 } else if (route["amount_in"].stringValue == inputAmount.stringValue) {
                     let msg = try await fetchSkipMsg(route)
                     if (msg["txs"][0]["cosmos_tx"]["msgs"].arrayValue.count == 1) {
+                        if (route["swap_venue"]["name"].stringValue.contains("elys-native") == true) {
+                            descriptionCardView.isHidden = true
+                            errorCardView.isHidden = false
+                            errorMsgLabel.text = NSLocalizedString("error_not_swap_of_route", comment: "")
+                            swapBtn.isEnabled = false
+                            toggleBtn.isEnabled = true
+                            return
+                        }
+                        
                         let slippage = NSDecimalNumber(string: "100").subtracting(NSDecimalNumber(string: skipSlippage))
                         let outputAmount = NSDecimalNumber(string: route["amount_out"].stringValue).multiplying(by: slippage).multiplying(byPowerOf10: -2, withBehavior: handler0Down)
                         let dpOutputAmount = outputAmount.multiplying(byPowerOf10: -outputAsset.decimals!)

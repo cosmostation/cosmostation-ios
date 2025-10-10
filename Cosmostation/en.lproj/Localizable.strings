@@ -1238,6 +1238,7 @@
 "error_pending" = "Pending. Unstaking is not possible.";
 "error_minimum_rent" = "Send amount at least %@ SOL for the rent.";
 "error_tranfer_disabled_vrise" = "vRISE is a staking-only asset.\nTransmission is not possible.";
+"error_not_swap_of_route" = "Swap is not currently supported due to stability issues in the route.";
 
 
 "alert_title_no_private_key" = "No Private Key";
