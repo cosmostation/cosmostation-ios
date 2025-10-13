@@ -25,11 +25,11 @@ class ChainWardenEVM_T: ChainWardenEVM  {
         stakeDenom = "award"
         bechAccountPrefix = "warden"
         validatorPrefix = "wardenvaloper"
-        grpcHost = "grpc.chiado.wardenprotocol.org"
-        lcdUrl = "https://api.chiado.wardenprotocol.org/"
+        grpcHost = "grpc.barra.wardenprotocol."
+        lcdUrl = "https://api.barra.wardenprotocol.org/"
     
         supportEvm = true
         coinSymbol = "WARD"
-        evmRpcURL = "https://evm.chiado.wardenprotocol.org"
+        evmRpcURL = "https://evm.barra.wardenprotocol.org"
     }
 }
