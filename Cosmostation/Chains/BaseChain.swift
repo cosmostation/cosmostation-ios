@@ -488,6 +488,14 @@ extension BaseChain {
         return getChainListParam()["btc_staking"]["url"].string ?? ""
     }
     
+    func isSupportEthStaking() -> Bool {
+        return getChainListParam()["eth_staking"]["is_support_staking"].bool ?? false
+    }
+    
+    func ethStakingExplorerUrl() -> String {
+        return getChainListParam()["eth_staking"]["url"].string ?? ""
+    }
+    
     func isSupportErc20() -> Bool {
         return (getChainListParam()["is_support_erc20"].bool ?? false && supportEvm)
     }
@@ -766,8 +774,8 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBitCoin84())                     //MAJOR
     result.append(ChainBitCoin86())                     //MAJOR
     result.append(ChainBitsong())
+    result.append(ChainBlast())                         //EVM
     result.append(ChainBluzelle())
-    result.append(ChainBostrom())
     result.append(ChainCantoEVM())                      //EVM
     result.append(ChainCarbon())
     result.append(ChainCelestia())
@@ -792,7 +800,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainFetchAi())
     result.append(ChainFetchAi60Old())
     result.append(ChainFetchAi60Secp())
-    result.append(ChainFinschia())
     result.append(ChainFirma())
     result.append(ChainForma())                         //EVM
     result.append(ChainFxcoreEVM())                     //EVM
@@ -806,6 +813,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainHumansEVM())                     //EVM
     result.append(ChainInjective())                     //EVM
     result.append(ChainInt3face())
+    result.append(ChainIntento())
     result.append(ChainInitia())
     result.append(ChainIota())
     result.append(ChainIris())
@@ -822,12 +830,14 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainKyve())
     result.append(ChainLava())
     result.append(ChainLike())
+    result.append(ChainLinea())                         //EVM
     result.append(ChainLombard())
     result.append(ChainLum118())
     result.append(ChainLum880())
     result.append(ChainLumera())
     result.append(ChainManifest())
     result.append(ChainMantle())                        //EVM
+    result.append(ChainMantraEVM())                     //EVM
     result.append(ChainMantra())
     result.append(ChainMedibloc())
     result.append(ChainMigaloo())
@@ -851,6 +861,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainPersistence118())
     result.append(ChainPersistence750())
     result.append(ChainPlanqEVM())                      //EVM
+    result.append(ChainPocket())
     result.append(ChainPolygon())                       //EVM
     result.append(ChainProvenance())
     result.append(ChainPryzm())
@@ -860,17 +871,16 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainRealioEVM())
     result.append(ChainRegen())
     result.append(ChainRizon())
-    result.append(ChainRouterEVM())
+    result.append(ChainRouterEVM())                     //EVM
     result.append(ChainSaga())
 //    result.append(ChainSaharaAiEVM())                   //EVM
     result.append(ChainSecret118())
     result.append(ChainSecret529())
     result.append(ChainSeda())
-    result.append(ChainSeiEVM())
+    result.append(ChainSeiEVM())                        //EVM
     result.append(ChainSei())
     result.append(ChainSelf())
     result.append(ChainSentinel())
-    result.append(ChainSge())
     result.append(ChainShardeum())                      //EVM
     result.append(ChainShentu())
     result.append(ChainShidoEVM())                      //EVM
@@ -884,6 +894,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainStratosEVM())                    //EVM
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
+    result.append(ChainSunrise())
     result.append(ChainSynternet())
     result.append(ChainTenetEVM())                      //EVM
     result.append(ChainTeritori())
@@ -901,9 +912,9 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainXpla())
     result.append(ChainXrplEVM())                       //EVM
     result.append(ChainZenrock())
-//    result.append(ChainZeroGravityEVM())                //EVM
+    result.append(ChainZeroGravityEVM())                //EVM
     result.append(ChainZetaEVM())                       //EVM
-//    result.append(ChainZigChain())
+    result.append(ChainZigChain())
 
     
     
@@ -912,10 +923,8 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBitCoin84_T())
     result.append(ChainBitCoin86_T())
     result.append(ChainGno_T())
-//    result.append(ChainImuaEVM_T())
     result.append(ChainInjective_T())
     result.append(ChainInitia_T())
-//    result.append(ChainLombard_T())
     result.append(ChainLumera_T())
     result.append(ChainMantraEVM_T())
     result.append(ChainMantra_T())
@@ -926,6 +935,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainSaharaAiEVM_T())
     result.append(ChainSelf_T())
     result.append(ChainTabiEVM_T())
+    result.append(ChainTerraClassic_T())
     result.append(ChainWardenEVM_T())
     result.append(ChainXion_T())
     result.append(ChainXrplEVM_T())
@@ -936,14 +946,17 @@ func ALLCHAINS() -> [BaseChain] {
     
     
 //    result.append(ChainArtelaEVM())                   //EVM
+//    result.append(ChainBostrom())
 //    result.append(ChainCrescent())
 //    result.append(ChainCudos())
 //    result.append(ChainEmoney())
+//    result.append(ChainFinschia())
 //    result.append(ChainGovgen())
 //    result.append(ChainNomic())
 //    result.append(ChainMars())
 //    result.append(ChainOnomy())
 //    result.append(ChainQuasar())
+//    result.append(ChainSge())
 //    result.append(ChainStafi())
 //    result.append(ChainStarname())
 //    
@@ -952,6 +965,8 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainBeraEVM_T())                     //EVM
 //    result.append(ChainBitCoin44_T())
 //    result.append(ChainBitCoin49_T())
+//    result.append(ChainImuaEVM_T())
+//    result.append(ChainLombard_T())
 //    result.append(ChainStoryEVM_T())
     
     result.forEach { chain in

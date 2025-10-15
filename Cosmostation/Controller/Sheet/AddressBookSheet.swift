@@ -247,7 +247,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate ,UITextViewDelegate {
             if chain.supportEvm && (WUtils.isValidEvmAddress(address)) {
                 return true
                 
-            } else if (chain is ChainSui || chain is ChainIota) && WUtils.isValidSuiAdderss(address) {
+            } else if (chain is ChainSui || chain is ChainIota) && WUtils.isValidSuiAddress(address) {
                 return true
                 
             } else if chain is ChainBitCoin86 && BtcJS.shared.callJSValueToBool(key: "validateAddress", param: [address, network]) {

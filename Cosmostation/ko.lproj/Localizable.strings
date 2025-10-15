@@ -1235,6 +1235,8 @@
 "error_staking_min_iota" = "1 IOTA 이상 부터 스테이킹 가능합니다.";
 "error_pending" = "팬딩 상태입니다.\n언스테이킹은 불가능합니다.";
 "error_minimum_rent" = "렌트 비용을 위해 최소 %@ SOL 보내야 합니다.";
+"error_tranfer_disabled_vrise" = "vRISE는 스테이킹 전용 자산입니다.\n전송이 불가능합니다.";
+"error_not_swap_of_route" = "현재 라우트의 안정성 문제로 스왑이 지원 되지 않습니다.";
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";

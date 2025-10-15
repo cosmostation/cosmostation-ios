@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChainMantra: BaseChain  {
+class ChainMantra: BaseChain {
     
     override init() {
         super.init()
@@ -16,6 +16,7 @@ class ChainMantra: BaseChain  {
         name = "Mantra"
         tag = "mantra118"
         chainImg = "chainMantra"
+        isDefault = false
         apiName = "mantra"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         

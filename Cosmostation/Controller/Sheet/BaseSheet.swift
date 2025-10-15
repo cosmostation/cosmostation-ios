@@ -469,6 +469,9 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             return 3
             
         } else if (sheetType == .SelectDelegatedAction) {
+            if targetChain is ChainSunrise {
+                return 4
+            }
             return 5
             
         } else if (sheetType == .SelectNeutronDelegatedAction) {
@@ -1002,6 +1005,7 @@ public enum SheetType: Int {
     case MoveDropDetail = 100
     case MoveDydx = 101
     case MoveBabylonDappDetail = 102
+    case MoveEthStaking = 103
     
     case SelectDappSort
     case SelectDappNetwork

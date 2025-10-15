@@ -72,7 +72,7 @@ class L_Generator {
     }
     
     static func postData(_ msgs: [L_Msg], _ fee: L_Fee, _ memo: String, _ baseChain: BaseChain) -> Data {
-        guard let oktChain = baseChain as? ChainOkt996Keccak else {
+        guard let oktChain = baseChain as? ChainOktEVM else {
             return Data()
         }
         let encoder = JSONEncoder()

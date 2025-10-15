@@ -171,11 +171,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     
     private func onInitEvmChain() {
         if (targetChain == nil) {
-            targetChain = allChains.filter({ $0.supportEvm }).first!
-        } else {
-            if !(targetChain.supportEvm) {
-                targetChain = allChains.filter({ $0.supportEvm }).first!
-            }
+            targetChain = allChains.filter({ $0.name == "Ethereum" }).first!
         }
     }
     
@@ -184,7 +180,6 @@ class DappDetailVC: BaseVC, WebSignDelegate {
             suiTargetChain = allChains.filter({ $0.name == "Sui" }).first!
         }
     }
-
     
     private func onInitChainIota() {
         if (iotaTargetChain == nil) {

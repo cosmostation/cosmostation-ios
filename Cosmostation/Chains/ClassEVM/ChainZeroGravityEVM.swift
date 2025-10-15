@@ -22,7 +22,7 @@ class ChainZeroGravityEVM: BaseChain {
         
         supportEvm = true
         coinSymbol = "0G"
-        evmRpcURL = ""
+        evmRpcURL = "https://evmrpc.0g.ai"
     }
 }
 

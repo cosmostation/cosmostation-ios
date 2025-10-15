@@ -20,11 +20,11 @@ class ChainZigChain: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .Unknown
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uzig"
         bechAccountPrefix = "zig"
         validatorPrefix = "zigvaloper"
         grpcHost = ""
-        lcdUrl = ""
+        lcdUrl = "https://public-zigchain-lcd.numia.xyz/"
     }
 }
