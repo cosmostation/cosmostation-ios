@@ -609,7 +609,7 @@ You can download each store.
   </tr>
   
   <tr>
-    <td><img. src="https://github.com/cosmostation/chainlist/blob/main/chain/lava/resource/chain_lava.png?raw=true" width="42" height = "42"></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/lava/resource/chain_lava.png?raw=true" width="42" height = "42"></td>
     <td><span style="font-weight:bold">LAVA</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
