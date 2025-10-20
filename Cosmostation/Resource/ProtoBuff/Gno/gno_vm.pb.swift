@@ -33,6 +33,9 @@ struct Gno_Vm_MsgCall {
   /// the amount of funds to be deposited to the package, if any ("<amount><denomination>")
   var send: String = String()
 
+  /// the amount of funds to lock for the storage, if any ("<amount><denomination>")
+  var maxDeposit: String = String()
+
   /// the gno package path
   var pkgPath: String = String()
 
@@ -68,7 +71,10 @@ struct Gno_Vm_MsgAddPackage {
   mutating func clearPackage() {self._package = nil}
 
   /// the amount of funds to be deposited at deployment, if any ("<amount><denomination>")
-  var deposit: String = String()
+  var send: String = String()
+
+  /// the amount of funds to put down for the storage fee, if any ("<amount><denomination>")
+  var maxDeposit: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -89,6 +95,9 @@ struct Gno_Vm_MsgRun {
 
   /// the amount of funds to be deposited to the package, if any ("<amount><denomination>")
   var send: String = String()
+
+  /// the amount of funds to put down for the storage fee, if any ("<amount><denomination>")
+  var maxDeposit: String = String()
 
   /// the package being executed
   var package: Gno_Vm_MemPackage {
@@ -123,9 +132,32 @@ struct Gno_Vm_MemPackage {
   /// the associated package gno source
   var files: [Gno_Vm_MemFile] = []
 
+  /// the (user defined) package type
+  var type: SwiftProtobuf.Google_Protobuf_Any {
+    get {return _type ?? SwiftProtobuf.Google_Protobuf_Any()}
+    set {_type = newValue}
+  }
+  /// Returns true if `type` has been explicitly set.
+  var hasType: Bool {return self._type != nil}
+  /// Clears the value of `type`. Subsequent reads from it will return its default value.
+  mutating func clearType() {self._type = nil}
+
+  /// the (user defined) extra information
+  var info: SwiftProtobuf.Google_Protobuf_Any {
+    get {return _info ?? SwiftProtobuf.Google_Protobuf_Any()}
+    set {_info = newValue}
+  }
+  /// Returns true if `info` has been explicitly set.
+  var hasInfo: Bool {return self._info != nil}
+  /// Clears the value of `info`. Subsequent reads from it will return its default value.
+  mutating func clearInfo() {self._info = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
+
+  fileprivate var _type: SwiftProtobuf.Google_Protobuf_Any? = nil
+  fileprivate var _info: SwiftProtobuf.Google_Protobuf_Any? = nil
 }
 
 /// MemFile is the metadata information tied to
@@ -163,9 +195,10 @@ extension Gno_Vm_MsgCall: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "caller"),
     2: .same(proto: "send"),
-    3: .standard(proto: "pkg_path"),
-    4: .same(proto: "func"),
-    5: .same(proto: "args"),
+    3: .standard(proto: "max_deposit"),
+    4: .standard(proto: "pkg_path"),
+    5: .same(proto: "func"),
+    6: .same(proto: "args"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -176,9 +209,10 @@ extension Gno_Vm_MsgCall: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.caller) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.send) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self.pkgPath) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.`func`) }()
-      case 5: try { try decoder.decodeRepeatedStringField(value: &self.args) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.maxDeposit) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.pkgPath) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.`func`) }()
+      case 6: try { try decoder.decodeRepeatedStringField(value: &self.args) }()
       default: break
       }
     }
@@ -191,14 +225,17 @@ extension Gno_Vm_MsgCall: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     if !self.send.isEmpty {
       try visitor.visitSingularStringField(value: self.send, fieldNumber: 2)
     }
+    if !self.maxDeposit.isEmpty {
+      try visitor.visitSingularStringField(value: self.maxDeposit, fieldNumber: 3)
+    }
     if !self.pkgPath.isEmpty {
-      try visitor.visitSingularStringField(value: self.pkgPath, fieldNumber: 3)
+      try visitor.visitSingularStringField(value: self.pkgPath, fieldNumber: 4)
     }
     if !self.`func`.isEmpty {
-      try visitor.visitSingularStringField(value: self.`func`, fieldNumber: 4)
+      try visitor.visitSingularStringField(value: self.`func`, fieldNumber: 5)
     }
     if !self.args.isEmpty {
-      try visitor.visitRepeatedStringField(value: self.args, fieldNumber: 5)
+      try visitor.visitRepeatedStringField(value: self.args, fieldNumber: 6)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -206,6 +243,7 @@ extension Gno_Vm_MsgCall: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   static func ==(lhs: Gno_Vm_MsgCall, rhs: Gno_Vm_MsgCall) -> Bool {
     if lhs.caller != rhs.caller {return false}
     if lhs.send != rhs.send {return false}
+    if lhs.maxDeposit != rhs.maxDeposit {return false}
     if lhs.pkgPath != rhs.pkgPath {return false}
     if lhs.`func` != rhs.`func` {return false}
     if lhs.args != rhs.args {return false}
@@ -219,7 +257,8 @@ extension Gno_Vm_MsgAddPackage: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "creator"),
     2: .same(proto: "package"),
-    3: .same(proto: "deposit"),
+    3: .same(proto: "send"),
+    4: .standard(proto: "max_deposit"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -230,7 +269,8 @@ extension Gno_Vm_MsgAddPackage: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.creator) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._package) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self.deposit) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.send) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.maxDeposit) }()
       default: break
       }
     }
@@ -247,8 +287,11 @@ extension Gno_Vm_MsgAddPackage: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     try { if let v = self._package {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     } }()
-    if !self.deposit.isEmpty {
-      try visitor.visitSingularStringField(value: self.deposit, fieldNumber: 3)
+    if !self.send.isEmpty {
+      try visitor.visitSingularStringField(value: self.send, fieldNumber: 3)
+    }
+    if !self.maxDeposit.isEmpty {
+      try visitor.visitSingularStringField(value: self.maxDeposit, fieldNumber: 4)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -256,7 +299,8 @@ extension Gno_Vm_MsgAddPackage: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   static func ==(lhs: Gno_Vm_MsgAddPackage, rhs: Gno_Vm_MsgAddPackage) -> Bool {
     if lhs.creator != rhs.creator {return false}
     if lhs._package != rhs._package {return false}
-    if lhs.deposit != rhs.deposit {return false}
+    if lhs.send != rhs.send {return false}
+    if lhs.maxDeposit != rhs.maxDeposit {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -267,7 +311,8 @@ extension Gno_Vm_MsgRun: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "caller"),
     2: .same(proto: "send"),
-    3: .same(proto: "package"),
+    3: .standard(proto: "max_deposit"),
+    4: .same(proto: "package"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -278,7 +323,8 @@ extension Gno_Vm_MsgRun: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.caller) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.send) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._package) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.maxDeposit) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._package) }()
       default: break
       }
     }
@@ -295,8 +341,11 @@ extension Gno_Vm_MsgRun: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
     if !self.send.isEmpty {
       try visitor.visitSingularStringField(value: self.send, fieldNumber: 2)
     }
+    if !self.maxDeposit.isEmpty {
+      try visitor.visitSingularStringField(value: self.maxDeposit, fieldNumber: 3)
+    }
     try { if let v = self._package {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -304,6 +353,7 @@ extension Gno_Vm_MsgRun: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
   static func ==(lhs: Gno_Vm_MsgRun, rhs: Gno_Vm_MsgRun) -> Bool {
     if lhs.caller != rhs.caller {return false}
     if lhs.send != rhs.send {return false}
+    if lhs.maxDeposit != rhs.maxDeposit {return false}
     if lhs._package != rhs._package {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -316,6 +366,8 @@ extension Gno_Vm_MemPackage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     1: .same(proto: "name"),
     2: .same(proto: "path"),
     3: .same(proto: "files"),
+    4: .same(proto: "type"),
+    5: .same(proto: "info"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -327,12 +379,18 @@ extension Gno_Vm_MemPackage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
       case 1: try { try decoder.decodeSingularStringField(value: &self.name) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.path) }()
       case 3: try { try decoder.decodeRepeatedMessageField(value: &self.files) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._type) }()
+      case 5: try { try decoder.decodeSingularMessageField(value: &self._info) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.name.isEmpty {
       try visitor.visitSingularStringField(value: self.name, fieldNumber: 1)
     }
@@ -342,6 +400,12 @@ extension Gno_Vm_MemPackage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     if !self.files.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.files, fieldNumber: 3)
     }
+    try { if let v = self._type {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._info {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -349,6 +413,8 @@ extension Gno_Vm_MemPackage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     if lhs.name != rhs.name {return false}
     if lhs.path != rhs.path {return false}
     if lhs.files != rhs.files {return false}
+    if lhs._type != rhs._type {return false}
+    if lhs._info != rhs._info {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
