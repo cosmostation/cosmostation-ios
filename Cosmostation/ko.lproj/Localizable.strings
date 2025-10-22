@@ -236,6 +236,7 @@
 "str_testnet" = "테스트넷";
 "str_gas_fee_coin" = "가스용 코인";
 "str_instant" = "즉시";
+"str_solana_expected_msg" = "잔액 변동은 추정치입니다.\n관련 금액과 자산은 보장되지 않습니다.";
 
 
 "str_tx_status" = "결과";

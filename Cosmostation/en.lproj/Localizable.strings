@@ -236,6 +236,7 @@
 "str_testnet" = "Testnet";
 "str_gas_fee_coin" = "Coin for Gas";
 "str_instant" = "Instant";
+"str_solana_expected_msg" = "Balance changes are estimates.\nThe associated amounts and assets are not guaranteed.";
 
 
 "str_tx_status" = "Status";

@@ -1758,8 +1758,7 @@ extension CommonTransfer {
     func solanaSend() {
         Task {
             do {
-                if let privateKey = fromChain.privateKey?.toHexString(),
-                   let signTransactionHex = try await solanaFetcher.signTransaction(solanaTxHex, privateKey),
+                if let signTransactionHex = try await solanaFetcher.signTransaction(solanaTxHex),
                    let sendTransaction = try await solanaFetcher.fetchSendTransaction(signTransactionHex) {
                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                            self.loadingView.isHidden = true
