@@ -110,6 +110,7 @@ class CommonTransfer: BaseVC {
     var btcTxHex = ""
 
     var gnoFetcher: GnoFetcher!
+    var gnoGas: [Double] = [1.0, 1.1, 1.2]
     
     var solanaFetcher: SolanaFetcher!
     var solanaFeeAmount = NSDecimalNumber.zero
@@ -770,12 +771,12 @@ class CommonTransfer: BaseVC {
                 errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
                 return
             }
-            cosmosTxFee.gasLimit = UInt64(Double(toGas == 0 ? fromChain.getInitGasLimit().uint64Value : toGas) * fromChain.getSimulatedGasMultiply())
+            cosmosTxFee.gasLimit = UInt64(Double(toGas == 0 ? fromChain.getInitGasLimit().uint64Value : toGas))
             
             if let gasRate = cosmosFeeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
-                let gasLimit = NSDecimalNumber.init(value: UInt64(Double(toGas == 0 ? fromChain.getInitGasLimit().uint64Value : toGas) * fromChain.getSimulatedGasMultiply() * fromChain.getSimulatedGasAdjustment()))
-                let feeAmount = gasRate.gasRate?.multiplying(by: gasLimit, withBehavior: handler0Up)
-                cosmosTxFee.amount[0].amount = feeAmount!.stringValue
+                let gasLimit = NSDecimalNumber.init(value: UInt64(Double(toGas == 0 ? fromChain.getInitGasLimit().uint64Value : toGas) * gnoGas[selectedFeePosition]))
+                let feeAmount = gasLimit.multiplying(byPowerOf10: -3, withBehavior: getDivideHandler(3))
+                cosmosTxFee.amount[0].amount = feeAmount.stringValue
             }
 
             onUpdateFeeView()
@@ -1220,7 +1221,7 @@ extension CommonTransfer {
         Task {
             guard let gasRate = self.cosmosTxFee.amount.filter({ $0.denom == self.cosmosTxFee.amount[0].denom }).first else { return }
             let fee = Tm2_Tx_TxFee.with {
-                $0.gasWanted = Int64(cosmosTxFee.gasLimit)
+                $0.gasWanted = Int64(3000000000)
                 $0.gasFee = gasRate.amount + gasRate.denom
             }
             
@@ -1848,6 +1849,7 @@ extension CommonTransfer {
                 $0.args = [toAddress,
                            toAmount.stringValue]
                 $0.caller = fromChain.bechAddress!
+                $0.maxDeposit = ""
                 $0.func = "Transfer"
                 $0.send = ""
                 $0.pkgPath = toSendMsToken.address!
