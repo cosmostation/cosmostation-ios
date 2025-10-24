@@ -924,8 +924,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNeutron_T())
     result.append(ChainNillion_T())
     result.append(ChainQubeticsEVM_T())
-    result.append(ChainSaharaAiEVM_T())
-    result.append(ChainSelf_T())
     result.append(ChainTabiEVM_T())
     result.append(ChainTerraClassic_T())
     result.append(ChainWardenEVM_T())
@@ -960,6 +958,8 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainBitCoin49_T())
 //    result.append(ChainImuaEVM_T())
 //    result.append(ChainLombard_T())
+//    result.append(ChainSaharaAiEVM_T())
+//    result.append(ChainSelf_T())
 //    result.append(ChainStoryEVM_T())
     
     result.forEach { chain in
