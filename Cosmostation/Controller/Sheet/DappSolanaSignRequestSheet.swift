@@ -58,8 +58,8 @@ class DappSolanaSignRequestSheet: BaseVC {
     var data: String!
     // sign message
     var signature: String!
-    // sign and sendTransaction
-    var preflightCommitment: String!
+    // signTransactions
+    var allTransactions = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +94,7 @@ class DappSolanaSignRequestSheet: BaseVC {
             if method == "solana_signMessage" {
                 do {
                     if let parseMessage = try await solanaFetcher.parseMessage(requestToSign!),
-                       let signMessage = try await solanaFetcher.signMessage(requestToSign!, selectedChain.privateKey?.hexEncodedString()) {
+                       let signMessage = try await solanaFetcher.signMessage(requestToSign!) {
                         let serializedSignMessageJsonData = try JSON(data: Data(signMessage.utf8))
                         
                         data = serializedSignMessageJsonData["publicKey"].stringValue
@@ -166,38 +166,71 @@ class DappSolanaSignRequestSheet: BaseVC {
                     }
                 }
                 
-            } else if method == "solana_signTransaction" {
+            } else if method == "solana_signTransaction" || method == "solana_signAllTransactions" {
+                var parsingResult = [String]()
+                var dataResult = [String]()
+                var displayJson = ""
+                var totalFee: UInt64 = 0
+                var totalExpectedSolAmount: Double = 0.0
+
+                guard let transactions = requestToSign?.array else { return }
                 do {
-//                    if let parseInstruction = try await solanaFetcher.parseInstructionsFromTx(requestToSign!),
-//                       let serializedTxMessage = try await solanaFetcher.serializedTxMessageFromTx(requestToSign!),
-//                       let feeForMessage = try await solanaFetcher.fetchFeeMessage(serializedTxMessage) {
-//                        
-//                        let serializedTx = requestToSign?["serializedTx"].stringValue ?? ""
-//                        let displayJson = JSON(parseInstruction.data(using: .utf8) ?? "")
-//                        let fee = feeForMessage["result"]["value"].uInt64Value
-//                        
-//                        if let privateKey = selectedChain.privateKey?.hexEncodedString(),
-//                           let signTransaction = try await solanaFetcher.signTransaction(serializedTx, privateKey) {
-//                            data = signTransaction
-//                            
-//                            DispatchQueue.main.async {
-//                                self.dangerMsgTitle.isHidden = false
-//                                self.feeCardView.isHidden = false
-//                                self.onUpdateView(NSDecimalNumber(value: fee))
-//                                self.toSignTextView.text = "\(displayJson)"
-//                                self.warnMsgLabel.isHidden = false
-//                            }
-//                        }
-//                    }
-                    
-                } catch {
-                    DispatchQueue.main.async {
-                        self.dismissWithFail()
+                    for json in transactions {
+                        let serializedTx = json["serializedTx"].stringValue
+                        if let parseInstruction = try await solanaFetcher.parseInstructionsFromTx(serializedTx),
+                           let accounts = try await solanaFetcher.accountsToTrack(serializedTx),
+                           let serializedTxMessage = try await solanaFetcher.serializedTxMessageFromTx(serializedTx),
+                           let feeForMessage = try await solanaFetcher.fetchFeeMessage(serializedTxMessage),
+                           let signTransaction = try await solanaFetcher.signTransaction(serializedTx) {
+                            
+                            parsingResult.append(String(describing: parseInstruction))
+                            if parsingResult.count > 0 {
+                                displayJson = joinedTransactions(parsingResult)
+                            } else {
+                                displayJson = "\(JSON(parseInstruction.data(using: .utf8) ?? ""))"
+                            }
+                            dataResult.append(String(describing: signTransaction))
+                            let baseFee = feeForMessage["result"]["value"].uInt64Value
+                            totalFee &+= baseFee
+                            
+                            if !accounts.isEmpty {
+                                let accountList = try JSONDecoder().decode([String].self, from: Data(accounts.utf8))
+                                let simulateValue = try await solanaFetcher.simulateValue(serializedTx, accountList)
+                                
+                                if simulateValue["err"].type == .null {
+                                    let multiAccountsValue = try await solanaFetcher.multiAccountsValue(accountList)
+                                    let changesData = try await solanaFetcher.analyzeTokenChanges(accounts, JSON(multiAccountsValue).rawString(), simulateValue.rawString())
+                                    let parsingChangesData = JSON(parseJSON: changesData ?? "").arrayValue
+                                    if parsingChangesData.count > 0 {
+                                        let solChangeAmount = parsingChangesData[0]["amount"].doubleValue
+                                        totalExpectedSolAmount += solChangeAmount
+                                    }
+                                }
+                            }
+                        }
                     }
-                }
-                
-            } else if method == "solana_signAllTransactions" {
-                do {
+                    allTransactions = dataResult
+                    
+                    DispatchQueue.main.async {
+                        if NSDecimalNumber(value: totalExpectedSolAmount).abs.compare(NSDecimalNumber.zero).rawValue > 0 {
+                            DispatchQueue.main.async {
+                                self.dangerMsgTitle.isHidden = false
+                                self.feeCardView.isHidden = true
+                                self.balanceChangeCardView.isHidden = false
+                                self.onUpdateChangeView(NSDecimalNumber(value: totalExpectedSolAmount), NSDecimalNumber(value: totalFee))
+                                self.changeToSignTextView.text = displayJson
+                                self.warnMsgLabel.isHidden = false
+                            }
+                            
+                        } else {
+                            self.dangerMsgTitle.isHidden = false
+                            self.feeCardView.isHidden = false
+                            self.balanceChangeCardView.isHidden = true
+                            self.onUpdateView(NSDecimalNumber(value: totalFee))
+                            self.toSignTextView.text = displayJson
+                            self.warnMsgLabel.isHidden = false
+                        }
+                    }
                     
                 } catch {
                     DispatchQueue.main.async {
@@ -282,11 +315,8 @@ class DappSolanaSignRequestSheet: BaseVC {
                 }
             }
             
-        } else if method == "solana_signTransaction" {
-            webSignDelegate?.onAcceptInjection([data], requestToSign!, messageId!)
-            
-        } else if method == "solana_signAllTransactions" {
-            webSignDelegate?.onAcceptInjection([data], requestToSign!, messageId!)
+        } else if method == "solana_signTransaction" || method == "solana_signAllTransactions" {
+            webSignDelegate?.onAcceptInjection(JSON(allTransactions), requestToSign!, messageId!)
         }
         
         dismiss(animated: true)

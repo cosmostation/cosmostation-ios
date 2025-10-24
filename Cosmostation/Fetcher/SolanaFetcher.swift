@@ -244,8 +244,9 @@ extension SolanaFetcher {
         return SolanaJS.shared.callJSValue(key: "parseMessage", param: [message])
     }
     
-    func signMessage(_ params: JSON, _ privateKey: String?) async throws -> String? {
+    func signMessage(_ params: JSON) async throws -> String? {
         let message = params["message"].stringValue
+        let privateKey = chain.privateKey?.hexEncodedString()
         return SolanaJS.shared.callJSValue(key: "signMessage", param: [message, privateKey])
     }
     

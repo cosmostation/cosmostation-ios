@@ -401,7 +401,7 @@ extension DappDetailVC: WKScriptMessageHandler {
             let bodyJSON = JSON(parseJSON: message.body as? String ?? "")
             let messageJSON = bodyJSON["message"]
             let method = messageJSON["method"].stringValue
-            print("DAPP REQUEST method \(method)")
+//            print("DAPP REQUEST method \(method)")
             
             //Handle Cosmos Request
             if (method == "cos_supportedChainIds") {
@@ -865,15 +865,7 @@ extension DappDetailVC: WKScriptMessageHandler {
                     injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
                 }
                 
-            } else if (method == "solana_signTransaction") {
-                let params = messageJSON["params"]
-                if params.count > 0 {
-                    self.popUpSolanaRequestSign(method, params[0], bodyJSON["messageId"])
-                } else {
-                    injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
-                }
-                
-            } else if (method == "solana_signAllTransactions") {
+            } else if (method == "solana_signTransaction" || method == "solana_signAllTransactions") {
                 let params = messageJSON["params"]
                 if params.count > 0 {
                     self.popUpSolanaRequestSign(method, params, bodyJSON["messageId"])
