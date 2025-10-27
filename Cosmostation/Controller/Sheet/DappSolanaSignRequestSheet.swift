@@ -184,7 +184,7 @@ class DappSolanaSignRequestSheet: BaseVC {
                            let signTransaction = try await solanaFetcher.signTransaction(serializedTx) {
                             
                             parsingResult.append(String(describing: parseInstruction))
-                            if parsingResult.count > 0 {
+                            if parsingResult.count > 1 {
                                 displayJson = joinedTransactions(parsingResult)
                             } else {
                                 displayJson = "\(JSON(parseInstruction.data(using: .utf8) ?? ""))"

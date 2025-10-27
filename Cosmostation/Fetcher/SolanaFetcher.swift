@@ -51,9 +51,12 @@ class SolanaFetcher {
                     tokenInfo["result"]["value"].arrayValue.forEach{ tokenValue in
                         let info = tokenValue["account"]["data"]["parsed"]["info"]
                         let mint = info["mint"].stringValue
+                        let amount = info["tokenAmount"]["amount"].stringValue
                         
                         if let _ = BaseData.instance.getToken(chain.apiName, mint) {
-                            solanaTokenInfo.append(info)
+                            if NSDecimalNumber(string: amount).compare(NSDecimalNumber.zero).rawValue > 0 {
+                                solanaTokenInfo.append(info)
+                            }
                         }
                     }
                     
