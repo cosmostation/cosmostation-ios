@@ -236,6 +236,7 @@
 "str_testnet" = "テストネット";
 "str_gas_fee_coin" = "ガス用コイン";
 "str_instant" = "直ちに";
+"str_solana_expected_msg" = "残高の変動は推定値です。\n関連する金額および資産は保証されません。";
 
 
 "str_tx_status" = "結果";

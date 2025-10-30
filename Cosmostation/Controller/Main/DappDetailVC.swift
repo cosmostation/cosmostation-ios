@@ -47,6 +47,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     var suiTargetChain: BaseChain?
     var iotaTargetChain: BaseChain?
     var btcTargetChain: BaseChain?
+    var solanaTargetChain: BaseChain?
     var web3: Web3?
     
     var btcNetwork: String?
@@ -206,7 +207,12 @@ class DappDetailVC: BaseVC, WebSignDelegate {
             }
             
         }
-        
+    }
+    
+    private func onInitChainSolana() {
+        if (solanaTargetChain == nil) {
+            solanaTargetChain = allChains.filter({ $0.apiName == "solana" }).first!
+        }
     }
 
     // Inject custom script to webview
@@ -354,7 +360,17 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         btcSignRequestSheet.modalTransitionStyle = .coverVertical
         self.present(btcSignRequestSheet, animated: true)
     }
-
+    
+    private func popUpSolanaRequestSign(_ method: String, _ request: JSON, _ messageId: JSON?) {
+        let solanaSignRequestSheet = DappSolanaSignRequestSheet(nibName: "DappSolanaSignRequestSheet", bundle: nil)
+        solanaSignRequestSheet.method = method
+        solanaSignRequestSheet.requestToSign = request
+        solanaSignRequestSheet.messageId = messageId
+        solanaSignRequestSheet.selectedChain = solanaTargetChain
+        solanaSignRequestSheet.webSignDelegate = self
+        solanaSignRequestSheet.modalTransitionStyle = .coverVertical
+        self.present(solanaSignRequestSheet, animated: true)
+    }
     
     func onCancleInjection(_ reseon: String, _ requestToSign: JSON, _ messageId: JSON) {
         injectionRequestReject(reseon, requestToSign, messageId)
@@ -827,6 +843,34 @@ extension DappDetailVC: WKScriptMessageHandler {
                         return
                     }
                     self.popUpIotaRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
+                }
+            }
+            
+            //Handle SOLANA Request
+            else if (method == "solana_connect") {
+                onInitChainSolana()
+                guard let pubKey = solanaTargetChain!.publicKey?.hexEncodedString() else { return }
+                let data: JSON = ["publicKey": pubKey]
+                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "solana_signMessage") {
+                let params = messageJSON["params"]
+                self.popUpSolanaRequestSign(method, params, bodyJSON["messageId"])
+                
+            } else if (method == "solana_signAndSendTransaction") {
+                let params = messageJSON["params"]
+                if params.count > 0 {
+                    self.popUpSolanaRequestSign(method, params[0], bodyJSON["messageId"])
+                } else {
+                    injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
+                }
+                
+            } else if (method == "solana_signTransaction" || method == "solana_signAllTransactions") {
+                let params = messageJSON["params"]
+                if params.count > 0 {
+                    self.popUpSolanaRequestSign(method, params, bodyJSON["messageId"])
+                } else {
+                    injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
                 }
             }
 

@@ -50,7 +50,14 @@ class SolanaFetcher {
                     solanaAccountInfo = accountInfo["result"]
                     tokenInfo["result"]["value"].arrayValue.forEach{ tokenValue in
                         let info = tokenValue["account"]["data"]["parsed"]["info"]
-                        solanaTokenInfo.append(info)
+                        let mint = info["mint"].stringValue
+                        let amount = info["tokenAmount"]["amount"].stringValue
+                        
+                        if let _ = BaseData.instance.getToken(chain.apiName, mint) {
+                            if NSDecimalNumber(string: amount).compare(NSDecimalNumber.zero).rawValue > 0 {
+                                solanaTokenInfo.append(info)
+                            }
+                        }
                     }
                     
                     solanaTokenInfo.forEach { tokenInfo in
@@ -211,7 +218,8 @@ extension SolanaFetcher {
         return SolanaJS.shared.overwriteProgramTx(overwriteProgramTxHex)
     }
     
-    func signTransaction(_ programTxHex: String, _ privateKey: String) async throws -> String? {
+    func signTransaction(_ programTxHex: String) async throws -> String? {
+        let privateKey = chain.privateKey?.hexEncodedString()
         let signTransactionHex = SolanaJS.shared.callJSValue(key: "signTransaction", param: [programTxHex, privateKey])
         return signTransactionHex
     }
@@ -232,5 +240,57 @@ extension SolanaFetcher {
     func associatedTokenAddress(_ mint: String, _ to: String) async throws -> String? {
         let receiverATA = SolanaJS.shared.callJSValue(key: "getAssociatedTokenAddress", param: [mint, to])
         return receiverATA
+    }
+    
+    func parseMessage(_ params: JSON) async throws -> String? {
+        let message = params["message"].stringValue
+        return SolanaJS.shared.callJSValue(key: "parseMessage", param: [message])
+    }
+    
+    func signMessage(_ params: JSON) async throws -> String? {
+        let message = params["message"].stringValue
+        let privateKey = chain.privateKey?.hexEncodedString()
+        return SolanaJS.shared.callJSValue(key: "signMessage", param: [message, privateKey])
+    }
+    
+    func parseInstructionsFromTx(_ serializedTx: String) async throws -> String? {
+        return SolanaJS.shared.callJSValue(key: "parseInstructionsFromTx", param: [serializedTx])
+    }
+    
+    func accountsToTrack(_ serializedTx: String) async throws -> String? {
+        return SolanaJS.shared.callJSValue(key: "getAccountsToTrack", param: [serializedTx, chain.mainAddress])
+    }
+    
+    func serializedTxMessageFromTx(_ serializedTx: String) async throws -> String? {
+        return SolanaJS.shared.callJSValue(key: "getSerializedTxMessageFromTx", param: [serializedTx])
+    }
+    
+    func simulateValue(_ serializedTx: String, _ accountList: [String]) async throws -> JSON {
+        let params: Any = [serializedTx, ["commitment": "confirmed", "encoding": "base64", "replaceRecentBlockhash": true, "accounts": ["encoding": "base64", "addresses": accountList]]]
+        let parameters: Parameters = ["method": "simulateTransaction", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        let simulate = try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+        return simulate["result"]["value"]
+    }
+    
+    func multiAccountsValue(_ accountList: [String]) async throws -> [JSON] {
+        let params: Any = [accountList, ["encoding": "base64", "commitment": "finalized"]]
+        let parameters: Parameters = ["method": "getMultipleAccounts", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        let multiAccounts = try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+        return multiAccounts["result"]["value"].arrayValue
+    }
+    
+    func analyzeTokenChanges(_ accounts: String, _ multiAccounts: String?, _ simulateValue: String?) async throws -> String? {
+        return SolanaJS.shared.callJSValue(key: "analyzeTokenChanges", param: [chain.mainAddress, accounts, multiAccounts, simulateValue])
+    }
+    
+    func fetchDappSendTransaction(_ txHex: String, _ requestToSign: JSON?) async throws -> JSON? {
+        let skipPreflight = requestToSign?["skipPreflight"].boolValue ?? false
+        let preflightCommitment = requestToSign?["preflightCommitment"].stringValue ?? "finalized"
+        let maxRetries = requestToSign?["maxRetries"].int64Value ?? 0
+        let minContextSlot = requestToSign?["minContextSlot"].int64Value ?? 0
+        
+        let params: Any = [txHex, ["encoding": "base64", "skipPreflight": skipPreflight, "preflightCommitment": preflightCommitment, "maxRetries": maxRetries, "minContextSlot": minContextSlot]]
+        let parameters: Parameters = ["method": "sendTransaction", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
 }
