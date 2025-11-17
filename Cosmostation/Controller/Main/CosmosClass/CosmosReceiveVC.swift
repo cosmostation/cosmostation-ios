@@ -30,14 +30,14 @@ class CosmosReceiveVC: BaseVC {
     }
     
     func setFooterView() {
-        let footerLabel = UILabel()
-        footerLabel.text = "Powered by COSMOSTATION"
-        footerLabel.textColor = .color04
-        footerLabel.font = .fontSize11Medium
-        footerLabel.textAlignment = .center
-        footerLabel.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20)
-        
-        tableView.tableFooterView = footerLabel
+//        let footerLabel = UILabel()
+//        footerLabel.text = "Powered by COSMOSTATION"
+//        footerLabel.textColor = .color04
+//        footerLabel.font = .fontSize11Medium
+//        footerLabel.textAlignment = .center
+//        footerLabel.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20)
+//        
+//        tableView.tableFooterView = footerLabel
     }
 
 }
@@ -71,6 +71,14 @@ extension CosmosReceiveVC: UITableViewDelegate, UITableViewDataSource {
         return 40
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -90,27 +98,5 @@ extension CosmosReceiveVC: UITableViewDelegate, UITableViewDataSource {
         }
         UIPasteboard.general.string = toCopyAddress.trimmingCharacters(in: .whitespacesAndNewlines)
         self.onShowToast(NSLocalizedString("address_copied", comment: ""))
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        for cell in tableView.visibleCells {
-            let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
-            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-            }
-        }
-    }
-
-    func maskCell(cell: UITableViewCell, margin: Float) {
-        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
-        cell.layer.masksToBounds = true
-    }
-
-    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
-        let mask = CAGradientLayer()
-        mask.frame = cell.bounds
-        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
-        return mask;
     }
 }
