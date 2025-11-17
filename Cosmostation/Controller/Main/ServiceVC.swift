@@ -161,7 +161,7 @@ extension ServiceVC: BaseSheetDelegate {
     func leftBarButton(_ name: String?, _ imge: UIImage? = nil) -> UIBarButtonItem {
         let button = UIButton(type: .system)
         
-        var title = AttributedString(name == nil ? "Account" : name!)
+        var title = AttributedString(name == nil ? "Account" : name!.firstSeven())
         title.font = .fontSize16Bold
         
         var config = UIButton.Configuration.plain()
@@ -174,7 +174,11 @@ extension ServiceVC: BaseSheetDelegate {
         button.configuration = config
         button.addTarget(self, action: #selector(onClickSwitchAccount(_:)), for: .touchUpInside)
         
-        return UIBarButtonItem(customView: button)
+        let leftBarButton = UIBarButtonItem(customView: button)
+        if #available(iOS 26.0, *) {
+            leftBarButton.hidesSharedBackground = true
+        }
+        return leftBarButton
     }
 
     @objc func onClickSwitchAccount(_ sender: UIButton) {

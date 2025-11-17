@@ -384,6 +384,10 @@ extension String {
     func addABIPrefix() -> String {
         return "0000000000000000000000000000000000000000000000000000000000000020" + self
     }
+    
+    func firstSeven() -> String {
+        return self.count > 7 ? String(self.prefix(7)) + "..." : self
+    }
 }
 
 extension UIColor {

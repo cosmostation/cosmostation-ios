@@ -16,6 +16,7 @@ class BaseNavi: UINavigationController{
         super.viewDidLoad()
         self.delegate = self
         self.interactivePopGestureRecognizer?.delegate = self
+        self.navigationItem.backButtonDisplayMode = .minimal
     }
 }
 

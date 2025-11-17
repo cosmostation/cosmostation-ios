@@ -121,12 +121,5 @@ class BaseVC: UIViewController {
         appDelegate.window?.rootViewController = mainTabVC
         self.present(mainTabVC, animated: true, completion: nil)
     }
-    
-    func backBarButton(_ name: String?) -> UIBarButtonItem {
-        let backBtnItem = UIBarButtonItem()
-        backBtnItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.fontSize16Bold], for: .normal)
-        backBtnItem.title = name
-        return backBtnItem
-    }
 }
 

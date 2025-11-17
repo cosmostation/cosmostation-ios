@@ -383,21 +383,21 @@ extension PortfolioVC: UITableViewDelegate, UITableViewDataSource, UIScrollViewD
             let cosmosClassVC = UIStoryboard(name: "CosmosClass", bundle: nil).instantiateViewController(withIdentifier: "CosmosClassVC") as! CosmosClassVC
             cosmosClassVC.selectedChain = chain
             cosmosClassVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
+            self.navigationItem.title = ""
             self.navigationController?.pushViewController(cosmosClassVC, animated: true)
             
         } else if (chain.supportEvm) {
             let evmClassVC = UIStoryboard(name: "EvmClass", bundle: nil).instantiateViewController(withIdentifier: "EvmClassVC") as! EvmClassVC
             evmClassVC.selectedChain = chain
             evmClassVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
+            self.navigationItem.title = ""
             self.navigationController?.pushViewController(evmClassVC, animated: true)
             
         } else if (!chain.mainAddress.isEmpty) {
             let majorClass = UIStoryboard(name: "MajorClass", bundle: nil).instantiateViewController(withIdentifier: "MajorClassVC") as! MajorClassVC
             majorClass.selectedChain = chain
             majorClass.hidesBottomBarWhenPushed = true
-            self.navigationItem.backBarButtonItem = backBarButton(baseAccount?.getRefreshName())
+            self.navigationItem.title = ""
             self.navigationController?.pushViewController(majorClass, animated: true)
         }
     }
@@ -541,7 +541,7 @@ extension PortfolioVC: BaseSheetDelegate {
     func leftBarButton(_ name: String?, _ imge: UIImage? = nil) -> UIBarButtonItem {
         let button = UIButton(type: .system)
         
-        var title = AttributedString(name == nil ? "Account" : name!)
+        var title = AttributedString(name == nil ? "Account" : name!.firstSeven())
         title.font = .fontSize16Bold
         
         var config = UIButton.Configuration.plain()
@@ -553,8 +553,12 @@ extension PortfolioVC: BaseSheetDelegate {
         
         button.configuration = config
         button.addTarget(self, action: #selector(onClickSwitchAccount(_:)), for: .touchUpInside)
-
-        return UIBarButtonItem(customView: button)
+        
+        let leftBarButton = UIBarButtonItem(customView: button)
+        if #available(iOS 26.0, *) {
+            leftBarButton.hidesSharedBackground = true
+        }
+        return leftBarButton
     }
     
     private func rightBarButton() -> [UIBarButtonItem] {
@@ -570,8 +574,23 @@ extension PortfolioVC: BaseSheetDelegate {
         chainSortingButton.configuration = config
         chainSortingButton.setImage(UIImage(named: SortingType(rawValue: lastSortingType.rawValue)!.rawValue), for: .normal)
         chainSortingButton.addTarget(self, action: #selector(onClickSortingButton), for: .touchUpInside)
-
-        return [UIBarButtonItem(customView: chainSearchButton), UIBarButtonItem(customView: chainSortingButton)]
+        
+        let chainSearchRightBarButton = UIBarButtonItem(customView: chainSearchButton)
+        let chainSortingRightBarButton = UIBarButtonItem(customView: chainSortingButton)
+        
+        let negativeSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        negativeSpace.width = -20
+        
+        if #available(iOS 26.0, *) {
+            chainSearchRightBarButton.sharesBackground = false
+            chainSortingRightBarButton.sharesBackground = false
+        }
+        return [chainSearchRightBarButton, .fixedSpace(0), chainSortingRightBarButton]
+        
+//        if #available(iOS 26.0, *) {
+//            chainSearchRightBarButton.hidesSharedBackground = true
+//            chainSortingRightBarButton.hidesSharedBackground = true
+//        }
     }
 
     @objc func onClickSwitchAccount(_ sender: UIButton) {

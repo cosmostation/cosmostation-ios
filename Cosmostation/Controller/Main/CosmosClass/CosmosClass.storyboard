@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0An-sf-Sxo">
-                                <rect key="frame" x="48" y="79" width="297" height="56"/>
+                                <rect key="frame" x="48" y="138" width="297" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaX-Dh-cwU">
                                         <rect key="frame" x="48" y="0.0" width="201" height="15.333333333333334"/>
@@ -47,7 +47,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZk-Ok-B8N">
-                                        <rect key="frame" x="93.666666666666657" y="20.333333333333332" width="24" height="35.333333333333343"/>
+                                        <rect key="frame" x="93.666666666666657" y="20.333333333333346" width="24" height="35.333333333333343"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="28"/>
                                         <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
@@ -71,7 +71,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qOU-VU-3WA">
-                                <rect key="frame" x="233.66666666666666" y="108" width="18" height="18"/>
+                                <rect key="frame" x="233.66666666666666" y="167" width="18" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="18" id="N1C-zg-TkF"/>
                                     <constraint firstAttribute="height" constant="18" id="tF4-bR-cgb"/>
@@ -84,52 +84,52 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5w-hK-wYy" customClass="MDCTabBarView">
-                                <rect key="frame" x="8" y="151" width="377" height="48"/>
+                                <rect key="frame" x="8" y="210" width="377" height="48"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="ufE-z8-wM4"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdX-08-eE0">
-                                <rect key="frame" x="8" y="199" width="377" height="0.66666666666665719"/>
+                                <rect key="frame" x="8" y="258" width="377" height="0.66666666666668561"/>
                                 <color key="backgroundColor" white="1" alpha="0.20277954931972789" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="UgD-In-4H3"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1V7-Iu-EPt">
-                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
+                                <rect key="frame" x="0.0" y="258.66666666666669" width="393" height="593.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="HxN-8c-YJG" kind="embed" identifier="embedHistoryVC" id="jJo-hB-wUK"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9R-os-Pfe">
-                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
+                                <rect key="frame" x="0.0" y="258.66666666666669" width="393" height="593.33333333333326"/>
                                 <connections>
                                     <segue destination="DVQ-I1-owb" kind="embed" identifier="embedNftVC" id="6Wk-zk-FDX"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYD-Wc-AXb">
-                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
+                                <rect key="frame" x="0.0" y="258.66666666666669" width="393" height="593.33333333333326"/>
                                 <connections>
                                     <segue destination="EO6-oK-AmS" kind="embed" identifier="embedCoinVC" id="ZOz-Cm-L38"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s8b-hk-JN5">
-                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
+                                <rect key="frame" x="0.0" y="258.66666666666669" width="393" height="593.33333333333326"/>
                                 <connections>
                                     <segue destination="yoF-DC-PBK" kind="embed" identifier="embedAboutVC" id="tOj-SA-aCs"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YnM-R6-Ocx">
-                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
+                                <rect key="frame" x="0.0" y="258.66666666666669" width="393" height="593.33333333333326"/>
                                 <connections>
                                     <segue destination="sy8-BH-h0n" kind="embed" identifier="embedEcosystemVC" id="f2X-Ng-ito"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6yJ-K0-WD3">
-                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
+                                <rect key="frame" x="0.0" y="258.66666666666669" width="393" height="593.33333333333326"/>
                                 <connections>
                                     <segue destination="caz-KK-0fb" kind="embed" identifier="embedReceiveVC" id="p1v-ca-M9I"/>
                                 </connections>
@@ -207,7 +207,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XNO-GG-9I6" customClass="LottieAnimationView" customModule="Lottie">
-                                <rect key="frame" x="106.66666666666669" y="283.66666666666669" width="180" height="110"/>
+                                <rect key="frame" x="106.66666666666669" y="313.33333333333331" width="180" height="110"/>
                                 <viewLayoutGuide key="safeArea" id="yjO-JL-86A"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -220,7 +220,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cey-rR-HuE">
-                                <rect key="frame" x="76.666666666666686" y="274.66666666666669" width="240" height="128"/>
+                                <rect key="frame" x="76.666666666666686" y="304.33333333333331" width="240" height="128"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEmptyData" translatesAutoresizingMaskIntoConstraints="NO" id="QSt-ip-BMQ">
                                         <rect key="frame" x="87.999999999999986" y="0.0" width="64.000000000000014" height="64"/>
@@ -292,7 +292,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8e1-0V-k7Y">
-                                <rect key="frame" x="76.666666666666686" y="374.66666666666669" width="240" height="128"/>
+                                <rect key="frame" x="76.666666666666686" y="387" width="240" height="128"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgNoSearch" translatesAutoresizingMaskIntoConstraints="NO" id="LLL-CN-Dck">
                                         <rect key="frame" x="87.999999999999986" y="0.0" width="64.000000000000014" height="64"/>
@@ -364,7 +364,7 @@
                                 <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDN-LF-jHM" customClass="LottieAnimationView" customModule="Lottie">
-                                <rect key="frame" x="106.66666666666669" y="283.66666666666669" width="180" height="110"/>
+                                <rect key="frame" x="106.66666666666669" y="313.33333333333331" width="180" height="110"/>
                                 <viewLayoutGuide key="safeArea" id="DU9-BH-ega"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -373,7 +373,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JqX-hQ-iha">
-                                <rect key="frame" x="76.666666666666686" y="274.66666666666669" width="240" height="128"/>
+                                <rect key="frame" x="76.666666666666686" y="304.33333333333331" width="240" height="128"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEmptyData" translatesAutoresizingMaskIntoConstraints="NO" id="rFY-Sl-6ay">
                                         <rect key="frame" x="87.999999999999986" y="0.0" width="64.000000000000014" height="64"/>
@@ -433,7 +433,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxe-k3-Aob" customClass="LottieAnimationView" customModule="Lottie">
-                                <rect key="frame" x="106.66666666666669" y="283.66666666666669" width="180" height="110"/>
+                                <rect key="frame" x="106.66666666666669" y="313.33333333333331" width="180" height="110"/>
                                 <viewLayoutGuide key="safeArea" id="cg0-eK-Ein"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -442,7 +442,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79U-Ag-E0L">
-                                <rect key="frame" x="76.666666666666686" y="274.66666666666669" width="240" height="128"/>
+                                <rect key="frame" x="76.666666666666686" y="304.33333333333331" width="240" height="128"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEmptyData" translatesAutoresizingMaskIntoConstraints="NO" id="bEj-pE-Igr">
                                         <rect key="frame" x="87.999999999999986" y="0.0" width="64.000000000000014" height="64"/>
@@ -506,7 +506,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Dwv-dP-2jS">
-                                <rect key="frame" x="0.0" y="59" width="393" height="593.33333333333337"/>
+                                <rect key="frame" x="0.0" y="118" width="393" height="534.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -548,7 +548,7 @@
                                 <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Shj-9l-HEW" customClass="LottieAnimationView" customModule="Lottie">
-                                <rect key="frame" x="106.66666666666669" y="283.66666666666669" width="180" height="110"/>
+                                <rect key="frame" x="106.66666666666669" y="313.33333333333331" width="180" height="110"/>
                                 <viewLayoutGuide key="safeArea" id="dQ1-wR-WB3"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -557,7 +557,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ed1-RP-lKd">
-                                <rect key="frame" x="76.666666666666686" y="274.66666666666669" width="240" height="128"/>
+                                <rect key="frame" x="76.666666666666686" y="304.33333333333331" width="240" height="128"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEmptyData" translatesAutoresizingMaskIntoConstraints="NO" id="N7u-Dc-BcW">
                                         <rect key="frame" x="87.999999999999986" y="0.0" width="64.000000000000014" height="64"/>
