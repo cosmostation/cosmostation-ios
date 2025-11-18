@@ -549,13 +549,6 @@ extension BaseChain {
         return 1.3
     }
     
-    func getSimulatedGasAdjustment() -> Double {
-        if let mutiply = getCosmosFeeInfo()["simulated_gas_adjustment"].double {
-            return mutiply
-        }
-        return 1.6
-    }
-    
     func getBaseFeePosition() -> Int {
         return getCosmosFeeInfo()["base"].intValue
     }
@@ -746,7 +739,6 @@ func ALLCHAINS() -> [BaseChain] {
     var result = [BaseChain]()
     
     result.append(ChainCosmos())
-    result.append(ChainAaron())
     result.append(ChainAgoric564())
     result.append(ChainAgoric118())
     result.append(ChainAiozEVM())                       //EVM
@@ -871,7 +863,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainRealioEVM())
     result.append(ChainRegen())
     result.append(ChainRizon())
-    result.append(ChainRouterEVM())                     //EVM
     result.append(ChainSaga())
 //    result.append(ChainSaharaAiEVM())                   //EVM
     result.append(ChainSecret118())
@@ -884,7 +875,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainShardeum())                      //EVM
     result.append(ChainShentu())
     result.append(ChainShidoEVM())                      //EVM
-//    result.append(ChainSolana())                        //MAJOR
+    result.append(ChainSolana())                        //MAJOR
     result.append(ChainSommelier())
     result.append(ChainSomnia())                        //EVM
     result.append(ChainSonic())                         //EVM
@@ -932,8 +923,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNeutron_T())
     result.append(ChainNillion_T())
     result.append(ChainQubeticsEVM_T())
-    result.append(ChainSaharaAiEVM_T())
-    result.append(ChainSelf_T())
     result.append(ChainTabiEVM_T())
     result.append(ChainTerraClassic_T())
     result.append(ChainWardenEVM_T())
@@ -946,6 +935,7 @@ func ALLCHAINS() -> [BaseChain] {
     
     
 //    result.append(ChainArtelaEVM())                   //EVM
+//    result.append(ChainAaron())
 //    result.append(ChainBostrom())
 //    result.append(ChainCrescent())
 //    result.append(ChainCudos())
@@ -956,6 +946,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainMars())
 //    result.append(ChainOnomy())
 //    result.append(ChainQuasar())
+//    result.append(ChainRouterEVM())                     //EVM
 //    result.append(ChainSge())
 //    result.append(ChainStafi())
 //    result.append(ChainStarname())
@@ -967,6 +958,8 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainBitCoin49_T())
 //    result.append(ChainImuaEVM_T())
 //    result.append(ChainLombard_T())
+//    result.append(ChainSaharaAiEVM_T())
+//    result.append(ChainSelf_T())
 //    result.append(ChainStoryEVM_T())
     
     result.forEach { chain in

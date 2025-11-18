@@ -1673,6 +1673,8 @@
 		155D96842E8645510047BC1B /* ChainBlast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D96832E8645510047BC1B /* ChainBlast.swift */; };
 		155D96862E8650930047BC1B /* ChainLinea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D96852E8650920047BC1B /* ChainLinea.swift */; };
 		155D96882E98F4290047BC1B /* ChainIntento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D96872E98F4290047BC1B /* ChainIntento.swift */; };
+		1580CD622EC48010008D02FD /* DappGnoSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1580CD602EC48010008D02FD /* DappGnoSignRequestSheet.swift */; };
+		1580CD632EC48010008D02FD /* DappGnoSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1580CD612EC48010008D02FD /* DappGnoSignRequestSheet.xib */; };
 		158BE1892E79985A00A02B4A /* ChainPocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158BE1882E79985A00A02B4A /* ChainPocket.swift */; };
 		158BE18F2E828D6900A02B4A /* ChainTerraClassic_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158BE18E2E828D6900A02B4A /* ChainTerraClassic_T.swift */; };
 		15ABBA6A2E838C72008560B7 /* ChainSunrise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ABBA692E838C72008560B7 /* ChainSunrise.swift */; };
@@ -1692,6 +1694,8 @@
 		15D637DE2E1BB10B000BCE79 /* ChainSolana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D637DC2E1BB10B000BCE79 /* ChainSolana.swift */; };
 		15D637E02E1BB66D000BCE79 /* SolanaFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D637DF2E1BB66D000BCE79 /* SolanaFetcher.swift */; };
 		15D637E12E1BB66D000BCE79 /* SolanaFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D637DF2E1BB66D000BCE79 /* SolanaFetcher.swift */; };
+		15D865202E729EF600C201C8 /* DappSolanaSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D8651F2E729EF600C201C8 /* DappSolanaSignRequestSheet.xib */; };
+		15D865212E729EF600C201C8 /* DappSolanaSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8651E2E729EF600C201C8 /* DappSolanaSignRequestSheet.swift */; };
 		1809C35129D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
 		1809C35229D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
 		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
@@ -3368,6 +3372,8 @@
 		155D96832E8645510047BC1B /* ChainBlast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBlast.swift; sourceTree = "<group>"; };
 		155D96852E8650920047BC1B /* ChainLinea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainLinea.swift; sourceTree = "<group>"; };
 		155D96872E98F4290047BC1B /* ChainIntento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainIntento.swift; sourceTree = "<group>"; };
+		1580CD602EC48010008D02FD /* DappGnoSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappGnoSignRequestSheet.swift; sourceTree = "<group>"; };
+		1580CD612EC48010008D02FD /* DappGnoSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappGnoSignRequestSheet.xib; sourceTree = "<group>"; };
 		158BE1882E79985A00A02B4A /* ChainPocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPocket.swift; sourceTree = "<group>"; };
 		158BE18E2E828D6900A02B4A /* ChainTerraClassic_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainTerraClassic_T.swift; sourceTree = "<group>"; };
 		15ABBA692E838C72008560B7 /* ChainSunrise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSunrise.swift; sourceTree = "<group>"; };
@@ -3379,6 +3385,8 @@
 		15D637D62E0E72C2000BCE79 /* cosmos_evm_crypto_v1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_evm_crypto_v1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
 		15D637DC2E1BB10B000BCE79 /* ChainSolana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSolana.swift; sourceTree = "<group>"; };
 		15D637DF2E1BB66D000BCE79 /* SolanaFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolanaFetcher.swift; sourceTree = "<group>"; };
+		15D8651E2E729EF600C201C8 /* DappSolanaSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappSolanaSignRequestSheet.swift; sourceTree = "<group>"; };
+		15D8651F2E729EF600C201C8 /* DappSolanaSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappSolanaSignRequestSheet.xib; sourceTree = "<group>"; };
 		1809C35029D16C80008884C1 /* injectScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = injectScript.js; sourceTree = "<group>"; };
 		181099DE28AE92FC00C178B5 /* PushUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUtils.swift; sourceTree = "<group>"; };
 		1812D46128E184D800AC7D61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -4836,6 +4844,10 @@
 				792B9CBC2C747CB2001440DB /* DappSuiSignRequestSheet.xib */,
 				7939A25B2D34DD85006674E3 /* DappBtcSignRequestSheet.swift */,
 				7939A25C2D34DD85006674E3 /* DappBtcSignRequestSheet.xib */,
+				15D8651E2E729EF600C201C8 /* DappSolanaSignRequestSheet.swift */,
+				15D8651F2E729EF600C201C8 /* DappSolanaSignRequestSheet.xib */,
+				1580CD602EC48010008D02FD /* DappGnoSignRequestSheet.swift */,
+				1580CD612EC48010008D02FD /* DappGnoSignRequestSheet.xib */,
 				796CC35F2C6B60CA00FEC658 /* SuiStakingInfoSheet.swift */,
 				796CC3612C6B60E000FEC658 /* SuiStakingInfoSheet.xib */,
 				79AB33FF2D6C392B00F1426C /* BtcStakeSheet.swift */,
@@ -6416,6 +6428,7 @@
 				049715032C0ED276008C45A0 /* basebg05.png in Resources */,
 				E18D73B82AB484AB00FCB1AA /* DappStartVC.xib in Resources */,
 				79B4225C2D9E759D0022A4F9 /* NeutronCompounding.xib in Resources */,
+				15D865202E729EF600C201C8 /* DappSolanaSignRequestSheet.xib in Resources */,
 				04FAD9B42AB011AC00143A3E /* SwitchPriceDisplayCell.xib in Resources */,
 				E1F257E52BFB2009008F4D21 /* EvmCancelUnbonding.xib in Resources */,
 				04FAD9BA2AB0125400143A3E /* BaseSheetCell.xib in Resources */,
@@ -6456,6 +6469,7 @@
 				E1DF777D2AB75F830028BD51 /* CheckPrivateKeysVC.xib in Resources */,
 				0402B7F42ACC38BA00824B3F /* CosmosVote.xib in Resources */,
 				0402B7EE2ACC248400824B3F /* CosmosRewardAddress.xib in Resources */,
+				1580CD632EC48010008D02FD /* DappGnoSignRequestSheet.xib in Resources */,
 				04C63D182B83717A00D4A366 /* SelectAddressListSheet.xib in Resources */,
 				04FEDB4E2B05D1340095B7B6 /* WalletDeriveVC.xib in Resources */,
 				04A421142C7896A800C0E1A2 /* drop.json in Resources */,
@@ -7663,6 +7677,7 @@
 				155D96862E8650930047BC1B /* ChainLinea.swift in Sources */,
 				04C6B9C52AAC59EC00B02A95 /* QrAddressPopupVC.swift in Sources */,
 				E14577FC2B3EC50C00EEFA8E /* CosmosClaimCommission.swift in Sources */,
+				1580CD622EC48010008D02FD /* DappGnoSignRequestSheet.swift in Sources */,
 				047843972AC991B300462F1C /* injective_ocr_v1beta1_query.pb.swift in Sources */,
 				E1D6B8D12AA499A400177D30 /* CosmosNftVC.swift in Sources */,
 				7967DCB92D9A4193007D74CE /* SelectRecipientChainCell.swift in Sources */,
@@ -8493,6 +8508,7 @@
 				046EA87B2AD04A2500A2FCE7 /* desmos_profiles_v3_models_profile.pb.swift in Sources */,
 				040B43EB2E3725F10018850C /* ChainGitopia.swift in Sources */,
 				79813A6D2D530F890083A1F5 /* zrchain_validation_module_module.pb.swift in Sources */,
+				15D865212E729EF600C201C8 /* DappSolanaSignRequestSheet.swift in Sources */,
 				04C816442BA98D74006B800A /* cosmos_tx_signing_v1beta1_signing.pb.swift in Sources */,
 				79FCA3DA2C3F9E92001C17D0 /* artela_fee_v1_genesis.pb.swift in Sources */,
 				0450327A2C1EEDCD00235F6A /* ChainBand.swift in Sources */,
@@ -8731,7 +8747,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 324;
+				CURRENT_PROJECT_VERSION = 325;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8743,7 +8759,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.39;
+				MARKETING_VERSION = 1.10.40;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -8764,7 +8780,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 324;
+				CURRENT_PROJECT_VERSION = 325;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -8777,7 +8793,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.39;
+				MARKETING_VERSION = 1.10.40;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Cosmostation debug provisioning profile";
@@ -8918,7 +8934,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 324;
+				CURRENT_PROJECT_VERSION = 325;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8932,7 +8948,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.39;
+				MARKETING_VERSION = 1.10.40;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -8952,7 +8968,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 324;
+				CURRENT_PROJECT_VERSION = 325;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8966,7 +8982,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10.39;
+				MARKETING_VERSION = 1.10.40;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

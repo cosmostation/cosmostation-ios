@@ -21,7 +21,7 @@ class ChainPolygon: BaseChain  {
         
         
         supportEvm = true
-        coinSymbol = "MATIC"
+        coinSymbol = "POL"
         evmRpcURL = "https://polygon-rpc.com"
     }
     

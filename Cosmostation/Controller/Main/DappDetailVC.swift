@@ -47,9 +47,12 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     var suiTargetChain: BaseChain?
     var iotaTargetChain: BaseChain?
     var btcTargetChain: BaseChain?
+    var solanaTargetChain: BaseChain?
     var web3: Web3?
     
     var btcNetwork: String?
+    
+    var gnoCurrentChainId: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +63,6 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         loadingView.loopMode = .loop
         loadingView.animationSpeed = 1.3
         loadingView.play()
-    
                 
         Task {
             if BaseData.instance.getLastAccount() != nil {
@@ -206,7 +208,12 @@ class DappDetailVC: BaseVC, WebSignDelegate {
             }
             
         }
-        
+    }
+    
+    private func onInitChainSolana() {
+        if (solanaTargetChain == nil) {
+            solanaTargetChain = allChains.filter({ $0.apiName == "solana" }).first!
+        }
     }
 
     // Inject custom script to webview
@@ -354,7 +361,28 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         btcSignRequestSheet.modalTransitionStyle = .coverVertical
         self.present(btcSignRequestSheet, animated: true)
     }
-
+    
+    private func popUpSolanaRequestSign(_ method: String, _ request: JSON, _ messageId: JSON?) {
+        let solanaSignRequestSheet = DappSolanaSignRequestSheet(nibName: "DappSolanaSignRequestSheet", bundle: nil)
+        solanaSignRequestSheet.method = method
+        solanaSignRequestSheet.requestToSign = request
+        solanaSignRequestSheet.messageId = messageId
+        solanaSignRequestSheet.selectedChain = solanaTargetChain
+        solanaSignRequestSheet.webSignDelegate = self
+        solanaSignRequestSheet.modalTransitionStyle = .coverVertical
+        self.present(solanaSignRequestSheet, animated: true)
+    }
+    
+    private func popUpGnoRequestSign(_ method: String, _ request: JSON, _ messageId: JSON?) {
+        let gnoSignRequestSheet = DappGnoSignRequestSheet(nibName: "DappGnoSignRequestSheet", bundle: nil)
+        gnoSignRequestSheet.method = method
+        gnoSignRequestSheet.requestToSign = request
+        gnoSignRequestSheet.messageId = messageId
+        gnoSignRequestSheet.selectedChain = targetChain
+        gnoSignRequestSheet.webSignDelegate = self
+        gnoSignRequestSheet.modalTransitionStyle = .coverVertical
+        self.present(gnoSignRequestSheet, animated: true)
+    }
     
     func onCancleInjection(_ reseon: String, _ requestToSign: JSON, _ messageId: JSON) {
         injectionRequestReject(reseon, requestToSign, messageId)
@@ -828,6 +856,99 @@ extension DappDetailVC: WKScriptMessageHandler {
                     }
                     self.popUpIotaRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
                 }
+            }
+            
+            //Handle SOLANA Request
+            else if (method == "solana_connect") {
+                onInitChainSolana()
+                guard let pubKey = solanaTargetChain!.publicKey?.hexEncodedString() else { return }
+                let data: JSON = ["publicKey": pubKey]
+                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
+            } else if (method == "solana_signMessage") {
+                let params = messageJSON["params"]
+                self.popUpSolanaRequestSign(method, params, bodyJSON["messageId"])
+                
+            } else if (method == "solana_signAndSendTransaction") {
+                let params = messageJSON["params"]
+                if params.count > 0 {
+                    self.popUpSolanaRequestSign(method, params[0], bodyJSON["messageId"])
+                } else {
+                    injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
+                }
+                
+            } else if (method == "solana_signTransaction" || method == "solana_signAllTransactions") {
+                let params = messageJSON["params"]
+                if params.count > 0 {
+                    self.popUpSolanaRequestSign(method, params, bodyJSON["messageId"])
+                } else {
+                    injectionRequestReject("Not implemented", messageJSON, bodyJSON["messageId"])
+                }
+            }
+            
+            //Handle GNO Request
+            else if method == "gno_connect" {
+                let data: JSON = ["code": 0, "status": "success", "message": "", "data": JSON.null]
+                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
+            } else if method == "gno_getNetwork" {
+                if targetChain == nil {
+                    targetChain = allChains.filter({ $0.name.contains("Gno") }).first!
+                }
+                
+                guard let gnoFetcher = (targetChain! as? ChainGno)?.getGnoFetcher() else { return }
+                let networkData: JSON = ["chainId": targetChain.chainIdCosmos,
+                                         "addressPrefix": targetChain!.bechAccountPrefix,
+                                         "indexerUrl": "",
+                                         "networkName": targetChain.name,
+                                         "rpcUrl": gnoFetcher.getRpc()]
+                
+                let data: JSON = ["code": 0, "status": "success", "message": "", "data": networkData]
+                self.injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
+            } else if method == "gno_getAccount" {
+                if targetChain == nil {
+                    targetChain = allChains.filter({ $0.name.contains("Gno") }).first!
+                }
+                
+                guard let gnoFetcher = (targetChain! as? ChainGno)?.getGnoFetcher() else { return }
+                if gnoCurrentChainId == nil {
+                    gnoCurrentChainId = targetChain.chainIdCosmos
+                }
+                
+                Task {
+                    if let _ = try? await gnoFetcher.fetchAuth() {
+                        let publicKeyData: JSON = ["@type": "/tm.PubKeySecp256k1", "value": gnoFetcher.gnoPublicKey ?? nil]
+                        
+                        let accountData: JSON = ["accountNumber": gnoFetcher.gnoAccountNumber ?? 0,
+                                                 "address": targetChain.bechAddress!,
+                                                 "chainId": gnoCurrentChainId,
+                                                 "coins": gnoFetcher.balanceAmount(targetChain.stakingAssetDenom()).stringValue + targetChain.stakingAssetDenom(),
+                                                 "publicKey": publicKeyData,
+                                                 "sequence": String(gnoFetcher.gnoSequenceNum ?? 0),
+                                                 "status": "ACTIVE"]
+                        
+                        let data: JSON = ["code": 0, "status": "success", "message": "", "data": accountData]
+                        self.injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                        
+                    } else {
+                        self.injectionRequestReject("RPC error", messageJSON, bodyJSON["messageId"])
+                    }
+                }
+                
+            } else if method == "gno_switchNetwork" {
+                let params = messageJSON["params"]
+                let chainId = params[0].stringValue
+                gnoCurrentChainId = chainId
+                
+                let chainIdData: JSON = ["chainId", gnoCurrentChainId]
+                
+                let data: JSON = ["code": 0, "status": "success", "message": "", "data": chainIdData]
+                self.injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
+            } else if method == "gno_signAndSendTransaction" || method == "gno_signTransaction" {
+                let params = messageJSON["params"]
+                self.popUpGnoRequestSign(method, params, bodyJSON["messageId"])
             }
 
             else {
