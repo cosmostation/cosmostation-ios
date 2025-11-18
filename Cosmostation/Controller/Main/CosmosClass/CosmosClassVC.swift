@@ -121,8 +121,8 @@ class CosmosClassVC: BaseVC {
             addNftBarBtn.sharesBackground = false
             explorerBarBtn.sharesBackground = false
         }
-        
         navigationItem.rightBarButtonItems = isTokenPresent() ? [explorerBarBtn, addtokenBarBtn] : [explorerBarBtn]
+        
         let titleView = BgRandomButton()
         titleView.setName(baseAccount?.getRefreshName())
         navigationItem.titleView = titleView

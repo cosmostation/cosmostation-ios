@@ -88,9 +88,11 @@ class MajorClassVC: BaseVC {
         explorerBtn.addTarget(self, action:  #selector(onClickExplorer), for: .touchUpInside)
         explorerBtn.frame = CGRectMake(0, 0, 30, 30)
         explorerBarBtn = UIBarButtonItem(customView: explorerBtn)
-        
         navigationItem.rightBarButtonItems = [explorerBarBtn]
-        navigationItem.titleView = BgRandomButton()
+        
+        let titleView = BgRandomButton()
+        titleView.setName(baseAccount?.getRefreshName())
+        navigationItem.titleView = titleView
         
         Task {
             if let babylonBtcFetcher = (selectedChain as? ChainBitCoin86)?.getBabylonBtcFetcher(),

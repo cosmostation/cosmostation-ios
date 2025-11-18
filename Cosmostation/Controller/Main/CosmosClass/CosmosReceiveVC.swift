@@ -30,14 +30,14 @@ class CosmosReceiveVC: BaseVC {
     }
     
     func setFooterView() {
-//        let footerLabel = UILabel()
-//        footerLabel.text = "Powered by COSMOSTATION"
-//        footerLabel.textColor = .color04
-//        footerLabel.font = .fontSize11Medium
-//        footerLabel.textAlignment = .center
-//        footerLabel.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20)
-//        
-//        tableView.tableFooterView = footerLabel
+        let footerLabel = UILabel()
+        footerLabel.text = "Powered by COSMOSTATION"
+        footerLabel.textColor = .color04
+        footerLabel.font = .fontSize11Medium
+        footerLabel.textAlignment = .center
+        footerLabel.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20)
+        
+        tableView.tableFooterView = footerLabel
     }
 
 }

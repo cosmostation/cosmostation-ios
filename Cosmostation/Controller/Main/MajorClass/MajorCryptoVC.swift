@@ -39,6 +39,8 @@ class MajorCryptoVC: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
+    
+        tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -51,12 +53,12 @@ class MajorCryptoVC: BaseVC {
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
         refresher.tintColor = .color01
-        tableView.addSubview(refresher)
+        tableView.refreshControl = refresher
         
         if selectedChain.isSupportBTCStaking() {
             onSetFloatingBtn()
         }
-        onUpdateView()
+        onSortAssets()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -97,47 +99,56 @@ class MajorCryptoVC: BaseVC {
         }
     }
     
-    func onUpdateView() {
-        if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
-            suiBalances = suiFetcher.suiBalances
-            //add zero sui for empty accoount
-            if (suiBalances.filter { $0.0 == SUI_MAIN_DENOM }.count == 0) {
-                suiBalances.append((SUI_MAIN_DENOM, NSDecimalNumber.zero))
-            }
-            suiBalances.sort {
-                if ($0.0 == SUI_MAIN_DENOM) { return true }
-                if ($1.0 == SUI_MAIN_DENOM) { return false }
-                let value0 = suiFetcher.balanceValue($0.0)
-                let value1 = suiFetcher.balanceValue($1.0)
-                return value0.compare(value1).rawValue > 0 ? true : false
-            }
-            
-        } else if let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() {
-            iotaBalances = iotaFetcher.iotaBalances
-            if iotaBalances.filter({ $0.0 == IOTA_MAIN_DENOM }).count == 0 {
-                iotaBalances.append((IOTA_MAIN_DENOM, NSDecimalNumber.zero))
-            }
-            iotaBalances.sort {
-                if ($0.0 == IOTA_MAIN_DENOM) { return true }
-                if ($1.0 == IOTA_MAIN_DENOM) { return false }
-                let value0 = iotaFetcher.balanceValue($0.0)
-                let value1 = iotaFetcher.balanceValue($1.0)
-                return value0.compare(value1).rawValue > 0 ? true : false
+    func onSortAssets() {
+        Task {
+            if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
+                suiBalances = suiFetcher.suiBalances
+                //add zero sui for empty accoount
+                if (suiBalances.filter { $0.0 == SUI_MAIN_DENOM }.count == 0) {
+                    suiBalances.append((SUI_MAIN_DENOM, NSDecimalNumber.zero))
+                }
+                suiBalances.sort {
+                    if ($0.0 == SUI_MAIN_DENOM) { return true }
+                    if ($1.0 == SUI_MAIN_DENOM) { return false }
+                    let value0 = suiFetcher.balanceValue($0.0)
+                    let value1 = suiFetcher.balanceValue($1.0)
+                    return value0.compare(value1).rawValue > 0 ? true : false
+                }
+                
+            } else if let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() {
+                iotaBalances = iotaFetcher.iotaBalances
+                if iotaBalances.filter({ $0.0 == IOTA_MAIN_DENOM }).count == 0 {
+                    iotaBalances.append((IOTA_MAIN_DENOM, NSDecimalNumber.zero))
+                }
+                iotaBalances.sort {
+                    if ($0.0 == IOTA_MAIN_DENOM) { return true }
+                    if ($1.0 == IOTA_MAIN_DENOM) { return false }
+                    let value0 = iotaFetcher.balanceValue($0.0)
+                    let value1 = iotaFetcher.balanceValue($1.0)
+                    return value0.compare(value1).rawValue > 0 ? true : false
 
+                }
+                
+            } else if let solanaFetcher = (selectedChain as? ChainSolana)?.getSolanaFetcher() {
+                allSplTokens = solanaFetcher.solanaTokenInfo
+                allSplTokens.sort {
+                    let value0 = solanaFetcher.splTokenValue($0["mint"].stringValue)
+                    let value1 = solanaFetcher.splTokenValue($1["mint"].stringValue)
+                    return value0.compare(value1).rawValue > 0 ? true : false
+                }
+                searchSplTokens = allSplTokens
             }
             
-        } else if let solanaFetcher = (selectedChain as? ChainSolana)?.getSolanaFetcher() {
-            allSplTokens = solanaFetcher.solanaTokenInfo
-            allSplTokens.sort {
-                let value0 = solanaFetcher.splTokenValue($0["mint"].stringValue)
-                let value1 = solanaFetcher.splTokenValue($1["mint"].stringValue)
-                return value0.compare(value1).rawValue > 0 ? true : false
+            DispatchQueue.main.async {
+                self.onUpdateView()
             }
-            searchSplTokens = allSplTokens
         }
-        
+    }
+    
+    func onUpdateView() {
         loadingView.isHidden = true
         tableView.reloadData()
+        tableView.isHidden = false
     }
     
     func onSetFloatingBtn() {
@@ -210,12 +221,20 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             if (section == 0) {
                 return 40
             } else if (section == 1 ) {
-                return searchSplTokens.count > 0 ? 40 : 0
+                return searchSplTokens.count > 0 ? 40 : .leastNormalMagnitude
             }
         } else {
-            return (section == 0) ? 40 : 0
+            return (section == 0) ? 40 : .leastNormalMagnitude
         }
-        return 0
+        return .leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -353,30 +372,6 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        for cell in tableView.visibleCells {
-            let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
-            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-            }
-        }
-        
-        view.endEditing(true)
-    }
-
-    func maskCell(cell: UITableViewCell, margin: Float) {
-        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
-        cell.layer.masksToBounds = true
-    }
-
-    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
-        let mask = CAGradientLayer()
-        mask.frame = cell.bounds
-        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
-        return mask;
     }
 }
 
