@@ -2438,8 +2438,6 @@
 		E1D5A3E52AC33B8000453914 /* CosmosClaimRewards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D5A3E22AC33B8000453914 /* CosmosClaimRewards.swift */; };
 		E1D5A3E62AC33B8000453914 /* CosmosClaimRewards.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D5A3E32AC33B8000453914 /* CosmosClaimRewards.xib */; };
 		E1D5A3E72AC33B8000453914 /* CosmosClaimRewards.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D5A3E32AC33B8000453914 /* CosmosClaimRewards.xib */; };
-		E1D6B8CE2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8CD2AA4998E00177D30 /* CosmosTokenVC.swift */; };
-		E1D6B8CF2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8CD2AA4998E00177D30 /* CosmosTokenVC.swift */; };
 		E1D6B8D12AA499A400177D30 /* CosmosNftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */; };
 		E1D6B8D22AA499A400177D30 /* CosmosNftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */; };
 		E1D6B8D42AA499B100177D30 /* CosmosAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */; };
@@ -3886,7 +3884,6 @@
 		E1D538282A96644F00FB0403 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		E1D5A3E22AC33B8000453914 /* CosmosClaimRewards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosClaimRewards.swift; sourceTree = "<group>"; };
 		E1D5A3E32AC33B8000453914 /* CosmosClaimRewards.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CosmosClaimRewards.xib; sourceTree = "<group>"; };
-		E1D6B8CD2AA4998E00177D30 /* CosmosTokenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosTokenVC.swift; sourceTree = "<group>"; };
 		E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosNftVC.swift; sourceTree = "<group>"; };
 		E1D6B8D32AA499B100177D30 /* CosmosAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosAboutVC.swift; sourceTree = "<group>"; };
 		E1D931EF2BCCD8C700AEEA10 /* AllChainCompoundingStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChainCompoundingStartVC.swift; sourceTree = "<group>"; };
@@ -4551,7 +4548,6 @@
 				047BA8D02A94756A00D3F7DD /* CosmosClass.storyboard */,
 				04527DC32A938FC9005F72D7 /* CosmosClassVC.swift */,
 				047BA8D32A94777600D3F7DD /* CosmosCryptoVC.swift */,
-				E1D6B8CD2AA4998E00177D30 /* CosmosTokenVC.swift */,
 				E1D6B8D02AA499A400177D30 /* CosmosNftVC.swift */,
 				E1A48DE02BFEF5C40084D770 /* CosmosReceiveVC.swift */,
 				047BA8D62A94778800D3F7DD /* CosmosHistoryVC.swift */,
@@ -6602,9 +6598,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Cosmostation/Pods-Cosmostation-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Cosmostation/Pods-Cosmostation-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -6619,9 +6619,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -6679,7 +6683,6 @@
 				04C816912BA98D74006B800A /* cosmos_consensus_v1_tx.grpc.swift in Sources */,
 				040B43E82E3724360018850C /* ChainBluzelle.swift in Sources */,
 				18FFB2EC281AF533004E65BB /* BaseData.swift in Sources */,
-				E1D6B8CF2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */,
 				04C940B72AE8D4A100415256 /* CryptoJS.swift in Sources */,
 				045033132C1F029A00235F6A /* ChainStride.swift in Sources */,
 				04FAD9E92AB6DBCE00143A3E /* ManageAccountCell.swift in Sources */,
@@ -7607,7 +7610,6 @@
 				04C816902BA98D74006B800A /* cosmos_consensus_v1_tx.grpc.swift in Sources */,
 				E1945E52223124F000A1436F /* BaseData.swift in Sources */,
 				792613C62CD4B82800FAF47D /* initia_ibchooks_v1_tx.pb.swift in Sources */,
-				E1D6B8CE2AA4998E00177D30 /* CosmosTokenVC.swift in Sources */,
 				04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */,
 				045033122C1F029A00235F6A /* ChainStride.swift in Sources */,
 				04C940B62AE8D4A100415256 /* CryptoJS.swift in Sources */,

@@ -49,22 +49,15 @@ class ReceiveCell: UITableViewCell {
             let evmAddress = chain.evmAddress!
             addressLabel.text = evmAddress
             addressLabel.adjustsFontSizeToFitWidth = true
-            
-            if let bechQrImage = WUtils.generateQrCode(evmAddress) {
-                rqImgView.image = UIImage(ciImage: bechQrImage)
-                chain.getChainImage().addToCenter(of: rqImgView, width: 60, height: 60)
-            }
+            setQR(evmAddress, chain.getChainImage())
             
         } else if chain.supportCosmos {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
             let bechAddress = chain.bechAddress!
             addressLabel.text = bechAddress
             addressLabel.adjustsFontSizeToFitWidth = true
+            setQR(bechAddress, chain.getChainImage())
             
-            if let bechQrImage = WUtils.generateQrCode(bechAddress) {
-                rqImgView.image = UIImage(ciImage: bechQrImage)
-                chain.getChainImage().addToCenter(of: rqImgView, width: 60, height: 60)
-            }
         } else if !chain.mainAddress.isEmpty {
             cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
             let mainAddress = chain.mainAddress
@@ -100,12 +93,19 @@ class ReceiveCell: UITableViewCell {
                 addressLabel.numberOfLines = 2
                 addressLabel.text = mainAddress
             }
+            setQR(mainAddress, chain.getChainImage())
             
-            if let qrImage = WUtils.generateQrCode(mainAddress) {
-                rqImgView.image = UIImage(ciImage: qrImage)
-                chain.getChainImage().addToCenter(of: rqImgView, width: 60, height: 60)
+        }
+    }
+    
+    private func setQR(_ address: String, _ chainImg: UIImage) {
+        Task {
+            if let qrImage = WUtils.generateQrCode(address) {
+                DispatchQueue.main.async {
+                    self.rqImgView.image = UIImage(ciImage: qrImage)
+                    chainImg.addToCenter(of: self.rqImgView, width: 60, height: 60)
+                }
             }
-            
         }
     }
     

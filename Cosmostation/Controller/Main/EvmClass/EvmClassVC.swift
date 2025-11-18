@@ -96,8 +96,16 @@ class EvmClassVC: BaseVC {
         explorerBtn.frame = CGRectMake(0, 0, 30, 30)
         explorerBarBtn = UIBarButtonItem(customView: explorerBtn)
         
+        
+        if #available(iOS 26.0, *) {
+            addtokenBarBtn.sharesBackground = false
+            explorerBarBtn.sharesBackground = false
+        }
         navigationItem.rightBarButtonItems = [explorerBarBtn, addtokenBarBtn]
-        navigationItem.titleView = BgRandomButton()
+        
+        let titleView = BgRandomButton()
+        titleView.setName(baseAccount?.getRefreshName())
+        navigationItem.titleView = titleView
     }
     
     override func viewWillAppear(_ animated: Bool) {

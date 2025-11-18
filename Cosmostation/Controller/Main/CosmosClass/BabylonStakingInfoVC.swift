@@ -364,7 +364,6 @@ extension BabylonStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (tabbar.selectedItem?.tag == 0) {
             if section == 0 {
@@ -391,19 +390,27 @@ extension BabylonStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (tabbar.selectedItem?.tag == 0) {
             if section == 0 {
-                return (pendingStakingTab.count) == 0 ? 0 : 40
+                return (pendingStakingTab.count) == 0 ? .leastNormalMagnitude : 40
             } else {
-                return delegations.count == 0 ? 0 : 40
+                return delegations.count == 0 ? .leastNormalMagnitude : 40
             }
             
         } else if (tabbar.selectedItem?.tag == 1) {
             if section == 0 {
-                return (pendingUnstakingTab.count) == 0 ? 0 : 40
+                return (pendingUnstakingTab.count) == 0 ? .leastNormalMagnitude : 40
             } else {
-                return unbondings.count == 0 ? 0 : 40
+                return unbondings.count == 0 ? .leastNormalMagnitude : 40
             }
         }
-        return 0
+        return .leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -522,30 +529,6 @@ extension BabylonStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         parameters.backgroundColor = .clear
         return UITargetedPreview(view: cell, parameters: parameters)
     }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        for cell in tableView.visibleCells {
-            let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
-            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-            }
-        }
-        
-        view.endEditing(true)
-    }
-
-    func maskCell(cell: UITableViewCell, margin: Float) {
-        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
-        cell.layer.masksToBounds = true
-    }
-
-    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
-        let mask = CAGradientLayer()
-        mask.frame = cell.bounds
-        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
-        return mask;
-    }
 }
 
 extension BabylonStakingInfoVC: BaseSheetDelegate, PinDelegate {
@@ -582,21 +565,13 @@ extension BabylonStakingInfoVC: BaseSheetDelegate, PinDelegate {
 }
 
 extension BabylonStakingInfoVC: MDCTabBarViewDelegate {
+    
     func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
-        
         if item.tag == 0 {
             emptyStakeImg.isHidden = (delegations.count + pendingStakingTab.count) > 0
         } else if item.tag == 1 {
             emptyStakeImg.isHidden = (unbondings.count + pendingUnstakingTab.count) > 0
         }
-        
         tableView.reloadData()
-        tableView.visibleCells.forEach { cell in
-            let hiddenFrameHeight = tableView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
-            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-            }
-        }
-        
     }
 }

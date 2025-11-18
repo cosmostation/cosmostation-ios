@@ -52,9 +52,6 @@ class CosmosClassVC: BaseVC {
             let target = segue.destination as! CosmosCryptoVC
             target.selectedChain = selectedChain
             cosmosCryptoVC = target
-        } else if (segue.identifier == "embedTokenVC") {
-            let target = segue.destination as! CosmosTokenVC
-            target.selectedChain = selectedChain
         } else if (segue.identifier == "embedNftVC") {
             let target = segue.destination as! CosmosNftVC
             target.selectedChain = selectedChain
@@ -116,9 +113,16 @@ class CosmosClassVC: BaseVC {
         explorerBtn.frame = CGRectMake(0, 0, 30, 30)
         explorerBarBtn = UIBarButtonItem(customView: explorerBtn)
         
+        if #available(iOS 26.0, *) {
+            addtokenBarBtn.sharesBackground = false
+            addNftBarBtn.sharesBackground = false
+            explorerBarBtn.sharesBackground = false
+        }
         navigationItem.rightBarButtonItems = isTokenPresent() ? [explorerBarBtn, addtokenBarBtn] : [explorerBarBtn]
-
-        navigationItem.titleView = BgRandomButton()
+        
+        let titleView = BgRandomButton()
+        titleView.setName(baseAccount?.getRefreshName())
+        navigationItem.titleView = titleView
     }
     
     override func viewWillAppear(_ animated: Bool) {

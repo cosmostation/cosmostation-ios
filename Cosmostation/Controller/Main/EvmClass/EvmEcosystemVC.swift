@@ -40,8 +40,12 @@ class EvmEcosystemVC: BaseVC {
                                         forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                         withReuseIdentifier: "EcoSystemSectionHeader")
         
-        ecosystemList = BaseData.instance.allEcosystems?.filter({ $0["chains"].arrayValue.map({ $0.stringValue }).contains(selectedChain.apiName) }).sorted { $0["is_default"].boolValue && !$1["is_default"].boolValue }
-        onUpdateView()
+        Task {
+            ecosystemList = BaseData.instance.allEcosystems?.filter({ $0["chains"].arrayValue.map({ $0.stringValue }).contains(selectedChain.apiName) }).sorted { $0["is_default"].boolValue && !$1["is_default"].boolValue }
+            DispatchQueue.main.async {
+                self.onUpdateView()
+            }
+        }
     }
     
     func onUpdateView() {

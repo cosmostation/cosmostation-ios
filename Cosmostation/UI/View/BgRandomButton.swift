@@ -12,14 +12,18 @@ final class BgRandomButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        self.setTitleColor(.clear, for: .normal)
-        self.frame = .init(x: 0, y: 0, width: 60, height: 30)
         self.addTarget(self, action: #selector(onClickBgRandomBtn), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setName(_ name: String?) {
+        let titleString =  name == nil ? "Account" : name!.firstSeven()
+        self.setTitle(titleString, for: .normal)
+        self.titleLabel?.font = .fontSize16Bold
+        self.titleLabel?.lineBreakMode = .byTruncatingMiddle
     }
     
     @objc func onClickBgRandomBtn() {

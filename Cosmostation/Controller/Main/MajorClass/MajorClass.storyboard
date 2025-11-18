@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4yH-GI-o1U">
-                                <rect key="frame" x="48" y="79" width="297" height="56"/>
+                                <rect key="frame" x="48" y="138" width="297" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="530-4U-Moh">
                                         <rect key="frame" x="48" y="0.0" width="201" height="15.333333333333334"/>
@@ -41,7 +41,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="viT-32-1st">
-                                        <rect key="frame" x="93.666666666666657" y="20.333333333333332" width="24" height="35.333333333333343"/>
+                                        <rect key="frame" x="93.666666666666657" y="20.333333333333346" width="24" height="35.333333333333343"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="28"/>
                                         <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
@@ -61,7 +61,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4s-oQ-zM4">
-                                <rect key="frame" x="233.66666666666666" y="108" width="18" height="18"/>
+                                <rect key="frame" x="233.66666666666666" y="167" width="18" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="48i-pj-epz"/>
                                     <constraint firstAttribute="width" constant="18" id="hbT-Zd-idj"/>
@@ -74,51 +74,51 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SsX-CA-En9" customClass="MDCTabBarView">
-                                <rect key="frame" x="8" y="151" width="377" height="48"/>
+                                <rect key="frame" x="8" y="210" width="377" height="48"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="ZHF-kB-OBx"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CDp-cK-tnN">
-                                <rect key="frame" x="8" y="199" width="377" height="0.66666666666665719"/>
+                                <rect key="frame" x="8" y="258" width="377" height="0.66666666666668561"/>
                                 <color key="backgroundColor" white="1" alpha="0.2027795493" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="PP4-9Y-Ir5"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dta-NH-yaH">
-                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
+                                <rect key="frame" x="0.0" y="258.66666666666669" width="393" height="593.33333333333326"/>
                                 <connections>
                                     <segue destination="CmV-Cc-oIK" kind="embed" identifier="majorCryptoVC" id="ybt-27-Ivw"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6pk-1t-J9n">
-                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
+                                <rect key="frame" x="0.0" y="258.66666666666669" width="393" height="593.33333333333326"/>
                                 <connections>
                                     <segue destination="Sbq-IT-bha" kind="embed" identifier="majorNftVC" id="OOU-Dx-oD8"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YIn-Wc-OfE">
-                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
+                                <rect key="frame" x="0.0" y="258.66666666666669" width="393" height="593.33333333333326"/>
                                 <connections>
                                     <segue destination="4h9-5A-BaI" kind="embed" identifier="majorReceiveVC" id="jdJ-ga-hLg"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WX9-p0-r1y">
-                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
+                                <rect key="frame" x="0.0" y="258.66666666666669" width="393" height="593.33333333333326"/>
                                 <connections>
                                     <segue destination="UqE-3N-TNJ" kind="embed" identifier="majorHistoryVC" id="4zg-bB-DBn"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sSD-bt-1AS">
-                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
+                                <rect key="frame" x="0.0" y="258.66666666666669" width="393" height="593.33333333333326"/>
                                 <connections>
                                     <segue destination="CK2-xn-dQI" kind="embed" identifier="majorEcosystemVC" id="FgP-Do-nNn"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hiv-ys-4yM">
-                                <rect key="frame" x="0.0" y="199.66666666666669" width="393" height="652.33333333333326"/>
+                                <rect key="frame" x="0.0" y="258.66666666666669" width="393" height="593.33333333333326"/>
                                 <connections>
                                     <segue destination="0ls-Eq-HxC" kind="embed" identifier="majorAboutVC" id="NbZ-gH-9UX"/>
                                 </connections>
@@ -189,11 +189,11 @@
             <objects>
                 <viewController storyboardIdentifier="MajorCryptoVC" id="CmV-Cc-oIK" customClass="MajorCryptoVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UeP-GM-2hf">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="593.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="O5d-SO-gxk">
-                                <rect key="frame" x="0.0" y="59" width="393" height="593.33333333333337"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="O5d-SO-gxk">
+                                <rect key="frame" x="0.0" y="117.99999999999997" width="393" height="475.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gmC-Ql-oRE" customClass="LottieAnimationView" customModule="Lottie">
@@ -206,7 +206,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6F-Rj-Y20" customClass="LottieAnimationView" customModule="Lottie">
-                                <rect key="frame" x="317" y="484.33333333333326" width="60" height="60"/>
+                                <rect key="frame" x="317" y="425.33333333333331" width="60" height="60"/>
                                 <viewLayoutGuide key="safeArea" id="pzm-Lm-OET"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -244,11 +244,11 @@
             <objects>
                 <viewController storyboardIdentifier="MajorNftVC" id="Sbq-IT-bha" customClass="MajorNftVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qbO-9A-u2A">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="593.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mhE-HN-D5K">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="593.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="con-H4-jg6">
                                     <size key="itemSize" width="128" height="128"/>
@@ -324,7 +324,7 @@
             <objects>
                 <viewController storyboardIdentifier="MajorHistoryVC" id="UqE-3N-TNJ" customClass="MajorHistoryVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xqe-l6-deK">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="593.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6H-aE-TKV" customClass="LottieAnimationView" customModule="Lottie">
@@ -363,8 +363,8 @@
                                     <constraint firstItem="xW8-qA-JSU" firstAttribute="centerX" secondItem="oCS-Gk-9PY" secondAttribute="centerX" id="s6r-JB-xb2"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="W6d-8U-Qkz">
-                                <rect key="frame" x="0.0" y="59" width="393" height="593.33333333333337"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="W6d-8U-Qkz">
+                                <rect key="frame" x="0.0" y="117.99999999999997" width="393" height="475.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -397,11 +397,11 @@
             <objects>
                 <viewController storyboardIdentifier="MajorEcosystemVC" id="CK2-xn-dQI" customClass="MajorEcosystemVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bYM-hy-hfA">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="593.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c9J-D7-9Uh">
-                                <rect key="frame" x="0.0" y="12" width="393" height="640.33333333333337"/>
+                                <rect key="frame" x="0.0" y="12" width="393" height="581.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IjD-9y-1s9">
                                     <size key="itemSize" width="128" height="128"/>
@@ -412,7 +412,7 @@
                                 <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5U1-Ec-OgT" customClass="LottieAnimationView" customModule="Lottie">
-                                <rect key="frame" x="106.66666666666669" y="271.33333333333331" width="180" height="110"/>
+                                <rect key="frame" x="106.66666666666669" y="241.66666666666663" width="180" height="110"/>
                                 <viewLayoutGuide key="safeArea" id="Za4-WH-KI8"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -421,7 +421,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KwY-1u-Bg2">
-                                <rect key="frame" x="76.666666666666686" y="262.33333333333331" width="240" height="128"/>
+                                <rect key="frame" x="76.666666666666686" y="232.66666666666663" width="240" height="128"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEmptyData" translatesAutoresizingMaskIntoConstraints="NO" id="mco-8C-UHX">
                                         <rect key="frame" x="87.999999999999986" y="0.0" width="64.000000000000014" height="64"/>
@@ -431,7 +431,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Empty Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0d-FS-ZhD">
-                                        <rect key="frame" x="79.999999999999972" y="72" width="79.666666666666657" height="17.666666666666671"/>
+                                        <rect key="frame" x="79.999999999999972" y="72.000000000000028" width="79.666666666666657" height="17.666666666666671"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
                                         <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
@@ -477,11 +477,11 @@
             <objects>
                 <viewController storyboardIdentifier="MajorAboutVC" id="0ls-Eq-HxC" customClass="MajorAboutVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gXb-ss-Cj2">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="593.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="CsX-pH-z1U">
-                                <rect key="frame" x="0.0" y="59" width="393" height="593.33333333333337"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="CsX-pH-z1U">
+                                <rect key="frame" x="0.0" y="117.99999999999997" width="393" height="475.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -508,11 +508,11 @@
             <objects>
                 <viewController storyboardIdentifier="MajorReceiveVC" id="4h9-5A-BaI" customClass="MajorReceiveVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2tB-EL-60s">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="593.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2ZO-55-Rud">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="652.33333333333337"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2ZO-55-Rud">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="593.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>

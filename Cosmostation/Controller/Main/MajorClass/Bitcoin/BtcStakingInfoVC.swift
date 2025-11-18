@@ -242,28 +242,6 @@ extension BtcStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let withdrawable = displayData.filter({$0.state.uppercased().contains("WITHDRAWABLE")})
-        let unstaking = displayData.filter({$0.state.uppercased() == "TIMELOCK_UNBONDING" || $0.state.uppercased() == "EARLY_UNBONDING"})
-        
-        if tabbar.selectedItem?.tag == 0 {
-            return 0
-        } else {
-            if section == 0 {
-                if withdrawable.isEmpty {
-                    return 0
-                }
-                return 40
-
-            } else {
-                if unstaking.isEmpty {
-                    return 0
-                }
-                return 40
-            }
-        }
-    }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let withdrawable = displayData.filter({$0.state.uppercased().contains("WITHDRAWABLE")})
         let unstaking = displayData.filter({$0.state.uppercased() == "TIMELOCK_UNBONDING" || $0.state.uppercased() == "EARLY_UNBONDING"})
@@ -282,6 +260,36 @@ extension BtcStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             return nil
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let withdrawable = displayData.filter({$0.state.uppercased().contains("WITHDRAWABLE")})
+        let unstaking = displayData.filter({$0.state.uppercased() == "TIMELOCK_UNBONDING" || $0.state.uppercased() == "EARLY_UNBONDING"})
+        
+        if tabbar.selectedItem?.tag == 0 {
+            return .leastNormalMagnitude
+        } else {
+            if section == 0 {
+                if withdrawable.isEmpty {
+                    return .leastNormalMagnitude
+                }
+                return 40
+
+            } else {
+                if unstaking.isEmpty {
+                    return .leastNormalMagnitude
+                }
+                return 40
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -327,32 +335,6 @@ extension BtcStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if tabbar.selectedItem?.tag == 1 {
-            for cell in tableView.visibleCells {
-                let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
-                if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                    maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-                }
-            }
-            view.endEditing(true)
-        }
-    }
-
-    func maskCell(cell: UITableViewCell, margin: Float) {
-        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
-        cell.layer.masksToBounds = true
-    }
-
-    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
-        let mask = CAGradientLayer()
-        mask.frame = cell.bounds
-        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
-        return mask;
-    }
-
 }
 
 extension BtcStakingInfoVC: BaseSheetDelegate {
@@ -388,15 +370,6 @@ extension BtcStakingInfoVC: MDCTabBarViewDelegate {
         }
         emptyStakeImg.isHidden = !displayData.isEmpty
         tableView.reloadData()
-        
-        if item.tag == 1 {
-            tableView.visibleCells.forEach { cell in
-                let hiddenFrameHeight = tableView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
-                if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                    maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-                }
-            }
-        }
     }
 }
 

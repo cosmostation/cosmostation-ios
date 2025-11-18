@@ -64,6 +64,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
         loadingView.animationSpeed = 1.3
         loadingView.play()
     
+        tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -76,7 +77,9 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
         refresher.tintColor = .color01
-        tableView.addSubview(refresher)
+        tableView.refreshControl = refresher
+        
+        
         
         searchBar = UISearchBar(frame: CGRect(x: 0, y: 10, width: self.view.frame.size.width, height: 54))
         searchBar?.searchTextField.textColor = .color01
@@ -393,6 +396,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
         
         loadingView.isHidden = true
         tableView.reloadData()
+        tableView.isHidden = false
     }
     
     func onStartCoinTransferVC(_ sendType: SendAssetType, _ denom: String) {
@@ -540,32 +544,40 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (selectedChain is ChainOktEVM) {
             if (section == 0) {
-                return searchOktBalances.count > 0 ? 40 : 0
+                return searchOktBalances.count > 0 ? 40 : .leastNormalMagnitude
             } else if (section == 4 ) {
-                return searchMintscanErc20Tokens.count > 0 ? 40 : 0
+                return searchMintscanErc20Tokens.count > 0 ? 40 : .leastNormalMagnitude
             }
             
         } else if (selectedChain is ChainGno) {
             if (section == 0) {
-                return (searchNativeCoins.count > 0) ? 40 : 0
+                return (searchNativeCoins.count > 0) ? 40 : .leastNormalMagnitude
             } else if (section == 3) {
-                return searchMintscanGrc20Tokens.count > 0 ? 40 : 0
+                return searchMintscanGrc20Tokens.count > 0 ? 40 : .leastNormalMagnitude
             }
             
         } else {
             if (section == 0) {
-                return (searchNativeCoins.count > 0) ? 40 : 0
+                return (searchNativeCoins.count > 0) ? 40 : .leastNormalMagnitude
             } else if (section == 1) {
-                return (searchIbcCoins.count > 0) ? 40 : 0
+                return (searchIbcCoins.count > 0) ? 40 : .leastNormalMagnitude
             } else if (section == 2) {
-                return (searchBridgedCoins.count > 0) ? 40 : 0
+                return (searchBridgedCoins.count > 0) ? 40 : .leastNormalMagnitude
             } else if (section == 3) {
-                return searchMintscanCw20Tokens.count > 0 ? 40 : 0
+                return searchMintscanCw20Tokens.count > 0 ? 40 : .leastNormalMagnitude
             } else if (section == 4) {
-                return searchMintscanErc20Tokens.count > 0 ? 40 : 0
+                return searchMintscanErc20Tokens.count > 0 ? 40 : .leastNormalMagnitude
             }
         }
-        return 0
+        return .leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
     }
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -621,16 +633,9 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (selectedChain is ChainGno) {
             if (indexPath.section == 0) {
-                //                if (searchNativeCoins[indexPath.row].denom == selectedChain.stakingAssetDenom()) {
-                //                    let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
-                //                    cell.bindCosmosStakeAsset(selectedChain)
-                //                    return cell
-                //
-                //                } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
                 cell.bindGnoClassAsset(selectedChain, searchNativeCoins[indexPath.row])
                 return cell
-                //                }
                 
             } else if (indexPath.section == 3) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
@@ -801,29 +806,6 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             }
         }
         return nil
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        for cell in tableView.visibleCells {
-            let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
-            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-            }
-        }
-        view.endEditing(true)
-    }
-
-    func maskCell(cell: UITableViewCell, margin: Float) {
-        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
-        cell.layer.masksToBounds = true
-    }
-
-    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
-        let mask = CAGradientLayer()
-        mask.frame = cell.bounds
-        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
-        return mask;
     }
     
     func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {

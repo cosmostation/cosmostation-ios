@@ -235,6 +235,12 @@ private extension AppDelegate {
         ]
         navigationBarAppearance.backgroundColor = UIColor.clear
         navigationBarAppearance.shadowColor = UIColor.clear
+        
+        let backButtonAppearance = UIBarButtonItemAppearance()
+        let fontAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.fontSize16Bold, .foregroundColor: UIColor.white]
+        backButtonAppearance.normal.titleTextAttributes = fontAttributes
+        navigationBarAppearance.buttonAppearance = backButtonAppearance
+        
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().compactAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
