@@ -97,10 +97,6 @@ class SolanaFetcher {
         return NSDecimalNumber.zero
     }
     
-    func allCoinValue(_ usd: Bool? = false) -> NSDecimalNumber {
-        return balanceValue(usd: usd).adding(allTokenValue(usd))
-    }
-    
     func splTokenValue(_ mintAddress: String, _ usd: Bool? = false) -> NSDecimalNumber {
         if let splToken = mintscanSplTokens.filter({ $0.address == mintAddress }).first {
             let msPrice = BaseData.instance.getPrice(splToken.coinGeckoId, usd)

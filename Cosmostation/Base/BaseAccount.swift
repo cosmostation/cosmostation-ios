@@ -293,8 +293,8 @@ public class BaseAccount {
                 chain.allTokenUSDValue = gnoFetcher.allTokenValue(id, true)
                 
             } else if let solanaFetcher = (chain as? ChainSolana)?.getSolanaFetcher() {
-                chain.allCoinValue = solanaFetcher.allCoinValue()
-                chain.allCoinUSDValue = solanaFetcher.allCoinValue(true)
+                chain.allCoinValue = solanaFetcher.balanceValue()
+                chain.allCoinUSDValue = solanaFetcher.balanceValue(usd: true)
                 chain.allTokenValue = solanaFetcher.allTokenValue()
                 chain.allTokenUSDValue = solanaFetcher.allTokenValue(true)
             }
