@@ -57,6 +57,14 @@ extension EvmReceiveVC: UITableViewDelegate, UITableViewDataSource {
         return 40
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -70,27 +78,5 @@ extension EvmReceiveVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UIPasteboard.general.string = selectedChain.evmAddress!.trimmingCharacters(in: .whitespacesAndNewlines)
         self.onShowToast(NSLocalizedString("address_copied", comment: ""))
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        for cell in tableView.visibleCells {
-            let hiddenFrameHeight = scrollView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
-            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-            }
-        }
-    }
-
-    func maskCell(cell: UITableViewCell, margin: Float) {
-        cell.layer.mask = visibilityMaskForCell(cell: cell, location: (margin / Float(cell.frame.size.height) ))
-        cell.layer.masksToBounds = true
-    }
-
-    func visibilityMaskForCell(cell: UITableViewCell, location: Float) -> CAGradientLayer {
-        let mask = CAGradientLayer()
-        mask.frame = cell.bounds
-        mask.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        mask.locations = [NSNumber(value: location), NSNumber(value: location)]
-        return mask;
     }
 }

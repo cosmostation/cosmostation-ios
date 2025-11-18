@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dpc-GE-4GN">
-                                <rect key="frame" x="48" y="79" width="297" height="56"/>
+                                <rect key="frame" x="48" y="138" width="297" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lo0-2d-dsg">
                                         <rect key="frame" x="48" y="0.0" width="201" height="15.333333333333334"/>
@@ -41,7 +41,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t80-pF-gTb">
-                                        <rect key="frame" x="93.666666666666657" y="20.333333333333332" width="24" height="35.333333333333343"/>
+                                        <rect key="frame" x="93.666666666666657" y="20.333333333333346" width="24" height="35.333333333333343"/>
                                         <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="28"/>
                                         <color key="textColor" name="_color01"/>
                                         <nil key="highlightedColor"/>
@@ -61,7 +61,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iyq-ej-XIn">
-                                <rect key="frame" x="233.66666666666666" y="108" width="18" height="18"/>
+                                <rect key="frame" x="233.66666666666666" y="167" width="18" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="MJQ-ut-5iy"/>
                                     <constraint firstAttribute="width" constant="18" id="qcv-O4-ToP"/>
@@ -74,51 +74,51 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUj-kd-BLh" customClass="MDCTabBarView">
-                                <rect key="frame" x="8" y="151" width="377" height="48"/>
+                                <rect key="frame" x="8" y="210" width="377" height="48"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="WWM-vI-XXB"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F8b-EV-MOC">
-                                <rect key="frame" x="8" y="199" width="377" height="0.66666666666665719"/>
+                                <rect key="frame" x="8" y="258" width="377" height="0.66666666666668561"/>
                                 <color key="backgroundColor" white="1" alpha="0.2027795493" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="jEi-cf-Z9x"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W2h-nP-75G">
-                                <rect key="frame" x="0.0" y="199" width="393" height="653"/>
+                                <rect key="frame" x="0.0" y="258" width="393" height="594"/>
                                 <connections>
                                     <segue destination="PEo-xb-PFQ" kind="embed" identifier="embedAssetVC" id="HN9-lW-sg4"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIO-da-bOO">
-                                <rect key="frame" x="0.0" y="199" width="393" height="653"/>
+                                <rect key="frame" x="0.0" y="258" width="393" height="594"/>
                                 <connections>
                                     <segue destination="cVX-vz-y8y" kind="embed" identifier="embedNftVC" id="fwm-Og-oSd"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJq-ks-FnM">
-                                <rect key="frame" x="0.0" y="199" width="393" height="653"/>
+                                <rect key="frame" x="0.0" y="258" width="393" height="594"/>
                                 <connections>
                                     <segue destination="cCh-9s-T0D" kind="embed" identifier="embedHistoryVC" id="58Y-95-YwA"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCB-ZA-sQs">
-                                <rect key="frame" x="0.0" y="199" width="393" height="653"/>
+                                <rect key="frame" x="0.0" y="258" width="393" height="594"/>
                                 <connections>
                                     <segue destination="umE-n0-62g" kind="embed" identifier="embedAboutVC" id="Xpz-ec-FbC"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90O-ET-A6J">
-                                <rect key="frame" x="0.0" y="199" width="393" height="653"/>
+                                <rect key="frame" x="0.0" y="258" width="393" height="594"/>
                                 <connections>
                                     <segue destination="ad1-tH-hp5" kind="embed" identifier="embedReceiveVC" id="1Zs-Y3-XUn"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0tE-SO-qGG">
-                                <rect key="frame" x="0.0" y="199" width="393" height="653"/>
+                                <rect key="frame" x="0.0" y="258" width="393" height="594"/>
                                 <connections>
                                     <segue destination="4uO-bN-E88" kind="embed" identifier="embedEcosystemVC" id="Ccb-cE-k40"/>
                                 </connections>
@@ -189,7 +189,7 @@
             <objects>
                 <viewController storyboardIdentifier="EvmAssetVC" id="PEo-xb-PFQ" customClass="EvmAssetVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nLy-bl-AGc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="594"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4H-Bi-3DH" customClass="LottieAnimationView" customModule="Lottie">
@@ -201,8 +201,8 @@
                                     <constraint firstAttribute="height" constant="110" id="Zeg-Vr-hYU"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gta-em-KsN">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gta-em-KsN">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="594"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -231,7 +231,7 @@
             <objects>
                 <viewController storyboardIdentifier="EvmNftVC" id="cVX-vz-y8y" customClass="EvmNftVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5bs-1l-niA">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="594"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="VZL-Xb-kee"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -246,7 +246,7 @@
             <objects>
                 <viewController storyboardIdentifier="EvmHistoryVC" id="cCh-9s-T0D" customClass="EvmHistoryVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xzi-HU-5xx">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="594"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="no5-bu-dDU" customClass="LottieAnimationView" customModule="Lottie">
@@ -285,8 +285,8 @@
                                     <constraint firstItem="rjV-4y-FXX" firstAttribute="centerX" secondItem="GVE-5P-3vO" secondAttribute="centerX" id="yUs-ti-psd"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EEw-nP-6PO">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EEw-nP-6PO">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="594"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -318,11 +318,11 @@
             <objects>
                 <viewController storyboardIdentifier="EvmAboutVC" id="umE-n0-62g" customClass="EvmAboutVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p7d-uC-fdb">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="594"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="TbU-28-L50">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="TbU-28-L50">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="594"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -349,11 +349,11 @@
             <objects>
                 <viewController storyboardIdentifier="EvmReceiveVC" id="ad1-tH-hp5" customClass="EvmReceiveVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4IJ-t8-wVc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="594"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="12w-lm-UMi">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="12w-lm-UMi">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="594"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -380,11 +380,11 @@
             <objects>
                 <viewController storyboardIdentifier="EvmEcosystemVC" id="4uO-bN-E88" customClass="EvmEcosystemVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lCM-uY-ijk">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="594"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Cjq-Xv-DKJ">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="653"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="594"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="icL-Wc-kbJ">
                                     <size key="itemSize" width="128" height="128"/>
