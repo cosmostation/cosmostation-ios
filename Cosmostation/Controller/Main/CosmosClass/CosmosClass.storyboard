@@ -283,67 +283,6 @@
             </objects>
             <point key="canvasLocation" x="-1961" y="847"/>
         </scene>
-        <!--Cosmos TokenVC-->
-        <scene sceneID="KcN-vG-E2e">
-            <objects>
-                <viewController storyboardIdentifier="CosmosTokenVC" id="yyO-ei-xsW" customClass="CosmosTokenVC" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6m4-W2-W09">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8e1-0V-k7Y">
-                                <rect key="frame" x="76.666666666666686" y="387" width="240" height="128"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgNoSearch" translatesAutoresizingMaskIntoConstraints="NO" id="LLL-CN-Dck">
-                                        <rect key="frame" x="87.999999999999986" y="0.0" width="64.000000000000014" height="64"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="64" id="Qdn-5h-Ewq"/>
-                                            <constraint firstAttribute="width" constant="64" id="xZ5-gW-Rea"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Tokens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wg1-kE-fap">
-                                        <rect key="frame" x="84.333333333333329" y="72" width="70.999999999999986" height="17.666666666666671"/>
-                                        <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="14"/>
-                                        <color key="textColor" name="_color01"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="Wg1-kE-fap" firstAttribute="centerX" secondItem="8e1-0V-k7Y" secondAttribute="centerX" id="5EI-XH-1Gy"/>
-                                    <constraint firstAttribute="width" constant="240" id="5z9-JP-9UO"/>
-                                    <constraint firstItem="Wg1-kE-fap" firstAttribute="top" secondItem="LLL-CN-Dck" secondAttribute="bottom" constant="8" id="FLX-lO-to0"/>
-                                    <constraint firstAttribute="height" constant="128" id="l4n-CG-SWU"/>
-                                    <constraint firstItem="LLL-CN-Dck" firstAttribute="centerX" secondItem="8e1-0V-k7Y" secondAttribute="centerX" id="uxS-3K-04F"/>
-                                    <constraint firstItem="LLL-CN-Dck" firstAttribute="top" secondItem="8e1-0V-k7Y" secondAttribute="top" id="xJY-YR-ck9"/>
-                                </constraints>
-                            </view>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="871-cq-xsh">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="cwp-G7-QNR"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" name="_primary"/>
-                        <constraints>
-                            <constraint firstItem="8e1-0V-k7Y" firstAttribute="centerY" secondItem="cwp-G7-QNR" secondAttribute="centerY" id="CV9-cs-MSw"/>
-                            <constraint firstItem="8e1-0V-k7Y" firstAttribute="centerX" secondItem="cwp-G7-QNR" secondAttribute="centerX" id="OUu-NX-tC9"/>
-                            <constraint firstItem="871-cq-xsh" firstAttribute="bottom" secondItem="6m4-W2-W09" secondAttribute="bottom" id="YiV-Fm-IMb"/>
-                            <constraint firstItem="cwp-G7-QNR" firstAttribute="leading" secondItem="871-cq-xsh" secondAttribute="leading" id="gia-lI-fU3"/>
-                            <constraint firstItem="cwp-G7-QNR" firstAttribute="trailing" secondItem="871-cq-xsh" secondAttribute="trailing" id="h8E-rG-IfN"/>
-                            <constraint firstAttribute="top" secondItem="871-cq-xsh" secondAttribute="top" id="y5I-Ux-auS"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="emptyDataView" destination="8e1-0V-k7Y" id="AYs-pM-Z0v"/>
-                        <outlet property="tableView" destination="871-cq-xsh" id="F51-zW-STr"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ctm-QY-5em" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1257" y="1773"/>
-        </scene>
         <!--Cosmos NftVC-->
         <scene sceneID="hdU-jR-Mfl">
             <objects>
@@ -643,7 +582,6 @@
     <resources>
         <image name="iconHideValueOn" width="24" height="24"/>
         <image name="imgEmptyData" width="240" height="240"/>
-        <image name="imgNoSearch" width="240" height="240"/>
         <namedColor name="_color01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

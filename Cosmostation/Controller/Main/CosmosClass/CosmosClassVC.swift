@@ -52,9 +52,6 @@ class CosmosClassVC: BaseVC {
             let target = segue.destination as! CosmosCryptoVC
             target.selectedChain = selectedChain
             cosmosCryptoVC = target
-        } else if (segue.identifier == "embedTokenVC") {
-            let target = segue.destination as! CosmosTokenVC
-            target.selectedChain = selectedChain
         } else if (segue.identifier == "embedNftVC") {
             let target = segue.destination as! CosmosNftVC
             target.selectedChain = selectedChain

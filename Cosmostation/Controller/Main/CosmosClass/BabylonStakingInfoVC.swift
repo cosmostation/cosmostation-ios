@@ -565,21 +565,13 @@ extension BabylonStakingInfoVC: BaseSheetDelegate, PinDelegate {
 }
 
 extension BabylonStakingInfoVC: MDCTabBarViewDelegate {
+    
     func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
-        
         if item.tag == 0 {
             emptyStakeImg.isHidden = (delegations.count + pendingStakingTab.count) > 0
         } else if item.tag == 1 {
             emptyStakeImg.isHidden = (unbondings.count + pendingUnstakingTab.count) > 0
         }
-        
         tableView.reloadData()
-        tableView.visibleCells.forEach { cell in
-            let hiddenFrameHeight = tableView.contentOffset.y + (navigationController?.navigationBar.frame.size.height ?? 44) - cell.frame.origin.y
-            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-                maskCell(cell: cell, margin: Float(hiddenFrameHeight))
-            }
-        }
-        
     }
 }
