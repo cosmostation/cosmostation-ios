@@ -80,12 +80,12 @@ class ChainSolana: BaseChain {
             
             if let solanaFetcher = getSolanaFetcher(), fetchState == .Success {
                 coinsCnt = solanaFetcher.valueCoinCnt()
-                allCoinValue = solanaFetcher.allCoinValue()
-                allCoinUSDValue = solanaFetcher.allCoinValue(true)
+                allCoinValue = solanaFetcher.balanceValue()
+                allCoinUSDValue = solanaFetcher.balanceValue(usd: true)
                 let mainCoinAmount = solanaFetcher.balanceAmount()
                 tokensCnt = solanaFetcher.solanaTokenInfo.count
-                allTokenValue = NSDecimalNumber.zero
-                allTokenUSDValue = NSDecimalNumber.zero
+                allTokenValue = solanaFetcher.allTokenValue()
+                allTokenUSDValue = solanaFetcher.allTokenValue(true)
                 
                 BaseData.instance.updateRefAddressesValue(
                     RefAddress(id, self.tag, self.mainAddress, "",
