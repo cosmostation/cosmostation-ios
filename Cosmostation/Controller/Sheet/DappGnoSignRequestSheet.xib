@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+        <array key="SpoqaHanSansNeo-Medium.otf">
+            <string>SpoqaHanSansNeo-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DappGnoSignRequestSheet" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="barView" destination="dFM-fS-nbK" id="tHL-xf-Dcm"/>
+                <outlet property="bodyCardView" destination="BI9-gG-sOb" id="Iff-22-x8m"/>
+                <outlet property="cancelBtn" destination="ytI-sk-EP1" id="fFd-vR-Wd0"/>
+                <outlet property="confirmBtn" destination="Klb-sO-aXq" id="3uZ-Eq-XXc"/>
+                <outlet property="controlStakView" destination="qXB-Po-zlS" id="GWw-4d-R3j"/>
+                <outlet property="dangerMsgTitle" destination="oJy-n7-WZW" id="7F5-J0-RAJ"/>
+                <outlet property="errorCardView" destination="dLa-c0-n0k" id="jIX-zZ-bbX"/>
+                <outlet property="errorMsgLabel" destination="hNV-7O-sxw" id="VDu-46-Ekz"/>
+                <outlet property="feeAmountLabel" destination="weg-Pj-yez" id="PPB-U6-WZB"/>
+                <outlet property="feeCardView" destination="yzC-kF-r81" id="HmH-h4-edi"/>
+                <outlet property="feeCurrencyLabel" destination="sST-E3-mY3" id="XGr-Ng-BkH"/>
+                <outlet property="feeDenomLabel" destination="2j6-3P-2f4" id="gJZ-Ss-QYV"/>
+                <outlet property="feeImg" destination="P2X-bE-aAP" id="W1j-Sa-jzi"/>
+                <outlet property="feeLabel" destination="c6h-P6-laH" id="JFE-Ua-8S7"/>
+                <outlet property="feeValueLabel" destination="Ykt-so-kFQ" id="wMs-v4-6Ah"/>
+                <outlet property="loadingView" destination="CgU-sp-Yec" id="QHs-Tr-T0X"/>
+                <outlet property="requestTitle" destination="vyT-ek-ZgK" id="7zN-r1-QG2"/>
+                <outlet property="safeMsgTitle" destination="u0h-Fh-JE3" id="d1n-qw-RTN"/>
+                <outlet property="toSignTextView" destination="B6l-up-utT" id="aGV-CY-lUT"/>
+                <outlet property="view" destination="o0c-6O-sDL" id="ZiR-h3-dt2"/>
+                <outlet property="warnMsgLabel" destination="oBX-Bn-g9M" id="x13-ha-2J4"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="o0c-6O-sDL">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Request" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyT-ek-ZgK">
+                    <rect key="frame" x="19.999999999999993" y="83" width="102.33333333333331" height="20.333333333333329"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                    <color key="textColor" name="_color01"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Affects your Assets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJy-n7-WZW">
+                    <rect key="frame" x="261.33333333333331" y="85.666666666666671" width="111.66666666666669" height="15.333333333333329"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                    <color key="textColor" name="_warnRed"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not affects your Assets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0h-Fh-JE3">
+                    <rect key="frame" x="238" y="85.666666666666671" width="135" height="15.333333333333329"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                    <color key="textColor" name="_voteYes"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Only sign this message if you trust the requesting site and fully understand its contents." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBX-Bn-g9M">
+                    <rect key="frame" x="20" y="115.33333333333333" width="353" height="30.333333333333329"/>
+                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                    <color key="textColor" name="_color02"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dFM-fS-nbK">
+                    <rect key="frame" x="8" y="165.66666666666666" width="377" height="0.66666666666665719"/>
+                    <color key="backgroundColor" name="_divider"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.80000000000000004" id="laL-pG-L79"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BI9-gG-sOb" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="182.33333333333334" width="377" height="447.66666666666663"/>
+                    <subviews>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="{}" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6l-up-utT">
+                            <rect key="frame" x="8" y="8" width="361" height="431.66666666666669"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_color01"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" name="_color06"/>
+                    <constraints>
+                        <constraint firstItem="B6l-up-utT" firstAttribute="top" secondItem="BI9-gG-sOb" secondAttribute="top" constant="8" id="7hy-Kc-KU3"/>
+                        <constraint firstItem="B6l-up-utT" firstAttribute="leading" secondItem="BI9-gG-sOb" secondAttribute="leading" constant="8" id="8cS-UO-lzI"/>
+                        <constraint firstAttribute="bottom" secondItem="B6l-up-utT" secondAttribute="bottom" constant="8" id="8jK-ER-EQe"/>
+                        <constraint firstAttribute="trailing" secondItem="B6l-up-utT" secondAttribute="trailing" constant="8" id="VIq-C8-Efi"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzC-kF-r81" customClass="FixCardView" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="652" width="377" height="100"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcS-N9-BuX">
+                            <rect key="frame" x="12" y="15" width="36" height="14"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="VzB-7i-x5Q"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Medium" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="textColor" name="_color02"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ZL-Nt-aFL">
+                            <rect key="frame" x="12" y="39" width="353" height="0.6666666666666643"/>
+                            <color key="backgroundColor" name="_color05"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="cnO-ki-547"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gey-Ba-Cuo" customClass="DropDownView" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="12" y="51.666666666666629" width="164.33333333333334" height="32"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="P2X-bE-aAP">
+                                    <rect key="frame" x="8" y="6" width="22" height="22"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="22" id="ptH-pH-kBM"/>
+                                        <constraint firstAttribute="width" constant="22" id="qNr-OT-3ee"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6h-P6-laH">
+                                    <rect key="frame" x="34" y="9" width="0.0" height="14"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="14" id="cKw-r5-rVr"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                    <color key="textColor" name="_color01"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="164.33333333333337" id="64g-XK-XyZ"/>
+                                <constraint firstItem="P2X-bE-aAP" firstAttribute="centerY" secondItem="Gey-Ba-Cuo" secondAttribute="centerY" constant="1" id="9ET-lr-RMd"/>
+                                <constraint firstItem="c6h-P6-laH" firstAttribute="centerY" secondItem="Gey-Ba-Cuo" secondAttribute="centerY" id="DQq-E5-oNK"/>
+                                <constraint firstItem="c6h-P6-laH" firstAttribute="leading" secondItem="P2X-bE-aAP" secondAttribute="trailing" constant="4" id="WPF-KU-7r1"/>
+                                <constraint firstItem="P2X-bE-aAP" firstAttribute="leading" secondItem="Gey-Ba-Cuo" secondAttribute="leading" constant="8" id="bKc-eG-krI"/>
+                                <constraint firstAttribute="height" constant="32" id="ehk-8a-SAo"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weg-Pj-yez">
+                            <rect key="frame" x="302.66666666666669" y="53.666666666666629" width="25" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="xVy-H9-rFj"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2j6-3P-2f4">
+                            <rect key="frame" x="329.66666666666669" y="53.666666666666629" width="35.333333333333314" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="mGZ-e2-0ll"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sST-E3-mY3">
+                            <rect key="frame" x="349.33333333333331" y="71.666666666666629" width="6.3333333333333144" height="14"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="j2u-YN-9tt"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
+                            <color key="textColor" name="_color02"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ykt-so-kFQ">
+                            <rect key="frame" x="357.66666666666669" y="71.666666666666629" width="7.3333333333333144" height="14"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="Pwm-AS-7Yl"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="textColor" name="_color02"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" name="_color06"/>
+                    <constraints>
+                        <constraint firstItem="Gey-Ba-Cuo" firstAttribute="top" secondItem="9ZL-Nt-aFL" secondAttribute="bottom" constant="12" id="16E-5j-CJb"/>
+                        <constraint firstItem="Ykt-so-kFQ" firstAttribute="centerY" secondItem="sST-E3-mY3" secondAttribute="centerY" id="6Tn-7n-dkz"/>
+                        <constraint firstAttribute="trailing" secondItem="9ZL-Nt-aFL" secondAttribute="trailing" constant="12" id="6Wt-fK-Bu0"/>
+                        <constraint firstItem="Gey-Ba-Cuo" firstAttribute="leading" secondItem="yzC-kF-r81" secondAttribute="leading" constant="12" id="Htu-kF-gSz"/>
+                        <constraint firstAttribute="trailing" secondItem="Ykt-so-kFQ" secondAttribute="trailing" constant="12" id="J1y-rU-HlE"/>
+                        <constraint firstItem="2j6-3P-2f4" firstAttribute="top" secondItem="9ZL-Nt-aFL" secondAttribute="bottom" constant="14" id="JzM-xq-fQk"/>
+                        <constraint firstItem="Ykt-so-kFQ" firstAttribute="leading" secondItem="sST-E3-mY3" secondAttribute="trailing" constant="2" id="SYd-BM-Uo6"/>
+                        <constraint firstItem="Ykt-so-kFQ" firstAttribute="top" secondItem="2j6-3P-2f4" secondAttribute="bottom" constant="2" id="TSb-ac-LfS"/>
+                        <constraint firstItem="9ZL-Nt-aFL" firstAttribute="leading" secondItem="yzC-kF-r81" secondAttribute="leading" constant="12" id="VN0-g0-CqU"/>
+                        <constraint firstItem="KcS-N9-BuX" firstAttribute="top" secondItem="yzC-kF-r81" secondAttribute="top" constant="15" id="evy-h7-24E"/>
+                        <constraint firstItem="KcS-N9-BuX" firstAttribute="leading" secondItem="yzC-kF-r81" secondAttribute="leading" constant="12" id="ghE-hv-i86"/>
+                        <constraint firstItem="weg-Pj-yez" firstAttribute="centerY" secondItem="2j6-3P-2f4" secondAttribute="centerY" id="iAJ-2Q-zYo"/>
+                        <constraint firstItem="9ZL-Nt-aFL" firstAttribute="top" secondItem="KcS-N9-BuX" secondAttribute="bottom" constant="10" id="kTo-B1-EXj"/>
+                        <constraint firstAttribute="trailing" secondItem="2j6-3P-2f4" secondAttribute="trailing" constant="12" id="pOs-T6-wOn"/>
+                        <constraint firstAttribute="height" constant="100" id="quD-Vu-rIA"/>
+                        <constraint firstItem="2j6-3P-2f4" firstAttribute="leading" secondItem="weg-Pj-yez" secondAttribute="trailing" constant="2" id="vuz-wF-bSd"/>
+                    </constraints>
+                </view>
+                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qXB-Po-zlS">
+                    <rect key="frame" x="8" y="760" width="377" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytI-sk-EP1" customClass="SecButton" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="184.66666666666666" height="50"/>
+                            <color key="backgroundColor" name="_color08"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="8zf-Fg-VMQ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" name="_color01"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" name="_font05"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickCancel:" destination="-1" eventType="touchUpInside" id="qfB-31-FCg"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Klb-sO-aXq" customClass="BaseButton" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="192.66666666666663" y="0.0" width="184.33333333333337" height="50"/>
+                            <color key="backgroundColor" name="_primary"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="iZz-zm-DSS"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="16"/>
+                            <state key="normal" title="Confirm">
+                                <color key="titleColor" name="_color01"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" name="photon"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickConfirm:" destination="-1" eventType="touchUpInside" id="BbV-jH-OYK"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLa-c0-n0k" customClass="RedFixCardView" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="8" y="638" width="377" height="50"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconWarnRed" translatesAutoresizingMaskIntoConstraints="NO" id="vq1-vy-yg0">
+                            <rect key="frame" x="10" y="10" width="16" height="16"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" name="_primary"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="16" id="QbF-cT-xoj"/>
+                                <constraint firstAttribute="height" constant="16" id="oLS-xa-O33"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="To4-ff-B5F">
+                            <rect key="frame" x="28" y="10.333333333333371" width="30.666666666666671" height="15.333333333333336"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="textColor" name="_colorRed"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Msg" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNV-7O-sxw">
+                            <rect key="frame" x="28" y="29.666666666666632" width="333" height="12.666666666666668"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="10"/>
+                            <color key="textColor" name="_colorRed"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.30199998620000001" blue="0.21199999750000001" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" name="_primary"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="4CG-OT-lWO"/>
+                        <constraint firstItem="vq1-vy-yg0" firstAttribute="top" secondItem="dLa-c0-n0k" secondAttribute="top" constant="10" id="4hO-Mp-Y2R"/>
+                        <constraint firstItem="To4-ff-B5F" firstAttribute="centerY" secondItem="vq1-vy-yg0" secondAttribute="centerY" id="52e-es-KGW"/>
+                        <constraint firstItem="To4-ff-B5F" firstAttribute="leading" secondItem="vq1-vy-yg0" secondAttribute="trailing" constant="2" id="PFg-yH-iaA"/>
+                        <constraint firstItem="vq1-vy-yg0" firstAttribute="leading" secondItem="dLa-c0-n0k" secondAttribute="leading" constant="10" id="bHc-k6-FCQ"/>
+                        <constraint firstItem="hNV-7O-sxw" firstAttribute="top" secondItem="To4-ff-B5F" secondAttribute="bottom" constant="4" id="lQ4-tn-esU"/>
+                        <constraint firstAttribute="trailing" secondItem="hNV-7O-sxw" secondAttribute="trailing" constant="16" id="xYt-rH-vlg"/>
+                        <constraint firstItem="hNV-7O-sxw" firstAttribute="leading" secondItem="To4-ff-B5F" secondAttribute="leading" id="zg7-2c-kNj"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CgU-sp-Yec" customClass="LottieAnimationView" customModule="Lottie">
+                    <rect key="frame" x="106.66666666666669" y="371" width="180" height="110"/>
+                    <viewLayoutGuide key="safeArea" id="Pma-bK-0Jv"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="76N-mw-2o8"/>
+                        <constraint firstAttribute="width" constant="180" id="LSK-Jp-HI3"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="N8n-IY-7Lq"/>
+            <color key="backgroundColor" name="_colorBg"/>
+            <constraints>
+                <constraint firstItem="oBX-Bn-g9M" firstAttribute="leading" secondItem="N8n-IY-7Lq" secondAttribute="leading" constant="20" id="0N7-30-Zhh"/>
+                <constraint firstItem="dFM-fS-nbK" firstAttribute="top" secondItem="oBX-Bn-g9M" secondAttribute="bottom" constant="20" id="2F9-3p-O7V"/>
+                <constraint firstItem="vyT-ek-ZgK" firstAttribute="leading" secondItem="N8n-IY-7Lq" secondAttribute="leading" constant="20" id="3W7-F6-NFs"/>
+                <constraint firstItem="BI9-gG-sOb" firstAttribute="leading" secondItem="N8n-IY-7Lq" secondAttribute="leading" constant="8" id="6Ug-8a-5ri"/>
+                <constraint firstAttribute="trailing" secondItem="dFM-fS-nbK" secondAttribute="trailing" constant="8" id="6tO-Mq-6lI"/>
+                <constraint firstItem="N8n-IY-7Lq" firstAttribute="trailing" secondItem="oJy-n7-WZW" secondAttribute="trailing" constant="20" id="7NL-uj-ryj"/>
+                <constraint firstItem="vyT-ek-ZgK" firstAttribute="top" secondItem="N8n-IY-7Lq" secondAttribute="top" constant="24" id="7oA-pQ-cLV"/>
+                <constraint firstItem="dFM-fS-nbK" firstAttribute="leading" secondItem="o0c-6O-sDL" secondAttribute="leading" constant="8" id="889-uO-Smo"/>
+                <constraint firstItem="N8n-IY-7Lq" firstAttribute="bottom" secondItem="qXB-Po-zlS" secondAttribute="bottom" constant="8" id="AOQ-ze-RZH"/>
+                <constraint firstItem="dLa-c0-n0k" firstAttribute="leading" secondItem="qXB-Po-zlS" secondAttribute="leading" id="EEA-e2-yVG"/>
+                <constraint firstItem="u0h-Fh-JE3" firstAttribute="centerY" secondItem="oJy-n7-WZW" secondAttribute="centerY" id="Hwj-mB-naD"/>
+                <constraint firstItem="qXB-Po-zlS" firstAttribute="top" secondItem="yzC-kF-r81" secondAttribute="bottom" constant="8" id="Jpp-eE-7Zx"/>
+                <constraint firstItem="yzC-kF-r81" firstAttribute="leading" secondItem="N8n-IY-7Lq" secondAttribute="leading" constant="8" id="PRX-Xs-hYE"/>
+                <constraint firstItem="N8n-IY-7Lq" firstAttribute="trailing" secondItem="qXB-Po-zlS" secondAttribute="trailing" constant="8" id="Pa0-0A-HcG"/>
+                <constraint firstItem="dLa-c0-n0k" firstAttribute="trailing" secondItem="qXB-Po-zlS" secondAttribute="trailing" id="RZx-FU-d1x"/>
+                <constraint firstItem="oBX-Bn-g9M" firstAttribute="top" secondItem="vyT-ek-ZgK" secondAttribute="bottom" constant="12" id="T5C-7p-Eh3"/>
+                <constraint firstItem="qXB-Po-zlS" firstAttribute="leading" secondItem="N8n-IY-7Lq" secondAttribute="leading" constant="8" id="VfT-Ca-eaj"/>
+                <constraint firstItem="dLa-c0-n0k" firstAttribute="top" secondItem="BI9-gG-sOb" secondAttribute="bottom" constant="8" id="Xgx-v6-UOt"/>
+                <constraint firstItem="N8n-IY-7Lq" firstAttribute="trailing" secondItem="yzC-kF-r81" secondAttribute="trailing" constant="8" id="bNg-ov-sBk"/>
+                <constraint firstItem="BI9-gG-sOb" firstAttribute="top" secondItem="dFM-fS-nbK" secondAttribute="bottom" constant="16" id="dkd-Hb-PRd"/>
+                <constraint firstItem="CgU-sp-Yec" firstAttribute="centerX" secondItem="o0c-6O-sDL" secondAttribute="centerX" id="isl-7l-wpP"/>
+                <constraint firstItem="CgU-sp-Yec" firstAttribute="centerY" secondItem="o0c-6O-sDL" secondAttribute="centerY" id="ixP-Kf-tGH"/>
+                <constraint firstItem="N8n-IY-7Lq" firstAttribute="trailing" secondItem="BI9-gG-sOb" secondAttribute="trailing" constant="8" id="oca-ud-e8u"/>
+                <constraint firstItem="u0h-Fh-JE3" firstAttribute="trailing" secondItem="oJy-n7-WZW" secondAttribute="trailing" id="sS6-Pg-6IA"/>
+                <constraint firstItem="N8n-IY-7Lq" firstAttribute="trailing" secondItem="oBX-Bn-g9M" secondAttribute="trailing" constant="20" id="sVg-D5-X6Q"/>
+                <constraint firstItem="oJy-n7-WZW" firstAttribute="centerY" secondItem="vyT-ek-ZgK" secondAttribute="centerY" id="zN6-ZF-sYE"/>
+                <constraint firstItem="qXB-Po-zlS" firstAttribute="top" secondItem="BI9-gG-sOb" secondAttribute="bottom" constant="130" id="zTx-Cd-W2Q"/>
+            </constraints>
+            <point key="canvasLocation" x="28.244274809160306" y="-11.267605633802818"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconWarnRed" width="24" height="24"/>
+        <image name="tokenDefault" width="48" height="48"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color02">
+            <color red="0.74509803921568629" green="0.81960784313725488" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color05">
+            <color red="0.31372549019607843" green="0.32156862745098042" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color06">
+            <color red="0.27450980392156865" green="0.27843137254901962" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_color08">
+            <color red="0.22352941176470589" green="0.22745098039215686" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorBg">
+            <color red="0.17254901960784313" green="0.17647058823529413" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorRed">
+            <color red="1" green="0.30196078431372547" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_divider">
+            <color red="1" green="1" blue="1" alpha="0.059999998658895493" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_primary">
+            <color red="0.48627450980392156" green="0.30980392156862746" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_voteYes">
+            <color red="0.030999999493360519" green="0.81999999284744263" blue="0.32199999690055847" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_warnRed">
+            <color red="0.95300000905990601" green="0.097999997437000275" blue="0.3880000114440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="photon">
+            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

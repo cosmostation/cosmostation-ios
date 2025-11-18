@@ -771,13 +771,10 @@ class CommonTransfer: BaseVC {
                 errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
                 return
             }
-            cosmosTxFee.gasLimit = UInt64(Double(toGas == 0 ? fromChain.getInitGasLimit().uint64Value : toGas))
+            cosmosTxFee.gasLimit = UInt64(Double(toGas) * fromChain.getSimulatedGasMultiply())
             
-            if let gasRate = cosmosFeeInfos[selectedFeePosition].FeeDatas.filter({ $0.denom == cosmosTxFee.amount[0].denom }).first {
-                let gasLimit = NSDecimalNumber.init(value: UInt64(Double(toGas == 0 ? fromChain.getInitGasLimit().uint64Value : toGas) * gnoGas[selectedFeePosition]))
-                let feeAmount = gasLimit.multiplying(byPowerOf10: -3, withBehavior: getDivideHandler(3))
-                cosmosTxFee.amount[0].amount = feeAmount.stringValue
-            }
+            let feeAmount = NSDecimalNumber.init(value: Double(cosmosTxFee.gasLimit) * gnoGas[selectedFeePosition]).multiplying(byPowerOf10: -3, withBehavior: getDivideHandler(0))
+            cosmosTxFee.amount[0].amount = feeAmount.stringValue
 
             onUpdateFeeView()
             sendBtn.isEnabled = true
@@ -1230,7 +1227,17 @@ extension CommonTransfer {
                    let simulRes = try await (fromChain as? ChainGno)?.getGnoFetcher()?.simulateTx(simulReq) {
                     
                     DispatchQueue.main.async {
-                        self.onUpdateWithSimul(UInt64(simulRes.gasUsed))
+                        if (simulRes.responseBase.hasError) {
+                            self.view.isUserInteractionEnabled = true
+                            self.loadingView.isHidden = true
+                            self.sendBtn.isEnabled = false
+                            let errorMsg = simulRes.responseBase.error.typeURL
+                            self.onShowToast(String(describing: errorMsg))
+                            return
+                            
+                        } else {
+                            self.onUpdateWithSimul(UInt64(simulRes.gasUsed))
+                        }
                     }
                 }
                 
@@ -1292,7 +1299,7 @@ extension CommonTransfer {
             }
             
             guard let sig = Signer.gnoSignature(fromChain,
-                                                [.init(type: "/vm.m_call", caller: fromChain.bechAddress!, send: "", pkg_path: toSendMsToken.address!, func: "Transfer", args: [toAddress, toAmount.stringValue])],
+                                                [.init(type: "/vm.m_call", caller: fromChain.bechAddress!, send: "", max_deposit: "", pkg_path: toSendMsToken.address!, func: "Transfer", args: [toAddress, toAmount.stringValue])],
                                                 txMemo,
                                                 .init(gas_wanted: String(fee.gasWanted), gas_fee: fee.gasFee)) else { return }
             do {
