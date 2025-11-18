@@ -13,6 +13,7 @@ import SwiftyJSON
 class GnoFetcher {
     var chain: BaseChain!
     
+    var gnoPublicKey: String?
     var gnoAccountNumber: UInt64?
     var gnoSequenceNum: UInt64?
     var gnoBalances: [Cosmos_Base_V1beta1_Coin]?
@@ -32,9 +33,7 @@ class GnoFetcher {
         return true
     }
     
-    
     func fetchGnoData(_ id: Int64) async -> Bool {
-        
         mintscanGrc20Tokens.removeAll()
         gnoBalances = nil
         do {
@@ -157,6 +156,7 @@ extension GnoFetcher {
 
 extension GnoFetcher {
     func fetchAuth() async throws {
+        gnoPublicKey = nil
         gnoAccountNumber = nil
         gnoSequenceNum = nil
         
@@ -171,6 +171,10 @@ extension GnoFetcher {
             return
         }
         let jsonData = try JSON(data: data!)
+        
+        if jsonData["BaseAccount"]["public_key"] != JSON.null {
+            gnoPublicKey = jsonData["BaseAccount"]["public_key"]["value"].stringValue
+        }
         gnoAccountNumber = UInt64(jsonData["BaseAccount"]["account_number"].stringValue)
         gnoSequenceNum = UInt64(jsonData["BaseAccount"]["sequence"].stringValue)
     }
@@ -249,7 +253,7 @@ extension GnoFetcher {
         let tokenPath = tokenInfo.address!
         let tokenBalancePath = "\(tokenPath).BalanceOf(\"\(chain.bechAddress!)\")"
         
-        let param: Parameters = ["method": "abci_query", "params": ["vm/qeval", tokenBalancePath.data(using: .utf8)!.base64EncodedString(),"0",false], "id" : 1, "jsonrpc" : "2.0"]
+        let param: Parameters = ["method": "abci_query", "params": ["vm/qeval", tokenBalancePath.data(using: .utf8)!.base64EncodedString(), "0", false], "id" : 1, "jsonrpc" : "2.0"]
         let result = try? await AF.request(getRpc(), method: .post, parameters: param, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
 
         if let encodedDataString = result?["result"]["response"]["ResponseBase"]["Data"].string {

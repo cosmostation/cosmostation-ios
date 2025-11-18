@@ -959,7 +959,7 @@ extension Signer {
     }
     
     struct Msg: Codable {
-        var type: String
+        var type: String?
         
         // bank.MsgSend
         var from_address: String?
@@ -969,9 +969,14 @@ extension Signer {
         // vm.m_call
         var caller: String?
         var send: String?
+        var max_deposit: String?
         var pkg_path: String?
         var `func`: String?
         var args: [String]?
+        
+        // addPkg, Run
+        var creator: String?
+        var package: MemPackage?
         
         enum CodingKeys: String, CodingKey {
             case type = "@type"
@@ -982,15 +987,37 @@ extension Signer {
             
             case caller
             case send
+            case max_deposit
             case pkg_path
             case `func`
             case args
+            
+            case creator
+            case package
         }
     }
     
     struct Fee: Codable {
         let gas_wanted: String
         let gas_fee: String
+    }
+    
+    struct MemPackage: Codable {
+        var name: String?
+        var path: String?
+        var files: [File]?
+        var type: AnyValue?
+        var info: AnyValue?
+    }
+    
+    struct File: Codable {
+        var name: String?
+        var body: String?
+    }
+    
+    struct AnyValue: Codable {
+        var type_url: String?
+        var value: String?
     }
     
     static func gnoSignature(_ baseChain: BaseChain, _ msgs: [Msg], _ memo: String, _ fee: Fee) -> Data? {
@@ -1016,11 +1043,20 @@ extension Signer {
                          _ msgs: [Google_Protobuf_Any],
                          _ memo: String, _ fee: Tm2_Tx_TxFee) -> Tm2_Tx_Tx? {
         
+        let pub = Tm2_Tx_PubKeySecp256k1.with {
+            $0.key = baseChain.publicKey!
+        }
+        
+        let pubkey = Google_Protobuf_Any.with {
+            $0.typeURL = "/tm.PubKeySecp256k1"
+            $0.value = try! pub.serializedData()
+        }
+        
         return Tm2_Tx_Tx.with {
             $0.messages = msgs
             $0.memo = memo
             $0.fee = fee
-            $0.signatures = [Tm2_Tx_TxSignature()]
+            $0.signatures = [Tm2_Tx_TxSignature.with { $0.pubKey = pubkey }]
         }
     }
     
@@ -1043,6 +1079,121 @@ extension Signer {
             $0.memo = memo
             $0.fee = fee
             $0.signatures = [Tm2_Tx_TxSignature.with { $0.pubKey = pubkey; $0.signature = sig }]
+        }
+    }
+    
+    static func gnoSignMsg(_ requestSign: JSON) async throws -> [Google_Protobuf_Any]? {
+        let messages = requestSign["messages"][0]
+        let type = messages["type"].stringValue
+        
+        if type.contains("MsgSend") {
+            let msgSend = Gno_Bank_MsgSend.with {
+                $0.fromAddress = messages["value"]["from_address"].stringValue
+                $0.toAddress = messages["value"]["to_address"].stringValue
+                $0.amount = messages["value"]["amount"].stringValue
+            }
+            
+            let anyMsg = Google_Protobuf_Any.with {
+                $0.typeURL = "/bank.MsgSend"
+                $0.value = try! msgSend.serializedData()
+            }
+            return [anyMsg]
+            
+        } else if type.contains("call") {
+            let args = messages["value"]["args"].arrayValue
+            let addArgs = args.map { $0.stringValue }
+            
+            let msgCall = Gno_Vm_MsgCall.with {
+                $0.send = messages["value"]["send"].stringValue
+                $0.caller = messages["value"]["caller"].stringValue
+                $0.maxDeposit = messages["value"]["max_deposit"].stringValue
+                $0.pkgPath = messages["value"]["pkg_path"].stringValue
+                $0.func = messages["value"]["func"].stringValue
+                $0.args = addArgs
+            }
+            
+            let anyMsg = Google_Protobuf_Any.with {
+                $0.typeURL = "/vm.m_call"
+                $0.value = try! msgCall.serializedData()
+            }
+            return [anyMsg]
+            
+        } else {
+            let messageValue = messages["value"]
+            let messagePackage = messageValue["package"]
+            let files = messagePackage["files"].arrayValue
+            
+            var memFiles = [Gno_Vm_MemFile]()
+            for file in files {
+                let fileMsg = Gno_Vm_MemFile.with {
+                    $0.name = file["name"].stringValue
+                    $0.body = file["body"].stringValue
+                }
+                memFiles.append(fileMsg)
+            }
+            
+            let anyType: Google_Protobuf_Any = {
+                let packageType = messagePackage["type"]
+                
+                guard packageType.type != .null else {
+                    return Google_Protobuf_Any()
+                }
+                
+                return Google_Protobuf_Any.with {
+                    $0.typeURL = packageType["type_url"].stringValue
+                    $0.value = Data(base64Encoded: packageType["value"].stringValue) ?? Data()
+                }
+            }()
+            
+            let anyInfo: Google_Protobuf_Any = {
+                let packageInfo = messagePackage["info"]
+                
+                guard packageInfo.type != .null else {
+                    return Google_Protobuf_Any()
+                }
+                
+                return Google_Protobuf_Any.with {
+                    $0.typeURL = packageInfo["type_url"].stringValue
+                    $0.value = Data(base64Encoded: packageInfo["value"].stringValue) ?? Data()
+                }
+            }()
+            
+            let memPackage = Gno_Vm_MemPackage.with {
+                $0.name = messagePackage["name"].stringValue
+                $0.path = messagePackage["path"].stringValue
+                $0.files = memFiles
+                $0.type = anyType
+                $0.info = anyInfo
+            }
+            
+            if type.contains("addpkg") {
+                let addPackageMsg = Gno_Vm_MsgAddPackage.with {
+                    $0.creator = messageValue["creator"].stringValue
+                    $0.package = memPackage
+                    $0.send = messageValue["send"].stringValue
+                    $0.maxDeposit = messageValue["max_deposit"].stringValue
+                }
+                
+                let anyMsg = Google_Protobuf_Any.with {
+                    $0.typeURL = "/vm.m_addpkg"
+                    $0.value = try! addPackageMsg.serializedData()
+                }
+                return [anyMsg]
+                
+            } else {
+                let runMsg = Gno_Vm_MsgRun.with {
+                    $0.caller = messageValue["caller"].stringValue
+                    $0.send = messageValue["send"].stringValue
+                    $0.package = memPackage
+                    $0.maxDeposit = messageValue["max_deposit"].stringValue
+                }
+                
+                let anyMsg = Google_Protobuf_Any.with {
+                    $0.typeURL = "/vm.m_run"
+                    $0.value = try! runMsg.serializedData()
+                }
+                return [anyMsg]
+            }
         }
     }
 }
