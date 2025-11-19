@@ -867,6 +867,10 @@ extension CosmosCryptoVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
     }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar?.endEditing(true)
+    }
 }
 
 
