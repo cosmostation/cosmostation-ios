@@ -12,10 +12,10 @@ import Web3Core
 
 class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, DeleteDelegate {
 
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addAccountBtn: BaseButton!
     
+    var searchBar: UISearchBar?
     var mnmonicAccounts = Array<BaseAccount>()
     var pkeyAccounts = Array<BaseAccount>()
     var searchMnmonicAccounts = Array<BaseAccount>()
@@ -36,18 +36,33 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
         tableView.register(UINib(nibName: "ManageAccountCell", bundle: nil), forCellReuseIdentifier: "ManageAccountCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
+
+        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
+        searchBar?.searchTextField.textColor = .color01
+        searchBar?.tintColor = UIColor.white
+        searchBar?.barTintColor = UIColor.clear
+        searchBar?.searchTextField.font = .fontSize14Bold
+        searchBar?.backgroundImage = UIImage()
+        searchBar?.delegate = self
         
         updateAccountsData()
         updateAccountsOrder()
         
         searchMnmonicAccounts = mnmonicAccounts
         searchPkeyAccounts = pkeyAccounts
-        searchBar.searchTextField.font = .fontSize12Medium
+        
+        if (searchMnmonicAccounts.count + searchPkeyAccounts.count > 10) {
+            tableView.tableHeaderView = searchBar
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setLocalizedString()
+        if (searchMnmonicAccounts.count + searchPkeyAccounts.count > 10) {
+            var contentOffset: CGPoint = tableView.contentOffset
+            contentOffset.y += (tableView.tableHeaderView?.frame)!.height
+            tableView.contentOffset = contentOffset
+        }
         tableView.isHidden = false
         addAccountBtn.isHidden = false
     }
@@ -55,6 +70,10 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
     override func setLocalizedString() {
         navigationItem.title = NSLocalizedString("setting_account_title", comment: "")
         addAccountBtn.setTitle(NSLocalizedString("str_add_account", comment: ""), for: .normal)
+    }
+    
+    @objc func dismissKeyboard() {
+        searchBar?.endEditing(true)
     }
     
     func updateAccountsOrder() {
@@ -430,6 +449,10 @@ extension AccountListVC: QrScanDelegate, QrImportCheckKeyDelegate {
 }
 
 extension AccountListVC: UISearchBarDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar?.endEditing(true)
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchMnmonicAccounts = searchText.isEmpty ? mnmonicAccounts : mnmonicAccounts.filter { account in
             return account.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
