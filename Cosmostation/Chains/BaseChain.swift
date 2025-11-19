@@ -1023,4 +1023,4 @@ public enum TxType: Int {
 
 
 
-let DEFUAL_DISPALY_CHAINS = ["cosmos118", "bitcoin86", "ethereum60", "suiMainnet", "neutron118", "kava60", "osmosis118", "dydx118", "atomone118", "babylon118"]
+let DEFUAL_DISPALY_CHAINS = ["cosmos118", "bitcoin86", "ethereum60", "atomone118", "solana501", "suiMainnet", "neutron118", "kava60", "osmosis118", "dydx118", "babylon118"]
