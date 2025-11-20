@@ -73,27 +73,32 @@ class DappGnoSignRequestSheet: BaseVC {
         
         Task {
             do {
-                var memo = ""
-                if requestToSign?["memo"].type != .null {
-                    memo = requestToSign?["memo"].stringValue ?? ""
-                }
-                
-                if let signMsgs = try await Signer.gnoSignMsg(requestToSign!),
-                   let defaultFee = selectedChain.getDefaultFeeCoins().first {
-                    
-                    let txFee = Tm2_Tx_TxFee.with {
-                        $0.gasWanted = Int64(3000000000)
-                        $0.gasFee = defaultFee.amount + defaultFee.denom
+                if let defaultFee = selectedChain.getDefaultFeeCoins().first {
+                    let memo = requestToSign?["memo"].stringValue ?? ""
+                    var gasFee = defaultFee.amount
+                    if requestToSign?["gasFee"].type != .null {
+                        gasFee = String(requestToSign?["gasFee"].int64Value ?? 0)
+                    }
+                    var gasWanted = Int64(3000000000)
+                    if requestToSign?["gasWanted"].type != .null {
+                        gasWanted = requestToSign?["gasWanted"].int64Value ?? 0
                     }
                     
-                    if let simulReq = Signer.genSimul(selectedChain, signMsgs, memo, txFee),
-                       let simulRes = try await gnoFetcher.simulateTx(simulReq) {
-                        
-                        DispatchQueue.main.async {
-                            if simulRes.responseBase.hasError {
-                                self.onUpdateWithSimul(nil, simulRes.responseBase.error.typeURL)
-                            } else {
-                                self.onUpdateWithSimul(simulRes.gasUsed, nil)
+                    let txFee = Tm2_Tx_TxFee.with {
+                        $0.gasWanted = gasWanted
+                        $0.gasFee = gasFee + defaultFee.denom
+                    }
+                    
+                    if let signMsgs = try await Signer.gnoSignMsg(requestToSign!) {
+                        if let simulReq = Signer.genSimul(selectedChain, signMsgs, memo, txFee),
+                           let simulRes = try await gnoFetcher.simulateTx(simulReq) {
+                            
+                            DispatchQueue.main.async {
+                                if simulRes.responseBase.hasError {
+                                    self.onUpdateWithSimul(nil, simulRes.responseBase.error.typeURL)
+                                } else {
+                                    self.onUpdateWithSimul(simulRes.gasUsed, nil)
+                                }
                             }
                         }
                     }
@@ -113,7 +118,7 @@ class DappGnoSignRequestSheet: BaseVC {
         bodyCardView.isHidden = false
         
         guard let toGas = gasUsed else {
-            controlStakView.isHidden = true
+            controlStakView.isHidden = false
             confirmBtn.isEnabled = false
             errorCardView.isHidden = false
             errorMsgLabel.text = errorMessage
@@ -167,28 +172,33 @@ class DappGnoSignRequestSheet: BaseVC {
             do {
                 let gasFee = requestToSign?["gasFee"].int64Value ?? 0
                 let gasWanted = requestToSign?["gasWanted"].int64Value ?? 0
-                var memo = ""
-                if requestToSign?["memo"].type != .null {
-                    memo = requestToSign?["memo"].stringValue ?? ""
-                }
-                let messages = requestToSign?["messages"][0]
-                let value = messages?["value"]
-                let type = messages?["type"].stringValue
+                let memo = requestToSign?["memo"].stringValue ?? ""
                 
-                guard let valueJson = value else { return }
-                let valueData = try valueJson.rawData()
-                let msg = try JSONDecoder().decode(Signer.Msg.self, from: valueData)
-                var typeMsg = msg
-                typeMsg.type = type ?? ""
+                var msgs = [Signer.Msg]()
+                guard let messages = requestToSign?["messages"].array else { return }
+                
+                for message in messages {
+                    let value = message["value"]
+                    let type = message["type"].stringValue
+                    
+                    let valueData = try value.rawData()
+                    let msg = try JSONDecoder().decode(Signer.Msg.self, from: valueData)
+                    var typeMsg = msg
+                    typeMsg.type = type
+                    if !type.contains("MsgSend") {
+                        typeMsg.max_deposit = value["max_deposit"].stringValue
+                    }
+                    
+                    msgs.append(typeMsg)
+                }
                 
                 let fee = Tm2_Tx_TxFee.with {
                     $0.gasWanted = gasWanted
                     $0.gasFee = String(gasFee) + selectedChain.stakingAssetDenom()
                 }
                 
-                guard let sig = Signer.gnoSignature(selectedChain, [typeMsg], memo, .init(gas_wanted: String(fee.gasWanted), gas_fee: fee.gasFee)) else { return }
-                
-                if let signMsgs = try await Signer.gnoSignMsg(requestToSign!) {
+                if let sig = Signer.gnoSignature(selectedChain, msgs, memo, .init(gas_wanted: String(fee.gasWanted), gas_fee: fee.gasFee)),
+                   let signMsgs = try await Signer.gnoSignMsg(requestToSign!) {
                     let broadReq = Signer.genTx(selectedChain, signMsgs, memo, fee, sig)
                     let txByte = try broadReq.serializedData().base64EncodedString()
                     
