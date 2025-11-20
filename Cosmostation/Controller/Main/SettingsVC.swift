@@ -36,9 +36,15 @@ class SettingsVC: BaseVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        reloadRows(IndexPath(row: 0, section: 0))
-        reloadRows(IndexPath(row: 5, section: 0))
+        
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
+        
+        if let accountCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SettingBaseCell {
+            accountCell.onBindSetAccount()
+        }
+        if let addressBook = tableView.cellForRow(at: IndexPath(row: 4, section: 0)) as? SettingBaseCell {
+            addressBook.onBindSetAddressBook()
+        }
     }
     
     
