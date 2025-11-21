@@ -431,20 +431,7 @@ class CosmosCryptoVC: BaseVC, SelectTokensListDelegate {
     //For drop event
     func onSetDrop() {
         if (!BaseData.instance.showEvenReview()) { return }
-        if (selectedChain is ChainCosmos || selectedChain is ChainNeutron || selectedChain is ChainCelestia) {
-            dropBtn.animation = LottieAnimation.named("drop")
-            dropBtn.contentMode = .scaleAspectFit
-            dropBtn.loopMode = .loop
-            dropBtn.animationSpeed = 1.3
-            dropBtn.play()
-            dropBtn.isHidden = false
-            dropBtn.tag = SheetType.MoveDropDetail.rawValue
-    
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn))
-            tapGesture.cancelsTouchesInView = false
-            dropBtn.addGestureRecognizer(tapGesture)
-            
-        } else if (selectedChain is ChainDydx) {
+        if (selectedChain is ChainDydx) {
             dropBtn.animation = LottieAnimation.named("dydx")
             dropBtn.contentMode = .scaleAspectFit
             dropBtn.loopMode = .loop
@@ -866,6 +853,10 @@ extension CosmosCryptoVC: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar?.endEditing(true)
     }
 }
 
