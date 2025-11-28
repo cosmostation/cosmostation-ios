@@ -2279,6 +2279,8 @@
 		E14E29782A98DA5300939AD2 /* SelectChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14E29742A98DA5300939AD2 /* SelectChainCell.xib */; };
 		E14E297A2A99C2CA00939AD2 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29792A99C2CA00939AD2 /* BaseButton.swift */; };
 		E14E297B2A99C2CA00939AD2 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29792A99C2CA00939AD2 /* BaseButton.swift */; };
+		E15444072ED031F8000EEFE5 /* ChainPaxi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15444062ED031F8000EEFE5 /* ChainPaxi.swift */; };
+		E15444082ED031F8000EEFE5 /* ChainPaxi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15444062ED031F8000EEFE5 /* ChainPaxi.swift */; };
 		E15899622E7C10270049147F /* ChainMantraEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15899612E7C10270049147F /* ChainMantraEVM.swift */; };
 		E15899632E7C10270049147F /* ChainMantraEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15899612E7C10270049147F /* ChainMantraEVM.swift */; };
 		E159805A2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
@@ -3798,6 +3800,7 @@
 		E14E29732A98DA5300939AD2 /* SelectChainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChainCell.swift; sourceTree = "<group>"; };
 		E14E29742A98DA5300939AD2 /* SelectChainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChainCell.xib; sourceTree = "<group>"; };
 		E14E29792A99C2CA00939AD2 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
+		E15444062ED031F8000EEFE5 /* ChainPaxi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPaxi.swift; sourceTree = "<group>"; };
 		E15899612E7C10270049147F /* ChainMantraEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantraEVM.swift; sourceTree = "<group>"; };
 		E15980582A6F5EFE0032892B /* PortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCell.swift; sourceTree = "<group>"; };
 		E15980592A6F5EFE0032892B /* PortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioCell.xib; sourceTree = "<group>"; };
@@ -4158,6 +4161,7 @@
 				045032DD2C1EFE5400235F6A /* ChainOsmosis.swift */,
 				79B7F35C2D8175C300AA755B /* ChainPaloma.swift */,
 				045032D72C1EFE5400235F6A /* ChainPassage.swift */,
+				E15444062ED031F8000EEFE5 /* ChainPaxi.swift */,
 				045032DF2C1EFE5500235F6A /* ChainPersistence118.swift */,
 				045032DB2C1EFE5400235F6A /* ChainPersistence750.swift */,
 				158BE1882E79985A00A02B4A /* ChainPocket.swift */,
@@ -7240,6 +7244,7 @@
 				040733042AA442B6001C63DD /* ImportMnemonicCheckVC.swift in Sources */,
 				047843922AC991B300462F1C /* injective_oracle_v1beta1_query.pb.swift in Sources */,
 				E10B1DAC2C2156430039283B /* KavaSwapListVC.swift in Sources */,
+				E15444072ED031F8000EEFE5 /* ChainPaxi.swift in Sources */,
 				18FFB591281AF533004E65BB /* AppDelegate.swift in Sources */,
 				E1CD6B012AEAAEF200376909 /* AboutSocialsCell.swift in Sources */,
 				04C816D92BA98D75006B800A /* cosmos_gov_module_v1_module.pb.swift in Sources */,
@@ -7764,6 +7769,7 @@
 				042316C52C3CD8C100840A86 /* InjectionSheet.swift in Sources */,
 				04A420E72C74B7AA00C0E1A2 /* ChainBitCoin84.swift in Sources */,
 				799261812D77EE66007E9911 /* babylon_incentive_query.pb.swift in Sources */,
+				E15444082ED031F8000EEFE5 /* ChainPaxi.swift in Sources */,
 				042DE8462AC4CD01003F3EA4 /* QrScanVC.swift in Sources */,
 				04D7854E2C328DB1009D1A94 /* feemarket_feemarket_v1_genesis.pb.swift in Sources */,
 				047843F32AC9A1B500462F1C /* ChainArchway.swift in Sources */,

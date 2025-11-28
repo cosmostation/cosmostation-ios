@@ -17,7 +17,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountListVC" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="addAccountBtn" destination="c1J-Ix-4I1" id="e78-D1-PU3"/>
-                <outlet property="searchBar" destination="0Mb-ja-pgO" id="guF-18-pQC"/>
                 <outlet property="tableView" destination="kVK-RP-Gq6" id="bjq-nO-XMI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -27,17 +26,8 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="0Mb-ja-pgO">
-                    <rect key="frame" x="0.0" y="118" width="393" height="64"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="Cqx-Pf-o4K"/>
-                    </connections>
-                </searchBar>
                 <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kVK-RP-Gq6">
-                    <rect key="frame" x="0.0" y="182" width="393" height="532"/>
+                    <rect key="frame" x="0.0" y="118" width="393" height="596"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_primary"/>
                 </tableView>
@@ -63,14 +53,11 @@
             <color key="tintColor" name="_primary"/>
             <constraints>
                 <constraint firstItem="c1J-Ix-4I1" firstAttribute="top" secondItem="kVK-RP-Gq6" secondAttribute="bottom" constant="8" id="9sF-gN-NUq"/>
+                <constraint firstItem="kVK-RP-Gq6" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="G3N-SY-nse"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kVK-RP-Gq6" secondAttribute="trailing" id="Pds-4K-GO9"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="kVK-RP-Gq6" secondAttribute="leading" id="Zf3-SG-mXY"/>
-                <constraint firstItem="0Mb-ja-pgO" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="bQe-cx-fUW"/>
-                <constraint firstItem="0Mb-ja-pgO" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="dJZ-VK-qrn"/>
                 <constraint firstItem="c1J-Ix-4I1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="eLc-8d-qiH"/>
-                <constraint firstItem="0Mb-ja-pgO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="oRp-Gt-2A8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="c1J-Ix-4I1" secondAttribute="trailing" constant="8" id="sY5-rc-tIF"/>
-                <constraint firstItem="kVK-RP-Gq6" firstAttribute="top" secondItem="0Mb-ja-pgO" secondAttribute="bottom" id="sm1-wB-MU4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="c1J-Ix-4I1" secondAttribute="bottom" constant="8" id="wab-Nw-Ix7"/>
             </constraints>
             <point key="canvasLocation" x="104.58015267175573" y="20.422535211267608"/>
