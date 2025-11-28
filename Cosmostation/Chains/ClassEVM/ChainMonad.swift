@@ -21,6 +21,6 @@ class ChainMonad: BaseChain {
         
         supportEvm = true
         coinSymbol = "MON"
-        evmRpcURL = ""
+        evmRpcURL = "https://rpc.evm.monad.mainnet.cosmostation.io"
     }
 }
