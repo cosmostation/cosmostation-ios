@@ -1083,118 +1083,124 @@ extension Signer {
     }
     
     static func gnoSignMsg(_ requestSign: JSON) async throws -> [Google_Protobuf_Any]? {
-        let messages = requestSign["messages"][0]
-        let type = messages["type"].stringValue
+        var msgAnys = [Google_Protobuf_Any]()
+        let messages = requestSign["messages"].arrayValue
         
-        if type.contains("MsgSend") {
-            let msgSend = Gno_Bank_MsgSend.with {
-                $0.fromAddress = messages["value"]["from_address"].stringValue
-                $0.toAddress = messages["value"]["to_address"].stringValue
-                $0.amount = messages["value"]["amount"].stringValue
-            }
+        for message in messages {
+            let type = message["type"].stringValue
             
-            let anyMsg = Google_Protobuf_Any.with {
-                $0.typeURL = "/bank.MsgSend"
-                $0.value = try! msgSend.serializedData()
-            }
-            return [anyMsg]
-            
-        } else if type.contains("call") {
-            let args = messages["value"]["args"].arrayValue
-            let addArgs = args.map { $0.stringValue }
-            
-            let msgCall = Gno_Vm_MsgCall.with {
-                $0.send = messages["value"]["send"].stringValue
-                $0.caller = messages["value"]["caller"].stringValue
-                $0.maxDeposit = messages["value"]["max_deposit"].stringValue
-                $0.pkgPath = messages["value"]["pkg_path"].stringValue
-                $0.func = messages["value"]["func"].stringValue
-                $0.args = addArgs
-            }
-            
-            let anyMsg = Google_Protobuf_Any.with {
-                $0.typeURL = "/vm.m_call"
-                $0.value = try! msgCall.serializedData()
-            }
-            return [anyMsg]
-            
-        } else {
-            let messageValue = messages["value"]
-            let messagePackage = messageValue["package"]
-            let files = messagePackage["files"].arrayValue
-            
-            var memFiles = [Gno_Vm_MemFile]()
-            for file in files {
-                let fileMsg = Gno_Vm_MemFile.with {
-                    $0.name = file["name"].stringValue
-                    $0.body = file["body"].stringValue
-                }
-                memFiles.append(fileMsg)
-            }
-            
-            let anyType: Google_Protobuf_Any = {
-                let packageType = messagePackage["type"]
-                
-                guard packageType.type != .null else {
-                    return Google_Protobuf_Any()
-                }
-                
-                return Google_Protobuf_Any.with {
-                    $0.typeURL = packageType["type_url"].stringValue
-                    $0.value = Data(base64Encoded: packageType["value"].stringValue) ?? Data()
-                }
-            }()
-            
-            let anyInfo: Google_Protobuf_Any = {
-                let packageInfo = messagePackage["info"]
-                
-                guard packageInfo.type != .null else {
-                    return Google_Protobuf_Any()
-                }
-                
-                return Google_Protobuf_Any.with {
-                    $0.typeURL = packageInfo["type_url"].stringValue
-                    $0.value = Data(base64Encoded: packageInfo["value"].stringValue) ?? Data()
-                }
-            }()
-            
-            let memPackage = Gno_Vm_MemPackage.with {
-                $0.name = messagePackage["name"].stringValue
-                $0.path = messagePackage["path"].stringValue
-                $0.files = memFiles
-                $0.type = anyType
-                $0.info = anyInfo
-            }
-            
-            if type.contains("addpkg") {
-                let addPackageMsg = Gno_Vm_MsgAddPackage.with {
-                    $0.creator = messageValue["creator"].stringValue
-                    $0.package = memPackage
-                    $0.send = messageValue["send"].stringValue
-                    $0.maxDeposit = messageValue["max_deposit"].stringValue
+            if type.contains("MsgSend") {
+                let msgSend = Gno_Bank_MsgSend.with {
+                    $0.fromAddress = message["value"]["from_address"].stringValue
+                    $0.toAddress = message["value"]["to_address"].stringValue
+                    $0.amount = message["value"]["amount"].stringValue
                 }
                 
                 let anyMsg = Google_Protobuf_Any.with {
-                    $0.typeURL = "/vm.m_addpkg"
-                    $0.value = try! addPackageMsg.serializedData()
+                    $0.typeURL = "/bank.MsgSend"
+                    $0.value = try! msgSend.serializedData()
                 }
-                return [anyMsg]
+                msgAnys.append(anyMsg)
+                
+            } else if type.contains("call") {
+                let args = message["value"]["args"].arrayValue
+                let addArgs = args.map { $0.stringValue }
+                
+                let msgCall = Gno_Vm_MsgCall.with {
+                    $0.send = message["value"]["send"].stringValue
+                    $0.caller = message["value"]["caller"].stringValue
+                    $0.maxDeposit = message["value"]["max_deposit"].stringValue
+                    $0.pkgPath = message["value"]["pkg_path"].stringValue
+                    $0.func = message["value"]["func"].stringValue
+                    $0.args = addArgs
+                }
+                
+                let anyMsg = Google_Protobuf_Any.with {
+                    $0.typeURL = "/vm.m_call"
+                    $0.value = try! msgCall.serializedData()
+                }
+                msgAnys.append(anyMsg)
                 
             } else {
-                let runMsg = Gno_Vm_MsgRun.with {
-                    $0.caller = messageValue["caller"].stringValue
-                    $0.send = messageValue["send"].stringValue
-                    $0.package = memPackage
-                    $0.maxDeposit = messageValue["max_deposit"].stringValue
+                let messageValue = message["value"]
+                let messagePackage = messageValue["package"]
+                let files = messagePackage["files"].arrayValue
+                
+                var memFiles = [Gno_Vm_MemFile]()
+                for file in files {
+                    let fileMsg = Gno_Vm_MemFile.with {
+                        $0.name = file["name"].stringValue
+                        $0.body = file["body"].stringValue
+                    }
+                    memFiles.append(fileMsg)
                 }
                 
-                let anyMsg = Google_Protobuf_Any.with {
-                    $0.typeURL = "/vm.m_run"
-                    $0.value = try! runMsg.serializedData()
+                let anyType: Google_Protobuf_Any = {
+                    let packageType = messagePackage["type"]
+                    
+                    guard packageType.type != .null else {
+                        return Google_Protobuf_Any()
+                    }
+                    
+                    return Google_Protobuf_Any.with {
+                        $0.typeURL = packageType["type_url"].stringValue
+                        $0.value = Data(base64Encoded: packageType["value"].stringValue) ?? Data()
+                    }
+                }()
+                
+                let anyInfo: Google_Protobuf_Any = {
+                    let packageInfo = messagePackage["info"]
+                    
+                    guard packageInfo.type != .null else {
+                        return Google_Protobuf_Any()
+                    }
+                    
+                    return Google_Protobuf_Any.with {
+                        $0.typeURL = packageInfo["type_url"].stringValue
+                        $0.value = Data(base64Encoded: packageInfo["value"].stringValue) ?? Data()
+                    }
+                }()
+                
+                let memPackage = Gno_Vm_MemPackage.with {
+                    $0.name = messagePackage["name"].stringValue
+                    $0.path = messagePackage["path"].stringValue
+                    $0.files = memFiles
+                    $0.type = anyType
+                    $0.info = anyInfo
                 }
-                return [anyMsg]
+                
+                if type.contains("addpkg") {
+                    let addPackageMsg = Gno_Vm_MsgAddPackage.with {
+                        $0.creator = messageValue["creator"].stringValue
+                        $0.package = memPackage
+                        $0.send = messageValue["send"].stringValue
+                        $0.maxDeposit = messageValue["max_deposit"].stringValue
+                    }
+                    
+                    let anyMsg = Google_Protobuf_Any.with {
+                        $0.typeURL = "/vm.m_addpkg"
+                        $0.value = try! addPackageMsg.serializedData()
+                    }
+                    msgAnys.append(anyMsg)
+                    
+                } else {
+                    let runMsg = Gno_Vm_MsgRun.with {
+                        $0.caller = messageValue["caller"].stringValue
+                        $0.send = messageValue["send"].stringValue
+                        $0.package = memPackage
+                        $0.maxDeposit = messageValue["max_deposit"].stringValue
+                    }
+                    
+                    let anyMsg = Google_Protobuf_Any.with {
+                        $0.typeURL = "/vm.m_run"
+                        $0.value = try! runMsg.serializedData()
+                    }
+                    msgAnys.append(anyMsg)
+                }
             }
         }
+        
+        return msgAnys
     }
 }
 

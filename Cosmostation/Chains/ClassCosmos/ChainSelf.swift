@@ -20,11 +20,11 @@ class ChainSelf: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uslf"
         bechAccountPrefix = "self"
         validatorPrefix = "selfvaloper"
-        grpcHost = "grpc-selfchain.cosmostation.io"
-        lcdUrl = "https://lcd-selfchain.cosmostation.io/"
+        grpcHost = "selfchain-mainnet.grpc.stakevillage.net"
+        lcdUrl = "https://api.selfchain.io/"
     }
 }
