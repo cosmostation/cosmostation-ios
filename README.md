@@ -126,7 +126,7 @@ You can download each store.
 	 	
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/archway/resource/chain_archway.png?raw=true" width="42" height = "42"></td>
-    <td><span style="font-weight:bold">ARCHYWAY</span></td>
+    <td><span style="font-weight:bold">ARCHWAY</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
@@ -830,6 +830,15 @@ You can download each store.
     <td>gRPC or Rest</td>
     <td></td>
   </tr>
+  
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/paxi/resource/chain_paxi.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">PAXI</span></td>
+    <td>m/44'/118'/0'/0/X</td>
+    <td>secp256k1</td>
+    <td>gRPC or Rest</td>
+    <td></td>
+  </tr>
 
   <tr>
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/persistence/resource/chain_persistence.png?raw=true" width="42" height = "42"></td>
@@ -1375,6 +1384,15 @@ You can download each store.
     <td>evmRPC</td>
     <td></td>
   </tr>
+  
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/monad/resource/chain_monad.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">MONAD</span></td>
+    <td>m/44'/60'/0'/0/X</td>
+    <td>keccak256</td>
+    <td>evmRPC</td>
+    <td></td>
+  </tr>
 
   <tr> 
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/optimism/resource/chain_optimism.png?raw=true" width="42" height = "42"></td>
@@ -1388,6 +1406,15 @@ You can download each store.
   <tr> 
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/polygon/resource/chain_polygon.png?raw=true" width="42" height = "42"></td>
     <td><span style="font-weight:bold">POLYGON</span></td>
+    <td>m/44'/60'/0'/0/X</td>
+    <td>keccak256</td>
+    <td>evmRPC</td>
+    <td></td>
+  </tr>
+  
+  <tr> 
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/scroll/resource/chain_scroll.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">SCROLL</span></td>
     <td>m/44'/60'/0'/0/X</td>
     <td>keccak256</td>
     <td>evmRPC</td>
@@ -1451,6 +1478,15 @@ You can download each store.
   <tr> 
     <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/xrplevm/resource/chain_xrplevm.png?raw=true" width="42" height = "42"></td>
     <td><span style="font-weight:bold">XRPL EVM</span></td>
+    <td>m/44'/60'/0'/0/X</td>
+    <td>keccak256</td>
+    <td>evmRPC</td>
+    <td></td>
+  </tr>
+  
+  <tr>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/zksync/resource/chain_zksync.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">ZKSYNC</span></td>
     <td>m/44'/60'/0'/0/X</td>
     <td>keccak256</td>
     <td>evmRPC</td>
