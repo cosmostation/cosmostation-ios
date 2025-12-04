@@ -64,6 +64,7 @@ class BaseChain {
     //FOR BTC or SUI or majorChains
     var mainAddress = ""
     var mainUrl = ""
+    var apiUrl = ""
     
     
     var allCoinValue = NSDecimalNumber.zero
@@ -747,6 +748,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAltheaEVM())                     //EVM
     result.append(ChainAlthea118())
     result.append(ChainAndromeda())
+    result.append(ChainAptos())
     result.append(ChainArbitrum())                      //EVM
     result.append(ChainArchway())
     result.append(ChainArkeo())                      

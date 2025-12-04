@@ -178,6 +178,12 @@ class MajorClassVC: BaseVC {
             tabbar.items.append(receiveTabBar)
             if (BaseData.instance.showEvenReview() && selectedChain.isSupportMobileDapp()) { tabbar.items.append(ecosystemTabBar) }
             tabbar.items.append(aboutTabBar)
+            
+        } else if (selectedChain is ChainAptos) {
+            tabbar.items.append(receiveTabBar)
+            tabbar.items.append(historyTabBar)
+            if (BaseData.instance.showEvenReview() && selectedChain.isSupportMobileDapp()) { tabbar.items.append(ecosystemTabBar) }
+            tabbar.items.append(aboutTabBar)
         }
         
         tabbar.barTintColor = .clear

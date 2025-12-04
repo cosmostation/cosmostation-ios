@@ -1675,6 +1675,9 @@
 		155D96882E98F4290047BC1B /* ChainIntento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D96872E98F4290047BC1B /* ChainIntento.swift */; };
 		1580CD622EC48010008D02FD /* DappGnoSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1580CD602EC48010008D02FD /* DappGnoSignRequestSheet.swift */; };
 		1580CD632EC48010008D02FD /* DappGnoSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1580CD612EC48010008D02FD /* DappGnoSignRequestSheet.xib */; };
+		1580CD6A2EDF02F4008D02FD /* AptosKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1580CD692EDF02F4008D02FD /* AptosKit */; };
+		1580CD6C2EDF03B4008D02FD /* ChainAptos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1580CD6B2EDF03B4008D02FD /* ChainAptos.swift */; };
+		1580CD6E2EDFD1FD008D02FD /* AptosFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1580CD6D2EDFD1FD008D02FD /* AptosFetcher.swift */; };
 		158BE1892E79985A00A02B4A /* ChainPocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158BE1882E79985A00A02B4A /* ChainPocket.swift */; };
 		158BE18F2E828D6900A02B4A /* ChainTerraClassic_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158BE18E2E828D6900A02B4A /* ChainTerraClassic_T.swift */; };
 		15ABBA6A2E838C72008560B7 /* ChainSunrise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ABBA692E838C72008560B7 /* ChainSunrise.swift */; };
@@ -3380,6 +3383,8 @@
 		155D96872E98F4290047BC1B /* ChainIntento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainIntento.swift; sourceTree = "<group>"; };
 		1580CD602EC48010008D02FD /* DappGnoSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappGnoSignRequestSheet.swift; sourceTree = "<group>"; };
 		1580CD612EC48010008D02FD /* DappGnoSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappGnoSignRequestSheet.xib; sourceTree = "<group>"; };
+		1580CD6B2EDF03B4008D02FD /* ChainAptos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAptos.swift; sourceTree = "<group>"; };
+		1580CD6D2EDFD1FD008D02FD /* AptosFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AptosFetcher.swift; sourceTree = "<group>"; };
 		158BE1882E79985A00A02B4A /* ChainPocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPocket.swift; sourceTree = "<group>"; };
 		158BE18E2E828D6900A02B4A /* ChainTerraClassic_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainTerraClassic_T.swift; sourceTree = "<group>"; };
 		15ABBA692E838C72008560B7 /* ChainSunrise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSunrise.swift; sourceTree = "<group>"; };
@@ -3983,6 +3988,7 @@
 				04BA9BCD2A976EA2003E2404 /* SkeletonView in Frameworks */,
 				04D279C62A64E73C00AF046A /* KeychainAccess in Frameworks */,
 				042DE6D92C19A0FA009CAC04 /* WalletConnectPairing in Frameworks */,
+				1580CD6A2EDF02F4008D02FD /* AptosKit in Frameworks */,
 				E122DA262A8A19D2006D1E7B /* Blake2 in Frameworks */,
 				042DE6D22C19A044009CAC04 /* Starscream in Frameworks */,
 				04D547ED2A612914001F1A4B /* FirebaseMessaging in Frameworks */,
@@ -4008,6 +4014,7 @@
 		040AC0522C7C1B1300427AFD /* ChainMajor */ = {
 			isa = PBXGroup;
 			children = (
+				1580CD6B2EDF03B4008D02FD /* ChainAptos.swift */,
 				04A420E32C74B78D00C0E1A2 /* ChainBitCoin44.swift */,
 				04A420EF2C74CB8300C0E1A2 /* ChainBitCoin49.swift */,
 				04A420E62C74B7AA00C0E1A2 /* ChainBitCoin84.swift */,
@@ -4237,6 +4244,7 @@
 		045032212C1EE83600235F6A /* Fetcher */ = {
 			isa = PBXGroup;
 			children = (
+				1580CD6D2EDFD1FD008D02FD /* AptosFetcher.swift */,
 				042DE6F72C1D4DFC009CAC04 /* EvmFetcher.swift */,
 				045CF9632C450D72000DAD08 /* CosmosFetcher.swift */,
 				E18B21F82C4A19FE00AD572F /* NeutronFetcher.swift */,
@@ -6014,6 +6022,7 @@
 				042DE6D82C19A0FA009CAC04 /* WalletConnectPairing */,
 				792D2B042C57767E0085007A /* SDWebImage */,
 				792D2B092C57769C0085007A /* SDWebImageSVGCoder */,
+				1580CD692EDF02F4008D02FD /* AptosKit */,
 			);
 			productName = Cosmostation;
 			productReference = E1945E24222E7C0600A1436F /* Cosmostation.app */;
@@ -6094,6 +6103,7 @@
 				042DE6D52C19A0FA009CAC04 /* XCRemoteSwiftPackageReference "WalletConnectSwiftV2" */,
 				792D2B032C57767E0085007A /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				792D2B082C57769C0085007A /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */,
+				1580CD682EDF02F4008D02FD /* XCRemoteSwiftPackageReference "swift-aptos" */,
 			);
 			productRefGroup = E1945E25222E7C0600A1436F /* Products */;
 			projectDirPath = "";
@@ -8037,6 +8047,7 @@
 				E1044EAD2BD798BC00DA05C2 /* NftTransfer.swift in Sources */,
 				04C816562BA98D74006B800A /* cosmos_feegrant_v1beta1_tx.grpc.swift in Sources */,
 				046EA88B2AD04A2500A2FCE7 /* desmos_profiles_v3_models_params.pb.swift in Sources */,
+				1580CD6E2EDFD1FD008D02FD /* AptosFetcher.swift in Sources */,
 				04527DBF2A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */,
 				047843772AC991B300462F1C /* injective_ocr_v1beta1_tx.pb.swift in Sources */,
 				79813A6F2D530F890083A1F5 /* zrchain_validation_query.pb.swift in Sources */,
@@ -8220,6 +8231,7 @@
 				799261802D77EE66007E9911 /* babylon_incentive_query.grpc.swift in Sources */,
 				0438A8082AE135B1006FA213 /* kava_cdp_v1beta1_query.pb.swift in Sources */,
 				E1DBD3EA2B6220EE0058E0DC /* EvmHistoryVC.swift in Sources */,
+				1580CD6C2EDF03B4008D02FD /* ChainAptos.swift in Sources */,
 				792613A42CD4B82800FAF47D /* initia_move_v1_auth.pb.swift in Sources */,
 				04C816742BA98D74006B800A /* cosmos_protocolpool_module_v1_module.pb.swift in Sources */,
 				04D7854C2C328DB1009D1A94 /* feemarket_feemarket_v1_query.pb.swift in Sources */,
@@ -9222,6 +9234,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		1580CD682EDF02F4008D02FD /* XCRemoteSwiftPackageReference "swift-aptos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mcxross/swift-aptos.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		792D2B032C57767E0085007A /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
@@ -9386,6 +9406,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04FA745A2A9DEE51001A2830 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		1580CD692EDF02F4008D02FD /* AptosKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1580CD682EDF02F4008D02FD /* XCRemoteSwiftPackageReference "swift-aptos" */;
+			productName = AptosKit;
 		};
 		1876EE872A49352400C53352 /* GRPC */ = {
 			isa = XCSwiftPackageProductDependency;

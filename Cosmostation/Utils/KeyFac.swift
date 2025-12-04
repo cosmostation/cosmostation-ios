@@ -28,7 +28,7 @@ class KeyFac {
                    pubKeyType == .BTC_Native_Segwit || pubKeyType == .BTC_Taproot) {
             return getSecp256k1PriKey(seed, path)
             
-        } else if (pubKeyType == .SUI_Ed25519 || pubKeyType == .IOTA_Ed25519 || pubKeyType == .SOLANA_Ed25519) {
+        } else if (pubKeyType == .SUI_Ed25519 || pubKeyType == .IOTA_Ed25519 || pubKeyType == .SOLANA_Ed25519 || pubKeyType == .APTOS_ED25519) {
             return getEd25519PriKey(seed, path)
             
         }
@@ -83,7 +83,7 @@ class KeyFac {
                    pubKeyType == .BTC_Native_Segwit || pubKeyType == .BTC_Taproot) {
             return getSecp256k1PubKey(priKey)
             
-        } else if (pubKeyType == .SUI_Ed25519 || pubKeyType == .IOTA_Ed25519 || pubKeyType == .SOLANA_Ed25519) {
+        } else if (pubKeyType == .SUI_Ed25519 || pubKeyType == .IOTA_Ed25519 || pubKeyType == .SOLANA_Ed25519 || pubKeyType == .APTOS_ED25519) {
             return getEd25519PubKey(priKey)
         }
         return nil
@@ -120,6 +120,11 @@ class KeyFac {
             
         } else if (pubKeyType == .SOLANA_Ed25519) {
             return base58Encode(pubKey)
+            
+        } else if (pubKeyType == .APTOS_ED25519) {
+            let data = Data(pubKey + [UInt8](Data(count: 1)))
+            let hash = Data(CryptoSwift.SHA3(variant: .sha256).calculate(for: data.bytes))
+            return "0x" + hash.toHexString()
         }
         return ""
     }
