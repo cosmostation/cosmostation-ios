@@ -355,6 +355,9 @@ class BaseChain {
         } else if let iotaFetcher = (self as? ChainIota)?.getIotaFetcher() {
             return iotaFetcher.hasFee(txType)
             
+        } else if let aptosFetcher = (self as? ChainAptos)?.getAptosFetcher() {
+            return aptosFetcher.hasFee()
+            
         } else if let gnoFetcher = (self as? ChainGno)?.getGnoFetcher() {
             var result = false
             getDefaultFeeCoins().forEach { minFee in
@@ -1011,6 +1014,7 @@ public enum TxStyle: Int {
     case IOTA_STYLE = 5
     case SOLANA_STYLE = 6
     case SPL_STYLE = 7
+    case MOVE_STYLE = 8
 }
 
 public enum TxType: Int {

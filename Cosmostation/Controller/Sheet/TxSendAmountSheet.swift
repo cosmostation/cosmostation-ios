@@ -66,7 +66,7 @@ class TxSendAmountSheet: BaseVC, UITextFieldDelegate {
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)
             
-        } else if (sendAssetType == .BTC_COIN || sendAssetType == .SUI_COIN || sendAssetType == .IOTA_COIN || sendAssetType == .SOLANA_COIN) {
+        } else if (sendAssetType == .BTC_COIN || sendAssetType == .SUI_COIN || sendAssetType == .IOTA_COIN || sendAssetType == .SOLANA_COIN || sendAssetType == .APTOS_COIN) {
             availableDenom.text = fromChain.assetSymbol(toSendDenom)
             let dpAmount = availableAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
             availableLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, availableLabel!.font, decimal)

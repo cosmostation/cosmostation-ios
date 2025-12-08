@@ -188,6 +188,18 @@ public class WDP {
         return localFormatter.string(from: Date(milliseconds: milliseconds))
     }
     
+    static func dpDate(_ microseconds: Int64) -> String {
+        let seconds = microseconds / 1_000_000
+        let micros  = microseconds % 1_000_000
+        
+        let date = Date(timeIntervalSince1970: TimeInterval(seconds) + TimeInterval(micros) / 1_000_000)
+        
+        let localFormatter = DateFormatter()
+        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
+        
+        return localFormatter.string(from: date)
+    }
+    
     static func dpTime(_ timeString: String?) -> String {
         if (timeString == nil) { return "-" }
         guard let date = WUtils.timeStringToDate(timeString!) else {
@@ -202,6 +214,18 @@ public class WDP {
         let localFormatter = DateFormatter()
         localFormatter.dateFormat = NSLocalizedString("HH:mm:ss", comment: "")
         return localFormatter.string(from: Date(milliseconds: milliseconds))
+    }
+    
+    static func dpTime(_ microseconds: Int64) -> String {
+        let seconds = microseconds / 1_000_000
+        let micros  = microseconds % 1_000_000
+        
+        let date = Date(timeIntervalSince1970: TimeInterval(seconds) + TimeInterval(micros) / 1_000_000)
+        
+        let localFormatter = DateFormatter()
+        localFormatter.dateFormat = NSLocalizedString("HH:mm:ss", comment: "")
+        
+        return localFormatter.string(from: date)
     }
     
     static func dpFullTime(_ timeString: String?) -> String {

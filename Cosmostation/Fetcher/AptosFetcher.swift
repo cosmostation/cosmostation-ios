@@ -8,12 +8,15 @@
 
 import Foundation
 import AptosKit
+import Alamofire
+import SwiftyJSON
 
 class AptosFetcher {
     
     var chain: BaseChain!
     
     var aptosAssetBalance = [current_fungible_asset_balances]()
+    var moveHistory = [JSON]()
     
     init(_ chain: BaseChain) {
         self.chain = chain
@@ -41,6 +44,15 @@ class AptosFetcher {
         } catch {
             print("aptos error \(error) ", chain.tag)
             return false
+        }
+    }
+    
+    func fetchMoveHistory() async {
+        moveHistory.removeAll()
+        
+        if let history = try? await fetchTxHistory() {
+            let reversed = Array((history ?? []).reversed())
+            moveHistory = reversed
         }
     }
     
@@ -105,6 +117,11 @@ class AptosFetcher {
         return aptosAssetBalance.count
     }
     
+    func hasFee() -> Swift.Bool {
+        let aptosBalance = balanceAmount(APTOS_MAIN_DENOM)
+        return aptosBalance.compare(APTOS_DEFAULT_FEE).rawValue > 0
+    }
+    
     func getApi() -> String {
         if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_LCD_ENDPOINT +  " : " + chain.name) {
             return endpoint.trimmingCharacters(in: .whitespaces)
@@ -134,5 +151,10 @@ extension AptosFetcher {
         } else {
             return nil
         }
+    }
+    
+    func fetchTxHistory() async throws -> [JSON]? {
+        var url = getApi() + "accounts/" + chain.mainAddress + "/transactions?limit=50"
+        return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
     }
 }

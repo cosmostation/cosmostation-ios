@@ -89,6 +89,56 @@ class HistoryCell: UITableViewCell {
         }
     }
     
+    func bindMoveHistory(_ chain: ChainAptos, _ history: JSON) {
+        if (history["success"].boolValue) {
+            successImg.image = UIImage(named: "iconSuccess")
+        } else {
+            successImg.image = UIImage(named: "iconFail")
+        }
+        
+        let payload = history["payload"]
+        let function = payload["function"].stringValue
+        let typeArguments = payload["type_arguments"].arrayValue
+        let arguments = payload["arguments"].arrayValue
+        
+        if function.lowercased().contains("transfer") {
+            msgsTitleLabel.text = NSLocalizedString("tx_send", comment: "")
+            if arguments.count >= 2 {
+                var assetType = ""
+                if !typeArguments.isEmpty {
+                    assetType = typeArguments[0].stringValue
+                } else {
+                    assetType = APTOS_MAIN_DENOM
+                }
+                
+                if let msAsset = BaseData.instance.getAsset(chain.apiName, assetType) {
+                    amountLabel.isHidden = false
+                    denomLabel.isHidden = false
+                    WDP.dpCoin(msAsset, NSDecimalNumber(string: arguments[1].stringValue), nil, denomLabel, amountLabel, msAsset.decimals)
+                    
+                } else {
+                    amountLabel.isHidden = true
+                    denomLabel.isHidden = false
+                    denomLabel.text = "-"
+                }
+                
+            } else {
+                amountLabel.isHidden = true
+                denomLabel.isHidden = false
+                denomLabel.text = "-"
+            }
+            
+        } else if function.lowercased().contains("swap") {
+            msgsTitleLabel.text = NSLocalizedString("title_swap_token", comment: "")
+            
+        } else {
+            msgsTitleLabel.text = function.components(separatedBy: "::").last?.trimmingCharacters(in: .whitespaces)
+        }
+        
+        hashLabel.text = history["hash"].stringValue
+        timeLabel.text = WDP.dpTime(Int64(history["timestamp"].stringValue)!)
+        blockLabel.text = "(" +  history["version"].stringValue + ")"
+    }
     
     func bindSuiHistory(_ suiChain: ChainSui, _ history: JSON) {
         // status check

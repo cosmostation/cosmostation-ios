@@ -82,6 +82,16 @@ class ChainAptos: BaseChain  {
         }
     }
     
+    func fetchMoveHistory() {
+        Task {
+            await getAptosFetcher()?.fetchMoveHistory()
+            
+            DispatchQueue.main.async(execute: {
+                NotificationCenter.default.post(name: Notification.Name("fetchHistory"), object: self.tag, userInfo: nil)
+            })
+        }
+    }
+    
     func isValidFullnodeURL(_ fullnode: String) -> Bool {
         guard let url = URL(string: fullnode), let scheme = url.scheme, (scheme == "http" || scheme == "https") else { return false }
         let trimmed = fullnode.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).trimmingCharacters(in: CharacterSet(charactersIn: "/"))

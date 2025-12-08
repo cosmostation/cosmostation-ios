@@ -69,6 +69,8 @@ class MajorHistoryVC: BaseVC {
         } else if let btcChain = selectedChain as? ChainBitCoin86 {
             btcChain.fetchHistory()
             
+        } else if let aptosChain = selectedChain as? ChainAptos {
+            aptosChain.fetchMoveHistory()
         }
     }
     
@@ -83,9 +85,9 @@ class MajorHistoryVC: BaseVC {
     
     func onUpdateView() {
         refresher.endRefreshing()
+        historyGroup.removeAll()
         
         if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
-            historyGroup.removeAll()
             suiFetcher.suiHistory.forEach { history in
                 let date = WDP.dpDate(history["timestampMs"].intValue)
                 var matched = -1
@@ -103,17 +105,7 @@ class MajorHistoryVC: BaseVC {
                 }
             }
             
-            loadingView.isHidden = true
-            view.isUserInteractionEnabled = true
-            if (historyGroup.count <= 0) {
-                emptyDataView.isHidden = false
-            } else {
-                emptyDataView.isHidden = true
-                tableView.reloadData()
-            }
-            
         } else if let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() {
-            historyGroup.removeAll()
             iotaFetcher.iotaHistory.forEach { history in
                 let date = WDP.dpDate(history["timestampMs"].intValue)
                 var matched = -1
@@ -131,18 +123,7 @@ class MajorHistoryVC: BaseVC {
                 }
             }
             
-            loadingView.isHidden = true
-            view.isUserInteractionEnabled = true
-            if (historyGroup.count <= 0) {
-                emptyDataView.isHidden = false
-            } else {
-                emptyDataView.isHidden = true
-                tableView.reloadData()
-            }
-            
         } else if let btcFetcher = (selectedChain as? ChainBitCoin86)?.getBtcFetcher() {
-            historyGroup.removeAll()
-            
             btcFetcher.btcHistory.forEach { history in
                 let date = history["status"]["confirmed"] == false ? "Pending" : WDP.dpDate(history["status"]["block_time"].intValue * 1000)
                 var matched = -1
@@ -160,35 +141,45 @@ class MajorHistoryVC: BaseVC {
                 }
             }
             
-            loadingView.isHidden = true
-            view.isUserInteractionEnabled = true
-            if (historyGroup.count <= 0) {
-                emptyDataView.isHidden = false
-            } else {
-                emptyDataView.isHidden = true
-                tableView.reloadData()
+        } else if let aptosFetcher = (selectedChain as? ChainAptos)?.getAptosFetcher() {
+            aptosFetcher.moveHistory.forEach { history in
+                let date = WDP.dpDate(Int64(history["timestamp"].stringValue)!)
+                var matched = -1
+                for i in 0 ..< historyGroup.count {
+                    if (historyGroup[i].date == date) {
+                        matched = i
+                    }
+                }
+                if (matched >= 0) {
+                    var updated = historyGroup[matched].values
+                    updated.append(history)
+                    historyGroup[matched].values = updated
+                } else {
+                    historyGroup.append(HistoryGroup.init(date, [history]))
+                }
             }
+        }
+        
+        loadingView.isHidden = true
+        view.isUserInteractionEnabled = true
+        if (historyGroup.count <= 0) {
+            emptyDataView.isHidden = false
+        } else {
+            emptyDataView.isHidden = true
+            tableView.reloadData()
         }
     }
 }
 
-
-//else if let btcChain = selectedChain as? ChainBitCoin86 {
-
 extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if selectedChain is ChainSui || selectedChain is ChainIota {
-            return historyGroup.count
-        } else if selectedChain is ChainBitCoin86 {
-            return historyGroup.count
-        }
-        return 0
+        return historyGroup.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if selectedChain is ChainSui || selectedChain is ChainIota {
+        if selectedChain is ChainSui || selectedChain is ChainIota || selectedChain is ChainAptos {
             let today = WDP.dpDate(Int(Date().timeIntervalSince1970) * 1000)
             if (historyGroup[section].date == today) {
                 view.titleLabel.text = "Today"
@@ -221,12 +212,7 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if selectedChain is ChainSui || selectedChain is ChainIota {
-            return historyGroup[section].values.count
-        } else if selectedChain is ChainBitCoin86 {
-            return historyGroup[section].values.count
-        }
-        return 0
+        return historyGroup[section].values.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -239,26 +225,22 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
 
         } else if let btcChain = selectedChain as? ChainBitCoin86 {
             cell.bindBtcHistory(btcChain, historyGroup[indexPath.section].values[indexPath.row])
+            
+        } else if let aptosChain = selectedChain as? ChainAptos {
+            cell.bindMoveHistory(aptosChain, historyGroup[indexPath.section].values[indexPath.row])
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let suiChain = selectedChain as? ChainSui {
-            let hash = historyGroup[indexPath.section].values[indexPath.row]["digest"].stringValue
-            guard let url = selectedChain.getExplorerTx(hash) else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if selectedChain is ChainIota {
-            let hash = historyGroup[indexPath.section].values[indexPath.row]["digest"].stringValue
-            guard let url = selectedChain.getExplorerTx(hash) else { return }
-            self.onShowSafariWeb(url)
-
-        } else if let btcChain = selectedChain as? ChainBitCoin86 {
-            let hash = historyGroup[indexPath.section].values[indexPath.row]["txid"].stringValue
-            guard let url = selectedChain.getExplorerTx(hash) else { return }
-            self.onShowSafariWeb(url)
+        var hash = ""
+        if selectedChain is ChainSui || selectedChain is ChainIota {
+            hash = historyGroup[indexPath.section].values[indexPath.row]["digest"].stringValue
+        } else {
+            hash = historyGroup[indexPath.section].values[indexPath.row]["txid"].stringValue
         }
+        guard let url = selectedChain.getExplorerTx(hash) else { return }
+        self.onShowSafariWeb(url)
     }
    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -275,7 +257,6 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
 
 struct HistoryGroup {
     var date : String!

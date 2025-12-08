@@ -116,6 +116,9 @@ class CommonTransfer: BaseVC {
     var solanaFeeAmount = NSDecimalNumber.zero
     var solanaMinimumRentAmount = NSDecimalNumber.zero
     var solanaTxHex = ""
+    
+    var aptosFetcher: AptosFetcher!
+    var moveFeeAmount = NSDecimalNumber.zero
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,6 +168,10 @@ class CommonTransfer: BaseVC {
             } else if (sendAssetType == .SOLANA_SPL) {
                 solanaFetcher = (fromChain as? ChainSolana)?.getSolanaFetcher()
                 txStyle = .SPL_STYLE
+                
+            } else if (sendAssetType == .APTOS_COIN) {
+                aptosFetcher = (fromChain as? ChainAptos)?.getAptosFetcher()
+                txStyle = .MOVE_STYLE
                 
             } else {
                 txStyle = .COSMOS_STYLE
@@ -280,6 +287,15 @@ class CommonTransfer: BaseVC {
             
             solanaFeeAmount = SOLANA_DEFAULT_FEE
 
+        } else if txStyle == .MOVE_STYLE {
+            feeSegments.removeAllSegments()
+            feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
+            selectedFeePosition = 0
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            feeSelectLabel.text = fromChain.mainAssetSymbol()
+            
+            moveFeeAmount = APTOS_DEFAULT_FEE
+
         } else if (txStyle == .COSMOS_STYLE) {
             if (cosmosFetcher.cosmosBaseFees.count > 0) {
                 feeSegments.removeAllSegments()
@@ -376,6 +392,16 @@ class CommonTransfer: BaseVC {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = fromChain.assetDecimal(toSendDenom)
             symbol = fromChain.assetSymbol(toSendDenom)
+            
+        } else if sendAssetType == .APTOS_COIN {
+            titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
+            decimal = fromChain.assetDecimal(toSendDenom)
+            symbol = fromChain.assetSymbol(toSendDenom)
+            
+            sendableAmount = aptosFetcher.balanceAmount(toSendDenom)
+            if (fromChain.stakingAssetDenom() == toSendDenom) {
+                sendableAmount = sendableAmount.subtracting(moveFeeAmount)
+            }
         }
         
         if txStyle != .COSMOS_STYLE {
@@ -518,7 +544,7 @@ class CommonTransfer: BaseVC {
                 toAssetDenomLabel.text = fromChain.assetSymbol(toSendDenom)
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                                 
-            } else if (sendAssetType == .SUI_COIN || sendAssetType == .IOTA_COIN) {
+            } else if (sendAssetType == .SUI_COIN || sendAssetType == .IOTA_COIN || sendAssetType == .APTOS_COIN) {
                 let msPrice = BaseData.instance.getPrice(fromChain.assetGeckoId(toSendDenom))
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
@@ -667,6 +693,14 @@ class CommonTransfer: BaseVC {
             let feeAmount = solanaFeeAmount.multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
             let feeValue = feePrice.multiplying(by: feeAmount, withBehavior: handler6)
             WDP.dpCoin(msAsset, solanaFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            
+        } else if txStyle == .MOVE_STYLE {
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.gasAssetDenom()) else { return }
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let feeAmount = moveFeeAmount.multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+            let feeValue = feePrice.multiplying(by: feeAmount, withBehavior: handler6)
+            WDP.dpCoin(msAsset, moveFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
         } else if (txStyle == .GNO_STYLE) {
@@ -875,6 +909,9 @@ class CommonTransfer: BaseVC {
             
         } else if (txStyle == .SPL_STYLE) {                                         // SOLANA SPL TOKEN Send
             splSendSimul()
+            
+        } else if (txStyle == .MOVE_STYLE) {                                        // MOVE Coin Send
+            
         }
     }
 
@@ -1788,6 +1825,14 @@ extension CommonTransfer {
     }
 }
 
+// Move style tx simul and broadcast
+extension CommonTransfer {
+    
+    func moveSendSimul() {
+        
+    }
+}
+
 
 // Cosmos style tx simul and broadcast
 extension CommonTransfer {
@@ -2267,4 +2312,5 @@ public enum SendAssetType: Int {
     case IOTA_NFT = 11
     case SOLANA_COIN = 12                   // solana sol send
     case SOLANA_SPL = 13                    // solana spl send
+    case APTOS_COIN = 14                    // aptos send
 }
