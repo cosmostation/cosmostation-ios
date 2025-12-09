@@ -36,7 +36,6 @@ class AptosFetcher {
                         aptosAssetBalance.append(asset)
                     }
                 }
-                print("Test12345 : ", accountCoinInfo)
                 return true
             }
             return false
@@ -154,7 +153,18 @@ extension AptosFetcher {
     }
     
     func fetchTxHistory() async throws -> [JSON]? {
-        var url = getApi() + "accounts/" + chain.mainAddress + "/transactions?limit=50"
+        let url = getApi() + "accounts/" + chain.mainAddress + "/transactions?limit=50"
         return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
+    }
+}
+
+extension AptosFetcher {
+    
+    func toKotlinByteArray(_ data: Foundation.Data) -> KotlinByteArray {
+        let kba = KotlinByteArray(size: Int32(data.count))
+        data.enumerated().forEach { (i, byte) in
+            kba.set(index: Int32(i), value: Int8(bitPattern: byte))
+        }
+        return kba
     }
 }

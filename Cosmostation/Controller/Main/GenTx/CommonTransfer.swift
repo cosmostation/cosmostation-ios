@@ -14,6 +14,7 @@ import Web3Core
 import BigInt
 import SwiftProtobuf
 import SDWebImage
+import AptosKit
 
 
 class CommonTransfer: BaseVC {
@@ -119,6 +120,7 @@ class CommonTransfer: BaseVC {
     
     var aptosFetcher: AptosFetcher!
     var moveFeeAmount = NSDecimalNumber.zero
+    var moveMaxGasAmount = NSDecimalNumber.zero
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -798,6 +800,17 @@ class CommonTransfer: BaseVC {
             solanaFeeAmount = NSDecimalNumber.init(value: toGas)
             sendBtn.isHidden = false
             
+        } else if (txStyle == .MOVE_STYLE) {
+            guard let toGas = gasUsed else {
+                sendBtn.isHidden = true
+                errorCardView.isHidden = false
+                errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
+                return
+            }
+            moveFeeAmount = NSDecimalNumber.init(value: toGas)
+            moveMaxGasAmount = NSDecimalNumber.init(value: toGas).multiplying(by: NSDecimalNumber(value: fromChain.getSimulatedGasMultiply()), withBehavior: handler0Up)
+            sendBtn.isHidden = false
+            
         } else if (txStyle == .GNO_STYLE) {
             guard let toGas = gasUsed else {
                 sendBtn.isHidden = true
@@ -911,7 +924,7 @@ class CommonTransfer: BaseVC {
             splSendSimul()
             
         } else if (txStyle == .MOVE_STYLE) {                                        // MOVE Coin Send
-            
+            moveSendSimul()
         }
     }
 
@@ -1829,7 +1842,121 @@ extension CommonTransfer {
 extension CommonTransfer {
     
     func moveSendSimul() {
-        
+        Task {
+            do {
+                if let publicKeyData = fromChain.publicKey {
+                    let publicKeyToByteArray = aptosFetcher.toKotlinByteArray(publicKeyData)
+                    let publicKey = Ed25519PublicKey(data: publicKeyToByteArray)
+                    let from = AccountAddress.companion.fromString(input: fromChain.mainAddress)
+                    let to = AccountAddress.companion.fromString(input: toAddress)
+                    let options = InputGenerateTransactionOptions(maxGasAmount: 1000, gasUnitPrice: nil, expireTimestamp: nil, accountSequenceNumber: nil)
+                    
+                    if let transferTransaction = try await aptosFetcher.client()?.transferCoinTransaction(
+                        from: from,
+                        to: to,
+                        amount: toAmount.uint64Value,
+                        coinType: toSendDenom,
+                        options: options) {
+                        
+                        let opts = InputSimulateTransactionOptions(
+                            estimateGasUnitPrice: false,
+                            estimateMaxGasAmount: false,
+                            estimatePrioritizedGasUnitPrice: false)
+                        
+                        let simulateTxs = try await aptosFetcher.client()?.simulateTransaction.simple(
+                            signerPublicKey: publicKey,
+                            transaction: transferTransaction,
+                            feePayerPublicKey: nil,
+                            options: opts)
+                        
+                        DispatchQueue.main.async {
+                            guard let simulate = (simulateTxs as? OptionSome<NSArray>)?.value else {
+                                self.view.isUserInteractionEnabled = true
+                                self.loadingView.isHidden = true
+                                self.sendBtn.isEnabled = false
+                                self.onShowToast(NSLocalizedString("error_evm_simul", comment: ""))
+                                return
+                            }
+                            
+                            if simulate.count > 0 {
+                                let gasUsed = (simulate[0] as? UserTransactionResponse)?.gasUsed
+                                let gasPrice = (simulate[0] as? UserTransactionResponse)?.gasUnitPrice
+                                
+                                let fee = NSDecimalNumber(string: gasUsed).multiplying(by: NSDecimalNumber(string: gasPrice))
+                                self.onUpdateWithSimul(UInt64(truncating: fee))
+                                
+                            } else {
+                                self.view.isUserInteractionEnabled = true
+                                self.loadingView.isHidden = true
+                                self.sendBtn.isEnabled = false
+                                self.onShowToast(NSLocalizedString("error_evm_simul", comment: ""))
+                                return
+                            }
+                        }
+                    }
+                }
+                
+            } catch let error as NSError {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.sendBtn.isEnabled = false
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
+                }
+            }
+        }
+    }
+    
+    func moveSend() {
+        Task {
+            do {
+                if let privateKeyData = fromChain.privateKey?.toHexString(),
+                   let privateKey = try? Ed25519PrivateKey(hex: privateKeyData) {
+                    let account = AptosKit.Account_.companion.from(privateKey: privateKey)
+                    
+                    let from = AccountAddress.companion.fromString(input: fromChain.mainAddress)
+                    let to = AccountAddress.companion.fromString(input: toAddress)
+                    let options = InputGenerateTransactionOptions(
+                        maxGasAmount: Int64(truncating: moveMaxGasAmount),
+                        gasUnitPrice: nil,
+                        expireTimestamp: nil,
+                        accountSequenceNumber: nil)
+                    
+                    if let transferTransaction = try await aptosFetcher.client()?.transferCoinTransaction(
+                        from: from,
+                        to: to,
+                        amount: toAmount.uint64Value,
+                        coinType: toSendDenom,
+                        options: options),
+                       
+                        let submit = try await aptosFetcher.client()?.signAndSubmitTransaction(
+                            signer: account,
+                            transaction: transferTransaction) {
+                        
+                        guard let resp = submit.expect(message: "") else { return }
+                        let hash = (resp as NSObject).value(forKey: "hash") as? String ?? ""
+                        
+                        print("Tx hash : ", hash)
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                            self.loadingView.isHidden = true
+                            let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                            txResult.txStyle = self.txStyle
+                            txResult.fromChain = self.fromChain
+                            txResult.toChain = self.toChain
+                            txResult.toAddress = self.toAddress
+                            txResult.moveHash = hash
+                            txResult.modalPresentationStyle = .fullScreen
+                            self.present(txResult, animated: true)
+                        })
+                    }
+                }
+                
+            } catch {
+                //TODO handle Error
+            }
+        }
     }
 }
 
@@ -2264,7 +2391,10 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
             } else if (txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
                 solanaSend()
                 
-            } else if (txStyle == .GNO_STYLE) {
+            } else if (txStyle == .MOVE_STYLE) {
+                moveSend()
+                
+            }  else if (txStyle == .GNO_STYLE) {
                 if sendAssetType == .GNO_GRC20 {
                     gnoGrc20Send()
                     

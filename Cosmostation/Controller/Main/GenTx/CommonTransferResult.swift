@@ -10,6 +10,7 @@ import UIKit
 import Lottie
 import SwiftyJSON
 import web3swift
+import AptosKit
 
 class CommonTransferResult: BaseVC, AddressBookDelegate {
     
@@ -35,6 +36,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var fromBtcFetcher: BtcFetcher!
     var fromGnoFetcher: GnoFetcher!
     var fromSolanaFetcher: SolanaFetcher!
+    var fromAptosFetcher: AptosFetcher!
     var toChain: BaseChain!
     var toAddress: String?
     var txMemo = ""
@@ -53,6 +55,8 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var btcResult: JSON?
     
     var solanaResult: JSON?
+    
+    var moveHash: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,6 +126,19 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             }
             fromSolanaFetcher = (fromChain as? ChainSolana)?.getSolanaFetcher()
             fetchSolanaTx(result)
+
+        } else if (txStyle == .MOVE_STYLE) {
+            if moveHash.isEmpty {
+                loadingView.isHidden = true
+                failView.isHidden = false
+                failMsgLabel.text = ""
+                confirmBtn.isEnabled = true
+                return
+                
+            } else {
+                fromAptosFetcher = (fromChain as? ChainAptos)?.getAptosFetcher()
+                fetchMoveTx(moveHash)
+            }
 
         } else if (txStyle == .GNO_STYLE) {
             guard (cosmosBroadcastTxResponse?.txhash) != nil else {
@@ -457,6 +474,57 @@ extension CommonTransferResult {
                 if (self.fetchCnt > 0) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
                         self.fetchSolanaTx(hex)
+                    });
+                    
+                } else {
+                    DispatchQueue.main.async {
+                        self.onShowMoreWait()
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchMoveTx(_ hash: String) {
+        Task {
+            do {
+                let txResult = try await fromAptosFetcher.client()?.waitForTransaction(
+                    transactionHash: HexInput(value: hash),
+                    options: WaitForTransactionOptions.init(timeoutSecs: 20, checkSuccess: true, waitForIndexer: nil))
+                
+                guard let result = (txResult as? OptionSome<TransactionResponse>)?.value else {
+                    self.confirmBtn.isEnabled = true
+                    loadingView.isHidden = true
+                    failView.isHidden = false
+                    failMsgLabel.text = ""
+                    confirmBtn.isEnabled = true
+                    return
+                }
+                
+                if result.type == TransactionResponseType.pending {
+                    self.confirmBtn.isEnabled = true
+                    self.fetchCnt = self.fetchCnt - 1
+                    if (self.fetchCnt > 0) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                            self.fetchMoveTx(hash)
+                        });
+                        
+                    } else {
+                        DispatchQueue.main.async {
+                            self.onShowMoreWait()
+                        }
+                    }
+                    
+                } else {
+                    self.onUpdateView()
+                }
+                
+            } catch {
+                self.confirmBtn.isEnabled = true
+                self.fetchCnt = self.fetchCnt - 1
+                if (self.fetchCnt > 0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(6000), execute: {
+                        self.fetchMoveTx(hash)
                     });
                     
                 } else {
