@@ -10,6 +10,7 @@ import Foundation
 import AptosKit
 import Alamofire
 import SwiftyJSON
+import CryptoKit
 
 class AptosFetcher {
     
@@ -76,7 +77,7 @@ class AptosFetcher {
         }
     }
     
-    func account() -> AccountAddress {
+    func accountAddress() -> AccountAddress {
         return AccountAddress.companion.fromString(input: chain.mainAddress)
     }
     
@@ -136,6 +137,29 @@ class AptosFetcher {
     }
 }
 
+extension Foundation.Data {
+    
+    func toKotlinByteArray() -> KotlinByteArray {
+        let kba = KotlinByteArray(size: Int32(self.count))
+        self.enumerated().forEach { (i, byte) in
+            kba.set(index: Int32(i), value: Int8(bitPattern: byte))
+        }
+        return kba
+    }
+}
+
+extension KotlinByteArray {
+    
+    func toSwiftData() -> Foundation.Data {
+        var data = Foundation.Data(capacity: Int(self.size))
+        for i in 0..<self.size {
+            let b = self.get(index: i)
+            data.append(UInt8(bitPattern: b))
+        }
+        return data
+    }
+}
+
 extension AptosFetcher {
     
     // account coin info
@@ -143,7 +167,7 @@ extension AptosFetcher {
     func fetchAccountCoinInfo() async throws -> [current_fungible_asset_balances]? {
         guard let client = client() else { return nil }
         
-        let coinData = try await client.getAccountCoinsData(accountAddress: account(), minimumLedgerVersion: nil)
+        let coinData = try await client.getAccountCoinsData(accountAddress: accountAddress(), minimumLedgerVersion: nil)
         
         if coinData is OptionSome {
             return (coinData as? OptionSome)?.value?.current_fungible_asset_balances
@@ -156,15 +180,87 @@ extension AptosFetcher {
         let url = getApi() + "accounts/" + chain.mainAddress + "/transactions?limit=50"
         return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
     }
+    
+    func fetchEncodeSubmission(_ rawTransaction: RawTransaction, _ to: String, _ toSendDenom: String, _ toAmount: String) async throws -> String? {
+        let url = "\(getApi())transactions/encode_submission"
+        
+        let payload = Payload(type_arguments: [toSendDenom], arguments: [to, toAmount])
+        let encodeRequest = EncodeRequest(
+            sender: rawTransaction.sender.value,
+            sequence_number: String(rawTransaction.sequenceNumber),
+            max_gas_amount: String(rawTransaction.maxGasAmount),
+            gas_unit_price: String(rawTransaction.gasUnitPrice),
+            expiration_timestamp_secs: String(rawTransaction.expirationTimestampSecs),
+            payload: payload)
+        
+        let encodeSubmission = try? await AF.request(url, method: .post,
+                                         parameters: encodeRequest,
+                                         encoder: JSONParameterEncoder.default,
+                                         headers: [:]).validate().serializingDecodable(String.self).value
+        
+        return encodeSubmission
+    }
 }
 
 extension AptosFetcher {
     
-    func toKotlinByteArray(_ data: Foundation.Data) -> KotlinByteArray {
-        let kba = KotlinByteArray(size: Int32(data.count))
-        data.enumerated().forEach { (i, byte) in
-            kba.set(index: Int32(i), value: Int8(bitPattern: byte))
-        }
-        return kba
+    struct EncodeRequest: Encodable {
+        let sender: String
+        let sequence_number: String
+        let max_gas_amount: String
+        let gas_unit_price: String
+        let expiration_timestamp_secs: String
+        let payload: Payload
+    }
+    
+    struct Payload: Encodable {
+        let type: String = "entry_function_payload"
+        let function: String = "0x1::coin::transfer"
+        let type_arguments: [String]
+        let arguments: [String]
+    }
+    
+    func sign(_ message: KotlinByteArray, _ privateKey: KotlinByteArray) async throws -> KotlinByteArray {
+        let msg = message.toSwiftData()
+        let pk = privateKey.toSwiftData()
+        let signing = try Curve25519.Signing.PrivateKey(rawRepresentation: pk)
+        let sign = try signing.signature(for: msg)
+        return sign.toKotlinByteArray()
     }
 }
+
+class Ed25519PKey: AptosKit.PrivateKey {
+    
+    let signingKeyPair: KeyPair
+    
+    init(_ pubHexInput: HexInput, _ priHexInput: HexInput) throws {
+        let pubHex = AptosKit.Hex.companion.fromHexInput(hexInput: pubHexInput)
+        let priHex = AptosKit.Hex.companion.fromHexInput(hexInput: priHexInput)
+        
+        guard pubHex.toByteArray().size == 32 else {
+            throw NSError(domain: "Ed25519", code: -1, userInfo: [NSLocalizedDescriptionKey: "Ed25519 public key must be 32 bytes \(pubHex.toByteArray().size)"])
+        }
+        guard priHex.toByteArray().size == 32 else {
+            throw NSError(domain: "Ed25519", code: -1, userInfo: [NSLocalizedDescriptionKey: "Ed25519 private key must be 32 bytes, got \(priHex.toByteArray().size)"])
+        }
+        signingKeyPair = KeyPair(privateKey: priHex.toByteArray(), publicKey: pubHex.toByteArray())
+    }
+    
+    func publicKey() -> AptosKit.PublicKey {
+        return Ed25519PublicKey(data: signingKeyPair.publicKey)
+    }
+    
+    func sign(message: HexInput) -> Signature {
+        let messageBytes = Hex.companion.fromHexInput(hexInput: message).toByteArray()
+        return signingKeyPair.sign(message: messageBytes) as Signature
+    }
+    
+    func toByteArray() -> KotlinByteArray {
+        return signingKeyPair.privateKey
+    }
+    
+    func ed25519PublicKey() -> Ed25519PublicKey {
+        return Ed25519PublicKey(data: signingKeyPair.publicKey)
+    }
+}
+

@@ -173,18 +173,18 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             successExplorerBtn.setTitle("Check in Explorer", for: .normal)
             failExplorerBtn.setTitle("Check in Explorer", for: .normal)
             
-        } else if (txStyle == .SUI_STYLE) {
+        } else if (txStyle == .SUI_STYLE || txStyle == .IOTA_STYLE) {
             successMsgLabel.text = suiResult?["result"]["digest"].stringValue
             successExplorerBtn.setTitle("Check in Explorer", for: .normal)
             failExplorerBtn.setTitle("Check in Explorer", for: .normal)
             
-        } else if (txStyle == .IOTA_STYLE) {
-            successMsgLabel.text = iotaResult?["result"]["digest"].stringValue
+        } else if (txStyle == .BTC_STYLE) {
+            successMsgLabel.text = btcResult?["result"].stringValue
             successExplorerBtn.setTitle("Check in Explorer", for: .normal)
             failExplorerBtn.setTitle("Check in Explorer", for: .normal)
 
-        } else if (txStyle == .BTC_STYLE) {
-            successMsgLabel.text = btcResult?["result"].stringValue
+        } else if (txStyle == .MOVE_STYLE) {
+            successMsgLabel.text = moveHash
             successExplorerBtn.setTitle("Check in Explorer", for: .normal)
             failExplorerBtn.setTitle("Check in Explorer", for: .normal)
 
@@ -215,7 +215,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
                 });
             }
             
-        } else if (txStyle == .SUI_STYLE || txStyle == .IOTA_STYLE || txStyle == .BTC_STYLE || txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
+        } else if (txStyle == .SUI_STYLE || txStyle == .IOTA_STYLE || txStyle == .BTC_STYLE || txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE || txStyle == .MOVE_STYLE) {
             successView.isHidden = false
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
                 self.onCheckAddAddressBook()
@@ -251,12 +251,8 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             guard let url = fromChain.getExplorerTx(evmHash) else { return }
             self.onShowSafariWeb(url)
             
-        } else if (txStyle == .SUI_STYLE) {
+        } else if (txStyle == .SUI_STYLE || txStyle == .IOTA_STYLE) {
             guard let url = fromChain.getExplorerTx(suiResult?["result"]["digest"].stringValue) else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (txStyle == .IOTA_STYLE) {
-            guard let url = fromChain.getExplorerTx(iotaResult?["result"]["digest"].stringValue) else { return }
             self.onShowSafariWeb(url)
             
         } else if (txStyle == .BTC_STYLE) {
@@ -267,6 +263,10 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             guard let url = fromChain.getExplorerTx(solanaResult?["result"].stringValue) else { return }
             self.onShowSafariWeb(url)
 
+        } else if (txStyle == .MOVE_STYLE) {
+            guard let url = fromChain.getExplorerTx(moveHash) else { return }
+            self.onShowSafariWeb(url)
+            
         } else if (txStyle == .COSMOS_STYLE || txStyle == .GNO_STYLE) {
             guard let url = fromChain.getExplorerTx(cosmosBroadcastTxResponse?.txhash) else { return }
             self.onShowSafariWeb(url)

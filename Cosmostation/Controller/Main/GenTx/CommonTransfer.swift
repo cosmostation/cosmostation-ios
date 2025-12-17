@@ -1844,9 +1844,10 @@ extension CommonTransfer {
     func moveSendSimul() {
         Task {
             do {
-                if let publicKeyData = fromChain.publicKey {
-                    let publicKeyToByteArray = aptosFetcher.toKotlinByteArray(publicKeyData)
-                    let publicKey = Ed25519PublicKey(data: publicKeyToByteArray)
+                if let publicKeyHex = fromChain.publicKey?.toHexString(),
+                   let privateKeyHex = fromChain.privateKey?.toHexString() {
+                    let pKey = try Ed25519PKey(HexInput.companion.fromString(string: publicKeyHex), HexInput.companion.fromString(string: privateKeyHex))
+                    
                     let from = AccountAddress.companion.fromString(input: fromChain.mainAddress)
                     let to = AccountAddress.companion.fromString(input: toAddress)
                     let options = InputGenerateTransactionOptions(maxGasAmount: 1000, gasUnitPrice: nil, expireTimestamp: nil, accountSequenceNumber: nil)
@@ -1864,7 +1865,7 @@ extension CommonTransfer {
                             estimatePrioritizedGasUnitPrice: false)
                         
                         let simulateTxs = try await aptosFetcher.client()?.simulateTransaction.simple(
-                            signerPublicKey: publicKey,
+                            signerPublicKey: pKey.publicKey(),
                             transaction: transferTransaction,
                             feePayerPublicKey: nil,
                             options: opts)
@@ -1911,9 +1912,9 @@ extension CommonTransfer {
     func moveSend() {
         Task {
             do {
-                if let privateKeyData = fromChain.privateKey?.toHexString(),
-                   let privateKey = try? Ed25519PrivateKey(hex: privateKeyData) {
-                    let account = AptosKit.Account_.companion.from(privateKey: privateKey)
+                if let publicKeyHex = fromChain.publicKey?.toHexString(),
+                   let privateKeyHex = fromChain.privateKey?.toHexString() {
+                    let pKey = try Ed25519PKey(HexInput.companion.fromString(string: publicKeyHex), HexInput.companion.fromString(string: privateKeyHex))
                     
                     let from = AccountAddress.companion.fromString(input: fromChain.mainAddress)
                     let to = AccountAddress.companion.fromString(input: toAddress)
@@ -1930,26 +1931,43 @@ extension CommonTransfer {
                         coinType: toSendDenom,
                         options: options),
                        
-                        let submit = try await aptosFetcher.client()?.signAndSubmitTransaction(
-                            signer: account,
-                            transaction: transferTransaction) {
+                        let encodeSubmission = try await aptosFetcher.fetchEncodeSubmission(
+                        transferTransaction.rawTransaction,
+                        to.value, 
+                        toSendDenom,
+                        toAmount.stringValue) {
                         
-                        guard let resp = submit.expect(message: "") else { return }
-                        let hash = (resp as NSObject).value(forKey: "hash") as? String ?? ""
+                        let messageBytes = Hex.companion.fromHexInput(hexInput: HexInput.companion.fromString(string: encodeSubmission)).toByteArray()
+                        let signature = try await aptosFetcher.sign(messageBytes, pKey.signingKeyPair.privateKey)
+                        let signed = AptosKit.AccountAuthenticatorEd25519(
+                            publicKey: pKey.ed25519PublicKey(),
+                            signature: Ed25519Signature(hexInput: signature))
                         
-                        print("Tx hash : ", hash)
-
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                            self.loadingView.isHidden = true
-                            let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
-                            txResult.txStyle = self.txStyle
-                            txResult.fromChain = self.fromChain
-                            txResult.toChain = self.toChain
-                            txResult.toAddress = self.toAddress
-                            txResult.moveHash = hash
-                            txResult.modalPresentationStyle = .fullScreen
-                            self.present(txResult, animated: true)
-                        })
+                        if let submit = try await aptosFetcher.client()?.submitTransaction.simple(
+                            transaction: transferTransaction,
+                            senderAuthenticator: signed,
+                            feePayerAuthenticator: nil) {
+                            
+                            if let some = submit as? OptionSome,
+                               let result = some.value {
+                                let hash: String = result.hash
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                                    self.loadingView.isHidden = true
+                                    let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                                    txResult.txStyle = self.txStyle
+                                    txResult.fromChain = self.fromChain
+                                    txResult.toChain = self.toChain
+                                    txResult.toAddress = self.toAddress
+                                    txResult.moveHash = hash
+                                    txResult.modalPresentationStyle = .fullScreen
+                                    self.present(txResult, animated: true)
+                                })
+                                
+                            } else {
+                                return
+                            }
+                        }
                     }
                 }
                 
