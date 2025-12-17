@@ -2285,6 +2285,8 @@
 		E15444082ED031F8000EEFE5 /* ChainPaxi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15444062ED031F8000EEFE5 /* ChainPaxi.swift */; };
 		E1577EA12EF2ABE4008676EE /* ChainEpixEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1577EA02EF2ABE4008676EE /* ChainEpixEVM.swift */; };
 		E1577EA22EF2ABE4008676EE /* ChainEpixEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1577EA02EF2ABE4008676EE /* ChainEpixEVM.swift */; };
+		E1577EA42EF2AF2D008676EE /* ChainGonka.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1577EA32EF2AF2D008676EE /* ChainGonka.swift */; };
+		E1577EA52EF2AF2D008676EE /* ChainGonka.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1577EA32EF2AF2D008676EE /* ChainGonka.swift */; };
 		E15899622E7C10270049147F /* ChainMantraEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15899612E7C10270049147F /* ChainMantraEVM.swift */; };
 		E15899632E7C10270049147F /* ChainMantraEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15899612E7C10270049147F /* ChainMantraEVM.swift */; };
 		E159805A2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
@@ -3812,6 +3814,7 @@
 		E14E29792A99C2CA00939AD2 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		E15444062ED031F8000EEFE5 /* ChainPaxi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPaxi.swift; sourceTree = "<group>"; };
 		E1577EA02EF2ABE4008676EE /* ChainEpixEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainEpixEVM.swift; sourceTree = "<group>"; };
+		E1577EA32EF2AF2D008676EE /* ChainGonka.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainGonka.swift; sourceTree = "<group>"; };
 		E15899612E7C10270049147F /* ChainMantraEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantraEVM.swift; sourceTree = "<group>"; };
 		E15980582A6F5EFE0032892B /* PortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCell.swift; sourceTree = "<group>"; };
 		E15980592A6F5EFE0032892B /* PortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioCell.xib; sourceTree = "<group>"; };
@@ -4137,6 +4140,7 @@
 				79813A5E2D53049F0083A1F5 /* ChainGgez.swift */,
 				040B43EA2E3725F10018850C /* ChainGitopia.swift */,
 				799B4A802D2BDC0E00998833 /* ChainGno.swift */,
+				E1577EA32EF2AF2D008676EE /* ChainGonka.swift */,
 				045032912C1EEFC900235F6A /* ChainGovgen.swift */,
 				0450329B2C1EEFCA00235F6A /* ChainGravityBridge.swift */,
 				79ED0BCB2DB75C6500C84DB7 /* ChainHippo.swift */,
@@ -7041,6 +7045,7 @@
 				04C8166D2BA98D74006B800A /* cosmos_mint_v1beta1_tx.pb.swift in Sources */,
 				047DCEE328855F4800253CAA /* MintscanMyVote.swift in Sources */,
 				04CFF0342AC58D4400FB3187 /* SelectFeeCoinCell.swift in Sources */,
+				E1577EA42EF2AF2D008676EE /* ChainGonka.swift in Sources */,
 				181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */,
 				04C8165F2BA98D74006B800A /* cosmos_nft_v1beta1_query.grpc.swift in Sources */,
 				E11069B92AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.pb.swift in Sources */,
@@ -8542,6 +8547,7 @@
 				15D865212E729EF600C201C8 /* DappSolanaSignRequestSheet.swift in Sources */,
 				04C816442BA98D74006B800A /* cosmos_tx_signing_v1beta1_signing.pb.swift in Sources */,
 				79FCA3DA2C3F9E92001C17D0 /* artela_fee_v1_genesis.pb.swift in Sources */,
+				E1577EA52EF2AF2D008676EE /* ChainGonka.swift in Sources */,
 				0450327A2C1EEDCD00235F6A /* ChainBand.swift in Sources */,
 				04C816642BA98D74006B800A /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
 				792613BD2CD4B82800FAF47D /* initia_intertx_v1_tx.pb.swift in Sources */,
