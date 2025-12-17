@@ -2283,6 +2283,8 @@
 		E14E297B2A99C2CA00939AD2 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29792A99C2CA00939AD2 /* BaseButton.swift */; };
 		E15444072ED031F8000EEFE5 /* ChainPaxi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15444062ED031F8000EEFE5 /* ChainPaxi.swift */; };
 		E15444082ED031F8000EEFE5 /* ChainPaxi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15444062ED031F8000EEFE5 /* ChainPaxi.swift */; };
+		E1577EA12EF2ABE4008676EE /* ChainEpixEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1577EA02EF2ABE4008676EE /* ChainEpixEVM.swift */; };
+		E1577EA22EF2ABE4008676EE /* ChainEpixEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1577EA02EF2ABE4008676EE /* ChainEpixEVM.swift */; };
 		E15899622E7C10270049147F /* ChainMantraEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15899612E7C10270049147F /* ChainMantraEVM.swift */; };
 		E15899632E7C10270049147F /* ChainMantraEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15899612E7C10270049147F /* ChainMantraEVM.swift */; };
 		E159805A2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
@@ -3809,6 +3811,7 @@
 		E14E29742A98DA5300939AD2 /* SelectChainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChainCell.xib; sourceTree = "<group>"; };
 		E14E29792A99C2CA00939AD2 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		E15444062ED031F8000EEFE5 /* ChainPaxi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPaxi.swift; sourceTree = "<group>"; };
+		E1577EA02EF2ABE4008676EE /* ChainEpixEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainEpixEVM.swift; sourceTree = "<group>"; };
 		E15899612E7C10270049147F /* ChainMantraEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantraEVM.swift; sourceTree = "<group>"; };
 		E15980582A6F5EFE0032892B /* PortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCell.swift; sourceTree = "<group>"; };
 		E15980592A6F5EFE0032892B /* PortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioCell.xib; sourceTree = "<group>"; };
@@ -4040,6 +4043,7 @@
 				049E2A092E4C59F800E660DC /* ChainCelo.swift */,
 				045032392C1EEA9600235F6A /* ChainCronos.swift */,
 				045032342C1EEA9500235F6A /* ChainDymensionEVM.swift */,
+				E1577EA02EF2ABE4008676EE /* ChainEpixEVM.swift */,
 				045032312C1EEA9500235F6A /* ChainEvmosEVM.swift */,
 				79D5560A2CE352870023F1B9 /* ChainFantom.swift */,
 				799B4A762D1E439D00998833 /* ChainForma.swift */,
@@ -7339,6 +7343,7 @@
 				04C817532BA98D75006B800A /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
 				E1DF77762AB74EE80028BD51 /* CheckPrivateKeyVC.swift in Sources */,
 				047843B82AC991B300462F1C /* injective_types_v1beta1_tx_response.pb.swift in Sources */,
+				E1577EA12EF2ABE4008676EE /* ChainEpixEVM.swift in Sources */,
 				046EA8EC2AD04A2600A2FCE7 /* desmos_profiles_v3_query.pb.swift in Sources */,
 				0478430E2AC9918700462F1C /* ethermint_evm_v1_tx.pb.swift in Sources */,
 				04C816952BA98D74006B800A /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */,
@@ -7603,6 +7608,7 @@
 				79D556192CEF04AE0023F1B9 /* ChainDoraVota.swift in Sources */,
 				79E381EC2DCC91E600DB0AD6 /* ChainLumera_T.swift in Sources */,
 				04C817702BA98D75006B800A /* cosmos_staking_v1beta1_tx.grpc.swift in Sources */,
+				E1577EA22EF2ABE4008676EE /* ChainEpixEVM.swift in Sources */,
 				04C816AC2BA98D75006B800A /* cosmos_bank_v1beta1_bank.pb.swift in Sources */,
 				0438A8022AE135B1006FA213 /* kava_cdp_v1beta1_tx.grpc.swift in Sources */,
 				04C816E42BA98D75006B800A /* cosmos_group_v1_tx.pb.swift in Sources */,
