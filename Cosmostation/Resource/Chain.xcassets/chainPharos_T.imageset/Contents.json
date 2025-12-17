@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "pharos(testnet).pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
