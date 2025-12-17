@@ -930,7 +930,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNillion_T())
     result.append(ChainPharos_T())
     result.append(ChainQubeticsEVM_T())
-    result.append(ChainTabiEVM_T())
     result.append(ChainTerraClassic_T())
     result.append(ChainWardenEVM_T())
     result.append(ChainXion_T())
@@ -968,6 +967,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainSaharaAiEVM_T())
 //    result.append(ChainSelf_T())
 //    result.append(ChainStoryEVM_T())
+//    result.append(ChainTabiEVM_T())
     
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {
