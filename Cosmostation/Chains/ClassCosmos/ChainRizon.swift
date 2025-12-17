@@ -24,7 +24,8 @@ class ChainRizon: BaseChain  {
         stakeDenom = "uatolo"
         bechAccountPrefix = "rizon"
         validatorPrefix = "rizonvaloper"
-        grpcHost = "grpc-rizon.cosmostation.io"
+        grpcHost = "rizon-grpc.publicnode.com:443"
         lcdUrl = "https://rizon-rest.publicnode.com/"
     }
 }
+
