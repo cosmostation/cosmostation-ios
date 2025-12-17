@@ -786,6 +786,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainDydx())
     result.append(ChainDymensionEVM())                  //EVM
     result.append(ChainElys())
+    result.append(ChainEpixEVM())                       //EVM
     result.append(ChainEthereum())                      //EVM
     result.append(ChainEvmosEVM())                      //EVM
     result.append(ChainFantom())                        //EVM
@@ -798,6 +799,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainGgez())
     result.append(ChainGitopia())
 //    result.append(ChainGno())
+    result.append(ChainGonka())
     result.append(ChainGravityAlpha())                  //EVM
     result.append(ChainGravityBridge())
     result.append(ChainHaqqEVM())                       //EVM
