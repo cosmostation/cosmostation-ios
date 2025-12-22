@@ -1673,6 +1673,8 @@
 		155D96842E8645510047BC1B /* ChainBlast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D96832E8645510047BC1B /* ChainBlast.swift */; };
 		155D96862E8650930047BC1B /* ChainLinea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D96852E8650920047BC1B /* ChainLinea.swift */; };
 		155D96882E98F4290047BC1B /* ChainIntento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D96872E98F4290047BC1B /* ChainIntento.swift */; };
+		1568DC7A2EF26001000FEEFC /* ChainPharos_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1568DC792EF26001000FEEFC /* ChainPharos_T.swift */; };
+		1568DC7C2EF2604C000FEEFC /* ChainPharos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1568DC7B2EF2604C000FEEFC /* ChainPharos.swift */; };
 		1580CD622EC48010008D02FD /* DappGnoSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1580CD602EC48010008D02FD /* DappGnoSignRequestSheet.swift */; };
 		1580CD632EC48010008D02FD /* DappGnoSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1580CD612EC48010008D02FD /* DappGnoSignRequestSheet.xib */; };
 		1580CD6A2EDF02F4008D02FD /* AptosKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1580CD692EDF02F4008D02FD /* AptosKit */; };
@@ -2284,6 +2286,10 @@
 		E14E297B2A99C2CA00939AD2 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14E29792A99C2CA00939AD2 /* BaseButton.swift */; };
 		E15444072ED031F8000EEFE5 /* ChainPaxi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15444062ED031F8000EEFE5 /* ChainPaxi.swift */; };
 		E15444082ED031F8000EEFE5 /* ChainPaxi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15444062ED031F8000EEFE5 /* ChainPaxi.swift */; };
+		E1577EA12EF2ABE4008676EE /* ChainEpixEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1577EA02EF2ABE4008676EE /* ChainEpixEVM.swift */; };
+		E1577EA22EF2ABE4008676EE /* ChainEpixEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1577EA02EF2ABE4008676EE /* ChainEpixEVM.swift */; };
+		E1577EA42EF2AF2D008676EE /* ChainGonka.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1577EA32EF2AF2D008676EE /* ChainGonka.swift */; };
+		E1577EA52EF2AF2D008676EE /* ChainGonka.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1577EA32EF2AF2D008676EE /* ChainGonka.swift */; };
 		E15899622E7C10270049147F /* ChainMantraEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15899612E7C10270049147F /* ChainMantraEVM.swift */; };
 		E15899632E7C10270049147F /* ChainMantraEVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15899612E7C10270049147F /* ChainMantraEVM.swift */; };
 		E159805A2A6F5EFE0032892B /* PortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15980582A6F5EFE0032892B /* PortfolioCell.swift */; };
@@ -3381,6 +3387,8 @@
 		155D96832E8645510047BC1B /* ChainBlast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBlast.swift; sourceTree = "<group>"; };
 		155D96852E8650920047BC1B /* ChainLinea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainLinea.swift; sourceTree = "<group>"; };
 		155D96872E98F4290047BC1B /* ChainIntento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainIntento.swift; sourceTree = "<group>"; };
+		1568DC792EF26001000FEEFC /* ChainPharos_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPharos_T.swift; sourceTree = "<group>"; };
+		1568DC7B2EF2604C000FEEFC /* ChainPharos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPharos.swift; sourceTree = "<group>"; };
 		1580CD602EC48010008D02FD /* DappGnoSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappGnoSignRequestSheet.swift; sourceTree = "<group>"; };
 		1580CD612EC48010008D02FD /* DappGnoSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappGnoSignRequestSheet.xib; sourceTree = "<group>"; };
 		1580CD6B2EDF03B4008D02FD /* ChainAptos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAptos.swift; sourceTree = "<group>"; };
@@ -3810,6 +3818,8 @@
 		E14E29742A98DA5300939AD2 /* SelectChainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChainCell.xib; sourceTree = "<group>"; };
 		E14E29792A99C2CA00939AD2 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		E15444062ED031F8000EEFE5 /* ChainPaxi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPaxi.swift; sourceTree = "<group>"; };
+		E1577EA02EF2ABE4008676EE /* ChainEpixEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainEpixEVM.swift; sourceTree = "<group>"; };
+		E1577EA32EF2AF2D008676EE /* ChainGonka.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainGonka.swift; sourceTree = "<group>"; };
 		E15899612E7C10270049147F /* ChainMantraEVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantraEVM.swift; sourceTree = "<group>"; };
 		E15980582A6F5EFE0032892B /* PortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCell.swift; sourceTree = "<group>"; };
 		E15980592A6F5EFE0032892B /* PortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioCell.xib; sourceTree = "<group>"; };
@@ -4043,6 +4053,7 @@
 				049E2A092E4C59F800E660DC /* ChainCelo.swift */,
 				045032392C1EEA9600235F6A /* ChainCronos.swift */,
 				045032342C1EEA9500235F6A /* ChainDymensionEVM.swift */,
+				E1577EA02EF2ABE4008676EE /* ChainEpixEVM.swift */,
 				045032312C1EEA9500235F6A /* ChainEvmosEVM.swift */,
 				79D5560A2CE352870023F1B9 /* ChainFantom.swift */,
 				799B4A762D1E439D00998833 /* ChainForma.swift */,
@@ -4059,6 +4070,7 @@
 				E14B92DA2DAFEF670030D4F0 /* ChainMonad.swift */,
 				042DE7002C1D7FCB009CAC04 /* ChainOktEVM.swift */,
 				045032362C1EEA9600235F6A /* ChainOptimism.swift */,
+				1568DC7B2EF2604C000FEEFC /* ChainPharos.swift */,
 				79C5187A2CC9E8C200BC0E85 /* ChainPlanqEVM.swift */,
 				045032332C1EEA9500235F6A /* ChainPolygon.swift */,
 				E119ECFB2DF0488200CD2C9B /* ChainQubeticsEVM.swift */,
@@ -4135,6 +4147,7 @@
 				79813A5E2D53049F0083A1F5 /* ChainGgez.swift */,
 				040B43EA2E3725F10018850C /* ChainGitopia.swift */,
 				799B4A802D2BDC0E00998833 /* ChainGno.swift */,
+				E1577EA32EF2AF2D008676EE /* ChainGonka.swift */,
 				045032912C1EEFC900235F6A /* ChainGovgen.swift */,
 				0450329B2C1EEFCA00235F6A /* ChainGravityBridge.swift */,
 				79ED0BCB2DB75C6500C84DB7 /* ChainHippo.swift */,
@@ -4741,6 +4754,7 @@
 				E14B92DD2DAFEF7C0030D4F0 /* ChainMonad_T.swift */,
 				04D785582C32B171009D1A94 /* ChainNeutron_T.swift */,
 				E18B21FB2C4A4EE900AD572F /* ChainNillion_T.swift */,
+				1568DC792EF26001000FEEFC /* ChainPharos_T.swift */,
 				E119ECFE2DF0489400CD2C9B /* ChainQubeticsEVM_T.swift */,
 				E16F39E62DE06487008A830D /* ChainSaharaAiEVM_T.swift */,
 				79909BCC2D8BB51D000CE2ED /* ChainSelf_T.swift */,
@@ -7041,6 +7055,7 @@
 				04C8166D2BA98D74006B800A /* cosmos_mint_v1beta1_tx.pb.swift in Sources */,
 				047DCEE328855F4800253CAA /* MintscanMyVote.swift in Sources */,
 				04CFF0342AC58D4400FB3187 /* SelectFeeCoinCell.swift in Sources */,
+				E1577EA42EF2AF2D008676EE /* ChainGonka.swift in Sources */,
 				181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */,
 				04C8165F2BA98D74006B800A /* cosmos_nft_v1beta1_query.grpc.swift in Sources */,
 				E11069B92AA4C57600EB02CA /* cosmwasm_wasm_v1_tx.pb.swift in Sources */,
@@ -7343,6 +7358,7 @@
 				04C817532BA98D75006B800A /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
 				E1DF77762AB74EE80028BD51 /* CheckPrivateKeyVC.swift in Sources */,
 				047843B82AC991B300462F1C /* injective_types_v1beta1_tx_response.pb.swift in Sources */,
+				E1577EA12EF2ABE4008676EE /* ChainEpixEVM.swift in Sources */,
 				046EA8EC2AD04A2600A2FCE7 /* desmos_profiles_v3_query.pb.swift in Sources */,
 				0478430E2AC9918700462F1C /* ethermint_evm_v1_tx.pb.swift in Sources */,
 				04C816952BA98D74006B800A /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */,
@@ -7607,6 +7623,7 @@
 				79D556192CEF04AE0023F1B9 /* ChainDoraVota.swift in Sources */,
 				79E381EC2DCC91E600DB0AD6 /* ChainLumera_T.swift in Sources */,
 				04C817702BA98D75006B800A /* cosmos_staking_v1beta1_tx.grpc.swift in Sources */,
+				E1577EA22EF2ABE4008676EE /* ChainEpixEVM.swift in Sources */,
 				04C816AC2BA98D75006B800A /* cosmos_bank_v1beta1_bank.pb.swift in Sources */,
 				0438A8022AE135B1006FA213 /* kava_cdp_v1beta1_tx.grpc.swift in Sources */,
 				04C816E42BA98D75006B800A /* cosmos_group_v1_tx.pb.swift in Sources */,
@@ -7919,6 +7936,7 @@
 				E10B1D972C2156430039283B /* KavaSwapListMyCell.swift in Sources */,
 				E10B1DE22C215C120039283B /* NeutronDaoVC.swift in Sources */,
 				04527DB92A937CA2005F72D7 /* AssetCell.swift in Sources */,
+				1568DC7C2EF2604C000FEEFC /* ChainPharos.swift in Sources */,
 				E16F39E42DE0645A008A830D /* ChainSaharaAiEVM.swift in Sources */,
 				792613A92CD4B82800FAF47D /* initia_reward_v1_query.grpc.swift in Sources */,
 				0402B7EC2ACC248400824B3F /* CosmosRewardAddress.swift in Sources */,
@@ -7938,6 +7956,7 @@
 				042D58712C5CF292003DBDE0 /* MajorReceiveVC.swift in Sources */,
 				04C816DE2BA98D75006B800A /* cosmos_base_kv_v1beta1_kv.pb.swift in Sources */,
 				04C817BE2BA98D75006B800A /* cosmos_distribution_v1beta1_genesis.pb.swift in Sources */,
+				1568DC7A2EF26001000FEEFC /* ChainPharos_T.swift in Sources */,
 				E13FC5532B26C79A0082C66E /* kava_earn_v1beta1_strategy.pb.swift in Sources */,
 				0409D2FB2AC5ECDD0021E192 /* SelectValidatorCell.swift in Sources */,
 				E14B92DE2DAFEF7C0030D4F0 /* ChainMonad_T.swift in Sources */,
@@ -8540,6 +8559,7 @@
 				15D865212E729EF600C201C8 /* DappSolanaSignRequestSheet.swift in Sources */,
 				04C816442BA98D74006B800A /* cosmos_tx_signing_v1beta1_signing.pb.swift in Sources */,
 				79FCA3DA2C3F9E92001C17D0 /* artela_fee_v1_genesis.pb.swift in Sources */,
+				E1577EA52EF2AF2D008676EE /* ChainGonka.swift in Sources */,
 				0450327A2C1EEDCD00235F6A /* ChainBand.swift in Sources */,
 				04C816642BA98D74006B800A /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
 				792613BD2CD4B82800FAF47D /* initia_intertx_v1_tx.pb.swift in Sources */,

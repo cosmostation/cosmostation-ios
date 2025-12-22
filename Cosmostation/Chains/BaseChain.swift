@@ -791,6 +791,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainDydx())
     result.append(ChainDymensionEVM())                  //EVM
     result.append(ChainElys())
+    result.append(ChainEpixEVM())                       //EVM
     result.append(ChainEthereum())                      //EVM
     result.append(ChainEvmosEVM())                      //EVM
     result.append(ChainFantom())                        //EVM
@@ -803,6 +804,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainGgez())
     result.append(ChainGitopia())
 //    result.append(ChainGno())
+    result.append(ChainGonka())
     result.append(ChainGravityAlpha())                  //EVM
     result.append(ChainGravityBridge())
     result.append(ChainHaqqEVM())                       //EVM
@@ -858,6 +860,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainPaxi())
     result.append(ChainPersistence118())
     result.append(ChainPersistence750())
+//    result.append(ChainPharos())                        //EVM
     result.append(ChainPlanqEVM())                      //EVM
     result.append(ChainPocket())
     result.append(ChainPolygon())                       //EVM
@@ -930,8 +933,8 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMonad_T())
     result.append(ChainNeutron_T())
     result.append(ChainNillion_T())
+    result.append(ChainPharos_T())
     result.append(ChainQubeticsEVM_T())
-    result.append(ChainTabiEVM_T())
     result.append(ChainTerraClassic_T())
     result.append(ChainWardenEVM_T())
     result.append(ChainXion_T())
@@ -969,6 +972,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainSaharaAiEVM_T())
 //    result.append(ChainSelf_T())
 //    result.append(ChainStoryEVM_T())
+//    result.append(ChainTabiEVM_T())
     
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {
