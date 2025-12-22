@@ -23,11 +23,7 @@ class AptosFetcher {
         self.chain = chain
     }
     
-    func fetchAptosBalance() async -> Swift.Bool {
-        return true
-    }
-    
-    func fetchAptosData(_ id: Int64) async -> Swift.Bool {
+    func fetchAptosData() async -> Swift.Bool {
         aptosAssetBalance.removeAll()
         
         do {
@@ -130,7 +126,7 @@ class AptosFetcher {
     }
     
     func getGraphQL() -> String {
-        if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_EVM_RPC_ENDPOINT +  " : " + chain.name) {
+        if let endpoint = UserDefaults.standard.string(forKey: KEY_CHAIN_RPC_ENDPOINT +  " : " + chain.name) {
             return endpoint.trimmingCharacters(in: .whitespaces)
         }
         return chain.mainUrl

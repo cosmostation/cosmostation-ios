@@ -69,7 +69,7 @@ class ChainSolana: BaseChain {
     override func fetchData(_ id: Int64) {
         fetchState = .Busy
         Task {
-            let solanaResult = await getSolanaFetcher()?.fetchSolanaData(id)
+            let solanaResult = await getSolanaFetcher()?.fetchSolanaData()
             
             if (solanaResult == false) {
                 fetchState = .Fail

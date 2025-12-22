@@ -165,6 +165,11 @@ class DeriveCell: UITableViewCell {
                     WDP.dpCoin(msAsset, availableAmount, nil, denomLabel, amountLabel, msAsset.decimals)
                 }
 
+            } else if let aptosFetcher = (chain as? ChainAptos)?.getAptosFetcher() {
+                let dpAmount = aptosFetcher.balanceAmount(APTOS_MAIN_DENOM).multiplying(byPowerOf10: -9, withBehavior: handler18Down)
+                denomLabel.text = chain.mainAssetSymbol()
+                amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
+
             } else if (chain.supportEvm) {
                 let dpAmount = chain.getEvmfetcher()?.evmBalances.multiplying(byPowerOf10: -18, withBehavior: handler18Down) ?? NSDecimalNumber.zero
                 denomLabel.text = chain.mainAssetSymbol()

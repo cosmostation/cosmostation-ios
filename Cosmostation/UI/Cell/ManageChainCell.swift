@@ -90,7 +90,17 @@ class ManageChainCell: UITableViewCell {
             evmEndpointTag.text = "RPC"
             evmEndpointLabel.text = solanaFetcher.getSolanaRpc().replacingOccurrences(of: "https://", with: "")
             evmEndpointLabel.adjustsFontSizeToFitWidth = true
+            
+        } else if let aptosFetcher = (chain as? ChainAptos)?.getAptosFetcher() {
+            cosmosLayer.isHidden = false
+            evmLayer.isHidden = false
+            cosmosEndpointTag.text = "REST"
+            evmEndpointTag.text = "GRAPHQL"
+            
+            cosmosEndpointLabel.text = aptosFetcher.getApi().replacingOccurrences(of: "https://", with: "")
+            cosmosEndpointLabel.adjustsFontSizeToFitWidth = true
+            evmEndpointLabel.text = aptosFetcher.getGraphQL().replacingOccurrences(of: "https://", with: "")
+            evmEndpointLabel.adjustsFontSizeToFitWidth = true
         }
     }
-    
 }

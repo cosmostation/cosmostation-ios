@@ -43,7 +43,20 @@ class ChainAptos: BaseChain  {
     override func fetchBalances() {
         fetchState = .Busy
         Task {
-            coinsCnt = 0 
+            coinsCnt = 0
+            let aptosResult = await getAptosFetcher()?.fetchAptosData()
+            
+            if (aptosResult == false) {
+                fetchState = .Fail
+            } else {
+                fetchState = .Success
+            }
+            
+            if (self.fetchState == .Success) {
+                if let aptosFetcher = getAptosFetcher() {
+                    coinsCnt = aptosfetcher?.aptosAssetBalance.count ?? 0
+                }
+            }
             
             DispatchQueue.main.async(execute: {
                 NotificationCenter.default.post(name: Notification.Name("fetchBalances"), object: self.tag, userInfo: nil)
@@ -54,7 +67,7 @@ class ChainAptos: BaseChain  {
     override func fetchData(_ id: Int64) {
         fetchState = .Busy
         Task { @MainActor in
-            let aptosResult = await getAptosFetcher()?.fetchAptosData(id)
+            let aptosResult = await getAptosFetcher()?.fetchAptosData()
             
             if (aptosResult == false) {
                 fetchState = .Fail
