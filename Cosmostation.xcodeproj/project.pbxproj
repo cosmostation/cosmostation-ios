@@ -1701,6 +1701,8 @@
 		15D637E12E1BB66D000BCE79 /* SolanaFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D637DF2E1BB66D000BCE79 /* SolanaFetcher.swift */; };
 		15D865202E729EF600C201C8 /* DappSolanaSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D8651F2E729EF600C201C8 /* DappSolanaSignRequestSheet.xib */; };
 		15D865212E729EF600C201C8 /* DappSolanaSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8651E2E729EF600C201C8 /* DappSolanaSignRequestSheet.swift */; };
+		15E031BE2EF9A1F100D230B0 /* aptos.js in Resources */ = {isa = PBXBuildFile; fileRef = 15E031BD2EF9A1F100D230B0 /* aptos.js */; };
+		15E031C02EF9A20E00D230B0 /* AptosJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E031BF2EF9A20E00D230B0 /* AptosJS.swift */; };
 		1809C35129D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
 		1809C35229D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
 		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
@@ -3406,6 +3408,8 @@
 		15D637DF2E1BB66D000BCE79 /* SolanaFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolanaFetcher.swift; sourceTree = "<group>"; };
 		15D8651E2E729EF600C201C8 /* DappSolanaSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappSolanaSignRequestSheet.swift; sourceTree = "<group>"; };
 		15D8651F2E729EF600C201C8 /* DappSolanaSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappSolanaSignRequestSheet.xib; sourceTree = "<group>"; };
+		15E031BD2EF9A1F100D230B0 /* aptos.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = aptos.js; sourceTree = "<group>"; };
+		15E031BF2EF9A20E00D230B0 /* AptosJS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AptosJS.swift; sourceTree = "<group>"; };
 		1809C35029D16C80008884C1 /* injectScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = injectScript.js; sourceTree = "<group>"; };
 		181099DE28AE92FC00C178B5 /* PushUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUtils.swift; sourceTree = "<group>"; };
 		1812D46128E184D800AC7D61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -4686,6 +4690,7 @@
 				04C940B22AE8D48C00415256 /* aes.js */,
 				795C0DC12C8E853C006D35A4 /* bitcoin.js */,
 				1505030D2E49DF250001415A /* solana.js */,
+				15E031BD2EF9A1F100D230B0 /* aptos.js */,
 				04A421132C7896A800C0E1A2 /* drop.json */,
 				79E7B3C92CF83F0400C28D93 /* dydx.json */,
 				7939A2592D30C2E2006674E3 /* btcStaking.json */,
@@ -4699,6 +4704,7 @@
 				04C940B52AE8D4A100415256 /* CryptoJS.swift */,
 				795C0DC32C8E8547006D35A4 /* BtcJS.swift */,
 				150503102E5C7F890001415A /* SolanaJS.swift */,
+				15E031BF2EF9A20E00D230B0 /* AptosJS.swift */,
 				E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */,
 				E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */,
 				E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */,
@@ -6361,6 +6367,7 @@
 				79ED0BD82DBA18F900C84DB7 /* IotaStakingInfoVC.xib in Resources */,
 				79DD26682D0C00B500B4353C /* VoteThreeItemsCell.xib in Resources */,
 				E10B1DD42C2159040039283B /* KavaMintCreateAction.xib in Resources */,
+				15E031BE2EF9A1F100D230B0 /* aptos.js in Resources */,
 				E10B1DAD2C2156430039283B /* KavaSwapListVC.xib in Resources */,
 				040733052AA442B6001C63DD /* ImportMnemonicCheckVC.xib in Resources */,
 				7992618C2D783FD3007E9911 /* BabylonClaimRewards.xib in Resources */,
@@ -8557,6 +8564,7 @@
 				040B43EB2E3725F10018850C /* ChainGitopia.swift in Sources */,
 				79813A6D2D530F890083A1F5 /* zrchain_validation_module_module.pb.swift in Sources */,
 				15D865212E729EF600C201C8 /* DappSolanaSignRequestSheet.swift in Sources */,
+				15E031C02EF9A20E00D230B0 /* AptosJS.swift in Sources */,
 				04C816442BA98D74006B800A /* cosmos_tx_signing_v1beta1_signing.pb.swift in Sources */,
 				79FCA3DA2C3F9E92001C17D0 /* artela_fee_v1_genesis.pb.swift in Sources */,
 				E1577EA52EF2AF2D008676EE /* ChainGonka.swift in Sources */,

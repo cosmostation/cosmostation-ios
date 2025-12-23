@@ -25,6 +25,8 @@ class DappSuiSignRequestSheet: BaseVC {
     @IBOutlet weak var barView: UIView!
     @IBOutlet weak var bodyCardView: FixCardView!
     @IBOutlet weak var toSignTextView: UITextView!
+    
+    @IBOutlet weak var feeTitleLabel: UILabel!
     @IBOutlet weak var feeCardView: FixCardView!
     @IBOutlet weak var feeImg: UIImageView!
     @IBOutlet weak var feeLabel: UILabel!
@@ -45,8 +47,14 @@ class DappSuiSignRequestSheet: BaseVC {
     var messageId: JSON?
     var selectedChain: BaseChain!
     var bytes: String!
+    var dappUrl: String?
     
     var suiFeeBudget = NSDecimalNumber.zero
+    
+    var moveGasPrice = NSDecimalNumber.zero
+    var moveMaxGasAmount = NSDecimalNumber.zero
+    var response: JSON?
+    var enCodeTx: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +72,10 @@ class DappSuiSignRequestSheet: BaseVC {
                 await dryrun()
             } else if method == "iota_signAndExecuteTransaction" || method == "iota_signAndExecuteTransactionBlock" || method == "iota_signTransaction" || method == "iota_signTransactionBlock" {
                 await iotaDryrun()
+            } else if method == "aptos_signMessage" {
+                await moveMessage()
+            } else if method == "aptos_signTransaction" {
+                await moveOriginalTx()
             }
             
             DispatchQueue.main.async {
@@ -73,7 +85,7 @@ class DappSuiSignRequestSheet: BaseVC {
     }
     
     override func setLocalizedString() {
-        if (method == "sui_signMessage") || (method == "sui_signPersonalMessage") || (method == "iota_signMessage") || (method == "iota_signPersonalMessage") {
+        if (method == "sui_signMessage") || (method == "sui_signPersonalMessage") || (method == "iota_signMessage") || (method == "iota_signPersonalMessage" || (method == "aptos_signMessage")) {
             requestTitle.text = NSLocalizedString("str_permit_request", comment: "")
         } else {
             requestTitle.text = NSLocalizedString("str_tx_request", comment: "")
@@ -99,6 +111,19 @@ class DappSuiSignRequestSheet: BaseVC {
             }
             safeMsgTitle.isHidden = false
             
+        } else if method == "aptos_signMessage" {
+            safeMsgTitle.isHidden = false
+            feeCardView.isHidden = true
+            let message = requestToSign?["message"].stringValue ?? ""
+            toSignTextView.text = "\(message)"
+            onInitFeeView()
+            
+        } else if method == "aptos_signTransaction" {
+            feeTitleLabel.text = "Max Estimated Fee"
+            dangerMsgTitle.isHidden = false
+            feeCardView.isHidden = false
+            onInitFeeView()
+            
         } else {
             dangerMsgTitle.isHidden = false
             feeCardView.isHidden = false
@@ -117,10 +142,19 @@ class DappSuiSignRequestSheet: BaseVC {
     func onUpdateFeeView() {
         guard let msAsset = BaseData.instance.getAsset(selectedChain.apiName, selectedChain.gasAssetDenom()) else { return }
         let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
-        let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
-        let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
-        feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 9)
-        WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+        
+        if selectedChain is ChainAptos {
+            let dpFee = moveGasPrice.multiplying(by: moveMaxGasAmount).multiplying(byPowerOf10: -8, withBehavior: getDivideHandler(8))
+            let feeValue = feePrice.multiplying(by: dpFee, withBehavior: handler6)
+            feeAmountLabel.attributedText = WDP.dpAmount(dpFee.stringValue, feeAmountLabel!.font, 8)
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            
+        } else {
+            let feeDpBudge = suiFeeBudget.multiplying(byPowerOf10: -9, withBehavior: getDivideHandler(9))
+            let feeValue = feePrice.multiplying(by: feeDpBudge, withBehavior: handler6)
+            feeAmountLabel.attributedText = WDP.dpAmount(feeDpBudge.stringValue, feeAmountLabel!.font, 9)
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+        }
     }
     
     private func dryrun() async {
@@ -156,6 +190,7 @@ class DappSuiSignRequestSheet: BaseVC {
             }
         }
     }
+    
     private func iotaDryrun() async {
         guard let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() else { return }
         
@@ -180,6 +215,49 @@ class DappSuiSignRequestSheet: BaseVC {
                 
                 let gasData = response["result"]["input"]["gasData"]
                 displayToSign!["gasData"] = gasData
+            }
+            
+        } catch {
+            print("fetching error: \(error)")
+            DispatchQueue.main.async {
+                self.dismissWithFail()
+            }
+        }
+    }
+    
+    private func moveMessage() async {
+        guard let aptosFetcher = (selectedChain as? ChainAptos)?.getAptosFetcher() else { return }
+        
+        do {
+            if let message = try await aptosFetcher.signMessage(requestToSign, dappUrl) {
+                response = JSON(message)
+            }
+            
+        } catch {
+            print("fetching error: \(error)")
+            DispatchQueue.main.async {
+                self.dismissWithFail()
+            }
+        }
+    }
+    
+    private func moveOriginalTx() async {
+        guard let aptosFetcher = (selectedChain as? ChainAptos)?.getAptosFetcher() else { return }
+        
+        do {
+            if let serializedTxHex = requestToSign?["serializedTxHex"].stringValue,
+               let originalTx = try await aptosFetcher.originalTx(serializedTxHex),
+               let signTx = try await aptosFetcher.signTx(serializedTxHex){
+                 
+                let displayJson = JSON(originalTx.data(using: .utf8) ?? "")
+                let rawTransaction = displayJson["rawTransaction"]
+                enCodeTx = signTx
+                moveGasPrice = NSDecimalNumber(string: rawTransaction["gas_unit_price"].stringValue.replacingOccurrences(of: "n", with: ""))
+                moveMaxGasAmount = NSDecimalNumber(string: rawTransaction["max_gas_amount"].stringValue.replacingOccurrences(of: "n", with: ""))
+                
+                DispatchQueue.main.async {
+                    self.toSignTextView.text = "\(displayJson)"
+                }
             }
             
         } catch {
@@ -247,6 +325,14 @@ class DappSuiSignRequestSheet: BaseVC {
             guard let messageBytes = requestToSign?["message"] else { return }
             let data: JSON = ["bytes": messageBytes, "signature": Signer.iotaSignatures(selectedChain, bytes)]
             webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
+        }
+        
+        else if method == "aptos_signMessage" {
+            let responseJson = JSON(parseJSON: response?.rawString() ?? "")
+            webSignDelegate?.onAcceptInjection(responseJson, requestToSign!, messageId!)
+            
+        } else if method == "aptos_signTransaction" {
+            webSignDelegate?.onAcceptInjection(JSON(enCodeTx ?? ""), requestToSign!, messageId!)
         }
         
         dismiss(animated: true)

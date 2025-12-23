@@ -196,6 +196,40 @@ extension AptosFetcher {
         
         return encodeSubmission
     }
+    
+    func signMessage(_ param: JSON?, _ dAppUrl: String?) async throws -> String? {
+        let privateKey = chain.privateKey?.hexEncodedString()
+        let messageJson = AptosJS.shared.callJSValue(key: "signAptosMessage", param: [privateKey, param?.rawValue, chain.mainAddress, dAppUrl])
+        return messageJson
+    }
+    
+    func originalTx(_ serializedTxHex: String) async throws -> String? {
+        let tx = AptosJS.shared.callJSValue(key: "getOriginalTx", param: [serializedTxHex])
+        return tx
+    }
+    
+    func signTx(_ serializedTxHex: String) async throws -> String? {
+        let privateKey = chain.privateKey?.hexEncodedString() ?? ""
+        let result: String? = try await withCheckedThrowingContinuation { continuation in
+                AptosJS.shared.callJSValueAsync(
+                    key: "signAptosTx",
+                    param: [serializedTxHex, privateKey, getApi()]
+                ) { value, error in
+                    if let error = error {
+                        continuation.resume(throwing: error)
+                        return
+                    }
+                    
+                    guard let value = value else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    continuation.resume(returning: value)
+                }
+            }
+        
+        return result
+    }
 }
 
 extension AptosFetcher {

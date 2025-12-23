@@ -48,6 +48,7 @@ class DappDetailVC: BaseVC, WebSignDelegate {
     var iotaTargetChain: BaseChain?
     var btcTargetChain: BaseChain?
     var solanaTargetChain: BaseChain?
+    var moveTargetChain: BaseChain?
     var web3: Web3?
     
     var btcNetwork: String?
@@ -382,6 +383,18 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         gnoSignRequestSheet.webSignDelegate = self
         gnoSignRequestSheet.modalTransitionStyle = .coverVertical
         self.present(gnoSignRequestSheet, animated: true)
+    }
+    
+    private func popUpMoveRequestSign(_ method: String, _ request: JSON, _ messageId: JSON?) {
+        let moveSignRequestSheet = DappSuiSignRequestSheet(nibName: "DappSuiSignRequestSheet", bundle: nil)
+        moveSignRequestSheet.method = method
+        moveSignRequestSheet.requestToSign = request
+        moveSignRequestSheet.messageId = messageId
+        moveSignRequestSheet.selectedChain = moveTargetChain
+        moveSignRequestSheet.dappUrl = "https://" + (dappUrl?.host ?? "")
+        moveSignRequestSheet.webSignDelegate = self
+        moveSignRequestSheet.modalTransitionStyle = .coverVertical
+        self.present(moveSignRequestSheet, animated: true)
     }
     
     func onCancleInjection(_ reseon: String, _ requestToSign: JSON, _ messageId: JSON) {
@@ -949,6 +962,36 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if method == "gno_signAndSendTransaction" || method == "gno_signTransaction" {
                 let params = messageJSON["params"]
                 self.popUpGnoRequestSign(method, params, bodyJSON["messageId"])
+            }
+            
+            //Handle APTOS Request
+            else if method == "aptos_connect" {
+                if moveTargetChain == nil {
+                    moveTargetChain = allChains.filter({ $0.name.contains("Aptos") }).first!
+                }
+                
+                let publicKey = moveTargetChain?.publicKey?.hexEncodedString()
+                let connectData: JSON = ["address": moveTargetChain?.mainAddress ?? "", "publicKey": publicKey ?? ""]
+                self.injectionRequestApprove(connectData, messageJSON, bodyJSON["messageId"])
+                
+            } else if method == "aptos_network" {
+                if moveTargetChain == nil {
+                    moveTargetChain = allChains.filter({ $0.name.contains("Aptos") }).first!
+                }
+                
+                let networkData: JSON = ["name": "mainnet", "chainId": 1]
+                self.injectionRequestApprove(networkData, messageJSON, bodyJSON["messageId"])
+                
+            } else if method == "aptos_disconnect" {
+                self.injectionRequestApprove(JSON.null, messageJSON, bodyJSON["messageId"])
+                
+            } else if method == "aptos_signMessage" {
+                let params = messageJSON["params"]
+                self.popUpMoveRequestSign(method, params, bodyJSON["messageId"])
+                
+            } else if method == "aptos_signTransaction" {
+                let params = messageJSON["params"]
+                self.popUpMoveRequestSign(method, params, bodyJSON["messageId"])
             }
 
             else {

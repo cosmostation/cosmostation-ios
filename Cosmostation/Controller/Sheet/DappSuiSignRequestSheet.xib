@@ -33,6 +33,7 @@
                 <outlet property="feeDenomLabel" destination="3SI-uC-vT0" id="tR0-cC-6Lb"/>
                 <outlet property="feeImg" destination="5gu-VF-6y2" id="pfA-jk-56u"/>
                 <outlet property="feeLabel" destination="VPb-W6-DF0" id="QuP-E2-OdI"/>
+                <outlet property="feeTitleLabel" destination="tcd-2B-hru" id="DtY-XP-zqJ"/>
                 <outlet property="feeValueLabel" destination="ZU4-Wv-t6f" id="OMb-gF-anU"/>
                 <outlet property="loadingView" destination="ubW-do-Wyh" id="gRK-Uq-hfQ"/>
                 <outlet property="requestTitle" destination="KfK-nK-zjT" id="MIJ-6g-Wwy"/>
@@ -366,7 +367,7 @@
             <color red="1" green="0.30196078431372547" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_divider">
-            <color red="1" green="1" blue="1" alpha="0.10000000149011612" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="0.059999998658895493" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font05">
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
