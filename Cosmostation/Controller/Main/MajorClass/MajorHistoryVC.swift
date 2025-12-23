@@ -236,6 +236,8 @@ extension MajorHistoryVC: UITableViewDelegate, UITableViewDataSource {
         var hash = ""
         if selectedChain is ChainSui || selectedChain is ChainIota {
             hash = historyGroup[indexPath.section].values[indexPath.row]["digest"].stringValue
+        } else if selectedChain is ChainAptos {
+            hash = historyGroup[indexPath.section].values[indexPath.row]["hash"].stringValue
         } else {
             hash = historyGroup[indexPath.section].values[indexPath.row]["txid"].stringValue
         }
