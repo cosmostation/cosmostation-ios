@@ -1682,6 +1682,7 @@
 		1580CD6E2EDFD1FD008D02FD /* AptosFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1580CD6D2EDFD1FD008D02FD /* AptosFetcher.swift */; };
 		158484152EFB1281002A3523 /* ChainAxone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158484142EFB1280002A3523 /* ChainAxone.swift */; };
 		158484172EFB1379002A3523 /* ChainAirchains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158484162EFB1379002A3523 /* ChainAirchains.swift */; };
+		158484192EFBB1CF002A3523 /* ChainAirchains_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158484182EFBB1CF002A3523 /* ChainAirchains_T.swift */; };
 		158BE1892E79985A00A02B4A /* ChainPocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158BE1882E79985A00A02B4A /* ChainPocket.swift */; };
 		158BE18F2E828D6900A02B4A /* ChainTerraClassic_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158BE18E2E828D6900A02B4A /* ChainTerraClassic_T.swift */; };
 		15ABBA6A2E838C72008560B7 /* ChainSunrise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ABBA692E838C72008560B7 /* ChainSunrise.swift */; };
@@ -3399,6 +3400,7 @@
 		1580CD6D2EDFD1FD008D02FD /* AptosFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AptosFetcher.swift; sourceTree = "<group>"; };
 		158484142EFB1280002A3523 /* ChainAxone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAxone.swift; sourceTree = "<group>"; };
 		158484162EFB1379002A3523 /* ChainAirchains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAirchains.swift; sourceTree = "<group>"; };
+		158484182EFBB1CF002A3523 /* ChainAirchains_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAirchains_T.swift; sourceTree = "<group>"; };
 		158BE1882E79985A00A02B4A /* ChainPocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPocket.swift; sourceTree = "<group>"; };
 		158BE18E2E828D6900A02B4A /* ChainTerraClassic_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainTerraClassic_T.swift; sourceTree = "<group>"; };
 		15ABBA692E838C72008560B7 /* ChainSunrise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSunrise.swift; sourceTree = "<group>"; };
@@ -4748,6 +4750,7 @@
 			isa = PBXGroup;
 			children = (
 				04965B452C37C94500403605 /* ChainCosmos_T.swift */,
+				158484182EFBB1CF002A3523 /* ChainAirchains_T.swift */,
 				04965B3C2C379A9C00403605 /* ChainArtelaEVM_T.swift */,
 				048CB5412D2E8A2100061729 /* ChainBabylon_T.swift */,
 				E10F88202C1E1B5800EA4272 /* ChainBeraEVM_T.swift */,
@@ -8378,6 +8381,7 @@
 				04C817442BA98D75006B800A /* cosmos_consensus_v1_query.grpc.swift in Sources */,
 				79AB34092D6EB0CE00F1426C /* BtcDelegate.swift in Sources */,
 				045033162C1F029A00235F6A /* ChainSentinel.swift in Sources */,
+				158484192EFBB1CF002A3523 /* ChainAirchains_T.swift in Sources */,
 				79705CC72D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.grpc.swift in Sources */,
 				79D5561B2CEF05D00023F1B9 /* ChainFirma.swift in Sources */,
 				E1CD6B002AEAAEF200376909 /* AboutSocialsCell.swift in Sources */,
