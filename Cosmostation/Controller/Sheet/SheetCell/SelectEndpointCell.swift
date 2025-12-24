@@ -299,7 +299,7 @@ class SelectEndpointCell: UITableViewCell {
             if (url.last != "/") {
                 url = url + "/"
             }
-            url = url + "/-/healthy"
+            url = url + "-/healthy"
             
             var endpointURL = endpoint["url"].stringValue
             if endpointURL.hasSuffix("/") {
