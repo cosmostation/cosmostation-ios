@@ -297,6 +297,10 @@ public class BaseAccount {
                 chain.allCoinUSDValue = solanaFetcher.balanceValue(usd: true)
                 chain.allTokenValue = solanaFetcher.allTokenValue()
                 chain.allTokenUSDValue = solanaFetcher.allTokenValue(true)
+                
+            } else if let aptosFetcher = (chain as? ChainAptos)?.getAptosFetcher() {
+                chain.allCoinValue = aptosFetcher.allAssetValue()
+                chain.allCoinUSDValue = aptosFetcher.allAssetValue(true)
             }
         }
     }
@@ -328,6 +332,7 @@ public enum PubKeyType: Int {
     case IOTA_Ed25519 = 12
     case COSMOS_EVM_Keccak256 = 13
     case SOLANA_Ed25519 = 14
+    case APTOS_ED25519 = 15
 
     case unknown = 99
     
@@ -362,6 +367,8 @@ public enum PubKeyType: Int {
         case PubKeyType.COSMOS_EVM_Keccak256:
             return "keccak256"
         case PubKeyType.SOLANA_Ed25519:
+            return "ed25519"
+        case PubKeyType.APTOS_ED25519:
             return "ed25519"
         case PubKeyType.unknown:
             return "unknown"

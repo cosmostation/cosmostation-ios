@@ -20,9 +20,7 @@ class MajorCryptoVC: BaseVC {
     
     var selectedChain: BaseChain!
     
-    var suiBalances = Array<(String, NSDecimalNumber)>()
-    
-    var iotaBalances = Array<(String, NSDecimalNumber)>()
+    var moveBalances = Array<(String, NSDecimalNumber)>()
     
     var allSplTokens = [JSON]()
     var searchSplTokens = [JSON]()
@@ -79,7 +77,6 @@ class MajorCryptoVC: BaseVC {
         if (selectedChain != nil && selectedChain.tag == tag) {
             DispatchQueue.main.async {
                 self.refresher.endRefreshing()
-                self.suiBalances.removeAll()
                 self.onUpdateView()
             }
         }
@@ -100,14 +97,15 @@ class MajorCryptoVC: BaseVC {
     }
     
     func onSortAssets() {
+        moveBalances.removeAll()
+        
         Task {
             if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
-                suiBalances = suiFetcher.suiBalances
-                //add zero sui for empty accoount
-                if (suiBalances.filter { $0.0 == SUI_MAIN_DENOM }.count == 0) {
-                    suiBalances.append((SUI_MAIN_DENOM, NSDecimalNumber.zero))
+                moveBalances = suiFetcher.suiBalances
+                if (moveBalances.filter { $0.0 == SUI_MAIN_DENOM }.count == 0) {
+                    moveBalances.append((SUI_MAIN_DENOM, NSDecimalNumber.zero))
                 }
-                suiBalances.sort {
+                moveBalances.sort {
                     if ($0.0 == SUI_MAIN_DENOM) { return true }
                     if ($1.0 == SUI_MAIN_DENOM) { return false }
                     let value0 = suiFetcher.balanceValue($0.0)
@@ -116,17 +114,16 @@ class MajorCryptoVC: BaseVC {
                 }
                 
             } else if let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() {
-                iotaBalances = iotaFetcher.iotaBalances
-                if iotaBalances.filter({ $0.0 == IOTA_MAIN_DENOM }).count == 0 {
-                    iotaBalances.append((IOTA_MAIN_DENOM, NSDecimalNumber.zero))
+                moveBalances = iotaFetcher.iotaBalances
+                if (moveBalances.filter { $0.0 == IOTA_MAIN_DENOM }.count == 0) {
+                    moveBalances.append((IOTA_MAIN_DENOM, NSDecimalNumber.zero))
                 }
-                iotaBalances.sort {
+                moveBalances.sort {
                     if ($0.0 == IOTA_MAIN_DENOM) { return true }
                     if ($1.0 == IOTA_MAIN_DENOM) { return false }
                     let value0 = iotaFetcher.balanceValue($0.0)
                     let value1 = iotaFetcher.balanceValue($1.0)
                     return value0.compare(value1).rawValue > 0 ? true : false
-
                 }
                 
             } else if let solanaFetcher = (selectedChain as? ChainSolana)?.getSolanaFetcher() {
@@ -137,6 +134,21 @@ class MajorCryptoVC: BaseVC {
                     return value0.compare(value1).rawValue > 0 ? true : false
                 }
                 searchSplTokens = allSplTokens
+                
+            } else if let aptosFetcher = (selectedChain as? ChainAptos)?.getAptosFetcher() {
+                aptosFetcher.aptosAssetBalance.forEach { aptosAsset in
+                    let coinType = aptosAsset.asset_type ?? ""
+                    let amount = NSDecimalNumber.init(string: aptosAsset.amount?.stringValue)
+                    moveBalances.append((coinType, amount))
+                }
+                
+                moveBalances.sort {
+                    if ($0.0 == APTOS_MAIN_DENOM) { return true }
+                    if ($1.0 == APTOS_MAIN_DENOM) { return false }
+                    let value0 = aptosFetcher.balanceValue($0.0)
+                    let value1 = aptosFetcher.balanceValue($1.0)
+                    return value0.compare(value1).rawValue > 0 ? true : false
+                }
             }
             
             DispatchQueue.main.async {
@@ -192,26 +204,26 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (selectedChain is ChainSui) {
+        if selectedChain is ChainSui || selectedChain is ChainIota {
             view.titleLabel.text = "Native Coins"
-            view.cntLabel.text = String(suiBalances.count)
+            view.cntLabel.text = String(moveBalances.count)
             
-        } else if selectedChain is ChainIota {
-            view.titleLabel.text = "Native Coins"
-            view.cntLabel.text = String(iotaBalances.count)
-
-        } else if (selectedChain is ChainBitCoin86) {
+        } else if selectedChain is ChainBitCoin86 {
             view.titleLabel.text = "Native Coins"
             view.cntLabel.text = ""
             
-        } else if (selectedChain is ChainSolana) {
-            if (section == 0) {
+        } else if selectedChain is ChainSolana {
+            if section == 0 {
                 view.titleLabel.text = "Native Coins"
                 view.cntLabel.text = ""
             } else {
                 view.titleLabel.text = "Spl Tokens"
                 view.cntLabel.text = String(searchSplTokens.count)
             }
+            
+        } else if selectedChain is ChainAptos {
+            view.titleLabel.text = "Coins"
+            view.cntLabel.text = String(moveBalances.count)
         }
         return view
     }
@@ -238,16 +250,11 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (selectedChain is ChainSui) {
-            return (section == 0) ? suiBalances.count : 0
-            
-        } else if selectedChain is ChainIota {
-            return (section == 0) ? iotaBalances.count : 0
-            
-        } else if (selectedChain is ChainBitCoin86) {
+        if selectedChain is ChainSui || selectedChain is ChainIota || selectedChain is ChainAptos {
+            return (section == 0) ? moveBalances.count : 0
+        } else if selectedChain is ChainBitCoin86 {
             return (section == 0) ? 1 : 0
-            
-        } else if (selectedChain is ChainSolana) {
+        } else if selectedChain is ChainSolana {
             return (section == 0) ? 1 : searchSplTokens.count
         }
         return 0
@@ -262,7 +269,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-                cell.bindSuiAsset(selectedChain, suiBalances[indexPath.row])
+                cell.bindSuiAsset(selectedChain, moveBalances[indexPath.row])
                 return cell
             }
             
@@ -274,7 +281,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-                cell.bindIotaAsset(selectedChain, iotaBalances[indexPath.row])
+                cell.bindIotaAsset(selectedChain, moveBalances[indexPath.row])
                 return cell
             }
 
@@ -292,6 +299,11 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
                 cell.bindSplToken(selectedChain, searchSplTokens[indexPath.row])
             }
             return cell
+            
+        } else if (selectedChain is ChainAptos) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+            cell.bindMoveClassAsset(selectedChain, moveBalances[indexPath.row])
+            return cell
         }
         
         return UITableViewCell()
@@ -307,7 +319,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
             transfer.sendAssetType = .SUI_COIN
             transfer.fromChain = selectedChain
-            transfer.toSendDenom = suiBalances[indexPath.row].0
+            transfer.toSendDenom = moveBalances[indexPath.row].0
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
             
@@ -320,7 +332,7 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
             transfer.sendAssetType = .IOTA_COIN
             transfer.fromChain = selectedChain
-            transfer.toSendDenom = iotaBalances[indexPath.row].0
+            transfer.toSendDenom = moveBalances[indexPath.row].0
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
             
@@ -371,6 +383,19 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
                     return
                 }
             }
+            
+        } else if selectedChain is ChainAptos {
+            if (selectedChain.isTxFeePayable() == false) {
+                onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+                return
+            }
+            
+            let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
+            transfer.sendAssetType = .APTOS_COIN
+            transfer.fromChain = selectedChain
+            transfer.toSendDenom = moveBalances[indexPath.row].0
+            transfer.modalTransitionStyle = .coverVertical
+            self.present(transfer, animated: true)
         }
     }
 }

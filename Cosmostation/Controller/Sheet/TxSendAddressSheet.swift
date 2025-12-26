@@ -10,6 +10,7 @@ import UIKit
 import Lottie
 import MaterialComponents
 import SwiftyJSON
+import AptosKit
 
 class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrScanDelegate, SelectAddressListDelegate, BaseSheetDelegate {
     
@@ -51,7 +52,7 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Swift.Bool {
         textField.resignFirstResponder()
         return true
     }
@@ -209,6 +210,16 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                 return
             }
+            
+        } else if toChain is ChainAptos {
+            if (isValidAptosAddress(userInput)) {
+                self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
+                self.dismiss(animated: true)
+                return
+            } else {
+                self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                return
+            }
         }
     }
     
@@ -341,5 +352,18 @@ public struct NameService {
         self.type = type
         self.name = name
         self.address = address
+    }
+}
+
+extension TxSendAddressSheet {
+    
+    func isValidAptosAddress(_ address: String?) -> Swift.Bool {
+        guard let raw = address?.trimmingCharacters(in: .whitespacesAndNewlines) else { return false }
+        guard raw.hasPrefix("0x") else { return false }
+        
+        let hex = String(raw.dropFirst(2))
+        guard !hex.isEmpty, hex.count == 64 else { return false }
+        _ = AccountAddress.companion.fromString(input: address ?? "")
+        return true
     }
 }

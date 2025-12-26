@@ -310,4 +310,22 @@ class AssetCell: UITableViewCell {
             }
         }
     }
+    
+    func bindMoveClassAsset(_ baseChain: BaseChain, _ balance: (String, NSDecimalNumber)) {
+        if let aptosFetcher = (baseChain as? ChainAptos)?.getAptosFetcher(),
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, balance.0) {
+            WDP.dpCoin(msAsset, aptosFetcher.balanceAmount(balance.0), coinImg, symbolLabel, amountLabel, 6)
+            WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+            
+            if BaseData.instance.getHideValue() {
+                hidenValueLabel.isHidden = false
+            } else {
+                WDP.dpValue(aptosFetcher.balanceValue(balance.0), valueCurrencyLabel, valueLabel)
+                amountLabel.isHidden = false
+                valueCurrencyLabel.isHidden = false
+                valueLabel.isHidden = false
+            }
+        }
+    }
 }

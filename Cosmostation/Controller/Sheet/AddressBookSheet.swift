@@ -9,6 +9,7 @@
 import UIKit
 import MaterialComponents
 import web3swift
+import AptosKit
 
 class AddressBookSheet: BaseVC, UITextFieldDelegate ,UITextViewDelegate {
     
@@ -85,12 +86,12 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate ,UITextViewDelegate {
         }
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Swift.Bool {
         textField.resignFirstResponder()
         return true
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Swift.Bool {
         if (text == "\n") {
             textView.resignFirstResponder()
             return false
@@ -231,7 +232,7 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate ,UITextViewDelegate {
         }
     }
     
-    func onValidateAddress(_ address: String?) -> Bool {
+    func onValidateAddress(_ address: String?) -> Swift.Bool {
         var network = ""
         if address!.starts(with: "t") || address!.starts(with: "2") || address!.starts(with: "m") {
             network = "testnet"
@@ -258,6 +259,9 @@ class AddressBookSheet: BaseVC, UITextFieldDelegate ,UITextViewDelegate {
                 
             } else if chain is ChainSolana && WUtils.isValidSolanaAddress(address) {
                 return true
+                
+            } else if chain is ChainAptos && isValidAptosAddress(address) {
+                return true
             }
             
         } else {
@@ -283,6 +287,18 @@ extension AddressBookSheet: BaseSheetDelegate {
     }
 }
 
+extension AddressBookSheet {
+    
+    func isValidAptosAddress(_ address: String?) -> Swift.Bool {
+        guard let raw = address?.trimmingCharacters(in: .whitespacesAndNewlines) else { return false }
+        guard raw.hasPrefix("0x") else { return false }
+        
+        let hex = String(raw.dropFirst(2))
+        guard !hex.isEmpty, hex.count == 64 else { return false }
+        _ = AccountAddress.companion.fromString(input: address ?? "")
+        return true
+    }
+}
 
 protocol AddressBookDelegate {
     func onAddressBookUpdated(_ result: Int?)

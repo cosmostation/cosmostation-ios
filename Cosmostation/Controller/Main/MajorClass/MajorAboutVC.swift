@@ -77,7 +77,7 @@ extension MajorAboutVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 3) { return .leastNormalMagnitude  }
         
-        if selectedChain is ChainBitCoin86 && section == 2 || selectedChain is ChainSolana && section == 2 {
+        if selectedChain is ChainBitCoin86 && section == 2 || selectedChain is ChainSolana && section == 2 || selectedChain is ChainAptos && section == 2 {
             return .leastNormalMagnitude
         }
 
@@ -93,11 +93,9 @@ extension MajorAboutVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if selectedChain is ChainBitCoin86 && section == 2 || selectedChain is ChainSolana && section == 2 {
+        if (selectedChain is ChainBitCoin86 || selectedChain is ChainSolana || selectedChain is ChainAptos) && section == 2 {
             return 0
         }
-
         return 1
     }
     

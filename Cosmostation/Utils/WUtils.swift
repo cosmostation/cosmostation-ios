@@ -284,7 +284,6 @@ public class WUtils {
     }
     
     static func isValidSolanaAddress(_ address: String?) -> Bool {
-        let test = KeyFac.base58Decode(address ?? "")
         guard let addr = address?.trimmingCharacters(in: .whitespacesAndNewlines),
               !addr.isEmpty,
               let decoded = KeyFac.base58Decode(addr) else {

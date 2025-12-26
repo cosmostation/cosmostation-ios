@@ -14,6 +14,7 @@ import SwiftProtobuf
 import SwiftyJSON
 import web3swift
 import Lottie
+import AptosKit
 
 class SelectEndpointCell: UITableViewCell {
     
@@ -25,7 +26,7 @@ class SelectEndpointCell: UITableViewCell {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var gapTime: CFAbsoluteTime?
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
@@ -159,7 +160,7 @@ class SelectEndpointCell: UITableViewCell {
                         self.configureClosedNode()
                         return
                     }
-
+                    
                     self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
                     self.configureSpeedLabel()
                     
@@ -179,7 +180,7 @@ class SelectEndpointCell: UITableViewCell {
             
             let checkTime = CFAbsoluteTimeGetCurrent()
             let url = endpoint["url"].stringValue.hasSuffix("/") ? String(endpoint["url"].stringValue.dropLast()) : endpoint["url"].stringValue
-
+            
             if suiFetcher.getSuiRpc().contains(url) {
                 seletedImg.isHidden = false
                 rootView.backgroundColor = .color08
@@ -208,7 +209,7 @@ class SelectEndpointCell: UITableViewCell {
             
             let checkTime = CFAbsoluteTimeGetCurrent()
             let url = endpoint["url"].stringValue.hasSuffix("/") ? String(endpoint["url"].stringValue.dropLast()) : endpoint["url"].stringValue
-
+            
             if iotaFetcher.getIotaRpc().contains(url) {
                 seletedImg.isHidden = false
                 rootView.backgroundColor = .color08
@@ -227,7 +228,7 @@ class SelectEndpointCell: UITableViewCell {
             }
         }
     }
-
+    
     func onBindGnoRpcEndpoint(_ position: Int, _ chain: BaseChain) {
         if let gnoFetcher = (chain as? ChainGno)?.getGnoFetcher() {
             let endpoint = chain.getChainListParam()["cosmos_rpc_endpoint"].arrayValue[position]
@@ -237,7 +238,7 @@ class SelectEndpointCell: UITableViewCell {
             
             let checkTime = CFAbsoluteTimeGetCurrent()
             let url = endpoint["url"].stringValue.hasSuffix("/") ? String(endpoint["url"].stringValue.dropLast()) : endpoint["url"].stringValue
-
+            
             if gnoFetcher.getRpc().contains(url) {
                 seletedImg.isHidden = false
                 rootView.backgroundColor = .color08
@@ -256,7 +257,7 @@ class SelectEndpointCell: UITableViewCell {
             }
         }
     }
-
+    
     func onBindSolanaRpcEndpoint(_ position: Int, _ chain: BaseChain) {
         if let solanaFetcher = (chain as? ChainSolana)?.getSolanaFetcher() {
             let endpoint = chain.getChainListParam()["solana_rpc_endpoint"].arrayValue[position]
@@ -266,7 +267,7 @@ class SelectEndpointCell: UITableViewCell {
             
             let checkTime = CFAbsoluteTimeGetCurrent()
             let url = endpoint["url"].stringValue.hasSuffix("/") ? String(endpoint["url"].stringValue.dropLast()) : endpoint["url"].stringValue
-
+            
             if solanaFetcher.getSolanaRpc().contains(url) {
                 seletedImg.isHidden = false
                 rootView.backgroundColor = .color08
@@ -286,6 +287,92 @@ class SelectEndpointCell: UITableViewCell {
         }
     }
     
+    func onBindMoveRestEndpoint(_ position: Int, _ chain: BaseChain) {
+        if let aptosFetcher = (chain as? ChainAptos)?.getAptosFetcher() {
+            let endpoint = chain.getChainListParam()["rest_endpoint"].arrayValue[position]
+            providerLabel.text = endpoint["provider"].string
+            endpointLabel.text = endpoint["url"].string?.replacingOccurrences(of: "https://", with: "")
+            endpointLabel.adjustsFontSizeToFitWidth = true
+            
+            let checkTime = CFAbsoluteTimeGetCurrent()
+            var url = endpoint["url"].stringValue
+            if (url.last != "/") {
+                url = url + "/"
+            }
+            url = url + "-/healthy"
+            
+            var endpointURL = endpoint["url"].stringValue
+            if endpointURL.hasSuffix("/") {
+                endpointURL = String(endpointURL.dropLast())
+            }
+            if aptosFetcher.getApi().contains(endpointURL) {
+                seletedImg.isHidden = false
+                rootView.backgroundColor = .color08
+            }
+            
+            Task {
+                do {
+                    let response = try await AF.request(url, method: .get).serializingDecodable(JSON.self).value
+                    let message = response["message"].stringValue
+                    if message.contains("ok") {
+                        self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
+                        configureSpeedLabel()
+                    } else {
+                        configureClosedNode()
+                    }
+                    
+                } catch {
+                    configureClosedNode()
+                }
+            }
+        }
+    }
+    
+    func onBindMoveGraphQLBind(_ position: Int, _ chain: BaseChain) {
+        if let aptosFetcher = (chain as? ChainAptos)?.getAptosFetcher() {
+            let endpoint = chain.getChainListParam()["graphql_endpoint"].arrayValue[position]
+            providerLabel.text = endpoint["provider"].string
+            endpointLabel.text = endpoint["url"].string?.replacingOccurrences(of: "https://", with: "")
+            endpointLabel.adjustsFontSizeToFitWidth = true
+            
+            let checkTime = CFAbsoluteTimeGetCurrent()
+            let url = endpoint["url"].stringValue.hasSuffix("/") ? String(endpoint["url"].stringValue.dropLast()) : endpoint["url"].stringValue
+            
+            if aptosFetcher.getGraphQL().contains(url) {
+                seletedImg.isHidden = false
+                rootView.backgroundColor = .color08
+            }
+            
+            Task {
+                do {
+                    let settings = AptosSettings(
+                        network: nil,
+                        fullNode: nil,
+                        faucet: nil,
+                        indexer: url,
+                        client: nil,
+                        clientConfig: ClientConfig.Companion.shared.default_,
+                        fullNodeConfig: nil,
+                        indexerConfig: nil,
+                        faucetConfig: nil
+                    )
+                    let config = AptosConfig(settings: settings)
+                    let aptos = Aptos(config: config, graceFull: false)
+                    
+                    let networkInfo = try await aptos.getLedgerInfo()
+                    if networkInfo is OptionSome {
+                        self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
+                        configureSpeedLabel()
+                    } else {
+                        configureClosedNode()
+                    }
+                    
+                } catch {
+                    configureClosedNode()
+                }
+            }
+        }
+    }
     
     func getConnection(_ host: String, _ port: Int) -> ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)

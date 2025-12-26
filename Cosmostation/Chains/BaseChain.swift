@@ -64,6 +64,7 @@ class BaseChain {
     //FOR BTC or SUI or majorChains
     var mainAddress = ""
     var mainUrl = ""
+    var apiUrl = ""
     
     
     var allCoinValue = NSDecimalNumber.zero
@@ -353,6 +354,9 @@ class BaseChain {
             
         } else if let iotaFetcher = (self as? ChainIota)?.getIotaFetcher() {
             return iotaFetcher.hasFee(txType)
+            
+        } else if let aptosFetcher = (self as? ChainAptos)?.getAptosFetcher() {
+            return aptosFetcher.hasFee()
             
         } else if let gnoFetcher = (self as? ChainGno)?.getGnoFetcher() {
             var result = false
@@ -747,6 +751,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAltheaEVM())                     //EVM
     result.append(ChainAlthea118())
     result.append(ChainAndromeda())
+    result.append(ChainAptos())
     result.append(ChainArbitrum())                      //EVM
     result.append(ChainArchway())
     result.append(ChainArkeo())                      
@@ -754,6 +759,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAtomone())
     result.append(ChainAvalanche())                     //EVM
     result.append(ChainAxelar())
+    result.append(ChainAxone())
     result.append(ChainBabylon())
     result.append(ChainBand())
     result.append(ChainBase())                          //EVM
@@ -916,6 +922,7 @@ func ALLCHAINS() -> [BaseChain] {
     
     
 
+    result.append(ChainAirchains_T())
     result.append(ChainBabylon_T())
     result.append(ChainBitCoin84_T())
     result.append(ChainBitCoin86_T())
@@ -1013,6 +1020,7 @@ public enum TxStyle: Int {
     case IOTA_STYLE = 5
     case SOLANA_STYLE = 6
     case SPL_STYLE = 7
+    case MOVE_STYLE = 8
 }
 
 public enum TxType: Int {

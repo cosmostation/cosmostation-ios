@@ -14,6 +14,7 @@ import Web3Core
 import BigInt
 import SwiftProtobuf
 import SDWebImage
+import AptosKit
 
 
 class CommonTransfer: BaseVC {
@@ -116,6 +117,10 @@ class CommonTransfer: BaseVC {
     var solanaFeeAmount = NSDecimalNumber.zero
     var solanaMinimumRentAmount = NSDecimalNumber.zero
     var solanaTxHex = ""
+    
+    var aptosFetcher: AptosFetcher!
+    var moveFeeAmount = NSDecimalNumber.zero
+    var moveMaxGasAmount = NSDecimalNumber.zero
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,6 +170,10 @@ class CommonTransfer: BaseVC {
             } else if (sendAssetType == .SOLANA_SPL) {
                 solanaFetcher = (fromChain as? ChainSolana)?.getSolanaFetcher()
                 txStyle = .SPL_STYLE
+                
+            } else if (sendAssetType == .APTOS_COIN) {
+                aptosFetcher = (fromChain as? ChainAptos)?.getAptosFetcher()
+                txStyle = .MOVE_STYLE
                 
             } else {
                 txStyle = .COSMOS_STYLE
@@ -280,6 +289,15 @@ class CommonTransfer: BaseVC {
             
             solanaFeeAmount = SOLANA_DEFAULT_FEE
 
+        } else if txStyle == .MOVE_STYLE {
+            feeSegments.removeAllSegments()
+            feeSegments.insertSegment(withTitle: "Default", at: 0, animated: false)
+            selectedFeePosition = 0
+            feeSegments.selectedSegmentIndex = selectedFeePosition
+            feeSelectLabel.text = fromChain.mainAssetSymbol()
+            
+            moveFeeAmount = APTOS_DEFAULT_FEE
+
         } else if (txStyle == .COSMOS_STYLE) {
             if (cosmosFetcher.cosmosBaseFees.count > 0) {
                 feeSegments.removeAllSegments()
@@ -376,6 +394,16 @@ class CommonTransfer: BaseVC {
             titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
             decimal = fromChain.assetDecimal(toSendDenom)
             symbol = fromChain.assetSymbol(toSendDenom)
+            
+        } else if sendAssetType == .APTOS_COIN {
+            titleCoinImg.sd_setImage(with: fromChain.assetImgUrl(toSendDenom), placeholderImage: UIImage(named: "tokenDefault"))
+            decimal = fromChain.assetDecimal(toSendDenom)
+            symbol = fromChain.assetSymbol(toSendDenom)
+            
+            sendableAmount = aptosFetcher.balanceAmount(toSendDenom)
+            if (fromChain.stakingAssetDenom() == toSendDenom) {
+                sendableAmount = sendableAmount.subtracting(moveFeeAmount)
+            }
         }
         
         if txStyle != .COSMOS_STYLE {
@@ -518,7 +546,7 @@ class CommonTransfer: BaseVC {
                 toAssetDenomLabel.text = fromChain.assetSymbol(toSendDenom)
                 toAssetAmountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, toAssetAmountLabel!.font, decimal)
                                 
-            } else if (sendAssetType == .SUI_COIN || sendAssetType == .IOTA_COIN) {
+            } else if (sendAssetType == .SUI_COIN || sendAssetType == .IOTA_COIN || sendAssetType == .APTOS_COIN) {
                 let msPrice = BaseData.instance.getPrice(fromChain.assetGeckoId(toSendDenom))
                 let dpAmount = toAmount.multiplying(byPowerOf10: -decimal, withBehavior: getDivideHandler(decimal))
                 let value = msPrice.multiplying(by: dpAmount, withBehavior: handler6)
@@ -669,6 +697,14 @@ class CommonTransfer: BaseVC {
             WDP.dpCoin(msAsset, solanaFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
             WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
             
+        } else if txStyle == .MOVE_STYLE {
+            guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, fromChain.gasAssetDenom()) else { return }
+            let feePrice = BaseData.instance.getPrice(msAsset.coinGeckoId)
+            let feeAmount = moveFeeAmount.multiplying(byPowerOf10: -msAsset.decimals!, withBehavior: handler6)
+            let feeValue = feePrice.multiplying(by: feeAmount, withBehavior: handler6)
+            WDP.dpCoin(msAsset, moveFeeAmount, feeSelectImg, feeDenomLabel, feeAmountLabel, msAsset.decimals)
+            WDP.dpValue(feeValue, feeCurrencyLabel, feeValueLabel)
+            
         } else if (txStyle == .GNO_STYLE) {
             guard let msAsset = BaseData.instance.getAsset(fromChain.apiName, cosmosTxFee.amount[0].denom) else { return }
             feeSelectLabel.text = msAsset.symbol
@@ -762,6 +798,17 @@ class CommonTransfer: BaseVC {
                 return
             }
             solanaFeeAmount = NSDecimalNumber.init(value: toGas)
+            sendBtn.isHidden = false
+            
+        } else if (txStyle == .MOVE_STYLE) {
+            guard let toGas = gasUsed else {
+                sendBtn.isHidden = true
+                errorCardView.isHidden = false
+                errorMsgLabel.text = errorMessage ?? NSLocalizedString("error_evm_simul", comment: "")
+                return
+            }
+            moveFeeAmount = NSDecimalNumber.init(value: toGas)
+            moveMaxGasAmount = NSDecimalNumber.init(value: toGas).multiplying(by: NSDecimalNumber(value: fromChain.getSimulatedGasMultiply()), withBehavior: handler0Up)
             sendBtn.isHidden = false
             
         } else if (txStyle == .GNO_STYLE) {
@@ -875,6 +922,9 @@ class CommonTransfer: BaseVC {
             
         } else if (txStyle == .SPL_STYLE) {                                         // SOLANA SPL TOKEN Send
             splSendSimul()
+            
+        } else if (txStyle == .MOVE_STYLE) {                                        // MOVE Coin Send
+            moveSendSimul()
         }
     }
 
@@ -1788,6 +1838,146 @@ extension CommonTransfer {
     }
 }
 
+// Move style tx simul and broadcast
+extension CommonTransfer {
+    
+    func moveSendSimul() {
+        Task {
+            do {
+                if let publicKeyHex = fromChain.publicKey?.toHexString(),
+                   let privateKeyHex = fromChain.privateKey?.toHexString() {
+                    let pKey = try Ed25519PKey(HexInput.companion.fromString(string: publicKeyHex), HexInput.companion.fromString(string: privateKeyHex))
+                    
+                    let from = AccountAddress.companion.fromString(input: fromChain.mainAddress)
+                    let to = AccountAddress.companion.fromString(input: toAddress)
+                    let options = InputGenerateTransactionOptions(maxGasAmount: 1000, gasUnitPrice: nil, expireTimestamp: nil, accountSequenceNumber: nil)
+                    
+                    if let transferTransaction = try await aptosFetcher.client()?.transferCoinTransaction(
+                        from: from,
+                        to: to,
+                        amount: toAmount.uint64Value,
+                        coinType: toSendDenom,
+                        options: options) {
+                        
+                        let opts = InputSimulateTransactionOptions(
+                            estimateGasUnitPrice: false,
+                            estimateMaxGasAmount: false,
+                            estimatePrioritizedGasUnitPrice: false)
+                        
+                        let simulateTxs = try await aptosFetcher.client()?.simulateTransaction.simple(
+                            signerPublicKey: pKey.publicKey(),
+                            transaction: transferTransaction,
+                            feePayerPublicKey: nil,
+                            options: opts)
+                        
+                        DispatchQueue.main.async {
+                            guard let simulate = (simulateTxs as? OptionSome<NSArray>)?.value else {
+                                self.view.isUserInteractionEnabled = true
+                                self.loadingView.isHidden = true
+                                self.sendBtn.isEnabled = false
+                                self.onShowToast(NSLocalizedString("error_evm_simul", comment: ""))
+                                return
+                            }
+                            
+                            if simulate.count > 0 {
+                                let gasUsed = (simulate[0] as? UserTransactionResponse)?.gasUsed
+                                let gasPrice = (simulate[0] as? UserTransactionResponse)?.gasUnitPrice
+                                
+                                let fee = NSDecimalNumber(string: gasUsed).multiplying(by: NSDecimalNumber(string: gasPrice))
+                                self.onUpdateWithSimul(UInt64(truncating: fee))
+                                
+                            } else {
+                                self.view.isUserInteractionEnabled = true
+                                self.loadingView.isHidden = true
+                                self.sendBtn.isEnabled = false
+                                self.onShowToast(NSLocalizedString("error_evm_simul", comment: ""))
+                                return
+                            }
+                        }
+                    }
+                }
+                
+            } catch let error as NSError {
+                DispatchQueue.main.async {
+                    self.view.isUserInteractionEnabled = true
+                    self.loadingView.isHidden = true
+                    self.sendBtn.isEnabled = false
+                    self.onShowToast("Error : " + "\n" + "\(error)")
+                    return
+                }
+            }
+        }
+    }
+    
+    func moveSend() {
+        Task {
+            do {
+                if let publicKeyHex = fromChain.publicKey?.toHexString(),
+                   let privateKeyHex = fromChain.privateKey?.toHexString() {
+                    let pKey = try Ed25519PKey(HexInput.companion.fromString(string: publicKeyHex), HexInput.companion.fromString(string: privateKeyHex))
+                    
+                    let from = AccountAddress.companion.fromString(input: fromChain.mainAddress)
+                    let to = AccountAddress.companion.fromString(input: toAddress)
+                    let options = InputGenerateTransactionOptions(
+                        maxGasAmount: Int64(truncating: moveMaxGasAmount),
+                        gasUnitPrice: nil,
+                        expireTimestamp: nil,
+                        accountSequenceNumber: nil)
+                    
+                    if let transferTransaction = try await aptosFetcher.client()?.transferCoinTransaction(
+                        from: from,
+                        to: to,
+                        amount: toAmount.uint64Value,
+                        coinType: toSendDenom,
+                        options: options),
+                       
+                        let encodeSubmission = try await aptosFetcher.fetchEncodeSubmission(
+                        transferTransaction.rawTransaction,
+                        to.value, 
+                        toSendDenom,
+                        toAmount.stringValue) {
+                        
+                        let messageBytes = Hex.companion.fromHexInput(hexInput: HexInput.companion.fromString(string: encodeSubmission)).toByteArray()
+                        let signature = try await aptosFetcher.sign(messageBytes, pKey.signingKeyPair.privateKey)
+                        let signed = AptosKit.AccountAuthenticatorEd25519(
+                            publicKey: pKey.ed25519PublicKey(),
+                            signature: Ed25519Signature(hexInput: signature))
+                        
+                        if let submit = try await aptosFetcher.client()?.submitTransaction.simple(
+                            transaction: transferTransaction,
+                            senderAuthenticator: signed,
+                            feePayerAuthenticator: nil) {
+                            
+                            if let some = submit as? OptionSome,
+                               let result = some.value {
+                                let hash: String = result.hash
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                                    self.loadingView.isHidden = true
+                                    let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                                    txResult.txStyle = self.txStyle
+                                    txResult.fromChain = self.fromChain
+                                    txResult.toChain = self.toChain
+                                    txResult.toAddress = self.toAddress
+                                    txResult.moveHash = hash
+                                    txResult.modalPresentationStyle = .fullScreen
+                                    self.present(txResult, animated: true)
+                                })
+                                
+                            } else {
+                                return
+                            }
+                        }
+                    }
+                }
+                
+            } catch {
+                //TODO handle Error
+            }
+        }
+    }
+}
+
 
 // Cosmos style tx simul and broadcast
 extension CommonTransfer {
@@ -2219,7 +2409,10 @@ extension CommonTransfer: BaseSheetDelegate, SendAddressDelegate, SendAmountShee
             } else if (txStyle == .SOLANA_STYLE || txStyle == .SPL_STYLE) {
                 solanaSend()
                 
-            } else if (txStyle == .GNO_STYLE) {
+            } else if (txStyle == .MOVE_STYLE) {
+                moveSend()
+                
+            }  else if (txStyle == .GNO_STYLE) {
                 if sendAssetType == .GNO_GRC20 {
                     gnoGrc20Send()
                     
@@ -2267,4 +2460,5 @@ public enum SendAssetType: Int {
     case IOTA_NFT = 11
     case SOLANA_COIN = 12                   // solana sol send
     case SOLANA_SPL = 13                    // solana spl send
+    case APTOS_COIN = 14                    // aptos send
 }

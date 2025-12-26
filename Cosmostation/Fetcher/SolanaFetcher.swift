@@ -35,7 +35,7 @@ class SolanaFetcher {
         return true
     }
     
-    func fetchSolanaData(_ id: Int64) async -> Bool {
+    func fetchSolanaData() async -> Bool {
         mintscanSplTokens.removeAll()
         solanaAccountInfo = JSON()
         solanaTokenInfo.removeAll()

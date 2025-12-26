@@ -61,7 +61,7 @@ class SelectAddressListSheet: BaseVC {
         
         var tempRefBechAddresses = [RefAddress]()
         
-        if (toChain is ChainSui || toChain is ChainIota || toChain is ChainSolana) {
+        if (toChain is ChainSui || toChain is ChainIota || toChain is ChainSolana || toChain is ChainAptos) {
             BaseData.instance.selectAllRefAddresses().forEach { refAddress in
                 if (refAddress.chainTag == toChain.tag && refAddress.bechAddress != senderMajorAddress) {
                     refMajorAddresses.append(refAddress)

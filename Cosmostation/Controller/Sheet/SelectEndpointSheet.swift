@@ -41,9 +41,9 @@ class SelectEndpointSheet: BaseVC {
         evmTableView.sectionHeaderTopPadding = 0
         
         endpointTypeSegment.removeAllSegments()
-        gRPCList = targetChain.getChainListParam()["grpc_endpoint"].array
+        gRPCList = targetChain.getChainListParam()["grpc_endpoint"].array ?? targetChain.getChainListParam()["rest_endpoint"].array
         lcdList = targetChain.getChainListParam()["lcd_endpoint"].array
-        evmRPCList = targetChain.getChainListParam()["evm_rpc_endpoint"].array
+        evmRPCList = targetChain.getChainListParam()["evm_rpc_endpoint"].array ?? targetChain.getChainListParam()["graphql_endpoint"].array
         rpcList = targetChain.getChainListParam()["rpc_endpoint"].array
         
         if (targetChain.supportCosmos && targetChain.supportEvm) {
@@ -65,13 +65,22 @@ class SelectEndpointSheet: BaseVC {
             evmTableView.isHidden = false
         }
         
-        if (targetChain is ChainSui || targetChain is ChainIota) {                  //using evm table
+        if targetChain is ChainAptos {
+            endpointTypeSegment.insertSegment(withTitle: "REST Endpoint", at: 0, animated: false)
+            endpointTypeSegment.insertSegment(withTitle: "GRAPHQL Endpoint", at: 1, animated: false)
+            endpointTypeSegment.isHidden = false
+            endpointTypeSegment.selectedSegmentIndex = 0
+            cosmosTableView.isHidden = false
+            evmTableView.isHidden = true
+        }
+        
+        if (targetChain is ChainSui || targetChain is ChainIota) {
             endpointTypeSegment.isHidden = true
             cosmosTableView.isHidden = true
             evmTableView.isHidden = false
         }
         
-        if (targetChain is ChainGno) {                  //using evm table
+        if (targetChain is ChainGno) {
             rpcList = targetChain.getChainListParam()["cosmos_rpc_endpoint"].array
             endpointTypeSegment.isHidden = true
             cosmosTableView.isHidden = true
@@ -116,7 +125,6 @@ class SelectEndpointSheet: BaseVC {
             evmTableView.isHidden = false
         }
     }
-    
 }
 
 extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
@@ -135,9 +143,15 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
                 view.imageView.isHidden = false
                 view.imageView.image = UIImage(named: "iconGrpc")
                 view.imageView.tintColor = .color03
-                view.titleLabel.text = "GRPC"
+                
+                if targetChain is ChainAptos {
+                    view.titleLabel.text = "REST"
+                } else {
+                    view.titleLabel.text = "GRPC"
+                }
                 view.cntLabel.text = String(gRPCList!.count)
                 return view
+                
             } else if (section == 1 && lcdList != nil) {
                 view.imageView.isHidden = false
                 view.imageView.image = UIImage(named: "iconRest")
@@ -145,6 +159,7 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
                 view.titleLabel.text = "REST"
                 view.cntLabel.text = String(lcdList!.count)
                 return view
+                
             } else {
                 return nil
             }
@@ -162,9 +177,15 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
                 view.imageView.isHidden = false
                 view.imageView.image = UIImage(named: "iconGrpc")
                 view.imageView.tintColor = .color03
-                view.titleLabel.text = "EVM RPC"
+                
+                if targetChain is ChainAptos {
+                    view.titleLabel.text = "GRAPHQL"
+                } else {
+                    view.titleLabel.text = "EVM RPC"
+                }
                 view.cntLabel.text = String(evmRPCList!.count)
                 return view
+                
             } else {
                 return nil
             }
@@ -181,6 +202,7 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
             } else if (section == 1) {
                 return (lcdList != nil) ? 40 : 0
             }
+            
         } else if (tableView == evmTableView) {
             if (targetChain is ChainSui || targetChain is ChainIota || targetChain is ChainGno || targetChain is ChainSolana) {
                 return (rpcList != nil) ? 40 : 0
@@ -211,7 +233,12 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier:"SelectEndpointCell") as? SelectEndpointCell
         if (tableView == cosmosTableView) {
             if (indexPath.section == 0) {
-                cell?.onBindGrpcEndpoint(indexPath.row, targetChain)
+                if targetChain is ChainAptos {
+                    cell?.onBindMoveRestEndpoint(indexPath.row, targetChain)
+                } else {
+                    cell?.onBindGrpcEndpoint(indexPath.row, targetChain)
+                }
+                
             } else {
                 cell?.onBindLcdEndpoint(indexPath.row, targetChain)
             }
@@ -228,6 +255,9 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
             } else if (targetChain is ChainSolana) {
                 cell?.onBindSolanaRpcEndpoint(indexPath.row, targetChain)
                 
+            } else if targetChain is ChainAptos {
+                cell?.onBindMoveGraphQLBind(indexPath.row, targetChain)
+                
             } else {
                 cell?.onBindEvmEndpoint(indexPath.row, targetChain)
             }
@@ -240,9 +270,15 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
         if (cell?.gapTime != nil) {
             if (tableView == cosmosTableView) {
                 if (indexPath.section == 0) {
-                    let endpoint = targetChain.getChainListParam()["grpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
-                    BaseData.instance.setGrpcEndpoint(targetChain, endpoint)
-                    BaseData.instance.setCosmosEndpointType(targetChain, .UseGRPC)
+                    if targetChain is ChainAptos {
+                        let endpoint = targetChain.getChainListParam()["rest_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                        BaseData.instance.setLcdEndpoint(targetChain, endpoint)
+                    } else {
+                        let endpoint = targetChain.getChainListParam()["grpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                        BaseData.instance.setGrpcEndpoint(targetChain, endpoint)
+                        BaseData.instance.setCosmosEndpointType(targetChain, .UseGRPC)
+                    }
+                    
                 } else {
                     let endpoint = targetChain.getChainListParam()["lcd_endpoint"].arrayValue[indexPath.row]["url"].stringValue
                     BaseData.instance.setLcdEndpoint(targetChain, endpoint)
@@ -262,11 +298,14 @@ extension SelectEndpointSheet: UITableViewDelegate, UITableViewDataSource {
                     let endpoint = targetChain.getChainListParam()["cosmos_rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
                     BaseData.instance.setRpcEndpoint(targetChain, endpoint)
 
+                } else if targetChain is ChainAptos {
+                    let endpoint = targetChain.getChainListParam()["graphql_endpoint"].arrayValue[indexPath.row]["url"].stringValue
+                    BaseData.instance.setRpcEndpoint(targetChain, endpoint)
+                    
                 } else {
                     let endpoint = targetChain.getChainListParam()["evm_rpc_endpoint"].arrayValue[indexPath.row]["url"].stringValue
                     BaseData.instance.setEvmRpcEndpoint(targetChain, endpoint)
                 }
-                
             }
             self.dismiss(animated: true) {
                 self.endpointDelegate?.onEndpointUpdated(["chainTag" : self.targetChain.tag])
