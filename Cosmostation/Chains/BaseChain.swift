@@ -880,7 +880,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainSeda())
     result.append(ChainSeiEVM())                        //EVM
     result.append(ChainSei())
-    result.append(ChainSelf())
     result.append(ChainSentinel())
     result.append(ChainShardeum())                      //EVM
     result.append(ChainShentu())
@@ -960,6 +959,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainOnomy())
 //    result.append(ChainQuasar())
 //    result.append(ChainRouterEVM())                     //EVM
+//    result.append(ChainSelf())
 //    result.append(ChainSge())
 //    result.append(ChainStafi())
 //    result.append(ChainStarname())
