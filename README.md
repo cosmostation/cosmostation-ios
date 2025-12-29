@@ -1538,7 +1538,7 @@ You can download each store.
   </tr>
   
   <tr> 
-    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/aptpos/resource/chain_aptos.png?raw=true" width="42" height = "42"></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/aptos/resource/chain_aptos.png?raw=true" width="42" height = "42"></td>
     <td><span style="font-weight:bold">APTOS</span></td>
     <td>m/44'/637'/0'/0'/X'</td>
     <td>ed25519</td>
@@ -1606,8 +1606,8 @@ You can download each store.
   </tr>
   
   <tr>
-    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/arichains-testnet/resource/chain_arichains-testnet.png?raw=true" width="42" height = "42"></td>
-    <td><span style="font-weight:bold">ARICHAINS TESTNET</span></td>
+    <td><img src="https://github.com/cosmostation/chainlist/blob/main/chain/airchains-testnet/resource/chain_airchains-testnet.png?raw=true" width="42" height = "42"></td>
+    <td><span style="font-weight:bold">AIRCHAINS TESTNET</span></td>
     <td>m/44'/118'/0'/0/X</td>
     <td>secp256k1</td>
     <td>gRPC or Rest</td>
