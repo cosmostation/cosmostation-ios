@@ -83,7 +83,7 @@ class AptosFetcher {
             return sum
         }
         aptosAssetBalance.forEach { asset in
-            sum = sum.adding(balanceValue(asset.asset_type))
+            sum = sum.adding(balanceValue(asset.asset_type, usd))
         }
         
         return sum
