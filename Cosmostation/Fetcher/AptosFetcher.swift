@@ -177,24 +177,144 @@ extension AptosFetcher {
         return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
     }
     
-    func fetchEncodeSubmission(_ rawTransaction: RawTransaction, _ to: String, _ toSendDenom: String, _ toAmount: String) async throws -> String? {
+    @MainActor
+    func fetchSimulateTransaction(_ publickey: String, _ to: String, _ toSendDenom: String, _ toAmount: String) async throws -> [JSON]? {
+        guard let client = client() else { return nil }
+        guard let msAsset = BaseData.instance.getAsset(chain.apiName, toSendDenom) else { return nil }
+        
+        let url = "\(getApi())transactions/simulate"
+        
+        let accountInfo = try await client.getAccountInfo(accountAddress: accountAddress()) { _ in }
+        let gasPriceInfo = try await client.getGasPriceEstimation()
+        
+        if accountInfo is OptionSome {
+            let sequenceNumber = (accountInfo as? OptionSome)?.value?.sequenceNumber ?? "0"
+            let nowMillis = Int64(Date().timeIntervalSince1970 * 1000)
+            let expirationTimestampSecs = nowMillis / 1000 + Int64(20)
+            let dummySig = Data(repeating: 0, count: 64).toHexString()
+            
+            let payload: Payload
+            if msAsset.type == "fungible" {
+                payload = Payload(
+                    function: "0x1::primary_fungible_store::transfer",
+                    type_arguments: ["0x1::fungible_asset::Metadata"],
+                    arguments: [toSendDenom, to, toAmount])
+            } else {
+                payload = Payload(type_arguments: [toSendDenom], arguments: [to, toAmount])
+            }
+            let signature = Signature(public_key: publickey, signature: dummySig)
+            
+            let encodeRequest = EncodeRequest(
+                sender: chain.mainAddress,
+                sequence_number: String(sequenceNumber),
+                max_gas_amount: String(1000),
+                gas_unit_price: String(gasPriceInfo.gasEstimate),
+                expiration_timestamp_secs: String(expirationTimestampSecs),
+                payload: payload,
+                signature: signature)
+            
+            let simulation = try? await AF.request(url, method: .post,
+                                                   parameters: encodeRequest,
+                                                   encoder: JSONParameterEncoder.default,
+                                                   headers: [:]).validate().serializingDecodable([JSON].self).value
+            return simulation
+            
+        } else {
+            return nil
+        }
+    }
+    
+    @MainActor
+    func fetchEncodeSubmission(_ to: String, _ toSendDenom: String, _ toAmount: String, _ maxGasAmount: String) async throws -> String? {
+        guard let client = client() else { return nil }
+        guard let msAsset = BaseData.instance.getAsset(chain.apiName, toSendDenom) else { return nil }
+        
         let url = "\(getApi())transactions/encode_submission"
         
-        let payload = Payload(type_arguments: [toSendDenom], arguments: [to, toAmount])
-        let encodeRequest = EncodeRequest(
-            sender: rawTransaction.sender.value,
-            sequence_number: String(rawTransaction.sequenceNumber),
-            max_gas_amount: String(rawTransaction.maxGasAmount),
-            gas_unit_price: String(rawTransaction.gasUnitPrice),
-            expiration_timestamp_secs: String(rawTransaction.expirationTimestampSecs),
-            payload: payload)
+        let accountInfo = try await client.getAccountInfo(accountAddress: accountAddress()) { _ in }
+        let gasPriceInfo = try await client.getGasPriceEstimation()
         
-        let encodeSubmission = try? await AF.request(url, method: .post,
-                                         parameters: encodeRequest,
-                                         encoder: JSONParameterEncoder.default,
-                                         headers: [:]).validate().serializingDecodable(String.self).value
+        if accountInfo is OptionSome {
+            let sequenceNumber = (accountInfo as? OptionSome)?.value?.sequenceNumber ?? "0"
+            let nowMillis = Int64(Date().timeIntervalSince1970 * 1000)
+            let expirationTimestampSecs = nowMillis / 1000 + Int64(20)
+            
+            let payload: Payload
+            if msAsset.type == "fungible" {
+                payload = Payload(
+                    function: "0x1::primary_fungible_store::transfer",
+                    type_arguments: ["0x1::fungible_asset::Metadata"],
+                    arguments: [toSendDenom, to, toAmount])
+            } else {
+                payload = Payload(type_arguments: [toSendDenom], arguments: [to, toAmount])
+            }
+            
+            let encodeRequest = EncodeRequest(
+                sender: chain.mainAddress,
+                sequence_number: String(sequenceNumber),
+                max_gas_amount: maxGasAmount,
+                gas_unit_price: String(gasPriceInfo.gasEstimate),
+                expiration_timestamp_secs: String(expirationTimestampSecs),
+                payload: payload)
+            
+            let encodeSubmission = try? await AF.request(url, method: .post,
+                                             parameters: encodeRequest,
+                                             encoder: JSONParameterEncoder.default,
+                                             headers: [:]).validate().serializingDecodable(String.self).value
+            
+            return encodeSubmission
+            
+        } else {
+            return nil
+        }
+    }
+    
+    @MainActor
+    func fetchSubmitTransaction(_ publickey: String, _ signatureHex: String, _ to: String, _ toSendDenom: String, _ toAmount: String, _ maxGasAmount: String) async throws -> String? {
+        guard let client = client() else { return nil }
+        guard let msAsset = BaseData.instance.getAsset(chain.apiName, toSendDenom) else { return nil }
         
-        return encodeSubmission
+        let url = "\(getApi())transactions"
+        
+        let accountInfo = try await client.getAccountInfo(accountAddress: accountAddress()) { _ in }
+        let gasPriceInfo = try await client.getGasPriceEstimation()
+        
+        if accountInfo is OptionSome {
+            let sequenceNumber = (accountInfo as? OptionSome)?.value?.sequenceNumber ?? "0"
+            let nowMillis = Int64(Date().timeIntervalSince1970 * 1000)
+            let expirationTimestampSecs = nowMillis / 1000 + Int64(20)
+            
+            let payload: Payload
+            if msAsset.type == "fungible" {
+                payload = Payload(
+                    function: "0x1::primary_fungible_store::transfer",
+                    type_arguments: ["0x1::fungible_asset::Metadata"],
+                    arguments: [toSendDenom, to, toAmount])
+            } else {
+                payload = Payload(type_arguments: [toSendDenom], arguments: [to, toAmount])
+            }
+            let signature = Signature(public_key: publickey, signature: signatureHex)
+            
+            let encodeRequest = EncodeRequest(
+                sender: chain.mainAddress,
+                sequence_number: String(sequenceNumber),
+                max_gas_amount: maxGasAmount,
+                gas_unit_price: String(gasPriceInfo.gasEstimate),
+                expiration_timestamp_secs: String(expirationTimestampSecs),
+                payload: payload,
+                signature: signature)
+            
+            let submitTransaction = try? await AF.request(url, method: .post,
+                                                   parameters: encodeRequest,
+                                                   encoder: JSONParameterEncoder.default,
+                                                   headers: [:]).validate().serializingDecodable(JSON.self).value
+            
+            let hash = submitTransaction?["hash"].stringValue
+            return hash
+            
+        } else {
+            return nil
+        }
     }
     
     func signMessage(_ param: JSON?, _ dAppUrl: String?) async throws -> String? {
@@ -235,25 +355,31 @@ extension AptosFetcher {
 extension AptosFetcher {
     
     struct EncodeRequest: Encodable {
-        let sender: String
-        let sequence_number: String
-        let max_gas_amount: String
-        let gas_unit_price: String
-        let expiration_timestamp_secs: String
-        let payload: Payload
+        let sender: String?
+        let sequence_number: String?
+        let max_gas_amount: String?
+        let gas_unit_price: String?
+        let expiration_timestamp_secs: String?
+        let payload: Payload?
+        var signature: Signature? = nil
     }
     
     struct Payload: Encodable {
         let type: String = "entry_function_payload"
-        let function: String = "0x1::coin::transfer"
+        var function: String? = "0x1::coin::transfer"
         let type_arguments: [String]
         let arguments: [String]
     }
     
-    func sign(_ message: KotlinByteArray, _ privateKey: KotlinByteArray) async throws -> KotlinByteArray {
+    struct Signature: Encodable {
+        let type: String = "ed25519_signature"
+        let public_key: String?
+        let signature: String
+    }
+    
+    func sign(_ message: KotlinByteArray, _ privateKey: Foundation.Data) async throws -> KotlinByteArray {
         let msg = message.toSwiftData()
-        let pk = privateKey.toSwiftData()
-        let signing = try Curve25519.Signing.PrivateKey(rawRepresentation: pk)
+        let signing = try Curve25519.Signing.PrivateKey(rawRepresentation: privateKey)
         let sign = try signing.signature(for: msg)
         return sign.toKotlinByteArray()
     }
@@ -287,10 +413,6 @@ class Ed25519PKey: AptosKit.PrivateKey {
     
     func toByteArray() -> KotlinByteArray {
         return signingKeyPair.privateKey
-    }
-    
-    func ed25519PublicKey() -> Ed25519PublicKey {
-        return Ed25519PublicKey(data: signingKeyPair.publicKey)
     }
 }
 

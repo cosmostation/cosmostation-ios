@@ -1844,44 +1844,12 @@ extension CommonTransfer {
     func moveSendSimul() {
         Task {
             do {
-                if let publicKeyHex = fromChain.publicKey?.toHexString(),
-                   let privateKeyHex = fromChain.privateKey?.toHexString() {
-                    let pKey = try Ed25519PKey(HexInput.companion.fromString(string: publicKeyHex), HexInput.companion.fromString(string: privateKeyHex))
-                    
-                    let from = AccountAddress.companion.fromString(input: fromChain.mainAddress)
-                    let to = AccountAddress.companion.fromString(input: toAddress)
-                    let options = InputGenerateTransactionOptions(maxGasAmount: 1000, gasUnitPrice: nil, expireTimestamp: nil, accountSequenceNumber: nil)
-                    
-                    if let transferTransaction = try await aptosFetcher.client()?.transferCoinTransaction(
-                        from: from,
-                        to: to,
-                        amount: toAmount.uint64Value,
-                        coinType: toSendDenom,
-                        options: options) {
-                        
-                        let opts = InputSimulateTransactionOptions(
-                            estimateGasUnitPrice: false,
-                            estimateMaxGasAmount: false,
-                            estimatePrioritizedGasUnitPrice: false)
-                        
-                        let simulateTxs = try await aptosFetcher.client()?.simulateTransaction.simple(
-                            signerPublicKey: pKey.publicKey(),
-                            transaction: transferTransaction,
-                            feePayerPublicKey: nil,
-                            options: opts)
-                        
+                if let publicKeyHex = fromChain.publicKey?.toHexString() {
+                    if let simulate = try await aptosFetcher.fetchSimulateTransaction(publicKeyHex, toAddress, toSendDenom, toAmount.stringValue) {
                         DispatchQueue.main.async {
-                            guard let simulate = (simulateTxs as? OptionSome<NSArray>)?.value else {
-                                self.view.isUserInteractionEnabled = true
-                                self.loadingView.isHidden = true
-                                self.sendBtn.isEnabled = false
-                                self.onShowToast(NSLocalizedString("error_evm_simul", comment: ""))
-                                return
-                            }
-                            
                             if simulate.count > 0 {
-                                let gasUsed = (simulate[0] as? UserTransactionResponse)?.gasUsed
-                                let gasPrice = (simulate[0] as? UserTransactionResponse)?.gasUnitPrice
+                                let gasUsed = simulate[0]["gas_used"].stringValue
+                                let gasPrice = simulate[0]["gas_unit_price"].stringValue
                                 
                                 let fee = NSDecimalNumber(string: gasUsed).multiplying(by: NSDecimalNumber(string: gasPrice))
                                 self.onUpdateWithSimul(UInt64(truncating: fee))
@@ -1913,61 +1881,31 @@ extension CommonTransfer {
         Task {
             do {
                 if let publicKeyHex = fromChain.publicKey?.toHexString(),
-                   let privateKeyHex = fromChain.privateKey?.toHexString() {
-                    let pKey = try Ed25519PKey(HexInput.companion.fromString(string: publicKeyHex), HexInput.companion.fromString(string: privateKeyHex))
+                   let privateKey = fromChain.privateKey,
+                   let encodeSubmission = try await aptosFetcher.fetchEncodeSubmission(toAddress, toSendDenom, toAmount.stringValue, moveMaxGasAmount.stringValue) {
                     
-                    let from = AccountAddress.companion.fromString(input: fromChain.mainAddress)
-                    let to = AccountAddress.companion.fromString(input: toAddress)
-                    let options = InputGenerateTransactionOptions(
-                        maxGasAmount: Int64(truncating: moveMaxGasAmount),
-                        gasUnitPrice: nil,
-                        expireTimestamp: nil,
-                        accountSequenceNumber: nil)
+                    let messageBytes = Hex.companion.fromHexInput(hexInput: HexInput.companion.fromString(string: encodeSubmission)).toByteArray()
+                    let signature = try await aptosFetcher.sign(messageBytes, privateKey)
                     
-                    if let transferTransaction = try await aptosFetcher.client()?.transferCoinTransaction(
-                        from: from,
-                        to: to,
-                        amount: toAmount.uint64Value,
-                        coinType: toSendDenom,
-                        options: options),
-                       
-                        let encodeSubmission = try await aptosFetcher.fetchEncodeSubmission(
-                        transferTransaction.rawTransaction,
-                        to.value, 
+                    if let hash = try await aptosFetcher.fetchSubmitTransaction(
+                        publicKeyHex,
+                        signature.toSwiftData().toHexString(),
+                        toAddress, 
                         toSendDenom,
-                        toAmount.stringValue) {
+                        toAmount.stringValue, 
+                        moveMaxGasAmount.stringValue) {
                         
-                        let messageBytes = Hex.companion.fromHexInput(hexInput: HexInput.companion.fromString(string: encodeSubmission)).toByteArray()
-                        let signature = try await aptosFetcher.sign(messageBytes, pKey.signingKeyPair.privateKey)
-                        let signed = AptosKit.AccountAuthenticatorEd25519(
-                            publicKey: pKey.ed25519PublicKey(),
-                            signature: Ed25519Signature(hexInput: signature))
-                        
-                        if let submit = try await aptosFetcher.client()?.submitTransaction.simple(
-                            transaction: transferTransaction,
-                            senderAuthenticator: signed,
-                            feePayerAuthenticator: nil) {
-                            
-                            if let some = submit as? OptionSome,
-                               let result = some.value {
-                                let hash: String = result.hash
-                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
-                                    self.loadingView.isHidden = true
-                                    let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
-                                    txResult.txStyle = self.txStyle
-                                    txResult.fromChain = self.fromChain
-                                    txResult.toChain = self.toChain
-                                    txResult.toAddress = self.toAddress
-                                    txResult.moveHash = hash
-                                    txResult.modalPresentationStyle = .fullScreen
-                                    self.present(txResult, animated: true)
-                                })
-                                
-                            } else {
-                                return
-                            }
-                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                            self.loadingView.isHidden = true
+                            let txResult = CommonTransferResult(nibName: "CommonTransferResult", bundle: nil)
+                            txResult.txStyle = self.txStyle
+                            txResult.fromChain = self.fromChain
+                            txResult.toChain = self.toChain
+                            txResult.toAddress = self.toAddress
+                            txResult.moveHash = hash
+                            txResult.modalPresentationStyle = .fullScreen
+                            self.present(txResult, animated: true)
+                        })
                     }
                 }
                 
