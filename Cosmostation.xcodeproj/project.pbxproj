@@ -1707,6 +1707,8 @@
 		15D865212E729EF600C201C8 /* DappSolanaSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D8651E2E729EF600C201C8 /* DappSolanaSignRequestSheet.swift */; };
 		15E031BE2EF9A1F100D230B0 /* aptos.js in Resources */ = {isa = PBXBuildFile; fileRef = 15E031BD2EF9A1F100D230B0 /* aptos.js */; };
 		15E031C02EF9A20E00D230B0 /* AptosJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E031BF2EF9A20E00D230B0 /* AptosJS.swift */; };
+		15F97AC92F18E8A8004C268C /* ChainMirage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F97AC82F18E8A8004C268C /* ChainMirage.swift */; };
+		15F97ACA2F18E8A8004C268C /* ChainMirage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F97AC82F18E8A8004C268C /* ChainMirage.swift */; };
 		1809C35129D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
 		1809C35229D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
 		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
@@ -3418,6 +3420,7 @@
 		15D8651F2E729EF600C201C8 /* DappSolanaSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappSolanaSignRequestSheet.xib; sourceTree = "<group>"; };
 		15E031BD2EF9A1F100D230B0 /* aptos.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = aptos.js; sourceTree = "<group>"; };
 		15E031BF2EF9A20E00D230B0 /* AptosJS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AptosJS.swift; sourceTree = "<group>"; };
+		15F97AC82F18E8A8004C268C /* ChainMirage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMirage.swift; sourceTree = "<group>"; };
 		1809C35029D16C80008884C1 /* injectScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = injectScript.js; sourceTree = "<group>"; };
 		181099DE28AE92FC00C178B5 /* PushUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUtils.swift; sourceTree = "<group>"; };
 		1812D46128E184D800AC7D61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -4191,6 +4194,7 @@
 				045032B92C1EFCE600235F6A /* ChainMedibloc.swift */,
 				79C518782CC9E7F200BC0E85 /* ChainMigaloo.swift */,
 				790D8B872CFD5837003A15F7 /* ChainMilkyway.swift */,
+				15F97AC82F18E8A8004C268C /* ChainMirage.swift */,
 				042DE7032C1D7FD6009CAC04 /* ChainNeutron.swift */,
 				045032CE2C1EFE3F00235F6A /* ChainNibiru.swift */,
 				04965B4B2C37DCF600403605 /* ChainNillion.swift */,
@@ -6970,6 +6974,7 @@
 				04C816DF2BA98D75006B800A /* cosmos_base_kv_v1beta1_kv.pb.swift in Sources */,
 				04C817BF2BA98D75006B800A /* cosmos_distribution_v1beta1_genesis.pb.swift in Sources */,
 				0409D2FC2AC5ECDD0021E192 /* SelectValidatorCell.swift in Sources */,
+				15F97AC92F18E8A8004C268C /* ChainMirage.swift in Sources */,
 				04C816CF2BA98D75006B800A /* cosmos_bank_v1beta1_query.grpc.swift in Sources */,
 				E1CD6AF52AEAAEC200376909 /* AboutStakingCell.swift in Sources */,
 				0492AE922A83CC9B001360F0 /* ServiceVC.swift in Sources */,
@@ -8086,6 +8091,7 @@
 				E1044EAD2BD798BC00DA05C2 /* NftTransfer.swift in Sources */,
 				04C816562BA98D74006B800A /* cosmos_feegrant_v1beta1_tx.grpc.swift in Sources */,
 				046EA88B2AD04A2500A2FCE7 /* desmos_profiles_v3_models_params.pb.swift in Sources */,
+				15F97ACA2F18E8A8004C268C /* ChainMirage.swift in Sources */,
 				1580CD6E2EDFD1FD008D02FD /* AptosFetcher.swift in Sources */,
 				04527DBF2A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */,
 				047843772AC991B300462F1C /* injective_ocr_v1beta1_tx.pb.swift in Sources */,

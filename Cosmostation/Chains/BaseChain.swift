@@ -841,6 +841,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMantra())
     result.append(ChainMedibloc())
     result.append(ChainMilkyway())
+    result.append(ChainMirage())
     result.append(ChainMonad())                         //EVM
     result.append(ChainNeutron())
     result.append(ChainMovement())
