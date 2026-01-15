@@ -38,7 +38,6 @@ class AptosFetcher {
             return false
             
         } catch {
-            print("aptos error \(error) ", chain.tag)
             return false
         }
     }
@@ -133,29 +132,6 @@ class AptosFetcher {
     }
 }
 
-extension Foundation.Data {
-    
-    func toKotlinByteArray() -> KotlinByteArray {
-        let kba = KotlinByteArray(size: Int32(self.count))
-        self.enumerated().forEach { (i, byte) in
-            kba.set(index: Int32(i), value: Int8(bitPattern: byte))
-        }
-        return kba
-    }
-}
-
-extension KotlinByteArray {
-    
-    func toSwiftData() -> Foundation.Data {
-        var data = Foundation.Data(capacity: Int(self.size))
-        for i in 0..<self.size {
-            let b = self.get(index: i)
-            data.append(UInt8(bitPattern: b))
-        }
-        return data
-    }
-}
-
 extension AptosFetcher {
     
     // account coin info
@@ -172,13 +148,15 @@ extension AptosFetcher {
         }
     }
     
+    // account history info
     func fetchTxHistory() async throws -> [JSON]? {
         let url = getApi() + "accounts/" + chain.mainAddress + "/transactions?limit=50"
         return try? await AF.request(url, method: .get).serializingDecodable([JSON].self).value
     }
     
+    // simulate
     @MainActor
-    func fetchSimulateTransaction(_ publickey: String, _ to: String, _ toSendDenom: String, _ toAmount: String) async throws -> [JSON]? {
+    func fetchSimulateTransaction(_ to: String, _ toSendDenom: String, _ toAmount: String) async throws -> [JSON]? {
         guard let client = client() else { return nil }
         guard let msAsset = BaseData.instance.getAsset(chain.apiName, toSendDenom) else { return nil }
         
@@ -196,13 +174,13 @@ extension AptosFetcher {
             let payload: Payload
             if msAsset.type == "fungible" {
                 payload = Payload(
-                    function: "0x1::primary_fungible_store::transfer",
+                    function: FUNGIBLE_FUNCTION_TYPE,
                     type_arguments: ["0x1::fungible_asset::Metadata"],
                     arguments: [toSendDenom, to, toAmount])
             } else {
                 payload = Payload(type_arguments: [toSendDenom], arguments: [to, toAmount])
             }
-            let signature = Signature(public_key: publickey, signature: dummySig)
+            let signature = Signature(public_key: chain.publicKey?.toHexString(), signature: dummySig)
             
             let encodeRequest = EncodeRequest(
                 sender: chain.mainAddress,
@@ -217,6 +195,7 @@ extension AptosFetcher {
                                                    parameters: encodeRequest,
                                                    encoder: JSONParameterEncoder.default,
                                                    headers: [:]).validate().serializingDecodable([JSON].self).value
+            
             return simulation
             
         } else {
@@ -225,7 +204,7 @@ extension AptosFetcher {
     }
     
     @MainActor
-    func fetchEncodeSubmission(_ to: String, _ toSendDenom: String, _ toAmount: String, _ maxGasAmount: String) async throws -> String? {
+    func fetchEncodeSubmission(_ to: String, _ toSendDenom: String, _ toAmount: String, _ maxGasAmount: String) async throws -> (String, String)? {
         guard let client = client() else { return nil }
         guard let msAsset = BaseData.instance.getAsset(chain.apiName, toSendDenom) else { return nil }
         
@@ -242,7 +221,7 @@ extension AptosFetcher {
             let payload: Payload
             if msAsset.type == "fungible" {
                 payload = Payload(
-                    function: "0x1::primary_fungible_store::transfer",
+                    function: FUNGIBLE_FUNCTION_TYPE,
                     type_arguments: ["0x1::fungible_asset::Metadata"],
                     arguments: [toSendDenom, to, toAmount])
             } else {
@@ -262,15 +241,16 @@ extension AptosFetcher {
                                              encoder: JSONParameterEncoder.default,
                                              headers: [:]).validate().serializingDecodable(String.self).value
             
-            return encodeSubmission
+            return (encodeSubmission ?? "", String(expirationTimestampSecs))
             
         } else {
             return nil
         }
     }
     
+    // broadcast
     @MainActor
-    func fetchSubmitTransaction(_ publickey: String, _ signatureHex: String, _ to: String, _ toSendDenom: String, _ toAmount: String, _ maxGasAmount: String) async throws -> String? {
+    func fetchSubmitTransaction(_ signatureHex: String, _ to: String, _ toSendDenom: String, _ toAmount: String, _ maxGasAmount: String, _ expirationTimestampSecs: String) async throws -> String? {
         guard let client = client() else { return nil }
         guard let msAsset = BaseData.instance.getAsset(chain.apiName, toSendDenom) else { return nil }
         
@@ -281,26 +261,24 @@ extension AptosFetcher {
         
         if accountInfo is OptionSome {
             let sequenceNumber = (accountInfo as? OptionSome)?.value?.sequenceNumber ?? "0"
-            let nowMillis = Int64(Date().timeIntervalSince1970 * 1000)
-            let expirationTimestampSecs = nowMillis / 1000 + Int64(20)
             
             let payload: Payload
             if msAsset.type == "fungible" {
                 payload = Payload(
-                    function: "0x1::primary_fungible_store::transfer",
+                    function: FUNGIBLE_FUNCTION_TYPE,
                     type_arguments: ["0x1::fungible_asset::Metadata"],
                     arguments: [toSendDenom, to, toAmount])
             } else {
                 payload = Payload(type_arguments: [toSendDenom], arguments: [to, toAmount])
             }
-            let signature = Signature(public_key: publickey, signature: signatureHex)
+            let signature = Signature(public_key: chain.publicKey?.toHexString(), signature: signatureHex)
             
             let encodeRequest = EncodeRequest(
                 sender: chain.mainAddress,
                 sequence_number: String(sequenceNumber),
                 max_gas_amount: maxGasAmount,
                 gas_unit_price: String(gasPriceInfo.gasEstimate),
-                expiration_timestamp_secs: String(expirationTimestampSecs),
+                expiration_timestamp_secs: expirationTimestampSecs,
                 payload: payload,
                 signature: signature)
             
@@ -309,14 +287,14 @@ extension AptosFetcher {
                                                    encoder: JSONParameterEncoder.default,
                                                    headers: [:]).validate().serializingDecodable(JSON.self).value
             
-            let hash = submitTransaction?["hash"].stringValue
-            return hash
+            return submitTransaction?["hash"].stringValue
             
         } else {
             return nil
         }
     }
     
+    // dapp function
     func signMessage(_ param: JSON?, _ dAppUrl: String?) async throws -> String? {
         let privateKey = chain.privateKey?.hexEncodedString()
         let messageJson = AptosJS.shared.callJSValue(key: "signAptosMessage", param: [privateKey, param?.rawValue, chain.mainAddress, dAppUrl])
@@ -366,7 +344,7 @@ extension AptosFetcher {
     
     struct Payload: Encodable {
         let type: String = "entry_function_payload"
-        var function: String? = "0x1::coin::transfer"
+        var function: String? = DEFAULT_FUNCTION_TYPE
         let type_arguments: [String]
         let arguments: [String]
     }
@@ -377,42 +355,13 @@ extension AptosFetcher {
         let signature: String
     }
     
-    func sign(_ message: KotlinByteArray, _ privateKey: Foundation.Data) async throws -> KotlinByteArray {
-        let msg = message.toSwiftData()
-        let signing = try Curve25519.Signing.PrivateKey(rawRepresentation: privateKey)
-        let sign = try signing.signature(for: msg)
-        return sign.toKotlinByteArray()
+    func sign(_ message: Foundation.Data) async throws -> Foundation.Data {
+        let signing = try Curve25519.Signing.PrivateKey(rawRepresentation: chain?.privateKey ?? Data())
+        let sign = try signing.signature(for: message)
+        return sign
     }
 }
 
-class Ed25519PKey: AptosKit.PrivateKey {
-    
-    let signingKeyPair: KeyPair
-    
-    init(_ pubHexInput: HexInput, _ priHexInput: HexInput) throws {
-        let pubHex = AptosKit.Hex.companion.fromHexInput(hexInput: pubHexInput)
-        let priHex = AptosKit.Hex.companion.fromHexInput(hexInput: priHexInput)
-        
-        guard pubHex.toByteArray().size == 32 else {
-            throw NSError(domain: "Ed25519", code: -1, userInfo: [NSLocalizedDescriptionKey: "Ed25519 public key must be 32 bytes \(pubHex.toByteArray().size)"])
-        }
-        guard priHex.toByteArray().size == 32 else {
-            throw NSError(domain: "Ed25519", code: -1, userInfo: [NSLocalizedDescriptionKey: "Ed25519 private key must be 32 bytes, got \(priHex.toByteArray().size)"])
-        }
-        signingKeyPair = KeyPair(privateKey: priHex.toByteArray(), publicKey: pubHex.toByteArray())
-    }
-    
-    func publicKey() -> AptosKit.PublicKey {
-        return Ed25519PublicKey(data: signingKeyPair.publicKey)
-    }
-    
-    func sign(message: HexInput) -> Signature {
-        let messageBytes = Hex.companion.fromHexInput(hexInput: message).toByteArray()
-        return signingKeyPair.sign(message: messageBytes) as Signature
-    }
-    
-    func toByteArray() -> KotlinByteArray {
-        return signingKeyPair.privateKey
-    }
-}
+let DEFAULT_FUNCTION_TYPE = "0x1::aptos_account::transfer_coins"
 
+let FUNGIBLE_FUNCTION_TYPE = "0x1::primary_fungible_store::transfer"

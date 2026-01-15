@@ -1844,23 +1844,21 @@ extension CommonTransfer {
     func moveSendSimul() {
         Task {
             do {
-                if let publicKeyHex = fromChain.publicKey?.toHexString() {
-                    if let simulate = try await aptosFetcher.fetchSimulateTransaction(publicKeyHex, toAddress, toSendDenom, toAmount.stringValue) {
-                        DispatchQueue.main.async {
-                            if simulate.count > 0 {
-                                let gasUsed = simulate[0]["gas_used"].stringValue
-                                let gasPrice = simulate[0]["gas_unit_price"].stringValue
-                                
-                                let fee = NSDecimalNumber(string: gasUsed).multiplying(by: NSDecimalNumber(string: gasPrice))
-                                self.onUpdateWithSimul(UInt64(truncating: fee))
-                                
-                            } else {
-                                self.view.isUserInteractionEnabled = true
-                                self.loadingView.isHidden = true
-                                self.sendBtn.isEnabled = false
-                                self.onShowToast(NSLocalizedString("error_evm_simul", comment: ""))
-                                return
-                            }
+                if let simulate = try await aptosFetcher.fetchSimulateTransaction(toAddress, toSendDenom, toAmount.stringValue) {
+                    DispatchQueue.main.async {
+                        if simulate.count > 0 {
+                            let gasUsed = simulate[0]["gas_used"].stringValue
+                            let gasPrice = simulate[0]["gas_unit_price"].stringValue
+                            
+                            let fee = NSDecimalNumber(string: gasUsed).multiplying(by: NSDecimalNumber(string: gasPrice))
+                            self.onUpdateWithSimul(UInt64(truncating: fee))
+                            
+                        } else {
+                            self.view.isUserInteractionEnabled = true
+                            self.loadingView.isHidden = true
+                            self.sendBtn.isEnabled = false
+                            self.onShowToast(NSLocalizedString("error_evm_simul", comment: ""))
+                            return
                         }
                     }
                 }
@@ -1880,20 +1878,17 @@ extension CommonTransfer {
     func moveSend() {
         Task {
             do {
-                if let publicKeyHex = fromChain.publicKey?.toHexString(),
-                   let privateKey = fromChain.privateKey,
-                   let encodeSubmission = try await aptosFetcher.fetchEncodeSubmission(toAddress, toSendDenom, toAmount.stringValue, moveMaxGasAmount.stringValue) {
-                    
-                    let messageBytes = Hex.companion.fromHexInput(hexInput: HexInput.companion.fromString(string: encodeSubmission)).toByteArray()
-                    let signature = try await aptosFetcher.sign(messageBytes, privateKey)
+                if let encodeSubmission = try await aptosFetcher.fetchEncodeSubmission(toAddress, toSendDenom, toAmount.stringValue, moveMaxGasAmount.stringValue) {
+                    let encodeData = Foundation.Data.fromHex(encodeSubmission.0) ?? Data()
+                    let signature = try await aptosFetcher.sign(encodeData).toHexString()
                     
                     if let hash = try await aptosFetcher.fetchSubmitTransaction(
-                        publicKeyHex,
-                        signature.toSwiftData().toHexString(),
-                        toAddress, 
+                        signature,
+                        toAddress,
                         toSendDenom,
                         toAmount.stringValue, 
-                        moveMaxGasAmount.stringValue) {
+                        moveMaxGasAmount.stringValue,
+                        encodeSubmission.1) {
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                             self.loadingView.isHidden = true
