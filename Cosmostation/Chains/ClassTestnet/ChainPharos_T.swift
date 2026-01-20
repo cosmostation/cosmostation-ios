@@ -22,6 +22,6 @@ class ChainPharos_T: ChainPharos {
         
         supportEvm = true
         coinSymbol = "PHRS"
-        evmRpcURL = "https://atlantic.dplabs-internal.com"
+        evmRpcURL = "https://rpc.evm.pharos.testnet.cosmostation.io"
     }
 }
