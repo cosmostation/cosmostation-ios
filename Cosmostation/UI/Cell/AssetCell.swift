@@ -311,17 +311,16 @@ class AssetCell: UITableViewCell {
         }
     }
     
-    func bindMoveClassAsset(_ baseChain: BaseChain, _ balance: (String, NSDecimalNumber)) {
-        if let aptosFetcher = (baseChain as? ChainAptos)?.getAptosFetcher(),
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, balance.0) {
-            WDP.dpCoin(msAsset, aptosFetcher.balanceAmount(balance.0), coinImg, symbolLabel, amountLabel, 6)
-            WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
+    func bindMoveClassAsset(_ baseChain: BaseChain, _ balance: (MintscanAsset, NSDecimalNumber)) {
+        if let aptosFetcher = (baseChain as? ChainAptos)?.getAptosFetcher() {
+            WDP.dpCoin(balance.0, aptosFetcher.balanceAmount(balance.0.denom), coinImg, symbolLabel, amountLabel, 6)
+            WDP.dpPrice(balance.0, priceCurrencyLabel, priceLabel)
+            WDP.dpPriceChanged(balance.0, priceChangeLabel, priceChangePercentLabel)
             
             if BaseData.instance.getHideValue() {
                 hidenValueLabel.isHidden = false
             } else {
-                WDP.dpValue(aptosFetcher.balanceValue(balance.0), valueCurrencyLabel, valueLabel)
+                WDP.dpValue(aptosFetcher.balanceValue(balance.0.denom), valueCurrencyLabel, valueLabel)
                 amountLabel.isHidden = false
                 valueCurrencyLabel.isHidden = false
                 valueLabel.isHidden = false

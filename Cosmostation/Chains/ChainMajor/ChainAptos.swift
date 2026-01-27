@@ -53,9 +53,7 @@ class ChainAptos: BaseChain  {
             }
             
             if (self.fetchState == .Success) {
-                if let aptosFetcher = getAptosFetcher() {
-                    coinsCnt = aptosfetcher?.aptosAssetBalance.count ?? 0
-                }
+                coinsCnt = getAptosFetcher()?.aptosAssetBalance.count ?? 0
             }
             
             DispatchQueue.main.async(execute: {

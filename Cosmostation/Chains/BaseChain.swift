@@ -806,6 +806,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainGitopia())
 //    result.append(ChainGno())
     result.append(ChainGonka())
+    result.append(ChainGnosis())                  //EVM
     result.append(ChainGravityAlpha())                  //EVM
     result.append(ChainGravityBridge())
     result.append(ChainHaqqEVM())                       //EVM
@@ -841,8 +842,10 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMantra())
     result.append(ChainMedibloc())
     result.append(ChainMilkyway())
+    result.append(ChainMirage())
     result.append(ChainMonad())                         //EVM
     result.append(ChainNeutron())
+    result.append(ChainMovement())
     result.append(ChainNibiru())
     result.append(ChainNillion())
     result.append(ChainNoble())
@@ -851,7 +854,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainOktEVM())                        //EVM
     result.append(ChainOkt996Keccak())                  //LCD
     result.append(ChainOkt996Secp())                    //LCD
-    result.append(ChainOmniflix())
     result.append(ChainOptimism())                      //EVM
     result.append(ChainOrai())
     result.append(ChainOsmosis())
@@ -957,6 +959,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainMars())
 //    result.append(ChainMigaloo())
 //    result.append(ChainOnomy())
+//    result.append(ChainOmniflix())
 //    result.append(ChainQuasar())
 //    result.append(ChainRouterEVM())                     //EVM
 //    result.append(ChainSelf())

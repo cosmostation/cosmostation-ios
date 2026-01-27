@@ -20,7 +20,11 @@ class MajorCryptoVC: BaseVC {
     
     var selectedChain: BaseChain!
     
+    //sui, iota
     var moveBalances = Array<(String, NSDecimalNumber)>()
+    // aptos, movement
+    var aptosNativeBalances = Array<(MintscanAsset, NSDecimalNumber)>()
+    var aptosFungibleBalances = Array<(MintscanAsset, NSDecimalNumber)>()
     
     var allSplTokens = [JSON]()
     var searchSplTokens = [JSON]()
@@ -137,16 +141,31 @@ class MajorCryptoVC: BaseVC {
                 
             } else if let aptosFetcher = (selectedChain as? ChainAptos)?.getAptosFetcher() {
                 aptosFetcher.aptosAssetBalance.forEach { aptosAsset in
-                    let coinType = aptosAsset.asset_type ?? ""
-                    let amount = NSDecimalNumber.init(string: aptosAsset.amount?.stringValue)
-                    moveBalances.append((coinType, amount))
+                    if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, aptosAsset.asset_type) {
+                        let amount = NSDecimalNumber.init(string: aptosAsset.amount?.stringValue)
+                        if msAsset.type == "fungible" {
+                            aptosFungibleBalances.append((msAsset, amount))
+                        } else {
+                            aptosNativeBalances.append((msAsset, amount))
+                        }
+                    }
                 }
                 
-                moveBalances.sort {
-                    if ($0.0 == APTOS_MAIN_DENOM) { return true }
-                    if ($1.0 == APTOS_MAIN_DENOM) { return false }
-                    let value0 = aptosFetcher.balanceValue($0.0)
-                    let value1 = aptosFetcher.balanceValue($1.0)
+                if (aptosNativeBalances.filter { $0.0.denom == APTOS_MAIN_DENOM }.count == 0) {
+                    if let mainAsset = BaseData.instance.getAsset(selectedChain.apiName, APTOS_MAIN_DENOM) {
+                        aptosNativeBalances.append((mainAsset, NSDecimalNumber.zero))
+                    }
+                }
+                aptosNativeBalances.sort {
+                    if ($0.0.denom == APTOS_MAIN_DENOM) { return true }
+                    if ($1.0.denom == APTOS_MAIN_DENOM) { return false }
+                    let value0 = aptosFetcher.balanceValue($0.0.denom)
+                    let value1 = aptosFetcher.balanceValue($1.0.denom)
+                    return value0.compare(value1).rawValue > 0 ? true : false
+                }
+                aptosFungibleBalances.sort {
+                    let value0 = aptosFetcher.balanceValue($0.0.denom)
+                    let value1 = aptosFetcher.balanceValue($1.0.denom)
                     return value0.compare(value1).rawValue > 0 ? true : false
                 }
             }
@@ -222,8 +241,13 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             }
             
         } else if selectedChain is ChainAptos {
-            view.titleLabel.text = "Coins"
-            view.cntLabel.text = String(moveBalances.count)
+            if section == 0 {
+                view.titleLabel.text = "Coins"
+                view.cntLabel.text = String(aptosNativeBalances.count)
+            } else {
+                view.titleLabel.text = "Fungible Coins"
+                view.cntLabel.text = String(aptosFungibleBalances.count)
+            }
         }
         return view
     }
@@ -235,6 +259,14 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             } else if (section == 1 ) {
                 return searchSplTokens.count > 0 ? 40 : .leastNormalMagnitude
             }
+            
+        } else if selectedChain is ChainAptos {
+            if (section == 0) {
+                return 40
+            } else if (section == 1 ) {
+                return aptosFungibleBalances.count > 0 ? 40 : .leastNormalMagnitude
+            }
+            
         } else {
             return (section == 0) ? 40 : .leastNormalMagnitude
         }
@@ -250,12 +282,18 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if selectedChain is ChainSui || selectedChain is ChainIota || selectedChain is ChainAptos {
+        if selectedChain is ChainSui || selectedChain is ChainIota  {
             return (section == 0) ? moveBalances.count : 0
         } else if selectedChain is ChainBitCoin86 {
             return (section == 0) ? 1 : 0
         } else if selectedChain is ChainSolana {
             return (section == 0) ? 1 : searchSplTokens.count
+        } else if selectedChain is ChainAptos {
+            if (section == 0) {
+                return aptosNativeBalances.count
+            } else {
+                return aptosFungibleBalances.count
+            }
         }
         return 0
     }
@@ -302,7 +340,11 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (selectedChain is ChainAptos) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
-            cell.bindMoveClassAsset(selectedChain, moveBalances[indexPath.row])
+            if (indexPath.section == 0) {
+                cell.bindMoveClassAsset(selectedChain, aptosNativeBalances[indexPath.row])
+            } else {
+                cell.bindMoveClassAsset(selectedChain, aptosFungibleBalances[indexPath.row])
+            }
             return cell
         }
         
@@ -393,7 +435,11 @@ extension MajorCryptoVC: UITableViewDelegate, UITableViewDataSource {
             let transfer = CommonTransfer(nibName: "CommonTransfer", bundle: nil)
             transfer.sendAssetType = .APTOS_COIN
             transfer.fromChain = selectedChain
-            transfer.toSendDenom = moveBalances[indexPath.row].0
+            if (indexPath.section == 0) {
+                transfer.toSendDenom = aptosNativeBalances[indexPath.row].0.denom
+            } else {
+                transfer.toSendDenom = aptosFungibleBalances[indexPath.row].0.denom
+            }
             transfer.modalTransitionStyle = .coverVertical
             self.present(transfer, animated: true)
         }
