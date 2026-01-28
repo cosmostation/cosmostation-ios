@@ -11,6 +11,7 @@ import Lottie
 import MaterialComponents
 import SwiftyJSON
 import AptosKit
+import web3swift
 
 class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrScanDelegate, SelectAddressListDelegate, BaseSheetDelegate {
     
@@ -140,10 +141,14 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             
         } else if (toChain.supportEvm == true && toChain.supportCosmos == false) {
             //only support EVM address style
-            if (WUtils.isValidEvmAddress(userInput)) {
+            if userInput?.contains(".eth") == true {
+                onCheckEns(userInput!)
+                
+            } else if WUtils.isValidEvmAddress(userInput) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
+                
             } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                 return
@@ -170,10 +175,14 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                 }
                 
             } else if (sendType == .EVM_COIN) {
-                if (WUtils.isValidEvmAddress(userInput)) {
+                if userInput?.contains(".eth") == true {
+                    onCheckEns(userInput!)
+                    
+                } else if WUtils.isValidEvmAddress(userInput) {
                     self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                     self.dismiss(animated: true)
                     return
+                    
                 } else {
                     self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                     return
@@ -181,10 +190,14 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                 
             } else if (sendType == .EVM_ERC20 && fromChain.tag == toChain.tag) {
                 //이더리움만 지원
-                if (WUtils.isValidEvmAddress(userInput)) {
+                if userInput?.contains(".eth") == true {
+                    onCheckEns(userInput!)
+                    
+                } else if WUtils.isValidEvmAddress(userInput) {
                     self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                     self.dismiss(animated: true)
                     return
+                    
                 } else {
                     self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                     return
@@ -227,6 +240,32 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         view.endEditing(true)
     }
     
+    func onCheckEns(_ userInput: String) {
+        view.isUserInteractionEnabled = false
+        loadingView.isHidden = false
+        nameservices.removeAll()
+        
+        Task {
+            if let ens = try await checkEnsService(userInput) {
+                nameservices.append(NameService.init("ens", userInput, ens))
+            }
+            
+            DispatchQueue.main.async {
+                self.view.isUserInteractionEnabled = true
+                self.loadingView.isHidden = true
+                if (self.nameservices.count == 0) {
+                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                    
+                } else {
+                    let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                    baseSheet.nameservices = self.nameservices
+                    baseSheet.sheetDelegate = self
+                    baseSheet.sheetType = .SelectCosmosNameServiceAddress
+                    self.onStartSheet(baseSheet, 320, 0.6)
+                }
+            }
+        }
+    }
     
     func onCheckNameServices(_ userInput: String)  {
         let prefix = toChain.bechAddressPrefix()
@@ -292,6 +331,18 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
 }
 
 extension TxSendAddressSheet {
+    
+    func checkEnsService(_ inputName: String) async throws -> String? {
+        guard let url = URL(string: ChainEthereum().getEvmfetcher()?.getEvmRpc() ?? ""),
+              let web3Provider = try? await Web3HttpProvider(url: url, network: .Mainnet)
+        else { return nil }
+        
+        let web3 = Web3.init(provider: web3Provider)
+        let ens = ENS(web3: web3)
+        
+        guard let evmAddress = try? await ens?.getAddress(forNode: inputName) else { return nil }
+        return evmAddress?.address
+    }
     
     func checkOsmoname(_ inputName: String, _ prefix: String) async throws -> JSON? {
         let name = String(inputName.split(separator: ".")[0]) + "." + prefix
