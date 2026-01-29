@@ -12,6 +12,8 @@ import MaterialComponents
 import SwiftyJSON
 import AptosKit
 import web3swift
+import Foundation
+import Alamofire
 
 class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrScanDelegate, SelectAddressListDelegate, BaseSheetDelegate {
     
@@ -104,20 +106,28 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         
         if (toChain is ChainSui) {
             //only support sui address style
-            if (WUtils.isValidSuiAddress(userInput)) {
+            if userInput?.contains(".sui") == true || userInput?.starts(with: "@") == true {
+                onCheckSuiNameService(userInput!)
+                
+            } else if WUtils.isValidSuiAddress(userInput) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
+                
             } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                 return
             }
             
         } else if toChain is ChainIota {
-            if (WUtils.isValidSuiAddress(userInput)) {
+            if userInput?.contains(".iota") == true || userInput?.starts(with: "@") == true {
+                onCheckIotaNameService(userInput!)
+                
+            } else if WUtils.isValidSuiAddress(userInput) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
+                
             } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                 return
@@ -267,6 +277,65 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         }
     }
     
+    func onCheckSuiNameService(_ userInput: String) {
+        view.isUserInteractionEnabled = false
+        loadingView.isHidden = false
+        nameservices.removeAll()
+        
+        Task {
+            if let suiNs = try await checkSuiNameServce(userInput) {
+                if suiNs["result"] != JSON.null {
+                    nameservices.append(NameService.init("sui", userInput, suiNs["result"].stringValue))
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.view.isUserInteractionEnabled = true
+                self.loadingView.isHidden = true
+                if (self.nameservices.count == 0) {
+                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                    
+                } else {
+                    let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                    baseSheet.nameservices = self.nameservices
+                    baseSheet.sheetDelegate = self
+                    baseSheet.sheetType = .SelectCosmosNameServiceAddress
+                    self.onStartSheet(baseSheet, 320, 0.6)
+                }
+            }
+        }
+    }
+    
+    func onCheckIotaNameService(_ userInput: String) {
+        view.isUserInteractionEnabled = false
+        loadingView.isHidden = false
+        nameservices.removeAll()
+        
+        Task {
+            if let iotaNs = try await checkIotaNameService(userInput) {
+                if iotaNs["result"] != JSON.null {
+                    let address = iotaNs["result"]["targetAddress"].stringValue
+                    nameservices.append(NameService.init("iota", userInput, address))
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.view.isUserInteractionEnabled = true
+                self.loadingView.isHidden = true
+                if (self.nameservices.count == 0) {
+                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                    
+                } else {
+                    let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                    baseSheet.nameservices = self.nameservices
+                    baseSheet.sheetDelegate = self
+                    baseSheet.sheetType = .SelectCosmosNameServiceAddress
+                    self.onStartSheet(baseSheet, 320, 0.6)
+                }
+            }
+        }
+    }
+    
     func onCheckNameServices(_ userInput: String)  {
         let prefix = toChain.bechAddressPrefix()
         
@@ -342,6 +411,18 @@ extension TxSendAddressSheet {
         
         guard let evmAddress = try? await ens?.getAddress(forNode: inputName) else { return nil }
         return evmAddress?.address
+    }
+    
+    func checkSuiNameServce(_ inputName: String) async throws -> JSON? {
+        guard let suiFetcher = (fromChain as? ChainSui)?.getSuiFetcher() else { return nil }
+        let parameters: Parameters = ["method": "suix_resolveNameServiceAddress", "params": [inputName] , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(suiFetcher.getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func checkIotaNameService(_ inputName: String) async throws -> JSON? {
+        guard let iotaFetcher = (fromChain as? ChainIota)?.getIotaFetcher() else { return nil }
+        let parameters: Parameters = ["method": "iotax_iotaNamesLookup", "params": [inputName] , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(iotaFetcher.getIotaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
     
     func checkOsmoname(_ inputName: String, _ prefix: String) async throws -> JSON? {

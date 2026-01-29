@@ -21,6 +21,12 @@ class SelectNameServiceCell: UITableViewCell {
         if nameservice.type == "ens" {
             serviceLabel.text = "Ethereum Name Service"
             
+        } else if nameservice.type == "sui" {
+            serviceLabel.text = "Sui Name Service"
+            
+        } else if nameservice.type == "iota" {
+            serviceLabel.text = "Iota Name Service"
+            
         } else if nameservice.type == "starname" {
             serviceLabel.text = "Starname Name Service"
             
