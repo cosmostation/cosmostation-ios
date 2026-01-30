@@ -42,6 +42,8 @@ class PortfolioVC: BaseVC {
     
     var lastSortingType: SortingType = .value
     
+    private static var didOnceShowAds = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,6 +76,7 @@ class PortfolioVC: BaseVC {
         navigationItem.titleView = BgRandomButton()
         
         initView()
+        onShowAds()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -288,6 +291,19 @@ class PortfolioVC: BaseVC {
         warnSheet.noticeType = .NodeDownGuide
         warnSheet.noticeDelegate = self
         onStartSheet(warnSheet, 420, 0.6)
+    }
+    
+    func onShowAds() {
+        guard !Self.didOnceShowAds else { return }
+        Self.didOnceShowAds = true
+        if BaseData.instance.getAdsShowOption() { return }
+        
+        if BaseData.instance.adsInfos?.count ?? 0 > 0 {
+            let adsPopUpView = AdsPopUpSheet(nibName: "AdsPopUpSheet", bundle: nil)
+            adsPopUpView.sheetDelegate = self
+            adsPopUpView.modalPresentationStyle = .overFullScreen
+            self.present(adsPopUpView, animated: true)
+        }
     }
 }
 
@@ -616,6 +632,12 @@ extension PortfolioVC: BaseSheetDelegate {
                         });
                     }
                 }
+            }
+            
+        } else if sheetType == .MoveAdsDetail {
+            if let urlStr = result["url"] as? String {
+                guard let url = URL(string: urlStr) else { return }
+                self.onShowSafariWeb(url)
             }
         }
     }

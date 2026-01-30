@@ -102,6 +102,10 @@ class BaseNetWork {
     func fetchCw721s() async throws -> JSON {
         return try await AF.request(BaseNetWork.msCw721Url(), method: .get).serializingDecodable(JSON.self).value
     }
+    
+    func fetchAdsInfos() async throws -> AdsInfos {
+        return try await AF.request(BaseNetWork.getAdsInfoURL(), method: .get).serializingDecodable(AdsInfos.self).value
+    }
 
     
     static func getAccountHistoryUrl(_ chain: BaseChain, _ address: String) -> String {
@@ -177,6 +181,10 @@ class BaseNetWork {
     
     static func getAllDappURL() -> String {
         return MINTSCAN_API_URL + "v11/dapp"
+    }
+    
+    static func getAdsInfoURL() -> String {
+        return WALLET_API_URL + "ad_list.json"
     }
     
     static func SkipChains() -> String {

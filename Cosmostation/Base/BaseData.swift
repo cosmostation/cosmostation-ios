@@ -30,6 +30,7 @@ final class BaseData: NSObject{
     var mintscanGrc20Tokens: [MintscanToken]?
     var mintscanSplTokens: [MintscanToken]?
     var mintscanCw721: [JSON]?
+    var adsInfos: [AdsInfo]?
     var baseAccount: BaseAccount?
     
     var allEcosystems: [JSON]?
@@ -908,5 +909,13 @@ extension BaseData {
     
     func getHideValue() -> Bool {
         return UserDefaults.standard.bool(forKey: KEY_HIDE_VALUE)
+    }
+    
+    func setAdsShowOption(_ hide : Bool) {
+        UserDefaults.standard.set(hide, forKey: KEY_ADS_SHOW_OPTION)
+    }
+    
+    func getAdsShowOption() -> Bool {
+        return UserDefaults.standard.bool(forKey: KEY_ADS_SHOW_OPTION)
     }
 }

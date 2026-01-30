@@ -1711,6 +1711,16 @@
 		15F97ACA2F18E8A8004C268C /* ChainMirage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F97AC82F18E8A8004C268C /* ChainMirage.swift */; };
 		15F97ACC2F1F6FF8004C268C /* ChainGnosis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F97ACB2F1F6FF8004C268C /* ChainGnosis.swift */; };
 		15F97ACD2F1F6FF8004C268C /* ChainGnosis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F97ACB2F1F6FF8004C268C /* ChainGnosis.swift */; };
+		15F97AD02F209927004C268C /* AdsPopUpSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15F97ACF2F209927004C268C /* AdsPopUpSheet.xib */; };
+		15F97AD12F209927004C268C /* AdsPopUpSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F97ACE2F209927004C268C /* AdsPopUpSheet.swift */; };
+		15F97AD22F209927004C268C /* AdsPopUpSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15F97ACF2F209927004C268C /* AdsPopUpSheet.xib */; };
+		15F97AD32F209927004C268C /* AdsPopUpSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F97ACE2F209927004C268C /* AdsPopUpSheet.swift */; };
+		15F97AD82F21CA6F004C268C /* AdsInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F97AD72F21CA6F004C268C /* AdsInfos.swift */; };
+		15F97AD92F21CA6F004C268C /* AdsInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F97AD72F21CA6F004C268C /* AdsInfos.swift */; };
+		15F97ADC2F21EFDE004C268C /* SelectAdsInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F97ADA2F21EFDE004C268C /* SelectAdsInfoCell.swift */; };
+		15F97ADD2F21EFDE004C268C /* SelectAdsInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15F97ADB2F21EFDE004C268C /* SelectAdsInfoCell.xib */; };
+		15F97ADE2F21EFDE004C268C /* SelectAdsInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15F97ADB2F21EFDE004C268C /* SelectAdsInfoCell.xib */; };
+		15F97ADF2F21EFDE004C268C /* SelectAdsInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F97ADA2F21EFDE004C268C /* SelectAdsInfoCell.swift */; };
 		1809C35129D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
 		1809C35229D16C80008884C1 /* injectScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1809C35029D16C80008884C1 /* injectScript.js */; };
 		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
@@ -3424,6 +3434,11 @@
 		15E031BF2EF9A20E00D230B0 /* AptosJS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AptosJS.swift; sourceTree = "<group>"; };
 		15F97AC82F18E8A8004C268C /* ChainMirage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMirage.swift; sourceTree = "<group>"; };
 		15F97ACB2F1F6FF8004C268C /* ChainGnosis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainGnosis.swift; sourceTree = "<group>"; };
+		15F97ACE2F209927004C268C /* AdsPopUpSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsPopUpSheet.swift; sourceTree = "<group>"; };
+		15F97ACF2F209927004C268C /* AdsPopUpSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsPopUpSheet.xib; sourceTree = "<group>"; };
+		15F97AD72F21CA6F004C268C /* AdsInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsInfos.swift; sourceTree = "<group>"; };
+		15F97ADA2F21EFDE004C268C /* SelectAdsInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAdsInfoCell.swift; sourceTree = "<group>"; };
+		15F97ADB2F21EFDE004C268C /* SelectAdsInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAdsInfoCell.xib; sourceTree = "<group>"; };
 		1809C35029D16C80008884C1 /* injectScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = injectScript.js; sourceTree = "<group>"; };
 		181099DE28AE92FC00C178B5 /* PushUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUtils.swift; sourceTree = "<group>"; };
 		1812D46128E184D800AC7D61 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -4811,6 +4826,7 @@
 				04BA9BD02A978131003E2404 /* RefAddress.swift */,
 				E16200362AF139C60008F397 /* AddressBook.swift */,
 				04806BC42BB06DCA0048F232 /* Cw721Model.swift */,
+				15F97AD72F21CA6F004C268C /* AdsInfos.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4919,6 +4935,8 @@
 				79734EE82D8D4E3F00574B41 /* DappDetailSheet.swift */,
 				79B4226A2DA63EA30022A4F9 /* AdditionalFeeSheet.swift */,
 				79B4226B2DA63EA30022A4F9 /* AdditionalFeeSheet.xib */,
+				15F97ACE2F209927004C268C /* AdsPopUpSheet.swift */,
+				15F97ACF2F209927004C268C /* AdsPopUpSheet.xib */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -4968,6 +4986,8 @@
 				7967DCB72D9A4193007D74CE /* SelectRecipientChainCell.xib */,
 				790A15D72DAF7A5D00EE6E78 /* SelectThemeCell.swift */,
 				790A15D82DAF7A5D00EE6E78 /* SelectThemeCell.xib */,
+				15F97ADA2F21EFDE004C268C /* SelectAdsInfoCell.swift */,
+				15F97ADB2F21EFDE004C268C /* SelectAdsInfoCell.xib */,
 			);
 			path = SheetCell;
 			sourceTree = "<group>";
@@ -6203,6 +6223,7 @@
 				04C6B9C82AAC59EC00B02A95 /* QrAddressPopupVC.xib in Resources */,
 				04FF6B952B21E101009DCA89 /* CosmosRewardListPopupVC.xib in Resources */,
 				04527DC22A937CC1005F72D7 /* AssetCosmosClassCell.xib in Resources */,
+				15F97ADE2F21EFDE004C268C /* SelectAdsInfoCell.xib in Resources */,
 				046BF1CF2B0F52BC00BC1FC8 /* SelectOktValidatorCell.xib in Resources */,
 				040732FE2AA44075001C63DD /* ImportMnemonicVC.xib in Resources */,
 				E122DC6A2A8DBD3B006D1E7B /* BaseHeader.xib in Resources */,
@@ -6228,6 +6249,7 @@
 				E1DF77722AB74ED50028BD51 /* CheckMenmonicVC.xib in Resources */,
 				04FA74882AA0E2A9001A2830 /* CreateMnemonicVC.xib in Resources */,
 				042D585D2C5CEF43003DBDE0 /* MajorClass.storyboard in Resources */,
+				15F97AD02F209927004C268C /* AdsPopUpSheet.xib in Resources */,
 				E1044EA82BD641DB00DA05C2 /* SendResultSheet.xib in Resources */,
 				E1F257F42BFCA223008F4D21 /* EvmVote.xib in Resources */,
 				E15F2D0D2ABF107300BAE105 /* StakeDelegateCell.xib in Resources */,
@@ -6366,6 +6388,7 @@
 				04A116F128F7DB42003605E5 /* LaunchScreen.storyboard in Resources */,
 				E122DC692A8DBD3B006D1E7B /* BaseHeader.xib in Resources */,
 				E10B1DCC2C2159040039283B /* KavaLendAction.xib in Resources */,
+				15F97AD22F209927004C268C /* AdsPopUpSheet.xib in Resources */,
 				E10B1DE02C215C120039283B /* NeutronDao.storyboard in Resources */,
 				E1831BA62AB82FE60078A28B /* ManageChainCell.xib in Resources */,
 				04FA747B2AA0446A001A2830 /* BaseMsgSheetCell.xib in Resources */,
@@ -6453,6 +6476,7 @@
 				04CFF0352AC58D4400FB3187 /* SelectFeeCoinCell.xib in Resources */,
 				E10B1DD02C2159040039283B /* KavaMintAction.xib in Resources */,
 				042DE8422AC4C518003F3EA4 /* TxMemoSheet.xib in Resources */,
+				15F97ADD2F21EFDE004C268C /* SelectAdsInfoCell.xib in Resources */,
 				E1D538292A96644F00FB0403 /* loading.json in Resources */,
 				04C940E82AF4DAAE00415256 /* DeleteAddressBookSheet.xib in Resources */,
 				04FF6B942B21E101009DCA89 /* CosmosRewardListPopupVC.xib in Resources */,
@@ -7038,6 +7062,7 @@
 				04C817B52BA98D75006B800A /* cosmos_base_reflection_v1beta1_reflection.pb.swift in Sources */,
 				045033212C1F045900235F6A /* ChainTeritori.swift in Sources */,
 				04C8178F2BA98D75006B800A /* cosmos_nft_module_v1_module.pb.swift in Sources */,
+				15F97AD82F21CA6F004C268C /* AdsInfos.swift in Sources */,
 				04C221712CF70A9C00B64057 /* BeraFetcher.swift in Sources */,
 				04B2A2F32BB42560001300E9 /* EvmAboutVC.swift in Sources */,
 				E1657B0C2AD0159D00264A21 /* SecButton.swift in Sources */,
@@ -7067,6 +7092,7 @@
 				04CD246F2AD2E99A00497EF5 /* kava_bep3_v1beta1_genesis.pb.swift in Sources */,
 				04527DC02A937CC1005F72D7 /* AssetCosmosClassCell.swift in Sources */,
 				0450324E2C1EEA9600235F6A /* ChainCantoEVM.swift in Sources */,
+				15F97ADF2F21EFDE004C268C /* SelectAdsInfoCell.swift in Sources */,
 				04C8172D2BA98D75006B800A /* cosmos_consensus_v1_tx.pb.swift in Sources */,
 				047843742AC991B300462F1C /* injective_wasmx_v1_events.pb.swift in Sources */,
 				04FEDB4D2B05D1340095B7B6 /* WalletDeriveVC.swift in Sources */,
@@ -7575,6 +7601,7 @@
 				045032CA2C1EFCE700235F6A /* ChainLike.swift in Sources */,
 				E10B1D902C2156430039283B /* KavaMintListMyCell.swift in Sources */,
 				04C817E02BA9917D006B800A /* cosmos_upgrade_v1beta1_query.grpc.swift in Sources */,
+				15F97AD12F209927004C268C /* AdsPopUpSheet.swift in Sources */,
 				045032C42C1EFCE700235F6A /* ChainKi.swift in Sources */,
 				04A420FA2C77409400C0E1A2 /* BtcFetcher.swift in Sources */,
 				04F048C82AF89B19002A809D /* SelectAddressBookCell.swift in Sources */,
@@ -7813,6 +7840,7 @@
 				7981F7642D0C343D00BB50DA /* ChainRealioEVM.swift in Sources */,
 				04C816AE2BA98D75006B800A /* cosmos_genutil_v1beta1_genesis.pb.swift in Sources */,
 				79ED0BD92DBA18F900C84DB7 /* IotaStakingInfoVC.swift in Sources */,
+				15F97AD32F209927004C268C /* AdsPopUpSheet.swift in Sources */,
 				790970242D7EB34D00DEB959 /* BabylonFetcher.swift in Sources */,
 				04C816FA2BA98D75006B800A /* cosmos_gov_v1_query.grpc.swift in Sources */,
 				04CD24762AD2E99A00497EF5 /* kava_bep3_v1beta1_query.grpc.swift in Sources */,
@@ -8225,6 +8253,7 @@
 				0478437B2AC991B300462F1C /* injective_wasmx_v1_query.grpc.swift in Sources */,
 				04C817A62BA98D75006B800A /* cosmos_gov_v1beta1_query.grpc.swift in Sources */,
 				79FCA3DC2C3F9E92001C17D0 /* artela_fee_v1_fee.pb.swift in Sources */,
+				15F97AD92F21CA6F004C268C /* AdsInfos.swift in Sources */,
 				0478430B2AC9918700462F1C /* ethermint_feemarket_v1_genesis.pb.swift in Sources */,
 				04D7854A2C328DB1009D1A94 /* feemarket_feemarket_v1_params.pb.swift in Sources */,
 				04C8171E2BA98D75006B800A /* cosmos_slashing_module_v1_module.pb.swift in Sources */,
@@ -8774,6 +8803,7 @@
 				792613C12CD4B82800FAF47D /* initia_reward_v1_tx.grpc.swift in Sources */,
 				04C817D72BA9917D006B800A /* cosmos_upgrade_v1beta1_tx.pb.swift in Sources */,
 				047843132AC9918700462F1C /* ethermint_types_v1_web3.pb.swift in Sources */,
+				15F97ADC2F21EFDE004C268C /* SelectAdsInfoCell.swift in Sources */,
 				E1D2FC642B81FCA30080B638 /* CommonTransfer.swift in Sources */,
 				79813A572D506DCA0083A1F5 /* GnoFetcher.swift in Sources */,
 				045032A42C1EEFCA00235F6A /* ChainDydx.swift in Sources */,
