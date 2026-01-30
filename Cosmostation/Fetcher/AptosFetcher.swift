@@ -54,7 +54,7 @@ class AptosFetcher {
     func client() -> Aptos? {
         if (chain as! ChainAptos).isValidFullnodeURL(getApi()), (chain as! ChainAptos).isValidIndexerGraphQLURL(getGraphQL()) {
             let settings = AptosSettings(
-                network: nil,
+                network: Network.mainnet,
                 fullNode: getApi(),
                 faucet: nil,
                 indexer: getGraphQL(),

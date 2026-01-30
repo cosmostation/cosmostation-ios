@@ -27,6 +27,12 @@ class SelectNameServiceCell: UITableViewCell {
         } else if nameservice.type == "iota" {
             serviceLabel.text = "Iota Name Service"
             
+        } else if nameservice.type == "move" {
+            serviceLabel.text = "Aptos Name Service"
+            
+        } else if nameservice.type == "solana" {
+            serviceLabel.text = "Solana Name Service"
+            
         } else if nameservice.type == "starname" {
             serviceLabel.text = "Starname Name Service"
             

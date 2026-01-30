@@ -225,20 +225,30 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             }
             
         } else if (toChain is ChainSolana) {
-            if (WUtils.isValidSolanaAddress(userInput)) {
+            if userInput?.contains(".sol") == true {
+                onCheckSolanaNameService(userInput!)
+                
+            } else if WUtils.isValidSolanaAddress(userInput) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
+                
             } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                 return
             }
             
         } else if toChain is ChainAptos {
-            if (isValidAptosAddress(userInput)) {
+            if userInput?.contains(".apt") == true, !(toChain is ChainMovement) {
+                onCheckMoveNameService(userInput!)
+                return
+            }
+            
+            if isValidAptosAddress(userInput) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
+                
             } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                 return
@@ -317,6 +327,61 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                     let address = iotaNs["result"]["targetAddress"].stringValue
                     nameservices.append(NameService.init("iota", userInput, address))
                 }
+            }
+            
+            DispatchQueue.main.async {
+                self.view.isUserInteractionEnabled = true
+                self.loadingView.isHidden = true
+                if (self.nameservices.count == 0) {
+                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                    
+                } else {
+                    let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                    baseSheet.nameservices = self.nameservices
+                    baseSheet.sheetDelegate = self
+                    baseSheet.sheetType = .SelectCosmosNameServiceAddress
+                    self.onStartSheet(baseSheet, 320, 0.6)
+                }
+            }
+        }
+    }
+    
+    func onCheckMoveNameService(_ userInput: String)  {
+        view.isUserInteractionEnabled = false
+        loadingView.isHidden = false
+        nameservices.removeAll()
+        
+        Task {
+            if let moveAddress = try await checkMoveNameService(userInput) {
+                nameservices.append(NameService.init("move", userInput, moveAddress))
+            }
+            
+            DispatchQueue.main.async {
+                self.view.isUserInteractionEnabled = true
+                self.loadingView.isHidden = true
+                if (self.nameservices.count == 0) {
+                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+                    
+                } else {
+                    let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+                    baseSheet.nameservices = self.nameservices
+                    baseSheet.sheetDelegate = self
+                    baseSheet.sheetType = .SelectCosmosNameServiceAddress
+                    self.onStartSheet(baseSheet, 320, 0.6)
+                }
+            }
+        }
+    }
+    
+    func onCheckSolanaNameService(_ userInput: String) {
+        view.isUserInteractionEnabled = false
+        loadingView.isHidden = false
+        nameservices.removeAll()
+        
+        Task {
+            guard let solanaFetcher = (fromChain as? ChainSolana)?.getSolanaFetcher() else { return }
+            if let ownerAddress = try await solanaFetcher.nameServiceAddress(userInput) {
+                nameservices.append(NameService.init("solana", userInput, ownerAddress))
             }
             
             DispatchQueue.main.async {
@@ -423,6 +488,16 @@ extension TxSendAddressSheet {
         guard let iotaFetcher = (fromChain as? ChainIota)?.getIotaFetcher() else { return nil }
         let parameters: Parameters = ["method": "iotax_iotaNamesLookup", "params": [inputName] , "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(iotaFetcher.getIotaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func checkMoveNameService(_ inputName: String) async throws -> String? {
+        guard let moveFetcher = (fromChain as? ChainAptos)?.getAptosFetcher() else { return nil }
+        let address = try await moveFetcher.client()?.getTargetAddress(name: inputName)
+        if address is OptionSome {
+            return (address as? OptionSome)?.value?.value
+        } else {
+            return nil
+        }
     }
     
     func checkOsmoname(_ inputName: String, _ prefix: String) async throws -> JSON? {
