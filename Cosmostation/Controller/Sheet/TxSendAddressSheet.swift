@@ -261,66 +261,29 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
     }
     
     func onCheckEns(_ userInput: String) {
-        view.isUserInteractionEnabled = false
-        loadingView.isHidden = false
-        nameservices.removeAll()
-        
+        setView()
         Task {
             if let ens = try await checkEnsService(userInput) {
                 nameservices.append(NameService.init("ens", userInput, ens))
             }
-            
-            DispatchQueue.main.async {
-                self.view.isUserInteractionEnabled = true
-                self.loadingView.isHidden = true
-                if (self.nameservices.count == 0) {
-                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-                    
-                } else {
-                    let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-                    baseSheet.nameservices = self.nameservices
-                    baseSheet.sheetDelegate = self
-                    baseSheet.sheetType = .SelectCosmosNameServiceAddress
-                    self.onStartSheet(baseSheet, 320, 0.6)
-                }
-            }
+            showNameServiceSheetOrToast()
         }
     }
     
     func onCheckSuiNameService(_ userInput: String) {
-        view.isUserInteractionEnabled = false
-        loadingView.isHidden = false
-        nameservices.removeAll()
-        
+        setView()
         Task {
             if let suiNs = try await checkSuiNameServce(userInput) {
                 if suiNs["result"] != JSON.null {
                     nameservices.append(NameService.init("sui", userInput, suiNs["result"].stringValue))
                 }
             }
-            
-            DispatchQueue.main.async {
-                self.view.isUserInteractionEnabled = true
-                self.loadingView.isHidden = true
-                if (self.nameservices.count == 0) {
-                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-                    
-                } else {
-                    let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-                    baseSheet.nameservices = self.nameservices
-                    baseSheet.sheetDelegate = self
-                    baseSheet.sheetType = .SelectCosmosNameServiceAddress
-                    self.onStartSheet(baseSheet, 320, 0.6)
-                }
-            }
+            showNameServiceSheetOrToast()
         }
     }
     
     func onCheckIotaNameService(_ userInput: String) {
-        view.isUserInteractionEnabled = false
-        loadingView.isHidden = false
-        nameservices.removeAll()
-        
+        setView()
         Task {
             if let iotaNs = try await checkIotaNameService(userInput) {
                 if iotaNs["result"] != JSON.null {
@@ -328,76 +291,28 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                     nameservices.append(NameService.init("iota", userInput, address))
                 }
             }
-            
-            DispatchQueue.main.async {
-                self.view.isUserInteractionEnabled = true
-                self.loadingView.isHidden = true
-                if (self.nameservices.count == 0) {
-                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-                    
-                } else {
-                    let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-                    baseSheet.nameservices = self.nameservices
-                    baseSheet.sheetDelegate = self
-                    baseSheet.sheetType = .SelectCosmosNameServiceAddress
-                    self.onStartSheet(baseSheet, 320, 0.6)
-                }
-            }
+            showNameServiceSheetOrToast()
         }
     }
     
     func onCheckMoveNameService(_ userInput: String)  {
-        view.isUserInteractionEnabled = false
-        loadingView.isHidden = false
-        nameservices.removeAll()
-        
+        setView()
         Task {
             if let moveAddress = try await checkMoveNameService(userInput) {
                 nameservices.append(NameService.init("move", userInput, moveAddress))
             }
-            
-            DispatchQueue.main.async {
-                self.view.isUserInteractionEnabled = true
-                self.loadingView.isHidden = true
-                if (self.nameservices.count == 0) {
-                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-                    
-                } else {
-                    let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-                    baseSheet.nameservices = self.nameservices
-                    baseSheet.sheetDelegate = self
-                    baseSheet.sheetType = .SelectCosmosNameServiceAddress
-                    self.onStartSheet(baseSheet, 320, 0.6)
-                }
-            }
+            showNameServiceSheetOrToast()
         }
     }
     
     func onCheckSolanaNameService(_ userInput: String) {
-        view.isUserInteractionEnabled = false
-        loadingView.isHidden = false
-        nameservices.removeAll()
-        
+        setView()
         Task {
             guard let solanaFetcher = (fromChain as? ChainSolana)?.getSolanaFetcher() else { return }
             if let ownerAddress = try await solanaFetcher.nameServiceAddress(userInput) {
                 nameservices.append(NameService.init("solana", userInput, ownerAddress))
             }
-            
-            DispatchQueue.main.async {
-                self.view.isUserInteractionEnabled = true
-                self.loadingView.isHidden = true
-                if (self.nameservices.count == 0) {
-                    self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-                    
-                } else {
-                    let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-                    baseSheet.nameservices = self.nameservices
-                    baseSheet.sheetDelegate = self
-                    baseSheet.sheetType = .SelectCosmosNameServiceAddress
-                    self.onStartSheet(baseSheet, 320, 0.6)
-                }
-            }
+            showNameServiceSheetOrToast()
         }
     }
     
@@ -460,6 +375,28 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                 self.sendAddressDelegate?.onInputedAddress(address, memo)
                 self.dismiss(animated: true)
             });
+        }
+    }
+    
+    private func setView() {
+        view.isUserInteractionEnabled = false
+        loadingView.isHidden = false
+        nameservices.removeAll()
+    }
+    
+    @MainActor
+    private func showNameServiceSheetOrToast() {
+        self.view.isUserInteractionEnabled = true
+        self.loadingView.isHidden = true
+        
+        if nameservices.isEmpty {
+            onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+        } else {
+            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+            baseSheet.nameservices = nameservices
+            baseSheet.sheetDelegate = self
+            baseSheet.sheetType = .SelectCosmosNameServiceAddress
+            onStartSheet(baseSheet, 320, 0.6)
         }
     }
 }
