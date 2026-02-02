@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SpoqaHanSansNeo-Bold.otf">
+            <string>SpoqaHanSansNeo-Bold</string>
+        </array>
+        <array key="SpoqaHanSansNeo-Regular.otf">
+            <string>SpoqaHanSansNeo-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AdsPopUpSheet" customModule="Cosmostation" customModuleProvider="target">
+            <connections>
+                <outlet property="closeButton" destination="lki-b7-PIi" id="DsS-lx-Ugw"/>
+                <outlet property="hideButton" destination="sDQ-5Y-l3M" id="Vjt-91-ALP"/>
+                <outlet property="indicatorLabel" destination="BOY-qN-PPx" id="9yD-x8-lDD"/>
+                <outlet property="pageContainerView" destination="0gJ-9b-mLx" id="WdZ-YJ-669"/>
+                <outlet property="popUpView" destination="fFc-Bu-MfZ" id="1wR-eP-DJg"/>
+                <outlet property="view" destination="ju7-DR-qvL" id="OD9-9l-DXb"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ju7-DR-qvL">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fFc-Bu-MfZ">
+                    <rect key="frame" x="27" y="256" width="339" height="390"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gJ-9b-mLx">
+                            <rect key="frame" x="0.0" y="0.0" width="339" height="350"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOY-qN-PPx" customClass="RoundedPaddingLabel" customModule="Cosmostation" customModuleProvider="target">
+                            <rect key="frame" x="303.66666666666669" y="16" width="19.333333333333314" height="15.333333333333336"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Regular" family="Spoqa Han Sans Neo" pointSize="12"/>
+                            <color key="textColor" name="_color01"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="6"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                    <real key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                    <real key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LYv-gc-Z1c">
+                            <rect key="frame" x="0.0" y="350" width="339" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lki-b7-PIi">
+                                    <rect key="frame" x="295" y="12.333333333333371" width="32" height="15"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Button">
+                                        <attributedString key="attributedTitle">
+                                            <fragment content="Close">
+                                                <attributes>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" metaFont="cellTitle"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    <integer key="NSUnderline" value="1"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                    </state>
+                                    <connections>
+                                        <action selector="closePopUpView:" destination="-1" eventType="touchUpInside" id="N8X-EE-DI4"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDQ-5Y-l3M">
+                                    <rect key="frame" x="12" y="10" width="153" height="20"/>
+                                    <fontDescription key="fontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="4" maxY="0.0"/>
+                                    <state key="normal" title="Hide for the next 7 days" image="iconUnCheckedBox">
+                                        <attributedString key="attributedTitle">
+                                            <fragment content="Hide for the next 7 days">
+                                                <attributes>
+                                                    <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <font key="NSFont" metaFont="cellTitle"/>
+                                                    <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration"/>
+                                    </state>
+                                    <buttonConfiguration key="configuration" style="plain" image="iconCheckboxOff" title="Don’t show again" imagePadding="4">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                        <fontDescription key="titleFontDescription" name="SpoqaHanSansNeo-Bold" family="Spoqa Han Sans Neo" pointSize="12"/>
+                                        <color key="baseForegroundColor" name="_color01"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="onBindHideOption:" destination="-1" eventType="touchUpInside" id="ajO-An-3Hi"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.059999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="6Ox-L0-eax"/>
+                                <constraint firstAttribute="bottom" secondItem="sDQ-5Y-l3M" secondAttribute="bottom" constant="10" id="ErZ-rg-6bb"/>
+                                <constraint firstItem="sDQ-5Y-l3M" firstAttribute="top" secondItem="LYv-gc-Z1c" secondAttribute="top" constant="10" id="IrL-Af-e0x"/>
+                                <constraint firstItem="lki-b7-PIi" firstAttribute="top" secondItem="LYv-gc-Z1c" secondAttribute="top" constant="12.5" id="JU1-Ft-3Mk"/>
+                                <constraint firstAttribute="trailing" secondItem="lki-b7-PIi" secondAttribute="trailing" constant="12" id="R0T-5i-57P"/>
+                                <constraint firstItem="sDQ-5Y-l3M" firstAttribute="leading" secondItem="LYv-gc-Z1c" secondAttribute="leading" constant="12" id="eqx-1z-dbY"/>
+                                <constraint firstAttribute="bottom" secondItem="lki-b7-PIi" secondAttribute="bottom" constant="12.5" id="eyv-5E-P34"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" name="_colorBg"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="0gJ-9b-mLx" secondAttribute="trailing" id="4Ms-Sk-Yd0"/>
+                        <constraint firstItem="BOY-qN-PPx" firstAttribute="top" secondItem="fFc-Bu-MfZ" secondAttribute="top" constant="16" id="8iB-1g-ZC3"/>
+                        <constraint firstItem="LYv-gc-Z1c" firstAttribute="top" secondItem="0gJ-9b-mLx" secondAttribute="bottom" id="AWj-SW-lwh"/>
+                        <constraint firstItem="0gJ-9b-mLx" firstAttribute="leading" secondItem="fFc-Bu-MfZ" secondAttribute="leading" id="CBV-p3-d67"/>
+                        <constraint firstAttribute="width" secondItem="fFc-Bu-MfZ" secondAttribute="height" multiplier="1:1.15" id="Iay-b5-i8W"/>
+                        <constraint firstItem="0gJ-9b-mLx" firstAttribute="top" secondItem="fFc-Bu-MfZ" secondAttribute="top" id="Lse-3L-TYm"/>
+                        <constraint firstAttribute="trailing" secondItem="LYv-gc-Z1c" secondAttribute="trailing" id="MD9-7m-uTL"/>
+                        <constraint firstAttribute="trailing" secondItem="BOY-qN-PPx" secondAttribute="trailing" constant="16" id="NTY-h7-wLi"/>
+                        <constraint firstAttribute="bottom" secondItem="LYv-gc-Z1c" secondAttribute="bottom" id="NxN-gf-uYV"/>
+                        <constraint firstItem="LYv-gc-Z1c" firstAttribute="leading" secondItem="fFc-Bu-MfZ" secondAttribute="leading" id="coS-Fw-Rqm"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="JNZ-xa-jTR"/>
+            <color key="backgroundColor" white="0.0" alpha="0.34178394039999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="fFc-Bu-MfZ" firstAttribute="leading" secondItem="JNZ-xa-jTR" secondAttribute="leading" constant="27" id="QDn-BO-TC4"/>
+                <constraint firstItem="JNZ-xa-jTR" firstAttribute="trailing" secondItem="fFc-Bu-MfZ" secondAttribute="trailing" constant="27" id="mko-dN-Zkm"/>
+                <constraint firstItem="fFc-Bu-MfZ" firstAttribute="centerY" secondItem="JNZ-xa-jTR" secondAttribute="centerY" id="wQM-g0-JKa"/>
+            </constraints>
+            <point key="canvasLocation" x="0.76335877862595414" y="-11.267605633802818"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconCheckboxOff" width="24" height="24"/>
+        <image name="iconUnCheckedBox" width="24" height="24"/>
+        <namedColor name="_color01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_colorBg">
+            <color red="0.17254901960784313" green="0.17647058823529413" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

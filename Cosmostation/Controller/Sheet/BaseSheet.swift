@@ -692,6 +692,11 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
                 return cell!
             }
             
+        } else if (sheetType == .SelectCosmosNameServiceAddress) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectNameServiceCell") as? SelectNameServiceCell
+            cell?.onBindNameservice(nameservices[indexPath.row])
+            return cell!
+            
         } else if (sheetType == .SelectNeutronVault) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"BaseSheetCell") as? BaseSheetCell
             cell?.onBindVault(indexPath.row)
@@ -1006,6 +1011,7 @@ public enum SheetType: Int {
     case MoveDydx = 101
     case MoveBabylonDappDetail = 102
     case MoveEthStaking = 103
+    case MoveAdsDetail = 104
     
     case SelectDappSort
     case SelectDappNetwork

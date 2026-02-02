@@ -11,6 +11,9 @@ import Lottie
 import MaterialComponents
 import SwiftyJSON
 import AptosKit
+import web3swift
+import Foundation
+import Alamofire
 
 class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrScanDelegate, SelectAddressListDelegate, BaseSheetDelegate {
     
@@ -103,20 +106,28 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         
         if (toChain is ChainSui) {
             //only support sui address style
-            if (WUtils.isValidSuiAddress(userInput)) {
+            if userInput?.contains(".sui") == true || userInput?.starts(with: "@") == true {
+                onCheckSuiNameService(userInput!)
+                
+            } else if WUtils.isValidSuiAddress(userInput) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
+                
             } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                 return
             }
             
         } else if toChain is ChainIota {
-            if (WUtils.isValidSuiAddress(userInput)) {
+            if userInput?.contains(".iota") == true || userInput?.starts(with: "@") == true {
+                onCheckIotaNameService(userInput!)
+                
+            } else if WUtils.isValidSuiAddress(userInput) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
+                
             } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                 return
@@ -140,10 +151,14 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             
         } else if (toChain.supportEvm == true && toChain.supportCosmos == false) {
             //only support EVM address style
-            if (WUtils.isValidEvmAddress(userInput)) {
+            if userInput?.contains(".eth") == true {
+                onCheckEns(userInput!)
+                
+            } else if WUtils.isValidEvmAddress(userInput) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
+                
             } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                 return
@@ -170,10 +185,14 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                 }
                 
             } else if (sendType == .EVM_COIN) {
-                if (WUtils.isValidEvmAddress(userInput)) {
+                if userInput?.contains(".eth") == true {
+                    onCheckEns(userInput!)
+                    
+                } else if WUtils.isValidEvmAddress(userInput) {
                     self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                     self.dismiss(animated: true)
                     return
+                    
                 } else {
                     self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                     return
@@ -181,10 +200,14 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
                 
             } else if (sendType == .EVM_ERC20 && fromChain.tag == toChain.tag) {
                 //이더리움만 지원
-                if (WUtils.isValidEvmAddress(userInput)) {
+                if userInput?.contains(".eth") == true {
+                    onCheckEns(userInput!)
+                    
+                } else if WUtils.isValidEvmAddress(userInput) {
                     self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                     self.dismiss(animated: true)
                     return
+                    
                 } else {
                     self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                     return
@@ -202,20 +225,30 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             }
             
         } else if (toChain is ChainSolana) {
-            if (WUtils.isValidSolanaAddress(userInput)) {
+            if userInput?.contains(".sol") == true {
+                onCheckSolanaNameService(userInput!)
+                
+            } else if WUtils.isValidSolanaAddress(userInput) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
+                
             } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                 return
             }
             
         } else if toChain is ChainAptos {
-            if (isValidAptosAddress(userInput)) {
+            if userInput?.contains(".apt") == true, !(toChain is ChainMovement) {
+                onCheckMoveNameService(userInput!)
+                return
+            }
+            
+            if isValidAptosAddress(userInput) {
                 self.sendAddressDelegate?.onInputedAddress(userInput!, nil)
                 self.dismiss(animated: true)
                 return
+                
             } else {
                 self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
                 return
@@ -227,6 +260,61 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         view.endEditing(true)
     }
     
+    func onCheckEns(_ userInput: String) {
+        setView()
+        Task {
+            if let ens = try await checkEnsService(userInput) {
+                nameservices.append(NameService.init("ens", userInput, ens))
+            }
+            showNameServiceSheetOrToast()
+        }
+    }
+    
+    func onCheckSuiNameService(_ userInput: String) {
+        setView()
+        Task {
+            if let suiNs = try await checkSuiNameServce(userInput) {
+                if suiNs["result"] != JSON.null {
+                    nameservices.append(NameService.init("sui", userInput, suiNs["result"].stringValue))
+                }
+            }
+            showNameServiceSheetOrToast()
+        }
+    }
+    
+    func onCheckIotaNameService(_ userInput: String) {
+        setView()
+        Task {
+            if let iotaNs = try await checkIotaNameService(userInput) {
+                if iotaNs["result"] != JSON.null {
+                    let address = iotaNs["result"]["targetAddress"].stringValue
+                    nameservices.append(NameService.init("iota", userInput, address))
+                }
+            }
+            showNameServiceSheetOrToast()
+        }
+    }
+    
+    func onCheckMoveNameService(_ userInput: String)  {
+        setView()
+        Task {
+            if let moveAddress = try await checkMoveNameService(userInput) {
+                nameservices.append(NameService.init("move", userInput, moveAddress))
+            }
+            showNameServiceSheetOrToast()
+        }
+    }
+    
+    func onCheckSolanaNameService(_ userInput: String) {
+        setView()
+        Task {
+            guard let solanaFetcher = (fromChain as? ChainSolana)?.getSolanaFetcher() else { return }
+            if let ownerAddress = try await solanaFetcher.nameServiceAddress(userInput) {
+                nameservices.append(NameService.init("solana", userInput, ownerAddress))
+            }
+            showNameServiceSheetOrToast()
+        }
+    }
     
     func onCheckNameServices(_ userInput: String)  {
         let prefix = toChain.bechAddressPrefix()
@@ -289,9 +377,65 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
             });
         }
     }
+    
+    private func setView() {
+        view.isUserInteractionEnabled = false
+        loadingView.isHidden = false
+        nameservices.removeAll()
+    }
+    
+    @MainActor
+    private func showNameServiceSheetOrToast() {
+        self.view.isUserInteractionEnabled = true
+        self.loadingView.isHidden = true
+        
+        if nameservices.isEmpty {
+            onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+        } else {
+            let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
+            baseSheet.nameservices = nameservices
+            baseSheet.sheetDelegate = self
+            baseSheet.sheetType = .SelectCosmosNameServiceAddress
+            onStartSheet(baseSheet, 320, 0.6)
+        }
+    }
 }
 
 extension TxSendAddressSheet {
+    
+    func checkEnsService(_ inputName: String) async throws -> String? {
+        guard let url = URL(string: ChainEthereum().getEvmfetcher()?.getEvmRpc() ?? ""),
+              let web3Provider = try? await Web3HttpProvider(url: url, network: .Mainnet)
+        else { return nil }
+        
+        let web3 = Web3.init(provider: web3Provider)
+        let ens = ENS(web3: web3)
+        
+        guard let evmAddress = try? await ens?.getAddress(forNode: inputName) else { return nil }
+        return evmAddress?.address
+    }
+    
+    func checkSuiNameServce(_ inputName: String) async throws -> JSON? {
+        guard let suiFetcher = (fromChain as? ChainSui)?.getSuiFetcher() else { return nil }
+        let parameters: Parameters = ["method": "suix_resolveNameServiceAddress", "params": [inputName] , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(suiFetcher.getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func checkIotaNameService(_ inputName: String) async throws -> JSON? {
+        guard let iotaFetcher = (fromChain as? ChainIota)?.getIotaFetcher() else { return nil }
+        let parameters: Parameters = ["method": "iotax_iotaNamesLookup", "params": [inputName] , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(iotaFetcher.getIotaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func checkMoveNameService(_ inputName: String) async throws -> String? {
+        guard let moveFetcher = (fromChain as? ChainAptos)?.getAptosFetcher() else { return nil }
+        let address = try await moveFetcher.client()?.getTargetAddress(name: inputName)
+        if address is OptionSome {
+            return (address as? OptionSome)?.value?.value
+        } else {
+            return nil
+        }
+    }
     
     func checkOsmoname(_ inputName: String, _ prefix: String) async throws -> JSON? {
         let name = String(inputName.split(separator: ".")[0]) + "." + prefix

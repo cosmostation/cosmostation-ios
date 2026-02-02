@@ -289,4 +289,21 @@ extension SolanaFetcher {
         let parameters: Parameters = ["method": "sendTransaction", "params": params , "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
+    
+    func nameServiceAddress(_ inputName: String) async throws -> String? {
+        let deriveNameAccountKey = SolanaJS.shared.callJSValue(key: "deriveNameAccountKey", param: [inputName])
+        if !deriveNameAccountKey.isEmpty {
+            let params: Any = [deriveNameAccountKey, ["encoding": "base64", "commitment": "confirmed"]]
+            let parameters: Parameters = ["method": "getAccountInfo", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+            let accountInfo = try await AF.request(getSolanaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+            let data = accountInfo["result"]["value"]["data"].arrayValue
+            
+            if data.count > 0 {
+                let parseData = data[0].stringValue
+                let ownerAddress = SolanaJS.shared.callJSValue(key: "parseNameRegistryOwner", param: [parseData])
+                return ownerAddress
+            }
+        }
+        return nil
+    }
 }

@@ -90,10 +90,27 @@ class SuiFetcher {
                     suiStakedList.append(stake)
                 })
                 
-                await suiBalances.concurrentForEach { coinType, balance in
-                    if let metadata = try? await self.fetchCoinMetadata(coinType)?["result"], metadata != JSON.null {
-                        self.suiCoinMeta[coinType] = metadata
+                let balances: [(String, JSON)] = await withTaskGroup(of: (String, JSON)?.self) { balance in
+                    for (coinType, _) in suiBalances {
+                        balance.addTask { [weak self] in
+                            guard let self else { return nil }
+                            if let metadata = try? await self.fetchCoinMetadata(coinType)?["result"],
+                               metadata != JSON.null {
+                                return (coinType, metadata) as? (String, JSON)
+                            }
+                            return nil
+                        }
                     }
+                    
+                    var dpBalances: [(String, JSON)] = []
+                    for await item in balance {
+                        if let item { dpBalances.append(item) }
+                    }
+                    return dpBalances
+                }
+                
+                for (coinType, metadata) in balances {
+                    self.suiCoinMeta[coinType] = metadata
                 }
             }
             return true

@@ -18,16 +18,31 @@ class SelectNameServiceCell: UITableViewCell {
     }
     
     func onBindNameservice(_ nameservice: NameService) {
-        if (nameservice.type == "starname") {
+        if nameservice.type == "ens" {
+            serviceLabel.text = "Ethereum Name Service"
+            
+        } else if nameservice.type == "sui" {
+            serviceLabel.text = "Sui Name Service"
+            
+        } else if nameservice.type == "iota" {
+            serviceLabel.text = "Iota Name Service"
+            
+        } else if nameservice.type == "move" {
+            serviceLabel.text = "Aptos Name Service"
+            
+        } else if nameservice.type == "solana" {
+            serviceLabel.text = "Solana Name Service"
+            
+        } else if nameservice.type == "starname" {
             serviceLabel.text = "Starname Name Service"
             
-        } else if (nameservice.type == "osmosis") {
+        } else if nameservice.type == "osmosis" {
             serviceLabel.text = "Osmosis ICNS"
             
-        } else if (nameservice.type == "stargaze") {
+        } else if nameservice.type == "stargaze" {
             serviceLabel.text = "Stargaze Name Service"
             
-        } else if (nameservice.type == "archway") {
+        } else if nameservice.type == "archway" {
             serviceLabel.text = "Archway ARCH ID"
         }
         addressLabel.text = nameservice.address
