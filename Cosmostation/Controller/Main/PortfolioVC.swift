@@ -42,6 +42,7 @@ class PortfolioVC: BaseVC {
     
     var lastSortingType: SortingType = .value
     
+    // Only One for the Notification -> onShowAds()
     private static var didOnceShowAds = false
     
     override func viewDidLoad() {
@@ -76,7 +77,6 @@ class PortfolioVC: BaseVC {
         navigationItem.titleView = BgRandomButton()
         
         initView()
-        onShowAds()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -92,6 +92,7 @@ class PortfolioVC: BaseVC {
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("FetchPrice"), object: nil)
         navigationItem.leftBarButtonItem = leftBarButton(baseAccount?.getRefreshName())
         onUpdateVC()
+        onShowAds()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -293,10 +294,10 @@ class PortfolioVC: BaseVC {
         onStartSheet(warnSheet, 420, 0.6)
     }
     
-    func onShowAds() {
+    private func onShowAds() {
+        if BaseData.instance.appUserInfo != nil { return }
         guard !Self.didOnceShowAds else { return }
         Self.didOnceShowAds = true
-        if BaseData.instance.getAdsShowOption() { return }
         
         if BaseData.instance.adsInfos?.count ?? 0 > 0 {
             let adsPopUpView = AdsPopUpSheet(nibName: "AdsPopUpSheet", bundle: nil)

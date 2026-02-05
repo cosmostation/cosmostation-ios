@@ -57,7 +57,10 @@ class AdsPopUpSheet: BaseVC {
     }
 
     @IBAction func closePopUpView(_ sender: Any) {
-        BaseData.instance.setAdsShowOption(hideButton.isSelected)
+        if hideButton.isSelected {
+            let ids = BaseData.instance.adsInfos?.compactMap { $0.id } ?? []
+            BaseData.instance.setAdsSet(ids)
+        }
         dismiss(animated: true)
     }
 
@@ -106,7 +109,10 @@ class AdsPopUpSheet: BaseVC {
     private func openWebAndDismiss(_ info: AdsInfo) {
         guard let urlStr = info.linkUrl?.trimmingCharacters(in: .whitespacesAndNewlines), !urlStr.isEmpty else { return }
         
-        BaseData.instance.setAdsShowOption(hideButton.isSelected)
+        if hideButton.isSelected {
+            let ids = BaseData.instance.adsInfos?.compactMap { $0.id } ?? []
+            BaseData.instance.setAdsSet(ids)
+        }
 
         dismiss(animated: true) { [weak self] in
             self?.sheetDelegate?.onSelectedSheet(.MoveAdsDetail, ["url": urlStr])
