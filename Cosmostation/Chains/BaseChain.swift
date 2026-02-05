@@ -678,6 +678,14 @@ extension BaseChain {
         return 13
     }
     
+    func isSupportMultiCall() -> Bool {
+        return getChainListParam()["evm_multicall_info"]["is_support_multicall"].bool ?? false
+    }
+    
+    func evmMultiCallAddress() -> String {
+        return getChainListParam()["evm_multicall_info"]["multicall_address"].string ?? "0xcA11bde05977b3631167028862bE2a173976CA11"
+    }
+    
     func getSkipAffiliate() -> String {
         if let affiliate = BaseData.instance.mintscanChainParams?["cosmos"]["params"]["chainlist_params"]["skip_affiliate"].string {
             return affiliate

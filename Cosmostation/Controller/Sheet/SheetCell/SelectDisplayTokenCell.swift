@@ -57,20 +57,29 @@ class SelectDisplayTokenCell: UITableViewCell {
         symbolLabel.text = token.symbol
         contractLabel.text = token.address
         
-        Task {
-            if getTokens?().map({$0.address}).contains(token.address) == false {
-                showLoadingView()
-                await fetchTokenBalance(chain, token)
-                hideLoadingView()
-            }
+        if chain.isSupportMultiCall() && !chain.evmMultiCallAddress().isEmpty {
+            let amount = token.getAmount().multiplying(byPowerOf10: -token.decimals!)
+            amountLabel.attributedText = WDP.dpAmount(amount.stringValue, amountLabel!.font)
+            let msPrice = BaseData.instance.getPrice(token.coinGeckoId)
+            let value = msPrice.multiplying(by: token.getAmount()).multiplying(byPowerOf10: -token.decimals!, withBehavior: handler6)
+            WDP.dpValue(value, valueCurrencyLabel, valueLabel)
             
-            if let index = getTokens?().firstIndex(where: { $0.address == token.address }),
-               let token = getTokens?()[index] {
-                let amount = token.getAmount().multiplying(byPowerOf10: -token.decimals!)
-                amountLabel.attributedText = WDP.dpAmount(amount.stringValue, amountLabel!.font)
-                let msPrice = BaseData.instance.getPrice(token.coinGeckoId)
-                let value = msPrice.multiplying(by: token.getAmount()).multiplying(byPowerOf10: -token.decimals!, withBehavior: handler6)
-                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+        } else {
+            Task {
+                if getTokens?().map({$0.address}).contains(token.address) == false {
+                    showLoadingView()
+                    await fetchTokenBalance(chain, token)
+                    hideLoadingView()
+                }
+                
+                if let index = getTokens?().firstIndex(where: { $0.address == token.address }),
+                   let token = getTokens?()[index] {
+                    let amount = token.getAmount().multiplying(byPowerOf10: -token.decimals!)
+                    amountLabel.attributedText = WDP.dpAmount(amount.stringValue, amountLabel!.font)
+                    let msPrice = BaseData.instance.getPrice(token.coinGeckoId)
+                    let value = msPrice.multiplying(by: token.getAmount()).multiplying(byPowerOf10: -token.decimals!, withBehavior: handler6)
+                    WDP.dpValue(value, valueCurrencyLabel, valueLabel)
+                }
             }
         }
     }
@@ -81,7 +90,7 @@ class SelectDisplayTokenCell: UITableViewCell {
             await (chain as? ChainGno)?.getGnoFetcher()?.fetchGrc20Balance(token)
             
         } else if chain.isSupportErc20() {
-            await chain.getEvmfetcher()?.fetchErc20Balance(token)
+            await chain.getEvmfetcher()?.fetchErc20BalanceOf(chain.evmAddress, token)
             
         } else if chain.isSupportCw20() {
             await chain.getCosmosfetcher()?.fetchCw20Balance(token)
