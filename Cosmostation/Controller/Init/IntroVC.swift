@@ -142,7 +142,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
             BaseData.instance.allEcosystems = msEcosystems
             
             let now = Int64(Date().timeIntervalSince1970 * 1000.0)
-            BaseData.instance.adsInfos = msAdsInfos.ads?.filter { adInfo in
+            let timeFilteredAds = msAdsInfos.ads?.filter { adInfo in
                 guard let mobile = adInfo.images.mobile, !mobile.isEmpty else { return false }
                 
                 let start = adInfo.dateStringToLong(date: adInfo.startAt)
@@ -158,6 +158,12 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
                     return now <= end
                 }
             }
+            
+            let visibleAds = timeFilteredAds?.filter { ad in
+                let id = ad.id.lowercased()
+                return !BaseData.instance.getAdsSet().contains(id)
+            }
+            BaseData.instance.adsInfos = visibleAds
         }
     }
     

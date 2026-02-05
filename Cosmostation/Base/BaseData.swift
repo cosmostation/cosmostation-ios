@@ -911,11 +911,14 @@ extension BaseData {
         return UserDefaults.standard.bool(forKey: KEY_HIDE_VALUE)
     }
     
-    func setAdsShowOption(_ hide : Bool) {
-        UserDefaults.standard.set(hide, forKey: KEY_ADS_SHOW_OPTION)
+    func setAdsSet(_ ids: [String]) {
+        var savedAds = getAdsSet()
+        ids.forEach { savedAds.insert($0.lowercased()) }
+        UserDefaults.standard.set(Array(savedAds), forKey: KEY_ADS_SHOW_OPTION)
     }
     
-    func getAdsShowOption() -> Bool {
-        return UserDefaults.standard.bool(forKey: KEY_ADS_SHOW_OPTION)
+    func getAdsSet() -> Set<String> {
+        let arr = UserDefaults.standard.stringArray(forKey: KEY_ADS_SHOW_OPTION) ?? []
+        return Set(arr.map { $0.lowercased() })
     }
 }

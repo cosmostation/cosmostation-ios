@@ -76,11 +76,26 @@ class MainTabVC: UITabBarController, UITabBarControllerDelegate {
             })
             
         } else if let userInfo = BaseData.instance.appUserInfo {
+            let pushType: String = {
+                if let value = userInfo["push_type"] as? String {
+                    return value
+                } else {
+                    return "-1"
+                }
+            }()
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                if (userInfo["push_type"] as? String == "0") {
+                if (pushType == "0") {
                     if let txhash = userInfo["txhash"] as? String,
                        let network = userInfo["network"] as? String,
                        let url = URL(string: MintscanTxUrl.replacingOccurrences(of: "${apiName}", with: network).replacingOccurrences(of: "${hash}", with: txhash)) {
+                        let safariViewController = SFSafariViewController(url: url)
+                        safariViewController.modalPresentationStyle = .popover
+                        self.present(safariViewController, animated: true)
+                    }
+                    
+                } else {
+                    if let url = URL(string: userInfo["url"] as? String ?? "") {
                         let safariViewController = SFSafariViewController(url: url)
                         safariViewController.modalPresentationStyle = .popover
                         self.present(safariViewController, animated: true)
