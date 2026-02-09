@@ -26,8 +26,8 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dQo-O5-792">
-                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dQo-O5-792">
+                    <rect key="frame" x="0.0" y="126" width="393" height="726"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" name="_primary"/>
                 </tableView>
@@ -68,7 +68,7 @@
                 <constraint firstItem="lMg-Lm-4Yd" firstAttribute="centerY" secondItem="Rmi-Md-KsU" secondAttribute="centerY" id="FvO-3S-bmp"/>
                 <constraint firstItem="lMg-Lm-4Yd" firstAttribute="centerX" secondItem="Rmi-Md-KsU" secondAttribute="centerX" id="LF2-4x-Jvg"/>
                 <constraint firstItem="dQo-O5-792" firstAttribute="leading" secondItem="Rmi-Md-KsU" secondAttribute="leading" id="Z9u-Gh-S2g"/>
-                <constraint firstAttribute="top" secondItem="dQo-O5-792" secondAttribute="top" id="eZn-1C-ozZ"/>
+                <constraint firstItem="Rmi-Md-KsU" firstAttribute="top" secondItem="dQo-O5-792" secondAttribute="top" constant="-8" id="eZn-1C-ozZ"/>
                 <constraint firstItem="Rmi-Md-KsU" firstAttribute="trailing" secondItem="dQo-O5-792" secondAttribute="trailing" id="tdK-2u-kWz"/>
             </constraints>
             <point key="canvasLocation" x="139.69465648854961" y="20.422535211267608"/>
