@@ -41,7 +41,11 @@ class ChainAnnouncementVC: BaseVC {
     }
     
     func onShowAnnounceDetail(_ announcement: AdsInfo) {
-        
+        let announcementPopUpView = AnnouncementPopUpSheet(nibName: "AnnouncementPopUpSheet", bundle: nil)
+        announcementPopUpView.announcement = announcement
+        announcementPopUpView.sheetDelegate = self
+        announcementPopUpView.modalPresentationStyle = .overFullScreen
+        self.present(announcementPopUpView, animated: true)
     }
 }
 
@@ -61,5 +65,15 @@ extension ChainAnnouncementVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let announcement = announcementList[indexPath.row]
         onShowAnnounceDetail(announcement)
+    }
+}
+
+extension ChainAnnouncementVC: BaseSheetDelegate {
+    
+    func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
+        if let urlStr = result["url"] as? String {
+            guard let url = URL(string: urlStr) else { return }
+            self.onShowSafariWeb(url)
+        }
     }
 }
