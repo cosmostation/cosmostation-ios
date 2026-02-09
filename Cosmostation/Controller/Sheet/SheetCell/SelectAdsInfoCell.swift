@@ -48,7 +48,7 @@ class SelectAdsInfoCell: UIViewController {
     }
 
     private func loadDataView() {
-        guard let image = adsInfo.images.mobile, let url = URL(string: image) else {
+        guard let image = adsInfo.images.mobile, let imageUrl = URL(string: image) else {
             imageView.image = UIImage(named: "popUpDrop")
             return
         }
@@ -67,7 +67,7 @@ class SelectAdsInfoCell: UIViewController {
             detailView.isHidden = true
         }
 
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
+        URLSession.shared.dataTask(with: imageUrl) { [weak self] data, _, _ in
             guard let self, let data, let img = UIImage(data: data) else {
                 return
             }

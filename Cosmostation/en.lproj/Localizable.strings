@@ -366,6 +366,7 @@
 "str_next_epoch" = "Activate Next Epoch";
 "str_coin_manage_stake" = "%@ Manage Stake";
 "str_mint_photon" = "mint PHOTON";
+"str_chain_announcement" = "Chain Announcements";
 
 
 "btn_delegate" = "  Delegate";
@@ -548,6 +549,7 @@
 "setting_hide_legacy" = "Enable Old Addresses";
 "setting_show_testnet" = "Enable Testnet";
 "setting_chain_title" = "Manage Chains";
+"setting_chain_announcement" = "Chain Announcements";
 "setting_addressbook_title" = "Add Address Book";
 "setting_language_title" = "Language";
 "setting_theme_title" = "Theme";

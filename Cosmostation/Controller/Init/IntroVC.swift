@@ -140,30 +140,7 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
             })
             BaseData.instance.mintscanCw721 = msCw721["assets"].arrayValue
             BaseData.instance.allEcosystems = msEcosystems
-            
-            let now = Int64(Date().timeIntervalSince1970 * 1000.0)
-            let timeFilteredAds = msAdsInfos.ads?.filter { adInfo in
-                guard let mobile = adInfo.images.mobile, !mobile.isEmpty else { return false }
-                
-                let start = adInfo.dateStringToLong(date: adInfo.startAt)
-                if now < start { return false }
-                
-                let endStr = adInfo.endAt?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-                if endStr.isEmpty {
-                    return true
-                } else {
-                    let end = adInfo.dateStringToLong(date: endStr)
-                    if end <= 0 { return false }
-                    if end < start { return false }
-                    return now <= end
-                }
-            }
-            
-            let visibleAds = timeFilteredAds?.filter { ad in
-                let id = ad.id.lowercased()
-                return !BaseData.instance.getAdsSet().contains(id)
-            }
-            BaseData.instance.adsInfos = visibleAds
+            BaseData.instance.adsInfos = msAdsInfos.ads
         }
     }
     

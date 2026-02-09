@@ -40,12 +40,18 @@ class SettingBaseCell: UITableViewCell {
         setDetailLabel.text = String(chainNames.count)
     }
     
+    func onBindSetChainNotice() {
+        setImg.image = UIImage(named: "setAnnouncement")
+        setTitleLabel.text = NSLocalizedString("setting_chain_announcement", comment: "")
+        setDetailLabel.text = ""
+    }
+    
     func onBindSetAddressBook() {
         setImg.image = UIImage(named: "setAddressBook")
         setTitleLabel.text = NSLocalizedString("setting_addressbook_title", comment: "")
         setDetailLabel.text = String(BaseData.instance.selectAllAddressBooks().count)
     }
-    
+
     
     func onBindSetLaungaue() {
         setImg.image = UIImage(named: "setLanguage")

@@ -299,11 +299,39 @@ class PortfolioVC: BaseVC {
         guard !Self.didOnceShowAds else { return }
         Self.didOnceShowAds = true
         
-        if BaseData.instance.adsInfos?.count ?? 0 > 0 {
-            let adsPopUpView = AdsPopUpSheet(nibName: "AdsPopUpSheet", bundle: nil)
-            adsPopUpView.sheetDelegate = self
-            adsPopUpView.modalPresentationStyle = .overFullScreen
-            self.present(adsPopUpView, animated: true)
+        Task {
+            let now = Int64(Date().timeIntervalSince1970 * 1000.0)
+            let timeFilteredAds = BaseData.instance.adsInfos?.filter { adInfo in
+                guard let mobile = adInfo.images.mobile, !mobile.isEmpty else { return false }
+                
+                let start = adInfo.dateStringToLong(date: adInfo.startAt)
+                if now < start { return false }
+                
+                let endStr = adInfo.endAt?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                if endStr.isEmpty {
+                    return true
+                } else {
+                    let end = adInfo.dateStringToLong(date: endStr)
+                    if end <= 0 { return false }
+                    if end < start { return false }
+                    return now <= end
+                }
+            }
+            
+            let visibleAds = timeFilteredAds?.filter { ad in
+                let id = ad.id.lowercased()
+                return !BaseData.instance.getAdsSet().contains(id)
+            }
+            
+            DispatchQueue.main.async {
+                if visibleAds?.count ?? 0 > 0 {
+                    let adsPopUpView = AdsPopUpSheet(nibName: "AdsPopUpSheet", bundle: nil)
+                    adsPopUpView.adsInfos = visibleAds ?? []
+                    adsPopUpView.sheetDelegate = self
+                    adsPopUpView.modalPresentationStyle = .overFullScreen
+                    self.present(adsPopUpView, animated: true)
+                }
+            }
         }
     }
 }

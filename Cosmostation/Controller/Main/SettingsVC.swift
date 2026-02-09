@@ -42,7 +42,7 @@ class SettingsVC: BaseVC {
         if let accountCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SettingBaseCell {
             accountCell.onBindSetAccount()
         }
-        if let addressBook = tableView.cellForRow(at: IndexPath(row: 4, section: 0)) as? SettingBaseCell {
+        if let addressBook = tableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? SettingBaseCell {
             addressBook.onBindSetAddressBook()
         }
     }
@@ -95,7 +95,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
-            return 5
+            return 6
         } else if (section == 1) {
             return 9
         } else if (section == 2) {
@@ -149,6 +149,10 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 return baseCell
                 
             } else if (indexPath.row == 4) {
+                baseCell.onBindSetChainNotice()
+                return baseCell
+                
+            } else if (indexPath.row == 5) {
                 baseCell.onBindSetAddressBook()
                 return baseCell
             }
@@ -261,6 +265,12 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(chainListVC, animated: true)
                 
             } else if (indexPath.row == 4) {
+                let chainAnnouncementVC = ChainAnnouncementVC(nibName: "ChainAnnouncementVC", bundle: nil)
+                chainAnnouncementVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(chainAnnouncementVC, animated: true)
+                
+            } else if (indexPath.row == 5) {
                 let addressBookVC = AddressBookListVC(nibName: "AddressBookListVC", bundle: nil)
                 addressBookVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
