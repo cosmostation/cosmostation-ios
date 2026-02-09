@@ -19,6 +19,7 @@ class AdsPopUpSheet: BaseVC {
     private var pages: [SelectAdsInfoCell] = []
     private var currentIndex: Int = 0
     
+    var adsInfos: [AdsInfo] = []
     var sheetDelegate: BaseSheetDelegate?
 
     override func viewDidLoad() {
@@ -58,14 +59,13 @@ class AdsPopUpSheet: BaseVC {
 
     @IBAction func closePopUpView(_ sender: Any) {
         if hideButton.isSelected {
-            let ids = BaseData.instance.adsInfos?.compactMap { $0.id } ?? []
+            let ids = adsInfos.compactMap { $0.id }
             BaseData.instance.setAdsSet(ids)
         }
         dismiss(animated: true)
     }
 
     private func setupPager() {
-        guard let adsInfos = BaseData.instance.adsInfos, !adsInfos.isEmpty else { return }
         if adsInfos.count == 1 {
             indicatorLabel.isHidden = true
         }
@@ -102,7 +102,6 @@ class AdsPopUpSheet: BaseVC {
     }
     
     private func updateIndicator() {
-        guard let adsInfos = BaseData.instance.adsInfos, !adsInfos.isEmpty else { return }
         indicatorLabel.text = "\(currentIndex + 1)/\(adsInfos.count)"
     }
     
@@ -110,7 +109,7 @@ class AdsPopUpSheet: BaseVC {
         guard let urlStr = info.linkUrl?.trimmingCharacters(in: .whitespacesAndNewlines), !urlStr.isEmpty else { return }
         
         if hideButton.isSelected {
-            let ids = BaseData.instance.adsInfos?.compactMap { $0.id } ?? []
+            let ids = adsInfos.compactMap { $0.id }
             BaseData.instance.setAdsSet(ids)
         }
 

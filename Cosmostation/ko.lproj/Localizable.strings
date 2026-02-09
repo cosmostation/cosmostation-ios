@@ -366,6 +366,7 @@
 "str_next_epoch" = "다음 에포치 활성화";
 "str_coin_manage_stake" = "%@ 스테이킹 관리";
 "str_mint_photon" = "PHOTON 발행";
+"str_chain_announcement" = "체인 공지";
 
 
 "btn_delegate" = "  위임 하기";
@@ -548,6 +549,7 @@
 "setting_hide_legacy" = "구 주소 활성화";
 "setting_show_testnet" = "테스트넷 활성화";
 "setting_chain_title" = "체인 관리";
+"setting_chain_announcement" = "체인 공지";
 "setting_addressbook_title" = "주소록 관리";
 "setting_language_title" = "언어";
 "setting_theme_title" = "테마";

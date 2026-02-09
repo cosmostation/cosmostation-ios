@@ -366,6 +366,7 @@
 "str_next_epoch" = "次のエポックを有効化";
 "str_coin_manage_stake" = "%@ステーキング管理";
 "str_mint_photon" = "PHOTON発行";
+"str_chain_announcement" = "チェーンのお知らせ";
 
 
 "btn_delegate" = "  委任する";
@@ -548,6 +549,7 @@
 "setting_hide_legacy" = "旧アドレス有効化";
 "setting_show_testnet" = "テストネットの有効化";
 "setting_chain_title" = "チェーン管理";
+"setting_chain_announcement" = "チェーンのお知らせ";
 "setting_addressbook_title" = "連絡先の管理";
 "setting_language_title" = "言語";
 "setting_theme_title" = "テーマ";
