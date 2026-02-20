@@ -71,11 +71,8 @@ let KADO_PAY_URL                        = "https://app.kado.money";
 let KADO_PAY_PUBLICK                    = "18e55363-1d76-456c-8d4d-ecee7b9517ea";
 let BINANCE_BUY_URL                     = "https://www.binance.com/en/crypto/buy";
 
-let CSS_VERSION                         = CSS_URL + "v1/app/version/ios";
-let CSS_PUSH_UPDATE                     = CSS_URL + "v1/account/update";
-let CSS_MOON_PAY                        = CSS_URL + "v1/sign/moonpay";
-//let WALLET_API_SYNC_PUSH_URL            = CSS_URL + "v1/push/token/address";
-//let WALLET_API_PUSH_STATUS_URL          = CSS_URL + "v1/push/alarm/status";
+let MINTSCAN_VERSION                    = MINTSCAN_API_URL + "v10/app/version/ios"
+let MINTSCAN_MOON_PAY                   = MINTSCAN_API_URL + "v10/app/keys/moonpay"
 
 let EVM_UNIVERSAL = "EVM-universal"
 

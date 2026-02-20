@@ -76,8 +76,8 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
     }
     
     func onAppVersionCheck() {
-//        print("onAppVersionCheck ", CSS_VERSION)
-        AF.request(CSS_VERSION, method: .get).responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
+//        print("onAppVersionCheck ", MINTSCAN_VERSION)
+        AF.request(MINTSCAN_VERSION, method: .get).responseDecodable(of: JSON.self, queue: .main, decoder: JSONDecoder()) { response in
             switch response.result {
             case .success(let value):
 //                print("onAppVersionCheck ", value)
