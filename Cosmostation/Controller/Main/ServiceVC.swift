@@ -35,7 +35,7 @@ class ServiceVC: BaseVC {
     func onOpenMoonpay() {
         let query = "?apiKey=" + MOON_PAY_PUBLICK
         let param = ["api_key" : query] as [String : Any]
-        AF.request(CSS_MOON_PAY, method: .post, parameters: param, encoding: JSONEncoding.default).responseDecodable(of: JSON.self)  { response in
+        AF.request(MINTSCAN_MOON_PAY, method: .post, parameters: param, encoding: JSONEncoding.default).responseDecodable(of: JSON.self)  { response in
             switch response.result {
             case .success(let res):
                 if let signauture = res["signature"].string {
