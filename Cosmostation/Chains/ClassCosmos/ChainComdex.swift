@@ -25,7 +25,7 @@ class ChainComdex: BaseChain  {
         bechAccountPrefix = "comdex"
         validatorPrefix = "comdexvaloper"
         grpcHost = ""
-        lcdUrl = "https://comdex.api.m.stavr.tech/"
+        lcdUrl = "https://comdex-api.polkachu.com"
     }
     
 }

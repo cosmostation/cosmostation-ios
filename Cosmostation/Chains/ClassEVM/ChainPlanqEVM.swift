@@ -29,6 +29,6 @@ class ChainPlanqEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "PLANQ"
-        evmRpcURL = "https://planq-rpc.nodies.app"
+        evmRpcURL = "https://mainnet-planq-evmrpc.konsortech.xyz"
     }
 }

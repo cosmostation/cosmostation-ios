@@ -905,7 +905,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
     result.append(ChainSunrise())
-    result.append(ChainSynternet())
     result.append(ChainTenetEVM())                      //EVM
     result.append(ChainTeritori())
     result.append(ChainTerra())
@@ -974,7 +973,9 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainSge())
 //    result.append(ChainStafi())
 //    result.append(ChainStarname())
-//    
+//    result.append(ChainSynternet())
+//
+//
 //    result.append(ChainCosmos_T())
 //    result.append(ChainArtelaEVM_T())
 //    result.append(ChainBeraEVM_T())                     //EVM

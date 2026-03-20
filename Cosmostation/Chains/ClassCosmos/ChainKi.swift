@@ -25,7 +25,7 @@ class ChainKi: BaseChain  {
         bechAccountPrefix = "ki"
         validatorPrefix = "kivaloper"
         grpcHost = ""
-        lcdUrl = "https://kichain.api.m.stavr.tech/"
+        lcdUrl = "https://kichain-api.polkachu.com/"
     }
     
 }

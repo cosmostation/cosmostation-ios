@@ -532,8 +532,7 @@ extension DappDetailVC: WKScriptMessageHandler {
             
             //Handle EVM Request
             else if (method == "eth_requestAccounts" || method == "wallet_requestPermissions") {
-                onInitEvmChain()
-                if let evmAddress = targetChain.evmAddress {
+                if let evmAddress = allChains.filter({ $0.supportEvm }).first?.evmAddress {
                     injectionRequestApprove([evmAddress], messageJSON, bodyJSON["messageId"])
                 } else {
                     let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
@@ -556,12 +555,8 @@ extension DappDetailVC: WKScriptMessageHandler {
                 
             } else if (method == "eth_chainId") {
                 onInitEvmChain()
-                if let evmChainId = targetChain.chainIdEvm {
-                    injectionRequestApprove(JSON.init(stringLiteral: evmChainId), messageJSON, bodyJSON["messageId"])
-                } else {
-                    let result = NSLocalizedString("error_not_support_cosmostation", comment: "")
-                    injectionRequestReject(result, messageJSON, bodyJSON["messageId"])
-                }
+                let evmChainId = targetChain.chainIdEvm ?? ""
+                injectionRequestApprove(JSON.init(stringLiteral: evmChainId), messageJSON, bodyJSON["messageId"])
                 
             } else if (method == "eth_accounts") {
                 onInitEvmChain()
