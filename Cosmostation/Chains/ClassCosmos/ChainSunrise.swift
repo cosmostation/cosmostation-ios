@@ -25,6 +25,6 @@ class ChainSunrise: BaseChain {
         bechAccountPrefix = "sunrise"
         validatorPrefix = "sunrisevaloper"
         grpcHost = "sunrise-grpc.noders.services"
-        lcdUrl = "https://sunrise-mainnet-api.mekonglabs.tech/"
+        lcdUrl = "https://rest.sunrise.tcnetwork.io"
     }
 }
