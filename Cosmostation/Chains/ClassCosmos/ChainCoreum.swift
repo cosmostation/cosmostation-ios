@@ -20,12 +20,12 @@ class ChainCoreum: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/990'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "ucore"
         bechAccountPrefix = "core"
         validatorPrefix = "corevaloper"
-        grpcHost = "grpc-coreum.cosmostation.io"  
-        lcdUrl = "https://lcd-coreum.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://rest-coreum.ecostake.com/"
     }
     
     override func getCosmosfetcher() -> CosmosFetcher? {

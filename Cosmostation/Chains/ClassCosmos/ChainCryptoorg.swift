@@ -20,12 +20,12 @@ class ChainCryptoorg: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/394'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "basecro"
         bechAccountPrefix = "cro"
         validatorPrefix = "crocncl"
-        grpcHost = "grpc-crypto-org.cosmostation.io"
-        lcdUrl = "https://lcd-crypto-org.cosmostation.io/"
+        grpcHost = "grpc.mainnet.crypto.org"
+        lcdUrl = "https://cryptocom-api.polkachu.com/"
     }
     
 }
