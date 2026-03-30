@@ -24,8 +24,8 @@ class ChainAtomone: BaseChain {
         stakeDenom = "uatone"
         bechAccountPrefix = "atone"
         validatorPrefix = "atonevaloper"
-        grpcHost = "grpc-atomone.cosmostation.io"
-        lcdUrl = "https://lcd-atomone.cosmostation.io/"
+        grpcHost = "grpc.atomone.citizenweb3.com"
+        lcdUrl = "https://api.atomone.citizenweb3.com/"
     }
     
     override func getCosmosfetcher() -> CosmosFetcher? {

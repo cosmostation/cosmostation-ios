@@ -21,11 +21,11 @@ class ChainAlthea118: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
 
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "aalthea"
         bechAccountPrefix = "althea"
         validatorPrefix = "altheavaloper"
-        grpcHost = "grpc-althea.cosmostation.io"
-        lcdUrl = "https://lcd-althea.cosmostation.io/"
+        grpcHost = "grpc.althea.citizenweb3.com"
+        lcdUrl = "https://nodes.chandrastation.com/api/althea/"
     }
 }

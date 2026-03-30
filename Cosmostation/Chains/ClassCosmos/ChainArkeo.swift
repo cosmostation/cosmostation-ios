@@ -20,11 +20,11 @@ class ChainArkeo: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uarkeo"
         bechAccountPrefix = "arkeo"
         validatorPrefix = "arkeovaloper"
-        grpcHost = "grpc.arkeo.roomit.xyz:8443"
+        grpcHost = "grpc.arkeo.nodestake.org"
         lcdUrl = "https://rest-seed.arkeo.network/"
     }
     

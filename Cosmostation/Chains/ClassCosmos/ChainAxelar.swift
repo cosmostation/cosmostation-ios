@@ -20,11 +20,11 @@ class ChainAxelar: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uaxl"
         bechAccountPrefix = "axelar"
         validatorPrefix = "axelarvaloper"
-        grpcHost = "grpc-axelar.cosmostation.io"
-        lcdUrl = "https://lcd-axelar.cosmostation.io/"
+        grpcHost = "axelar.grpc.stakin-nodes.com"
+        lcdUrl = "https://axelar-rest.staketab.org/"
     }
 }
