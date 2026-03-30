@@ -24,8 +24,8 @@ class ChainBluzelle: BaseChain  {
         stakeDenom = "ubnt"
         bechAccountPrefix = "bluzelle"
         validatorPrefix = "bluzellevaloper"
-        grpcHost = "a.client.sentry.net.bluzelle.com:9090"
-        lcdUrl = "https://rest.cosmos.directory/bluzelle/"
+        grpcHost = ""
+        lcdUrl = "https://a.client.sentry.net.bluzelle.com:1317/"
     }
     
 }

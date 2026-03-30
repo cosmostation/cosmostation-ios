@@ -24,7 +24,7 @@ class ChainBostrom: BaseChain {
         stakeDenom = "boot"
         bechAccountPrefix = "bostrom"
         validatorPrefix = "bostromvaloper"
-        grpcHost = "grpc-cyber-ia.cosmosia.notional.ventures:443"
+        grpcHost = ""
         lcdUrl = "https://lcd.bostrom.cybernode.ai/"
     }
 }
