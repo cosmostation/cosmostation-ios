@@ -24,7 +24,7 @@ class ChainUmee: BaseChain {
         stakeDenom = "uumee"
         bechAccountPrefix = "umee"
         validatorPrefix = "umeevaloper"
-        grpcHost = "umee-grpc.stake-town.com"
+        grpcHost = "grpc-umee.mzonder.com"
         lcdUrl = "https://umee-api.polkachu.com/"
     }
     

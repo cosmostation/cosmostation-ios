@@ -20,16 +20,16 @@ class ChainZetaEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "azeta"
         bechAccountPrefix = "zeta"
         validatorPrefix = "zetavaloper"
-        grpcHost = "grpc-zeta.cosmostation.io"
-        lcdUrl = "https://lcd-zeta.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://zetachain.blockpi.network/lcd/v1/public/"
     
         supportEvm = true
         coinSymbol = "ZETA"
-        evmRpcURL = "https://rpc-zeta-evm.cosmostation.io"
+        evmRpcURL = "https://zetachain-mainnet.g.allthatnode.com/archive/evm"
     }
 }
 

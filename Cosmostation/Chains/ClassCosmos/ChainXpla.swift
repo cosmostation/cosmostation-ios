@@ -20,11 +20,11 @@ class ChainXpla: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/60'/0'/0/X")
 
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "axpla"
         bechAccountPrefix = "xpla"
         validatorPrefix = "xplavaloper"
-        grpcHost = "grpc-xpla.cosmostation.io"
-        lcdUrl = "https://lcd-xpla.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://dimension-lcd.xpla.io/"
     }
 }
