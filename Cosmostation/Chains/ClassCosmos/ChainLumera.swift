@@ -23,7 +23,7 @@ class ChainLumera: BaseChain {
         stakeDenom = "ulume"
         bechAccountPrefix = "lumera"
         validatorPrefix = "lumeravaloper"
-        grpcHost = "grpc.lumera.mainnet.cosmostation.io"
-        lcdUrl = "https://lcd.lumera.mainnet.cosmostation.io"
+        grpcHost = "grpc.lumera.io"
+        lcdUrl = "https://lcd.lumera.io"
     }
 }

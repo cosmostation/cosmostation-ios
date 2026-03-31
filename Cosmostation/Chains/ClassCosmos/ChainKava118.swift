@@ -25,8 +25,8 @@ class ChainKava118: ChainKavaEVM  {
         stakeDenom = "ukava"
         bechAccountPrefix = "kava"
         validatorPrefix = "kavavaloper"
-        grpcHost = "grpc-kava.cosmostation.io"
-        lcdUrl = "https://lcd-kava.cosmostation.io/"
+        grpcHost = "grpc.data.kava.io"
+        lcdUrl = "https://api.data.kava.io/"
         
         supportEvm = false
         coinSymbol = ""
