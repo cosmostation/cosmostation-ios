@@ -24,7 +24,7 @@ class ChainGravityBridge: BaseChain  {
         stakeDenom = "ugraviton"
         bechAccountPrefix = "gravity"
         validatorPrefix = "gravityvaloper"
-        grpcHost = "grpc-gravity-bridge.cosmostation.io"
-        lcdUrl = "https://lcd-gravity-bridge.cosmostation.io/"
+        grpcHost = "grpc.gravity.citizenweb3.com"
+        lcdUrl = "https://gravitychain.io:1317/"
     }
 }

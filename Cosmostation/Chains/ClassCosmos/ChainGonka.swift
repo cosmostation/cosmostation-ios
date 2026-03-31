@@ -24,7 +24,7 @@ class ChainGonka: BaseChain  {
         stakeDenom = "ngonka"
         bechAccountPrefix = "gonka"
         validatorPrefix = "gonkavaloper"
-        grpcHost = "gonka04.6block.com:8443"
-        lcdUrl = "https://node1.gonka.ai:8443/chain-api/"
+        grpcHost = ""
+        lcdUrl = "https://gonka04.6block.com:8443/chain-api/"
     }
 }

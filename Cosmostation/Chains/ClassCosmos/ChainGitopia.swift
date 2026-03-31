@@ -24,7 +24,7 @@ class ChainGitopia: BaseChain  {
         stakeDenom = "ulore"
         bechAccountPrefix = "gitopia"
         validatorPrefix = "gitopiavaloper"
-        grpcHost = "gitopia.lavenderfive.com:443"
+        grpcHost = "gitopia.grpc.liveraven.net:443"
         lcdUrl = "https://rest.cosmos.directory/gitopia/"
     }
     
