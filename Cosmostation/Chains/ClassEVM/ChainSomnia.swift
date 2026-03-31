@@ -22,6 +22,6 @@ class ChainSomnia: BaseChain  {
         
         supportEvm = true
         coinSymbol = "SOMI"
-        evmRpcURL = "https://rpc.evm.somnia.mainnet.cosmostation.io/"
+        evmRpcURL = "https://api.infra.mainnet.somnia.network/"
     }
 }

@@ -21,11 +21,11 @@ class ChainSecret118: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uscrt"
         bechAccountPrefix = "secret"
         validatorPrefix = "secretvaloper"
-        grpcHost = "grpc-secret.cosmostation.io"
-        lcdUrl = "https://lcd-secret.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://secretnetwork-api.lavenderfive.com/"
     }
 }

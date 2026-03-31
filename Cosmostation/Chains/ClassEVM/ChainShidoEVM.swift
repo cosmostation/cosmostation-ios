@@ -24,7 +24,7 @@ class ChainShidoEVM: BaseChain  {
         stakeDenom = "shido"
         bechAccountPrefix = "shido"
         validatorPrefix = "shidovaloper"
-        grpcHost = "grpc.shidoscan.com"
+        grpcHost = "grpc.mavnode.io"
         lcdUrl = "https://api.shidoscan.net/"
         
         supportEvm = true

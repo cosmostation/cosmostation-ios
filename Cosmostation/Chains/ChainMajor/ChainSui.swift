@@ -24,7 +24,7 @@ class ChainSui: BaseChain  {
         coinSymbol = "SUI"
         stakeDenom = SUI_MAIN_DENOM
         
-        mainUrl = "https://sui-mainnet-us-2.cosmostation.io"
+        mainUrl = "https://fullnode.mainnet.sui.io:443"
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {

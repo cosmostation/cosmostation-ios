@@ -21,12 +21,12 @@ class ChainSeiEVM: ChainSei {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "usei"
         bechAccountPrefix = "sei"
         validatorPrefix = "seivaloper"
-        grpcHost = "grpc-sei.cosmostation.io"
-        lcdUrl = "https://lcd-sei.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://api-sei.stingray.plus/"
         
         supportEvm = true
         coinSymbol = "SEI"
