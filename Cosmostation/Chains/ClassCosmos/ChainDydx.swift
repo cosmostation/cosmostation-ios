@@ -24,8 +24,8 @@ class ChainDydx: BaseChain  {
         stakeDenom = "adydx"
         bechAccountPrefix = "dydx"
         validatorPrefix = "dydxvaloper"
-        grpcHost = "grpc-dydx.cosmostation.io"
-        lcdUrl = "https://lcd-dydx.cosmostation.io/"
+        grpcHost = "dydx-grpc.kingnodes.com"
+        lcdUrl = "https://dydx-dao-api.polkachu.com/"
     }
 }
 

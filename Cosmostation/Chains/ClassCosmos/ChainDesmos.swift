@@ -25,7 +25,7 @@ class ChainDesmos: BaseChain  {
         bechAccountPrefix = "desmos"
         validatorPrefix = "desmosvaloper"
         grpcHost = ""
-        lcdUrl = "https://desmos-rest.staketab.org/"
+        lcdUrl = "https://api.mainnet.desmos.network/"
     }
     
 }

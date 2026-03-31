@@ -22,6 +22,6 @@ class ChainEthereum: BaseChain {
         
         supportEvm = true
         coinSymbol = "ETH"
-        evmRpcURL = "https://rpc-ethereum-evm.cosmostation.io/rpc"
+        evmRpcURL = "https://rpc.ankr.com/eth"
     }
 }
