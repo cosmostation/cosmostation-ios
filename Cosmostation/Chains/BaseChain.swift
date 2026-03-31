@@ -854,7 +854,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainNeutron())
     result.append(ChainMovement())
     result.append(ChainNibiru())
-    result.append(ChainNillion())
     result.append(ChainNoble())
     result.append(ChainNolus())
     result.append(ChainNyx())
@@ -874,7 +873,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainPocket())
     result.append(ChainPolygon())                       //EVM
     result.append(ChainProvenance())
-    result.append(ChainPryzm())
     result.append(ChainPundix())
     result.append(ChainQubeticsEVM())                   //EVM
     result.append(ChainQuicksilver())
@@ -962,12 +960,14 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainFinschia())
 //    result.append(ChainGovgen())
 //    result.append(ChainMilkyway())
+//    result.append(ChainNillion())
 //    result.append(ChainNomic())
 //    result.append(ChainMars())
 //    result.append(ChainMigaloo())
 //    result.append(ChainOnomy())
 //    result.append(ChainOmniflix())
 //    result.append(ChainQuasar())
+//    result.append(ChainPryzm())
 //    result.append(ChainRouterEVM())                     //EVM
 //    result.append(ChainSelf())
 //    result.append(ChainSge())

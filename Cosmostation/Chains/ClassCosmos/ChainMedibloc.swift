@@ -20,12 +20,12 @@ class ChainMedibloc: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/371'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "umed"
         bechAccountPrefix = "panacea"
         validatorPrefix = "panaceavaloper"
-        grpcHost = "grpc-medibloc.cosmostation.io"
-        lcdUrl = "https://lcd-medibloc.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://api.gopanacea.org/"
     }
 }
 

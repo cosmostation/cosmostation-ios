@@ -24,7 +24,7 @@ class ChainPlanqEVM: BaseChain  {
         stakeDenom = "aplanq"
         bechAccountPrefix = "plq"
         validatorPrefix = "plqvaloper"
-        grpcHost = "grpc.planq.network"
+        grpcHost = ""
         lcdUrl = "https://planq.api.m.stavr.tech/"
         
         supportEvm = true

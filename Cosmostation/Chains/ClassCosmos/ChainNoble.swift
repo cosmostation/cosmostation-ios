@@ -20,12 +20,12 @@ class ChainNoble: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "ustake"
         bechAccountPrefix = "noble"
         validatorPrefix = "noblevaloper"
         supportStaking = false
-        grpcHost = "grpc-noble.cosmostation.io"
-        lcdUrl = "https://lcd-noble.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://noble-api.polkachu.com/"
     }
 }

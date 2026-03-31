@@ -25,6 +25,6 @@ class ChainPassage: BaseChain  {
         bechAccountPrefix = "pasg"
         validatorPrefix = "pasgvaloper"
         grpcHost = "passage-grpc.stakerhouse.com"
-        lcdUrl = "https://rest-passage.ecostake.com/"
+        lcdUrl = "https://passage-api.polkachu.com/"
     }
 }

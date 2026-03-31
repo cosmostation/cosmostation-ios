@@ -20,12 +20,12 @@ class ChainOsmosis: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uosmo"
         bechAccountPrefix = "osmo"
         validatorPrefix = "osmovaloper"
-        grpcHost = "grpc-osmosis.cosmostation.io"
-        lcdUrl = "https://lcd-osmosis.cosmostation.io/"
+        grpcHost = "osmosis.grpc.stakin-nodes.com"
+        lcdUrl = "https://lcd.osmosis.zone/"
     }
     
 }
