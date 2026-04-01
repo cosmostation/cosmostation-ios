@@ -384,18 +384,6 @@ extension SuiFetcher {
         return try? await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["txBytes"].stringValue
     }
     
-    func unsafeUnstake(_ sender: String, _ objectId: String, _ gasBudget: String) async throws -> String? {
-        if let result = try? await AF.request("https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildUnstakingRequest",
-                                              method: .post,
-                                              parameters: ["address" : sender, "objectId" : objectId, "gas" : gasBudget, "rpc": getSuiRpc()],
-                                              encoder: JSONParameterEncoder.default).serializingData().value {
-            if let string = String(data: result, encoding: .utf8) {
-                return Data(hex: string).base64EncodedString()
-            }
-        }
-        return nil
-    }
-    
     func suiDryrun(_ tx_bytes: String) async throws -> JSON? {
         let parameters: Parameters = ["method": "sui_dryRunTransactionBlock", "params": [tx_bytes], "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
