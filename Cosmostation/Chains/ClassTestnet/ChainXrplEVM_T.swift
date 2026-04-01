@@ -21,6 +21,6 @@ class ChainXrplEVM_T: ChainXrplEVM {
         
         supportEvm = true
         coinSymbol = "XRP"
-        evmRpcURL = "https://rpc-office-evm.cosmostation.io/xrplevm-testnet/"
+        evmRpcURL = "https://rpc.testnet.xrplevm.org/"
     }
 }

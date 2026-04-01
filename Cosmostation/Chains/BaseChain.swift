@@ -938,7 +938,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMantra_T())
     result.append(ChainMonad_T())
     result.append(ChainNeutron_T())
-    result.append(ChainNillion_T())
     result.append(ChainPharos_T())
     result.append(ChainQubeticsEVM_T())
     result.append(ChainTerraClassic_T())
@@ -947,7 +946,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainXrplEVM_T())
     result.append(ChainZeroGravityEVM_T())
     result.append(ChainZigChain_T())
-    result.append(ChainZkCloud_T())
     
     
     
@@ -983,10 +981,12 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainBitCoin49_T())
 //    result.append(ChainImuaEVM_T())
 //    result.append(ChainLombard_T())
+//    result.append(ChainNillion_T())
 //    result.append(ChainSaharaAiEVM_T())
 //    result.append(ChainSelf_T())
 //    result.append(ChainStoryEVM_T())
 //    result.append(ChainTabiEVM_T())
+//    result.append(ChainZkCloud_T())
     
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {

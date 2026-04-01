@@ -25,12 +25,12 @@ class ChainMantraEVM_T: BaseChain  {
         stakeDenom = "uom"
         bechAccountPrefix = "mantra"
         validatorPrefix = "mantravaloper"
-        grpcHost = "grpc-office-mantra.cosmostation.io"
-        lcdUrl = "https://lcd-office.cosmostation.io/mantra-testnet/"
+        grpcHost = "grpc.dukong.mantrachain.io"
+        lcdUrl = "https://api.dukong.mantrachain.io/"
         
         supportEvm = true
         coinSymbol = "OM"
-        evmRpcURL = "https://rpc.evm.mantra.testnet.cosmostation.io"
+        evmRpcURL = "https://evm.dukong.mantrachain.io"
     }
 }
 

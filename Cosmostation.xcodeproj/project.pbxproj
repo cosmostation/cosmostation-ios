@@ -4822,13 +4822,13 @@
 				79909BCC2D8BB51D000CE2ED /* ChainSelf_T.swift */,
 				040AC1832C9BDC5F00427AFD /* ChainStoryEVM_T.swift */,
 				04E4138E2D27C788001378D3 /* ChainTabiEVM_T.swift */,
+				158BE18E2E828D6900A02B4A /* ChainTerraClassic_T.swift */,
 				E1F945572DDF205200672DE1 /* ChainWardenEVM_T.swift */,
 				79813A792D5477FC0083A1F5 /* ChainXion_T.swift */,
 				7948D6762D911E3F005208B2 /* ChainXrplEVM_T.swift */,
 				04E228892DE8501E00EBE768 /* ChainZeroGravityEVM_T.swift */,
 				E119ED042DF04BE700CD2C9B /* ChainZigChain_T.swift */,
 				7948D6722D91035B005208B2 /* ChainZkCloud_T.swift */,
-				158BE18E2E828D6900A02B4A /* ChainTerraClassic_T.swift */,
 			);
 			path = ClassTestnet;
 			sourceTree = "<group>";

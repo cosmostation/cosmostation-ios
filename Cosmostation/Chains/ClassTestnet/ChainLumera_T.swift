@@ -24,7 +24,7 @@ class ChainLumera_T: ChainLumera {
         stakeDenom = "ulume"
         bechAccountPrefix = "lumera"
         validatorPrefix = "lumeravaloper"
-        grpcHost = "grpc.testnet.lumera.io"
+        grpcHost = ""
         lcdUrl = "https://lcd.testnet.lumera.io"
     }
 }

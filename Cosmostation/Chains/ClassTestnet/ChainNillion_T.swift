@@ -21,11 +21,11 @@ class ChainNillion_T: ChainNillion {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "unil"
         bechAccountPrefix = "nillion"
         validatorPrefix = "nillionvaloper"
-        grpcHost = "grpc-office-nillion.cosmostation.io"
+        grpcHost = ""
         lcdUrl = "https://testnet-nillion-api.lavenderfive.com/"
     }
 }

@@ -22,12 +22,12 @@ class ChainMantra_T: ChainMantra  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uom"
         bechAccountPrefix = "mantra"
         validatorPrefix = "mantravaloper"
-        grpcHost = "grpc-office-mantra.cosmostation.io"
-        lcdUrl = "https://lcd-office.cosmostation.io/mantra-testnet/"
+        grpcHost = "grpc.dukong.mantrachain.io"
+        lcdUrl = "https://api.dukong.mantrachain.io/"
     }
 }
 

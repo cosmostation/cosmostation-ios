@@ -31,6 +31,6 @@ class ChainInjective_T: ChainInjective {
         
         supportEvm = true
         coinSymbol = "INJ"
-        evmRpcURL = "https://rpc-office-evm.cosmostation.io/injective-testnet/"
+        evmRpcURL = "https://testnet.sentry.chain.json-rpc.injective.network/"
     }
 }

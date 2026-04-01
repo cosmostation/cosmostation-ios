@@ -21,11 +21,11 @@ class ChainBabylon_T: ChainBabylon {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "ubbn"
         bechAccountPrefix = "bbn"
         validatorPrefix = "bbnvaloper"
-        grpcHost = "grpc-office-babylon.cosmostation.io"
-        lcdUrl = "https://lcd-office.cosmostation.io/babylon-testnet/"
+        grpcHost = ""
+        lcdUrl = "https://babylon-testnet-api.nodes.guru/"
     }
 }
