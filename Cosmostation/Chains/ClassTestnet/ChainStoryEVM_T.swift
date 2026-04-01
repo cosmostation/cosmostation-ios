@@ -23,11 +23,11 @@ class ChainStoryEVM_T: ChainStoryEVM  {
         
         supportEvm = true
         coinSymbol = "IP"
-        evmRpcURL = "https://rpc-office-evm.cosmostation.io/story-testnet/"
+        evmRpcURL = ""
         
 //        bechAccountPrefix = "story"
 //        validatorPrefix = "storyvaloper"
-//        mainUrl = "https://lcd-office.cosmostation.io/story-testnet"
+//        mainUrl = ""
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {

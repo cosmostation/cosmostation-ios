@@ -24,11 +24,11 @@ class ChainAltheaEVM: BaseChain {
         stakeDenom = "aalthea"
         bechAccountPrefix = "althea"
         validatorPrefix = "altheavaloper"
-        grpcHost = "grpc-althea.cosmostation.io"
-        lcdUrl = "https://lcd-althea.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = ""
         
         supportEvm = true
         coinSymbol = "ALTHEA"
-        evmRpcURL = "https://rpc-althea-evm.cosmostation.io"
+        evmRpcURL = ""
     }
 }

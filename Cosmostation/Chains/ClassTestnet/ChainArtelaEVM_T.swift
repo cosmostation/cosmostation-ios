@@ -26,12 +26,12 @@ class ChainArtelaEVM_T: BaseChain {
         stakeDenom = "uart"
         bechAccountPrefix = "art"
         validatorPrefix = "artvaloper"
-        grpcHost = "grpc-office-artela.cosmostation.io"
-        lcdUrl = "https://lcd-office.cosmostation.io/artela-testnet/"
+        grpcHost = ""
+        lcdUrl = ""
         
         
         supportEvm = true
         coinSymbol = "ART"
-        evmRpcURL = "https://rpc-office-evm.cosmostation.io/artela-testnet/"
+        evmRpcURL = ""
     }
 }

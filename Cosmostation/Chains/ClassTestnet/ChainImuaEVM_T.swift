@@ -25,12 +25,12 @@ class ChainImuaEVM_T: ChainImuaEVM {
         stakeDenom = "hua"
         bechAccountPrefix = "im"
         validatorPrefix = "imvaloper"
-        grpcHost = "grpc.testnet.imua.cosmostation.io"
-        lcdUrl = "https://lcd.testnet.imua.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = ""
         
         
         supportEvm = true
         coinSymbol = "IMUA"
-        evmRpcURL = "https://rpc-office-evm.cosmostation.io/imua-testnet/"
+        evmRpcURL = ""
     }
 }

@@ -24,8 +24,8 @@ class ChainMilkyway: BaseChain {
         stakeDenom = "umilk"
         bechAccountPrefix = "milk"
         validatorPrefix = "milkvaloper"
-        grpcHost = "grpc-milkyway.cosmostation.io"
-        lcdUrl = "https://lcd-milkyway.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = ""
     }
 
 }

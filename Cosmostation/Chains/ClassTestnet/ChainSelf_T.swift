@@ -25,7 +25,7 @@ class ChainSelf_T: ChainSelf {
         stakeDenom = "uslf"
         bechAccountPrefix = "self"
         validatorPrefix = "selfvaloper"
-        grpcHost = "grpc.testnet.selfchain.cosmostation.io"
-        lcdUrl = "https://lcd.testnet.selfchain.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = ""
     }
 }

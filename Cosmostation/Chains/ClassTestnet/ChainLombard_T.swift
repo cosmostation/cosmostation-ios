@@ -25,7 +25,7 @@ class ChainLombard_T: ChainLombard  {
         stakeDenom = "ustake"
         bechAccountPrefix = "lom"
         validatorPrefix = "lomvaloper"
-        grpcHost = "grpc.testnet.lombard.cosmostation.io"
-        lcdUrl = "https://lcd.testnet.lombard.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = ""
     }
 }

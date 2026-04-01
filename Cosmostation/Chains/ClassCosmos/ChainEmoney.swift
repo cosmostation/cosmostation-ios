@@ -24,8 +24,8 @@ class ChainEmoney: BaseChain  {
         stakeDenom = "ungm"
         bechAccountPrefix = "emoney"
         validatorPrefix = "emoneyvaloper"
-        grpcHost = "grpc-emoney.cosmostation.io"
-        lcdUrl = "https://lcd-emoney.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = ""
     }
     
 }

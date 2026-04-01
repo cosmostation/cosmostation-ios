@@ -25,7 +25,7 @@ class ChainInitia_T: ChainInitia  {
         stakeDenom = "uinit"
         bechAccountPrefix = "init"
         validatorPrefix = "initvaloper"
-        grpcHost = "grpc-office-initia-2.cosmostation.io"
-        lcdUrl = "https://lcd-office.cosmostation.io/initia-2-testnet/"
+        grpcHost = ""
+        lcdUrl = ""
     }
 }
