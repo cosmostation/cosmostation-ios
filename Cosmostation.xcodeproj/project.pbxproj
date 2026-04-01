@@ -1680,6 +1680,9 @@
 		1580CD6A2EDF02F4008D02FD /* AptosKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1580CD692EDF02F4008D02FD /* AptosKit */; };
 		1580CD6C2EDF03B4008D02FD /* ChainAptos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1580CD6B2EDF03B4008D02FD /* ChainAptos.swift */; };
 		1580CD6E2EDFD1FD008D02FD /* AptosFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1580CD6D2EDFD1FD008D02FD /* AptosFetcher.swift */; };
+		158198572F7CF54100C618CA /* sui.js in Resources */ = {isa = PBXBuildFile; fileRef = 158198562F7CF54100C618CA /* sui.js */; };
+		158198592F7CF8E200C618CA /* SuiJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158198582F7CF8E200C618CA /* SuiJS.swift */; };
+		1581985A2F7CF8E200C618CA /* SuiJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158198582F7CF8E200C618CA /* SuiJS.swift */; };
 		158484152EFB1281002A3523 /* ChainAxone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158484142EFB1280002A3523 /* ChainAxone.swift */; };
 		158484172EFB1379002A3523 /* ChainAirchains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158484162EFB1379002A3523 /* ChainAirchains.swift */; };
 		158484192EFBB1CF002A3523 /* ChainAirchains_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158484182EFBB1CF002A3523 /* ChainAirchains_T.swift */; };
@@ -3427,6 +3430,8 @@
 		1580CD612EC48010008D02FD /* DappGnoSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappGnoSignRequestSheet.xib; sourceTree = "<group>"; };
 		1580CD6B2EDF03B4008D02FD /* ChainAptos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAptos.swift; sourceTree = "<group>"; };
 		1580CD6D2EDFD1FD008D02FD /* AptosFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AptosFetcher.swift; sourceTree = "<group>"; };
+		158198562F7CF54100C618CA /* sui.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = sui.js; sourceTree = "<group>"; };
+		158198582F7CF8E200C618CA /* SuiJS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiJS.swift; sourceTree = "<group>"; };
 		158484142EFB1280002A3523 /* ChainAxone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAxone.swift; sourceTree = "<group>"; };
 		158484162EFB1379002A3523 /* ChainAirchains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAirchains.swift; sourceTree = "<group>"; };
 		158484182EFBB1CF002A3523 /* ChainAirchains_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAirchains_T.swift; sourceTree = "<group>"; };
@@ -4746,6 +4751,7 @@
 				795C0DC12C8E853C006D35A4 /* bitcoin.js */,
 				1505030D2E49DF250001415A /* solana.js */,
 				15E031BD2EF9A1F100D230B0 /* aptos.js */,
+				158198562F7CF54100C618CA /* sui.js */,
 				04A421132C7896A800C0E1A2 /* drop.json */,
 				79E7B3C92CF83F0400C28D93 /* dydx.json */,
 				7939A2592D30C2E2006674E3 /* btcStaking.json */,
@@ -4760,6 +4766,7 @@
 				795C0DC32C8E8547006D35A4 /* BtcJS.swift */,
 				150503102E5C7F890001415A /* SolanaJS.swift */,
 				15E031BF2EF9A20E00D230B0 /* AptosJS.swift */,
+				158198582F7CF8E200C618CA /* SuiJS.swift */,
 				E10EB5982A8500830054A9AF /* SpoqaHanSansNeo-Bold.otf */,
 				E10EB58D2A84F6970054A9AF /* SpoqaHanSansNeo-Medium.otf */,
 				E10EB58C2A84F6970054A9AF /* SpoqaHanSansNeo-Regular.otf */,
@@ -6615,6 +6622,7 @@
 				04A4210A2C785FEE00C0E1A2 /* AssetBtcCell.xib in Resources */,
 				E14577FE2B3EC50C00EEFA8E /* CosmosClaimCommission.xib in Resources */,
 				046BF1C22B0F259C00BC1FC8 /* OktValidatorCell.xib in Resources */,
+				158198572F7CF54100C618CA /* sui.js in Resources */,
 				E159805C2A6F5EFE0032892B /* PortfolioCell.xib in Resources */,
 				04B789F32ACB3FDC00E9BE88 /* BaseSheetHeader.xib in Resources */,
 				79ED0BDC2DBA311500C84DB7 /* IotaStake.xib in Resources */,
@@ -7027,6 +7035,7 @@
 				E122DC532A8A4712006D1E7B /* tendermint_libs_bits_types.pb.swift in Sources */,
 				E10B1DA02C2156430039283B /* KavaEarnListVC.swift in Sources */,
 				04A421002C77618000C0E1A2 /* ChainBitCoin44_T.swift in Sources */,
+				158198592F7CF8E200C618CA /* SuiJS.swift in Sources */,
 				04C817512BA98D75006B800A /* cosmos_bank_v1beta1_query.pb.swift in Sources */,
 				E10B1DF42C215E250039283B /* NeutronVote.swift in Sources */,
 				04C816492BA98D74006B800A /* cosmos_base_reflection_v2alpha1_reflection.grpc.swift in Sources */,
@@ -8471,6 +8480,7 @@
 				79705CC72D76D0FC00B89830 /* cosmos_base_node_v1beta1_query.grpc.swift in Sources */,
 				79D5561B2CEF05D00023F1B9 /* ChainFirma.swift in Sources */,
 				E1CD6B002AEAAEF200376909 /* AboutSocialsCell.swift in Sources */,
+				1581985A2F7CF8E200C618CA /* SuiJS.swift in Sources */,
 				0494CBFB2BAF442E00FA3E49 /* NftListHeader.swift in Sources */,
 				04E413922D27CE16001378D3 /* ChainBostrom.swift in Sources */,
 				04D785502C328DB1009D1A94 /* feemarket_feemarket_v1_tx.pb.swift in Sources */,
