@@ -190,7 +190,7 @@ extension IotaUnstake {
             do {
                 if let txBytes = try await iotaFetcher.buildUnstakingRequest(fromValidator.1["stakedIotaId"].stringValue),
                    let dryRes = try await iotaFetcher.iotaDryrun(txBytes), dryRes["error"].isEmpty,
-                   let broadRes = try await iotaFetcher.iotaExecuteTx(txBytes, Signer.iotaSignatures(selectedChain, txBytes), nil) {
+                   let broadRes = try await iotaFetcher.iotaExecuteTx(txBytes, Signer.moveSignatures(selectedChain, txBytes), nil) {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true

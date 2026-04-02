@@ -925,26 +925,38 @@ class Signer {
 
 extension Signer  {
     
-    static func suiSignatures(_ baseChain: BaseChain, _ txByte: String) -> [String] {
-        return suiSignatures(baseChain.privateKey!, baseChain.publicKey!, Data(base64Encoded: txByte)!)
+    static func moveSignatures(_ baseChain: BaseChain, _ txByte: String) -> [String] {
+        let hash = try! Blake2b.hash(size: 32, data: Data([0, 0, 0]) + Data(base64Encoded: txByte)!)
+        let signature = Ed25519.sign(message: [UInt8](hash), secretKey: [UInt8](baseChain.privateKey!))
+        return [(Data([0x00]) + Data(signature) + baseChain.publicKey!).base64EncodedString()]
     }
     
-    static func suiSignatures(_ privateKey: Data, _ pubKey: Data, _ data: Data) -> [String] {
-        let hash = try! Blake2b.hash(size: 32, data: Data([0, 0, 0]) + data)
-        let signature = Ed25519.sign(message: [UInt8](hash), secretKey: [UInt8](privateKey))
-        return [(Data([0x00]) + Data(signature) + pubKey).base64EncodedString()]
+    static func messageMoveSignatures(_ baseChain: BaseChain, _ txByte: String) -> [String] {
+        guard let messageBytes = Data(base64Encoded: txByte) else {
+            return []
+        }
+        let lengthPrefix = encodeULEB128(messageBytes.count)
+        let data = Data([3, 0, 0]) + Data(lengthPrefix) + messageBytes
+        
+        let hash = try! Blake2b.hash(size: 32, data: data)
+        let signature = Ed25519.sign(message: [UInt8](hash), secretKey: [UInt8](baseChain.privateKey!))
+        let result = [(Data([0x00]) + Data(signature) + baseChain.publicKey!).base64EncodedString()]
+        return [(Data([0x00]) + Data(signature) + baseChain.publicKey!).base64EncodedString()]
     }
     
-    static func iotaSignatures(_ baseChain: BaseChain, _ txByte: String) -> [String] {
-        return iotaSignatures(baseChain.privateKey!, baseChain.publicKey!, Data(base64Encoded: txByte)!)
+    static func encodeULEB128(_ value: Int) -> [UInt8] {
+        var v = value
+        var result: [UInt8] = []
+        repeat {
+            var byte = UInt8(v & 0x7F)
+            v = v >> 7
+            if v != 0 {
+                byte |= 0x80
+            }
+            result.append(byte)
+        } while v != 0
+        return result
     }
-    
-    static func iotaSignatures(_ privateKey: Data, _ pubKey: Data, _ data: Data) -> [String] {
-        let hash = try! Blake2b.hash(size: 32, data: Data([0, 0, 0]) + data)
-        let signature = Ed25519.sign(message: [UInt8](hash), secretKey: [UInt8](privateKey))
-        return [(Data([0x00]) + Data(signature) + pubKey).base64EncodedString()]
-    }
-
 }
 
 // MARK: Gno chain

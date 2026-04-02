@@ -296,7 +296,6 @@ class DappDetailVC: BaseVC, WebSignDelegate {
         }
     }
     
-    
     private func popUpCosmosRequestSign(_ method: String, _ request: JSON, _ messageId: JSON?, _ wcRequest: WalletConnectSign.Request?) {
         let cosmosSignRequestSheet = DappCosmosSignRequestSheet(nibName: "DappCosmosSignRequestSheet", bundle: nil)
         cosmosSignRequestSheet.method = method
@@ -430,9 +429,12 @@ extension DappDetailVC: WKScriptMessageHandler {
             
             //Handle Cosmos Request
             if (method == "cos_supportedChainIds") {
-                let chainIds = allChains.filter { $0.chainIdCosmos != nil }.map{ $0.chainIdCosmos }
-                if (chainIds.count > 0) {
-                    let data:JSON = ["official": chainIds, "unofficial": []]
+                let supportChainIds = BaseData.instance.mintscanChainParams?.dictionaryValue.compactMap { _, value in
+                    value["params"]["chainlist_params"]["chain_id_cosmos"].string
+                } ?? allChains.filter { $0.chainIdCosmos != nil }.map{ $0.chainIdCosmos }
+                
+                if (supportChainIds.count > 0) {
+                    let data:JSON = ["official": supportChainIds, "unofficial": []]
                     injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
                 } else {
                     injectionRequestReject("Error", messageJSON, bodyJSON["messageId"])
@@ -453,21 +455,22 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "cos_requestAccount" || method == "cos_account") {
                 let requestChainName = messageJSON["params"]["chainName"].stringValue
                 let requestChainId = messageJSON["params"]["chainId"].stringValue
-                if let chain = allChains.filter({ $0.chainIdCosmos == requestChainId ||
+                let chain = allChains.filter({ $0.chainIdCosmos == requestChainId ||
                     $0.chainIdCosmos == requestChainName ||
                     $0.name.lowercased() == requestChainId.lowercased() ||
-                    $0.name.lowercased() == requestChainName.lowercased()} ).first {
-                    targetChain = chain
-                    var data = JSON()
-                    data["isLedger"].boolValue = false
-                    data["isKeystone"].boolValue = false
-                    data["isEthermint"].boolValue = targetChain.supportEvm
-                    data["name"].stringValue = baseAccount.name
-                    data["address"].stringValue = chain.bechAddress!
-                    data["publicKey"].stringValue = chain.publicKey!.toHexString()
-                    injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
-                } else {
-                    injectionRequestReject(NSLocalizedString("error_not_support_cosmostation", comment: "") + "  " + requestChainName + "  " + requestChainId, messageJSON, bodyJSON["messageId"])
+                    $0.name.lowercased() == requestChainName.lowercased()} ).first
+                targetChain = chain
+                
+                var data = JSON()
+                data["isLedger"].boolValue = false
+                data["isKeystone"].boolValue = false
+                data["isEthermint"].boolValue = chain?.supportEvm ?? false
+                data["name"].stringValue = baseAccount.name
+                data["address"].stringValue = chain?.bechAddress ?? ""
+                data["publicKey"].stringValue = chain?.publicKey?.toHexString() ?? ""
+                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
+                if targetChain == nil {
                     onShowToast(NSLocalizedString("error_not_support_cosmostation", comment: "") + "  " + requestChainName + "  " + requestChainId)
                 }
                 
@@ -713,40 +716,29 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "sui_getChain") {
                 injectionRequestApprove("mainnet", messageJSON, bodyJSON["messageId"])
                 
+            } else if (method == "sui_basicParam") {
+                onInitChainSui()
+                let data: JSON = ["rpc": (suiTargetChain as? ChainSui)?.getSuiFetcher()?.getSuiRpc() ?? "", "address": suiTargetChain!.mainAddress]
+                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
             } else if (method == "sui_signTransactionBlock") || (method == "sui_signTransaction") {  // v1 || v2
-                Task {
-                    let toSign = messageJSON["params"]
-                    guard let suiFetcher = (suiTargetChain! as? ChainSui)?.getSuiFetcher() else { return }
-                    guard let hex = try await suiFetcher.signAfterAction(params: toSign, messageId: bodyJSON["messageId"]) else {
-                        self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])
-                        return
-                    }
-                    self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
-                }
+                let toSign = messageJSON["params"]
+                let hex = toSign["buildHexString"].stringValue
+                self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
 
             } else if (method == "sui_signAndExecuteTransactionBlock") || (method == "sui_signAndExecuteTransaction") {  // v1 || v2
-                Task {
-                    let toSign = messageJSON["params"]
-                    guard let suiFetcher = (suiTargetChain! as? ChainSui)?.getSuiFetcher() else { return }
-                    guard let hex = try await suiFetcher.signAfterAction(params: toSign, messageId: bodyJSON["messageId"]) else {
-                        self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])
-                        return
-                    }
-                    self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
-                }
+                let toSign = messageJSON["params"]
+                let hex = toSign["buildHexString"].stringValue
+                self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
                 
             } else if (method == "sui_signMessage") || (method == "sui_signPersonalMessage") {  // v1 || v2
                 Task {
                     let toSign = messageJSON["params"]
-                    guard let suiFetcher = (suiTargetChain! as? ChainSui)?.getSuiFetcher() else { return }
                     guard toSign["accountAddress"].stringValue.lowercased() == self.suiTargetChain!.mainAddress.lowercased() else {
                         self.injectionRequestReject("Wrong address", messageJSON, bodyJSON["messageId"])
                         return
                     }
-                    guard let hex = try await suiFetcher.signAfterAction(params: toSign, messageId: bodyJSON["messageId"]) else {
-                        self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])
-                        return
-                    }
+                    let hex = toSign["message"].stringValue
                     self.popUpSuiRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
                 }
             }
@@ -828,40 +820,29 @@ extension DappDetailVC: WKScriptMessageHandler {
             } else if (method == "iota_getChain") {
                 injectionRequestApprove("mainnet", messageJSON, bodyJSON["messageId"])
                 
+            } else if (method == "iota_basicParam") {
+                onInitChainIota()
+                let data: JSON = ["rpc": (iotaTargetChain as? ChainIota)?.getIotaFetcher()?.getIotaRpc() ?? "", "address": iotaTargetChain!.mainAddress]
+                injectionRequestApprove(data, messageJSON, bodyJSON["messageId"])
+                
             } else if (method == "iota_signTransactionBlock" || method == "iota_signTransaction") {
-                Task {
-                    let toSign = messageJSON["params"]
-                    guard let iotaFetcher = (iotaTargetChain! as? ChainIota)?.getIotaFetcher() else { return }
-                    guard let hex = try await iotaFetcher.signAfterAction(params: toSign, messageId: bodyJSON["messageId"]) else {
-                        self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])
-                        return
-                    }
-                    self.popUpIotaRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
-                }
+                let toSign = messageJSON["params"]
+                let hex = toSign["buildHexString"].stringValue
+                self.popUpIotaRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
 
             } else if (method == "iota_signAndExecuteTransactionBlock") || (method == "iota_signAndExecuteTransaction") {  // v1 || v2
-                Task {
-                    let toSign = messageJSON["params"]
-                    guard let iotaFetcher = (iotaTargetChain! as? ChainIota)?.getIotaFetcher() else { return }
-                    guard let hex = try await iotaFetcher.signAfterAction(params: toSign, messageId: bodyJSON["messageId"]) else {
-                        self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])
-                        return
-                    }
-                    self.popUpIotaRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
-                }
+                let toSign = messageJSON["params"]
+                let hex = toSign["buildHexString"].stringValue
+                self.popUpIotaRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
                 
             } else if (method == "iota_signMessage") || (method == "iota_signPersonalMessage") {  // v1 || v2
                 Task {
                     let toSign = messageJSON["params"]
-                    guard let iotaFetcher = (iotaTargetChain! as? ChainIota)?.getIotaFetcher() else { return }
                     guard toSign["accountAddress"].stringValue.lowercased() == self.iotaTargetChain!.mainAddress.lowercased() else {
                         self.injectionRequestReject("Wrong address", messageJSON, bodyJSON["messageId"])
                         return
                     }
-                    guard let hex = try await iotaFetcher.signAfterAction(params: toSign, messageId: bodyJSON["messageId"]) else {
-                        self.injectionRequestReject("Cancel", toSign, bodyJSON["messageId"])
-                        return
-                    }
+                    let hex = toSign["message"].stringValue
                     self.popUpIotaRequestSign(method, toSign, bodyJSON["messageId"], Data(hex: hex).base64EncodedString())
                 }
             }

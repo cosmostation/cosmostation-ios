@@ -279,14 +279,14 @@ class DappSuiSignRequestSheet: BaseVC {
     
     @IBAction func onClickConfirm(_ sender: Any) {
         if method == "sui_signTransaction" || method == "sui_signTransactionBlock" {
-            let data: JSON = ["transactionBlockBytes": bytes, "signature": Signer.suiSignatures(selectedChain, bytes)]
+            let data: JSON = ["transactionBlockBytes": bytes, "signature": Signer.moveSignatures(selectedChain, bytes)]
             webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
             
         } else if method == "sui_signAndExecuteTransaction" || method == "sui_signAndExecuteTransactionBlock" {
             guard let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() else { return }
             Task {
                 let options = requestToSign!["options"]
-                if let data = try await suiFetcher.suiExecuteTx(self.bytes, Signer.suiSignatures(selectedChain, bytes), options) {
+                if let data = try await suiFetcher.suiExecuteTx(self.bytes, Signer.moveSignatures(selectedChain, bytes), options) {
                     webSignDelegate?.onAcceptInjection(data["result"], requestToSign!, messageId!)
                     
                 } else {
@@ -294,36 +294,31 @@ class DappSuiSignRequestSheet: BaseVC {
                 }
             }
             
-        } else if (method == "sui_signMessage") {
-            guard let messageBytes = requestToSign?["message"] else { return }
-            let data: JSON = ["messageBytes": messageBytes, "signature": Signer.suiSignatures(selectedChain, bytes)]
+        } else if (method == "sui_signMessage" || method == "sui_signPersonalMessage") {
+            guard let messageBytes = requestToSign?["message"].stringValue else { return }
+            let data: JSON = ["messageBytes": messageBytes, "signature": Signer.messageMoveSignatures(selectedChain, messageBytes)[0]]
             webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
-            
-        } else if (method == "sui_signPersonalMessage") {
-            guard let messageBytes = requestToSign?["message"] else { return }
-            let data: JSON = ["bytes": messageBytes, "signature": Signer.suiSignatures(selectedChain, bytes)]
-            webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
-            
         }
         
         else if (method == "iota_signTransactionBlock" || method == "iota_signTransaction") {
-            let data: JSON = ["bytes": bytes, "signature": Signer.iotaSignatures(selectedChain, bytes)]
+            let data: JSON = ["bytes": bytes, "signature": Signer.moveSignatures(selectedChain, bytes)]
             webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
 
         } else if (method == "iota_signAndExecuteTransactionBlock") || (method == "iota_signAndExecuteTransaction") {
             guard let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() else { return }
             Task {
                 let options = requestToSign!["options"]
-                if let data = try await iotaFetcher.iotaExecuteTx(self.bytes, Signer.iotaSignatures(selectedChain, bytes), options) {
+                if let data = try await iotaFetcher.iotaExecuteTx(self.bytes, Signer.moveSignatures(selectedChain, bytes), options) {
                     webSignDelegate?.onAcceptInjection(data["result"], requestToSign!, messageId!)
                     
                 } else {
                     webSignDelegate?.onCancleInjection("Fail iotaExecuteTx request", requestToSign!, messageId!)
                 }
             }
+            
         } else if (method == "iota_signMessage") || (method == "iota_signPersonalMessage") {
-            guard let messageBytes = requestToSign?["message"] else { return }
-            let data: JSON = ["bytes": messageBytes, "signature": Signer.iotaSignatures(selectedChain, bytes)]
+            guard let messageBytes = requestToSign?["message"].stringValue else { return }
+            let data: JSON = ["bytes": messageBytes, "signature": Signer.messageMoveSignatures(selectedChain, messageBytes)[0]]
             webSignDelegate?.onAcceptInjection(data, requestToSign!, messageId!)
         }
         
