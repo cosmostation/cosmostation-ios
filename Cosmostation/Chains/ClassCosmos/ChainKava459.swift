@@ -21,7 +21,7 @@ class ChainKava459: ChainKavaEVM {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/459'/0'/0/X")
 
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "ukava"
         bechAccountPrefix = "kava"
         validatorPrefix = "kavavaloper"
