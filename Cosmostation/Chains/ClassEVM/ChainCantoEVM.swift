@@ -29,6 +29,6 @@ class ChainCantoEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "CANTO"
-        evmRpcURL = "https://canto-rpc.ansybl.io"
+        evmRpcURL = "https://canto.gravitychain.io"
     }
 }
