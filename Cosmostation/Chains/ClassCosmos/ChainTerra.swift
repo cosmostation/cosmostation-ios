@@ -25,6 +25,6 @@ class ChainTerra: BaseChain  {
         bechAccountPrefix = "terra"
         validatorPrefix = "terravaloper"
         grpcHost = "erra2.tdrsys.com:2083"
-        lcdUrl = "https://terra2.tdrsys.com/"
+        lcdUrl = "https://terra-api.cosmosrescue.dev/"
     }
 }

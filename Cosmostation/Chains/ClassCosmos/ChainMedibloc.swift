@@ -25,7 +25,7 @@ class ChainMedibloc: BaseChain  {
         bechAccountPrefix = "panacea"
         validatorPrefix = "panaceavaloper"
         grpcHost = ""
-        lcdUrl = "https://api.gopanacea.org/"
+        lcdUrl = "https://lcd-medibloc.imperator.co/"
     }
 }
 

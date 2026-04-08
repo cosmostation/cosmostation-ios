@@ -20,12 +20,12 @@ class ChainKima: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uKIMA"
         bechAccountPrefix = "kima"
         validatorPrefix = "kimavaloper"
         grpcHost = "grpc.kima.network:443"
-        lcdUrl = "https://api.kima.network/"
+        lcdUrl = ""
     }
     
 }
