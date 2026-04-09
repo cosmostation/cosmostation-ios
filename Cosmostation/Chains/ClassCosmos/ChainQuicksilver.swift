@@ -25,6 +25,6 @@ class ChainQuicksilver: BaseChain  {
         bechAccountPrefix = "quick"
         validatorPrefix = "quickvaloper"
         grpcHost = ""
-        lcdUrl = "https://quicksilver.tdrsys.com/"
+        lcdUrl = "https://mainnet-quicksilver-api.konsortech.xyz/"
     }
 }
