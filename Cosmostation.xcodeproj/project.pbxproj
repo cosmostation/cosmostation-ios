@@ -1690,6 +1690,8 @@
 		158BE18F2E828D6900A02B4A /* ChainTerraClassic_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158BE18E2E828D6900A02B4A /* ChainTerraClassic_T.swift */; };
 		159B1A7A2F149BF300E07B14 /* ChainMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B1A792F149BF300E07B14 /* ChainMovement.swift */; };
 		15ABBA6A2E838C72008560B7 /* ChainSunrise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ABBA692E838C72008560B7 /* ChainSunrise.swift */; };
+		15AFD76D2F8CE9AA00172467 /* ChainCheqd_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AFD76C2F8CE9AA00172467 /* ChainCheqd_T.swift */; };
+		15AFD76E2F8CE9AA00172467 /* ChainCheqd_T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AFD76C2F8CE9AA00172467 /* ChainCheqd_T.swift */; };
 		15B24C862AE9039A0009B359 /* DappCosmosSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B24C842AE9039A0009B359 /* DappCosmosSignRequestSheet.swift */; };
 		15B24C872AE9039A0009B359 /* DappCosmosSignRequestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B24C842AE9039A0009B359 /* DappCosmosSignRequestSheet.swift */; };
 		15B24C882AE9039A0009B359 /* DappCosmosSignRequestSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15B24C852AE9039A0009B359 /* DappCosmosSignRequestSheet.xib */; };
@@ -3439,6 +3441,7 @@
 		158BE18E2E828D6900A02B4A /* ChainTerraClassic_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainTerraClassic_T.swift; sourceTree = "<group>"; };
 		159B1A792F149BF300E07B14 /* ChainMovement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMovement.swift; sourceTree = "<group>"; };
 		15ABBA692E838C72008560B7 /* ChainSunrise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSunrise.swift; sourceTree = "<group>"; };
+		15AFD76C2F8CE9AA00172467 /* ChainCheqd_T.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCheqd_T.swift; sourceTree = "<group>"; };
 		15B24C842AE9039A0009B359 /* DappCosmosSignRequestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappCosmosSignRequestSheet.swift; sourceTree = "<group>"; };
 		15B24C852AE9039A0009B359 /* DappCosmosSignRequestSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DappCosmosSignRequestSheet.xib; sourceTree = "<group>"; };
 		15B349312F39BF6E00E94FD7 /* AnnouncementPopUpSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementPopUpSheet.swift; sourceTree = "<group>"; };
@@ -4812,6 +4815,7 @@
 				04A421012C77618E00C0E1A2 /* ChainBitCoin49_T.swift */,
 				04A420FB2C77617000C0E1A2 /* ChainBitCoin84_T.swift */,
 				79813A4D2D3F4A990083A1F5 /* ChainBitCoin86_T.swift */,
+				15AFD76C2F8CE9AA00172467 /* ChainCheqd_T.swift */,
 				799B4A892D2E744F00998833 /* ChainGno_T.swift */,
 				043E69622E1B67280094EAB5 /* ChainInjective_T.swift */,
 				79ED0BD32DB8AD0800C84DB7 /* ChainImuaEVM_T.swift */,
@@ -7206,6 +7210,7 @@
 				045032E82C1EFE5500235F6A /* ChainRizon.swift in Sources */,
 				04C8175D2BA98D75006B800A /* cosmos_auth_v1beta1_query.pb.swift in Sources */,
 				04D7855A2C32B171009D1A94 /* ChainNeutron_T.swift in Sources */,
+				15AFD76D2F8CE9AA00172467 /* ChainCheqd_T.swift in Sources */,
 				04C817372BA98D75006B800A /* cosmos_circuit_v1_tx.pb.swift in Sources */,
 				047843022AC9918700462F1C /* ethermint_evm_v1_evm.pb.swift in Sources */,
 				04C817952BA98D75006B800A /* cosmos_evidence_v1beta1_query.grpc.swift in Sources */,
@@ -8282,6 +8287,7 @@
 				047843052AC9918700462F1C /* ethermint_types_v1_dynamic_fee.pb.swift in Sources */,
 				047843C92AC991B300462F1C /* injective_auction_v1beta1_query.grpc.swift in Sources */,
 				04C817402BA98D75006B800A /* cosmos_protocolpool_v1_tx.grpc.swift in Sources */,
+				15AFD76E2F8CE9AA00172467 /* ChainCheqd_T.swift in Sources */,
 				79813A5D2D53035D0083A1F5 /* ChainAllora.swift in Sources */,
 				E10B1DFE2C215EF20039283B /* OkAddShare.swift in Sources */,
 				04C817002BA98D75006B800A /* cosmos_autocli_v1_query.pb.swift in Sources */,
