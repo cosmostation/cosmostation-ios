@@ -25,7 +25,7 @@ class ChainIris: BaseChain  {
         bechAccountPrefix = "iaa"
         validatorPrefix = "iva"
         grpcHost = ""
-        lcdUrl = "https://iris-api.highstakes.ch/"
+        lcdUrl = "https://mainnet-iris-api.konsortech.xyz/"
     }
 }
 

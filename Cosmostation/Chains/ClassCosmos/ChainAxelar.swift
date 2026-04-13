@@ -25,6 +25,6 @@ class ChainAxelar: BaseChain {
         bechAccountPrefix = "axelar"
         validatorPrefix = "axelarvaloper"
         grpcHost = "axelar.grpc.stakin-nodes.com"
-        lcdUrl = "https://axelar-rest.staketab.org/"
+        lcdUrl = "https://lcd-axelar.imperator.co/"
     }
 }
