@@ -25,6 +25,6 @@ class ChainAssetMantle: BaseChain  {
         bechAccountPrefix = "mantle"
         validatorPrefix = "mantlevaloper"
         grpcHost = "assetmantle-grpc.stakerhouse.com"
-        lcdUrl = "https://assetmantle-api.polkachu.com/"
+        lcdUrl = "https://assetmantle-rest.stakerhouse.com/"
     }
 }

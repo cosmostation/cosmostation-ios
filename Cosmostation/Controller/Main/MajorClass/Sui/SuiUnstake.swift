@@ -152,7 +152,7 @@ extension SuiUnstake {
     
     func suiUnstakeGasCheck() {
         Task {
-            if let txBytes = try await suiFetcher.unsafeUnstake(selectedChain.mainAddress, fromValidator.1["stakedSuiId"].stringValue, suiFeeBudget.stringValue),
+            if let txBytes = try await suiFetcher.buildUnstakingRequest(fromValidator.1["stakedSuiId"].stringValue),
                let response = try await suiFetcher.suiDryrun(txBytes) {
                 if let error = response["error"]["message"].string {
                     DispatchQueue.main.async {
@@ -171,6 +171,7 @@ extension SuiUnstake {
                 } else {
                     gasCost = computationCost.multiplying(by: NSDecimalNumber(string: "1.3") , withBehavior: handler0Down).uint64Value
                 }
+                
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(gasCost)
                 }
@@ -186,9 +187,9 @@ extension SuiUnstake {
     func suiUnstake() {
         Task {
             do {
-                if let txBytes = try await suiFetcher.unsafeUnstake(selectedChain.mainAddress, fromValidator.1["stakedSuiId"].stringValue, suiFeeBudget.stringValue),
+                if let txBytes = try await suiFetcher.buildUnstakingRequest(fromValidator.1["stakedSuiId"].stringValue),
                    let dryRes = try await suiFetcher.suiDryrun(txBytes), dryRes["error"].isEmpty,
-                   let broadRes = try await suiFetcher.suiExecuteTx(txBytes, Signer.suiSignatures(selectedChain, txBytes), nil) {
+                   let broadRes = try await suiFetcher.suiExecuteTx(txBytes, Signer.moveSignatures(selectedChain, txBytes), nil) {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true

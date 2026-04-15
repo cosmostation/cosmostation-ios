@@ -24,7 +24,7 @@ class ChainAndromeda: BaseChain {
         stakeDenom = "uandr"
         bechAccountPrefix = "andr"
         validatorPrefix = "andrvaloper"
-        grpcHost = "andromeda.lavenderfive.com"
+        grpcHost = "andromeda.grpc.liveraven.net"
         lcdUrl = "https://andro.api.m.stavr.tech/"
     }
 }

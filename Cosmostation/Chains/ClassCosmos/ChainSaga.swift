@@ -20,12 +20,12 @@ class ChainSaga: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "usaga"
         bechAccountPrefix = "saga"
         validatorPrefix = "sagavaloper"
-        grpcHost = "grpc-saga.cosmostation.io"
-        lcdUrl = "https://lcd-saga.cosmostation.io/"
+        grpcHost = "grpc.saga.nodestake.org"
+        lcdUrl = "https://saga-api.stakeandrelax.net/"
     }
 }
 

@@ -209,7 +209,7 @@ extension SuiStake {
     
     func suiStakeGasCheck() {
         Task {
-            if let txBytes = try await suiFetcher.unsafeStake(selectedChain.mainAddress, suiInputs(), toStakeAmount.stringValue, toValidator["suiAddress"].stringValue, suiFeeBudget.stringValue),
+            if let txBytes = try await suiFetcher.buildStakingRequest(toStakeAmount.stringValue, toValidator["suiAddress"].stringValue),
                let response = try await suiFetcher.suiDryrun(txBytes) {
                 if let error = response["error"]["message"].string {
                     DispatchQueue.main.async {
@@ -228,6 +228,7 @@ extension SuiStake {
                 } else {
                     gasCost = computationCost.multiplying(by: NSDecimalNumber(string: "1.3") , withBehavior: handler0Down).uint64Value
                 }
+                
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(gasCost)
                 }
@@ -243,9 +244,9 @@ extension SuiStake {
     func suiStake() {
         Task {
             do {
-                if let txBytes = try await suiFetcher.unsafeStake(selectedChain.mainAddress, suiInputs(), toStakeAmount.stringValue, toValidator["suiAddress"].stringValue, suiFeeBudget.stringValue),
+                if let txBytes = try await suiFetcher.buildStakingRequest(toStakeAmount.stringValue, toValidator["suiAddress"].stringValue),
                    let dryRes = try await suiFetcher.suiDryrun(txBytes), dryRes["error"].isEmpty,
-                   let broadRes = try await suiFetcher.suiExecuteTx(txBytes, Signer.suiSignatures(selectedChain, txBytes), nil) {
+                   let broadRes = try await suiFetcher.suiExecuteTx(txBytes, Signer.moveSignatures(selectedChain, txBytes), nil) {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -262,16 +263,6 @@ extension SuiStake {
                 //TODO handle Error
             }
         }
-    }
-    
-    func suiInputs() -> [String] {
-        var result = [String]()
-        suiFetcher.suiObjects.forEach { object in
-            if (object["type"].stringValue.contains(SUI_MAIN_DENOM)) {
-                result.append(object["objectId"].stringValue)
-            }
-        }
-        return result
     }
 }
 

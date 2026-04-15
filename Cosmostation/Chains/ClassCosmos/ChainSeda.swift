@@ -24,7 +24,7 @@ class ChainSeda: BaseChain {
         stakeDenom = "aseda"
         bechAccountPrefix = "seda"
         validatorPrefix = "sedavaloper"
-        grpcHost = "seda.grpc.kjnodes.com"
+        grpcHost = ""
         lcdUrl = "https://lcd.mainnet.seda.xyz/"
     }
 }

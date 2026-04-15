@@ -24,7 +24,7 @@ class ChainArkeo: BaseChain {
         stakeDenom = "uarkeo"
         bechAccountPrefix = "arkeo"
         validatorPrefix = "arkeovaloper"
-        grpcHost = "grpc.arkeo.roomit.xyz:8443"
+        grpcHost = "grpc.arkeo.nodestake.org"
         lcdUrl = "https://rest-seed.arkeo.network/"
     }
     

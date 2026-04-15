@@ -210,7 +210,7 @@ extension IotaStake {
     
     func iotaStakeGasCheck() {
         Task {
-            if let txBytes = try await iotaFetcher.unsafeStake(selectedChain.mainAddress, iotaInputs(), toStakeAmount.stringValue, toValidator["iotaAddress"].stringValue, iotaFeeBudget.stringValue),
+            if let txBytes = try await iotaFetcher.buildStakingRequest(toStakeAmount.stringValue, toValidator["iotaAddress"].stringValue),
                let response = try await iotaFetcher.iotaDryrun(txBytes) {
                 if let error = response["error"]["message"].string {
                     DispatchQueue.main.async {
@@ -229,6 +229,7 @@ extension IotaStake {
                 } else {
                     gasCost = computationCost.multiplying(by: NSDecimalNumber(string: "1.3") , withBehavior: handler0Down).uint64Value
                 }
+                
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(gasCost)
                 }
@@ -244,9 +245,9 @@ extension IotaStake {
     func iotaStake() {
         Task {
             do {
-                if let txBytes = try await iotaFetcher.unsafeStake(selectedChain.mainAddress, iotaInputs(), toStakeAmount.stringValue, toValidator["iotaAddress"].stringValue, iotaFeeBudget.stringValue),
+                if let txBytes = try await iotaFetcher.buildStakingRequest(toStakeAmount.stringValue, toValidator["iotaAddress"].stringValue),
                    let dryRes = try await iotaFetcher.iotaDryrun(txBytes), dryRes["error"].isEmpty,
-                   let broadRes = try await iotaFetcher.iotaExecuteTx(txBytes, Signer.iotaSignatures(selectedChain, txBytes), nil) {
+                   let broadRes = try await iotaFetcher.iotaExecuteTx(txBytes, Signer.moveSignatures(selectedChain, txBytes), nil) {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -263,16 +264,6 @@ extension IotaStake {
                 //TODO handle Error
             }
         }
-    }
-    
-    func iotaInputs() -> [String] {
-        var result = [String]()
-        iotaFetcher.iotaObjects.forEach { object in
-            if (object["type"].stringValue.contains(IOTA_MAIN_DENOM)) {
-                result.append(object["objectId"].stringValue)
-            }
-        }
-        return result
     }
 }
 

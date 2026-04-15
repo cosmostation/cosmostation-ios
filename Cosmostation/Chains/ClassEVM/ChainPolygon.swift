@@ -22,7 +22,7 @@ class ChainPolygon: BaseChain  {
         
         supportEvm = true
         coinSymbol = "POL"
-        evmRpcURL = "https://polygon-rpc.com"
+        evmRpcURL = "https://polygon.drpc.org"
     }
     
 }

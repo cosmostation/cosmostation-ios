@@ -384,30 +384,6 @@ extension SuiFetcher {
         return try? await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["txBytes"].stringValue
     }
     
-    func unsafeStake(_ sender: String, _ coins: [String], _ amount: String, _ validator: String, _ gasBudget: String) async throws -> String? {
-        if let result = try? await AF.request("https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildStakingRequest",
-                                              method: .post,
-                                              parameters: ["address" : sender, "validatorAddress" : validator, "gas" : gasBudget, "amount" : amount, "rpc": getSuiRpc()],
-                                              encoder: JSONParameterEncoder.default).serializingData().value {
-            if let string = String(data: result, encoding: .utf8) {
-                return Data(hex: string).base64EncodedString()
-            }
-        }
-        return nil
-    }
-    
-    func unsafeUnstake(_ sender: String, _ objectId: String, _ gasBudget: String) async throws -> String? {
-        if let result = try? await AF.request("https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildUnstakingRequest",
-                                              method: .post,
-                                              parameters: ["address" : sender, "objectId" : objectId, "gas" : gasBudget, "rpc": getSuiRpc()],
-                                              encoder: JSONParameterEncoder.default).serializingData().value {
-            if let string = String(data: result, encoding: .utf8) {
-                return Data(hex: string).base64EncodedString()
-            }
-        }
-        return nil
-    }
-    
     func suiDryrun(_ tx_bytes: String) async throws -> JSON? {
         let parameters: Parameters = ["method": "sui_dryRunTransactionBlock", "params": [tx_bytes], "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
@@ -507,6 +483,72 @@ extension JSON {
     
     func suiValidatorVp() -> NSDecimalNumber {
         return NSDecimalNumber(string: self["stakingPoolSuiBalance"].stringValue).multiplying(byPowerOf10: -9, withBehavior: handler12Down)
+    }
+}
+
+extension SuiFetcher {
+    
+    func fetchReferenceGasPrice() async throws -> String {
+        let parameters: Parameters = ["method": "suix_getReferenceGasPrice", "params": [] , "id" : 1, "jsonrpc" : "2.0"]
+        let response = try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+        return response["result"].stringValue
+    }
+    
+    func fetchSuixCoins() async throws -> [JSON] {
+        let params: Any = [chain.mainAddress, SUI_MAIN_DENOM, nil, 1]
+        let parameters: Parameters = ["method": "suix_getCoins", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        let response = try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+        return response["result"]["data"].arrayValue
+    }
+    
+    func buildStakingRequest(_ toAmount: String, _ validatorAddress: String) async throws -> String? {
+        let gasPrice = try await fetchReferenceGasPrice()
+        let coinDatas = try await fetchSuixCoins()
+        
+        if coinDatas.count > 0 {
+            let coindata = coinDatas[0]
+            let gasBudget = baseFee(.SUI_STAKE)
+            let coinObjectId = coindata["coinObjectId"].stringValue
+            let version = coindata["version"].stringValue
+            let digest = coindata["digest"].stringValue
+            
+            let buildStakingTxHex = try await SuiJS.shared.callJSValue(key: "buildStakingRequest",
+                                                                       param: [toAmount, validatorAddress, chain.mainAddress, gasPrice, gasBudget, coinObjectId, version, digest])
+            return Data(hex: buildStakingTxHex ?? "").base64EncodedString()
+
+        } else {
+            return ""
+        }
+    }
+    
+    func fetchSuiObject(_ objectId: String) async throws -> JSON {
+        let params: Any = [objectId, ["showContent": false]]
+        let parameters: Parameters = ["method": "sui_getObject", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func buildUnstakingRequest(_ objectId: String) async throws -> String? {
+        let gasPrice = try await fetchReferenceGasPrice()
+        let coinDatas = try await fetchSuixCoins()
+        
+        if coinDatas.count > 0 {
+            let coindata = coinDatas[0]
+            let gasBudget = baseFee(.SUI_UNSTAKE)
+            let coinObjectId = coindata["coinObjectId"].stringValue
+            let version = coindata["version"].stringValue
+            let digest = coindata["digest"].stringValue
+            
+            let stakedObject = try await fetchSuiObject(objectId)
+            let stakedObjectVersion = stakedObject["result"]["data"]["version"].stringValue
+            let stakedObjectDigest = stakedObject["result"]["data"]["digest"].stringValue
+            
+            let buildUnStakingTxHex = try await SuiJS.shared.callJSValue(key: "buildUnstakingRequest",
+                                                                       param: [chain.mainAddress, gasPrice, gasBudget, coinObjectId, version, digest, objectId, stakedObjectVersion, stakedObjectDigest])
+            return Data(hex: buildUnStakingTxHex ?? "").base64EncodedString()
+            
+        } else {
+            return ""
+        }
     }
 }
 

@@ -24,7 +24,7 @@ class ChainLike: BaseChain  {
         stakeDenom = "nanolike"
         bechAccountPrefix = "like"
         validatorPrefix = "likevaloper"
-        grpcHost = "grpc-likecoin-mainnet.pikaser.net"
+        grpcHost = ""
         lcdUrl = "https://mainnet-node.like.co/"
     }
 }

@@ -24,11 +24,11 @@ class ChainPlanqEVM: BaseChain  {
         stakeDenom = "aplanq"
         bechAccountPrefix = "plq"
         validatorPrefix = "plqvaloper"
-        grpcHost = "grpc.planq.network"
+        grpcHost = ""
         lcdUrl = "https://planq.api.m.stavr.tech/"
         
         supportEvm = true
         coinSymbol = "PLANQ"
-        evmRpcURL = "https://planq-rpc.nodies.app"
+        evmRpcURL = "https://mainnet-planq-evmrpc.konsortech.xyz"
     }
 }

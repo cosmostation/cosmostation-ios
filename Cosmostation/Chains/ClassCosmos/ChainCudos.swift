@@ -24,8 +24,8 @@ class ChainCudos: BaseChain {
         stakeDenom = "acudos"
         bechAccountPrefix = "cudos"
         validatorPrefix = "cudosvaloper"
-        grpcHost = "grpc-cudos.cosmostation.io"
-        lcdUrl = "https://lcd-cudos.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = ""
     }
 }
 

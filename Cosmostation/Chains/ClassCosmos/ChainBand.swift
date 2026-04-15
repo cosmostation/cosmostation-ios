@@ -20,12 +20,12 @@ class ChainBand: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/494'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uband"
         bechAccountPrefix = "band"
         validatorPrefix = "bandvaloper"
-        grpcHost = "grpc-band.cosmostation.io"
-        lcdUrl = "https://lcd-band.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = "https://laozi1.bandchain.org/api/"
     }
     
 }

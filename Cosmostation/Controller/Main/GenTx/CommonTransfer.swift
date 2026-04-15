@@ -1519,7 +1519,7 @@ extension CommonTransfer {
             do {
                 if let txBytes = try await suiFetcher.unsafeCoinSend(toSendDenom, fromChain.mainAddress, suiInputs(), [toAddress], [toAmount.stringValue], suiFeeBudget.stringValue),
                    let dryRes = try await suiFetcher.suiDryrun(txBytes), dryRes["error"].isEmpty,
-                   let broadRes = try await suiFetcher.suiExecuteTx(txBytes, Signer.suiSignatures(fromChain, txBytes), nil) {
+                   let broadRes = try await suiFetcher.suiExecuteTx(txBytes, Signer.moveSignatures(fromChain, txBytes), nil) {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true
@@ -1593,7 +1593,7 @@ extension CommonTransfer {
             do {
                 if let txBytes = try await iotaFetcher.unsafeCoinSend(toSendDenom, fromChain.mainAddress, iotaInputs(), [toAddress], [toAmount.stringValue], iotaFeeBudget.stringValue),
                    let dryRes = try await iotaFetcher.iotaDryrun(txBytes), dryRes["error"].isEmpty,
-                   let broadRes = try await iotaFetcher.iotaExecuteTx(txBytes, Signer.iotaSignatures(fromChain, txBytes), nil) {
+                   let broadRes = try await iotaFetcher.iotaExecuteTx(txBytes, Signer.moveSignatures(fromChain, txBytes), nil) {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true

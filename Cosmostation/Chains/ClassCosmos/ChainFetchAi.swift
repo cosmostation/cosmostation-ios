@@ -20,12 +20,12 @@ class ChainFetchAi: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "afet"
         bechAccountPrefix = "fetch"
         validatorPrefix = "fetchvaloper"
-        grpcHost = "grpc-fetchai.cosmostation.io"
-        lcdUrl = "https://lcd-fetchai.cosmostation.io/"
+        grpcHost = "grpc-fetchhub.fetch.ai"
+        lcdUrl = "https://fetch-api.polkachu.com"
     }
     
 }

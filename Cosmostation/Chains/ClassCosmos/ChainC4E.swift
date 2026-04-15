@@ -24,7 +24,7 @@ class ChainC4E: BaseChain  {
         stakeDenom = "uc4e"
         bechAccountPrefix = "c4e"
         validatorPrefix = "c4evaloper"
-        grpcHost = "grpc.c4e.nodestake.top:443"
+        grpcHost = ""
         lcdUrl = "https://lcd.c4e.io/"
     }
     

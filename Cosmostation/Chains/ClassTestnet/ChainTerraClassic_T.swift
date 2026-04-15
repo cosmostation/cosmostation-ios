@@ -21,7 +21,7 @@ class ChainTerraClassic_T: ChainTerraClassic  {
         
         
         cosmosEndPointType = .UseLCD
-        grpcHost = "rebel-rpc.luncgoblins.com"
+        grpcHost = ""
         lcdUrl = "https://rebel-lcd.luncgoblins.com/"
     }
 }

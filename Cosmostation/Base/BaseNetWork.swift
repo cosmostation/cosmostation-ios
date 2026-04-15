@@ -180,7 +180,7 @@ class BaseNetWork {
     }
     
     static func getAllDappURL() -> String {
-        return MINTSCAN_API_URL + "v11/dapp"
+        return WALLET_API_URL + "eco_list.json"
     }
     
     static func getAdsInfoURL() -> String {

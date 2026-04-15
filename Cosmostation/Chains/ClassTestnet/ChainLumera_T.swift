@@ -19,12 +19,11 @@ class ChainLumera_T: ChainLumera {
         apiName = "lumera-testnet"
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
-        
         cosmosEndPointType = .UseLCD
         stakeDenom = "ulume"
         bechAccountPrefix = "lumera"
         validatorPrefix = "lumeravaloper"
-        grpcHost = "grpc.testnet.lumera.io"
-        lcdUrl = "https://lcd.testnet.lumera.io"
+        grpcHost = ""
+        lcdUrl = "https://api-t.lumera.nodestake.org/"
     }
 }

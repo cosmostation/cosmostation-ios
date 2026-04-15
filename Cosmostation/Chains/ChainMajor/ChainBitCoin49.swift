@@ -21,7 +21,7 @@ class ChainBitCoin49: ChainBitCoin86 {
         
         coinSymbol = "BTC"
         
-        mainUrl = "https://rpc-office.cosmostation.io/bitcoin-mainnet"
+        mainUrl = "https://bitcoin-mainnet.gateway.tatum.io"
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {

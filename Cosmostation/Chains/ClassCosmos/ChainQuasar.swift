@@ -24,7 +24,7 @@ class ChainQuasar: BaseChain  {
         stakeDenom = "uqsr"
         bechAccountPrefix = "quasar"
         validatorPrefix = "quasarvaloper"
-        grpcHost = "grpc-quasar.cosmostation.io"
-        lcdUrl = "https://lcd-quasar.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = ""
     }
 }

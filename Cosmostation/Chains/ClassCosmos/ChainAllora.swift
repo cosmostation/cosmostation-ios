@@ -20,7 +20,7 @@ class ChainAllora: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uallo"
         bechAccountPrefix = "allo"
         validatorPrefix = "allovaloper"

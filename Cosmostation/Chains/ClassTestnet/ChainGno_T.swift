@@ -27,6 +27,6 @@ class ChainGno_T: ChainGno {
         validatorPrefix = "gvaloper"
         grpcHost = ""
         lcdUrl = ""
-        rpcUrl = "https://rpc-office.cosmostation.io/gno-testnet/"
+        rpcUrl = "https://rpc.test11.testnets.gno.land/"
     }
 }

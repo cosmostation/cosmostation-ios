@@ -24,7 +24,7 @@ class ChainOrai: BaseChain  {
         stakeDenom = "orai"
         bechAccountPrefix = "orai"
         validatorPrefix = "oraivaloper"
-        grpcHost = "grpc.orai.pfc.zone"
+        grpcHost = ""
         lcdUrl = "https://lcd.orai.io"
     }
 }

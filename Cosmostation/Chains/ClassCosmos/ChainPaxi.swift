@@ -24,7 +24,7 @@ class ChainPaxi: BaseChain  {
         stakeDenom = "upaxi"
         bechAccountPrefix = "paxi"
         validatorPrefix = "paxivaloper"
-        grpcHost = "mainnet-rpc.paxinet.io"
+        grpcHost = ""
         lcdUrl = "https://mainnet-lcd.paxinet.io/"
     }
 }

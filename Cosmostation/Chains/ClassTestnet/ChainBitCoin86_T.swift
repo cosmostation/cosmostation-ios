@@ -21,7 +21,7 @@ class ChainBitCoin86_T: ChainBitCoin86 {
         
         coinSymbol = "sBTC"
         
-        mainUrl = "https://rpc-office.cosmostation.io/bitcoin-testnet"
+        mainUrl = "https://bitcoin-signet.gateway.tatum.io"
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {

@@ -24,7 +24,7 @@ class ChainQuicksilver: BaseChain  {
         stakeDenom = "uqck"
         bechAccountPrefix = "quick"
         validatorPrefix = "quickvaloper"
-        grpcHost = "quicksilver-grpc.stake-town.com"
-        lcdUrl = "https://lcd.quicksilver.zone/"
+        grpcHost = ""
+        lcdUrl = "https://mainnet-quicksilver-api.konsortech.xyz/"
     }
 }

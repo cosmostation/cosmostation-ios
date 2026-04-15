@@ -25,7 +25,7 @@ class ChainRealioEVM: BaseChain {
         bechAccountPrefix = "realio"
         validatorPrefix = "realiovaloper"
         grpcHost = ""
-        lcdUrl = "https://api-realio-network.nodeist.net/"
+        lcdUrl = "https://realio.api.m.stavr.tech/"
         
         supportEvm = true
         coinSymbol = "RIO"

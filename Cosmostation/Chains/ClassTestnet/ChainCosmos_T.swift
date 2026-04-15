@@ -25,7 +25,7 @@ class ChainCosmos_T: BaseChain {
         stakeDenom = "uatom"
         bechAccountPrefix = "cosmos"
         validatorPrefix = "cosmosvaloper"
-        grpcHost = "grpc-office.cosmostation.io"
-        lcdUrl = "https://rest.sentry-01.theta-testnet.polypore.xyz/"
+        grpcHost = ""
+        lcdUrl = ""
     }
 }

@@ -24,7 +24,7 @@ class ChainQubeticsEVM: BaseChain {
         stakeDenom = "tics"
         bechAccountPrefix = "qubetics"
         validatorPrefix = "qubeticsvaloper"
-        grpcHost = "grpc.qubetics.com"
+        grpcHost = ""
         lcdUrl = "https://swagger.qubetics.com/"
         
         supportEvm = true

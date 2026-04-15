@@ -20,7 +20,7 @@ class ChainStratosEVM: BaseChain {
         accountKeyType = AccountKeyType(.STRATOS_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "wei"
         bechAccountPrefix = "st"
         validatorPrefix = "stvaloper"

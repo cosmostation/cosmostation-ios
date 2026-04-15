@@ -24,7 +24,7 @@ class ChainEvmosEVM: BaseChain  {
         stakeDenom = "aevmos"
         bechAccountPrefix = "evmos"
         validatorPrefix = "evmosvaloper"
-        grpcHost = "evmos-grpc.stake-town.com"
+        grpcHost = ""
         lcdUrl = "https://evmos-api.polkachu.com/"
     
         supportEvm = true

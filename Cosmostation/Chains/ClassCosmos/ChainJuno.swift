@@ -24,7 +24,7 @@ class ChainJuno: BaseChain  {
         stakeDenom = "ujuno"
         bechAccountPrefix = "juno"
         validatorPrefix = "junovaloper"
-        grpcHost = "juno-grpc.chainroot.io"
+        grpcHost = "juno-grpc.cogwheel.zone"
         lcdUrl = "https://juno-rest.publicnode.com/"
     }
     

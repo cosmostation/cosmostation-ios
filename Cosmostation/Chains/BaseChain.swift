@@ -822,7 +822,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainHumansEVM())                     //EVM
     result.append(ChainInjective())                     //EVM
     result.append(ChainInt3face())
-    result.append(ChainIntento())
     result.append(ChainInitia())
     result.append(ChainIota())
     result.append(ChainIris())
@@ -844,18 +843,15 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainLum118())
     result.append(ChainLum880())
     result.append(ChainLumera())
-    result.append(ChainManifest())
     result.append(ChainMantle())                        //EVM
     result.append(ChainMantraEVM())                     //EVM
     result.append(ChainMantra())
     result.append(ChainMedibloc())
-    result.append(ChainMilkyway())
     result.append(ChainMirage())
     result.append(ChainMonad())                         //EVM
     result.append(ChainNeutron())
     result.append(ChainMovement())
     result.append(ChainNibiru())
-    result.append(ChainNillion())
     result.append(ChainNoble())
     result.append(ChainNolus())
     result.append(ChainNyx())
@@ -875,7 +871,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainPocket())
     result.append(ChainPolygon())                       //EVM
     result.append(ChainProvenance())
-    result.append(ChainPryzm())
     result.append(ChainPundix())
     result.append(ChainQubeticsEVM())                   //EVM
     result.append(ChainQuicksilver())
@@ -905,7 +900,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
     result.append(ChainSunrise())
-    result.append(ChainSynternet())
     result.append(ChainTenetEVM())                      //EVM
     result.append(ChainTeritori())
     result.append(ChainTerra())
@@ -934,6 +928,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBabylon_T())
     result.append(ChainBitCoin84_T())
     result.append(ChainBitCoin86_T())
+    result.append(ChainCheqd_T())
     result.append(ChainGno_T())
     result.append(ChainInjective_T())
     result.append(ChainInitia_T())
@@ -942,7 +937,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMantra_T())
     result.append(ChainMonad_T())
     result.append(ChainNeutron_T())
-    result.append(ChainNillion_T())
     result.append(ChainPharos_T())
     result.append(ChainQubeticsEVM_T())
     result.append(ChainTerraClassic_T())
@@ -951,7 +945,6 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainXrplEVM_T())
     result.append(ChainZeroGravityEVM_T())
     result.append(ChainZigChain_T())
-    result.append(ChainZkCloud_T())
     
     
     
@@ -963,18 +956,25 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainEmoney())
 //    result.append(ChainFinschia())
 //    result.append(ChainGovgen())
+//    result.append(ChainIntento())
+//    result.append(ChainMilkyway())
+//    result.append(ChainNillion())
 //    result.append(ChainNomic())
 //    result.append(ChainMars())
+//    result.append(ChainManifest())
 //    result.append(ChainMigaloo())
 //    result.append(ChainOnomy())
 //    result.append(ChainOmniflix())
 //    result.append(ChainQuasar())
+//    result.append(ChainPryzm())
 //    result.append(ChainRouterEVM())                     //EVM
 //    result.append(ChainSelf())
 //    result.append(ChainSge())
 //    result.append(ChainStafi())
 //    result.append(ChainStarname())
-//    
+//    result.append(ChainSynternet())
+//
+//
 //    result.append(ChainCosmos_T())
 //    result.append(ChainArtelaEVM_T())
 //    result.append(ChainBeraEVM_T())                     //EVM
@@ -982,10 +982,12 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainBitCoin49_T())
 //    result.append(ChainImuaEVM_T())
 //    result.append(ChainLombard_T())
+//    result.append(ChainNillion_T())
 //    result.append(ChainSaharaAiEVM_T())
 //    result.append(ChainSelf_T())
 //    result.append(ChainStoryEVM_T())
 //    result.append(ChainTabiEVM_T())
+//    result.append(ChainZkCloud_T())
     
     result.forEach { chain in
         if let cosmosChainId = chain.getChainListParam()["chain_id_cosmos"].string {

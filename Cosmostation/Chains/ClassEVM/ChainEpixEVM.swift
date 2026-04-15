@@ -24,7 +24,7 @@ class ChainEpixEVM: BaseChain  {
         stakeDenom = "aepix"
         bechAccountPrefix = "epix"
         validatorPrefix = "epixvaloper"
-        grpcHost = "grpc.epix.zone:15067"
+        grpcHost = ""
         lcdUrl = "https://api.epix.zone/"
     
         supportEvm = true

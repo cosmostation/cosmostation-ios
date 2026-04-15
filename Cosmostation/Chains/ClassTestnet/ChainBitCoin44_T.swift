@@ -22,7 +22,7 @@ class ChainBitCoin44_T: ChainBitCoin86_T {
         
         coinSymbol = "sBTC"
         
-        mainUrl = "https://rpc-office.cosmostation.io/bitcoin-testnet"
+        mainUrl = ""
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {

@@ -22,16 +22,17 @@ class ChainKavaEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "ukava"
         bechAccountPrefix = "kava"
         validatorPrefix = "kavavaloper"
-        grpcHost = "grpc-kava.cosmostation.io"
+        grpcHost = "grpc.data.kava.io"
+        lcdUrl = "https://api.data.kava.io/"
         
         
         supportEvm = true
         coinSymbol = "KAVA"
-        evmRpcURL = "https://rpc-kava-evm.cosmostation.io"
+        evmRpcURL = "https://evm.kava.io"
     }
     
     override func getCosmosfetcher() -> CosmosFetcher? {

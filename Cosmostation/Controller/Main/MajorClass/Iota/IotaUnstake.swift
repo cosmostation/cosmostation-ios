@@ -153,7 +153,7 @@ extension IotaUnstake {
     
     func iotaUnstakeGasCheck() {
         Task {
-            if let txBytes = try await iotaFetcher.unsafeUnstake(selectedChain.mainAddress, fromValidator.1["stakedIotaId"].stringValue, iotaFeeBudget.stringValue),
+            if let txBytes = try await iotaFetcher.buildUnstakingRequest(fromValidator.1["stakedIotaId"].stringValue),
                let response = try await iotaFetcher.iotaDryrun(txBytes) {
                 if let error = response["error"]["message"].string {
                     DispatchQueue.main.async {
@@ -172,6 +172,7 @@ extension IotaUnstake {
                 } else {
                     gasCost = computationCost.multiplying(by: NSDecimalNumber(string: "1.3") , withBehavior: handler0Down).uint64Value
                 }
+                
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(gasCost)
                 }
@@ -187,9 +188,9 @@ extension IotaUnstake {
     func iotaUnstake() {
         Task {
             do {
-                if let txBytes = try await iotaFetcher.unsafeUnstake(selectedChain.mainAddress, fromValidator.1["stakedIotaId"].stringValue, iotaFeeBudget.stringValue),
+                if let txBytes = try await iotaFetcher.buildUnstakingRequest(fromValidator.1["stakedIotaId"].stringValue),
                    let dryRes = try await iotaFetcher.iotaDryrun(txBytes), dryRes["error"].isEmpty,
-                   let broadRes = try await iotaFetcher.iotaExecuteTx(txBytes, Signer.iotaSignatures(selectedChain, txBytes), nil) {
+                   let broadRes = try await iotaFetcher.iotaExecuteTx(txBytes, Signer.moveSignatures(selectedChain, txBytes), nil) {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                         self.loadingView.isHidden = true

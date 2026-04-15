@@ -24,7 +24,7 @@ class ChainSource: BaseChain {
         stakeDenom = "usource"
         bechAccountPrefix = "source"
         validatorPrefix = "sourcevaloper"
-        grpcHost = "source-grpc.polkachu.com"
-        lcdUrl = "https://source.api.m.stavr.tech/"
+        grpcHost = ""
+        lcdUrl = "https://rest.source.tcnetwork.io/"
     }
 }

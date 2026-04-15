@@ -20,12 +20,12 @@ class ChainDydx: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "adydx"
         bechAccountPrefix = "dydx"
         validatorPrefix = "dydxvaloper"
-        grpcHost = "grpc-dydx.cosmostation.io"
-        lcdUrl = "https://lcd-dydx.cosmostation.io/"
+        grpcHost = "dydx-grpc.kingnodes.com"
+        lcdUrl = "https://dydx-dao-api.polkachu.com/"
     }
 }
 

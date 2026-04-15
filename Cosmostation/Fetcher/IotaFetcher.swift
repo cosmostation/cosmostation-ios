@@ -377,30 +377,6 @@ extension IotaFetcher {
         return try? await AF.request(getIotaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["txBytes"].stringValue
     }
     
-    func unsafeStake(_ sender: String, _ coins: [String], _ amount: String, _ validator: String, _ gasBudget: String) async throws -> String? {
-        if let result = try? await AF.request("https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildIotaStakingRequest",
-                                              method: .post,
-                                              parameters: ["address" : sender, "validatorAddress" : validator, "gas" : gasBudget, "amount" : amount, "rpc": getIotaRpc()],
-                                              encoder: JSONParameterEncoder.default).serializingData().value {
-            if let string = String(data: result, encoding: .utf8) {
-                return Data(hex: string).base64EncodedString()
-            }
-        }
-        return nil
-    }
-    
-    func unsafeUnstake(_ sender: String, _ objectId: String, _ gasBudget: String) async throws -> String? {
-        if let result = try? await AF.request("https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildIotaUnstakingRequest",
-                                              method: .post,
-                                              parameters: ["address" : sender, "objectId" : objectId, "gas" : gasBudget, "rpc": getIotaRpc()],
-                                              encoder: JSONParameterEncoder.default).serializingData().value {
-            if let string = String(data: result, encoding: .utf8) {
-                return Data(hex: string).base64EncodedString()
-            }
-        }
-        return nil
-    }
-    
     func iotaDryrun(_ tx_bytes: String) async throws -> JSON? {
         let parameters: Parameters = ["method": "iota_dryRunTransactionBlock", "params": [tx_bytes], "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getIotaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
@@ -496,6 +472,72 @@ extension JSON {
     
     func iotaValidatorVp() -> NSDecimalNumber {
         return NSDecimalNumber(string: self["stakingPoolIotaBalance"].stringValue).multiplying(byPowerOf10: -9, withBehavior: handler12Down)
+    }
+}
+
+extension IotaFetcher {
+    
+    func fetchReferenceGasPrice() async throws -> String {
+        let parameters: Parameters = ["method": "iotax_getReferenceGasPrice", "params": [] , "id" : 1, "jsonrpc" : "2.0"]
+        let response = try await AF.request(getIotaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+        return response["result"].stringValue
+    }
+    
+    func fetchIotaxCoins() async throws -> [JSON] {
+        let params: Any = [chain.mainAddress, IOTA_MAIN_DENOM, nil, 1]
+        let parameters: Parameters = ["method": "iotax_getCoins", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        let response = try await AF.request(getIotaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+        return response["result"]["data"].arrayValue
+    }
+    
+    func buildStakingRequest(_ toAmount: String, _ validatorAddress: String) async throws -> String? {
+        let gasPrice = try await fetchReferenceGasPrice()
+        let coinDatas = try await fetchIotaxCoins()
+        
+        if coinDatas.count > 0 {
+            let coindata = coinDatas[0]
+            let gasBudget = baseFee(.IOTA_STAKE)
+            let coinObjectId = coindata["coinObjectId"].stringValue
+            let version = coindata["version"].stringValue
+            let digest = coindata["digest"].stringValue
+            
+            let buildStakingTxHex = try await SuiJS.shared.callJSValue(key: "buildIotaStakingRequest",
+                                                                       param: [toAmount, validatorAddress, chain.mainAddress, gasPrice, gasBudget, coinObjectId, version, digest])
+            return Data(hex: buildStakingTxHex ?? "").base64EncodedString()
+
+        } else {
+            return ""
+        }
+    }
+    
+    func fetchIotaObject(_ objectId: String) async throws -> JSON {
+        let params: Any = [objectId, ["showContent": false]]
+        let parameters: Parameters = ["method": "iota_getObject", "params": params , "id" : 1, "jsonrpc" : "2.0"]
+        return try await AF.request(getIotaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+    }
+    
+    func buildUnstakingRequest(_ objectId: String) async throws -> String? {
+        let gasPrice = try await fetchReferenceGasPrice()
+        let coinDatas = try await fetchIotaxCoins()
+        
+        if coinDatas.count > 0 {
+            let coindata = coinDatas[0]
+            let gasBudget = baseFee(.SUI_UNSTAKE)
+            let coinObjectId = coindata["coinObjectId"].stringValue
+            let version = coindata["version"].stringValue
+            let digest = coindata["digest"].stringValue
+            
+            let stakedObject = try await fetchIotaObject(objectId)
+            let stakedObjectVersion = stakedObject["result"]["data"]["version"].stringValue
+            let stakedObjectDigest = stakedObject["result"]["data"]["digest"].stringValue
+            
+            let buildUnStakingTxHex = try await SuiJS.shared.callJSValue(key: "buildIotaUnstakingRequest",
+                                                                       param: [chain.mainAddress, gasPrice, gasBudget, coinObjectId, version, digest, objectId, stakedObjectVersion, stakedObjectDigest])
+            return Data(hex: buildUnStakingTxHex ?? "").base64EncodedString()
+            
+        } else {
+            return ""
+        }
     }
 }
 

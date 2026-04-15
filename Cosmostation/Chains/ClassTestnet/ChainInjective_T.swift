@@ -21,7 +21,7 @@ class ChainInjective_T: ChainInjective {
         accountKeyType = AccountKeyType(.INJECTIVE_Secp256k1, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "inj"
         bechAccountPrefix = "inj"
         validatorPrefix = "injvaloper"
@@ -31,6 +31,6 @@ class ChainInjective_T: ChainInjective {
         
         supportEvm = true
         coinSymbol = "INJ"
-        evmRpcURL = "https://rpc-office-evm.cosmostation.io/injective-testnet/"
+        evmRpcURL = "https://testnet.sentry.chain.json-rpc.injective.network/"
     }
 }

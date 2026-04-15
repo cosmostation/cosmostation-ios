@@ -24,8 +24,8 @@ class ChainChihuahua: BaseChain  {
         stakeDenom = "uhuahua"
         bechAccountPrefix = "chihuahua"
         validatorPrefix = "chihuahuavaloper"
-        grpcHost = "grpc-chihuahua.cosmostation.io"
-        lcdUrl = "https://lcd-chihuahua.cosmostation.io/"
+        grpcHost = "grpc.chihuahua.validatus.com"
+        lcdUrl = "https://chihuahua-api.polkachu.com/"
     }
     
 }

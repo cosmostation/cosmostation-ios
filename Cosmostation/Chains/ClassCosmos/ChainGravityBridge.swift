@@ -20,11 +20,11 @@ class ChainGravityBridge: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "ugraviton"
         bechAccountPrefix = "gravity"
         validatorPrefix = "gravityvaloper"
-        grpcHost = "grpc-gravity-bridge.cosmostation.io"
-        lcdUrl = "https://lcd-gravity-bridge.cosmostation.io/"
+        grpcHost = "grpc.gravity.citizenweb3.com"
+        lcdUrl = "https://gravitychain.io:1317/"
     }
 }

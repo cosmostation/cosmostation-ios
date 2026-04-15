@@ -24,7 +24,7 @@ class ChainGovgen: BaseChain  {
         stakeDenom = "ugovgen"
         bechAccountPrefix = "govgen"
         validatorPrefix = "govgenvaloper"
-        grpcHost = "grpc-govgen.cosmostation.io"
-        lcdUrl = "https://lcd-govgen.cosmostation.io/"
+        grpcHost = ""
+        lcdUrl = ""
     }
 }

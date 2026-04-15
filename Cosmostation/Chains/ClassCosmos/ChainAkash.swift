@@ -20,12 +20,12 @@ class ChainAkash: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseGRPC
+        cosmosEndPointType = .UseLCD
         stakeDenom = "uakt"
         bechAccountPrefix = "akash"
         validatorPrefix = "akashvaloper"
-        grpcHost = "grpc-akash.cosmostation.io"
-        lcdUrl = "https://lcd-akash.cosmostation.io/"
+        grpcHost = "akash.lavenderfive.com"
+        lcdUrl = "https://rest-akash.ecostake.com/"
     }
     
 }
