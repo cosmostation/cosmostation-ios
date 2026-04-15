@@ -25,7 +25,7 @@ class ChainLava: BaseChain  {
         bechAccountPrefix = "lava@"
         validatorPrefix = "lava@valoper"
         grpcHost = ""
-        lcdUrl = "https://lava-api.w3coins.io/"
+        lcdUrl = "https://lava.rest.lava.build/"
     }
     
 }
