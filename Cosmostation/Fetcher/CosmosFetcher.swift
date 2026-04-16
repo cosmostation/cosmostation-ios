@@ -107,7 +107,14 @@ class CosmosFetcher {
                 
                 baseFees?.forEach({ basefee in
                     if (BaseData.instance.getAsset(chain.apiName, basefee.denom) != nil) {
-                        self.cosmosBaseFees.append(basefee)
+                        if chain is ChainCheqd {
+                            var tempBasefee = Cosmos_Base_V1beta1_DecCoin()
+                            tempBasefee.denom = basefee.denom
+                            tempBasefee.amount = NSDecimalNumber(string: basefee.amount).multiplying(byPowerOf10: 4).stringValue
+                            self.cosmosBaseFees.append(tempBasefee)
+                        } else {
+                            self.cosmosBaseFees.append(basefee)
+                        }
                     }
                 })
                 self.cosmosBaseFees.sort {
@@ -963,7 +970,14 @@ extension CosmosFetcher {
             if let baseFees = try? await Feemarket_Feemarket_V1_QueryNIOClient(channel: getClient()).gasPrices(req, callOptions: getCallOptions()).response.get().prices {
                 baseFees.forEach({ basefee in
                     if (BaseData.instance.getAsset(chain.apiName, basefee.denom) != nil) {
-                        self.cosmosBaseFees.append(basefee)
+                        if chain is ChainCheqd {
+                            var tempBasefee = Cosmos_Base_V1beta1_DecCoin()
+                            tempBasefee.denom = basefee.denom
+                            tempBasefee.amount = NSDecimalNumber(string: basefee.amount).multiplying(byPowerOf10: 4).stringValue
+                            self.cosmosBaseFees.append(tempBasefee)
+                        } else {
+                            self.cosmosBaseFees.append(basefee)
+                        }
                     }
                 })
                 self.cosmosBaseFees.sort {
@@ -979,7 +993,14 @@ extension CosmosFetcher {
             if let result = response?.feeMarket() {
                 result.forEach { basefee in
                     if (BaseData.instance.getAsset(chain.apiName, basefee.denom) != nil) {
-                        self.cosmosBaseFees.append(basefee)
+                        if chain is ChainCheqd {
+                            var tempBasefee = Cosmos_Base_V1beta1_DecCoin()
+                            tempBasefee.denom = basefee.denom
+                            tempBasefee.amount = NSDecimalNumber(string: basefee.amount).multiplying(byPowerOf10: 4).stringValue
+                            self.cosmosBaseFees.append(tempBasefee)
+                        } else {
+                            self.cosmosBaseFees.append(basefee)
+                        }
                     }
                 }
                 self.cosmosBaseFees.sort {
