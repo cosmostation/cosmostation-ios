@@ -759,7 +759,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainAltheaEVM())                     //EVM
     result.append(ChainAlthea118())
     result.append(ChainAndromeda())
-    result.append(ChainAptos())
+    result.append(ChainAptos())                         //MAJOR
     result.append(ChainArbitrum())                      //EVM
     result.append(ChainArchway())
     result.append(ChainArkeo())                      
@@ -807,7 +807,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainFetchAi())
     result.append(ChainFetchAi60Old())
     result.append(ChainFetchAi60Secp())
-    result.append(ChainFilecoin())
+    result.append(ChainFilecoin())                      //EVM
     result.append(ChainFirma())
     result.append(ChainForma())                         //EVM
     result.append(ChainFxcoreEVM())                     //EVM
@@ -815,7 +815,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainGitopia())
 //    result.append(ChainGno())
     result.append(ChainGonka())
-    result.append(ChainGnosis())                  //EVM
+    result.append(ChainGnosis())                        //EVM
     result.append(ChainGravityAlpha())                  //EVM
     result.append(ChainGravityBridge())
     result.append(ChainHaqqEVM())                       //EVM
@@ -844,6 +844,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainLum118())
     result.append(ChainLum880())
     result.append(ChainLumera())
+    result.append(ChainMantaPacific())                  //EVM
     result.append(ChainMantle())                        //EVM
     result.append(ChainMantraEVM())                     //EVM
     result.append(ChainMantra())
@@ -851,7 +852,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainMirage())
     result.append(ChainMonad())                         //EVM
     result.append(ChainNeutron())
-    result.append(ChainMovement())
+    result.append(ChainMovement())                      //MAJOR
     result.append(ChainNibiru())
     result.append(ChainNoble())
     result.append(ChainNolus())
