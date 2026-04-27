@@ -807,6 +807,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainFetchAi())
     result.append(ChainFetchAi60Old())
     result.append(ChainFetchAi60Secp())
+    result.append(ChainFilecoin())
     result.append(ChainFirma())
     result.append(ChainForma())                         //EVM
     result.append(ChainFxcoreEVM())                     //EVM
