@@ -45,21 +45,21 @@ class ReceiveCell: UITableViewCell {
         }
         
         if chain.supportEvm, section == 0 {
-            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name + " EVM")
+            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.getChainName() + " EVM")
             let evmAddress = chain.evmAddress!
             addressLabel.text = evmAddress
             addressLabel.adjustsFontSizeToFitWidth = true
             setQR(evmAddress, chain.getChainImage())
             
         } else if chain.supportCosmos {
-            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
+            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.getChainName())
             let bechAddress = chain.bechAddress!
             addressLabel.text = bechAddress
             addressLabel.adjustsFontSizeToFitWidth = true
             setQR(bechAddress, chain.getChainImage())
             
         } else if !chain.mainAddress.isEmpty {
-            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
+            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.getChainName())
             let mainAddress = chain.mainAddress
             
             if (chain is ChainBitCoin86) {

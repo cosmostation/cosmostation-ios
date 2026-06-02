@@ -37,7 +37,7 @@ class PopupReceiveCell: UITableViewCell {
         oldTag.isHidden = chain.isDefault
         
         if (section == 0 && chain.supportEvm)  {
-            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name + " EVM")
+            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.getChainName() + " EVM")
             let evmAddress = chain.evmAddress!
             addressLabel.text = evmAddress
             addressLabel.adjustsFontSizeToFitWidth = true
@@ -48,7 +48,7 @@ class PopupReceiveCell: UITableViewCell {
             }
             
         } else if (section == 1 && chain.supportCosmos) {
-            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
+            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.getChainName())
             let bechAddress = chain.bechAddress!
             addressLabel.text = bechAddress
             addressLabel.adjustsFontSizeToFitWidth = true
@@ -59,7 +59,7 @@ class PopupReceiveCell: UITableViewCell {
             }
             
         } else if (section == 2 && !chain.mainAddress.isEmpty) {
-            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.name)
+            cautionLabel.text = String(format: NSLocalizedString("str_deposit_caution", comment: ""), chain.getChainName())
             let mainAddress = chain.mainAddress
             
             if (chain is ChainBitCoin86) {
