@@ -24,10 +24,4 @@ class ChainStoryEVM: BaseChain {
         coinSymbol = "IP"
         evmRpcURL = "https://evmrpc.story.nodestake.org"
     }
-    
-//    override func fetchBalances() {
-//    }
-//    
-//    override func fetchData(_ id: Int64) {
-//    }
 }

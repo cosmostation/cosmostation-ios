@@ -25,7 +25,7 @@ class ChainThor: BaseChain {
         bechAccountPrefix = "thor"
         validatorPrefix = "thorvaloper"
         supportStaking = false
-        grpcHost = ""
-        lcdUrl = "https://thornode.ninerealms.com/"
+        grpcHost = "grpc-thorchain.rorcual.xyz:443"
+        lcdUrl = "https://gateway.liquify.com/chain/thorchain_api/"
     }
 }

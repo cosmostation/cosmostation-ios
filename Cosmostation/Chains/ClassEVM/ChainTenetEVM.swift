@@ -20,15 +20,8 @@ class ChainTenetEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
-        stakeDenom = "atenet"
-        bechAccountPrefix = "tenet"
-        validatorPrefix = "tenetvaloper"
-        grpcHost = ""
-        lcdUrl = "https://tenet-rest.publicnode.com/"
-        
         supportEvm = true
         coinSymbol = "TENET"
-        evmRpcURL = "https://tenet-evm.publicnode.com"
+        evmRpcURL = "https://rpc.tenet.org"
     }
 }
