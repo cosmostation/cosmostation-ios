@@ -111,7 +111,7 @@ class SelectEndpointSheet: BaseVC {
     }
     
     override func setLocalizedString() {
-        titleLabel.text = "\(targetChain.name.uppercased()) Endpoint"
+        titleLabel.text = "\(targetChain.getChainName().uppercased()) Endpoint"
         titleImageView.image = targetChain.getChainImage()
     }
     

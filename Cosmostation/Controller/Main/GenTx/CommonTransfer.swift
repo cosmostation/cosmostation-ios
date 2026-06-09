@@ -451,8 +451,8 @@ class CommonTransfer: BaseVC {
             
         } else {
             ibcSendGuideView.isHidden = false
-            let fromChainName = fromChain.name ?? ""
-            let toChainName = toChain.name ?? ""
+            let fromChainName = fromChain.getChainName()
+            let toChainName = toChain.getChainName()
             let fullText = "IBC Send from \(fromChainName) to \(toChainName) network"
             let attributedString = NSMutableAttributedString(string: fullText)
             let fullRange = (fullText as NSString).range(of: fullText)

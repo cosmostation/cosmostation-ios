@@ -29,6 +29,6 @@ class ChainHumansEVM: BaseChain  {
         
         supportEvm = true
         coinSymbol = "HEART"
-        evmRpcURL = "https://jsonrpc.humans.nodestake.top"
+        evmRpcURL = "https://humans-mainnet-evm.itrocket.net"
     }
 }

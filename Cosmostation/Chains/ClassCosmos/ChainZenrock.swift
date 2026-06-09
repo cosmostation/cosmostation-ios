@@ -24,8 +24,8 @@ class ChainZenrock: BaseChain  {
         stakeDenom = "urock"
         bechAccountPrefix = "zen"
         validatorPrefix = "zenvaloper"
-        grpcHost = "grpc.zenrock.nodestake.org"
-        lcdUrl = "https://api.zenrock.nodestake.org/"
+        grpcHost = "grpc.diamond.zenrocklabs.io:443"
+        lcdUrl = "https://zenrock.api.m.stavr.tech/"
     }
     
     override func getCosmosfetcher() -> CosmosFetcher? {

@@ -120,7 +120,7 @@ struct DappDetailSheet: View {
                                     .scaledToFit()
                                     .frame(width: 16, height: 16)
                                 
-                                Text(chain.name.uppercased())
+                                Text(chain.getChainName().uppercased())
                                     .foregroundStyle(Color.base03)
                                     .font(.system15)
                             }

@@ -25,6 +25,6 @@ class ChainPocket: BaseChain  {
         bechAccountPrefix = "pokt"
         validatorPrefix = "poktvaloper"
         grpcHost = ""
-        lcdUrl = "https://shannon-grove-api.mainnet.poktroll.com/"
+        lcdUrl = "https://pocket.api.pocket.network/"
     }
 }

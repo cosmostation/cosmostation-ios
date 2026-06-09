@@ -27,7 +27,7 @@ class QrAddressPopup2VC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
+        chainNameLabel.text = selectedChain.getChainName().uppercased() + "  (" + baseAccount.name + ")"
     
         if (baseAccount.type == .withMnemonic) {
             hdPathLabel.text = selectedChain.getHDPath(baseAccount.lastHDPath)

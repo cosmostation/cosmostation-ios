@@ -69,7 +69,7 @@ class AllDappListCell: UICollectionViewCell {
                     
                     self.chainImageViews.first?.image = chain.getChainImage()
                     self.chainLabel.isHidden = false
-                    self.chainLabel.text = chain.apiName.uppercased()
+                    self.chainLabel.text = chain.getChainName().uppercased()
                 }
             } else {
                 if chains.count <= 7 {

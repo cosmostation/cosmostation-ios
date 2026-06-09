@@ -1674,6 +1674,8 @@
 		152F4EC22F9F5B4D00B3C280 /* ChainFilecoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F4EC02F9F5B4D00B3C280 /* ChainFilecoin.swift */; };
 		152F4EC42F9F615B00B3C280 /* ChainMantaPacific.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F4EC32F9F615B00B3C280 /* ChainMantaPacific.swift */; };
 		152F4EC52F9F615B00B3C280 /* ChainMantaPacific.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F4EC32F9F615B00B3C280 /* ChainMantaPacific.swift */; };
+		15369FCF2FA3B3690085F997 /* ChainBitBadges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15369FCE2FA3B3690085F997 /* ChainBitBadges.swift */; };
+		15369FD02FA3B3690085F997 /* ChainBitBadges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15369FCE2FA3B3690085F997 /* ChainBitBadges.swift */; };
 		155D96842E8645510047BC1B /* ChainBlast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D96832E8645510047BC1B /* ChainBlast.swift */; };
 		155D96862E8650930047BC1B /* ChainLinea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D96852E8650920047BC1B /* ChainLinea.swift */; };
 		155D96882E98F4290047BC1B /* ChainIntento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D96872E98F4290047BC1B /* ChainIntento.swift */; };
@@ -3429,6 +3431,7 @@
 		150503102E5C7F890001415A /* SolanaJS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolanaJS.swift; sourceTree = "<group>"; };
 		152F4EC02F9F5B4D00B3C280 /* ChainFilecoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFilecoin.swift; sourceTree = "<group>"; };
 		152F4EC32F9F615B00B3C280 /* ChainMantaPacific.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantaPacific.swift; sourceTree = "<group>"; };
+		15369FCE2FA3B3690085F997 /* ChainBitBadges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitBadges.swift; sourceTree = "<group>"; };
 		155D96832E8645510047BC1B /* ChainBlast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBlast.swift; sourceTree = "<group>"; };
 		155D96852E8650920047BC1B /* ChainLinea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainLinea.swift; sourceTree = "<group>"; };
 		155D96872E98F4290047BC1B /* ChainIntento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainIntento.swift; sourceTree = "<group>"; };
@@ -4192,6 +4195,7 @@
 				048CB53E2D2E899B00061729 /* ChainBabylon.swift */,
 				045032702C1EEDCC00235F6A /* ChainBand.swift */,
 				04010E0B2E01520A00B07D8D /* ChainBeezee.swift */,
+				15369FCE2FA3B3690085F997 /* ChainBitBadges.swift */,
 				045032752C1EEDCD00235F6A /* ChainBitcana.swift */,
 				045032772C1EEDCD00235F6A /* ChainBitsong.swift */,
 				040B43E72E3724360018850C /* ChainBluzelle.swift */,
@@ -7177,6 +7181,7 @@
 				047843962AC991B300462F1C /* injective_peggy_v1_msgs.pb.swift in Sources */,
 				04C817752BA98D75006B800A /* cosmos_crypto_ed25519_keys.pb.swift in Sources */,
 				04C8166F2BA98D74006B800A /* cosmos_orm_v1_orm.pb.swift in Sources */,
+				15369FD02FA3B3690085F997 /* ChainBitBadges.swift in Sources */,
 				04C817732BA98D75006B800A /* cosmos_crisis_v1beta1_genesis.pb.swift in Sources */,
 				046EA8742AD04A2500A2FCE7 /* desmos_profiles_v3_query_app_links.pb.swift in Sources */,
 				0450324C2C1EEA9600235F6A /* ChainCronos.swift in Sources */,
@@ -7726,6 +7731,7 @@
 				158484172EFB1379002A3523 /* ChainAirchains.swift in Sources */,
 				790970292D8016C000DEB959 /* PendingDelegateCell.swift in Sources */,
 				E18B21FC2C4A4EE900AD572F /* ChainNillion_T.swift in Sources */,
+				15369FCF2FA3B3690085F997 /* ChainBitBadges.swift in Sources */,
 				7992616D2D77EE66007E9911 /* babylon_epoching_v1_epoching.pb.swift in Sources */,
 				04C817A02BA98D75006B800A /* cosmos_distribution_v1beta1_tx.pb.swift in Sources */,
 				042296812A890C9B003C7630 /* ChainKava118.swift in Sources */,

@@ -24,8 +24,8 @@ class ChainBitcana: BaseChain {
         stakeDenom = "ubcna"
         bechAccountPrefix = "bcna"
         validatorPrefix = "bcnavaloper"
-        grpcHost = "grpc.bitcanna.io"
-        lcdUrl = "https://lcd.bitcanna.io/"
+        grpcHost = ""
+        lcdUrl = "https://bitcanna.api.m.anode.team/"
     }
     
 }

@@ -24,7 +24,7 @@ class ChainJackal: BaseChain  {
         stakeDenom = "ujkl"
         bechAccountPrefix = "jkl"
         validatorPrefix = "jklvaloper"
-        grpcHost = "grpc.jackal.silentvalidator.com"
-        lcdUrl = "https://api.jackalprotocol.com/"
+        grpcHost = ""
+        lcdUrl = "https://jkl.api.m.stavr.tech/"
     }
 }

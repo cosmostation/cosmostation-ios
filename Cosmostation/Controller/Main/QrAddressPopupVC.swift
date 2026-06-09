@@ -25,7 +25,7 @@ class QrAddressPopupVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        chainNameLabel.text = selectedChain.name.uppercased() + "  (" + baseAccount.name + ")"
+        chainNameLabel.text = selectedChain.getChainName().uppercased() + "  (" + baseAccount.name + ")"
         
         if selectedChain.supportEvm == true {
             toDpAddress = selectedChain.evmAddress!
