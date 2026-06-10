@@ -1682,6 +1682,8 @@
 		153F5C682FD90C4F00DB4C06 /* ChainSymphony.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F5C662FD90C4F00DB4C06 /* ChainSymphony.swift */; };
 		153F5C6D2FD930F900DB4C06 /* ChainBitway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F5C6C2FD930F900DB4C06 /* ChainBitway.swift */; };
 		153F5C6E2FD930F900DB4C06 /* ChainBitway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F5C6C2FD930F900DB4C06 /* ChainBitway.swift */; };
+		153F5C702FD9693800DB4C06 /* ChainUnunifi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F5C6F2FD9693800DB4C06 /* ChainUnunifi.swift */; };
+		153F5C712FD9693800DB4C06 /* ChainUnunifi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F5C6F2FD9693800DB4C06 /* ChainUnunifi.swift */; };
 		155D96842E8645510047BC1B /* ChainBlast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D96832E8645510047BC1B /* ChainBlast.swift */; };
 		155D96862E8650930047BC1B /* ChainLinea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D96852E8650920047BC1B /* ChainLinea.swift */; };
 		155D96882E98F4290047BC1B /* ChainIntento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155D96872E98F4290047BC1B /* ChainIntento.swift */; };
@@ -3441,6 +3443,7 @@
 		153F5C632FD8341600DB4C06 /* ChainDecentr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainDecentr.swift; sourceTree = "<group>"; };
 		153F5C662FD90C4F00DB4C06 /* ChainSymphony.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSymphony.swift; sourceTree = "<group>"; };
 		153F5C6C2FD930F900DB4C06 /* ChainBitway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitway.swift; sourceTree = "<group>"; };
+		153F5C6F2FD9693800DB4C06 /* ChainUnunifi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainUnunifi.swift; sourceTree = "<group>"; };
 		155D96832E8645510047BC1B /* ChainBlast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBlast.swift; sourceTree = "<group>"; };
 		155D96852E8650920047BC1B /* ChainLinea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainLinea.swift; sourceTree = "<group>"; };
 		155D96872E98F4290047BC1B /* ChainIntento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainIntento.swift; sourceTree = "<group>"; };
@@ -4315,6 +4318,7 @@
 				0450331B2C1F045900235F6A /* ChainUmee.swift */,
 				79C518762CC8E3DA00BC0E85 /* ChainUnification.swift */,
 				E12DFA732DD48A7200E53C10 /* ChainUnion.swift */,
+				153F5C6F2FD9693800DB4C06 /* ChainUnunifi.swift */,
 				0485A4FD2CD9FC3A00DE1661 /* ChainXion.swift */,
 				045033182C1F045900235F6A /* ChainXpla.swift */,
 				79813A602D530A9E0083A1F5 /* ChainZenrock.swift */,
@@ -7574,6 +7578,7 @@
 				046652252DACDB2700F9C125 /* ibc_applications_transfer_v1_tx.pb.swift in Sources */,
 				046652262DACDB2700F9C125 /* ibc_applications_interchain_accounts_host_v1_tx.grpc.swift in Sources */,
 				046652272DACDB2700F9C125 /* ibc_applications_perm_v1_types.pb.swift in Sources */,
+				153F5C712FD9693800DB4C06 /* ChainUnunifi.swift in Sources */,
 				046652282DACDB2700F9C125 /* ibc_applications_transfer_v1_query.pb.swift in Sources */,
 				046652292DACDB2700F9C125 /* ibc_applications_interchain_accounts_controller_v1_query.grpc.swift in Sources */,
 				0466522A2DACDB2700F9C125 /* ibc_core_client_v2_counterparty.pb.swift in Sources */,
@@ -8833,6 +8838,7 @@
 				047DCEE228855F4800253CAA /* MintscanMyVote.swift in Sources */,
 				045032C92C1EFCE700235F6A /* ChainLike.swift in Sources */,
 				E10B1D8F2C2156430039283B /* KavaMintListMyCell.swift in Sources */,
+				153F5C702FD9693800DB4C06 /* ChainUnunifi.swift in Sources */,
 				04C817DF2BA9917D006B800A /* cosmos_upgrade_v1beta1_query.grpc.swift in Sources */,
 				045032C32C1EFCE700235F6A /* ChainKi.swift in Sources */,
 				04F048C72AF89B19002A809D /* SelectAddressBookCell.swift in Sources */,

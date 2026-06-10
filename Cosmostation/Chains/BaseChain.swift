@@ -904,6 +904,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainThor())
     result.append(ChainUnification())
     result.append(ChainUnion())
+    result.append(ChainUnunifi())
 //    result.append(ChainWardenEVM())                     //EVM
     result.append(ChainWemix())                         //EVM
     result.append(ChainWorldchain())                    //EVM
