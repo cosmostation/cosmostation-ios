@@ -26,7 +26,7 @@ class ChainLum118: BaseChain  {
         bechAccountPrefix = "lum"
         validatorPrefix = "lumvaloper"
         grpcHost = "lum-grpc.stakerhouse.com"
-        lcdUrl = "https://lum-rest.stakerhouse.com/"
+        lcdUrl = "https://lumnetwork_mainnet_api.chain.whenmoonwhenlambo.money"
     }
     
 }

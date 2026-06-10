@@ -781,6 +781,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainBitCoin84())                     //MAJOR
     result.append(ChainBitCoin86())                     //MAJOR
     result.append(ChainBitsong())
+    result.append(ChainBitway())
     result.append(ChainBlast())                         //EVM
     result.append(ChainCantoEVM())                      //EVM
     result.append(ChainCarbon())
@@ -792,6 +793,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainCoreum())
     result.append(ChainCronos())                        //EVM
     result.append(ChainCryptoorg())
+    result.append(ChainDecentr())
     result.append(ChainDesmos())
     result.append(ChainDoraVota())
     result.append(ChainDungeon())
@@ -889,12 +891,12 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainSomnia())                        //EVM
     result.append(ChainSonic())                         //EVM
     result.append(ChainSource())
-    result.append(ChainStargaze())
     result.append(ChainStoryEVM())                      //EVM
     result.append(ChainStratosEVM())                    //EVM
     result.append(ChainStride())
     result.append(ChainSui())                           //MAJOR
     result.append(ChainSunrise())
+    result.append(ChainSymphony())
     result.append(ChainTenetEVM())                      //EVM
     result.append(ChainTeritori())
     result.append(ChainTerra())
@@ -902,6 +904,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainThor())
     result.append(ChainUnification())
     result.append(ChainUnion())
+    result.append(ChainUnunifi())
 //    result.append(ChainWardenEVM())                     //EVM
     result.append(ChainWemix())                         //EVM
     result.append(ChainWorldchain())                    //EVM
@@ -973,6 +976,7 @@ func ALLCHAINS() -> [BaseChain] {
 //    result.append(ChainSelf())
 //    result.append(ChainSge())
 //    result.append(ChainStafi())
+//    result.append(ChainStargaze())
 //    result.append(ChainStarname())
 //    result.append(ChainSynternet())
 //    result.append(ChainUmee())

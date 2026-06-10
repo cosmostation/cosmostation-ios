@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "symphony.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

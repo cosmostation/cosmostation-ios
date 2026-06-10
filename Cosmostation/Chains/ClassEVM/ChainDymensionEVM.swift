@@ -24,11 +24,11 @@ class ChainDymensionEVM: BaseChain  {
         stakeDenom = "adym"
         bechAccountPrefix = "dym"
         validatorPrefix = "dymvaloper"
-        grpcHost = "grpc.dymension.nodestake.org"
-        lcdUrl = "https://api.dymension.nodestake.org/"
+        grpcHost = ""
+        lcdUrl = "https://m-dymension.api.utsa.tech/"
         
         supportEvm = true
         coinSymbol = "DYM"
-        evmRpcURL = "https://jsonrpc.dymension.nodestake.org"
+        evmRpcURL = "https://dymension.drpc.org"
     }
 }

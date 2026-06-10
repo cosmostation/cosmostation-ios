@@ -25,6 +25,6 @@ class ChainCelestia: BaseChain  {
         bechAccountPrefix = "celestia"
         validatorPrefix = "celestiavaloper"
         grpcHost = ""
-        lcdUrl = "https://api.celestia.nodestake.org/"
+        lcdUrl = "https://celestia-mainnet-api.itrocket.net/"
     }
 }
