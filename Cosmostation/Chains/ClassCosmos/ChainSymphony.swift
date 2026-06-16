@@ -25,7 +25,7 @@ class ChainSymphony: BaseChain  {
         bechAccountPrefix = "symphony"
         validatorPrefix = "symphonyvaloper"
         grpcHost = "symphony-grpc.cogwheel.zone:443"
-        lcdUrl = "https://api-m.symphony.vinjan-inc.com/"
+        lcdUrl = "https://symphony-api.cogwheel.zone/"
     }
     
 }
