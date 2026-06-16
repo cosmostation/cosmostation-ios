@@ -1670,6 +1670,8 @@
 		1505030E2E49DF260001415A /* solana.js in Resources */ = {isa = PBXBuildFile; fileRef = 1505030D2E49DF250001415A /* solana.js */; };
 		1505030F2E49DF260001415A /* solana.js in Resources */ = {isa = PBXBuildFile; fileRef = 1505030D2E49DF250001415A /* solana.js */; };
 		150503112E5C7F890001415A /* SolanaJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150503102E5C7F890001415A /* SolanaJS.swift */; };
+		15199C612FE11989006954F0 /* ChainEmpower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15199C602FE11989006954F0 /* ChainEmpower.swift */; };
+		15199C622FE11989006954F0 /* ChainEmpower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15199C602FE11989006954F0 /* ChainEmpower.swift */; };
 		152F4EC12F9F5B4D00B3C280 /* ChainFilecoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F4EC02F9F5B4D00B3C280 /* ChainFilecoin.swift */; };
 		152F4EC22F9F5B4D00B3C280 /* ChainFilecoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F4EC02F9F5B4D00B3C280 /* ChainFilecoin.swift */; };
 		152F4EC42F9F615B00B3C280 /* ChainMantaPacific.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152F4EC32F9F615B00B3C280 /* ChainMantaPacific.swift */; };
@@ -3437,6 +3439,7 @@
 		04FF6B972B21EB74009DCA89 /* RewardDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardDetailCell.xib; sourceTree = "<group>"; };
 		1505030D2E49DF250001415A /* solana.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = solana.js; sourceTree = "<group>"; };
 		150503102E5C7F890001415A /* SolanaJS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolanaJS.swift; sourceTree = "<group>"; };
+		15199C602FE11989006954F0 /* ChainEmpower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainEmpower.swift; sourceTree = "<group>"; };
 		152F4EC02F9F5B4D00B3C280 /* ChainFilecoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFilecoin.swift; sourceTree = "<group>"; };
 		152F4EC32F9F615B00B3C280 /* ChainMantaPacific.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainMantaPacific.swift; sourceTree = "<group>"; };
 		15369FCE2FA3B3690085F997 /* ChainBitBadges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBitBadges.swift; sourceTree = "<group>"; };
@@ -4231,6 +4234,7 @@
 				045032922C1EEFC900235F6A /* ChainDydx.swift */,
 				7981F75B2D0C1CAB00BB50DA /* ChainElys.swift */,
 				045032942C1EEFC900235F6A /* ChainEmoney.swift */,
+				15199C602FE11989006954F0 /* ChainEmpower.swift */,
 				0450329A2C1EEFCA00235F6A /* ChainFetchAi.swift */,
 				045032902C1EEFC900235F6A /* ChainFetchAi60Old.swift */,
 				045032952C1EEFC900235F6A /* ChainFetchAi60Secp.swift */,
@@ -7675,6 +7679,7 @@
 				04C816BF2BA98D75006B800A /* cosmos_counter_v1_tx.pb.swift in Sources */,
 				046EA87C2AD04A2500A2FCE7 /* desmos_profiles_v3_models_profile.pb.swift in Sources */,
 				04C816452BA98D74006B800A /* cosmos_tx_signing_v1beta1_signing.pb.swift in Sources */,
+				15199C622FE11989006954F0 /* ChainEmpower.swift in Sources */,
 				79FCA3DB2C3F9E92001C17D0 /* artela_fee_v1_genesis.pb.swift in Sources */,
 				0450327B2C1EEDCD00235F6A /* ChainBand.swift in Sources */,
 				04C816652BA98D74006B800A /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
@@ -7896,6 +7901,7 @@
 				046EA8EF2AD04A2600A2FCE7 /* desmos_profiles_v3_msg_server.grpc.swift in Sources */,
 				047843A72AC991B300462F1C /* injective_exchange_v1beta1_tx.pb.swift in Sources */,
 				E10B1DE82C215C120039283B /* NeutronSingleDao.swift in Sources */,
+				15199C612FE11989006954F0 /* ChainEmpower.swift in Sources */,
 				79FCA3CE2C3F9E92001C17D0 /* artela_evm_v1_tx.pb.swift in Sources */,
 				04C817BA2BA98D75006B800A /* cosmos_evidence_v1beta1_tx.grpc.swift in Sources */,
 				04806BC52BB06DCA0048F232 /* Cw721Model.swift in Sources */,
