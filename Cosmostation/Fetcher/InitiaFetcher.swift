@@ -62,7 +62,7 @@ class InitiaFetcher: CosmosFetcher {
                 if ($1.description_p.moniker == "Cosmostation") { return false }
                 if ($0.jailed && !$1.jailed) { return false }
                 if (!$0.jailed && $1.jailed) { return true }
-                return Double($0.tokens.filter({$0.denom == chain.stakingAssetDenom()}).first!.amount)! > Double($1.tokens.filter({$0.denom == chain.stakingAssetDenom()}).first!.amount)!
+                return Double($0.tokens.filter({$0.denom == chain.stakingAssetDenom()}).first?.amount ?? "0")! > Double($1.tokens.filter({$0.denom == chain.stakingAssetDenom()}).first?.amount ?? "0")!
             }
             return true
         }
