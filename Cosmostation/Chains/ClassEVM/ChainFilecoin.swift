@@ -22,6 +22,6 @@ class ChainFilecoin: BaseChain {
         
         supportEvm = true
         coinSymbol = "FIL"
-        evmRpcURL = "https://filecoin.chainup.net/rpc/v1"
+        evmRpcURL = "https://api.chain.love/rpc/v1"
     }
 }

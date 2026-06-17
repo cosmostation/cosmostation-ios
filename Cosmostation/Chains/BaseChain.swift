@@ -800,6 +800,7 @@ func ALLCHAINS() -> [BaseChain] {
     result.append(ChainDydx())
     result.append(ChainDymensionEVM())                  //EVM
     result.append(ChainElys())
+    result.append(ChainEmpower())
     result.append(ChainEpixEVM())                       //EVM
     result.append(ChainEthereum())                      //EVM
     result.append(ChainFantom())                        //EVM
