@@ -140,7 +140,7 @@ class SelectValidatorCell: UITableViewCell {
         let stakeDenom = baseChain.stakingAssetDenom()
         if let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
             
-            let vpAmount = NSDecimalNumber(string: validator.tokens.filter({$0.denom == stakeDenom}).first?.amount).multiplying(byPowerOf10: -msAsset.decimals!)
+            let vpAmount = NSDecimalNumber(string: validator.tokens.filter({$0.denom == stakeDenom}).first?.amount ?? "0").multiplying(byPowerOf10: -msAsset.decimals!)
             vpLabel?.attributedText = WDP.dpAmount(vpAmount.stringValue, vpLabel!.font, 0)
             
             let commission = NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
