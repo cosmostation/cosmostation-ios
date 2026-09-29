@@ -523,6 +523,13 @@ extension String {
         return nil
     }
     
+    func suiDpSymbol(_ max: Int = 12) -> String {
+        let trimmed = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        if (trimmed.isEmpty) { return "-" }
+        if (trimmed.count <= max) { return trimmed }
+        return String(trimmed.prefix(max)) + "…"
+    }
+    
     func suiTimestampMs() -> Int {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]

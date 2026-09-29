@@ -238,12 +238,12 @@ class HistoryCell: UITableViewCell {
                 WDP.dpCoin(msAsset, NSDecimalNumber(value: intAmount), nil, denomLabel, amountLabel, msAsset.decimals)
 
             } else if let metaData = suiFetcher.suiCoinMeta[symbol] {
-                denomLabel.text = metaData?.symbol
+                denomLabel.text = (metaData?.symbol ?? "").suiDpSymbol()
                 let dpAmount = NSDecimalNumber(value: intAmount).multiplying(byPowerOf10: -Int16(metaData?.decimals ?? 9), withBehavior: handler18Down)
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
 
             } else {
-                denomLabel.text = symbol.suiCoinSymbol()
+                denomLabel.text = (symbol.suiCoinSymbol() ?? "-").suiDpSymbol()
                 let dpAmount = NSDecimalNumber(value: intAmount).multiplying(byPowerOf10: -9, withBehavior: handler18Down)
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 9)
             }
