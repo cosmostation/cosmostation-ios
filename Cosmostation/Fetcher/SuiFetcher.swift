@@ -400,12 +400,12 @@ extension SuiFetcher {
     }
     
     func fetchHistory(_ address: String, _ after: String?) async throws -> ([JSON], String?) {
-        let variables: [String: Any] = ["addr": address, "first": 50, "after": after ?? NSNull()]
+        let variables: [String: Any] = ["addr": address, "last": 50, "before": after ?? NSNull()]
         let parameters: Parameters = ["query": SUI_HISTORY_QUERY, "variables": variables]
         let response = try await AF.request(chain.mainUrl, method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
 
         let connection = response["data"]["transactions"]
-        let nextCursor = connection["pageInfo"]["hasNextPage"].boolValue ? connection["pageInfo"]["endCursor"].string : nil
+        let nextCursor = connection["pageInfo"]["hasPreviousPage"].boolValue ? connection["pageInfo"]["startCursor"].string : nil
         return (connection["nodes"].arrayValue, nextCursor)
     }
     
