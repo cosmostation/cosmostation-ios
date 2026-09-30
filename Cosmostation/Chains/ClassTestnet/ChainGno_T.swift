@@ -29,6 +29,6 @@ class ChainGno_T: ChainGno {
         lcdUrl = ""
         rpcUrl = "https://rpc.onyx.testnets.gno.land:443"
         
-        gnoIndexerUrl = "https://indexer.pearl.testnets.gno.land/graphql/query"
+        gnoIndexerUrl = "https://indexer.onyx.testnets.gno.land/graphql/query"
     }
 }
