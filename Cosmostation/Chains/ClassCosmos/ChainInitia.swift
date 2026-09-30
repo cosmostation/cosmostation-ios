@@ -20,12 +20,12 @@ class ChainInitia: BaseChain  {
         accountKeyType = AccountKeyType(.INITIA_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uinit"
         bechAccountPrefix = "init"
         validatorPrefix = "initvaloper"
-        grpcHost = ""
-        lcdUrl = "https://rest.initia.xyz/"
+        grpcHost = "grpc-initia.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-initia.mainnet.cosmoslabs.kr/"
     }
     
     override func getCosmosfetcher() -> CosmosFetcher? {

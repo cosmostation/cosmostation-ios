@@ -27,6 +27,7 @@ class CosmosHistoryVC: BaseVC {
     let EVM_BATCH_CNT = 20
 
     var evmHistoryGroup = Array<EvmHistoryGroup>()        //For EVM chain
+    var gnoHistoryGroup = Array<GnoHistoryGroup>()        //For Gno chain
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +67,10 @@ class CosmosHistoryVC: BaseVC {
         
         if selectedChain is ChainOktEVM {
             onFetchOktHistory(selectedChain.evmAddress!, histoyID)
+            
+        } else if selectedChain is ChainGno {
+            onFetchGnoHistory()
+            
         } else {
             if (!selectedChain.isSupportMintscan()) { return }
             onFetchMsHistory(selectedChain.bechAddress, histoyID)
@@ -157,36 +162,55 @@ class CosmosHistoryVC: BaseVC {
         }
     }
     
+    func onFetchGnoHistory() {
+        guard let gnoFetcher = (selectedChain as? ChainGno)?.getGnoFetcher() else { return }
+        Task {
+            await gnoFetcher.fetchGnoHistory()
+
+            DispatchQueue.main.async {
+                self.gnoHistoryGroup.removeAll()
+                gnoFetcher.gnoHistory.forEach { history in
+                    let headerDate = WDP.dpDate(history["time"].string)
+                    if let index = self.gnoHistoryGroup.firstIndex(where: { $0.date == headerDate }) {
+                        self.gnoHistoryGroup[index].values.append(history)
+                    } else {
+                        self.gnoHistoryGroup.append(GnoHistoryGroup.init(headerDate, [history]))
+                    }
+                }
+
+                self.loadingView.isHidden = true
+                self.tableView.isHidden = self.gnoHistoryGroup.isEmpty
+                self.emptyDataView.isHidden = !self.gnoHistoryGroup.isEmpty
+                self.tableView.reloadData()
+                self.refresher.endRefreshing()
+            }
+        }
+    }
+    
 }
 
 
 extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if selectedChain is ChainOktEVM {
-            return evmHistoryGroup.count
-        } else {
-            return msHistoryGroup.count
-        }
+        if selectedChain is ChainOktEVM { return evmHistoryGroup.count }
+        else if selectedChain is ChainGno { return gnoHistoryGroup.count }
+        else { return msHistoryGroup.count }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = BaseHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         let today = WDP.dpDate(Int(Date().timeIntervalSince1970) * 1000)
         if selectedChain is ChainOktEVM {
-            if (evmHistoryGroup[section].date == today) {
-                view.titleLabel.text = "Today"
-            } else {
-                view.titleLabel.text = evmHistoryGroup[section].date
-            }
+            view.titleLabel.text = (evmHistoryGroup[section].date == today) ? "Today" : evmHistoryGroup[section].date
+            view.cntLabel.text = ""
+
+        } else if selectedChain is ChainGno {
+            view.titleLabel.text = (gnoHistoryGroup[section].date == today) ? "Today" : gnoHistoryGroup[section].date
             view.cntLabel.text = ""
 
         } else {
-            if (msHistoryGroup[section].date == today) {
-                view.titleLabel.text = "Today"
-            } else {
-                view.titleLabel.text = msHistoryGroup[section].date
-            }
+            view.titleLabel.text = (msHistoryGroup[section].date == today) ? "Today" : msHistoryGroup[section].date
             view.cntLabel.text = ""
         }
         return view
@@ -205,24 +229,19 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if selectedChain is ChainOktEVM {
-            return evmHistoryGroup[section].values.count
-            
-        } else {
-            return msHistoryGroup[section].values.count
-        }
-        
+        if selectedChain is ChainOktEVM { return evmHistoryGroup[section].values.count }
+        else if selectedChain is ChainGno { return gnoHistoryGroup[section].values.count }
+        else { return msHistoryGroup[section].values.count }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as! HistoryCell
         if selectedChain is ChainOktEVM {
-            let history = evmHistoryGroup[indexPath.section].values[indexPath.row]
-            cell.bindEvmClassHistory(baseAccount, selectedChain, history)
-            
+            cell.bindEvmClassHistory(baseAccount, selectedChain, evmHistoryGroup[indexPath.section].values[indexPath.row])
+        } else if selectedChain is ChainGno {
+            cell.bindGnoHistory(selectedChain, gnoHistoryGroup[indexPath.section].values[indexPath.row])
         } else {
-            let history = msHistoryGroup[indexPath.section].values[indexPath.row]
-            cell.bindCosmosClassHistory(baseAccount, selectedChain, history)
+            cell.bindCosmosClassHistory(baseAccount, selectedChain, msHistoryGroup[indexPath.section].values[indexPath.row])
         }
         return cell
     }
@@ -250,6 +269,8 @@ extension CosmosHistoryVC: UITableViewDelegate, UITableViewDataSource {
         var hash: String?
         if selectedChain is ChainOktEVM {
             hash = evmHistoryGroup[indexPath.section].values[indexPath.row]["txHash"].stringValue
+        } else if selectedChain is ChainGno {
+            hash = gnoHistoryGroup[indexPath.section].values[indexPath.row]["hash"].stringValue
         } else {
             if let cell = tableView.cellForRow(at: indexPath) as? HistoryCell {
                 if (cell.msgsTitleLabel.text == NSLocalizedString("tx_send", comment: "")) {
@@ -273,6 +294,16 @@ struct MintscanHistoryGroup {
     var values = Array<MintscanHistory>()
     
     init(_ date: String!, _ values: Array<MintscanHistory>) {
+        self.date = date
+        self.values = values
+    }
+}
+
+struct GnoHistoryGroup {
+    var date : String!
+    var values = Array<JSON>()
+
+    init(_ date: String!, _ values: Array<JSON>) {
         self.date = date
         self.values = values
     }

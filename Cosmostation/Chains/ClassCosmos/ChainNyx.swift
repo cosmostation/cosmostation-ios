@@ -20,11 +20,11 @@ class ChainNyx: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "unyx"
         bechAccountPrefix = "n"
         validatorPrefix = "nvaloper"
-        grpcHost = "grpc.nymtech.net"
-        lcdUrl = "https://nym-api.polkachu.com/"
+        grpcHost = "grpc-nyx.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-nyx.mainnet.cosmoslabs.kr/"
     }
 }

@@ -26,14 +26,14 @@ class SuiStakingInfoVC: BaseVC {
     var refresher: UIRefreshControl!
     
     var selectedChain: ChainSui!
-    var suiFehcer: SuiFetcher!
+    var suiFetcher: SuiFetcher!
     
     var timer: Timer?
     var epoch: Int64?
     var epochStartTimestampMs: Int64?
     var epochDurationMs: Int64?
-    var stakedList = [(String, JSON)]()
-    var displayStakedList = [(String, JSON)]()
+    var stakedList = [SuiStakeReward]()
+    var displayStakedList = [SuiStakeReward]()
     
     var majorCryptoVC: MajorCryptoVC?
     
@@ -41,7 +41,7 @@ class SuiStakingInfoVC: BaseVC {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
-        suiFehcer = selectedChain.getSuiFetcher()
+        suiFetcher = selectedChain.getSuiFetcher()
         
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
@@ -50,9 +50,9 @@ class SuiStakingInfoVC: BaseVC {
         loadingView.animationSpeed = 1.3
         loadingView.play()
         
-        epoch = suiFehcer.suiSystem["epoch"].int64Value
-        epochStartTimestampMs = suiFehcer.suiSystem["epochStartTimestampMs"].int64Value
-        epochDurationMs = suiFehcer.suiSystem["epochDurationMs"].int64Value
+        epoch = Int64(suiFetcher.suiSystem?.epoch ?? 0)
+        epochStartTimestampMs = Int64(suiFetcher.suiSystem?.systemState.epochStartTimestampMs ?? 0)
+        epochDurationMs = Int64(suiFetcher.suiSystem?.systemState.parameters.epochDurationMs ?? 0)
         epochLable.text = "#" + String(epoch!)
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onUpdateTime), userInfo: nil, repeats: true)
@@ -156,26 +156,22 @@ class SuiStakingInfoVC: BaseVC {
     
     @objc func showInfoSheet() {
         let infoSheet = SuiStakingInfoSheet(nibName: "SuiStakingInfoSheet", bundle: nil)
-        infoSheet.suiFehcer = suiFehcer
+        infoSheet.suiFetcher = suiFetcher
         onStartSheet(infoSheet, 420, 0.7)
     }
     
     func onUpdateView() {
         stakedList.removeAll()
-        suiFehcer.suiStakedList.forEach { suiStaked in
-            suiStaked["stakes"].arrayValue.forEach { stakes in
-                stakedList.append((suiStaked["validatorAddress"].stringValue, stakes))
-            }
-        }
-        
+        stakedList = suiFetcher.suiStakedList
+
         stakedList.sort {
-            return $0.1["stakeRequestEpoch"].uInt64Value > $1.1["stakeRequestEpoch"].uInt64Value
+            return $0.activationEpoch > $1.activationEpoch
         }
         
         if tabbar.selectedItem?.tag == 0 {
-            displayStakedList = stakedList.filter{ $0.1["status"].stringValue != "Pending" }
+            displayStakedList = stakedList.filter { !$0.isPending }
         } else {
-            displayStakedList = stakedList.filter{ $0.1["status"].stringValue == "Pending" }
+            displayStakedList = stakedList.filter { $0.isPending }
         }
         
         refresher.endRefreshing()
@@ -197,7 +193,7 @@ class SuiStakingInfoVC: BaseVC {
             return
         }
         
-        let suiBalance = suiFehcer.balanceAmount(SUI_MAIN_DENOM)
+        let suiBalance = suiFetcher.balanceAmount(SUI_MAIN_DENOM)
         if (suiBalance.compare(SUI_MIN_STAKE.adding(SUI_FEE_STAKE)).rawValue < 0) {
             onShowToast(NSLocalizedString("error_not_enough_sui_stake", comment: ""))
             return
@@ -209,7 +205,7 @@ class SuiStakingInfoVC: BaseVC {
         self.present(suiStake, animated: true)
     }
     
-    func onClickUnStake(_ stake: (String, JSON)) {
+    func onClickUnStake(_ stake: SuiStakeReward) {
         let suiUnstake = SuiUnstake(nibName: "SuiUnstake", bundle: nil)
         suiUnstake.selectedChain = selectedChain
         suiUnstake.fromValidator = stake
@@ -218,7 +214,6 @@ class SuiStakingInfoVC: BaseVC {
     }
     
 }
-
 
 extension SuiStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     
@@ -233,7 +228,7 @@ extension SuiStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if displayStakedList[indexPath.row].1["status"].stringValue == "Pending" {
+        if displayStakedList[indexPath.row].isPending {
             onShowToast(NSLocalizedString("error_pending", comment: ""))
         } else {
             onClickUnStake(displayStakedList[indexPath.row])
@@ -246,11 +241,10 @@ extension SuiStakingInfoVC: MDCTabBarViewDelegate {
     func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
         
         if item.tag == 0 {
-            displayStakedList = stakedList.filter{ $0.1["status"].stringValue != "Pending" }
+            displayStakedList = stakedList.filter { !$0.isPending }
         } else if item.tag == 1 {
-            displayStakedList = stakedList.filter{ $0.1["status"].stringValue == "Pending" }
+            displayStakedList = stakedList.filter { $0.isPending }
         }
-        
         emptyStakeImg.isHidden = !displayStakedList.isEmpty
         
         tableView.reloadData()

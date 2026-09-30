@@ -20,11 +20,11 @@ class ChainKyve: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ukyve"
         bechAccountPrefix = "kyve"
         validatorPrefix = "kyvevaloper"
-        grpcHost = "grpc-kyve.mms.team"
-        lcdUrl = "https://api-eu-1.kyve.network/"
+        grpcHost = "grpc-kyve.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-kyve.mainnet.cosmoslabs.kr/"
     }
 }

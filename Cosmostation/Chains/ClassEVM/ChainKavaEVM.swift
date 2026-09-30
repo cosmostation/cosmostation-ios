@@ -22,12 +22,12 @@ class ChainKavaEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ukava"
         bechAccountPrefix = "kava"
         validatorPrefix = "kavavaloper"
-        grpcHost = "grpc.data.kava.io"
-        lcdUrl = "https://api.data.kava.io/"
+        grpcHost = "grpc-kava.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-kava.mainnet.cosmoslabs.kr/"
         
         
         supportEvm = true

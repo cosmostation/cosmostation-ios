@@ -620,7 +620,7 @@ extension CosmosCryptoVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (selectedChain is ChainGno) {
             if (indexPath.section == 0) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as! AssetCell
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCosmosClassCell") as! AssetCosmosClassCell
                 cell.bindGnoClassAsset(selectedChain, searchNativeCoins[indexPath.row])
                 return cell
                 

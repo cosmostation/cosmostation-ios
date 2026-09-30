@@ -24,7 +24,8 @@ class ChainSui: BaseChain  {
         coinSymbol = "SUI"
         stakeDenom = SUI_MAIN_DENOM
         
-        mainUrl = "https://fullnode.mainnet.sui.io:443"
+        grpcHost = "fullnode.mainnet.sui.io"
+        mainUrl = "https://graphql.mainnet.sui.io/graphql"
     }
     
     override func setInfoWithPrivateKey(_ priKey: Data) {
@@ -112,7 +113,8 @@ class ChainSui: BaseChain  {
             if let msAsset = BaseData.instance.getAsset(apiName, denom) {
                 return msAsset.symbol!
             } else if let metaData = suiFetcher.suiCoinMeta[denom] {
-                return  metaData["symbol"].stringValue
+                return  metaData?.symbol ?? "UnKnown"
+                
             }
         }
         return denom.suiCoinSymbol() ?? "UnKnown"
@@ -123,7 +125,7 @@ class ChainSui: BaseChain  {
             if let msAsset = BaseData.instance.getAsset(apiName, denom) {
                 return msAsset.assetImg()
             } else if let metaData = suiFetcher.suiCoinMeta[denom] {
-                return  metaData.assetImg()
+                return URL(string: metaData?.iconURL ?? "")
             }
         }
         return nil
@@ -134,7 +136,7 @@ class ChainSui: BaseChain  {
             if let msAsset = BaseData.instance.getAsset(apiName, denom) {
                 return msAsset.decimals ?? 9
             } else if let metaData = suiFetcher.suiCoinMeta[denom] {
-                return  metaData["decimals"].int16 ?? 9
+                return Int16(metaData?.decimals ?? 9)
             }
         }
         return 9
@@ -151,9 +153,50 @@ class ChainSui: BaseChain  {
 
 let SUI_TYPE_COIN = "0x2::coin::Coin"
 let SUI_MAIN_DENOM = "0x2::sui::SUI"
+let SUI_STAKED_TYPE = "0x3::staking_pool::StakedSui"
 
 let SUI_MIN_STAKE       = NSDecimalNumber.init(string: "1000000000")
 let SUI_FEE_SEND        = NSDecimalNumber.init(string: "4000000")
 let SUI_FEE_STAKE       = NSDecimalNumber.init(string: "50000000")
 let SUI_FEE_UNSTAKE     = NSDecimalNumber.init(string: "50000000")
 let SUI_FEE_DEFAULT     = NSDecimalNumber.init(string: "70000000")
+
+let SUI_EXCHANGE_RATE_QUERY = """
+query($tableId: SuiAddress!, $epochKey: Base64!) {
+    address(address: $tableId) {
+        dynamicField(name: { type: "u64", bcs: $epochKey }) {
+            value {
+                ... on MoveValue {
+                    json
+                }
+            }
+        }
+    }
+}
+"""
+
+let SUI_HISTORY_QUERY = """
+  query($addr: SuiAddress!, $last: Int!, $before: String) {
+    transactions(last: $last, before: $before, filter: {affectedAddress: $addr}) {
+      pageInfo { hasPreviousPage startCursor }
+      nodes {
+        digest
+        sender { address }
+        effects {
+          checkpoint { sequenceNumber }
+          status
+          timestamp
+          balanceChanges { nodes { owner { address } coinType { repr } amount } }
+          gasEffects { gasSummary { computationCost storageCost storageRebate } }
+        }
+        kind {
+          __typename
+          ... on ProgrammableTransaction {
+            inputs { nodes { __typename ... on MoveValue { type { repr } json } } }
+            commands { nodes { __typename ... on MoveCallCommand { function { name module { name } } } } }
+          }
+        }
+      }
+    }
+  }
+  """

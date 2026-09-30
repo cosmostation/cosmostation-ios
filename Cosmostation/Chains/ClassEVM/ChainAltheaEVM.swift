@@ -20,12 +20,12 @@ class ChainAltheaEVM: BaseChain {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "aalthea"
         bechAccountPrefix = "althea"
         validatorPrefix = "altheavaloper"
-        grpcHost = "grpc.althea.citizenweb3.com"
-        lcdUrl = "https://nodes.chandrastation.com/api/althea/"
+        grpcHost = "grpc-althea.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-althea.mainnet.cosmoslabs.kr/"
         
         supportEvm = true
         coinSymbol = "ALTHEA"

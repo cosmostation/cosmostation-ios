@@ -20,11 +20,11 @@ class ChainBitBadges: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ubadge"
         bechAccountPrefix = "bb"
         validatorPrefix = "bbvaloper"
-        grpcHost = "grpc.bitbadges.io"
-        lcdUrl = "https://lcd.bitbadges.io/"
+        grpcHost = "grpc-bitbadges.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-bitbadges.mainnet.cosmoslabs.kr/"
     }
 }

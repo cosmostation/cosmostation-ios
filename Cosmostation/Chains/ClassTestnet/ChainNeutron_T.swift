@@ -21,14 +21,12 @@ class ChainNeutron_T: ChainNeutron {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "untrn"
         bechAccountPrefix = "neutron"
         validatorPrefix = "neutronvaloper"
         supportStaking = false
-        grpcHost = ""
-        lcdUrl = "https://rest-falcron.pion-1.ntrn.tech/"
-        
-        
+        grpcHost = "grpc-neutron.testnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-neutron.testnet.cosmoslabs.kr/"
     }
 }

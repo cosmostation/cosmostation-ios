@@ -20,12 +20,11 @@ class ChainGitopia: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ulore"
         bechAccountPrefix = "gitopia"
         validatorPrefix = "gitopiavaloper"
-        grpcHost = "gitopia.grpc.liveraven.net:443"
-        lcdUrl = "https://rest.cosmos.directory/gitopia/"
+        grpcHost = "grpc-gitopia.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-gitopia.mainnet.cosmoslabs.kr/"
     }
-    
 }

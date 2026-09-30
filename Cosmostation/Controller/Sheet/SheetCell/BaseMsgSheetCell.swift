@@ -76,6 +76,21 @@ class BaseMsgSheetCell: UITableViewCell {
         
     }
     
+    func onBindNetworkErrorMnemonicAccount(_ position: Int) {
+        if position == 0 {
+            titleLabel.text = NSLocalizedString("str_check_mnemonic", comment: "")
+            descriptionLabel.text = ""
+            
+        } else {
+            titleLabel.text = NSLocalizedString("str_check_each_private_keys", comment: "")
+            descriptionLabel.text = ""
+        }
+    }
+    
+    func onBindNetworkErrorPrivateKeyAccount() {
+        titleLabel.text = NSLocalizedString("str_check_private_key", comment: "")
+        descriptionLabel.text = ""
+    }
     
     func onBindDelegate(_ position: Int) {
         if (position == 0) {

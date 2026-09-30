@@ -20,12 +20,12 @@ class ChainHaqqEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "aISLM"
         bechAccountPrefix = "haqq"
         validatorPrefix = "haqqvaloper"
-        grpcHost = "grpc.haqq.sh"
-        lcdUrl = "https://rest.cosmos.haqq.network/"
+        grpcHost = "grpc-haqq.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-haqq.mainnet.cosmoslabs.kr/"
     
         supportEvm = true
         coinSymbol = "ISLM"

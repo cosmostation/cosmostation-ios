@@ -20,11 +20,11 @@ class ChainJackal: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ujkl"
         bechAccountPrefix = "jkl"
         validatorPrefix = "jklvaloper"
-        grpcHost = ""
-        lcdUrl = "https://jkl.api.m.stavr.tech/"
+        grpcHost = "grpc-jackal.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-jackal.mainnet.cosmoslabs.kr/"
     }
 }

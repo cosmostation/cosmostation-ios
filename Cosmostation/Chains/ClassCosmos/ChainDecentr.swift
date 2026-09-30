@@ -20,12 +20,11 @@ class ChainDecentr: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "udec"
         bechAccountPrefix = "decentr"
         validatorPrefix = "decentrvaloper"
-        grpcHost = ""
-        lcdUrl = "https://api.decentr.chaintools.tech/"
+        grpcHost = "grpc-decentr.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-decentr.mainnet.cosmoslabs.kr/"
     }
-    
 }

@@ -21,12 +21,12 @@ class ChainWardenEVM_T: ChainWardenEVM  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "award"
         bechAccountPrefix = "warden"
         validatorPrefix = "wardenvaloper"
-        grpcHost = "grpc.barra.wardenprotocol."
-        lcdUrl = "https://api.barra.wardenprotocol.org/"
+        grpcHost = "grpc-warden.winnode.xyz"
+        lcdUrl = "https://warden-testnet-api.polkachu.com/"
     
         supportEvm = true
         coinSymbol = "WARD"

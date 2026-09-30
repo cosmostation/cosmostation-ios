@@ -11,6 +11,7 @@ import Foundation
 class ChainGno: BaseChain  {
     
     var gnoFetcher: GnoFetcher?
+    var gnoIndexerUrl = "https://indexer.onbloc.xyz/graphql/query"
     
     override init() {
         super.init()
@@ -22,14 +23,14 @@ class ChainGno: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseRPC
         stakeDenom = "ugnot"
         bechAccountPrefix = "g"
         validatorPrefix = "gvaloper"
         supportStaking = false
         grpcHost = ""
         lcdUrl = ""
-        rpcUrl = ""
+        rpcUrl = "https://rpc.onbloc.xyz:443"
     }
     
     func getGnoFetcher() -> GnoFetcher? {
@@ -108,3 +109,41 @@ class ChainGno: BaseChain  {
     }
     
 }
+
+let GNO_HISTORY_QUERY = """
+query($addr: String!) {
+    getTransactions(where: { _or: [
+        { messages: { value: { BankMsgSend: { from_address: { eq: $addr } } } } },
+        { messages: { value: { BankMsgSend: { to_address: { eq: $addr } } } } },
+        { messages: { value: { MsgCall: { caller: { eq: $addr } } } } },
+        { messages: { value: { MsgAddPackage: { creator: { eq: $addr } } } } },
+        { messages: { value: { MsgRun: { caller: { eq: $addr } } } } }
+    ]}, order: { heightAndIndex: DESC }) {
+        hash
+        block_height
+        success
+        memo
+        gas_fee { denom amount }
+        messages {
+            typeUrl
+            route
+            value {
+                __typename
+                ... on BankMsgSend { from_address to_address amount }
+                ... on MsgCall { caller pkg_path func args }
+                ... on MsgAddPackage { creator package { path } }
+                ... on MsgRun { caller }
+            }
+        }
+    }
+}
+"""
+
+let GNO_BLOCK_TIME_QUERY = """
+query($heights: [FilterBlock!]!) {
+    getBlocks(where: { _or: $heights }) {
+        height
+        time
+    }
+}
+"""

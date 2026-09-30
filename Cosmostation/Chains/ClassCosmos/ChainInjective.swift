@@ -20,12 +20,12 @@ class ChainInjective: BaseChain  {
         accountKeyType = AccountKeyType(.INJECTIVE_Secp256k1, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "inj"
         bechAccountPrefix = "inj"
         validatorPrefix = "injvaloper"
-        grpcHost = "sentry.chain.grpc.injective.network"
-        lcdUrl = "https://injective-rest.publicnode.com/"
+        grpcHost = "grpc-injective.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-injective.mainnet.cosmoslabs.kr/"
         
         supportEvm = true
         coinSymbol = "INJ"

@@ -20,12 +20,11 @@ class ChainCarbon: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "swth"
         bechAccountPrefix = "swth"
         validatorPrefix = "swthvaloper"
-        grpcHost = ""
-        lcdUrl = "https://api.carbon.network/"
+        grpcHost = "grpc-carbon.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-carbon.mainnet.cosmoslabs.kr/"
     }
-    
 }

@@ -20,12 +20,12 @@ class ChainAtomone: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uatone"
         bechAccountPrefix = "atone"
         validatorPrefix = "atonevaloper"
-        grpcHost = "grpc.atomone.citizenweb3.com"
-        lcdUrl = "https://api.atomone.citizenweb3.com/"
+        grpcHost = "grpc-atomone.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-atomone.mainnet.cosmoslabs.kr/"
     }
     
     override func getCosmosfetcher() -> CosmosFetcher? {

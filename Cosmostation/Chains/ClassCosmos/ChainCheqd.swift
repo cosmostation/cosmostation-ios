@@ -20,12 +20,11 @@ class ChainCheqd: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ncheq"
         bechAccountPrefix = "cheqd"
         validatorPrefix = "cheqdvaloper"
-        grpcHost = "grpc.cheqd.net:443"
-        lcdUrl = "https://api.cheqd.net/"
+        grpcHost = "grpc-cheqd.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-cheqd.mainnet.cosmoslabs.kr/"
     }
-    
 }

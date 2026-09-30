@@ -19,20 +19,19 @@ class SuiStakingInfoSheet: BaseVC {
     
     @IBOutlet weak var confirmBtn: BaseButton!
     
-    var suiFehcer: SuiFetcher?
+    var suiFetcher: SuiFetcher?
     var iotaFetcher: IotaFetcher?
-    var epoch: Int64?
+    var epoch: Int64 = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
 
-        if let suiFehcer {
-            epoch = suiFehcer.suiSystem["epoch"].int64Value
+        if let suiFetcher {
+            epoch = Int64(suiFetcher.suiSystem?.epoch ?? 0)
         } else if let iotaFetcher {
             epoch = iotaFetcher.iotaSystem["epoch"].int64Value
-
         }
         titleLabel.text = NSLocalizedString("title_staking_info", comment: "")
         
@@ -41,8 +40,8 @@ class SuiStakingInfoSheet: BaseVC {
         let range = (msgSuiGuide0 as NSString).range(of: NSLocalizedString("epoch_time", comment: ""))
         attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.fontSize14Bold , range: range)
         guideMsg0.attributedText = attributedString
-        guideMsg1.text = String(format: NSLocalizedString("msg_sui_guide_1", comment: ""), "#"+String(epoch!))
-        guideMsg2.text = String(format: NSLocalizedString("msg_sui_guide_2", comment: ""), "#"+String(epoch! + 1))
+        guideMsg1.text = String(format: NSLocalizedString("msg_sui_guide_1", comment: ""), "#"+String(epoch))
+        guideMsg2.text = String(format: NSLocalizedString("msg_sui_guide_2", comment: ""), "#"+String(epoch + 1))
         guideMsg3.text = NSLocalizedString("msg_sui_guide_3", comment: "")
     }
     

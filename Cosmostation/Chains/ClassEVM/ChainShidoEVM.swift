@@ -20,12 +20,12 @@ class ChainShidoEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "shido"
         bechAccountPrefix = "shido"
         validatorPrefix = "shidovaloper"
-        grpcHost = "grpc.mavnode.io"
-        lcdUrl = "https://api.shidoscan.net/"
+        grpcHost = "grpc-shido.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-shido.mainnet.cosmoslabs.kr/"
         
         supportEvm = true
         coinSymbol = "SHIDO"

@@ -20,12 +20,11 @@ class ChainLava: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ulava"
         bechAccountPrefix = "lava@"
         validatorPrefix = "lava@valoper"
-        grpcHost = ""
-        lcdUrl = "https://lava.rest.lava.build/"
+        grpcHost = "grpc-lava.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-lava.mainnet.cosmoslabs.kr/"
     }
-    
 }

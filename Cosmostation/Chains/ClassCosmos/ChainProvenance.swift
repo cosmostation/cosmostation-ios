@@ -20,11 +20,11 @@ class ChainProvenance: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/505'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "nhash"
         bechAccountPrefix = "pb"
         validatorPrefix = "pbvaloper"
-        grpcHost = ""
-        lcdUrl = "https://provenance.api.m.stavr.tech/"
+        grpcHost = "grpc-provenance.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-provenance.mainnet.cosmoslabs.kr/"
     }
 }

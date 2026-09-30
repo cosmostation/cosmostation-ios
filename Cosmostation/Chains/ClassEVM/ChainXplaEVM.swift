@@ -20,12 +20,12 @@ class ChainXplaEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "axpla"
         bechAccountPrefix = "xpla"
         validatorPrefix = "xplavaloper"
-        grpcHost = ""
-        lcdUrl = "https://dimension-lcd.xpla.io/"
+        grpcHost = "grpc-xpla.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-xpla.mainnet.cosmoslabs.kr/"
         
         supportEvm = true
         coinSymbol = "XPLA"

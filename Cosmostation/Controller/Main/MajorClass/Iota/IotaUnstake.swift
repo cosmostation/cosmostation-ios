@@ -42,7 +42,6 @@ class IotaUnstake: BaseVC {
 
     var iotaFetcher: IotaFetcher!
     var iotaFeeBudget = NSDecimalNumber.zero
-    var iotaGasPrice = NSDecimalNumber.zero
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +55,6 @@ class IotaUnstake: BaseVC {
 
         Task {
             iotaFetcher = selectedChain.getIotaFetcher()
-            iotaGasPrice = try await iotaFetcher.fetchGasprice()
             
             DispatchQueue.main.async {
                 self.onInitFee()    // set init fee for set send available

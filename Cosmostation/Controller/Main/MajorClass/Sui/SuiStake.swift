@@ -48,11 +48,10 @@ class SuiStake: BaseVC {
     
     var suiFetcher: SuiFetcher!
     var suiFeeBudget = NSDecimalNumber.zero
-    var suiGasPrice = NSDecimalNumber.zero
     
     var availableAmount = NSDecimalNumber.zero
     var toStakeAmount = NSDecimalNumber.zero
-    var toValidator: JSON!
+    var toValidator: Sui_Rpc_V2_Validator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +70,6 @@ class SuiStake: BaseVC {
         
         Task {
             suiFetcher = selectedChain.getSuiFetcher()
-            suiGasPrice = try await suiFetcher.fetchGasprice()
             
             DispatchQueue.main.async {
                 self.onInitFee()                            // set init fee for set send available
@@ -127,9 +125,10 @@ class SuiStake: BaseVC {
     }
     
     func onUpdateValidatorView() {
-        monikerImg.sd_setImage(with: toValidator.suiValidatorImg(), placeholderImage: UIImage(named: "iconValidatorDefault"))
-        monikerLabel.text = toValidator.suiValidatorName()
-        commLabel?.attributedText = WDP.dpAmount(toValidator.suiValidatorCommission().stringValue, commLabel!.font, 2)
+        monikerImg.sd_setImage(with: URL(string: toValidator.imageURL), placeholderImage: UIImage(named: "iconValidatorDefault"))
+        monikerLabel.text = toValidator.name
+        let commission = NSDecimalNumber(value: toValidator.commissionRate).multiplying(byPowerOf10: -2, withBehavior: handler2Down)
+        commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
         onSimul()
     }
     
@@ -209,18 +208,18 @@ extension SuiStake {
     
     func suiStakeGasCheck() {
         Task {
-            if let txBytes = try await suiFetcher.buildStakingRequest(toStakeAmount.stringValue, toValidator["suiAddress"].stringValue),
+            if let txBytes = try await suiFetcher.buildStakingRequest(toStakeAmount.stringValue, toValidator.address),
                let response = try await suiFetcher.suiDryrun(txBytes) {
-                if let error = response["error"]["message"].string {
+                if (!response.status.success) {
                     DispatchQueue.main.async {
-                        self.onUpdateWithSimul(nil, error)
+                        self.onUpdateWithSimul(nil, response.status.error.description_p)
                     }
                     return
                 }
                 
-                let computationCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["computationCost"].stringValue)
-                let storageCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageCost"].stringValue)
-                let storageRebate = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageRebate"].stringValue)
+                let computationCost = NSDecimalNumber(value: response.gasUsed.computationCost)
+                let storageCost = NSDecimalNumber(value: response.gasUsed.storageCost)
+                let storageRebate = NSDecimalNumber(value: response.gasUsed.storageRebate)
                 
                 var gasCost: UInt64 = 0
                 if (storageCost.compare(storageRebate).rawValue > 0) {
@@ -244,8 +243,8 @@ extension SuiStake {
     func suiStake() {
         Task {
             do {
-                if let txBytes = try await suiFetcher.buildStakingRequest(toStakeAmount.stringValue, toValidator["suiAddress"].stringValue),
-                   let dryRes = try await suiFetcher.suiDryrun(txBytes), dryRes["error"].isEmpty,
+                if let txBytes = try await suiFetcher.buildStakingRequest(toStakeAmount.stringValue, toValidator.address),
+                   let dryRes = try await suiFetcher.suiDryrun(txBytes), dryRes.status.hasError == false,
                    let broadRes = try await suiFetcher.suiExecuteTx(txBytes, Signer.moveSignatures(selectedChain, txBytes), nil) {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
@@ -272,7 +271,7 @@ extension SuiStake: BaseSheetDelegate, AmountSheetDelegate, PinDelegate {
     func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
         if (sheetType == .SelectSuiValidator) {
             if let suiAddress = result["suiAddress"] as? String {
-                toValidator = suiFetcher.suiValidators.filter { $0["suiAddress"].stringValue == suiAddress }.first!
+                toValidator = suiFetcher.suiValidators.filter { $0.address == suiAddress }.first!
                 onUpdateValidatorView()
             }
         }

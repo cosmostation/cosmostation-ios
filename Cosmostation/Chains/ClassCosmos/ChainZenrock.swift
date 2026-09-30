@@ -27,19 +27,4 @@ class ChainZenrock: BaseChain  {
         grpcHost = "grpc.diamond.zenrocklabs.io:443"
         lcdUrl = "https://zenrock.api.m.stavr.tech/"
     }
-    
-    override func getCosmosfetcher() -> CosmosFetcher? {
-        if (cosmosFetcher == nil) {
-            cosmosFetcher = ZenrockFetcher.init(self)
-        }
-        return cosmosFetcher
-    }
-    
-    func getZenrockFetcher() -> ZenrockFetcher? {
-        if (cosmosFetcher == nil) {
-            cosmosFetcher = ZenrockFetcher.init(self)
-        }
-        return cosmosFetcher as? ZenrockFetcher
-    }
-
 }

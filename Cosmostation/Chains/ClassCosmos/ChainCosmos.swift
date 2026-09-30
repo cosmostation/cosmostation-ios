@@ -24,7 +24,7 @@ class ChainCosmos: BaseChain {
         stakeDenom = "uatom"
         bechAccountPrefix = "cosmos"
         validatorPrefix = "cosmosvaloper"
-        grpcHost = "grpc-cosmos.cosmostation.io"
-        lcdUrl = "https://lcd-cosmos.cosmostation.io/"
+        grpcHost = "grpc-cosmos.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-cosmos.mainnet.cosmoslabs.kr/"
     }
 }

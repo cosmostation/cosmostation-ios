@@ -20,12 +20,11 @@ class ChainBeezee: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ubze"
         bechAccountPrefix = "bze"
         validatorPrefix = "bzevaloper"
-        grpcHost = "grpc.getbze.com:9099"
-        lcdUrl = "https://rest.getbze.com/"
+        grpcHost = "grpc-beezee.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-beezee.mainnet.cosmoslabs.kr/"
     }
-    
 }

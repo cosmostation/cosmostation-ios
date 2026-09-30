@@ -360,6 +360,7 @@
 "str_copy_with_box" = "박스영역을 눌러서 복사하실 수 있습니다";
 "str_support_injection" = "인젝션 지원";
 "str_retry" = "재시도";
+"str_view_private_key" = "키 보기";
 "str_change_end_point" = "End-Point 변경";
 "str_current_epoch" = "현재 에포치";
 "str_next_reward_distibution" = "다음 보상 분배";

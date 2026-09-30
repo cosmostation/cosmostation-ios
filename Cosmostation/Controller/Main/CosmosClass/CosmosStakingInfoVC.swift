@@ -32,10 +32,6 @@ class CosmosStakingInfoVC: BaseVC {
     var initiaValidators = [Initia_Mstaking_V1_Validator]()
     var initiaDelegations = [Initia_Mstaking_V1_DelegationResponse]()
     var initiaUnbondings = [InitiaUnbondingEntry]()
-    
-    var zenrockValidators = [Zrchain_Validation_ValidatorHV]()
-    var zenrockDelegations = [Zrchain_Validation_DelegationResponse]()
-    var zenrockUnbondings = [ZenrockUnbondingEntry]()
 
     var cosmosCryptoVC: CosmosCryptoVC?
 
@@ -152,29 +148,6 @@ class CosmosStakingInfoVC: BaseVC {
                     return $0.entry.creationHeight < $1.entry.creationHeight
                 }
                 
-            } else if let zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher() {
-                rewardAddress = zenrockFetcher.rewardAddress
-                zenrockValidators = zenrockFetcher.validators
-                zenrockDelegations = zenrockFetcher.delegations
-                rewards = zenrockFetcher.cosmosRewards
-                zenrockUnbondings.removeAll()
-                
-                zenrockFetcher.unbondings?.forEach { unbonding in
-                    unbonding.entries.forEach { entry in
-                        zenrockUnbondings.append(ZenrockUnbondingEntry.init(validatorAddress: unbonding.validatorAddress, entry: entry))
-                    }
-                }
-                
-                cosmostationValAddress = zenrockValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
-                zenrockDelegations.sort {
-                    if ($0.delegation.validatorAddress == cosmostationValAddress) { return true }
-                    if ($1.delegation.validatorAddress == cosmostationValAddress) { return false }
-                    return Double($0.balance.amount)! > Double($1.balance.amount)!
-                }
-                zenrockUnbondings.sort {
-                    return $0.entry.creationHeight < $1.entry.creationHeight
-                }
-                
             } else if let cosmosFetcher = selectedChain.getCosmosfetcher() {
                 rewardAddress = cosmosFetcher.rewardAddress
                 validators = cosmosFetcher.cosmosValidators
@@ -218,13 +191,6 @@ class CosmosStakingInfoVC: BaseVC {
                 emptyStakeImg.isHidden = true
             }
             
-        } else if selectedChain is ChainZenrock {
-            if (tabbar.selectedItem?.tag == 0 ? zenrockDelegations.count : zenrockUnbondings.count) == 0 {
-                emptyStakeImg.isHidden = false
-            } else {
-                emptyStakeImg.isHidden = true
-            }
-            
         } else {
             if (tabbar.selectedItem?.tag == 0 ? delegations.count : unbondings.count) == 0 {
                 emptyStakeImg.isHidden = false
@@ -252,16 +218,6 @@ class CosmosStakingInfoVC: BaseVC {
             delegate.modalTransitionStyle = .coverVertical
             self.present(delegate, animated: true)
             
-        } else if (selectedChain is ChainZenrock) {
-            let delegate = CosmosDelegate(nibName: "CosmosDelegate", bundle: nil)
-            delegate.selectedChain = selectedChain
-            if (toValAddress != nil) {
-                delegate.toValidatorZenrock = zenrockValidators.filter({ $0.operatorAddress == toValAddress }).first
-            }
-            delegate.modalTransitionStyle = .coverVertical
-            self.present(delegate, animated: true)
-
-            
         } else {
             let delegate = CosmosDelegate(nibName: "CosmosDelegate", bundle: nil)
             delegate.selectedChain = selectedChain
@@ -285,13 +241,6 @@ class CosmosStakingInfoVC: BaseVC {
             undelegate.modalTransitionStyle = .coverVertical
             self.present(undelegate, animated: true)
             
-        } else if (selectedChain is ChainZenrock) {
-            let undelegate = CosmosUndelegate(nibName: "CosmosUndelegate", bundle: nil)
-            undelegate.selectedChain = selectedChain
-            undelegate.fromValidatorZenrock = zenrockValidators.filter({ $0.operatorAddress == fromValAddress }).first
-            undelegate.modalTransitionStyle = .coverVertical
-            self.present(undelegate, animated: true)
-
         } else {
             let undelegate = CosmosUndelegate(nibName: "CosmosUndelegate", bundle: nil)
             undelegate.selectedChain = selectedChain
@@ -313,13 +262,6 @@ class CosmosStakingInfoVC: BaseVC {
             redelegate.modalTransitionStyle = .coverVertical
             self.present(redelegate, animated: true)
             
-        } else if (selectedChain is ChainZenrock) {
-            let redelegate = CosmosRedelegate(nibName: "CosmosRedelegate", bundle: nil)
-            redelegate.selectedChain = selectedChain
-            redelegate.fromValidatorZenrock = zenrockValidators.filter({ $0.operatorAddress == fromValAddress }).first
-            redelegate.modalTransitionStyle = .coverVertical
-            self.present(redelegate, animated: true)
-
         } else {
             let redelegate = CosmosRedelegate(nibName: "CosmosRedelegate", bundle: nil)
             redelegate.selectedChain = selectedChain
@@ -381,13 +323,6 @@ class CosmosStakingInfoVC: BaseVC {
             cancel.modalTransitionStyle = .coverVertical
             self.present(cancel, animated: true)
             
-        } else if (selectedChain is ChainZenrock) {
-            let cancel = CosmosCancelUnbonding(nibName: "CosmosCancelUnbonding", bundle: nil)
-            cancel.selectedChain = selectedChain
-            cancel.unbondingEntryZenrock = zenrockUnbondings[position]
-            cancel.modalTransitionStyle = .coverVertical
-            self.present(cancel, animated: true)
-
         } else {
             let cancel = CosmosCancelUnbonding(nibName: "CosmosCancelUnbonding", bundle: nil)
             cancel.selectedChain = selectedChain
@@ -405,8 +340,6 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         if (tabbar.selectedItem?.tag == 0) {
             if (selectedChain is ChainInitia) {
                 return initiaDelegations.count
-            } else if (selectedChain is ChainZenrock) {
-                return zenrockDelegations.count
             } else {
                 return delegations.count
             }
@@ -414,8 +347,6 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
         } else if (tabbar.selectedItem?.tag == 1) {
             if (selectedChain is ChainInitia) {
                 return initiaUnbondings.count
-            } else if (selectedChain is ChainZenrock) {
-                return zenrockUnbondings.count
             } else {
                 return unbondings.count
             }
@@ -433,15 +364,6 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
                 }
                 return cell
                 
-            } else if selectedChain is ChainZenrock {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"StakeDelegateCell") as! StakeDelegateCell
-                let delegation = zenrockDelegations[indexPath.row]
-                if let validator = zenrockValidators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
-                    cell.onBindZenrockMyDelegate(selectedChain, validator, delegation)
-                }
-                return cell
-
-
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"StakeDelegateCell") as! StakeDelegateCell
                 let delegation = delegations[indexPath.row]
@@ -460,15 +382,6 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
                 }
                 return cell
                 
-            } else if selectedChain is ChainZenrock {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"StakeUnbondingCell") as! StakeUnbondingCell
-                let entry = zenrockUnbondings[indexPath.row]
-                if let validator = zenrockValidators.filter({ $0.operatorAddress == entry.validatorAddress }).first {
-                    cell.onBindZenrockMyUnbonding(selectedChain, validator, entry)
-                }
-                return cell
-                
-
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"StakeUnbondingCell") as! StakeUnbondingCell
                 let entry = unbondings[indexPath.row]
@@ -494,13 +407,6 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
                 baseSheet.sheetType = .SelectInitiaDelegatedAction
                 onStartSheet(baseSheet, 320, 0.6)
                 
-            } else if selectedChain is ChainZenrock {
-                let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
-                baseSheet.sheetDelegate = self
-                baseSheet.zenrockDelegation = zenrockDelegations[indexPath.row]
-                baseSheet.sheetType = .SelectZenrockDelegatedAction
-                onStartSheet(baseSheet, 320, 0.6)
-
             } else {
                 let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
                 baseSheet.sheetDelegate = self
@@ -523,7 +429,7 @@ extension CosmosStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
 extension CosmosStakingInfoVC: BaseSheetDelegate, PinDelegate {
     
     public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if (sheetType == .SelectDelegatedAction || sheetType == .SelectInitiaDelegatedAction || sheetType == .SelectZenrockDelegatedAction) {
+        if (sheetType == .SelectDelegatedAction || sheetType == .SelectInitiaDelegatedAction) {
             if let index = result["index"] as? Int,
                let valAddress = result["validatorAddress"] as? String {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
@@ -560,10 +466,10 @@ extension CosmosStakingInfoVC: MDCTabBarViewDelegate {
     func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
         
         if item.tag == 0 {
-            emptyStakeImg.isHidden = !delegations.isEmpty || !initiaDelegations.isEmpty || !zenrockDelegations.isEmpty
+            emptyStakeImg.isHidden = !delegations.isEmpty || !initiaDelegations.isEmpty
 
         } else if item.tag == 1 {
-            emptyStakeImg.isHidden = !unbondings.isEmpty || !initiaUnbondings.isEmpty || !zenrockUnbondings.isEmpty
+            emptyStakeImg.isHidden = !unbondings.isEmpty || !initiaUnbondings.isEmpty
             
         }
         
@@ -579,9 +485,4 @@ struct UnbondingEntry {
 struct InitiaUnbondingEntry {
     var validatorAddress: String = String()
     var entry: Initia_Mstaking_V1_UnbondingDelegationEntry
-}
-
-struct ZenrockUnbondingEntry {
-    var validatorAddress: String = String()
-    var entry: Zrchain_Validation_UnbondingDelegationEntry
 }

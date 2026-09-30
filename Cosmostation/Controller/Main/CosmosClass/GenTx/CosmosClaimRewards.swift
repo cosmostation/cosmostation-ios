@@ -91,14 +91,6 @@ class CosmosClaimRewards: BaseVC {
                 validatorsLabel.text = initiaFetcher.initiaValidators.filter { $0.operatorAddress == claimableRewards[0].validatorAddress }.first?.description_p.moniker
             }
             
-        } else if let zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher() {
-            let cosmostationValAddress = zenrockFetcher.validators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
-            if (claimableRewards.filter { $0.validatorAddress == cosmostationValAddress }.count > 0) {
-                validatorsLabel.text = "Cosmostation"
-            } else {
-                validatorsLabel.text = zenrockFetcher.validators.filter { $0.operatorAddress == claimableRewards[0].validatorAddress }.first?.description_p.moniker
-            }
-            
         } else if let neutronFetcher = (selectedChain as? ChainNeutron)?.getNeutronFetcher() {
             let stakedValidatorAddress = neutronFetcher.cosmosDelegations
                                             .map{ $0.delegation.validatorAddress }

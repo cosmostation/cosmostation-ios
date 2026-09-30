@@ -24,6 +24,8 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
     var toDeleteAccount: BaseAccount?
     var toCheckAccount: BaseAccount?
     
+    var purpose: AccountListPurpose = .normal
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,7 +66,11 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
             tableView.contentOffset = contentOffset
         }
         tableView.isHidden = false
-        addAccountBtn.isHidden = false
+        if purpose == .normal {
+            addAccountBtn.isHidden = false
+        } else {
+            addAccountBtn.isHidden = true
+        }
     }
     
     override func setLocalizedString() {
@@ -205,6 +211,21 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                     }
                 });
             }
+        } else if sheetType == .SelectOptionNetworkErrorMnemonciAccount {
+            if let index = result["index"] as? Int {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                    if index == 0 {
+                        self.onCheckPinforMnemonic(result["account"] as! BaseAccount)
+                    } else if index == 1 {
+                        self.onCheckPinforPrivateKeys(result["account"] as! BaseAccount)
+                    }
+                });
+            }
+            
+        } else if sheetType == .SelectOptionNetworkErrorPrivateKeyAccount {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                self.onCheckPinforPrivateKey(result["account"] as! BaseAccount)
+            });
         }
     }
     
@@ -241,6 +262,11 @@ class AccountListVC: BaseVC, PinDelegate, BaseSheetDelegate, RenameDelegate, Del
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                     let checkMenmonicVC = CheckMenmonicVC(nibName: "CheckMenmonicVC", bundle: nil)
                     checkMenmonicVC.toCheckAccount = self.toCheckAccount
+                    if self.purpose == .normal {
+                        checkMenmonicVC.purpose = .normal
+                    } else {
+                        checkMenmonicVC.purpose = .viewKey
+                    }
                     self.navigationItem.title = ""
                     self.navigationItem.backButtonTitle = ""
                     self.navigationController?.pushViewController(checkMenmonicVC, animated: true)
@@ -335,14 +361,22 @@ extension AccountListVC: UITableViewDelegate, UITableViewDataSource, UITableView
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
             baseSheet.selectedAccount = searchMnmonicAccounts[indexPath.row]
-            baseSheet.sheetType = .SelectOptionMnemonicAccount
+            if purpose == .normal {
+                baseSheet.sheetType = .SelectOptionMnemonicAccount
+            } else {
+                baseSheet.sheetType = .SelectOptionNetworkErrorMnemonciAccount
+            }
             onStartSheet(baseSheet, 320, 0.6)
             
         } else if (indexPath.section == 1) {
             let baseSheet = BaseSheet(nibName: "BaseSheet", bundle: nil)
             baseSheet.sheetDelegate = self
             baseSheet.selectedAccount = searchPkeyAccounts[indexPath.row]
-            baseSheet.sheetType = .SelectOptionPrivateKeyAccount
+            if purpose == .normal {
+                baseSheet.sheetType = .SelectOptionPrivateKeyAccount
+            } else {
+                baseSheet.sheetType = .SelectOptionNetworkErrorPrivateKeyAccount
+            }
             onStartSheet(baseSheet, 320, 0.6)
         }
     }
@@ -484,3 +518,9 @@ class StringProvider: NSObject, NSItemProviderWriting {
         return Progress(totalUnitCount: 100)
     }
 }
+
+enum AccountListPurpose {
+    case normal
+    case viewKey
+}
+

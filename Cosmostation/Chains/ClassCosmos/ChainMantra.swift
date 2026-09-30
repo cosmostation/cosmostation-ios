@@ -21,11 +21,11 @@ class ChainMantra: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uom"
         bechAccountPrefix = "mantra"
         validatorPrefix = "mantravaloper"
-        grpcHost = "grpc.mantrachain.io"
-        lcdUrl = "https://api.mantrachain.io/"
+        grpcHost = "grpc-mantra.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-mantra.mainnet.cosmoslabs.kr/"
     }
 }

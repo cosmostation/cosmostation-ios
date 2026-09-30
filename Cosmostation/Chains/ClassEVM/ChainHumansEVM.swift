@@ -20,12 +20,12 @@ class ChainHumansEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "aheart"
         bechAccountPrefix = "human"
         validatorPrefix = "humanvaloper"
-        grpcHost = "grpc.humans.nodestake.top"
-        lcdUrl = "https://humans-mainnet-api.itrocket.net/"
+        grpcHost = "grpc-humans.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-humans.mainnet.cosmoslabs.kr/"
         
         supportEvm = true
         coinSymbol = "HEART"

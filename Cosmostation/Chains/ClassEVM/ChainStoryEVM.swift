@@ -21,7 +21,7 @@ class ChainStoryEVM: BaseChain {
         
         
         supportEvm = true
-        coinSymbol = "IP"
-        evmRpcURL = "https://evmrpc.story.nodestake.org"
+        coinSymbol = "DATA"
+        evmRpcURL = "https://mainnet.storyrpc.io"
     }
 }

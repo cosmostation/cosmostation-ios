@@ -20,11 +20,11 @@ class ChainXion: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uxion"
         bechAccountPrefix = "xion"
         validatorPrefix = "xionvaloper"
-        grpcHost = ""
-        lcdUrl = "https://xion-api.polkachu.com/"
+        grpcHost = "grpc-xion.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-xion.mainnet.cosmoslabs.kr/"
     }
 }

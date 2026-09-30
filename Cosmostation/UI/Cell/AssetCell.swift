@@ -164,9 +164,9 @@ class AssetCell: UITableViewCell {
                 WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
                 
             } else if let metaData = suiFetcher.suiCoinMeta[balance.0] {
-                coinImg.sd_setImage(with: metaData.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
-                symbolLabel.text = metaData["symbol"].stringValue
-                let dpAmount = balance.1.multiplying(byPowerOf10: -metaData["decimals"].int16Value, withBehavior: handler18Down)
+                coinImg.sd_setImage(with: URL(string: metaData?.iconURL ?? ""), placeholderImage: UIImage(named: "tokenDefault"))
+                symbolLabel.text = metaData?.symbol
+                let dpAmount = balance.1.multiplying(byPowerOf10: -Int16(metaData?.decimals ?? 9), withBehavior: handler18Down)
                 amountLabel.attributedText = WDP.dpAmount(dpAmount.stringValue, amountLabel!.font, 6)
                 
             } else {
@@ -224,25 +224,6 @@ class AssetCell: UITableViewCell {
         }
     }
 
-    
-    func bindGnoClassAsset(_ baseChain: BaseChain, _ coin: Cosmos_Base_V1beta1_Coin) {
-        if let gnoFether = (baseChain as? ChainGno)?.getGnoFetcher(),
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, coin.denom) {
-            let value = gnoFether.denomValue(coin.denom)
-            WDP.dpCoin(msAsset, coin, coinImg, symbolLabel, amountLabel, 6)
-            WDP.dpPrice(msAsset, priceCurrencyLabel, priceLabel)
-            WDP.dpPriceChanged(msAsset, priceChangeLabel, priceChangePercentLabel)
-            if (BaseData.instance.getHideValue()) {
-                hidenValueLabel.isHidden = false
-            } else {
-                WDP.dpValue(value, valueCurrencyLabel, valueLabel)
-                amountLabel.isHidden = false
-                valueCurrencyLabel.isHidden = false
-                valueLabel.isHidden = false
-            }
-        }
-    }
-    
     func bindGnoClassToken(_ baseChain: BaseChain, _ token: MintscanToken) {
         if let gnoFetcher = (baseChain as? ChainGno)?.getGnoFetcher() {
             let value = gnoFetcher.tokenValue(token.address!)

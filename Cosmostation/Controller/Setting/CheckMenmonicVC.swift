@@ -48,6 +48,8 @@ class CheckMenmonicVC: BaseVC {
     
     var wordLabels: [UILabel] = [UILabel]()
     var toCheckAccount: BaseAccount!
+    
+    var purpose: AccountListPurpose = .normal
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,6 +108,12 @@ class CheckMenmonicVC: BaseVC {
         
         lastPathLabel.text = "Last HD Path : " + toCheckAccount.lastHDPath
         lastPathLabel.isHidden = false
+        
+        if purpose == .normal {
+            createBtn.isHidden = false
+        } else {
+            createBtn.isHidden = true
+        }
     }
     
     @IBAction func onClickCreate(_ sender: UIButton) {

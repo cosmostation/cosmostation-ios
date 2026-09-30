@@ -21,12 +21,12 @@ class ChainAgoric118: ChainAgoric564 {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ubld"
         bechAccountPrefix = "agoric"
         validatorPrefix = "agoricvaloper"
-        grpcHost = ""
-        lcdUrl = "https://agoric-api.polkachu.com/"
+        grpcHost = "grpc-agoric.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-agoric.mainnet.cosmoslabs.kr/"
     }
 }
 

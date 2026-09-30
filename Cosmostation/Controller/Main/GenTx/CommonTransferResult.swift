@@ -48,7 +48,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
     var evmHash: String?
     var evmRecipient: JSON?
     
-    var suiResult: JSON?
+    var suiResult: Sui_Rpc_V2_ExecutedTransaction?
     
     var iotaResult: JSON?
     
@@ -83,10 +83,10 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             fetchEvmTx()
             
         } else if (txStyle == .SUI_STYLE) {
-            if (suiResult?["result"]["effects"]["status"]["status"].stringValue != "success") {
+            if (suiResult?.effects.status.success != true) {
                 loadingView.isHidden = true
                 failView.isHidden = false
-                failMsgLabel.text = suiResult?["result"]["effects"]["status"]["error"].stringValue
+                failMsgLabel.text = suiResult?.effects.status.error.description_p
                 confirmBtn.isEnabled = true
                 return
             }
@@ -174,7 +174,7 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             failExplorerBtn.setTitle("Check in Explorer", for: .normal)
             
         } else if (txStyle == .SUI_STYLE || txStyle == .IOTA_STYLE) {
-            successMsgLabel.text = suiResult?["result"]["digest"].stringValue
+            successMsgLabel.text = suiResult?.digest
             successExplorerBtn.setTitle("Check in Explorer", for: .normal)
             failExplorerBtn.setTitle("Check in Explorer", for: .normal)
             
@@ -251,8 +251,12 @@ class CommonTransferResult: BaseVC, AddressBookDelegate {
             guard let url = fromChain.getExplorerTx(evmHash) else { return }
             self.onShowSafariWeb(url)
             
-        } else if (txStyle == .SUI_STYLE || txStyle == .IOTA_STYLE) {
-            guard let url = fromChain.getExplorerTx(suiResult?["result"]["digest"].stringValue) else { return }
+        } else if (txStyle == .SUI_STYLE) {
+            guard let url = fromChain.getExplorerTx(suiResult?.digest) else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (txStyle == .IOTA_STYLE) {
+            guard let url = fromChain.getExplorerTx(iotaResult?["result"]["digest"].stringValue) else { return }
             self.onShowSafariWeb(url)
             
         } else if (txStyle == .BTC_STYLE) {

@@ -20,11 +20,11 @@ class ChainSunrise: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uvrise"
         bechAccountPrefix = "sunrise"
         validatorPrefix = "sunrisevaloper"
-        grpcHost = "sunrise-grpc.noders.services"
-        lcdUrl = "https://rest.sunrise.tcnetwork.io"
+        grpcHost = "grpc-sunrise.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-sunrise.mainnet.cosmoslabs.kr/"
     }
 }

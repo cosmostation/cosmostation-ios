@@ -360,6 +360,7 @@
 "str_copy_with_box" = "Tap the box for copy";
 "str_support_injection" = "Support Injection";
 "str_retry" = "Retry";
+"str_view_private_key" = "View Private Key";
 "str_change_end_point" = "Change End-Point";
 "str_current_epoch" = "Current Epoch";
 "str_next_reward_distibution" = "Next Reward";

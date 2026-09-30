@@ -48,7 +48,6 @@ class IotaStake: BaseVC {
     
     var iotaFetcher: IotaFetcher!
     var iotaFeeBudget = NSDecimalNumber.zero
-    var iotaGasPrice = NSDecimalNumber.zero
     
     var availableAmount = NSDecimalNumber.zero
     var toStakeAmount = NSDecimalNumber.zero
@@ -71,7 +70,6 @@ class IotaStake: BaseVC {
         
         Task {
             iotaFetcher = selectedChain.getIotaFetcher()
-            iotaGasPrice = try await iotaFetcher.fetchGasprice()
             
             DispatchQueue.main.async {
                 self.onInitFee()                            // set init fee for set send available

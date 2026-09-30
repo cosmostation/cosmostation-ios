@@ -21,12 +21,11 @@ class ChainPersistence750: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/750'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uxprt"
         bechAccountPrefix = "persistence"
         validatorPrefix = "persistencevaloper"
-        grpcHost = ""
-        lcdUrl = "https://rest.core.persistence.one/"
+        grpcHost = "grpc-persistence.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-persistence.mainnet.cosmoslabs.kr/"
     }
-    
 }

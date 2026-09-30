@@ -79,9 +79,6 @@ class AssetCosmosClassCell: UITableViewCell {
         } else if let initiaChain = baseChain as? ChainInitia {
             bindInitia(initiaChain)
             
-        } else if let zenrockChain = baseChain as? ChainZenrock {
-            bindZenrock(zenrockChain)
-            
         } else {
             let stakeDenom = baseChain.stakingAssetDenom()
             if let cosmosFetcher = baseChain.getCosmosfetcher(),
@@ -349,11 +346,10 @@ class AssetCosmosClassCell: UITableViewCell {
         }
     }
     
-    func bindZenrock(_ baseChain: ChainZenrock) {
-        let stakeDenom = baseChain.stakingAssetDenom()
-        if let zenrockFetcher = baseChain.getZenrockFetcher(),
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
-            let value = zenrockFetcher.denomValue(stakeDenom)
+    func bindGnoClassAsset(_ baseChain: BaseChain, _ coin: Cosmos_Base_V1beta1_Coin) {
+        if let gnoFether = (baseChain as? ChainGno)?.getGnoFetcher(),
+           let msAsset = BaseData.instance.getAsset(baseChain.apiName, coin.denom) {
+            let value = gnoFether.denomValue(coin.denom)
             
             coinImg.sd_setImage(with: msAsset.assetImg(), placeholderImage: UIImage(named: "tokenDefault"))
             symbolLabel.text = msAsset.symbol?.uppercased()
@@ -369,52 +365,25 @@ class AssetCosmosClassCell: UITableViewCell {
                 valueLabel.isHidden = false
             }
             
-            let availableAmount = zenrockFetcher.balanceAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+            let availableAmount = gnoFether.balanceAmount(coin.denom).multiplying(byPowerOf10: -msAsset.decimals!)
             availableLabel?.attributedText = WDP.dpAmount(availableAmount.stringValue, availableLabel!.font, 6)
             
-            let vestingAmount = zenrockFetcher.vestingAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
+            let vestingAmount = gnoFether.vestingAmount(coin.denom).multiplying(byPowerOf10: -msAsset.decimals!)
             if (vestingAmount != NSDecimalNumber.zero) {
                 vestingLayer.isHidden = false
                 vestingLabel?.attributedText = WDP.dpAmount(vestingAmount.stringValue, vestingLabel!.font, 6)
             }
             
+            stakingLayer.isHidden = true
+            unstakingLayer.isHidden = true
+            rewardLayer.isHidden = true
             
-            let stakingAmount = zenrockFetcher.zenrockDelegationAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
-            stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
-            
-            let unStakingAmount = zenrockFetcher.zenrockUnbondingAmountSum().multiplying(byPowerOf10: -msAsset.decimals!)
-            unstakingLabel?.attributedText = WDP.dpAmount(unStakingAmount.stringValue, unstakingLabel!.font, 6)
-            
-            let rewardAmount = zenrockFetcher.rewardAmountSum(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-            if (zenrockFetcher.rewardOtherDenomTypeCnts() > 0) {
-                rewardTitle.text = "Reward + " + String(zenrockFetcher.rewardOtherDenomTypeCnts())
-            } else {
-                rewardTitle.text = "Reward"
-            }
-            rewardLabel?.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardLabel!.font, 6)
-            
-            let commissionAmount = zenrockFetcher.commissionAmount(stakeDenom).multiplying(byPowerOf10: -msAsset.decimals!)
-            if (zenrockFetcher.cosmosCommissions.count > 0) {
-                commissionLayer.isHidden = false
-                if (zenrockFetcher.commissionOtherDenoms() > 0) {
-                    commissionTitle.text = "Commission + " + String(zenrockFetcher.commissionOtherDenoms())
-                } else {
-                    commissionTitle.text = "Commission"
-                }
-                commissionLabel?.attributedText = WDP.dpAmount(commissionAmount.stringValue, commissionLabel!.font, 6)
-            }
-            
-            let totalAmount = availableAmount.adding(vestingAmount).adding(stakingAmount)
-                .adding(unStakingAmount).adding(rewardAmount).adding(commissionAmount)
+            let totalAmount = availableAmount.adding(vestingAmount)
             amountLabel?.attributedText = WDP.dpAmount(totalAmount.stringValue, amountLabel!.font, 6)
             
             if (BaseData.instance.getHideValue()) {
                 availableLabel.text = "✱✱✱✱"
                 vestingLabel.text = "✱✱✱✱"
-                stakingLabel.text = "✱✱✱✱"
-                unstakingLabel.text = "✱✱✱✱"
-                rewardLabel.text = "✱✱✱✱"
-                commissionLabel.text = "✱✱✱✱"
             }
         }
     }

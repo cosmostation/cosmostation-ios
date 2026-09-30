@@ -35,16 +35,27 @@ class NftListCell: UICollectionViewCell {
         titleLabel.text = info["name"].stringValue + " #" + nft.tokenId
         titleLabel.adjustsFontSizeToFitWidth = true
     }
+    
+    func onBindSuiNft(_ suiNFT: Sui_Rpc_V2_Object) {
+        if let url = suiNFT.suiNftURL() {
+            nftImageView.sd_setImage(with: url)
+        } else {
+            nftImageView.image = UIImage(named: "imgNftPlaceHolder")
+        }
+        let name = suiNFT.suiNftName()
+        titleLabel.text = !name.isEmpty ? name : suiNFT.objectID
+        titleLabel.adjustsFontSizeToFitWidth = !name.isEmpty
+    }
 
-    func onBindNft(_ suiNFT: JSON) {
-        if let url = suiNFT.suiNftULR() {
+    func onBindNft(_ nft: JSON) {
+        if let url = nft.iotaNftULR() {
             nftImageView.sd_setImage(with: url)
         } else {
             nftImageView.image = UIImage(named: "imgNftPlaceHolder")
         }
         
-        let name = suiNFT["display"]["data"]["name"].stringValue
-        let objectId = suiNFT["objectId"].stringValue
+        let name = nft["display"]["data"]["name"].stringValue
+        let objectId = nft["objectId"].stringValue
 
         titleLabel.text = !name.isEmpty ? name : objectId
         titleLabel.adjustsFontSizeToFitWidth = !name.isEmpty ? true : false

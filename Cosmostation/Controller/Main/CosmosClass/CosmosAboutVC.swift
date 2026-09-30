@@ -81,6 +81,7 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 2 && selectedChain is ChainGno { return .leastNormalMagnitude }
         if (section == 3 && selectedChain.getCosmosfetcher()?.rewardAddress == nil) { return .leastNormalMagnitude }
         if (section == 4) { return .leastNormalMagnitude }
         return 40
@@ -99,6 +100,7 @@ extension CosmosAboutVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 2 && selectedChain is ChainGno { return 0 }
         if (indexPath.section == 3 && selectedChain.getCosmosfetcher()?.rewardAddress == nil) { return 0 }
         return UITableView.automaticDimension
     }

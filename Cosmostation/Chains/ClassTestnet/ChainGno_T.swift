@@ -27,6 +27,8 @@ class ChainGno_T: ChainGno {
         validatorPrefix = "gvaloper"
         grpcHost = ""
         lcdUrl = ""
-        rpcUrl = "https://rpc.test11.testnets.gno.land/"
+        rpcUrl = "https://rpc.onyx.testnets.gno.land:443"
+        
+        gnoIndexerUrl = "https://indexer.onyx.testnets.gno.land/graphql/query"
     }
 }

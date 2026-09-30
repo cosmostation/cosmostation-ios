@@ -20,12 +20,12 @@ class ChainArchway: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "aarch"
         bechAccountPrefix = "archway"
         validatorPrefix = "archwayvaloper"
-        grpcHost = "grpc.mainnet.archway.io"
-        lcdUrl = "https://api.mainnet.archway.io/"
+        grpcHost = "grpc-archway.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-archway.mainnet.cosmoslabs.kr/"
     }
 }
 

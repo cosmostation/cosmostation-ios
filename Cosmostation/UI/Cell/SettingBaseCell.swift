@@ -92,32 +92,6 @@ class SettingBaseCell: UITableViewCell {
         setDetailLabel.text = ""
     }
     
-    func onBindSetHomePage() {
-        setImg.image = UIImage(named: "setHomepage")
-        setTitleLabel.text = NSLocalizedString("setting_homepage_title", comment: "")
-        setDetailLabel.text = ""
-    }
-    
-    
-    
-    func onBindSetTerm() {
-        setImg.image = UIImage(named: "setTerm")
-        setTitleLabel.text = NSLocalizedString("setting_term_title", comment: "")
-        setDetailLabel.text = ""
-    }
-    
-    func onBindSetPrivacy() {
-        setImg.image = UIImage(named: "setPrivacy")
-        setTitleLabel.text = NSLocalizedString("setting_privacy_title", comment: "")
-        setDetailLabel.text = ""
-    }
-    
-    func onBindSetGithub() {
-        setImg.image = UIImage(named: "setGithub")
-        setTitleLabel.text = NSLocalizedString("setting_github_title", comment: "")
-        setDetailLabel.text = ""
-    }
-    
     func onBindSetVersion() {
         setImg.image = UIImage(named: "setVersion")
         setTitleLabel.text = NSLocalizedString("setting_version_title", comment: "")

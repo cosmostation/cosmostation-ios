@@ -175,26 +175,31 @@ class SelectEndpointCell: UITableViewCell {
         if let suiFetcher = (chain as? ChainSui)?.getSuiFetcher() {
             let endpoint = chain.getChainListParam()["rpc_endpoint"].arrayValue[position]
             providerLabel.text = endpoint["provider"].string
-            endpointLabel.text = endpoint["url"].string?.replacingOccurrences(of: "https://", with: "")
+            endpointLabel.text = endpoint["url"].string
             endpointLabel.adjustsFontSizeToFitWidth = true
-            
+
             let checkTime = CFAbsoluteTimeGetCurrent()
-            let url = endpoint["url"].stringValue.hasSuffix("/") ? String(endpoint["url"].stringValue.dropLast()) : endpoint["url"].stringValue
-            
-            if suiFetcher.getSuiRpc().contains(url) {
+            let components = endpoint["url"].stringValue.components(separatedBy: ":")
+            let host = components[0].trimmingCharacters(in: .whitespaces)
+            let port = components.count > 1 ? (Int(components[1].trimmingCharacters(in: .whitespaces)) ?? 443) : 443
+
+            if (suiFetcher.getGrpc().host == host) {
                 seletedImg.isHidden = false
                 rootView.backgroundColor = .color08
             }
-            
-            let param: Parameters = ["method": "sui_getChainIdentifier", "params": [], "id" : 1, "jsonrpc" : "2.0"]
-            AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).response { response in
-                switch response.result {
-                case .success :
+
+            Task {
+                let channel = getConnection(host, port)
+                do {
+                    let req = Sui_Rpc_V2_GetServiceInfoRequest()
+                    _ = try await Sui_Rpc_V2_LedgerServiceNIOClient(channel: channel).getServiceInfo(req, callOptions: getCallOptions()).response.get()
                     self.gapTime = CFAbsoluteTimeGetCurrent() - checkTime
-                    self.configureSpeedLabel()
-                    
-                case .failure:
-                    self.configureClosedNode()
+                    configureSpeedLabel()
+                    _ = channel.close()
+
+                } catch {
+                    _ = channel.close()
+                    configureClosedNode()
                 }
             }
         }

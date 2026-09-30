@@ -20,11 +20,11 @@ class ChainQuicksilver: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uqck"
         bechAccountPrefix = "quick"
         validatorPrefix = "quickvaloper"
-        grpcHost = ""
-        lcdUrl = "https://mainnet-quicksilver-api.konsortech.xyz/"
+        grpcHost = "grpc-quicksilver.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-quicksilver.mainnet.cosmoslabs.kr/"
     }
 }

@@ -22,12 +22,12 @@ class ChainBabylon: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ubbn"
         bechAccountPrefix = "bbn"
         validatorPrefix = "bbnvaloper"
-        grpcHost = "grpc.babylon.validatus.com"
-        lcdUrl = "https://babylon.nodes.guru/api/"
+        grpcHost = "grpc-babylon.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-babylon.mainnet.cosmoslabs.kr/"
     }
     
     override func fetchData(_ id: Int64) {

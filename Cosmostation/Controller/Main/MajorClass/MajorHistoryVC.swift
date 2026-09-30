@@ -89,7 +89,7 @@ class MajorHistoryVC: BaseVC {
         
         if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
             suiFetcher.suiHistory.forEach { history in
-                let date = WDP.dpDate(history["timestampMs"].intValue)
+                let date = WDP.dpDate(history["effects"]["timestamp"].stringValue.suiTimestampMs())
                 var matched = -1
                 for i in 0 ..< historyGroup.count {
                     if (historyGroup[i].date == date) {

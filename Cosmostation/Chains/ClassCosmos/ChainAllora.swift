@@ -20,12 +20,12 @@ class ChainAllora: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uallo"
         bechAccountPrefix = "allo"
         validatorPrefix = "allovaloper"
-        grpcHost = "allora-grpc.mainnet.allora.network"
-        lcdUrl = "https://allora-api.mainnet.allora.network/"
+        grpcHost = "grpc-allora.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-allora.mainnet.cosmoslabs.kr/"
     }
     
 }

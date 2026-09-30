@@ -20,12 +20,12 @@ class ChainZetaEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "azeta"
         bechAccountPrefix = "zeta"
         validatorPrefix = "zetavaloper"
-        grpcHost = ""
-        lcdUrl = "https://zetachain.blockpi.network/lcd/v1/public/"
+        grpcHost = "grpc-zeta.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-zeta.mainnet.cosmoslabs.kr/"
     
         supportEvm = true
         coinSymbol = "ZETA"

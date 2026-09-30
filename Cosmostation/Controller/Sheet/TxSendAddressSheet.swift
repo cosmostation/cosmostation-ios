@@ -274,8 +274,8 @@ class TxSendAddressSheet: BaseVC, UITextViewDelegate, UITextFieldDelegate, QrSca
         setView()
         Task {
             if let suiNs = try await checkSuiNameServce(userInput) {
-                if suiNs["result"] != JSON.null {
-                    nameservices.append(NameService.init("sui", userInput, suiNs["result"].stringValue))
+                if !suiNs.isEmpty {
+                    nameservices.append(NameService.init("sui", userInput, suiNs))
                 }
             }
             showNameServiceSheetOrToast()
@@ -415,10 +415,14 @@ extension TxSendAddressSheet {
         return evmAddress?.address
     }
     
-    func checkSuiNameServce(_ inputName: String) async throws -> JSON? {
+    func checkSuiNameServce(_ inputName: String) async throws -> String? {
         guard let suiFetcher = (fromChain as? ChainSui)?.getSuiFetcher() else { return nil }
-        let parameters: Parameters = ["method": "suix_resolveNameServiceAddress", "params": [inputName] , "id" : 1, "jsonrpc" : "2.0"]
-        return try await AF.request(suiFetcher.getSuiRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
+        
+        let req = Sui_Rpc_V2_LookupNameRequest.with {
+            $0.name = inputName
+        }
+        let response = try await Sui_Rpc_V2_NameServiceNIOClient(channel: suiFetcher.getClient()).lookupName(req, callOptions: suiFetcher.getCallOptions()).response.get()
+        return response.record.targetAddress
     }
     
     func checkIotaNameService(_ inputName: String) async throws -> JSON? {

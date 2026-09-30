@@ -22,7 +22,6 @@ class ChainCronos: BaseChain  {
         
         supportEvm = true
         coinSymbol = "CRO"
-        evmRpcURL = "https://evm.cronos.org"
+        evmRpcURL = "https://cronos.drpc.org"
     }
-    
 }

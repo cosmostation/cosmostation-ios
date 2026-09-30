@@ -38,11 +38,10 @@ class SuiUnstake: BaseVC {
     @IBOutlet weak var loadingView: LottieAnimationView!
     
     var selectedChain: ChainSui!
-    var fromValidator: (String, JSON)!
+    var fromValidator: SuiStakeReward!
 
     var suiFetcher: SuiFetcher!
     var suiFeeBudget = NSDecimalNumber.zero
-    var suiGasPrice = NSDecimalNumber.zero
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +55,6 @@ class SuiUnstake: BaseVC {
 
         Task {
             suiFetcher = selectedChain.getSuiFetcher()
-            suiGasPrice = try await suiFetcher.fetchGasprice()
             
             DispatchQueue.main.async {
                 self.onInitFee()    // set init fee for set send available
@@ -94,18 +92,19 @@ class SuiUnstake: BaseVC {
     }
     
     func onUpdateValidatorView() {
-        if let validator = suiFetcher.suiValidators.filter({ $0["suiAddress"].stringValue == fromValidator.0 }).first {
-            logoImg.sd_setImage(with: validator.suiValidatorImg(), placeholderImage: UIImage(named: "tokenDefault"))
-            nameLabel.text = validator.suiValidatorName()
+        if let validator = suiFetcher.suiValidators.filter({ $0.address == fromValidator.validatorAddress }).first {
+            logoImg.sd_setImage(with: URL(string: validator.imageURL), placeholderImage: UIImage(named: "tokenDefault"))
+            nameLabel.text = validator.name
         }
-        objectIdLabel.text = fromValidator.1["stakedSuiId"].stringValue
-        let principal = NSDecimalNumber(value: fromValidator.1["principal"].uInt64Value).multiplying(byPowerOf10: -9)
-        let estimatedReward = NSDecimalNumber(value: fromValidator.1["estimatedReward"].uInt64Value).multiplying(byPowerOf10: -9)
+        objectIdLabel.text = fromValidator.objectId
+        
+        let principal = NSDecimalNumber(value: fromValidator.principal).multiplying(byPowerOf10: -9)
+        let estimatedReward = NSDecimalNumber(value: fromValidator.estimatedReward).multiplying(byPowerOf10: -9)
         principalLabel?.attributedText = WDP.dpAmount(principal.stringValue, principalLabel!.font, 9)
         estimatedRewardLabel?.attributedText = WDP.dpAmount(estimatedReward.stringValue, principalLabel!.font, 9)
         totalStakedLabel?.attributedText = WDP.dpAmount(estimatedReward.adding(principal).stringValue, totalStakedLabel!.font, 9)
-        startEaringLabel.text = "Epoch #" + fromValidator.1["stakeActiveEpoch"].stringValue
-        
+        startEaringLabel.text = "Epoch #" + String(fromValidator.activationEpoch)
+
         onSimul()
     }
     
@@ -152,18 +151,18 @@ extension SuiUnstake {
     
     func suiUnstakeGasCheck() {
         Task {
-            if let txBytes = try await suiFetcher.buildUnstakingRequest(fromValidator.1["stakedSuiId"].stringValue),
+            if let txBytes = try await suiFetcher.buildUnstakingRequest(fromValidator.objectId),
                let response = try await suiFetcher.suiDryrun(txBytes) {
-                if let error = response["error"]["message"].string {
+                if (!response.status.success) {
                     DispatchQueue.main.async {
-                        self.onUpdateWithSimul(nil, error)
+                        self.onUpdateWithSimul(nil, response.status.error.description_p)
                     }
                     return
                 }
                 
-                let computationCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["computationCost"].stringValue)
-                let storageCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageCost"].stringValue)
-                let storageRebate = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageRebate"].stringValue)
+                let computationCost = NSDecimalNumber(value: response.gasUsed.computationCost)
+                let storageCost = NSDecimalNumber(value: response.gasUsed.storageCost)
+                let storageRebate = NSDecimalNumber(value: response.gasUsed.storageRebate)
                 
                 var gasCost: UInt64 = 0
                 if (storageCost.compare(storageRebate).rawValue > 0) {
@@ -187,8 +186,8 @@ extension SuiUnstake {
     func suiUnstake() {
         Task {
             do {
-                if let txBytes = try await suiFetcher.buildUnstakingRequest(fromValidator.1["stakedSuiId"].stringValue),
-                   let dryRes = try await suiFetcher.suiDryrun(txBytes), dryRes["error"].isEmpty,
+                if let txBytes = try await suiFetcher.buildUnstakingRequest(fromValidator.objectId),
+                   let dryRes = try await suiFetcher.suiDryrun(txBytes), dryRes.status.hasError == false,
                    let broadRes = try await suiFetcher.suiExecuteTx(txBytes, Signer.moveSignatures(selectedChain, txBytes), nil) {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {

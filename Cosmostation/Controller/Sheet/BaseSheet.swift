@@ -57,8 +57,8 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var cdpType: String?
     var earnCoin: Cosmos_Base_V1beta1_Coin?
     
-    var suiValidators = [JSON]()
-    var suiValidatorsSearch = [JSON]()
+    var suiValidators = [Sui_Rpc_V2_Validator]()
+    var suiValidatorsSearch = [Sui_Rpc_V2_Validator]()
     
     var iotaValidators = [JSON]()
     var iotaValidatorsSearch = [JSON]()
@@ -67,11 +67,6 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
     var initiaValidatorsSearch = Array<Initia_Mstaking_V1_Validator>()
     var initiaDelegations = Array<Initia_Mstaking_V1_DelegationResponse>()
     var initiaDelegation: Initia_Mstaking_V1_DelegationResponse!
-    
-    var zenrockValidators = Array<Zrchain_Validation_ValidatorHV>()
-    var zenrockValidatorsSearch = Array<Zrchain_Validation_ValidatorHV>()
-    var zenrockDelegations = Array<Zrchain_Validation_DelegationResponse>()
-    var zenrockDelegation: Zrchain_Validation_DelegationResponse!
     
     var finalityProviders = [FinalityProvider]()
     var finalityProvidersSearch = [FinalityProvider]()
@@ -146,10 +141,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
         if (sheetType == .SelectCreateAccount) {
             sheetTitle.text = NSLocalizedString("title_create_account", comment: "")
             
-        } else if (sheetType == .SelectOptionMnemonicAccount) {
-            sheetTitle.text = NSLocalizedString("title_select_options", comment: "")
-            
-        } else if (sheetType == .SelectOptionPrivateKeyAccount) {
+        } else if (sheetType == .SelectOptionMnemonicAccount || sheetType == .SelectOptionPrivateKeyAccount || sheetType == .SelectOptionNetworkErrorMnemonciAccount || sheetType == .SelectOptionNetworkErrorPrivateKeyAccount) {
             sheetTitle.text = NSLocalizedString("title_select_options", comment: "")
             
         } else if (sheetType == .SwitchAccount) {
@@ -206,9 +198,6 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             
         } else if (sheetType == .SelectSwapSlippage) {
             sheetTitle.text = NSLocalizedString("title_select_slippage", comment: "")
-            
-        } else if (sheetType == .SelectDelegatedAction || sheetType == .SelectUnbondingAction || sheetType == .SelectInitiaDelegatedAction || sheetType == .SelectZenrockDelegatedAction || sheetType == .SelectNeutronDelegatedAction || sheetType == .SelectBtcDelegatedAction || sheetType == .SelectBtcWithdrawAction) {
-            sheetTitle.text = NSLocalizedString("title_select_options", comment: "")
             
         } else if (sheetType == .SelectFeeDenom || sheetType == .SelectBaseFeeDenom) {
             sheetTitle.text = NSLocalizedString("str_select_coin_for_fee", comment: "")
@@ -301,20 +290,6 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
                     initiaValidators.append(validator)
                 }
             }
-        } else if (sheetType == .SelectZenrockValidator) {
-            sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
-            sheetSearchBar.isHidden = false
-            zenrockValidatorsSearch = zenrockValidators
-
-        } else if (sheetType == .SelectZenrockUnStakeValidator) {
-            sheetTitle.text = NSLocalizedString("str_select_validators", comment: "")
-            zenrockDelegations = ((targetChain as? ChainZenrock)?.getZenrockFetcher()!.delegations)!
-            zenrockDelegations.forEach { delegation in
-                if let validator = (targetChain as? ChainZenrock)?.getZenrockFetcher()!.validators.filter({ $0.operatorAddress == delegation.delegation.validatorAddress }).first {
-                    zenrockValidators.append(validator)
-                }
-            }
-            
         } else if (sheetType == .SelectFinalityProvider) {
             sheetTitle.text = "Select Finality Provider"
             sheetSearchBar.isHidden = false
@@ -365,7 +340,7 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             }
         } else if (sheetType == .SelectSuiValidator) {
             suiValidatorsSearch = searchText.isEmpty ? suiValidators : suiValidators.filter { validator in
-                return validator.suiValidatorName().range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                return validator.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
         } else if (sheetType == .SelectIotaValidator) {
             iotaValidatorsSearch = searchText.isEmpty ? iotaValidators : iotaValidators.filter { validator in
@@ -373,10 +348,6 @@ class BaseSheet: BaseVC, UISearchBarDelegate {
             }
         } else if (sheetType == .SelectInitiaValidator) {
             initiaValidatorsSearch = searchText.isEmpty ? initiaValidators : initiaValidators.filter { validator in
-                return validator.description_p.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-            }
-        } else if (sheetType == .SelectZenrockValidator) {
-            zenrockValidatorsSearch = searchText.isEmpty ? zenrockValidators: zenrockValidators.filter { validator in
                 return validator.description_p.moniker.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
         } else if (sheetType == .SelectFinalityProvider) {
@@ -440,6 +411,12 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectOptionPrivateKeyAccount) {
             return 3
+            
+        } else if (sheetType == .SelectOptionNetworkErrorMnemonciAccount) {
+            return 2
+            
+        } else if (sheetType == .SelectOptionNetworkErrorPrivateKeyAccount) {
+            return 1
             
         } else if (sheetType == .SwitchAccount) {
             return BaseData.instance.selectAccounts().count
@@ -538,15 +515,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
         } else if (sheetType == .SelectInitiaUnStakeValidator) {
             return initiaValidators.count
             
-        } else if (sheetType == .SelectZenrockValidator) {
-            return zenrockValidatorsSearch.count
-            
-        } else if (sheetType == .SelectZenrockDelegatedAction) {
-            return 5
-            
-        } else if (sheetType == .SelectZenrockUnStakeValidator) {
-            return zenrockValidators.count
-            
         } else if (sheetType == .SelectFinalityProvider) {
             return finalityProvidersSearch.count
             
@@ -591,7 +559,17 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindPrivateKeyAccount(indexPath.row)
             return cell!
             
-        } else if (sheetType == .SwitchAccount) {
+        } else if (sheetType == .SelectOptionNetworkErrorMnemonciAccount) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
+            cell?.onBindNetworkErrorMnemonicAccount(indexPath.row)
+            return cell!
+            
+        } else if (sheetType == .SelectOptionNetworkErrorPrivateKeyAccount) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
+            cell?.onBindNetworkErrorPrivateKeyAccount()
+            return cell!
+            
+        }  else if (sheetType == .SwitchAccount) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SwitchAccountCell") as? SwitchAccountCell
             cell?.onBindAccount(BaseData.instance.selectAccounts()[indexPath.row])
             return cell!
@@ -752,21 +730,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             cell?.onBindUnstakeValidator(targetChain, initiaValidators[indexPath.row])
             return cell!
             
-        } else if (sheetType == .SelectZenrockValidator) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SelectValidatorCell") as? SelectValidatorCell
-            cell?.onBindValidator(targetChain, zenrockValidatorsSearch[indexPath.row])
-            return cell!
-
-        } else if (sheetType == .SelectZenrockDelegatedAction) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"BaseMsgSheetCell") as? BaseMsgSheetCell
-            cell?.onBindDelegate(indexPath.row)
-            return cell!
-
-        } else if (sheetType == .SelectZenrockUnStakeValidator) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectValidatorCell") as? SelectValidatorCell
-            cell?.onBindUnstakeValidator(targetChain, zenrockValidators[indexPath.row])
-            return cell!
-
         } else if (sheetType == .SelectFinalityProvider) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SelectValidatorCell") as? SelectValidatorCell
             cell?.onBindFinalityProvider(targetChain, finalityProvidersSearch[indexPath.row])
@@ -813,7 +776,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             let result: [String : Any] = ["index" : indexPath.row, "accountId" : BaseData.instance.selectAccounts()[indexPath.row].id]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
-        } else if (sheetType == .SelectOptionMnemonicAccount || sheetType == .SelectOptionPrivateKeyAccount) {
+        } else if (sheetType == .SelectOptionMnemonicAccount || sheetType == .SelectOptionPrivateKeyAccount || sheetType == .SelectOptionNetworkErrorMnemonciAccount || sheetType == .SelectOptionNetworkErrorPrivateKeyAccount) {
             let result: [String : Any] = ["index" : indexPath.row, "account" : selectedAccount]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
@@ -879,7 +842,7 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectSuiValidator) {
-            let result: [String : Any] = ["index" : indexPath.row, "suiAddress" : suiValidatorsSearch[indexPath.row]["suiAddress"].stringValue]
+            let result: [String : Any] = ["index" : indexPath.row, "suiAddress" : suiValidatorsSearch[indexPath.row].address]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectIotaValidator) {
@@ -895,18 +858,6 @@ extension BaseSheet: UITableViewDelegate, UITableViewDataSource {
             
         } else if (sheetType == .SelectInitiaUnStakeValidator) {
             let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : initiaValidators[indexPath.row].operatorAddress]
-            sheetDelegate?.onSelectedSheet(sheetType, result)
-            
-        } else if (sheetType == .SelectZenrockValidator) {
-            let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : zenrockValidatorsSearch[indexPath.row].operatorAddress]
-            sheetDelegate?.onSelectedSheet(sheetType, result)
-
-        } else if (sheetType == .SelectZenrockDelegatedAction) {
-            let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : zenrockDelegation.delegation.validatorAddress]
-            sheetDelegate?.onSelectedSheet(sheetType, result)
-
-        } else if (sheetType == .SelectZenrockUnStakeValidator) {
-            let result: [String : Any] = ["index" : indexPath.row, "validatorAddress" : zenrockValidators[indexPath.row].operatorAddress]
             sheetDelegate?.onSelectedSheet(sheetType, result)
             
         } else if (sheetType == .SelectFinalityProvider) {
@@ -957,6 +908,8 @@ public enum SheetType: Int {
     case SelectCreateAccount = 0
     case SelectOptionMnemonicAccount = 1
     case SelectOptionPrivateKeyAccount = 2
+    case SelectOptionNetworkErrorMnemonciAccount = 3
+    case SelectOptionNetworkErrorPrivateKeyAccount = 4
     
     case SwitchAccount = 11
     case SwitchLanguage = 12
@@ -1001,10 +954,6 @@ public enum SheetType: Int {
     case SelectInitiaValidator = 91
     case SelectInitiaUnStakeValidator = 92
     case SelectInitiaDelegatedAction = 93
-
-    case SelectZenrockValidator = 94
-    case SelectZenrockUnStakeValidator = 95
-    case SelectZenrockDelegatedAction = 96
     
 
     case MoveDropDetail = 100

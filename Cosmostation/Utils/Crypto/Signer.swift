@@ -103,14 +103,6 @@ class Signer {
         return [anyMsg]
     }
     
-    static func genDelegateMsg(_ toDelegate: Zrchain_Validation_MsgDelegate) -> [Google_Protobuf_Any] {
-        let anyMsg = Google_Protobuf_Any.with {
-            $0.typeURL = "/zrchain.validation.MsgDelegate"
-            $0.value = try! toDelegate.serializedData()
-        }
-        return [anyMsg]
-    }
-    
     static func genDelegateMsg(_ toDelegate: Babylon_Epoching_V1_MsgWrappedDelegate) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/babylon.epoching.v1.MsgWrappedDelegate"
@@ -144,14 +136,6 @@ class Signer {
         return [anyMsg]
     }
 
-    static func genUndelegateMsg(_ toUndelegate: Zrchain_Validation_MsgUndelegate) -> [Google_Protobuf_Any] {
-        let anyMsg = Google_Protobuf_Any.with {
-            $0.typeURL = "/zrchain.validation.MsgUndelegate"
-            $0.value = try! toUndelegate.serializedData()
-        }
-        return [anyMsg]
-    }
-
     static func genUndelegateMsg(_ toUndelegate: Babylon_Epoching_V1_MsgWrappedUndelegate) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/babylon.epoching.v1.MsgWrappedUndelegate"
@@ -172,14 +156,6 @@ class Signer {
     static func genCancelUnbondingMsg(_ toCancel: Initia_Mstaking_V1_MsgCancelUnbondingDelegation) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/initia.mstaking.v1.MsgCancelUnbondingDelegation"
-            $0.value = try! toCancel.serializedData()
-        }
-        return [anyMsg]
-    }
-
-    static func genCancelUnbondingMsg(_ toCancel: Zrchain_Validation_MsgCancelUnbondingDelegation) -> [Google_Protobuf_Any] {
-        let anyMsg = Google_Protobuf_Any.with {
-            $0.typeURL = "/zrchain.validation.MsgCancelUnbondingDelegation"
             $0.value = try! toCancel.serializedData()
         }
         return [anyMsg]
@@ -205,14 +181,6 @@ class Signer {
     static func genRedelegateMsg(_ toRedelegate: Initia_Mstaking_V1_MsgBeginRedelegate) -> [Google_Protobuf_Any] {
         let anyMsg = Google_Protobuf_Any.with {
             $0.typeURL = "/initia.mstaking.v1.MsgBeginRedelegate"
-            $0.value = try! toRedelegate.serializedData()
-        }
-        return [anyMsg]
-    }
-    
-    static func genRedelegateMsg(_ toRedelegate: Zrchain_Validation_MsgBeginRedelegate) -> [Google_Protobuf_Any] {
-        let anyMsg = Google_Protobuf_Any.with {
-            $0.typeURL = "/zrchain.validation.MsgBeginRedelegate"
             $0.value = try! toRedelegate.serializedData()
         }
         return [anyMsg]
@@ -363,40 +331,6 @@ class Signer {
             }
             let deleAnyMsg = Google_Protobuf_Any.with {
                 $0.typeURL = "/initia.mstaking.v1.MsgDelegate"
-                $0.value = try! deleMsg.serializedData()
-            }
-            anyMsgs.append(deleAnyMsg)
-        }
-        return anyMsgs
-    }
-    
-    static func genZenrockCompoundingMsg(_ address: String,
-                                        _ rewards: [Cosmos_Distribution_V1beta1_DelegationDelegatorReward],
-                                        _ stakingDenom: String) -> [Google_Protobuf_Any] {
-        var anyMsgs = [Google_Protobuf_Any]()
-        rewards.forEach { reward in
-            let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
-                $0.delegatorAddress = address
-                $0.validatorAddress = reward.validatorAddress
-            }
-            let anyMsg = Google_Protobuf_Any.with {
-                $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
-                $0.value = try! claimMsg.serializedData()
-            }
-            anyMsgs.append(anyMsg)
-            
-            let rewardCoin = reward.reward.filter({ $0.denom == stakingDenom }).first
-            let deleCoin = Cosmos_Base_V1beta1_Coin.with {
-                $0.denom = rewardCoin!.denom
-                $0.amount = NSDecimalNumber.init(string: rewardCoin!.amount).multiplying(byPowerOf10: -18, withBehavior: handler0Down).stringValue
-            }
-            let deleMsg = Zrchain_Validation_MsgDelegate.with {
-                $0.delegatorAddress = address
-                $0.validatorAddress = reward.validatorAddress
-                $0.amount = deleCoin
-            }
-            let deleAnyMsg = Google_Protobuf_Any.with {
-                $0.typeURL = "/zrchain.validation.MsgDelegate"
                 $0.value = try! deleMsg.serializedData()
             }
             anyMsgs.append(deleAnyMsg)

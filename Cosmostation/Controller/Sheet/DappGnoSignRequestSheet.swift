@@ -136,8 +136,8 @@ class DappGnoSignRequestSheet: BaseVC {
         confirmBtn.isEnabled = true
         
         feeImg.sd_setImage(with: selectedChain.assetImgUrl(selectedChain.gasAssetDenom()!), placeholderImage: UIImage(named: "tokenDefault"))
-        feeLabel.text = selectedChain.stakingAssetSymbol()
-        feeDenomLabel.text = selectedChain.stakingAssetSymbol()
+        feeLabel.text = selectedChain.mainAssetSymbol()
+        feeDenomLabel.text = selectedChain.mainAssetSymbol()
         onUpdateFeeView(gasUsed)
     }
     

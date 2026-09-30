@@ -500,7 +500,7 @@ extension BabylonStakingInfoVC: UITableViewDelegate, UITableViewDataSource {
 
 extension BabylonStakingInfoVC: BaseSheetDelegate, PinDelegate {
     public func onSelectedSheet(_ sheetType: SheetType?, _ result: Dictionary<String, Any>) {
-        if (sheetType == .SelectDelegatedAction || sheetType == .SelectInitiaDelegatedAction || sheetType == .SelectZenrockDelegatedAction) {
+        if (sheetType == .SelectDelegatedAction || sheetType == .SelectInitiaDelegatedAction) {
             if let index = result["index"] as? Int,
                let valAddress = result["validatorAddress"] as? String {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {

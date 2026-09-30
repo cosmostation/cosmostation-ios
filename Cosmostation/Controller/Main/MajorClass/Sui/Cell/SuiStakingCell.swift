@@ -33,25 +33,25 @@ class SuiStakingCell: UITableViewCell {
         pendingTag.isHidden = true
     }
     
-    func onBindMyStake(_ baseChain: ChainSui, _ stake: (String, JSON)) {
+    func onBindMyStake(_ baseChain: ChainSui, _ stake: SuiStakeReward) {
         if let suiFetcher = baseChain.suiFetcher {
-            if let validator = suiFetcher.suiValidators.filter({ $0["suiAddress"].stringValue == stake.0 }).first {
-                logoImg.sd_setImage(with: validator.suiValidatorImg(), placeholderImage: UIImage(named: "iconValidatorDefault"))
-                nameLabel.text = validator.suiValidatorName()
+            if let validator = suiFetcher.suiValidators.filter({ $0.address == stake.validatorAddress }).first {
+                logoImg.sd_setImage(with: URL(string: validator.imageURL), placeholderImage: UIImage(named: "iconValidatorDefault"))
+                nameLabel.text = validator.name
             }
         }
         
-        if (stake.1["status"].stringValue == "Pending") {
+        if (stake.isPending) {
             pendingTag.isHidden = false
         }
-        objectIdLabel.text = stake.1["stakedSuiId"].stringValue
+        objectIdLabel.text = stake.objectId
         
-        let principal = NSDecimalNumber(value: stake.1["principal"].uInt64Value).multiplying(byPowerOf10: -9)
-        let estimatedReward = NSDecimalNumber(value: stake.1["estimatedReward"].uInt64Value).multiplying(byPowerOf10: -9)
+        let principal = NSDecimalNumber(value: stake.principal).multiplying(byPowerOf10: -9)
+        let estimatedReward = NSDecimalNumber(value: stake.estimatedReward).multiplying(byPowerOf10: -9)
         principalLabel?.attributedText = WDP.dpAmount(principal.stringValue, principalLabel!.font, 9)
         estimatedRewardLabel?.attributedText = WDP.dpAmount(estimatedReward.stringValue, estimatedRewardLabel!.font, 9)
         totalStakedLabel?.attributedText = WDP.dpAmount(estimatedReward.adding(principal).stringValue, totalStakedLabel!.font, 9)
-        startEaringLabel.text = "Epoch #" + stake.1["stakeActiveEpoch"].stringValue
+        startEaringLabel.text = "Epoch #" + String(stake.activationEpoch)
     }
     
     func onBindMyStake(_ baseChain: ChainIota, _ stake: (String, JSON)) {

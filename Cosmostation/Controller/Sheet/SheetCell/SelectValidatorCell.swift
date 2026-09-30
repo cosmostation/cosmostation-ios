@@ -103,11 +103,13 @@ class SelectValidatorCell: UITableViewCell {
     }
     
     
-    func onBindSuiValidator(_ baseChain: BaseChain, _ validator: JSON) {
-        logoImg.sd_setImage(with: validator.suiValidatorImg(), placeholderImage: UIImage(named: "iconValidatorDefault"))
-        nameLabel.text = validator.suiValidatorName()
-        vpLabel?.attributedText = WDP.dpAmount(validator.suiValidatorVp().stringValue, vpLabel!.font, 0)
-        commLabel?.attributedText = WDP.dpAmount(validator.suiValidatorCommission().stringValue, commLabel!.font, 2)
+    func onBindSuiValidator(_ baseChain: BaseChain, _ validator: Sui_Rpc_V2_Validator) {
+        logoImg.sd_setImage(with: URL(string: validator.imageURL), placeholderImage: UIImage(named: "iconValidatorDefault"))
+        nameLabel.text = validator.name
+        let vp = NSDecimalNumber(value: validator.stakingPool.suiBalance).multiplying(byPowerOf10: -9, withBehavior: handler0Down)
+        vpLabel?.attributedText = WDP.dpAmount(vp.stringValue, vpLabel!.font, 0)
+        let commission = NSDecimalNumber(value: validator.commissionRate).multiplying(byPowerOf10: -2, withBehavior: handler2Down)
+        commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
         
         vpTitle.isHidden = false
         vpLabel.isHidden = false
@@ -170,53 +172,6 @@ class SelectValidatorCell: UITableViewCell {
         if let delegations = (baseChain as? ChainInitia)?.getInitiaFetcher()?.initiaDelegations,
            let msAsset = BaseData.instance.getAsset(baseChain.apiName, stakeDenom) {
             let staked = delegations.filter { $0.delegation.validatorAddress == validator.operatorAddress }.first?.balance.filter({ $0.denom == stakeDenom }).first?.amount
-            let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
-            stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
-        }
-        
-        stakingTitle.isHidden = false
-        stakingLabel.isHidden = false
-    }
-    
-    func onBindValidator(_ baseChain: BaseChain, _ validator: Zrchain_Validation_ValidatorHV) {
-        
-        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
-        nameLabel.text = validator.description_p.moniker
-        if (validator.jailed) {
-            jailedTag.isHidden = false
-        }
-        
-        if let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.stakingAssetDenom()) {
-            
-            let vpAmount = NSDecimalNumber(string: validator.tokensNative).multiplying(byPowerOf10: -msAsset.decimals!)
-            vpLabel?.attributedText = WDP.dpAmount(vpAmount.stringValue, vpLabel!.font, 0)
-            
-            let commission = NSDecimalNumber(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -16)
-            commLabel?.attributedText = WDP.dpAmount(commission.stringValue, commLabel!.font, 2)
-        }
-        
-        vpTitle.isHidden = false
-        vpLabel.isHidden = false
-        
-        commTitle.isHidden = false
-        commLabel.isHidden = false
-        commPercentLabel.isHidden = false
-    }
-    
-    func onBindUnstakeValidator(_ baseChain: BaseChain, _ validator: Zrchain_Validation_ValidatorHV) {
-        
-        logoImg.setMonikerImg(baseChain, validator.operatorAddress)
-        nameLabel.text = validator.description_p.moniker
-        if (validator.jailed) {
-            jailedTag.isHidden = false
-        } else {
-            guard let zenrockFetcher = (baseChain as? ChainZenrock)?.getZenrockFetcher() else { return }
-            inactiveTag.isHidden = zenrockFetcher.isActiveValidator(validator)
-        }
-        
-        if let delegations = (baseChain as? ChainZenrock)?.getZenrockFetcher()?.delegations,
-           let msAsset = BaseData.instance.getAsset(baseChain.apiName, baseChain.stakingAssetDenom()) {
-            let staked = delegations.filter { $0.delegation.validatorAddress == validator.operatorAddress }.first?.balance.amount
             let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
             stakingLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakingLabel!.font, 6)
         }

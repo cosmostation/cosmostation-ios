@@ -20,11 +20,11 @@ class ChainBitway: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ubtw"
         bechAccountPrefix = "bc"
         validatorPrefix = "bcvaloper"
-        grpcHost = "grpc.bitway.com:443"
-        lcdUrl = "https://rest.bitway.com/"
+        grpcHost = "grpc-bitway.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-bitway.mainnet.cosmoslabs.kr/"
     }
 }

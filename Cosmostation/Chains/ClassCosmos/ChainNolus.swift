@@ -20,12 +20,12 @@ class ChainNolus: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "unls"
         bechAccountPrefix = "nolus"
         validatorPrefix = "nolusvaloper"
-        grpcHost = "grpc.nolus.network:443"
-        lcdUrl = "https://lcd.nolus.network/"
+        grpcHost = "grpc-nolus.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-nolus.mainnet.cosmoslabs.kr/"
     }
 }
 

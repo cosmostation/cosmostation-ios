@@ -20,11 +20,11 @@ class ChainCelestia: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "utia"
         bechAccountPrefix = "celestia"
         validatorPrefix = "celestiavaloper"
-        grpcHost = ""
-        lcdUrl = "https://celestia-mainnet-api.itrocket.net/"
+        grpcHost = "grpc-celestia.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-celestia.mainnet.cosmoslabs.kr/"
     }
 }

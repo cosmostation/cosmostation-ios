@@ -20,12 +20,11 @@ class ChainDoraVota: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "peaka"
         bechAccountPrefix = "dora"
         validatorPrefix = "doravaloper"
-        grpcHost = "vota-grpc.dorafactory.org"
-        lcdUrl = "https://vota-rest.dorafactory.org"
+        grpcHost = "grpc-dora.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-dora.mainnet.cosmoslabs.kr/"
     }
-    
 }

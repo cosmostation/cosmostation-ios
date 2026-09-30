@@ -20,12 +20,11 @@ class ChainChihuahua: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uhuahua"
         bechAccountPrefix = "chihuahua"
         validatorPrefix = "chihuahuavaloper"
-        grpcHost = "grpc.chihuahua.validatus.com"
-        lcdUrl = "https://chihuahua-api.polkachu.com/"
+        grpcHost = "grpc-chihuahua.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-chihuahua.mainnet.cosmoslabs.kr/"
     }
-    
 }

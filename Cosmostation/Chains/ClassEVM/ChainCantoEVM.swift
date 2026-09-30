@@ -20,12 +20,12 @@ class ChainCantoEVM: BaseChain  {
         accountKeyType = AccountKeyType(.ETH_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "acanto"
         bechAccountPrefix = "canto"
         validatorPrefix = "cantovaloper"
-        grpcHost = ""
-        lcdUrl = "https://canto-api.polkachu.com/"
+        grpcHost = "grpc-canto.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-canto.mainnet.cosmoslabs.kr/"
         
         supportEvm = true
         coinSymbol = "CANTO"

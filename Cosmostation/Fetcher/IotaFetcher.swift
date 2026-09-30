@@ -326,14 +326,6 @@ extension IotaFetcher {
         return try await AF.request(getIotaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
     }
     
-    func fetchGasprice() async throws -> NSDecimalNumber {
-        let parameters: Parameters = ["method": "iotax_getReferenceGasPrice", "params": [], "id" : 1, "jsonrpc" : "2.0"]
-        if let price = try await AF.request(getIotaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"].string {
-            return NSDecimalNumber.init(string: price)
-        }
-        return NSDecimalNumber.zero
-    }
-    
     func fetchAPYs() async throws -> [JSON]?  {
         let parameters: Parameters = ["method": "iotax_getValidatorsApy", "params": [], "id" : 1, "jsonrpc" : "2.0"]
         return try await AF.request(getIotaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value["result"]["apys"].array
@@ -401,17 +393,6 @@ extension IotaFetcher {
             return try await AF.request(getIotaRpc(), method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingDecodable(JSON.self).value
         }
     }
-    
-    func signAfterAction(params:JSON, messageId: JSON) async throws -> String? { //
-        let url = "https://us-central1-splash-wallet-60bd6.cloudfunctions.net/buildIotaTransaction"
-        let parameters = [
-            "rpc": getIotaRpc(),
-            "txBlock": params["transactionBlockSerialized"].stringValue,
-            "address": params["transactionBlockSerialized"]["sender"].string ?? chain.mainAddress
-        ]
-        guard let value = await AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).serializingData().response.value else { return nil }
-        return String(data: value, encoding: .utf8)
-    }
 }
 
 
@@ -454,6 +435,10 @@ extension String {
 
 
 extension JSON {
+    func assetImg() -> URL? {
+        return URL(string: self["iconUrl"].stringValue)
+    }
+
     func iotaValidatorImg() -> URL? {
         if let imageUrl = self["imageUrl"].string,
             imageUrl.isEmpty == false {

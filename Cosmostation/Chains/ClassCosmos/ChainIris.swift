@@ -20,12 +20,12 @@ class ChainIris: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uiris"
         bechAccountPrefix = "iaa"
         validatorPrefix = "iva"
-        grpcHost = ""
-        lcdUrl = "https://mainnet-iris-api.konsortech.xyz/"
+        grpcHost = "grpc-iris.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-iris.mainnet.cosmoslabs.kr/"
     }
 }
 

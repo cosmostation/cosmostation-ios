@@ -71,15 +71,13 @@ class NftTransfer: BaseVC {
     var cosmosTxTip: Cosmos_Tx_V1beta1_Tip?
     
     
-    var toSendSuiNFT: JSON!
+    var toSendSuiNFT: Sui_Rpc_V2_Object!
     var suiFetcher: SuiFetcher!
     var suiFeeBudget = NSDecimalNumber.zero
-    var suiGasPrice = NSDecimalNumber.zero
     
     var toSendIotaNFT: JSON!
     var iotaFetcher: IotaFetcher!
     var iotaFeeBudget = NSDecimalNumber.zero
-    var iotaGasPrice = NSDecimalNumber.zero
 
 
     override func viewDidLoad() {
@@ -109,13 +107,11 @@ class NftTransfer: BaseVC {
                 sendType = .SUI_NFT
                 txStyle = .SUI_STYLE
                 suiFetcher = suiChain.getSuiFetcher()
-                suiGasPrice = try await suiFetcher.fetchGasprice()
                 
             } else if let iotaChain = fromChain as? ChainIota {
                 sendType = .IOTA_NFT
                 txStyle = .IOTA_STYLE
                 iotaFetcher = iotaChain.getIotaFetcher()
-                iotaGasPrice = try await iotaFetcher.fetchGasprice()
             }
             
             DispatchQueue.main.async {
@@ -146,11 +142,11 @@ class NftTransfer: BaseVC {
     
     func onInitNft() {
         if (txStyle == .SUI_STYLE) {
-            if let url = toSendSuiNFT.suiNftULR() {
+            if let url = toSendSuiNFT.suiNftURL() {
                 toSendNftImage.sd_setImage(with: url, placeholderImage: UIImage(named: "imgNftPlaceHolder"))
             }
-            toSendNftName.text = toSendSuiNFT["display"]["data"]["name"].stringValue
-            toSendNftCollectionName.text = toSendSuiNFT["objectId"].stringValue
+            toSendNftName.text = toSendSuiNFT.suiNftName()
+            toSendNftCollectionName.text = toSendSuiNFT.objectID
             
         } else if (txStyle == .IOTA_STYLE) {
             if let url = toSendIotaNFT.iotaNftULR() {
@@ -429,18 +425,18 @@ extension NftTransfer {
     
     func suiNftSendGasCheck() {
         Task {
-            if let txBytes = try await suiFetcher.unsafeTransferObject(fromChain.mainAddress, toSendSuiNFT["objectId"].stringValue, suiFeeBudget.stringValue, toAddress),
+            if let txBytes = try await suiFetcher.buildSendNftRequest(toAddress, toSendSuiNFT),
                let response = try await suiFetcher.suiDryrun(txBytes) {
-                if let error = response["error"]["message"].string {
+                if (!response.status.success) {
                     DispatchQueue.main.async {
-                        self.onUpdateWithSimul(nil, error)
+                        self.onUpdateWithSimul(nil, response.status.error.description_p)
                     }
                     return
                 }
                 
-                let computationCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["computationCost"].stringValue)
-                let storageCost = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageCost"].stringValue)
-                let storageRebate = NSDecimalNumber(string: response["result"]["effects"]["gasUsed"]["storageRebate"].stringValue)
+                let computationCost = NSDecimalNumber(value: response.gasUsed.computationCost)
+                let storageCost = NSDecimalNumber(value: response.gasUsed.storageCost)
+                let storageRebate = NSDecimalNumber(value: response.gasUsed.storageRebate)
                 
                 var gasCost: UInt64 = 0
                 if (storageCost.compare(storageRebate).rawValue > 0) {
@@ -448,6 +444,7 @@ extension NftTransfer {
                 } else {
                     gasCost = computationCost.multiplying(by: NSDecimalNumber(string: "1.3") , withBehavior: handler0Down).uint64Value
                 }
+                
                 DispatchQueue.main.async {
                     self.onUpdateWithSimul(gasCost)
                 }
@@ -463,8 +460,8 @@ extension NftTransfer {
     func suiNftSend() {
         Task {
             do {
-                if let txBytes = try await suiFetcher.unsafeTransferObject(fromChain.mainAddress, toSendSuiNFT["objectId"].stringValue, suiFeeBudget.stringValue, toAddress),
-                   let dryRes = try await suiFetcher.suiDryrun(txBytes), dryRes["error"].isEmpty,
+                if let txBytes = try await suiFetcher.buildSendNftRequest(toAddress, toSendSuiNFT),
+                   let dryRes = try await suiFetcher.suiDryrun(txBytes), dryRes.status.hasError == false,
                    let broadRes = try await suiFetcher.suiExecuteTx(txBytes, Signer.moveSignatures(fromChain, txBytes), nil) {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {

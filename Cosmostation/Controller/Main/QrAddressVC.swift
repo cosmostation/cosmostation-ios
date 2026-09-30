@@ -54,18 +54,6 @@ class QrAddressVC: BaseVC {
         tableView.register(UINib(nibName: "PopupReceiveCell", bundle: nil), forCellReuseIdentifier: "PopupReceiveCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderTopPadding = 0.0
-        
-        setFooterView()
-    }
-    
-    func setFooterView() {
-        let footerLabel = UILabel()
-        footerLabel.text = "Powered by COSMOSTATION"
-        footerLabel.textColor = .color04
-        footerLabel.font = .fontSize11Medium
-        footerLabel.textAlignment = .center
-        footerLabel.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50)
-        tableView.tableFooterView = footerLabel
     }
     
     @IBAction func onClickEvmShare(_ sender: BaseButton) {

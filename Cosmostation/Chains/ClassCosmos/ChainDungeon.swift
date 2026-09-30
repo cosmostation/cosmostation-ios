@@ -20,12 +20,11 @@ class ChainDungeon: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "udgn"
         bechAccountPrefix = "dungeon"
         validatorPrefix = "dungeonvaloper"
-        grpcHost = ""
-        lcdUrl = "https://dungeon-wallet.api.quasarstaking.ai"
+        grpcHost = "grpc-dungeon.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-dungeon.mainnet.cosmoslabs.kr/"
     }
-    
 }

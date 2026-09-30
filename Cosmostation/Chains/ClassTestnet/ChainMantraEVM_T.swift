@@ -21,12 +21,12 @@ class ChainMantraEVM_T: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_EVM_Keccak256, "m/44'/60'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "uom"
         bechAccountPrefix = "mantra"
         validatorPrefix = "mantravaloper"
-        grpcHost = "grpc.dukong.mantrachain.io"
-        lcdUrl = "https://api.dukong.mantrachain.io/"
+        grpcHost = "grpc-mantra.testnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-mantra.testnet.cosmoslabs.kr/"
         
         supportEvm = true
         coinSymbol = "OM"

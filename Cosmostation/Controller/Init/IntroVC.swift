@@ -18,6 +18,8 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
     @IBOutlet weak var bottomLogoView: UIView!
     @IBOutlet weak var bottomControlView: UIView!
     
+    private var shouldShowNetworkAlert = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.view.addBackground()
@@ -67,6 +69,15 @@ class IntroVC: BaseVC, BaseSheetDelegate, PinDelegate {
             UserDefaults.standard.set(true, forKey: "UPDATED_ADDRESSBOOK")
         }
         onAppVersionCheck()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if shouldShowNetworkAlert {
+            shouldShowNetworkAlert = false
+            onShowNetworkAlert()
+        }
     }
     
     func onUpdateMigration() {
@@ -258,10 +269,21 @@ extension IntroVC {
     
     func onShowNetworkAlert() {
         let alert = UIAlertController(title: NSLocalizedString("error_network", comment: ""), message: NSLocalizedString("error_network_msg", comment: ""), preferredStyle: .alert)
-        let action = UIAlertAction(title: NSLocalizedString("str_retry", comment: ""), style: .default, handler: { _ in
+        let retryAction = UIAlertAction(title: NSLocalizedString("str_retry", comment: ""), style: .default, handler: { _ in
             self.onAppVersionCheck()
         })
-        alert.addAction(action)
+        let confirmKeyAction = UIAlertAction(title: NSLocalizedString("str_view_private_key", comment: ""), style: .default, handler: { _ in
+            self.shouldShowNetworkAlert = true
+            
+            let accountListVC = AccountListVC(nibName: "AccountListVC", bundle: nil)
+            accountListVC.hidesBottomBarWhenPushed = true
+            accountListVC.purpose = .viewKey
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(accountListVC, animated: true)
+        })
+        
+        alert.addAction(retryAction)
+        alert.addAction(confirmKeyAction)
         self.present(alert, animated: true, completion: nil)
     }
     

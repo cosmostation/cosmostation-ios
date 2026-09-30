@@ -20,12 +20,11 @@ class ChainJuno: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ujuno"
         bechAccountPrefix = "juno"
         validatorPrefix = "junovaloper"
-        grpcHost = "juno-grpc.cogwheel.zone"
-        lcdUrl = "https://juno-rest.publicnode.com/"
+        grpcHost = "grpc-juno.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-juno.mainnet.cosmoslabs.kr/"
     }
-    
 }

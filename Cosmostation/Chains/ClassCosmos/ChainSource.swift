@@ -20,11 +20,11 @@ class ChainSource: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "usource"
         bechAccountPrefix = "source"
         validatorPrefix = "sourcevaloper"
-        grpcHost = ""
-        lcdUrl = "https://rest.source.tcnetwork.io/"
+        grpcHost = "grpc-source.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-source.mainnet.cosmoslabs.kr/"
     }
 }

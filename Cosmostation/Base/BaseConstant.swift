@@ -63,7 +63,7 @@ let CSS_URL                             = "https://api-wallet.cosmostation.io/";
 let NFT_INFURA                          = "https://ipfs.infura.io/ipfs/";
 let SKIP_API_URL                        = "https://api.skip.money/";
 let SQUID_API_URL                       = "https://api.squidrouter.com/v1/";
-let WALLET_API_URL                      = "https://raw.githubusercontent.com/cosmostation/chainlist/master/wallet/"
+let WALLET_API_URL                      = "https://raw.githubusercontent.com/CosmosLabsKR/chainlist/master/wallet/"
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
 let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTuuCn";

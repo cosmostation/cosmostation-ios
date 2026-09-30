@@ -100,13 +100,6 @@ class CosmosCompounding: BaseVC {
                 validatorsLabel.text = initiaFetcher.initiaValidators.filter { $0.operatorAddress == claimableRewards[0].validatorAddress }.first?.description_p.moniker
             }
             
-        } else if let zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher() {
-            let cosmostationValAddress = zenrockFetcher.validators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
-            if (claimableRewards.filter { $0.validatorAddress == cosmostationValAddress }.count > 0) {
-                validatorsLabel.text = "Cosmostation"
-            } else {
-                validatorsLabel.text = zenrockFetcher.validators.filter { $0.operatorAddress == claimableRewards[0].validatorAddress }.first?.description_p.moniker
-            }
         } else {
             let cosmostationValAddress = cosmosFetcher.cosmosValidators.filter({ $0.description_p.moniker == "Cosmostation" }).first?.operatorAddress
             if (claimableRewards.filter { $0.validatorAddress == cosmostationValAddress }.count > 0) {
@@ -288,9 +281,6 @@ class CosmosCompounding: BaseVC {
     func onBindCompoundingMsg() -> [Google_Protobuf_Any] {
         if selectedChain is ChainInitia {
             return Signer.genInitiaCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())
-            
-        } else if selectedChain is ChainZenrock {
-            return Signer.genZenrockCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())
             
         } else if selectedChain is ChainBabylon {
             return Signer.genBabylonCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())

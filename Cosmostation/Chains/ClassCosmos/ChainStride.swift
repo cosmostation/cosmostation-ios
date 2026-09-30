@@ -20,11 +20,11 @@ class ChainStride: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "ustrd"
         bechAccountPrefix = "stride"
         validatorPrefix = "stridevaloper"
-        grpcHost = "grpc.stride.citizenweb3.com"
-        lcdUrl = "https://stride-api.polkachu.com/"
+        grpcHost = "grpc-stride.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-stride.mainnet.cosmoslabs.kr/"
     }
 }

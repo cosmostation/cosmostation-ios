@@ -20,11 +20,11 @@ class ChainOrai: BaseChain  {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "orai"
         bechAccountPrefix = "orai"
         validatorPrefix = "oraivaloper"
-        grpcHost = ""
-        lcdUrl = "https://lcd.orai.io"
+        grpcHost = "grpc-oraichain.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-oraichain.mainnet.cosmoslabs.kr/"
     }
 }

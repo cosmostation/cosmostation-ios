@@ -64,16 +64,12 @@ class CosmosUndelegate: BaseVC {
     var fromValidatorInitia: Initia_Mstaking_V1_Validator?
     var initiaFetcher: InitiaFetcher?
 
-    var fromValidatorZenrock: Zrchain_Validation_ValidatorHV?
-    var zenrockFetcher: ZenrockFetcher?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         baseAccount = BaseData.instance.baseAccount
         cosmosFetcher = selectedChain.getCosmosfetcher()
         initiaFetcher = (selectedChain as? ChainInitia)?.getInitiaFetcher()
-        zenrockFetcher = (selectedChain as? ChainZenrock)?.getZenrockFetcher()
         
         loadingView.isHidden = false
         loadingView.animation = LottieAnimation.named("loading")
@@ -92,11 +88,6 @@ class CosmosUndelegate: BaseVC {
         if let initiaFetcher {
             if (fromValidatorInitia == nil) {
                 fromValidatorInitia = initiaFetcher.initiaValidators.filter { $0.operatorAddress == initiaFetcher.initiaDelegations[0].delegation.validatorAddress }.first
-            }
-            
-        } else if let zenrockFetcher {
-            if fromValidatorZenrock == nil {
-                fromValidatorZenrock = zenrockFetcher.validators.filter { $0.operatorAddress == zenrockFetcher.delegations[0].delegation.validatorAddress }.first
             }
             
         } else {
@@ -131,8 +122,6 @@ class CosmosUndelegate: BaseVC {
         baseSheet.sheetDelegate = self
         if selectedChain is ChainInitia {
             baseSheet.sheetType = .SelectInitiaUnStakeValidator
-        } else if selectedChain is ChainZenrock {
-            baseSheet.sheetType = .SelectZenrockUnStakeValidator
         } else {
             baseSheet.sheetType = .SelectUnStakeValidator
         }
@@ -157,22 +146,6 @@ class CosmosUndelegate: BaseVC {
                 stakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakedLabel!.font, 6)
             }
             
-        } else if let zenrockFetcher {
-            monikerImg.setMonikerImg(selectedChain, fromValidatorZenrock!.operatorAddress)
-            monikerLabel.text = fromValidatorZenrock!.description_p.moniker
-            if (fromValidatorZenrock!.jailed) {
-                jailedTag.isHidden = false
-            } else {
-                inactiveTag.isHidden = zenrockFetcher.isActiveValidator(fromValidatorZenrock!)
-            }
-            
-            let stakeDenom = selectedChain.stakingAssetDenom()
-            if let msAsset = BaseData.instance.getAsset(selectedChain.apiName, stakeDenom) {
-                let staked = zenrockFetcher.delegations.filter { $0.delegation.validatorAddress == fromValidatorZenrock?.operatorAddress }.first?.balance.amount
-                let stakingAmount = NSDecimalNumber(string: staked).multiplying(byPowerOf10: -msAsset.decimals!)
-                stakedLabel?.attributedText = WDP.dpAmount(stakingAmount.stringValue, stakedLabel!.font, 6)
-            }
-        
         } else {
             monikerImg.setMonikerImg(selectedChain, fromValidator!.operatorAddress)
             monikerLabel.text = fromValidator!.description_p.moniker
@@ -302,9 +275,6 @@ class CosmosUndelegate: BaseVC {
         if let initiaFetcher, let delegated = initiaFetcher.initiaDelegations.filter({ $0.delegation.validatorAddress == fromValidatorInitia?.operatorAddress }).first {
             availableAmount = NSDecimalNumber(string: delegated.balance.filter({ $0.denom == selectedChain.stakingAssetDenom()}).first?.amount)
         }
-        if let delegated = zenrockFetcher?.delegations.filter({ $0.delegation.validatorAddress == fromValidatorZenrock?.operatorAddress }).first {
-            availableAmount = NSDecimalNumber(string: delegated.balance.amount)
-        }
     }
     
     @objc func onClickMemo() {
@@ -399,14 +369,6 @@ class CosmosUndelegate: BaseVC {
             }
             return Signer.genUndelegateMsg(unDelegateMsg)
             
-        } else if selectedChain is ChainZenrock {
-            let unDelegateMsg = Zrchain_Validation_MsgUndelegate.with {
-                $0.delegatorAddress = selectedChain.bechAddress!
-                $0.validatorAddress = fromValidatorZenrock!.operatorAddress
-                $0.amount = toCoin!
-            }
-            return Signer.genUndelegateMsg(unDelegateMsg)
-            
         } else if selectedChain is ChainBabylon {
             let unDelegateMsg = Babylon_Epoching_V1_MsgWrappedUndelegate.with {
                 $0.msg.delegatorAddress = selectedChain.bechAddress!
@@ -445,14 +407,6 @@ extension CosmosUndelegate: BaseSheetDelegate, MemoDelegate, AmountSheetDelegate
                 onSimul()
             }
             
-        } else if (sheetType == .SelectZenrockUnStakeValidator) {
-            if let validatorAddress = result["validatorAddress"] as? String, let zenrockFetcher {
-                fromValidatorZenrock = zenrockFetcher.validators.filter({ $0.operatorAddress == validatorAddress }).first!
-                onUpdateValidatorView()
-                onUpdateFeeView()
-                onSimul()
-            }
-
         } else if (sheetType == .SelectFeeDenom) {
             if let index = result["index"] as? Int,
                let selectedDenom = feeInfos[selectedFeePosition].FeeDatas[index].denom {

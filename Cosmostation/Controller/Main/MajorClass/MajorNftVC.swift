@@ -19,6 +19,7 @@ class MajorNftVC: BaseVC {
     var refresher: UIRefreshControl!
 
     var selectedChain: BaseChain!
+    var suiNFTs = Array<Sui_Rpc_V2_Object>()
     var NFTs = Array<JSON>()
 
     override func viewDidLoad() {
@@ -44,7 +45,7 @@ class MajorNftVC: BaseVC {
         collectionView.refreshControl = refresher
         
         if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
-            NFTs = suiFetcher.allNfts()
+            suiNFTs = suiFetcher.allNfts()
         } else if let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() {
             NFTs = iotaFetcher.allNfts()
         }
@@ -76,7 +77,7 @@ class MajorNftVC: BaseVC {
         let tag = notification.object as! String
         if (selectedChain != nil && selectedChain.tag == tag ) {
             if let suiFetcher = (selectedChain as? ChainSui)?.getSuiFetcher() {
-                NFTs = suiFetcher.allNfts()
+                suiNFTs = suiFetcher.allNfts()
             } else if let iotaFetcher = (selectedChain as? ChainIota)?.getIotaFetcher() {
                 NFTs = iotaFetcher.allNfts()
             }
@@ -90,13 +91,25 @@ class MajorNftVC: BaseVC {
     func onUpdateView() {
         refresher.endRefreshing()
         loadingView.isHidden = true
-        if (NFTs.count <= 0) {
-            emptyDataView.isHidden = false
-            collectionView.isHidden = true
+        if selectedChain is ChainSui {
+            if suiNFTs.count <= 0 {
+                emptyDataView.isHidden = false
+                collectionView.isHidden = true
+            } else {
+                emptyDataView.isHidden = true
+                collectionView.isHidden = false
+                collectionView.reloadData()
+            }
+            
         } else {
-            emptyDataView.isHidden = true
-            collectionView.isHidden = false
-            collectionView.reloadData()
+            if (NFTs.count <= 0) {
+                emptyDataView.isHidden = false
+                collectionView.isHidden = true
+            } else {
+                emptyDataView.isHidden = true
+                collectionView.isHidden = false
+                collectionView.reloadData()
+            }
         }
     }
 }
@@ -104,13 +117,22 @@ class MajorNftVC: BaseVC {
 extension MajorNftVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return NFTs.count
+        if selectedChain is ChainSui {
+            return suiNFTs.count
+        } else {
+            return NFTs.count
+        }
     }
         
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NftListCell", for: indexPath) as! NftListCell
-        let suiNFT = NFTs[indexPath.row]
-        cell.onBindNft(suiNFT)
+        if selectedChain is ChainSui {
+            let suiNFT = suiNFTs[indexPath.row]
+            cell.onBindSuiNft(suiNFT)
+        } else {
+            let nft = NFTs[indexPath.row]
+            cell.onBindNft(nft)
+        }
         return cell
     }
     
@@ -145,37 +167,32 @@ extension MajorNftVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         let transfer = NftTransfer(nibName: "NftTransfer", bundle: nil)
         transfer.fromChain = selectedChain
         if selectedChain is ChainSui {
-            transfer.toSendSuiNFT = NFTs[indexPath.row]
+            transfer.toSendSuiNFT = suiNFTs[indexPath.row]
         } else if selectedChain is ChainIota {
             transfer.toSendIotaNFT = NFTs[indexPath.row]
         }
         transfer.modalTransitionStyle = .coverVertical
         self.present(transfer, animated: true)
-        
     }
 }
 
+extension Sui_Rpc_V2_Object {
+    func suiNftURL() -> URL? {
+        guard hasDisplay, display.hasOutput,
+              var urlString = display.output.suiStringField("image_url") else { return nil }
+        if (urlString.starts(with: "ipfs://")) {
+            urlString = urlString.replacingOccurrences(of: "ipfs://", with: "https://ipfs.io/ipfs/")
+        }
+        return URL(string: urlString)
+    }
 
-
+    func suiNftName() -> String {
+        guard hasDisplay, display.hasOutput else { return "" }
+        return display.output.suiStringField("name") ?? ""
+    }
+}
 
 extension JSON {
-    public func suiNftULR() -> URL? {
-        if var urlString = suiRawNftUrlString() {
-            if urlString.starts(with: "ipfs://") {
-                urlString = urlString.replacingOccurrences(of: "ipfs://", with: "https://ipfs.io/ipfs/")
-            }
-            return URL(string: urlString)
-        }
-        return nil
-    }
-    
-    public func suiRawNftUrlString() -> String? {
-        if let url = self["display"]["data"]["image_url"].string {
-            return url
-        }
-        return nil
-    }
-    
     public func iotaNftULR() -> URL? {
         if var urlString = iotaRawNftUrlString() {
             if urlString.starts(with: "ipfs://") {
@@ -192,5 +209,4 @@ extension JSON {
         }
         return nil
     }
-
 }

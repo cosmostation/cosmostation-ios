@@ -360,6 +360,7 @@
 "str_copy_with_box" = "コピーするにはボックスをタップしてください";
 "str_support_injection" = "インジェクションをサポート";
 "str_retry" = "リトライ";
+"str_view_private_key" = "秘密鍵を表示";
 "str_change_end_point" = "End-Point 変更";
 "str_current_epoch" = "現在 Epoch";
 "str_next_reward_distibution" = "次の報酬分配";

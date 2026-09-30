@@ -21,11 +21,11 @@ class ChainSei: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "usei"
         bechAccountPrefix = "sei"
         validatorPrefix = "seivaloper"
-        grpcHost = ""
-        lcdUrl = "https://api-sei.stingray.plus/"
+        grpcHost = "grpc-sei.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-sei.mainnet.cosmoslabs.kr/"
     }
 }

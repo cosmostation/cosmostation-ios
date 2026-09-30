@@ -67,7 +67,7 @@ class ManageChainCell: UITableViewCell {
         if let suiFetcher = (chain as? ChainSui)?.getSuiFetcher() {
             //using evm field
             evmLayer.isHidden = false
-            evmEndpointTag.text = "RPC"
+            evmEndpointTag.text = "GRPC"
             evmEndpointLabel.text = suiFetcher.getSuiRpc().replacingOccurrences(of: "https://", with: "")
             evmEndpointLabel.adjustsFontSizeToFitWidth = true
             

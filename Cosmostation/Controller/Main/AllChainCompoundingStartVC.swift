@@ -250,9 +250,6 @@ extension AllChainCompoundingStartVC {
         if selectedChain is ChainInitia {
             return Signer.genInitiaCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())
             
-        } else if selectedChain is ChainZenrock {
-            return Signer.genZenrockCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())
-            
         } else if selectedChain is ChainBabylon {
             return Signer.genBabylonCompoundingMsg(selectedChain.bechAddress!, claimableRewards, selectedChain.stakingAssetDenom())
             
