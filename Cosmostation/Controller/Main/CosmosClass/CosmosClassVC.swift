@@ -288,10 +288,8 @@ class CosmosClassVC: BaseVC {
         }
         
         if (selectedChain.isStakeEnabled()) {
-            if !(selectedChain is ChainNeutron) {
-                mainFab.addItem(title: "Vote", image: UIImage(named: "iconFabGov")) { _ in
-                    self.onProposalList()
-                }
+            mainFab.addItem(title: "Vote", image: UIImage(named: "iconFabGov")) { _ in
+                self.onProposalList()
             }
             if (selectedChain.getCosmosfetcher()?.cosmosCommissions.count ?? 0 > 0) {
                 mainFab.addItem(title: "Claim Commission", image: UIImage(named: "iconFabCommission")) { _ in
