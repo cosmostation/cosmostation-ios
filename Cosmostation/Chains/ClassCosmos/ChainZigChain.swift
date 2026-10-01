@@ -21,7 +21,7 @@ class ChainZigChain: BaseChain  {
         
         
         cosmosEndPointType = .UseGRPC
-        stakeDenom = "uzig"
+        stakeDenom = "azig"
         bechAccountPrefix = "zig"
         validatorPrefix = "zigvaloper"
         grpcHost = "grpc-zigchain.mainnet.cosmoslabs.kr"

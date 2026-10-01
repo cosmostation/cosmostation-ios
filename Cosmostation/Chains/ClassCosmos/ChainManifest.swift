@@ -19,11 +19,11 @@ class ChainManifest: BaseChain {
         accountKeyType = AccountKeyType(.COSMOS_Secp256k1, "m/44'/118'/0'/0/X")
         
         
-        cosmosEndPointType = .UseLCD
+        cosmosEndPointType = .UseGRPC
         stakeDenom = "upoa"
         bechAccountPrefix = "manifest"
         validatorPrefix = "manifestvaloper"
-        grpcHost = "https://manifest-grpc.liftedinit.app"
-        lcdUrl = "https://nodes.liftedinit.app/manifest/api/"
+        grpcHost = "grpc-manifest.mainnet.cosmoslabs.kr"
+        lcdUrl = "https://lcd-manifest.mainnet.cosmoslabs.kr/"
     }
 }
